@@ -1,39 +1,62 @@
-# Moral Gravity Wells Analysis
+# Moral Gravity Well Analysis
 
-This Python application creates a visualization of moral gravity wells using a polar plot. The visualization shows positive and negative moral wells, their relative strengths, and calculates various metrics including the Center of Mass (COM), Moral Polarity Score (MPS), and Directional Purity Score (DPS).
+A Python-based visualization tool for moral gravity well analysis. This tool creates polar plots to visualize moral dimensions and their relationships, including gravity wells, narrative scores, and centers of mass.
 
-## Requirements
+## Setup
 
-- Python 3.7 or higher
-- matplotlib
-- numpy
-
-## Installation
-
-1. Create a virtual environment (recommended):
+1. Ensure you have Python 3.9+ installed
+2. Clone this repository
+3. Install dependencies:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Unix/macOS
-# or
-.\venv\Scripts\activate  # On Windows
-```
-
-2. Install the required packages:
-```bash
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 ## Usage
 
-Run the script using Python:
+### Basic Usage
+Run the visualization with the sample data:
 ```bash
-python moral_gravity.py
+python3 moral_gravity.py
 ```
 
-This will display a polar plot showing:
-- Positive wells (blue shades)
-- Negative wells (orange shades)
-- Center of Mass (red star)
-- Metrics in a text box
+### Custom Analysis
+To visualize your own analysis, create a JSON file following this structure:
+```json
+{
+    "metadata": {
+        "title": "Your Analysis Title",
+        "filename": "your_analysis.json",
+        "summary": "Your analysis summary text..."
+    },
+    "wells": [
+        {"name": "Dimension1", "angle": 0, "score": 0.7},
+        {"name": "Dimension2", "angle": 90, "score": 0.8}
+        // ... add more dimensions
+    ],
+    "metrics": {
+        "com": {
+            "x": 0.0,
+            "y": 0.0
+        }
+    }
+}
+```
 
-The size and color intensity of each point represents the strength of that moral well. 
+Then run:
+```bash
+python3 moral_gravity.py your_analysis.json
+```
+
+## Visualization Elements
+
+- **Gray Dots**: Moral gravity wells (fixed positions)
+- **Blue Dots**: Narrative scores
+- **Red Dot**: Center of Mass (COM)
+- **Dotted Circle**: Reference circle
+- **Dashed Lines**: Connections from center to narrative scores
+
+## File Structure
+
+- `moral_gravity.py`: Main visualization script
+- `requirements.txt`: Python package dependencies
+- `sample_analysis.json`: Example analysis data 
