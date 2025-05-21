@@ -339,8 +339,10 @@ def main():
         json_path = 'sample_analysis.json'
     
     try:
-        # If input file is in root directory, move it to temp directory first
+        # If input file is in root directory, move it to temp directory
+        original_path = None
         if not Path(json_path).parent.is_absolute():
+            original_path = Path(json_path)
             temp_input = TEMP_DIR / Path(json_path).name
             shutil.copy2(json_path, temp_input)
             json_path = str(temp_input)
@@ -356,6 +358,10 @@ def main():
         # Clean up temporary files
         for file in TEMP_DIR.glob("*"):
             file.unlink()
+        
+        # Remove original file if it was in root directory
+        if original_path and original_path.exists():
+            original_path.unlink()
             
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
