@@ -26,12 +26,17 @@ python3 -m pip install -r requirements.txt
    - Submit both files to your chosen LLM
    - Request output in the required JSON format (see below)
    - Save the LLM's response as a JSON file (e.g., `analysis.json`)
+   - Place the JSON file in any directory - the tool will handle file organization
 
 3. **Create Visualization**
    ```bash
    python3 moral_gravity_map.py analysis.json
    ```
-   The visualization will be saved in `model_output/` with a timestamp and model name.
+   The tool will:
+   - Move input files to a temporary working directory
+   - Generate visualizations in `model_output/` with timestamp and model name
+   - Automatically clean up temporary files and input JSON
+   - Create a dedicated output directory for each analysis
 
 ### Multi-Model Analysis
 
@@ -116,8 +121,10 @@ This will create a visualization comparing the analyses from different models, w
   - (Additional prompts for different contexts will be added here)
 - `analysis/`: Analysis documentation and comparisons
 - `model_output/`: Generated visualizations and data
+  - Organized by timestamp and model name
+  - Each analysis gets its own subdirectory
+  - Contains both JSON data and PNG visualization
 - `requirements.txt`: Python package dependencies
-- `old_files/`: Archive of previous versions
 
 ## Development
 
