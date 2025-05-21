@@ -21,9 +21,17 @@ def load_analysis_data(json_path: str) -> Dict:
 
 def plot_gravity_map(data: Dict):
     """Generate the moral gravity wells visualization from analysis data."""
+    # Extract data
+    wells = data['wells']
+    metrics = data['metrics']
+    metadata = data['metadata']
+    
     # Set up the figure with white background
     plt.style.use('default')
     fig = plt.figure(figsize=(12, 10))  # Further reduce height
+    
+    # Get the output filename from the input JSON
+    output_filename = metadata['filename'].rsplit('.', 1)[0] + '.png'
     
     # Create main polar axis for the plot
     ax = plt.subplot2grid((8, 1), (0, 0), rowspan=6, projection='polar')  # More granular grid, main plot takes most space
@@ -33,11 +41,6 @@ def plot_gravity_map(data: Dict):
     # Make the outer circle invisible
     ax.spines['polar'].set_color('none')
 
-    # Extract data
-    wells = data['wells']
-    metrics = data['metrics']
-    metadata = data['metadata']
-    
     # Add two-line title
     fig.text(0.5, 0.92, "Moral Gravity Map", 
             fontsize=16, fontweight='bold', 
@@ -89,10 +92,11 @@ def plot_gravity_map(data: Dict):
         else:
             ha = 'left' if -np.pi/2 <= angle <= np.pi/2 else 'right'
         
-        # Special positioning for Resentment
+        # Special positioning for specific labels
         label_radius = 1.2
         if well == "Resentment":
-            label_radius = 1.3  # Move Resentment label further out
+            label_radius = 1.25  # Slightly reduced from 1.3 to move label left
+            ha = 'left'  # Force left alignment to move it right of the circle
         
         ax.text(angle, label_radius, well, ha=ha, va='center', rotation=0)
 
@@ -127,6 +131,9 @@ def plot_gravity_map(data: Dict):
              bbox=dict(facecolor='white', alpha=0.9, edgecolor='none', pad=5))
 
     plt.subplots_adjust(top=0.85, bottom=0.05, hspace=0)
+    
+    # Save the plot with the same base filename as the input
+    plt.savefig(output_filename, bbox_inches='tight', dpi=300)
     plt.show()
 
 def main():
