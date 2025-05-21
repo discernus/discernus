@@ -17,7 +17,9 @@ python3 -m pip install -r requirements.txt
 
 1. **Prepare Your Files**
    - Create a text file containing your narrative (e.g., `narrative.txt`)
-   - Use the standard prompt template from `prompts/moral_gravity_analysis.txt`
+   - Choose an appropriate prompt from the `prompts/` directory:
+     - `5_dipole_liberal_democratic_norm_prompt.txt`: Standard 10-dimension analysis for political/civic narratives
+     - (Additional prompt types for corporate, cultural, etc. contexts coming soon)
    - Customize the prompt if needed for your specific LLM
 
 2. **Generate Analysis**
@@ -109,9 +111,10 @@ This will create a visualization comparing the analyses from different models, w
 
 - `moral_gravity_map.py`: Main visualization script
 - `generate_comparison.py`: Multi-model comparison script
-- `prompts/`: Standard prompts for different LLMs
-- `config/`
-  - `gwllmp.ini`: Configuration settings
+- `prompts/`: Analysis prompts for different contexts
+  - `5_dipole_liberal_democratic_norm_prompt.txt`: Standard 10-dimension political analysis
+  - (Additional prompts for different contexts will be added here)
+- `config/`: Configuration files
 - `analysis/`: Analysis documentation and comparisons
 - `model_output/`: Generated visualizations and data
 - `requirements.txt`: Python package dependencies
