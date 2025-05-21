@@ -11,6 +11,71 @@ A Python-based visualization tool for moral gravity well analysis. This tool cre
 python3 -m pip install -r requirements.txt
 ```
 
+## Workflow
+
+### Single Model Analysis
+
+1. **Prepare Your Files**
+   - Create a text file containing your narrative (e.g., `narrative.txt`)
+   - Use the standard prompt template from `prompts/moral_gravity_analysis.txt`
+   - Customize the prompt if needed for your specific LLM
+
+2. **Generate Analysis**
+   - Submit both files to your chosen LLM
+   - Request output in the required JSON format (see below)
+   - Save the LLM's response as a JSON file (e.g., `analysis.json`)
+
+3. **Create Visualization**
+   ```bash
+   python3 moral_gravity_map.py analysis.json
+   ```
+   The visualization will be saved in `model_output/` with a timestamp and model name.
+
+### Multi-Model Analysis
+
+1. **Generate Multiple Analyses**
+   - Follow steps 1-2 above for each LLM
+   - Use consistent narrative and prompt files across models
+   - Save each response with a descriptive name (e.g., `gpt4_analysis.json`, `claude_analysis.json`)
+
+2. **Create Comparison**
+   - Place all JSON files in a directory (e.g., `analyses/`)
+   - Run the comparison tool:
+   ```bash
+   python3 generate_comparison.py analyses/*.json
+   ```
+   This will create a combined visualization showing all models' interpretations.
+
+### Required JSON Format
+```json
+{
+    "metadata": {
+        "title": "Your Analysis Title",
+        "filename": "your_analysis.json",
+        "model_name": "Model Name",
+        "model_version": "Version",
+        "summary": "Your analysis summary text..."
+    },
+    "wells": [
+        {"name": "Dignity", "angle": 90, "score": 0.8},
+        {"name": "Truth", "angle": 30, "score": 0.7},
+        {"name": "Hope", "angle": 60, "score": 0.9},
+        {"name": "Justice", "angle": 150, "score": 0.8},
+        {"name": "Pragmatism", "angle": 120, "score": 0.7},
+        {"name": "Tribalism", "angle": 270, "score": 0.2},
+        {"name": "Fear", "angle": 300, "score": 0.1},
+        {"name": "Resentment", "angle": 330, "score": 0.1},
+        {"name": "Manipulation", "angle": 210, "score": 0.1},
+        {"name": "Fantasy", "angle": 240, "score": 0.1}
+    ],
+    "metrics": {
+        "com": {"x": 0.3, "y": 0.4},
+        "mps": 0.8,
+        "dps": 0.7
+    }
+}
+```
+
 ## Usage
 
 ### Basic Usage
@@ -31,35 +96,6 @@ This will create a visualization comparing the analyses from different models, w
 - Flexible legend layout (2-3 columns based on model count)
 - Enhanced visibility with alpha transparency
 
-### Custom Analysis
-To visualize your own analysis, create a JSON file following this structure:
-```json
-{
-    "metadata": {
-        "title": "Your Analysis Title",
-        "filename": "your_analysis.json",
-        "model_name": "Model Name",
-        "summary": "Your analysis summary text..."
-    },
-    "wells": [
-        {"name": "Dimension1", "angle": 0, "score": 0.7},
-        {"name": "Dimension2", "angle": 90, "score": 0.8}
-        // ... add more dimensions
-    ],
-    "metrics": {
-        "com": {
-            "x": 0.0,
-            "y": 0.0
-        }
-    }
-}
-```
-
-Then run:
-```bash
-python3 moral_gravity_map.py your_analysis.json
-```
-
 ## Visualization Elements
 
 - **Gray Dots**: Moral gravity wells (fixed positions)
@@ -73,6 +109,7 @@ python3 moral_gravity_map.py your_analysis.json
 
 - `moral_gravity_map.py`: Main visualization script
 - `generate_comparison.py`: Multi-model comparison script
+- `prompts/`: Standard prompts for different LLMs
 - `config/`
   - `gwllmp.ini`: Configuration settings
 - `analysis/`: Analysis documentation and comparisons
