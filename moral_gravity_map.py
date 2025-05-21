@@ -12,11 +12,16 @@ import matplotlib.patches as mpatches
 import json
 import sys
 import os
+import tempfile
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 from textwrap import wrap
 from pathlib import Path
 import shutil
+
+# Create a temporary directory for working files
+TEMP_DIR = Path(tempfile.gettempdir()) / "moral_gravity_analysis"
+TEMP_DIR.mkdir(exist_ok=True)
 
 class MoralGravityMap:
     """Core class for generating moral gravity visualizations."""
@@ -278,6 +283,11 @@ def create_output_directory(json_path: str, data: Dict, multi_analysis: bool = F
     png_output_path = output_dir / png_filename
     
     if not multi_analysis:
+        # Copy input file to output directory
+        shutil.copy2(json_path, json_output_path)
+    else:
+        # For multi-analysis, save the combined analysis to the output directory
+        temp_json = TEMP_DIR / json_filename
         shutil.copy2(json_path, json_output_path)
     
     return str(json_output_path), str(png_output_path)
@@ -329,6 +339,12 @@ def main():
         json_path = 'sample_analysis.json'
     
     try:
+        # If input file is in root directory, move it to temp directory first
+        if not Path(json_path).parent.is_absolute():
+            temp_input = TEMP_DIR / Path(json_path).name
+            shutil.copy2(json_path, temp_input)
+            json_path = str(temp_input)
+        
         with open(json_path, 'r') as f:
             data = json.load(f)
         
@@ -336,6 +352,11 @@ def main():
             generate_multi_visualization(data, json_path)
         else:
             generate_single_visualization(data, json_path)
+            
+        # Clean up temporary files
+        for file in TEMP_DIR.glob("*"):
+            file.unlink()
+            
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
