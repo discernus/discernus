@@ -130,22 +130,72 @@ class MoralGravityMap:
         # Use first analysis for base elements
         self.plot_base_elements(analyses[0]['wells'])
         
-        # Plot each COM with a different color
-        colors = plt.cm.rainbow(np.linspace(0, 1, len(analyses)))
+        # Use tab20 colormap for distinct colors
+        n_colors = len(analyses)
+        self.com_colors = plt.cm.tab20(np.linspace(0, 1, 20))[:n_colors]
+        self.analyses = analyses  # Store for legend creation
         
-        for analysis, color in zip(analyses, colors):
+        # Group points by proximity
+        points = []
+        for analysis in analyses:
             com_x = analysis['metrics']['com']['x']
             com_y = analysis['metrics']['com']['y']
             com_r = np.sqrt(com_x**2 + com_y**2)
             com_theta = np.arctan2(com_y, com_x)
+            points.append((com_r, com_theta, com_x, com_y))
+        
+        # Find groups of overlapping points
+        THRESHOLD = 0.02  # Distance threshold for considering points as overlapping
+        groups = []
+        used = set()
+        
+        for i, (r1, theta1, x1, y1) in enumerate(points):
+            if i in used:
+                continue
             
-            self.ax.scatter(com_theta, com_r,
-                          s=self.style_config['marker_sizes']['com'],
-                          color=color, zorder=4)
-            self.ax.text(com_theta, com_r + 0.1,
-                        f"{analysis['metadata']['model_name']}\nCOM = ({com_x:.2f}, {com_y:.2f})",
-                        ha='center', va='bottom',
-                        color=color)
+            group = [(i, (r1, theta1, x1, y1))]
+            used.add(i)
+            
+            for j, (r2, theta2, x2, y2) in enumerate(points):
+                if j in used:
+                    continue
+                
+                # Calculate Euclidean distance between points
+                dist = np.sqrt((x1-x2)**2 + (y1-y2)**2)
+                if dist < THRESHOLD:
+                    group.append((j, (r2, theta2, x2, y2)))
+                    used.add(j)
+            
+            groups.append(group)
+        
+        # Plot points with offset for overlapping ones
+        for group in groups:
+            if len(group) == 1:
+                # Single point - plot normally
+                idx, (r, theta, _, _) = group[0]
+                self.ax.scatter(theta, r,
+                              s=self.style_config['marker_sizes']['com'],
+                              color=self.com_colors[idx],
+                              alpha=0.7,  # Add some transparency
+                              zorder=4)
+            else:
+                # Multiple overlapping points - arrange in a small circle
+                center_r = np.mean([p[1][0] for p in group])
+                center_theta = np.mean([p[1][1] for p in group])
+                
+                # Calculate offsets in a circle
+                n_points = len(group)
+                radius = 0.02  # Size of the arrangement circle
+                for i, (idx, _) in enumerate(group):
+                    angle = 2 * np.pi * i / n_points
+                    offset_r = radius * np.cos(angle)
+                    offset_theta = radius * np.sin(angle) / center_r  # Adjust for polar coordinates
+                    
+                    self.ax.scatter(center_theta + offset_theta, center_r + offset_r,
+                                  s=self.style_config['marker_sizes']['com'],
+                                  color=self.com_colors[idx],
+                                  alpha=0.7,  # Add some transparency
+                                  zorder=4)
 
     def add_legend(self, mode: str = 'single') -> None:
         """Add appropriate legend based on visualization mode."""
@@ -161,12 +211,22 @@ class MoralGravityMap:
                 mpatches.Patch(color=self.style_config['colors']['com'],
                              label='Center of Mass')
             ]
+            legend_ax.legend(handles=patches, loc='center', ncol=len(patches),
+                           bbox_to_anchor=(0.5, 0.8))
         else:  # multiple
+            # Create patches for gravity wells and each model's COM
             patches = [mpatches.Patch(color=self.style_config['colors']['wells'],
                                     label='Gravity Wells')]
-        
-        legend_ax.legend(handles=patches, loc='center', ncol=len(patches),
-                        bbox_to_anchor=(0.5, 0.8))
+            
+            # Add a patch for each model
+            for analysis, color in zip(self.analyses, self.com_colors):
+                patches.append(mpatches.Patch(color=color,
+                                           label=analysis['metadata']['model_name']))
+            
+            # Use 3 columns for legend when there are many models
+            ncol = 3 if len(patches) > 6 else 2
+            legend_ax.legend(handles=patches, loc='center', ncol=ncol,
+                           bbox_to_anchor=(0.5, 1.0))
 
     def add_summary(self, summary: str) -> None:
         """Add analysis summary with consistent styling."""
