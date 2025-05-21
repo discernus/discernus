@@ -4,8 +4,45 @@ import numpy as np
 import matplotlib.patches as mpatches
 import json
 import sys
+import os
+from datetime import datetime
 from typing import Dict, List
 from textwrap import wrap
+from pathlib import Path
+import shutil
+
+def create_output_directory(json_path: str, data: Dict) -> tuple[str, str]:
+    """Create output directory structure and return paths."""
+    # Create base output directory if it doesn't exist
+    base_dir = Path("model_output")
+    base_dir.mkdir(exist_ok=True)
+    
+    # Get model name from metadata
+    model_name = data['metadata'].get('model_name', 'unknown_model')
+    model_name = model_name.lower().replace(' ', '_')
+    
+    # Create timestamped subfolder with descriptive name including model
+    timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S")
+    json_name = Path(json_path).stem
+    
+    # Create new filenames with model name
+    base_filename = f"{json_name}_{model_name}"
+    json_filename = f"{base_filename}.json"
+    png_filename = f"{base_filename}.png"
+    
+    # Create subfolder name
+    subfolder_name = f"{timestamp}_{model_name}_{json_name}"
+    output_dir = base_dir / subfolder_name
+    output_dir.mkdir(exist_ok=True)
+    
+    # Set up output paths with new filenames
+    json_output_path = output_dir / json_filename
+    png_output_path = output_dir / png_filename
+    
+    # Copy input JSON to output directory with new name
+    shutil.copy2(json_path, json_output_path)
+    
+    return str(json_output_path), str(png_output_path)
 
 def load_analysis_data(json_path: str) -> Dict:
     """Load and validate the analysis data from a JSON file."""
@@ -19,8 +56,11 @@ def load_analysis_data(json_path: str) -> Dict:
     
     return data
 
-def plot_gravity_map(data: Dict):
+def plot_gravity_map(data: Dict, json_path: str):
     """Generate the moral gravity wells visualization from analysis data."""
+    # Create output directory and get file paths
+    json_output_path, png_output_path = create_output_directory(json_path, data)
+    
     # Extract data
     wells = data['wells']
     metrics = data['metrics']
@@ -29,9 +69,6 @@ def plot_gravity_map(data: Dict):
     # Set up the figure with white background
     plt.style.use('default')
     fig = plt.figure(figsize=(12, 10))  # Further reduce height
-    
-    # Get the output filename from the input JSON
-    output_filename = metadata['filename'].rsplit('.', 1)[0] + '.png'
     
     # Create main polar axis for the plot
     ax = plt.subplot2grid((8, 1), (0, 0), rowspan=6, projection='polar')  # More granular grid, main plot takes most space
@@ -132,9 +169,18 @@ def plot_gravity_map(data: Dict):
 
     plt.subplots_adjust(top=0.85, bottom=0.05, hspace=0)
     
-    # Save the plot with the same base filename as the input
-    plt.savefig(output_filename, bbox_inches='tight', dpi=300)
+    # Save with the custom filename
+    plt.savefig(png_output_path, bbox_inches='tight', dpi=300)
+    plt.close()  # Close the current figure
+    
+    # Create a new figure for display
+    fig = plt.figure()
+    img = plt.imread(png_output_path)
+    plt.imshow(img)
+    plt.axis('off')
     plt.show()
+    
+    print(f"\nOutput files saved to: {os.path.dirname(png_output_path)}")
 
 def main():
     if len(sys.argv) > 1:
@@ -144,7 +190,7 @@ def main():
     
     try:
         data = load_analysis_data(json_path)
-        plot_gravity_map(data)
+        plot_gravity_map(data, json_path)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)

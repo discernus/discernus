@@ -1,0 +1,69 @@
+{
+    "metadata": {
+        "title": "Thomas Jefferson First Inaugural Address (analyzed by Le Chat)",
+        "filename": "jefferson_first_inaugural_address_analyzed_by_le_chat_2025_05_20.json",
+        "model_name": "Le Chat",
+        "model_version": "2025-05-20",
+        "summary": "Jefferson's First Inaugural Address emphasizes dignity, truth, and justice, reflecting a strong moral framework. The speech exhibits high scores in positive dimensions, particularly in dignity and hope, while maintaining low scores in negative dimensions like tribalism and fear. The Center of Mass indicates a balanced approach with a slight inclination towards positive moral values, suggesting a narrative focused on unity and pragmatic optimism."
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 0.9
+        },
+        {
+            "name": "Truth",
+            "angle": 30,
+            "score": 0.8
+        },
+        {
+            "name": "Hope",
+            "angle": 60,
+            "score": 0.8
+        },
+        {
+            "name": "Justice",
+            "angle": 150,
+            "score": 0.7
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 120,
+            "score": 0.7
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.1
+        },
+        {
+            "name": "Fear",
+            "angle": 300,
+            "score": 0.1
+        },
+        {
+            "name": "Resentment",
+            "angle": 330,
+            "score": 0.1
+        },
+        {
+            "name": "Manipulation",
+            "angle": 210,
+            "score": 0.1
+        },
+        {
+            "name": "Fantasy",
+            "angle": 240,
+            "score": 0.1
+        }
+    ],
+    "metrics": {
+        "com": {
+            "x": 0.5,
+            "y": 0.5
+        },
+        "mps": 0.8,
+        "dps": 0.2
+    }
+} 

@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "title": "Thomas Jefferson's First Inaugural Address (analyzed by Claude 3.7 Sonnet)",
+    "filename": "jefferson_first_inaugural_analysis_2025.json",
+    "model_name": "Claude 3.7 Sonnet",
+    "model_version": "May 20, 2025",
+    "summary": "Jefferson's inaugural address demonstrates a strong commitment to positive moral values while showing minimal presence of negative elements. The speech emphasizes dignity across partisan divides, truth-seeking, hopeful vision, justice for all citizens, and pragmatic governance. It deliberately avoids tribalism, fear-mongering, resentment, manipulation, and fantasy solutions. The high MPS (0.9) confirms its preference for positive moral values over negative ones."
+  },
+  "wells": [
+    {"name": "Dignity", "angle": 90, "score": 0.8},
+    {"name": "Truth", "angle": 30, "score": 0.7},
+    {"name": "Hope", "angle": 60, "score": 0.9},
+    {"name": "Justice", "angle": 150, "score": 0.85},
+    {"name": "Pragmatism", "angle": 120, "score": 0.75},
+    {"name": "Tribalism", "angle": 270, "score": 0.1},
+    {"name": "Fear", "angle": 300, "score": 0.2},
+    {"name": "Resentment", "angle": 330, "score": 0.1},
+    {"name": "Manipulation", "angle": 210, "score": 0.05},
+    {"name": "Fantasy", "angle": 240, "score": 0.1}
+  ],
+  "metrics": {
+    "com": {"x": 0.0, "y": 2.6},
+    "mps": 0.9,
+    "dps": 0.4
+  }
+} 

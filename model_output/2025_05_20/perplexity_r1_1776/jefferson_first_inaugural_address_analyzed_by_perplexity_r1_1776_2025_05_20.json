@@ -1,0 +1,69 @@
+{
+    "metadata": {
+        "title": "Jefferson's First Inaugural Address (analyzed by Perplexity R1 1776)",
+        "filename": "jefferson_first_inaugural_address_analyzed_by_perplexity_r1_1776_2025_05_20.json",
+        "model_name": "Perplexity R1 1776",
+        "model_version": "2025-05-20",
+        "summary": "The address demonstrates strong positive moral framing with high Hope and Dignity scores, emphasizing national unity through shared principles rather than division. Jefferson's rejection of political intolerance directly suppresses negative dimensions while concrete policy proposals balance idealism with Pragmatism. The narrative's moral center clusters around aspirational values with practical governance mechanisms."
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 0.8
+        },
+        {
+            "name": "Truth",
+            "angle": 30,
+            "score": 0.7
+        },
+        {
+            "name": "Hope",
+            "angle": 60,
+            "score": 0.9
+        },
+        {
+            "name": "Justice",
+            "angle": 150,
+            "score": 0.8
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 120,
+            "score": 0.8
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.1
+        },
+        {
+            "name": "Fear",
+            "angle": 300,
+            "score": 0.1
+        },
+        {
+            "name": "Resentment",
+            "angle": 330,
+            "score": 0.0
+        },
+        {
+            "name": "Manipulation",
+            "angle": 210,
+            "score": 0.0
+        },
+        {
+            "name": "Fantasy",
+            "angle": 240,
+            "score": 0.1
+        }
+    ],
+    "metrics": {
+        "com": {
+            "x": 0.0,
+            "y": 0.6
+        },
+        "mps": 0.9,
+        "dps": 0.4
+    }
+} 

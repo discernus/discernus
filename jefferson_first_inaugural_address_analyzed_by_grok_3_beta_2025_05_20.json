@@ -1,0 +1,69 @@
+{
+    "metadata": {
+        "title": "Jefferson's First Inaugural Address (analyzed by Grok 3 Beta)",
+        "filename": "jefferson_first_inaugural_address_analyzed_by_grok_3_beta_2025_05_20.json",
+        "model_name": "Grok 3 Beta",
+        "model_version": "2025-05-20",
+        "summary": "This narrative reflects a strong commitment to dignity, truth, justice, and pragmatism, emphasizing individual rights, constitutional principles, and realistic governance. The low scores on tribalism, fear, resentment, manipulation, and fantasy indicate a reasoned and hopeful approach, grounded in evidence and inclusive values."
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 0.8
+        },
+        {
+            "name": "Truth",
+            "angle": 30,
+            "score": 0.9
+        },
+        {
+            "name": "Hope",
+            "angle": 60,
+            "score": 0.7
+        },
+        {
+            "name": "Justice",
+            "angle": 150,
+            "score": 0.8
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 120,
+            "score": 0.9
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.1
+        },
+        {
+            "name": "Fear",
+            "angle": 300,
+            "score": 0.2
+        },
+        {
+            "name": "Resentment",
+            "angle": 330,
+            "score": 0.1
+        },
+        {
+            "name": "Manipulation",
+            "angle": 210,
+            "score": 0.1
+        },
+        {
+            "name": "Fantasy",
+            "angle": 240,
+            "score": 0.1
+        }
+    ],
+    "metrics": {
+        "com": {
+            "x": 0.0,
+            "y": 0.5
+        },
+        "mps": 0.9,
+        "dps": 0.9
+    }
+} 

@@ -1,0 +1,69 @@
+{
+    "metadata": {
+        "title": "Jefferson's First Inaugural Address (analyzed by Claude 3.7 Sonnet Thinking)",
+        "filename": "jefferson_first_inaugural_address_analyzed_by_claude_3_7_sonnet_thinking_2025_05_20.json",
+        "model_name": "Claude 3.7 Sonnet Thinking",
+        "model_version": "2025-05-20",
+        "summary": "The analysis reveals a strongly principled narrative emphasizing unity and republican ideals, with exceptional scores in positive moral dimensions (MPS: 0.9) and minimal engagement with negative rhetorical tactics. The COM positioning reflects Jefferson's balance between aspirational values and practical governance, while the moderate DPS indicates intentional diversity in moral appeals without dilution of core principles."
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 0.8
+        },
+        {
+            "name": "Truth",
+            "angle": 30,
+            "score": 0.7
+        },
+        {
+            "name": "Hope",
+            "angle": 60,
+            "score": 0.9
+        },
+        {
+            "name": "Justice",
+            "angle": 150,
+            "score": 0.8
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 120,
+            "score": 0.7
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.1
+        },
+        {
+            "name": "Fear",
+            "angle": 300,
+            "score": 0.1
+        },
+        {
+            "name": "Resentment",
+            "angle": 330,
+            "score": 0.1
+        },
+        {
+            "name": "Manipulation",
+            "angle": 210,
+            "score": 0.1
+        },
+        {
+            "name": "Fantasy",
+            "angle": 240,
+            "score": 0.1
+        }
+    ],
+    "metrics": {
+        "com": {
+            "x": 0.0,
+            "y": 0.6
+        },
+        "mps": 0.9,
+        "dps": 0.4
+    }
+} 

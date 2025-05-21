@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "title": "First Inaugural Address (analyzed by OpenAI o4-mini)",
+    "filename": "first_inaugural_address_analysis_2025_05_20.json",
+    "model_name": "OpenAI o4-mini",
+    "model_version": "2025-05-20",
+    "summary": "This address frames a highly dignified and just vision for governance, emphasizing universal rights and rule-based fairness while offering grounded hope and pragmatic solutions. It demonstrates intellectual honesty and unity, with minimal tribal or manipulative appeals. The modest negative elements reflect cautious awareness of threats without resorting to fearmongering or resentment. The resulting metrics show strong positive moral orientation and balanced directional variation, underscoring Jefferson's integrative and principled rhetorical style."
+  },
+  "wells": [
+    {"name": "Dignity", "angle": 90, "score": 1.0},
+    {"name": "Truth", "angle": 30, "score": 0.8},
+    {"name": "Hope", "angle": 60, "score": 0.8},
+    {"name": "Justice", "angle": 150, "score": 1.0},
+    {"name": "Pragmatism", "angle": 120, "score": 0.9},
+    {"name": "Tribalism", "angle": 270, "score": 0.0},
+    {"name": "Fear", "angle": 300, "score": 0.2},
+    {"name": "Resentment", "angle": 330, "score": 0.1},
+    {"name": "Manipulation", "angle": 210, "score": 0.0},
+    {"name": "Fantasy", "angle": 240, "score": 0.0}
+  ],
+  "metrics": {
+    "com": {"x": 0.0, "y": 0.3},
+    "mps": 0.9,
+    "dps": 0.3
+  }
+} 
