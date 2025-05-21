@@ -114,7 +114,6 @@ This will create a visualization comparing the analyses from different models, w
 - `prompts/`: Analysis prompts for different contexts
   - `5_dipole_liberal_democratic_norm_prompt.txt`: Standard 10-dimension political analysis
   - (Additional prompts for different contexts will be added here)
-- `config/`: Configuration files
 - `analysis/`: Analysis documentation and comparisons
 - `model_output/`: Generated visualizations and data
 - `requirements.txt`: Python package dependencies
