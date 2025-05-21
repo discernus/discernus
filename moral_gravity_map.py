@@ -214,9 +214,8 @@ class MoralGravityMap:
             legend_ax.legend(handles=patches, loc='center', ncol=len(patches),
                            bbox_to_anchor=(0.5, 0.8))
         else:  # multiple
-            # Create patches for gravity wells and each model's COM
-            patches = [mpatches.Patch(color=self.style_config['colors']['wells'],
-                                    label='Gravity Wells')]
+            # Create patches for each model's COM only
+            patches = []
             
             # Add a patch for each model
             for analysis, color in zip(self.analyses, self.com_colors):
@@ -330,8 +329,13 @@ def main():
         json_path = 'sample_analysis.json'
     
     try:
-        data = load_analysis_data(json_path)
-        generate_single_visualization(data, json_path)
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+        
+        if isinstance(data, list):
+            generate_multi_visualization(data, json_path)
+        else:
+            generate_single_visualization(data, json_path)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
