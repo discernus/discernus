@@ -1,6 +1,6 @@
 # Moral Gravity Well Analysis
 
-A Python-based visualization tool for moral gravity well analysis. This tool creates polar plots to visualize moral dimensions and their relationships, including gravity wells, narrative scores, and centers of mass.
+A Python-based visualization tool for moral gravity well analysis. This tool creates polar plots to visualize moral dimensions and their relationships, including gravity wells, narrative scores, and centers of mass. It supports both single-model analysis and multi-model comparisons.
 
 ## Setup
 
@@ -14,10 +14,22 @@ python3 -m pip install -r requirements.txt
 ## Usage
 
 ### Basic Usage
-Run the visualization with the sample data:
+Run a single visualization with the sample data:
 ```bash
-python3 moral_gravity.py
+python3 moral_gravity_map.py
 ```
+
+### Multi-Model Comparison
+To generate a comparison visualization of multiple analyses:
+```bash
+python3 generate_comparison.py
+```
+
+This will create a visualization comparing the analyses from different models, with:
+- Distinct colors for each model using the tab20 colormap
+- Smart handling of overlapping points with circular arrangement
+- Flexible legend layout (2-3 columns based on model count)
+- Enhanced visibility with alpha transparency
 
 ### Custom Analysis
 To visualize your own analysis, create a JSON file following this structure:
@@ -26,6 +38,7 @@ To visualize your own analysis, create a JSON file following this structure:
     "metadata": {
         "title": "Your Analysis Title",
         "filename": "your_analysis.json",
+        "model_name": "Model Name",
         "summary": "Your analysis summary text..."
     },
     "wells": [
@@ -44,7 +57,7 @@ To visualize your own analysis, create a JSON file following this structure:
 
 Then run:
 ```bash
-python3 moral_gravity.py your_analysis.json
+python3 moral_gravity_map.py your_analysis.json
 ```
 
 ## Visualization Elements
@@ -54,12 +67,18 @@ python3 moral_gravity.py your_analysis.json
 - **Red Dot**: Center of Mass (COM)
 - **Dotted Circle**: Reference circle
 - **Dashed Lines**: Connections from center to narrative scores
+- **Multi-Color Dots**: Different models in comparison view
 
-## File Structure
+## Directory Structure
 
-- `moral_gravity.py`: Main visualization script
+- `moral_gravity_map.py`: Main visualization script
+- `generate_comparison.py`: Multi-model comparison script
+- `config/`
+  - `gwllmp.ini`: Configuration settings
+- `analysis/`: Analysis documentation and comparisons
+- `model_output/`: Generated visualizations and data
 - `requirements.txt`: Python package dependencies
-- `sample_analysis.json`: Example analysis data
+- `old_files/`: Archive of previous versions
 
 ## License
 
