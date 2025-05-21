@@ -59,4 +59,10 @@ python3 moral_gravity.py your_analysis.json
 
 - `moral_gravity.py`: Main visualization script
 - `requirements.txt`: Python package dependencies
-- `sample_analysis.json`: Example analysis data 
+- `sample_analysis.json`: Example analysis data
+
+## License
+
+Copyright (c) 2025 Jeff Whatcott. All rights reserved.
+
+This software and its documentation are protected by copyright law. Unauthorized reproduction or distribution of this software, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under law. 

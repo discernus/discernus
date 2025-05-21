@@ -1,3 +1,11 @@
+"""
+Copyright (c) 2025 Jeff Whatcott
+All rights reserved.
+
+Moral Gravity Map Visualization Tool
+This tool generates visualizations of moral gravity well analyses.
+"""
+
 # Visualization Code
 import matplotlib.pyplot as plt
 import numpy as np
