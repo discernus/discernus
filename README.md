@@ -80,6 +80,31 @@ python3 moral_gravity_map.py your_analysis.json
 - `requirements.txt`: Python package dependencies
 - `old_files/`: Archive of previous versions
 
+## Development
+
+### Branching Strategy
+
+This repository follows a two-branch development model:
+
+- `main` branch:
+  - Contains stable, released code only
+  - Protected from direct development changes
+  - Tagged with version numbers (e.g., v1.0.0)
+  - Updated only through reviewed pull requests from `dev`
+
+- `dev` branch:
+  - Contains all active development work
+  - Feature branches merge into `dev` first
+  - Changes are tested and reviewed here
+  - When stable, changes are merged to `main` for release
+
+### Contributing
+
+1. Always create your changes in the `dev` branch
+2. Test your changes thoroughly
+3. Create a pull request from `dev` to `main` for releases
+4. Tag new releases in `main` with version numbers
+
 ## License
 
 Copyright (c) 2025 Jeff Whatcott. All rights reserved.
