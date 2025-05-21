@@ -1,0 +1,26 @@
+{
+    "metadata": {
+        "title": "Thomas Jefferson First Inaugural Address",
+        "model": "OpenAI GPT-4 Mini",
+        "model_version": "o4mini",
+        "filename": "thomas_jefferson_first_inaugural_address_o4mini.json",
+        "summary": "This text exhibits a strong commitment to dignity, justice, and hope, emphasizing unity and constitutional principles with low tribalism and resentment. The narrative balances idealism with pragmatism, reflecting grounded optimism and intellectual honesty."
+    },
+    "wells": [
+        {"name": "Dignity", "angle": 90, "score": 0.9},
+        {"name": "Truth", "angle": 30, "score": 0.8},
+        {"name": "Justice", "angle": 150, "score": 0.9},
+        {"name": "Hope", "angle": 60, "score": 0.8},
+        {"name": "Pragmatism", "angle": 120, "score": 0.8},
+        {"name": "Tribalism", "angle": 270, "score": 0.1},
+        {"name": "Fear", "angle": 300, "score": 0.2},
+        {"name": "Resentment", "angle": 330, "score": 0.1},
+        {"name": "Manipulation", "angle": 210, "score": 0.1},
+        {"name": "Fantasy", "angle": 240, "score": 0.1}
+    ],
+    "metrics": {
+        "com": {"x": -0.0, "y": 0.3},
+        "mps": 0.9,
+        "dps": 0.5
+    }
+} 

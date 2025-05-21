@@ -38,11 +38,17 @@ def plot_gravity_map(data: Dict):
     metrics = data['metrics']
     metadata = data['metadata']
     
-    # Add two-line title with less space at top
+    # Add two-line title
     fig.text(0.5, 0.92, "Moral Gravity Map", 
             fontsize=16, fontweight='bold', 
             horizontalalignment='center')
-    fig.text(0.5, 0.89, metadata['title'],
+    
+    # Add subtitle with model info if available
+    subtitle = metadata['title']
+    if 'model' in metadata:
+        subtitle += f" (analyzed by {metadata['model']})"
+    
+    fig.text(0.5, 0.89, subtitle,
             fontsize=12, style='italic',
             horizontalalignment='center')
     
