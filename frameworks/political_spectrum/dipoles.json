@@ -1,6 +1,6 @@
 {
   "framework_name": "political_spectrum",
-  "version": "v1.0.0",
+  "version": "v2025.06.04",
   "description": "This framework analyzes text through traditional left-right political dimensions, examining tensions between solidarity/competition, equality/tradition, and democratic/authoritarian impulses. Ideal for analyzing political speeches, policy documents, and ideological texts.",
   "dipoles": [
     {

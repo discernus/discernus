@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Framework Manager for Moral Gravity Wells
+Framework Manager for Narrative Gravity Wells
 
 Manages multiple dipole frameworks and enables easy switching between them.
 """
@@ -208,7 +208,7 @@ class FrameworkManager:
             print("No frameworks found in frameworks/ directory")
 
 def main():
-    parser = argparse.ArgumentParser(description="Manage Moral Gravity Wells frameworks")
+    parser = argparse.ArgumentParser(description="Manage Narrative Gravity Wells frameworks")
     parser.add_argument("command", choices=["list", "switch", "active", "validate", "summary"], 
                        help="Command to execute")
     parser.add_argument("framework", nargs="?", help="Framework name (for switch/validate commands)")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple launcher for the Moral Gravity Wells Streamlit app
+Simple launcher for the Narrative Gravity Wells Streamlit app
 Handles dependency installation and launches the interface
 """
 
@@ -22,7 +22,7 @@ def install_dependencies():
 
 def launch_streamlit():
     """Launch the Streamlit app"""
-    print("🚀 Launching Moral Gravity Wells Analysis Interface...")
+    print("🚀 Launching Narrative Gravity Maps Interface...")
     print("📱 Your browser should open automatically")
     print("🌐 If not, go to: http://localhost:8501")
     print("⏹️  Press Ctrl+C to stop the server")
@@ -31,7 +31,7 @@ def launch_streamlit():
     try:
         subprocess.run([
             sys.executable, "-m", "streamlit", "run", 
-            "moral_gravity_app.py",
+            "narrative_gravity_app.py",
             "--server.headless", "false",
             "--server.address", "localhost",
             "--server.port", "8501"
@@ -43,12 +43,12 @@ def launch_streamlit():
 
 def main():
     """Main launcher function"""
-    print("🎯 Moral Gravity Wells Analysis - Streamlit Interface")
+    print("🎯 Narrative Gravity Maps - Streamlit Interface")
     print("=" * 50)
     
     # Check if we're in the right directory
-    if not Path("moral_gravity_elliptical.py").exists():
-        print("❌ Error: Please run this script from the moral_gravity_analysis directory")
+    if not Path("narrative_gravity_elliptical.py").exists():
+        print("❌ Error: Please run this script from the narrative_gravity_map directory")
         sys.exit(1)
     
     # Check if streamlit is installed

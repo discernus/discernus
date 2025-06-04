@@ -25,6 +25,8 @@ wheels/
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS specific
 .DS_Store
@@ -33,4 +35,37 @@ wheels/
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-Thumbs.db .DS_Store
+Thumbs.db
+
+# Project-specific cleanup
+# Temporary test files
+test_*.png
+test_*.json
+*_test.*
+
+# Log files
+*.log
+*.tmp
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+
+# Large model files (if any)
+*.model
+*.pkl
+
+# Streamlit specific
+.streamlit/
+
+# Development documentation (keep only in docs/)
+*_NOTES.md
+*_TODO.md
+*_SCRATCH.md

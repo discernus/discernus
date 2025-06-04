@@ -1,9 +1,9 @@
 {
   "framework_name": "political_spectrum",
-  "version": "v1.0.0",
+  "version": "v2025.06.04",
   "description": "Political Spectrum Analysis Mathematical Framework",
   "ellipse": {
-    "description": "Elliptical coordinate system parameters",
+            "description": "Coordinate system parameters",
     "semi_major_axis": 1.0,
     "semi_minor_axis": 0.8,
     "orientation": "horizontal"

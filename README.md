@@ -1,14 +1,20 @@
-# Elliptical Moral Gravity Wells Framework v2.0
+# Narrative Gravity Maps v2.0
 
-**A quantitative framework for analyzing the moral forces driving political narratives**
+**A quantitative methodology for analyzing the moral forces driving persuasive narratives**
 
-![Moral Gravity Wells Analysis](https://img.shields.io/badge/analysis-moral--gravity--wells-blue.svg)
+![Narrative Gravity Wells Analysis](https://img.shields.io/badge/analysis-narrative--gravity--wells-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.8%2B-green.svg)
 ![Version](https://img.shields.io/badge/version-2.0-orange.svg)
 
 ## Overview
 
-The Elliptical Moral Gravity Wells framework positions political narratives within an elliptical coordinate system based on ten moral "gravity wells" that exert attractive force proportional to their moral weight and the narrative's alignment with each well.
+**Narrative Gravity Maps** provide a general quantitative methodology for mapping moral and rhetorical forces within persuasive texts. The methodology positions conceptual "gravity wells" on a coordinate system, where each well represents a distinct orientation that exerts attractive force proportional to a narrative's alignment with that orientation.
+
+**This methodology can be instantiated through multiple specialized frameworks:**
+
+- **🏛️ Civic Virtue Framework**: Our most advanced implementation for moral analysis of political discourse
+- **🗳️ Political Spectrum Framework**: Focused on left-right political positioning  
+- **🎭 Rhetorical Posture Framework**: Emphasizing communication style and approach
 
 **Version 2.0 introduces a modular architecture** that separates conceptual definitions from mathematical implementation, enabling:
 
@@ -23,10 +29,10 @@ The Elliptical Moral Gravity Wells framework positions political narratives with
 
 ### Basic Usage (Unchanged)
 ```python
-from moral_gravity_elliptical import MoralGravityWellsElliptical, load_analysis_data
+from narrative_gravity_elliptical import NarrativeGravityWellsElliptical, load_analysis_data
 
 # Initialize analyzer
-analyzer = MoralGravityWellsElliptical()
+analyzer = NarrativeGravityWellsElliptical()
 
 # Load and visualize analysis
 data = load_analysis_data("model_output/sample_analysis.json")
@@ -40,7 +46,7 @@ print(f"Visualization saved: {output_path}")
 python framework_manager.py summary
 
 # Switch to different framework
-python framework_manager.py switch political_spectrum
+python framework_manager.py switch civic_virtue
 
 # Generate prompt for active framework
 python generate_prompt.py --output prompts/custom/latest.txt
@@ -58,30 +64,40 @@ pip install -r requirements.txt
 - seaborn  
 - numpy
 
-## Architecture Overview
+## Project Structure
 
-### Storage Structure (New in v2.0)
+The project is organized for clarity and maintainability:
 
 ```
-moral_gravity_analysis/
-├── frameworks/                    # Multiple dipole frameworks
-│   ├── moral_foundations/         # Original 5-dipole system
-│   │   ├── dipoles.json          # Conceptual definitions
-│   │   ├── framework.json        # Mathematical implementation
-│   │   └── README.md             # Framework documentation
-│   └── political_spectrum/        # Alternative framework
-├── prompts/                       # Generated prompts by framework/version
-│   └── moral_foundations/
-│       ├── v2025.01.05/          # Current version
-│       │   ├── interactive.txt
-│       │   ├── batch.txt
-│       │   └── metadata.json
-│       └── v2025.01.03/          # Legacy version
-├── config/                        # Active configuration (symlinks)
-│   ├── dipoles.json -> ../frameworks/moral_foundations/dipoles.json
-│   └── framework.json -> ../frameworks/moral_foundations/framework.json
-└── model_output/                  # Analysis results
+narrative_gravity_analysis/
+├── 🚀 Core Application
+│   ├── launch_app.py                 # Application launcher
+│   ├── narrative_gravity_app.py      # Main Streamlit interface  
+│   ├── narrative_gravity_elliptical.py # Core analysis engine
+│   ├── framework_manager.py          # Framework management
+│   └── generate_prompt.py            # LLM prompt generator
+│
+├── 📊 Data & Configuration
+│   ├── frameworks/                   # Framework definitions
+│   │   ├── civic_virtue/            # Primary framework
+│   │   ├── political_spectrum/      # Alternative framework
+│   │   └── moral_rhetorical_posture/ # Communication style
+│   ├── config/                      # Active framework (symlinks)
+│   ├── model_output/                # Analysis results
+
+│   └── reference_texts/             # Sample texts
+│
+├── 📚 Documentation  
+│   ├── docs/development/            # Technical documentation
+│   ├── docs/examples/               # Usage examples
+│   └── narrative_gravity_wells_paper.md # Academic paper
+│
+└── 🗃️ Archive & Tests
+    ├── archive/                     # Historical files
+    └── tests/                       # Test files
 ```
+
+See `PROJECT_STRUCTURE.md` for detailed organization documentation.
 
 ### Configuration Files
 
@@ -122,9 +138,9 @@ Defines positioning, weighting, and ellipse parameters:
 }
 ```
 
-## Current Moral Framework
+## Civic Virtue Framework (Default)
 
-The default framework includes 10 moral gravity wells arranged in 5 dipoles:
+The **Civic Virtue Framework** is our most advanced implementation, designed for moral analysis of persuasive political discourse. It includes 10 gravity wells arranged in 5 dipoles representing tensions between integrative civic virtues and disintegrative rhetorical forces:
 
 ### Integrative Wells (Upper Half)
 - **Dignity** (90°, weight: 1.0) - Individual moral worth and universal rights
@@ -142,17 +158,36 @@ The default framework includes 10 moral gravity wells arranged in 5 dipoles:
 
 ### Theoretical Foundation
 
+### Differential Weighting System
+
+Narrative Gravity Maps support sophisticated **differential weighting** where wells can have varying gravitational influence based on theoretical justification. This distinguishes the methodology from simpler approaches that treat all dimensions equally.
+
+#### Civic Virtue Framework Weighting
+
 The three-tier weighting system reflects moral psychology research:
 
 - **Primary Tier (±1.0)**: Identity forces (Dignity/Tribalism) - most powerful moral motivators
-- **Secondary Tier (±0.8)**: Universalizable principles (Truth, Justice, Manipulation, Resentment)
+- **Secondary Tier (±0.8)**: Universalizable principles (Truth, Justice, Manipulation, Resentment)  
 - **Tertiary Tier (±0.6)**: Cognitive moderators (Hope, Pragmatism, Fantasy, Fear)
+
+This hierarchical structure reflects empirical findings that identity-based concerns can override fairness considerations and abstract reasoning in human moral judgment.
+
+#### Framework Creation with Weighting
+
+When creating custom frameworks, you can:
+
+1. **Enable Differential Weighting**: Choose to use varying weights vs. equal weights (1.0)
+2. **Define Tier System**: Create primary/secondary/tertiary tiers with custom weight values
+3. **Assign Dipoles to Tiers**: Place each dipole in the appropriate theoretical tier
+4. **Document Philosophy**: Explain the theoretical basis for your weighting decisions
+
+The framework creation wizard in the Streamlit interface guides you through this process, ensuring your custom frameworks maintain theoretical rigor while enabling empirical validation.
 
 ## Usage Examples
 
 ### 1. Standard Analysis
 ```python
-analyzer = MoralGravityWellsElliptical()
+analyzer = NarrativeGravityWellsElliptical()
 data = load_analysis_data("model_output/mandela_1994_analysis.json")
 output = analyzer.create_visualization(data)
 ```
@@ -169,11 +204,11 @@ output = analyzer.create_comparative_visualization(analyses)
 ### 3. Custom Framework
 ```python
 # Use alternative framework
-analyzer = MoralGravityWellsElliptical(config_dir="frameworks/political_spectrum")
+analyzer = NarrativeGravityWellsElliptical(config_dir="frameworks/political_spectrum")
 
 # Or switch active framework
 # python framework_manager.py switch political_spectrum
-analyzer = MoralGravityWellsElliptical()  # Uses active framework
+analyzer = NarrativeGravityWellsElliptical()  # Uses active framework
 ```
 
 ### 4. Framework Management
@@ -182,7 +217,7 @@ from framework_manager import FrameworkManager
 
 manager = FrameworkManager()
 frameworks = manager.list_frameworks()
-manager.switch_framework("political_spectrum")
+manager.switch_framework("civic_virtue")
 ```
 
 ## Tools
@@ -190,13 +225,13 @@ manager.switch_framework("political_spectrum")
 ### Core Analysis
 ```bash
 # Single file analysis
-python moral_gravity_elliptical.py model_output/analysis.json
+python narrative_gravity_elliptical.py model_output/analysis.json
 
 # Comparative analysis  
-python moral_gravity_elliptical.py model_output/analysis1.json model_output/analysis2.json
+python narrative_gravity_elliptical.py model_output/analysis1.json model_output/analysis2.json
 
 # Custom output path
-python moral_gravity_elliptical.py analysis.json --output custom_viz.png
+python narrative_gravity_elliptical.py analysis.json --output custom_viz.png
 ```
 
 ### Framework Management
@@ -301,7 +336,7 @@ python generate_prompt.py --output prompts/environmental_ethics/v2025.01.06/inte
 ```json
 {
   "metadata": {
-    "prompt_version": "2025.01.05.16.30",
+            "prompt_version": "2025.06.04",
     "framework": "moral_foundations"
   },
   "scores": {
@@ -333,12 +368,13 @@ When contributing new frameworks or features:
 
 ## Version History
 
-- **v2.0** (2025.01.05): Modular architecture, multi-framework support, automated prompt generation
-- **v1.0** (2025.01.03): Original elliptical framework implementation
+- **v2025.06.04**: Narrative Gravity Maps methodology - comprehensive restructuring with Civic Virtue Framework
+- **v2025.01.05**: Modular architecture, multi-framework support, automated prompt generation
+- **v1.0** (2025.01.03): Original framework implementation
 
 ## Files Overview
 
-- `moral_gravity_elliptical.py` - Core analysis engine
+- `narrative_gravity_elliptical.py` - Core analysis engine
 - `generate_prompt.py` - Automated prompt generation
 - `framework_manager.py` - Framework management tool
 - `frameworks/` - Multiple dipole framework definitions

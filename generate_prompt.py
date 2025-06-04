@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Moral Gravity Wells Prompt Generator
+Narrative Gravity Wells Prompt Generator
 
 Generates LLM analysis prompts from dipole configuration files.
 This enables easy customization and extensibility of the framework.
@@ -118,7 +118,7 @@ def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True, fr
             "",
             "## Initial Instructions:",
             "",
-            "You are an expert political narrative analyst specializing in moral gravity wells analysis. This is an interactive workflow where you'll analyze multiple political texts and provide comparative insights.",
+            "You are an expert political narrative analyst specializing in narrative gravity wells analysis. This is an interactive workflow where you'll analyze multiple political texts and provide comparative insights.",
             "",
             "**WORKFLOW:**",
             "1. Start by asking the user to upload their first political narrative file for analysis",
@@ -143,10 +143,10 @@ def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True, fr
         ])
     else:
         prompt_lines.extend([
-            "Moral Gravity Wells Analysis Prompt",
+            "Narrative Gravity Wells Analysis Prompt",
             f"Version: {timestamp} (Generated from dipoles v{dipole_version}, framework v{framework_version})",
             "",
-            "You are an expert political narrative analyst. Analyze the provided text using the moral gravity wells framework.",
+            "You are an expert political narrative analyst. Analyze the provided text using the narrative gravity wells framework.",
             "",
             "**SCORING CRITERIA:**",
             "Score the narrative on each of the following gravity wells (0.0 = no presence, 1.0 = maximum presence):",
@@ -258,7 +258,7 @@ def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True, fr
             "First, please confirm whether you can reliably identify your model name and version. If not, I'll ask the user to provide this information.",
             "",
             "**STEP 2: Analysis Workflow**", 
-            "Once model information is confirmed, please ask the user to upload their first political narrative file for moral gravity wells analysis. I'll provide both the JSON output and detailed commentary, then we can continue with additional files for comparative analysis.",
+            "Once model information is confirmed, please ask the user to upload their first political narrative file for narrative gravity wells analysis. I'll provide both the JSON output and detailed commentary, then we can continue with additional files for comparative analysis.",
             "",
             "Can you reliably identify your exact model name and version number?"
         ])
