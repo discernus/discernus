@@ -1,0 +1,70 @@
+{
+    "metadata": {
+        "title": "Take Back Our Nation: The Time for Mercy Is Over (analyzed by ChatGPT)",
+        "filename": "2025_06_03_153000_chatgpt_analysis.json",
+        "model_name": "ChatGPT",
+        "model_version": "GPT-4",
+        "prompt_version": "2025.01.03.19.45",
+        "summary": "Aggressively tribal, grievance-driven narrative invoking cultural purity and existential threat. Heavy emotional appeals and deterministic framing suggest zero-sum worldview. Minimal engagement with pluralism, nuance, or credible problem-solving."
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 0.1
+        },
+        {
+            "name": "Truth",
+            "angle": 30,
+            "score": 0.1
+        },
+        {
+            "name": "Hope",
+            "angle": 60,
+            "score": 0.0
+        },
+        {
+            "name": "Justice",
+            "angle": 150,
+            "score": 0.2
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 120,
+            "score": 0.0
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.95
+        },
+        {
+            "name": "Fear",
+            "angle": 300,
+            "score": 0.9
+        },
+        {
+            "name": "Resentment",
+            "angle": 330,
+            "score": 0.95
+        },
+        {
+            "name": "Manipulation",
+            "angle": 210,
+            "score": 0.85
+        },
+        {
+            "name": "Fantasy",
+            "angle": 240,
+            "score": 0.8
+        }
+    ],
+    "metrics": {
+        "com": {
+            "x": -0.71,
+            "y": -0.81
+        },
+        "mps": 0.86,
+        "dps": 0.92
+    }
+}
