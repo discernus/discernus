@@ -1,188 +1,349 @@
-# Elliptical Moral Gravity Wells Framework
+# Elliptical Moral Gravity Wells Framework v2.0
 
-A quantitative framework for analyzing the moral forces driving political narratives using elliptical geometry and gravity well positioning.
+**A quantitative framework for analyzing the moral forces driving political narratives**
+
+![Moral Gravity Wells Analysis](https://img.shields.io/badge/analysis-moral--gravity--wells-blue.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-green.svg)
+![Version](https://img.shields.io/badge/version-2.0-orange.svg)
 
 ## Overview
 
-The Elliptical Moral Gravity Wells framework positions ten moral "gravity wells" on an elliptical boundary, with integrative wells (Dignity, Truth, Justice, Hope, Pragmatism) in the upper half and disintegrative wells (Tribalism, Manipulation, Resentment, Fantasy, Fear) in the lower half. Political narratives are positioned inside the ellipse based on their gravitational pull from these boundary wells.
+The Elliptical Moral Gravity Wells framework positions political narratives within an elliptical coordinate system based on ten moral "gravity wells" that exert attractive force proportional to their moral weight and the narrative's alignment with each well.
 
-## Key Features
+**Version 2.0 introduces a modular architecture** that separates conceptual definitions from mathematical implementation, enabling:
 
-### 🎯 **Comprehensive Analysis**
-- **10 Moral Dimensions**: Five integrative and five disintegrative gravity wells
-- **Elliptical Geometry**: Vertically elongated ellipse emphasizing moral elevation
-- **Advanced Metrics**: Moral Elevation, Polarity, Coherence, and Directional Purity scores
-- **Visual Positioning**: Narratives plotted based on weighted gravitational forces
-
-### 🔄 **Interactive Workflow** 
-- **Multi-file Analysis**: Compare multiple political texts in a single session
-- **Progressive Insights**: Each analysis builds on previous ones for comparative understanding
-- **LLM Integration**: Works with any AI model (GPT-4, Claude, Gemini, etc.)
-- **Smart File Handling**: Automatic downloadable JSON outputs when supported
-
-### 📊 **Professional Visualizations**
-- **Enhanced Filename Generation**: Content-aware naming with vendor/model attribution
-- **Publication Quality**: High-resolution outputs with proper typography and spacing
-- **Comparative Analysis**: Side-by-side visualization of multiple narratives
-- **Automatic Summaries**: 500-character analysis summaries with intelligent text fitting
+- ✅ **Full Backward Compatibility** - All existing code and JSON files work unchanged
+- 🎯 **Custom Dipole Systems** - Define your own moral dimensions
+- 🔧 **Flexible Weighting** - Experiment with different mathematical frameworks  
+- 🤖 **Multi-LLM Support** - Generate prompts for any AI model
+- 📊 **Automated Analysis** - Streamlined prompt generation and processing
+- 🏗️ **Multi-Framework Storage** - Organized framework and prompt management
 
 ## Quick Start
 
-### Prerequisites
-```bash
-python 3.8+
-matplotlib
-numpy
-seaborn
+### Basic Usage (Unchanged)
+```python
+from moral_gravity_elliptical import MoralGravityWellsElliptical, load_analysis_data
+
+# Initialize analyzer
+analyzer = MoralGravityWellsElliptical()
+
+# Load and visualize analysis
+data = load_analysis_data("model_output/sample_analysis.json")
+output_path = analyzer.create_visualization(data)
+print(f"Visualization saved: {output_path}")
 ```
 
-### Installation
+### Framework Management (New in v2.0)
 ```bash
-git clone https://github.com/your-repo/moral-gravity-analysis
-cd moral-gravity-analysis
+# List available frameworks
+python framework_manager.py summary
+
+# Switch to different framework
+python framework_manager.py switch political_spectrum
+
+# Generate prompt for active framework
+python generate_prompt.py --output prompts/custom/latest.txt
+```
+
+## Installation
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Basic Usage
+**Requirements:**
+- Python 3.8+
+- matplotlib
+- seaborn  
+- numpy
 
-**Single Analysis:**
-```bash
-python moral_gravity_elliptical.py path/to/analysis.json
-```
+## Architecture Overview
 
-**Comparative Analysis:**
-```bash
-python moral_gravity_elliptical.py analysis1.json analysis2.json analysis3.json
-```
-
-## Interactive LLM Analysis
-
-### Using the Interactive Prompt
-
-1. **Copy the prompt** from `reference_prompts/5_dipole_interactive_prompt_v2025.01.03.19.45.txt`
-2. **Paste into your preferred LLM** (GPT-4, Claude, Gemini, etc.)
-3. **Upload your first political text** when prompted
-4. **Receive JSON analysis + commentary**
-5. **Continue with additional files** for comparative insights
-
-### Example Workflow
-```
-You → Paste interactive prompt into ChatGPT
-LLM → "Please upload your first political narrative file"
-You → Upload speech/manifesto/article
-LLM → Provides JSON + detailed analysis + asks for next file
-You → Upload second text
-LLM → Provides analysis + comparison with first file
-...continue building comprehensive analysis
-```
-
-## Analysis Framework
-
-### Moral Gravity Wells
-
-**Integrative Wells (Upper Ellipse):**
-- **Dignity** (90°): Individual moral worth, universal rights, pluralism
-- **Truth** (30°): Intellectual honesty, evidence engagement, transparency
-- **Justice** (150°): Impartial fairness, rule-based processes, inclusion
-- **Hope** (60°): Grounded optimism, realistic paths forward
-- **Pragmatism** (120°): Evidence-based solutions, feasibility focus
-
-**Disintegrative Wells (Lower Ellipse):**
-- **Tribalism** (270°): Group dominance, in-group/out-group framing
-- **Manipulation** (210°): Information distortion, emotional exploitation
-- **Resentment** (330°): Grievance-centered, moral scorekeeping
-- **Fantasy** (240°): Denial of trade-offs, utopian promises
-- **Fear** (300°): Threat amplification, danger exaggeration
-
-### Calculated Metrics
-
-- **Moral Elevation**: Vertical position normalized by ellipse height (-1.0 to 1.0)
-- **Moral Polarity**: Distance from center normalized by ellipse dimensions (0.0 to 1.0)
-- **Coherence**: Consistency of gravitational pull direction (0.0 to 1.0)
-- **Directional Purity**: Alignment with vertical moral axis (-1.0 to 1.0)
-
-## Example Analyses
-
-The `model_output/` directory contains example analyses across the political spectrum:
-
-### Historical Speeches
-- **Nelson Mandela 1994 Inaugural**: Reconciliation and hope-centered
-- **Hugo Chávez 2006 UN Speech**: Populist critique with tribalism elements
-
-### Contemporary Political Texts
-- **Left Center Positive**: "A Shared Future" - dignity and institutional reform
-- **Left Center Negative**: "Redemption Through Reckoning" - grievance-based manifesto
-- **Right Center Positive**: "Stewarding Freedom" - conservative renewal vision
-- **Right Center Negative**: "Take Back Our Nation" - fear and tribal mobilization
-
-## File Organization
+### Storage Structure (New in v2.0)
 
 ```
 moral_gravity_analysis/
-├── moral_gravity_elliptical.py      # Main framework
-├── reference_prompts/               # Current and historical prompts
-│   ├── 5_dipole_interactive_prompt_v2025.01.03.19.45.txt
-│   └── older_versions/
-├── reference_texts/                 # Example political texts
-├── model_output/                    # Generated analyses and visualizations
-├── analysis/                        # Research documentation
-├── requirements.txt
-└── README.md
+├── frameworks/                    # Multiple dipole frameworks
+│   ├── moral_foundations/         # Original 5-dipole system
+│   │   ├── dipoles.json          # Conceptual definitions
+│   │   ├── framework.json        # Mathematical implementation
+│   │   └── README.md             # Framework documentation
+│   └── political_spectrum/        # Alternative framework
+├── prompts/                       # Generated prompts by framework/version
+│   └── moral_foundations/
+│       ├── v2025.01.05/          # Current version
+│       │   ├── interactive.txt
+│       │   ├── batch.txt
+│       │   └── metadata.json
+│       └── v2025.01.03/          # Legacy version
+├── config/                        # Active configuration (symlinks)
+│   ├── dipoles.json -> ../frameworks/moral_foundations/dipoles.json
+│   └── framework.json -> ../frameworks/moral_foundations/framework.json
+└── model_output/                  # Analysis results
 ```
 
-## Filename Convention
+### Configuration Files
 
-All generated files follow the pattern:
+#### `dipoles.json` - Conceptual Framework
+Defines moral dimensions without mathematical parameters:
+```json
+{
+  "dipoles": [
+    {
+      "name": "Identity",
+      "positive": {
+        "name": "Dignity",
+        "description": "Affirms individual moral worth...",
+        "language_cues": ["equal dignity", "inherent worth"]
+      },
+      "negative": {
+        "name": "Tribalism",
+        "description": "Prioritizes group dominance...", 
+        "language_cues": ["real Americans", "our people"]
+      }
+    }
+  ]
+}
 ```
-YYYY_MM_DD_HHMMSS_[vendor]_[model]_[content_identifier].[extension]
+
+#### `framework.json` - Mathematical Implementation
+Defines positioning, weighting, and ellipse parameters:
+```json
+{
+  "ellipse": {
+    "semi_major_axis": 1.0,
+    "semi_minor_axis": 0.7
+  },
+  "wells": {
+    "Dignity": {"angle": 90, "weight": 1.0, "type": "integrative"},
+    "Tribalism": {"angle": 270, "weight": -1.0, "type": "disintegrative"}
+  }
+}
 ```
 
-Examples:
-- `2025_06_03_214802_openai_gpt_4_a_shared_future_equity_through_dignity_and_democra.png`
-- `2025_06_03_214914_openai_gpt_4_take_back_our_nation_the_time_for_mercy_is_over.json`
+## Current Moral Framework
 
-## Advanced Features
+The default framework includes 10 moral gravity wells arranged in 5 dipoles:
 
-### Comparative Visualizations
+### Integrative Wells (Upper Half)
+- **Dignity** (90°, weight: 1.0) - Individual moral worth and universal rights
+- **Truth** (45°, weight: 0.8) - Intellectual honesty and evidence-based reasoning  
+- **Hope** (20°, weight: 0.6) - Grounded optimism with realistic paths forward
+- **Justice** (135°, weight: 0.8) - Impartial, rule-based fairness
+- **Pragmatism** (160°, weight: 0.6) - Evidence-based, adaptable solutions
+
+### Disintegrative Wells (Lower Half)
+- **Tribalism** (270°, weight: -1.0) - Group dominance over individual agency
+- **Manipulation** (315°, weight: -0.8) - Information distortion and exploitation
+- **Fantasy** (340°, weight: -0.6) - Denial of trade-offs and complexity
+- **Resentment** (225°, weight: -0.8) - Grievance-centered moral scorekeeping  
+- **Fear** (200°, weight: -0.6) - Threat-focused reaction and control
+
+### Theoretical Foundation
+
+The three-tier weighting system reflects moral psychology research:
+
+- **Primary Tier (±1.0)**: Identity forces (Dignity/Tribalism) - most powerful moral motivators
+- **Secondary Tier (±0.8)**: Universalizable principles (Truth, Justice, Manipulation, Resentment)
+- **Tertiary Tier (±0.6)**: Cognitive moderators (Hope, Pragmatism, Fantasy, Fear)
+
+## Usage Examples
+
+### 1. Standard Analysis
+```python
+analyzer = MoralGravityWellsElliptical()
+data = load_analysis_data("model_output/mandela_1994_analysis.json")
+output = analyzer.create_visualization(data)
+```
+
+### 2. Comparative Analysis
+```python
+analyses = [
+    load_analysis_data("model_output/analysis1.json"),
+    load_analysis_data("model_output/analysis2.json")
+]
+output = analyzer.create_comparative_visualization(analyses)
+```
+
+### 3. Custom Framework
+```python
+# Use alternative framework
+analyzer = MoralGravityWellsElliptical(config_dir="frameworks/political_spectrum")
+
+# Or switch active framework
+# python framework_manager.py switch political_spectrum
+analyzer = MoralGravityWellsElliptical()  # Uses active framework
+```
+
+### 4. Framework Management
+```python
+from framework_manager import FrameworkManager
+
+manager = FrameworkManager()
+frameworks = manager.list_frameworks()
+manager.switch_framework("political_spectrum")
+```
+
+## Tools
+
+### Core Analysis
 ```bash
-python moral_gravity_elliptical.py file1.json file2.json
-# Generates: timestamp_model_comparative_content1_vs_content2.png
+# Single file analysis
+python moral_gravity_elliptical.py model_output/analysis.json
+
+# Comparative analysis  
+python moral_gravity_elliptical.py model_output/analysis1.json model_output/analysis2.json
+
+# Custom output path
+python moral_gravity_elliptical.py analysis.json --output custom_viz.png
 ```
 
-### Cross-Model Analysis
-The framework supports analyses from multiple AI models:
-- OpenAI GPT-4 (`openai_gpt_4`)
-- Anthropic Claude (`anthropic_claude_sonnet_4`)
-- Google Gemini (`google_gemini_pro`)
-- Custom models (automatic detection from metadata)
+### Framework Management
+```bash
+# List available frameworks
+python framework_manager.py list
 
-### Academic Integration
-- **Mathematical Foundation**: Based on elliptical geometry and gravitational physics
-- **Reproducible Analysis**: Standardized JSON format with version tracking
-- **Publication Ready**: High-quality visualizations with proper academic formatting
+# Get active framework
+python framework_manager.py active
+
+# Switch frameworks
+python framework_manager.py switch political_spectrum
+
+# Validate framework
+python framework_manager.py validate moral_foundations
+
+# Full summary
+python framework_manager.py summary
+```
+
+### Prompt Generation
+```bash
+# Generate interactive LLM prompt for active framework
+python generate_prompt.py --output prompts/latest.txt
+
+# Generate simple analysis prompt  
+python generate_prompt.py --simple --output prompts/basic.txt
+
+# Use custom configuration
+python generate_prompt.py --config-dir frameworks/custom --output custom_prompt.txt
+```
+
+## Creating Custom Frameworks
+
+### 1. Create Framework Directory
+```bash
+mkdir -p frameworks/environmental_ethics
+```
+
+### 2. Define Conceptual Framework (`dipoles.json`)
+```json
+{
+  "version": "2025.01.06",
+  "description": "Environmental Ethics Analysis Framework",
+  "dipoles": [
+    {
+      "name": "Stewardship",
+      "description": "Environmental responsibility dynamics",
+      "positive": {
+        "name": "Sustainability",
+        "description": "Long-term environmental thinking...",
+        "language_cues": ["future generations", "renewable", "carbon neutral"]
+      },
+      "negative": {
+        "name": "Exploitation",
+        "description": "Short-term resource extraction...",
+        "language_cues": ["maximize profits", "cheap energy", "job creation"]
+      }
+    }
+  ]
+}
+```
+
+### 3. Define Mathematical Framework (`framework.json`)
+```json
+{
+  "version": "2025.01.06",
+  "description": "Environmental Ethics Mathematical Framework",
+  "ellipse": {
+    "semi_major_axis": 1.0,
+    "semi_minor_axis": 0.8
+  },
+  "wells": {
+    "Sustainability": {"angle": 90, "weight": 1.0, "type": "integrative"},
+    "Exploitation": {"angle": 270, "weight": -1.0, "type": "disintegrative"}
+  }
+}
+```
+
+### 4. Activate Framework
+```bash
+python framework_manager.py switch environmental_ethics
+python generate_prompt.py --output prompts/environmental_ethics/v2025.01.06/interactive.txt
+```
+
+## JSON Format Evolution
+
+### Old Format (Still Supported)
+```json
+{
+  "wells": [
+    {"name": "Dignity", "score": 1.0, "angle": 90},
+    {"name": "Truth", "score": 0.8, "angle": 45}
+  ],
+  "com": {"x": 0.1, "y": 0.2},
+  "mps": 0.25,
+  "dps": 0.85
+}
+```
+
+### New Format (Minimal)
+```json
+{
+  "metadata": {
+    "prompt_version": "2025.01.05.16.30",
+    "framework": "moral_foundations"
+  },
+  "scores": {
+    "Dignity": 1.0,
+    "Truth": 0.8
+  }
+}
+```
+
+The system automatically handles both formats with full backward compatibility.
+
+## Research Applications
+
+- **Political Speech Analysis** - Understanding moral appeals in campaign rhetoric
+- **Policy Debate Analysis** - Mapping moral arguments in policy discussions  
+- **Cross-Cultural Comparison** - Comparing moral emphasis across different societies
+- **Historical Analysis** - Tracking moral themes across time periods
+- **Framework Development** - Creating domain-specific moral analysis systems
 
 ## Contributing
 
-This framework is designed for academic research into political discourse analysis. Contributions should maintain the mathematical rigor and visualization quality standards.
+When contributing new frameworks or features:
 
-## License
-
-See LICENSE file for details.
-
-## Citation
-
-If you use this framework in academic work, please cite:
-```
-Whatcott, J. (2025). Elliptical Moral Gravity Wells Framework v2.0: 
-Interactive Analysis of Political Narrative Moral Forces. 
-```
+1. **Framework Structure**: Follow the `dipoles.json` + `framework.json` pattern
+2. **Documentation**: Include README.md explaining theoretical basis
+3. **Validation**: Use `framework_manager.py validate` to check structure
+4. **Testing**: Verify with existing analysis data
+5. **Versioning**: Use semantic versioning for framework evolution
 
 ## Version History
 
-- **v2.0 (2025.01.03)**: Major enhancement with interactive workflow and advanced features
-  - Interactive LLM prompt system for multi-file comparative analysis
-  - Enhanced filename generation with content identification and vendor/model attribution
-  - Professional visualization system with automatic text fitting
-  - Comprehensive comparative analysis capabilities
-  - Support for multiple AI models (GPT-4, Claude, Gemini, etc.)
-- **v1.0**: Initial elliptical framework with basic analysis capabilities 
+- **v2.0** (2025.01.05): Modular architecture, multi-framework support, automated prompt generation
+- **v1.0** (2025.01.03): Original elliptical framework implementation
+
+## Files Overview
+
+- `moral_gravity_elliptical.py` - Core analysis engine
+- `generate_prompt.py` - Automated prompt generation
+- `framework_manager.py` - Framework management tool
+- `frameworks/` - Multiple dipole framework definitions
+- `prompts/` - Generated prompts organized by framework/version
+- `config/` - Active framework configuration (symlinks)
+- `model_output/` - Analysis results and visualizations
+
+For detailed technical documentation, see `MODULAR_ARCHITECTURE.md` and `STORAGE_ARCHITECTURE.md`.

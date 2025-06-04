@@ -1,0 +1,19 @@
+{
+  "version": "v2025.01.03",
+  "generated_date": "2025-01-03T19:45:00Z",
+  "framework": "moral_foundations",
+  "dipoles_version": "2025.01.03",
+  "framework_version": "2025.01.03",
+  "prompt_type": "interactive",
+  "description": "Original interactive prompt before modular architecture migration",
+  "features": [
+    "Basic well definitions",
+    "Traditional JSON output format",
+    "Manual metric calculation required"
+  ],
+  "generation_tool": "manual",
+  "format": "text",
+  "target_models": ["gpt-4", "claude-3"],
+  "validation_status": "legacy",
+  "superseded_by": "v2025.01.05"
+} 

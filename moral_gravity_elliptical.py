@@ -13,6 +13,7 @@ Version 2.0 enhancements include:
 - Enhanced filename generation with content identification and vendor attribution  
 - Professional visualization system with automatic text fitting
 - Support for multiple AI models (GPT-4, Claude, Gemini, etc.)
+- Modular configuration system for extensibility
 
 The framework positions ten moral "gravity wells" on an elliptical boundary,
 with integrative wells in the upper half and disintegrative wells in the lower half.
@@ -41,35 +42,28 @@ class MoralGravityWellsElliptical:
     
     This class implements the mathematical framework for positioning narratives
     within an elliptical coordinate system based on moral gravity wells.
+    
+    Version 2.0 adds modular configuration support while maintaining full 
+    backward compatibility with existing JSON files and naming conventions.
     """
     
-    def __init__(self):
+    def __init__(self, config_dir: str = "config"):
         self.fig = None
         self.ax = None
+        self.config_dir = config_dir
         
         # Use pure matplotlib for reliable aspect ratio control
         plt.rcParams['font.family'] = 'sans-serif'
         plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sans']
         
-        # Ellipse parameters - CORRECT orientation
-        self.ellipse_a = 1.0  # Semi-major axis (VERTICAL)
-        self.ellipse_b = 0.7  # Semi-minor axis (HORIZONTAL)
+        # Load configuration or use defaults for backward compatibility
+        try:
+            self._load_framework_config()
+        except (FileNotFoundError, KeyError) as e:
+            print(f"⚠️  Using default configuration (config not found: {e})")
+            self._load_default_config()
         
-        # Well definitions with elliptical positioning
-        self.well_definitions = {
-            'Dignity': {'angle': 90, 'type': 'integrative', 'moral_weight': 1.0},
-            'Justice': {'angle': 135, 'type': 'integrative', 'moral_weight': 0.9},
-            'Truth': {'angle': 45, 'type': 'integrative', 'moral_weight': 0.9},
-            'Pragmatism': {'angle': 160, 'type': 'integrative', 'moral_weight': 0.7},
-            'Hope': {'angle': 20, 'type': 'integrative', 'moral_weight': 0.8},
-            'Tribalism': {'angle': 270, 'type': 'disintegrative', 'moral_weight': -1.0},
-            'Resentment': {'angle': 225, 'type': 'disintegrative', 'moral_weight': -0.9},
-            'Manipulation': {'angle': 315, 'type': 'disintegrative', 'moral_weight': -0.9},
-            'Fear': {'angle': 200, 'type': 'disintegrative', 'moral_weight': -0.7},
-            'Fantasy': {'angle': 340, 'type': 'disintegrative', 'moral_weight': -0.8}
-        }
-        
-        # Clean, professional styling
+        # Style configuration remains the same
         self.style_config = {
             'figure_size': (10, 12.5),  # Larger size while maintaining 4:5 ratio (same as 8:10)
             'main_title': "Elliptical Moral Gravity Wells Analysis",
@@ -101,6 +95,58 @@ class MoralGravityWellsElliptical:
                 'narrative': 300
             }
         }
+
+    def _load_framework_config(self):
+        """Load framework configuration from config files."""
+        framework_path = Path(self.config_dir) / "framework.json"
+        
+        with open(framework_path, 'r') as f:
+            framework = json.load(f)
+        
+        # Extract ellipse parameters
+        ellipse_config = framework['ellipse']
+        self.ellipse_a = ellipse_config['semi_major_axis']
+        self.ellipse_b = ellipse_config['semi_minor_axis']
+        
+        # Extract well definitions
+        wells_config = framework['wells']
+        self.well_definitions = {}
+        
+        for well_name, well_config in wells_config.items():
+            self.well_definitions[well_name] = {
+                'angle': well_config['angle'],
+                'type': well_config['type'],
+                'moral_weight': well_config['weight']
+            }
+        
+        # Store additional framework metadata
+        self.framework_version = framework.get('version', 'unknown')
+        self.scaling_factor = framework.get('scaling_factor', 0.8)
+        
+        print(f"✅ Loaded framework v{self.framework_version} from {framework_path}")
+
+    def _load_default_config(self):
+        """Load default configuration for backward compatibility."""
+        # Ellipse parameters - CORRECT orientation
+        self.ellipse_a = 1.0  # Semi-major axis (VERTICAL)
+        self.ellipse_b = 0.7  # Semi-minor axis (HORIZONTAL)
+        
+        # Well definitions with elliptical positioning (current values)
+        self.well_definitions = {
+            'Dignity': {'angle': 90, 'type': 'integrative', 'moral_weight': 1.0},
+            'Justice': {'angle': 135, 'type': 'integrative', 'moral_weight': 0.8},
+            'Truth': {'angle': 45, 'type': 'integrative', 'moral_weight': 0.8},
+            'Pragmatism': {'angle': 160, 'type': 'integrative', 'moral_weight': 0.6},
+            'Hope': {'angle': 20, 'type': 'integrative', 'moral_weight': 0.6},
+            'Tribalism': {'angle': 270, 'type': 'disintegrative', 'moral_weight': -1.0},
+            'Resentment': {'angle': 225, 'type': 'disintegrative', 'moral_weight': -0.8},
+            'Manipulation': {'angle': 315, 'type': 'disintegrative', 'moral_weight': -0.8},
+            'Fear': {'angle': 200, 'type': 'disintegrative', 'moral_weight': -0.6},
+            'Fantasy': {'angle': 340, 'type': 'disintegrative', 'moral_weight': -0.6}
+        }
+        
+        self.framework_version = "default"
+        self.scaling_factor = 0.8
 
     def ellipse_point(self, angle_deg: float) -> Tuple[float, float]:
         """Calculate point on ellipse boundary for given angle."""
@@ -376,12 +422,27 @@ class MoralGravityWellsElliptical:
 
     def create_visualization(self, data: Dict, output_path: str = None) -> str:
         """Generate complete visualization from analysis data."""
+        
+        # Normalize data to handle both old and new JSON formats
+        normalized_data = normalize_analysis_data(data)
+        
+        # Ensure well angles match current framework configuration
+        for well in normalized_data['wells']:
+            well_name = well['name']
+            if well_name in self.well_definitions:
+                well['angle'] = self.well_definitions[well_name]['angle']
+            else:
+                print(f"⚠️  Unknown well '{well_name}' - using angle 0")
+                well['angle'] = 0
+        
         self.setup_figure()
-        self.add_titles(data['metadata']['title'], data['metadata'].get('model_name'), data['metadata'].get('model_version'))
+        self.add_titles(normalized_data['metadata']['title'], 
+                       normalized_data['metadata'].get('model_name'), 
+                       normalized_data['metadata'].get('model_version'))
         self.plot_ellipse_boundary()
         
         # Plot wells and scores
-        well_scores = self.plot_wells_and_scores(data['wells'])
+        well_scores = self.plot_wells_and_scores(normalized_data['wells'])
         
         # Plot narrative position
         narrative_x, narrative_y = self.plot_narrative_position(well_scores)
@@ -394,7 +455,7 @@ class MoralGravityWellsElliptical:
         self.add_legend()
         
         # Add summary
-        self.add_summary(data['metadata']['summary'])
+        self.add_summary(normalized_data['metadata']['summary'])
         
         # Finalize
         plt.tight_layout()
@@ -402,8 +463,8 @@ class MoralGravityWellsElliptical:
         if output_path is None:
             # Generate filename using improved model name generation and content identifier
             timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S")
-            model_part = self.generate_model_filename_part(data['metadata'])
-            content_part = self.generate_content_identifier(data['metadata']['title'])
+            model_part = self.generate_model_filename_part(normalized_data['metadata'])
+            content_part = self.generate_content_identifier(normalized_data['metadata']['title'])
             filename = f"{timestamp}_{model_part}_{content_part}.png"
             output_path = f"model_output/{filename}"
         
@@ -577,94 +638,80 @@ class MoralGravityWellsElliptical:
                               linewidth=1.5))
 
     def create_comparative_visualization(self, analyses: List[Dict], output_path: str = None) -> str:
-        """Generate comparative visualization from multiple analysis data."""
-        if len(analyses) < 2:
-            raise ValueError("Need at least 2 analyses for comparative visualization")
+        """Create a comparative visualization of multiple analyses."""
+        
+        # Normalize all analysis data
+        normalized_analyses = [normalize_analysis_data(data) for data in analyses]
+        
+        # Ensure all wells have current framework angles
+        for analysis in normalized_analyses:
+            for well in analysis['wells']:
+                well_name = well['name']
+                if well_name in self.well_definitions:
+                    well['angle'] = self.well_definitions[well_name]['angle']
+                else:
+                    print(f"⚠️  Unknown well '{well_name}' - using angle 0")
+                    well['angle'] = 0
         
         self.setup_figure()
         
-        # Create composite title
-        titles = [analysis['metadata']['title'].split(' (')[0] for analysis in analyses]
-        composite_title = f"Comparative Analysis: {' vs '.join(titles)}"
+        # Create title with multiple narratives
+        titles = [data['metadata']['title'] for data in normalized_analyses]
+        combined_title = " vs. ".join(titles[:3])  # Limit to 3 for readability
+        if len(titles) > 3:
+            combined_title += f" (and {len(titles) - 3} more)"
         
-        # Get model info from first analysis for subtitle
-        model_name = analyses[0]['metadata'].get('model_name')
-        model_version = analyses[0]['metadata'].get('model_version')
-        self.add_titles(composite_title, model_name, model_version)
-        
+        self.add_titles(combined_title)
         self.plot_ellipse_boundary()
         
-        # Plot wells from first analysis (they should be the same for all)
-        self.plot_wells_only(analyses[0]['wells'])
+        # Plot wells (only once)
+        self.plot_wells_only(normalized_analyses[0]['wells'])
         
-        # Use distinct colors for different analyses
-        colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7']  # Vibrant, distinct colors
+        # Calculate positions for all narratives
+        positions = []
+        colors = plt.cm.Set1([i/len(normalized_analyses) for i in range(len(normalized_analyses))])
         
-        # Plot each narrative position
-        narrative_positions = []
-        for i, analysis in enumerate(analyses):
-            wells_dict = {well['name']: well['score'] for well in analysis['wells']}
-            narrative_x, narrative_y = self.calculate_narrative_position(wells_dict)
-            narrative_positions.append((narrative_x, narrative_y))
+        for i, data in enumerate(normalized_analyses):
+            well_scores = {well['name']: well['score'] for well in data['wells']}
+            x, y = self.calculate_narrative_position(well_scores)
+            positions.append((x, y))
             
-            # Plot narrative marker
-            self.ax.scatter(narrative_x, narrative_y,
-                           s=self.style_config['marker_sizes']['narrative'],
-                           color=colors[i % len(colors)], 
-                           zorder=6, alpha=0.9,
-                           edgecolors='white',
-                           linewidth=3)
+            # Plot each narrative with different color
+            self.ax.scatter(x, y, 
+                          s=self.style_config['marker_sizes']['narrative'],
+                          c=[colors[i]], 
+                          edgecolors='black',
+                          linewidth=2,
+                          alpha=0.9,
+                          zorder=10)
             
             # Add narrative label
-            title = analysis['metadata']['title'].split(' (')[0]
-            label_text = title[:25] + "..." if len(title) > 25 else title
+            title = data['metadata']['title']
+            if len(title) > 30:
+                title = title[:27] + "..."
             
-            # Position labels to avoid overlap
-            label_offset_y = 0.15 + (i * 0.05)  # Stagger vertically
-            self.ax.text(narrative_x, narrative_y + label_offset_y,
-                       label_text,
-                       ha='center', va='bottom',
-                       color=self.style_config['colors']['text_primary'],
-                       fontsize=self.style_config['font_sizes']['labels'],
-                       fontweight='bold',
-                       bbox=dict(boxstyle="round,pad=0.3", 
-                               facecolor='white', 
-                               alpha=0.95,
-                               edgecolor=colors[i % len(colors)],
-                               linewidth=2))
+            self.ax.annotate(title,
+                           (x, y),
+                           xytext=(10, 10),
+                           textcoords='offset points',
+                           fontsize=9,
+                           fontweight='bold',
+                           bbox=dict(boxstyle="round,pad=0.3", 
+                                   facecolor=colors[i], 
+                                   alpha=0.7,
+                                   edgecolor='black'))
         
-        # Add connection line between narratives if 2 narratives
-        if len(narrative_positions) == 2:
-            x1, y1 = narrative_positions[0]
-            x2, y2 = narrative_positions[1]
-            self.ax.plot([x1, x2], [y1, y2], 
-                        color='gray', linestyle=':', alpha=0.7, linewidth=2, zorder=1)
-        
-        # Add distance and metrics comparison
-        self.add_comparative_metrics(narrative_positions, analyses)
+        # Add comparative metrics
+        self.add_comparative_metrics(positions, normalized_analyses)
         
         # Add comparative legend
-        self.add_comparative_legend(analyses, colors)
+        self.add_comparative_legend(normalized_analyses, colors)
         
-        # Finalize
         plt.tight_layout()
         
         if output_path is None:
-            # Generate filename for comparative analysis using improved naming with content identifiers
             timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S")
-            model_part = self.generate_model_filename_part(analyses[0]['metadata'])
-            
-            # For comparative analysis, combine content identifiers (limit to 2-3 for filename length)
-            content_parts = []
-            for i, analysis in enumerate(analyses[:3]):  # Limit to first 3 to keep filename reasonable
-                content_part = self.generate_content_identifier(analysis['metadata']['title'])
-                # Shorten individual parts for comparative files
-                if len(content_part) > 20:
-                    content_part = content_part[:20]
-                content_parts.append(content_part)
-            
-            content_identifier = "_vs_".join(content_parts)
-            filename = f"{timestamp}_{model_part}_comparative_{content_identifier}.png"
+            filename = f"{timestamp}_comparative_analysis.png"
             output_path = f"model_output/{filename}"
         
         # Create output directory if it doesn't exist
@@ -794,6 +841,42 @@ def load_analysis_data(json_path: str) -> Dict:
     """Load analysis data from JSON file."""
     with open(json_path, 'r') as f:
         return json.load(f)
+
+def normalize_analysis_data(data: Dict) -> Dict:
+    """
+    Normalize analysis data to handle both old and new JSON formats.
+    
+    Old format: {'wells': [{'name': 'Dignity', 'angle': 90, 'score': 1.0}, ...]}
+    New format: {'scores': {'Dignity': 1.0, 'Truth': 0.8, ...}}
+    
+    Always returns old format for backward compatibility with visualization code.
+    """
+    if 'scores' in data and 'wells' not in data:
+        # New minimal format - convert to old format for backward compatibility
+        wells = []
+        scores = data['scores']
+        
+        # Note: angles and weights will be loaded from framework config during visualization
+        # For now, we create wells entries without angles (they'll be populated later)
+        for well_name, score in scores.items():
+            wells.append({
+                'name': well_name,
+                'score': score,
+                'angle': 0,  # Will be overridden by framework config
+            })
+        
+        # Create normalized data structure
+        normalized_data = data.copy()
+        normalized_data['wells'] = wells
+        
+        return normalized_data
+    
+    elif 'wells' in data:
+        # Old format - return as-is but ensure angles match current framework if available
+        return data
+    
+    else:
+        raise ValueError("Invalid JSON format: must contain either 'wells' or 'scores'")
 
 def main():
     """Main function for generating elliptical moral gravity visualizations."""

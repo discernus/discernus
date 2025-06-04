@@ -1,71 +1,69 @@
 {
     "metadata": {
-        "title": "Hugo Ch\u00e1vez, UN General Assembly Speech (2006) (analyzed by ChatGPT)",
-        "filename": "2025_06_03_155000_chatgpt_analysis.json",
+        "title": "Nelson Mandela Inaugural Address (1994) (analyzed by ChatGPT)",
+        "filename": "2025_06_03_155500_chatgpt_analysis.json",
         "model_name": "ChatGPT",
         "model_version": "GPT-4",
         "prompt_version": "2025.01.05.16.30",
-        "summary": "A populist, anti-imperialist speech framed around global grievance, U.S. opposition, and revolutionary moral urgency. Strong presence of fear, resentment, and manipulation, with occasional appeals to truth and international dignity.",
+        "summary": "A masterclass in moral clarity and reconciliation, Mandela\u2019s address radiates universal dignity, justice, and hopeful solidarity. Rejects retribution, embraces pluralism, and offers a disciplined, visionary framework for peaceful national renewal.",
         "transformation_note": "Updated weights and angles from v2025.01.03.19.45 to v2025.01.05.16.30"
     },
     "wells": [
         {
             "name": "Dignity",
             "angle": 90,
-            "score": 0.6
+            "score": 1.0
         },
         {
             "name": "Justice",
             "angle": 135,
-            "score": 0.5
+            "score": 0.95
         },
         {
             "name": "Truth",
             "angle": 45,
-            "score": 0.4
+            "score": 0.9
         },
         {
             "name": "Pragmatism",
             "angle": 160,
-            "score": 0.2
+            "score": 0.85
         },
         {
             "name": "Hope",
             "angle": 20,
-            "score": 0.2
+            "score": 0.95
         },
         {
             "name": "Tribalism",
             "angle": 270,
-            "score": 0.75
+            "score": 0.0
         },
         {
             "name": "Resentment",
             "angle": 225,
-            "score": 0.9
+            "score": 0.0
         },
         {
             "name": "Manipulation",
             "angle": 315,
-            "score": 0.7
+            "score": 0.0
         },
         {
             "name": "Fear",
             "angle": 200,
-            "score": 0.8
+            "score": 0.0
         },
         {
             "name": "Fantasy",
             "angle": 340,
-            "score": 0.6
+            "score": 0.1
         }
     ],
     "metrics": {
-        "com": {
-            "x": -0.028034052099962077,
-            "y": -0.13742059566129872
-        },
-        "mps": 0.14025094719483908,
-        "dps": 1.0
+        "moral_elevation": 0.5099333606665034,
+        "moral_polarity": 0.5106529145925318,
+        "coherence": 0.9578947368421055,
+        "directional_purity": 1.0
     }
 }

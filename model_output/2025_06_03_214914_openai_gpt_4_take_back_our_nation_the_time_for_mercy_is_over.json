@@ -4,8 +4,9 @@
         "filename": "2025_06_03_153000_chatgpt_analysis.json",
         "model_name": "ChatGPT",
         "model_version": "GPT-4",
-        "prompt_version": "2025.01.03.19.45",
-        "summary": "Aggressively tribal, grievance-driven narrative invoking cultural purity and existential threat. Heavy emotional appeals and deterministic framing suggest zero-sum worldview. Minimal engagement with pluralism, nuance, or credible problem-solving."
+        "prompt_version": "2025.01.05.16.30",
+        "summary": "Aggressively tribal, grievance-driven narrative invoking cultural purity and existential threat. Heavy emotional appeals and deterministic framing suggest zero-sum worldview. Minimal engagement with pluralism, nuance, or credible problem-solving.",
+        "transformation_note": "Updated weights and angles from v2025.01.03.19.45 to v2025.01.05.16.30"
     },
     "wells": [
         {
@@ -14,23 +15,23 @@
             "score": 0.1
         },
         {
-            "name": "Truth",
-            "angle": 30,
-            "score": 0.1
-        },
-        {
-            "name": "Hope",
-            "angle": 60,
-            "score": 0.0
-        },
-        {
             "name": "Justice",
-            "angle": 150,
+            "angle": 135,
             "score": 0.2
         },
         {
+            "name": "Truth",
+            "angle": 45,
+            "score": 0.1
+        },
+        {
             "name": "Pragmatism",
-            "angle": 120,
+            "angle": 160,
+            "score": 0.0
+        },
+        {
+            "name": "Hope",
+            "angle": 20,
             "score": 0.0
         },
         {
@@ -39,32 +40,32 @@
             "score": 0.95
         },
         {
-            "name": "Fear",
-            "angle": 300,
-            "score": 0.9
-        },
-        {
             "name": "Resentment",
-            "angle": 330,
+            "angle": 225,
             "score": 0.95
         },
         {
             "name": "Manipulation",
-            "angle": 210,
+            "angle": 315,
             "score": 0.85
         },
         {
+            "name": "Fear",
+            "angle": 200,
+            "score": 0.9
+        },
+        {
             "name": "Fantasy",
-            "angle": 240,
+            "angle": 340,
             "score": 0.8
         }
     ],
     "metrics": {
         "com": {
-            "x": -0.71,
-            "y": -0.81
+            "x": -0.015680305194109994,
+            "y": -0.42545553190032087
         },
-        "mps": 0.86,
-        "dps": 0.92
+        "mps": 0.42574438527779246,
+        "dps": 1.0
     }
 }
