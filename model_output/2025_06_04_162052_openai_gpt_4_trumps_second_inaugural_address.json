@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "title": "Trump's Second Inaugural Address (analyzed by ChatGPT)",
+    "filename": "2025_06_04_ChatGPT_analysis.json",
+    "model_name": "ChatGPT",
+    "model_version": "GPT-4-turbo",
+    "prompt_version": "2025.06.04.16.19",
+    "dipoles_version": "v2.0.0",
+    "framework_version": "v2.0.0",
+    "framework_name": "moral_foundations",
+    "summary": "Trump's speech presents a moral landscape centered on national strength, grievance rectification, and populist triumph. While it includes calls to unity, dignity is framed primarily through group identity. The narrative emphasizes resentment, fear, and fantasy alongside pragmatic policy aims, with low engagement in nuance or mutual moral accountability."
+  },
+  "scores": {
+    "Dignity": 0.4,
+    "Tribalism": 0.8,
+    "Truth": 0.3,
+    "Manipulation": 0.7,
+    "Justice": 0.5,
+    "Resentment": 0.8,
+    "Hope": 0.6,
+    "Fantasy": 0.7,
+    "Pragmatism": 0.6,
+    "Fear": 0.7
+  },
+  "calculated_metrics": {
+    "moral_elevation": -0.14556908081105163,
+    "moral_polarity": 0.1470278384031071,
+    "coherence": 0.2131147540983607,
+    "directional_purity": 1.0
+  }
+}

@@ -1,6 +1,7 @@
 {
-  "version": "2025.01.05",
-  "description": "Moral Gravity Wells Dipole Definitions - Conceptual Framework",
+  "framework_name": "moral_foundations",
+  "version": "v1.0.0",
+  "description": "This framework analyzes text through the lens of moral psychology, focusing on the tension between integrative forces (like dignity, truth, hope) and disintegrative forces (like tribalism, resentment, fear). It's particularly effective for analyzing political rhetoric, manifestos, and moral arguments.",
   "dipoles": [
     {
       "name": "Identity",

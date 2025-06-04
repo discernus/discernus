@@ -1,5 +1,6 @@
 {
-  "version": "2025.01.05",
+  "framework_name": "moral_foundations",
+  "version": "v1.0.0",
   "description": "Moral Gravity Wells Mathematical Framework - Implementation Parameters",
   "ellipse": {
     "description": "Elliptical coordinate system parameters",

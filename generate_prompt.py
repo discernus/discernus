@@ -34,12 +34,65 @@ def load_framework(config_dir: str = "config") -> Dict:
     with open(config_path, 'r') as f:
         return json.load(f)
 
-def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True) -> str:
+class PromptGenerator:
+    """
+    Wrapper class for prompt generation functionality.
+    Provides a class-based interface for Streamlit integration.
+    """
+    
+    def __init__(self, config_dir: str = "config", framework_name: str = None):
+        self.config_dir = config_dir
+        self.framework_name = framework_name
+        if not framework_name:
+            # Try to get framework name from the files themselves
+            try:
+                dipoles = load_dipoles(config_dir)
+                framework = load_framework(config_dir)
+                self.framework_name = dipoles.get('framework_name') or framework.get('framework_name')
+            except FileNotFoundError:
+                pass
+            
+            # Fallback to FrameworkManager if not found in files
+            if not self.framework_name:
+                try:
+                    from framework_manager import FrameworkManager
+                    manager = FrameworkManager()
+                    self.framework_name = manager.get_active_framework() or "unknown"
+                except:
+                    self.framework_name = "unknown"
+        
+    def generate_interactive_prompt(self) -> str:
+        """Generate an interactive workflow prompt."""
+        dipoles = load_dipoles(self.config_dir)
+        framework = load_framework(self.config_dir)
+        return generate_prompt(dipoles, framework, interactive=True, framework_name=self.framework_name)
+    
+    def generate_batch_prompt(self) -> str:
+        """Generate a batch processing prompt."""
+        dipoles = load_dipoles(self.config_dir)
+        framework = load_framework(self.config_dir)
+        return generate_prompt(dipoles, framework, interactive=False, framework_name=self.framework_name)
+    
+    def generate_simple_prompt(self) -> str:
+        """Generate a simple single-analysis prompt."""
+        dipoles = load_dipoles(self.config_dir)
+        framework = load_framework(self.config_dir)
+        return generate_prompt(dipoles, framework, interactive=False, framework_name=self.framework_name)
+
+def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True, framework_name: str = None) -> str:
     """Generate LLM prompt from dipole and framework configurations."""
     
     timestamp = datetime.now().strftime("%Y.%m.%d.%H.%M")
+    
+    # Clean version strings to avoid double-v prefixes
     dipole_version = dipoles.get('version', 'unknown')
     framework_version = framework.get('version', 'unknown')
+    
+    # Remove existing 'v' prefix if present to avoid duplication
+    if dipole_version.startswith('v'):
+        dipole_version = dipole_version[1:]
+    if framework_version.startswith('v'):
+        framework_version = framework_version[1:]
     
     prompt_lines = []
     
@@ -48,6 +101,20 @@ def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True) ->
         prompt_lines.extend([
             "Gravity Wells Scoring Prompt - Interactive Analysis Workflow",
             f"Version: {timestamp} (Generated from dipoles v{dipole_version}, framework v{framework_version})",
+            "",
+            "## Model Identification:",
+            "",
+            "**IMPORTANT: Before we begin the analysis, I need to confirm model identification information:**",
+            "",
+            "Can you reliably identify your exact model name and version number? If you're uncertain about either:",
+            "- Your exact model name (e.g., 'ChatGPT', 'Claude', 'Gemini')",
+            "- Your specific version (e.g., 'GPT-4', '3.5 Sonnet', 'Pro')",
+            "",
+            "Please respond with: 'I cannot reliably identify my model details' and I will ask the user to provide this information.",
+            "",
+            "If you CAN reliably identify both your model name and version, please proceed with the analysis workflow below.",
+            "",
+            "---",
             "",
             "## Initial Instructions:",
             "",
@@ -60,9 +127,9 @@ def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True) ->
             "4. For each subsequent file, provide comparative insights vs all previous files",
             "",
             "**FILE HANDLING:**",
-            "- If your platform supports downloadable files, generate a downloadable JSON file using this naming convention: `YYYY_MM_DD_HHMMSS_[model_name]_analysis.json`",
-            "- If downloadable files are not supported, display the formatted JSON clearly for copy/paste",
-            "- Always provide the analysis commentary outside the JSON",
+            "- Please format your JSON response in a code block for easy copy/paste",
+            "- Use ```json code blocks to make the output easily copyable",
+            "- Always provide the analysis commentary outside the JSON code block",
             "",
             "---",
             "",
@@ -106,22 +173,45 @@ def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True) ->
     
     # Analysis process
     prompt_lines.extend([
+        "**CONCEPTUAL ASSESSMENT METHODOLOGY:**",
+        "",
+        "This framework employs a **conceptual assessment approach** that prioritizes semantic understanding over surface-level keyword counting. You should:",
+        "",
+        "1. **Identify Underlying Moral Frameworks**: First, identify the underlying moral frameworks and values being expressed in each section of the narrative, regardless of specific language used.",
+        "",
+        "2. **Extract Central Themes**: Determine which moral themes are central to the overall argument vs. merely mentioned in passing. Focus on what drives the core narrative logic.",
+        "",
+        "3. **Use Language Cues as Indicators**: The provided language cues are illustrative examples, not exhaustive lists. Look for conceptually similar terms, phrases, and ideas that convey the same moral orientations.",
+        "",
+        "4. **Assess Conceptual Strength**: Score based on how strongly each moral orientation shapes the narrative's fundamental structure and arguments, not just frequency of related words.",
+        "",
+        "**THREE-STEP ANALYSIS PROCESS:**",
+        "1. **Theme Extraction**: Identify the core moral themes and values driving the narrative's central arguments",
+        "2. **Centrality Assessment**: Determine which themes are foundational vs. peripheral to the overall message",
+        "3. **Holistic Scoring**: Assign scores based on conceptual strength and centrality, not linguistic frequency",
+        "",
         "**ANALYSIS PROCESS:**",
         "1. Assign each well a score (one decimal place)",
         "2. Write concise analysis summary (maximum 500 characters)",
         "3. Generate JSON output with proper metadata",
         "",
+        "**MODEL IDENTIFICATION FOR JSON:**",
+        "- If you can reliably self-identify: Use your actual model name and version",
+        "- If you cannot reliably self-identify: Ask the user to provide this information before proceeding",
+        "- Format: 'model_name': 'Exact Model Name', 'model_version': 'Exact Version'",
+        "",
         "**JSON OUTPUT FORMAT:**",
         "```json",
         "{",
         "    \"metadata\": {",
-        "        \"title\": \"[Narrative Title] (analyzed by [Your Model Name])\",",
+        "        \"title\": \"[Narrative Title] (analyzed by [Model Name])\",",
         "        \"filename\": \"YYYY_MM_DD_HHMMSS_[model_name]_analysis.json\",",
-        "        \"model_name\": \"[Your Model Name]\",",
-        "        \"model_version\": \"[Your Version]\",",
+        "        \"model_name\": \"[Exact Model Name - either self-identified or user-provided]\",",
+        "        \"model_version\": \"[Exact Version - either self-identified or user-provided]\",",
         f"        \"prompt_version\": \"{timestamp}\",",
-        f"        \"dipoles_version\": \"{dipole_version}\",",
-        f"        \"framework_version\": \"{framework_version}\",",
+        f"        \"dipoles_version\": \"v{dipole_version}\",",
+        f"        \"framework_version\": \"v{framework_version}\",",
+        f"        \"framework_name\": \"{framework_name or 'unknown'}\",",
         "        \"summary\": \"[Your 500-character analysis summary]\"",
         "    },",
         "    \"scores\": {"
@@ -147,15 +237,16 @@ def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True) ->
     if interactive:
         prompt_lines.extend([
             "**RESPONSE STRUCTURE:**",
-            "1. **JSON Output** (formatted for download/copy)",
-            "2. **Analysis Commentary** (outside JSON):",
-            "   - Key moral themes identified",
-            "   - Positioning explanation (why scores were assigned)",
-            "   - Notable rhetorical strategies",
-            "   - Overall moral framing assessment",
+            "1. **JSON Output** (in ```json code block for easy copy/paste):",
+            "2. **Analysis Commentary** (outside JSON code block):",
+            "   - **Key moral themes identified**: Core moral frameworks and values driving the narrative",
+            "   - **Theme centrality analysis**: Which themes are foundational vs. peripheral to the overall argument",
+            "   - **Conceptual reasoning**: Why scores were assigned based on semantic strength and narrative importance",
+            "   - **Notable rhetorical strategies**: How moral appeals are constructed and deployed",
+            "   - **Overall moral framing assessment**: Holistic evaluation of the narrative's moral positioning",
             "3. **Comparative Analysis** (for 2nd+ files):",
             "   - How this narrative compares to previous files",
-            "   - Key differences in moral positioning",
+            "   - Key differences in moral positioning and thematic emphasis",
             "   - Evolution of themes across analyses",
             "4. **Request for next file** (unless user indicates they're done)",
             "",
@@ -163,9 +254,13 @@ def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True) ->
             "",
             "## Getting Started:",
             "",
-            "Please upload your first political narrative file for moral gravity wells analysis. I'll provide both the JSON output and detailed commentary, then we can continue with additional files for comparative analysis.",
+            "**STEP 1: Model Identification**",
+            "First, please confirm whether you can reliably identify your model name and version. If not, I'll ask the user to provide this information.",
             "",
-            "What file would you like me to analyze first?"
+            "**STEP 2: Analysis Workflow**", 
+            "Once model information is confirmed, please ask the user to upload their first political narrative file for moral gravity wells analysis. I'll provide both the JSON output and detailed commentary, then we can continue with additional files for comparative analysis.",
+            "",
+            "Can you reliably identify your exact model name and version number?"
         ])
     else:
         prompt_lines.extend([

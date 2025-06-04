@@ -36,10 +36,14 @@ class FrameworkManager:
                         with open(framework_file) as f:
                             framework_data = json.load(f)
                         
+                        # Use explicit framework_name from files, fallback to folder name
+                        framework_name = dipoles_data.get('framework_name') or framework_data.get('framework_name') or framework_path.name
+                        
                         frameworks.append({
-                            'name': framework_path.name,
+                            'name': framework_name,
+                            'directory': framework_path.name,  # Keep track of directory for switching
                             'path': framework_path,
-                            'version': framework_data.get('version', 'unknown'),
+                            'version': framework_data.get('version', 'unknown').lstrip('v'),  # Remove 'v' prefix if present
                             'description': dipoles_data.get('description', 'No description'),
                             'dipole_count': len(dipoles_data.get('dipoles', [])),
                             'well_count': len(framework_data.get('wells', {}))
@@ -54,22 +58,48 @@ class FrameworkManager:
         dipoles_link = self.config_dir / "dipoles.json"
         framework_link = self.config_dir / "framework.json"
         
-        if dipoles_link.is_symlink() and framework_link.is_symlink():
-            # Extract framework name from symlink path
-            dipoles_target = os.readlink(dipoles_link)
-            # Expected format: ../frameworks/FRAMEWORK_NAME/dipoles.json
-            parts = dipoles_target.split('/')
-            if len(parts) >= 3 and parts[-3] == 'frameworks':
-                return parts[-2]
+        if dipoles_link.exists() and framework_link.exists():
+            try:
+                # Read framework name from the files themselves
+                with open(dipoles_link) as f:
+                    dipoles_data = json.load(f)
+                with open(framework_link) as f:
+                    framework_data = json.load(f)
+                
+                # Use explicit framework_name from files
+                framework_name = dipoles_data.get('framework_name') or framework_data.get('framework_name')
+                if framework_name:
+                    return framework_name
+                
+                # Fallback: extract from symlink path if no explicit name
+                if dipoles_link.is_symlink():
+                    dipoles_target = os.readlink(dipoles_link)
+                    parts = dipoles_target.split('/')
+                    if len(parts) >= 3 and parts[-3] == 'frameworks':
+                        return parts[-2]
+            except (json.JSONDecodeError, OSError):
+                pass
         
         return None
     
     def switch_framework(self, framework_name):
-        """Switch to a different framework"""
-        framework_path = self.frameworks_dir / framework_name
+        """Switch to a different framework by name"""
+        # Find the directory for this framework name
+        frameworks = self.list_frameworks()
+        target_framework = None
+        for fw in frameworks:
+            if fw['name'] == framework_name:
+                target_framework = fw
+                break
+        
+        if not target_framework:
+            raise ValueError(f"Framework '{framework_name}' not found")
+        
+        framework_directory = target_framework['directory']
+        framework_path = self.frameworks_dir / framework_directory
         
         if not framework_path.exists():
-            raise ValueError(f"Framework '{framework_name}' not found")
+            raise ValueError(f"Framework directory '{framework_directory}' not found")
         
         dipoles_file = framework_path / "dipoles.json"
         framework_file = framework_path / "framework.json"
@@ -87,8 +117,8 @@ class FrameworkManager:
             config_framework.unlink()
         
         # Create new symlinks
-        dipoles_target = f"../frameworks/{framework_name}/dipoles.json"
-        framework_target = f"../frameworks/{framework_name}/framework.json"
+        dipoles_target = f"../frameworks/{framework_directory}/dipoles.json"
+        framework_target = f"../frameworks/{framework_directory}/framework.json"
         
         config_dipoles.symlink_to(dipoles_target)
         config_framework.symlink_to(framework_target)

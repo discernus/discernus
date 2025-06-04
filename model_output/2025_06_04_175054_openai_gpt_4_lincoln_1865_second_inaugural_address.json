@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "title": "Lincoln 1865 Second Inaugural Address (analyzed by ChatGPT)",
+    "filename": "2025_06_04_174000_chatgpt_analysis.json",
+    "model_name": "ChatGPT",
+    "model_version": "GPT-4-turbo (June 2024)",
+    "prompt_version": "2025.06.04.17.40",
+    "dipoles_version": "v1.0.0",
+    "framework_version": "v1.0.0",
+    "framework_name": "moral_rhetorical_posture",
+    "summary": "Lincoln\u2019s address emphasizes shared guilt, divine justice, and national healing. It is deeply reflective, humble, and restorative in tone, acknowledging the moral weight of slavery and war without triumph or blame. While resolute, it avoids partisanship and revolutionary zeal, advocating for a just, inclusive peace."
+  },
+  "scores": {
+    "Restorative": 0.9,
+    "Retributive": 0.2,
+    "Universalist": 0.8,
+    "Partisan": 0.1,
+    "Humility": 1.0,
+    "Triumph": 0.1,
+    "Moral Reflection": 1.0,
+    "Operational Will": 0.3,
+    "Reformist": 0.7,
+    "Revolutionary": 0.2
+  },
+  "calculated_metrics": {
+    "moral_elevation": 0.43329831463242297,
+    "moral_polarity": 0.4340485246953605,
+    "coherence": 0.660377358490566,
+    "directional_purity": 1.0
+  }
+}

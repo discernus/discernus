@@ -123,7 +123,12 @@ class MoralGravityWellsElliptical:
         self.framework_version = framework.get('version', 'unknown')
         self.scaling_factor = framework.get('scaling_factor', 0.8)
         
-        print(f"✅ Loaded framework v{self.framework_version} from {framework_path}")
+        # Clean version string for display (remove v prefix if present to avoid duplication)
+        display_version = self.framework_version
+        if display_version.startswith('v'):
+            display_version = display_version[1:]
+        
+        print(f"✅ Loaded framework v{display_version} from {framework_path}")
 
     def _load_default_config(self):
         """Load default configuration for backward compatibility."""
@@ -225,8 +230,8 @@ class MoralGravityWellsElliptical:
             score = well['score']
             well_scores[name] = score
             
-            # Get position on ellipse boundary
-            x, y = self.ellipse_point(self.well_definitions[name]['angle'])
+            current_well_angle = self.well_definitions[name]['angle'] # Get angle from loaded config
+            x, y = self.ellipse_point(current_well_angle)
             
             # Choose colors based on well type
             well_type = self.well_definitions[name]['type']
@@ -246,17 +251,18 @@ class MoralGravityWellsElliptical:
                           linewidth=2)
             
             # Add well labels with smart positioning
-            if name in ['Dignity', 'Tribalism']:
-                # Center labels for top and bottom wells - ensure perfect centering
+            # Check if the well is at the top (90 deg) or bottom (270 deg)
+            if current_well_angle == 90 or current_well_angle == 270:
+                # Center labels for top and bottom wells
                 label_x = 0  # Force x-coordinate to exactly 0 for perfect centering
-                label_y = y + (0.09 if name == 'Dignity' else -0.09)  # 50% closer to ellipse edge
+                label_y = y + (0.09 if current_well_angle == 90 else -0.09)
                 ha = 'center'
-                va = 'bottom' if name == 'Dignity' else 'top'
+                va = 'bottom' if current_well_angle == 90 else 'top'
             else:
                 # Standard positioning for other wells
-                label_offset = 0.09  # 50% closer to ellipse edge (was 0.18)
+                label_offset = 0.09
                 label_x = x + (label_offset if x >= 0 else -label_offset)
-                label_y = y + (0.025 if y >= 0 else -0.025)  # Slight vertical adjustment
+                label_y = y + (0.025 if y >= 0 else -0.025)
                 ha = 'left' if x >= 0 else 'right'
                 va = 'bottom' if y >= 0 else 'top'
             
@@ -420,6 +426,71 @@ class MoralGravityWellsElliptical:
                 return f"{clean_name}_{clean_version}"
             return clean_name
 
+    def add_visualization_metadata(self, analyses: List[Dict], output_path: str = None) -> None:
+        """Add comprehensive metadata at the bottom of the visualization."""
+        metadata_lines = []
+        
+        # Get current framework info
+        framework_name = "unknown"
+        framework_version = self.framework_version
+        
+        # Try to get framework name from config
+        try:
+            with open(Path(self.config_dir) / "dipoles.json", 'r') as f:
+                dipoles_data = json.load(f)
+                framework_name = dipoles_data.get('framework_name', 'unknown')
+                display_name = dipoles_data.get('display_name', framework_name)
+                if display_name and display_name != framework_name:
+                    framework_name = display_name
+        except:
+            pass
+        
+        # Clean framework version for display
+        display_version = framework_version
+        if display_version.startswith('v'):
+            display_version = display_version[1:]
+        
+        # Add creation timestamp
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        metadata_lines.append(f"Generated: {timestamp}")
+        
+        # Add framework info
+        metadata_lines.append(f"Framework: {framework_name} v{display_version}")
+        
+        # Add file and model info for each analysis
+        for i, analysis in enumerate(analyses):
+            metadata = analysis.get('metadata', {})
+            
+            # Extract filename from metadata if available
+            filename = metadata.get('filename', f'analysis_{i+1}.json')
+            if filename.endswith('.json'):
+                filename = filename[:-5]  # Remove .json extension for cleaner display
+            
+            # Get model info
+            model_name = metadata.get('model_name', 'Unknown')
+            model_version = metadata.get('model_version', '')
+            model_info = f"{model_name} {model_version}".strip() if model_version else model_name
+            
+            # Create file info line
+            file_line = f"File {i+1}: {filename} ({model_info})"
+            metadata_lines.append(file_line)
+        
+        # Join all metadata lines
+        metadata_text = " | ".join(metadata_lines)
+        
+        # Add metadata at the very bottom of the figure
+        self.fig.text(0.5, 0.01, metadata_text,
+                     fontsize=8,
+                     color='#666666',
+                     horizontalalignment='center',
+                     verticalalignment='bottom',
+                     style='italic',
+                     bbox=dict(boxstyle="round,pad=0.3", 
+                             facecolor='white', 
+                             alpha=0.8,
+                             edgecolor='lightgray',
+                             linewidth=0.5))
+
     def create_visualization(self, data: Dict, output_path: str = None) -> str:
         """Generate complete visualization from analysis data."""
         
@@ -456,6 +527,9 @@ class MoralGravityWellsElliptical:
         
         # Add summary
         self.add_summary(normalized_data['metadata']['summary'])
+        
+        # Add comprehensive metadata at bottom
+        self.add_visualization_metadata([normalized_data], output_path)
         
         # Finalize
         plt.tight_layout()
@@ -531,11 +605,12 @@ class MoralGravityWellsElliptical:
                        f"Coherence: {metrics['coherence']:.3f}\n"
                        f"Directional Purity: {metrics['directional_purity']:.3f}")
         
-        self.fig.text(0.15, 0.18, metrics_text,  # Moved up slightly for new layout
+        self.fig.text(0.02, 0.5, metrics_text,  # Moved to center-left
                      fontsize=self.style_config['font_sizes']['metrics'],
                      color=self.style_config['colors']['text_primary'],
                      fontweight='bold',
-                     verticalalignment='top',
+                     verticalalignment='center', # Align to center
+                     horizontalalignment='left', # Align to left
                      bbox=dict(boxstyle="round,pad=0.5", 
                              facecolor=self.style_config['colors']['metrics_bg'], 
                              alpha=0.9,
@@ -557,7 +632,7 @@ class MoralGravityWellsElliptical:
         
         self.fig.legend(handles=patches, 
                        loc='lower center', 
-                       bbox_to_anchor=(0.5, 0.08),  # Moved up to make room for summary below
+                       bbox_to_anchor=(0.5, 0.025),  # Moved legend down to y=0.025
                        ncol=4,
                        fontsize=self.style_config['font_sizes']['labels'],
                        frameon=True,
@@ -624,10 +699,10 @@ class MoralGravityWellsElliptical:
                 wrapped_text = '\n'.join(final_lines)
         
         # Position the summary
-        self.fig.text(0.5, 0.015,  # Moved slightly lower to give more room
+        self.fig.text(0.5, 0.06,  # Moved summary down to y=0.06
                      wrapped_text,
                      horizontalalignment='center',
-                     verticalalignment='center',
+                     verticalalignment='bottom',
                      fontsize=font_size,
                      color=self.style_config['colors']['text_primary'],
                      style='italic',
@@ -636,6 +711,130 @@ class MoralGravityWellsElliptical:
                               alpha=0.95,
                               edgecolor=self.style_config['colors']['text_secondary'], 
                               linewidth=1.5))
+
+    def smart_truncate_comparative_titles(self, titles: List[str], max_length: int = 25) -> List[str]:
+        """
+        Smart truncation for comparative titles that preserves distinguishing information.
+        
+        For titles with common prefixes/suffixes, focuses on the unique parts.
+        For very similar titles, uses intelligent abbreviation and person name extraction.
+        """
+        if len(titles) < 2:
+            # Single title - use standard truncation
+            return [title[:max_length-3] + "..." if len(title) > max_length else title for title in titles]
+        
+        # Clean titles first (remove "(analyzed by...)" parts)
+        clean_titles = []
+        for title in titles:
+            clean_title = title.split(' (analyzed by')[0] if ' (analyzed by' in title else title
+            clean_titles.append(clean_title)
+        
+        # Find common prefix
+        if len(clean_titles) >= 2:
+            # Find longest common prefix
+            common_prefix = ""
+            min_len = min(len(t) for t in clean_titles)
+            for i in range(min_len):
+                if all(title[i] == clean_titles[0][i] for title in clean_titles):
+                    common_prefix += clean_titles[0][i]
+                else:
+                    break
+            
+            # Find longest common suffix  
+            common_suffix = ""
+            for i in range(1, min_len + 1):
+                if all(title[-i] == clean_titles[0][-i] for title in clean_titles):
+                    common_suffix = clean_titles[0][-i] + common_suffix
+                else:
+                    break
+            
+            # If we have a significant common prefix (more than 10 chars), focus on unique parts
+            if len(common_prefix) > 10:
+                unique_parts = []
+                for title in clean_titles:
+                    # Remove common prefix and suffix
+                    unique_part = title[len(common_prefix):]
+                    if common_suffix and unique_part.endswith(common_suffix):
+                        unique_part = unique_part[:-len(common_suffix)]
+                    
+                    # Clean up the unique part
+                    unique_part = unique_part.strip(" -_,")
+                    
+                    # Special handling for presidential speeches and similar patterns
+                    if unique_part:
+                        # Extract person names for inaugural addresses, speeches, etc.
+                        words = unique_part.split()
+                        if len(words) >= 2:
+                            # Look for name patterns: "Donald J. Trump", "Abraham Lincoln", etc.
+                            if any(word.endswith('.') for word in words[:3]):  # Middle initial pattern
+                                # "Donald J. Trump" -> "D.J. Trump"
+                                if len(words) >= 3:
+                                    unique_part = f"{words[0][0]}.{words[1]} {words[2]}"
+                                else:
+                                    unique_part = f"{words[0][0]}. {words[1]}"
+                            elif len(words) == 2 and all(word[0].isupper() for word in words):
+                                # "Abraham Lincoln" -> "A. Lincoln" if too long
+                                if len(unique_part) > max_length:
+                                    unique_part = f"{words[0][0]}. {words[1]}"
+                            elif len(words) > 2:
+                                # Multiple words - try to abbreviate intelligently
+                                unique_part = f"{words[0]} {words[-1]}"  # First and last word
+                    
+                    # If still too long, truncate but preserve the end (usually the name)
+                    if len(unique_part) > max_length:
+                        if len(unique_part.split()) > 1:
+                            # Keep the last word (usually surname) and truncate the beginning
+                            words = unique_part.split()
+                            last_word = words[-1]
+                            remaining_space = max_length - len(last_word) - 4  # "... "
+                            if remaining_space > 0:
+                                unique_part = f"...{unique_part[:remaining_space]} {last_word}"
+                            else:
+                                unique_part = f"...{last_word}"
+                        else:
+                            unique_part = unique_part[:max_length-3] + "..."
+                    
+                    # Add context clue if very short
+                    if len(unique_part) < 8 and common_prefix:
+                        # Add abbreviated prefix for context
+                        prefix_words = common_prefix.strip().split()
+                        if prefix_words:
+                            # Abbreviate first word(s) for context
+                            if "inaugural" in common_prefix.lower():
+                                context = "Inaug:"
+                            elif "speech" in common_prefix.lower():
+                                context = "Speech:"
+                            elif "address" in common_prefix.lower():
+                                context = "Addr:"
+                            else:
+                                context = f"{prefix_words[0][:4]}:"
+                            unique_part = f"{context} {unique_part}"
+                    
+                    unique_parts.append(unique_part if unique_part else title[:max_length-3] + "...")
+                
+                return unique_parts
+        
+        # Fallback: no significant common prefix, use standard smart truncation
+        result = []
+        for title in clean_titles:
+            if len(title) <= max_length:
+                result.append(title)
+            else:
+                # Try to preserve important words (names, key terms)
+                words = title.split()
+                if len(words) > 1:
+                    # Keep first and last words if possible
+                    first_word = words[0]
+                    last_word = words[-1]
+                    if len(first_word) + len(last_word) + 4 <= max_length:  # space for "... "
+                        result.append(f"{first_word}...{last_word}")
+                    else:
+                        # Just truncate normally
+                        result.append(title[:max_length-3] + "...")
+                else:
+                    result.append(title[:max_length-3] + "...")
+        
+        return result
 
     def create_comparative_visualization(self, analyses: List[Dict], output_path: str = None) -> str:
         """Create a comparative visualization of multiple analyses."""
@@ -657,11 +856,31 @@ class MoralGravityWellsElliptical:
         
         # Create title with multiple narratives
         titles = [data['metadata']['title'] for data in normalized_analyses]
-        combined_title = " vs. ".join(titles[:3])  # Limit to 3 for readability
-        if len(titles) > 3:
-            combined_title += f" (and {len(titles) - 3} more)"
         
-        self.add_titles(combined_title)
+        # Clean titles by removing any existing "(analyzed by...)" parts
+        clean_titles = []
+        for title in titles:
+            clean_title = title.split(' (analyzed by')[0] if ' (analyzed by' in title else title
+            clean_titles.append(clean_title)
+        
+        # Create subtitle with both narrative names
+        comparative_subtitle = " vs. ".join(clean_titles[:2])  # Show first 2 titles
+        if len(clean_titles) > 2:
+            comparative_subtitle += f" (and {len(clean_titles) - 2} more)"
+        
+        # Use custom titles for comparative analysis
+        self.fig.text(0.5, 0.95, "Moral Distance Analysis",
+                     fontsize=self.style_config['font_sizes']['title'],
+                     fontweight='bold',
+                     horizontalalignment='center',
+                     color=self.style_config['colors']['text_primary'])
+        
+        self.fig.text(0.5, 0.91, comparative_subtitle,
+                     fontsize=self.style_config['font_sizes']['subtitle'],
+                     style='italic',
+                     horizontalalignment='center',
+                     color=self.style_config['colors']['text_secondary'])
+        
         self.plot_ellipse_boundary()
         
         # Plot wells (only once)
@@ -670,6 +889,9 @@ class MoralGravityWellsElliptical:
         # Calculate positions for all narratives
         positions = []
         colors = plt.cm.Set1([i/len(normalized_analyses) for i in range(len(normalized_analyses))])
+        
+        # Get smart truncated titles for the chart labels
+        chart_titles = self.smart_truncate_comparative_titles(titles, max_length=25)
         
         for i, data in enumerate(normalized_analyses):
             well_scores = {well['name']: well['score'] for well in data['wells']}
@@ -685,27 +907,37 @@ class MoralGravityWellsElliptical:
                           alpha=0.9,
                           zorder=10)
             
-            # Add narrative label
-            title = data['metadata']['title']
-            if len(title) > 30:
-                title = title[:27] + "..."
+            # Use the smart truncated title
+            truncated_title = chart_titles[i]
             
-            self.ax.annotate(title,
-                           (x, y),
-                           xytext=(10, 10),
-                           textcoords='offset points',
-                           fontsize=9,
-                           fontweight='bold',
-                           bbox=dict(boxstyle="round,pad=0.3", 
-                                   facecolor=colors[i], 
-                                   alpha=0.7,
-                                   edgecolor='black'))
+            # Center the label over the moral center
+            self.ax.text(x, y + 0.12,  # Position above the center
+                        truncated_title,
+                        ha='center', va='bottom',
+                        fontsize=10,
+                        fontweight='bold',
+                        color=self.style_config['colors']['text_primary'],
+                        bbox=dict(boxstyle="round,pad=0.3", 
+                                facecolor=colors[i], 
+                                alpha=0.8,
+                                edgecolor='black',
+                                linewidth=1))
         
-        # Add comparative metrics
+        # Add dotted line between moral centers (if there are exactly 2)
+        if len(positions) == 2:
+            pos1, pos2 = positions
+            self.ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], 
+                        linestyle='--', 
+                        color='gray',  # Make it gray and more subtle
+                        linewidth=2,  # Make it thinner for a more subtle line
+                        alpha=0.6,    # Make it more opaque for testing
+                        zorder=15)    # Higher z-order to ensure it's on top
+        
+        # Add comparative metrics (but no legend since labels are on chart)
         self.add_comparative_metrics(positions, normalized_analyses)
         
-        # Add comparative legend
-        self.add_comparative_legend(normalized_analyses, colors)
+        # Add comprehensive metadata at bottom (replacing model info box)
+        self.add_visualization_metadata(normalized_analyses, output_path)
         
         plt.tight_layout()
         
@@ -727,8 +959,8 @@ class MoralGravityWellsElliptical:
             name = well['name']
             
             if name in self.well_definitions:
-                # Get position on ellipse boundary
-                x, y = self.ellipse_point(self.well_definitions[name]['angle'])
+                current_well_angle = self.well_definitions[name]['angle'] # Get angle from loaded config
+                x, y = self.ellipse_point(current_well_angle)
                 
                 # Choose colors based on well type
                 well_type = self.well_definitions[name]['type']
@@ -748,11 +980,12 @@ class MoralGravityWellsElliptical:
                               linewidth=2)
                 
                 # Add well labels with smart positioning
-                if name in ['Dignity', 'Tribalism']:
+                # Check if the well is at the top (90 deg) or bottom (270 deg)
+                if current_well_angle == 90 or current_well_angle == 270:
                     label_x = 0
-                    label_y = y + (0.09 if name == 'Dignity' else -0.09)
+                    label_y = y + (0.09 if current_well_angle == 90 else -0.09)
                     ha = 'center'
-                    va = 'bottom' if name == 'Dignity' else 'top'
+                    va = 'bottom' if current_well_angle == 90 else 'top'
                 else:
                     label_offset = 0.09
                     label_x = x + (label_offset if x >= 0 else -label_offset)
@@ -806,24 +1039,6 @@ class MoralGravityWellsElliptical:
                              alpha=0.9,
                              edgecolor='blue',
                              linewidth=1.5))
-
-    def add_comparative_legend(self, analyses: List[Dict], colors: List[str]) -> None:
-        """Add legend for comparative visualization."""
-        patches = []
-        for i, analysis in enumerate(analyses):
-            title = analysis['metadata']['title'].split(' (')[0]
-            label = title[:20] + "..." if len(title) > 20 else title
-            patches.append(mpatches.Patch(color=colors[i % len(colors)], label=label))
-        
-        self.fig.legend(handles=patches, 
-                       loc='lower center', 
-                       bbox_to_anchor=(0.5, 0.08),
-                       ncol=min(len(patches), 2),
-                       fontsize=self.style_config['font_sizes']['labels'],
-                       frameon=True,
-                       facecolor='white',
-                       edgecolor='gray',
-                       framealpha=0.9)
 
     def calculate_elliptical_distance(self, pos_a: Tuple[float, float], 
                                     pos_b: Tuple[float, float]) -> float:
