@@ -125,7 +125,6 @@ moral_gravity_analysis/
 │   └── older_versions/
 ├── reference_texts/                 # Example political texts
 ├── model_output/                    # Generated analyses and visualizations
-├── analysis/                        # Research documentation
 ├── requirements.txt
 └── README.md
 ```
