@@ -1,0 +1,221 @@
+# User Personas - Narrative Gravity Model
+
+#personal/writing/narrativegravity
+---
+
+## Persona 1: Dr. Sarah Chen, Validation Researcher  
+
+**Profile**  
+• Associate Professor of Political Communication at a mid-tier research university  
+• 8 years post-PhD, working toward tenure  
+
+**Background & Context**  
+• Specializes in computational political discourse analysis  
+• Uses content-analysis and basic sentiment tools  
+• Moderate Python comfort (runs scripts, but not a developer)  
+• Needs 2–3 publications in 18 months; wary of black-box AI  
+
+**Goals & Motivations**  
+1. Co-author a methodologically rigorous paper  
+2. Access novel analytical tools for ongoing projects  
+3. Train graduate students in reproducible text analysis  
+
+**Pain Points & Frustrations**  
+• “How do I know this isn’t just dressed-up sentiment analysis?”  
+• Reproducibility anxiety for students  
+• Skepticism from tenure reviewers  
+
+**Technical Requirements**  
+• Raw results export in CSV/JSON (SPSS/R compatible)  
+• Confidence intervals, inter-rater and inter-LLM reliability metrics  
+• Detailed methodology documentation  
+
+**User Journey Story**  
+Fresh back from a conference, Sarah visits the platform URL. In 2 hours she:  
+1. Reads the methodology draft and variance data  
+2. Downloads CSV of Trump 2025 vs. Lincoln 1865 analyses  
+3. Tests the “Demo Analysis” on Obama’s 2008 speech  
+4. Reviews validation-study design (48 h framework separation, randomization)  
+5. Screenshots key findings and schedules a lunch to plan a pilot study  
+
+**Success Metrics**  
+• Publication in a top-tier journal  
+• Framework cited by peers  
+• Graduate-student replication of her pilot study  
+
+---
+
+## Persona 2: Marcus Rodriguez, Media Analyst  
+
+**Profile**  
+• Senior Political Reporter for a major metropolitan newspaper  
+• 15 years covering campaigns, debates, and policy  
+
+**Background & Context**  
+• Relies on sentiment trackers and manual fact-checks  
+• Low-to-moderate technical comfort (web tools OK; CLI no)  
+• Deadlines often require analysis within 2–4 hours  
+
+**Goals & Motivations**  
+1. Publish data-backed analysis that stands out  
+2. Educate readers on deeper rhetorical patterns  
+3. Build a signature analytical brand  
+
+**Pain Points & Frustrations**  
+• Speed vs. depth under tight deadlines  
+• Explaining AI methods to skeptical editors/readers  
+• Need quotes illustrating each score (e.g., “fear-mongering passages”)  
+
+**Technical Requirements**  
+• 30 min end-to-end analysis  
+• Visualizations and excerpted quotes for each high-score dimension  
+• One-click CSV/JSON export, plus plain-English summaries  
+
+**User Journey Story**  
+Covering the State of the Union, Marcus:  
+1. Pastes transcript into the web UI  
+2. Selects three frameworks (CV, MRP, PS) and clicks “Run”  
+3. Drafts his article while the 20-min analysis runs  
+4. Receives scores + 3–5 exemplary quotes per high-score dimension  
+5. Compares results to Obama 2012 and Reagan 1984 via sidebar  
+6. Submits his piece with embedded charts and attributions  
+
+**Success Metrics**  
+• Article engagement and social-media shares  
+• Editor praise for unique analytical depth  
+• Other journalists asking for his methodology  
+
+---
+
+## Persona 3: Dr. Elena Vasquez, Framework Developer  
+
+**Profile**  
+• PhD in Literature, digital humanities researcher & consultant  
+• 5 years in computational text analysis, strong Python skills  
+
+**Background & Context**  
+• Analyzes corporate ESG reports, social movements, historical texts  
+• Builds NLP pipelines but seeks faster platform foundations  
+• Runs a consulting practice for NGOs and think tanks  
+
+**Goals & Motivations**  
+1. Extend the core model with domain-specific frameworks  
+2. Prove methodological soundness to clients and peers  
+3. Contribute extensions to an open repository  
+
+**Pain Points & Frustrations**  
+• Reinventing low-level analysis code is time-consuming  
+• Validating new frameworks without built-in testing tools  
+• Needing transparent access to core algorithms  
+
+**Technical Requirements**  
+• JSON schema for defining new gravity wells and weights  
+• Access to coordinate-calculation code and prompt templates  
+• Test harness for inter-LLM validation on custom corpora  
+• API endpoints for programmatic integration  
+
+**User Journey Story**  
+Elena needs to analyze corporate sustainability reports:  
+1. Clones repo and reviews core JSON Schemas  
+2. Designs “Environmental Commitment” framework (action vs. gesture, accountability vs. primacy, etc.)  
+3. Uses CLI tool to convert 50 reports into JSONL with semantic chunking  
+4. Runs multi-LLM validation via Hugging Face integration  
+5. Refines weights based on variance results  
+6. Publishes her framework extension and wins a new consulting contract  
+
+**Success Metrics**  
+• Adoption of her framework by other researchers  
+• Citations in academic and industry reports  
+• Increased consulting revenue from proprietary analysis services  
+
+---
+
+## Persona 4: You, Project Founder & Platform Shepherd  
+
+**Profile**  
+• Retired technology executive, independent researcher, Cursor-driven architect  
+• 30 years in SaaS/platform scaling, now focused on meaningful second-act projects  
+
+**Background & Context**  
+• Relies on AI-assisted coding (Cursor) for implementation  
+• Passionate about open source, sensitive to exploitation risks  
+• Manages project on a $2 500 validation-phase budget  
+
+**Goals & Motivations**  
+1. Build a sustainable platform with strong IP attribution  
+2. Establish academic credibility through rigorous validation  
+3. Protect against uncompensated commercial appropriation  
+4. Maintain modular architecture for flexibility  
+
+**Pain Points & Frustrations**  
+• Licensing complexity: open vs. protective terms  
+• Need admin UI to manage batch jobs without coding  
+• Ensuring quality and vision as the community grows  
+
+**Technical Requirements**  
+• Admin dashboard for job launch, monitoring, cost tracking  
+• Token-based auth and role management  
+• JSON-generation CLI and schema-migration tooling  
+• Copyleft core license + permissive framework extension license  
+
+**User Journey Story**  
+A typical week for the Founder:  
+1. Reviews overnight validation-study results on the dashboard  
+2. Adjusts schema and runs migration script for legacy corpora  
+3. Works with Cursor to add excerpt extraction feature  
+4. Approves framework-extension pull requests  
+5. Monitors Hugging Face spending and pauses jobs if needed  
+6. Sends licensing-compliance notices to misusing firms  
+
+**Success Metrics**  
+• Reliable system uptime for all personas  
+• Academic papers published with co-author credit  
+• Healthy open-source ecosystem with fair attribution  
+• Project stays within budget and time commitments  
+
+---
+
+## Persona 5: Jessica Park, Casual User  
+
+**Profile**  
+• Public-policy graduate student and engaged citizen  
+• Active on social media, volunteers in local campaigns  
+
+**Background & Context**  
+• Consumes multiple news sources and podcasts  
+• High consumer-tech comfort; low domain expertise  
+• Limited time—seeks quick, trustworthy insights  
+
+**Goals & Motivations**  
+1. Understand why rhetoric feels persuasive or manipulative  
+2. Make informed voting decisions and discuss politics confidently  
+3. Share credible analysis with friends and family  
+
+**Pain Points & Frustrations**  
+• Overwhelmed by complex political messaging  
+• Unsure how to separate partisan spin from substantive argument  
+• Intimidated by academic jargon and statistical output  
+
+**Technical Requirements**  
+• Mobile-friendly web UI with one-click “Analyze”  
+• Results in plain English, 1–2 min turnaround  
+• Charts with embedded excerpt quotes for context  
+• One-click social-media sharing of analysis  
+
+**User Journey Story**  
+After seeing a journalist’s tweet, Jessica:  
+1. Clicks link, pastes a recent campaign-ad transcript  
+2. Waits 90 sec for CV/MRP/PS scores + 3 fear-related quotes  
+3. “So that’s why it felt manipulative!” she thinks  
+4. Shares a screenshot on Instagram Stories with a brief caption  
+5. At her next volunteer meeting, she walks peers through the tool  
+
+**Success Metrics**  
+• Weekly return visits and shared analyses  
+• Friends and family use her insights in discussions  
+• Increased confidence in identifying manipulative rhetoric  
+
+---
+
+*These personas guide the design and prioritization of our Milestone 1 infrastructure—and set the stage for Milestones 2 and 3, where academic replication, public-facing tools, and broader adoption come into play.*  
+
