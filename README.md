@@ -382,4 +382,90 @@ When contributing new frameworks or features:
 - `config/` - Active framework configuration (symlinks)
 - `model_output/` - Analysis results and visualizations
 
-For detailed technical documentation, see `MODULAR_ARCHITECTURE.md` and `STORAGE_ARCHITECTURE.md`.
+For detailed technical documentation, see `docs/development/MODULAR_ARCHITECTURE.md` and `docs/development/STORAGE_ARCHITECTURE.md`. For a complete overview of available documentation, see `docs/README.md`.
+
+## Using This Software with the Paper "Narrative Gravity Maps"
+
+If you are reading the paper "Narrative Gravity Maps: A Quantitative Framework for Discerning the Forces Driving Persuasive Narratives," this repository provides the open-source implementation of the methodology and frameworks discussed. While the paper focuses on political narrative analysis using the Civic Virtue Framework, the methodology can be applied to any persuasive narrative type with appropriate frameworks. We encourage you to explore the tools and replicate the analyses.
+
+**Key files and directories related to the paper:**
+*   **Replication Guide:** For specific instructions on how to reproduce the analyses and figures presented in the paper, please see [`PAPER_REPLICATION.md`](./PAPER_REPLICATION.md).
+*   **Frameworks:** The analytical frameworks (e.g., Civic Virtue Framework) are defined in the `frameworks/` directory.
+*   **Reference Texts:** Sample texts, including those used in the paper, can be found in `reference_texts/`.
+*   **LLM Scores for Paper Analyses:** The specific LLM-generated scores used for the paper's figures are located in `model_output/paper_analyses/` (as detailed in `PAPER_REPLICATION.md`).
+
+## Getting Started
+
+We recommend starting with the Streamlit web application for the most user-friendly experience.
+
+1.  **Ensure Dependencies are Installed:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+2.  **Launch the Application:**
+    ```bash
+    python launch_app.py
+    ```
+    This will open the interface in your web browser.
+
+## Workflow: Analyzing New Texts
+
+This application uses a multi-step process to analyze persuasive narratives, involving an external Large Language Model (LLM) like ChatGPT or Claude:
+
+1.  **Generate Prompt (in Streamlit App):**
+    *   Go to the "📝 Create Analysis" tab.
+    *   Select the desired framework (e.g., "civic_virtue").
+    *   Click "📋 Generate Analysis Prompt". A detailed prompt will appear.
+
+2.  **Use External LLM:**
+    *   Copy the generated prompt.
+    *   Go to your chosen LLM (e.g., ChatGPT, Claude).
+    *   Paste the prompt, followed by the text you want to analyze.
+    *   The LLM will output a response, hopefully in JSON format as requested by the prompt.
+
+3.  **Input LLM JSON Response (in Streamlit App):**
+    *   Copy the JSON portion of the LLM's response.
+    *   Back in the Streamlit app (Step 2 on the "📝 Create Analysis" tab), paste this JSON into the text area labeled "Paste JSON response here".
+
+4.  **Generate Visualization (in Streamlit App):**
+    *   Click "🎯 Generate Visualization".
+    *   The narrative gravity map and associated metrics will be displayed.
+
+For a quick test of the visualization step without needing an LLM, you can use the "🧪 Load Test JSON" button on the "📝 Create Analysis" tab.
+
+**Example of Expected JSON from LLM:**
+
+**🚨 CRITICAL:** LLM must use decimal scores between 0.0 and 1.0 (NOT 1-10 or any other scale)
+
+```json
+{
+  "metadata": {
+    "title": "Trump's 2025 Second Inaugural Address (analyzed by Claude 3.5 Sonnet)",
+    "filename": "2025_06_04_203300_claude_35_sonnet_analysis.json",
+    "model_name": "Claude",
+    "model_version": "4.0 Sonnet",
+    "prompt_version": "2025.06.04.20.19",
+    "dipoles_version": "v2025.06.04",
+    "framework_version": "v2025.06.04",
+    "framework_name": "civic_virtue",
+    "summary": "Brief analysis summary explaining the moral positioning..."
+  },
+  "scores": {
+    "Dignity": 0.6,
+    "Tribalism": 0.8,
+    "Truth": 0.4,
+    "Manipulation": 0.7,
+    "Justice": 0.5,
+    "Resentment": 0.8,
+    "Hope": 0.7,
+    "Fantasy": 0.6,
+    "Pragmatism": 0.3,
+    "Fear": 0.9
+  }
+}
+```
+
+**Important Notes:**
+- This example shows the exact structure and score format required for the civic_virtue framework
+- All scores must be decimal values between 0.0 and 1.0
+- **Model Identification**: If using AI platforms (like Perplexity) that run underlying models (like Claude), you may need to manually update the `model_name` and `model_version` fields in the JSON to reflect the actual underlying model for academic accuracy
