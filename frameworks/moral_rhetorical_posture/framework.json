@@ -1,0 +1,75 @@
+{
+  "framework_name": "moral_rhetorical_posture",
+  "display_name": "Moral-Rhetorical Posture",
+  "version": "v2025.06.04",
+  "description": "Narrative-Rhetorical Posture Mathematical Framework - Implementation Parameters",
+  "ellipse": {
+            "description": "Coordinate system parameters",
+    "semi_major_axis": 1.0,
+    "semi_minor_axis": 0.7,
+    "orientation": "vertical"
+  },
+  "wells": {
+    "Restorative": {
+      "angle": 90,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Retributive": {
+      "angle": 270,
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Universalist": {
+      "angle": 45,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Partisan": {
+      "angle": 225,
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Humility": {
+      "angle": 135,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Triumph": {
+      "angle": 315,
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Moral Reflection": {
+      "angle": 120,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Operational Will": {
+      "angle": 300,
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Reformist": {
+      "angle": 60,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Revolutionary": {
+      "angle": 240,
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    }
+  },
+  "scaling_factor": 0.8
+}

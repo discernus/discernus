@@ -1,0 +1,11 @@
+# Test requirements for Narrative Gravity Maps
+# Extends the main requirements.txt with testing-specific dependencies
+
+# Include main application requirements
+-r ../requirements.txt
+
+# Additional testing dependencies
+requests>=2.31.0
+pytest>=7.4.0
+pytest-mock>=3.11.0
+unittest-xml-reporting>=3.2.0 

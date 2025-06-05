@@ -1,0 +1,74 @@
+{
+  "framework_name": "political_spectrum",
+  "version": "v2025.06.04",
+  "description": "Political Spectrum Analysis Mathematical Framework",
+  "ellipse": {
+            "description": "Coordinate system parameters",
+    "semi_major_axis": 1.0,
+    "semi_minor_axis": 0.8,
+    "orientation": "horizontal"
+  },
+  "wells": {
+    "Solidarity": {
+      "angle": 180,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Equality": {
+      "angle": 135,
+      "weight": 0.9,
+      "type": "integrative", 
+      "tier": "primary"
+    },
+    "Democracy": {
+      "angle": 90,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Cosmopolitan": {
+      "angle": 45,
+      "weight": 0.7,
+      "type": "integrative",
+      "tier": "secondary"
+    },
+    "Progressive": {
+      "angle": 225,
+      "weight": 0.8,
+      "type": "integrative",
+      "tier": "secondary"
+    },
+    "Competition": {
+      "angle": 0,
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Tradition": {
+      "angle": 315,
+      "weight": -0.9,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Control": {
+      "angle": 270,
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Nationalist": {
+      "angle": 135,
+      "weight": -0.7,
+      "type": "disintegrative",
+      "tier": "secondary"
+    },
+    "Conservative": {
+      "angle": 315,
+      "weight": -0.8,
+      "type": "disintegrative",
+      "tier": "secondary"
+    }
+  },
+  "scaling_factor": 0.9
+} 

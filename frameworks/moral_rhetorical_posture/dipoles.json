@@ -1,0 +1,112 @@
+{
+  "framework_name": "moral_rhetorical_posture",
+  "display_name": "Moral-Rhetorical Posture",
+  "description": "This framework works especially well for analyzing high-stakes political oratory, inaugural addresses, and manifestos—where the primary function is moral and symbolic leadership, not policy detail.",
+  "version": "v2025.06.04",
+  "created_date": "2025-06-04T16:34:57.362085",
+  "dipoles": [
+    {
+      "name": "Restorative/Retributive",
+      "description": "Restorative vs Retributive dynamics",
+      "positive": {
+        "name": "Restorative",
+        "description": "Represents restorative orientation",
+        "language_cues": [
+          "Seeks healing",
+          "forgiveness",
+          "moral accountability"
+        ]
+      },
+      "negative": {
+        "name": "Retributive",
+        "description": "Represents retributive orientation",
+        "language_cues": [
+          "Emphasizes punishment",
+          "dominance",
+          "moral vengeance"
+        ]
+      }
+    },
+    {
+      "name": "Universalist/Partisan",
+      "description": "Universalist vs Partisan dynamics",
+      "positive": {
+        "name": "Universalist",
+        "description": "Represents universalist orientation",
+        "language_cues": [
+          "Appeals to shared human or national identity across divisions"
+        ]
+      },
+      "negative": {
+        "name": "Partisan",
+        "description": "Represents partisan orientation",
+        "language_cues": [
+          "Frames identity as us vs. them",
+          "winners vs. traitors"
+        ]
+      }
+    },
+    {
+      "name": "Humility/Triumph",
+      "description": "Humility vs Triumph dynamics",
+      "positive": {
+        "name": "Humility",
+        "description": "Represents humility orientation",
+        "language_cues": [
+          "Acknowledges limits",
+          "shared guilt",
+          "and dependency on higher purpose"
+        ]
+      },
+      "negative": {
+        "name": "Triumph",
+        "description": "Represents triumph orientation",
+        "language_cues": [
+          "Emphasizes greatness",
+          "destiny",
+          "and exceptionalism"
+        ]
+      }
+    },
+    {
+      "name": "Moral Reflection/Operational Will",
+      "description": "Moral Reflection vs Operational Will dynamics",
+      "positive": {
+        "name": "Moral Reflection",
+        "description": "Represents moral reflection orientation",
+        "language_cues": [
+          "Explores causes and ethical weight of actions"
+        ]
+      },
+      "negative": {
+        "name": "Operational Will",
+        "description": "Represents operational will orientation",
+        "language_cues": [
+          "Focuses on action",
+          "control",
+          "and decisiveness"
+        ]
+      }
+    },
+    {
+      "name": "Reformist/Revolutionary",
+      "description": "Reformist vs Revolutionary dynamics",
+      "positive": {
+        "name": "Reformist",
+        "description": "Represents reformist orientation",
+        "language_cues": [
+          "Advocates principled evolution of flawed systems"
+        ]
+      },
+      "negative": {
+        "name": "Revolutionary",
+        "description": "Represents revolutionary orientation",
+        "language_cues": [
+          "Seeks abrupt reversal",
+          "cleansing",
+          "or total break"
+        ]
+      }
+    }
+  ]
+}

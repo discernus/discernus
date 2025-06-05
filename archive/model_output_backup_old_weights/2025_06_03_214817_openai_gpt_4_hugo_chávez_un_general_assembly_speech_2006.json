@@ -1,0 +1,69 @@
+{
+    "metadata": {
+        "title": "Hugo Ch\u00e1vez, UN General Assembly Speech (2006) (analyzed by ChatGPT)",
+        "filename": "2025_06_03_155000_chatgpt_analysis.json",
+        "model_name": "ChatGPT",
+        "model_version": "GPT-4",
+        "prompt_version": "2025.01.05.16.30",
+        "summary": "A populist, anti-imperialist speech framed around global grievance, U.S. opposition, and revolutionary moral urgency. Strong presence of fear, resentment, and manipulation, with occasional appeals to truth and international dignity.",
+        "transformation_note": "Updated weights and angles from v2025.01.03.19.45 to v2025.01.05.16.30"
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 0.6
+        },
+        {
+            "name": "Justice",
+            "angle": 135,
+            "score": 0.5
+        },
+        {
+            "name": "Truth",
+            "angle": 45,
+            "score": 0.4
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 160,
+            "score": 0.2
+        },
+        {
+            "name": "Hope",
+            "angle": 20,
+            "score": 0.2
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.75
+        },
+        {
+            "name": "Resentment",
+            "angle": 225,
+            "score": 0.9
+        },
+        {
+            "name": "Manipulation",
+            "angle": 315,
+            "score": 0.7
+        },
+        {
+            "name": "Fear",
+            "angle": 200,
+            "score": 0.8
+        },
+        {
+            "name": "Fantasy",
+            "angle": 340,
+            "score": 0.6
+        }
+    ],
+    "metrics": {
+        "moral_elevation": -0.13742059566129872,
+        "moral_polarity": 0.14025094719483908,
+        "coherence": 0.327433628318584,
+        "directional_purity": 1.0
+    }
+}

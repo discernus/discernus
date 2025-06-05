@@ -1,0 +1,69 @@
+{
+    "metadata": {
+        "title": "Stewarding Freedom: A Conservative Vision for Renewal (analyzed by ChatGPT)",
+        "filename": "2025_06_03_153500_chatgpt_analysis.json",
+        "model_name": "ChatGPT",
+        "model_version": "GPT-4",
+        "prompt_version": "2025.01.05.16.30",
+        "summary": "A measured, principle-based conservative vision emphasizing dignity, truth, and justice. Rejects tribalism, fear, and utopianism while affirming merit, responsibility, and institutional evolution through stewardship. Moderately hopeful and pragmatic.",
+        "transformation_note": "Updated weights and angles from v2025.01.03.19.45 to v2025.01.05.16.30"
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 0.9
+        },
+        {
+            "name": "Justice",
+            "angle": 135,
+            "score": 0.8
+        },
+        {
+            "name": "Truth",
+            "angle": 45,
+            "score": 0.85
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 160,
+            "score": 0.9
+        },
+        {
+            "name": "Hope",
+            "angle": 20,
+            "score": 0.8
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.1
+        },
+        {
+            "name": "Resentment",
+            "angle": 225,
+            "score": 0.1
+        },
+        {
+            "name": "Manipulation",
+            "angle": 315,
+            "score": 0.05
+        },
+        {
+            "name": "Fear",
+            "angle": 200,
+            "score": 0.1
+        },
+        {
+            "name": "Fantasy",
+            "angle": 340,
+            "score": 0.1
+        }
+    ],
+    "metrics": {
+        "moral_elevation": 0.4232983594310076,
+        "moral_polarity": 0.4233063755518382,
+        "coherence": 0.8085106382978723,
+        "directional_purity": 1.0
+    }
+}

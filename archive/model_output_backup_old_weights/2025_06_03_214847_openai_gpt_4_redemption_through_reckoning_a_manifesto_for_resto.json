@@ -1,0 +1,69 @@
+{
+    "metadata": {
+        "title": "Redemption Through Reckoning: A Manifesto for Restorative Power (analyzed by ChatGPT)",
+        "filename": "2025_06_03_154000_chatgpt_analysis.json",
+        "model_name": "ChatGPT",
+        "model_version": "GPT-4",
+        "prompt_version": "2025.01.05.16.30",
+        "summary": "Militant identity narrative driven by moral absolutism, collective grievance, and revolutionary ambition. Frames justice as revenge, truth as emotion, and coexistence as betrayal. High negative well intensity with near-total rejection of pluralism.",
+        "transformation_note": "Updated weights and angles from v2025.01.03.19.45 to v2025.01.05.16.30"
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 0.1
+        },
+        {
+            "name": "Justice",
+            "angle": 135,
+            "score": 0.3
+        },
+        {
+            "name": "Truth",
+            "angle": 45,
+            "score": 0.1
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 160,
+            "score": 0.0
+        },
+        {
+            "name": "Hope",
+            "angle": 20,
+            "score": 0.0
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.9
+        },
+        {
+            "name": "Resentment",
+            "angle": 225,
+            "score": 0.95
+        },
+        {
+            "name": "Manipulation",
+            "angle": 315,
+            "score": 0.9
+        },
+        {
+            "name": "Fear",
+            "angle": 200,
+            "score": 0.85
+        },
+        {
+            "name": "Fantasy",
+            "angle": 340,
+            "score": 0.85
+        }
+    ],
+    "metrics": {
+        "moral_elevation": -0.40164651761649717,
+        "moral_polarity": 0.40177901877778494,
+        "coherence": 0.797979797979798,
+        "directional_purity": 1.0
+    }
+}

@@ -1,0 +1,69 @@
+{
+    "metadata": {
+        "title": "Nelson Mandela Inaugural Address (1994) (analyzed by ChatGPT)",
+        "filename": "2025_06_03_155500_chatgpt_analysis.json",
+        "model_name": "ChatGPT",
+        "model_version": "GPT-4",
+        "prompt_version": "2025.01.05.16.30",
+        "summary": "A masterclass in moral clarity and reconciliation, Mandela\u2019s address radiates universal dignity, justice, and hopeful solidarity. Rejects retribution, embraces pluralism, and offers a disciplined, visionary framework for peaceful national renewal.",
+        "transformation_note": "Updated weights and angles from v2025.01.03.19.45 to v2025.01.05.16.30"
+    },
+    "wells": [
+        {
+            "name": "Dignity",
+            "angle": 90,
+            "score": 1.0
+        },
+        {
+            "name": "Justice",
+            "angle": 135,
+            "score": 0.95
+        },
+        {
+            "name": "Truth",
+            "angle": 45,
+            "score": 0.9
+        },
+        {
+            "name": "Pragmatism",
+            "angle": 160,
+            "score": 0.85
+        },
+        {
+            "name": "Hope",
+            "angle": 20,
+            "score": 0.95
+        },
+        {
+            "name": "Tribalism",
+            "angle": 270,
+            "score": 0.0
+        },
+        {
+            "name": "Resentment",
+            "angle": 225,
+            "score": 0.0
+        },
+        {
+            "name": "Manipulation",
+            "angle": 315,
+            "score": 0.0
+        },
+        {
+            "name": "Fear",
+            "angle": 200,
+            "score": 0.0
+        },
+        {
+            "name": "Fantasy",
+            "angle": 340,
+            "score": 0.1
+        }
+    ],
+    "metrics": {
+        "moral_elevation": 0.5099333606665034,
+        "moral_polarity": 0.5106529145925318,
+        "coherence": 0.9578947368421055,
+        "directional_purity": 1.0
+    }
+}
