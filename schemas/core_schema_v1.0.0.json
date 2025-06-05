@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-gravity.github.io/schemas/core_schema_v1.0.0.json",
+  "title": "Narrative Gravity Core Schema",
+  "description": "Universal schema for document+chunk records in the consequential narratives corpus",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "document": {
+      "type": "object",
+      "description": "Document-level metadata fields",
+      "properties": {
+        "text_id": {
+          "type": "string",
+          "description": "Unique identifier for the document"
+        },
+        "title": {
+          "type": "string",
+          "description": "Document title"
+        },
+        "document_type": {
+          "type": "string",
+          "enum": ["speech", "op_ed", "article", "tv_ad_script", "pamphlet", "web_page", "social_media", "other"],
+          "description": "Type of document"
+        },
+        "author": {
+          "type": "string",
+          "description": "Document author"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Publication date in ISO 8601 format"
+        },
+        "publication": {
+          "type": ["string", "null"],
+          "description": "Publication or venue name"
+        },
+        "medium": {
+          "type": ["string", "null"],
+          "enum": ["print", "online", "TV", "radio", null],
+          "description": "Medium of publication"
+        },
+        "campaign_name": {
+          "type": ["string", "null"],
+          "description": "Associated campaign name"
+        },
+        "audience_size": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Estimated audience size"
+        },
+        "source_url": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "Source URL if available"
+        },
+        "schema_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Schema version (semantic versioning)"
+        },
+        "document_metadata": {
+          "type": "object",
+          "description": "Additional document metadata",
+          "additionalProperties": true
+        }
+      },
+      "required": ["text_id", "title", "document_type", "author", "date", "schema_version"],
+      "additionalProperties": false
+    },
+    "chunk_id": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Zero-based chunk index within document"
+    },
+    "total_chunks": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Total number of chunks in document"
+    },
+    "chunk_type": {
+      "type": "string",
+      "enum": ["fixed", "sectional", "semantic"],
+      "description": "Chunking strategy used"
+    },
+    "chunk_size": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of characters in this chunk"
+    },
+    "chunk_overlap": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Characters overlapping with previous chunk"
+    },
+    "document_position": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Normalized position (0.0-1.0) of chunk start in document"
+    },
+    "word_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of words in chunk"
+    },
+    "unique_words": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of unique words in chunk"
+    },
+    "word_density": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Ratio of unique words to total words"
+    },
+    "chunk_content": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The actual text content of the chunk"
+    },
+    "framework_data": {
+      "type": "object",
+      "description": "Framework-specific extension data",
+      "additionalProperties": true,
+      "default": {}
+    }
+  },
+  "required": [
+    "document",
+    "chunk_id", 
+    "total_chunks", 
+    "chunk_type", 
+    "chunk_size", 
+    "document_position", 
+    "word_count", 
+    "unique_words", 
+    "word_density", 
+    "chunk_content"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "document": {
+        "text_id": "example_001",
+        "title": "Sample Speech",
+        "document_type": "speech",
+        "author": "Jane Doe",
+        "date": "2024-01-15T10:30:00Z",
+        "publication": "Example Conference",
+        "medium": "online",
+        "campaign_name": "Example Campaign 2024",
+        "audience_size": 1000,
+        "source_url": "https://example.com/speech",
+                 "schema_version": "1.0.0",
+         "document_metadata": {
+           "location": "Washington DC",
+           "event_type": "keynote"
+         }
+      },
+      "chunk_id": 0,
+      "total_chunks": 3,
+      "chunk_type": "fixed",
+      "chunk_size": 1500,
+      "chunk_overlap": 150,
+      "document_position": 0.0,
+      "word_count": 250,
+      "unique_words": 180,
+      "word_density": 0.72,
+      "chunk_content": "Thank you for joining us today...",
+      "framework_data": {
+        "civic_virtue": {
+          "dignity_markers": ["respect", "honor"],
+          "truth_indicators": ["evidence", "facts"]
+        }
+      }
+    }
+  ]
+} 
