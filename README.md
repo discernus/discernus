@@ -633,6 +633,8 @@ The testing overhaul was conducted in two main phases:
 
 This process uncovered and fixed numerous bugs related to Pydantic V2 migration, database type compatibility (PostgreSQL `JSONB` vs. generic `JSON`), import path errors, and incorrect business logic.
 
+**Testing Strategy Update (v2.1):** Integration tests now use SQLite by default for faster, more reliable testing. Unit tests use in-memory SQLite for isolation. PostgreSQL remains the production database, with optional PostgreSQL testing for production-like validation.
+
 ### Known Issues
 - **`test_api_services.py` Failures:** There are two persistent test failures in `tests/unit/test_api_services.py` related to the `ingest_jsonl_corpus` service function. The fixes for these failures could not be reliably applied due to suspected issues with the development environment's file editing tools. The primary issue appears to be incorrect handling of empty or whitespace-only files during ingestion.
 

@@ -1306,6 +1306,10 @@ def create_fallback_bar_chart(data1, data2, name1, name2, scores1, scores2, comm
 
 def detect_framework_from_json(data):
     """Detect which framework a JSON analysis was created with"""
+    # Check for direct framework_name field first
+    if 'framework_name' in data:
+        return data['framework_name']
+    
     if 'metadata' in data:
         # Check for explicit framework info
         if 'framework_name' in data['metadata']:
