@@ -478,8 +478,8 @@ class NarrativeGravityWellsElliptical:
         # Join all metadata lines
         metadata_text = " | ".join(metadata_lines)
         
-        # Add metadata at the very bottom of the figure
-        self.fig.text(0.5, 0.01, metadata_text,
+        # Add metadata below the legend
+        self.fig.text(0.5, 0.005, metadata_text,
                      fontsize=8,
                      color='#666666',
                      horizontalalignment='center',
@@ -632,7 +632,7 @@ class NarrativeGravityWellsElliptical:
         
         self.fig.legend(handles=patches, 
                        loc='lower center', 
-                       bbox_to_anchor=(0.5, 0.025),  # Moved legend down to y=0.025
+                       bbox_to_anchor=(0.5, 0.01),  # Moved legend further down to make space
                        ncol=4,
                        fontsize=self.style_config['font_sizes']['labels'],
                        frameon=True,
@@ -641,76 +641,49 @@ class NarrativeGravityWellsElliptical:
                        framealpha=0.9)
 
     def add_summary(self, summary: str) -> None:
-        """Add analysis summary below the legend with generous space to prevent truncation."""
-        # Very generous parameters for 500 character limit
-        max_lines = 5  # Allow 5 lines to be safe
-        base_font_size = 11
-        min_font_size = 10
-        
+        """Add analysis summary positioned between Tribalism label and legend."""
         working_summary = summary.strip()
         
-        # Only truncate if dramatically over 500 chars (should rarely happen with prompt limit)
-        if len(working_summary) > 550:  # Very generous buffer
-            sentences = working_summary.split('. ')
-            truncated = ""
-            
-            for i, sentence in enumerate(sentences):
-                if i == 0:
-                    test_text = sentence
-                else:
-                    test_text = truncated + ". " + sentence
-                
-                if len(test_text) <= 520:  # Very generous
-                    truncated = test_text
-                else:
-                    break
-            
-            if len(truncated) > 100:
-                working_summary = truncated.rstrip() + "..."
-            else:
-                working_summary = working_summary[:517] + "..."
+        # POSITION SUMMARY LOWER - CLOSER TO LEGEND
+        # Tribalism label is at the bottom of ellipse (~0.25 in figure coords)
+        # Legend is now at y=0.01, so it occupies roughly 0.01 to 0.045
+        # Move summary much lower - closer to legend than to Tribalism label
         
-        # Very conservative font sizing - avoid reduction unless absolutely necessary
-        font_size = base_font_size
-        target_chars_per_line = 90  # Conservative line width for safety
+        tribalism_label_bottom = 0.20  # Approximate bottom of Tribalism label
+        legend_top = 0.055             # Approximate top of legend area
         
-        final_length = len(working_summary)
-        if final_length > 480:  # Only for very long summaries
-            font_size = max(min_font_size, base_font_size - 1)
-            target_chars_per_line = 95
+        # COMPACT FORMATTING FOR AVAILABLE SPACE
+        # Use 3-4 lines max, smaller font, more characters per line
+        max_lines = 3
+        chars_per_line = 120  # More compact: 500 chars in 3-4 lines
+        font_size = 9  # Smaller, readable font
         
-        # Wrap text generously
-        wrapped_text = '\n'.join(wrap(working_summary, width=target_chars_per_line))
+        # Wrap text compactly
+        wrapped_text = '\n'.join(wrap(working_summary, width=chars_per_line))
         lines = wrapped_text.split('\n')
         
-        # Only truncate as absolute last resort
+        # Truncate if still too long (prompt obedience issue)
         if len(lines) > max_lines:
-            # Try wider lines first
-            wrapped_text = '\n'.join(wrap(working_summary, width=target_chars_per_line + 15))
-            lines = wrapped_text.split('\n')
-            
-            if len(lines) > max_lines:
-                # Very generous final truncation
-                final_lines = lines[:max_lines-1]
-                last_line = lines[max_lines-1]
-                if len(last_line) > target_chars_per_line + 10:
-                    last_line = last_line[:target_chars_per_line+7] + "..."
-                final_lines.append(last_line)
-                wrapped_text = '\n'.join(final_lines)
+            # Truncate to max_lines worth of characters
+            char_limit = chars_per_line * max_lines - 3  # Leave room for "..."
+            working_summary = working_summary[:char_limit] + "..."
+            wrapped_text = '\n'.join(wrap(working_summary, width=chars_per_line))
         
-        # Position the summary
-        self.fig.text(0.5, 0.06,  # Moved summary down to y=0.06
+        # Position summary closer to legend (75% of way down from Tribalism to legend)
+        summary_y = tribalism_label_bottom * 0.25 + legend_top * 0.75  # Much closer to legend
+        
+        self.fig.text(0.5, summary_y,
                      wrapped_text,
                      horizontalalignment='center',
-                     verticalalignment='bottom',
+                     verticalalignment='center',  # Center vertically in the gap
                      fontsize=font_size,
                      color=self.style_config['colors']['text_primary'],
                      style='italic',
-                     bbox=dict(boxstyle="round,pad=0.5",
+                     bbox=dict(boxstyle="round,pad=0.3",  # Smaller padding
                               facecolor='white', 
                               alpha=0.95,
                               edgecolor=self.style_config['colors']['text_secondary'], 
-                              linewidth=1.5))
+                              linewidth=1.0))  # Thinner border for compactness
 
     def smart_truncate_comparative_titles(self, titles: List[str], max_length: int = 25) -> List[str]:
         """

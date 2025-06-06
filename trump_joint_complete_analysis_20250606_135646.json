@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "title": "Donald J. Trump Address to Joint Session of Congress March 4, 2025",
+    "filename": "golden_trump_joint_01.txt",
+    "model_name": "GPT-4o",
+    "model_version": "4o",
+    "framework_name": "civic_virtue",
+    "framework_version": "v2025.06.04",
+    "analysis_timestamp": "2025-06-06T13:56:46.669380",
+    "summary": "Analysis of Trump's joint address showing -0.22 narrative elevation with 5/10 wells scoring above 0.5"
+  },
+  "scores": {
+    "Dignity": 0.2,
+    "Tribalism": 0.8,
+    "Truth": 0.3,
+    "Manipulation": 0.7,
+    "Justice": 0.4,
+    "Resentment": 0.6,
+    "Hope": 0.5,
+    "Fantasy": 0.7,
+    "Pragmatism": 0.3,
+    "Fear": 0.6
+  },
+  "calculated_metrics": {
+    "narrative_elevation": -0.2159621342937292,
+    "narrative_polarity": 0.21735181624281744,
+    "coherence": 0.33333333333333337,
+    "directional_purity": 1.0
+  },
+  "analysis_details": {
+    "character_count": 55721,
+    "word_count": 9798,
+    "analysis_duration_seconds": 15.818438053131104,
+    "cost_usd": 0.035015,
+    "narrative_position": {
+      "x": 0.024539123361455792,
+      "y": -0.2159621342937292
+    }
+  },
+  "raw_analysis": "The narrative strongly emphasizes Tribalism, with frequent references to in-group/out-group dynamics, such as 'real Americans' and criticism of Democrats. Manipulation is evident through emotionally charged language and claims of unprecedented achievements without substantial evidence. Resentment is present in the focus on grievances against previous administrations and perceived injustices. Fantasy is reflected in the portrayal of a utopian future without acknowledging complexities or trade-offs. Fear is invoked through descriptions of threats from illegal immigration and foreign adversaries. Dignity and Truth are less prominent, with limited emphasis on universal rights or intellectual honesty. Justice is moderately present, with some calls for fairness and rule-based processes. Hope is present in the optimistic vision for America's future, though it is often intertwined with fantastical elements. Pragmatism is low, as the narrative lacks detailed, evidence-based solutions."
+}

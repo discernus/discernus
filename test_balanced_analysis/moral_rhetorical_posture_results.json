@@ -1,0 +1,56 @@
+{
+  "openai_gpt-4.1": {
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "framework": "moral_rhetorical_posture",
+    "result": {
+      "raw_response": "Certainly! Let\u2019s analyze the text using the **moral_rhetorical_posture** framework, which examines how a statement positions itself morally and rhetorically\u2014whether it asserts, questions, warns, celebrates, critiques, etc., and what moral stance (if any) it takes.\n\n**Text:**  \n*The future of AI in 2025 will be characterized by more powerful reasoning capabilities, better cost efficiency, and enhanced multimodal features.*\n\n---\n\n### Rhetorical Posture\n\n- **Assertive/Descriptive:**  \n  The statement is assertive and predictive. It makes a confident claim about what the future of AI will look like, presenting these developments as facts or near-certainties.\n- **Neutral Tone:**  \n  The language is neutral and technical, focusing on features and capabilities rather than emotional or value-laden language.\n- **No Direct Call to Action:**  \n  There is no imperative or suggestion for action; it is purely descriptive.\n\n### Moral Posture\n\n- **Implicitly Positive:**  \n  While the statement does not explicitly make a moral judgment, the choice of features\u2014\u201cmore powerful reasoning,\u201d \u201cbetter cost efficiency,\u201d \u201cenhanced multimodal features\u201d\u2014are generally considered positive advancements in technology. This implies a subtle endorsement of these developments as beneficial.\n- **Absence of Ethical Reflection:**  \n  The text does not address potential risks, downsides, or ethical considerations (e.g., bias, misuse, impact on jobs, etc.). It is morally neutral on the surface but implicitly frames progress as good by highlighting improvements.\n- **Progress-Oriented:**  \n  The focus on \u201cmore,\u201d \u201cbetter,\u201d and \u201cenhanced\u201d aligns with a progress-oriented moral stance, suggesting that advancement in these areas is desirable.\n\n---\n\n### Summary Table\n\n| Aspect                | Posture/Positioning                                                                 |\n|-----------------------|------------------------------------------------------------------------------------|\n| **Rhetorical**        | Assertive, predictive, neutral, descriptive, no call to action                     |\n| **Moral**             | Implicitly positive, progress-oriented, lacks explicit ethical reflection           |\n\n---\n\n**Conclusion:**  \nThe text adopts an assertive and neutral rhetorical posture, confidently predicting technical improvements in AI. Morally, it is implicitly positive and progress-oriented, framing these advancements as desirable, but it does not engage with ethical complexities or potential negative consequences.",
+      "scores": {},
+      "parsed": false
+    },
+    "cost": 0.0073100000000000005,
+    "duration": 10.50447940826416,
+    "timestamp": "2025-06-06T13:27:44.385094",
+    "success": true,
+    "model_generation": "2025"
+  },
+  "anthropic_claude-4-sonnet": {
+    "provider": "anthropic",
+    "model": "claude-4-sonnet",
+    "framework": "moral_rhetorical_posture",
+    "result": {
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-4-sonnet'}}"
+    },
+    "cost": 0.0,
+    "duration": 0.4240741729736328,
+    "timestamp": "2025-06-06T13:27:44.809244",
+    "success": true,
+    "model_generation": "2025"
+  },
+  "mistral_mistral-medium-3": {
+    "provider": "mistral",
+    "model": "mistral-medium-3",
+    "framework": "moral_rhetorical_posture",
+    "result": {
+      "error": "Status: 400. Message: {\"object\":\"error\",\"message\":\"Invalid model: mistral-medium-3\",\"type\":\"invalid_model\",\"param\":null,\"code\":\"1500\"}"
+    },
+    "cost": 0.0,
+    "duration": 0.26827025413513184,
+    "timestamp": "2025-06-06T13:27:45.077538",
+    "success": true,
+    "model_generation": "2025"
+  },
+  "google_ai_gemini-2.5-flash": {
+    "provider": "google_ai",
+    "model": "gemini-2.5-flash",
+    "framework": "moral_rhetorical_posture",
+    "result": {
+      "error": "404 models/gemini-2-5-flash-preview is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+    },
+    "cost": 0.0,
+    "duration": 0.10099625587463379,
+    "timestamp": "2025-06-06T13:27:45.178583",
+    "success": true,
+    "model_generation": "2025"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "test_completed": "2025-06-06T16:24:59.683367",
+  "framework": "civic_virtue",
+  "text_analyzed": "We must unite as Americans to build a stronger, more just society where every person has the opportunity to succeed through hard work and determination.",
+  "model_comparisons": [
+    {
+      "model": "mistralai/Mistral-7B-Instruct-v0.3",
+      "model_type": "mistral_style",
+      "scores": {
+        "Manipulation": 0.0,
+        "Fear": 0.0,
+        "Fantasy": 0.0,
+        "Resentment": 0.0,
+        "Truth": 0.0,
+        "Tribalism": 0.0,
+        "Justice": 0.0,
+        "Hope": 0.0,
+        "Pragmatism": 0.0,
+        "Dignity": 0.0
+      },
+      "cost": 0.00252
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "title": "Donald J. Trump Address to Joint Session of Congress March 4, 2025",
+    "filename": "golden_trump_joint_01.txt",
+    "model_name": "GPT-4o",
+    "model_version": "4o",
+    "framework_name": "civic_virtue",
+    "framework_version": "v2025.06.04",
+    "analysis_timestamp": "2025-06-06T13:59:35.338496",
+    "summary": "The narrative is heavily shaped by tribalism, as it emphasizes group identity and in-group/out-group dynamics, particularly in its portrayal of political opponents and foreign entities. Manipulation is evident through the use of emotionally charged language and claims that lack transparency or consistency. Resentment is a strong theme, with a focus on grievances and moral scorekeeping against perceived adversaries. Fantasy is prominent, with promises of utopian outcomes and unprecedented achievements without credible strategies. Fear is used to highlight threats and justify actions, particularly regarding immigration and national security. Dignity and justice are less emphasized, with occasional references to individual worth and fairness. Truth and pragmatism are weak, as the narrative often lacks engagement with evidence and realistic solutions."
+  },
+  "scores": {
+    "Dignity": 0.2,
+    "Tribalism": 0.8,
+    "Truth": 0.3,
+    "Manipulation": 0.7,
+    "Justice": 0.3,
+    "Resentment": 0.7,
+    "Hope": 0.5,
+    "Fantasy": 0.8,
+    "Pragmatism": 0.2,
+    "Fear": 0.8
+  },
+  "calculated_metrics": {
+    "narrative_elevation": -0.24869129997090483,
+    "narrative_polarity": 0.24982747446154918,
+    "coherence": 0.43396226415094336,
+    "directional_purity": 1.0
+  },
+  "analysis_details": {
+    "character_count": 55721,
+    "word_count": 9798,
+    "analysis_duration_seconds": 8.275943279266357,
+    "cost_usd": 0.034795,
+    "narrative_position": {
+      "x": 0.023799250295281266,
+      "y": -0.24869129997090483
+    }
+  },
+  "raw_analysis": "The narrative is heavily shaped by tribalism, as it emphasizes group identity and in-group/out-group dynamics, particularly in its portrayal of political opponents and foreign entities. Manipulation is evident through the use of emotionally charged language and claims that lack transparency or consistency. Resentment is a strong theme, with a focus on grievances and moral scorekeeping against perceived adversaries. Fantasy is prominent, with promises of utopian outcomes and unprecedented achievements without credible strategies. Fear is used to highlight threats and justify actions, particularly regarding immigration and national security. Dignity and justice are less emphasized, with occasional references to individual worth and fairness. Truth and pragmatism are weak, as the narrative often lacks engagement with evidence and realistic solutions."
+}

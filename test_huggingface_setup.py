@@ -13,6 +13,14 @@ from pathlib import Path
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("⚠️  python-dotenv not installed. Make sure your environment variables are set manually.")
+    pass
+
 def test_api_key():
     """Test that API key is properly configured."""
     print("🔑 Testing API Key Configuration...")
@@ -46,11 +54,11 @@ def test_huggingface_client():
         print(f"  ✅ Client initialized successfully")
         print(f"  ✅ Available frameworks: {frameworks}")
         
-        return client
+        return True
         
     except Exception as e:
         print(f"  ❌ Client initialization failed: {e}")
-        return None
+        return False
 
 def test_simple_model():
     """Test a simple model call."""
@@ -66,7 +74,7 @@ def test_simple_model():
         }
         
         # Test with a simple sentiment model
-        url = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment-latest"
+        url = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment"
         
         payload = {
             "inputs": "I love working with AI systems!"

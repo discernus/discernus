@@ -1,0 +1,11 @@
+{
+  "text": "Democracy thrives when citizens actively participate in civic life",
+  "framework": "civic_virtue",
+  "result": {
+    "raw_response": "The civic virtue framework emphasizes the importance of active participation in community life and public affairs, as well as the adherence to certain values such as justice, honesty, and respect for others. \n\nIn the given text, the concept of civic virtue is strongly implied. Democracy, a form of government where power is vested in the people, is said to thrive when citizens actively participate in civic life. This participation can take many forms, such as voting, volunteering, or engaging in public discourse, and it is a key aspect of civic virtue. \n\nThe text suggests that for a democracy to function effectively, citizens must not only be aware of their rights, but also fulfill their responsibilities. This includes being informed about public affairs, respecting the rule of law, and contributing to the welfare of the community. \n\nIn conclusion, the text aligns with the civic virtue framework by emphasizing the importance of active citizen participation in maintaining a healthy democracy.",
+    "scores": {},
+    "parsed": false
+  },
+  "cost": 0.01188,
+  "timestamp": "2025-06-06T13:03:19.361008"
+}

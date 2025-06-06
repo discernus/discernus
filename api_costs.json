@@ -1,0 +1,524 @@
+[
+  {
+    "timestamp": "2025-06-06T13:03:19.359904",
+    "provider": "openai",
+    "model": "gpt-4",
+    "cost": 0.01188,
+    "tokens_input": 28,
+    "tokens_output": 184,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:10:35.709341",
+    "provider": "openai",
+    "model": "gpt-4",
+    "cost": 0.0195,
+    "tokens_input": 80,
+    "tokens_output": 285,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:10:41.421177",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.010264800000000001,
+    "tokens_input": 70,
+    "tokens_output": 404,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:13:32.469760",
+    "provider": "openai",
+    "model": "gpt-4",
+    "cost": 0.01926,
+    "tokens_input": 80,
+    "tokens_output": 281,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:13:38.583700",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.010171200000000002,
+    "tokens_input": 70,
+    "tokens_output": 400,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:14:25.044572",
+    "provider": "openai",
+    "model": "gpt-4",
+    "cost": 0.02118,
+    "tokens_input": 80,
+    "tokens_output": 313,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:14:30.916433",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.0103584,
+    "tokens_input": 70,
+    "tokens_output": 408,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:14:34.576300",
+    "provider": "google_ai",
+    "model": "gemini-1.5-flash",
+    "cost": 0.004177500000000001,
+    "tokens_input": 99,
+    "tokens_output": 663,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:25:46.131777",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.006475,
+    "tokens_input": 44,
+    "tokens_output": 417,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:25:49.829516",
+    "provider": "openai",
+    "model": "gpt-4.1-mini",
+    "cost": 0.00017039999999999997,
+    "tokens_input": 44,
+    "tokens_output": 273,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:25:53.600699",
+    "provider": "openai",
+    "model": "gpt-4.1-nano",
+    "cost": 0.00010680000000000001,
+    "tokens_input": 44,
+    "tokens_output": 256,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:02.208254",
+    "provider": "mistral",
+    "model": "mistral-saba-2502",
+    "cost": 0.0134784,
+    "tokens_input": 35,
+    "tokens_output": 549,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:11.611906",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.00746,
+    "tokens_input": 43,
+    "tokens_output": 483,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:14.093226",
+    "provider": "openai",
+    "model": "gpt-4.1-mini",
+    "cost": 6.225e-05,
+    "tokens_input": 43,
+    "tokens_output": 93,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:18.177029",
+    "provider": "openai",
+    "model": "gpt-4.1-nano",
+    "cost": 0.0001443,
+    "tokens_input": 43,
+    "tokens_output": 350,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:31.283563",
+    "provider": "mistral",
+    "model": "mistral-saba-2502",
+    "cost": 0.0204048,
+    "tokens_input": 35,
+    "tokens_output": 838,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:38.990850",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.00797,
+    "tokens_input": 46,
+    "tokens_output": 516,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:46.236284",
+    "provider": "openai",
+    "model": "gpt-4.1-mini",
+    "cost": 0.00027449999999999995,
+    "tokens_input": 46,
+    "tokens_output": 446,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:48.900943",
+    "provider": "openai",
+    "model": "gpt-4.1-nano",
+    "cost": 9.86e-05,
+    "tokens_input": 46,
+    "tokens_output": 235,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:26:58.422362",
+    "provider": "mistral",
+    "model": "mistral-saba-2502",
+    "cost": 0.013416,
+    "tokens_input": 35,
+    "tokens_output": 547,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:27:21.072190",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.008439999999999998,
+    "tokens_input": 44,
+    "tokens_output": 548,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:27:33.268515",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.008645,
+    "tokens_input": 43,
+    "tokens_output": 562,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:27:44.381329",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.0073100000000000005,
+    "tokens_input": 46,
+    "tokens_output": 472,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:28:52.602546",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.009075,
+    "tokens_input": 27,
+    "tokens_output": 596,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:38:40.597295",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0135425,
+    "tokens_input": 3217,
+    "tokens_output": 550,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:38:53.311232",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.01358,
+    "tokens_input": 3216,
+    "tokens_output": 554,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:39:10.750369",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0143375,
+    "tokens_input": 3219,
+    "tokens_output": 629,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:39:28.740100",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.031415,
+    "tokens_input": 9838,
+    "tokens_output": 682,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:39:44.169386",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0307225,
+    "tokens_input": 9837,
+    "tokens_output": 613,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:40:01.917870",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.03201,
+    "tokens_input": 9840,
+    "tokens_output": 741,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:40:17.483253",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0349775,
+    "tokens_input": 11555,
+    "tokens_output": 609,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:40:39.233272",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.035045,
+    "tokens_input": 11554,
+    "tokens_output": 616,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:40:54.857241",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0366125,
+    "tokens_input": 11557,
+    "tokens_output": 772,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:41:07.292750",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0102475,
+    "tokens_input": 1971,
+    "tokens_output": 532,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:41:25.335446",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.010204999999999999,
+    "tokens_input": 1970,
+    "tokens_output": 528,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:41:42.577277",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.012212500000000001,
+    "tokens_input": 1973,
+    "tokens_output": 728,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:41:51.176675",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0207925,
+    "tokens_input": 6257,
+    "tokens_output": 515,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:42:06.469119",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.02127,
+    "tokens_input": 6256,
+    "tokens_output": 563,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:42:24.767101",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.022417500000000003,
+    "tokens_input": 6259,
+    "tokens_output": 677,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:42:39.112336",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.01669,
+    "tokens_input": 4464,
+    "tokens_output": 553,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:42:54.411981",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0173775,
+    "tokens_input": 4463,
+    "tokens_output": 622,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:48:13.450788",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.004975,
+    "tokens_input": 902,
+    "tokens_output": 272,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:49:01.003348",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.005045,
+    "tokens_input": 902,
+    "tokens_output": 279,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:52:28.219994",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.005495,
+    "tokens_input": 902,
+    "tokens_output": 324,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:54:43.788966",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.035265,
+    "tokens_input": 12866,
+    "tokens_output": 310,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:56:46.666324",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.035015,
+    "tokens_input": 12866,
+    "tokens_output": 285,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T13:59:35.335841",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.034795,
+    "tokens_input": 12866,
+    "tokens_output": 263,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:03:15.776123",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.034175000000000004,
+    "tokens_input": 12874,
+    "tokens_output": 199,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:06:45.092204",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.034295000000000006,
+    "tokens_input": 12874,
+    "tokens_output": 211,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:07:12.359116",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.034135000000000006,
+    "tokens_input": 12874,
+    "tokens_output": 195,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:07:34.247216",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.034115000000000006,
+    "tokens_input": 12874,
+    "tokens_output": 193,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:10:35.484706",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.03418500000000001,
+    "tokens_input": 12874,
+    "tokens_output": 200,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:13:51.288696",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.03427500000000001,
+    "tokens_input": 12874,
+    "tokens_output": 209,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:19:10.642587",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.013444999999999999,
+    "tokens_input": 4490,
+    "tokens_output": 222,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:19:14.752636",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0121025,
+    "tokens_input": 4093,
+    "tokens_output": 187,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:19:40.018505",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.004485,
+    "tokens_input": 946,
+    "tokens_output": 212,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:20:22.472884",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.013314999999999999,
+    "tokens_input": 4490,
+    "tokens_output": 209,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-06T14:20:25.223634",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.0120725,
+    "tokens_input": 4093,
+    "tokens_output": 184,
+    "request_type": "analysis"
+  }
+]

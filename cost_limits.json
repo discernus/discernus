@@ -1,0 +1,6 @@
+{
+  "daily_limit": 2.0,
+  "weekly_limit": 10.0,
+  "monthly_limit": 25.0,
+  "single_request_limit": 0.5
+}

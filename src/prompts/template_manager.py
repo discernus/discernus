@@ -404,8 +404,8 @@ Once confirmed, please ask the user to upload their first narrative file for ana
             return """**INSTRUCTIONS:**
 1. Read the provided text carefully
 2. Score each well based on conceptual strength (0.0-1.0 scale ONLY)
-3. Provide the JSON output as specified above
-4. Include brief analysis summary explaining your rationale"""
+3. Write a concise analysis summary (maximum 500 characters)
+4. Provide the JSON output as specified above with scores and analysis summary"""
     
     def _assemble_prompt(self, components: List[str]) -> str:
         """Assemble components into final prompt."""
