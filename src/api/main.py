@@ -233,6 +233,12 @@ async def get_system_stats(db: Session = Depends(get_db)):
     stats = crud.get_system_statistics(db)
     return stats
 
+@app.get("/api/metrics")
+async def get_system_metrics():
+    """Get detailed system metrics including success rates and costs."""
+    from ..utils.logging_config import metrics_collector
+    return metrics_collector.get_summary()
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000) 

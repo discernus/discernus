@@ -192,8 +192,9 @@ async def create_processing_job(
                         )
                         task_count += 1
                         
-                        # TODO: Enqueue task for Celery processing
-                        # await enqueue_analysis_task(task.id)
+                        # Enqueue task for Celery processing
+                        from ..tasks.analysis_tasks import process_narrative_analysis_task
+                        process_narrative_analysis_task.delay(task.id)
         
         # Update job with task count
         crud.update_job_task_counts(db, job.id)
@@ -234,8 +235,9 @@ async def resume_job(job_id: int, db: Session) -> int:
             if task.status == "failed":
                 crud.update_task_status(db, task.id, "pending")
             
-            # TODO: Re-enqueue task for Celery processing
-            # await enqueue_analysis_task(task.id)
+            # Re-enqueue task for Celery processing
+            from ..tasks.analysis_tasks import process_narrative_analysis_task
+            process_narrative_analysis_task.delay(task.id)
             requeued_count += 1
         
         # Update job status

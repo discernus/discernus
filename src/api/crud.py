@@ -137,6 +137,10 @@ def create_chunk(
     db.refresh(chunk)
     return chunk
 
+def get_chunk_by_id(db: Session, chunk_id: int) -> Optional[Chunk]:
+    """Get a specific chunk by ID."""
+    return db.query(Chunk).filter(Chunk.id == chunk_id).first()
+
 def get_chunks_by_text_ids(db: Session, text_ids: List[str]) -> List[Chunk]:
     """Get all chunks for documents with specified text_ids."""
     return (

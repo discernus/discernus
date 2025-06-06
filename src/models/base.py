@@ -44,6 +44,10 @@ def get_db():
     finally:
         db.close()
 
+def get_db_session():
+    """Get a new database session for background tasks."""
+    return SessionLocal()
+
 def create_all_tables():
     """Create all tables - used for initial setup."""
     Base.metadata.create_all(bind=engine)
