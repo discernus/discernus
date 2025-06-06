@@ -127,40 +127,54 @@ This document contains complete project information for the **Narrative Gravity 
 ### Core Components
 ```
 narrative_gravity_analysis/
-├── 🚀 Core Application (5 files)
-│   ├── launch_app.py                 # Application launcher
-│   ├── narrative_gravity_app.py      # Main Streamlit interface (1,372 lines)
-│   ├── narrative_gravity_elliptical.py # Core analysis engine (1,136 lines)
-│   ├── framework_manager.py          # Framework switching system (257 lines)
-│   └── generate_prompt.py            # LLM prompt generator (351 lines)
+├── 🚀 Core Application & Analysis
+│   ├── launch_app.py                 # Main application launcher
+│   ├── narrative_gravity_app.py      # Core Streamlit web interface
+│   ├── narrative_gravity_elliptical.py # Core analysis & visualization engine
+│   ├── create_generic_multi_run_dashboard.py # Universal multi-run dashboard system
+│   ├── framework_manager.py          # Framework switching & management system
+│   └── generate_prompt.py            # Legacy LLM prompt generator
+│
+├── 📁 Backend Infrastructure (src/)
+│   ├── api/                          # FastAPI endpoints for jobs, tasks, corpora
+│   ├── api_clients/                  # Clients for interacting with LLM APIs
+│   ├── cli/                          # Command-line interface tools
+│   ├── models/                       # Database models (SQLAlchemy)
+│   ├── prompts/                      # Prompt templates and management
+│   ├── tasks/                        # Celery tasks for background processing
+│   └── utils/                        # Utility functions (validation, chunking)
 │
 ├── 📊 Data & Configuration
-│   ├── frameworks/                   # Framework definitions (3 frameworks)
-│   ├── config/                      # Active framework (symlinks)
-│   ├── model_output/                # Analysis results JSON/PNG
-│   └── reference_texts/             # Sample texts for analysis
+│   ├── frameworks/                   # Framework definitions (Civic Virtue, etc.)
+│   ├── config/                       # Symlinks to active framework
+│   ├── corpus/                       # Text corpora (golden set, etc.)
+│   ├── model_output/                 # Analysis results (JSON/PNG)
+│   └── reference_texts/              # Sample texts for analysis
 │
-├── 📚 Documentation (4,508 lines)
-│   ├── docs/development/            # Technical documentation (6 active docs)
-│   ├── docs/examples/               # Usage examples
-│   ├── README.md                    # Main project documentation (471 lines)
-│   ├── PAPER_REPLICATION.md         # Academic reproduction guide
-│   └── narrative_gravity_wells_paper.md # Academic paper (294 lines)
+├── 📚 Documentation & Instructions
+│   ├── docs/                         # User guides, architecture, examples
+│   ├── dev_instructions/             # Core strategic & development documents
+│   ├── README.md                     # Main project documentation
+│   └── PROJECT_STRUCTURE.md          # Detailed project structure overview
 │
 └── 🗃️ Testing & Archive
-    ├── tests/                       # Test suite (906 lines, 31 tests)
-    └── archive/                     # Historical development files
+    ├── tests/                        # Unit, integration, and validation tests
+    └── archive/                      # Historical development versions & outputs
 ```
 
 ### Technology Stack
 ```bash
-# Core Dependencies (requirements.txt)
-matplotlib>=3.7.0      # Visualization engine
-numpy>=1.24.0          # Mathematical computations
-seaborn                # Statistical plotting
-streamlit>=1.30.0      # Web interface
-plotly>=5.17.0         # Interactive visualizations
-pandas>=2.0.0          # Data manipulation
+# Core Dependencies (see requirements.txt for full list)
+fastapi                # High-performance API framework
+celery                 # Distributed task queue
+redis                  # In-memory data store / message broker
+sqlalchemy             # SQL toolkit and Object Relational Mapper (ORM)
+alembic                # Lightweight database migration tool
+streamlit              # Web interface for interactive apps
+pandas                 # Data manipulation and analysis
+plotly                 # Interactive visualizations
+matplotlib             # Static visualization engine
+numpy                  # Mathematical computations
 ```
 
 ### Modular Framework Architecture
@@ -1234,20 +1248,22 @@ class PromptGenerator:
 
 ---
 
-## 4. Configuration System
+## 6. Configuration System
 
-### 4.1 Active Configuration (`config/`)
+### 6.1 Active Configuration (`config/`)
 
-The `config/` directory contains symlinks to the active framework:
+The `config/` directory contains symlinks to the active framework's configuration files. This allows for hot-swapping analysis frameworks without changing any code.
+
 ```bash
 config/
 ├── dipoles.json -> ../frameworks/civic_virtue/dipoles.json
 └── framework.json -> ../frameworks/civic_virtue/framework.json
 ```
 
-### 4.2 Dipoles Configuration Structure (`dipoles.json`)
+### 6.2 Dipoles Configuration (`dipoles.json`)
 
-**Complete current active configuration:**
+This file defines the conceptual structure of a framework, including the names, descriptions, and language cues for each "dipole" (the opposing concepts like Dignity vs. Tribalism). It's used primarily for generating the LLM prompts.
+
 ```json
 {
   "framework_name": "civic_virtue",
@@ -1274,9 +1290,10 @@ config/
 }
 ```
 
-### 4.3 Framework Configuration Structure (`framework.json`)
+### 6.3 Framework Configuration (`framework.json`)
 
-**Complete mathematical implementation:**
+This file defines the mathematical implementation of the framework, including the position and weight of each gravity well, the ellipse parameters, and metric definitions. It is used by the analysis and visualization engine.
+
 ```json
 {
   "framework_name": "civic_virtue",
@@ -1330,26 +1347,24 @@ config/
 
 ---
 
-## 5. Framework Definitions
+## 7. Framework Definitions
 
-### 5.1 Available Frameworks
+### 7.1 Available Frameworks
 
-The system currently supports three specialized frameworks:
+The system currently supports three specialized, hot-swappable frameworks stored in the `frameworks/` directory:
 
-1. **Civic Virtue Framework** (`frameworks/civic_virtue/`) - **Primary**
-   - Most advanced implementation for political discourse
-   - 5 dipoles, 10 wells with differential weighting
-   - Three-tier system: Identity (±1.0), Principles (±0.8), Cognition (±0.6)
+1.  **Civic Virtue Framework** (`frameworks/civic_virtue/`) - **Primary**
+    *   Our most advanced and validated framework for political discourse.
+    *   Features 5 dipoles and 10 wells with a three-tier differential weighting system based on moral psychology research.
 
-2. **Political Spectrum Framework** (`frameworks/political_spectrum/`)
-   - Traditional left-right political positioning
-   - Alternative framework for comparative analysis
+2.  **Political Spectrum Framework** (`frameworks/political_spectrum/`)
+    *   A more traditional model for positioning narratives on a left-right political spectrum.
+    *   Useful for comparative analysis against the Civic Virtue model.
 
-3. **Moral Rhetorical Posture Framework** (`frameworks/moral_rhetorical_posture/`)
-   - Communication style and approach analysis
-   - Rhetorical strategy assessment
+3.  **Moral Rhetorical Posture Framework** (`frameworks/moral_rhetorical_posture/`)
+    *   Assesses communication style and rhetorical strategy rather than ideological content.
 
-### 5.2 Civic Virtue Framework Details
+### 7.2 Civic Virtue Framework Details
 
 **Integrative Gravity Wells** (Upper hemisphere, positive weights):
 - **Dignity** (90°, +1.0): Individual moral worth, universal rights
@@ -1365,133 +1380,17 @@ The system currently supports three specialized frameworks:
 - **Resentment** (225°, -0.8): Grievance-centered moral scorekeeping
 - **Fear** (200°, -0.6): Threat-focused reaction and control
 
-### 5.3 Framework Creation Guidelines
+### 7.3 Framework Creation Guidelines
 
-**Required Files Structure:**
+A new framework can be added by creating a new subdirectory in `frameworks/` with the following required files:
+
 ```
 frameworks/[framework_name]/
-├── dipoles.json      # Conceptual definitions
-├── framework.json    # Mathematical implementation
-└── README.md         # Framework documentation
+├── dipoles.json      # Conceptual definitions for LLM prompts
+├── framework.json    # Mathematical implementation for analysis
+└── README.md         # Documentation explaining the framework's theory
 ```
-
-**Validation Requirements:**
-- Consistent well names between dipoles.json and framework.json
-- Valid angular positioning (0-360 degrees)
-- Appropriate weight assignments (-1.0 to +1.0)
-- Complete language cue definitions
-
----
-
-## 9. Testing Infrastructure
-
-### 6.1 Test Suite Overview
-
-**Comprehensive smoke testing system** - 906 lines across 6 files:
-- **Total Tests**: 31 (all passing, 2 skipped)
-- **CLI Tools**: 17 tests ✅
-- **Streamlit App**: 14 tests ✅
-- **Coverage**: Framework management, prompt generation, visualization, integration
-
-### 6.2 Test Structure
-
-```
-tests/
-├── README.md                 # Comprehensive testing documentation (289 lines)
-├── TESTING_SUMMARY.md        # Test results and coverage summary (225 lines)
-├── run_tests.py             # Main test runner (182 lines)
-├── test.sh                  # Shell script wrapper (159 lines)
-├── test_requirements.txt    # Testing dependencies (11 lines)
-├── test_cli_tools.py        # CLI functionality tests (384 lines)
-└── test_streamlit_app.py    # Streamlit interface tests (343 lines)
-```
-
-### 6.3 Test Categories
-
-**Framework Manager Tests** ✅
-- Framework initialization and directory handling
-- Framework listing (empty and populated states)
-- Framework validation (basic smoke test)
-- CLI command help and usage verification
-
-**Prompt Generator Tests** ✅
-- Configuration loading (dipoles.json, framework.json)
-- Interactive prompt generation with proper structure
-- Batch prompt generation
-- CLI command help and usage verification
-
-**Visualization Engine Tests** ✅
-- Elliptical visualizer initialization
-- Analysis data loading and validation
-- JSON error handling
-- CLI command help and usage verification
-
-**Streamlit Component Tests** ✅
-- Framework name normalization
-- JSON framework detection (with/without metadata)
-- Utility function validation
-- File existence and syntax validation
-
-**Integration Tests** ✅
-- CLI commands execute without crashing
-- Help system functionality works
-- Python syntax validation across all files
-- Import system verification
-- Requirements validation
-
-### 6.4 Running Tests
-
-**Quick Testing:**
-```bash
-# All tests (< 2 seconds)
-python tests/run_tests.py
-
-# Shell wrapper with options
-./tests/test.sh              # All tests
-./tests/test.sh cli          # CLI only
-./tests/test.sh streamlit    # Streamlit only
-./tests/test.sh quick        # Syntax/import checks
-```
-
----
-
-## 10. Documentation
-
-### 7.1 Core Documentation Files
-
-**Main Documentation** (4,508 total lines):
-- `README.md` (471 lines): Complete project overview, usage, examples
-- `PAPER_REPLICATION.md` (70 lines): Academic reproduction guide
-- `PROJECT_STRUCTURE.md` (110 lines): Architectural organization
-- `narrative_gravity_wells_paper.md` (294 lines): Academic paper draft
-
-**Development Documentation** (`docs/development/`):
-- 6 active technical documents covering architecture, user stories, roadmap
-- 11 archived development files moved to organized structure
-
-**Testing Documentation** (`tests/`):
-- `README.md` (289 lines): Comprehensive testing guide
-- `TESTING_SUMMARY.md` (225 lines): Test results and coverage
-
-### 7.2 Key Documentation Insights
-
-**Paper Publication Ready:**
-- Academic paper with theoretical foundation
-- Replication instructions for key analyses
-- Model identification guidance for accuracy
-- Framework versioning for reproducibility
-
-**Architecture Documentation:**
-- Clean modular design with symlink-based configuration
-- Framework-agnostic core with specialized implementations
-- Comprehensive CLI and web interface documentation
-- Testing philosophy and maintenance guidelines
-
-**User Experience Documentation:**
-- Multiple user persona coverage (researchers, custom framework developers)
-- Workflow examples from basic to advanced usage
-- Troubleshooting and common use cases
-- Installation and dependency management
+The system will automatically discover and validate any new frameworks that follow this structure.
 
 ---
 
@@ -1802,6 +1701,25 @@ This comprehensive documentation provides complete technical context for systema
 
 ---
 
+## 5. Key Code Components
+
+This section highlights the most critical Python modules in the system that drive the analysis, visualization, and backend processing.
+
+### 5.1 Analysis & Visualization
+- **`narrative_gravity_elliptical.py`**: The mathematical heart of the system. This module calculates narrative positions based on framework scores and generates the core elliptical visualizations. It's the primary engine for turning raw scores into graphical insights.
+- **`create_generic_multi_run_dashboard.py`**: A key component for our validation studies. This script consumes multi-run analysis results, computes statistics like variance and confidence intervals, and generates the comprehensive multi-part dashboards that include elliptical maps, bar charts, and LLM-generated summaries. It is framework-agnostic and uses filename parsing for metadata extraction.
+
+### 5.2 Application & Interface
+- **`narrative_gravity_app.py`**: The main Streamlit web application. It provides the user interface for uploading texts, managing frameworks, launching analyses, and viewing results. It orchestrates the user-facing workflow.
+- **`framework_manager.py`**: A utility that handles the loading, validation, and switching of analysis frameworks (e.g., Civic Virtue, Political Spectrum). It allows the system to be modular and extensible.
+
+### 5.3 Backend Processing (Illustrative from `src/`)
+- **`src/tasks/processing.py`**: A core Celery task for running analysis jobs in the background. It takes a chunk of text and an analysis configuration, interacts with the LLM client, and stores the result. This enables our scalable, asynchronous architecture.
+- **`src/api_clients/huggingface_client.py`** (Illustrative): A client responsible for wrapping the Hugging Face API. It handles authentication, request formatting, and retry logic, providing a stable interface for the task processor to use.
+- **`src/models/job.py`** (Illustrative): The SQLAlchemy data model for a 'Job'. It defines the database schema for tracking the state and parameters of an analysis job, including which texts, frameworks, and models are used.
+
+---
+
 *End of Comprehensive Documentation*
 
 **File Statistics:**
@@ -1811,3 +1729,53 @@ This comprehensive documentation provides complete technical context for systema
 - **Test Suite**: 906 lines, 31 tests
 - **Configuration**: 185 lines JSON across frameworks
 - **Status**: Production-ready, API integration ready 
+
+---
+
+## 9. Testing Infrastructure
+
+Our testing philosophy has evolved from basic smoke tests to a more robust, multi-layered approach that ensures the reliability of the core application, the backend infrastructure, and the analysis results themselves.
+
+### 9.1 Test Suite Overview
+The `tests/` directory contains a combination of unit tests, integration tests, and (forthcoming) validation study tests. The suite is designed to verify both code correctness and the scientific validity of the analysis.
+
+-   **Unit Tests (`tests/unit/`)**: Focused on isolating and testing individual functions and classes. For example, testing the mathematical calculations in `narrative_gravity_elliptical.py` or a specific utility function in `src/utils/`.
+-   **Integration Tests (`tests/integration/`)**: Designed to test the interaction between different parts of the system. For example, verifying that a `Celery` task correctly calls the `API Client` and stores data using the `Database Models`.
+-   **Validation Tests (`tests/validation/`)**: *[In Development]* This is a new, critical category of tests designed to execute the validation studies outlined in Phase 1 of our strategy. These tests will run analyses on the golden set corpus and perform statistical checks on the results to measure reliability and consensus.
+
+### 9.2 Backend Testing (`src/`)
+The backend components in the `src/` directory are tested with a focus on their specific roles in the application stack:
+-   **API Tests**: Verifying FastAPI endpoint logic, including request/response formats, authentication, and error handling.
+-   **Task Tests**: Testing Celery task execution, ensuring they can be queued, run, and handle success/failure states correctly.
+-   **Model Tests**: Confirming that the SQLAlchemy database models correctly map to the database schema and that relationships are correctly defined.
+-   **Client Tests**: Mocking external APIs (like Hugging Face) to test the retry logic, error handling, and data parsing of our API clients.
+
+### 9.3 Forthcoming: Validation Study Automation
+The next major development in our testing infrastructure is the creation of an automated test harness for the **Golden Set Validation Framework**.
+
+---
+
+## 10. Documentation
+
+Our documentation is organized into three distinct categories to serve different audiences: strategic stakeholders, developers, and end-users.
+
+### 10.1 Strategic & Planning Documentation (`dev_instructions/`)
+This is the canonical source for understanding the project's direction, priorities, and high-level plans. It's essential reading for product management and strategic decision-making.
+-   **`VALIDATION_FIRST_DEVELOPMENT_STRATEGY.md`**: The most important document right now. Outlines our current 3-phase plan for achieving academic credibility.
+-   **`COMPREHENSIVE_PROJECT_DOCUMENTATION.md`**: This document. A detailed technical and strategic reference.
+-   **`User Personas - Narrative Gravity Model.md`**: Describes the target users who drive our development priorities.
+-   **Milestone & Epic Docs**: Documents that track the completion status and high-level goals of major work packages.
+
+### 10.2 Technical & Developer Documentation (`docs/` and code)
+This documentation is aimed at developers working on the system.
+-   **`docs/architecture/`**: Contains diagrams (like the ERD) and detailed explanations of the system's architecture.
+-   **`README.md`**: The primary entry point for a new developer, explaining how to set up, configure, and run the application.
+-   **Code Docstrings**: We aim for comprehensive docstrings within the code itself to explain the purpose and function of key classes and methods.
+-   **`PROJECT_STRUCTURE.md`**: A detailed map of the files and directories in the repository.
+
+### 10.3 User & Academic Documentation (`docs/` and outputs)
+This documentation is for end-users of the tool, including researchers and academic collaborators.
+-   **`docs/user-guides/`**: Contains guides for using the application, understanding the frameworks, and interpreting the results.
+-   **`docs/examples/`**: Showcases example analyses and dashboards.
+-   **Replication Materials**: For any publication, we will produce a complete replication package with data, scripts, and instructions to ensure full academic transparency and reproducibility.
+-   **Generated Reports**: The automated reports from the interpretive intelligence phase will themselves be a form of user documentation, explaining the results of a specific analysis.
