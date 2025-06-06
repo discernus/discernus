@@ -11,7 +11,7 @@ import logging
 from datetime import datetime
 
 from ..models.base import get_db
-from ..models import models
+from ..models import User
 from . import schemas, crud, services
 from ..utils.auth import get_current_user, get_current_admin_user, get_optional_user
 from ..utils.sanitization import sanitize_string, sanitize_search_query, SanitizationError
@@ -70,7 +70,7 @@ async def upload_corpus(
     file: UploadFile = File(...),
     name: Optional[str] = None,
     description: Optional[str] = None,
-    current_user: models.User = Depends(get_current_admin_user),  # Only admins can upload
+    current_user: User = Depends(get_current_admin_user),  # Only admins can upload
     db: Session = Depends(get_db)
 ):
     """
@@ -111,7 +111,7 @@ async def upload_corpus(
 async def list_corpora(
     skip: int = 0,
     limit: int = 100,
-    current_user: Optional[models.User] = Depends(get_optional_user),
+    current_user: Optional[User] = Depends(get_optional_user),
     db: Session = Depends(get_db)
 ):
     """List all uploaded corpora with metadata."""
@@ -155,7 +155,7 @@ async def list_corpus_chunks(
 @app.post("/api/jobs", response_model=schemas.JobResponse)
 async def create_job(
     job_request: schemas.JobCreate,
-    current_user: models.User = Depends(get_current_admin_user),  # Only admins can create jobs
+    current_user: User = Depends(get_current_admin_user),  # Only admins can create jobs
     db: Session = Depends(get_db)
 ):
     """
