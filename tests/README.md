@@ -1,289 +1,161 @@
-# 🧪 Narrative Gravity Maps - Smoke Tests
+# Test Suite Documentation
 
-This directory contains smoke tests for the Narrative Gravity Maps application, covering both CLI tools and the Streamlit interface.
+## 📁 Test Organization
 
-## 📂 Test Structure
+The test suite is organized into clear categories for different types of testing:
 
 ```
 tests/
-├── README.md                 # This file - test documentation
-├── run_tests.py             # Main test runner script
-├── test_requirements.txt    # Testing dependencies
-├── test_cli_tools.py        # CLI functionality tests
-└── test_streamlit_app.py    # Streamlit interface tests
+├── integration/          # Integration tests for full system workflows
+├── unit/                 # Unit tests for individual components  
+├── utilities/            # Utility scripts and validation tools
+├── test_data/            # Test data files and sample corpora
+├── test_results/         # Test output and validation results
+└── README.md            # This documentation
 ```
 
-## 🚀 Quick Start
+## 🧪 Test Categories
 
-### 1. Install Test Dependencies
+### **Integration Tests** (`integration/`)
 
+Full system integration tests that verify end-to-end workflows:
+
+- **`test_auth_system.py`** - Authentication and JWT token system validation
+- **`test_api.py`** - FastAPI endpoints and request/response validation  
+- **`test_corpus_tools.py`** - Corpus ingestion and processing workflows
+- **`test_ingestion.py`** - Text ingestion and database storage validation
+- **`test_job_processing.py`** - Celery task queue and job processing
+- **`final_ingestion_test.py`** - Comprehensive ingestion system validation
+
+### **Unit Tests** (`unit/`)
+
+Individual component tests:
+
+- **`test_cli_tools.py`** - Framework manager and CLI tool tests
+- **`test_streamlit_app.py`** - Streamlit interface component tests
+
+### **Utility Scripts** (`utilities/`)
+
+Development and validation utilities:
+
+- **`run_epic_validation.py`** - Epic 1 validation suite (Task Queue, HuggingFace, Retry Logic, Golden Set)
+- **`align_formats.py`** - CSV format alignment and validation utility
+- **`check_corpus5.py`** - Quick corpus validation check
+- **`check_docs.py`** - Documentation completeness validation
+- **`quick_test.py`** - Fast system health check
+
+## 📊 Test Data
+
+### **Sample Datasets** (`test_data/`)
+- **`sample_corpus.jsonl`** - Original sample corpus for testing
+- **`sample_corpus_v2.jsonl`** - Updated sample corpus format
+
+### **Test Results** (`test_results/`)
+- Contains output from Epic validation runs
+- Stores integration test results for analysis
+- Performance benchmark data
+
+## 🚀 Running Tests
+
+### **Quick System Check**
 ```bash
-# From the project root directory
-pip install -r tests/test_requirements.txt
+# Fast health check
+python tests/utilities/quick_test.py
+
+# Documentation validation
+python tests/utilities/check_docs.py
 ```
 
-### 2. Run All Tests
-
+### **Epic Validation Suite**
 ```bash
-# Simple run - from project root
-python tests/run_tests.py
-
-# Or directly
-cd tests && python run_tests.py
+# Complete Epic 1 validation (4 test categories)
+python tests/utilities/run_epic_validation.py
 ```
 
-### 3. Run Individual Test Files
-
+### **Integration Tests**
 ```bash
-# CLI tests only
-python tests/test_cli_tools.py
+# Individual integration tests
+python tests/integration/test_auth_system.py
+python tests/integration/test_api.py
+python tests/integration/test_corpus_tools.py
 
-# Streamlit tests only  
-python tests/test_streamlit_app.py
+# Comprehensive ingestion test
+python tests/integration/final_ingestion_test.py
 ```
 
-## 📊 Test Coverage
-
-### CLI Tools Tests (`test_cli_tools.py`)
-
-- **Framework Manager Tests**
-  - ✅ Framework initialization
-  - ✅ Framework listing (empty and populated)
-  - ✅ Framework validation
-  - ✅ CLI command help/usage
-
-- **Prompt Generator Tests**
-  - ✅ Configuration loading (dipoles.json, framework.json)
-  - ✅ Interactive prompt generation
-  - ✅ Batch prompt generation
-  - ✅ CLI command help/usage
-
-- **Visualization Engine Tests**
-  - ✅ Elliptical visualizer initialization
-  - ✅ Analysis data loading
-  - ✅ JSON validation and error handling
-  - ✅ CLI command help/usage
-
-- **Integration Tests**
-  - ✅ CLI commands execution
-  - ✅ Help system functionality
-  - ✅ Basic command validation
-
-### Streamlit App Tests (`test_streamlit_app.py`)
-
-- **Component Tests**
-  - ✅ Session state initialization
-  - ✅ Framework name normalization
-  - ✅ JSON framework detection
-  - ✅ Utility function validation
-
-- **Integration Tests**
-  - ✅ File existence checks
-  - ✅ Python syntax validation
-  - ✅ Import system verification
-  - ✅ Requirements file validation
-
-- **App Startup Tests**
-  - ⚠️ Full Streamlit startup (skipped by default - long-running)
-  - ✅ Launch script validation
-  - ✅ Dependencies verification
-
-## 🔧 Configuration
-
-### Test Environment
-
-Tests automatically:
-- Set up the Python path to include the project root
-- Change working directory to project root
-- Create temporary directories for isolated testing
-- Clean up resources after each test
-
-### Mock Data
-
-Tests create mock framework structures when needed:
-- Temporary `dipoles.json` and `framework.json` files
-- Test analysis data in proper JSON format
-- Isolated test directories that don't affect the main project
-
-## 📋 Test Results
-
-The test runner provides detailed output:
-
-```
-🎯 Narrative Gravity Maps - Smoke Test Runner
-============================================================
-
-🔧 Test environment setup:
-   Project root: /path/to/narrative_gravity_analysis
-   Working directory: /path/to/narrative_gravity_analysis
-   Python path includes: /path/to/narrative_gravity_analysis
-
-🔍 Discovering tests in: /path/to/tests
-   Pattern: test_*.py
-
-📄 Found 2 test file(s):
-   - test_cli_tools.py
-   - test_streamlit_app.py
-
-🧪 Running tests from test_cli_tools...
-============================================================
-[Individual test results...]
-
-📊 TEST SUMMARY
-============================================================
-✅ PASS test_cli_tools................  15 tests,   0 failures,   0 errors,   0 skipped
-✅ PASS test_streamlit_app.............  12 tests,   0 failures,   0 errors,   1 skipped
-------------------------------------------------------------
-TOTAL:                              27 tests,   0 failures,   0 errors,   1 skipped
-
-🎉 ALL TESTS PASSED!
-
-⏱️  Tests completed in 3.45 seconds
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-#### ImportError: Module not found
+### **Unit Tests**
 ```bash
-# Make sure you're running from the project root
-cd /path/to/narrative_gravity_analysis
-python tests/run_tests.py
-
-# Or install the project in development mode
-pip install -e .
+# Run unit tests with pytest
+cd tests/unit
+python -m pytest test_cli_tools.py -v
+python -m pytest test_streamlit_app.py -v
 ```
 
-#### Missing Dependencies
+### **Utility Tools**
 ```bash
-# Install test dependencies
-pip install -r tests/test_requirements.txt
+# Format alignment
+python tests/utilities/align_formats.py
 
-# Or install main dependencies first
-pip install -r requirements.txt
+# Corpus validation
+python tests/utilities/check_corpus5.py
 ```
 
-#### Streamlit Import Errors
+## ✅ Test Status
+
+### **Epic 1 Validation** ✅ (4/4 Success)
+- ✅ **Task Queue Processing**: Celery + Redis operational
+- ✅ **HuggingFace Integration**: All 3 frameworks loaded
+- ✅ **Retry Logic**: Error handling validated
+- ✅ **Golden Set Testing**: 17 presidential speeches validated
+
+### **Integration Test Coverage** ✅
+- ✅ **Authentication System**: JWT tokens working
+- ✅ **API Endpoints**: FastAPI responses validated
+- ✅ **Corpus Processing**: Text ingestion operational
+- ✅ **Job Processing**: Task queue functional
+- ✅ **Database Operations**: PostgreSQL validated
+
+### **Unit Test Coverage** ✅  
+- ✅ **CLI Tools**: Framework manager functional
+- ✅ **Streamlit Components**: Web interface operational
+
+## �� Test Maintenance
+
+### **Adding New Tests**
+1. **Integration Tests**: Add to `integration/` for full workflow tests
+2. **Unit Tests**: Add to `unit/` for component-specific tests  
+3. **Utilities**: Add to `utilities/` for development tools
+
+### **Test Data Management**
+- Place sample data in `test_data/`
+- Store results in `test_results/`
+- Use descriptive naming conventions
+
+### **Running Full Test Suite**
 ```bash
-# Ensure Streamlit is installed
-pip install streamlit>=1.30.0
+# Epic validation (comprehensive)
+python tests/utilities/run_epic_validation.py
 
-# Check if other dependencies are missing
-pip install matplotlib numpy seaborn plotly pandas
+# Quick health check
+python tests/utilities/quick_test.py
+
+# Integration tests (all)
+for test in tests/integration/*.py; do python "$test"; done
 ```
 
-#### Framework Configuration Errors
-- Tests create their own mock frameworks
-- If you see framework-related errors, ensure the `frameworks/` directory exists
-- Check that `config/` symlinks are properly set up
+---
 
-### Test-Specific Issues
+## 📈 Test Philosophy
 
-#### Long-Running Tests
-Some tests are skipped by default (marked with `@unittest.skip`):
-- `test_streamlit_app_starts` - Actually launches Streamlit server
+Our testing approach prioritizes:
 
-To enable these tests, edit the test file and remove the `@unittest.skip` decorator.
+1. **End-to-End Validation**: Epic tests verify complete workflows
+2. **Component Isolation**: Unit tests verify individual functions
+3. **Real-World Data**: Golden set provides realistic validation
+4. **Performance Monitoring**: Tests track system performance
+5. **Academic Rigor**: Validation meets research standards
 
-#### CLI Integration Tests
-These tests rely on:
-- Scripts being executable from the project root
-- Python modules being importable
-- Command-line arguments being properly handled
+---
 
-If these fail, check:
-1. Working directory is correct
-2. Python path includes project root  
-3. All required files exist
-
-## 🎯 Adding New Tests
-
-### Test File Structure
-
-```python
-#!/usr/bin/env python3
-"""
-Description of what this test file covers
-"""
-
-import unittest
-import sys
-import os
-from pathlib import Path
-
-# Add project root to path
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-# Import modules to test
-from your_module import YourClass
-
-class TestYourFeature(unittest.TestCase):
-    """Test cases for your feature"""
-    
-    def setUp(self):
-        """Set up test environment"""
-        pass
-    
-    def tearDown(self):
-        """Clean up test environment"""
-        pass
-    
-    def test_basic_functionality(self):
-        """Test basic functionality"""
-        self.assertTrue(True)
-
-if __name__ == '__main__':
-    unittest.main()
-```
-
-### Best Practices
-
-1. **Use descriptive test names** - `test_framework_validation_with_valid_data`
-2. **Clean up resources** - Use `tearDown()` to remove temp files/directories
-3. **Test both success and failure cases** - Happy path and error conditions
-4. **Use mocks for external dependencies** - Don't rely on external services
-5. **Make tests independent** - Each test should be able to run in isolation
-6. **Add timeouts for subprocess calls** - Prevent hanging tests
-
-## 📈 CI/CD Integration
-
-### GitHub Actions Example
-
-```yaml
-name: Smoke Tests
-on: [push, pull_request]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Install dependencies
-      run: |
-        pip install -r tests/test_requirements.txt
-    - name: Run smoke tests
-      run: |
-        python tests/run_tests.py
-```
-
-### Local Automation
-
-```bash
-# Create a git pre-commit hook
-echo '#!/bin/bash\npython tests/run_tests.py' > .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
-```
-
-## 📝 Notes
-
-- Tests are designed as **smoke tests** - they verify basic functionality works
-- They do **not** replace comprehensive unit/integration testing
-- Focus is on "does it work at all" rather than "does it work perfectly"
-- Tests are designed to be fast and reliable for CI/CD pipelines
-
-For questions or issues with the test suite, check the main project documentation or create an issue in the project repository. 
+*Last Updated: January 2025*  
+*Test Suite Version: v1.1 (Post-Cleanup)* 

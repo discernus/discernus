@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-gravity.github.io/schemas/mrp_extension_v1.0.0.json",
+  "title": "Moral Rhetorical Posture Framework Extension Schema",
+  "description": "Extension schema for Moral Rhetorical Posture framework-specific data in framework_data field",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "ingestion_metadata": {
+      "type": "object",
+      "description": "Framework-specific metadata populated during ingestion",
+      "properties": {
+        "rhetorical_context": {
+          "type": "string",
+          "enum": ["ceremonial", "deliberative", "judicial", "campaign", "legislative", "diplomatic", "academic"],
+          "description": "Primary rhetorical context of the communication"
+        },
+        "audience_type": {
+          "type": "string",
+          "enum": ["general_public", "partisan_base", "elites", "international", "academic", "judicial", "mixed"],
+          "description": "Primary intended audience"
+        },
+        "communication_style": {
+          "type": "string",
+          "enum": ["formal", "informal", "populist", "technocratic", "emotional", "analytical"],
+          "description": "Overall communication style assessment"
+        },
+        "moral_domain": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["individual_rights", "collective_responsibility", "justice_fairness", "authority_tradition", "loyalty_betrayal", "sanctity_degradation"]
+          },
+          "description": "Primary moral domains addressed"
+        }
+      },
+      "additionalProperties": true
+    },
+    "preprocessing_markers": {
+      "type": "object",
+      "description": "Pre-computed rhetorical and moral posture markers",
+      "properties": {
+        "restorative_language": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Language indicating restorative/healing approaches"
+        },
+        "retributive_language": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Language indicating punitive/retributive approaches"
+        },
+        "universalist_markers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Universal principle and value language"
+        },
+        "partisan_markers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Partisan or factional language patterns"
+        },
+        "humility_indicators": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Language indicating humility and uncertainty"
+        },
+        "triumph_indicators": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Language indicating victory and dominance"
+        },
+        "moral_reflection_markers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Reflective and contemplative moral language"
+        },
+        "operational_will_markers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Action-oriented and decisionist language"
+        }
+      },
+      "additionalProperties": true
+    },
+    "analysis_results": {
+      "type": "object",
+      "description": "Moral rhetorical posture analysis results",
+      "properties": {
+        "well_scores": {
+          "type": "object",
+          "description": "Individual well scores (0.0-1.0) for each moral rhetorical dimension",
+          "properties": {
+            "restorative": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "retributive": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "universalist": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "partisan": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "humility": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "triumph": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "moral_reflection": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "operational_will": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "reformist": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "revolutionary": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+          },
+          "additionalProperties": false
+        },
+        "narrative_position": {
+          "type": "object",
+          "description": "Position on the moral rhetorical posture ellipse",
+          "properties": {
+            "x": {"type": "number"},
+            "y": {"type": "number"},
+            "ellipse_distance": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+          },
+          "required": ["x", "y", "ellipse_distance"],
+          "additionalProperties": false
+        },
+        "rhetorical_metrics": {
+          "type": "object",
+          "description": "Moral rhetorical posture-specific calculated metrics",
+          "properties": {
+            "justice_orientation": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Balance between restorative (+) and retributive (-) justice"
+            },
+            "moral_scope": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Balance between universalist (+) and partisan (-) moral scope"
+            },
+            "epistemic_stance": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Balance between humility (+) and triumph (-) in moral claims"
+            },
+            "change_approach": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Balance between reformist (+) and revolutionary (-) change"
+            },
+            "moral_certainty": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Overall level of moral certainty expressed"
+            },
+            "rhetorical_complexity": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Complexity and nuance of moral positioning"
+            }
+          },
+          "additionalProperties": true
+        },
+        "posture_classification": {
+          "type": "object",
+          "description": "Discrete classification of moral rhetorical posture",
+          "properties": {
+            "primary_posture": {
+              "type": "string",
+              "enum": ["healer", "judge", "philosopher", "warrior", "reformer", "revolutionary"],
+              "description": "Primary moral rhetorical posture type"
+            },
+            "secondary_tendencies": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Secondary rhetorical tendencies detected"
+            },
+            "posture_consistency": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Internal consistency of moral rhetorical stance"
+            },
+            "contextual_appropriateness": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Appropriateness of posture for rhetorical context"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "ingestion_metadata": {
+        "rhetorical_context": "ceremonial",
+        "audience_type": "general_public",
+        "communication_style": "formal",
+        "moral_domain": ["individual_rights", "collective_responsibility"]
+      },
+      "preprocessing_markers": {
+        "restorative_language": ["healing", "bringing together"],
+        "universalist_markers": ["all people", "universal principles"],
+        "humility_indicators": ["we must learn", "complex challenge"]
+      },
+      "analysis_results": {
+        "well_scores": {
+          "restorative": 0.85,
+          "universalist": 0.78,
+          "humility": 0.72,
+          "retributive": 0.15
+        },
+        "narrative_position": {
+          "x": 0.23,
+          "y": 0.67,
+          "ellipse_distance": 0.71
+        },
+        "rhetorical_metrics": {
+          "justice_orientation": 0.65,
+          "moral_scope": 0.73,
+          "epistemic_stance": 0.58,
+          "moral_certainty": 0.45
+        },
+        "posture_classification": {
+          "primary_posture": "healer",
+          "posture_consistency": 0.84,
+          "contextual_appropriateness": 0.91
+        }
+      }
+    }
+  ]
+} 

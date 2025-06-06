@@ -23,7 +23,7 @@ Below are step-by-step instructions and best practices to hand off to Cursor for
 ### 1.3 JSONB Usage Guidelines  
 - **Hybrid Relational–Document Model:** Store fixed, frequently queried fields (IDs, timestamps, status) as traditional columns; put variable or extension data in JSONB (`metadata`, `framework_data`) to preserve flexibility[1].  
 - **Indexing:** Create GIN indexes on JSONB columns for paths you’ll query often, e.g.  
-CREATE INDEX idx_chunk_framework ON chunk USING gin ((framework_data->'civicVirtue'));
+CREATE INDEX idx_chunk_frameworkON chunk USING gin ((framework_data->'civicVirtue'));
 
 text
 - **Performance:** Use JSONB’s binary storage to traverse nested keys without full-document scans, and plan for partitioning large tables by `date` or `corpus_id` as data grows[1].
@@ -60,12 +60,12 @@ alembic upgrade head
 ## 3. Versioned JSON Schema Repository
 
 ### 3.1 Repository Structure  
-schemas/ ├── core_schema_v1.0.0.json ├── cv_extension_v1.0.0.json ├── mrp_extension_v1.0.0.json ├── ps_extension_v1.0.0.json └── README.md
+schemas/├── core_schema_v1.0.0.json├── cv_extension_v1.0.0.json├── mrp_extension_v1.0.0.json├── ps_extension_v1.0.0.json└── README.md
 
 ### 3.2 Semantic Versioning & Publishing  
 - **File Naming:** Include version in filename (e.g., `_v1.0.0.json`).  
 - **$id Property:** In each schema’s root, set:  
-{ "$schema": "~[https://json-schema.org/draft/2020-12/schema](https://json-schema.org/draft/2020-12/schema)~", "$id": "~[https://your-repo.github.io/schemas/core_schema_v1.0.0.json](https://your-repo.github.io/schemas/core_schema_v1.0.0.json)~", … }
+{"$schema": "~[https://json-schema.org/draft/2020-12/schema](https://json-schema.org/draft/2020-12/schema)~","$id": "~[https://your-repo.github.io/schemas/core_schema_v1.0.0.json](https://your-repo.github.io/schemas/core_schema_v1.0.0.json)~",…}
 - **Git Tags:** Tag each release in Git (e.g., `git tag v1.0.0` → `git push --tags`).
 
 ### 3.3 Migration Scripts  

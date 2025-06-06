@@ -23,6 +23,18 @@ narrative_gravity_analysis/
 └── generate_prompt.py                  # LLM prompt generator
 ```
 
+## 🔧 Operational Scripts
+
+```
+├── scripts/                           # Startup and utility scripts
+│   ├── run_api.py                     # FastAPI server startup
+│   ├── run_celery.py                  # Celery worker startup
+│   ├── setup_database.py              # Database setup utility
+│   └── README.md                      # Scripts documentation
+│
+└── alembic.ini                        # Database migration config (root required)
+```
+
 ## 📊 Data and Configuration
 
 ```

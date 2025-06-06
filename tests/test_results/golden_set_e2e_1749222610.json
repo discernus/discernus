@@ -1,0 +1,9 @@
+{
+  "started_at": "2025-06-06T15:10:10.285187",
+  "api_health": false,
+  "jsonl_generation": {},
+  "corpus_ingestion": {},
+  "job_processing": {},
+  "overall_success": false,
+  "completed_at": "2025-06-06T15:10:10.292066"
+}

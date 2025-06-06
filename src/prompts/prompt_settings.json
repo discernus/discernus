@@ -1,0 +1,25 @@
+{
+  "enforce_decimal_scale": true,
+  "include_model_identification": true,
+  "include_analysis_methodology": true,
+  "include_examples": false,
+  "max_language_cues": 3,
+  "temperature_guidance": null,
+  "experimental_features": [],
+  "api_mode_settings": {
+    "abbreviated_methodology": true,
+    "focus_on_json_reliability": true,
+    "include_scoring_examples": false
+  },
+  "interactive_mode_settings": {
+    "include_workflow_guidance": true,
+    "include_comparative_analysis": true,
+    "include_response_structure": true
+  },
+  "prompt_optimization": {
+    "version": "v1.0.0",
+    "description": "Base prompt settings for production use",
+    "last_updated": "2025-01-15",
+    "notes": "Optimized for reliable JSON extraction and consistent scoring"
+  }
+} 

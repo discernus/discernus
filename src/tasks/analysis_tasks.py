@@ -15,6 +15,7 @@ from celery.exceptions import Retry
 from ..celery_app import celery_app
 from ..models.base import get_db_session
 from ..api import crud
+from sqlalchemy.orm import Session
 from ..api.schemas import TaskStatus
 
 logger = logging.getLogger(__name__)
@@ -88,7 +89,7 @@ def process_narrative_analysis_task(self, task_id: int) -> Dict[str, Any]:
         else:
             raise TaskExecutionError(f"Unknown framework: {task.framework}")
         
-        # Store successful result
+        # Store successful result in task and update chunk framework_data
         crud.update_task_status(
             db,
             task_id,
@@ -96,6 +97,9 @@ def process_narrative_analysis_task(self, task_id: int) -> Dict[str, Any]:
             result_data=analysis_result,
             api_cost=api_cost
         )
+        
+        # Update chunk's framework_data with analysis results
+        _update_chunk_framework_data(db, chunk, task.framework, analysis_result)
         
         logger.info(f"Task {task_id} completed successfully")
         
@@ -174,30 +178,11 @@ def analyze_civic_virtue(text: str, model: str) -> tuple[Dict[str, Any], float]:
         Tuple of (analysis_result, api_cost)
     """
     try:
-        # Placeholder for civic virtue analysis
-        # TODO: Integrate with your existing analysis logic from analysis_logic_v2025.06.04.2.py
+        from .huggingface_client import HuggingFaceClient
         
-        result = call_huggingface_api(
-            model=model,
-            text=text,
-            task_type="text-classification"
-        )
+        client = HuggingFaceClient()
+        analysis_result, api_cost = client.analyze_text(text, "civic_virtue", model)
         
-        # Process result for civic virtue framework
-        analysis_result = {
-            "framework": "civic_virtue",
-            "model": model,
-            "raw_response": result,
-            "civic_virtue_scores": {
-                "compassion": _extract_score(result, "compassion"),
-                "justice": _extract_score(result, "justice"),
-                "integrity": _extract_score(result, "integrity"),
-                "courage": _extract_score(result, "courage")
-            },
-            "processed_at": datetime.utcnow().isoformat()
-        }
-        
-        api_cost = estimate_api_cost(text, model)
         return analysis_result, api_cost
         
     except Exception as e:
@@ -216,29 +201,11 @@ def analyze_moral_rhetorical_posture(text: str, model: str) -> tuple[Dict[str, A
         Tuple of (analysis_result, api_cost)
     """
     try:
-        # Placeholder for moral rhetorical posture analysis
-        # TODO: Integrate with your existing analysis logic
+        from .huggingface_client import HuggingFaceClient
         
-        result = call_huggingface_api(
-            model=model,
-            text=text,
-            task_type="text-classification"
-        )
+        client = HuggingFaceClient()
+        analysis_result, api_cost = client.analyze_text(text, "moral_rhetorical_posture", model)
         
-        analysis_result = {
-            "framework": "moral_rhetorical_posture",
-            "model": model,
-            "raw_response": result,
-            "posture_scores": {
-                "authoritative": _extract_score(result, "authoritative"),
-                "empathetic": _extract_score(result, "empathetic"),
-                "analytical": _extract_score(result, "analytical"),
-                "passionate": _extract_score(result, "passionate")
-            },
-            "processed_at": datetime.utcnow().isoformat()
-        }
-        
-        api_cost = estimate_api_cost(text, model)
         return analysis_result, api_cost
         
     except Exception as e:
@@ -257,29 +224,11 @@ def analyze_political_spectrum(text: str, model: str) -> tuple[Dict[str, Any], f
         Tuple of (analysis_result, api_cost)
     """
     try:
-        # Placeholder for political spectrum analysis
-        # TODO: Integrate with your existing analysis logic
+        from .huggingface_client import HuggingFaceClient
         
-        result = call_huggingface_api(
-            model=model,
-            text=text,
-            task_type="text-classification"
-        )
+        client = HuggingFaceClient()
+        analysis_result, api_cost = client.analyze_text(text, "political_spectrum", model)
         
-        analysis_result = {
-            "framework": "political_spectrum",
-            "model": model,
-            "raw_response": result,
-            "spectrum_scores": {
-                "liberal": _extract_score(result, "liberal"),
-                "conservative": _extract_score(result, "conservative"),
-                "libertarian": _extract_score(result, "libertarian"),
-                "authoritarian": _extract_score(result, "authoritarian")
-            },
-            "processed_at": datetime.utcnow().isoformat()
-        }
-        
-        api_cost = estimate_api_cost(text, model)
         return analysis_result, api_cost
         
     except Exception as e:
@@ -350,6 +299,30 @@ def estimate_api_cost(text: str, model: str) -> float:
     base_cost = 0.001  # $0.001 per request
     length_multiplier = len(text) / 1000  # Additional cost per 1K characters
     return base_cost + (length_multiplier * 0.0001)
+
+def _update_chunk_framework_data(db: Session, chunk, framework: str, analysis_result: Dict[str, Any]) -> None:
+    """Update chunk's framework_data with analysis results."""
+    try:
+        # Get current framework_data or initialize
+        current_framework_data = chunk.framework_data or {}
+        
+        # Ensure analysis_results section exists
+        if 'analysis_results' not in current_framework_data:
+            current_framework_data['analysis_results'] = {}
+        
+        # Store framework-specific results
+        current_framework_data['analysis_results'][framework] = analysis_result
+        
+        # Update chunk in database
+        chunk.framework_data = current_framework_data
+        db.commit()
+        
+        logger.info(f"Updated framework_data for chunk {chunk.id} with {framework} results")
+        
+    except Exception as e:
+        logger.error(f"Failed to update chunk framework_data: {e}")
+        db.rollback()
+
 
 def _update_job_progress(db, job_id: int):
     """Update job progress and status based on task completion."""

@@ -54,21 +54,45 @@ Framework-specific extensions:
 3. **Must** provide backward compatibility for older versions
 4. **Should** follow additive-only changes when possible
 
+## Framework Data Structure
+
+The `framework_data` field in each chunk supports a three-stage data population model:
+
+### 1. Ingestion Metadata (Populated at Upload Time)
+- **Pre-analysis tags**: Human-assigned framework relevance markers
+- **Content categorization**: Language complexity, content type, context
+- **Domain-specific metadata**: Historical context, author affiliation, etc.
+
+### 2. Preprocessing Markers (Populated During Ingestion)
+- **Language markers**: Pre-identified phrases relevant to framework analysis
+- **Lexical indicators**: Framework-specific vocabulary patterns
+- **Structural markers**: Content organization relevant to analysis
+
+### 3. Analysis Results (Populated During Processing)
+- **Well scores**: Individual framework dimension scores (0.0-1.0)
+- **Narrative positioning**: Calculated position on framework coordinate system
+- **Framework metrics**: Framework-specific calculated measures
+- **Confidence scores**: Analysis reliability and confidence indicators
+
 ## Validation Workflow
 
-1. **Ingestion**: Validate against core schema + active framework extensions
-2. **Migration Check**: Detect `schema_version` mismatches 
-3. **Auto-upgrade**: Run migration scripts if configured
-4. **Storage**: Store original version info with migrated data
+### Current Approach: Framework-Agnostic Ingestion + Runtime Selection
+
+1. **Ingestion**: Validate against core schema only (universal compatibility)
+2. **Job Creation**: Select frameworks at runtime for cross-framework analysis
+3. **Processing**: Any framework can analyze any corpus
+4. **Results Storage**: Framework-specific results stored in `framework_data.analysis_results`
+5. **Migration Check**: Detect `schema_version` mismatches 
+6. **Auto-upgrade**: Run migration scripts if configured
 
 ## Schema Registry
 
 | Schema | Current Version | Status | Notes |
 |--------|----------------|---------|-------|
 | Core | 1.0.0 | Stable | Universal document+chunk format |
-| Civic Virtue | 1.0.0 | Stable | Dignity, Truth, Hope, etc. wells |
-| Moral-Rhetorical Posture | 1.0.0 | Draft | Dipole marker framework |
-| Political Spectrum | 1.0.0 | Draft | Ideological lexicon mapping |
+| Civic Virtue Extension | 1.0.0 | Stable | Dignity, Truth, Hope, etc. wells - framework_data structure |
+| Political Spectrum Extension | 1.0.0 | Stable | Liberal, Conservative, Libertarian, Authoritarian - framework_data structure |
+| Moral-Rhetorical Posture Extension | 1.0.0 | Stable | Restorative, Retributive, etc. postures - framework_data structure |
 
 ## Git Tags
 

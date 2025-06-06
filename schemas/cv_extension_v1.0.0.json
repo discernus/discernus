@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-gravity.github.io/schemas/cv_extension_v1.0.0.json",
+  "title": "Civic Virtue Framework Extension Schema",
+  "description": "Extension schema for Civic Virtue framework-specific data in framework_data field",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "ingestion_metadata": {
+      "type": "object",
+      "description": "Framework-specific metadata populated during ingestion",
+      "properties": {
+        "pre_analysis_tags": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Human-assigned tags for framework relevance"
+        },
+        "language_complexity": {
+          "type": "string",
+          "enum": ["simple", "moderate", "complex", "academic"],
+          "description": "Assessed complexity level for framework analysis"
+        },
+        "content_type": {
+          "type": "string",
+          "enum": ["narrative", "argument", "description", "mixed"],
+          "description": "Primary content type for civic virtue analysis"
+        },
+        "historical_context": {
+          "type": "object",
+          "description": "Historical context relevant to civic virtue analysis",
+          "properties": {
+            "era": {"type": "string"},
+            "political_context": {"type": "string"},
+            "social_movement": {"type": "string"}
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "preprocessing_markers": {
+      "type": "object",
+      "description": "Pre-computed language markers that assist framework analysis",
+      "properties": {
+        "dignity_markers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified phrases indicating dignity themes"
+        },
+        "tribalism_markers": {
+          "type": "array", 
+          "items": {"type": "string"},
+          "description": "Pre-identified phrases indicating tribal language"
+        },
+        "truth_indicators": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified evidence-based language"
+        },
+        "manipulation_flags": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified manipulative language patterns"
+        },
+        "justice_themes": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified justice and fairness language"
+        },
+        "resentment_themes": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified grievance and resentment language"
+        }
+      },
+      "additionalProperties": true
+    },
+    "analysis_results": {
+      "type": "object",
+      "description": "Framework analysis results populated during processing",
+      "properties": {
+        "well_scores": {
+          "type": "object",
+          "description": "Individual well scores (0.0-1.0) for each civic virtue well",
+          "properties": {
+            "dignity": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "truth": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "hope": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "justice": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "pragmatism": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "tribalism": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "manipulation": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "fantasy": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "resentment": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "fear": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+          },
+          "additionalProperties": false
+        },
+        "narrative_position": {
+          "type": "object",
+          "description": "Calculated narrative position on the civic virtue ellipse",
+          "properties": {
+            "x": {"type": "number"},
+            "y": {"type": "number"},
+            "ellipse_distance": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+          },
+          "required": ["x", "y", "ellipse_distance"],
+          "additionalProperties": false
+        },
+        "civic_metrics": {
+          "type": "object",
+          "description": "Civic virtue framework-specific calculated metrics",
+          "properties": {
+            "center_of_mass": {
+              "type": "object",
+              "properties": {
+                "x": {"type": "number"},
+                "y": {"type": "number"}
+              },
+              "required": ["x", "y"]
+            },
+            "narrative_polarity_score": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Distance from center normalized by ellipse dimensions"
+            },
+            "directional_purity_score": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Consistency of integrative vs disintegrative pull"
+            },
+            "civic_elevation": {
+              "type": "number",
+              "description": "Vertical position indicating overall civic virtue orientation"
+            },
+            "tier_dominance": {
+              "type": "object",
+              "description": "Relative influence of primary/secondary/tertiary tiers",
+              "properties": {
+                "primary_weight": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+                "secondary_weight": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+                "tertiary_weight": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+              }
+            }
+          },
+          "additionalProperties": true
+        },
+        "confidence_scores": {
+          "type": "object",
+          "description": "Analysis confidence and reliability metrics",
+          "properties": {
+            "overall_confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "well_confidence": {
+              "type": "object",
+              "description": "Per-well confidence scores",
+              "additionalProperties": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+            },
+            "framework_suitability": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "How well this framework applies to the text"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "ingestion_metadata": {
+        "pre_analysis_tags": ["political_speech", "moral_argument"],
+        "language_complexity": "moderate",
+        "content_type": "narrative",
+        "historical_context": {
+          "era": "post_cold_war",
+          "political_context": "democratic_transition"
+        }
+      },
+      "preprocessing_markers": {
+        "dignity_markers": ["individual worth", "human rights"],
+        "truth_indicators": ["evidence shows", "research indicates"]
+      },
+      "analysis_results": {
+        "well_scores": {
+          "dignity": 0.85,
+          "truth": 0.72,
+          "tribalism": 0.15
+        },
+        "narrative_position": {
+          "x": 0.34,
+          "y": 0.67,
+          "ellipse_distance": 0.73
+        },
+        "civic_metrics": {
+          "narrative_polarity_score": 0.73,
+          "directional_purity_score": 0.82,
+          "civic_elevation": 0.67
+        }
+      }
+    }
+  ]
+} 

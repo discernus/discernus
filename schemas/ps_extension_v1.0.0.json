@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-gravity.github.io/schemas/ps_extension_v1.0.0.json",
+  "title": "Political Spectrum Framework Extension Schema",
+  "description": "Extension schema for Political Spectrum framework-specific data in framework_data field",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "ingestion_metadata": {
+      "type": "object",
+      "description": "Framework-specific metadata populated during ingestion",
+      "properties": {
+        "political_era": {
+          "type": "string",
+          "description": "Political era for contextual analysis"
+        },
+        "author_affiliation": {
+          "type": "string",
+          "enum": ["democrat", "republican", "independent", "third_party", "nonpartisan", "unknown"],
+          "description": "Known political affiliation of the author"
+        },
+        "policy_domains": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["economic", "social", "foreign_policy", "environmental", "healthcare", "education", "defense", "other"]
+          },
+          "description": "Primary policy domains discussed in the text"
+        },
+        "geographic_context": {
+          "type": "string",
+          "enum": ["local", "state", "national", "international"],
+          "description": "Geographic scope of political discussion"
+        }
+      },
+      "additionalProperties": true
+    },
+    "preprocessing_markers": {
+      "type": "object",
+      "description": "Pre-computed ideological markers for political spectrum analysis",
+      "properties": {
+        "liberal_indicators": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified progressive/liberal language patterns"
+        },
+        "conservative_indicators": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified conservative/traditional language patterns"
+        },
+        "libertarian_indicators": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified individual liberty/small government language"
+        },
+        "authoritarian_indicators": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Pre-identified strong government/control language"
+        },
+        "economic_policy_markers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Economic policy position indicators"
+        },
+        "social_policy_markers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Social policy position indicators"
+        }
+      },
+      "additionalProperties": true
+    },
+    "analysis_results": {
+      "type": "object",
+      "description": "Political spectrum analysis results",
+      "properties": {
+        "well_scores": {
+          "type": "object",
+          "description": "Individual well scores (0.0-1.0) for each political spectrum dimension",
+          "properties": {
+            "solidarity": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "equality": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "democracy": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "cosmopolitan": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "progressive": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "competition": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "tradition": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "control": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "nationalist": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "conservative": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+          },
+          "additionalProperties": false
+        },
+        "narrative_position": {
+          "type": "object",
+          "description": "Position on the political spectrum ellipse",
+          "properties": {
+            "x": {"type": "number"},
+            "y": {"type": "number"},
+            "ellipse_distance": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+          },
+          "required": ["x", "y", "ellipse_distance"],
+          "additionalProperties": false
+        },
+        "political_metrics": {
+          "type": "object",
+          "description": "Political spectrum-specific calculated metrics",
+          "properties": {
+            "left_right_position": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Traditional left-right political positioning (-1=left, +1=right)"
+            },
+            "authoritarian_libertarian_position": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Authority orientation (-1=libertarian, +1=authoritarian)"
+            },
+            "economic_orientation": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Economic policy orientation (-1=progressive, +1=conservative)"
+            },
+            "social_orientation": {
+              "type": "number",
+              "minimum": -1.0,
+              "maximum": 1.0,
+              "description": "Social policy orientation (-1=liberal, +1=conservative)"
+            },
+            "ideological_consistency": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0,
+              "description": "Internal consistency of political positions"
+            }
+          },
+          "additionalProperties": true
+        },
+        "classification_results": {
+          "type": "object",
+          "description": "Discrete classification results",
+          "properties": {
+            "primary_quadrant": {
+              "type": "string",
+              "enum": ["liberal_democrat", "conservative_republican", "libertarian", "authoritarian"],
+              "description": "Primary political quadrant classification"
+            },
+            "secondary_tendencies": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Secondary political tendencies detected"
+            },
+            "confidence_level": {
+              "type": "string",
+              "enum": ["high", "medium", "low"],
+              "description": "Confidence in political classification"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "ingestion_metadata": {
+        "political_era": "modern_polarization",
+        "author_affiliation": "democrat",
+        "policy_domains": ["economic", "social"],
+        "geographic_context": "national"
+      },
+      "preprocessing_markers": {
+        "liberal_indicators": ["social justice", "wealth inequality"],
+        "economic_policy_markers": ["progressive taxation", "social safety net"]
+      },
+      "analysis_results": {
+        "well_scores": {
+          "solidarity": 0.78,
+          "equality": 0.82,
+          "competition": 0.25
+        },
+        "narrative_position": {
+          "x": -0.45,
+          "y": 0.32,
+          "ellipse_distance": 0.67
+        },
+        "political_metrics": {
+          "left_right_position": -0.65,
+          "economic_orientation": -0.72,
+          "ideological_consistency": 0.84
+        },
+        "classification_results": {
+          "primary_quadrant": "liberal_democrat",
+          "confidence_level": "high"
+        }
+      }
+    }
+  ]
+} 

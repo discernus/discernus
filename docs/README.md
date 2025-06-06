@@ -1,72 +1,83 @@
-# Documentation Overview
+# Narrative Gravity Analysis - Documentation Index
 
-This directory contains all documentation for the Narrative Gravity Maps project, organized for clarity and maintainability.
+## 📚 Documentation Overview
 
-## 📁 Directory Structure
+This directory contains comprehensive documentation for the Narrative Gravity Analysis system, organized into clear categories for different audiences.
 
-### `/development/` - Active Development Documentation
-Current, actively maintained documentation for developers and researchers:
+## 🏗️ Architecture Documentation
 
-- **PAPER_PUBLICATION_CHECKLIST.md** - Checklist for preparing repository for academic paper publication
-- **USER_STORIES.md** - Detailed user workflows and feature requirements analysis
-- **MODULAR_ARCHITECTURE.md** - Technical documentation of the modular system architecture
-- **STORAGE_ARCHITECTURE.md** - Documentation of data organization and storage design
-- **DEVELOPMENT_ROADMAP.md** - Future development priorities and planned features
-- **DOCS_CLEANUP_PLAN.md** - This cleanup reorganization plan
+**Core System Architecture**
+- [`FRAMEWORK_ARCHITECTURE.md`](architecture/FRAMEWORK_ARCHITECTURE.md) - Complete framework architecture overview
+- [`MODULAR_ARCHITECTURE.md`](architecture/MODULAR_ARCHITECTURE.md) - System modular design
+- [`STORAGE_ARCHITECTURE.md`](architecture/STORAGE_ARCHITECTURE.md) - Database and storage design
+- [`COMPREHENSIVE_ARCHITECTURAL_REVIEW.md`](architecture/COMPREHENSIVE_ARCHITECTURAL_REVIEW.md) - Complete system review
 
-### `/examples/` - User Guides and Tutorials
-User-facing documentation for getting started:
+**Implementation Details**
+- [`FRAMEWORK_IMPLEMENTATION_SUMMARY.md`](architecture/FRAMEWORK_IMPLEMENTATION_SUMMARY.md) - Framework implementation details
+- [`PROMPT_ARCHITECTURE.md`](architecture/PROMPT_ARCHITECTURE.md) - Unified prompt template system
 
-- **STREAMLIT_QUICKSTART.md** - Quick start guide for the web interface
-- **WORKFLOW_DEMO.md** - Step-by-step workflow demonstration
+## 👥 User Guides
 
-### `/archive/` - Historical Documentation
-Preserved development history and completed work:
+**Getting Started**
+- [`EPIC_1_COMPLETION_SUMMARY.md`](user-guides/EPIC_1_COMPLETION_SUMMARY.md) - System capabilities overview
+- [`GOLDEN_SET_SUMMARY.md`](user-guides/GOLDEN_SET_SUMMARY.md) - Validation dataset information
+- [`CORPUS_TOOLING_SUMMARY.md`](user-guides/CORPUS_TOOLING_SUMMARY.md) - Text corpus management tools
 
-#### `/archive/completed_fixes/`
-Documentation of completed fixes and improvements:
-- FRAMEWORK_INJECTION_FIX.md
-- VISUALIZATION_FIXES.md
-- MODEL_NAME_FIX.md
-- PROMPT_AND_FILENAME_IMPROVEMENTS.md
-- UX_CLEANUP_OPTIONAL_TEXT.md
-- CLI_JSON_FIXES.md
-- IMPROVED_INTERFACE_NOTES.md
-- ROBUST_FRAMEWORK_NAMES.md
-- TEST_SAMPLE_JSON.md
+**Data Management**
+- [`PARAGRAPH_FIX_VALIDATION.md`](user-guides/PARAGRAPH_FIX_VALIDATION.md) - Text preprocessing validation
 
-#### `/archive/development_history/`
-Historical project snapshots and cleanup records:
-- PROJECT_CLEANUP_v2025.06.04.md
-- PROJECT_SNAPSHOT_v2.0.md
+## 🔌 API Documentation
 
-## 📋 Documentation Guidelines
+**Data Formats**
+- [`CSV_FORMAT_STANDARD.md`](api/CSV_FORMAT_STANDARD.md) - Standard CSV format specification
 
-### For Contributors
-- **Current work:** Add new documentation to `/development/`
-- **User guides:** Add tutorials and examples to `/examples/`
-- **Completed work:** Move finished development docs to `/archive/completed_fixes/`
-- **Historical records:** Preserve in `/archive/development_history/`
+**Integration Examples**
+- [`examples/`](examples/) - Code examples and integration samples
 
-### For Users
-- **Getting started:** Begin with `/examples/` directory
-- **Technical details:** Reference `/development/` for architecture and design
-- **Paper replication:** See main repository `PAPER_REPLICATION.md`
+## 🛠️ Development Documentation
 
-## 🎯 Benefits of This Organization
+**Project Management**
+- [`development/DEVELOPMENT_ROADMAP.md`](development/DEVELOPMENT_ROADMAP.md) - Development planning
+- [`development/USER_STORIES.md`](development/USER_STORIES.md) - Feature requirements
+- [`development/PAPER_PUBLICATION_CHECKLIST.md`](development/PAPER_PUBLICATION_CHECKLIST.md) - Academic publication prep
 
-1. **Clear Separation** - Active vs. historical documentation
-2. **Easier Navigation** - Users find relevant docs quickly
-3. **Reduced Clutter** - Development folder focuses on current priorities
-4. **Historical Preservation** - Important development history maintained
-5. **Better Onboarding** - New contributors see current docs first
+**Development Process**
+- [`development/DEVELOPMENT_SNAPSHOT_v2025.06.04.2.md`](development/DEVELOPMENT_SNAPSHOT_v2025.06.04.2.md) - Historical snapshot
+- [`development/DOCS_CLEANUP_PLAN.md`](development/DOCS_CLEANUP_PLAN.md) - Documentation organization plan
 
-## 📈 Recent Changes
+## 📋 Quick Reference
 
-**June 2025 Cleanup:**
-- Moved 9 completed fix documents to archive
-- Moved 2 historical snapshots to archive
-- Maintained 6 active development documents
-- Created clear organizational structure
+### **For Researchers**
+1. Start with [`FRAMEWORK_ARCHITECTURE.md`](architecture/FRAMEWORK_ARCHITECTURE.md) for system overview
+2. Review [`EPIC_1_COMPLETION_SUMMARY.md`](user-guides/EPIC_1_COMPLETION_SUMMARY.md) for capabilities
+3. Check [`GOLDEN_SET_SUMMARY.md`](user-guides/GOLDEN_SET_SUMMARY.md) for validation data
 
-This organization supports both current development needs and long-term project maintenance. 
+### **For Developers**
+1. Read [`MODULAR_ARCHITECTURE.md`](architecture/MODULAR_ARCHITECTURE.md) for system design
+2. Review [`PROMPT_ARCHITECTURE.md`](architecture/PROMPT_ARCHITECTURE.md) for prompt system
+3. Check [`development/DEVELOPMENT_ROADMAP.md`](development/DEVELOPMENT_ROADMAP.md) for roadmap
+
+### **For Data Scientists**
+1. Start with [`CORPUS_TOOLING_SUMMARY.md`](user-guides/CORPUS_TOOLING_SUMMARY.md) for data tools
+2. Review [`CSV_FORMAT_STANDARD.md`](api/CSV_FORMAT_STANDARD.md) for data formats
+3. Check [`examples/`](examples/) for integration code
+
+## 🔄 Documentation Status
+
+- ✅ **Architecture**: Complete and up-to-date
+- ✅ **User Guides**: Complete with Epic 1 validation
+- ✅ **API Documentation**: Complete with format standards
+- 🟡 **Development**: Ongoing updates with roadmap
+- ✅ **Examples**: Code samples available
+
+## 📞 Getting Help
+
+- **System Architecture Questions**: See [`architecture/`](architecture/) documentation
+- **Usage Questions**: Check [`user-guides/`](user-guides/) directory
+- **API Integration**: Review [`api/`](api/) and [`examples/`](examples/) directories
+- **Development**: See [`development/`](development/) roadmap and planning docs
+
+---
+
+*Last Updated: January 2025*
+*Documentation Version: v1.1 (Unified Prompt Architecture)* 

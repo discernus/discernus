@@ -2,10 +2,19 @@
 """
 Narrative Gravity Wells Prompt Generator
 
-Generates LLM analysis prompts from dipole configuration files.
+Generates LLM analysis prompts from framework configurations using the unified template system.
 This enables easy customization and extensibility of the framework.
 
-Usage: python generate_prompt.py [--config-dir config] [--output prompt.txt]
+Usage: python generate_prompt.py [--framework civic_virtue] [--mode interactive] [--output prompt.txt]
+
+MIGRATION NOTICE:
+This script now uses the new unified template system (src/prompts/template_manager.py).
+The old PromptGenerator class is maintained for backward compatibility but is deprecated.
+
+NEW RECOMMENDED USAGE:
+    from src.prompts.template_manager import PromptTemplateManager
+    template_manager = PromptTemplateManager()
+    prompt = template_manager.generate_interactive_prompt(framework)
 """
 
 import json
@@ -13,6 +22,8 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
+
+from src.prompts.template_manager import PromptTemplateManager, PromptMode
 
 def load_dipoles(config_dir: str = "config") -> Dict:
     """Load dipole definitions from configuration file."""
@@ -36,13 +47,25 @@ def load_framework(config_dir: str = "config") -> Dict:
 
 class PromptGenerator:
     """
-    Wrapper class for prompt generation functionality.
-    Provides a class-based interface for Streamlit integration.
+    DEPRECATED: Legacy wrapper for backward compatibility.
+    
+    NEW CODE SHOULD USE: src.prompts.template_manager.PromptTemplateManager
+    
+    This class provides backward compatibility for existing code that uses
+    the old PromptGenerator interface. It wraps the new PromptTemplateManager.
     """
     
     def __init__(self, config_dir: str = "config", framework_name: str = None):
+        print("⚠️  DEPRECATION WARNING: PromptGenerator is deprecated.")
+        print("   Use src.prompts.template_manager.PromptTemplateManager instead.")
+        print("   See PROMPT_ARCHITECTURE.md for migration guide.")
+        
         self.config_dir = config_dir
         self.framework_name = framework_name
+        
+        # Initialize the new template manager
+        self.template_manager = PromptTemplateManager()
+        
         if not framework_name:
             # Try to get framework name from the files themselves
             try:
@@ -57,293 +80,103 @@ class PromptGenerator:
                 try:
                     from framework_manager import FrameworkManager
                     manager = FrameworkManager()
-                    self.framework_name = manager.get_active_framework() or "unknown"
+                    self.framework_name = manager.get_active_framework() or "civic_virtue"
                 except:
-                    self.framework_name = "unknown"
+                    self.framework_name = "civic_virtue"
         
     def generate_interactive_prompt(self) -> str:
-        """Generate an interactive workflow prompt."""
-        dipoles = load_dipoles(self.config_dir)
-        framework = load_framework(self.config_dir)
-        return generate_prompt(dipoles, framework, interactive=True, framework_name=self.framework_name)
+        """Generate an interactive workflow prompt using new template system."""
+        return self.template_manager.generate_interactive_prompt(self.framework_name)
     
     def generate_batch_prompt(self) -> str:
-        """Generate a batch processing prompt."""
-        dipoles = load_dipoles(self.config_dir)
-        framework = load_framework(self.config_dir)
-        return generate_prompt(dipoles, framework, interactive=False, framework_name=self.framework_name)
+        """Generate a batch processing prompt using new template system."""
+        sample_text = "Sample text for batch processing."
+        return self.template_manager.generate_api_prompt(sample_text, self.framework_name)
     
     def generate_simple_prompt(self) -> str:
-        """Generate a simple single-analysis prompt."""
-        dipoles = load_dipoles(self.config_dir)
-        framework = load_framework(self.config_dir)
-        return generate_prompt(dipoles, framework, interactive=False, framework_name=self.framework_name)
+        """Generate a simple single-analysis prompt using new template system."""
+        sample_text = "Sample text for simple analysis."
+        return self.template_manager.generate_api_prompt(sample_text, self.framework_name)
 
 def generate_prompt(dipoles: Dict, framework: Dict, interactive: bool = True, framework_name: str = None) -> str:
-    """Generate LLM prompt from dipole and framework configurations."""
+    """
+    DEPRECATED: Legacy function for backward compatibility.
     
-    timestamp = datetime.now().strftime("%Y.%m.%d.%H.%M")
+    NEW CODE SHOULD USE: PromptTemplateManager.generate_*_prompt() methods
     
-    # Clean version strings to avoid double-v prefixes
-    dipole_version = dipoles.get('version', 'unknown')
-    framework_version = framework.get('version', 'unknown')
+    This function provides backward compatibility by using the new template system.
+    """
+    print("⚠️  DEPRECATION WARNING: generate_prompt() function is deprecated.")
+    print("   Use PromptTemplateManager methods instead.")
     
-    # Remove existing 'v' prefix if present to avoid duplication
-    if dipole_version.startswith('v'):
-        dipole_version = dipole_version[1:]
-    if framework_version.startswith('v'):
-        framework_version = framework_version[1:]
+    template_manager = PromptTemplateManager()
     
-    prompt_lines = []
-    
-    # Header
-    if interactive:
-        prompt_lines.extend([
-            "Gravity Wells Scoring Prompt - Interactive Analysis Workflow",
-            f"Version: {timestamp} (Generated from dipoles v{dipole_version}, framework v{framework_version})",
-            "",
-            "## Model Identification:",
-            "",
-            "**IMPORTANT: Before we begin the analysis, I need to confirm model identification information:**",
-            "",
-            "Can you reliably identify your exact model name and version number? If you're uncertain about either:",
-            "- Your exact model name (e.g., 'ChatGPT', 'Claude', 'Gemini')",
-            "- Your specific version (e.g., 'GPT-4', '3.5 Sonnet', 'Pro')",
-            "",
-            "Please respond with: 'I cannot reliably identify my model details' and I will ask the user to provide this information.",
-            "",
-            "If you CAN reliably identify both your model name and version, please proceed with the analysis workflow below.",
-            "",
-            "---",
-            "",
-            "## Initial Instructions:",
-            "",
-            "You are an expert narrative analyst specializing in narrative gravity wells analysis. This is an interactive workflow where you'll analyze multiple persuasive texts and provide comparative insights.",
-            "",
-            "**WORKFLOW:**",
-            "1. Start by asking the user to upload their first narrative file for analysis",
-            "2. After each analysis, provide both the JSON output AND separate commentary",
-            "3. Ask for additional files to build comparative analysis",
-            "4. For each subsequent file, provide comparative insights vs all previous files",
-            "",
-            "**FILE HANDLING:**",
-            "- Please format your JSON response in a code block for easy copy/paste",
-            "- Use ```json code blocks to make the output easily copyable",
-            "- Always provide the analysis commentary outside the JSON code block",
-            "",
-            "---",
-            "",
-            "## Analysis Instructions:",
-            "",
-            "When the user uploads a file, analyze it using the following framework:",
-            "",
-                    "**CRITICAL SCORING REQUIREMENTS:**",
-        "",
-        "🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨",
-        "- Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)",
-        "- DO NOT use integers 1-10 or any other scale",
-        "- DO NOT use percentages or any scale other than 0.0-1.0",
-        "- Example valid scores: 0.1, 0.4, 0.6, 0.8, 1.0",
-        "- Example INVALID scores: 1, 5, 10, 25%, 0.5/1.0",
-        "",
-        "Score each narrative on the following gravity wells (0.0 = no presence, 1.0 = maximum presence):",
-            ""
-        ])
-    else:
-        prompt_lines.extend([
-            "Narrative Gravity Wells Analysis Prompt",
-            f"Version: {timestamp} (Generated from dipoles v{dipole_version}, framework v{framework_version})",
-            "",
-            "You are an expert narrative analyst. Analyze the provided text using the narrative gravity wells framework.",
-            "",
-                    "**CRITICAL SCORING REQUIREMENTS:**",
-        "",
-        "🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨",
-        "- Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)",
-        "- DO NOT use integers 1-10 or any other scale",
-        "- DO NOT use percentages or any scale other than 0.0-1.0",
-        "- Example valid scores: 0.1, 0.4, 0.6, 0.8, 1.0",
-        "- Example INVALID scores: 1, 5, 10, 25%, 0.5/1.0",
-        "",
-        "Score the narrative on each of the following gravity wells (0.0 = no presence, 1.0 = maximum presence):",
-            ""
-        ])
-    
-    # Generate dipole descriptions
-    for dipole in dipoles['dipoles']:
-        positive = dipole['positive']
-        negative = dipole['negative']
-        
-        # Format language cues outside f-string to avoid backslash issues
-        positive_cues = ', '.join(['"' + cue + '"' for cue in positive['language_cues']])
-        negative_cues = ', '.join(['"' + cue + '"' for cue in negative['language_cues']])
-        
-        prompt_lines.extend([
-            f"**{positive['name']} vs. {negative['name']} ({dipole['name']} Dimension)**",
-            f"- {positive['name']}: {positive['description']}",
-            f"  Language cues: {positive_cues}",
-            f"- {negative['name']}: {negative['description']}",
-            f"  Language cues: {negative_cues}",
-            ""
-        ])
-    
-    # Analysis process
-    prompt_lines.extend([
-        "**CONCEPTUAL ASSESSMENT METHODOLOGY:**",
-        "",
-        "This framework employs a **conceptual assessment approach** that prioritizes semantic understanding over surface-level keyword counting. You should:",
-        "",
-        "1. **Identify Underlying Frameworks**: First, identify the underlying frameworks and values being expressed in each section of the narrative, regardless of specific language used.",
-        "",
-        "2. **Extract Central Themes**: Determine which themes are central to the overall argument vs. merely mentioned in passing. Focus on what drives the core narrative logic.",
-        "",
-        "3. **Use Language Cues as Indicators**: The provided language cues are illustrative examples, not exhaustive lists. Look for conceptually similar terms, phrases, and ideas that convey the same orientations.",
-        "",
-        "4. **Assess Conceptual Strength**: Score based on how strongly each orientation shapes the narrative's fundamental structure and arguments, not just frequency of related words.",
-        "",
-        "**THREE-STEP ANALYSIS PROCESS:**",
-        "1. **Theme Extraction**: Identify the core themes and values driving the narrative's central arguments",
-        "2. **Centrality Assessment**: Determine which themes are foundational vs. peripheral to the overall message",
-        "3. **Holistic Scoring**: Assign scores based on conceptual strength and centrality, not linguistic frequency",
-        "",
-        "**ANALYSIS PROCESS:**",
-        "1. Assign each well a score between 0.0-1.0 (one decimal place)",
-        "2. Write concise analysis summary (maximum 500 characters)",
-        "3. Generate JSON output with proper metadata",
-        "",
-        "🚨 **CRITICAL JSON FORMAT REQUIREMENTS** 🚨",
-        "- The JSON format shown below is MANDATORY and MUST BE FOLLOWED EXACTLY",
-        "- DO NOT modify the structure, field names, or nesting",
-        "- DO NOT add extra fields or remove required fields",
-        "- DO NOT use different score scales (only 0.0-1.0 decimal values)",
-        "- The visualization software will FAIL if the format is incorrect",
-        "- Academic reproducibility depends on EXACT format compliance",
-        "",
-        "**MODEL IDENTIFICATION FOR JSON:**",
-        "- If you are a direct model (e.g., ChatGPT, Claude): Use your actual model name and version",
-        "- If you are a platform using underlying models (e.g., Perplexity using Claude): Identify the underlying model if known, otherwise identify yourself",
-        "- If you cannot reliably self-identify or determine the underlying model: Ask the user to provide this information",
-        "- Format: 'model_name': 'Exact Model Name', 'model_version': 'Exact Version'",
-        "- Note: Users may manually correct model identification after generation for academic accuracy",
-        "",
-        "**JSON OUTPUT FORMAT - FOLLOW EXACTLY:**",
-        "",
-        "⚠️  **COPY THIS STRUCTURE EXACTLY - Replace only the values in [brackets]**",
-        "⚠️  **Use DECIMAL scores 0.0-1.0 in the scores section**",
-        "⚠️  **Do NOT change field names, structure, or add/remove fields**",
-        "",
-        "```json",
-        "{",
-        "    \"metadata\": {",
-        "        \"title\": \"[Narrative Title] (analyzed by [Model Name])\",",
-        "        \"filename\": \"YYYY_MM_DD_HHMMSS_[model_name]_analysis.json\",",
-        "        \"model_name\": \"[Exact Model Name - either self-identified or user-provided]\",",
-        "        \"model_version\": \"[Exact Version - either self-identified or user-provided]\",",
-        f"        \"prompt_version\": \"{timestamp}\",",
-        f"        \"dipoles_version\": \"v{dipole_version}\",",
-        f"        \"framework_version\": \"v{framework_version}\",",
-        f"        \"framework_name\": \"{framework_name or 'unknown'}\",",
-        "        \"summary\": \"[Your 500-character analysis summary]\"",
-        "    },",
-        "    \"scores\": {"
-    ])
-    
-    # Generate well list for JSON format
-    well_names = []
-    for dipole in dipoles['dipoles']:
-        well_names.append(dipole['positive']['name'])
-        well_names.append(dipole['negative']['name'])
-    
-    for i, well_name in enumerate(well_names):
-        comma = "," if i < len(well_names) - 1 else ""
-        prompt_lines.append(f"        \"{well_name}\": 0.0{comma}")
-    
-    prompt_lines.extend([
-        "    }",
-        "}",
-        "```",
-        ""
-    ])
+    # Determine framework name
+    if not framework_name:
+        framework_name = dipoles.get('framework_name') or framework.get('framework_name') or "civic_virtue"
     
     if interactive:
-        prompt_lines.extend([
-            "**RESPONSE STRUCTURE:**",
-            "1. **JSON Output** (in ```json code block for easy copy/paste):",
-            "2. **Analysis Commentary** (outside JSON code block):",
-            "   - **Key themes identified**: Core frameworks and values driving the narrative",
-            "   - **Theme centrality analysis**: Which themes are foundational vs. peripheral to the overall argument",
-            "   - **Conceptual reasoning**: Why scores were assigned based on semantic strength and narrative importance",
-            "   - **Notable rhetorical strategies**: How thematic appeals are constructed and deployed",
-            "   - **Overall framing assessment**: Holistic evaluation of the narrative's positioning within the analytical framework",
-            "3. **Comparative Analysis** (for 2nd+ files):",
-            "   - How this narrative compares to previous files",
-            "   - Key differences in positioning and thematic emphasis",
-            "   - Evolution of themes across analyses",
-            "4. **Request for next file** (unless user indicates they're done)",
-            "",
-            "---",
-            "",
-            "## Getting Started:",
-            "",
-            "**STEP 1: Model Identification**",
-            "First, please confirm whether you can reliably identify your model name and version. If not, I'll ask the user to provide this information.",
-            "",
-            "**STEP 2: Analysis Workflow**", 
-            "Once model information is confirmed, please ask the user to upload their first narrative file for narrative gravity wells analysis. I'll provide both the JSON output and detailed commentary, then we can continue with additional files for comparative analysis.",
-            "",
-            "Can you reliably identify your exact model name and version number?"
-        ])
+        return template_manager.generate_interactive_prompt(framework_name)
     else:
-        prompt_lines.extend([
-            "**INSTRUCTIONS:**",
-            "1. Read the provided text carefully",
-            "2. Score each well based on conceptual strength, not keyword frequency (0.0-1.0 scale ONLY)",
-            "3. Provide the JSON output as specified above with EXACT format compliance",
-            "4. Include a brief analysis summary explaining your scoring rationale",
-            "",
-            "🔥 **FINAL REMINDER: Use 0.0-1.0 decimal scores. NO exceptions. NO other scales.** 🔥"
-        ])
-    
-    return '\n'.join(prompt_lines)
+        sample_text = "Sample text for prompt generation."
+        return template_manager.generate_api_prompt(sample_text, framework_name)
 
 def main():
-    """Generate prompt from configuration files."""
-    parser = argparse.ArgumentParser(description="Generate LLM prompts from configuration")
-    parser.add_argument("--config-dir", default="config", help="Configuration directory")
+    """Generate prompt using unified template system."""
+    parser = argparse.ArgumentParser(description="Generate LLM prompts using unified template system")
+    parser.add_argument("--framework", default="civic_virtue", 
+                       help="Framework to use (civic_virtue, political_spectrum, moral_rhetorical_posture)")
+    parser.add_argument("--mode", choices=["interactive", "api", "batch"], default="interactive",
+                       help="Prompt generation mode")
     parser.add_argument("--output", help="Output file path")
-    parser.add_argument("--interactive", action="store_true", default=True, 
-                       help="Generate interactive workflow prompt")
-    parser.add_argument("--simple", action="store_true", 
-                       help="Generate simple single-analysis prompt")
+    parser.add_argument("--experiment-id", help="Experimental prompt variant ID")
+    parser.add_argument("--variant", help="Experimental variant name")
     
     args = parser.parse_args()
     
-    # Load configurations
+    # Initialize template manager
+    template_manager = PromptTemplateManager()
+    
     try:
-        dipoles = load_dipoles(args.config_dir)
-        framework = load_framework(args.config_dir)
-    except FileNotFoundError as e:
-        print(f"❌ Configuration error: {e}")
+        # Generate prompt based on mode
+        if args.experiment_id and args.variant:
+            # Experimental mode requires sample text
+            sample_text = "Sample text for experimental prompt generation."
+            prompt = template_manager.generate_experimental_prompt(
+                sample_text, args.framework, args.experiment_id, args.variant
+            )
+            mode_description = f"Experimental ({args.experiment_id}/{args.variant})"
+        elif args.mode == "interactive":
+            prompt = template_manager.generate_interactive_prompt(args.framework)
+            mode_description = "Interactive"
+        elif args.mode == "api":
+            # API mode requires sample text
+            sample_text = "Sample text for API prompt generation."
+            prompt = template_manager.generate_api_prompt(sample_text, args.framework)
+            mode_description = "API"
+        else:  # batch
+            sample_text = "Sample text for batch prompt generation."
+            prompt = template_manager.generate_api_prompt(sample_text, args.framework)
+            mode_description = "Batch"
+        
+        # Output
+        if args.output:
+            output_path = Path(args.output)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            with open(output_path, 'w') as f:
+                f.write(prompt)
+            
+            print(f"✅ Prompt generated: {output_path}")
+            print(f"   Framework: {args.framework}")
+            print(f"   Mode: {mode_description}")
+            print(f"   Template System: Unified v1.0")
+        else:
+            print(prompt)
+        
+    except Exception as e:
+        print(f"❌ Error generating prompt: {e}")
         return 1
-    
-    # Generate prompt
-    interactive_mode = not args.simple
-    prompt = generate_prompt(dipoles, framework, interactive_mode)
-    
-    # Output
-    if args.output:
-        output_path = Path(args.output)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        
-        with open(output_path, 'w') as f:
-            f.write(prompt)
-        
-        print(f"✅ Prompt generated: {output_path}")
-        print(f"   Mode: {'Interactive' if interactive_mode else 'Simple'}")
-        print(f"   Dipoles: {len(dipoles['dipoles'])} pairs")
-        print(f"   Wells: {len(dipoles['dipoles']) * 2} total")
-    else:
-        print(prompt)
     
     return 0
 

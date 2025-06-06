@@ -24,7 +24,7 @@ if 'narrative_gravity_elliptical' in sys.modules:
 # Import our existing modules
 from narrative_gravity_elliptical import NarrativeGravityWellsElliptical
 from framework_manager import FrameworkManager
-from generate_prompt import PromptGenerator
+from src.prompts.template_manager import PromptTemplateManager
 
 # Configure page
 st.set_page_config(
@@ -164,8 +164,8 @@ def single_text_analysis():
         if st.button("📋 Generate Analysis Prompt", type="primary"):
             try:
                 current_framework = st.session_state.current_framework
-                generator = PromptGenerator(framework_name=current_framework)
-                prompt = generator.generate_interactive_prompt()
+                template_manager = PromptTemplateManager()
+                prompt = template_manager.generate_interactive_prompt(current_framework)
                 
                 # Store prompt in session state so it persists
                 st.session_state.generated_prompt = prompt

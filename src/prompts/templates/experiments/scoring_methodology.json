@@ -1,0 +1,32 @@
+{
+  "description": "Experiment with different scoring methodologies for narrative gravity analysis",
+  "created": "2025-01-15",
+  "purpose": "Test whether explicit scoring examples improve LLM accuracy and consistency",
+  
+  "control": {
+    "description": "Standard scoring methodology without examples",
+    "scoring_requirements": "**CRITICAL SCORING REQUIREMENTS:**\n\n🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨\n- Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)\n- DO NOT use integers 1-10 or any other scale\n- DO NOT use percentages or any scale other than 0.0-1.0\n- Example valid scores: 0.1, 0.4, 0.6, 0.8, 1.0\n- Example INVALID scores: 1, 5, 10, 25%, 0.5/1.0\n\n"
+  },
+  
+  "treatment_a": {
+    "description": "Enhanced scoring with concrete examples and thresholds",
+    "scoring_requirements": "**CRITICAL SCORING REQUIREMENTS:**\n\n🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨\n- Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)\n- DO NOT use integers 1-10 or any other scale\n- DO NOT use percentages or any scale other than 0.0-1.0\n\n**SCORING THRESHOLDS:**\n- 0.0-0.2: Minimal/no presence\n- 0.3-0.4: Slight presence, mentioned briefly\n- 0.5-0.6: Moderate presence, supporting theme\n- 0.7-0.8: Strong presence, central theme\n- 0.9-1.0: Dominant presence, defining characteristic\n\n**EXAMPLE:**\nFor 'Dignity' in \"We must respect every individual's inherent worth\":\n- Score: 0.8 (strong presence - central theme about individual worth)\n\n"
+  },
+  
+  "treatment_b": {
+    "description": "Comparative scoring with explicit anchor points",
+    "scoring_requirements": "**CRITICAL SCORING REQUIREMENTS:**\n\n🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨\n- Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)\n- DO NOT use integers 1-10 or any other scale\n- DO NOT use percentages or any scale other than 0.0-1.0\n\n**ANCHOR POINT METHOD:**\nThink of Martin Luther King Jr.'s \"I Have a Dream\" speech as a 1.0 for Dignity.\nThink of divisive political attacks as a 1.0 for Tribalism.\nScore your text relative to these reference points.\n\n**COMPARATIVE QUESTIONS:**\n- How does this text's emphasis on [well] compare to the strongest examples you know?\n- Is this theme stronger or weaker than in typical political discourse?\n- Rate relative strength, not absolute presence.\n\n"
+  },
+  
+  "treatment_c": {
+    "description": "Process-focused scoring with step-by-step methodology",
+    "scoring_requirements": "**CRITICAL SCORING REQUIREMENTS:**\n\n🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨\n- Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)\n- DO NOT use integers 1-10 or any other scale\n- DO NOT use percentages or any scale other than 0.0-1.0\n\n**SCORING PROCESS (follow for each well):**\n1. **Identify**: Scan text for concepts related to this well\n2. **Extract**: Pull specific phrases/sentences showing this orientation\n3. **Assess centrality**: Is this theme central or peripheral to the main argument?\n4. **Weight importance**: How much does this theme shape the overall narrative?\n5. **Score accordingly**: Combine frequency, centrality, and importance into 0.0-1.0 score\n\n**STEP-BY-STEP SCORING:**\nFor each well, briefly note your findings for steps 1-4, then assign score.\n\n"
+  },
+  
+  "experimental_metadata": {
+    "hypothesis": "Explicit scoring guidance will improve inter-rater reliability and reduce score variance",
+    "metrics": ["score_variance", "consistency_across_models", "processing_time", "explanation_quality"],
+    "sample_size_target": 100,
+    "frameworks_tested": ["civic_virtue", "political_spectrum"]
+  }
+} 

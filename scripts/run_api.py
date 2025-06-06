@@ -9,9 +9,9 @@ import os
 from pathlib import Path
 import uvicorn
 
-# Add src to Python path
-src_path = Path(__file__).parent / "src"
-sys.path.insert(0, str(src_path))
+# Add project root to Python path for src imports
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 def main():
     """Start the FastAPI server."""

@@ -40,7 +40,7 @@ output_path = analyzer.create_visualization(data)
 print(f"Visualization saved: {output_path}")
 ```
 
-### Framework Management (New in v2.0)
+### Framework Management & Prompt Generation
 ```bash
 # List available frameworks
 python framework_manager.py summary
@@ -48,8 +48,12 @@ python framework_manager.py summary
 # Switch to different framework
 python framework_manager.py switch civic_virtue
 
-# Generate prompt for active framework
-python generate_prompt.py --output prompts/custom/latest.txt
+# Generate prompts using unified template system
+python generate_prompt.py --framework civic_virtue --mode interactive
+python generate_prompt.py --framework political_spectrum --mode api
+
+# Experimental prompt generation
+python generate_prompt.py --framework civic_virtue --experiment-id scoring_methodology --variant treatment
 ```
 
 ## Installation
@@ -77,6 +81,12 @@ narrative_gravity_analysis/
 │   ├── framework_manager.py          # Framework management
 │   └── generate_prompt.py            # LLM prompt generator
 │
+├── 🔧 Scripts & Operations
+│   ├── scripts/run_api.py            # FastAPI server startup
+│   ├── scripts/run_celery.py         # Celery worker startup
+│   ├── scripts/setup_database.py     # Database setup utility
+│   └── alembic.ini                   # Database migration config
+│
 ├── 📊 Data & Configuration
 │   ├── frameworks/                   # Framework definitions
 │   │   ├── civic_virtue/            # Primary framework
@@ -88,8 +98,11 @@ narrative_gravity_analysis/
 │   └── reference_texts/             # Sample texts
 │
 ├── 📚 Documentation  
-│   ├── docs/development/            # Technical documentation
-│   ├── docs/examples/               # Usage examples
+│   ├── docs/architecture/           # System architecture docs
+│   ├── docs/user-guides/           # User-facing guides
+│   ├── docs/api/                   # API documentation
+│   ├── docs/development/           # Development docs
+│   ├── docs/examples/              # Usage examples
 │   └── narrative_gravity_wells_paper.md # Academic paper
 │
 └── 🗃️ Archive & Tests
