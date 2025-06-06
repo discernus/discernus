@@ -16,9 +16,9 @@ This document contains complete project information for the **Narrative Gravity 
 5. [Core Source Code](#core-source-code)
 6. [Configuration System](#configuration-system)
 7. [Framework Definitions](#framework-definitions)
-8. [Testing Infrastructure](#testing-infrastructure)
-9. [Documentation](#documentation)
-10. [Technical Specifications](#technical-specifications)
+8. [Current Validation & Research Requirements](#current-validation--research-requirements)
+9. [Testing Infrastructure](#testing-infrastructure)
+10. [Documentation](#documentation)
 
 ---
 
@@ -1383,7 +1383,7 @@ frameworks/[framework_name]/
 
 ---
 
-## 6. Testing Infrastructure
+## 9. Testing Infrastructure
 
 ### 6.1 Test Suite Overview
 
@@ -1455,7 +1455,7 @@ python tests/run_tests.py
 
 ---
 
-## 7. Documentation
+## 10. Documentation
 
 ### 7.1 Core Documentation Files
 
@@ -1495,93 +1495,110 @@ python tests/run_tests.py
 
 ---
 
-## 8. API Integration Requirements
+## 8. Current Validation & Research Requirements
 
-### 8.1 Current Manual Workflow
+### 8.1 ✅ API Integration Complete (Epic 1-4)
 
-**Critical Bottleneck Identified:**
-The current workflow requires **manual LLM interaction** for each analysis:
-1. Generate prompt using `generate_prompt.py`
-2. Manually copy prompt to LLM interface (ChatGPT, Claude, etc.)
-3. Manually paste text for analysis
-4. Manually copy JSON response
-5. Save JSON file and run visualization
+**Multi-LLM Integration Achieved:**
+✅ **HuggingFace API Integration**: Unified access to GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro  
+✅ **Batch Processing**: Automated multi-run analysis with statistical aggregation  
+✅ **Cross-Model Validation**: Systematic comparison and consensus analysis  
+✅ **Statistical Enhancement**: Confidence intervals, variance quantification, uncertainty measures  
+✅ **Workflow Automation**: No more manual copy/paste - full API automation  
 
-**Scalability Limitations:**
-- Single analysis per session
-- No variance quantification across multiple runs
-- No systematic cross-model validation
-- No batch processing capability
-- Manual error handling and resubmission
+**Infrastructure Complete:**
+- Celery + Redis task queue for scalable processing
+- PostgreSQL database for persistent storage
+- FastAPI REST endpoints for job management
+- Streamlit dashboard for real-time monitoring
 
-### 8.2 Required API Integration Capabilities
+### 8.2 🎯 Current Priority: Academic Validation Studies
 
-**Priority 1: Hugging Face API Integration**
+**Critical Need**: Academic credibility through rigorous validation studies
+
+**Phase 1 Requirements (Weeks 1-3): Core Reliability Validation**
 ```python
-# Target workflow automation
-def analyze_text_batch(text: str, framework: str, model_configs: List[Dict], n_runs: int = 5):
-    """
-    Automated batch analysis with statistical validation
-    
-    Args:
-        text: Input text for analysis
-        framework: Framework name (civic_virtue, political_spectrum, etc.)
-        model_configs: List of model configurations for cross-validation
-        n_runs: Number of runs per model for variance quantification
-    
-    Returns:
-        AnalysisResults: Statistical summary with confidence intervals
-    """
+# Multi-run consistency study requirements
+validation_study_requirements = {
+    "corpus": "17 golden set texts",
+    "frameworks": ["civic_virtue", "political_spectrum", "moral_foundations"],
+    "llms": ["gpt-4o", "claude-3.5-sonnet", "gemini-1.5-pro"],
+    "runs_per_combination": 5,
+    "total_analyses": 765,  # 17 × 3 × 3 × 5
+    "metrics": [
+        "coefficient_of_variation",
+        "confidence_intervals", 
+        "inter_llm_correlation",
+        "framework_internal_consistency"
+    ]
+}
 ```
 
-**Priority 2: Multi-Model Cross-Validation**
-- Support for GPT-4, Claude 4.0 Sonnet, Gemini Pro
-- Systematic comparison across models
-- Statistical validation of consensus/divergence
-- Automated model identification and attribution
-
-**Priority 3: Statistical Analysis Enhancement**
+**Phase 2 Requirements (Weeks 4-5): Interpretive Intelligence**
 ```python
-# Enhanced analysis with confidence intervals
-class StatisticalAnalysisResults:
-    mean_scores: Dict[str, float]           # Average scores per well
-    confidence_intervals: Dict[str, Tuple] # 95% CI per well
-    inter_model_variance: Dict[str, float] # Cross-model consistency
-    intra_model_variance: Dict[str, float] # Within-model consistency
-    composite_metrics: Dict[str, float]    # COM, NPS, DPS with uncertainty
+# Evidence extraction and explanation system
+interpretive_requirements = {
+    "quote_extraction": "identify_passages_supporting_scores",
+    "explanation_generation": "human_readable_reasoning_chains",
+    "comparative_analysis": "corpus_relative_positioning", 
+    "report_templates": [
+        "executive_summary",
+        "technical_appendix",
+        "evidence_based_insights"
+    ]
+}
 ```
 
-### 8.3 API Integration Architecture
+**Phase 3 Requirements (Weeks 6-8): Conversational Interface**
+```python
+# Domain-specific AI assistant requirements
+conversational_requirements = {
+    "query_types": [
+        "score_explanations",
+        "comparative_analysis", 
+        "variance_investigation",
+        "evidence_retrieval"
+    ],
+    "architecture": "hybrid_local_remote_llm",
+    "local_model": "llama_3_1_8b",  # For basic queries
+    "remote_models": "gpt4_claude_gemini",  # For complex analysis
+    "hallucination_control": "grounded_responses_only"
+}
+```
 
-**Proposed System Components:**
+### 8.3 Academic Publication Requirements
 
-1. **API Client Manager** (`api_client.py`)
-   - Unified interface for multiple LLM APIs
-   - Rate limiting and error handling
-   - Authentication and configuration management
-   - Response validation and parsing
+**Statistical Rigor Standards:**
+- Multi-run reliability: CV < 0.15 for 80% of well dimensions
+- Inter-LLM consensus: r > 0.7 between primary LLM pairs  
+- Framework validity: Internal consistency α > 0.8
+- Replication package: Complete methodology documentation
 
-2. **Batch Analysis Engine** (`batch_analyzer.py`)
-   - Multi-run analysis coordination
-   - Statistical aggregation and validation
-   - Progress tracking and resumption
-   - Result caching and persistence
+**Evidence Standards:**
+- Quote relevance: 90% of extracted quotes directly support scores
+- Explanation accuracy: 85%+ human evaluator approval
+- Comparative insights: Meaningful cross-text pattern identification
+- Report quality: Non-technical stakeholders can act on insights
 
-3. **Cross-Model Validator** (`cross_validator.py`)
-   - Model configuration management
-   - Systematic cross-model comparison
-   - Consensus analysis and outlier detection
-   - Statistical significance testing
+### 8.4 Technology Stack for Validation Studies
 
-4. **Enhanced Visualization** (extensions to existing engine)
-   - Confidence interval plotting
-   - Multi-model comparison charts
-   - Statistical distribution visualization
-   - Uncertainty quantification graphics
+**Statistical Analysis Tools:**
+```python
+# Required statistical libraries and methods
+statistical_stack = {
+    "correlation_analysis": ["scipy.stats.pearsonr", "spearmanr", "kendalltau"],
+    "reliability_measures": ["cronbach_alpha", "test_retest_reliability"],
+    "confidence_intervals": ["bootstrap_methods", "parametric_ci"],
+    "variance_analysis": ["anova", "coefficient_of_variation"],
+    "consensus_metrics": ["intraclass_correlation", "fleiss_kappa"]
+}
+```
 
-### 8.4 Configuration Requirements
-
-**API Configuration Structure:**
+**Validation Pipeline Architecture:**
+- **Automated Study Runner**: Orchestrates large-scale validation experiments
+- **Statistical Analyzer**: Computes reliability and consensus metrics  
+- **Report Generator**: Creates publication-ready analysis summaries
+- **Quality Assurance**: Validates results against academic standards
 ```json
 {
   "api_providers": {
