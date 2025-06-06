@@ -9,7 +9,7 @@ import json
 from typing import Any, Dict, List, Union
 from urllib.parse import quote, unquote
 
-from utils.logging_config import get_logger, ErrorCodes
+from .logging_config import get_logger, ErrorCodes
 
 logger = get_logger(__name__)
 

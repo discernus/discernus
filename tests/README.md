@@ -57,6 +57,18 @@ Development and validation utilities:
 
 ## 🚀 Running Tests
 
+### **Database Configuration for Tests**
+
+Integration tests use **SQLite** by default for faster, isolated testing:
+
+```bash
+# SQLite (recommended for testing)
+DATABASE_URL="sqlite:///test.db" python -m pytest tests/integration/ -v
+
+# PostgreSQL (for production-like testing)
+DATABASE_URL="postgresql://user:pass@localhost:5432/test_db" python -m pytest tests/integration/ -v
+```
+
 ### **Quick System Check**
 ```bash
 # Fast health check
@@ -73,22 +85,46 @@ python tests/utilities/run_epic_validation.py
 ```
 
 ### **Integration Tests**
-```bash
-# Individual integration tests
-python tests/integration/test_auth_system.py
-python tests/integration/test_api.py
-python tests/integration/test_corpus_tools.py
 
-# Comprehensive ingestion test
+**Option 1: Using SQLite (Recommended)**
+```bash
+# All integration tests with SQLite
+DATABASE_URL="sqlite:///test.db" python -m pytest tests/integration/ -v
+
+# Individual tests with SQLite
+DATABASE_URL="sqlite:///test.db" python -m pytest tests/integration/test_api.py -v
+DATABASE_URL="sqlite:///test.db" python -m pytest tests/integration/test_streamlit_integration.py -v
+DATABASE_URL="sqlite:///test.db" python -m pytest tests/integration/test_cli_tools.py -v
+```
+
+**Option 2: Tests Not Requiring Database**
+```bash
+# API import/schema tests (no database needed)
+python -m pytest tests/integration/test_api.py -v
+python -m pytest tests/integration/test_streamlit_integration.py -v
+python -m pytest tests/integration/test_corpus_tools.py -v
+```
+
+**Option 3: Tests Requiring Live API Server**
+```bash
+# Start API server first (in another terminal)
+python scripts/run_api.py
+
+# Then run tests requiring live API
+python tests/integration/test_auth_system.py
 python tests/integration/final_ingestion_test.py
+python tests/integration/test_job_processing.py
 ```
 
 ### **Unit Tests**
 ```bash
-# Run unit tests with pytest
-cd tests/unit
-python -m pytest test_cli_tools.py -v
-python -m pytest test_streamlit_app.py -v
+# Run unit tests with pytest (use SQLite by default)
+python -m pytest tests/unit/ -v
+
+# Individual unit test files
+python -m pytest tests/unit/test_crud.py -v
+python -m pytest tests/unit/test_api_services.py -v
+python -m pytest tests/unit/test_analysis_tasks.py -v
 ```
 
 ### **Utility Tools**
@@ -108,16 +144,28 @@ python tests/utilities/check_corpus5.py
 - ✅ **Retry Logic**: Error handling validated
 - ✅ **Golden Set Testing**: 17 presidential speeches validated
 
-### **Integration Test Coverage** ✅
-- ✅ **Authentication System**: JWT tokens working
-- ✅ **API Endpoints**: FastAPI responses validated
-- ✅ **Corpus Processing**: Text ingestion operational
-- ✅ **Job Processing**: Task queue functional
-- ✅ **Database Operations**: PostgreSQL validated
+### **Integration Test Coverage** ✅ (30/31 passing - 97%)
+- ✅ **API Import/Schema Tests**: FastAPI components validated (3/3)
+- ✅ **Streamlit Integration**: App startup and CLI tools (5/6)
+- ✅ **CLI Tools**: Framework management (9/9) 
+- ✅ **Corpus Tools**: Schema and JSONL generation (2/2)
+- ✅ **Authentication System**: Live API testing (7/7)
+- ✅ **Job Processing**: Task queue integration (1/1)
+- ✅ **Ingestion Workflow**: JSONL processing (2/2)
+- ✅ **Full End-to-End**: Complete workflow validation (1/1)
 
-### **Unit Test Coverage** ✅  
-- ✅ **CLI Tools**: Framework manager functional
-- ✅ **Streamlit Components**: Web interface operational
+### **Unit Test Coverage** ✅ (151/151 passing - 100%)
+- ✅ **Database Operations**: CRUD operations with SQLite (19/19)
+- ✅ **API Services**: Text ingestion and processing (9/9)
+- ✅ **Task Processing**: Celery task logic with mocking (3/3)
+- ✅ **Authentication**: JWT and security utilities (6/6)
+- ✅ **Framework Management**: CLI and prompt generation (12/12)
+- ✅ **Data Processing**: Sanitization, logging, costs (102/102)
+
+### **Database Testing Strategy** 🔄
+- **Unit Tests**: Use in-memory SQLite for fast isolation
+- **Integration Tests**: SQLite by default, PostgreSQL optional
+- **Full System Tests**: Require PostgreSQL + live API server
 
 ## �� Test Maintenance
 

@@ -12,11 +12,11 @@ from datetime import datetime
 from celery import current_task
 from celery.exceptions import Retry
 
-from celery_app import celery_app
-from models.base import get_db_session
-from api import crud
+from ..celery_app import celery_app
+from ..models.base import get_db_session
+from ..api import crud
 from sqlalchemy.orm import Session
-from api.schemas import TaskStatus
+from ..api.schemas import TaskStatus
 
 logger = logging.getLogger(__name__)
 

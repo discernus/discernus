@@ -8,7 +8,7 @@ from sqlalchemy import and_, func, text
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
-from models.models import Corpus, Document, Chunk, Job, Task
+from ..models.models import Corpus, Document, Chunk, Job, Task
 from . import schemas
 
 # Corpus CRUD operations

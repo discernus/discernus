@@ -69,8 +69,23 @@ class TestFrameworkManagerIntegration:
         # Create a mock framework structure
         frameworks_dir = Path(framework_manager.base_dir) / "frameworks" / "test_framework"
         frameworks_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create both required files
         with open(frameworks_dir / "dipoles.json", 'w') as f:
-            json.dump({"framework_name": "test_framework"}, f)
+            json.dump({
+                "framework_name": "test_framework",
+                "version": "1.0.0",
+                "description": "Test framework",
+                "dipoles": []
+            }, f)
+        
+        with open(frameworks_dir / "framework.json", 'w') as f:
+            json.dump({
+                "framework_name": "test_framework", 
+                "version": "1.0.0",
+                "description": "Test framework",
+                "wells": {}
+            }, f)
         
         frameworks = framework_manager.list_frameworks()
         assert len(frameworks) == 1
@@ -87,12 +102,30 @@ class TestPromptGeneratorIntegration:
         assert framework['framework_name'] == 'test_framework'
 
     def test_generate_prompts(self, prompt_generator_fixture):
-        generator, _ = prompt_generator_fixture
-        interactive_prompt = generator.generate_interactive_prompt()
-        batch_prompt = generator.generate_batch_prompt()
-        assert "Interactive" in interactive_prompt
-        assert "Test Positive" in interactive_prompt
-        assert "Test Positive" in batch_prompt
+        generator, config_dir = prompt_generator_fixture
+        
+        # Create the framework directory structure that the generator expects
+        temp_dir = Path(config_dir).parent
+        frameworks_dir = temp_dir / "frameworks" / "test_framework"
+        frameworks_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Copy the test files to the expected location
+        import shutil
+        shutil.copy(Path(config_dir) / "dipoles.json", frameworks_dir / "dipoles.json")
+        shutil.copy(Path(config_dir) / "framework.json", frameworks_dir / "framework.json")
+        
+        # Change to temp directory so the generator can find the frameworks
+        import os
+        original_cwd = os.getcwd()
+        try:
+            os.chdir(temp_dir)
+            interactive_prompt = generator.generate_interactive_prompt()
+            batch_prompt = generator.generate_batch_prompt()
+            assert "Interactive" in interactive_prompt
+            assert "Test Positive" in interactive_prompt
+            assert "Test Positive" in batch_prompt
+        finally:
+            os.chdir(original_cwd)
 
 class TestNarrativeGravityEllipticalIntegration:
     """Integration tests for narrative_gravity_elliptical.py."""

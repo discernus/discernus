@@ -14,9 +14,9 @@ from fastapi import HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 
-from models.models import User
-from models.base import get_db
-from utils.logging_config import get_logger, ErrorCodes, metrics_collector
+from ..models.models import User
+from ..models.base import get_db
+from .logging_config import get_logger, ErrorCodes, metrics_collector
 
 logger = get_logger(__name__)
 

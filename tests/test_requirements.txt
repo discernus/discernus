@@ -8,4 +8,8 @@
 requests>=2.31.0
 pytest>=7.4.0
 pytest-mock>=3.11.0
-unittest-xml-reporting>=3.2.0 
+pytest-asyncio>=0.21.0
+unittest-xml-reporting>=3.2.0
+
+# Note: SQLite is included in Python standard library for test databases
+# Integration tests use SQLite for faster, isolated testing 

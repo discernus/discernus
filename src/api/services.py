@@ -11,8 +11,8 @@ from datetime import datetime
 import logging
 
 from . import crud, schemas
-from models.models import Corpus, Job, Task
-from tasks import analysis_tasks
+from ..models.models import Corpus, Job, Task
+from ..tasks import analysis_tasks
 
 logger = logging.getLogger(__name__)
 
@@ -44,9 +44,14 @@ async def ingest_jsonl_corpus(
         text_content = content.decode('utf-8').strip()
         
         if not text_content:
-            raise IngestionError("Empty file or no valid JSON lines found")
+            raise IngestionError("Empty file")
         
         lines = text_content.split('\n')
+        
+        # Check if all lines are empty/whitespace
+        valid_lines = [line for line in lines if line.strip()]
+        if not valid_lines:
+            raise IngestionError("Empty file")
         
         # Create corpus first
         corpus = crud.create_corpus(db, name=name, description=description, uploader_id=uploader_id)
@@ -130,6 +135,24 @@ async def ingest_jsonl_corpus(
                     )
                 )
                 continue
+        
+        # Check if any records were successfully processed
+        if total_chunks == 0:
+            # If there were validation errors, it means we had content but it was invalid
+            # In this case, create the corpus with 0 records
+            if validation_errors:
+                logger.warning(f"Corpus {name} created with 0 records due to validation errors")
+                crud.update_corpus_record_count(db, corpus.id, 0)
+                return corpus
+            else:
+                # If no validation errors and no chunks, it means truly empty file
+                # Clean up corpus
+                try:
+                    db.delete(corpus)
+                    db.commit()
+                except Exception:
+                    pass
+                raise IngestionError("Empty file or no valid JSON lines found")
         
         # Update corpus record count
         crud.update_corpus_record_count(db, corpus.id, total_chunks)

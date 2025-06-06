@@ -10,11 +10,11 @@ import json
 from datetime import datetime
 
 # Add the project root to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from api import services, crud, schemas
-from models.models import Base, Corpus, Document, Chunk, Job, Task
-from api.services import IngestionError, ValidationError
+from src.api import services, crud, schemas
+from src.models.models import Base, Corpus, Document, Chunk, Job, Task
+from src.api.services import IngestionError, ValidationError
 
 # --- Database Fixtures for In-Memory Testing (similar to test_crud) ---
 
@@ -65,7 +65,7 @@ def create_valid_jsonl(docs=1, chunks_per_doc=1) -> bytes:
                 "chunk_content": f"This is chunk {j+1} of doc {i+1}."
             }
             lines.append(json.dumps(record))
-    return "\\n".join(lines).encode('utf-8')
+    return "\n".join(lines).encode('utf-8')
 
 class TestApiServices:
     """Unit tests for API service layer functions."""
@@ -98,7 +98,7 @@ class TestApiServices:
     @pytest.mark.asyncio
     async def test_ingest_jsonl_corpus_invalid_json(self, db):
         """Tests ingestion with invalid JSON content."""
-        invalid_content = b'{"a": 1}\\nthis is not json\\n{"b": 2}'
+        invalid_content = b'{"a": 1}\nthis is not json\n{"b": 2}'
         
         corpus = await services.ingest_jsonl_corpus(
             content=invalid_content,
@@ -138,10 +138,10 @@ class TestApiServices:
             await services.ingest_jsonl_corpus(b'', "Empty", None, None, db)
             
         with pytest.raises(IngestionError, match="Empty file"):
-            await services.ingest_jsonl_corpus(b' \\n \\t \\n ', "Whitespace", None, None, db)
+            await services.ingest_jsonl_corpus(b' \n \t \n ', "Whitespace", None, None, db)
 
     @pytest.mark.asyncio
-    @patch('api.services.analysis_tasks.process_narrative_analysis_task.delay')
+    @patch('src.api.services.analysis_tasks.process_narrative_analysis_task.delay')
     async def test_create_processing_job_success(self, mock_delay, db):
         """Tests successful creation of a processing job."""
         # 1. Setup
@@ -196,7 +196,7 @@ class TestApiServices:
             await services.create_processing_job(job_request, creator_id=1, db=db)
             
     @pytest.mark.asyncio
-    @patch('api.services.analysis_tasks.process_narrative_analysis_task.delay')
+    @patch('src.api.services.analysis_tasks.process_narrative_analysis_task.delay')
     async def test_resume_job_success(self, mock_delay, db):
         """Tests resuming a failed job."""
         # 1. Setup: Create a failed job with one failed and one pending task

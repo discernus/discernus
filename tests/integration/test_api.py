@@ -14,52 +14,32 @@ sys.path.insert(0, str(src_path))
 
 def test_api_startup():
     """Test that the API can start without errors."""
-    try:
-        from src.api.main import app
-        print("✅ FastAPI app created successfully")
-        
-        # Test that we can access the app
-        assert app.title == "Narrative Gravity Analysis API"
-        print("✅ App configuration correct")
-        
-        return True
-        
-    except Exception as e:
-        print(f"❌ API startup failed: {e}")
-        return False
+    from src.api.main import app
+    print("✅ FastAPI app created successfully")
+    
+    # Test that we can access the app
+    assert app.title == "Narrative Gravity Analysis API"
+    print("✅ App configuration correct")
 
 def test_database_models():
     """Test that database models can be imported."""
-    try:
-        from src.models.models import Corpus, Document, Chunk, Job, Task
-        print("✅ Database models imported successfully")
-        
-        # Test model creation (without database)
-        corpus = Corpus(name="test", record_count=0)
-        print("✅ Model instantiation works")
-        
-        return True
-        
-    except Exception as e:
-        print(f"❌ Database models test failed: {e}")
-        return False
+    from src.models.models import Corpus, Document, Chunk, Job, Task
+    print("✅ Database models imported successfully")
+    
+    # Test model creation (without database)
+    corpus = Corpus(name="test", record_count=0)
+    assert corpus.name == "test"
+    print("✅ Model instantiation works")
 
 def test_schemas():
     """Test that Pydantic schemas work correctly."""
-    try:
-        from src.api.schemas import CorpusResponse, JobCreate, DocumentType
-        print("✅ API schemas imported successfully")
-        
-        # Test enum
-        doc_type = DocumentType.speech
-        assert doc_type == "speech"
-        print("✅ Schema enums work correctly")
-        
-        return True
-        
-    except Exception as e:
-        print(f"❌ Schema test failed: {e}")
-        return False
+    from src.api.schemas import CorpusResponse, JobCreate, DocumentType
+    print("✅ API schemas imported successfully")
+    
+    # Test enum
+    doc_type = DocumentType.speech
+    assert doc_type == "speech"
+    print("✅ Schema enums work correctly")
 
 def main():
     """Run all tests."""

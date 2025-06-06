@@ -7,10 +7,10 @@ import os
 from datetime import datetime
 
 # Add the project root to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from api import crud, schemas
-from models.models import Base, Corpus, Document, Chunk, Job, Task
+from src.api import crud, schemas
+from src.models.models import Base, Corpus, Document, Chunk, Job, Task
 
 # --- Database Fixtures for In-Memory Testing ---
 
