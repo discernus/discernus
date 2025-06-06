@@ -2,14 +2,25 @@
 
 #personal/writing/narrativegravity
 
+## 🎯 CURRENT STATUS (January 2025): Validation-First Development
+
+**Milestone 1 Infrastructure**: ✅ COMPLETED  
+**NEW PRIORITY**: Academic validation studies to establish credibility before publication.
+
+**See**: `VALIDATION_FIRST_DEVELOPMENT_STRATEGY.md` for detailed 3-phase validation plan.
+
+---
+
 Below are the three high-level milestones for Milestone 1 (validation research infrastructure), Milestone 2 (publication-ready package), and Milestone 3 (public platform deployment). Each milestone builds on the previous, ensuring a solid foundation for academic credibility and later broader adoption.
 
 ---
 
-## Milestone 1: Validation Research Infrastructure
+## Milestone 1: Validation Research Infrastructure ✅ COMPLETED
 
 **Goal:**  
-Build and deliver the core API-driven tooling and admin UI that allow the Project Founder to ingest a growing “consequential narratives” corpus, invoke multiple LLMs via Hugging Face, and generate fully instrumented, multi-run analysis results.
+Build and deliver the core API-driven tooling and admin UI that allow the Project Founder to ingest a growing "consequential narratives" corpus, invoke multiple LLMs via Hugging Face, and generate fully instrumented, multi-run analysis results.
+
+**STATUS**: ✅ All infrastructure complete. Moving to validation studies phase.
 
 **Key Deliverables:**  
 - Backend services for JSONL corpus ingestion, schema validation, chunking, and job orchestration  
@@ -29,10 +40,10 @@ Build and deliver the core API-driven tooling and admin UI that allow the Projec
 ## Milestone 2: Publication-Ready Academic Package
 
 **Goal:**  
-Leverage the infrastructure from Milestone 1 to produce the “receipts”—robust validation studies, expert reliability data, and reproducible replication materials—culminating in a complete draft paper and replication package for friendly peer review.
+Leverage the infrastructure from Milestone 1 to produce the "receipts"—robust validation studies, expert reliability data, and reproducible replication materials—culminating in a complete draft paper and replication package for friendly peer review.
 
 **Key Deliverables:**  
-- Curated validation corpus of “consequential narratives” with documented metadata and chunking  
+- Curated validation corpus of "consequential narratives" with documented metadata and chunking  
 - Multi-LLM reliability study (intra- and inter-model variance) across selected texts  
 - Expert-panel calibration study design and results, plus crowdsourced spot-checks  
 - Replication package: raw inputs, chunking metadata, API parameters, run-level outputs, analysis scripts, and instructions  
@@ -41,7 +52,7 @@ Leverage the infrastructure from Milestone 1 to produce the “receipts”—rob
 
 **Success Criteria:**  
 - Completion of expert and crowdsourced validation studies demonstrating statistical reliability  
-- Fully documented, versioned replication package that passes tests on the “golden set” corpus  
+- Fully documented, versioned replication package that passes tests on the "golden set" corpus  
 - A polished manuscript ready to share with academic collaborators and conference reviewers  
 
 ---
