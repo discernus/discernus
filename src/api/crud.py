@@ -21,11 +21,12 @@ def get_corpus(db: Session, corpus_id: int) -> Optional[Corpus]:
     """Get a specific corpus by ID."""
     return db.query(Corpus).filter(Corpus.id == corpus_id).first()
 
-def create_corpus(db: Session, name: str, description: Optional[str] = None) -> Corpus:
+def create_corpus(db: Session, name: str, description: Optional[str] = None, uploader_id: Optional[int] = None) -> Corpus:
     """Create a new corpus."""
     corpus = Corpus(
         name=name,
         description=description,
+        uploader_id=uploader_id,
         record_count=0  # Will be updated as documents are added
     )
     db.add(corpus)
@@ -168,10 +169,11 @@ def get_job(db: Session, job_id: int) -> Optional[Job]:
     """Get a specific job by ID."""
     return db.query(Job).filter(Job.id == job_id).first()
 
-def create_job(db: Session, job_data: schemas.JobCreate) -> Job:
+def create_job(db: Session, job_data: schemas.JobCreate, creator_id: Optional[int] = None) -> Job:
     """Create a new job."""
     job = Job(
         corpus_id=job_data.corpus_id,
+        creator_id=creator_id,
         job_name=job_data.job_name,
         text_ids=job_data.text_ids,
         frameworks=job_data.frameworks,

@@ -223,4 +223,87 @@ class ValidationErrorResponse(BaseSchema):
     line_number: int
     error_type: str
     field_errors: Dict[str, List[str]]
-    raw_content: Optional[str] = None 
+    raw_content: Optional[str] = None
+
+# Authentication schemas
+
+class UserRole(str, Enum):
+    admin = "admin"
+    user = "user"
+
+class UserCreate(BaseSchema):
+    """Schema for creating a new user."""
+    username: str = Field(..., min_length=3, max_length=50)
+    email: str = Field(..., max_length=255)
+    password: str = Field(..., min_length=8, max_length=128)
+    full_name: Optional[str] = Field(None, max_length=255)
+    organization: Optional[str] = Field(None, max_length=255)
+    role: UserRole = Field(default=UserRole.user)
+
+    @validator('username')
+    def validate_username(cls, v):
+        """Validate username format."""
+        import re
+        if not re.match(r'^[a-zA-Z0-9_-]+$', v):
+            raise ValueError("Username can only contain letters, numbers, underscores, and hyphens")
+        return v
+
+    @validator('email')
+    def validate_email(cls, v):
+        """Validate email format."""
+        import re
+        if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', v):
+            raise ValueError("Invalid email format")
+        return v.lower()
+
+class UserLogin(BaseSchema):
+    """Schema for user login."""
+    username: str = Field(..., max_length=255)
+    password: str = Field(..., max_length=128)
+
+class UserResponse(BaseSchema):
+    """Schema for user information in responses."""
+    id: int
+    username: str
+    email: str
+    full_name: Optional[str]
+    organization: Optional[str]
+    role: UserRole
+    is_active: bool
+    is_verified: bool
+    created_at: datetime
+    last_login: Optional[datetime]
+    rate_limit_quota: int
+
+class UserUpdate(BaseSchema):
+    """Schema for updating user information."""
+    full_name: Optional[str] = Field(None, max_length=255)
+    organization: Optional[str] = Field(None, max_length=255)
+    email: Optional[str] = Field(None, max_length=255)
+
+    @validator('email')
+    def validate_email(cls, v):
+        """Validate email format."""
+        if v:
+            import re
+            if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', v):
+                raise ValueError("Invalid email format")
+            return v.lower()
+        return v
+
+class PasswordChange(BaseSchema):
+    """Schema for changing password."""
+    current_password: str = Field(..., max_length=128)
+    new_password: str = Field(..., min_length=8, max_length=128)
+
+class TokenResponse(BaseSchema):
+    """Schema for authentication token response."""
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+    expires_in: int
+    user: UserResponse
+
+class TokenRefresh(BaseSchema):
+    """Schema for token refresh request."""
+    refresh_token: str 

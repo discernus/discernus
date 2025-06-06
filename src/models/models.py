@@ -17,6 +17,46 @@ import uuid
 from .base import Base
 
 
+class User(Base):
+    """
+    User table: Authentication and authorization for API access.
+    Implements Epic 1 requirement G: Security & Access Control.
+    """
+    __tablename__ = "user"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String(255), unique=True, nullable=False, index=True)
+    email = Column(String(255), unique=True, nullable=False, index=True)
+    hashed_password = Column(String(255), nullable=False)
+    
+    # Role-based access control
+    role = Column(String(50), default="user")  # "admin", "user"
+    is_active = Column(Boolean, default=True)
+    is_verified = Column(Boolean, default=False)
+    
+    # Profile information
+    full_name = Column(String(255), nullable=True)
+    organization = Column(String(255), nullable=True)
+    
+    # Security and tracking
+    created_at = Column(DateTime, default=func.now())
+    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
+    last_login = Column(DateTime, nullable=True)
+    failed_login_attempts = Column(Integer, default=0)
+    locked_until = Column(DateTime, nullable=True)
+    
+    # API access tracking
+    api_key_hash = Column(String(255), nullable=True)  # For API key authentication
+    rate_limit_quota = Column(Integer, default=1000)  # Requests per hour
+    
+    # Relationships
+    uploaded_corpora = relationship("Corpus", back_populates="uploader")
+    created_jobs = relationship("Job", back_populates="creator")
+    
+    def __repr__(self):
+        return f"<User(id={self.id}, username='{self.username}', role='{self.role}')>"
+
+
 class Corpus(Base):
     """
     Corpus table: Container for uploaded document collections.
@@ -27,10 +67,11 @@ class Corpus(Base):
     name = Column(String(255), nullable=False)
     upload_timestamp = Column(DateTime, default=func.now())
     record_count = Column(Integer, default=0)
-    uploader_id = Column(String(255), nullable=True)  # For future user system
+    uploader_id = Column(Integer, ForeignKey("user.id"), nullable=True)  # Link to user who uploaded
     description = Column(Text, nullable=True)
     
     # Relationships
+    uploader = relationship("User", back_populates="uploaded_corpora")
     documents = relationship("Document", back_populates="corpus", cascade="all, delete-orphan")
     jobs = relationship("Job", back_populates="corpus", cascade="all, delete-orphan")
     
@@ -125,6 +166,7 @@ class Job(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     corpus_id = Column(Integer, ForeignKey("corpus.id"), nullable=False)
+    creator_id = Column(Integer, ForeignKey("user.id"), nullable=True)  # User who created the job
     
     # Job configuration
     job_name = Column(String(255), nullable=True)
@@ -154,6 +196,7 @@ class Job(Base):
     
     # Relationships
     corpus = relationship("Corpus", back_populates="jobs")
+    creator = relationship("User", back_populates="created_jobs")
     tasks = relationship("Task", back_populates="job", cascade="all, delete-orphan")
     
     def __repr__(self):

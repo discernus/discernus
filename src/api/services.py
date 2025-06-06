@@ -31,6 +31,7 @@ async def ingest_jsonl_corpus(
     content: bytes,
     name: str,
     description: Optional[str],
+    uploader_id: Optional[int],
     db: Session
 ) -> Corpus:
     """
@@ -46,7 +47,7 @@ async def ingest_jsonl_corpus(
             raise IngestionError("Empty file or no valid JSON lines found")
         
         # Create corpus first
-        corpus = crud.create_corpus(db, name=name, description=description)
+        corpus = crud.create_corpus(db, name=name, description=description, uploader_id=uploader_id)
         logger.info(f"Created corpus {corpus.id}: {name}")
         
         # Track documents to avoid duplicates
@@ -153,6 +154,7 @@ async def ingest_jsonl_corpus(
 
 async def create_processing_job(
     job_request: schemas.JobCreate,
+    creator_id: Optional[int],
     db: Session
 ) -> Job:
     """
@@ -170,7 +172,7 @@ async def create_processing_job(
             raise ValueError(f"No chunks found for text_ids: {job_request.text_ids}")
         
         # Create job
-        job = crud.create_job(db, job_request)
+        job = crud.create_job(db, job_request, creator_id=creator_id)
         logger.info(f"Created job {job.id} for corpus {corpus.name}")
         
         # Calculate total tasks

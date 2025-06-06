@@ -11,8 +11,11 @@ import logging
 from datetime import datetime
 
 from ..models.base import get_db
+from ..models import models
 from . import schemas, crud, services
-from .auth import get_current_user  # For future authentication
+from ..utils.auth import get_current_user, get_current_admin_user, get_optional_user
+from ..utils.sanitization import sanitize_string, sanitize_search_query, SanitizationError
+from .auth import router as auth_router
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -35,6 +38,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include authentication router
+app.include_router(auth_router, prefix="/api")
 
 # Health check endpoint
 @app.get("/api/health")
@@ -64,6 +70,7 @@ async def upload_corpus(
     file: UploadFile = File(...),
     name: Optional[str] = None,
     description: Optional[str] = None,
+    current_user: models.User = Depends(get_current_admin_user),  # Only admins can upload
     db: Session = Depends(get_db)
 ):
     """
@@ -86,6 +93,7 @@ async def upload_corpus(
             content=content,
             name=corpus_name,
             description=description,
+            uploader_id=current_user.id,
             db=db
         )
         
@@ -103,6 +111,7 @@ async def upload_corpus(
 async def list_corpora(
     skip: int = 0,
     limit: int = 100,
+    current_user: Optional[models.User] = Depends(get_optional_user),
     db: Session = Depends(get_db)
 ):
     """List all uploaded corpora with metadata."""
@@ -146,6 +155,7 @@ async def list_corpus_chunks(
 @app.post("/api/jobs", response_model=schemas.JobResponse)
 async def create_job(
     job_request: schemas.JobCreate,
+    current_user: models.User = Depends(get_current_admin_user),  # Only admins can create jobs
     db: Session = Depends(get_db)
 ):
     """
@@ -155,6 +165,7 @@ async def create_job(
     try:
         job = await services.create_processing_job(
             job_request=job_request,
+            creator_id=current_user.id,
             db=db
         )
         
