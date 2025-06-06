@@ -1,180 +1,89 @@
 # Narrative Gravity Maps - Comprehensive Project Documentation
-*Version: 2025.01.15 - Complete Technical Reference for Requirements Definition & LLM Collaboration*
+*Version: 2025.06.04.2 - Complete Technical Reference for API Integration Planning*
 
 ## 🎯 Purpose
 
-This document contains complete project information for the **Narrative Gravity Maps** framework (current version) to enable detailed requirements definition and collaboration with other LLMs in product manager mode. It includes architecture overview, Epic 1-4 completion status, current capabilities, validation-first strategy, and technical specifications needed for systematic development planning.
-
-**Current Status**: Epic 1-4 infrastructure complete, now focused on validation-first development for academic credibility.
+This document contains complete project information for the **Narrative Gravity Maps** framework (v2025.06.04.2) to enable detailed API integration planning with another LLM while conserving Cursor quota. It includes all source code, configuration files, documentation, test structures, and architectural specifications needed for systematic development of automated API workflows.
 
 ## 📋 Table of Contents
 
-1. [Current Status & Strategic Position](#current-status--strategic-position)
-2. [Epic 1-4 Completion Summary](#epic-1-4-completion-summary)
-3. [Validation-First Development Strategy](#validation-first-development-strategy)
-4. [Architecture Summary](#architecture-summary)
-5. [Core Source Code](#core-source-code)
-6. [Configuration System](#configuration-system)
-7. [Framework Definitions](#framework-definitions)
-8. [Current Validation & Research Requirements](#current-validation--research-requirements)
-9. [Testing Infrastructure](#testing-infrastructure)
-10. [Documentation](#documentation)
+1. [Project Overview](#project-overview)
+2. [Architecture Summary](#architecture-summary)
+3. [Core Source Code](#core-source-code)
+4. [Configuration System](#configuration-system)
+5. [Framework Definitions](#framework-definitions)
+6. [Testing Infrastructure](#testing-infrastructure)
+7. [Documentation](#documentation)
+8. [API Integration Requirements](#api-integration-requirements)
+9. [Technical Specifications](#technical-specifications)
+10. [Development Context](#development-context)
 
 ---
 
-## 1. Current Status & Strategic Position
+## 1. Project Overview
 
-### ✅ Infrastructure Complete (Epic 1-4)
-- **Backend Infrastructure**: Celery + Redis + PostgreSQL + FastAPI ✅
-- **Multi-LLM Integration**: GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro ✅
-- **Golden Set Corpus**: 17 curated texts with metadata ✅
-- **Universal Multi-Run Dashboard**: Auto-detection and framework agnostic ✅
-- **Framework Support**: Civic Virtue, Political Spectrum, Moral Foundations ✅
+### Current Status
+- **Version**: v2025.06.04.2 (production-ready research tool)
+- **Release Status**: Minor release completed, dev→main merged
+- **Code Metrics**: 4,084 lines Python code (2,572 core, 606 tools, 906 tests)
+- **Documentation**: 4,508 lines across 15+ documents
+- **Test Coverage**: Comprehensive smoke testing (31 tests passing)
 
-### 🎯 Current Strategic Priority: Validation-First Development
-**CRITICAL**: Academic credibility must be established before advancing to Milestone 2.
+### Strategic Position
+The project is at a critical juncture where **manual LLM workflow** is the primary scalability bottleneck. The next phase requires **systematic API automation** to enable:
+- Multi-run analysis with variance quantification
+- Cross-model validation (GPT-4, Claude, Gemini)
+- Batch processing for large text corpora
+- Statistical confidence intervals for reproducibility
 
-**Phase 1 (Weeks 1-3)**: Core Reliability Validation
-- Multi-run consistency studies (17 texts × 3 frameworks × 3 LLMs × 5 runs = 765 analyses)
-- Inter-LLM correlation analysis and consensus thresholds
-- Framework internal consistency validation
-
-**Phase 2 (Weeks 4-5)**: Interpretive Intelligence
-- Evidence extraction systems with supporting quotes
-- Automated report generation for human understanding
-- Comparative analysis capabilities
-
-**Phase 3 (Weeks 6-8)**: Conversational Analysis Interface
-- Domain-specific AI assistant for natural language queries
-- Hybrid local/remote LLM architecture
-- User-friendly interface for non-technical stakeholders
-
-### Key Current Capabilities
+### Key Capabilities
 - **Framework-Agnostic Design**: Modular architecture supports any persuasive narrative type
 - **Mathematical Rigor**: Elliptical coordinate system with differential weighting
 - **Visualization Engine**: Automated generation of publication-ready plots
-- **Universal Dashboard**: Auto-detects framework and metadata from filenames
+- **Multi-Framework Support**: Civic virtue, political spectrum, rhetorical posture
 - **Interactive Interface**: Streamlit app with comprehensive workflow management
 
 ---
 
-## 2. Epic 1-4 Completion Summary
-
-### ✅ Epic 1: Corpus & Job Management Backend (COMPLETED)
-**Infrastructure**: Full backend services implementation
-- **Data Models**: Corpus, Document, Chunk, Job, Task with PostgreSQL + Alembic
-- **JSONL Ingestion**: Schema validation and metadata extraction
-- **Queue & Orchestration**: Celery + Redis with fault-tolerant processing
-- **APIs**: Complete REST endpoints for corpus and job management
-- **Resumability**: Exponential backoff retry logic for LLM API failures
-
-### ✅ Epic 2: Hugging Face API Integration Backend (COMPLETED)
-**Multi-LLM Integration**: Unified access to multiple LLMs
-- **Unified API**: Single integration point through HuggingFace
-- **Model Support**: GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro
-- **Cost Tracking**: Integrated billing and usage monitoring
-- **Rate Limiting**: Transparent retry and backoff strategies
-
-### ✅ Epic 3: Results Analysis Backend (COMPLETED)
-**Statistical Analysis**: Comprehensive reliability metrics
-- **Variance Analysis**: Multi-run consistency measurements
-- **Confidence Intervals**: Statistical reliability quantification
-- **Inter-Model Agreement**: Cross-LLM consensus validation
-- **Export Capabilities**: CSV/JSON for academic replication
-
-### ✅ Epic 4: Admin Interface & Monitoring (COMPLETED)
-**User Interface**: Complete workflow management
-- **Streamlit Dashboard**: Real-time job monitoring and cost tracking
-- **Upload Interface**: JSONL corpus ingestion with validation
-- **Results Viewer**: Visualization and export capabilities
-- **Settings Management**: Framework selection and parameter configuration
-
-### 🆕 Additional Achievements Beyond Epic 1-4:
-- **Universal Multi-Run Dashboard**: Auto-detection system for any framework/speaker/year
-- **Golden Set Corpus**: 17 carefully curated texts for validation studies
-- **Framework-Agnostic Architecture**: Hot-swappable framework support
-- **Enhanced Visualization**: Professional publication-ready charts
-- **Comprehensive Documentation**: Full technical and user documentation
-
----
-
-## 3. Validation-First Development Strategy
-
-### 🧪 Critical Gap Identified: Academic Validation
-**Problem**: Current system produces numerical data (JSON/PNG) but lacks:
-- Interpretive narratives explaining what scores mean
-- Evidence extraction with supporting quotes
-- Comparative context and insights
-- Academic-grade reliability studies
-
-### 📊 Validation Requirements (3-Phase Plan)
-**See**: `VALIDATION_FIRST_DEVELOPMENT_STRATEGY.md` for complete 270-line specification
-
-**Phase 1**: Multi-run consistency, inter-LLM correlation, framework validation
-**Phase 2**: Evidence extraction, automated reports, human-readable explanations  
-**Phase 3**: Conversational AI interface for domain-specific queries
-
-### 🎯 Success Criteria for Academic Credibility
-- Multi-run reliability: CV < 0.15 for 80% of well dimensions
-- Inter-LLM consensus: r > 0.7 between primary LLM pairs
-- Framework validity: Internal consistency α > 0.8
-- Publication-quality statistical documentation
-
----
-
-## 4. Architecture Summary
+## 2. Architecture Summary
 
 ### Core Components
 ```
 narrative_gravity_analysis/
-├── 🚀 Core Application & Analysis
-│   ├── launch_app.py                 # Main application launcher
-│   ├── narrative_gravity_app.py      # Core Streamlit web interface
-│   ├── narrative_gravity_elliptical.py # Core analysis & visualization engine
-│   ├── create_generic_multi_run_dashboard.py # Universal multi-run dashboard system
-│   ├── framework_manager.py          # Framework switching & management system
-│   └── generate_prompt.py            # Legacy LLM prompt generator
-│
-├── 📁 Backend Infrastructure (src/)
-│   ├── api/                          # FastAPI endpoints for jobs, tasks, corpora
-│   ├── api_clients/                  # Clients for interacting with LLM APIs
-│   ├── cli/                          # Command-line interface tools
-│   ├── models/                       # Database models (SQLAlchemy)
-│   ├── prompts/                      # Prompt templates and management
-│   ├── tasks/                        # Celery tasks for background processing
-│   └── utils/                        # Utility functions (validation, chunking)
+├── 🚀 Core Application (5 files)
+│   ├── launch_app.py                 # Application launcher
+│   ├── narrative_gravity_app.py      # Main Streamlit interface (1,372 lines)
+│   ├── narrative_gravity_elliptical.py # Core analysis engine (1,136 lines)
+│   ├── framework_manager.py          # Framework switching system (257 lines)
+│   └── generate_prompt.py            # LLM prompt generator (351 lines)
 │
 ├── 📊 Data & Configuration
-│   ├── frameworks/                   # Framework definitions (Civic Virtue, etc.)
-│   ├── config/                       # Symlinks to active framework
-│   ├── corpus/                       # Text corpora (golden set, etc.)
-│   ├── model_output/                 # Analysis results (JSON/PNG)
-│   └── reference_texts/              # Sample texts for analysis
+│   ├── frameworks/                   # Framework definitions (3 frameworks)
+│   ├── config/                      # Active framework (symlinks)
+│   ├── model_output/                # Analysis results JSON/PNG
+│   └── reference_texts/             # Sample texts for analysis
 │
-├── 📚 Documentation & Instructions
-│   ├── docs/                         # User guides, architecture, examples
-│   ├── dev_instructions/             # Core strategic & development documents
-│   ├── README.md                     # Main project documentation
-│   └── PROJECT_STRUCTURE.md          # Detailed project structure overview
+├── 📚 Documentation (4,508 lines)
+│   ├── docs/development/            # Technical documentation (6 active docs)
+│   ├── docs/examples/               # Usage examples
+│   ├── README.md                    # Main project documentation (471 lines)
+│   ├── PAPER_REPLICATION.md         # Academic reproduction guide
+│   └── narrative_gravity_wells_paper.md # Academic paper (294 lines)
 │
 └── 🗃️ Testing & Archive
-    ├── tests/                        # Unit, integration, and validation tests
-    └── archive/                      # Historical development versions & outputs
+    ├── tests/                       # Test suite (906 lines, 31 tests)
+    └── archive/                     # Historical development files
 ```
 
 ### Technology Stack
 ```bash
-# Core Dependencies (see requirements.txt for full list)
-fastapi                # High-performance API framework
-celery                 # Distributed task queue
-redis                  # In-memory data store / message broker
-sqlalchemy             # SQL toolkit and Object Relational Mapper (ORM)
-alembic                # Lightweight database migration tool
-streamlit              # Web interface for interactive apps
-pandas                 # Data manipulation and analysis
-plotly                 # Interactive visualizations
-matplotlib             # Static visualization engine
-numpy                  # Mathematical computations
+# Core Dependencies (requirements.txt)
+matplotlib>=3.7.0      # Visualization engine
+numpy>=1.24.0          # Mathematical computations
+seaborn                # Statistical plotting
+streamlit>=1.30.0      # Web interface
+plotly>=5.17.0         # Interactive visualizations
+pandas>=2.0.0          # Data manipulation
 ```
 
 ### Modular Framework Architecture
@@ -1248,22 +1157,20 @@ class PromptGenerator:
 
 ---
 
-## 6. Configuration System
+## 4. Configuration System
 
-### 6.1 Active Configuration (`config/`)
+### 4.1 Active Configuration (`config/`)
 
-The `config/` directory contains symlinks to the active framework's configuration files. This allows for hot-swapping analysis frameworks without changing any code.
-
+The `config/` directory contains symlinks to the active framework:
 ```bash
 config/
 ├── dipoles.json -> ../frameworks/civic_virtue/dipoles.json
 └── framework.json -> ../frameworks/civic_virtue/framework.json
 ```
 
-### 6.2 Dipoles Configuration (`dipoles.json`)
+### 4.2 Dipoles Configuration Structure (`dipoles.json`)
 
-This file defines the conceptual structure of a framework, including the names, descriptions, and language cues for each "dipole" (the opposing concepts like Dignity vs. Tribalism). It's used primarily for generating the LLM prompts.
-
+**Complete current active configuration:**
 ```json
 {
   "framework_name": "civic_virtue",
@@ -1290,10 +1197,9 @@ This file defines the conceptual structure of a framework, including the names, 
 }
 ```
 
-### 6.3 Framework Configuration (`framework.json`)
+### 4.3 Framework Configuration Structure (`framework.json`)
 
-This file defines the mathematical implementation of the framework, including the position and weight of each gravity well, the ellipse parameters, and metric definitions. It is used by the analysis and visualization engine.
-
+**Complete mathematical implementation:**
 ```json
 {
   "framework_name": "civic_virtue",
@@ -1347,24 +1253,26 @@ This file defines the mathematical implementation of the framework, including th
 
 ---
 
-## 7. Framework Definitions
+## 5. Framework Definitions
 
-### 7.1 Available Frameworks
+### 5.1 Available Frameworks
 
-The system currently supports three specialized, hot-swappable frameworks stored in the `frameworks/` directory:
+The system currently supports three specialized frameworks:
 
-1.  **Civic Virtue Framework** (`frameworks/civic_virtue/`) - **Primary**
-    *   Our most advanced and validated framework for political discourse.
-    *   Features 5 dipoles and 10 wells with a three-tier differential weighting system based on moral psychology research.
+1. **Civic Virtue Framework** (`frameworks/civic_virtue/`) - **Primary**
+   - Most advanced implementation for political discourse
+   - 5 dipoles, 10 wells with differential weighting
+   - Three-tier system: Identity (±1.0), Principles (±0.8), Cognition (±0.6)
 
-2.  **Political Spectrum Framework** (`frameworks/political_spectrum/`)
-    *   A more traditional model for positioning narratives on a left-right political spectrum.
-    *   Useful for comparative analysis against the Civic Virtue model.
+2. **Political Spectrum Framework** (`frameworks/political_spectrum/`)
+   - Traditional left-right political positioning
+   - Alternative framework for comparative analysis
 
-3.  **Moral Rhetorical Posture Framework** (`frameworks/moral_rhetorical_posture/`)
-    *   Assesses communication style and rhetorical strategy rather than ideological content.
+3. **Moral Rhetorical Posture Framework** (`frameworks/moral_rhetorical_posture/`)
+   - Communication style and approach analysis
+   - Rhetorical strategy assessment
 
-### 7.2 Civic Virtue Framework Details
+### 5.2 Civic Virtue Framework Details
 
 **Integrative Gravity Wells** (Upper hemisphere, positive weights):
 - **Dignity** (90°, +1.0): Individual moral worth, universal rights
@@ -1380,124 +1288,223 @@ The system currently supports three specialized, hot-swappable frameworks stored
 - **Resentment** (225°, -0.8): Grievance-centered moral scorekeeping
 - **Fear** (200°, -0.6): Threat-focused reaction and control
 
-### 7.3 Framework Creation Guidelines
+### 5.3 Framework Creation Guidelines
 
-A new framework can be added by creating a new subdirectory in `frameworks/` with the following required files:
-
+**Required Files Structure:**
 ```
 frameworks/[framework_name]/
-├── dipoles.json      # Conceptual definitions for LLM prompts
-├── framework.json    # Mathematical implementation for analysis
-└── README.md         # Documentation explaining the framework's theory
+├── dipoles.json      # Conceptual definitions
+├── framework.json    # Mathematical implementation
+└── README.md         # Framework documentation
 ```
-The system will automatically discover and validate any new frameworks that follow this structure.
+
+**Validation Requirements:**
+- Consistent well names between dipoles.json and framework.json
+- Valid angular positioning (0-360 degrees)
+- Appropriate weight assignments (-1.0 to +1.0)
+- Complete language cue definitions
 
 ---
 
-## 8. Current Validation & Research Requirements
+## 6. Testing Infrastructure
 
-### 8.1 ✅ API Integration Complete (Epic 1-4)
+### 6.1 Test Suite Overview
 
-**Multi-LLM Integration Achieved:**
-✅ **HuggingFace API Integration**: Unified access to GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro  
-✅ **Batch Processing**: Automated multi-run analysis with statistical aggregation  
-✅ **Cross-Model Validation**: Systematic comparison and consensus analysis  
-✅ **Statistical Enhancement**: Confidence intervals, variance quantification, uncertainty measures  
-✅ **Workflow Automation**: No more manual copy/paste - full API automation  
+**Comprehensive smoke testing system** - 906 lines across 6 files:
+- **Total Tests**: 31 (all passing, 2 skipped)
+- **CLI Tools**: 17 tests ✅
+- **Streamlit App**: 14 tests ✅
+- **Coverage**: Framework management, prompt generation, visualization, integration
 
-**Infrastructure Complete:**
-- Celery + Redis task queue for scalable processing
-- PostgreSQL database for persistent storage
-- FastAPI REST endpoints for job management
-- Streamlit dashboard for real-time monitoring
+### 6.2 Test Structure
 
-### 8.2 🎯 Current Priority: Academic Validation Studies
-
-**Critical Need**: Academic credibility through rigorous validation studies
-
-**Phase 1 Requirements (Weeks 1-3): Core Reliability Validation**
-```python
-# Multi-run consistency study requirements
-validation_study_requirements = {
-    "corpus": "17 golden set texts",
-    "frameworks": ["civic_virtue", "political_spectrum", "moral_foundations"],
-    "llms": ["gpt-4o", "claude-3.5-sonnet", "gemini-1.5-pro"],
-    "runs_per_combination": 5,
-    "total_analyses": 765,  # 17 × 3 × 3 × 5
-    "metrics": [
-        "coefficient_of_variation",
-        "confidence_intervals", 
-        "inter_llm_correlation",
-        "framework_internal_consistency"
-    ]
-}
+```
+tests/
+├── README.md                 # Comprehensive testing documentation (289 lines)
+├── TESTING_SUMMARY.md        # Test results and coverage summary (225 lines)
+├── run_tests.py             # Main test runner (182 lines)
+├── test.sh                  # Shell script wrapper (159 lines)
+├── test_requirements.txt    # Testing dependencies (11 lines)
+├── test_cli_tools.py        # CLI functionality tests (384 lines)
+└── test_streamlit_app.py    # Streamlit interface tests (343 lines)
 ```
 
-**Phase 2 Requirements (Weeks 4-5): Interpretive Intelligence**
-```python
-# Evidence extraction and explanation system
-interpretive_requirements = {
-    "quote_extraction": "identify_passages_supporting_scores",
-    "explanation_generation": "human_readable_reasoning_chains",
-    "comparative_analysis": "corpus_relative_positioning", 
-    "report_templates": [
-        "executive_summary",
-        "technical_appendix",
-        "evidence_based_insights"
-    ]
-}
+### 6.3 Test Categories
+
+**Framework Manager Tests** ✅
+- Framework initialization and directory handling
+- Framework listing (empty and populated states)
+- Framework validation (basic smoke test)
+- CLI command help and usage verification
+
+**Prompt Generator Tests** ✅
+- Configuration loading (dipoles.json, framework.json)
+- Interactive prompt generation with proper structure
+- Batch prompt generation
+- CLI command help and usage verification
+
+**Visualization Engine Tests** ✅
+- Elliptical visualizer initialization
+- Analysis data loading and validation
+- JSON error handling
+- CLI command help and usage verification
+
+**Streamlit Component Tests** ✅
+- Framework name normalization
+- JSON framework detection (with/without metadata)
+- Utility function validation
+- File existence and syntax validation
+
+**Integration Tests** ✅
+- CLI commands execute without crashing
+- Help system functionality works
+- Python syntax validation across all files
+- Import system verification
+- Requirements validation
+
+### 6.4 Running Tests
+
+**Quick Testing:**
+```bash
+# All tests (< 2 seconds)
+python tests/run_tests.py
+
+# Shell wrapper with options
+./tests/test.sh              # All tests
+./tests/test.sh cli          # CLI only
+./tests/test.sh streamlit    # Streamlit only
+./tests/test.sh quick        # Syntax/import checks
 ```
 
-**Phase 3 Requirements (Weeks 6-8): Conversational Interface**
+---
+
+## 7. Documentation
+
+### 7.1 Core Documentation Files
+
+**Main Documentation** (4,508 total lines):
+- `README.md` (471 lines): Complete project overview, usage, examples
+- `PAPER_REPLICATION.md` (70 lines): Academic reproduction guide
+- `PROJECT_STRUCTURE.md` (110 lines): Architectural organization
+- `narrative_gravity_wells_paper.md` (294 lines): Academic paper draft
+
+**Development Documentation** (`docs/development/`):
+- 6 active technical documents covering architecture, user stories, roadmap
+- 11 archived development files moved to organized structure
+
+**Testing Documentation** (`tests/`):
+- `README.md` (289 lines): Comprehensive testing guide
+- `TESTING_SUMMARY.md` (225 lines): Test results and coverage
+
+### 7.2 Key Documentation Insights
+
+**Paper Publication Ready:**
+- Academic paper with theoretical foundation
+- Replication instructions for key analyses
+- Model identification guidance for accuracy
+- Framework versioning for reproducibility
+
+**Architecture Documentation:**
+- Clean modular design with symlink-based configuration
+- Framework-agnostic core with specialized implementations
+- Comprehensive CLI and web interface documentation
+- Testing philosophy and maintenance guidelines
+
+**User Experience Documentation:**
+- Multiple user persona coverage (researchers, custom framework developers)
+- Workflow examples from basic to advanced usage
+- Troubleshooting and common use cases
+- Installation and dependency management
+
+---
+
+## 8. API Integration Requirements
+
+### 8.1 Current Manual Workflow
+
+**Critical Bottleneck Identified:**
+The current workflow requires **manual LLM interaction** for each analysis:
+1. Generate prompt using `generate_prompt.py`
+2. Manually copy prompt to LLM interface (ChatGPT, Claude, etc.)
+3. Manually paste text for analysis
+4. Manually copy JSON response
+5. Save JSON file and run visualization
+
+**Scalability Limitations:**
+- Single analysis per session
+- No variance quantification across multiple runs
+- No systematic cross-model validation
+- No batch processing capability
+- Manual error handling and resubmission
+
+### 8.2 Required API Integration Capabilities
+
+**Priority 1: Hugging Face API Integration**
 ```python
-# Domain-specific AI assistant requirements
-conversational_requirements = {
-    "query_types": [
-        "score_explanations",
-        "comparative_analysis", 
-        "variance_investigation",
-        "evidence_retrieval"
-    ],
-    "architecture": "hybrid_local_remote_llm",
-    "local_model": "llama_3_1_8b",  # For basic queries
-    "remote_models": "gpt4_claude_gemini",  # For complex analysis
-    "hallucination_control": "grounded_responses_only"
-}
+# Target workflow automation
+def analyze_text_batch(text: str, framework: str, model_configs: List[Dict], n_runs: int = 5):
+    """
+    Automated batch analysis with statistical validation
+    
+    Args:
+        text: Input text for analysis
+        framework: Framework name (civic_virtue, political_spectrum, etc.)
+        model_configs: List of model configurations for cross-validation
+        n_runs: Number of runs per model for variance quantification
+    
+    Returns:
+        AnalysisResults: Statistical summary with confidence intervals
+    """
 ```
 
-### 8.3 Academic Publication Requirements
+**Priority 2: Multi-Model Cross-Validation**
+- Support for GPT-4, Claude 4.0 Sonnet, Gemini Pro
+- Systematic comparison across models
+- Statistical validation of consensus/divergence
+- Automated model identification and attribution
 
-**Statistical Rigor Standards:**
-- Multi-run reliability: CV < 0.15 for 80% of well dimensions
-- Inter-LLM consensus: r > 0.7 between primary LLM pairs  
-- Framework validity: Internal consistency α > 0.8
-- Replication package: Complete methodology documentation
-
-**Evidence Standards:**
-- Quote relevance: 90% of extracted quotes directly support scores
-- Explanation accuracy: 85%+ human evaluator approval
-- Comparative insights: Meaningful cross-text pattern identification
-- Report quality: Non-technical stakeholders can act on insights
-
-### 8.4 Technology Stack for Validation Studies
-
-**Statistical Analysis Tools:**
+**Priority 3: Statistical Analysis Enhancement**
 ```python
-# Required statistical libraries and methods
-statistical_stack = {
-    "correlation_analysis": ["scipy.stats.pearsonr", "spearmanr", "kendalltau"],
-    "reliability_measures": ["cronbach_alpha", "test_retest_reliability"],
-    "confidence_intervals": ["bootstrap_methods", "parametric_ci"],
-    "variance_analysis": ["anova", "coefficient_of_variation"],
-    "consensus_metrics": ["intraclass_correlation", "fleiss_kappa"]
-}
+# Enhanced analysis with confidence intervals
+class StatisticalAnalysisResults:
+    mean_scores: Dict[str, float]           # Average scores per well
+    confidence_intervals: Dict[str, Tuple] # 95% CI per well
+    inter_model_variance: Dict[str, float] # Cross-model consistency
+    intra_model_variance: Dict[str, float] # Within-model consistency
+    composite_metrics: Dict[str, float]    # COM, NPS, DPS with uncertainty
 ```
 
-**Validation Pipeline Architecture:**
-- **Automated Study Runner**: Orchestrates large-scale validation experiments
-- **Statistical Analyzer**: Computes reliability and consensus metrics  
-- **Report Generator**: Creates publication-ready analysis summaries
-- **Quality Assurance**: Validates results against academic standards
+### 8.3 API Integration Architecture
+
+**Proposed System Components:**
+
+1. **API Client Manager** (`api_client.py`)
+   - Unified interface for multiple LLM APIs
+   - Rate limiting and error handling
+   - Authentication and configuration management
+   - Response validation and parsing
+
+2. **Batch Analysis Engine** (`batch_analyzer.py`)
+   - Multi-run analysis coordination
+   - Statistical aggregation and validation
+   - Progress tracking and resumption
+   - Result caching and persistence
+
+3. **Cross-Model Validator** (`cross_validator.py`)
+   - Model configuration management
+   - Systematic cross-model comparison
+   - Consensus analysis and outlier detection
+   - Statistical significance testing
+
+4. **Enhanced Visualization** (extensions to existing engine)
+   - Confidence interval plotting
+   - Multi-model comparison charts
+   - Statistical distribution visualization
+   - Uncertainty quantification graphics
+
+### 8.4 Configuration Requirements
+
+**API Configuration Structure:**
 ```json
 {
   "api_providers": {
@@ -1701,25 +1708,6 @@ This comprehensive documentation provides complete technical context for systema
 
 ---
 
-## 5. Key Code Components
-
-This section highlights the most critical Python modules in the system that drive the analysis, visualization, and backend processing.
-
-### 5.1 Analysis & Visualization
-- **`narrative_gravity_elliptical.py`**: The mathematical heart of the system. This module calculates narrative positions based on framework scores and generates the core elliptical visualizations. It's the primary engine for turning raw scores into graphical insights.
-- **`create_generic_multi_run_dashboard.py`**: A key component for our validation studies. This script consumes multi-run analysis results, computes statistics like variance and confidence intervals, and generates the comprehensive multi-part dashboards that include elliptical maps, bar charts, and LLM-generated summaries. It is framework-agnostic and uses filename parsing for metadata extraction.
-
-### 5.2 Application & Interface
-- **`narrative_gravity_app.py`**: The main Streamlit web application. It provides the user interface for uploading texts, managing frameworks, launching analyses, and viewing results. It orchestrates the user-facing workflow.
-- **`framework_manager.py`**: A utility that handles the loading, validation, and switching of analysis frameworks (e.g., Civic Virtue, Political Spectrum). It allows the system to be modular and extensible.
-
-### 5.3 Backend Processing (Illustrative from `src/`)
-- **`src/tasks/processing.py`**: A core Celery task for running analysis jobs in the background. It takes a chunk of text and an analysis configuration, interacts with the LLM client, and stores the result. This enables our scalable, asynchronous architecture.
-- **`src/api_clients/huggingface_client.py`** (Illustrative): A client responsible for wrapping the Hugging Face API. It handles authentication, request formatting, and retry logic, providing a stable interface for the task processor to use.
-- **`src/models/job.py`** (Illustrative): The SQLAlchemy data model for a 'Job'. It defines the database schema for tracking the state and parameters of an analysis job, including which texts, frameworks, and models are used.
-
----
-
 *End of Comprehensive Documentation*
 
 **File Statistics:**
@@ -1729,53 +1717,3 @@ This section highlights the most critical Python modules in the system that driv
 - **Test Suite**: 906 lines, 31 tests
 - **Configuration**: 185 lines JSON across frameworks
 - **Status**: Production-ready, API integration ready 
-
----
-
-## 9. Testing Infrastructure
-
-Our testing philosophy has evolved from basic smoke tests to a more robust, multi-layered approach that ensures the reliability of the core application, the backend infrastructure, and the analysis results themselves.
-
-### 9.1 Test Suite Overview
-The `tests/` directory contains a combination of unit tests, integration tests, and (forthcoming) validation study tests. The suite is designed to verify both code correctness and the scientific validity of the analysis.
-
--   **Unit Tests (`tests/unit/`)**: Focused on isolating and testing individual functions and classes. For example, testing the mathematical calculations in `narrative_gravity_elliptical.py` or a specific utility function in `src/utils/`.
--   **Integration Tests (`tests/integration/`)**: Designed to test the interaction between different parts of the system. For example, verifying that a `Celery` task correctly calls the `API Client` and stores data using the `Database Models`.
--   **Validation Tests (`tests/validation/`)**: *[In Development]* This is a new, critical category of tests designed to execute the validation studies outlined in Phase 1 of our strategy. These tests will run analyses on the golden set corpus and perform statistical checks on the results to measure reliability and consensus.
-
-### 9.2 Backend Testing (`src/`)
-The backend components in the `src/` directory are tested with a focus on their specific roles in the application stack:
--   **API Tests**: Verifying FastAPI endpoint logic, including request/response formats, authentication, and error handling.
--   **Task Tests**: Testing Celery task execution, ensuring they can be queued, run, and handle success/failure states correctly.
--   **Model Tests**: Confirming that the SQLAlchemy database models correctly map to the database schema and that relationships are correctly defined.
--   **Client Tests**: Mocking external APIs (like Hugging Face) to test the retry logic, error handling, and data parsing of our API clients.
-
-### 9.3 Forthcoming: Validation Study Automation
-The next major development in our testing infrastructure is the creation of an automated test harness for the **Golden Set Validation Framework**.
-
----
-
-## 10. Documentation
-
-Our documentation is organized into three distinct categories to serve different audiences: strategic stakeholders, developers, and end-users.
-
-### 10.1 Strategic & Planning Documentation (`dev_instructions/`)
-This is the canonical source for understanding the project's direction, priorities, and high-level plans. It's essential reading for product management and strategic decision-making.
--   **`VALIDATION_FIRST_DEVELOPMENT_STRATEGY.md`**: The most important document right now. Outlines our current 3-phase plan for achieving academic credibility.
--   **`COMPREHENSIVE_PROJECT_DOCUMENTATION.md`**: This document. A detailed technical and strategic reference.
--   **`User Personas - Narrative Gravity Model.md`**: Describes the target users who drive our development priorities.
--   **Milestone & Epic Docs**: Documents that track the completion status and high-level goals of major work packages.
-
-### 10.2 Technical & Developer Documentation (`docs/` and code)
-This documentation is aimed at developers working on the system.
--   **`docs/architecture/`**: Contains diagrams (like the ERD) and detailed explanations of the system's architecture.
--   **`README.md`**: The primary entry point for a new developer, explaining how to set up, configure, and run the application.
--   **Code Docstrings**: We aim for comprehensive docstrings within the code itself to explain the purpose and function of key classes and methods.
--   **`PROJECT_STRUCTURE.md`**: A detailed map of the files and directories in the repository.
-
-### 10.3 User & Academic Documentation (`docs/` and outputs)
-This documentation is for end-users of the tool, including researchers and academic collaborators.
--   **`docs/user-guides/`**: Contains guides for using the application, understanding the frameworks, and interpreting the results.
--   **`docs/examples/`**: Showcases example analyses and dashboards.
--   **Replication Materials**: For any publication, we will produce a complete replication package with data, scripts, and instructions to ensure full academic transparency and reproducibility.
--   **Generated Reports**: The automated reports from the interpretive intelligence phase will themselves be a form of user documentation, explaining the results of a specific analysis.
