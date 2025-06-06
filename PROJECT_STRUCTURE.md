@@ -20,7 +20,9 @@ narrative_gravity_analysis/
 ├── narrative_gravity_app.py            # Main Streamlit interface
 ├── narrative_gravity_elliptical.py     # Core analysis engine
 ├── framework_manager.py                # Framework switching system
-└── generate_prompt.py                  # LLM prompt generator
+├── generate_prompt.py                  # LLM prompt generator
+├── create_generic_multi_run_dashboard.py # Universal multi-run dashboard system
+└── test_auto_detection.py             # Auto-detection capability tests
 ```
 
 ## 🔧 Operational Scripts
@@ -73,6 +75,10 @@ narrative_gravity_analysis/
 │   │   ├── USER_STORIES.md
 │   │   └── [various technical docs]
 │   │
+│   ├── generalization/               # Multi-run dashboard documentation (NEW)
+│   │   ├── GENERIC_DASHBOARD_USAGE.md  # Comprehensive usage guide
+│   │   └── GENERALIZATION_SUMMARY.md   # Technical transformation details
+│   │
 │   └── examples/                      # Usage examples
 │       ├── STREAMLIT_QUICKSTART.md
 │       └── WORKFLOW_DEMO.md
@@ -84,6 +90,17 @@ narrative_gravity_analysis/
 
 ```
 ├── archive/                           # Historical/backup files
+│   ├── development_versions/          # Previous dashboard versions (NEW)
+│   │   ├── create_obama_elliptical_dashboard_v*.py
+│   │   ├── create_obama_elliptical_enhanced_v*.py
+│   │   ├── test_multi_run_obama.py
+│   │   └── [various development iterations]
+│   │
+│   ├── test_outputs/                  # Development dashboard outputs (NEW)
+│   │   ├── obama_dashboard_v*.png
+│   │   ├── obama_elliptical_enhanced*.png
+│   │   └── [various test visualizations]
+│   │
 │   └── model_output_backup_old_weights/
 │
 

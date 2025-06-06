@@ -1,0 +1,90 @@
+{
+  "test_metadata": {
+    "test_type": "multi_run_consistency",
+    "model": "claude-3.5-sonnet",
+    "framework": "civic_virtue",
+    "text_source": "Obama First Inaugural 2009",
+    "total_runs": 5,
+    "timestamp": "2025-06-06T14:27:31.117433"
+  },
+  "individual_runs": [
+    {
+      "run_number": 1,
+      "success": true,
+      "model": "claude-3.5-sonnet",
+      "framework": "civic_virtue",
+      "result": {
+        "raw_response": "{\n  \"scores\": {\n    \"Dignity\": 0.9,\n    \"Tribalism\": 0.2,\n    \"Truth\": 0.8,\n    \"Manipulation\": 0.1,\n    \"Justice\": 0.8,\n    \"Resentment\": 0.1,\n    \"Hope\": 0.9,\n    \"Fantasy\": 0.2,\n    \"Pragmatism\": 0.8,\n    \"Fear\": 0.2\n  },\n  \"analysis\": \"Obama's inaugural address strongly emphasizes dignity (universal worth, shared humanity), truth (honest acknowledgment of challenges), and hope (grounded optimism) while maintaining pragmatic realism. The speech centers on collective responsibility and shared values rather than division. It acknowledges difficulties while offering realistic paths forward, grounded in historical precedent and American ideals. Notable for balancing aspirational rhetoric with practical acknowledgment of challenges.\"\n}\n\nThe speech powerfully affirms individual dignity while rejecting tribalism, emphasizes truthful assessment of challenges while avoiding manipulation, promotes justice through shared responsibility rather than resentment, offers grounded hope without fantasy solutions, and maintains pragmatic focus while acknowledging but not exploiting fears.",
+        "scores": {},
+        "parsed": false
+      },
+      "scores": {},
+      "cost": 0.01647,
+      "duration": 8.276506900787354,
+      "timestamp": "2025-06-06T14:26:56.315600"
+    },
+    {
+      "run_number": 2,
+      "success": true,
+      "model": "claude-3.5-sonnet",
+      "framework": "civic_virtue",
+      "result": {
+        "raw_response": "{\n  \"scores\": {\n    \"Dignity\": 0.9,\n    \"Tribalism\": 0.2,\n    \"Truth\": 0.8,\n    \"Manipulation\": 0.1,\n    \"Justice\": 0.8,\n    \"Resentment\": 0.1,\n    \"Hope\": 0.9,\n    \"Fantasy\": 0.2,\n    \"Pragmatism\": 0.8,\n    \"Fear\": 0.2\n  },\n  \"analysis\": \"Obama's inaugural address strongly emphasizes dignity (universal worth, shared humanity), truth (honest acknowledgment of challenges), and hope (grounded optimism) while maintaining pragmatic realism. The speech centers on collective responsibility and shared values rather than division. It acknowledges difficulties while offering realistic paths forward, grounded in historical precedent and American ideals. Notable focus on unity and common purpose over partisan interests, with minimal appeal to fear or resentment.\"\n}\n\nThe speech powerfully balances aspirational themes with pragmatic acknowledgment of challenges, consistently emphasizing shared dignity and collective purpose over tribal divisions. While acknowledging real threats and problems, it frames them as challenges to be met through shared effort rather than sources of fear or resentment.",
+        "scores": {},
+        "parsed": false
+      },
+      "scores": {},
+      "cost": 0.016575,
+      "duration": 6.9560651779174805,
+      "timestamp": "2025-06-06T14:27:05.276725"
+    },
+    {
+      "run_number": 3,
+      "success": true,
+      "model": "claude-3.5-sonnet",
+      "framework": "civic_virtue",
+      "result": {
+        "raw_response": "{\n  \"scores\": {\n    \"Dignity\": 0.9,\n    \"Tribalism\": 0.2,\n    \"Truth\": 0.8,\n    \"Manipulation\": 0.1,\n    \"Justice\": 0.8,\n    \"Resentment\": 0.1,\n    \"Hope\": 0.9,\n    \"Fantasy\": 0.2,\n    \"Pragmatism\": 0.8,\n    \"Fear\": 0.2\n  },\n  \"analysis\": \"Obama's inaugural address strongly emphasizes dignity (universal worth, shared humanity), truth (honest acknowledgment of challenges), and hope (grounded optimism) while maintaining pragmatic realism. The speech centers on collective responsibility and shared values rather than division. It acknowledges difficulties while offering realistic paths forward, grounded in historical precedent and American ideals. Notable for balancing aspirational rhetoric with practical acknowledgment of challenges.\"\n}\n\nThe speech powerfully affirms individual dignity while rejecting tribalism, emphasizes truthful assessment of challenges while avoiding manipulation, promotes justice through shared responsibility rather than resentment, offers grounded hope without fantasy solutions, and maintains pragmatic focus while acknowledging but not exploiting fears.",
+        "scores": {},
+        "parsed": false
+      },
+      "scores": {},
+      "cost": 0.01647,
+      "duration": 5.835581064224243,
+      "timestamp": "2025-06-06T14:27:13.115126"
+    },
+    {
+      "run_number": 4,
+      "success": true,
+      "model": "claude-3.5-sonnet",
+      "framework": "civic_virtue",
+      "result": {
+        "raw_response": "{\n  \"scores\": {\n    \"Dignity\": 0.9,\n    \"Tribalism\": 0.2,\n    \"Truth\": 0.8,\n    \"Manipulation\": 0.1,\n    \"Justice\": 0.8,\n    \"Resentment\": 0.2,\n    \"Hope\": 0.9,\n    \"Fantasy\": 0.3,\n    \"Pragmatism\": 0.7,\n    \"Fear\": 0.2\n  },\n  \"analysis\": \"Obama's inaugural address strongly emphasizes dignity (universal worth, shared humanity) and hope (realistic optimism about America's potential). It acknowledges hard truths while remaining pragmatic about solutions. The speech centers justice through equal rights and fair governance, while minimizing tribalism and resentment. It balances aspirational rhetoric with concrete challenges, avoiding both fear-mongering and fantasy solutions. The narrative gravitates strongly toward unity, shared sacrifice, and collective responsibility.\"\n}\n\nThe speech powerfully emphasizes universal human dignity (\"all are equal, all are free\"), truth-telling about challenges while maintaining grounded hope (\"challenges we face are real...but they will be met\"), and pragmatic approaches to complex problems. While acknowledging fears and divisions, it deliberately pulls away from tribalistic or resentment-based framing, instead emphasizing shared values and common purpose.",
+        "scores": {},
+        "parsed": false
+      },
+      "scores": {},
+      "cost": 0.01695,
+      "duration": 7.196744918823242,
+      "timestamp": "2025-06-06T14:27:22.313085"
+    },
+    {
+      "run_number": 5,
+      "success": true,
+      "model": "claude-3.5-sonnet",
+      "framework": "civic_virtue",
+      "result": {
+        "raw_response": "{\n  \"scores\": {\n    \"Dignity\": 0.9,\n    \"Tribalism\": 0.2,\n    \"Truth\": 0.8,\n    \"Manipulation\": 0.1,\n    \"Justice\": 0.8,\n    \"Resentment\": 0.1,\n    \"Hope\": 0.9,\n    \"Fantasy\": 0.2,\n    \"Pragmatism\": 0.8,\n    \"Fear\": 0.2\n  },\n  \"analysis\": \"Obama's inaugural address strongly emphasizes dignity (universal worth, shared humanity), truth (honest acknowledgment of challenges), and hope (grounded optimism) while maintaining pragmatic realism. The speech centers on collective responsibility and shared values rather than division or blame. It acknowledges real problems while offering practical paths forward, grounded in historical perspective and democratic principles. Notable for balancing aspirational rhetoric with concrete challenges and solutions.\"\n}\n\nThe speech powerfully affirms individual dignity while rejecting tribalism, emphasizes truthful assessment of challenges while avoiding manipulation, promotes justice through shared responsibility rather than resentment, offers grounded hope without fantasy solutions, and maintains pragmatic focus while acknowledging but not exploiting fears.",
+        "scores": {},
+        "parsed": false
+      },
+      "scores": {},
+      "cost": 0.01647,
+      "duration": 6.799070119857788,
+      "timestamp": "2025-06-06T14:27:31.117374"
+    }
+  ],
+  "consistency_analysis": {
+    "error": "No scores found in successful runs"
+  }
+}

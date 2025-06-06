@@ -27,7 +27,7 @@
 
 ## Quick Start
 
-### Basic Usage (Unchanged)
+### Basic Analysis
 ```python
 from narrative_gravity_elliptical import NarrativeGravityWellsElliptical, load_analysis_data
 
@@ -38,6 +38,34 @@ analyzer = NarrativeGravityWellsElliptical()
 data = load_analysis_data("model_output/sample_analysis.json")
 output_path = analyzer.create_visualization(data)
 print(f"Visualization saved: {output_path}")
+```
+
+### Multi-Run Analysis Dashboard (NEW)
+```python
+from create_generic_multi_run_dashboard import create_dashboard
+
+# Auto-detect everything from filename
+fig = create_dashboard("results.json")
+
+# Manual parameters for specific speaker/framework
+fig = create_dashboard("results.json", 
+                      speaker="Lincoln", 
+                      year="1863", 
+                      speech_type="Address",
+                      framework="Civic Virtue")
+```
+
+### Command Line Usage
+```bash
+# Generate multi-run dashboard with auto-detection
+python create_generic_multi_run_dashboard.py results.json
+
+# Manual parameters
+python create_generic_multi_run_dashboard.py results.json \
+  --speaker "Kennedy" --year "1961" --speech-type "Inaugural"
+
+# Test auto-detection capabilities
+python test_auto_detection.py
 ```
 
 ### Framework Management & Prompt Generation
@@ -329,6 +357,105 @@ mkdir -p frameworks/environmental_ethics
 python framework_manager.py switch environmental_ethics
 python generate_prompt.py --output prompts/environmental_ethics/v2025.01.06/interactive.txt
 ```
+
+## Multi-Run Analysis Dashboard System
+
+**NEW in v2025.06.04**: A fully generalized multi-run analysis dashboard that works with any speaker, framework, and text type while maintaining statistical rigor and professional visualization quality.
+
+### Features
+
+- **🎯 Universal Compatibility**: Works with any multi-run JSON file structure
+- **🔍 Auto-Detection**: Extracts speaker, year, framework from filenames automatically  
+- **📊 Framework Agnostic**: Handles any framework structure (civic virtue, custom, etc.)
+- **📈 Statistical Analysis**: Variance analysis, confidence intervals, narrative center tracking
+- **🤖 LLM Integration**: Generates composite summaries and variance analyses
+- **⚙️ Parameter Override**: Manual parameters override auto-detection when needed
+
+### Usage
+
+#### Basic Auto-Detection
+```bash
+# Automatically detects everything from filename and data
+python create_generic_multi_run_dashboard.py obama_multi_run_civic_virtue_20250606_142731.json
+
+# Output: "Obama Unknown Year Speech - Multi-Run Civic Virtue Analysis Dashboard"
+```
+
+#### Manual Parameters
+```bash
+python create_generic_multi_run_dashboard.py results.json \
+  --speaker "Lincoln" \
+  --year "1863" \
+  --speech-type "Gettysburg Address" \
+  --framework "Civic Virtue"
+
+# Output: "Lincoln 1863 Gettysburg Address - Multi-Run Civic Virtue Analysis Dashboard"  
+```
+
+#### Programmatic Usage
+```python
+from create_generic_multi_run_dashboard import create_dashboard
+
+# Auto-detect metadata
+fig = create_dashboard("multi_run_results.json")
+
+# Manual override
+fig = create_dashboard("results.json", 
+                      speaker="Kennedy", 
+                      year="1961",
+                      speech_type="Inaugural Address",
+                      framework="Civic Virtue")
+
+if fig:
+    fig.savefig("dashboard.png", dpi=300, bbox_inches='tight')
+```
+
+### Auto-Detection Capabilities
+
+The system recognizes common filename patterns:
+
+- `obama_multi_run_civic_virtue_20250606_142731.json` → Obama, Civic Virtue
+- `trump_2017_populist_framework_20250101_120000.json` → Trump, 2017, Populist Framework  
+- `lincoln_wartime_rhetoric_1863.json` → Lincoln, Wartime Rhetoric, 1863
+
+Framework detection:
+- **Civic Virtue**: Auto-detected from well names (Dignity, Truth, Hope, etc.)
+- **Unknown Frameworks**: Automatically categorizes as integrative/disintegrative
+- **Any Size**: Handles 6, 10, 12, or any number of wells
+
+### Dashboard Output
+
+The generated dashboard maintains professional quality with:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    [Speaker] [Year] [Type] - Multi-Run         │
+│                    [Framework] Analysis Dashboard              │
+├─────────────────────┬───────────────────────────────────────────┤
+│                     │                                           │
+│   Framework Map     │         Bar Chart with                   │
+│   (Elliptical)      │      Confidence Intervals                │
+│   Mean Scores       │                                           │
+│                     │                                           │
+├─────────────────────┼───────────────────────────────────────────┤
+│   COMPOSITE         │       VARIANCE ANALYSIS                  │
+│   SUMMARY           │                                           │
+│   (LLM Generated)   │       (LLM Generated)                    │
+├─────────────────────┴───────────────────────────────────────────┤
+│ Files: xxx.json | Model: xxx | Runs: N | Date: xxx | Job: xxx  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Testing
+
+```bash
+# Test auto-detection capabilities
+python test_auto_detection.py
+
+# Shows filename parsing and framework detection examples
+```
+
+See `docs/generalization/GENERIC_DASHBOARD_USAGE.md` for comprehensive documentation and `docs/generalization/GENERALIZATION_SUMMARY.md` for technical details of the transformation from speaker-specific to universal system.
 
 ## JSON Format Evolution
 
