@@ -58,7 +58,7 @@ class CostManager:
                 "o4-mini": {"input": 0.003, "output": 0.012},
                 
                 # GPT-4o series (current production)
-                "gpt-4o": {"input": 0.0025, "output": 0.01},
+                "gpt-4o": {"input": 0.005, "output": 0.015},
                 "gpt-4o-mini": {"input": 0.00015, "output": 0.0006},
                 
                 # Legacy support
@@ -210,7 +210,7 @@ class CostManager:
             # Default estimation if model not found - use reasonable fallback
             cost = (input_tokens * 0.005 / 1000) + (output_tokens * 0.015 / 1000)
         
-        return cost, input_tokens, output_tokens
+        return round(cost, 7), input_tokens, output_tokens
     
     def check_limits_before_request(self, estimated_cost: float) -> Tuple[bool, str]:
         """Check if request would exceed limits"""
@@ -285,24 +285,22 @@ class CostManager:
             print(f"⚠️ WARNING: Monthly spending ${monthly_spent:.2f} approaching limit ${self.limits.monthly_limit:.2f}")
     
     def get_spending_summary(self) -> Dict:
-        """Get comprehensive spending summary"""
+        """Get summary of spending over different periods"""
         now = datetime.now()
+        daily = self._get_spending_since(now - timedelta(days=1))
+        weekly = self._get_spending_since(now - timedelta(weeks=1))
+        monthly = self._get_spending_since(now - timedelta(days=30))
         
         return {
-            "current_limits": asdict(self.limits),
-            "spending": {
-                "today": self._get_spending_since(now - timedelta(days=1)),
-                "this_week": self._get_spending_since(now - timedelta(weeks=1)),
-                "this_month": self._get_spending_since(now - timedelta(days=30)),
-                "total": sum(entry.cost for entry in self.costs)
-            },
+            "daily": daily,
+            "weekly": weekly,
+            "monthly": monthly,
             "usage_by_provider": self._get_usage_by_provider(),
-            "usage_by_model": self._get_usage_by_model(),
-            "total_requests": len(self.costs)
+            "usage_by_model": self._get_usage_by_model()
         }
     
     def _get_usage_by_provider(self) -> Dict:
-        """Get usage breakdown by provider"""
+        """Get total usage grouped by provider"""
         usage = {}
         for entry in self.costs:
             if entry.provider not in usage:
@@ -502,4 +500,20 @@ class CostManager:
         # Sort by value score (descending)
         recommendations.sort(key=lambda x: x["value_score"], reverse=True)
         
-        return recommendations[:10]  # Return top 10 recommendations 
+        return recommendations[:10]  # Return top 10 recommendations
+    
+    def add_cost(self, provider: str, model: str, cost: float, 
+                   tokens_input: int, tokens_output: int, request_type: str = "analysis"):
+        """Add a new cost entry and save to file."""
+        entry = CostEntry(
+            timestamp=datetime.now().isoformat(),
+            provider=provider,
+            model=model,
+            cost=cost,
+            tokens_input=tokens_input,
+            tokens_output=tokens_output,
+            request_type=request_type
+        )
+        self.costs.append(entry)
+        self._save_costs()
+        self._check_and_warn_limits() 

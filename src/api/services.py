@@ -11,7 +11,8 @@ from datetime import datetime
 import logging
 
 from . import crud, schemas
-from ..models.models import Corpus, Job, Task
+from models.models import Corpus, Job, Task
+from tasks import analysis_tasks
 
 logger = logging.getLogger(__name__)
 
@@ -40,11 +41,12 @@ async def ingest_jsonl_corpus(
     """
     try:
         # Decode content
-        text_content = content.decode('utf-8')
-        lines = text_content.strip().split('\n')
+        text_content = content.decode('utf-8').strip()
         
-        if not lines or not lines[0].strip():
+        if not text_content:
             raise IngestionError("Empty file or no valid JSON lines found")
+        
+        lines = text_content.split('\n')
         
         # Create corpus first
         corpus = crud.create_corpus(db, name=name, description=description, uploader_id=uploader_id)
@@ -66,7 +68,7 @@ async def ingest_jsonl_corpus(
                 
                 # Validate against schema
                 try:
-                    record = schemas.JSONLRecord.parse_obj(record_data)
+                    record = schemas.JSONLRecord.model_validate(record_data)
                 except Exception as e:
                     validation_errors.append(
                         schemas.ValidationErrorResponse(
@@ -195,8 +197,7 @@ async def create_processing_job(
                         task_count += 1
                         
                         # Enqueue task for Celery processing
-                        from ..tasks.analysis_tasks import process_narrative_analysis_task
-                        process_narrative_analysis_task.delay(task.id)
+                        analysis_tasks.process_narrative_analysis_task.delay(task.id)
         
         # Update job with task count
         crud.update_job_task_counts(db, job.id)
@@ -238,8 +239,7 @@ async def resume_job(job_id: int, db: Session) -> int:
                 crud.update_task_status(db, task.id, "pending")
             
             # Re-enqueue task for Celery processing
-            from ..tasks.analysis_tasks import process_narrative_analysis_task
-            process_narrative_analysis_task.delay(task.id)
+            analysis_tasks.process_narrative_analysis_task.delay(task.id)
             requeued_count += 1
         
         # Update job status

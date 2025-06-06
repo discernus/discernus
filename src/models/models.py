@@ -8,7 +8,6 @@ from sqlalchemy import (
     Column, Integer, String, Text, DateTime, Float, Boolean, 
     ForeignKey, JSON, ARRAY
 )
-from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from datetime import datetime
@@ -102,8 +101,8 @@ class Document(Base):
     source_url = Column(Text, nullable=True)
     schema_version = Column(String(20), nullable=False)
     
-    # JSONB for flexible metadata and framework extensions
-    document_metadata = Column(JSONB, default=dict, nullable=False)
+    # JSON for flexible metadata and framework extensions
+    document_metadata = Column(JSON, default=dict, nullable=False)
     
     # Timestamps
     created_at = Column(DateTime, default=func.now())
@@ -139,8 +138,8 @@ class Chunk(Base):
     word_density = Column(Float, nullable=False)  # unique_words / word_count
     chunk_content = Column(Text, nullable=False)
     
-    # JSONB for framework-specific extensions
-    framework_data = Column(JSONB, default=dict, nullable=False)
+    # JSON for framework-specific extensions
+    framework_data = Column(JSON, default=dict, nullable=False)
     
     # Processing status
     processing_status = Column(String(20), default="pending")  # pending, processing, completed, failed
@@ -170,9 +169,9 @@ class Job(Base):
     
     # Job configuration
     job_name = Column(String(255), nullable=True)
-    text_ids = Column(JSONB, nullable=False)  # Array of text_id strings to process
-    frameworks = Column(JSONB, nullable=False)  # Array of framework names
-    models = Column(JSONB, nullable=False)  # Array of model names/configs
+    text_ids = Column(JSON, nullable=False)  # Array of text_id strings to process
+    frameworks = Column(JSON, nullable=False)  # Array of framework names
+    models = Column(JSON, nullable=False)  # Array of model names/configs
     run_count = Column(Integer, default=5)  # Number of runs per chunk/model combo
     
     # Job status and metadata
@@ -186,7 +185,7 @@ class Job(Base):
     actual_cost = Column(Float, default=0.0)
     
     # Configuration and parameters
-    job_config = Column(JSONB, default=dict, nullable=False)  # Additional job parameters
+    job_config = Column(JSON, default=dict, nullable=False)  # Additional job parameters
     
     # Timestamps
     created_at = Column(DateTime, default=func.now())
@@ -225,7 +224,7 @@ class Task(Base):
     max_attempts = Column(Integer, default=3)
     
     # Results and error handling
-    result_data = Column(JSONB, nullable=True)  # LLM response and analysis results
+    result_data = Column(JSON, nullable=True)  # LLM response and analysis results
     last_error = Column(Text, nullable=True)
     error_count = Column(Integer, default=0)
     
@@ -256,7 +255,7 @@ Index('idx_task_job_status', Task.job_id, Task.status)
 Index('idx_task_chunk_framework', Task.chunk_id, Task.framework)
 Index('idx_job_corpus_status', Job.corpus_id, Job.status)
 
-# JSONB indexes for framework data queries (created in migration)
+# JSON indexes for framework data queries (created in migration)
 # These will be added via Alembic migration:
 # CREATE INDEX idx_chunk_framework_data ON chunk USING gin (framework_data);
 # CREATE INDEX idx_task_result_data ON task USING gin (result_data); 

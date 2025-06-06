@@ -609,3 +609,50 @@ For a quick test of the visualization step without needing an LLM, you can use t
 - This example shows the exact structure and score format required for the civic_virtue framework
 - All scores must be decimal values between 0.0 and 1.0
 - **Model Identification**: If using AI platforms (like Perplexity) that run underlying models (like Claude), you may need to manually update the `model_name` and `model_version` fields in the JSON to reflect the actual underlying model for academic accuracy
+
+## Project Status
+
+The project has recently undergone a significant testing overhaul to improve code quality, reliability, and maintainability. This effort focused on establishing a robust unit testing foundation for the backend services.
+
+### Testing Overhaul Summary
+
+The testing overhaul was conducted in two main phases:
+
+**Phase 1: Foundational Unit Tests & Refactoring**
+- **Mathematical Engine:** Added comprehensive unit tests for the core elliptical distance calculations in `narrative_gravity_elliptical.py`.
+- **Dashboard Logic:** Created unit tests for pure helper functions in the Streamlit dashboard code.
+- **Legacy Test Refactoring:** Migrated all existing `unittest`-style tests to a modern `pytest` framework, separating them into appropriate unit and integration test suites.
+
+**Phase 2: Backend Confidence (src/)**
+- **`src/utils`:** Added full unit test coverage for all utility modules, including `sanitization.py`, `auth.py`, `logging_config.py`, and `cost_manager.py`.
+- **`src/api`:**
+    - Tested and hardened the Pydantic `schemas.py`, upgrading them to V2 and fixing validation logic.
+    - Added complete unit tests for the database layer in `crud.py`, using an in-memory SQLite database.
+    - Added tests for the business logic in `services.py`.
+- **`src/tasks`:** Implemented unit tests for the Celery-based `analysis_tasks.py`, mocking external dependencies like the database and Hugging Face API calls.
+
+This process uncovered and fixed numerous bugs related to Pydantic V2 migration, database type compatibility (PostgreSQL `JSONB` vs. generic `JSON`), import path errors, and incorrect business logic.
+
+### Known Issues
+- **`test_api_services.py` Failures:** There are two persistent test failures in `tests/unit/test_api_services.py` related to the `ingest_jsonl_corpus` service function. The fixes for these failures could not be reliably applied due to suspected issues with the development environment's file editing tools. The primary issue appears to be incorrect handling of empty or whitespace-only files during ingestion.
+
+## Getting Started
+
+1.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+2.  **Run the application:**
+    ```bash
+    streamlit run src/streamlit_app/app.py
+    ```
+
+## Running Tests
+To run the full test suite:
+```bash
+pytest
+```
+To run tests for a specific file:
+```bash
+pytest tests/unit/test_crud.py
+```

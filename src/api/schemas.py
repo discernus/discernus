@@ -3,8 +3,8 @@ Pydantic schemas for API request/response validation.
 Implements data models for Epic 1 corpus and job management endpoints.
 """
 
-from pydantic import BaseModel, Field, validator
-from typing import List, Optional, Dict, Any
+from pydantic import BaseModel, Field, field_validator, ConfigDict, validator
+from typing import List, Optional, Dict, Any, Union
 from datetime import datetime
 from enum import Enum
 
@@ -42,8 +42,7 @@ class TaskStatus(str, Enum):
 # Base schemas
 
 class BaseSchema(BaseModel):
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 # Corpus schemas
 
@@ -64,7 +63,7 @@ class DocumentBase(BaseSchema):
     title: str = Field(..., min_length=1, max_length=500)
     document_type: DocumentType
     author: str = Field(..., min_length=1, max_length=255)
-    date: datetime
+    date: Union[datetime, str]
     publication: Optional[str] = Field(None, max_length=255)
     medium: Optional[str] = Field(None, max_length=50)
     campaign_name: Optional[str] = Field(None, max_length=255)
@@ -72,6 +71,15 @@ class DocumentBase(BaseSchema):
     source_url: Optional[str] = None
     schema_version: str = Field(..., pattern=r"^\d+\.\d+\.\d+$")
     document_metadata: Dict[str, Any] = Field(default_factory=dict)
+
+    @field_validator('date', mode='before')
+    def date_to_datetime(cls, v):
+        if isinstance(v, str):
+            try:
+                return datetime.fromisoformat(v.replace('Z', '+00:00'))
+            except ValueError:
+                raise ValueError("Invalid ISO 8601 date format")
+        return v
 
 class DocumentResponse(DocumentBase):
     id: int
@@ -106,13 +114,13 @@ class ChunkResponse(ChunkBase):
 class JobCreate(BaseSchema):
     corpus_id: int = Field(..., gt=0)
     job_name: Optional[str] = Field(None, max_length=255)
-    text_ids: List[str] = Field(..., min_items=1)
-    frameworks: List[str] = Field(..., min_items=1)
-    models: List[str] = Field(..., min_items=1)
+    text_ids: List[str] = Field(..., min_length=1)
+    frameworks: List[str] = Field(..., min_length=1)
+    models: List[str] = Field(..., min_length=1)
     run_count: int = Field(default=5, ge=1, le=20)
     job_config: Dict[str, Any] = Field(default_factory=dict)
 
-    @validator('frameworks')
+    @field_validator('frameworks')
     def validate_frameworks(cls, v):
         """Validate that frameworks are supported."""
         supported = ['civic_virtue', 'moral_rhetorical_posture', 'political_spectrum']
@@ -202,12 +210,11 @@ class JSONLRecord(BaseSchema):
     chunk_content: str = Field(..., min_length=1)
     framework_data: Dict[str, Any] = Field(default_factory=dict)
 
-    @validator('chunk_id', 'total_chunks')
-    def validate_chunk_consistency(cls, v, values):
+    @field_validator('chunk_id')
+    def validate_chunk_consistency(cls, v, info: any):
         """Ensure chunk_id is less than total_chunks."""
-        if 'chunk_id' in values and 'total_chunks' in values:
-            if values['chunk_id'] >= values['total_chunks']:
-                raise ValueError("chunk_id must be less than total_chunks")
+        if 'total_chunks' in info.data and v >= info.data['total_chunks']:
+            raise ValueError("chunk_id must be less than total_chunks")
         return v
 
 # Error response schemas
@@ -238,9 +245,9 @@ class UserCreate(BaseSchema):
     password: str = Field(..., min_length=8, max_length=128)
     full_name: Optional[str] = Field(None, max_length=255)
     organization: Optional[str] = Field(None, max_length=255)
-    role: UserRole = Field(default=UserRole.user)
+    role: 'UserRole' = Field(default='user')
 
-    @validator('username')
+    @field_validator('username')
     def validate_username(cls, v):
         """Validate username format."""
         import re
@@ -248,13 +255,14 @@ class UserCreate(BaseSchema):
             raise ValueError("Username can only contain letters, numbers, underscores, and hyphens")
         return v
 
-    @validator('email')
-    def validate_email(cls, v):
-        """Validate email format."""
+    @field_validator('email')
+    def validate_email_format(cls, v):
+        """Validate email format using a more robust regex."""
         import re
-        if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', v):
+        # A regex that is compliant with most modern email address standards
+        if not re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", v):
             raise ValueError("Invalid email format")
-        return v.lower()
+        return v
 
 class UserLogin(BaseSchema):
     """Schema for user login."""
@@ -281,7 +289,7 @@ class UserUpdate(BaseSchema):
     organization: Optional[str] = Field(None, max_length=255)
     email: Optional[str] = Field(None, max_length=255)
 
-    @validator('email')
+    @field_validator('email')
     def validate_email(cls, v):
         """Validate email format."""
         if v:

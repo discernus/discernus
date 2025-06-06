@@ -12,11 +12,11 @@ from datetime import datetime
 from celery import current_task
 from celery.exceptions import Retry
 
-from ..celery_app import celery_app
-from ..models.base import get_db_session
-from ..api import crud
+from celery_app import celery_app
+from models.base import get_db_session
+from api import crud
 from sqlalchemy.orm import Session
-from ..api.schemas import TaskStatus
+from api.schemas import TaskStatus
 
 logger = logging.getLogger(__name__)
 
@@ -146,7 +146,8 @@ def process_narrative_analysis_task(self, task_id: int) -> Dict[str, Any]:
         )
         
         # Update job status if all tasks failed
-        _update_job_progress(db, task.job_id)
+        if task:
+            _update_job_progress(db, task.job_id)
         
         raise e
         

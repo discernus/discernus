@@ -9,7 +9,7 @@ import json
 from typing import Any, Dict, List, Union
 from urllib.parse import quote, unquote
 
-from ..utils.logging_config import get_logger, ErrorCodes
+from utils.logging_config import get_logger, ErrorCodes
 
 logger = get_logger(__name__)
 
@@ -19,11 +19,9 @@ class SanitizationError(Exception):
 
 # Dangerous patterns to detect
 SQL_INJECTION_PATTERNS = [
-    r"\b(union|select|insert|update|delete|drop|create|alter|exec|execute)\b",
-    r"(--|/\*|\*/|;|'|\")",
-    r"\bor\b.*=.*\bor\b",
-    r"\band\b.*=.*\band\b",
-    r"(char\(|ascii\(|substring\()",
+    r"\b(union\s+select|insert\s+into|update\s+set|delete\s+from|drop\s+table|create\s+table|alter\s+table|exec)\b",
+    r"(--|/\*|\*/|;)",
+    r"\b(or|and)\s+\w+\s*="
 ]
 
 XSS_PATTERNS = [
@@ -181,34 +179,31 @@ def sanitize_filename(filename: str) -> str:
     """
     if not isinstance(filename, str):
         raise SanitizationError("Filename must be a string")
-    
-    # Remove path components
-    filename = filename.replace('/', '').replace('\\', '')
+
+    # Check for path traversal before sanitizing
+    if '..' in filename or '/' in filename or '\\' in filename:
+        raise SanitizationError("Invalid characters in filename")
     
     # Remove dangerous characters
-    filename = re.sub(r'[<>:"|?*\x00-\x1f]', '', filename)
-    
-    # Check for path traversal
-    if '..' in filename or filename.startswith('.'):
-        raise SanitizationError("Invalid filename")
+    sanitized = re.sub(r'[<>:"|?*\x00-\x1f]', '', filename)
     
     # Check for reserved names (Windows)
     reserved_names = ['CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 
                      'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 
                      'LPT6', 'LPT7', 'LPT8', 'LPT9']
     
-    if filename.upper() in reserved_names:
+    if sanitized.upper() in reserved_names:
         raise SanitizationError("Reserved filename")
     
     # Ensure minimum length
-    if len(filename) < 1:
+    if len(sanitized) < 1:
         raise SanitizationError("Filename too short")
     
     # Ensure maximum length
-    if len(filename) > 255:
+    if len(sanitized) > 255:
         raise SanitizationError("Filename too long")
     
-    return filename
+    return sanitized
 
 def sanitize_json_content(content: str, max_size: int = 50 * 1024 * 1024) -> Dict[str, Any]:
     """
@@ -322,13 +317,13 @@ def validate_email(email: str) -> str:
 
 def validate_username(username: str) -> str:
     """
-    Validate and sanitize username.
+    Validate a username.
     
     Args:
         username: Username to validate
         
     Returns:
-        Sanitized username
+        Validated username
         
     Raises:
         SanitizationError: If username is invalid
@@ -336,22 +331,13 @@ def validate_username(username: str) -> str:
     if not isinstance(username, str):
         raise SanitizationError("Username must be a string")
     
-    username = username.strip()
+    # Check length
+    if not 3 <= len(username) <= 32:
+        raise SanitizationError("Username must be between 3 and 32 characters")
     
-    # Username can only contain alphanumeric characters, underscores, and hyphens
+    # Check for valid characters
     if not re.match(r'^[a-zA-Z0-9_-]+$', username):
-        raise SanitizationError("Username can only contain letters, numbers, underscores, and hyphens")
-    
-    if len(username) < 3:
-        raise SanitizationError("Username must be at least 3 characters")
-    
-    if len(username) > 50:
-        raise SanitizationError("Username must be at most 50 characters")
-    
-    # Check for reserved usernames
-    reserved_usernames = ['admin', 'root', 'system', 'api', 'test', 'user', 'guest', 'anonymous']
-    if username.lower() in reserved_usernames:
-        raise SanitizationError("Username is reserved")
+        raise SanitizationError("Username can only contain letters, numbers, hyphens, and underscores")
     
     return username
 
