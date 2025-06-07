@@ -1,0 +1,17 @@
+id,job_id,well_name,mean_score,std_deviation,variance,score_category,well_type,created_at
+5,stub_test_20250606_221655,civic_duty,0.787,0.0034,1.2e-05,high,disintegrative,2025-06-06 22:16:55.222180
+4,stub_test_20250606_221655,justice,0.738,0.0078,6.1e-05,high,integrative,2025-06-06 22:16:55.222180
+2,stub_test_20250606_221655,liberty,0.684,0.0067,4.5e-05,medium,integrative,2025-06-06 22:16:55.222180
+6,stub_test_20250606_221655,moral_leadership,0.721,0.0089,7.9e-05,high,disintegrative,2025-06-06 22:16:55.222180
+1,stub_test_20250606_221655,prosperity,0.751,0.0089,7.9e-05,high,integrative,2025-06-06 22:16:55.222180
+3,stub_test_20250606_221655,security,0.814,0.0045,2e-05,high,integrative,2025-06-06 22:16:55.222180
+8,stub_test_20250606_221655,tradition,0.652,0.0123,0.000151,medium,disintegrative,2025-06-06 22:16:55.222180
+7,stub_test_20250606_221655,unity,0.764,0.0056,3.1e-05,high,disintegrative,2025-06-06 22:16:55.222180
+13,stub_test_20250606_221721,civic_duty,0.787,0.0034,1.2e-05,high,disintegrative,2025-06-06 22:17:21.910784
+12,stub_test_20250606_221721,justice,0.738,0.0078,6.1e-05,high,integrative,2025-06-06 22:17:21.910784
+10,stub_test_20250606_221721,liberty,0.684,0.0067,4.5e-05,medium,integrative,2025-06-06 22:17:21.910784
+14,stub_test_20250606_221721,moral_leadership,0.721,0.0089,7.9e-05,high,disintegrative,2025-06-06 22:17:21.910784
+9,stub_test_20250606_221721,prosperity,0.751,0.0089,7.9e-05,high,integrative,2025-06-06 22:17:21.910784
+11,stub_test_20250606_221721,security,0.814,0.0045,2e-05,high,integrative,2025-06-06 22:17:21.910784
+16,stub_test_20250606_221721,tradition,0.652,0.0123,0.000151,medium,disintegrative,2025-06-06 22:17:21.910784
+15,stub_test_20250606_221721,unity,0.764,0.0056,3.1e-05,high,disintegrative,2025-06-06 22:17:21.910784

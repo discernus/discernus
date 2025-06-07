@@ -1,0 +1,42 @@
+{
+  "analysis": {
+    "total_samples": 10,
+    "variance_stats": {
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "std": 0.0,
+      "percentiles": {
+        "5th": 0.0,
+        "10th": 0.0,
+        "25th": 0.0,
+        "75th": 0.0,
+        "90th": 0.0,
+        "95th": 0.0
+      }
+    },
+    "suggested_thresholds": {
+      "individual_minimal": 0.0,
+      "individual_low": 0.0,
+      "sum_minimal": 0.0
+    }
+  },
+  "performance": {
+    "model_performance": [
+      {
+        "model": "gpt-4o",
+        "framework": "civic virtue",
+        "success_rate": 1.0,
+        "avg_cost": 0.013202999999999998,
+        "avg_variance": 0.0,
+        "job_count": 1
+      }
+    ]
+  },
+  "current_thresholds": {
+    "individual": 0.02,
+    "sum": 0.05
+  },
+  "timestamp": "2025-06-06 21:25:23.665392"
+}

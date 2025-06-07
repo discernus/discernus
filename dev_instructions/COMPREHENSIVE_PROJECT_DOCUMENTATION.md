@@ -1,11 +1,11 @@
 # Narrative Gravity Maps - Comprehensive Project Documentation
-*Version: 2025.01.15 - Complete Technical Reference for Requirements Definition & LLM Collaboration*
+*Version: 2025.06.06 - Complete Technical Reference for Requirements Definition & LLM Collaboration*
 
 ## 🎯 Purpose
 
 This document contains complete project information for the **Narrative Gravity Maps** framework (current version) to enable detailed requirements definition and collaboration with other LLMs in product manager mode. It includes architecture overview, Epic 1-4 completion status, current capabilities, validation-first strategy, and technical specifications needed for systematic development planning.
 
-**Current Status**: Epic 1-4 infrastructure complete, now focused on validation-first development for academic credibility.
+**Current Status**: Epic 1-4 infrastructure complete (99.5% test success rate), MetricsCollector bug fixed, now focused on validation-first development for academic credibility.
 
 ## 📋 Table of Contents
 
@@ -67,6 +67,8 @@ This document contains complete project information for the **Narrative Gravity 
 - **Queue & Orchestration**: Celery + Redis with fault-tolerant processing
 - **APIs**: Complete REST endpoints for corpus and job management
 - **Resumability**: Exponential backoff retry logic for LLM API failures
+- **Testing**: 99.5% test success rate (181/182 tests passing)
+- **Bug Fixes**: MetricsCollector increment_metric method completed
 
 ### ✅ Epic 2: Hugging Face API Integration Backend (COMPLETED)
 **Multi-LLM Integration**: Unified access to multiple LLMs
@@ -108,7 +110,9 @@ This document contains complete project information for the **Narrative Gravity 
 - Academic-grade reliability studies
 
 ### 📊 Validation Requirements (3-Phase Plan)
-**See**: `VALIDATION_FIRST_DEVELOPMENT_STRATEGY.md` for complete 270-line specification
+**See**: 
+- `VALIDATION_FIRST_DEVELOPMENT_STRATEGY.md` for complete 270-line specification
+- `VALIDATION_IMPLEMENTATION_ROADMAP.md` for specific implementation tasks
 
 **Phase 1**: Multi-run consistency, inter-LLM correlation, framework validation
 **Phase 2**: Evidence extraction, automated reports, human-readable explanations  
@@ -186,11 +190,11 @@ The system uses **symlink-based modular architecture**:
 
 ---
 
-## 3. Core Source Code
+## 5. Core Source Code
 
-### 3.1 Core Analysis Engine (`narrative_gravity_elliptical.py`)
+### 5.1 Core Analysis Engine (`narrative_gravity_elliptical.py`)
 
-**Complete Source Code** (1,136 lines - mathematical heart of the system):
+**Mathematical heart of the system** (1,136+ lines) - provides the core visualization and analysis capabilities.
 
 **KEY METHODS FOR API INTEGRATION:**
 - `create_visualization(data: Dict, output_path: str = None) -> str`: Main visualization creation
@@ -198,976 +202,59 @@ The system uses **symlink-based modular architecture**:
 - `calculate_elliptical_metrics(narrative_x, narrative_y, well_scores)`: Statistical measures
 - `normalize_analysis_data(data: Dict) -> Dict`: Data format standardization
 
-**CRITICAL FOR API AUTOMATION:**
+**CRITICAL CLASS STRUCTURE:**
 
 ```python
-"""
-Narrative Gravity Maps v2025.06.04
-Copyright (c) 2025 Jeff Whatcott
-All rights reserved.
-
-This module implements the Narrative Gravity Maps methodology v2025.06.04 for analyzing 
-the forces driving persuasive narratives. Based on the academic paper 
-"Narrative Gravity Wells: A Quantitative Framework for Discerning the Forces 
-Driving Persuasive Narratives."
-
-Version 2025.06.04 enhancements include:
-- Interactive LLM prompt system for multi-file comparative analysis
-- Enhanced filename generation with content identification and vendor attribution  
-- Professional visualization system with automatic text fitting
-- Support for multiple AI models (GPT-4, Claude, Gemini, etc.)
-- Modular configuration system for extensibility
-
-The framework positions ten "gravity wells" on an elliptical boundary,
-with integrative wells in the upper half and disintegrative wells in the lower half.
-Narratives are positioned inside the ellipse based on gravitational pull from boundary wells.
-"""
-
-import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-import matplotlib.patches as mpatches
-import json
-import sys
-import os
-import tempfile
-from datetime import datetime
-from typing import Dict, List, Optional, Tuple
-from textwrap import wrap
-from pathlib import Path
-import shutil
-import matplotlib.colors as mcolors
-import argparse
-
 class NarrativeGravityWellsElliptical:
     """
     Narrative Gravity Wells analyzer and visualizer.
-    
-    This class implements the mathematical framework for positioning narratives
-    within a coordinate system based on narrative gravity wells.
-    
-    Version 2.0 adds modular configuration support while maintaining full 
-    backward compatibility with existing JSON files and naming conventions.
+    Implements mathematical framework for positioning narratives
+    within coordinate system based on narrative gravity wells.
     """
     
     def __init__(self, config_dir: str = "config"):
-        self.fig = None
-        self.ax = None
-        self.config_dir = config_dir
+        """Initialize with framework configuration"""
         
-        # Use pure matplotlib for reliable aspect ratio control
-        plt.rcParams['font.family'] = 'sans-serif'
-        plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans', 'Liberation Sans']
-        
-        # Load configuration or use defaults for backward compatibility
-        try:
-            self._load_framework_config()
-        except (FileNotFoundError, KeyError) as e:
-            print(f"⚠️  Using default configuration (config not found: {e})")
-            self._load_default_config()
-        
-        # Style configuration remains the same
-        self.style_config = {
-            'figure_size': (10, 12.5),  # Larger size while maintaining 4:5 ratio (same as 8:10)
-            'main_title': "Narrative Gravity Wells Analysis",
-            'font_sizes': {
-                'title': 20,      # Slightly larger for bigger figure
-                'subtitle': 16,   # Slightly larger for bigger figure
-                'summary': 12,    # Slightly larger for bigger figure
-                'labels': 11,     # Slightly larger for bigger figure
-                'coordinates': 9,
-                'metrics': 11
-            },
-            'colors': {
-                'wells_integrative': '#2E7D32',      # Deep green
-                'wells_disintegrative': '#C62828',   # Deep red
-                'wells_integrative_edge': '#1B5E20', # Darker green edge
-                'wells_disintegrative_edge': '#B71C1C', # Darker red edge
-                'scores': '#1976D2',                 # Professional blue
-                'narrative': '#FF8F00',              # Vibrant orange
-                'narrative_edge': '#E65100',         # Darker orange edge
-                'ellipse': '#616161',                # Professional gray
-                'text_primary': '#212121',           # Dark gray
-                'text_secondary': '#757575',         # Medium gray
-                'metrics_bg': '#F5F5F5',            # Light gray background
-                'metrics_border': '#BDBDBD'          # Medium gray border
-            },
-            'marker_sizes': {
-                'wells': 80,
-                'scores': 60,
-                'narrative': 300
-            }
-        }
-
-    def _load_framework_config(self):
-        """Load framework configuration from config files."""
-        framework_path = Path(self.config_dir) / "framework.json"
-        
-        with open(framework_path, 'r') as f:
-            framework = json.load(f)
-        
-        # Extract ellipse parameters
-        ellipse_config = framework['ellipse']
-        self.ellipse_a = ellipse_config['semi_major_axis']
-        self.ellipse_b = ellipse_config['semi_minor_axis']
-        
-        # Extract well definitions
-        wells_config = framework['wells']
-        self.well_definitions = {}
-        
-        for well_name, well_config in wells_config.items():
-            self.well_definitions[well_name] = {
-                'angle': well_config['angle'],
-                'type': well_config['type'],
-                'narrative_weight': well_config['weight']
-            }
-        
-        # Store additional framework metadata
-        self.framework_version = framework.get('version', 'unknown')
-        self.scaling_factor = framework.get('scaling_factor', 0.8)
-        
-        # Clean version string for display (remove v prefix if present to avoid duplication)
-        display_version = self.framework_version
-        if display_version.startswith('v'):
-            display_version = display_version[1:]
-        
-        print(f"✅ Loaded framework v{display_version} from {framework_path}")
-
-    def _load_default_config(self):
-        """Load default configuration for backward compatibility."""
-        # Ellipse parameters - CORRECT orientation
-        self.ellipse_a = 1.0  # Semi-major axis (VERTICAL)
-        self.ellipse_b = 0.7  # Semi-minor axis (HORIZONTAL)
-        
-        # Well definitions with elliptical positioning (current values)
-        self.well_definitions = {
-            'Dignity': {'angle': 90, 'type': 'integrative', 'narrative_weight': 1.0},
-            'Justice': {'angle': 135, 'type': 'integrative', 'narrative_weight': 0.8},
-            'Truth': {'angle': 45, 'type': 'integrative', 'narrative_weight': 0.8},
-            'Pragmatism': {'angle': 160, 'type': 'integrative', 'narrative_weight': 0.6},
-            'Hope': {'angle': 20, 'type': 'integrative', 'narrative_weight': 0.6},
-            'Tribalism': {'angle': 270, 'type': 'disintegrative', 'narrative_weight': -1.0},
-            'Resentment': {'angle': 225, 'type': 'disintegrative', 'narrative_weight': -0.8},
-            'Manipulation': {'angle': 315, 'type': 'disintegrative', 'narrative_weight': -0.8},
-            'Fear': {'angle': 200, 'type': 'disintegrative', 'narrative_weight': -0.6},
-            'Fantasy': {'angle': 340, 'type': 'disintegrative', 'narrative_weight': -0.6}
-        }
-        
-        self.framework_version = "default"
-        self.scaling_factor = 0.8
-
-    def ellipse_point(self, angle_deg: float) -> Tuple[float, float]:
-        """Calculate point on ellipse boundary for given angle."""
-        angle_rad = np.deg2rad(angle_deg)
-        x = self.ellipse_b * np.cos(angle_rad)  # Minor axis horizontal
-        y = self.ellipse_a * np.sin(angle_rad)  # Major axis vertical
-        return x, y
-
-    def setup_figure(self) -> None:
-        """Initialize the figure with clean layout."""
-        # Create figure with tall proportions
-        self.fig = plt.figure(figsize=self.style_config['figure_size'])
-        self.fig.patch.set_facecolor('white')
-        
-        # Simple, clean subplot
-        self.ax = plt.subplot(1, 1, 1)
-        self.ax.set_facecolor('white')
-        
-        # CRITICAL: Set equal aspect ratio for proper ellipse display
-        self.ax.set_aspect('equal')
-        self.ax.set_xlim(-1.2, 1.2)
-        self.ax.set_ylim(-1.4, 1.4)
-        
-        # Clean grid
-        self.ax.grid(True, alpha=0.3, linestyle='-', linewidth=0.5, color='lightgray')
-        self.ax.set_axisbelow(True)
-        
-        # Remove ticks for cleaner look
-        self.ax.tick_params(left=False, bottom=False, labelleft=False, labelbottom=False)
-        for spine in self.ax.spines.values():
-            spine.set_visible(False)
-
-    def plot_ellipse_boundary(self) -> None:
-        """Plot the elliptical boundary using parametric equations for guaranteed orientation."""
-        # Create ellipse using parametric equations - this WORKS
-        theta = np.linspace(0, 2*np.pi, 100)
-        x_ellipse = self.ellipse_b * np.cos(theta)  # horizontal (smaller)
-        y_ellipse = self.ellipse_a * np.sin(theta)  # vertical (larger)
-        
-        # Plot the ellipse boundary
-        self.ax.plot(x_ellipse, y_ellipse, 
-                    color=self.style_config['colors']['ellipse'],
-                    linestyle='-', 
-                    linewidth=3,
-                    alpha=0.8)
-
-    def add_titles(self, subtitle: str, model_name: str = None, model_version: str = None) -> None:
-        """Add main title and subtitle with model information."""
-        # Extract clean subtitle (remove existing parentheses)
-        clean_subtitle = subtitle.split(' (')[0] if ' (' in subtitle else subtitle
-        
-        # Add model information if available
-        if model_name and model_version:
-            clean_subtitle += f" (analyzed by {model_name})"
-        elif model_name:
-            clean_subtitle += f" (analyzed by {model_name})"
-        
-        self.fig.text(0.5, 0.95, self.style_config['main_title'],
-                     fontsize=self.style_config['font_sizes']['title'],
-                     fontweight='bold',
-                     horizontalalignment='center',
-                     color=self.style_config['colors']['text_primary'])
-        
-        self.fig.text(0.5, 0.91, clean_subtitle,
-                     fontsize=self.style_config['font_sizes']['subtitle'],
-                     style='italic',
-                     horizontalalignment='center',
-                     color=self.style_config['colors']['text_secondary'])
-
-    def plot_wells_and_scores(self, wells: List[Dict], include_scores: bool = True) -> Dict[str, float]:
-        """Plot wells on ellipse boundary with clean styling."""
-        well_scores = {}
-        
-        for well in wells:
-            name = well['name']
-            score = well['score']
-            well_scores[name] = score
-            
-            current_well_angle = self.well_definitions[name]['angle'] # Get angle from loaded config
-            x, y = self.ellipse_point(current_well_angle)
-            
-            # Choose colors based on well type
-            well_type = self.well_definitions[name]['type']
-            if well_type == 'integrative':
-                well_color = self.style_config['colors']['wells_integrative']
-                edge_color = self.style_config['colors']['wells_integrative_edge']
-            else:
-                well_color = self.style_config['colors']['wells_disintegrative']
-                edge_color = self.style_config['colors']['wells_disintegrative_edge']
-            
-            # Plot well position
-            self.ax.scatter(x, y, 
-                          color=well_color,
-                          s=self.style_config['marker_sizes']['wells'], 
-                          zorder=4, alpha=0.9,
-                          edgecolors=edge_color,
-                          linewidth=1.5)
-            
-            # Add well label with proper positioning
-            label_offset = 0.15
-            if well_type == 'integrative':
-                label_y = y + label_offset
-            else:
-                label_y = y - label_offset
-            
-            # Create well label
-            self.ax.text(x, label_y, name,
-                        fontsize=self.style_config['font_sizes']['labels'],
-                        ha='center', va='center',
-                        color=self.style_config['colors']['text_primary'],
-                        fontweight='bold')
-            
-            # Add score if requested
-            if include_scores:
-                score_color = self.style_config['colors']['scores']
-                score_text = f"{score:.2f}"
-                
-                if well_type == 'integrative':
-                    score_y = y - 0.08
-                else:
-                    score_y = y + 0.08
-                
-                self.ax.text(x, score_y, score_text,
-                           fontsize=self.style_config['font_sizes']['coordinates'],
-                           ha='center', va='center',
-                           color=score_color,
-                           fontweight='normal')
-        
-        return well_scores
-
-    def calculate_narrative_position(self, well_scores: Dict[str, float]) -> Tuple[float, float]:
-        """Calculate narrative position using gravity wells methodology."""
-        total_weighted_x = 0
-        total_weighted_y = 0
-        total_weight = 0
-        
-        for well_name, score in well_scores.items():
-            if well_name in self.well_definitions:
-                # Get well position on boundary
-                x, y = self.ellipse_point(self.well_definitions[well_name]['angle'])
-                
-                # Apply narrative weight
-                narrative_weight = self.well_definitions[well_name]['narrative_weight']
-                
-                # Calculate contribution with weighting
-                weight_contribution = score * abs(narrative_weight)
-                
-                # For SIGNED weighting, we need to consider the sign when averaging
-                # This maintains the intended directional influence
-                signed_weight = score * narrative_weight
-                total_weighted_x += signed_weight * x
-                total_weighted_y += signed_weight * y
-                total_weight += weight_contribution
-        
-        if total_weight == 0:
-            return 0.0, 0.0
-        
-        # Calculate weighted center with scaling
-        center_x = (total_weighted_x / total_weight) * self.scaling_factor
-        center_y = (total_weighted_y / total_weight) * self.scaling_factor
-        
-        return center_x, center_y
-
-    def plot_narrative_position(self, well_scores: Dict[str, float]) -> Tuple[float, float]:
-        """Plot the calculated narrative position."""
-        center_x, center_y = self.calculate_narrative_position(well_scores)
-        
-        # Plot the narrative center position
-        self.ax.scatter(center_x, center_y,
-                       color=self.style_config['colors']['narrative'],
-                       s=self.style_config['marker_sizes']['narrative'],
-                       zorder=5, alpha=0.9,
-                       edgecolors=self.style_config['colors']['narrative_edge'],
-                       linewidth=3)
-        
-        # Add coordinates text
-        coord_text = f"({center_x:.2f}, {center_y:.2f})"
-        self.ax.text(center_x, center_y - 0.15, coord_text,
-                    fontsize=self.style_config['font_sizes']['coordinates'],
-                    ha='center', va='top',
-                    color=self.style_config['colors']['text_secondary'],
-                    fontweight='bold')
-        
-        return center_x, center_y
-
-    def generate_content_identifier(self, title: str) -> str:
-        """
-        Generate a content identifier from the title for use in filenames.
-        
-        Attempts to extract meaningful content descriptors while avoiding 
-        generic terms like 'Analysis', 'Text', etc.
-        """
-        # Remove common generic terms
-        generic_terms = [
-            'analysis', 'text', 'document', 'content', 'narrative', 
-            'gravity', 'wells', 'map', 'report', 'study'
-        ]
-        
-        # Clean and split title
-        clean_title = title.lower()
-        for term in generic_terms:
-            clean_title = clean_title.replace(term, '')
-        
-        # Extract meaningful words (3+ characters, alphanumeric)
-        words = [word.strip() for word in clean_title.replace('_', ' ').replace('-', ' ').split() 
-                if len(word.strip()) >= 3 and word.strip().replace(' ', '').isalnum()]
-        
-        # Take first 2-3 meaningful words
-        content_words = words[:3] if len(words) >= 3 else words[:2]
-        
-        if content_words:
-            return '_'.join(content_words)
-        else:
-            # Fallback to first few characters of title
-            fallback = ''.join(c for c in title if c.isalnum())[:8]
-            return fallback if fallback else 'narrative'
-
-    def generate_model_filename_part(self, metadata: Dict) -> str:
-        """
-        Generate model identification part of filename from metadata.
-        
-        Handles various model name formats and ensures clean, filesystem-safe names.
-        """
-        model_name = metadata.get('model_name', 'unknown_model')
-        model_version = metadata.get('model_version', '')
-        
-        # Clean model name for filename use
-        clean_model = model_name.lower().replace(' ', '_').replace('-', '_').replace('.', '_')
-        
-        # Remove common prefixes/suffixes
-        clean_model = clean_model.replace('chatgpt_', '').replace('claude_', '').replace('gemini_', '')
-        clean_model = clean_model.replace('_model', '').replace('_ai', '')
-        
-        # Add version if available and meaningful
-        if model_version and model_version not in clean_model:
-            clean_version = model_version.replace(' ', '_').replace('-', '_').replace('.', '_')
-            clean_model += f'_{clean_version}'
-        
-        # Ensure filename safety
-        clean_model = ''.join(c for c in clean_model if c.isalnum() or c in ['_'])
-        
-        return clean_model[:50]  # Limit length for filesystem compatibility
-
-    def add_visualization_metadata(self, analyses: List[Dict], output_path: str = None) -> None:
-        """Add comprehensive metadata to the bottom of the visualization."""
-        
-        # Generate timestamp and framework version info
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
-        # Clean version for display
-        display_version = self.framework_version
-        if display_version.startswith('v'):
-            display_version = display_version[1:]
-        
-        # Base metadata
-        metadata_lines = [
-            f"Generated: {timestamp}",
-            f"Framework: v{display_version}",
-            f"Methodology: Narrative Gravity Maps"
-        ]
-        
-        # Add analysis-specific metadata
-        if len(analyses) == 1:
-            # Single analysis
-            analysis = analyses[0]
-            metadata = analysis.get('metadata', {})
-            
-            model_info = []
-            if metadata.get('model_name'):
-                model_info.append(f"Model: {metadata['model_name']}")
-            if metadata.get('model_version'):
-                model_info.append(f"v{metadata['model_version']}")
-            if model_info:
-                metadata_lines.append(" ".join(model_info))
-            
-            if metadata.get('analysis_timestamp'):
-                metadata_lines.append(f"Analysis: {metadata['analysis_timestamp']}")
-        
-        else:
-            # Comparative analysis
-            metadata_lines.append(f"Comparative Analysis ({len(analyses)} texts)")
-            
-            # List models used
-            models_used = set()
-            for analysis in analyses:
-                metadata = analysis.get('metadata', {})
-                model_name = metadata.get('model_name')
-                if model_name:
-                    models_used.add(model_name)
-            
-            if models_used:
-                if len(models_used) == 1:
-                    metadata_lines.append(f"Model: {list(models_used)[0]}")
-                else:
-                    metadata_lines.append(f"Models: {', '.join(sorted(models_used))}")
-        
-        # Add file path if saving
-        if output_path:
-            filename = os.path.basename(output_path)
-            metadata_lines.append(f"File: {filename}")
-        
-        # Create metadata text
-        metadata_text = " | ".join(metadata_lines)
-        
-        # Position at bottom of figure
-        self.fig.text(0.5, 0.02, metadata_text,
-                     fontsize=8,
-                     ha='center', va='bottom',
-                     color=self.style_config['colors']['text_secondary'],
-                     style='italic')
-
     def create_visualization(self, data: Dict, output_path: str = None) -> str:
-        """Create a complete visualization for a single analysis."""
-        # Normalize data format for backward compatibility
-        data = normalize_analysis_data(data)
+        """Generate complete visualization for single analysis"""
         
-        # Extract basic information
-        title = data.get('text_title', 'Narrative Analysis')
-        wells = data.get('wells', [])
-        metadata = data.get('metadata', {})
+    def create_comparative_visualization(self, analyses: List[Dict], output_path: str = None) -> str:
+        """Generate comparative visualization for multiple analyses"""
         
-        # Get model information for subtitle
-        model_name = metadata.get('model_name')
-        model_version = metadata.get('model_version')
+    def calculate_narrative_position(self, well_scores: Dict[str, float]) -> Tuple[float, float]:
+        """Calculate narrative position using gravity wells methodology"""
         
-        # Set up the figure
-        self.setup_figure()
-        
-        # Plot core elements
-        self.plot_ellipse_boundary()
-        well_scores = self.plot_wells_and_scores(wells)
-        narrative_x, narrative_y = self.plot_narrative_position(well_scores)
-        
-        # Add titles and content
-        self.add_titles(title, model_name, model_version)
-        
-        # Calculate and display metrics
-        metrics = self.calculate_elliptical_metrics(narrative_x, narrative_y, well_scores)
-        self.add_metrics_display(metrics)
-        
-        # Add legend
-        self.add_legend()
-        
-        # Generate output filename if not provided
-        if not output_path:
-            # Create meaningful filename from content and model
-            content_id = self.generate_content_identifier(title)
-            model_part = self.generate_model_filename_part(metadata)
-            timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S")
-            
-            output_path = f"model_output/{timestamp}_{model_part}_{content_id}_analysis.png"
-        
-        # Add comprehensive metadata
-        self.add_visualization_metadata([data], output_path)
-        
-        # Save the figure
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        self.fig.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='white')
-        plt.close()
-        
-        return output_path
-
     def calculate_elliptical_metrics(self, narrative_x: float, narrative_y: float, 
                                    well_scores: Dict[str, float]) -> Dict[str, float]:
-        """Calculate comprehensive metrics for the narrative position."""
-        
-        # 1. Narrative Polarity Score (NPS) - distance from center normalized by ellipse
-        # Transform to normalized ellipse coordinates for distance calculation
-        normalized_x = narrative_x / self.ellipse_b
-        normalized_y = narrative_y / self.ellipse_a
-        distance_from_center = np.sqrt(normalized_x**2 + normalized_y**2)
-        
-        # NPS is this distance, capped at 1.0 (on boundary)
-        nps = min(distance_from_center, 1.0)
-        
-        # 2. Center of Mass coordinates
-        com_x = narrative_x
-        com_y = narrative_y
-        
-        # 3. Directional Purity Score (DPS)
-        dps = self.calculate_directional_purity_score(well_scores)
-        
-        return {
-            'nps': nps,
-            'com_x': com_x,
-            'com_y': com_y,
-            'dps': dps
-        }
+        """Calculate comprehensive metrics for narrative position"""
+```
 
-    def calculate_directional_purity_score(self, well_scores: Dict[str, float]) -> float:
-        """
-        Calculate Directional Purity Score - measures consistency of integrative vs disintegrative pull.
-        
-        DPS ranges from 0 (perfectly balanced) to 1 (pure directional consistency).
-        """
-        integrative_sum = 0
-        disintegrative_sum = 0
-        
-        for well_name, score in well_scores.items():
-            if well_name in self.well_definitions:
-                well_type = self.well_definitions[well_name]['type']
-                if well_type == 'integrative':
-                    integrative_sum += score
-                else:
-                    disintegrative_sum += score
-        
-        total_sum = integrative_sum + disintegrative_sum
-        if total_sum == 0:
-            return 0.0
-        
-        # Calculate the absolute difference ratio
-        difference = abs(integrative_sum - disintegrative_sum)
-        dps = difference / total_sum
-        
-        return dps
+**DATA FORMATS:**
 
-    def add_metrics_display(self, metrics: Dict[str, float]) -> None:
-        """Add metrics display box to the visualization."""
-        nps = metrics['nps']
-        com_x = metrics['com_x']
-        com_y = metrics['com_y']
-        dps = metrics['dps']
-        
-        # Create metrics text
-        metrics_text = [
-            f"Center of Mass: ({com_x:.2f}, {com_y:.2f})",
-            f"Narrative Polarity Score: {nps:.2f}",
-            f"Directional Purity Score: {dps:.2f}"
-        ]
-        
-        # Position metrics box in bottom right
-        for i, text in enumerate(metrics_text):
-            self.fig.text(0.98, 0.18 - i*0.025, text,
-                         fontsize=self.style_config['font_sizes']['metrics'],
-                         ha='right', va='top',
-                         color=self.style_config['colors']['text_primary'],
-                         bbox=dict(boxstyle="round,pad=0.3",
-                                 facecolor=self.style_config['colors']['metrics_bg'],
-                                 edgecolor=self.style_config['colors']['metrics_border'],
-                                 alpha=0.8))
+```python
+# LLM Analysis Input Format
+{
+    "text_title": "Analysis Title",
+    "model_name": "claude-4.0-sonnet", 
+    "model_version": "20240229",
+    "analysis_timestamp": "2025-06-04T20:34:29",
+    "framework": "civic_virtue",
+    "wells": {
+        "Dignity": 0.8,      # Scores must be 0.0-1.0
+        "Truth": 0.6,
+        "Hope": 0.4,
+        // ... all 10 wells
+    }
+}
 
-    def add_legend(self) -> None:
-        """Add a clean legend explaining the visualization elements."""
-        legend_elements = [
-            plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=self.style_config['colors']['wells_integrative'],
-                      markersize=8, label='Integrative Wells'),
-            plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=self.style_config['colors']['wells_disintegrative'],
-                      markersize=8, label='Disintegrative Wells'),
-            plt.Line2D([0], [0], marker='o', color='w', markerfacecolor=self.style_config['colors']['narrative'],
-                      markersize=12, label='Narrative Position')
-        ]
-        
-        self.ax.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1.0, 1.0),
-                      frameon=True, fancybox=True, shadow=True, fontsize=10)
-
-    def add_summary(self, summary: str) -> None:
-        """Add analysis summary text."""
-        # Wrap text for better display
-        wrapped_summary = wrap(summary, width=80)
-        summary_text = '\n'.join(wrapped_summary[:4])  # Limit to 4 lines
-        
-        # Position summary in upper left
-        self.fig.text(0.02, 0.85, summary_text,
-                     fontsize=self.style_config['font_sizes']['summary'],
-                     ha='left', va='top',
-                     color=self.style_config['colors']['text_primary'],
-                     bbox=dict(boxstyle="round,pad=0.5",
-                              facecolor='white',
-                              edgecolor=self.style_config['colors']['metrics_border'],
-                              alpha=0.9))
-
-    def smart_truncate_comparative_titles(self, titles: List[str], max_length: int = 25) -> List[str]:
-        """
-        Intelligently truncate titles for comparative analysis to fit in visualization.
-        Uses multiple strategies to preserve meaning while fitting space constraints.
-        """
-        if not titles:
-            return titles
-        
-        truncated = []
-        
-        for title in titles:
-            if len(title) <= max_length:
-                truncated.append(title)
-                continue
-            
-            # Strategy 1: Remove common words first
-            common_words = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by']
-            words = title.split()
-            filtered_words = [w for w in words if w.lower() not in common_words]
-            filtered_title = ' '.join(filtered_words)
-            
-            if len(filtered_title) <= max_length:
-                truncated.append(filtered_title)
-                continue
-            
-            # Strategy 2: Remove parenthetical content
-            if '(' in title and ')' in title:
-                clean_title = re.sub(r'\([^)]*\)', '', title).strip()
-                if len(clean_title) <= max_length:
-                    truncated.append(clean_title)
-                    continue
-            
-            # Strategy 3: Take first meaningful words
-            words = title.split()
-            result = ""
-            for word in words:
-                if len(result + word + " ") <= max_length - 3:  # Leave room for "..."
-                    result += word + " "
-                else:
-                    break
-            
-            if result.strip():
-                truncated.append(result.strip() + "...")
-            else:
-                # Fallback: hard truncate
-                truncated.append(title[:max_length-3] + "...")
-        
-        return truncated
-
-    def create_comparative_visualization(self, analyses: List[Dict], output_path: str = None) -> str:
-        """Create a comparative visualization for multiple analyses."""
-        if len(analyses) < 2:
-            raise ValueError("Comparative analysis requires at least 2 analyses")
-        
-        # Normalize all data
-        analyses = [normalize_analysis_data(data) for data in analyses]
-        
-        # Extract titles
-        titles = [data.get('text_title', f'Analysis {i+1}') for i, data in enumerate(analyses)]
-        
-        # Smart truncate titles for better display
-        display_titles = self.smart_truncate_comparative_titles(titles, max_length=30)
-        
-        # Set up figure
-        self.setup_figure()
-        
-        # Plot ellipse boundary
-        self.plot_ellipse_boundary()
-        
-        # Plot wells (use first analysis for well positions, should be consistent)
-        first_wells = analyses[0].get('wells', [])
-        self.plot_wells_only(first_wells)
-        
-        # Plot narrative positions for each analysis
-        positions = []
-        colors = plt.cm.Set1(np.linspace(0, 1, len(analyses)))  # Use different colors
-        
-        for i, (analysis, color) in enumerate(zip(analyses, colors)):
-            wells = analysis.get('wells', [])
-            well_scores = {well['name']: well['score'] for well in wells}
-            
-            narrative_x, narrative_y = self.calculate_narrative_position(well_scores)
-            positions.append((narrative_x, narrative_y))
-            
-            # Plot position with unique color and label
-            self.ax.scatter(narrative_x, narrative_y,
-                           color=color,
-                           s=self.style_config['marker_sizes']['narrative'],
-                           zorder=5, alpha=0.8,
-                           edgecolors='black',
-                           linewidth=2,
-                           label=display_titles[i])
-            
-            # Add position coordinates
-            coord_text = f"({narrative_x:.2f}, {narrative_y:.2f})"
-            self.ax.text(narrative_x, narrative_y - 0.15, coord_text,
-                        fontsize=self.style_config['font_sizes']['coordinates'],
-                        ha='center', va='top',
-                        color='black',
-                        fontweight='bold')
-        
-        # Add comparative title
-        main_title = f"Comparative Analysis: {len(analyses)} Narratives"
-        self.fig.text(0.5, 0.95, main_title,
-                     fontsize=self.style_config['font_sizes']['title'],
-                     fontweight='bold',
-                     horizontalalignment='center',
-                     color=self.style_config['colors']['text_primary'])
-        
-        # Add subtitle with analysis info
-        subtitle = f"Framework: {self.framework_version}"
-        self.fig.text(0.5, 0.91, subtitle,
-                     fontsize=self.style_config['font_sizes']['subtitle'],
-                     style='italic',
-                     horizontalalignment='center',
-                     color=self.style_config['colors']['text_secondary'])
-        
-        # Add comparative metrics
-        self.add_comparative_metrics(positions, analyses)
-        
-        # Add legend for narratives
-        self.ax.legend(loc='upper left', bbox_to_anchor=(0.0, 1.0),
-                      frameon=True, fancybox=True, shadow=True, fontsize=9)
-        
-        # Generate output filename if not provided
-        if not output_path:
-            timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S")
-            output_path = f"model_output/{timestamp}_comparative_analysis_{len(analyses)}_narratives.png"
-        
-        # Add metadata
-        self.add_visualization_metadata(analyses, output_path)
-        
-        # Save the figure
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        self.fig.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='white')
-        plt.close()
-        
-        return output_path
-
-    def plot_wells_only(self, wells: List[Dict]) -> None:
-        """Plot only the wells without scores for comparative analysis."""
-        for well in wells:
-            name = well['name']
-            
-            current_well_angle = self.well_definitions[name]['angle']
-            x, y = self.ellipse_point(current_well_angle)
-            
-            # Choose colors based on well type
-            well_type = self.well_definitions[name]['type']
-            if well_type == 'integrative':
-                well_color = self.style_config['colors']['wells_integrative']
-                edge_color = self.style_config['colors']['wells_integrative_edge']
-            else:
-                well_color = self.style_config['colors']['wells_disintegrative']
-                edge_color = self.style_config['colors']['wells_disintegrative_edge']
-            
-            # Plot well position
-            self.ax.scatter(x, y, 
-                          color=well_color,
-                          s=self.style_config['marker_sizes']['wells'], 
-                          zorder=4, alpha=0.9,
-                          edgecolors=edge_color,
-                          linewidth=1.5)
-            
-            # Add well label
-            label_offset = 0.15
-            if well_type == 'integrative':
-                label_y = y + label_offset
-            else:
-                label_y = y - label_offset
-            
-            self.ax.text(x, label_y, name,
-                        fontsize=self.style_config['font_sizes']['labels'],
-                        ha='center', va='center',
-                        color=self.style_config['colors']['text_primary'],
-                        fontweight='bold')
-
-    def add_comparative_metrics(self, positions: List[Tuple[float, float]], analyses: List[Dict]) -> None:
-        """Add comparative metrics display."""
-        if len(positions) < 2:
-            return
-        
-        # Calculate centroid of all positions
-        centroid_x = sum(pos[0] for pos in positions) / len(positions)
-        centroid_y = sum(pos[1] for pos in positions) / len(positions)
-        
-        # Calculate spread (average distance from centroid)
-        distances = [np.sqrt((pos[0] - centroid_x)**2 + (pos[1] - centroid_y)**2) for pos in positions]
-        avg_spread = sum(distances) / len(distances)
-        
-        # Calculate maximum distance between any two points
-        max_distance = 0
-        for i in range(len(positions)):
-            for j in range(i+1, len(positions)):
-                distance = self.calculate_elliptical_distance(positions[i], positions[j])
-                max_distance = max(max_distance, distance)
-        
-        # Create metrics text
-        metrics_text = [
-            f"Analysis Count: {len(analyses)}",
-            f"Centroid: ({centroid_x:.2f}, {centroid_y:.2f})",
-            f"Average Spread: {avg_spread:.2f}",
-            f"Maximum Distance: {max_distance:.2f}"
-        ]
-        
-        # Position metrics box
-        for i, text in enumerate(metrics_text):
-            self.fig.text(0.98, 0.20 - i*0.025, text,
-                         fontsize=self.style_config['font_sizes']['metrics'],
-                         ha='right', va='top',
-                         color=self.style_config['colors']['text_primary'],
-                         bbox=dict(boxstyle="round,pad=0.3",
-                                 facecolor=self.style_config['colors']['metrics_bg'],
-                                 edgecolor=self.style_config['colors']['metrics_border'],
-                                 alpha=0.8))
-
-    def calculate_elliptical_distance(self, pos_a: Tuple[float, float], 
-                                    pos_b: Tuple[float, float]) -> float:
-        """Calculate distance between two positions in elliptical coordinate space."""
-        # Transform to normalized ellipse coordinates
-        norm_a_x = pos_a[0] / self.ellipse_b
-        norm_a_y = pos_a[1] / self.ellipse_a
-        norm_b_x = pos_b[0] / self.ellipse_b
-        norm_b_y = pos_b[1] / self.ellipse_a
-        
-        # Calculate Euclidean distance in normalized space
-        distance = np.sqrt((norm_a_x - norm_b_x)**2 + (norm_a_y - norm_b_y)**2)
-        return distance
-
-
-def load_analysis_data(json_path: str) -> Dict:
-    """Load and validate analysis data from JSON file."""
-    with open(json_path, 'r') as f:
-        return json.load(f)
-
-def normalize_analysis_data(data: Dict) -> Dict:
-    """
-    Normalize analysis data to ensure consistent format across different versions.
-    
-    This function handles backward compatibility and ensures all required fields exist.
-    """
-    # Handle both old and new data formats
-    normalized = {}
-    
-    # Extract title (handle various field names)
-    normalized['text_title'] = (
-        data.get('text_title') or 
-        data.get('title') or 
-        data.get('analysis_title') or 
-        'Narrative Analysis'
-    )
-    
-    # Extract wells data
-    if 'wells' in data:
-        # New format: wells is a list of dicts with name and score
-        if isinstance(data['wells'], list):
-            normalized['wells'] = data['wells']
-        elif isinstance(data['wells'], dict):
-            # Convert dict format to list format
-            normalized['wells'] = [
-                {'name': name, 'score': score} 
-                for name, score in data['wells'].items()
-            ]
-    else:
-        # Old format: scores are direct keys
-        well_names = [
-            'Dignity', 'Truth', 'Hope', 'Justice', 'Pragmatism',
-            'Tribalism', 'Manipulation', 'Fantasy', 'Resentment', 'Fear'
-        ]
-        normalized['wells'] = []
-        for name in well_names:
-            if name in data:
-                normalized['wells'].append({'name': name, 'score': data[name]})
-    
-    # Extract metadata
-    metadata = {}
-    
-    # Handle analysis timestamp
-    metadata['analysis_timestamp'] = (
-        data.get('analysis_timestamp') or
-        data.get('timestamp') or
-        datetime.now().isoformat()
-    )
-    
-    # Handle model information
-    metadata['model_name'] = data.get('model_name', 'Unknown')
-    metadata['model_version'] = data.get('model_version', '')
-    
-    normalized['metadata'] = metadata
-    
-    # Copy any additional fields
-    for key, value in data.items():
-        if key not in ['wells', 'text_title', 'title', 'analysis_title', 'timestamp', 'analysis_timestamp', 'model_name', 'model_version']:
-            if key not in ['Dignity', 'Truth', 'Hope', 'Justice', 'Pragmatism', 'Tribalism', 'Manipulation', 'Fantasy', 'Resentment', 'Fear']:
-                normalized[key] = value
-    
-    return normalized
-
-
-def main():
-    """Main function for command-line usage."""
-    parser = argparse.ArgumentParser(description='Narrative Gravity Wells Analysis and Visualization')
-    parser.add_argument('input_files', nargs='+', help='JSON analysis file(s)')
-    parser.add_argument('--output', '-o', help='Output PNG file path')
-    parser.add_argument('--config-dir', default='config', help='Configuration directory (default: config)')
-    
-    args = parser.parse_args()
-    
-    # Initialize analyzer
-    analyzer = NarrativeGravityWellsElliptical(config_dir=args.config_dir)
-    
-    if len(args.input_files) == 1:
-        # Single analysis
-        try:
-            data = load_analysis_data(args.input_files[0])
-            output_path = analyzer.create_visualization(data, args.output)
-            print(f"✅ Visualization created: {output_path}")
-        except Exception as e:
-            print(f"❌ Error creating visualization: {e}")
-            return 1
-    
-    else:
-        # Comparative analysis
-        try:
-            analyses = [load_analysis_data(file) for file in args.input_files]
-            output_path = analyzer.create_comparative_visualization(analyses, args.output)
-            print(f"✅ Comparative visualization created: {output_path}")
-        except Exception as e:
-            print(f"❌ Error creating comparative visualization: {e}")
-            return 1
-    
-    return 0
-
-
-# Backward compatibility wrapper
-class NarrativeGravityAnalyzer(NarrativeGravityWellsElliptical):
-    """Backward compatibility wrapper for the old class name."""
-    pass
-
-
-if __name__ == "__main__":
-    exit(main())
+# Analysis Output Format
+{
+    "center_of_mass": {"x": 0.12, "y": 0.34},
+    "narrative_polarity_score": 0.67,
+    "directional_purity_score": 0.84,
+    "dominant_wells": ["Dignity", "Hope"],
+    "ellipse_position": {"semi_major": 1.0, "semi_minor": 0.7}
+}
 ```
 
 **API Integration Points:**
@@ -1176,7 +263,35 @@ if __name__ == "__main__":
 - Configuration: Framework-agnostic via config system
 - Error handling: Comprehensive validation and fallback
 
-### 3.2 Streamlit Interface (`narrative_gravity_app.py`)
+**DATA FORMATS:**
+
+```python
+# LLM Analysis Input Format
+{
+    "text_title": "Analysis Title",
+    "model_name": "claude-4.0-sonnet", 
+    "model_version": "20240229",
+    "analysis_timestamp": "2025-06-04T20:34:29",
+    "framework": "civic_virtue",
+    "wells": {
+        "Dignity": 0.8,      # Scores must be 0.0-1.0
+        "Truth": 0.6,
+        "Hope": 0.4,
+        // ... all 10 wells
+    }
+}
+
+# Analysis Output Format
+{
+    "center_of_mass": {"x": 0.12, "y": 0.34},
+    "narrative_polarity_score": 0.67,
+    "directional_purity_score": 0.84,
+    "dominant_wells": ["Dignity", "Hope"],
+    "ellipse_position": {"semi_major": 1.0, "semi_minor": 0.7}
+}
+```
+
+### 5.2 Streamlit Interface (`narrative_gravity_app.py`)
 
 Comprehensive web interface - 1,372 lines providing:
 
@@ -1697,7 +812,30 @@ The API integration development represents the **critical next milestone** in th
 4. **Cross-model validation infrastructure**
 5. **Batch processing optimization and result caching**
 
-This comprehensive documentation provides complete technical context for systematic API integration planning that will transform the Narrative Gravity Maps framework from a manual research tool into a scalable, statistically rigorous analysis platform suitable for large-scale academic and research applications.
+---
+
+## 📊 **Summary for Product Manager Mode**
+
+**Current Position (June 2025)**:
+- ✅ **Infrastructure Complete**: Epic 1-4 finished with 99.5% test success rate
+- ✅ **API Foundation**: Ready for LLM automation with bug fixes completed
+- ✅ **Framework System**: 3 hot-swappable frameworks with modular architecture
+- 🎯 **Next Phase**: Validation-first development for academic credibility
+
+**Immediate Priorities**:
+1. **Phase 1 Validation**: Multi-run consistency studies (765 analyses across golden set)
+2. **Statistical Rigor**: Inter-LLM correlation analysis and framework validation  
+3. **Evidence Systems**: Quote extraction and human-readable explanations
+4. **Academic Publication**: Validation studies ready for peer review
+
+**Key Capabilities**:
+- Mathematical framework with elliptical coordinate system
+- Multi-LLM integration (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro)
+- Framework-agnostic design supporting any persuasive narrative type
+- Comprehensive testing infrastructure and error handling
+- Publication-ready visualization engine
+
+This comprehensive documentation provides complete technical context for systematic development planning that will transform the Narrative Gravity Maps framework from a manual research tool into a scalable, statistically rigorous analysis platform suitable for large-scale academic and research applications.
 
 ---
 

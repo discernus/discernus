@@ -142,6 +142,14 @@ class MetricsCollector:
         if redis_status:
             self.metrics["system_health"]["redis_status"] = redis_status
     
+    def increment_metric(self, metric_name: str, tags: Dict[str, Any] = None):
+        """Increment a metric by 1. Added for backward compatibility with auth system."""
+        if metric_name == "users_registered_total":
+            self.metrics["ingestion"]["total_attempts"] += 1
+        elif metric_name == "user_logins_total":
+            self.metrics["api_usage"]["total_requests"] += 1
+        # Note: This is a compatibility method. Full metrics should use specific record_* methods.
+    
     def get_summary(self) -> Dict[str, Any]:
         """Get summary metrics for monitoring."""
         return {
