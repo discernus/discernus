@@ -6,7 +6,7 @@ import os
 # Add the project root to the Python path to allow for absolute imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-import narrative_gravity_elliptical
+from src.narrative_gravity import engine
 
 
 @pytest.fixture
@@ -14,7 +14,7 @@ def analyzer():
     """Returns a NarrativeGravityWellsElliptical instance with default config."""
     # Using a non-existent config directory forces the class to use its default
     # configuration, making the test self-contained.
-    return narrative_gravity_elliptical.NarrativeGravityWellsElliptical(config_dir="non_existent_dir_to_force_defaults")
+    return engine.NarrativeGravityWellsElliptical(config_dir="non_existent_dir_to_force_defaults")
 
 
 class TestNarrativeGravityEllipticalMath:

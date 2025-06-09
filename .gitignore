@@ -69,3 +69,6 @@ test_*.json
 *_NOTES.md
 *_TODO.md
 *_SCRATCH.md
+
+# Temporary files and experiments
+tmp/

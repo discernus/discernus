@@ -1,5 +1,118 @@
 # Narrative Gravity Maps - Changelog
 
+## [Unreleased]
+
+### ✨ New Features
+- **Release Management System**: Comprehensive automated release process
+  - `scripts/release.py`: Automated release script with pre-release checks
+  - File hygiene verification, test requirements, documentation checks
+  - Semantic versioning, CHANGELOG updates, git tagging automation
+  - Dry-run capability for testing release process safely
+
+### 📋 Documentation
+- **Release Process Guide**: `docs/development/RELEASE_PROCESS.md`
+  - Complete manual and automated release procedures
+  - Troubleshooting guides and recovery procedures
+  - Release type definitions and timing guidelines
+- **Research Data Export Standards**: Documented `exports/` directory organization
+  - Academic data export formats (R, CSV, Parquet)
+  - Timestamped versioning for reproducible research
+  - External collaboration and validation support
+
+## [v2.1.2] - Corpus Organization Consolidation - 2025-06-09
+
+### 🏗️ Infrastructure
+- **BREAKING**: Consolidated duplicate text data directories
+  - Moved `reference_texts/` contents to `corpus/raw_sources/`
+  - Moved processing scripts to `corpus/processing_scripts/`
+  - Updated all file path references in code
+  - Eliminated duplicate corpus organization
+- **Text Data Organization**: Centralized all text data under `corpus/`
+  - `corpus/golden_set/`: Curated, analysis-ready datasets
+  - `corpus/raw_sources/`: Original source materials  
+  - `corpus/processing_scripts/`: Data transformation scripts
+- **Documentation**: Updated governance files with corpus organization standards
+
+## [v2.1.1] - Project Organization & Database Architecture - 2025-01-06
+
+### 🧹 Major Project Cleanup & Reorganization
+
+#### **Root Directory Cleanup**
+- **Moved Analysis Results**: 5 visualization files → `analysis_results/temp_cleanup_2025_01_06/`
+- **Moved Test Files**: 6 temporary test files → `tests/temp_stress_tests/`
+- **Moved Utility Scripts**: 7 scripts → `scripts/` directory
+- **Moved Documentation**: Database architecture doc → `docs/architecture/`
+- **Removed Legacy**: 0-byte `narrative_gravity.db` SQLite file causing confusion
+
+#### **Python Package Structure Reorganization**
+- **NEW**: Proper `src/narrative_gravity/` package structure following Python standards
+- **Moved Core Files**:
+  - `narrative_gravity_app.py` → `src/narrative_gravity/app.py`
+  - `narrative_gravity_elliptical.py` → `src/narrative_gravity/engine.py` 
+  - `launch_app.py` → `src/narrative_gravity/launcher.py`
+  - `framework_manager.py` → `src/narrative_gravity/framework_manager.py`
+- **Updated Imports**: Fixed 18+ Python files with new import paths
+- **Enhanced Compatibility**: Dual import system for both direct execution and module imports
+
+#### **Comprehensive Platform Launcher**
+- **NEW**: `launch.py` - Orchestrates all platform services
+- **Service Management**: Database, API server (port 8000), Celery worker, Streamlit UI (port 8501)
+- **Launch Options**: Individual services or full platform with single command
+- **Database Setup**: Automated PostgreSQL initialization and verification
+- **Backward Compatibility**: `launch_streamlit.py` for simple UI access
+
+#### **Database Architecture Clarification**
+- **NEW**: `docs/architecture/database_architecture.md` - Comprehensive database usage guide
+- **NEW**: `check_database.py` - Database configuration verification script
+- **PostgreSQL PRIMARY**: All application data (main app, API, Celery, production)
+- **SQLite LIMITED**: Unit testing (in-memory) and logging fallback only
+- **Configuration**: Enhanced launcher with PostgreSQL verification and clear error messages
+- **Fixed**: Alembic migration configuration for new package structure
+
+### ✨ New Features
+- **Service Orchestration**: Single command launches entire platform
+- **Database Verification**: Automatic PostgreSQL connection testing
+- **Import Flexibility**: Apps work in both development and package contexts
+- **Clear Documentation**: Eliminates database confusion for AI assistants and developers
+
+### 🔧 Fixes & Improvements
+- **Import Path Standardization**: Converted to proper package imports throughout codebase
+- **Database Confusion Resolution**: Crystal clear PostgreSQL vs SQLite usage documentation
+- **Legacy File Cleanup**: Removed confusing 0-byte SQLite file
+- **Service Dependencies**: Clear startup order and dependency management
+- **Error Messages**: Reference specific documentation for troubleshooting
+
+### 🏗️ Infrastructure
+- **Python Package Standards**: Follows PEP 8 and packaging best practices
+- **Service Architecture**: Proper microservice orchestration with cleanup
+- **Database Strategy**: PostgreSQL for production, SQLite for testing only
+- **Documentation Structure**: Centralized guides for database, launch, and architecture
+
+### 📋 Usage Changes
+
+#### **New Launch Commands**
+```bash
+python launch.py                    # Launch all services
+python launch.py --streamlit-only   # UI only
+python launch.py --api-only         # API server only
+python launch.py --setup-db         # Database setup
+python check_database.py            # Verify database config
+```
+
+#### **Import Updates** (For Developers)
+```python
+# NEW: Package imports
+from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
+from src.narrative_gravity.framework_manager import FrameworkManager
+```
+
+### 🎯 Benefits
+- **Professional Structure**: Standard Python package organization
+- **Service Orchestration**: One-command platform startup
+- **Database Clarity**: Zero confusion about PostgreSQL vs SQLite usage  
+- **Developer Experience**: Clear setup, documentation, and troubleshooting
+- **AI Assistant Clarity**: Explicit database usage prevents confusion
+
 ## [v2.1.0] - Testing Infrastructure Overhaul Complete - 2025-06-06
 
 ### 🎉 Major Achievement: Comprehensive Testing Infrastructure 

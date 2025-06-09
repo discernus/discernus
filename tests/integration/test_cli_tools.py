@@ -10,9 +10,9 @@ import subprocess
 # Add the project root to the Python path to allow for absolute imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from framework_manager import FrameworkManager
-from generate_prompt import PromptGenerator, load_dipoles, load_framework
-from narrative_gravity_elliptical import NarrativeGravityWellsElliptical, load_analysis_data
+from src.narrative_gravity.framework_manager import FrameworkManager
+from scripts.generate_prompt import PromptGenerator, load_dipoles, load_framework
+from src.narrative_gravity.engine import NarrativeGravityWellsElliptical, load_analysis_data
 
 # --- Fixtures for setting up test environments ---
 
@@ -159,6 +159,6 @@ class TestCLIExecutionIntegration:
 
     def test_narrative_gravity_elliptical_cli_help(self):
         # This script might require a file, testing with --help
-        stdout, _, exit_code = self.run_cli_command(["python", "narrative_gravity_elliptical.py", "--help"])
+        stdout, _, exit_code = self.run_cli_command(["python", "src/narrative_gravity/engine.py", "--help"])
         assert exit_code == 0
-        assert "usage: narrative_gravity_elliptical.py" in stdout 
+        assert "usage:" in stdout 

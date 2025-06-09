@@ -1,0 +1,146 @@
+{
+  "job_id": "trump_trump_gpt4o_gpt_4o_20250606_221319",
+  "speaker": "Donald Trump",
+  "speech_type": "Joint Session Address",
+  "framework": "civic_virtue",
+  "model": "claude-3.5-sonnet",
+  "total_runs": 5,
+  "raw_scores": [
+    {
+      "Fear": 0.7,
+      "Hope": 0.5,
+      "Truth": 0.3,
+      "Dignity": 0.2,
+      "Fantasy": 0.8,
+      "Justice": 0.4,
+      "Tribalism": 0.8,
+      "Pragmatism": 0.3,
+      "Resentment": 0.6,
+      "Manipulation": 0.7
+    },
+    {
+      "Fear": 0.7,
+      "Hope": 0.5,
+      "Truth": 0.3,
+      "Dignity": 0.2,
+      "Fantasy": 0.8,
+      "Justice": 0.4,
+      "Tribalism": 0.8,
+      "Pragmatism": 0.3,
+      "Resentment": 0.6,
+      "Manipulation": 0.7
+    },
+    {
+      "Fear": 0.7,
+      "Hope": 0.5,
+      "Truth": 0.3,
+      "Dignity": 0.2,
+      "Fantasy": 0.8,
+      "Justice": 0.4,
+      "Tribalism": 0.8,
+      "Pragmatism": 0.3,
+      "Resentment": 0.6,
+      "Manipulation": 0.7
+    },
+    {
+      "Fear": 0.7,
+      "Hope": 0.5,
+      "Truth": 0.3,
+      "Dignity": 0.2,
+      "Fantasy": 0.8,
+      "Justice": 0.4,
+      "Tribalism": 0.8,
+      "Pragmatism": 0.3,
+      "Resentment": 0.6,
+      "Manipulation": 0.7
+    },
+    {
+      "Fear": 0.8,
+      "Hope": 0.6,
+      "Truth": 0.3,
+      "Dignity": 0.2,
+      "Fantasy": 0.8,
+      "Justice": 0.3,
+      "Tribalism": 0.8,
+      "Pragmatism": 0.2,
+      "Resentment": 0.7,
+      "Manipulation": 0.7
+    }
+  ],
+  "average_scores": {
+    "Dignity": 0.2,
+    "Truth": 0.3,
+    "Justice": 0.38,
+    "Hope": 0.52,
+    "Pragmatism": 0.27999999999999997,
+    "Tribalism": 0.8,
+    "Manipulation": 0.7,
+    "Resentment": 0.6199999999999999,
+    "Fantasy": 0.8,
+    "Fear": 0.72
+  },
+  "analysis_data": {
+    "metadata": {
+      "title": "Trump Joint Session Address - Multi-Run Average (5 runs)",
+      "model_name": "Claude 3.5 Sonnet",
+      "model_version": "claude-3.5-sonnet",
+      "summary": "Multi-run analysis of Trump Joint Session Address using Civic Virtue framework",
+      "timestamp": "2025-06-08T18:39:15.269964",
+      "job_id": "trump_trump_gpt4o_gpt_4o_20250606_221319",
+      "framework": "civic_virtue",
+      "run_count": 5
+    },
+    "wells": [
+      {
+        "name": "Dignity",
+        "score": 0.2,
+        "angle": 90
+      },
+      {
+        "name": "Truth",
+        "score": 0.3,
+        "angle": 45
+      },
+      {
+        "name": "Justice",
+        "score": 0.38,
+        "angle": 135
+      },
+      {
+        "name": "Hope",
+        "score": 0.52,
+        "angle": 20
+      },
+      {
+        "name": "Pragmatism",
+        "score": 0.27999999999999997,
+        "angle": 160
+      },
+      {
+        "name": "Tribalism",
+        "score": 0.8,
+        "angle": 270
+      },
+      {
+        "name": "Manipulation",
+        "score": 0.7,
+        "angle": 315
+      },
+      {
+        "name": "Resentment",
+        "score": 0.6199999999999999,
+        "angle": 225
+      },
+      {
+        "name": "Fantasy",
+        "score": 0.8,
+        "angle": 340
+      },
+      {
+        "name": "Fear",
+        "score": 0.72,
+        "angle": 200
+      }
+    ]
+  }
+}

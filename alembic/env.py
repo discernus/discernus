@@ -19,11 +19,12 @@ if config.config_file_name is not None:
 import sys
 import os
 
-# Add src to path to import our models
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
+# Add project root to path to import our models
+project_root = os.path.join(os.path.dirname(__file__), '..')
+sys.path.append(project_root)
 
-from src.models.base import Base
-from src.models.models import *  # Import all models for autogenerate
+from src.narrative_gravity.models.base import Base
+from src.narrative_gravity.models.models import *  # Import all models for autogenerate
 
 target_metadata = Base.metadata
 

@@ -128,7 +128,7 @@ def main():
     
     run_command([
         sys.executable, str(cli_dir / "schema_generator.py"),
-        "--input", "test_data/sample_corpus.jsonl",
+        "--input", "tests/test_data/sample_corpus.jsonl",
         "--output", str(examples_dir / "generated_schema.json"),
         "--title", "Generated Schema from Sample Data",
         "--description", "Auto-generated schema from existing corpus data"
@@ -137,7 +137,7 @@ def main():
     # 2. Validate existing data against core schema
     run_command([
         sys.executable, str(cli_dir / "schema_generator.py"),
-        "--input", "test_data/sample_corpus.jsonl",
+        "--input", "tests/test_data/sample_corpus.jsonl",
         "--validate-against", str(schema_path),
         "--show-errors"
     ], "Validate existing data against core schema")

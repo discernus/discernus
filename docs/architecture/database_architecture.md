@@ -1,316 +1,171 @@
-# Database-First Architecture for Narrative Gravity Analysis
+# Database Architecture - Narrative Gravity Wells
 
-## Overview
+## 🗄️ Database Usage Overview
 
-The Narrative Gravity Analysis system now uses a **database-first architecture** designed specifically for academic research workflows and enterprise business intelligence tools. This addresses the critical need for comprehensive data logging and analysis capabilities.
+The Narrative Gravity Wells project uses **multiple databases** for different purposes. This document clarifies when each is used to prevent confusion.
 
-## Key Improvements
+## 📊 Database Types & Usage
 
-### ✅ **What We Fixed**
-- **Scattered JSON files** → **Single source of truth in database**
-- **Limited SQLite** → **Enterprise PostgreSQL with SQLite fallback**
-- **Missing raw responses** → **Complete LLM corpus capture**
-- **Academic incompatibility** → **Native export to SPSS, R, Parquet**
-- **No BI integration** → **Direct Looker/Tableau connectivity**
+### 🐘 **PostgreSQL (PRIMARY/PRODUCTION)**
+- **Purpose**: Main application database
+- **Location**: External PostgreSQL server
+- **Connection**: `postgresql://postgres:postgres@localhost:5432/narrative_gravity`
+- **Used By**:
+  - ✅ Main application (`src/narrative_gravity/app.py`)
+  - ✅ API server (`src/api/`)
+  - ✅ Celery workers
+  - ✅ Production data storage
+  - ✅ Alembic migrations
 
-## Database Schema
+### 📁 **SQLite (FALLBACK/LOGGING)**
+- **Purpose**: Fallback logging and statistics
+- **Location**: `logs/narrative_gravity_stats.db`
+- **Used By**:
+  - ⚠️ Statistical logger when PostgreSQL unavailable
+  - ⚠️ Local logging fallback
+  - ❌ **NOT** for main application data
 
-### Core Tables
+### 🧪 **SQLite (TESTING)**
+- **Purpose**: Unit testing only
+- **Location**: In-memory (`:memory:`)
+- **Used By**:
+  - ✅ Unit tests (`tests/unit/`)
+  - ✅ Isolated test environments
+  - ❌ **NOT** for application data
 
-#### `jobs` - Multi-run Analysis Jobs
-```sql
-CREATE TABLE jobs (
-    job_id TEXT PRIMARY KEY,
-    speaker TEXT NOT NULL,
-    speech_type TEXT NOT NULL,
-    text_length INTEGER NOT NULL,
-    framework TEXT NOT NULL,
-    model_name TEXT NOT NULL,
-    total_runs INTEGER NOT NULL,
-    successful_runs INTEGER NOT NULL,
-    total_cost DECIMAL(10,4) NOT NULL,
-    total_duration_seconds DECIMAL(8,2) NOT NULL,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    mean_scores JSONB NOT NULL,  -- Average well scores
-    variance_stats JSONB NOT NULL,  -- Variance analysis
-    threshold_category TEXT NOT NULL  -- perfect/near_perfect/minimal/normal
-);
-```
+### 🗃️ **Legacy SQLite File**
+- **File**: `narrative_gravity.db` (root directory)
+- **Status**: ⚠️ **LEGACY/UNUSED** (0 bytes)
+- **Action**: Should be removed
 
-#### `runs` - Individual LLM Analyses
-```sql
-CREATE TABLE runs (
-    run_id TEXT PRIMARY KEY,
-    job_id TEXT NOT NULL REFERENCES jobs(job_id),
-    run_number INTEGER NOT NULL,
-    well_scores JSONB NOT NULL,  -- All well scores
-    narrative_position JSONB NOT NULL,  -- x,y coordinates
-    analysis_text TEXT NOT NULL,  -- Processed analysis
-    model_name TEXT NOT NULL,
-    framework TEXT NOT NULL,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    cost DECIMAL(8,4) NOT NULL,
-    duration_seconds DECIMAL(6,2) NOT NULL,
-    success BOOLEAN NOT NULL,
-    error_message TEXT,
-    -- ENHANCED CORPUS CAPTURE
-    raw_prompt TEXT,  -- Complete prompt sent to LLM
-    raw_response TEXT,  -- Full unprocessed LLM response
-    input_text TEXT,  -- Source text being analyzed
-    model_parameters JSONB,  -- Temperature, max_tokens, etc.
-    api_metadata JSONB  -- Request/response metadata
-);
-```
+## 🔧 Configuration Hierarchy
 
-#### `variance_stats` - Academic Variance Analysis
-```sql
-CREATE TABLE variance_stats (
-    id SERIAL PRIMARY KEY,
-    job_id TEXT NOT NULL REFERENCES jobs(job_id),
-    well_name TEXT NOT NULL,
-    mean_score DECIMAL(6,4) NOT NULL,
-    std_deviation DECIMAL(6,4) NOT NULL,
-    variance DECIMAL(8,6) NOT NULL,
-    score_category TEXT NOT NULL,  -- low/medium/high
-    well_type TEXT NOT NULL  -- integrative/disintegrative
-);
-```
-
-## Academic Export Capabilities
-
-### Supported Formats
-
-#### **CSV** - Universal compatibility
-```python
-# Export all data to CSV
-files = logger.export_for_academics(export_format="csv")
-# Creates: runs.csv, jobs.csv, variance.csv
-```
-
-#### **SPSS** - Statistical analysis (.sav files)
-```python
-# Export with proper variable labels
-files = logger.export_for_academics(export_format="spss")
-# Creates: narrative_gravity_TIMESTAMP.sav
-```
-
-#### **R** - Advanced statistics
-```python
-# Export with auto-generated analysis script
-files = logger.export_for_academics(export_format="r")
-# Creates: data.csv + analysis_script.R
-```
-
-#### **Parquet** - Data lakes & big data
-```python
-# Compressed columnar format for analytics
-files = logger.export_for_academics(export_format="parquet")
-# Creates: narrative_gravity_corpus_TIMESTAMP.parquet
-```
-
-### Sample Academic Workflow
-
-```python
-from src.utils.statistical_logger import StatisticalLogger
-
-# Initialize with PostgreSQL preference
-logger = StatisticalLogger(prefer_postgresql=True)
-
-# Export all formats for comprehensive analysis
-exports = logger.export_for_academics(
-    export_format="all",
-    output_dir="exports/research_2025/",
-    include_raw_responses=True  # Full corpus
-)
-
-# Query specific subsets
-claude_responses = logger.get_full_response_corpus(filters={
-    'model_name': 'claude-3-5-sonnet-20241022',
-    'speaker': 'Trump'
-})
-
-# Get corpus statistics
-stats = logger.get_corpus_stats()
-print(f"Total cost: ${stats['total_cost']:.4f}")
-```
-
-## Business Intelligence Integration
-
-### Looker Connectivity
-```yaml
-connection: narrative_gravity_pg
-host: localhost
-database: narrative_gravity
-schema: public
-tables:
-  - jobs
-  - runs  
-  - variance_stats
-  - performance_metrics
-```
-
-### Key Dimensions & Measures
-- **Dimensions**: speaker, model_name, framework, timestamp
-- **Measures**: total_cost, success_rate, variance, duration  
-- **Advanced**: JSONB queries on well_scores and parameters
-
-### Sample Looker SQL
-```sql
-SELECT 
-    speaker,
-    model_name,
-    AVG(total_cost) as avg_cost,
-    AVG(successful_runs::float / total_runs) as success_rate,
-    COUNT(*) as job_count
-FROM jobs 
-WHERE timestamp >= '2025-01-01'
-GROUP BY speaker, model_name
-ORDER BY success_rate DESC;
-```
-
-## Database Configuration
-
-### PostgreSQL (Preferred)
-```python
-pg_config = {
-    'host': 'localhost',
-    'port': '5432', 
-    'database': 'narrative_gravity',
-    'user': 'postgres',
-    'password': 'your_password'
-}
-logger = StatisticalLogger(pg_config=pg_config)
-```
-
-### Environment Variables
+### Environment Variables (`.env`)
 ```bash
-export DB_HOST=localhost
-export DB_PORT=5432
-export DB_NAME=narrative_gravity
-export DB_USER=postgres
-export DB_PASSWORD=your_password
+# PRIMARY DATABASE (PostgreSQL)
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/narrative_gravity
+
+# OPTIONAL: Enable SQL debugging
+SQL_DEBUG=false
 ```
 
-### SQLite Fallback
-If PostgreSQL is unavailable, the system automatically falls back to SQLite with reduced functionality.
+### Fallback Logic (Statistical Logger)
+1. **Try PostgreSQL** (from `DATABASE_URL`)
+2. **If unavailable**: Fall back to SQLite in `logs/`
+3. **Testing**: Always use in-memory SQLite
 
-## Migration from JSON Files
+## 🚀 Setup Instructions
 
-The system now eliminates scattered JSON output files:
-
-### Before (Problematic)
-```
-model_output/
-├── job_12345.json
-├── job_67890.json
-└── analysis_results/
-    ├── dashboard_data.json
-    └── variance_stats.json
+### 1. Initial Database Setup
+```bash
+python launch.py --setup-db
 ```
 
-### After (Clean)
-```
-PostgreSQL Database
-├── Complete run data
-├── Job metadata  
-├── Variance statistics
-└── Performance metrics
-     ↓
-All visualizations pull from DB
+### 2. Verify PostgreSQL Connection
+```bash
+python -c "from src.narrative_gravity.models.base import engine; engine.connect(); print('✅ PostgreSQL connected')"
 ```
 
-## Performance Optimizations
-
-### Indexes for Analytics
-```sql
-CREATE INDEX idx_runs_job_id ON runs(job_id);
-CREATE INDEX idx_runs_model_name ON runs(model_name);
-CREATE INDEX idx_runs_timestamp ON runs(timestamp);
-CREATE INDEX idx_jobs_speaker ON jobs(speaker);
-CREATE INDEX idx_jobs_model_name ON jobs(model_name);
+### 3. Check Database Status
+```bash
+python scripts/setup_database.py
 ```
 
-### JSONB Efficiency
-- Well scores stored as JSONB for efficient querying
-- Model parameters indexed for parameter analysis
-- Native JSON operations in PostgreSQL
+## 🔍 Troubleshooting
 
-## Dependencies
+### "Database not accessible" Error
+**Cause**: PostgreSQL not running or misconfigured
 
-### Required Python Packages
-```txt
-psycopg2-binary==2.9.9    # PostgreSQL driver
-pandas==2.2.3             # DataFrame operations
-pyreadstat==1.3.0         # SPSS/Stata support
-fastparquet==2025.1.0     # Parquet support
-scipy==1.15.1             # Scientific computing
-scikit-learn==1.7.0       # Machine learning
+**Solutions**:
+```bash
+# Install PostgreSQL (macOS)
+brew install postgresql
+brew services start postgresql
+
+# Create database
+createdb narrative_gravity
+
+# Run setup
+python launch.py --setup-db
 ```
 
-## Usage Examples
+### SQLite Fallback Messages
+**Cause**: PostgreSQL unavailable, using fallback logging
 
-### Initialize Logger
-```python
-from src.utils.statistical_logger import StatisticalLogger
+**Fix**: Ensure PostgreSQL is running and properly configured
 
-# Auto-detect best database
-logger = StatisticalLogger()
+### Test Database Issues
+**Cause**: Unit tests should always use in-memory SQLite
 
-# Force PostgreSQL
-logger = StatisticalLogger(prefer_postgresql=True)
+**Check**: Ensure test fixtures use `sqlite:///:memory:`
+
+## 📋 Database Schema Management
+
+### Migrations (PostgreSQL Only)
+```bash
+# Create migration
+alembic revision --autogenerate -m "Description"
+
+# Apply migrations
+alembic upgrade head
+
+# Check status
+alembic current
 ```
 
-### Export for Academics
-```python
-# All formats
-exports = logger.export_for_academics(export_format="all")
+### Schema Files
+- **Primary Schema**: Defined in `src/narrative_gravity/models/`
+- **Migrations**: Stored in `alembic/versions/`
+- **Config**: `alembic.ini` (PostgreSQL only)
 
-# SPSS only
-spss_file = logger.export_for_academics(export_format="spss")
+## 🎯 For AI Assistants & Developers
 
-# Include raw responses for corpus linguistics
-full_corpus = logger.export_for_academics(
-    export_format="csv",
-    include_raw_responses=True
-)
+### Default Assumptions
+1. **Always assume PostgreSQL** for main application
+2. **SQLite only for**:
+   - Unit testing (in-memory)
+   - Statistical logging fallback
+   - Local development without PostgreSQL
+
+### When to Use Each Database
+
+| Use Case | Database | Connection |
+|----------|----------|------------|
+| Main app development | PostgreSQL | `DATABASE_URL` |
+| Production deployment | PostgreSQL | `DATABASE_URL` |
+| Unit testing | SQLite | `:memory:` |
+| Statistical logging | SQLite | `logs/narrative_gravity_stats.db` |
+| Schema migrations | PostgreSQL | Alembic |
+
+### Quick Checks
+```bash
+# What database is configured?
+echo $DATABASE_URL
+
+# Is PostgreSQL running?
+pg_isready -h localhost -p 5432
+
+# Test connection
+python -c "from src.narrative_gravity.models.base import engine; print(engine.url)"
 ```
 
-### Query Corpus
-```python
-# All Claude responses
-claude_data = logger.get_full_response_corpus(filters={
-    'model_name': 'claude-3-5-sonnet-20241022'
-})
+## ⚠️ Common Pitfalls
 
-# High-cost analyses
-expensive = logger.get_full_response_corpus(filters={
-    'min_cost': 0.01
-})
+1. **Don't assume SQLite for main app** - It's PostgreSQL
+2. **Don't migrate SQLite files** - They're temporary/fallback
+3. **Don't store production data in SQLite** - Use PostgreSQL
+4. **Don't ignore database setup** - Run `--setup-db` first
 
-# Date range
-recent = logger.get_full_response_corpus(filters={
-    'date_range': ('2025-01-01', '2025-12-31')
-})
+## 🧹 Cleanup Actions
+
+### Remove Legacy SQLite File
+```bash
+rm narrative_gravity.db  # 0-byte legacy file
 ```
 
-## Benefits
+### Clear Logs (if needed)
+```bash
+rm logs/narrative_gravity_stats.db*
+```
 
-### For Academics
-- ✅ **Direct SPSS/R/Stata compatibility**
-- ✅ **Complete raw response corpus**
-- ✅ **Proper variable labels and metadata**
-- ✅ **Auto-generated analysis scripts**
-
-### For Enterprise
-- ✅ **Looker/Tableau connectivity**
-- ✅ **Data lake integration (Parquet)**
-- ✅ **Scalable PostgreSQL backend**
-- ✅ **Real-time dashboard capability**
-
-### For Researchers
-- ✅ **Single source of truth**
-- ✅ **No more scattered JSON files**
-- ✅ **Full LLM interaction history**
-- ✅ **Advanced query capabilities**
-
-This architecture transforms the Narrative Gravity system from a file-based tool into an enterprise-grade research platform suitable for academic publication and commercial deployment. 
+This architecture ensures **PostgreSQL for production** and **SQLite only for testing/fallback**, eliminating database confusion! 

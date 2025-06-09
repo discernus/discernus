@@ -112,6 +112,18 @@ narrative_gravity_analysis/
 │   │   ├── FRAMEWORK_ARCHITECTURE.md
 │   │   └── PROMPT_ARCHITECTURE.md
 │   │
+│   ├── development/                   # Developer documentation
+│   │   ├── planning/                  # Strategic planning documents
+│   │   │   ├── COMPREHENSIVE_PROJECT_DOCUMENTATION.md
+│   │   │   ├── User Personas - Narrative Gravity Model.md
+│   │   │   ├── Project Milestones - Narrative Gravity Model.md
+│   │   │   └── database_first_architecture_todos.md
+│   │   ├── CONTRIBUTING.md
+│   │   └── RELEASE_PROCESS.md
+│   │
+│   ├── academic/                      # Academic documentation
+│   │   └── PAPER_REPLICATION.md       # Academic paper replication guide
+│   │
 │   ├── generalization/               # Multi-run dashboard documentation
 │   │   ├── GENERIC_DASHBOARD_USAGE.md  # Comprehensive usage guide
 │   │   └── GENERALIZATION_SUMMARY.md   # Technical transformation details
@@ -145,10 +157,10 @@ narrative_gravity_analysis/
 ├── snapshots/                         # Project snapshots
 │   └── obama_multirun_elliptical_v1/  # Obama multi-run snapshot
 │
-├── replication/                       # Paper replication materials
-│   └── PAPER_REPLICATION.md           # Replication guide
+
+
 │
-└── dev_instructions/                  # Development instructions
+
     ├── COMPREHENSIVE_PROJECT_DOCUMENTATION.md
     ├── User Personas - Narrative Gravity Model.md
     └── [various development guides]

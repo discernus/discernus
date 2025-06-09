@@ -1,0 +1,204 @@
+# Narrative Gravity Wells - Cursor AI Assistant Rules
+# This file provides consistent guidance for AI assistants working on this project
+
+## Project Organization Philosophy
+
+### Root Directory Standards
+ONLY place these file types in the root directory:
+- **Operational files**: README.md, CHANGELOG.md, LICENSE
+- **Launch/access tools**: launch.py, launch_streamlit.py, check_database.py
+- **Configuration**: requirements.txt, env.example, alembic.ini, pytest.ini
+- **Build/deploy**: .gitignore, setup.py (if needed)
+
+NEVER place in root:
+- Analysis results (→ analysis_results/)
+- Test files (→ tests/)
+- Utility scripts (→ scripts/)
+- Documentation (→ docs/)
+- Temporary files (→ tmp/YYYY_MM_DD/)
+
+### Documentation Organization
+- **docs/architecture/**: All architectural documentation
+- **docs/user-guides/**: End-user focused guides
+- **docs/development/**: Developer/contributor guides
+- **docs/api/**: API documentation
+- **Root level docs**: Only operational guides (LAUNCH_GUIDE.md)
+
+### Research Data Organization
+- **exports/academic_formats/**: Research data exports for external analysis
+  - R scripts with pre-written statistical analysis
+  - CSV/Parquet files formatted for academic tools (R, Python, Stata)
+  - Timestamped exports for version tracking
+  - Publication-ready datasets with analysis code
+
+### Package Structure Standards
+Follow Python packaging standards:
+- **src/narrative_gravity/**: Main package with proper __init__.py files
+- **Use relative imports**: Within package modules
+- **Absolute imports**: For external modules and when executed directly
+- **Import compatibility**: Support both direct execution and module imports
+
+## Database Architecture (CRITICAL)
+
+### Default Database Assumptions
+- **PRIMARY DATABASE**: Always PostgreSQL for application data
+- **SQLite usage**: ONLY for unit testing (in-memory) and logging fallback
+- **Connection**: postgresql://postgres:postgres@localhost:5432/narrative_gravity
+
+### Database Rules
+1. **NEVER assume SQLite** for main application data
+2. **PostgreSQL for**: Main app, API server, Celery workers, production
+3. **SQLite for**: Unit tests (`:memory:`), logging fallback (`logs/narrative_gravity_stats.db`)
+4. **Reference**: docs/architecture/database_architecture.md for details
+
+### Database Troubleshooting
+When database issues arise:
+1. Check PostgreSQL connection first
+2. Reference `python check_database.py`
+3. Setup with `python launch.py --setup-db`
+4. Point to docs/architecture/database_architecture.md
+
+## Service Architecture
+
+### Port Allocation
+- **8501**: Streamlit UI (main interface)
+- **8000**: FastAPI server (REST API + docs at /api/docs)
+- **5432**: PostgreSQL database
+- **6379**: Redis (if using Celery)
+
+### Launch Patterns
+- **Full platform**: `python launch.py`
+- **Individual services**: Use --streamlit-only, --api-only, --celery-only flags
+- **Database setup**: `python launch.py --setup-db`
+
+## Code Standards
+
+### Import Path Updates
+When files are moved, update ALL references:
+- Import statements in Python files
+- Documentation references
+- Configuration files (alembic/env.py, etc.)
+- Test files
+
+### Change Documentation
+- **ALL significant changes**: Add to CHANGELOG.md with proper versioning
+- **NO separate summary files**: Use the master changelog
+- **Version format**: [vX.Y.Z] - Description - YYYY-MM-DD
+
+### Testing Standards
+- **Unit tests**: Use in-memory SQLite (`:memory:`)
+- **Integration tests**: Can use PostgreSQL
+- **Test organization**: tests/unit/, tests/integration/, tests/utilities/
+
+## Import Guidelines
+
+### Package Imports (Preferred)
+```python
+from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
+from src.narrative_gravity.framework_manager import FrameworkManager
+```
+
+### Dual Import Pattern (For Streamlit compatibility)
+```python
+try:
+    from .module import Class  # Relative import
+except ImportError:
+    from src.package.module import Class  # Absolute fallback
+```
+
+## Error Handling Philosophy
+
+### User-Friendly Errors
+- **Database errors**: Point to check_database.py and setup instructions
+- **Import errors**: Suggest package structure fixes
+- **Service errors**: Reference launch.py options and LAUNCH_GUIDE.md
+
+### Documentation References
+Always reference specific documentation:
+- Database issues → docs/architecture/database_architecture.md
+- Launch issues → LAUNCH_GUIDE.md
+- Architecture questions → docs/architecture/
+- Changes → CHANGELOG.md
+
+## Text Data Organization
+
+### Corpus Structure
+All text data is centralized under the `corpus/` directory:
+- **corpus/golden_set/**: Curated, analysis-ready datasets (standardized format)
+- **corpus/raw_sources/**: Original source materials (presidential speeches, synthetic narratives)
+- **corpus/processing_scripts/**: Scripts that transform raw sources into golden sets
+
+### Examples Directory
+The `examples/` directory provides demonstrations and tutorials:
+- **examples/**: Demo scripts showing how to use corpus generation tools
+- **Sample data files**: Example inputs in various formats (Markdown, CSV, text)
+- **Generated outputs**: Demonstration of expected JSONL and schema formats
+- **Purpose**: Developer onboarding, user training, tool testing
+
+### Data Processing Philosophy
+- Raw sources preserved for reference and reprocessing
+- Golden sets are standardized, validated, and analysis-ready
+- Processing scripts document transformation logic
+- Examples directory maintains working demonstrations of tooling
+
+## Framework Philosophy
+
+### Modularity First
+- Support multiple frameworks (civic_virtue, political_spectrum, etc.)
+- Avoid hardcoded assumptions about specific frameworks
+- Use framework-agnostic design patterns
+
+### Configuration Management
+- Environment variables in .env (copy from env.example)
+- Framework configs in frameworks/ directory
+- Database config through DATABASE_URL
+
+## File Movement Protocols
+
+When reorganizing files:
+1. **Check dependencies**: Use grep/search to find all references
+2. **Update imports**: Fix all Python import statements
+3. **Update docs**: Fix all documentation references
+4. **Update configs**: Fix alembic, tests, etc.
+5. **Test**: Verify imports work after changes
+6. **Document**: Add to CHANGELOG.md
+
+## Release Management
+
+### Release Process Standards
+- **All releases**: Use `python scripts/release.py` for consistency
+- **Pre-release requirements**: All tests pass, documentation current, git clean
+- **Version types**: patch (fixes), minor (features), major (breaking changes)
+- **CHANGELOG.md**: Must have [Unreleased] section for ongoing changes
+
+### Release Commands
+```bash
+python scripts/release.py --dry-run patch --message "Test release"
+python scripts/release.py patch --message "Bug fixes"
+python scripts/release.py minor --message "New features"
+python scripts/release.py major --message "Breaking changes"
+```
+
+## Quality Standards
+
+### Before Completing Tasks
+- [ ] Verify PostgreSQL is primary database assumption
+- [ ] Check that files are in correct directories
+- [ ] Update all references when moving files
+- [ ] Add significant changes to CHANGELOG.md
+- [ ] Test that imports work correctly
+- [ ] Ensure documentation references are accurate
+
+### Temporary File Management
+- **Temporary files**: Always use `tmp/YYYY_MM_DD/` format
+- **Naming pattern**: `tmp/2025_06_09/experiment_name/`
+- **Auto-cleanup**: Temporary directories older than 30 days can be removed
+- **Git ignore**: All `tmp/` contents should be ignored by git
+
+### Cleanup Philosophy
+- Prefer organizing existing files over creating new ones
+- Move temporary/analysis files to appropriate subdirectories
+- Keep root directory minimal and purposeful
+- Document changes in changelog, not separate files
+
+This ensures consistent, professional project organization across all AI assistant interactions. 
