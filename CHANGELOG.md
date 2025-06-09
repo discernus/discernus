@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [v2.2.0] - Major project organization overhaul with governance standards implementation - 2025-06-09
+
+## [Unreleased]
+
 ### ✨ New Features
 - **Release Management System**: Comprehensive automated release process
   - `scripts/release.py`: Automated release script with pre-release checks
