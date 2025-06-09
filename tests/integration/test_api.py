@@ -14,7 +14,7 @@ sys.path.insert(0, str(src_path))
 
 def test_api_startup():
     """Test that the API can start without errors."""
-    from src.api.main import app
+    from src.narrative_gravity.api.main import app
     print("✅ FastAPI app created successfully")
     
     # Test that we can access the app
@@ -23,7 +23,7 @@ def test_api_startup():
 
 def test_database_models():
     """Test that database models can be imported."""
-    from src.models.models import Corpus, Document, Chunk, Job, Task
+    from src.narrative_gravity.models.models import Corpus, Document, Chunk, Job, Task
     print("✅ Database models imported successfully")
     
     # Test model creation (without database)
@@ -33,7 +33,7 @@ def test_database_models():
 
 def test_schemas():
     """Test that Pydantic schemas work correctly."""
-    from src.api.schemas import CorpusResponse, JobCreate, DocumentType
+    from src.narrative_gravity.api.schemas import CorpusResponse, JobCreate, DocumentType
     print("✅ API schemas imported successfully")
     
     # Test enum

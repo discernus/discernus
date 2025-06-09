@@ -29,7 +29,7 @@ def test_jsonl_ingestion():
     """Test JSONL file ingestion - creates corpus and ingests documents in one step"""
     print("\n📤 Testing JSONL ingestion (creates corpus + documents)...")
     
-    jsonl_file = Path("test_data/sample_corpus_v2.jsonl")
+    jsonl_file = Path("tests/test_data/sample_corpus_v2.jsonl")
     if not jsonl_file.exists():
         print(f"❌ JSONL file not found: {jsonl_file}")
         assert False, f"Test data file not found: {jsonl_file}"

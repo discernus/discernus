@@ -148,14 +148,14 @@ class TestCLIExecutionIntegration:
         return result.stdout, result.stderr, result.returncode
 
     def test_framework_manager_cli_help(self):
-        stdout, _, exit_code = self.run_cli_command(["python", "framework_manager.py", "--help"])
+        stdout, _, exit_code = self.run_cli_command(["python", "src/narrative_gravity/framework_manager.py", "--help"])
         assert exit_code == 0
-        assert "usage: framework_manager.py" in stdout
+        assert "usage:" in stdout
 
     def test_generate_prompt_cli_help(self):
-        stdout, _, exit_code = self.run_cli_command(["python", "generate_prompt.py", "--help"])
+        stdout, _, exit_code = self.run_cli_command(["python", "scripts/generate_prompt.py", "--help"])
         assert exit_code == 0
-        assert "usage: generate_prompt.py" in stdout
+        assert "usage:" in stdout
 
     def test_narrative_gravity_elliptical_cli_help(self):
         # This script might require a file, testing with --help

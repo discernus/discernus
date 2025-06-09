@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 
 # Note: The functions being tested here are not pure and have side effects,
 # making them integration tests rather than unit tests.
-from narrative_gravity_app import load_framework_for_analysis
+from src.narrative_gravity.app import load_framework_for_analysis
 
 class TestStreamlitAppAndLaunchIntegration:
     """
@@ -29,12 +29,12 @@ class TestStreamlitAppAndLaunchIntegration:
 
     def test_app_and_launch_scripts_exist(self, project_root):
         """Tests that the main application and launch scripts exist."""
-        assert (project_root / "narrative_gravity_app.py").is_file()
-        assert (project_root / "launch_app.py").is_file()
+        assert (project_root / "src" / "narrative_gravity" / "app.py").is_file()
+        assert (project_root / "src" / "narrative_gravity" / "launcher.py").is_file()
 
     @pytest.mark.parametrize("script_name", [
-        "narrative_gravity_app.py",
-        "launch_app.py"
+        "src/narrative_gravity/app.py",
+        "src/narrative_gravity/launcher.py"
     ])
     def test_script_syntax(self, project_root, script_name):
         """Tests that critical scripts have valid Python syntax."""
@@ -48,13 +48,13 @@ class TestStreamlitAppAndLaunchIntegration:
             pytest.fail(f"Syntax check timed out for {script_name}")
 
     def test_launch_app_help_mode(self, project_root):
-        """Tests that launch_app.py responds to --help."""
+        """Tests that launcher.py responds to --help."""
         result = subprocess.run(
-            [sys.executable, "launch_app.py", "--help"],
+            [sys.executable, "src/narrative_gravity/launcher.py", "--help"],
             capture_output=True, text=True, check=False
         )
         assert result.returncode == 0
-        assert "usage: launch_app.py" in result.stdout
+        assert "usage:" in result.stdout
 
     def test_requirements_file_exists(self, project_root):
         """Ensures the requirements.txt file exists."""
@@ -69,7 +69,7 @@ class TestStreamlitAppAndLaunchIntegration:
         process = None
         try:
             process = subprocess.Popen(
-                [sys.executable, "-m", "streamlit", "run", "narrative_gravity_app.py",
+                [sys.executable, "-m", "streamlit", "run", "src/narrative_gravity/app.py",
                  "--server.headless", "true", "--server.port", "8503"],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
             )

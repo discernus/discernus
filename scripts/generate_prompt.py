@@ -19,11 +19,16 @@ NEW RECOMMENDED USAGE:
 
 import json
 import argparse
+import os
+import sys
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
 
-from src.prompts.template_manager import PromptTemplateManager, PromptMode
+# Add the project root to the Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.narrative_gravity.prompts.template_manager import PromptTemplateManager, PromptMode
 
 def load_dipoles(config_dir: str = "config") -> Dict:
     """Load dipole definitions from configuration file."""
