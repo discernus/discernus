@@ -17,15 +17,15 @@ def test_celery_app_creation():
         import sys
         
         # Clear the module cache to force reimport with new env vars
-        if 'src.celery_app' in sys.modules:
-            del sys.modules['src.celery_app']
+        if 'src.narrative_gravity.celery_app' in sys.modules:
+            del sys.modules['src.narrative_gravity.celery_app']
         if 'celery_app' in sys.modules:
             del sys.modules['celery_app']
             
-        from src.celery_app import celery_app
+        from src.narrative_gravity.celery_app import celery_app
         
         assert isinstance(celery_app, Celery)
         assert celery_app.main == "narrative_gravity_analysis"
         assert celery_app.conf.broker_url == "redis://test-redis:6379/0"
         assert celery_app.conf.result_backend == "redis://test-redis:6379/0"
-        assert "src.tasks.analysis_tasks" in celery_app.conf.include 
+        assert "src.narrative_gravity.tasks.analysis_tasks" in celery_app.conf.include 

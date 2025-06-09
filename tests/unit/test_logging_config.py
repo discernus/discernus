@@ -7,9 +7,9 @@ from io import StringIO
 from datetime import datetime
 
 # Add the project root to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from utils.logging_config import MetricsCollector, StructuredLogger, setup_logging, get_logger, ErrorCodes
+from src.narrative_gravity.utils.logging_config import MetricsCollector, StructuredLogger, setup_logging, get_logger, ErrorCodes
 
 @pytest.fixture
 def metrics_collector():

@@ -6,7 +6,7 @@ from datetime import timedelta
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from src.utils.auth import (
+from src.narrative_gravity.utils.auth import (
     hash_password,
     verify_password,
     create_access_token,

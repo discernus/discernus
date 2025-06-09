@@ -18,10 +18,10 @@ from typing import Dict, List, Optional, Tuple, Any
 import sys
 sys.path.append('.')
 from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
-from src.api_clients.direct_api_client import DirectAPIClient
+from src.narrative_gravity.api_clients.direct_api_client import DirectAPIClient
 
 # Add statistical logging import
-from src.utils.statistical_logger import logger, JobData, RunData
+from src.narrative_gravity.utils.statistical_logger import logger, JobData, RunData
 import time
 
 def extract_scores_from_raw_response(raw_response: str) -> Dict[str, float]:
@@ -813,7 +813,7 @@ def create_dashboard(results_file: str, speaker: str = None, year: str = None,
 def load_and_process_data_from_database(job_id: str) -> Optional[Tuple]:
     """Load and process data from database instead of JSON file"""
     try:
-        from src.utils.statistical_logger import logger
+        from src.narrative_gravity.utils.statistical_logger import logger
         
         print(f"🔄 Loading data from database for job: {job_id}")
         

@@ -15,7 +15,7 @@ celery_app = Celery(
     "narrative_gravity_analysis",
     broker=os.getenv("REDIS_URL", "redis://localhost:6379/0"),
     backend=os.getenv("REDIS_URL", "redis://localhost:6379/0"),
-    include=["src.tasks.analysis_tasks"]
+    include=["src.narrative_gravity.tasks.analysis_tasks"]
 )
 
 # Celery configuration
@@ -54,7 +54,7 @@ celery_app.conf.update(
 
 # Task routing (if needed for multiple queues later)
 celery_app.conf.task_routes = {
-    "src.tasks.analysis_tasks.*": {"queue": "analysis"},
+    "src.narrative_gravity.tasks.analysis_tasks.*": {"queue": "analysis"},
 }
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ import os
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from create_generic_multi_run_dashboard import (
+from scripts.create_generic_multi_run_dashboard import (
     extract_scores_from_raw_response,
     extract_analysis_from_raw_response,
     parse_filename_metadata,

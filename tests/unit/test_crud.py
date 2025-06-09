@@ -9,8 +9,8 @@ from datetime import datetime
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from src.api import crud, schemas
-from src.models.models import Base, Corpus, Document, Chunk, Job, Task
+from src.narrative_gravity.api import crud, schemas
+from src.narrative_gravity.models.models import Base, Corpus, Document, Chunk, Job, Task
 
 # --- Database Fixtures for In-Memory Testing ---
 

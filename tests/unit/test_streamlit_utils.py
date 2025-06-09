@@ -5,7 +5,7 @@ import os
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from narrative_gravity_app import (
+from src.narrative_gravity.app import (
     normalize_framework_name,
     detect_framework_from_json
 )

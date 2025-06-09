@@ -12,9 +12,9 @@ from datetime import datetime
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from src.api import services, crud, schemas
-from src.models.models import Base, Corpus, Document, Chunk, Job, Task
-from src.api.services import IngestionError, ValidationError
+from src.narrative_gravity.api import services, crud, schemas
+from src.narrative_gravity.models.models import Base, Corpus, Document, Chunk, Job, Task
+from src.narrative_gravity.api.services import IngestionError, ValidationError
 
 # --- Database Fixtures for In-Memory Testing (similar to test_crud) ---
 
@@ -141,7 +141,7 @@ class TestApiServices:
             await services.ingest_jsonl_corpus(b' \n \t \n ', "Whitespace", None, None, db)
 
     @pytest.mark.asyncio
-    @patch('src.api.services.analysis_tasks.process_narrative_analysis_task.delay')
+    @patch('src.narrative_gravity.api.services.analysis_tasks.process_narrative_analysis_task.delay')
     async def test_create_processing_job_success(self, mock_delay, db):
         """Tests successful creation of a processing job."""
         # 1. Setup
@@ -196,7 +196,7 @@ class TestApiServices:
             await services.create_processing_job(job_request, creator_id=1, db=db)
             
     @pytest.mark.asyncio
-    @patch('src.api.services.analysis_tasks.process_narrative_analysis_task.delay')
+    @patch('src.narrative_gravity.api.services.analysis_tasks.process_narrative_analysis_task.delay')
     async def test_resume_job_success(self, mock_delay, db):
         """Tests resuming a failed job."""
         # 1. Setup: Create a failed job with one failed and one pending task
