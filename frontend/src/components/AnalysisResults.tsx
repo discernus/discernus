@@ -1,17 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useExperimentStore, AnalysisResult } from '../store/experimentStore';
+import apiService from '../services/apiClient';
 
 const AnalysisResults: React.FC = () => {
   const {
     analysis_results,
     pinned_result_ids,
-    togglePinResult
+    togglePinResult,
+    setAnalysisResults
   } = useExperimentStore();
 
   // Enhanced filtering for multi-model and hierarchical results
   const [filterMode, setFilterMode] = useState<'all' | 'hierarchical' | 'multi_model'>('all');
   const [showStabilityMetrics, setShowStabilityMetrics] = useState(false);
   const [expandedJustifications, setExpandedJustifications] = useState<Record<string, boolean>>({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch analysis results when component mounts
+  useEffect(() => {
+    const fetchAnalysisResults = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        console.log('🔄 Fetching analysis results from API...');
+        
+        const results = await apiService.getAnalysisResults();
+        console.log('✅ Fetched', results.length, 'analysis results');
+        
+        // Convert API results to store format
+        const convertedResults: AnalysisResult[] = results.map((result) => ({
+          id: result.analysis_id,
+          experiment_id: 'single-text-analysis', // Since these are single text analyses
+          text_id: result.analysis_id,
+          text_content: result.text_content,
+          llm_model: result.model,
+          llm_version: 'latest',
+          raw_scores: result.raw_scores,
+          well_justifications: result.well_justifications,
+          calculated_metrics: result.calculated_metrics,
+          execution_time: result.execution_time,
+          complete_provenance: {
+            prompt_template_hash: 'api-result',
+            framework_version: result.framework,
+            scoring_algorithm_version: 'api-result',
+            llm_model: result.model,
+            timestamp: result.execution_time
+          },
+          is_pinned: false
+        }));
+        
+        // Update store with fetched results
+        setAnalysisResults(convertedResults);
+        
+      } catch (err: any) {
+        console.error('❌ Failed to fetch analysis results:', err);
+        setError(err.message || 'Failed to load analysis results');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnalysisResults();
+  }, []); // Empty dependency array means this runs once when component mounts
 
   // Group multi-model results for comparison (temporarily disabled)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -124,7 +175,7 @@ const AnalysisResults: React.FC = () => {
       .slice(0, 3);
     
     return (
-      <div key={result.id} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+      <div key={result.id} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm" data-testid="analysis-result-card">
         {/* Header with basic metadata */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
@@ -242,8 +293,33 @@ const AnalysisResults: React.FC = () => {
     );
   };
 
+  // Loading state
+  if (loading) {
+    return (
+      <div className="p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Analysis Results</h2>
+        <div className="flex items-center justify-center p-8">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <span className="ml-4 text-gray-600">Loading analysis results...</span>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">Analysis Results</h2>
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          <strong>Error:</strong> {error}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" data-testid="analysis-results-container">
       {/* Basic filter controls */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
@@ -271,8 +347,47 @@ const AnalysisResults: React.FC = () => {
           </div>
         </div>
         
-        <div className="text-sm text-gray-600">
-          {filteredResults.length} results • {pinned_result_ids.length} pinned
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={() => {
+              setLoading(true);
+              setError(null);
+              apiService.getAnalysisResults().then(results => {
+                const convertedResults: AnalysisResult[] = results.map((result) => ({
+                  id: result.analysis_id,
+                  experiment_id: 'single-text-analysis',
+                  text_id: result.analysis_id,
+                  text_content: result.text_content,
+                  llm_model: result.model,
+                  llm_version: 'latest',
+                  raw_scores: result.raw_scores,
+                  well_justifications: result.well_justifications,
+                  calculated_metrics: result.calculated_metrics,
+                  execution_time: result.execution_time,
+                  complete_provenance: {
+                    prompt_template_hash: 'api-result',
+                    framework_version: result.framework,
+                    scoring_algorithm_version: 'api-result',
+                    llm_model: result.model,
+                    timestamp: result.execution_time
+                  },
+                  is_pinned: false
+                }));
+                setAnalysisResults(convertedResults);
+                setLoading(false);
+              }).catch(err => {
+                setError(err.message);
+                setLoading(false);
+              });
+            }}
+            className="px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-sm hover:bg-blue-200"
+            data-testid="refresh-results-button"
+          >
+            🔄 Refresh
+          </button>
+          <div className="text-sm text-gray-600">
+            {filteredResults.length} results • {pinned_result_ids.length} pinned
+          </div>
         </div>
       </div>
 
@@ -290,7 +405,7 @@ const AnalysisResults: React.FC = () => {
           <p className="text-gray-500">No analysis results yet. Run an experiment to see results here.</p>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-6" data-testid="analysis-results-list">
           {filteredResults.map(renderAnalysisResult)}
         </div>
       )}

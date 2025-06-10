@@ -357,98 +357,150 @@ async def analyze_single_text(
     db: Session = Depends(get_db)
 ):
     """
-    Analyze single text with hierarchical analysis.
+    Analyze single text with hierarchical analysis using REAL LLM integration.
     This is the main endpoint for the v2.1 research workbench frontend.
     """
     try:
-        # TODO: Implement actual analysis service
-        # For now, return enhanced mock data that matches the frontend expectations
+        # Import and initialize real analysis service
+        from .analysis_service import RealAnalysisService
         
-        import uuid
-        import random
-        from datetime import datetime
+        analysis_service = RealAnalysisService()
         
-        # Generate realistic mock scores for Civic Virtue framework
-        mock_raw_scores = {
-            "Dignity": round(random.uniform(0.2, 0.8), 3),
-            "Truth": round(random.uniform(0.2, 0.8), 3),
-            "Justice": round(random.uniform(0.2, 0.8), 3),
-            "Hope": round(random.uniform(0.2, 0.8), 3),
-            "Pragmatism": round(random.uniform(0.2, 0.8), 3),
-            "Tribalism": round(random.uniform(0.1, 0.6), 3),
-            "Manipulation": round(random.uniform(0.1, 0.6), 3),
-            "Resentment": round(random.uniform(0.1, 0.6), 3),
-            "Fantasy": round(random.uniform(0.1, 0.6), 3),
-            "Fear": round(random.uniform(0.1, 0.6), 3),
-        }
-        
-        # Generate hierarchical ranking
-        sorted_wells = sorted(mock_raw_scores.items(), key=lambda x: x[1], reverse=True)
-        primary_wells = [
-            {"well": sorted_wells[0][0], "score": sorted_wells[0][1], "relative_weight": 40.0},
-            {"well": sorted_wells[1][0], "score": sorted_wells[1][1], "relative_weight": 35.0},
-            {"well": sorted_wells[2][0], "score": sorted_wells[2][1], "relative_weight": 25.0},
-        ]
-        
-        hierarchical_ranking = schemas.HierarchicalRanking(
-            primary_wells=primary_wells,
-            secondary_wells=[],
-            total_weight=100.0
+        # Perform real analysis using existing working components
+        analysis_result = await analysis_service.analyze_single_text(
+            text_content=request.text_content,
+            framework_config_id=request.framework_config_id or "civic_virtue",
+            prompt_template_id=request.prompt_template_id or "hierarchical_v1",
+            scoring_algorithm_id=request.scoring_algorithm_id or "standard",
+            llm_model=request.llm_model or "gpt-4",
+            include_justifications=request.include_justifications,
+            include_hierarchical_ranking=request.include_hierarchical_ranking
         )
         
-        # Generate well justifications
+        # CRITICAL FIX: Save analysis results to database for frontend to display
+        try:
+            from ..models.models import Run, Experiment
+            
+            # Create a temporary experiment for single-text analyses if none exists
+            temp_experiment = db.query(Experiment).filter(
+                Experiment.name == "Single Text Analysis"
+            ).first()
+            
+            if not temp_experiment:
+                temp_experiment = Experiment(
+                    name="Single Text Analysis",
+                    description="Temporary experiment for single-text analyses",
+                    prompt_template_id=request.prompt_template_id or "hierarchical_v1",
+                    framework_config_id=request.framework_config_id or "civic_virtue",
+                    scoring_algorithm_id=request.scoring_algorithm_id or "standard",
+                    analysis_mode="single_model",
+                    selected_models=[request.llm_model or "gpt-4"],
+                    creator_id=current_user.id if current_user else None
+                )
+                db.add(temp_experiment)
+                db.commit()
+                db.refresh(temp_experiment)
+            
+            # Get next run number
+            last_run = db.query(Run).filter(Run.experiment_id == temp_experiment.id).order_by(Run.run_number.desc()).first()
+            next_run_number = (last_run.run_number + 1) if last_run else 1
+            
+            # Create run record
+            analysis_record = Run(
+                experiment_id=temp_experiment.id,
+                run_number=next_run_number,
+                text_content=request.text_content,
+                input_length=len(request.text_content),
+                llm_model=request.llm_model or "gpt-4",
+                llm_version="latest",
+                prompt_template_version=request.prompt_template_id or "hierarchical_v1",
+                framework_version=request.framework_config_id or "civic_virtue",
+                raw_scores=analysis_result.get("raw_scores", {}),
+                hierarchical_ranking=analysis_result.get("hierarchical_ranking", {}),
+                well_justifications=analysis_result.get("well_justifications", {}),
+                framework_fit_score=analysis_result.get("framework_fit_score", 0.8),
+                narrative_elevation=float(analysis_result["calculated_metrics"]["narrative_elevation"]),
+                polarity=float(analysis_result["calculated_metrics"]["polarity"]),
+                coherence=float(analysis_result["calculated_metrics"]["coherence"]),
+                directional_purity=float(analysis_result["calculated_metrics"]["directional_purity"]),
+                narrative_position_x=float(analysis_result["narrative_position"]["x"]),
+                narrative_position_y=float(analysis_result["narrative_position"]["y"]),
+                execution_time=analysis_result.get("execution_time", datetime.now()),
+                duration_seconds=analysis_result.get("duration_seconds", 0.0),
+                api_cost=analysis_result.get("api_cost", 0.0),
+                complete_provenance={
+                    "prompt_template_hash": f"hash_{request.prompt_template_id}",
+                    "framework_version": request.framework_config_id,
+                    "scoring_algorithm_version": request.scoring_algorithm_id,
+                    "llm_model": request.llm_model,
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "analysis_type": "single_text"
+                },
+                status="completed",
+                success=True
+            )
+            
+            db.add(analysis_record)
+            db.commit()
+            db.refresh(analysis_record)
+            
+            logger.info(f"✅ Analysis saved to database with ID: {analysis_record.id}")
+            
+        except Exception as save_error:
+            logger.warning(f"⚠️ Failed to save analysis to database: {save_error}")
+            # Continue even if save fails - return the analysis result
+        
+        # Convert to proper schema objects
+        hierarchical_ranking = schemas.HierarchicalRanking(
+            primary_wells=analysis_result["hierarchical_ranking"]["primary_wells"],
+            secondary_wells=analysis_result["hierarchical_ranking"]["secondary_wells"],
+            total_weight=analysis_result["hierarchical_ranking"]["total_weight"]
+        )
+        
         well_justifications = {}
-        for well, score in mock_raw_scores.items():
+        for well, justification in analysis_result["well_justifications"].items():
             well_justifications[well] = schemas.WellJustification(
-                score=score,
-                reasoning=f"Analysis shows {well.lower()} themes with moderate to strong presence. The text demonstrates clear patterns consistent with this narrative well.",
-                evidence_quotes=[
-                    "example quote from text",
-                    "another supporting passage"
-                ],
-                confidence=round(random.uniform(0.7, 0.95), 2)
+                score=justification["score"],
+                reasoning=justification["reasoning"],
+                evidence_quotes=justification["evidence_quotes"],
+                confidence=justification["confidence"]
             )
         
-        # Calculate metrics
         calculated_metrics = schemas.CalculatedMetrics(
-            narrative_elevation=round(random.uniform(0.4, 0.8), 3),
-            polarity=round(random.uniform(-0.3, 0.3), 3),
-            coherence=round(random.uniform(0.6, 0.9), 3),
-            directional_purity=round(random.uniform(0.5, 0.8), 3)
+            narrative_elevation=analysis_result["calculated_metrics"]["narrative_elevation"],
+            polarity=analysis_result["calculated_metrics"]["polarity"],
+            coherence=analysis_result["calculated_metrics"]["coherence"],
+            directional_purity=analysis_result["calculated_metrics"]["directional_purity"]
         )
         
         narrative_position = schemas.NarrativePosition(
-            x=round(random.uniform(-0.3, 0.3), 3),
-            y=round(random.uniform(-0.3, 0.3), 3)
+            x=analysis_result["narrative_position"]["x"],
+            y=analysis_result["narrative_position"]["y"]
         )
         
-        # Create response
+        # Create response with real analysis data
         response = schemas.SingleTextAnalysisResponse(
-            analysis_id=str(uuid.uuid4()),
-            text_content=request.text_content,
-            framework="civic_virtue",
-            model=request.llm_model,
-            raw_scores=mock_raw_scores,
+            analysis_id=analysis_result["analysis_id"],
+            text_content=analysis_result["text_content"],
+            framework=analysis_result["framework"],
+            model=analysis_result["model"],
+            raw_scores=analysis_result["raw_scores"],
             hierarchical_ranking=hierarchical_ranking,
             well_justifications=well_justifications,
             calculated_metrics=calculated_metrics,
             narrative_position=narrative_position,
-            framework_fit_score=round(random.uniform(0.6, 0.9), 3),
-            dominant_wells=[
-                {"well": primary_wells[0]["well"], "score": primary_wells[0]["score"], "relative_weight": primary_wells[0]["relative_weight"]},
-                {"well": primary_wells[1]["well"], "score": primary_wells[1]["score"], "relative_weight": primary_wells[1]["relative_weight"]},
-                {"well": primary_wells[2]["well"], "score": primary_wells[2]["score"], "relative_weight": primary_wells[2]["relative_weight"]},
-            ],
-            execution_time=datetime.utcnow(),
-            duration_seconds=round(random.uniform(2.0, 8.0), 2),
-            api_cost=round(random.uniform(0.01, 0.05), 4)
+            framework_fit_score=analysis_result["framework_fit_score"],
+            dominant_wells=analysis_result["dominant_wells"],
+            execution_time=analysis_result["execution_time"],
+            duration_seconds=analysis_result["duration_seconds"],
+            api_cost=analysis_result["api_cost"]
         )
         
-        logger.info(f"Single text analysis completed for {len(request.text_content)} characters")
+        logger.info(f"✅ REAL analysis completed for {len(request.text_content)} characters - Model: {analysis_result['model']}, Cost: ${analysis_result['api_cost']:.4f}")
         return response
         
     except Exception as e:
-        logger.error(f"Single text analysis failed: {e}")
+        logger.error(f"Real analysis failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Analysis failed: {str(e)}"
@@ -861,6 +913,83 @@ async def get_scoring_algorithms():
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to load scoring algorithms: {str(e)}"
+        )
+
+@app.get("/api/analysis-results", response_model=List[schemas.SingleTextAnalysisResponse])
+async def list_analysis_results(
+    skip: int = 0,
+    limit: int = 100,
+    current_user: Optional[User] = Depends(get_optional_user),
+    db: Session = Depends(get_db)
+):
+    """Get recent single-text analysis results for the Analysis Results tab."""
+    try:
+        from ..models.models import Run, Experiment
+        
+        # Query recent analysis results from the "Single Text Analysis" experiment (newest first)
+        query = db.query(Run).join(Experiment).filter(
+            Experiment.name == "Single Text Analysis"
+        ).order_by(Run.execution_time.desc())
+        
+        # If user is logged in, show only their results, otherwise show all
+        if current_user:
+            query = query.filter(Experiment.creator_id == current_user.id)
+        
+        results = query.offset(skip).limit(limit).all()
+        
+        # Convert to the expected response format
+        converted_results = []
+        for result in results:
+            converted_result = {
+                "analysis_id": str(result.id),
+                "text_content": result.text_content,
+                "framework": result.framework_version,
+                "model": result.llm_model,
+                "raw_scores": result.raw_scores or {},
+                "hierarchical_ranking": result.hierarchical_ranking or {
+                    "primary_wells": [],
+                    "secondary_wells": [],
+                    "total_weight": 100.0
+                },
+                "well_justifications": result.well_justifications or {},
+                "calculated_metrics": {
+                    "narrative_elevation": result.narrative_elevation or 0.0,
+                    "polarity": result.polarity or 0.0, 
+                    "coherence": result.coherence or 0.0,
+                    "directional_purity": result.directional_purity or 0.0
+                },
+                "narrative_position": {
+                    "x": result.narrative_position_x or 0.0,
+                    "y": result.narrative_position_y or 0.0
+                },
+                "framework_fit_score": result.framework_fit_score or 0.0,
+                "dominant_wells": [], # Will be populated from hierarchical_ranking
+                "execution_time": result.execution_time.isoformat() if result.execution_time else "",
+                "duration_seconds": result.duration_seconds or 0.0,
+                "api_cost": result.api_cost or 0.0
+            }
+            
+            # Extract dominant wells from hierarchical ranking or raw scores
+            if converted_result["hierarchical_ranking"].get("primary_wells"):
+                converted_result["dominant_wells"] = converted_result["hierarchical_ranking"]["primary_wells"][:3]
+            else:
+                # Fallback: create dominant wells from raw scores
+                sorted_scores = sorted(converted_result["raw_scores"].items(), key=lambda x: x[1], reverse=True)
+                converted_result["dominant_wells"] = [
+                    {"well": well, "score": score, "relative_weight": 0.0}
+                    for well, score in sorted_scores[:3]
+                ]
+            
+            converted_results.append(converted_result)
+        
+        logger.info(f"✅ Retrieved {len(converted_results)} analysis results")
+        return converted_results
+        
+    except Exception as e:
+        logger.error(f"Failed to retrieve analysis results: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve analysis results: {str(e)}"
         )
 
 if __name__ == "__main__":

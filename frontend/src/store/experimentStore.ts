@@ -162,6 +162,7 @@ interface ExperimentStore {
   
   // Actions - Analysis Results
   addAnalysisResult: (result: Omit<AnalysisResult, 'id' | 'is_pinned'>) => void;
+  setAnalysisResults: (results: AnalysisResult[]) => void;
   togglePinResult: (id: string) => void;
   clearPinnedResults: () => void;
   
@@ -934,6 +935,8 @@ This prompt template is designed for **v2.1 Phase 1** hierarchical analysis with
           { ...result, id: generateId(), is_pinned: false }
         ]
       })),
+
+      setAnalysisResults: (results) => set({ analysis_results: results }),
       
       togglePinResult: (id) => set((state) => {
         const isPinned = state.pinned_result_ids.includes(id);

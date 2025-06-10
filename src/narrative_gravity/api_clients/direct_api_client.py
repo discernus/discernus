@@ -79,13 +79,18 @@ class DirectAPIClient:
         else:
             print("⚠️ Anthropic API key not found in environment")
         
-        # Initialize Mistral
+        # Initialize Mistral (handle deprecated client gracefully)
         mistral_key = os.getenv("MISTRAL_API_KEY")
         if mistral_key:
-            self.mistral_client = MistralClient(api_key=mistral_key)
-            print("✅ Mistral client initialized (2025 models available)")
+            try:
+                self.mistral_client = MistralClient(api_key=mistral_key)
+                print("✅ Mistral client initialized (2025 models available)")
+            except NotImplementedError:
+                print("⚠️ Mistral client deprecated - skipping Mistral support")
+                self.mistral_client = None
         else:
             print("⚠️ Mistral API key not found in environment")
+            self.mistral_client = None
         
         # Initialize Google AI
         google_ai_key = os.getenv("GOOGLE_AI_API_KEY")
@@ -177,6 +182,7 @@ class DirectAPIClient:
                     print(f"❌ Mistral connection failed: {e2}")
         else:
             results["mistral"] = False
+            print("⚠️ Mistral client not available (deprecated or no API key)")
         
         # Test Google AI with Gemini 2.0 Flash
         if self.google_ai_client:
@@ -207,7 +213,7 @@ class DirectAPIClient:
         """
         # Import the prompt template manager
         try:
-            from src.prompts.template_manager import PromptTemplateManager
+            from src.narrative_gravity.prompts.template_manager import PromptTemplateManager
             template_manager = PromptTemplateManager()
             prompt = template_manager.generate_api_prompt(text, framework, model_name)
         except ImportError as e:

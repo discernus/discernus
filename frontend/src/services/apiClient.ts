@@ -648,6 +648,19 @@ export const apiService = {
       'gpt-4-turbo-preview',
       'gemini-1.5-pro'
     ]);
+  },
+
+  // Analysis Results Management
+  async getAnalysisResults(skip = 0, limit = 100): Promise<SingleTextAnalysisResponse[]> {
+    try {
+      const response = await apiClient.get('/api/analysis-results', {
+        params: { skip, limit }
+      });
+      return response.data;
+    } catch (error: any) {
+      console.error('Failed to fetch analysis results:', error);
+      throw new Error(`Failed to fetch analysis results: ${error.response?.data?.detail || error.message}`);
+    }
   }
 };
 
