@@ -19,14 +19,19 @@
 ## Primary User Personas (Priority Order)
 
 ### 1. **Project Founder** (YOU) - Independent Research Author
-**Current Need:** Paper development system for academic publication process
+**Current Need:** LLM validation workbench for systematic evidence generation and academic confidence building
 **Priority:** Immediate - critical for validation-first development phase
 
-**Recent Infrastructure Addition:** Complete paper development system now available:
-- Dedicated `paper/` directory with version control, evidence tracking, and workflow management
-- Automated paper management tools for maintaining academic integrity standards
-- Clear separation of technical validation (achieved) from human validation (required)
-- Professional workflow supporting independent researcher publication goals
+**Core Workflow:** Comprehensive 15-step validation experimentation cycle:
+- **Phase 1:** Experiment Design (text corpus, framework variants, prompt templates, LLM configurations)
+- **Phase 2:** Execution & Monitoring (batch processing, framework fit assessment, real-time progress)
+- **Phase 3:** Deep Analysis (cross-LLM consensus, evidence passages, metadata patterns)
+- **Phase 4:** Evidence Synthesis (confidence assessment, academic export, methodology documentation)
+
+**Recent Infrastructure Additions:**
+- Complete paper development system (`paper/` directory with version control and validation checking)
+- Detailed requirements specification for LLM validation workbench (see `docs/development/LLM_VALIDATION_WORKBENCH_REQUIREMENTS.md`)
+- Clear validation sequence: Build LLM confidence first, then validate LLM against human judgment
 
 ### 2. **Dr. Sarah Chen** - Validation Researcher  
 **Current Need:** Co-author rigorous academic validation studies
@@ -46,40 +51,45 @@
 
 ---
 
-## Epic 1: Research Workbench (v2.1 Phase 1) 🔴 IN PROGRESS
+## Epic 1: LLM Validation Workbench (v2.1 Phase 1) 🔴 IN PROGRESS
 
-### User Story 1.1: Unified Experiment Design
-**As a** framework researcher, **I want** to design experiments that combine prompt templates, framework configurations, and scoring algorithms as unified testable hypotheses, **so that** I can systematically evaluate thematic hierarchy detection improvements.
+**Development Strategy:** Backend-first approach to ensure solid data structures and API services before frontend integration
+
+### User Story 1.1: Multi-Variable LLM Validation Experiments
+**As an** independent research author, **I want** to systematically construct experiments with multiple variables (texts + metadata, framework variants, prompt templates, LLM configurations, scoring methodologies), **so that** I can build confidence in the LLM-based approach through comprehensive validation evidence.
 
 **Acceptance Criteria:**
+- 🔴 **Backend API services** for experiment configuration (CRITICAL BLOCKER)
+- 🔴 **Database schema** for multi-variable experiment storage (CRITICAL BLOCKER)  
+- 🔴 **Experiment execution engine** with batch processing (CRITICAL BLOCKER)
 - ✅ Frontend "Experiment Designer" interface (COMPLETED)
-- 🔴 Backend API endpoints for experiment creation (BLOCKER)
-- 🔴 Experiment execution engine integration (BLOCKER)
-- 🟡 Hypothesis bundling and comparison tools (PLANNED)
+- 🟡 Framework fit assessment system (PLANNED)
 
-**Current Status:** Frontend complete, backend integration needed
+**Current Status:** Frontend complete, backend development prioritized
 
-### User Story 1.2: Research-Grade Version Control
-**As a** framework developer, **I want** comprehensive provenance tracking for all experimental components, **so that** I can reproduce any analysis and understand performance changes.
+### User Story 1.2: Framework Fit Assessment & Quality Gates
+**As an** independent research author, **I want** the system to automatically detect when frameworks are inappropriate for texts (like analyzing Shakespeare sonnets for political content), **so that** I can trust my validation results and avoid meaningless analyses.
 
 **Acceptance Criteria:**
-- ✅ Database schema for experiment lineage (COMPLETED)
-- 🔴 API endpoints for version management (BLOCKER)
-- 🔴 Provenance metadata in analysis results (BLOCKER)
-- 🟡 Rollback and forking capabilities (PLANNED)
+- 🔴 **Automatic fit scoring** (0.0-1.0) with confidence metrics (CRITICAL BLOCKER)
+- 🔴 **Threshold management** with configurable quality gates (CRITICAL BLOCKER)
+- 🔴 **Alternative framework suggestions** when fit is poor (CRITICAL BLOCKER)
+- 🟡 Fit explanation generation (PLANNED)
+- 🟡 Historical fit performance tracking (PLANNED)
 
-**Current Status:** Database ready, API integration needed
+**Current Status:** Requirements defined, backend implementation needed
 
-### User Story 1.3: Comparative Analysis Dashboard
-**As a** researcher, **I want** to compare experimental results across multiple dimensions with statistical rigor, **so that** I can identify which changes improve thematic hierarchy detection.
+### User Story 1.3: Cross-LLM Consensus & Evidence Analysis
+**As an** independent research author, **I want** to analyze cross-LLM consensus (target >0.90 correlation) with supporting evidence passages, **so that** I can build statistical confidence in the methodology before human validation studies.
 
 **Acceptance Criteria:**
+- 🔴 **Cross-LLM correlation analysis** with statistical significance testing (CRITICAL BLOCKER)
+- 🔴 **Evidence passage extraction** and quality assessment (CRITICAL BLOCKER)
+- 🔴 **Metadata pattern analysis** (temporal trends, speaker differences) (CRITICAL BLOCKER)
 - ✅ Frontend comparison interface (COMPLETED)
-- 🔴 Statistical comparison API endpoints (BLOCKER)
-- 🔴 Hierarchy sharpness metrics calculation (BLOCKER)
-- 🟡 Multi-dimensional filtering (PLANNED)
+- 🟡 Academic export formats (R, Python, CSV) (PLANNED)
 
-**Current Status:** Frontend ready, backend calculation engine needed
+**Current Status:** Frontend ready, backend statistical analysis engine needed
 
 ---
 
@@ -189,16 +199,26 @@ graph TD
 
 ## Implementation Roadmap
 
-### Phase 1: Complete Research Workbench (1-2 weeks)
-1. **Week 1:** Backend API integration
-   - Create missing API endpoints
-   - Connect frontend to real backend
-   - Test experiment creation/execution flow
+### Phase 1: Complete LLM Validation Workbench (3-4 weeks)
+**Backend-First Development Strategy:**
 
-2. **Week 2:** Enhanced features
-   - Real-time progress tracking
-   - Advanced filtering and comparison
-   - Error handling improvements
+1. **Week 1-2:** Data Structures & API Services
+   - Implement comprehensive database schema for multi-variable experiments
+   - Build core API endpoints for experiment configuration and execution
+   - Create batch processing engine with LLM provider integration
+   - Implement framework fit assessment algorithms
+
+2. **Week 3:** Statistical Analysis Engine
+   - Cross-LLM correlation analysis with significance testing
+   - Evidence passage extraction and quality assessment
+   - Metadata pattern analysis capabilities
+   - Academic export functionality (R, Python, CSV)
+
+3. **Week 4:** Frontend Integration & Testing
+   - Connect existing frontend to completed backend services
+   - End-to-end testing of complete validation workflows
+   - Performance optimization and error handling
+   - User acceptance testing of full validation cycle
 
 ### Phase 2: Validation Studies (4-6 weeks)  
 1. **Weeks 3-4:** Expert validation infrastructure
@@ -213,11 +233,15 @@ graph TD
 
 ## Success Metrics by Phase
 
-### Phase 1 Success (Research Workbench)
-- [ ] End-to-end experiment creation and execution working
-- [ ] Statistical comparison tools functional
-- [ ] Version control and provenance tracking operational
-- [ ] All user workflows validated through automated testing
+### Phase 1 Success (LLM Validation Workbench)
+- [ ] **Multi-variable experiment construction** working end-to-end
+- [ ] **Framework fit assessment** preventing inappropriate analyses (Shakespeare sonnet test case)
+- [ ] **Cross-LLM consensus analysis** achieving >0.90 correlation targets
+- [ ] **Evidence passage extraction** providing coherent supporting quotes
+- [ ] **Metadata pattern analysis** detecting historical/speaker trends
+- [ ] **Academic export formats** generating publication-ready datasets
+- [ ] **Complete 15-step validation workflow** functioning as specified in user journey
+- [ ] **Statistical confidence** enabling academic paper methodology claims
 
 ### Phase 2 Success (Validation)
 - [ ] Expert validation studies completed with acceptable reliability

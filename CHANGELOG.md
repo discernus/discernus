@@ -798,3 +798,45 @@ from src.narrative_gravity.framework_manager import FrameworkManager
 - Backend: FastAPI running on port 8000 with comprehensive API documentation
 - Database: PostgreSQL with complete v2.1 schema supporting hierarchical analysis
 - All tests passing: end-to-end workflow, frontend integration, and data consistency 
+
+## [LLM Validation Planning & Documentation] - 2025-01-06
+
+### Added
+- **LLM Validation Workbench Requirements**: Comprehensive 10-section requirements document (`docs/development/LLM_VALIDATION_WORKBENCH_REQUIREMENTS.md`)
+  - Multi-variable experiment construction with text corpus, frameworks, prompts, LLM configurations
+  - Framework fit assessment with automatic detection and quality gates  
+  - Cross-LLM consensus analysis with statistical reliability testing
+  - Academic export capabilities and publication-ready data generation
+  - Complete API architecture and database schema specifications
+
+- **Enhanced User Persona**: Detailed 15-step LLM validation experimentation cycle for Independent Research Author
+  - Phase 1: Experiment Design (corpus assembly, framework variants, prompt templates)
+  - Phase 2: Execution & Monitoring (batch processing, fit assessment, real-time progress)
+  - Phase 3: Deep Analysis (cross-LLM consensus, evidence passages, metadata patterns)
+  - Phase 4: Evidence Synthesis (confidence assessment, academic export, documentation)
+
+- **Paper Validation Placeholders**: Comprehensive experimental result placeholders in paper draft
+  - Multi-variable experimental design section with 1,350+ planned LLM analyses
+  - Cross-LLM consensus analysis with 0.94± correlation targets
+  - Framework sensitivity testing and robustness metrics
+  - Evidence portfolio for academic confidence building
+  - Phase 2 human validation study planning
+
+### Changed
+- **User Stories Focus**: Updated from generic "research workbench" to specific "LLM validation workbench"
+  - Backend-first development strategy clearly defined
+  - Multi-variable experiment construction prioritized
+  - Framework fit assessment and cross-LLM consensus emphasized
+  - Extended timeline to 3-4 weeks for realistic implementation
+
+- **Implementation Roadmap**: Restructured to reflect systematic validation approach
+  - Week 1-2: Data structures & API services development
+  - Week 3: Statistical analysis engine implementation  
+  - Week 4: Frontend integration & testing
+  - Clear success criteria focusing on statistical reliability and academic confidence
+
+### Result
+- **Clear Development Path**: Backend-first approach with systematic LLM validation before human studies
+- **Academic Credibility**: Paper now shows path from LLM confidence building to human validation
+- **Implementation Focus**: Detailed requirements enabling immediate backend development start
+- **Validation Sequence**: Established logical progression from computational consistency to human alignment 

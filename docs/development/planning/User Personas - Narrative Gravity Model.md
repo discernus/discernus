@@ -163,13 +163,51 @@ Elena needs to analyze corporate sustainability reports:
 • **Reproducibility package**: Complete methodology documentation and replication materials
 • **Admin interface**: Simple UI for managing validation studies without coding
 
-**User Journey Story**  
-Working toward paper submission, the Independent Researcher:  
-1. **Morning**: Reviews latest validation study results from overnight LLM runs
-2. **Mid-morning**: Updates paper draft with new statistical findings and methodology refinements  
-3. **Afternoon**: Runs comparative analysis between framework versions to strengthen methodology section
-4. **Evening**: Exports latest results to academic formats and updates replication package
-5. **Week-end**: Coordinates with potential academic co-authors, sharing reproducible analysis results
+**User Journey Story: LLM Validation Experimentation Cycle**  
+
+**Phase 1: Experiment Design**  
+The Independent Researcher starts a new validation study by opening the research workbench. Today's goal: test whether the Civic Virtue Framework shows consistent cross-LLM results on presidential inaugural addresses.
+
+1. **Text Corpus Assembly**: Selects 12 presidential inaugural addresses spanning 1861-2021, entering rich metadata for each (speaker, date, historical context, audience, word count). Notes that Lincoln's 1865 address was delivered to a war-weary nation while Biden's 2021 was to a deeply polarized electorate.
+
+2. **Framework Configuration**: Creates three framework variants to test sensitivity:
+   - Standard Civic Virtue (current weights: Identity 1.0, Principles 0.8, Moderators 0.6)
+   - Equal-weighted version (all dipoles weighted 1.0) 
+   - Enhanced-pragmatism version (pragmatism weight increased to 0.8)
+
+3. **Prompt Template Iteration**: Tests three prompt approaches:
+   - Standard template with explicit 0-1 scoring requirements
+   - Enhanced template with historical context instructions
+   - Minimal template to test baseline LLM interpretation
+
+4. **LLM Configuration**: Selects GPT-4, Claude-3-Sonnet, and Mistral-Large with 3 runs each for statistical reliability (27 total analyses per framework-prompt combination).
+
+**Phase 2: Experiment Execution & Monitoring**  
+5. **Batch Execution**: Launches the experiment suite (324 total LLM calls) with randomized execution order. Monitors real-time progress, cost tracking ($23.45 estimated), and preliminary fit assessments.
+
+6. **Framework Fit Alerts**: Receives notification that Shakespeare's Sonnet 18 (test case) shows poor framework fit (0.23 score) with explanation: "Political discourse analysis framework not appropriate for romantic poetry." Confirms the fit detection system is working.
+
+7. **Early Results Review**: After 45 minutes, reviews interim results showing Lincoln 1865 achieving 0.94 cross-LLM correlation on dignity scores, with supporting passages properly identified: "With malice toward none, with charity for all..."
+
+**Phase 3: Deep Analysis & Evidence Building**  
+8. **Consensus Analysis**: Examines cross-LLM correlation matrices showing overall 0.91 agreement across models, with dignity and justice dimensions most consistent (0.94+ correlation) and pragmatism showing more variance (0.87 correlation).
+
+9. **Evidence Exploration**: Drills down into individual analyses, reviewing LLM explanations for scoring decisions. Notes that all three models consistently identify Lincoln's "bind up the nation's wounds" as high-dignity rhetoric, with coherent supporting explanations.
+
+10. **Metadata Pattern Analysis**: Discovers that post-1960 speeches show systematically higher tribalism scores (0.34 avg vs 0.12 for pre-1960), with statistical significance (p=0.003). Documents this as a potential historical trend worthy of academic investigation.
+
+11. **Framework Sensitivity Testing**: Compares results across the three framework weight configurations, finding that core positioning remains stable (position variance <0.05) but narrative elevation shows meaningful differences when pragmatism is weighted higher.
+
+**Phase 4: Validation Evidence Synthesis**  
+12. **Confidence Assessment**: Reviews the evidence portfolio: 91% cross-LLM correlation, stable framework positioning, coherent evidence passages, and systematic metadata patterns. Feels confident enough to draft methodology claims for the academic paper.
+
+13. **Academic Export**: Generates publication-ready CSV files with all raw scores, correlation matrices, and supporting passage evidence. Exports R-compatible statistical analysis scripts showing significance tests and confidence intervals.
+
+14. **Documentation Update**: Updates the paper's methodology section with new statistical findings, including tables of inter-LLM reliability and framework fit assessments. Adds footnote about historical tribalism trends as supporting evidence for framework validity.
+
+15. **Experimental Archive**: Saves the complete experiment configuration and results as "Presidential_Inaugural_Validation_v1.0" for future replication and extension studies.
+
+**Evening Reflection**: Reviews the day's evidence generation, noting that systematic validation through the workbench produced far more rigorous results than manual testing. Plans tomorrow's experiment: testing framework performance on synthetic narratives with known moral characteristics as additional validation evidence.
 
 **Success Metrics**  
 • **Primary**: Successful submission and acceptance of peer-reviewed paper
