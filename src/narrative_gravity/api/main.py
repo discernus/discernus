@@ -42,6 +42,9 @@ app.add_middleware(
         "http://localhost:3000",  # React dev server
         "http://localhost:3001",  # React dev server (alt)
         "http://localhost:3002",  # React dev server (alt)
+        "http://localhost:3003",  # React dev server (alt)
+        "http://localhost:3004",  # React dev server (alt)
+        "http://localhost:3005",  # React dev server (alt)
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -134,14 +137,17 @@ async def list_experiments(
 @app.get("/api/experiments/{experiment_id}", response_model=schemas.ExperimentResponse)
 async def get_experiment(
     experiment_id: int,
-    current_user: User = Depends(get_current_user),
+    current_user: Optional[User] = Depends(get_optional_user),
     db: Session = Depends(get_db)
 ):
     """Get experiment details."""
-    experiment = db.query(Experiment).filter(
-        Experiment.id == experiment_id,
-        Experiment.creator_id == current_user.id
-    ).first()
+    if current_user:
+        experiment = db.query(Experiment).filter(
+            Experiment.id == experiment_id,
+            Experiment.creator_id == current_user.id
+        ).first()
+    else:
+        experiment = db.query(Experiment).filter(Experiment.id == experiment_id).first()
     
     if not experiment:
         raise HTTPException(
@@ -248,8 +254,8 @@ async def create_run(
             input_length=len(run_data.text_content),
             llm_model=run_data.llm_model,
             llm_version=run_data.llm_version or "latest",
-            prompt_template_version=experiment.prompt_template_id,
-            framework_version=experiment.framework_config_id,
+            prompt_template_version=experiment.prompt_template_id[:20],  # Truncate to fit DB constraint
+            framework_version=experiment.framework_config_id[:20],  # Truncate to fit DB constraint
             raw_scores=mock_raw_scores,
             hierarchical_ranking=hierarchical_ranking,
             framework_fit_score=round(random.uniform(0.6, 0.9), 3),
@@ -324,14 +330,17 @@ async def list_experiment_runs(
 @app.get("/api/runs/{run_id}", response_model=schemas.RunResponse)
 async def get_run(
     run_id: int,
-    current_user: User = Depends(get_current_user),
+    current_user: Optional[User] = Depends(get_optional_user),
     db: Session = Depends(get_db)
 ):
     """Get details of a specific analysis run."""
-    run = db.query(Run).join(Experiment).filter(
-        Run.id == run_id,
-        Experiment.creator_id == current_user.id
-    ).first()
+    if current_user:
+        run = db.query(Run).join(Experiment).filter(
+            Run.id == run_id,
+            Experiment.creator_id == current_user.id
+        ).first()
+    else:
+        run = db.query(Run).filter(Run.id == run_id).first()
     
     if not run:
         raise HTTPException(

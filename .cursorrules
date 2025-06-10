@@ -189,6 +189,15 @@ python scripts/release.py major --message "Breaking changes"
 - [ ] Test that imports work correctly
 - [ ] Ensure documentation references are accurate
 
+### Validation Requirements (CRITICAL)
+**NEVER declare victory or completion until functionality is validated through:**
+- [ ] **Automated unit tests** (for individual functions/components)
+- [ ] **Integration tests** (for API endpoints and database operations)
+- [ ] **Playwright end-to-end tests** (for full user workflows)
+- [ ] **Manual verification** of complete user scenarios
+
+**ALL claimed functionality must be demonstrably working through automated testing before declaring success.**
+
 ### Temporary File Management
 - **Temporary files**: Always use `tmp/YYYY_MM_DD/` format
 - **Naming pattern**: `tmp/2025_06_09/experiment_name/`

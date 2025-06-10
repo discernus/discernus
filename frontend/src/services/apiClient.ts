@@ -1,8 +1,17 @@
 import axios from 'axios';
 import { debugMonitor } from './debugMonitor';
 
-// API Configuration
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+// API Configuration - Use more robust environment variable handling
+const getApiUrl = () => {
+  try {
+    return process.env.REACT_APP_API_URL || 'http://localhost:8000';
+  } catch (e) {
+    // Fallback if process.env is not available
+    return 'http://localhost:8000';
+  }
+};
+
+const API_BASE_URL = getApiUrl();
 
 // Create axios instance with default config
 const apiClient = axios.create({

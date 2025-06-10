@@ -1,356 +1,346 @@
-import React, { useState } from 'react';
-import { useExperimentStore } from '../store/experimentStore';
-import apiService, { SingleTextAnalysisRequest } from '../services/apiClient';
+import React, { useState, useEffect } from 'react';
+import apiService from '../services/apiClient';
+
+interface ConfigData {
+  frameworks: Array<{id: string; name: string; version: string}>;
+  prompts: Array<{id: string; name: string; version: string}>;
+  algorithms: Array<{id: string; name: string}>;
+}
 
 const ExperimentDesigner: React.FC = () => {
-  const {
-    prompt_templates,
-    framework_configs,
-    scoring_algorithms,
-    available_models,
-    experimentForm,
-    setExperimentForm,
-    analysis_results,
-    addAnalysisResult
-  } = useExperimentStore();
+  // API Configuration State
+  const [configData, setConfigData] = useState<ConfigData>({
+    frameworks: [], prompts: [], algorithms: []
+  });
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
-  // Safe initialization of experimentForm
-  const safeExperimentForm = experimentForm || {
-    prompt_template_id: '',
-    framework_config_id: '',
-    scoring_algorithm_id: '',
-    analysis_mode: ''
-  };
+  // Experiment Configuration State
+  const [selectedFramework, setSelectedFramework] = useState('');
+  const [selectedPrompt, setSelectedPrompt] = useState('');
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState('');
+  const [selectedModel, setSelectedModel] = useState('gpt-4');
 
+  // Text Analysis State
   const [textInput, setTextInput] = useState('');
   const [analyzing, setAnalyzing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<any>(null);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
-  const [isMultiModelMode, setIsMultiModelMode] = useState(false);
-  const [selectedModel, setSelectedModel] = useState('gpt-4');
-  const [selectedModelsForComparison, setSelectedModelsForComparison] = useState<string[]>(['gpt-4', 'claude-3-sonnet']);
 
-  const handleCreateExperiment = async () => {
-    if (!safeExperimentForm.prompt_template_id || !safeExperimentForm.framework_config_id || !safeExperimentForm.scoring_algorithm_id) {
-      alert('Please configure all experiment parameters first.');
-      return;
-    }
+  // Load configuration on mount
+  useEffect(() => {
+    const loadConfiguration = async () => {
+      try {
+        console.log('🔄 Loading API configuration...');
+        const [frameworks, prompts, algorithms] = await Promise.all([
+          apiService.getFrameworkConfigs(),
+          apiService.getPromptTemplates(),
+          apiService.getScoringAlgorithms()
+        ]);
 
-    try {
-      console.log('🔄 Creating experiment with configuration:', safeExperimentForm);
-      
-      // TODO: Implement experiment creation via API
-      // For now, just validate the form
-      alert('Experiment configuration saved! Ready for analysis.');
-      
-    } catch (error: any) {
-      console.error('❌ Experiment creation failed:', error);
-      alert(`Experiment creation failed: ${error.message}`);
-    }
-  };
+        setConfigData({ frameworks, prompts, algorithms });
+        
+        // Auto-select first options
+        if (frameworks.length > 0) setSelectedFramework(frameworks[0].id);
+        if (prompts.length > 0) setSelectedPrompt(prompts[0].id);
+        if (algorithms.length > 0) setSelectedAlgorithm(algorithms[0].id);
 
-  const handleRunAnalysis = async () => {
+        console.log('✅ Configuration loaded successfully');
+      } catch (error: any) {
+        console.error('❌ Configuration loading failed:', error);
+        setLoadError(error.message || 'Failed to load configuration');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadConfiguration();
+  }, []);
+
+  // Handle text analysis
+  const handleAnalyze = async () => {
     if (!textInput.trim()) {
       alert('Please enter text to analyze');
       return;
     }
-    if (!safeExperimentForm.prompt_template_id || !safeExperimentForm.framework_config_id || !safeExperimentForm.scoring_algorithm_id) {
-      alert('Please configure the experiment first');
+    if (!selectedFramework || !selectedPrompt || !selectedAlgorithm) {
+      alert('Please select all configuration options');
       return;
     }
 
     setAnalyzing(true);
     setAnalysisError(null);
-    
+    setAnalysisResult(null);
+
     try {
-      console.log('🔄 Starting analysis with configuration:', { 
-        textInput: textInput.substring(0, 100) + '...',
-        models: isMultiModelMode ? selectedModelsForComparison : [selectedModel],
-        config: safeExperimentForm
+      console.log('🔄 Starting analysis...', { 
+        text: textInput.substring(0, 50) + '...',
+        framework: selectedFramework,
+        prompt: selectedPrompt,
+        algorithm: selectedAlgorithm,
+        model: selectedModel
       });
 
-      if (isMultiModelMode) {
-        // Multi-model comparison analysis
-        const multiModelRequest = {
-          text_content: textInput,
-          prompt_template_id: safeExperimentForm.prompt_template_id,
-          framework_config_id: safeExperimentForm.framework_config_id,
-          scoring_algorithm_id: safeExperimentForm.scoring_algorithm_id,
-          selected_models: selectedModelsForComparison,
-          runs_per_model: 3
-        };
+      const result = await apiService.analyzeSingleText({
+        text_content: textInput,
+        prompt_template_id: selectedPrompt,
+        framework_config_id: selectedFramework,
+        scoring_algorithm_id: selectedAlgorithm,
+        llm_model: selectedModel,
+        include_justifications: true,
+        include_hierarchical_ranking: true
+      });
 
-        const multiModelResponse = await apiService.analyzeMultiModel(multiModelRequest);
-        
-        console.log('✅ Multi-model analysis completed:', multiModelResponse);
-        
-        // Convert multi-model response to individual results for the store
-        multiModelResponse.model_results.forEach((modelResult, index) => {
-          const analysisResult = {
-            id: `${multiModelResponse.analysis_id}-${modelResult.model}-${index}`,
-            experiment_id: 'temp-' + Date.now(),
-            text_id: 'text-' + Date.now(),
-            text_content: textInput,
-            llm_model: modelResult.model,
-            llm_version: '1.0',
-            raw_scores: modelResult.mean_scores,
-            well_justifications: undefined, // Multi-model doesn't include individual justifications
-            calculated_metrics: {
-              narrative_elevation: 0.72,
-              polarity: 0.15,
-              coherence: 0.85,
-              directional_purity: 0.62
-            },
-            execution_time: multiModelResponse.execution_time,
-            complete_provenance: {
-              prompt_template_hash: 'multi-model-hash',
-              framework_version: framework_configs.find(f => f.id === safeExperimentForm.framework_config_id)?.version || '1.0',
-              scoring_algorithm_version: '1.0',
-              llm_model: modelResult.model,
-              timestamp: multiModelResponse.execution_time
-            },
-            is_pinned: false
-          };
-          
-          addAnalysisResult(analysisResult);
-        });
-
-        alert(`Multi-model analysis complete! Analyzed with ${selectedModelsForComparison.length} models. Check the Analysis Results tab.`);
-        
-      } else {
-        // Single model analysis
-        const singleTextRequest: SingleTextAnalysisRequest = {
-          text_content: textInput,
-          prompt_template_id: safeExperimentForm.prompt_template_id,
-          framework_config_id: safeExperimentForm.framework_config_id,
-          scoring_algorithm_id: safeExperimentForm.scoring_algorithm_id,
-          llm_model: selectedModel,
-          include_justifications: true,
-          include_hierarchical_ranking: true
-        };
-
-        const response = await apiService.analyzeSingleText(singleTextRequest);
-        
-        console.log('✅ Single text analysis completed:', response);
-
-        // Convert API response to store format
-        const analysisResult = {
-          id: response.analysis_id,
-          experiment_id: 'temp-' + Date.now(),
-          text_id: 'text-' + Date.now(),
-          text_content: response.text_content,
-          llm_model: response.model,
-          llm_version: '1.0',
-          raw_scores: response.raw_scores,
-          well_justifications: response.well_justifications,
-          calculated_metrics: response.calculated_metrics,
-          execution_time: response.execution_time,
-          complete_provenance: {
-            prompt_template_hash: 'api-hash',
-            framework_version: framework_configs.find(f => f.id === safeExperimentForm.framework_config_id)?.version || '1.0',
-            scoring_algorithm_version: '1.0',
-            llm_model: response.model,
-            timestamp: response.execution_time
-          },
-          is_pinned: false
-        };
-        
-        addAnalysisResult(analysisResult);
-        alert('Analysis complete! Check the Analysis Results tab.');
-      }
+      console.log('✅ Analysis completed:', result);
+      setAnalysisResult(result);
       
     } catch (error: any) {
       console.error('❌ Analysis failed:', error);
-      setAnalysisError(error.message || 'Analysis failed. Please try again.');
-      alert(`Analysis failed: ${error.message || 'Unknown error'}`);
+      setAnalysisError(error.message || 'Analysis failed');
     } finally {
       setAnalyzing(false);
     }
   };
 
-  return (
-    <div className="experiment-designer">
-      <div className="designer-header">
-        <h2>🧪 Experiment Designer</h2>
-        <p>Configure and run narrative gravity analysis experiments</p>
+  // Loading state
+  if (loading) {
+    return (
+      <div className="p-6" data-testid="experiment-designer-loading">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">🧪 Experiment Designer</h2>
+        <div className="flex items-center justify-center p-8">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <span className="ml-4 text-gray-600">Loading configuration...</span>
+        </div>
       </div>
+    );
+  }
 
+  // Error state
+  if (loadError) {
+    return (
+      <div className="p-6" data-testid="experiment-designer-error">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">🧪 Experiment Designer</h2>
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          <strong>Configuration Error:</strong> {loadError}
+          <br />
+          <small>Make sure the API server is running on http://localhost:8000</small>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-6" data-testid="experiment-designer">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">🧪 Experiment Designer</h2>
+      
       {/* Configuration Section */}
-      <div className="config-section">
-        <h3>📋 Experiment Configuration</h3>
+      <div className="mb-8">
+        <h3 className="text-lg font-semibold mb-4">📋 Analysis Configuration</h3>
         
-        <div className="config-grid">
-          <div className="config-item">
-            <label>Prompt Template:</label>
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Framework ({configData.frameworks.length} available)
+            </label>
             <select 
-              value={safeExperimentForm.prompt_template_id} 
-              onChange={(e) => setExperimentForm({...safeExperimentForm, prompt_template_id: e.target.value})}
-            >
-              <option value="">Select Template...</option>
-              {prompt_templates.map(template => (
-                <option key={template.id} value={template.id}>
-                  {template.name} ({template.version})
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="config-item">
-            <label>Framework Configuration:</label>
-            <select 
-              value={safeExperimentForm.framework_config_id} 
-              onChange={(e) => setExperimentForm({...safeExperimentForm, framework_config_id: e.target.value})}
+              value={selectedFramework}
+              onChange={(e) => setSelectedFramework(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-3 py-2"
+              data-testid="framework-select"
             >
               <option value="">Select Framework...</option>
-                             {framework_configs.map(framework => (
-                 <option key={framework.id} value={framework.id}>
-                   {framework.display_name} ({framework.version})
-                 </option>
-               ))}
-            </select>
-          </div>
-
-          <div className="config-item">
-            <label>Scoring Algorithm:</label>
-            <select 
-              value={safeExperimentForm.scoring_algorithm_id} 
-              onChange={(e) => setExperimentForm({...safeExperimentForm, scoring_algorithm_id: e.target.value})}
-            >
-              <option value="">Select Algorithm...</option>
-              {scoring_algorithms.map(algorithm => (
-                <option key={algorithm.id} value={algorithm.id}>
-                  {algorithm.name}
+              {configData.frameworks.map(fw => (
+                <option key={fw.id} value={fw.id}>
+                  {fw.name} ({fw.version})
                 </option>
               ))}
             </select>
           </div>
 
-          <div className="config-item">
-            <label>Analysis Mode:</label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Prompt Template ({configData.prompts.length} available)
+            </label>
             <select 
-              value={safeExperimentForm.analysis_mode} 
-              onChange={(e) => {
-                const isMulti = e.target.value === 'multi_model_comparison';
-                setIsMultiModelMode(isMulti);
-                setExperimentForm({...safeExperimentForm, analysis_mode: e.target.value});
-              }}
+              value={selectedPrompt}
+              onChange={(e) => setSelectedPrompt(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-3 py-2"
+              data-testid="prompt-select"
             >
-              <option value="single_model">Single Model Analysis</option>
-              <option value="multi_model_comparison">Multi-Model Comparison (Stability Assessment)</option>
+              <option value="">Select Prompt...</option>
+              {configData.prompts.map(pt => (
+                <option key={pt.id} value={pt.id}>
+                  {pt.name} ({pt.version})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Scoring Algorithm ({configData.algorithms.length} available)
+            </label>
+            <select 
+              value={selectedAlgorithm}
+              onChange={(e) => setSelectedAlgorithm(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-3 py-2"
+              data-testid="algorithm-select"
+            >
+              <option value="">Select Algorithm...</option>
+              {configData.algorithms.map(alg => (
+                <option key={alg.id} value={alg.id}>
+                  {alg.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              LLM Model
+            </label>
+            <select 
+              value={selectedModel}
+              onChange={(e) => setSelectedModel(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-3 py-2"
+              data-testid="model-select"
+            >
+              <option value="gpt-4">GPT-4</option>
+              <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+              <option value="claude-3-sonnet">Claude 3 Sonnet</option>
+              <option value="claude-3-haiku">Claude 3 Haiku</option>
             </select>
           </div>
         </div>
 
-        {/* Model Selection */}
-        <div className="model-selection">
-          {isMultiModelMode ? (
-            <div className="multi-model-selection">
-              <label>Models for Comparison:</label>
-              <div className="model-checkboxes">
-                                 {available_models.map((model: string) => (
-                   <label key={model} className="checkbox-label">
-                     <input
-                       type="checkbox"
-                       checked={selectedModelsForComparison.includes(model)}
-                       onChange={(e) => {
-                         if (e.target.checked) {
-                           setSelectedModelsForComparison([...selectedModelsForComparison, model]);
-                         } else {
-                           setSelectedModelsForComparison(selectedModelsForComparison.filter(m => m !== model));
-                         }
-                       }}
-                     />
-                     {model}
-                   </label>
-                 ))}
-              </div>
-            </div>
-          ) : (
-            <div className="single-model-selection">
-              <label>LLM Model:</label>
-                             <select value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
-                 {available_models.map((model: string) => (
-                   <option key={model} value={model}>{model}</option>
-                 ))}
-               </select>
-            </div>
-          )}
+        <div className="bg-blue-50 p-3 rounded text-sm">
+          <strong>Configuration Status:</strong> {
+            selectedFramework && selectedPrompt && selectedAlgorithm 
+              ? '✅ Ready for analysis'
+              : '⚠️ Please select all options'
+          }
         </div>
-
-        <button 
-          className="create-experiment-btn"
-          onClick={handleCreateExperiment}
-          disabled={!safeExperimentForm.prompt_template_id || !safeExperimentForm.framework_config_id || !safeExperimentForm.scoring_algorithm_id}
-        >
-          💾 Save Experiment Configuration
-        </button>
       </div>
 
-      {/* Text Analysis Section */}
-      <div className="analysis-section">
-        <h3>📝 Text Analysis</h3>
+      {/* Text Input Section */}
+      <div className="mb-8">
+        <h3 className="text-lg font-semibold mb-4">📝 Text Analysis</h3>
         
-        <div className="text-input-area">
-          <label>Text to Analyze:</label>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Text to Analyze
+          </label>
           <textarea
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
-            placeholder="Enter the text you want to analyze..."
-            rows={8}
-            className="text-input"
+            placeholder="Enter the text you want to analyze for narrative gravity wells..."
+            rows={6}
+            className="w-full border border-gray-300 rounded-md px-3 py-2"
+            data-testid="text-input"
           />
-          <div className="input-info">
+          <div className="text-sm text-gray-500 mt-1">
             Characters: {textInput.length} | Words: {textInput.split(/\s+/).filter(w => w.length > 0).length}
           </div>
         </div>
 
         {analysisError && (
-          <div className="error-message">
-            ❌ {analysisError}
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <strong>Analysis Error:</strong> {analysisError}
           </div>
         )}
 
-        <button 
-          className="analyze-btn"
-          onClick={handleRunAnalysis}
-          disabled={analyzing || !textInput.trim() || !safeExperimentForm.prompt_template_id}
+        <button
+          onClick={handleAnalyze}
+          disabled={analyzing || !textInput.trim() || !selectedFramework}
+          className={`px-6 py-3 rounded-md font-semibold ${
+            analyzing || !textInput.trim() || !selectedFramework
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : 'bg-blue-600 text-white hover:bg-blue-700'
+          }`}
+          data-testid="analyze-button"
         >
-          {analyzing ? '🔄 Analyzing...' : '🚀 Run Analysis'}
+          {analyzing ? '🔄 Analyzing...' : '🚀 Analyze Text'}
         </button>
+      </div>
 
-        {analyzing && (
-          <div className="analysis-progress">
-            <div className="progress-info">
-              <p>🔄 Analysis in progress...</p>
-              <p>Model: {isMultiModelMode ? `${selectedModelsForComparison.length} models` : selectedModel}</p>
-                             <p>Framework: {framework_configs.find(f => f.id === safeExperimentForm.framework_config_id)?.display_name || 'Unknown'}</p>
-              <p>Algorithm: {scoring_algorithms.find(a => a.id === safeExperimentForm.scoring_algorithm_id)?.name || 'Unknown'}</p>
+      {/* Results Section */}
+      {analysisResult && (
+        <div className="mb-8" data-testid="analysis-results">
+          <h3 className="text-lg font-semibold mb-4">📊 Analysis Results</h3>
+          
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+            <h4 className="font-semibold text-green-900 mb-2">✅ Analysis Complete</h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <strong>Model:</strong> {analysisResult.model}
+              </div>
+              <div>
+                <strong>Framework:</strong> {analysisResult.framework}
+              </div>
+              <div>
+                <strong>Execution Time:</strong> {analysisResult.duration_seconds?.toFixed(2)}s
+              </div>
+              <div>
+                <strong>API Cost:</strong> ${analysisResult.api_cost?.toFixed(4)}
+              </div>
             </div>
           </div>
-        )}
-      </div>
 
-      {/* Status Section */}
-      <div className="status-section">
-        <h3>📊 Status</h3>
-        <div className="status-grid">
-          <div className="status-item">
-            <span className="status-label">Available Templates:</span>
-            <span className="status-value">{prompt_templates.length}</span>
+          {/* Raw Scores */}
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <h4 className="font-semibold mb-3">Gravity Well Scores</h4>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              {Object.entries(analysisResult.raw_scores || {}).map(([well, score]) => (
+                <div key={well} className="flex justify-between">
+                  <span>{well}:</span>
+                  <span className="font-mono">{(score as number).toFixed(3)}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="status-item">
-            <span className="status-label">Available Frameworks:</span>
-            <span className="status-value">{framework_configs.length}</span>
+
+          {/* Calculated Metrics */}
+          <div className="bg-white border border-gray-200 rounded-lg p-4 mb-4">
+            <h4 className="font-semibold mb-3">Calculated Metrics</h4>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <div className="flex justify-between">
+                <span>Narrative Elevation:</span>
+                <span className="font-mono">{analysisResult.calculated_metrics?.narrative_elevation?.toFixed(3)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Polarity:</span>
+                <span className="font-mono">{analysisResult.calculated_metrics?.polarity?.toFixed(3)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Coherence:</span>
+                <span className="font-mono">{analysisResult.calculated_metrics?.coherence?.toFixed(3)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Directional Purity:</span>
+                <span className="font-mono">{analysisResult.calculated_metrics?.directional_purity?.toFixed(3)}</span>
+              </div>
+            </div>
           </div>
-          <div className="status-item">
-            <span className="status-label">Available Algorithms:</span>
-            <span className="status-value">{scoring_algorithms.length}</span>
-          </div>
-          <div className="status-item">
-            <span className="status-label">Analysis Results:</span>
-            <span className="status-value">{analysis_results.length}</span>
-          </div>
+
+          {/* Dominant Wells */}
+          {analysisResult.dominant_wells && (
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <h4 className="font-semibold mb-3">Dominant Wells</h4>
+              <div className="space-y-2">
+                {analysisResult.dominant_wells.map((well: any, index: number) => (
+                  <div key={index} className="flex justify-between items-center">
+                    <span className="font-medium">{well.well}</span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm text-gray-600">{well.relative_weight}%</span>
+                      <span className="font-mono text-sm">{well.score?.toFixed(3)}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 };

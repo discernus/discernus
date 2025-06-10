@@ -22,6 +22,14 @@ wheels/
 .installed.cfg
 *.egg
 
+# Node.js / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+package-lock.json
+
 # IDE
 .vscode/
 .idea/
@@ -72,3 +80,12 @@ test_*.json
 
 # Temporary files and experiments
 tmp/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Debug files
+frontend-debug*.png

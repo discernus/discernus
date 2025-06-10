@@ -23,12 +23,9 @@ def main():
     print("=" * 50)
     
     try:
-        # Import the app
-        from src.api.main import app
-        
-        # Run the server
+        # Run the server with import string for reload support
         uvicorn.run(
-            app,
+            "src.narrative_gravity.api.main:app",
             host="127.0.0.1",
             port=8000,
             reload=True,  # Auto-reload on code changes

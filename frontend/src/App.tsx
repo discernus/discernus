@@ -3,10 +3,8 @@ import './index.css';
 import DebugConsole from './components/DebugConsole';
 import { debugMonitor } from './services/debugMonitor';
 
-// Lazy load components with error boundaries
-const ExperimentDesigner = lazy(() => import('./components/ExperimentDesigner').catch(() => ({
-  default: () => <div className="p-6"><h2 className="text-xl font-semibold text-gray-900 mb-4">🧪 Experiment Designer</h2><p className="text-red-600">Component failed to load</p></div>
-})));
+// Lazy load components with error boundaries  
+const ExperimentDesigner = lazy(() => import('./components/ExperimentDesigner'));
 
 const PromptEditor = lazy(() => import('./components/PromptEditor').catch(() => ({
   default: () => <div className="p-6"><h2 className="text-xl font-semibold text-gray-900 mb-4">✏️ Prompt Editor</h2><p className="text-red-600">Component failed to load</p></div>
