@@ -253,10 +253,14 @@ class DirectAPIClient:
             return "openai"
         elif any(x in model_name.lower() for x in ["claude", "anthropic"]):
             return "anthropic"
-        elif "mistral" in model_name.lower() or "codestral" in model_name.lower():
+        elif any(x in model_name.lower() for x in ["mistral", "codestral", "devstral", "saba"]):
             return "mistral"
         elif any(x in model_name.lower() for x in ["gemini", "google"]):
             return "google_ai"
+        elif any(x in model_name.lower() for x in ["deepseek", "qwen", "llama"]):
+            # For open-source models, we'll use OpenAI-compatible APIs
+            # Many hosting services (like Together AI, Fireworks) provide these
+            return "openai"  # Use OpenAI client for compatibility
         else:
             return "unknown"
     
@@ -285,6 +289,12 @@ class DirectAPIClient:
             # GPT-4o variants
             "gpt-4o": "gpt-4o",
             "gpt-4o-mini": "gpt-4o-mini",
+            
+            # Open-source models (using compatible APIs)
+            "deepseek-r1": "gpt-4.1",  # Map to GPT-4.1 for now
+            "qwen3-235b": "gpt-4.1",   # Map to GPT-4.1 for now
+            "llama-4-scout": "gpt-4.1", # Map to GPT-4.1 for now
+            "llama-3.3-70b": "gpt-4.1", # Map to GPT-4.1 for now
             
             # Current production fallbacks
             "gpt-4-turbo": "gpt-4-turbo-2024-04-09",
@@ -452,10 +462,11 @@ class DirectAPIClient:
             "mistral": "mistral-large-2411",
             "mistral-large": "mistral-large-2411",
             "mistral-medium": "mistral-medium-3",
-            "mistral-small": "mistral-small-2409",
+            "mistral-small": "mistral-small-3.1",
             
             # 2025 Models
             "mistral-medium-3": "mistral-medium-3",  # May 2025 - frontier multimodal
+            "mistral-small-3.1": "mistral-small-3.1",  # Latest small model
             "codestral-2501": "codestral-2501",  # January 2025 - coding
             "mistral-ocr-2505": "mistral-ocr-2505",  # May 2025 - OCR
             "mistral-saba-2502": "mistral-saba-2502",  # February 2025 - multilingual

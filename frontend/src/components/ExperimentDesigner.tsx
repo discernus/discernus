@@ -19,7 +19,7 @@ const ExperimentDesigner: React.FC = () => {
   const [selectedFramework, setSelectedFramework] = useState('');
   const [selectedPrompt, setSelectedPrompt] = useState('');
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('');
-  const [selectedModel, setSelectedModel] = useState('gpt-4');
+  const [selectedModel, setSelectedModel] = useState('gpt-4.1');
 
   // Text Analysis State
   const [textInput, setTextInput] = useState('');
@@ -205,11 +205,53 @@ const ExperimentDesigner: React.FC = () => {
               className="w-full border border-gray-300 rounded-md px-3 py-2"
               data-testid="model-select"
             >
-              <option value="gpt-4">GPT-4</option>
-              <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-              <option value="claude-3-sonnet">Claude 3 Sonnet</option>
-              <option value="claude-3-haiku">Claude 3 Haiku</option>
+              <optgroup label="🔵 OpenAI (2025 Models)">
+                <option value="gpt-4.1">GPT-4.1 (Latest - Recommended)</option>
+                <option value="gpt-4.1-mini">GPT-4.1 Mini</option>
+                <option value="o1">o1 (Reasoning)</option>
+                <option value="o3">o3 (Advanced Reasoning)</option>
+                <option value="gpt-4o">GPT-4o (Current)</option>
+                <option value="gpt-4o-mini">GPT-4o Mini</option>
+              </optgroup>
+              
+              <optgroup label="🟠 Anthropic (Claude 4 Series)">
+                <option value="claude-4-opus">Claude 4 Opus (Latest - Premium)</option>
+                <option value="claude-4-sonnet">Claude 4 Sonnet (Latest - Recommended)</option>
+                <option value="claude-3.7-sonnet">Claude 3.7 Sonnet</option>
+                <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
+                <option value="claude-3.5-haiku">Claude 3.5 Haiku (Fast)</option>
+              </optgroup>
+              
+              <optgroup label="🔴 Mistral AI (2025 Models)">
+                <option value="mistral-large-2411">Mistral Large (November 2024 - Recommended)</option>
+                <option value="mistral-small-2409">Mistral Small (Efficient)</option>
+              </optgroup>
+              
+              <optgroup label="🟢 Google AI (Gemini 2.5 Series)">
+                <option value="gemini-2.5-pro">Gemini 2.5 Pro (Latest - Deep Think)</option>
+                <option value="gemini-2.5-flash">Gemini 2.5 Flash (Latest - Adaptive)</option>
+                <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+                <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+              </optgroup>
+              
+              <optgroup label="🌟 Open Source (Latest)">
+                <option value="deepseek-r1">DeepSeek R1 (Reasoning)</option>
+                <option value="qwen3-235b">Qwen3 235B (Latest)</option>
+                <option value="llama-4-scout">Llama 4 Scout (10M Context)</option>
+                <option value="llama-3.3-70b">Llama 3.3 70B</option>
+              </optgroup>
+              
+              <optgroup label="📖 Legacy Models">
+                <option value="gpt-4">GPT-4 (Legacy)</option>
+                <option value="gpt-3.5-turbo">GPT-3.5 Turbo (Legacy)</option>
+                <option value="claude-3-sonnet">Claude 3 Sonnet (Legacy)</option>
+                <option value="claude-3-haiku">Claude 3 Haiku (Legacy)</option>
+              </optgroup>
             </select>
+            <div className="text-xs text-gray-500 mt-1">
+              💡 Recommended: GPT-4.1, Claude 4 Sonnet, or Mistral Large for narrative analysis
+            </div>
           </div>
         </div>
 
