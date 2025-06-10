@@ -1,6 +1,7 @@
 """
 Core database models for Narrative Gravity Analysis.
 Implements the 5 core entities: Corpus, Document, Chunk, Job, Task
+plus v2.1 enhancements: Experiment, Run for hierarchical analysis
 as specified in Epic 1 technical requirements.
 """
 
@@ -51,6 +52,7 @@ class User(Base):
     # Relationships
     uploaded_corpora = relationship("Corpus", back_populates="uploader")
     created_jobs = relationship("Job", back_populates="creator")
+    experiments = relationship("Experiment", back_populates="creator")
     
     def __repr__(self):
         return f"<User(id={self.id}, username='{self.username}', role='{self.role}')>"
@@ -156,16 +158,132 @@ class Chunk(Base):
         return f"<Chunk(id={self.id}, doc_id={self.document_id}, chunk={self.chunk_id}/{self.total_chunks})>"
 
 
+class Experiment(Base):
+    """
+    Experiment table: Research experiments with hypotheses and configurations.
+    v2.1 enhancement for hierarchical analysis research workbench.
+    """
+    __tablename__ = "experiment"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    creator_id = Column(Integer, ForeignKey("user.id"), nullable=True)
+    
+    # Experiment metadata
+    name = Column(String(255), nullable=False)
+    hypothesis = Column(Text, nullable=True)
+    description = Column(Text, nullable=True)
+    research_context = Column(Text, nullable=True)
+    
+    # Configuration
+    prompt_template_id = Column(String(100), nullable=False)  # ID from prompt template store
+    framework_config_id = Column(String(100), nullable=False)  # ID from framework config store
+    scoring_algorithm_id = Column(String(100), nullable=False)  # Hierarchical, Winner-Take-Most, etc.
+    
+    # Analysis mode
+    analysis_mode = Column(String(50), default="single_model")  # single_model, multi_model_comparison
+    selected_models = Column(JSON, nullable=False)  # Array of model names for multi-model
+    
+    # Status and results
+    status = Column(String(20), default="draft")  # draft, active, completed, archived
+    total_runs = Column(Integer, default=0)
+    successful_runs = Column(Integer, default=0)
+    
+    # Academic metadata
+    research_notes = Column(Text, nullable=True)
+    publication_status = Column(String(50), default="unpublished")  # unpublished, submitted, published
+    tags = Column(JSON, default=list, nullable=False)  # Research tags for organization
+    
+    # Timestamps
+    created_at = Column(DateTime, default=func.now())
+    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
+    
+    # Relationships
+    creator = relationship("User", back_populates="experiments")
+    runs = relationship("Run", back_populates="experiment", cascade="all, delete-orphan")
+    
+    def __repr__(self):
+        return f"<Experiment(id={self.id}, name='{self.name}', status='{self.status}')>"
+
+
+class Run(Base):
+    """
+    Run table: Individual analysis executions with hierarchical results.
+    v2.1 enhancement supporting hierarchical ranking and justifications.
+    """
+    __tablename__ = "run"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    experiment_id = Column(Integer, ForeignKey("experiment.id"), nullable=False)
+    
+    # Run identification
+    run_number = Column(Integer, nullable=False)  # Sequential within experiment
+    text_id = Column(String(255), nullable=True)  # Link to original text source
+    
+    # Input data
+    text_content = Column(Text, nullable=False)
+    input_length = Column(Integer, nullable=False)  # Character count
+    
+    # Model and execution metadata
+    llm_model = Column(String(100), nullable=False)
+    llm_version = Column(String(50), nullable=True)
+    prompt_template_version = Column(String(20), nullable=False)
+    framework_version = Column(String(20), nullable=False)
+    
+    # Hierarchical Analysis Results (v2.1)
+    raw_scores = Column(JSON, nullable=False)  # Well scores: {"Dignity": 0.7, "Truth": 0.6, ...}
+    hierarchical_ranking = Column(JSON, nullable=True)  # Primary/secondary/tertiary wells with weights
+    framework_fit_score = Column(Float, nullable=True)  # How well framework fits the text (0.0-1.0)
+    
+    # Well Justifications (v2.1)
+    well_justifications = Column(JSON, nullable=True)  # Detailed LLM reasoning per well
+    
+    # Calculated Metrics
+    narrative_elevation = Column(Float, nullable=True)
+    polarity = Column(Float, nullable=True)
+    coherence = Column(Float, nullable=True)
+    directional_purity = Column(Float, nullable=True)
+    narrative_position_x = Column(Float, nullable=True)
+    narrative_position_y = Column(Float, nullable=True)
+    
+    # Execution metadata
+    execution_time = Column(DateTime, default=func.now())
+    duration_seconds = Column(Float, nullable=True)
+    api_cost = Column(Float, nullable=True)
+    
+    # Raw LLM interaction data
+    raw_prompt = Column(Text, nullable=True)  # Complete prompt sent to LLM
+    raw_response = Column(Text, nullable=True)  # Complete raw response from LLM
+    model_parameters = Column(JSON, nullable=True)  # Temperature, max_tokens, etc.
+    
+    # Status and error handling
+    status = Column(String(20), default="completed")  # pending, running, completed, failed
+    success = Column(Boolean, default=True)
+    error_message = Column(Text, nullable=True)
+    
+    # Provenance and audit trail
+    complete_provenance = Column(JSON, nullable=False)  # Full traceability data
+    
+    # Timestamps
+    created_at = Column(DateTime, default=func.now())
+    
+    # Relationships
+    experiment = relationship("Experiment", back_populates="runs")
+    
+    def __repr__(self):
+        return f"<Run(id={self.id}, experiment={self.experiment_id}, model='{self.llm_model}', run={self.run_number})>"
+
+
 class Job(Base):
     """
     Job table: Batch processing jobs for multiple chunks.
-    Orchestrates analysis across chunks, frameworks, and models.
+    Enhanced for v2.1 hierarchical analysis compatibility.
     """
     __tablename__ = "job"
     
     id = Column(Integer, primary_key=True, index=True)
     corpus_id = Column(Integer, ForeignKey("corpus.id"), nullable=False)
-    creator_id = Column(Integer, ForeignKey("user.id"), nullable=True)  # User who created the job
+    creator_id = Column(Integer, ForeignKey("user.id"), nullable=True)
+    experiment_id = Column(Integer, ForeignKey("experiment.id"), nullable=True)  # v2.1: Link to experiment
     
     # Job configuration
     job_name = Column(String(255), nullable=True)
@@ -173,6 +291,11 @@ class Job(Base):
     frameworks = Column(JSON, nullable=False)  # Array of framework names
     models = Column(JSON, nullable=False)  # Array of model names/configs
     run_count = Column(Integer, default=5)  # Number of runs per chunk/model combo
+    
+    # v2.1 Hierarchical Analysis Configuration
+    prompt_template_config = Column(JSON, nullable=True)  # Hierarchical prompt configuration
+    scoring_algorithm = Column(String(50), default="traditional")  # traditional, hierarchical, winner_take_most
+    analysis_mode = Column(String(50), default="single_model")  # single_model, multi_model_comparison
     
     # Job status and metadata
     status = Column(String(20), default="pending")  # pending, running, completed, failed, cancelled
@@ -196,6 +319,7 @@ class Job(Base):
     # Relationships
     corpus = relationship("Corpus", back_populates="jobs")
     creator = relationship("User", back_populates="created_jobs")
+    experiment = relationship("Experiment")  # Optional link to experiment
     tasks = relationship("Task", back_populates="job", cascade="all, delete-orphan")
     
     def __repr__(self):
@@ -205,7 +329,7 @@ class Job(Base):
 class Task(Base):
     """
     Task table: Individual processing tasks.
-    Links one chunk to one framework/model/run combination.
+    Enhanced for v2.1 hierarchical analysis results.
     """
     __tablename__ = "task"
     
@@ -223,8 +347,12 @@ class Task(Base):
     attempts = Column(Integer, default=0)
     max_attempts = Column(Integer, default=3)
     
+    # v2.1 Enhanced Results Structure
+    result_data = Column(JSON, nullable=True)  # Traditional LLM response and analysis results
+    hierarchical_result = Column(JSON, nullable=True)  # v2.1: Hierarchical ranking data
+    justifications = Column(JSON, nullable=True)  # v2.1: Well justifications and evidence
+    
     # Results and error handling
-    result_data = Column(JSON, nullable=True)  # LLM response and analysis results
     last_error = Column(Text, nullable=True)
     error_count = Column(Integer, default=0)
     

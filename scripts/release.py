@@ -96,7 +96,7 @@ class ReleaseManager:
         
         # Check root directory cleanliness
         allowed_root_files = {
-            'README.md', 'CHANGELOG.md', 'LICENSE', 'launch.py', 'launch_streamlit.py',
+            'README.md', 'CHANGELOG.md', 'LICENSE', 'launch.py', 'STREAMLIT_MIGRATION_NOTICE.md',
             'check_database.py', 'requirements.txt', 'env.example', 'alembic.ini',
             'pytest.ini', '.gitignore', '.cursorrules', 'PROJECT_STRUCTURE.md',
             '.env', 'LAUNCH_GUIDE.md'

@@ -1,5 +1,5 @@
 # Database Models for Narrative Gravity Analysis
-from .models import User, Corpus, Document, Chunk, Job, Task
+from .models import User, Corpus, Document, Chunk, Job, Task, Experiment, Run
 
 __all__ = [
     'User',
@@ -7,5 +7,7 @@ __all__ = [
     'Document',
     'Chunk',
     'Job',
-    'Task'
+    'Task',
+    'Experiment',
+    'Run'
 ] 

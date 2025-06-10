@@ -131,15 +131,15 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python launch.py                    # Launch all services
-  python launch.py --streamlit-only   # Launch only Streamlit UI
+  python launch.py                    # Launch backend services
+  python launch.py --frontend-info    # Show React frontend information
   python launch.py --api-only         # Launch only API server
   python launch.py --setup-db         # Setup database only
         """
     )
     
-    parser.add_argument('--streamlit-only', action='store_true',
-                       help='Launch only the Streamlit interface')
+    parser.add_argument('--frontend-info', action='store_true',
+                       help='Show information about the React frontend')
     parser.add_argument('--api-only', action='store_true', 
                        help='Launch only the API server')
     parser.add_argument('--celery-only', action='store_true',
@@ -148,8 +148,8 @@ Examples:
                        help='Setup database and exit')
     parser.add_argument('--no-db-check', action='store_true',
                        help='Skip database connectivity check')
-    parser.add_argument('--port', type=int, default=8501,
-                       help='Port for Streamlit app (default: 8501)')
+    parser.add_argument('--port', type=int, default=8000,
+                       help='Port for API server (default: 8000)')
     
     args = parser.parse_args()
     
@@ -174,22 +174,29 @@ Examples:
     # Check database (unless skipped)
     if not args.no_db_check and not check_database():
         print("💡 Run with --setup-db to initialize the database")
-        if not args.streamlit_only:  # Allow Streamlit-only mode without DB
-            sys.exit(1)
+        sys.exit(1)
     
     manager = ServiceManager()
     
     try:
-        # Start individual services if requested
-        if args.streamlit_only:
-            print("🖥️  Starting Streamlit interface only...")
-            subprocess.run([
-                sys.executable, "-m", "streamlit", "run",
-                "src/narrative_gravity/app.py",
-                "--server.headless", "false",
-                "--server.address", "localhost", 
-                "--server.port", str(args.port)
-            ])
+        # Show frontend information if requested
+        if args.frontend_info:
+            print("🎯 React Frontend Information")
+            print("=" * 40)
+            print("The Streamlit interface has been deprecated.")
+            print("Please use the modern React research workbench:")
+            print("")
+            print("📁 Location: frontend/")
+            print("🚀 Launch: cd frontend && npm run dev")
+            print("🌐 URL: http://localhost:3000")
+            print("")
+            print("📋 Features:")
+            print("  • Modern React 18 + TypeScript + Tailwind CSS")
+            print("  • Autonomous debug monitoring")
+            print("  • Real-time error detection")
+            print("  • Professional research interface")
+            print("")
+            print("📖 See: STREAMLIT_MIGRATION_NOTICE.md")
             return
         
         elif args.api_only:
@@ -202,12 +209,15 @@ Examples:
             subprocess.run([sys.executable, "scripts/run_celery.py"])
             return
         
-        # Start all services
-        print("🚀 Starting all services...")
-        print(f"📊 Streamlit UI: http://localhost:{args.port}")
+        # Start backend services
+        print("🚀 Starting backend services...")
         print("🌐 API Server: http://localhost:8000")
         print("📚 API Docs: http://localhost:8000/api/docs")
         print("🔄 Celery Worker: Background processing")
+        print("")
+        print("🎯 For the frontend interface:")
+        print("   cd frontend && npm run dev")
+        print("   http://localhost:3000")
         print("\n⏹️  Press Ctrl+C to stop all services")
         print("=" * 60)
         
@@ -215,15 +225,13 @@ Examples:
         manager.start_service("API", [sys.executable, "scripts/run_api.py"])
         manager.start_service("Celery", [sys.executable, "scripts/run_celery.py"])
         
-        # Start Streamlit last (blocking)
-        print("🖥️  Starting Streamlit interface...")
-        subprocess.run([
-            sys.executable, "-m", "streamlit", "run",
-            "src/narrative_gravity/app.py", 
-            "--server.headless", "false",
-            "--server.address", "localhost",
-            "--server.port", str(args.port)
-        ])
+        # Keep running until interrupted
+        print("✅ Backend services running. Start frontend separately.")
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            pass
         
     except KeyboardInterrupt:
         print("\n👋 Shutting down...")

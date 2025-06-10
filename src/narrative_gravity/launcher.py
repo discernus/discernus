@@ -1,116 +1,80 @@
 #!/usr/bin/env python3
 """
-Simple launcher for the Narrative Gravity Wells Streamlit app
-Handles dependency installation and launches the interface
+🚨 DEPRECATED: Streamlit Interface Launcher
+
+This launcher previously started the Streamlit interface, which has been deprecated.
+Please use the modern React Research Workbench instead.
 """
 
-import subprocess
 import sys
-import os
-import argparse
 from pathlib import Path
 
-def install_dependencies():
-    """Install required dependencies"""
-    print("🔧 Installing dependencies...")
-    try:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
-        print("✅ Dependencies installed successfully!")
-        return True
-    except subprocess.CalledProcessError as e:
-        print(f"❌ Error installing dependencies: {e}")
-        return False
-
-def launch_streamlit():
-    """Launch the Streamlit app"""
-    print("🚀 Launching Narrative Gravity Maps Interface...")
-    print("📱 Your browser should open automatically")
-    print("🌐 If not, go to: http://localhost:8501")
-    print("⏹️  Press Ctrl+C to stop the server")
-    print("-" * 50)
-    
-    try:
-        subprocess.run([
-            sys.executable, "-m", "streamlit", "run", 
-            "src/narrative_gravity/app.py",
-            "--server.headless", "false",
-            "--server.address", "localhost",
-            "--server.port", "8501"
-        ])
-    except KeyboardInterrupt:
-        print("\n🛑 Server stopped by user")
-    except Exception as e:
-        print(f"❌ Error launching app: {e}")
+def show_migration_info():
+    """Show information about migrating to React interface"""
+    print("🚨 STREAMLIT INTERFACE DEPRECATED")
+    print("=" * 50)
+    print("The Streamlit interface has been replaced with a modern React research workbench.")
+    print("")
+    print("🎯 NEW REACT INTERFACE:")
+    print("   📁 Location: frontend/")
+    print("   🚀 Launch: cd frontend && npm run dev")
+    print("   🌐 URL: http://localhost:3000")
+    print("")
+    print("✨ BENEFITS:")
+    print("   • Modern React 18 + TypeScript + Tailwind CSS")
+    print("   • Autonomous debug monitoring")
+    print("   • Real-time error detection")
+    print("   • Professional research interface")
+    print("   • Better performance and user experience")
+    print("")
+    print("📁 ARCHIVED STREAMLIT:")
+    print("   The original Streamlit app is preserved in:")
+    print("   archive/streamlit_legacy/")
+    print("")
+    print("📖 MIGRATION GUIDE:")
+    print("   See: STREAMLIT_MIGRATION_NOTICE.md")
+    print("   See: archive/streamlit_legacy/STREAMLIT_DEPRECATION_NOTICE.md")
+    print("")
+    print("❓ NEED HELP?")
+    print("   • React setup: frontend/README.md")
+    print("   • Backend services: python launch.py")
+    print("   • Questions: Contact development team")
 
 def main():
-    """Main launcher function"""
-    parser = argparse.ArgumentParser(
-        prog='launch_app.py',
-        description='Launch the Narrative Gravity Maps Streamlit interface',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  python launch_app.py           # Launch the app normally
-  python launch_app.py --help    # Show this help message
-        """
-    )
+    """Main function - shows deprecation notice"""
+    show_migration_info()
     
-    parser.add_argument(
-        '--no-install', 
-        action='store_true',
-        help='Skip dependency installation check'
-    )
+    # Ask if user wants to continue to archived Streamlit
+    print("\n" + "=" * 50)
+    response = input("Continue to archived Streamlit app anyway? (y/N): ").lower().strip()
     
-    parser.add_argument(
-        '--port',
-        type=int,
-        default=8501,
-        help='Port to run the Streamlit app on (default: 8501)'
-    )
-    
-    args = parser.parse_args()
-    
-    print("🎯 Narrative Gravity Maps - Streamlit Interface")
-    print("=" * 50)
-    
-    # Check if we're in the right directory
-    if not Path("src/narrative_gravity/engine.py").exists():
-        print("❌ Error: Please run this script from the narrative_gravity_analysis directory")
-        sys.exit(1)
-    
-    # Check if streamlit is installed (unless skipped)
-    if not args.no_install:
-        try:
-            import streamlit
-            print("✅ Streamlit already installed")
-        except ImportError:
-            print("📦 Streamlit not found - installing dependencies...")
-            if not install_dependencies():
-                sys.exit(1)
-    
-    # Launch the app
-    launch_streamlit_with_port(args.port)
-
-def launch_streamlit_with_port(port=8501):
-    """Launch the Streamlit app on specified port"""
-    print("🚀 Launching Narrative Gravity Maps Interface...")
-    print("📱 Your browser should open automatically")
-    print(f"🌐 If not, go to: http://localhost:{port}")
-    print("⏹️  Press Ctrl+C to stop the server")
-    print("-" * 50)
-    
-    try:
-        subprocess.run([
-            sys.executable, "-m", "streamlit", "run", 
-            "src/narrative_gravity/app.py",
-            "--server.headless", "false",
-            "--server.address", "localhost",
-            "--server.port", str(port)
-        ])
-    except KeyboardInterrupt:
-        print("\n🛑 Server stopped by user")
-    except Exception as e:
-        print(f"❌ Error launching app: {e}")
+    if response in ['y', 'yes']:
+        print("\n🔄 Redirecting to archived Streamlit...")
+        print("⚠️  Note: This interface is no longer maintained.")
+        
+        # Check if archived app exists
+        archived_app = Path("archive/streamlit_legacy/src/narrative_gravity/app.py")
+        if archived_app.exists():
+            import subprocess
+            try:
+                subprocess.run([
+                    sys.executable, "-m", "streamlit", "run", 
+                    str(archived_app),
+                    "--server.headless", "false",
+                    "--server.address", "localhost",
+                    "--server.port", "8501"
+                ])
+            except KeyboardInterrupt:
+                print("\n🛑 Archived Streamlit stopped")
+            except Exception as e:
+                print(f"❌ Error launching archived app: {e}")
+                print("💡 Try: cd archive/streamlit_legacy && streamlit run src/narrative_gravity/app.py")
+        else:
+            print("❌ Archived Streamlit app not found")
+            print("💡 Files may have been moved or deleted")
+    else:
+        print("\n✅ Great choice! The React interface is much better.")
+        print("🚀 Run: cd frontend && npm run dev")
 
 if __name__ == "__main__":
     main() 

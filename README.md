@@ -103,8 +103,8 @@ The project is organized for clarity and maintainability:
 ```
 narrative_gravity_analysis/
 ├── 🚀 Core Application
-│   ├── launch_app.py                 # Application launcher
-│   ├── narrative_gravity_app.py      # Main Streamlit interface  
+│   ├── frontend/                     # React Research Workbench (RECOMMENDED)
+│   ├── launch.py                     # Backend services launcher
 │   ├── narrative_gravity_elliptical.py # Core analysis engine
 │   ├── framework_manager.py          # Framework management
 │   └── generate_prompt.py            # LLM prompt generator
@@ -536,26 +536,37 @@ If you are reading the paper "Narrative Gravity Maps: A Quantitative Framework f
 
 ## Getting Started
 
-We recommend starting with the Streamlit web application for the most user-friendly experience.
+We recommend starting with the React Research Workbench for the most user-friendly experience.
 
 1.  **Ensure Dependencies are Installed:**
     ```bash
+    # Frontend dependencies
+    cd frontend
+    npm install
+    
+    # Backend dependencies (if needed)
     pip install -r requirements.txt
     ```
 2.  **Launch the Application:**
     ```bash
-    python launch_app.py
+    # React interface (recommended)
+    cd frontend
+    npm run dev
+    # Open http://localhost:3000
+    
+    # Or backend services
+    python launch.py
     ```
-    This will open the interface in your web browser.
 
 ## Workflow: Analyzing New Texts
 
 This application uses a multi-step process to analyze persuasive narratives, involving an external Large Language Model (LLM) like ChatGPT or Claude:
 
-1.  **Generate Prompt (in Streamlit App):**
-    *   Go to the "📝 Create Analysis" tab.
+1.  **Generate Prompt (in React App):**
+    *   Open the React interface at http://localhost:3000
+    *   Go to the "Prompt Editor" tab.
     *   Select the desired framework (e.g., "civic_virtue").
-    *   Click "📋 Generate Analysis Prompt". A detailed prompt will appear.
+    *   Click "Generate Analysis Prompt". A detailed prompt will appear.
 
 2.  **Use External LLM:**
     *   Copy the generated prompt.
@@ -563,15 +574,16 @@ This application uses a multi-step process to analyze persuasive narratives, inv
     *   Paste the prompt, followed by the text you want to analyze.
     *   The LLM will output a response, hopefully in JSON format as requested by the prompt.
 
-3.  **Input LLM JSON Response (in Streamlit App):**
+3.  **Input LLM JSON Response (in React App):**
     *   Copy the JSON portion of the LLM's response.
-    *   Back in the Streamlit app (Step 2 on the "📝 Create Analysis" tab), paste this JSON into the text area labeled "Paste JSON response here".
+    *   Back in the React app, go to the "Analysis Results" tab.
+    *   Paste this JSON into the text area labeled "Paste JSON response here".
 
-4.  **Generate Visualization (in Streamlit App):**
-    *   Click "🎯 Generate Visualization".
-    *   The narrative gravity map and associated metrics will be displayed.
+4.  **Generate Visualization (in React App):**
+    *   Click "Generate Visualization".
+    *   The narrative gravity map and associated metrics will be displayed in the "Comparison Dashboard".
 
-For a quick test of the visualization step without needing an LLM, you can use the "🧪 Load Test JSON" button on the "📝 Create Analysis" tab.
+For a quick test of the visualization step without needing an LLM, you can use the test data features in the React interface.
 
 **Example of Expected JSON from LLM:**
 
@@ -620,7 +632,7 @@ The testing overhaul was conducted in two main phases:
 
 **Phase 1: Foundational Unit Tests & Refactoring**
 - **Mathematical Engine:** Added comprehensive unit tests for the core elliptical distance calculations in `narrative_gravity_elliptical.py`.
-- **Dashboard Logic:** Created unit tests for pure helper functions in the Streamlit dashboard code.
+- **Dashboard Logic:** Created unit tests for pure helper functions in the legacy dashboard code.
 - **Legacy Test Refactoring:** Migrated all existing `unittest`-style tests to a modern `pytest` framework, separating them into appropriate unit and integration test suites.
 
 **Phase 2: Backend Confidence (src/)**
@@ -638,16 +650,18 @@ This process uncovered and fixed numerous bugs related to Pydantic V2 migration,
 ### Known Issues
 - **`test_api_services.py` Failures:** There are two persistent test failures in `tests/unit/test_api_services.py` related to the `ingest_jsonl_corpus` service function. The fixes for these failures could not be reliably applied due to suspected issues with the development environment's file editing tools. The primary issue appears to be incorrect handling of empty or whitespace-only files during ingestion.
 
-## Getting Started
+## Getting Started (Legacy Backend)
 
 1.  **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
-2.  **Run the application:**
+2.  **Run backend services:**
     ```bash
-    streamlit run src/streamlit_app/app.py
+    python launch.py
     ```
+
+**Note:** For the modern React interface, see the main Getting Started section above.
 
 ## Running Tests
 To run the full test suite:
