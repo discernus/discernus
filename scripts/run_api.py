@@ -28,7 +28,7 @@ def main():
             "src.narrative_gravity.api.main:app",
             host="127.0.0.1",
             port=8000,
-            reload=True,  # Auto-reload on code changes
+            # reload=True,  # Auto-reload on code changes (DISABLED for stability in background)
             log_level="info"
         )
         

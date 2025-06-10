@@ -199,34 +199,40 @@ Examples:
             print("📖 See: STREAMLIT_MIGRATION_NOTICE.md")
             return
         
-        elif args.api_only:
+        # --- Centralized Service Management Logic ---
+        # Determine which services to start
+        services_to_start = []
+        if args.api_only:
             print("🌐 Starting API server only...")
-            subprocess.run([sys.executable, "scripts/run_api.py"])
-            return
-        
+            services_to_start.append(("API", [sys.executable, "scripts/run_api.py"]))
         elif args.celery_only:
             print("🔄 Starting Celery worker only...")
-            subprocess.run([sys.executable, "scripts/run_celery.py"])
+            services_to_start.append(("Celery", [sys.executable, "scripts/run_celery.py"]))
+        else:
+            # Default to full platform launch if no specific service requested
+            print("🚀 Starting backend services...")
+            print("🌐 API Server: http://localhost:8000")
+            print("📚 API Docs: http://localhost:8000/api/docs")
+            print("🔄 Celery Worker: Background processing")
+            print("")
+            services_to_start.append(("API", [sys.executable, "scripts/run_api.py"]))
+            services_to_start.append(("Celery", [sys.executable, "scripts/run_celery.py"]))
+
+        if not services_to_start:
+            print("No services to start. Exiting.")
             return
+
+        # Start services
+        for name, cmd in services_to_start:
+            manager.start_service(name, cmd)
         
-        # Start backend services
-        print("🚀 Starting backend services...")
-        print("🌐 API Server: http://localhost:8000")
-        print("📚 API Docs: http://localhost:8000/api/docs")
-        print("🔄 Celery Worker: Background processing")
-        print("")
-        print("🎯 For the frontend interface:")
+        print("✅ Backend services running. Start frontend separately.")
         print("   cd frontend && npm run dev")
         print("   http://localhost:3000")
         print("\n⏹️  Press Ctrl+C to stop all services")
         print("=" * 60)
-        
-        # Start services in order
-        manager.start_service("API", [sys.executable, "scripts/run_api.py"])
-        manager.start_service("Celery", [sys.executable, "scripts/run_celery.py"])
-        
-        # Keep running until interrupted
-        print("✅ Backend services running. Start frontend separately.")
+
+        # Keep running until interrupted (for all modes that start services)
         try:
             while True:
                 time.sleep(1)

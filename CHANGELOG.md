@@ -98,6 +98,10 @@
   - **Console Monitoring**: Real-time capture of JavaScript errors and warnings
   - **Integration Testing**: API ↔ Frontend communication fully validated
 
+### 🐛 Bug Fixes
+- **Fixed 'Analyze Text' Button Disabled Issue**: Ensured the 'Analyze Text' button is correctly enabled after creating an experiment by persisting the experiment name state in the frontend.
+- **Resolved API Server Network Connectivity**: Addressed persistent 'Network Error' by disabling `reload=True` in `scripts/run_api.py` and by ensuring `launch.py --api-only` properly keeps the API server running in the background via `ServiceManager` and a persistent process. This requires manual launch of `python scripts/run_api.py` in a separate terminal for stable operation outside of Cursor.
+
 ## [Unreleased] - v2.1 Phase 1 Enhancements
 
 ### Added - Workstream 1: Prompt Engineering & Scoring Framework Refinement
