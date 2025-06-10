@@ -130,48 +130,53 @@ Elena needs to analyze corporate sustainability reports:
 
 ---
 
-## Persona 4: You, Project Founder & Platform Shepherd  
+## Persona 4: You, Independent Research Author
 
 **Profile**  
-• Retired technology executive, independent researcher, Cursor-driven architect  
-• 30 years in SaaS/platform scaling, now focused on meaningful second-act projects  
+• Non-developer, non-academic independent researcher  
+• Focus on getting a rigorous academic paper published on narrative analysis methodology
+• Limited technical background but strong conceptual and analytical thinking
 
 **Background & Context**  
-• Relies on AI-assisted coding (Cursor) for implementation  
-• Passionate about open source, sensitive to exploitation risks  
-• Manages project on a $2 500 validation-phase budget  
+• Working independently outside traditional academic or corporate structures
+• Relies on AI-assisted development tools (Cursor) for technical implementation
+• Strong interest in political discourse analysis and moral framework development
+• Operating on limited budget for validation phase (~$2,500)
 
 **Goals & Motivations**  
-1. Build a sustainable platform with strong IP attribution  
-2. Establish academic credibility through rigorous validation  
-3. Protect against uncompensated commercial appropriation  
-4. Maintain modular architecture for flexibility  
+1. **Primary Goal**: Complete and publish a peer-reviewed academic paper on Narrative Gravity Maps methodology
+2. Establish credibility for the framework through rigorous validation studies  
+3. Build a research tool that can generate reproducible, statistically sound results
+4. Protect intellectual property while enabling appropriate academic collaboration
 
 **Pain Points & Frustrations**  
-• Licensing complexity: open vs. protective terms  
-• Need admin UI to manage batch jobs without coding  
-• Ensuring quality and vision as the community grows  
+• **Paper draft management**: Need to track versions and ensure latest draft is always accessible
+• **Validation anxiety**: Ensuring the methodology meets academic publication standards without formal institutional support
+• **Technical dependency**: Relying on AI assistance for implementation while maintaining research integrity
+• **Time pressure**: Balancing thorough validation with publication timeline goals
+• **Peer review concerns**: Anticipating skepticism about AI-assisted research from traditional academics
 
 **Technical Requirements**  
-• Admin dashboard for job launch, monitoring, cost tracking  
-• Token-based auth and role management  
-• JSON-generation CLI and schema-migration tooling  
-• Copyleft core license + permissive framework extension license  
+• **Paper management system**: Version control and backup for research drafts  
+• **Validation tools**: Statistical analysis capabilities for inter-rater reliability, LLM consistency testing
+• **Data export**: Academic-format outputs (CSV, JSON) compatible with statistical software
+• **Reproducibility package**: Complete methodology documentation and replication materials
+• **Admin interface**: Simple UI for managing validation studies without coding
 
 **User Journey Story**  
-A typical week for the Founder:  
-1. Reviews overnight validation-study results on the dashboard  
-2. Adjusts schema and runs migration script for legacy corpora  
-3. Works with Cursor to add excerpt extraction feature  
-4. Approves framework-extension pull requests  
-5. Monitors Hugging Face spending and pauses jobs if needed  
-6. Sends licensing-compliance notices to misusing firms  
+Working toward paper submission, the Independent Researcher:  
+1. **Morning**: Reviews latest validation study results from overnight LLM runs
+2. **Mid-morning**: Updates paper draft with new statistical findings and methodology refinements  
+3. **Afternoon**: Runs comparative analysis between framework versions to strengthen methodology section
+4. **Evening**: Exports latest results to academic formats and updates replication package
+5. **Week-end**: Coordinates with potential academic co-authors, sharing reproducible analysis results
 
 **Success Metrics**  
-• Reliable system uptime for all personas  
-• Academic papers published with co-author credit  
-• Healthy open-source ecosystem with fair attribution  
-• Project stays within budget and time commitments  
+• **Primary**: Successful submission and acceptance of peer-reviewed paper
+• **Secondary**: Framework citations by independent researchers  
+• **Validation**: Statistical reliability metrics meet academic standards (>0.90 correlation)
+• **Impact**: Recognition in computational social science and political analysis communities
+• **Sustainability**: Framework adoption enables ongoing research collaboration opportunities  
 
 ---
 

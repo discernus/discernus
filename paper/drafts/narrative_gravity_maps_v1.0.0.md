@@ -4,13 +4,13 @@
 
 Contemporary political discourse faces an unprecedented crisis of moral clarity and epistemic integrity. This paper introduces **Narrative Gravity Maps**, a quantitative methodology for mapping and analyzing the forces that drive persuasive narrative formation. The methodology positions conceptual "gravity wells" on a coordinate system, enabling systematic measurement of narrative positioning and trajectory. 
 
-We demonstrate this approach through the **Civic Virtue Framework**, a specialized implementation designed for moral analysis of persuasive political discourse. This framework maps narratives along five core dipoles—such as Dignity vs. Tribalism and Truth vs. Manipulation—representing tensions between integrative civic virtues and disintegrative rhetorical forces. **Empirical validation through analysis of contemporary American presidential discourse demonstrates the framework's analytical capabilities, with cross-model reliability testing achieving correlation coefficients exceeding 0.90 across multiple LLM platforms.**
+We demonstrate this approach through the **Civic Virtue Framework**, a specialized implementation designed for moral analysis of persuasive political discourse. This framework maps narratives along five core dipoles—such as Dignity vs. Tribalism and Truth vs. Manipulation—representing tensions between integrative civic virtues and disintegrative rhetorical forces. **Technical implementation demonstrates cross-model consistency with correlation coefficients exceeding 0.90 across multiple LLM platforms, though empirical validation against human judgment remains a critical area for future research.**
 
-**The operational implementation has achieved production-ready status with 99.5% test success rate, enabling systematic analysis of political discourse with quantitative rigor.** Case studies of Trump and Biden inaugural addresses demonstrate the framework's capacity for quantitative differentiation between contrasting political approaches, with elliptical distance metrics providing precise measurement of rhetorical separation.
+**The operational implementation has achieved technical stability with 99.5% system reliability, enabling systematic computational analysis of political discourse.** Case studies of Trump and Biden inaugural addresses demonstrate the framework's capacity for quantitative differentiation between contrasting political approaches, with elliptical distance metrics providing precise measurement of computational rhetorical positioning.
 
-Unlike purely descriptive approaches, Narrative Gravity Maps make explicit normative distinctions while maintaining analytical rigor and statistical validation. The methodology enables researchers, educators, and citizens to assess not only what persuasive narratives argue, but how they morally orient themselves toward either public trust and universal human agency, or toward grievance, fear, and identity-based appeals.
+Unlike purely descriptive approaches, Narrative Gravity Maps make explicit normative distinctions while maintaining technical consistency and computational reproducibility. The methodology provides a systematic computational tool for analyzing how persuasive narratives position themselves along specified moral and rhetorical dimensions, though validation against human moral perception requires further empirical research.
 
-**Keywords:** moral psychology, political discourse, narrative analysis, computational social science, democratic institutions, empirical validation
+**Keywords:** moral psychology, political discourse, narrative analysis, computational social science, democratic institutions, computational consistency
 
 ## 1. Introduction
 
@@ -335,7 +335,59 @@ The empirical validation demonstrates that Narrative Gravity Maps has achieved o
 
 ## 6. Discussion and Implications
 
-### 6.1 Methodology Advantages and Limitations
+### 6.1 Validation Status and Critical Limitations
+
+#### 6.1.1 What Has Been Validated: Technical Consistency
+
+The current implementation demonstrates robust **technical consistency** across multiple dimensions:
+
+**Cross-LLM Reliability**: Correlation coefficients exceeding 0.90 across GPT-4, Claude-4, Llama-3, and Mixtral-8x7B platforms demonstrate that different LLMs produce consistent results when applying the same analytical framework to identical texts.
+
+**System Reliability**: 99.5% technical success rate demonstrates stable computational implementation suitable for systematic research applications.
+
+**Mathematical Framework**: Consistent positioning algorithms and visualization systems provide reproducible quantitative measurements across multiple analysis runs.
+
+#### 6.1.2 What Remains Unvalidated: Human Alignment
+
+**Critical Gap: Human Judgment Validation**
+
+The framework's most significant limitation is the **absence of empirical validation against human moral perception**. While the system achieves high cross-LLM consistency, recent research in computational theme detection reveals several concerning patterns that likely apply to this implementation:
+
+**Hierarchical Prioritization Limitations**: LLMs consistently struggle with hierarchical theme prioritization, often "over-distributing attention across multiple themes rather than identifying hierarchical dominance" (Literature Review, 2025). This may explain observed score distributions that fail to clearly distinguish dominant moral themes.
+
+**Contextual Nuance Deficits**: Computational approaches show "limited capacity for contextual adaptation, often missing themes that require understanding of implicit cultural or historical references" (Literature Review, 2025). Political discourse analysis particularly requires contextual sensitivity that current LLM approaches may systematically miss.
+
+**Thematic "Hallucination" Risk**: LLMs can generate "plausible but false thematic interpretations" that "appear semantically coherent while fundamentally misrepresenting the narrative's moral architecture" (Literature Review, 2025). This represents a particularly concerning limitation for moral and political analysis.
+
+#### 6.1.3 Required Validation Studies
+
+Before claims of empirical validation can be substantiated, the framework requires:
+
+**Expert Annotation Studies**: Systematic comparison of LLM outputs against expert human judgment using established inter-rater reliability protocols.
+
+**Cross-Cultural Validation**: Testing whether framework assumptions about moral hierarchy and conceptual relationships hold across different cultural contexts.
+
+**Temporal Consistency Testing**: Validation that framework scoring remains stable across different time periods and evolving political contexts.
+
+**Salience Ranking Validation**: Direct testing of whether LLM-identified dominant themes align with human perception of narrative salience and moral emphasis.
+
+#### 6.1.4 Appropriate Current Applications
+
+Given these limitations, the framework is currently validated for:
+
+**Systematic Comparative Analysis**: Tracking changes in computational measurements of political discourse over time, with appropriate caveats about what these measurements represent.
+
+**Exploratory Research Tool**: Initial analysis to identify potential patterns for further investigation using human-validated methods.
+
+**Methodological Development**: Testing and refining computational approaches to thematic analysis with explicit acknowledgment of validation limitations.
+
+**Educational Applications**: Demonstrating systematic analytical approaches to political discourse, with clear communication about the difference between computational consistency and human validity.
+
+The framework should **not** currently be used for:
+- Claims about actual human moral perception
+- Definitive assessments of political rhetoric quality
+- Policy recommendations based solely on computational outputs
+- Academic research without appropriate validation caveats
 
 ### 6.2 Framework Extensibility and Cultural Adaptability
 
@@ -343,15 +395,39 @@ The empirical validation demonstrates that Narrative Gravity Maps has achieved o
 
 ### 6.4 Future Research Directions
 
+#### 6.4.1 Priority: Human Validation Studies
+
+The most critical next step involves designing and conducting rigorous human validation studies to determine:
+
+**Alignment Assessment**: The degree to which computational outputs align with expert human judgment across different types of political discourse.
+
+**Boundary Condition Identification**: Specific contexts where computational analysis fails to capture human moral perception.
+
+**Calibration Requirements**: Adjustments needed to improve human-computational alignment while maintaining systematic measurement capabilities.
+
+#### 6.4.2 Methodological Refinement
+
+**Prompt Engineering Optimization**: Systematic development of prompting strategies based on growing understanding of LLM limitations in thematic analysis.
+
+**Hybrid Human-AI Approaches**: Development of systems that leverage computational systematic coverage while preserving human contextual judgment and hierarchical understanding.
+
+**Framework Adaptation**: Methods for adjusting analytical frameworks based on empirical validation results while maintaining theoretical coherence.
+
 ## 7. Conclusion
 
-**Narrative Gravity Maps** represent a significant advancement in the quantitative analysis of persuasive discourse. By combining rigorous mathematical modeling with normative clarity, this methodology provides a flexible foundation for developing specialized analytical frameworks suited to different contexts and goals.
+**Narrative Gravity Maps** represent a promising computational approach to systematic analysis of persuasive discourse. By combining mathematical modeling with normative frameworks, this methodology provides a foundation for developing specialized analytical tools, though significant validation work remains before empirical claims can be substantiated.
 
-The **Civic Virtue Framework** demonstrates the methodology's potential through its focus on moral analysis of political discourse. This implementation successfully transforms moral analysis from subjective interpretation to systematic measurement while maintaining cultural adaptability. The framework enables assessment of how political narratives orient themselves toward either civic cohesion or fragmentation—toward universal human agency and public trust, or toward grievance, fear, and identity-based appeals.
+The **Civic Virtue Framework** demonstrates the methodology's computational consistency and technical potential. The implementation achieves reliable cross-LLM correlation (r > 0.90) and systematic measurement capabilities, providing a stable platform for analyzing political discourse through specified moral and rhetorical dimensions. However, **the critical question of alignment with human moral perception remains unresolved**.
 
-The modular nature of Narrative Gravity Maps enables the development of additional specialized frameworks. While the Civic Virtue Framework represents our most advanced current implementation, we have developed other frameworks as illustrations and anticipate that the research community will develop many more, each tailored to specific analytical needs and normative contexts.
+Current research in computational theme detection reveals fundamental limitations in LLM-based approaches that likely affect this framework: difficulty with hierarchical prioritization, limited contextual adaptation, and risk of thematic hallucination. These limitations suggest that while the framework provides valuable systematic analysis capabilities, claims about capturing human moral perception require substantial empirical validation.
 
-This methodology offers researchers, educators, and citizens quantitative tools for navigating moral complexity in democratic discourse while maintaining the flexibility to adapt to diverse cultural and analytical contexts.
+**Immediate Applications**: The framework currently serves as a useful tool for systematic comparative analysis, exploratory research, and methodological development, provided appropriate caveats are maintained about the difference between computational consistency and human validity.
+
+**Critical Next Steps**: Priority must be given to human validation studies that directly compare computational outputs with expert human judgment across diverse political discourse contexts. Only through such validation can the framework's relationship to human moral perception be properly established.
+
+**Long-term Potential**: If appropriately validated, Narrative Gravity Maps could provide researchers, educators, and citizens with quantitative tools for navigating moral complexity in democratic discourse. The modular framework design enables development of additional specialized implementations tailored to specific analytical contexts.
+
+This methodology represents an important step toward systematic analysis of political discourse, but responsible development requires acknowledging current limitations while pursuing the empirical validation necessary for robust academic and practical applications.
 
 ## References
 

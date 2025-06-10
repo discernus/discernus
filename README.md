@@ -672,3 +672,84 @@ To run tests for a specific file:
 ```bash
 pytest tests/unit/test_crud.py
 ```
+
+# Narrative Gravity Wells: Quantitative Framework for Analyzing Political Discourse
+
+## Abstract
+
+This repository implements the **Narrative Gravity Maps** methodology - a quantitative framework for analyzing the moral and rhetorical forces in political discourse. Through positioning conceptual "gravity wells" on coordinate systems, the framework enables systematic measurement of how narratives orient toward civic virtues versus disintegrative rhetorical forces.
+
+The methodology demonstrates technical consistency with cross-LLM correlation exceeding 0.90, though empirical validation against human moral perception remains an active area of research. The system provides valuable tools for systematic comparative analysis, exploratory research, and methodological development in computational political discourse analysis.
+
+## 🎯 Current Project Status (January 2025)
+
+### ✅ **Technical Infrastructure Complete**
+- **Backend Services**: Multi-LLM integration with 99.5% test reliability
+- **Database**: PostgreSQL with comprehensive schema for experiments and analysis
+- **Frontend**: React research workbench for systematic analysis workflows
+- **Testing**: Comprehensive automated testing with Playwright end-to-end validation
+
+### 🔴 **Critical Development Priority**
+- **Backend API Integration**: Connecting React frontend to existing analysis engine
+- **Missing API Endpoints**: Experiments, runs, and configuration endpoints needed
+
+### 📋 **Research Phase**: Validation-First Development
+Moving from infrastructure completion to academic validation studies establishing framework credibility.
+
+---
+
+## 📚 Academic Paper Development
+
+### Current Paper Status
+- **Current Version**: v1.0.0 (Validation-Ready Draft)
+- **Location**: `paper/drafts/narrative_gravity_maps_v1.0.0.md`
+- **Status**: Technical implementation documented, human validation studies required
+
+### Paper Development Workflow
+```bash
+# Check current paper status
+cd paper && python manage_paper.py status
+
+# Create new paper version
+python manage_paper.py new-version --type minor
+
+# Check evidence status
+python manage_paper.py check-evidence
+
+# Validate claims against available evidence
+python manage_paper.py validate-claims
+
+# Generate submission checklist
+python manage_paper.py submission-checklist
+```
+
+### Paper Directory Structure
+```
+paper/
+├── README.md                     # Paper development guide
+├── PAPER_CHANGELOG.md            # Complete version history
+├── manage_paper.py               # Automated paper management
+├── drafts/                       # Version-controlled paper drafts
+├── evidence/                     # Supporting evidence and data
+│   ├── technical_validation/     # Cross-LLM consistency data
+│   ├── case_studies/            # Political speech analyses
+│   ├── validation_studies/      # Human validation (required)
+│   └── figures/                 # Charts and visualizations
+├── reviews/                      # Peer review and feedback
+└── submission/                   # Journal submission materials
+```
+
+### Evidence Requirements for Publication
+- ✅ **Technical Validation**: Cross-LLM consistency (r > 0.90) documented
+- ✅ **Case Studies**: Presidential speech analyses with statistical metrics
+- ❌ **Human Validation**: Expert annotation studies (critical gap)
+- ❌ **Inter-Rater Reliability**: Human expert agreement studies needed
+- ❌ **Cross-Cultural Validation**: Framework applicability across contexts
+
+### Academic Integrity Standards
+- **No Validation Overclaims**: Clear distinction between technical consistency and human validation
+- **Evidence-Based Progression**: All claims backed by appropriate supporting data
+- **Transparent Limitations**: Honest acknowledgment of current gaps and research needs
+- **Independent Research**: Rigorous methodology despite non-institutional context
+
+---
