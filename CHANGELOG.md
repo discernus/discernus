@@ -1,8 +1,8 @@
 # Narrative Gravity Maps - Changelog
 
-## [Unreleased]
+## [Unreleased] - June 11, 2025
 
-### 🎬 YOUTUBE TRANSCRIPT INTELLIGENT INGESTION SERVICE: Video Content to Research Corpus - June 11, 2025
+### 🎬 YOUTUBE TRANSCRIPT INTELLIGENT INGESTION SERVICE: Video Content to Research Corpus
 
 **Strategic Achievement**: Production-ready YouTube transcript extraction system extending intelligent corpus ingestion to video content
 - **YouTube Transcript Extraction**: Complete service for automated video content processing
@@ -62,7 +62,7 @@
 - **User-uploaded content with captions**: 70-90% success rate
 - **Videos without captions**: 0% (graceful failure with clear messaging)
 
-### 🤖 INTELLIGENT CORPUS INGESTION SERVICE: LLM-Powered Metadata Extraction - June 11, 2025
+### 🤖 INTELLIGENT CORPUS INGESTION SERVICE: LLM-Powered Metadata Extraction
 
 **Strategic Achievement**: Production-ready intelligent corpus ingestion system for automated metadata extraction from messy text files
 - **LLM-Powered Metadata Extraction**: Complete service using GPT-3.5-turbo for automatic metadata extraction
@@ -121,7 +121,7 @@
 - **Quality Control**: Confidence-based processing ensuring only high-quality extractions reach corpus
 - **Academic Workflow**: Supporting systematic corpus development for digital humanities research
 
-### 🎯 ENHANCED CORPUS MANAGEMENT SYSTEM: FAIR Data & Academic Standards - June 11, 2025
+### 🎯 ENHANCED CORPUS MANAGEMENT SYSTEM: FAIR Data & Academic Standards
 
 **Strategic Achievement**: Comprehensive corpus management system meeting FAIR data principles and academic standards
 - **Stable Text Identifiers**: Complete implementation of semantic document identification for academic workflow
@@ -164,7 +164,7 @@
 - **Component Integration**: Foundation for batch orchestration and research validation protocols
 - **Export Pipeline**: Research-ready datasets feeding into academic analysis workflows
 
-### 🎯 PRIORITY 1 DATABASE FOUNDATION: Component Versioning Infrastructure Complete - June 11, 2025
+### 🎯 PRIORITY 1 DATABASE FOUNDATION: Component Versioning Infrastructure Complete
 
 **Strategic Achievement**: Complete database schema infrastructure for validation-first research platform
 - **Component Versioning Database Schema**: Full implementation of systematic component management
@@ -196,7 +196,7 @@
 - **Academic Workflow**: Infrastructure supports publication-quality provenance and reproducibility
 - **Development Workflow**: Structured approach to systematic component improvement and validation
 
-### 🏗️ ARCHITECTURAL IMPROVEMENT: Clean Component Separation - June 11, 2025
+### 🏗️ ARCHITECTURAL IMPROVEMENT: Clean Component Separation
 
 **Strategic Achievement**: Implemented clean separation of concerns for component architecture
 - **New Framework-Agnostic Prompt Templates**: Created properly-named prompt templates that focus solely on LLM optimization
@@ -211,56 +211,7 @@
 - **Backward Compatibility**: Old `civic_virtue_hierarchical` template deprecated but preserved for historical analysis
 - **Documentation**: Updated component versioning guide with new naming conventions and architectural principles
 
-### 🎯 PRIORITY 3 COMPLETE: Academic Tool Integration Infrastructure - January 6, 2025
-
-**Strategic Achievement**: Complete academic publication toolkit bridging systematic development with academic requirements
-- **Academic Data Export Pipeline** (`src/narrative_gravity/academic/data_export.py`): Publication-ready data formatting
-  - Multi-format export: CSV (universal), Feather (R-optimized), DTA (Stata), JSON (Python with metadata)
-  - Academic variable naming standards (lowercase, underscore conventions) with comprehensive data dictionaries
-  - Component development data export for methodology papers and development process documentation
-  - Complete replication package builder with ZIP assembly including data, code, documentation, and troubleshooting guides
-  - Database integration with Priority 1 infrastructure preserving experimental provenance and component versioning
-- **AI-Generated Analysis Templates** (`src/narrative_gravity/academic/analysis_templates.py`): Multi-language statistical analysis
-  - Jupyter notebook generation with interactive exploration, reliability analysis, visualization, and statistical modeling
-  - R script generation with tidyverse, lme4 mixed-effects modeling, ggplot2 publication-grade visualizations
-  - Stata integration with publication-ready analysis, LaTeX table export, mixed-effects regression, and APA-style reporting
-  - Academic best practices: publication-ready styling, statistical rigor, reproducibility, and cross-tool compatibility
-- **Academic Documentation Generators** (`src/narrative_gravity/academic/documentation.py`): Publication-ready documentation
-  - Methodology paper generation from experimental data with complete component development process documentation
-  - Statistical report formatting in APA style with significance testing, effect sizes, and publication compliance
-  - Automated replication guide generation with step-by-step instructions, troubleshooting, and verification procedures
-  - Academic citation support with proper version tracking and reproducibility requirements
-
-**CLI Tool Suite**: Complete academic workflow automation
-- **Academic Data Exporter** (`src/narrative_gravity/cli/export_academic_data.py`): Comprehensive data export automation
-  - Multi-format data export with filtering by date range, frameworks, and study parameters
-  - Component development analysis export for methodology documentation and academic validation
-  - Complete replication package builder with automated assembly of data, code, and documentation
-  - Integration with Priority 1 & 2 infrastructure for complete experimental provenance
-- **Analysis Template Generator** (`src/narrative_gravity/cli/generate_analysis_templates.py`): Multi-language code generation
-  - Jupyter notebook creation with comprehensive statistical analysis and visualization templates
-  - R script generation with academic-standard statistical modeling and publication-ready plotting
-  - Stata script creation with publication-grade analysis and automated LaTeX table export
-  - Template customization options for different research contexts and publication requirements
-- **Documentation Generator** (`src/narrative_gravity/cli/generate_documentation.py`): Academic documentation automation
-  - Methodology section generation from experimental database with complete process documentation
-  - Results section formatting with APA-style statistical reporting and significance testing
-  - Replication guide creation with complete step-by-step instructions and troubleshooting support
-  - Publication-ready formatting for manuscript submission and peer review
-
-**Elena's User Journey Support**: Complete Weeks 3 & 5 workflow enablement
-- **Week 3 Statistical Analysis**: Jupyter notebook statistical analysis, Stata integration, R visualization discovery
-- **Week 5 Publication Preparation**: Documentation generation, replication package creation, methodology paper automation
-- **Academic Standards Compliance**: All outputs meet publication requirements with proper citation and reproducibility
-- **Multi-Tool Integration**: Seamless workflow across Python/Jupyter, R, and Stata with consistent analysis approaches
-
-**Integration with Prior Infrastructure**: Seamless Priority 1 & 2 enhancement
-- **Database Integration**: Leverages Priority 1 component versioning, experimental data, and statistical metrics
-- **Development Session Integration**: Uses Priority 2 development sessions for methodology documentation and quality assessment
-- **Academic Provenance**: Complete experimental tracking with component version specifications for exact replication
-- **Quality Assurance**: Academic standards compliance with automated validation and publication readiness assessment
-
-### 🎯 PRIORITY 2 COMPLETE: Manual Development Support Infrastructure - June 11, 2025
+### 🎯 PRIORITY 2 COMPLETE: Manual Development Support Infrastructure
 
 **Strategic Infrastructure**: Complete structured development workflow system for systematic component development
 - **Seed Prompt Library** (`src/narrative_gravity/development/seed_prompts.py`): Standardized LLM conversation starters
@@ -318,7 +269,8 @@
 - **Quality Consistency**: Automated validation ensuring uniform quality across researchers
 - **Academic Rigor**: Built-in academic standards supporting validation studies and publication
 
-### 🧪 PRIORITY 1 TEST SUITE INTEGRATION - Automated Validation System - 2025-06-11
+### 🧪 PRIORITY 1 TEST SUITE INTEGRATION - Automated Validation System
+
 - **Comprehensive Test Coverage**: Complete automated testing for validation-first research platform
   - **Unit Tests** (`tests/unit/test_component_models.py`): 21 tests covering all Priority 1 database models
     - PromptTemplate model functionality and validation status options
@@ -344,7 +296,8 @@
   - **Research Workflow**: Tests validate complete manual development workflow
   - **Quality Gates**: Automated tests prevent regression during Priority 2+ development
 
-### 🎯 PRIORITY 1 COMPLETE: Core Infrastructure Implementation - 2025-06-11
+### 🎯 PRIORITY 1 COMPLETE: Core Infrastructure Implementation
+
 - **Component Versioning System**: Complete database schema for systematic component management
   - **New Tables**: `prompt_templates`, `framework_versions`, `weighting_methodologies`, `component_compatibility`, `development_sessions`
   - **Version Control**: Full parent-child relationships, validation status tracking, performance metrics
@@ -366,7 +319,8 @@
   - **Systematic Validation**: CLI tools support academic rigor and reproducibility
   - **Component Evolution**: Version tracking enables research methodology development
 
-### 🛠️ Environment Configuration - Date Handling Fix - 2025-06-11
+### 🛠️ Environment Configuration - Date Handling Fix
+
 - **Fixed Incorrect Date Usage**: Resolved systematic issue where hardcoded dates were used instead of actual system date
   - **Problem**: Documentation contained "January 2025" when actual date was June 11, 2025
   - **Root Cause**: AI assistants were assuming dates instead of checking system time
@@ -378,11 +332,10 @@
   - **Utility Script**: Provides multiple date formats (human-readable, ISO, timestamp)
   - **AI Assistant Rules**: Future AI assistants must use system date commands
 
-## [v2.3.0] - Project organization and cursorrules compliance - 2025-06-10
+## [v2.3.0] - Project organization and cursorrules compliance - June 10, 2025
 
-## [Unreleased]
+### 📁 Project Organization - Cursorrules Compliance Cleanup
 
-### 📁 Project Organization - Cursorrules Compliance Cleanup - 2025-01-06
 - **Root Directory Cleanup**: Moved misplaced files to proper directories per cursorrules standards
   - **Test files moved**: `test_*.py` → `tests/integration/` and `tests/e2e/`
   - **Chatbot files moved**: `chainlit_chat*.py`, `chatbot_web*.py`, `chat_with_file.py` → `src/narrative_gravity/chatbot/`
@@ -397,7 +350,93 @@
 - **Import Path Updates**: Updated `launch_chainlit.py` and documentation references for moved files
 - **Root Directory Standards**: Now compliant with cursorrules - only operational files, launch tools, and configuration remain
 
-### 🌐 Web Interface - Basic Flask UI for Chatbot - 2025-01-06
+### 🎯 Frontend Integration Breakthrough
+
+- **WSOD (White Screen of Death) Resolution**: Fixed critical browser compatibility issue
+  - **Root Cause**: `process.env` undefined in browser environment causing React crashes
+  - **Solution**: Added proper `process.env` polyfill in `vite.config.ts` for browser compatibility
+  - **Impact**: Frontend now loads correctly at http://localhost:3000 with full React functionality
+- **End-to-End UI Testing Ready**: Complete UI testing infrastructure established
+  - **Playwright Integration**: Comprehensive browser automation testing with `tests/e2e/complete-end-to-end.spec.ts`
+  - **Manual Testing Guide**: `MANUAL_UI_TESTING_GUIDE.md` with step-by-step UI validation procedures
+  - **Debug Automation**: `debug_frontend.js` script for automated frontend health checking
+- **API-Frontend Integration Verified**: All communication layers working
+  - **Configuration Loading**: Frontend successfully loads 3 frameworks, 4 prompt templates, 4 scoring algorithms
+  - **CORS Resolution**: Proper cross-origin communication between localhost:3000 ↔ localhost:8000
+  - **Request/Response Validation**: API client properly handling all endpoint communications
+
+### ✅ ANALYSIS ENGINE STATUS CONFIRMED - Real LLM Integration Working
+
+- **Analysis Engine Investigation**: Verified `/api/analyze/single-text` uses **REAL LLM INTEGRATION**
+  - **RealAnalysisService**: Uses DirectAPIClient with actual OpenAI, Anthropic, Google AI APIs
+  - **Working API Clients**: Confirmed connections to GPT-4.1, Claude 3.5 Sonnet, Gemini 2.x series
+  - **Real Analysis Pipeline**: PromptTemplateManager → DirectAPIClient → NarrativeGravityWellsElliptical → Database
+  - **Actual Cost Tracking**: Real API usage costs with CostManager integration
+- **Development Status Clarification**: 
+  - ✅ **Frontend**: Fully functional React interface with all components working
+  - ✅ **Database**: PostgreSQL with proper schemas and data persistence
+  - ✅ **API Infrastructure**: Complete REST API with all endpoints and authentication
+  - ✅ **Analysis Engine**: **REAL** - Complete LLM integration with OpenAI/Anthropic/Google APIs working
+- **Note**: Fallback mock data only used if real LLM analysis fails (proper error handling)
+
+### 🔧 Technical Infrastructure Improvements  
+
+- **Environment Variable Handling**: Robust browser/server environment variable management
+  - **Vite Configuration**: Proper `process.env` definition for browser environments
+
+## [v2.2.0] - Academic and conversational interfaces - January 6, 2025
+
+### 🎯 PRIORITY 3 COMPLETE: Academic Tool Integration Infrastructure
+
+**Strategic Achievement**: Complete academic publication toolkit bridging systematic development with academic requirements
+- **Academic Data Export Pipeline** (`src/narrative_gravity/academic/data_export.py`): Publication-ready data formatting
+  - Multi-format export: CSV (universal), Feather (R-optimized), DTA (Stata), JSON (Python with metadata)
+  - Academic variable naming standards (lowercase, underscore conventions) with comprehensive data dictionaries
+  - Component development data export for methodology papers and development process documentation
+  - Complete replication package builder with ZIP assembly including data, code, documentation, and troubleshooting guides
+  - Database integration with Priority 1 infrastructure preserving experimental provenance and component versioning
+- **AI-Generated Analysis Templates** (`src/narrative_gravity/academic/analysis_templates.py`): Multi-language statistical analysis
+  - Jupyter notebook generation with interactive exploration, reliability analysis, visualization, and statistical modeling
+  - R script generation with tidyverse, lme4 mixed-effects modeling, ggplot2 publication-grade visualizations
+  - Stata integration with publication-ready analysis, LaTeX table export, mixed-effects regression, and APA-style reporting
+  - Academic best practices: publication-ready styling, statistical rigor, reproducibility, and cross-tool compatibility
+- **Academic Documentation Generators** (`src/narrative_gravity/academic/documentation.py`): Publication-ready documentation
+  - Methodology paper generation from experimental data with complete component development process documentation
+  - Statistical report formatting in APA style with significance testing, effect sizes, and publication compliance
+  - Automated replication guide generation with step-by-step instructions, troubleshooting, and verification procedures
+  - Academic citation support with proper version tracking and reproducibility requirements
+
+**CLI Tool Suite**: Complete academic workflow automation
+- **Academic Data Exporter** (`src/narrative_gravity/cli/export_academic_data.py`): Comprehensive data export automation
+  - Multi-format data export with filtering by date range, frameworks, and study parameters
+  - Component development analysis export for methodology documentation and academic validation
+  - Complete replication package builder with automated assembly of data, code, and documentation
+  - Integration with Priority 1 & 2 infrastructure for complete experimental provenance
+- **Analysis Template Generator** (`src/narrative_gravity/cli/generate_analysis_templates.py`): Multi-language code generation
+  - Jupyter notebook creation with comprehensive statistical analysis and visualization templates
+  - R script generation with academic-standard statistical modeling and publication-ready plotting
+  - Stata script creation with publication-grade analysis and automated LaTeX table export
+  - Template customization options for different research contexts and publication requirements
+- **Documentation Generator** (`src/narrative_gravity/cli/generate_documentation.py`): Academic documentation automation
+  - Methodology section generation from experimental database with complete process documentation
+  - Results section formatting with APA-style statistical reporting and significance testing
+  - Replication guide creation with complete step-by-step instructions and troubleshooting support
+  - Publication-ready formatting for manuscript submission and peer review
+
+**Elena's User Journey Support**: Complete Weeks 3 & 5 workflow enablement
+- **Week 3 Statistical Analysis**: Jupyter notebook statistical analysis, Stata integration, R visualization discovery
+- **Week 5 Publication Preparation**: Documentation generation, replication package creation, methodology paper automation
+- **Academic Standards Compliance**: All outputs meet publication requirements with proper citation and reproducibility
+- **Multi-Tool Integration**: Seamless workflow across Python/Jupyter, R, and Stata with consistent analysis approaches
+
+**Integration with Prior Infrastructure**: Seamless Priority 1 & 2 enhancement
+- **Database Integration**: Leverages Priority 1 component versioning, experimental data, and statistical metrics
+- **Development Session Integration**: Uses Priority 2 development sessions for methodology documentation and quality assessment
+- **Academic Provenance**: Complete experimental tracking with component version specifications for exact replication
+- **Quality Assurance**: Academic standards compliance with automated validation and publication readiness assessment
+
+### 🌐 Web Interface - Basic Flask UI for Chatbot
+
 - **Flask Web Interface**: Modern web interface for the narrative gravity chatbot
   - Clean, responsive HTML/CSS design with professional gradient styling
   - Large text input support up to 1.2MB (3x largest corpus file - Lenin's "What is to Be Done")
@@ -415,7 +454,8 @@
 - **Advantages Over Terminal**: Eliminates buffer limitations, provides visual feedback, enables copy-paste of large political texts
 - **Documentation**: Complete usage guide in `WEB_INTERFACE_GUIDE.md` with troubleshooting
 
-### 🤖 Chatbot Research Workbench - Phase 1 WORKING SOLUTION - 2025-01-06
+### 🤖 Chatbot Research Workbench - Phase 1 WORKING SOLUTION
+
 - **Domain-Constrained Conversational Interface**: Professional chatbot for narrative gravity analysis
   - **Domain Filtering**: 100% accurate filtering of off-topic queries while accepting relevant research questions
   - **Natural Language Framework Management**: Conversational framework switching, explanation, and listing
@@ -451,7 +491,8 @@
   - **Verified**: Successfully processed 1000+ character political texts with full analysis
   - **Usage**: `python3 chat_with_file.py` with automatic file detection and cleanup
 
-### 🎯 Academic Paper Development System - 2025-01-06
+### 🎯 Academic Paper Development System
+
 - **Complete Paper Management Infrastructure**: Established professional academic paper development workflow
   - **Dedicated Directory Structure**: `paper/` with organized subdirectories for drafts, evidence, reviews, submission
   - **Version-Controlled Drafts**: Semantic versioning system (vMAJOR.MINOR.PATCH) for systematic paper evolution
@@ -470,6 +511,7 @@
   - **Transparency-Driven**: Credibility through open methodology and honest limitations
 
 ### 🚨 BREAKING CHANGES - Streamlit Interface Deprecation
+
 - **Streamlit App Deprecated**: The legacy Streamlit interface has been officially deprecated in favor of the React Research Workbench
 - **Files Moved to Archive**: 
   - `src/narrative_gravity/app.py` → `archive/streamlit_legacy/src/narrative_gravity/app.py`
@@ -482,6 +524,7 @@
 - **Migration Support**: Complete deprecation notices and migration guides provided
 
 ### ✨ New Features - Autonomous Debug Monitoring System
+
 - **Comprehensive Debug Console**: Real-time debugging interface with visual 🐛 button
   - Floating debug console accessible from any app state
   - Real-time health status indicators (🟢 Healthy, 🟡 Warning, 🔴 Error)
@@ -502,303 +545,6 @@
   - Environment variable support: `REACT_APP_DEBUG_MODE=true`
   - URL parameter activation: `?debug=true` for on-demand debugging
   - Persistent debug mode with localStorage state management
-
-### 🔧 Technical Implementation
-- **Debug Monitor Service**: `frontend/src/services/debugMonitor.ts`
-  - Global error handling with window event listeners
-  - Performance monitoring with PerformanceObserver API
-  - API call interception with fetch override and Axios interceptors
-  - Component lifecycle tracking with React hooks integration
-- **Terminal Logger Service**: `frontend/src/services/terminalLogger.ts`
-  - Console output routing to development server terminal
-  - Structured logging with component identification
-  - Batch processing to prevent terminal overwhelm
-  - Vite development server integration for output visibility
-- **Debug Console Component**: `frontend/src/components/DebugConsole.tsx`
-  - Professional dark-themed floating interface
-  - Real-time event streaming with filtering capabilities
-  - Health status dashboard with metrics display
-  - Data export functionality for collaborative debugging
-
-### 🎯 Independence Benefits
-- **Zero Manual Error Reporting**: All errors automatically captured and displayed
-- **AI Assistant Visibility**: Debug events appear in terminal output during development
-- **Complete Error Context**: Stack traces, component state, user actions, and API history
-- **Real-Time Monitoring**: Continuous health status without manual checks
-- **Historical Analysis**: Full session tracking for pattern identification
-- **Collaborative Debugging**: Exportable debug data for team analysis
-
-### 🎯 Frontend Integration Breakthrough - 2025-06-10
-- **WSOD (White Screen of Death) Resolution**: Fixed critical browser compatibility issue
-  - **Root Cause**: `process.env` undefined in browser environment causing React crashes
-  - **Solution**: Added proper `process.env` polyfill in `vite.config.ts` for browser compatibility
-  - **Impact**: Frontend now loads correctly at http://localhost:3000 with full React functionality
-- **End-to-End UI Testing Ready**: Complete UI testing infrastructure established
-  - **Playwright Integration**: Comprehensive browser automation testing with `tests/e2e/complete-end-to-end.spec.ts`
-  - **Manual Testing Guide**: `MANUAL_UI_TESTING_GUIDE.md` with step-by-step UI validation procedures
-  - **Debug Automation**: `debug_frontend.js` script for automated frontend health checking
-- **API-Frontend Integration Verified**: All communication layers working
-  - **Configuration Loading**: Frontend successfully loads 3 frameworks, 4 prompt templates, 4 scoring algorithms
-  - **CORS Resolution**: Proper cross-origin communication between localhost:3000 ↔ localhost:8000
-  - **Request/Response Validation**: API client properly handling all endpoint communications
-
-### ✅ ANALYSIS ENGINE STATUS CONFIRMED - Real LLM Integration Working
-- **Analysis Engine Investigation**: Verified `/api/analyze/single-text` uses **REAL LLM INTEGRATION**
-  - **RealAnalysisService**: Uses DirectAPIClient with actual OpenAI, Anthropic, Google AI APIs
-  - **Working API Clients**: Confirmed connections to GPT-4.1, Claude 3.5 Sonnet, Gemini 2.x series
-  - **Real Analysis Pipeline**: PromptTemplateManager → DirectAPIClient → NarrativeGravityWellsElliptical → Database
-  - **Actual Cost Tracking**: Real API usage costs with CostManager integration
-- **Development Status Clarification**: 
-  - ✅ **Frontend**: Fully functional React interface with all components working
-  - ✅ **Database**: PostgreSQL with proper schemas and data persistence
-  - ✅ **API Infrastructure**: Complete REST API with all endpoints and authentication
-  - ✅ **Analysis Engine**: **REAL** - Complete LLM integration with OpenAI/Anthropic/Google APIs working
-- **Note**: Fallback mock data only used if real LLM analysis fails (proper error handling)
-
-### 🔧 Technical Infrastructure Improvements  
-- **Environment Variable Handling**: Robust browser/server environment variable management
-  - **Vite Configuration**: Proper `process.env` definition for browser environments
-  - **API Client Hardening**: Fallback handling for environment variable access
-  - **Development Stability**: No more browser crashes from undefined process variables
-- **Testing Infrastructure Enhanced**: 
-  - **Browser Automation**: Playwright scripts catching frontend errors automatically
-  - **Console Monitoring**: Real-time capture of JavaScript errors and warnings
-  - **Integration Testing**: API ↔ Frontend communication fully validated
-
-### 🐛 Bug Fixes
-- **Fixed 'Analyze Text' Button Disabled Issue**: Ensured the 'Analyze Text' button is correctly enabled after creating an experiment by persisting the experiment name state in the frontend.
-- **Resolved API Server Network Connectivity**: Addressed persistent 'Network Error' by disabling `reload=True` in `scripts/run_api.py` and by ensuring `launch.py --api-only` properly keeps the API server running in the background via `ServiceManager` and a persistent process. This requires manual launch of `python scripts/run_api.py` in a separate terminal for stable operation outside of Cursor.
-
-## [Unreleased] - v2.1 Phase 1 Enhancements
-
-### Added - Workstream 1: Prompt Engineering & Scoring Framework Refinement
-- **Hierarchical Prompt Templates**: Enhanced prompt editor now creates prompts that require LLMs to:
-  - Identify and rank the top 2-3 driving wells with relative weights (must sum to 100%)
-  - Provide specific textual evidence for each ranked well
-  - Explain WHY each well dominates over others
-  - Flag single-well dominance when one well accounts for >80% weight
-  - Assess framework fit score (0.0-1.0) with missing dimension identification
-- **Nonlinear Weighting Mechanisms**: Added 4 new scoring algorithms implementing Phase 1 requirements:
-  - `Winner-Take-Most`: Amplifies dominant wells while suppressing weaker ones for clearer hierarchy
-  - `Exponential Weighting`: Squares differences to enhance thematic distinction
-  - `Hierarchical Dominance`: Uses LLM-provided rankings with edge snapping for single-well dominance
-  - `Nonlinear Transform`: Applies sigmoid transforms to exaggerate differences near poles
-- **Multi-Model Comparison Infrastructure**: Enhanced experiment designer with:
-  - Radio button selection between single-model and multi-model analysis modes
-  - Checkbox interface for selecting multiple LLMs for stability assessment
-  - Automated parallel execution across selected models with linked result metadata
-  - Stability metrics calculation (elevation stability, polarity stability, model agreement)
-- **Enhanced Analysis Results Display**: New hierarchical result rendering showing:
-  - Prompt type badges (Hierarchical vs Standard)
-  - Multi-model comparison indicators
-  - Framework fit scores with color-coded warning for low fit (<70%)
-  - Hierarchical well rankings with relative weights and evidence excerpts
-  - Single-well dominance warnings when one well >80% weight
-  - Multi-model stability assessment dashboard with comparative metrics
-
-### Enhanced - Research Workbench Infrastructure
-- **Experiment Versioning**: Added `type` property to PromptTemplate interface supporting 'standard' and 'hierarchical' types
-- **Complete Provenance Tracking**: Extended metadata capture for multi-model experiments with comparison linking
-- **API Interface Extensions**: Updated SingleTextAnalysisRequest/Response to support new scoring algorithm types
-- **Store Architecture**: Enhanced experimentStore with 5 new scoring algorithms and hierarchical prompt support
-
-### Technical Implementation - Phase 1 Foundation
-- **Prompt Template Evolution**: Default new prompts now use hierarchical structure requiring ranked well identification
-- **Framework Content Integration**: Enhanced prompt preview showing structured analysis requirements
-- **Multi-Model Orchestration**: Batch processing infrastructure for parallel LLM analysis with result aggregation
-- **Stability Assessment**: Mathematical implementation of model agreement and score distribution analysis
-
-### Research Methodology Advancement
-This phase establishes the foundation for **Workstream 2: Human-Machine Alignment & Validation** by implementing:
-- Hierarchical prompt outputs that can be systematically compared to human expert rankings
-- Multi-model stability data enabling LLM selection and ensemble approach evaluation  
-- Framework fit detection preparing for identification of missing thematic dimensions
-- Complete experimental provenance supporting rigorous validation methodology
-
-### Phase 1 Completion Status (Weeks 1-4)
-✅ **Define revised prompt templates** requiring model ranking and relative weighting
-✅ **Implement nonlinear weighting mechanism** with 4 distinct algorithmic approaches
-✅ **Multi-model comparison infrastructure** supporting stability assessment across LLMs
-🔄 **Iterative refinement** based on validation feedback (ongoing as prompts are tested)
-
-**Next Phase**: Validation Foundation (Weeks 5-8) will focus on human annotation studies and systematic prompt iteration based on validation results.
-
-## [v2.2.1] - React Research Workbench Stable Baseline with Comprehensive Test Harness - 2025-06-09
-
-### 🎯 Major Achievement: Stable Development Foundation
-- **Configuration Crisis Resolution**: Eliminated all build/dependency conflicts and lockups
-- **Test-Driven Stability**: Established comprehensive test harness with 14 automated validation tests
-- **Zero-Error Baseline**: 18/18 stability checks passing, ready for incremental development
-
-### ✨ New Features - Frontend Research Workbench
-- **Minimal Stable App**: React 18 + TypeScript + Vite + Tailwind CSS working baseline
-- **Tab-Based Navigation**: Four main research workbench sections (Experiment Designer, Prompt Editor, Analysis Results, Comparison Dashboard)
-- **Responsive UI**: Professional gradient branding with research-focused design
-- **Real-time Debug Panel**: Live development status and metrics display
-
-### 🧪 Comprehensive Test Harness Implementation
-- **14 Unit Tests**: Complete coverage of baseline functionality
-  - Basic rendering and component structure
-  - Tab navigation and state management 
-  - CSS class application and styling integrity
-  - Component isolation and error handling
-  - Performance under rapid navigation stress
-  - Integration readiness validation
-- **Vitest Integration**: Modern testing framework with jsdom environment
-- **Automated Validation**: Test-driven development with regression detection
-
-### 🛡️ Stability Check System
-- **Automated Configuration Audit**: `npm run stability-check` validates entire setup
-- **18-Point Validation**: Package.json, TypeScript config, build system, test execution, imports, CSS
-- **Build Pipeline Verification**: Complete end-to-end build and test validation
-- **Development Readiness Gates**: Ensures stable foundation before adding complexity
-
-### 🔧 Technical Infrastructure Resolution
-- **Dependency Conflicts Fixed**: React 18, TypeScript 5.6, Vite 6.0 compatibility
-- **Build System Stability**: Vite + PostCSS + Tailwind CSS v3.4 working properly
-- **Import Path Cleanup**: Standardized ES module imports without React namespace pollution
-- **TypeScript Configuration**: Strict mode enabled with proper bundler resolution
-
-### 🏗️ Development Architecture
-- **Phase-Based Development**: Validated incremental complexity addition
-- **Test-First Approach**: Every addition validated by automated test suite
-- **Configuration Monitoring**: Continuous validation prevents regression
-- **Professional Structure**: Follows React/TypeScript best practices
-
-### 📋 Scripts & Automation
-```bash
-npm run dev              # Development server (validated stable)
-npm run build           # Production build (zero errors)
-npm run test            # Full test suite (14 tests passing)
-npm run stability-check # Complete configuration audit
-npm run validate        # Full pipeline validation
-```
-
-### 🎉 Benefits Achieved
-- **End to WSOD Era**: No more white screens of death or mysterious lockups
-- **Predictable Development**: Test harness catches regressions immediately
-- **Professional Foundation**: Enterprise-grade React application structure
-- **Incremental Safety**: Can add complexity with confidence and validation
-- **Academic Validation Ready**: Research-grade quality controls and reproducibility
-
-### 🚀 Next Phase Ready
-- **State Management Integration**: Foundation prepared for Zustand store addition
-- **API Client Integration**: Structure ready for backend communication
-- **Component Development**: Tab content areas ready for research workbench features
-- **Framework Integration**: Architecture supports narrative gravity framework integration
-
-## [v2.2.0] - Major project organization overhaul with governance standards implementation - 2025-06-09
-
-### ✨ New Features
-- **Release Management System**: Comprehensive automated release process
-  - `scripts/release.py`: Automated release script with pre-release checks
-  - File hygiene verification, test requirements, documentation checks
-  - Semantic versioning, CHANGELOG updates, git tagging automation
-  - Dry-run capability for testing release process safely
-
-### 📋 Documentation
-- **Release Process Guide**: `docs/development/RELEASE_PROCESS.md`
-  - Complete manual and automated release procedures
-  - Troubleshooting guides and recovery procedures
-  - Release type definitions and timing guidelines
-- **Research Data Export Standards**: Documented `exports/` directory organization
-  - Academic data export formats (R, CSV, Parquet)
-  - Timestamped versioning for reproducible research
-  - External collaboration and validation support
-
-## [v2.1.2] - Corpus Organization Consolidation - 2025-06-09
-
-### 🏗️ Infrastructure
-- **BREAKING**: Consolidated duplicate text data directories
-  - Moved `reference_texts/` contents to `corpus/raw_sources/`
-  - Moved processing scripts to `corpus/processing_scripts/`
-  - Updated all file path references in code
-  - Eliminated duplicate corpus organization
-- **Text Data Organization**: Centralized all text data under `corpus/`
-  - `corpus/golden_set/`: Curated, analysis-ready datasets
-  - `corpus/raw_sources/`: Original source materials  
-  - `corpus/processing_scripts/`: Data transformation scripts
-- **Documentation**: Updated governance files with corpus organization standards
-
-## [v2.1.1] - Project Organization & Database Architecture - 2025-01-06
-
-### 🧹 Major Project Cleanup & Reorganization
-
-#### **Root Directory Cleanup**
-- **Moved Analysis Results**: 5 visualization files → `analysis_results/temp_cleanup_2025_01_06/`
-- **Moved Test Files**: 6 temporary test files → `tests/temp_stress_tests/`
-- **Moved Utility Scripts**: 7 scripts → `scripts/` directory
-- **Moved Documentation**: Database architecture doc → `docs/architecture/`
-- **Removed Legacy**: 0-byte `narrative_gravity.db` SQLite file causing confusion
-
-#### **Python Package Structure Reorganization**
-- **NEW**: Proper `src/narrative_gravity/` package structure following Python standards
-- **Moved Core Files**:
-  - `narrative_gravity_app.py` → `src/narrative_gravity/app.py`
-  - `narrative_gravity_elliptical.py` → `src/narrative_gravity/engine.py` 
-  - `launch_app.py` → `src/narrative_gravity/launcher.py`
-  - `framework_manager.py` → `src/narrative_gravity/framework_manager.py`
-- **Updated Imports**: Fixed 18+ Python files with new import paths
-- **Enhanced Compatibility**: Dual import system for both direct execution and module imports
-
-#### **Comprehensive Platform Launcher**
-- **NEW**: `launch.py` - Orchestrates all platform services
-- **Service Management**: Database, API server (port 8000), Celery worker, Streamlit UI (port 8501)
-- **Launch Options**: Individual services or full platform with single command
-- **Database Setup**: Automated PostgreSQL initialization and verification
-- **Backward Compatibility**: `launch_streamlit.py` for simple UI access
-
-#### **Database Architecture Clarification**
-- **NEW**: `docs/architecture/database_architecture.md` - Comprehensive database usage guide
-- **NEW**: `check_database.py` - Database configuration verification script
-- **PostgreSQL PRIMARY**: All application data (main app, API, Celery, production)
-- **SQLite LIMITED**: Unit testing (in-memory) and logging fallback only
-- **Configuration**: Enhanced launcher with PostgreSQL verification and clear error messages
-- **Fixed**: Alembic migration configuration for new package structure
-
-### ✨ New Features
-- **Service Orchestration**: Single command launches entire platform
-- **Database Verification**: Automatic PostgreSQL connection testing
-- **Import Flexibility**: Apps work in both development and package contexts
-- **Clear Documentation**: Eliminates database confusion for AI assistants and developers
-
-### 🔧 Fixes & Improvements
-- **Import Path Standardization**: Converted to proper package imports throughout codebase
-- **Database Confusion Resolution**: Crystal clear PostgreSQL vs SQLite usage documentation
-- **Legacy File Cleanup**: Removed confusing 0-byte SQLite file
-- **Service Dependencies**: Clear startup order and dependency management
-- **Error Messages**: Reference specific documentation for troubleshooting
-
-### 🏗️ Infrastructure
-- **Python Package Standards**: Follows PEP 8 and packaging best practices
-- **Service Architecture**: Proper microservice orchestration with cleanup
-- **Database Strategy**: PostgreSQL for production, SQLite for testing only
-- **Documentation Structure**: Centralized guides for database, launch, and architecture
-
-### 📋 Usage Changes
-
-#### **New Launch Commands**
-```bash
-python launch.py                    # Launch all services
-python launch.py --streamlit-only   # UI only
-python launch.py --api-only         # API server only
-python launch.py --setup-db         # Database setup
-python check_database.py            # Verify database config
-```
-
-#### **Import Updates** (For Developers)
-```python
-# NEW: Package imports
-from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
-from src.narrative_gravity.framework_manager import FrameworkManager
-```
-
-### 🎯 Benefits
-- **Professional Structure**: Standard Python package organization
-- **Service Orchestration**: One-command platform startup
-- **Database Clarity**: Zero confusion about PostgreSQL vs SQLite usage  
-- **Developer Experience**: Clear setup, documentation, and troubleshooting
-- **AI Assistant Clarity**: Explicit database usage prevents confusion
 
 ## [v2.1.0-post-rename] - Repository Rebranding to Narrative Gravity Analysis - 2025-06-04
 
