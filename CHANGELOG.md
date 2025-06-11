@@ -384,7 +384,7 @@
 - **Environment Variable Handling**: Robust browser/server environment variable management
   - **Vite Configuration**: Proper `process.env` definition for browser environments
 
-## [v2.2.0] - Academic and conversational interfaces - January 6, 2025
+## [v2.2.0] - Academic and conversational interfaces - June 11, 2025
 
 ### 🎯 PRIORITY 3 COMPLETE: Academic Tool Integration Infrastructure
 
@@ -899,16 +899,16 @@
 - **Documentation Reorganization**: Enhanced docs directory structure
 - **Project Structure Updates**: Comprehensive documentation of new organization
 
-## [Pre-1.0 Development] - Foundation & Early Development - 2025-01-03 to 2025-05-21
+## [Pre-1.0 Development] - Foundation & Early Development - 2025-05-20 to 2025-05-21
 
-### Initial Development Phase (January 2025)
+### Initial Development Phase (May 2025)
 - **bd5a2aa**: **Initial Commit** - Moral Gravity Well visualization with polar plot, legend, and summary text
 - **1cdcf68**: Added README with usage instructions and basic project documentation
 - **f5796ef**: Model information integration in JSON output and visualization
 - **c6d2762**: Visual refinements - fine-tuned Resentment label positioning to avoid overlap
 - **d57f73f**: Enhanced metadata - prompt versioning and model information in titles
 
-### Core Feature Development (January-May 2025)
+### Core Feature Development (May 2025)
 - **79fd9c7**: **🎯 First Major Milestone** - Complete first run across 9 LLMs on Jefferson's First Inaugural
 - **393d9f1**: Professional foundation - copyright notices added to project files
 - **52ace8d**: **✨ Multi-model comparison capability** - fundamental advancement enabling comparative analysis
@@ -928,7 +928,7 @@
 - **Comparative Framework**: Multi-model validation methodology
 - **Academic Standards**: Publication-quality output and documentation practices
 
-## [Documentation Cleanup] - 2025-01-06
+## [Documentation Cleanup] - June 10, 2025
 
 ### Removed
 - **Redundant paper file**: docs/narrative_gravity_wells_paper.md (superseded by paper/ directory)
@@ -994,7 +994,7 @@
 - Database: PostgreSQL with complete v2.1 schema supporting hierarchical analysis
 - All tests passing: end-to-end workflow, frontend integration, and data consistency 
 
-## [LLM Validation Planning & Documentation] - 2025-01-06
+## [LLM Validation Planning & Documentation] - June 10, 2025
 
 ### Added
 - **LLM Validation Workbench Requirements**: Comprehensive 10-section requirements document (`docs/development/LLM_VALIDATION_WORKBENCH_REQUIREMENTS.md`)
