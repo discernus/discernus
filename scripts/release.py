@@ -139,8 +139,8 @@ class ReleaseManager:
             self.error("pytest not available. Install with: pip install pytest")
             return False
         
-        # Run tests with coverage if available
-        test_cmd = ['python3', '-m', 'pytest', '-v']
+        # Run tests with coverage if available, excluding archive directories
+        test_cmd = ['python3', '-m', 'pytest', '-v', '--ignore=archive/', '--ignore=tests/temp_stress_tests/']
         
         # Check if pytest-cov is available
         success, _ = self.run_command(['python3', '-c', 'import pytest_cov'])
