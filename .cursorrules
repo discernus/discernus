@@ -61,14 +61,18 @@ When database issues arise:
 ## Service Architecture
 
 ### Port Allocation
-- **8501**: Streamlit UI (main interface)
+- **3000**: React Research Workbench (main interface)
 - **8000**: FastAPI server (REST API + docs at /api/docs)
+- **8002**: Chainlit Chat Interface (conversational analysis)  
 - **5432**: PostgreSQL database
 - **6379**: Redis (if using Celery)
+- **8501**: Streamlit UI (DEPRECATED - moved to archive/)
 
 ### Launch Patterns
-- **Full platform**: `python launch.py`
-- **Individual services**: Use --streamlit-only, --api-only, --celery-only flags
+- **Backend services**: `python launch.py`
+- **React frontend**: `cd frontend && npm run dev`
+- **Individual services**: Use --api-only, --celery-only, --chainlit-only flags
+- **Frontend info**: `python launch.py --frontend-info`
 - **Database setup**: `python launch.py --setup-db`
 
 ## Code Standards

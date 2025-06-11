@@ -134,6 +134,7 @@ Examples:
   python launch.py                    # Launch backend services
   python launch.py --frontend-info    # Show React frontend information
   python launch.py --api-only         # Launch only API server
+  python launch.py --chainlit-only    # Launch only Chainlit chat interface
   python launch.py --setup-db         # Setup database only
         """
     )
@@ -144,6 +145,8 @@ Examples:
                        help='Launch only the API server')
     parser.add_argument('--celery-only', action='store_true',
                        help='Launch only the Celery worker')
+    parser.add_argument('--chainlit-only', action='store_true',
+                       help='Launch only the Chainlit chat interface')
     parser.add_argument('--setup-db', action='store_true',
                        help='Setup database and exit')
     parser.add_argument('--no-db-check', action='store_true',
@@ -208,6 +211,11 @@ Examples:
         elif args.celery_only:
             print("🔄 Starting Celery worker only...")
             services_to_start.append(("Celery", [sys.executable, "scripts/run_celery.py"]))
+        elif args.chainlit_only:
+            print("💬 Starting Chainlit chat interface only...")
+            print("🌐 Chainlit Interface: http://localhost:8002")
+            print("📱 Advanced conversational analysis interface")
+            services_to_start.append(("Chainlit", [sys.executable, "launch_chainlit.py"]))
         else:
             # Default to full platform launch if no specific service requested
             print("🚀 Starting backend services...")

@@ -1,0 +1,50 @@
+{
+  "framework_name": "fukuyama_identity",
+  "display_name": "Fukuyama Identity Framework",
+  "version": "v2025.01.07",
+  "description": "The Fukuyama Identity Framework analyzes how political narratives either strengthen or fragment the civic culture necessary for pluralistic democracy. Based on Francis Fukuyama's theoretical insights about identity, recognition, and democratic sustainability, it focuses on three core dipoles that capture the psychological and institutional dynamics central to democratic health.",
+  "dipoles": [
+    {
+      "name": "Identity Foundation",
+      "description": "What defines legitimate membership in the political community",
+      "positive": {
+        "name": "Creedal Identity",
+        "description": "Defines citizenship through shared commitment to democratic principles—constitutionalism, rule of law, human equality. Emphasizes voluntary allegiance to civic ideals rather than inherited characteristics.",
+        "language_cues": ["constitutional principles", "shared values", "civic education", "naturalization", "merit-based citizenship", "democratic ideals", "voluntary commitment", "universal rights", "civic oath", "constitutional patriotism"]
+      },
+      "negative": {
+        "name": "Ethnic Identity", 
+        "description": "Defines belonging through blood, soil, cultural inheritance, or religious tradition. Treats citizenship as an inherited status rather than a chosen commitment.",
+        "language_cues": ["blood and soil", "ancestral heritage", "cultural purity", "birthright citizenship", "real Americans", "our people", "they don't belong", "foreign influence", "traditional values", "native born"]
+      }
+    },
+    {
+      "name": "Recognition Dynamics",
+      "description": "How does the demand for recognition affect social solidarity",
+      "positive": {
+        "name": "Integrative Recognition",
+        "description": "Acknowledges particular experiences while maintaining universal human dignity. Builds broader community by expanding the circle of moral concern without creating zero-sum competition.",
+        "language_cues": ["shared humanity", "common citizenship", "universal dignity", "mutual understanding", "bridge-building", "inclusive community", "expanding circle", "common ground", "unity in diversity", "moral progress"]
+      },
+      "negative": {
+        "name": "Fragmentary Recognition",
+        "description": "Atomizes society into competing identity groups, each claiming moral superiority through victimization narratives. Creates zero-sum competition for status rather than seeking common ground.",
+        "language_cues": ["group grievances", "victimization hierarchy", "identity-based claims", "us versus them", "moral scorekeeping", "oppression Olympics", "separate communities", "irreconcilable differences", "lived experience", "zero-sum competition"]
+      }
+    },
+    {
+      "name": "Psychological Motivation",
+      "description": "How does the narrative channel the human need for recognition",
+      "positive": {
+        "name": "Democratic Thymos",
+        "description": "Represents healthy demand for equal dignity channeled through civic participation and mutual respect. Seeks recognition through contribution to the common good rather than dominance over others.",
+        "language_cues": ["civic virtue", "equal dignity", "procedural fairness", "mutual respect", "common good", "civic participation", "democratic norms", "institutional legitimacy", "public service", "civic duty"]
+      },
+      "negative": {
+        "name": "Megalothymic Thymos",
+        "description": "Represents destructive desire for superior recognition through dominance over other groups. Converts natural human need for dignity into zero-sum competition for status.",
+        "language_cues": ["group superiority", "dominance", "contempt for opponents", "zero-sum competition", "status hierarchy", "moral superiority", "righteous anger", "justified dominance", "we're better than", "they deserve less"]
+      }
+    }
+  ]
+}

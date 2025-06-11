@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Narrative Gravity Analysis Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .framework-section {
+            background: #f8fafc;
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .framework-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .current-framework {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .framework-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        select {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            background: white;
+            font-size: 14px;
+        }
+        
+        .switch-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        
+        .switch-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .main-content {
+            padding: 30px;
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        .input-section h3 {
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .text-input {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .input-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #718096;
+        }
+        
+        .char-count {
+            font-weight: 500;
+        }
+        
+        .max-size {
+            color: #e53e3e;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .analyze-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .analyze-btn:hover {
+            background: #38a169;
+            transform: translateY(-1px);
+        }
+        
+        .analyze-btn:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .clear-btn {
+            background: #e2e8f0;
+            color: #4a5568;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .clear-btn:hover {
+            background: #cbd5e0;
+        }
+        
+        .response-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .response-content {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            white-space: pre-wrap;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #fed7d7;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .success {
+            background: #c6f6d5;
+            color: #2f855a;
+            border: 1px solid #9ae6b4;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .response-meta {
+            background: #edf2f7;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #4a5568;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Narrative Gravity Analysis Chatbot</h1>
+            <p>Analyze political discourse using intelligent frameworks</p>
+        </div>
+        
+        <div class="framework-section">
+            <div class="framework-info">
+                <div class="current-framework">
+                    Current Framework: <span id="current-framework">{{ current_framework }}</span>
+                </div>
+                <div class="framework-selector">
+                    <label for="framework-select">Switch to:</label>
+                    <select id="framework-select">
+                        {% for framework in frameworks %}
+                        <option value="{{ framework.name }}">{{ framework.name.replace('_', ' ').title() }}</option>
+                        {% endfor %}
+                    </select>
+                    <button class="switch-btn" onclick="switchFramework()">Switch</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <h3>📝 Enter Political Text or Query</h3>
+                <textarea 
+                    id="text-input" 
+                    class="text-input" 
+                    placeholder="Paste political speeches, statements, or ask questions like:
+• What is the Fukuyama Identity framework?
+• Explain Megalothymic Thymos
+• Switch to Civic Virtue framework
+
+Or paste any political discourse up to 1.2MB for analysis..."
+                    oninput="updateCharCount()"
+                ></textarea>
+                
+                <div class="input-meta">
+                    <span class="char-count" id="char-count">0 characters</span>
+                    <span>Maximum: 1.2MB (1,258,291 characters)</span>
+                </div>
+                
+                <div class="buttons">
+                    <button class="analyze-btn" id="analyze-btn" onclick="analyzeText()">
+                        🧠 Analyze
+                    </button>
+                    <button class="clear-btn" onclick="clearText()">
+                        🗑️ Clear
+                    </button>
+                </div>
+            </div>
+            
+            <div class="response-section">
+                <h3>🤖 Chatbot Response</h3>
+                <div id="response-container">
+                    <div class="response-content">
+                        Ready to analyze political discourse! Enter text above or ask questions about the frameworks.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const MAX_CHARS = 1258291; // 1.2MB in characters (approximate)
+        
+        function updateCharCount() {
+            const input = document.getElementById('text-input');
+            const count = document.getElementById('char-count');
+            const analyzeBtn = document.getElementById('analyze-btn');
+            
+            const length = input.value.length;
+            count.textContent = `${length.toLocaleString()} characters`;
+            
+            if (length > MAX_CHARS) {
+                count.classList.add('max-size');
+                analyzeBtn.disabled = true;
+            } else {
+                count.classList.remove('max-size');
+                analyzeBtn.disabled = false;
+            }
+        }
+        
+        function clearText() {
+            document.getElementById('text-input').value = '';
+            updateCharCount();
+        }
+        
+        async function analyzeText() {
+            const input = document.getElementById('text-input').value.trim();
+            const responseContainer = document.getElementById('response-container');
+            const analyzeBtn = document.getElementById('analyze-btn');
+            
+            if (!input) {
+                showError('Please enter some text to analyze.');
+                return;
+            }
+            
+            // Show loading
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = '🧠 Analyzing...';
+            responseContainer.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    Processing with intelligent domain classification...
+                </div>
+            `;
+            
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: input })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResponse(data);
+                } else {
+                    showError(data.error || 'An error occurred');
+                }
+                
+            } catch (error) {
+                showError('Network error: ' + error.message);
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = '🧠 Analyze';
+            }
+        }
+        
+        async function switchFramework() {
+            const select = document.getElementById('framework-select');
+            const framework = select.value;
+            
+            if (!framework) return;
+            
+            try {
+                const response = await fetch('/switch_framework', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ framework: framework })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('current-framework').textContent = data.framework;
+                    showSuccess(data.message);
+                } else {
+                    showError(data.error || 'Failed to switch framework');
+                }
+                
+            } catch (error) {
+                showError('Network error: ' + error.message);
+            }
+        }
+        
+        function showResponse(data) {
+            const container = document.getElementById('response-container');
+            
+            let metaInfo = '';
+            if (data.metadata) {
+                const interesting = ['classification', 'confidence', 'auto_analyzed', 'text_length'];
+                const meta = {};
+                interesting.forEach(key => {
+                    if (data.metadata[key] !== undefined) {
+                        meta[key] = data.metadata[key];
+                    }
+                });
+                
+                if (Object.keys(meta).length > 0) {
+                    metaInfo = `
+                        <div class="response-meta">
+                            <strong>Analysis Metadata:</strong> ${JSON.stringify(meta, null, 2)}
+                        </div>
+                    `;
+                }
+            }
+            
+            container.innerHTML = `
+                <div class="response-content">${data.response}</div>
+                ${metaInfo}
+            `;
+        }
+        
+        function showError(message) {
+            const container = document.getElementById('response-container');
+            container.innerHTML = `
+                <div class="error">
+                    <strong>Error:</strong> ${message}
+                </div>
+            `;
+        }
+        
+        function showSuccess(message) {
+            const existing = document.querySelector('.success');
+            if (existing) existing.remove();
+            
+            const container = document.getElementById('response-container');
+            container.insertAdjacentHTML('afterbegin', `
+                <div class="success">
+                    ${message}
+                </div>
+            `);
+            
+            setTimeout(() => {
+                const success = document.querySelector('.success');
+                if (success) success.remove();
+            }, 3000);
+        }
+        
+        // Allow Enter+Ctrl to submit
+        document.getElementById('text-input').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                analyzeText();
+            }
+        });
+        
+        // Initialize character count
+        updateCharCount();
+    </script>
+</body>
+</html> 

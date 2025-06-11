@@ -1,8 +1,12 @@
 # Unified Prompt Template Architecture
 
+**Last Updated**: January 2025  
+**Implementation Status**: Production Ready with Programmatic Generation  
+**Template Structure**: Minimal with Experimental Support
+
 ## Overview
 
-The Unified Prompt Template Architecture combines the sophistication of the v2.0 prompt generation system with the flexibility needed for production API use. It provides template-based prompt construction, framework-agnostic design, and A/B testing capabilities.
+The Unified Prompt Template Architecture combines the sophistication of the v2.0 prompt generation system with the flexibility needed for production API use. The current implementation emphasizes **programmatic prompt generation** rather than static templates, with sophisticated logic built into the PromptTemplateManager class.
 
 ## Architecture Benefits
 
@@ -50,43 +54,72 @@ experimental_prompt = template_manager.generate_experimental_prompt(
 )
 ```
 
-### 2. Prompt Settings (`src/prompts/prompt_settings.json`)
+### 2. Prompt Settings (`src/narrative_gravity/prompts/prompt_settings.json`)
 
-**Configuration file for prompt behavior:**
+**Actual configuration file for prompt behavior:**
 
 ```json
 {
   "enforce_decimal_scale": true,
   "include_model_identification": true,
   "include_analysis_methodology": true,
+  "include_examples": false,
   "max_language_cues": 3,
+  "temperature_guidance": null,
+  "experimental_features": [],
   "api_mode_settings": {
     "abbreviated_methodology": true,
-    "focus_on_json_reliability": true
+    "focus_on_json_reliability": true,
+    "include_scoring_examples": false
   },
   "interactive_mode_settings": {
     "include_workflow_guidance": true,
-    "include_comparative_analysis": true
+    "include_comparative_analysis": true,
+    "include_response_structure": true
+  },
+  "prompt_optimization": {
+    "version": "v1.0.0",
+    "description": "Base prompt settings for production use",
+    "last_updated": "2025-01-15",
+    "notes": "Optimized for reliable JSON extraction and consistent scoring"
   }
 }
 ```
 
-### 3. Experimental Framework (`src/prompts/templates/experiments/`)
+### 3. Experimental Framework (`src/narrative_gravity/prompts/templates/experiments/`)
 
-**A/B testing configurations for prompt optimization:**
+**Current Implementation**: Single experimental configuration file
+
+**File**: `scoring_methodology.json` - Testing different scoring guidance approaches
 
 ```json
 {
+  "description": "Experiment with different scoring methodologies for narrative gravity analysis",
+  "purpose": "Test whether explicit scoring examples improve LLM accuracy and consistency",
+  
   "control": {
-    "description": "Standard scoring methodology",
-    "scoring_requirements": "Standard 0.0-1.0 scale instructions"
+    "description": "Standard scoring methodology without examples",
+    "scoring_requirements": "🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨..."
   },
+  
   "treatment_a": {
-    "description": "Enhanced with concrete examples",
-    "scoring_requirements": "Detailed thresholds and examples"
+    "description": "Enhanced scoring with concrete examples and thresholds",
+    "scoring_requirements": "**SCORING THRESHOLDS:**\n- 0.0-0.2: Minimal/no presence..."
+  },
+  
+  "treatment_b": {
+    "description": "Comparative scoring with explicit anchor points",
+    "scoring_requirements": "**ANCHOR POINT METHOD:**\nThink of MLK 'I Have a Dream'..."
+  },
+  
+  "treatment_c": {
+    "description": "Process-focused scoring with step-by-step methodology",
+    "scoring_requirements": "**SCORING PROCESS:**\n1. Identify 2. Extract 3. Assess..."
   }
 }
 ```
+
+**Status**: Minimal but functional template structure focused on experimental scoring methodologies
 
 ## Usage Patterns
 
@@ -143,6 +176,42 @@ treatment_result = client.analyze_text_experimental(
 # Compare results for prompt optimization
 ```
 
+## Summary: Current Prompt Architecture Status
+
+### ✅ **What's Working**
+1. **PromptTemplateManager**: Production-ready with 442 lines of sophisticated prompt generation logic
+2. **Three Prompt Modes**: API (optimized), Interactive (full featured), Experimental (A/B testing)  
+3. **Framework Integration**: Automatic loading of all 4 available frameworks
+4. **Programmatic Generation**: Dynamic prompt building from JSON configurations
+5. **Experimental Support**: Functional A/B testing with `scoring_methodology.json`
+
+### 📁 **Implementation Approach**
+- **Strategy**: **Programmatic over static templates** - More maintainable and consistent
+- **Templates**: Minimal static files, sophisticated programmatic generation
+- **Configuration**: Rich JSON-based settings with optimization tracking
+- **Flexibility**: Easy framework addition without template creation
+
+### 🎯 **Current Capabilities**
+- **Real-time prompt generation** for any framework
+- **Consistent formatting and requirements** across all prompt types  
+- **A/B testing infrastructure** with 4 experimental variants
+- **Production-optimized API prompts** with reliable JSON extraction
+- **Research-grade interactive prompts** with full methodology
+
+### 🔧 **Usage Commands**
+```bash
+# Generate API prompt programmatically  
+python -c "from src.narrative_gravity.prompts.template_manager import PromptTemplateManager; tm = PromptTemplateManager(); print(tm.generate_api_prompt('test text', 'civic_virtue', 'gpt-4'))"
+
+# Check prompt settings
+cat src/narrative_gravity/prompts/prompt_settings.json
+
+# View experimental configurations
+cat src/narrative_gravity/prompts/templates/experiments/scoring_methodology.json
+```
+
+The prompt architecture is **production-ready** with a focus on programmatic generation rather than static templates.
+
 ## Prompt Generation Modes
 
 ### 1. **API Mode** - Production Automation
@@ -184,20 +253,56 @@ prompt = template_manager.generate_experimental_prompt(
 
 ### **Automatic Framework Discovery**
 
-The system automatically loads framework configurations:
+The system automatically loads framework configurations from the actual directory structure:
 
 ```
 frameworks/
 ├── civic_virtue/
-│   ├── dipoles.json      # Well definitions
-│   └── framework.json    # Framework metadata
-├── political_spectrum/
+│   ├── dipoles.json      # Well definitions with language cues
+│   ├── framework.json    # Sophisticated mathematical configuration  
+│   └── README.md         # Framework documentation
+├── political_spectrum/    # [CURRENTLY ACTIVE via config/ symlinks]
 │   ├── dipoles.json
-│   └── framework.json
-└── moral_rhetorical_posture/
+│   ├── framework.json
+│   └── README.md
+├── moral_rhetorical_posture/
+│   ├── dipoles.json
+│   ├── framework.json
+│   └── README.md
+└── fukuyama_identity/     # Fourth framework available
     ├── dipoles.json
-    └── framework.json
+    ├── framework.json
+    └── README.md
 ```
+
+**Framework Loading Process**:
+1. PromptTemplateManager scans `frameworks/` directory
+2. Loads `dipoles.json` for well definitions and language cues
+3. Loads `framework.json` for mathematical parameters and weighting
+4. Generates framework-specific prompts dynamically
+5. Active framework determined by `config/` symlinks
+
+## Current Implementation Notes
+
+### **Programmatic vs Template-Based Generation**
+The current implementation prioritizes **programmatic prompt generation** over static template files:
+
+**✅ What Works**:
+- **PromptTemplateManager**: Sophisticated prompt building logic with 442 lines of code
+- **Dynamic content generation**: Framework-specific prompts built from JSON configurations  
+- **Multiple modes**: API, Interactive, and Experimental prompt variants
+- **Sophisticated components**: Role definition, scoring requirements, methodology, JSON formatting
+
+**📁 Template File Status**:
+- **Minimal static templates**: Only `experiments/scoring_methodology.json` exists
+- **Most prompts generated programmatically**: Using `_build_*()` methods in PromptTemplateManager
+- **Framework-specific content**: Dynamically loaded from `frameworks/*/dipoles.json` and `framework.json`
+
+**Benefits of Current Approach**:
+- **Consistency**: All prompts use same logic and formatting
+- **Maintainability**: Changes to prompt structure update all variants automatically
+- **Framework independence**: New frameworks work immediately without template creation
+- **Experimentation**: Easy A/B testing through configuration rather than template duplication
 
 ### **Template Generation Process**
 

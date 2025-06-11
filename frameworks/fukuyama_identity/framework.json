@@ -1,0 +1,82 @@
+{
+  "framework_name": "fukuyama_identity",
+  "display_name": "Fukuyama Identity Framework", 
+  "version": "v2025.01.07",
+  "description": "Fukuyama Identity Framework - Analyzes democratic sustainability through identity, recognition, and thymos dynamics based on Francis Fukuyama's theoretical insights",
+  "ellipse": {
+    "description": "Coordinate system parameters",
+    "semi_major_axis": 1.0,
+    "semi_minor_axis": 0.7,
+    "orientation": "vertical"
+  },
+  "weighting_philosophy": {
+    "description": "Two-tier weighting system based on Fukuyama's theoretical hierarchy",
+    "primary_tier": {
+      "weight": 1.0,
+      "description": "Identity foundation - most fundamental to democratic sustainability",
+      "wells": ["Creedal Identity", "Ethnic Identity"]
+    },
+    "secondary_tier": {
+      "weight": 0.9,
+      "description": "Recognition and thymos dynamics - core psychological drivers",
+      "wells": ["Integrative Recognition", "Fragmentary Recognition", "Democratic Thymos", "Megalothymic Thymos"]
+    }
+  },
+  "wells": {
+    "Creedal Identity": {
+      "angle": 90,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Integrative Recognition": {
+      "angle": 45,
+      "weight": 0.9,
+      "type": "integrative", 
+      "tier": "secondary"
+    },
+    "Democratic Thymos": {
+      "angle": 135,
+      "weight": 0.9,
+      "type": "integrative",
+      "tier": "secondary"
+    },
+    "Ethnic Identity": {
+      "angle": 270,
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Fragmentary Recognition": {
+      "angle": 225,
+      "weight": -0.9,
+      "type": "disintegrative",
+      "tier": "secondary"
+    },
+    "Megalothymic Thymos": {
+      "angle": 315,
+      "weight": -0.9,
+      "type": "disintegrative",
+      "tier": "secondary"
+    }
+  },
+  "scaling_factor": 0.8,
+  "metrics": {
+    "com": {
+      "name": "Center of Mass",
+      "description": "Weighted center position considering signed weights"
+    },
+    "ies": {
+      "name": "Identity Elevation Score",
+      "description": "Y-axis position indicating integrative vs disintegrative pull"
+    },
+    "ics": {
+      "name": "Identity Coherence Score", 
+      "description": "Consistency of identity orientation across wells"
+    },
+    "tas": {
+      "name": "Thymos Alignment Score",
+      "description": "How narrative channels recognition-seeking behavior"
+    }
+  }
+}
