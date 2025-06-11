@@ -71,4 +71,21 @@ If using VS Code, add to `.vscode/settings.json`:
 }
 ```
 
-This ensures both AI assistant commands and your IDE can properly resolve imports. 
+This ensures both AI assistant commands and your IDE can properly resolve imports.
+
+## Date and Time Handling
+
+**CRITICAL**: Never hardcode dates in documentation or files. Always use system date/time:
+
+```bash
+# Get current date for documentation
+./scripts/get_current_date.sh              # Returns: June 11, 2025
+./scripts/get_current_date.sh iso          # Returns: 2025-06-11  
+./scripts/get_current_date.sh timestamp    # Returns: 2025-06-11 08:49:35
+
+# Or use date command directly
+date "+%B %-d, %Y"                         # Returns: June 11, 2025
+date "+%Y-%m-%d"                           # Returns: 2025-06-11
+```
+
+This prevents documentation from containing incorrect dates and ensures timestamps are accurate. 

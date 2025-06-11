@@ -131,12 +131,27 @@ from narrative_gravity.engine import NarrativeGravityWellsElliptical
 - **Verify venv activation** before pip installs
 - **Check import availability** before claiming packages are installed
 - **Environment setup is MANDATORY** - never skip `source scripts/setup_dev_env.sh`
+- **ALWAYS get current date from system** - never assume dates, use `./scripts/get_current_date.sh` or `date` command
+
+#### Date and Time Handling (CRITICAL)
+**NEVER hardcode dates - always use system date/time:**
+```bash
+# Get current date for documentation
+./scripts/get_current_date.sh              # Returns: June 11, 2025
+./scripts/get_current_date.sh iso          # Returns: 2025-06-11
+./scripts/get_current_date.sh timestamp    # Returns: 2025-06-11 08:49:35
+
+# Or use date command directly
+date "+%B %-d, %Y"                         # Returns: June 11, 2025
+date "+%Y-%m-%d"                           # Returns: 2025-06-11
+```
 
 #### Common Environment Issues & Solutions
 - **"command not found: python"** → Use `python3` instead
 - **"command not found: pip"** → Use `pip3` or ensure venv is active
 - **"alembic not found"** → Alembic installed in system, not venv - verify with setup script
 - **Import failures** → Run setup script, check PYTHONPATH configuration
+- **Wrong dates in files** → Always use `./scripts/get_current_date.sh` or `date` command
 
 ## Code Standards
 
