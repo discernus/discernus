@@ -124,6 +124,20 @@ from narrative_gravity.engine import NarrativeGravityWellsElliptical
 3. **Reference**: DEV_ENVIRONMENT.md for detailed setup guide
 4. **Never guess paths**: Use the established environment setup
 
+#### Critical Command Consistency Rules
+**ALWAYS follow these patterns to avoid environment issues:**
+- **Use `python3`** (never `python` - it may not exist)
+- **Use `pip3`** (or `pip` only AFTER confirming venv is active)
+- **Verify venv activation** before pip installs
+- **Check import availability** before claiming packages are installed
+- **Environment setup is MANDATORY** - never skip `source scripts/setup_dev_env.sh`
+
+#### Common Environment Issues & Solutions
+- **"command not found: python"** → Use `python3` instead
+- **"command not found: pip"** → Use `pip3` or ensure venv is active
+- **"alembic not found"** → Alembic installed in system, not venv - verify with setup script
+- **Import failures** → Run setup script, check PYTHONPATH configuration
+
 ## Code Standards
 
 ### Import Path Updates
