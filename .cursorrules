@@ -75,6 +75,55 @@ When database issues arise:
 - **Frontend info**: `python launch.py --frontend-info`
 - **Database setup**: `python launch.py --setup-db`
 
+## Development Environment Setup (CRITICAL)
+
+### Path Configuration Requirements
+**ALWAYS set up the development environment before running Python commands:**
+
+#### Mandatory Setup for Each Session
+```bash
+# Activate virtual environment (if not already active)
+source venv/bin/activate
+
+# Setup development paths (REQUIRED)
+source scripts/setup_dev_env.sh
+```
+
+#### Why This is Critical
+The project uses `src/narrative_gravity/` structure, but `src/` is not automatically in Python's module search path. Without proper setup:
+- ❌ `from narrative_gravity.engine import NarrativeGravityWellsElliptical` fails
+- ❌ AI assistants struggle with import paths
+- ❌ Inconsistent working directory problems
+
+#### Environment Variables Set by setup_dev_env.sh
+- `PROJECT_ROOT`: `/Users/jeffwhatcott/narrative_gravity_analysis`
+- `PYTHONPATH`: Includes project root AND `src/` directory
+- `NARRATIVE_GRAVITY_*`: Helper variables for scripts
+- Automatically loads all `.env` variables
+
+#### Verification Commands
+**Before running any Python code, verify setup:**
+```bash
+python3 -c "from src.narrative_gravity.engine import NarrativeGravityWellsElliptical; print('✅ Imports working!')"
+```
+
+#### Import Pattern Standards
+**After environment setup, use these patterns:**
+```python
+# Preferred (works after setup)
+from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
+from src.narrative_gravity.framework_manager import FrameworkManager
+
+# Also works (shorter)
+from narrative_gravity.engine import NarrativeGravityWellsElliptical
+```
+
+#### Troubleshooting Import Issues
+1. **First step**: Always run `source scripts/setup_dev_env.sh`
+2. **Verify PYTHONPATH**: Check that `src/` is in Python path
+3. **Reference**: DEV_ENVIRONMENT.md for detailed setup guide
+4. **Never guess paths**: Use the established environment setup
+
 ## Code Standards
 
 ### Import Path Updates
@@ -186,6 +235,8 @@ python scripts/release.py major --message "Breaking changes"
 ## Quality Standards
 
 ### Before Completing Tasks
+- [ ] **Setup development environment**: Run `source scripts/setup_dev_env.sh`
+- [ ] **Verify imports work**: Test with verification command
 - [ ] Verify PostgreSQL is primary database assumption
 - [ ] Check that files are in correct directories
 - [ ] Update all references when moving files
