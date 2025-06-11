@@ -2,6 +2,215 @@
 
 ## [Unreleased]
 
+### 🎬 YOUTUBE TRANSCRIPT INTELLIGENT INGESTION SERVICE: Video Content to Research Corpus - June 11, 2025
+
+**Strategic Achievement**: Production-ready YouTube transcript extraction system extending intelligent corpus ingestion to video content
+- **YouTube Transcript Extraction**: Complete service for automated video content processing
+  - `YouTubeTranscriptExtractor` class with multi-language transcript extraction (manual and auto-generated captions)
+  - Video ID extraction from various YouTube URL formats with validation
+  - Content cleaning and formatting optimized for political speech analysis
+  - Free transcript extraction using YouTube's caption API (no additional API costs)
+- **Enhanced Metadata Pipeline**: Combines YouTube video metadata with AI-powered content analysis
+  - `YouTubeCorpusIngestionService` extending existing intelligent ingestion architecture
+  - Video-specific metadata: channel, upload date, views, duration, engagement metrics
+  - Speaker identification from channel names and content analysis
+  - Political content classification (speech, debate, interview, address, press conference)
+  - +10 confidence boost for complete video metadata integration
+- **Production CLI Tools**: Professional command-line interface for video processing
+  - `scripts/intelligent_ingest_youtube.py`: Full LLM-enhanced YouTube processing with dry-run mode
+  - `scripts/demo_youtube_ingestion.py`: Demonstration version requiring no API keys
+  - Multi-language support, confidence thresholds, batch processing with rate limiting
+  - Enhanced result reporting with video metrics and citation information
+- **Demonstrated Results**: Successfully processed Phil Davidson 2010 political speech with 100% confidence
+  - Video metadata extraction: Title, channel, upload date, view count (126K+ views), duration
+  - Perfect transcript extraction: 3,904 characters of clean political speech content
+  - Enhanced text ID generation: `davison_speech_2010_lipnBHey` with video context
+  - Seamless corpus integration with YouTube-specific metadata fields
+
+**Technical Implementation**: Robust video processing architecture with comprehensive error handling
+- **Core Services** (`src/narrative_gravity/corpus/youtube_ingestion.py`):
+  - `YouTubeVideoInfo` dataclass with complete video metadata structure
+  - `YouTubeTranscriptExtractor` with youtube-transcript-api integration and content cleaning
+  - `YouTubeCorpusIngestionService` extending IntelligentIngestionService with video enhancements
+- **Enhanced Metadata Integration**: Combines YouTube and LLM analysis for superior results
+  - Video metadata enhancement of extracted content metadata
+  - Political figure recognition patterns (President, Senator, Governor)
+  - Content type classification based on titles and transcript analysis
+  - Citation generation with permanent video URLs and engagement metrics
+- **Dependencies**: Added youtube-transcript-api and yt-dlp to requirements.txt
+  - Free transcript extraction without YouTube API costs
+  - Optional enhanced metadata with yt-dlp for video information
+  - Graceful fallback when enhanced dependencies unavailable
+
+**Research Workflow Integration**: Seamless extension of existing corpus management
+- **Academic Standards**: YouTube videos treated as first-class corpus documents
+- **Enhanced Citation Support**: Video URLs, upload dates, channels for academic referencing
+- **Cross-Language Capability**: Extract political content in multiple languages
+- **Engagement Analytics**: View counts, like ratios for content impact analysis
+- **Temporal Analysis**: Upload dates enabling longitudinal political speech studies
+
+**Complete Documentation Suite**: Comprehensive guides anticipating user needs and problems
+- **Complete YouTube Guide** (`docs/user-guides/YOUTUBE_TRANSCRIPT_INGESTION_GUIDE.md`): 600+ lines comprehensive documentation
+- **YouTube Quick Start** (`docs/user-guides/YOUTUBE_INGESTION_QUICKSTART.md`): Essential commands and workflow examples
+- **Updated User Guide README** (`docs/user-guides/README.md`): Integration with existing documentation structure
+- **Comprehensive Troubleshooting**: 20+ common issues with solutions and best practices
+- **Security & Privacy Guidance**: Transparent handling of content sent to external APIs
+
+**Success Rate Expectations**: Realistic performance targets based on content type
+- **Professional political videos with manual captions**: 90-100% success rate
+- **Major news channels with auto-captions**: 80-95% success rate
+- **User-uploaded content with captions**: 70-90% success rate
+- **Videos without captions**: 0% (graceful failure with clear messaging)
+
+### 🤖 INTELLIGENT CORPUS INGESTION SERVICE: LLM-Powered Metadata Extraction - June 11, 2025
+
+**Strategic Achievement**: Production-ready intelligent corpus ingestion system for automated metadata extraction from messy text files
+- **LLM-Powered Metadata Extraction**: Complete service using GPT-3.5-turbo for automatic metadata extraction
+  - `MetadataExtractor` class with OpenAI API integration and graceful error handling
+  - Structured JSON extraction: title, author, date, document_type, description, language
+  - Confidence scoring based on field completeness and validation checks (0-100%)
+  - Fallback mechanisms when LLM extraction fails with rule-based title extraction
+- **Intelligent Processing Workflow**: End-to-end service from messy files to corpus registration
+  - `IntelligentIngestionService` with configurable confidence thresholds (default: 70%)
+  - Automatic categorization: successful (≥70%), uncertain (40-69%), failed (<40%)
+  - Integration with existing CorpusRegistry for high-confidence document registration
+  - Semantic text ID generation from extracted metadata (`{author}_{type}_{year}` format)
+- **Production CLI Tools**: Command-line interface for batch processing workflows
+  - `scripts/intelligent_ingest.py`: Full LLM-powered ingestion with dry-run mode
+  - `scripts/demo_intelligent_ingest.py`: Rule-based demo version requiring no API keys
+  - Comprehensive argument support: confidence thresholds, output directories, verbose mode
+  - Professional result reporting with detailed statistics and file-by-file analysis
+- **Demonstrated Results**: Successfully processed 27 historical documents with 100% demo success rate
+  - Historical document corpus: Presidential inaugurals, UN speeches, political addresses
+  - Perfect metadata extraction: titles, authors, dates, document types with high confidence
+  - Complete integration: All high-confidence documents automatically registered in corpus
+  - Academic-quality metadata: Proper formatting, semantic IDs, comprehensive descriptions
+
+**Technical Implementation**: Robust production architecture with error handling
+- **Core Services** (`src/narrative_gravity/corpus/intelligent_ingestion.py`): 
+  - `ExtractedMetadata` dataclass with confidence scoring and extraction notes
+  - `MetadataExtractor` with LLM integration, prompt engineering, validation checks
+  - `IntelligentIngestionService` with batch processing and database integration
+- **Quality Assurance**: Comprehensive confidence scoring and validation
+  - Field completeness scoring (title: 25pts, author: 20pts, date: 20pts, type: 15pts)
+  - Content consistency validation (title presence in text, date format validation)
+  - Error handling with detailed logging and fallback extraction methods
+- **CLI Infrastructure**: Professional command-line tools with full argument support
+  - Batch directory processing with file discovery and filtering
+  - Detailed result categorization and JSON export for audit trails
+  - Integration modes: full database registration vs. dry-run analysis only
+
+**Research Workflow Integration**: Foundation for academic corpus management
+- **Academic Standards**: Metadata extraction follows digital humanities best practices
+- **FAIR Compliance**: Automatic generation of structured metadata supporting findability
+- **Corpus Integration**: Seamless integration with existing CorpusRegistry and discovery systems
+- **Provenance Tracking**: Complete audit trail from source files through extraction to registration
+- **Research Enablement**: Transforms messy historical documents into analysis-ready corpus entries
+
+**Complete Documentation Suite**: Comprehensive user guides and workflow integration
+- **Complete User Guide** (`docs/user-guides/INTELLIGENT_CORPUS_INGESTION_GUIDE.md`): Step-by-step instructions, troubleshooting, advanced usage
+- **Quick Start Guide** (`docs/user-guides/INTELLIGENT_INGESTION_QUICKSTART.md`): Essential commands and workflows for immediate use
+- **Workflow Integration Guide** (`docs/user-guides/CORPUS_WORKFLOW_INTEGRATION.md`): Complete research workflow from messy files to publication
+- **Navigation Overview** (`docs/user-guides/README.md`): Documentation index and getting started guidance
+- **Comprehensive Troubleshooting**: Detailed problem-solving for processing, quality, and database issues
+- **Best Practices**: Professional workflow recommendations for academic research standards
+
+**Future Implementation Ready**: Intelligent classification and auto-formatting service
+- **LLM Integration**: Production-ready OpenAI API integration with cost-effective GPT-3.5-turbo
+- **Scalable Architecture**: Batch processing capable of handling large document collections
+- **Quality Control**: Confidence-based processing ensuring only high-quality extractions reach corpus
+- **Academic Workflow**: Supporting systematic corpus development for digital humanities research
+
+### 🎯 ENHANCED CORPUS MANAGEMENT SYSTEM: FAIR Data & Academic Standards - June 11, 2025
+
+**Strategic Achievement**: Comprehensive corpus management system meeting FAIR data principles and academic standards
+- **Stable Text Identifiers**: Complete implementation of semantic document identification for academic workflow
+  - **Semantic Text IDs**: Human-readable format `{author}_{type}_{year}[_{sequence}]` (e.g., `obama_inaugural_2009`)
+  - **Placeholder URIs**: Infrastructure ready for stable URI web service (future implementation)
+  - **Content Integrity**: SHA-256 hashing for file validation and change detection
+  - **Database Integration**: Enhanced hybrid approach preserving file workflow while adding metadata management
+- **FAIR Data Compliance**: Systematic implementation of Findable, Accessible, Interoperable, Reusable principles
+  - **CorpusValidator**: Comprehensive validation with 63.9% overall FAIR score achievement
+  - **Integrity Monitoring**: File existence, hash validation, metadata completeness checking
+  - **Academic Standards**: Citation format validation, schema versioning, provenance tracking
+  - **Compliance Reporting**: Automated FAIR assessment with principle-by-principle scoring
+- **Discovery & Search Tools**: Advanced corpus exploration and navigation capabilities
+  - **CorpusDiscovery**: Full-text and metadata search with relevance scoring
+  - **Faceted Browsing**: Navigate by author, document type, year, decade with count statistics
+  - **Corpus Statistics**: Comprehensive analytics (11 documents, 8 authors, 421-year span)
+  - **Document Similarity**: Metadata-based similarity analysis for related content discovery
+- **Academic Export Infrastructure**: Research-ready dataset generation in multiple formats
+  - **CorpusExporter**: Multi-format exports (CSV, JSON, R, Python, Stata) with analysis templates
+  - **Citation Generation**: APA, MLA, Chicago, BibTeX format support with stable URI integration
+  - **Replication Packages**: Complete research packages with data, code, documentation, and guides
+  - **Academic Metadata**: TEI-compliant structured metadata with JSONB flexibility
+
+**Technical Implementation**: Production-ready corpus management with PostgreSQL integration
+- **Enhanced Registry** (`src/narrative_gravity/corpus/registry.py`): Stable identifier management with database integration
+- **Validation Framework** (`src/narrative_gravity/corpus/validator.py`): 5-tier quality assessment with academic compliance
+- **Discovery Engine** (`src/narrative_gravity/corpus/discovery.py`): Search, faceting, and corpus analytics
+- **Export System** (`src/narrative_gravity/corpus/exporter.py`): Multi-format academic dataset generation
+
+**Academic Standards Achievement**: Meeting digital humanities best practices
+- **FAIR Principle Scores**: Findable (100%), Accessible (4.6%), Interoperable (100%), Reusable (74.6%)
+- **Metadata Standards**: Complete bibliographic information with provenance tracking
+- **Citation Framework**: Stable text identifiers with infrastructure ready for URI web service
+- **Quality Assessment**: Automated validation identifying corpus issues for improvement
+- **Research Workflow**: Seamless integration supporting systematic corpus analysis and publication
+
+**Integration with Existing Infrastructure**: Enhanced corpus foundation supporting Priority 2 CLI orchestration
+- **Database Compatibility**: Works with existing PostgreSQL schema and document tables
+- **Hybrid Approach**: Preserves file-based workflow while adding academic metadata management
+- **Component Integration**: Foundation for batch orchestration and research validation protocols
+- **Export Pipeline**: Research-ready datasets feeding into academic analysis workflows
+
+### 🎯 PRIORITY 1 DATABASE FOUNDATION: Component Versioning Infrastructure Complete - June 11, 2025
+
+**Strategic Achievement**: Complete database schema infrastructure for validation-first research platform
+- **Component Versioning Database Schema**: Full implementation of systematic component management
+  - **New Tables**: `prompt_templates`, `framework_versions`, `weighting_methodologies`, `component_compatibility`, `development_sessions`
+  - **Foreign Key Integration**: Added component version references to existing `experiment` and `run` tables
+  - **Data Migration**: Successfully migrated 16 experiments and 26 runs to use component versioning foreign keys
+  - **Database Migration**: Applied migration `574edb17ee08` populating component tables with current civic virtue framework v2.1.0
+  - **Complete Provenance**: All analysis results now linked to specific component versions for exact reproducibility
+- **Component Management CLI**: Professional command-line interface for component lifecycle management
+  - **Component Operations**: Create, list, validate, and export prompt templates, frameworks, and weighting methodologies
+  - **Semantic Versioning**: Complete version control with parent-child relationships and validation status tracking
+  - **Compatibility Matrix**: Systematic validation of component combinations with performance metrics
+  - **Export Capabilities**: JSON export for sharing, backup, and external analysis tool integration
+- **Academic Standards Integration**: Complete infrastructure for systematic research validation
+  - **Performance Tracking**: Usage counts, success rates, average costs, and compatibility metrics
+  - **Development Sessions**: Structured workflow tracking for hypothesis-driven component development
+  - **Quality Assurance**: Validation status tracking (draft → tested → validated → deprecated)
+  - **Reproducibility Support**: Complete experimental provenance with specific component version references
+
+**Technical Implementation**: Production-ready infrastructure with complete PostgreSQL integration
+- **Database Architecture**: UUID primary keys, JSON configuration storage, foreign key constraints
+- **CLI Tool**: `src/narrative_gravity/cli/component_manager.py` with comprehensive command set
+- **Documentation**: Complete guide at `docs/development/component_versioning_guide.md`
+- **Migration Verification**: All foreign key relationships working, no data loss during migration
+
+**Research Platform Foundation**: Enables systematic validation-first development methodology
+- **Component Evolution**: Track framework and prompt development with complete history
+- **Experimental Integrity**: Every analysis result linked to exact component versions used
+- **Academic Workflow**: Infrastructure supports publication-quality provenance and reproducibility
+- **Development Workflow**: Structured approach to systematic component improvement and validation
+
+### 🏗️ ARCHITECTURAL IMPROVEMENT: Clean Component Separation - June 11, 2025
+
+**Strategic Achievement**: Implemented clean separation of concerns for component architecture
+- **New Framework-Agnostic Prompt Templates**: Created properly-named prompt templates that focus solely on LLM optimization
+  - `hierarchical_analysis v2.1.0`: Framework-agnostic hierarchical ranking and evidence extraction
+  - `traditional_analysis v2.1.0`: Framework-agnostic comprehensive dimensional scoring
+  - `linear_traditional v2.1.0`: Equal-weight mathematical interpretation methodology
+- **Architecture Principle**: Each component type now has distinct responsibilities and independent lifecycles:
+  - **Prompt Templates**: Pure LLM optimization layer (prompt engineering techniques)
+  - **Frameworks**: Pure theoretical constructs layer (dipoles, conceptual relationships)  
+  - **Weighting Methodologies**: Pure mathematical interpretation layer (visualization algorithms)
+- **Data Migration**: Successfully migrated all 16 experiments and 26 runs from conflated naming to clean architecture
+- **Backward Compatibility**: Old `civic_virtue_hierarchical` template deprecated but preserved for historical analysis
+- **Documentation**: Updated component versioning guide with new naming conventions and architectural principles
+
 ### 🎯 PRIORITY 3 COMPLETE: Academic Tool Integration Infrastructure - January 6, 2025
 
 **Strategic Achievement**: Complete academic publication toolkit bridging systematic development with academic requirements

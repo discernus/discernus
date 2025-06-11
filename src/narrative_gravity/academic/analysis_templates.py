@@ -7,6 +7,13 @@ Supports Elena's Week 3 workflow for statistical analysis and visualization.
 
 import json
 from datetime import datetime
+# Visualization imports
+try:
+    from ..visualization.plotly_elliptical import PlotlyEllipticalVisualizer
+    PLOTLY_ELLIPTICAL_AVAILABLE = True
+except ImportError:
+    PLOTLY_ELLIPTICAL_AVAILABLE = False
+
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from sqlalchemy.orm import sessionmaker
