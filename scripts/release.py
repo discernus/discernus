@@ -134,16 +134,16 @@ class ReleaseManager:
         self.log("Running comprehensive test suite...")
         
         # Check if pytest is available
-        success, _ = self.run_command(['python', '-m', 'pytest', '--version'])
+        success, _ = self.run_command(['python3', '-m', 'pytest', '--version'])
         if not success:
             self.error("pytest not available. Install with: pip install pytest")
             return False
         
         # Run tests with coverage if available
-        test_cmd = ['python', '-m', 'pytest', '-v']
+        test_cmd = ['python3', '-m', 'pytest', '-v']
         
         # Check if pytest-cov is available
-        success, _ = self.run_command(['python', '-c', 'import pytest_cov'])
+        success, _ = self.run_command(['python3', '-c', 'import pytest_cov'])
         if success:
             test_cmd.extend(['--cov=src', '--cov-report=term-missing'])
         
