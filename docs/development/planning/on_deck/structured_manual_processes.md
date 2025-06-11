@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
-
 # Is there a need to define best practice processes and seed prompts for LLM chatbot sessions focused on prompt template engineering, framework engineering, and weighting schemes, respectively? I'm thinking that standardizing and optimizing the manual steps as much as possible will lead to better results.
 
 🧠 **Essential Standardization Need:**

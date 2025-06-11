@@ -132,6 +132,7 @@ from narrative_gravity.engine import NarrativeGravityWellsElliptical
 - **Check import availability** before claiming packages are installed
 - **Environment setup is MANDATORY** - never skip `source scripts/setup_dev_env.sh`
 - **ALWAYS get current date from system** - never assume dates, use `./scripts/get_current_date.sh` or `date` command
+- **Terminal commands must be single line** - no newlines in `run_terminal_cmd`, use `&&` to chain commands
 
 #### Date and Time Handling (CRITICAL)
 **NEVER hardcode dates - always use system date/time:**

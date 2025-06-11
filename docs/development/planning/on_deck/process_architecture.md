@@ -100,18 +100,18 @@ MANUAL DEVELOPMENT LAYER
 │  Session Init   │───▶│   LLM Sessions  │───▶│   Refinement    │
 │  (CLI Trigger)  │    │  (Seed Prompts) │    │  (Hypothesis    │
 └─────────────────┘    └─────────────────┘    │   Testing)      │
-         │                       │             └─────────────────┘
+         │                       │            └─────────────────┘
          │                       │                       │
          ▼                       ▼                       ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                     DATABASE LAYER                              │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐  │
-│  │ development_    │  │ component_      │  │ component_     │  │
-│  │ sessions        │  │ versions        │  │ compatibility  │  │
-│  │ • hypothesis    │  │ • prompt_temps  │  │ • performance  │  │
-│  │ • objectives    │  │ • frameworks    │  │ • validation   │  │
-│  │ • provenance    │  │ • weightings    │  │ • matrices     │  │
-│  └─────────────────┘  └─────────────────┘  └────────────────┘  │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐   │
+│  │ development_    │  │ component_      │  │ component_     │   │
+│  │ sessions        │  │ versions        │  │ compatibility  │   │
+│  │ • hypothesis    │  │ • prompt_temps  │  │ • performance  │   │
+│  │ • objectives    │  │ • frameworks    │  │ • validation   │   │
+│  │ • provenance    │  │ • weightings    │  │ • matrices     │   │
+│  └─────────────────┘  └─────────────────┘  └────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
          │                       │                       │
          ▼                       ▼                       ▼
@@ -126,12 +126,12 @@ CLI ORCHESTRATION LAYER
          ▼                       ▼                       ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                EXPERIMENTAL DATA LAYER                          │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐  │
-│  │ experiments     │  │ runs            │  │ statistical_   │  │
-│  │ • component_ids │  │ • cv_values     │  │ results        │  │
-│  │ • configurations│  │ • llm_outputs   │  │ • effect_sizes │  │
-│  │ • provenance    │  │ • timestamps    │  │ • significance │  │
-│  └─────────────────┘  └─────────────────┘  └────────────────┘  │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐   │
+│  │ experiments     │  │ runs            │  │ statistical_   │   │
+│  │ • component_ids │  │ • cv_values     │  │ results        │   │
+│  │ • configurations│  │ • llm_outputs   │  │ • effect_sizes │   │
+│  │ • provenance    │  │ • timestamps    │  │ • significance │   │
+│  └─────────────────┘  └─────────────────┘  └────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
          │                       │                       │
          ▼                       ▼                       ▼

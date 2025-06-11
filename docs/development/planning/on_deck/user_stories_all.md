@@ -1,3 +1,5 @@
+<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
+
 🧠 **Essential CLI-Based User Stories:**
 
 - Document and systematize existing batch processing capabilities for academic validation
@@ -8,262 +10,34 @@
 
 You're absolutely right to leverage your existing CLI infrastructure rather than building elaborate interfaces. Based on your comprehensive backend capabilities and the strategic pivot toward manual iteration + batch processing, here are user stories that build on what you have:
 
-## **User Story 1 (Expanded): Integrated Research Component Development**
+## **User Story 1: Systematic Prompt Engineering Workflow**
 
-### **As a researcher conducting systematic framework and methodology development**
+### **As a researcher conducting prompt optimization**
 
-"I want to systematically develop and test variations across prompt templates, framework definitions, and weighting methodologies using manual LLM interaction, while maintaining rigorous version control and experimental provenance in my database, so that I can rapidly iterate toward reliable thematic hierarchy detection while ensuring all components work together effectively."
+"I want to systematically test prompt variations using my existing CLI tools and document the evolution of prompt effectiveness, so that I can maintain clear experimental provenance while rapidly iterating toward reliable thematic hierarchy detection."
 
-## **Three Distinct Development Workflows**
+**Current Capabilities to Leverage:**
 
-### **1. Prompt Template Engineering**
+- Your existing PromptTemplateManager with three distinct modes
+- Framework switching system via FrameworkManager
+- Real LLM integration through DirectAPIClient
 
-**Manual Development Process:**
-
-- Use Claude/GPT-4 web interfaces for iterative prompt refinement
-- Focus on instruction clarity, scoring consistency, and hierarchy detection
-- Test hierarchical ranking approaches vs. independent well assessment
-- Experiment with evidence extraction requirements and reasoning chains
-
-**Database Integration:**
-
-```sql
--- Extend existing schema for prompt versioning
-CREATE TABLE prompt_templates (
-    id UUID PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    version VARCHAR(20) NOT NULL,
-    template_content TEXT NOT NULL,
-    description TEXT,
-    created_by UUID REFERENCES users(id),
-    created_at TIMESTAMP DEFAULT NOW(),
-    parent_version_id UUID REFERENCES prompt_templates(id),
-    UNIQUE(name, version)
-);
-```
-
-
-### **2. Framework Definition Development**
-
-**Manual Development Process:**
-
-- Conversational framework construction using your established methodology
-- Iterative dipole refinement and conceptual clarity enhancement
-- Cross-framework compatibility testing and validation
-- Framework fit assessment and boundary condition exploration
-
-**Database Integration:**
-
-```sql
--- Your existing framework infrastructure extended
-CREATE TABLE framework_versions (
-    id UUID PRIMARY KEY,
-    framework_name VARCHAR(100) NOT NULL,
-    version VARCHAR(20) NOT NULL,
-    dipoles_json JSONB NOT NULL,
-    framework_json JSONB NOT NULL,
-    description TEXT,
-    created_by UUID REFERENCES users(id),
-    created_at TIMESTAMP DEFAULT NOW(),
-    parent_version_id UUID REFERENCES framework_versions(id),
-    UNIQUE(framework_name, version)
-);
-```
-
-
-### **3. Weighting Methodology Development**
-
-**Manual Development Process:**
-
-- Mathematical approach experimentation (linear averaging, winner-take-most, exponential weighting)
-- Dominance hierarchy calculation methods
-- Narrative positioning algorithm variations
-- Compression of extremes solutions
-
-**Database Integration:**
-
-```sql
--- New component for weighting methodology tracking
-CREATE TABLE weighting_methodologies (
-    id UUID PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    version VARCHAR(20) NOT NULL,
-    algorithm_description TEXT NOT NULL,
-    mathematical_formula TEXT,
-    implementation_notes TEXT,
-    created_by UUID REFERENCES users(id),
-    created_at TIMESTAMP DEFAULT NOW(),
-    parent_version_id UUID REFERENCES weighting_methodologies(id),
-    UNIQUE(name, version)
-);
-```
-
-
-## **Enhanced CLI Workflow Integration**
-
-### **Component Selection and Analysis Execution**
+**Workflow Documentation Needed:**
 
 ```bash
-# Enhanced CLI with three-component specification
-python analyze_single.py \
-  --text golden_set/trump_joint_session.txt \
-  --prompt-template hierarchical_ranking:v2.1 \
-  --framework civic_virtue:v1.4 \
-  --weighting-method winner_take_most:v1.2 \
-  --model gpt-4o \
-  --output results.json
-
-# Batch analysis with component matrix
-python analyze_batch.py \
-  --corpus golden_set.jsonl \
-  --component-matrix experiment_config.yaml \
-  --output batch_results/
+# Document standard prompt testing workflow
+1. Manual iteration in Claude/GPT-4 web interfaces
+2. Export successful prompts to template files
+3. Test via CLI: python analyze.py --prompt-version v2.1 --framework civic_virtue --text sample.txt
+4. Document results with version control
 ```
 
+**Gaps to Address with Limited Development:**
 
-### **Experimental Configuration Management**
+- **Prompt Version Tracking CLI**: Simple tool to create/manage prompt versions
+- **Comparative Analysis Script**: Side-by-side comparison of prompt performance
+- **Documentation Generator**: Automatic changelog for prompt modifications
 
-```yaml
-# experiment_config.yaml - Component combination matrix
-experiment_name: "hierarchical_prompting_validation"
-prompt_templates:
-  - "hierarchical_ranking:v2.1"
-  - "evidence_extraction:v1.3"
-frameworks:
-  - "civic_virtue:v1.4"
-  - "political_spectrum:v2.0"
-weighting_methods:
-  - "winner_take_most:v1.2"
-  - "exponential_decay:v1.0"
-models:
-  - "gpt-4o"
-  - "claude-3.5-sonnet"
-runs_per_combination: 3
-```
-
-
-## **Version Compatibility and Tracking**
-
-### **Compatibility Matrix Management**
-
-```sql
--- Track which components work well together
-CREATE TABLE component_compatibility (
-    id UUID PRIMARY KEY,
-    prompt_template_id UUID REFERENCES prompt_templates(id),
-    framework_id UUID REFERENCES framework_versions(id),
-    weighting_method_id UUID REFERENCES weighting_methodologies(id),
-    compatibility_score FLOAT,
-    validation_status VARCHAR(20),
-    notes TEXT,
-    validated_at TIMESTAMP DEFAULT NOW()
-);
-```
-
-
-### **Experimental Provenance Enhancement**
-
-```sql
--- Extend your existing experiments table
-ALTER TABLE experiments ADD COLUMN prompt_template_id UUID REFERENCES prompt_templates(id);
-ALTER TABLE experiments ADD COLUMN framework_version_id UUID REFERENCES framework_versions(id);
-ALTER TABLE experiments ADD COLUMN weighting_method_id UUID REFERENCES weighting_methodologies(id);
-```
-
-
-## **Manual Development Documentation Workflow**
-
-### **Development Session Tracking**
-
-```bash
-# Start development session with component specification
-python start_dev_session.py \
-  --component prompt_template \
-  --base-version hierarchical_ranking:v2.0 \
-  --description "Testing evidence extraction requirements"
-
-# Document development iteration
-python log_iteration.py \
-  --session-id abc123 \
-  --iteration-notes "Added requirement for ranking top 3 wells with evidence quotes" \
-  --test-results "Improved hierarchy detection on synthetic narratives"
-
-# Create new version from session
-python create_version.py \
-  --session-id abc123 \
-  --new-version v2.1 \
-  --changelog "Enhanced hierarchical ranking with evidence extraction"
-```
-
-
-### **Cross-Component Testing Protocol**
-
-```bash
-# Test component combinations for compatibility
-python test_compatibility.py \
-  --prompt hierarchical_ranking:v2.1 \
-  --framework civic_virtue:v1.4 \
-  --weighting winner_take_most:v1.2 \
-  --test-corpus synthetic_narratives.jsonl \
-  --metrics cv,hierarchy_sharpness,dominance_detection
-
-# Generate compatibility report
-python generate_compatibility_report.py \
-  --experiment-id exp_456 \
-  --output compatibility_analysis.json
-```
-
-
-## **Integration with Existing Infrastructure**
-
-### **Leveraging Current Capabilities**
-
-- **FrameworkManager**: Extend to support database-stored frameworks with version selection
-- **PromptTemplateManager**: Integrate with database versioning system
-- **PostgreSQL Schema**: Build on existing experiments and runs tables
-- **Multi-Run Dashboard**: Enhanced to show component version information
-
-
-### **CLI Enhancement Strategy**
-
-```python
-# Enhanced analysis service integrating all three components
-class IntegratedAnalysisService:
-    def __init__(self):
-        self.prompt_manager = DatabasePromptManager()
-        self.framework_manager = DatabaseFrameworkManager()
-        self.weighting_manager = WeightingMethodologyManager()
-    
-    def analyze_with_components(self, text, prompt_version, framework_version, 
-                              weighting_version, model):
-        # Load versioned components
-        prompt = self.prompt_manager.get_version(prompt_version)
-        framework = self.framework_manager.get_version(framework_version)
-        weighting = self.weighting_manager.get_version(weighting_version)
-        
-        # Execute analysis with full provenance tracking
-        return self.execute_analysis(text, prompt, framework, weighting, model)
-```
-
-
-## **Research Workflow Benefits**
-
-### **Systematic Component Development**
-
-- **Independent Iteration**: Modify prompts without affecting framework definitions
-- **Compatibility Testing**: Systematic evaluation of component combinations
-- **Provenance Tracking**: Complete experimental history for academic publication
-- **Rollback Capabilities**: Return to previous versions when experiments fail
-
-
-### **Academic Validation Support**
-
-- **Component Attribution**: Clear attribution of performance improvements to specific components
-- **Replication Packages**: Complete component specifications for research reproduction
-- **Statistical Analysis**: Performance comparison across component combinations
-- **Documentation Standards**: Academic-quality methodology documentation
-
-This expanded approach transforms your CLI tools from simple analysis executors into a comprehensive research laboratory that maintains the separation of concerns between prompts, frameworks, and weighting methodologies while enabling systematic exploration of their interactions. The manual development approach with LLM chatbots preserves the conversational creativity essential for hypothesis formation while the database integration ensures rigorous experimental tracking for academic credibility.
 
 ## **User Story 2: Multi-Framework Batch Validation Studies**
 

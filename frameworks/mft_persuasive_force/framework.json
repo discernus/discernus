@@ -1,82 +1,117 @@
 {
-  "framework_name": "fukuyama_identity",
-  "display_name": "Fukuyama Identity Framework", 
-  "version": "v2025.01.07",
-  "description": "Fukuyama Identity Framework - Analyzes democratic sustainability through identity, recognition, and thymos dynamics based on Francis Fukuyama's theoretical insights",
+  "framework_name": "mft_persuasive_force",
+  "display_name": "MFT Persuasive Force Framework",
+  "version": "v2025.06.11", 
+  "description": "MFT Persuasive Force Framework - Analyzes persuasive communication through empirically-validated moral foundations",
   "ellipse": {
     "description": "Coordinate system parameters",
     "semi_major_axis": 1.0,
     "semi_minor_axis": 0.7,
     "orientation": "vertical"
   },
-  "weighting_philosophy": {
-    "description": "Two-tier weighting system based on Fukuyama's theoretical hierarchy",
-    "primary_tier": {
-      "weight": 1.0,
-      "description": "Identity foundation - most fundamental to democratic sustainability",
-      "wells": ["Creedal Identity", "Ethnic Identity"]
+  "cultural_segments": {
+    "progressive_urban": {
+      "compassion": 1.0,
+      "equity": 0.95,
+      "solidarity": 0.4,
+      "hierarchy": 0.2,
+      "purity": 0.15,
+      "cruelty": -1.0,
+      "exploitation": -0.95,
+      "treachery": -0.4,
+      "rebellion": 0.3,
+      "corruption": -0.6
     },
-    "secondary_tier": {
-      "weight": 0.9,
-      "description": "Recognition and thymos dynamics - core psychological drivers",
-      "wells": ["Integrative Recognition", "Fragmentary Recognition", "Democratic Thymos", "Megalothymic Thymos"]
+    "conservative_religious": {
+      "compassion": 0.8,
+      "equity": 0.6,
+      "solidarity": 0.9,
+      "hierarchy": 1.0,
+      "purity": 1.0,
+      "cruelty": -0.8,
+      "exploitation": -0.6,
+      "treachery": -0.9,
+      "rebellion": -1.0,
+      "corruption": -1.0
+    },
+    "libertarian_independent": {
+      "compassion": 0.7,
+      "equity": 0.9,
+      "solidarity": 0.3,
+      "hierarchy": 0.2,
+      "purity": 0.3,
+      "cruelty": -0.7,
+      "exploitation": -0.9,
+      "treachery": -0.5,
+      "rebellion": 0.4,
+      "corruption": -0.8
+    },
+    "working_class_traditional": {
+      "compassion": 0.8,
+      "equity": 0.8,
+      "solidarity": 0.9,
+      "hierarchy": 0.7,
+      "purity": 0.6,
+      "cruelty": -0.8,
+      "exploitation": -0.9,
+      "treachery": -0.9,
+      "rebellion": -0.6,
+      "corruption": -0.7
+    },
+    "multicultural_urban": {
+      "compassion": 0.9,
+      "equity": 0.9,
+      "solidarity": 0.7,
+      "hierarchy": 0.4,
+      "purity": 0.4,
+      "cruelty": -0.9,
+      "exploitation": -0.9,
+      "treachery": -0.7,
+      "rebellion": 0.1,
+      "corruption": -0.6
+    },
+    "rural_traditional": {
+      "compassion": 0.7,
+      "equity": 0.6,
+      "solidarity": 0.8,
+      "hierarchy": 0.9,
+      "purity": 0.8,
+      "cruelty": -0.7,
+      "exploitation": -0.6,
+      "treachery": -0.8,
+      "rebellion": -0.9,
+      "corruption": -0.8
     }
   },
   "wells": {
-    "Creedal Identity": {
-      "angle": 90,
-      "weight": 1.0,
-      "type": "integrative",
-      "tier": "primary"
-    },
-    "Integrative Recognition": {
-      "angle": 45,
-      "weight": 0.9,
-      "type": "integrative", 
-      "tier": "secondary"
-    },
-    "Democratic Thymos": {
-      "angle": 135,
-      "weight": 0.9,
-      "type": "integrative",
-      "tier": "secondary"
-    },
-    "Ethnic Identity": {
-      "angle": 270,
-      "weight": -1.0,
-      "type": "disintegrative",
-      "tier": "primary"
-    },
-    "Fragmentary Recognition": {
-      "angle": 225,
-      "weight": -0.9,
-      "type": "disintegrative",
-      "tier": "secondary"
-    },
-    "Megalothymic Thymos": {
-      "angle": 315,
-      "weight": -0.9,
-      "type": "disintegrative",
-      "tier": "secondary"
-    }
+    "Compassion": {"angle": 90, "weight": 1.0, "type": "integrative"},
+    "Equity": {"angle": 45, "weight": 0.9, "type": "integrative"},
+    "Solidarity": {"angle": 135, "weight": 0.8, "type": "integrative"},
+    "Hierarchy": {"angle": 160, "weight": 0.8, "type": "integrative"},
+    "Purity": {"angle": 20, "weight": 0.7, "type": "integrative"},
+    "Cruelty": {"angle": 270, "weight": -1.0, "type": "disintegrative"},
+    "Exploitation": {"angle": 225, "weight": -0.9, "type": "disintegrative"},
+    "Treachery": {"angle": 315, "weight": -0.8, "type": "disintegrative"},
+    "Rebellion": {"angle": 200, "weight": -0.8, "type": "disintegrative"},
+    "Corruption": {"angle": 340, "weight": -0.7, "type": "disintegrative"}
   },
   "scaling_factor": 0.8,
   "metrics": {
     "com": {
       "name": "Center of Mass",
-      "description": "Weighted center position considering signed weights"
+      "description": "Weighted center position considering cultural weights"
     },
-    "ies": {
-      "name": "Identity Elevation Score",
-      "description": "Y-axis position indicating integrative vs disintegrative pull"
+    "crs": {
+      "name": "Cultural Resonance Score", 
+      "description": "Appeal alignment with target demographic segment"
     },
-    "ics": {
-      "name": "Identity Coherence Score", 
-      "description": "Consistency of identity orientation across wells"
+    "fdi": {
+      "name": "Foundation Diversity Index",
+      "description": "Breadth of moral appeal across foundations"
     },
-    "tas": {
-      "name": "Thymos Alignment Score",
-      "description": "How narrative channels recognition-seeking behavior"
+    "ctt": {
+      "name": "Cross-Cultural Transferability",
+      "description": "Predicted effectiveness across demographic segments"
     }
   }
 }

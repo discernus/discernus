@@ -1,49 +1,77 @@
 {
-  "framework_name": "fukuyama_identity",
-  "display_name": "Fukuyama Identity Framework",
-  "version": "v2025.01.07",
-  "description": "The Fukuyama Identity Framework analyzes how political narratives either strengthen or fragment the civic culture necessary for pluralistic democracy. Based on Francis Fukuyama's theoretical insights about identity, recognition, and democratic sustainability, it focuses on three core dipoles that capture the psychological and institutional dynamics central to democratic health.",
+  "framework_name": "mft_persuasive_force",
+  "display_name": "MFT Persuasive Force Framework", 
+  "version": "v2025.06.11",
+  "description": "The MFT Persuasive Force Framework analyzes how political narratives deploy different moral appeals based on Haidt's empirically-validated moral foundations. Designed for cross-cultural persuasive communication analysis with demographic-specific weighting matrices.",
   "dipoles": [
     {
-      "name": "Identity Foundation",
-      "description": "What defines legitimate membership in the political community",
+      "name": "Care Foundation",
+      "description": "How does the narrative appeal to compassion versus acceptance of harm",
       "positive": {
-        "name": "Creedal Identity",
-        "description": "Defines citizenship through shared commitment to democratic principles—constitutionalism, rule of law, human equality. Emphasizes voluntary allegiance to civic ideals rather than inherited characteristics.",
-        "language_cues": ["constitutional principles", "shared values", "civic education", "naturalization", "merit-based citizenship", "democratic ideals", "voluntary commitment", "universal rights", "civic oath", "constitutional patriotism"]
+        "name": "Compassion",
+        "description": "Appeals to empathy, suffering reduction, protection of vulnerable populations. Emphasizes moral obligation to prevent harm and care for others.",
+        "language_cues": ["empathy", "suffering", "protect the vulnerable", "care for others", "prevent harm", "compassion", "help those in need", "moral obligation to care"]
       },
       "negative": {
-        "name": "Ethnic Identity", 
-        "description": "Defines belonging through blood, soil, cultural inheritance, or religious tradition. Treats citizenship as an inherited status rather than a chosen commitment.",
-        "language_cues": ["blood and soil", "ancestral heritage", "cultural purity", "birthright citizenship", "real Americans", "our people", "they don't belong", "foreign influence", "traditional values", "native born"]
+        "name": "Cruelty", 
+        "description": "Indifference to harm, callousness toward suffering, acceptance of preventable damage to others.",
+        "language_cues": ["acceptable losses", "collateral damage", "tough choices", "they deserve it", "survival of fittest", "callous indifference", "preventable suffering"]
       }
     },
     {
-      "name": "Recognition Dynamics",
-      "description": "How does the demand for recognition affect social solidarity",
+      "name": "Fairness Foundation",
+      "description": "How does the narrative frame justice and proportionality",
       "positive": {
-        "name": "Integrative Recognition",
-        "description": "Acknowledges particular experiences while maintaining universal human dignity. Builds broader community by expanding the circle of moral concern without creating zero-sum competition.",
-        "language_cues": ["shared humanity", "common citizenship", "universal dignity", "mutual understanding", "bridge-building", "inclusive community", "expanding circle", "common ground", "unity in diversity", "moral progress"]
+        "name": "Equity",
+        "description": "Proportional justice, merit-based outcomes, procedural fairness. Emphasizes equal treatment and deserved consequences.",
+        "language_cues": ["fair treatment", "equal justice", "merit-based", "proportional response", "procedural fairness", "everyone deserves", "equal opportunity"]
       },
       "negative": {
-        "name": "Fragmentary Recognition",
-        "description": "Atomizes society into competing identity groups, each claiming moral superiority through victimization narratives. Creates zero-sum competition for status rather than seeking common ground.",
-        "language_cues": ["group grievances", "victimization hierarchy", "identity-based claims", "us versus them", "moral scorekeeping", "oppression Olympics", "separate communities", "irreconcilable differences", "lived experience", "zero-sum competition"]
+        "name": "Exploitation",
+        "description": "Unfair advantage, rigged systems, proportionality violations. Acceptance of systematic unfairness or cheating.",
+        "language_cues": ["rigged system", "unfair advantage", "systematic cheating", "double standards", "exploitation", "gaming the system", "undeserved benefits"]
       }
     },
     {
-      "name": "Psychological Motivation",
-      "description": "How does the narrative channel the human need for recognition",
+      "name": "Loyalty Foundation", 
+      "description": "How does the narrative appeal to group solidarity versus betrayal",
       "positive": {
-        "name": "Democratic Thymos",
-        "description": "Represents healthy demand for equal dignity channeled through civic participation and mutual respect. Seeks recognition through contribution to the common good rather than dominance over others.",
-        "language_cues": ["civic virtue", "equal dignity", "procedural fairness", "mutual respect", "common good", "civic participation", "democratic norms", "institutional legitimacy", "public service", "civic duty"]
+        "name": "Solidarity",
+        "description": "Group cohesion, collective identity, mutual obligation, standing together through challenges.",
+        "language_cues": ["stand together", "mutual obligation", "collective identity", "group solidarity", "shared sacrifice", "common cause", "united we stand"]
       },
       "negative": {
-        "name": "Megalothymic Thymos",
-        "description": "Represents destructive desire for superior recognition through dominance over other groups. Converts natural human need for dignity into zero-sum competition for status.",
-        "language_cues": ["group superiority", "dominance", "contempt for opponents", "zero-sum competition", "status hierarchy", "moral superiority", "righteous anger", "justified dominance", "we're better than", "they deserve less"]
+        "name": "Treachery",
+        "description": "Betrayal of group trust, abandonment of collective obligations, disloyalty to shared commitments.",
+        "language_cues": ["betrayal", "abandonment", "selling out", "disloyalty", "breaking trust", "selfish abandonment", "turning against"]
+      }
+    },
+    {
+      "name": "Authority Foundation",
+      "description": "How does the narrative frame respect for hierarchy and order",
+      "positive": {
+        "name": "Hierarchy", 
+        "description": "Respect for legitimate leadership, institutional order, proper chains of command and social structure.",
+        "language_cues": ["legitimate authority", "institutional order", "proper respect", "chain of command", "social structure", "rightful leadership", "institutional legitimacy"]
+      },
+      "negative": {
+        "name": "Rebellion",
+        "description": "Challenge to legitimate authority, subversion of established order, disrespect for institutional structures.",
+        "language_cues": ["challenge authority", "subvert order", "institutional rebellion", "disrespect leadership", "undermine hierarchy", "revolutionary disruption"]
+      }
+    },
+    {
+      "name": "Sanctity Foundation",
+      "description": "How does the narrative invoke purity and sacred values",
+      "positive": {
+        "name": "Purity",
+        "description": "Sacred values, moral boundaries, spiritual transcendence, protection of what is holy or pure.",
+        "language_cues": ["sacred values", "moral boundaries", "spiritual transcendence", "pure intentions", "holy purposes", "moral sanctity", "sacred duty"]
+      },
+      "negative": {
+        "name": "Corruption", 
+        "description": "Degradation of sacred values, boundary violations, moral contamination, desecration of purity.",
+        "language_cues": ["moral contamination", "boundary violations", "desecration", "corruption of values", "degradation", "moral pollution", "sacred violation"]
       }
     }
   ]

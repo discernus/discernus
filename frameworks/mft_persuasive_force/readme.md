@@ -1,16 +1,12 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
+## **MFT Persuasive Force Framework Architecture**
 
-# Suggest a new mft based narrative gravity framework and weights for three different cultures in the context of evaluation of persuasive narratives. Separate alternative to civic virtue.
+This MFT-based framework would differ fundamentally from the Civic Virtue Framework by organizing around Haidt's empirically-validated psychological foundations rather than normative democratic ideals. This approach prioritizes descriptive accuracy over prescriptive moral hierarchy.
 
 - **Foundation-driven architecture**: Five dipoles directly mapping Haidt's empirically-validated moral foundations to persuasive communication patterns
 - **Cultural calibration**: Distinct weighting profiles for Western Liberal, East Asian Collectivist, and Traditional Religious contexts based on cross-cultural MFT research
 - **Persuasive force focus**: Framework optimized for analyzing how narratives deploy different moral appeals rather than comprehensive moral evaluation
 - **Empirical grounding**: Weights derived from Haidt's cross-cultural data showing systematic foundation prioritization differences
 - **Modular implementation**: Compatible with existing elliptical visualization while enabling culture-specific analytical precision
-
-🧠 A pure MFT-based framework would differ fundamentally from the Civic Virtue Framework by organizing around Haidt's empirically-validated psychological foundations rather than normative democratic ideals. This approach prioritizes descriptive accuracy over prescriptive moral hierarchy.
-
-## **MFT Persuasive Force Framework Architecture**
 
 **Foundation-Based Dipolar Structure**
 
@@ -216,26 +212,4 @@ The MFT Persuasive Force Framework transforms Haidt's descriptive moral psycholo
 Future development could incorporate **dynamic cultural weighting** based on real-time demographic data, **foundation interaction modeling** that captures how different moral appeals amplify or inhibit each other, and **temporal analysis** tracking how cultural foundation priorities shift over time in response to social and political changes.
 
 <div style="text-align: center">⁂</div>
-
-[^1]: Moral-Gravity-Wells-A-Quantitative-Framework-for-Discerning-the-Moral-Forces-Driving-the-Formatio.md
-
-[^2]: README.md
-
-[^3]: README.md
-
-[^4]: README.md
-
-[^5]: civic_virtue_api_prompt.md
-
-[^6]: political_spectrum_api_prompt.md
-
-[^7]: FRAMEWORK_ARCHITECTURE.md
-
-[^8]: Narrative-Gravity-Model-Epic-1-Corpus-Job-Management-Backend.md
-
-[^9]: i-ve-updated-the-files-in-this-3SOhPLUeRHirmfQDLsNCOw.md
-
-[^10]: dipoles.json
-
-[^11]: civic_virtue_prompt.md
 
