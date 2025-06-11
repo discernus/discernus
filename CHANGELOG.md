@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [v2.3.0] - Project organization and cursorrules compliance - 2025-06-10
+
+## [Unreleased]
+
 ### 📁 Project Organization - Cursorrules Compliance Cleanup - 2025-01-06
 - **Root Directory Cleanup**: Moved misplaced files to proper directories per cursorrules standards
   - **Test files moved**: `test_*.py` → `tests/integration/` and `tests/e2e/`
