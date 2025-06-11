@@ -1,5 +1,9 @@
 # Database Models for Narrative Gravity Analysis
 from .models import User, Corpus, Document, Chunk, Job, Task, Experiment, Run
+from .component_models import (
+    PromptTemplate, FrameworkVersion, WeightingMethodology, 
+    ComponentCompatibility, DevelopmentSession
+)
 
 __all__ = [
     'User',
@@ -9,5 +13,11 @@ __all__ = [
     'Job',
     'Task',
     'Experiment',
-    'Run'
+    'Run',
+    # Component versioning models
+    'PromptTemplate',
+    'FrameworkVersion', 
+    'WeightingMethodology',
+    'ComponentCompatibility',
+    'DevelopmentSession'
 ] 
