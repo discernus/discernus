@@ -93,14 +93,29 @@ class AcademicDataExporter:
         try:
             import pyreadstat
             dta_path = output_path / f"{study_name}.dta"
-            pyreadstat.write_dta(df_clean, str(dta_path), 
-                               variable_labels=data_dict['variable_labels'])
+            # Use correct pyreadstat API
+            pyreadstat.write_dta(df_clean, str(dta_path))
             output_files['stata'] = str(dta_path)
         except ImportError:
             print("⚠️  pyreadstat not available - skipping Stata .dta export")
+        except Exception as e:
+            print(f"⚠️  Stata export failed: {e} - continuing with other formats")
         
         # 4. JSON (Python-optimized with metadata)
         json_path = output_path / f"{study_name}.json"
+        # Custom JSON serializer for pandas types
+        def json_serializer(obj):
+            if isinstance(obj, np.integer):
+                return int(obj)
+            elif isinstance(obj, np.floating):
+                return float(obj)
+            elif isinstance(obj, np.ndarray):
+                return obj.tolist()
+            elif isinstance(obj, (datetime, pd.Timestamp)):
+                return obj.isoformat()
+            else:
+                return str(obj)
+        
         export_data = {
             'metadata': {
                 'study_name': study_name,
@@ -117,7 +132,7 @@ class AcademicDataExporter:
         }
         
         with open(json_path, 'w') as f:
-            json.dump(export_data, f, indent=2, default=str)
+            json.dump(export_data, f, indent=2, default=json_serializer)
         output_files['json'] = str(json_path)
         
         # 5. Data dictionary (separate file)
@@ -197,48 +212,34 @@ class AcademicDataExporter:
             e.created_at as experiment_date,
             e.description as experiment_description,
             
-            -- Framework information
-            f.name as framework_name,
-            fv.version as framework_version,
-            fv.dipoles_json,
-            fv.framework_json,
-            
-            -- Prompt template information
-            COALESCE(pt.name, 'legacy') as prompt_template_name,
-            COALESCE(pt.version, 'v1.0') as prompt_template_version,
-            COALESCE(pt.template_type, 'standard') as template_type,
-            
-            -- Weighting methodology information
-            COALESCE(wm.name, 'linear') as weighting_method_name,
-            COALESCE(wm.version, 'v1.0') as weighting_method_version,
-            COALESCE(wm.algorithm_type, 'linear') as weighting_algorithm,
-            
-            -- Run results
+            -- Run results  
             r.id as run_id,
-            r.text_title,
-            r.model_name,
-            r.analysis_result,
-            r.cost,
-            r.processing_time,
+            r.text_id,
+            r.llm_model,
+            r.text_content,
+            r.raw_scores,
+            r.hierarchical_ranking,
+            r.framework_fit_score,
+            r.narrative_elevation,
+            r.polarity,
+            r.coherence,
+            r.directional_purity,
+            r.narrative_position_x,
+            r.narrative_position_y,
+            r.api_cost,
+            r.duration_seconds,
             r.created_at as run_date,
+            r.success,
             
-            -- Calculated metrics
-            r.coefficient_variation,
-            r.icc_score,
-            r.confidence_intervals,
-            r.statistical_summary,
+            -- Template and framework info
+            e.prompt_template_id,
+            e.framework_config_id,
+            e.scoring_algorithm_id,
+            r.prompt_template_version,
+            r.framework_version
             
-            -- Narrative positioning
-            r.narrative_position,
-            r.relative_position,
-            r.framework_fit
-            
-        FROM experiments e
-        JOIN frameworks f ON e.framework_id = f.id
-        JOIN framework_versions fv ON e.framework_version_id = fv.id  
-        JOIN runs r ON e.id = r.experiment_id
-        LEFT JOIN prompt_templates pt ON e.prompt_template_id = pt.id
-        LEFT JOIN weighting_methodologies wm ON e.weighting_method_id = wm.id
+        FROM experiment e
+        JOIN run r ON e.id = r.experiment_id
         """
         
         conditions = []
@@ -366,8 +367,8 @@ class AcademicDataExporter:
         df_clean = df_clean.rename(columns=column_mapping)
         
         # Parse JSON fields into numeric columns
-        if 'analysis_result' in df_clean.columns:
-            df_clean = self._expand_analysis_results(df_clean)
+        if 'raw_scores' in df_clean.columns:
+            df_clean = self._expand_raw_scores(df_clean)
         
         # Convert dates to proper datetime
         date_columns = ['exp_date', 'analysis_date']
@@ -383,11 +384,18 @@ class AcademicDataExporter:
         
         # Handle missing values appropriately
         df_clean = df_clean.fillna({
-            'cv': np.nan,
-            'icc': np.nan,
-            'cost': 0.0,
-            'process_time_sec': 0.0
+            'api_cost': 0.0,
+            'duration_seconds': 0.0
         })
+        
+        # Convert dict columns to JSON strings for CSV compatibility
+        dict_columns = []
+        for col in df_clean.columns:
+            if len(df_clean) > 0 and isinstance(df_clean[col].iloc[0], dict):
+                dict_columns.append(col)
+        
+        for col in dict_columns:
+            df_clean[col] = df_clean[col].apply(lambda x: json.dumps(x) if isinstance(x, dict) else x)
         
         return df_clean
     
@@ -413,38 +421,42 @@ class AcademicDataExporter:
         
         return df_clean
     
-    def _expand_analysis_results(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Expand JSON analysis results into individual columns."""
+    def _expand_raw_scores(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Expand JSON raw scores into individual columns."""
         
-        if 'analysis_result' not in df.columns:
+        if 'raw_scores' not in df.columns:
             return df
         
-        # Parse JSON analysis results
-        analysis_data = []
+        # Parse JSON raw scores
+        scores_data = []
         for idx, row in df.iterrows():
             try:
-                if pd.notna(row['analysis_result']):
-                    result = json.loads(row['analysis_result']) if isinstance(row['analysis_result'], str) else row['analysis_result']
+                if pd.notna(row['raw_scores']):
+                    # Handle both string JSON and dict objects
+                    if isinstance(row['raw_scores'], str):
+                        scores = json.loads(row['raw_scores'])
+                    elif isinstance(row['raw_scores'], dict):
+                        scores = row['raw_scores']
+                    else:
+                        scores = {}
                     
-                    # Extract well scores
+                    # Extract well scores with proper naming
                     well_scores = {}
-                    if isinstance(result, dict):
-                        for key, value in result.items():
-                            if isinstance(value, dict) and 'score' in value:
-                                well_scores[f'well_{key}'] = value['score']
-                            elif isinstance(value, (int, float)):
-                                well_scores[f'well_{key}'] = value
+                    if isinstance(scores, dict):
+                        for key, value in scores.items():
+                            if isinstance(value, (int, float)):
+                                well_scores[f'well_{key.lower()}'] = value
                     
-                    analysis_data.append(well_scores)
+                    scores_data.append(well_scores)
                 else:
-                    analysis_data.append({})
-            except (json.JSONDecodeError, TypeError):
-                analysis_data.append({})
+                    scores_data.append({})
+            except (json.JSONDecodeError, TypeError, ValueError):
+                scores_data.append({})
         
         # Convert to DataFrame and merge
-        if analysis_data:
-            analysis_df = pd.DataFrame(analysis_data)
-            df = pd.concat([df, analysis_df], axis=1)
+        if scores_data:
+            scores_df = pd.DataFrame(scores_data)
+            df = pd.concat([df, scores_df], axis=1)
         
         return df
     
