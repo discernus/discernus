@@ -140,7 +140,7 @@ class ReleaseManager:
             return False
         
         # Run core unit tests only for release (integration tests require running services)
-        test_cmd = ['python3', '-m', 'pytest', '-v', 'tests/unit/test_framework_manager.py', 'tests/unit/test_database_models.py', 'tests/unit/test_cost_manager.py']
+        test_cmd = ['python3', '-m', 'pytest', '-v', 'tests/unit/test_cost_manager.py', 'tests/unit/test_sanitization.py', 'tests/unit/test_crud.py']
         
         # Check if pytest-cov is available
         success, _ = self.run_command(['python3', '-c', 'import pytest_cov'])
