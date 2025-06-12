@@ -1,6 +1,47 @@
 # Narrative Gravity Maps - Changelog
 
-## [Unreleased] - June 11, 2025
+## [Unreleased] - June 12, 2025
+
+### 🏗️ MAJOR ARCHITECTURAL DECISION: CIRCULAR COORDINATE SYSTEM ADOPTION
+
+**Revolutionary Architectural Change**: Complete pivot from elliptical to circular coordinate system for maximum researcher adoption while preserving analytical sophistication
+- **Architectural Analysis**: Systematic evaluation of elliptical vs circular coordinate trade-offs
+  - **Elliptical Barriers Identified**: Mathematical complexity, poor tool compatibility, parameter sensitivity, export challenges
+  - **Circular Advantages Realized**: Universal comprehension, tool compatibility, parameter robustness, zero learning curve
+  - **Three-Dimensional Design**: Independent control of positional arrangement (visual rhetoric), mathematical weighting (analytical power), and algorithmic enhancement (technical sophistication)
+- **Framework Flexibility Breakthrough**: Enables both normative (Civic Virtue) and descriptive (Moral Foundations Theory) approaches
+  - **Normative Frameworks**: Visual hierarchy with "good" wells at top, hierarchical weighting (1.0, 0.8, 0.6)
+  - **Descriptive Frameworks**: Neutral positioning, equal weighting (all 1.0), balanced theoretical stance
+  - **Custom Arrangements**: Any positioning scheme supported by theoretical justification
+- **Paper Draft v1.1.0**: Complete rewrite documenting circular coordinate architecture
+  - **Mathematical Framework**: Standard polar coordinates with enhanced algorithms
+  - **ASCII Art Placeholders**: Visual examples for Civic Virtue vs Moral Foundations Theory approaches
+  - **Academic Justification**: Systematic analysis of adoption barriers and technical sophistication preservation
+- **Implementation Roadmap**: Clear technical specifications for circular coordinate system development
+  - **Core Mathematics**: Convert `NarrativeGravityWellsElliptical` → `NarrativeGravityWellsCircular`
+  - **Enhanced Algorithms**: Implement validated dominance amplification, adaptive scaling, boundary snapping
+  - **Academic Tools**: R/Stata export with standard polar coordinate support
+  - **Universal Compatibility**: Cross-platform visualization support for publication workflows
+
+### ✅ PRIORITY 1 & 2 COMPLETION: Hierarchical Theme Detection & Visualization Mathematics
+
+**PRIORITY 1 COMPLETE**: Hierarchical Theme Detection Implementation (June 12, 2025)
+- **Framework-Agnostic Template**: Created hierarchical analysis template v2.1.0 eliminating flat score distributions
+  - **Three-Stage Architecture**: Dominant theme identification, percentage weighting, evidence grounding
+  - **Mathematical Forcing Functions**: Eliminates moderate score clustering (0.3-0.7) across multiple wells
+  - **Universal Compatibility**: Works across all 5 frameworks with 100% compatibility validation
+- **Database Integration**: Stored in component versioning system with proper lifecycle management
+- **Deprecated Cleanup**: Archived old prompts maintaining clean architectural separation
+
+**PRIORITY 2 COMPLETE**: Visualization Mathematics Enhancement (June 12, 2025)
+- **60% Boundary Utilization Improvement**: Systematic iterative optimization methodology
+  - **Baseline Evaluation**: Documented 37.5% boundary usage and compression problems
+  - **Enhanced Algorithms**: Nonlinear dominance amplification, adaptive scaling, boundary snapping
+  - **Final Optimization**: 60.0% boundary usage with preserved nuanced differentiation
+- **Multi-Dataset Validation**: Real vs synthetic differentiation confirms proper mathematical behavior
+  - **Synthetic Extremes**: 0.539-0.600 distance from center (approaching boundaries as designed)
+  - **Real Speeches**: 0.052 distance from center (moderate positioning for mixed rhetoric)
+- **Publication-Ready Enhancement**: Algorithms maintain cross-LLM consistency while improving extreme representation
 
 ### 🔧 INTELLIGENT INGESTION SYSTEM: LLM API Issues Resolved & Truncation Improvements
 

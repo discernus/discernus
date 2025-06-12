@@ -1,0 +1,143 @@
+{
+  "positioning_strategy_examples": {
+    "description": "Framework developers can choose from these positioning strategies based on their theoretical goals",
+    
+    "strategy_1_vertical_clustering": {
+      "use_case": "Normative frameworks emphasizing moral hierarchy (e.g., Civic Virtue)",
+      "positioning_strategy": {
+        "type": "clustered_positioning",
+        "description": "Wells clustered around vertical axis to emphasize moral hierarchy",
+        "clusters": {
+          "top_cluster": {
+            "center_angle": 90,
+            "span": 60,
+            "well_types": ["virtue", "positive", "integrative"],
+            "description": "Positive wells clustered around top (90°)"
+          },
+          "bottom_cluster": {
+            "center_angle": 270,
+            "span": 60,
+            "well_types": ["problem", "negative", "disintegrative"],
+            "description": "Negative wells clustered around bottom (270°)"
+          }
+        }
+      },
+      "example_result": "Wells positioned at 60°-120° (positive) and 240°-300° (negative) for strong moral clustering"
+    },
+    
+    "strategy_2_individual_angles": {
+      "use_case": "Frameworks with specific theoretical positioning requirements (e.g., custom research frameworks)",
+      "positioning_strategy": {
+        "type": "individual_angles",
+        "description": "Framework developer specifies exact angle for each well based on theoretical model"
+      },
+      "wells_example": {
+        "Primary_Concept": {"angle": 45, "weight": 1.0, "type": "integrative"},
+        "Secondary_Concept": {"angle": 135, "weight": 0.8, "type": "integrative"},
+        "Opposing_Force": {"angle": 225, "weight": -1.0, "type": "disintegrative"},
+        "Balancing_Factor": {"angle": 315, "weight": -0.8, "type": "disintegrative"}
+      },
+      "example_result": "Each well positioned exactly where framework developer specifies"
+    },
+    
+    "strategy_3_even_distribution": {
+      "use_case": "Descriptive frameworks avoiding moral hierarchy implications (e.g., Moral Foundations Theory)",
+      "positioning_strategy": {
+        "type": "even_distribution",
+        "description": "Wells distributed evenly around circle to avoid visual hierarchy",
+        "distribution_method": "equal_spacing",
+        "start_angle": 0,
+        "rotation_offset": 0
+      },
+      "example_result": "For 8 wells: positioned at 0°, 45°, 90°, 135°, 180°, 225°, 270°, 315° (neutral distribution)"
+    },
+    
+    "strategy_4_horizontal_clustering": {
+      "use_case": "Political frameworks emphasizing left-right spectrum",
+      "positioning_strategy": {
+        "type": "clustered_positioning",
+        "description": "Wells clustered around horizontal axis for political left-right emphasis",
+        "clusters": {
+          "left_cluster": {
+            "center_angle": 180,
+            "span": 80,
+            "well_types": ["progressive", "left", "liberal"],
+            "description": "Progressive wells clustered around left (180°)"
+          },
+          "right_cluster": {
+            "center_angle": 0,
+            "span": 80,
+            "well_types": ["conservative", "right", "traditional"],
+            "description": "Conservative wells clustered around right (0°)"
+          }
+        }
+      },
+      "example_result": "Wells positioned at 140°-220° (left) and 320°-40° (right) for political spectrum clustering"
+    },
+    
+    "strategy_5_diagonal_clustering": {
+      "use_case": "Frameworks with diagonal opposition (e.g., authoritarian-libertarian vs left-right)",
+      "positioning_strategy": {
+        "type": "clustered_positioning",
+        "description": "Wells clustered around diagonal axes for complex multi-dimensional frameworks",
+        "clusters": {
+          "upper_right_cluster": {
+            "center_angle": 45,
+            "span": 50,
+            "well_types": ["auth_right", "traditional_authority"],
+            "description": "Authoritarian-right cluster"
+          },
+          "lower_left_cluster": {
+            "center_angle": 225,
+            "span": 50,
+            "well_types": ["lib_left", "progressive_liberty"],
+            "description": "Libertarian-left cluster"
+          },
+          "upper_left_cluster": {
+            "center_angle": 135,
+            "span": 40,
+            "well_types": ["auth_left", "state_control"],
+            "description": "Authoritarian-left cluster"
+          },
+          "lower_right_cluster": {
+            "center_angle": 315,
+            "span": 40,
+            "well_types": ["lib_right", "free_market"],
+            "description": "Libertarian-right cluster"
+          }
+        }
+      },
+      "example_result": "Four-quadrant clustering for political compass style frameworks"
+    }
+  },
+  
+  "implementation_guidelines": {
+    "for_framework_developers": [
+      "Choose positioning strategy based on theoretical goals",
+      "Vertical clustering: Best for normative frameworks emphasizing moral hierarchy",
+      "Horizontal clustering: Best for political left-right frameworks",
+      "Diagonal clustering: Best for multi-dimensional frameworks (political compass style)",
+      "Individual angles: Best for precise theoretical positioning requirements",
+      "Even distribution: Best for descriptive frameworks avoiding implications"
+    ],
+    "clustering_orientations": [
+      "Vertical (top/bottom): Moral hierarchy emphasis (good/bad, virtue/vice)",
+      "Horizontal (left/right): Political spectrum emphasis (progressive/conservative)",
+      "Diagonal: Multi-dimensional emphasis (auth/lib + left/right)",
+      "Custom angles: Any orientation based on theoretical needs"
+    ],
+    "configuration_flexibility": [
+      "Span parameter: Adjust tightness of clustering (30°-90° typical range)",
+      "Center angles: Position clusters anywhere on circle (0°-360°)",
+      "Multiple clusters: Support 2, 3, 4, or more clusters per framework",
+      "Well type mapping: Assign any well types to any clusters",
+      "Mixed approaches: Some wells clustered, others individual",
+      "Framework-agnostic: Engine supports any clustering terminology"
+    ],
+    "backward_compatibility": [
+      "Legacy 'integrative/disintegrative' terminology still supported",
+      "Automatic conversion from old CV framework format",
+      "Individual angle specifications always respected"
+    ]
+  }
+} 

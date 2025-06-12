@@ -9,6 +9,24 @@
     "semi_minor_axis": 0.7,
     "orientation": "vertical"
   },
+  "positioning_strategy": {
+    "type": "clustered_positioning",
+    "description": "Wells clustered around vertical dipoles to emphasize moral hierarchy",
+    "clusters": {
+      "top_cluster": {
+        "center_angle": 90,
+        "span": 60,
+        "well_types": ["integrative"],
+        "description": "Virtue wells clustered around top (90°) within 60° span"
+      },
+      "bottom_cluster": {
+        "center_angle": 270,
+        "span": 60,
+        "well_types": ["disintegrative"],
+        "description": "Problem wells clustered around bottom (270°) within 60° span"
+      }
+    }
+  },
   "weighting_philosophy": {
     "description": "Three-tier weighting system based on moral psychology research",
     "primary_tier": {
@@ -35,25 +53,25 @@
       "tier": "primary"
     },
     "Truth": {
-      "angle": 45,
+      "angle": 75,
       "weight": 0.8,
       "type": "integrative",
       "tier": "secondary"
     },
     "Hope": {
-      "angle": 20,
+      "angle": 60,
       "weight": 0.6,
       "type": "integrative",
       "tier": "tertiary"
     },
     "Justice": {
-      "angle": 135,
+      "angle": 105,
       "weight": 0.8,
       "type": "integrative",
       "tier": "secondary"
     },
     "Pragmatism": {
-      "angle": 160,
+      "angle": 120,
       "weight": 0.6,
       "type": "integrative",
       "tier": "tertiary"
@@ -65,25 +83,25 @@
       "tier": "primary"
     },
     "Fear": {
-      "angle": 200,
+      "angle": 240,
       "weight": -0.6,
       "type": "disintegrative",
       "tier": "tertiary"
     },
     "Resentment": {
-      "angle": 225,
+      "angle": 255,
       "weight": -0.8,
       "type": "disintegrative",
       "tier": "secondary"
     },
     "Manipulation": {
-      "angle": 315,
+      "angle": 285,
       "weight": -0.8,
       "type": "disintegrative",
       "tier": "secondary"
     },
     "Fantasy": {
-      "angle": 340,
+      "angle": 300,
       "weight": -0.6,
       "type": "disintegrative",
       "tier": "tertiary"
