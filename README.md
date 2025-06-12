@@ -1,6 +1,6 @@
 # Narrative Gravity Maps: Quantitative Framework for Analyzing Persuasive Narratives
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: All Rights Reserved](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)]()
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PostgreSQL](https://img.shields.io/badge/database-postgresql-blue.svg)](https://www.postgresql.org/)
 
@@ -393,7 +393,9 @@ For the academic paper (when published):
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Copyright (c) 2025 Jeff Whatcott. All rights reserved.
+
+This project is proprietary software. No part of this software may be reproduced, distributed, or transmitted in any form or by any means without the prior written permission of the copyright holder. See the [LICENSE](LICENSE) file for complete terms.
 
 ## Support and Documentation
 
