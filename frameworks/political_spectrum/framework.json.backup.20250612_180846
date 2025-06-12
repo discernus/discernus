@@ -1,0 +1,113 @@
+{
+  "framework_name": "political_spectrum",
+  "display_name": "Political Spectrum Framework",
+  "version": "v2025.06.04",
+  "description": "Political Spectrum Analysis Mathematical Framework",
+  "circle": {
+    "description": "Circular coordinate system parameters",
+    "radius": 1.0
+  },
+  "positioning_strategy": {
+    "type": "clustered_positioning",
+    "description": "Wells clustered around horizontal axis for political left-right emphasis",
+    "clusters": {
+      "left_cluster": {
+        "center_angle": 180,
+        "span": 80,
+        "well_types": [
+          "progressive"
+        ],
+        "description": "Progressive/left wells clustered around left (180\u00b0)"
+      },
+      "right_cluster": {
+        "center_angle": 0,
+        "span": 80,
+        "well_types": [
+          "conservative"
+        ],
+        "description": "Conservative/right wells clustered around right (0\u00b0)"
+      }
+    }
+  },
+  "wells": {
+    "Solidarity": {
+      "angle": 180,
+      "weight": 1.0,
+      "type": "progressive",
+      "tier": "primary"
+    },
+    "Equality": {
+      "angle": 160,
+      "weight": 0.9,
+      "type": "progressive",
+      "tier": "primary"
+    },
+    "Democracy": {
+      "angle": 200,
+      "weight": 1.0,
+      "type": "progressive",
+      "tier": "primary"
+    },
+    "Cosmopolitan": {
+      "angle": 140,
+      "weight": 0.7,
+      "type": "progressive",
+      "tier": "secondary"
+    },
+    "Progressive": {
+      "angle": 220,
+      "weight": 0.8,
+      "type": "progressive",
+      "tier": "secondary"
+    },
+    "Competition": {
+      "angle": 0,
+      "weight": 1.0,
+      "type": "conservative",
+      "tier": "primary"
+    },
+    "Tradition": {
+      "angle": 340,
+      "weight": 0.9,
+      "type": "conservative",
+      "tier": "primary"
+    },
+    "Control": {
+      "angle": 20,
+      "weight": 1.0,
+      "type": "conservative",
+      "tier": "primary"
+    },
+    "Nationalist": {
+      "angle": 320,
+      "weight": 0.7,
+      "type": "conservative",
+      "tier": "secondary"
+    },
+    "Conservative": {
+      "angle": 40,
+      "weight": 0.8,
+      "type": "conservative",
+      "tier": "secondary"
+    }
+  },
+  "well_type_colors": {
+    "progressive": "#1976D2",
+    "conservative": "#C62828"
+  },
+  "scaling_factor": 0.9,
+  "metrics": {
+    "com": {
+      "name": "Center of Mass",
+      "description": "Weighted center position considering political orientation"
+    },
+    "pps": {
+      "name": "Political Polarity Score",
+      "description": "Distance from center normalized by circle radius"
+    },
+    "lrs": {
+      "name": "Left-Right Score",
+      "description": "X-axis position indicating progressive vs conservative orientation"
+    }
+  }
+}

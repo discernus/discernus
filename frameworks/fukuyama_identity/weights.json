@@ -1,0 +1,55 @@
+{
+  "well_weights": {
+    "Creedal Identity": {
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Integrative Recognition": {
+      "weight": 0.9,
+      "type": "integrative",
+      "tier": "secondary"
+    },
+    "Democratic Thymos": {
+      "weight": 0.9,
+      "type": "integrative",
+      "tier": "secondary"
+    },
+    "Ethnic Identity": {
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Fragmentary Recognition": {
+      "weight": -0.9,
+      "type": "disintegrative",
+      "tier": "secondary"
+    },
+    "Megalothymic Thymos": {
+      "weight": -0.9,
+      "type": "disintegrative",
+      "tier": "secondary"
+    }
+  },
+  "weighting_philosophy": {
+    "description": "Two-tier weighting system based on Fukuyama's theoretical hierarchy",
+    "primary_tier": {
+      "weight": 1.0,
+      "description": "Identity foundation - most fundamental to democratic sustainability",
+      "wells": [
+        "Creedal Identity",
+        "Ethnic Identity"
+      ]
+    },
+    "secondary_tier": {
+      "weight": 0.9,
+      "description": "Recognition and thymos dynamics - core psychological drivers",
+      "wells": [
+        "Integrative Recognition",
+        "Fragmentary Recognition",
+        "Democratic Thymos",
+        "Megalothymic Thymos"
+      ]
+    }
+  }
+}

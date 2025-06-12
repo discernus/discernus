@@ -10,7 +10,7 @@ Transform messy text files and YouTube videos into research-ready corpus entries
 |----------|---------|-------------|
 | **[Quick Start Guide](INTELLIGENT_INGESTION_QUICKSTART.md)** | Essential commands & workflows | ⚡ **Start here** - get running in 5 minutes |
 | **[Complete User Guide](INTELLIGENT_CORPUS_INGESTION_GUIDE.md)** | Comprehensive documentation | 📖 Detailed setup, troubleshooting, advanced usage |
-| **[YouTube Quick Start](YOUTUBE_INGESTION_QUICKSTART.md)** | YouTube transcript extraction | 📺 Extract political speeches from YouTube |
+| **[YouTube Quick Start](YOUTUBE_INGESTION_QUICKSTART.md)** | YouTube transcript extraction | 📺 Extract persuasive discourse from YouTube |
 | **[YouTube Complete Guide](YOUTUBE_TRANSCRIPT_INGESTION_GUIDE.md)** | Comprehensive YouTube docs | 🎬 Advanced YouTube processing & troubleshooting |
 | **[Workflow Integration Guide](CORPUS_WORKFLOW_INTEGRATION.md)** | Research workflow context | 🔗 Understand how this fits your research process |
 
@@ -37,7 +37,7 @@ python3 scripts/demo_intelligent_ingest.py
 
 #### YouTube Videos
 ```bash
-# Extract political speech transcripts from YouTube
+# Extract persuasive discourse transcripts from YouTube
 python3 scripts/intelligent_ingest_youtube.py "YOUTUBE_URL" --verbose
 
 # OR demo version (no API key needed)
@@ -84,29 +84,29 @@ cat tmp/youtube_ingestion_*/VIDEO_ID_result.json
 
 ### 🏛️ Historical Research
 - Presidential speeches and addresses
-- Political campaign materials
-- Historical letters and documents
+- Campaign materials and manifestos
+- Historical letters and documents  
 - UN speeches and international addresses
-- **YouTube**: Official government channels, historical speech archives
+- **YouTube**: Official channels, historical speech archives
 
-### 📊 Political Analysis  
+### 📊 Discourse Analysis (using appropriate frameworks)
 - Legislative speeches
-- Party manifestos
-- Debate transcripts
 - Policy documents
-- **YouTube**: Political debates, press conferences, campaign rallies
+- Debate transcripts
+- Organizational communications
+- **YouTube**: Debates, press conferences, public addresses
 
 ### 🎓 Academic Research
 - Document corpus preparation
 - Metadata standardization
 - FAIR data compliance
 - Publication preparation
-- **YouTube**: Contemporary political discourse, international diplomacy
+- **YouTube**: Contemporary discourse, international communications
 
 ### 📺 Video Content Analysis
 - **Presidential addresses** on official channels
 - **UN General Assembly speeches** with captions
-- **Political debates** from news organizations
+- **Organizational debates** from news organizations
 - **Press conferences** and briefings
 - **Campaign speeches** and town halls
 - **International diplomatic** addresses
@@ -136,7 +136,7 @@ The Intelligent Corpus Ingestion Service (including YouTube support) works seaml
 ✅ **Priority 3 Academic Tools** - Publication and replication packages
 ✅ **React Research Workbench** - Interactive analysis interface
 ✅ **YouTube Transcript API** - Free transcript extraction without API costs
-✅ **Multi-Language Support** - Process political content in various languages
+✅ **Multi-Language Support** - Process persuasive content in various languages
 
 ## Key Features
 
@@ -172,7 +172,7 @@ The Intelligent Corpus Ingestion Service (including YouTube support) works seaml
 - **Free transcript extraction** - No YouTube API costs
 - **Multi-language support** - Extract captions in various languages
 - **Enhanced metadata** - Channel, views, upload date, duration
-- **Political content detection** - Automatic speech classification
+- **Content type detection** - Automatic discourse classification
 - **Citation generation** - Academic referencing for video sources
 
 ## Support & Next Steps

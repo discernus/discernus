@@ -6,6 +6,48 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased] - Future
 
+## [v1.2.0] - 2025-06-12
+
+### Added
+**FRAMEWORK AGNOSTICISM TRANSFORMATION**: Complete repositioning of paper to establish universal methodology approach
+- **Universal Methodology Focus**: Paper now positions Narrative Gravity Maps as framework-agnostic methodology applicable across all domains
+- **Cross-Domain Framework Examples**: Five example frameworks spanning political discourse, business communication, educational content, healthcare messaging, and communication studies
+- **Domain-Specific Application Guidelines**: Clear framework development guidance for any analytical domain
+- **Future Framework Opportunities**: Explicit pathways for business, education, healthcare, legal, international relations, and marketing applications
+
+### Changed
+- **Title**: "A Universal Quantitative Framework for Analyzing Persuasive Discourse" (emphasizing universal applicability)
+- **Abstract**: Universal methodology focus with domain-specific examples rather than political discourse primacy  
+- **Introduction**: Cross-domain methodology with political discourse as one application among many
+- **Core Methodology**: Framework-agnostic language throughout ("configurable gravity wells," "conceptual forces")
+- **Appendix**: Replaced detailed framework code with framework summaries and domain applicability table
+- **Keywords**: Added "framework-agnostic analysis," "universal methodology" 
+
+### Repositioned
+- **Civic Virtue Framework**: From primary focus to domain-specific example for political discourse analysis
+- **All 5 Frameworks**: Clearly positioned as demonstrations of methodology versatility rather than core contributions
+- **Research Applications**: Universal applicability across business, education, healthcare, legal, international relations
+- **Academic Appeal**: Positioned for computational social science, methodology, and interdisciplinary journals
+
+### Enhanced
+- **Cross-Domain Validation Strategy**: Emphasis on universal validation principles with domain-specific requirements
+- **Framework Development Guidelines**: Step-by-step guidance for creating frameworks in any domain
+- **Community Development**: Clear pathway for researcher contributions across all fields
+- **Technical Infrastructure**: Universal compatibility with academic tools across all disciplines
+
+### Evidence Status
+- ✅ Universal methodology validation across 5 diverse example frameworks
+- ✅ Framework-agnostic technical implementation confirmed  
+- ✅ Cross-domain applicability demonstrated through diverse configurations
+- ❌ Domain-specific human validation required for each framework application
+- ❌ Cross-domain validation studies needed for universal claims
+
+### Academic Impact Strategy
+- **Broader Adoption**: Any researcher can see methodology applicability to their domain
+- **Cross-Disciplinary Citation**: Universal methodology enables citation across multiple fields
+- **Community Growth**: Framework contribution pathway for researchers in any domain
+- **Methodological Innovation**: Focus on universal computational methodology rather than domain-specific applications
+
 ## [v1.0.1] - 2025-06-10
 
 ### Added

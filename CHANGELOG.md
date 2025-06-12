@@ -2,6 +2,286 @@
 
 ## [Unreleased] - June 12, 2025
 
+### 🧹 PROJECT ORGANIZATION CLEANUP: Repository Structure Standardization
+
+**COMPLETED**: Major cleanup of repository organization following established repo rules
+- **Root Directory Cleanup**: Moved 20+ files from root directory to appropriate locations per repo standards
+  - **Installation Scripts**: Moved to `scripts/` directory
+    - `install_essential_r_packages.R`, `install_academic_tools.py`, `install_r_packages.R`
+    - `export_academic_data.py`, `enhanced_r_template.R`
+  - **Visualization Demos**: Organized into `analysis_results/visualization_demos_2025_06_12/`
+    - Demo scripts, positioning strategies, clustering comparisons
+    - Lincoln visualization files (HTML/PNG outputs), test scripts
+    - Plotly visualization pipeline and enhancement scripts
+  - **Documentation Organization**: Moved guides to appropriate docs subdirectories
+    - `PLOTLY_ELLIPTICAL_GUIDE.md` → `archive/deprecated_visualization_guides/` (outdated)
+    - `ACADEMIC_PIPELINE_STATUS.md` → `docs/specifications/` (current status)
+- **Temporary File Organization**: Applied proper tmp/ directory structure per repo rules
+  - **Dated Structure**: Created `tmp/2025_06_12/framework_migration_cleanup/`
+  - **Loose File Consolidation**: Moved 20+ temporary files into proper dated directories
+  - **Framework Migration Artifacts**: Organized visualization iteration files, test scripts, and documentation
+- **Root Directory Standards Achievement**: Now complies with repo rule philosophy
+  - **Operational Files Only**: README.md, CHANGELOG.md, LICENSE, launch scripts, configuration
+  - **No Analysis Results**: All outputs properly organized in `analysis_results/`
+  - **No Utility Scripts**: All scripts properly organized in `scripts/`
+  - **No Temporary Files**: All temp files properly organized in dated `tmp/` directories
+
+**Repository Quality Improvement**: Clean, professional project structure following established standards
+- **Maintainability**: Clear separation of operational vs development vs results files
+- **Onboarding**: New contributors can quickly understand project organization
+- **Scalability**: Structure supports continued growth without clutter
+- **Academic Standards**: Professional organization supporting research credibility
+
+### ✅ TODO LIST ENHANCEMENT: Phase 2-4 Planning Integration
+
+**STRATEGIC PLANNING**: Added comprehensive next-phase planning to development TODO system
+- **Phase 2: Prompt Template Specification System**: Formal specification and versioning for templates
+  - JSON schema v2.0 for template structure, parameters, and validation rules
+  - Bidirectional sync system between database and filesystem (similar to framework sync)
+  - 3-tier validation pipeline (Schema, Semantic, Performance) with quality gates
+  - Migration tools for existing prompt templates to formal specification
+- **Phase 3: Weighting Scheme Specification System**: Mathematical methodology formalization
+  - Formal specification for dominance amplification, scaling factors, boundary logic
+  - Automated testing of weighting calculations against known benchmarks
+  - A/B testing framework for parameter optimization and academic documentation
+  - Cross-framework compatibility ensuring schemes work across all 5 frameworks
+- **Phase 4: Integration and Testing Pipeline**: Complete end-to-end quality assurance
+  - Automated integration tests for full pipeline (Framework → Prompt → Weighting → Visualization)
+  - Performance benchmarking with regression detection and quality assurance gates
+  - Cross-model validation testing consistency across different LLM providers
+  - Academic compliance testing with automated publication-readiness verification
+
+**Implementation Timeline**: 8-week structured rollout (July 10 - August 7, 2025)
+- **Week 5**: Phase 2 - Prompt Template Specification System
+- **Week 6**: Phase 3 - Weighting Scheme Specification System  
+- **Week 7**: Phase 4 - Integration and Testing Pipeline
+- **Week 8**: Cross-phase validation and documentation
+
+**Success Metrics Integration**: Updated TODO success criteria to include Phase 2-4 completion
+- All prompt templates formalized with validation pipeline
+- Mathematical weighting schemes validated and optimized
+- Full integration testing pipeline operational
+- 100% automated test coverage for critical paths established
+
+### 📄 ACADEMIC PAPER UPDATE: Framework-Agnostic Universal Methodology (v1.2.0)
+
+**CRITICAL ACADEMIC REPOSITIONING**: Updated paper draft to reflect framework agnosticism principle established across platform
+- **Universal Methodology Positioning**: Paper now positions Narrative Gravity Maps as universal framework-agnostic methodology
+  - **Title Updated**: "A Universal Quantitative Framework for Analyzing Persuasive Discourse" 
+  - **Abstract Focus**: Universal applicability across domains, not primarily political discourse analysis
+  - **Introduction Scope**: Cross-domain methodology with political discourse as one example among many
+  - **Framework Demonstrations**: 5 example frameworks across different domains (political, business, education, healthcare, communication)
+- **Academic Language Transformation**: Comprehensive revision eliminating framework-specific language at methodology level
+  - **Core Methodology**: "Configurable gravity wells," "conceptual forces," "framework-agnostic architecture"
+  - **Domain Examples**: Political discourse clearly positioned as one domain-specific application
+  - **Research Applications**: Universal applicability across business, education, healthcare, legal, international relations
+  - **Framework Descriptions**: All 5 frameworks positioned as examples demonstrating versatility
+
+**Structural Academic Improvements**: Enhanced paper organization for broader academic impact
+- **Appendix Replacement**: Removed detailed framework code, replaced with framework summaries and domain applicability
+  - **Framework Summary Table**: Configuration overview across all 5 example frameworks
+  - **Domain Applications**: Research applications across political science, business, education, healthcare, communication, psychology
+  - **Implementation Guidelines**: Framework development guidance for any domain
+  - **Technical Notes**: Universal infrastructure supporting any framework type
+- **Cross-Domain Validation**: Emphasized universal validation strategies and domain-specific requirements
+- **Future Opportunities**: Clear pathway for framework development across any analytical domain
+
+**Academic Impact Strategy**: Positioned for broader adoption and cross-disciplinary citation
+- **Universal Appeal**: Any researcher can see applicability to their domain
+- **Methodological Contribution**: Focus on universal methodology innovation rather than domain-specific applications
+- **Community Development**: Clear framework contribution pathway for researchers across fields
+- **Publication Strategy**: Suitable for computational social science, methodology, or interdisciplinary journals
+
+**Framework Examples Repositioned**: Clear positioning as demonstrations rather than core focus
+- **Civic Virtue**: Political discourse analysis (domain-specific example)
+- **Political Spectrum**: Ideological positioning (domain-specific example)  
+- **Moral Foundations**: Cross-cultural analysis (domain-specific example)
+- **Identity Recognition**: Identity dynamics (domain-specific example)
+- **Rhetorical Posture**: Communication styles (domain-specific example)
+
+### 🎯 FRAMEWORK AGNOSTICISM: Platform Language Neutrality Achieved
+
+**CRITICAL STRATEGIC UPDATE**: Systematically separated platform methodology from framework-specific language
+- **Problem Solved**: Eliminated confusion between general methodology and domain-specific applications
+  - **Platform Level**: Framework-agnostic language focusing on "gravity wells," "conceptual forces," "analytical frameworks"
+  - **Framework Level**: Domain-specific language preserved within framework contexts (moral, political, integrative, etc.)
+  - **Academic Credibility**: Clear separation shows methodology transcends any specific domain or use case
+- **Documentation Language Updates**: Comprehensive revision of platform-level descriptions
+  - **README.md**: Updated core platform description to be framework-agnostic while preserving examples
+  - **User Guides**: Removed domain-specific language from platform descriptions
+  - **Research Applications**: Updated from "Political Speech Analysis" to "Persuasive Discourse Analysis"
+  - **Framework Descriptions**: Clarified as "domain-specific examples" rather than inherent platform capabilities
+- **Terminology Standardization**: Established clear language boundaries
+  - **Platform Level**: "Gravity wells," "coordinate systems," "conceptual forces," "analytical frameworks"
+  - **Framework Level**: "Moral," "political," "integrative," "disintegrative" (only within framework context)
+  - **Domain Neutrality**: "Persuasive discourse," "framework-defined forces," "domain-appropriate frameworks"
+
+**Academic Impact**: Platform now clearly supports universal methodology applicable to any persuasive discourse domain
+- **Broader Adoption**: Researchers in any field can see applicability to their domain
+- **Theoretical Clarity**: Methodology separated from specific implementations
+- **Framework Flexibility**: Clear path for creating frameworks for business, education, healthcare, etc.
+- **Publication Ready**: Academic papers can emphasize methodology generalizability
+
+**Implementation Examples**: 5 frameworks now clearly positioned as domain-specific demonstrations
+- **Civic Virtue Framework**: "Political discourse analysis" (domain-specific example)
+- **Political Spectrum Framework**: "Political positioning analysis" (domain-specific example)
+- **MFT Framework**: "Cross-cultural moral analysis" (domain-specific example)
+- **Identity Framework**: "Identity and recognition analysis" (domain-specific example)
+- **Rhetorical Posture Framework**: "Communication style analysis" (domain-specific example)
+
+### 🗄️ STRATEGIC FRONTEND ARCHIVING: Complete Interface Deprecation for Research Focus
+
+**STRATEGIC DECISION**: Archived all frontend interfaces to focus on core research pipeline completion
+- **Problem Solved**: Eliminated resource split between interface development and academic research requirements
+  - **Research Priority**: Focus on experimental matrix runs, human validation studies, and paper publication
+  - **Interface Complexity**: Frontend development consuming resources needed for statistical validation
+  - **Academic Timeline**: Paper completion timeline requires concentrated effort on core methodology
+- **Complete Interface Archive**: Systematically archived all user interface work to `archive/deprecated_interfaces/`
+  - **Chainlit Interface**: Moved `launch_chainlit.py`, `chainlit.md`, `.chainlit/`, and `src/narrative_gravity/chatbot/`
+  - **React Frontend**: Moved complete `frontend/` directory with TypeScript application and dependencies
+  - **Node.js Artifacts**: Moved `package.json`, `package-lock.json`, `node_modules/`, and `public/` assets
+  - **Testing Infrastructure**: Moved `playwright.config.ts`, `playwright-report/`, and `test-results/` 
+- **Documentation and Restoration**: Complete preservation with restoration procedures
+  - **Archive README**: Comprehensive documentation of all archived components with restoration procedures
+  - **Strategic Context**: Clear priority sequence (Research → Validation → Paper → Interfaces)
+  - **Technical Preservation**: All dependencies, configurations, and development state preserved
+  - **Future Integration**: Backend API compatibility maintained for future interface restoration
+
+**Repository Organization**: Professional structure supporting academic research focus
+- **Clean Root Directory**: Only operational files remain (launch.py, database config, etc.)
+- **Backend Focus**: `launch.py` updated to support only backend services (API, Celery workers)
+- **Documentation Updates**: README.md and LAUNCH_GUIDE.md updated to reflect research pipeline focus
+- **Archive Structure**: Organized archive preserving complete development history and technical achievements
+
+**Research Pipeline Priority**: Clear strategic focus on academic completion sequence
+- **Phase 1 Complete**: Framework Source of Truth architecture with all 5 frameworks validated
+- **Phase 2-4 Planned**: Prompt templates, weighting schemes, and integration testing (July-August 2025)
+- **Academic Validation**: Human validation studies and statistical rigor prioritized
+- **Paper Publication**: Academic publication pathway clear without interface development overhead
+
+### ✅ SOURCE OF TRUTH ARCHITECTURE: Framework Management System Complete
+
+**ARCHITECTURAL ACHIEVEMENT**: Successfully resolved "source of truth" problem between database and filesystem framework storage
+- **Problem Solved**: Eliminated dual-source confusion where frameworks existed in both database and filesystem
+  - **Before**: Manual synchronization prone to drift, unclear authority, development friction
+  - **After**: Database as authoritative source with filesystem as development workspace
+- **Framework Sync Tool**: Complete bidirectional synchronization system (`scripts/framework_sync.py`)
+  - **Status Checking**: Compare database vs filesystem versions with change detection
+  - **Export/Import**: Seamless movement between database and filesystem for development
+  - **Conflict Resolution**: Intelligent handling of version conflicts and drift
+  - **Batch Operations**: Migrate all frameworks simultaneously with comprehensive error handling
+- **All 5 Frameworks Migrated**: 100% success rate migrating to v2.0 specification
+  - **civic_virtue**: ✅ Migrated to v2025.06.12, validation passed
+  - **political_spectrum**: ✅ Migrated to v2025.06.12, validation passed
+  - **fukuyama_identity**: ✅ Migrated to v2025.06.12, validation passed
+  - **mft_persuasive_force**: ✅ Migrated to v2025.06.12, validation passed (schema fixes applied)
+  - **moral_rhetorical_posture**: ✅ Migrated to v2025.06.12, validation passed
+- **Infrastructure Tools**: Complete developer workflow system
+  - **Validation Pipeline**: 3-tier validation (Schema, Semantic, Academic) with comprehensive error reporting
+  - **Migration System**: Automated v1.x → v2.0 framework migration with backup and rollback
+  - **Quality Assurance**: 100% framework validation success rate achieved
+
+**Developer Workflow Established**: Clear processes for framework development and maintenance
+- **Framework Development**: Export → Edit → Validate → Import cycle with conflict detection
+- **Version Management**: Database-first versioning with complete provenance tracking
+- **Quality Gates**: Automated validation prevents invalid frameworks from entering system
+- **Team Collaboration**: Multiple developers can work safely with synchronized development
+
+**Foundation for Next Phases**: Robust architecture supporting Phase 2-4 implementation
+- **Proven Sync Architecture**: Framework sync patterns ready for prompt templates and weighting schemes
+- **Validation Pipeline**: 3-tier validation system ready for extension to other component types
+- **Database Integration**: Production-ready component versioning with proper foreign key relationships
+- **Development Workflow**: Established patterns supporting systematic component development
+
+### ✅ FORMAL SPECIFICATION SYSTEM v1.0 IMPLEMENTED
+
+**MAJOR MILESTONE**: Successfully implemented formal specification system with validation tools
+- **Framework Specification Schema v2.0**: Complete JSON schema with comprehensive validation rules
+  - **Required Fields**: framework_name, display_name, version, description, coordinate_system, positioning_strategy, wells, theoretical_foundation
+  - **Coordinate System**: Formal circular coordinate specification (deprecated elliptical)
+  - **Positioning Strategy**: Clustered, even distribution, or custom positioning with cluster definitions
+  - **Academic Foundation**: Required theoretical sources and approach documentation
+  - **Validation Levels**: Schema, semantic, and academic validation with detailed error reporting
+- **Validation Tools**: Comprehensive CLI validation system with detailed reporting
+  - **Multi-level Validation**: Structural (JSON schema), semantic (consistency), academic (rigor)
+  - **Error Categories**: Schema violations, semantic inconsistencies, academic gaps, best practices
+  - **Fix Suggestions**: Automated recommendations for resolving validation issues
+  - **Batch Processing**: Validate all frameworks with summary reporting
+- **Migration System**: Automated migration from v1.x to v2.0 specification
+  - **Civic Virtue Framework**: Successfully migrated and validated (✅ VALIDATION PASSED)
+  - **Backward Compatibility**: Preserves existing data while adding required v2.0 fields
+  - **Backup Creation**: Automatic backup of original frameworks before migration
+- **Quality Assurance**: Automated validation pipeline with comprehensive checks
+  - **Academic Rigor**: Citation format validation, theoretical approach depth checks
+  - **Best Practices**: Color accessibility, metric completeness, compatibility declarations
+  - **Semantic Consistency**: Well angle uniqueness, cluster span validation, type consistency
+
+### 📋 FORMAL SPECIFICATION SYSTEM PROPOSAL
+
+**STRATEGIC INITIATIVE**: Comprehensive proposal for formal specifications across all system components
+- **Framework Specifications**: Standardized JSON schema for moral/political analysis frameworks
+  - **Coordinate System**: Formal circular coordinate specification with positioning strategies
+  - **Validation Rules**: Structural, semantic, and academic validation requirements
+  - **Theoretical Foundation**: Required academic citations and empirical validation
+  - **Compatibility Matrix**: Clear interoperability requirements with other components
+- **Prompt Template Specifications**: Structured component-based template system
+  - **Component Architecture**: 8 ordered components (header, role, scoring, methodology, etc.)
+  - **Performance Targets**: CV < 0.20, hierarchical clarity, format compliance metrics
+  - **Framework Compatibility**: Clear mapping between templates and frameworks
+  - **Validation Pipeline**: Automated quality assurance and regression testing
+- **Weighting Scheme Specifications**: Mathematical methodology standardization
+  - **Algorithm Types**: winner_take_most, proportional, threshold_based, custom
+  - **Mathematical Foundation**: LaTeX formulas, parameter definitions, edge case handling
+  - **Empirical Validation**: Test scenarios, behavioral requirements, performance metrics
+  - **Implementation Standards**: Python class specifications, complexity requirements
+- **Quality Assurance Framework**: Automated validation pipeline with CLI tools
+- **Implementation Strategy**: 4-phase rollout over 7 weeks with tooling and training
+- **Academic Rigor**: Peer review support, reproducibility, standardization for research
+
+### ✅ COMPLETE FRAMEWORK MIGRATION TO CIRCULAR COORDINATES
+
+**MAJOR ARCHITECTURAL UPDATE**: Successfully migrated all 5 frameworks from elliptical to circular coordinate system
+- **Framework Updates**: Updated all framework configurations in both filesystem and database
+  - **Civic Virtue Framework**: Updated to circular with clustered positioning (top/bottom clusters)
+  - **Political Spectrum Framework**: Updated to circular with left/right clustering for political orientation
+  - **MFT Persuasive Force Framework**: Updated to circular with even distribution to avoid visual hierarchy
+  - **Fukuyama Identity Framework**: Updated to circular with vertical dipole clustering
+  - **Moral Rhetorical Posture Framework**: Updated to circular with restorative/retributive clustering
+- **Database Synchronization**: All 5 frameworks now use circular coordinates in database (✅ Circular status confirmed)
+- **Weight System Standardization**: Fixed all frameworks to use positive weights (well type determines moral direction)
+- **Color Coding**: Added consistent well_type_colors for integrative/disintegrative visualization
+- **Positioning Strategies**: Implemented proper clustering and arc variables as discussed in paper draft
+
+### ✅ PLOTLY CIRCULAR VISUALIZATION PIPELINE VALIDATED
+
+**Production Success**: Complete validation of Plotly-based circular visualization system through end-to-end testing
+- **Database Schema Integration**: Successfully updated test pipeline to work with v2.1 schema
+  - **Schema Migration**: Updated from legacy `analysis_result`/`framework_version`/`corpus_document` to modern `run`/`document` tables
+  - **Query Optimization**: Proper joins on `run.text_id = document.text_id` with framework filtering via `run.framework_version`
+  - **Data Structure**: Uses `run.raw_scores` JSON column for well scores, eliminating complex parsing
+- **Visualization System Validation**: Comprehensive testing with sample civic virtue data
+  - **Individual Visualizations**: Generated 3 distinct scenario visualizations (hopeful speech, divisive rhetoric, balanced analysis)
+  - **Comparative Analysis**: Multi-panel comparison visualization with 4-quadrant layout
+  - **Interactive Output**: All visualizations saved as interactive HTML files with hover info and academic styling
+  - **Framework Compatibility**: Tested with 10-well civic virtue configuration (5 integrative, 5 disintegrative)
+- **Production Pipeline Ready**: Complete test infrastructure for database-driven visualization
+  - **Test Script**: `scripts/test_plotly_circular_pipeline.py` updated for v2.1 schema compatibility
+  - **Demo Script**: `scripts/demo_plotly_circular_visualization.py` for standalone validation
+  - **Error Handling**: Comprehensive database error detection with helpful troubleshooting messages
+  - **Output Management**: Organized output in `analysis_results/plotly_demo/` with timestamped files
+
+**Technical Implementation**: Robust production architecture validated through testing
+- **PlotlyCircularVisualizer**: Confirmed working with wells configuration, narrative scores, and academic styling
+- **Database Integration**: Seamless operation with PostgreSQL v2.1 schema and proper foreign key relationships
+- **Framework Agnostic**: Supports arbitrary well types, colors, and arrangements as designed
+- **Academic Standards**: Publication-ready outputs with proper titles, legends, and interactive features
+
+**Next Steps Ready**: System prepared for real analysis data integration
+- **Database Population**: Ready to process actual analysis results when available
+- **Framework Extension**: Validated architecture supports multiple frameworks beyond civic virtue
+- **Research Workflow**: Complete pipeline from database analysis results to publication-ready visualizations
+- **Academic Integration**: Interactive HTML outputs suitable for research presentations and publications
+
 ### 🏗️ MAJOR ARCHITECTURAL DECISION: CIRCULAR COORDINATE SYSTEM ADOPTION
 
 **Revolutionary Architectural Change**: Complete pivot from elliptical to circular coordinate system for maximum researcher adoption while preserving analytical sophistication
@@ -420,6 +700,18 @@
   - **Development Guide**: Added date handling section to `DEV_ENVIRONMENT.md`
   - **Utility Script**: Provides multiple date formats (human-readable, ISO, timestamp)
   - **AI Assistant Rules**: Future AI assistants must use system date commands
+
+### 🚀 MIGRATION TO PLOTLY & CIRCULAR VISUALIZATION ENGINE (June 12, 2025)
+
+**Major Visualization Overhaul**: Migrated all narrative gravity visualizations to Plotly, fully deprecating the elliptical approach in favor of a robust, framework-agnostic circular coordinate system.
+- **Exclusive Plotly Adoption**: All visualizations now use Plotly for interactive, publication-ready outputs (HTML/PNG)
+- **Elliptical Approach Deprecated**: Removed all elliptical engine and visualization code (`engine.py`, `plotly_elliptical.py`)
+- **Enhanced Circular Visualizer**: Upgraded `PlotlyCircularVisualizer` with academic styling, metrics display, comparative analysis, and improved type/color handling
+- **Engine Update**: `NarrativeGravityWellsCircular` now uses Plotly exclusively, with simplified config and output logic
+- **Test & Demo Modernization**: Updated all test/demo scripts to use the new Plotly-based engine and output interactive HTML by default
+- **Repository Cleanup**: Removed legacy matplotlib and elliptical files, ensuring a clean, maintainable codebase
+
+**Impact**: The system is now fully aligned with modern academic visualization standards, supporting universal tool compatibility, interactive exploration, and streamlined publication workflows. Circular coordinate system is the sole supported architecture going forward.
 
 ## [v2.3.0] - Project organization and cursorrules compliance - June 10, 2025
 

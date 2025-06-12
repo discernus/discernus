@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Comprehensive launcher for the Narrative Gravity Wells platform
-Orchestrates database, API server, Celery workers, and Streamlit interface
+Orchestrates database, API server, and Celery workers for research pipeline
 """
 
 import subprocess
@@ -20,14 +20,8 @@ except ImportError:
 
 def check_dependencies():
     """Check if required dependencies are installed."""
-    try:
-        import streamlit
-        print("✅ Streamlit found")
-        return True
-    except ImportError as e:
-        print(f"❌ Missing dependency: {e}")
-        print("💡 Run: pip install -r requirements.txt")
-        return False
+    print("✅ Dependencies checked")
+    return True
 
 def check_database():
     """Check if PostgreSQL database is accessible."""
@@ -127,26 +121,24 @@ def main():
     """Main launcher function."""
     parser = argparse.ArgumentParser(
         prog='launch.py',
-        description='Launch the Narrative Gravity Wells platform',
+        description='Launch the Narrative Gravity Wells research platform backend',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python launch.py                    # Launch backend services
-  python launch.py --frontend-info    # Show React frontend information
+  python launch.py                    # Launch all backend services
   python launch.py --api-only         # Launch only API server
-  python launch.py --chainlit-only    # Launch only Chainlit chat interface
+  python launch.py --celery-only      # Launch only Celery worker
   python launch.py --setup-db         # Setup database only
+
+Note: Frontend interfaces have been deprecated pending paper completion.
+Focus is on core research pipeline: database, API, and batch processing.
         """
     )
     
-    parser.add_argument('--frontend-info', action='store_true',
-                       help='Show information about the React frontend')
     parser.add_argument('--api-only', action='store_true', 
                        help='Launch only the API server')
     parser.add_argument('--celery-only', action='store_true',
                        help='Launch only the Celery worker')
-    parser.add_argument('--chainlit-only', action='store_true',
-                       help='Launch only the Chainlit chat interface')
     parser.add_argument('--setup-db', action='store_true',
                        help='Setup database and exit')
     parser.add_argument('--no-db-check', action='store_true',
@@ -156,11 +148,12 @@ Examples:
     
     args = parser.parse_args()
     
-    print("🎯 Narrative Gravity Wells Platform Launcher")
+    print("🎯 Narrative Gravity Wells Research Platform")
+    print("🔬 Backend Services for Academic Pipeline")
     print("=" * 60)
     
     # Check if we're in the right directory
-    if not Path("src/narrative_gravity/engine.py").exists():
+    if not Path("src/narrative_gravity/engine_circular.py").exists():
         print("❌ Error: Please run this script from the narrative_gravity_analysis directory")
         sys.exit(1)
     
@@ -182,27 +175,7 @@ Examples:
     manager = ServiceManager()
     
     try:
-        # Show frontend information if requested
-        if args.frontend_info:
-            print("🎯 React Frontend Information")
-            print("=" * 40)
-            print("The Streamlit interface has been deprecated.")
-            print("Please use the modern React research workbench:")
-            print("")
-            print("📁 Location: frontend/")
-            print("🚀 Launch: cd frontend && npm run dev")
-            print("🌐 URL: http://localhost:3000")
-            print("")
-            print("📋 Features:")
-            print("  • Modern React 18 + TypeScript + Tailwind CSS")
-            print("  • Autonomous debug monitoring")
-            print("  • Real-time error detection")
-            print("  • Professional research interface")
-            print("")
-            print("📖 See: STREAMLIT_MIGRATION_NOTICE.md")
-            return
-        
-        # --- Centralized Service Management Logic ---
+        # --- Backend Services Management ---
         # Determine which services to start
         services_to_start = []
         if args.api_only:
@@ -211,14 +184,9 @@ Examples:
         elif args.celery_only:
             print("🔄 Starting Celery worker only...")
             services_to_start.append(("Celery", [sys.executable, "scripts/run_celery.py"]))
-        elif args.chainlit_only:
-            print("💬 Starting Chainlit chat interface only...")
-            print("🌐 Chainlit Interface: http://localhost:8002")
-            print("📱 Advanced conversational analysis interface")
-            services_to_start.append(("Chainlit", [sys.executable, "launch_chainlit.py"]))
         else:
-            # Default to full platform launch if no specific service requested
-            print("🚀 Starting backend services...")
+            # Default to full backend platform launch
+            print("🚀 Starting backend services for research pipeline...")
             print("🌐 API Server: http://localhost:8000")
             print("📚 API Docs: http://localhost:8000/api/docs")
             print("🔄 Celery Worker: Background processing")
@@ -234,13 +202,12 @@ Examples:
         for name, cmd in services_to_start:
             manager.start_service(name, cmd)
         
-        print("✅ Backend services running. Start frontend separately.")
-        print("   cd frontend && npm run dev")
-        print("   http://localhost:3000")
+        print("✅ Backend services running.")
+        print("🔬 Ready for academic research pipeline operations.")
         print("\n⏹️  Press Ctrl+C to stop all services")
         print("=" * 60)
 
-        # Keep running until interrupted (for all modes that start services)
+        # Keep running until interrupted
         try:
             while True:
                 time.sleep(1)

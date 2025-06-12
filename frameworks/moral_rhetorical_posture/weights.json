@@ -1,0 +1,55 @@
+{
+  "well_weights": {
+    "Restorative": {
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Retributive": {
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Universalist": {
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Partisan": {
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Humility": {
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Triumph": {
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Moral Reflection": {
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Operational Will": {
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    },
+    "Reformist": {
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary"
+    },
+    "Revolutionary": {
+      "weight": -1.0,
+      "type": "disintegrative",
+      "tier": "primary"
+    }
+  },
+  "weighting_philosophy": null
+}

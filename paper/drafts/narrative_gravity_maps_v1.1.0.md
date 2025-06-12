@@ -174,6 +174,21 @@ ASCII Placeholder:
 
 **Mathematical Sophistication Preserved**: All analytical enhancements (dominance amplification, adaptive scaling, boundary optimization) work equally effectively with circular coordinates while eliminating implementation complexity.
 
+### 3.5 Framework-Agnostic Definition and Extensibility
+
+A core innovation of the Narrative Gravity Maps methodology is its fully framework-agnostic architecture. Framework developers can define any set of wells, well types, clustering strategies, and weighting schemes, without the engine making any assumptions about the meaning or structure of these elements. This enables:
+- **Normative frameworks** (e.g., Civic Virtue, Fukuyama Identity) to use vertical clustering and hierarchical weighting.
+- **Descriptive frameworks** (e.g., Moral Foundations Theory) to use even distribution and equal weighting.
+- **Political frameworks** (e.g., Political Spectrum) to use horizontal clustering and custom type labels (e.g., "progressive", "conservative").
+
+Each framework specifies its configuration in a single JSON file, including:
+- A `wells` dictionary (well name → angle, type, weight, tier, etc.)
+- A `positioning_strategy` (clustered, even, or individual angles)
+- An optional `well_type_colors` mapping for visualization
+- A `weighting_philosophy` block describing the theoretical rationale
+
+The engine reads these definitions directly, supporting any number of types, clusters, or weighting schemes. This design ensures maximum flexibility for future theoretical developments and cross-framework comparison. See Appendix A for a summary of the weighting schemes for all current frameworks.
+
 ## 4. The Civic Virtue Framework Implementation
 
 ### 4.1 Framework Overview and Demonstration
@@ -339,3 +354,100 @@ The ultimate test lies not in technical sophistication but in alignment with hum
 - [ ] Develop R/Stata integration packages for academic compatibility
 - [ ] Create comprehensive replication package with statistical validation
 - [ ] Conduct peer review preparation and methodology documentation review 
+
+## Appendix A: Framework Weighting Schemes
+
+This appendix summarizes the weighting schemes for all frameworks used in this study. For full details, see the corresponding `framework.json` and `weights.json` files in the repository.
+
+### Civic Virtue Framework
+```json
+{
+  "well_weights": {
+    "Dignity": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Truth": {"weight": 0.8, "type": "integrative", "tier": "secondary"},
+    "Hope": {"weight": 0.6, "type": "integrative", "tier": "tertiary"},
+    "Justice": {"weight": 0.8, "type": "integrative", "tier": "secondary"},
+    "Pragmatism": {"weight": 0.6, "type": "integrative", "tier": "tertiary"},
+    "Tribalism": {"weight": -1.0, "type": "disintegrative", "tier": "primary"},
+    "Fear": {"weight": -0.6, "type": "disintegrative", "tier": "tertiary"},
+    "Resentment": {"weight": -0.8, "type": "disintegrative", "tier": "secondary"},
+    "Manipulation": {"weight": -0.8, "type": "disintegrative", "tier": "secondary"},
+    "Fantasy": {"weight": -0.6, "type": "disintegrative", "tier": "tertiary"}
+  },
+  "weighting_philosophy": "Three-tier system: Primary (1.0), Secondary (0.8), Tertiary (0.6)"
+}
+```
+
+### Political Spectrum Framework
+```json
+{
+  "well_weights": {
+    "Solidarity": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Equality": {"weight": 0.9, "type": "integrative", "tier": "primary"},
+    "Democracy": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Cosmopolitan": {"weight": 0.7, "type": "integrative", "tier": "secondary"},
+    "Progressive": {"weight": 0.8, "type": "integrative", "tier": "secondary"},
+    "Competition": {"weight": -1.0, "type": "disintegrative", "tier": "primary"},
+    "Tradition": {"weight": -0.9, "type": "disintegrative", "tier": "primary"},
+    "Control": {"weight": -1.0, "type": "disintegrative", "tier": "primary"},
+    "Nationalist": {"weight": -0.7, "type": "disintegrative", "tier": "secondary"},
+    "Conservative": {"weight": -0.8, "type": "disintegrative", "tier": "secondary"}
+  },
+  "weighting_philosophy": "No explicit tiering; primary and secondary weights used."
+}
+```
+
+### MFT Persuasive Force Framework
+```json
+{
+  "well_weights": {
+    "Compassion": {"weight": 1.0, "type": "integrative"},
+    "Equity": {"weight": 0.9, "type": "integrative"},
+    "Solidarity": {"weight": 0.8, "type": "integrative"},
+    "Hierarchy": {"weight": 0.8, "type": "integrative"},
+    "Purity": {"weight": 0.7, "type": "integrative"},
+    "Cruelty": {"weight": -1.0, "type": "disintegrative"},
+    "Exploitation": {"weight": -0.9, "type": "disintegrative"},
+    "Treachery": {"weight": -0.8, "type": "disintegrative"},
+    "Rebellion": {"weight": -0.8, "type": "disintegrative"},
+    "Corruption": {"weight": -0.7, "type": "disintegrative"}
+  },
+  "weighting_philosophy": "Equal or near-equal weighting; no explicit tiering."
+}
+```
+
+### Fukuyama Identity Framework
+```json
+{
+  "well_weights": {
+    "Creedal Identity": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Integrative Recognition": {"weight": 0.9, "type": "integrative", "tier": "secondary"},
+    "Democratic Thymos": {"weight": 0.9, "type": "integrative", "tier": "secondary"},
+    "Ethnic Identity": {"weight": -1.0, "type": "disintegrative", "tier": "primary"},
+    "Fragmentary Recognition": {"weight": -0.9, "type": "disintegrative", "tier": "secondary"},
+    "Megalothymic Thymos": {"weight": -0.9, "type": "disintegrative", "tier": "secondary"}
+  },
+  "weighting_philosophy": "Two-tier system: Primary (1.0), Secondary (0.9)"
+}
+```
+
+### Moral Rhetorical Posture Framework
+```json
+{
+  "well_weights": {
+    "Restorative": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Retributive": {"weight": -1.0, "type": "disintegrative", "tier": "primary"},
+    "Universalist": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Partisan": {"weight": -1.0, "type": "disintegrative", "tier": "primary"},
+    "Humility": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Triumph": {"weight": -1.0, "type": "disintegrative", "tier": "primary"},
+    "Moral Reflection": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Operational Will": {"weight": -1.0, "type": "disintegrative", "tier": "primary"},
+    "Reformist": {"weight": 1.0, "type": "integrative", "tier": "primary"},
+    "Revolutionary": {"weight": -1.0, "type": "disintegrative", "tier": "primary"}
+  },
+  "weighting_philosophy": "All wells primary; equal weighting by type."
+}
+```
+
+For full details and theoretical rationale, see the corresponding `framework.json` and `weights.json` files in the repository. 

@@ -412,4 +412,201 @@ The architecture is **production-ready** and significantly more sophisticated th
 - Plugin-based framework architecture
 - User-defined custom frameworks
 
-This architecture positions the Narrative Gravity Analysis system as a flexible, scalable platform for multi-dimensional narrative analysis across diverse theoretical frameworks. 
+This architecture positions the Narrative Gravity Analysis system as a flexible, scalable platform for multi-dimensional narrative analysis across diverse theoretical frameworks.
+
+# Framework-Agnostic Definition for Circular Engine (v1.1.0+)
+
+**New in v1.1.0:** The Narrative Gravity circular engine is now fully framework-agnostic. Frameworks can define any set of wells, well types, clusters, and type-to-color mappings. The engine does not assume any special meaning for type names (e.g., 'integrative', 'disintegrative', 'progressive', etc.).
+
+## How to Define a Framework (Agnostic Conventions)
+
+- **Wells**: Each well must have a unique name, an angle (degrees), a type (arbitrary string), and a narrative_weight (float).
+- **Well Types**: The 'type' field is a free-form string. Use any label that fits your theoretical model (e.g., 'type_1', 'identity', 'virtue', 'axis_A', etc.).
+- **Clusters**: If using clustered positioning, clusters are defined by name and can group any set of well types. No type names are assumed by the engine.
+- **Type-to-Color Mapping**: Optionally, specify a 'well_type_colors' mapping in your framework.json to control the color for each well type in visualizations. If omitted, the engine assigns colors from a default palette.
+
+### Example: Minimal Agnostic framework.json
+```json
+{
+  "framework_name": "agnostic_example",
+  "version": "v1.0.0",
+  "circle": { "radius": 1.0 },
+  "positioning_strategy": {
+    "type": "clustered_positioning",
+    "clusters": {
+      "cluster_A": { "center_angle": 90, "span": 60, "well_types": ["type_1"] },
+      "cluster_B": { "center_angle": 270, "span": 60, "well_types": ["type_2"] }
+    }
+  },
+  "wells": {
+    "Well_A": { "angle": 80, "type": "type_1", "weight": 1.0 },
+    "Well_B": { "angle": 100, "type": "type_1", "weight": 0.8 },
+    "Well_C": { "angle": 260, "type": "type_2", "weight": 0.8 },
+    "Well_D": { "angle": 280, "type": "type_2", "weight": 0.6 }
+  },
+  "well_type_colors": {
+    "type_1": "#1976D2",
+    "type_2": "#C62828"
+  },
+  "scaling_factor": 0.8,
+  "metrics": {
+    "example_metric": { "name": "Example Metric", "description": "A sample metric." }
+  }
+}
+```
+
+**Key Points:**
+- The engine will use the color mapping for 'type_1' and 'type_2' in all visualizations.
+- You may use any type names and as many types as needed for your framework.
+- If 'well_type_colors' is omitted or a type is missing, the engine will assign a color from a default palette.
+- Clusters, weights, and angles are all fully customizable. 
+
+# Positioning Strategies for Framework Developers
+
+Framework developers can choose from several positioning strategies to match their theoretical goals and visual rhetoric needs. Below are the most common strategies, with use cases, JSON configuration snippets, and explanations. You can run `positioning_strategies_demo.py` to visualize these options in practice.
+
+---
+
+## 1. Vertical Clustering (Normative/Moral Hierarchy)
+**Use Case:** Normative frameworks emphasizing moral hierarchy (e.g., Civic Virtue)
+
+```json
+{
+  "positioning_strategy": {
+    "type": "clustered_positioning",
+    "description": "Wells clustered around vertical axis to emphasize moral hierarchy",
+    "clusters": {
+      "top_cluster": {
+        "center_angle": 90,
+        "span": 60,
+        "well_types": ["virtue", "positive", "integrative"],
+        "description": "Positive wells clustered around top (90°)"
+      },
+      "bottom_cluster": {
+        "center_angle": 270,
+        "span": 60,
+        "well_types": ["problem", "negative", "disintegrative"],
+        "description": "Negative wells clustered around bottom (270°)"
+      }
+    }
+  }
+}
+```
+*Wells are positioned at 60°-120° (positive) and 240°-300° (negative) for strong moral clustering.*
+
+---
+
+## 2. Individual Angles (Maximum Control)
+**Use Case:** Frameworks with specific theoretical positioning requirements (e.g., custom research frameworks)
+
+```json
+{
+  "positioning_strategy": {
+    "type": "individual_angles",
+    "description": "Framework developer specifies exact angle for each well based on theoretical model"
+  },
+  "wells": {
+    "Primary_Concept": {"angle": 45, "weight": 1.0, "type": "integrative"},
+    "Secondary_Concept": {"angle": 135, "weight": 0.8, "type": "integrative"},
+    "Opposing_Force": {"angle": 225, "weight": -1.0, "type": "disintegrative"},
+    "Balancing_Factor": {"angle": 315, "weight": -0.8, "type": "disintegrative"}
+  }
+}
+```
+*Each well is positioned exactly where the framework developer specifies.*
+
+---
+
+## 3. Even Distribution (Descriptive/Neutral)
+**Use Case:** Descriptive frameworks avoiding moral hierarchy implications (e.g., Moral Foundations Theory)
+
+```json
+{
+  "positioning_strategy": {
+    "type": "even_distribution",
+    "description": "Wells distributed evenly around circle to avoid visual hierarchy",
+    "distribution_method": "equal_spacing",
+    "start_angle": 0,
+    "rotation_offset": 0
+  }
+}
+```
+*For 8 wells: positioned at 0°, 45°, 90°, 135°, 180°, 225°, 270°, 315° (neutral distribution).* 
+
+---
+
+## 4. Horizontal Clustering (Political Spectrum)
+**Use Case:** Political frameworks emphasizing left-right spectrum
+
+```json
+{
+  "positioning_strategy": {
+    "type": "clustered_positioning",
+    "description": "Wells clustered around horizontal axis for political left-right emphasis",
+    "clusters": {
+      "left_cluster": {
+        "center_angle": 180,
+        "span": 80,
+        "well_types": ["progressive", "left", "liberal"],
+        "description": "Progressive wells clustered around left (180°)"
+      },
+      "right_cluster": {
+        "center_angle": 0,
+        "span": 80,
+        "well_types": ["conservative", "right", "traditional"],
+        "description": "Conservative wells clustered around right (0°)"
+      }
+    }
+  }
+}
+```
+*Wells are positioned at 140°-220° (left) and 320°-40° (right) for political spectrum clustering.*
+
+---
+
+## 5. Diagonal Clustering (Multi-Dimensional)
+**Use Case:** Frameworks with diagonal opposition (e.g., authoritarian-libertarian vs left-right)
+
+```json
+{
+  "positioning_strategy": {
+    "type": "clustered_positioning",
+    "description": "Wells clustered around diagonal axes for complex multi-dimensional frameworks",
+    "clusters": {
+      "upper_right_cluster": {
+        "center_angle": 45,
+        "span": 50,
+        "well_types": ["auth_right", "traditional_authority"],
+        "description": "Authoritarian-right cluster"
+      },
+      "lower_left_cluster": {
+        "center_angle": 225,
+        "span": 50,
+        "well_types": ["lib_left", "progressive_liberty"],
+        "description": "Libertarian-left cluster"
+      },
+      "upper_left_cluster": {
+        "center_angle": 135,
+        "span": 40,
+        "well_types": ["auth_left", "state_control"],
+        "description": "Authoritarian-left cluster"
+      },
+      "lower_right_cluster": {
+        "center_angle": 315,
+        "span": 40,
+        "well_types": ["lib_right", "free_market"],
+        "description": "Libertarian-right cluster"
+      }
+    }
+  }
+}
+```
+*Four-quadrant clustering for political compass style frameworks.*
+
+---
+
+**Tip:**
+- You can mix and match these strategies, or define your own, as the engine is fully agnostic.
+- See `positioning_strategies_demo.py` for live visualizations of each strategy.
+
+--- 

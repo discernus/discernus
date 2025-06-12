@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-gravity.github.io/schemas/framework-v2.0.json",
+  "title": "Narrative Gravity Framework Specification",
+  "description": "Formal specification for Narrative Gravity Wells analysis frameworks",
+  "version": "2.0.0",
+  "type": "object",
+  "required": [
+    "framework_name",
+    "display_name", 
+    "version",
+    "description",
+    "coordinate_system",
+    "positioning_strategy",
+    "wells",
+    "theoretical_foundation"
+  ],
+  "properties": {
+    "framework_name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Unique framework identifier in snake_case",
+      "examples": ["civic_virtue", "political_spectrum", "mft_persuasive_force"]
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 100,
+      "description": "Human-readable framework name",
+      "examples": ["Civic Virtue Framework", "Political Spectrum Analysis"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v\\d{4}\\.\\d{2}\\.\\d{2}$",
+      "description": "Semantic version in format vYYYY.MM.DD",
+      "examples": ["v2025.06.12", "v2025.01.15"]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 50,
+      "maxLength": 1000,
+      "description": "Academic description of framework purpose and methodology"
+    },
+    "coordinate_system": {
+      "type": "object",
+      "required": ["type", "radius"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["circle"],
+          "description": "Coordinate system type (only circle supported in v2.0)"
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 10.0,
+          "default": 1.0,
+          "description": "Circle radius for coordinate system"
+        },
+        "description": {
+          "type": "string",
+          "description": "Coordinate system rationale and properties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "positioning_strategy": {
+      "type": "object",
+      "required": ["type", "description"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["clustered_positioning", "even_distribution", "custom"],
+          "description": "Well positioning methodology"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20,
+          "description": "Rationale for positioning strategy choice"
+        },
+        "clusters": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-z][a-z0-9_]*$": {
+              "type": "object",
+              "required": ["center_angle", "span", "well_types", "description"],
+              "properties": {
+                "center_angle": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 360,
+                  "description": "Center angle of cluster in degrees"
+                },
+                "span": {
+                  "type": "number",
+                  "minimum": 10,
+                  "maximum": 180,
+                  "description": "Angular span of cluster in degrees"
+                },
+                "well_types": {
+                  "type": "array",
+                  "items": {"type": "string"},
+                  "minItems": 1,
+                  "description": "Well types included in this cluster"
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 10,
+                  "description": "Purpose and rationale for this cluster"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "wells": {
+      "type": "object",
+      "minProperties": 2,
+      "maxProperties": 20,
+      "patternProperties": {
+        "^[A-Z][A-Za-z\\s]*$": {
+          "type": "object",
+          "required": ["angle", "weight", "type"],
+          "properties": {
+            "angle": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 360,
+              "description": "Angular position in degrees (0° = East, 90° = North)"
+            },
+            "weight": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 2.0,
+              "description": "Well importance weight (positive values only)"
+            },
+            "type": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 30,
+              "description": "Framework-specific well type classification"
+            },
+            "tier": {
+              "type": "string",
+              "enum": ["primary", "secondary", "tertiary"],
+              "description": "Hierarchical importance tier"
+            },
+            "description": {
+              "type": "string",
+              "minLength": 20,
+              "maxLength": 500,
+              "description": "Academic definition and theoretical basis"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "well_type_colors": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Hex color code for well type visualization"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Color mapping for well types in visualizations"
+    },
+    "theoretical_foundation": {
+      "type": "object",
+      "required": ["primary_sources", "theoretical_approach"],
+      "properties": {
+        "primary_sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 10
+          },
+          "minItems": 1,
+          "maxItems": 20,
+          "description": "Academic citations for theoretical foundation"
+        },
+        "theoretical_approach": {
+          "type": "string",
+          "minLength": 100,
+          "maxLength": 2000,
+          "description": "Detailed methodology and theoretical basis"
+        },
+        "validation_studies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 10
+          },
+          "description": "Empirical validation and supporting research"
+        },
+        "limitations": {
+          "type": "string",
+          "description": "Known limitations and scope boundaries"
+        }
+      },
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z]{2,4}$": {
+          "type": "object",
+          "required": ["name", "description"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 50,
+              "description": "Human-readable metric name"
+            },
+            "description": {
+              "type": "string",
+              "minLength": 20,
+              "maxLength": 200,
+              "description": "Calculation methodology and interpretation"
+            },
+            "formula": {
+              "type": "string",
+              "description": "Mathematical formula (LaTeX or ASCII)"
+            },
+            "interpretation": {
+              "type": "string",
+              "description": "Guidance for interpreting metric values"
+            },
+            "range": {
+              "type": "object",
+              "properties": {
+                "min": {"type": "number"},
+                "max": {"type": "number"}
+              },
+              "description": "Expected value range for metric"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "description": "Framework-specific analytical metrics"
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "prompt_templates": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Compatible prompt template identifiers"
+        },
+        "weighting_schemes": {
+          "type": "array", 
+          "items": {"type": "string"},
+          "description": "Compatible weighting methodology identifiers"
+        },
+        "visualization_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["circular", "comparative", "temporal", "cluster"]
+          },
+          "description": "Supported visualization types"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Interoperability specifications"
+    },
+    "scaling_factor": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 2.0,
+      "default": 1.0,
+      "description": "Global scaling factor for visualization"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "Framework author or research team"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Framework creation timestamp"
+    },
+    "last_modified": {
+      "type": "string", 
+      "format": "date-time",
+      "description": "Last modification timestamp"
+    }
+  },
+  "additionalProperties": true,
+  "examples": [
+    {
+      "framework_name": "civic_virtue",
+      "display_name": "Civic Virtue Framework",
+      "version": "v2025.06.12",
+      "description": "A specialized framework for analyzing moral dimensions of political discourse through civic virtue theory, emphasizing dignity, truth, justice, and democratic values.",
+      "coordinate_system": {
+        "type": "circle",
+        "radius": 1.0,
+        "description": "Circular coordinate system for framework-agnostic positioning"
+      },
+      "positioning_strategy": {
+        "type": "clustered_positioning",
+        "description": "Wells clustered around vertical dipoles to emphasize moral hierarchy",
+        "clusters": {
+          "top_cluster": {
+            "center_angle": 90,
+            "span": 80,
+            "well_types": ["integrative"],
+            "description": "Virtue wells clustered around top (90°) within 80° span"
+          },
+          "bottom_cluster": {
+            "center_angle": 270,
+            "span": 80,
+            "well_types": ["disintegrative"],
+            "description": "Problem wells clustered around bottom (270°) within 80° span"
+          }
+        }
+      },
+      "wells": {
+        "Dignity": {
+          "angle": 90,
+          "weight": 1.0,
+          "type": "integrative",
+          "tier": "primary",
+          "description": "Recognition of inherent human worth and respect for individual agency"
+        },
+        "Tribalism": {
+          "angle": 270,
+          "weight": 1.0,
+          "type": "disintegrative", 
+          "tier": "primary",
+          "description": "In-group favoritism and out-group hostility that undermines civic unity"
+        }
+      },
+      "well_type_colors": {
+        "integrative": "#2E7D32",
+        "disintegrative": "#C62828"
+      },
+      "theoretical_foundation": {
+        "primary_sources": [
+          "Aristotle. Nicomachean Ethics. Book VI.",
+          "Sandel, M. (2012). What Money Can't Buy: The Moral Limits of Markets."
+        ],
+        "theoretical_approach": "Draws from classical virtue ethics and contemporary civic republican theory to identify moral dimensions that strengthen or weaken democratic discourse and civic engagement."
+      },
+      "metrics": {
+        "com": {
+          "name": "Center of Mass",
+          "description": "Weighted center position considering well types and scores"
+        },
+        "dps": {
+          "name": "Directional Purity Score", 
+          "description": "Consistency of integrative vs disintegrative pull"
+        }
+      }
+    }
+  ]
+} 

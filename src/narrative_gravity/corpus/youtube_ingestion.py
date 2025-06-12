@@ -3,7 +3,7 @@
 YouTube Transcript Extraction for Intelligent Corpus Ingestion
 
 Extends the corpus ingestion service to handle YouTube videos with transcripts,
-particularly useful for political speeches, debates, and addresses.
+particularly useful for speeches, debates, and addresses across any domain.
 """
 
 import json
@@ -293,7 +293,7 @@ class YouTubeCorpusIngestionService(IntelligentIngestionService):
             metadata.document_type = self._classify_youtube_content(video_info.title or "", content)
         
         if not metadata.description:
-            metadata.description = f"YouTube video: {video_info.title or 'Political speech'}"
+            metadata.description = f"YouTube video: {video_info.title or 'Persuasive discourse'}"
         
         # Boost confidence for YouTube videos with good metadata
         if video_info.title and video_info.channel and video_info.upload_date:

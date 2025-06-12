@@ -15,7 +15,7 @@ sys.path.insert(0, str(project_root))
 def test_database_connection():
     """Test that we can connect to the database."""
     try:
-        from src.models.base import engine, SessionLocal
+        from src.narrative_gravity.models.base import engine, SessionLocal
         
         print("Testing database connection...")
         
@@ -116,7 +116,7 @@ def main():
     print("\nNext steps:")
     print("1. Run initial migration: alembic revision --autogenerate -m 'Initial tables'")
     print("2. Apply migration: alembic upgrade head")
-    print("3. Test with: python -c 'from src.models.base import create_all_tables; create_all_tables()'")
+    print("3. Test with: python -c 'from src.narrative_gravity.models.base import create_all_tables; create_all_tables()'")
     
     return True
 
