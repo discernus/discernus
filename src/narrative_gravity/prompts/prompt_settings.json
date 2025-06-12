@@ -6,6 +6,13 @@
   "max_language_cues": 3,
   "temperature_guidance": null,
   "experimental_features": [],
+  "use_hierarchical_default": true,
+  "hierarchical_settings": {
+    "experiment_id": "hierarchical_theme_detection",
+    "variant": "hierarchical_v1",
+    "description": "Use three-stage hierarchical approach for all prompt generation",
+    "enabled_modes": ["api", "interactive", "batch"]
+  },
   "api_mode_settings": {
     "abbreviated_methodology": true,
     "focus_on_json_reliability": true,
@@ -17,9 +24,9 @@
     "include_response_structure": true
   },
   "prompt_optimization": {
-    "version": "v1.0.0",
-    "description": "Base prompt settings for production use",
-    "last_updated": "2025-01-15",
-    "notes": "Optimized for reliable JSON extraction and consistent scoring"
+    "version": "v2.1.0",
+    "description": "Hierarchical theme detection as default - addresses flat score distributions",
+    "last_updated": "2025-06-11",
+    "notes": "Implements three-stage hierarchical prompting to force thematic hierarchy and reduce flat 0.3-0.7 distributions"
   }
 } 

@@ -1,0 +1,20 @@
+{
+  "text_id": "roosevelt_address_1933",
+  "content_hash": "b5055221034e5fe424981a9b5e42d91df1dfdc31196f29c6b645b7280aef55a6",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "First Inaugural Address",
+    "author": "Franklin D. Roosevelt",
+    "date": "1933-03-04",
+    "document_type": "address",
+    "description": "First Inaugural Address delivered by Franklin D. Roosevelt on March 4, 1933.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-11T20:25:28.705303",
+  "original_path": "tmp/test_ingestion/roosevelt_test.txt",
+  "stable_path": "corpus/processed/b5/05/b5055221034e5fe424981a9b5e42d91df1dfdc31196f29c6b645b7280aef55a6/roosevelt_address_1933.txt"
+}

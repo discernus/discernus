@@ -1,0 +1,44 @@
+{
+  "description": "Hierarchical Theme Detection - Three-Stage Prompt Architecture",
+  "created": "2025-06-11",
+  "purpose": "Transform analytical task from 'detect all themes' to 'identify hierarchy of driving forces' to produce sharper, more defensible results",
+  "theoretical_foundation": "Addresses flat score distributions and missing hierarchy signal by forcing LLMs toward hierarchical thinking rather than balanced, moderate responses",
+  
+  "hierarchical_v1": {
+    "description": "Full three-stage hierarchical approach with mathematical forcing functions",
+    "role_definition": "You are an expert narrative analyst specializing in hierarchical thematic analysis. Your task is to identify the dominant driving forces that shape this narrative's moral architecture, not just detect all present themes.",
+    
+    "scoring_requirements": "**HIERARCHICAL THEMATIC ANALYSIS**\n\n**CORE PRINCIPLE SHIFT: From Presence to Dominance**\nYour goal is to identify the hierarchy of driving forces, not merely detect all themes present.\n\n🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨\n- Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)\n- DO NOT use integers 1-10 or any other scale\n- DO NOT use percentages or any scale other than 0.0-1.0\n\n**THREE-STAGE ANALYSIS PROCESS:**\n\n**STAGE 1 - IDENTIFY DOMINANT THEMES**\nAfter reading this narrative, identify the 2-3 themes that most fundamentally shape its moral architecture. These should be forces that, if removed, would fundamentally alter the narrative's character.\n\nRank your selections 1-3 and provide one-sentence justification for each.\n\n**STAGE 2 - ASSIGN RELATIVE WEIGHTS**\nDistribute 100 percentage points across ALL ten wells, with the following constraints:\n- Your top-ranked theme must receive 40-60% \n- Your second-ranked theme must receive 20-40%\n- Your third-ranked theme (if any) must receive 10-30%\n- All remaining wells must receive 0-5% unless you can provide strong textual evidence\n\n**STAGE 3 - EVIDENCE AND SCORING**\nFor each well receiving >5% weight:\n- Provide specific text excerpt (5-20 words) demonstrating its presence\n- Convert percentage weight to 0.0-1.0 score using: Score = (Weight% ÷ 60) capped at 1.0\n- For wells receiving ≤5% weight, assign scores 0.0-0.2 based on minimal presence\n\n**QUALITY CONTROLS**\n- If no theme achieves >40% weight, this narrative may not fit the Civic Virtue framework\n- If you cannot find strong textual evidence for a well, it should score <0.2\n- Dominant themes should be visually obvious to any reader of this text\n\n",
+    
+    "methodology": "**HIERARCHICAL ASSESSMENT METHODOLOGY:**\n\nThis framework employs a **dominance hierarchy approach** that prioritizes thematic centrality over comprehensive coverage.\n\n**ANALYTICAL SEQUENCE:**\n1. **Hierarchy Identification**: Identify the 2-3 most fundamental driving forces\n2. **Mathematical Constraints**: Apply percentage weightings with strict thresholds\n3. **Evidence Validation**: Ground all significant scores in specific textual evidence\n4. **Hierarchical Verification**: Ensure clear distinction between dominant and peripheral themes\n\n**FORCING FUNCTIONS:**\n- **Top theme constraint**: Must receive 40-60% (forces identification of clear dominance)\n- **Secondary theme constraint**: Must receive 20-40% (prevents flat distributions)\n- **Evidence requirement**: >5% themes must have textual support (prevents impressionistic scoring)\n- **Residual constraint**: Remaining wells limited to 0-5% (forces hierarchical thinking)\n\n**SUCCESS CRITERIA:**\n- Clear hierarchical distinctions (not flat 0.3-0.7 distributions)\n- Textual grounding for all major themes\n- Mathematical consistency in percentage weighting\n- Defensible ranking based on narrative centrality\n\n",
+    
+    "instructions": "**HIERARCHICAL ANALYSIS INSTRUCTIONS:**\n\n1. **Read the text carefully** and identify its core moral architecture\n2. **Stage 1**: Force-rank the 2-3 most dominant themes with justifications\n3. **Stage 2**: Assign percentage weights following the mathematical constraints\n4. **Stage 3**: Provide textual evidence and convert to 0.0-1.0 scores\n5. **Verify hierarchy**: Ensure dominant themes are clearly distinguishable from peripheral ones\n6. **Quality check**: Confirm that removing your top themes would fundamentally alter the narrative\n\n**EXPECTED OUTCOME:**\n- 1-2 wells scoring 0.7-1.0 (dominant themes)\n- 1-2 wells scoring 0.3-0.6 (secondary themes)\n- 6-8 wells scoring 0.0-0.2 (minimal/absent themes)\n- Clear textual evidence for all scores >0.2\n- Hierarchical logic that any reader could verify\n\n**OUTPUT FORMAT:**\nProvide your Stage 1 ranking first, then Stage 2 percentage weights, then Stage 3 evidence and final scores in the JSON format."
+  },
+  
+  "hierarchical_simplified": {
+    "description": "Simplified hierarchical approach focusing on top 3 themes only",
+    "role_definition": "You are an expert narrative analyst. Focus on identifying the top 3 driving forces in this narrative, not comprehensive theme detection.",
+    
+    "scoring_requirements": "**SIMPLIFIED HIERARCHICAL ANALYSIS**\n\n**Focus on Top 3 Themes Only:**\n1. Identify the single most dominant theme (score 0.7-1.0)\n2. Identify the second most important theme (score 0.4-0.7)\n3. Identify the third theme if significant (score 0.2-0.5)\n4. All other themes score 0.0-0.2 unless clearly present\n\n🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨\n- Use ONLY decimal values between 0.0 and 1.0\n- Score based on thematic dominance, not just presence\n- Provide text excerpt for any score >0.3\n\n**HIERARCHY REQUIREMENT:**\nYour scores should show clear hierarchy - avoid flat distributions where all wells score 0.3-0.7.\n\n",
+    
+    "instructions": "**SIMPLIFIED INSTRUCTIONS:**\n1. Read the text and identify the single most powerful driving theme\n2. Identify the second most important theme\n3. Check if there's a clear third theme worth noting\n4. Score all other themes minimally (0.0-0.2) unless strongly present\n5. Provide brief textual evidence for your top 3 scores\n6. Ensure clear hierarchical distinction in your scoring"
+  },
+  
+  "experimental_metadata": {
+    "hypothesis": "Three-stage hierarchical prompting will produce sharper thematic distinctions and reduce flat score distributions",
+    "success_metrics": [
+      "Synthetic extremes achieve 90%+ single-well dominance",
+      "Real-world narratives show clear 2-3 theme hierarchy in 80%+ of cases", 
+      "Cross-model consistency (Spearman's ρ > 0.85) for hierarchical rankings",
+      "Multi-run reliability (CV < 0.1) for dominant theme identification"
+    ],
+    "validation_targets": [
+      "Perfect positive synthetic: Dignity 90%+, disintegrative wells 0-2%",
+      "Perfect negative synthetic: Tribalism 90%+, integrative wells 0-2%",
+      "Balanced historical speech: 4-5 wells distributed, no single well >40%"
+    ],
+    "frameworks_tested": ["civic_virtue", "political_spectrum", "fukuyama_identity"],
+    "sample_size_target": 100,
+    "comparison_baseline": "current_default_prompts"
+  }
+} 

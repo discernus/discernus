@@ -1,0 +1,20 @@
+{
+  "text_id": "clinton_address_1997",
+  "content_hash": "ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "Address to a Joint Session of Congress",
+    "author": "WILLIAM J. CLINTON",
+    "date": "1997-02-04",
+    "document_type": "address",
+    "description": "President Clinton's address to a Joint Session of Congress highlighting the state of the Union in 1997 and outlining achievements and future goals.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-11T20:36:13.290518",
+  "original_path": "tmp/sotu_test/Clinton_SOTU_1997.txt",
+  "stable_path": "corpus/processed/ad/15/ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4/clinton_address_1997.txt"
+}

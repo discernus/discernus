@@ -1,0 +1,20 @@
+{
+  "text_id": "lincoln_address_1865",
+  "content_hash": "0ae2960b5cd7e957845ef9a5f64bcd20f62750cd3420fbfebd7b0fd6778b6dc6",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "Second Inaugural Address",
+    "author": "Abraham Lincoln",
+    "date": "1865-03-04",
+    "document_type": "address",
+    "description": "Abraham Lincoln's Second Inaugural Address delivered on March 4, 1865.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-11T20:23:23.896848",
+  "original_path": "tmp/test_ingestion/lincoln_test.txt",
+  "stable_path": "corpus/processed/0a/e2/0ae2960b5cd7e957845ef9a5f64bcd20f62750cd3420fbfebd7b0fd6778b6dc6/lincoln_address_1865.txt"
+}

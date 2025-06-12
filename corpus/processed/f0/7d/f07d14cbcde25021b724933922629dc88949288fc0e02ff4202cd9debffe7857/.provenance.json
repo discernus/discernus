@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "tmp/sotu_test/Biden_SOTU_2024.txt",
+    "filename": "Biden_SOTU_2024.txt",
+    "size_bytes": 54369,
+    "modified_at": "2025-06-11T20:33:08.832825"
+  },
+  "processing": {
+    "processed_at": "2025-06-11T20:35:20.445573",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/f0/7d/f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857",
+    "text_file": "corpus/processed/f0/7d/f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857/jr_address_2024.txt",
+    "metadata_file": "corpus/processed/f0/7d/f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857/.metadata.json"
+  }
+}

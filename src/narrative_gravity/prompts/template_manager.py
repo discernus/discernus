@@ -23,7 +23,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 
 
@@ -44,7 +44,9 @@ class PromptSettings:
     include_examples: bool = False
     max_language_cues: int = 3
     temperature_guidance: Optional[float] = None
-    experimental_features: List[str] = None
+    experimental_features: List[str] = field(default_factory=list)
+    use_hierarchical_default: bool = False
+    hierarchical_settings: Optional[Dict[str, Any]] = None
 
 
 class PromptTemplateManager:
@@ -56,7 +58,10 @@ class PromptTemplateManager:
     
     def __init__(self, template_dir: str = None, settings_file: str = None):
         self.template_dir = Path(template_dir) if template_dir else Path(__file__).parent / "templates"
-        self.settings_file = settings_file or "prompt_settings.json"
+        if settings_file:
+            self.settings_file = settings_file
+        else:
+            self.settings_file = Path(__file__).parent / "prompt_settings.json"
         self.settings = self._load_settings()
         self.templates = self._load_templates()
     
@@ -67,7 +72,21 @@ class PromptTemplateManager:
         if settings_path.exists():
             with open(settings_path, 'r') as f:
                 data = json.load(f)
-            return PromptSettings(**data)
+            
+            # Extract only fields that exist in PromptSettings dataclass
+            valid_fields = {
+                'enforce_decimal_scale': data.get('enforce_decimal_scale', True),
+                'include_model_identification': data.get('include_model_identification', True),
+                'include_analysis_methodology': data.get('include_analysis_methodology', True),
+                'include_examples': data.get('include_examples', False),
+                'max_language_cues': data.get('max_language_cues', 3),
+                'temperature_guidance': data.get('temperature_guidance', None),
+                'experimental_features': data.get('experimental_features', []),
+                'use_hierarchical_default': data.get('use_hierarchical_default', False),
+                'hierarchical_settings': data.get('hierarchical_settings', None)
+            }
+                
+            return PromptSettings(**valid_fields)
         else:
             # Return defaults
             return PromptSettings()
@@ -90,6 +109,17 @@ class PromptTemplateManager:
         
         Optimized for reliable JSON extraction and consistent results.
         """
+        # Check if hierarchical approach should be used as default
+        if (self.settings.use_hierarchical_default and 
+            hasattr(self.settings, 'hierarchical_settings') and 
+            self.settings.hierarchical_settings and
+            'api' in self.settings.hierarchical_settings.get('enabled_modes', [])):
+            
+            experiment_id = self.settings.hierarchical_settings['experiment_id']
+            variant = self.settings.hierarchical_settings['variant']
+            return self.generate_experimental_prompt(text, framework, experiment_id, variant)
+        
+        # Default non-hierarchical generation
         framework_config = self._load_framework_config(framework)
         
         components = [
@@ -111,6 +141,19 @@ class PromptTemplateManager:
         
         Includes full v2.0 sophistication for human-guided analysis.
         """
+        # Check if hierarchical approach should be used as default
+        if (self.settings.use_hierarchical_default and 
+            hasattr(self.settings, 'hierarchical_settings') and 
+            self.settings.hierarchical_settings and
+            'interactive' in self.settings.hierarchical_settings.get('enabled_modes', [])):
+            
+            experiment_id = self.settings.hierarchical_settings['experiment_id']
+            variant = self.settings.hierarchical_settings['variant']
+            # For interactive mode, we need a sample text, so use a placeholder
+            sample_text = "[TEXT TO BE PROVIDED BY USER]"
+            return self.generate_experimental_prompt(sample_text, framework, experiment_id, variant)
+        
+        # Default non-hierarchical generation
         framework_config = self._load_framework_config(framework)
         
         components = [

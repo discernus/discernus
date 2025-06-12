@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "corpus/raw_sources/test_presidential/lincoln_1865_second_inaugural.txt",
+    "filename": "lincoln_1865_second_inaugural.txt",
+    "size_bytes": 3995,
+    "modified_at": "2025-06-11T20:18:34.002188"
+  },
+  "processing": {
+    "processed_at": "2025-06-11T20:19:52.422941",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "278848191d01241a5179551a9c413764ad2755be1439650df8a8cd7c9f9e3018"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/27/88/278848191d01241a5179551a9c413764ad2755be1439650df8a8cd7c9f9e3018",
+    "text_file": "corpus/processed/27/88/278848191d01241a5179551a9c413764ad2755be1439650df8a8cd7c9f9e3018/lincoln_address_1865.txt",
+    "metadata_file": "corpus/processed/27/88/278848191d01241a5179551a9c413764ad2755be1439650df8a8cd7c9f9e3018/.metadata.json"
+  }
+}

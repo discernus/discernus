@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "tmp/test_ingestion/lincoln_test.txt",
+    "filename": "lincoln_test.txt",
+    "size_bytes": 944,
+    "modified_at": "2025-06-11T20:23:22.508234"
+  },
+  "processing": {
+    "processed_at": "2025-06-11T20:23:23.897568",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "0ae2960b5cd7e957845ef9a5f64bcd20f62750cd3420fbfebd7b0fd6778b6dc6"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/0a/e2/0ae2960b5cd7e957845ef9a5f64bcd20f62750cd3420fbfebd7b0fd6778b6dc6",
+    "text_file": "corpus/processed/0a/e2/0ae2960b5cd7e957845ef9a5f64bcd20f62750cd3420fbfebd7b0fd6778b6dc6/lincoln_address_1865.txt",
+    "metadata_file": "corpus/processed/0a/e2/0ae2960b5cd7e957845ef9a5f64bcd20f62750cd3420fbfebd7b0fd6778b6dc6/.metadata.json"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "tmp/sotu_test/new_long_speech.txt",
+    "filename": "new_long_speech.txt",
+    "size_bytes": 7471,
+    "modified_at": "2025-06-11T20:37:07.245961"
+  },
+  "processing": {
+    "processed_at": "2025-06-11T20:37:14.490361",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "08d56204f118b1d1fe2b464537e93b861a74cc42ad5fbb3dc4d421d8ded41dc7"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/08/d5/08d56204f118b1d1fe2b464537e93b861a74cc42ad5fbb3dc4d421d8ded41dc7",
+    "text_file": "corpus/processed/08/d5/08d56204f118b1d1fe2b464537e93b861a74cc42ad5fbb3dc4d421d8ded41dc7/smith_speech_2025.txt",
+    "metadata_file": "corpus/processed/08/d5/08d56204f118b1d1fe2b464537e93b861a74cc42ad5fbb3dc4d421d8ded41dc7/.metadata.json"
+  }
+}

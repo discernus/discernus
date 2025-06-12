@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "created_at": "2025-06-11T20:19:52.423045",
+  "processed_files": {
+    "lincoln_address_1865": {
+      "content_hash": "0ae2960b5cd7e957845ef9a5f64bcd20f62750cd3420fbfebd7b0fd6778b6dc6",
+      "file_path": "corpus/processed/0a/e2/0ae2960b5cd7e957845ef9a5f64bcd20f62750cd3420fbfebd7b0fd6778b6dc6/lincoln_address_1865.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-11T20:23:23.898117",
+      "title": "Second Inaugural Address",
+      "author": "Abraham Lincoln",
+      "date": "1865-03-04",
+      "document_type": "address"
+    },
+    "roosevelt_address_1933": {
+      "content_hash": "b5055221034e5fe424981a9b5e42d91df1dfdc31196f29c6b645b7280aef55a6",
+      "file_path": "corpus/processed/b5/05/b5055221034e5fe424981a9b5e42d91df1dfdc31196f29c6b645b7280aef55a6/roosevelt_address_1933.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-11T20:25:28.705911",
+      "title": "First Inaugural Address",
+      "author": "Franklin D. Roosevelt",
+      "date": "1933-03-04",
+      "document_type": "address"
+    },
+    "jr_address_2024": {
+      "content_hash": "f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857",
+      "file_path": "corpus/processed/f0/7d/f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857/jr_address_2024.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-11T20:35:20.445879",
+      "title": "Address to a Joint Session of Congress",
+      "author": "JOSEPH R. BIDEN, JR.",
+      "date": "2024-03-07",
+      "document_type": "address"
+    },
+    "clinton_address_1997": {
+      "content_hash": "ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4",
+      "file_path": "corpus/processed/ad/15/ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4/clinton_address_1997.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-11T20:36:13.291062",
+      "title": "Address to a Joint Session of Congress",
+      "author": "WILLIAM J. CLINTON",
+      "date": "1997-02-04",
+      "document_type": "address"
+    },
+    "smith_speech_2025": {
+      "content_hash": "08d56204f118b1d1fe2b464537e93b861a74cc42ad5fbb3dc4d421d8ded41dc7",
+      "file_path": "corpus/processed/08/d5/08d56204f118b1d1fe2b464537e93b861a74cc42ad5fbb3dc4d421d8ded41dc7/smith_speech_2025.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-11T20:37:14.490570",
+      "title": "State of the Union Address",
+      "author": "President Jane Smith",
+      "date": "2025-01-29",
+      "document_type": "speech"
+    }
+  },
+  "last_updated": "2025-06-11T20:37:14.490573",
+  "total_processed": 5
+}

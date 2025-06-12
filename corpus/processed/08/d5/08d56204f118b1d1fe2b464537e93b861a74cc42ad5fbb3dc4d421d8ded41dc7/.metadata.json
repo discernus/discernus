@@ -1,0 +1,20 @@
+{
+  "text_id": "smith_speech_2025",
+  "content_hash": "08d56204f118b1d1fe2b464537e93b861a74cc42ad5fbb3dc4d421d8ded41dc7",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "State of the Union Address",
+    "author": "President Jane Smith",
+    "date": "2025-01-29",
+    "document_type": "speech",
+    "description": "President Jane Smith's State of the Union Address outlining key priorities for the nation and addressing various challenges and opportunities.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Metadata extracted with high confidence."
+    ]
+  },
+  "processed_at": "2025-06-11T20:37:14.490172",
+  "original_path": "tmp/sotu_test/new_long_speech.txt",
+  "stable_path": "corpus/processed/08/d5/08d56204f118b1d1fe2b464537e93b861a74cc42ad5fbb3dc4d421d8ded41dc7/smith_speech_2025.txt"
+}

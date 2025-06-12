@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "tmp/test_ingestion/roosevelt_test.txt",
+    "filename": "roosevelt_test.txt",
+    "size_bytes": 803,
+    "modified_at": "2025-06-11T20:24:08.337523"
+  },
+  "processing": {
+    "processed_at": "2025-06-11T20:25:28.705526",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "b5055221034e5fe424981a9b5e42d91df1dfdc31196f29c6b645b7280aef55a6"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/b5/05/b5055221034e5fe424981a9b5e42d91df1dfdc31196f29c6b645b7280aef55a6",
+    "text_file": "corpus/processed/b5/05/b5055221034e5fe424981a9b5e42d91df1dfdc31196f29c6b645b7280aef55a6/roosevelt_address_1933.txt",
+    "metadata_file": "corpus/processed/b5/05/b5055221034e5fe424981a9b5e42d91df1dfdc31196f29c6b645b7280aef55a6/.metadata.json"
+  }
+}

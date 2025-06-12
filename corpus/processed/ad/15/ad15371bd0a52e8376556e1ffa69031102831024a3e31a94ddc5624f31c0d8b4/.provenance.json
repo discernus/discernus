@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "tmp/sotu_test/Clinton_SOTU_1997.txt",
+    "filename": "Clinton_SOTU_1997.txt",
+    "size_bytes": 52590,
+    "modified_at": "2025-06-11T20:36:03.385545"
+  },
+  "processing": {
+    "processed_at": "2025-06-11T20:36:13.290805",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/ad/15/ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4",
+    "text_file": "corpus/processed/ad/15/ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4/clinton_address_1997.txt",
+    "metadata_file": "corpus/processed/ad/15/ad15371bd0a52e8376556e1ffa69031102831024a3e31a94ddc5624f31c0d8b4/.metadata.json"
+  }
+}
