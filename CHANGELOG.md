@@ -1,5 +1,9 @@
 # Narrative Gravity Maps - Changelog
 
+## [Unreleased]
+
+## [v2.4.0] - Framework Agnosticism and Source of Truth Architecture - 2025-06-12
+
 ## [Unreleased] - June 12, 2025
 
 ### 🧹 PROJECT ORGANIZATION CLEANUP: Repository Structure Standardization
