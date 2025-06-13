@@ -17,6 +17,8 @@ This directory contains comprehensive documentation for the Narrative Gravity An
 
 **Implementation Details**
 - [`FRAMEWORK_IMPLEMENTATION_SUMMARY.md`](architecture/FRAMEWORK_IMPLEMENTATION_SUMMARY.md) - Framework implementation details
+- [`FRAMEWORK_SOURCE_OF_TRUTH.md`](architecture/FRAMEWORK_SOURCE_OF_TRUTH.md) - Database-first framework architecture and sync tools
+- [`COMPONENT_VERSIONING_ARCHITECTURE.md`](architecture/COMPONENT_VERSIONING_ARCHITECTURE.md) - Component versioning system and database architecture
 - [`PROMPT_ARCHITECTURE.md`](architecture/PROMPT_ARCHITECTURE.md) - Unified prompt template system
 - [`BACKEND_SERVICES_CAPABILITIES.md`](architecture/BACKEND_SERVICES_CAPABILITIES.md) - Current backend capabilities
 - [`PROJECT_STRUCTURE.md`](architecture/PROJECT_STRUCTURE.md) - Overall project organization
@@ -29,6 +31,7 @@ This directory contains comprehensive documentation for the Narrative Gravity An
 - [`CORPUS_TOOLING_SUMMARY.md`](user-guides/CORPUS_TOOLING_SUMMARY.md) - Text corpus management tools
 - [`PARAGRAPH_FIX_VALIDATION.md`](user-guides/PARAGRAPH_FIX_VALIDATION.md) - Text preprocessing validation
 - [`STREAMLIT_MIGRATION_NOTICE.md`](user-guides/STREAMLIT_MIGRATION_NOTICE.md) - Legacy interface migration notice
+- [`ACADEMIC_SOFTWARE_INSTALLATION_GUIDE.md`](user-guides/ACADEMIC_SOFTWARE_INSTALLATION_GUIDE.md) - Complete academic tooling setup guide
 
 ## 🔌 API Documentation
 
@@ -36,13 +39,15 @@ This directory contains comprehensive documentation for the Narrative Gravity An
 - [`CSV_FORMAT_STANDARD.md`](api/CSV_FORMAT_STANDARD.md) - Standard CSV format specification
 
 **System Guidelines**
-- [`API_COST_PROTECTION_GUIDE.md`](API_COST_PROTECTION_GUIDE.md) - Cost management for API usage
-- [`corpus_generation_tools.md`](corpus_generation_tools.md) - Text corpus generation tools
+- [`API_COST_PROTECTION_GUIDE.md`](user-guides/API_COST_PROTECTION_GUIDE.md) - Cost management for API usage
+- [`corpus_generation_tools.md`](user-guides/corpus_generation_tools.md) - Text corpus generation tools
 
 ## 📚 Academic Documentation
 
 **Research Standards**
 - [`PAPER_REPLICATION.md`](academic/PAPER_REPLICATION.md) - Academic replication standards
+- [`PAPER_PUBLICATION_CHECKLIST.md`](academic/PAPER_PUBLICATION_CHECKLIST.md) - Academic publication preparation checklist
+- [`Human_Thematic_Perception_and_Computational_Replication_A_Literature_Review.md`](academic/Human_Thematic_Perception_and_Computational_Replication_A_Literature_Review.md) - Literature review and theoretical foundation
 
 ## 🛠️ Development Documentation
 
@@ -58,13 +63,8 @@ This directory contains comprehensive documentation for the Narrative Gravity An
 
 **Project Management**
 - [`development/DEVELOPMENT_ROADMAP.md`](development/DEVELOPMENT_ROADMAP.md) - Development planning
-- [`development/PAPER_PUBLICATION_CHECKLIST.md`](development/PAPER_PUBLICATION_CHECKLIST.md) - Academic publication prep
-- [`development/CONTRIBUTING.md`](development/CONTRIBUTING.md) - Contribution guidelines
+- [`../CONTRIBUTING.md`](../CONTRIBUTING.md) - Contribution guidelines (project root)
 - [`development/RELEASE_PROCESS.md`](development/RELEASE_PROCESS.md) - Release management process
-
-**Planning and Analysis**
-- [`development/planning/User Personas - Narrative Gravity Model.md`](development/planning/) - User persona analysis
-- [`development/planning/Human_Thematic_Perception_and_Computational_Replication_A_Literature_Review.md`](development/planning/) - Literature review
 
 ## 📋 Quick Reference
 
@@ -92,6 +92,8 @@ This directory contains comprehensive documentation for the Narrative Gravity An
 - ✅ **Strategic Planning**: Current validation-first strategy documented
 - ✅ **User Guides**: Core tools and datasets documented
 - ✅ **API Documentation**: Format standards complete
+- ✅ **Framework Migration**: All 5 frameworks migrated to v2025.06.13 with database as source of truth
+- ✅ **Pipeline Testing**: Comprehensive end-to-end testing completed with gap analysis
 - 🟡 **Development**: Active implementation of validation-first platform
 - 🔴 **Interface Documentation**: Archived (deprecated per strategic pivot)
 
@@ -103,6 +105,16 @@ This directory contains comprehensive documentation for the Narrative Gravity An
 - **API Integration**: Review [`api/`](api/) directory
 - **Academic Standards**: See [`academic/`](academic/) directory
 
+## 📋 Specifications and Status
+
+**Framework and System Specifications**
+- [`FRAMEWORK_AGNOSTICISM_GUIDE.md`](specifications/FRAMEWORK_AGNOSTICISM_GUIDE.md) - Universal methodology approach
+- [`FORMAL_SPECIFICATION_PROPOSAL.md`](specifications/FORMAL_SPECIFICATION_PROPOSAL.md) - Systematic component specification system
+- [`IMPLEMENTATION_STATUS.md`](specifications/IMPLEMENTATION_STATUS.md) - Current system implementation status
+- [`ACADEMIC_PIPELINE_STATUS.md`](specifications/ACADEMIC_PIPELINE_STATUS.md) - Research pipeline status and capabilities
+- [`User Personas - Narrative Gravity Model.md`](specifications/User\ Personas\ -\ Narrative\ Gravity\ Model.md) - User persona analysis and requirements
+- [`END_TO_END_SUCCESS_SUMMARY.md`](specifications/END_TO_END_SUCCESS_SUMMARY.md) - System achievement and capability summary
+
 ## 📁 Archived Documentation
 
 Interface development documentation has been moved to:
@@ -112,5 +124,5 @@ Interface development documentation has been moved to:
 
 ---
 
-*Last Updated: June 11, 2025*
+*Last Updated: June 13, 2025*
 *Documentation Version: v2.0 (Validation-First Strategy)* 

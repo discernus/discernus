@@ -1,6 +1,6 @@
 # Framework Architecture Documentation
 
-**Last Updated**: January 2025  
+**Last Updated**: June 13, 2025  
 **Current Active Framework**: political_spectrum (via config/ symlinks)  
 **Status**: Production Ready with 4 Available Frameworks
 

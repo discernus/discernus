@@ -58,8 +58,8 @@ cp paper/drafts/narrative_gravity_maps_v1.0.0.md paper/drafts/narrative_gravity_
 
 ## Current Status
 
-**Current Version**: v1.0.0 (January 2025)
-**Status**: Validation-Ready Draft
+**Current Version**: v1.0.0 (June 2025)
+**Status**: PROGRESSIVE UPDATE
 **Next Milestone**: Human validation studies required before publication submission
 
 ### Key Validation Tasks Remaining:

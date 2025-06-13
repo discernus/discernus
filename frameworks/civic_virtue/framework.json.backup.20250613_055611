@@ -1,0 +1,146 @@
+{
+  "framework_name": "civic_virtue",
+  "display_name": "Civic Virtue Framework",
+  "version": "v2025.06.04",
+  "description": "Civic Virtue Framework - A specialized Narrative Gravity Map implementation for moral analysis of persuasive political discourse",
+  "coordinate_system": {
+    "type": "circle",
+    "radius": 1.0,
+    "description": "Default circular coordinate system"
+  },
+  "positioning_strategy": {
+    "type": "clustered_positioning",
+    "description": "Wells clustered around vertical dipoles to emphasize moral hierarchy",
+    "clusters": {
+      "top_cluster": {
+        "center_angle": 90,
+        "span": 80,
+        "well_types": [
+          "integrative"
+        ],
+        "description": "Virtue wells clustered around top (90\u00b0) within 80\u00b0 span"
+      },
+      "bottom_cluster": {
+        "center_angle": 270,
+        "span": 80,
+        "well_types": [
+          "disintegrative"
+        ],
+        "description": "Problem wells clustered around bottom (270\u00b0) within 80\u00b0 span"
+      }
+    }
+  },
+  "wells": {
+    "Dignity": {
+      "angle": 90,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary",
+      "description": "Analysis dimension for dignity in narrative content"
+    },
+    "Truth": {
+      "angle": 75,
+      "weight": 0.8,
+      "type": "integrative",
+      "tier": "secondary",
+      "description": "Analysis dimension for truth in narrative content"
+    },
+    "Hope": {
+      "angle": 60,
+      "weight": 0.6,
+      "type": "integrative",
+      "tier": "tertiary",
+      "description": "Analysis dimension for hope in narrative content"
+    },
+    "Justice": {
+      "angle": 105,
+      "weight": 0.8,
+      "type": "integrative",
+      "tier": "secondary",
+      "description": "Analysis dimension for justice in narrative content"
+    },
+    "Pragmatism": {
+      "angle": 120,
+      "weight": 0.6,
+      "type": "integrative",
+      "tier": "tertiary",
+      "description": "Analysis dimension for pragmatism in narrative content"
+    },
+    "Tribalism": {
+      "angle": 270,
+      "weight": 1.0,
+      "type": "disintegrative",
+      "tier": "primary",
+      "description": "Analysis dimension for tribalism in narrative content"
+    },
+    "Fear": {
+      "angle": 240,
+      "weight": 0.6,
+      "type": "disintegrative",
+      "tier": "tertiary",
+      "description": "Analysis dimension for fear in narrative content"
+    },
+    "Resentment": {
+      "angle": 255,
+      "weight": 0.8,
+      "type": "disintegrative",
+      "tier": "secondary",
+      "description": "Analysis dimension for resentment in narrative content"
+    },
+    "Manipulation": {
+      "angle": 285,
+      "weight": 0.8,
+      "type": "disintegrative",
+      "tier": "secondary",
+      "description": "Analysis dimension for manipulation in narrative content"
+    },
+    "Fantasy": {
+      "angle": 300,
+      "weight": 0.6,
+      "type": "disintegrative",
+      "tier": "tertiary",
+      "description": "Analysis dimension for fantasy in narrative content"
+    }
+  },
+  "well_type_colors": {
+    "integrative": "#2E7D32",
+    "disintegrative": "#C62828"
+  },
+  "theoretical_foundation": {
+    "primary_sources": [
+      "Aristotle. Nicomachean Ethics. Book VI.",
+      "Sandel, M. (2012). What Money Can't Buy: The Moral Limits of Markets."
+    ],
+    "theoretical_approach": "Draws from classical virtue ethics and contemporary civic republican theory to identify moral dimensions that strengthen or weaken democratic discourse and civic engagement."
+  },
+  "metrics": {
+    "com": {
+      "name": "Center of Mass",
+      "description": "Weighted center position considering signed weights"
+    },
+    "nps": {
+      "name": "Narrative Polarity Score",
+      "description": "Distance from center normalized by circle radius"
+    },
+    "dps": {
+      "name": "Directional Purity Score",
+      "description": "Consistency of integrative vs disintegrative pull"
+    }
+  },
+  "compatibility": {
+    "prompt_templates": [
+      "hierarchical_v2.1",
+      "standard_v2.0"
+    ],
+    "weighting_schemes": [
+      "winner_take_most",
+      "proportional"
+    ],
+    "visualization_types": [
+      "circular",
+      "comparative"
+    ]
+  },
+  "scaling_factor": 0.8,
+  "last_modified": "2025-06-12T18:08:46.761935"
+}

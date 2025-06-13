@@ -1,0 +1,123 @@
+{
+  "framework_name": "fukuyama_identity",
+  "display_name": "Fukuyama Identity Framework",
+  "version": "v2025.01.07",
+  "description": "Fukuyama Identity Framework - Analyzes democratic sustainability through identity, recognition, and thymos dynamics based on Francis Fukuyama's theoretical insights",
+  "coordinate_system": {
+    "type": "circle",
+    "radius": 1.0,
+    "description": "Circular coordinate system parameters"
+  },
+  "positioning_strategy": {
+    "type": "clustered_positioning",
+    "description": "Wells clustered around vertical dipoles to emphasize moral hierarchy",
+    "clusters": {
+      "top_cluster": {
+        "center_angle": 90,
+        "span": 80,
+        "well_types": [
+          "integrative"
+        ],
+        "description": "Virtue wells clustered around top (90\u00b0) within 80\u00b0 span"
+      },
+      "bottom_cluster": {
+        "center_angle": 270,
+        "span": 80,
+        "well_types": [
+          "disintegrative"
+        ],
+        "description": "Problem wells clustered around bottom (270\u00b0) within 80\u00b0 span"
+      }
+    }
+  },
+  "wells": {
+    "Creedal Identity": {
+      "angle": 90,
+      "weight": 1.0,
+      "type": "integrative",
+      "tier": "primary",
+      "description": "Analysis dimension for creedal identity in narrative content"
+    },
+    "Integrative Recognition": {
+      "angle": 60,
+      "weight": 0.9,
+      "type": "integrative",
+      "tier": "secondary",
+      "description": "Analysis dimension for integrative recognition in narrative content"
+    },
+    "Democratic Thymos": {
+      "angle": 120,
+      "weight": 0.9,
+      "type": "integrative",
+      "tier": "secondary",
+      "description": "Analysis dimension for democratic thymos in narrative content"
+    },
+    "Ethnic Identity": {
+      "angle": 270,
+      "weight": 1.0,
+      "type": "disintegrative",
+      "tier": "primary",
+      "description": "Analysis dimension for ethnic identity in narrative content"
+    },
+    "Fragmentary Recognition": {
+      "angle": 240,
+      "weight": 0.9,
+      "type": "disintegrative",
+      "tier": "secondary",
+      "description": "Analysis dimension for fragmentary recognition in narrative content"
+    },
+    "Megalothymic Thymos": {
+      "angle": 300,
+      "weight": 0.9,
+      "type": "disintegrative",
+      "tier": "secondary",
+      "description": "Analysis dimension for megalothymic thymos in narrative content"
+    }
+  },
+  "well_type_colors": {
+    "integrative": "#1976D2",
+    "disintegrative": "#C62828"
+  },
+  "theoretical_foundation": {
+    "primary_sources": [
+      "Fukuyama, F. (2018). Identity: The Demand for Dignity and the Politics of Resentment.",
+      "Fukuyama, F. (1992). The End of History and the Last Man.",
+      "Taylor, C. (1992). Multiculturalism and the Politics of Recognition."
+    ],
+    "theoretical_approach": "Analyzes democratic sustainability through identity, recognition, and thymos dynamics based on Francis Fukuyama's theoretical insights about the role of identity in modern politics and democratic institutions."
+  },
+  "metrics": {
+    "com": {
+      "name": "Center of Mass",
+      "description": "Weighted center position considering well types"
+    },
+    "ies": {
+      "name": "Identity Elevation Score",
+      "description": "Y-axis position indicating integrative vs disintegrative pull"
+    },
+    "ics": {
+      "name": "Identity Coherence Score",
+      "description": "Consistency of identity orientation across wells"
+    },
+    "tas": {
+      "name": "Thymos Alignment Score",
+      "description": "How narrative channels recognition-seeking behavior"
+    }
+  },
+  "compatibility": {
+    "prompt_templates": [
+      "hierarchical_v2.1",
+      "standard_v2.0"
+    ],
+    "weighting_schemes": [
+      "winner_take_most",
+      "proportional"
+    ],
+    "visualization_types": [
+      "circular",
+      "comparative"
+    ]
+  },
+  "scaling_factor": 0.8,
+  "last_modified": "2025-06-12T18:08:46.770647"
+}

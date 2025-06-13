@@ -1,66 +1,22 @@
-# Development Environment Setup Guide
+# Development Environment Setup - Quick Reference
 
-## The Path Problem
-The AI assistant often struggles with Python import paths because the project uses a `src/` directory structure that isn't automatically in Python's module search path.
+> **Note**: Complete development environment guidance is in `.cursorrules`. This document provides IDE-specific setup and quick reference.
 
-## Quick Fix: Auto-Setup Every Session
-
-**Add this to the top of your work sessions:**
+## Quick Setup Commands
 
 ```bash
-# Activate virtual environment (if not already active)
+# Essential setup for every session
 source venv/bin/activate
-
-# Setup development paths
 source scripts/setup_dev_env.sh
-```
 
-## What This Fixes
-
-### ✅ **Before** (Broken):
-```python
-# This would fail
-from narrative_gravity.engine import NarrativeGravityWellsElliptical
-```
-
-### ✅ **After** (Working):
-```python
-# Both of these work now
-from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
-from narrative_gravity.engine import NarrativeGravityWellsElliptical  # Also works!
-```
-
-## Environment Variables Set
-
-The setup script configures:
-- `PROJECT_ROOT`: `/Users/jeffwhatcott/narrative_gravity_analysis`
-- `PYTHONPATH`: Includes project root and `src/` directory
-- `NARRATIVE_GRAVITY_*`: Helper variables for scripts
-- Loads all `.env` variables automatically
-
-## Verification
-
-Test that everything works:
-```bash
+# Verify imports work
 python3 -c "from src.narrative_gravity.engine import NarrativeGravityWellsElliptical; print('✅ Imports working!')"
 ```
 
-## For Long-Term Use
+## IDE Configuration
 
-Add to your `~/.zshrc` or `~/.bashrc`:
-```bash
-# Auto-setup Narrative Gravity environment when entering the project
-cd() {
-    builtin cd "$@"
-    if [[ "$PWD" == *"narrative_gravity_analysis"* ]] && [[ -f "scripts/setup_dev_env.sh" ]]; then
-        source scripts/setup_dev_env.sh > /dev/null 2>&1
-    fi
-}
-```
-
-## Alternative: IDE Setup
-
-If using VS Code, add to `.vscode/settings.json`:
+### VS Code Setup
+Add to `.vscode/settings.json`:
 ```json
 {
     "python.defaultInterpreterPath": "./venv/bin/python",
@@ -71,21 +27,31 @@ If using VS Code, add to `.vscode/settings.json`:
 }
 ```
 
-This ensures both AI assistant commands and your IDE can properly resolve imports.
+### PyCharm Setup
+1. **File → Settings → Project → Python Interpreter**
+2. Select the virtual environment: `./venv/bin/python`
+3. **File → Settings → Project → Project Structure**
+4. Mark `src/` directory as "Sources Root"
 
-## Date and Time Handling
+## Shell Integration (Optional)
 
-**CRITICAL**: Never hardcode dates in documentation or files. Always use system date/time:
-
+Add to `~/.zshrc` or `~/.bashrc` for automatic setup:
 ```bash
-# Get current date for documentation
-./scripts/get_current_date.sh              # Returns: June 11, 2025
-./scripts/get_current_date.sh iso          # Returns: 2025-06-11  
-./scripts/get_current_date.sh timestamp    # Returns: 2025-06-11 08:49:35
-
-# Or use date command directly
-date "+%B %-d, %Y"                         # Returns: June 11, 2025
-date "+%Y-%m-%d"                           # Returns: 2025-06-11
+# Auto-setup when entering project directory
+cd() {
+    builtin cd "$@"
+    if [[ "$PWD" == *"narrative_gravity_analysis"* ]] && [[ -f "scripts/setup_dev_env.sh" ]]; then
+        source scripts/setup_dev_env.sh > /dev/null 2>&1
+    fi
+}
 ```
 
-This prevents documentation from containing incorrect dates and ensures timestamps are accurate. 
+## Common Issues
+
+**Import failures?** → Run `source scripts/setup_dev_env.sh`  
+**Command not found: python?** → Use `python3`  
+**Wrong dates in files?** → Use `date` command or `./scripts/get_current_date.sh`
+
+---
+
+**For complete development environment guidance, see `.cursorrules`** 

@@ -121,8 +121,9 @@ from narrative_gravity.engine import NarrativeGravityWellsElliptical
 #### Troubleshooting Import Issues
 1. **First step**: Always run `source scripts/setup_dev_env.sh`
 2. **Verify PYTHONPATH**: Check that `src/` is in Python path
-3. **Reference**: DEV_ENVIRONMENT.md for detailed setup guide
-4. **Never guess paths**: Use the established environment setup
+3. **Reference**: docs/development/DEV_ENVIRONMENT.md for IDE-specific setup
+4. **Advanced troubleshooting**: docs/development/ENVIRONMENT_TROUBLESHOOTING.md for diagnostic commands and emergency reset
+5. **Never guess paths**: Use the established environment setup
 
 #### Critical Command Consistency Rules
 **ALWAYS follow these patterns to avoid environment issues:**
