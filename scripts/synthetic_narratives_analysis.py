@@ -16,7 +16,7 @@ from typing import Dict, Any, List
 sys.path.append('.')
 
 from src.api_clients.direct_api_client import DirectAPIClient
-from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
+from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
 
 def load_synthetic_narratives() -> Dict[str, str]:
     """Load all synthetic narrative texts"""
@@ -134,8 +134,8 @@ def create_comparative_visualization(analysis_results: List[Dict[str, Any]]) -> 
         }
         formatted_analyses.append(formatted_analysis)
     
-    # Initialize the established elliptical visualizer
-    visualizer = NarrativeGravityWellsElliptical()
+    # Initialize the circular coordinate visualizer
+    visualizer = NarrativeGravityWellsCircular()
     
     # Create comparative visualization
     output_path = visualizer.create_comparative_visualization(

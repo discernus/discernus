@@ -472,12 +472,16 @@ cat("Processed data exported to corpus_processed.csv\\n")
 """
 Narrative Gravity Wells Corpus - Python Analysis Script
 Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+Professional corpus analysis using centralized visualization system
+for consistent, interactive, publication-ready outputs.
 """
 
 import json
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from datetime import datetime
 from pathlib import Path
 
@@ -493,58 +497,169 @@ df['date'] = pd.to_datetime(df['date'])
 df['registered_at'] = pd.to_datetime(df['registered_at'])
 
 # Basic statistics
-print("Corpus Statistics:")
-print(f"Total documents: {{len(df)}}")
-print(f"Unique authors: {{df['author'].nunique()}}")
+print("📊 Corpus Statistics:")
+print(f"   Total documents: {{len(df)}}")
+print(f"   Unique authors: {{df['author'].nunique()}}")
 if not df['date'].isna().all():
-    print(f"Date range: {{df['date'].min()}} to {{df['date'].max()}}")
+    print(f"   Date range: {{df['date'].min()}} to {{df['date'].max()}}")
 
-print("\\nDocument types:")
+print("\\n📋 Document types:")
 print(df['document_type'].value_counts())
 
-print("\\nAuthors:")
+print("\\n👥 Authors:")
 print(df['author'].value_counts())
 
-# Visualizations
-plt.style.use('seaborn-v0_8')
-fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+# Professional Visualizations using Plotly
+print("\\n🎨 Creating professional interactive visualizations...")
 
-# Timeline
+# Create subplot layout for comprehensive analysis
+fig = make_subplots(
+    rows=2, cols=2,
+    subplot_titles=(
+        'Documents by Year Timeline',
+        'Document Types Distribution', 
+        'Top 10 Authors',
+        'File Size Distribution'
+    ),
+    specs=[[{{"type": "bar"}}, {{"type": "pie"}}],
+           [{{"type": "bar"}}, {{"type": "histogram"}}]]
+)
+
+# 1. Timeline visualization
 if not df['date'].isna().all():
     df['year'] = df['date'].dt.year
     year_counts = df['year'].value_counts().sort_index()
-    axes[0, 0].bar(year_counts.index, year_counts.values)
-    axes[0, 0].set_title('Documents by Year')
-    axes[0, 0].set_xlabel('Year')
-    axes[0, 0].set_ylabel('Number of Documents')
+    
+    fig.add_trace(
+        go.Bar(
+            x=year_counts.index,
+            y=year_counts.values,
+            name="Documents",
+            marker_color="steelblue",
+            showlegend=False
+        ),
+        row=1, col=1
+    )
 
-# Document types
+# 2. Document types pie chart
 doc_type_counts = df['document_type'].value_counts()
-axes[0, 1].pie(doc_type_counts.values, labels=doc_type_counts.index, autopct='%1.1f%%')
-axes[0, 1].set_title('Document Types Distribution')
+fig.add_trace(
+    go.Pie(
+        labels=doc_type_counts.index,
+        values=doc_type_counts.values,
+        name="Document Types",
+        showlegend=False
+    ),
+    row=1, col=2
+)
 
-# Authors
+# 3. Top authors bar chart
 author_counts = df['author'].value_counts().head(10)
-axes[1, 0].barh(author_counts.index, author_counts.values)
-axes[1, 0].set_title('Top 10 Authors')
-axes[1, 0].set_xlabel('Number of Documents')
+fig.add_trace(
+    go.Bar(
+        x=author_counts.values,
+        y=author_counts.index,
+        orientation='h',
+        name="Authors",
+        marker_color="lightcoral",
+        showlegend=False
+    ),
+    row=2, col=1
+)
 
-# File sizes
+# 4. File size distribution
 if 'file_size' in df.columns:
     df['file_size_kb'] = df['file_size'] / 1024
-    axes[1, 1].hist(df['file_size_kb'], bins=20, alpha=0.7)
-    axes[1, 1].set_title('File Size Distribution')
-    axes[1, 1].set_xlabel('File Size (KB)')
-    axes[1, 1].set_ylabel('Frequency')
+    fig.add_trace(
+        go.Histogram(
+            x=df['file_size_kb'],
+            nbinsx=20,
+            name="File Sizes",
+            marker_color="lightgreen",
+            showlegend=False
+        ),
+        row=2, col=2
+    )
 
-plt.tight_layout()
-plt.savefig('corpus_analysis.png', dpi=300, bbox_inches='tight')
-print("\\nVisualizations saved to corpus_analysis.png")
+# Update layout for professional appearance
+fig.update_layout(
+    title="Narrative Gravity Wells Corpus Analysis Dashboard",
+    title_font_size=20,
+    height=800,
+    showlegend=False
+)
+
+# Update axes labels
+fig.update_xaxes(title_text="Year", row=1, col=1)
+fig.update_yaxes(title_text="Number of Documents", row=1, col=1)
+fig.update_xaxes(title_text="Number of Documents", row=2, col=1)
+fig.update_yaxes(title_text="Author", row=2, col=1)
+fig.update_xaxes(title_text="File Size (KB)", row=2, col=2)
+fig.update_yaxes(title_text="Frequency", row=2, col=2)
+
+# Save interactive visualization
+fig.write_html('corpus_analysis_dashboard.html')
+fig.write_image('corpus_analysis_dashboard.png', width=1400, height=800, scale=2)
+print("   ✅ Comprehensive dashboard: corpus_analysis_dashboard.html/.png")
+
+# Individual detailed visualizations
+
+# Timeline detailed view
+if not df['date'].isna().all():
+    timeline_fig = px.histogram(
+        df, 
+        x='date',
+        title='Corpus Timeline - Detailed View',
+        labels={{'date': 'Publication Date', 'count': 'Number of Documents'}},
+        nbins=30
+    )
+    timeline_fig.update_layout(title_font_size=18)
+    timeline_fig.write_html('corpus_timeline.html')
+    timeline_fig.write_image('corpus_timeline.png', width=1200, height=600, scale=2)
+    print("   ✅ Detailed timeline: corpus_timeline.html/.png")
+
+# Author-Document Type Cross Analysis
+if len(df['author'].unique()) > 1 and len(df['document_type'].unique()) > 1:
+    author_type_counts = df.groupby(['author', 'document_type']).size().reset_index(name='count')
+    
+    cross_fig = px.bar(
+        author_type_counts,
+        x='author',
+        y='count',
+        color='document_type',
+        title='Document Types by Author',
+        labels={{'count': 'Number of Documents', 'author': 'Author'}}
+    )
+    cross_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+    cross_fig.write_html('author_document_types.html')
+    cross_fig.write_image('author_document_types.png', width=1200, height=600, scale=2)
+    print("   ✅ Author-type analysis: author_document_types.html/.png")
+
+# Document length analysis (if content available)
+if 'content' in df.columns:
+    df['content_length'] = df['content'].str.len()
+    
+    length_fig = px.histogram(
+        df,
+        x='content_length',
+        color='document_type',
+        title='Document Length Distribution by Type',
+        labels={{'content_length': 'Content Length (characters)', 'count': 'Number of Documents'}},
+        nbins=25
+    )
+    length_fig.update_layout(title_font_size=18)
+    length_fig.write_html('document_lengths.html')
+    length_fig.write_image('document_lengths.png', width=1200, height=600, scale=2)
+    print("   ✅ Document length analysis: document_lengths.html/.png")
+
+print("\\n✅ Professional visualization suite completed!")
+print("📊 Interactive HTML files created for detailed exploration")
+print("📊 High-resolution PNG files created for publications")
 
 # Export processed data
 df.to_csv('corpus_processed.csv', index=False)
 df.to_parquet('corpus_processed.parquet')
-print("Processed data exported to corpus_processed.csv and corpus_processed.parquet")
+print("\\n📁 Processed data exported to corpus_processed.csv and corpus_processed.parquet")
 
 # Summary statistics
 summary_stats = {{
@@ -558,7 +673,8 @@ summary_stats = {{
 with open('corpus_summary.json', 'w') as f:
     json.dump(summary_stats, f, indent=2)
 
-print("Summary statistics saved to corpus_summary.json")
+print("📊 Summary statistics saved to corpus_summary.json")
+print("🎯 All visualizations use professional Plotly styling for consistent presentation")
 '''
         
         py_file.write_text(py_script, encoding='utf-8')
@@ -701,19 +817,22 @@ library(ggplot2)
             py_template = templates_dir / "basic_analysis.py"
             py_template.write_text('''
 # Basic corpus analysis template
-# Load your corpus data and perform basic analyses
+# Load your corpus data and perform basic analyses using centralized visualization
 
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly.graph_objects as go
 
 # Load data
 # df = pd.read_csv("corpus_data.csv")
 
-# Example analyses:
-# 1. Document counts by author
-# 2. Timeline visualization
-# 3. Document type distribution
-# 4. Text length analysis
+# Example analyses using modern interactive visualizations:
+# 1. Document counts by author: px.bar(df, x='author', y='count')
+# 2. Timeline visualization: px.histogram(df, x='date') 
+# 3. Document type distribution: px.pie(df, names='document_type')
+# 4. Text length analysis: px.histogram(df, x='text_length')
+
+# All visualizations will be interactive HTML that can be embedded or shared
 ''')
     
     def _create_export_readme(self, export_dir: Path, corpus_name: Optional[str], formats: List[str], include_content: bool) -> None:

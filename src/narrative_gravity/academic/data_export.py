@@ -870,20 +870,22 @@ All well scores range from 0.0 (completely absent) to 1.0 (strongly present).
         code_dir = package_dir / "code"
         code_dir.mkdir(exist_ok=True)
         
-        # Python analysis template
+        # Python analysis template using centralized visualization system
         python_template = '''"""
 Narrative Gravity Wells Analysis - Python Template
 
-This script provides template analysis code for the experimental dataset.
+This script provides template analysis code for the experimental dataset using
+the centralized visualization system for professional, interactive outputs.
 Adapt as needed for your specific research questions.
 """
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from scipy import stats
 import json
+
+# Import centralized visualization system
+from narrative_gravity.visualization import create_visualization_engine
 
 # Load data
 print("Loading dataset...")
@@ -904,38 +906,117 @@ print("\\nModel Performance Comparison:")
 model_stats = data.groupby('llm_model')['cv'].agg(['mean', 'std'])
 print(model_stats)
 
-# Visualization
-plt.figure(figsize=(12, 8))
+# Professional Visualization Suite using Centralized Engine
+print("\\n📊 Creating professional visualizations...")
 
-# Reliability by framework
-plt.subplot(2, 2, 1)
-sns.boxplot(data=data, x='framework', y='cv')
-plt.title('Reliability by Framework')
-plt.xticks(rotation=45)
+# Initialize visualization engine with academic theme for publication-ready outputs
+engine = create_visualization_engine(theme='academic')
 
-# Processing time by model
-plt.subplot(2, 2, 2)
-sns.boxplot(data=data, x='llm_model', y='process_time_sec')
-plt.title('Processing Time by Model')
-plt.xticks(rotation=45)
+# 1. Framework Reliability Analysis
+import plotly.express as px
+reliability_fig = px.box(
+    data, 
+    x='framework', 
+    y='cv',
+    title='Framework Reliability Analysis (Lower CV = Better)',
+    labels={'cv': 'Coefficient of Variation', 'framework': 'Framework'}
+)
+reliability_fig.add_hline(
+    y=0.20, 
+    line_dash="dash", 
+    line_color="red",
+    annotation_text="Reliability Threshold (0.20)"
+)
+reliability_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+reliability_fig.write_html('../output/framework_reliability.html')
+reliability_fig.write_image('../output/framework_reliability.png', width=1200, height=800, scale=2)
+print("   ✅ Framework reliability analysis: ../output/framework_reliability.html/.png")
 
-# Well scores distribution (example for first well)
+# 2. Model Performance Comparison
+model_fig = px.box(
+    data, 
+    x='llm_model', 
+    y='cv',
+    title='Model Performance Comparison',
+    labels={'cv': 'Coefficient of Variation', 'llm_model': 'LLM Model'}
+)
+model_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+model_fig.write_html('../output/model_performance.html')
+model_fig.write_image('../output/model_performance.png', width=1200, height=800, scale=2)
+print("   ✅ Model performance: ../output/model_performance.html/.png")
+
+# 3. Well Scores Distribution
 well_columns = [col for col in data.columns if col.startswith('well_')]
 if well_columns:
-    plt.subplot(2, 2, 3)
-    sns.histplot(data=data, x=well_columns[0], bins=20)
-    plt.title(f'Distribution of {well_columns[0]}')
+    well_data = data[well_columns].melt(var_name='well', value_name='score')
+    well_fig = px.box(
+        well_data, 
+        x='well', 
+        y='score',
+        title='Well Scores Distribution Across All Analyses',
+        labels={'score': 'Well Score', 'well': 'Narrative Well'}
+    )
+    well_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+    well_fig.write_html('../output/well_scores_distribution.html')
+    well_fig.write_image('../output/well_scores_distribution.png', width=1200, height=800, scale=2)
+    print("   ✅ Well scores distribution: ../output/well_scores_distribution.html/.png")
 
-# Cost analysis
-plt.subplot(2, 2, 4)
-sns.scatterplot(data=data, x='process_time_sec', y='cost', hue='llm_model')
-plt.title('Cost vs Processing Time')
+# 4. Cost vs Processing Time Analysis
+if 'cost' in data.columns and 'process_time_sec' in data.columns:
+    cost_fig = px.scatter(
+        data, 
+        x='process_time_sec', 
+        y='cost', 
+        color='llm_model',
+        title='Cost vs Processing Time Analysis',
+        labels={
+            'process_time_sec': 'Processing Time (seconds)', 
+            'cost': 'Cost (USD)',
+            'llm_model': 'LLM Model'
+        }
+    )
+    cost_fig.update_layout(title_font_size=18)
+    cost_fig.write_html('../output/cost_analysis.html')
+    cost_fig.write_image('../output/cost_analysis.png', width=1200, height=800, scale=2)
+    print("   ✅ Cost analysis: ../output/cost_analysis.html/.png")
 
-plt.tight_layout()
-plt.savefig('../output/exploratory_analysis.png', dpi=300, bbox_inches='tight')
-plt.show()
+# 5. Create Narrative Gravity Visualization (if well data exists)
+if well_columns and len(well_columns) >= 3:
+    print("   📊 Creating narrative gravity visualization...")
+    
+    # Prepare analysis data for visualization engine
+    wells = {}
+    for i, well_col in enumerate(well_columns[:8]):  # Limit to 8 wells for clarity
+        well_name = well_col.replace('well_', '').replace('_', ' ').title()
+        angle = (i * 360 / len(well_columns[:8])) % 360
+        wells[well_name] = {
+            'angle': angle,
+            'type': 'integrative' if i % 2 == 0 else 'disintegrative',
+            'weight': 1.0
+        }
+    
+    # Use mean scores across dataset
+    mean_scores = {}
+    for well_col in well_columns[:8]:
+        well_name = well_col.replace('well_', '').replace('_', ' ').title()
+        mean_scores[well_name] = data[well_col].mean()
+    
+    # Create narrative gravity visualization
+    gravity_fig = engine.create_single_analysis(
+        wells=wells,
+        scores=mean_scores,
+        title='Mean Narrative Gravity Profile - [STUDY_NAME]',
+        include_center=True
+    )
+    gravity_fig.write_html('../output/narrative_gravity_profile.html')
+    gravity_fig.write_image('../output/narrative_gravity_profile.png', width=800, height=800, scale=2)
+    print("   ✅ Narrative gravity profile: ../output/narrative_gravity_profile.html/.png")
 
-print("\\nAnalysis complete! Check the output directory for visualizations.")
+print("\\n✅ Professional visualization suite completed!")
+print("📊 Interactive HTML files created for detailed exploration")
+print("📊 High-resolution PNG files created for publications")
+print("🎯 All visualizations use consistent academic theming")
+print("\\nAnalysis complete! Check the ../output/ directory for all visualizations.")
 '''
         
         python_path = code_dir / "python_analysis.py"

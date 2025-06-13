@@ -251,7 +251,7 @@ Analytical Goals:
 Mathematical Constraints:
 - Preserve relative ordering of well strengths
 - Avoid artificial compression of meaningful differences  
-- Enable clear visualization on elliptical coordinate system
+- Enable clear visualization on circular coordinate system
 - Support statistical analysis and comparison across narratives
 
 Development Focus: {development_focus}

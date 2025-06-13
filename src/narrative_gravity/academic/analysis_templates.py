@@ -7,12 +7,12 @@ Supports Elena's Week 3 workflow for statistical analysis and visualization.
 
 import json
 from datetime import datetime
-# Visualization imports
+# Visualization imports - using circular coordinate system
 try:
-    from ..visualization.plotly_elliptical import PlotlyEllipticalVisualizer
-    PLOTLY_ELLIPTICAL_AVAILABLE = True
+    from ..visualization.plotly_circular import PlotlyCircularVisualizer
+    PLOTLY_CIRCULAR_AVAILABLE = True
 except ImportError:
-    PLOTLY_ELLIPTICAL_AVAILABLE = False
+    PLOTLY_CIRCULAR_AVAILABLE = False
 
 from pathlib import Path
 from typing import Dict, List, Optional, Any
@@ -92,8 +92,6 @@ class JupyterTemplateGenerator:
         """Generate imports code."""
         return """import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from scipy import stats
 import plotly.express as px
 import plotly.graph_objects as go
@@ -101,9 +99,8 @@ from plotly.subplots import make_subplots
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set style
-plt.style.use('seaborn-v0_8')
-sns.set_palette("husl")
+# Import centralized visualization system
+from narrative_gravity.visualization import create_visualization_engine
 
 print("📊 Narrative Gravity Wells Analysis")
 print("=" * 50)"""
@@ -193,83 +190,169 @@ if len(cv_by_framework) > 1 and all(len(group) > 1 for group in cv_by_framework)
         print("❌ No significant framework effect")"""
     
     def _get_visualization_code(self):
-        """Generate visualization code."""
-        return """# Comprehensive visualization suite
-import matplotlib.pyplot as plt
-import seaborn as sns
+        """Generate visualization code using centralized system."""
+        return """# Professional visualization suite using centralized system
+print("\\n📊 Creating professional visualizations...")
 
-# Set up the plotting environment
-plt.figure(figsize=(15, 12))
+# Initialize visualization engine with academic theme
+engine = create_visualization_engine(theme='academic')
 
-# 1. Reliability by Framework
-plt.subplot(2, 3, 1)
+# 1. Reliability by Framework Analysis
 if 'cv' in data.columns and data['cv'].notna().any():
-    sns.boxplot(data=data, x='framework', y='cv')
-    plt.axhline(y=0.20, color='red', linestyle='--', alpha=0.7, label='Target Threshold')
-    plt.title('Reliability by Framework\\n(Lower CV = Better)')
-    plt.xticks(rotation=45)
-    plt.legend()
+    reliability_fig = px.box(
+        data, 
+        x='framework', 
+        y='cv',
+        title='Reliability by Framework (Lower CV = Better)',
+        labels={'cv': 'Coefficient of Variation', 'framework': 'Framework'}
+    )
+    reliability_fig.add_hline(
+        y=0.20, 
+        line_dash="dash", 
+        line_color="red",
+        annotation_text="Target Threshold (0.20)"
+    )
+    reliability_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+    reliability_fig.write_html('reliability_by_framework.html')
+    reliability_fig.write_image('reliability_by_framework.png', width=1200, height=800, scale=2)
+    print("✅ Reliability analysis: reliability_by_framework.html/.png")
 
-# 2. Model Performance
-plt.subplot(2, 3, 2)
+# 2. Model Performance Comparison
 if 'llm_model' in data.columns and 'cv' in data.columns:
-    sns.violinplot(data=data, x='llm_model', y='cv')
-    plt.title('Model Performance Comparison')
-    plt.xticks(rotation=45)
+    model_fig = px.violin(
+        data, 
+        x='llm_model', 
+        y='cv',
+        title='Model Performance Comparison',
+        labels={'cv': 'Coefficient of Variation', 'llm_model': 'LLM Model'}
+    )
+    model_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+    model_fig.write_html('model_performance.html')
+    model_fig.write_image('model_performance.png', width=1200, height=800, scale=2)
+    print("✅ Model performance: model_performance.html/.png")
 
-# 3. Cost vs Processing Time
-plt.subplot(2, 3, 3)
+# 3. Cost vs Processing Time Analysis
 if 'cost' in data.columns and 'process_time_sec' in data.columns:
-    sns.scatterplot(data=data, x='process_time_sec', y='cost', hue='llm_model', alpha=0.7)
-    plt.title('Cost vs Processing Time')
-    plt.xlabel('Processing Time (seconds)')
-    plt.ylabel('Cost (USD)')
+    cost_fig = px.scatter(
+        data, 
+        x='process_time_sec', 
+        y='cost', 
+        color='llm_model',
+        title='Cost vs Processing Time Analysis',
+        labels={
+            'process_time_sec': 'Processing Time (seconds)', 
+            'cost': 'Cost (USD)',
+            'llm_model': 'LLM Model'
+        }
+    )
+    cost_fig.update_layout(title_font_size=18)
+    cost_fig.write_html('cost_analysis.html')
+    cost_fig.write_image('cost_analysis.png', width=1200, height=800, scale=2)
+    print("✅ Cost analysis: cost_analysis.html/.png")
 
-# 4. Framework Usage Over Time
-plt.subplot(2, 3, 4)
+# 4. Framework Timeline Analysis
 if 'exp_date' in data.columns:
     data_time = data.copy()
-    data_time['month'] = pd.to_datetime(data_time['exp_date']).dt.to_period('M')
+    data_time['month'] = pd.to_datetime(data_time['exp_date']).dt.to_period('M').astype(str)
     framework_timeline = data_time.groupby(['month', 'framework']).size().reset_index(name='count')
     
-    for framework in framework_timeline['framework'].unique():
-        fdata = framework_timeline[framework_timeline['framework'] == framework]
-        plt.plot(fdata['month'].astype(str), fdata['count'], marker='o', label=framework)
-    
-    plt.title('Framework Usage Timeline')
-    plt.xticks(rotation=45)
-    plt.legend()
+    timeline_fig = px.line(
+        framework_timeline, 
+        x='month', 
+        y='count', 
+        color='framework',
+        title='Framework Usage Timeline',
+        labels={'count': 'Number of Analyses', 'month': 'Month'}
+    )
+    timeline_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+    timeline_fig.write_html('framework_timeline.html')
+    timeline_fig.write_image('framework_timeline.png', width=1200, height=800, scale=2)
+    print("✅ Timeline analysis: framework_timeline.html/.png")
 
-# 5. Well Scores Distribution (if available)
+# 5. Well Scores Distribution
 well_columns = [col for col in data.columns if col.startswith('well_')]
 if well_columns:
-    plt.subplot(2, 3, 5)
-    well_data = data[well_columns].melt()
-    sns.boxplot(data=well_data, x='variable', y='value')
-    plt.title('Well Scores Distribution')
-    plt.xticks(rotation=45)
-    plt.ylabel('Score')
+    well_data = data[well_columns].melt(var_name='well', value_name='score')
+    well_fig = px.box(
+        well_data, 
+        x='well', 
+        y='score',
+        title='Well Scores Distribution',
+        labels={'score': 'Score', 'well': 'Narrative Well'}
+    )
+    well_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+    well_fig.write_html('well_scores_distribution.html')
+    well_fig.write_image('well_scores_distribution.png', width=1200, height=800, scale=2)
+    print("✅ Well scores: well_scores_distribution.html/.png")
 
 # 6. Reliability Improvement Over Time
-plt.subplot(2, 3, 6)
 if 'exp_date' in data.columns and 'cv' in data.columns:
     data_time = data.copy()
-    data_time['week'] = pd.to_datetime(data_time['exp_date']).dt.to_period('W')
-    weekly_cv = data_time.groupby('week')['cv'].mean()
+    data_time['week'] = pd.to_datetime(data_time['exp_date']).dt.to_period('W').astype(str)
+    weekly_cv = data_time.groupby('week')['cv'].mean().reset_index()
     
-    plt.plot(weekly_cv.index.astype(str), weekly_cv.values, marker='o', linewidth=2)
-    plt.axhline(y=0.20, color='red', linestyle='--', alpha=0.7, label='Target Threshold')
-    plt.title('Reliability Improvement Over Time')
-    plt.xticks(rotation=45)
-    plt.ylabel('Mean CV')
-    plt.legend()
+    improvement_fig = px.line(
+        weekly_cv, 
+        x='week', 
+        y='cv',
+        title='Reliability Improvement Over Time',
+        labels={'cv': 'Mean Coefficient of Variation', 'week': 'Week'}
+    )
+    improvement_fig.add_hline(
+        y=0.20, 
+        line_dash="dash", 
+        line_color="red",
+        annotation_text="Target Threshold"
+    )
+    improvement_fig.update_layout(title_font_size=18, xaxis_tickangle=45)
+    improvement_fig.write_html('reliability_improvement.html')
+    improvement_fig.write_image('reliability_improvement.png', width=1200, height=800, scale=2)
+    print("✅ Improvement tracking: reliability_improvement.html/.png")
 
-plt.tight_layout()
-plt.savefig('comprehensive_analysis.png', dpi=300, bbox_inches='tight')
-plt.show()
+# Create comprehensive dashboard with all visualizations
+print("\\n📊 Creating comprehensive dashboard...")
+dashboard_analyses = []
 
-print("\\n✅ Visualization suite completed!")
-print("📊 Saved: comprehensive_analysis.png")"""
+# Add narrative gravity visualization if well data exists
+if well_columns and len(well_columns) >= 3:
+    # Extract sample well definitions for visualization
+    wells = {}
+    for i, well_col in enumerate(well_columns[:8]):  # Limit to 8 wells for clarity
+        well_name = well_col.replace('well_', '').replace('_', ' ').title()
+        angle = (i * 360 / len(well_columns[:8])) % 360
+        wells[well_name] = {
+            'angle': angle,
+            'type': 'integrative' if i % 2 == 0 else 'disintegrative',
+            'weight': 1.0
+        }
+    
+    # Get latest analysis scores
+    if len(data) > 0:
+        latest_scores = {}
+        for well_col in well_columns[:8]:
+            well_name = well_col.replace('well_', '').replace('_', ' ').title()
+            latest_scores[well_name] = data[well_col].dropna().iloc[-1] if not data[well_col].dropna().empty else 0.5
+        
+        dashboard_analyses.append({
+            'title': 'Latest Analysis Results',
+            'wells': wells,
+            'scores': latest_scores
+        })
+
+if dashboard_analyses:
+    dashboard_fig = engine.create_dashboard(
+        analyses=dashboard_analyses,
+        title='Narrative Gravity Analysis Dashboard',
+        include_summary=True
+    )
+    dashboard_fig.write_html('narrative_gravity_dashboard.html')
+    dashboard_fig.write_image('narrative_gravity_dashboard.png', width=1800, height=1200, scale=2)
+    print("✅ Dashboard: narrative_gravity_dashboard.html/.png")
+
+print("\\n✅ Professional visualization suite completed!")
+print("📊 Interactive HTML files created for detailed exploration")
+print("📊 High-resolution PNG files created for publications")
+print("🎯 All visualizations use consistent academic theming")"""
 
 
 class RScriptGenerator:

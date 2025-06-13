@@ -1,27 +1,33 @@
 #!/usr/bin/env python3
 """
-Generic Multi-Run Narrative Gravity Analysis Dashboard
-Generalized version that works with any framework, speaker, and text type
+Generic Multi-Run Narrative Gravity Analysis Dashboard - NO API VERSION
+========================================================================
+
+Testing/offline version that works with any framework, speaker, and text type
+WITHOUT making API calls for summary generation. Uses the centralized 
+visualization system for consistent professional outputs.
+
+This script is identical to the main dashboard except:
+- No LLM API calls for summary generation (uses simple templates)
+- Designed for testing and offline analysis scenarios
+- All visualizations use the centralized Plotly-based system
 """
 
 import json
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from pathlib import Path
 from datetime import datetime
 import textwrap
 import re
 from typing import Dict, List, Optional, Tuple, Any
 
-# Import the elliptical visualization system
+# Import the centralized visualization system
 import sys
 sys.path.append('.')
-from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
-from src.api_clients.direct_api_client import DirectAPIClient
+from src.narrative_gravity.visualization import create_visualization_engine
+from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
 
-# Add statistical logging import
-from src.utils.statistical_logger import logger, JobData, RunData
+# NOTE: This version avoids API dependencies for testing
 import time
 
 def extract_scores_from_raw_response(raw_response: str) -> Dict[str, float]:
@@ -153,7 +159,7 @@ def load_and_process_data(results_file: str) -> Optional[Tuple]:
     narrative_centers = []
     
     # Initialize visualizer to calculate narrative centers
-    visualizer = NarrativeGravityWellsElliptical()
+    visualizer = NarrativeGravityWellsCircular()
     
     for run in data['individual_runs']:
         if run['success']:
@@ -254,77 +260,38 @@ def generate_variance_analysis_with_house_llm(mean_scores: Dict[str, float], wel
         
         return " ".join(analysis_parts)
 
-class CustomEllipticalVisualizer(NarrativeGravityWellsElliptical):
-    """Extended visualizer that can display narrative center variance"""
+def create_analysis_data_for_visualization(mean_scores: Dict[str, float], framework_info: Dict[str, Any], metadata: Dict[str, str]) -> Dict:
+    """Create data structure for centralized visualization system (NO API VERSION)."""
     
-    def __init__(self, narrative_stats=None):
-        super().__init__()
-        self.narrative_stats = narrative_stats
+    # Convert mean scores to wells format expected by visualization engine
+    wells = {}
+    for well_name, score in mean_scores.items():
+        # Assign angle based on well position (evenly distribute)
+        well_index = list(mean_scores.keys()).index(well_name)
+        angle = (well_index * 360 / len(mean_scores)) % 360
+        
+        # Determine well type from framework info
+        well_type = 'integrative'
+        if well_name in framework_info.get('disintegrative_wells', []):
+            well_type = 'disintegrative'
+        elif well_name in framework_info.get('integrative_wells', []):
+            well_type = 'integrative'
+        
+        wells[well_name] = {
+            'angle': angle,
+            'type': well_type,
+            'weight': 1.0
+        }
     
-    def plot_narrative_position_with_variance(self, well_scores: dict) -> tuple:
-        """Calculate and plot the narrative position with variance information."""
-        narrative_x, narrative_y = self.calculate_narrative_position(well_scores)
-        
-        # Plot narrative position with glow effect
-        self.ax.scatter(narrative_x, narrative_y,
-                       s=self.style_config['marker_sizes']['narrative'] * 1.3,
-                       color='lightgray', 
-                       zorder=4, alpha=0.4,
-                       edgecolors='gray',
-                       linewidth=1)
-        
-        self.ax.scatter(narrative_x, narrative_y,
-                       s=self.style_config['marker_sizes']['narrative'],
-                       color=self.style_config['colors']['narrative'], 
-                       zorder=5, alpha=0.9,
-                       edgecolors=self.style_config['colors']['narrative_edge'],
-                       linewidth=3)
-        
-        # Add label
-        self.ax.text(narrative_x, narrative_y + 0.12,
-                    "Narrative Center",
-                    ha='center', va='bottom',
-                    color=self.style_config['colors']['text_primary'],
-                    fontweight='bold', 
-                    fontsize=self.style_config['font_sizes']['labels'],
-                    bbox=dict(boxstyle="round,pad=0.4", 
-                            facecolor='white', 
-                            alpha=0.9,
-                            edgecolor=self.style_config['colors']['narrative'],
-                            linewidth=2))
-        
-        # Add coordinates with variance if available
-        if self.narrative_stats:
-            x_mean = self.narrative_stats['x']['mean']
-            x_std = self.narrative_stats['x']['std']
-            y_mean = self.narrative_stats['y']['mean']
-            y_std = self.narrative_stats['y']['std']
-            
-            coord_text = f"({x_mean:.3f}±{x_std:.3f}, {y_mean:.3f}±{y_std:.3f})"
-            self.ax.text(narrative_x, narrative_y - 0.12,
-                        coord_text,
-                        ha='center', va='top',
-                        color=self.style_config['colors']['text_secondary'],
-                        fontsize=self.style_config['font_sizes']['coordinates'],
-                        fontweight='bold',
-                        bbox=dict(boxstyle="round,pad=0.3", 
-                                facecolor='lightyellow', 
-                                alpha=0.8,
-                                edgecolor='orange',
-                                linewidth=1))
-        else:
-            # Fallback to regular coordinates
-            self.ax.text(narrative_x, narrative_y - 0.12,
-                        f"({narrative_x:.2f}, {narrative_y:.2f})",
-                        ha='center', va='top',
-                        color=self.style_config['colors']['text_secondary'],
-                        fontsize=self.style_config['font_sizes']['coordinates'],
-                        alpha=0.8)
-        
-        return narrative_x, narrative_y
+    return {
+        'title': f"{metadata.get('speaker', 'Unknown')} - {metadata.get('framework', 'Analysis')} (NO API)",
+        'wells': wells,
+        'scores': mean_scores,
+        'metadata': metadata
+    }
 
 def create_dashboard(results_file: str, speaker: str = None, year: str = None, 
-                    speech_type: str = None, framework: str = None) -> Optional[plt.Figure]:
+                    speech_type: str = None, framework: str = None) -> Optional[str]:
     """Create a generalized multi-run analysis dashboard"""
     
     start_time = time.time()
@@ -349,365 +316,77 @@ def create_dashboard(results_file: str, speaker: str = None, year: str = None,
     run_count = raw_data.get('test_metadata', {}).get('total_runs', len(raw_data.get('individual_runs', [])))
     model_name = raw_data.get('test_metadata', {}).get('model', 'Claude 3.5 Sonnet').title()
     
-    print(f"🎨 Creating dashboard for {speaker} {year} {speech_type} ({framework})...")
+    print(f"🎨 Creating NO API dashboard for {speaker} {year} {speech_type} ({framework})...")
     
-    # Create figure with proper centering layout
-    fig = plt.figure(figsize=(20, 12))
+    # Create centralized visualization using new engine (NO API VERSION)
+    print("   📊 Generating centralized visualization...")
     
-    # Use GridSpec with the same structure as the original
-    from matplotlib.gridspec import GridSpec
-    gs = GridSpec(7, 4, figure=fig, 
-                  height_ratios=[0.5, 2, 2, 0.4, 0.9, 0.15, 0.2],
-                  width_ratios=[0.2, 1.8, 1.6, 0.2],
-                  hspace=0.2, wspace=0.35)
-    
-    # Create the elliptical subplot (left) - slightly shifted right
-    print("   📊 Generating elliptical visualization...")
-    ax1 = fig.add_subplot(gs[1:3, 1])
-    
-    # Create elliptical visualization
     try:
-        visualizer = CustomEllipticalVisualizer(narrative_stats)
+        # Create visualization engine with presentation theme for dashboard
+        engine = create_visualization_engine(theme='presentation')
         
-        # Format the mean scores into the correct structure for the visualizer
-        wells_list = []
-        for well_name, score in mean_scores.items():
-            wells_list.append({
-                'name': well_name,
-                'score': score
-            })
+        # Prepare analysis data for visualization
+        metadata = {
+            'speaker': speaker,
+            'year': year, 
+            'framework': framework,
+            'speech_type': speech_type
+        }
         
-        # Set up the visualizer to use our subplot
-        visualizer.fig = fig
-        visualizer.ax = ax1
+        analysis_data = create_analysis_data_for_visualization(mean_scores, framework_info, metadata)
         
-        # Set up the subplot with the same configuration as the visualizer
-        visualizer.setup_figure = lambda: None  # Override to prevent new figure creation
-        
-        # Create the elliptical components manually
-        visualizer.plot_ellipse_boundary()
-        well_scores = visualizer.plot_wells_and_scores(wells_list, include_scores=True)
-        narrative_x, narrative_y = visualizer.plot_narrative_position_with_variance(well_scores)
-        
-        # Add title to this subplot
-        ax1.set_title(f'{framework} Elliptical Map\nMean Scores Across {run_count} Runs', 
-                      fontsize=16, fontweight='bold', pad=20)
-        
-        # Ensure equal aspect ratio for ellipse
-        ax1.set_aspect('equal')
-        ax1.set_xlim(-1.2, 1.2)
-        ax1.set_ylim(-1.2, 1.2)
-        
-    except Exception as e:
-        print(f"   ⚠️ Error creating elliptical plot: {e}")
-    
-    # Create the enhanced bar chart (right)
-    print("   📊 Generating enhanced bar chart...")
-    ax2 = fig.add_subplot(gs[1:3, 2])
-    
-    # Get categorized wells
-    integrative_wells = framework_info.get('integrative_wells', [])
-    disintegrative_wells = framework_info.get('disintegrative_wells', [])
-    
-    # Extract data for wells
-    int_means = [well_stats[well]['mean'] for well in integrative_wells if well in well_stats]
-    int_stds = [well_stats[well]['std'] for well in integrative_wells if well in well_stats]
-    dis_means = [well_stats[well]['mean'] for well in disintegrative_wells if well in well_stats]
-    dis_stds = [well_stats[well]['std'] for well in disintegrative_wells if well in well_stats]
-    
-    # Create bars
-    x_int = np.arange(len(integrative_wells))
-    x_dis = np.arange(len(disintegrative_wells)) + len(integrative_wells) + 0.5
-    
-    # Plot integrative wells
-    bars_int = ax2.bar(x_int, int_means, yerr=int_stds, capsize=5,
-                       color='#2E8B57', alpha=0.7, label='Integrative Wells', 
-                       edgecolor='black', linewidth=1)
-    
-    # Plot disintegrative wells
-    bars_dis = ax2.bar(x_dis, dis_means, yerr=dis_stds, capsize=5,
-                       color='#CD5C5C', alpha=0.7, label='Disintegrative Wells',
-                       edgecolor='black', linewidth=1)
-    
-    # Add value labels for integrative wells
-    for i, (bar, mean, std) in enumerate(zip(bars_int, int_means, int_stds)):
-        height = bar.get_height()
-        ax2.text(bar.get_x() + bar.get_width()/2., height + std + 0.02,
-                 f'{mean:.3f}±{std:.3f}', ha='center', va='bottom', 
-                 fontsize=11, fontweight='bold')
-    
-    # Add value labels for disintegrative wells
-    for i, (bar, mean, std) in enumerate(zip(bars_dis, dis_means, dis_stds)):
-        height = bar.get_height()
-        ax2.text(bar.get_x() + bar.get_width()/2., height + std + 0.02,
-                 f'{mean:.3f}±{std:.3f}', ha='center', va='bottom', 
-                 fontsize=11, fontweight='bold')
-    
-    # Customize the chart
-    all_wells = integrative_wells + disintegrative_wells
-    all_positions = list(x_int) + list(x_dis)
-    
-    ax2.set_xticks(all_positions)
-    ax2.set_xticklabels(all_wells, rotation=45, ha='right', fontsize=12)
-    ax2.set_ylabel('Score (0.0 - 1.0)', fontsize=14, fontweight='bold')
-    ax2.set_title('Integrative vs Disintegrative Wells\nwith Confidence Intervals (±1 Standard Deviation)', 
-                  fontsize=16, fontweight='bold', pad=20)
-    ax2.legend(loc='upper left', fontsize=12)
-    ax2.grid(True, alpha=0.3)
-    ax2.set_ylim(0, 1.1)
-    
-    # Add dividing line between integrative and disintegrative
-    if integrative_wells and disintegrative_wells:
-        ax2.axvline(x=len(integrative_wells) + 0.25, color='gray', linestyle='--', alpha=0.5)
-    
-    # Generate LLM content for panels
-    print("   🤖 Generating composite summary...")
-    composite_summary = generate_composite_summary(all_analyses, speaker, speech_type, framework)
-    
-    print("   🤖 Generating variance analysis...")
-    variance_analysis = generate_variance_analysis_with_house_llm(mean_scores, well_stats, narrative_stats, framework_info, run_count)
-    
-    # Add narrative panels
-    print("   📝 Adding summary and variance analysis panels...")
-    
-    # Left panel - Composite Summary (reduced width)
-    ax3 = fig.add_subplot(gs[4, 1])  # Back to just column 1 instead of spanning
-    ax3.axis('off')
-    
-    # Better text formatting - positioned lower in the panel to avoid axis labels
-    ax3.text(0.02, 0.85, "COMPOSITE SUMMARY", 
-             fontsize=14, fontweight='bold', color='darkblue',
-             transform=ax3.transAxes, va='top')
-    
-    # Wrap text with reduced width  
-    wrapped_summary = textwrap.fill(composite_summary, width=75)  # Reduced width for narrower panel
-    ax3.text(0.02, 0.65, wrapped_summary, 
-             fontsize=11, transform=ax3.transAxes, 
-             va='top', wrap=True, color='black')
-    
-    # Add border
-    for spine in ax3.spines.values():
-        spine.set_visible(True)
-        spine.set_linewidth(2)
-        spine.set_edgecolor('blue')
-    
-    # Right panel - Variance Analysis (wider span to the right)
-    ax4 = fig.add_subplot(gs[4, 2:])  # Span from column 2 to end
-    ax4.axis('off')
-    
-    # Better text formatting - positioned lower and shifted left
-    ax4.text(-0.05, 0.85, "VARIANCE ANALYSIS",  # Shifted left with negative x, lower position
-             fontsize=14, fontweight='bold', color='darkred',
-             transform=ax4.transAxes, va='top')
-    
-    # Improved text wrapping and formatting for variance analysis
-    # Truncate if too long to prevent overflow
-    max_chars = 400  # Reasonable limit for the space available
-    if len(variance_analysis) > max_chars:
-        variance_analysis = variance_analysis[:max_chars] + "..."
-
-    # Split into paragraphs and wrap each separately for better formatting
-    paragraphs = variance_analysis.replace('. ', '.\n').split('\n')
-    formatted_lines = []
-    for paragraph in paragraphs:
-        if paragraph.strip():
-            # Wrap each paragraph separately at reasonable width
-            wrapped = textwrap.fill(paragraph.strip(), width=70, 
-                                  break_long_words=True, break_on_hyphens=True)
-            formatted_lines.append(wrapped)
-
-    # Join with proper spacing
-    final_text = '\n\n'.join(formatted_lines)
-
-    # Render with proper formatting - no double wrapping
-    ax4.text(-0.05, 0.65, final_text,  # Shifted left with negative x, lower position
-             fontsize=10, transform=ax4.transAxes, 
-             va='top', ha='left', color='black',
-             linespacing=1.4)  # Better line spacing
-    
-    # Add border
-    for spine in ax4.spines.values():
-        spine.set_visible(True)
-        spine.set_linewidth(2)
-        spine.set_edgecolor('darkred')
-    
-    # Add forensic footer
-    print("   📋 Adding forensic footer...")
-    ax_footer = fig.add_subplot(gs[6, :])  # Span all columns at very bottom
-    ax_footer.axis('off')
-    
-    # Get job ID and metadata from raw data
-    job_id = raw_data.get('job_id') or raw_data.get('test_metadata', {}).get('timestamp', Path(results_file).stem)
-    analysis_date = raw_data.get('analysis_date') or raw_data.get('test_metadata', {}).get('timestamp', 'Unknown Date')
-    
-    # Format analysis date if it's a timestamp
-    if 'T' in str(analysis_date):
-        try:
-            analysis_date = datetime.fromisoformat(str(analysis_date).replace('Z', '+00:00')).strftime('%Y-%m-%d')
-        except:
-            analysis_date = str(analysis_date)[:10]  # Take first 10 chars as fallback
-    
-    # Create forensic information
-    forensic_text = f"Files: {Path(results_file).name} | Model: {model_name} | Runs: {run_count} | Analysis Date: {analysis_date} | Job ID: {job_id}"
-    
-    ax_footer.text(0.5, 0.5, forensic_text, 
-                   fontsize=9, ha='center', va='center',
-                   transform=ax_footer.transAxes, 
-                   color='gray', style='italic',
-                   bbox=dict(boxstyle="round,pad=0.3", 
-                           facecolor='lightgray', 
-                           alpha=0.3,
-                           edgecolor='gray',
-                           linewidth=1))
-    
-    # Add main title at the top
-    fig.suptitle(f'{speaker} {year} {speech_type} - Multi-Run {framework} Analysis Dashboard\n{model_name} ({run_count} runs)', 
-                 fontsize=18, fontweight='bold', y=0.95)
-    
-    # Statistical logging
-    print("   📊 Logging statistical data...")
-    try:
-        # Calculate variance stats for logging
-        wells = list(well_stats.keys())
-        variances = [well_stats[well]['std'] for well in wells]
-        total_variance = sum(variances)
-        max_individual_variance = max(variances) if variances else 0
-        
-        # Determine threshold category
-        if total_variance == 0:
-            threshold_category = "perfect"
-        elif total_variance < 0.05:
-            threshold_category = "near_perfect"
-        elif max_individual_variance < 0.02:
-            threshold_category = "minimal"
-        else:
-            threshold_category = "normal"
-        
-        # Calculate metrics
-        individual_runs = raw_data.get('individual_runs', [])
-        successful_runs = len([r for r in individual_runs if r.get('success', True)])
-        total_cost = sum(r.get('cost', 0) for r in individual_runs)
-        
-        # Get text length (approximation)
-        text_length = len(str(raw_data.get('input_text', ''))) or 10000  # fallback estimate
-        
-        # Create job data for logging FIRST (foreign key constraint)
-        job_data = JobData(
-            job_id=job_id,
-            speaker=speaker,
-            speech_type=speech_type,
-            text_length=text_length,
-            framework=framework.lower(),
-            model_name=model_name.lower(),
-            total_runs=run_count,
-            successful_runs=successful_runs,
-            total_cost=total_cost,
-            total_duration_seconds=time.time() - start_time,
-            timestamp=datetime.now().isoformat(),
-            mean_scores=mean_scores,
-            variance_stats={
-                'total_variance': total_variance,
-                'max_individual_variance': max_individual_variance,
-                'well_count': len(wells),
-                'threshold_category': threshold_category
-            },
-            threshold_category=threshold_category
+        # Create single analysis visualization
+        viz_fig = engine.create_single_analysis(
+            wells=analysis_data['wells'],
+            scores=analysis_data['scores'],
+            title=f'{framework} Analysis (NO API)\n{speaker} {year} ({run_count} runs)',
+            include_center=True,
+            show_variance=True,
+            variance_data=narrative_stats if narrative_stats else None
         )
         
-        # Log the job FIRST
-        logger.log_job(job_data)
+        # Save the visualization as HTML and PNG
+        output_path = Path(results_file).parent / f"no_api_dashboard_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        viz_fig.write_html(f"{output_path}.html")
+        viz_fig.write_image(f"{output_path}.png", width=800, height=800, scale=2)
         
-        # Log individual runs with full data (AFTER job exists)
-        for i, run in enumerate(individual_runs):
-            if run.get('success', True):
-                # Extract run data
-                result = run.get('result', {})
-                
-                # Handle both raw_response format and direct result format
-                if 'raw_response' in result:
-                    raw_response = result['raw_response']
-                    scores = extract_scores_from_raw_response(raw_response)
-                    analysis = extract_analysis_from_raw_response(raw_response)
-                else:
-                    raw_response = json.dumps(result)  # Convert direct result to string
-                    scores = result.get('scores', {})
-                    analysis = result.get('analysis', '')
-                
-                # Calculate narrative position for this run
-                visualizer = NarrativeGravityWellsElliptical()
-                narrative_x, narrative_y = visualizer.calculate_narrative_position(scores)
-                
-                # Create run data for logging
-                run_data = RunData(
-                    run_id=f"{job_id}_run_{i+1}",
-                    job_id=job_id,
-                    run_number=i+1,
-                    well_scores=scores,
-                    narrative_position={'x': narrative_x, 'y': narrative_y},
-                    analysis_text=analysis,
-                    model_name=model_name.lower(),
-                    framework=framework.lower(),
-                    timestamp=datetime.now().isoformat(),
-                    cost=run.get('cost', 0),
-                    duration_seconds=run.get('duration', 0),
-                    success=run.get('success', True),
-                    error_message=run.get('error', None),
-                    raw_prompt=run.get('prompt', ''),  # If available
-                    raw_response=raw_response,
-                    input_text=str(raw_data.get('input_text', '')),
-                    model_parameters=run.get('model_parameters', {}),
-                    api_metadata=run.get('api_metadata', {})
-                )
-                
-                # Log the individual run
-                logger.log_run(run_data)
+        print(f"   ✅ NO API Interactive visualization saved: {output_path}.html")
+        print(f"   ✅ NO API Static visualization saved: {output_path}.png")
         
-        # Log variance statistics
-        logger.log_variance_statistics(job_id, well_stats, framework_info)
+        # NO API VERSION: Summary generation without LLM calls
+        print("   📝 Generating simple summaries (no API)...")
+        composite_summary = generate_composite_summary(all_analyses, speaker, speech_type, framework)
+        variance_analysis = generate_variance_analysis_with_house_llm(mean_scores, well_stats, narrative_stats, framework_info, run_count)
         
-        # Log performance metrics
-        success_rate = successful_runs / run_count if run_count > 0 else 0
-        avg_cost = total_cost / run_count if run_count > 0 else 0
-        avg_duration = (time.time() - start_time) / run_count if run_count > 0 else 0
+        print(f"   ✅ Composite Summary: {composite_summary[:50]}...")
+        print(f"   ✅ Variance Analysis: {variance_analysis[:50]}...")
+        print("   📊 Professional NO API dashboard completed!")
         
-        logger.log_performance_metrics(
-            job_id=job_id,
-            model_name=model_name.lower(),
-            framework=framework.lower(),
-            success_rate=success_rate,
-            avg_cost=avg_cost,
-            avg_duration=avg_duration,
-            total_variance=total_variance,
-            max_variance=max_individual_variance
-        )
-        
-        print(f"   ✅ Logged job data: {job_id} ({threshold_category} variance)")
-        print(f"   ✅ Logged {successful_runs} individual runs with full raw responses")
+        # Return the HTML path for display
+        return f"{output_path}.html"
         
     except Exception as e:
-        print(f"   ⚠️ Warning: Statistical logging failed: {e}")
-        import traceback
-        traceback.print_exc()
+        print(f"   ⚠️ Error creating centralized visualization: {e}")
+        return None
     
-    return fig
 
 def main():
-    """Main function to demonstrate usage"""
+    """Main function to demonstrate NO API dashboard usage"""
     import argparse
     
-    parser = argparse.ArgumentParser(description='Generate Multi-Run Narrative Gravity Analysis Dashboard')
+    parser = argparse.ArgumentParser(description='Generate Multi-Run Narrative Gravity Analysis Dashboard (NO API VERSION)')
     parser.add_argument('results_file', help='Path to the multi-run results JSON file')
     parser.add_argument('--speaker', help='Speaker name (auto-detected if not provided)')
     parser.add_argument('--year', help='Year of speech (auto-detected if not provided)')
     parser.add_argument('--speech-type', help='Type of speech (default: Speech)')
     parser.add_argument('--framework', help='Analysis framework (auto-detected if not provided)')
-    parser.add_argument('--output', help='Output filename (auto-generated if not provided)')
     
     args = parser.parse_args()
     
-    print("🎨 Creating Generic Multi-Run Analysis Dashboard...")
+    print("🎨 Creating NO API Multi-Run Analysis Dashboard...")
+    print("   (Testing version with centralized visualization system)")
     
-    fig = create_dashboard(
+    dashboard_path = create_dashboard(
         results_file=args.results_file,
         speaker=args.speaker,
         year=args.year,
@@ -715,30 +394,12 @@ def main():
         framework=args.framework
     )
     
-    if not fig:
-        print("❌ Failed to create dashboard")
-        return
-    
-    # Generate output filename
-    if args.output:
-        filename = args.output
+    if dashboard_path:
+        print(f"✅ NO API Dashboard created: {dashboard_path}")
+        print(f"📊 Features: Centralized visualization, no API calls, professional theming")
+        print(f"🎯 Perfect for testing and offline analysis")
     else:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        base_name = Path(args.results_file).stem
-        # Determine output directory based on input file location
-        if "model_output" in str(args.results_file):
-            filename = f"model_output/generic_dashboard_{base_name}_{timestamp}.png"
-        else:
-            filename = f"test_results/generic_dashboard_{base_name}_{timestamp}.png"
-    
-    # Ensure output directory exists
-    Path(filename).parent.mkdir(parents=True, exist_ok=True)
-    
-    fig.savefig(filename, dpi=300, bbox_inches='tight', facecolor='white')
-    plt.close(fig)
-    
-    print(f"✅ Generic Dashboard saved: {filename}")
-    print(f"📊 Features: Auto-detection, framework-agnostic, parameter-driven")
+        print("❌ Failed to create NO API dashboard")
 
 if __name__ == "__main__":
     main()

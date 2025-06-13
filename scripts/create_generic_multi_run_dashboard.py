@@ -6,18 +6,17 @@ Generalized version that works with any framework, speaker, and text type
 
 import json
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from pathlib import Path
 from datetime import datetime
 import textwrap
 import re
 from typing import Dict, List, Optional, Tuple, Any
 
-# Import the elliptical visualization system
+# Import the centralized visualization system
 import sys
 sys.path.append('.')
-from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
+from src.narrative_gravity.visualization import create_visualization_engine
+from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
 from src.narrative_gravity.api_clients.direct_api_client import DirectAPIClient
 
 # Add statistical logging import
@@ -153,7 +152,7 @@ def load_and_process_data(results_file: str) -> Optional[Tuple]:
     narrative_centers = []
     
     # Initialize visualizer to calculate narrative centers
-    visualizer = NarrativeGravityWellsElliptical()
+    visualizer = NarrativeGravityWellsCircular()
     
     for run in data['individual_runs']:
         if run['success']:
@@ -373,77 +372,38 @@ RESPOND WITH PLAIN TEXT ONLY - NO JSON, NO SCORES, JUST THE ANALYSIS TEXT."""
             print(f"Error generating variance analysis: {e}")
             return "Error generating variance analysis."
 
-class CustomEllipticalVisualizer(NarrativeGravityWellsElliptical):
-    """Extended visualizer that can display narrative center variance"""
+def create_analysis_data_for_visualization(mean_scores: Dict[str, float], framework_info: Dict[str, Any], metadata: Dict[str, str]) -> Dict:
+    """Create data structure for centralized visualization system."""
     
-    def __init__(self, narrative_stats=None):
-        super().__init__()
-        self.narrative_stats = narrative_stats
+    # Convert mean scores to wells format expected by visualization engine
+    wells = {}
+    for well_name, score in mean_scores.items():
+        # Assign angle based on well position (evenly distribute)
+        well_index = list(mean_scores.keys()).index(well_name)
+        angle = (well_index * 360 / len(mean_scores)) % 360
+        
+        # Determine well type from framework info
+        well_type = 'integrative'
+        if well_name in framework_info.get('disintegrative_wells', []):
+            well_type = 'disintegrative'
+        elif well_name in framework_info.get('integrative_wells', []):
+            well_type = 'integrative'
+        
+        wells[well_name] = {
+            'angle': angle,
+            'type': well_type,
+            'weight': 1.0
+        }
     
-    def plot_narrative_position_with_variance(self, well_scores: dict) -> tuple:
-        """Calculate and plot the narrative position with variance information."""
-        narrative_x, narrative_y = self.calculate_narrative_position(well_scores)
-        
-        # Plot narrative position with glow effect
-        self.ax.scatter(narrative_x, narrative_y,
-                       s=self.style_config['marker_sizes']['narrative'] * 1.3,
-                       color='lightgray', 
-                       zorder=4, alpha=0.4,
-                       edgecolors='gray',
-                       linewidth=1)
-        
-        self.ax.scatter(narrative_x, narrative_y,
-                       s=self.style_config['marker_sizes']['narrative'],
-                       color=self.style_config['colors']['narrative'], 
-                       zorder=5, alpha=0.9,
-                       edgecolors=self.style_config['colors']['narrative_edge'],
-                       linewidth=3)
-        
-        # Add label
-        self.ax.text(narrative_x, narrative_y + 0.12,
-                    "Narrative Center",
-                    ha='center', va='bottom',
-                    color=self.style_config['colors']['text_primary'],
-                    fontweight='bold', 
-                    fontsize=self.style_config['font_sizes']['labels'],
-                    bbox=dict(boxstyle="round,pad=0.4", 
-                            facecolor='white', 
-                            alpha=0.9,
-                            edgecolor=self.style_config['colors']['narrative'],
-                            linewidth=2))
-        
-        # Add coordinates with variance if available
-        if self.narrative_stats:
-            x_mean = self.narrative_stats['x']['mean']
-            x_std = self.narrative_stats['x']['std']
-            y_mean = self.narrative_stats['y']['mean']
-            y_std = self.narrative_stats['y']['std']
-            
-            coord_text = f"({x_mean:.3f}±{x_std:.3f}, {y_mean:.3f}±{y_std:.3f})"
-            self.ax.text(narrative_x, narrative_y - 0.12,
-                        coord_text,
-                        ha='center', va='top',
-                        color=self.style_config['colors']['text_secondary'],
-                        fontsize=self.style_config['font_sizes']['coordinates'],
-                        fontweight='bold',
-                        bbox=dict(boxstyle="round,pad=0.3", 
-                                facecolor='lightyellow', 
-                                alpha=0.8,
-                                edgecolor='orange',
-                                linewidth=1))
-        else:
-            # Fallback to regular coordinates
-            self.ax.text(narrative_x, narrative_y - 0.12,
-                        f"({narrative_x:.2f}, {narrative_y:.2f})",
-                        ha='center', va='top',
-                        color=self.style_config['colors']['text_secondary'],
-                        fontsize=self.style_config['font_sizes']['coordinates'],
-                        alpha=0.8)
-        
-        return narrative_x, narrative_y
+    return {
+        'title': f"{metadata.get('speaker', 'Unknown')} - {metadata.get('framework', 'Analysis')}",
+        'wells': wells,
+        'scores': mean_scores,
+        'metadata': metadata
+    }
 
 def create_dashboard(results_file: str, speaker: str = None, year: str = None, 
-                    speech_type: str = None, framework: str = None) -> Optional[plt.Figure]:
+                    speech_type: str = None, framework: str = None) -> Optional[str]:
     """Create a generalized multi-run analysis dashboard"""
     
     start_time = time.time()
@@ -480,45 +440,58 @@ def create_dashboard(results_file: str, speaker: str = None, year: str = None,
                   width_ratios=[0.2, 1.8, 1.6, 0.2],
                   hspace=0.2, wspace=0.35)
     
-    # Create the elliptical subplot (left) - slightly shifted right
-    print("   📊 Generating elliptical visualization...")
-    ax1 = fig.add_subplot(gs[1:3, 1])
+    # Create centralized visualization using new engine
+    print("   📊 Generating centralized visualization...")
     
-    # Create elliptical visualization
     try:
-        visualizer = CustomEllipticalVisualizer(narrative_stats)
+        # Create visualization engine with presentation theme for dashboard
+        engine = create_visualization_engine(theme='presentation')
         
-        # Format the mean scores into the correct structure for the visualizer
-        wells_list = []
-        for well_name, score in mean_scores.items():
-            wells_list.append({
-                'name': well_name,
-                'score': score
-            })
+        # Prepare analysis data for visualization
+        metadata = {
+            'speaker': speaker,
+            'year': year, 
+            'framework': framework,
+            'speech_type': speech_type
+        }
         
-        # Set up the visualizer to use our subplot
-        visualizer.fig = fig
-        visualizer.ax = ax1
+        analysis_data = create_analysis_data_for_visualization(mean_scores, framework_info, metadata)
         
-        # Set up the subplot with the same configuration as the visualizer
-        visualizer.setup_figure = lambda: None  # Override to prevent new figure creation
+        # Create single analysis visualization
+        viz_fig = engine.create_single_analysis(
+            wells=analysis_data['wells'],
+            scores=analysis_data['scores'],
+            title=f'{framework} Analysis\n{speaker} {year} ({run_count} runs)',
+            include_center=True,
+            show_variance=True,
+            variance_data=narrative_stats if narrative_stats else None
+        )
         
-        # Create the elliptical components manually
-        visualizer.plot_ellipse_boundary()
-        well_scores = visualizer.plot_wells_and_scores(wells_list, include_scores=True)
-        narrative_x, narrative_y = visualizer.plot_narrative_position_with_variance(well_scores)
+        # Save the visualization as HTML and PNG
+        output_path = Path(results_file).parent / "dashboard_visualization"
+        viz_fig.write_html(f"{output_path}.html")
+        viz_fig.write_image(f"{output_path}.png", width=800, height=800, scale=2)
         
-        # Add title to this subplot
-        ax1.set_title(f'{framework} Elliptical Map\nMean Scores Across {run_count} Runs', 
-                      fontsize=16, fontweight='bold', pad=20)
+        # Add a text note to the matplotlib dashboard about the interactive version
+        ax1 = fig.add_subplot(gs[1:3, 1])
+        ax1.axis('off')
+        ax1.text(0.5, 0.6, "🎯 Interactive Narrative Gravity Map", 
+                ha='center', va='center', fontsize=16, fontweight='bold',
+                transform=ax1.transAxes)
+        ax1.text(0.5, 0.4, f"Professional interactive visualization\ncreated with centralized engine:\n{output_path}.html", 
+                ha='center', va='center', fontsize=12, transform=ax1.transAxes,
+                bbox=dict(boxstyle="round,pad=0.5", facecolor='lightblue', alpha=0.7))
         
-        # Ensure equal aspect ratio for ellipse
-        ax1.set_aspect('equal')
-        ax1.set_xlim(-1.2, 1.2)
-        ax1.set_ylim(-1.2, 1.2)
+        print(f"   ✅ Interactive visualization saved: {output_path}.html")
+        print(f"   ✅ Static visualization saved: {output_path}.png")
         
     except Exception as e:
-        print(f"   ⚠️ Error creating elliptical plot: {e}")
+        print(f"   ⚠️ Error creating centralized visualization: {e}")
+        # Fallback to simple text display
+        ax1 = fig.add_subplot(gs[1:3, 1])
+        ax1.axis('off')
+        ax1.text(0.5, 0.5, f"Visualization Error\n{str(e)}", 
+                ha='center', va='center', transform=ax1.transAxes)
     
     # Create the enhanced bar chart (right)
     print("   📊 Generating enhanced bar chart...")
@@ -753,7 +726,7 @@ def create_dashboard(results_file: str, speaker: str = None, year: str = None,
                     analysis = result.get('analysis', '')
                 
                 # Calculate narrative position for this run
-                visualizer = NarrativeGravityWellsElliptical()
+                visualizer = NarrativeGravityWellsCircular()
                 narrative_x, narrative_y = visualizer.calculate_narrative_position(scores)
                 
                 # Create run data for logging
@@ -863,12 +836,12 @@ def load_and_process_data_from_database(job_id: str) -> Optional[Tuple]:
         
         # Calculate narrative positions
         try:
-            from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
-            visualizer = NarrativeGravityWellsElliptical()
+            from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
+            visualizer = NarrativeGravityWellsCircular()
         except ImportError:
             # Fallback: import from current directory
-            from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
-            visualizer = NarrativeGravityWellsElliptical()
+            from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
+            visualizer = NarrativeGravityWellsCircular()
         
         for scores in all_scores:
             x, y = visualizer.calculate_narrative_position(scores)
@@ -941,13 +914,13 @@ def create_dashboard_from_database(job_id: str, output_file: str = None) -> Opti
                   width_ratios=[0.2, 1.8, 1.6, 0.2],
                   hspace=0.2, wspace=0.35)
     
-    # Create the elliptical subplot (left) - slightly shifted right
-    print("   📊 Generating elliptical visualization...")
+    # Create the circular coordinate subplot (left) - slightly shifted right
+    print("   📊 Generating circular coordinate visualization...")
     ax1 = fig.add_subplot(gs[1:3, 1])
     
-    # Create elliptical visualization
+    # Create circular coordinate visualization
     try:
-        visualizer = CustomEllipticalVisualizer(narrative_stats)
+        visualizer = CustomCircularVisualizer(narrative_stats)
         
         # Format the mean scores into the correct structure for the visualizer
         wells_list = []
@@ -964,13 +937,13 @@ def create_dashboard_from_database(job_id: str, output_file: str = None) -> Opti
         # Set up the subplot with the same configuration as the visualizer
         visualizer.setup_figure = lambda: None  # Override to prevent new figure creation
         
-        # Create the elliptical components manually
-        visualizer.plot_ellipse_boundary()
+        # Create the circular coordinate components manually
+        visualizer.plot_circle_boundary()
         well_scores = visualizer.plot_wells_and_scores(wells_list, include_scores=True)
         narrative_x, narrative_y = visualizer.plot_narrative_position_with_variance(well_scores)
         
         # Add title to this subplot
-        ax1.set_title(f'{framework} Elliptical Map\nMean Scores Across {run_count} Runs', 
+        ax1.set_title(f'{framework} Circular Coordinate Map\nMean Scores Across {run_count} Runs', 
                       fontsize=16, fontweight='bold', pad=20)
         
         # Ensure equal aspect ratio for ellipse
@@ -979,7 +952,7 @@ def create_dashboard_from_database(job_id: str, output_file: str = None) -> Opti
         ax1.set_ylim(-1.2, 1.2)
         
     except Exception as e:
-        print(f"   ⚠️ Error creating elliptical plot: {e}")
+        print(f"   ⚠️ Error creating circular coordinate plot: {e}")
     
     # Create the enhanced bar chart (right)
     print("   📊 Generating enhanced bar chart...")

@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 
 from src.narrative_gravity.framework_manager import FrameworkManager
 from scripts.generate_prompt import PromptGenerator, load_dipoles, load_framework
-from src.narrative_gravity.engine import NarrativeGravityWellsElliptical, load_analysis_data
+from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
 
 # --- Fixtures for setting up test environments ---
 
@@ -127,17 +127,16 @@ class TestPromptGeneratorIntegration:
         finally:
             os.chdir(original_cwd)
 
-class TestNarrativeGravityEllipticalIntegration:
-    """Integration tests for narrative_gravity_elliptical.py."""
+class TestNarrativeGravityCircularIntegration:
+    """Integration tests for circular coordinate system engine."""
 
-    def test_load_analysis_data(self, temp_test_dir):
-        test_data = {"metadata": {"title": "Test"}, "wells": []}
-        json_path = Path(temp_test_dir) / "analysis.json"
-        with open(json_path, 'w') as f:
-            json.dump(test_data, f)
-        
-        loaded_data = load_analysis_data(str(json_path))
-        assert loaded_data["metadata"]["title"] == "Test"
+    def test_circular_engine_initialization(self, temp_test_dir):
+        """Test that the circular engine can be initialized properly."""
+        engine = NarrativeGravityWellsCircular(config_dir=temp_test_dir)
+        assert hasattr(engine, 'circle_radius')
+        assert engine.circle_radius == 1.0
+        assert hasattr(engine, 'well_definitions')
+        assert isinstance(engine.well_definitions, dict)
 
 class TestCLIExecutionIntegration:
     """Tests the CLI execution of the tools via subprocess."""
@@ -157,8 +156,8 @@ class TestCLIExecutionIntegration:
         assert exit_code == 0
         assert "usage:" in stdout
 
-    def test_narrative_gravity_elliptical_cli_help(self):
-        # This script might require a file, testing with --help
-        stdout, _, exit_code = self.run_cli_command(["python", "src/narrative_gravity/engine.py", "--help"])
+    def test_narrative_gravity_circular_cli_help(self):
+        # Test the circular coordinate system engine CLI
+        stdout, _, exit_code = self.run_cli_command(["python", "src/narrative_gravity/engine_circular.py", "--help"])
         assert exit_code == 0
         assert "usage:" in stdout 

@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-Trump Multi-Run Analysis - Elliptical Visualization
+Trump Multi-Run Analysis - Circular Coordinate Visualization
 
-Uses the established NarrativeGravityWellsElliptical system to generate 
-a proper elliptical visualization of the Trump analysis results.
+Uses the circular coordinate system to generate 
+a proper visualization of the Trump analysis results.
 """
 
 import numpy as np
-from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
+from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
 from datetime import datetime
 import json
 
-def create_trump_elliptical_visualization():
-    """Create elliptical visualization using the established system."""
+def create_trump_circular_visualization():
+    """Create circular coordinate visualization using the established system."""
     
     print("🔄 Processing Trump multi-run data...")
     
@@ -60,10 +60,10 @@ def create_trump_elliptical_visualization():
         'wells': wells_list
     }
     
-    print("🎨 Creating elliptical visualization...")
+    print("🎨 Creating circular coordinate visualization...")
     
-    # Initialize the established elliptical visualizer
-    visualizer = NarrativeGravityWellsElliptical()
+    # Initialize the circular coordinate visualizer
+    visualizer = NarrativeGravityWellsCircular()
     
     # Create the visualization using the established system
     output_path = visualizer.create_visualization(analysis_data, 
@@ -90,5 +90,5 @@ def create_trump_elliptical_visualization():
     return output_path
 
 if __name__ == "__main__":
-    output_path = create_trump_elliptical_visualization()
-    print(f"\n🖼️  Trump elliptical visualization complete: {output_path}") 
+    output_path = create_trump_circular_visualization()
+    print(f"\n🖼️  Trump circular coordinate visualization complete: {output_path}") 
