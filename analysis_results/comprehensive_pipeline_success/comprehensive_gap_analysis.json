@@ -1,0 +1,1157 @@
+{
+  "timestamp": "2025-06-13T07:21:56.105130",
+  "test_summary": {
+    "total_tests": 10,
+    "successful_tests": 0,
+    "failed_tests": 10,
+    "success_rate": 0.0
+  },
+  "gap_analysis": {
+    "total_gaps": 162,
+    "critical_gaps": 0,
+    "error_gaps": 10,
+    "warning_gaps": 10,
+    "info_gaps": 142
+  },
+  "manual_intervention_analysis": {
+    "total_manual_interventions": 20,
+    "interventions_per_test": 2.0,
+    "zero_intervention_goal_met": false
+  },
+  "gaps": [
+    {
+      "stage": "PIPELINE_INIT",
+      "severity": "INFO",
+      "component": "PipelineTester",
+      "message": "Initialized pipeline tester with output directory: analysis_results/comprehensive_pipeline_success",
+      "manual_intervention": false
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83c\udfaf Starting comprehensive end-to-end testing",
+      "manual_intervention": false
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 1/10: political_speech with civic_virtue",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Biden State of Union 2024 (excerpt)",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: civic_virtue",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (17, null, Pipeline Test - civic_virtue, null, End-to-end pipeline validation test, null, hierarchical_v1, civic_virtue, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:15.868597, 2025-06-13 07:21:15.868597, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - civic_virtue', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'civic_virtue', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813675.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813675.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: civic_virtue",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 2/10: synthetic_narrative with civic_virtue",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Synthetic Political Narrative",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: civic_virtue",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (18, null, Pipeline Test - civic_virtue, null, End-to-end pipeline validation test, null, hierarchical_v1, civic_virtue, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:28.304149, 2025-06-13 07:21:28.304149, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - civic_virtue', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'civic_virtue', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813688.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813688.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: civic_virtue",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 3/10: political_speech with political_spectrum",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Biden State of Union 2024 (excerpt)",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: political_spectrum",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (19, null, Pipeline Test - political_spectrum, null, End-to-end pipeline validation test, null, hierarchical_v1, political_spectrum, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:31.122068, 2025-06-13 07:21:31.122068, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - political_spectrum', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'political_spectrum', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813691.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813691.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: political_spectrum",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 4/10: synthetic_narrative with political_spectrum",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Synthetic Political Narrative",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: political_spectrum",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (20, null, Pipeline Test - political_spectrum, null, End-to-end pipeline validation test, null, hierarchical_v1, political_spectrum, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:34.942091, 2025-06-13 07:21:34.942091, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - political_spectrum', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'political_spectrum', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813694.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813694.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: political_spectrum",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 5/10: political_speech with fukuyama_identity",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Biden State of Union 2024 (excerpt)",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: fukuyama_identity",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (21, null, Pipeline Test - fukuyama_identity, null, End-to-end pipeline validation test, null, hierarchical_v1, fukuyama_identity, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:37.742698, 2025-06-13 07:21:37.742698, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - fukuyama_identity', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'fukuyama_identity', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813697.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813697.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: fukuyama_identity",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 6/10: synthetic_narrative with fukuyama_identity",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Synthetic Political Narrative",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: fukuyama_identity",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (22, null, Pipeline Test - fukuyama_identity, null, End-to-end pipeline validation test, null, hierarchical_v1, fukuyama_identity, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:40.678315, 2025-06-13 07:21:40.678315, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - fukuyama_identity', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'fukuyama_identity', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813700.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813700.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: fukuyama_identity",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 7/10: political_speech with mft_persuasive_force",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Biden State of Union 2024 (excerpt)",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: mft_persuasive_force",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (23, null, Pipeline Test - mft_persuasive_force, null, End-to-end pipeline validation test, null, hierarchical_v1, mft_persuasive_force, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:43.377962, 2025-06-13 07:21:43.377962, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - mft_persuasive_force', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'mft_persuasive_force', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813703.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813703.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: mft_persuasive_force",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 8/10: synthetic_narrative with mft_persuasive_force",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Synthetic Political Narrative",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: mft_persuasive_force",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (24, null, Pipeline Test - mft_persuasive_force, null, End-to-end pipeline validation test, null, hierarchical_v1, mft_persuasive_force, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:47.091195, 2025-06-13 07:21:47.091195, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - mft_persuasive_force', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'mft_persuasive_force', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813707.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813707.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: mft_persuasive_force",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 9/10: political_speech with moral_rhetorical_posture",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Biden State of Union 2024 (excerpt)",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: moral_rhetorical_posture",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (25, null, Pipeline Test - moral_rhetorical_posture, null, End-to-end pipeline validation test, null, hierarchical_v1, moral_rhetorical_posture, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:50.076557, 2025-06-13 07:21:50.076557, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - moral_rhetorical_posture', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'moral_rhetorical_posture', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813710.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813710.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: moral_rhetorical_posture",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    },
+    {
+      "stage": "COMPREHENSIVE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\udccb Running test 10/10: synthetic_narrative with moral_rhetorical_posture",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Synthetic Political Narrative",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: moral_rhetorical_posture",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "Testing database storage",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "INFO",
+      "component": "DatabaseStorage",
+      "message": "\u2705 Database connection successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_3",
+      "severity": "WARNING",
+      "component": "DatabaseStorage",
+      "message": "Real database storage failed: (psycopg2.errors.NotNullViolation) null value in column \"selected_models\" of relation \"experiment\" violates not-null constraint\nDETAIL:  Failing row contains (26, null, Pipeline Test - moral_rhetorical_posture, null, End-to-end pipeline validation test, null, hierarchical_v1, moral_rhetorical_posture, standard, single_model, null, draft, 0, 0, null, unpublished, [], 2025-06-13 07:21:56.017411, 2025-06-13 07:21:56.017411, null, null, null).\n\n[SQL: INSERT INTO experiment (creator_id, name, hypothesis, description, research_context, prompt_template_id, framework_config_id, scoring_algorithm_id, analysis_mode, status, total_runs, successful_runs, research_notes, publication_status, tags, created_at, updated_at) VALUES (%(creator_id)s, %(name)s, %(hypothesis)s, %(description)s, %(research_context)s, %(prompt_template_id)s, %(framework_config_id)s, %(scoring_algorithm_id)s, %(analysis_mode)s, %(status)s, %(total_runs)s, %(successful_runs)s, %(research_notes)s, %(publication_status)s, %(tags)s::JSON, now(), now()) RETURNING experiment.id, experiment.created_at, experiment.updated_at]\n[parameters: {'creator_id': None, 'name': 'Pipeline Test - moral_rhetorical_posture', 'hypothesis': None, 'description': 'End-to-end pipeline validation test', 'research_context': None, 'prompt_template_id': 'hierarchical_v1', 'framework_config_id': 'moral_rhetorical_posture', 'scoring_algorithm_id': 'standard', 'analysis_mode': 'single_model', 'status': 'draft', 'total_runs': 0, 'successful_runs': 0, 'research_notes': None, 'publication_status': 'unpublished', 'tags': '[]'}]\n(Background on this error at: https://sqlalche.me/e/20/gkpj), using mock storage",
+      "manual_intervention": true
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "Testing academic export",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 CSV export created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_export_mock_run_1749813716.csv",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 R template created: analysis_results/comprehensive_pipeline_success/academic_exports/analysis_template_mock_run_1749813716.R",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_4",
+      "severity": "INFO",
+      "component": "AcademicExport",
+      "message": "\u2705 Academic export completed",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "Testing visualization with framework: moral_rhetorical_posture",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "INFO",
+      "component": "Visualization",
+      "message": "\u2705 Circular engine initialized",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_5",
+      "severity": "ERROR",
+      "component": "Visualization",
+      "message": "Visualization creation failed: Invalid format 'html'.\n    Supported formats: ['png', 'jpg', 'jpeg', 'webp', 'svg', 'pdf', 'eps', 'json']",
+      "manual_intervention": true
+    }
+  ]
+}

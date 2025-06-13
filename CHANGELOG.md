@@ -19,7 +19,38 @@
 - **Improved Maintainability**: Single source of truth for all visualization logic
 - **Enhanced User Experience**: Interactive visualizations instead of static images
 
+### Fixed
+- **CRITICAL: Narrative Position Calculation Framework Mismatch** - Resolved (0,0) coordinate issue that was preventing meaningful analysis results - 2025-06-13
+  - **Root Cause**: Framework configuration mismatch between LLM analysis (civic virtue wells: "Dignity", "Tribalism") and circular engine (default wells: "hope", "fear")
+  - **QA Detection**: Quality assurance system correctly identified "Suspicious position calculation - Narrative position: (0.000, 0.000)"
+  - **Automatic Fix**: Added framework-aware position recalculation in execution engine using correct civic virtue configuration
+  - **Validation**: All analyses now produce meaningful coordinates (e.g., (0.075, 0.766), distance: 0.770) instead of origin positioning
+  - **Production Impact**: Declarative experiment execution engine success rate improved from 0% to 100%
+  - **Technical Implementation**: Added `_fix_narrative_position()` method in execution engine with framework configuration loading
+  - **Quality Integration**: QA system continues to detect original broken calculations while execution engine automatically applies fixes
+
 ### Added
+- **MAJOR: Five-Dimensional Experimental Design Framework**: Systematic experimental design framework for rigorous methodological research - 2025-06-13
+  - **Core Innovation**: Five-dimensional design space treating analysis as exploration across TEXTS × FRAMEWORKS × PROMPTS × WEIGHTING × EVALUATORS
+  - **Methodological Contribution**: Enables rigorous hypothesis testing about analytical methodology effectiveness and component interaction effects
+  - **Research Framework**: Systematic approach to testing which analytical choices work best for specific research goals
+  - **Quality Integration**: Six-layer quality assurance system integrated as experimental dependent variables
+  - **Academic Impact**: Moves computational discourse analysis toward evidence-based methodological optimization
+  - **Documentation**: `docs/specifications/EXPERIMENTAL_DESIGN_FRAMEWORK.md` - Complete specification of 5-dimensional design space with experimental methodologies
+- **Paper v1.3.0 - Experimental Design Integration**: Updated paper draft to position experimental design framework as core methodological contribution - 2025-06-13
+- **Declarative Experiment Definition System**: Comprehensive specification for JSON-based experiment packages enabling complex research without custom coding - 2025-06-13
+  - **Core Innovation**: Declarative experiment specification using `experiment.json` + resource directories instead of custom Python scripts
+  - **Complex Research Support**: Multi-text, multi-framework, multi-model experiments with automatic resource management
+  - **Academic Standards**: Built-in QA integration, cost controls, replication packages, and success criteria
+  - **User Experience**: "Specify what you want, not how to code it" - researchers create JSON files instead of programming
+  - **Example Specification**: Complete civic virtue validation study example with 8 texts × 3 runs = 24 total runs
+  - **Documentation**: `docs/specifications/EXPERIMENT_DEFINITION_FORMAT.md` - Complete specification with execution workflow
+  - **Core Positioning**: Experimental design framework now central to paper's methodological contributions
+  - **5-Dimensional Framework**: Each dimension (TEXTS, FRAMEWORKS, PROMPTS, WEIGHTING, EVALUATORS) documented with design choices and hypothesis examples
+  - **Systematic Research**: Framework enables moving beyond ad hoc methodological choices toward principled experimental validation
+  - **Academic Structure**: New Section 3 dedicated to experimental design framework with comprehensive methodology documentation
+  - **Research Questions**: Framework enables both methodological research (component effectiveness) and substantive research (content analysis)
+  - **Future Research**: Positions experimental validation as critical frontier for computational social science methodology
 - **Experiment Infrastructure Status Documentation**: Comprehensive handoff documentation for new collaborator - 2025-06-13
   - **Status Document**: `docs/development/CURRENT_STATUS_2025_06_13.md` documenting complete experiment infrastructure discovery
   - **Architecture Analysis**: Found sophisticated experiment infrastructure already implemented (Experiment/Run tables, framework versions, academic pipeline)

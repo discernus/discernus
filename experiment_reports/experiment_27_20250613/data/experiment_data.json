@@ -1,0 +1,147 @@
+{
+  "experiment": {
+    "id": 27,
+    "name": "MFT_Single_Document_Validation",
+    "hypothesis": "MFT Persuasive Force framework will show distinct foundation emphasis patterns in presidential rhetoric, demonstrating framework effectiveness",
+    "description": "Single-document analysis using MFT framework to validate basic functionality with Roosevelt 1933 Inaugural Address",
+    "research_context": "Initial validation study for MFT framework implementation with real LLM analysis",
+    "framework": "mft_persuasive_force",
+    "framework_id": "5c85376b-cc78-434c-a70a-b82e31f7192e",
+    "prompt_template_id": "8f60f525-2336-4005-8936-e4205e2c0d56",
+    "scoring_algorithm_id": "hierarchical",
+    "analysis_mode": "single_model",
+    "selected_models": [
+      "gpt-4"
+    ],
+    "status": "active",
+    "total_runs": 1,
+    "successful_runs": 1,
+    "created_at": "2025-06-13 08:08:49.260744",
+    "updated_at": "2025-06-13 08:14:39.301541"
+  },
+  "runs": [
+    {
+      "run_id": 28,
+      "run_number": 1,
+      "text_id": "roosevelt_address_1933",
+      "llm_model": "gpt-4",
+      "raw_scores": {
+        "Compassion": 1.0,
+        "Equity": 0.3,
+        "Solidarity": 0.3,
+        "Hierarchy": 0.3,
+        "Purity": 0.3,
+        "Cruelty": 1.0,
+        "Exploitation": 0.3,
+        "Treachery": 0.3,
+        "Rebellion": 0.3,
+        "Corruption": 0.3
+      },
+      "hierarchical_ranking": {
+        "primary_wells": [
+          {
+            "well": "Compassion",
+            "score": 1.0,
+            "relative_weight": 43.5
+          },
+          {
+            "well": "Cruelty",
+            "score": 1.0,
+            "relative_weight": 43.5
+          },
+          {
+            "well": "Equity",
+            "score": 0.3,
+            "relative_weight": 13.0
+          }
+        ],
+        "secondary_wells": [],
+        "total_weight": 100.0
+      },
+      "framework_fit_score": 0.8,
+      "narrative_position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "calculated_metrics": {
+        "narrative_elevation": 0.0,
+        "polarity": -0.039999999999999994,
+        "coherence": 0.30000000000000004,
+        "directional_purity": 1.0
+      },
+      "execution_time": "2025-06-13 08:14:55.028684",
+      "duration_seconds": 11.620528936386108,
+      "api_cost": 0.0339,
+      "success": true
+    }
+  ],
+  "well_statistics": {
+    "Compassion": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 1
+    },
+    "Equity": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "count": 1
+    },
+    "Solidarity": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "count": 1
+    },
+    "Hierarchy": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "count": 1
+    },
+    "Purity": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "count": 1
+    },
+    "Cruelty": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "count": 1
+    },
+    "Exploitation": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "count": 1
+    },
+    "Treachery": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "count": 1
+    },
+    "Rebellion": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "count": 1
+    },
+    "Corruption": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "count": 1
+    }
+  },
+  "summary_metrics": {
+    "total_runs": 1,
+    "successful_runs": 1,
+    "total_cost": 0.0339,
+    "avg_duration": 11.620528936386108,
+    "avg_framework_fit": 0.8
+  }
+}

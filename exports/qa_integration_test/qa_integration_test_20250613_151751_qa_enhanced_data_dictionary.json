@@ -1,0 +1,22 @@
+{
+  "study_info": {
+    "title": "Narrative Gravity Wells Analysis Dataset",
+    "description": "Experimental data from LLM-based narrative analysis",
+    "creation_date": "2025-06-13T15:17:51.360723",
+    "n_observations": 4,
+    "n_variables": 43,
+    "qa_enhanced": true,
+    "qa_validation_layers": [
+      "Layer 1: Input Validation",
+      "Layer 2: LLM Response Validation",
+      "Layer 3: Statistical Coherence Validation",
+      "Layer 4: Mathematical Consistency Verification",
+      "Layer 5: Cross-Validation",
+      "Layer 6: Anomaly Detection"
+    ]
+  },
+  "variables": {
+    "exp_id": {
+      "description": "Unique experiment identifier (UUID)",
+      "type": "int64",
+      "missing_count": 
