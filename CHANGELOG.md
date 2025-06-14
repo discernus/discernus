@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [v2.5.0] - MECEC Documentation Architecture and Planning Compliance - 2025-06-14
+
+## [Unreleased]
+
 ### 📚 MECEC Documentation Architecture Enhancement - June 14, 2025
 **EVOLUTION TO CURRENCY-AWARE DOCUMENTATION**: Enhanced MECE principles with "Current" requirement for temporal accuracy
 
