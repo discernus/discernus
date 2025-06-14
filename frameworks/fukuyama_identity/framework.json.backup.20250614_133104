@@ -75,7 +75,7 @@
     }
   },
   "well_type_colors": {
-    "integrative": "#00695C",
+    "integrative": "#1976D2",
     "disintegrative": "#C62828"
   },
   "theoretical_foundation": {
@@ -119,5 +119,5 @@
     ]
   },
   "scaling_factor": 0.8,
-  "last_modified": "2025-06-14T13:31:04.927516"
+  "last_modified": "2025-06-13T05:56:11.173390"
 }
