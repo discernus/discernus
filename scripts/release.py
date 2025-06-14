@@ -166,8 +166,8 @@ class ReleaseManager:
             'README.md',
             'CHANGELOG.md',
             'LAUNCH_GUIDE.md',
-            'docs/development/CONTRIBUTING.md',
-            'docs/architecture/database_architecture.md'
+            'CONTRIBUTING.md',
+            'docs/platform-development/architecture/database_architecture.md'
         ]
         
         for doc in required_docs:
