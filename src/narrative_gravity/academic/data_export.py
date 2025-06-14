@@ -105,14 +105,18 @@ class AcademicDataExporter:
         json_path = output_path / f"{study_name}.json"
         # Custom JSON serializer for pandas types
         def json_serializer(obj):
-            if isinstance(obj, np.integer):
+            if isinstance(obj, (np.integer, pd.Int64Dtype)):
                 return int(obj)
-            elif isinstance(obj, np.floating):
+            elif isinstance(obj, (np.floating, pd.Float64Dtype)):
                 return float(obj)
             elif isinstance(obj, np.ndarray):
                 return obj.tolist()
             elif isinstance(obj, (datetime, pd.Timestamp)):
                 return obj.isoformat()
+            elif isinstance(obj, np.bool_):
+                return bool(obj)
+            elif pd.isna(obj):
+                return None
             else:
                 return str(obj)
         
@@ -1243,14 +1247,472 @@ For exact replication:
             f.write(methodology_content)
 
 
+class QAEnhancedDataExporter(AcademicDataExporter):
+    """
+    Quality Assurance Enhanced Data Exporter.
+    
+    Extends AcademicDataExporter with integrated 6-layer quality assurance
+    validation before academic data export. Adds QA confidence scores and
+    quality metadata to all exported datasets.
+    
+    Phase 1 of QA integration: Core QA validation with enhanced data output.
+    """
+    
+    def __init__(self, database_url: Optional[str] = None):
+        """Initialize QA-enhanced exporter with database connection and QA system."""
+        super().__init__(database_url)
+        
+        # Import QA system
+        try:
+            from src.narrative_gravity.utils.llm_quality_assurance import LLMQualityAssuranceSystem
+            self.qa_system = LLMQualityAssuranceSystem()
+            self.qa_available = True
+        except ImportError as e:
+            print(f"⚠️  QA system not available: {e}")
+            self.qa_system = None
+            self.qa_available = False
+    
+    def export_experiments_data(self, 
+                               start_date: Optional[str] = None,
+                               end_date: Optional[str] = None,
+                               framework_names: Optional[List[str]] = None,
+                               study_name: Optional[str] = None,
+                               output_dir: str = "exports/academic_formats",
+                               include_qa_validation: bool = True,
+                               qa_confidence_threshold: float = 0.5) -> Dict[str, str]:
+        """
+        Export experimental data with integrated quality assurance validation.
+        
+        Args:
+            start_date: ISO date string for filtering (e.g., '2025-06-01')
+            end_date: ISO date string for filtering
+            framework_names: List of framework names to include
+            study_name: Study identifier for output naming
+            output_dir: Directory for output files
+            include_qa_validation: Whether to run QA validation on exported data
+            qa_confidence_threshold: Minimum confidence threshold for inclusion
+            
+        Returns:
+            Dict mapping format names to output file paths, with QA report
+        """
+        # Generate study identifier
+        if not study_name:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            study_name = f"qa_enhanced_study_{timestamp}"
+        
+        # Create output directory
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+        
+        print(f"🔍 Starting QA-enhanced data export: {study_name}")
+        
+        # Build comprehensive query
+        query = self._build_comprehensive_query(start_date, end_date, framework_names)
+        
+        # Execute query and get data
+        with self.Session() as session:
+            df = pd.read_sql(query, session.bind)
+        
+        print(f"📊 Retrieved {len(df)} experimental runs for analysis")
+        
+        # Run QA validation if requested and available
+        if include_qa_validation and self.qa_available:
+            print("🔍 Running quality assurance validation...")
+            df_with_qa = self._validate_analysis_quality(df, qa_confidence_threshold)
+        else:
+            print("⚠️  Skipping QA validation (disabled or unavailable)")
+            df_with_qa = df
+        
+        # Clean and standardize data for academic analysis
+        df_clean = self._prepare_academic_dataframe(df_with_qa)
+        
+        # Generate enhanced data dictionary with QA fields
+        data_dict = self._generate_qa_enhanced_data_dictionary(df_clean)
+        
+        # Export in multiple formats
+        output_files = {}
+        
+        # 1. CSV (universal compatibility)
+        csv_path = output_path / f"{study_name}_qa_enhanced.csv"
+        df_clean.to_csv(csv_path, index=False)
+        output_files['csv'] = str(csv_path)
+        
+        # 2. Feather (R-optimized)
+        feather_path = output_path / f"{study_name}_qa_enhanced.feather"
+        df_clean.to_feather(feather_path)
+        output_files['feather'] = str(feather_path)
+        
+        # 3. Stata DTA (if pyreadstat available)
+        try:
+            import pyreadstat
+            dta_path = output_path / f"{study_name}_qa_enhanced.dta"
+            pyreadstat.write_dta(df_clean, str(dta_path))
+            output_files['stata'] = str(dta_path)
+        except ImportError:
+            print("⚠️  pyreadstat not available - skipping Stata .dta export")
+        except Exception as e:
+            print(f"⚠️  Stata export failed: {e} - continuing with other formats")
+        
+        # 4. JSON (Python-optimized with enhanced metadata)
+        json_path = output_path / f"{study_name}_qa_enhanced.json"
+        
+        # Custom JSON serializer for pandas types
+        def json_serializer(obj):
+            if isinstance(obj, np.integer):
+                return int(obj)
+            elif isinstance(obj, np.floating):
+                return float(obj)
+            elif isinstance(obj, np.ndarray):
+                return obj.tolist()
+            elif isinstance(obj, (datetime, pd.Timestamp)):
+                return obj.isoformat()
+            else:
+                return str(obj)
+        
+        # Enhanced metadata with QA information
+        qa_summary = self._generate_qa_summary(df_clean) if include_qa_validation and self.qa_available else {}
+        
+        export_data = {
+            'metadata': {
+                'study_name': study_name,
+                'export_date': datetime.now().isoformat(),
+                'record_count': len(df_clean),
+                'date_range': {
+                    'start': start_date,
+                    'end': end_date
+                },
+                'frameworks_included': framework_names,
+                'qa_enhanced': include_qa_validation and self.qa_available,
+                'qa_confidence_threshold': qa_confidence_threshold,
+                'qa_summary': qa_summary,
+                'data_dictionary': data_dict
+            },
+            'data': df_clean.to_dict('records')
+        }
+        
+        with open(json_path, 'w') as f:
+            json.dump(export_data, f, indent=2, default=json_serializer)
+        output_files['json'] = str(json_path)
+        
+        # 5. Enhanced data dictionary (separate file)
+        dict_path = output_path / f"{study_name}_qa_enhanced_data_dictionary.json"
+        with open(dict_path, 'w') as f:
+            json.dump(data_dict, f, indent=2, default=json_serializer)
+        output_files['data_dictionary'] = str(dict_path)
+        
+        # 6. QA Validation Report (if QA was run)
+        if include_qa_validation and self.qa_available and qa_summary:
+            qa_report_path = output_path / f"{study_name}_qa_validation_report.json"
+            with open(qa_report_path, 'w') as f:
+                json.dump(qa_summary, f, indent=2, default=str)
+            output_files['qa_report'] = str(qa_report_path)
+            
+            print(f"✅ QA validation complete: {qa_summary.get('total_runs', 0)} runs analyzed")
+            print(f"   - High confidence: {qa_summary.get('high_confidence_count', 0)}")
+            print(f"   - Medium confidence: {qa_summary.get('medium_confidence_count', 0)}")
+            print(f"   - Low confidence: {qa_summary.get('low_confidence_count', 0)}")
+        
+        print(f"📦 QA-enhanced export complete: {len(output_files)} files generated")
+        return output_files
+    
+    def _validate_analysis_quality(self, df: pd.DataFrame, confidence_threshold: float = 0.5) -> pd.DataFrame:
+        """
+        Run quality assurance validation on experimental data.
+        
+        Args:
+            df: Raw experimental data from database
+            confidence_threshold: Minimum confidence for inclusion
+            
+        Returns:
+            DataFrame with QA validation results and confidence scores
+        """
+        if not self.qa_available:
+            print("⚠️  QA system not available - returning original data")
+            return df
+        
+        # Initialize QA result columns
+        df_with_qa = df.copy()
+        qa_results = {
+            'qa_confidence_level': [],
+            'qa_confidence_score': [],
+            'qa_anomalies_detected': [],
+            'qa_requires_second_opinion': [],
+            'qa_validation_summary': [],
+            'qa_critical_issues': [],
+            'qa_passed_threshold': []
+        }
+        
+        print(f"🔍 Running QA validation on {len(df)} experimental runs...")
+        
+        validation_count = 0
+        for idx, row in df.iterrows():
+            try:
+                # Extract required fields for QA validation
+                text_input = row.get('text_content', '')
+                framework = self._extract_framework_name(row)
+                
+                # Parse raw scores
+                raw_scores = self._parse_raw_scores(row.get('raw_scores', {}))
+                
+                # Create mock LLM response for validation
+                llm_response = {
+                    'scores': raw_scores,
+                    'analysis': f"Analysis of {row.get('text_id', 'unknown text')}"
+                }
+                
+                # Run QA validation
+                qa_assessment = self.qa_system.validate_llm_analysis(
+                    text_input=str(text_input),
+                    framework=framework,
+                    llm_response=llm_response,
+                    parsed_scores=raw_scores
+                )
+                
+                # Extract QA results
+                qa_results['qa_confidence_level'].append(qa_assessment.confidence_level)
+                qa_results['qa_confidence_score'].append(qa_assessment.confidence_score)
+                qa_results['qa_anomalies_detected'].append(len(qa_assessment.anomalies_detected))
+                qa_results['qa_requires_second_opinion'].append(qa_assessment.requires_second_opinion)
+                qa_results['qa_validation_summary'].append(qa_assessment.summary)
+                
+                # Count critical issues
+                critical_issues = sum(1 for check in qa_assessment.individual_checks 
+                                    if not check.passed and check.severity == 'CRITICAL')
+                qa_results['qa_critical_issues'].append(critical_issues)
+                
+                # Check if passes threshold
+                passes_threshold = qa_assessment.confidence_score >= confidence_threshold
+                qa_results['qa_passed_threshold'].append(passes_threshold)
+                
+                validation_count += 1
+                
+            except Exception as e:
+                # Handle validation failures gracefully
+                print(f"⚠️  QA validation failed for run {idx}: {e}")
+                qa_results['qa_confidence_level'].append('UNKNOWN')
+                qa_results['qa_confidence_score'].append(0.0)
+                qa_results['qa_anomalies_detected'].append(0)
+                qa_results['qa_requires_second_opinion'].append(True)
+                qa_results['qa_validation_summary'].append(f"Validation failed: {str(e)}")
+                qa_results['qa_critical_issues'].append(1)
+                qa_results['qa_passed_threshold'].append(False)
+        
+        # Add QA columns to dataframe
+        for col_name, values in qa_results.items():
+            df_with_qa[col_name] = values
+        
+        print(f"✅ QA validation complete: {validation_count}/{len(df)} runs validated")
+        
+        # Report confidence distribution
+        confidence_counts = df_with_qa['qa_confidence_level'].value_counts()
+        for level, count in confidence_counts.items():
+            print(f"   - {level} confidence: {count} runs")
+        
+        # Report threshold results
+        passed_threshold = df_with_qa['qa_passed_threshold'].sum()
+        print(f"   - Passed threshold (≥{confidence_threshold}): {passed_threshold}/{len(df)} runs")
+        
+        return df_with_qa
+    
+    def _extract_framework_name(self, row: pd.Series) -> str:
+        """Extract framework name from database row."""
+        # Try multiple possible column names
+        for col in ['framework_name', 'framework', 'framework_version']:
+            if col in row and pd.notna(row[col]):
+                framework_version = str(row[col])
+                # Extract framework name from version string
+                if 'civic_virtue' in framework_version:
+                    return 'civic_virtue'
+                elif 'political_spectrum' in framework_version:
+                    return 'political_spectrum'
+                elif 'fukuyama_identity' in framework_version:
+                    return 'fukuyama_identity'
+                elif 'mft_persuasive_force' in framework_version:
+                    return 'mft_persuasive_force'
+                elif 'moral_rhetorical_posture' in framework_version:
+                    return 'moral_rhetorical_posture'
+        
+        return 'unknown'
+    
+    def _parse_raw_scores(self, raw_scores: Any) -> Dict[str, float]:
+        """Parse raw scores from database format."""
+        try:
+            if isinstance(raw_scores, str):
+                scores = json.loads(raw_scores)
+            elif isinstance(raw_scores, dict):
+                scores = raw_scores
+            else:
+                return {}
+            
+            # Ensure all values are float
+            parsed_scores = {}
+            for key, value in scores.items():
+                try:
+                    parsed_scores[str(key)] = float(value)
+                except (ValueError, TypeError):
+                    parsed_scores[str(key)] = 0.3  # Default value
+            
+            return parsed_scores
+            
+        except (json.JSONDecodeError, TypeError, ValueError):
+            return {}
+    
+    def _generate_qa_enhanced_data_dictionary(self, df: pd.DataFrame) -> Dict[str, Any]:
+        """Generate enhanced data dictionary including QA field descriptions."""
+        
+        # Start with base data dictionary
+        data_dict = self._generate_data_dictionary(df)
+        
+        # Add QA-specific variable descriptions
+        qa_variable_descriptions = {
+            'qa_confidence_level': 'Quality assurance confidence level (HIGH/MEDIUM/LOW)',
+            'qa_confidence_score': 'Numerical confidence score from QA validation (0.0-1.0)',
+            'qa_anomalies_detected': 'Number of statistical anomalies detected during QA validation',
+            'qa_requires_second_opinion': 'Boolean indicating if analysis requires second opinion validation',
+            'qa_validation_summary': 'Human-readable summary of quality assessment results',
+            'qa_critical_issues': 'Number of critical QA issues detected (0 = no critical issues)',
+            'qa_passed_threshold': 'Boolean indicating if analysis passed minimum confidence threshold'
+        }
+        
+        # Update variable descriptions and info
+        for col in df.columns:
+            if col.startswith('qa_'):
+                # Add QA variable info
+                var_info = {
+                    'description': qa_variable_descriptions.get(col, f'QA variable: {col}'),
+                    'type': str(df[col].dtype),
+                    'missing_count': df[col].isna().sum(),
+                    'missing_percent': (df[col].isna().sum() / len(df)) * 100,
+                    'qa_enhanced': True
+                }
+                
+                # Add statistics for numeric QA variables
+                if col == 'qa_confidence_score' and df[col].dtype in ['int64', 'float64']:
+                    var_info.update({
+                        'min': float(df[col].min()) if df[col].notna().any() else None,
+                        'max': float(df[col].max()) if df[col].notna().any() else None,
+                        'mean': float(df[col].mean()) if df[col].notna().any() else None,
+                        'std': float(df[col].std()) if df[col].notna().any() else None
+                    })
+                
+                # Add value counts for categorical QA variables
+                elif col in ['qa_confidence_level'] and df[col].notna().any():
+                    value_counts = df[col].value_counts().to_dict()
+                    var_info['value_counts'] = {str(k): int(v) for k, v in value_counts.items()}
+                
+                data_dict['variables'][col] = var_info
+                data_dict['variable_labels'][col] = qa_variable_descriptions.get(col, col)
+        
+        # Add QA methodology information to study info
+        data_dict['study_info']['qa_enhanced'] = True
+        data_dict['study_info']['qa_validation_layers'] = [
+            'Layer 1: Input Validation',
+            'Layer 2: LLM Response Validation', 
+            'Layer 3: Statistical Coherence Validation',
+            'Layer 4: Mathematical Consistency Verification',
+            'Layer 5: Cross-Validation',
+            'Layer 6: Anomaly Detection'
+        ]
+        
+        return data_dict
+    
+    def _generate_qa_summary(self, df: pd.DataFrame) -> Dict[str, Any]:
+        """Generate QA validation summary statistics."""
+        
+        if not any(col.startswith('qa_') for col in df.columns):
+            return {}
+        
+        # Basic counts
+        total_runs = len(df)
+        high_confidence = len(df[df['qa_confidence_level'] == 'HIGH']) if 'qa_confidence_level' in df.columns else 0
+        medium_confidence = len(df[df['qa_confidence_level'] == 'MEDIUM']) if 'qa_confidence_level' in df.columns else 0
+        low_confidence = len(df[df['qa_confidence_level'] == 'LOW']) if 'qa_confidence_level' in df.columns else 0
+        
+        # Confidence score statistics
+        confidence_stats = {}
+        if 'qa_confidence_score' in df.columns and df['qa_confidence_score'].notna().any():
+            confidence_stats = {
+                'mean': float(df['qa_confidence_score'].mean()),
+                'median': float(df['qa_confidence_score'].median()),
+                'std': float(df['qa_confidence_score'].std()),
+                'min': float(df['qa_confidence_score'].min()),
+                'max': float(df['qa_confidence_score'].max())
+            }
+        
+        # Anomaly and issue counts
+        total_anomalies = df['qa_anomalies_detected'].sum() if 'qa_anomalies_detected' in df.columns else 0
+        total_critical_issues = df['qa_critical_issues'].sum() if 'qa_critical_issues' in df.columns else 0
+        second_opinion_needed = df['qa_requires_second_opinion'].sum() if 'qa_requires_second_opinion' in df.columns else 0
+        
+        qa_summary = {
+            'validation_timestamp': datetime.now().isoformat(),
+            'total_runs': total_runs,
+            'high_confidence_count': high_confidence,
+            'medium_confidence_count': medium_confidence,
+            'low_confidence_count': low_confidence,
+            'confidence_distribution': {
+                'HIGH': f"{high_confidence/total_runs*100:.1f}%" if total_runs > 0 else "0%",
+                'MEDIUM': f"{medium_confidence/total_runs*100:.1f}%" if total_runs > 0 else "0%",
+                'LOW': f"{low_confidence/total_runs*100:.1f}%" if total_runs > 0 else "0%"
+            },
+            'confidence_score_statistics': confidence_stats,
+            'quality_issues': {
+                'total_anomalies_detected': int(total_anomalies),
+                'total_critical_issues': int(total_critical_issues),
+                'runs_requiring_second_opinion': int(second_opinion_needed),
+                'second_opinion_rate': f"{second_opinion_needed/total_runs*100:.1f}%" if total_runs > 0 else "0%"
+            },
+            'quality_assessment': {
+                'overall_quality': 'HIGH' if high_confidence/total_runs >= 0.8 else ('MEDIUM' if high_confidence/total_runs >= 0.5 else 'LOW') if total_runs > 0 else 'UNKNOWN',
+                'data_reliability': 'Excellent' if total_critical_issues == 0 else ('Good' if total_critical_issues < total_runs * 0.1 else 'Needs Review'),
+                'recommended_confidence_threshold': 0.8 if high_confidence/total_runs >= 0.5 else 0.5 if total_runs > 0 else 0.0
+            }
+        }
+        
+        return qa_summary
+
+
 # Convenience functions for CLI integration
+def export_qa_enhanced_academic_data(study_name: str, include_qa_validation: bool = True, **kwargs) -> Dict[str, str]:
+    """
+    Convenience function to export QA-enhanced academic data.
+    
+    Args:
+        study_name: Study identifier for output naming
+        include_qa_validation: Whether to run QA validation (default: True)
+        **kwargs: Additional arguments passed to QAEnhancedDataExporter.export_experiments_data()
+        
+    Returns:
+        Dict mapping format names to output file paths
+    """
+    exporter = QAEnhancedDataExporter()
+    return exporter.export_experiments_data(study_name=study_name, include_qa_validation=include_qa_validation, **kwargs)
+
 def export_academic_data(study_name: str, **kwargs) -> Dict[str, str]:
-    """Quick export function for CLI tools."""
+    """
+    Legacy convenience function maintained for backward compatibility.
+    
+    Args:
+        study_name: Study identifier for output naming
+        **kwargs: Additional arguments passed to AcademicDataExporter.export_experiments_data()
+        
+    Returns:
+        Dict mapping format names to output file paths
+    """
     exporter = AcademicDataExporter()
     return exporter.export_experiments_data(study_name=study_name, **kwargs)
 
-
 def build_replication_package(study_name: str, description: str, **kwargs) -> str:
-    """Quick replication package builder for CLI tools."""
+    """
+    Build replication package using legacy data exporter.
+    
+    Args:
+        study_name: Study identifier
+        description: Study description
+        **kwargs: Additional arguments passed to ReplicationPackageBuilder.build_replication_package()
+        
+    Returns:
+        Path to generated replication package ZIP file
+    """
     builder = ReplicationPackageBuilder()
-    return builder.build_replication_package(study_name, description, **kwargs) 
+    return builder.build_replication_package(study_name=study_name, study_description=description, **kwargs) 

@@ -1,0 +1,81 @@
+{
+  "timestamp": "2025-06-13T07:20:39.543886",
+  "total_gaps": 10,
+  "critical_gaps": 0,
+  "error_gaps": 0,
+  "warning_gaps": 0,
+  "manual_interventions": 0,
+  "zero_intervention_goal_met": true,
+  "gaps": [
+    {
+      "stage": "PIPELINE_INIT",
+      "severity": "INFO",
+      "component": "PipelineTester",
+      "message": "Initialized pipeline tester with output directory: analysis_results/pipeline_test_circular_fix",
+      "manual_intervention": false
+    },
+    {
+      "stage": "PIPELINE_TEST",
+      "severity": "INFO",
+      "component": "TestRunner",
+      "message": "\ud83d\ude80 Starting simple pipeline test",
+      "manual_intervention": false
+    },
+    {
+      "stage": "IMPORTS",
+      "severity": "INFO",
+      "component": "ImportTest",
+      "message": "Testing core imports",
+      "manual_intervention": false
+    },
+    {
+      "stage": "IMPORTS",
+      "severity": "INFO",
+      "component": "ImportTest",
+      "message": "\u2705 Circular engine import successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "IMPORTS",
+      "severity": "INFO",
+      "component": "ImportTest",
+      "message": "\u2705 Framework manager import successful",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "Testing text input with: Biden State of Union 2024 (excerpt)",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_1",
+      "severity": "INFO",
+      "component": "TextInput",
+      "message": "\u2705 Text input validated",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "Testing LLM analysis with framework: civic_virtue",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\ud83d\ude80 Initializing real LLM analysis service",
+      "manual_intervention": false
+    },
+    {
+      "stage": "STAGE_2",
+      "severity": "INFO",
+      "component": "LLMAnalysis",
+      "message": "\u2705 Real LLM analysis completed successfully",
+      "manual_intervention": false
+    }
+  ]
+}

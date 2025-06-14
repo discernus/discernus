@@ -1,0 +1,289 @@
+{
+  "experiment": {
+    "id": 28,
+    "name": "MFT_Cross_Presidential_Comparison",
+    "hypothesis": "Different presidential addresses will show distinct MFT foundation patterns reflecting historical context and political positioning",
+    "description": "Multi-document comparative analysis using MFT framework across Roosevelt, Biden, and Clinton addresses",
+    "research_context": "Comparative study to test framework consistency across different political eras and rhetorical styles",
+    "framework": {
+      "name": "mft_persuasive_force",
+      "version": "v2025.06.13",
+      "id": "5c85376b-cc78-434c-a70a-b82e31f7192e"
+    },
+    "prompt_template_id": "8f60f525-2336-4005-8936-e4205e2c0d56",
+    "scoring_algorithm_id": "hierarchical",
+    "analysis_mode": "single_model",
+    "selected_models": [
+      "gpt-4"
+    ],
+    "status": "active",
+    "total_runs": 3,
+    "successful_runs": 3,
+    "created_at": "2025-06-13 08:08:49.270471",
+    "updated_at": "2025-06-13 09:38:51.455214"
+  },
+  "runs": [
+    {
+      "run_id": 29,
+      "run_number": 1,
+      "text_id": "roosevelt_address_1933",
+      "llm_model": "gpt-4",
+      "raw_scores": {
+        "Compassion": 1.0,
+        "Equity": 0.3,
+        "Solidarity": 0.3,
+        "Hierarchy": 0.3,
+        "Purity": 0.3,
+        "Cruelty": 1.0,
+        "Exploitation": 0.3,
+        "Treachery": 0.3,
+        "Rebellion": 0.3,
+        "Corruption": 0.3
+      },
+      "framework_fit_score": 0.8,
+      "narrative_position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "calculated_metrics": {
+        "narrative_elevation": 0.0,
+        "polarity": -0.039999999999999994,
+        "coherence": 0.30000000000000004,
+        "directional_purity": 1.0
+      },
+      "duration_seconds": 13.618701934814453,
+      "api_cost": 0.0342,
+      "success": true
+    },
+    {
+      "run_id": 30,
+      "run_number": 2,
+      "text_id": "jr_address_2024",
+      "llm_model": "gpt-4",
+      "raw_scores": {
+        "Compassion": 1.0,
+        "Equity": 0.3,
+        "Solidarity": 0.3,
+        "Hierarchy": 0.3,
+        "Purity": 0.3,
+        "Cruelty": 0.3,
+        "Exploitation": 0.3,
+        "Treachery": 0.3,
+        "Rebellion": 0.3,
+        "Corruption": 0.3
+      },
+      "framework_fit_score": 0.8,
+      "narrative_position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "calculated_metrics": {
+        "narrative_elevation": 0.0,
+        "polarity": -0.16999999999999998,
+        "coherence": 0.30000000000000004,
+        "directional_purity": 1.0
+      },
+      "duration_seconds": 18.037019968032837,
+      "api_cost": 0.0681,
+      "success": true
+    },
+    {
+      "run_id": 31,
+      "run_number": 3,
+      "text_id": "clinton_address_1997",
+      "llm_model": "gpt-4",
+      "raw_scores": {
+        "Compassion": 1.0,
+        "Equity": 0.3,
+        "Solidarity": 0.3,
+        "Hierarchy": 0.3,
+        "Purity": 0.3,
+        "Cruelty": 0.3,
+        "Exploitation": 0.3,
+        "Treachery": 0.3,
+        "Rebellion": 0.3,
+        "Corruption": 0.3
+      },
+      "framework_fit_score": 0.8,
+      "narrative_position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "calculated_metrics": {
+        "narrative_elevation": 0.0,
+        "polarity": -0.16999999999999998,
+        "coherence": 0.30000000000000004,
+        "directional_purity": 1.0
+      },
+      "duration_seconds": 14.736001014709473,
+      "api_cost": 0.0624,
+      "success": true
+    }
+  ],
+  "text_analysis": {
+    "roosevelt_address_1933": {
+      "scores": {
+        "Compassion": 1.0,
+        "Equity": 0.3,
+        "Solidarity": 0.3,
+        "Hierarchy": 0.3,
+        "Purity": 0.3,
+        "Cruelty": 1.0,
+        "Exploitation": 0.3,
+        "Treachery": 0.3,
+        "Rebellion": 0.3,
+        "Corruption": 0.3
+      },
+      "metrics": {
+        "narrative_elevation": 0.0,
+        "polarity": -0.039999999999999994,
+        "coherence": 0.30000000000000004,
+        "directional_purity": 1.0
+      },
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "model": "gpt-4"
+    },
+    "jr_address_2024": {
+      "scores": {
+        "Compassion": 1.0,
+        "Equity": 0.3,
+        "Solidarity": 0.3,
+        "Hierarchy": 0.3,
+        "Purity": 0.3,
+        "Cruelty": 0.3,
+        "Exploitation": 0.3,
+        "Treachery": 0.3,
+        "Rebellion": 0.3,
+        "Corruption": 0.3
+      },
+      "metrics": {
+        "narrative_elevation": 0.0,
+        "polarity": -0.16999999999999998,
+        "coherence": 0.30000000000000004,
+        "directional_purity": 1.0
+      },
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "model": "gpt-4"
+    },
+    "clinton_address_1997": {
+      "scores": {
+        "Compassion": 1.0,
+        "Equity": 0.3,
+        "Solidarity": 0.3,
+        "Hierarchy": 0.3,
+        "Purity": 0.3,
+        "Cruelty": 0.3,
+        "Exploitation": 0.3,
+        "Treachery": 0.3,
+        "Rebellion": 0.3,
+        "Corruption": 0.3
+      },
+      "metrics": {
+        "narrative_elevation": 0.0,
+        "polarity": -0.16999999999999998,
+        "coherence": 0.30000000000000004,
+        "directional_purity": 1.0
+      },
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "model": "gpt-4"
+    }
+  },
+  "well_statistics": {
+    "Compassion": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "std": 0.0,
+      "count": 3
+    },
+    "Equity": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "std": 0.0,
+      "count": 3
+    },
+    "Solidarity": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "std": 0.0,
+      "count": 3
+    },
+    "Hierarchy": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "std": 0.0,
+      "count": 3
+    },
+    "Purity": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "std": 0.0,
+      "count": 3
+    },
+    "Cruelty": {
+      "mean": 0.5333333333333333,
+      "min": 0.3,
+      "max": 1.0,
+      "std": 0.32998316455372223,
+      "count": 3
+    },
+    "Exploitation": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "std": 0.0,
+      "count": 3
+    },
+    "Treachery": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "std": 0.0,
+      "count": 3
+    },
+    "Rebellion": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "std": 0.0,
+      "count": 3
+    },
+    "Corruption": {
+      "mean": 0.3,
+      "min": 0.3,
+      "max": 0.3,
+      "std": 0.0,
+      "count": 3
+    }
+  },
+  "patterns": {
+    "high_scoring_wells": [
+      "Compassion"
+    ],
+    "low_scoring_wells": [],
+    "variable_wells": [
+      "Cruelty"
+    ]
+  },
+  "summary_metrics": {
+    "total_runs": 3,
+    "successful_runs": 3,
+    "texts_analyzed": 3,
+    "total_cost": 0.1647,
+    "avg_duration": 15.463907639185587,
+    "avg_framework_fit": 0.8000000000000002
+  }
+}

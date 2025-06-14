@@ -316,7 +316,31 @@ If you CAN reliably identify both your model name and version, please proceed wi
     
     def _build_framework_wells(self, framework_config: Dict, experiment_config: Dict = None) -> str:
         """Build framework-specific wells descriptions."""
-        dipoles = framework_config["dipoles"]["dipoles"]
+        # Handle different dipoles structures
+        dipoles_config = framework_config["dipoles"]
+        
+        if "dipoles" in dipoles_config:
+            # Full dipoles structure (like civic_virtue)
+            dipoles = dipoles_config["dipoles"]
+        elif "primary" in dipoles_config:
+            # Simple dipoles structure (like political_spectrum)
+            # Convert to expected format
+            dipoles = [{
+                "name": "Primary",
+                "positive": {
+                    "name": dipoles_config["primary"]["positive"],
+                    "description": f"Emphasis on {dipoles_config['primary']['positive'].lower()} themes",
+                    "language_cues": []
+                },
+                "negative": {
+                    "name": dipoles_config["primary"]["negative"],
+                    "description": f"Emphasis on {dipoles_config['primary']['negative'].lower()} themes",
+                    "language_cues": []
+                }
+            }]
+        else:
+            # Fallback for unknown structure
+            dipoles = []
         
         lines = ["**FRAMEWORK WELLS:**\n"]
         
@@ -377,7 +401,23 @@ This framework employs a **conceptual assessment approach** that prioritizes sem
     def _build_json_format(self, framework_config: Dict) -> str:
         """Build JSON format specification."""
         timestamp = datetime.now().strftime("%Y.%m.%d.%H.%M")
-        dipoles = framework_config["dipoles"]["dipoles"]
+        
+        # Handle different dipoles structures
+        dipoles_config = framework_config["dipoles"]
+        
+        if "dipoles" in dipoles_config:
+            # Full dipoles structure (like civic_virtue)
+            dipoles = dipoles_config["dipoles"]
+        elif "primary" in dipoles_config:
+            # Simple dipoles structure (like political_spectrum)
+            dipoles = [{
+                "positive": {"name": dipoles_config["primary"]["positive"]},
+                "negative": {"name": dipoles_config["primary"]["negative"]}
+            }]
+        else:
+            # Fallback for unknown structure
+            dipoles = []
+        
         framework_name = framework_config["name"]
         
         # Get all well names

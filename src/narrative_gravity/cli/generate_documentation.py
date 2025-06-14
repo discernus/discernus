@@ -433,7 +433,7 @@ The study used the following component versions:
 1. **Import errors**: Ensure development environment is properly set up
    ```bash
    source scripts/setup_dev_env.sh
-   python -c "from src.narrative_gravity.engine import NarrativeGravityWellsElliptical; print('✅ Imports working!')"
+   python -c "from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular; print('✅ Imports working!')"
    ```
 
 2. **Database connection errors**: Verify PostgreSQL is running and accessible

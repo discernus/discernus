@@ -63,6 +63,20 @@ class DirectAPIClient:
         # Initialize cost manager
         self.cost_manager = CostManager() if CostManager else None
         
+        # Store current analysis context for quality assurance
+        self._current_text = None
+        self._current_framework = None
+        
+        # Initialize retry handler for robust API calls
+        try:
+            from ..utils.api_retry_handler import APIRetryHandler, ProviderFailoverHandler
+            self.retry_handler = APIRetryHandler()
+            self.failover_handler = ProviderFailoverHandler()
+        except ImportError:
+            print("⚠️ Retry handler not available - using basic error handling")
+            self.retry_handler = None
+            self.failover_handler = None
+        
         # Initialize OpenAI
         openai_key = os.getenv("OPENAI_API_KEY")
         if openai_key:
@@ -211,6 +225,10 @@ class DirectAPIClient:
         Analyze text using specified model and framework
         Compatible with existing narrative gravity framework
         """
+        # Store context for quality assurance
+        self._current_text = text
+        self._current_framework = framework
+        
         # Import the prompt template manager
         try:
             from src.narrative_gravity.prompts.template_manager import PromptTemplateManager
@@ -265,7 +283,7 @@ class DirectAPIClient:
             return "unknown"
     
     def _analyze_with_openai(self, prompt: str, model_name: str = "gpt-4.1") -> Tuple[Dict[str, Any], float]:
-        """Analyze with OpenAI models - Updated for 2025"""
+        """Analyze with OpenAI models - Updated for 2025 with retry handling"""
         if not self.openai_client:
             raise ValueError("OpenAI client not initialized")
         
@@ -302,6 +320,78 @@ class DirectAPIClient:
         
         model = model_map.get(model_name, "gpt-4.1")
         
+        # Use retry handler if available, otherwise basic error handling
+        if self.retry_handler:
+            return self._openai_api_call_with_retry(prompt, model)
+        else:
+            return self._openai_api_call_basic(prompt, model)
+    
+    def _openai_api_call_with_retry(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """OpenAI API call with retry logic."""
+        
+        @self.retry_handler.with_retry("openai", model)
+        def make_openai_call():
+            # Check if model supports extended context for narrative analysis
+            max_tokens = 2000
+            if "4.1" in model:
+                max_tokens = 4000  # GPT-4.1 series supports longer outputs
+            elif model.startswith("o"):
+                max_tokens = 3000  # o-series optimized for reasoning
+                
+            response = self.openai_client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=max_tokens,
+                temperature=0.1
+            )
+            
+            content = response.choices[0].message.content
+            usage = response.usage
+            
+            # Calculate cost with updated 2025 pricing
+            if "4.1" in model:
+                if "mini" in model:
+                    cost = (usage.prompt_tokens * 0.00015 / 1000) + (usage.completion_tokens * 0.0006 / 1000)
+                elif "nano" in model:
+                    cost = (usage.prompt_tokens * 0.0001 / 1000) + (usage.completion_tokens * 0.0004 / 1000)
+                else:  # GPT-4.1 standard
+                    cost = (usage.prompt_tokens * 0.005 / 1000) + (usage.completion_tokens * 0.015 / 1000)
+            elif model.startswith("o"):
+                # o-series reasoning models (premium pricing for reasoning)
+                if "mini" in model:
+                    cost = (usage.prompt_tokens * 0.003 / 1000) + (usage.completion_tokens * 0.012 / 1000)
+                else:
+                    cost = (usage.prompt_tokens * 0.015 / 1000) + (usage.completion_tokens * 0.06 / 1000)
+            elif "4o" in model:
+                if "mini" in model:
+                    cost = (usage.prompt_tokens * 0.00015 / 1000) + (usage.completion_tokens * 0.0006 / 1000)
+                else:
+                    cost = (usage.prompt_tokens * 0.0025 / 1000) + (usage.completion_tokens * 0.01 / 1000)
+            else:
+                # Fallback pricing for older models
+                cost = (usage.prompt_tokens * 0.01 / 1000) + (usage.completion_tokens * 0.03 / 1000)
+            
+            # Record actual cost
+            if self.cost_manager:
+                self.cost_manager.record_cost(
+                    provider="openai",
+                    model=model,
+                    actual_cost=cost,
+                    tokens_input=usage.prompt_tokens,
+                    tokens_output=usage.completion_tokens,
+                    request_type="analysis"
+                )
+            
+            # Mark provider as healthy on success
+            if self.failover_handler:
+                self.failover_handler.mark_provider_healthy("openai")
+            
+            return self._parse_response(content, self._current_text, self._current_framework), cost
+        
+        return make_openai_call()
+    
+    def _openai_api_call_basic(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """Basic OpenAI API call with simple error handling (fallback)."""
         try:
             # Check if model supports extended context for narrative analysis
             max_tokens = 2000
@@ -356,7 +446,7 @@ class DirectAPIClient:
                     request_type="analysis"
                 )
             
-            return self._parse_response(content), cost
+            return self._parse_response(content, self._current_text, self._current_framework), cost
             
         except Exception as e:
             print(f"OpenAI API error: {e}")
@@ -445,7 +535,7 @@ class DirectAPIClient:
                     request_type="analysis"
                 )
             
-            return self._parse_response(content), cost
+            return self._parse_response(content, self._current_text, self._current_framework), cost
             
         except Exception as e:
             print(f"Anthropic API error: {e}")
@@ -532,17 +622,22 @@ class DirectAPIClient:
                     request_type="analysis"
                 )
             
-            return self._parse_response(content), cost
+            return self._parse_response(content, self._current_text, self._current_framework), cost
             
         except Exception as e:
             print(f"Mistral API error: {e}")
             return {"error": str(e)}, 0.0
     
-    def _parse_response(self, content: str) -> Dict[str, Any]:
-        """Parse LLM response - tries JSON first, then structured extraction"""
+    def _parse_response(self, content: str, text_input: str = None, framework: str = None) -> Dict[str, Any]:
+        """Parse LLM response with integrated quality assurance validation"""
+        # Step 1: Parse the LLM response
+        raw_response = {}
+        parsed_scores = {}
+        
         try:
             # Try to parse as JSON first
-            return json.loads(content)
+            raw_response = json.loads(content)
+            parsed_scores = raw_response.get('scores', {})
         except json.JSONDecodeError:
             # Try to extract JSON from code blocks (remove ```json and ```)
             cleaned_content = content.strip()
@@ -555,10 +650,63 @@ class DirectAPIClient:
             cleaned_content = cleaned_content.strip()
             
             try:
-                return json.loads(cleaned_content)
+                raw_response = json.loads(cleaned_content)
+                parsed_scores = raw_response.get('scores', {})
             except json.JSONDecodeError:
                 # If still not JSON, try to extract structured data
-                return self._extract_narrative_scores(content)
+                raw_response = self._extract_narrative_scores(content)
+                parsed_scores = raw_response.get('scores', {})
+        
+        # Step 2: Run Quality Assurance Validation (if context available)
+        if text_input and framework and parsed_scores:
+            try:
+                from ..utils.llm_quality_assurance import validate_llm_analysis
+                
+                quality_assessment = validate_llm_analysis(
+                    text_input=text_input,
+                    framework=framework,
+                    llm_response=raw_response,
+                    parsed_scores=parsed_scores
+                )
+                
+                # Add quality assurance results to response
+                raw_response['quality_assurance'] = {
+                    'confidence_level': quality_assessment.confidence_level,
+                    'confidence_score': quality_assessment.confidence_score,
+                    'summary': quality_assessment.summary,
+                    'requires_second_opinion': quality_assessment.requires_second_opinion,
+                    'anomalies_detected': quality_assessment.anomalies_detected,
+                    'validation_timestamp': quality_assessment.quality_metadata['validation_timestamp'],
+                    'checks_passed': quality_assessment.quality_metadata['checks_passed'],
+                    'total_checks': quality_assessment.quality_metadata['total_checks']
+                }
+                
+                # Log quality issues for monitoring
+                if quality_assessment.confidence_level == 'LOW':
+                    print(f"🚨 LOW confidence analysis detected: {quality_assessment.summary}")
+                elif quality_assessment.requires_second_opinion:
+                    print(f"⚠️ Second opinion recommended: {quality_assessment.summary}")
+                elif quality_assessment.anomalies_detected:
+                    print(f"📊 Anomalies detected: {len(quality_assessment.anomalies_detected)} issues")
+                    
+                # Issue warnings for critical patterns (Roosevelt 1933 case)
+                for check in quality_assessment.individual_checks:
+                    if check.check_name == 'default_value_ratio' and not check.passed:
+                        print(f"🔴 CRITICAL: High default value ratio detected - {check.message}")
+                    elif check.check_name == 'position_calculation' and not check.passed:
+                        print(f"🔴 CRITICAL: Suspicious position calculation - {check.message}")
+                
+            except Exception as qa_error:
+                print(f"⚠️ Quality assurance validation failed: {qa_error}")
+                # Add minimal quality info to indicate QA failure
+                raw_response['quality_assurance'] = {
+                    'confidence_level': 'UNKNOWN',
+                    'confidence_score': 0.5,
+                    'summary': f"Quality validation failed: {str(qa_error)}",
+                    'validation_error': str(qa_error)
+                }
+        
+        return raw_response
     
     def _extract_narrative_scores(self, content: str) -> Dict[str, Any]:
         """Extract narrative gravity scores from text response"""
@@ -673,7 +821,7 @@ class DirectAPIClient:
                     request_type="analysis"
                 )
             
-            return self._parse_response(content), cost
+            return self._parse_response(content, self._current_text, self._current_framework), cost
             
         except Exception as e:
             print(f"Google AI API error: {e}")
@@ -750,4 +898,54 @@ class DirectAPIClient:
                 "gemini-1.5-pro",
             ]
         
-        return {k: v for k, v in models.items() if v}  # Only return providers with models 
+        return {k: v for k, v in models.items() if v}  # Only return providers with models
+    
+    def get_retry_statistics(self) -> Dict[str, Any]:
+        """Get comprehensive retry and reliability statistics."""
+        stats = {
+            'retry_handler_available': self.retry_handler is not None,
+            'failover_handler_available': self.failover_handler is not None
+        }
+        
+        if self.retry_handler:
+            retry_stats = self.retry_handler.get_retry_stats()
+            stats.update(retry_stats)
+        
+        if self.failover_handler:
+            health_status = self.failover_handler.get_health_status()
+            stats['provider_health'] = health_status
+        
+        return stats
+    
+    def log_reliability_report(self):
+        """Log comprehensive reliability report."""
+        print("\n📊 DIRECTAPICLIENT RELIABILITY REPORT")
+        print("=" * 50)
+        
+        stats = self.get_retry_statistics()
+        
+        if stats['retry_handler_available']:
+            print(f"✅ Retry Handler: Active")
+            print(f"   Total API calls: {stats.get('total_calls', 0)}")
+            print(f"   Success rate: {stats.get('success_rate', 0):.1%}")
+            print(f"   Retry rate: {stats.get('retry_rate', 0):.1%}")
+            
+            if stats.get('retries_by_reason'):
+                print("   Retries by reason:")
+                for reason, count in stats['retries_by_reason'].items():
+                    print(f"     {reason}: {count}")
+        else:
+            print("⚠️ Retry Handler: Not available (basic error handling)")
+        
+        if stats['failover_handler_available']:
+            provider_health = stats['provider_health']
+            print(f"✅ Failover Handler: Active")
+            print(f"   Healthy providers: {len(provider_health['healthy_providers'])}")
+            for provider, healthy in provider_health['provider_health'].items():
+                status = "✅ Healthy" if healthy else "❌ Unhealthy"
+                failures = provider_health['failure_counts'].get(provider, 0)
+                print(f"     {provider}: {status} ({failures} failures)")
+        else:
+            print("⚠️ Failover Handler: Not available")
+        
+        print("=" * 50) 

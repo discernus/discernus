@@ -15,18 +15,18 @@ try:
     from ..api_clients.direct_api_client import DirectAPIClient
     from ..prompts.template_manager import PromptTemplateManager
     from ..framework_manager import FrameworkManager
-    from ..engine import NarrativeGravityWellsElliptical
+    from ..engine_circular import NarrativeGravityWellsCircular
 except ImportError:
     # Fallback to absolute imports for direct execution
     from src.narrative_gravity.api_clients.direct_api_client import DirectAPIClient
     from src.narrative_gravity.prompts.template_manager import PromptTemplateManager
     from src.narrative_gravity.framework_manager import FrameworkManager
-    from src.narrative_gravity.engine import NarrativeGravityWellsElliptical
+    from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
 
 class RealAnalysisService:
     """
     Real analysis service that uses existing working components instead of fake data.
-    Integrates DirectAPIClient + PromptTemplateManager + NarrativeGravityWellsElliptical.
+    Integrates DirectAPIClient + PromptTemplateManager + NarrativeGravityWellsCircular.
     """
     
     def __init__(self):
@@ -34,7 +34,7 @@ class RealAnalysisService:
         self.llm_client = DirectAPIClient()
         self.prompt_manager = PromptTemplateManager()
         self.framework_manager = FrameworkManager()
-        self.engine = NarrativeGravityWellsElliptical()
+        self.engine = NarrativeGravityWellsCircular()
         
         # Check what LLM providers are available
         self.available_connections = self.llm_client.test_connections()
@@ -81,11 +81,11 @@ class RealAnalysisService:
             # Step 3: Parse LLM response into structured data
             parsed_analysis = self._parse_llm_response(llm_response, framework_name)
             
-            # Step 4: Calculate narrative position using existing engine
+            # Step 4: Calculate narrative position using circular engine
             narrative_position = self.engine.calculate_narrative_position(parsed_analysis['raw_scores'])
             
-            # Step 5: Calculate advanced metrics
-            calculated_metrics = self.engine.calculate_elliptical_metrics(
+            # Step 5: Calculate advanced metrics (circular engine compatible)
+            calculated_metrics = self._calculate_circular_metrics(
                 narrative_position[0], 
                 narrative_position[1], 
                 parsed_analysis['raw_scores']
@@ -165,16 +165,21 @@ class RealAnalysisService:
             print(f"⚠️ LLM response parsing failed: {e}")
             return self._generate_default_scores(framework)
     
-    def _extract_scores_from_text(self, response_text: str) -> Dict[str, float]:
+    def _extract_scores_from_text(self, response_text: str, framework: str = "civic_virtue") -> Dict[str, float]:
         """
         Fallback method to extract scores from text response.
         Looks for patterns like "Dignity: 0.75" or "Truth: 7.5/10"
         """
         scores = {}
         
-        # Common well names for civic virtue framework
-        well_names = ['Dignity', 'Truth', 'Justice', 'Hope', 'Pragmatism', 
-                     'Tribalism', 'Manipulation', 'Resentment', 'Fantasy', 'Fear']
+        # Get well names based on framework
+        if framework == "mft_persuasive_force":
+            well_names = ['Compassion', 'Equity', 'Solidarity', 'Hierarchy', 'Purity',
+                         'Cruelty', 'Exploitation', 'Treachery', 'Rebellion', 'Corruption']
+        else:
+            # Default to civic virtue framework wells
+            well_names = ['Dignity', 'Truth', 'Justice', 'Hope', 'Pragmatism', 
+                         'Tribalism', 'Manipulation', 'Resentment', 'Fantasy', 'Fear']
         
         for well in well_names:
             # Look for patterns like "Dignity: 0.75" or "Dignity: 7.5/10"
@@ -213,10 +218,25 @@ class RealAnalysisService:
         if framework == "civic_virtue":
             expected_wells = ['Dignity', 'Truth', 'Justice', 'Hope', 'Pragmatism', 
                             'Tribalism', 'Manipulation', 'Resentment', 'Fantasy', 'Fear']
+        elif framework == "mft_persuasive_force":
+            expected_wells = ['Compassion', 'Equity', 'Solidarity', 'Hierarchy', 'Purity',
+                            'Cruelty', 'Exploitation', 'Treachery', 'Rebellion', 'Corruption']
         else:
-            # Default to civic virtue wells
-            expected_wells = ['Dignity', 'Truth', 'Justice', 'Hope', 'Pragmatism', 
-                            'Tribalism', 'Manipulation', 'Resentment', 'Fantasy', 'Fear']
+            # Try to get wells from framework config
+            try:
+                framework_path = Path("frameworks") / framework / "framework.json"
+                if framework_path.exists():
+                    import json
+                    with open(framework_path, 'r') as f:
+                        framework_config = json.load(f)
+                    expected_wells = list(framework_config.get('wells', {}).keys())
+                else:
+                    # Last resort fallback to civic virtue
+                    expected_wells = ['Dignity', 'Truth', 'Justice', 'Hope', 'Pragmatism', 
+                                    'Tribalism', 'Manipulation', 'Resentment', 'Fantasy', 'Fear']
+            except:
+                expected_wells = ['Dignity', 'Truth', 'Justice', 'Hope', 'Pragmatism', 
+                                'Tribalism', 'Manipulation', 'Resentment', 'Fantasy', 'Fear']
         
         normalized_scores = {}
         for well in expected_wells:
@@ -345,6 +365,35 @@ class RealAnalysisService:
                     break
         
         return relevant_sentences[:2] if relevant_sentences else [f"Thematic elements related to {well.lower()} detected in the narrative."]
+    
+    def _calculate_circular_metrics(
+        self, 
+        x: float, 
+        y: float, 
+        raw_scores: Dict[str, float]
+    ) -> Dict[str, float]:
+        """
+        Calculate metrics compatible with circular coordinate system.
+        """
+        import math
+        
+        # Convert circular coordinates to metrics
+        radius = math.sqrt(x*x + y*y)
+        angle = math.atan2(y, x) if x != 0 or y != 0 else 0
+        
+        # Calculate well score statistics
+        scores = list(raw_scores.values())
+        positive_scores = [s for s in scores if s > 0.5]
+        negative_scores = [s for s in scores if s <= 0.5]
+        
+        metrics = {
+            "narrative_elevation": radius,  # Distance from center
+            "polarity": (sum(positive_scores) - sum(negative_scores)) / len(scores) if scores else 0.0,
+            "coherence": 1.0 - (max(scores) - min(scores)) if scores else 0.8,  # Inverse of score range
+            "directional_purity": abs(math.cos(angle)) + abs(math.sin(angle))  # How close to axes
+        }
+        
+        return metrics
     
     def _generate_fallback_analysis(
         self, 
