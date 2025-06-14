@@ -412,8 +412,8 @@ framework = session.query(FrameworkVersion).filter_by(
                 weights_data = json.load(f)
             
             # Basic structure validation
-            if 'name' not in framework_data:
-                print("❌ framework.json missing 'name' field")
+            if 'framework_name' not in framework_data:
+                print("❌ framework.json missing 'framework_name' field")
                 return False
             
             if 'version' not in framework_data:
