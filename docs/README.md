@@ -3,7 +3,7 @@
 **World-class computational narrative analysis documentation with MECE architecture**
 
 *Last Updated: June 14, 2025*  
-*Documentation Architecture: MECE (Mutually Exclusive, Collectively Exhaustive)*
+*Documentation Architecture: MECEC (Mutually Exclusive, Collectively Exhaustive, Current)*
 
 ---
 
@@ -94,12 +94,13 @@ The platform implements a **5-dimensional experimental design space**:
 
 ## 📚 **Documentation Organization Principles**
 
-### **MECE Architecture Benefits**
-- **No Content Overlap**: Each document has single, clear purpose
-- **Complete Coverage**: All user needs and workflows documented
-- **Audience-Driven**: Clear separation between researchers, developers, users
-- **Workflow-Organized**: Documents grouped by phase of user journey
-- **Cross-Referenced**: Clear navigation between related concepts
+### **MECEC Architecture Benefits**
+- **Mutually Exclusive**: Each document has single, clear purpose with no content overlap
+- **Collectively Exhaustive**: Complete coverage of all user needs and workflows with no gaps
+- **Current**: All information is up-to-date and relevant; completed items moved to historical archives
+- **Audience-Driven**: Clear separation between researchers, developers, users, and managers
+- **Workflow-Organized**: Documents grouped by phase of user journey and temporal relevance
+- **Cross-Referenced**: Clear navigation between related concepts with currency indicators
 
 ### **Audience Separation**
 - **Research Guide**: Everything researchers need for experiments and methodology
@@ -154,10 +155,11 @@ The platform implements a **5-dimensional experimental design space**:
 - **🎯 Project Management**: 60 documents (39%) - Planning, status, strategic direction
 
 ### **Quality Assurance**
-- **MECE Compliance**: All documents follow mutually exclusive, collectively exhaustive principles
-- **Version Control**: All documents tracked with last updated dates
-- **Cross-Reference Integrity**: Navigation links maintained and validated
-- **Audience Consistency**: Clear audience identification throughout
+- **MECEC Compliance**: All documents follow mutually exclusive, collectively exhaustive, current principles
+- **Currency Maintenance**: Completed items systematically moved to historical archives
+- **Version Control**: All documents tracked with last updated dates and relevance status
+- **Cross-Reference Integrity**: Navigation links maintained and validated with temporal accuracy
+- **Audience Consistency**: Clear audience identification with current workflow positioning
 
 ---
 
@@ -189,14 +191,16 @@ The platform implements a **5-dimensional experimental design space**:
 ### **Documentation Maintenance**
 - **Update Responsibility**: Document maintainers specified in each section
 - **Review Schedule**: Quarterly reviews for structural changes, immediate updates for content
-- **Quality Standards**: MECE principles maintained, cross-references updated
-- **Version Control**: All changes tracked with clear change descriptions
+- **Currency Procedures**: Daily/completed items moved to historical archives within 24 hours
+- **Quality Standards**: MECEC principles maintained, cross-references updated
+- **Version Control**: All changes tracked with clear change descriptions and temporal relevance
 
 ### **Contributing**
-- **Content Guidelines**: Follow MECE principles and audience separation
+- **Content Guidelines**: Follow MECEC principles and audience separation
 - **Navigation Updates**: Maintain cross-reference matrix when adding/moving documents
-- **Quality Standards**: Include purpose statement, audience identification, and clear structure
-- **Review Process**: All major changes reviewed for MECE compliance and navigation integrity
+- **Currency Requirements**: Mark completion status and move completed items to archives
+- **Quality Standards**: Include purpose statement, audience identification, and temporal relevance
+- **Review Process**: All major changes reviewed for MECEC compliance and navigation integrity
 
 ---
 
