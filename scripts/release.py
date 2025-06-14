@@ -96,7 +96,7 @@ class ReleaseManager:
         
         # Check root directory cleanliness
         allowed_root_files = {
-            'README.md', 'CHANGELOG.md', 'LICENSE', 'launch.py', 'launch_chainlit.py',
+            'README.md', 'CHANGELOG.md', 'LICENSE', 'CONTRIBUTING.md', 'launch.py', 'launch_chainlit.py',
             'check_database.py', 'requirements.txt', 'env.example', 'alembic.ini',
             'pytest.ini', '.gitignore', '.cursorrules', 'LAUNCH_GUIDE.md',
             'package.json', 'package-lock.json', 'playwright.config.ts', 'chainlit.md',
@@ -110,7 +110,7 @@ class ReleaseManager:
             'archive', 'model_output', 'framework_prompts',
             '.pytest_cache', 'tmp', 'frontend', 'node_modules', 'paper',
             'public', 'templates', '.chainlit', '.files', 'playwright-report',
-            'test-results'
+            'test-results', 'test_output', 'futures', 'experiment_reports'
         }
         
         for item in self.root_dir.iterdir():
