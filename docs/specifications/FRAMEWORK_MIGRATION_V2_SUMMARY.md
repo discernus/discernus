@@ -259,7 +259,7 @@ for fw in ['civic_virtue', 'political_spectrum', 'fukuyama_identity', 'mft_persu
 ## 📚 **Related Documentation**
 
 ### **Architecture Documentation**
-- [`FRAMEWORK_SOURCE_OF_TRUTH.md`](../architecture/FRAMEWORK_SOURCE_OF_TRUTH.md) - Database-first architecture
+- [`FRAMEWORK_DEVELOPMENT_AND_MAINTENANCE.md`](../architecture/FRAMEWORK_DEVELOPMENT_AND_MAINTENANCE.md) - Comprehensive framework development guide
 - [`FRAMEWORK_ARCHITECTURE.md`](../architecture/FRAMEWORK_ARCHITECTURE.md) - Complete framework system design
 - [`CURRENT_SYSTEM_STATUS.md`](../architecture/CURRENT_SYSTEM_STATUS.md) - Current operational status
 

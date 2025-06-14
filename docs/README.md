@@ -17,7 +17,7 @@ This directory contains comprehensive documentation for the Narrative Gravity An
 
 **Implementation Details**
 - [`FRAMEWORK_IMPLEMENTATION_SUMMARY.md`](architecture/FRAMEWORK_IMPLEMENTATION_SUMMARY.md) - Framework implementation details
-- [`FRAMEWORK_SOURCE_OF_TRUTH.md`](architecture/FRAMEWORK_SOURCE_OF_TRUTH.md) - Database-first framework architecture and sync tools
+- [`FRAMEWORK_DEVELOPMENT_AND_MAINTENANCE.md`](architecture/FRAMEWORK_DEVELOPMENT_AND_MAINTENANCE.md) - Comprehensive framework development, quality assurance, and production management guide
 - [`COMPONENT_VERSIONING_ARCHITECTURE.md`](architecture/COMPONENT_VERSIONING_ARCHITECTURE.md) - Component versioning system and database architecture
 - [`PROMPT_ARCHITECTURE.md`](architecture/PROMPT_ARCHITECTURE.md) - Unified prompt template system
 - [`BACKEND_SERVICES_CAPABILITIES.md`](architecture/BACKEND_SERVICES_CAPABILITIES.md) - Current backend capabilities

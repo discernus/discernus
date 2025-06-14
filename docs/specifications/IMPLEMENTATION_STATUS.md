@@ -92,7 +92,7 @@ All 5 frameworks successfully migrated and validated:
 | moral_rhetorical_posture | ✅ Complete | v2025.06.14 | ✅ Passed | ✅ WCAG AA Compliant |
 
 **6. Documentation** ✅
-- **Architecture Guide:** `docs/development/FRAMEWORK_SOURCE_OF_TRUTH.md`
+- **Architecture Guide:** `docs/architecture/FRAMEWORK_DEVELOPMENT_AND_MAINTENANCE.md`
 - **Implementation Status:** This document
 - **Workflow Documentation:** Complete development and deployment guides
 - **Schema Documentation:** Embedded in JSON schema with examples

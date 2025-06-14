@@ -75,7 +75,7 @@ Following comprehensive end-to-end pipeline testing (June 13, 2025), the system 
 - Test results across all 5 frameworks with 2 test cases each
 
 ### **Framework Migration Documentation**
-**Primary Reference**: `docs/architecture/FRAMEWORK_SOURCE_OF_TRUTH.md`
+**Primary Reference**: `docs/architecture/FRAMEWORK_DEVELOPMENT_AND_MAINTENANCE.md`
 - Database-first architecture implementation
 - Framework synchronization procedures
 - v2025.06.13 migration details
