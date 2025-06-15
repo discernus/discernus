@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDITI Framework Validation Study - Setup Report</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status-success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .status-pending {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        .status-error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        .hypothesis {
+            border-left: 4px solid #007bff;
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        .file-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .next-steps {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .metric {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 IDITI Framework Validation Study</h1>
+        <h2>Individual Dignity Identity v Tribal Identity</h2>
+        <p>Comprehensive Three-Hypothesis Validation Experiment</p>
+        <p><strong>Generated:</strong> June 14, 2025 | <strong>Status:</strong> <span class="status-success">Setup Complete</span></p>
+    </div>
+
+    <div class="section">
+        <h2>📋 Executive Summary</h2>
+        <p>The IDITI (Individual Dignity Identity v Tribal Identity) framework has been successfully created as a specialized version of the Civic Virtue framework, focusing exclusively on the identity dipole. This validation study is designed to test three critical hypotheses about the framework's performance.</p>
+        
+        <div class="metric">Framework: IDITI v2025.06.14</div>
+        <div class="metric">Validation Texts: 32</div>
+        <div class="metric">Categories: 6</div>
+        <div class="metric">Model: GPT-4o</div>
+        <div class="metric">Analysis Type: Traditional Linear</div>
+    </div>
+
+    <div class="section">
+        <h2>🔬 Three-Hypothesis Framework</h2>
+        
+        <div class="hypothesis">
+            <h3>Hypothesis 1: Discriminative Validity</h3>
+            <p><strong>Question:</strong> Can the framework distinguish dignity from tribalism rhetoric?</p>
+            <p><strong>Criteria:</strong></p>
+            <ul>
+                <li>Dignity texts should score >0.6 on Dignity well, <0.4 on Tribalism well</li>
+                <li>Tribalism texts should score >0.6 on Tribalism well, <0.4 on Dignity well</li>
+                <li>Mixed texts should score 0.4-0.6 on both wells</li>
+                <li>Statistical significance p<0.05 between groups</li>
+            </ul>
+        </div>
+
+        <div class="hypothesis">
+            <h3>Hypothesis 2: Ideological Agnosticism</h3>
+            <p><strong>Question:</strong> Does the framework score content rather than political orientation?</p>
+            <p><strong>Criteria:</strong></p>
+            <ul>
+                <li>Conservative dignity should score similarly to progressive dignity</li>
+                <li>Conservative tribalism should score similarly to progressive tribalism</li>
+                <li>No significant difference between ideological groups within same category</li>
+            </ul>
+        </div>
+
+        <div class="hypothesis">
+            <h3>Hypothesis 3: Ground Truth Alignment</h3>
+            <p><strong>Question:</strong> Do pre-labeled texts match expected framework responses?</p>
+            <p><strong>Criteria:</strong></p>
+            <ul>
+                <li>Validates our manual categorization process</li>
+                <li>Extreme controls should show strongest expected patterns</li>
+                <li>Framework should align with human expert judgment</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📊 Validation Dataset</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Count</th>
+                    <th>Description</th>
+                    <th>Expected Pattern</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Extreme Controls</td>
+                    <td>4</td>
+                    <td>Pure examples created for validation</td>
+                    <td>Strongest expected signals</td>
+                </tr>
+                <tr>
+                    <td>Mixed Controls</td>
+                    <td>4</td>
+                    <td>Balanced examples with both elements</td>
+                    <td>Moderate scores on both wells</td>
+                </tr>
+                <tr>
+                    <td>Conservative Dignity</td>
+                    <td>6</td>
+                    <td>McCain, Romney, Reagan speeches</td>
+                    <td>High dignity, low tribalism</td>
+                </tr>
+                <tr>
+                    <td>Conservative Tribalism</td>
+                    <td>6</td>
+                    <td>Trump, King, Beck rhetoric</td>
+                    <td>High tribalism, low dignity</td>
+                </tr>
+                <tr>
+                    <td>Progressive Dignity</td>
+                    <td>6</td>
+                    <td>Obama, Warren, Lewis speeches</td>
+                    <td>High dignity, low tribalism</td>
+                </tr>
+                <tr>
+                    <td>Progressive Tribalism</td>
+                    <td>6</td>
+                    <td>Sanders, AOC, Kendi rhetoric</td>
+                    <td>High tribalism, low dignity</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>✅ Completed Setup Tasks</h2>
+        <ul>
+            <li class="status-success">✅ Created IDITI framework (frameworks/iditi/)</li>
+            <li class="status-success">✅ Registered framework in database</li>
+            <li class="status-success">✅ Generated validation corpus (3,827 text chunks)</li>
+            <li class="status-success">✅ Created experiment configuration</li>
+            <li class="status-success">✅ Generated analysis templates (Jupyter, R, Stata)</li>
+            <li class="status-success">✅ Opened Jupyter notebook for analysis</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📁 Generated Files</h2>
+        <div class="file-list">
+            <h4>Framework Files:</h4>
+            <ul>
+                <li><code>frameworks/iditi/framework.json</code> - Main framework configuration</li>
+                <li><code>frameworks/iditi/dipoles.json</code> - Identity dipole definition</li>
+                <li><code>frameworks/iditi/weights.json</code> - Well weighting configuration</li>
+                <li><code>frameworks/iditi/README.md</code> - Framework documentation</li>
+            </ul>
+            
+            <h4>Experiment Files:</h4>
+            <ul>
+                <li><code>experiment_reports/iditi_validation_corpus.jsonl</code> - Validation dataset (2.9MB)</li>
+                <li><code>experiment_reports/iditi_validation_config.yaml</code> - Experiment configuration</li>
+                <li><code>experiment_reports/run_iditi_experiment.py</code> - Direct execution script</li>
+            </ul>
+            
+            <h4>Analysis Templates:</h4>
+            <ul>
+                <li><code>experiment_reports/analysis/notebooks/iditi_validation_study_exploration.ipynb</code> - Jupyter notebook</li>
+                <li><code>experiment_reports/analysis/r_scripts/iditi_validation_study_analysis.R</code> - R analysis script</li>
+                <li><code>experiment_reports/analysis/stata_scripts/iditi_validation_study_publication.do</code> - Stata script</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="next-steps">
+        <h2>🚀 Next Steps for Execution</h2>
+        <h3>Option 1: Jupyter Notebook Analysis (Recommended)</h3>
+        <div class="code-block">
+# The Jupyter notebook is already open and contains:
+# - Data loading and preprocessing
+# - Statistical analysis for all three hypotheses
+# - Visualization generation
+# - Publication-ready results
+
+# Simply run the cells in the notebook to execute the analysis
+        </div>
+
+        <h3>Option 2: Command Line Execution</h3>
+        <div class="code-block">
+# Run the complete validation study
+python3 experiment_reports/run_iditi_experiment.py
+
+# Or use the academic pipeline
+python3 src/narrative_gravity/cli/academic_pipeline.py \
+    --study-name "iditi_validation_study" \
+    --frameworks "iditi" \
+    --execute-all \
+    --output-dir "experiment_reports"
+        </div>
+
+        <h3>Option 3: R Statistical Analysis</h3>
+        <div class="code-block">
+# Run the R analysis script
+Rscript experiment_reports/analysis/r_scripts/iditi_validation_study_analysis.R
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📈 Expected Outcomes</h2>
+        <p>Upon successful execution, the validation study will generate:</p>
+        <ul>
+            <li><strong>Statistical Results:</strong> Hypothesis testing with p-values and effect sizes</li>
+            <li><strong>Visualizations:</strong> Circular coordinate plots, comparative analyses, distribution plots</li>
+            <li><strong>Validation Report:</strong> Comprehensive assessment of framework performance</li>
+            <li><strong>Academic Outputs:</strong> Publication-ready tables and figures</li>
+            <li><strong>Replication Package:</strong> Complete materials for reproducible research</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🔧 Technical Configuration</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Version/Value</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Framework</td>
+                    <td>IDITI v2025.06.14</td>
+                    <td class="status-success">Registered</td>
+                </tr>
+                <tr>
+                    <td>Prompt Template</td>
+                    <td>hierarchical_analysis v2.1.0</td>
+                    <td class="status-success">Available</td>
+                </tr>
+                <tr>
+                    <td>Weighting Method</td>
+                    <td>linear_traditional</td>
+                    <td class="status-pending">Needs Registration</td>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>GPT-4o</td>
+                    <td class="status-success">Ready</td>
+                </tr>
+                <tr>
+                    <td>Database</td>
+                    <td>PostgreSQL</td>
+                    <td class="status-success">Connected</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>📚 Research Context</h2>
+        <p>This validation study represents a critical step in developing specialized narrative analysis frameworks. The IDITI framework focuses on a fundamental tension in political discourse: the balance between individual dignity and tribal identity.</p>
+        
+        <p><strong>Theoretical Foundation:</strong></p>
+        <ul>
+            <li>Fukuyama, F. (2018). Identity: The Demand for Dignity and the Politics of Resentment</li>
+            <li>Jung, C. G. (1921). Psychological Types (Individual vs. Collective Identity concepts)</li>
+        </ul>
+        
+        <p>The validation approach follows rigorous academic standards with multiple hypothesis testing, statistical validation, and reproducible methodology.</p>
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; padding: 20px; color: #666;">
+        <p>Generated by Narrative Gravity Analysis Platform | June 14, 2025</p>
+        <p>For questions or support, refer to the project documentation</p>
+    </footer>
+</body>
+</html> 

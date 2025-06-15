@@ -1,0 +1,36 @@
+{
+  "framework_name": "iditi",
+  "display_name": "Individual Dignity Identity v Tribal Identity",
+  "version": "v2025.06.14",
+  "description": "The Individual Dignity Identity v Tribal Identity framework focuses exclusively on the tension between affirming individual moral worth and prioritizing group dominance or tribal loyalty.",
+  "dipoles": [
+    {
+      "name": "Identity",
+      "description": "Moral worth and group membership dynamics",
+      "positive": {
+        "name": "Dignity",
+        "description": "Affirms individual moral worth and universal rights, regardless of group identity. Emphasizes agency, pluralism, and character over affiliation.",
+        "language_cues": [
+          "equal dignity",
+          "inherent worth",
+          "regardless of background",
+          "individual character",
+          "universal rights",
+          "human agency"
+        ]
+      },
+      "negative": {
+        "name": "Tribalism",
+        "description": "Prioritizes group dominance, loyalty, or identity over individual agency. Often frames moral worth in in-group/out-group terms.",
+        "language_cues": [
+          "real Americans",
+          "our people",
+          "they don't belong",
+          "us vs them",
+          "group loyalty",
+          "identity politics"
+        ]
+      }
+    }
+  ]
+}

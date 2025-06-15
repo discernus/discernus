@@ -398,6 +398,18 @@ Items discovered or decided but not yet prioritized for current iteration. Gets 
 
 **Strategic Justification**: Critical validation study to establish computational-human alignment in political discourse analysis using strategic single-dipole approach (Dignity vs Tribalism) with anonymous political excerpts.
 
+### **Methodological Design Review and Enhancement**
+*Reference: `docs/project-management/planning/specialized/human_validation/reviewer_feedback_validation_design_gaps.md`*
+
+- [ ] **Integrate Reviewer Feedback on Validation Study Methodology** - Address five critical methodological gaps identified by external reviewer for journal-level acceptance (discovered: December 2024, priority: HIGH)
+  - Implement inter-rater reliability (IRR) metrics: Fleiss' Kappa for 3+ raters, target ≥0.6 (good), ≥0.8 (excellent)
+  - Design stratified rater recruitment across ideological spectrum (liberal, conservative, moderate) to address single-source bias
+  - Add null model baselines: random vector baseline and majority sentiment model for comparative performance
+  - Develop comprehensive rater training protocol with 1-2 page primer, plain-language well definitions, annotated examples
+  - Conduct power analysis for statistical significance: target 100-150 triplets per well for medium effect detection
+  - Strategic decision: Pilot with 3 wells (Dignity/Tribalism, Truth/Fantasy, Justice/Resentment) before full 10-well study
+  - Budget impact: ~$1,500-2,000 for quality diverse rater pool vs original design
+
 ### **Phase 1: LLM Baseline Development and Validation**
 *Reordered from Phase 2 to enable iterative refinement before human annotation investment*
 

@@ -278,6 +278,18 @@ class YouTubeCorpusIngestionService(IntelligentIngestionService):
         # Use LLM extraction but enhance with video metadata
         metadata = self.extractor.extract_metadata(content, f"{video_info.video_id}_transcript.txt")
         
+        # Cross-validate speaker identification with YouTube title
+        if metadata.author and video_info.title:
+            potential_conflict = self._check_speaker_conflict(metadata.author, video_info.title)
+            if potential_conflict:
+                metadata.confidence_score -= 15
+                metadata.extraction_notes.append(
+                    f"POTENTIAL SPEAKER CONFLICT: LLM identified '{metadata.author}' but YouTube title '{video_info.title}' suggests different speaker"
+                )
+                print(f"⚠️  Speaker identification conflict detected!")
+                print(f"   LLM identified: {metadata.author}")
+                print(f"   YouTube title: {video_info.title}")
+        
         # Enhance with YouTube metadata
         if not metadata.title and video_info.title:
             metadata.title = video_info.title
@@ -303,10 +315,74 @@ class YouTubeCorpusIngestionService(IntelligentIngestionService):
         
         return metadata
     
+    def _check_speaker_conflict(self, llm_speaker: str, youtube_title: str) -> bool:
+        """Check if LLM speaker conflicts with YouTube title patterns"""
+        
+        # Extract potential speakers from YouTube title
+        title_patterns = [
+            r'(President|Governor|Senator|Mayor|Rep\.|Sen\.) ([A-Z][a-z]+)',
+            r'Gov\s+([A-Z][a-z]+)',  # "Gov Perry" pattern
+            r'([A-Z][a-z]+) (speech|address|remarks)',
+        ]
+        
+        youtube_speakers = []
+        for pattern in title_patterns:
+            matches = re.findall(pattern, youtube_title, re.IGNORECASE)
+            for match in matches:
+                if isinstance(match, tuple):
+                    youtube_speakers.extend([part.strip() for part in match if part.strip() and len(part.strip()) > 2])
+                else:
+                    youtube_speakers.append(match.strip())
+        
+        if not youtube_speakers:
+            return False  # No conflict if we can't extract speaker from title
+        
+        # Check if LLM speaker shares any name parts with YouTube speakers
+        llm_name_parts = set(llm_speaker.lower().split())
+        for youtube_speaker in youtube_speakers:
+            youtube_name_parts = set(youtube_speaker.lower().split())
+            if llm_name_parts & youtube_name_parts:  # Any overlap
+                return False  # No conflict
+        
+        return True  # Conflict detected
+    
     def _extract_speaker_from_youtube(self, channel: str, content: str) -> str:
         """Try to identify the actual speaker from channel name and content"""
         
-        # If channel contains person's name, use it
+        # Enhanced content analysis for speaker identification
+        content_start = content[:2000]  # Analyze more content for better accuracy
+        
+        # Look for direct speaker identification patterns (most reliable)
+        direct_patterns = [
+            r'I am ([A-Z][a-z]+ [A-Z][a-z]+)',
+            r'My name is ([A-Z][a-z]+ [A-Z][a-z]+)',
+            r'I\'m ([A-Z][a-z]+ [A-Z][a-z]+)',
+            r'This is ([A-Z][a-z]+ [A-Z][a-z]+)',
+            r'([A-Z][a-z]+ [A-Z][a-z]+) speaking',
+            r'Thank you.*I\'m ([A-Z][a-z]+ [A-Z][a-z]+)',
+        ]
+        
+        for pattern in direct_patterns:
+            match = re.search(pattern, content_start, re.IGNORECASE)
+            if match:
+                speaker_name = match.group(1)
+                # Validate it's a real name (not common words)
+                name_parts = speaker_name.split()
+                if len(name_parts) >= 2 and all(part.istitle() and len(part) > 1 for part in name_parts):
+                    return speaker_name
+        
+        # Look for political title + name patterns
+        title_patterns = [
+            r'(Governor|President|Senator|Mayor|Representative) ([A-Z][a-z]+ [A-Z][a-z]+)',
+            r'(Gov\.|Pres\.|Sen\.|Rep\.) ([A-Z][a-z]+ [A-Z][a-z]+)',
+        ]
+        
+        for pattern in title_patterns:
+            match = re.search(pattern, content_start)
+            if match:
+                return f"{match.group(1)} {match.group(2)}"
+        
+        # If channel contains person's name, use it (but with validation)
         person_patterns = [
             r'([A-Z][a-z]+ [A-Z][a-z]+)',  # First Last
             r'(President [A-Z][a-z]+)',    # President Name
@@ -317,19 +393,11 @@ class YouTubeCorpusIngestionService(IntelligentIngestionService):
         for pattern in person_patterns:
             match = re.search(pattern, channel)
             if match:
-                return match.group(1)
-        
-        # Look for speaker identification in content
-        speaker_patterns = [
-            r'I am ([A-Z][a-z]+ [A-Z][a-z]+)',
-            r'My name is ([A-Z][a-z]+ [A-Z][a-z]+)',
-            r'([A-Z][a-z]+ [A-Z][a-z]+) speaking',
-        ]
-        
-        for pattern in speaker_patterns:
-            match = re.search(pattern, content[:1000])  # Check first 1000 chars
-            if match:
-                return match.group(1)
+                potential_name = match.group(1)
+                # Don't use organization names that might match the pattern
+                org_words = ['council', 'committee', 'center', 'institute', 'foundation', 'association']
+                if not any(org_word in potential_name.lower() for org_word in org_words):
+                    return potential_name
         
         return channel  # Fallback to channel name
     

@@ -15,6 +15,9 @@ python3 scripts/intelligent_ingest_youtube.py "YOUTUBE_URL" --verbose
 # OR demo version (no API key needed for testing)
 python3 scripts/demo_youtube_ingestion.py
 
+# Test the improved accuracy features
+python3 scripts/test_youtube_improvements.py
+
 # Check results
 cat tmp/youtube_ingestion_*/VIDEO_ID_result.json
 ```
@@ -25,8 +28,42 @@ cat tmp/youtube_ingestion_*/VIDEO_ID_result.json
 **Output**: Research-ready corpus entries with enhanced metadata:
 - `davison_speech_2010_lipnBHey` with title, author, date, type, description
 - **Plus YouTube metadata**: Views, channel, duration, upload date
+- **Cross-validated speaker identification** with conflict detection
 - Automatically registered in your research database
 - Ready for narrative gravity analysis
+
+## 🆕 NEW: Enhanced Accuracy Features (June 2025)
+
+### Cross-Validation System
+The tool now **automatically detects speaker identification conflicts** between AI analysis and YouTube metadata:
+
+```bash
+# When processing, you may see warnings like:
+⚠️  Speaker identification conflict detected!
+   LLM identified: Greg Abbott
+   YouTube title: Gov Perry ALEC 2016
+
+# Confidence score automatically reduced by 15 points
+# Conflict flagged in extraction notes for manual review
+```
+
+### Enhanced Speaker Extraction
+**Improved accuracy** through better content analysis:
+- ✅ **Direct introductions**: "My name is Rick Perry..."
+- ✅ **Political titles**: "Governor Abbott speaking..."
+- ✅ **Validation patterns**: Filters out organization names
+- ✅ **Extended content analysis**: Checks first 2000 characters
+
+### Quality Assurance Testing
+```bash
+# Test the accuracy improvements
+python3 scripts/test_youtube_improvements.py
+
+# Expected output:
+# ✅ Perry/Abbott misidentification - PASS
+# ✅ Correct identification - PASS  
+# ✅ Enhanced speaker extraction - PASS
+```
 
 ## Success Expectations
 
@@ -92,7 +129,15 @@ print(f'Added {results.total_matches} YouTube videos to corpus')
 |-------|-------|--------------|---------------|
 | ✅ **Successful** | ≥70% | Auto-registered in corpus | ✅ Ready for analysis |
 | ⚠️ **Uncertain** | 40-69% | Saved but not registered | 📝 Review & manually register |
+| 🚨 **Conflict Detected** | -15 points | Speaker ID conflict flagged | 🔍 **Manual review required** |
 | ❌ **Failed** | <40% | Basic fallback metadata | 🔧 Manual processing required |
+
+### Understanding Conflict Detection
+When the system detects a **speaker identification conflict** between AI analysis and YouTube metadata:
+- **Confidence score reduced by 15 points** (e.g., 85% → 70%)
+- **Warning message displayed** during processing
+- **Extraction notes flagged** with conflict details
+- **Manual review recommended** before using for research
 
 ## Common Issues & Quick Fixes
 
@@ -129,6 +174,22 @@ python3 scripts/intelligent_ingest_youtube.py "URL" --confidence-threshold 50
 
 # Check uncertain results for manual processing
 cat tmp/youtube_ingestion_*/VIDEO_ID_result.json
+```
+
+### 🚨 Speaker identification conflict detected
+```bash
+# When you see conflict warnings:
+⚠️  Speaker identification conflict detected!
+   LLM identified: Greg Abbott
+   YouTube title: Gov Perry ALEC 2016
+
+# Check the extraction notes in result file:
+jq '.metadata.extraction_notes' tmp/youtube_ingestion_*/VIDEO_ID_result.json
+
+# Manually verify the correct speaker and register:
+# 1. Watch/listen to video to confirm actual speaker
+# 2. Use manual registration with correct metadata
+# 3. Report pattern to improve future accuracy
 ```
 
 ## Manual Correction for Uncertain Results
