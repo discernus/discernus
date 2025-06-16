@@ -89,3 +89,4 @@ tmp/
 
 # Debug files
 frontend-debug*.png
+analysis_results/

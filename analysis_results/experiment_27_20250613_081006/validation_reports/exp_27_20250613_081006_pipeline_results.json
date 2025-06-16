@@ -1,8 +1,0 @@
-{
-  "study_name": "exp_27_20250613_081006",
-  "execution_date": "2025-06-13T08:10:06.808583",
-  "pipeline_version": "Priority 3 Enhanced",
-  "stages": {},
-  "error": "(psycopg2.errors.UndefinedTable) missing FROM-clause entry for table \"f\"\nLINE 37:          WHERE f.name IN ('5c85376b-cc78-434c-a70a-b82e31f71...\n                        ^\n\n[SQL: \n        SELECT \n            -- Experiment identifiers\n            e.id as experiment_id,\n            e.name as experiment_name,\n            e.created_at as experiment_date,\n            e.description as experiment_description,\n            \n            -- Run results  \n            r.id as run_id,\n            r.text_id,\n            r.llm_model,\n            r.text_content,\n            r.raw_scores,\n            r.hierarchical_ranking,\n            r.framework_fit_score,\n            r.narrative_elevation,\n            r.polarity,\n            r.coherence,\n            r.directional_purity,\n            r.narrative_position_x,\n            r.narrative_position_y,\n            r.api_cost,\n            r.duration_seconds,\n            r.created_at as run_date,\n            r.success,\n            \n            -- Template and framework info\n            e.prompt_template_id,\n            e.framework_config_id,\n            e.scoring_algorithm_id,\n            r.prompt_template_version,\n            r.framework_version\n            \n        FROM experiment e\n        JOIN run r ON e.id = r.experiment_id\n         WHERE f.name IN ('5c85376b-cc78-434c-a70a-b82e31f7192e') ORDER BY e.created_at DESC, r.created_at DESC]\n(Background on this error at: https://sqlalche.me/e/20/f405)",
-  "status": "failed"
-}
