@@ -603,6 +603,47 @@
   - Retained unique value: emergency reset procedures, root cause analysis, diagnostic patterns
   - Updated cursor rules to reference troubleshooting guide for advanced diagnostic procedures
 
+### 🧹 PROJECT STRUCTURE: Root Directory Cleanup & Standardization - June 17, 2025
+
+**COMPREHENSIVE DIRECTORY REORGANIZATION**: Implemented systematic cleanup of root directory to align with project standards and improve maintainability
+
+#### **Root Directory Standardization**
+- **Files Relocated**:
+  - Validation study files moved to `experiment_reports/`:
+    - `iditi_validation_study.json`
+    - `iditi_validation_study.yaml`
+    - `civic_virtue_real_validation_study.json`
+  - Test files moved to `tests/`:
+    - `test_iditi_analysis.py`
+  - Configuration files moved to appropriate locations:
+    - `.cursorrules` → `.files/`
+    - `LAUNCH_GUIDE.md` and `CONTRIBUTING.md` → `docs/`
+
+#### **Directory Structure Optimization**
+- **Academic Documentation**:
+  - `paper/` → `docs/paper/`
+  - `futures/` → `docs/planning/futures/`
+- **Analysis Outputs**:
+  - `analysis_results/` → `exports/analysis_results/`
+  - `model_output/` → `exports/model_output/`
+- **Testing Infrastructure**:
+  - `test_output/` → `tests/output/`
+- **Source Code Organization**:
+  - `schemas/` → `src/narrative_gravity/schemas/`
+  - `templates/` → `src/narrative_gravity/templates/`
+
+#### **System Maintenance**
+- **Cleanup Operations**:
+  - Removed system files (`.DS_Store`)
+  - Created backup in `tmp/root_cleanup_backup_20250617_073808/`
+  - Comprehensive logging in `logs/root_cleanup.log`
+
+**Strategic Impact**: Improved project maintainability and adherence to standard directory structure, making the codebase more accessible and easier to navigate for new contributors.
+
+## [v2.4.0] - Framework Agnosticism and Source of Truth Architecture - 2025-06-12
+
+## [Unreleased] - June 12, 2025
+
 ## [v2.4.0] - Framework Agnosticism and Source of Truth Architecture - 2025-06-12
 
 ## [Unreleased] - June 12, 2025
