@@ -1,0 +1,108 @@
+{
+  "analysis_type": "single_rater_descriptive",
+  "metadata": {
+    "model_count": 1,
+    "well_count": 10,
+    "sample_size": 72,
+    "analysis_timestamp": "2025-06-17T10:52:25.547236"
+  },
+  "descriptive_statistics": {
+    "well_dignity": {
+      "count": 72,
+      "mean": 0.491111111111111,
+      "std": 0.28250167919508695,
+      "min": 0.3,
+      "max": 1.0,
+      "range": 0.7,
+      "cv": 57.522966351940795
+    },
+    "well_truth": {
+      "count": 72,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_justice": {
+      "count": 72,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_hope": {
+      "count": 72,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_pragmatism": {
+      "count": 72,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_tribalism": {
+      "count": 72,
+      "mean": 0.4566666666666666,
+      "std": 0.28197992137089845,
+      "min": 0.0,
+      "max": 1.0,
+      "range": 1.0,
+      "cv": 61.74742803742303
+    },
+    "well_manipulation": {
+      "count": 72,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_resentment": {
+      "count": 72,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_fantasy": {
+      "count": 72,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_fear": {
+      "count": 72,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    }
+  },
+  "internal_consistency": {
+    "split_half_correlation": 0.7470264833648832,
+    "split_half_p_value": 4.874804660447925e-14,
+    "spearman_brown_coefficient": 0.8551976635477936,
+    "interpretation": "good"
+  },
+  "message": "Single rater detected - full reliability analysis requires multiple raters"
+}

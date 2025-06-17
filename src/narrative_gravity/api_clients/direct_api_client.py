@@ -629,7 +629,7 @@ class DirectAPIClient:
             return {"error": str(e)}, 0.0
     
     def _parse_response(self, content: str, text_input: str = None, framework: str = None) -> Dict[str, Any]:
-        """Parse LLM response with integrated quality assurance validation"""
+        """Parse LLM response with integrated quality assurance validation - supports both simple and hierarchical formats"""
         # Step 1: Parse the LLM response
         raw_response = {}
         parsed_scores = {}
@@ -637,7 +637,22 @@ class DirectAPIClient:
         try:
             # Try to parse as JSON first
             raw_response = json.loads(content)
-            parsed_scores = raw_response.get('scores', {})
+            
+            # Check if it's a hierarchical response (3-stage format)
+            if self._is_hierarchical_response(raw_response):
+                # Convert hierarchical format to simple format
+                parsed_scores = self._extract_hierarchical_scores(raw_response)
+                # Create a simplified response in the expected format
+                simplified_response = {
+                    'scores': parsed_scores,
+                    'analysis': raw_response.get('analysis', 'Hierarchical analysis completed'),
+                    'hierarchical_details': raw_response  # Keep original for debugging
+                }
+                raw_response = simplified_response
+            else:
+                # Handle simple format
+                parsed_scores = raw_response.get('scores', {})
+                
         except json.JSONDecodeError:
             # Try to extract JSON from code blocks (remove ```json and ```)
             cleaned_content = content.strip()
@@ -651,7 +666,19 @@ class DirectAPIClient:
             
             try:
                 raw_response = json.loads(cleaned_content)
-                parsed_scores = raw_response.get('scores', {})
+                
+                # Check hierarchical format again after cleaning
+                if self._is_hierarchical_response(raw_response):
+                    parsed_scores = self._extract_hierarchical_scores(raw_response)
+                    simplified_response = {
+                        'scores': parsed_scores,
+                        'analysis': raw_response.get('analysis', 'Hierarchical analysis completed'),
+                        'hierarchical_details': raw_response
+                    }
+                    raw_response = simplified_response
+                else:
+                    parsed_scores = raw_response.get('scores', {})
+                    
             except json.JSONDecodeError:
                 # If still not JSON, try to extract structured data
                 raw_response = self._extract_narrative_scores(content)
@@ -707,6 +734,46 @@ class DirectAPIClient:
                 }
         
         return raw_response
+    
+    def _is_hierarchical_response(self, response: Dict[str, Any]) -> bool:
+        """Check if response is in hierarchical 3-stage format"""
+        hierarchical_keys = {
+            'Stage 1 Ranking', 
+            'Stage 2 Weights', 
+            'Stage 3 Evidence and Scores'
+        }
+        response_keys = set(response.keys())
+        
+        # If response contains hierarchical stage keys, it's hierarchical
+        return len(hierarchical_keys.intersection(response_keys)) >= 2
+    
+    def _extract_hierarchical_scores(self, response: Dict[str, Any]) -> Dict[str, float]:
+        """Extract scores from hierarchical 3-stage response format"""
+        scores = {}
+        
+        # Try to extract from Stage 3 Evidence and Scores
+        stage3 = response.get('Stage 3 Evidence and Scores', {})
+        if stage3:
+            for well_name, well_data in stage3.items():
+                if isinstance(well_data, dict) and 'score' in well_data:
+                    try:
+                        scores[well_name] = float(well_data['score'])
+                    except (ValueError, TypeError):
+                        print(f"⚠️ Could not parse score for {well_name}: {well_data}")
+        
+        # Fallback: try to extract from Stage 2 Weights (convert percentages to 0-1 scale)
+        if not scores:
+            stage2 = response.get('Stage 2 Weights', {})
+            if stage2:
+                for well_name, weight in stage2.items():
+                    try:
+                        # Convert percentage (0-100) to decimal (0-1.0), capped at 1.0
+                        score = min(float(weight) / 60.0, 1.0)  # Divide by 60 as per hierarchical template
+                        scores[well_name] = score
+                    except (ValueError, TypeError):
+                        print(f"⚠️ Could not parse weight for {well_name}: {weight}")
+        
+        return scores
     
     def _extract_narrative_scores(self, content: str) -> Dict[str, Any]:
         """Extract narrative gravity scores from text response"""
