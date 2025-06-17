@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "corpus/validation_set/conservative_dignity/mitt_romney_2020_impeachment_vote.txt",
+    "filename": "mitt_romney_2020_impeachment_vote.txt",
+    "size_bytes": 7839,
+    "modified_at": "2025-06-14T18:23:04.295204"
+  },
+  "processing": {
+    "processed_at": "2025-06-16T23:56:53.775631",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "125756c23d6e75a7872154891ac4dd80c66b06e1245ba5d2627f900371a0d38d"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/12/57/125756c23d6e75a7872154891ac4dd80c66b06e1245ba5d2627f900371a0d38d",
+    "text_file": "corpus/processed/12/57/125756c23d6e75a7872154891ac4dd80c66b06e1245ba5d2627f900371a0d38d/utah_speech_2020.txt",
+    "metadata_file": "corpus/processed/12/57/125756c23d6e75a7872154891ac4dd80c66b06e1245ba5d2627f900371a0d38d/.metadata.json"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "text_id": "perry_speech_2016",
+  "content_hash": "4a7959305c93b323631a18b7bdfb09ba5a6aa83701c043cc05b2f65d633f3ded",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "Remarks by Governor Rick Perry at the American Legislative Exchange Council Annual Meeting",
+    "author": "Governor Rick Perry",
+    "date": "2016-08-04",
+    "document_type": "speech",
+    "description": "Governor Perry's comprehensive address on conservative approaches to criminal justice reform and racial justice, arguing for how Republicans can better serve African American communities through policy reform rather than rhetoric.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-16T23:56:50.399555",
+  "original_path": "corpus/validation_set/conservative_dignity/rick_perry_2016_alec_speech.txt",
+  "stable_path": "corpus/processed/4a/79/4a7959305c93b323631a18b7bdfb09ba5a6aa83701c043cc05b2f65d633f3ded/perry_speech_2016.txt"
+}

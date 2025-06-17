@@ -51,8 +51,68 @@
       "author": "President Jane Smith",
       "date": "2025-01-29",
       "document_type": "speech"
+    },
+    "reagan_speech_1986": {
+      "content_hash": "acb8497e52afc05efeca362b3fb5e654b250bd64c667749316d9e7feca974e6b",
+      "file_path": "corpus/processed/ac/b8/acb8497e52afc05efeca362b3fb5e654b250bd64c667749316d9e7feca974e6b/reagan_speech_1986.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-16T23:56:46.976867",
+      "title": "Address to the Nation on the Challenger Disaster",
+      "author": "Ronald Reagan",
+      "date": "1986-01-28",
+      "document_type": "speech"
+    },
+    "nominee_speech_2008": {
+      "content_hash": "563f9a0e138d2b5442f841146da9a200377933e95c41ce2b26b3954c7ce208d0",
+      "file_path": "corpus/processed/56/3f/563f9a0e138d2b5442f841146da9a200377933e95c41ce2b26b3954c7ce208d0/nominee_speech_2008.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-16T23:56:48.982086",
+      "title": "John McCain - 2008 Presidential Election Concession Speech",
+      "author": "John McCain, U.S. Senator from Arizona and Republican Presidential Nominee",
+      "date": "2008-11-04",
+      "document_type": "speech"
+    },
+    "perry_speech_2016": {
+      "content_hash": "4a7959305c93b323631a18b7bdfb09ba5a6aa83701c043cc05b2f65d633f3ded",
+      "file_path": "corpus/processed/4a/79/4a7959305c93b323631a18b7bdfb09ba5a6aa83701c043cc05b2f65d633f3ded/perry_speech_2016.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-16T23:56:50.400073",
+      "title": "Remarks by Governor Rick Perry at the American Legislative Exchange Council Annual Meeting",
+      "author": "Governor Rick Perry",
+      "date": "2016-08-04",
+      "document_type": "speech"
+    },
+    "hogan_speech_2023": {
+      "content_hash": "f62fae96029552b67221f9dbecb0699b0b66371f38cc71260c5ed364ca59610b",
+      "file_path": "corpus/processed/f6/2f/f62fae96029552b67221f9dbecb0699b0b66371f38cc71260c5ed364ca59610b/hogan_speech_2023.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-16T23:56:52.267829",
+      "title": "US Infrastructure Champion Governor Larry Hogan Addresses GIIA Board Members",
+      "author": "Larry Hogan",
+      "date": "2023-12-01",
+      "document_type": "speech"
+    },
+    "utah_speech_2020": {
+      "content_hash": "125756c23d6e75a7872154891ac4dd80c66b06e1245ba5d2627f900371a0d38d",
+      "file_path": "corpus/processed/12/57/125756c23d6e75a7872154891ac4dd80c66b06e1245ba5d2627f900371a0d38d/utah_speech_2020.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-16T23:56:53.776405",
+      "title": "Mitt Romney - Senate Floor Speech on Impeachment Vote",
+      "author": "Mitt Romney, U.S. Senator from Utah",
+      "date": "2020-02-05",
+      "document_type": "speech"
+    },
+    "dde_speech_2017": {
+      "content_hash": "078694a9633ab74cc87249ab1b14a17980f211b4ebd016a4723eb1355b526e32",
+      "file_path": "corpus/processed/07/86/078694a9633ab74cc87249ab1b14a17980f211b4ebd016a4723eb1355b526e32/dde_speech_2017.txt",
+      "confidence_score": 100.0,
+      "processed_at": "2025-06-16T23:56:55.215106",
+      "title": "America's Criminal Justice System Is Broken",
+      "author": "Thom Tillis (R-NC) and Chris Coons (D-DE)",
+      "date": "2017-01-09",
+      "document_type": "speech"
     }
   },
-  "last_updated": "2025-06-11T20:37:14.490573",
-  "total_processed": 5
+  "last_updated": "2025-06-16T23:56:55.215109",
+  "total_processed": 11
 }

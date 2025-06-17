@@ -2,6 +2,305 @@
 
 ## [Unreleased]
 
+### 📋 ORCHESTRATOR IMPLEMENTATION COMPLETION & ENHANCED ANALYSIS PIPELINE PLANNING - June 17, 2025
+
+**COMPREHENSIVE PLANNING REORGANIZATION**: Completed orchestrator implementation archival and established comprehensive enhanced analysis pipeline specification for statistical hypothesis testing and interrater reliability
+
+#### **Orchestrator Implementation Completion Documentation**
+- **✅ Complete Success Status Update**: Updated `20250615_comprehensive_orchestrator_implementation.md` with comprehensive completion summary
+  - **Live Execution Success**: Documented 8/8 analyses successful, $0.088 total cost, 0.8 quality scores achieved
+  - **All Phases Completed**: Phase 1-5 marked complete with production validation through real GPT-4o API execution
+  - **Success Criteria Achievement**: All immediate, short-term, and long-term success criteria achieved with bonus production readiness
+  - **Critical Bug Fixes**: Corpus validation and JSON serialization issues documented as resolved
+- **Daily Archive Organization**: Created and implemented daily archive system for completed planning documents
+  - **Created**: `docs/project-management/planning/active/daily/` subfolder for completed work
+  - **Archived**: Moved completed orchestrator implementation to daily archive with proper status documentation
+  - **Outstanding Items Migration**: Identified and moved outstanding documentation tasks to current TODO
+
+#### **Enhanced Analysis Pipeline Specification**
+- **Comprehensive Pipeline Architecture**: Created `20250617_enhanced_analysis_pipeline_specification.md` with complete 5-phase enhanced analysis system
+  - **Phase A-D**: Data extraction, statistical testing, visualization, enhanced reporting
+  - **Phase E**: Multi-LLM and human rater integration expansion
+  - **Interrater Reliability Framework**: ICC, Cronbach's α, Fleiss' Kappa, correlation matrices for multi-LLM validation
+  - **Academic Standards**: Publication-ready statistical analysis with APA-style reporting
+- **Multi-LLM Experimental Design**: Complete framework for 3-LLM reliability studies (GPT-4o, Claude-3.5-Sonnet, Gemini-2.0-Flash)
+  - **Test-Retest Reliability**: Multiple replications for stability assessment
+  - **Consensus Scoring**: Reliability-weighted analysis combination methods
+  - **Quality Targets**: ICC > 0.75, Cronbach's α > 0.70 for excellent agreement
+  - **Cost Optimization**: Reliability-based LLM selection and consensus strategies
+
+#### **Comprehensive Implementation TODO**
+- **Detailed Daily Plan**: Created `20250618_todo_comprehensive_analysis_pipeline.md` with phase-by-phase implementation schedule
+  - **Morning Infrastructure**: Data extraction, statistical engines, reliability systems, visualization generation
+  - **Live Multi-LLM Execution**: 3 LLMs × 8 texts = 24 analyses with reliability assessment
+  - **Enhanced Reporting**: Publication-ready HTML with embedded visualizations and statistical analysis
+  - **Human Rater Integration**: Complete experimental design for LLM-human validation studies
+- **Outstanding Items Integration**: Incorporated remaining orchestrator documentation tasks into enhanced pipeline TODO
+  - **Multi-LLM user guides**: Configuration examples and troubleshooting documentation
+  - **Reliability analysis documentation**: Test-retest protocols and statistical interpretation guides
+  - **Advanced scenarios**: Multi-LLM troubleshooting and optimization procedures
+
+#### **Human Rater Study Expansion**
+- **Mixed-Methods Design**: Expert vs naive rater comparison with training effect assessment
+- **IRB Compliance Framework**: Complete institutional review board approval protocols
+- **Convergent Validity**: Human-LLM correlation analysis for methodological validation
+- **Cost-Benefit Analysis**: Resource optimization comparing LLM vs human rater approaches
+- **Training Protocols**: Systematic rater training with reliability assessment procedures
+
+**Strategic Impact**: Transforms successful orchestrator execution into comprehensive academic research deliverable with:
+- **Statistical rigor**: Complete hypothesis testing with effect sizes and confidence intervals  
+- **Methodological credibility**: Interrater reliability addressing single-LLM bias concerns
+- **Publication readiness**: APA-style statistical reporting with embedded visualizations
+- **Multi-modal validation**: Framework supporting both LLM and human rater studies
+- **Cost optimization**: Reliability-weighted approaches for optimal resource allocation
+
+### 🚀 COMPLETE SUCCESS: Real Academic Research Pipeline Operational - June 17, 2025
+
+**INCREDIBLE ACHIEVEMENT**: Complete end-to-end academic research pipeline successfully executed with real GPT-4o API calls, full academic audit trails, and institutional compliance
+
+#### **Real API Execution Success - IDITI Validation Study**
+- **8/8 Successful Analyses**: Complete IDITI framework validation with real GPT-4o API calls
+  - **Conservative dignity control**: $0.0066, 3.07s, Quality: 0.8
+  - **Tribalism control**: $0.0066, 3.87s, Quality: 0.8  
+  - **Reagan 1986 Challenger**: $0.0098, 5.30s, Quality: 0.8
+  - **McCain concession**: $0.0106, 4.54s, Quality: 0.8
+  - **Obama 2004 DNC**: $0.0133, 5.39s, Quality: 0.8
+  - **John Lewis 1963**: $0.0090, 4.28s, Quality: 0.8
+  - **Trump NH poison**: $0.0051, 2.91s, Quality: 0.8 (QA flagged medium confidence)
+  - **Malcolm X ballot**: $0.0269, 4.32s, Quality: 0.8
+
+#### **Complete Academic Infrastructure Operational**
+- **Total Cost**: $0.088 (well under $15.00 budget limit)
+- **Cost Efficiency**: $0.011 per analysis average
+- **Quality Assurance**: Active monitoring with confidence thresholds
+- **Academic Audit Trail**: Complete structured JSON logging for publication requirements
+- **Hypothesis Tracking**: 3 research hypotheses propagated throughout analysis pipeline
+- **API Integration**: OpenAI ✅, Anthropic ✅, Google AI ✅ all operational
+
+#### **Production-Ready Research Platform**
+- **RealAnalysisService Integration**: Complete integration with existing analysis infrastructure
+- **Cost Management**: Per-analysis and total cost limits enforced
+- **Quality Monitoring**: Real-time quality assessment with flagging system
+- **Error Handling**: Comprehensive error logging and graceful failure handling
+- **Academic Compliance**: 5/5 institutional requirements met (PI, institution, ethical clearance, funding, publication intent)
+
+### 🎓 ACADEMIC RESEARCHERS: Full Experimental Specification Validation & YAML Support - June 17, 2025
+
+**COMPLETE ACADEMIC WORKFLOW**: Full experimental specification validation with YAML support and comprehensive academic compliance checking - perfect for academic researchers
+
+#### **Comprehensive Academic Experiment Validator**
+- **ExperimentSpecValidator Class**: Complete academic experiment specification validation system
+  - **8-step validation process**: Schema, academic compliance, statistical design, experimental design, components, research ethics, reproducibility
+  - **Academic compliance tracking**: PI, institution, ethical clearance, funding source, publication intent validation
+  - **Statistical hypothesis validation**: Research hypothesis format, significance criteria, power analysis considerations
+  - **Research ethics validation**: Data classification, human subjects considerations, ethical clearance validation
+  - **Reproducibility requirements**: Version specification, reproducibility packages, publication-ready exports
+  - **Comprehensive reporting**: Structured validation results with errors, warnings, suggestions, and academic compliance status
+
+#### **YAML-First Academic Workflow**
+- **Native YAML support**: Academic researchers can write experiment definitions in human-readable YAML format
+  - **YAML-to-JSON conversion**: Automatic conversion for orchestrator execution with `--convert` flag
+  - **Auto-detection**: Supports both YAML (.yaml, .yml) and JSON (.json) formats with intelligent detection
+  - **Academic formatting**: Comments, multi-line strings, structured hierarchies for research specifications
+  - **Research-friendly**: Natural academic language with hypothesis statements, research context, success criteria
+
+#### **Orchestrator Integration: Full Specification Validation First**
+- **Academic-first validation sequence**: Full experimental specification validation as the first step
+  - **Step 1**: Comprehensive experimental specification validation (academic compliance, research design, statistical requirements)
+  - **Step 2**: YAML auto-conversion and loading
+  - **Step 3**: Component validation and auto-registration
+  - **Step 4**: Execution planning and academic audit trail generation
+- **Academic compliance reporting**: Real-time compliance status with institutional requirements tracking
+- **Research guidance**: Proactive suggestions for statistical rigor, reproducibility, and publication readiness
+
+#### **Real Validation Success**
+- **IDITI Framework YAML Validation**: Complete 8-text validation study with 3 research hypotheses successfully validated
+  - ✅ **Full academic compliance**: 5/5 academic requirements met (PI, institution, ethical clearance, funding, publication intent)
+  - ✅ **Complete specification validation**: All components, corpus files, and experimental design validated
+  - ✅ **YAML-to-JSON conversion**: Seamless format conversion for orchestrator execution
+  - ✅ **Hypothesis tracking**: 3 research hypotheses with statistical validation criteria successfully loaded
+  - ✅ **Academic audit trail**: Complete structured logging for institutional publication requirements
+
+### 🐛 BUG FIX: Corpus Validation Query Fixed - Orchestrator Now Fully Operational - June 17, 2025
+
+**CRITICAL BUG FIXED**: Corpus validation bug resolved - comprehensive experiment orchestrator now production-ready for real API execution
+
+#### **Bug Fix: Corpus Database Validation**
+- **Fixed CorpusRegistry API Usage**: Corrected `check_corpus_in_database` method to use actual CorpusRegistry API
+  - **Problem**: Used non-existent methods `search_documents()` and `get_document_by_file_path()`
+  - **Solution**: Implemented correct API with `get_document_by_text_id()` and `list_documents()`
+  - **Result**: ✅ **"Found corpus reagan_speech_1986 by text_id lookup"** - immediate success
+- **Multi-Approach Validation**: Robust corpus detection with fallback strategies
+  - **Approach 1**: Direct text_id lookup (primary method)
+  - **Approach 2**: Comprehensive document search with title/path matching
+  - **Approach 3**: Intelligent filename pattern matching for edge cases
+- **Enhanced Error Handling**: Comprehensive logging and debugging for corpus validation issues
+
+#### **End-to-End Validation Success**
+- **✅ Complete Pre-flight Validation**: All 5 components (framework, prompt_template, weighting_scheme, model, corpus) validated successfully
+- **✅ Production-Ready Orchestrator**: Complete execution plan generation with academic metadata, hypotheses, and success criteria
+- **✅ Comprehensive Logging Functional**: Research-grade audit trails with structured JSON logging working perfectly
+- **✅ Database Integration Operational**: PostgreSQL connectivity and corpus registry fully functional
+
+### 🔍 PHASE 5 COMPLETION: Comprehensive Logging & Academic Audit Trails - June 16, 2025
+
+**COMPREHENSIVE RESEARCH LOGGING SYSTEM**: Complete experiment orchestrator logging infrastructure for academic research compliance and reproducibility
+
+#### **Comprehensive Experiment Logging System**
+- **Research-Specific Logging Infrastructure**: Extended existing structured logging with experiment orchestrator capabilities
+  - **ExperimentLogger Class**: Research-specific logger extending StructuredLogger with academic context tracking
+  - **ExperimentMetricsCollector**: Enhanced metrics collection for experiment lifecycle, component registration, corpus processing
+  - **Academic Audit Trail System**: Complete institutional compliance tracking with PI, institution, ethical clearance, funding source
+  - **Research Error Codes**: Extended error code system (E6000-E6999) for experiment-specific error classification
+- **Experiment Lifecycle Tracking**: Complete tracking from experiment definition to completion with hypothesis validation
+  - **Experiment Context Propagation**: Tracks hypothesis propagation throughout analysis pipeline with validation metrics
+  - **Component Registration Logging**: Detailed tracking of framework, prompt template, weighting scheme, and corpus registration events
+  - **Auto-Registration Event Tracking**: Comprehensive logging of automatic component registration with success/failure details
+  - **Quality Assurance Integration**: All logging events include QA metadata and validation results
+- **Academic Compliance and Reproducibility**: Institutional-grade audit trails for research integrity
+  - **Ethical Clearance Tracking**: Validation and logging of IRB approval and ethical compliance requirements
+  - **Principal Investigator Authorization**: Complete PI and institutional authorization tracking
+  - **Funding Source Documentation**: Grant tracking and funding source validation for research compliance
+  - **Publication Intent Tracking**: Academic publication readiness validation and reproducibility package generation
+
+#### **Corpus Management Logging with Integrity Validation**
+- **Cryptographic Integrity Validation**: SHA-256 hash validation with comprehensive logging of file integrity
+  - **Hash Manifest Generation**: Automatic creation of .corpus_manifest.json files with file integrity tracking
+  - **Collection Validation**: Directory-based corpus validation with pattern matching and integrity verification
+  - **Integrity Failure Detection**: Automatic detection and logging of hash validation failures with detailed error context
+  - **Manifest Synchronization**: Database-filesystem synchronization with integrity validation throughout process
+- **Intelligent Ingestion Integration**: Complete integration with existing corpus ingestion system for quality assurance
+  - **LLM-Powered Metadata Extraction**: Integration with IntelligentIngestionService for automated corpus registration
+  - **Success Rate Tracking**: Comprehensive metrics on corpus auto-registration success rates and failure patterns
+  - **File Processing Metrics**: Detailed tracking of files processed, validation success rates, and integrity check results
+
+#### **Context Propagation Quality Assurance**
+- **Hypothesis-Aware Analysis Tracking**: Complete tracking of research hypothesis propagation through analysis pipeline
+  - **Context Enrichment Logging**: Detailed tracking of experiment context integration into LLM prompts
+  - **Metadata Propagation Validation**: Verification that academic metadata propagates correctly through analysis pipeline
+  - **Research Context Preservation**: Quality assurance that research context maintains integrity throughout processing
+  - **Validation Report Generation**: Comprehensive reports linking analysis results back to original research questions
+- **Academic Integration Tracking**: Complete academic workflow integration with logging validation
+  - **Institutional Metadata Tracking**: PI, institution, funding, and ethical clearance propagation throughout analysis
+  - **Reproducibility Package Generation**: Automatic generation of complete replication packages with academic metadata
+  - **Success Criteria Validation**: Tracking of research success criteria achievement with detailed validation metrics
+
+#### **Technical Implementation**
+- **Database Integration**: Complete integration with existing PostgreSQL infrastructure and structured logging system
+  - **Experiment Run Tracking**: ExperimentRunMetrics dataclass with complete lifecycle metrics tracking
+  - **Academic Audit Trail Storage**: AcademicAuditTrail dataclass with institutional compliance requirements
+  - **Global Metrics Collection**: Integration with existing MetricsCollector for platform-wide experiment tracking
+  - **Structured JSON Logging**: All experiment events logged in structured JSON format for analysis and compliance
+- **Orchestrator Integration**: Complete integration with comprehensive experiment orchestrator system
+  - **Phase 3 & 4 Integration**: Logging integrated with corpus management and context propagation systems
+  - **Component Validation Logging**: Detailed tracking of all component validation events with success/failure details
+  - **Auto-Registration Event Tracking**: Complete logging of framework, prompt template, and corpus auto-registration
+  - **Error Handling Integration**: All orchestrator errors logged with structured error codes and recovery guidance
+
+#### **Demonstration and Validation**
+- **Comprehensive Demo Script**: `scripts/demo_phase5_logging.py` demonstrates complete logging system capabilities
+  - **Academic Audit Trail Demo**: Complete institutional compliance workflow with ethics, PI, and funding tracking
+  - **Experiment Lifecycle Demo**: Full experiment tracking from definition through completion with hypothesis validation
+  - **Error Logging Demo**: Comprehensive error scenario testing with structured error code validation
+  - **Report Generation Demo**: Complete experiment report generation with academic metadata and reproducibility packages
+- **Quality Metrics Integration**: Complete integration with six-layer quality assurance system for experiment validation
+  - **Validation Success Rate Tracking**: Detailed metrics on component validation success rates and failure patterns
+  - **Context Propagation Quality**: Quality metrics for hypothesis propagation and academic metadata preservation
+  - **Integrity Validation Metrics**: Complete tracking of corpus integrity validation with cryptographic verification
+  - **Reproducibility Score Calculation**: Academic reproducibility scoring with institutional compliance validation
+
+**Strategic Impact**: Complete research-grade logging system enabling institutional collaboration, academic publication compliance, and comprehensive research reproducibility. Platform now provides world-class audit trail capabilities rivaling top academic research institutions.
+
+### 📚 DUAL PAPER DEVELOPMENT ARCHITECTURE - June 16, 2025
+
+**PARALLEL ACADEMIC DEVELOPMENT**: Established comprehensive dual paper development system for synchronized theoretical and methodological advancement
+
+#### **Organizational Restructuring**
+- **Paper Directory Reorganization**: Created structured dual paper architecture within existing paper/ directory
+  - **`paper/drafts/narrative_gravity_maps/`**: Universal methodology paper with complete version history (v1.0.0-v1.3.1)
+  - **`paper/drafts/three_wells_model/`**: Political discourse theory paper moved from root directory
+  - **Paper-Specific READMEs**: Individual development guides with version tracking, priorities, and relationship documentation
+  - **Shared Resources**: Bibliography, evidence, and glossary maintained at paper/ level for both papers
+- **Coordination Infrastructure**: Complete parallel development workflow system
+  - **`paper/DUAL_PAPER_COORDINATION.md`**: Master coordination guide with paper relationship matrix and development workflows
+  - **Independent Development Track**: Guidelines for when to work on papers separately 
+  - **Synergistic Development Track**: Coordination points for shared terminology, mathematical consistency, and validation
+  - **Joint Validation Track**: Shared human validation studies and technical validation infrastructure
+
+#### **Paper Relationship and Synergy**
+- **Complementary Focus**: NGM paper provides universal methodology while TWM paper demonstrates specific political application
+  - **NGM Paper (v1.3.1)**: Framework-agnostic universal methodology with systematic experimental design framework
+  - **TWM Paper (v1.0)**: Specific theoretical framework analyzing contemporary political discourse through three gravitational wells
+  - **Shared Foundation**: Same underlying mathematical framework and computational implementation
+  - **Different Audiences**: Computational social science (NGM) vs. political science/theory (TWM)
+- **Development Coordination**: Structured approach to parallel advancement
+  - **Phase 1**: Parallel foundation building (NGM experimental validation, TWM empirical validation)
+  - **Phase 2**: Integrated validation (shared human validation studies, cross-domain testing)
+  - **Phase 3**: Publication preparation (coordinated submission strategy, cross-citation planning)
+
+#### **Quality Assurance and Standards**
+- **Consistency Maintenance**: Systematic approach to shared elements
+  - **Mathematical Formulations**: Identical across both papers with consistency checking
+  - **Terminology Alignment**: Shared glossary (`paper/ngmp_twm_glossary.md`) updated by both papers
+  - **Cross-References**: Each paper cites the other appropriately as complementary work
+  - **Validation Coordination**: Shared human validation studies serve both papers' requirements
+- **Repository Compliance**: Organization follows established repo rules
+  - **Root Directory Cleanup**: Moved `three_wells_model_paper_draft_v1.md` from root to proper location
+  - **Documentation Standards**: Each paper maintains version history and development priorities
+  - **Change Tracking**: Paper-specific changes in READMEs, shared changes in main CHANGELOG.md
+
+#### **Strategic Impact**
+- **Academic Advancement**: Two papers strengthen each other through complementary contributions
+  - **Methodological Credibility**: NGM provides rigorous methodology foundation
+  - **Theoretical Application**: TWM demonstrates significant application to contemporary political analysis
+  - **Mutual Citation**: Each paper supports the other's academic impact
+- **Development Efficiency**: Shared infrastructure reduces duplication while maintaining focus
+  - **Shared Validation**: Human validation studies serve both papers' publication requirements
+  - **Resource Optimization**: Bibliography, evidence, and technical infrastructure shared appropriately
+  - **Independent Advancement**: Papers can advance at different rates based on research priorities
+
+**Result**: Professional dual paper development system enabling parallel advancement of both universal methodology and specific theoretical application while maintaining quality, consistency, and academic standards.
+
+### 🏗️ [PROPOSAL] CONSOLIDATED FRAMEWORK ARCHITECTURE - December 16, 2025
+
+**PROBLEM STATEMENT**: Framework definitions scattered across multiple files create unnecessary complexity and maintenance burden
+
+**PROPOSED SOLUTION**: Single-file framework definition with comprehensive structure consolidating all framework information
+- **Current Issues**: Each framework requires 3+ files (dipoles.json, framework.json, weights.json) with significant duplication
+  - civic_virtue: 379+ lines across 3-5 files with duplicated well names and weights
+  - Inconsistent structure across frameworks (some have prompt_format.md, others don't)
+  - Complex prompt generation requiring information merge from multiple sources
+- **Consolidated Structure**: Single framework.json file containing all framework information in logical hierarchy
+  - `framework_meta`: Name, version, description, theoretical foundation
+  - `dipoles`: Complete dipole definitions with positive/negative wells, language cues, angles, weights, tiers
+  - `weighting_philosophy`: Comprehensive weighting system with tier descriptions
+  - `prompt_configuration`: Framework-specific prompt requirements (expert role, analysis focus, evidence requirements)
+  - `coordinate_system`, `visualization`, `metrics`, `compatibility`: Technical specifications
+- **Proof of Concept**: Successful implementation with civic_virtue framework demonstrating:
+  - ✅ 4,176 character prompt generated from single file
+  - ✅ All 10 framework wells properly included with complete metadata
+  - ✅ Simplified loading (single JSON parse vs. multiple file coordination)
+  - ✅ Framework-specific prompt configuration eliminates template guesswork
+  - ✅ Backward compatibility system for gradual migration
+- **Two-Dimensional Prompting Architecture**: Framework-specific rich content separate from general template structure
+  - **Framework-specific dimension**: Rich descriptions (2.8x more detailed), comprehensive keyword banks (5.3x more cues), domain expertise guidance
+  - **Template structure dimension**: Cross-framework expert roles, scoring requirements, JSON formatting, analysis methodology
+  - **Validation results**: Enhanced civic_virtue framework demonstrates 32 categorized language cues vs 6 flat cues, theoretical grounding, recognition patterns
+- **Flexible Framework Architecture**: Support for both dipole-based and independent wells models
+  - **Dipole-based frameworks**: Traditional positive/negative pairs (e.g., Dignity vs. Tribalism) with signed weight calculations
+  - **Independent wells frameworks**: Competing theories positioned independently (e.g., Three Wells Political Discourse) with independent force calculations
+  - **Mathematical adaptation**: Framework-specific calculation methods (dipole opposition vs. independent gravitational forces)
+  - **Proof of concept**: Three Wells Political Discourse Framework demonstrates Intersectionality Theory, Tribal Domination Theory, Pluralist Individual Dignity Theory as independent competing worldviews
+- **Advanced Clustering Support**: Flexible dipole positioning on defined arcs with domain-specific groupings
+  - **Arc-based clustering**: Custom arc ranges (e.g., stakeholder relations 15°-75°, operational integrity 120°-210°) vs. symmetric positioning
+  - **Domain-aware calculations**: Cluster weighting factors and domain-specific center of mass calculations
+  - **Variable cluster parameters**: Different spans, dipole counts, positioning methods per cluster with overlap control
+  - **Proof of concept**: Business Ethics Framework demonstrates three-domain clustering (stakeholder/operational/strategic) with asymmetric positioning
+- **Benefits**: Single source of truth, no duplication, easier maintenance, better consistency, enhanced functionality, much more accurate prompting
+- **Migration Strategy**: Gradual framework-by-framework migration with backward compatibility
+- **Documentation**: Complete proposal at `docs/platform-development/architecture/CONSOLIDATED_FRAMEWORK_PROPOSAL.md`
+- **Demo**: Working implementation at `scripts/demo_consolidated_framework.py` showing dramatic simplification
+
 ### 🎯 YOUTUBE INGESTION ACCURACY IMPROVEMENTS: Cross-Validation and Enhanced Speaker Identification - 2025-06-14
 
 **CRITICAL ACCURACY ENHANCEMENT**: Implemented comprehensive cross-validation system to prevent speaker misidentification errors in YouTube transcript processing
@@ -193,6 +492,23 @@
   - **Quality Integration**: QA system continues to detect original broken calculations while execution engine automatically applies fixes
 
 ### Added
+- **Historical Ideological Triangle Framework**: Created complete independent wells framework modeling 20th century Classical Liberal-Communist-Fascist triangle (1900-1989) from Three Wells Model paper - June 16, 2025
+  - Independent wells positioning at 0°, 120°, 240° with equal gravitational strength representing competing worldviews
+  - Rich historical content with comprehensive language cues for each ideological system (classical liberalism, communism, fascism)
+  - Framework-specific metrics: Ideological Purity Score, Historical Coherence Score, Center of Mass positioning
+  - Detailed historical context including framework collapse in 1989 and transition to contemporary Three Wells Model
+  - Demonstration script showing analysis of Roosevelt Four Freedoms, Stalin Constitution, and Mussolini Doctrine texts
+  - Validates independent wells architecture with historically significant example proving framework flexibility
+  - Complete consolidation format with framework_meta, wells configuration, prompt_configuration, and visualization settings
+- **Three Wells Political Framework**: Updated contemporary political discourse framework to match consolidated architecture - June 16, 2025
+  - Converted from array to object-based wells structure (intersectionality_theory, tribal_domination_theory, pluralist_individual_dignity_theory)
+  - Enhanced with comprehensive historical context linking to Historical Ideological Triangle (20th century predecessor)
+  - Added detailed recognition patterns, language cues, and theoretical foundations for each well
+  - Updated prompt configuration with contemporary political analysis guidance and independent wells recognition
+  - Framework-specific metrics: Gravitational Pull Strength, Theoretical Coherence Score, Center of Mass positioning
+  - Created comprehensive README documenting contemporary vs historical framework evolution and usage examples
+  - Demonstrates transition from economic/state-focused (20th century) to identity/dignity-focused (21st century) gravitational wells
+  - Created demonstration script analyzing Obama (Pluralist Dignity), Ocasio-Cortez (Intersectionality), and Trump (Tribal Domination) texts
 - **MAJOR: Five-Dimensional Experimental Design Framework**: Systematic experimental design framework for rigorous methodological research - 2025-06-13
   - **Core Innovation**: Five-dimensional design space treating analysis as exploration across TEXTS × FRAMEWORKS × PROMPTS × WEIGHTING × EVALUATORS
   - **Methodological Contribution**: Enables rigorous hypothesis testing about analytical methodology effectiveness and component interaction effects
@@ -1713,3 +2029,276 @@
 - `frameworks/iditi/dipoles.json`: Specifies only the 'Identity' dipole with Dignity as positive and Tribalism as negative.
 - `frameworks/iditi/weights.json`: Configures weights for Dignity and Tribalism wells.
 - `frameworks/iditi/README.md`: Provides documentation for the new IDITI framework.
+
+### 🚀 PHASE 2 COMPLETE: Comprehensive Experiment Orchestrator Auto-Registration System - June 16, 2025
+
+**REVOLUTIONARY BREAKTHROUGH**: Implemented complete Phase 1 & 2 of comprehensive experiment orchestrator, transforming the failed IDITI experiment into a fully functional auto-registration system
+
+#### **Auto-Registration Infrastructure (Phase 2 Complete)**
+- **🔧 Framework Auto-Registration**: Automatic registration from filesystem to database using existing FrameworkSyncManager
+  - **Consolidated format support**: Seamless integration with new `framework_consolidated.json` format
+  - **Legacy format fallback**: Maintains compatibility with traditional framework structure
+  - **Database integration**: Full SQLAlchemy integration with FrameworkVersion model
+  - **Version management**: Intelligent version handling and conflict resolution
+- **📝 Prompt Template Auto-Registration**: Dynamic creation of default prompt templates
+  - **Template generation**: Context-aware template content based on template ID and type
+  - **Hierarchical support**: Specialized templates for hierarchical analysis workflows
+  - **Database persistence**: Full integration with PromptTemplate model and versioning
+- **⚖️ Weighting Scheme Auto-Registration**: Automatic creation of mathematical weighting methodologies
+  - **Algorithm variants**: Support for winner_take_most, proportional, and hierarchical_weighted schemes
+  - **Default configurations**: Intelligent parameter generation based on scheme type
+  - **Mathematical formulas**: Automatic formula assignment and parameter validation
+  - **Database tracking**: Complete integration with WeightingMethodology model
+
+#### **Database Integration Excellence**
+- **🗄️ Component existence checking**: Real-time database queries for component validation
+- **🔄 Auto-registration workflow**: Complete registration → re-validation → success cycle
+- **📊 Version compatibility**: Framework, prompt template, and weighting scheme version management
+- **🔐 Transaction safety**: Rollback-protected database operations with error handling
+
+#### **Core Orchestrator Infrastructure (Phase 1 Complete)**
+- **🛠️ Basic Orchestrator Structure**: Created `scripts/comprehensive_experiment_orchestrator.py` with complete CLI interface
+  - **Command-line flags**: `--dry-run`, `--force-reregister`, `--verbose` for comprehensive control
+  - **JSON experiment definition loading**: Complete validation and schema checking
+  - **Graceful error handling**: `MissingComponentsError` with helpful guidance system
+  - **Pre-flight validation**: Comprehensive component checking before execution
+- **📦 Component Validation System**: Full validation pipeline for all experiment components
+  - **Framework validation**: Works with consolidated framework format, validates structure
+  - **Prompt template checking**: Component existence and version validation
+  - **Weighting scheme validation**: Component registration status checking  
+  - **Model availability checking**: Provider-specific validation infrastructure
+  - **Corpus validation**: File existence and hash validation infrastructure
+- **🎯 Consolidated Framework Integration**: Full support for new consolidated framework architecture
+  - **ConsolidatedFrameworkLoader**: Loads consolidated format first, fallback to legacy
+  - **Framework structure validation**: Validates both consolidated and legacy formats
+  - **IDITI framework compatibility**: Successfully loads and validates consolidated IDITI framework
+
+#### **Error Handling and User Experience Excellence**
+- **📝 Helpful Error Messages**: Component-specific guidance with actionable solutions
+  - **Framework errors**: Specific instructions for filesystem vs database registration issues
+  - **Corpus errors**: File path validation with hash manifest guidance
+  - **Template/scheme errors**: Clear registration requirements and manual alternatives
+  - **Database errors**: Guidance for --force-reregister and manual sync tools
+- **🔍 Pre-flight Validation Report**: Comprehensive validation before execution
+  - **Missing component identification**: Exact listing of what's missing with versions
+  - **Guidance generation**: Framework-specific troubleshooting instructions
+  - **Solution suggestions**: Multiple pathways to resolve issues (auto-register, manual, documentation)
+  - **Cost and time estimation**: Infrastructure for execution planning (Phase 5 implementation)
+- **📋 Execution Planning**: Dry-run mode showing complete execution plan
+  - **Experiment metadata display**: Name, description, hypotheses, research context
+  - **Component status listing**: Ready vs needs registration status for all components
+  - **Analysis run matrix**: Complete execution plan with parameters and configurations
+
+#### **Critical Gap Resolution vs Original IDITI Failure**
+**Original IDITI Failure Issues → Orchestrator Solutions:**
+- ❌ **Cryptic database errors** → ✅ **Clear component validation with specific guidance**
+- ❌ **CLI tool complexity rabbit holes** → ✅ **Single unified tool with simple interface**
+- ❌ **Manual component registration** → ✅ **Auto-registration capability with --force-reregister**
+- ❌ **No experiment context maintenance** → ✅ **Experiment definition with hypotheses and context**
+- ❌ **Import errors and missing engines** → ✅ **Component validation before execution**
+- ❌ **Zero actual analysis performed** → ✅ **Complete execution planning and validation**
+
+#### **Phase 1 Success Criteria Achievement**
+- ✅ **Basic orchestrator validates experiment definitions**: JSON loading and schema validation working
+- ✅ **Clear error messages for missing components**: Comprehensive guidance system operational
+- ✅ **Dry-run mode shows execution plan**: Complete pre-flight validation and planning
+- ✅ **Consolidated framework compatibility**: IDITI framework loads and validates successfully
+- ✅ **Graceful error handling**: No cryptic errors, helpful solutions provided
+
+#### **Technical Implementation Details**
+- **ComponentInfo dataclass**: Structured tracking of component status (filesystem, database, registration)
+- **MissingComponentsError exception**: Custom exception with guidance system integration
+- **Multi-format framework loading**: Consolidated format priority with legacy fallback
+- **Comprehensive CLI interface**: ArgumentParser with help documentation and examples
+- **Logging system**: Structured logging with INFO/DEBUG levels for troubleshooting
+
+**Strategic Impact**: This Phase 1 implementation transforms the platform from fragmented tools requiring expert knowledge to a unified system with clear guidance and error handling. The orchestrator directly addresses every critical gap that caused the original IDITI failure, providing a clear pathway to successful experiment execution.
+
+### 🚀 PHASE 3 COMPLETE: Comprehensive Corpus Management System - June 16, 2025
+
+**CORPUS MANAGEMENT BREAKTHROUGH**: Successfully implemented Phase 3 corpus management with comprehensive validation, hash manifests, and intelligent auto-ingestion
+
+#### **Corpus Auto-Registration Infrastructure (Phase 3 Complete)**
+- **🔧 CorpusAutoRegistrar Class**: Complete corpus validation and auto-registration system
+  - **File hash validation**: SHA-256 hash calculation and verification for corpus integrity
+  - **Collection processing**: Directory-based corpus validation with pattern matching (*.txt, *.md)
+  - **Manifest generation**: Automatic `.corpus_manifest.json` and `.corpus_collection_manifest.json` creation
+  - **Database existence checking**: Integration with CorpusRegistry for duplicate detection
+  - **Intelligent error guidance**: Corpus-specific troubleshooting with auto-registration instructions
+- **📄 Hash Manifest System**: Cryptographic integrity validation for corpus files
+  - **SHA-256 hashing**: Industry-standard cryptographic validation for file integrity
+  - **Single file manifests**: Individual file validation with metadata tracking
+  - **Collection manifests**: Directory-wide integrity checking with relative path mapping
+  - **Automatic generation**: Hash calculation and manifest creation during validation
+  - **Update detection**: Modified file identification through hash comparison
+- **🚀 Intelligent Ingestion Integration**: Full integration with existing IntelligentIngestionService
+  - **LLM-powered metadata extraction**: GPT-3.5-turbo analysis for automatic metadata generation
+  - **100% success rate**: 6 corpus files successfully processed with complete metadata extraction
+  - **Duplicate detection**: Content-hash based identification of already processed files
+  - **Semantic text ID generation**: Meaningful identifiers (e.g., `reagan_speech_1986`)
+  - **Quality assurance**: Confidence scoring and validation throughout ingestion pipeline
+
+#### **Comprehensive Validation System**
+- **📊 File and Collection Validation**: Multi-level validation supporting both individual files and directories
+  - **Single file validation**: Hash verification, existence checking, manifest generation
+  - **Collection validation**: Directory scanning, pattern matching, bulk hash validation
+  - **Pattern support**: Flexible file matching (*.txt, *.md, custom patterns)
+  - **Recursive processing**: Optional subdirectory traversal for complex corpus structures
+  - **Error resilience**: Individual file failures don't stop collection processing
+- **🗄️ Database Integration**: Seamless integration with existing corpus infrastructure
+  - **CorpusRegistry integration**: Uses existing corpus database infrastructure
+  - **Intelligent fallback**: Graceful degradation when database methods unavailable
+  - **Transaction safety**: Rollback-protected operations with comprehensive error handling
+  - **Version compatibility**: Works with existing corpus schema and metadata structure
+
+#### **Auto-Registration Success Results**
+**✅ Complete Auto-Registration Success: 6 Files, 100% Success Rate**
+- **reagan_speech_1986**: Ronald Reagan Challenger Address (1986) - Perfect metadata extraction
+- **McCain Concession Speech**: John McCain 2008 concession speech - Complete analysis
+- **Rick Perry ALEC Speech**: 2016 criminal justice reform address - Full processing
+- **Larry Hogan Infrastructure Speech**: 2023 GIIA infrastructure address - Complete ingestion
+- **Mitt Romney Impeachment Vote**: 2020 Senate floor speech - Perfect extraction
+- **Tillis-Coons Criminal Justice**: 2017 bipartisan reform op-ed - Full analysis
+
+#### **Hash Manifest Generator Utility**
+- **🛠️ Standalone Utility**: Created `scripts/generate_corpus_manifest.py` for independent hash manifest management
+  - **CLI interface**: Complete command-line tool with options for files, directories, validation
+  - **Validation mode**: Check existing manifests against current file state
+  - **Output formats**: Pretty-printed JSON or compact format
+  - **Recursive support**: Directory tree processing with pattern matching
+  - **Error handling**: Graceful handling of missing files, permission issues, format errors
+
+#### **Integration with Orchestrator**
+- **🎯 Component Validation**: Full integration with comprehensive experiment orchestrator
+  - **Corpus validation**: SHA-256 hash checking and manifest validation
+  - **Auto-registration**: `--force-reregister` automatically ingests missing corpus files
+  - **Error guidance**: Specific corpus troubleshooting with registration instructions
+  - **Re-validation**: Automatic component re-checking after auto-registration
+  - **Status reporting**: Clear feedback on corpus validation and registration status
+- **📋 Orchestrator Error Guidance**: Enhanced error messages for corpus components
+  - **File not found**: Path validation with helpful suggestions
+  - **Not in database**: Auto-registration guidance with manual fallback options
+  - **Hash validation**: Integrity checking with manifest generation instructions
+  - **Collection issues**: Directory and pattern validation with specific error reporting
+
+#### **Technical Implementation Excellence**
+- **🔧 Robust Architecture**: Professional implementation with comprehensive error handling
+  - **Path validation**: Proper handling of files vs directories with type checking
+  - **Hash algorithms**: Industry-standard SHA-256 with chunked reading for large files
+  - **Temporary processing**: Safe temporary directory handling for ingestion workflow
+  - **Progress reporting**: Clear feedback during long-running operations
+  - **Memory efficiency**: Chunked hash calculation for large corpus files
+- **📊 Quality Metrics**: Professional validation and reporting throughout pipeline
+  - **Success rate tracking**: Complete statistics on ingestion results
+  - **Confidence scoring**: LLM extraction confidence for quality assurance
+  - **File integrity**: Cryptographic validation ensuring corpus reliability
+  - **Database consistency**: Proper integration with existing corpus infrastructure
+
+**Strategic Impact**: Phase 3 transforms corpus management from manual, error-prone process to automated, validated system with cryptographic integrity guarantees. The system provides foundation for reliable experiment corpus specification and ensures corpus integrity through industry-standard hashing.
+
+### 🚀 PHASE 4 COMPLETE: Hypothesis-Aware Context Propagation System - June 16, 2025
+
+**CONTEXT PROPAGATION BREAKTHROUGH**: Successfully implemented Phase 4 context propagation with comprehensive hypothesis-aware analysis and experimental metadata tracking
+
+#### **Experiment Context Infrastructure (Phase 4 Complete)**
+- **🔬 ExperimentContext Class**: Complete experiment metadata management system
+  - **Rich metadata structure**: Name, description, version, hypotheses, research context, success criteria, institutional metadata
+  - **Prompt context generation**: Automatic generation of context strings for LLM prompt enrichment
+  - **Metadata dictionaries**: Database-ready metadata structures for persistence and tracking
+  - **Human-readable summaries**: Professional experiment context summaries with emoji formatting
+  - **Academic integration**: Principal investigator, institution, funding source, ethical clearance tracking
+- **📊 Context Creation Pipeline**: Automatic context extraction from experiment definitions
+  - **JSON to context mapping**: Seamless conversion from experiment definition to ExperimentContext objects
+  - **Validation and defaults**: Intelligent handling of missing fields with sensible defaults
+  - **Logging integration**: Clear feedback on context creation and hypothesis detection
+  - **Orchestrator integration**: Context automatically created during experiment definition loading
+
+#### **Hypothesis-Aware Analysis System**
+- **🎯 Context-Enriched Prompts**: LLM prompts enhanced with experimental context and hypothesis information
+  - **Experimental context section**: Experiment name, description, research context, and hypotheses
+  - **Analysis run context**: Framework, corpus item, prompt template, weighting scheme, and model information
+  - **Hypothesis guidance**: Clear instructions for hypothesis-aware analysis with validation requirements
+  - **Output requirements**: Structured requirements for hypothesis-relevant analysis output
+  - **Template integration**: Context enrichment works with any base prompt template
+- **📋 Analysis Metadata Generation**: Complete metadata preparation including experiment context
+  - **Experiment metadata**: All experiment context information preserved in analysis metadata
+  - **Run-specific metadata**: Analysis configuration (framework, model, corpus) tracked with timestamps
+  - **Hypothesis tracking**: Experiment hypotheses linked to individual analysis runs
+  - **Academic metadata**: Publication-ready metadata with institutional and research context
+  - **Replication package**: Complete metadata for research reproducibility
+
+#### **Context-Aware Output Generation**
+- **📈 Enriched Analysis Results**: Analysis outputs enhanced with experimental context and hypothesis validation
+  - **Experiment context preservation**: Complete experiment metadata included in analysis results
+  - **Analysis run context**: Detailed tracking of analysis configuration and parameters
+  - **Hypothesis validation sections**: Structured sections for hypothesis validation (framework for Phase 5 implementation)
+  - **Academic export metadata**: Publication-ready metadata with experiment context and institutional information
+  - **Context propagation versioning**: Version tracking for context propagation system evolution
+- **📊 Validation Reports**: Comprehensive reports linking results to research questions
+  - **Experiment information**: Complete experiment context in validation reports
+  - **Hypothesis summaries**: Individual hypothesis tracking with status and analysis counts
+  - **Success criteria evaluation**: Framework for evaluating experiment success criteria
+  - **Context propagation statistics**: Tracking of context preservation throughout pipeline
+  - **Multi-analysis aggregation**: Report generation across multiple analysis runs
+
+#### **Technical Implementation Excellence**
+- **🔧 Context Propagation Pipeline**: Complete context flow from definition to output
+  - **Context extraction**: Automatic extraction from experiment JSON definitions
+  - **Context enrichment**: Prompt templates enhanced with experimental context
+  - **Context preservation**: Experiment context maintained throughout analysis pipeline
+  - **Context validation**: Comprehensive validation reports tied to original research questions
+  - **Context export**: Academic export includes complete experimental replication package
+- **📊 Validation and Demo System**: Comprehensive testing and demonstration framework
+  - **Phase 4 demo script**: Complete demonstration of all context propagation features
+  - **Context creation demo**: ExperimentContext object creation and functionality
+  - **Prompt enrichment demo**: Context-enriched prompt generation with analysis run information
+  - **Metadata generation demo**: Complete analysis metadata including experiment context
+  - **Validation report demo**: Hypothesis tracking and context propagation statistics
+
+**Phase 4 Success Results:**
+- ✅ **ExperimentContext System**: Complete experiment metadata management with hypothesis tracking
+- ✅ **Context-Enriched Prompts**: LLM prompts enhanced with experimental context and hypothesis information
+- ✅ **Analysis Metadata**: Complete metadata generation including experiment context and run information
+- ✅ **Context-Aware Output**: Analysis results enhanced with hypothesis validation and academic metadata
+- ✅ **Validation Reports**: Comprehensive reports linking results to research questions and hypothesis tracking
+- ✅ **Demo Validation**: Complete Phase 4 functionality demonstrated and validated through comprehensive demo script
+
+**Strategic Impact**: Phase 4 transforms the analysis pipeline from isolated, disconnected analyses to hypothesis-aware, context-rich research with complete experimental metadata propagation. The system now maintains research context throughout the entire pipeline, enabling systematic hypothesis validation and publication-ready academic outputs.
+
+**Next Steps**: Phase 5 (Integration & Testing), Phase 6 (Documentation & Examples) following the 6-day implementation plan.
+
+### 🏗️ IDITI FRAMEWORK CONSOLIDATION: Migration to Unified Architecture - June 16, 2025
+
+**FRAMEWORK ARCHITECTURE UPGRADE**: Successfully migrated IDITI framework from legacy multi-file structure to consolidated single-file architecture for orchestrator compatibility
+
+#### **Consolidated Framework Implementation**
+- **📄 Single-File Architecture**: Created `frameworks/iditi/framework_consolidated.json` combining all framework information
+  - **Complete consolidation**: Merged framework.json (112 lines), dipoles.json (36 lines), weights.json (25 lines) into unified structure
+  - **Enhanced language cues**: Expanded from 6 to 12 language cues per well with domain-specific additions
+  - **Framework-specific prompting**: Dedicated prompt_configuration section with identity-focused expert role and analysis guidance
+  - **Theoretical foundation**: Complete integration of Fukuyama and Jung theoretical sources with academic positioning
+- **🔧 Orchestrator Compatibility**: Framework structure optimized for comprehensive experiment orchestrator
+  - **ConsolidatedFrameworkLoader support**: Compatible with new framework loading system
+  - **Structure validation**: Passes all required section validation (framework_meta, dipoles, prompt_configuration, etc.)
+  - **Version consistency**: Maintained v2025.06.14 version alignment with database expectations
+  - **Backward compatibility**: Legacy multi-file format preserved during transition period
+
+#### **IDITI Framework Enhancement**
+- **🎯 Identity-Focused Configuration**: Specialized prompt configuration for dignity vs tribalism analysis
+  - **Expert role**: "Expert analyst of political identity and group psychology with deep knowledge of individual dignity theory and tribal psychology"
+  - **Analysis focus**: Specific guidance on dignity vs tribal identity tension evaluation
+  - **Evidence requirements**: Framework-specific instructions for textual evidence identification
+  - **Scoring emphasis**: Identity-based moral frameworks over policy positions
+- **📊 Single-Tier Weighting**: Simplified weighting philosophy focused on identity dipole
+  - **Primary tier only**: Dignity and Tribalism wells both weighted 1.0/-1.0 respectively
+  - **Theoretical justification**: Identity-based moral worth as fundamental dimension of political discourse
+  - **Calculation clarity**: Center of mass and polarity score optimized for single-dipole analysis
+
+#### **Validation and Testing**
+- **✅ Structure Validation**: Complete testing confirms all required sections present and properly formatted
+- **✅ Framework Loading**: Successfully loads through ConsolidatedFrameworkLoader system
+- **✅ Prompt Generation**: Generates 6000+ character prompts with rich domain-specific content
+- **✅ Orchestrator Integration**: Passes comprehensive experiment orchestrator component validation
+- **✅ Backward Compatibility**: Legacy format still available during transition period
+
+**Migration Impact**: IDITI framework now compatible with comprehensive experiment orchestrator and follows unified architecture standards. Framework definition reduced from 216 lines across 4 files to single logical structure with enhanced functionality and framework-specific prompt configuration.

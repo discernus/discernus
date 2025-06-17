@@ -71,7 +71,7 @@ class PlotlyCircularVisualizer:
         fig.add_hline(y=0, line_dash="dot", line_color=self.style['grid_color'], opacity=0.7)
         fig.add_vline(x=0, line_dash="dot", line_color=self.style['grid_color'], opacity=0.7)
         
-        # Base layout
+        # Base layout with locked aspect ratio
         fig.update_layout(
             width=self.figure_size,
             height=self.figure_size,
@@ -84,7 +84,9 @@ class PlotlyCircularVisualizer:
                 range=[-1.2, 1.2],
                 showgrid=True,
                 gridcolor=self.style['grid_color'],
-                gridwidth=self.style['grid_width']
+                gridwidth=self.style['grid_width'],
+                scaleanchor="y",  # Lock aspect ratio to y-axis
+                scaleratio=1      # 1:1 ratio ensures circle stays circular
             ),
             yaxis=dict(
                 visible=False,
@@ -279,7 +281,7 @@ class PlotlyCircularVisualizer:
             for trace in subplot_fig.data[1:]:  # Skip the boundary trace
                 fig.add_trace(trace, row=row, col=col)
         
-        # Update layout
+        # Update layout with aspect ratio locking for all subplots
         fig.update_layout(
             title=dict(
                 text=title,
@@ -289,6 +291,10 @@ class PlotlyCircularVisualizer:
             width=self.figure_size * 2,
             showlegend=False
         )
+        
+        # Lock aspect ratio for all subplots to keep circles circular
+        fig.update_xaxes(scaleanchor="y", scaleratio=1, range=[-1.2, 1.2])
+        fig.update_yaxes(range=[-1.2, 1.2])
         
         # Save outputs
         if output_html:

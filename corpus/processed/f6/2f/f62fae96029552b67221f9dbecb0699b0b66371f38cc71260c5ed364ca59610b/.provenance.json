@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "corpus/validation_set/conservative_dignity/larry_hogan_2023_giia_infrastructure_speech.txt",
+    "filename": "larry_hogan_2023_giia_infrastructure_speech.txt",
+    "size_bytes": 5525,
+    "modified_at": "2025-06-14T18:49:26.566947"
+  },
+  "processing": {
+    "processed_at": "2025-06-16T23:56:52.267537",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "f62fae96029552b67221f9dbecb0699b0b66371f38cc71260c5ed364ca59610b"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/f6/2f/f62fae96029552b67221f9dbecb0699b0b66371f38cc71260c5ed364ca59610b",
+    "text_file": "corpus/processed/f6/2f/f62fae96029552b67221f9dbecb0699b0b66371f38cc71260c5ed364ca59610b/hogan_speech_2023.txt",
+    "metadata_file": "corpus/processed/f6/2f/f62fae96029552b67221f9dbecb0699b0b66371f38cc71260c5ed364ca59610b/.metadata.json"
+  }
+}

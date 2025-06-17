@@ -1,0 +1,20 @@
+{
+  "text_id": "hogan_speech_2023",
+  "content_hash": "f62fae96029552b67221f9dbecb0699b0b66371f38cc71260c5ed364ca59610b",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "US Infrastructure Champion Governor Larry Hogan Addresses GIIA Board Members",
+    "author": "Larry Hogan",
+    "date": "2023-12-01",
+    "document_type": "speech",
+    "description": "Governor Larry Hogan discusses the importance of modernizing America's infrastructure and the role of public-private partnerships in achieving this goal.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-16T23:56:52.267087",
+  "original_path": "corpus/validation_set/conservative_dignity/larry_hogan_2023_giia_infrastructure_speech.txt",
+  "stable_path": "corpus/processed/f6/2f/f62fae96029552b67221f9dbecb0699b0b66371f38cc71260c5ed364ca59610b/hogan_speech_2023.txt"
+}

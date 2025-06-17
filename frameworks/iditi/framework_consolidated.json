@@ -1,0 +1,136 @@
+{
+  "framework_meta": {
+    "name": "iditi",
+    "display_name": "Individual Dignity Identity v Tribal Identity",
+    "version": "v2025.06.14",
+    "description": "Individual Dignity Identity v Tribal Identity - A specialized Narrative Gravity Map implementation focusing on the tension between individual dignity and tribal identity in persuasive discourse. This framework examines the fundamental tension between affirming universal human dignity versus prioritizing group loyalty and tribal belonging.",
+    "theoretical_foundation": {
+      "primary_sources": [
+        "Fukuyama, F. (2018). Identity: The Demand for Dignity and the Politics of Resentment.",
+        "Jung, C. G. (1921). Psychological Types. (Concepts of Individual vs. Collective Identity)"
+      ],
+      "theoretical_approach": "This framework examines narratives through the lens of individual dignity versus tribal identity, drawing on theories of identity formation and collective psychology. It analyzes how language reinforces or challenges the tension between personal autonomy and group allegiance."
+    },
+    "last_modified": "2025-06-16T21:00:00.000000"
+  },
+
+  "coordinate_system": {
+    "type": "circle",
+    "radius": 1.0,
+    "scaling_factor": 0.8,
+    "description": "Default circular coordinate system with fixed positioning strategy"
+  },
+
+  "positioning_strategy": {
+    "type": "fixed_positioning",
+    "description": "Wells are fixed at 90 and 270 degrees to represent the identity dipole - vertical axis emphasizing the moral hierarchy between dignity and tribalism.",
+    "wells": {
+      "Dignity": {
+        "angle": 90,
+        "description": "Individual Dignity Identity well fixed at 90 degrees (top of circle)."
+      },
+      "Tribalism": {
+        "angle": 270,
+        "description": "Tribal Identity well fixed at 270 degrees (bottom of circle)."
+      }
+    }
+  },
+
+  "dipoles": [
+    {
+      "name": "Identity",
+      "description": "Moral worth and group membership dynamics - the fundamental tension between individual dignity and tribal loyalty",
+      "positive": {
+        "name": "Dignity",
+        "description": "Affirms individual moral worth and universal rights, regardless of group identity. Emphasizes agency, pluralism, and character over affiliation.",
+        "language_cues": [
+          "equal dignity",
+          "inherent worth", 
+          "regardless of background",
+          "individual character",
+          "universal rights",
+          "human agency",
+          "personal dignity",
+          "individual merit",
+          "common humanity",
+          "respect for all",
+          "universal values",
+          "human dignity"
+        ],
+        "angle": 90,
+        "weight": 1.0,
+        "type": "integrative",
+        "tier": "primary"
+      },
+      "negative": {
+        "name": "Tribalism",
+        "description": "Prioritizes group dominance, loyalty, or identity over individual agency. Often frames moral worth in in-group/out-group terms.",
+        "language_cues": [
+          "real Americans",
+          "our people",
+          "they don't belong",
+          "us vs them",
+          "group loyalty",
+          "identity politics",
+          "blood and soil",
+          "true believers",
+          "outsiders",
+          "not one of us",
+          "tribal unity",
+          "group supremacy"
+        ],
+        "angle": 270,
+        "weight": -1.0,
+        "type": "disintegrative",
+        "tier": "primary"
+      }
+    }
+  ],
+
+  "weighting_philosophy": {
+    "description": "Single-tier weighting system focused on the identity dipole: Dignity and Tribalism. This framework operates on the principle that identity-based moral worth is the most fundamental dimension of political discourse.",
+    "tiers": {
+      "primary": {
+        "weight": 1.0,
+        "description": "Identity forces - the fundamental moral motivators that determine how individuals and groups relate to each other",
+        "wells": ["Dignity", "Tribalism"]
+      }
+    }
+  },
+
+  "visualization": {
+    "well_type_colors": {
+      "integrative": "#2E7D32",
+      "disintegrative": "#C62828"
+    },
+    "supported_types": ["circular", "comparative"]
+  },
+
+  "metrics": {
+    "com": {
+      "name": "Center of Mass",
+      "description": "Weighted center position considering signed weights - indicates overall orientation toward dignity vs tribalism"
+    },
+    "nps": {
+      "name": "Narrative Polarity Score", 
+      "description": "Distance from center normalized by circle radius - measures strength of identity orientation"
+    },
+    "dps": {
+      "name": "Directional Purity Score",
+      "description": "Consistency of integrative vs disintegrative pull - measures clarity of dignity vs tribalism orientation"
+    }
+  },
+
+  "prompt_configuration": {
+    "expert_role": "You are an expert analyst of political identity and group psychology, with deep knowledge of individual dignity theory and tribal psychology. You specialize in analyzing how discourse either affirms universal human dignity or appeals to tribal identity and group loyalty.",
+    "analysis_focus": "Evaluate how the text either affirms individual dignity and universal human worth OR appeals to tribal identity and group-based moral distinctions. Focus specifically on the tension between treating people as individuals with inherent worth versus defining people primarily through group membership and loyalty.",
+    "scoring_emphasis": "Focus on identity-based moral frameworks rather than policy positions. Look for how the text treats human worth: as universal and individual, or as conditional on group membership and loyalty.",
+    "evidence_requirements": "Provide specific textual evidence for each well score, identifying language that either affirms individual dignity and universal rights or prioritizes group identity and tribal belonging. Explain why the text leans toward dignity or tribalism."
+  },
+
+  "compatibility": {
+    "prompt_templates": ["hierarchical_v2.1", "standard_v2.0"],
+    "weighting_schemes": ["winner_take_most", "proportional"],
+    "api_versions": ["v2.0", "v2.1"]
+  }
+} 

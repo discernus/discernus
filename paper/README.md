@@ -1,30 +1,58 @@
-# Narrative Gravity Maps: Academic Paper Development
+# Academic Papers: Dual Development
 
-This directory contains all materials related to the academic paper on Narrative Gravity Maps methodology.
+This directory contains all materials related to two complementary academic papers being developed in parallel within the Narrative Gravity Analysis project.
 
 ## Directory Structure
 
 ```
 paper/
-├── README.md                    # This file - paper development guide
-├── PAPER_CHANGELOG.md           # Version history and changes
-├── drafts/                      # Version-controlled paper drafts
-│   ├── narrative_gravity_maps_v1.0.0.md    # Current corrected draft
-│   └── [future versions]
-├── evidence/                    # Supporting evidence and data
-│   ├── validation_studies/      # Human validation study results
-│   ├── technical_validation/    # Cross-LLM consistency data
-│   ├── case_studies/           # Analyzed speeches and results
-│   └── figures/                # Charts, visualizations, tables
-├── reviews/                     # Peer review and feedback
-│   ├── internal_reviews/        # Self-review and iteration notes
-│   ├── expert_feedback/         # External expert input
-│   └── journal_reviews/         # Formal peer review (when received)
-└── submission/                  # Journal submission materials
-    ├── formatted_versions/      # Journal-specific formatted drafts
-    ├── supplementary_materials/ # Additional files for submission
-    └── replication_package/     # Complete reproducibility materials
+├── README.md                           # This file - dual paper development guide
+├── PAPER_CHANGELOG.md                  # Shared version history and changes
+├── ngmp_twm_glossary.md               # Shared terminology for both papers
+├── manage_paper.py                     # Paper management utilities
+├── drafts/                            # Version-controlled paper drafts
+│   ├── narrative_gravity_maps/        # NGM Paper: Universal Methodology
+│   │   ├── README.md                  # NGM-specific development guide
+│   │   ├── narrative_gravity_maps_v1.3.1.md  # Latest NGM version
+│   │   └── [version history]         # Previous NGM versions
+│   └── three_wells_model/             # TWM Paper: Political Discourse Theory
+│       ├── README.md                  # TWM-specific development guide
+│       ├── three_wells_model_paper_draft_v1.md  # Latest TWM version
+│       └── [future versions]         # TWM version history
+├── bibliography/                       # Shared bibliography for both papers
+├── evidence/                          # Supporting evidence and data
+│   ├── validation_studies/            # Human validation study results
+│   ├── technical_validation/          # Cross-LLM consistency data
+│   ├── case_studies/                  # Analyzed speeches and results
+│   └── figures/                       # Charts, visualizations, tables
+├── reviews/                           # Peer review and feedback
+│   ├── internal_reviews/              # Self-review and iteration notes
+│   ├── expert_feedback/               # External expert input
+│   └── journal_reviews/               # Formal peer review (when received)
+└── submission/                        # Journal submission materials
+    ├── formatted_versions/            # Journal-specific formatted drafts
+    ├── supplementary_materials/       # Additional files for submission
+    └── replication_package/           # Complete reproducibility materials
 ```
+
+## Two Complementary Papers
+
+### 1. Narrative Gravity Maps (NGM) Paper
+**Focus**: Universal quantitative methodology for analyzing persuasive discourse across any analytical domain
+**Current Version**: v1.3.1 - Framework-Agnostic Universal Methodology with Systematic Experimental Design
+**Key Contribution**: Technical methodology with systematic experimental design framework
+
+### 2. Three Gravitational Wells Model (TWM) Paper  
+**Focus**: Specific theoretical framework for understanding contemporary political discourse
+**Current Version**: v1.0 - Three Gravitational Wells of Contemporary Political Discourse: An Integrative Analysis
+**Key Contribution**: Political theory applying gravitational wells concept to contemporary discourse
+
+### Relationship and Synergy
+- **NGM Paper**: Provides the universal methodology and technical infrastructure
+- **TWM Paper**: Demonstrates a specific theoretical application with political significance
+- **Parallel Development**: Both papers can advance simultaneously, each strengthening the other
+- **Shared Foundation**: Same underlying mathematical framework and computational implementation
+- **Different Audiences**: NGM targets methodological/computational communities; TWM targets political science/theory communities
 
 ## Paper Development Workflow
 
@@ -58,15 +86,33 @@ cp paper/drafts/narrative_gravity_maps_v1.0.0.md paper/drafts/narrative_gravity_
 
 ## Current Status
 
-**Current Version**: v1.0.0 (June 2025)
-**Status**: PROGRESSIVE UPDATE
-**Next Milestone**: Human validation studies required before publication submission
+### Narrative Gravity Maps Paper
+**Current Version**: v1.3.1 (December 2024)
+**Status**: EXPERIMENTAL DESIGN FRAMEWORK COMPLETE
+**Next Milestone**: Complete systematic experimental validation across all five frameworks
 
-### Key Validation Tasks Remaining:
+**Key Development Tasks**:
+- [ ] Complete systematic experimental validation across all five frameworks
+- [ ] Conduct human-LLM comparison studies for each framework implementation  
+- [ ] Generate publication-ready experimental results visualizations
+- [ ] Develop comprehensive experimental replication packages
+
+### Three Wells Model Paper
+**Current Version**: v1.0 (December 2024)
+**Status**: THEORETICAL FRAMEWORK COMPLETE
+**Next Milestone**: Empirical validation using NGM methodology
+
+**Key Development Tasks**:
+- [ ] Implement pilot empirical strategy using Narrative Gravity Map methodology
+- [ ] Complete development of Historical Ideological Triangle framework (Appendix A)
+- [ ] Develop more detailed case studies and evidence
+- [ ] Strengthen discussion of democratic implications and practical applications
+
+### Shared Validation Requirements:
 - [ ] Expert annotation studies comparing LLM outputs to human judgment
-- [ ] Cross-cultural validation of framework assumptions
+- [ ] Cross-cultural validation of framework assumptions  
 - [ ] Temporal consistency testing across different time periods
-- [ ] Salience ranking validation studies
+- [ ] Human validation studies (critical gap for both papers)
 
 ## Evidence Requirements
 

@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "corpus/validation_set/conservative_dignity/tillis_coons_2017_criminal_justice_reform.txt",
+    "filename": "tillis_coons_2017_criminal_justice_reform.txt",
+    "size_bytes": 5641,
+    "modified_at": "2025-06-14T18:55:46.358821"
+  },
+  "processing": {
+    "processed_at": "2025-06-16T23:56:55.214956",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "078694a9633ab74cc87249ab1b14a17980f211b4ebd016a4723eb1355b526e32"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/07/86/078694a9633ab74cc87249ab1b14a17980f211b4ebd016a4723eb1355b526e32",
+    "text_file": "corpus/processed/07/86/078694a9633ab74cc87249ab1b14a17980f211b4ebd016a4723eb1355b526e32/dde_speech_2017.txt",
+    "metadata_file": "corpus/processed/07/86/078694a9633ab74cc87249ab1b14a17980f211b4ebd016a4723eb1355b526e32/.metadata.json"
+  }
+}

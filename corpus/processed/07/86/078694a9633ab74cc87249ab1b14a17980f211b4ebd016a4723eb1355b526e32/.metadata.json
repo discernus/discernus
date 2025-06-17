@@ -1,0 +1,20 @@
+{
+  "text_id": "dde_speech_2017",
+  "content_hash": "078694a9633ab74cc87249ab1b14a17980f211b4ebd016a4723eb1355b526e32",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "America's Criminal Justice System Is Broken",
+    "author": "Thom Tillis (R-NC) and Chris Coons (D-DE)",
+    "date": "2017-01-09",
+    "document_type": "speech",
+    "description": "Bipartisan op-ed discussing the broken criminal justice system in the United States and the need for reform, particularly focusing on juvenile offenders.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-16T23:56:55.214768",
+  "original_path": "corpus/validation_set/conservative_dignity/tillis_coons_2017_criminal_justice_reform.txt",
+  "stable_path": "corpus/processed/07/86/078694a9633ab74cc87249ab1b14a17980f211b4ebd016a4723eb1355b526e32/dde_speech_2017.txt"
+}

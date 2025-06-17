@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "corpus/validation_set/conservative_dignity/john_mccain_2008_concession_speech.txt",
+    "filename": "john_mccain_2008_concession_speech.txt",
+    "size_bytes": 7416,
+    "modified_at": "2025-06-14T18:18:52.439761"
+  },
+  "processing": {
+    "processed_at": "2025-06-16T23:56:48.981857",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "563f9a0e138d2b5442f841146da9a200377933e95c41ce2b26b3954c7ce208d0"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/56/3f/563f9a0e138d2b5442f841146da9a200377933e95c41ce2b26b3954c7ce208d0",
+    "text_file": "corpus/processed/56/3f/563f9a0e138d2b5442f841146da9a200377933e95c41ce2b26b3954c7ce208d0/nominee_speech_2008.txt",
+    "metadata_file": "corpus/processed/56/3f/563f9a0e138d2b5442f841146da9a200377933e95c41ce2b26b3954c7ce208d0/.metadata.json"
+  }
+}

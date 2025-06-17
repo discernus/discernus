@@ -1,0 +1,20 @@
+{
+  "text_id": "nominee_speech_2008",
+  "content_hash": "563f9a0e138d2b5442f841146da9a200377933e95c41ce2b26b3954c7ce208d0",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "John McCain - 2008 Presidential Election Concession Speech",
+    "author": "John McCain, U.S. Senator from Arizona and Republican Presidential Nominee",
+    "date": "2008-11-04",
+    "document_type": "speech",
+    "description": "Concession speech following defeat to Barack Obama in the 2008 presidential election, widely praised as one of the most gracious and dignified concession speeches in modern American political history.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-16T23:56:48.981565",
+  "original_path": "corpus/validation_set/conservative_dignity/john_mccain_2008_concession_speech.txt",
+  "stable_path": "corpus/processed/56/3f/563f9a0e138d2b5442f841146da9a200377933e95c41ce2b26b3954c7ce208d0/nominee_speech_2008.txt"
+}

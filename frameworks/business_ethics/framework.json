@@ -1,0 +1,352 @@
+{
+  "framework_meta": {
+    "name": "business_ethics",
+    "display_name": "Business Ethics Framework",
+    "version": "v2025.12.16",
+    "description": "Analyzes business communications across three domains of ethical concern: stakeholder relationships, operational integrity, and strategic vision. Demonstrates flexible dipole clustering on defined arcs.",
+    "theoretical_foundation": {
+      "primary_sources": [
+        "Freeman, R.E. (1984). Strategic Management: A Stakeholder Approach",
+        "Solomon, R.C. (1992). Ethics and Excellence: Cooperation and Integrity in Business"
+      ],
+      "theoretical_approach": "Stakeholder-based ethical analysis focusing on three domains of business responsibility clustered around specific arcs of analytical space."
+    },
+    "last_modified": "2025-12-16T16:30:00.000000"
+  },
+
+  "coordinate_system": {
+    "type": "circle",
+    "radius": 1.0,
+    "scaling_factor": 1.0,
+    "description": "Circular coordinate system with dipoles clustered in three defined business ethics domains"
+  },
+
+  "positioning_strategy": {
+    "type": "domain_arc_clustering",
+    "description": "Dipoles clustered within specific arcs representing distinct domains of business ethics",
+    "clusters": {
+      "stakeholder_relations": {
+        "center_angle": 45,
+        "span": 60,
+        "arc_range": [15, 75],
+        "dipole_count": 2,
+        "description": "Stakeholder relationship ethics clustered in upper-right quadrant",
+        "positioning_method": "even_distribution_within_arc"
+      },
+      "operational_integrity": {
+        "center_angle": 165,
+        "span": 90,
+        "arc_range": [120, 210],
+        "dipole_count": 2,
+        "description": "Operational and governance ethics clustered in left quadrant",
+        "positioning_method": "even_distribution_within_arc"
+      },
+      "strategic_vision": {
+        "center_angle": 315,
+        "span": 90,
+        "arc_range": [270, 360],
+        "dipole_count": 1,
+        "description": "Strategic and long-term vision ethics clustered in lower-right quadrant",
+        "positioning_method": "center_focused"
+      }
+    },
+    "cluster_separation": "minimum_30_degrees",
+    "allow_overlap": false
+  },
+
+  "framework_type": "clustered_dipoles",
+
+  "dipoles": [
+    {
+      "name": "Customer Relations",
+      "cluster": "stakeholder_relations",
+      "description": "How business communications treat customer needs and rights",
+      "positive": {
+        "name": "Customer Service",
+        "description": "Prioritizes genuine customer benefit and transparent value delivery",
+        "language_cues": {
+          "customer_focus": [
+            "customer success",
+            "genuine value",
+            "long-term relationship",
+            "customer feedback",
+            "solving real problems",
+            "transparent pricing",
+            "honest communication",
+            "customer-first"
+          ]
+        },
+        "angle": 30,
+        "weight": 1.0,
+        "type": "integrative",
+        "tier": "primary"
+      },
+      "negative": {
+        "name": "Customer Exploitation",
+        "description": "Prioritizes extraction of value from customers over genuine service",
+        "language_cues": {
+          "exploitation": [
+            "maximize extraction",
+            "hidden fees",
+            "planned obsolescence",
+            "vendor lock-in",
+            "dark patterns",
+            "manipulative marketing",
+            "bait and switch",
+            "profit maximization"
+          ]
+        },
+        "angle": 210,
+        "weight": -1.0,
+        "type": "disintegrative",
+        "tier": "primary"
+      }
+    },
+    {
+      "name": "Employee Relations",
+      "cluster": "stakeholder_relations", 
+      "description": "How business communications address worker dignity and development",
+      "positive": {
+        "name": "Employee Development",
+        "description": "Invests in worker growth, safety, and meaningful contribution",
+        "language_cues": {
+          "development_focus": [
+            "employee growth",
+            "professional development",
+            "workplace safety",
+            "meaningful work",
+            "work-life balance",
+            "fair compensation",
+            "career advancement",
+            "team empowerment"
+          ]
+        },
+        "angle": 60,
+        "weight": 0.9,
+        "type": "integrative",
+        "tier": "secondary"
+      },
+      "negative": {
+        "name": "Employee Exploitation",
+        "description": "Treats workers as disposable resources for profit extraction",
+        "language_cues": {
+          "exploitation": [
+            "human resources",
+            "cost cutting",
+            "efficiency gains",
+            "lean operations",
+            "expendable workforce",
+            "maximize productivity",
+            "reduce labor costs",
+            "streamline operations"
+          ]
+        },
+        "angle": 240,
+        "weight": -0.9,
+        "type": "disintegrative", 
+        "tier": "secondary"
+      }
+    },
+    {
+      "name": "Governance Transparency",
+      "cluster": "operational_integrity",
+      "description": "How business communications handle accountability and decision-making processes",
+      "positive": {
+        "name": "Accountability",
+        "description": "Demonstrates transparent governance and responsible decision-making",
+        "language_cues": {
+          "transparency": [
+            "transparent governance",
+            "accountable leadership",
+            "open decision-making",
+            "stakeholder input", 
+            "ethical standards",
+            "responsible practices",
+            "oversight mechanisms",
+            "public reporting"
+          ]
+        },
+        "angle": 135,
+        "weight": 0.8,
+        "type": "integrative",
+        "tier": "secondary"
+      },
+      "negative": {
+        "name": "Opacity",
+        "description": "Conceals decision-making processes and avoids accountability",
+        "language_cues": {
+          "concealment": [
+            "proprietary information",
+            "confidential strategy",
+            "need to know basis",
+            "trade secrets",
+            "competitive advantage",
+            "internal matters",
+            "executive privilege",
+            "strategic confidentiality"
+          ]
+        },
+        "angle": 315,
+        "weight": -0.8,
+        "type": "disintegrative",
+        "tier": "secondary"
+      }
+    },
+    {
+      "name": "Financial Integrity",
+      "cluster": "operational_integrity",
+      "description": "How business communications handle financial responsibility and reporting",
+      "positive": {
+        "name": "Financial Responsibility",
+        "description": "Demonstrates prudent financial management and honest reporting",
+        "language_cues": {
+          "responsibility": [
+            "sustainable growth",
+            "prudent management",
+            "accurate reporting",
+            "financial discipline",
+            "long-term stability",
+            "responsible investment",
+            "sound fundamentals",
+            "fiscal responsibility"
+          ]
+        },
+        "angle": 195,
+        "weight": 0.8,
+        "type": "integrative",
+        "tier": "secondary"
+      },
+      "negative": {
+        "name": "Financial Manipulation",
+        "description": "Engages in accounting manipulation or unsustainable financial practices",
+        "language_cues": {
+          "manipulation": [
+            "aggressive accounting",
+            "revenue recognition",
+            "financial engineering",
+            "off-balance sheet",
+            "creative bookkeeping",
+            "earnings management",
+            "regulatory arbitrage",
+            "financial optimization"
+          ]
+        },
+        "angle": 15,
+        "weight": -0.8,
+        "type": "disintegrative",
+        "tier": "secondary"
+      }
+    },
+    {
+      "name": "Strategic Purpose",
+      "cluster": "strategic_vision",
+      "description": "How business communications frame long-term purpose and societal impact",
+      "positive": {
+        "name": "Sustainable Purpose",
+        "description": "Articulates long-term value creation for society and stakeholders",
+        "language_cues": {
+          "purpose_driven": [
+            "sustainable impact",
+            "societal benefit",
+            "long-term value",
+            "positive contribution",
+            "meaningful mission",
+            "stakeholder capitalism",
+            "social responsibility",
+            "environmental stewardship"
+          ]
+        },
+        "angle": 315,
+        "weight": 0.7,
+        "type": "integrative",
+        "tier": "tertiary"
+      },
+      "negative": {
+        "name": "Short-term Extraction",
+        "description": "Focuses solely on short-term profit extraction without regard for long-term consequences",
+        "language_cues": {
+          "extraction": [
+            "quarterly results",
+            "shareholder value",
+            "cost optimization",
+            "market efficiency",
+            "competitive advantage",
+            "profit maximization",
+            "operational leverage",
+            "margin expansion"
+          ]
+        },
+        "angle": 135,
+        "weight": -0.7,
+        "type": "disintegrative",
+        "tier": "tertiary"
+      }
+    }
+  ],
+
+  "calculation_method": {
+    "type": "clustered_dipole_center_of_mass",
+    "description": "Calculate center of mass accounting for cluster-based dipole organization",
+    "cluster_weighting": {
+      "stakeholder_relations": 0.4,
+      "operational_integrity": 0.4, 
+      "strategic_vision": 0.2
+    },
+    "formula": "COM = Σ(cluster_weight × dipole_COM) for each cluster"
+  },
+
+  "prompt_configuration": {
+    "expert_role": "You are an expert business ethics analyst specializing in stakeholder capitalism, corporate governance, and sustainable business practices with deep knowledge of ethical frameworks for evaluating business communications.",
+    "analysis_focus": "Evaluate how business communications demonstrate ethical orientation across three domains: stakeholder relationships, operational integrity, and strategic vision, noting clustering patterns within each domain.",
+    "scoring_emphasis": "Assess ethical positioning within each domain cluster, considering how different business ethics concerns manifest in distinct areas of corporate communication.",
+    "evidence_requirements": "Provide specific textual evidence supporting each well score, explaining how language patterns reflect underlying business ethics assumptions within each domain cluster.",
+    "framework_specific_guidance": {
+      "cluster_awareness": [
+        "Recognize that dipoles are clustered by business domain",
+        "Stakeholder relations cluster focuses on customer and employee treatment",
+        "Operational integrity cluster addresses governance and financial practices", 
+        "Strategic vision cluster examines long-term purpose and sustainability",
+        "Consider domain-specific ethical patterns and language"
+      ]
+    }
+  },
+
+  "visualization": {
+    "cluster_colors": {
+      "stakeholder_relations": "#4CAF50",
+      "operational_integrity": "#2196F3",
+      "strategic_vision": "#FF9800"
+    },
+    "cluster_boundaries": {
+      "show_arc_boundaries": true,
+      "boundary_style": "dashed",
+      "boundary_opacity": 0.3
+    },
+    "well_colors": {
+      "integrative": "#2E7D32",
+      "disintegrative": "#C62828"
+    },
+    "supported_types": ["circular", "clustered"]
+  },
+
+  "metrics": {
+    "com": {
+      "name": "Center of Mass", 
+      "description": "Overall ethical orientation considering cluster-weighted dipole forces"
+    },
+    "ccs": {
+      "name": "Cluster Coherence Score",
+      "description": "Consistency of ethical orientation within each domain cluster"
+    },
+    "des": {
+      "name": "Domain Ethics Score",
+      "description": "Ethical performance score for each of the three business domains"
+    }
+  },
+
+  "compatibility": {
+    "prompt_templates": ["clustered_dipoles_v1.0"],
+    "calculation_methods": ["clustered_dipole_center_of_mass"],
+    "api_versions": ["v2.1"]
+  }
+} 

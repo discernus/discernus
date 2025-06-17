@@ -212,10 +212,24 @@ class NarrativeGravityVisualizationEngine:
         
         fig.update_layout(**layout_config)
         
-        # Update subplot axes
+        # Update subplot axes with aspect ratio locking to keep circles circular
         for i in range(1, rows*cols + 1):
-            fig.update_xaxes(visible=False, range=[-1.2, 1.2], row=(i-1)//cols + 1, col=(i-1)%cols + 1)
-            fig.update_yaxes(visible=False, range=[-1.2, 1.2], row=(i-1)//cols + 1, col=(i-1)%cols + 1)
+            row_idx = (i-1)//cols + 1
+            col_idx = (i-1)%cols + 1
+            fig.update_xaxes(
+                visible=False, 
+                range=[-1.2, 1.2], 
+                scaleanchor=f"y{i}", 
+                scaleratio=1,
+                row=row_idx, 
+                col=col_idx
+            )
+            fig.update_yaxes(
+                visible=False, 
+                range=[-1.2, 1.2], 
+                row=row_idx, 
+                col=col_idx
+            )
         
         # Add summary if requested
         if include_summary and len(analyses) > 1:

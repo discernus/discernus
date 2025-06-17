@@ -1,0 +1,20 @@
+{
+  "text_id": "utah_speech_2020",
+  "content_hash": "125756c23d6e75a7872154891ac4dd80c66b06e1245ba5d2627f900371a0d38d",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "Mitt Romney - Senate Floor Speech on Impeachment Vote",
+    "author": "Mitt Romney, U.S. Senator from Utah",
+    "date": "2020-02-05",
+    "document_type": "speech",
+    "description": "Speech explaining Mitt Romney's vote to convict President Trump on abuse of power charges during the Senate Impeachment Trial of President Donald Trump.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-16T23:56:53.774941",
+  "original_path": "corpus/validation_set/conservative_dignity/mitt_romney_2020_impeachment_vote.txt",
+  "stable_path": "corpus/processed/12/57/125756c23d6e75a7872154891ac4dd80c66b06e1245ba5d2627f900371a0d38d/utah_speech_2020.txt"
+}

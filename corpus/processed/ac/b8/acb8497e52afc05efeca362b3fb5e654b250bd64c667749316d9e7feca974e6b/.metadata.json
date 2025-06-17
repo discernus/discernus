@@ -1,0 +1,20 @@
+{
+  "text_id": "reagan_speech_1986",
+  "content_hash": "acb8497e52afc05efeca362b3fb5e654b250bd64c667749316d9e7feca974e6b",
+  "extraction_confidence": 100.0,
+  "extracted_metadata": {
+    "title": "Address to the Nation on the Challenger Disaster",
+    "author": "Ronald Reagan",
+    "date": "1986-01-28",
+    "document_type": "speech",
+    "description": "President Ronald Reagan's address to the nation following the Space Shuttle Challenger disaster, paying tribute to the crew and offering comfort to the nation.",
+    "language": "en",
+    "confidence_score": 100.0,
+    "extraction_notes": [
+      "Confidence level: High"
+    ]
+  },
+  "processed_at": "2025-06-16T23:56:46.975751",
+  "original_path": "/var/folders/s8/5pq48bwj2jd9s2fwyh7g_y300000gn/T/tmp1lt6bh1g/ronald_reagan_1986_challenger_address.txt",
+  "stable_path": "corpus/processed/ac/b8/acb8497e52afc05efeca362b3fb5e654b250bd64c667749316d9e7feca974e6b/reagan_speech_1986.txt"
+}

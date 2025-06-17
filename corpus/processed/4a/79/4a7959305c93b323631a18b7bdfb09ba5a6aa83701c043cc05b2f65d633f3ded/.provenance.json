@@ -1,0 +1,19 @@
+{
+  "source_file": {
+    "original_path": "corpus/validation_set/conservative_dignity/rick_perry_2016_alec_speech.txt",
+    "filename": "rick_perry_2016_alec_speech.txt",
+    "size_bytes": 26656,
+    "modified_at": "2025-06-14T18:35:46.098175"
+  },
+  "processing": {
+    "processed_at": "2025-06-16T23:56:50.399867",
+    "confidence_score": 100.0,
+    "extraction_method": "intelligent_ingestion",
+    "content_hash": "4a7959305c93b323631a18b7bdfb09ba5a6aa83701c043cc05b2f65d633f3ded"
+  },
+  "stable_location": {
+    "directory": "corpus/processed/4a/79/4a7959305c93b323631a18b7bdfb09ba5a6aa83701c043cc05b2f65d633f3ded",
+    "text_file": "corpus/processed/4a/79/4a7959305c93b323631a18b7bdfb09ba5a6aa83701c043cc05b2f65d633f3ded/perry_speech_2016.txt",
+    "metadata_file": "corpus/processed/4a/79/4a7959305c93b323631a18b7bdfb09ba5a6aa83701c043cc05b2f65d633f3ded/.metadata.json"
+  }
+}
