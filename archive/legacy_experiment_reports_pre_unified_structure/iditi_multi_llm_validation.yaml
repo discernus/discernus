@@ -1,0 +1,190 @@
+experiment_meta:
+  name: "iditi_multi_llm_validation"
+  version: "1.0.0"
+  description: "Multi-LLM reliability validation study for IDITI framework"
+  created: "2025-06-17T12:00:00Z"
+  principal_investigator: "Research Team"
+  institution: "Narrative Gravity Research Lab"
+  ethical_clearance: "IRB-2025-001"
+  funding_source: "Internal Research"
+  publication_intent: "Academic publication planned"
+  research_context: "This study validates the reliability and consistency of the IDITI framework across multiple LLM providers"
+  hypotheses:
+    - "H1: Dignity and Tribalism scores show discriminative validity across multiple LLMs"
+    - "H2: Analysis demonstrates ideological agnosticism across different political texts"
+    - "H3: Multi-LLM consensus scores align with theoretical framework expectations"
+  success_criteria:
+    - "ICC > 0.75 between LLM providers"
+    - "Cronbach's α > 0.70 for internal consistency"
+    - "All statistical hypotheses tested with proper confidence intervals"
+    - "Cost efficiency maintained under $5.00 total"
+
+components:
+  frameworks:
+    - id: "iditi"
+      framework_id: "iditi"
+      version: "2025.06.14"
+  corpus:
+    - id: "reagan_1986_challenger"
+      file_path: "corpus/validation_set/conservative_dignity/ronald_reagan_1986_challenger_address.txt"
+    - id: "aoc_2025_rally"
+      file_path: "corpus/validation_set/progressive_tribalism/aoc_2025_fighting_oligarchy_rally.txt"
+    - id: "obama_2004_dnc"
+      file_path: "corpus/validation_set/progressive_dignity/obama_2004_dnc.txt"
+    - id: "john_lewis_1963"
+      file_path: "corpus/validation_set/progressive_dignity/john_lewis_1963_march_washington.txt"
+    - id: "mccain_concession_2008"
+      file_path: "corpus/validation_set/conservative_dignity/john_mccain_2008_concession_speech.txt"
+    - id: "progressive_balanced_control"
+      file_path: "corpus/validation_set/mixed_controls/progressive_balanced_1.txt"
+    - id: "conservative_balanced_control"
+      file_path: "corpus/validation_set/mixed_controls/conservative_balanced_1.txt"
+    - id: "conservative_dignity_control"
+      file_path: "corpus/validation_set/extreme_controls/conservative_dignity_control.txt"
+  prompt_templates:
+    - id: "traditional_analysis"
+      template_id: "traditional_analysis"
+      version: "1.0.0"
+  weighting_schemes:
+    - id: "standard"
+      scheme_id: "standard"
+      version: "1.0.0"
+  models:
+    - model_id: "gpt-4o"
+      provider: "openai"
+    - model_id: "claude-3-5-sonnet-20241022"
+      provider: "anthropic"
+    - model_id: "gemini-2.0-flash-exp"
+      provider: "google"
+
+execution:
+  description: "Multi-LLM reliability validation with 3 replications per provider"
+  quality_assurance:
+    confidence_threshold: 0.7
+    response_completeness_check: true
+    json_validation: true
+    outlier_detection: true
+  # Multi-LLM reliability matrix
+  matrix:
+    # GPT-4o runs (3 replications for test-retest reliability)
+    - run_id: "gpt4o_replication_1"
+      description: "GPT-4o first replication"
+      framework: "iditi"
+      model: "gpt-4o"
+      provider: "openai"
+      prompt_template: "traditional_analysis"
+      replication_number: 1
+    - run_id: "gpt4o_replication_2"
+      description: "GPT-4o second replication"
+      framework: "iditi"
+      model: "gpt-4o"
+      provider: "openai"
+      prompt_template: "traditional_analysis"
+      replication_number: 2
+    - run_id: "gpt4o_replication_3"
+      description: "GPT-4o third replication"
+      framework: "iditi"
+      model: "gpt-4o"
+      provider: "openai"
+      prompt_template: "traditional_analysis"
+      replication_number: 3
+    
+    # Claude-3.5-Sonnet runs (3 replications)
+    - run_id: "claude_replication_1"
+      description: "Claude-3.5-Sonnet first replication"
+      framework: "iditi"
+      model: "claude-3-5-sonnet-20241022"
+      provider: "anthropic"
+      prompt_template: "traditional_analysis"
+      replication_number: 1
+    - run_id: "claude_replication_2"
+      description: "Claude-3.5-Sonnet second replication"
+      framework: "iditi"
+      model: "claude-3-5-sonnet-20241022"
+      provider: "anthropic"
+      prompt_template: "traditional_analysis"
+      replication_number: 2
+    - run_id: "claude_replication_3"
+      description: "Claude-3.5-Sonnet third replication"
+      framework: "iditi"
+      model: "claude-3-5-sonnet-20241022"
+      provider: "anthropic"
+      prompt_template: "traditional_analysis"
+      replication_number: 3
+    
+    # Gemini-2.0-Flash runs (3 replications)
+    - run_id: "gemini_replication_1"
+      description: "Gemini-2.0-Flash first replication"
+      framework: "iditi"
+      model: "gemini-2.0-flash-exp"
+      provider: "google"
+      prompt_template: "traditional_analysis"
+      replication_number: 1
+    - run_id: "gemini_replication_2"
+      description: "Gemini-2.0-Flash second replication"
+      framework: "iditi"
+      model: "gemini-2.0-flash-exp"
+      provider: "google"
+      prompt_template: "traditional_analysis"
+      replication_number: 2
+    - run_id: "gemini_replication_3"
+      description: "Gemini-2.0-Flash third replication"
+      framework: "iditi"
+      model: "gemini-2.0-flash-exp"
+      provider: "google"
+      prompt_template: "traditional_analysis"
+      replication_number: 3
+
+  # Cost and quality controls
+  cost_controls:
+    max_total_cost: 5.00
+    cost_per_analysis_limit: 0.25
+    budget_alert_threshold: 4.00
+  
+  quality_controls:
+    confidence_threshold: 0.7
+    response_completeness_check: true
+    json_validation: true
+    outlier_detection: true
+  
+  # Reliability analysis configuration
+  reliability_analysis:
+    enabled: true
+    target_icc: 0.75
+    target_cronbach_alpha: 0.70
+    correlation_threshold: 0.80
+    coefficient_variation_threshold: 0.20
+    
+  # Post-analysis pipeline
+  analysis_pipeline:
+    statistical_testing: true
+    reliability_metrics: true
+    visualization_generation: true
+    html_report_generation: true
+    auto_browser_open: true
+
+# Study design metadata
+study_design:
+  type: "multi_llm_reliability_validation"
+  total_analyses: 72  # 3 LLMs × 8 texts × 3 replications
+  expected_duration: "45-60 minutes"
+  statistical_power: 0.80
+  significance_level: 0.05
+  
+research_context: |
+  This study validates the reliability and consistency of the IDITI (Identity, 
+  Dignity, Truth, Justice) framework across multiple LLM providers. The study 
+  tests whether the framework can produce consistent results regardless of the 
+  specific LLM used, which is crucial for establishing methodological credibility 
+  in computational text analysis.
+  
+  The study uses a balanced corpus representing different ideological positions 
+  and dignitarian vs tribalistic rhetoric to test the framework's discriminative 
+  validity and ideological agnosticism.
+
+tags:
+  - "multi_llm"
+  - "reliability_validation"
+  - "iditi_framework"
+  - "interrater_reliability"
+  - "methodological_validation" 

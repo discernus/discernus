@@ -1,0 +1,108 @@
+{
+  "analysis_type": "single_rater_descriptive",
+  "metadata": {
+    "model_count": 1,
+    "well_count": 10,
+    "sample_size": 4,
+    "analysis_timestamp": "2025-06-17T10:28:44.577470"
+  },
+  "descriptive_statistics": {
+    "well_compassion": {
+      "count": 4,
+      "mean": 0.5325000000000001,
+      "std": 0.3960955271985114,
+      "min": 0.18,
+      "max": 0.9,
+      "range": 0.72,
+      "cv": 74.38413656310071
+    },
+    "well_equity": {
+      "count": 4,
+      "mean": 0.55,
+      "std": 0.30044411571316665,
+      "min": 0.28,
+      "max": 0.82,
+      "range": 0.5399999999999999,
+      "cv": 54.626202856939386
+    },
+    "well_solidarity": {
+      "count": 4,
+      "mean": 0.48,
+      "std": 0.2839013913315678,
+      "min": 0.22,
+      "max": 0.75,
+      "range": 0.53,
+      "cv": 59.14612319407663
+    },
+    "well_hierarchy": {
+      "count": 4,
+      "mean": 0.545,
+      "std": 0.3702701716314723,
+      "min": 0.2,
+      "max": 0.88,
+      "range": 0.6799999999999999,
+      "cv": 67.93948103329767
+    },
+    "well_purity": {
+      "count": 4,
+      "mean": 0.6,
+      "std": 0.35814336049502116,
+      "min": 0.28,
+      "max": 0.92,
+      "range": 0.64,
+      "cv": 59.69056008250353
+    },
+    "well_cruelty": {
+      "count": 4,
+      "mean": 0.1225,
+      "std": 0.020615528128088298,
+      "min": 0.1,
+      "max": 0.15,
+      "range": 0.04999999999999999,
+      "cv": 16.829002553541468
+    },
+    "well_exploitation": {
+      "count": 4,
+      "mean": 0.20750000000000002,
+      "std": 0.029860788111948193,
+      "min": 0.18,
+      "max": 0.25,
+      "range": 0.07,
+      "cv": 14.390741258770213
+    },
+    "well_treachery": {
+      "count": 4,
+      "mean": 0.09000000000000001,
+      "std": 0.011547005383792518,
+      "min": 0.08,
+      "max": 0.1,
+      "range": 0.020000000000000004,
+      "cv": 12.830005981991684
+    },
+    "well_rebellion": {
+      "count": 4,
+      "mean": 0.40750000000000003,
+      "std": 0.25210778118363053,
+      "min": 0.18,
+      "max": 0.65,
+      "range": 0.47000000000000003,
+      "cv": 61.86694016776209
+    },
+    "well_corruption": {
+      "count": 4,
+      "mean": 0.1725,
+      "std": 0.04573474244670748,
+      "min": 0.12,
+      "max": 0.22,
+      "range": 0.1,
+      "cv": 26.512894172004337
+    }
+  },
+  "internal_consistency": {
+    "split_half_correlation": -0.6511789869670546,
+    "split_half_p_value": 0.34882101303294544,
+    "spearman_brown_coefficient": -3.7335995403783317,
+    "interpretation": "poor"
+  },
+  "message": "Single rater detected - full reliability analysis requires multiple raters"
+}

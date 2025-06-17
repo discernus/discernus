@@ -1,0 +1,910 @@
+{
+  "hypothesis_testing": {
+    "H1_discriminative_validity": {
+      "hypothesis": "Discriminative validity: Dignity and Tribalism wells differentiate expected text categories",
+      "dignity_wells": [
+        "well_Dignity"
+      ],
+      "tribalism_wells": [
+        "well_Tribalism"
+      ],
+      "tests_performed": [
+        {
+          "comparison": "well_Dignity vs well_Tribalism",
+          "test_type": "paired_t_test",
+          "t_statistic": 0.23076923076923045,
+          "p_value": 0.8226545408271236,
+          "significant": "False",
+          "dignity_mean": 0.55,
+          "tribalism_mean": 0.5,
+          "dignity_std": 0.3689323936863109,
+          "tribalism_std": 0.31622776601683794,
+          "sample_sizes": {
+            "dignity": 10,
+            "tribalism": 10
+          }
+        }
+      ],
+      "status": "not_supported",
+      "significant_comparisons": 0,
+      "total_comparisons": 1
+    },
+    "H2_ideological_agnosticism": {
+      "hypothesis": "Ideological agnosticism: Framework should not systematically favor conservative vs progressive content",
+      "tests_performed": [],
+      "sample_sizes": {
+        "conservative": 0,
+        "progressive": 0,
+        "unknown": 25
+      },
+      "status": "insufficient_data",
+      "message": "Could not identify both conservative and progressive texts for comparison"
+    },
+    "H3_ground_truth_alignment": {
+      "hypothesis": "Ground truth alignment: Extreme control texts should score >0.8 on expected wells",
+      "target_threshold": 0.8,
+      "tests_performed": [],
+      "extreme_controls_found": 0,
+      "status": "insufficient_data",
+      "message": "No extreme control texts identified"
+    }
+  },
+  "descriptive_statistics": {
+    "well_Fear": {
+      "count": 10,
+      "mean": 0.45999999999999996,
+      "std": 0.27568097504180444,
+      "min": 0.2,
+      "max": 0.8,
+      "median": 0.44999999999999996,
+      "q25": 0.2,
+      "q75": 0.7,
+      "skewness": 0.044546787287457264,
+      "kurtosis": -2.469496108692784
+    },
+    "well_Hope": {
+      "count": 10,
+      "mean": 0.7100000000000002,
+      "std": 0.2024845673131659,
+      "min": 0.5,
+      "max": 0.9,
+      "median": 0.75,
+      "q25": 0.5,
+      "q75": 0.9,
+      "skewness": -0.06825773635383664,
+      "kurtosis": -2.4642361406192457
+    },
+    "well_Truth": {
+      "count": 10,
+      "mean": 0.55,
+      "std": 0.26352313834736496,
+      "min": 0.3,
+      "max": 0.8,
+      "median": 0.55,
+      "q25": 0.3,
+      "q75": 0.8,
+      "skewness": 0.0,
+      "kurtosis": -2.571428571428572
+    },
+    "well_Dignity": {
+      "count": 10,
+      "mean": 0.55,
+      "std": 0.3689323936863109,
+      "min": 0.2,
+      "max": 0.9,
+      "median": 0.55,
+      "q25": 0.2,
+      "q75": 0.9,
+      "skewness": 0.0,
+      "kurtosis": -2.571428571428572
+    },
+    "well_Fantasy": {
+      "count": 10,
+      "mean": 0.5,
+      "std": 0.31622776601683794,
+      "min": 0.2,
+      "max": 0.8,
+      "median": 0.5,
+      "q25": 0.2,
+      "q75": 0.8,
+      "skewness": 0.0,
+      "kurtosis": -2.571428571428571
+    },
+    "well_Justice": {
+      "count": 10,
+      "mean": 0.5900000000000001,
+      "std": 0.22335820757001273,
+      "min": 0.3,
+      "max": 0.8,
+      "median": 0.6000000000000001,
+      "q25": 0.4,
+      "q75": 0.8,
+      "skewness": -0.06880196373082453,
+      "kurtosis": -2.409235498406683
+    },
+    "well_Tribalism": {
+      "count": 10,
+      "mean": 0.5,
+      "std": 0.31622776601683794,
+      "min": 0.2,
+      "max": 0.8,
+      "median": 0.5,
+      "q25": 0.2,
+      "q75": 0.8,
+      "skewness": 0.0,
+      "kurtosis": -2.571428571428571
+    },
+    "well_Pragmatism": {
+      "count": 10,
+      "mean": 0.54,
+      "std": 0.27568097504180444,
+      "min": 0.2,
+      "max": 0.8,
+      "median": 0.55,
+      "q25": 0.3,
+      "q75": 0.8,
+      "skewness": -0.04454678728745714,
+      "kurtosis": -2.469496108692785
+    },
+    "well_Resentment": {
+      "count": 10,
+      "mean": 0.36,
+      "std": 0.27568097504180444,
+      "min": 0.1,
+      "max": 0.7,
+      "median": 0.35,
+      "q25": 0.1,
+      "q75": 0.6,
+      "skewness": 0.04454678728745671,
+      "kurtosis": -2.469496108692785
+    },
+    "well_Manipulation": {
+      "count": 10,
+      "mean": 0.4,
+      "std": 0.31622776601683794,
+      "min": 0.1,
+      "max": 0.7,
+      "median": 0.39999999999999997,
+      "q25": 0.1,
+      "q75": 0.7,
+      "skewness": 0.0,
+      "kurtosis": -2.571428571428571
+    },
+    "well_unity": {
+      "count": 15,
+      "mean": 0.7400000000000001,
+      "std": 0.01463850109422801,
+      "min": 0.72,
+      "max": 0.76,
+      "median": 0.74,
+      "q25": 0.73,
+      "q75": 0.75,
+      "skewness": 0.0,
+      "kurtosis": -1.3282051282051288
+    },
+    "well_justice": {
+      "count": 15,
+      "mean": 0.7749999999999999,
+      "std": 0.021957751641341984,
+      "min": 0.745,
+      "max": 0.8049999999999999,
+      "median": 0.775,
+      "q25": 0.76,
+      "q75": 0.79,
+      "skewness": 0.0,
+      "kurtosis": -1.328205128205131
+    },
+    "well_liberty": {
+      "count": 15,
+      "mean": 0.7100000000000002,
+      "std": 0.01463850109422801,
+      "min": 0.6900000000000001,
+      "max": 0.7300000000000001,
+      "median": 0.7100000000000001,
+      "q25": 0.7000000000000001,
+      "q75": 0.7200000000000001,
+      "skewness": 0.0,
+      "kurtosis": -1.3282051282051284
+    },
+    "well_security": {
+      "count": 15,
+      "mean": 0.7899999999999998,
+      "std": 0.01463850109422801,
+      "min": 0.7699999999999999,
+      "max": 0.8099999999999999,
+      "median": 0.7899999999999999,
+      "q25": 0.7799999999999999,
+      "q75": 0.7999999999999999,
+      "skewness": 0.0,
+      "kurtosis": -1.3282051282051284
+    },
+    "well_tradition": {
+      "count": 15,
+      "mean": 0.7149999999999999,
+      "std": 0.03659625273556998,
+      "min": 0.665,
+      "max": 0.765,
+      "median": 0.7150000000000001,
+      "q25": 0.6900000000000001,
+      "q75": 0.74,
+      "skewness": 0.0,
+      "kurtosis": -1.3282051282051266
+    },
+    "well_civic_duty": {
+      "count": 15,
+      "mean": 0.775,
+      "std": 0.007319250547114005,
+      "min": 0.765,
+      "max": 0.785,
+      "median": 0.775,
+      "q25": 0.77,
+      "q75": 0.78,
+      "skewness": 0.0,
+      "kurtosis": -1.328205128205128
+    },
+    "well_prosperity": {
+      "count": 15,
+      "mean": 0.8100000000000002,
+      "std": 0.029277002188455973,
+      "min": 0.77,
+      "max": 0.85,
+      "median": 0.81,
+      "q25": 0.79,
+      "q75": 0.83,
+      "skewness": 0.0,
+      "kurtosis": -1.3282051282051266
+    },
+    "well_moral_leadership": {
+      "count": 15,
+      "mean": 0.77,
+      "std": 0.029277002188455973,
+      "min": 0.73,
+      "max": 0.8099999999999999,
+      "median": 0.77,
+      "q25": 0.75,
+      "q75": 0.7899999999999999,
+      "skewness": 0.0,
+      "kurtosis": -1.3282051282051257
+    }
+  },
+  "effect_sizes": {
+    "well_Fear_vs_well_Hope": {
+      "cohens_d": -1.0336227882434048,
+      "effect_magnitude": "large"
+    },
+    "well_Fear_vs_well_Truth": {
+      "cohens_d": -0.3337405203330079,
+      "effect_magnitude": "small"
+    },
+    "well_Fear_vs_well_Dignity": {
+      "cohens_d": -0.27636039057598083,
+      "effect_magnitude": "small"
+    },
+    "well_Fear_vs_well_Fantasy": {
+      "cohens_d": -0.13483997249264854,
+      "effect_magnitude": "negligible"
+    },
+    "well_Fear_vs_well_Justice": {
+      "cohens_d": -0.5181609137791108,
+      "effect_magnitude": "medium"
+    },
+    "well_Fear_vs_well_Tribalism": {
+      "cohens_d": -0.13483997249264854,
+      "effect_magnitude": "negligible"
+    },
+    "well_Fear_vs_well_Pragmatism": {
+      "cohens_d": -0.29019050004400493,
+      "effect_magnitude": "small"
+    },
+    "well_Fear_vs_well_Resentment": {
+      "cohens_d": 0.36273812505500574,
+      "effect_magnitude": "small"
+    },
+    "well_Fear_vs_well_Manipulation": {
+      "cohens_d": 0.20225995873897243,
+      "effect_magnitude": "small"
+    },
+    "well_Fear_vs_well_unity": {
+      "cohens_d": -1.434349007708298,
+      "effect_magnitude": "large"
+    },
+    "well_Fear_vs_well_justice": {
+      "cohens_d": -1.6108144911107407,
+      "effect_magnitude": "large"
+    },
+    "well_Fear_vs_well_liberty": {
+      "cohens_d": -1.2806687568824096,
+      "effect_magnitude": "large"
+    },
+    "well_Fear_vs_well_security": {
+      "cohens_d": -1.6904827590847782,
+      "effect_magnitude": "large"
+    },
+    "well_Fear_vs_well_tradition": {
+      "cohens_d": -1.2967465460567948,
+      "effect_magnitude": "large"
+    },
+    "well_Fear_vs_well_civic_duty": {
+      "cohens_d": -1.6153466862092178,
+      "effect_magnitude": "large"
+    },
+    "well_Fear_vs_well_prosperity": {
+      "cohens_d": -1.7854221747271537,
+      "effect_magnitude": "large"
+    },
+    "well_Fear_vs_well_moral_leadership": {
+      "cohens_d": -1.5813739261869069,
+      "effect_magnitude": "large"
+    },
+    "well_Hope_vs_well_Truth": {
+      "cohens_d": 0.680868187635171,
+      "effect_magnitude": "medium"
+    },
+    "well_Hope_vs_well_Dignity": {
+      "cohens_d": 0.5376653840862995,
+      "effect_magnitude": "medium"
+    },
+    "well_Hope_vs_well_Fantasy": {
+      "cohens_d": 0.7909057560124456,
+      "effect_magnitude": "medium"
+    },
+    "well_Hope_vs_well_Justice": {
+      "cohens_d": 0.5629124404806863,
+      "effect_magnitude": "medium"
+    },
+    "well_Hope_vs_well_Tribalism": {
+      "cohens_d": 0.7909057560124456,
+      "effect_magnitude": "medium"
+    },
+    "well_Hope_vs_well_Pragmatism": {
+      "cohens_d": 0.7028634960055151,
+      "effect_magnitude": "medium"
+    },
+    "well_Hope_vs_well_Resentment": {
+      "cohens_d": 1.4470719035407662,
+      "effect_magnitude": "large"
+    },
+    "well_Hope_vs_well_Manipulation": {
+      "cohens_d": 1.1675275445898003,
+      "effect_magnitude": "large"
+    },
+    "well_Hope_vs_well_unity": {
+      "cohens_d": -0.2089836758611293,
+      "effect_magnitude": "small"
+    },
+    "well_Hope_vs_well_justice": {
+      "cohens_d": -0.4513337006488295,
+      "effect_magnitude": "small"
+    },
+    "well_Hope_vs_well_liberty": {
+      "cohens_d": 0.0,
+      "effect_magnitude": "negligible"
+    },
+    "well_Hope_vs_well_security": {
+      "cohens_d": -0.5572898022963437,
+      "effect_magnitude": "medium"
+    },
+    "well_Hope_vs_well_tradition": {
+      "cohens_d": -0.0343647539463255,
+      "effect_magnitude": "negligible"
+    },
+    "well_Hope_vs_well_civic_duty": {
+      "cohens_d": -0.4536833930613119,
+      "effect_magnitude": "small"
+    },
+    "well_Hope_vs_well_prosperity": {
+      "cohens_d": -0.6912421425656157,
+      "effect_magnitude": "medium"
+    },
+    "well_Hope_vs_well_moral_leadership": {
+      "cohens_d": -0.4147452855393683,
+      "effect_magnitude": "small"
+    },
+    "well_Truth_vs_well_Dignity": {
+      "cohens_d": 0.0,
+      "effect_magnitude": "negligible"
+    },
+    "well_Truth_vs_well_Fantasy": {
+      "cohens_d": 0.17177950029416061,
+      "effect_magnitude": "negligible"
+    },
+    "well_Truth_vs_well_Justice": {
+      "cohens_d": -0.16375482422848067,
+      "effect_magnitude": "negligible"
+    },
+    "well_Truth_vs_well_Tribalism": {
+      "cohens_d": 0.17177950029416061,
+      "effect_magnitude": "negligible"
+    },
+    "well_Truth_vs_well_Pragmatism": {
+      "cohens_d": 0.03708228003700088,
+      "effect_magnitude": "negligible"
+    },
+    "well_Truth_vs_well_Resentment": {
+      "cohens_d": 0.7045633207030162,
+      "effect_magnitude": "medium"
+    },
+    "well_Truth_vs_well_Manipulation": {
+      "cohens_d": 0.5153385008824815,
+      "effect_magnitude": "medium"
+    },
+    "well_Truth_vs_well_unity": {
+      "cohens_d": -1.0180774595135467,
+      "effect_magnitude": "large"
+    },
+    "well_Truth_vs_well_justice": {
+      "cohens_d": -1.2033067398067743,
+      "effect_magnitude": "large"
+    },
+    "well_Truth_vs_well_liberty": {
+      "cohens_d": -0.8573283869587767,
+      "effect_magnitude": "large"
+    },
+    "well_Truth_vs_well_security": {
+      "cohens_d": -1.2859925804381627,
+      "effect_magnitude": "large"
+    },
+    "well_Truth_vs_well_tradition": {
+      "cohens_d": -0.8770658863654011,
+      "effect_magnitude": "large"
+    },
+    "well_Truth_vs_well_civic_duty": {
+      "cohens_d": -1.2070112361253358,
+      "effect_magnitude": "large"
+    },
+    "well_Truth_vs_well_prosperity": {
+      "cohens_d": -1.386774286483833,
+      "effect_magnitude": "large"
+    },
+    "well_Truth_vs_well_moral_leadership": {
+      "cohens_d": -1.1734243962555504,
+      "effect_magnitude": "large"
+    },
+    "well_Dignity_vs_well_Fantasy": {
+      "cohens_d": 0.1455213750217999,
+      "effect_magnitude": "negligible"
+    },
+    "well_Dignity_vs_well_Justice": {
+      "cohens_d": -0.1311651671567907,
+      "effect_magnitude": "negligible"
+    },
+    "well_Dignity_vs_well_Tribalism": {
+      "cohens_d": 0.1455213750217999,
+      "effect_magnitude": "negligible"
+    },
+    "well_Dignity_vs_well_Pragmatism": {
+      "cohens_d": 0.03070671006399787,
+      "effect_magnitude": "negligible"
+    },
+    "well_Dignity_vs_well_Resentment": {
+      "cohens_d": 0.5834274912159592,
+      "effect_magnitude": "medium"
+    },
+    "well_Dignity_vs_well_Manipulation": {
+      "cohens_d": 0.43656412506539943,
+      "effect_magnitude": "small"
+    },
+    "well_Dignity_vs_well_unity": {
+      "cohens_d": -0.7277466476004352,
+      "effect_magnitude": "medium"
+    },
+    "well_Dignity_vs_well_justice": {
+      "cohens_d": -0.8609598329091155,
+      "effect_magnitude": "large"
+    },
+    "well_Dignity_vs_well_liberty": {
+      "cohens_d": -0.6128392821898405,
+      "effect_magnitude": "medium"
+    },
+    "well_Dignity_vs_well_security": {
+      "cohens_d": -0.919258923284759,
+      "effect_magnitude": "large"
+    },
+    "well_Dignity_vs_well_tradition": {
+      "cohens_d": -0.6293988470733167,
+      "effect_magnitude": "medium"
+    },
+    "well_Dignity_vs_well_civic_duty": {
+      "cohens_d": -0.8623136821452896,
+      "effect_magnitude": "large"
+    },
+    "well_Dignity_vs_well_prosperity": {
+      "cohens_d": -0.9935240536577016,
+      "effect_magnitude": "large"
+    },
+    "well_Dignity_vs_well_moral_leadership": {
+      "cohens_d": -0.8406741992488239,
+      "effect_magnitude": "large"
+    },
+    "well_Fantasy_vs_well_Justice": {
+      "cohens_d": -0.32875531828882665,
+      "effect_magnitude": "small"
+    },
+    "well_Fantasy_vs_well_Tribalism": {
+      "cohens_d": 0.0,
+      "effect_magnitude": "negligible"
+    },
+    "well_Fantasy_vs_well_Pragmatism": {
+      "cohens_d": -0.13483997249264854,
+      "effect_magnitude": "negligible"
+    },
+    "well_Fantasy_vs_well_Resentment": {
+      "cohens_d": 0.4719399037242695,
+      "effect_magnitude": "small"
+    },
+    "well_Fantasy_vs_well_Manipulation": {
+      "cohens_d": 0.31622776601683783,
+      "effect_magnitude": "small"
+    },
+    "well_Fantasy_vs_well_unity": {
+      "cohens_d": -1.0721644962673913,
+      "effect_magnitude": "large"
+    },
+    "well_Fantasy_vs_well_justice": {
+      "cohens_d": -1.2268832790513737,
+      "effect_magnitude": "large"
+    },
+    "well_Fantasy_vs_well_liberty": {
+      "cohens_d": -0.9381439342339678,
+      "effect_magnitude": "large"
+    },
+    "well_Fantasy_vs_well_security": {
+      "cohens_d": -1.2955320996564297,
+      "effect_magnitude": "large"
+    },
+    "well_Fantasy_vs_well_tradition": {
+      "cohens_d": -0.9551345132105686,
+      "effect_magnitude": "large"
+    },
+    "well_Fantasy_vs_well_civic_duty": {
+      "cohens_d": -1.229508099193539,
+      "effect_magnitude": "large"
+    },
+    "well_Fantasy_vs_well_prosperity": {
+      "cohens_d": -1.3804585188913157,
+      "effect_magnitude": "large"
+    },
+    "well_Fantasy_vs_well_moral_leadership": {
+      "cohens_d": -1.202334839034371,
+      "effect_magnitude": "large"
+    },
+    "well_Justice_vs_well_Tribalism": {
+      "cohens_d": 0.32875531828882665,
+      "effect_magnitude": "small"
+    },
+    "well_Justice_vs_well_Pragmatism": {
+      "cohens_d": 0.19929265914581176,
+      "effect_magnitude": "negligible"
+    },
+    "well_Justice_vs_well_Resentment": {
+      "cohens_d": 0.9167462320707339,
+      "effect_magnitude": "large"
+    },
+    "well_Justice_vs_well_Manipulation": {
+      "cohens_d": 0.6940390052764114,
+      "effect_magnitude": "medium"
+    },
+    "well_Justice_vs_well_unity": {
+      "cohens_d": -0.9477060100321061,
+      "effect_magnitude": "large"
+    },
+    "well_Justice_vs_well_justice": {
+      "cohens_d": -1.1657255168434806,
+      "effect_magnitude": "large"
+    },
+    "well_Justice_vs_well_liberty": {
+      "cohens_d": -0.7581648080256854,
+      "effect_magnitude": "medium"
+    },
+    "well_Justice_vs_well_security": {
+      "cohens_d": -1.2636080133761396,
+      "effect_magnitude": "large"
+    },
+    "well_Justice_vs_well_tradition": {
+      "cohens_d": -0.7810351335109422,
+      "effect_magnitude": "medium"
+    },
+    "well_Justice_vs_well_civic_duty": {
+      "cohens_d": -1.1707165547642442,
+      "effect_magnitude": "large"
+    },
+    "well_Justice_vs_well_prosperity": {
+      "cohens_d": -1.3811366033714225,
+      "effect_magnitude": "large"
+    },
+    "well_Justice_vs_well_moral_leadership": {
+      "cohens_d": -1.1300208573038903,
+      "effect_magnitude": "large"
+    },
+    "well_Tribalism_vs_well_Pragmatism": {
+      "cohens_d": -0.13483997249264854,
+      "effect_magnitude": "negligible"
+    },
+    "well_Tribalism_vs_well_Resentment": {
+      "cohens_d": 0.4719399037242695,
+      "effect_magnitude": "small"
+    },
+    "well_Tribalism_vs_well_Manipulation": {
+      "cohens_d": 0.31622776601683783,
+      "effect_magnitude": "small"
+    },
+    "well_Tribalism_vs_well_unity": {
+      "cohens_d": -1.0721644962673913,
+      "effect_magnitude": "large"
+    },
+    "well_Tribalism_vs_well_justice": {
+      "cohens_d": -1.2268832790513737,
+      "effect_magnitude": "large"
+    },
+    "well_Tribalism_vs_well_liberty": {
+      "cohens_d": -0.9381439342339678,
+      "effect_magnitude": "large"
+    },
+    "well_Tribalism_vs_well_security": {
+      "cohens_d": -1.2955320996564297,
+      "effect_magnitude": "large"
+    },
+    "well_Tribalism_vs_well_tradition": {
+      "cohens_d": -0.9551345132105686,
+      "effect_magnitude": "large"
+    },
+    "well_Tribalism_vs_well_civic_duty": {
+      "cohens_d": -1.229508099193539,
+      "effect_magnitude": "large"
+    },
+    "well_Tribalism_vs_well_prosperity": {
+      "cohens_d": -1.3804585188913157,
+      "effect_magnitude": "large"
+    },
+    "well_Tribalism_vs_well_moral_leadership": {
+      "cohens_d": -1.202334839034371,
+      "effect_magnitude": "large"
+    },
+    "well_Pragmatism_vs_well_Resentment": {
+      "cohens_d": 0.6529286250990106,
+      "effect_magnitude": "medium"
+    },
+    "well_Pragmatism_vs_well_Manipulation": {
+      "cohens_d": 0.4719399037242695,
+      "effect_magnitude": "small"
+    },
+    "well_Pragmatism_vs_well_unity": {
+      "cohens_d": -1.0245350055059268,
+      "effect_magnitude": "large"
+    },
+    "well_Pragmatism_vs_well_justice": {
+      "cohens_d": -1.2017187473365838,
+      "effect_magnitude": "large"
+    },
+    "well_Pragmatism_vs_well_liberty": {
+      "cohens_d": -0.8708547546800384,
+      "effect_magnitude": "large"
+    },
+    "well_Pragmatism_vs_well_security": {
+      "cohens_d": -1.2806687568824071,
+      "effect_magnitude": "large"
+    },
+    "well_Pragmatism_vs_well_tradition": {
+      "cohens_d": -0.8899241002350547,
+      "effect_magnitude": "large"
+    },
+    "well_Pragmatism_vs_well_civic_duty": {
+      "cohens_d": -1.2050999087592573,
+      "effect_magnitude": "large"
+    },
+    "well_Pragmatism_vs_well_prosperity": {
+      "cohens_d": -1.377325677646661,
+      "effect_magnitude": "large"
+    },
+    "well_Pragmatism_vs_well_moral_leadership": {
+      "cohens_d": -1.1732774291064143,
+      "effect_magnitude": "large"
+    },
+    "well_Resentment_vs_well_Manipulation": {
+      "cohens_d": -0.13483997249264854,
+      "effect_magnitude": "negligible"
+    },
+    "well_Resentment_vs_well_unity": {
+      "cohens_d": -1.9466165104612614,
+      "effect_magnitude": "large"
+    },
+    "well_Resentment_vs_well_justice": {
+      "cohens_d": -2.122184170828436,
+      "effect_magnitude": "large"
+    },
+    "well_Resentment_vs_well_liberty": {
+      "cohens_d": -1.7929362596353726,
+      "effect_magnitude": "large"
+    },
+    "well_Resentment_vs_well_security": {
+      "cohens_d": -2.2027502618377413,
+      "effect_magnitude": "large"
+    },
+    "well_Resentment_vs_well_tradition": {
+      "cohens_d": -1.8052746033339695,
+      "effect_magnitude": "large"
+    },
+    "well_Resentment_vs_well_civic_duty": {
+      "cohens_d": -2.1281551580216678,
+      "effect_magnitude": "large"
+    },
+    "well_Resentment_vs_well_prosperity": {
+      "cohens_d": -2.2955427960777683,
+      "effect_magnitude": "large"
+    },
+    "well_Resentment_vs_well_moral_leadership": {
+      "cohens_d": -2.091494547537522,
+      "effect_magnitude": "large"
+    },
+    "well_Manipulation_vs_well_unity": {
+      "cohens_d": -1.5188997030454707,
+      "effect_magnitude": "large"
+    },
+    "well_Manipulation_vs_well_justice": {
+      "cohens_d": -1.6730226532518735,
+      "effect_magnitude": "large"
+    },
+    "well_Manipulation_vs_well_liberty": {
+      "cohens_d": -1.3848791410120473,
+      "effect_magnitude": "large"
+    },
+    "well_Manipulation_vs_well_security": {
+      "cohens_d": -1.7422673064345093,
+      "effect_magnitude": "large"
+    },
+    "well_Manipulation_vs_well_tradition": {
+      "cohens_d": -1.3993831240061823,
+      "effect_magnitude": "large"
+    },
+    "well_Manipulation_vs_well_civic_duty": {
+      "cohens_d": -1.676601953445735,
+      "effect_magnitude": "large"
+    },
+    "well_Manipulation_vs_well_prosperity": {
+      "cohens_d": -1.8257677185336756,
+      "effect_magnitude": "large"
+    },
+    "well_Manipulation_vs_well_moral_leadership": {
+      "cohens_d": -1.647644038676731,
+      "effect_magnitude": "large"
+    },
+    "well_unity_vs_well_justice": {
+      "cohens_d": -1.8756195557598243,
+      "effect_magnitude": "large"
+    },
+    "well_unity_vs_well_liberty": {
+      "cohens_d": 2.049390153191912,
+      "effect_magnitude": "large"
+    },
+    "well_unity_vs_well_security": {
+      "cohens_d": -3.4156502553198433,
+      "effect_magnitude": "large"
+    },
+    "well_unity_vs_well_tradition": {
+      "cohens_d": 0.8969937018449134,
+      "effect_magnitude": "large"
+    },
+    "well_unity_vs_well_civic_duty": {
+      "cohens_d": -3.024345659256992,
+      "effect_magnitude": "large"
+    },
+    "well_unity_vs_well_prosperity": {
+      "cohens_d": -3.0243456592570057,
+      "effect_magnitude": "large"
+    },
+    "well_unity_vs_well_moral_leadership": {
+      "cohens_d": -1.296148139681569,
+      "effect_magnitude": "large"
+    },
+    "well_justice_vs_well_liberty": {
+      "cohens_d": 3.483293460696821,
+      "effect_magnitude": "large"
+    },
+    "well_justice_vs_well_security": {
+      "cohens_d": -0.8038369524684953,
+      "effect_magnitude": "large"
+    },
+    "well_justice_vs_well_tradition": {
+      "cohens_d": 1.9882004869908363,
+      "effect_magnitude": "large"
+    },
+    "well_justice_vs_well_civic_duty": {
+      "cohens_d": -6.783574731503472e-15,
+      "effect_magnitude": "negligible"
+    },
+    "well_justice_vs_well_prosperity": {
+      "cohens_d": -1.3525284963110251,
+      "effect_magnitude": "large"
+    },
+    "well_justice_vs_well_moral_leadership": {
+      "cohens_d": 0.1932183566158552,
+      "effect_magnitude": "negligible"
+    },
+    "well_liberty_vs_well_security": {
+      "cohens_d": -5.465040408511755,
+      "effect_magnitude": "large"
+    },
+    "well_liberty_vs_well_tradition": {
+      "cohens_d": -0.17939874036896913,
+      "effect_magnitude": "negligible"
+    },
+    "well_liberty_vs_well_civic_duty": {
+      "cohens_d": -5.616641938620126,
+      "effect_magnitude": "large"
+    },
+    "well_liberty_vs_well_prosperity": {
+      "cohens_d": -4.320493798938575,
+      "effect_magnitude": "large"
+    },
+    "well_liberty_vs_well_moral_leadership": {
+      "cohens_d": -2.592296279363138,
+      "effect_magnitude": "large"
+    },
+    "well_security_vs_well_tradition": {
+      "cohens_d": 2.6909811055347124,
+      "effect_magnitude": "large"
+    },
+    "well_security_vs_well_civic_duty": {
+      "cohens_d": 1.2961481396815528,
+      "effect_magnitude": "large"
+    },
+    "well_security_vs_well_prosperity": {
+      "cohens_d": -0.8640987597877302,
+      "effect_magnitude": "large"
+    },
+    "well_security_vs_well_moral_leadership": {
+      "cohens_d": 0.8640987597877062,
+      "effect_magnitude": "large"
+    },
+    "well_tradition_vs_well_civic_duty": {
+      "cohens_d": -2.2735942402352274,
+      "effect_magnitude": "large"
+    },
+    "well_tradition_vs_well_prosperity": {
+      "cohens_d": -2.866685573770143,
+      "effect_magnitude": "large"
+    },
+    "well_tradition_vs_well_moral_leadership": {
+      "cohens_d": -1.6596600690248189,
+      "effect_magnitude": "large"
+    },
+    "well_civic_duty_vs_well_prosperity": {
+      "cohens_d": -1.6401817211612248,
+      "effect_magnitude": "large"
+    },
+    "well_civic_duty_vs_well_moral_leadership": {
+      "cohens_d": 0.2343116744516028,
+      "effect_magnitude": "small"
+    },
+    "well_prosperity_vs_well_moral_leadership": {
+      "cohens_d": 1.3662601021279526,
+      "effect_magnitude": "large"
+    }
+  },
+  "metadata": {
+    "sample_size": 25,
+    "well_count": 18,
+    "frameworks_tested": [
+      "civic_virtue"
+    ],
+    "models_tested": [
+      "claude 3.5 sonnet",
+      "claude-3-5-sonnet"
+    ],
+    "significance_level": 0.05,
+    "testing_timestamp": "2025-06-17T09:14:41.117040"
+  },
+  "summary": {
+    "overall_assessment": "validation_concerns",
+    "hypotheses_supported": 0,
+    "hypotheses_tested": 3,
+    "key_findings": [
+      "H1: Discriminative validity not demonstrated - wells may need refinement"
+    ],
+    "recommendations": [
+      "Consider refining well definitions for better discriminative validity",
+      "Investigate and address potential ideological bias in framework",
+      "Improve ground truth alignment - consider threshold adjustments or control text selection"
+    ]
+  }
+}

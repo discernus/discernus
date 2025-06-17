@@ -1,0 +1,393 @@
+{
+  "structured_results": {
+    "structured_data": "   analysis_id text_id framework  ...                   timestamp  well_dignity  well_tribalism\n0  iditi_run_1  text_0     iditi  ...  2025-06-17T10:00:35.894643          0.80            0.20\n1  iditi_run_2  text_1     iditi  ...  2025-06-17T10:00:35.894741          0.16            0.87\n2  iditi_run_3  text_2     iditi  ...  2025-06-17T10:00:35.894786          0.84            0.22\n3  iditi_run_4  text_3     iditi  ...  2025-06-17T10:00:35.894962          0.18            0.91\n4  iditi_run_5  text_4     iditi  ...  2025-06-17T10:00:35.895111          0.95            0.05\n5  iditi_run_6  text_5     iditi  ...  2025-06-17T10:00:35.895533          0.03            0.97\n6  iditi_run_7  text_6     iditi  ...  2025-06-17T10:00:35.896327          0.75            0.25\n7  iditi_run_8  text_7     iditi  ...  2025-06-17T10:00:35.896805          0.80            0.20\n\n[8 rows x 13 columns]",
+    "metadata": {
+      "total_analyses": 8,
+      "successful_analyses": 8,
+      "failed_analyses": 0,
+      "total_cost": 0.0,
+      "cost_efficiency": 0.0,
+      "extraction_timestamp": "2025-06-17T10:00:35.909698",
+      "well_columns": [
+        "well_dignity",
+        "well_tribalism"
+      ],
+      "frameworks_used": [
+        "iditi"
+      ],
+      "models_used": [
+        "gpt-4o"
+      ]
+    },
+    "raw_execution_results": {
+      "total_analyses": 8,
+      "successful_analyses": 8,
+      "failed_analyses": 0,
+      "total_cost": 0.0,
+      "cost_efficiency": 0.0,
+      "results": [
+        {
+          "analysis_id": "iditi_run_1",
+          "text_id": "text_0",
+          "framework": "iditi",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.0,
+          "duration_seconds": 28,
+          "framework_fit_score": 0.8,
+          "well_scores": {
+            "dignity": 0.8,
+            "tribalism": 0.2
+          },
+          "raw_scores": {
+            "dignity": 0.8,
+            "tribalism": 0.2
+          },
+          "narrative_position_x": 0.3,
+          "narrative_position_y": 0.0,
+          "timestamp": "2025-06-17T10:00:35.894643"
+        },
+        {
+          "analysis_id": "iditi_run_2",
+          "text_id": "text_1",
+          "framework": "iditi",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.0,
+          "duration_seconds": 30,
+          "framework_fit_score": 0.8,
+          "well_scores": {
+            "dignity": 0.16,
+            "tribalism": 0.87
+          },
+          "raw_scores": {
+            "dignity": 0.16,
+            "tribalism": 0.87
+          },
+          "narrative_position_x": -0.355,
+          "narrative_position_y": 0.009,
+          "timestamp": "2025-06-17T10:00:35.894741"
+        },
+        {
+          "analysis_id": "iditi_run_3",
+          "text_id": "text_2",
+          "framework": "iditi",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.0,
+          "duration_seconds": 32,
+          "framework_fit_score": 0.8,
+          "well_scores": {
+            "dignity": 0.8400000000000001,
+            "tribalism": 0.22
+          },
+          "raw_scores": {
+            "dignity": 0.8400000000000001,
+            "tribalism": 0.22
+          },
+          "narrative_position_x": 0.31,
+          "narrative_position_y": 0.018,
+          "timestamp": "2025-06-17T10:00:35.894786"
+        },
+        {
+          "analysis_id": "iditi_run_4",
+          "text_id": "text_3",
+          "framework": "iditi",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.0,
+          "duration_seconds": 34,
+          "framework_fit_score": 0.8,
+          "well_scores": {
+            "dignity": 0.18,
+            "tribalism": 0.91
+          },
+          "raw_scores": {
+            "dignity": 0.18,
+            "tribalism": 0.91
+          },
+          "narrative_position_x": -0.365,
+          "narrative_position_y": 0.0269999999999999,
+          "timestamp": "2025-06-17T10:00:35.894962"
+        },
+        {
+          "analysis_id": "iditi_run_5",
+          "text_id": "text_4",
+          "framework": "iditi",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.0,
+          "duration_seconds": 36,
+          "framework_fit_score": 0.8,
+          "well_scores": {
+            "dignity": 0.95,
+            "tribalism": 0.05
+          },
+          "raw_scores": {
+            "dignity": 0.95,
+            "tribalism": 0.05
+          },
+          "narrative_position_x": 0.4499999999999999,
+          "narrative_position_y": 0.0,
+          "timestamp": "2025-06-17T10:00:35.895111"
+        },
+        {
+          "analysis_id": "iditi_run_6",
+          "text_id": "text_5",
+          "framework": "iditi",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.0,
+          "duration_seconds": 38,
+          "framework_fit_score": 0.8,
+          "well_scores": {
+            "dignity": 0.03,
+            "tribalism": 0.97
+          },
+          "raw_scores": {
+            "dignity": 0.03,
+            "tribalism": 0.97
+          },
+          "narrative_position_x": -0.47,
+          "narrative_position_y": 0.0,
+          "timestamp": "2025-06-17T10:00:35.895533"
+        },
+        {
+          "analysis_id": "iditi_run_7",
+          "text_id": "text_6",
+          "framework": "iditi",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.0,
+          "duration_seconds": 40,
+          "framework_fit_score": 0.8,
+          "well_scores": {
+            "dignity": 0.75,
+            "tribalism": 0.25
+          },
+          "raw_scores": {
+            "dignity": 0.75,
+            "tribalism": 0.25
+          },
+          "narrative_position_x": 0.25,
+          "narrative_position_y": 0.0,
+          "timestamp": "2025-06-17T10:00:35.896327"
+        },
+        {
+          "analysis_id": "iditi_run_8",
+          "text_id": "text_7",
+          "framework": "iditi",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.0,
+          "duration_seconds": 42,
+          "framework_fit_score": 0.8,
+          "well_scores": {
+            "dignity": 0.8,
+            "tribalism": 0.2
+          },
+          "raw_scores": {
+            "dignity": 0.8,
+            "tribalism": 0.2
+          },
+          "narrative_position_x": 0.3,
+          "narrative_position_y": 0.0,
+          "timestamp": "2025-06-17T10:00:35.896805"
+        }
+      ]
+    }
+  },
+  "statistical_results": {
+    "hypothesis_testing": {
+      "H1_discriminative_validity": {
+        "hypothesis": "Discriminative validity: Dignity and Tribalism wells differentiate expected text categories",
+        "dignity_wells": [
+          "well_dignity"
+        ],
+        "tribalism_wells": [
+          "well_tribalism"
+        ],
+        "tests_performed": [
+          {
+            "comparison": "well_dignity vs well_tribalism",
+            "test_type": "paired_t_test",
+            "t_statistic": 0.3930312695741785,
+            "p_value": 0.705991283378697,
+            "significant": "False",
+            "dignity_mean": 0.56375,
+            "tribalism_mean": 0.45875,
+            "dignity_std": 0.3716733396795786,
+            "tribalism_std": 0.3846496550666036,
+            "sample_sizes": {
+              "dignity": 8,
+              "tribalism": 8
+            }
+          }
+        ],
+        "status": "not_supported",
+        "significant_comparisons": 0,
+        "total_comparisons": 1
+      },
+      "H2_ideological_agnosticism": {
+        "hypothesis": "Ideological agnosticism: Framework should not systematically favor conservative vs progressive content",
+        "tests_performed": [],
+        "sample_sizes": {
+          "conservative": 0,
+          "progressive": 0,
+          "unknown": 8
+        },
+        "status": "insufficient_data",
+        "message": "Could not identify both conservative and progressive texts for comparison"
+      },
+      "H3_ground_truth_alignment": {
+        "hypothesis": "Ground truth alignment: Extreme control texts should score >0.8 on expected wells",
+        "target_threshold": 0.8,
+        "tests_performed": [],
+        "extreme_controls_found": 0,
+        "status": "insufficient_data",
+        "message": "No extreme control texts identified"
+      }
+    },
+    "descriptive_statistics": {
+      "well_dignity": {
+        "count": 8,
+        "mean": 0.56375,
+        "std": 0.3716733396795786,
+        "min": 0.03,
+        "max": 0.95,
+        "median": 0.775,
+        "q25": 0.175,
+        "q75": 0.81,
+        "skewness": -0.6041493501807637,
+        "kurtosis": -1.9366310249638596
+      },
+      "well_tribalism": {
+        "count": 8,
+        "mean": 0.45875,
+        "std": 0.3846496550666036,
+        "min": 0.05,
+        "max": 0.97,
+        "median": 0.235,
+        "q25": 0.2,
+        "q75": 0.88,
+        "skewness": 0.5670438201397187,
+        "kurtosis": -2.074342109439884
+      }
+    },
+    "effect_sizes": {
+      "well_dignity_vs_well_tribalism": {
+        "cohens_d": 0.27761829246635167,
+        "effect_magnitude": "small"
+      }
+    },
+    "metadata": {
+      "sample_size": 8,
+      "well_count": 2,
+      "frameworks_tested": [
+        "iditi"
+      ],
+      "models_tested": [
+        "gpt-4o"
+      ],
+      "significance_level": 0.05,
+      "testing_timestamp": "2025-06-17T10:00:35.936369"
+    },
+    "summary": {
+      "overall_assessment": "validation_concerns",
+      "hypotheses_supported": 0,
+      "hypotheses_tested": 3,
+      "key_findings": [
+        "H1: Discriminative validity not demonstrated - wells may need refinement"
+      ],
+      "recommendations": [
+        "Consider refining well definitions for better discriminative validity",
+        "Investigate and address potential ideological bias in framework",
+        "Improve ground truth alignment - consider threshold adjustments or control text selection"
+      ]
+    }
+  },
+  "reliability_results": {
+    "analysis_type": "single_rater_descriptive",
+    "metadata": {
+      "model_count": 1,
+      "well_count": 2,
+      "sample_size": 8,
+      "analysis_timestamp": "2025-06-17T10:00:35.936607"
+    },
+    "descriptive_statistics": {
+      "well_dignity": {
+        "count": 8,
+        "mean": 0.56375,
+        "std": 0.3716733396795786,
+        "min": 0.03,
+        "max": 0.95,
+        "range": 0.9199999999999999,
+        "cv": 65.92875204959266
+      },
+      "well_tribalism": {
+        "count": 8,
+        "mean": 0.45875,
+        "std": 0.3846496550666036,
+        "min": 0.05,
+        "max": 0.97,
+        "range": 0.9199999999999999,
+        "cv": 83.84733625430052
+      }
+    },
+    "internal_consistency": {
+      "split_half_correlation": -0.9963171020359819,
+      "split_half_p_value": 1.2453995327217505e-07,
+      "spearman_brown_coefficient": -541.050613820961,
+      "interpretation": "poor"
+    },
+    "message": "Single rater detected - full reliability analysis requires multiple raters"
+  },
+  "visualization_results": {
+    "descriptive_plots": {
+      "descriptive_analysis": "experiment_reports/analysis/test_visualizations/descriptive_analysis.png"
+    },
+    "hypothesis_plots": {
+      "hypothesis_testing": "experiment_reports/analysis/test_visualizations/hypothesis_testing_results.png"
+    },
+    "reliability_plots": {
+      "reliability_analysis": "experiment_reports/analysis/test_visualizations/reliability_analysis.png"
+    },
+    "correlation_plots": {
+      "correlation_matrix": "experiment_reports/analysis/test_visualizations/correlation_matrix.png"
+    },
+    "distribution_plots": {
+      "score_distributions": "experiment_reports/analysis/test_visualizations/score_distributions.png"
+    },
+    "narrative_gravity_plots": {
+      "narrative_gravity_map": "experiment_reports/analysis/test_visualizations/narrative_gravity_map.png"
+    },
+    "interactive_dashboard": {
+      "interactive_dashboard": "experiment_reports/analysis/test_visualizations/interactive_dashboard.html"
+    },
+    "generated_files": {
+      "descriptive_analysis": "experiment_reports/analysis/test_visualizations/descriptive_analysis.png",
+      "hypothesis_testing": "experiment_reports/analysis/test_visualizations/hypothesis_testing_results.png",
+      "reliability_analysis": "experiment_reports/analysis/test_visualizations/reliability_analysis.png",
+      "correlation_matrix": "experiment_reports/analysis/test_visualizations/correlation_matrix.png",
+      "score_distributions": "experiment_reports/analysis/test_visualizations/score_distributions.png",
+      "narrative_gravity_map": "experiment_reports/analysis/test_visualizations/narrative_gravity_map.png",
+      "interactive_dashboard": "experiment_reports/analysis/test_visualizations/interactive_dashboard.html"
+    }
+  },
+  "pipeline_status": "success",
+  "timestamp": "2025-06-17T10:00:37.564005",
+  "summary": {
+    "total_analyses": 8,
+    "hypotheses_supported": 0,
+    "overall_assessment": "validation_concerns",
+    "visualizations_generated": 7,
+    "key_findings": [
+      "H1: Discriminative validity not demonstrated - wells may need refinement"
+    ],
+    "recommendations": [
+      "Consider refining well definitions for better discriminative validity",
+      "Investigate and address potential ideological bias in framework",
+      "Improve ground truth alignment - consider threshold adjustments or control text selection"
+    ]
+  }
+}

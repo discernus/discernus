@@ -1,0 +1,143 @@
+{
+  "experiment_meta": {
+    "name": "Enhanced_Orchestration_Demo",
+    "version": "1.0.0",
+    "created": "2025-06-17T10:20:00Z",
+    "description": "Demonstration of end-to-end orchestration with enhanced analysis pipeline",
+    "hypothesis": "The orchestrator can automatically run complete analysis workflow from data collection to final reports",
+    "research_context": "Testing comprehensive experiment orchestration capabilities",
+    "principal_investigator": "Demo User",
+    "institution": "Research Lab",
+    "ethical_clearance": "DEMO-2025-001",
+    "funding_source": "Internal R&D",
+    "data_classification": "unclassified",
+    "publication_intent": true,
+    "tags": ["orchestration", "automation", "demo"],
+    "hypotheses": [
+      "The orchestrator can automatically execute complete experiments",
+      "Enhanced analysis pipeline provides comprehensive statistical validation",
+      "Generated reports are publication-ready"
+    ],
+    "success_criteria": [
+      "All analysis components execute successfully",
+      "Statistical tests run without errors",
+      "Visualizations are generated correctly",
+      "HTML report is comprehensive and readable",
+      "Academic exports are properly formatted"
+    ]
+  },
+
+  "components": {
+    "frameworks": [
+      {
+        "id": "civic_virtue",
+        "version": "1.0.0",
+        "type": "file_path",
+        "file_path": "frameworks/civic_virtue/framework.json"
+      }
+    ],
+    "prompt_templates": [
+      {
+        "id": "traditional_analysis",
+        "version": "1.0.0"
+      }
+    ],
+    "weighting_schemes": [
+      {
+        "id": "uniform_weighting",
+        "version": "1.0.0"
+      }
+    ],
+    "models": [
+      {
+        "id": "gpt-4o",
+        "provider": "openai",
+        "version": "2024-05-13"
+      }
+    ],
+    "corpus": [
+      {
+        "id": "demo_texts",
+        "type": "file_collection",
+        "file_path": "corpus/demo_texts",
+        "pattern": "*.txt",
+        "description": "Demo text collection for orchestration testing"
+      }
+    ]
+  },
+
+  "execution": {
+    "description": "Enhanced orchestration demonstration with comprehensive analysis pipeline",
+    "matrix": [
+      {
+        "run_id": "demo_run_1",
+        "description": "Primary analysis run",
+        "framework": "civic_virtue",
+        "prompt_template": "traditional_analysis",
+        "weighting_scheme": "uniform_weighting",
+        "model": "gpt-4o"
+      }
+    ],
+    "cost_controls": {
+      "max_total_cost": 10.0,
+      "cost_per_analysis_limit": 0.50
+    },
+    "quality_controls": {
+      "min_framework_fit_score": 0.7,
+      "enable_qa_validation": true,
+      "require_evidence": false
+    },
+    "quality_assurance": {
+      "enable_qa_validation": true,
+      "confidence_threshold": 0.7,
+      "require_evidence": false,
+      "manual_review_triggers": ["low_confidence", "anomaly_detected"]
+    }
+  },
+
+  "enhanced_analysis": {
+    "enabled": true,
+    "generate_html_report": true,
+    "generate_academic_exports": true,
+    "configuration": {
+      "statistical_testing": {
+        "enabled": true,
+        "significance_level": 0.05,
+        "tests": ["descriptive_stats", "correlation_analysis", "hypothesis_testing"]
+      },
+      "reliability_analysis": {
+        "enabled": true,
+        "methods": ["consistency_measures", "agreement_analysis"]
+      },
+      "visualizations": {
+        "enabled": true,
+        "types": ["scatter_plots", "distribution_plots", "correlation_matrix", "narrative_map", "well_analysis"],
+        "interactive": true,
+        "publication_ready": true
+      },
+      "academic_integration": {
+        "export_formats": ["csv", "json"],
+        "include_metadata": true,
+        "generate_replication_package": false
+      }
+    }
+  },
+
+  "outputs": {
+    "save_to_database": true,
+    "export_formats": ["json", "csv"],
+    "include_raw_responses": false,
+    "include_provenance": true,
+    "academic_exports": {
+      "enabled": true,
+      "formats": ["csv", "feather"],
+      "include_replication_package": true
+    }
+  },
+
+  "validation_criteria": {
+    "min_successful_analyses": 1,
+    "max_total_cost": 10.0,
+    "required_quality_score": 0.7
+  }
+} 

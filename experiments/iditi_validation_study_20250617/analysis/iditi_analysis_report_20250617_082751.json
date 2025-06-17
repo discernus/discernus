@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "analysis_timestamp": "2025-06-17T08:27:51.822837",
+    "data_file": "exports/analysis_results/extracted_results_20250617_081917.csv",
+    "total_records": 25,
+    "analysis_engine": "Python-based IDITI Analysis",
+    "frameworks_analyzed": [
+      "civic_virtue"
+    ],
+    "models_analyzed": [
+      "claude 3.5 sonnet",
+      "claude-3-5-sonnet"
+    ]
+  },
+  "executive_summary": {
+    "data_quality": "Poor",
+    "key_findings": [],
+    "reliability_assessment": "0.0% of wells meet reliability threshold"
+  },
+  "detailed_results": {
+    "reliability": {
+      "framework_reliability": {},
+      "model_reliability": {
+        "claude 3.5 sonnet": {
+          "n_analyses": 10,
+          "avg_cost": 0.025439999999999997,
+          "avg_duration": 10.994000000000002,
+          "success_rate": 1.0
+        },
+        "claude-3-5-sonnet": {
+          "n_analyses": 15,
+          "avg_cost": 0.016699999999999996,
+          "avg_duration": 7.1,
+          "success_rate": 1.0
+        }
+      },
+      "well_reliability": {},
+      "overall_metrics": {}
+    },
+    "comparative": {
+      "cost_analysis": {
+        "total_cost": 0.5049,
+        "avg_cost_per_analysis": 0.020196000000000002,
+        "avg_duration": 8.6576,
+        "cost_efficiency": 0.020196000000000002,
+        "by_model": {
+          "claude 3.5 sonnet": {
+            "total_cost": 0.2544,
+            "avg_cost": 0.0254,
+            "n_analyses": 10,
+            "avg_duration": 10.994
+          },
+          "claude-3-5-sonnet": {
+            "total_cost": 0.2505,
+            "avg_cost": 0.0167,
+            "n_analyses": 15,
+            "avg_duration": 7.1
+          }
+        }
+      }
+    }
+  },
+  "recommendations": [
+    "Consider increasing sample size or refining prompts to improve reliability"
+  ]
+}

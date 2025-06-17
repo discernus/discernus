@@ -1,0 +1,31 @@
+{
+  "status": "completed",
+  "experiment_id": 33,
+  "experiment_name": "Civic Virtue Framework Validation Study",
+  "execution_summary": {
+    "total_runs": 24,
+    "successful_runs": 0,
+    "success_rate": 0.0,
+    "total_cost": 0,
+    "execution_time_minutes": 4.731156116666667,
+    "runs_per_minute": 5.072755877882378
+  },
+  "outputs": {
+    "academic_export": {
+      "csv": "experiment_reports/experiment_33/academic_exports/experiment_33_20250613_154806_qa_enhanced.csv",
+      "feather": "experiment_reports/experiment_33/academic_exports/experiment_33_20250613_154806_qa_enhanced.feather",
+      "json": "experiment_reports/experiment_33/academic_exports/experiment_33_20250613_154806_qa_enhanced.json",
+      "data_dictionary": "experiment_reports/experiment_33/academic_exports/experiment_33_20250613_154806_qa_enhanced_data_dictionary.json",
+      "qa_report": "experiment_reports/experiment_33/academic_exports/experiment_33_20250613_154806_qa_validation_report.json"
+    },
+    "visualizations": {
+      "status": "generated",
+      "path": "visualizations/experiment_33"
+    },
+    "qa_reports": {
+      "status": "generated",
+      "path": "qa_reports/experiment_33"
+    }
+  },
+  "timestamp": "2025-06-13T15:48:06.516594"
+}

@@ -1328,7 +1328,16 @@ In addition to the standard analysis output, please consider how your findings r
         try:
             query = session.query(FrameworkVersion).filter_by(framework_name=framework_id)
             if version:
-                query = query.filter_by(version=version)
+                # Handle version prefix variations (v2025.06.14 vs 2025.06.14)
+                version_with_v = version if version.startswith('v') else f'v{version}'
+                version_without_v = version[1:] if version.startswith('v') else version
+                
+                # Check both with and without 'v' prefix
+                query = query.filter(
+                    (FrameworkVersion.version == version) |
+                    (FrameworkVersion.version == version_with_v) |
+                    (FrameworkVersion.version == version_without_v)
+                )
             
             return query.first() is not None
         except Exception:
@@ -1531,6 +1540,16 @@ In addition to the standard analysis output, please consider how your findings r
         
         if registration_success:
             logger.info("✅ All missing components successfully auto-registered")
+            
+            # Update component states after successful registration
+            for component in missing_components:
+                if component.component_type == 'framework':
+                    component.exists_in_db = self._check_framework_in_database(component.component_id, component.version)
+                elif component.component_type == 'prompt_template':
+                    component.exists_in_db = self._check_template_in_database(component.component_id, component.version)
+                elif component.component_type == 'weighting_scheme':
+                    component.exists_in_db = self._check_weighting_in_database(component.component_id, component.version)
+                # Note: corpus components don't need updating here as they're handled differently
         else:
             logger.error("❌ Some components failed to auto-register")
         
@@ -1673,56 +1692,345 @@ In addition to the standard analysis output, please consider how your findings r
         if self.dry_run:
             print("\n🔍 DRY RUN - No actual execution will occur")
     
-    def execute_enhanced_analysis_pipeline(self, execution_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute enhanced analysis pipeline with statistical validation and visualization."""
+    def execute_enhanced_analysis_pipeline(self, execution_results: Dict[str, Any], experiment: Dict[str, Any] = None) -> Dict[str, Any]:
+        """Execute enhanced analysis pipeline with statistical validation, visualization, and reporting."""
         logger.info("📊 Starting enhanced analysis pipeline...")
+        
+        # Get enhanced analysis configuration
+        enhanced_config = {}
+        if experiment:
+            enhanced_config = experiment.get('enhanced_analysis', {})
+        
+        # Check if enhanced analysis is enabled (default: True)
+        if not enhanced_config.get('enabled', True):
+            logger.info("📊 Enhanced analysis pipeline disabled in experiment configuration")
+            return {'pipeline_status': 'disabled', 'timestamp': datetime.now().isoformat()}
+        
+        # Create organized output directory within experiments/ structure
+        experiment_name = experiment.get('experiment_meta', {}).get('name', 'experiment') if experiment else 'analysis'
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        experiment_dir = Path('experiments') / f"{experiment_name}_{timestamp}"
+        output_dir = experiment_dir / 'enhanced_analysis'
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        logger.info(f"📁 Enhanced analysis output directory: {output_dir}")
+        logger.info(f"📁 Complete experiment directory: {experiment_dir}")
         
         try:
             # Step 1: Extract and structure experiment results
+            logger.info("📊 Step 1: Extracting and structuring results...")
             from extract_experiment_results import ExperimentResultsExtractor
             extractor = ExperimentResultsExtractor()
             structured_results = extractor.extract_results(execution_results)
             
+            if 'error' in structured_results:
+                logger.error(f"❌ Results extraction failed: {structured_results['error']}")
+                return {
+                    'pipeline_status': 'failed', 
+                    'error': f"Results extraction failed: {structured_results['error']}", 
+                    'timestamp': datetime.now().isoformat()
+                }
+            
+            # Save structured results
+            structured_file = output_dir / 'structured_results.json'
+            with open(structured_file, 'w') as f:
+                json.dump(structured_results, f, indent=2, default=str)
+            logger.info(f"✅ Structured {len(structured_results.get('structured_data', []))} records")
+            
             # Step 2: Run statistical hypothesis testing
+            logger.info("🧪 Step 2: Running statistical hypothesis testing...")
             from statistical_hypothesis_testing import StatisticalHypothesisTester
             tester = StatisticalHypothesisTester()
             statistical_results = tester.test_hypotheses(structured_results)
             
+            # Save statistical results
+            stats_file = output_dir / 'statistical_results.json'
+            with open(stats_file, 'w') as f:
+                json.dump(statistical_results, f, indent=2, default=str)
+            
+            if 'error' in statistical_results:
+                logger.warning(f"⚠️ Statistical testing issues: {statistical_results['error']}")
+            else:
+                summary = statistical_results.get('summary', {})
+                logger.info(f"✅ Hypothesis testing complete - {summary.get('hypotheses_supported', 0)}/3 supported")
+            
             # Step 3: Calculate interrater reliability
+            logger.info("🔍 Step 3: Analyzing interrater reliability...")
             from interrater_reliability_analysis import InterraterReliabilityAnalyzer
             reliability_analyzer = InterraterReliabilityAnalyzer()
             reliability_results = reliability_analyzer.analyze_reliability(structured_results)
             
+            # Save reliability results
+            reliability_file = output_dir / 'reliability_results.json'
+            with open(reliability_file, 'w') as f:
+                json.dump(reliability_results, f, indent=2, default=str)
+            
+            if 'error' in reliability_results:
+                logger.warning(f"⚠️ Reliability analysis limited: {reliability_results['error']}")
+            else:
+                logger.info("✅ Reliability analysis complete")
+            
             # Step 4: Generate comprehensive visualizations
+            logger.info("🎨 Step 4: Generating comprehensive visualizations...")
             from generate_comprehensive_visualizations import VisualizationGenerator
-            visualizer = VisualizationGenerator()
+            viz_output_dir = output_dir / 'visualizations'
+            visualizer = VisualizationGenerator(output_dir=str(viz_output_dir))
             visualization_results = visualizer.generate_visualizations(
                 structured_results,
                 statistical_results,
                 reliability_results
             )
             
-            # Combine all results
+            if 'error' in visualization_results:
+                logger.warning(f"⚠️ Visualization generation issues: {visualization_results['error']}")
+            else:
+                viz_count = len(visualizer.generated_files) if hasattr(visualizer, 'generated_files') else 0
+                logger.info(f"✅ Generated {viz_count} visualizations")
+            
+            # Step 5: Generate enhanced HTML report (if enabled)
+            html_report_path = None
+            if enhanced_config.get('generate_html_report', True):
+                logger.info("📄 Step 5: Generating enhanced HTML report...")
+                try:
+                    # Create HTML report with all analysis results
+                    html_report_path = self._generate_comprehensive_html_report(
+                        structured_results, statistical_results, 
+                        reliability_results, visualization_results, output_dir
+                    )
+                    logger.info(f"✅ Enhanced HTML report generated: {html_report_path}")
+                except Exception as e:
+                    logger.warning(f"⚠️ HTML report generation failed: {e}")
+            
+            # Step 6: Academic pipeline integration (if enabled)
+            academic_results = None
+            if enhanced_config.get('generate_academic_exports', False):
+                logger.info("🎓 Step 6: Generating academic exports...")
+                try:
+                    academic_results = self._generate_academic_exports(
+                        structured_results, output_dir, experiment
+                    )
+                    logger.info("✅ Academic exports generated")
+                except Exception as e:
+                    logger.warning(f"⚠️ Academic export generation failed: {e}")
+            
+            # Combine all results with comprehensive metadata
             enhanced_results = {
                 'structured_results': structured_results,
                 'statistical_results': statistical_results,
                 'reliability_results': reliability_results,
                 'visualization_results': visualization_results,
                 'pipeline_status': 'success',
-                'timestamp': datetime.now().isoformat()
+                'timestamp': datetime.now().isoformat(),
+                'experiment_directory': str(experiment_dir),
+                'enhanced_analysis_directory': str(output_dir),
+                'files_generated': {
+                    'structured_data': str(structured_file),
+                    'statistical_analysis': str(stats_file),
+                    'reliability_analysis': str(reliability_file),
+                    'visualizations_dir': str(viz_output_dir),
+                    'html_report': str(html_report_path) if html_report_path else None
+                },
+                'summary': {
+                    'total_analyses': len(structured_results.get('structured_data', [])),
+                    'statistical_tests_run': len(statistical_results.get('tests', {})) if 'error' not in statistical_results else 0,
+                    'hypotheses_supported': statistical_results.get('summary', {}).get('hypotheses_supported', 0) if 'error' not in statistical_results else 0,
+                    'reliability_metrics_calculated': bool('error' not in reliability_results),
+                    'visualizations_generated': len(visualizer.generated_files) if hasattr(visualizer, 'generated_files') else 0,
+                    'html_report_generated': bool(html_report_path),
+                    'academic_exports_generated': bool(academic_results)
+                }
             }
             
+            # Save comprehensive pipeline results
+            pipeline_results_file = output_dir / 'pipeline_results.json'
+            with open(pipeline_results_file, 'w') as f:
+                json.dump(enhanced_results, f, indent=2, default=str)
+            
+            # Generate pipeline summary report
+            self._generate_pipeline_summary_report(enhanced_results, output_dir, experiment_dir)
+            
             logger.info("✅ Enhanced analysis pipeline completed successfully")
+            logger.info(f"📁 All results saved to: {output_dir}")
+            
             return enhanced_results
             
         except Exception as e:
             logger.error(f"❌ Enhanced analysis pipeline failed: {e}")
-            return {
+            import traceback
+            traceback.print_exc()
+            
+            # Save error information
+            error_file = output_dir / 'pipeline_error.json'
+            error_info = {
                 'pipeline_status': 'failed',
                 'error': str(e),
+                'traceback': traceback.format_exc(),
                 'timestamp': datetime.now().isoformat()
             }
+            with open(error_file, 'w') as f:
+                json.dump(error_info, f, indent=2)
+            
+            return error_info
+    
+    def _generate_comprehensive_html_report(self, structured_results, 
+                                            statistical_results, reliability_results, 
+                                            visualization_results, output_dir):
+        """Generate comprehensive HTML report combining all analysis results."""
+        
+        # Create comprehensive report data
+        report_data = {
+            'experiment_analysis': {
+                'structured_data_summary': {
+                    'total_analyses': len(structured_results.get('structured_data', [])),
+                    'metadata': structured_results.get('metadata', {})
+                },
+                'statistical_summary': statistical_results.get('summary', {}) if 'error' not in statistical_results else {},
+                'reliability_summary': reliability_results.get('summary', {}) if 'error' not in reliability_results else {},
+                'visualization_summary': visualization_results.get('summary', {}) if 'error' not in visualization_results else {}
+            }
+        }
+        
+        # Generate HTML using template
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Enhanced Analysis Report</title>
+            <style>
+                body {{ font-family: Arial, sans-serif; margin: 40px; }}
+                .header {{ background: #2E86AB; color: white; padding: 20px; border-radius: 8px; }}
+                .section {{ margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }}
+                .metric {{ display: inline-block; margin: 10px; padding: 15px; background: #f8f9fa; border-radius: 5px; }}
+                .success {{ color: #28a745; }}
+                .warning {{ color: #ffc107; }}
+                .error {{ color: #dc3545; }}
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>🎯 Enhanced Analysis Report</h1>
+                <p>Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+            </div>
+            
+            <div class="section">
+                <h2>📊 Analysis Summary</h2>
+                <div class="metric">
+                    <strong>Total Analyses:</strong> {report_data['experiment_analysis']['structured_data_summary']['total_analyses']}
+                </div>
+                <div class="metric">
+                    <strong>Statistical Tests:</strong> {len(statistical_results.get('tests', {})) if 'error' not in statistical_results else 'Failed'}
+                </div>
+                <div class="metric">
+                    <strong>Reliability Analysis:</strong> {'✅ Complete' if 'error' not in reliability_results else '⚠️ Limited'}
+                </div>
+                <div class="metric">
+                    <strong>Visualizations:</strong> {len(visualization_results.get('files_generated', [])) if 'error' not in visualization_results else 'Failed'}
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📁 Generated Files</h2>
+                <ul>
+                    <li>📊 Structured Results: <code>structured_results.json</code></li>
+                    <li>🧪 Statistical Analysis: <code>statistical_results.json</code></li>
+                    <li>🔍 Reliability Analysis: <code>reliability_results.json</code></li>
+                    <li>🎨 Visualizations: <code>visualizations/</code></li>
+                    <li>📋 Pipeline Results: <code>pipeline_results.json</code></li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>🔗 Quick Links</h2>
+                <p>All analysis files are located in: <code>{output_dir}</code></p>
+            </div>
+        </body>
+        </html>
+        """
+        
+        # Save HTML report
+        html_file = output_dir / 'enhanced_analysis_report.html'
+        with open(html_file, 'w') as f:
+            f.write(html_content)
+        
+        return html_file
+    
+    def _generate_academic_exports(self, structured_results, output_dir, experiment):
+        """Generate academic exports if enabled."""
+        academic_dir = output_dir / 'academic_exports'
+        academic_dir.mkdir(exist_ok=True)
+        
+        # Export structured data in academic formats
+        if 'structured_data' in structured_results:
+            # CSV export
+            csv_file = academic_dir / 'analysis_data.csv'
+            if hasattr(structured_results['structured_data'], 'to_csv'):
+                structured_results['structured_data'].to_csv(csv_file, index=False)
+            
+            # Generate basic academic report
+            academic_report = {
+                'study_metadata': experiment.get('experiment_meta', {}) if experiment else {},
+                'analysis_summary': structured_results.get('metadata', {}),
+                'export_timestamp': datetime.now().isoformat(),
+                'files_generated': ['analysis_data.csv']
+            }
+            
+            report_file = academic_dir / 'academic_report.json'
+            with open(report_file, 'w') as f:
+                json.dump(academic_report, f, indent=2, default=str)
+        
+        return {'academic_exports_dir': str(academic_dir)}
+    
+    def _generate_pipeline_summary_report(self, enhanced_results, output_dir, experiment_dir):
+        """Generate a human-readable summary report."""
+        summary = enhanced_results['summary']
+        
+        report_content = f"""
+# Enhanced Analysis Pipeline Summary
 
+**Generated:** {enhanced_results['timestamp']}
+**Status:** {enhanced_results['pipeline_status']}
+
+## 📊 Analysis Overview
+
+- **Total Analyses Processed:** {summary['total_analyses']}
+- **Statistical Tests Run:** {summary['statistical_tests_run']}
+- **Hypotheses Supported:** {summary['hypotheses_supported']}
+- **Reliability Metrics:** {'✅ Calculated' if summary['reliability_metrics_calculated'] else '❌ Failed'}
+- **Visualizations Generated:** {summary['visualizations_generated']}
+- **HTML Report:** {'✅ Generated' if summary['html_report_generated'] else '❌ Failed'}
+- **Academic Exports:** {'✅ Generated' if summary['academic_exports_generated'] else '❌ Not Requested'}
+
+## 📁 Generated Files
+
+All experiment outputs have been saved to: `{experiment_dir}`
+
+### Experiment Directory Structure:
+```
+{experiment_dir.name}/
+├── enhanced_analysis/
+│   ├── pipeline_results.json          # Complete pipeline results
+│   ├── structured_results.json        # Extracted experiment data
+│   ├── statistical_results.json       # Statistical analysis results
+│   ├── reliability_results.json       # Reliability metrics
+│   ├── enhanced_analysis_report.html  # Interactive HTML report
+│   ├── README.md                       # This summary
+│   ├── visualizations/                # Comprehensive visualizations
+│   └── academic_exports/               # Publication-ready exports
+```
+
+## 🚀 Next Steps
+
+1. Review the HTML report for interactive analysis
+2. Examine statistical results for hypothesis validation
+3. Check reliability metrics for data quality assessment
+4. Use visualizations for presentation and publication
+
+"""
+        
+        summary_file = output_dir / 'README.md'
+        with open(summary_file, 'w') as f:
+            f.write(report_content)
+    
     def execute_analysis_matrix(self, experiment: Dict[str, Any], components: List[ComponentInfo]) -> Dict[str, Any]:
         """Execute the actual analysis matrix with real API calls"""
         logger.info("🔬 Initializing real analysis service...")
@@ -1861,7 +2169,7 @@ In addition to the standard analysis output, please consider how your findings r
         
         # After collecting all_results, run enhanced analysis pipeline
         if all_results:
-            enhanced_results = self.execute_enhanced_analysis_pipeline(execution_summary)
+            enhanced_results = self.execute_enhanced_analysis_pipeline(execution_summary, experiment)
             execution_summary['enhanced_analysis'] = enhanced_results
         
         return execution_summary

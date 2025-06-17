@@ -14,12 +14,12 @@
     "john_lewis_1963_march_washington.txt": {
       "hash": "afefd5ff1c062dcc4168ec8ceb0cf1a31109c2afb1b5f75478574e1ebec57dfc",
       "size_bytes": 5889,
-      "last_updated": "2025-06-17T00:47:31.386413"
+      "last_updated": "2025-06-17T09:02:40.055845"
     },
     "obama_2004_dnc.txt": {
       "hash": "3213086fdcb9943f58e377758ce183dd817ecbbad66f4928a90e642a576517e3",
       "size_bytes": 13089,
-      "last_updated": "2025-06-17T00:47:31.384094"
+      "last_updated": "2025-06-17T09:02:40.052911"
     },
     "obama_2012_dnc_acceptance_speech.txt": {
       "hash": "e335b462ec7fd87eb28fc75c701719a89e792ea73fad6b1c6ecd7f81ae64d5df",
@@ -32,5 +32,5 @@
       "last_updated": "2025-06-17T00:34:17.859037"
     }
   },
-  "manifest_updated": "2025-06-17T00:47:31.386416"
+  "manifest_updated": "2025-06-17T09:02:40.055849"
 }

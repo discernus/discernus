@@ -1,0 +1,660 @@
+{
+  "structured_results": {
+    "structured_data": "         analysis_id      text_id     framework  ... well_treachery  well_rebellion  well_corruption\n0  demo_run_1_text_1  demo_text_1  civic_virtue  ...           0.10            0.60             0.20\n1  demo_run_1_text_2  demo_text_2  civic_virtue  ...           0.10            0.20             0.15\n2  demo_run_2_text_1  demo_text_1  civic_virtue  ...           0.08            0.65             0.22\n3  demo_run_2_text_2  demo_text_2  civic_virtue  ...           0.08            0.18             0.12\n\n[4 rows x 21 columns]",
+    "metadata": {
+      "total_analyses": 4,
+      "successful_analyses": 4,
+      "failed_analyses": 0,
+      "total_cost": 0.25,
+      "cost_efficiency": 0.0625,
+      "extraction_timestamp": "2025-06-17T10:27:54.236368",
+      "well_columns": [
+        "well_compassion",
+        "well_equity",
+        "well_solidarity",
+        "well_hierarchy",
+        "well_purity",
+        "well_cruelty",
+        "well_exploitation",
+        "well_treachery",
+        "well_rebellion",
+        "well_corruption"
+      ],
+      "frameworks_used": [
+        "civic_virtue"
+      ],
+      "models_used": [
+        "gpt-4o"
+      ]
+    },
+    "raw_execution_results": {
+      "total_analyses": 4,
+      "successful_analyses": 4,
+      "failed_analyses": 0,
+      "total_cost": 0.25,
+      "cost_efficiency": 0.0625,
+      "results": [
+        {
+          "analysis_id": "demo_run_1_text_1",
+          "text_id": "demo_text_1",
+          "framework": "civic_virtue",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.06,
+          "duration_seconds": 25.4,
+          "framework_fit_score": 0.85,
+          "well_scores": {
+            "compassion": 0.9,
+            "equity": 0.8,
+            "solidarity": 0.7,
+            "hierarchy": 0.2,
+            "purity": 0.3,
+            "cruelty": 0.1,
+            "exploitation": 0.2,
+            "treachery": 0.1,
+            "rebellion": 0.6,
+            "corruption": 0.2
+          },
+          "narrative_position_x": 0.35,
+          "narrative_position_y": 0.42,
+          "timestamp": "2025-06-17T10:27:54.186005"
+        },
+        {
+          "analysis_id": "demo_run_1_text_2",
+          "text_id": "demo_text_2",
+          "framework": "civic_virtue",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.058,
+          "duration_seconds": 23.8,
+          "framework_fit_score": 0.82,
+          "well_scores": {
+            "compassion": 0.2,
+            "equity": 0.3,
+            "solidarity": 0.25,
+            "hierarchy": 0.85,
+            "purity": 0.9,
+            "cruelty": 0.15,
+            "exploitation": 0.2,
+            "treachery": 0.1,
+            "rebellion": 0.2,
+            "corruption": 0.15
+          },
+          "narrative_position_x": -0.32,
+          "narrative_position_y": 0.38,
+          "timestamp": "2025-06-17T10:27:54.186006"
+        },
+        {
+          "analysis_id": "demo_run_2_text_1",
+          "text_id": "demo_text_1",
+          "framework": "civic_virtue",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.062,
+          "duration_seconds": 26.1,
+          "framework_fit_score": 0.87,
+          "well_scores": {
+            "compassion": 0.85,
+            "equity": 0.82,
+            "solidarity": 0.75,
+            "hierarchy": 0.25,
+            "purity": 0.28,
+            "cruelty": 0.12,
+            "exploitation": 0.18,
+            "treachery": 0.08,
+            "rebellion": 0.65,
+            "corruption": 0.22
+          },
+          "narrative_position_x": 0.38,
+          "narrative_position_y": 0.45,
+          "timestamp": "2025-06-17T10:27:54.186007"
+        },
+        {
+          "analysis_id": "demo_run_2_text_2",
+          "text_id": "demo_text_2",
+          "framework": "civic_virtue",
+          "llm_model": "gpt-4o",
+          "success": true,
+          "api_cost": 0.07,
+          "duration_seconds": 28.3,
+          "framework_fit_score": 0.79,
+          "well_scores": {
+            "compassion": 0.18,
+            "equity": 0.28,
+            "solidarity": 0.22,
+            "hierarchy": 0.88,
+            "purity": 0.92,
+            "cruelty": 0.12,
+            "exploitation": 0.25,
+            "treachery": 0.08,
+            "rebellion": 0.18,
+            "corruption": 0.12
+          },
+          "narrative_position_x": -0.35,
+          "narrative_position_y": 0.41,
+          "timestamp": "2025-06-17T10:27:54.186008"
+        }
+      ]
+    }
+  },
+  "statistical_results": {
+    "hypothesis_testing": {
+      "H1_discriminative_validity": {
+        "hypothesis": "Discriminative validity: Dignity and Tribalism wells differentiate expected text categories",
+        "dignity_wells": [],
+        "tribalism_wells": [],
+        "tests_performed": [],
+        "status": "insufficient_data",
+        "message": "Missing wells - Dignity: [], Tribalism: []"
+      },
+      "H2_ideological_agnosticism": {
+        "hypothesis": "Ideological agnosticism: Framework should not systematically favor conservative vs progressive content",
+        "tests_performed": [],
+        "sample_sizes": {
+          "conservative": 0,
+          "progressive": 0,
+          "unknown": 4
+        },
+        "status": "insufficient_data",
+        "message": "Could not identify both conservative and progressive texts for comparison"
+      },
+      "H3_ground_truth_alignment": {
+        "hypothesis": "Ground truth alignment: Extreme control texts should score >0.8 on expected wells",
+        "target_threshold": 0.8,
+        "tests_performed": [],
+        "extreme_controls_found": 0,
+        "status": "insufficient_data",
+        "message": "No extreme control texts identified"
+      }
+    },
+    "descriptive_statistics": {
+      "well_compassion": {
+        "count": 4,
+        "mean": 0.5325000000000001,
+        "std": 0.3960955271985114,
+        "min": 0.18,
+        "max": 0.9,
+        "median": 0.525,
+        "q25": 0.195,
+        "q75": 0.8625,
+        "skewness": 0.011573908795584004,
+        "kurtosis": -5.907826933260298
+      },
+      "well_equity": {
+        "count": 4,
+        "mean": 0.55,
+        "std": 0.30044411571316665,
+        "min": 0.28,
+        "max": 0.82,
+        "median": 0.55,
+        "q25": 0.295,
+        "q75": 0.805,
+        "skewness": 0.0,
+        "kurtosis": -5.95575230893092
+      },
+      "well_solidarity": {
+        "count": 4,
+        "mean": 0.48,
+        "std": 0.2839013913315678,
+        "min": 0.22,
+        "max": 0.75,
+        "median": 0.475,
+        "q25": 0.2425,
+        "q75": 0.7124999999999999,
+        "skewness": 0.017131031131583575,
+        "kurtosis": -5.790482670295362
+      },
+      "well_hierarchy": {
+        "count": 4,
+        "mean": 0.545,
+        "std": 0.3702701716314723,
+        "min": 0.2,
+        "max": 0.88,
+        "median": 0.55,
+        "q25": 0.2375,
+        "q75": 0.8574999999999999,
+        "skewness": -0.010085879584203863,
+        "kurtosis": -5.876487052580784
+      },
+      "well_purity": {
+        "count": 4,
+        "mean": 0.6,
+        "std": 0.35814336049502116,
+        "min": 0.28,
+        "max": 0.92,
+        "median": 0.6,
+        "q25": 0.295,
+        "q75": 0.905,
+        "skewness": 0.0,
+        "kurtosis": -5.968847385687302
+      },
+      "well_cruelty": {
+        "count": 4,
+        "mean": 0.1225,
+        "std": 0.020615528128088298,
+        "min": 0.1,
+        "max": 0.15,
+        "median": 0.12,
+        "q25": 0.11499999999999999,
+        "q75": 0.1275,
+        "skewness": 0.713340073636274,
+        "kurtosis": 1.785467128027685
+      },
+      "well_exploitation": {
+        "count": 4,
+        "mean": 0.20750000000000002,
+        "std": 0.029860788111948193,
+        "min": 0.18,
+        "max": 0.25,
+        "median": 0.2,
+        "q25": 0.195,
+        "q75": 0.21250000000000002,
+        "skewness": 1.3802366205644985,
+        "kurtosis": 2.6024980347628492
+      },
+      "well_treachery": {
+        "count": 4,
+        "mean": 0.09000000000000001,
+        "std": 0.011547005383792518,
+        "min": 0.08,
+        "max": 0.1,
+        "median": 0.09,
+        "q25": 0.08,
+        "q75": 0.1,
+        "skewness": 0.0,
+        "kurtosis": -6.000000000000002
+      },
+      "well_rebellion": {
+        "count": 4,
+        "mean": 0.40750000000000003,
+        "std": 0.25210778118363053,
+        "min": 0.18,
+        "max": 0.65,
+        "median": 0.4,
+        "q25": 0.195,
+        "q75": 0.6125,
+        "skewness": 0.028504918623823535,
+        "kurtosis": -5.773370566694689
+      },
+      "well_corruption": {
+        "count": 4,
+        "mean": 0.1725,
+        "std": 0.04573474244670748,
+        "min": 0.12,
+        "max": 0.22,
+        "median": 0.175,
+        "q25": 0.1425,
+        "q75": 0.20500000000000002,
+        "skewness": -0.19600292789973037,
+        "kurtosis": -3.2024253583276447
+      }
+    },
+    "effect_sizes": {
+      "well_compassion_vs_well_equity": {
+        "cohens_d": -0.049781206448408215,
+        "effect_magnitude": "negligible"
+      },
+      "well_compassion_vs_well_solidarity": {
+        "cohens_d": 0.1523526854006791,
+        "effect_magnitude": "negligible"
+      },
+      "well_compassion_vs_well_hierarchy": {
+        "cohens_d": -0.03260299524869575,
+        "effect_magnitude": "negligible"
+      },
+      "well_compassion_vs_well_purity": {
+        "cohens_d": -0.17876221892663202,
+        "effect_magnitude": "negligible"
+      },
+      "well_compassion_vs_well_cruelty": {
+        "cohens_d": 1.4618791993582312,
+        "effect_magnitude": "large"
+      },
+      "well_compassion_vs_well_exploitation": {
+        "cohens_d": 1.15709174558478,
+        "effect_magnitude": "large"
+      },
+      "well_compassion_vs_well_treachery": {
+        "cohens_d": 1.5792244957448311,
+        "effect_magnitude": "large"
+      },
+      "well_compassion_vs_well_rebellion": {
+        "cohens_d": 0.3765043161949203,
+        "effect_magnitude": "small"
+      },
+      "well_compassion_vs_well_corruption": {
+        "cohens_d": 1.2768553467309922,
+        "effect_magnitude": "large"
+      },
+      "well_equity_vs_well_solidarity": {
+        "cohens_d": 0.23948833479916554,
+        "effect_magnitude": "small"
+      },
+      "well_equity_vs_well_hierarchy": {
+        "cohens_d": 0.014829332562085048,
+        "effect_magnitude": "negligible"
+      },
+      "well_equity_vs_well_purity": {
+        "cohens_d": -0.15126071783182615,
+        "effect_magnitude": "negligible"
+      },
+      "well_equity_vs_well_cruelty": {
+        "cohens_d": 2.0075548755013917,
+        "effect_magnitude": "large"
+      },
+      "well_equity_vs_well_exploitation": {
+        "cohens_d": 1.6042697166325175,
+        "effect_magnitude": "large"
+      },
+      "well_equity_vs_well_treachery": {
+        "cohens_d": 2.163657997282274,
+        "effect_magnitude": "large"
+      },
+      "well_equity_vs_well_rebellion": {
+        "cohens_d": 0.5138263835318861,
+        "effect_magnitude": "medium"
+      },
+      "well_equity_vs_well_corruption": {
+        "cohens_d": 1.756685069771736,
+        "effect_magnitude": "large"
+      },
+      "well_solidarity_vs_well_hierarchy": {
+        "cohens_d": -0.19701493056702551,
+        "effect_magnitude": "negligible"
+      },
+      "well_solidarity_vs_well_purity": {
+        "cohens_d": -0.3713314008487619,
+        "effect_magnitude": "small"
+      },
+      "well_solidarity_vs_well_cruelty": {
+        "cohens_d": 1.7761577048598947,
+        "effect_magnitude": "large"
+      },
+      "well_solidarity_vs_well_exploitation": {
+        "cohens_d": 1.349972446344803,
+        "effect_magnitude": "large"
+      },
+      "well_solidarity_vs_well_treachery": {
+        "cohens_d": 1.9411234796725543,
+        "effect_magnitude": "large"
+      },
+      "well_solidarity_vs_well_rebellion": {
+        "cohens_d": 0.27004312685866444,
+        "effect_magnitude": "small"
+      },
+      "well_solidarity_vs_well_corruption": {
+        "cohens_d": 1.512269681251999,
+        "effect_magnitude": "large"
+      },
+      "well_hierarchy_vs_well_purity": {
+        "cohens_d": -0.1509921964424294,
+        "effect_magnitude": "negligible"
+      },
+      "well_hierarchy_vs_well_cruelty": {
+        "cohens_d": 1.6112053092723855,
+        "effect_magnitude": "large"
+      },
+      "well_hierarchy_vs_well_exploitation": {
+        "cohens_d": 1.2848793368720162,
+        "effect_magnitude": "large"
+      },
+      "well_hierarchy_vs_well_treachery": {
+        "cohens_d": 1.7369870809837633,
+        "effect_magnitude": "large"
+      },
+      "well_hierarchy_vs_well_rebellion": {
+        "cohens_d": 0.4340993101299246,
+        "effect_magnitude": "small"
+      },
+      "well_hierarchy_vs_well_corruption": {
+        "cohens_d": 1.4119998721201326,
+        "effect_magnitude": "large"
+      },
+      "well_purity_vs_well_cruelty": {
+        "cohens_d": 1.882405404487706,
+        "effect_magnitude": "large"
+      },
+      "well_purity_vs_well_exploitation": {
+        "cohens_d": 1.544519667289909,
+        "effect_magnitude": "large"
+      },
+      "well_purity_vs_well_treachery": {
+        "cohens_d": 2.0128094468078386,
+        "effect_magnitude": "large"
+      },
+      "well_purity_vs_well_rebellion": {
+        "cohens_d": 0.6215744126197305,
+        "effect_magnitude": "medium"
+      },
+      "well_purity_vs_well_corruption": {
+        "cohens_d": 1.6744867573088587,
+        "effect_magnitude": "large"
+      },
+      "well_cruelty_vs_well_exploitation": {
+        "cohens_d": -3.3128059925543183,
+        "effect_magnitude": "large"
+      },
+      "well_cruelty_vs_well_treachery": {
+        "cohens_d": 1.9451432054098834,
+        "effect_magnitude": "large"
+      },
+      "well_cruelty_vs_well_rebellion": {
+        "cohens_d": -1.593405922207283,
+        "effect_magnitude": "large"
+      },
+      "well_cruelty_vs_well_corruption": {
+        "cohens_d": -1.4095229572048185,
+        "effect_magnitude": "large"
+      },
+      "well_exploitation_vs_well_treachery": {
+        "cohens_d": 5.190281725517789,
+        "effect_magnitude": "large"
+      },
+      "well_exploitation_vs_well_rebellion": {
+        "cohens_d": -1.1141240075107057,
+        "effect_magnitude": "large"
+      },
+      "well_exploitation_vs_well_corruption": {
+        "cohens_d": 0.9062168892044172,
+        "effect_magnitude": "large"
+      },
+      "well_treachery_vs_well_rebellion": {
+        "cohens_d": -1.7791698923069383,
+        "effect_magnitude": "large"
+      },
+      "well_treachery_vs_well_corruption": {
+        "cohens_d": -2.473454573686342,
+        "effect_magnitude": "large"
+      },
+      "well_rebellion_vs_well_corruption": {
+        "cohens_d": 1.2970762129530722,
+        "effect_magnitude": "large"
+      }
+    },
+    "metadata": {
+      "sample_size": 4,
+      "well_count": 10,
+      "frameworks_tested": [
+        "civic_virtue"
+      ],
+      "models_tested": [
+        "gpt-4o"
+      ],
+      "significance_level": 0.05,
+      "testing_timestamp": "2025-06-17T10:27:55.119216"
+    },
+    "summary": {
+      "overall_assessment": "validation_concerns",
+      "hypotheses_supported": 0,
+      "hypotheses_tested": 3,
+      "key_findings": [],
+      "recommendations": [
+        "Consider refining well definitions for better discriminative validity",
+        "Investigate and address potential ideological bias in framework",
+        "Improve ground truth alignment - consider threshold adjustments or control text selection"
+      ]
+    }
+  },
+  "reliability_results": {
+    "analysis_type": "single_rater_descriptive",
+    "metadata": {
+      "model_count": 1,
+      "well_count": 10,
+      "sample_size": 4,
+      "analysis_timestamp": "2025-06-17T10:27:55.513527"
+    },
+    "descriptive_statistics": {
+      "well_compassion": {
+        "count": 4,
+        "mean": 0.5325000000000001,
+        "std": 0.3960955271985114,
+        "min": 0.18,
+        "max": 0.9,
+        "range": 0.72,
+        "cv": 74.38413656310071
+      },
+      "well_equity": {
+        "count": 4,
+        "mean": 0.55,
+        "std": 0.30044411571316665,
+        "min": 0.28,
+        "max": 0.82,
+        "range": 0.5399999999999999,
+        "cv": 54.626202856939386
+      },
+      "well_solidarity": {
+        "count": 4,
+        "mean": 0.48,
+        "std": 0.2839013913315678,
+        "min": 0.22,
+        "max": 0.75,
+        "range": 0.53,
+        "cv": 59.14612319407663
+      },
+      "well_hierarchy": {
+        "count": 4,
+        "mean": 0.545,
+        "std": 0.3702701716314723,
+        "min": 0.2,
+        "max": 0.88,
+        "range": 0.6799999999999999,
+        "cv": 67.93948103329767
+      },
+      "well_purity": {
+        "count": 4,
+        "mean": 0.6,
+        "std": 0.35814336049502116,
+        "min": 0.28,
+        "max": 0.92,
+        "range": 0.64,
+        "cv": 59.69056008250353
+      },
+      "well_cruelty": {
+        "count": 4,
+        "mean": 0.1225,
+        "std": 0.020615528128088298,
+        "min": 0.1,
+        "max": 0.15,
+        "range": 0.04999999999999999,
+        "cv": 16.829002553541468
+      },
+      "well_exploitation": {
+        "count": 4,
+        "mean": 0.20750000000000002,
+        "std": 0.029860788111948193,
+        "min": 0.18,
+        "max": 0.25,
+        "range": 0.07,
+        "cv": 14.390741258770213
+      },
+      "well_treachery": {
+        "count": 4,
+        "mean": 0.09000000000000001,
+        "std": 0.011547005383792518,
+        "min": 0.08,
+        "max": 0.1,
+        "range": 0.020000000000000004,
+        "cv": 12.830005981991684
+      },
+      "well_rebellion": {
+        "count": 4,
+        "mean": 0.40750000000000003,
+        "std": 0.25210778118363053,
+        "min": 0.18,
+        "max": 0.65,
+        "range": 0.47000000000000003,
+        "cv": 61.86694016776209
+      },
+      "well_corruption": {
+        "count": 4,
+        "mean": 0.1725,
+        "std": 0.04573474244670748,
+        "min": 0.12,
+        "max": 0.22,
+        "range": 0.1,
+        "cv": 26.512894172004337
+      }
+    },
+    "internal_consistency": {
+      "split_half_correlation": -0.6511789869670546,
+      "split_half_p_value": 0.34882101303294544,
+      "spearman_brown_coefficient": -3.7335995403783317,
+      "interpretation": "poor"
+    },
+    "message": "Single rater detected - full reliability analysis requires multiple raters"
+  },
+  "visualization_results": {
+    "descriptive_plots": {
+      "descriptive_analysis": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/descriptive_analysis.png"
+    },
+    "hypothesis_plots": {
+      "hypothesis_testing": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/hypothesis_testing_results.png"
+    },
+    "reliability_plots": {
+      "reliability_analysis": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/reliability_analysis.png"
+    },
+    "correlation_plots": {
+      "correlation_matrix": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/correlation_matrix.png"
+    },
+    "distribution_plots": {
+      "score_distributions": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/score_distributions.png"
+    },
+    "narrative_gravity_plots": {
+      "narrative_gravity_map": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/narrative_gravity_map.png",
+      "well_scores_radar": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/well_scores_radar.png"
+    },
+    "interactive_dashboard": {
+      "interactive_dashboard": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/interactive_dashboard.html"
+    },
+    "generated_files": {
+      "descriptive_analysis": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/descriptive_analysis.png",
+      "hypothesis_testing": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/hypothesis_testing_results.png",
+      "reliability_analysis": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/reliability_analysis.png",
+      "correlation_matrix": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/correlation_matrix.png",
+      "score_distributions": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/score_distributions.png",
+      "narrative_gravity_map": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/narrative_gravity_map.png",
+      "well_scores_radar": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/well_scores_radar.png",
+      "interactive_dashboard": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations/interactive_dashboard.html"
+    }
+  },
+  "pipeline_status": "success",
+  "timestamp": "2025-06-17T10:27:58.238295",
+  "experiment_directory": "experiments/Enhanced_Orchestration_Demo_20250617_102754",
+  "enhanced_analysis_directory": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis",
+  "files_generated": {
+    "structured_data": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/structured_results.json",
+    "statistical_analysis": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/statistical_results.json",
+    "reliability_analysis": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/reliability_results.json",
+    "visualizations_dir": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/visualizations",
+    "html_report": "experiments/Enhanced_Orchestration_Demo_20250617_102754/enhanced_analysis/enhanced_analysis_report.html"
+  },
+  "summary": {
+    "total_analyses": 4,
+    "statistical_tests_run": 0,
+    "hypotheses_supported": 0,
+    "reliability_metrics_calculated": true,
+    "visualizations_generated": 8,
+    "html_report_generated": true,
+    "academic_exports_generated": true
+  }
+}

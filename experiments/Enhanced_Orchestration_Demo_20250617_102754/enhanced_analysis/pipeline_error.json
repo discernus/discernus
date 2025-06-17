@@ -1,0 +1,6 @@
+{
+  "pipeline_status": "failed",
+  "error": "name 'experiment_dir' is not defined",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/scripts/comprehensive_experiment_orchestrator.py\", line 1850, in execute_enhanced_analysis_pipeline\n    self._generate_pipeline_summary_report(enhanced_results, output_dir)\n  File \"/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/scripts/comprehensive_experiment_orchestrator.py\", line 2005, in _generate_pipeline_summary_report\n    All experiment outputs have been saved to: `{experiment_dir.parent / experiment_dir.name}`\nNameError: name 'experiment_dir' is not defined\n",
+  "timestamp": "2025-06-17T10:27:58.250033"
+}

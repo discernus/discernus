@@ -1,0 +1,134 @@
+{
+  "corpus_name": "IDITI Validation Corpus",
+  "experiment_id": "iditi_validation_study_20250617",
+  "framework": "Identity-Ideology-Tribalism-Integration (IDITI)",
+  "total_texts": 32,
+  "creation_date": "2025-06-17",
+  "validation_purpose": "Test discriminative validity, ideological agnosticism, and ground truth alignment",
+  
+  "categories": {
+    "conservative_dignity": {
+      "description": "Conservative political texts emphasizing dignity, unity, and constructive discourse",
+      "expected_scores": {
+        "dignity": "> 0.6",
+        "tribalism": "< 0.4",
+        "political_orientation": "conservative"
+      },
+      "text_count": 6,
+      "example_authors": ["Ronald Reagan", "George H.W. Bush", "Mitt Romney", "John McCain"]
+    },
+    
+    "conservative_tribalism": {
+      "description": "Conservative political texts emphasizing in-group loyalty and out-group antagonism",
+      "expected_scores": {
+        "dignity": "< 0.4", 
+        "tribalism": "> 0.6",
+        "political_orientation": "conservative"
+      },
+      "text_count": 6,
+      "example_authors": ["Donald Trump", "Steve Bannon", "Ted Cruz", "Tucker Carlson"]
+    },
+    
+    "progressive_dignity": {
+      "description": "Progressive political texts emphasizing dignity, unity, and constructive discourse",
+      "expected_scores": {
+        "dignity": "> 0.6",
+        "tribalism": "< 0.4", 
+        "political_orientation": "progressive"
+      },
+      "text_count": 6,
+      "example_authors": ["Barack Obama", "Joe Biden", "Hillary Clinton", "John Lewis"]
+    },
+    
+    "progressive_tribalism": {
+      "description": "Progressive political texts emphasizing in-group loyalty and out-group antagonism",
+      "expected_scores": {
+        "dignity": "< 0.4",
+        "tribalism": "> 0.6",
+        "political_orientation": "progressive"  
+      },
+      "text_count": 6,
+      "example_authors": ["Elizabeth Warren", "Alexandria Ocasio-Cortez", "Bernie Sanders", "The Squad"]
+    },
+    
+    "extreme_controls": {
+      "description": "Texts with extreme tribalism characteristics for validation testing",
+      "expected_scores": {
+        "tribalism": "> 0.8",
+        "dignity": "< 0.2"
+      },
+      "text_count": 4,
+      "purpose": "Validate framework's ability to detect high tribalism"
+    },
+    
+    "mixed_controls": {
+      "description": "Texts with balanced dignity/tribalism characteristics",
+      "expected_scores": {
+        "dignity": "0.4-0.6",
+        "tribalism": "0.4-0.6"
+      },
+      "text_count": 4,
+      "purpose": "Validate framework's ability to detect nuanced discourse"
+    }
+  },
+  
+  "corpus_construction": {
+    "selection_criteria": [
+      "Political speeches, statements, or writings",
+      "Clear political orientation (conservative vs progressive)",
+      "Clear discourse style (dignity-oriented vs tribalism-oriented)",
+      "Sufficient length for reliable analysis (>200 words)",
+      "Published or delivered in public contexts"
+    ],
+    
+    "exclusion_criteria": [
+      "Private conversations or communications", 
+      "Texts shorter than 200 words",
+      "Ambiguous political orientation",
+      "Non-political content"
+    ],
+    
+    "validation_strategy": {
+      "expert_review": "Texts reviewed by research team for category assignment",
+      "inter_rater_reliability": "Planned for Phase 2 multi-LLM study",
+      "ground_truth_controls": "Extreme and mixed controls for validation"
+    }
+  },
+  
+  "hypotheses_tested": {
+    "H1_discriminative_validity": {
+      "description": "Framework distinguishes dignity from tribalism within political orientations",
+      "test_categories": ["conservative_dignity vs conservative_tribalism", "progressive_dignity vs progressive_tribalism"],
+      "statistical_method": "Independent samples t-test",
+      "expected_outcome": "Significant differences in dignity/tribalism scores"
+    },
+    
+    "H2_ideological_agnosticism": {
+      "description": "Framework measures dignity/tribalism independently of political orientation",
+      "test_categories": ["conservative_dignity vs progressive_dignity", "conservative_tribalism vs progressive_tribalism"],
+      "statistical_method": "One-way ANOVA", 
+      "expected_outcome": "No significant differences between political orientations within discourse styles"
+    },
+    
+    "H3_ground_truth_alignment": {
+      "description": "Framework produces expected scores for validation controls",
+      "test_categories": ["extreme_controls", "mixed_controls"],
+      "statistical_method": "Correlation analysis with expected scores",
+      "expected_outcome": "Strong positive correlation (r > 0.7) with expected scores"
+    }
+  },
+  
+  "source_locations": {
+    "corpus_files": "corpus/validation_set/",
+    "file_structure": "Organized by category subdirectories",
+    "text_format": "Plain text files (.txt)",
+    "metadata_files": ".corpus_manifest.json in each subdirectory"
+  },
+  
+  "quality_assurance": {
+    "text_preprocessing": "Minimal - preserve original political discourse",
+    "length_validation": "All texts >200 words confirmed",
+    "category_validation": "Expert review completed",
+    "technical_validation": "Corpus registry validation passed"
+  }
+} 

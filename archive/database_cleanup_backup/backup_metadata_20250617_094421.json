@@ -1,0 +1,14 @@
+{
+  "backup_date": "2025-06-17T09:44:21.322149",
+  "cutoff_date": "2025-06-17T00:00:00",
+  "records_backed_up": 25,
+  "frameworks_backed_up": {
+    "civic_virtue": 25
+  },
+  "models_backed_up": {
+    "claude-3-5-sonnet": 15,
+    "claude 3.5 sonnet": 10
+  },
+  "reason": "Pre-unified structure experiment data cleanup",
+  "csv_file": "obsolete_experiment_data_20250617_094421.csv"
+}

@@ -197,24 +197,53 @@ class PromptTemplateManager:
         return self._assemble_prompt(components)
     
     def _load_framework_config(self, framework: str) -> Dict[str, Any]:
-        """Load framework configuration files."""
+        """Load framework configuration files - supports both old and new consolidated formats."""
         framework_path = Path("frameworks") / framework
         
-        # Load dipoles configuration
+        # Try new consolidated format first
+        consolidated_path = framework_path / "framework_consolidated.json"
+        if consolidated_path.exists():
+            with open(consolidated_path, 'r') as f:
+                consolidated_config = json.load(f)
+            
+            # Extract components from consolidated format
+            return {
+                "dipoles": {
+                    "dipoles": consolidated_config.get("dipoles", []),
+                    "framework_name": consolidated_config.get("framework_meta", {}).get("name", framework),
+                    "description": consolidated_config.get("framework_meta", {}).get("description", ""),
+                    "version": consolidated_config.get("framework_meta", {}).get("version", "v1.0.0")
+                },
+                "framework": {
+                    "wells": consolidated_config.get("wells", {}),
+                    "framework_name": consolidated_config.get("framework_meta", {}).get("name", framework),
+                    "version": consolidated_config.get("framework_meta", {}).get("version", "v1.0.0"),
+                    "description": consolidated_config.get("framework_meta", {}).get("description", "")
+                },
+                "name": framework
+            }
+        
+        # Fallback to old separate files format
         dipoles_path = framework_path / "dipoles.json"
-        with open(dipoles_path, 'r') as f:
-            dipoles_config = json.load(f)
-        
-        # Load framework configuration  
         framework_config_path = framework_path / "framework.json"
-        with open(framework_config_path, 'r') as f:
-            framework_config = json.load(f)
         
-        return {
-            "dipoles": dipoles_config,
-            "framework": framework_config,
-            "name": framework
-        }
+        if dipoles_path.exists() and framework_config_path.exists():
+            # Load dipoles configuration
+            with open(dipoles_path, 'r') as f:
+                dipoles_config = json.load(f)
+            
+            # Load framework configuration  
+            with open(framework_config_path, 'r') as f:
+                framework_config = json.load(f)
+            
+            return {
+                "dipoles": dipoles_config,
+                "framework": framework_config,
+                "name": framework
+            }
+        
+        # If neither format exists, raise an error
+        raise FileNotFoundError(f"Framework '{framework}' not found. Expected either 'framework_consolidated.json' or both 'dipoles.json' and 'framework.json' in {framework_path}")
     
     def _load_experiment_config(self, experiment_id: str, variant: str) -> Dict[str, Any]:
         """Load experimental prompt variations."""
