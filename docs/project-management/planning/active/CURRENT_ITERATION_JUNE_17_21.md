@@ -23,7 +23,18 @@ Transform successful single-LLM execution into comprehensive multi-LLM research 
 ## 📋 **PHASE BREAKDOWN**
 
 ### **Phase 1: Infrastructure Buildout** (Days 1-2)
-**Status**: 🎯 **IN PROGRESS**
+**Status**: ✅ **COMPLETED WITH MAJOR CLEANUP**
+
+#### **⚠️ CRITICAL CODE REVIEW FINDINGS**
+**Date**: June 17, 2025
+**Issue**: Less experienced collaborator created significant code redundancy and architectural violations
+**Action**: Comprehensive cleanup performed - see `docs/project-management/status/code_review_cleanup_june_17_2025.md`
+
+**Summary**:
+- ❌ **Removed 4 redundant scripts** (1,521 lines of duplicate code)
+- ✅ **Enhanced 2 salvageable scripts** with proper integration
+- ✅ **Preserved existing architecture** and prevented fragmentation
+- ✅ **Documented integration patterns** for future development
 
 #### **1.0 Docker Infrastructure**
 - [ ] **Docker Configuration**
@@ -45,36 +56,35 @@ Transform successful single-LLM execution into comprehensive multi-LLM research 
   - Health check implementation
   - Logging and monitoring setup
 
-#### **1.1 Data Extraction & Statistical Analysis**
-- [ ] **Script**: `extract_experiment_results.py`
-  - Database query system for experiment results
-  - JSON response parsing for well scores
-  - Multi-LLM dataset structuring
-- [ ] **Script**: `statistical_hypothesis_testing.py`
-  - H1-H3 hypothesis testing with t-tests, ANOVA, correlation analysis
-  - Effect size calculations and confidence intervals
-  - P-value corrections for multiple testing
-  - Cross-model reliability analysis with correlation coefficients
-  - Systematic documentation of prompt sensitivity variations
-  - Quality assurance metrics for computational reliability
+#### **1.1 Data Extraction & Integration** ✅ **COMPLETED**
+- ✅ **Script**: `extract_experiment_results.py` **ENHANCED**
+  - Database query system using existing `StatisticalLogger`
+  - Framework-agnostic design with `FrameworkManager` integration
+  - Dynamic column validation and error handling
+  - Proper export path management
+- ~~❌ **Script**: `statistical_hypothesis_testing.py` **REMOVED** - Conflicts with established R-based methodology~~
+  - **Note**: Existing R scripts already provide comprehensive statistical analysis with mixed-effects models
 
-#### **1.2 Interrater Reliability System**
-- [ ] **Script**: `interrater_reliability_analysis.py`
-  - ICC, Cronbach's Alpha, Fleiss' Kappa implementation
-  - Pairwise correlation matrices and outlier detection
-  - Database schema updates for reliability metrics
-  - Multi-layer validation systems integration
-  - Continuous feedback loops and expert intervention protocols
-  - Quality estimation with manual inspection points
+#### **1.2 Reliability Analysis Integration** ✅ **COMPLETED**
+- ~~❌ **Script**: `interrater_reliability_analysis.py` **REMOVED** - 80% duplicate functionality~~
+  - **Note**: Existing system already provides:
+    - ✅ ICC, Cronbach's Alpha, Fleiss' Kappa in R scripts
+    - ✅ Academic export templates with reliability metrics
+    - ✅ Jupyter notebooks with comprehensive analysis
+    - ✅ Publication-ready statistical reporting
 
-#### **1.3 Enhanced Visualization System**
-- [ ] **Script**: `generate_comprehensive_visualizations.py`
-  - Statistical charts with hypothesis-specific analysis
-  - Bland-Altman plots for LLM agreement
-  - Interactive elements with hover details
-  - Comparative analysis of coordinate systems
-  - Boundary effects and edge case visualization
-  - Circular vs linear mapping comparison plots
+#### **1.3 Visualization System Integration** ✅ **COMPLETED**  
+- ✅ **Centralized Engine Preserved**
+  - Existing `NarrativeGravityVisualizationEngine` maintained as single source of truth
+  - Theme-aware styling system preserved (academic, presentation, minimal, dark)
+  - Publication-ready export capabilities already available
+  - Framework-agnostic well positioning already implemented
+
+- ~~❌ **Script**: `generate_comprehensive_visualizations.py` **REMOVED** - Conflicted with architecture~~
+  - **Note**: Would have created maintenance nightmare with scattered implementations
+  
+- ~~❌ **Script**: `enhanced_html_report_generator.py` **REMOVED** - Duplicate functionality~~
+  - **Note**: Existing academic export system provides comprehensive HTML templates
 
 ### **Phase 2: Multi-LLM Execution** (Days 2-3)
 **Status**: 🎯 **READY TO EXECUTE**
@@ -267,20 +277,23 @@ Transform successful single-LLM execution into comprehensive multi-LLM research 
 - **Multi-LLM API failures**: Test individual provider connections first
 - **Database performance**: Monitor query times with larger datasets
 - **Statistical calculation errors**: Validate with known datasets
+- **Visualization performance**: Implement caching for complex calculations
 
 ### **Research Risks**
 - **Low interrater reliability**: Have fallback analysis methods ready
 - **Hypothesis rejection**: Prepare discussion of null results
 - **Cost overruns**: Monitor API costs throughout execution
+- **Visualization clarity**: Ensure statistical context is clear and interpretable
 
 ### **Time Risks**
 - **Scope creep**: Focus on core functionality first, enhancements second
 - **Debug time**: Allocate extra time for testing and validation
+- **Visualization complexity**: Prioritize essential features over nice-to-haves
 
 ## 📅 **TIMELINE & MILESTONES**
 
 ### **Week 1 (June 17-21)**
-- **Monday-Tuesday**: Infrastructure buildout (data extraction, statistics, reliability)
+- **Monday-Tuesday**: Infrastructure buildout (data extraction, statistics, reliability, visualization)
 - **Wednesday**: Multi-LLM execution with live validation
 - **Thursday**: Enhanced reporting and pipeline integration
 - **Friday**: Human rater framework and documentation
@@ -304,6 +317,7 @@ Transform successful single-LLM execution into comprehensive multi-LLM research 
 - **Research credibility**: Interrater reliability addresses single-LLM bias concerns
 - **Methodological contribution**: Framework for computational text analysis validation
 - **Practical applications**: Optimal LLM selection and cost optimization strategies
+- **Visualization excellence**: Publication-ready visualizations with statistical context
 
 ## 🔮 **NEXT ITERATION PREVIEW**
 

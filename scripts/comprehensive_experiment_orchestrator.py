@@ -1673,6 +1673,56 @@ In addition to the standard analysis output, please consider how your findings r
         if self.dry_run:
             print("\n🔍 DRY RUN - No actual execution will occur")
     
+    def execute_enhanced_analysis_pipeline(self, execution_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute enhanced analysis pipeline with statistical validation and visualization."""
+        logger.info("📊 Starting enhanced analysis pipeline...")
+        
+        try:
+            # Step 1: Extract and structure experiment results
+            from extract_experiment_results import ExperimentResultsExtractor
+            extractor = ExperimentResultsExtractor()
+            structured_results = extractor.extract_results(execution_results)
+            
+            # Step 2: Run statistical hypothesis testing
+            from statistical_hypothesis_testing import StatisticalHypothesisTester
+            tester = StatisticalHypothesisTester()
+            statistical_results = tester.test_hypotheses(structured_results)
+            
+            # Step 3: Calculate interrater reliability
+            from interrater_reliability_analysis import InterraterReliabilityAnalyzer
+            reliability_analyzer = InterraterReliabilityAnalyzer()
+            reliability_results = reliability_analyzer.analyze_reliability(structured_results)
+            
+            # Step 4: Generate comprehensive visualizations
+            from generate_comprehensive_visualizations import VisualizationGenerator
+            visualizer = VisualizationGenerator()
+            visualization_results = visualizer.generate_visualizations(
+                structured_results,
+                statistical_results,
+                reliability_results
+            )
+            
+            # Combine all results
+            enhanced_results = {
+                'structured_results': structured_results,
+                'statistical_results': statistical_results,
+                'reliability_results': reliability_results,
+                'visualization_results': visualization_results,
+                'pipeline_status': 'success',
+                'timestamp': datetime.now().isoformat()
+            }
+            
+            logger.info("✅ Enhanced analysis pipeline completed successfully")
+            return enhanced_results
+            
+        except Exception as e:
+            logger.error(f"❌ Enhanced analysis pipeline failed: {e}")
+            return {
+                'pipeline_status': 'failed',
+                'error': str(e),
+                'timestamp': datetime.now().isoformat()
+            }
+
     def execute_analysis_matrix(self, experiment: Dict[str, Any], components: List[ComponentInfo]) -> Dict[str, Any]:
         """Execute the actual analysis matrix with real API calls"""
         logger.info("🔬 Initializing real analysis service...")
@@ -1808,6 +1858,11 @@ In addition to the standard analysis output, please consider how your findings r
         }
         
         logger.info(f"🎯 Execution completed: {execution_summary['successful_analyses']}/{execution_summary['total_analyses']} successful, ${execution_summary['total_cost']:.3f} total cost")
+        
+        # After collecting all_results, run enhanced analysis pipeline
+        if all_results:
+            enhanced_results = self.execute_enhanced_analysis_pipeline(execution_summary)
+            execution_summary['enhanced_analysis'] = enhanced_results
         
         return execution_summary
     
