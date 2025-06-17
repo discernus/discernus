@@ -4,7 +4,7 @@
     "progressive_balanced_1.txt": {
       "hash": "beae53e583b9641c2ac121430ec111cb5f5895927494fb9a15637ca7d9a3952f",
       "size_bytes": 2423,
-      "last_updated": "2025-06-17T08:55:38.779409"
+      "last_updated": "2025-06-17T10:43:18.983722"
     },
     "progressive_balanced_2.txt": {
       "hash": "c7e0f068232e54e503eb856fe346ee2e852bbe767307cd3dcbdc7615a25dd795",
@@ -14,7 +14,7 @@
     "conservative_balanced_1.txt": {
       "hash": "0feedb4c0472e223d8ef5ed5f14e574a9fca670a5b6a38ed8c8f744622b0d922",
       "size_bytes": 2475,
-      "last_updated": "2025-06-17T08:55:38.781413"
+      "last_updated": "2025-06-17T10:43:18.985797"
     },
     "conservative_balanced_2.txt": {
       "hash": "71b41b8732b9f1ca375f17dfcafc71e0861383655cd06d77df29335d5270ddb0",
@@ -22,5 +22,5 @@
       "last_updated": "2025-06-17T00:34:17.825996"
     }
   },
-  "manifest_updated": "2025-06-17T08:55:38.781414"
+  "manifest_updated": "2025-06-17T10:43:18.985799"
 }
