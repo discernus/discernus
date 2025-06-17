@@ -1,0 +1,36 @@
+{
+  "analysis_type": "single_rater_descriptive",
+  "metadata": {
+    "model_count": 1,
+    "well_count": 2,
+    "sample_size": 8,
+    "analysis_timestamp": "2025-06-17T14:05:03.300219"
+  },
+  "descriptive_statistics": {
+    "well_dignity": {
+      "count": 8,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_tribalism": {
+      "count": 8,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    }
+  },
+  "internal_consistency": {
+    "split_half_correlation": NaN,
+    "split_half_p_value": NaN,
+    "spearman_brown_coefficient": NaN,
+    "interpretation": "excellent"
+  },
+  "message": "Single rater detected - full reliability analysis requires multiple raters"
+}

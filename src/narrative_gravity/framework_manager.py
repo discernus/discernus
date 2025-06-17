@@ -207,6 +207,63 @@ class FrameworkManager:
         if not frameworks:
             print("No frameworks found in frameworks/ directory")
 
+    def load_framework(self, framework_name: str) -> dict:
+        """
+        Load framework data from filesystem.
+        
+        This method was added to fix AttributeError: 'FrameworkManager' object has no attribute 'load_framework'
+        that was occurring in multiple scripts. It delegates to the same logic used by ConsolidatedFrameworkLoader.
+        
+        Args:
+            framework_name: Name of the framework to load
+            
+        Returns:
+            Dictionary containing framework data
+            
+        Raises:
+            FileNotFoundError: If framework files are not found
+            json.JSONDecodeError: If framework files contain invalid JSON
+        """
+        framework_path = self.frameworks_dir / framework_name
+        
+        if not framework_path.exists():
+            raise FileNotFoundError(f"Framework directory not found: {framework_name}")
+        
+        # Try consolidated format first
+        consolidated_file = framework_path / "framework_consolidated.json"
+        if consolidated_file.exists():
+            try:
+                with open(consolidated_file, 'r') as f:
+                    return json.load(f)
+            except json.JSONDecodeError as e:
+                raise json.JSONDecodeError(f"Invalid JSON in {consolidated_file}: {e}")
+        
+        # Fallback to legacy format
+        framework_file = framework_path / "framework.json"
+        if framework_file.exists():
+            try:
+                with open(framework_file, 'r') as f:
+                    framework_data = json.load(f)
+                
+                # For legacy format, also try to load dipoles.json for completeness
+                dipoles_file = framework_path / "dipoles.json"
+                if dipoles_file.exists():
+                    try:
+                        with open(dipoles_file, 'r') as f:
+                            dipoles_data = json.load(f)
+                        # Merge dipoles into framework data if not already present
+                        if 'dipoles' not in framework_data and 'dipoles' in dipoles_data:
+                            framework_data['dipoles'] = dipoles_data['dipoles']
+                    except json.JSONDecodeError:
+                        pass  # Continue with framework.json only
+                
+                return framework_data
+                
+            except json.JSONDecodeError as e:
+                raise json.JSONDecodeError(f"Invalid JSON in {framework_file}: {e}")
+        
+        raise FileNotFoundError(f"No framework configuration files found for: {framework_name}")
+
 def main():
     parser = argparse.ArgumentParser(description="Manage Narrative Gravity Wells frameworks")
     parser.add_argument("command", choices=["list", "switch", "active", "validate", "summary"], 

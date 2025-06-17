@@ -1,0 +1,140 @@
+{
+  "timestamp": "2025-06-17T15:03:41.591758",
+  "storage_analysis": {
+    "timestamp": "2025-06-17T15:03:41.591783",
+    "logs": {
+      "total_size_bytes": 738772,
+      "total_size_mb": 0.7,
+      "file_count": 6,
+      "files": {
+        "experiment_orchestrator.log": {
+          "size_bytes": 713751,
+          "size_mb": 0.68,
+          "modified": "2025-06-17T14:17:38.005431",
+          "age_days": 0
+        },
+        "variance_threshold_analysis.json": {
+          "size_bytes": 827,
+          "size_mb": 0.0,
+          "modified": "2025-06-06T21:25:23.665484",
+          "age_days": 10
+        },
+        "root_cleanup.log": {
+          "size_bytes": 10104,
+          "size_mb": 0.01,
+          "modified": "2025-06-17T07:38:08.612570",
+          "age_days": 0
+        },
+        "narrative_gravity_stats.db": {
+          "size_bytes": 0,
+          "size_mb": 0.0,
+          "modified": "2025-06-06T21:57:36.042872",
+          "age_days": 10
+        },
+        "phase5_demo.log": {
+          "size_bytes": 14087,
+          "size_mb": 0.01,
+          "modified": "2025-06-17T00:16:01.415015",
+          "age_days": 0
+        },
+        "api_costs.json": {
+          "size_bytes": 3,
+          "size_mb": 0.0,
+          "modified": "2025-06-17T09:45:50.742815",
+          "age_days": 0
+        }
+      }
+    },
+    "experiments": {
+      "total_size_bytes": 13852864,
+      "total_size_mb": 13.21,
+      "directory_count": 7,
+      "completed_experiments": 0,
+      "failed_experiments": 0,
+      "resumable_experiments": 0,
+      "directories": {
+        "IDITI_Small_Validation_Study_20250617_141734": {
+          "size_bytes": 550425,
+          "size_mb": 0.52,
+          "modified": "2025-06-17T14:18:03",
+          "age_days": 0,
+          "status": "unknown",
+          "has_checkpoint": false
+        },
+        "iditi_multi_llm_validation_20250617_131302": {
+          "size_bytes": 8540797,
+          "size_mb": 8.15,
+          "modified": "2025-06-17T13:35:24",
+          "age_days": 0,
+          "status": "unknown",
+          "has_checkpoint": false
+        },
+        "iditi_multi_llm_validation_20250617_135322": {
+          "size_bytes": 2564766,
+          "size_mb": 2.45,
+          "modified": "2025-06-17T13:53:52",
+          "age_days": 0,
+          "status": "unknown",
+          "has_checkpoint": false
+        },
+        "IDITI_Small_Validation_Study_20250617_141338": {
+          "size_bytes": 550086,
+          "size_mb": 0.52,
+          "modified": "2025-06-17T14:16:51",
+          "age_days": 0,
+          "status": "unknown",
+          "has_checkpoint": false
+        },
+        "IDITI_Small_Validation_Study_20250617_140952": {
+          "size_bytes": 549195,
+          "size_mb": 0.52,
+          "modified": "2025-06-17T14:10:02",
+          "age_days": 0,
+          "status": "unknown",
+          "has_checkpoint": false
+        },
+        "IDITI_Small_Validation_Study_20250617_141210": {
+          "size_bytes": 548500,
+          "size_mb": 0.52,
+          "modified": "2025-06-17T14:12:21",
+          "age_days": 0,
+          "status": "unknown",
+          "has_checkpoint": false
+        },
+        "IDITI_Small_Validation_Study_20250617_140502": {
+          "size_bytes": 549095,
+          "size_mb": 0.52,
+          "modified": "2025-06-17T14:05:29",
+          "age_days": 0,
+          "status": "unknown",
+          "has_checkpoint": false
+        }
+      }
+    },
+    "total_size_bytes": 14591636,
+    "warnings": [],
+    "growth_trend": {},
+    "total_size_gb": 0.014
+  },
+  "cleanup_candidates": {
+    "old_logs": [],
+    "failed_experiments": [],
+    "old_checkpoints": [],
+    "large_experiments": [],
+    "recommendations": []
+  },
+  "api_costs": {
+    "file_exists": true,
+    "total_cost": 0.0,
+    "recent_cost": 0.0,
+    "daily_average": 0.0,
+    "warnings": [],
+    "file_size_mb": 0.0
+  },
+  "system_health": {
+    "orchestrator_log_size_mb": 0.68,
+    "active_experiments": 7,
+    "resumable_experiments": 0,
+    "storage_warnings": []
+  }
+}

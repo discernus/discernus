@@ -563,3 +563,164 @@ class QualityGateManager:
 **Implementation Priority**: High  
 **Resource Requirements**: 1-2 months development time  
 **Expected Impact**: Major improvement in research quality and efficiency 
+
+# AI Academic Advisor Methodology v2.0
+**Enhanced with Architectural Compliance Validation**
+
+*A systematic approach to forensic analysis and rapid resolution of critical system failures*
+
+## Overview
+
+The AI Academic Advisor methodology provides a structured 13-phase approach for diagnosing and resolving complex system failures while maintaining architectural compliance. This methodology was developed after successfully resolving critical framework-prompt template incompatibilities in the IDITI Multi-LLM Validation Experiment.
+
+**Version 2.0 Enhancement**: Added Phase 13 to address architectural compliance validation after core system repairs.
+
+## The 13-Phase Methodology
+
+### **Phase 1: Problem Recognition** 
+- Identify symptoms of system failure
+- Document expected vs actual behavior
+- Establish baseline failure metrics
+
+### **Phase 2: Initial Forensic Assessment**
+- Gather immediate failure data
+- Identify affected components
+- Assess scope and urgency
+
+### **Phase 3: Data Archaeology** 
+- Extract and examine failure artifacts
+- Compare with known-good baselines
+- Identify patterns in failure data
+
+### **Phase 4: System Architecture Review**
+- Map system component interactions
+- Identify architectural dependencies
+- Review design principles and constraints
+
+### **Phase 5: Root Cause Hypothesis Formation**
+- Develop potential failure theories
+- Prioritize hypotheses by likelihood
+- Plan investigation approaches
+
+### **Phase 6: Deep System Inspection**
+- Examine source code and configurations
+- Trace execution paths
+- Identify incompatibilities and violations
+
+### **Phase 7: Hypothesis Testing**
+- Test theories against evidence
+- Validate or refute hypotheses
+- Refine understanding of root cause
+
+### **Phase 8: Solution Architecture Design**
+- Design architectural fix approach
+- Ensure compliance with system principles
+- Plan implementation strategy
+
+### **Phase 9: Implementation**
+- Execute architectural fixes
+- Follow framework-independent principles
+- Maintain backward compatibility
+
+### **Phase 10: Unit Validation**
+- Test individual component fixes
+- Verify expected behavior restoration
+- Document fix effectiveness
+
+### **Phase 11: Integration Testing**
+- Test fixed components in full system
+- Validate end-to-end functionality
+- Ensure no regression introduced
+
+### **Phase 12: Core Functionality Validation**
+- Confirm primary failure resolved
+- Validate success criteria met
+- Document resolution evidence
+
+### **Phase 13: Architectural Compliance Validation** ⭐ **NEW**
+- **Production System Usage**: Verify all downstream components use designated production engines
+- **Framework Boundary Compliance**: Validate data extraction respects framework definitions
+- **Memory Guidance Adherence**: Check compliance with established architectural principles  
+- **Downstream System Validation**: Test entire pipeline for architectural violations
+- **Design Pattern Compliance**: Ensure all components follow established patterns
+
+## Key Principles
+
+### **Forensic Rigor**
+- Every hypothesis must be testable
+- Evidence-based decision making
+- Documentation of investigation process
+- Reproducible validation methods
+
+### **Architectural Integrity**
+- Maintain framework independence
+- Leverage existing production systems
+- Follow established design patterns
+- Respect component boundaries
+
+### **Comprehensive Validation** ⭐ **ENHANCED**
+- Test core functionality AND downstream compliance
+- Validate both primary and secondary system behaviors
+- Ensure architectural principles maintained throughout
+- Check production system integration
+
+### **Systematic Approach**
+- Follow phases sequentially
+- Document decisions and rationale
+- Validate each phase before proceeding
+- Maintain investigation audit trail
+
+## Success Criteria
+
+A system failure is considered fully resolved when:
+
+1. ✅ **Core functionality restored** (Phases 1-12)
+2. ✅ **Architectural compliance verified** (Phase 13)
+3. ✅ **No regression introduced**
+4. ✅ **Production systems properly utilized**
+5. ✅ **Framework boundaries respected**
+
+## Case Study: IDITI Multi-LLM Validation Recovery
+
+### **Core Issue Resolution** (Phases 1-12)
+- **Problem**: 100% analysis failure with baseline 0.3 scores
+- **Root Cause**: Hardcoded "ten wells" in hierarchical prompt template
+- **Solution**: Framework-independent template architecture
+- **Validation**: Real scores (0.0-1.0 range) restored
+
+### **Architectural Compliance Discovery** (Phase 13)
+- **Issue 1**: Enhanced analysis pipeline extracting all 10 wells instead of 2 framework-defined wells
+- **Issue 2**: Custom visualizations bypassing production NarrativeGravityVisualizationEngine
+- **Solution**: Framework-aware data extraction + production engine integration
+- **Result**: Complete architectural compliance restored
+
+### **Lessons Learned**
+- ❌ **V1.0 Gap**: Focused only on core functionality
+- ✅ **V2.0 Fix**: Comprehensive downstream validation
+- 🎯 **Key Insight**: Success requires both functional AND architectural validation
+
+## Implementation Guidelines
+
+### **When to Use**
+- Critical system failures affecting core functionality
+- Architectural violations discovered in production
+- Complex integration issues requiring systematic investigation
+- System repairs requiring framework independence
+
+### **Required Expertise**
+- Understanding of system architecture
+- Forensic analysis capabilities
+- Knowledge of design patterns and principles
+- Ability to implement framework-independent solutions
+
+### **Tools and Resources**
+- Production database access for failure analysis
+- Framework management systems
+- Testing environments for validation
+- Documentation systems for audit trails
+
+## Conclusion
+
+The AI Academic Advisor methodology provides a systematic approach to resolving complex system failures while maintaining architectural integrity. Version 2.0's addition of architectural compliance validation ensures that fixes not only restore functionality but also maintain system design principles and production standards.
+
+**The combination of systematic forensic analysis, architectural expertise, and comprehensive validation creates a robust methodology for handling critical system failures.** 

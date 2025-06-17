@@ -1,0 +1,1741 @@
+{
+  "structured_data": "                            analysis_id text_id  ... well_dignity well_tribalism\n0  31ecb597-d882-413a-95bc-83566f2778e2  text_0  ...          0.3            0.3\n1  dd232096-db08-40bf-8d66-c70ca9fe8b6e  text_1  ...          0.3            0.3\n2  7ad0e66c-9f85-4d01-b160-4841c817d055  text_2  ...          0.3            0.3\n3  1d163eeb-5b9a-422e-a86a-bde0db4712cf  text_3  ...          0.3            0.3\n4  fea8976c-134c-44d4-8293-60daf558f5e6  text_4  ...          0.3            0.3\n5  89a74889-9854-4bf9-8ed3-f7b333e0bdc9  text_5  ...          0.3            0.3\n6  2449f500-ffd6-4ea8-a30b-ce04cb0f7666  text_6  ...          0.3            0.3\n7  dda8d175-4adb-4702-b96c-f543c804a7c6  text_7  ...          0.3            0.3\n\n[8 rows x 13 columns]",
+  "metadata": {
+    "total_analyses": 8,
+    "successful_analyses": 0,
+    "failed_analyses": 8,
+    "total_cost": 0.0728,
+    "cost_efficiency": 0.0091,
+    "extraction_timestamp": "2025-06-17T14:05:02.175486",
+    "well_columns": [
+      "well_dignity",
+      "well_tribalism"
+    ],
+    "frameworks_used": [
+      "iditi"
+    ],
+    "models_used": [
+      "unknown"
+    ]
+  },
+  "raw_execution_results": {
+    "total_analyses": 8,
+    "total_cost": 0.0728,
+    "successful_analyses": 8,
+    "failed_analyses": 0,
+    "cost_efficiency": 0.0091,
+    "results": [
+      {
+        "analysis_id": "31ecb597-d882-413a-95bc-83566f2778e2",
+        "text_content": "The enduring strength of our nation is forged not in the halls of government, but in the character of our people. At the heart of our philosophy is a profound belief in the power of the individual\u2014the power to dream, to build, and to achieve. We hold that every person is created with inherent worth and endowed with the fundamental right to life, liberty, and the pursuit of happiness. This is the cornerstone of a free and prosperous society, a principle that unites us not by coercing conformity, but by celebrating the boundless potential of each and every citizen.\n\nOur vision for America is one of an opportunity society, where the primary role of government is not to direct the lives of its citizens, but to secure the conditions for them to flourish on their own terms. We champion policies that are rooted in economic freedom and personal responsibility. We believe in lowering the tax burden on families and businesses, not as an end in itself, but as a means to unleash innovation, create jobs, and empower individuals to invest in their own futures. We advocate for a regulatory environment that is sensible and predictable, one that gets out of the way of the entrepreneurs and small business owners who are the lifeblood of our communities.\n\nThis commitment to individual liberty extends to every facet of our lives. We believe that parents, not bureaucrats, should be the primary decision-makers in their children's education. We trust individuals to make their own healthcare choices, and we support reforms that increase competition and transparency in the marketplace. At its core, our philosophy is one of trust\u2014trust in the wisdom of the individual, trust in the power of free enterprise, and trust in the capacity of people to govern their own lives without undue interference from the state.\n\nWe reject the politics of envy and division that seeks to pit one group of Americans against another. Instead, we believe in a society where success is celebrated and hard work is rewarded. The American dream is not a finite pie to be divided, but an ever-expanding horizon of opportunity that is available to all who are willing to strive for it. Our strength as a nation is not found in a monolithic, top-down vision, but in the dynamic and diverse contributions of millions of free individuals, each pursuing their own unique path.\n\nUltimately, our principles are grounded in a deep and abiding respect for the dignity of the individual. We believe that a government that respects the rights of its citizens, that trusts them to make their own choices, and that unleashes their creative potential is a government that will preside over a nation that is not only prosperous, but also just, virtuous, and strong. This is the enduring promise of our republic, a promise of individual liberty and personal responsibility that has been a beacon of hope for generations, and one that we must work to preserve for the generations to come.",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "raw_scores": {
+          "Dignity": 0.3,
+          "Truth": 0.3,
+          "Justice": 0.3,
+          "Hope": 0.3,
+          "Pragmatism": 0.3,
+          "Tribalism": 0.3,
+          "Manipulation": 0.3,
+          "Resentment": 0.3,
+          "Fantasy": 0.3,
+          "Fear": 0.3
+        },
+        "hierarchical_ranking": {
+          "primary_wells": [
+            {
+              "well": "Dignity",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Truth",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Justice",
+              "score": 0.3,
+              "relative_weight": 33.3
+            }
+          ],
+          "secondary_wells": [],
+          "total_weight": 100.0
+        },
+        "well_justifications": {
+          "Dignity": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates dignity themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "We hold that every person is created with inherent worth and endowed with the fundamental right to life, liberty, and the pursuit of happiness"
+            ],
+            "confidence": 0.65
+          },
+          "Truth": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates truth themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to truth detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Justice": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates justice themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "We hold that every person is created with inherent worth and endowed with the fundamental right to life, liberty, and the pursuit of happiness"
+            ],
+            "confidence": 0.65
+          },
+          "Hope": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates hope themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "We believe in lowering the tax burden on families and businesses, not as an end in itself, but as a means to unleash innovation, create jobs, and empower individuals to invest in their own futures"
+            ],
+            "confidence": 0.65
+          },
+          "Pragmatism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates pragmatism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to pragmatism detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Tribalism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates tribalism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "This is the cornerstone of a free and prosperous society, a principle that unites us not by coercing conformity, but by celebrating the boundless potential of each and every citizen.\n\nOur vision for America is one of an opportunity society, where the primary role of government is not to direct the lives of its citizens, but to secure the conditions for them to flourish on their own terms",
+              "We believe in lowering the tax burden on families and businesses, not as an end in itself, but as a means to unleash innovation, create jobs, and empower individuals to invest in their own futures"
+            ],
+            "confidence": 0.65
+          },
+          "Manipulation": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates manipulation themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to manipulation detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Resentment": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates resentment themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to resentment detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fantasy": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fantasy themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "At the heart of our philosophy is a profound belief in the power of the individual\u2014the power to dream, to build, and to achieve"
+            ],
+            "confidence": 0.65
+          },
+          "Fear": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fear themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fear detected in the narrative."
+            ],
+            "confidence": 0.65
+          }
+        },
+        "calculated_metrics": {
+          "narrative_elevation": 0.0,
+          "polarity": -0.29999999999999993,
+          "coherence": 1.0,
+          "directional_purity": 1.0
+        },
+        "narrative_position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "framework_fit_score": 0.8,
+        "dominant_wells": [
+          {
+            "well": "Dignity",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Truth",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Justice",
+            "score": 0.3,
+            "relative_weight": 33.3
+          }
+        ],
+        "execution_time": "2025-06-17 14:04:19.403200",
+        "duration_seconds": 3.84,
+        "api_cost": 0.0065,
+        "experiment_context": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_description": "Cost-effective IDITI framework validation using 8 key texts to test architectural compliance improvements",
+          "experiment_version": "1.0.0",
+          "experiment_created": "2025-06-17T17:00:00Z",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "success_criteria": [
+            "Framework boundary compliance: exactly 2 wells extracted",
+            "Production system usage: NarrativeGravityVisualizationEngine signatures found",
+            "Architectural compliance score >80%",
+            "Statistical analysis runs successfully on framework-compliant data"
+          ],
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "funding_source": "IDITI Framework Development",
+          "ethical_clearance": "IRB-2025-IDITI-SMALL-001"
+        },
+        "analysis_run_context": {
+          "run_id": "iditi_architectural_compliance_test",
+          "framework": "iditi",
+          "corpus_item": "conservative_dignity_control",
+          "prompt_template": "traditional_analysis",
+          "model": "gpt-4o",
+          "text_path": "corpus/validation_set/extreme_controls/conservative_dignity_control.txt"
+        },
+        "hypothesis_validation": {
+          "experiment_hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "hypothesis_validation_notes": "Automated hypothesis validation not yet implemented",
+          "analysis_timestamp": "2025-06-17T14:04:19.404668",
+          "context_propagation_version": "v1.0.0"
+        },
+        "academic_metadata": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_version": "1.0.0",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "replication_package_ready": true
+        }
+      },
+      {
+        "analysis_id": "dd232096-db08-40bf-8d66-c70ca9fe8b6e",
+        "text_content": "There is a battle being waged for the heart and soul of our nation, and we must be clear about what is at stake. Our way of life, our values, and our heritage are under constant assault from a radical, out-of-touch elite that seeks to dismantle everything we hold dear. They want to rewrite our history, erase our traditions, and replace our time-honored principles with a foreign ideology that is alien to the spirit of our people. This is not a simple policy disagreement; it is a cultural war, and we are the last line of defense for the values that made this nation great.\n\nWe are a people bound together by a shared love for our country, a deep respect for our flag, and a common-sense understanding of right and wrong. We are the hardworking, patriotic citizens who have been forgotten by the coastal elites and the globalist institutions that cater to every interest but our own. They call us backwards, they mock our faith, and they dismiss our concerns, but they do so at their own peril. For we are the silent majority, the true heart of this nation, and our voices will not be silenced any longer.\n\nWe must understand that they do not share our values. They do not believe in the sanctity of the family, the importance of hard work, or the fundamental right to self-defense. They seek to undermine our sovereignty with open borders, to weaken our economy with crippling regulations, and to indoctrinate our children with a curriculum that teaches them to be ashamed of their own country. This is not a partnership; it is a zero-sum game. For them to win, we must lose.\n\nTherefore, we must stand united as a bulwark against this rising tide of radicalism. Our loyalty must be to our own, to our communities, to our people. We must be unapologetic in our defense of our culture and our heritage. We must not be afraid to speak the truth, even if it is deemed politically incorrect by the arbiters of acceptable opinion. Our strength lies in our unity, in our shared identity as a people who refuse to bow down to the forces that seek to erase us.\n\nThis is a time for choosing. There is no room for compromise with those who are actively working to destroy our way of life. You are either with us, fighting to preserve the values that we cherish, or you are with them, aiding in the erosion of our national identity. We must be vigilant, we must be strong, and we must be united. The future of our nation depends on it. We must protect our own, for no one else will. This is our land, our home, and we will not surrender it.",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "raw_scores": {
+          "Dignity": 0.3,
+          "Truth": 0.3,
+          "Justice": 0.3,
+          "Hope": 0.3,
+          "Pragmatism": 0.3,
+          "Tribalism": 0.3,
+          "Manipulation": 0.3,
+          "Resentment": 0.3,
+          "Fantasy": 0.3,
+          "Fear": 0.3
+        },
+        "hierarchical_ranking": {
+          "primary_wells": [
+            {
+              "well": "Dignity",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Truth",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Justice",
+              "score": 0.3,
+              "relative_weight": 33.3
+            }
+          ],
+          "secondary_wells": [],
+          "total_weight": 100.0
+        },
+        "well_justifications": {
+          "Dignity": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates dignity themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "They want to rewrite our history, erase our traditions, and replace our time-honored principles with a foreign ideology that is alien to the spirit of our people",
+              "This is not a simple policy disagreement; it is a cultural war, and we are the last line of defense for the values that made this nation great.\n\nWe are a people bound together by a shared love for our country, a deep respect for our flag, and a common-sense understanding of right and wrong"
+            ],
+            "confidence": 0.65
+          },
+          "Truth": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates truth themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to truth detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Justice": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates justice themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "This is not a simple policy disagreement; it is a cultural war, and we are the last line of defense for the values that made this nation great.\n\nWe are a people bound together by a shared love for our country, a deep respect for our flag, and a common-sense understanding of right and wrong",
+              "They do not believe in the sanctity of the family, the importance of hard work, or the fundamental right to self-defense"
+            ],
+            "confidence": 0.65
+          },
+          "Hope": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates hope themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to hope detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Pragmatism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates pragmatism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "We are the hardworking, patriotic citizens who have been forgotten by the coastal elites and the globalist institutions that cater to every interest but our own",
+              "They do not believe in the sanctity of the family, the importance of hard work, or the fundamental right to self-defense"
+            ],
+            "confidence": 0.65
+          },
+          "Tribalism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates tribalism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "There is a battle being waged for the heart and soul of our nation, and we must be clear about what is at stake",
+              "They call us backwards, they mock our faith, and they dismiss our concerns, but they do so at their own peril"
+            ],
+            "confidence": 0.65
+          },
+          "Manipulation": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates manipulation themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to manipulation detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Resentment": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates resentment themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to resentment detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fantasy": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fantasy themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fantasy detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fear": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fear themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fear detected in the narrative."
+            ],
+            "confidence": 0.65
+          }
+        },
+        "calculated_metrics": {
+          "narrative_elevation": 0.0,
+          "polarity": -0.29999999999999993,
+          "coherence": 1.0,
+          "directional_purity": 1.0
+        },
+        "narrative_position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "framework_fit_score": 0.8,
+        "dominant_wells": [
+          {
+            "well": "Dignity",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Truth",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Justice",
+            "score": 0.3,
+            "relative_weight": 33.3
+          }
+        ],
+        "execution_time": "2025-06-17 14:04:24.108630",
+        "duration_seconds": 4.7,
+        "api_cost": 0.0069,
+        "experiment_context": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_description": "Cost-effective IDITI framework validation using 8 key texts to test architectural compliance improvements",
+          "experiment_version": "1.0.0",
+          "experiment_created": "2025-06-17T17:00:00Z",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "success_criteria": [
+            "Framework boundary compliance: exactly 2 wells extracted",
+            "Production system usage: NarrativeGravityVisualizationEngine signatures found",
+            "Architectural compliance score >80%",
+            "Statistical analysis runs successfully on framework-compliant data"
+          ],
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "funding_source": "IDITI Framework Development",
+          "ethical_clearance": "IRB-2025-IDITI-SMALL-001"
+        },
+        "analysis_run_context": {
+          "run_id": "iditi_architectural_compliance_test",
+          "framework": "iditi",
+          "corpus_item": "conservative_tribalism_control",
+          "prompt_template": "traditional_analysis",
+          "model": "gpt-4o",
+          "text_path": "corpus/validation_set/extreme_controls/conservative_tribalism_control.txt"
+        },
+        "hypothesis_validation": {
+          "experiment_hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "hypothesis_validation_notes": "Automated hypothesis validation not yet implemented",
+          "analysis_timestamp": "2025-06-17T14:04:24.109168",
+          "context_propagation_version": "v1.0.0"
+        },
+        "academic_metadata": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_version": "1.0.0",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "replication_package_ready": true
+        }
+      },
+      {
+        "analysis_id": "7ad0e66c-9f85-4d01-b160-4841c817d055",
+        "text_content": "**Ronald Reagan - Address to the Nation on the Challenger Disaster**\n\n**Bibliographic Information:**\n- **Speaker:** Ronald Reagan, 40th President of the United States\n- **Event:** Address to the Nation on the Space Shuttle Challenger Disaster\n- **Speech Type:** National Tragedy Address\n- **Date:** January 28, 1986\n- **Location:** Oval Office, The White House\n- **Context:** Address delivered on the evening of the Challenger disaster, replacing the planned State of the Union address\n- **Source:** C-SPAN (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=66mGwws7EEw\n- **Duration:** 4 minutes 22 seconds\n- **Views:** Over 222,000\n- **Classification:** Conservative Dignity (Validation Set)\n- **Historical Significance:** One of the most moving presidential addresses in American history, providing comfort to a grieving nation and demonstrating presidential leadership during national tragedy. Features the iconic closing line from John Gillespie Magee Jr.'s poem \"High Flight.\"\n\n---\n\nLadies and gentlemen, I'd planned to speak to you tonight to report on the State of the Union, but the events of earlier today have led me to change those plans.\n\nToday is a day for mourning and remembering. Nancy and I are pained to the core by the tragedy of the shuttle Challenger. We know we share this pain with all of the people of our country. This is truly a national loss.\n\nNineteen years ago, almost to the day, we lost three astronauts in a terrible accident on the ground. But we've never lost an astronaut in flight; we've never had a tragedy like this. And perhaps we've forgotten the courage it took for the crew of the shuttle. But they, the Challenger Seven, were aware of the dangers, but overcame them and did their jobs brilliantly.\n\nWe mourn seven heroes: Michael Smith, Dick Scobee, Judith Resnik, Ronald McNair, Ellison Onizuka, Gregory Jarvis, and Christa McAuliffe. We mourn their loss as a nation together.\n\nFor the families of the seven, we cannot bear, as you do, the full impact of this tragedy. But we feel the loss, and we're thinking about you so very much. Your loved ones were daring and brave, and they had that special grace, that special spirit that says, \"Give me a challenge, and I'll meet it with joy.\" They had a hunger to explore the universe and discover its truths. They wished to serve, and they did. They served all of us.\n\nWe've grown used to wonders in this century. It's hard to dazzle us. But for twenty-five years, the United States space program has been doing just that. We've grown used to the idea of space, and perhaps we forget that we've only just begun. We're still pioneers. They, the members of the Challenger crew, were pioneers.\n\nAnd I want to say something to the schoolchildren of America who were watching the live coverage of the shuttle's takeoff. I know it's hard to understand, but sometimes painful things like this happen. It's all part of the process of exploration and discovery. It's all part of taking a chance and expanding man's horizons. The future doesn't belong to the fainthearted; it belongs to the brave. The Challenger crew was pulling us into the future, and we'll continue to follow them.\n\nI've always had great faith in and respect for our space program, and what happened today does nothing to diminish it. We don't hide our space program. We don't keep secrets and cover things up. We do it all up front and in public. That's the way freedom is, and we wouldn't change it for a minute.\n\nWe'll continue our quest in space. There will be more shuttle flights and more shuttle crews and, yes, more volunteers, more civilians, more teachers in space. Nothing ends here; our hopes and our journeys continue.\n\nI want to add that I wish I could talk to every man and woman who works for NASA or who worked on this mission and tell them: \"Your dedication and professionalism have moved and impressed us for decades. And we know of your anguish. We share it.\"\n\nThere's a coincidence today. On this day 390 years ago, the great explorer Sir Francis Drake died aboard ship off the coast of Panama. In his lifetime the great frontiers were the oceans, and an historian later said, \"He lived by the sea, died on it, and was buried in it.\" Well, today we can say of the Challenger crew: Their dedication was, like Drake's, complete.\n\nThe crew of the space shuttle Challenger honored us by the manner in which they lived their lives. We will never forget them, nor the last time we saw them, this morning, as they prepared for their journey and waved goodbye and \"slipped the surly bonds of earth\" to \"touch the face of God.\"\n\nThank you.",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "raw_scores": {
+          "Dignity": 0.3,
+          "Truth": 0.3,
+          "Justice": 0.3,
+          "Hope": 0.3,
+          "Pragmatism": 0.3,
+          "Tribalism": 0.3,
+          "Manipulation": 0.3,
+          "Resentment": 0.3,
+          "Fantasy": 0.3,
+          "Fear": 0.3
+        },
+        "hierarchical_ranking": {
+          "primary_wells": [
+            {
+              "well": "Dignity",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Truth",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Justice",
+              "score": 0.3,
+              "relative_weight": 33.3
+            }
+          ],
+          "secondary_wells": [],
+          "total_weight": 100.0
+        },
+        "well_justifications": {
+          "Dignity": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates dignity themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "**Ronald Reagan - Address to the Nation on the Challenger Disaster**\n\n**Bibliographic Information:**\n- **Speaker:** Ronald Reagan, 40th President of the United States\n- **Event:** Address to the Nation on the Space Shuttle Challenger Disaster\n- **Speech Type:** National Tragedy Address\n- **Date:** January 28, 1986\n- **Location:** Oval Office, The White House\n- **Context:** Address delivered on the evening of the Challenger disaster, replacing the planned State of the Union address\n- **Source:** C-SPAN (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=66mGwws7EEw\n- **Duration:** 4 minutes 22 seconds\n- **Views:** Over 222,000\n- **Classification:** Conservative Dignity (Validation Set)\n- **Historical Significance:** One of the most moving presidential addresses in American history, providing comfort to a grieving nation and demonstrating presidential leadership during national tragedy"
+            ],
+            "confidence": 0.65
+          },
+          "Truth": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates truth themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to truth detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Justice": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates justice themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to justice detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Hope": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates hope themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to hope detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Pragmatism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates pragmatism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to pragmatism detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Tribalism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates tribalism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "**Ronald Reagan - Address to the Nation on the Challenger Disaster**\n\n**Bibliographic Information:**\n- **Speaker:** Ronald Reagan, 40th President of the United States\n- **Event:** Address to the Nation on the Space Shuttle Challenger Disaster\n- **Speech Type:** National Tragedy Address\n- **Date:** January 28, 1986\n- **Location:** Oval Office, The White House\n- **Context:** Address delivered on the evening of the Challenger disaster, replacing the planned State of the Union address\n- **Source:** C-SPAN (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=66mGwws7EEw\n- **Duration:** 4 minutes 22 seconds\n- **Views:** Over 222,000\n- **Classification:** Conservative Dignity (Validation Set)\n- **Historical Significance:** One of the most moving presidential addresses in American history, providing comfort to a grieving nation and demonstrating presidential leadership during national tragedy",
+              "But they, the Challenger Seven, were aware of the dangers, but overcame them and did their jobs brilliantly.\n\nWe mourn seven heroes: Michael Smith, Dick Scobee, Judith Resnik, Ronald McNair, Ellison Onizuka, Gregory Jarvis, and Christa McAuliffe"
+            ],
+            "confidence": 0.65
+          },
+          "Manipulation": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates manipulation themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to manipulation detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Resentment": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates resentment themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "But they, the Challenger Seven, were aware of the dangers, but overcame them and did their jobs brilliantly.\n\nWe mourn seven heroes: Michael Smith, Dick Scobee, Judith Resnik, Ronald McNair, Ellison Onizuka, Gregory Jarvis, and Christa McAuliffe"
+            ],
+            "confidence": 0.65
+          },
+          "Fantasy": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fantasy themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fantasy detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fear": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fear themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "But they, the Challenger Seven, were aware of the dangers, but overcame them and did their jobs brilliantly.\n\nWe mourn seven heroes: Michael Smith, Dick Scobee, Judith Resnik, Ronald McNair, Ellison Onizuka, Gregory Jarvis, and Christa McAuliffe"
+            ],
+            "confidence": 0.65
+          }
+        },
+        "calculated_metrics": {
+          "narrative_elevation": 0.0,
+          "polarity": -0.29999999999999993,
+          "coherence": 1.0,
+          "directional_purity": 1.0
+        },
+        "narrative_position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "framework_fit_score": 0.8,
+        "dominant_wells": [
+          {
+            "well": "Dignity",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Truth",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Justice",
+            "score": 0.3,
+            "relative_weight": 33.3
+          }
+        ],
+        "execution_time": "2025-06-17 14:04:32.576441",
+        "duration_seconds": 8.47,
+        "api_cost": 0.0105,
+        "experiment_context": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_description": "Cost-effective IDITI framework validation using 8 key texts to test architectural compliance improvements",
+          "experiment_version": "1.0.0",
+          "experiment_created": "2025-06-17T17:00:00Z",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "success_criteria": [
+            "Framework boundary compliance: exactly 2 wells extracted",
+            "Production system usage: NarrativeGravityVisualizationEngine signatures found",
+            "Architectural compliance score >80%",
+            "Statistical analysis runs successfully on framework-compliant data"
+          ],
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "funding_source": "IDITI Framework Development",
+          "ethical_clearance": "IRB-2025-IDITI-SMALL-001"
+        },
+        "analysis_run_context": {
+          "run_id": "iditi_architectural_compliance_test",
+          "framework": "iditi",
+          "corpus_item": "reagan_challenger",
+          "prompt_template": "traditional_analysis",
+          "model": "gpt-4o",
+          "text_path": "corpus/validation_set/conservative_dignity/ronald_reagan_1986_challenger_address.txt"
+        },
+        "hypothesis_validation": {
+          "experiment_hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "hypothesis_validation_notes": "Automated hypothesis validation not yet implemented",
+          "analysis_timestamp": "2025-06-17T14:04:32.578693",
+          "context_propagation_version": "v1.0.0"
+        },
+        "academic_metadata": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_version": "1.0.0",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "replication_package_ready": true
+        }
+      },
+      {
+        "analysis_id": "1d163eeb-5b9a-422e-a86a-bde0db4712cf",
+        "text_content": "**John McCain - 2008 Presidential Election Concession Speech**\n\n**Bibliographic Information:**\n- **Speaker:** John McCain, U.S. Senator from Arizona and Republican Presidential Nominee\n- **Event:** 2008 Presidential Election Concession Speech\n- **Speech Type:** Election Concession Address\n- **Date:** November 4, 2008\n- **Location:** Arizona Biltmore Hotel, Phoenix, Arizona\n- **Context:** Concession speech following defeat to Barack Obama in the 2008 presidential election\n- **Source:** C-SPAN (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=NvgqRKYapU8\n- **Duration:** 15 minutes\n- **Views:** Over 1 million\n- **Classification:** Conservative Dignity (Validation Set)\n- **Historical Significance:** Widely praised as one of the most gracious and dignified concession speeches in modern American political history, demonstrating statesmanship and unity in defeat.\n\n---\n\nThank you, thank you my friends. Thank you for coming here on this beautiful Arizona evening. [Applause] \n\nMy friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.\n\nIn a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance. But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.\n\nThis is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight. I've always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too. But we both recognize that though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.\n\nA century ago, President Theodore Roosevelt's invitation of Booker T. Washington to dine at the White House was taken as an outrage in many quarters. America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States. [Applause]\n\nLet there be no reason now for any American to fail to cherish their citizenship in this, the greatest nation on Earth. Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.\n\nSenator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain. These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\n\nI urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.\n\nWhatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that. [Applause]\n\nIt is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again. We fought - we fought as hard as we could, and though we fell short, the failure is mine, not yours.\n\nI am so deeply grateful to all of you for the great honor of your support and for all you have done for me. I wish the outcome had been different, my friends. The road was a difficult one from the outset, but your support and friendship never wavered. I cannot adequately express how deeply indebted I am to you.\n\nI'm especially grateful to my wife Cindy, my children, my dear mother, and all my family, and to the many old and dear friends who have stood by my side through the many ups and downs of this long campaign. I have always been a fortunate man, and never more so for the love and encouragement you have given me.\n\nYou know, campaigns are often harder on a candidate's family than on the candidate, and that's been true in this campaign. All I can offer in compensation is my love and gratitude and the promise of more peaceful years ahead.\n\nI am also, of course, very thankful to Governor Sarah Palin - one of the best campaigners I have ever seen and an impressive new voice in our party for reform and the principles that have always been our greatest strength. Her husband Todd and their five beautiful children, for their tireless dedication to our cause and the courage and grace they showed in the rough and tumble of a presidential campaign. We can all look forward with great interest to her future service to Alaska, the Republican Party, and our country.\n\nTo all my campaign comrades, from Rick Davis and Steve Schmidt and Mark Salter to every last volunteer who fought so hard and valiantly month after month in what at times seemed to be the most challenging campaign in modern times - thank you so much. A lost election will never mean more to me than the privilege of your faith and friendship.\n\nI don't know what more we could have done to try to win this election. I'll leave that to others to determine. Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.\n\nThis campaign was and will remain the great honor of my life, and my heart is filled with nothing but gratitude for the experience and to the American people for giving me a fair hearing before deciding that Senator Obama and my old friend Senator Joe Biden should have the honor of leading us for the next four years.\n\n[Please, please] I would not be an American worthy of the name should I regret a fate that has allowed me the extraordinary privilege of serving this country for a half a century. Today I was a candidate for the highest office in the country I love so much, and tonight I remain her servant. That is blessing enough for anyone, and I thank the people of Arizona for it.\n\nTonight - tonight more than any night - I hold in my heart nothing but love for this country and for all its citizens, whether they supported me or Senator Obama. I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans, as I have often in this campaign, to not despair of our present difficulties, but to believe always in the promise and greatness of America.\n\nBecause nothing is inevitable here. Americans never quit. We never surrender. We never hide from history. We make history.\n\nThank you, and God bless you, and God bless America. Thank you all very much.\n\n[Applause]",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "raw_scores": {
+          "Dignity": 0.3,
+          "Truth": 0.3,
+          "Justice": 0.3,
+          "Hope": 0.3,
+          "Pragmatism": 0.3,
+          "Tribalism": 0.3,
+          "Manipulation": 0.3,
+          "Resentment": 0.3,
+          "Fantasy": 0.3,
+          "Fear": 0.3
+        },
+        "hierarchical_ranking": {
+          "primary_wells": [
+            {
+              "well": "Dignity",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Truth",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Justice",
+              "score": 0.3,
+              "relative_weight": 33.3
+            }
+          ],
+          "secondary_wells": [],
+          "total_weight": 100.0
+        },
+        "well_justifications": {
+          "Dignity": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates dignity themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Senator from Arizona and Republican Presidential Nominee\n- **Event:** 2008 Presidential Election Concession Speech\n- **Speech Type:** Election Concession Address\n- **Date:** November 4, 2008\n- **Location:** Arizona Biltmore Hotel, Phoenix, Arizona\n- **Context:** Concession speech following defeat to Barack Obama in the 2008 presidential election\n- **Source:** C-SPAN (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=NvgqRKYapU8\n- **Duration:** 15 minutes\n- **Views:** Over 1 million\n- **Classification:** Conservative Dignity (Validation Set)\n- **Historical Significance:** Widely praised as one of the most gracious and dignified concession speeches in modern American political history, demonstrating statesmanship and unity in defeat.\n\n---\n\nThank you, thank you my friends",
+              "A little while ago, I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.\n\nIn a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance"
+            ],
+            "confidence": 0.65
+          },
+          "Truth": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates truth themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to truth detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Justice": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates justice themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "But we both recognize that though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.\n\nA century ago, President Theodore Roosevelt's invitation of Booker T"
+            ],
+            "confidence": 0.65
+          },
+          "Hope": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates hope themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.\n\nThis is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight"
+            ],
+            "confidence": 0.65
+          },
+          "Pragmatism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates pragmatism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to pragmatism detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Tribalism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates tribalism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Senator from Arizona and Republican Presidential Nominee\n- **Event:** 2008 Presidential Election Concession Speech\n- **Speech Type:** Election Concession Address\n- **Date:** November 4, 2008\n- **Location:** Arizona Biltmore Hotel, Phoenix, Arizona\n- **Context:** Concession speech following defeat to Barack Obama in the 2008 presidential election\n- **Source:** C-SPAN (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=NvgqRKYapU8\n- **Duration:** 15 minutes\n- **Views:** Over 1 million\n- **Classification:** Conservative Dignity (Validation Set)\n- **Historical Significance:** Widely praised as one of the most gracious and dignified concession speeches in modern American political history, demonstrating statesmanship and unity in defeat.\n\n---\n\nThank you, thank you my friends",
+              "[Applause] \n\nMy friends, we have come to the end of a long journey"
+            ],
+            "confidence": 0.65
+          },
+          "Manipulation": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates manipulation themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to manipulation detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Resentment": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates resentment themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to resentment detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fantasy": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fantasy themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fantasy detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fear": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fear themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fear detected in the narrative."
+            ],
+            "confidence": 0.65
+          }
+        },
+        "calculated_metrics": {
+          "narrative_elevation": 0.0,
+          "polarity": -0.29999999999999993,
+          "coherence": 1.0,
+          "directional_purity": 1.0
+        },
+        "narrative_position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "framework_fit_score": 0.8,
+        "dominant_wells": [
+          {
+            "well": "Dignity",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Truth",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Justice",
+            "score": 0.3,
+            "relative_weight": 33.3
+          }
+        ],
+        "execution_time": "2025-06-17 14:04:37.255426",
+        "duration_seconds": 4.67,
+        "api_cost": 0.0098,
+        "experiment_context": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_description": "Cost-effective IDITI framework validation using 8 key texts to test architectural compliance improvements",
+          "experiment_version": "1.0.0",
+          "experiment_created": "2025-06-17T17:00:00Z",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "success_criteria": [
+            "Framework boundary compliance: exactly 2 wells extracted",
+            "Production system usage: NarrativeGravityVisualizationEngine signatures found",
+            "Architectural compliance score >80%",
+            "Statistical analysis runs successfully on framework-compliant data"
+          ],
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "funding_source": "IDITI Framework Development",
+          "ethical_clearance": "IRB-2025-IDITI-SMALL-001"
+        },
+        "analysis_run_context": {
+          "run_id": "iditi_architectural_compliance_test",
+          "framework": "iditi",
+          "corpus_item": "mccain_concession",
+          "prompt_template": "traditional_analysis",
+          "model": "gpt-4o",
+          "text_path": "corpus/validation_set/conservative_dignity/john_mccain_2008_concession_speech.txt"
+        },
+        "hypothesis_validation": {
+          "experiment_hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "hypothesis_validation_notes": "Automated hypothesis validation not yet implemented",
+          "analysis_timestamp": "2025-06-17T14:04:37.255889",
+          "context_propagation_version": "v1.0.0"
+        },
+        "academic_metadata": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_version": "1.0.0",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "replication_package_ready": true
+        }
+      },
+      {
+        "analysis_id": "fea8976c-134c-44d4-8293-60daf558f5e6",
+        "text_content": "**Barack Obama - 2004 Democratic National Convention Keynote Speech**\n\n**Bibliographic Information:**\n- **Speaker:** Barack Obama, Illinois State Senator and U.S. Senate Candidate\n- **Event:** 2004 Democratic National Convention\n- **Speech Type:** Keynote Address\n- **Date:** July 27, 2004\n- **Location:** Fleet Center, Boston, Massachusetts\n- **Source:** C-SPAN Historic Convention Speeches\n- **URL:** https://www.c-span.org/program/historic-convention-speeches/barack-obama-2004-democratic-national-convention-keynote-speech/193754\n- **Classification:** Progressive Dignity (Validation Set)\n- **Historical Significance:** This keynote address launched Obama into national prominence and is widely regarded as one of the most influential political speeches in modern American history.\n\n---\n\nThank you so much. Thank you so much. Thank you. Thank you. Thank you so much. Thank you so much. Thank you. Thank you. Thank you, Dick Durbin. You make us all proud. On behalf of the great state of Illinois, crossroads of a nation, land of Lincoln, let me express my deepest gratitude for the privilege of addressing this convention.\n\nTonight is a particular honor for me because, let's face it, my presence on this stage is pretty unlikely. My father was a foreign student born and raised in a small village in Kenya. He grew up herding goats, went to school in a tin roof shack. His father, my grandfather, was a cook, a domestic servant to the British. But my grandfather had larger dreams for his son. Through hard work and perseverance, my father got a scholarship to study in a magical place, America, that shone as a beacon of freedom and opportunity to so many who had come before.\n\nWhile studying here my father met my mother. She was born in a town on the other side of the world, in Kansas. Her father worked on oil rigs and farms through most of the Depression. The day after Pearl Harbor, my grandfather signed up for duty. Joined the army, marched across Europe. Back home my grandmother raised a baby and went to work on a bomber assembly line. After the war, they studied on the G.I. Bill, bought a house through F.H.A., and later moved west all the way to Hawaii in search of opportunity. And they, too, had big dreams for their daughter.\n\nA common dream born of two continents. My parents shared not only an improbable love, they shared an abiding faith in the possibilities of this nation. They would give me an African name, Barack, believing in a tolerant America your name is no barrier to success. They imagined -- they imagined me going to the best schools in the land even though they weren't rich because in a generous America you don't have to be rich to achieve your potential. They have both passed away now and yet I know that on this night they look down on me with great pride.\n\nThey stand here and I stand here today grateful for the diversity of my heritage, aware that my parents' dreams live on in my two precious daughters. I stand here knowing that my story is part of the larger American story, that I owe a debt to all of those who came before me and that in no other country on earth is my story even possible.\n\nTonight we gather to affirm the greatness of our nation. Not because of the height of our skyscrapers or the power of our military or the size of our economy, our pride is based on a very simple premise. Summed up in a declaration made over 200 years ago. We hold these truths to be self-evident, that all men are created equal. That they are endowed by their Creator with certain inalienable rights among these are life, liberty, and the pursuit of happiness.\n\nThat is the true genius of America. A faith in simple dreams. An insistence on small miracles. That we can tuck in our children at night and know that they are fed and clothed and safe from harm. And we can say what we think, write what we think without hearing a sudden knock on the door, that we can have an idea and start our own business without paying a bribe, that we can participate in the political process without fear of retribution and that our votes will be counted, at least most of the time.\n\nThis year in this election we are called to reaffirm our values and our commitments, to hold them against a hard reality and see how we're measuring up to the legacy of our forebears and the promise of future generations. Fellow Americans, Democrats, Republicans, independents, I say to you we have more work to do.\n\nMore work to do for the workers I met in Illinois who are losing their union jobs at the Maytag plant that's moving to Mexico and now we're having to compete with their own children for jobs that pay $7 an hour, or the father I met that was losing his job and choking back the tears wondering how he would pay $4,500 a month for the drugs his son needs without the health benefits that he counted on. More to do for the young woman in East St. Louis and thousands more like her who has the grades, has the drive, has the will but doesn't have the money to go to college.\n\nNow don't get me wrong, the people I meet in small towns and big cities and diners and office parks, they don't expect government to solve all of their problems. They know they have to work hard to get ahead and they want to. Go into the counties around Chicago and people will tell you they don't want their tax money wasted by a welfare agency or by the Pentagon. Go into any inner city neighborhood and folks will tell you that government alone can't teach our kids to learn. They know the parents have to teach. The children can't achieve unless we raise their expectations and turn off the television sets and eradicate the slander that says a black youth with a book is acting white. They know those things.\n\nPeople don't expect government to solve all their problems but they sense deep in their bones that with just a slight change in priorities we could make sure that every child in America has a decent shot at life. And that the doors of opportunity remain open to all. They know we can do better and they want that choice.\n\nIn this election we offer that choice. Our party has chosen a man to lead us who embodies the best this country has to offer and that man is John Kerry. John Kerry understands the ideals of community, faith, and service because they've defined his life from his heroic service in Vietnam to his years as a prosecutor and lieutenant governor, through two decades in the United States Senate. He has devoted himself to this country. Again and again we've seen him make tough choices when easier ones were available. His values and his record affirm what is best in us.\n\nJohn Kerry believes in an America where hard work is rewarded so instead of offering tax breaks to companies shipping jobs overseas he offers them to companies creating jobs here at home. John Kerry believes in an America where all Americans can afford the same health coverage our politicians in Washington have for themselves. John Kerry believes in energy independence so we aren't held hostage to the profits of oil companies or the sabotage of foreign oil fields. John Kerry believes in the constitutional freedoms that have made our country the envy of the world and he will never sacrifice our basic liberties or use faith as a wedge to divide us. And John Kerry believes that in a dangerous world war must be an option sometimes but it should never be the first option.\n\nYou know, a while back -- a while back I met a young man in a V.F.W. hall in East Moline, Illinois. He was a good-looking kid, 6'2\", clear-eyed with an easy smile. He told me he joined the Marines and was headed to Iraq the following week. As I listened to him explain why he'd enlisted, the absolute faith he had in our country and its leaders, his devotion to duty and service I thought this young man was all that any of us might ever hope for in a child.\n\nBut then I asked myself, are we serving him as well as he's serving us? I thought of the 900 men and women, sons and daughters, husbands and wives, friends and neighbors, who won't be returning to their own hometowns. I thought of the families I met struggling to get by without a loved one's full income or whose loved one returned with a limb missing but still lack long-term health care benefits because they were reservists.\n\nWhen we send our young men and women into harm's way we have a solemn obligation not to fudge the numbers or shade the truth about why they're going, to care for their families while they're gone, to tend to the soldiers upon their return and to never ever go to war without enough troops to win the war, secure the peace and earn the respect of the world.\n\nNow let me be clear. Let me be clear. We have real enemies in the world. These enemies must be found. They must be pursued. And they must be defeated. John Kerry knows this. And just as Lieutenant Kerry did not hesitate to risk his life to protect the men who served with him in Vietnam, President Kerry will not hesitate one moment to use our military might to keep America safe and secure.\n\nJohn Kerry believes in America. And he knows that it's not enough for just some of us to prosper. For alongside our famous individualism there's another ingredient in the American saga. A belief that we're all connected as one people. If there's a child on the south side of Chicago who can't read, that matters to me even if it's not my child. If there's a senior citizen somewhere who can't pay for their prescription drugs and having to choose between medicine and the rent, that makes my life poorer even if it's not my grandparent. If there's an Arab-American family being rounded up without benefit of an attorney or due process that threatens my civil liberties.\n\nIt is that fundamental belief -- it is that fundamental belief I am my brother's keeper, I am my sister's keeper that makes this country work. It's what allows us to pursue our individual dreams and yet still come together as one American family. Out of many, one.\n\nNow even as we speak, there are those who are preparing to divide us, the spin masters, the negative ad peddlers who embrace the politics of anything goes. Well, I say to them tonight there is not a liberal America and a conservative America. There is the United States of America. There is not a black America and a white America and Latino America and Asian America. There's the United States of America.\n\nThe pundits, the pundits like to slice and dice our country into red states and blue states, red states for Republicans, blue states for Democrats, but I've got news for them, too. We worship an awesome God in the blue states and we don't like federal agents poking around in our libraries in the red states. We coach Little League in the blue states and, yes, we've got some gay friends in the red states. There are patriots who oppose the war in Iraq and there are patriots who support the war in Iraq. We are one people, all of us pledging allegiance to the stars and stripes, all of us defending the United States of America.\n\nIn the end that's what this election is about. Do we participate in the politics of cynicism or in a politics of hope? John Kerry calls on us to hope. John Edwards calls on us to hope. I'm not talking about blind optimism here, the willful ignorance that thinks unemployment will go away if we just don't think about it or health care crisis will solve itself if we just ignore it. That's not what I'm talking about.\n\nI'm talking about something more substantial. It's the hope of slaves sitting around a fire singing freedom songs. The hope of immigrants setting out for distant shores. The hope of a young naval lieutenant bravely patrolling the Mekong Delta, the hope of a mill worker's son who dares to defy the odds, the hope of a skinny kid with a funny name who believes that America has a place for him, too. Hope -- hope in the face of difficulty. Hope in the face of uncertainty. The audacity of hope.\n\nIn the end that is God's greatest gift to us, the bedrock of this nation, a belief in things not seen. A belief that there are better days ahead. I believe that we can give our middle class relief and provide working families with the road to opportunity. I believe we can provide jobs for the jobless, homes to the homeless, and reclaim young people in cities across America from violence and despair. I believe that we have righteous wind at our backs and as we stand on the crossroads of history we can make the right choices and meet the challenges that face us.\n\nAmerica, tonight if you feel the same energy that I do, if you feel the same urgency that I do, if you feel the same passion that I do, if you feel the same hopefulness that I do, if we do what we must do, then I have no doubt that all across the country from Florida to Oregon, from Washington to Maine the people will rise up in November and John Kerry will be sworn in as president and John Edwards will be sworn in as vice president and this country will reclaim its promise and out of this long political darkness a brighter day will come.\n\nThank you very much, everybody. God bless you. Thank you.",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "raw_scores": {
+          "Dignity": 0.3,
+          "Truth": 0.3,
+          "Justice": 0.3,
+          "Hope": 0.3,
+          "Pragmatism": 0.3,
+          "Tribalism": 0.3,
+          "Manipulation": 0.3,
+          "Resentment": 0.3,
+          "Fantasy": 0.3,
+          "Fear": 0.3
+        },
+        "hierarchical_ranking": {
+          "primary_wells": [
+            {
+              "well": "Dignity",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Truth",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Justice",
+              "score": 0.3,
+              "relative_weight": 33.3
+            }
+          ],
+          "secondary_wells": [],
+          "total_weight": 100.0
+        },
+        "well_justifications": {
+          "Dignity": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates dignity themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Senate Candidate\n- **Event:** 2004 Democratic National Convention\n- **Speech Type:** Keynote Address\n- **Date:** July 27, 2004\n- **Location:** Fleet Center, Boston, Massachusetts\n- **Source:** C-SPAN Historic Convention Speeches\n- **URL:** https://www.c-span.org/program/historic-convention-speeches/barack-obama-2004-democratic-national-convention-keynote-speech/193754\n- **Classification:** Progressive Dignity (Validation Set)\n- **Historical Significance:** This keynote address launched Obama into national prominence and is widely regarded as one of the most influential political speeches in modern American history.\n\n---\n\nThank you so much"
+            ],
+            "confidence": 0.65
+          },
+          "Truth": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates truth themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to truth detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Justice": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates justice themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to justice detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Hope": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates hope themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to hope detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Pragmatism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates pragmatism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to pragmatism detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Tribalism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates tribalism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Senate Candidate\n- **Event:** 2004 Democratic National Convention\n- **Speech Type:** Keynote Address\n- **Date:** July 27, 2004\n- **Location:** Fleet Center, Boston, Massachusetts\n- **Source:** C-SPAN Historic Convention Speeches\n- **URL:** https://www.c-span.org/program/historic-convention-speeches/barack-obama-2004-democratic-national-convention-keynote-speech/193754\n- **Classification:** Progressive Dignity (Validation Set)\n- **Historical Significance:** This keynote address launched Obama into national prominence and is widely regarded as one of the most influential political speeches in modern American history.\n\n---\n\nThank you so much"
+            ],
+            "confidence": 0.65
+          },
+          "Manipulation": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates manipulation themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to manipulation detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Resentment": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates resentment themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to resentment detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fantasy": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fantasy themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fantasy detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fear": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fear themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fear detected in the narrative."
+            ],
+            "confidence": 0.65
+          }
+        },
+        "calculated_metrics": {
+          "narrative_elevation": 0.0,
+          "polarity": -0.29999999999999993,
+          "coherence": 1.0,
+          "directional_purity": 1.0
+        },
+        "narrative_position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "framework_fit_score": 0.8,
+        "dominant_wells": [
+          {
+            "well": "Dignity",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Truth",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Justice",
+            "score": 0.3,
+            "relative_weight": 33.3
+          }
+        ],
+        "execution_time": "2025-06-17 14:04:42.090459",
+        "duration_seconds": 4.83,
+        "api_cost": 0.0125,
+        "experiment_context": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_description": "Cost-effective IDITI framework validation using 8 key texts to test architectural compliance improvements",
+          "experiment_version": "1.0.0",
+          "experiment_created": "2025-06-17T17:00:00Z",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "success_criteria": [
+            "Framework boundary compliance: exactly 2 wells extracted",
+            "Production system usage: NarrativeGravityVisualizationEngine signatures found",
+            "Architectural compliance score >80%",
+            "Statistical analysis runs successfully on framework-compliant data"
+          ],
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "funding_source": "IDITI Framework Development",
+          "ethical_clearance": "IRB-2025-IDITI-SMALL-001"
+        },
+        "analysis_run_context": {
+          "run_id": "iditi_architectural_compliance_test",
+          "framework": "iditi",
+          "corpus_item": "obama_dnc",
+          "prompt_template": "traditional_analysis",
+          "model": "gpt-4o",
+          "text_path": "corpus/validation_set/progressive_dignity/obama_2004_dnc.txt"
+        },
+        "hypothesis_validation": {
+          "experiment_hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "hypothesis_validation_notes": "Automated hypothesis validation not yet implemented",
+          "analysis_timestamp": "2025-06-17T14:04:42.092249",
+          "context_propagation_version": "v1.0.0"
+        },
+        "academic_metadata": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_version": "1.0.0",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "replication_package_ready": true
+        }
+      },
+      {
+        "analysis_id": "89a74889-9854-4bf9-8ed3-f7b333e0bdc9",
+        "text_content": "**John Lewis - Speech at the March on Washington for Jobs and Freedom**\n\n**Bibliographic Information:**\n- **Speaker:** John Lewis, Chairman of the Student Nonviolent Coordinating Committee (SNCC)\n- **Event:** March on Washington for Jobs and Freedom\n- **Speech Type:** Civil Rights Address\n- **Date:** August 28, 1963\n- **Location:** Lincoln Memorial, Washington, D.C.\n- **Age of Speaker:** 23 years old\n- **Source:** NowThis Impact (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=TCqR9LbT1_w\n- **Classification:** Progressive Dignity (Validation Set)\n- **Historical Significance:** One of the youngest speakers at the March on Washington, Lewis delivered a powerful address calling for immediate civil rights action. This speech helped establish him as a key leader in the Civil Rights Movement.\n\n---\n\n[Applause] We march today for jobs and freedom, but we have nothing to be proud of, for hundreds and thousands of our brothers are not here. They're receiving starvation wages or no wages at all. While we stand here, there are sharecroppers in the Delta of Mississippi who are out in the field working for less than three dollars a day, twelve hours a day. While we stand here, there are students in jail on trumped-up charges. Our brother James Farmer, along with many others, is also in jail.\n\nWe come here today with a great sense of misgiving. It is true that we support the administration's civil rights bill. We support it with great reservations, however. Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations. In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state. It will not protect the hundreds and thousands of people who have been arrested upon trumped-up charges.\n\nWhat about the three young men - SNCC field secretaries in Americus, Georgia - who face the death penalty for engaging in peaceful protest? As it stands now, the voting section of this bill will not help the thousands of black people who want to vote. It will not help the citizens of Mississippi, of Alabama, and Georgia, who are qualified to vote but lack a sixth-grade education.\n\nWe must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote. We need a bill that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year. We must have a good FEPC bill.\n\nMy friends, let us not forget that we are involved in a serious social revolution. By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation. There are exceptions, of course - we salute those - but what political leader can stand up and say, \"My party is the party of principles\"? For the party of Kennedy is also the party of Eastland. The party of Javits is also the party of Goldwater.\n\nWhere is our party? Where is the political party that will make it unnecessary to march on Washington? Where is the political party that will make it unnecessary to march in the streets of Birmingham? Where is the political party that will protect the citizens of Albany, Georgia? Do you know that in Albany, Georgia, nine of our leaders have been indicted, not by Dixiecrats, but by the federal government for peaceful protest?\n\nBut what did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby? To those who have said, \"Be patient and wait,\" we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!\n\n[Applause] [Music] [Applause] \n\nWe are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again. And then you holler, \"Be patient.\" How long can we be patient? We want our freedom and we want it now!\n\n[Applause] \n\nWe do not want to go to jail, but we will go to jail if this is the price we must pay for love, brotherhood, and true peace. I appeal to all of you to get in this great revolution that is sweeping this nation. Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete.\n\nWe must get in this revolution and complete the revolution. For in the Delta of Mississippi, in southwest Georgia, in the Black Belt of Alabama, in Harlem, in Chicago, Detroit, Philadelphia, and all over this nation, the black masses are on the march for jobs and freedom.\n\nThey're talking about slow down and stop. We will not stop! All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!\n\n[Applause] \n\nIf we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington. We will march through the South, through the streets of Jackson, through the streets of Danville, through the streets of Cambridge, through the streets of Birmingham. But we will march with the spirit of love and with the spirit of dignity that we have shown here today.\n\n[Music] [Applause] \n\nBy the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy. We must say: Wake up America! Wake up! For we cannot stop, and we will not and cannot be patient!\n\n[Applause]",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "raw_scores": {
+          "Dignity": 0.3,
+          "Truth": 0.3,
+          "Justice": 0.3,
+          "Hope": 0.3,
+          "Pragmatism": 0.3,
+          "Tribalism": 0.3,
+          "Manipulation": 0.3,
+          "Resentment": 0.3,
+          "Fantasy": 0.3,
+          "Fear": 0.3
+        },
+        "hierarchical_ranking": {
+          "primary_wells": [
+            {
+              "well": "Dignity",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Truth",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Justice",
+              "score": 0.3,
+              "relative_weight": 33.3
+            }
+          ],
+          "secondary_wells": [],
+          "total_weight": 100.0
+        },
+        "well_justifications": {
+          "Dignity": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates dignity themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "**John Lewis - Speech at the March on Washington for Jobs and Freedom**\n\n**Bibliographic Information:**\n- **Speaker:** John Lewis, Chairman of the Student Nonviolent Coordinating Committee (SNCC)\n- **Event:** March on Washington for Jobs and Freedom\n- **Speech Type:** Civil Rights Address\n- **Date:** August 28, 1963\n- **Location:** Lincoln Memorial, Washington, D.C.\n- **Age of Speaker:** 23 years old\n- **Source:** NowThis Impact (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=TCqR9LbT1_w\n- **Classification:** Progressive Dignity (Validation Set)\n- **Historical Significance:** One of the youngest speakers at the March on Washington, Lewis delivered a powerful address calling for immediate civil rights action"
+            ],
+            "confidence": 0.65
+          },
+          "Truth": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates truth themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to truth detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Justice": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates justice themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "**John Lewis - Speech at the March on Washington for Jobs and Freedom**\n\n**Bibliographic Information:**\n- **Speaker:** John Lewis, Chairman of the Student Nonviolent Coordinating Committee (SNCC)\n- **Event:** March on Washington for Jobs and Freedom\n- **Speech Type:** Civil Rights Address\n- **Date:** August 28, 1963\n- **Location:** Lincoln Memorial, Washington, D.C.\n- **Age of Speaker:** 23 years old\n- **Source:** NowThis Impact (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=TCqR9LbT1_w\n- **Classification:** Progressive Dignity (Validation Set)\n- **Historical Significance:** One of the youngest speakers at the March on Washington, Lewis delivered a powerful address calling for immediate civil rights action",
+              "This speech helped establish him as a key leader in the Civil Rights Movement.\n\n---\n\n[Applause] We march today for jobs and freedom, but we have nothing to be proud of, for hundreds and thousands of our brothers are not here"
+            ],
+            "confidence": 0.65
+          },
+          "Hope": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates hope themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to hope detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Pragmatism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates pragmatism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "While we stand here, there are sharecroppers in the Delta of Mississippi who are out in the field working for less than three dollars a day, twelve hours a day"
+            ],
+            "confidence": 0.65
+          },
+          "Tribalism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates tribalism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "**John Lewis - Speech at the March on Washington for Jobs and Freedom**\n\n**Bibliographic Information:**\n- **Speaker:** John Lewis, Chairman of the Student Nonviolent Coordinating Committee (SNCC)\n- **Event:** March on Washington for Jobs and Freedom\n- **Speech Type:** Civil Rights Address\n- **Date:** August 28, 1963\n- **Location:** Lincoln Memorial, Washington, D.C.\n- **Age of Speaker:** 23 years old\n- **Source:** NowThis Impact (YouTube Archive)\n- **URL:** https://www.youtube.com/watch?v=TCqR9LbT1_w\n- **Classification:** Progressive Dignity (Validation Set)\n- **Historical Significance:** One of the youngest speakers at the March on Washington, Lewis delivered a powerful address calling for immediate civil rights action",
+              "This speech helped establish him as a key leader in the Civil Rights Movement.\n\n---\n\n[Applause] We march today for jobs and freedom, but we have nothing to be proud of, for hundreds and thousands of our brothers are not here"
+            ],
+            "confidence": 0.65
+          },
+          "Manipulation": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates manipulation themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to manipulation detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Resentment": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates resentment themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to resentment detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fantasy": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fantasy themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fantasy detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fear": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fear themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state"
+            ],
+            "confidence": 0.65
+          }
+        },
+        "calculated_metrics": {
+          "narrative_elevation": 0.0,
+          "polarity": -0.29999999999999993,
+          "coherence": 1.0,
+          "directional_purity": 1.0
+        },
+        "narrative_position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "framework_fit_score": 0.8,
+        "dominant_wells": [
+          {
+            "well": "Dignity",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Truth",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Justice",
+            "score": 0.3,
+            "relative_weight": 33.3
+          }
+        ],
+        "execution_time": "2025-06-17 14:04:47.317830",
+        "duration_seconds": 5.22,
+        "api_cost": 0.009,
+        "experiment_context": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_description": "Cost-effective IDITI framework validation using 8 key texts to test architectural compliance improvements",
+          "experiment_version": "1.0.0",
+          "experiment_created": "2025-06-17T17:00:00Z",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "success_criteria": [
+            "Framework boundary compliance: exactly 2 wells extracted",
+            "Production system usage: NarrativeGravityVisualizationEngine signatures found",
+            "Architectural compliance score >80%",
+            "Statistical analysis runs successfully on framework-compliant data"
+          ],
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "funding_source": "IDITI Framework Development",
+          "ethical_clearance": "IRB-2025-IDITI-SMALL-001"
+        },
+        "analysis_run_context": {
+          "run_id": "iditi_architectural_compliance_test",
+          "framework": "iditi",
+          "corpus_item": "lewis_march",
+          "prompt_template": "traditional_analysis",
+          "model": "gpt-4o",
+          "text_path": "corpus/validation_set/progressive_dignity/john_lewis_1963_march_washington.txt"
+        },
+        "hypothesis_validation": {
+          "experiment_hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "hypothesis_validation_notes": "Automated hypothesis validation not yet implemented",
+          "analysis_timestamp": "2025-06-17T14:04:47.322127",
+          "context_propagation_version": "v1.0.0"
+        },
+        "academic_metadata": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_version": "1.0.0",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "replication_package_ready": true
+        }
+      },
+      {
+        "analysis_id": "2449f500-ffd6-4ea8-a30b-ce04cb0f7666",
+        "text_content": "---\ntitle: \"Trump says immigrants are 'poisoning the blood of our country'\"\nauthor: \"Donald Trump\"\ndate_of_speech: \"2023-12-19\"\nsource_url: \"https://www.youtube.com/watch?v=RKPFjAhd3KQ\"\nretrieval_date: \"June 14, 2025\"\n---\n\nYou know, when they let, I think the real number is 15, 16 million people into our country, when they do that, we got a lot of work to do. They're poisoning the blood of our country. That's what they've done. They poisoned mental institutions and prisons all over the world, not just in South America, not just the three or four countries that we think about, but all over the world. They're coming into our country from Africa, from Asia, all over the world. They're pouring into our country. Nobody's even looking at them. They just come in. The crime is going to be tremendous. The terrorism is going to be, terrorism is going to be. And then we built a tremendous piece of the wall and then we're going to build more.",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "raw_scores": {
+          "Dignity": 0.3,
+          "Truth": 0.3,
+          "Justice": 0.3,
+          "Hope": 0.3,
+          "Pragmatism": 0.3,
+          "Tribalism": 0.3,
+          "Manipulation": 0.3,
+          "Resentment": 0.3,
+          "Fantasy": 0.3,
+          "Fear": 0.3
+        },
+        "hierarchical_ranking": {
+          "primary_wells": [
+            {
+              "well": "Dignity",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Truth",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Justice",
+              "score": 0.3,
+              "relative_weight": 33.3
+            }
+          ],
+          "secondary_wells": [],
+          "total_weight": 100.0
+        },
+        "well_justifications": {
+          "Dignity": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates dignity themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to dignity detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Truth": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates truth themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to truth detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Justice": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates justice themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to justice detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Hope": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates hope themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to hope detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Pragmatism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates pragmatism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "---\ntitle: \"Trump says immigrants are 'poisoning the blood of our country'\"\nauthor: \"Donald Trump\"\ndate_of_speech: \"2023-12-19\"\nsource_url: \"https://www.youtube.com/watch?v=RKPFjAhd3KQ\"\nretrieval_date: \"June 14, 2025\"\n---\n\nYou know, when they let, I think the real number is 15, 16 million people into our country, when they do that, we got a lot of work to do"
+            ],
+            "confidence": 0.65
+          },
+          "Tribalism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates tribalism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "They poisoned mental institutions and prisons all over the world, not just in South America, not just the three or four countries that we think about, but all over the world",
+              "Nobody's even looking at them"
+            ],
+            "confidence": 0.65
+          },
+          "Manipulation": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates manipulation themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to manipulation detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Resentment": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates resentment themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to resentment detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fantasy": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fantasy themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fantasy detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fear": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fear themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fear detected in the narrative."
+            ],
+            "confidence": 0.65
+          }
+        },
+        "calculated_metrics": {
+          "narrative_elevation": 0.0,
+          "polarity": -0.29999999999999993,
+          "coherence": 1.0,
+          "directional_purity": 1.0
+        },
+        "narrative_position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "framework_fit_score": 0.8,
+        "dominant_wells": [
+          {
+            "well": "Dignity",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Truth",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Justice",
+            "score": 0.3,
+            "relative_weight": 33.3
+          }
+        ],
+        "execution_time": "2025-06-17 14:04:57.035616",
+        "duration_seconds": 9.7,
+        "api_cost": 0.0083,
+        "experiment_context": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_description": "Cost-effective IDITI framework validation using 8 key texts to test architectural compliance improvements",
+          "experiment_version": "1.0.0",
+          "experiment_created": "2025-06-17T17:00:00Z",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "success_criteria": [
+            "Framework boundary compliance: exactly 2 wells extracted",
+            "Production system usage: NarrativeGravityVisualizationEngine signatures found",
+            "Architectural compliance score >80%",
+            "Statistical analysis runs successfully on framework-compliant data"
+          ],
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "funding_source": "IDITI Framework Development",
+          "ethical_clearance": "IRB-2025-IDITI-SMALL-001"
+        },
+        "analysis_run_context": {
+          "run_id": "iditi_architectural_compliance_test",
+          "framework": "iditi",
+          "corpus_item": "trump_poison",
+          "prompt_template": "traditional_analysis",
+          "model": "gpt-4o",
+          "text_path": "corpus/validation_set/conservative_tribalism/trump_nh_poison.txt"
+        },
+        "hypothesis_validation": {
+          "experiment_hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "hypothesis_validation_notes": "Automated hypothesis validation not yet implemented",
+          "analysis_timestamp": "2025-06-17T14:04:57.036188",
+          "context_propagation_version": "v1.0.0"
+        },
+        "academic_metadata": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_version": "1.0.0",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "replication_package_ready": true
+        }
+      },
+      {
+        "analysis_id": "dda8d175-4adb-4702-b96c-f543c804a7c6",
+        "text_content": "TITLE: Fighting Oligarchy Rally Speech  \nSPEAKER: Alexandria Ocasio-Cortez (AOC)\nROLE: U.S. Representative (D-NY)\nDATE: January 2025\nVENUE: Fighting Oligarchy Rally, Greeley, Colorado\nCO-SPEAKER: Bernie Sanders\nSOURCE: Rev.com Transcript\nURL: https://www.rev.com/transcripts/fighting-oligarcy-rally\nCLASSIFICATION: Progressive Tribalism\nFRAMEWORK_QUADRANT: Progressive/Tribalism\nVALIDATION_STUDY: Civic Virtue Framework - Dignity vs Tribalism Dimension\nEXTRACTED: December 2024\n\n===== SPEECH CONTENT =====\n\nWe are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.\n\nThe same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.\n\nThey want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who's just trying to make a better life for themselves. But we're smarter than that Greeley. We know better than that.\n\nAnd I understand that this kind of disdain that the wealthiest, wealthiest people in this country have for the working class doesn't just come from them not being raised right. It's shorthand for the right wing's entire political agenda and a certain ugly kind of politics, a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends. And Greeley, there's a word for this kind of thing, corruption.\n\nDonald Trump does see the immense pressure that working people are under. But his answer is an America that operates on the principle of every man for himself, divide and conquer. And now that Trump is back in power, we see it clear as day. He's handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback. And in exchange, those billionaires and oligarchs will back his campaigns and bankroll those of his allies. They scratch his back and he scratches theirs. And all of us are left behind.\n\nAnd the clever thing that these guys sell is making working people like you and me believe that we're just one step outside from that club, that we're just a little bit out from being able to be a billionaire too. Any billionaires in this room? I didn't think so.\n\nNow it's this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren't earned really. They aren't working for these billions. They're stealing them. They're stealing them. They're stealing them from you and you and me.\n\nJust look at what Elon Musk and Donald Trump are doing to our healthcare, our veterans' benefits, and Social Security. They are slashing programs that we and you have spent a lifetime paying into. And by the way, not them, because those billionaires haven't paid their fair share of taxes in years.\n\nAnd let's talk about Medicaid and Medicare for a second because your representative, Dave Evans, you know that guy that hasn't been showing up for the last couple months? Maybe he hasn't been showing up because he voted to cut Medicaid.\n\nIn fact, every single House Republican voted to cut Medicaid and they'll tell you, \"No, I didn't. I didn't say that,\" but here's what it is. They voted on a budget that cuts $880 billion from the committee that's in charge of Medicaid. And so now they're trying to play a game and say, \"We didn't do that,\" because they did by proxy. So let's set the record straight.\n\nMass media and Fox News, and the right well have you believe that these American values are something out of the Communist Manifesto. They believe that we think these things, because we went to some fancy college and read them in a book somewhere. But I'll tell you, I don't believe in healthcare, labor and human dignity, because I'm an extremist or a Marxist. I believe it because I was a waitress, because I've scrubbed toilets with my mom to afford school, because I've worked double shifts to keep the lights on, because I lost my dad to cancer as a kid and had to see my mom open hospital bills in the days after. And I don't want us to live like this anymore, Greeley.\n\nThis isn't just about Republicans. We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.\n\nYou know which Coloradans did vote to gut Medicaid and jack up healthcare costs? Gabe Evans and Lauren Boebert right next door. So folks, you know what that means, right? We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.\n\nSo to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do. You do. Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.\n\nIf you are willing to fight for working people regardless of who they are, how they identify, or where they come from, you are welcome here. But I will say this, those leaders on either side of the aisle who are willing to put their fellow Americans down, so that they can get ahead or feel better about themselves, those folks may best find a home somewhere else. Because in this house, we stand together, we know that, that it's our only choice because we know that without exception, if we stand together, it is the only way that we can win.\n\nSo I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.\n\nIt's about the thousands of you who came out today to stand together and say, \"Our lives deserve dignity and our work deserves respect.\"",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "raw_scores": {
+          "Dignity": 0.3,
+          "Truth": 0.3,
+          "Justice": 0.3,
+          "Hope": 0.3,
+          "Pragmatism": 0.3,
+          "Tribalism": 0.3,
+          "Manipulation": 0.3,
+          "Resentment": 0.3,
+          "Fantasy": 0.3,
+          "Fear": 0.3
+        },
+        "hierarchical_ranking": {
+          "primary_wells": [
+            {
+              "well": "Dignity",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Truth",
+              "score": 0.3,
+              "relative_weight": 33.3
+            },
+            {
+              "well": "Justice",
+              "score": 0.3,
+              "relative_weight": 33.3
+            }
+          ],
+          "secondary_wells": [],
+          "total_weight": 100.0
+        },
+        "well_justifications": {
+          "Dignity": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates dignity themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Representative (D-NY)\nDATE: January 2025\nVENUE: Fighting Oligarchy Rally, Greeley, Colorado\nCO-SPEAKER: Bernie Sanders\nSOURCE: Rev.com Transcript\nURL: https://www.rev.com/transcripts/fighting-oligarcy-rally\nCLASSIFICATION: Progressive Tribalism\nFRAMEWORK_QUADRANT: Progressive/Tribalism\nVALIDATION_STUDY: Civic Virtue Framework - Dignity vs Tribalism Dimension\nEXTRACTED: December 2024\n\n===== SPEECH CONTENT =====\n\nWe are witnessing an oligarchy in America"
+            ],
+            "confidence": 0.65
+          },
+          "Truth": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates truth themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "In fact, much of our political system enables it, starting with the role of money in politics.\n\nThe same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart"
+            ],
+            "confidence": 0.65
+          },
+          "Justice": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates justice themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture",
+              "We know better than that.\n\nAnd I understand that this kind of disdain that the wealthiest, wealthiest people in this country have for the working class doesn't just come from them not being raised right"
+            ],
+            "confidence": 0.65
+          },
+          "Hope": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates hope themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.\n\nThey want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who's just trying to make a better life for themselves",
+              "We know better than that.\n\nAnd I understand that this kind of disdain that the wealthiest, wealthiest people in this country have for the working class doesn't just come from them not being raised right"
+            ],
+            "confidence": 0.65
+          },
+          "Pragmatism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates pragmatism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Representative (D-NY)\nDATE: January 2025\nVENUE: Fighting Oligarchy Rally, Greeley, Colorado\nCO-SPEAKER: Bernie Sanders\nSOURCE: Rev.com Transcript\nURL: https://www.rev.com/transcripts/fighting-oligarcy-rally\nCLASSIFICATION: Progressive Tribalism\nFRAMEWORK_QUADRANT: Progressive/Tribalism\nVALIDATION_STUDY: Civic Virtue Framework - Dignity vs Tribalism Dimension\nEXTRACTED: December 2024\n\n===== SPEECH CONTENT =====\n\nWe are witnessing an oligarchy in America",
+              "In fact, much of our political system enables it, starting with the role of money in politics.\n\nThe same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart"
+            ],
+            "confidence": 0.65
+          },
+          "Tribalism": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates tribalism themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price",
+              "And our political system is ill-prepared for this abuse of power"
+            ],
+            "confidence": 0.65
+          },
+          "Manipulation": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates manipulation themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to manipulation detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Resentment": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates resentment themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to resentment detected in the narrative."
+            ],
+            "confidence": 0.65
+          },
+          "Fantasy": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fantasy themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.\n\nThey want us to think that our lives are suffering because of the LGBT kid down the street or because of the mixed status family or the dreamer down the block who's just trying to make a better life for themselves"
+            ],
+            "confidence": 0.65
+          },
+          "Fear": {
+            "score": 0.3,
+            "reasoning": "Analysis indicates fear themes present with score 0.300. Minimal thematic presence detected.",
+            "evidence_quotes": [
+              "Thematic elements related to fear detected in the narrative."
+            ],
+            "confidence": 0.65
+          }
+        },
+        "calculated_metrics": {
+          "narrative_elevation": 0.0,
+          "polarity": -0.29999999999999993,
+          "coherence": 1.0,
+          "directional_purity": 1.0
+        },
+        "narrative_position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "framework_fit_score": 0.8,
+        "dominant_wells": [
+          {
+            "well": "Dignity",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Truth",
+            "score": 0.3,
+            "relative_weight": 33.3
+          },
+          {
+            "well": "Justice",
+            "score": 0.3,
+            "relative_weight": 33.3
+          }
+        ],
+        "execution_time": "2025-06-17 14:05:02.076348",
+        "duration_seconds": 5.04,
+        "api_cost": 0.0093,
+        "experiment_context": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_description": "Cost-effective IDITI framework validation using 8 key texts to test architectural compliance improvements",
+          "experiment_version": "1.0.0",
+          "experiment_created": "2025-06-17T17:00:00Z",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "success_criteria": [
+            "Framework boundary compliance: exactly 2 wells extracted",
+            "Production system usage: NarrativeGravityVisualizationEngine signatures found",
+            "Architectural compliance score >80%",
+            "Statistical analysis runs successfully on framework-compliant data"
+          ],
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "funding_source": "IDITI Framework Development",
+          "ethical_clearance": "IRB-2025-IDITI-SMALL-001"
+        },
+        "analysis_run_context": {
+          "run_id": "iditi_architectural_compliance_test",
+          "framework": "iditi",
+          "corpus_item": "aoc_rally",
+          "prompt_template": "traditional_analysis",
+          "model": "gpt-4o",
+          "text_path": "corpus/validation_set/progressive_tribalism/aoc_2025_fighting_oligarchy_rally.txt"
+        },
+        "hypothesis_validation": {
+          "experiment_hypotheses": [
+            "IDITI framework extracts exactly 2 wells (Dignity, Tribalism) per architectural compliance",
+            "Framework-aware extraction respects framework boundary definitions",
+            "Production visualization engine signatures are properly embedded"
+          ],
+          "hypothesis_validation_notes": "Automated hypothesis validation not yet implemented",
+          "analysis_timestamp": "2025-06-17T14:05:02.081848",
+          "context_propagation_version": "v1.0.0"
+        },
+        "academic_metadata": {
+          "experiment_name": "IDITI_Small_Validation_Study",
+          "experiment_version": "1.0.0",
+          "research_context": "Testing AI Academic Advisor v2.0 architectural compliance enhancements with framework-aware data extraction",
+          "principal_investigator": "Narrative Gravity Research Team",
+          "institution": "Narrative Gravity Research Initiative",
+          "tags": [
+            "iditi",
+            "architectural_compliance",
+            "framework_validation",
+            "cost_effective"
+          ],
+          "replication_package_ready": true
+        }
+      }
+    ]
+  }
+}

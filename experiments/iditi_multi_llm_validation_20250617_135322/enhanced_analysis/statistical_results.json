@@ -1,0 +1,108 @@
+{
+  "hypothesis_testing": {
+    "H1_discriminative_validity": {
+      "hypothesis": "Discriminative validity: Dignity and Tribalism wells differentiate expected text categories",
+      "dignity_wells": [
+        "well_dignity"
+      ],
+      "tribalism_wells": [
+        "well_tribalism"
+      ],
+      "tests_performed": [
+        {
+          "comparison": "well_dignity vs well_tribalism",
+          "test_type": "paired_t_test",
+          "t_statistic": 2.4654787500687685,
+          "p_value": 0.016102078808354073,
+          "significant": "True",
+          "dignity_mean": 0.5154629629629629,
+          "tribalism_mean": 0.4477777777777777,
+          "dignity_std": 0.29446766672531766,
+          "tribalism_std": 0.2872708993964801,
+          "sample_sizes": {
+            "dignity": 72,
+            "tribalism": 72
+          }
+        }
+      ],
+      "status": "supported",
+      "significant_comparisons": 1,
+      "total_comparisons": 1
+    },
+    "H2_ideological_agnosticism": {
+      "hypothesis": "Ideological agnosticism: Framework should not systematically favor conservative vs progressive content",
+      "tests_performed": [],
+      "sample_sizes": {
+        "conservative": 0,
+        "progressive": 0,
+        "unknown": 72
+      },
+      "status": "insufficient_data",
+      "message": "Could not identify both conservative and progressive texts for comparison"
+    },
+    "H3_ground_truth_alignment": {
+      "hypothesis": "Ground truth alignment: Extreme control texts should score >0.8 on expected wells",
+      "target_threshold": 0.8,
+      "tests_performed": [],
+      "extreme_controls_found": 0,
+      "status": "insufficient_data",
+      "message": "No extreme control texts identified"
+    }
+  },
+  "descriptive_statistics": {
+    "well_dignity": {
+      "count": 72,
+      "mean": 0.5154629629629629,
+      "std": 0.29446766672531766,
+      "min": 0.3,
+      "max": 1.0,
+      "median": 0.3,
+      "q25": 0.3,
+      "q75": 0.9,
+      "skewness": 0.701389034849856,
+      "kurtosis": -1.4325974523280436
+    },
+    "well_tribalism": {
+      "count": 72,
+      "mean": 0.4477777777777777,
+      "std": 0.2872708993964801,
+      "min": 0.0,
+      "max": 1.0,
+      "median": 0.3,
+      "q25": 0.3,
+      "q75": 0.6224999999999999,
+      "skewness": 1.039380288677984,
+      "kurtosis": -0.3682575461493278
+    }
+  },
+  "effect_sizes": {
+    "well_dignity_vs_well_tribalism": {
+      "cohens_d": 0.23268186185572406,
+      "effect_magnitude": "small"
+    }
+  },
+  "metadata": {
+    "sample_size": 72,
+    "well_count": 2,
+    "frameworks_tested": [
+      "iditi"
+    ],
+    "models_tested": [
+      "unknown"
+    ],
+    "significance_level": 0.05,
+    "testing_timestamp": "2025-06-17T13:53:23.911585"
+  },
+  "summary": {
+    "overall_assessment": "partial_validation",
+    "hypotheses_supported": 1,
+    "hypotheses_tested": 3,
+    "key_findings": [
+      "H1: Discriminative validity demonstrated - dignity/tribalism wells differentiate appropriately"
+    ],
+    "recommendations": [
+      "Investigate and address potential ideological bias in framework",
+      "Improve ground truth alignment - consider threshold adjustments or control text selection"
+    ]
+  }
+}

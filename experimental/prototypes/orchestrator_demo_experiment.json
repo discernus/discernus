@@ -1,0 +1,71 @@
+{
+  "experiment_meta": {
+    "name": "IDITI_Orchestrator_Demo",
+    "description": "Demonstration of complete orchestrator capabilities",
+    "version": "v1.0.0",
+    "created": "2025-06-17T14:58:26.670388",
+    "principal_investigator": "Demo Researcher",
+    "institution": "Orchestrator University",
+    "hypotheses": [
+      "The orchestrator provides complete statistical analysis without custom scripts",
+      "Transaction safety prevents loss of expensive LLM analysis work",
+      "Integrated systems are superior to scattered custom scripts"
+    ],
+    "success_criteria": [
+      "Complete statistical analysis generated automatically",
+      "Resume capability demonstrated for cost protection",
+      "No custom scripts required for any experiment task"
+    ]
+  },
+  "components": {
+    "frameworks": [
+      {
+        "id": "iditi",
+        "version": "v2025.06.14"
+      }
+    ],
+    "prompt_templates": [
+      {
+        "id": "traditional_analysis",
+        "version": "v2.1"
+      }
+    ],
+    "weighting_schemes": [
+      {
+        "id": "winner_take_most",
+        "version": "v2.1"
+      }
+    ],
+    "models": [
+      {
+        "id": "gpt-4o",
+        "provider": "openai"
+      }
+    ],
+    "corpus": [
+      {
+        "id": "demo_text",
+        "file_path": "corpus/demo_texts/demo_text_1.txt"
+      }
+    ]
+  },
+  "execution": {
+    "matrix": [
+      {
+        "run_id": "orchestrator_demo",
+        "framework": "iditi",
+        "model": "gpt-4o",
+        "prompt_template": "traditional_analysis"
+      }
+    ],
+    "cost_controls": {
+      "max_total_cost": 5.0,
+      "cost_per_analysis_limit": 0.25
+    }
+  },
+  "enhanced_analysis": {
+    "enabled": true,
+    "generate_html_report": true,
+    "generate_academic_exports": true
+  }
+}

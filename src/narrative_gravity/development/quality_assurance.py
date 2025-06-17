@@ -1,6 +1,11 @@
 """
 Component Quality Assurance Framework
 
+🚨 AI ASSISTANT WARNING: This is a PRODUCTION quality assurance system.
+❌ DO NOT build new QA/validation systems - enhance existing ones!
+✅ USE THIS: ComponentQualityValidator for component validation
+✅ USE THIS: LLMQualityAssuranceSystem for LLM analysis validation
+
 Provides automated validation and quality assessment for:
 - Prompt templates (clarity, consistency, format compliance)
 - Framework architectures (coherence, completeness, theoretical grounding)

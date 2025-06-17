@@ -1,0 +1,76 @@
+# Cursor AI Assistant Rules for Narrative Gravity Analysis Project
+
+## 🚨 MANDATORY RULES - ALWAYS FOLLOW
+
+### Rule 1: ALWAYS Search Production Systems First
+Before suggesting ANY development work, you MUST run:
+```bash
+python3 scripts/production/check_existing_systems.py "functionality description"
+```
+
+### Rule 2: NEVER Use Deprecated Systems
+- ❌ NEVER mention "AI Academic Advisor" (it's just file existence checks)
+- ❌ NEVER reference `deprecated/` directory code
+- ❌ NEVER use `architectural_compliance_validator.py` (moved to deprecated)
+
+### Rule 3: ALWAYS Use Production Systems
+- ✅ USE: `LLMQualityAssuranceSystem` (6-layer mathematical validation)
+- ✅ USE: `ComponentQualityValidator` (component validation)
+- ✅ USE: `QAEnhancedDataExporter` (academic export)
+- ✅ USE: `scripts/production/execute_experiment_definition.py` (experiments)
+
+### Rule 4: Build in Experimental First
+- ✅ New development starts in `experimental/prototypes/`
+- ❌ NEVER create files directly in `src/` without experimental testing
+
+### Rule 5: Enhance Don't Replace
+- ✅ FIRST: Try to enhance existing production systems
+- ❌ AVOID: Building new systems that duplicate functionality
+
+## 🔍 SEARCH STRATEGY
+
+### ALWAYS Search These (Production):
+- `src/narrative_gravity/` - Core production code
+- `scripts/production/` - Production scripts
+- `docs/specifications/` - Production docs
+
+### CONDITIONAL Search (Experimental):
+- `experimental/` - Only when explicitly asked about experimental work
+- `sandbox/` - Only for specific research
+
+### NEVER Search (Deprecated):
+- `deprecated/` - Obsolete code
+- Files with `# DEPRECATED` comments
+- `archive/` directories
+
+## 🛡️ COMPLIANCE VALIDATION
+
+Before suggesting code changes, consider running:
+```bash
+python3 scripts/production/validate_ai_assistant_compliance.py --check-suggestion "your suggestion"
+```
+
+## 📚 REQUIRED FILES TO REFERENCE
+
+1. `.ai_assistant_rules.md` - Complete rule set
+2. `docs/EXISTING_SYSTEMS_INVENTORY.md` - What already exists
+3. `docs/CODE_ORGANIZATION_STANDARDS.md` - Code organization
+4. `DEVELOPMENT.md` - Development guide
+
+## 🎯 SUCCESS CRITERIA
+
+You are following rules correctly if you:
+- ✅ Search production systems before suggesting development
+- ✅ Reference existing production systems when available
+- ✅ Suggest experimental development for new features
+- ✅ Recommend enhancing over rebuilding
+- ✅ Never reference deprecated systems
+
+## ❌ COMMON VIOLATIONS TO AVOID
+
+- Suggesting "build new QA system" → Use existing LLMQualityAssuranceSystem
+- Mentioning "AI Academic Advisor" → Use production QA systems
+- Creating files in `src/` directly → Use experimental/ first
+- Building without searching → Always search first
+
+Remember: These rules exist because this project repeatedly rebuilt inferior versions of existing sophisticated systems. Following these rules prevents that waste. 

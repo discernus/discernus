@@ -1,0 +1,9 @@
+analysis_id,text_id,framework,model,success,api_cost,duration_seconds,quality_score,narrative_position_x,narrative_position_y,timestamp,well_dignity,well_tribalism
+f1e3752e-4749-45c4-9095-b0d3f1155355,text_0,iditi,unknown,True,0.0065,4.82,0.8,0.0,0.0,2025-06-17T14:12:10.195511,0.3,0.3
+1ff324a4-3d55-4784-a28a-53bddca35abf,text_1,iditi,unknown,True,0.0069,8.79,0.8,0.0,0.0,2025-06-17T14:12:10.197483,0.3,0.3
+6d121f53-fde1-4a12-b4e3-c133efa9a86e,text_2,iditi,unknown,True,0.0104,9.6,0.8,0.0,0.0,2025-06-17T14:12:10.201274,0.3,0.3
+0cfb35e2-832c-4114-9edb-b4ee535a64f3,text_3,iditi,unknown,True,0.0097,4.82,0.8,0.0,0.0,2025-06-17T14:12:10.201655,0.3,0.3
+6886552a-dde3-4fe0-a165-858edf422613,text_4,iditi,unknown,True,0.0141,10.22,0.8,0.0,0.0,2025-06-17T14:12:10.203737,0.3,0.3
+3584147a-1d32-442a-ba17-fa5c5ac41c27,text_5,iditi,unknown,True,0.0085,5.45,0.8,0.0,0.0,2025-06-17T14:12:10.204090,0.3,0.3
+d3bc3b38-76d0-4185-9c14-96420cc6d255,text_6,iditi,unknown,True,0.0081,12.82,0.8,0.0,0.0,2025-06-17T14:12:10.204349,0.3,0.3
+cf0f8bcb-a766-45db-b4cb-1bccac962897,text_7,iditi,unknown,True,0.0095,5.59,0.8,0.0,0.0,2025-06-17T14:12:10.205456,0.3,0.3

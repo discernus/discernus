@@ -1,0 +1,20 @@
+{
+  "experiment_path": "experiments/IDITI_Small_Validation_Study_20250617_141734",
+  "validation_timestamp": "2025-06-17T14:18:00.414746",
+  "compliance_level": "FULLY_COMPLIANT",
+  "compliance_score": 100.0,
+  "violations": [],
+  "warnings": [],
+  "checks_passed": [
+    "\u2705 Framework boundary compliance: iditi has exactly 2 wells as expected",
+    "\u2705 Production visualization engine signatures found",
+    "\u2705 Framework-aware data extraction patterns found",
+    "\u2705 Required directory structure present",
+    "\u2705 Expected file naming conventions followed",
+    "\u2705 HTML report statistical tests count appears accurate",
+    "\u2705 HTML report visualization count appears accurate",
+    "\u2705 No framework loading errors detected in logs",
+    "\u2705 Visualization files appear to have reasonable complexity"
+  ],
+  "total_checks": 9
+}

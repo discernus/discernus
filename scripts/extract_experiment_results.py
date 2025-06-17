@@ -56,29 +56,75 @@ class ExperimentResultsExtractor:
         else:
             self.production_db_available = False
         
+    def _get_framework_wells(self, framework_name: str) -> List[str]:
+        """Get the list of wells defined for a specific framework."""
+        try:
+            # Load framework directly from file system (FrameworkManager doesn't have load_framework method)
+            framework_path = Path("frameworks") / framework_name / "framework_consolidated.json"
+            
+            if framework_path.exists():
+                with open(framework_path, 'r') as f:
+                    framework_data = json.load(f)
+                
+                # Extract wells from dipoles
+                wells = []
+                dipoles = framework_data.get('dipoles', [])
+                for dipole in dipoles:
+                    if isinstance(dipole, dict):
+                        if 'positive' in dipole and 'name' in dipole['positive']:
+                            wells.append(dipole['positive']['name'])
+                        if 'negative' in dipole and 'name' in dipole['negative']:
+                            wells.append(dipole['negative']['name'])
+                
+                logger.info(f"✅ Loaded {len(wells)} wells for {framework_name}: {wells}")
+                return wells
+            
+            # Fallback to old format
+            framework_dir = Path("frameworks") / framework_name
+            dipoles_file = framework_dir / "dipoles.json"
+            
+            if dipoles_file.exists():
+                with open(dipoles_file, 'r') as f:
+                    dipoles_data = json.load(f)
+                
+                wells = []
+                dipoles = dipoles_data.get('dipoles', [])
+                for dipole in dipoles:
+                    if isinstance(dipole, dict):
+                        if 'positive' in dipole and 'name' in dipole['positive']:
+                            wells.append(dipole['positive']['name'])
+                        if 'negative' in dipole and 'name' in dipole['negative']:
+                            wells.append(dipole['negative']['name'])
+                
+                logger.info(f"✅ Loaded {len(wells)} wells for {framework_name} (legacy): {wells}")
+                return wells
+            
+            logger.warning(f"Framework {framework_name} has no configuration files")
+            return []
+            
+        except Exception as e:
+            logger.warning(f"Could not load framework {framework_name}: {e}")
+            return []
+
     def extract_results(self, execution_results: Dict) -> Dict:
         """
-        Extract and structure experiment results for enhanced analysis pipeline.
+        Extract and structure experiment results for enhanced analysis.
         
         Args:
-            execution_results: Dictionary containing execution summary from orchestrator
+            execution_results: Raw experiment execution results
             
         Returns:
-            Dictionary containing structured results for statistical analysis
+            Dictionary containing structured data and metadata
         """
+        logger.info("📊 Processing execution results for enhanced analysis...")
+        
         try:
-            # Extract experiment metadata from execution results
-            total_analyses = execution_results.get('total_analyses', 0)
-            successful_analyses = execution_results.get('successful_analyses', 0)
             results_list = execution_results.get('results', [])
+            total_analyses = len(results_list)
+            successful_analyses = len([r for r in results_list if r.get('success', False)])
             
-            logger.info(f"📊 Processing {len(results_list)} results for enhanced analysis")
+            logger.info(f"📊 Processing {total_analyses} analyses...")
             
-            if not results_list:
-                logger.warning("No results to process")
-                return {'structured_data': pd.DataFrame(), 'metadata': {}}
-            
-            # Convert results list to structured data
             structured_data = []
             
             for i, result in enumerate(results_list):
@@ -88,11 +134,15 @@ class ExperimentResultsExtractor:
                     if not well_scores and 'raw_scores' in result:
                         well_scores = result['raw_scores']
                     
+                    # Get framework-specific wells
+                    framework_name = result.get('framework', 'unknown')
+                    framework_wells = self._get_framework_wells(framework_name)
+                    
                     # Create structured record
                     record = {
                         'analysis_id': result.get('analysis_id', f'analysis_{i}'),
                         'text_id': result.get('text_id', f'text_{i}'),
-                        'framework': result.get('framework', 'unknown'),
+                        'framework': framework_name,
                         'model': result.get('llm_model', 'unknown'),
                         'success': result.get('success', True),
                         'api_cost': result.get('api_cost', 0.0),
@@ -103,11 +153,27 @@ class ExperimentResultsExtractor:
                         'timestamp': result.get('timestamp', pd.Timestamp.now().isoformat())
                     }
                     
-                    # Add well scores as separate columns
-                    for well_name, score in well_scores.items():
-                        # Clean well name for column usage
-                        clean_well_name = well_name.lower().replace(' ', '_').replace('-', '_')
-                        record[f'well_{clean_well_name}'] = score
+                    # Add well scores ONLY for wells defined in the framework
+                    if framework_wells:
+                        for well_name in framework_wells:
+                            # Look for the well score in various formats
+                            score = None
+                            if well_name in well_scores:
+                                score = well_scores[well_name]
+                            elif well_name.lower() in well_scores:
+                                score = well_scores[well_name.lower()]
+                            elif well_name.title() in well_scores:
+                                score = well_scores[well_name.title()]
+                            
+                            if score is not None:
+                                clean_well_name = well_name.lower().replace(' ', '_').replace('-', '_')
+                                record[f'well_{clean_well_name}'] = score
+                    else:
+                        # Fallback: if no framework wells defined, extract all
+                        logger.warning(f"No framework wells defined for {framework_name}, extracting all scores")
+                        for well_name, score in well_scores.items():
+                            clean_well_name = well_name.lower().replace(' ', '_').replace('-', '_')
+                            record[f'well_{clean_well_name}'] = score
                     
                     structured_data.append(record)
                     
@@ -118,6 +184,9 @@ class ExperimentResultsExtractor:
             # Convert to DataFrame
             df = pd.DataFrame(structured_data)
             
+            # Get framework-aware well columns
+            well_columns = [col for col in df.columns if col.startswith('well_')]
+            
             # Create metadata summary
             metadata = {
                 'total_analyses': total_analyses,
@@ -126,12 +195,12 @@ class ExperimentResultsExtractor:
                 'total_cost': execution_results.get('total_cost', 0.0),
                 'cost_efficiency': execution_results.get('cost_efficiency', 0.0),
                 'extraction_timestamp': pd.Timestamp.now().isoformat(),
-                'well_columns': [col for col in df.columns if col.startswith('well_')],
+                'well_columns': well_columns,
                 'frameworks_used': df['framework'].unique().tolist() if 'framework' in df.columns else [],
                 'models_used': df['model'].unique().tolist() if 'model' in df.columns else []
             }
             
-            logger.info(f"✅ Structured {len(df)} records with {len(metadata['well_columns'])} wells")
+            logger.info(f"✅ Structured {len(df)} records with {len(metadata['well_columns'])} framework-defined wells")
             
             return {
                 'structured_data': df,

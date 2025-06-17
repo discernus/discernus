@@ -24,7 +24,7 @@
     "trump_nh_poison.txt": {
       "hash": "fc49ed2329270ddf01d7823ab78b28eadac6b739a28993f5e5bb0d30cb94e470",
       "size_bytes": 944,
-      "last_updated": "2025-06-17T09:02:40.058669"
+      "last_updated": "2025-06-17T14:17:05.745886"
     },
     "vance_nat_con.txt": {
       "hash": "7bef0e681fbbbb0c029b4455103d2dbb4eb02f94048c1529eb61c27f4380b199",
@@ -32,5 +32,5 @@
       "last_updated": "2025-06-17T00:34:17.847671"
     }
   },
-  "manifest_updated": "2025-06-17T09:02:40.058674"
+  "manifest_updated": "2025-06-17T14:17:05.745888"
 }

@@ -1,24 +1,11 @@
 {
-  "generation_timestamp": "2025-06-17T10:04:19.455630",
-  "total_files": 8,
-  "visualizations": {
-    "descriptive_analysis": "experiment_reports/analysis/test_visualizations/descriptive_analysis.png",
+  "generation_timestamp": "2025-06-17T17:54:50.303514",
+  "visualization_engine": "NarrativeGravityVisualizationEngine (Production)",
+  "theme": "academic",
+  "files_generated": {
     "hypothesis_testing": "experiment_reports/analysis/test_visualizations/hypothesis_testing_results.png",
     "reliability_analysis": "experiment_reports/analysis/test_visualizations/reliability_analysis.png",
-    "correlation_matrix": "experiment_reports/analysis/test_visualizations/correlation_matrix.png",
-    "score_distributions": "experiment_reports/analysis/test_visualizations/score_distributions.png",
-    "narrative_gravity_map": "experiment_reports/analysis/test_visualizations/narrative_gravity_map.png",
-    "well_scores_radar": "experiment_reports/analysis/test_visualizations/well_scores_radar.png",
-    "interactive_dashboard": "experiment_reports/analysis/test_visualizations/interactive_dashboard.html"
+    "score_distributions": "experiment_reports/analysis/test_visualizations/score_distributions.png"
   },
-  "descriptions": {
-    "descriptive_analysis": "Box plots, violin plots, and mean comparisons of well scores",
-    "hypothesis_testing": "Visual summaries of statistical hypothesis testing results",
-    "reliability_analysis": "ICC values and coefficient of variation analysis",
-    "correlation_matrix": "Correlation heatmap between all well scores",
-    "score_distributions": "Histograms showing distribution of each well score",
-    "narrative_gravity_map": "Scatter plot of narrative positioning coordinates",
-    "well_scores_radar": "Radar chart comparing mean well scores",
-    "interactive_dashboard": "Interactive Plotly dashboard with multiple views"
-  }
+  "total_files": 3
 }

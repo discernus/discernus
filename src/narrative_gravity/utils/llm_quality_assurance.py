@@ -3,6 +3,11 @@
 LLM Quality Assurance System
 ============================
 
+🚨 AI ASSISTANT WARNING: This is the PRODUCTION quality assurance system.
+❌ DO NOT build new QA systems - enhance this one instead!
+❌ DO NOT use "AI Academic Advisor" (deprecated file-checking in deprecated/)
+✅ USE THIS: LLMQualityAssuranceSystem (production 6-layer validation)
+
 Multi-layered validation system for LLM analysis results to prevent silent failures
 and artificial precision. Implements "virtual eyes on" principle with systematic
 quality checks and confidence scoring.

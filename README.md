@@ -407,3 +407,31 @@ This project is proprietary software. No part of this software may be reproduced
 ---
 
 **🎯 Research Focus**: This platform prioritizes robust academic methodology over user interface polish. All frontend development has been archived to focus resources on core research capabilities, statistical validation, and publication preparation.
+
+## 🚨 **BEFORE BUILDING ANYTHING NEW**
+
+**Rule: Search production code first, build in experimental!**
+
+```bash
+# ALWAYS run this before starting any new development:
+python3 scripts/production/check_existing_systems.py "your functionality description"
+
+# Check the production systems inventory:
+cat docs/EXISTING_SYSTEMS_INVENTORY.md
+
+# Check clean code organization standards:
+cat docs/CODE_ORGANIZATION_STANDARDS.md
+```
+
+**Why?** This project has repeatedly built inferior versions of existing sophisticated systems. Example: Built "AI Academic Advisor" (file existence checks) to replace LLMQualityAssuranceSystem (6-layer mathematical validation).
+
+**🏗️ New Clean Organization**:
+- ✅ **Production**: `src/`, `scripts/production/`, `docs/specifications/` (stable, tested, documented)
+- 🧪 **Experimental**: `experimental/`, `sandbox/` (iteration, prototypes, testing)  
+- 🗑️ **Deprecated**: `deprecated/` (obsolete code - avoid using)
+
+**🔄 Development Workflow**:
+1. **Search first**: Use production search tool to find existing systems
+2. **Enhance existing**: Improve production code rather than rebuilding
+3. **Build in experimental**: New development starts in `experimental/`
+4. **Promote when ready**: Move to production with quality checks

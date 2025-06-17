@@ -1,0 +1,21 @@
+{
+  "experiment_path": "experiments/IDITI_Small_Validation_Study_20250617_141338",
+  "validation_timestamp": "2025-06-17T14:16:48.405833",
+  "compliance_level": "NON_COMPLIANT",
+  "compliance_score": 77.77777777777779,
+  "violations": [
+    "Content quality violation: HTML reports 0 statistical tests but 3 were actually performed",
+    "Content quality violation: HTML reports 0 visualizations but 3 PNG files exist"
+  ],
+  "warnings": [],
+  "checks_passed": [
+    "\u2705 Framework boundary compliance: iditi has exactly 2 wells as expected",
+    "\u2705 Production visualization engine signatures found",
+    "\u2705 Framework-aware data extraction patterns found",
+    "\u2705 Required directory structure present",
+    "\u2705 Expected file naming conventions followed",
+    "\u2705 No framework loading errors detected in logs",
+    "\u2705 Visualization files appear to have reasonable complexity"
+  ],
+  "total_checks": 9
+}

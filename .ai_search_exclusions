@@ -1,0 +1,44 @@
+# AI Assistant Search Exclusions
+# These patterns should be avoided in AI assistant codebase searches
+# to prevent using deprecated, experimental, or obsolete code
+
+# Deprecated code (never use)
+deprecated/
+**/deprecated/**
+**/archive/**
+*.bak
+*_old*
+*_backup*
+
+# Experimental code (conditional use only)
+experimental/**
+sandbox/**
+tmp/**
+temp/**
+
+# Test and development debris
+**/*test*
+**/*demo*
+**/*temp*
+**/*tmp*
+
+# Known problematic patterns
+# DEPRECATED
+# TODO: Remove
+# OBSOLETE
+# NOT WORKING
+# BROKEN
+
+# Specific deprecated systems
+architectural_compliance_validator.py
+AI Academic Advisor
+
+# Log and cache files
+logs/**
+*.log
+**/__pycache__/**
+.git/**
+
+# Large data files that confuse searches
+corpus/processed/**
+exports/** 

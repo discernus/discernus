@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Comprehensive Visualization Generator for Narrative Gravity Analysis
-Creates publication-ready visualizations for statistical analysis and reliability metrics
+Framework-Aware Visualization Generator for Narrative Gravity Analysis
+Uses production NarrativeGravityVisualizationEngine for consistent, theme-aware visualizations
 """
 
 import pandas as pd
@@ -15,30 +15,40 @@ import logging
 from typing import Dict, List, Tuple, Any, Optional
 from pathlib import Path
 import json
+import sys
 import warnings
 warnings.filterwarnings('ignore')
+
+# Add src to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+from narrative_gravity.visualization.engine import NarrativeGravityVisualizationEngine
+from narrative_gravity.framework_manager import FrameworkManager
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Set style for matplotlib
-plt.style.use('seaborn-v0_8')
-sns.set_palette("husl")
-
 class VisualizationGenerator:
-    """Comprehensive visualization generator for narrative gravity analysis."""
+    """Framework-aware visualization generator using production visualization engine."""
     
     def __init__(self, output_dir: str = "experiment_reports/analysis/visualizations"):
-        """Initialize the visualization generator."""
+        """Initialize the visualization generator with production engine."""
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.generated_files = {}
         
+        # Initialize production systems
+        self.viz_engine = NarrativeGravityVisualizationEngine(theme='academic')
+        self.framework_manager = FrameworkManager()
+        
+        logger.info(f"✅ Initialized visualization generator with production engine")
+        logger.info(f"📊 Theme: {self.viz_engine.theme_name}")
+        
     def generate_visualizations(self, structured_results: Dict, statistical_results: Dict, 
                               reliability_results: Dict) -> Dict[str, Any]:
         """
-        Generate comprehensive visualizations for all analysis results.
+        Generate comprehensive visualizations using production visualization engine.
         
         Args:
             structured_results: Structured experiment data
@@ -55,79 +65,329 @@ class VisualizationGenerator:
             logger.error("No structured data available for visualization")
             return {'error': 'No data available'}
         
+        # Get framework information
+        frameworks_used = df['framework'].unique() if 'framework' in df.columns else ['unknown']
+        primary_framework = frameworks_used[0] if len(frameworks_used) > 0 else 'unknown'
+        
+        # Load framework definition for well structure
+        framework_wells = self._get_framework_wells(primary_framework)
         well_columns = [col for col in df.columns if col.startswith('well_')]
         
-        # Generate different types of visualizations
+        logger.info(f"📊 Generating visualizations for {primary_framework} framework")
+        logger.info(f"🎯 Framework wells: {framework_wells}")
+        logger.info(f"📈 Data wells: {[col.replace('well_', '') for col in well_columns]}")
+        
+        # Generate different types of visualizations using production engine
         viz_results = {
-            'descriptive_plots': self.create_descriptive_plots(df, well_columns),
+            'descriptive_plots': self.create_descriptive_plots(df, well_columns, primary_framework),
             'hypothesis_plots': self.create_hypothesis_plots(statistical_results),
             'reliability_plots': self.create_reliability_plots(reliability_results),
-            'correlation_plots': self.create_correlation_plots(df, well_columns),
+            'correlation_plots': self.create_framework_correlation_plots(df, well_columns, primary_framework),
             'distribution_plots': self.create_distribution_plots(df, well_columns),
-            'narrative_gravity_plots': self.create_narrative_gravity_plots(df, well_columns),
-            'interactive_dashboard': self.create_interactive_dashboard(df, well_columns, statistical_results),
+            'narrative_gravity_plots': self.create_production_narrative_plots(df, well_columns, primary_framework),
+            'interactive_dashboard': self.create_production_dashboard(df, well_columns, statistical_results, primary_framework),
             'generated_files': self.generated_files
         }
         
-        logger.info(f"✅ Generated {len(self.generated_files)} visualization files")
+        logger.info(f"✅ Generated {len(self.generated_files)} visualization files using production engine")
         return viz_results
-    
-    def create_descriptive_plots(self, df: pd.DataFrame, well_columns: List[str]) -> Dict[str, str]:
-        """Create descriptive statistical plots."""
-        logger.info("📊 Creating descriptive plots...")
+
+    def _get_framework_wells(self, framework_name: str) -> List[str]:
+        """Get the list of wells defined for a specific framework."""
+        try:
+            framework = self.framework_manager.load_framework(framework_name)
+            if hasattr(framework, 'wells') and framework.wells:
+                return list(framework.wells.keys())
+            elif hasattr(framework, 'dipoles'):
+                # Extract well names from dipoles
+                wells = []
+                for dipole in framework.dipoles:
+                    if hasattr(dipole, 'positive') and hasattr(dipole.positive, 'name'):
+                        wells.append(dipole.positive.name)
+                    if hasattr(dipole, 'negative') and hasattr(dipole.negative, 'name'):
+                        wells.append(dipole.negative.name)
+                return wells
+            else:
+                logger.warning(f"Framework {framework_name} has no defined wells")
+                return []
+        except Exception as e:
+            logger.warning(f"Could not load framework {framework_name}: {e}")
+            return []
+
+    def _prepare_framework_data(self, df: pd.DataFrame, well_columns: List[str], framework_name: str) -> Dict:
+        """Prepare data in format expected by production visualization engine."""
+        framework_wells = self._get_framework_wells(framework_name)
+        
+        # Build wells configuration for visualization engine
+        wells = {}
+        try:
+            framework = self.framework_manager.load_framework(framework_name)
+            
+            if hasattr(framework, 'wells') and framework.wells:
+                for well_name, well_config in framework.wells.items():
+                    wells[well_name] = {
+                        'angle': getattr(well_config, 'angle', 0),
+                        'type': getattr(well_config, 'type', 'integrative'),
+                        'weight': getattr(well_config, 'weight', 1.0)
+                    }
+            elif hasattr(framework, 'dipoles'):
+                # Build wells from dipoles
+                for dipole in framework.dipoles:
+                    if hasattr(dipole, 'positive'):
+                        wells[dipole.positive.name] = {
+                            'angle': getattr(dipole.positive, 'angle', 90),
+                            'type': 'integrative',
+                            'weight': getattr(dipole.positive, 'weight', 1.0)
+                        }
+                    if hasattr(dipole, 'negative'):
+                        wells[dipole.negative.name] = {
+                            'angle': getattr(dipole.negative, 'angle', 270),
+                            'type': 'disintegrative', 
+                            'weight': getattr(dipole.negative, 'weight', -1.0)
+                        }
+        except Exception as e:
+            logger.warning(f"Could not load framework configuration for {framework_name}: {e}")
+        
+        return wells
+
+    def create_production_narrative_plots(self, df: pd.DataFrame, well_columns: List[str], 
+                                        framework_name: str) -> Dict[str, str]:
+        """Create narrative gravity plots using production visualization engine."""
+        logger.info("🌌 Creating narrative gravity plots with production engine...")
         
         plots = {}
         
-        # 1. Well scores distribution
-        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('Well Scores Distribution Analysis', fontsize=16, fontweight='bold')
+        # Prepare framework configuration
+        wells = self._prepare_framework_data(df, well_columns, framework_name)
         
-        # Box plot
-        if len(well_columns) > 0:
-            well_data = df[well_columns].dropna()
-            axes[0, 0].boxplot([well_data[col].dropna() for col in well_columns], 
-                              labels=[col.replace('well_', '') for col in well_columns])
-            axes[0, 0].set_title('Well Scores Distribution')
-            axes[0, 0].set_ylabel('Score')
-            axes[0, 0].tick_params(axis='x', rotation=45)
+        if not wells:
+            logger.warning("No framework wells configuration available")
+            return plots
         
-        # Violin plot
-        if len(well_columns) > 0:
-            well_data_melted = pd.melt(df[well_columns], var_name='Well', value_name='Score')
-            well_data_melted['Well'] = well_data_melted['Well'].str.replace('well_', '')
-            sns.violinplot(data=well_data_melted, x='Well', y='Score', ax=axes[0, 1])
-            axes[0, 1].set_title('Well Scores Density Distribution')
-            axes[0, 1].tick_params(axis='x', rotation=45)
-        
-        # Mean scores by well
-        if len(well_columns) > 0:
-            means = [df[col].mean() for col in well_columns]
-            stds = [df[col].std() for col in well_columns]
-            well_names = [col.replace('well_', '') for col in well_columns]
+        # Create multiple analyses for comparison
+        analyses = []
+        for i, row in df.iterrows():
+            # Extract narrative scores from row
+            narrative_scores = {}
+            for well_name in wells.keys():
+                well_col = f"well_{well_name.lower().replace(' ', '_').replace('-', '_')}"
+                if well_col in df.columns:
+                    narrative_scores[well_name] = row[well_col]
             
-            axes[1, 0].bar(well_names, means, yerr=stds, capsize=5, alpha=0.7)
-            axes[1, 0].set_title('Mean Well Scores with Standard Deviation')
-            axes[1, 0].set_ylabel('Mean Score')
-            axes[1, 0].tick_params(axis='x', rotation=45)
+            if narrative_scores:
+                analyses.append({
+                    'title': row.get('text_id', f'Analysis {i}'),
+                    'wells': wells,
+                    'scores': narrative_scores,
+                    'metadata': {
+                        'framework': framework_name,
+                        'model': row.get('model', 'unknown'),
+                        'cost': row.get('api_cost', 0.0)
+                    }
+                })
         
-        # Cost and quality analysis
-        if 'cost' in df.columns and 'quality_score' in df.columns:
-            scatter = axes[1, 1].scatter(df['cost'], df['quality_score'], alpha=0.6)
-            axes[1, 1].set_xlabel('API Cost ($)')
-            axes[1, 1].set_ylabel('Quality Score')
-            axes[1, 1].set_title('Cost vs Quality Analysis')
-        
-        plt.tight_layout()
-        
-        plot_file = self.output_dir / 'descriptive_analysis.png'
-        plt.savefig(plot_file, dpi=300, bbox_inches='tight')
-        plt.close()
-        
-        plots['descriptive_analysis'] = str(plot_file)
-        self.generated_files['descriptive_analysis'] = str(plot_file)
+        if analyses:
+            # Create single analysis visualization (first analysis)
+            single_fig = self.viz_engine.create_single_analysis(
+                wells=wells,
+                narrative_scores=analyses[0]['scores'],
+                title=f'{framework_name.upper()} Framework - {analyses[0]["title"]}',
+                show=False
+            )
+            
+            # Save single analysis
+            single_plot_file = self.output_dir / 'narrative_gravity_map.png'
+            single_fig.write_image(str(single_plot_file), width=1200, height=800)
+            plots['narrative_gravity_map'] = str(single_plot_file)
+            self.generated_files['narrative_gravity_map'] = str(single_plot_file)
+            
+            # Create comparative analysis if multiple analyses
+            if len(analyses) > 1:
+                # Take first few for comparison to avoid clutter
+                comparison_analyses = analyses[:min(6, len(analyses))]
+                
+                comp_fig = self.viz_engine.create_comparative_analysis(
+                    analyses=comparison_analyses,
+                    title=f'{framework_name.upper()} Framework - Comparative Analysis',
+                    show=False
+                )
+                
+                comp_plot_file = self.output_dir / 'comparative_narrative_analysis.png'
+                comp_fig.write_image(str(comp_plot_file), width=1600, height=1000)
+                plots['comparative_analysis'] = str(comp_plot_file)
+                self.generated_files['comparative_analysis'] = str(comp_plot_file)
         
         return plots
-    
+
+    def create_framework_correlation_plots(self, df: pd.DataFrame, well_columns: List[str], 
+                                         framework_name: str) -> Dict[str, str]:
+        """Create correlation matrix showing only framework-defined wells."""
+        logger.info("🔗 Creating framework-aware correlation plots...")
+        
+        plots = {}
+        
+        if len(well_columns) < 2:
+            return plots
+        
+        # Get framework wells to filter correlation matrix
+        framework_wells = self._get_framework_wells(framework_name)
+        
+        # Filter well columns to only framework-defined wells
+        filtered_well_columns = []
+        for well_name in framework_wells:
+            well_col = f"well_{well_name.lower().replace(' ', '_').replace('-', '_')}"
+            if well_col in well_columns:
+                filtered_well_columns.append(well_col)
+        
+        if len(filtered_well_columns) >= 2:
+            well_data = df[filtered_well_columns].dropna()
+            if not well_data.empty:
+                correlation_matrix = well_data.corr()
+                
+                # Create correlation heatmap with framework styling
+                plt.figure(figsize=(10, 8))
+                mask = np.triu(np.ones_like(correlation_matrix, dtype=bool))
+                sns.heatmap(correlation_matrix, mask=mask, annot=True, cmap='RdBu_r', center=0,
+                           square=True, linewidths=0.5, cbar_kws={"shrink": .8})
+                plt.title(f'{framework_name.upper()} Framework - Well Scores Correlation Matrix', 
+                         fontsize=14, fontweight='bold')
+                
+                # Clean up labels to show framework well names
+                labels = []
+                for col in filtered_well_columns:
+                    well_name = col.replace('well_', '')
+                    # Try to find the original well name in framework
+                    for fw_well in framework_wells:
+                        if fw_well.lower().replace(' ', '_').replace('-', '_') == well_name:
+                            labels.append(fw_well)
+                            break
+                    else:
+                        labels.append(well_name)
+                
+                plt.xticks(range(len(labels)), labels, rotation=45, ha='right')
+                plt.yticks(range(len(labels)), labels, rotation=0)
+                
+                plt.tight_layout()
+                
+                plot_file = self.output_dir / 'correlation_matrix.png'
+                plt.savefig(plot_file, dpi=300, bbox_inches='tight')
+                plt.close()
+                
+                plots['correlation_matrix'] = str(plot_file)
+                self.generated_files['correlation_matrix'] = str(plot_file)
+        
+        return plots
+
+    def create_production_dashboard(self, df: pd.DataFrame, well_columns: List[str], 
+                                  statistical_results: Dict, framework_name: str) -> Dict[str, str]:
+        """Create interactive dashboard using production visualization components."""
+        logger.info("🎮 Creating interactive dashboard with production components...")
+        
+        plots = {}
+        
+        # Prepare framework data
+        wells = self._prepare_framework_data(df, well_columns, framework_name)
+        
+        if not wells:
+            logger.warning("No framework configuration for dashboard")
+            return plots
+        
+        # Create dashboard with production engine
+        try:
+            # Prepare analyses for dashboard
+            analyses = []
+            for i, row in df.iterrows():
+                narrative_scores = {}
+                for well_name in wells.keys():
+                    well_col = f"well_{well_name.lower().replace(' ', '_').replace('-', '_')}"
+                    if well_col in df.columns:
+                        narrative_scores[well_name] = row[well_col]
+                
+                if narrative_scores:
+                    analyses.append({
+                        'title': row.get('text_id', f'Analysis {i}'),
+                        'wells': wells,
+                        'scores': narrative_scores
+                    })
+            
+            if analyses:
+                # Create dashboard HTML
+                dashboard_fig = self.viz_engine.create_comparative_analysis(
+                    analyses=analyses[:10],  # Limit for performance
+                    title=f'{framework_name.upper()} Framework - Interactive Dashboard',
+                    show=False
+                )
+                
+                dashboard_file = self.output_dir / 'interactive_dashboard.html'
+                dashboard_fig.write_html(str(dashboard_file))
+                
+                plots['interactive_dashboard'] = str(dashboard_file)
+                self.generated_files['interactive_dashboard'] = str(dashboard_file)
+        
+        except Exception as e:
+            logger.warning(f"Could not create production dashboard: {e}")
+        
+        return plots
+
+    # Keep minimal custom plots for statistical results that don't have production equivalents
+    def create_descriptive_plots(self, df: pd.DataFrame, well_columns: List[str], framework_name: str) -> Dict[str, str]:
+        """Create minimal descriptive plots for statistical overview."""
+        logger.info("📊 Creating descriptive plots...")
+        
+        plots = {}
+        framework_wells = self._get_framework_wells(framework_name)
+        
+        # Filter to framework wells only
+        filtered_well_columns = []
+        for well_name in framework_wells:
+            well_col = f"well_{well_name.lower().replace(' ', '_').replace('-', '_')}"
+            if well_col in well_columns:
+                filtered_well_columns.append(well_col)
+        
+        if filtered_well_columns:
+            fig, axes = plt.subplots(1, 2, figsize=(15, 6))
+            fig.suptitle(f'{framework_name.upper()} Framework - Descriptive Analysis', fontsize=14, fontweight='bold')
+            
+            # Well means with proper framework labels
+            well_data = df[filtered_well_columns].dropna()
+            if not well_data.empty:
+                means = [well_data[col].mean() for col in filtered_well_columns]
+                stds = [well_data[col].std() for col in filtered_well_columns]
+                
+                # Get proper well names
+                well_names = []
+                for col in filtered_well_columns:
+                    well_name = col.replace('well_', '')
+                    for fw_well in framework_wells:
+                        if fw_well.lower().replace(' ', '_').replace('-', '_') == well_name:
+                            well_names.append(fw_well)
+                            break
+                    else:
+                        well_names.append(well_name)
+                
+                axes[0].bar(well_names, means, yerr=stds, capsize=5, alpha=0.7)
+                axes[0].set_title(f'Mean Well Scores ({framework_name})')
+                axes[0].set_ylabel('Mean Score')
+                axes[0].tick_params(axis='x', rotation=45)
+            
+            # Cost and quality analysis
+            if 'api_cost' in df.columns and 'quality_score' in df.columns:
+                axes[1].scatter(df['api_cost'], df['quality_score'], alpha=0.6)
+                axes[1].set_xlabel('API Cost ($)')
+                axes[1].set_ylabel('Quality Score')
+                axes[1].set_title('Cost vs Quality Analysis')
+            
+            plt.tight_layout()
+            
+            plot_file = self.output_dir / 'descriptive_analysis.png'
+            plt.savefig(plot_file, dpi=300, bbox_inches='tight')
+            plt.close()
+            
+            plots['descriptive_analysis'] = str(plot_file)
+            self.generated_files['descriptive_analysis'] = str(plot_file)
+        
+        return plots
+
     def create_hypothesis_plots(self, statistical_results: Dict) -> Dict[str, str]:
         """Create plots for hypothesis testing results."""
         logger.info("🎯 Creating hypothesis testing plots...")
@@ -139,71 +399,41 @@ class VisualizationGenerator:
         
         hypothesis_data = statistical_results['hypothesis_testing']
         
-        # Create hypothesis summary plot
-        fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-        fig.suptitle('Hypothesis Testing Results Summary', fontsize=16, fontweight='bold')
+        # Create minimal hypothesis summary
+        fig, ax = plt.subplots(1, 1, figsize=(10, 6))
+        fig.suptitle('Hypothesis Testing Results Summary', fontsize=14, fontweight='bold')
         
-        # H1: Discriminative Validity
-        h1_results = hypothesis_data.get('H1_discriminative_validity', {})
-        if h1_results.get('tests_performed'):
-            test_names = []
-            p_values = []
-            significance = []
-            
-            for test in h1_results['tests_performed']:
-                test_names.append(test.get('comparison', 'Test'))
-                p_values.append(test.get('p_value', 1.0))
-                significance.append('Significant' if test.get('significant', False) else 'Not Significant')
-            
-            colors = ['green' if sig == 'Significant' else 'red' for sig in significance]
-            axes[0].bar(range(len(test_names)), p_values, color=colors, alpha=0.7)
-            axes[0].axhline(y=0.05, color='red', linestyle='--', alpha=0.5, label='α = 0.05')
-            axes[0].set_title('H1: Discriminative Validity\np-values')
-            axes[0].set_ylabel('p-value')
-            axes[0].set_yscale('log')
-            axes[0].legend()
+        # Collect hypothesis results
+        hypothesis_names = []
+        statuses = []
         
-        # H2: Ideological Agnosticism
-        h2_results = hypothesis_data.get('H2_ideological_agnosticism', {})
-        if h2_results.get('tests_performed'):
-            well_names = []
-            p_values = []
-            effect_sizes = []
-            
-            for test in h2_results['tests_performed']:
-                well_names.append(test.get('well', 'Well').replace('well_', ''))
-                p_values.append(test.get('p_value', 1.0))
-                effect_sizes.append(test.get('effect_size', 0.0))
-            
-            # Scatter plot of p-values vs effect sizes
-            scatter = axes[1].scatter(effect_sizes, p_values, alpha=0.7, s=60)
-            axes[1].axhline(y=0.05, color='red', linestyle='--', alpha=0.5, label='α = 0.05')
-            axes[1].set_xlabel('Effect Size')
-            axes[1].set_ylabel('p-value')
-            axes[1].set_title('H2: Ideological Agnosticism\nEffect Size vs p-value')
-            axes[1].set_yscale('log')
-            axes[1].legend()
+        for h_name, h_results in hypothesis_data.items():
+            if isinstance(h_results, dict):
+                hypothesis_names.append(h_name.replace('_', ' ').title())
+                status = h_results.get('status', 'unknown')
+                statuses.append(status)
         
-        # H3: Ground Truth Alignment
-        h3_results = hypothesis_data.get('H3_ground_truth_alignment', {})
-        if h3_results.get('tests_performed'):
-            text_ids = []
-            scores = []
-            meets_threshold = []
+        if hypothesis_names:
+            # Color code by status
+            colors = []
+            for status in statuses:
+                if status == 'supported':
+                    colors.append('green')
+                elif status == 'insufficient_data':
+                    colors.append('orange')
+                else:
+                    colors.append('red')
             
-            for test in h3_results['tests_performed']:
-                text_ids.append(test.get('text_id', 'Text')[:20])  # Truncate for display
-                scores.append(test.get('score', 0.0))
-                meets_threshold.append(test.get('meets_threshold', False))
+            ax.bar(hypothesis_names, [1] * len(hypothesis_names), color=colors, alpha=0.7)
+            ax.set_title('Hypothesis Testing Status')
+            ax.set_ylabel('Status')
+            ax.set_ylim(0, 1.2)
+            ax.tick_params(axis='x', rotation=45)
             
-            colors = ['green' if meets else 'red' for meets in meets_threshold]
-            bars = axes[2].bar(range(len(text_ids)), scores, color=colors, alpha=0.7)
-            axes[2].axhline(y=0.8, color='red', linestyle='--', alpha=0.5, label='Threshold = 0.8')
-            axes[2].set_title('H3: Ground Truth Alignment\nControl Text Performance')
-            axes[2].set_ylabel('Score')
-            axes[2].set_xticks(range(len(text_ids)))
-            axes[2].set_xticklabels(text_ids, rotation=45, ha='right')
-            axes[2].legend()
+            # Add status labels
+            for i, (name, status) in enumerate(zip(hypothesis_names, statuses)):
+                ax.text(i, 0.5, status.replace('_', ' ').title(), 
+                       ha='center', va='center', fontweight='bold', color='white')
         
         plt.tight_layout()
         
@@ -215,74 +445,19 @@ class VisualizationGenerator:
         self.generated_files['hypothesis_testing'] = str(plot_file)
         
         return plots
-    
+
     def create_reliability_plots(self, reliability_results: Dict) -> Dict[str, str]:
-        """Create plots for reliability analysis results."""
+        """Create minimal reliability plots."""
         logger.info("🔍 Creating reliability plots...")
         
         plots = {}
         
-        if not reliability_results or 'error' in reliability_results:
-            return plots
-        
-        # ICC Analysis Plot
-        icc_data = reliability_results.get('icc_analysis', {})
-        if icc_data:
-            fig, axes = plt.subplots(1, 2, figsize=(15, 6))
-            fig.suptitle('Interrater Reliability Analysis', fontsize=16, fontweight='bold')
-            
-            # ICC values by well
-            wells = []
-            icc_values = []
-            interpretations = []
-            
-            for well, icc_result in icc_data.items():
-                if icc_result.get('icc_value') is not None:
-                    wells.append(well.replace('well_', ''))
-                    icc_values.append(icc_result['icc_value'])
-                    interpretations.append(icc_result.get('interpretation', 'unknown'))
-            
-            if wells:
-                # Color code by interpretation
-                color_map = {'poor': 'red', 'moderate': 'orange', 'good': 'lightgreen', 'excellent': 'green'}
-                colors = [color_map.get(interp, 'gray') for interp in interpretations]
-                
-                bars = axes[0].bar(wells, icc_values, color=colors, alpha=0.7)
-                axes[0].axhline(y=0.5, color='red', linestyle='--', alpha=0.5, label='Poor threshold')
-                axes[0].axhline(y=0.75, color='orange', linestyle='--', alpha=0.5, label='Good threshold')
-                axes[0].axhline(y=0.9, color='green', linestyle='--', alpha=0.5, label='Excellent threshold')
-                axes[0].set_title('Intraclass Correlation Coefficients (ICC)')
-                axes[0].set_ylabel('ICC Value')
-                axes[0].set_ylim(0, 1.0)
-                axes[0].tick_params(axis='x', rotation=45)
-                axes[0].legend()
-                
-                # Add interpretation labels on bars
-                for bar, interp in zip(bars, interpretations):
-                    height = bar.get_height()
-                    axes[0].text(bar.get_x() + bar.get_width()/2., height + 0.01,
-                               interp.replace('_', ' ').title(),
-                               ha='center', va='bottom', fontsize=8, rotation=90)
-        
-        # Coefficient of Variation
-        cv_data = reliability_results.get('coefficient_of_variation', {})
-        if cv_data:
-            wells = []
-            cv_values = []
-            
-            for well, cv_result in cv_data.items():
-                wells.append(well.replace('well_', ''))
-                cv_values.append(cv_result['coefficient_of_variation'])
-            
-            if wells:
-                axes[1].bar(wells, cv_values, alpha=0.7, color='skyblue')
-                axes[1].set_title('Coefficient of Variation by Well')
-                axes[1].set_ylabel('CV (%)')
-                axes[1].tick_params(axis='x', rotation=45)
-                axes[1].axhline(y=20, color='orange', linestyle='--', alpha=0.5, label='Moderate variability')
-                axes[1].legend()
-        
-        plt.tight_layout()
+        # Simple reliability summary
+        plt.figure(figsize=(8, 6))
+        plt.text(0.5, 0.5, 'Reliability Analysis\n(See reliability_results.json for details)', 
+                ha='center', va='center', fontsize=14, transform=plt.gca().transAxes)
+        plt.title('Reliability Analysis Summary', fontsize=14, fontweight='bold')
+        plt.axis('off')
         
         plot_file = self.output_dir / 'reliability_analysis.png'
         plt.savefig(plot_file, dpi=300, bbox_inches='tight')
@@ -292,294 +467,44 @@ class VisualizationGenerator:
         self.generated_files['reliability_analysis'] = str(plot_file)
         
         return plots
-    
-    def create_correlation_plots(self, df: pd.DataFrame, well_columns: List[str]) -> Dict[str, str]:
-        """Create correlation matrix and related plots."""
-        logger.info("🔗 Creating correlation plots...")
-        
-        plots = {}
-        
-        if len(well_columns) < 2:
-            return plots
-        
-        # Correlation matrix
-        well_data = df[well_columns].dropna()
-        if not well_data.empty:
-            correlation_matrix = well_data.corr()
-            
-            # Create correlation heatmap
-            plt.figure(figsize=(12, 10))
-            mask = np.triu(np.ones_like(correlation_matrix, dtype=bool))
-            sns.heatmap(correlation_matrix, mask=mask, annot=True, cmap='coolwarm', center=0,
-                       square=True, linewidths=0.5, cbar_kws={"shrink": .8})
-            plt.title('Well Scores Correlation Matrix', fontsize=16, fontweight='bold')
-            
-            # Clean up labels
-            labels = [col.replace('well_', '') for col in well_columns]
-            plt.xticks(range(len(labels)), labels, rotation=45, ha='right')
-            plt.yticks(range(len(labels)), labels, rotation=0)
-            
-            plt.tight_layout()
-            
-            plot_file = self.output_dir / 'correlation_matrix.png'
-            plt.savefig(plot_file, dpi=300, bbox_inches='tight')
-            plt.close()
-            
-            plots['correlation_matrix'] = str(plot_file)
-            self.generated_files['correlation_matrix'] = str(plot_file)
-        
-        return plots
-    
+
     def create_distribution_plots(self, df: pd.DataFrame, well_columns: List[str]) -> Dict[str, str]:
-        """Create distribution analysis plots."""
+        """Create distribution plots (minimal version)."""
         logger.info("📈 Creating distribution plots...")
         
         plots = {}
         
-        if not well_columns:
-            return plots
-        
-        # Create distribution plots for each well
-        n_wells = len(well_columns)
-        n_cols = 4
-        n_rows = (n_wells + n_cols - 1) // n_cols
-        
-        fig, axes = plt.subplots(n_rows, n_cols, figsize=(16, 4 * n_rows))
-        fig.suptitle('Well Score Distributions', fontsize=16, fontweight='bold')
-        
-        if n_rows == 1:
-            axes = axes.reshape(1, -1)
-        
-        for i, well_col in enumerate(well_columns):
-            row = i // n_cols
-            col = i % n_cols
+        if well_columns:
+            # Simple summary plot
+            plt.figure(figsize=(10, 6))
+            plt.text(0.5, 0.5, f'Distribution Analysis\n{len(well_columns)} wells analyzed\n(See interactive dashboard for details)', 
+                    ha='center', va='center', fontsize=14, transform=plt.gca().transAxes)
+            plt.title('Score Distributions Summary', fontsize=14, fontweight='bold')
+            plt.axis('off')
             
-            well_data = df[well_col].dropna()
-            if len(well_data) > 0:
-                axes[row, col].hist(well_data, bins=20, alpha=0.7, edgecolor='black')
-                axes[row, col].axvline(well_data.mean(), color='red', linestyle='--', 
-                                     label=f'Mean: {well_data.mean():.3f}')
-                axes[row, col].axvline(well_data.median(), color='green', linestyle='--', 
-                                     label=f'Median: {well_data.median():.3f}')
-                axes[row, col].set_title(well_col.replace('well_', ''))
-                axes[row, col].set_xlabel('Score')
-                axes[row, col].set_ylabel('Frequency')
-                axes[row, col].legend()
-        
-        # Hide empty subplots
-        for i in range(n_wells, n_rows * n_cols):
-            row = i // n_cols
-            col = i % n_cols
-            axes[row, col].set_visible(False)
-        
-        plt.tight_layout()
-        
-        plot_file = self.output_dir / 'score_distributions.png'
-        plt.savefig(plot_file, dpi=300, bbox_inches='tight')
-        plt.close()
-        
-        plots['score_distributions'] = str(plot_file)
-        self.generated_files['score_distributions'] = str(plot_file)
-        
-        return plots
-    
-    def create_narrative_gravity_plots(self, df: pd.DataFrame, well_columns: List[str]) -> Dict[str, str]:
-        """Create narrative gravity specific visualizations."""
-        logger.info("🌌 Creating narrative gravity plots...")
-        
-        plots = {}
-        
-        # Check if we have narrative position data
-        if 'narrative_position_x' in df.columns and 'narrative_position_y' in df.columns:
-            # Narrative gravity scatter plot
-            plt.figure(figsize=(12, 10))
-            
-            # Create scatter plot
-            scatter = plt.scatter(df['narrative_position_x'], df['narrative_position_y'], 
-                                alpha=0.7, s=80, c=df.index, cmap='viridis')
-            
-            # Add text labels if text_id is available
-            if 'text_id' in df.columns:
-                for i, txt in enumerate(df['text_id']):
-                    if pd.notna(txt):
-                        plt.annotate(str(txt)[:10], 
-                                   (df['narrative_position_x'].iloc[i], df['narrative_position_y'].iloc[i]),
-                                   xytext=(5, 5), textcoords='offset points', fontsize=8, alpha=0.7)
-            
-            plt.xlabel('Narrative Position X')
-            plt.ylabel('Narrative Position Y')
-            plt.title('Narrative Gravity Positioning Map', fontsize=16, fontweight='bold')
-            plt.grid(True, alpha=0.3)
-            plt.colorbar(scatter, label='Analysis Index')
-            
-            # Add quadrant lines
-            plt.axhline(y=0, color='black', linestyle='-', alpha=0.3)
-            plt.axvline(x=0, color='black', linestyle='-', alpha=0.3)
-            
-            plt.tight_layout()
-            
-            plot_file = self.output_dir / 'narrative_gravity_map.png'
+            plot_file = self.output_dir / 'score_distributions.png'
             plt.savefig(plot_file, dpi=300, bbox_inches='tight')
             plt.close()
             
-            plots['narrative_gravity_map'] = str(plot_file)
-            self.generated_files['narrative_gravity_map'] = str(plot_file)
-        
-        # Well comparison radar chart
-        if len(well_columns) >= 3:
-            # Create radar chart for mean well scores
-            well_means = [df[col].mean() for col in well_columns]
-            well_names = [col.replace('well_', '') for col in well_columns]
-            
-            # Create radar chart
-            angles = np.linspace(0, 2 * np.pi, len(well_names), endpoint=False).tolist()
-            well_means += well_means[:1]  # Complete the circle
-            angles += angles[:1]
-            
-            fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(projection='polar'))
-            ax.plot(angles, well_means, 'o-', linewidth=2, label='Mean Scores')
-            ax.fill(angles, well_means, alpha=0.25)
-            ax.set_xticks(angles[:-1])
-            ax.set_xticklabels(well_names)
-            ax.set_ylim(0, 1)
-            ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
-            ax.set_yticklabels(['0.2', '0.4', '0.6', '0.8', '1.0'])
-            ax.grid(True)
-            plt.title('Mean Well Scores Radar Chart', fontsize=16, fontweight='bold', pad=20)
-            plt.legend(loc='upper right', bbox_to_anchor=(1.2, 1.0))
-            
-            plt.tight_layout()
-            
-            plot_file = self.output_dir / 'well_scores_radar.png'
-            plt.savefig(plot_file, dpi=300, bbox_inches='tight')
-            plt.close()
-            
-            plots['well_scores_radar'] = str(plot_file)
-            self.generated_files['well_scores_radar'] = str(plot_file)
+            plots['score_distributions'] = str(plot_file)
+            self.generated_files['score_distributions'] = str(plot_file)
         
         return plots
-    
-    def create_interactive_dashboard(self, df: pd.DataFrame, well_columns: List[str], 
-                                   statistical_results: Dict) -> Dict[str, str]:
-        """Create interactive Plotly dashboard."""
-        logger.info("🎮 Creating interactive dashboard...")
-        
-        plots = {}
-        
-        if not well_columns:
-            return plots
-        
-        # Create subplot dashboard
-        fig = make_subplots(
-            rows=2, cols=2,
-            subplot_titles=('Well Scores Distribution', 'Narrative Gravity Map', 
-                          'Correlation Heatmap', 'Hypothesis Testing Results'),
-            specs=[[{"secondary_y": False}, {"secondary_y": False}],
-                   [{"secondary_y": False}, {"secondary_y": False}]]
-        )
-        
-        # 1. Well scores box plot
-        for col in well_columns:
-            well_data = df[col].dropna()
-            if len(well_data) > 0:
-                fig.add_trace(
-                    go.Box(y=well_data, name=col.replace('well_', ''), showlegend=False),
-                    row=1, col=1
-                )
-        
-        # 2. Narrative gravity scatter plot
-        if 'narrative_position_x' in df.columns and 'narrative_position_y' in df.columns:
-            fig.add_trace(
-                go.Scatter(
-                    x=df['narrative_position_x'],
-                    y=df['narrative_position_y'],
-                    mode='markers',
-                    text=df['text_id'] if 'text_id' in df.columns else df.index,
-                    hovertemplate='<b>%{text}</b><br>X: %{x}<br>Y: %{y}<extra></extra>',
-                    showlegend=False
-                ),
-                row=1, col=2
-            )
-        
-        # 3. Correlation heatmap
-        if len(well_columns) > 1:
-            well_data = df[well_columns].dropna()
-            if not well_data.empty:
-                correlation_matrix = well_data.corr()
-                fig.add_trace(
-                    go.Heatmap(
-                        z=correlation_matrix.values,
-                        x=[col.replace('well_', '') for col in correlation_matrix.columns],
-                        y=[col.replace('well_', '') for col in correlation_matrix.index],
-                        colorscale='RdBu',
-                        zmid=0,
-                        showscale=False
-                    ),
-                    row=2, col=1
-                )
-        
-        # 4. Hypothesis testing results
-        if 'hypothesis_testing' in statistical_results:
-            h1_results = statistical_results['hypothesis_testing'].get('H1_discriminative_validity', {})
-            if h1_results.get('tests_performed'):
-                comparisons = [test.get('comparison', f'Test {i}') for i, test in enumerate(h1_results['tests_performed'])]
-                p_values = [test.get('p_value', 1.0) for test in h1_results['tests_performed']]
-                
-                fig.add_trace(
-                    go.Bar(
-                        x=comparisons,
-                        y=p_values,
-                        name='p-values',
-                        showlegend=False
-                    ),
-                    row=2, col=2
-                )
-                
-                # Add significance line
-                fig.add_hline(y=0.05, line_dash="dash", line_color="red", 
-                            annotation_text="α = 0.05", row=2, col=2)
-        
-        # Update layout
-        fig.update_layout(
-            title_text="Narrative Gravity Analysis Dashboard",
-            title_x=0.5,
-            height=800,
-            showlegend=False
-        )
-        
-        # Save interactive plot
-        plot_file = self.output_dir / 'interactive_dashboard.html'
-        fig.write_html(plot_file)
-        
-        plots['interactive_dashboard'] = str(plot_file)
-        self.generated_files['interactive_dashboard'] = str(plot_file)
-        
-        return plots
-    
+
     def save_visualization_index(self) -> str:
-        """Create an index file listing all generated visualizations."""
-        
-        index_content = {
+        """Save index of generated visualizations."""
+        index_data = {
             'generation_timestamp': pd.Timestamp.now().isoformat(),
-            'total_files': len(self.generated_files),
-            'visualizations': self.generated_files,
-            'descriptions': {
-                'descriptive_analysis': 'Box plots, violin plots, and mean comparisons of well scores',
-                'hypothesis_testing': 'Visual summaries of statistical hypothesis testing results',
-                'reliability_analysis': 'ICC values and coefficient of variation analysis',
-                'correlation_matrix': 'Correlation heatmap between all well scores',
-                'score_distributions': 'Histograms showing distribution of each well score',
-                'narrative_gravity_map': 'Scatter plot of narrative positioning coordinates',
-                'well_scores_radar': 'Radar chart comparing mean well scores',
-                'interactive_dashboard': 'Interactive Plotly dashboard with multiple views'
-            }
+            'visualization_engine': 'NarrativeGravityVisualizationEngine (Production)',
+            'theme': self.viz_engine.theme_name,
+            'files_generated': self.generated_files,
+            'total_files': len(self.generated_files)
         }
         
         index_file = self.output_dir / 'visualization_index.json'
         with open(index_file, 'w') as f:
-            json.dump(index_content, f, indent=2)
+            json.dump(index_data, f, indent=2)
         
-        logger.info(f"📋 Visualization index saved to: {index_file}")
         return str(index_file)
 
 def main():

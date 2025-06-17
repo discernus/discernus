@@ -377,6 +377,49 @@ Items discovered or decided but not yet prioritized for current iteration. Gets 
   - Include scaling transparency in quality reports
   - Flag potential issues with over-scaling or under-utilization of visual space
 
+## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
+*Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
+
+**Strategic Justification**: Multi-layered transaction management system that treats any uncertainty that could compromise experiment validity as grounds for graceful termination and rollback. Ensures zero contaminated results while providing clear user guidance for resolution.
+
+### **Architecture Status Overview**
+- ✅ **Phase 1 Complete**: Framework Transaction Manager - Database-first loading, content change detection, automatic version increment
+- ✅ **Phase 2 Complete**: Data Transaction Manager - Corpus integrity validation, content hash verification, encoding validation
+- ✅ **Phase 2 Complete**: Quality Transaction Manager - Analysis quality thresholds, framework fit validation, statistical significance enforcement
+- 📋 **Phase 3 Planned**: Pipeline Transaction Manager - LLM availability, dependency compatibility, API reliability
+- 📋 **Phase 4 Planned**: Compliance Transaction Manager - Academic compliance, ethical clearance, institutional policy
+
+### **Implementation Follow-up Tasks**
+- [ ] **Enhanced Orchestrator Integration** - Integrate all transaction managers into comprehensive pre-flight validation (discovered: June 17, priority: HIGH)
+  - Update `comprehensive_experiment_orchestrator.py` to use all transaction managers
+  - Implement coordinated rollback across all transaction types
+  - Add transaction-aware error handling with specific guidance
+  - Include transaction metrics in monitoring dashboard
+
+- [ ] **Transaction Integrity Exception Hierarchy** - Implement complete exception hierarchy for different transaction failures (discovered: June 17, priority: MEDIUM)
+  - Create `TransactionIntegrityError` base class
+  - Implement domain-specific exceptions: `FrameworkTransactionIntegrityError`, `DataTransactionIntegrityError`, `QualityTransactionIntegrityError`
+  - Add structured error handling with rollback guidance
+  - Integrate with existing error monitoring systems
+
+- [ ] **Transaction Audit Trail System** - Implement comprehensive audit logging for all transaction decisions (discovered: June 17, priority: MEDIUM)
+  - Add transaction ID tracking across all experiment operations
+  - Store transaction state history in database
+  - Implement query interface for transaction analysis
+  - Create dashboard for transaction success/failure trends
+
+- [ ] **User Experience Enhancement** - Improve transaction failure user experience (discovered: June 17, priority: MEDIUM)
+  - Create user-friendly error messages with specific guidance
+  - Implement step-by-step recovery commands
+  - Add transaction status indicators in CLI
+  - Create transaction integrity validation tools
+
+- [ ] **Documentation and Training** - Complete transaction integrity documentation and training materials (discovered: June 17, priority: LOW)
+  - Update user guides with transaction integrity concepts
+  - Create troubleshooting guide for transaction failures
+  - Add developer documentation for extending transaction managers
+  - Include transaction integrity in academic methodology documentation
+
 ## 🔧 **Infrastructure & Performance**
 
 - [ ] **Performance Benchmarking** - Measure visualization generation speed improvements (discovered: June 13, priority: TBD)
