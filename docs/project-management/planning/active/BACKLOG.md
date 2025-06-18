@@ -627,4 +627,6 @@ Items discovered or decided but not yet prioritized for current iteration. Gets 
 - **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
 - **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
 - **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
-- **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory 
+- **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
+
+- [ ] Execute deep internal rebrand: Refactor all internal code, package names, and module references from previous names (e.g., narrative_gravity) to Discernus. Ensure all imports, documentation, and configuration files are updated. Schedule for completion before public launch. 

@@ -154,9 +154,9 @@
 | Document | Purpose | Audience | Status |
 |----------|---------|----------|--------|
 | [`GOLDEN_SET_SUMMARY.md`](user-guides/GOLDEN_SET_SUMMARY.md) | High-quality corpus summary | 👥 Researchers | ✅ Complete |
-| [`EPIC_1_COMPLETION_SUMMARY.md`](user-guides/EPIC_1_COMPLETION_SUMMARY.md) | Major development milestone summary | 👥 All Users | ✅ Complete |
-| [`PARAGRAPH_FIX_VALIDATION.md`](user-guides/PARAGRAPH_FIX_VALIDATION.md) | Data quality fix validation | 👥 Data Users | ✅ Complete |
-| [`STREAMLIT_MIGRATION_NOTICE.md`](user-guides/STREAMLIT_MIGRATION_NOTICE.md) | Interface migration information | 👥 Legacy Users | ✅ Complete |
+| `EPIC_1_COMPLETION_SUMMARY.md` | Major development milestone summary | 👥 All Users | 📚 Archived |
+| `PARAGRAPH_FIX_VALIDATION.md` | Data quality fix validation | 👥 Data Users | 📚 Archived |
+| `STREAMLIT_MIGRATION_NOTICE.md` | Interface migration information | 👥 Legacy Users | 📚 Archived |
 
 ---
 
@@ -209,17 +209,18 @@
 
 | Document | Purpose | Audience | Status |
 |----------|---------|----------|--------|
-| [`CURRENT_ITERATION_JUNE_13_14.md`](project-management/planning/active/CURRENT_ITERATION_JUNE_13_14.md) | Current iteration scope and progress | 🎯 Project Team | ✅ Complete |
-| [`current_status_update.md`](project-management/planning/active/current_status_update.md) | Real-time status updates | 🎯 Project Team | ✅ Complete |
-| [`NEXT_ITERATION_JUNE_17_21.md`](project-management/planning/active/NEXT_ITERATION_JUNE_17_21.md) | Next iteration planning | 🎯 Project Team | ✅ Complete |
+| [`CURRENT_ITERATION_JUNE_17_21.md`](project-management/planning/active/CURRENT_ITERATION_JUNE_17_21.md) | Current iteration scope and progress | 🎯 Project Team | ✅ Complete |
+| `current_status_update.md` | Real-time status updates | 🎯 Project Team | 📚 Archived |
+| `NEXT_ITERATION_JUNE_17_21.md` | Next iteration planning | 🎯 Project Team | 📚 Archived |
 | [`BACKLOG.md`](project-management/planning/active/BACKLOG.md) | Project backlog and future work | 🎯 Project Team | ✅ Complete |
 
 ### **Daily Planning** [`planning/daily/`](project-management/planning/daily/)
 
 | Document | Purpose | Audience | Status |
 |----------|---------|----------|--------|
-| [`DAILY_TODO_2025_06_13.md`](project-management/planning/daily/DAILY_TODO_2025_06_13.md) | Daily task tracking | 🎯 Development Team | ✅ Complete |
-| [`DAILY_TODO_2025_06_14.md`](project-management/planning/daily/DAILY_TODO_2025_06_14.md) | Daily task tracking | 🎯 Development Team | ✅ Complete |
+| [`DAILY_TODO_2025_06_18.md`](project-management/planning/daily/DAILY_TODO_2025_06_18.md) | Daily task tracking | 🎯 Development Team | ✅ Complete |
+| `DAILY_TODO_2025_06_13.md` | Daily task tracking | 🎯 Development Team | 📚 Historical |
+| `DAILY_TODO_2025_06_14.md` | Daily task tracking | 🎯 Development Team | 📚 Historical |
 | [`QA_INTEGRATION_TECHNICAL_PLAN_2025_06_13.md`](project-management/planning/daily/QA_INTEGRATION_TECHNICAL_PLAN_2025_06_13.md) | QA integration technical planning | 🎯💻 Technical Team | ✅ Complete |
 | [`CIVIC_VIRTUE_EXPERIMENT_SPECIFICATION_2025_06_13.md`](project-management/planning/daily/CIVIC_VIRTUE_EXPERIMENT_SPECIFICATION_2025_06_13.md) | Specific experiment planning | 🎯🔬 Research Team | ✅ Complete |
 | [`COLOR_OPTIMIZATION_REPORT_20250614_133104.md`](project-management/planning/daily/COLOR_OPTIMIZATION_REPORT_20250614_133104.md) | Color optimization implementation | 🎯💻 Development Team | ✅ Complete |
@@ -243,7 +244,8 @@
 
 | Document | Purpose | Audience | Status |
 |----------|---------|----------|--------|
-| [`CURRENT_STATUS_2025_06_13.md`](project-management/status/CURRENT_STATUS_2025_06_13.md) | Comprehensive status snapshot | 🎯 All Stakeholders | ✅ Complete |
+| [`CURRENT_STATUS_2025_06_17.md`](project-management/status/CURRENT_STATUS_2025_06_17.md) | Comprehensive status snapshot | 🎯 All Stakeholders | ✅ Complete |
+| `CURRENT_STATUS_2025_06_13.md` | Historical status snapshot | 🎯 All Stakeholders | 📚 Historical |
 | [`ACADEMIC_TOOL_INTEGRATION_GUIDE.md`](project-management/status/ACADEMIC_TOOL_INTEGRATION_GUIDE.md) | Academic integration status | 🎯📚 Academic Team | ✅ Complete |
 | [`MANUAL_DEVELOPMENT_SUPPORT_GUIDE.md`](project-management/status/MANUAL_DEVELOPMENT_SUPPORT_GUIDE.md) | Development support procedures | 🎯💻 Development Team | ✅ Complete |
 

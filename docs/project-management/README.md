@@ -1,19 +1,20 @@
-# Project Management Documentation
-**Last Updated:** June 17, 2025  
+# Discernus Project Management Documentation
+**Last Updated:** June 2025  
+**Strategic Focus:** MVP Academic Validation Strategy  
 **Organization:** MECE (Mutually Exclusive, Collectively Exhaustive) with Currency Requirements
 
 ## 📋 **QUICK STATUS CHECK**
 
-### **Current Status** (June 17, 2025)
-- **🎉 MAJOR BREAKTHROUGH**: Complete academic research pipeline operational
-- **✅ Live Execution Success**: 8/8 IDITI analyses completed ($0.088 cost)
-- **🚀 Current Iteration**: Enhanced analysis pipeline with multi-LLM validation (June 17-21)
-- **📚 Infrastructure**: World-class with quality assurance and academic compliance
+### **Current Status** (June 2025)
+- **🚀 STRATEGIC PIVOT**: Discernus MVP strategy for academic validation
+- **✅ Technical Foundation**: Complete academic research pipeline operational
+- **🎯 Current Focus**: MFT validation and expert consultation (Haidt lab)
+- **📚 Infrastructure**: World-class technical foundation ready for academic credibility
 
 **Quick Links:**
-- **Current Status**: [`status/CURRENT_STATUS_2025_06_17.md`](status/CURRENT_STATUS_2025_06_17.md)
-- **Active Iteration**: [`planning/active/CURRENT_ITERATION_JUNE_17_21.md`](planning/active/CURRENT_ITERATION_JUNE_17_21.md)
-- **Daily TODO**: [`planning/daily/20250617_todo_comprehensive_analysis_pipeline.md`](planning/daily/20250617_todo_comprehensive_analysis_pipeline.md)
+- **Current Status**: [`status/CURRENT_STATUS_2025_06_17.md`](status/CURRENT_STATUS_2025_06_17.md) *(Pre-pivot reference)*
+- **Active Iteration**: [`planning/active/CURRENT_ITERATION_DISCERNUS_MVP.md`](planning/active/CURRENT_ITERATION_DISCERNUS_MVP.md)
+- **User Journeys**: [`planning/discernus_mvp_user_journeys.md`](planning/discernus_mvp_user_journeys.md)
 
 ## 🏗️ **FOLDER ORGANIZATION**
 
@@ -89,11 +90,11 @@
 - **Database Infrastructure**: PostgreSQL with complete experimental schema
 - **Documentation**: MECE architecture with 151 documents organized
 
-### **🎯 Current Priorities**
-- **Multi-LLM Studies**: 3-LLM reliability validation for methodological credibility
-- **Statistical Analysis**: Hypothesis testing with effect sizes and confidence intervals
-- **Enhanced Reporting**: Publication-ready HTML reports with interactive visualizations
-- **Human Integration**: Framework design for LLM-human validation studies
+### **🎯 Current Priorities** (Discernus MVP)
+- **Expert Consultation**: Haidt lab collaboration for MFT validation
+- **Statistical Validation**: r>0.8 correlation with MFQ-30 across all foundations
+- **Academic Credibility**: Publication pathway with expert co-authorship
+- **Community Adoption**: Computational social science researcher engagement
 
 ### **🚨 Key Achievements This Week**
 - **8/8 IDITI Analyses**: Complete success with real API execution
@@ -147,4 +148,4 @@
 
 ---
 
-**The project-management folder provides comprehensive planning and status tracking for the Narrative Gravity Analysis platform, supporting both day-to-day execution and long-term strategic development with world-class organizational standards.** 
+**The project-management folder provides comprehensive planning and status tracking for the Discernus platform, supporting the MVP academic validation strategy through expert consultation, statistical validation, and publication pathway establishment with world-class organizational standards.** 

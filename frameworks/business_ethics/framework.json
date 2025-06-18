@@ -1,4 +1,18 @@
 {
+  "name": "business_ethics",
+  "display_name": "Business Ethics Framework", 
+  "version": "v2025.06.17",
+  "description": "Analyzes business communications across three domains of ethical concern: stakeholder relationships, operational integrity, and strategic vision.",
+  "theoretical_foundation": {
+    "primary_sources": [
+      "Freeman, R.E. (1984). Strategic Management: A Stakeholder Approach",
+      "Solomon, R.C. (1992). Ethics and Excellence: Cooperation and Integrity in Business"
+    ],
+    "theoretical_approach": "Stakeholder-based ethical analysis focusing on three domains of business responsibility clustered around specific arcs of analytical space."
+  },
+  "last_modified": "2025-06-17T16:00:00.000000", 
+  "prompt_template": "business_ethics_v2.1",
+  "analysis_instructions": "Evaluate how business communications demonstrate ethical orientation across three domains: stakeholder relationships, operational integrity, and strategic vision.",
   "framework_meta": {
     "name": "business_ethics",
     "display_name": "Business Ethics Framework",

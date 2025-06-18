@@ -31,7 +31,7 @@ This platform prioritizes **academic research workflows** and **methodological r
 ## 🏛️ **Academic Positioning**
 
 ### Current Development Phase
-**Phase 1**: MFT Implementation Development (December 2024)
+**Phase 1**: MFT Implementation Development (June 2025)
 - Building robust MFT analysis using existing infrastructure
 - Internal validation testing on political texts
 - Professional demonstration system for expert review
@@ -102,10 +102,10 @@ python scripts/production/check_existing_systems.py "MFT analysis"
 python scripts/analyze_mft.py --text "your_text.txt" --output results.json
 
 # 3. Generate academic export
-python scripts/export_academic_data.py --study-name "mft_validation_2024" --format all
+python scripts/export_academic_data.py --study-name "mft_validation_2025" --format all
 
 # 4. Create publication visualizations
-python scripts/create_publication_figures.py --experiment mft_validation_2024
+python scripts/create_publication_figures.py --experiment mft_validation_2025
 ```
 
 ## 📊 **Available Frameworks**
@@ -223,7 +223,7 @@ If you use Discernus in your research, please cite:
 @software{discernus_platform,
   title={Discernus: Computational Discourse Analysis Platform for Academic Research},
   author={[Author Name]},
-  year={2024},
+  year={2025},
   url={https://github.com/discernus/discernus},
   version={1.0.0-mvp}
 }
@@ -259,7 +259,7 @@ For the academic methodology paper (when published):
 
 ## 📄 **License**
 
-Copyright (c) 2024 Discernus. All rights reserved.
+Copyright (c) 2025 Discernus. All rights reserved.
 
 This project is proprietary software designed for academic research collaboration. See the [LICENSE](LICENSE) file for complete terms regarding academic use, collaboration, and citation requirements.
 

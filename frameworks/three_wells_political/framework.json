@@ -1,4 +1,15 @@
 {
+  "name": "three_wells_political",
+  "display_name": "Three Wells Political Discourse",
+  "version": "v2025.06.17",
+  "description": "Analyzes contemporary political discourse through three competing gravitational wells: Intersectionality Theory, Tribal Domination Theory, and Pluralist Individual Dignity Theory that transcend traditional left-right categories",
+  "theoretical_foundation": {
+    "primary_sources": [
+      "Three Gravitational Wells of Contemporary Political Discourse: An Integrative Analysis"
+    ],
+    "theoretical_approach": "Based on the Three Wells Model that argues contemporary politics is organized around three independent theories about human nature, social organization, and political legitimacy rather than traditional economic redistribution categories"
+  },
+  "last_modified": "2025-06-17T16:00:00.000000",
   "framework_meta": {
     "name": "Three Wells Political Discourse",
     "version": "1.0.0",
@@ -183,6 +194,9 @@
   },
   
   "compatibility": {
+    "prompt_templates": ["three_wells_v1.0", "contemporary_political_v1.0"],
+    "weighting_schemes": ["independent_wells", "equidistant_positioning"],
+    "api_versions": ["v2.0", "v2.1"],
     "supported_templates": ["contemporary_political_analysis", "discourse_analysis", "theoretical_assessment"],
     "supported_methods": ["llm_scoring", "keyword_matching", "semantic_analysis"],
     "output_formats": ["narrative_gravity_map", "political_profile", "theoretical_positioning"]

@@ -1,4 +1,15 @@
 {
+  "name": "historical_ideological_triangle",
+  "display_name": "Historical Ideological Triangle",
+  "version": "v2025.06.17",
+  "description": "The three competing ideological systems that defined 20th century political discourse (1900-1989): Classical Liberalism, Communism, and Fascism as independent gravitational wells",
+  "theoretical_foundation": {
+    "primary_sources": [
+      "Three Gravitational Wells of Contemporary Political Discourse: An Integrative Analysis, Appendix A"
+    ],
+    "theoretical_approach": "Based on the fundamental incompatibility of three comprehensive worldviews that each viewed the others as existential threats to human civilization"
+  },
+  "last_modified": "2025-06-17T16:00:00.000000",
   "framework_meta": {
     "name": "Historical Ideological Triangle",
     "version": "1.0.0",
@@ -181,6 +192,9 @@
   },
   
   "compatibility": {
+    "prompt_templates": ["historical_triangle_v1.0", "ideological_analysis_v1.0"], 
+    "weighting_schemes": ["independent_wells", "equidistant_positioning"],
+    "api_versions": ["v2.0", "v2.1"],
     "supported_templates": ["academic_analysis", "historical_analysis", "ideological_assessment"],
     "supported_methods": ["llm_scoring", "keyword_matching", "semantic_analysis"],
     "output_formats": ["narrative_gravity_map", "ideological_profile", "historical_positioning"]

@@ -35,7 +35,7 @@
 
 ### **🎯 For Project Management** → [`project-management/`](project-management/)
 *Planning, status tracking, and strategic direction*
-- **Current status?** → [`status/CURRENT_STATUS_2025_06_13.md`](project-management/status/CURRENT_STATUS_2025_06_13.md)
+- **Current status?** → [`status/CURRENT_STATUS_2025_06_17.md`](project-management/status/CURRENT_STATUS_2025_06_17.md)
 - **Active planning?** → [`planning/active/`](project-management/planning/active/)
 - **Strategic direction?** → [`planning/strategic/`](project-management/planning/strategic/)
 

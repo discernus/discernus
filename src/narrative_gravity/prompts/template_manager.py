@@ -197,10 +197,10 @@ class PromptTemplateManager:
         return self._assemble_prompt(components)
     
     def _load_framework_config(self, framework: str) -> Dict[str, Any]:
-        """Load framework configuration files - supports both old and new consolidated formats."""
+        """Load framework configuration files - supports all framework formats."""
         framework_path = Path("frameworks") / framework
         
-        # Try new consolidated format first
+        # Try new consolidated format first (framework_consolidated.json)
         consolidated_path = framework_path / "framework_consolidated.json"
         if consolidated_path.exists():
             with open(consolidated_path, 'r') as f:
@@ -223,17 +223,26 @@ class PromptTemplateManager:
                 "name": framework
             }
         
-        # Fallback to old separate files format
-        dipoles_path = framework_path / "dipoles.json"
-        framework_config_path = framework_path / "framework.json"
+        # Try standard framework.json (our new cleaned format)
+        framework_json_path = framework_path / "framework.json"
+        if framework_json_path.exists():
+            with open(framework_json_path, 'r') as f:
+                framework_config = json.load(f)
+            
+            # Return the framework config directly - it will be handled by the wells/dipoles logic in other methods
+            # Add the "name" field for compatibility
+            framework_config["name"] = framework_config.get("name", framework)
+            return framework_config
         
-        if dipoles_path.exists() and framework_config_path.exists():
+        # Fallback to old separate files format  
+        dipoles_path = framework_path / "dipoles.json"
+        if dipoles_path.exists() and framework_json_path.exists():
             # Load dipoles configuration
             with open(dipoles_path, 'r') as f:
                 dipoles_config = json.load(f)
             
             # Load framework configuration  
-            with open(framework_config_path, 'r') as f:
+            with open(framework_json_path, 'r') as f:
                 framework_config = json.load(f)
             
             return {
@@ -242,8 +251,8 @@ class PromptTemplateManager:
                 "name": framework
             }
         
-        # If neither format exists, raise an error
-        raise FileNotFoundError(f"Framework '{framework}' not found. Expected either 'framework_consolidated.json' or both 'dipoles.json' and 'framework.json' in {framework_path}")
+        # If no valid format exists, raise an error
+        raise FileNotFoundError(f"Framework '{framework}' not found. Expected 'framework.json', 'framework_consolidated.json', or both 'dipoles.json' and 'framework.json' in {framework_path}")
     
     def _load_experiment_config(self, experiment_id: str, variant: str) -> Dict[str, Any]:
         """Load experimental prompt variations."""
@@ -345,49 +354,172 @@ If you CAN reliably identify both your model name and version, please proceed wi
     
     def _build_framework_wells(self, framework_config: Dict, experiment_config: Dict = None) -> str:
         """Build framework-specific wells descriptions."""
-        # Handle different dipoles structures
-        dipoles_config = framework_config["dipoles"]
-        
-        if "dipoles" in dipoles_config:
-            # Full dipoles structure (like civic_virtue)
-            dipoles = dipoles_config["dipoles"]
-        elif "primary" in dipoles_config:
-            # Simple dipoles structure (like political_spectrum)
-            # Convert to expected format
-            dipoles = [{
-                "name": "Primary",
-                "positive": {
-                    "name": dipoles_config["primary"]["positive"],
-                    "description": f"Emphasis on {dipoles_config['primary']['positive'].lower()} themes",
-                    "language_cues": []
-                },
-                "negative": {
-                    "name": dipoles_config["primary"]["negative"],
-                    "description": f"Emphasis on {dipoles_config['primary']['negative'].lower()} themes",
-                    "language_cues": []
-                }
-            }]
-        else:
-            # Fallback for unknown structure
-            dipoles = []
-        
         lines = ["**FRAMEWORK WELLS:**\n"]
         
-        for dipole in dipoles:
-            positive = dipole["positive"]
-            negative = dipole["negative"]
+        # Check if framework has 'dipoles' format (civic_virtue style)
+        if "dipoles" in framework_config and isinstance(framework_config["dipoles"], dict):
+            dipoles_config = framework_config["dipoles"]
             
-            # Get language cues (limited by settings)
-            pos_cues = positive.get('language_cues', [])[:self.settings.max_language_cues]
-            neg_cues = negative.get('language_cues', [])[:self.settings.max_language_cues]
+            if "dipoles" in dipoles_config:
+                # Full dipoles structure (like civic_virtue)
+                dipoles = dipoles_config["dipoles"]
+            elif "primary" in dipoles_config:
+                # Simple dipoles structure (like political_spectrum)
+                # Convert to expected format
+                dipoles = [{
+                    "name": "Primary",
+                    "positive": {
+                        "name": dipoles_config["primary"]["positive"],
+                        "description": f"Emphasis on {dipoles_config['primary']['positive'].lower()} themes",
+                        "language_cues": []
+                    },
+                    "negative": {
+                        "name": dipoles_config["primary"]["negative"],
+                        "description": f"Emphasis on {dipoles_config['primary']['negative'].lower()} themes",
+                        "language_cues": []
+                    }
+                }]
+            else:
+                dipoles = []
             
-            lines.append(f"**{positive['name']} vs. {negative['name']} ({dipole['name']} Dimension)**")
-            lines.append(f"- {positive['name']}: {positive['description']}")
-            if pos_cues:
-                lines.append(f"  Language cues: {', '.join(pos_cues)}")
-            lines.append(f"- {negative['name']}: {negative['description']}")
-            if neg_cues:
-                lines.append(f"  Language cues: {', '.join(neg_cues)}")
+            # Process dipoles format
+            for dipole in dipoles:
+                positive = dipole["positive"]
+                negative = dipole["negative"]
+                
+                # Get language cues (limited by settings)
+                pos_cues = []
+                neg_cues = []
+                
+                # Handle different language_cues formats
+                if 'language_cues' in positive:
+                    cues = positive['language_cues']
+                    if isinstance(cues, list):
+                        pos_cues = cues[:self.settings.max_language_cues]
+                    elif isinstance(cues, dict):
+                        # Flatten dictionary of language cues
+                        all_cues = []
+                        for category_cues in cues.values():
+                            if isinstance(category_cues, list):
+                                all_cues.extend(category_cues)
+                        pos_cues = all_cues[:self.settings.max_language_cues]
+                
+                if 'language_cues' in negative:
+                    cues = negative['language_cues']
+                    if isinstance(cues, list):
+                        neg_cues = cues[:self.settings.max_language_cues]
+                    elif isinstance(cues, dict):
+                        # Flatten dictionary of language cues
+                        all_cues = []
+                        for category_cues in cues.values():
+                            if isinstance(category_cues, list):
+                                all_cues.extend(category_cues)
+                        neg_cues = all_cues[:self.settings.max_language_cues]
+                
+                lines.append(f"**{positive['name']} vs. {negative['name']} ({dipole['name']} Dimension)**")
+                lines.append(f"- {positive['name']}: {positive['description']}")
+                if pos_cues:
+                    lines.append(f"  Language cues: {', '.join(pos_cues)}")
+                lines.append(f"- {negative['name']}: {negative['description']}")
+                if neg_cues:
+                    lines.append(f"  Language cues: {', '.join(neg_cues)}")
+                lines.append("")
+                
+        # Check if framework has 'dipoles' array format (civic_virtue consolidated style)
+        elif "dipoles" in framework_config and isinstance(framework_config["dipoles"], list):
+            dipoles = framework_config["dipoles"]
+            
+            # Process dipoles format
+            for dipole in dipoles:
+                positive = dipole["positive"]
+                negative = dipole["negative"]
+                
+                # Get language cues (limited by settings)
+                pos_cues = []
+                neg_cues = []
+                
+                # Handle different language_cues formats
+                if 'language_cues' in positive:
+                    cues = positive['language_cues']
+                    if isinstance(cues, list):
+                        pos_cues = cues[:self.settings.max_language_cues]
+                    elif isinstance(cues, dict):
+                        # Flatten dictionary of language cues
+                        all_cues = []
+                        for category_cues in cues.values():
+                            if isinstance(category_cues, list):
+                                all_cues.extend(category_cues)
+                        pos_cues = all_cues[:self.settings.max_language_cues]
+                
+                if 'language_cues' in negative:
+                    cues = negative['language_cues']
+                    if isinstance(cues, list):
+                        neg_cues = cues[:self.settings.max_language_cues]
+                    elif isinstance(cues, dict):
+                        # Flatten dictionary of language cues
+                        all_cues = []
+                        for category_cues in cues.values():
+                            if isinstance(category_cues, list):
+                                all_cues.extend(category_cues)
+                        neg_cues = all_cues[:self.settings.max_language_cues]
+                
+                lines.append(f"**{positive['name']} vs. {negative['name']} ({dipole['name']} Dimension)**")
+                lines.append(f"- {positive['name']}: {positive['description']}")
+                if pos_cues:
+                    lines.append(f"  Language cues: {', '.join(pos_cues)}")
+                lines.append(f"- {negative['name']}: {negative['description']}")
+                if neg_cues:
+                    lines.append(f"  Language cues: {', '.join(neg_cues)}")
+                lines.append("")
+                
+        # Check if framework has 'wells' format (moral_rhetorical_posture style)
+        elif "wells" in framework_config:
+            wells = framework_config["wells"]
+            
+            # Group wells by type for better presentation
+            wells_by_type = {}
+            untyped_wells = []
+            
+            for well_name, well_config in wells.items():
+                # Try multiple description field names
+                description = (well_config.get("description") or 
+                             well_config.get("rich_description") or 
+                             well_config.get("summary") or 
+                             "")
+                
+                well_info = {
+                    "name": well_name,
+                    "description": description,
+                    "type": well_config.get("type", None)
+                }
+                
+                well_type = well_config.get("type")
+                if well_type:
+                    if well_type not in wells_by_type:
+                        wells_by_type[well_type] = []
+                    wells_by_type[well_type].append(well_info)
+                else:
+                    untyped_wells.append(well_info)
+            
+            # Display wells grouped by type
+            for well_type, typed_wells in wells_by_type.items():
+                # Capitalize and format type name for display
+                type_display = well_type.replace("_", " ").title()
+                lines.append(f"**{type_display.upper()} WELLS:**")
+                for well in typed_wells:
+                    lines.append(f"- **{well['name']}**: {well['description']}")
+                lines.append("")
+            
+            # Display untyped wells
+            if untyped_wells:
+                lines.append("**FRAMEWORK WELLS:**")
+                for well in untyped_wells:
+                    lines.append(f"- **{well['name']}**: {well['description']}")
+                lines.append("")
+        
+        else:
+            # Fallback - no clear structure found
+            lines.append("Framework structure not recognized. Please check framework configuration.")
             lines.append("")
         
         return "\n".join(lines)
@@ -431,29 +563,49 @@ This framework employs a **conceptual assessment approach** that prioritizes sem
         """Build JSON format specification."""
         timestamp = datetime.now().strftime("%Y.%m.%d.%H.%M")
         
-        # Handle different dipoles structures
-        dipoles_config = framework_config["dipoles"]
-        
-        if "dipoles" in dipoles_config:
-            # Full dipoles structure (like civic_virtue)
-            dipoles = dipoles_config["dipoles"]
-        elif "primary" in dipoles_config:
-            # Simple dipoles structure (like political_spectrum)
-            dipoles = [{
-                "positive": {"name": dipoles_config["primary"]["positive"]},
-                "negative": {"name": dipoles_config["primary"]["negative"]}
-            }]
-        else:
-            # Fallback for unknown structure
-            dipoles = []
-        
-        framework_name = framework_config["name"]
-        
-        # Get all well names
         well_names = []
-        for dipole in dipoles:
-            well_names.append(dipole["positive"]["name"])
-            well_names.append(dipole["negative"]["name"])
+        
+        # Handle different framework structures
+        if "dipoles" in framework_config and isinstance(framework_config["dipoles"], dict):
+            # Old dipoles structure
+            dipoles_config = framework_config["dipoles"]
+            
+            if "dipoles" in dipoles_config:
+                # Full dipoles structure (like civic_virtue)
+                dipoles = dipoles_config["dipoles"]
+            elif "primary" in dipoles_config:
+                # Simple dipoles structure (like political_spectrum)
+                dipoles = [{
+                    "positive": {"name": dipoles_config["primary"]["positive"]},
+                    "negative": {"name": dipoles_config["primary"]["negative"]}
+                }]
+            else:
+                dipoles = []
+            
+            # Get all well names from dipoles
+            for dipole in dipoles:
+                well_names.append(dipole["positive"]["name"])
+                well_names.append(dipole["negative"]["name"])
+                
+        elif "dipoles" in framework_config and isinstance(framework_config["dipoles"], list):
+            # New dipoles array structure (civic_virtue consolidated)
+            dipoles = framework_config["dipoles"]
+            
+            # Get all well names from dipoles
+            for dipole in dipoles:
+                well_names.append(dipole["positive"]["name"])
+                well_names.append(dipole["negative"]["name"])
+                
+        elif "wells" in framework_config:
+            # Wells structure (moral_rhetorical_posture style)
+            wells = framework_config["wells"]
+            well_names = list(wells.keys())
+            
+        else:
+            # Fallback - no clear structure
+            well_names = ["Unknown_Well_1", "Unknown_Well_2"]
+        
+        framework_name = framework_config.get("name", "unknown_framework")
         
         lines = [
             "**RESPONSE FORMAT (JSON):**",

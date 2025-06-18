@@ -1,4 +1,5 @@
 {
+  "name": "moral_rhetorical_posture",
   "framework_name": "moral_rhetorical_posture",
   "display_name": "Moral-Rhetorical Posture",
   "version": "v2025.06.14",
@@ -137,11 +138,14 @@
       "winner_take_most",
       "proportional"
     ],
+    "api_versions": ["v2.0", "v2.1"],
     "visualization_types": [
       "circular",
       "comparative"
     ]
   },
+  "prompt_template": "moral_rhetorical_posture_v2.1",
+  "analysis_instructions": "Evaluate how the text adopts different moral-rhetorical postures, focusing on restorative vs retributive approaches to political discourse.",
   "scaling_factor": 0.8,
   "last_modified": "2025-06-14T13:44:07.294358"
 }
