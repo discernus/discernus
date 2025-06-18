@@ -1,91 +1,83 @@
-# Narrative Gravity Maps: Quantitative Framework for Analyzing Persuasive Narratives
+# Discernus
+**Computational Discourse Analysis Platform for Academic Research**
 
 [![License: All Rights Reserved](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)]()
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PostgreSQL](https://img.shields.io/badge/database-postgresql-blue.svg)](https://www.postgresql.org/)
 
-**Narrative Gravity Maps** is a research platform for quantitative analysis of persuasive narratives through configurable analytical frameworks. The system maps narrative "gravity wells" that represent conceptual forces attracting or repelling audience attention, enabling systematic analysis of persuasive discourse across any domain.
+> **Academic Validation Strategy: Expert Consultation + Statistical Evidence + Publication Pipeline**
 
-## 🎯 **Focus: Academic Research Pipeline**
+## 🎯 **MVP Focus: Moral Foundations Theory Validation**
 
-This platform prioritizes **academic research workflows** over user interfaces. All frontend development has been archived pending completion of the core research pipeline and academic publication.
+Discernus is a **validation-first computational discourse analysis platform** designed for rigorous academic research. Our current focus is establishing academic credibility through systematic validation of Moral Foundations Theory implementation against established measures (MFQ-30) with expert consultation from framework originators.
+
+**Strategic Objectives:**
+- **Expert Endorsement**: Collaboration with Jonathan Haidt lab for MFT validation
+- **Statistical Validation**: r>0.8 correlation with MFQ-30 across all foundations
+- **Academic Publication**: Co-authored methodology paper with framework experts
+- **Community Adoption**: Computational social science researcher platform usage
+
+## 🔬 **Academic Research Infrastructure**
+
+This platform prioritizes **academic research workflows** and **methodological rigor** over user interfaces. All development focuses on publication-quality methodology, expert consultation integration, and systematic validation evidence.
 
 **Core Research Capabilities:**
-- **Database-driven analysis**: PostgreSQL backend with comprehensive provenance tracking
-- **Framework management**: 5 formal frameworks with v2.0 specification system
-- **Batch processing**: CLI tools for systematic experimentation
-- **Academic standards**: Publication-ready output formats and replication packages
+- **Framework Validation**: Systematic testing against established psychological measures
+- **Multi-LLM Reliability**: Cross-model consistency testing for methodological credibility  
+- **Expert Integration**: Academic collaboration workflows with framework originators
+- **Publication Pipeline**: Academic export formats and replication packages
+- **Quality Assurance**: 6-layer validation preventing research failures
 
-## Table of Contents
+## 🏛️ **Academic Positioning**
 
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Quick Start](#quick-start)
-- [Research Frameworks](#research-frameworks)
-- [CLI Tools](#cli-tools)
-- [Database Architecture](#database-architecture)
-- [Academic Workflow](#academic-workflow)
-- [Development](#development)
-- [Citation](#citation)
+### Current Development Phase
+**Phase 1**: MFT Implementation Development (December 2024)
+- Building robust MFT analysis using existing infrastructure
+- Internal validation testing on political texts
+- Professional demonstration system for expert review
+- Preliminary validation study with correlation evidence
 
-## Overview
+### Expert Consultation Strategy  
+**Phase 2**: Expert Engagement After Demonstration (Weeks 5-8)
+- Haidt lab outreach with working MFT implementation
+- Implementation refinement based on expert feedback
+- Large-scale validation study design (expert-approved)
+- Academic collaboration framework establishment
 
-### What are Narrative Gravity Maps?
+### Validation Execution
+**Phase 3**: Large-Scale Statistical Validation (Weeks 9-12)
+- n=500 participant study with MFQ-30 correlations
+- Multi-LLM reliability analysis (target: r=0.91+ between models)
+- Publication-quality statistical evidence generation
+- Academic paper drafting with expert co-authorship
 
-Narrative Gravity Maps visualize the **conceptual forces** within persuasive texts by mapping them onto a coordinate system with **gravity wells** representing different values, emotions, or rhetorical strategies defined by analytical frameworks. Each well has a position (angle) and gravitational strength (weight), creating a force field that attracts narrative elements.
+## 🔧 **Technical Infrastructure**
 
-**Example - Civic Virtue Framework (one of 5 available frameworks):**
-- **Framework-defined attractive forces**: Dignity (90°), Truth (45°), Hope (20°), Justice (135°), Pragmatism (160°)
-- **Framework-defined repulsive forces**: Tribalism (270°), Manipulation (315°), Fantasy (340°), Resentment (225°), Fear (200°)
+### Production-Ready Systems
+- **Multi-LLM Integration**: OpenAI, Anthropic, Google AI with cost controls
+- **Quality Assurance**: 6-layer validation system preventing silent failures
+- **Database Infrastructure**: PostgreSQL with complete experimental provenance
+- **Academic Export**: R/Stata/Jupyter templates with publication metadata
+- **Visualization**: Professional Plotly system with academic theming
 
-### Research Applications
+### Framework Management v2.0
+- **JSON Schema Validation**: 3-tier validation (Schema, Semantic, Academic)
+- **Version Control**: Complete component versioning for reproducibility  
+- **Academic Standards**: Citation requirements and empirical validation
+- **Expert Integration**: Framework originator consultation workflows
 
-- **Persuasive Discourse Analysis**: Mapping conceptual appeals across any domain using appropriate frameworks
-- **Argumentative Structure Analysis**: Understanding rhetorical patterns in debates and policy discussions  
-- **Cross-Cultural Research**: Comparing emphasis patterns across societies using cultural frameworks
-- **Historical Analysis**: Tracking narrative themes across time periods with domain-appropriate frameworks
-- **Framework Development**: Creating domain-specific analysis systems for any field of study
-
-## Key Features
-
-### 🔬 **Research-Grade Infrastructure**
-- **PostgreSQL Backend**: Complete experimental provenance and version control
-- **Component Versioning**: Formal specifications for frameworks, prompts, and weighting schemes
-- **Batch Processing**: Systematic experimentation with statistical validation
-- **Academic Standards**: Publication-ready outputs with comprehensive metadata
-
-### 📊 **Formal Framework System**
-- **5 Complete Frameworks**: Civic virtue, political spectrum, moral foundations, identity, rhetorical posture
-- **v2.0 Specification**: JSON schema with 3-tier validation (Schema, Semantic, Academic)
-- **Circular Coordinates**: Universal compatibility with academic tools (R, Stata, Python)
-- **Theoretical Foundations**: Academic citations and empirical validation requirements
-
-### 🛠️ **Command-Line Tools**
-- **Framework Management**: Create, validate, migrate, and sync analytical frameworks for any domain
-- **Intelligent Corpus Ingestion**: LLM-powered metadata extraction from messy text files
-- **Academic Export**: Multi-format datasets with analysis templates
-- **Database Operations**: Complete CLI interface for research workflows
-
-### 🎯 **Analysis Pipeline**
-- **Multi-LLM Support**: OpenAI, Anthropic, and other providers for framework-agnostic analysis
-- **Hierarchical Prompting**: Advanced template system eliminating flat score distributions
-- **Enhanced Visualization**: Plotly-based circular coordinate system for any framework type
-- **Statistical Rigor**: Confidence intervals, variance analysis, reproducibility across domains
-
-## Quick Start
+## 🚀 **Quick Start for Researchers**
 
 ### Prerequisites
-
 - **Python 3.9+**
 - **PostgreSQL database** 
-- **OpenAI API key** (for LLM analysis)
+- **OpenAI API key** (for MFT analysis)
 
 ### Installation
-
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/narrative_gravity_analysis.git
-cd narrative_gravity_analysis
+git clone https://github.com/discernus/discernus.git
+cd discernus
 
 # Create virtual environment
 python -m venv venv
@@ -101,337 +93,176 @@ source scripts/setup_dev_env.sh
 python launch.py --setup-db
 ```
 
-### Basic Research Workflow
-
+### Research Workflow
 ```bash
-# 1. Check framework status
-python scripts/framework_sync.py status
+# 1. Check system status
+python scripts/production/check_existing_systems.py "MFT analysis"
 
-# 2. Generate analysis prompt
-python scripts/generate_prompt.py --framework civic_virtue --output my_prompt.txt
+# 2. Run MFT analysis
+python scripts/analyze_mft.py --text "your_text.txt" --output results.json
 
-# 3. Run LLM analysis (external step with ChatGPT/Claude)
-# Use the generated prompt with your chosen LLM
+# 3. Generate academic export
+python scripts/export_academic_data.py --study-name "mft_validation_2024" --format all
 
-# 4. Process results (when you have LLM JSON response)
-python scripts/process_analysis_results.py results.json
-
-# 5. Generate visualizations
-python scripts/create_visualization.py results.json --output analysis.html
+# 4. Create publication visualizations
+python scripts/create_publication_figures.py --experiment mft_validation_2024
 ```
 
-### Backend Services
+## 📊 **Available Frameworks**
 
+### Primary: Moral Foundations Theory (MFT)
+**Academic Focus**: Haidt et al. (2009-2024) validation study
+- **5 Foundations**: Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation
+- **Validation Target**: MFQ-30 correlation analysis
+- **Expert Consultation**: Jonathan Haidt lab collaboration
+- **Research Application**: Cross-cultural moral discourse analysis
+
+### Additional Frameworks (Post-MVP)
+- **Political Framing Theory**: Issue framing and narrative positioning
+- **Cultural Theory**: Douglas & Wildavsky cultural analysis
+- **Business Ethics Framework**: Corporate communication analysis  
+- **Identity Framework**: Recognition and identity dynamics
+
+## 🎯 **Academic Validation Strategy**
+
+### Statistical Validation Targets
+- **Overall MFT Correlation**: r>0.8 with MFQ-30 (p<0.001)
+- **Foundation-Specific**: Care/Harm r>0.89, Fairness r>0.81, etc.
+- **Cross-LLM Reliability**: r>0.91 between GPT-4, Claude, Gemini
+- **Effect Sizes**: d>0.8 for practical significance
+
+### Expert Consultation Protocol
+- **Implementation Review**: Technical accuracy assessment by framework originators
+- **Methodology Validation**: Academic standards compliance verification
+- **Collaboration Framework**: Co-authorship and publication planning
+- **Community Endorsement**: Computational social science network recommendations
+
+### Publication Pipeline
+- **Target Venues**: Computational Social Science, Political Psychology journals
+- **Methodology Contribution**: Systematic framework validation for computational text analysis
+- **Replication Package**: Complete code, data, and analysis scripts
+- **Open Science**: Transparent methodology and reproducible research standards
+
+## 📚 **Documentation & Research**
+
+### Academic Documentation
+- **Methodology Guide**: [`docs/specifications/`](docs/specifications/) - Complete validation protocols
+- **Research Workflow**: [`docs/research-guide/`](docs/research-guide/) - Academic pipeline documentation
+- **Expert Consultation**: [`docs/planning/discernus_mvp_user_journeys.md`](docs/planning/discernus_mvp_user_journeys.md) - Collaboration frameworks
+
+### Technical Documentation  
+- **System Architecture**: [`docs/platform-development/architecture/`](docs/platform-development/architecture/) - Infrastructure design
+- **API Reference**: Production systems and integration guides
+- **Quality Assurance**: 6-layer validation system documentation
+
+## 🏗️ **Development Workflow**
+
+### **🚨 MANDATORY: Search Production Systems First**
 ```bash
-# Launch all backend services
-python launch.py
-
-# Or launch specific services
-python launch.py --api-only     # Just the API (port 8000)
-python launch.py --celery-only  # Just background workers
-```
-
-**Services:**
-- **API Server**: http://localhost:8000 (with docs at /api/docs)
-- **Celery Workers**: Background processing for batch operations
-
-## Example Frameworks
-
-The system includes 5 domain-specific frameworks demonstrating the methodology's versatility:
-
-### 1. Civic Virtue Framework (Primary Example)
-**Domain**: Political discourse analysis
-- **10 wells**: Framework-defined attraction/repulsion forces for civic analysis
-- **Hierarchical weighting**: Demonstrates differential weighting capabilities
-- **Use case**: Political speeches, policy debates, campaign rhetoric
-
-### 2. Political Spectrum Framework  
-**Domain**: Political positioning analysis
-- **6 wells**: Framework-defined progressive/conservative dimensions
-- **Equal weighting**: Demonstrates uniform weighting approach
-- **Use case**: Ideological analysis, partisan classification
-
-### 3. Moral Foundations Theory (MFT) Framework
-**Domain**: Cross-cultural moral analysis
-- **10 wells**: Framework-defined universal moral dimensions
-- **Equal weighting**: Descriptive framework approach
-- **Use case**: Cross-cultural comparative analysis
-
-### 4. Fukuyama Identity Framework
-**Domain**: Identity and recognition analysis
-- **6 wells**: Framework-defined identity dynamics
-- **Vertical arrangement**: Demonstrates positioning flexibility
-- **Use case**: Identity-focused discourse analysis
-
-### 5. Moral Rhetorical Posture Framework
-**Domain**: Communication style analysis
-- **6 wells**: Framework-defined communication approaches
-- **Communication focus**: Style vs content analysis capabilities
-- **Use case**: Conflict analysis, mediation contexts
-
-**Note**: These are examples demonstrating the platform's capability to support frameworks from any analytical domain.
-
-## CLI Tools
-
-### Framework Management
-
-```bash
-# Check framework synchronization status
-python scripts/framework_sync.py status
-
-# Export framework from database for editing
-python scripts/framework_sync.py export civic_virtue
-
-# Import edited framework back to database  
-python scripts/framework_sync.py import civic_virtue
-
-# Validate framework compliance
-python scripts/validate_framework_spec.py --framework civic_virtue
-
-# Validate all frameworks
-python scripts/validate_framework_spec.py --all
-```
-
-### Corpus Management
-
-```bash
-# Intelligent ingestion from messy text files
-python scripts/intelligent_ingest.py /path/to/text/files/
-
-# YouTube transcript extraction and processing
-python scripts/intelligent_ingest_youtube.py "https://youtube.com/watch?v=VIDEO_ID"
-
-# Check corpus status and FAIR compliance
-python scripts/corpus_status.py --show-stats
-```
-
-### Academic Export
-
-```bash
-# Export data for academic analysis
-python scripts/export_academic_data.py --study-name "my_study_2025" --format all
-
-# Install R packages for analysis
-Rscript scripts/install_essential_r_packages.R
-
-# Generate analysis templates
-python scripts/generate_analysis_templates.py --study-name "my_study_2025"
-```
-
-## Database Architecture
-
-### Core Tables
-- **`framework_versions`**: Formal framework specifications with validation status
-- **`prompt_templates`**: Versioned prompt templates with performance metrics
-- **`weighting_methodologies`**: Mathematical weighting schemes and algorithms
-- **`experiments`**: Research experiment definitions and configurations
-- **`runs`**: Individual analysis runs with complete provenance
-- **`documents`**: Corpus documents with stable identifiers and metadata
-
-### Version Control
-- **Component versioning**: Every framework, prompt, and weighting scheme versioned
-- **Experimental provenance**: Complete audit trail from input to output
-- **Database migrations**: Alembic-managed schema evolution
-- **Backup procedures**: Automated backup and recovery systems
-
-### Research Workflow Integration
-```bash
-# Database operations
-python check_database.py                    # Verify connection and schema
-python scripts/setup_database.py           # Initialize or update schema
-python -c "from alembic import command; from alembic.config import Config; cfg = Config('alembic.ini'); command.upgrade(cfg, 'head')"  # Apply migrations
-```
-
-## Academic Workflow
-
-### 1. Experimental Design
-```bash
-# Create experiment configuration (using any framework)
-python scripts/create_experiment.py --name "discourse_analysis_2024" --framework civic_virtue --prompt hierarchical_v2_1_0
-
-# Batch processing setup
-python scripts/setup_batch_analysis.py experiments/discourse_analysis_2024.yaml
-```
-
-### 2. Data Collection
-```bash
-# Process corpus of persuasive texts (any domain)
-python scripts/intelligent_ingest.py corpus/raw_texts/ --confidence-threshold 80
-
-# Validate corpus quality
-python scripts/corpus_status.py --validate-metadata
-```
-
-### 3. Analysis Execution
-```bash
-# Run systematic analysis
-python scripts/run_batch_analysis.py experiments/discourse_analysis_2024.yaml
-
-# Monitor progress
-python scripts/check_analysis_status.py --experiment discourse_analysis_2024
-```
-
-### 4. Statistical Analysis
-```bash
-# Export for academic analysis
-python scripts/export_academic_data.py --experiment discourse_analysis_2024 --format all
-
-# Generate statistical reports
-Rscript analysis_results/discourse_analysis_2024/statistical_analysis.R
-
-# Create publication visualizations
-python scripts/create_publication_figures.py --experiment discourse_analysis_2024
-```
-
-### 5. Replication Package
-```bash
-# Generate complete replication package
-python scripts/create_replication_package.py --experiment discourse_analysis_2024
-
-# Validate replication package
-python scripts/validate_replication.py replication_packages/discourse_analysis_2024/
-```
-
-## Development
-
-### Environment Setup
-```bash
-# Setup development environment (required for each session)
-source scripts/setup_dev_env.sh
-
-# Verify imports are working
-python -c "from src.narrative_gravity.engine import NarrativeGravityWellsCircular; print('✅ Imports working!')"
-```
-
-### Contributing to Framework Development
-```bash
-# Create new framework
-mkdir frameworks/my_new_framework
-# Edit framework.json following v2.0 specification
-
-# Validate framework
-python scripts/validate_framework_spec.py frameworks/my_new_framework/framework.json
-
-# Import to database
-python scripts/framework_sync.py import my_new_framework
-```
-
-### Testing
-```bash
-# Run unit tests
-python -m pytest tests/unit/ -v
-
-# Run integration tests  
-python -m pytest tests/integration/ -v
-
-# Run end-to-end tests
-python -m pytest tests/e2e/ -v
-```
-
-## Project Structure
-
-The project is organized for academic research workflows:
-
-```
-narrative_gravity_analysis/
-├── 🔬 Research Pipeline
-│   ├── src/narrative_gravity/           # Core analysis modules
-│   │   ├── engine_circular.py          # Circular coordinate analysis engine
-│   │   ├── framework_manager.py        # Framework management system
-│   │   ├── models/                     # Database models and schemas
-│   │   ├── academic/                   # Academic export and analysis tools
-│   │   └── corpus/                     # Corpus management and ingestion
-│   ├── scripts/                        # CLI tools and utilities
-│   └── frameworks/                     # Framework specifications (v2.0)
-│
-├── 🗄️ Data Management  
-│   ├── corpus/                         # Research corpus with FAIR compliance
-│   ├── analysis_results/               # Analysis outputs and visualizations
-│   ├── exports/academic_formats/       # Academic datasets and templates
-│   └── schemas/                        # JSON schemas and specifications
-│
-├── 📚 Documentation & Research
-│   ├── docs/                          # Complete documentation suite
-│   │   ├── architecture/              # System architecture
-│   │   ├── specifications/            # Technical specifications
-│   │   ├── user-guides/              # User and workflow guides
-│   │   └── development/              # Development documentation
-│   ├── paper/                         # Academic paper development
-│   └── tests/                         # Comprehensive test suite
-│
-└── 🏗️ Infrastructure
-    ├── launch.py                      # Backend services launcher
-    ├── alembic/                       # Database migrations
-    ├── logs/                          # System logs
-    └── archive/deprecated_interfaces/ # Archived frontend work
-```
-
-## Citation
-
-If you use this software in your research, please cite:
-
-```bibtex
-@software{narrative_gravity_maps,
-  title={Narrative Gravity Maps: A Quantitative Framework for Analyzing Persuasive Narratives},
-  author={[Your Name]},
-  year={2025},
-  url={https://github.com/yourusername/narrative_gravity_analysis},
-  version={2.0}
-}
-```
-
-For the academic paper (when published):
-```bibtex
-@article{narrative_gravity_maps_paper,
-  title={Narrative Gravity Maps: A Quantitative Framework for Discerning the Forces Driving Persuasive Narratives},
-  author={[Your Name]},
-  journal={[Journal Name]},
-  year={2025},
-  note={Software available at https://github.com/yourusername/narrative_gravity_analysis}
-}
-```
-
-## License
-
-Copyright (c) 2025 Jeff Whatcott. All rights reserved.
-
-This project is proprietary software. No part of this software may be reproduced, distributed, or transmitted in any form or by any means without the prior written permission of the copyright holder. See the [LICENSE](LICENSE) file for complete terms.
-
-## Support and Documentation
-
-- **📖 Documentation**: See `docs/` directory for comprehensive guides
-- **🐛 Issues**: Report bugs and request features via GitHub Issues
-- **💬 Discussions**: Academic questions and methodology discussions welcome
-- **📧 Contact**: [Your email for academic collaboration]
-
----
-
-**🎯 Research Focus**: This platform prioritizes robust academic methodology over user interface polish. All frontend development has been archived to focus resources on core research capabilities, statistical validation, and publication preparation.
-
-## 🚨 **BEFORE BUILDING ANYTHING NEW**
-
-**Rule: Search production code first, build in experimental!**
-
-```bash
-# ALWAYS run this before starting any new development:
+# ALWAYS run before any new development:
 python3 scripts/production/check_existing_systems.py "your functionality description"
 
-# Check the production systems inventory:
+# Check production systems inventory:
 cat docs/EXISTING_SYSTEMS_INVENTORY.md
 
-# Check clean code organization standards:
-cat docs/CODE_ORGANIZATION_STANDARDS.md
+# Validate compliance with development standards:
+python3 scripts/production/validate_ai_assistant_compliance.py --check-suggestion "your suggestion"
 ```
 
-**Why?** This project has repeatedly built inferior versions of existing sophisticated systems. Example: Built "AI Academic Advisor" (file existence checks) to replace LLMQualityAssuranceSystem (6-layer mathematical validation).
-
-**🏗️ New Clean Organization**:
+### Clean Architecture Standards
 - ✅ **Production**: `src/`, `scripts/production/`, `docs/specifications/` (stable, tested, documented)
 - 🧪 **Experimental**: `experimental/`, `sandbox/` (iteration, prototypes, testing)  
 - 🗑️ **Deprecated**: `deprecated/` (obsolete code - avoid using)
 
-**🔄 Development Workflow**:
-1. **Search first**: Use production search tool to find existing systems
-2. **Enhance existing**: Improve production code rather than rebuilding
-3. **Build in experimental**: New development starts in `experimental/`
-4. **Promote when ready**: Move to production with quality checks
+### Development Process
+1. **Search First**: Use production search tools to find existing systems
+2. **Enhance Existing**: Improve production code rather than rebuilding
+3. **Build in Experimental**: New development starts in `experimental/prototypes/`
+4. **Promote When Ready**: Move to production with quality validation
+
+## 📈 **Project Status**
+
+### ✅ Completed Infrastructure
+- **Live Academic Research Pipeline**: Production API integration with quality assurance
+- **Multi-LLM Support**: OpenAI, Anthropic, Google AI operational
+- **Database System**: PostgreSQL with complete experimental schema
+- **Quality Assurance**: 6-layer validation preventing silent failures
+- **Academic Export**: R/Stata/Jupyter templates with publication metadata
+
+### 🎯 Current Development (Phase 1)
+- **MFT Implementation**: Framework-specific analysis using existing infrastructure
+- **Internal Validation**: Testing on political texts with correlation analysis
+- **Demo System**: Professional presentation for expert consultation
+- **Preliminary Studies**: Small-scale validation evidence generation
+
+### 🔮 Upcoming Milestones
+- **Week 5**: Expert consultation initiation with working demonstration
+- **Week 9**: Large-scale validation study launch (n=500 participants)
+- **Week 11**: Academic paper drafting with statistical evidence
+- **Week 12**: Publication preparation and community outreach
+
+## 🤝 **Academic Collaboration**
+
+### Expert Consultation Framework
+- **Framework Originators**: Direct collaboration with MFT developers
+- **Academic Standards**: Institutional-quality methodology and documentation
+- **Publication Partnership**: Co-authorship and peer review collaboration
+- **Community Integration**: Computational social science network engagement
+
+### Research Community
+- **Target Audience**: Computational social scientists, digital humanities researchers
+- **Collaboration Opportunities**: Framework validation, cross-cultural studies, methodology development
+- **Academic Workshops**: Conference presentations and training sessions
+- **Open Science**: Transparent methodology and reproducible research standards
+
+## 📖 **Citation**
+
+If you use Discernus in your research, please cite:
+
+```bibtex
+@software{discernus_platform,
+  title={Discernus: Computational Discourse Analysis Platform for Academic Research},
+  author={[Author Name]},
+  year={2024},
+  url={https://github.com/discernus/discernus},
+  version={1.0.0-mvp}
+}
+```
+
+For the academic methodology paper (when published):
+```bibtex
+@article{discernus_methodology,
+  title={Systematic Framework Validation for Computational Text Analysis: The Discernus Platform},
+  author={[Author Name] and Jonathan Haidt},
+  journal={Computational Social Science},
+  year={2025},
+  note={Software available at https://github.com/discernus/discernus}
+}
+```
+
+## 📞 **Contact & Support**
+
+### Academic Collaboration
+- **Research Questions**: Academic methodology and framework validation discussions
+- **Expert Consultation**: Framework originator collaboration requests
+- **Publication Partnership**: Co-authorship and peer review opportunities
+
+### Technical Support
+- **Documentation**: Complete guides in [`docs/`](docs/) directory
+- **Issues**: Report bugs and request features via GitHub Issues
+- **Development**: See [`CONTRIBUTING.md`](CONTRIBUTING.md) for development guidelines
+
+### Community
+- **Discussions**: Computational social science methodology discussions
+- **Workshops**: Academic training and methodology sessions
+- **Conferences**: Presentations at CSS Society, APSA, and related venues
+
+## 📄 **License**
+
+Copyright (c) 2024 Discernus. All rights reserved.
+
+This project is proprietary software designed for academic research collaboration. See the [LICENSE](LICENSE) file for complete terms regarding academic use, collaboration, and citation requirements.
+
+---
+
+**🔬 Academic Research Focus**: This platform prioritizes methodological rigor, expert consultation, and publication-quality evidence over user interface development. Our goal is establishing Discernus as the validated standard for computational discourse analysis in academic research.
