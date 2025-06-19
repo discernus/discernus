@@ -1,0 +1,584 @@
+# Civic Virtue Framework
+# Analyzes moral dimensions of persuasive political discourse through classical virtue ethics
+# and contemporary civic republican theory to identify dimensions that strengthen or weaken
+# democratic discourse and civic engagement.
+#
+# Version: v2025.06.17
+# Last Modified: 2025-06-17
+# Status: Production Ready
+
+# =============================================================================
+# FRAMEWORK METADATA
+# =============================================================================
+
+name: civic_virtue
+framework_name: civic_virtue
+display_name: "Civic Virtue Framework"
+version: v2025.06.17
+
+description: |
+  Civic Virtue Framework analyzes moral dimensions of persuasive political discourse 
+  through classical virtue ethics and contemporary civic republican theory. Identifies 
+  dimensions that strengthen or weaken democratic discourse and civic engagement using 
+  clustered positioning around vertical moral hierarchy.
+
+framework_type: clustered_wells
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  scaling_factor: 0.8
+  description: "Circular coordinate system with wells clustered around vertical moral hierarchy"
+
+positioning_strategy:
+  type: clustered_positioning
+  description: "Wells clustered around vertical dipoles to emphasize moral hierarchy"
+  
+  clusters:
+    virtue_cluster:
+      center_angle: 90
+      span: 60
+      arc_range: [60, 120]
+      well_count: 5
+      well_types: ["integrative"]
+      description: "Virtue wells clustered around top (90°) emphasizing civic strengths"
+      positioning_method: even_distribution_within_arc
+    
+    vice_cluster:
+      center_angle: 270
+      span: 60
+      arc_range: [240, 300]
+      well_count: 5
+      well_types: ["disintegrative"]
+      description: "Vice wells clustered around bottom (270°) emphasizing civic weaknesses"
+      positioning_method: even_distribution_within_arc
+  
+  cluster_separation: minimum_180_degrees
+  allow_overlap: false
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Aristotle. Nicomachean Ethics. Book VI."
+    - "Sandel, M. (2012). What Money Can't Buy: The Moral Limits of Markets."
+  
+  theoretical_approach: |
+    Draws from classical virtue ethics and contemporary civic republican theory to 
+    identify moral dimensions that strengthen or weaken democratic discourse and 
+    civic engagement. Examines civic virtues and vices in political communication.
+  
+  core_insight: |
+    Democratic discourse quality depends on presence of civic virtues (dignity, truth, 
+    justice, hope, pragmatism) versus civic vices (tribalism, fear, resentment, 
+    manipulation, fantasy) in political communication.
+
+# =============================================================================
+# CIVIC VIRTUE WELLS
+# =============================================================================
+
+wells:
+  
+  # Virtue Cluster - Primary
+  Dignity:
+    cluster: virtue_cluster
+    position:
+      angle: 90
+      coordinates: [0.0, 1.0]
+    
+    name: "Dignity"
+    description: "Affirms individual moral worth and universal human dignity in discourse"
+    
+    rich_description: |
+      Emphasizes inherent human worth, individual moral agency, and universal rights 
+      regardless of group identity. Treats all people as deserving of respect and 
+      capable of reasoned participation in democratic life.
+    
+    language_cues:
+      - equal dignity
+      - inherent worth
+      - human agency
+      - individual character
+      - universal rights
+      - moral worth
+      - human dignity
+      - respect for all
+      - common humanity
+      - individual merit
+      - personal dignity
+      - universal values
+    
+    weight: 1.0
+    type: integrative
+    tier: primary
+
+  # Virtue Cluster - Secondary
+  Truth:
+    cluster: virtue_cluster
+    position:
+      angle: 75
+      coordinates: [0.259, 0.966]
+    
+    name: "Truth"
+    description: "Commitment to factual accuracy and intellectual honesty in discourse"
+    
+    rich_description: |
+      Demonstrates commitment to factual accuracy, intellectual honesty, and evidence-based 
+      reasoning. Acknowledges complexity and uncertainty rather than oversimplifying.
+    
+    language_cues:
+      - factual accuracy
+      - evidence-based
+      - intellectual honesty
+      - acknowledge complexity
+      - seek truth
+      - verify information
+      - honest assessment
+      - accurate reporting
+      - factual foundation
+      - empirical evidence
+      - transparent analysis
+      - honest inquiry
+    
+    weight: 0.8
+    type: integrative
+    tier: secondary
+
+  Justice:
+    cluster: virtue_cluster
+    position:
+      angle: 105
+      coordinates: [-0.259, 0.966]
+    
+    name: "Justice"
+    description: "Commitment to fairness, proportionality, and procedural equity"
+    
+    rich_description: |
+      Emphasizes fairness, proportional treatment, procedural equity, and just 
+      outcomes. Considers multiple perspectives and seeks balanced solutions.
+    
+    language_cues:
+      - fairness
+      - proportional treatment
+      - procedural equity
+      - just outcomes
+      - balanced approach
+      - fair process
+      - equitable treatment
+      - due process
+      - impartial judgment
+      - equal treatment
+      - just resolution
+      - proportional response
+    
+    weight: 0.8
+    type: integrative
+    tier: secondary
+
+  # Virtue Cluster - Tertiary
+  Hope:
+    cluster: virtue_cluster
+    position:
+      angle: 60
+      coordinates: [0.5, 0.866]
+    
+    name: "Hope"
+    description: "Constructive vision and optimism about democratic possibilities"
+    
+    rich_description: |
+      Presents constructive vision, optimism about democratic possibilities, and 
+      confidence in human capacity for positive change and cooperation.
+    
+    language_cues:
+      - constructive vision
+      - optimistic future
+      - positive change
+      - democratic possibilities
+      - human potential
+      - better tomorrow
+      - hopeful outlook
+      - progress possible
+      - collective capability
+      - promising future
+      - constructive solutions
+      - inspiring vision
+    
+    weight: 0.6
+    type: integrative
+    tier: tertiary
+
+  Pragmatism:
+    cluster: virtue_cluster
+    position:
+      angle: 120
+      coordinates: [-0.5, 0.866]
+    
+    name: "Pragmatism"
+    description: "Focus on practical solutions and workable compromise"
+    
+    rich_description: |
+      Emphasizes practical solutions, workable compromise, and results-oriented 
+      approaches. Values effectiveness and feasibility in policy recommendations.
+    
+    language_cues:
+      - practical solutions
+      - workable compromise
+      - results-oriented
+      - effective approach
+      - feasible policy
+      - realistic goals
+      - pragmatic approach
+      - workable solutions
+      - practical results
+      - effective implementation
+      - achievable outcomes
+      - sensible approach
+    
+    weight: 0.6
+    type: integrative
+    tier: tertiary
+
+  # Vice Cluster - Primary
+  Tribalism:
+    cluster: vice_cluster
+    position:
+      angle: 270
+      coordinates: [0.0, -1.0]
+    
+    name: "Tribalism"
+    description: "Prioritizes group loyalty and in-group/out-group distinctions over universal principles"
+    
+    rich_description: |
+      Prioritizes group loyalty over universal principles, emphasizes in-group/out-group 
+      distinctions, and treats moral worth as conditional on group membership.
+    
+    language_cues:
+      - real Americans
+      - our people
+      - they don't belong
+      - us vs them
+      - group loyalty
+      - not one of us
+      - tribal unity
+      - group supremacy
+      - blood and soil
+      - true believers
+      - outsiders
+      - identity politics
+    
+    weight: 1.0
+    type: disintegrative
+    tier: primary
+
+  # Vice Cluster - Secondary
+  Resentment:
+    cluster: vice_cluster
+    position:
+      angle: 255
+      coordinates: [-0.259, -0.966]
+    
+    name: "Resentment"
+    description: "Appeals to grievance, victimization, and blame of others"
+    
+    rich_description: |
+      Appeals to grievance, victimization, and blame of others for problems. 
+      Focuses on past injuries and seeks retribution rather than solutions.
+    
+    language_cues:
+      - victimization
+      - grievance
+      - blame others
+      - past injuries
+      - seek retribution
+      - they wronged us
+      - unfair treatment
+      - revenge
+      - payback
+      - resentful anger
+      - nursing grudges
+      - victim mentality
+    
+    weight: 0.8
+    type: disintegrative
+    tier: secondary
+
+  Manipulation:
+    cluster: vice_cluster
+    position:
+      angle: 285
+      coordinates: [0.259, -0.966]
+    
+    name: "Manipulation"
+    description: "Uses deceptive rhetoric and emotional manipulation rather than reasoned argument"
+    
+    rich_description: |
+      Uses deceptive rhetoric, emotional manipulation, and propaganda techniques 
+      rather than reasoned argument and evidence-based persuasion.
+    
+    language_cues:
+      - deceptive rhetoric
+      - emotional manipulation
+      - propaganda techniques
+      - misleading claims
+      - distorted facts
+      - manipulative language
+      - false promises
+      - deceptive framing
+      - propaganda
+      - spin
+      - misleading information
+      - emotional exploitation
+    
+    weight: 0.8
+    type: disintegrative
+    tier: secondary
+
+  # Vice Cluster - Tertiary
+  Fear:
+    cluster: vice_cluster
+    position:
+      angle: 240
+      coordinates: [-0.5, -0.866]
+    
+    name: "Fear"
+    description: "Appeals to anxiety, catastrophic thinking, and existential threats"
+    
+    rich_description: |
+      Appeals to anxiety, catastrophic thinking, and existential threats. 
+      Emphasizes danger and crisis to motivate action through fear.
+    
+    language_cues:
+      - catastrophic thinking
+      - existential threats
+      - anxiety appeal
+      - crisis mentality
+      - fear mongering
+      - doom and gloom
+      - panic
+      - terror
+      - existential danger
+      - apocalyptic
+      - threatening
+      - scary consequences
+    
+    weight: 0.6
+    type: disintegrative
+    tier: tertiary
+
+  Fantasy:
+    cluster: vice_cluster
+    position:
+      angle: 300
+      coordinates: [0.5, -0.866]
+    
+    name: "Fantasy"
+    description: "Promotes unrealistic expectations and magical thinking about solutions"
+    
+    rich_description: |
+      Promotes unrealistic expectations, magical thinking about solutions, and 
+      denial of practical constraints or trade-offs in policy implementation.
+    
+    language_cues:
+      - unrealistic expectations
+      - magical thinking
+      - fantasy solutions
+      - denial of constraints
+      - impossible promises
+      - wishful thinking
+      - unrealistic goals
+      - magical solutions
+      - fantasy world
+      - ignore reality
+      - impossible outcomes
+      - utopian thinking
+    
+    weight: 0.6
+    type: disintegrative
+    tier: tertiary
+
+# =============================================================================
+# CALCULATION METHODOLOGY
+# =============================================================================
+
+calculation_method:
+  type: clustered_center_of_mass
+  description: "Calculate center of mass accounting for cluster-based well organization"
+  
+  cluster_weighting:
+    virtue_cluster: 0.5
+    vice_cluster: 0.5
+  
+  formula: "COM = Σ(cluster_weight × well_COM) for each cluster"
+
+# =============================================================================
+# WEIGHTING PHILOSOPHY
+# =============================================================================
+
+weighting_philosophy:
+  description: "Hierarchical weighting based on civic importance and democratic discourse impact"
+  approach: virtue_hierarchy_weighting
+  
+  tiers:
+    primary:
+      weight: 1.0
+      description: "Fundamental civic virtues and vices - core democratic discourse dimensions"
+      wells:
+        - Dignity
+        - Tribalism
+    
+    secondary:
+      weight: 0.8
+      description: "Important civic dimensions - significant democratic discourse impact"
+      wells:
+        - Truth
+        - Justice
+        - Resentment
+        - Manipulation
+    
+    tertiary:
+      weight: 0.6
+      description: "Supporting civic dimensions - moderate democratic discourse impact"
+      wells:
+        - Hope
+        - Pragmatism
+        - Fear
+        - Fantasy
+  
+  moral_hierarchy:
+    virtue_cluster: "Positive civic virtues that strengthen democratic discourse"
+    vice_cluster: "Negative civic vices that weaken democratic discourse"
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION
+# =============================================================================
+
+visualization:
+  cluster_colors:
+    virtue_cluster: "#4CAF50"    # Green - virtue focus
+    vice_cluster: "#F44336"      # Red - vice focus
+  
+  cluster_boundaries:
+    show_arc_boundaries: true
+    boundary_style: solid
+    boundary_opacity: 0.4
+  
+  well_colors:
+    integrative: "#2E7D32"      # Dark green - civic virtues
+    disintegrative: "#C62828"   # Dark red - civic vices
+  
+  supported_types:
+    - circular
+    - clustered
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  center_of_mass:
+    name: "Center of Mass"
+    description: "Overall civic orientation considering cluster-weighted well forces"
+  
+  narrative_polarity_score:
+    name: "Narrative Polarity Score"
+    description: "Distance from center normalized by circle radius - measures civic orientation strength"
+  
+  directional_purity_score:
+    name: "Directional Purity Score"
+    description: "Consistency of virtue vs vice orientation - measures civic discourse clarity"
+  
+  virtue_dominance_index:
+    name: "Virtue Dominance Index"
+    description: "Relative strength of virtue cluster versus vice cluster"
+  
+  civic_discourse_quality:
+    name: "Civic Discourse Quality Score"
+    description: "Overall assessment of democratic discourse health based on virtue/vice balance"
+
+# =============================================================================
+# PROMPT INTEGRATION
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert in civic virtue theory and democratic discourse analysis, 
+    specializing in classical virtue ethics and contemporary civic republican 
+    theory with deep knowledge of moral dimensions in political communication.
+  
+  analysis_focus: |
+    Evaluate how political discourse demonstrates civic virtues (dignity, truth, 
+    justice, hope, pragmatism) versus civic vices (tribalism, fear, resentment, 
+    manipulation, fantasy) that affect democratic discourse quality.
+  
+  scoring_approach: |
+    Score each well on 0.0-1.0 scale based on presence/strength of civic 
+    virtue or vice in the text, with specific textual evidence.
+  
+  scoring_emphasis: |
+    Assess civic virtue and vice positioning within each cluster, considering how 
+    different moral dimensions manifest in political communication and their 
+    impact on democratic discourse quality.
+  
+  evidence_requirements: |
+    Provide specific textual evidence supporting each well score, explaining how 
+    language patterns reflect underlying civic virtue or vice assumptions and 
+    their effect on democratic participation.
+  
+  framework_specific_guidance:
+    cluster_awareness:
+      - "Recognize that wells are clustered by moral orientation"
+      - "Virtue cluster focuses on civic strengths that enhance democratic discourse"
+      - "Vice cluster addresses civic weaknesses that undermine democratic discourse"
+      - "Consider cluster-specific moral patterns and language"
+      - "Assess overall virtue vs vice balance in political communication"
+
+# =============================================================================
+# SYSTEM COMPATIBILITY
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - clustered_wells_v1.0
+    - civic_virtue_v2.1
+  
+  calculation_methods:
+    - clustered_center_of_mass
+  
+  api_versions:
+    - v2.1
+  
+  visualization_types:
+    - circular
+    - clustered
+
+# =============================================================================
+# ACADEMIC VALIDATION
+# =============================================================================
+
+validation:
+  academic_standard: "Classical Virtue Ethics and Civic Republican Theory"
+  theoretical_foundation: "Aristotelian virtue ethics and contemporary civic theory"
+  domain_expertise: "Democratic discourse analysis and political communication ethics"
+  
+  key_principles:
+    - "Civic virtues strengthen democratic discourse and participation"
+    - "Civic vices undermine democratic discourse and civic engagement"
+    - "Moral dimensions affect quality of political communication"
+    - "Character virtues translate to communicative virtues in public sphere"
+    - "Democratic health depends on virtue-vice balance in political discourse"
+
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-17T18:00:00.000000"
+theoretical_validation: "Classical virtue ethics and civic republican theory validated"
+implementation_status: "Production ready for civic virtue analysis of political discourse"
+prompt_template: "civic_virtue_v2.1"
+analysis_instructions: "Evaluate how political discourse demonstrates civic virtues versus civic vices that affect democratic discourse quality." 

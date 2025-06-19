@@ -131,6 +131,10 @@ prompt_configuration:
     between treating people as individuals with inherent worth versus defining people primarily 
     through group membership and loyalty.
   
+  scoring_approach: |
+    Score each well on 0.0-1.0 scale based on presence/strength of identity 
+    orientation in the text, with specific textual evidence.
+  
   scoring_emphasis: >
     Focus on identity-based moral frameworks rather than policy positions. Look for how the text 
     treats human worth: as universal and individual, or as conditional on group membership and loyalty.

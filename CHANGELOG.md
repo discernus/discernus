@@ -3,6 +3,25 @@
 ## [Unreleased]
 
 ### Added
+- **🎯 POLITICAL FRAMING THEORY FRAMEWORKS: Revolutionary Dual-Theory Implementation** (June 17, 2025)
+  - **Lakoff Family Models Framework**: First quantitative test of Lakoff's family model clustering hypothesis through arc clustering analysis
+    - **Three Dipoles Architecture**: Authority/Discipline vs Empathy/Communication, Competition/Hierarchy vs Cooperation/Mutual Support, Self-Reliance vs Interdependence
+    - **Arc Clustering Hypothesis Testing**: Tests whether Strict Father components (315° to 45°) cluster separately from Nurturant Parent components (135° to 225°)
+    - **Coherence Violation Detection**: Algorithms to identify mixed messaging that violates family model predictions
+    - **Family Model Coherence Validation**: Systematic testing of whether political communications follow predicted clustering patterns
+    - **Cross-Issue Worldview Consistency**: Analysis of family model clustering patterns across different policy domains
+  - **Entman Framing Functions Framework**: Systematic test of Entman's function independence hypothesis through four independent wells
+    - **Four Independent Wells**: Problem Definition (0°), Causal Attribution (90°), Moral Evaluation (180°), Treatment Recommendation (270°)
+    - **Function Independence Testing**: Statistical validation of whether framing functions vary independently as communication theory predicts
+    - **Frame Competition Detection**: Identification of competing or conflicting frames within same communication
+    - **Strategic Communication Analysis**: Measurement of systematic vs ad hoc framing function usage
+    - **Message Completeness Assessment**: Analysis of which framing functions are present/absent in political communications
+  - **Theoretical Innovation**: Addresses fundamental distinction between "frames in thought" (Lakoff) vs "frames in communication" (Entman)
+  - **Research Integration**: Built on Chong & Druckman synthesis and extensive Political Framing Theory bibliography with 15+ foundational sources
+  - **Advanced Visualization**: Arc cluster boundaries, coherence violation highlighting, function independence indicators, strategic pattern recognition
+  - **Academic Validation**: Production-ready frameworks with comprehensive prompt configurations, quality assurance integration, and research question documentation
+
+### Added
 - **🏗️ UNIFIED ASSET MANAGEMENT ARCHITECTURE: Complete Prototype Implementation** (June 19, 2025)
   - **Content-Addressable Storage System**: Extended corpus hash-based pattern to all asset types with hierarchical structure `asset_storage/{type}/{hash_prefix}/{hash_middle}/{hash_full}/`
   - **Framework Standardization to YAML**: Converted IDITI (dignity vs tribalism dipole) and Three Wells Political (non-dipole independent theories) frameworks from JSON to YAML with complete academic documentation

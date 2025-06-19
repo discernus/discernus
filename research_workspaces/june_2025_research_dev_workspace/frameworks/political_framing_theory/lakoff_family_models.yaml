@@ -1,0 +1,587 @@
+# Lakoff Family Models Framework - Political Framing Theory
+# Tests family model coherence through three dipoles with arc clustering hypothesis
+# Based on George Lakoff's "Moral Politics" family-based moral systems and integration
+# research by Chong & Druckman demonstrating "frames in thought" cognitive structures
+#
+# Version: v2025.06.17
+# Last Modified: 2025-06-17
+# Status: Production Ready
+
+# =============================================================================
+# FRAMEWORK METADATA
+# =============================================================================
+
+name: lakoff_family_models
+framework_name: lakoff_family_models
+display_name: "Lakoff Family Models Framework (Political Framing Theory)"
+version: v2025.06.17
+
+description: |
+  Lakoff Family Models Framework tests George Lakoff's family model coherence hypothesis 
+  through three dipoles with arc clustering analysis. Implements Strict Father vs 
+  Nurturant Parent worldview components as independent dipoles positioned in predicted 
+  arc clusters to empirically validate cognitive linguistics theory through circular geometry.
+
+framework_type: arc_clustered_dipoles
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  scaling_factor: 1.0
+  description: "Circular coordinate system testing arc clustering hypothesis for family model coherence"
+
+positioning_strategy:
+  type: arc_clustering_hypothesis
+  description: "Three dipoles positioned to test Lakoff's family model clustering predictions"
+  
+  clusters:
+    strict_father_arc:
+      center_angle: 0
+      span: 90
+      arc_range: [315, 45]
+      dipole_count: 3
+      model_type: "strict_father"
+      description: "Strict Father model components clustered on left arc (315° to 45°)"
+      positioning_method: specific_degree_placement
+      hypothesis: "Authority/Discipline, Competition/Hierarchy, Self-Reliance should cluster"
+    
+    nurturant_parent_arc:
+      center_angle: 180
+      span: 90
+      arc_range: [135, 225]
+      dipole_count: 3
+      model_type: "nurturant_parent"
+      description: "Nurturant Parent model components clustered on right arc (135° to 225°)"
+      positioning_method: specific_degree_placement
+      hypothesis: "Empathy/Communication, Cooperation/Mutual Support, Interdependence should cluster"
+  
+  cluster_separation: 180_degrees
+  clustering_validation: empirical_testing_required
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Lakoff, G. (1996). Moral Politics: How Liberals and Conservatives Think. University of Chicago Press."
+    - "Lakoff, G. (2002). Moral Politics: How Liberals and Conservatives Think (2nd ed.). University of Chicago Press."
+    - "Chong, D., & Druckman, J. N. (2007). Framing theory. Annual Review of Political Science, 10, 103-126."
+    - "Thibodeau, P. H., & Boroditsky, L. (2011). Metaphors we think with: The role of metaphor in reasoning. PLoS One, 6(2), e16782."
+  
+  theoretical_approach: |
+    Tests Lakoff's family model coherence hypothesis through computational analysis 
+    and circular geometry. Examines whether political communications actually follow 
+    predicted clustering patterns where Strict Father components (Authority/Discipline, 
+    Competition/Hierarchy, Self-Reliance) cluster together and oppose Nurturant Parent 
+    components (Empathy/Communication, Cooperation/Mutual Support, Interdependence).
+  
+  core_insight: |
+    Political worldviews stem from coherent family models that generate consistent 
+    positions across issues. This framework provides the first quantitative test 
+    of whether family model components actually cluster as Lakoff's theory predicts.
+
+  integration_research: |
+    Based on Chong & Druckman's finding that this addresses "frames in thought" 
+    (deep cognitive structures) as distinct from "frames in communication" 
+    (systematic message construction).
+
+# =============================================================================
+# FAMILY MODEL DIPOLES
+# =============================================================================
+
+dipoles:
+  
+  # Strict Father Arc Cluster - Dipole 1
+  - name: Authority_Discipline_vs_Empathy_Communication
+    cluster: strict_father_arc
+    description: "Authority/discipline vs empathy/communication - leadership and decision-making approaches"
+    
+    positive:
+      name: Authority_Discipline
+      description: "Strong moral authority, clear discipline, hierarchical decision-making and order"
+      
+      rich_description: |
+        Emphasizes strong moral authority, clear discipline, hierarchical decision-making, 
+        and order. Leadership through strength, control, and established authority structures.
+      
+      language_cues:
+        - strong leadership
+        - moral authority
+        - discipline
+        - law and order
+        - clear rules
+        - firm boundaries
+        - decisive action
+        - chain of command
+        - respect for authority
+        - maintain control
+        - establish order
+        - traditional values
+        - moral discipline
+        - proper behavior
+        - hierarchical structure
+        - authoritative guidance
+      
+      position:
+        angle: 315
+        coordinates: [0.707, 0.707]
+      
+      weight: 1.0
+      type: strict_father
+      tier: primary
+    
+    negative:
+      name: Empathy_Communication
+      description: "Empathetic understanding, inclusive dialogue, communication-based problem solving"
+      
+      rich_description: |
+        Emphasizes empathetic understanding, inclusive dialogue, communication-based 
+        problem solving, and listening to diverse perspectives and voices.
+      
+      language_cues:
+        - listen to all voices
+        - understand different perspectives
+        - inclusive dialogue
+        - empathetic understanding
+        - open communication
+        - hear concerns
+        - diverse viewpoints
+        - respectful discussion
+        - bridge differences
+        - meaningful conversation
+        - mutual understanding
+        - compassionate listening
+        - collaborative dialogue
+        - inclusive participation
+        - empathetic engagement
+        - understanding approach
+      
+      position:
+        angle: 135
+        coordinates: [-0.707, 0.707]
+      
+      weight: -1.0
+      type: nurturant_parent
+      tier: primary
+
+  # Strict Father Arc Cluster - Dipole 2  
+  - name: Competition_Hierarchy_vs_Cooperation_Mutual_Support
+    cluster: strict_father_arc
+    description: "Competition/hierarchy vs cooperation/mutual support - social organization approaches"
+    
+    positive:
+      name: Competition_Hierarchy
+      description: "Natural hierarchy, merit-based competition, individual achievement through competitive advantage"
+      
+      rich_description: |
+        Emphasizes natural hierarchy, merit-based competition, winners and losers as 
+        character building, and individual achievement through competitive advantage.
+      
+      language_cues:
+        - natural hierarchy
+        - merit-based selection
+        - winners and losers
+        - competition builds character
+        - survival of the fittest
+        - earned position
+        - individual achievement
+        - competitive advantage
+        - rise to the top
+        - best candidate
+        - proven track record
+        - performance-based
+        - meritocracy
+        - competitive excellence
+        - hierarchical order
+        - earned success
+      
+      position:
+        angle: 0
+        coordinates: [1.0, 0.0]
+      
+      weight: 0.9
+      type: strict_father
+      tier: secondary
+    
+    negative:
+      name: Cooperation_Mutual_Support
+      description: "Egalitarian cooperation, shared responsibility, collective problem-solving and mutual aid"
+      
+      rich_description: |
+        Emphasizes egalitarian cooperation, shared responsibility, collective problem-solving, 
+        mutual aid, and protection of vulnerable through community care.
+      
+      language_cues:
+        - working together
+        - shared responsibility
+        - collective effort
+        - mutual support
+        - help each other
+        - community strength
+        - collaboration
+        - partnership
+        - united approach
+        - team effort
+        - collective action
+        - solidarity
+        - cooperative solutions
+        - mutual aid
+        - community support
+        - collective care
+      
+      position:
+        angle: 180
+        coordinates: [-1.0, 0.0]
+      
+      weight: -0.9
+      type: nurturant_parent
+      tier: secondary
+
+  # Strict Father Arc Cluster - Dipole 3
+  - name: Self_Reliance_vs_Interdependence
+    cluster: strict_father_arc
+    description: "Self-reliance vs interdependence - individual vs collective responsibility approaches"
+    
+    positive:
+      name: Self_Reliance
+      description: "Individual responsibility, self-determination, personal accountability for outcomes"
+      
+      rich_description: |
+        Emphasizes individual responsibility, self-determination, personal accountability 
+        for outcomes, and strength through independence and self-sufficiency.
+      
+      language_cues:
+        - personal responsibility
+        - self-reliance
+        - individual accountability
+        - pull yourself up
+        - earn your way
+        - stand on your own
+        - personal choice
+        - individual freedom
+        - self-determination
+        - bootstrap
+        - self-made
+        - independent
+        - personal agency
+        - individual merit
+        - self-sufficiency
+        - personal achievement
+      
+      position:
+        angle: 45
+        coordinates: [0.707, -0.707]
+      
+      weight: 0.8
+      type: strict_father
+      tier: secondary
+    
+    negative:
+      name: Interdependence
+      description: "Collective responsibility, social connection, mutual dependence as foundation for society"
+      
+      rich_description: |
+        Emphasizes collective responsibility, social connection, strength through unity 
+        and shared purpose, and mutual dependence as foundation for society.
+      
+      language_cues:
+        - we're all connected
+        - stronger together
+        - collective well-being
+        - mutual dependence
+        - shared fate
+        - common good
+        - social fabric
+        - community bonds
+        - interconnected society
+        - mutual obligation
+        - collective responsibility
+        - shared prosperity
+        - social solidarity
+        - community interdependence
+        - collective strength
+        - shared destiny
+      
+      position:
+        angle: 225
+        coordinates: [-0.707, -0.707]
+      
+      weight: -0.8
+      type: nurturant_parent
+      tier: secondary
+
+# =============================================================================
+# ARC CLUSTERING ANALYSIS CONFIGURATION
+# =============================================================================
+
+clustering_analysis:
+  
+  hypothesis_testing:
+    strict_father_clustering:
+      expected_wells: ["Authority_Discipline", "Competition_Hierarchy", "Self_Reliance"]
+      predicted_arc: [315, 45]
+      clustering_coefficient_threshold: 0.7
+      co_activation_threshold: 0.6
+    
+    nurturant_parent_clustering:
+      expected_wells: ["Empathy_Communication", "Cooperation_Mutual_Support", "Interdependence"]
+      predicted_arc: [135, 225]
+      clustering_coefficient_threshold: 0.7
+      co_activation_threshold: 0.6
+    
+    anti_clustering:
+      hypothesis: "Strict Father and Nurturant Parent wells should not co-activate"
+      cross_cluster_threshold: 0.3
+      coherence_violation_detection: true
+  
+  geometric_measurements:
+    center_of_mass_calculation: cluster_weighted
+    clustering_coefficient: "measure_actual_vs_predicted_positioning"
+    arc_separation_index: "quantitative_distance_between_family_model_clusters"
+    intra_cluster_coherence: "average_distance_between_wells_within_same_family_model"
+    inter_cluster_distance: "minimum_distance_between_wells_from_different_family_models"
+  
+  coherence_violation_detection:
+    mixed_messaging_score: "texts_scoring_high_on_both_family_model_clusters"
+    contradiction_index: "wells_from_opposing_family_models_both_highly_activated"
+    family_model_purity: "percentage_of_total_activation_concentrated_in_predicted_cluster"
+    strategic_mixing_detection: "systematic_patterns_of_cross_cluster_activation"
+  
+  validation_metrics:
+    clustering_success_rate: "percentage_of_texts_following_predicted_arc_patterns"
+    predictive_accuracy: "family_model_positioning_predicting_new_issue_positions"
+    cross_issue_consistency: "correlation_of_arc_patterns_across_different_policy_domains"
+    temporal_stability: "consistency_of_clustering_patterns_over_time_for_same_sources"
+
+# =============================================================================
+# CALCULATION METHODOLOGY
+# =============================================================================
+
+calculation_method:
+  type: arc_clustered_dipole_center_of_mass
+  description: "Calculate center of mass testing family model clustering hypothesis through geometric analysis"
+  
+  cluster_weighting:
+    strict_father_arc: 0.5
+    nurturant_parent_arc: 0.5
+  
+  clustering_validation:
+    method: "empirical_testing_of_lakoff_predictions"
+    success_criteria: "geographic_clustering_of_family_model_components"
+  
+  formula: "COM = Σ(cluster_weight × dipole_COM) with clustering coefficient analysis"
+
+# =============================================================================
+# WEIGHTING PHILOSOPHY
+# =============================================================================
+
+weighting_philosophy:
+  description: "Hierarchical weighting testing Lakoff's predictions about family model component importance"
+  approach: family_model_hierarchy_testing
+  
+  tiers:
+    primary:
+      weight: 1.0
+      description: "Core family model distinction - Authority/Discipline vs Empathy/Communication"
+      dipoles:
+        - Authority_Discipline_vs_Empathy_Communication
+    
+    secondary:
+      weight: 0.9
+      description: "Important family model components - social organization approaches"
+      dipoles:
+        - Competition_Hierarchy_vs_Cooperation_Mutual_Support
+    
+    secondary_alt:
+      weight: 0.8
+      description: "Supporting family model components - responsibility approaches"
+      dipoles:
+        - Self_Reliance_vs_Interdependence
+  
+  family_model_predictions:
+    strict_father_arc: "Authority/Discipline + Competition/Hierarchy + Self-Reliance should cluster"
+    nurturant_parent_arc: "Empathy/Communication + Cooperation/Mutual Support + Interdependence should cluster"
+    coherence_hypothesis: "Components within each family model should co-activate"
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION
+# =============================================================================
+
+visualization:
+  arc_cluster_colors:
+    strict_father_arc: "#1976D2"      # Blue - Strict Father model
+    nurturant_parent_arc: "#4CAF50"   # Green - Nurturant Parent model
+  
+  arc_boundaries:
+    show_predicted_arcs: true
+    boundary_style: dashed
+    boundary_opacity: 0.4
+    clustering_hypothesis_overlay: true
+  
+  well_colors:
+    strict_father: "#0D47A1"          # Dark blue - Strict Father components
+    nurturant_parent: "#1B5E20"       # Dark green - Nurturant Parent components
+  
+  clustering_visualization:
+    show_clustering_coefficients: true
+    highlight_coherence_violations: true
+    center_of_mass_indicators: true
+    arc_separation_measurements: true
+  
+  supported_types:
+    - circular
+    - arc_clustered
+    - clustering_analysis
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  center_of_mass:
+    name: "Center of Mass"
+    description: "Overall family model orientation considering arc-clustered dipole forces"
+  
+  clustering_coefficient:
+    name: "Family Model Clustering Coefficient"
+    description: "Measure of how closely actual positioning matches Lakoff's clustering predictions"
+  
+  arc_separation_index:
+    name: "Arc Separation Index"
+    description: "Quantitative distance between Strict Father and Nurturant Parent clusters"
+  
+  family_model_coherence_score:
+    name: "Family Model Coherence Score"
+    description: "Consistency of family model components within predicted clusters"
+  
+  coherence_violation_index:
+    name: "Coherence Violation Index"
+    description: "Detection of mixed messaging that violates family model predictions"
+  
+  predictive_validation_score:
+    name: "Predictive Validation Score"
+    description: "Ability of family model positioning to predict positions on new issues"
+
+# =============================================================================
+# PROMPT INTEGRATION
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert in cognitive linguistics and political psychology, specializing 
+    in George Lakoff's family model theory and political framing analysis. You have 
+    deep knowledge of how Strict Father and Nurturant Parent worldviews manifest 
+    in political discourse through specific language patterns and conceptual metaphors.
+  
+  analysis_focus: |
+    Analyze this text to identify components of Lakoff's family models: Authority/Discipline, 
+    Competition/Hierarchy, Self-Reliance (Strict Father) versus Empathy/Communication, 
+    Cooperation/Mutual Support, Interdependence (Nurturant Parent). Test whether these 
+    components cluster as predicted by family model theory.
+  
+  scoring_approach: |
+    Score each dipole pole on 0.0-1.0 scale based on presence/strength of family 
+    model components in the text, with specific textual evidence supporting 
+    clustering hypothesis testing.
+  
+  scoring_emphasis: |
+    Focus on detecting family model coherence patterns. Look for co-activation 
+    of Strict Father components (Authority/Discipline + Competition/Hierarchy + 
+    Self-Reliance) or Nurturant Parent components (Empathy/Communication + 
+    Cooperation/Mutual Support + Interdependence) as predicted by theory.
+  
+  evidence_requirements: |
+    Provide specific textual evidence for each dipole score, explaining how 
+    language patterns reflect family model assumptions. Note any coherence 
+    violations where opposing family model components appear together.
+  
+  framework_specific_guidance:
+    clustering_awareness:
+      - "Look for co-activation patterns within each family model"
+      - "Strict Father components should cluster: Authority/Discipline, Competition/Hierarchy, Self-Reliance"
+      - "Nurturant Parent components should cluster: Empathy/Communication, Cooperation/Mutual Support, Interdependence"
+      - "Note any mixed messaging that violates family model coherence predictions"
+      - "Consider conceptual metaphors that reveal underlying family model assumptions"
+
+# =============================================================================
+# RESEARCH QUESTIONS ENABLED
+# =============================================================================
+
+research_questions:
+  family_model_coherence_testing:
+    question: "Do political texts that score high on Authority/Discipline also score high on Competition/Hierarchy and Self-Reliance as Lakoff predicts?"
+    methodology: "Statistical correlation analysis across family model components"
+    success_criteria: "Strong positive correlations within family model clusters"
+  
+  arc_clustering_validation:
+    question: "Do the six dipole poles actually cluster geographically as predicted by family model theory when analyzing real political communications?"
+    methodology: "Geometric clustering analysis using circular coordinates"
+    success_criteria: "Geographic clustering matches theoretical predictions"
+  
+  coherence_violation_detection:
+    question: "What percentage of political texts violate family model predictions by mixing Strict Father and Nurturant Parent language patterns?"
+    methodology: "Coherence violation detection algorithms"
+    success_criteria: "Identification and categorization of mixed messaging patterns"
+  
+  cross_issue_worldview_consistency:
+    question: "Do political figures maintain consistent family model clustering patterns across different policy domains?"
+    methodology: "Cross-issue correlation analysis of family model positioning"
+    success_criteria: "Consistent clustering patterns across economic, social, foreign policy domains"
+  
+  predictive_worldview_analysis:
+    question: "Can family model positioning on known issues predict positions on new/emerging political issues?"
+    methodology: "Predictive modeling using family model scores"
+    success_criteria: "Successful prediction of positions on new issues from family model patterns"
+
+# =============================================================================
+# SYSTEM COMPATIBILITY
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - arc_clustered_dipoles_v1.0
+    - lakoff_family_models_v2.1
+  
+  calculation_methods:
+    - arc_clustered_dipole_center_of_mass
+    - clustering_coefficient_analysis
+  
+  api_versions:
+    - v2.1
+  
+  visualization_types:
+    - circular
+    - arc_clustered
+    - clustering_analysis
+
+# =============================================================================
+# ACADEMIC VALIDATION
+# =============================================================================
+
+validation:
+  academic_standard: "Lakoff Family Model Theory and Cognitive Linguistics"
+  theoretical_foundation: "George Lakoff's Moral Politics framework"
+  empirical_validation: "Thibodeau & Boroditsky experimental validation of conceptual metaphor effects"
+  integration_research: "Chong & Druckman synthesis of cognitive and communication framing approaches"
+  
+  key_principles:
+    - "Political worldviews stem from coherent family-based moral systems"
+    - "Strict Father and Nurturant Parent models generate consistent positions across issues"
+    - "Family model components should cluster geographically when analyzed computationally"
+    - "Conceptual metaphors reveal underlying family model assumptions"
+    - "Frame coherence violations indicate mixed or strategic messaging"
+
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-17T19:00:00.000000"
+theoretical_validation: "Lakoff family model theory with Chong & Druckman integration research"
+implementation_status: "Production ready for testing family model clustering hypothesis"
+prompt_template: "lakoff_family_models_v2.1"
+analysis_instructions: "Analyze family model components testing whether Strict Father elements (Authority/Discipline, Competition/Hierarchy, Self-Reliance) cluster together and oppose Nurturant Parent elements (Empathy/Communication, Cooperation/Mutual Support, Interdependence) as predicted by Lakoff's theory." 

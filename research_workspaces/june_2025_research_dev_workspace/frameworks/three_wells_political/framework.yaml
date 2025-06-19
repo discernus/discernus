@@ -264,6 +264,10 @@ prompt_configuration:
     about human nature, social organization, and political legitimacy that transcend
     traditional economic categories.
   
+  scoring_approach: |
+    Score each well independently on 0.0-1.0 scale based on presence/strength 
+    of theoretical orientation in the text, with specific textual evidence.
+  
   analytical_questions:
     - "Does this narrative primarily organize around group identity and systemic oppression (Intersectionality Theory)?"
     - "Does this narrative emphasize in-group loyalty and out-group exclusion (Tribal Domination Theory)?"

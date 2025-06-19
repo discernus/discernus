@@ -377,6 +377,53 @@ Items discovered or decided but not yet prioritized for current iteration. Gets 
   - Include scaling transparency in quality reports
   - Flag potential issues with over-scaling or under-utilization of visual space
 
+## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
+*Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
+
+**✅ MIGRATION UPDATE** (June 17, 2025): Business Ethics framework successfully migrated from obsolete JSON format to standardized YAML format in research workspace with complete documentation.
+
+**Strategic Justification**: Comprehensive specifications and user guides needed for the research workspace structure and YAML formats validated in the unified asset management prototype. Critical for production integration and researcher adoption.
+
+- [ ] **Research Workspace Specification Documentation** - Create comprehensive technical specification for the research workspace structure and workflows (discovered: June 19, priority: HIGH)
+  - Document complete directory structure: frameworks/, prompt_templates/, weighting_schemes/, experiments/, etc.
+  - Specify YAML format standards for all asset types with complete schema documentation
+  - Include project_manifest.yaml specification with dependency tracking and version management
+  - Document two-tier architecture: development workspace + immutable storage integration
+  - Create technical requirements for hash-based content addressing and provenance tracking
+  - Include migration pathways from legacy JSON formats to new YAML standards
+
+- [ ] **YAML Format Standards and Schema Documentation** - Establish formal standards for all YAML asset formats (discovered: June 19, priority: HIGH)
+  - Create comprehensive schema documentation for framework YAML format with validation rules
+  - Document prompt template YAML structure with methodology integration requirements
+  - Specify weighting scheme YAML format with mathematical constraint validation
+  - Include metadata and provenance tracking YAML schemas
+  - Create validation tools and examples for each YAML format type
+  - Document version evolution and backward compatibility requirements
+
+- [ ] **Research Workspace User Guide** - Create comprehensive user guide for researchers working with the workspace structure (discovered: June 19, priority: HIGH)
+  - Write step-by-step guide for creating new frameworks in YAML format
+  - Document workflow for developing and testing prompt templates
+  - Include best practices for research workspace organization and asset management
+  - Create troubleshooting guide for common YAML format and validation issues
+  - Document integration pathways between research workspace and production systems
+  - Include collaboration workflows and version control best practices
+
+- [ ] **Content-Addressable Storage Integration Guide** - Document the production integration pathway for hash-based asset storage (discovered: June 19, priority: MEDIUM)
+  - Create technical specification for asset_storage/ directory structure and hash algorithms
+  - Document integration with existing FrameworkManager and PromptTemplateManager systems
+  - Specify database schema requirements for asset_versions and asset_provenance tables
+  - Include migration strategy from prototype to production implementation
+  - Document integrity verification and deduplication capabilities
+  - Create troubleshooting guide for hash-based storage and retrieval operations
+
+- [ ] **Framework Portfolio Management Guide** - Document systematic approach to managing diverse framework types (dipole vs non-dipole) (discovered: June 19, priority: MEDIUM)
+  - Create guide for converting legacy JSON frameworks to YAML format
+  - Document framework validation and theoretical coherence testing procedures
+  - Include best practices for framework versioning and iteration management
+  - Specify quality assurance requirements for framework academic documentation
+  - Create comparative analysis guidelines for different framework architectures
+  - Document expert consultation preparation and validation evidence requirements
+
 ## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
 *Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
 

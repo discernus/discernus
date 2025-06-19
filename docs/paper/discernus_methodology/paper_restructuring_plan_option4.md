@@ -60,11 +60,11 @@ The current draft suffers from several fundamental problems identified in expert
 
 ### Title Options
 - "Systematic Framework Comparison for Computational Text Analysis: The Discernus Platform"
-- "Discernus: An Experimental Infrastructure for Comparative Political Text Analysis"
+- "Discernus: An Experimental Infrastructure for Comparative Persuasive Text Analysis"
 - "Methodological Infrastructure for Systematic Political Framework Testing"
 
 ### Abstract (200-250 words)
-**New Focus**: Presents Discernus as experimental infrastructure for systematic comparison of political analysis frameworks, demonstrated through implementation of three established approaches: Moral Foundations Theory (Haidt et al.), Political Framing Theory (Entman, Lakoff), and Cultural Theory (Douglas & Wildavsky). Emphasizes methodological contribution rather than theoretical discovery.
+**New Focus**: Presents Discernus as experimental infrastructure for systematic comparison of persuasive analysis frameworks, demonstrated through implementation of three established approaches: Moral Foundations Theory (Haidt et al.), Political Framing Theory (Entman, Lakoff), and Cultural Theory (Douglas & Wildavsky). Emphasizes methodological contribution rather than theoretical discovery.
 
 ### I. Introduction (4-5 pages)
 **Current Problem**: Fragmentation in computational political text analysis, lack of systematic framework comparison, replication crisis in social science
