@@ -1,0 +1,10 @@
+asset_type: !!python/object/apply:__main__.AssetType
+- framework
+content_hash: 08b33fff5a0e2453dc04e6d1ca8dfe33f62133d0216a7eae06d3595857ac2e77
+created_at: 2025-06-19 15:57:47.508509
+development_path: research_workspaces/june_2025_research_dev_workspace/frameworks/iditi
+format_version: yaml_v1.0
+name: framework
+storage_path: asset_storage/framework/08/b3/08b33fff5a0e2453dc04e6d1ca8dfe33f62133d0216a7eae06d3595857ac2e77
+validation_status: pending
+version: auto

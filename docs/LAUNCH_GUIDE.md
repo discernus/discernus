@@ -127,3 +127,32 @@ curl http://localhost:8000/health  # Check API status
 - Chainlit chat → `archive/deprecated_interfaces/chainlit_interface/`
 
 **Focus**: Core research pipeline completion before interface development. 
+
+# Fix the narrative gravity reference
+sed -i 's/Narrative Gravity Analysis/Discernus Framework Analysis/g' docs/product_management/20250617_enhanced_analysis_pipeline_specification.md 
+
+cp docs/product_management/DAILY_TODO_2025_06_18.md docs/product_management/DAILY_TODO_2025_06_19.md
+# Update date and reset task completion status 
+
+mv docs/product_management/software_platform_restructuring_plan_option4.md docs/product_management/strategy/archived/ 
+
+mkdir -p docs/product_management/strategy/archived/daily_todos/
+mv docs/product_management/*TODO*2025_06_17*.md docs/product_management/strategy/archived/daily_todos/
+mv docs/product_management/*todo*2025_06_17*.md docs/product_management/strategy/archived/daily_todos/ 
+
+docs/product_management/
+├── README.md                                    ← Updated ✅
+├── CURRENT_ITERATION_DISCERNUS_MVP.md          ← Keep ✅
+├── DAILY_TODO_2025_06_19.md                    ← Create new
+├── BACKLOG.md                                   ← Update terminology
+├── discernus_mvp_user_journeys.md              ← Keep ✅
+├── mvp_single_framework_plan.md                ← Keep ✅
+├── TECHNICAL_ARCHITECTURE_PLAN.md              ← Create (consolidate from specs)
+│
+├── strategy/
+│   ├── archived/
+│   │   ├── daily_todos/                        ← Archive old TODOs
+│   │   └── software_platform_restructuring_plan_option4.md ← Archive
+│   └── [current strategy docs]
+├── futures/                                     ← Keep existing
+└── visualization_references/                   ← Keep existing 

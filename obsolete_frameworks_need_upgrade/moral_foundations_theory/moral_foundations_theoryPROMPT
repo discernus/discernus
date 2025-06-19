@@ -1,0 +1,125 @@
+Moral Foundations Theory Analysis - Haidt Framework
+Version: 2025.06.19.01.00 | Framework: moral_foundations_theory | Mode: dipoles_analysis
+
+You are an expert in moral psychology specializing in Jonathan Haidt's Moral Foundations Theory with deep knowledge of how different moral foundations manifest in discourse across cultures and political orientations.
+
+**MORAL FOUNDATIONS THEORY ANALYSIS**
+
+**THEORETICAL FOUNDATION:**
+Analyze this text using Haidt's five core moral foundations. Each foundation represents an evolved psychological mechanism for addressing adaptive challenges in group living.
+
+**THE FIVE MORAL FOUNDATION PAIRS:**
+
+**1. CARE/HARM FOUNDATION**
+- **Care (Positive)**: Compassion, protection of vulnerable, empathy for suffering, kindness
+- **Harm (Negative)**: Cruelty, violence, causing suffering, neglect of those in need
+- **Evolved from**: Mammalian attachment systems and parental care
+- **Key indicators**: Language about compassion, protection, suffering, helping others
+
+**2. FAIRNESS/CHEATING FOUNDATION**  
+- **Fairness (Positive)**: Justice, reciprocity, proportional treatment, earning rewards
+- **Cheating (Negative)**: Exploitation, free-riding, undeserved advantage, corruption
+- **Evolved from**: Reciprocal altruism and cooperation challenges
+- **Key indicators**: Language about justice, deserving, equality, merit, fairness
+
+**3. LOYALTY/BETRAYAL FOUNDATION**
+- **Loyalty (Positive)**: Group solidarity, patriotism, self-sacrifice for collective
+- **Betrayal (Negative)**: Disloyalty, treason, putting self above group
+- **Evolved from**: Group cooperation and coalition formation  
+- **Key indicators**: Language about team, unity, solidarity, patriotism, group commitment
+
+**4. AUTHORITY/SUBVERSION FOUNDATION**
+- **Authority (Positive)**: Respect for hierarchy, tradition, legitimate leadership
+- **Subversion (Negative)**: Chaos, illegitimate rebellion, disrespect for order
+- **Evolved from**: Primate hierarchical social structures
+- **Key indicators**: Language about respect, tradition, order, hierarchy, leadership
+
+**5. SANCTITY/DEGRADATION FOUNDATION**
+- **Sanctity (Positive)**: Purity, sacred values, elevated living, spiritual concerns
+- **Degradation (Negative)**: Contamination, debasement, profaning the sacred
+- **Evolved from**: Disgust psychology and contamination avoidance
+- **Key indicators**: Language about purity, sacred, holy, elevated, dignity
+
+**POLITICAL PSYCHOLOGY INSIGHT:**
+- **Liberals**: Primarily emphasize Care and Fairness foundations
+- **Conservatives**: Draw more equally on all five foundations
+- **Understanding differences**: Political disagreements often stem from prioritizing different moral foundations
+
+🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨
+- Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)
+- DO NOT use integers 1-10 or any other scale
+- DO NOT use percentages or any scale other than 0.0-1.0
+
+**ANALYSIS METHODOLOGY:**
+
+**STEP 1 - IDENTIFY DOMINANT FOUNDATIONS**
+Read the text and identify which 2-3 moral foundations are most prominent. Look for:
+- Language cues specific to each foundation
+- Emotional appeals that activate particular foundations
+- Moral arguments that draw on foundation-specific concerns
+
+**STEP 2 - ASSESS POSITIVE VS NEGATIVE POLES**
+For each prominent foundation, determine whether the text emphasizes:
+- The positive pole (Care, Fairness, Loyalty, Authority, Sanctity)
+- The negative pole (Harm, Cheating, Betrayal, Subversion, Degradation)
+- Or both poles in tension
+
+**STEP 3 - TEXTUAL EVIDENCE**
+For each significant foundation (>0.2 score), provide:
+- Specific quotes demonstrating foundation activation
+- Explanation of how the language connects to that foundation
+- Assessment of intensity (0.0-1.0 scale)
+
+**SCORING GUIDELINES:**
+- **0.8-1.0**: Foundation is central theme with strong language cues
+- **0.5-0.7**: Foundation is clearly present with moderate emphasis  
+- **0.2-0.4**: Foundation has minor presence or weak signals
+- **0.0-0.1**: Foundation is absent or barely detectable
+
+**RESPONSE FORMAT (JSON):**
+
+```json
+{
+  "scores": {
+    "Care": 0.0,
+    "Harm": 0.0,
+    "Fairness": 0.0,
+    "Cheating": 0.0,
+    "Loyalty": 0.0,
+    "Betrayal": 0.0,
+    "Authority": 0.0,
+    "Subversion": 0.0,
+    "Sanctity": 0.0,
+    "Degradation": 0.0
+  },
+  "analysis": "Brief explanation of dominant foundations and textual evidence"
+}
+```
+
+**TEXT TO ANALYZE:**
+
+America stands at a crossroads. We face challenges that test our character and our resolve. But I believe in the fundamental decency of the American people. I believe in our capacity to come together, to bridge our differences, and to build a future worthy of our children.
+
+We must reject the politics of division and embrace the politics of unity. Not the unity of conformity, but the unity of purpose - the understanding that we are all in this together, that our fates are intertwined.
+
+Yes, we have real disagreements about policy. That's healthy in a democracy. But we must remember that our opponents are not our enemies - they are our fellow Americans who simply see different solutions to the challenges we face.
+
+The work ahead will not be easy. But nothing worthwhile ever is. We must approach it with humility, with empathy, and with an unwavering commitment to the truth. We must listen to one another, learn from one another, and work together to solve the problems that matter most.
+
+**MORAL FOUNDATIONS ANALYSIS INSTRUCTIONS:**
+
+1. **Foundation Identification**: Identify which of the five foundation pairs are most activated
+2. **Pole Assessment**: Determine positive vs negative emphasis for each foundation
+3. **Evidence Citation**: Provide specific textual evidence for scores >0.2
+4. **Political Pattern**: Note whether the moral profile aligns with liberal (individualizing) or conservative (binding) patterns
+5. **Cultural Context**: Consider how foundation usage might vary across cultural contexts
+
+**EXPECTED OUTCOME:**
+- Clear identification of 2-3 dominant moral foundations
+- Scores reflecting the theoretical structure of MFT (paired opposites)
+- Evidence-based analysis grounded in specific textual examples
+- Recognition of individualizing vs binding foundation patterns
+- Academically rigorous analysis suitable for moral psychology research
+
+**OUTPUT FORMAT:**
+Provide foundation analysis in JSON format with specific textual evidence supporting each significant score (>0.2). 

@@ -1,8 +1,8 @@
-# Political Corpora Resources - Analysis for Narrative Gravity Research
+# Political Corpora Resources - Analysis for Discernus Platform Political Narrative
 
 ## Overview
 
-Based on the corpus resources discovered in the web search, this analysis identifies the most relevant resources for narrative gravity research and outlines potential applications and methodological connections.
+Based on the corpus resources discovered in the web search, this analysis identifies the most relevant resources for discernus platform research in the political narrative domain and outlines potential applications and methodological connections.
 
 ## Most Relevant Corpora for Narrative Gravity Research
 

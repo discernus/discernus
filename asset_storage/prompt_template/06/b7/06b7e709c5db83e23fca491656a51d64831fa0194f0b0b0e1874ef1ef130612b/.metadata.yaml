@@ -1,0 +1,10 @@
+asset_type: !!python/object/apply:__main__.AssetType
+- prompt_template
+content_hash: 06b7e709c5db83e23fca491656a51d64831fa0194f0b0b0e1874ef1ef130612b
+created_at: 2025-06-19 15:57:47.543445
+development_path: research_workspaces/june_2025_research_dev_workspace/prompt_templates/moral_foundations_analysis
+format_version: yaml_v1.0
+name: template
+storage_path: asset_storage/prompt_template/06/b7/06b7e709c5db83e23fca491656a51d64831fa0194f0b0b0e1874ef1ef130612b
+validation_status: pending
+version: auto

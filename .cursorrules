@@ -1,5 +1,9 @@
 # Cursor AI Assistant Rules for Narrative Gravity Analysis Project
 
+## 🎯 USER PREFERENCES
+
+**User prefers temperature 0 behaviour from all assistants** - Prioritize systematic, consistent, rule-following responses over creative variation for this technical/academic project.
+
 ## 🚨 MANDATORY RULES - ALWAYS FOLLOW
 
 ### Rule 1: ALWAYS Search Production Systems First

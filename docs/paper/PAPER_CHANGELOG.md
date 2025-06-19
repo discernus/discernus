@@ -1,16 +1,52 @@
-# Paper Changelog: Narrative Gravity Maps
+# Paper Changelog: Discernus Methodology Paper
 
-All notable changes to the academic paper "Narrative Gravity Maps: A Quantitative Framework for Discerning the Forces Driving Persuasive Narratives" are documented in this file.
+All notable changes to the academic paper "Systematic Framework Comparison for Computational Text Analysis: The Discernus Platform" are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased] - Future
 
+## [v2.0.0] - 2025-06-18
+
+### Added
+**STRATEGIC PIVOT TO DISCERNUS METHODOLOGY**: Complete transformation from theoretical discovery to methodological infrastructure
+- **Complete Paper Restructuring**: Transformed from "Narrative Gravity Maps" theoretical framework to "Discernus Platform" methodological infrastructure
+- **Established Framework Focus**: Shifted from novel Three Wells Model to implementations of established frameworks (Moral Foundations Theory, Political Framing Theory, Cultural Theory)
+- **Methodological Contribution Positioning**: Repositioned paper as infrastructure for systematic framework comparison rather than theoretical discovery
+- **Academic Validation Strategy**: Integrated expert consultation process with framework originators and rigorous validation studies
+- **Platform Architecture Documentation**: Added comprehensive technical infrastructure specifications for research platform
+
+### Changed
+- **Paper Title**: "Narrative Gravity Maps: A Quantitative Framework for Discerning the Forces Driving Persuasive Narratives" → "Systematic Framework Comparison for Computational Text Analysis: The Discernus Platform"
+- **Core Argument**: From novel theoretical framework to methodological infrastructure enabling systematic comparison of established frameworks
+- **Validation Approach**: From internal consistency validation to rigorous comparison with established measures and expert consultation
+- **Scope**: From universal methodology claims to domain-specific validation with clear boundary conditions
+- **Academic Positioning**: From political theory contribution to computational social science methodology advancement
+
+### Enhanced
+- **AI Citation Safeguards**: Implemented comprehensive bibliography verification system to prevent AI hallucination citations
+- **Bibliography Management**: Added systematic verification protocols, DOI checking, and multiple source confirmation requirements
+- **Documentation Quality Assurance**: Integrated MECEC (Mutually Exclusive, Collectively Exhaustive, Current) compliance across all documentation
+- **Cross-Reference Integrity**: Systematic audit and repair of documentation cross-references and navigation
+
+### Evidence Status
+- ✅ Technical platform implementation validated
+- ✅ Framework operationalization protocols established
+- ✅ Expert consultation process initiated
+- ❌ Systematic validation studies with established measures (required for publication)
+- ❌ Human-computer comparison studies (critical for methodological claims)
+
+### Strategic Impact
+- **Academic Credibility**: Shifted from potentially controversial novel theory to established methodological contribution
+- **Community Alignment**: Positioned for collaboration with established framework research communities
+- **Publication Strategy**: Focused on computational social science and methodology journals rather than political theory
+- **Platform Adoption**: Clear value proposition for researchers using established frameworks
+
 ## [v1.2.0] - 2025-06-12
 
 ### Added
 **FRAMEWORK AGNOSTICISM TRANSFORMATION**: Complete repositioning of paper to establish universal methodology approach
-- **Universal Methodology Focus**: Paper now positions Narrative Gravity Maps as framework-agnostic methodology applicable across all domains
+- **Universal Methodology Focus**: Paper positioned Narrative Gravity Maps as framework-agnostic methodology applicable across all domains *(Note: Superseded by Discernus methodology focus in v2.0.0)*
 - **Cross-Domain Framework Examples**: Five example frameworks spanning political discourse, business communication, educational content, healthcare messaging, and communication studies
 - **Domain-Specific Application Guidelines**: Clear framework development guidance for any analytical domain
 - **Future Framework Opportunities**: Explicit pathways for business, education, healthcare, legal, international relations, and marketing applications
@@ -65,7 +101,7 @@ Fixed all validation overclaims in paper content - changed 'empirical validation
 - Expert annotation comparison results (v1.1.0)
 - Expanded literature review incorporating human-LLM alignment research (v1.1.0)
 
-## [1.0.0] - 2025-01-06
+## [1.0.0] - 2025-06-19
 
 ### Added
 - **MAJOR CORRECTION**: Honest validation status assessment replacing overclaims
@@ -101,7 +137,7 @@ Fixed all validation overclaims in paper content - changed 'empirical validation
 - ❌ Human validation studies - acknowledged as critical gap
 - ❌ Expert annotation studies - identified as required next step
 
-## [0.9.0] - 2025-01-05 (Historical Reconstruction)
+## [0.9.0] - 2025-06-19 (Historical Reconstruction)
 
 ### Added (Before Validation Correction)
 - Complete mathematical framework documentation
@@ -171,9 +207,9 @@ evidence/
 ## Review Status
 
 ### Internal Reviews
-- [x] Technical accuracy review (2025-01-06)
-- [x] Validation claims audit (2025-01-06) 
-- [x] Literature review integration (2025-01-06)
+- [x] Technical accuracy review (2025-06-19)
+- [x] Validation claims audit (2025-06-19) 
+- [x] Literature review integration (2025-06-19)
 - [ ] Independent technical review (planned)
 - [ ] Academic writing quality review (planned)
 
@@ -198,4 +234,4 @@ evidence/
 
 ---
 
-*This changelog maintains complete transparency about paper development, ensuring that validation claims align precisely with available evidence and that the research maintains academic integrity throughout the publication process.* 
+*This changelog maintains complete transparency about paper development, documenting the strategic evolution from theoretical discovery to methodological infrastructure, ensuring that validation claims align precisely with available evidence and that the research maintains academic integrity throughout the publication process.* 

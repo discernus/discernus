@@ -1,0 +1,10 @@
+asset_type: !!python/object/apply:__main__.AssetType
+- framework
+content_hash: c62c9447dc9bec6f9bbb38dd0e3599a2329832e41cfa9fd410bada63a24cc262
+created_at: 2025-06-19 15:57:47.536341
+development_path: research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory
+format_version: yaml_v1.0
+name: framework
+storage_path: asset_storage/framework/c6/2c/c62c9447dc9bec6f9bbb38dd0e3599a2329832e41cfa9fd410bada63a24cc262
+validation_status: pending
+version: auto
