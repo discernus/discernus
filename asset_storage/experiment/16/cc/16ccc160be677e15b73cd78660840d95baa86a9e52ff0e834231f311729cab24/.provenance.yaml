@@ -1,0 +1,7 @@
+asset_id: MFT_Academic_Validation_Study_1.0.0_20250619_221657
+content_hash: 16ccc160be677e15b73cd78660840d95baa86a9e52ff0e834231f311729cab24
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-19T22:16:57.224518'
+source_path: experiments/mft_validation_experiment.json
+validation_status: validated_before_storage
+version: 1.0.0

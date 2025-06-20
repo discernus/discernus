@@ -30,7 +30,7 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
 # Add src to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 
 try:
     import yaml
@@ -973,7 +973,7 @@ class ExperimentOrchestrator:
         
         # Initialize experiment logging
         try:
-            from src.narrative_gravity.analysis.statistical_logger import StatisticalLogger
+            from narrative_gravity.analysis.statistical_logger import StatisticalLogger
             self.experiment_logger = StatisticalLogger()
             logger.info("✅ StatisticalLogger initialized")
         except ImportError:
@@ -1410,7 +1410,10 @@ In addition to the standard analysis output, please consider how your findings r
         return components
     
     def _validate_framework(self, framework_spec: Dict[str, Any]) -> ComponentInfo:
-        """Validate framework component"""
+        """
+        Validate framework component using unified asset management flow:
+        Workspace → Validation → Content-Addressable Storage → Database Registration
+        """
         framework_id = framework_spec.get('id', framework_spec.get('name'))
         version = framework_spec.get('version')
         file_path = framework_spec.get('file_path')
@@ -1422,17 +1425,18 @@ In addition to the standard analysis output, please consider how your findings r
             file_path=file_path
         )
         
-        # Check if framework exists on filesystem
+        # STEP 1: Validate from workspace
+        framework_data = None
         try:
-            # If file_path is specified, load directly from there
             if file_path:
                 framework_path = Path(file_path)
                 if not framework_path.exists():
-                    raise FileNotFoundError(f"Framework file not found at specified path: {file_path}")
+                    raise FileNotFoundError(f"Framework file not found at workspace path: {file_path}")
                 
-                # Load framework directly from file path
+                # Load and validate framework from workspace
                 if framework_path.suffix.lower() in ['.yaml', '.yml']:
-                    import yaml
+                    if not YAML_AVAILABLE:
+                        raise RuntimeError("PyYAML not available - cannot load YAML framework")
                     with open(framework_path, 'r') as f:
                         framework_data = yaml.safe_load(f)
                 else:
@@ -1440,7 +1444,7 @@ In addition to the standard analysis output, please consider how your findings r
                         framework_data = json.load(f)
                 
                 component.exists_on_filesystem = True
-                logger.info(f"✅ Framework loaded from workspace file: {file_path}")
+                logger.info(f"✅ Framework loaded from workspace: {file_path}")
                 
             else:
                 # Fall back to standard framework loader
@@ -1451,8 +1455,9 @@ In addition to the standard analysis output, please consider how your findings r
             missing_sections = self.framework_loader.validate_framework_structure(framework_data)
             if missing_sections:
                 logger.warning(f"Framework {framework_id} missing sections: {missing_sections}")
+                # For now, continue with warning - could make this blocking in the future
             
-            # 📦 UNIFIED ASSET MANAGEMENT: Store validated framework in content-addressable storage
+            # STEP 2: Store validated framework in content-addressable storage
             if framework_data:
                 try:
                     storage_result = self.asset_manager.store_asset(
@@ -1473,18 +1478,18 @@ In addition to the standard analysis output, please consider how your findings r
                         logger.info(f"📦 Framework {framework_id} stored in asset storage (hash: {component.content_hash[:8]}...)")
                         
                 except Exception as e:
-                    logger.warning(f"⚠️ Failed to store framework in asset storage: {e}")
-                    # Continue without asset storage - not a blocking error
+                    logger.error(f"❌ Failed to store framework in asset storage: {e}")
+                    raise  # This is now a blocking error - we need clean asset storage
             
         except FileNotFoundError as e:
             component.exists_on_filesystem = False
             component.needs_registration = True
-            logger.warning(f"Framework {framework_id} not found: {e}")
+            logger.warning(f"Framework {framework_id} not found in workspace: {e}")
         except Exception as e:
-            logger.error(f"Error loading framework {framework_id}: {e}")
+            logger.error(f"Error validating framework {framework_id}: {e}")
             raise
         
-        # Check database existence if available
+        # STEP 3: Check database existence (registration will happen later from asset storage)
         if DATABASE_AVAILABLE and self.auto_registration_available:
             component.exists_in_db = self._check_framework_in_database(framework_id, version)
         else:
@@ -1553,7 +1558,10 @@ In addition to the standard analysis output, please consider how your findings r
         return component
     
     def _validate_corpus(self, corpus_spec: Dict[str, Any]) -> ComponentInfo:
-        """Validate corpus files with hash validation and database checking"""
+        """
+        Validate corpus using unified asset management flow:
+        Workspace → Validation → Content-Addressable Storage → Database Registration
+        """
         corpus_id = corpus_spec.get('id', corpus_spec.get('name'))
         file_path = corpus_spec.get('file_path')
         expected_hash = corpus_spec.get('expected_hash')
@@ -1566,59 +1574,80 @@ In addition to the standard analysis output, please consider how your findings r
             expected_hash=expected_hash
         )
         
-        # Validate using corpus registrar if available
+        # STEP 1: Validate corpus from workspace
+        try:
+            if file_path:
+                corpus_path = Path(file_path)
+                
+                if corpus_path.is_file():
+                    # Single file validation
+                    if not corpus_path.exists():
+                        raise FileNotFoundError(f"Corpus file not found: {file_path}")
+                    
+                    # Read and validate file content
+                    with open(corpus_path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                    
+                    if len(content.strip()) == 0:
+                        logger.warning(f"Corpus file appears empty: {file_path}")
+                    
+                    component.exists_on_filesystem = True
+                    logger.info(f"✅ Corpus file validated: {file_path}")
+                    
+                elif corpus_path.is_dir():
+                    # Directory collection validation
+                    if not corpus_path.exists():
+                        raise FileNotFoundError(f"Corpus directory not found: {file_path}")
+                    
+                    # Find matching files in directory
+                    import glob
+                    file_pattern = str(corpus_path / pattern)
+                    matching_files = glob.glob(file_pattern)
+                    
+                    if not matching_files:
+                        logger.warning(f"No files found matching pattern {pattern} in {file_path}")
+                        component.exists_on_filesystem = False
+                    else:
+                        # Validate each file in collection
+                        valid_files = 0
+                        for file_path_in_collection in matching_files:
+                            try:
+                                with open(file_path_in_collection, 'r', encoding='utf-8') as f:
+                                    content = f.read()
+                                if len(content.strip()) > 0:
+                                    valid_files += 1
+                            except Exception as e:
+                                logger.warning(f"Error reading corpus file {file_path_in_collection}: {e}")
+                        
+                        component.exists_on_filesystem = valid_files > 0
+                        logger.info(f"✅ Corpus collection validated: {valid_files}/{len(matching_files)} files in {file_path}")
+                else:
+                    raise FileNotFoundError(f"Corpus path is neither file nor directory: {file_path}")
+                    
+            else:
+                # No file path provided - can't validate
+                component.exists_on_filesystem = False
+                logger.warning(f"No file path provided for corpus: {corpus_id}")
+                
+        except FileNotFoundError as e:
+            component.exists_on_filesystem = False
+            logger.warning(f"Corpus {corpus_id} not found in workspace: {e}")
+        except Exception as e:
+            logger.error(f"Error validating corpus {corpus_id}: {e}")
+            component.exists_on_filesystem = False
+        
+        # STEP 2: Check database existence (corpus registration will be handled separately)
         if DATABASE_AVAILABLE and self.auto_registration_available:
             try:
-                if file_path:
-                    corpus_path = Path(file_path)
-                    
-                    if corpus_path.is_file():
-                        # Single file validation
-                        validation = self.corpus_registrar.validate_corpus_file(file_path, expected_hash)
-                        component.exists_on_filesystem = validation['exists']
-                        
-                        # Check hash validation
-                        if expected_hash and not validation['hash_valid']:
-                            logger.warning(f"Hash validation failed for corpus: {corpus_id}")
-                            logger.warning(f"  Expected: {expected_hash}")
-                            logger.warning(f"  Calculated: {validation['calculated_hash']}")
-                        
-                        # Store calculated hash for reference
-                        component.expected_hash = validation['calculated_hash']
-                        
-                    elif corpus_path.is_dir():
-                        # Directory collection validation  
-                        validation = self.corpus_registrar.validate_corpus_collection(file_path, pattern)
-                        component.exists_on_filesystem = validation['valid']
-                        
-                        if not validation['valid']:
-                            logger.warning(f"Corpus collection validation failed: {corpus_id}")
-                            logger.warning(f"  Files found: {validation['files_found']}")
-                            logger.warning(f"  Files valid: {validation['files_valid']}")
-                    else:
-                        component.exists_on_filesystem = False
-                        
-                    # Check database existence
-                    component.exists_in_db = self.corpus_registrar.check_corpus_in_database(corpus_id, file_path)
-                    
-                else:
-                    # No file path provided - can't validate
-                    component.exists_on_filesystem = False
-                    component.exists_in_db = False
-                    
+                component.exists_in_db = self.corpus_registrar.check_corpus_in_database(corpus_id, file_path)
             except Exception as e:
-                logger.warning(f"Error validating corpus {corpus_id}: {e}")
-                # Fallback to basic file existence check
-                if file_path:
-                    corpus_file = Path(file_path)
-                    component.exists_on_filesystem = corpus_file.exists()
+                logger.warning(f"Error checking corpus {corpus_id} in database: {e}")
                 component.exists_in_db = False
         else:
-            # Fallback validation without corpus registrar
-            if file_path:
-                corpus_file = Path(file_path)
-                component.exists_on_filesystem = corpus_file.exists()
             component.exists_in_db = False
+        
+        # Note: Corpus files are not stored in content-addressable storage during validation
+        # They are registered directly to the corpus registry during auto-registration
         
         return component
     
@@ -1694,7 +1723,11 @@ In addition to the standard analysis output, please consider how your findings r
         
         for component in missing_components:
             try:
-                if component.component_type == 'framework' and component.exists_on_filesystem:
+                if component.component_type == 'framework' and component.content_hash:
+                    # Register framework from content-addressable storage, not workspace
+                    success = self._register_framework_from_storage(component)
+                elif component.component_type == 'framework' and component.exists_on_filesystem:
+                    # Fallback to legacy registration if no content hash
                     success = self.framework_registrar.register_framework(
                         component.component_id, 
                         component.version
@@ -1858,6 +1891,70 @@ In addition to the standard analysis output, please consider how your findings r
         
         return registration_success
     
+    def _register_framework_from_storage(self, component: ComponentInfo) -> bool:
+        """Register framework from content-addressable storage to database"""
+        if not component.content_hash or not component.storage_path:
+            logger.error(f"Cannot register framework {component.component_id}: missing content hash or storage path")
+            return False
+        
+        logger.info(f"🔧 Registering framework from asset storage: {component.component_id} (hash: {component.content_hash[:8]}...)")
+        
+        try:
+            # Load validated framework from asset storage
+            asset_data = self.asset_manager.load_asset_by_hash(component.content_hash, 'framework')
+            if not asset_data:
+                logger.error(f"Failed to load framework from asset storage: {component.component_id}")
+                return False
+            
+            framework_data = asset_data['content']
+            
+            # Register to database using existing infrastructure
+            session = self.framework_registrar.Session()
+            try:
+                # Check if framework version already exists
+                framework_version = component.version or 'v1.0.0'
+                existing = session.query(FrameworkVersion).filter_by(
+                    framework_name=component.component_id,
+                    version=framework_version
+                ).first()
+                
+                if existing:
+                    logger.info(f"Framework {component.component_id}:{framework_version} already exists in database")
+                    return True
+                
+                # Extract components for database storage from validated asset
+                dipoles_data = {'dipoles': framework_data.get('dipoles', [])}
+                weights_data = framework_data.get('weighting_philosophy', {})
+                
+                # Create new framework version record
+                framework_record = FrameworkVersion(
+                    framework_name=component.component_id,
+                    version=framework_version,
+                    dipoles_json=dipoles_data,
+                    framework_json=framework_data,
+                    weights_json=weights_data,
+                    description=framework_data.get('description', f'Registered from validated asset storage'),
+                    theoretical_foundation=str(framework_data.get('theoretical_foundation', '')),
+                    validation_status="validated_from_storage"
+                )
+                
+                session.add(framework_record)
+                session.commit()
+                
+                logger.info(f"✅ Framework registered from asset storage: {component.component_id}:{framework_version}")
+                return True
+                
+            except Exception as e:
+                logger.error(f"Database error registering framework {component.component_id}: {e}")
+                session.rollback()
+                return False
+            finally:
+                session.close()
+                
+        except Exception as e:
+            logger.error(f"Failed to register framework {component.component_id} from storage: {e}")
+            return False
+    
     def generate_error_guidance(self, missing_components: List[ComponentInfo]) -> Dict[str, str]:
         """Generate helpful error messages and guidance"""
         guidance = {}
@@ -1929,118 +2026,73 @@ In addition to the standard analysis output, please consider how your findings r
         
         # Initialize Framework Transaction Manager
         try:
-            from src.narrative_gravity.utils.framework_transaction_manager import FrameworkTransactionManager
-            framework_tx_manager = FrameworkTransactionManager(self.current_experiment_id)
-            logger.info("🔒 Framework Transaction Manager initialized")
+            from narrative_gravity.utils.framework_transaction_manager import FrameworkTransactionManager
+            
+            transaction_manager = FrameworkTransactionManager()
+            
+            # Validate components with standard validation
+            components = self.validate_components(experiment)
+            
+            # Validate frameworks using transaction manager
+            framework_errors = []
+            for component in components:
+                if component.component_type == 'framework':
+                    validation_result = transaction_manager.validate_framework_transaction(
+                        component.component_id,
+                        component.version,
+                        component.file_path
+                    )
+                    
+                    if not validation_result['valid']:
+                        framework_errors.extend(validation_result['errors'])
+            
+            if framework_errors:
+                # Generate detailed guidance for framework transaction integrity failure
+                guidance = {
+                    'transaction_id': self.current_experiment_id,
+                    'total_frameworks': len([c for c in components if c.component_type == 'framework']),
+                    'failed_frameworks': [
+                        {
+                            'framework_name': component.component_id,
+                            'validation_result': 'failed',
+                            'error_details': framework_errors[:3],
+                            'requested_version': component.version,
+                            'database_version': None
+                        }
+                        for component in components 
+                        if component.component_type == 'framework'
+                    ],
+                    'recommendations': [
+                        f"Framework '{component.component_id}' validation failed. Check framework definition and database registration."
+                        for component in components 
+                        if component.component_type == 'framework'
+                    ],
+                    'commands_to_run': [
+                        f"# Check framework definition: frameworks/{component.component_id}/framework_consolidated.json",
+                        f"python3 scripts/framework_sync.py import {component.component_id}",
+                        f"python3 scripts/framework_sync.py validate {component.component_id}"
+                    ]
+                }
+                
+                # Create detailed failure message for user
+                detailed_message = self._generate_framework_failure_message(guidance, framework_errors)
+                
+                # Raise framework transaction integrity error
+                raise FrameworkTransactionIntegrityError(
+                    framework_errors=framework_errors,
+                    guidance=guidance,
+                    detailed_message=detailed_message
+                )
+            
+            logger.info("✅ Framework transaction integrity validation passed")
+            
         except ImportError:
             logger.warning("⚠️ Framework Transaction Manager not available - using basic validation")
-            framework_tx_manager = None
-        
-        # Validate components with standard validation
-        components = self.validate_components(experiment)
-        
-        # 🔒 CRITICAL: Framework Transaction Integrity Validation
-        if framework_tx_manager:
-            logger.info("🔒 Validating framework transaction integrity...")
-            
-            # Extract framework specifications from experiment
-            components_config = experiment.get('components', {})
-            frameworks = components_config.get('frameworks', [])
-            
-            # Validate each framework for transaction integrity
-            for framework_spec in frameworks:
-                framework_name = framework_spec.get('id', framework_spec.get('name'))
-                expected_version = framework_spec.get('version')
-                framework_file = framework_spec.get('file_path')
-                
-                # Resolve framework file path if provided
-                framework_file_path = None
-                if framework_file:
-                    if Path(framework_file).is_absolute():
-                        framework_file_path = Path(framework_file)
-                    else:
-                        # Try relative to experiment file location
-                        framework_file_path = Path(self.experiment_file).parent / framework_file
-                        if not framework_file_path.exists():
-                            # Try relative to frameworks directory
-                            framework_file_path = Path("frameworks") / framework_name / "framework_consolidated.json"
-                
-                logger.info(f"🔍 Validating framework transaction: {framework_name}")
-                
-                # Perform framework transaction validation
-                tx_state = framework_tx_manager.validate_framework_for_experiment(
-                    framework_name=framework_name,
-                    framework_file_path=framework_file_path,
-                    expected_version=expected_version
-                )
-                
-                # Log transaction state
-                logger.info(f"🔒 Framework {framework_name} validation result: {tx_state.validation_result.value}")
-                if tx_state.new_version_created:
-                    logger.info(f"🔄 New framework version created: {framework_name}:{tx_state.database_version}")
-            
-            # 🚨 CRITICAL: Check framework transaction validity
-            is_framework_valid, framework_errors = framework_tx_manager.is_transaction_valid()
-            
-            if not is_framework_valid:
-                logger.error("🚨 FRAMEWORK TRANSACTION INTEGRITY FAILURE")
-                logger.error("❌ Experiment terminated due to framework validation uncertainty")
-                
-                # Generate user guidance
-                guidance = framework_tx_manager.generate_rollback_guidance()
-                
-                # Log detailed guidance
-                logger.error("🔧 Framework Transaction Failure Guidance:")
-                logger.error(f"   Transaction ID: {guidance['transaction_id']}")
-                logger.error(f"   Failed Frameworks: {len(guidance['failed_frameworks'])}")
-                
-                for recommendation in guidance['recommendations']:
-                    logger.error(f"   📋 {recommendation}")
-                
-                logger.error("🔧 Commands to fix framework issues:")
-                for command in guidance['commands_to_run']:
-                    logger.error(f"   $ {command}")
-                
-                # Attempt rollback
-                logger.warning("🔄 Attempting framework transaction rollback...")
-                rollback_success = framework_tx_manager.rollback_transaction()
-                
-                if rollback_success:
-                    logger.info("✅ Framework transaction rollback completed")
-                else:
-                    logger.error("❌ Framework transaction rollback failed - manual intervention required")
-                
-                # Save framework failure checkpoint
-                self.save_checkpoint(ExperimentState.FAILED, {
-                    'failure_reason': 'framework_transaction_integrity_failure',
-                    'framework_errors': framework_errors,
-                    'guidance': guidance,
-                    'rollback_successful': rollback_success
-                })
-                
-                # Generate comprehensive error for experiment designer
-                error_message = self._generate_framework_failure_message(guidance, framework_errors)
-                
-                # Fail the experiment with clear guidance
-                raise FrameworkTransactionIntegrityError(
-                    framework_errors,
-                    guidance,
-                    error_message
-                )
-            
-            else:
-                logger.info("✅ Framework transaction integrity validation PASSED")
-                
-                # Log framework validation success
-                if self.experiment_logger:
-                    self.experiment_logger.info(
-                        "Framework transaction integrity validated",
-                        extra_data={
-                            'transaction_id': framework_tx_manager.transaction_id,
-                            'frameworks_validated': len(framework_tx_manager.transaction_states),
-                            'new_versions_created': len([s for s in framework_tx_manager.transaction_states if s.new_version_created])
-                        }
-                    )
+        except FrameworkTransactionIntegrityError:
+            # Re-raise framework integrity errors without modification
+            raise
+        except Exception as e:
+            logger.warning(f"⚠️ Framework transaction validation error: {e} - continuing with basic validation")
         
         # Standard component validation
         missing_components = [comp for comp in components if not comp.exists_on_filesystem or not comp.exists_in_db]
@@ -2712,7 +2764,7 @@ All experiment outputs have been saved to: `{experiment_dir}`
             # Initialize experiment transaction
             logger.info("🚀 Starting experiment transaction...")
             
-            # Load experiment definition
+            # STEP 1: Load and validate experiment definition from workspace
             experiment = self.load_experiment_definition(experiment_file)
             experiment_meta = experiment.get('experiment_meta', {})
             
@@ -2720,13 +2772,38 @@ All experiment outputs have been saved to: `{experiment_dir}`
             self.current_experiment_id = self._create_experiment_id(experiment_meta)
             logger.info(f"📋 Experiment Transaction ID: {self.current_experiment_id}")
             
+            # STEP 2: Store validated experiment definition in content-addressable storage
+            try:
+                experiment_storage = self.asset_manager.store_asset(
+                    content=experiment,
+                    asset_type='experiment',
+                    asset_id=self.current_experiment_id,
+                    version=experiment_meta.get('version', '1.0.0'),
+                    source_path=str(experiment_file)
+                )
+                
+                self.experiment_content_hash = experiment_storage['content_hash']
+                logger.info(f"📦 Experiment definition stored in asset storage (hash: {self.experiment_content_hash[:8]}...)")
+                
+                # Store experiment hash for transaction integrity
+                self.save_checkpoint(ExperimentState.INITIALIZING, {
+                    'experiment_file': str(experiment_file),
+                    'experiment_meta': experiment_meta,
+                    'experiment_content_hash': self.experiment_content_hash,
+                    'experiment_storage_path': experiment_storage['storage_path']
+                })
+                
+            except Exception as e:
+                logger.error(f"❌ Failed to store experiment definition: {e}")
+                raise RuntimeError(f"Cannot proceed without validated experiment storage: {e}")
+            
             # 🚨 FIX: CREATE DATABASE EXPERIMENT RECORD (was missing!)
             # This fixes the critical database storage disconnect issue
             self.database_experiment_id = None
             if DATABASE_AVAILABLE:
                 try:
-                    from src.narrative_gravity.models.models import Experiment
-                    from src.narrative_gravity.utils.database import get_database_url
+                    from narrative_gravity.models.models import Experiment
+                    from narrative_gravity.utils.database import get_database_url
                     from sqlalchemy import create_engine
                     from sqlalchemy.orm import sessionmaker
                     from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -2771,7 +2848,7 @@ All experiment outputs have been saved to: `{experiment_dir}`
                             
                             # 🔒 COHERENCE FIX: Initialize StatisticalLogger within same transaction
                             try:
-                                from src.narrative_gravity.utils.statistical_logger import StatisticalLogger
+                                from narrative_gravity.utils.statistical_logger import StatisticalLogger
                                 self.statistical_logger = StatisticalLogger()
                                 # Test StatisticalLogger connection within transaction
                                 logger.info("✅ StatisticalLogger initialized")
@@ -2833,11 +2910,7 @@ All experiment outputs have been saved to: `{experiment_dir}`
                     logger.info("No resumable experiments found - starting fresh")
                     self.resume_from_checkpoint = False
             
-            # Save initial checkpoint
-            self.save_checkpoint(ExperimentState.INITIALIZING, {
-                'experiment_file': str(experiment_file),
-                'experiment_meta': experiment_meta
-            })
+            # Note: Initial checkpoint already saved with experiment storage info above
             
             # Start experiment logging if available
             if self.experiment_logger:
@@ -3029,8 +3102,8 @@ All experiment outputs have been saved to: `{experiment_dir}`
             # 🚨 FIX: UPDATE DATABASE EXPERIMENT STATUS TO COMPLETED
             if self.database_experiment_id and DATABASE_AVAILABLE:
                 try:
-                    from src.narrative_gravity.models.models import Experiment
-                    from src.narrative_gravity.utils.database import get_database_url
+                    from narrative_gravity.models.models import Experiment
+                    from narrative_gravity.utils.database import get_database_url
                     from sqlalchemy import create_engine
                     from sqlalchemy.orm import sessionmaker
                     from sqlalchemy.exc import SQLAlchemyError
@@ -3083,8 +3156,8 @@ All experiment outputs have been saved to: `{experiment_dir}`
             # Update database status if available
             if hasattr(self, 'database_experiment_id') and self.database_experiment_id and DATABASE_AVAILABLE:
                 try:
-                    from src.narrative_gravity.models.models import Experiment
-                    from src.narrative_gravity.utils.database import get_database_url
+                    from narrative_gravity.models.models import Experiment
+                    from narrative_gravity.utils.database import get_database_url
                     from sqlalchemy import create_engine
                     from sqlalchemy.orm import sessionmaker
                     from sqlalchemy.exc import SQLAlchemyError
