@@ -1,0 +1,14 @@
+{
+  "experiment_id": "MFT_Simple_Test_1.0.0_20250619_213207",
+  "state": "component_registration",
+  "timestamp": "2025-06-19T21:32:07.262828",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "missing_components": 2,
+    "components_to_register": [
+      "framework:iditi",
+      "weighting_scheme:uniform_weighting"
+    ]
+  }
+}

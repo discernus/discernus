@@ -33,6 +33,14 @@ logger = logging.getLogger(__name__)
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 try:
+    import yaml
+    YAML_AVAILABLE = True
+except ImportError:
+    logger.warning("PyYAML not available - YAML functionality limited")
+    YAML_AVAILABLE = False
+    yaml = None
+
+try:
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker
     from narrative_gravity.models.component_models import FrameworkVersion, PromptTemplate, WeightingMethodology
@@ -92,9 +100,12 @@ class ComponentInfo:
     version: Optional[str] = None
     file_path: Optional[str] = None
     expected_hash: Optional[str] = None
+    content_hash: Optional[str] = None  # NEW: Content hash for unified asset management
+    storage_path: Optional[str] = None  # NEW: Path in content-addressable storage
     exists_in_db: bool = False
     exists_on_filesystem: bool = False
     needs_registration: bool = False
+    validated_content: Optional[Dict[str, Any]] = None  # NEW: Store validated content
 
 @dataclass
 class ExperimentContext:
@@ -928,21 +939,45 @@ class ExperimentOrchestrator:
     """
     
     def __init__(self):
-        self.framework_loader = ConsolidatedFrameworkLoader()
-        self.dry_run = False
-        self.force_reregister = False
-        self.open_report = False
-        self.resume_from_checkpoint = False  # New: Resume capability
+        """Initialize orchestrator with all necessary components"""
         
-        # Initialize experiment logging (Phase 5: Comprehensive Logging)
+        # Database and logging setup
+        self.current_experiment_id = None
+        self.experiment_context = None
+        
+        # Initialize asset manager for unified storage
+        self.asset_manager = UnifiedAssetManager()
+        
+        # Initialize component loaders and registrars
+        self.framework_loader = ConsolidatedFrameworkLoader()
+        
         if DATABASE_AVAILABLE:
             try:
-                setup_experiment_logging()
-                self.experiment_logger = get_experiment_logger("experiment_orchestrator")
+                self.framework_registrar = FrameworkAutoRegistrar()
+                self.component_registrar = ComponentAutoRegistrar()
+                self.corpus_registrar = CorpusAutoRegistrar()
+                self.auto_registration_available = True
+                logger.info("✅ Auto-registration systems initialized")
             except Exception as e:
-                logger.warning(f"Experiment logging not available: {e}")
-                self.experiment_logger = None
+                logger.warning(f"⚠️ Auto-registration systems not available: {e}")
+                self.framework_registrar = None
+                self.component_registrar = None
+                self.corpus_registrar = None
+                self.auto_registration_available = False
         else:
+            self.framework_registrar = None
+            self.component_registrar = None
+            self.corpus_registrar = None
+            self.auto_registration_available = False
+            logger.warning("⚠️ Database not available - auto-registration disabled")
+        
+        # Initialize experiment logging
+        try:
+            from src.narrative_gravity.analysis.statistical_logger import StatisticalLogger
+            self.experiment_logger = StatisticalLogger()
+            logger.info("✅ StatisticalLogger initialized")
+        except ImportError:
+            logger.warning("⚠️ StatisticalLogger not available")
             self.experiment_logger = None
         
         # Initialize auto-registrars if database available
@@ -1389,17 +1424,65 @@ In addition to the standard analysis output, please consider how your findings r
         
         # Check if framework exists on filesystem
         try:
-            framework_data = self.framework_loader.load_framework(framework_id)
-            component.exists_on_filesystem = True
+            # If file_path is specified, load directly from there
+            if file_path:
+                framework_path = Path(file_path)
+                if not framework_path.exists():
+                    raise FileNotFoundError(f"Framework file not found at specified path: {file_path}")
+                
+                # Load framework directly from file path
+                if framework_path.suffix.lower() in ['.yaml', '.yml']:
+                    import yaml
+                    with open(framework_path, 'r') as f:
+                        framework_data = yaml.safe_load(f)
+                else:
+                    with open(framework_path, 'r') as f:
+                        framework_data = json.load(f)
+                
+                component.exists_on_filesystem = True
+                logger.info(f"✅ Framework loaded from workspace file: {file_path}")
+                
+            else:
+                # Fall back to standard framework loader
+                framework_data = self.framework_loader.load_framework(framework_id)
+                component.exists_on_filesystem = True
             
             # Validate framework structure
             missing_sections = self.framework_loader.validate_framework_structure(framework_data)
             if missing_sections:
                 logger.warning(f"Framework {framework_id} missing sections: {missing_sections}")
             
-        except FileNotFoundError:
+            # 📦 UNIFIED ASSET MANAGEMENT: Store validated framework in content-addressable storage
+            if framework_data:
+                try:
+                    storage_result = self.asset_manager.store_asset(
+                        content=framework_data,
+                        asset_type='framework',
+                        asset_id=framework_id,
+                        version=version or 'v1.0.0',
+                        source_path=file_path
+                    )
+                    
+                    component.content_hash = storage_result['content_hash']
+                    component.storage_path = storage_result['storage_path']
+                    component.validated_content = framework_data
+                    
+                    if storage_result['already_existed']:
+                        logger.info(f"📦 Framework {framework_id} already in asset storage (hash: {component.content_hash[:8]}...)")
+                    else:
+                        logger.info(f"📦 Framework {framework_id} stored in asset storage (hash: {component.content_hash[:8]}...)")
+                        
+                except Exception as e:
+                    logger.warning(f"⚠️ Failed to store framework in asset storage: {e}")
+                    # Continue without asset storage - not a blocking error
+            
+        except FileNotFoundError as e:
             component.exists_on_filesystem = False
             component.needs_registration = True
+            logger.warning(f"Framework {framework_id} not found: {e}")
+        except Exception as e:
+            logger.error(f"Error loading framework {framework_id}: {e}")
+            raise
         
         # Check database existence if available
         if DATABASE_AVAILABLE and self.auto_registration_available:
@@ -2623,6 +2706,9 @@ All experiment outputs have been saved to: `{experiment_dir}`
         ✅ This orchestrator handles ALL experiment needs including statistical analysis.
         """
         try:
+            # Store experiment file path for use in other methods
+            self.experiment_file = experiment_file
+            
             # Initialize experiment transaction
             logger.info("🚀 Starting experiment transaction...")
             
@@ -3187,6 +3273,161 @@ All experiment outputs have been saved to: `{experiment_dir}`
             logger.error(f"❌ Experiment validation error: {e}")
         
         return validation_result
+
+class UnifiedAssetManager:
+    """Unified asset management with content-addressable storage"""
+    
+    def __init__(self, storage_root: str = "asset_storage"):
+        self.storage_root = Path(storage_root)
+        self.storage_root.mkdir(exist_ok=True)
+        
+        # Create asset type directories
+        for asset_type in ['framework', 'prompt_template', 'weighting_scheme', 'experiment']:
+            (self.storage_root / asset_type).mkdir(exist_ok=True)
+    
+    def calculate_content_hash(self, content: Any, asset_type: str) -> str:
+        """Calculate SHA-256 hash of asset content"""
+        if asset_type in ['framework', 'prompt_template', 'weighting_scheme', 'experiment']:
+            # For structured data, use canonical JSON representation
+            if isinstance(content, dict):
+                canonical_json = json.dumps(content, sort_keys=True, separators=(',', ':'))
+                return hashlib.sha256(canonical_json.encode('utf-8')).hexdigest()
+            elif isinstance(content, str):
+                return hashlib.sha256(content.encode('utf-8')).hexdigest()
+        
+        raise ValueError(f"Unsupported asset type for hashing: {asset_type}")
+    
+    def get_storage_path(self, content_hash: str, asset_type: str) -> Path:
+        """Get storage path for content hash using prefix-based directory structure"""
+        # Use first 2 and next 2 characters for directory structure
+        prefix1 = content_hash[:2]
+        prefix2 = content_hash[2:4]
+        
+        storage_path = self.storage_root / asset_type / prefix1 / prefix2 / content_hash
+        return storage_path
+    
+    def store_asset(self, content: Any, asset_type: str, asset_id: str, version: str, 
+                   source_path: Optional[str] = None) -> Dict[str, Any]:
+        """Store validated asset in content-addressable storage"""
+        
+        # Calculate content hash
+        content_hash = self.calculate_content_hash(content, asset_type)
+        storage_path = self.get_storage_path(content_hash, asset_type)
+        
+        # Check if asset already exists
+        if storage_path.exists():
+            logger.info(f"📦 Asset already stored: {asset_id} (hash: {content_hash[:8]}...)")
+            return {
+                'content_hash': content_hash,
+                'storage_path': str(storage_path),
+                'already_existed': True
+            }
+        
+        # Create storage directory
+        storage_path.mkdir(parents=True, exist_ok=True)
+        
+        # Store primary content
+        if not YAML_AVAILABLE:
+            raise RuntimeError("PyYAML not available - cannot store YAML assets")
+            
+        if asset_type == 'framework':
+            content_file = storage_path / 'framework.yaml'
+            with open(content_file, 'w') as f:
+                yaml.dump(content, f, default_flow_style=False, sort_keys=False)
+        elif asset_type in ['prompt_template', 'weighting_scheme']:
+            content_file = storage_path / f'{asset_type}.yaml'
+            with open(content_file, 'w') as f:
+                yaml.dump(content, f, default_flow_style=False, sort_keys=False)
+        elif asset_type == 'experiment':
+            content_file = storage_path / 'experiment.yaml'
+            with open(content_file, 'w') as f:
+                yaml.dump(content, f, default_flow_style=False, sort_keys=False)
+        
+        # Create metadata
+        metadata = {
+            'asset_type': asset_type,
+            'asset_id': asset_id,
+            'version': version,
+            'content_hash': content_hash,
+            'created_timestamp': datetime.now().isoformat(),
+            'storage_path': str(storage_path),
+            'content_size': len(json.dumps(content) if isinstance(content, dict) else str(content))
+        }
+        
+        metadata_file = storage_path / '.metadata.yaml'
+        with open(metadata_file, 'w') as f:
+            yaml.dump(metadata, f, default_flow_style=False)
+        
+        # Create provenance tracking
+        provenance = {
+            'asset_id': asset_id,
+            'version': version,
+            'source_path': source_path,
+            'ingestion_method': 'orchestrator_validation',
+            'ingestion_timestamp': datetime.now().isoformat(),
+            'content_hash': content_hash,
+            'validation_status': 'validated_before_storage'
+        }
+        
+        provenance_file = storage_path / '.provenance.yaml'
+        with open(provenance_file, 'w') as f:
+            yaml.dump(provenance, f, default_flow_style=False)
+        
+        logger.info(f"📦 Stored asset: {asset_id} (hash: {content_hash[:8]}...) → {storage_path}")
+        
+        return {
+            'content_hash': content_hash,
+            'storage_path': str(storage_path),
+            'already_existed': False,
+            'metadata': metadata,
+            'provenance': provenance
+        }
+    
+    def load_asset_by_hash(self, content_hash: str, asset_type: str) -> Optional[Dict[str, Any]]:
+        """Load asset by content hash"""
+        storage_path = self.get_storage_path(content_hash, asset_type)
+        
+        if not storage_path.exists():
+            return None
+        
+        # Load primary content
+        if asset_type == 'framework':
+            content_file = storage_path / 'framework.yaml'
+        elif asset_type in ['prompt_template', 'weighting_scheme']:
+            content_file = storage_path / f'{asset_type}.yaml'
+        elif asset_type == 'experiment':
+            content_file = storage_path / 'experiment.yaml'
+        else:
+            return None
+        
+        if not content_file.exists():
+            return None
+        
+        with open(content_file, 'r') as f:
+            content = yaml.safe_load(f)
+        
+        # Load metadata if available
+        metadata_file = storage_path / '.metadata.yaml'
+        metadata = None
+        if metadata_file.exists():
+            with open(metadata_file, 'r') as f:
+                metadata = yaml.safe_load(f)
+        
+        return {
+            'content': content,
+            'content_hash': content_hash,
+            'storage_path': str(storage_path),
+            'metadata': metadata
+        }
+    
+    def verify_asset_integrity(self, content_hash: str, asset_type: str) -> bool:
+        """Verify asset integrity by recalculating hash"""
+        asset_data = self.load_asset_by_hash(content_hash, asset_type)
+        if not asset_data:
+            return False
+        
+        recalculated_hash = self.calculate_content_hash(asset_data['content'], asset_type)
+        return recalculated_hash == content_hash
 
 def main():
     """Main CLI entry point"""

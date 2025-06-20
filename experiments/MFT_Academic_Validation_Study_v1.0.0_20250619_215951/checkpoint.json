@@ -1,0 +1,38 @@
+{
+  "experiment_id": "MFT_Academic_Validation_Study_v1.0.0_20250619_215951",
+  "state": "failed",
+  "timestamp": "2025-06-19T21:59:51.634559",
+  "can_resume": false,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "failure_reason": "framework_transaction_integrity_failure",
+    "framework_errors": [
+      "Framework moral_foundations_theory: not_found",
+      "Framework moral_foundations_theory not found in database or filesystem"
+    ],
+    "guidance": {
+      "transaction_id": "MFT_Academic_Validation_Study_v1.0.0_20250619_215951",
+      "total_frameworks": 1,
+      "failed_frameworks": [
+        {
+          "framework_name": "moral_foundations_theory",
+          "validation_result": "not_found",
+          "error_details": [
+            "Framework moral_foundations_theory not found in database or filesystem"
+          ],
+          "requested_version": "v2025.06.19",
+          "database_version": null
+        }
+      ],
+      "recommendations": [
+        "Framework 'moral_foundations_theory' not found. Create framework definition file and import to database."
+      ],
+      "commands_to_run": [
+        "# Create framework definition file: frameworks/moral_foundations_theory/framework_consolidated.json",
+        "python3 scripts/framework_sync.py import moral_foundations_theory",
+        "python3 scripts/framework_sync.py validate moral_foundations_theory"
+      ]
+    },
+    "rollback_successful": true
+  }
+}

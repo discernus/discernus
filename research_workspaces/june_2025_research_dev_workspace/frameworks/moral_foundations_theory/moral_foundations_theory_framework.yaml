@@ -186,7 +186,7 @@ dipoles:
         - brotherhood
         - sacrifice for group
         - stick together
-              angle: 120
+      angle: 120
       weight: 1.0
       type: binding
       tier: equal_weighting
@@ -203,7 +203,7 @@ dipoles:
         - turncoat
         - backstabbing
         - selling out
-              angle: 300
+      angle: 300
       weight: -1.0
       type: binding_violation
       tier: equal_weighting
@@ -457,8 +457,8 @@ detection_methodology:
   
   syntactic_analysis:
     moral_imperatives: "Detection of 'we must/should/ought' constructions with moral content"
-    causal_moral_language: "because it's wrong/right to..." patterns
-    conditional_statements: "if we truly care about..." moral reasoning structures
+    causal_moral_language: "because it's wrong/right to... patterns"
+    conditional_statements: "if we truly care about... moral reasoning structures"
   
   semantic_analysis:
     agent_patient_structures: "Moral agency and beneficiary identification"
