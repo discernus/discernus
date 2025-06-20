@@ -25,12 +25,15 @@ from datetime import datetime
 from enum import Enum
 import pickle
 
+# Add src to path for imports - ensure absolute path resolution FIRST
+script_dir = Path(__file__).parent.resolve()
+project_root = script_dir.parent.parent
+src_path = project_root / 'src'
+sys.path.insert(0, str(src_path))
+
 # Configure basic logging (will be enhanced with experiment logging)
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
-
-# Add src to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 
 try:
     import yaml
@@ -39,6 +42,9 @@ except ImportError:
     logger.warning("PyYAML not available - YAML functionality limited")
     YAML_AVAILABLE = False
     yaml = None
+
+# Set PYTHONPATH for reliable imports
+os.environ['PYTHONPATH'] = f"{src_path}:{os.environ.get('PYTHONPATH', '')}"
 
 try:
     from sqlalchemy import create_engine
@@ -54,6 +60,7 @@ try:
     )
     from narrative_gravity.api.analysis_service import RealAnalysisService
     DATABASE_AVAILABLE = True
+    logger.info("✅ Database imports successful")
 except ImportError as e:
     logger.warning(f"Database imports not available: {e}")
     DATABASE_AVAILABLE = False
@@ -979,19 +986,6 @@ class ExperimentOrchestrator:
         except ImportError:
             logger.warning("⚠️ StatisticalLogger not available")
             self.experiment_logger = None
-        
-        # Initialize auto-registrars if database available
-        if DATABASE_AVAILABLE:
-            try:
-                self.framework_registrar = FrameworkAutoRegistrar()
-                self.component_registrar = ComponentAutoRegistrar()
-                self.corpus_registrar = CorpusAutoRegistrar()
-                self.auto_registration_available = True
-            except Exception as e:
-                logger.warning(f"Auto-registration not available: {e}")
-                self.auto_registration_available = False
-        else:
-            self.auto_registration_available = False
         
         # Experiment context for hypothesis-aware analysis
         self.experiment_context: Optional[ExperimentContext] = None
