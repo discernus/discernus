@@ -44,9 +44,11 @@
 - **Asset Storage**: Content-addressable storage functioning correctly  
 - **Transaction Safety**: Checkpoint and rollback systems operational
 
-#### ⚠️ **Minor Issue Remaining**
-- Database schema constraint: `framework_name` field needs expansion from 20 to 50 characters
-  - Simple schema update required (non-blocking for architecture validation)
+#### ✅ **All Issues RESOLVED**
+- ~~Database schema constraint: `framework_name` field needs expansion from 20 to 50 characters~~ ✅ **FIXED**
+  - **Root Cause**: `validation_status` field was varchar(20), but auto-registration used "validated_from_storage" (23 chars)
+  - **Solution**: Created and applied migration to expand `validation_status` to varchar(50) in all component tables
+  - **Result**: Framework registration now working perfectly ✅
 
 **Strategic Impact**: The unified asset management architecture is **production-ready** and implements exactly the specified transaction flow with clean validated handoffs and complete transaction dynamics meeting academic research requirements.
 
