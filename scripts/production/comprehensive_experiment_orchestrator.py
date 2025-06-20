@@ -273,13 +273,26 @@ class ConsolidatedFrameworkLoader:
         # For legacy format  
         legacy_sections = ['framework_name', 'dipoles', 'wells']
         
+        # For YAML format (new) - wells are embedded in dipoles
+        yaml_sections = ['name', 'dipoles']  # Minimal sections for YAML format
+        
         if 'framework_meta' in framework:
             # Consolidated format validation
             missing = [section for section in consolidated_sections if section not in framework]
-        else:
+        elif 'wells' in framework:
             # Legacy format validation
             missing = [section for section in legacy_sections if section not in framework]
-        
+        else:
+            # YAML format validation - check for dipoles and name
+            missing = [section for section in yaml_sections if section not in framework]
+            
+            # For YAML format, wells are extracted from dipoles, so check dipoles have proper structure
+            if 'dipoles' in framework and framework['dipoles']:
+                # Validate that dipoles have positive/negative structure (which becomes wells)
+                first_dipole = framework['dipoles'][0]
+                if not ('positive' in first_dipole and 'negative' in first_dipole):
+                    missing.append('dipoles_with_endpoints')
+            
         return missing
 
 class FrameworkAutoRegistrar:
@@ -734,6 +747,8 @@ class CorpusAutoRegistrar:
     
     def check_corpus_in_database(self, corpus_id: str, file_path: str = None) -> bool:
         """Check if corpus item exists in database using CorpusRegistry API"""
+        from pathlib import Path  # Import at method level to avoid issues
+        
         logger.info(f"🔍 Checking corpus in database: {corpus_id} (file_path: {file_path})")
         
         try:
@@ -780,7 +795,6 @@ class CorpusAutoRegistrar:
             # Approach 3: Check by filename pattern matching  
             if file_path:
                 try:
-                    from pathlib import Path
                     filename = Path(file_path).name
                     filename_base = filename.replace('.txt', '').replace('.md', '')
                     logger.info(f"🔍 Approach 3: Searching by filename pattern '{filename_base}'")
@@ -2031,14 +2045,15 @@ In addition to the standard analysis output, please consider how your findings r
             framework_errors = []
             for component in components:
                 if component.component_type == 'framework':
-                    validation_result = transaction_manager.validate_framework_transaction(
+                    validation_state = transaction_manager.validate_framework_for_experiment(
                         component.component_id,
-                        component.version,
-                        component.file_path
+                        Path(component.file_path) if component.file_path else None,
+                        component.version
                     )
                     
-                    if not validation_result['valid']:
-                        framework_errors.extend(validation_result['errors'])
+                    # Check if validation failed
+                    if validation_state.validation_result.value not in ['valid', 'content_changed']:
+                        framework_errors.extend(validation_state.error_details)
             
             if framework_errors:
                 # Generate detailed guidance for framework transaction integrity failure

@@ -48,9 +48,10 @@ class PromptTemplate(Base):
     # Relationships
     creator = relationship("User")
     parent_version = relationship("PromptTemplate", remote_side=[id])
-    child_versions = relationship("PromptTemplate", remote_side=[parent_version_id])
+    child_versions = relationship("PromptTemplate", remote_side=[parent_version_id], overlaps="parent_version")
     compatibility_entries = relationship("ComponentCompatibility", 
-                                       foreign_keys="ComponentCompatibility.prompt_template_id")
+                                       foreign_keys="ComponentCompatibility.prompt_template_id",
+                                       overlaps="prompt_template")
     
     # Unique constraint for name + version
     __table_args__ = (UniqueConstraint('name', 'version', name='_prompt_name_version_uc'),)
@@ -97,9 +98,10 @@ class FrameworkVersion(Base):
     # Relationships
     creator = relationship("User")
     parent_version = relationship("FrameworkVersion", remote_side=[id])
-    child_versions = relationship("FrameworkVersion", remote_side=[parent_version_id])
+    child_versions = relationship("FrameworkVersion", remote_side=[parent_version_id], overlaps="parent_version")
     compatibility_entries = relationship("ComponentCompatibility", 
-                                       foreign_keys="ComponentCompatibility.framework_id")
+                                       foreign_keys="ComponentCompatibility.framework_id",
+                                       overlaps="framework")
     
     # Unique constraint for framework_name + version
     __table_args__ = (UniqueConstraint('framework_name', 'version', name='_framework_name_version_uc'),)
@@ -148,9 +150,10 @@ class WeightingMethodology(Base):
     # Relationships
     creator = relationship("User")
     parent_version = relationship("WeightingMethodology", remote_side=[id])
-    child_versions = relationship("WeightingMethodology", remote_side=[parent_version_id])
+    child_versions = relationship("WeightingMethodology", remote_side=[parent_version_id], overlaps="parent_version")
     compatibility_entries = relationship("ComponentCompatibility", 
-                                       foreign_keys="ComponentCompatibility.weighting_method_id")
+                                       foreign_keys="ComponentCompatibility.weighting_method_id",
+                                       overlaps="weighting_method")
     
     # Unique constraint for name + version
     __table_args__ = (UniqueConstraint('name', 'version', name='_weighting_name_version_uc'),)
@@ -192,9 +195,9 @@ class ComponentCompatibility(Base):
     validated_by = Column(Integer, ForeignKey("user.id"), nullable=True)
     
     # Relationships
-    prompt_template = relationship("PromptTemplate")
-    framework = relationship("FrameworkVersion")
-    weighting_method = relationship("WeightingMethodology")
+    prompt_template = relationship("PromptTemplate", overlaps="compatibility_entries")
+    framework = relationship("FrameworkVersion", overlaps="compatibility_entries")
+    weighting_method = relationship("WeightingMethodology", overlaps="compatibility_entries")
     validator = relationship("User")
     
     # Unique constraint for component combination

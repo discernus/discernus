@@ -353,7 +353,11 @@ class FrameworkTransactionManager:
         """Validate file content matches database content"""
         try:
             with open(file_path, 'r') as f:
-                file_content = json.load(f)
+                if file_path.suffix.lower() in ['.yaml', '.yml']:
+                    import yaml
+                    file_content = yaml.safe_load(f)
+                else:
+                    file_content = json.load(f)
             
             # Calculate file hash
             file_dipoles = file_content.get('dipoles', [])
@@ -379,11 +383,15 @@ class FrameworkTransactionManager:
         """Create new framework version for changed content"""
         try:
             # Generate new version number
-            new_version = self._generate_next_version(current_version)
+            new_version = self._generate_next_version(current_version, framework_name)
             
             # Load framework content
             with open(file_path, 'r') as f:
-                file_content = json.load(f)
+                if file_path.suffix.lower() in ['.yaml', '.yml']:
+                    import yaml
+                    file_content = yaml.safe_load(f)
+                else:
+                    file_content = json.load(f)
             
             # Import as new version
             return self._import_framework_to_database(file_path, framework_name, new_version)
@@ -405,7 +413,11 @@ class FrameworkTransactionManager:
         session = self.Session()
         try:
             with open(file_path, 'r') as f:
-                content = json.load(f)
+                if file_path.suffix.lower() in ['.yaml', '.yml']:
+                    import yaml
+                    content = yaml.safe_load(f)
+                else:
+                    content = json.load(f)
             
             # Extract framework data
             dipoles_data = content.get('dipoles', [])
@@ -448,26 +460,72 @@ class FrameworkTransactionManager:
         finally:
             session.close()
     
-    def _generate_next_version(self, current_version: str) -> str:
-        """Generate next version number"""
+    def _generate_next_version(self, current_version: str, framework_name: str) -> str:
+        """Generate next version number with collision detection for specific framework"""
+        if not DATABASE_AVAILABLE:
+            # Fallback when no database available
+            return f"v{datetime.now().strftime('%Y.%m.%d.%H%M%S')}"
+        
+        session = self.Session()
         try:
-            if current_version.startswith('v'):
-                version_num = current_version[1:]
-            else:
-                version_num = current_version
-            
-            # Simple increment for patch version
-            parts = version_num.split('.')
-            if len(parts) >= 3:
-                parts[2] = str(int(parts[2]) + 1)
-                return f"v{'.'.join(parts)}"
-            else:
-                # Fallback to date-based version
-                return f"v{datetime.now().strftime('%Y.%m.%d')}"
+            # Strategy 1: Try to increment patch version
+            try:
+                if current_version.startswith('v'):
+                    version_num = current_version[1:]
+                else:
+                    version_num = current_version
                 
+                parts = version_num.split('.')
+                if len(parts) >= 3:
+                    # Increment patch version
+                    parts[2] = str(int(parts[2]) + 1)
+                    candidate = f"v{'.'.join(parts)}"
+                    
+                    # Check if this version exists for this framework
+                    if not self._version_exists(session, framework_name, candidate):
+                        return candidate
+            except (ValueError, IndexError):
+                pass
+            
+            # Strategy 2: Date-based version with collision detection
+            today = datetime.now()
+            date_base = f"v{today.strftime('%Y.%m.%d')}"
+            
+            if not self._version_exists(session, framework_name, date_base):
+                return date_base
+            
+            # Strategy 3: Date + time components (collision-resistant)
+            time_variants = [
+                f"{date_base}.{today.strftime('%H')}",  # Add hour
+                f"{date_base}.{today.strftime('%H%M')}",  # Add hour+minute
+                f"{date_base}.{today.strftime('%H%M%S')}",  # Add hour+minute+second
+            ]
+            
+            for candidate in time_variants:
+                if not self._version_exists(session, framework_name, candidate):
+                    return candidate
+            
+            # Strategy 4: Date + microseconds (virtually collision-proof)
+            microsecond_variant = f"{date_base}.{today.strftime('%H%M%S')}.{today.microsecond}"
+            return microsecond_variant
+            
+        except Exception as e:
+            # Ultimate fallback - timestamp with transaction ID for uniqueness
+            logger.warning(f"Version generation error: {e}, using fallback")
+            return f"v{datetime.now().strftime('%Y.%m.%d.%H%M%S')}.{self.transaction_id[-6:]}"
+        finally:
+            session.close()
+    
+    def _version_exists(self, session, framework_name: str, version: str) -> bool:
+        """Check if a version already exists for the specific framework"""
+        try:
+            count = session.query(FrameworkVersion).filter_by(
+                framework_name=framework_name,
+                version=version
+            ).count()
+            return count > 0
         except Exception:
-            # Fallback to timestamp
-            return f"v{datetime.now().strftime('%Y.%m.%d.%H%M')}"
+            return False  # Assume it doesn't exist if we can't check
     
     def _log_validation_result(self, state: FrameworkTransactionState):
         """Log detailed validation result"""
