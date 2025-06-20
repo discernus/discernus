@@ -1,0 +1,7 @@
+asset_id: MFT_Single_File_Test_1.0.0_20250620_134810
+content_hash: d00b865afd894e145698b698cf82913155c0a9e4f0f009aa97a5278f590527e7
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-20T13:48:10.407709'
+source_path: experiments/mft_single_test.json
+validation_status: validated_before_storage
+version: 1.0.0

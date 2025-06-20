@@ -1,0 +1,150 @@
+experiment_meta:
+  name: MFT_Working_Validation_Study
+  version: 1.0.0
+  created: '2025-06-20T14:00:00Z'
+  description: Working MFT validation using database texts to test orchestrator
+  hypothesis: MFT framework correctly analyzes moral foundations in political texts
+  research_context: Fixed orchestrator configuration test for MFT validation
+  principal_investigator: Research Team
+  institution: Discernus Research Lab
+  ethical_clearance: MFT-2025-001
+  funding_source: Internal
+  data_classification: research
+  publication_intent: true
+  tags:
+  - mft
+  - orchestrator_test
+  - validation
+  hypotheses:
+  - Conservative texts show higher Authority/Loyalty scores
+  - Progressive texts show higher Care/Fairness scores
+  - MFT framework produces consistent moral foundation scoring
+  success_criteria:
+  - All analyses complete successfully
+  - Foundation scores are generated for all texts
+  - Theoretical patterns emerge as expected
+components:
+  frameworks:
+  - id: moral_foundations_theory
+    version: 2.0.0
+    type: file_path
+    file_path: research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+  prompt_templates:
+  - id: hierarchical_analysis
+    version: 2.1.0
+  weighting_schemes:
+  - id: winner_take_most
+    version: 2.1.0
+  models:
+  - id: gpt-4o-mini
+    provider: openai
+    version: '2024-07-18'
+  corpus:
+  - id: reagan_challenger
+    type: file_path
+    file_path: corpus/validation_set/conservative_dignity/ronald_reagan_1986_challenger_address.txt
+    description: Reagan Challenger address - conservative
+  - id: romney_impeachment
+    type: file_path
+    file_path: corpus/validation_set/conservative_dignity/mitt_romney_2020_impeachment_vote.txt
+    description: Romney impeachment speech - conservative
+  - id: obama_dnc_2004
+    type: file_path
+    file_path: corpus/validation_set/progressive_dignity/obama_2004_dnc.txt
+    description: Obama 2004 DNC keynote - progressive
+  - id: lewis_march
+    type: file_path
+    file_path: corpus/validation_set/progressive_dignity/john_lewis_1963_march_washington.txt
+    description: John Lewis March on Washington - progressive
+execution:
+  description: MFT validation with working database corpus configuration
+  matrix:
+  - run_id: conservative_reagan
+    description: Reagan conservative analysis
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o-mini
+    corpus_subset: reagan_challenger
+  - run_id: conservative_romney
+    description: Romney conservative analysis
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o-mini
+    corpus_subset: romney_impeachment
+  - run_id: progressive_obama
+    description: Obama progressive analysis
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o-mini
+    corpus_subset: obama_dnc_2004
+  - run_id: progressive_lewis
+    description: Lewis progressive analysis
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o-mini
+    corpus_subset: lewis_march
+  cost_controls:
+    max_total_cost: 10.0
+    cost_per_analysis_limit: 2.5
+  quality_controls:
+    min_framework_fit_score: 0.6
+    enable_qa_validation: true
+    require_evidence: true
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.7
+    require_evidence: true
+    manual_review_triggers:
+    - low_confidence
+    - anomaly_detected
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+  configuration:
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests:
+      - descriptive_stats
+      - correlation_analysis
+    visualizations:
+      enabled: true
+      types:
+      - foundation_radar_charts
+      - foundation_comparison_plots
+      interactive: true
+      publication_ready: true
+    academic_integration:
+      export_formats:
+      - csv
+      - json
+      include_metadata: true
+    mft_specific_analysis:
+      foundation_correlation_analysis: true
+      conservative_liberal_comparison: true
+      theoretical_coherence_validation: true
+outputs:
+  save_to_database: true
+  export_formats:
+  - json
+  - csv
+  include_raw_responses: true
+  include_provenance: true
+  academic_exports:
+    enabled: true
+    formats:
+    - csv
+    - json
+    include_replication_package: true
+    mft_specific_outputs:
+      foundation_scores_matrix: true
+      theoretical_validation_report: true
+validation_criteria:
+  min_successful_analyses: 4
+  max_total_cost: 10.0
+  required_quality_score: 0.7

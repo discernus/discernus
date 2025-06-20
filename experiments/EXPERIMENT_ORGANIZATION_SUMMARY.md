@@ -141,4 +141,46 @@ python3 scripts/create_experiment_package.py experiment_id --framework="Framewor
 
 This experiment organization system represents a major infrastructure improvement that transforms our research workflow from scattered, hard-to-reproduce experiments to standardized, self-contained, publication-ready research packages. This will significantly improve our ability to conduct reproducible academic research and collaborate with other researchers.
 
-**Status**: Ready for immediate use with all future experiments. 
+**Status**: Ready for immediate use with all future experiments.
+
+## ✅ JUNE 2025 UPDATE: Results-Experiment Integration
+
+### New Organizational Pattern (June 20, 2025)
+**Problem Identified**: Results were being scattered in separate `exports/` directories, disconnected from their experiments.
+
+**Solution Implemented**: Results now live **with** the experiment in a standardized structure:
+
+```
+experiments/{EXPERIMENT_NAME}/
+├── README.md                     # Comprehensive experiment documentation
+├── checkpoint.json               # Orchestrator execution status  
+├── {experiment_config}.json      # Original experiment definition
+├── results/                      # ALL RESULTS HERE
+│   ├── experiment_summary.md     # Human-readable comprehensive analysis
+│   ├── experiment_results.csv    # Statistical analysis ready data
+│   ├── experiment_results.json   # Structured results
+│   └── complete_package_info.json # Metadata
+├── analysis/                     # Analysis workspace
+└── enhanced_analysis/            # Enhanced pipeline outputs
+```
+
+### Success Example: MFT Working Validation Study
+- **Directory**: `research_workspaces/june_2025_research_dev_workspace/experiments/MFT_Working_Validation_Study_1.0.0_20250620_141620/`
+- **Research Context**: Located in research workspace with related frameworks and validation studies
+- **Self-Contained**: Configuration, checkpoint, results, and documentation all together
+- **Academic Ready**: CSV exports, comprehensive analysis, metadata included
+- **No Scattered Files**: Everything related to the experiment in one place
+
+### Organizational Strategy
+- **Research Experiments**: `research_workspaces/{PROJECT}/experiments/` - Academic studies with project context
+- **System Experiments**: `experiments/` - Infrastructure testing and system validation
+- **Better Organization**: Experiments grouped with related research assets
+
+### Key Benefits
+1. **Findability**: Results are where you expect them (with the experiment)
+2. **Reproducibility**: Complete experiment context in one location  
+3. **Academic Standards**: Professional documentation and export formats
+4. **Collaboration**: Easy to share complete experiment packages
+5. **Organization**: No more hunting through exports directories
+
+This represents the **final evolution** of our experiment organization system - from scattered files → centralized packages → **results-integrated packages**. 

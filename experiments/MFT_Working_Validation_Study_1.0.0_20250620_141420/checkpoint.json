@@ -1,0 +1,16 @@
+{
+  "experiment_id": "MFT_Working_Validation_Study_1.0.0_20250620_141420",
+  "state": "component_registration",
+  "timestamp": "2025-06-20T14:14:20.847279",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "missing_components": 4,
+    "components_to_register": [
+      "corpus:reagan_speech_1986",
+      "corpus:utah_speech_2020",
+      "corpus:roosevelt_address_1933",
+      "corpus:clinton_address_1997"
+    ]
+  }
+}

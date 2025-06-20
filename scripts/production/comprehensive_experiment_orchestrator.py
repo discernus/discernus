@@ -2204,10 +2204,12 @@ In addition to the standard analysis output, please consider how your findings r
             logger.info("📊 Enhanced analysis pipeline disabled in experiment configuration")
             return {'pipeline_status': 'disabled', 'timestamp': datetime.now().isoformat()}
         
-        # Create organized output directory within experiments/ structure
+        # Create organized output directory respecting experiment source location
         experiment_name = experiment.get('experiment_meta', {}).get('name', 'experiment') if experiment else 'analysis'
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        experiment_dir = Path('experiments') / f"{experiment_name}_{timestamp}"
+        
+        # Determine appropriate location based on experiment source
+        experiment_dir = self._determine_experiment_output_location(experiment_name, timestamp)
         output_dir = experiment_dir / 'enhanced_analysis'
         output_dir.mkdir(parents=True, exist_ok=True)
         
@@ -2217,7 +2219,7 @@ In addition to the standard analysis output, please consider how your findings r
         try:
             # Step 1: Extract and structure experiment results
             logger.info("📊 Step 1: Extracting and structuring results...")
-            from extract_experiment_results import ExperimentResultsExtractor
+            from scripts.extract_experiment_results import ExperimentResultsExtractor
             extractor = ExperimentResultsExtractor()
             structured_results = extractor.extract_results(execution_results)
             
@@ -2526,6 +2528,35 @@ In addition to the standard analysis output, please consider how your findings r
         
         return {'academic_exports_dir': str(academic_dir)}
     
+    def _determine_experiment_output_location(self, experiment_name: str, timestamp: str) -> Path:
+        """
+        Determine the appropriate output location for experiment results.
+        
+        Follows the new organizational pattern:
+        - Research experiments: results go in research workspace
+        - System experiments: results go in system experiments directory
+        """
+        experiment_dir_name = f"{experiment_name}_{timestamp}"
+        
+        # Check if we have an experiment file path stored during execution
+        if hasattr(self, 'experiment_file') and self.experiment_file:
+            experiment_file_path = Path(self.experiment_file)
+            
+            # If experiment came from a research workspace, put results there
+            if 'research_workspaces' in experiment_file_path.parts:
+                # Extract the research workspace path
+                parts = experiment_file_path.parts
+                workspace_idx = parts.index('research_workspaces')
+                if workspace_idx + 1 < len(parts):
+                    workspace_name = parts[workspace_idx + 1]
+                    workspace_experiments_dir = Path('research_workspaces') / workspace_name / 'experiments'
+                    logger.info(f"📍 Detected research workspace experiment - results will be saved to: {workspace_experiments_dir}")
+                    return workspace_experiments_dir / experiment_dir_name
+        
+        # Default to system experiments directory
+        logger.info(f"📍 Using system experiments directory for results")
+        return Path('experiments') / experiment_dir_name
+
     def _generate_pipeline_summary_report(self, enhanced_results, output_dir, experiment_dir):
         """Generate a human-readable summary report."""
         summary = enhanced_results['summary']
@@ -3504,6 +3535,41 @@ class UnifiedAssetManager:
         
         recalculated_hash = self.calculate_content_hash(asset_data['content'], asset_type)
         return recalculated_hash == content_hash
+
+def determine_experiment_results_location(experiment_file_path: str, experiment_name: str = "experiment") -> Path:
+    """
+    Utility function to determine appropriate results location for any experiment.
+    
+    This function implements the organizational pattern:
+    - Research experiments (from research_workspaces): results go in research workspace
+    - System experiments: results go in system experiments directory
+    
+    Args:
+        experiment_file_path: Path to the original experiment file
+        experiment_name: Name of the experiment for directory naming
+        
+    Returns:
+        Path where experiment results should be placed
+    """
+    from datetime import datetime
+    
+    experiment_file = Path(experiment_file_path)
+    timestamp = datetime.now().strftime("_%Y%m%d_%H%M%S")
+    experiment_dir_name = f"{experiment_name}{timestamp}"
+    
+    # If experiment came from a research workspace, put results there
+    if 'research_workspaces' in experiment_file.parts:
+        # Extract the research workspace path
+        parts = experiment_file.parts
+        workspace_idx = parts.index('research_workspaces')
+        if workspace_idx + 1 < len(parts):
+            workspace_name = parts[workspace_idx + 1]
+            workspace_experiments_dir = Path('research_workspaces') / workspace_name / 'experiments'
+            return workspace_experiments_dir / experiment_dir_name
+    
+    # Default to system experiments directory
+    return Path('experiments') / experiment_dir_name
+
 
 def main():
     """Main CLI entry point"""

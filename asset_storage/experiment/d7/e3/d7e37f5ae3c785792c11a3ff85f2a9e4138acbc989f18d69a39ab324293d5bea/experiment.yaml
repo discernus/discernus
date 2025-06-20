@@ -1,0 +1,150 @@
+experiment_meta:
+  name: MFT_Working_Validation_Study
+  version: 1.0.0
+  created: '2025-06-20T14:00:00Z'
+  description: Working MFT validation using database texts to test orchestrator
+  hypothesis: MFT framework correctly analyzes moral foundations in political texts
+  research_context: Fixed orchestrator configuration test for MFT validation
+  principal_investigator: Research Team
+  institution: Discernus Research Lab
+  ethical_clearance: MFT-2025-001
+  funding_source: Internal
+  data_classification: research
+  publication_intent: true
+  tags:
+  - mft
+  - orchestrator_test
+  - validation
+  hypotheses:
+  - Conservative texts show higher Authority/Loyalty scores
+  - Progressive texts show higher Care/Fairness scores
+  - MFT framework produces consistent moral foundation scoring
+  success_criteria:
+  - All analyses complete successfully
+  - Foundation scores are generated for all texts
+  - Theoretical patterns emerge as expected
+components:
+  frameworks:
+  - id: moral_foundations_theory
+    version: 2.0.0
+    type: file_path
+    file_path: research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+  prompt_templates:
+  - id: hierarchical_analysis
+    version: 2.1.0
+  weighting_schemes:
+  - id: winner_take_most
+    version: 2.1.0
+  models:
+  - id: gpt-4o-mini
+    provider: openai
+    version: '2024-07-18'
+  corpus:
+  - id: reagan_speech_1986
+    type: database
+    text_id: reagan_speech_1986
+    description: Reagan Challenger address - conservative
+  - id: utah_speech_2020
+    type: database
+    text_id: utah_speech_2020
+    description: Romney impeachment speech - conservative
+  - id: roosevelt_address_1933
+    type: database
+    text_id: roosevelt_address_1933
+    description: FDR First Inaugural - progressive
+  - id: clinton_address_1997
+    type: database
+    text_id: clinton_address_1997
+    description: Clinton Joint Session - progressive
+execution:
+  description: MFT validation with working database corpus configuration
+  matrix:
+  - run_id: conservative_reagan
+    description: Reagan conservative analysis
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o-mini
+    corpus_subset: reagan_speech_1986
+  - run_id: conservative_romney
+    description: Romney conservative analysis
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o-mini
+    corpus_subset: utah_speech_2020
+  - run_id: progressive_fdr
+    description: FDR progressive analysis
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o-mini
+    corpus_subset: roosevelt_address_1933
+  - run_id: progressive_clinton
+    description: Clinton progressive analysis
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o-mini
+    corpus_subset: clinton_address_1997
+  cost_controls:
+    max_total_cost: 10.0
+    cost_per_analysis_limit: 2.5
+  quality_controls:
+    min_framework_fit_score: 0.6
+    enable_qa_validation: true
+    require_evidence: true
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.7
+    require_evidence: true
+    manual_review_triggers:
+    - low_confidence
+    - anomaly_detected
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+  configuration:
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests:
+      - descriptive_stats
+      - correlation_analysis
+    visualizations:
+      enabled: true
+      types:
+      - foundation_radar_charts
+      - foundation_comparison_plots
+      interactive: true
+      publication_ready: true
+    academic_integration:
+      export_formats:
+      - csv
+      - json
+      include_metadata: true
+    mft_specific_analysis:
+      foundation_correlation_analysis: true
+      conservative_liberal_comparison: true
+      theoretical_coherence_validation: true
+outputs:
+  save_to_database: true
+  export_formats:
+  - json
+  - csv
+  include_raw_responses: true
+  include_provenance: true
+  academic_exports:
+    enabled: true
+    formats:
+    - csv
+    - json
+    include_replication_package: true
+    mft_specific_outputs:
+      foundation_scores_matrix: true
+      theoretical_validation_report: true
+validation_criteria:
+  min_successful_analyses: 4
+  max_total_cost: 10.0
+  required_quality_score: 0.7

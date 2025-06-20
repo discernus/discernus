@@ -1,0 +1,133 @@
+
+experiment_meta:
+  name: "Populism_Prompt_Validation_Study"
+  version: "v1.0.0"
+  created: "2025-06-20T17:00:00Z"
+  description: "Validation of the Populism vs. Pluralism Dipole against BYU Global Populism Dataset"
+  hypothesis: "Discernus Populism-Pluralism dipole reliably replicates BYU human-coded populism scores using LLM scoring"
+  research_context: "Testing structural dipole accuracy against holistic expert labels"
+  principal_investigator: "Discernus Research Unit"
+  institution: "Discernus Research Lab"
+  ethical_clearance: "ACADEMIC-2025-PPL-001"
+  funding_source: "Internal Development"
+  data_classification: "research"
+  publication_intent: true
+  tags: ["populism", "pluralism", "byu_populism", "llm_validation", "worldview_analysis"]
+
+  hypotheses:
+    - "Discernus dipole scores positively correlate with BYU human-coded populism scores"
+    - "High BYU-populist speeches score strongly toward +1.0 on the Discernus dipole"
+    - "Low BYU-populist speeches score near –1.0 on the Discernus dipole"
+    - "Contradiction index flags mixed or incoherent worldview rhetoric in medium-range speeches"
+
+  success_criteria:
+    - "Correlation (r > 0.75) between BYU score and Discernus dipole score"
+    - "≥80% of highly populist BYU-coded speeches score >0.75 on the Discernus dipole"
+    - "≤20% of low-populism BYU-coded speeches score >0.5 (false positives)"
+    - "Contradiction index meaningfully detects worldview tension in edge cases"
+    - "Descriptive insights into how populism expresses itself rhetorically"
+
+components:
+  frameworks:
+    - id: "populism_vs_pluralism"
+      version: "v2025.06.20"
+      type: "file_path"
+      file_path: "frameworks/populism_vs_pluralism/populism_vs_pluralism.yaml"
+
+  prompt_templates:
+    - id: "populism_analysis"
+      version: "v1.0"
+      type: "workspace_asset"
+      file_path: "prompt_templates/populism_analysis/template.yaml"
+
+  models:
+    - id: "gpt-4o"
+      provider: "openai"
+      version: "2024-05-13"
+
+  corpus:
+    - id: "byu_populism_speeches"
+      type: "file_collection"
+      file_path: "corpus/byu_2016_speeches"
+      pattern: "*.txt"
+      description: "Speeches from the BYU Global Populism Dataset (Trump, Clinton, Sanders, Cruz)"
+
+    - id: "byu_populism_scores"
+      type: "annotation_file"
+      file_path: "corpus/byu_2016_speeches/labels/byu_populism_scores.csv"
+      description: "Gold labels from BYU Global Populism Dataset (scale 0.0–2.0)"
+
+execution:
+  description: "Run Discernus populism dipole scoring on BYU-coded campaign speeches"
+  matrix:
+    - run_id: "byu_corpus_dipole_scoring"
+      description: "LLM-based scoring of campaign speeches using Populism vs. Pluralism framework"
+      framework: "populism_vs_pluralism"
+      prompt_template: "populism_analysis"
+      model: "gpt-4o"
+      corpus_subset: "byu_populism_speeches"
+
+  cost_controls:
+    max_total_cost: 20.0
+    cost_per_analysis_limit: 0.75
+
+  quality_controls:
+    min_framework_fit_score: 0.7
+    enable_qa_validation: true
+    require_evidence: true
+
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.75
+    require_evidence: true
+    manual_review_triggers: ["low_confidence", "contradiction_index>0.5"]
+
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+
+  configuration:
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests: ["correlation_analysis", "classification_thresholds", "contradiction_flagging"]
+
+    reliability_analysis:
+      enabled: true
+      methods: ["score_distribution_comparison", "false_positive_detection", "coherence_purity_analysis"]
+
+    visualizations:
+      enabled: true
+      types: ["scatter_plot_with_regression", "histograms_by_category", "contradiction_heatmap"]
+      interactive: true
+      publication_ready: true
+
+    academic_integration:
+      export_formats: ["csv", "json", "r_data"]
+      include_metadata: true
+      generate_replication_package: true
+
+outputs:
+  save_to_database: true
+  export_formats: ["json", "csv", "r_data"]
+  include_raw_responses: true
+  include_provenance: true
+
+  academic_exports:
+    enabled: true
+    formats: ["csv", "r_data", "stata", "feather"]
+    include_replication_package: true
+    populism_outputs:
+      dipole_scores_matrix: true
+      contradiction_index_report: true
+      regression_correlation_analysis: true
+
+validation_criteria:
+  min_successful_analyses: 100
+  max_total_cost: 20.0
+  required_quality_score: 0.75
+  custom_criteria:
+    min_correlation: 0.75
+    max_false_positive_rate: 0.2
+    contradiction_index_precision: 0.8

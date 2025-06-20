@@ -1,0 +1,16 @@
+{
+  "experiment_info": {
+    "name": "MFT_Working_Validation_Study",
+    "id": 66,
+    "status": "completed",
+    "created_at": "2025-06-20 14:16:20.986015",
+    "updated_at": "2025-06-20 14:19:09.326606",
+    "total_runs": 0
+  },
+  "analysis_runs": [],
+  "summary_stats": {
+    "total_analyses": 0,
+    "successful_runs": 0,
+    "total_cost": 0.0
+  }
+}

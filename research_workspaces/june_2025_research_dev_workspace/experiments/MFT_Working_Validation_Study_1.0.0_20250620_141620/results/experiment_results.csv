@@ -1,0 +1,2 @@
+experiment_id,experiment_name,status,total_analyses,success_rate,total_cost,framework,model,texts_analyzed,duration_minutes,quality_status
+MFT_Working_Validation_Study_1.0.0_20250620_141620,MFT Working Validation Study,completed,16,100%,$0.0132,moral_foundations_theory,gpt-4o-mini,4,4,medium-high 

@@ -1,0 +1,174 @@
+# Populism vs Pluralism Dipole Framework - Discernus Worldview Axis
+# Developed from BYU Global Populism Dataset and ideological populism theory (Mudde, Hawkins)
+# Integrated into Discernus dipole-based worldview scoring system
+
+name: populism_vs_pluralism
+framework_name: populism_vs_pluralism
+display_name: "Populism vs Pluralism Dipole"
+version: v2025.06.20
+
+description: |
+  This framework encodes the ideological tension between populist and pluralist worldviews, grounded in 
+  the theoretical work of Hawkins, Mudde, Rovira Kaltwasser, and the BYU Global Populism project. It 
+  formalizes the populist–pluralist axis as a coherent dipole usable in large language model scoring, 
+  worldview clustering, and rhetorical diagnostics. The populist pole emphasizes moral dualism, 
+  anti-elitism, and people-centric sovereignty, while the pluralist pole emphasizes institutional 
+  legitimacy, value pluralism, and democratic competition.
+
+framework_type: single_dipole
+coordinate_system:
+  type: line
+  scale: [-1.0, 1.0]
+  midpoint: 0.0
+  description: "Linear dipole axis: -1 = pure pluralism, +1 = pure populism"
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Hawkins, K. A., Carlin, R. E., Littvay, L., & Rovira Kaltwasser, C. (2019). The Ideational Approach to Populism: Concept, Theory, and Analysis. Routledge."
+    - "Mudde, C. (2004). The Populist Zeitgeist. Government and Opposition, 39(4), 541-563."
+    - "Hawkins, K. A., Aguilar, R., Silva, B. C., Jenne, E., & Kocijan, B. (2019). Global Populism Dataset (2019 release). BYU Center for the Study of Elections and Democracy."
+  
+  theoretical_approach: |
+    Operationalizes populism as a moralistic ideology distinguishing a pure, virtuous people from a 
+    corrupt elite, promoting popular sovereignty as the sole legitimate authority. Contrasts this with 
+    pluralism, which treats society as composed of multiple legitimate groups in dynamic institutional 
+    balance. This framework adapts BYU's holistic scoring method into a structured dipole for 
+    interpretability and LLM scaling.
+
+# =============================================================================
+# DIPOLE DEFINITION
+# =============================================================================
+
+dipole:
+  name: Populism_vs_Pluralism
+  description: "Ideological tension between populist and pluralist worldviews in democratic discourse"
+
+  positive:
+    name: Populism
+    description: "Moral dualism, people-centric sovereignty, anti-elitism, and rejection of institutional pluralism"
+    
+    rich_description: |
+      Frames politics as a struggle between a virtuous, unified "people" and a corrupt, self-serving 
+      "elite." Emphasizes direct popular will over representative institutions, often casting political 
+      opponents as illegitimate. Rejects compromise, favors absolute moral clarity, and frequently 
+      invokes a sense of systemic betrayal or conspiracy.
+    
+    language_cues:
+      - the real Americans
+      - the corrupt elite
+      - rigged system
+      - only I can fix it
+      - the people have spoken
+      - betrayed by the establishment
+      - take back control
+      - they don’t care about you
+      - the forgotten men and women
+      - fight for the people
+      - drain the swamp
+      - shut down the system
+
+    weight: 1.0
+    type: populist
+    tier: primary
+
+  negative:
+    name: Pluralism
+    description: "Institutional trust, group legitimacy, democratic competition, and norm-bound political diversity"
+    
+    rich_description: |
+      Treats society as composed of multiple legitimate constituencies with competing interests. 
+      Emphasizes procedural democracy, institutional checks and balances, and the legitimacy of political 
+      disagreement. Values compromise, dialogue, and institutional continuity. Rejects Manichaean framing 
+      in favor of issue complexity and shared governance.
+    
+    language_cues:
+      - different voices matter
+      - respect the democratic process
+      - checks and balances
+      - legitimate disagreement
+      - inclusive institutions
+      - protect the rule of law
+      - governing together
+      - preserve our democracy
+      - trust in democratic norms
+      - working through the system
+      - political pluralism
+      - competing ideas strengthen democracy
+
+    weight: -1.0
+    type: pluralist
+    tier: primary
+
+# =============================================================================
+# PROMPT CONFIGURATION
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are a political discourse analyst specializing in ideological populism and pluralism, 
+    trained using the BYU Global Populism Dataset and the ideational theory of populism. You 
+    recognize moral framing, anti-elitism, and people-centrism as core features of populist rhetoric, 
+    and institutional trust and diversity-of-view as core to pluralism.
+
+  analysis_focus: |
+    Analyze this text for evidence of populist or pluralist worldview. Identify whether the speaker 
+    frames politics in moral binaries, elevates the "people" above institutions, and vilifies elites 
+    (populism), or affirms democratic institutions, political pluralism, and respectful disagreement (pluralism).
+
+  scoring_approach: |
+    Score on a -1.0 to +1.0 scale:
+      +1.0 = highly populist
+      0.0 = neutral or mixed
+      -1.0 = highly pluralist
+
+    Include evidence for both sides, noting contradiction if both poles are invoked in tension.
+
+  evidence_requirements: |
+    Quote or paraphrase specific text passages supporting each end of the dipole. If both appear 
+    in close proximity, flag as worldview contradiction. Note dominant pole and intensity.
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  dipole_score:
+    name: "Populism-Pluralism Dipole Score"
+    description: "Scalar measurement of rhetorical worldview from populist (+1) to pluralist (–1)"
+  
+  contradiction_index:
+    name: "Populism-Pluralism Contradiction Index"
+    description: "Degree to which both poles appear in the same communication, indicating strategic or incoherent worldview"
+  
+  purity_score:
+    name: "Worldview Purity Score"
+    description: "Strength of dominant pole without contamination from the opposite pole"
+
+# =============================================================================
+# RESEARCH QUESTIONS ENABLED
+# =============================================================================
+
+research_questions:
+  populist_worldview_detection:
+    question: "How frequently and intensely do political communications adopt populist rhetorical worldviews?"
+    methodology: "Dipole scoring of large corpora (e.g., campaign speeches)"
+  
+  worldview_mixing_detection:
+    question: "When and where do politicians mix populist and pluralist elements in the same message?"
+    methodology: "Contradiction index scoring over time or across issues"
+  
+  cross-party worldview analysis:
+    question: "Do parties or factions differ in their average positioning on the populism-pluralism axis?"
+    methodology: "Aggregate dipole scores across speakers and parties"
+
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-20T12:00:00Z"
+implementation_status: "Production ready for LLM-based worldview scoring"
+prompt_template: "populism_vs_pluralism_v1.0"

@@ -1,0 +1,15 @@
+{
+  "experiment_id": "MFT_Working_Validation_Study_1.0.0_20250620_141533",
+  "state": "completed",
+  "timestamp": "2025-06-20T14:15:37.257261",
+  "can_resume": false,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "transaction_complete": true,
+    "final_timestamp": "2025-06-20T14:15:37.257226",
+    "execution_summary": {
+      "total_analyses": 16,
+      "total_cost": 0.0
+    }
+  }
+}

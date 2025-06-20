@@ -1,0 +1,98 @@
+experiment_meta:
+  name: MFT_Single_File_Test
+  version: 1.0.0
+  created: '2025-06-20T13:47:00Z'
+  description: Simple test of MFT framework with single file
+  hypothesis: MFT framework correctly analyzes conservative dignity text
+  research_context: Quick validation test
+  principal_investigator: Test User
+  institution: Research Lab
+  ethical_clearance: TEST-2025-001
+  funding_source: Internal
+  data_classification: test
+  publication_intent: false
+  tags:
+  - mft
+  - test
+  hypotheses:
+  - MFT framework identifies moral foundations in conservative text
+  success_criteria:
+  - Analysis completes successfully
+  - Framework scores are generated
+components:
+  frameworks:
+  - id: moral_foundations_theory
+    version: 2.0.0
+    type: file_path
+    file_path: research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+  prompt_templates:
+  - id: hierarchical_analysis
+    version: 2.1.0
+  weighting_schemes:
+  - id: winner_take_most
+    version: 2.1.0
+  models:
+  - id: gpt-4o
+    provider: openai
+    version: '2024-05-13'
+  corpus:
+  - id: single_test
+    type: file_path
+    file_path: corpus/validation_set/conservative_dignity/ronald_reagan_1986_challenger_address.txt
+    description: Single conservative dignity text for testing
+execution:
+  description: Single file MFT test
+  matrix:
+  - run_id: single_test_run
+    description: Test MFT on Reagan Challenger address
+    framework: moral_foundations_theory
+    prompt_template: hierarchical_analysis
+    weighting_scheme: winner_take_most
+    model: gpt-4o
+    corpus_subset: single_test
+  cost_controls:
+    max_total_cost: 5.0
+    cost_per_analysis_limit: 1.0
+  quality_controls:
+    min_framework_fit_score: 0.7
+    enable_qa_validation: true
+    require_evidence: true
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.75
+    require_evidence: true
+    manual_review_triggers:
+    - low_confidence
+    - anomaly_detected
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+  configuration:
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests:
+      - descriptive_stats
+    visualizations:
+      enabled: true
+      types:
+      - foundation_radar_charts
+      interactive: true
+      publication_ready: true
+    academic_integration:
+      export_formats:
+      - csv
+      - json
+      include_metadata: true
+outputs:
+  save_to_database: true
+  export_formats:
+  - json
+  - csv
+  include_raw_responses: true
+  include_provenance: true
+validation_criteria:
+  min_successful_analyses: 1
+  max_total_cost: 5.0
+  required_quality_score: 0.75

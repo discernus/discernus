@@ -1,0 +1,6 @@
+{
+  "pipeline_status": "failed",
+  "error": "No module named 'extract_experiment_results'",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/scripts/production/comprehensive_experiment_orchestrator.py\", line 2220, in execute_enhanced_analysis_pipeline\n    from extract_experiment_results import ExperimentResultsExtractor\nModuleNotFoundError: No module named 'extract_experiment_results'\n",
+  "timestamp": "2025-06-20T14:15:37.256993"
+}
