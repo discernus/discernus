@@ -1,5 +1,7 @@
 # Cursor AI Assistant Rules for Narrative Gravity Analysis Project
 
+> **📖 MASTER DOCUMENT**: See `ai_assistant_compliance_rules.md` for complete comprehensive rules and detailed guidance. This file contains core rules for Cursor IDE integration.
+
 ## 🎯 USER PREFERENCES
 
 **User prefers temperature 0 behaviour from all assistants** - Prioritize systematic, consistent, rule-following responses over creative variation for this technical/academic project.
@@ -56,7 +58,7 @@ python3 scripts/production/validate_ai_assistant_compliance.py --check-suggestio
 
 ## 📚 REQUIRED FILES TO REFERENCE
 
-1. `.ai_assistant_rules.md` - Complete rule set
+1. `ai_assistant_compliance_rules.md` - **MASTER DOCUMENT** - Complete comprehensive rule set
 2. `docs/EXISTING_SYSTEMS_INVENTORY.md` - What already exists
 3. `docs/CODE_ORGANIZATION_STANDARDS.md` - Code organization
 4. `DEVELOPMENT.md` - Development guide
