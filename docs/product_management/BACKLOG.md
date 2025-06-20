@@ -477,6 +477,25 @@ Items discovered or decided but not yet prioritized for current iteration. Gets 
 
 ## 📊 **Testing & Validation**
 
+- [ ] **Comprehensive Test System Review and Optimization** - Stem-to-stern review of all test infrastructure and test data following academic validation completion (discovered: June 19, priority: HIGH)
+  - **Current State Assessment**: 161 test result files (226.4MB) across 22 categories with comprehensive QA validation reports
+  - **Review Scope**: Complete audit of test coverage, test result quality, data organization, and preservation strategies
+  - **Test Data Analysis**: Systematic review of QA test exports (qa_convenience_test/, qa_integration_test/) with validation report quality assessment
+  - **Infrastructure Evaluation**: Assessment of test isolation system, bloat prevention integration, and result preservation effectiveness
+  - **Strategic Justification**: Ensure test infrastructure scales appropriately for production academic validation runs and maintains research-grade quality standards
+  - **Deliverables**: Test strategy optimization, data retention policies, quality metrics enhancement, and comprehensive testing best practices documentation
+  - **Dependencies**: Complete after major academic validation runs to capture lessons learned and scale requirements
+
+- [ ] **Experiment QA System Status Review and Enhancement** - Comprehensive review of discovered experiment QA system capabilities and integration status (discovered: June 19, priority: HIGH)
+  - **Discovery Context**: QA system found operational with comprehensive validation reports, confidence scoring, and multi-format exports during test infrastructure inspection
+  - **System Assessment**: Evaluate QAEnhancedDataExporter, LLMQualityAssuranceSystem (6-layer validation), and ComponentQualityValidator integration status
+  - **Quality Metrics Review**: Analysis of current confidence score statistics (mean: 0.037, all LOW confidence), quality issue detection (10 anomalies, 8 critical issues), and validation effectiveness
+  - **Integration Analysis**: Review QA system integration with orchestrator, export pipeline, and academic validation workflows
+  - **Enhancement Opportunities**: Identify gaps in current QA coverage, threshold optimization, and academic validation integration
+  - **Strategic Justification**: Ensure QA system meets academic rigor standards and provides meaningful quality assurance for research publications
+  - **Deliverables**: QA system status report, enhancement recommendations, integration optimization, and academic validation alignment strategy
+  - **Priority Rationale**: Critical for ensuring research quality and publication readiness of academic validation outputs
+
 - [ ] **Unit Testing Framework** - CLI component tests, database integration tests (discovered: June 13, priority: TBD)
 - [ ] **Integration Testing Suite** - Cross-component compatibility tests (discovered: June 13, priority: TBD)
 - [ ] **Academic Standard Compliance Tests** - Ensure outputs meet publication requirements (discovered: June 13, priority: TBD)

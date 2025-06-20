@@ -1,0 +1,7 @@
+asset_id: MFT_Academic_Validation_Study_v1.0.0_20250619_225419
+content_hash: f19e6ec0f0bfefb63a23ca2e09136bb45a4b9e019b220b8ce0e8f03ad73218d8
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-19T22:54:19.883542'
+source_path: research_workspaces/june_2025_research_dev_workspace/experiments/mft_validation_study.yaml
+validation_status: validated_before_storage
+version: v1.0.0

@@ -1132,55 +1132,49 @@ class ExperimentOrchestrator:
     
     def load_experiment_definition(self, experiment_file: Path) -> Dict[str, Any]:
         """Load and validate experiment definition with full specification validation"""
-        logger.info(f"Loading experiment definition: {experiment_file}")
+        logger.info(f"📋 Loading experiment definition: {experiment_file}")
         
-        if not experiment_file.exists():
-            raise FileNotFoundError(f"Experiment definition not found: {experiment_file}")
-        
-        # Step 1: Full experimental specification validation (first step for academics)
+        # Pre-flight validation with enhanced error messages
         try:
-            # Import here to avoid circular dependencies
-            import sys
-            sys.path.insert(0, str(Path(__file__).parent))
-            from experiment_validator import ExperimentSpecValidator
+            from .experiment_validation_utils import ExperimentValidator
+            validator = ExperimentValidator()
+            validation_report = validator.validate_experiment_file(experiment_file)
             
-            logger.info("🔍 Running comprehensive experimental specification validation...")
-            validator = ExperimentSpecValidator()
-            validation_result = validator.validate_experiment(experiment_file)
+            if not validation_report.is_valid:
+                logger.error("❌ Experiment definition validation failed")
+                logger.error("=" * 60)
+                
+                # Print detailed validation report
+                for issue in validation_report.issues:
+                    if issue.severity.value == "error":
+                        logger.error(f"❌ {issue.message}")
+                        logger.error(f"   Location: {issue.location}")
+                        logger.error(f"   Fix: {issue.suggestion}")
+                        if issue.example:
+                            logger.error(f"   Example: {issue.example}")
+                
+                raise ValueError(f"Experiment validation failed with {validation_report.summary.get('error', 0)} errors")
             
-            # Check validation results
-            if validation_result.is_valid:
-                logger.info("✅ Experimental specification validation passed")
-                
-                # Show academic compliance status
-                compliance_summary = []
-                for field, compliant in validation_result.academic_compliance.items():
-                    status = "✅" if compliant else "⚠️"
-                    compliance_summary.append(f"{status} {field.replace('_', ' ').title()}")
-                
-                if compliance_summary:
-                    logger.info(f"🎓 Academic compliance: {len([c for c in validation_result.academic_compliance.values() if c])}/{len(validation_result.academic_compliance)} requirements met")
-            else:
-                logger.error("❌ Experimental specification validation failed")
-                
-                # Print detailed errors for researchers
-                for error in validation_result.errors:
-                    logger.error(f"  • {error}")
-                
-                raise ValueError(f"Experiment specification validation failed with {len(validation_result.errors)} errors. Please address these academic research requirements before proceeding.")
+            # Show warnings but continue
+            warnings_count = validation_report.summary.get('warning', 0)
+            if warnings_count > 0:
+                logger.warning(f"⚠️  {warnings_count} validation warnings found:")
+                for issue in validation_report.issues:
+                    if issue.severity.value == "warning":
+                        logger.warning(f"⚠️  {issue.message}")
+                        logger.warning(f"   Fix: {issue.suggestion}")
             
-            # Show warnings and suggestions (non-blocking)
-            for warning in validation_result.warnings:
-                logger.warning(f"⚠️  Academic Note: {warning}")
-            
-            for suggestion in validation_result.suggestions:
-                logger.info(f"💡 Suggestion: {suggestion}")
+            logger.info("✅ Enhanced validation passed")
             
         except ImportError:
-            logger.warning("⚠️  ExperimentSpecValidator not available - using basic validation only")
+            logger.warning("⚠️  Enhanced validation not available - using basic validation only")
         except Exception as e:
-            logger.error(f"❌ Specification validation error: {e}")
-            raise ValueError(f"Failed to validate experiment specification: {e}")
+            logger.error(f"❌ Enhanced validation error: {e}")
+            logger.warning("⚠️  Falling back to basic validation")
+
+        # Continue with existing validation logic
+        if not experiment_file.exists():
+            raise FileNotFoundError(f"Experiment definition not found: {experiment_file}")
         
         # Step 2: Load experiment data (supports YAML auto-conversion)
         try:
@@ -1197,7 +1191,7 @@ class ExperimentOrchestrator:
             else:
                 experiment = json.loads(file_content)
                 logger.info("✅ Loaded JSON experiment definition")
-            
+
             # Step 3: Basic schema validation (backup)
             required_fields = ['experiment_meta', 'components', 'execution']
             missing_fields = [field for field in required_fields if field not in experiment]
