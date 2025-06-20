@@ -388,4 +388,30 @@ This comprehensive fix resolves the disconnect between framework definitions, da
 
 ---
 
-*For complete historical changelog, see previous versions* 
+- **🔧 ENHANCED FRAMEWORK DETECTION SYSTEM: Descriptive Framework Names Support** (June 19, 2025)
+  - **Flexible Pattern Matching**: Enhanced framework detection supports descriptive names with priority order
+    - **Highest Priority**: `*_framework.yaml`, `*_framework.json` (descriptive names)
+    - **Standard Support**: `framework.yaml`, `framework.json` (current pattern)
+    - **Legacy Support**: `framework_consolidated.json` (consolidated format)
+  - **Complete Research Workspace Implementation**: Successfully renamed and tested all frameworks
+    - `entman_framing_functions_framework.yaml` - Entman's four independent framing functions
+    - `lakoff_family_models_framework.yaml` - Lakoff's family model clustering theory
+    - `civic_virtue_framework.yaml` - Civic virtue vs vice 10-well framework
+    - `iditi_framework.yaml` - Individual dignity vs tribal identity framework
+    - `three_wells_political_framework.yaml` - Three independent political theory wells
+    - `business_ethics_framework.yaml` - Business ethics framework
+    - `moral_foundations_theory_framework.yaml` - Haidt's moral foundations theory
+  - **100% Conversion Success**: All 6 framework directories now use descriptive naming
+  - **Full System Validation**: Complete end-to-end testing confirms all frameworks load and operate correctly
+  - **Self-Documenting Files**: Framework files now clearly indicate their type and purpose
+  - **Multi-Framework Theory Support**: Perfect for theories with multiple frameworks like political framing theory
+  - **Backward Compatibility**: Maintains full support for existing framework naming patterns
+  - **Academic Standards**: Aligns with academic naming conventions for research files
+  - **Production Integration**: Updated all core framework loading components
+    - Enhanced `FrameworkManager.load_framework()` with pattern matching
+    - Updated `ConsolidatedFrameworkLoader` in experiment orchestrator
+    - Enhanced `PromptTemplateManager` framework configuration loading
+    - Upgraded unified asset ingestion pipeline prototype
+  - **Validation Success**: Complete end-to-end testing confirms descriptive framework names fully supported
+
+*For complete historical changelog, see previous versions*

@@ -196,20 +196,51 @@ class ConsolidatedFrameworkLoader:
         self.frameworks_dir = Path(frameworks_dir)
     
     def load_framework(self, framework_name: str) -> Dict[str, Any]:
-        """Load framework using consolidated format first, fallback to legacy"""
-        # Try consolidated format first
-        consolidated_file = self.frameworks_dir / framework_name / "framework_consolidated.json"
-        if consolidated_file.exists():
-            logger.info(f"Loading consolidated framework: {framework_name}")
-            with open(consolidated_file, 'r') as f:
-                return json.load(f)
+        """Load framework using enhanced pattern matching - descriptive names first, fallback to legacy"""
+        framework_dir = self.frameworks_dir / framework_name
         
-        # Fallback to legacy format
-        legacy_file = self.frameworks_dir / framework_name / "framework.json"
-        if legacy_file.exists():
-            logger.warning(f"Using legacy framework format: {framework_name}")
-            with open(legacy_file, 'r') as f:
-                return json.load(f)
+        if not framework_dir.exists():
+            raise FileNotFoundError(f"Framework directory not found: {framework_name}")
+        
+        # Enhanced framework file detection with pattern matching
+        framework_patterns = [
+            # 1. Descriptive framework names (new pattern) - highest priority
+            "*_framework.yaml",
+            "*_framework.json", 
+            # 2. Consolidated format (enhanced legacy support)
+            "framework_consolidated.json",
+            # 3. Standard framework names (current pattern)
+            "framework.yaml",
+            "framework.json"
+        ]
+        
+        main_framework_file = None
+        
+        # Find the main framework file using pattern matching
+        for pattern in framework_patterns:
+            matches = list(framework_dir.glob(pattern))
+            if matches:
+                # If multiple matches, prefer the first alphabetically for consistency
+                main_framework_file = sorted(matches)[0]
+                logger.info(f"Found framework file using pattern '{pattern}': {main_framework_file.name}")
+                break
+        
+        if main_framework_file:
+            logger.info(f"Loading framework: {framework_name} from {main_framework_file.name}")
+            
+            try:
+                if main_framework_file.suffix.lower() == '.yaml':
+                    # Handle YAML format
+                    import yaml
+                    with open(main_framework_file, 'r') as f:
+                        return yaml.safe_load(f)
+                else:
+                    # Handle JSON format
+                    with open(main_framework_file, 'r') as f:
+                        return json.load(f)
+            except Exception as e:
+                logger.error(f"Error loading framework file {main_framework_file}: {e}")
+                raise
         
         raise FileNotFoundError(f"Framework not found: {framework_name}")
     

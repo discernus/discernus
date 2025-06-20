@@ -1,37 +1,62 @@
-# Discernus Single Framework MVP Implementation Plan
-**Moral Foundations Theory as Proof-of-Concept for Platform Viability**
+# Discernus Dual Framework MVP Implementation Plan
+**Moral Foundations Theory and Political Framing Theory as Comprehensive Proof-of-Concept**
 
-*Date: December 2024*  
+*Date: June 2025*  
 *Status: Focused MVP Strategy*  
-*Approach: Single Framework End-to-End Validation*
+*Approach: Dual Framework End-to-End Validation*
 
 ---
 
 ## Executive Summary
 
-This document outlines a focused implementation strategy that starts with a single established framework (Moral Foundations Theory) to demonstrate Discernus's core value proposition before expanding to multiple frameworks. This approach dramatically reduces complexity while providing a complete proof-of-concept that can attract academic adoption and validate the methodological approach.
+This document outlines a comprehensive implementation strategy that demonstrates Discernus's core value proposition through systematic validation of two complementary established frameworks: Moral Foundations Theory (MFT) and Political Framing Theory (PFT). This approach provides robust proof-of-concept across both moral psychology and political communication while demonstrating the platform's capability for multi-framework integration.
 
-**Core Strategy**: Prove the concept works excellently with one framework before adding complexity  
-**Primary Goal**: End-to-end validation of Discernus approach using Moral Foundations Theory  
-**Success Criteria**: Academic publication, expert endorsement, community adoption of single-framework implementation
+**Core Strategy**: Prove the concept works excellently with two complementary frameworks that provide comprehensive discourse analysis capabilities  
+**Primary Goal**: End-to-end validation of Discernus approach using both Moral Foundations Theory and Political Framing Theory  
+**Success Criteria**: Academic publications across both moral psychology and political communication, expert endorsement from both research communities, community adoption across computational social science disciplines
 
 ---
 
-## Why Moral Foundations Theory as MVP Framework
+## Why Moral Foundations Theory and Political Framing Theory as MVP Frameworks
 
-### Strategic Advantages
+### Strategic Advantages of Dual Framework Approach
+
+#### Moral Foundations Theory (MFT)
 1. **Most Established**: Extensive validation instruments (MFQ-30), large research community, clear expert leadership
 2. **Clear Operationalization**: Well-defined constructs with validated lexicons and measurement approaches
 3. **Active Research Area**: Ongoing academic interest ensures relevance and adoption potential
 4. **Expert Accessibility**: Jonathan Haidt, Jesse Graham, and team have established collaboration patterns
 5. **Replication Opportunities**: Abundant published studies for validation comparisons
 
+#### Political Framing Theory (PFT)
+1. **Theoretical Innovation**: Novel integration of Entman and Lakoff frameworks provides methodological contribution
+2. **Political Communication Relevance**: High demand in political psychology and communication research
+3. **Complementary Analysis**: Provides strategic communication perspective alongside moral psychology
+4. **Geometric Validation**: Arc clustering hypothesis enables innovative empirical testing
+5. **Methodological Advancement**: First systematic computational implementation of integrated framing theory
+
+### Complementary Framework Benefits
+1. **Comprehensive Analysis**: Moral foundations (underlying values) + political framing (strategic communication)
+2. **Broader Academic Appeal**: Attracts both moral psychology and political communication researchers
+3. **Methodological Validation**: Demonstrates platform capability across different theoretical approaches
+4. **Comparative Insights**: Enables research questions impossible with single framework
+5. **Community Building**: Establishes Discernus across multiple research communities
+
 ### Technical Advantages
+
+#### Moral Foundations Theory
 1. **Clear Dimensional Structure**: Five foundations provide manageable complexity for initial implementation
 2. **Validated Instruments**: MFQ provides gold standard for construct validation
 3. **Lexical Resources**: Established vocabulary lists and linguistic indicators available
 4. **Behavioral Correlates**: Known relationships with other measures for convergent/discriminant validity
 5. **Cross-Cultural Data**: International validation studies provide robustness testing opportunities
+
+#### Political Framing Theory
+1. **Innovative Architecture**: Dipole vs. independent wells comparison enables methodological research
+2. **Geometric Analysis**: Arc clustering provides quantitative validation of theoretical predictions
+3. **Frame Detection**: Clear success metrics through precision/recall on known exemplars
+4. **Strategic Analysis**: Enables detection of audience-specific messaging patterns
+5. **Theory Testing**: Empirical validation of cognitive linguistics predictions
 
 ---
 
@@ -39,154 +64,181 @@ This document outlines a focused implementation strategy that starts with a sing
 
 ### Core MVP Components
 
-#### 1. Single Framework Implementation
+#### 1. Dual Framework Implementation
 **Moral Foundations Theory (MFT) Framework**
 - Five-foundation scoring system (Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation)
 - Validated lexical markers from established MFT research
 - Prompt templates based on MFQ methodology
 - Circular coordinate system for visualization (existing architecture)
 
+**Political Framing Theory (PFT) Framework**
+- Entman four framing functions (problem definition, causal interpretation, moral evaluation, solution recommendation)
+- Lakoff family model analysis with arc clustering hypothesis testing
+- Independent wells architecture for function independence
+- Geometric clustering analysis for family model validation
+
 #### 2. Essential Technical Infrastructure
 **Automated Analysis Pipeline**
 - Single LLM provider integration (OpenAI GPT-4 as primary)
-- Batch processing for systematic analysis
+- Batch processing for systematic analysis across both frameworks
 - Basic quality assurance and error handling
-- Database storage for results and provenance
+- Database storage for results and provenance with dual framework support
 
 **Validation Infrastructure**
-- MFQ correlation studies (construct validity)
-- Test-retest reliability assessment
+- MFT: MFQ correlation studies (construct validity)
+- PFT: Frame detection accuracy on known exemplars
+- Test-retest reliability assessment across both frameworks
 - Inter-rater agreement measurement
-- Statistical reporting and visualization
+- Statistical reporting and visualization for both frameworks
 
 #### 3. Expert Consultation Integration
-**Haidt Lab Collaboration**
-- Framework implementation review and approval
-- Validation study design consultation
+**Dual Expert Collaboration**
+- Haidt Lab: MFT framework implementation review and approval
+- Political Communication Researchers: PFT framework implementation review and approval
+- Validation study design consultation across both frameworks
 - Results interpretation and publication collaboration
-- Platform endorsement for academic credibility
+- Platform endorsement for academic credibility in both communities
 
 #### 4. Academic Publication Package
-**Single-Framework Methodology Paper**
-- Platform description and implementation details
-- MFT validation study results
-- Comparison with established MFT research
-- Replication of classic MFT findings using Discernus
+**Dual-Framework Methodology Papers**
+- MFT Paper: "Computational Validation of Moral Foundations Theory"
+- PFT Paper: "Systematic Political Framing Analysis: Computational Implementation of Entman-Lakoff Integration"
+- Platform description and implementation details for both frameworks
+- Comparative analysis demonstrating complementary insights
+- Replication of classic findings using Discernus across both frameworks
 
 ### What's Excluded from MVP
-- Multiple framework comparison
-- Complex experimental design infrastructure
-- Advanced statistical modeling
+- Additional frameworks beyond MFT and PFT
+- Complex experimental design infrastructure (initially)
+- Advanced statistical modeling beyond validation requirements
 - Cross-cultural validation (initially)
 - Human-computer comparison studies (initially)
-- Multi-LLM provider integration
+- Multi-LLM provider integration (initially)
 
 ---
 
 ## Implementation Plan
 
 ### Phase 1: Core Infrastructure (Months 1-2)
-**Objective**: Get basic pipeline working end-to-end with MFT
+**Objective**: Get basic pipeline working end-to-end with both MFT and PFT frameworks
 
 **Month 1: Foundation**
 - Fix current platform critical gaps (import errors, database sessions)
 - Implement single LLM provider integration (OpenAI)
-- Build basic MFT framework configuration
-- Create simple batch processing capability
+- Build unified framework configuration system supporting both MFT and PFT
+- Create batch processing capability for dual framework analysis
 
-**Month 2: MFT Implementation**
+**Month 2: Dual Framework Implementation**
 - Import validated MFT lexicons and scoring rubrics
 - Build MFT-specific prompt templates
-- Implement five-foundation scoring system
-- Create basic visualization output
+- Implement PFT framework with Entman functions and Lakoff family models
+- Create PFT-specific prompt templates with arc clustering analysis
+- Implement basic visualization output for both frameworks
 
 **Success Criteria**: 
 - Process 100 texts through complete MFT analysis pipeline
-- Generate visualization outputs
-- Store results in database with provenance
+- Process 100 texts through complete PFT analysis pipeline
+- Generate visualization outputs for both frameworks
+- Store results in database with provenance tracking
 
 ### Phase 2: Validation Infrastructure (Months 3-4)
-**Objective**: Build validation capabilities for academic credibility
+**Objective**: Build validation capabilities for academic credibility across both frameworks
 
-**Month 3: Validation Framework**
-- Implement MFQ correlation study infrastructure
-- Build statistical analysis and reporting tools
-- Create test-retest reliability testing
-- Develop validation data collection protocols
+**Month 3: Dual Framework Validation Framework**
+- Implement MFQ correlation study infrastructure for MFT validation
+- Build frame detection accuracy testing infrastructure for PFT validation
+- Create statistical analysis and reporting tools for both frameworks
+- Develop test-retest reliability testing across both frameworks
+- Design validation data collection protocols for both MFT and PFT
 
 **Month 4: Initial Validation Studies**
-- Execute MFQ correlation study (n=500+ participants)
-- Conduct test-retest reliability assessment
-- Perform inter-rater agreement analysis
-- Generate preliminary validation results
+- Execute MFQ correlation study (n=500+ participants) for MFT validation
+- Conduct frame detection accuracy study on known exemplars for PFT validation
+- Perform test-retest reliability assessment across both frameworks
+- Execute inter-rater agreement analysis for both frameworks
+- Generate preliminary validation results showing both frameworks working
 
 **Success Criteria**:
-- Significant correlation with MFQ subscales (r > 0.6)
-- Test-retest reliability (r > 0.8)
-- Inter-rater agreement (α > 0.7)
+- MFT: Significant correlation with MFQ subscales (r > 0.6)
+- PFT: Frame detection accuracy >75% precision/recall
+- Test-retest reliability (r > 0.8) for both frameworks
+- Inter-rater agreement (α > 0.7) across both frameworks
 
 ### Phase 3: Expert Collaboration (Months 5-6)
-**Objective**: Secure expert endorsement and academic credibility
+**Objective**: Secure expert endorsement and academic credibility across both research communities
 
-**Month 5: Expert Engagement**
-- Initial contact and collaboration proposal with Haidt lab
-- Framework implementation review and feedback
-- Validation study design consultation
-- Platform demonstration and expert evaluation
+**Month 5: Dual Expert Engagement**
+- Initial contact and collaboration proposal with Haidt lab for MFT validation
+- Initial contact and collaboration proposal with political communication researchers for PFT validation
+- Framework implementation review and feedback from both expert communities
+- Validation study design consultation across both frameworks
+- Platform demonstration and expert evaluation with both research communities
 
 **Month 6: Expert Integration**
-- Implement expert feedback and recommendations
-- Conduct expert-supervised validation studies
-- Secure expert approval and endorsement
-- Prepare collaborative publication materials
+- Implement expert feedback and recommendations for both frameworks
+- Conduct expert-supervised validation studies for both MFT and PFT
+- Secure expert approval and endorsement from both research communities
+- Prepare collaborative publication materials for both frameworks
 
 **Success Criteria**:
-- Formal expert approval of MFT implementation
-- Expert collaboration agreement for publication
-- Expert endorsement of platform approach
+- Formal expert approval of MFT implementation from Haidt lab
+- Formal expert approval of PFT implementation from political communication researchers
+- Expert collaboration agreements for dual publication strategy
+- Expert endorsement of platform approach across both communities
 
 ### Phase 4: Academic Publication (Months 7-8)
-**Objective**: Publish validated single-framework methodology
+**Objective**: Publish validated dual-framework methodology across both research communities
 
-**Month 7: Publication Preparation**
-- Complete validation study analysis
-- Write methodology paper with expert collaboration
-- Prepare replication package and open-source release
-- Create platform documentation for community adoption
+**Month 7: Dual Publication Preparation**
+- Complete validation study analysis for both frameworks
+- Write MFT methodology paper with Haidt lab collaboration
+- Write PFT methodology paper with political communication researcher collaboration
+- Prepare replication package and open-source release for both frameworks
+- Create comprehensive platform documentation for community adoption
 
-**Month 8: Publication Submission**
-- Submit paper to computational social science journal
-- Release platform publicly with documentation
-- Begin community engagement and adoption facilitation
-- Plan expansion to additional frameworks
+**Month 8: Publication Submission and Launch**
+- Submit MFT paper to moral psychology journal (e.g., Political Psychology)
+- Submit PFT paper to political communication journal (e.g., Political Communication)
+- Release platform publicly with documentation for both frameworks
+- Begin community engagement and adoption facilitation across both research communities
+- Demonstrate comparative analysis capabilities unique to dual framework approach
 
 **Success Criteria**:
-- Paper submitted to target journal
-- Platform publicly available with documentation
-- Community interest and initial adoption
-- Clear expansion roadmap
+- Both papers submitted to target journals in their respective fields
+- Platform publicly available with comprehensive documentation
+- Community interest and initial adoption across both research communities
+- Demonstrated value of dual framework comparative analysis approach
 
 ---
 
 ## Validation Study Design
 
-### Primary Validation Study: MFQ Correlation
-**Design**: Participants complete both MFQ-30 and provide text samples for Discernus analysis
+### Primary Validation Studies
+
+#### MFT Validation: MFQ Correlation Study
+**Design**: Participants complete both MFQ-30 and provide text samples for Discernus MFT analysis
 **Sample Size**: 500+ participants across diverse demographics
-**Analysis**: Correlation between MFQ subscale scores and Discernus foundation scores
+**Analysis**: Correlation between MFQ subscale scores and Discernus MFT foundation scores
 **Expected Results**: Significant correlations (r > 0.6) demonstrating construct validity
 
-### Secondary Validation Studies
-1. **Test-Retest Reliability**: Same texts analyzed multiple times to assess consistency
-2. **Inter-Rater Agreement**: Multiple human coders analyze subset for comparison
-3. **Known Groups Validation**: Test on texts from groups with expected MFT differences
-4. **Replication Study**: Replicate classic MFT finding using Discernus
+#### PFT Validation: Frame Detection Accuracy Study
+**Design**: Expert-coded frame detection on known exemplars compared with Discernus PFT analysis
+**Sample Size**: 200+ texts with established frame annotations from political communication research
+**Analysis**: Precision/recall analysis for frame detection across both Entman functions and Lakoff family models
+**Expected Results**: >75% precision/recall demonstrating accurate frame detection
 
-### Expert Validation Process
-1. **Implementation Review**: Expert evaluation of framework operationalization
-2. **Validation Design**: Expert input on validation study methodology
-3. **Results Interpretation**: Expert collaboration on findings analysis
-4. **Platform Endorsement**: Expert approval for academic publication
+### Secondary Validation Studies
+1. **Test-Retest Reliability**: Same texts analyzed multiple times to assess consistency across both frameworks
+2. **Inter-Rater Agreement**: Multiple human coders analyze subset for comparison with both MFT and PFT results
+3. **Known Groups Validation**: Test on texts from groups with expected differences in both moral foundations and framing patterns
+4. **MFT Replication Study**: Replicate classic MFT finding using Discernus
+5. **PFT Arc Clustering Validation**: Test Lakoff family model predictions using geometric clustering analysis
+
+### Dual Expert Validation Process
+1. **Implementation Review**: Expert evaluation of both framework operationalizations
+2. **Validation Design**: Expert input on validation study methodology for both frameworks
+3. **Results Interpretation**: Expert collaboration on findings analysis across both frameworks
+4. **Platform Endorsement**: Expert approval for academic publication from both research communities
 
 ---
 
@@ -200,17 +252,30 @@ This document outlines a focused implementation strategy that starts with a sing
 - Cost monitoring and rate limiting
 
 ### Database Schema
-**Minimal Required Tables**
+**Minimal Required Tables for Dual Framework Support**
 ```sql
--- Simplified for MVP
-CREATE TABLE mft_analyses (
+-- Unified analysis table supporting both frameworks
+CREATE TABLE discourse_analyses (
     id UUID PRIMARY KEY,
     text_content TEXT NOT NULL,
+    framework_type VARCHAR NOT NULL, -- 'MFT' or 'PFT'
+    
+    -- MFT specific fields
     care_score DECIMAL(3,2),
     fairness_score DECIMAL(3,2), 
     loyalty_score DECIMAL(3,2),
     authority_score DECIMAL(3,2),
     sanctity_score DECIMAL(3,2),
+    
+    -- PFT specific fields
+    problem_definition JSONB,
+    causal_interpretation JSONB,
+    moral_evaluation JSONB,
+    solution_recommendation JSONB,
+    family_model_classification VARCHAR,
+    arc_clustering_data JSONB,
+    
+    -- Shared fields
     narrative_position JSONB,
     analysis_metadata JSONB,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -218,92 +283,107 @@ CREATE TABLE mft_analyses (
 
 CREATE TABLE validation_studies (
     id UUID PRIMARY KEY,
-    study_type VARCHAR NOT NULL,
+    study_type VARCHAR NOT NULL, -- 'MFT_correlation', 'PFT_frame_detection', etc.
+    framework_type VARCHAR NOT NULL,
     participant_data JSONB,
     discernus_results JSONB,
-    correlation_results JSONB,
+    validation_results JSONB, -- correlations, precision/recall, etc.
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
 ### Visualization
-**Simplified Output**
-- Basic radar chart with five MFT dimensions
-- Simple narrative positioning visualization
-- Statistical summary tables
-- Export capabilities for academic use
+**Dual Framework Output**
+- MFT: Basic radar chart with five moral foundation dimensions
+- PFT: Frame detection visualization showing Entman functions and Lakoff family model positioning
+- Combined narrative positioning visualization showing both moral and framing perspectives
+- Arc clustering visualization for Lakoff family model validation
+- Statistical summary tables for both frameworks
+- Export capabilities for academic use supporting both frameworks
 
 ---
 
-## Risk Mitigation for MVP Approach
+## Risk Mitigation for Dual Framework MVP Approach
 
 ### Technical Risks
-**Risk**: Even single framework proves too complex
-**Mitigation**: Start with manual validation before full automation, iterative development
+**Risk**: Dual framework complexity proves too challenging
+**Mitigation**: Start with manual validation before full automation, iterative development, fall back to single framework if necessary
 
-**Risk**: MFT implementation doesn't achieve adequate validity
-**Mitigation**: Early expert consultation, multiple validation approaches, pivot readiness
+**Risk**: MFT or PFT implementation doesn't achieve adequate validity
+**Mitigation**: Early expert consultation for both frameworks, multiple validation approaches, pivot readiness
+
+**Risk**: Framework integration challenges
+**Mitigation**: Design unified analysis pipeline with framework-specific modules, independent validation paths
 
 ### Academic Risks
-**Risk**: Single framework paper insufficient for publication
-**Mitigation**: Focus on methodological rigor, expert collaboration, clear expansion roadmap
+**Risk**: Dual framework papers insufficient for publication
+**Mitigation**: Focus on methodological rigor for both frameworks, expert collaboration across both communities, demonstrate unique value of comparative analysis
 
-**Risk**: Expert collaboration challenges
-**Mitigation**: Multiple expert contacts, clear value proposition, flexible collaboration terms
+**Risk**: Expert collaboration challenges across multiple communities
+**Mitigation**: Multiple expert contacts in both research areas, clear value propositions for each community, flexible collaboration terms
+
+**Risk**: Comparative analysis methodology not accepted
+**Mitigation**: Validate frameworks independently first, then demonstrate added value of combined analysis
 
 ### Platform Risks
-**Risk**: Technical infrastructure proves inadequate
-**Mitigation**: Address current 102 gaps systematically, focus on core functionality first
+**Risk**: Technical infrastructure proves inadequate for dual framework support
+**Mitigation**: Address current gaps systematically, focus on core functionality first, use unified architecture
 
 ---
 
-## Success Metrics for MVP
+## Success Metrics for Dual Framework MVP
 
 ### Technical Success
-1. **Pipeline Functionality**: 100% success rate for MFT analysis pipeline
-2. **Validation Results**: Significant correlations with MFQ (r > 0.6)
-3. **Reliability Metrics**: Test-retest reliability (r > 0.8)
-4. **Expert Approval**: Formal endorsement from Haidt lab
+1. **Pipeline Functionality**: 100% success rate for both MFT and PFT analysis pipelines
+2. **MFT Validation Results**: Significant correlations with MFQ (r > 0.6)
+3. **PFT Validation Results**: Frame detection accuracy >75% precision/recall
+4. **Reliability Metrics**: Test-retest reliability (r > 0.8) for both frameworks
+5. **Expert Approval**: Formal endorsement from both Haidt lab and political communication researchers
 
 ### Academic Success
-1. **Publication**: Acceptance in computational social science journal
-2. **Expert Collaboration**: Co-authorship or endorsement from MFT experts
-3. **Community Interest**: Platform adoption by other researchers
-4. **Replication Success**: Successful replication of established MFT findings
+1. **Dual Publications**: Acceptance in both moral psychology and political communication journals
+2. **Expert Collaboration**: Co-authorship or endorsement from experts in both framework areas
+3. **Community Interest**: Platform adoption by researchers across both communities
+4. **Replication Success**: Successful replication of established findings in both MFT and PFT
+5. **Comparative Analysis**: Demonstration of unique insights from dual framework approach
 
 ### Platform Success
-1. **Usability**: Researchers can use platform without extensive training
-2. **Reliability**: Consistent results across multiple analyses
-3. **Documentation**: Complete documentation enabling community adoption
-4. **Expansion Ready**: Clear pathway to additional frameworks
+1. **Usability**: Researchers can use both frameworks without extensive training
+2. **Reliability**: Consistent results across multiple analyses for both frameworks
+3. **Documentation**: Complete documentation enabling community adoption across both research areas
+4. **Framework Integration**: Successful demonstration of complementary framework insights
+5. **Expansion Ready**: Clear pathway to additional frameworks based on dual framework architecture
 
 ---
 
 ## Expansion Strategy Post-MVP
 
-### Phase 5: Second Framework (Months 9-12)
-- Apply lessons learned to Political Framing Theory implementation
-- Demonstrate multi-framework capability
-- Cross-framework comparison studies
+### Phase 5: Framework Integration Enhancement (Months 9-12)
+- Advanced comparative analysis capabilities leveraging both MFT and PFT
+- Cross-framework validation studies demonstrating unique insights
+- Multi-text analysis with dual framework perspective
+- Enhanced visualization showing framework interactions
 
-### Phase 6: Platform Maturation (Year 2)
-- Add Cultural Theory as third framework
-- Implement advanced experimental design capabilities
+### Phase 6: Third Framework Addition (Year 2)
+- Add Cultural Theory as third framework, building on dual framework architecture
+- Implement advanced experimental design capabilities across all frameworks
 - Build community contribution infrastructure
-- Develop framework marketplace concept
+- Develop framework marketplace concept with proven dual framework foundation
 
 ### Long-Term Vision
-- Standard infrastructure for computational social science
-- Community-contributed framework library
-- Integration with major research platforms
-- Academic course adoption and training programs
+- Standard infrastructure for computational social science with validated multi-framework capability
+- Community-contributed framework library building on successful dual framework model
+- Integration with major research platforms across multiple disciplines
+- Academic course adoption and training programs demonstrating comparative framework analysis
 
 ---
 
 ## Conclusion
 
-This MVP approach dramatically reduces risk while maintaining the core value proposition of Discernus as methodological infrastructure. By proving the concept works excellently with one established framework, we create a solid foundation for expansion while generating immediate academic value and community adoption.
+This dual framework MVP approach establishes Discernus as comprehensive methodological infrastructure while maintaining academic rigor. By proving the concept works excellently with two complementary established frameworks, we create a robust foundation for expansion while generating immediate academic value and community adoption across multiple research communities.
 
-The single-framework approach addresses the current platform gaps systematically while building credibility through expert collaboration and rigorous validation. Success with MFT provides proof-of-concept for the broader vision while creating sustainable momentum for long-term platform development.
+The dual-framework approach addresses the current platform gaps systematically while building credibility through expert collaboration and rigorous validation across both moral psychology and political communication. Success with both MFT and PFT provides comprehensive proof-of-concept for the broader vision while creating sustainable momentum for long-term platform development with broader academic appeal.
 
-**Next Action**: Begin Phase 1 implementation focusing on getting MFT analysis pipeline working end-to-end with current platform infrastructure. 
+The combination of moral foundations analysis (underlying values) and political framing analysis (strategic communication) provides researchers with unprecedented analytical depth, demonstrating Discernus's unique value proposition for computational discourse analysis.
+
+**Next Action**: Begin Phase 1 implementation focusing on getting both MFT and PFT analysis pipelines working end-to-end with current platform infrastructure, leveraging the comprehensive framework development strategy already established for both frameworks. 

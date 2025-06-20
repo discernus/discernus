@@ -7,15 +7,15 @@
 
 > **Academic Validation Strategy: Expert Consultation + Statistical Evidence + Publication Pipeline**
 
-## 🎯 **MVP Focus: Moral Foundations Theory Validation**
+## 🎯 **MVP Focus: Dual Framework Validation (MFT + PFT)**
 
-Discernus is a **validation-first computational discourse analysis platform** designed for rigorous academic research. Our current focus is establishing academic credibility through systematic validation of Moral Foundations Theory implementation against established measures (MFQ-30) with expert consultation from framework originators.
+Discernus is a **validation-first computational discourse analysis platform** designed for rigorous academic research. Our current focus is establishing academic credibility through systematic validation of our implementation using leading academic theories of moral psychology and political communication to evaluate contemporary textual narratives with expert consultation from framework originators.
 
 **Strategic Objectives:**
-- **Expert Endorsement**: Collaboration with Jonathan Haidt lab for MFT validation
-- **Statistical Validation**: r>0.8 correlation with MFQ-30 across all foundations
-- **Academic Publication**: Co-authored methodology paper with framework experts
-- **Community Adoption**: Computational social science researcher platform usage
+- **Expert Endorsement**: Collaboration with Jonathan Haidt lab (MFT) and political framing theory researchers (PFT)
+- **Statistical Validation**: r>0.8 correlation with MFQ-30 for MFT; systematic frame detection accuracy for PFT
+- **Academic Publication**: Co-authored methodology papers with framework experts across moral psychology and political communication
+- **Community Adoption**: Computational social science and political psychology researcher platform usage
 
 ## 🔬 **Academic Research Infrastructure**
 
@@ -31,25 +31,27 @@ This platform prioritizes **academic research workflows** and **methodological r
 ## 🏛️ **Academic Positioning**
 
 ### Current Development Phase
-**Phase 1**: MFT Implementation Development (June 2025)
-- Building robust MFT analysis using existing infrastructure
-- Internal validation testing on political texts
-- Professional demonstration system for expert review
-- Preliminary validation study with correlation evidence
+**Phase 1**: Dual Framework Implementation Development (June 2025)
+- Building robust MFT and PFT analysis using existing infrastructure
+- Internal validation testing on political texts with both moral and framing perspectives
+- Professional demonstration system for expert review across both frameworks
+- Preliminary validation studies with correlation evidence (MFT) and frame detection accuracy (PFT)
 
 ### Expert Consultation Strategy  
 **Phase 2**: Expert Engagement After Demonstration (Weeks 5-8)
 - Haidt lab outreach with working MFT implementation
-- Implementation refinement based on expert feedback
-- Large-scale validation study design (expert-approved)
-- Academic collaboration framework establishment
+- Political framing theory researcher engagement with working PFT implementation
+- Implementation refinement based on expert feedback across both frameworks
+- Large-scale validation study design (expert-approved for both MFT and PFT)
+- Academic collaboration framework establishment for dual publications
 
 ### Validation Execution
 **Phase 3**: Large-Scale Statistical Validation (Weeks 9-12)
-- n=500 participant study with MFQ-30 correlations
-- Multi-LLM reliability analysis (target: r=0.91+ between models)
-- Publication-quality statistical evidence generation
-- Academic paper drafting with expert co-authorship
+- n=500 participant study with MFQ-30 correlations for MFT validation
+- Frame detection accuracy studies for PFT validation using known exemplars
+- Multi-LLM reliability analysis (target: r=0.91+ between models across both frameworks)
+- Publication-quality statistical evidence generation for both frameworks
+- Academic paper drafting with expert co-authorship (dual publication strategy)
 
 ## 🔧 **Technical Infrastructure**
 
@@ -96,51 +98,70 @@ python launch.py --setup-db
 ### Research Workflow
 ```bash
 # 1. Check system status
-python scripts/production/check_existing_systems.py "MFT analysis"
+python scripts/production/check_existing_systems.py "MFT and PFT analysis"
 
-# 2. Run MFT analysis
-python scripts/analyze_mft.py --text "your_text.txt" --output results.json
+# 2. Run moral foundations analysis
+python scripts/analyze_mft.py --text "your_text.txt" --output mft_results.json
 
-# 3. Generate academic export
-python scripts/export_academic_data.py --study-name "mft_validation_2025" --format all
+# 3. Run political framing analysis  
+python scripts/analyze_pft.py --text "your_text.txt" --output pft_results.json
 
-# 4. Create publication visualizations
-python scripts/create_publication_figures.py --experiment mft_validation_2025
+# 4. Generate academic export for both frameworks
+python scripts/export_academic_data.py --study-name "dual_framework_validation_2025" --format all
+
+# 5. Create publication visualizations
+python scripts/create_publication_figures.py --experiment dual_framework_validation_2025
 ```
 
 ## 📊 **Available Frameworks**
 
-### Primary: Moral Foundations Theory (MFT)
+### Primary MVP Targets: Dual Framework Implementation
+
+#### Moral Foundations Theory (MFT)
 **Academic Focus**: Haidt et al. (2009-2024) validation study
 - **5 Foundations**: Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation
-- **Validation Target**: MFQ-30 correlation analysis
+- **Validation Target**: MFQ-30 correlation analysis (r>0.8)
 - **Expert Consultation**: Jonathan Haidt lab collaboration
 - **Research Application**: Cross-cultural moral discourse analysis
 
+#### Political Framing Theory (PFT) 
+**Academic Focus**: Entman & Lakoff integration study
+- **Lakoff Framework**: Three dipoles with arc clustering hypothesis (Authority/Discipline ↔ Empathy/Communication, Competition/Hierarchy ↔ Cooperation/Mutual Support, Self-Reliance ↔ Interdependence)
+- **Entman Framework**: Four independent wells (Problem Definition, Causal Attribution, Moral Evaluation, Treatment Recommendation)
+- **Validation Target**: Frame detection accuracy and theoretical coherence testing
+- **Expert Consultation**: Political communication and cognitive linguistics researchers
+- **Research Application**: Political discourse analysis and strategic communication assessment
+
 ### Additional Frameworks (Post-MVP)
-- **Political Framing Theory**: Issue framing and narrative positioning
 - **Cultural Theory**: Douglas & Wildavsky cultural analysis
 - **Business Ethics Framework**: Corporate communication analysis  
-- **Identity Framework**: Recognition and identity dynamics
 
 ## 🎯 **Academic Validation Strategy**
 
 ### Statistical Validation Targets
+
+#### Moral Foundations Theory (MFT)
 - **Overall MFT Correlation**: r>0.8 with MFQ-30 (p<0.001)
 - **Foundation-Specific**: Care/Harm r>0.89, Fairness r>0.81, etc.
 - **Cross-LLM Reliability**: r>0.91 between GPT-4, Claude, Gemini
 - **Effect Sizes**: d>0.8 for practical significance
 
+#### Political Framing Theory (PFT)
+- **Lakoff Framework**: Arc clustering validation (>75% texts following predicted patterns)
+- **Entman Framework**: Frame function detection accuracy (>80% precision/recall)
+- **Cross-LLM Reliability**: r>0.91 between models for frame detection
+- **Theoretical Coherence**: Family model coherence testing and violation detection
+
 ### Expert Consultation Protocol
-- **Implementation Review**: Technical accuracy assessment by framework originators
-- **Methodology Validation**: Academic standards compliance verification
-- **Collaboration Framework**: Co-authorship and publication planning
-- **Community Endorsement**: Computational social science network recommendations
+- **Implementation Review**: Technical accuracy assessment by framework originators (Haidt lab for MFT, political communication researchers for PFT)
+- **Methodology Validation**: Academic standards compliance verification across both frameworks
+- **Collaboration Framework**: Co-authorship and publication planning for dual framework papers
+- **Community Endorsement**: Computational social science and political psychology network recommendations
 
 ### Publication Pipeline
-- **Target Venues**: Computational Social Science, Political Psychology journals
-- **Methodology Contribution**: Systematic framework validation for computational text analysis
-- **Replication Package**: Complete code, data, and analysis scripts
+- **Target Venues**: Computational Social Science, Political Psychology, Political Communication journals
+- **Methodology Contribution**: Systematic dual framework validation for computational text analysis
+- **Replication Package**: Complete code, data, and analysis scripts for both frameworks
 - **Open Science**: Transparent methodology and reproducible research standards
 
 ## 📚 **Documentation & Research**
@@ -190,24 +211,24 @@ python3 scripts/production/validate_ai_assistant_compliance.py --check-suggestio
 - **Academic Export**: R/Stata/Jupyter templates with publication metadata
 
 ### 🎯 Current Development (Phase 1)
-- **MFT Implementation**: Framework-specific analysis using existing infrastructure
-- **Internal Validation**: Testing on political texts with correlation analysis
-- **Demo System**: Professional presentation for expert consultation
-- **Preliminary Studies**: Small-scale validation evidence generation
+- **Dual Framework Implementation**: MFT and PFT analysis using existing infrastructure
+- **Internal Validation**: Testing on political texts with correlation analysis (MFT) and frame detection (PFT)
+- **Demo System**: Professional presentation for expert consultation across both frameworks
+- **Preliminary Studies**: Small-scale validation evidence generation for both MFT and PFT
 
 ### 🔮 Upcoming Milestones
-- **Week 5**: Expert consultation initiation with working demonstration
-- **Week 9**: Large-scale validation study launch (n=500 participants)
-- **Week 11**: Academic paper drafting with statistical evidence
-- **Week 12**: Publication preparation and community outreach
+- **Week 5**: Expert consultation initiation with working demonstration (both MFT and PFT)
+- **Week 9**: Large-scale validation study launch (n=500 participants for MFT; frame detection accuracy for PFT)
+- **Week 11**: Academic paper drafting with statistical evidence for both frameworks
+- **Week 12**: Publication preparation and community outreach across moral psychology and political communication
 
 ## 🤝 **Academic Collaboration**
 
 ### Expert Consultation Framework
-- **Framework Originators**: Direct collaboration with MFT developers
-- **Academic Standards**: Institutional-quality methodology and documentation
-- **Publication Partnership**: Co-authorship and peer review collaboration
-- **Community Integration**: Computational social science network engagement
+- **Framework Originators**: Direct collaboration with MFT developers (Haidt lab) and political framing theory researchers
+- **Academic Standards**: Institutional-quality methodology and documentation across both frameworks
+- **Publication Partnership**: Co-authorship and peer review collaboration for dual framework papers
+- **Community Integration**: Computational social science and political psychology network engagement
 
 ### Research Community
 - **Target Audience**: Computational social scientists, digital humanities researchers
@@ -229,12 +250,20 @@ If you use Discernus in your research, please cite:
 }
 ```
 
-For the academic methodology paper (when published):
+For the academic methodology papers (when published):
 ```bibtex
-@article{discernus_methodology,
-  title={Systematic Framework Validation for Computational Text Analysis: The Discernus Platform},
+@article{discernus_mft_methodology,
+  title={Computational Validation of Moral Foundations Theory: The Discernus MFT Implementation},
   author={[Author Name] and Jonathan Haidt},
-  journal={Computational Social Science},
+  journal={Political Psychology},
+  year={2025},
+  note={Software available at https://github.com/discernus/discernus}
+}
+
+@article{discernus_pft_methodology,
+  title={Systematic Political Framing Analysis: Computational Implementation of Entman-Lakoff Integration},
+  author={[Author Name] and [Political Communication Researchers]},
+  journal={Political Communication},
   year={2025},
   note={Software available at https://github.com/discernus/discernus}
 }

@@ -212,27 +212,59 @@ class UnifiedAssetIngestion:
             )
     
     def _find_main_asset_file(self, asset_dir: Path, asset_type: AssetType) -> Optional[Path]:
-        """Find the main asset file in a directory."""
+        """Find the main asset file in a directory with enhanced pattern matching."""
         if asset_type == AssetType.FRAMEWORK:
-            # Look for framework.yaml
-            for candidate in ["framework.yaml", "framework.json"]:
-                main_file = asset_dir / candidate
-                if main_file.exists():
-                    return main_file
+            # Priority order for framework detection - descriptive names first
+            framework_patterns = [
+                # 1. Descriptive framework names (new pattern) - highest priority
+                "*_framework.yaml",
+                "*_framework.json", 
+                # 2. Standard framework names (current pattern)
+                "framework.yaml",
+                "framework.json",
+                # 3. Consolidated format (legacy support)
+                "framework_consolidated.json"
+            ]
+            
+            for pattern in framework_patterns:
+                matches = list(asset_dir.glob(pattern))
+                if matches:
+                    # If multiple matches, prefer the first alphabetically for consistency
+                    return sorted(matches)[0]
+            
+            return None
         
         elif asset_type == AssetType.PROMPT_TEMPLATE:
-            # Look for template.yaml
-            for candidate in ["template.yaml", "template.json"]:
-                main_file = asset_dir / candidate
-                if main_file.exists():
-                    return main_file
+            # Enhanced template detection with descriptive names
+            template_patterns = [
+                "*_template.yaml",
+                "*_template.json",
+                "template.yaml", 
+                "template.json"
+            ]
+            
+            for pattern in template_patterns:
+                matches = list(asset_dir.glob(pattern))
+                if matches:
+                    return sorted(matches)[0]
+            
+            return None
         
         elif asset_type == AssetType.WEIGHTING_SCHEME:
-            # Look for scheme.yaml
-            for candidate in ["scheme.yaml", "scheme.json"]:
-                main_file = asset_dir / candidate
-                if main_file.exists():
-                    return main_file
+            # Enhanced scheme detection with descriptive names
+            scheme_patterns = [
+                "*_scheme.yaml",
+                "*_scheme.json",
+                "scheme.yaml", 
+                "scheme.json"
+            ]
+            
+            for pattern in scheme_patterns:
+                matches = list(asset_dir.glob(pattern))
+                if matches:
+                    return sorted(matches)[0]
+            
+            return None
         
         return None
     

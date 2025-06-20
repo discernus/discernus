@@ -197,45 +197,81 @@ class PromptTemplateManager:
         return self._assemble_prompt(components)
     
     def _load_framework_config(self, framework: str) -> Dict[str, Any]:
-        """Load framework configuration files - supports all framework formats."""
+        """Load framework configuration files - supports all framework formats with enhanced pattern matching."""
         framework_path = Path("frameworks") / framework
         
-        # Try new consolidated format first (framework_consolidated.json)
-        consolidated_path = framework_path / "framework_consolidated.json"
-        if consolidated_path.exists():
-            with open(consolidated_path, 'r') as f:
-                consolidated_config = json.load(f)
-            
-            # Extract components from consolidated format
-            return {
-                "dipoles": {
-                    "dipoles": consolidated_config.get("dipoles", []),
-                    "framework_name": consolidated_config.get("framework_meta", {}).get("name", framework),
-                    "description": consolidated_config.get("framework_meta", {}).get("description", ""),
-                    "version": consolidated_config.get("framework_meta", {}).get("version", "v1.0.0")
-                },
-                "framework": {
-                    "wells": consolidated_config.get("wells", {}),
-                    "framework_name": consolidated_config.get("framework_meta", {}).get("name", framework),
-                    "version": consolidated_config.get("framework_meta", {}).get("version", "v1.0.0"),
-                    "description": consolidated_config.get("framework_meta", {}).get("description", "")
-                },
-                "name": framework
-            }
+        # Enhanced framework file detection with pattern matching
+        framework_patterns = [
+            # 1. Descriptive framework names (new pattern) - highest priority
+            "*_framework.yaml",
+            "*_framework.json", 
+            # 2. Consolidated format (enhanced legacy support)
+            "framework_consolidated.json",
+            # 3. Standard framework names (current pattern)
+            "framework.yaml",
+            "framework.json"
+        ]
         
-        # Try standard framework.json (our new cleaned format)
-        framework_json_path = framework_path / "framework.json"
-        if framework_json_path.exists():
-            with open(framework_json_path, 'r') as f:
-                framework_config = json.load(f)
-            
-            # Return the framework config directly - it will be handled by the wells/dipoles logic in other methods
-            # Add the "name" field for compatibility
-            framework_config["name"] = framework_config.get("name", framework)
-            return framework_config
+        main_framework_file = None
+        
+        # Find the main framework file using pattern matching
+        for pattern in framework_patterns:
+            matches = list(framework_path.glob(pattern))
+            if matches:
+                # If multiple matches, prefer the first alphabetically for consistency
+                main_framework_file = sorted(matches)[0]
+                break
+        
+        if main_framework_file:
+            try:
+                if main_framework_file.suffix.lower() == '.yaml':
+                    # Handle YAML format
+                    import yaml
+                    with open(main_framework_file, 'r') as f:
+                        framework_data = yaml.safe_load(f)
+                    
+                    # Return YAML framework data directly - it should be complete
+                    framework_data["name"] = framework_data.get("name", framework)
+                    return framework_data
+                    
+                elif main_framework_file.name == "framework_consolidated.json":
+                    # Handle consolidated JSON format
+                    with open(main_framework_file, 'r') as f:
+                        consolidated_config = json.load(f)
+                    
+                    # Extract components from consolidated format
+                    return {
+                        "dipoles": {
+                            "dipoles": consolidated_config.get("dipoles", []),
+                            "framework_name": consolidated_config.get("framework_meta", {}).get("name", framework),
+                            "description": consolidated_config.get("framework_meta", {}).get("description", ""),
+                            "version": consolidated_config.get("framework_meta", {}).get("version", "v1.0.0")
+                        },
+                        "framework": {
+                            "wells": consolidated_config.get("wells", {}),
+                            "framework_name": consolidated_config.get("framework_meta", {}).get("name", framework),
+                            "version": consolidated_config.get("framework_meta", {}).get("version", "v1.0.0"),
+                            "description": consolidated_config.get("framework_meta", {}).get("description", "")
+                        },
+                        "name": framework
+                    }
+                    
+                else:
+                    # Handle standard JSON format (framework.json)
+                    with open(main_framework_file, 'r') as f:
+                        framework_config = json.load(f)
+                    
+                    # Return the framework config directly - it will be handled by the wells/dipoles logic in other methods
+                    framework_config["name"] = framework_config.get("name", framework)
+                    return framework_config
+                    
+            except Exception as e:
+                raise Exception(f"Error loading framework file {main_framework_file}: {e}")
         
         # Fallback to old separate files format  
         dipoles_path = framework_path / "dipoles.json"
+        framework_json_path = framework_path / "framework.json"
+        
         if dipoles_path.exists() and framework_json_path.exists():
             # Load dipoles configuration
             with open(dipoles_path, 'r') as f:
@@ -252,7 +288,7 @@ class PromptTemplateManager:
             }
         
         # If no valid format exists, raise an error
-        raise FileNotFoundError(f"Framework '{framework}' not found. Expected 'framework.json', 'framework_consolidated.json', or both 'dipoles.json' and 'framework.json' in {framework_path}")
+        raise FileNotFoundError(f"Framework '{framework}' not found. Expected descriptive framework files (*_framework.yaml, *_framework.json), standard files (framework.yaml, framework.json), consolidated files (framework_consolidated.json), or separate files (dipoles.json + framework.json) in {framework_path}")
     
     def _load_experiment_config(self, experiment_id: str, variant: str) -> Dict[str, Any]:
         """Load experimental prompt variations."""

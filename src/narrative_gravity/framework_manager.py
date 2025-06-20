@@ -209,10 +209,15 @@ class FrameworkManager:
 
     def load_framework(self, framework_name: str) -> dict:
         """
-        Load framework data from filesystem.
+        Load framework data from filesystem with enhanced pattern matching.
         
         This method was added to fix AttributeError: 'FrameworkManager' object has no attribute 'load_framework'
         that was occurring in multiple scripts. It delegates to the same logic used by ConsolidatedFrameworkLoader.
+        
+        Supports multiple framework file naming patterns:
+        - Descriptive names: *_framework.yaml, *_framework.json (highest priority)
+        - Standard names: framework.yaml, framework.json 
+        - Consolidated: framework_consolidated.json (legacy support)
         
         Args:
             framework_name: Name of the framework to load
@@ -229,38 +234,58 @@ class FrameworkManager:
         if not framework_path.exists():
             raise FileNotFoundError(f"Framework directory not found: {framework_name}")
         
-        # Try consolidated format first
-        consolidated_file = framework_path / "framework_consolidated.json"
-        if consolidated_file.exists():
-            try:
-                with open(consolidated_file, 'r') as f:
-                    return json.load(f)
-            except json.JSONDecodeError as e:
-                raise json.JSONDecodeError(f"Invalid JSON in {consolidated_file}: {e}")
+        # Enhanced framework file detection with pattern matching
+        framework_patterns = [
+            # 1. Descriptive framework names (new pattern) - highest priority
+            "*_framework.yaml",
+            "*_framework.json", 
+            # 2. Consolidated format (enhanced legacy support)
+            "framework_consolidated.json",
+            # 3. Standard framework names (current pattern)
+            "framework.yaml",
+            "framework.json"
+        ]
         
-        # Fallback to legacy format
-        framework_file = framework_path / "framework.json"
-        if framework_file.exists():
+        main_framework_file = None
+        
+        # Find the main framework file using pattern matching
+        for pattern in framework_patterns:
+            matches = list(framework_path.glob(pattern))
+            if matches:
+                # If multiple matches, prefer the first alphabetically for consistency
+                main_framework_file = sorted(matches)[0]
+                break
+        
+        if main_framework_file:
             try:
-                with open(framework_file, 'r') as f:
-                    framework_data = json.load(f)
-                
-                # For legacy format, also try to load dipoles.json for completeness
-                dipoles_file = framework_path / "dipoles.json"
-                if dipoles_file.exists():
-                    try:
-                        with open(dipoles_file, 'r') as f:
-                            dipoles_data = json.load(f)
-                        # Merge dipoles into framework data if not already present
-                        if 'dipoles' not in framework_data and 'dipoles' in dipoles_data:
-                            framework_data['dipoles'] = dipoles_data['dipoles']
-                    except json.JSONDecodeError:
-                        pass  # Continue with framework.json only
-                
-                return framework_data
-                
+                if main_framework_file.suffix.lower() == '.yaml':
+                    # Handle YAML format
+                    import yaml
+                    with open(main_framework_file, 'r') as f:
+                        return yaml.safe_load(f)
+                else:
+                    # Handle JSON format
+                    with open(main_framework_file, 'r') as f:
+                        framework_data = json.load(f)
+                    
+                    # For legacy format, also try to load dipoles.json for completeness
+                    dipoles_file = framework_path / "dipoles.json"
+                    if dipoles_file.exists() and main_framework_file.name == "framework.json":
+                        try:
+                            with open(dipoles_file, 'r') as f:
+                                dipoles_data = json.load(f)
+                            # Merge dipoles into framework data if not already present
+                            if 'dipoles' not in framework_data and 'dipoles' in dipoles_data:
+                                framework_data['dipoles'] = dipoles_data['dipoles']
+                        except json.JSONDecodeError:
+                            pass  # Continue with framework.json only
+                    
+                    return framework_data
+                    
             except json.JSONDecodeError as e:
-                raise json.JSONDecodeError(f"Invalid JSON in {framework_file}: {e}")
+                raise json.JSONDecodeError(f"Invalid JSON in {main_framework_file}: {e}")
+            except Exception as e:
+                raise Exception(f"Error loading framework file {main_framework_file}: {e}")
         
         raise FileNotFoundError(f"No framework configuration files found for: {framework_name}")
 
