@@ -59,7 +59,28 @@ class ExperimentResultsExtractor:
     def _get_framework_wells(self, framework_name: str) -> List[str]:
         """Get the list of wells defined for a specific framework."""
         try:
-            # Load framework directly from file system (FrameworkManager doesn't have load_framework method)
+            import yaml
+            
+            # First try YAML frameworks (modern approach)
+            framework_path = self._get_framework_yaml_path(framework_name)
+            if framework_path:
+                with open(framework_path, 'r', encoding='utf-8') as f:
+                    framework_data = yaml.safe_load(f)
+                
+                # Extract wells from dipoles
+                wells = []
+                dipoles = framework_data.get('dipoles', [])
+                for dipole in dipoles:
+                    if isinstance(dipole, dict):
+                        if 'positive' in dipole and 'name' in dipole['positive']:
+                            wells.append(dipole['positive']['name'])
+                        if 'negative' in dipole and 'name' in dipole['negative']:
+                            wells.append(dipole['negative']['name'])
+                
+                logger.info(f"✅ Loaded {len(wells)} wells for {framework_name} from YAML: {wells}")
+                return wells
+            
+            # Fallback to old JSON format for legacy frameworks
             framework_path = Path("frameworks") / framework_name / "framework_consolidated.json"
             
             if framework_path.exists():
@@ -76,10 +97,10 @@ class ExperimentResultsExtractor:
                         if 'negative' in dipole and 'name' in dipole['negative']:
                             wells.append(dipole['negative']['name'])
                 
-                logger.info(f"✅ Loaded {len(wells)} wells for {framework_name}: {wells}")
+                logger.info(f"✅ Loaded {len(wells)} wells for {framework_name} (JSON): {wells}")
                 return wells
             
-            # Fallback to old format
+            # Last resort: old dipoles format
             framework_dir = Path("frameworks") / framework_name
             dipoles_file = framework_dir / "dipoles.json"
             
@@ -99,12 +120,47 @@ class ExperimentResultsExtractor:
                 logger.info(f"✅ Loaded {len(wells)} wells for {framework_name} (legacy): {wells}")
                 return wells
             
-            logger.warning(f"Framework {framework_name} has no configuration files")
+            logger.warning(f"Framework {framework_name} has no configuration files in any format")
             return []
             
         except Exception as e:
             logger.warning(f"Could not load framework {framework_name}: {e}")
             return []
+    
+    def _get_framework_yaml_path(self, framework_name: str) -> Optional[str]:
+        """
+        Map framework name to its YAML file path.
+        """
+        # Normalize framework name
+        framework_name = framework_name.replace('_', '').lower()
+        
+        # Framework name mappings
+        framework_mappings = {
+            'moralfoundationstheory': 'moral_foundations_theory',
+            'mft': 'moral_foundations_theory',
+            'moralfoundations': 'moral_foundations_theory',
+            'civicvirtue': 'civic_virtue',
+            'iditi': 'iditi'
+        }
+        
+        # Get canonical framework name
+        canonical_name = framework_mappings.get(framework_name, framework_name)
+        
+        # Search paths in order of preference
+        search_paths = [
+            # Research workspace (primary)
+            f"research_workspaces/june_2025_research_dev_workspace/frameworks/{canonical_name}/{canonical_name}_framework.yaml",
+            f"research_workspaces/june_2025_research_dev_workspace/frameworks/{canonical_name}/framework.yaml",
+            # Main frameworks directory (fallback)  
+            f"frameworks/{canonical_name}/framework.yaml",
+            f"frameworks/{canonical_name}/{canonical_name}_framework.yaml",
+        ]
+        
+        for path in search_paths:
+            if Path(path).exists():
+                return path
+        
+        return None
 
     def extract_results(self, execution_results: Dict) -> Dict:
         """

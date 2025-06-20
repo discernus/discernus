@@ -34,7 +34,7 @@ class RealAnalysisService:
         self.llm_client = DirectAPIClient()
         self.prompt_manager = PromptTemplateManager()
         self.framework_manager = FrameworkManager()
-        self.engine = NarrativeGravityWellsCircular()
+        self.engine = None  # Will be initialized per-analysis with correct framework
         
         # Check what LLM providers are available
         self.available_connections = self.llm_client.test_connections()
@@ -81,8 +81,17 @@ class RealAnalysisService:
             # Step 3: Parse LLM response into structured data
             parsed_analysis = self._parse_llm_response(llm_response, framework_name)
             
-            # Step 4: Calculate narrative position using circular engine
-            narrative_position = self.engine.calculate_narrative_position(parsed_analysis['raw_scores'])
+            # Step 4: Initialize framework-aware circular engine
+            framework_path = self._get_framework_yaml_path(framework_name)
+            if framework_path:
+                engine = NarrativeGravityWellsCircular(framework_path=framework_path)
+                print(f"✅ Using framework-aware circular engine: {framework_path}")
+            else:
+                engine = NarrativeGravityWellsCircular()  # Fallback to default
+                print(f"⚠️ Using default circular engine (framework YAML not found)")
+            
+            # Calculate narrative position using framework-aware engine
+            narrative_position = engine.calculate_narrative_position(parsed_analysis['raw_scores'])
             
             # Step 5: Calculate advanced metrics (circular engine compatible)
             calculated_metrics = self._calculate_circular_metrics(
@@ -324,6 +333,42 @@ class RealAnalysisService:
         import re
         normalized = re.sub(r'_v\d{4}_\d{2}_\d{2}$', '', framework_config_id)
         return normalized
+    
+    def _get_framework_yaml_path(self, framework_name: str) -> Optional[str]:
+        """
+        Map framework name to its YAML file path.
+        Searches research workspaces and main frameworks directory.
+        """
+        # Normalize framework name
+        framework_name = framework_name.replace('_', '').lower()
+        
+        # Framework name mappings
+        framework_mappings = {
+            'moralfoundationstheory': 'moral_foundations_theory',
+            'mft': 'moral_foundations_theory',
+            'moralfoundations': 'moral_foundations_theory',
+            'civicvirtue': 'civic_virtue',
+            'iditi': 'iditi'
+        }
+        
+        # Get canonical framework name
+        canonical_name = framework_mappings.get(framework_name, framework_name)
+        
+        # Search paths in order of preference
+        search_paths = [
+            # Research workspace (primary)
+            f"research_workspaces/june_2025_research_dev_workspace/frameworks/{canonical_name}/{canonical_name}_framework.yaml",
+            f"research_workspaces/june_2025_research_dev_workspace/frameworks/{canonical_name}/framework.yaml",
+            # Main frameworks directory (fallback)  
+            f"frameworks/{canonical_name}/framework.yaml",
+            f"frameworks/{canonical_name}/{canonical_name}_framework.yaml",
+        ]
+        
+        for path in search_paths:
+            if Path(path).exists():
+                return path
+        
+        return None
     
     def _normalize_scores_for_framework(self, scores: Dict[str, float], framework: str) -> Dict[str, float]:
         """

@@ -2097,8 +2097,15 @@ In addition to the standard analysis output, please consider how your findings r
         except Exception as e:
             logger.warning(f"⚠️ Framework transaction validation error: {e} - continuing with basic validation")
         
-        # Standard component validation
-        missing_components = [comp for comp in components if not comp.exists_on_filesystem or not comp.exists_in_db]
+        # Standard component validation with database availability awareness
+        if DATABASE_AVAILABLE and self.auto_registration_available:
+            # Database available: require both filesystem and database existence
+            missing_components = [comp for comp in components if not comp.exists_on_filesystem or not comp.exists_in_db]
+            logger.info("🔍 Validating components: filesystem + database")
+        else:
+            # Database unavailable: only require filesystem existence
+            missing_components = [comp for comp in components if not comp.exists_on_filesystem]
+            logger.warning("⚠️ Database unavailable - validating filesystem only")
         
         if missing_components:
             logger.warning(f"⚠️  Found {len(missing_components)} missing components")
@@ -2760,25 +2767,58 @@ All experiment outputs have been saved to: `{experiment_dir}`
         return execution_summary
     
     def _load_corpus_text(self, file_path: str) -> Optional[str]:
-        """Load text content from corpus file"""
+        """Load text content from corpus file or directory collection"""
         try:
-            corpus_file = Path(file_path)
-            if not corpus_file.exists():
-                logger.error(f"Corpus file not found: {file_path}")
+            corpus_path = Path(file_path)
+            if not corpus_path.exists():
+                logger.error(f"Corpus path not found: {file_path}")
                 return None
             
-            with open(corpus_file, 'r', encoding='utf-8') as f:
-                content = f.read().strip()
+            if corpus_path.is_file():
+                # Handle single file
+                with open(corpus_path, 'r', encoding='utf-8') as f:
+                    content = f.read().strip()
+                
+                if not content:
+                    logger.warning(f"Empty corpus file: {file_path}")
+                    return None
+                
+                logger.debug(f"Loaded {len(content)} characters from {file_path}")
+                return content
+                
+            elif corpus_path.is_dir():
+                # Handle directory collection - load all .txt files
+                txt_files = list(corpus_path.glob("*.txt"))
+                if not txt_files:
+                    logger.error(f"No .txt files found in corpus directory: {file_path}")
+                    return None
+                
+                # Combine all files in the collection
+                all_content = []
+                for txt_file in sorted(txt_files):  # Sort for consistent ordering
+                    try:
+                        with open(txt_file, 'r', encoding='utf-8') as f:
+                            file_content = f.read().strip()
+                        if file_content:
+                            all_content.append(f"=== {txt_file.name} ===\n{file_content}")
+                    except Exception as e:
+                        logger.warning(f"Error reading file {txt_file}: {e}")
+                        continue
+                
+                if not all_content:
+                    logger.error(f"No readable content found in corpus directory: {file_path}")
+                    return None
+                
+                combined_content = "\n\n".join(all_content)
+                logger.info(f"Loaded {len(combined_content)} characters from {len(all_content)} files in {file_path}")
+                return combined_content
             
-            if not content:
-                logger.warning(f"Empty corpus file: {file_path}")
+            else:
+                logger.error(f"Corpus path is neither file nor directory: {file_path}")
                 return None
-            
-            logger.debug(f"Loaded {len(content)} characters from {file_path}")
-            return content
             
         except Exception as e:
-            logger.error(f"Error loading corpus file {file_path}: {e}")
+            logger.error(f"Error loading corpus from {file_path}: {e}")
             return None
     
     def execute_experiment(self, experiment_file: Path):

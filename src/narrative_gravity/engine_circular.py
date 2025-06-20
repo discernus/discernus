@@ -2,6 +2,7 @@
 # Version 2.0.0 - Plotly-based Interactive Visualization
 
 import json
+import yaml
 import numpy as np
 from datetime import datetime
 from pathlib import Path
@@ -25,19 +26,28 @@ class NarrativeGravityWellsCircular:
     3. Algorithmic Enhancement (Technical Sophistication): Validated enhancement algorithms
     """
     
-    def __init__(self, config_dir: str = "config"):
+    def __init__(self, config_dir: str = "config", framework_path: str = None):
         self.circle_radius = 1.0
         self.config_dir = config_dir
+        self.framework_path = framework_path
         self.well_definitions = {}
         self.enhanced_algorithms_enabled = True  # Enhanced algorithms now implemented
         self.type_to_color = {
             'integrative': '#2E7D32',  # Dark green
-            'disintegrative': '#C62828'  # Dark red
+            'disintegrative': '#C62828',  # Dark red
+            'individualizing': '#1976D2',  # Blue
+            'binding': '#388E3C',  # Green
+            'individualizing_violation': '#D32F2F',  # Red
+            'binding_violation': '#F57C00',  # Orange
+            'liberty_based': '#9C27B0'  # Purple
         }
         
-        # Load configuration or use defaults for backward compatibility
+        # Load configuration - try framework-aware loading first, then legacy
         try:
-            self._load_framework_config()
+            if framework_path:
+                self._load_yaml_framework(framework_path)
+            else:
+                self._load_framework_config()
         except (FileNotFoundError, KeyError) as e:
             print(f"⚠️  Using default configuration (config not found: {e})")
             self._load_default_config()
@@ -48,8 +58,49 @@ class NarrativeGravityWellsCircular:
             type_to_color=self.type_to_color
         )
 
+    def _load_yaml_framework(self, framework_path: str):
+        """Load framework configuration from YAML framework file."""
+        try:
+            with open(framework_path, 'r', encoding='utf-8') as f:
+                framework_data = yaml.safe_load(f)
+            
+            # Extract well definitions from dipoles
+            self.well_definitions = {}
+            dipoles = framework_data.get('dipoles', [])
+            
+            for dipole in dipoles:
+                # Add positive pole
+                if 'positive' in dipole:
+                    positive = dipole['positive']
+                    self.well_definitions[positive['name']] = {
+                        'angle': positive.get('angle', 0),
+                        'type': positive.get('type', 'positive'),
+                        'weight': abs(positive.get('weight', 1.0)),
+                        'description': positive.get('description', '')
+                    }
+                
+                # Add negative pole  
+                if 'negative' in dipole:
+                    negative = dipole['negative']
+                    self.well_definitions[negative['name']] = {
+                        'angle': negative.get('angle', 180),
+                        'type': negative.get('type', 'negative'),
+                        'weight': abs(negative.get('weight', 1.0)),
+                        'description': negative.get('description', '')
+                    }
+            
+            # Update colors if provided in framework
+            if 'well_type_colors' in framework_data:
+                framework_colors = framework_data['well_type_colors']
+                self.type_to_color.update(framework_colors)
+                
+            print(f"✅ Loaded {len(self.well_definitions)} wells from YAML framework: {framework_path}")
+            
+        except Exception as e:
+            raise FileNotFoundError(f"Failed to load YAML framework {framework_path}: {e}")
+
     def _load_framework_config(self):
-        """Load framework configuration from config directory."""
+        """Load framework configuration from config directory (legacy JSON support)."""
         config_path = Path(self.config_dir) / "framework_config.json"
         with open(config_path) as f:
             config = json.load(f)

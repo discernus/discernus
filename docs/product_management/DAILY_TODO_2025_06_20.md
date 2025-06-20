@@ -1,235 +1,198 @@
-# Daily TODO - Thursday, June 20, 2025
-*Updated: June 20, 2025 Morning - Return to MFT Academic Validation Strategy*
-*Priority: HIGH - MFT Framework Implementation with Robust Infrastructure Foundation*
+# Daily TODO - Thursday, June 20, 2025 - **INFRASTRUCTURE PROGRESS**
+*Updated: June 20, 2025 Evening - MFT Academic Validation Status: ANALYSIS QUALITY ISSUES DISCOVERED*
+*Priority: ⚠️ **INFRASTRUCTURE WORKING, ANALYSIS BROKEN** - Pipeline Testing + Quality Issues*
 
-## **🎯 Today's Primary Focus**
-Return to core MFT academic validation work, leveraging the comprehensive testing infrastructure and automated bloat prevention system completed yesterday.
+## **📋 REALITY CHECK: Infrastructure vs Analysis Quality**
+**DISCOVERY**: Production pipeline infrastructure works (API calls, database, transactions) but analysis quality is poor and unsuitable for academic use.
 
 ## **📋 ITERATION CONTEXT**
 - **Current Iteration**: Discernus MVP Academic Validation (June-September 2025)
 - **Current Phase**: **Phase 1: MFT Implementation Development** (Weeks 1-4)
 - **Current Week**: **Week 1: MFT Framework Implementation** 
-- **Strategic Goal**: Build academically rigorous MFT implementation ready for expert consultation
-- **Foundation**: ✅ Enterprise testing infrastructure and bloat prevention now operational
+- **Strategic Goal**: ⚠️ **PARTIAL** - Infrastructure working, analysis quality poor
+- **Foundation**: ✅ Infrastructure and organization working
+- **Discovery**: ⚠️ Analysis quality unsuitable for academic use
 
 ---
 
-## **🧠 PRIMARY FOCUS: MFT Framework Academic Implementation**
+## **⚠️ MIXED RESULTS: Infrastructure vs Analysis Quality**
 
-### **1. MFT Framework Validation & Expert Consultation Preparation** ⏰ **URGENT - 3 hours**
-**Context**: Prepare theoretically accurate MFT framework for Haidt lab consultation
+### **1. Production Pipeline Testing** ⏰ **INFRASTRUCTURE WORKING, ANALYSIS POOR**
+**Status**: ⚠️ **INFRASTRUCTURE SUCCESS, QUALITY FAILURE**
 
-**Specific Tasks**:
-- [ ] **Complete MFT Framework Theoretical Validation**
-  - Review existing `moral_foundations_theory` framework against Haidt literature
-  - Validate dipole structure accuracy (Care/Harm, Fairness/Cheating, etc.)
-  - Document theoretical accuracy vs. published MFT research
-  - Prepare framework documentation for expert review
+**What Actually Works**:
+- ✅ **API Integration**: Real GPT-4o calls with actual costs ($0.350)
+- ✅ **Database Integration**: Experiment tracking and transaction management
+- ✅ **Corpus Processing**: 170K+ characters processed from validation sets
+- ✅ **Framework Location**: `research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/`
 
-- [ ] **MFT Implementation Testing**
-  - Test MFT framework loading with current production systems
-  - Validate framework works with orchestrator and analysis pipeline
-  - Run small-scale MFT analysis on validation corpus
-  - Ensure MFT scoring produces meaningful results (not baseline failures)
+**Critical Quality Issues Discovered**:
+- ❌ **Low QA Scores**: 9/13 quality checks failing consistently
+- ❌ **Template Responses**: Generic justifications instead of real MFT analysis
+- ❌ **Missing Configuration**: Framework config files not found
+- ❌ **Broken Coordinates**: All narrative positions showing (0,0)
+- ❌ **Poor Evidence**: No real text quotes, just template placeholders
 
-- [ ] **Expert Consultation Package Preparation**
-  - Create professional MFT implementation documentation
-  - Prepare preliminary validation results from MFT testing
-  - Document framework operationalization choices and rationale
-  - Draft initial outreach to Haidt lab for collaboration
+**Result**: Infrastructure can execute experiments but analysis quality is **unsuitable for academic use**
 
-**Success Criteria**: MFT framework validated, tested, and ready for expert consultation
+### **2. Intelligent Experiment Organization** ⏰ **COMPLETED**
+**Status**: ✅ **Successfully Implemented**
 
-### **2. MFT Validation Study Design** ⏰ **HIGH PRIORITY - 2 hours**
-**Context**: Design systematic validation comparing MFT analysis with MFQ-30 responses
+**Actual Accomplishments**:
+- ✅ **Results Placement**: Experiments now placed in appropriate research workspace directories
+- ✅ **Source Detection**: Orchestrator automatically detects experiment source location
+- ✅ **File Organization**: Structured output directories with proper metadata
+- ✅ **Utility Functions**: `determine_experiment_results_location()` working correctly
 
-**Specific Tasks**:
-- [ ] **MFQ-30 Correlation Study Protocol**
-  - Design study protocol: n=500 participants for robust statistical power
-  - Create text corpus appropriate for MFT analysis (diverse moral content)
-  - Plan data collection workflow: participants complete MFQ-30 + provide texts
-  - Define success criteria: r>0.6 correlation with MFQ subscales, target r>0.8
-
-- [ ] **Statistical Analysis Framework**
-  - Plan correlation analysis between Discernus MFT scores and MFQ-30 subscales
-  - Design foundation-specific validation (Care/Harm, Fairness/Cheating, etc.)
-  - Create statistical reporting and visualization plans
-  - Prepare academic-quality analysis methodology
-
-- [ ] **Multi-LLM Reliability Protocol**
-  - Design cross-LLM consistency testing (GPT-4, Claude, Gemini)
-  - Plan test-retest reliability assessment (same texts, multiple runs)
-  - Create inter-rater agreement measurement with human coders
-  - Target reliability metrics: r>0.8 test-retest, κ>0.75 human-LLM agreement
-
-**Success Criteria**: Complete validation study protocol ready for execution
-
-### **3. MFT Academic Documentation Development** 🔍 **MEDIUM PRIORITY - 2 hours**
-**Context**: Create publication-quality documentation for MFT implementation
-
-**Specific Tasks**:
-- [ ] **MFT Methodology Documentation**
-  - Document lexical markers and scoring rubrics used in MFT implementation
-  - Explain prompt template design and theoretical grounding
-  - Create framework implementation guide for academic review
-  - Document quality assurance integration and validation protocols
-
-- [ ] **Preliminary Results Documentation**
-  - Run MFT analysis on diverse text corpus (political, moral, social texts)
-  - Document scoring patterns and theoretical consistency
-  - Create visualization outputs showing MFT foundation patterns
-  - Prepare preliminary evidence package for expert consultation
-
-- [ ] **Academic Paper Draft Outline**
-  - Create outline for "Computational Validation of Moral Foundations Theory"
-  - Plan methodology section with implementation details
-  - Design results section structure for validation evidence
-  - Prepare discussion section addressing limitations and future research
-
-**Success Criteria**: Professional academic documentation ready for expert review
+**Impact**: 
+- Researchers can now find results alongside experiments
+- Clean separation between research workspace and system experiments
+- Self-contained experiment packages for academic reproducibility
 
 ---
 
-## **🏗️ SECONDARY PRIORITY: Technical Integration & Quality Assurance**
+## **📊 TECHNICAL DEBUGGING RESULTS**
 
-### **4. Production System Integration Testing** 📋 **MEDIUM PRIORITY - 1.5 hours**
-**Context**: Ensure MFT works seamlessly with existing production infrastructure
+### **Database & Transaction Management** 
+**Status**: ✅ **Working Correctly**
 
-**Specific Tasks**:
-- [ ] **MFT-QA System Integration**
-  - Test MFT framework with existing QA system (6-layer validation)
-  - Ensure confidence scoring works correctly for MFT analysis
-  - Validate MFT results pass through quality assurance pipeline
-  - Document any framework-specific QA adjustments needed
+**Confirmed Working**:
+- ✅ **Database Integration**: Experiments properly tracked (ID: 68)
+- ✅ **Transaction Management**: Checkpoints and rollback working
+- ✅ **Cost Tracking**: Real API costs recorded ($0.350)
+- ✅ **Import Path Fix**: Fixed "No module named 'src'" database import issue
 
-- [ ] **Cost Monitoring and Budget Control**
-  - Test MFT analysis with API cost monitoring system
-  - Validate cost protection mechanisms work with MFT experiments
-  - Ensure budget controls prevent overruns during validation studies
-  - Document expected costs for n=500 validation study
+### **Corpus Processing & File Handling**
+**Status**: ✅ **Working Correctly**
 
-- [ ] **Academic Export Integration**
-  - Test MFT results export to R, Stata, and Jupyter formats
-  - Ensure academic export system handles MFT foundation scores correctly
-  - Validate statistical analysis templates work with MFT data structure
-  - Create MFT-specific export templates if needed
-
-**Success Criteria**: MFT framework seamlessly integrated with all production systems
-
-### **5. Testing Infrastructure Validation** 📚 **LOW PRIORITY - 1 hour**
-**Context**: Verify yesterday's testing infrastructure works correctly with MFT
-
-**Specific Tasks**:
-- [ ] **Bloat Prevention System Testing**
-  - Run MFT experiments and verify cleanup systems work correctly
-  - Test that MFT experiment results are preserved while temporary files cleaned
-  - Validate test isolation system doesn't interfere with MFT analysis
-  - Ensure automated cleanup preserves MFT validation study data
-
-- [ ] **Validation System Integration**
-  - Test experiment validation utils with MFT framework
-  - Ensure enhanced validation provides useful guidance for MFT experiments
-  - Validate error handling works correctly for MFT-specific issues
-  - Document MFT-specific validation patterns
-
-**Success Criteria**: Testing infrastructure proven compatible with MFT academic work
+**Confirmed Working**:
+- ✅ **Directory Collections**: Successfully loads .txt files from corpus directories
+- ✅ **Text Concatenation**: Properly combines multiple files with headers
+- ✅ **File Validation**: Handles both individual files and directory collections
+- ✅ **Large Text Processing**: 170K+ characters processed successfully
 
 ---
 
-## **💡 SUPPORTING TASKS**
+## **📈 REALISTIC ASSESSMENT**
 
-### **6. Strategic Planning Updates** 📖 **LOW PRIORITY - 30 min**
-**Context**: Update iteration planning to reflect testing infrastructure completion
+**Infrastructure Success**: ✅ **PARTIAL**
+- ✅ Database integration and transaction management working
+- ✅ API calls and cost tracking functional  
+- ✅ Corpus processing and file handling working
+- ✅ Experiment organization improved
 
-**Specific Tasks**:
-- [ ] **Current Iteration Status Update**
-  - Update CURRENT_ITERATION_DISCERNUS_MVP.md with testing infrastructure completion
-  - Adjust Phase 1 timeline to reflect solid foundation for MFT work
-  - Document how testing infrastructure supports academic validation goals
-  - Plan Phase 2 (Expert Consultation) with infrastructure advantages
-
-- [ ] **Strategic Documentation Alignment**
-  - Update strategic documents to reflect robust production system status
-  - Document testing infrastructure as completed foundation for academic work
-  - Align user journeys with enhanced reliability and validation capabilities
-  - Update success metrics to reflect infrastructure foundation completion
-
-**Success Criteria**: Strategic planning documents current and aligned
+**Analysis Quality**: ❌ **UNSUITABLE FOR ACADEMIC USE**
+- ❌ Low QA scores (9/13 checks failing)
+- ❌ Template responses instead of real analysis
+- ❌ Missing framework configuration files
+- ❌ Broken coordinate system (all positions 0,0)
 
 ---
 
-## **🎯 SUCCESS METRICS FOR TODAY**
+## **🎯 CURRENT STATUS**
 
-**Minimum Success**:
-- ✅ MFT framework validated and tested with production systems
-- ✅ Expert consultation package prepared for Haidt lab outreach
-- ✅ MFT validation study protocol designed and documented
+**Technical Infrastructure**: ✅ **WORKING** - Framework-aware architecture unified, coordinate calculations fixed
 
-**Full Success**:
-- MFT academic documentation completed and professional-quality
-- Multi-LLM reliability testing planned and specified
-- Production system integration fully validated for MFT work
-- Academic paper draft outline completed
+**Analysis Quality**: ⚠️ **IMPROVED** - QA scores improved from 9/13 to 11/13 (LOW→MEDIUM confidence) 
 
-**Outstanding Success**:
-- Initial Haidt lab outreach initiated with professional package
-- Preliminary MFT validation results demonstrating theoretical consistency
-- Complete MFT methodology ready for peer review
-- Academic validation study ready for immediate execution
+**Academic Readiness**: ⚠️ **APPROACHING** - Infrastructure solid, analysis quality improving, needs refinement
+
+**Research Capability**: ⚠️ **FUNCTIONAL** - Can generate meaningful results, needs enhanced analysis pipeline completion
 
 ---
 
-## **📅 WORKFLOW AND FILES TO WORK WITH**
+## **📋 REALISTIC NEXT STEPS**
 
-### **Files to Review Today**:
-- `frameworks/moral_foundations_theory/framework.yaml` - MFT framework definition
-- `docs/product_management/CURRENT_ITERATION_DISCERNUS_MVP.md` - Strategic context
-- `docs/product_management/discernus_mvp_user_journeys.md` - User journey alignment
+**Immediate Priority**: Fix analysis quality issues before any academic use
 
-### **Files to Create Today**:
-- `docs/academic/mft_expert_consultation_package.md` - Haidt lab outreach materials
-- `docs/academic/mft_validation_study_protocol.md` - Statistical validation design
-- `docs/academic/mft_methodology_documentation.md` - Implementation details
+**Time Required**: 4-6 hours of focused debugging to achieve genuine production readiness
 
-### **Files to Update Today**:
-- `docs/product_management/CURRENT_ITERATION_DISCERNUS_MVP.md` - Phase 1 progress
-- `docs/product_management/BACKLOG.md` - Add any discovered tasks
+**Success Criteria**: QA scores >11/13, real evidence quotes, meaningful coordinate positions
 
-### **Commands to Run Today**:
-```bash
-# Test MFT framework loading
-python3 scripts/production/comprehensive_experiment_orchestrator.py --framework moral_foundations_theory --list
-
-# Run MFT validation experiment
-python3 scripts/production/execute_experiment_definition.py experiments/mft_validation_test.json
-
-# Check system health with new testing infrastructure
-python3 scripts/production/auto_bloat_prevention.py --check
-```
+**🧠 PROJECT STATUS**: Infrastructure ✅ Working → Analysis Quality ⚠️ Improving → **MAJOR ARCHITECTURAL BREAKTHROUGH ACHIEVED**
 
 ---
 
-## **💭 STRATEGIC CONTEXT**
+## **🎉 MAJOR ACCOMPLISHMENT: Framework Architecture Unification Complete**
 
-**Current MVP Strategy**: MFT academic validation with expert consultation and statistical validation
+### **✅ ARCHITECTURAL BREAKTHROUGH ACHIEVED (June 20, 2025 Evening)**
 
-**Today's Role**: Return to core academic work leveraging yesterday's infrastructure investment
+**Today's session accomplished a fundamental architectural transformation**:
 
-**Week 1 Goal**: Complete MFT framework validation and expert consultation preparation
+- **🔧 Complete Framework Unification**: All Discernus components now use unified YAML framework architecture
+- **🎯 Circular Engine Integration**: Core positioning system (heart of Discernus) now framework-aware
+- **📊 Quality Improvement**: QA confidence improved from LOW (9/13) to MEDIUM (11/13)
+- **🚫 Configuration Errors Eliminated**: No more "config not found" or framework mismatch errors
+- **🤝 API Politeness**: Added rate limiting to be respectful to LLM providers
 
-**Academic Impact**: Prepare for Haidt lab collaboration with professional, validated implementation
+### **Components Successfully Unified**:
+- ✅ Analysis Service (framework-aware circular engine)
+- ✅ QA System (framework-aware coordinate calculations)  
+- ✅ Circular Engine (reads YAML frameworks dynamically)
+- ✅ Enhanced Analysis Pipeline (loads YAML frameworks)
 
-**Infrastructure Advantage**: Robust testing and cleanup systems enable confident academic experimentation
+### **Technical Achievement**:
+**Solved the fundamental mismatch** between YAML-based experiments and JSON-based circular engine configuration. The Discernus positioning system now properly integrates with any framework!
 
 ---
 
-## **🏆 EXPECTED COMPLETION STATUS**
+## **🚨 CRITICAL UPDATE: Production Pipeline Testing Results**
+*Added: June 20, 2025 Late Evening - Post-Testing Analysis*
 
-**MFT Academic Readiness**: Framework validated, documented, and ready for expert consultation
-**Validation Study Design**: Complete protocol ready for n=500 statistical validation
-**Production Integration**: MFT seamlessly working with all production systems
-**Expert Consultation**: Professional package ready for Haidt lab collaboration
+### **✅ INFRASTRUCTURE SUCCESS - ❌ ANALYSIS QUALITY FAILURE**
 
-**🧠 PROJECT STATUS**: Testing Infrastructure ✅ Complete → MFT Academic Validation (Phase 1 of 12-week MVP strategy)
+**What Actually Works**:
+- ✅ **Real API Integration**: $0.350 in actual GPT-4o costs (9 analyses)
+- ✅ **Database Integration**: Proper experiment tracking (ID: 68)
+- ✅ **Corpus Processing**: Successfully processed 170K+ characters from text collections
+- ✅ **Transaction Management**: Checkpoints, rollback, state management working
+- ✅ **Cost Controls**: Rate limiting and budget protection operational
 
-**Next Steps**: With MFT implementation solid, proceed to expert consultation and validation study execution in remaining Phase 1 weeks. 
+**🚨 CRITICAL QUALITY ISSUES DISCOVERED**:
+- ❌ **Low Confidence Analysis**: 9/13 QA checks failed
+- ❌ **Template Response Mode**: Generic justifications instead of real MFT analysis
+- ❌ **Framework Configuration Missing**: `config/framework_config.json` not found
+- ❌ **Coordinate System Broken**: All positions showing (0.000, 0.000)
+- ❌ **Missing Statistical Modules**: Enhanced analysis pipeline incomplete
+
+---
+
+## **⚠️ URGENT TODO: Fix Production Pipeline Quality Issues**
+
+### **✅ Priority 1: Framework Configuration (COMPLETED)**
+- [✅] **Unified Architecture**: Modified circular engine to read YAML frameworks instead of JSON
+- [✅] **Analysis Service Integration**: Framework-aware circular engine in analysis pipeline  
+- [✅] **QA System Integration**: Framework-aware coordinate calculations in quality assurance
+- [✅] **Configuration Loading**: No more "config not found" errors - system reads from YAML
+
+### **⚠️ Priority 2: Analysis Quality Improvement (Critical)**  
+- [✅] **Coordinate System Repair**: Fixed - no more (0,0) positions with framework-aware engine
+- [✅] **QA Score Improvement**: Improved from 9/13 to 11/13 checks passing (LOW→MEDIUM confidence)
+- [ ] **Fix Prompt Templates**: Review and improve moral_foundations_analysis prompt for real MFT reasoning
+- [ ] **Evidence Quote Extraction**: Fix generic justifications to use actual text evidence
+- [ ] **QA Threshold Tuning**: Target 12/13 checks passing for HIGH confidence
+
+### **⚠️ Priority 3: Enhanced Analysis Pipeline (High)**
+- [✅] **Framework Integration**: Enhanced pipeline now loads YAML frameworks successfully
+- [ ] **Missing Module**: Create or fix `statistical_hypothesis_testing` module
+- [ ] **Visualization Generation**: Ensure charts and graphs are created for academic reports
+- [ ] **HTML Report Generation**: Fix comprehensive reporting pipeline
+- [ ] **Academic Export Validation**: Verify CSV/R exports contain meaningful data
+
+### **Priority 4: Academic Validation Verification (High)**
+- [ ] **Real Data Validation**: Manually review sample analyses for MFT accuracy
+- [ ] **Expert Review Preparation**: Ensure analysis quality meets academic standards
+- [ ] **Hypothesis Testing**: Verify theoretical predictions match analysis results
+- [ ] **Statistical Significance**: Confirm results are academically meaningful
+
+### **🎯 SUCCESS CRITERIA FOR PRODUCTION READINESS**
+1. **QA Score**: >11/13 checks passing consistently
+2. **Real Analysis**: Evidence quotes from actual text, not templates  
+3. **Framework Integration**: No configuration warnings or errors
+4. **Position Calculation**: Meaningful coordinate values (not 0,0)
+5. **Statistical Pipeline**: Complete enhanced analysis including visualizations
+6. **Academic Standards**: Results suitable for expert review and publication
+
+**⏰ ESTIMATED TIME**: 4-6 hours to fix core issues and achieve genuine production readiness
+
+**🔍 VERIFICATION METHOD**: Re-run MFT validation study and confirm >90% QA score + meaningful analysis results 

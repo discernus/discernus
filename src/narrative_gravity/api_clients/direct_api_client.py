@@ -67,6 +67,15 @@ class DirectAPIClient:
         self._current_text = None
         self._current_framework = None
         
+        # Add rate limiting to be polite to APIs
+        self._last_request_time = {}
+        self._rate_limits = {
+            'openai': 2.0,     # 2 seconds between requests (more polite)
+            'anthropic': 1.5,   # 1.5 seconds between requests 
+            'mistral': 1.0,     # 1 second between requests
+            'google_ai': 1.0    # 1 second between requests
+        }
+        
         # Initialize retry handler for robust API calls
         try:
             from ..utils.api_retry_handler import APIRetryHandler, ProviderFailoverHandler
@@ -220,6 +229,21 @@ class DirectAPIClient:
         
         return results
     
+    def _enforce_rate_limit(self, provider: str):
+        """Enforce rate limiting to be polite to API providers"""
+        current_time = time.time()
+        
+        if provider in self._last_request_time:
+            time_since_last = current_time - self._last_request_time[provider]
+            required_delay = self._rate_limits.get(provider, 1.0)
+            
+            if time_since_last < required_delay:
+                sleep_time = required_delay - time_since_last
+                print(f"💤 Rate limiting: waiting {sleep_time:.1f}s for {provider}")
+                time.sleep(sleep_time)
+        
+        self._last_request_time[provider] = time.time()
+    
     def analyze_text(self, text: str, framework: str, model_name: str) -> Tuple[Dict[str, Any], float]:
         """
         Analyze text using specified model and framework
@@ -329,6 +353,9 @@ class DirectAPIClient:
     def _openai_api_call_with_retry(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
         """OpenAI API call with retry logic."""
         
+        # Enforce polite rate limiting before making request
+        self._enforce_rate_limit("openai")
+        
         @self.retry_handler.with_retry("openai", model)
         def make_openai_call():
             # Check if model supports extended context for narrative analysis
@@ -392,6 +419,9 @@ class DirectAPIClient:
     
     def _openai_api_call_basic(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
         """Basic OpenAI API call with simple error handling (fallback)."""
+        # Enforce polite rate limiting before making request
+        self._enforce_rate_limit("openai")
+        
         try:
             # Check if model supports extended context for narrative analysis
             max_tokens = 2000
@@ -485,6 +515,9 @@ class DirectAPIClient:
         }
         
         model = model_map.get(model_name, "claude-3-5-sonnet-20241022")
+        
+        # Enforce polite rate limiting before making request
+        self._enforce_rate_limit("anthropic")
         
         try:
             # Adjust max tokens based on model capabilities

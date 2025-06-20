@@ -1,0 +1,7 @@
+asset_id: Framework_Config_Test_v1.0.0_20250620_162920
+content_hash: d079035f349adf78df8d78d622e24be35cce03f8ec6b4b457c65d63ef1147c65
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-20T16:29:20.441192'
+source_path: test_framework_config.yaml
+validation_status: validated_before_storage
+version: v1.0.0

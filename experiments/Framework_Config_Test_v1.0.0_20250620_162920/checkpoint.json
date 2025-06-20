@@ -1,0 +1,10 @@
+{
+  "experiment_id": "Framework_Config_Test_v1.0.0_20250620_162920",
+  "state": "pre_flight_validation",
+  "timestamp": "2025-06-20T16:29:20.537976",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "message": "Starting pre-flight validation"
+  }
+}

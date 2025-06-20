@@ -1,0 +1,34 @@
+experiment_meta:
+  name: Framework_Config_Test
+  version: v1.0.0
+  created: '2025-06-20T18:30:00Z'
+  description: Quick test to verify framework configuration fixes
+components:
+  frameworks:
+  - id: moral_foundations_theory
+    version: v2025.06.19
+    file_path: research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+  prompt_templates:
+  - id: moral_foundations_analysis
+    version: v2.1
+  weighting_schemes:
+  - id: foundation_pairs
+    version: v2.1
+  models:
+  - id: gpt-4o
+    provider: openai
+  corpus:
+  - id: test_text
+    file_path: corpus/demo_texts/demo_text_1.txt
+execution:
+  cost_controls:
+    max_total_cost: 0.1
+    cost_per_analysis_limit: 0.1
+  matrix:
+  - run_id: config_test
+    description: Test framework configuration
+    framework: moral_foundations_theory
+    prompt_template: moral_foundations_analysis
+    model: gpt-4o
+enhanced_analysis:
+  enabled: false
