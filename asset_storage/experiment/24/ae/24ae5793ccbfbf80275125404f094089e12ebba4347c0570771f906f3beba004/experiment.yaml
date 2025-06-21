@@ -1,0 +1,157 @@
+experiment_meta:
+  name: MFT_Architecture_Validation_Test
+  version: v1.0.0
+  created: '2025-06-20T22:00:00Z'
+  description: Comprehensive test of unified framework architecture breakthrough -
+    validates YAML integration and QA improvements
+  hypothesis: Unified framework architecture correctly integrates YAML frameworks
+    with circular engine and achieves HIGH QA confidence (12+/13 checks)
+  research_context: Post-architectural breakthrough validation - Testing framework-aware
+    circular engine and QA system integration
+  principal_investigator: Architecture Team
+  institution: Discernus Research Lab
+  ethical_clearance: TECH-2025-ARCH-001
+  funding_source: Internal Development
+  data_classification: research
+  publication_intent: false
+  tags:
+  - architecture_validation
+  - framework_integration
+  - qa_testing
+  - yaml_unification
+  hypotheses:
+  - Framework-aware circular engine correctly reads YAML framework definitions
+  - QA system achieves MEDIUM+ confidence (11+/13 checks) with no configuration errors
+  - Coordinate calculations produce meaningful positions (not 0,0)
+  - Analysis pipeline completes without framework mismatch warnings
+  - Enhanced analysis pipeline generates complete reports with visualizations
+  success_criteria:
+  - QA confidence MEDIUM or higher (11+/13 checks passing)
+  - Zero configuration file errors or warnings
+  - Meaningful coordinate positions (not all zeros)
+  - Complete enhanced analysis report generation
+  - Real evidence quotes in analysis results
+  - Statistical analysis components functioning
+components:
+  frameworks:
+  - id: moral_foundations_theory
+    version: v2025.06.19
+    type: file_path
+    file_path: research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+  prompt_templates:
+  - id: moral_foundations_analysis
+    version: v1.0
+    type: workspace_asset
+    file_path: research_workspaces/june_2025_research_dev_workspace/prompt_templates/moral_foundations_analysis/template.yaml
+  weighting_schemes:
+  - id: foundation_pairs
+    version: v1.0
+    type: workspace_asset
+    file_path: research_workspaces/june_2025_research_dev_workspace/weighting_schemes/foundation_pairs/scheme.yaml
+  models:
+  - id: gpt-4o
+    provider: openai
+    version: '2024-05-13'
+  corpus:
+  - id: mixed_controls
+    type: file_collection
+    file_path: corpus/validation_set/mixed_controls
+    pattern: '*.txt'
+    description: Mixed political content for focused architecture validation
+  - id: conservative_dignity
+    type: file_collection
+    file_path: corpus/validation_set/conservative_dignity
+    pattern: '*.txt'
+    description: Conservative texts for architectural validation (small subset)
+execution:
+  description: Focused architectural validation - testing unified framework integration
+  matrix:
+  - run_id: architecture_validation_mixed
+    description: Mixed content analysis - tests core framework integration
+    framework: moral_foundations_theory
+    prompt_template: moral_foundations_analysis
+    weighting_scheme: foundation_pairs
+    model: gpt-4o
+    corpus_subset: mixed_controls
+  - run_id: architecture_validation_conservative
+    description: Conservative content analysis - validates coordinate calculations
+    framework: moral_foundations_theory
+    prompt_template: moral_foundations_analysis
+    weighting_scheme: foundation_pairs
+    model: gpt-4o
+    corpus_subset: conservative_dignity
+  cost_controls:
+    max_total_cost: 10.0
+    cost_per_analysis_limit: 0.5
+  quality_controls:
+    min_framework_fit_score: 0.6
+    enable_qa_validation: true
+    require_evidence: true
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.7
+    require_evidence: true
+    manual_review_triggers:
+    - low_confidence
+    - anomaly_detected
+    - coordinate_zero_values
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+  configuration:
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests:
+      - descriptive_stats
+      - correlation_analysis
+    reliability_analysis:
+      enabled: true
+      methods:
+      - foundation_consistency
+      - theoretical_coherence
+    visualizations:
+      enabled: true
+      types:
+      - foundation_radar_charts
+      - narrative_positioning
+      interactive: true
+      publication_ready: false
+    academic_integration:
+      export_formats:
+      - csv
+      - json
+      include_metadata: true
+      generate_replication_package: false
+    architecture_validation:
+      test_coordinate_calculations: true
+      validate_framework_loading: true
+      check_qa_integration: true
+      verify_config_elimination: true
+outputs:
+  save_to_database: true
+  export_formats:
+  - json
+  - csv
+  include_raw_responses: true
+  include_provenance: true
+  academic_exports:
+    enabled: true
+    formats:
+    - csv
+    - json
+    include_replication_package: false
+    architecture_validation_outputs:
+      qa_score_breakdown: true
+      coordinate_validation_report: true
+      framework_integration_summary: true
+validation_criteria:
+  min_successful_analyses: 4
+  max_total_cost: 10.0
+  required_quality_score: 0.7
+  architecture_specific_criteria:
+    min_qa_checks_passing: 11
+    require_non_zero_coordinates: true
+    max_configuration_errors: 0
+    min_evidence_quotes: 2

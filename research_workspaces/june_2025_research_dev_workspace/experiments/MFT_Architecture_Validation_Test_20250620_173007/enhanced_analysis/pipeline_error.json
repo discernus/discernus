@@ -1,0 +1,6 @@
+{
+  "pipeline_status": "failed",
+  "error": "No module named 'scripts'",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/scripts/production/comprehensive_experiment_orchestrator.py\", line 2243, in execute_enhanced_analysis_pipeline\n    from scripts.extract_experiment_results import ExperimentResultsExtractor\nModuleNotFoundError: No module named 'scripts'\n",
+  "timestamp": "2025-06-20T17:30:07.229173"
+}
