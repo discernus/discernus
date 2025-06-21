@@ -1,7 +1,7 @@
 #   Init  
 
 **Module:** `src.corpus.__init__`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/corpus/__init__.py`
+**File:** `/app/src/corpus/__init__.py`
 **Package:** `corpus`
 
 Narrative Gravity Corpus Management System
@@ -22,4 +22,4 @@ Core Components:
 - `registry`
 - `validator`
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

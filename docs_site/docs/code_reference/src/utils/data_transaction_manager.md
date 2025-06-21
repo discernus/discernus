@@ -1,7 +1,7 @@
 # Data Transaction Manager
 
 **Module:** `src.utils.data_transaction_manager`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/utils/data_transaction_manager.py`
+**File:** `/app/src/utils/data_transaction_manager.py`
 **Package:** `utils`
 
 Data Transaction Manager
@@ -171,4 +171,4 @@ Log detailed validation result
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

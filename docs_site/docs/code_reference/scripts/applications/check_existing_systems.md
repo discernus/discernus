@@ -1,7 +1,7 @@
 # Check Existing Systems
 
 **Module:** `scripts.applications.check_existing_systems`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/check_existing_systems.py`
+**File:** `/app/scripts/applications/check_existing_systems.py`
 **Package:** `applications`
 
 Check Existing Systems - Production-First Search
@@ -15,9 +15,9 @@ Uses clean search strategy:
 3. Never search deprecated code unless explicitly requested
 
 Usage:
-    python3 scripts/production/check_existing_systems.py "quality assurance"
-    python3 scripts/production/check_existing_systems.py "experiment execution"
-    python3 scripts/production/check_existing_systems.py "data export" --include-experimental
+    python3 scripts/applications/check_existing_systems.py "quality assurance"
+python3 scripts/applications/check_existing_systems.py "experiment execution"
+python3 scripts/applications/check_existing_systems.py "data export" --include-experimental
 
 ## Dependencies
 
@@ -89,4 +89,4 @@ main()
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

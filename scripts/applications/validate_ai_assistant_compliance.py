@@ -132,7 +132,7 @@ class AIAssistantComplianceValidator:
         """Check if production search was performed recently."""
         try:
             # Check if check_existing_systems.py was run recently
-            search_script = self.project_root / "scripts/production/check_existing_systems.py"
+            search_script = self.project_root / "scripts/applications/check_existing_systems.py"
             if search_script.exists():
                 # This is a simple heuristic - in practice you might want more sophisticated tracking
                 return True
@@ -182,7 +182,7 @@ class AIAssistantComplianceValidator:
         if not overall_compliant:
             report.append(f"\n🔧 REQUIRED ACTIONS:")
             report.append(f"1. Review .ai_assistant_rules.md")
-            report.append(f"2. Run: python3 scripts/production/check_existing_systems.py")
+            report.append(f"2. Run: python3 scripts/applications/check_existing_systems.py")
             report.append(f"3. Use existing production systems instead of rebuilding")
             report.append(f"4. Move new development to experimental/ first")
         
@@ -302,9 +302,9 @@ def main():
         print("🔍 Quick Compliance Check:")
         print("✅ Rules file exists:", Path(".ai_assistant_rules.md").exists())
         print("✅ Production search tool exists:", 
-              Path("scripts/production/check_existing_systems.py").exists())
+              Path("scripts/applications/check_existing_systems.py").exists())
         print("✅ Systems inventory exists:", 
-              Path("docs/EXISTING_SYSTEMS_INVENTORY.md").exists())
+              Path("docs_site/docs/EXISTING_SYSTEMS_INVENTORY.md").exists())
         return
     
     if args.check_suggestion:

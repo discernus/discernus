@@ -1,7 +1,7 @@
 # Data Export
 
 **Module:** `src.academic.data_export`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/academic/data_export.py`
+**File:** `/app/src/academic/data_export.py`
 **Package:** `academic`
 
 Academic Data Export Pipeline
@@ -322,4 +322,4 @@ Returns:
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

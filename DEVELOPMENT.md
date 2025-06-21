@@ -6,7 +6,7 @@
 
 ```bash
 # BEFORE suggesting ANY development work:
-python3 scripts/production/check_existing_systems.py "what you want to build"
+python3 scripts/applications/check_existing_systems.py "what you want to build"
 ```
 
 **📚 REQUIRED READING:**
@@ -36,7 +36,7 @@ python3 scripts/production/check_existing_systems.py "what you want to build"
 ## 🔄 **Development Workflow**
 
 ### **For AI Assistants:**
-1. **Search First**: `python3 scripts/production/check_existing_systems.py "functionality"`
+1. **Search First**: `python3 scripts/applications/check_existing_systems.py "functionality"`
 2. **Enhance Don't Replace**: Use existing production systems when possible
 3. **Build in Experimental**: New code goes in `experimental/` first
 4. **Validate Compliance**: `python3 scripts/production/validate_ai_assistant_compliance.py`

@@ -1,7 +1,7 @@
 # Engine
 
 **Module:** `src.visualization.engine`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/visualization/engine.py`
+**File:** `/app/src/visualization/engine.py`
 **Package:** `visualization`
 
 Narrative Gravity Visualization Engine
@@ -154,4 +154,4 @@ Create a themed visualization engine.
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

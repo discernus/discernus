@@ -11,7 +11,7 @@
 ### Rule 1: ALWAYS Search Production Systems First
 Before suggesting ANY development work, you MUST run:
 ```bash
-python3 scripts/production/check_existing_systems.py "functionality description"
+python3 scripts/applications/check_existing_systems.py "functionality description"
 ```
 
 ### Rule 2: NEVER Use Deprecated Systems

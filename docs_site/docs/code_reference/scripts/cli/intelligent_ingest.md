@@ -1,7 +1,7 @@
 # Intelligent Ingest
 
 **Module:** `scripts.cli.intelligent_ingest`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/cli/intelligent_ingest.py`
+**File:** `/app/scripts/cli/intelligent_ingest.py`
 **Package:** `cli`
 
 CLI tool for Intelligent Corpus Ingestion Service
@@ -33,4 +33,4 @@ main()
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

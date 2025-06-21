@@ -18,9 +18,9 @@ import sys
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src'))
 
-from src.narrative_gravity.academic.data_export import AcademicDataExporter
-from src.narrative_gravity.academic.analysis_templates import JupyterTemplateGenerator
-from src.narrative_gravity.academic.documentation import MethodologyPaperGenerator
+from src.academic.data_export import AcademicDataExporter
+from src.academic.analysis_templates import JupyterTemplateGenerator
+from src.academic.documentation import MethodologyPaperGenerator
 
 
 class TestAcademicPipeline:

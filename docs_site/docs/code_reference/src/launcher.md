@@ -1,7 +1,7 @@
 # Launcher
 
 **Module:** `src.launcher`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/launcher.py`
+**File:** `/app/src/launcher.py`
 
 🚨 DEPRECATED: Streamlit Interface Launcher
 
@@ -40,4 +40,4 @@ Main function - shows deprecation notice
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

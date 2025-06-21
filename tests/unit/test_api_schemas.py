@@ -7,7 +7,7 @@ from datetime import datetime
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from src.narrative_gravity.api.schemas import JobCreate, UserCreate, UserRole, DocumentBase, DocumentType
+from src.api.schemas import JobCreate, UserCreate, UserRole, DocumentBase, DocumentType
 
 class TestApiSchemas:
     """

@@ -13,13 +13,13 @@ import sys
 sys.path.append('.')
 sys.path.append('./src')
 
-from src.narrative_gravity.utils.api_retry_handler import (
+from src.utils.api_retry_handler import (
     APIRetryHandler, 
     ProviderFailoverHandler, 
     RetryConfig, 
     RetryReason
 )
-from src.narrative_gravity.api_clients.direct_api_client import DirectAPIClient
+from src.api_clients.direct_api_client import DirectAPIClient
 
 class TestAPIRetryHandler:
     """Test suite for API retry handling functionality."""

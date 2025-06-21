@@ -29,7 +29,7 @@ def run_command(command, check=True):
 def search_existing_systems(functionality):
     """Run the mandatory production search."""
     print(f"🔍 MANDATORY: Searching for existing systems...")
-    search_command = f'python3 scripts/production/check_existing_systems.py "{functionality}"'
+    search_command = f'python3 scripts/applications/check_existing_systems.py "{functionality}"'
     result = run_command(search_command, check=False)
     
     if result and result.stdout:

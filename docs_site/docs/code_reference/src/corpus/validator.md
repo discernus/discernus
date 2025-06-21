@@ -1,7 +1,7 @@
 # Validator
 
 **Module:** `src.corpus.validator`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/corpus/validator.py`
+**File:** `/app/src/corpus/validator.py`
 **Package:** `corpus`
 
 Corpus Validator - Integrity checking and FAIR data compliance validation.
@@ -139,4 +139,4 @@ Check academic citation and metadata standards.
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

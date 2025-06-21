@@ -1,7 +1,7 @@
 # Demonstrate Transaction Integrity
 
 **Module:** `scripts.applications.demonstrate_transaction_integrity`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/demonstrate_transaction_integrity.py`
+**File:** `/app/scripts/applications/demonstrate_transaction_integrity.py`
 **Package:** `applications`
 
 Transaction Integrity Architecture Demonstration
@@ -126,4 +126,4 @@ Run transaction integrity demonstration
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

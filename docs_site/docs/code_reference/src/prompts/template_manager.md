@@ -1,7 +1,7 @@
 # Template Manager
 
 **Module:** `src.prompts.template_manager`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/prompts/template_manager.py`
+**File:** `/app/src/prompts/template_manager.py`
 **Package:** `prompts`
 
 Prompt Template Manager - Minimal implementation for analysis service
@@ -69,4 +69,4 @@ List available templates
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

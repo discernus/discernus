@@ -146,7 +146,7 @@ These are production-ready scripts that perform key operational or administrativ
 ### Rule 1: Search First
 ```bash
 # ALWAYS run before building anything:
-python3 scripts/production/check_existing_systems.py "functionality description"
+python3 scripts/applications/check_existing_systems.py "functionality description"
 # OR manually search:
 grep -r "quality.assurance\|validation\|QA" src/ docs/ scripts/
 ```

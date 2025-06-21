@@ -1,7 +1,7 @@
 # Bloat Prevention System
 
 **Module:** `scripts.applications.bloat_prevention_system`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/bloat_prevention_system.py`
+**File:** `/app/scripts/applications/bloat_prevention_system.py`
 **Package:** `applications`
 
 Bloat Prevention System
@@ -151,4 +151,4 @@ CLI entry point
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

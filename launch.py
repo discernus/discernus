@@ -30,7 +30,7 @@ def check_database():
         project_root = Path(__file__).parent
         sys.path.insert(0, str(project_root))
         
-        from src.narrative_gravity.models.base import engine
+        from src.models.base import engine
         
         # Verify it's PostgreSQL
         db_url = str(engine.url)

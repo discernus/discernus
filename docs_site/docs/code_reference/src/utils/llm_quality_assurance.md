@@ -1,7 +1,7 @@
 # Llm Quality Assurance
 
 **Module:** `src.utils.llm_quality_assurance`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/utils/llm_quality_assurance.py`
+**File:** `/app/src/utils/llm_quality_assurance.py`
 **Package:** `utils`
 
 LLM Quality Assurance System
@@ -274,4 +274,4 @@ Detect statistical outliers in scores.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

@@ -1,7 +1,7 @@
 # New Development Workflow
 
 **Module:** `scripts.applications.new_development_workflow`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/new_development_workflow.py`
+**File:** `/app/scripts/applications/new_development_workflow.py`
 **Package:** `applications`
 
 New Development Workflow
@@ -64,4 +64,4 @@ Main workflow function.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

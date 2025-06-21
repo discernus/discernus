@@ -1,7 +1,7 @@
 # Documentation Date Management
 
 **Module:** `scripts.applications.documentation_date_management`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/documentation_date_management.py`
+**File:** `/app/scripts/applications/documentation_date_management.py`
 **Package:** `applications`
 
 Production Documentation Date Management System
@@ -98,4 +98,4 @@ CLI interface for production date management.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

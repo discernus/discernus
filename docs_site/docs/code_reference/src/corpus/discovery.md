@@ -1,7 +1,7 @@
 # Discovery
 
 **Module:** `src.corpus.discovery`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/corpus/discovery.py`
+**File:** `/app/src/corpus/discovery.py`
 **Package:** `corpus`
 
 Corpus Discovery - Search and exploration tools for corpus navigation.
@@ -272,4 +272,4 @@ Export catalog as TSV.
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

@@ -10,9 +10,10 @@ import subprocess
 # Add the project root to the Python path to allow for absolute imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from src.narrative_gravity.framework_manager import FrameworkManager
-from scripts.generate_prompt import PromptGenerator, load_dipoles, load_framework
-from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
+from src.framework_manager import FrameworkManager
+# Note: generate_prompt functionality may have been moved or deprecated
+# from scripts.generate_prompt import PromptGenerator, load_dipoles, load_framework
+from src.coordinate_engine import DiscernusCoordinateEngine
 
 # --- Fixtures for setting up test environments ---
 

@@ -6,15 +6,14 @@ import os
 # Add the project root to the Python path to allow for absolute imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
+from src.coordinate_engine import DiscernusCoordinateEngine
 
 
 @pytest.fixture
 def analyzer():
-    """Returns a NarrativeGravityWellsCircular instance with default config."""
-    # Using a non-existent config directory forces the class to use its default
-    # configuration, making the test self-contained.
-    return NarrativeGravityWellsCircular(config_dir="non_existent_dir_to_force_defaults")
+    """Returns a DiscernusCoordinateEngine instance with default config."""
+    # Using default configuration to make the test self-contained.
+    return DiscernusCoordinateEngine()
 
 
 class TestNarrativeGravityCircularMath:

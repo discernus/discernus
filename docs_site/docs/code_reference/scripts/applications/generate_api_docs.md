@@ -1,7 +1,7 @@
 # Generate Api Docs
 
 **Module:** `scripts.applications.generate_api_docs`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/generate_api_docs.py`
+**File:** `/app/scripts/applications/generate_api_docs.py`
 **Package:** `applications`
 
 Production API Documentation Generator for Discernus
@@ -37,4 +37,4 @@ Main entry point for the production API documentation generator.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

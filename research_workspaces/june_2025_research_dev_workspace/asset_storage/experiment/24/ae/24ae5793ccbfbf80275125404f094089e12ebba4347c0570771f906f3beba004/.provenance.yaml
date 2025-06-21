@@ -1,0 +1,7 @@
+asset_id: MFT_Architecture_Validation_Test_v1.0.0_20250621_154555
+content_hash: 24ae5793ccbfbf80275125404f094089e12ebba4347c0570771f906f3beba004
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-21T15:45:56.003312'
+source_path: experiments/mft_architecture_validation_test.yaml
+validation_status: validated_before_storage
+version: v1.0.0

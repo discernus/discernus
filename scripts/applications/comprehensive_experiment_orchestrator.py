@@ -25,6 +25,14 @@ from datetime import datetime
 from enum import Enum
 import pickle
 
+# Fix: Ensure project root is in path for imports (before any imports)
+project_root = Path(__file__).parent.parent.parent  # Go up to project root
+project_root_str = str(project_root)
+
+# Add project root to path so 'from src.module import ...' works
+if project_root_str not in sys.path:
+    sys.path.insert(0, project_root_str)
+
 # Moved yaml import for safer error handling
 try:
     import yaml
@@ -154,6 +162,7 @@ except ImportError as e:
             return {'summary': {}, 'error': 'Database not available'}
 
 # Import analysis service separately with fallback
+
 try:
     from src.api.analysis_service import RealAnalysisService
     ANALYSIS_SERVICE_AVAILABLE = True
@@ -1134,7 +1143,7 @@ class ExperimentOrchestrator:
         
         # Initialize experiment logging
         try:
-            from narrative_gravity.analysis.statistical_logger import StatisticalLogger
+            from src.analysis.statistical_logger import StatisticalLogger
             self.experiment_logger = StatisticalLogger()
             logger.info("✅ StatisticalLogger initialized")
         except ImportError:
@@ -2613,6 +2622,11 @@ All experiment outputs have been saved to: `{experiment_dir}`
         logger.info("🔬 Initializing real analysis service...")
         
         try:
+            # Check if real analysis service is available
+            if not ANALYSIS_SERVICE_AVAILABLE:
+                logger.error("RealAnalysisService not available - using fallback")
+                return {"error": "RealAnalysisService not available", "results": []}
+            
             # Initialize the real analysis service
             analysis_service = RealAnalysisService()
             
@@ -3017,8 +3031,8 @@ All experiment outputs have been saved to: `{experiment_dir}`
             self.database_experiment_id = None
             if DATABASE_AVAILABLE:
                 try:
-                    from narrative_gravity.models.models import Experiment
-                    from narrative_gravity.utils.database import get_database_url
+                    from src.models.models import Experiment
+                    from src.utils.database import get_database_url
                     from sqlalchemy import create_engine
                     from sqlalchemy.orm import sessionmaker
                     from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -3063,7 +3077,7 @@ All experiment outputs have been saved to: `{experiment_dir}`
                             
                             # 🔒 COHERENCE FIX: Initialize StatisticalLogger within same transaction
                             try:
-                                from narrative_gravity.utils.statistical_logger import StatisticalLogger
+                                from src.utils.statistical_logger import StatisticalLogger
                                 self.statistical_logger = StatisticalLogger()
                                 # Test StatisticalLogger connection within transaction
                                 logger.info("✅ StatisticalLogger initialized")
@@ -3317,8 +3331,8 @@ All experiment outputs have been saved to: `{experiment_dir}`
             # 🚨 FIX: UPDATE DATABASE EXPERIMENT STATUS TO COMPLETED
             if self.database_experiment_id and DATABASE_AVAILABLE:
                 try:
-                    from narrative_gravity.models.models import Experiment
-                    from narrative_gravity.utils.database import get_database_url
+                    from src.models.models import Experiment
+                    from src.utils.database import get_database_url
                     from sqlalchemy import create_engine
                     from sqlalchemy.orm import sessionmaker
                     from sqlalchemy.exc import SQLAlchemyError
@@ -3371,8 +3385,8 @@ All experiment outputs have been saved to: `{experiment_dir}`
             # Update database status if available
             if hasattr(self, 'database_experiment_id') and self.database_experiment_id and DATABASE_AVAILABLE:
                 try:
-                    from narrative_gravity.models.models import Experiment
-                    from narrative_gravity.utils.database import get_database_url
+                    from src.models.models import Experiment
+                    from src.utils.database import get_database_url
                     from sqlalchemy import create_engine
                     from sqlalchemy.orm import sessionmaker
                     from sqlalchemy.exc import SQLAlchemyError
@@ -3427,8 +3441,8 @@ All experiment outputs have been saved to: `{experiment_dir}`
             # 🚨 FIX: UPDATE DATABASE EXPERIMENT STATUS TO FAILED
             if hasattr(self, 'database_experiment_id') and self.database_experiment_id and DATABASE_AVAILABLE:
                 try:
-                    from src.narrative_gravity.models.models import Experiment
-                    from src.narrative_gravity.utils.database import get_database_url
+                    from src.models.models import Experiment
+                    from src.utils.database import get_database_url
                     from sqlalchemy import create_engine
                     from sqlalchemy.orm import sessionmaker
                     from sqlalchemy.exc import SQLAlchemyError

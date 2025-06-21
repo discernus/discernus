@@ -11,9 +11,9 @@ Uses clean search strategy:
 3. Never search deprecated code unless explicitly requested
 
 Usage:
-    python3 scripts/production/check_existing_systems.py "quality assurance"
-    python3 scripts/production/check_existing_systems.py "experiment execution"
-    python3 scripts/production/check_existing_systems.py "data export" --include-experimental
+    python3 scripts/applications/check_existing_systems.py "quality assurance"
+python3 scripts/applications/check_existing_systems.py "experiment execution"
+python3 scripts/applications/check_existing_systems.py "data export" --include-experimental
 """
 
 import sys
@@ -174,7 +174,7 @@ class ProductionCodeSearcher:
 
 def show_inventory():
     """Show the existing systems inventory."""
-    inventory_path = Path(__file__).parent.parent.parent / "docs" / "EXISTING_SYSTEMS_INVENTORY.md"
+    inventory_path = Path(__file__).parent.parent.parent / "docs_site" / "docs" / "EXISTING_SYSTEMS_INVENTORY.md"
     
     if inventory_path.exists():
         print("\n📋 PRODUCTION SYSTEMS INVENTORY:")
@@ -204,9 +204,9 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python3 scripts/production/check_existing_systems.py "quality assurance"
-  python3 scripts/production/check_existing_systems.py "experiment execution" --include-experimental
-  python3 scripts/production/check_existing_systems.py "validation" --include-deprecated
+  python3 scripts/applications/check_existing_systems.py "quality assurance"
+python3 scripts/applications/check_existing_systems.py "experiment execution" --include-experimental
+python3 scripts/applications/check_existing_systems.py "validation" --include-deprecated
         """
     )
     

@@ -1,7 +1,7 @@
 # Framework Manager
 
 **Module:** `src.framework_manager`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/framework_manager.py`
+**File:** `/app/src/framework_manager.py`
 
 Framework Manager for Narrative Gravity Wells
 
@@ -105,4 +105,4 @@ main()
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

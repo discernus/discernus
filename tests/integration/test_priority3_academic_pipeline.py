@@ -15,8 +15,8 @@ import sys
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src'))
 
-from src.narrative_gravity.academic.data_export import AcademicDataExporter
-from src.narrative_gravity.academic.analysis_templates import JupyterTemplateGenerator
+from src.academic.data_export import AcademicDataExporter
+from src.academic.analysis_templates import JupyterTemplateGenerator
 
 
 class TestAcademicDataExport:
@@ -119,17 +119,17 @@ class TestPipelineIntegration:
         """Test all Priority 3 components are available."""
         
         # Test data export
-        from src.narrative_gravity.academic.data_export import AcademicDataExporter
+        from src.academic.data_export import AcademicDataExporter
         exporter = AcademicDataExporter()
         assert hasattr(exporter, 'export_experiments_data')
         
         # Test analysis templates
-        from src.narrative_gravity.academic.analysis_templates import JupyterTemplateGenerator
+        from src.academic.analysis_templates import JupyterTemplateGenerator
         generator = JupyterTemplateGenerator()
         assert hasattr(generator, 'generate_exploration_notebook')
         
         # Test documentation
-        from src.narrative_gravity.academic.documentation import MethodologyPaperGenerator
+        from src.academic.documentation import MethodologyPaperGenerator
         doc_generator = MethodologyPaperGenerator()
         assert hasattr(doc_generator, 'generate_methodology_section')
     

@@ -1,7 +1,7 @@
 # Manage Costs
 
 **Module:** `src.utils.manage_costs`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/utils/manage_costs.py`
+**File:** `/app/src/utils/manage_costs.py`
 **Package:** `utils`
 
 API Cost Management CLI - Updated for 2025 Models
@@ -132,4 +132,4 @@ Main CLI function
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

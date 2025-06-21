@@ -18,14 +18,15 @@ from pathlib import Path
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-from src.narrative_gravity.models import (
+from src.models import (
     PromptTemplate, FrameworkVersion, WeightingMethodology, 
     ComponentCompatibility, DevelopmentSession
 )
-from src.narrative_gravity.cli.manage_components import ComponentVersionManager
-from src.narrative_gravity.cli.dev_session import DevelopmentSessionTracker
-from src.narrative_gravity.cli.analyze_batch import ComponentMatrix
-from src.narrative_gravity.utils.database import get_database_url
+# Note: CLI functionality has been moved to scripts/cli/ 
+# from scripts.cli.manage_components import ComponentVersionManager
+# from scripts.cli.dev_session import DevelopmentSessionTracker  
+# from scripts.cli.analyze_batch import ComponentMatrix
+from src.utils.database import get_database_url
 
 
 @pytest.fixture

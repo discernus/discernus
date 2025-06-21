@@ -18,12 +18,12 @@ from pathlib import Path
 # Add src to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.narrative_gravity.models import get_db_session, Experiment, Run, FrameworkVersion
-from src.narrative_gravity.api.analysis_service import RealAnalysisService
+from src.models import get_db_session, Experiment, Run, FrameworkVersion
+from src.api.analysis_service import RealAnalysisService
 
 # Import current visualization tools
 try:
-    from src.narrative_gravity.visualization.plotly_circular import PlotlyCircularVisualizer
+    from src.visualization.plotly_circular import PlotlyCircularVisualizer
     CIRCULAR_VIZ_AVAILABLE = True
 except ImportError:
     CIRCULAR_VIZ_AVAILABLE = False

@@ -1,7 +1,7 @@
 # Direct Api Client
 
 **Module:** `src.api_clients.direct_api_client`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/api_clients/direct_api_client.py`
+**File:** `/app/src/api_clients/direct_api_client.py`
 **Package:** `api_clients`
 
 Direct API Client for Flagship LLMs - Updated for 2025 Models
@@ -167,4 +167,4 @@ Log comprehensive reliability report.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

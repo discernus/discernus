@@ -1,7 +1,7 @@
 # Generate Comprehensive Docs
 
 **Module:** `scripts.applications.generate_comprehensive_docs`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/generate_comprehensive_docs.py`
+**File:** `/app/scripts/applications/generate_comprehensive_docs.py`
 **Package:** `applications`
 
 Comprehensive Documentation Generator for Discernus
@@ -38,4 +38,4 @@ Main entry point for comprehensive documentation generation.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

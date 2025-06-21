@@ -1,7 +1,7 @@
 # Database
 
 **Module:** `src.utils.database`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/utils/database.py`
+**File:** `/app/src/utils/database.py`
 **Package:** `utils`
 
 Database utilities for Discernus Analysis Platform.
@@ -48,4 +48,4 @@ Returns:
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

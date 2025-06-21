@@ -1,7 +1,7 @@
 # Visualization
 
 **Module:** `src.analysis.visualization`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/analysis/visualization.py`
+**File:** `/app/src/analysis/visualization.py`
 **Package:** `analysis`
 
 Framework-Aware Visualization Generator for Narrative Gravity Analysis
@@ -131,4 +131,4 @@ Save index of generated visualizations.
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

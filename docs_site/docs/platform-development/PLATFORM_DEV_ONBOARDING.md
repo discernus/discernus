@@ -8,7 +8,11 @@ Welcome to the Discernus team! This guide provides the "golden path" for a new p
 
 Your goal in this phase is to understand *how* and *why* our system is built the way it is.
 
-1.  **Start at the Documentation Site**: Begin by exploring the [**documentation website**](../README.md) we've set up. It provides the high-level mission and vision.
+1.  **Start at the Documentation Site**: Begin by exploring the [**documentation website**](../README.md) we've set up. It provides the high-level mission and vision. To view the project documentation locally, run the following command from the project root:
+    ```bash
+    docker-compose up docs
+    ```
+    You can then access the documentation at [http://localhost:8000](http://localhost:8000). This starts a live-reloading server, and any changes you make to the documentation files will be updated in your browser automatically.
 
 2.  **Review the Project Map**: From the homepage, use the **"Key Documents"** badges to navigate to the **[`Documentation Index`](../docs/DOCUMENTATION_INDEX.md)**. This is your map to the entire project's knowledge base.
 
@@ -26,11 +30,7 @@ This phase gets the application running on your local machine.
 
 1.  **Follow the Environment Guide**: The **[`DEV_ENVIRONMENT.md`](../docs/platform-development/DEV_ENVIRONMENT.md)** provides the single source of truth for setting up your environment. **The Docker-based setup is strongly recommended.**
 
-2.  **View the Documentation Website**: To view the project documentation locally, run the following command from the project root. This starts a live-reloading server, and any changes you make to the documentation files will be updated in your browser automatically.
-    ```bash
-    docker-compose up docs
-    ```
-    You can then access the documentation at [http://localhost:8000](http://localhost:8000).
+2.  **Verify Documentation Access**: Ensure you can access the documentation website at [http://localhost:8000](http://localhost:8000) (started in Phase 1). If you encounter any issues with the Docker setup, refer to the troubleshooting section in the **[`DEV_ENVIRONMENT.md`](../docs/platform-development/DEV_ENVIRONMENT.md)** guide.
 
 3.  **Initialize the Research Workspace**: Even as a platform developer, you need the research workspace for the application to run correctly. After setting up the Docker environment, run this script from the project root:
     ```bash

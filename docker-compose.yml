@@ -42,6 +42,7 @@ services:
   docs:
     build: .
     container_name: discernus_docs
+    entrypoint: []  # Override the default entrypoint
     command: >
       sh -c "
       python3 scripts/applications/generate_comprehensive_docs.py --include-scripts &&

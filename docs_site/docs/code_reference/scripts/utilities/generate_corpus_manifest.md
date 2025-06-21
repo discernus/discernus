@@ -1,7 +1,7 @@
 # Generate Corpus Manifest
 
 **Module:** `scripts.utilities.generate_corpus_manifest`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/utilities/generate_corpus_manifest.py`
+**File:** `/app/scripts/utilities/generate_corpus_manifest.py`
 **Package:** `utilities`
 
 Corpus Hash Manifest Generator
@@ -86,4 +86,4 @@ main()
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

@@ -1,7 +1,7 @@
 # Check Rule Enforcement
 
 **Module:** `scripts.applications.check_rule_enforcement`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/check_rule_enforcement.py`
+**File:** `/app/scripts/applications/check_rule_enforcement.py`
 **Package:** `applications`
 
 Rule Enforcement Status Check
@@ -63,4 +63,4 @@ Main status check function.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

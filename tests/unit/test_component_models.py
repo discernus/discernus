@@ -8,7 +8,7 @@ import json
 from datetime import datetime, timezone
 from uuid import uuid4
 
-from src.narrative_gravity.models.component_models import (
+from src.models.component_models import (
     PromptTemplate, FrameworkVersion, WeightingMethodology,
     ComponentCompatibility, DevelopmentSession
 )

@@ -1,7 +1,7 @@
 # Audit Code Organization
 
 **Module:** `scripts.applications.audit_code_organization`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/audit_code_organization.py`
+**File:** `/app/scripts/applications/audit_code_organization.py`
 **Package:** `applications`
 
 Audit Code Organization
@@ -54,4 +54,4 @@ Main audit function.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

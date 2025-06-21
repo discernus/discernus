@@ -1,7 +1,7 @@
 # Validate Ai Assistant Compliance
 
 **Module:** `scripts.applications.validate_ai_assistant_compliance`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/validate_ai_assistant_compliance.py`
+**File:** `/app/scripts/applications/validate_ai_assistant_compliance.py`
 **Package:** `applications`
 
 AI Assistant Compliance Validator
@@ -95,4 +95,4 @@ main()
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

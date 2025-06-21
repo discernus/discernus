@@ -1,7 +1,7 @@
 # Comprehensive Experiment Orchestrator
 
 **Module:** `scripts.applications.comprehensive_experiment_orchestrator`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/comprehensive_experiment_orchestrator.py`
+**File:** `/app/scripts/applications/comprehensive_experiment_orchestrator.py`
 **Package:** `applications`
 
 Comprehensive Experiment Orchestrator
@@ -26,10 +26,6 @@ Phase 1: Core Orchestrator (Day 1 Implementation)
 - `hashlib`
 - `json`
 - `logging`
-- `narrative_gravity.analysis.statistical_logger`
-- `narrative_gravity.models.models`
-- `narrative_gravity.utils.database`
-- `narrative_gravity.utils.statistical_logger`
 - `os`
 - `pathlib`
 - `pickle`
@@ -42,6 +38,7 @@ Phase 1: Core Orchestrator (Day 1 Implementation)
 - `src.academic.documentation`
 - `src.analysis.reliability`
 - `src.analysis.results`
+- `src.analysis.statistical_logger`
 - `src.analysis.statistics`
 - `src.analysis.visualization`
 - `src.api.analysis_service`
@@ -50,12 +47,12 @@ Phase 1: Core Orchestrator (Day 1 Implementation)
 - `src.corpus.registry`
 - `src.corpus.validator`
 - `src.models.component_models`
-- `src.narrative_gravity.models.models`
-- `src.narrative_gravity.utils.database`
+- `src.models.models`
 - `src.utils.database`
 - `src.utils.experiment_logging`
 - `src.utils.framework_transaction_manager`
 - `src.utils.llm_quality_assurance`
+- `src.utils.statistical_logger`
 - `src.visualization.themes`
 - `sys`
 - `tempfile`
@@ -711,4 +708,4 @@ Main CLI entry point
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

@@ -1,7 +1,7 @@
 # Setup Database
 
 **Module:** `scripts.utilities.setup_database`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/utilities/setup_database.py`
+**File:** `/app/scripts/utilities/setup_database.py`
 **Package:** `utilities`
 
 Database setup script for Narrative Gravity Analysis.
@@ -63,4 +63,4 @@ Main setup function.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

@@ -1,7 +1,7 @@
 # Export Academic Data
 
 **Module:** `scripts.cli.export_academic_data`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/cli/export_academic_data.py`
+**File:** `/app/scripts/cli/export_academic_data.py`
 **Package:** `cli`
 
 Academic Data Export CLI - Simple wrapper for existing functionality
@@ -36,4 +36,4 @@ CLI interface for academic data export.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

@@ -1,7 +1,7 @@
 # Registry
 
 **Module:** `src.corpus.registry`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/corpus/registry.py`
+**File:** `/app/src/corpus/registry.py`
 **Package:** `corpus`
 
 Corpus Registry - Enhanced corpus management with stable identifiers.
@@ -188,4 +188,4 @@ Convert database row to CorpusDocument object.
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

@@ -9,7 +9,7 @@ specifically targeting the Roosevelt 1933 silent failure scenario.
 
 import pytest
 import numpy as np
-from src.narrative_gravity.utils.llm_quality_assurance import (
+from src.utils.llm_quality_assurance import (
     LLMQualityAssuranceSystem,
     validate_llm_analysis,
     QualityCheck,
@@ -275,7 +275,7 @@ class TestLLMQualityAssuranceIntegration:
         """Test that quality assurance is integrated into DirectAPIClient."""
         
         # This would require actual API keys, so we'll test the structure
-        from src.narrative_gravity.api_clients.direct_api_client import DirectAPIClient
+        from src.api_clients.direct_api_client import DirectAPIClient
         
         client = DirectAPIClient()
         

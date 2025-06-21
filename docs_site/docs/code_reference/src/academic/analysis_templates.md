@@ -1,7 +1,7 @@
 # Analysis Templates
 
 **Module:** `src.academic.analysis_templates`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/academic/analysis_templates.py`
+**File:** `/app/src/academic/analysis_templates.py`
 **Package:** `academic`
 
 AI-Generated Analysis Templates - Priority 3
@@ -199,4 +199,4 @@ Quick Stata script generation.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

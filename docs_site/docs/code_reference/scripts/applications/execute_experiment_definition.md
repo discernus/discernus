@@ -1,7 +1,7 @@
 # Execute Experiment Definition
 
 **Module:** `scripts.applications.execute_experiment_definition`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/execute_experiment_definition.py`
+**File:** `/app/scripts/applications/execute_experiment_definition.py`
 **Package:** `applications`
 
 Execution Engine for Declarative Experiment Definitions
@@ -73,4 +73,4 @@ Fix narrative position calculation using correct framework configuration
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

@@ -1,7 +1,7 @@
 # Statistics
 
 **Module:** `src.analysis.statistics`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/analysis/statistics.py`
+**File:** `/app/src/analysis/statistics.py`
 **Package:** `analysis`
 
 Statistical Hypothesis Testing System for Narrative Gravity Analysis
@@ -121,4 +121,4 @@ Generate overall summary of hypothesis testing results.
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

@@ -1,7 +1,7 @@
 # Framework Sync
 
 **Module:** `scripts.applications.framework_sync`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/framework_sync.py`
+**File:** `/app/scripts/applications/framework_sync.py`
 **Package:** `applications`
 
 Framework Synchronization Tool
@@ -149,4 +149,4 @@ main()
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

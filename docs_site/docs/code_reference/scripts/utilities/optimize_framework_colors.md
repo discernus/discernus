@@ -1,7 +1,7 @@
 # Optimize Framework Colors
 
 **Module:** `scripts.utilities.optimize_framework_colors`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/utilities/optimize_framework_colors.py`
+**File:** `/app/scripts/utilities/optimize_framework_colors.py`
 **Package:** `utilities`
 
 Framework Color Optimization Script
@@ -91,4 +91,4 @@ Main execution function.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

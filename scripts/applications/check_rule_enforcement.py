@@ -64,14 +64,14 @@ def main():
     
     # 2. Documentation files
     print("\n📚 Documentation:")
-    all_good &= check_file_exists("docs/EXISTING_SYSTEMS_INVENTORY.md", "Systems Inventory")
-    all_good &= check_file_exists("docs/CODE_ORGANIZATION_STANDARDS.md", "Organization Standards")
+    all_good &= check_file_exists("docs_site/docs/EXISTING_SYSTEMS_INVENTORY.md", "Systems Inventory")
+    all_good &= check_file_exists("docs_site/docs/CODE_ORGANIZATION_STANDARDS.md", "Organization Standards")
     
     # 3. Production tools
     print("\n🔧 Production Tools:")
-    all_good &= check_file_exists("scripts/production/check_existing_systems.py", "Production Search Tool")
-    all_good &= check_file_exists("scripts/production/validate_ai_assistant_compliance.py", "Compliance Validator")
-    all_good &= check_file_exists("scripts/production/new_development_workflow.py", "Guided Workflow")
+    all_good &= check_file_exists("scripts/applications/check_existing_systems.py", "Production Search Tool")
+    all_good &= check_file_exists("scripts/applications/validate_ai_assistant_compliance.py", "Compliance Validator")
+    all_good &= check_file_exists("scripts/applications/new_development_workflow.py", "Guided Workflow")
     all_good &= check_file_exists("scripts/production/audit_code_organization.py", "Organization Auditor")
     
     # 4. Directory structure
@@ -115,8 +115,8 @@ def main():
         print("🎉 ALL RULE ENFORCEMENT MECHANISMS IN PLACE!")
         print("✅ Future AI assistants should automatically follow rules")
         print("\n🎯 Quick test commands:")
-        print("python3 scripts/production/check_existing_systems.py 'quality assurance'")
-        print("python3 scripts/production/validate_ai_assistant_compliance.py --quick-check")
+        print("python3 scripts/applications/check_existing_systems.py 'quality assurance'")
+        print("python3 scripts/applications/validate_ai_assistant_compliance.py --quick-check")
     else:
         print("❌ SOME ENFORCEMENT MECHANISMS MISSING!")
         print("⚠️  Rule enforcement may not be complete")

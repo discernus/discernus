@@ -1,7 +1,7 @@
 # Experiment Logging
 
 **Module:** `src.utils.experiment_logging`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/utils/experiment_logging.py`
+**File:** `/app/src/utils/experiment_logging.py`
 **Package:** `utils`
 
 Comprehensive Experiment Logging System for Narrative Gravity Analysis
@@ -240,4 +240,4 @@ Setup experiment logging with extended configuration
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

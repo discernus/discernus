@@ -1,7 +1,7 @@
 # Exporter
 
 **Module:** `src.corpus.exporter`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/corpus/exporter.py`
+**File:** `/app/src/corpus/exporter.py`
 **Package:** `corpus`
 
 Corpus Exporter - Academic format exports with citation support.
@@ -209,4 +209,4 @@ Export metadata as XML (placeholder implementation).
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

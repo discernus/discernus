@@ -1,7 +1,7 @@
 # Setup Research Workspace
 
 **Module:** `scripts.utilities.setup_research_workspace`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/utilities/setup_research_workspace.py`
+**File:** `/app/scripts/utilities/setup_research_workspace.py`
 **Package:** `utilities`
 
 ## Dependencies
@@ -32,4 +32,4 @@ Args:
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

@@ -27,12 +27,12 @@ import shutil
 # Setup paths
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src'))
 
-from src.narrative_gravity.academic import (
+from src.academic import (
     AcademicDataExporter, ReplicationPackageBuilder,
     JupyterTemplateGenerator, RScriptGenerator, StataIntegration
 )
-from src.narrative_gravity.models import Experiment, Run
-from src.narrative_gravity.utils.database import get_db
+from src.models import Experiment, Run
+from src.utils.database import get_database_url
 
 
 class TestAcademicPipelineEndToEnd:

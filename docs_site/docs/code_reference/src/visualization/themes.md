@@ -1,7 +1,7 @@
 # Themes
 
 **Module:** `src.visualization.themes`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/visualization/themes.py`
+**File:** `/app/src/visualization/themes.py`
 **Package:** `visualization`
 
 Narrative Gravity Visualization Themes
@@ -218,4 +218,4 @@ Set the default theme.
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

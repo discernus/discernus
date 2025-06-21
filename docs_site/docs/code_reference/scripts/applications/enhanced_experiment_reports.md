@@ -1,7 +1,7 @@
 # Enhanced Experiment Reports
 
 **Module:** `scripts.applications.enhanced_experiment_reports`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/applications/enhanced_experiment_reports.py`
+**File:** `/app/scripts/applications/enhanced_experiment_reports.py`
 **Package:** `applications`
 
 Enhanced Experiment Report Generator - FIXED VERSION
@@ -20,9 +20,9 @@ Enhanced Experiment Report Generator - FIXED VERSION
 - `markdown`
 - `os`
 - `pathlib`
-- `src.narrative_gravity.api.analysis_service`
-- `src.narrative_gravity.models`
-- `src.narrative_gravity.visualization.plotly_circular`
+- `src.api.analysis_service`
+- `src.models`
+- `src.visualization.plotly_circular`
 - `sys`
 
 ## Table of Contents
@@ -80,4 +80,4 @@ Find existing academic outputs for this experiment.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

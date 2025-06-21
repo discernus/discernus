@@ -1,7 +1,7 @@
 # Analysis Service
 
 **Module:** `src.api.analysis_service`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/api/analysis_service.py`
+**File:** `/app/src/api/analysis_service.py`
 **Package:** `api`
 
 Real Analysis Service - Integrates existing LLM and analysis components
@@ -9,22 +9,22 @@ Replaces fake/mock analysis with actual AI-powered narrative analysis
 
 ## Dependencies
 
-- `api_clients.direct_api_client`
-- `coordinate_engine`
 - `datetime`
-- `framework_manager`
 - `json`
 - `math`
-- `models.component_models`
 - `pathlib`
-- `prompts.template_manager`
 - `random`
 - `re`
 - `sqlalchemy`
 - `sqlalchemy.orm`
+- `src.api_clients.direct_api_client`
+- `src.coordinate_engine`
+- `src.framework_manager`
+- `src.models.component_models`
+- `src.prompts.template_manager`
+- `src.utils.database`
 - `time`
 - `typing`
-- `utils.database`
 - `uuid`
 
 ## Table of Contents
@@ -152,4 +152,4 @@ Better than random data but clearly marked as fallback. Uses dynamic framework l
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

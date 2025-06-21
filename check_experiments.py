@@ -10,8 +10,8 @@ sys.path.insert(0, str(Path(__file__).parent / 'src'))
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from src.narrative_gravity.utils.database import get_database_url
-from src.narrative_gravity.models.models import Experiment, Run
+from src.utils.database import get_database_url
+from src.models.models import Experiment, Run
 
 def main():
     try:

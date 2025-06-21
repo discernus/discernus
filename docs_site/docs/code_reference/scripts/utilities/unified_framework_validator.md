@@ -1,7 +1,7 @@
 # Unified Framework Validator
 
 **Module:** `scripts.utilities.unified_framework_validator`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/scripts/utilities/unified_framework_validator.py`
+**File:** `/app/scripts/utilities/unified_framework_validator.py`
 **Package:** `utilities`
 
 Unified Framework Validator v2.0
@@ -290,4 +290,4 @@ CLI main function
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

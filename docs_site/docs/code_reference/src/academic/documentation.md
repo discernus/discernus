@@ -1,7 +1,7 @@
 # Documentation
 
 **Module:** `src.academic.documentation`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/academic/documentation.py`
+**File:** `/app/src/academic/documentation.py`
 **Package:** `academic`
 
 Academic Documentation Generators - Priority 3
@@ -140,4 +140,4 @@ Quick results report generation.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

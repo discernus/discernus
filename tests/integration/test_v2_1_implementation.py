@@ -13,8 +13,8 @@ from sqlalchemy.orm import Session
 # Add src to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
-from narrative_gravity.models.base import get_db
-from narrative_gravity.models import User, Experiment, Run
+from src.models.base import get_db
+from src.models import User, Experiment, Run
 
 def test_v2_1_data_structures():
     """Test the v2.1 experiment and run data structures."""

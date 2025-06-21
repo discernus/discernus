@@ -1,7 +1,7 @@
 # Results
 
 **Module:** `src.analysis.results`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/analysis/results.py`
+**File:** `/app/src/analysis/results.py`
 **Package:** `analysis`
 
 Extract and parse experiment results from the database.
@@ -121,4 +121,4 @@ Args:
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

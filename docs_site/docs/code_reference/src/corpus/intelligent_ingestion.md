@@ -1,7 +1,7 @@
 # Intelligent Ingestion
 
 **Module:** `src.corpus.intelligent_ingestion`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/corpus/intelligent_ingestion.py`
+**File:** `/app/src/corpus/intelligent_ingestion.py`
 **Package:** `corpus`
 
 Intelligent Corpus Ingestion Service
@@ -157,4 +157,4 @@ Returns:
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*

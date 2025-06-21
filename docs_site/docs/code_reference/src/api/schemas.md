@@ -1,7 +1,7 @@
 # Schemas
 
 **Module:** `src.api.schemas`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/api/schemas.py`
+**File:** `/app/src/api/schemas.py`
 **Package:** `api`
 
 Pydantic schemas for API request/response validation.
@@ -409,4 +409,4 @@ Response schema for multi-model comparison analysis.
 
 ---
 
-*Generated on 2025-06-21 12:44:48*
+*Generated on 2025-06-21 20:19:04*

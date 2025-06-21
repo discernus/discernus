@@ -1,7 +1,7 @@
 # Coordinate Engine
 
 **Module:** `src.coordinate_engine`
-**File:** `/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/discernus/src/coordinate_engine.py`
+**File:** `/app/src/coordinate_engine.py`
 
 ## Dependencies
 
@@ -124,4 +124,4 @@ CLI interface for circular coordinate system visualization.
 
 ---
 
-*Generated on 2025-06-21 12:44:47*
+*Generated on 2025-06-21 20:19:04*
