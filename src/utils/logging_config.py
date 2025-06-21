@@ -198,7 +198,7 @@ class StructuredLogger:
             "timestamp": datetime.utcnow().isoformat(),
             "level": level,
             "message": message,
-            "service": "narrative_gravity_analysis",
+            "service": "discernus",
             "version": "1.0.0"
         }
         
@@ -274,7 +274,7 @@ def setup_logging(log_level: str = "INFO", log_file: str = None):
             }
         },
         "loggers": {
-            "narrative_gravity_analysis": {
+            "discernus": {
                 "level": log_level,
                 "handlers": ["console"],
                 "propagate": False
