@@ -42,7 +42,7 @@ def check_postgresql():
     print("=" * 40)
     
     try:
-        from src.narrative_gravity.models.base import engine
+        from src.models.base import engine
         
         # Check URL
         db_url = str(engine.url)
@@ -79,7 +79,7 @@ def check_sqlite_usage():
         print("✅ No legacy SQLite file")
     
     # Check stats file
-    stats_file = Path("logs/narrative_gravity_stats.db")
+    stats_file = Path("logs/discernus_stats.db")
     if stats_file.exists():
         size = stats_file.stat().st_size
         print(f"📊 Stats file: {stats_file} ({size} bytes)")

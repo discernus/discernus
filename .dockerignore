@@ -18,7 +18,7 @@ venv/
 logs/
 api_costs.json
 cost_limits.json
-narrative_gravity_stats.db
+discernus_stats.db
 experiments/
 tmp/
 asset_storage/

@@ -14,14 +14,14 @@ src_dir = current_dir / "src"
 sys.path.insert(0, str(src_dir))
 
 # Import project models and database utilities
-from narrative_gravity.models.base import Base
-from narrative_gravity.utils.database import get_database_url
+from models.base import Base
+from utils.database import get_database_url
 
 # Import all models so Alembic can detect them for autogenerate
-from narrative_gravity.models.models import (
+from models.models import (
     User, Corpus, Document, Chunk, Job, Task, Experiment, Run
 )
-from narrative_gravity.models.component_models import (
+from models.component_models import (
     PromptTemplate, FrameworkVersion, WeightingMethodology, 
     ComponentCompatibility, DevelopmentSession
 )
