@@ -22,7 +22,13 @@ This phase gets the platform running on your local machine so you can start your
 
 1.  **Follow the Environment Guide**: The **[`DEV_ENVIRONMENT.md`](../../docs/platform-development/DEV_ENVIRONMENT.md)** provides the single source of truth for setting up your environment. **The Docker-based setup is strongly recommended.**
 
-2.  **Initialize Your Research Workspace**: The `research_workspaces` directory is where you will do all of your work. After setting up the Docker environment, run this script from the project root to create the necessary folder structure:
+2.  **View the Documentation Website**: To view the project documentation locally, run the following command from the project root. This starts a live-reloading server, and any changes you make to the documentation files will be updated in your browser automatically.
+    ```bash
+    docker-compose up docs
+    ```
+    You can then access the documentation at [http://localhost:8000](http://localhost:8000).
+
+3.  **Initialize Your Research Workspace**: The `research_workspaces` directory is where you will do all of your work. After setting up the Docker environment, run this script from the project root to create the necessary folder structure:
     ```bash
     python3 scripts/utilities/setup_research_workspace.py
     ```
