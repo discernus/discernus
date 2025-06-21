@@ -3,8 +3,46 @@ theme:
   name: material
 nav:
   - 'Home': 'README.md'
-  - 'Documentation Index': 'docs/DOCUMENTATION_INDEX.md'
-  - 'Contributing': 'docs/CONTRIBUTING.md'
-  - 'Development Environment': 'docs/platform-development/DEV_ENVIRONMENT.md'
-  - 'Code Standards': 'docs/CODE_ORGANIZATION_STANDARDS.md'
-  - 'Release Process': 'docs/platform-development/RELEASE_PROCESS.md' 
+  - 'Documentation Index': 'DOCUMENTATION_INDEX.md'
+  - 'API Documentation': 
+    - 'Overview': 'api/index.md'
+    - 'Analysis Service': 'api/analysis_service.md'
+    - 'Schemas': 'api/schemas.md'
+  - 'Code Reference (Complete)':
+    - 'Overview': 'code_reference/index.md'
+    - 'Cross-Reference Index': 'code_reference/cross_reference.md'
+    - 'Source Code':
+      - 'Academic':
+        - 'Data Export': 'code_reference/src/academic/data_export.md'
+        - 'Analysis Templates': 'code_reference/src/academic/analysis_templates.md'
+        - 'Documentation': 'code_reference/src/academic/documentation.md'
+      - 'Analysis':
+        - 'Reliability': 'code_reference/src/analysis/reliability.md'
+        - 'Results': 'code_reference/src/analysis/results.md'
+        - 'Statistics': 'code_reference/src/analysis/statistics.md'
+        - 'Visualization': 'code_reference/src/analysis/visualization.md'
+      - 'API':
+        - 'Analysis Service': 'code_reference/src/api/analysis_service.md'
+        - 'Schemas': 'code_reference/src/api/schemas.md'
+      - 'Corpus':
+        - 'Discovery': 'code_reference/src/corpus/discovery.md'
+        - 'Registry': 'code_reference/src/corpus/registry.md'
+        - 'Validator': 'code_reference/src/corpus/validator.md'
+        - 'Intelligent Ingestion': 'code_reference/src/corpus/intelligent_ingestion.md'
+      - 'Utils':
+        - 'LLM Quality Assurance': 'code_reference/src/utils/llm_quality_assurance.md'
+        - 'Cost Manager': 'code_reference/src/utils/cost_manager.md'
+        - 'Experiment Logging': 'code_reference/src/utils/experiment_logging.md'
+        - 'Statistical Logger': 'code_reference/src/utils/statistical_logger.md'
+      - 'Visualization':
+        - 'Engine': 'code_reference/src/visualization/engine.md'
+        - 'Themes': 'code_reference/src/visualization/themes.md'
+        - 'Plotly Circular': 'code_reference/src/visualization/plotly_circular.md'
+    - 'Scripts (Key Tools)':
+      - 'Experiment Orchestrator': 'code_reference/scripts/applications/comprehensive_experiment_orchestrator.md'
+      - 'Framework Validator': 'code_reference/scripts/utilities/unified_framework_validator.md'
+      - 'Generate Docs': 'code_reference/scripts/applications/generate_comprehensive_docs.md'
+  - 'Contributing': 'CONTRIBUTING.md'
+  - 'Development Environment': 'platform-development/DEV_ENVIRONMENT.md'
+  - 'Code Standards': 'CODE_ORGANIZATION_STANDARDS.md'
+  - 'Release Process': 'platform-development/RELEASE_PROCESS.md' 

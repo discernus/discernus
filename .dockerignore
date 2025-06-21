@@ -28,4 +28,31 @@ product_management/
 
 # IDE
 .vscode/
-.idea/ 
+.idea/
+
+# Exclude build artifacts and local state
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+/site
+
+# Exclude documentation source files that aren't needed in the image
+docs_site/
+paper/
+
+# Exclude local configuration and secrets
+.env
+.idea/
+.vscode/
+*.db
+*.sqlite3
+
+# Exclude build directories
+_build/
+dist/
+build/
+*.egg-info/
+*.egg 

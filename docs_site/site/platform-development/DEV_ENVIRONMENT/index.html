@@ -233,6 +233,120 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/api/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/api/analysis_service.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analysis Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/api/schemas.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schemas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
         
@@ -458,6 +572,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-setting-up-the-research-workspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Setting Up the Research Workspace
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -576,6 +699,13 @@ docker-compose exec app python launch.py --setup-db
 <li><strong>Command not found: <code>python</code>?</strong> → The standard is <code>python3</code>.</li>
 <li><strong>Database connection errors?</strong> → Verify the database service is running (via <code>docker-compose ps</code>) and that the connection details in your configuration are correct.</li>
 </ul>
+<hr />
+<h2 id="4-setting-up-the-research-workspace">4. Setting Up the Research Workspace</h2>
+<p>The <code>research_workspaces</code> directory is essential for development, as it holds the frameworks, experiments, and other assets the application loads at runtime. This directory is intentionally not committed to the repository to keep research data separate from the application's source code.</p>
+<p>For a new developer, this directory will be empty. To create the standard, required folder structure, run the following command from the project root:</p>
+<pre><code class="language-bash">python3 scripts/utilities/setup_research_workspace.py
+</code></pre>
+<p>This script will create all the necessary subdirectories (<code>experiments/</code>, <code>frameworks/</code>, etc.) so you can begin development immediately.</p>
 <hr />
 <p><strong>For complete development environment guidance, see <code>.cursorrules</code></strong> </p>
 

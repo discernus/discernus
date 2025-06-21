@@ -233,6 +233,120 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/api/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/api/analysis_service.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analysis Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/api/schemas.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schemas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../docs/CONTRIBUTING.md" class="md-nav__link">
         
@@ -357,6 +471,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="🤝 Code Review Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docstring-linting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docstring Linting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -475,6 +604,12 @@
 <li><strong>Testing</strong>: Do all existing tests pass? Are there new tests that cover the new functionality?</li>
 <li><strong>Error Handling</strong>: Does the code handle potential errors gracefully?</li>
 </ol>
+<h3 id="docstring-linting">Docstring Linting</h3>
+<p>To ensure our code is self-documenting, all production code must pass <code>pydocstyle</code> checks. Before submitting a PR, run the linter on your changed files.</p>
+<pre><code class="language-bash"># Run the docstring linter on the entire src directory
+python3 -m pydocstyle src/
+</code></pre>
+<p>This check enforces the Google-style docstring format defined in <a href="../CODE_ORGANIZATION_STANDARDS/"><code>CODE_ORGANIZATION_STANDARDS.md</code></a>.</p>
 <hr />
 <h2 id="development-setup">🔧 Development Setup</h2>
 <p>For detailed instructions on setting up your local or Docker-based development environment, please see <strong><a href="../platform-development/DEV_ENVIRONMENT/"><code>platform-development/DEV_ENVIRONMENT.md</code></a></strong>.</p>

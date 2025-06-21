@@ -1,0 +1,1541 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>API Module: Schemas - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-module-schemas" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API Module: Schemas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/api/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/api/analysis_service.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analysis Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/api/schemas.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schemas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Table of Contents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documenttype" class="md-nav__link">
+    <span class="md-ellipsis">
+      DocumentType
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chunktype" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChunkType
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jobstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      JobStatus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taskstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      TaskStatus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baseschema" class="md-nav__link">
+    <span class="md-ellipsis">
+      BaseSchema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corpusbase" class="md-nav__link">
+    <span class="md-ellipsis">
+      CorpusBase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corpusresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      CorpusResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentbase" class="md-nav__link">
+    <span class="md-ellipsis">
+      DocumentBase
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DocumentBase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#date_to_datetimecls-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      date_to_datetime(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      DocumentResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chunkbase" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChunkBase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chunkresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChunkResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jobcreate" class="md-nav__link">
+    <span class="md-ellipsis">
+      JobCreate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JobCreate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_frameworkscls-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_frameworks(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jobresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      JobResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#taskresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      TaskResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jobdetailresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      JobDetailResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemstats" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemStats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frameworkconfigresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      FrameworkConfigResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompttemplateresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      PromptTemplateResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scoringalgorithmresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      ScoringAlgorithmResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jsonlrecord" class="md-nav__link">
+    <span class="md-ellipsis">
+      JSONLRecord
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JSONLRecord">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_chunk_consistencycls-v-info-any" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_chunk_consistency(cls, v, info: any)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errorresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      ErrorResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validationerrorresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      ValidationErrorResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userrole" class="md-nav__link">
+    <span class="md-ellipsis">
+      UserRole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usercreate" class="md-nav__link">
+    <span class="md-ellipsis">
+      UserCreate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UserCreate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_usernamecls-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_username(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_email_formatcls-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_email_format(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userlogin" class="md-nav__link">
+    <span class="md-ellipsis">
+      UserLogin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      UserResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userupdate" class="md-nav__link">
+    <span class="md-ellipsis">
+      UserUpdate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UserUpdate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_emailcls-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_email(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passwordchange" class="md-nav__link">
+    <span class="md-ellipsis">
+      PasswordChange
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      TokenResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenrefresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      TokenRefresh
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#welljustification" class="md-nav__link">
+    <span class="md-ellipsis">
+      WellJustification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hierarchicalranking" class="md-nav__link">
+    <span class="md-ellipsis">
+      HierarchicalRanking
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HierarchicalRanking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_total_weightcls-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_total_weight(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculatedmetrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      CalculatedMetrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#narrativeposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      NarrativePosition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#completeprovenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      CompleteProvenance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experimentcreate" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExperimentCreate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experimentupdate" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExperimentUpdate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experimentresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExperimentResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runcreate" class="md-nav__link">
+    <span class="md-ellipsis">
+      RunCreate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      RunResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#singletextanalysisrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      SingleTextAnalysisRequest
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#singletextanalysisresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      SingleTextAnalysisResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multimodelanalysisrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      MultiModelAnalysisRequest
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelcomparisonresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      ModelComparisonResult
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multimodelanalysisresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      MultiModelAnalysisResponse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#date_to_datetimecls-v_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      date_to_datetime(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_frameworkscls-v_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_frameworks(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_chunk_consistencycls-v-info-any_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_chunk_consistency(cls, v, info: any)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_usernamecls-v_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_username(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_email_formatcls-v_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_email_format(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_emailcls-v_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_email(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate_total_weightcls-v_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      validate_total_weight(cls, v)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api-module-schemas">API Module: Schemas</h1>
+<p>Pydantic schemas for API request/response validation.
+Implements data models for Epic 1 corpus and job management endpoints.
+Enhanced for v2.1 hierarchical analysis.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<h3 id="classes">Classes</h3>
+<ul>
+<li><a href="#documenttype">DocumentType</a></li>
+<li><a href="#chunktype">ChunkType</a></li>
+<li><a href="#jobstatus">JobStatus</a></li>
+<li><a href="#taskstatus">TaskStatus</a></li>
+<li><a href="#baseschema">BaseSchema</a></li>
+<li><a href="#corpusbase">CorpusBase</a></li>
+<li><a href="#corpusresponse">CorpusResponse</a></li>
+<li><a href="#documentbase">DocumentBase</a></li>
+<li><a href="#documentresponse">DocumentResponse</a></li>
+<li><a href="#chunkbase">ChunkBase</a></li>
+<li><a href="#chunkresponse">ChunkResponse</a></li>
+<li><a href="#jobcreate">JobCreate</a></li>
+<li><a href="#jobresponse">JobResponse</a></li>
+<li><a href="#taskresponse">TaskResponse</a></li>
+<li><a href="#jobdetailresponse">JobDetailResponse</a></li>
+<li><a href="#systemstats">SystemStats</a></li>
+<li><a href="#frameworkconfigresponse">FrameworkConfigResponse</a></li>
+<li><a href="#prompttemplateresponse">PromptTemplateResponse</a></li>
+<li><a href="#scoringalgorithmresponse">ScoringAlgorithmResponse</a></li>
+<li><a href="#jsonlrecord">JSONLRecord</a></li>
+<li><a href="#errorresponse">ErrorResponse</a></li>
+<li><a href="#validationerrorresponse">ValidationErrorResponse</a></li>
+<li><a href="#userrole">UserRole</a></li>
+<li><a href="#usercreate">UserCreate</a></li>
+<li><a href="#userlogin">UserLogin</a></li>
+<li><a href="#userresponse">UserResponse</a></li>
+<li><a href="#userupdate">UserUpdate</a></li>
+<li><a href="#passwordchange">PasswordChange</a></li>
+<li><a href="#tokenresponse">TokenResponse</a></li>
+<li><a href="#tokenrefresh">TokenRefresh</a></li>
+<li><a href="#welljustification">WellJustification</a></li>
+<li><a href="#hierarchicalranking">HierarchicalRanking</a></li>
+<li><a href="#calculatedmetrics">CalculatedMetrics</a></li>
+<li><a href="#narrativeposition">NarrativePosition</a></li>
+<li><a href="#completeprovenance">CompleteProvenance</a></li>
+<li><a href="#experimentcreate">ExperimentCreate</a></li>
+<li><a href="#experimentupdate">ExperimentUpdate</a></li>
+<li><a href="#experimentresponse">ExperimentResponse</a></li>
+<li><a href="#runcreate">RunCreate</a></li>
+<li><a href="#runresponse">RunResponse</a></li>
+<li><a href="#singletextanalysisrequest">SingleTextAnalysisRequest</a></li>
+<li><a href="#singletextanalysisresponse">SingleTextAnalysisResponse</a></li>
+<li><a href="#multimodelanalysisrequest">MultiModelAnalysisRequest</a></li>
+<li><a href="#modelcomparisonresult">ModelComparisonResult</a></li>
+<li><a href="#multimodelanalysisresponse">MultiModelAnalysisResponse</a></li>
+<li><a href="#config">Config</a></li>
+<li><a href="#config">Config</a></li>
+</ul>
+<h3 id="functions">Functions</h3>
+<ul>
+<li><a href="#date_to_datetime">date_to_datetime</a></li>
+<li><a href="#validate_frameworks">validate_frameworks</a></li>
+<li><a href="#validate_chunk_consistency">validate_chunk_consistency</a></li>
+<li><a href="#validate_username">validate_username</a></li>
+<li><a href="#validate_email_format">validate_email_format</a></li>
+<li><a href="#validate_email">validate_email</a></li>
+<li><a href="#validate_total_weight">validate_total_weight</a></li>
+</ul>
+<h2 id="classes_1">Classes</h2>
+<h3 id="documenttype">DocumentType</h3>
+<p><em>Inherits from: str, Enum</em></p>
+<hr />
+<h3 id="chunktype">ChunkType</h3>
+<p><em>Inherits from: str, Enum</em></p>
+<hr />
+<h3 id="jobstatus">JobStatus</h3>
+<p><em>Inherits from: str, Enum</em></p>
+<hr />
+<h3 id="taskstatus">TaskStatus</h3>
+<p><em>Inherits from: str, Enum</em></p>
+<hr />
+<h3 id="baseschema">BaseSchema</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<hr />
+<h3 id="corpusbase">CorpusBase</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<hr />
+<h3 id="corpusresponse">CorpusResponse</h3>
+<p><em>Inherits from: CorpusBase</em></p>
+<hr />
+<h3 id="documentbase">DocumentBase</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<h4 id="methods">Methods</h4>
+<h5 id="date_to_datetimecls-v">date_to_datetime(cls, v)</h5>
+<hr />
+<h3 id="documentresponse">DocumentResponse</h3>
+<p><em>Inherits from: DocumentBase</em></p>
+<hr />
+<h3 id="chunkbase">ChunkBase</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<hr />
+<h3 id="chunkresponse">ChunkResponse</h3>
+<p><em>Inherits from: ChunkBase</em></p>
+<hr />
+<h3 id="jobcreate">JobCreate</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<h4 id="methods_1">Methods</h4>
+<h5 id="validate_frameworkscls-v">validate_frameworks(cls, v)</h5>
+<p>Validate that frameworks are supported.</p>
+<hr />
+<h3 id="jobresponse">JobResponse</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<hr />
+<h3 id="taskresponse">TaskResponse</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<hr />
+<h3 id="jobdetailresponse">JobDetailResponse</h3>
+<p><em>Inherits from: JobResponse</em></p>
+<p>Extended job response with task breakdown.</p>
+<hr />
+<h3 id="systemstats">SystemStats</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>System-wide statistics for monitoring.</p>
+<hr />
+<h3 id="frameworkconfigresponse">FrameworkConfigResponse</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Schema for framework configuration response.</p>
+<hr />
+<h3 id="prompttemplateresponse">PromptTemplateResponse</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Schema for prompt template response.</p>
+<hr />
+<h3 id="scoringalgorithmresponse">ScoringAlgorithmResponse</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Schema for scoring algorithm response.</p>
+<hr />
+<h3 id="jsonlrecord">JSONLRecord</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Schema for validating individual JSONL records during ingestion.</p>
+<h4 id="methods_2">Methods</h4>
+<h5 id="validate_chunk_consistencycls-v-info-any">validate_chunk_consistency(cls, v, info: any)</h5>
+<p>Ensure chunk_id is less than total_chunks.</p>
+<hr />
+<h3 id="errorresponse">ErrorResponse</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Standard error response format.</p>
+<hr />
+<h3 id="validationerrorresponse">ValidationErrorResponse</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Detailed validation error for JSONL ingestion.</p>
+<hr />
+<h3 id="userrole">UserRole</h3>
+<p><em>Inherits from: str, Enum</em></p>
+<hr />
+<h3 id="usercreate">UserCreate</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Schema for creating a new user.</p>
+<h4 id="methods_3">Methods</h4>
+<h5 id="validate_usernamecls-v">validate_username(cls, v)</h5>
+<p>Validate username format.</p>
+<h5 id="validate_email_formatcls-v">validate_email_format(cls, v)</h5>
+<p>Validate email format using a more robust regex.</p>
+<hr />
+<h3 id="userlogin">UserLogin</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Schema for user login.</p>
+<hr />
+<h3 id="userresponse">UserResponse</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Schema for user information in responses.</p>
+<hr />
+<h3 id="userupdate">UserUpdate</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Schema for updating user information.</p>
+<h4 id="methods_4">Methods</h4>
+<h5 id="validate_emailcls-v">validate_email(cls, v)</h5>
+<p>Validate email format.</p>
+<hr />
+<h3 id="passwordchange">PasswordChange</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Schema for changing password.</p>
+<hr />
+<h3 id="tokenresponse">TokenResponse</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Schema for authentication token response.</p>
+<hr />
+<h3 id="tokenrefresh">TokenRefresh</h3>
+<p><em>Inherits from: BaseSchema</em></p>
+<p>Schema for token refresh request.</p>
+<hr />
+<h3 id="welljustification">WellJustification</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Individual well justification with LLM reasoning.</p>
+<hr />
+<h3 id="hierarchicalranking">HierarchicalRanking</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Hierarchical ranking of wells with relative weights.</p>
+<h4 id="methods_5">Methods</h4>
+<h5 id="validate_total_weightcls-v">validate_total_weight(cls, v)</h5>
+<hr />
+<h3 id="calculatedmetrics">CalculatedMetrics</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Calculated narrative metrics.</p>
+<hr />
+<h3 id="narrativeposition">NarrativePosition</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>2D narrative position coordinates.</p>
+<hr />
+<h3 id="completeprovenance">CompleteProvenance</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Complete provenance and audit trail.</p>
+<hr />
+<h3 id="experimentcreate">ExperimentCreate</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Schema for creating a new experiment.</p>
+<hr />
+<h3 id="experimentupdate">ExperimentUpdate</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Schema for updating an experiment.</p>
+<hr />
+<h3 id="experimentresponse">ExperimentResponse</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Schema for experiment responses.</p>
+<hr />
+<h3 id="runcreate">RunCreate</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Schema for creating a new analysis run.</p>
+<hr />
+<h3 id="runresponse">RunResponse</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Schema for run responses with hierarchical results.</p>
+<hr />
+<h3 id="singletextanalysisrequest">SingleTextAnalysisRequest</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Enhanced request schema for single text analysis.</p>
+<hr />
+<h3 id="singletextanalysisresponse">SingleTextAnalysisResponse</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Enhanced response schema for single text analysis.</p>
+<hr />
+<h3 id="multimodelanalysisrequest">MultiModelAnalysisRequest</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Request schema for multi-model comparison analysis.</p>
+<hr />
+<h3 id="modelcomparisonresult">ModelComparisonResult</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Individual model result in multi-model comparison.</p>
+<hr />
+<h3 id="multimodelanalysisresponse">MultiModelAnalysisResponse</h3>
+<p><em>Inherits from: BaseModel</em></p>
+<p>Response schema for multi-model comparison analysis.</p>
+<hr />
+<h3 id="config">Config</h3>
+<hr />
+<h3 id="config_1">Config</h3>
+<hr />
+<h2 id="functions_1">Functions</h2>
+<h3 id="date_to_datetimecls-v_1">date_to_datetime(cls, v)</h3>
+<hr />
+<h3 id="validate_frameworkscls-v_1">validate_frameworks(cls, v)</h3>
+<p>Validate that frameworks are supported.</p>
+<hr />
+<h3 id="validate_chunk_consistencycls-v-info-any_1">validate_chunk_consistency(cls, v, info: any)</h3>
+<p>Ensure chunk_id is less than total_chunks.</p>
+<hr />
+<h3 id="validate_usernamecls-v_1">validate_username(cls, v)</h3>
+<p>Validate username format.</p>
+<hr />
+<h3 id="validate_email_formatcls-v_1">validate_email_format(cls, v)</h3>
+<p>Validate email format using a more robust regex.</p>
+<hr />
+<h3 id="validate_emailcls-v_1">validate_email(cls, v)</h3>
+<p>Validate email format.</p>
+<hr />
+<h3 id="validate_total_weightcls-v_1">validate_total_weight(cls, v)</h3>
+<hr />
+<p><em>Generated on 2025-06-21 11:54:02</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

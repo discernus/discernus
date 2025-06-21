@@ -233,6 +233,120 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    API Documentation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/api/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/api/analysis_service.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analysis Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/api/schemas.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schemas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../docs/CONTRIBUTING.md" class="md-nav__link">
         
@@ -340,6 +454,33 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-application-systems-src" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Application Systems (src/)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-scripts-tools-scriptsapplications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Scripts &amp; Tools (scripts/applications/)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-status-june-20-2025-major-architectural-breakthrough-validated-framework-integration-working-import-path-technical-debt-affects-enhanced-analysis-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Current Status (June 20, 2025):** Major architectural breakthrough validated. Framework integration working. Import path technical debt affects enhanced analysis components.
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#quality-assurance-systems" class="md-nav__link">
@@ -667,8 +808,114 @@
 
 
 <h1 id="existing-systems-inventory">Existing Systems Inventory</h1>
-<p><em>BEFORE BUILDING ANYTHING NEW, CHECK THIS LIST</em></p>
-<p><strong>🎯 Current Status (June 20, 2025):</strong> Major architectural breakthrough validated. Framework integration working. Import path technical debt affects enhanced analysis components.</p>
+<p>This document serves as a catalog of all production-ready systems in the Discernus project. Before starting any new development, consult this inventory to see if existing functionality can be enhanced or reused.</p>
+<hr />
+<h2 id="core-application-systems-src">Core Application Systems (<code>src/</code>)</h2>
+<p>These modules form the core of the Discernus application.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Module</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>academic/</code></td>
+<td style="text-align: left;">Contains tools for academic integration, such as data export and replication package builders.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>analysis/</code></td>
+<td style="text-align: left;">Core analysis components, including reliability and results processing.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>api/</code></td>
+<td style="text-align: left;">The main application API, including the analysis service and data schemas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>api_clients/</code></td>
+<td style="text-align: left;">Clients for interacting with external LLM APIs (OpenAI, Anthropic, etc.).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>coordinate_engine.py</code></td>
+<td style="text-align: left;">The mathematical engine for calculating narrative positions from analysis scores.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>corpus/</code></td>
+<td style="text-align: left;">Tools for managing and processing text corpora, including discovery and ingestion.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>framework_manager.py</code></td>
+<td style="text-align: left;">Manages the loading, validation, and application of analytical frameworks.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>models/</code></td>
+<td style="text-align: left;">Defines the database models and schemas for all persistent data.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>prompts/</code></td>
+<td style="text-align: left;">Manages the generation and versioning of prompt templates for LLMs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>utils/</code></td>
+<td style="text-align: left;">A collection of shared, production-ready utility functions.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>visualization/</code></td>
+<td style="text-align: left;">The engine for generating all plots and visualizations for reports.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="production-scripts-tools-scriptsapplications">Production Scripts &amp; Tools (<code>scripts/applications/</code>)</h2>
+<p>These are production-ready scripts that perform key operational or administrative tasks.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Script</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>comprehensive_experiment_orchestrator.py</code></td>
+<td style="text-align: left;"><strong>Primary entry point for research.</strong> The main script for defining and running complex experiments.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>execute_experiment_definition.py</code></td>
+<td style="text-align: left;">A focused script for running a pre-defined experiment file. Used by the main orchestrator.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>check_existing_systems.py</code></td>
+<td style="text-align: left;"><strong>Mandatory check before development.</strong> A utility to search the codebase for existing functionality.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>validate_ai_assistant_compliance.py</code></td>
+<td style="text-align: left;">A tool to ensure that AI-driven development adheres to project rules.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>framework_sync.py</code></td>
+<td style="text-align: left;">Synchronizes framework definitions between the filesystem and the database.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>bloat_prevention_system.py</code></td>
+<td style="text-align: left;">A system to detect and report on code or asset bloat.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>enhanced_experiment_reports.py</code></td>
+<td style="text-align: left;">Generates detailed, multi-page HTML reports from experiment results.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>create_experiment_package.py</code></td>
+<td style="text-align: left;">Creates a self-contained, shareable package from an experiment's results.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>end_to_end_pipeline_test.py</code></td>
+<td style="text-align: left;">A script for running a full, end-to-end test of the entire analysis pipeline.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="current-status-june-20-2025-major-architectural-breakthrough-validated-framework-integration-working-import-path-technical-debt-affects-enhanced-analysis-components">🎯 Current Status (June 20, 2025):** Major architectural breakthrough validated. Framework integration working. Import path technical debt affects enhanced analysis components.</h2>
 <h2 id="quality-assurance-systems">🔍 Quality Assurance Systems</h2>
 <h3 id="llmqualityassurancesystem-srcnarrative_gravityutilsllm_quality_assurancepy">✅ LLMQualityAssuranceSystem (<code>src/narrative_gravity/utils/llm_quality_assurance.py</code>)</h3>
 <p><strong>What it does</strong>: 6-layer mathematical validation of LLM analysis results
