@@ -17,8 +17,11 @@ from typing import Dict, List, Optional, Union, Tuple
 from dataclasses import dataclass, asdict
 from urllib.parse import urljoin
 
-from sqlalchemy import text
-from src.narrative_gravity.models.base import engine
+from sqlalchemy import text, create_engine
+from src.narrative_gravity.utils.database import get_database_url
+
+# Create a scoped engine for the registry
+engine = create_engine(get_database_url())
 
 
 @dataclass

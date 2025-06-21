@@ -20,23 +20,16 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 import os
 from dotenv import load_dotenv
+from src.narrative_gravity.utils.database import get_database_url
 
 # Load environment variables
 load_dotenv()
 
-# Database URL - defaults to local PostgreSQL
-DATABASE_URL = os.getenv(
-    "DATABASE_URL", 
-    "postgresql://postgres:postgres@localhost:5432/narrative_gravity"
-)
+# Get the database URL from environment variables
+DATABASE_URL = get_database_url()
 
 # Create engine with connection pooling
-engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,
-    pool_recycle=300,
-    echo=os.getenv("SQL_DEBUG", "false").lower() == "true"
-)
+engine = create_engine(DATABASE_URL)
 
 # Session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

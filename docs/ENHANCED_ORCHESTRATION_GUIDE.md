@@ -1,9 +1,11 @@
 # Enhanced End-to-End Orchestration Guide
 
-**Status:** ✅ **IMPLEMENTED & TESTED**  
-**Date:** June 17, 2025  
-**Version:** 1.0.0  
+**Status:** ⚠️ **CORE ARCHITECTURE WORKING - IMPORT ISSUES REMAIN**  
+**Date:** June 20, 2025  
+**Version:** 1.1.0  
 **Production Pipeline:** `comprehensive_experiment_orchestrator.py` → Enhanced Analysis Pipeline → Academic Exports
+
+**🎯 CURRENT STATUS:** Framework integration and orchestrator infrastructure fully working. Import path technical debt prevents full enhanced analysis pipeline completion.
 
 ## 🎯 Overview
 
@@ -97,9 +99,13 @@ enhanced_results = self.execute_enhanced_analysis_pipeline(execution_summary, ex
 
 **Automatic Pipeline Steps:**
 
-#### **Step 1: Results Extraction**
+#### **Step 1: Results Extraction** ⚠️ *Import Issues*
 ```python
+# Current (failing due to import paths):
 from extract_experiment_results import ExperimentResultsExtractor
+
+# Required fix (when import paths are resolved):
+from scripts.extract_experiment_results import ExperimentResultsExtractor
 extractor = ExperimentResultsExtractor()
 structured_results = extractor.extract_results(execution_results)
 ```
@@ -107,9 +113,13 @@ structured_results = extractor.extract_results(execution_results)
 - Standardizes well scores and metadata
 - Handles multiple framework types (IDITI, MFT, Civic Virtue)
 
-#### **Step 2: Statistical Hypothesis Testing**
+#### **Step 2: Statistical Hypothesis Testing** ⚠️ *Import Issues*
 ```python
+# Current (failing due to import paths):
 from statistical_hypothesis_testing import StatisticalHypothesisTester
+
+# Required fix (when import paths are resolved):
+from scripts.statistical_hypothesis_testing import StatisticalHypothesisTester
 tester = StatisticalHypothesisTester()
 statistical_results = tester.test_hypotheses(structured_results)
 ```
@@ -118,9 +128,13 @@ statistical_results = tester.test_hypotheses(structured_results)
 - Tests H3: Ground Truth Alignment (scores match expected patterns)
 - Calculates descriptive statistics and effect sizes
 
-#### **Step 3: Reliability Analysis**
+#### **Step 3: Reliability Analysis** ⚠️ *Import Issues*
 ```python
+# Current (failing due to import paths):
 from interrater_reliability_analysis import InterraterReliabilityAnalyzer
+
+# Required fix (when import paths are resolved):
+from scripts.interrater_reliability_analysis import InterraterReliabilityAnalyzer
 reliability_analyzer = InterraterReliabilityAnalyzer()
 reliability_results = reliability_analyzer.analyze_reliability(structured_results)
 ```
@@ -128,9 +142,13 @@ reliability_results = reliability_analyzer.analyze_reliability(structured_result
 - Performs consistency analysis across replications
 - Handles single-rater descriptive analysis appropriately
 
-#### **Step 4: Comprehensive Visualizations**
+#### **Step 4: Comprehensive Visualizations** ⚠️ *Import Issues*
 ```python
+# Current (failing due to import paths):
 from generate_comprehensive_visualizations import VisualizationGenerator
+
+# Required fix (when import paths are resolved):
+from scripts.generate_comprehensive_visualizations import VisualizationGenerator
 visualizer = VisualizationGenerator(output_dir=str(viz_output_dir))
 visualization_results = visualizer.generate_visualizations(
     structured_results, statistical_results, reliability_results
@@ -169,34 +187,41 @@ academic_results = self._generate_academic_exports(
 
 ### **Phase 5: Output Organization & Documentation**
 ```python
-# Complete experiment directory structure creation
-experiment_dir = Path('experiments') / f"{experiment_name}_{timestamp}"
-output_dir = experiment_dir / 'enhanced_analysis'
+# Intelligent experiment output location detection
+if self._is_research_workspace_experiment(experiment_file):
+    # Research workspace experiments: results alongside experiment definition
+    output_dir = workspace_experiments_dir / f"{experiment_name}_{timestamp}" / 'enhanced_analysis'
+else:
+    # Standalone experiments: results in main experiments directory
+    output_dir = Path('experiments') / f"{experiment_name}_{timestamp}" / 'enhanced_analysis'
+
+# Transaction tracking always in main experiments directory
+checkpoint_dir = Path('experiments') / f"{experiment_transaction_id}"
 ```
 
-**Generated Structure:**
+**Generated Structure (Research Workspace Experiments):**
 ```
-experiments/[ExperimentName_YYYYMMDD_HHMMSS]/
-├── enhanced_analysis/
-│   ├── README.md                          # Executive summary
-│   ├── pipeline_results.json              # Complete pipeline results
-│   ├── structured_results.json            # Extracted experiment data
-│   ├── statistical_results.json           # H1/H2/H3 testing results
-│   ├── reliability_results.json           # Inter-rater reliability
-│   ├── enhanced_analysis_report.html      # Interactive report
-│   ├── visualizations/
-│   │   ├── interactive_dashboard.html     # 4.5MB dashboard
-│   │   ├── descriptive_analysis.png       # Statistical plots
-│   │   ├── hypothesis_testing_results.png # H1/H2/H3 outcomes
-│   │   ├── reliability_analysis.png       # Reliability metrics
-│   │   ├── correlation_matrix.png         # Well correlations
-│   │   ├── score_distributions.png        # Distribution plots
-│   │   ├── narrative_gravity_map.png      # 2D positioning
-│   │   └── well_scores_radar.png          # Radar charts
-│   └── academic_exports/
-│       ├── analysis_data.csv              # Statistical software ready
-│       └── academic_report.json           # Complete metadata
-└── [experiment definition files, corpus, etc.]
+research_workspaces/[workspace_name]/experiments/
+├── [experiment_definition].yaml           # Original experiment definition
+├── [ExperimentName_YYYYMMDD_HHMMSS]/     # Results alongside definition
+│   └── enhanced_analysis/
+│       ├── README.md                      # Executive summary
+│       ├── pipeline_results.json          # Complete pipeline results
+│       ├── structured_results.json        # Extracted experiment data
+│       ├── statistical_results.json       # H1/H2/H3 testing results
+│       ├── reliability_results.json       # Inter-rater reliability
+│       ├── enhanced_analysis_report.html  # Interactive report
+│       ├── visualizations/               # (Generated when pipeline completes)
+│       │   ├── interactive_dashboard.html
+│       │   ├── descriptive_analysis.png
+│       │   └── [additional visualization files]
+│       └── academic_exports/             # (Generated when pipeline completes)
+│           ├── analysis_data.csv
+│           └── academic_report.json
+
+experiments/                              # Transaction tracking (separate)
+├── [ExperimentTransactionID]/
+│   └── checkpoint.json                   # Transaction state management
 ```
 
 ## 🔧 Configuration & Control
@@ -239,20 +264,62 @@ In experiment JSON definitions:
 
 ### **Orchestrator Command Line Interface**
 ```bash
-# Full end-to-end orchestration
-python3 scripts/comprehensive_experiment_orchestrator.py experiment.json --force-reregister
+# Full end-to-end orchestration (with required PYTHONPATH)
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.yaml --force-reregister
 
 # Dry run (validation only)
-python3 scripts/comprehensive_experiment_orchestrator.py experiment.json --dry-run
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.yaml --dry-run
 
 # Verbose output
-python3 scripts/comprehensive_experiment_orchestrator.py experiment.json --verbose
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.yaml --verbose
 ```
+
+## 🛠️ **Troubleshooting & Current Limitations**
+
+### **Import Path Issues**
+**Problem:** Import errors like `No module named 'src'` or `No module named 'scripts'`
+
+**Solution:**
+```bash
+# Required: Set PYTHONPATH to include src directory
+export PYTHONPATH=src
+# Or run with inline PYTHONPATH
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.yaml
+```
+
+### **Database Fallback Behavior**
+When database components are unavailable, the orchestrator gracefully degrades:
+- ✅ **Framework Integration:** Still works (loads from YAML)
+- ✅ **Experiment Execution:** Continues with file-based storage
+- ⚠️ **StatisticalLogger:** Disabled but experiment proceeds
+- ⚠️ **Enhanced Analysis:** May fail on import issues
+
+### **Enhanced Analysis Pipeline Status**
+**Current Status:** ⚠️ Import path technical debt prevents completion
+- ✅ **Core Orchestrator:** Working correctly
+- ✅ **Framework Integration:** YAML unified architecture working
+- ✅ **LLM Connections:** Real API connections operational
+- ❌ **Analysis Pipeline:** `PromptTemplateManager` import issues
+- ❌ **Enhanced Analysis:** `extract_experiment_results` import issues
+
+### **Graceful Degradation**
+The orchestrator implements fallback behavior:
+```
+INFO: ✅ Analysis service import successful
+❌ Analysis failed: PromptTemplateManager is required for proper analysis but could not be imported: No module named 'src'
+ERROR: ❌ Enhanced analysis pipeline failed: No module named 'scripts'
+```
+
+Results: Framework validation succeeds, basic experiment structure created, but full analysis requires import fixes.
 
 ### **Demo Production Pipeline**
 ```bash
-# Demonstrate complete workflow with mock data
-python3 scripts/demo_enhanced_orchestration.py
+# Demonstrate architectural validation (current working functionality)
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py \
+    research_workspaces/june_2025_research_dev_workspace/experiments/mft_architecture_validation_test.yaml
+
+# Note: Enhanced analysis demo requires import path fixes
+# python3 scripts/demo_enhanced_orchestration.py  # Currently blocked by import issues
 ```
 
 ## 📊 Production Pipeline Outputs
@@ -306,37 +373,41 @@ The `analysis_data.csv` export is designed for immediate use in:
 - **Confidence Intervals:** Uncertainty quantification
 - **Reproducible Research:** Complete methodology and data documentation
 
-## ✅ Production System Verification
+## ⚠️ Production System Verification
 
-### **Successful Production Test Results**
+### **Actual Production Test Results (June 20, 2025)**
 ```
-🎉 ENHANCED ORCHESTRATION DEMO SUCCESSFUL
+🎯 ARCHITECTURAL BREAKTHROUGH VALIDATED
 ============================================================
 
-✅ The enhanced analysis pipeline is now fully integrated!
-✅ End-to-end orchestration capabilities demonstrated!
+✅ Framework integration and orchestrator infrastructure working!
+⚠️ Enhanced analysis pipeline blocked by import path issues
 
-📁 Experiment directory: experiments/Enhanced_Orchestration_Demo_20250617_102843
-📁 Enhanced analysis outputs: experiments/Enhanced_Orchestration_Demo_20250617_102843/enhanced_analysis
+📁 Experiment directory: research_workspaces/june_2025_research_dev_workspace/experiments/
+📁 Enhanced analysis outputs: MFT_Architecture_Validation_Test_20250620_173007/enhanced_analysis/
+📁 Transaction tracking: experiments/MFT_Architecture_Validation_Test_v1.0.0_20250620_173002/
 
 📊 Analysis Summary:
-   • Total Analyses: 4
-   • Statistical Tests: 0 (H1/H2/H3 testing complete)
-   • Hypotheses Supported: 0/3 (insufficient data for significance)
-   • Reliability Metrics: ✅ Calculated
-   • Visualizations: 8 types generated
-   • HTML Report: ✅ Interactive report created
-   • Academic Exports: ✅ CSV and metadata generated
+   • Total Analyses: 4 (framework architecture validated)
+   • Total Cost: $0.000 (import issues prevented real LLM calls)
+   • LLM Connections: ✅ OpenAI, Anthropic, Google AI operational
+   • Framework Loading: ✅ 12 wells loaded from MFT database
+   • Corpus Processing: ✅ 67,783 characters processed successfully
+   • Enhanced Pipeline: ❌ Import path issues prevent completion
 ```
 
-### **Production Components Verified**
-- ✅ **ExperimentOrchestrator** - Master workflow coordination
-- ✅ **ExperimentResultsExtractor** - Data structuring and standardization
-- ✅ **StatisticalHypothesisTester** - H1/H2/H3 testing with effect sizes
-- ✅ **InterraterReliabilityAnalyzer** - Consistency and agreement analysis
-- ✅ **VisualizationGenerator** - 8-type comprehensive visualization suite
-- ✅ **Academic Export System** - CSV/JSON export with metadata
-- ✅ **HTML Report Generator** - Interactive analysis reporting
+### **Production Components Status**
+- ✅ **ExperimentOrchestrator** - Master workflow coordination WORKING
+- ✅ **Framework Integration** - YAML unified architecture WORKING  
+- ✅ **LLM Connections** - Real API connections operational
+- ✅ **Asset Management** - Content-addressable storage WORKING
+- ✅ **Transaction Management** - Checkpoint system WORKING
+- ⚠️ **ExperimentResultsExtractor** - Import path issues prevent loading
+- ⚠️ **StatisticalHypothesisTester** - Import path issues prevent loading
+- ⚠️ **InterraterReliabilityAnalyzer** - Import path issues prevent loading
+- ⚠️ **VisualizationGenerator** - Import path issues prevent loading
+- ⚠️ **Academic Export System** - Import path issues prevent completion
+- ⚠️ **HTML Report Generator** - Import path issues prevent completion
 
 ## 🎯 Key Production Features
 
@@ -360,12 +431,15 @@ The `analysis_data.csv` export is designed for immediate use in:
 
 ## 🚀 Usage Examples
 
-### **Basic Production Experiment**
+### **Basic Production Experiment** 
 ```bash
-# Execute complete workflow
-python3 scripts/comprehensive_experiment_orchestrator.py \
-    experiments/my_research_study.json \
+# Execute complete workflow (with required PYTHONPATH)
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py \
+    research_workspaces/my_workspace/experiments/my_research_study.yaml \
     --force-reregister
+
+# Note: Currently validates framework architecture but enhanced analysis 
+# requires import path fixes to complete
 ```
 
 ### **Academic Research Study**
@@ -416,13 +490,21 @@ python3 scripts/comprehensive_experiment_orchestrator.py \
 
 ## 📝 Summary
 
-The **Enhanced End-to-End Orchestration** system transforms the narrative gravity analysis platform into a complete academic research environment. The production pipeline automatically orchestrates:
+The **Enhanced End-to-End Orchestration** system has achieved a major architectural breakthrough in framework integration while maintaining compatibility with the complete academic research pipeline design. 
 
-1. **Real LLM API Execution** with cost controls and quality monitoring
-2. **Comprehensive Statistical Analysis** with hypothesis testing and effect sizes  
-3. **Inter-Rater Reliability Assessment** for multi-model studies
-4. **Publication-Quality Visualizations** with 8 different analysis types
-5. **Academic Export Generation** ready for statistical software and publication
-6. **Interactive Report Creation** for analysis communication and sharing
+### **✅ Current Working Components:**
+1. **Framework-Aware Architecture** - YAML unified system eliminates configuration mismatches
+2. **Real LLM API Connections** - OpenAI, Anthropic, Google AI operational  
+3. **Intelligent Output Routing** - Research workspace experiments get co-located results
+4. **Transaction Management** - Robust checkpointing and state management
+5. **Asset Management** - Content-addressable storage with integrity verification
+6. **Database Graceful Degradation** - System works with or without database
 
-**The system provides true end-to-end orchestration from experiment definition to publication-ready academic research outputs.** 
+### **⚠️ Pending Import Path Fixes:**
+1. **Enhanced Statistical Analysis** - Blocked by `scripts.` import path issues
+2. **Inter-Rater Reliability Assessment** - Import path technical debt
+3. **Publication-Quality Visualizations** - Import path technical debt  
+4. **Academic Export Generation** - Import path technical debt
+5. **Interactive Report Creation** - Import path technical debt
+
+**The core orchestration infrastructure and framework integration is production-ready. The enhanced analysis pipeline awaits import path cleanup to achieve full end-to-end capability.** 

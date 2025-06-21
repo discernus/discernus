@@ -1,0 +1,30 @@
+# Docker ignore patterns
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+venv/
+.env
+
+# Project specific
+logs/
+api_costs.json
+cost_limits.json
+narrative_gravity_stats.db
+experiments/
+tmp/
+asset_storage/
+deprecated/
+research_workspaces/
+
+# IDE
+.vscode/
+.idea/ 

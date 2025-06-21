@@ -1,4 +1,4 @@
-# Narrative Gravity Wells - Backend Services Launch Guide
+# Discernus - Backend Services Launch Guide
 
 ## Quick Start
 
@@ -62,16 +62,45 @@ python launch.py --setup-db
 # 1. Launch backend services
 python launch.py
 
-# 2. Use CLI tools for research
-python scripts/framework_sync.py status
-python scripts/intelligent_ingest.py /path/to/corpus/
-python scripts/export_academic_data.py --study-name my_research
+# 2. Use CLI tools for research (requires PYTHONPATH)
+PYTHONPATH=src python scripts/framework_sync.py status
+PYTHONPATH=src python scripts/intelligent_ingest.py /path/to/corpus/
+PYTHONPATH=src python scripts/export_academic_data.py --study-name my_research
 
-# 3. Access API documentation
+# 3. Production experiment execution (validated workflow)
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py \
+    research_workspaces/my_workspace/experiments/my_study.yaml --force-reregister
+
+# 4. Access API documentation
 # Open http://localhost:8000/api/docs
 ```
 
 ## Troubleshooting
+
+### Import Path Issues (Common)
+**Problem:** `No module named 'src'` or `No module named 'scripts'` errors
+
+**Solution:**
+```bash
+# Set PYTHONPATH for all operations
+export PYTHONPATH=src
+# Or use inline for specific commands
+PYTHONPATH=src python scripts/some_script.py
+```
+
+**Background:** Import path technical debt affects multiple CLI tools and orchestrator components.
+
+### Production Experiment Execution
+**Validated Working Command:**
+```bash
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py \
+    research_workspaces/your_workspace/experiments/experiment.yaml --force-reregister
+```
+
+**Current Status:**
+- ✅ Framework integration and orchestrator infrastructure working
+- ✅ YAML unified architecture eliminates configuration mismatches  
+- ⚠️ Enhanced analysis pipeline blocked by import path issues
 
 ### Port Already in Use
 ```bash
@@ -126,33 +155,27 @@ curl http://localhost:8000/health  # Check API status
 - React frontend → `archive/deprecated_interfaces/react_frontend/`  
 - Chainlit chat → `archive/deprecated_interfaces/chainlit_interface/`
 
-**Focus**: Core research pipeline completion before interface development. 
+**Focus**: Core research pipeline completion before interface development.
 
-# Fix the narrative gravity reference
-sed -i 's/Narrative Gravity Analysis/Discernus Framework Analysis/g' docs/product_management/20250617_enhanced_analysis_pipeline_specification.md 
+## Production Research Workflow Status
 
-cp docs/product_management/DAILY_TODO_2025_06_18.md docs/product_management/DAILY_TODO_2025_06_19.md
-# Update date and reset task completion status 
+### ✅ Validated Working Components (June 20, 2025)
+- **Framework Integration:** YAML unified architecture eliminates configuration mismatches
+- **Experiment Orchestrator:** Core infrastructure and transaction management working
+- **LLM Connections:** OpenAI, Anthropic, Google AI operational
+- **Asset Management:** Content-addressable storage with integrity verification
+- **Intelligent Output Routing:** Research workspace experiments co-located with results
 
-mv docs/product_management/software_platform_restructuring_plan_option4.md docs/product_management/strategy/archived/ 
+### ⚠️ Pending Technical Debt
+- **Enhanced Analysis Pipeline:** Import path issues prevent completion
+- **CLI Tools:** Most require `PYTHONPATH=src` for proper operation
+- **Statistical Analysis:** Blocked by `scripts.` import path technical debt
 
-mkdir -p docs/product_management/strategy/archived/daily_todos/
-mv docs/product_management/*TODO*2025_06_17*.md docs/product_management/strategy/archived/daily_todos/
-mv docs/product_management/*todo*2025_06_17*.md docs/product_management/strategy/archived/daily_todos/ 
+### 🎯 Recommended Production Usage
+```bash
+# Current validated workflow for experiment execution
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py \
+    research_workspaces/your_workspace/experiments/your_study.yaml --force-reregister
+```
 
-docs/product_management/
-├── README.md                                    ← Updated ✅
-├── CURRENT_ITERATION_DISCERNUS_MVP.md          ← Keep ✅
-├── DAILY_TODO_2025_06_19.md                    ← Create new
-├── BACKLOG.md                                   ← Update terminology
-├── discernus_mvp_user_journeys.md              ← Keep ✅
-├── mvp_single_framework_plan.md                ← Keep ✅
-├── TECHNICAL_ARCHITECTURE_PLAN.md              ← Create (consolidate from specs)
-│
-├── strategy/
-│   ├── archived/
-│   │   ├── daily_todos/                        ← Archive old TODOs
-│   │   └── software_platform_restructuring_plan_option4.md ← Archive
-│   └── [current strategy docs]
-├── futures/                                     ← Keep existing
-└── visualization_references/                   ← Keep existing 
+This validates framework architecture and orchestrator infrastructure while providing graceful degradation when enhanced analysis components have import issues. 

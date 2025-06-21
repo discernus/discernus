@@ -109,7 +109,33 @@
 
 **Success Criteria**: QA scores >11/13, real evidence quotes, meaningful coordinate positions
 
-**🧠 PROJECT STATUS**: Infrastructure ✅ Working → Analysis Quality ⚠️ Improving → **MAJOR ARCHITECTURAL BREAKTHROUGH ACHIEVED**
+**🧠 PROJECT STATUS**: Infrastructure ✅ Working → Analysis Quality ⚠️ Improving → **MAJOR ARCHITECTURAL BREAKTHROUGH ACHIEVED** → **DEAD CODE DISCOVERED**
+
+---
+
+## **🔍 MAJOR DISCOVERY: Systematic Dead Code Audit Complete**
+
+### **✅ DEAD CODE AUDIT RESULTS (June 20, 2025 Evening)**
+
+**Shocking Discovery**: Only **42.4%** of src/ modules are actually used (25/59). The architectural breakthrough revealed **massive dead code**.
+
+**📊 Audit Statistics:**
+- **Total src/ modules**: 59
+- **Actually used**: 25 (42.4%) 
+- **Dead code**: 38 (57.6%)
+- **Production-critical**: 17 (28.8%)
+
+**🗑️ Major Dead Code Categories:**
+- **Entire CLI system**: 15 modules, **0% usage** (replaced by orchestrator)
+- **Abandoned web interface**: 4/7 API modules unused  
+- **Development tools**: 6 modules replaced by production systems
+- **Task/queue system**: 3 modules not needed for academic workflow
+- **Utility modules**: 6 modules with consolidated functionality
+- **Specialized corpus tools**: 4 modules not needed for MFT validation
+
+**🎯 Cleanup Opportunity**: **57% code reduction** while maintaining all production functionality
+
+**📄 Full Report**: `docs/DEAD_CODE_AUDIT_JUNE_2025.md`
 
 ---
 
@@ -196,3 +222,41 @@
 **⏰ ESTIMATED TIME**: 4-6 hours to fix core issues and achieve genuine production readiness
 
 **🔍 VERIFICATION METHOD**: Re-run MFT validation study and confirm >90% QA score + meaningful analysis results 
+
+---
+
+## **🚀 TOMORROW'S PRIORITIES (Friday, June 21, 2025)**
+*Post Import Path Fixes - Enhanced Analysis Pipeline Validation*
+
+### **1. Enhanced Analysis Pipeline Full Validation** ⏰ **HIGH PRIORITY**
+**Status**: 🎯 **READY FOR COMPREHENSIVE TESTING** (Post import path fixes)
+
+**Tomorrow's Actions**:
+- [ ] **Run Full Enhanced Analysis Test**: Execute complete pipeline with MFT framework
+- [ ] **Verify Statistical Analysis Components**: Confirm H1/H2/H3 testing works  
+- [ ] **Test All 8 Visualization Types**: Ensure comprehensive visualization generation
+- [ ] **Validate Academic Export Pipeline**: Confirm CSV, JSON, academic report generation
+- [ ] **Test Multi-LLM Integration**: Verify cross-LLM reliability analysis functions
+- [ ] **Large Scale Testing**: Process 50+ texts to validate performance
+
+### **2. Academic Validation Study Design** ⏰ **HIGH PRIORITY**
+**Status**: 🎯 **INFRASTRUCTURE READY FOR ACADEMIC WORK**
+
+**Tomorrow's Deliverables**:
+- [ ] **MFQ-30 Correlation Study Design**: Complete n=500 participant validation protocol
+- [ ] **Expert Consultation Package**: Professional demonstration materials for Haidt lab  
+- [ ] **Statistical Validation Protocol**: Target correlations (r>0.8) and methodology
+- [ ] **Multi-LLM Reliability Framework**: Cross-provider validation study design
+- [ ] **Publication Timeline**: Academic paper framework and venue identification
+
+### **3. Expert Consultation Initiation** ⏰ **READY TO LAUNCH**
+**Status**: 🎯 **DEMONSTRATION READY** (With working enhanced analysis)
+
+**Tomorrow's Outreach**:
+- [ ] **Haidt Lab Contact**: Professional consultation request with working demo
+- [ ] **Academic Collaboration Proposal**: Co-authorship framework for validation
+- [ ] **Technical Documentation**: Complete methodology for expert review
+- [ ] **Demonstration Results**: Generate compelling analysis examples
+- [ ] **Research Community Outreach**: Identify additional expert contacts
+
+**🎯 TOMORROW'S SUCCESS CRITERIA**: Enhanced analysis validated + Academic study designed + Expert consultation initiated 

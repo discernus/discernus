@@ -428,6 +428,23 @@ class FrameworkTransactionManager:
             if not version:
                 version = framework_data.get('version', 'v1.0.0')
             
+            # Check if framework version already exists
+            existing_framework = session.query(FrameworkVersion).filter_by(
+                framework_name=framework_name,
+                version=version
+            ).first()
+            
+            if existing_framework:
+                # Framework already exists - return existing info
+                logger.info(f"✅ Framework already exists in database: {framework_name}:{version}")
+                content_hash = self._calculate_framework_hash({'dipoles': dipoles_data}, framework_data)
+                return {
+                    'success': True,
+                    'version': version,
+                    'content_hash': content_hash,
+                    'already_existed': True
+                }
+            
             # Create framework version record
             framework_record = FrameworkVersion(
                 framework_name=framework_name,
@@ -445,10 +462,12 @@ class FrameworkTransactionManager:
             # Calculate content hash
             content_hash = self._calculate_framework_hash({'dipoles': dipoles_data}, framework_data)
             
+            logger.info(f"✅ New framework imported to database: {framework_name}:{version}")
             return {
                 'success': True,
                 'version': version,
-                'content_hash': content_hash
+                'content_hash': content_hash,
+                'already_existed': False
             }
             
         except Exception as e:

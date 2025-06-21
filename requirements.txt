@@ -15,10 +15,11 @@ seaborn>=0.12.0
 
 # Database
 psycopg2-binary>=2.9.6
+alembic>=1.10.0
 
 # Web and reporting
 jinja2>=3.1.0
-webbrowser>=0.0.1
+PyYAML>=6.0
 
 # Utilities
 python-dotenv>=1.0.0
@@ -26,3 +27,9 @@ tqdm>=4.65.0
 pytest>=7.3.1
 black>=23.3.0
 flake8>=6.0.0
+
+# LLM APIs
+openai>=1.9.0
+anthropic>=0.21.3
+mistralai>=0.1.5
+google-generativeai>=0.5.2

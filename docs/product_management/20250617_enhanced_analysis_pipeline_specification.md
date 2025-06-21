@@ -1,22 +1,23 @@
 # Enhanced Analysis Pipeline with Interrater Reliability Specification
-*Created: June 17, 2025*
-*Status: PLANNING - Implementation Required*
+*Created: June 17, 2025*  
+*Updated: June 20, 2025*  
+*Status: ✅ SUPERSEDED - Functionality integrated into the [Production Pipeline Upgrade Proposal](./production_pipeline_upgrade_proposal.md)*
 
 ## 🎯 **Executive Summary**
 
-Following the successful execution of our comprehensive experiment orchestrator with real GPT-4o API calls (8/8 analyses successful, $0.088 total cost), we need to enhance the analysis pipeline to include full statistical hypothesis testing, comprehensive visualizations, and interrater reliability metrics for multi-LLM experiments.
+The vision outlined in this specification has been formalized and integrated into a broader strategic initiative. The implementation details and next steps are now captured in the **[Production Pipeline Upgrade Proposal](./production_pipeline_upgrade_proposal.md)**. This document is preserved for historical context.
 
-**Current Status**: Raw execution data collected ✅ → **Next**: Statistical analysis and publication-ready reporting ⏳
+The core requirements for data extraction, statistical analysis, visualization, and reporting are all addressed by the new proposal, which outlines the integration of existing supporting modules into the main production orchestrator.
 
-## 📊 **Core Problem Statement**
+## 📊 **Core Problem Statement - UPDATED**
 
-Our successful IDITI validation study execution generated raw data but shows "📊 Under Analysis" for all success criteria:
-- Statistical separation testing (p < 0.05)
-- Ideological agnosticism validation  
-- Ground truth alignment measurement
-- Multi-LLM reliability assessment
+Our architectural breakthrough achieved unified framework integration, but enhanced analysis pipeline is blocked by import path technical debt:
+- Enhanced analysis components exist but cannot be imported (`No module named 'scripts'`)
+- Statistical testing scripts implemented but blocked by import issues
+- Visualization and reporting components integrated but cannot load
+- Multi-LLM reliability assessment ready but import path prevents execution
 
-**Goal**: Transform raw execution results into complete academic research deliverable with interrater reliability analysis.
+**Goal**: Fix import path issues (2 hours) to enable complete academic research pipeline with interrater reliability analysis.
 
 ## 🏗️ **Enhanced Analysis Pipeline Architecture**
 
@@ -188,16 +189,19 @@ human_rater_study:
 
 **Deliverable**: Complete experimental design for multi-modal validation
 
-## 🛠️ **Implementation Plan**
+## 🛠️ **Implementation Plan - UPDATED**
 
-### **Scripts to Develop**:
-1. **`extract_experiment_results.py`** - Database query and data extraction
-2. **`statistical_hypothesis_testing.py`** - Complete statistical analysis
-3. **`interrater_reliability_analysis.py`** - Multi-LLM reliability metrics
-4. **`generate_comprehensive_visualizations.py`** - All visualization generation
-5. **`enhanced_html_report_generator.py`** - Publication-ready report
-6. **`multi_llm_experiment_orchestrator.py`** - Enhanced orchestrator
-7. **`human_rater_study_designer.py`** - Human study integration
+### **⚡ IMMEDIATE (Next 2 Hours) - Import Path Fixes**:
+1. **✅ `extract_experiment_results.py`** - EXISTS, fix import: `from scripts.extract_experiment_results import`
+2. **✅ `statistical_hypothesis_testing.py`** - EXISTS, fix import: `from scripts.statistical_hypothesis_testing import`
+3. **✅ `interrater_reliability_analysis.py`** - EXISTS, fix import: `from scripts.interrater_reliability_analysis import`
+4. **✅ `generate_comprehensive_visualizations.py`** - EXISTS, fix import: `from scripts.generate_comprehensive_visualizations import`
+5. **✅ Enhanced orchestrator integration** - EXISTS, fix import paths in `comprehensive_experiment_orchestrator.py`
+
+### **🎯 TESTING (Next 30 Minutes After Fixes)**:
+- Test enhanced analysis pipeline with working MFT framework
+- Validate statistical analysis component loading
+- Verify visualization generation works with architectural breakthrough
 
 ### **Database Schema Extensions**:
 ```sql
@@ -287,34 +291,37 @@ python3 scripts/human_rater_study_designer.py iditi_human_validation.yaml
 - **Training protocols** for human rater studies  
 - **Quality thresholds** for automated analysis acceptance
 
-## 🚨 **Implementation Priority**
+## 🚨 **Implementation Priority - UPDATED**
 
-**HIGH PRIORITY** - This enhancement transforms our successful orchestrator execution into complete academic research deliverable with:
-- Statistical validation of research hypotheses
-- Publication-ready visualizations and reporting
-- Interrater reliability for methodological rigor
-- Framework for expanded multi-modal studies
+**CRITICAL PRIORITY** ⚡ - Import path fixes required to unlock existing enhanced analysis pipeline:
+- All enhanced analysis components are implemented and integrated
+- Import path technical debt blocks execution (`No module named 'scripts'`)
+- Architectural breakthrough provides strong foundation for immediate completion
+- 2-hour fix enables complete academic research pipeline
 
-**Timeline**: Implementation target for tomorrow (June 18, 2025) to capitalize on successful orchestrator execution momentum.
+**Timeline**: **Next 2 Hours** (June 20, 2025 evening) - Fix import paths to enable full enhanced analysis validation.
 
-## 📚 **Dependencies**
+## 📚 **Dependencies - UPDATED**
 
 ### **Technical**:
-- ✅ PostgreSQL database with experiment results
-- ✅ Python statistical libraries (scipy, statsmodels)
-- ✅ Visualization system (plotly, centralized engine)
-- ✅ HTML report generation framework
+- ✅ **Unified YAML Framework Architecture**: Architectural breakthrough achieved
+- ✅ **Enhanced Analysis Components**: All scripts implemented and integrated  
+- ⚠️ **Import Path Resolution**: PYTHONPATH fixes required (2 hours)
+- ✅ **Statistical Libraries**: Available and ready (scipy, statsmodels)
+- ✅ **Visualization System**: Plotly centralized engine operational
+- ✅ **Database Infrastructure**: PostgreSQL with graceful degradation working
 
 ### **Research**:
-- ✅ Successful IDITI validation study execution (8/8 analyses)
-- ✅ Raw GPT-4o response data in database
-- ✅ Framework scoring methodology established
-- ⏳ Statistical analysis methodology implementation
+- ✅ **Framework Integration**: MFT framework successfully loading (12 wells)
+- ✅ **Multi-LLM Connections**: OpenAI, Anthropic, Google AI operational
+- ✅ **Orchestrator Infrastructure**: Production transaction management working
+- ⚠️ **Statistical Analysis**: Ready after import path fixes
+- ⚠️ **Enhanced Pipeline**: Ready after import path fixes
 
 ### **Academic**:
-- ⏳ Interrater reliability calculation methods
-- ⏳ Human rater study design protocols
-- ⏳ Publication standards compliance verification
-- ⏳ Institutional review process integration
+- ✅ **Infrastructure Foundation**: Ready for academic validation studies
+- ⚠️ **Statistical Validation**: Ready after import path fixes (tonight)
+- 🎯 **Expert Consultation**: Ready for immediate outreach (tomorrow)
+- 🎯 **Publication Pipeline**: Ready after enhanced analysis validation (tomorrow)
 
-**Status**: All critical dependencies met, ready for immediate implementation. 
+**Status**: **NEXT 2 HOURS**: Fix import paths → **TOMORROW**: Full academic validation pipeline operational 

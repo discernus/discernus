@@ -10,18 +10,12 @@ from datetime import datetime
 from typing import Dict, Any, Tuple, List, Optional
 from pathlib import Path
 
-# Import existing working components
-try:
-    from ..api_clients.direct_api_client import DirectAPIClient
-    from ..prompts.template_manager import PromptTemplateManager
-    from ..framework_manager import FrameworkManager
-    from ..engine_circular import NarrativeGravityWellsCircular
-except ImportError:
-    # Fallback to absolute imports for direct execution
-    from src.narrative_gravity.api_clients.direct_api_client import DirectAPIClient
-    from src.narrative_gravity.prompts.template_manager import PromptTemplateManager
-    from src.narrative_gravity.framework_manager import FrameworkManager
-    from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
+# Use a single, consistent import path
+from ..api_clients.direct_api_client import DirectAPIClient
+from ..prompts.template_manager import PromptTemplateManager
+from ..framework_manager import FrameworkManager
+from ..engine_circular import NarrativeGravityWellsCircular
+from ..utils.database import get_database_url
 
 class RealAnalysisService:
     """
@@ -278,7 +272,6 @@ class RealAnalysisService:
             from sqlalchemy import create_engine
             from sqlalchemy.orm import sessionmaker
             from ..models.component_models import FrameworkVersion
-            from ..utils.database import get_database_url
             
             engine = create_engine(get_database_url())
             Session = sessionmaker(bind=engine)

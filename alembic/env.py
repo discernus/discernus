@@ -1,9 +1,30 @@
 from logging.config import fileConfig
+import sys
+import os
+from pathlib import Path
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+
+# Add the project src directory to Python path
+current_dir = Path(__file__).resolve().parent.parent
+src_dir = current_dir / "src"
+sys.path.insert(0, str(src_dir))
+
+# Import project models and database utilities
+from narrative_gravity.models.base import Base
+from narrative_gravity.utils.database import get_database_url
+
+# Import all models so Alembic can detect them for autogenerate
+from narrative_gravity.models.models import (
+    User, Corpus, Document, Chunk, Job, Task, Experiment, Run
+)
+from narrative_gravity.models.component_models import (
+    PromptTemplate, FrameworkVersion, WeightingMethodology, 
+    ComponentCompatibility, DevelopmentSession
+)
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -16,16 +37,6 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-import sys
-import os
-
-# Add project root to path to import our models
-project_root = os.path.join(os.path.dirname(__file__), '..')
-sys.path.append(project_root)
-
-from src.narrative_gravity.models.base import Base
-from src.narrative_gravity.models.models import *  # Import all models for autogenerate
-
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -46,7 +57,8 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url")
+    # Use the project's database URL configuration
+    url = get_database_url()
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -65,8 +77,12 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+    # Override the sqlalchemy.url in the configuration with our project's database URL
+    configuration = config.get_section(config.config_ini_section, {})
+    configuration['sqlalchemy.url'] = get_database_url()
+    
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section, {}),
+        configuration,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )

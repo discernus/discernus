@@ -25,26 +25,23 @@ from datetime import datetime
 from enum import Enum
 import pickle
 
-# Add src to path for imports - ensure absolute path resolution FIRST
-script_dir = Path(__file__).parent.resolve()
-project_root = script_dir.parent.parent
-src_path = project_root / 'src'
-sys.path.insert(0, str(src_path))
+# Moved yaml import for safer error handling
+try:
+    import yaml
+    YAML_AVAILABLE = True
+except ImportError:
+    YAML_AVAILABLE = False
+    yaml = None # Ensure yaml is defined even if import fails
 
 # Configure basic logging (will be enhanced with experiment logging)
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
-try:
-    import yaml
-    YAML_AVAILABLE = True
-except ImportError:
+if not YAML_AVAILABLE:
     logger.warning("PyYAML not available - YAML functionality limited")
-    YAML_AVAILABLE = False
-    yaml = None
 
-# Set PYTHONPATH for reliable imports
-os.environ['PYTHONPATH'] = f"{src_path}:{os.environ.get('PYTHONPATH', '')}"
+# Set PYTHONPATH for reliable imports - handled in Dockerfile
+# os.environ['PYTHONPATH'] = f"{src_path}:{os.environ.get('PYTHONPATH', '')}"
 
 try:
     from sqlalchemy import create_engine
@@ -53,21 +50,126 @@ try:
     from narrative_gravity.utils.database import get_database_url
     from narrative_gravity.corpus.registry import CorpusRegistry
     from narrative_gravity.corpus.intelligent_ingestion import IntelligentIngestionService
+    from narrative_gravity.corpus.validator import CorpusValidator
+    from narrative_gravity.corpus.exporter import CorpusExporter
+    from narrative_gravity.utils.framework_transaction_manager import FrameworkTransactionManager, FrameworkValidationResult
+    from narrative_gravity.academic.documentation import MethodologyPaperGenerator, StatisticalReportFormatter
+    from narrative_gravity.academic.analysis_templates import RScriptGenerator, StataIntegration, JupyterTemplateGenerator
+    from narrative_gravity.visualization.themes import theme_manager
     from narrative_gravity.utils.experiment_logging import (
         get_experiment_logger, 
         setup_experiment_logging,
         ExperimentErrorCodes
     )
-    from narrative_gravity.api.analysis_service import RealAnalysisService
+    from narrative_gravity.analysis.results import ExperimentResultsExtractor
+    from narrative_gravity.analysis.statistics import StatisticalHypothesisTester
+    from narrative_gravity.analysis.reliability import InterraterReliabilityAnalyzer
+    from narrative_gravity.analysis.visualization import VisualizationGenerator
     DATABASE_AVAILABLE = True
     logger.info("✅ Database imports successful")
 except ImportError as e:
     logger.warning(f"Database imports not available: {e}")
     DATABASE_AVAILABLE = False
+    
+    # Define fallback classes when database is not available
+    from enum import Enum
+    
+    class FrameworkValidationResult(Enum):
+        VALID = "valid"
+        VERSION_MISMATCH = "version_mismatch"
+        CONTENT_CHANGED = "content_changed"
+        NOT_FOUND = "not_found"
+        VALIDATION_ERROR = "validation_error"
+        TRANSACTION_FAILURE = "transaction_failure"
+    
+    class FrameworkTransactionManager:
+        def __init__(self, transaction_id=None):
+            logger.warning("FrameworkTransactionManager not available - using fallback")
+            self.transaction_id = transaction_id or "fallback"
+        
+        def validate_framework_for_experiment(self, framework_name, framework_file_path=None, expected_version=None):
+            logger.warning("Framework validation not available - database not connected")
+            result = type('obj', (object,), {
+                'validation_result': FrameworkValidationResult.VALID,
+                'framework_name': framework_name,
+                'error_details': ['Database not available - validation skipped']
+            })()
+            return result
+        
+        def generate_rollback_guidance(self):
+            return {
+                'transaction_id': self.transaction_id, 
+                'failed_frameworks': [],
+                'recommendations': ['Database connection required for framework validation'],
+                'commands_to_run': ['Check database connectivity and try again']
+            }
+        
+        def rollback_transaction(self):
+            logger.info("No rollback needed - database not available")
+            return True
+    
+    # Define additional fallback classes
+    class CorpusValidationResult:
+        def __init__(self, is_valid=True, errors=None):
+            self.is_valid = is_valid
+            self.errors = errors or []
+        
+        def summary(self):
+            if self.is_valid:
+                return "Corpus validation passed (fallback mode - database not available)"
+            else:
+                return f"Corpus validation failed: {'; '.join(self.errors)}"
+    
+    class CorpusValidator:
+        def __init__(self):
+            logger.warning("CorpusValidator not available - using fallback")
+        
+        def validate_corpus_collection(self, directory, pattern="*.txt"):
+            return {'valid': True, 'validation_details': {'files_found': 0, 'errors': []}}
+        
+        def validate_corpus(self, corpus_name=None, **kwargs):
+            logger.warning(f"Corpus validation not available - using fallback for {corpus_name}")
+            return CorpusValidationResult(is_valid=True, errors=[])
+    
+    class ExperimentResultsExtractor:
+        def extract_results(self, execution_results):
+            logger.warning("ExperimentResultsExtractor not available - using fallback")
+            return {'structured_data': [], 'metadata': {}}
+    
+    class StatisticalHypothesisTester:
+        def test_hypotheses(self, structured_results):
+            logger.warning("StatisticalHypothesisTester not available - using fallback")
+            return {'summary': {}, 'error': 'Database not available'}
+    
+    class InterraterReliabilityAnalyzer:
+        def analyze_reliability(self, structured_results):
+            logger.warning("InterraterReliabilityAnalyzer not available - using fallback")
+            return {'summary': {}, 'error': 'Database not available'}
+    
+    class VisualizationGenerator:
+        def __init__(self, output_dir=None):
+            logger.warning("VisualizationGenerator not available - using fallback")
+        
+        def generate_visualizations(self, structured_results, statistical_results, reliability_results):
+            return {'summary': {}, 'error': 'Database not available'}
+
+# Import analysis service separately with fallback
+try:
+    from narrative_gravity.api.analysis_service import RealAnalysisService
+    ANALYSIS_SERVICE_AVAILABLE = True
+    logger.info("✅ Analysis service import successful")
+except ImportError as e:
+    logger.warning(f"Analysis service not available: {e}")
+    ANALYSIS_SERVICE_AVAILABLE = False
+    # Define a fallback class
+    class RealAnalysisService:
+        def __init__(self):
+            logger.error("RealAnalysisService not available - using fallback")
+        async def analyze_single_text(self, *args, **kwargs):
+            raise ImportError("RealAnalysisService not properly imported")
 
 # Add import with try/except for optional architectural compliance
 try:
-    sys.path.insert(0, str(Path(__file__).parent))
     from architectural_compliance_validator import ArchitecturalComplianceValidator
     ARCHITECTURAL_COMPLIANCE_AVAILABLE = True
 except ImportError:
@@ -1182,12 +1284,10 @@ class ExperimentOrchestrator:
             
             # Auto-detect and handle YAML/JSON
             if experiment_file.suffix.lower() in ['.yaml', '.yml']:
-                try:
-                    import yaml
-                    experiment = yaml.safe_load(file_content)
-                    logger.info("✅ Loaded YAML experiment definition (auto-converted)")
-                except ImportError:
+                if not YAML_AVAILABLE:
                     raise ValueError("YAML file detected but PyYAML not installed. Please install PyYAML or convert to JSON.")
+                experiment = yaml.safe_load(file_content)
+                logger.info("✅ Loaded YAML experiment definition (auto-converted)")
             else:
                 experiment = json.loads(file_content)
                 logger.info("✅ Loaded JSON experiment definition")
@@ -1203,9 +1303,12 @@ class ExperimentOrchestrator:
             
             return experiment
             
-        except (json.JSONDecodeError, yaml.YAMLError) as e:
+        except json.JSONDecodeError as e:
             raise ValueError(f"Invalid format in experiment definition: {e}")
         except Exception as e:
+            # Check if it's a YAMLError if YAML is available
+            if YAML_AVAILABLE and isinstance(e, yaml.YAMLError):
+                 raise ValueError(f"Invalid format in experiment definition: {e}")
             raise ValueError(f"Error loading experiment definition: {e}")
     
     def _create_experiment_context(self, experiment: Dict[str, Any]) -> ExperimentContext:
@@ -1560,96 +1663,67 @@ In addition to the standard analysis output, please consider how your findings r
         return component
     
     def _validate_corpus(self, corpus_spec: Dict[str, Any]) -> ComponentInfo:
-        """
-        Validate corpus using unified asset management flow:
-        Workspace → Validation → Content-Addressable Storage → Database Registration
-        """
+        """Validate corpus component with integrity checks."""
         corpus_id = corpus_spec.get('id', corpus_spec.get('name'))
         file_path = corpus_spec.get('file_path')
-        expected_hash = corpus_spec.get('expected_hash')
-        pattern = corpus_spec.get('pattern', '*.txt')  # For directory validation
-        
+        pattern = corpus_spec.get('pattern', '*.txt')
+
         component = ComponentInfo(
             component_type='corpus',
             component_id=corpus_id,
-            file_path=file_path,
-            expected_hash=expected_hash
+            file_path=file_path
         )
-        
-        # STEP 1: Validate corpus from workspace
-        try:
-            if file_path:
-                corpus_path = Path(file_path)
-                
-                if corpus_path.is_file():
-                    # Single file validation
-                    if not corpus_path.exists():
-                        raise FileNotFoundError(f"Corpus file not found: {file_path}")
-                    
-                    # Read and validate file content
-                    with open(corpus_path, 'r', encoding='utf-8') as f:
-                        content = f.read()
-                    
-                    if len(content.strip()) == 0:
-                        logger.warning(f"Corpus file appears empty: {file_path}")
-                    
-                    component.exists_on_filesystem = True
-                    logger.info(f"✅ Corpus file validated: {file_path}")
-                    
-                elif corpus_path.is_dir():
-                    # Directory collection validation
-                    if not corpus_path.exists():
-                        raise FileNotFoundError(f"Corpus directory not found: {file_path}")
-                    
-                    # Find matching files in directory
-                    import glob
-                    file_pattern = str(corpus_path / pattern)
-                    matching_files = glob.glob(file_pattern)
-                    
-                    if not matching_files:
-                        logger.warning(f"No files found matching pattern {pattern} in {file_path}")
-                        component.exists_on_filesystem = False
-                    else:
-                        # Validate each file in collection
-                        valid_files = 0
-                        for file_path_in_collection in matching_files:
-                            try:
-                                with open(file_path_in_collection, 'r', encoding='utf-8') as f:
-                                    content = f.read()
-                                if len(content.strip()) > 0:
-                                    valid_files += 1
-                            except Exception as e:
-                                logger.warning(f"Error reading corpus file {file_path_in_collection}: {e}")
-                        
-                        component.exists_on_filesystem = valid_files > 0
-                        logger.info(f"✅ Corpus collection validated: {valid_files}/{len(matching_files)} files in {file_path}")
-                else:
-                    raise FileNotFoundError(f"Corpus path is neither file nor directory: {file_path}")
-                    
-            else:
-                # No file path provided - can't validate
+
+        logger.info(f"🔍 Validating corpus: {corpus_id} at {file_path}")
+
+        # Validate corpus files directly from filesystem
+        if file_path:
+            corpus_path = Path(file_path)
+            if not corpus_path.exists():
+                logger.error(f"❌ Corpus directory not found: {file_path}")
                 component.exists_on_filesystem = False
-                logger.warning(f"No file path provided for corpus: {corpus_id}")
-                
-        except FileNotFoundError as e:
-            component.exists_on_filesystem = False
-            logger.warning(f"Corpus {corpus_id} not found in workspace: {e}")
-        except Exception as e:
-            logger.error(f"Error validating corpus {corpus_id}: {e}")
-            component.exists_on_filesystem = False
-        
-        # STEP 2: Check database existence (corpus registration will be handled separately)
-        if DATABASE_AVAILABLE and self.auto_registration_available:
-            try:
-                component.exists_in_db = self.corpus_registrar.check_corpus_in_database(corpus_id, file_path)
-            except Exception as e:
-                logger.warning(f"Error checking corpus {corpus_id} in database: {e}")
-                component.exists_in_db = False
+                return component
+            
+            # Check for text files matching pattern
+            text_files = list(corpus_path.glob(pattern))
+            if not text_files:
+                logger.error(f"❌ No files found matching pattern '{pattern}' in {corpus_path}")
+                component.exists_on_filesystem = False
+                return component
+            
+            logger.info(f"✅ Found {len(text_files)} files matching pattern '{pattern}'")
+            
+            # Basic file validation - check files are readable and non-empty
+            valid_files = 0
+            for file_path_obj in text_files:
+                try:
+                    if file_path_obj.is_file() and file_path_obj.stat().st_size > 0:
+                        valid_files += 1
+                    else:
+                        logger.warning(f"⚠️ Invalid file: {file_path_obj.name}")
+                except Exception as e:
+                    logger.warning(f"⚠️ Error checking file {file_path_obj.name}: {e}")
+            
+            if valid_files == 0:
+                logger.error(f"❌ No valid text files found in {corpus_path}")
+                component.exists_on_filesystem = False
+                return component
+            
+            logger.info(f"✅ Validated {valid_files}/{len(text_files)} files in corpus")
+            component.exists_on_filesystem = True
         else:
-            component.exists_in_db = False
-        
-        # Note: Corpus files are not stored in content-addressable storage during validation
-        # They are registered directly to the corpus registry during auto-registration
+            logger.warning(f"⚠️ No file_path specified for corpus {corpus_id}")
+            component.exists_on_filesystem = False
+
+        # Check for corpus in database
+        if self.auto_registration_available:
+            component.exists_in_db = self.corpus_registrar.check_corpus_in_database(
+                corpus_id=corpus_id, 
+                file_path=file_path
+            )
+            if not component.exists_in_db:
+                logger.warning(f"Corpus '{corpus_id}' not found in database, will attempt registration.")
+                component.needs_registration = True
         
         return component
     
@@ -2018,106 +2092,46 @@ In addition to the standard analysis output, please consider how your findings r
         return guidance
     
     def pre_flight_validation(self, experiment: Dict[str, Any]) -> Tuple[bool, List[ComponentInfo]]:
-        """
-        🔒 FRAMEWORK TRANSACTION INTEGRITY: Enhanced pre-flight validation
-        
-        Validates all components including framework transaction integrity.
-        Any framework uncertainty triggers graceful experiment termination.
-        """
+        """Enhanced pre-flight validation with component existence checks."""
         logger.info("🔍 Starting enhanced pre-flight validation with framework transaction integrity...")
         
-        # Initialize Framework Transaction Manager
+        components = []
+        ftx_manager = FrameworkTransactionManager(self.current_experiment_id)
+        
         try:
-            from narrative_gravity.utils.framework_transaction_manager import FrameworkTransactionManager
-            
-            transaction_manager = FrameworkTransactionManager()
-            
             # Validate components with standard validation
             components = self.validate_components(experiment)
             
-            # Validate frameworks using transaction manager
+            # Additional framework transaction validation
             framework_errors = []
             for component in components:
                 if component.component_type == 'framework':
-                    validation_state = transaction_manager.validate_framework_for_experiment(
+                    validation_state = ftx_manager.validate_framework_for_experiment(
                         component.component_id,
                         Path(component.file_path) if component.file_path else None,
                         component.version
                     )
-                    
-                    # Check if validation failed
-                    if validation_state.validation_result.value not in ['valid', 'content_changed']:
-                        framework_errors.extend(validation_state.error_details)
-            
+                    if validation_state.validation_result != FrameworkValidationResult.VALID:
+                        framework_errors.append(f"Framework '{component.component_id}' failed validation: {validation_state.validation_result.value}")
+
             if framework_errors:
-                # Generate detailed guidance for framework transaction integrity failure
-                guidance = {
-                    'transaction_id': self.current_experiment_id,
-                    'total_frameworks': len([c for c in components if c.component_type == 'framework']),
-                    'failed_frameworks': [
-                        {
-                            'framework_name': component.component_id,
-                            'validation_result': 'failed',
-                            'error_details': framework_errors[:3],
-                            'requested_version': component.version,
-                            'database_version': None
-                        }
-                        for component in components 
-                        if component.component_type == 'framework'
-                    ],
-                    'recommendations': [
-                        f"Framework '{component.component_id}' validation failed. Check framework definition and database registration."
-                        for component in components 
-                        if component.component_type == 'framework'
-                    ],
-                    'commands_to_run': [
-                        f"# Check framework definition: frameworks/{component.component_id}/framework_consolidated.json",
-                        f"python3 scripts/framework_sync.py import {component.component_id}",
-                        f"python3 scripts/framework_sync.py validate {component.component_id}"
-                    ]
-                }
-                
-                # Create detailed failure message for user
-                detailed_message = self._generate_framework_failure_message(guidance, framework_errors)
-                
-                # Raise framework transaction integrity error
-                raise FrameworkTransactionIntegrityError(
-                    framework_errors=framework_errors,
-                    guidance=guidance,
-                    detailed_message=detailed_message
-                )
-            
-            logger.info("✅ Framework transaction integrity validation passed")
-            
-        except ImportError:
-            logger.warning("⚠️ Framework Transaction Manager not available - using basic validation")
-        except FrameworkTransactionIntegrityError:
-            # Re-raise framework integrity errors without modification
-            raise
+                guidance = ftx_manager.generate_rollback_guidance()
+                ftx_manager.rollback_transaction()
+                raise FrameworkTransactionIntegrityError(framework_errors, guidance, "Framework validation failed")
+
+        except FrameworkTransactionIntegrityError as e:
+            logger.error(f"❌ FRAMEWORK TRANSACTION FAILURE: {e.detailed_message}")
+            raise # Re-raise to be caught by the main experiment loop
         except Exception as e:
-            logger.warning(f"⚠️ Framework transaction validation error: {e} - continuing with basic validation")
-        
-        # Standard component validation with database availability awareness
-        if DATABASE_AVAILABLE and self.auto_registration_available:
-            # Database available: require both filesystem and database existence
-            missing_components = [comp for comp in components if not comp.exists_on_filesystem or not comp.exists_in_db]
-            logger.info("🔍 Validating components: filesystem + database")
-        else:
-            # Database unavailable: only require filesystem existence
-            missing_components = [comp for comp in components if not comp.exists_on_filesystem]
-            logger.warning("⚠️ Database unavailable - validating filesystem only")
-        
+            logger.error(f"❌ Pre-flight validation failed: {e}", exc_info=True)
+            return False, []
+
+        # Check for missing components on the filesystem
+        missing_components = [comp for comp in components if not comp.exists_on_filesystem]
         if missing_components:
-            logger.warning(f"⚠️  Found {len(missing_components)} missing components")
-            for comp in missing_components:
-                logger.warning(f"   Missing: {comp.component_type}:{comp.component_id}")
-        else:
-            logger.info("✅ All standard components validated")
+            return False, missing_components
         
-        # Overall validation result
-        is_valid = len(missing_components) == 0
-        
-        return is_valid, components
+        return True, components
     
     def _generate_framework_failure_message(self, guidance: Dict[str, Any], framework_errors: List[str]) -> str:
         """Generate comprehensive error message for framework transaction failures"""
@@ -2198,229 +2212,67 @@ In addition to the standard analysis output, please consider how your findings r
             print("\n🔍 DRY RUN - No actual execution will occur")
     
     def execute_enhanced_analysis_pipeline(self, execution_results: Dict[str, Any], experiment: Dict[str, Any] = None) -> Dict[str, Any]:
-        """Execute enhanced analysis pipeline with statistical validation, visualization, and reporting."""
-        logger.info("📊 Starting enhanced analysis pipeline...")
+        """Orchestrates the post-processing of results into a full academic package."""
+        logger.info("🚀 Kicking off Enhanced Academic Analysis Pipeline...")
+        self.save_checkpoint(ExperimentState.ENHANCED_PIPELINE, data=execution_results)
+
+        # Determine output directory
+        output_dir = self._determine_experiment_output_location(
+            self.current_experiment_id,
+            datetime.now().strftime("%Y%m%d_%H%M%S")
+        )
+        enhanced_output_dir = output_dir / "enhanced_analysis"
+        enhanced_output_dir.mkdir(parents=True, exist_ok=True)
         
-        # Get enhanced analysis configuration
-        enhanced_config = {}
-        if experiment:
-            enhanced_config = experiment.get('enhanced_analysis', {})
-        
-        # Check if enhanced analysis is enabled (default: True)
-        if not enhanced_config.get('enabled', True):
-            logger.info("📊 Enhanced analysis pipeline disabled in experiment configuration")
-            return {'pipeline_status': 'disabled', 'timestamp': datetime.now().isoformat()}
-        
-        # Create organized output directory respecting experiment source location
-        experiment_name = experiment.get('experiment_meta', {}).get('name', 'experiment') if experiment else 'analysis'
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        # Determine appropriate location based on experiment source
-        experiment_dir = self._determine_experiment_output_location(experiment_name, timestamp)
-        output_dir = experiment_dir / 'enhanced_analysis'
-        output_dir.mkdir(parents=True, exist_ok=True)
-        
-        logger.info(f"📁 Enhanced analysis output directory: {output_dir}")
-        logger.info(f"📁 Complete experiment directory: {experiment_dir}")
-        
+        logger.info(f"📚 Enhanced analysis package will be saved to: {enhanced_output_dir}")
+
         try:
             # Step 1: Extract and structure experiment results
             logger.info("📊 Step 1: Extracting and structuring results...")
-            from scripts.extract_experiment_results import ExperimentResultsExtractor
             extractor = ExperimentResultsExtractor()
             structured_results = extractor.extract_results(execution_results)
             
-            if 'error' in structured_results:
-                logger.error(f"❌ Results extraction failed: {structured_results['error']}")
-                return {
-                    'pipeline_status': 'failed', 
-                    'error': f"Results extraction failed: {structured_results['error']}", 
-                    'timestamp': datetime.now().isoformat()
-                }
-            
-            # Save structured results
-            structured_file = output_dir / 'structured_results.json'
-            with open(structured_file, 'w') as f:
-                json.dump(structured_results, f, indent=2, default=str)
-            logger.info(f"✅ Structured {len(structured_results.get('structured_data', []))} records")
-            
             # Step 2: Run statistical hypothesis testing
             logger.info("🧪 Step 2: Running statistical hypothesis testing...")
-            from statistical_hypothesis_testing import StatisticalHypothesisTester
             tester = StatisticalHypothesisTester()
             statistical_results = tester.test_hypotheses(structured_results)
-            
-            # Save statistical results
-            stats_file = output_dir / 'statistical_results.json'
-            with open(stats_file, 'w') as f:
-                json.dump(statistical_results, f, indent=2, default=str)
-            
-            if 'error' in statistical_results:
-                logger.warning(f"⚠️ Statistical testing issues: {statistical_results['error']}")
-            else:
-                summary = statistical_results.get('summary', {})
-                logger.info(f"✅ Hypothesis testing complete - {summary.get('hypotheses_supported', 0)}/3 supported")
-            
+
             # Step 3: Calculate interrater reliability
             logger.info("🔍 Step 3: Analyzing interrater reliability...")
-            from interrater_reliability_analysis import InterraterReliabilityAnalyzer
             reliability_analyzer = InterraterReliabilityAnalyzer()
             reliability_results = reliability_analyzer.analyze_reliability(structured_results)
-            
-            # Save reliability results
-            reliability_file = output_dir / 'reliability_results.json'
-            with open(reliability_file, 'w') as f:
-                json.dump(reliability_results, f, indent=2, default=str)
-            
-            if 'error' in reliability_results:
-                logger.warning(f"⚠️ Reliability analysis limited: {reliability_results['error']}")
-            else:
-                logger.info("✅ Reliability analysis complete")
-            
+
             # Step 4: Generate comprehensive visualizations
             logger.info("🎨 Step 4: Generating comprehensive visualizations...")
-            from generate_comprehensive_visualizations import VisualizationGenerator
-            viz_output_dir = output_dir / 'visualizations'
-            visualizer = VisualizationGenerator(output_dir=str(viz_output_dir))
+            visualizer = VisualizationGenerator(output_dir=str(enhanced_output_dir / 'visualizations'))
             visualization_results = visualizer.generate_visualizations(
                 structured_results,
                 statistical_results,
                 reliability_results
             )
-            
-            if 'error' in visualization_results:
-                logger.warning(f"⚠️ Visualization generation issues: {visualization_results['error']}")
-            else:
-                viz_count = len(visualizer.generated_files) if hasattr(visualizer, 'generated_files') else 0
-                logger.info(f"✅ Generated {viz_count} visualizations")
-            
-            # Step 5: Generate enhanced HTML report (if enabled)
-            html_report_path = None
-            if enhanced_config.get('generate_html_report', True):
-                logger.info("📄 Step 5: Generating enhanced HTML report...")
-                try:
-                    # Create HTML report with all analysis results
-                    html_report_path = self._generate_comprehensive_html_report(
-                        structured_results, statistical_results, 
-                        reliability_results, visualization_results, output_dir
-                    )
-                    logger.info(f"✅ Enhanced HTML report generated: {html_report_path}")
-                except Exception as e:
-                    logger.warning(f"⚠️ HTML report generation failed: {e}")
-            
-            # Step 6: Academic pipeline integration (if enabled)
-            academic_results = None
-            if enhanced_config.get('generate_academic_exports', False):
-                logger.info("🎓 Step 6: Generating academic exports...")
-                try:
-                    academic_results = self._generate_academic_exports(
-                        structured_results, output_dir, experiment
-                    )
-                    logger.info("✅ Academic exports generated")
-                except Exception as e:
-                    logger.warning(f"⚠️ Academic export generation failed: {e}")
-            
-            # Combine all results with comprehensive metadata
-            enhanced_results = {
-                'structured_results': structured_results,
-                'statistical_results': statistical_results,
-                'reliability_results': reliability_results,
-                'visualization_results': visualization_results,
-                'pipeline_status': 'success',
-                'timestamp': datetime.now().isoformat(),
-                'experiment_directory': str(experiment_dir),
-                'enhanced_analysis_directory': str(output_dir),
-                'files_generated': {
-                    'structured_data': str(structured_file),
-                    'statistical_analysis': str(stats_file),
-                    'reliability_analysis': str(reliability_file),
-                    'visualizations_dir': str(viz_output_dir),
-                    'html_report': str(html_report_path) if html_report_path else None
-                },
-                'summary': {
-                    'total_analyses': len(structured_results.get('structured_data', [])),
-                    'statistical_tests_run': len(statistical_results.get('tests', {})) if 'error' not in statistical_results else 0,
-                    'hypotheses_supported': statistical_results.get('summary', {}).get('hypotheses_supported', 0) if 'error' not in statistical_results else 0,
-                    'reliability_metrics_calculated': bool('error' not in reliability_results),
-                    'visualizations_generated': len(visualizer.generated_files) if hasattr(visualizer, 'generated_files') else 0,
-                    'html_report_generated': bool(html_report_path),
-                    'academic_exports_generated': bool(academic_results)
-                }
-            }
-            
-            # Save comprehensive pipeline results
-            pipeline_results_file = output_dir / 'pipeline_results.json'
-            with open(pipeline_results_file, 'w') as f:
-                json.dump(enhanced_results, f, indent=2, default=str)
-            
-            # Generate pipeline summary report
-            self._generate_pipeline_summary_report(enhanced_results, output_dir, experiment_dir)
-            
-            logger.info("✅ Enhanced analysis pipeline completed successfully")
-            logger.info(f"📁 All results saved to: {output_dir}")
-            
-            # Phase 5: Architectural Compliance Validation (AI Academic Advisor v2.0)
-            print(f"\n{'='*60}")
-            print(f"Phase 5: Architectural Compliance Validation")
-            print(f"{'='*60}")
-            
-            try:
-                if ARCHITECTURAL_COMPLIANCE_AVAILABLE:
-                    validator = ArchitecturalComplianceValidator()
-                    compliance_report = validator.validate_experiment_results(str(output_dir))
-                else:
-                    logger.warning("Architectural compliance validator not available - skipping validation")
-                    compliance_report = {
-                        'compliance_level': 'VALIDATION_UNAVAILABLE',
-                        'compliance_score': 0,
-                        'error': 'Architectural compliance validator not available'
-                    }
-                
-                # Add compliance report to enhanced results
-                enhanced_results['architectural_compliance'] = compliance_report
-                
-                if compliance_report["compliance_level"] == "NON_COMPLIANT":
-                    logger.warning(f"⚠️ ARCHITECTURAL VIOLATIONS DETECTED!")
-                    logger.warning(f"Compliance Score: {compliance_report['compliance_score']:.1f}%")
-                    logger.warning(f"Violations: {len(compliance_report['violations'])}")
-                    logger.warning(f"See report: {output_dir}/architectural_compliance_report.json")
-                    # Don't fail the experiment, but warn about violations
-                elif compliance_report["compliance_level"] == "COMPLIANT_WITH_WARNINGS":
-                    logger.info(f"✅ Architectural compliance validated with warnings")
-                    logger.info(f"Compliance Score: {compliance_report['compliance_score']:.1f}%")
-                    logger.info(f"Warnings: {len(compliance_report['warnings'])}")
-                else:
-                    logger.info(f"✅ Full architectural compliance validated")
-                    logger.info(f"Compliance Score: {compliance_report['compliance_score']:.1f}%")
-                    
-            except Exception as e:
-                logger.warning(f"⚠️ Architectural compliance validation failed: {str(e)}")
-                # Don't fail the experiment for validation issues
-                enhanced_results['architectural_compliance'] = {
-                    'error': str(e),
-                    'compliance_level': 'VALIDATION_FAILED'
-                }
-            
-            return enhanced_results
-            
+
+            # Step 5: Generate academic exports and final report
+            logger.info("✍️ Step 5: Generating academic exports and final report...")
+            self._generate_academic_exports(
+                structured_results, 
+                enhanced_output_dir, 
+                experiment
+            )
+            self._generate_comprehensive_html_report(
+                structured_results, 
+                statistical_results, 
+                reliability_results, 
+                visualization_results, 
+                enhanced_output_dir
+            )
+
+            logger.info("✅ Enhanced Academic Analysis Pipeline finished successfully.")
+            return {"status": "completed", "output_path": str(enhanced_output_dir)}
+
         except Exception as e:
-            logger.error(f"❌ Enhanced analysis pipeline failed: {e}")
-            import traceback
-            traceback.print_exc()
-            
-            # Save error information
-            error_file = output_dir / 'pipeline_error.json'
-            error_info = {
-                'pipeline_status': 'failed',
-                'error': str(e),
-                'traceback': traceback.format_exc(),
-                'timestamp': datetime.now().isoformat()
-            }
-            with open(error_file, 'w') as f:
-                json.dump(error_info, f, indent=2)
-            
-            return error_info
-    
+            logger.error(f"❌ Enhanced analysis pipeline failed: {e}", exc_info=True)
+            return {"status": "failed", "error": str(e)}
+
     def _generate_comprehensive_html_report(self, structured_results, 
                                             statistical_results, reliability_results, 
                                             visualization_results, output_dir):

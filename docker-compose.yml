@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: narrative_gravity_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=narrative_gravity
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d narrative_gravity"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: narrative_gravity_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=narrative_gravity
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./experiments:/app/experiments
+      - ./frameworks:/app/frameworks
+      - ./research_workspaces:/app/research_workspaces
+      - ./corpus:/app/corpus
+      - ./asset_storage:/app/asset_storage
+      - ./logs:/app/logs
+    # The entrypoint is already defined in the Dockerfile, so we don't need to specify it here
+    # unless we want to override it for a specific command.
+
+volumes:
+  postgres_data: 
