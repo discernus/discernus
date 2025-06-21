@@ -1,0 +1,4 @@
+# Exclude directories from git-archive
+product_management/ export-ignore
+docs_site/ export-ignore
+research_workspaces/ export-ignore 

@@ -1,0 +1,1287 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>CLI Experiment Definition & Execution Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cli-experiment-definition-execution-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CLI Experiment Definition &amp; Execution Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clean-component-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clean Component Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clean Component Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#llm-analysis-approach-prompt-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 LLM Analysis Approach (Prompt Templates)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Theoretical Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-weighting" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚖️ Mathematical Weighting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-available-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      List Available Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiment Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-an-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is an Experiment?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-creation-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Creation Process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiment Creation Process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-define-research-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Define Research Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-validate-component-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Validate Component Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Create Experiment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-experiment-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual Experiment Creation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Execution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiment Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-text-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Text Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-model-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Model Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiment Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      List Experiments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Development Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-new-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating New Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating New Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-llm-analysis-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      New LLM Analysis Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-theoretical-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Theoretical Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-mathematical-weighting" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Mathematical Weighting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Assurance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Assurance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-experiment-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Post-Experiment Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Post-Experiment Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-notebook-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jupyter Notebook Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launch-jupyter-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launch Jupyter Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive-analysis-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive Analysis Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Export
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Academic Export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#individual-experiment-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Individual Experiment Export
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-research-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprehensive Research Export
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Not Found
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compatibility-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compatibility Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-connection-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Connection Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experiment-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-academic-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Academic Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration with Academic Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-cli-experiment-execution-systematic-reproducible" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: CLI Experiment Execution (Systematic &amp; Reproducible)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-interactive-jupyter-analysis-rich-exploratory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Interactive Jupyter Analysis (Rich &amp; Exploratory)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-two-phase-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Two-Phase Approach
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cli-experiment-definition-execution-guide">CLI Experiment Definition &amp; Execution Guide</h1>
+<h2 id="overview">Overview</h2>
+<p>This guide explains how to define and run narrative gravity analysis experiments using the command-line interface. The system implements <strong>clean separation of concerns</strong> where three independent component types combine at runtime to create experimental configurations.</p>
+<h2 id="clean-component-architecture">Clean Component Architecture</h2>
+<h3 id="llm-analysis-approach-prompt-templates">🔧 <strong>LLM Analysis Approach</strong> (Prompt Templates)</h3>
+<p>Framework-agnostic prompt engineering optimized for specific LLM response patterns.</p>
+<p><strong>Available Approaches:</strong>
+- <code>hierarchical_analysis v2.1.0</code> - Ranking, weighting, and evidence extraction
+- <code>traditional_analysis v2.1.0</code> - Comprehensive dimensional scoring
+- <code>civic_virtue_hierarchical v2.1.0</code> - (deprecated) Legacy conflated naming</p>
+<h3 id="theoretical-framework">🏗️ <strong>Theoretical Framework</strong></h3>
+<p>Pure theoretical definitions of narrative space including dipoles and conceptual relationships.</p>
+<p><strong>Available Frameworks:</strong>
+- <code>civic_virtue v2.1.0</code> - Dignity/Truth/Justice dipoles with civic engagement focus
+- <code>test_civic_virtue vv1.0</code> - Testing framework for validation</p>
+<h3 id="mathematical-weighting">⚖️ <strong>Mathematical Weighting</strong></h3>
+<p>Mathematical algorithms for interpreting scores and generating meaningful visualizations.</p>
+<p><strong>Available Methods:</strong>
+- <code>hierarchical_weighted v2.1.0</code> - Primary/secondary/tertiary importance (45%/35%/20%)
+- <code>linear_traditional v2.1.0</code> - Equal weight averaging across all dimensions
+- <code>test_winner_take_most vv1.0</code> - Testing methodology for validation</p>
+<h2 id="component-management">Component Management</h2>
+<h3 id="list-available-components">List Available Components</h3>
+<pre><code class="language-bash"># View all components
+python src/narrative_gravity/cli/component_manager.py list
+
+# View specific component type
+python src/narrative_gravity/cli/component_manager.py list --type prompt
+python src/narrative_gravity/cli/component_manager.py list --type framework
+python src/narrative_gravity/cli/component_manager.py list --type weighting
+</code></pre>
+<h3 id="component-details">Component Details</h3>
+<pre><code class="language-bash"># Get detailed information about a specific component
+python src/narrative_gravity/cli/component_manager.py show prompt &quot;hierarchical_analysis&quot; &quot;2.1.0&quot;
+python src/narrative_gravity/cli/component_manager.py show framework &quot;civic_virtue&quot; &quot;2.1.0&quot;
+python src/narrative_gravity/cli/component_manager.py show weighting &quot;hierarchical_weighted&quot; &quot;2.1.0&quot;
+</code></pre>
+<h2 id="experiment-definition">Experiment Definition</h2>
+<h3 id="what-is-an-experiment">What is an Experiment?</h3>
+<p>An experiment is a <strong>systematic research configuration</strong> that specifies:</p>
+<ol>
+<li><strong>Research Question</strong>: What hypothesis are you testing?</li>
+<li><strong>LLM Analysis Approach</strong>: How should the LLM analyze text? (hierarchical vs traditional)</li>
+<li><strong>Theoretical Framework</strong>: What conceptual space should be analyzed? (civic virtue, political spectrum)</li>
+<li><strong>Mathematical Weighting</strong>: How should scores be interpreted? (hierarchical vs linear)</li>
+<li><strong>Target Texts</strong>: What corpus should be analyzed?</li>
+</ol>
+<h3 id="experiment-creation-process">Experiment Creation Process</h3>
+<h4 id="step-1-define-research-context">Step 1: Define Research Context</h4>
+<pre><code class="language-bash"># Create experiment configuration file
+cat &gt; my_experiment_config.yaml &lt;&lt; 'EOF'
+experiment:
+  name: &quot;Lincoln_Speech_Civic_Virtue_Analysis&quot;
+  hypothesis: &quot;Lincoln's Second Inaugural uses hierarchical civic virtue themes with Hope and Justice dominance&quot;
+  description: &quot;Testing hierarchical vs traditional analysis approaches on foundational American political text&quot;
+  research_context: &quot;Validation study comparing LLM analysis approaches for civic virtue framework&quot;
+
+components:
+  llm_analysis_approach: &quot;hierarchical_analysis v2.1.0&quot;
+  theoretical_framework: &quot;civic_virtue v2.1.0&quot; 
+  mathematical_weighting: &quot;hierarchical_weighted v2.1.0&quot;
+
+analysis:
+  mode: &quot;single_model&quot;  # or &quot;multi_model&quot;
+  selected_models: [&quot;gpt-4o-mini&quot;]
+  target_texts: [&quot;corpus/presidential_speeches/lincoln_1865_second_inaugural.txt&quot;]
+
+metadata:
+  researcher: &quot;user&quot;
+  tags: [&quot;validation_study&quot;, &quot;civic_virtue&quot;, &quot;hierarchical_analysis&quot;]
+  research_notes: &quot;Baseline validation for hierarchical analysis approach&quot;
+EOF
+</code></pre>
+<h4 id="step-2-validate-component-compatibility">Step 2: Validate Component Compatibility</h4>
+<pre><code class="language-bash"># Check if selected components work together
+python src/narrative_gravity/cli/component_manager.py validate-compatibility \
+    &quot;hierarchical_analysis v2.1.0&quot; \
+    &quot;civic_virtue v2.1.0&quot; \
+    &quot;hierarchical_weighted v2.1.0&quot;
+</code></pre>
+<h4 id="step-3-create-experiment">Step 3: Create Experiment</h4>
+<pre><code class="language-bash"># Create experiment in database
+python src/narrative_gravity/cli/experiment_manager.py create \
+    --config my_experiment_config.yaml \
+    --validate-components
+</code></pre>
+<h3 id="manual-experiment-creation">Manual Experiment Creation</h3>
+<pre><code class="language-bash"># Direct experiment creation with component IDs
+python src/narrative_gravity/cli/experiment_manager.py create \
+    --name &quot;Direct_Experiment_Test&quot; \
+    --hypothesis &quot;Testing direct CLI experiment creation&quot; \
+    --prompt-template-id &quot;db1a7436-54e2-4b13-a03e-25d91ad723c7&quot; \
+    --framework-id &quot;059aa4c8-4b50-4c3e-8b4f-123456789abc&quot; \
+    --weighting-id &quot;7bbd4ebb-a1b2-4c3d-8e9f-123456789def&quot; \
+    --analysis-mode &quot;single_model&quot; \
+    --models &quot;gpt-4o-mini&quot;
+</code></pre>
+<h2 id="experiment-execution">Experiment Execution</h2>
+<h3 id="single-text-analysis">Single Text Analysis</h3>
+<pre><code class="language-bash"># Analyze single text with existing experiment
+python src/narrative_gravity/cli/run_analysis.py \
+    --experiment-id 16 \
+    --text-file &quot;corpus/presidential_speeches/lincoln_1865_second_inaugural.txt&quot; \
+    --model &quot;gpt-4o-mini&quot;
+</code></pre>
+<h3 id="batch-analysis">Batch Analysis</h3>
+<pre><code class="language-bash"># Analyze multiple texts
+python src/narrative_gravity/cli/run_analysis.py \
+    --experiment-id 16 \
+    --text-dir &quot;corpus/presidential_speeches/&quot; \
+    --model &quot;gpt-4o-mini&quot; \
+    --parallel 3
+</code></pre>
+<h3 id="multi-model-analysis">Multi-Model Analysis</h3>
+<pre><code class="language-bash"># Compare across multiple LLMs
+python src/narrative_gravity/cli/run_analysis.py \
+    --experiment-id 16 \
+    --text-file &quot;corpus/presidential_speeches/lincoln_1865_second_inaugural.txt&quot; \
+    --models &quot;gpt-4o-mini,claude-3-haiku,gemini-pro&quot; \
+    --compare-models
+</code></pre>
+<h2 id="experiment-management">Experiment Management</h2>
+<h3 id="list-experiments">List Experiments</h3>
+<pre><code class="language-bash"># View all experiments
+python src/narrative_gravity/cli/experiment_manager.py list
+
+# View experiments by status
+python src/narrative_gravity/cli/experiment_manager.py list --status completed
+python src/narrative_gravity/cli/experiment_manager.py list --status running
+
+# View experiments by researcher
+python src/narrative_gravity/cli/experiment_manager.py list --researcher user
+</code></pre>
+<h3 id="experiment-details">Experiment Details</h3>
+<pre><code class="language-bash"># Get detailed experiment information
+python src/narrative_gravity/cli/experiment_manager.py show 16
+
+# View experiment results
+python src/narrative_gravity/cli/experiment_manager.py results 16
+
+# Export experiment data
+python src/narrative_gravity/cli/experiment_manager.py export 16 --format json
+</code></pre>
+<h2 id="component-development-workflow">Component Development Workflow</h2>
+<h3 id="creating-new-components">Creating New Components</h3>
+<h4 id="new-llm-analysis-approach">New LLM Analysis Approach</h4>
+<pre><code class="language-bash"># Start development session
+python src/narrative_gravity/cli/start_dev_session.py \
+    --component-type prompt_template \
+    --name &quot;evidence_based_analysis&quot; \
+    --hypothesis &quot;Evidence-focused prompts will improve justification quality&quot;
+
+# Create new prompt template
+python src/narrative_gravity/cli/component_manager.py create-prompt \
+    &quot;evidence_based_analysis&quot; \
+    &quot;1.0.0&quot; \
+    &quot;templates/evidence_based_prompt.txt&quot; \
+    --description &quot;Framework-agnostic evidence-based analysis with citation requirements&quot;
+</code></pre>
+<h4 id="new-theoretical-framework">New Theoretical Framework</h4>
+<pre><code class="language-bash"># Create framework from configuration
+python src/narrative_gravity/cli/component_manager.py create-framework \
+    &quot;moral_foundations&quot; \
+    &quot;1.0.0&quot; \
+    &quot;frameworks/moral_foundations/config.json&quot; \
+    --description &quot;Haidt's moral foundations framework implementation&quot;
+</code></pre>
+<h4 id="new-mathematical-weighting">New Mathematical Weighting</h4>
+<pre><code class="language-bash"># Create weighting methodology
+python src/narrative_gravity/cli/component_manager.py create-weighting \
+    &quot;attention_focused&quot; \
+    &quot;1.0.0&quot; \
+    &quot;exponential&quot; \
+    &quot;Dynamic weighting based on salience detection&quot; \
+    --formula &quot;weight = exp(salience_score * attention_factor)&quot; \
+    --parameters '{&quot;attention_factor&quot;: 2.0, &quot;min_weight&quot;: 0.1}'
+</code></pre>
+<h2 id="quality-assurance">Quality Assurance</h2>
+<h3 id="component-validation">Component Validation</h3>
+<pre><code class="language-bash"># Validate component quality
+python src/narrative_gravity/cli/validate_component.py \
+    --component-type prompt_template \
+    --name &quot;hierarchical_analysis&quot; \
+    --version &quot;2.1.0&quot;
+
+# Check component compatibility matrix
+python src/narrative_gravity/cli/component_manager.py compatibility-matrix
+</code></pre>
+<h3 id="experiment-validation">Experiment Validation</h3>
+<pre><code class="language-bash"># Validate experiment configuration
+python src/narrative_gravity/cli/experiment_manager.py validate 16
+
+# Check experiment reproducibility
+python src/narrative_gravity/cli/experiment_manager.py reproduce 16 \
+    --text-file &quot;corpus/presidential_speeches/lincoln_1865_second_inaugural.txt&quot;
+</code></pre>
+<h2 id="post-experiment-analysis">Post-Experiment Analysis</h2>
+<h3 id="jupyter-notebook-generation">Jupyter Notebook Generation</h3>
+<p>After experiment execution, interactive Jupyter notebooks are automatically generated for rich analysis:</p>
+<pre><code class="language-bash"># Generate enhanced analysis notebook for specific experiment
+python src/narrative_gravity/cli/generate_analysis_templates.py \
+    --experiment-id 16 \
+    --template-type jupyter \
+    --output-dir &quot;analysis_results/experiment_16_analysis/&quot;
+
+# Generate comprehensive analysis with all experiments
+python src/narrative_gravity/cli/generate_analysis_templates.py \
+    --date-range &quot;2025-06-01,2025-06-30&quot; \
+    --template-type jupyter \
+    --include-visualization \
+    --output-dir &quot;analysis_results/june_2025_comprehensive/&quot;
+</code></pre>
+<h3 id="launch-jupyter-analysis">Launch Jupyter Analysis</h3>
+<pre><code class="language-bash"># Navigate to generated analysis directory
+cd analysis_results/experiment_16_analysis/
+
+# Launch Jupyter server
+jupyter notebook enhanced_analysis.ipynb
+
+# Or launch Jupyter Lab for advanced features
+jupyter lab enhanced_analysis.ipynb
+</code></pre>
+<h3 id="interactive-analysis-features">Interactive Analysis Features</h3>
+<p>The generated Jupyter notebooks include:
+- <strong>📊 Interactive Visualizations</strong>: Plotly-based elliptical plots with zoom, pan, hover
+- <strong>📈 Statistical Analysis</strong>: Comprehensive metrics and statistical tests
+- <strong>🔍 Data Exploration</strong>: Interactive widgets for filtering and comparison
+- <strong>📝 Publication-Ready Output</strong>: LaTeX-formatted tables and high-DPI figures
+- <strong>🔄 Reproducible Analysis</strong>: Complete code with explanations and methodology</p>
+<h2 id="academic-export">Academic Export</h2>
+<h3 id="individual-experiment-export">Individual Experiment Export</h3>
+<pre><code class="language-bash"># Export experiment for publication
+python src/narrative_gravity/cli/export_academic_data.py \
+    --experiment-id 16 \
+    --format all \
+    --output-dir &quot;exports/academic_formats/lincoln_analysis_2025_06_11/&quot;
+</code></pre>
+<h3 id="comprehensive-research-export">Comprehensive Research Export</h3>
+<pre><code class="language-bash"># Export all experiments from date range
+python src/narrative_gravity/cli/export_academic_data.py \
+    --date-range &quot;2025-06-01,2025-06-30&quot; \
+    --frameworks &quot;civic_virtue&quot; \
+    --include-development-sessions \
+    --format all \
+    --output-dir &quot;exports/academic_formats/june_2025_validation_study/&quot;
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<h4 id="component-not-found">Component Not Found</h4>
+<pre><code class="language-bash"># Error: Component not found
+# Solution: List available components
+python src/narrative_gravity/cli/component_manager.py list --type prompt
+
+# Find correct component ID
+python src/narrative_gravity/cli/component_manager.py show prompt &quot;hierarchical_analysis&quot; &quot;2.1.0&quot;
+</code></pre>
+<h4 id="compatibility-issues">Compatibility Issues</h4>
+<pre><code class="language-bash"># Error: Components not compatible
+# Solution: Check compatibility matrix
+python src/narrative_gravity/cli/component_manager.py validate-compatibility \
+    &quot;prompt_id&quot; &quot;framework_id&quot; &quot;weighting_id&quot;
+</code></pre>
+<h4 id="database-connection-issues">Database Connection Issues</h4>
+<pre><code class="language-bash"># Check database status
+python check_database.py
+
+# Verify component tables
+python src/narrative_gravity/cli/component_manager.py list
+</code></pre>
+<h3 id="environment-setup">Environment Setup</h3>
+<pre><code class="language-bash"># Ensure development environment is set up
+source scripts/setup_dev_env.sh
+
+# Verify imports work
+python3 -c &quot;from src.narrative_gravity.engine import NarrativeGravityWellsElliptical; print('✅ Imports working!')&quot;
+</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="experiment-design">Experiment Design</h3>
+<ol>
+<li><strong>Clear Hypothesis</strong>: Always specify what you're testing</li>
+<li><strong>Component Rationale</strong>: Document why you chose specific components</li>
+<li><strong>Validation Focus</strong>: Use clean architecture for systematic comparison</li>
+<li><strong>Documentation</strong>: Tag experiments for later analysis</li>
+</ol>
+<h3 id="component-development">Component Development</h3>
+<ol>
+<li><strong>Independent Lifecycles</strong>: Develop each component type separately</li>
+<li><strong>Clear Naming</strong>: Use descriptive, framework-agnostic names</li>
+<li><strong>Version Control</strong>: Use semantic versioning for all components</li>
+<li><strong>Quality Gates</strong>: Validate components before production use</li>
+</ol>
+<h3 id="research-workflow">Research Workflow</h3>
+<ol>
+<li><strong>Validation First</strong>: Test components before large studies</li>
+<li><strong>Systematic Comparison</strong>: Use component matrix for method validation</li>
+<li><strong>Academic Standards</strong>: Export data in publication-ready formats</li>
+<li><strong>Reproducibility</strong>: Document complete experimental provenance</li>
+</ol>
+<h2 id="integration-with-academic-pipeline">Integration with Academic Pipeline</h2>
+<p>The CLI experiment system integrates seamlessly with the academic publication workflow using a <strong>two-phase approach</strong>:</p>
+<h3 id="phase-1-cli-experiment-execution-systematic-reproducible"><strong>Phase 1: CLI Experiment Execution</strong> (Systematic &amp; Reproducible)</h3>
+<ol>
+<li><strong>Component Development</strong> → Systematic iteration with hypothesis tracking</li>
+<li><strong>Experimental Design</strong> → Clean architecture supporting method validation  </li>
+<li><strong>Data Collection</strong> → CLI batch processing with complete provenance</li>
+<li><strong>Database Storage</strong> → All results stored with component version tracking</li>
+</ol>
+<h3 id="phase-2-interactive-jupyter-analysis-rich-exploratory"><strong>Phase 2: Interactive Jupyter Analysis</strong> (Rich &amp; Exploratory)</h3>
+<ol>
+<li><strong>Jupyter Generation</strong> → Automated creation of analysis-ready notebooks</li>
+<li><strong>Interactive Exploration</strong> → Rich visualizations, statistical analysis, data widgets</li>
+<li><strong>Academic Export</strong> → Publication-ready data in multiple formats (CSV, R, Stata, Jupyter)</li>
+<li><strong>Human Validation</strong> → Interactive comparison protocols for validation studies</li>
+</ol>
+<h3 id="benefits-of-two-phase-approach"><strong>Benefits of Two-Phase Approach</strong></h3>
+<ul>
+<li><strong>Reproducibility</strong>: CLI ensures consistent, scriptable experiment execution</li>
+<li><strong>Exploration</strong>: Jupyter enables rich interactive analysis and hypothesis generation</li>
+<li><strong>Academic Standards</strong>: Both phases support publication-quality research workflows</li>
+<li><strong>Validation Focus</strong>: Clean separation enables systematic comparison studies</li>
+<li><strong>Flexibility</strong>: Researchers can iterate on analysis without re-running expensive LLM calls</li>
+</ul>
+<p>This workflow supports the validation-first research platform approach, enabling systematic development and rigorous academic validation of narrative analysis methodologies. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

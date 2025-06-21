@@ -1,0 +1,10 @@
+site_name: Discernus Project
+theme:
+  name: material
+nav:
+  - 'Home': 'README.md'
+  - 'Documentation Index': 'docs/DOCUMENTATION_INDEX.md'
+  - 'Contributing': 'docs/CONTRIBUTING.md'
+  - 'Development Environment': 'docs/platform-development/DEV_ENVIRONMENT.md'
+  - 'Code Standards': 'docs/CODE_ORGANIZATION_STANDARDS.md'
+  - 'Release Process': 'docs/platform-development/RELEASE_PROCESS.md' 

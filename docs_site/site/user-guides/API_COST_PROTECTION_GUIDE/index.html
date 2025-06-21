@@ -1,0 +1,920 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>🛡️ API Cost Protection Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-cost-protection-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🛡️ API Cost Protection Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protection-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Protection Layers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 Protection Layers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pre-request-cost-estimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Pre-Request Cost Estimation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-automatic-cost-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Automatic Cost Tracking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-multi-level-spending-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Multi-Level Spending Limits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-early-warning-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Early Warning System
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Current Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Current Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#your-default-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Your Default Limits:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typical-costs-per-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Typical Costs per Analysis:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use-cost-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 How to Use Cost Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 How to Use Cost Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check-current-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Check Current Status
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-your-own-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set Your Own Limits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estimate-costs-before-running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estimate Costs Before Running
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-cost-data-for-accounting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Export Cost Data for Accounting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provider-specific-cost-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Provider-Specific Cost Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Provider-Specific Cost Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#openai-most-expensive" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenAI (Most Expensive)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anthropic-mid-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anthropic (Mid-Range)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistral-competitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mistral (Competitive)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emergency-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚨 Emergency Procedures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Emergency Procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-you-hit-a-limit" class="md-nav__link">
+    <span class="md-ellipsis">
+      If You Hit a Limit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-costs-seem-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      If Costs Seem Wrong
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-large-analysis-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Large Analysis Projects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-for-academic-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Best Practices for Academic Research
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Best Practices for Academic Research">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-budget-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Budget Planning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-model-selection-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Model Selection Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-batch-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Batch Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-cost-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Cost Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Advanced Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Advanced Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-cost-limits-per-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Cost Limits per Provider
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-specific-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project-Specific Tracking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alert-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alert Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-your-protection-is-active" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Summary: Your Protection is Active
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api-cost-protection-guide">🛡️ API Cost Protection Guide</h1>
+<h2 id="overview">Overview</h2>
+<p>Your system now has <strong>comprehensive cost protection</strong> built-in to prevent unexpected API charges from OpenAI, Anthropic, and Mistral.</p>
+<h2 id="protection-layers">🔐 Protection Layers</h2>
+<h3 id="1-pre-request-cost-estimation"><strong>1. Pre-Request Cost Estimation</strong></h3>
+<ul>
+<li><strong>Automatic estimation</strong> before every API call</li>
+<li><strong>Real-time limit checking</strong> </li>
+<li><strong>Immediate blocking</strong> if limits would be exceeded</li>
+</ul>
+<h3 id="2-automatic-cost-tracking"><strong>2. Automatic Cost Tracking</strong></h3>
+<ul>
+<li><strong>Real-time recording</strong> of actual costs</li>
+<li><strong>Token usage tracking</strong> for accuracy</li>
+<li><strong>Historical cost data</strong> for analysis</li>
+</ul>
+<h3 id="3-multi-level-spending-limits"><strong>3. Multi-Level Spending Limits</strong></h3>
+<ul>
+<li><strong>Daily limits</strong>: Prevent daily overspending</li>
+<li><strong>Weekly limits</strong>: Control weekly research budgets</li>
+<li><strong>Monthly limits</strong>: Academic budget management</li>
+<li><strong>Single request limits</strong>: Prevent large single charges</li>
+</ul>
+<h3 id="4-early-warning-system"><strong>4. Early Warning System</strong></h3>
+<ul>
+<li><strong>80% threshold warnings</strong> when approaching limits</li>
+<li><strong>Real-time notifications</strong> during analysis</li>
+<li><strong>Spending summaries</strong> and breakdowns</li>
+</ul>
+<h2 id="current-settings">📋 Current Settings</h2>
+<h3 id="your-default-limits"><strong>Your Default Limits:</strong></h3>
+<pre><code>Daily: $2.00        # Safe for daily research
+Weekly: $10.00      # Reasonable weekly budget
+Monthly: $25.00     # Academic-friendly monthly limit
+Single Request: $0.50  # Prevent large single charges
+</code></pre>
+<h3 id="typical-costs-per-analysis"><strong>Typical Costs per Analysis:</strong></h3>
+<pre><code>GPT-4: ~$0.01-0.02          # Most expensive
+Claude-3-Sonnet: ~$0.003-0.005  # Mid-range
+Claude-3-Haiku: ~$0.0004    # Very cheap
+Mistral-Large: ~$0.007      # Mid-range
+GPT-3.5-Turbo: ~$0.0005    # Very cheap
+</code></pre>
+<h2 id="how-to-use-cost-management">🚀 <strong>How to Use Cost Management</strong></h2>
+<h3 id="check-current-status"><strong>Check Current Status</strong></h3>
+<pre><code class="language-bash">python manage_costs.py status
+</code></pre>
+<h3 id="set-your-own-limits"><strong>Set Your Own Limits</strong></h3>
+<pre><code class="language-bash"># Conservative research limits
+python manage_costs.py limits --daily 1 --weekly 5 --monthly 15
+
+# Production/large-scale limits  
+python manage_costs.py limits --daily 10 --weekly 50 --monthly 150
+</code></pre>
+<h3 id="estimate-costs-before-running"><strong>Estimate Costs Before Running</strong></h3>
+<pre><code class="language-bash">python manage_costs.py estimate &quot;Your text to analyze here&quot;
+</code></pre>
+<h3 id="export-cost-data-for-accounting"><strong>Export Cost Data for Accounting</strong></h3>
+<pre><code class="language-bash">python manage_costs.py export --filename my_research_costs.csv
+</code></pre>
+<h3 id="real-time-monitoring"><strong>Real-Time Monitoring</strong></h3>
+<pre><code class="language-bash">python manage_costs.py monitor
+</code></pre>
+<h2 id="provider-specific-cost-management">⚙️ <strong>Provider-Specific Cost Management</strong></h2>
+<h3 id="openai-most-expensive"><strong>OpenAI (Most Expensive)</strong></h3>
+<ul>
+<li><strong>GPT-4</strong>: $0.03/1K input + $0.06/1K output tokens</li>
+<li><strong>GPT-3.5</strong>: $0.0005/1K input + $0.0015/1K output tokens</li>
+<li><strong>Billing</strong>: Per token, very accurate</li>
+<li><strong>Cost Control</strong>: ✅ Excellent usage tracking</li>
+</ul>
+<h3 id="anthropic-mid-range"><strong>Anthropic (Mid-Range)</strong></h3>
+<ul>
+<li><strong>Claude-3-Sonnet</strong>: $0.003/1K input + $0.015/1K output tokens</li>
+<li><strong>Claude-3-Haiku</strong>: $0.00025/1K input + $0.00125/1K output tokens</li>
+<li><strong>Billing</strong>: Per token, accurate</li>
+<li><strong>Cost Control</strong>: ✅ Good usage tracking</li>
+</ul>
+<h3 id="mistral-competitive"><strong>Mistral (Competitive)</strong></h3>
+<ul>
+<li><strong>Large</strong>: $0.008/1K input + $0.024/1K output tokens</li>
+<li><strong>Small</strong>: $0.002/1K input + $0.006/1K output tokens</li>
+<li><strong>Billing</strong>: Per token, estimated if not provided</li>
+<li><strong>Cost Control</strong>: ✅ Estimated tracking</li>
+</ul>
+<h2 id="emergency-procedures">🚨 <strong>Emergency Procedures</strong></h2>
+<h3 id="if-you-hit-a-limit"><strong>If You Hit a Limit</strong></h3>
+<pre><code class="language-bash"># Check current spending
+python manage_costs.py status
+
+# Increase limits if needed
+python manage_costs.py limits --daily 5
+
+# Or wait for next time period
+</code></pre>
+<h3 id="if-costs-seem-wrong"><strong>If Costs Seem Wrong</strong></h3>
+<pre><code class="language-bash"># Export data for review
+python manage_costs.py export
+
+# Reset tracking if needed (with confirmation)
+python manage_costs.py reset
+</code></pre>
+<h3 id="for-large-analysis-projects"><strong>For Large Analysis Projects</strong></h3>
+<pre><code class="language-bash"># Set higher temporary limits
+python manage_costs.py limits --weekly 20 --monthly 60
+
+# Run your analysis
+python run_flagship_analysis.py --samples
+
+# Reset to conservative limits
+python manage_costs.py limits --daily 2 --weekly 10
+</code></pre>
+<h2 id="best-practices-for-academic-research">📊 <strong>Best Practices for Academic Research</strong></h2>
+<h3 id="1-budget-planning"><strong>1. Budget Planning</strong></h3>
+<ul>
+<li><strong>Start conservative</strong>: $25/month typically covers substantial research</li>
+<li><strong>Track by project</strong>: Export costs for grant reporting</li>
+<li><strong>Use cheaper models first</strong>: Test with GPT-3.5 and Claude-Haiku</li>
+</ul>
+<h3 id="2-model-selection-strategy"><strong>2. Model Selection Strategy</strong></h3>
+<pre><code class="language-bash"># Development/testing: Use cheaper models
+--model gpt-3.5-turbo
+--model claude-3-haiku
+
+# Final analysis: Use premium models
+--model gpt-4
+--model claude-3-sonnet
+</code></pre>
+<h3 id="3-batch-processing"><strong>3. Batch Processing</strong></h3>
+<ul>
+<li><strong>Estimate total costs</strong> before large batches</li>
+<li><strong>Process in smaller chunks</strong> to stay within daily limits</li>
+<li><strong>Monitor progress</strong> during long analyses</li>
+</ul>
+<h3 id="4-cost-optimization"><strong>4. Cost Optimization</strong></h3>
+<ul>
+<li><strong>Shorter prompts</strong> = lower input costs</li>
+<li><strong>Focused analysis</strong> = lower output costs  </li>
+<li><strong>Model selection</strong> based on task complexity</li>
+</ul>
+<h2 id="advanced-configuration">🔧 <strong>Advanced Configuration</strong></h2>
+<h3 id="custom-cost-limits-per-provider"><strong>Custom Cost Limits per Provider</strong></h3>
+<p>You can modify <code>src/utils/cost_manager.py</code> to set different limits for different providers:</p>
+<pre><code class="language-python"># Example: Higher limits for cheaper models
+if provider == &quot;anthropic&quot; and &quot;haiku&quot; in model:
+    daily_limit *= 2  # Double limit for cheap model
+</code></pre>
+<h3 id="project-specific-tracking"><strong>Project-Specific Tracking</strong></h3>
+<pre><code class="language-python"># Create separate cost managers for different projects
+cost_manager = CostManager(
+    cost_file=&quot;project_a_costs.json&quot;,
+    limits_file=&quot;project_a_limits.json&quot;
+)
+</code></pre>
+<h3 id="alert-integration"><strong>Alert Integration</strong></h3>
+<p>Add email/Slack alerts when approaching limits by modifying the <code>_check_and_warn_limits()</code> method.</p>
+<h2 id="summary-your-protection-is-active">🎯 <strong>Summary: Your Protection is Active</strong></h2>
+<p>✅ <strong>Automatic cost estimation</strong> before every request<br />
+✅ <strong>Hard limits</strong> prevent overspending<br />
+✅ <strong>Real-time tracking</strong> of actual costs<br />
+✅ <strong>Early warnings</strong> at 80% of limits<br />
+✅ <strong>Multi-level protection</strong> (daily/weekly/monthly)<br />
+✅ <strong>Provider-specific tracking</strong> for all three APIs<br />
+✅ <strong>Export capabilities</strong> for accounting/grants<br />
+✅ <strong>Emergency controls</strong> to adjust or reset  </p>
+<p><strong>Your research is protected against runaway costs while maintaining full access to flagship LLMs! 🛡️</strong> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

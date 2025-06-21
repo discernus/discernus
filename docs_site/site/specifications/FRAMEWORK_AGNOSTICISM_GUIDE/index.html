@@ -1,0 +1,962 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Framework Agnosticism Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#framework-agnosticism-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Framework Agnosticism Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-framework-agnosticism-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Framework Agnosticism Principle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Framework Agnosticism Principle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Concept
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why This Matters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#language-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Language Standards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Language Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform-level-language-framework-agnostic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform-Level Language (Framework-Agnostic)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-level-language-domain-specific" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework-Level Language (Domain-Specific)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-framework-positioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Framework Positioning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Framework Positioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#correct-framework-agnostic-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Correct Framework-Agnostic Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incorrect-framework-specific-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Incorrect Framework-Specific Description
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentation-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Standards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-writing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Writing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#domain-extension-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain Extension Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Domain Extension Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#business-communication-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business Communication Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#educational-discourse-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Educational Discourse Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#healthcare-communication-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Healthcare Communication Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#platform-capabilities-framework-agnostic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Capabilities (Framework-Agnostic)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Platform Capabilities (Framework-Agnostic)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Methodology
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualization-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-across-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Across Domains
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation Across Domains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-domain-validation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Domain Validation Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Assurance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-framework-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Framework Development
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Future Framework Development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#framework-creation-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Creation Guidelines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expansion-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expansion Opportunities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Success Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#academic-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Impact
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="framework-agnosticism-guide">Framework Agnosticism Guide</h1>
+<p><strong>Document Version</strong>: 1.0<br />
+<strong>Last Updated</strong>: June 12, 2025<br />
+<strong>Status</strong>: Strategic Foundation Document</p>
+<h2 id="overview">Overview</h2>
+<p>This document establishes the <strong>Framework Agnosticism Principle</strong> - the fundamental separation between the general Narrative Gravity Maps methodology and domain-specific framework implementations. This separation is critical for academic credibility, broader adoption, and theoretical clarity.</p>
+<h2 id="the-framework-agnosticism-principle">The Framework Agnosticism Principle</h2>
+<h3 id="core-concept">Core Concept</h3>
+<p><strong>Platform Level</strong>: The Narrative Gravity Maps methodology is a general system for analyzing persuasive discourse through configurable analytical frameworks. It is domain-neutral and framework-agnostic.</p>
+<p><strong>Framework Level</strong>: Specific implementations that apply the methodology to particular domains (political discourse, business communication, educational content, etc.) using domain-specific conceptual frameworks.</p>
+<h3 id="why-this-matters">Why This Matters</h3>
+<ol>
+<li><strong>Academic Credibility</strong>: Shows the methodology transcends any specific domain</li>
+<li><strong>Broader Adoption</strong>: Researchers in any field can see applicability to their domain  </li>
+<li><strong>Theoretical Clarity</strong>: Methodology separated from specific implementations</li>
+<li><strong>Framework Flexibility</strong>: Clear path for creating frameworks for any analytical domain</li>
+</ol>
+<h2 id="language-standards">Language Standards</h2>
+<h3 id="platform-level-language-framework-agnostic">Platform-Level Language (Framework-Agnostic)</h3>
+<p><strong>Core Methodology Terms:</strong>
+- "Gravity wells" - not "moral forces" or "political forces"
+- "Conceptual forces" - not domain-specific force types
+- "Analytical frameworks" - not "moral frameworks" or "political frameworks"
+- "Framework-defined forces" - not "integrative/disintegrative forces"
+- "Coordinate systems" - mathematical positioning concepts
+- "Persuasive discourse" - not "political discourse" or "moral discourse"
+- "Domain-appropriate frameworks" - acknowledging domain specificity</p>
+<p><strong>Analysis Capabilities:</strong>
+- "Framework-agnostic analysis"
+- "Configurable analytical frameworks for any domain"
+- "Systematic analysis of persuasive discourse across domains"
+- "Universal methodology applicable to any persuasive discourse domain"</p>
+<p><strong>Research Applications:</strong>
+- "Persuasive Discourse Analysis" (not "Political Speech Analysis")
+- "Argumentative Structure Analysis" (not "Policy Debate Analysis")
+- "Cross-Cultural Research using cultural frameworks"
+- "Historical Analysis with domain-appropriate frameworks"</p>
+<h3 id="framework-level-language-domain-specific">Framework-Level Language (Domain-Specific)</h3>
+<p><strong>Within Framework Context Only:</strong>
+- "Moral," "political," "integrative," "disintegrative"
+- "Good," "bad," "positive," "negative" (when framework-defined)
+- Domain-specific terminology (civic virtue, political spectrum, etc.)
+- Normative language (when appropriate to the framework)</p>
+<p><strong>Framework Descriptions:</strong>
+- Always qualify as "domain-specific examples"
+- Make clear they demonstrate platform capabilities
+- Acknowledge they are implementations, not inherent platform features</p>
+<h2 id="example-framework-positioning">Example Framework Positioning</h2>
+<h3 id="correct-framework-agnostic-description">✅ Correct Framework-Agnostic Description</h3>
+<pre><code>The Narrative Gravity Maps platform includes 5 domain-specific frameworks 
+demonstrating the methodology's versatility:
+
+1. Civic Virtue Framework (Political discourse analysis)
+   - Domain: Political discourse analysis
+   - Wells: Framework-defined attraction/repulsion forces for civic analysis
+   - Use case: Political speeches, policy debates, campaign rhetoric
+
+Note: These are examples demonstrating the platform's capability to 
+support frameworks from any analytical domain.
+</code></pre>
+<h3 id="incorrect-framework-specific-description">❌ Incorrect Framework-Specific Description</h3>
+<pre><code>The Narrative Gravity Maps platform analyzes moral and political forces 
+within texts using integrative and disintegrative wells:
+
+1. Civic Virtue Framework (Primary)
+   - Focus: Moral analysis of political discourse  
+   - Wells: 5 integrative virtues + 5 disintegrative forces
+   - Use case: Political speeches, policy debates
+</code></pre>
+<h2 id="implementation-guidelines">Implementation Guidelines</h2>
+<h3 id="documentation-standards">Documentation Standards</h3>
+<ol>
+<li><strong>Platform Documentation</strong>: Must use framework-agnostic language</li>
+<li><strong>Framework Documentation</strong>: May use domain-specific language within context</li>
+<li><strong>Examples</strong>: Always clarify as demonstrations of platform capabilities</li>
+<li><strong>Use Cases</strong>: Present as domain-specific applications, not platform limitations</li>
+</ol>
+<h3 id="code-implementation">Code Implementation</h3>
+<ol>
+<li><strong>Core Engine</strong>: Framework-agnostic variable names and docstrings</li>
+<li><strong>Framework Modules</strong>: Domain-specific implementations clearly scoped</li>
+<li><strong>API Endpoints</strong>: General endpoints that accept any framework</li>
+<li><strong>Documentation</strong>: Clear separation between methodology and implementation</li>
+</ol>
+<h3 id="academic-writing">Academic Writing</h3>
+<ol>
+<li><strong>Methodology Sections</strong>: Focus on general framework-agnostic principles</li>
+<li><strong>Implementation Sections</strong>: Present specific frameworks as examples</li>
+<li><strong>Results Sections</strong>: Emphasize methodology validation across domains</li>
+<li><strong>Discussion Sections</strong>: Highlight broader applicability beyond examples</li>
+</ol>
+<h2 id="domain-extension-examples">Domain Extension Examples</h2>
+<h3 id="business-communication-framework">Business Communication Framework</h3>
+<pre><code class="language-json">{
+  &quot;framework_name&quot;: &quot;corporate_communication&quot;,
+  &quot;domain&quot;: &quot;Business discourse analysis&quot;,
+  &quot;wells&quot;: {
+    &quot;Transparency&quot;: {&quot;angle&quot;: 90, &quot;weight&quot;: 1.0, &quot;type&quot;: &quot;trust_building&quot;},
+    &quot;Obfuscation&quot;: {&quot;angle&quot;: 270, &quot;weight&quot;: -1.0, &quot;type&quot;: &quot;trust_eroding&quot;}
+  }
+}
+</code></pre>
+<h3 id="educational-discourse-framework">Educational Discourse Framework</h3>
+<pre><code class="language-json">{
+  &quot;framework_name&quot;: &quot;pedagogical_approach&quot;,
+  &quot;domain&quot;: &quot;Educational communication analysis&quot;, 
+  &quot;wells&quot;: {
+    &quot;Empowerment&quot;: {&quot;angle&quot;: 45, &quot;weight&quot;: 1.0, &quot;type&quot;: &quot;growth_oriented&quot;},
+    &quot;Limitation&quot;: {&quot;angle&quot;: 225, &quot;weight&quot;: -1.0, &quot;type&quot;: &quot;growth_limiting&quot;}
+  }
+}
+</code></pre>
+<h3 id="healthcare-communication-framework">Healthcare Communication Framework</h3>
+<pre><code class="language-json">{
+  &quot;framework_name&quot;: &quot;medical_communication&quot;,
+  &quot;domain&quot;: &quot;Healthcare discourse analysis&quot;,
+  &quot;wells&quot;: {
+    &quot;Empathy&quot;: {&quot;angle&quot;: 90, &quot;weight&quot;: 1.0, &quot;type&quot;: &quot;healing_oriented&quot;},
+    &quot;Dismissiveness&quot;: {&quot;angle&quot;: 270, &quot;weight&quot;: -1.0, &quot;type&quot;: &quot;healing_impeding&quot;}
+  }
+}
+</code></pre>
+<h2 id="platform-capabilities-framework-agnostic">Platform Capabilities (Framework-Agnostic)</h2>
+<h3 id="core-methodology">Core Methodology</h3>
+<ul>
+<li><strong>Circular coordinate system</strong>: Universal mathematical foundation</li>
+<li><strong>Gravity well positioning</strong>: Flexible well placement for any conceptual framework</li>
+<li><strong>Differential weighting</strong>: Support for equal or hierarchical well importance</li>
+<li><strong>Multi-LLM analysis</strong>: Framework-agnostic prompt generation and analysis</li>
+<li><strong>Statistical validation</strong>: Cross-framework statistical rigor and reproducibility</li>
+</ul>
+<h3 id="visualization-system">Visualization System</h3>
+<ul>
+<li><strong>Framework-agnostic visualization</strong>: Works with any well configuration</li>
+<li><strong>Customizable positioning</strong>: Support for any theoretical arrangement</li>
+<li><strong>Enhanced algorithms</strong>: Dominance amplification and adaptive scaling for any domain</li>
+<li><strong>Publication-ready output</strong>: Academic-quality visualizations for any field</li>
+</ul>
+<h3 id="research-infrastructure">Research Infrastructure</h3>
+<ul>
+<li><strong>Database architecture</strong>: Framework-agnostic experimental tracking</li>
+<li><strong>Academic export</strong>: Multi-format datasets for any research domain</li>
+<li><strong>Component versioning</strong>: Framework evolution and validation tracking</li>
+<li><strong>Replication packages</strong>: Complete reproducibility for any domain application</li>
+</ul>
+<h2 id="validation-across-domains">Validation Across Domains</h2>
+<h3 id="cross-domain-validation-strategy">Cross-Domain Validation Strategy</h3>
+<ol>
+<li><strong>Mathematical Consistency</strong>: Core algorithms work identically across frameworks</li>
+<li><strong>Statistical Rigor</strong>: Validation metrics apply uniformly across domains</li>
+<li><strong>Reproducibility</strong>: Replication procedures work for any framework</li>
+<li><strong>Tool Compatibility</strong>: Academic tools (R, Stata, Python) work with any framework</li>
+</ol>
+<h3 id="quality-assurance">Quality Assurance</h3>
+<ol>
+<li><strong>Framework Validation</strong>: Schema compliance regardless of domain</li>
+<li><strong>Academic Standards</strong>: Theoretical foundation requirements for any field</li>
+<li><strong>Documentation Quality</strong>: Consistent documentation standards across domains</li>
+<li><strong>Testing Coverage</strong>: Comprehensive testing works for any framework type</li>
+</ol>
+<h2 id="future-framework-development">Future Framework Development</h2>
+<h3 id="framework-creation-guidelines">Framework Creation Guidelines</h3>
+<ol>
+<li><strong>Domain Identification</strong>: Clear specification of analytical domain</li>
+<li><strong>Theoretical Foundation</strong>: Academic grounding appropriate to the field</li>
+<li><strong>Well Definition</strong>: Domain-specific conceptual forces and positioning</li>
+<li><strong>Validation Strategy</strong>: Domain-appropriate validation and testing</li>
+</ol>
+<h3 id="expansion-opportunities">Expansion Opportunities</h3>
+<ul>
+<li><strong>Legal Analysis</strong>: Frameworks for legal argumentation and judicial discourse</li>
+<li><strong>Corporate Strategy</strong>: Business communication and organizational rhetoric</li>
+<li><strong>Educational Theory</strong>: Pedagogical approaches and learning discourse</li>
+<li><strong>Healthcare Communication</strong>: Patient-provider interaction analysis</li>
+<li><strong>International Relations</strong>: Diplomatic discourse and conflict communication</li>
+<li><strong>Marketing/Advertising</strong>: Persuasive commercial communication analysis</li>
+</ul>
+<h2 id="success-metrics">Success Metrics</h2>
+<h3 id="academic-impact">Academic Impact</h3>
+<ul>
+<li><strong>Adoption across disciplines</strong>: Researchers from multiple fields using the platform</li>
+<li><strong>Publication diversity</strong>: Papers across different academic domains</li>
+<li><strong>Citation patterns</strong>: Cross-disciplinary citation and methodology validation</li>
+<li><strong>Framework contributions</strong>: Community-created frameworks for new domains</li>
+</ul>
+<h3 id="technical-validation">Technical Validation</h3>
+<ul>
+<li><strong>Framework compatibility</strong>: All frameworks pass universal validation</li>
+<li><strong>Tool integration</strong>: Seamless operation across different academic tool ecosystems</li>
+<li><strong>Performance consistency</strong>: Identical analysis quality across domains</li>
+<li><strong>Reproducibility standards</strong>: Cross-domain replication and validation</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Framework agnosticism is not just a design principle - it's the foundation for the Narrative Gravity Maps methodology's academic credibility and broad applicability. By maintaining clear separation between the general methodology and specific implementations, we enable:</p>
+<ol>
+<li><strong>Universal Adoption</strong>: Any researcher can apply the methodology to their domain</li>
+<li><strong>Academic Rigor</strong>: Clear theoretical foundations separated from implementation details  </li>
+<li><strong>Community Growth</strong>: Researchers can contribute frameworks without platform limitations</li>
+<li><strong>Long-term Sustainability</strong>: Methodology transcends any specific research trend or domain</li>
+</ol>
+<p>This principle ensures that Narrative Gravity Maps becomes a foundational methodology for quantitative discourse analysis across all fields of human communication and persuasion.</p>
+<hr />
+<p><strong>Maintained by</strong>: Narrative Gravity Development Team<br />
+<strong>Next Review</strong>: After first cross-domain publication<br />
+<strong>Related Documents</strong>: Framework v2.0 Specification, Academic Standards Guide </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

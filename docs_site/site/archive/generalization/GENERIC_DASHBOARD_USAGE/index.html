@@ -1,0 +1,890 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Generic Multi-Run Narrative Gravity Analysis Dashboard - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#generic-multi-run-narrative-gravity-analysis-dashboard" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Generic Multi-Run Narrative Gravity Analysis Dashboard
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-dynamic-input-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Dynamic Input Handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-flexible-title-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Flexible Title Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-framework-agnostic-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Framework Agnostic Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-llm-prompt-generalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. LLM Prompt Generalization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-signature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Function Signature
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Function Signature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-basic-usage-full-auto-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Basic Usage (Full Auto-Detection)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-with-manual-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. With Manual Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-partial-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Partial Override
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-custom-output-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Custom Output Location
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-detection-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Detection Logic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Auto-Detection Logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filename-parsing-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filename Parsing Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Detection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preserved-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preserved Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preserved Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visual-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visual Layout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistical-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistical Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-criteria-met" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Criteria Met
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-from-specific-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration from Specific Versions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="generic-multi-run-narrative-gravity-analysis-dashboard">Generic Multi-Run Narrative Gravity Analysis Dashboard</h1>
+<p>A fully generalized version of the multi-run visualization system that can work with any speaker, framework, and text type.</p>
+<h2 id="overview">Overview</h2>
+<p>This system takes a hardcoded, Obama-specific dashboard and transforms it into a flexible, parameter-driven tool that can analyze any multi-run narrative gravity analysis results.</p>
+<h2 id="key-features">Key Features</h2>
+<h3 id="1-dynamic-input-handling">1. <strong>Dynamic Input Handling</strong></h3>
+<ul>
+<li>Works with any multi-run JSON file structure</li>
+<li>Auto-detects run count (not limited to 5 runs)</li>
+<li>Handles any framework (not just civic virtue)</li>
+<li>Extracts speaker/source and year from filename or accepts as parameters</li>
+</ul>
+<h3 id="2-flexible-title-generation">2. <strong>Flexible Title Generation</strong></h3>
+<ul>
+<li><strong>Before</strong>: "Obama 2009 Inaugural Speech - Multi-Run Civic Virtue Analysis Dashboard"</li>
+<li><strong>After</strong>: "[Speaker] [Year] [Speech/Text Type] - Multi-Run [Framework] Analysis Dashboard"</li>
+<li>Auto-parses from filename or accepts manual parameters</li>
+</ul>
+<h3 id="3-framework-agnostic-design">3. <strong>Framework Agnostic Design</strong></h3>
+<ul>
+<li>Auto-detects framework structure from JSON data</li>
+<li>Works with any framework's well structure</li>
+<li>Dynamic well categorization (integrative vs disintegrative)</li>
+<li>Gracefully handles unknown frameworks</li>
+</ul>
+<h3 id="4-llm-prompt-generalization">4. <strong>LLM Prompt Generalization</strong></h3>
+<ul>
+<li>Generic prompting for any speech/framework combination</li>
+<li>Framework-agnostic statistical analysis prompts</li>
+<li>No hardcoded references to specific speakers or content</li>
+</ul>
+<h2 id="function-signature">Function Signature</h2>
+<pre><code class="language-python">create_dashboard(results_file, speaker=None, year=None, speech_type=None, framework=None)
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>results_file</code> (required): Path to multi-run results JSON file</li>
+<li><code>speaker</code> (optional): Speaker name (auto-detected from filename if not provided)</li>
+<li><code>year</code> (optional): Year of speech (auto-detected from filename if not provided)  </li>
+<li><code>speech_type</code> (optional): Type of speech/text (defaults to "Speech")</li>
+<li><code>framework</code> (optional): Analysis framework (auto-detected from data if not provided)</li>
+</ul>
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="1-basic-usage-full-auto-detection">1. Basic Usage (Full Auto-Detection)</h3>
+<pre><code class="language-bash">python create_generic_multi_run_dashboard.py results.json
+</code></pre>
+<p>The system will automatically extract all metadata from the filename and data structure.</p>
+<h3 id="2-with-manual-parameters">2. With Manual Parameters</h3>
+<pre><code class="language-bash">python create_generic_multi_run_dashboard.py results.json \
+  --speaker &quot;Lincoln&quot; \
+  --year &quot;1863&quot; \
+  --speech-type &quot;Address&quot; \
+  --framework &quot;Civic Virtue&quot;
+</code></pre>
+<h3 id="3-partial-override">3. Partial Override</h3>
+<pre><code class="language-bash">python create_generic_multi_run_dashboard.py trump_2017_rally_populist_framework.json \
+  --speech-type &quot;Rally Speech&quot;
+</code></pre>
+<p>Will auto-detect Trump, 2017, and populist framework, but use "Rally Speech" as the type.</p>
+<h3 id="4-custom-output-location">4. Custom Output Location</h3>
+<pre><code class="language-bash">python create_generic_multi_run_dashboard.py results.json \
+  --output &quot;custom_dashboard.png&quot;
+</code></pre>
+<h2 id="auto-detection-logic">Auto-Detection Logic</h2>
+<h3 id="filename-parsing-patterns">Filename Parsing Patterns</h3>
+<p>The system recognizes these common filename patterns:</p>
+<ol>
+<li><code>speaker_year_framework_timestamp.json</code></li>
+<li>Example: <code>trump_2017_populist_20250606_142731.json</code></li>
+<li>
+<p>Extracts: Speaker=Trump, Year=2017, Framework=Populist</p>
+</li>
+<li>
+<p><code>speaker_multi_run_framework_timestamp.json</code></p>
+</li>
+<li>Example: <code>biden_multi_run_civic_virtue_20250606_142731.json</code></li>
+<li>
+<p>Extracts: Speaker=Biden, Framework=Civic Virtue</p>
+</li>
+<li>
+<p><code>speaker_framework_year.json</code></p>
+</li>
+<li>Example: <code>churchill_wartime_rhetoric_1940.json</code></li>
+<li>Extracts: Speaker=Churchill, Framework=Wartime Rhetoric, Year=1940</li>
+</ol>
+<h3 id="framework-detection">Framework Detection</h3>
+<p>The system automatically detects framework types:</p>
+<ol>
+<li><strong>Civic Virtue Framework</strong>: Auto-detected if wells include Dignity, Truth, Hope, Justice, Pragmatism, Tribalism, Manipulation, Fantasy, Resentment, Fear</li>
+<li><strong>Unknown Frameworks</strong>: Automatically categorizes first half of wells as integrative, second half as disintegrative</li>
+<li><strong>Custom Categories</strong>: Can be extended to recognize other framework patterns</li>
+</ol>
+<h2 id="preserved-features">Preserved Features</h2>
+<h3 id="visual-layout">Visual Layout</h3>
+<ul>
+<li>Same GridSpec structure with 7 rows and proper spacing</li>
+<li>Elliptical map with narrative center variance display  </li>
+<li>Bar chart with confidence intervals and value labels</li>
+<li>Color-coded panels (blue/darkred borders)</li>
+<li>Forensic footer with complete traceability data</li>
+</ul>
+<h3 id="statistical-analysis">Statistical Analysis</h3>
+<ul>
+<li>Variance calculation across all runs</li>
+<li>Confidence interval computation</li>
+<li>Narrative center coordinate variance</li>
+<li>Category-specific variance comparisons</li>
+</ul>
+<h3 id="llm-integration">LLM Integration</h3>
+<ul>
+<li>Composite summary generation (2-3 sentences)</li>
+<li>Pure variance analysis (100 words, technical focus)</li>
+<li>Score-variance relationship discussion</li>
+<li>Framework-agnostic prompting</li>
+</ul>
+<h2 id="output-structure">Output Structure</h2>
+<p>The generated dashboard maintains the same professional layout as the original:</p>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                    [Speaker] [Year] [Type] - Multi-Run         │
+│                    [Framework] Analysis Dashboard              │
+├─────────────────────┬───────────────────────────────────────────┤
+│                     │                                           │
+│   Framework Map     │         Bar Chart with                   │
+│   (Elliptical)      │      Confidence Intervals                │
+│   Mean Scores       │                                           │
+│                     │                                           │
+├─────────────────────┼───────────────────────────────────────────┤
+│   COMPOSITE         │       VARIANCE ANALYSIS                  │
+│   SUMMARY           │                                           │
+│   (LLM Generated)   │       (LLM Generated)                    │
+├─────────────────────┴───────────────────────────────────────────┤
+│ Files: xxx.json | Model: xxx | Runs: N | Date: xxx | Job: xxx  │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h2 id="technical-architecture">Technical Architecture</h2>
+<h3 id="core-functions">Core Functions</h3>
+<ul>
+<li><code>parse_filename_metadata()</code>: Extracts metadata from filenames</li>
+<li><code>detect_framework_structure()</code>: Auto-detects framework from score data</li>
+<li><code>load_and_process_data()</code>: Loads and processes multi-run results</li>
+<li><code>generate_composite_summary()</code>: Creates framework-agnostic summary</li>
+<li><code>generate_variance_analysis()</code>: Creates statistical variance analysis</li>
+<li><code>create_dashboard()</code>: Main dashboard generation function</li>
+</ul>
+<h3 id="backward-compatibility">Backward Compatibility</h3>
+<p>The system maintains full backward compatibility with existing JSON file formats and naming conventions.</p>
+<h2 id="error-handling">Error Handling</h2>
+<ul>
+<li>Graceful fallbacks for missing metadata</li>
+<li>Default values for unknown parameters  </li>
+<li>Clear error messages for file issues</li>
+<li>Framework auto-detection for unknown structures</li>
+</ul>
+<h2 id="integration">Integration</h2>
+<p>Can be easily integrated into existing workflows:</p>
+<pre><code class="language-python">from create_generic_multi_run_dashboard import create_dashboard
+
+# Generate dashboard programmatically
+fig = create_dashboard(&quot;my_results.json&quot;, speaker=&quot;Kennedy&quot;, year=&quot;1961&quot;)
+if fig:
+    fig.savefig(&quot;kennedy_dashboard.png&quot;, dpi=300, bbox_inches='tight')
+</code></pre>
+<h2 id="success-criteria-met">Success Criteria Met</h2>
+<p>✅ Works with any multi-run JSON file structure<br />
+✅ Automatically adapts to different frameworks<br />
+✅ Generates appropriate titles and forensic data<br />
+✅ Maintains visual quality and statistical rigor<br />
+✅ Requires minimal manual configuration<br />
+✅ Preserves all refined features from the original  </p>
+<h2 id="migration-from-specific-versions">Migration from Specific Versions</h2>
+<p>To migrate from speaker-specific versions:</p>
+<ol>
+<li>Replace hardcoded function calls:
+   ```python
+   # Old
+   from create_obama_elliptical_dashboard_v8 import main
+   main()</li>
+</ol>
+<p># New<br />
+   from create_generic_multi_run_dashboard import create_dashboard
+   create_dashboard("results.json")
+   ```</p>
+<ol>
+<li>Update file naming conventions to leverage auto-detection</li>
+<li>Test with existing data to verify compatibility</li>
+</ol>
+<p>The generalized system provides the same quality output with maximum flexibility and minimal configuration. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

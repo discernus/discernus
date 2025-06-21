@@ -1,0 +1,183 @@
+# Comparative Framework Validation Experiment
+# Purpose: Validate dipole vs non-dipole framework effectiveness on categorized corpus
+# Date: June 19, 2025
+
+experiment_meta:
+  name: "dipole_vs_non_dipole_validation_study"
+  display_name: "Dipole vs Non-Dipole Framework Validation Study"
+  version: "v1.0"
+  description: >
+    Comparative validation study testing the effectiveness of dipole-based frameworks
+    (IDITI) versus non-dipole frameworks (Three Wells Political) on a categorized
+    validation corpus. Tests both framework types on identical texts to measure
+    methodological effectiveness and academic credibility.
+  
+  academic_purpose: "Framework validation for expert consultation and publication"
+  created_date: "2025-06-19T16:30:00.000000"
+  expected_duration: "15-20 minutes"
+  estimated_cost: "$5-8"
+
+# Experiment design
+study_design:
+  type: "comparative_validation"
+  methodology: "same_corpus_multiple_frameworks"
+  control_strategy: "identical_texts_different_frameworks"
+  
+  research_questions:
+    - "Do dipole frameworks (binary opposition) provide clearer scoring patterns?"
+    - "Do non-dipole frameworks (independent competition) capture more nuanced analysis?"
+    - "Which framework type demonstrates better theoretical coherence on categorized texts?"
+    - "How do framework types differ in analyzing dignity vs tribalism themes?"
+
+# Framework configurations
+frameworks:
+  framework_1:
+    name: "iditi"
+    type: "dipole"
+    source_path: "research_workspaces/june_2025_research_dev_workspace/frameworks/iditi"
+    framework_file: "framework.yaml"
+    description: "Individual Dignity vs Tribal Identity (dipole framework)"
+    theoretical_focus: "dignity_tribalism_binary"
+    
+  framework_2:
+    name: "three_wells_political"
+    type: "non_dipole"
+    source_path: "research_workspaces/june_2025_research_dev_workspace/frameworks/three_wells_political"
+    framework_file: "framework.yaml"
+    description: "Three Wells Political Discourse (independent wells framework)"
+    theoretical_focus: "dignity_tribalism_intersectionality_triangle"
+
+# Corpus configuration
+corpus:
+  source: "corpus/validation_set"
+  strategy: "representative_sampling"
+  
+  categories:
+    conservative_dignity:
+      path: "corpus/validation_set/conservative_dignity"
+      expected_pattern: "high_dignity_low_tribalism"
+      sample_size: 2
+      description: "Conservative texts emphasizing individual dignity themes"
+      
+    progressive_tribalism:
+      path: "corpus/validation_set/progressive_tribalism"
+      expected_pattern: "high_tribalism_variable_intersectionality"
+      sample_size: 2
+      description: "Progressive texts emphasizing tribal/group identity themes"
+      
+    mixed_controls:
+      path: "corpus/validation_set/mixed_controls"
+      expected_pattern: "balanced_mixed_signals"
+      sample_size: 1
+      description: "Control texts with mixed or balanced themes"
+
+# Analysis configuration
+analysis_settings:
+  llm_model: "gpt-4"
+  temperature: 0.3
+  prompt_template: "hierarchical_analysis"
+  quality_assurance: true
+  
+  scoring_requirements:
+    scale: "0.0_to_1.0"
+    enforce_decimal: true
+    require_justifications: true
+
+# Execution plan
+execution:
+  phases:
+    phase_1:
+      name: "IDITI Framework Analysis"
+      framework: "iditi"
+      corpus_categories: ["conservative_dignity", "progressive_tribalism", "mixed_controls"]
+      parallel_execution: false
+      
+    phase_2:
+      name: "Three Wells Framework Analysis"
+      framework: "three_wells_political"
+      corpus_categories: ["conservative_dignity", "progressive_tribalism", "mixed_controls"]
+      parallel_execution: false
+      
+    phase_3:
+      name: "Comparative Analysis"
+      action: "generate_comparison_report"
+      compare_frameworks: ["iditi", "three_wells_political"]
+
+# Expected outcomes
+validation_targets:
+  iditi_framework:
+    conservative_dignity:
+      expected_dignity_score: ">0.7"
+      expected_tribalism_score: "<0.3"
+      theoretical_prediction: "clear_dignity_orientation"
+      
+    progressive_tribalism:
+      expected_dignity_score: "<0.4"
+      expected_tribalism_score: ">0.6"
+      theoretical_prediction: "clear_tribalism_orientation"
+  
+  three_wells_framework:
+    conservative_dignity:
+      expected_pluralist_dignity_score: ">0.6"
+      expected_tribal_domination_score: "<0.4"
+      expected_intersectionality_score: "<0.3"
+      
+    progressive_tribalism:
+      expected_intersectionality_score: ">0.5"
+      expected_tribal_domination_score: "variable"
+      expected_pluralist_dignity_score: "<0.4"
+
+# Success criteria
+success_metrics:
+  theoretical_coherence:
+    target: "frameworks_show_expected_patterns"
+    measurement: "predicted_vs_actual_scoring"
+    
+  discriminative_power:
+    target: "frameworks_distinguish_categories"
+    measurement: "between_category_variance"
+    
+  methodological_robustness:
+    target: "consistent_results_across_framework_types"
+    measurement: "cross_framework_correlation_analysis"
+
+# Output specifications
+outputs:
+  individual_analyses:
+    format: "json"
+    include_justifications: true
+    include_confidence_scores: true
+    
+  comparative_report:
+    format: "markdown"
+    include_statistical_analysis: true
+    include_academic_discussion: true
+    
+  data_export:
+    formats: ["csv", "json"]
+    academic_ready: true
+    replication_package: true
+
+# Academic validation features
+academic_features:
+  expert_review_ready: true
+  replication_package: true
+  statistical_validation: true
+  publication_quality: true
+  
+  documentation:
+    methodology_transparency: "complete"
+    asset_provenance: "hash_verified"
+    execution_logs: "comprehensive"
+
+# Risk mitigation
+cost_controls:
+  max_budget: "$10.00"
+  token_limits: true
+  failure_handling: "graceful_degradation"
+  
+quality_controls:
+  llm_qa_validation: true
+  json_format_validation: true
+  score_range_validation: true
+  justification_completeness: true 

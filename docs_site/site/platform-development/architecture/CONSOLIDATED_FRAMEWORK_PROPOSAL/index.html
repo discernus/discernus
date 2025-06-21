@@ -1,0 +1,1147 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Consolidated Framework Architecture Proposal - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#consolidated-framework-architecture-proposal" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Consolidated Framework Architecture Proposal
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Problem Statement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Problem Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Problems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-file-structure-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current File Structure Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-solution-consolidated-framework-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Proposed Solution: Consolidated Framework Definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💡 Proposed Solution: Consolidated Framework Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single-File Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprehensive Schema
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits-of-consolidated-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Benefits of Consolidated Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Benefits of Consolidated Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-simplicity-maintainability" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Simplicity &amp; Maintainability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-enhanced-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Enhanced Functionality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-developer-experience" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Developer Experience
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-rich-framework-specific-prompting" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Rich Framework-Specific Prompting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flexible-framework-architecture-beyond-dipoles" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Flexible Framework Architecture: Beyond Dipoles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Flexible Framework Architecture: Beyond Dipoles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#framework-model-flexibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Model Flexibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#two-dimensional-prompting-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two-Dimensional Prompting Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimension-1-framework-specific-rich-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dimension 1: Framework-Specific Rich Content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimension-2-general-template-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dimension 2: General Template Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Separation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Migration Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Migration Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-proof-of-concept-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Proof of Concept ✅ Complete
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-gradual-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Gradual Migration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-full-transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Full Transition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison-before-vs-after" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Comparison: Before vs. After
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Comparison: Before vs. After">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-multi-file-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Multi-File Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proposed-consolidated-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proposed Consolidated Approach
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Validation Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Validation Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#successful-prompt-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Successful Prompt Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-simplification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Simplification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-richness-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Richness Improvements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-flexibility-achievements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architectural Flexibility Achievements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-clustering-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Clustering Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Implementation Checklist
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Implementation Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#framework-definition-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Definition Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-integration-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Integration Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleanup-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cleanup Tasks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="consolidated-framework-architecture-proposal">Consolidated Framework Architecture Proposal</h1>
+<p><strong>Problem</strong>: Framework definitions are scattered across multiple files with duplication and inconsistency<br />
+<strong>Solution</strong>: Single-file framework definition with comprehensive structure<br />
+<strong>Date</strong>: December 16, 2025</p>
+<hr />
+<h2 id="problem-statement">🎯 <strong>Problem Statement</strong></h2>
+<p>The current framework definition system is <strong>simultaneously too complex and too sparse</strong>:</p>
+<h3 id="current-problems"><strong>Current Problems</strong></h3>
+<ul>
+<li><strong>Multi-file complexity</strong>: Each framework requires 3+ files (dipoles.json, framework.json, weights.json)</li>
+<li><strong>Information duplication</strong>: Well names and weights duplicated across files</li>
+<li><strong>Inconsistent structure</strong>: Some frameworks have prompt_format.md, others don't</li>
+<li><strong>Maintenance burden</strong>: Changes require updating multiple files</li>
+<li><strong>Scattered information</strong>: Related data split across multiple locations</li>
+<li><strong>Prompt generation complexity</strong>: System must merge information from multiple sources</li>
+</ul>
+<h3 id="current-file-structure-issues"><strong>Current File Structure Issues</strong></h3>
+<pre><code>frameworks/civic_virtue/
+├── dipoles.json          (148 lines) - Framework metadata + dipole definitions
+├── framework.json        (146 lines) - Coordinate system + well positioning + weights
+├── weights.json          (85 lines)  - Duplicate weight info + philosophy
+├── README.md             (46 lines)  - Documentation
+└── prompt_format.md      (114 lines) - Sometimes present, inconsistent
+</code></pre>
+<p><strong>Total</strong>: 539+ lines across 5 files with significant duplication</p>
+<hr />
+<h2 id="proposed-solution-consolidated-framework-definition">💡 <strong>Proposed Solution: Consolidated Framework Definition</strong></h2>
+<h3 id="single-file-structure"><strong>Single-File Structure</strong></h3>
+<pre><code>frameworks/civic_virtue/
+└── framework.json        (All framework information in logical structure)
+</code></pre>
+<h3 id="comprehensive-schema"><strong>Comprehensive Schema</strong></h3>
+<pre><code class="language-json">{
+  &quot;framework_meta&quot;: {
+    &quot;name&quot;: &quot;civic_virtue&quot;,
+    &quot;display_name&quot;: &quot;Civic Virtue Framework&quot;, 
+    &quot;version&quot;: &quot;v2025.06.14&quot;,
+    &quot;description&quot;: &quot;Complete framework description&quot;,
+    &quot;theoretical_foundation&quot;: {
+      &quot;primary_sources&quot;: [...],
+      &quot;theoretical_approach&quot;: &quot;...&quot;
+    }
+  },
+
+  &quot;coordinate_system&quot;: {
+    &quot;type&quot;: &quot;circle&quot;,
+    &quot;radius&quot;: 1.0,
+    &quot;scaling_factor&quot;: 0.8
+  },
+
+  &quot;dipoles&quot;: [
+    {
+      &quot;name&quot;: &quot;Identity&quot;,
+      &quot;description&quot;: &quot;Moral worth and group membership dynamics&quot;,
+      &quot;positive&quot;: {
+        &quot;name&quot;: &quot;Dignity&quot;,
+        &quot;description&quot;: &quot;...&quot;,
+        &quot;language_cues&quot;: [...],
+        &quot;angle&quot;: 90,
+        &quot;weight&quot;: 1.0,
+        &quot;type&quot;: &quot;integrative&quot;,
+        &quot;tier&quot;: &quot;primary&quot;
+      },
+      &quot;negative&quot;: {
+        &quot;name&quot;: &quot;Tribalism&quot;, 
+        &quot;description&quot;: &quot;...&quot;,
+        &quot;language_cues&quot;: [...],
+        &quot;angle&quot;: 270,
+        &quot;weight&quot;: -1.0,
+        &quot;type&quot;: &quot;disintegrative&quot;,
+        &quot;tier&quot;: &quot;primary&quot;
+      }
+    }
+  ],
+
+  &quot;weighting_philosophy&quot;: {
+    &quot;description&quot;: &quot;Three-tier weighting system...&quot;,
+    &quot;tiers&quot;: {
+      &quot;primary&quot;: {&quot;weight&quot;: 1.0, &quot;description&quot;: &quot;...&quot;, &quot;wells&quot;: [...]},
+      &quot;secondary&quot;: {&quot;weight&quot;: 0.8, &quot;description&quot;: &quot;...&quot;, &quot;wells&quot;: [...]},
+      &quot;tertiary&quot;: {&quot;weight&quot;: 0.6, &quot;description&quot;: &quot;...&quot;, &quot;wells&quot;: [...]}
+    }
+  },
+
+  &quot;prompt_configuration&quot;: {
+    &quot;expert_role&quot;: &quot;You are an expert...&quot;,
+    &quot;analysis_focus&quot;: &quot;Evaluate how...&quot;,
+    &quot;scoring_emphasis&quot;: &quot;Focus on...&quot;,
+    &quot;evidence_requirements&quot;: &quot;Provide specific...&quot;
+  },
+
+  &quot;visualization&quot;: {
+    &quot;well_type_colors&quot;: {&quot;integrative&quot;: &quot;#2E7D32&quot;, &quot;disintegrative&quot;: &quot;#C62828&quot;},
+    &quot;supported_types&quot;: [&quot;circular&quot;, &quot;comparative&quot;]
+  },
+
+  &quot;metrics&quot;: {
+    &quot;com&quot;: {&quot;name&quot;: &quot;Center of Mass&quot;, &quot;description&quot;: &quot;...&quot;},
+    &quot;nps&quot;: {&quot;name&quot;: &quot;Narrative Polarity Score&quot;, &quot;description&quot;: &quot;...&quot;}
+  },
+
+  &quot;compatibility&quot;: {
+    &quot;prompt_templates&quot;: [&quot;hierarchical_v2.1&quot;, &quot;standard_v2.0&quot;],
+    &quot;weighting_schemes&quot;: [&quot;winner_take_most&quot;, &quot;proportional&quot;],
+    &quot;api_versions&quot;: [&quot;v2.0&quot;, &quot;v2.1&quot;]
+  }
+}
+</code></pre>
+<hr />
+<h2 id="benefits-of-consolidated-approach">✅ <strong>Benefits of Consolidated Approach</strong></h2>
+<h3 id="1-simplicity-maintainability"><strong>1. Simplicity &amp; Maintainability</strong></h3>
+<ul>
+<li><strong>Single source of truth</strong>: All framework information in one logical structure</li>
+<li><strong>No duplication</strong>: Well definitions, weights, and metadata unified</li>
+<li><strong>Easier updates</strong>: Change framework in one place</li>
+<li><strong>Consistent structure</strong>: Same schema across all frameworks</li>
+<li><strong>Better version control</strong>: Single file to track changes</li>
+</ul>
+<h3 id="2-enhanced-functionality"><strong>2. Enhanced Functionality</strong></h3>
+<ul>
+<li><strong>Framework-specific prompting</strong>: <code>prompt_configuration</code> section eliminates template guesswork</li>
+<li><strong>Complete context</strong>: All related information available simultaneously</li>
+<li><strong>Self-documenting</strong>: Structure makes relationships clear</li>
+<li><strong>Validation simplicity</strong>: Single schema to validate against</li>
+</ul>
+<h3 id="3-developer-experience"><strong>3. Developer Experience</strong></h3>
+<ul>
+<li><strong>Simpler loading</strong>: One JSON parse operation vs. multiple file loads</li>
+<li><strong>Fewer errors</strong>: No cross-file reference mismatches</li>
+<li><strong>Easier testing</strong>: Mock single object vs. multiple file system</li>
+<li><strong>Better IDE support</strong>: Single file for navigation and editing</li>
+</ul>
+<h3 id="4-rich-framework-specific-prompting"><strong>4. Rich Framework-Specific Prompting</strong></h3>
+<ul>
+<li><strong>Comprehensive keyword banks</strong>: 5.3x more language cues with categorical organization</li>
+<li><strong>Rich conceptual descriptions</strong>: 2.8x more detailed well descriptions with theoretical context</li>
+<li><strong>Framework-specific guidance</strong>: Domain expertise embedded (analytical questions, contextual considerations, common challenges)</li>
+<li><strong>Separation of concerns</strong>: Framework-specific content separate from general template structure</li>
+<li><strong>Domain expertise capture</strong>: Framework developers can encode deep domain knowledge into prompting</li>
+</ul>
+<hr />
+<h2 id="flexible-framework-architecture-beyond-dipoles">🎯 <strong>Flexible Framework Architecture: Beyond Dipoles</strong></h2>
+<p>The consolidated framework approach supports <strong>multiple conceptual models</strong> including both traditional dipole-based frameworks and independent wells approaches:</p>
+<h3 id="framework-model-flexibility"><strong>Framework Model Flexibility</strong></h3>
+<p><strong>Dipole-Based Frameworks</strong> (Current Standard):
+- Organized as positive/negative pairs (e.g., Dignity vs. Tribalism)
+- Wells positioned as opposites around circle
+- Center of mass calculated from dipole forces
+- Suitable for moral/virtue frameworks with clear opposites</p>
+<p><strong>Independent Wells Frameworks</strong> (New Capability):
+- Wells positioned independently around circle
+- Each well represents competing theory, not opposite pair
+- Center of mass calculated from independent gravitational forces<br />
+- Suitable for tripartite models or competing worldviews</p>
+<p><strong>Example: Three Wells Political Discourse Framework</strong>
+Based on the Three Gravitational Wells model, positioning:
+- Intersectionality Theory (0°)
+- Tribal Domination Theory (120°) 
+- Pluralist Individual Dignity Theory (240°)</p>
+<p>These represent independent competing worldviews, not opposite pairs, requiring different mathematical treatment and prompt approaches.</p>
+<p><strong>Clustered Dipole Frameworks</strong> (Advanced Feature):
+- Dipoles clustered within defined arcs of the circle
+- Flexible cluster definitions with custom arc ranges
+- Domain-specific groupings (e.g., stakeholder relations 15°-75°, operational integrity 120°-210°)
+- Cluster-aware calculations and domain-specific metrics
+- Support for asymmetric positioning and variable cluster sizes</p>
+<h3 id="two-dimensional-prompting-architecture"><strong>Two-Dimensional Prompting Architecture</strong></h3>
+<p>The consolidated framework approach perfectly supports the crucial distinction between <strong>framework-specific content</strong> and <strong>general template structure</strong>:</p>
+<h3 id="dimension-1-framework-specific-rich-content"><strong>Dimension 1: Framework-Specific Rich Content</strong></h3>
+<ul>
+<li><strong>Rich dipole descriptions</strong>: Deep conceptual explanations with theoretical context</li>
+<li><strong>Comprehensive keyword banks</strong>: Organized by categories (direct appeals, bridging language, etc.)</li>
+<li><strong>Domain expertise guidance</strong>: Framework-specific analytical questions and considerations</li>
+<li><strong>Conceptual breadth mapping</strong>: Core concepts and recognition patterns for each well</li>
+<li><strong>Theoretical grounding</strong>: Academic sources and domain-specific reasoning</li>
+</ul>
+<p><strong>Example - Enhanced Dignity Well:</strong>
+- <strong>Basic description</strong>: 144 characters
+- <strong>Rich description</strong>: 410 characters (2.8x more detailed)
+- <strong>Language cues</strong>: 32 total across 4 categories (5.3x more comprehensive)
+- <strong>Domain guidance</strong>: 5 analytical questions, 4 contextual considerations, 5 common challenges</p>
+<h3 id="dimension-2-general-template-structure"><strong>Dimension 2: General Template Structure</strong></h3>
+<ul>
+<li><strong>Expert role definition</strong>: Cross-framework analyst positioning</li>
+<li><strong>Scoring requirements</strong>: Universal 0.0-1.0 scale with evidence requirements</li>
+<li><strong>JSON response format</strong>: Consistent structure across all frameworks</li>
+<li><strong>Analysis methodology</strong>: General approach to evidence gathering and reasoning</li>
+<li><strong>Response formatting</strong>: Standard metadata, wells array, metrics structure</li>
+</ul>
+<h3 id="benefits-of-separation"><strong>Benefits of Separation</strong></h3>
+<p>✅ <strong>Framework developers</strong> can focus on domain expertise without worrying about prompt engineering<br />
+✅ <strong>Template developers</strong> can improve general prompting without domain-specific knowledge<br />
+✅ <strong>More accurate analysis</strong> through rich, domain-specific content<br />
+✅ <strong>Maintainable templates</strong> through consistent cross-framework structure<br />
+✅ <strong>Scalable system</strong> supporting any number of specialized frameworks  </p>
+<hr />
+<h2 id="migration-strategy">🔄 <strong>Migration Strategy</strong></h2>
+<h3 id="phase-1-proof-of-concept-complete"><strong>Phase 1: Proof of Concept</strong> ✅ Complete</h3>
+<ul>
+<li>[x] Create consolidated structure for <code>civic_virtue</code></li>
+<li>[x] Build demonstration loader and prompt generator</li>
+<li>[x] Validate prompt generation quality</li>
+<li>[x] Document benefits and approach</li>
+</ul>
+<h3 id="phase-2-gradual-migration"><strong>Phase 2: Gradual Migration</strong></h3>
+<ol>
+<li><strong>Update FrameworkManager</strong> to support both old and new formats</li>
+<li><strong>Migrate one framework at a time</strong> (civic_virtue, political_spectrum, etc.)</li>
+<li><strong>Add validation</strong> to ensure consolidated definitions are complete</li>
+<li><strong>Update PromptTemplateManager</strong> to use consolidated information</li>
+</ol>
+<h3 id="phase-3-full-transition"><strong>Phase 3: Full Transition</strong></h3>
+<ol>
+<li><strong>Update all existing frameworks</strong> to consolidated format</li>
+<li><strong>Remove legacy multi-file support</strong> after validation</li>
+<li><strong>Update documentation</strong> and guides</li>
+<li><strong>Clean up deprecated files</strong></li>
+</ol>
+<h3 id="backward-compatibility"><strong>Backward Compatibility</strong></h3>
+<pre><code class="language-python">def load_framework(self, framework_name: str) -&gt; Dict[str, Any]:
+    &quot;&quot;&quot;Load framework with backward compatibility&quot;&quot;&quot;
+    consolidated_file = f&quot;frameworks/{framework_name}/framework.json&quot;
+
+    if os.path.exists(consolidated_file):
+        # New consolidated format
+        with open(consolidated_file, 'r') as f:
+            return json.load(f)
+    else:
+        # Legacy multi-file format
+        return self._load_legacy_framework(framework_name)
+</code></pre>
+<hr />
+<h2 id="comparison-before-vs-after">📊 <strong>Comparison: Before vs. After</strong></h2>
+<h3 id="current-multi-file-approach"><strong>Current Multi-File Approach</strong></h3>
+<pre><code class="language-python"># Load 3+ separate files
+dipoles = load_json(&quot;frameworks/civic_virtue/dipoles.json&quot;)      # 148 lines
+framework = load_json(&quot;frameworks/civic_virtue/framework.json&quot;)  # 146 lines  
+weights = load_json(&quot;frameworks/civic_virtue/weights.json&quot;)      # 85 lines
+
+# Cross-reference and merge data
+wells = extract_wells_from_dipoles(dipoles)
+well_weights = weights[&quot;well_weights&quot;]  
+coordinate_system = framework[&quot;coordinate_system&quot;]
+
+# Build prompt from scattered information
+prompt = build_prompt(dipoles, framework, weights, custom_templates)
+</code></pre>
+<h3 id="proposed-consolidated-approach"><strong>Proposed Consolidated Approach</strong></h3>
+<pre><code class="language-python"># Load single comprehensive file
+framework = load_json(&quot;frameworks/civic_virtue/framework.json&quot;)
+
+# All information immediately available
+dipoles = framework[&quot;dipoles&quot;]
+weights = framework[&quot;weighting_philosophy&quot;] 
+prompt_config = framework[&quot;prompt_configuration&quot;]
+coordinate_system = framework[&quot;coordinate_system&quot;]
+
+# Direct prompt generation
+prompt = generate_prompt_from_framework(framework, text)
+</code></pre>
+<p><strong>Reduction</strong>: From 379+ lines across 3+ files to single logical structure</p>
+<hr />
+<h2 id="validation-results">🧪 <strong>Validation Results</strong></h2>
+<p>The proof-of-concept demonstrates:</p>
+<h3 id="successful-prompt-generation"><strong>Successful Prompt Generation</strong></h3>
+<ul>
+<li>✅ <strong>4,176 character prompt</strong> generated from consolidated definition</li>
+<li>✅ <strong>All framework wells</strong> properly included (10 wells from 5 dipoles)</li>
+<li>✅ <strong>Scoring guidelines</strong> integrated from weighting philosophy</li>
+<li>✅ <strong>Expert role</strong> and analysis focus from prompt configuration</li>
+<li>✅ <strong>Evidence requirements</strong> explicitly stated</li>
+<li>✅ <strong>JSON format</strong> automatically derived from dipole structure</li>
+</ul>
+<h3 id="code-simplification"><strong>Code Simplification</strong></h3>
+<ul>
+<li>✅ <strong>Single load operation</strong> vs. multiple file coordination</li>
+<li>✅ <strong>No cross-referencing</strong> needed between files</li>
+<li>✅ <strong>Logical information hierarchy</strong> easy to navigate</li>
+<li>✅ <strong>Framework-specific prompt configuration</strong> eliminates guesswork</li>
+</ul>
+<h3 id="content-richness-improvements"><strong>Content Richness Improvements</strong></h3>
+<ul>
+<li>✅ <strong>Language cues</strong>: 5.3x more comprehensive (32 vs 6 total)</li>
+<li>✅ <strong>Descriptive content</strong>: 2.8x more detailed (410 vs 144 characters)</li>
+<li>✅ <strong>Categorical organization</strong>: 4 language cue categories vs flat list</li>
+<li>✅ <strong>Domain expertise</strong>: 14 pieces of framework-specific guidance</li>
+<li>✅ <strong>Theoretical grounding</strong>: Explicit academic sources and reasoning</li>
+<li>✅ <strong>Recognition patterns</strong>: 6 concrete patterns for identifying each well</li>
+</ul>
+<h3 id="architectural-flexibility-achievements"><strong>Architectural Flexibility Achievements</strong></h3>
+<ul>
+<li>✅ <strong>Multiple framework models</strong>: Both dipole-based and independent wells supported</li>
+<li>✅ <strong>Three Wells Model compatibility</strong>: Direct support for tripartite political discourse analysis</li>
+<li>✅ <strong>Calculation method specification</strong>: Framework-specific mathematical approaches</li>
+<li>✅ <strong>Gravitational metaphor support</strong>: Independent wells as competing theories vs. opposing forces</li>
+<li>✅ <strong>Prompt adaptation</strong>: Framework-aware prompt generation for different conceptual models</li>
+</ul>
+<h3 id="advanced-clustering-capabilities"><strong>Advanced Clustering Capabilities</strong></h3>
+<ul>
+<li>✅ <strong>Flexible arc positioning</strong>: Custom arc ranges (e.g., 15°-75°) vs. symmetric positioning</li>
+<li>✅ <strong>Domain-specific clustering</strong>: Business ethics example with stakeholder/operational/strategic domains</li>
+<li>✅ <strong>Variable cluster parameters</strong>: Different spans, dipole counts, and positioning methods per cluster</li>
+<li>✅ <strong>Cluster-aware calculations</strong>: Domain weighting and cluster coherence metrics</li>
+<li>✅ <strong>Asymmetric framework design</strong>: Support for frameworks focused on specific conceptual regions</li>
+<li>✅ <strong>Overlap control</strong>: Configurable cluster separation and boundary management</li>
+</ul>
+<hr />
+<h2 id="implementation-checklist">📋 <strong>Implementation Checklist</strong></h2>
+<h3 id="framework-definition-tasks"><strong>Framework Definition Tasks</strong></h3>
+<ul>
+<li>[ ] Create consolidated schema specification</li>
+<li>[ ] Migrate <code>civic_virtue</code> framework (proof-of-concept ✅)</li>
+<li>[ ] Migrate <code>political_spectrum</code> framework  </li>
+<li>[ ] Migrate <code>moral_rhetorical_posture</code> framework</li>
+<li>[ ] Migrate <code>fukuyama_identity</code> framework</li>
+<li>[ ] Migrate <code>mft_persuasive_force</code> framework</li>
+<li>[ ] Migrate <code>iditi</code> framework</li>
+</ul>
+<h3 id="code-integration-tasks"><strong>Code Integration Tasks</strong></h3>
+<ul>
+<li>[ ] Update FrameworkManager with backward compatibility</li>
+<li>[ ] Update PromptTemplateManager to use prompt_configuration</li>
+<li>[ ] Add validation for consolidated framework files</li>
+<li>[ ] Update framework loading tests</li>
+<li>[ ] Update API endpoints using frameworks</li>
+</ul>
+<h3 id="documentation-tasks"><strong>Documentation Tasks</strong></h3>
+<ul>
+<li>[ ] Update framework development guides</li>
+<li>[ ] Create migration guide for existing frameworks</li>
+<li>[ ] Update API documentation</li>
+<li>[ ] Add consolidated schema to project specs</li>
+</ul>
+<h3 id="cleanup-tasks"><strong>Cleanup Tasks</strong></h3>
+<ul>
+<li>[ ] Remove deprecated multi-file loaders</li>
+<li>[ ] Clean up legacy framework files</li>
+<li>[ ] Update CHANGELOG with architectural improvement</li>
+<li>[ ] Archive old examples and documentation</li>
+</ul>
+<hr />
+<h2 id="conclusion">🎯 <strong>Conclusion</strong></h2>
+<p>The consolidated framework approach addresses the core problem: <strong>information scattered across multiple files creates unnecessary complexity while making framework-specific customization difficult</strong>.</p>
+<p>The single-file approach provides:
+- <strong>Complete framework definition</strong> in logical structure
+- <strong>Framework-specific prompt configuration</strong> eliminating template guesswork<br />
+- <strong>Simplified maintenance</strong> and development workflow
+- <strong>Better consistency</strong> across all frameworks
+- <strong>Enhanced functionality</strong> through comprehensive metadata</p>
+<p>This architectural improvement will make framework development, maintenance, and usage significantly more straightforward while enabling better customization and consistency.</p>
+<p><strong>Recommendation</strong>: Proceed with gradual migration starting with proof-of-concept validation and framework-by-framework conversion. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

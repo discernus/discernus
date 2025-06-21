@@ -1,0 +1,1338 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#narrative-gravity-analysis-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-navigation-by-audience" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Quick Navigation by Audience
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Quick Navigation by Audience">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-researchers-research-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔬 For Researchers → research-guide/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-platform-developers-platform-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      💻 For Platform Developers → platform-development/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-end-users-user-guides" class="md-nav__link">
+    <span class="md-ellipsis">
+      👥 For End Users → user-guides/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-project-management-project-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 For Project Management → project-management/
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-documentation-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Complete Documentation Index
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Complete Documentation Index">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#master-inventory-documentation_inventorymd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Master Inventory → DOCUMENTATION_INVENTORY.md
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-platform-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Current Platform Status
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Current Platform Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#revolutionary-capabilities-june-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Revolutionary Capabilities ✅ June 2025
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Revolutionary Capabilities ✅ June 2025">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#100-operational-research-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 100% Operational Research System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-asset-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏛️ Research Asset Ecosystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Academic Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Methodology
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-organization-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Documentation Organization Principles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Documentation Organization Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mecec-architecture-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      MECEC Architecture Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audience-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audience Separation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Standards
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Getting Started Paths
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Getting Started Paths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-researcher-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Researcher Journey
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-developer-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Developer Journey
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-user-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      End User Journey
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Documentation Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Documentation Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprehensive Coverage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audience-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audience Distribution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Assurance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-what-you-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Finding What You Need
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Finding What You Need">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Questions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      📞 Support &amp; Maintenance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📞 Support &amp; Maintenance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Maintenance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-navigation-by-audience" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Quick Navigation by Audience
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Quick Navigation by Audience">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-researchers-research-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔬 For Researchers → research-guide/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-platform-developers-platform-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      💻 For Platform Developers → platform-development/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-end-users-user-guides" class="md-nav__link">
+    <span class="md-ellipsis">
+      👥 For End Users → user-guides/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-project-management-project-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 For Project Management → project-management/
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-documentation-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Complete Documentation Index
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Complete Documentation Index">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#master-inventory-documentation_inventorymd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Master Inventory → DOCUMENTATION_INVENTORY.md
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-platform-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Current Platform Status
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Current Platform Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#revolutionary-capabilities-june-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Revolutionary Capabilities ✅ June 2025
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Revolutionary Capabilities ✅ June 2025">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#100-operational-research-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 100% Operational Research System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-asset-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏛️ Research Asset Ecosystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Academic Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Methodology
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-organization-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Documentation Organization Principles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Documentation Organization Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mecec-architecture-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      MECEC Architecture Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audience-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audience Separation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Standards
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Getting Started Paths
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Getting Started Paths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-researcher-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Researcher Journey
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-developer-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Developer Journey
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-user-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      End User Journey
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Documentation Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Documentation Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprehensive Coverage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audience-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audience Distribution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Assurance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding-what-you-need" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Finding What You Need
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Finding What You Need">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#search-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Questions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      📞 Support &amp; Maintenance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📞 Support &amp; Maintenance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Maintenance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="narrative-gravity-analysis-documentation">Narrative Gravity Analysis - Documentation</h1>
+<p><strong>World-class computational narrative analysis documentation with MECE architecture</strong></p>
+<p><em>Last Updated: June 14, 2025</em><br />
+<em>Documentation Architecture: MECEC (Mutually Exclusive, Collectively Exhaustive, Current)</em></p>
+<hr />
+<h2 id="quick-navigation-by-audience">🎯 <strong>Quick Navigation by Audience</strong></h2>
+<h3 id="for-researchers-research-guide"><strong>🔬 For Researchers</strong> → <a href="research-guide/"><code>research-guide/</code></a></h3>
+<p><em>Complete experimental methodology and asset development</em>
+- <strong>New to platform?</strong> → <a href="research-guide/getting-started/RESEARCH_ONBOARDING/"><code>getting-started/RESEARCH_ONBOARDING.md</code></a>
+- <strong>Need methodology?</strong> → <a href="research-guide/methodology/EXPERIMENTAL_DESIGN_FRAMEWORK/"><code>methodology/EXPERIMENTAL_DESIGN_FRAMEWORK.md</code></a>
+- <strong>Developing assets?</strong> → <a href="research-guide/development-guides/"><code>development-guides/</code></a>
+- <strong>Running experiments?</strong> → <a href="research-guide/practical-guides/CLI_EXPERIMENT_GUIDE/"><code>practical-guides/CLI_EXPERIMENT_GUIDE.md</code></a>
+- <strong>Publishing research?</strong> → <a href="research-guide/academic-workflow/"><code>academic-workflow/</code></a></p>
+<h3 id="for-platform-developers-platform-development"><strong>💻 For Platform Developers</strong> → <a href="platform-development/"><code>platform-development/</code></a></h3>
+<p><em>Software engineering, architecture, and system development</em>
+- <strong>Environment setup?</strong> → <a href="platform-development/DEV_ENVIRONMENT/"><code>DEV_ENVIRONMENT.md</code></a>
+- <strong>System architecture?</strong> → <a href="platform-development/architecture/CURRENT_SYSTEM_STATUS/"><code>architecture/CURRENT_SYSTEM_STATUS.md</code></a>
+- <strong>Database design?</strong> → <a href="platform-development/architecture/database_architecture/"><code>architecture/database_architecture.md</code></a>
+- <strong>Quality assurance?</strong> → <a href="platform-development/quality-assurance/LLM_QUALITY_ASSURANCE/"><code>quality-assurance/LLM_QUALITY_ASSURANCE.md</code></a>
+- <strong>API documentation?</strong> → <a href="platform-development/api/"><code>api/</code></a></p>
+<h3 id="for-end-users-user-guides"><strong>👥 For End Users</strong> → <a href="user-guides/"><code>user-guides/</code></a></h3>
+<p><em>Practical how-to documentation and quick reference</em>
+- <strong>Getting started?</strong> → <a href="user-guides/"><code>README.md</code></a>
+- <strong>CLI reference?</strong> → <a href="user-guides/CLI_QUICK_REFERENCE/"><code>CLI_QUICK_REFERENCE.md</code></a>
+- <strong>Corpus management?</strong> → <a href="user-guides/CORPUS_ORGANIZATION_GUIDE/"><code>CORPUS_ORGANIZATION_GUIDE.md</code></a>
+- <strong>Cost management?</strong> → <a href="user-guides/API_COST_PROTECTION_GUIDE/"><code>API_COST_PROTECTION_GUIDE.md</code></a>
+- <strong>Installation help?</strong> → <a href="user-guides/ACADEMIC_SOFTWARE_INSTALLATION_GUIDE/"><code>ACADEMIC_SOFTWARE_INSTALLATION_GUIDE.md</code></a></p>
+<h3 id="for-project-management-project-management"><strong>🎯 For Project Management</strong> → <a href="project-management/"><code>project-management/</code></a></h3>
+<p><em>Planning, status tracking, and strategic direction</em>
+- <strong>Current status?</strong> → <a href="project-management/status/CURRENT_STATUS_2025_06_17.md"><code>status/CURRENT_STATUS_2025_06_17.md</code></a>
+- <strong>Active planning?</strong> → <a href="project-management/planning/active/"><code>planning/active/</code></a>
+- <strong>Strategic direction?</strong> → <a href="project-management/planning/strategic/"><code>planning/strategic/</code></a></p>
+<hr />
+<h2 id="complete-documentation-index">📋 <strong>Complete Documentation Index</strong></h2>
+<h3 id="master-inventory-documentation_inventorymd"><strong>Master Inventory</strong> → <a href="DOCUMENTATION_INVENTORY/"><code>DOCUMENTATION_INVENTORY.md</code></a></h3>
+<p><em>Comprehensive index of all 151 documentation files with purpose and audience mapping</em></p>
+<p><strong>Key Features:</strong>
+- <strong>MECE Organization</strong>: Mutually exclusive, collectively exhaustive architecture
+- <strong>Audience Mapping</strong>: Clear separation by user type and workflow phase
+- <strong>Cross-Reference Matrix</strong>: Navigation between related concepts
+- <strong>Status Tracking</strong>: 142 complete documents (94%), 9 planned documents (6%)
+- <strong>Usage Guidelines</strong>: How to navigate and maintain the documentation</p>
+<hr />
+<h2 id="current-platform-status">🚀 <strong>Current Platform Status</strong></h2>
+<h3 id="revolutionary-capabilities-june-2025"><strong>Revolutionary Capabilities</strong> ✅ <strong>June 2025</strong></h3>
+<p>Following the <strong>June 13-14 breakthrough</strong>, the platform achieved:</p>
+<h4 id="100-operational-research-system"><strong>🎯 100% Operational Research System</strong></h4>
+<ul>
+<li><strong>Declarative Experiments</strong>: JSON-based experiment definitions with full execution</li>
+<li><strong>Quality Assurance</strong>: 6-layer validation preventing invalid research data</li>
+<li><strong>Academic Pipeline</strong>: Publication-ready visualizations and data exports</li>
+<li><strong>Database Integration</strong>: Production PostgreSQL with complete versioning</li>
+</ul>
+<h4 id="research-asset-ecosystem"><strong>🏛️ Research Asset Ecosystem</strong></h4>
+<ul>
+<li><strong>5 Operational Frameworks</strong>: All with WCAG AA accessibility compliance (v2025.06.14)</li>
+<li><strong>Formal Specifications</strong>: Complete prompt template and weighting scheme standards</li>
+<li><strong>Component Versioning</strong>: Systematic tracking of all research asset evolution</li>
+<li><strong>Quality Validation</strong>: Automated testing and academic rigor enforcement</li>
+</ul>
+<h4 id="academic-integration"><strong>📊 Academic Integration</strong></h4>
+<ul>
+<li><strong>Interactive Analysis</strong>: Jupyter notebooks with advanced visualizations</li>
+<li><strong>Publication Export</strong>: R, Stata, CSV formats with replication packages</li>
+<li><strong>Confidence Metadata</strong>: Quality reporting and validation for peer review</li>
+<li><strong>Human Validation</strong>: Protocols for LLM vs expert comparison studies</li>
+</ul>
+<h3 id="research-methodology"><strong>Research Methodology</strong></h3>
+<p>The platform implements a <strong>5-dimensional experimental design space</strong>:</p>
+<ol>
+<li><strong>TEXTS</strong> - Content being analyzed</li>
+<li><strong>FRAMEWORKS</strong> - Theoretical lenses applied  </li>
+<li><strong>PROMPTS</strong> - Analysis instructions</li>
+<li><strong>WEIGHTING</strong> - Mathematical interpretation</li>
+<li><strong>EVALUATORS</strong> - Analysis agents (LLM/human)</li>
+</ol>
+<p><strong>Complete Methodology</strong>: <a href="research-guide/methodology/EXPERIMENTAL_DESIGN_FRAMEWORK/"><code>research-guide/methodology/EXPERIMENTAL_DESIGN_FRAMEWORK.md</code></a></p>
+<hr />
+<h2 id="documentation-organization-principles">📚 <strong>Documentation Organization Principles</strong></h2>
+<h3 id="mecec-architecture-benefits"><strong>MECEC Architecture Benefits</strong></h3>
+<ul>
+<li><strong>Mutually Exclusive</strong>: Each document has single, clear purpose with no content overlap</li>
+<li><strong>Collectively Exhaustive</strong>: Complete coverage of all user needs and workflows with no gaps</li>
+<li><strong>Current</strong>: All information is up-to-date and relevant; completed items moved to historical archives</li>
+<li><strong>Audience-Driven</strong>: Clear separation between researchers, developers, users, and managers</li>
+<li><strong>Workflow-Organized</strong>: Documents grouped by phase of user journey and temporal relevance</li>
+<li><strong>Cross-Referenced</strong>: Clear navigation between related concepts with currency indicators</li>
+</ul>
+<h3 id="audience-separation"><strong>Audience Separation</strong></h3>
+<ul>
+<li><strong>Research Guide</strong>: Everything researchers need for experiments and methodology</li>
+<li><strong>Platform Development</strong>: Software engineering, architecture, and system development</li>
+<li><strong>User Guides</strong>: Practical how-to documentation for end users</li>
+<li><strong>Project Management</strong>: Planning, status tracking, and strategic direction</li>
+<li><strong>Specifications</strong>: Technical standards and implementation status</li>
+</ul>
+<h3 id="quality-standards"><strong>Quality Standards</strong></h3>
+<ul>
+<li><strong>Academic Rigor</strong>: All methodology grounded in research best practices</li>
+<li><strong>Reproducibility</strong>: Complete documentation for independent replication</li>
+<li><strong>Accessibility</strong>: WCAG AA compliance for all research outputs</li>
+<li><strong>Version Control</strong>: Systematic tracking of documentation evolution</li>
+</ul>
+<hr />
+<h2 id="getting-started-paths">🎯 <strong>Getting Started Paths</strong></h2>
+<h3 id="new-researcher-journey"><strong>New Researcher Journey</strong></h3>
+<ol>
+<li><strong>Platform Overview</strong>: <a href="research-guide/getting-started/RESEARCH_ONBOARDING/"><code>research-guide/getting-started/RESEARCH_ONBOARDING.md</code></a></li>
+<li><strong>First Experiment</strong>: Follow the guided 2-4 hour onboarding process</li>
+<li><strong>Advanced Methodology</strong>: <a href="research-guide/methodology/"><code>research-guide/methodology/</code></a></li>
+<li><strong>Asset Development</strong>: <a href="research-guide/development-guides/"><code>research-guide/development-guides/</code></a></li>
+</ol>
+<h3 id="platform-developer-journey"><strong>Platform Developer Journey</strong></h3>
+<ol>
+<li><strong>Environment Setup</strong>: <a href="platform-development/DEV_ENVIRONMENT/"><code>platform-development/DEV_ENVIRONMENT.md</code></a></li>
+<li><strong>System Understanding</strong>: <a href="platform-development/architecture/CURRENT_SYSTEM_STATUS/"><code>platform-development/architecture/CURRENT_SYSTEM_STATUS.md</code></a></li>
+<li><strong>Architecture Review</strong>: <a href="platform-development/architecture/"><code>platform-development/architecture/</code></a></li>
+<li><strong>Development Process</strong>: Follow established quality assurance procedures</li>
+</ol>
+<h3 id="end-user-journey"><strong>End User Journey</strong></h3>
+<ol>
+<li><strong>User Guide Overview</strong>: <a href="user-guides/"><code>user-guides/README.md</code></a></li>
+<li><strong>Quick Reference</strong>: <a href="user-guides/CLI_QUICK_REFERENCE/"><code>user-guides/CLI_QUICK_REFERENCE.md</code></a></li>
+<li><strong>Specific Tasks</strong>: Navigate to relevant user guides by function</li>
+<li><strong>Advanced Features</strong>: Academic software installation and corpus management</li>
+</ol>
+<hr />
+<h2 id="documentation-metrics">📊 <strong>Documentation Metrics</strong></h2>
+<h3 id="comprehensive-coverage"><strong>Comprehensive Coverage</strong></h3>
+<ul>
+<li><strong>Total Documents</strong>: 151 files across all categories</li>
+<li><strong>Completion Rate</strong>: 94% complete (142 docs), 6% planned (9 docs)</li>
+<li><strong>Architecture Types</strong>: 5 major audience categories with clear separation</li>
+<li><strong>Cross-References</strong>: Complete navigation matrix between related concepts</li>
+</ul>
+<h3 id="audience-distribution"><strong>Audience Distribution</strong></h3>
+<ul>
+<li><strong>🔬 Researchers</strong>: 34 documents (23%) - Methodology, asset development, execution</li>
+<li><strong>💻 Platform Developers</strong>: 28 documents (19%) - Architecture, APIs, engineering</li>
+<li><strong>👥 End Users</strong>: 17 documents (11%) - Practical guides, quick reference</li>
+<li><strong>📚 Academic Community</strong>: 12 documents (8%) - Publication, validation, collaboration</li>
+<li><strong>🎯 Project Management</strong>: 60 documents (39%) - Planning, status, strategic direction</li>
+</ul>
+<h3 id="quality-assurance"><strong>Quality Assurance</strong></h3>
+<ul>
+<li><strong>MECEC Compliance</strong>: All documents follow mutually exclusive, collectively exhaustive, current principles</li>
+<li><strong>Currency Maintenance</strong>: Completed items systematically moved to historical archives</li>
+<li><strong>Version Control</strong>: All documents tracked with last updated dates and relevance status</li>
+<li><strong>Cross-Reference Integrity</strong>: Navigation links maintained and validated with temporal accuracy</li>
+<li><strong>Audience Consistency</strong>: Clear audience identification with current workflow positioning</li>
+</ul>
+<hr />
+<h2 id="finding-what-you-need">🔍 <strong>Finding What You Need</strong></h2>
+<h3 id="search-strategy"><strong>Search Strategy</strong></h3>
+<ol>
+<li><strong>Start with audience</strong>: Identify your primary role (researcher, developer, user, manager)</li>
+<li><strong>Use navigation paths</strong>: Follow recommended getting started journeys</li>
+<li><strong>Check the inventory</strong>: <a href="DOCUMENTATION_INVENTORY/"><code>DOCUMENTATION_INVENTORY.md</code></a> has complete cross-reference matrix</li>
+<li><strong>Follow cross-references</strong>: Documents link to related concepts and workflows</li>
+</ol>
+<h3 id="common-questions"><strong>Common Questions</strong></h3>
+<ul>
+<li><strong>"How do I run my first experiment?"</strong> → <a href="research-guide/getting-started/RESEARCH_ONBOARDING/"><code>research-guide/getting-started/RESEARCH_ONBOARDING.md</code></a></li>
+<li><strong>"How do I set up my development environment?"</strong> → <a href="platform-development/DEV_ENVIRONMENT/"><code>platform-development/DEV_ENVIRONMENT.md</code></a></li>
+<li><strong>"What's the current system status?"</strong> → <a href="platform-development/architecture/CURRENT_SYSTEM_STATUS/"><code>platform-development/architecture/CURRENT_SYSTEM_STATUS.md</code></a></li>
+<li><strong>"How do I manage my corpus?"</strong> → <a href="user-guides/CORPUS_ORGANIZATION_GUIDE/"><code>user-guides/CORPUS_ORGANIZATION_GUIDE.md</code></a></li>
+<li><strong>"What's the strategic direction?"</strong> → <a href="project-management/planning/strategic/"><code>project-management/planning/strategic/</code></a></li>
+</ul>
+<hr />
+<h2 id="support-maintenance">📞 <strong>Support &amp; Maintenance</strong></h2>
+<h3 id="getting-help"><strong>Getting Help</strong></h3>
+<ul>
+<li><strong>Research Questions</strong>: Reference research guide methodology and development sections</li>
+<li><strong>Technical Issues</strong>: Check platform development troubleshooting and architecture docs</li>
+<li><strong>User Problems</strong>: Use practical user guides and quick reference materials</li>
+<li><strong>Strategic Questions</strong>: Review project management planning and status documents</li>
+</ul>
+<h3 id="documentation-maintenance"><strong>Documentation Maintenance</strong></h3>
+<ul>
+<li><strong>Update Responsibility</strong>: Document maintainers specified in each section</li>
+<li><strong>Review Schedule</strong>: Quarterly reviews for structural changes, immediate updates for content</li>
+<li><strong>Currency Procedures</strong>: Daily/completed items moved to historical archives within 24 hours</li>
+<li><strong>Quality Standards</strong>: MECEC principles maintained, cross-references updated</li>
+<li><strong>Version Control</strong>: All changes tracked with clear change descriptions and temporal relevance</li>
+</ul>
+<h3 id="contributing"><strong>Contributing</strong></h3>
+<ul>
+<li><strong>Content Guidelines</strong>: Follow MECEC principles and audience separation</li>
+<li><strong>Navigation Updates</strong>: Maintain cross-reference matrix when adding/moving documents</li>
+<li><strong>Currency Requirements</strong>: Mark completion status and move completed items to archives</li>
+<li><strong>Quality Standards</strong>: Include purpose statement, audience identification, and temporal relevance</li>
+<li><strong>Review Process</strong>: All major changes reviewed for MECEC compliance and navigation integrity</li>
+</ul>
+<hr />
+<p><strong>This documentation architecture supports world-class computational narrative analysis research and development with complete coverage, clear navigation, and rigorous quality standards.</strong></p>
+<p><em>Maintained by: Documentation Team</em><br />
+<em>Next Review: After significant structural changes or quarterly review cycle</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

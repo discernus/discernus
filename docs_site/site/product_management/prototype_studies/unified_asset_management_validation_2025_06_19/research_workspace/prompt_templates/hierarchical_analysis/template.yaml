@@ -1,0 +1,172 @@
+# Hierarchical Analysis Prompt Template
+# Version: v2025.06.19 (Extracted from PromptTemplateManager)
+# Purpose: Comprehensive narrative analysis with detailed scoring methodology
+
+template_meta:
+  name: "hierarchical_analysis"
+  display_name: "Hierarchical Narrative Analysis"
+  version: "v2025.06.19"
+  description: >
+    Comprehensive prompt template for detailed narrative analysis using hierarchical
+    scoring methodology. Includes full conceptual assessment approach with
+    three-step analysis process and detailed justification requirements.
+  
+  target_modes: ["api", "interactive", "experimental"]
+  template_type: "comprehensive_analysis"
+  last_modified: "2025-06-19T16:00:00.000000"
+  created_by: "unified_asset_management_extraction"
+
+# Template structure and components
+template_structure:
+  header:
+    dynamic: true
+    variables: ["timestamp", "framework", "mode"]
+    template: |
+      {title}
+      Version: {timestamp} | Framework: {framework} | Mode: {mode}
+
+  role_definition:
+    api_mode: >
+      You are an expert narrative analyst. Analyze the provided text using 
+      the narrative gravity wells framework.
+    
+    interactive_mode: >
+      You are an expert narrative analyst specializing in narrative gravity wells analysis. 
+      This is an interactive workflow where you'll analyze multiple texts and provide 
+      comparative insights.
+    
+    experimental_mode: >
+      You are an expert narrative analyst conducting systematic framework validation 
+      for academic research purposes.
+
+  scoring_requirements:
+    enforce_decimal_scale: true
+    content: |
+      **CRITICAL SCORING REQUIREMENTS:**
+
+      🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨
+      - Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9)
+      - DO NOT use integers 1-10 or any other scale
+      - DO NOT use percentages or any scale other than 0.0-1.0
+      - Example valid scores: 0.1, 0.4, 0.6, 0.8, 1.0
+      - Example INVALID scores: 1, 5, 10, 25%, 0.5/1.0
+
+  framework_wells:
+    dynamic: true
+    source: "framework_configuration"
+    description: "Framework wells section is dynamically generated from framework YAML files"
+
+  analysis_methodology:
+    full_version: |
+      **CONCEPTUAL ASSESSMENT METHODOLOGY:**
+
+      This framework employs a **conceptual assessment approach** that prioritizes semantic 
+      understanding over surface-level keyword counting. You should:
+
+      1. **Identify Underlying Frameworks**: First, identify the underlying frameworks and 
+         values being expressed in each section of the narrative, regardless of specific 
+         language used.
+
+      2. **Extract Central Themes**: Determine which themes are central to the overall 
+         argument vs. merely mentioned in passing. Focus on what drives the core narrative logic.
+
+      3. **Use Language Cues as Indicators**: The provided language cues are illustrative 
+         examples, not exhaustive lists. Look for conceptually similar terms, phrases, 
+         and ideas that convey the same orientations.
+
+      4. **Assess Conceptual Strength**: Score based on how strongly each orientation shapes 
+         the narrative's fundamental structure and arguments, not just frequency of related words.
+
+      **THREE-STEP ANALYSIS PROCESS:**
+      1. **Theme Extraction**: Identify the core themes and values driving the narrative's 
+         central arguments
+      2. **Centrality Assessment**: Determine which themes are foundational vs. peripheral 
+         to the overall message
+      3. **Holistic Scoring**: Assign scores based on conceptual strength and centrality, 
+         not linguistic frequency
+    
+    abbreviated_version: |
+      **ANALYSIS APPROACH:**
+      - Focus on conceptual strength, not keyword frequency
+      - Score based on how strongly each orientation shapes the narrative's structure
+      - Provide brief justification for scores
+
+  json_format:
+    dynamic: true
+    source: "framework_wells"
+    description: "JSON format specification is dynamically generated based on framework wells"
+    template_structure: |
+      {
+        "analysis_metadata": {
+          "text_id": "string",
+          "framework": "string", 
+          "timestamp": "YYYY-MM-DD HH:MM:SS",
+          "model": "string"
+        },
+        "well_scores": {
+          // Dynamic wells from framework
+        },
+        "analysis_summary": {
+          "primary_orientation": "string",
+          "secondary_themes": ["string"],
+          "overall_assessment": "string"
+        },
+        "justifications": {
+          // Dynamic justifications for each well
+        }
+      }
+
+  instructions:
+    api_mode: |
+      **ANALYSIS INSTRUCTIONS:**
+      1. Read the text carefully and identify core themes
+      2. Score each well based on conceptual strength (0.0-1.0)
+      3. Provide brief justifications for each score
+      4. Return results in the specified JSON format only
+
+    interactive_mode: |
+      **INTERACTIVE WORKFLOW:**
+      1. Analyze the provided text using the three-step methodology
+      2. Provide detailed scoring with comprehensive justifications
+      3. Include both JSON output AND separate commentary
+      4. Ask for additional texts to build comparative analysis
+
+    experimental_mode: |
+      **EXPERIMENTAL ANALYSIS:**
+      1. Follow the standardized methodology precisely
+      2. Provide detailed justifications for academic validation
+      3. Ensure consistent scoring approach across all texts
+      4. Include confidence indicators where appropriate
+
+# Framework compatibility
+compatibility:
+  framework_types: ["dipole", "non_dipole", "independent_wells"]
+  supported_frameworks: ["moral_foundations_theory", "iditi", "three_wells_political"]
+  weighting_schemes: ["winner_take_most", "proportional", "independent_wells"]
+  api_versions: ["v2.0", "v2.1"]
+
+# Template settings
+settings:
+  enforce_decimal_scale: true
+  include_model_identification: true
+  include_analysis_methodology: true
+  max_language_cues: 3
+  temperature_guidance: null
+  use_hierarchical_default: false
+
+# Academic features
+academic_features:
+  replication_support: true
+  validation_mode: true
+  confidence_scoring: false
+  comparative_analysis: true
+  detailed_justifications: true
+
+# Asset management metadata
+asset_metadata:
+  format_version: "yaml_v1.0"
+  extraction_source: "src/narrative_gravity/prompts/template_manager.py"
+  extraction_date: "2025-06-19T16:00:00.000000"
+  validation_status: "pending"
+  hash_verified: false
+  template_type: "comprehensive_hierarchical" 

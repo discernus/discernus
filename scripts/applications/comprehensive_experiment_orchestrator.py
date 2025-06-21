@@ -168,6 +168,15 @@ except ImportError as e:
         async def analyze_single_text(self, *args, **kwargs):
             raise ImportError("RealAnalysisService not properly imported")
 
+# Import QA system for quality validation
+try:
+    from src.utils.llm_quality_assurance import LLMQualityAssuranceSystem, validate_llm_analysis
+    QA_SYSTEM_AVAILABLE = True
+    logger.info("✅ QA system import successful")
+except ImportError as e:
+    logger.warning(f"QA system not available: {e}")
+    QA_SYSTEM_AVAILABLE = False
+
 # Add import with try/except for optional architectural compliance
 try:
     from architectural_compliance_validator import ArchitecturalComplianceValidator
@@ -175,6 +184,19 @@ try:
 except ImportError:
     logger.warning("Architectural compliance validator not available")
     ARCHITECTURAL_COMPLIANCE_AVAILABLE = False
+
+# Import unified framework validator
+try:
+    from scripts.utilities.unified_framework_validator import (
+        UnifiedFrameworkValidator, 
+        FrameworkValidationResult as UnifiedValidationResult,
+        ValidationSeverity
+    )
+    UNIFIED_FRAMEWORK_VALIDATOR_AVAILABLE = True
+    logger.info("✅ Unified framework validator import successful")
+except ImportError as e:
+    logger.warning(f"Unified framework validator not available: {e}")
+    UNIFIED_FRAMEWORK_VALIDATOR_AVAILABLE = False
 
 class MissingComponentsError(Exception):
     """Raised when required experiment components are missing"""
@@ -1094,6 +1116,22 @@ class ExperimentOrchestrator:
             self.auto_registration_available = False
             logger.warning("⚠️ Database not available - auto-registration disabled")
         
+        # Initialize QA system for quality validation
+        if QA_SYSTEM_AVAILABLE:
+            self.qa_system = LLMQualityAssuranceSystem()
+            logger.info("✅ QA system initialized")
+        else:
+            self.qa_system = None
+            logger.warning("⚠️ QA system not available - experiments will not have quality validation")
+        
+        # Initialize unified framework validator
+        if UNIFIED_FRAMEWORK_VALIDATOR_AVAILABLE:
+            self.unified_framework_validator = UnifiedFrameworkValidator(verbose=False)
+            logger.info("✅ Unified framework validator initialized")
+        else:
+            self.unified_framework_validator = None
+            logger.warning("⚠️ Unified framework validator not available - using legacy validation")
+        
         # Initialize experiment logging
         try:
             from narrative_gravity.analysis.statistical_logger import StatisticalLogger
@@ -1336,6 +1374,30 @@ class ExperimentOrchestrator:
         
         return context
     
+    def _create_experiment_context_for_qa(self, experiment: Dict[str, Any]):
+        """Create experiment context for QA system validation (imports from enhanced QA system)."""
+        try:
+            from src.utils.llm_quality_assurance import ExperimentContext
+            
+            experiment_meta = experiment.get('experiment_meta', {})
+            
+            return ExperimentContext(
+                name=experiment_meta.get('name', 'Unnamed Experiment'),
+                description=experiment_meta.get('description', 'No description provided'),
+                version=experiment_meta.get('version', '1.0.0'),
+                hypotheses=experiment_meta.get('hypotheses', []),
+                success_criteria=experiment_meta.get('success_criteria', []),
+                research_context=experiment_meta.get('research_context', ''),
+                tags=experiment_meta.get('tags', []),
+                expected_outcomes=experiment_meta.get('expected_outcomes'),
+                framework_requirements=experiment_meta.get('framework_requirements'),
+                corpus_requirements=experiment_meta.get('corpus_requirements'),
+                statistical_requirements=experiment_meta.get('statistical_requirements')
+            )
+        except ImportError as e:
+            logger.warning(f"Could not import enhanced QA ExperimentContext: {e}")
+            return None
+    
     def create_context_enriched_prompt(self, base_prompt: str, analysis_run_info: Dict[str, Any] = None) -> str:
         """Create context-enriched prompt for hypothesis-aware analysis"""
         if not self.experiment_context:
@@ -1516,8 +1578,13 @@ In addition to the standard analysis output, please consider how your findings r
     
     def _validate_framework(self, framework_spec: Dict[str, Any]) -> ComponentInfo:
         """
-        Validate framework component using unified asset management flow:
-        Workspace → Validation → Content-Addressable Storage → Database Registration
+        Validate framework component using unified framework validator and asset management flow.
+        
+        🎯 CONSOLIDATED VALIDATION:
+        - Uses unified framework validator for comprehensive validation
+        - Supports both dipole-based and independent wells architectures
+        - Validates YAML and JSON formats
+        - Includes academic standards and semantic consistency checks
         """
         framework_id = framework_spec.get('id', framework_spec.get('name'))
         version = framework_spec.get('version')
@@ -1530,37 +1597,99 @@ In addition to the standard analysis output, please consider how your findings r
             file_path=file_path
         )
         
-        # STEP 1: Validate from workspace
+        # STEP 1: Comprehensive unified validation
         framework_data = None
+        validation_result = None
+        
         try:
             if file_path:
                 framework_path = Path(file_path)
                 if not framework_path.exists():
                     raise FileNotFoundError(f"Framework file not found at workspace path: {file_path}")
                 
-                # Load and validate framework from workspace
-                if framework_path.suffix.lower() in ['.yaml', '.yml']:
-                    if not YAML_AVAILABLE:
-                        raise RuntimeError("PyYAML not available - cannot load YAML framework")
-                    with open(framework_path, 'r') as f:
-                        framework_data = yaml.safe_load(f)
+                # Use unified framework validator if available
+                if self.unified_framework_validator:
+                    logger.info(f"🔍 Running unified framework validation: {framework_id}")
+                    validation_result = self.unified_framework_validator.validate_framework(framework_path)
+                    
+                    # Process validation results
+                    if not validation_result.is_valid:
+                        error_summary = validation_result.get_summary()
+                        logger.error(f"❌ Framework validation failed: {framework_id}")
+                        logger.error(f"   Errors: {error_summary['errors']}, Warnings: {error_summary['warnings']}")
+                        
+                        # Log detailed errors
+                        for issue in validation_result.get_issues_by_severity(ValidationSeverity.ERROR):
+                            logger.error(f"   ❌ {issue.category}: {issue.message}")
+                            if issue.fix_suggestion:
+                                logger.error(f"      💡 Fix: {issue.fix_suggestion}")
+                        
+                        # This is now a blocking error - we need valid frameworks
+                        raise ValueError(f"Framework validation failed with {error_summary['errors']} errors")
+                    
+                    # Log warnings but continue
+                    warning_count = validation_result.get_summary()['warnings']
+                    if warning_count > 0:
+                        logger.warning(f"⚠️ Framework {framework_id} has {warning_count} validation warnings")
+                        for issue in validation_result.get_issues_by_severity(ValidationSeverity.WARNING):
+                            logger.warning(f"   ⚠️ {issue.category}: {issue.message}")
+                    
+                    logger.info(f"✅ Framework validation passed: {framework_id} ({validation_result.architecture.value})")
+                    
+                    # Extract validated framework data from validator
+                    if framework_path.suffix.lower() in ['.yaml', '.yml']:
+                        if not YAML_AVAILABLE:
+                            raise RuntimeError("PyYAML not available - cannot load YAML framework")
+                        with open(framework_path, 'r') as f:
+                            framework_data = yaml.safe_load(f)
+                    else:
+                        with open(framework_path, 'r') as f:
+                            framework_data = json.load(f)
+                
                 else:
-                    with open(framework_path, 'r') as f:
-                        framework_data = json.load(f)
+                    # Fall back to legacy validation if unified validator not available
+                    logger.warning(f"⚠️ Using legacy framework validation for {framework_id}")
+                    
+                    if framework_path.suffix.lower() in ['.yaml', '.yml']:
+                        if not YAML_AVAILABLE:
+                            raise RuntimeError("PyYAML not available - cannot load YAML framework")
+                        with open(framework_path, 'r') as f:
+                            framework_data = yaml.safe_load(f)
+                    else:
+                        with open(framework_path, 'r') as f:
+                            framework_data = json.load(f)
+                    
+                    # Legacy validation using framework loader
+                    missing_sections = self.framework_loader.validate_framework_structure(framework_data)
+                    if missing_sections:
+                        logger.warning(f"Framework {framework_id} missing sections: {missing_sections}")
                 
                 component.exists_on_filesystem = True
                 logger.info(f"✅ Framework loaded from workspace: {file_path}")
                 
             else:
                 # Fall back to standard framework loader
+                logger.info(f"🔍 Loading framework from framework loader: {framework_id}")
                 framework_data = self.framework_loader.load_framework(framework_id)
                 component.exists_on_filesystem = True
-            
-            # Validate framework structure
-            missing_sections = self.framework_loader.validate_framework_structure(framework_data)
-            if missing_sections:
-                logger.warning(f"Framework {framework_id} missing sections: {missing_sections}")
-                # For now, continue with warning - could make this blocking in the future
+                
+                # Run unified validation on loaded framework if available
+                if self.unified_framework_validator and framework_data:
+                    # Create temporary file for validation since validator expects file path
+                    import tempfile
+                    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tmp_file:
+                        json.dump(framework_data, tmp_file, indent=2)
+                        tmp_path = Path(tmp_file.name)
+                    
+                    try:
+                        validation_result = self.unified_framework_validator.validate_framework(tmp_path)
+                        if not validation_result.is_valid:
+                            error_count = validation_result.get_summary()['errors']
+                            logger.error(f"❌ Framework validation failed: {framework_id} ({error_count} errors)")
+                            raise ValueError(f"Framework validation failed")
+                        logger.info(f"✅ Framework validation passed: {framework_id}")
+                    finally:
+                        tmp_path.unlink()  # Clean up temporary file
             
             # STEP 2: Store validated framework in content-addressable storage
             if framework_data:
@@ -1576,6 +1705,18 @@ In addition to the standard analysis output, please consider how your findings r
                     component.content_hash = storage_result['content_hash']
                     component.storage_path = storage_result['storage_path']
                     component.validated_content = framework_data
+                    
+                    # Store validation metadata if available
+                    if validation_result:
+                        validation_metadata = {
+                            'architecture': validation_result.architecture.value,
+                            'format_type': validation_result.format_type,
+                            'wells_count': validation_result.wells_count,
+                            'dipoles_count': validation_result.dipoles_count,
+                            'validation_passed': validation_result.is_valid,
+                            'validation_timestamp': validation_result.validation_timestamp
+                        }
+                        component.validated_content['_validation_metadata'] = validation_metadata
                     
                     if storage_result['already_existed']:
                         logger.info(f"📦 Framework {framework_id} already in asset storage (hash: {component.content_hash[:8]}...)")
@@ -2551,6 +2692,121 @@ All experiment outputs have been saved to: `{experiment_dir}`
                     if analysis_cost > cost_per_analysis_limit:
                         logger.warning(f"⚠️  Analysis exceeded cost limit: ${analysis_cost:.3f} > ${cost_per_analysis_limit:.3f}")
                     
+                    # 🚨 CRITICAL: QA VALIDATION CHECKPOINT - Prevent cargo cult research
+                    qa_passed = False
+                    qa_confidence = "UNKNOWN"
+                    if self.qa_system:
+                        try:
+                            # Extract parsed scores for QA validation
+                            parsed_scores = analysis_result.get('raw_scores', {})
+                            llm_response = analysis_result.get('llm_response', analysis_result)
+                            
+                            # Create experiment context for enhanced QA validation
+                            experiment_context = self._create_experiment_context_for_qa(experiment)
+                            
+                            # Run comprehensive QA validation with experiment context
+                            qa_assessment = self.qa_system.validate_llm_analysis(
+                                text_input=text_content,
+                                framework=framework_id,
+                                llm_response=llm_response,
+                                parsed_scores=parsed_scores,
+                                experiment_context=experiment_context
+                            )
+                            
+                            # Update analysis result with enhanced QA information
+                            analysis_result['qa_assessment'] = {
+                                'confidence_level': qa_assessment.confidence_level,
+                                'confidence_score': qa_assessment.confidence_score,
+                                'checks_passed': qa_assessment.quality_metadata['checks_passed'],
+                                'total_checks': qa_assessment.quality_metadata['total_checks'],
+                                'critical_failures': qa_assessment.quality_metadata['critical_failures'],
+                                'anomalies_detected': len(qa_assessment.anomalies_detected),
+                                'anomalies': qa_assessment.anomalies_detected,
+                                'experiment_issues_count': qa_assessment.quality_metadata.get('experiment_issues_count', 0),
+                                'experiment_specific_issues': qa_assessment.experiment_specific_issues or [],
+                                'has_experiment_context': qa_assessment.quality_metadata.get('has_experiment_context', False),
+                                'requires_second_opinion': qa_assessment.requires_second_opinion,
+                                'summary': qa_assessment.summary
+                            }
+                            
+                            qa_confidence = qa_assessment.confidence_level
+                            qa_passed = qa_assessment.confidence_level in ['HIGH', 'MEDIUM']
+                            
+                            # Check for critical experiment-specific issues that should fail QA
+                            experiment_issues = qa_assessment.experiment_specific_issues or []
+                            critical_experiment_issues = [
+                                issue for issue in experiment_issues
+                                if any(keyword in issue.lower() for keyword in [
+                                    'critical', 'insufficient', 'cannot', 'unable', 'failed',
+                                    'discriminative validity: variance=0.0000', 'positioning quality: 0/4'
+                                ])
+                            ]
+                            
+                            if critical_experiment_issues:
+                                qa_passed = False
+                                logger.warning(f"❌ QA failed due to critical experiment issues: {len(critical_experiment_issues)}")
+                                for issue in critical_experiment_issues:
+                                    logger.warning(f"   🔬 {issue}")
+                            
+                            # Log QA results with experiment context
+                            if qa_passed:
+                                logger.info(f"✅ QA validation passed: {qa_confidence} confidence ({qa_assessment.quality_metadata['checks_passed']}/{qa_assessment.quality_metadata['total_checks']} checks)")
+                                if experiment_issues:
+                                    logger.info(f"   🔬 Experiment-specific validation: {len(experiment_issues)} issues noted")
+                            else:
+                                logger.warning(f"❌ QA validation failed: {qa_confidence} confidence ({qa_assessment.quality_metadata['checks_passed']}/{qa_assessment.quality_metadata['total_checks']} checks)")
+                                logger.warning(f"   Issues: {qa_assessment.summary}")
+                                
+                                # Log anomalies if detected
+                                if qa_assessment.anomalies_detected:
+                                    logger.warning(f"   Anomalies: {qa_assessment.anomalies_detected}")
+                                
+                                # Log experiment-specific issues
+                                if experiment_issues:
+                                    logger.warning(f"   🔬 Experiment Issues: {experiment_issues}")
+                            
+                        except Exception as e:
+                            logger.error(f"❌ QA validation error: {e}")
+                            analysis_result['qa_assessment'] = {
+                                'confidence_level': 'ERROR',
+                                'error': str(e)
+                            }
+                            qa_passed = False
+                            qa_confidence = "ERROR"
+                    else:
+                        logger.warning("⚠️ QA system not available - accepting analysis without validation")
+                        qa_passed = True  # Allow execution when QA system not available
+                        qa_confidence = "NO_QA"
+                    
+                    # 🚨 TRANSACTION CHECKPOINT: Only proceed if QA passes or QA is disabled
+                    if not qa_passed and self.qa_system:
+                        logger.error(f"🚨 ANALYSIS REJECTED: QA validation failed for {corpus_component.component_id}")
+                        logger.error("   This analysis does not meet quality standards for academic use")
+                        logger.error("   Experiment continues but this analysis will be marked as failed")
+                        
+                        # Mark as failed analysis
+                        analysis_result['qa_failed'] = True
+                        analysis_result['success'] = False
+                        analysis_result['failure_reason'] = f"QA validation failed: {qa_confidence} confidence"
+                        
+                        # Log failed analysis
+                        if self.experiment_logger:
+                            self.experiment_logger.error(
+                                f"Analysis failed QA validation: {corpus_component.component_id}",
+                                extra_data={
+                                    'qa_confidence': qa_confidence,
+                                    'framework': framework_id,
+                                    'model': model_id,
+                                    'api_cost': analysis_cost,
+                                    'failure_type': 'qa_validation_failed'
+                                }
+                            )
+                    else:
+                        # Mark as successful analysis
+                        analysis_result['qa_failed'] = False
+                        analysis_result['success'] = True
+                        analysis_result['qa_confidence'] = qa_confidence
+                    
                     # Add experiment context to results
                     if self.experiment_context:
                         analysis_result = self.generate_context_aware_output(analysis_result, analysis_run_info)
@@ -2592,16 +2848,49 @@ All experiment outputs have been saved to: `{experiment_dir}`
             validation_report = self.create_validation_report(all_results)
             logger.info(f"📊 Validation report generated with {len(all_results)} analyses")
         
+        # QA-aware success/failure counting
+        qa_validated_successes = len([r for r in all_results if r.get('success', False) and not r.get('qa_failed', False)])
+        qa_validation_failures = len([r for r in all_results if r.get('qa_failed', False)])
+        technical_failures = len([r for r in all_results if 'error' in r])
+        total_failures = qa_validation_failures + technical_failures
+        
         execution_summary = {
             'total_analyses': len(all_results),
             'total_cost': round(total_cost, 4),
-            'successful_analyses': len([r for r in all_results if 'error' not in r]),
-            'failed_analyses': len([r for r in all_results if 'error' in r]),
+            'successful_analyses': qa_validated_successes,  # Only QA-validated successes
+            'failed_analyses': total_failures,
+            'qa_validation_failures': qa_validation_failures,
+            'technical_failures': technical_failures,
             'cost_efficiency': round(total_cost / len(all_results), 4) if all_results else 0,
+            'qa_summary': {
+                'high_confidence': len([r for r in all_results if r.get('qa_assessment', {}).get('confidence_level') == 'HIGH']),
+                'medium_confidence': len([r for r in all_results if r.get('qa_assessment', {}).get('confidence_level') == 'MEDIUM']),
+                'low_confidence': len([r for r in all_results if r.get('qa_assessment', {}).get('confidence_level') == 'LOW']),
+                'qa_system_available': self.qa_system is not None
+            },
             'results': all_results
         }
         
-        logger.info(f"🎯 Execution completed: {execution_summary['successful_analyses']}/{execution_summary['total_analyses']} successful, ${execution_summary['total_cost']:.3f} total cost")
+        # QA-aware completion logging
+        if execution_summary['qa_summary']['qa_system_available']:
+            logger.info(f"🎯 Execution completed: {execution_summary['successful_analyses']}/{execution_summary['total_analyses']} QA-validated successes, ${execution_summary['total_cost']:.3f} total cost")
+            if execution_summary['qa_validation_failures'] > 0:
+                logger.warning(f"⚠️ QA rejections: {execution_summary['qa_validation_failures']} analyses failed quality validation")
+            
+            # Log QA confidence breakdown
+            qa_summary = execution_summary['qa_summary']
+            logger.info(f"📊 QA confidence: {qa_summary['high_confidence']} HIGH, {qa_summary['medium_confidence']} MEDIUM, {qa_summary['low_confidence']} LOW")
+        else:
+            logger.warning(f"⚠️ Execution completed WITHOUT QA validation: {execution_summary['successful_analyses']}/{execution_summary['total_analyses']} analyses, ${execution_summary['total_cost']:.3f} total cost")
+            logger.warning("   Results may not meet academic quality standards")
+        
+        # Add transaction-level QA checkpoint for experiment failure
+        if execution_summary.get('qa_summary', {}).get('qa_system_available', False):
+            qa_success_rate = execution_summary['successful_analyses'] / execution_summary['total_analyses'] if execution_summary['total_analyses'] > 0 else 0
+            if qa_success_rate < 0.5:  # If less than 50% pass QA validation
+                logger.error("🚨 EXPERIMENT QUALITY FAILURE: Less than 50% of analyses passed QA validation")
+                logger.error("   This experiment does not meet minimum quality standards for academic use")
+                logger.error("   Consider reviewing framework configuration, prompt templates, or corpus quality")
         
         # After collecting all_results, run enhanced analysis pipeline
         if all_results:

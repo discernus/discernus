@@ -1,0 +1,891 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>General guidelines - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ok-any-general-guidelines-beyond-the-requirements-for-ensuring-a-successful-dev-iteration-based-on-this-thread-i-want-to-make-sure-cursor-has-all-the-direction-and-context-it-needs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              General guidelines
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-integration-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Integration Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Integration Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leverage-existing-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leverage Existing Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respect-separation-of-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Respect Separation of Concerns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rapid-iteration-focus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rapid Iteration Focus
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-and-resilience" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling and Resilience
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-management-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Management Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Management Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corpus-handling-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corpus Handling Complexity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-control-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version Control Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-and-scalability-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance and Scalability Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance and Scalability Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimization-priorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimization Priorities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-and-quality-assurance-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing and Quality Assurance Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing and Quality Assurance Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-first-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation-First Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-research-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Research Standards
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-experience-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Experience Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Experience Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cognitive-load-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cognitive Load Reduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expert-user-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expert User Interface
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-broader-project-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Broader Project Goals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration with Broader Project Goals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workstream-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workstream Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeline-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeline Alignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specific-technical-recommendations-for-cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Specific Technical Recommendations for Cursor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Specific Technical Recommendations for Cursor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Integration Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Metrics and Validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Success Metrics and Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#functional-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functional Success Criteria
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Targets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/></p>
+<h1 id="ok-any-general-guidelines-beyond-the-requirements-for-ensuring-a-successful-dev-iteration-based-on-this-thread-i-want-to-make-sure-cursor-has-all-the-direction-and-context-it-needs">OK. Any general guidelines beyond the requirements for ensuring a successful dev iteration based on this thread? I want to make sure Cursor has all the direction and context it needs.</h1>
+<p>🧠 <strong>Essential Development Guidelines for Cursor:</strong></p>
+<ul>
+<li>Leverage existing production-ready infrastructure rather than rebuilding components</li>
+<li>Maintain architectural separation between general prompts and framework-specific content</li>
+<li>Follow validation-first development principles with comprehensive error handling</li>
+<li>Implement proper versioning and change tracking for reproducibility</li>
+<li>Design for rapid iteration cycles while maintaining system stability</li>
+</ul>
+<p>Based on your comprehensive project documentation and the critical nature of Workstream 1 as the foundation for all other workstreams, here are essential guidelines to ensure Cursor delivers a successful development iteration:</p>
+<h2 id="architecture-integration-guidelines"><strong>Architecture Integration Guidelines</strong></h2>
+<h3 id="leverage-existing-infrastructure"><strong>Leverage Existing Infrastructure</strong></h3>
+<p>Your backend is production-ready with sophisticated capabilities that Cursor should build upon, not recreate:</p>
+<ul>
+<li><strong>Use existing API endpoints</strong> (<code>/api/analyze/single-text</code>, <code>/api/experiments</code>, <code>/api/corpora</code>) rather than creating new ones</li>
+<li><strong>Connect to PostgreSQL v2.1 schema</strong> with proper experiment tracking and version control</li>
+<li><strong>Integrate with PromptTemplateManager</strong> (442 lines of sophisticated logic) rather than hard-coding prompt generation</li>
+<li><strong>Utilize DirectAPIClient</strong> for real LLM connections (OpenAI, Anthropic, Google AI)</li>
+<li><strong>Leverage FrameworkManager</strong> for hot-swappable framework configuration</li>
+</ul>
+<h3 id="respect-separation-of-concerns"><strong>Respect Separation of Concerns</strong></h3>
+<p>The modular architecture is critical for maintaining system integrity:</p>
+<ul>
+<li><strong>General prompts</strong> and <strong>framework-specific content</strong> must remain separate in the UI</li>
+<li><strong>Independent versioning</strong> for prompt templates vs. framework configurations</li>
+<li><strong>Preview functionality</strong> to show merged prompts without affecting the separation</li>
+<li><strong>Validation layer</strong> ensuring template variables have corresponding framework content</li>
+</ul>
+<h2 id="development-workflow-guidelines"><strong>Development Workflow Guidelines</strong></h2>
+<h3 id="rapid-iteration-focus"><strong>Rapid Iteration Focus</strong></h3>
+<p>The React app's primary purpose is accelerating the prompt engineering feedback loop:</p>
+<ul>
+<li><strong>Optimize for speed</strong>: Click-to-result cycles should be under 10 seconds</li>
+<li><strong>Real-time validation</strong>: Show prompt errors and incompatibilities immediately</li>
+<li><strong>Quick save/restore</strong>: Version snapshots for rapid experimentation</li>
+<li><strong>Undo/redo capability</strong>: Allow fearless experimentation with easy rollback</li>
+</ul>
+<h3 id="error-handling-and-resilience"><strong>Error Handling and Resilience</strong></h3>
+<p>Your existing system has 99.5% test success rate—maintain this reliability:</p>
+<ul>
+<li><strong>Graceful API failures</strong>: Handle LLM timeouts, rate limits, and connection issues</li>
+<li><strong>Version compatibility checks</strong>: Prevent incompatible prompt/framework combinations</li>
+<li><strong>Input validation</strong>: Validate JSON schemas before sending to backend</li>
+<li><strong>Fallback strategies</strong>: Continue working even if one LLM model is unavailable</li>
+</ul>
+<h2 id="data-management-guidelines"><strong>Data Management Guidelines</strong></h2>
+<h3 id="corpus-handling-complexity"><strong>Corpus Handling Complexity</strong></h3>
+<p>Your dual corpus system requires careful handling:</p>
+<ul>
+<li><strong>Real-world corpora</strong>: Fixed text, editable metadata—prevent accidental text modification</li>
+<li><strong>Synthetic corpora</strong>: Fully editable—enable rapid test case creation</li>
+<li><strong>Metadata schemas</strong>: Support fluid, evolving structures without breaking existing data</li>
+<li><strong>Bulk operations</strong>: Enable efficient corpus expansion and management</li>
+</ul>
+<h3 id="version-control-integration"><strong>Version Control Integration</strong></h3>
+<p>Reproducibility is essential for academic validation:</p>
+<ul>
+<li><strong>Complete provenance tracking</strong>: Every analysis result must record exact versions used</li>
+<li><strong>Semantic versioning</strong>: Automatic increment suggestions for both prompts and frameworks</li>
+<li><strong>Change logging</strong>: User-provided descriptions of what changed and why</li>
+<li><strong>Compatibility matrices</strong>: Visual indication of which versions work together</li>
+</ul>
+<h2 id="performance-and-scalability-guidelines"><strong>Performance and Scalability Guidelines</strong></h2>
+<h3 id="optimization-priorities"><strong>Optimization Priorities</strong></h3>
+<p>Balance speed with comprehensive functionality:</p>
+<ul>
+<li><strong>Lazy loading</strong>: Load corpus data, framework definitions, and version history on demand</li>
+<li><strong>Caching strategies</strong>: Cache merged prompts, API responses, and visualization data</li>
+<li><strong>Progressive enhancement</strong>: Core functionality works immediately, advanced features load progressively</li>
+<li><strong>Batch operations</strong>: Queue multiple analyses for efficient resource utilization</li>
+</ul>
+<h3 id="resource-management"><strong>Resource Management</strong></h3>
+<p>Stay within your \$2500 budget constraints:</p>
+<ul>
+<li><strong>Cost monitoring</strong>: Display estimated API costs before executing analyses</li>
+<li><strong>Model selection guidance</strong>: Recommend cost-effective models for different use cases</li>
+<li><strong>Rate limiting awareness</strong>: Respect API rate limits and provide user feedback</li>
+<li><strong>Efficient API usage</strong>: Minimize redundant calls through intelligent caching</li>
+</ul>
+<h2 id="testing-and-quality-assurance-guidelines"><strong>Testing and Quality Assurance Guidelines</strong></h2>
+<h3 id="validation-first-development"><strong>Validation-First Development</strong></h3>
+<p>Your academic credibility depends on system reliability:</p>
+<ul>
+<li><strong>Unit tests</strong>: Test prompt merging, versioning, and data validation logic</li>
+<li><strong>Integration tests</strong>: Verify API connectivity and data flow</li>
+<li><strong>User acceptance testing</strong>: Validate against actual prompt engineering workflows</li>
+<li><strong>Regression testing</strong>: Ensure changes don't break existing functionality</li>
+</ul>
+<h3 id="academic-research-standards"><strong>Academic Research Standards</strong></h3>
+<p>The system must support rigorous research methodology:</p>
+<ul>
+<li><strong>Reproducible experiments</strong>: Every analysis must be exactly replicable</li>
+<li><strong>Audit trails</strong>: Complete logs of user actions and system responses</li>
+<li><strong>Data integrity</strong>: Prevent accidental data corruption or loss</li>
+<li><strong>Export capabilities</strong>: Generate academic-quality documentation and reports</li>
+</ul>
+<h2 id="user-experience-guidelines"><strong>User Experience Guidelines</strong></h2>
+<h3 id="cognitive-load-reduction"><strong>Cognitive Load Reduction</strong></h3>
+<p>The interface must simplify complex analytical work:</p>
+<ul>
+<li><strong>Context preservation</strong>: Maintain user state across sessions and page refreshes</li>
+<li><strong>Visual hierarchy</strong>: Clear distinction between different types of content and controls</li>
+<li><strong>Progressive disclosure</strong>: Show relevant information without overwhelming the user</li>
+<li><strong>Intelligent defaults</strong>: Pre-populate fields with sensible values based on context</li>
+</ul>
+<h3 id="expert-user-interface"><strong>Expert User Interface</strong></h3>
+<p>Design for sophisticated users who understand the domain:</p>
+<ul>
+<li><strong>Keyboard shortcuts</strong>: Enable rapid navigation and common operations</li>
+<li><strong>Advanced features</strong>: Power-user capabilities without cluttering basic workflows</li>
+<li><strong>Customizable layouts</strong>: Allow users to optimize for their specific work patterns</li>
+<li><strong>Expert feedback</strong>: Clear indication of system status and potential issues</li>
+</ul>
+<h2 id="integration-with-broader-project-goals"><strong>Integration with Broader Project Goals</strong></h2>
+<h3 id="workstream-dependencies"><strong>Workstream Dependencies</strong></h3>
+<p>Remember that other workstreams depend on Workstream 1 success:</p>
+<ul>
+<li><strong>Human validation</strong> (Workstream 2) requires stable, reliable prompts</li>
+<li><strong>Visualization improvements</strong> (Workstream 3) need consistent scoring data</li>
+<li><strong>Framework fit detection</strong> (Workstream 5) relies on prompt refinements</li>
+<li><strong>Documentation</strong> (Workstream 4) must reflect actual system capabilities</li>
+</ul>
+<h3 id="timeline-alignment"><strong>Timeline Alignment</strong></h3>
+<p>Your 16-week schedule requires careful coordination:</p>
+<ul>
+<li><strong>Phase 1 (Weeks 1-4)</strong>: Focus on core prompt engineering functionality</li>
+<li><strong>Phase 2 (Weeks 5-8)</strong>: Enable validation feedback loops</li>
+<li><strong>Phase 3 (Weeks 9-12)</strong>: Support advanced experimentation features</li>
+<li><strong>Phase 4 (Weeks 13-16)</strong>: Polish for public deployment</li>
+</ul>
+<h2 id="specific-technical-recommendations-for-cursor"><strong>Specific Technical Recommendations for Cursor</strong></h2>
+<h3 id="component-architecture"><strong>Component Architecture</strong></h3>
+<ul>
+<li><strong>Modular design</strong>: Separate components for prompt editing, framework management, analysis execution, and results display</li>
+<li><strong>State management</strong>: Use React Context or Redux for complex state across components</li>
+<li><strong>Real-time updates</strong>: WebSocket or polling for long-running analysis operations</li>
+<li><strong>Responsive design</strong>: Support various screen sizes for different work environments</li>
+</ul>
+<h3 id="api-integration-patterns"><strong>API Integration Patterns</strong></h3>
+<ul>
+<li><strong>Async/await patterns</strong>: Handle LLM analysis calls that may take several seconds</li>
+<li><strong>Error boundaries</strong>: Graceful handling of API failures and unexpected responses</li>
+<li><strong>Loading states</strong>: Clear feedback during analysis execution</li>
+<li><strong>Optimistic updates</strong>: Immediate UI feedback with backend confirmation</li>
+</ul>
+<h3 id="development-best-practices"><strong>Development Best Practices</strong></h3>
+<ul>
+<li><strong>Code documentation</strong>: Clear comments explaining domain-specific logic</li>
+<li><strong>TypeScript usage</strong>: Strong typing for API responses and data structures</li>
+<li><strong>Component testing</strong>: Test prompt merging, version management, and data validation</li>
+<li><strong>Accessibility</strong>: Screen reader support and keyboard navigation</li>
+</ul>
+<h2 id="success-metrics-and-validation"><strong>Success Metrics and Validation</strong></h2>
+<h3 id="functional-success-criteria"><strong>Functional Success Criteria</strong></h3>
+<ul>
+<li><strong>Prompt engineering cycle time</strong>: Reduce from minutes to seconds</li>
+<li><strong>Error rate</strong>: Maintain &lt;0.5% system failures</li>
+<li><strong>User workflow completion</strong>: 95%+ success rate for core operations</li>
+<li><strong>Academic reproducibility</strong>: 100% exact replication of previous analyses</li>
+</ul>
+<h3 id="performance-targets"><strong>Performance Targets</strong></h3>
+<ul>
+<li><strong>Initial load time</strong>: &lt;3 seconds for application startup</li>
+<li><strong>Analysis execution</strong>: &lt;10 seconds for single-text analysis</li>
+<li><strong>Version switching</strong>: &lt;1 second for framework/prompt changes</li>
+<li><strong>Data save operations</strong>: &lt;2 seconds for versioning and storage</li>
+</ul>
+<p>These guidelines ensure that Cursor builds a system that not only meets immediate Workstream 1 needs but also supports the broader academic validation strategy essential for your project's credibility and long-term success. The focus on existing infrastructure integration, architectural integrity, and validation-first development will accelerate your timeline while maintaining the quality standards necessary for academic publication.</p>
+<div style="text-align: center">⁂</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,862 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Database-First Architecture Development TODOs - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#database-first-architecture-development-todos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database-First Architecture Development TODOs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mission-accomplished-previous-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Mission Accomplished (Previous Session)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-todos-for-next-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Priority TODOs for Next Session
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Priority TODOs for Next Session">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-documentation-architecture-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Documentation &amp; Architecture (HIGH PRIORITY)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-testing-infrastructure-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Testing Infrastructure (HIGH PRIORITY)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-academic-export-enhancement-medium-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Academic Export Enhancement (MEDIUM PRIORITY)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-performance-reliability-medium-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Performance &amp; Reliability (MEDIUM PRIORITY)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-dependency-management-medium-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Dependency Management (MEDIUM PRIORITY)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cli-tool-enhancement-low-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. CLI Tool Enhancement (LOW PRIORITY)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-debt-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Technical Debt &amp; Cleanup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Technical Debt &amp; Cleanup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#legacy-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Legacy Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Validation &amp; Quality Assurance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Validation &amp; Quality Assurance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Integrity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard Quality
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics-for-next-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Success Metrics for Next Session
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Success Metrics for Next Session">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#must-have" class="md-nav__link">
+    <span class="md-ellipsis">
+      Must-Have
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#should-have" class="md-nav__link">
+    <span class="md-ellipsis">
+      Should-Have
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nice-to-have" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nice-to-Have
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues-to-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Known Issues to Address
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#long-term-architecture-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Long-Term Architecture Goals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Long-Term Architecture Goals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-next-session-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1 (Next Session): Foundation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-future-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2 (Future): Enhancement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-future-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3 (Future): Scale
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="database-first-architecture-development-todos">Database-First Architecture Development TODOs</h1>
+<p><strong>Session Date:</strong> January 7, 2025<br />
+<strong>Previous Session:</strong> January 6, 2025 - Database-First Architecture Implementation</p>
+<h2 id="mission-accomplished-previous-session">🎯 <strong>Mission Accomplished (Previous Session)</strong></h2>
+<ul>
+<li>✅ Resolved architectural inconsistency (dashboards reading JSON instead of database)</li>
+<li>✅ Implemented database-first dashboard generation</li>
+<li>✅ Created standalone CLI tool (<code>create_dashboard_from_database.py</code>)</li>
+<li>✅ Enhanced database query functions in <code>statistical_logger.py</code></li>
+<li>✅ Successfully tested with Trump and Obama dashboards</li>
+<li>✅ Fixed variance analysis formatting issues</li>
+</ul>
+<hr />
+<h2 id="priority-todos-for-next-session">🚀 <strong>Priority TODOs for Next Session</strong></h2>
+<h3 id="1-documentation-architecture-high-priority"><strong>1. Documentation &amp; Architecture (HIGH PRIORITY)</strong></h3>
+<ul>
+<li>[ ] <strong>Complete Database Schema Documentation</strong></li>
+<li>Document all tables, relationships, and indexes</li>
+<li>Create ER diagram for PostgreSQL schema</li>
+<li>
+<p>Document migration from JSON-based to database-first architecture</p>
+</li>
+<li>
+<p>[ ] <strong>API Documentation</strong></p>
+</li>
+<li>Document all new database query functions</li>
+<li>Create usage examples for <code>statistical_logger.py</code> methods</li>
+<li>
+<p>Document dashboard generation API patterns</p>
+</li>
+<li>
+<p>[ ] <strong>Workflow Documentation</strong></p>
+</li>
+<li>Complete user guide for database-first dashboard creation</li>
+<li>Document academic export processes from database</li>
+<li>Create troubleshooting guide for common issues</li>
+</ul>
+<h3 id="2-testing-infrastructure-high-priority"><strong>2. Testing Infrastructure (HIGH PRIORITY)</strong></h3>
+<ul>
+<li>[ ] <strong>Unit Tests for Database Functions</strong></li>
+<li>Test <code>get_job_by_id()</code>, <code>get_runs_by_job_id()</code>, <code>get_dashboard_data()</code></li>
+<li>Mock database responses for isolated testing</li>
+<li>
+<p>Test error handling and edge cases</p>
+</li>
+<li>
+<p>[ ] <strong>Integration Tests for Dashboard Generation</strong></p>
+</li>
+<li>End-to-end tests for <code>create_dashboard_from_database()</code></li>
+<li>Test with various job IDs and data configurations</li>
+<li>
+<p>Validate dashboard output quality and consistency</p>
+</li>
+<li>
+<p>[ ] <strong>Database Schema Tests</strong></p>
+</li>
+<li>Validate table creation and migration scripts</li>
+<li>Test PostgreSQL vs SQLite compatibility</li>
+<li>Test database connection error handling</li>
+</ul>
+<h3 id="3-academic-export-enhancement-medium-priority"><strong>3. Academic Export Enhancement (MEDIUM PRIORITY)</strong></h3>
+<ul>
+<li>[ ] <strong>Direct Database Export Functions</strong></li>
+<li>Enhance academic export to query database directly (no JSON files)</li>
+<li>Test SPSS, R, CSV, and Parquet exports from database</li>
+<li>
+<p>Validate academic format compatibility</p>
+</li>
+<li>
+<p>[ ] <strong>Export CLI Integration</strong></p>
+</li>
+<li>Add database-first export options to CLI tools</li>
+<li>Support job ID-based exports</li>
+<li>Batch export functionality for multiple jobs</li>
+</ul>
+<h3 id="4-performance-reliability-medium-priority"><strong>4. Performance &amp; Reliability (MEDIUM PRIORITY)</strong></h3>
+<ul>
+<li>[ ] <strong>Database Performance Optimization</strong></li>
+<li>Analyze query performance with EXPLAIN ANALYZE</li>
+<li>Add missing indexes for dashboard queries</li>
+<li>
+<p>Implement connection pooling for high-volume usage</p>
+</li>
+<li>
+<p>[ ] <strong>Error Handling Enhancement</strong></p>
+</li>
+<li>Comprehensive error handling for database failures</li>
+<li>Graceful fallbacks for missing variance statistics table</li>
+<li>Better error messages for user-facing CLI tools</li>
+</ul>
+<h3 id="5-dependency-management-medium-priority"><strong>5. Dependency Management (MEDIUM PRIORITY)</strong></h3>
+<ul>
+<li>[ ] <strong>Requirements Documentation</strong></li>
+<li>Document new PostgreSQL dependencies</li>
+<li>Update <code>requirements.txt</code> with version specifications</li>
+<li>
+<p>Create installation guide for database setup</p>
+</li>
+<li>
+<p>[ ] <strong>Environment Configuration</strong></p>
+</li>
+<li>Document database configuration requirements</li>
+<li>Create <code>.env.example</code> for database connection settings</li>
+<li>Add database initialization scripts</li>
+</ul>
+<h3 id="6-cli-tool-enhancement-low-priority"><strong>6. CLI Tool Enhancement (LOW PRIORITY)</strong></h3>
+<ul>
+<li>[ ] <strong>Extended CLI Functionality</strong></li>
+<li>Add batch dashboard generation (multiple job IDs)</li>
+<li>Interactive job filtering (by speaker, model, date range)</li>
+<li>
+<p>Dashboard comparison tools from database</p>
+</li>
+<li>
+<p>[ ] <strong>User Experience Improvements</strong></p>
+</li>
+<li>Better interactive prompts and error messages</li>
+<li>Progress indicators for dashboard generation</li>
+<li>Output format options (PNG, PDF, SVG)</li>
+</ul>
+<hr />
+<h2 id="technical-debt-cleanup">🔧 <strong>Technical Debt &amp; Cleanup</strong></h2>
+<h3 id="code-quality"><strong>Code Quality</strong></h3>
+<ul>
+<li>[ ] <strong>Type Hints and Documentation</strong></li>
+<li>Add comprehensive type hints to new database functions</li>
+<li>Improve docstrings for all new methods</li>
+<li>
+<p>Code style consistency (Black, isort)</p>
+</li>
+<li>
+<p>[ ] <strong>Refactoring Opportunities</strong></p>
+</li>
+<li>Extract common database query patterns</li>
+<li>Consolidate timestamp handling across modules</li>
+<li>Simplify error handling patterns</li>
+</ul>
+<h3 id="legacy-support"><strong>Legacy Support</strong></h3>
+<ul>
+<li>[ ] <strong>JSON-to-Database Migration Tools</strong></li>
+<li>Create utilities to migrate existing JSON files to database</li>
+<li>Validation tools to ensure data integrity</li>
+<li>Backward compatibility testing</li>
+</ul>
+<hr />
+<h2 id="validation-quality-assurance">📊 <strong>Validation &amp; Quality Assurance</strong></h2>
+<h3 id="data-integrity"><strong>Data Integrity</strong></h3>
+<ul>
+<li>[ ] <strong>Database Validation Scripts</strong></li>
+<li>Verify job and run data consistency</li>
+<li>Check for orphaned records or missing references</li>
+<li>Validate JSON field structures in database</li>
+</ul>
+<h3 id="dashboard-quality"><strong>Dashboard Quality</strong></h3>
+<ul>
+<li>[ ] <strong>Visual Regression Testing</strong></li>
+<li>Compare database-first vs JSON-based dashboard outputs</li>
+<li>Validate variance analysis formatting</li>
+<li>Test with edge cases (zero variance, missing data)</li>
+</ul>
+<hr />
+<h2 id="success-metrics-for-next-session">🎯 <strong>Success Metrics for Next Session</strong></h2>
+<h3 id="must-have"><strong>Must-Have</strong></h3>
+<ul>
+<li>[ ] Complete unit test coverage for database functions (&gt;90%)</li>
+<li>[ ] Working integration tests for dashboard generation</li>
+<li>[ ] Updated documentation for database-first workflows</li>
+</ul>
+<h3 id="should-have"><strong>Should-Have</strong></h3>
+<ul>
+<li>[ ] Performance benchmarks for database queries</li>
+<li>[ ] Academic export validation from database</li>
+<li>[ ] CLI tool enhancements and user experience improvements</li>
+</ul>
+<h3 id="nice-to-have"><strong>Nice-to-Have</strong></h3>
+<ul>
+<li>[ ] Automated regression testing pipeline</li>
+<li>[ ] Database migration utilities</li>
+<li>[ ] Advanced CLI features (batch processing, filtering)</li>
+</ul>
+<hr />
+<h2 id="known-issues-to-address">📋 <strong>Known Issues to Address</strong></h2>
+<ol>
+<li><strong>Variance Statistics Table</strong>: Some jobs may not have variance statistics entries</li>
+<li><strong>Timestamp Formatting</strong>: Mixed string/datetime handling needs standardization</li>
+<li><strong>Import Dependencies</strong>: Module import paths need cleanup for better reliability</li>
+<li><strong>CLI Integration</strong>: Main <code>narrative_gravity_elliptical.py</code> CLI needs database integration</li>
+<li><strong>Error Messages</strong>: User-facing errors need improvement for better debugging</li>
+</ol>
+<hr />
+<h2 id="long-term-architecture-goals">🚀 <strong>Long-Term Architecture Goals</strong></h2>
+<h3 id="phase-1-next-session-foundation"><strong>Phase 1 (Next Session)</strong>: Foundation</h3>
+<ul>
+<li>Complete testing and documentation</li>
+<li>Solidify database-first architecture</li>
+</ul>
+<h3 id="phase-2-future-enhancement"><strong>Phase 2 (Future)</strong>: Enhancement</h3>
+<ul>
+<li>Real-time dashboard updates</li>
+<li>Advanced analytics queries</li>
+<li>Performance monitoring</li>
+</ul>
+<h3 id="phase-3-future-scale"><strong>Phase 3 (Future)</strong>: Scale</h3>
+<ul>
+<li>API endpoints for dashboard generation</li>
+<li>Multi-user support</li>
+<li>Cloud deployment ready</li>
+</ul>
+<hr />
+<p><strong>Note</strong>: This TODO list represents approximately 2-3 development sessions worth of work. Prioritize HIGH and MEDIUM items first, focusing on testing and documentation to ensure the database-first architecture is robust and well-documented. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

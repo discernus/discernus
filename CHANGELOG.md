@@ -2,6 +2,176 @@
 
 ## [Unreleased]
 
+### 📋 **SPECIFICATIONS UPDATE: MECEC Compliance Review Complete (June 21, 2025)**
+
+**COMPREHENSIVE SPECIFICATION REVIEW**: Updated all formal specifications to achieve MECEC (Mutually Exclusive, Collectively Exhaustive, Current) compliance post-validation consolidation.
+
+#### ✅ **Specification Modernization**
+
+**🎯 FORMAL_SPECIFICATIONS.md Updated (v2.1.0)**:
+- **Current Reality Reflection**: Updated from outdated JSON-first to current YAML-first framework format
+- **Unified Validator Integration**: Documents production unified_framework_validator.py (1,054 lines) replacing deprecated systems
+- **Architecture Support**: Multi-architecture specification (dipole-based + independent wells frameworks)
+- **Validation Architecture**: Complete production vs deprecated system documentation with migration guidance
+
+**📐 Multi-Architecture Framework Support**:
+- **Dipole-Based Frameworks**: `dipoles[]` array structure (e.g., Moral Foundations Theory)
+- **Independent Wells Frameworks**: `wells{}` dictionary structure (e.g., Three Wells Political)
+- **Auto-Detection**: Unified validator automatically detects and validates both architectures
+- **Format Support**: YAML primary + JSON legacy migration support
+
+**🔧 Production System Integration**:
+- **Framework Validation**: `scripts/utilities/unified_framework_validator.py` (comprehensive multi-layer validation)
+- **Experiment Validation**: `scripts/applications/experiment_validation_utils.py` (orchestrator-integrated)
+- **Orchestrator Integration**: Complete validation pipeline in comprehensive_experiment_orchestrator.py
+- **Deprecated Systems**: Clear documentation of moved systems with migration guidance
+
+#### 🎯 **MECEC Compliance Achieved**
+
+**✅ Mutually Exclusive**:
+- Framework validation: Single unified validator (deprecated systems properly moved)
+- Experiment validation: Orchestrator-integrated only (standalone systems deprecated)
+- Clear component boundaries: Frameworks, experiments, templates, schemes
+
+**✅ Collectively Exhaustive**:
+- Framework architectures: Both dipole-based and independent wells covered
+- Validation layers: Format, structure, semantics, academic, integration
+- Component specifications: All system components documented
+
+**✅ Current**:
+- Updated: June 21, 2025 (reflects validation consolidation work)
+- Format accuracy: Current YAML-first specification matches actual implementation
+- System integration: Production validation architecture documented
+
+#### 🎯 **Strategic Impact**
+
+**Documentation Reliability**: Specifications now accurately reflect production system capabilities rather than outdated proposals, eliminating developer confusion and ensuring accurate system representation.
+
+### 🗑️ **VALIDATION SYSTEM CONSOLIDATION: Experiment Validator Deprecation (June 21, 2025)**
+
+**EXPERIMENT VALIDATOR CLEANUP**: Deprecated redundant experiment validation system that was not integrated into production pipeline.
+
+#### ✅ **Validation System Rationalization**
+
+**🎯 Deprecated Redundant System:**
+- **Moved to deprecated**: `scripts/applications/experiment_validator.py` → `deprecated/by-system/experiment_validator.py`
+- **Redundancy eliminated**: Duplicate functionality with production validation system
+- **No migration needed**: System was not being used in production workflows
+
+**🏗️ Production System Confirmed:**
+- **Production validator**: `scripts/applications/experiment_validation_utils.py` (463 lines)
+- **Orchestrator integration**: Used by `comprehensive_experiment_orchestrator.py`
+- **Enhanced user experience**: Clear error messages with actionable guidance and fix suggestions
+- **Structured reporting**: ValidationReport with severity levels and detailed issue tracking
+
+#### 🔍 **Analysis Results**
+
+**✅ Systems Kept (Specialized):**
+- **Unified framework validator**: `scripts/utilities/unified_framework_validator.py` (framework validation - architecture-aware)
+- **Experiment validation utils**: `scripts/applications/experiment_validation_utils.py` (experiment validation - production system)
+- **AI assistant compliance**: `scripts/applications/validate_ai_assistant_compliance.py` (meta-validation of AI suggestions)
+- **Corpus validator**: `src/corpus/validator.py` (FAIR compliance and corpus integrity)
+
+**🗑️ Systems Deprecated:**
+- **Framework spec validator**: `deprecated/by-system/validate_framework_spec.py` (replaced by unified validator)
+- **Experiment validator**: `deprecated/by-system/experiment_validator.py` (redundant with validation utils)
+
+#### 🎯 **Strategic Impact**
+
+**Validation Architecture Cleanup:**
+- **No redundancy**: Each validator serves a distinct purpose (framework, experiment, corpus, meta-validation)
+- **Production integration**: All kept validators are integrated into production workflows
+- **Clear responsibilities**: Framework → unified validator, Experiments → validation utils, Corpus → domain validator
+- **Developer clarity**: Single validation system per domain, no confusion about which to use
+
+**Code Quality Enhancement:**
+- **Reduced maintenance**: Fewer validation systems to maintain and update
+- **Consistent patterns**: Standardized validation approach across the platform
+- **Clear migration path**: Deprecated systems have clear replacement guidance
+
+**Academic Standards Maintained**: All validation capabilities preserved in production systems with enhanced error reporting and user guidance.
+
+### 🔧 **FRAMEWORK VALIDATOR CONSOLIDATION: Unified Architecture Support (June 21, 2025)**
+
+**VALIDATOR CONSOLIDATION**: Successfully unified fragmented framework validation systems into single comprehensive validator supporting all framework architectures and formats.
+
+#### ✅ **Unified Validation System Created**
+
+**🎯 Consolidated Framework Validation:**
+- **New Production System**: `scripts/utilities/unified_framework_validator.py` (1,054 lines) - Comprehensive validation supporting all architectures
+- **Architecture Support**: Both dipole-based frameworks (MFT) and independent wells frameworks (Three Wells Political)
+- **Format Support**: Current YAML format + legacy JSON migration support
+- **Validation Layers**: Format detection, structural validation, semantic consistency, academic standards, integration compatibility
+- **Dual Interface**: CLI utility + importable component for orchestrator integration
+
+**🏗️ Architecture-Aware Detection:**
+- **Dipole-based frameworks**: Auto-detects `dipoles[]` array with `positive`/`negative` objects
+- **Independent wells frameworks**: Auto-detects `wells{}` dict with `position`/`angle_degrees` objects
+- **Legacy JSON support**: Backward compatibility for migration from old format
+- **Smart file detection**: Pattern matching for framework files (`*_framework.yaml`, `framework.yaml`, etc.)
+
+**📊 Comprehensive Validation Results:**
+- **MFT Framework**: ✅ Architecture: dipole_based, Format: yaml, Wells: 12, Dipoles: 6
+- **Three Wells Political**: ✅ Architecture: independent_wells, Format: yaml, Wells: 3, Dipoles: 0
+- **Academic Standards**: Citation format validation, theoretical foundation checking
+- **Semantic Consistency**: Angle uniqueness, coordinate validation, weight distribution checks
+
+#### 🔗 **Orchestrator Integration Complete**
+
+**🔧 Enhanced Framework Validation in Orchestrator:**
+- **Integrated Validation**: Replaced fragmented validation with unified system in `comprehensive_experiment_orchestrator.py`
+- **Comprehensive Error Reporting**: Detailed error messages with fix suggestions for validation failures
+- **Validation Metadata Storage**: Framework architecture, format, wells/dipoles count stored with validated content
+- **Backward Compatibility**: Falls back to legacy validation if unified validator unavailable
+- **Transaction Safety**: Validation failures now block experiment execution to prevent invalid analyses
+
+**📈 Validation Quality Enhancement:**
+- **Before**: Multiple conflicting validators expecting different formats
+- **After**: Single validator with comprehensive multi-layer validation
+- **Error Guidance**: Clear fix suggestions for each validation failure type
+- **Academic Standards**: Enhanced validation for theoretical foundation, citations, version information
+
+#### 🗑️ **Legacy System Deprecation**
+
+**📁 Moved to Deprecated:**
+- **`scripts/utilities/validate_framework_spec.py`** → **`deprecated/by-system/validate_framework_spec.py`**
+- **Clear Migration Guidance**: Deprecation notice with migration commands and feature comparison
+- **No Breaking Changes**: Legacy validator still available during transition period
+
+**🎯 Migration Benefits:**
+- **Format Mismatch Eliminated**: No more conflicts between YAML frameworks and JSON-expecting validators
+- **Architecture Blindness Resolved**: Full support for both dipole and independent wells architectures
+- **Enhanced Standards**: Academic rigor validation, semantic consistency checking, integration compatibility
+
+#### 📊 **Validation Coverage Matrix**
+
+**✅ Supported Architectures:**
+- **Dipole-based**: MFT, IDITI, Lakoff Family Models (positive/negative pole pairs)
+- **Independent Wells**: Three Wells Political, Entman Framing Functions (independent theory wells)
+- **Legacy JSON**: Backward compatibility for existing frameworks during migration
+
+**✅ Validation Layers:**
+1. **Format Detection & Parsing** - Auto-detects YAML/JSON with proper error handling
+2. **Structural Validation** - Architecture-aware schema validation
+3. **Semantic Consistency** - Angle uniqueness, coordinate validation, weight distribution
+4. **Academic Standards** - Citation format, theoretical foundation, version requirements
+5. **Integration Compatibility** - Prompt configuration, compatibility declarations
+
+#### 🎯 **Strategic Impact**
+
+**Framework Validation Transformation:**
+- **Before**: Fragmented validators with format mismatches and architecture blindness
+- **After**: Unified validator supporting all frameworks with comprehensive academic standards
+- **Developer Experience**: Single validation command for all framework types with clear error guidance
+- **Academic Readiness**: Enhanced validation standards supporting peer review and publication
+
+**Production Integration Success:**
+- **Orchestrator Enhancement**: Framework validation now blocks invalid experiments before expensive LLM analysis
+- **Validation Metadata**: Complete framework information stored with validated content for audit trails
+- **Error Prevention**: Clear fix suggestions preventing common framework specification errors
+
+**Future-Proof Architecture**: Unified validator designed to support additional framework architectures and validation requirements as the platform evolves.
+
 ### 🎉 **MAJOR BREAKTHROUGH: Framework Architecture Unification Complete (June 20, 2025)**
 
 **ARCHITECTURAL TRANSFORMATION**: Successfully unified the entire Discernus framework architecture, resolving fundamental mismatch between YAML-based experiments and JSON-based circular engine configuration.
@@ -806,5 +976,26 @@ This comprehensive fix resolves the disconnect between framework definitions, da
     - Enhanced `PromptTemplateManager` framework configuration loading
     - Upgraded unified asset ingestion pipeline prototype
   - **Validation Success**: Complete end-to-end testing confirms descriptive framework names fully supported
+
+### Added
+- **Comprehensive Documentation Suite**: Implemented a full documentation site using MkDocs, including role-based onboarding guides for researchers and platform developers.
+- **Self-Documentation Strategy**: Created and documented a formal strategy for self-documenting systems, including automated indexers, docstring linting, and schema validation.
+- **Automated Workspace Indexing**: Added `scripts/utilities/update_research_workspace_index.py` to automatically update the research workspace README with a current list of frameworks and experiments.
+- **Developer Experience Tooling**:
+    - Implemented a `pydocstyle` linter to enforce docstring standards.
+    - Created a `.github/pull_request_template.md` to standardize the contribution process.
+    - Added a `scripts/utilities/setup_research_workspace.py` script to scaffold the research environment for new users.
+- **Systems Inventory**: Created `EXISTING_SYSTEMS_INVENTORY.md` to catalog all production-ready systems and prevent redundant development.
+
+### Changed
+- **Overhauled Onboarding**: Replaced the existing monolithic onboarding guide with streamlined, role-based "Golden Path" documents.
+- **Enhanced `CONTRIBUTING.md`**: Significantly improved the contributing guide with details on the testing suite, development environment fallbacks, and a formal PR process.
+- **Improved CLI Help**: Enhanced the `--help` output for all `scripts/cli/` tools to be more descriptive and provide clear usage examples.
+- **Refined Project Structure**:
+    - Moved the `product_management` directory to the project root to separate it from user-facing documentation.
+    - Created a dedicated `docs_site` for the MkDocs build, cleaning up the project root.
+- **Optimized Release Artifacts**: Updated `.dockerignore` and `.gitattributes` to exclude `product_management` and `research_workspaces` from builds and release archives.
+
+## [1.0.0] - 2025-06-21
 
 *For complete historical changelog, see previous versions*

@@ -1,0 +1,1373 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Discernus MVP Iteration Plan: Academic Validation Strategy - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#discernus-mvp-iteration-plan-academic-validation-strategy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Discernus MVP Iteration Plan: Academic Validation Strategy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#strategic-pivot-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 STRATEGIC PIVOT OVERVIEW
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 STRATEGIC PIVOT OVERVIEW">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-technical-validation-academic-credibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Technical Validation → Academic Credibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-mvp-focus-expert-endorsement-academic-publication" class="md-nav__link">
+    <span class="md-ellipsis">
+      New MVP Focus: Expert Endorsement &amp; Academic Publication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-week-phase-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 13-WEEK PHASE BREAKDOWN
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 13-WEEK PHASE BREAKDOWN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-0-foundation-infrastructure-weeks-3-to-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 0: Foundation Infrastructure (Weeks -3 to 0)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 0: Foundation Infrastructure (Weeks -3 to 0)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strategic-rationale-academic-credibility-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Rationale: Academic Credibility Foundation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-foundation-architecture-june-19-26-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week -3: Foundation Architecture (June 19-26, 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-content-addressable-storage-june-26-july-3-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week -2: Content-Addressable Storage (June 26 - July 3, 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-1-experiment-integration-july-3-10-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week -1: Experiment Integration (July 3-10, 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-0-replication-audit-infrastructure-july-10-17-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 0: Replication &amp; Audit Infrastructure (July 10-17, 2025)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-mft-implementation-development-weeks-1-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: MFT Implementation Development (Weeks 1-4)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 1: MFT Implementation Development (Weeks 1-4)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-1-mft-framework-implementation-significant-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: MFT Framework Implementation ✅ SIGNIFICANT PROGRESS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-systematic-testing-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Systematic Testing &amp; Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-demonstration-capability-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: Demonstration Capability Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-4-preliminary-validation-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 4: Preliminary Validation Study
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-expert-consultation-validation-design-weeks-5-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Expert Consultation &amp; Validation Design (Weeks 5-8)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 2: Expert Consultation &amp; Validation Design (Weeks 5-8)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-5-expert-consultation-initiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 5: Expert Consultation Initiation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-6-implementation-refinement-based-on-expert-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 6: Implementation Refinement Based on Expert Feedback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-7-large-scale-validation-study-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 7: Large-Scale Validation Study Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-8-validation-study-launch-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 8: Validation Study Launch Preparation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-large-scale-validation-execution-weeks-9-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Large-Scale Validation Execution (Weeks 9-12)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 3: Large-Scale Validation Execution (Weeks 9-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-9-validation-study-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 9: Validation Study Launch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-10-statistical-analysis-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 10: Statistical Analysis &amp; Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-11-academic-documentation-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 11: Academic Documentation Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-12-publication-community-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 12: Publication &amp; Community Preparation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-infrastructure-pipeline-upgrades" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ TECHNICAL INFRASTRUCTURE &amp; PIPELINE UPGRADES
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ TECHNICAL INFRASTRUCTURE &amp; PIPELINE UPGRADES">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-production-capabilities-june-20-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Core Production Capabilities (June 20, 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proposed-pipeline-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Proposed Pipeline Integrations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocked-capabilities-technical-debt" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Blocked Capabilities (Technical Debt)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#immediate-required-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Immediate Required Actions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-criteria-validation-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 SUCCESS CRITERIA &amp; VALIDATION METRICS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 SUCCESS CRITERIA &amp; VALIDATION METRICS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#academic-validation-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Validation Success
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-achievement-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Achievement Success
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategic-success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Success Metrics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risk-mitigation-contingency-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚨 RISK MITIGATION &amp; CONTINGENCY PLANNING
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 RISK MITIGATION &amp; CONTINGENCY PLANNING">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#academic-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategic-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Risks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-status-assessment-june-20-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 CURRENT STATUS ASSESSMENT (June 20, 2025)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 CURRENT STATUS ASSESSMENT (June 20, 2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#major-accomplishments-beyond-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Major Accomplishments Beyond Plan
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#immediate-technical-debt-to-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Immediate Technical Debt to Resolve
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategic-position-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Position Assessment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#immediate-next-steps-june-20-27-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 IMMEDIATE NEXT STEPS (June 20-27, 2025)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 IMMEDIATE NEXT STEPS (June 20-27, 2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#priority-1-integrate-supporting-modules-critical" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 1: Integrate Supporting Modules ⚡ CRITICAL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority-2-resolve-import-path-technical-debt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 2: Resolve Import Path Technical Debt 🎯
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority-3-leverage-architectural-breakthrough-for-academic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 3: Leverage Architectural Breakthrough for Academic Validation 📊
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategic-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Recommendation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-strategic-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎉 EXPECTED STRATEGIC OUTCOMES
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎉 EXPECTED STRATEGIC OUTCOMES">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#academic-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Impact
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-evolution-enhanced-by-architectural-breakthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Evolution ⚡ ENHANCED BY ARCHITECTURAL BREAKTHROUGH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategic-positioning-strengthened-by-infrastructure-advantage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Positioning 🎯 STRENGTHENED BY INFRASTRUCTURE ADVANTAGE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-mvp-evolution-pathway" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔮 POST-MVP EVOLUTION PATHWAY
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔮 POST-MVP EVOLUTION PATHWAY">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-framework-expansion-month-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Framework Expansion (Month 4+)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-community-platform-month-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 5: Community Platform (Month 6+)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-6-research-acceleration-month-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 6: Research Acceleration (Month 12+)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="discernus-mvp-iteration-plan-academic-validation-strategy">Discernus MVP Iteration Plan: Academic Validation Strategy</h1>
+<p><strong>Iteration Period:</strong> June 2025 - September 2025 (12 weeks)<br />
+<strong>Status:</strong> 🚀 <strong>ACTIVE</strong> - Strategic Pivot to Academic Credibility<br />
+<strong>Context:</strong> Leveraging successful technical infrastructure for MFT validation and expert endorsement</p>
+<h2 id="strategic-pivot-overview">🎯 <strong>STRATEGIC PIVOT OVERVIEW</strong></h2>
+<h3 id="from-technical-validation-academic-credibility"><strong>From Technical Validation → Academic Credibility</strong></h3>
+<p>The previous iteration achieved extraordinary technical success:
+- ✅ <strong>Live Academic Research Pipeline</strong>: Production API integration with quality assurance
+- ✅ <strong>World-Class Infrastructure</strong>: Database, orchestration, multi-LLM support operational<br />
+- ✅ <strong>Quality Assurance System</strong>: 6-layer validation preventing silent failures
+- ✅ <strong>Professional Documentation</strong>: MECE organization with 151+ documents</p>
+<h3 id="new-mvp-focus-expert-endorsement-academic-publication"><strong>New MVP Focus: Expert Endorsement &amp; Academic Publication</strong></h3>
+<p>Transform technical capabilities into <strong>academic credibility</strong> through:
+- <strong>Moral Foundations Theory validation</strong> against established measures (MFQ-30)
+- <strong>Expert consultation and collaboration</strong> with framework originators (Haidt lab)
+- <strong>Statistical validation evidence</strong> supporting publication-quality methodology claims
+- <strong>Academic community adoption</strong> through computational social science networks
+- <strong>Publication pathway establishment</strong> with co-authorship and peer review</p>
+<p><strong>Strategic Success Criteria</strong>: Expert endorsement + Statistical validation (r&gt;0.8) + Publication acceptance</p>
+<hr />
+<h2 id="13-week-phase-breakdown">📋 <strong>13-WEEK PHASE BREAKDOWN</strong></h2>
+<h3 id="phase-0-foundation-infrastructure-weeks-3-to-0"><strong>Phase 0: Foundation Infrastructure</strong> (Weeks -3 to 0)</h3>
+<p><strong>Status</strong>: ✅ <strong>COMPLETED</strong> - Codebase audit and cleanup performed.</p>
+<h4 id="strategic-rationale-academic-credibility-foundation"><strong>Strategic Rationale: Academic Credibility Foundation</strong></h4>
+<p>Before pursuing expert consultation and validation studies, establish <strong>disciplined, defensible, replicable, and auditable</strong> research infrastructure. Current five-dimensional experiment architecture (texts, frameworks, prompt templates, weighting schemes, evaluators) requires systematic asset management for academic credibility.</p>
+<p><strong>🎯 STATUS (June 20, 2025)</strong>: Major architectural breakthrough achieved with unified YAML framework architecture. Codebase audit completed, identifying 30 modules for archival/removal and 12 supporting modules for integration into the production pipeline.</p>
+<p><strong>Core Infrastructure Objectives:</strong>
+- <strong>Unified Asset Format</strong>: YAML standardization for all researcher-developed assets
+- <strong>Content-Addressable Storage</strong>: Hash-based integrity extending proven corpus pattern
+- <strong>Two-Tier Architecture</strong>: Development workspace separate from immutable storage
+- <strong>Academic Audit Trail</strong>: Complete replication packages for independent verification</p>
+<h4 id="week-3-foundation-architecture-june-19-26-2025"><strong>Week -3: Foundation Architecture (June 19-26, 2025)</strong></h4>
+<ul>
+<li>
+<p>[✅] <strong>Framework YAML Conversion &amp; MFT Validation</strong></p>
+</li>
+<li>
+<p>[✅] <strong>Prompt Template Management System</strong></p>
+</li>
+</ul>
+<h4 id="week-2-content-addressable-storage-june-26-july-3-2025"><strong>Week -2: Content-Addressable Storage (June 26 - July 3, 2025)</strong></h4>
+<ul>
+<li>
+<p>[✅] <strong>Universal Asset Storage Implementation</strong></p>
+</li>
+<li>
+<p>[✅] <strong>Asset Ingestion Pipeline</strong></p>
+</li>
+</ul>
+<h4 id="week-1-experiment-integration-july-3-10-2025"><strong>Week -1: Experiment Integration (July 3-10, 2025)</strong></h4>
+<ul>
+<li>
+<p>[✅] <strong>Enhanced Experiment Definition Format</strong></p>
+</li>
+<li>
+<p>[✅] <strong>Asset Resolution System</strong></p>
+</li>
+</ul>
+<h4 id="week-0-replication-audit-infrastructure-july-10-17-2025"><strong>Week 0: Replication &amp; Audit Infrastructure (July 10-17, 2025)</strong></h4>
+<ul>
+<li>
+<p>[✅] <strong>Academic Replication Packages</strong></p>
+</li>
+<li>
+<p>[✅] <strong>Human Auditor Capabilities</strong></p>
+</li>
+</ul>
+<h3 id="phase-1-mft-implementation-development-weeks-1-4"><strong>Phase 1: MFT Implementation Development</strong> (Weeks 1-4)</h3>
+<p><strong>Status</strong>: ⚡ <strong>MAJOR BREAKTHROUGH ACHIEVED</strong> - Unified Framework Architecture + MFT Integration Working</p>
+<h4 id="week-1-mft-framework-implementation-significant-progress"><strong>Week 1: MFT Framework Implementation</strong> ✅ <strong>SIGNIFICANT PROGRESS</strong></h4>
+<ul>
+<li>
+<p>[✅] <strong>Foundation-Specific Implementation</strong>
+  <code>yaml
+  # MFT implementation successfully working (June 20, 2025)
+  moral_foundations_theory:
+    theoretical_grounding: "Haidt et al. (2009-2024)"
+    status: "✅ 12 wells loaded from database successfully"
+    architecture: "Unified YAML framework architecture operational"
+    validation: "Framework-aware circular engine working"
+    breakthrough: "Configuration mismatch issues eliminated"</code></p>
+</li>
+<li>
+<p>[✅] <strong>Technical Integration</strong> - <strong>MAJOR BREAKTHROUGH ACHIEVED</strong></p>
+</li>
+<li>✅ <strong>Framework-Aware Architecture</strong>: Unified YAML system eliminates JSON/YAML config mismatches</li>
+<li>✅ <strong>Multi-LLM Infrastructure</strong>: OpenAI, Anthropic, Google AI connections operational  </li>
+<li>✅ <strong>Database Integration</strong>: MFT framework loading with graceful degradation</li>
+<li>⚠️ <strong>Enhanced Analysis Pipeline</strong>: Blocked by import path technical debt (requires PYTHONPATH fixes)</li>
+</ul>
+<h4 id="week-2-systematic-testing-validation"><strong>Week 2: Systematic Testing &amp; Validation</strong></h4>
+<ul>
+<li>[ ] <strong>Internal Validation Testing</strong></li>
+<li>Test MFT implementation on known political texts (inaugural addresses, campaign speeches)</li>
+<li>Validate results against intuitive expectations and existing literature</li>
+<li>Cross-LLM consistency testing using existing reliability infrastructure</li>
+<li>Quality assurance integration ensuring confidence scoring</li>
+</ul>
+<h4 id="week-3-demonstration-capability-development"><strong>Week 3: Demonstration Capability Development</strong></h4>
+<ul>
+<li>[ ] <strong>Professional Demo System</strong></li>
+<li>Clean, academic-quality interface for demonstrating MFT analysis</li>
+<li>Sample analysis results on diverse text corpus (political, moral, social)</li>
+<li>Export capabilities showing publication-ready outputs</li>
+<li>Technical documentation package for expert review</li>
+</ul>
+<h4 id="week-4-preliminary-validation-study"><strong>Week 4: Preliminary Validation Study</strong></h4>
+<ul>
+<li>[ ] <strong>Small-Scale Validation</strong></li>
+<li>Analyze 20-30 texts with known moral foundation characteristics</li>
+<li>Compare results with existing MFT analyses in literature</li>
+<li>Document correlation patterns and statistical reliability</li>
+<li>Prepare preliminary validation evidence package</li>
+</ul>
+<h3 id="phase-2-expert-consultation-validation-design-weeks-5-8"><strong>Phase 2: Expert Consultation &amp; Validation Design</strong> (Weeks 5-8)</h3>
+<p><strong>Status</strong>: 🎯 <strong>PRIORITY 1</strong> - Expert Engagement After Demonstration</p>
+<h4 id="week-5-expert-consultation-initiation"><strong>Week 5: Expert Consultation Initiation</strong></h4>
+<ul>
+<li>[ ] <strong>Haidt Lab Outreach Strategy</strong></li>
+<li>Professional demonstration package with working MFT implementation</li>
+<li>Preliminary validation results from Phase 1 testing</li>
+<li>Academic collaboration proposal (not endorsement request)</li>
+<li>
+<p>Timeline for systematic validation study completion</p>
+</li>
+<li>
+<p>[ ] <strong>Expert Review Package Assembly</strong></p>
+</li>
+<li>Technical documentation of MFT operationalization choices</li>
+<li>Demonstration results on diverse text corpus</li>
+<li>Quality assurance system integration documentation</li>
+<li>Request for implementation feedback and academic consultation</li>
+</ul>
+<h4 id="week-6-implementation-refinement-based-on-expert-feedback"><strong>Week 6: Implementation Refinement Based on Expert Feedback</strong></h4>
+<ul>
+<li>[ ] <strong>MFT Enhancement Integration</strong></li>
+<li>Implementation refinements based on expert consultation feedback</li>
+<li>Enhanced lexical markers for challenging foundation distinctions</li>
+<li>Improved scoring protocols for boundary cases and ambiguous passages</li>
+<li>Documentation updates reflecting expert collaboration input</li>
+</ul>
+<h4 id="week-7-large-scale-validation-study-design"><strong>Week 7: Large-Scale Validation Study Design</strong></h4>
+<ul>
+<li>[ ] <strong>MFQ-30 Correlation Study Protocol</strong></li>
+<li>Target sample size: n=500 participants for robust correlation analysis</li>
+<li>Text corpus: 50 diverse texts appropriate for MFT analysis (expert-approved)</li>
+<li>Success criteria: r&gt;0.8 across all foundations with p&lt;0.001</li>
+<li>
+<p>IRB approval framework for human subjects research</p>
+</li>
+<li>
+<p>[ ] <strong>Multi-LLM Reliability Framework</strong>
+  <code>python
+  # Enhanced cross-LLM validation system
+  reliability_results = discernus.cross_llm_analysis(
+      models=['gpt-4', 'claude-3-sonnet', 'gemini-1.5-pro'],
+      runs_per_model=5,
+      corpus=expert_approved_texts,
+      framework='moral_foundations_theory'
+  )
+  # Target: r=0.91+ between model pairs</code></p>
+</li>
+</ul>
+<h4 id="week-8-validation-study-launch-preparation"><strong>Week 8: Validation Study Launch Preparation</strong></h4>
+<ul>
+<li>[ ] <strong>Academic Collaboration Framework Establishment</strong></li>
+<li>Co-authorship agreement framework with expert consultants</li>
+<li>Quarterly consultation schedule for ongoing refinement</li>
+<li>Academic workshop proposal for computational social science community</li>
+<li>Publication timeline and venue identification</li>
+</ul>
+<h3 id="phase-3-large-scale-validation-execution-weeks-9-12"><strong>Phase 3: Large-Scale Validation Execution</strong> (Weeks 9-12)</h3>
+<p><strong>Status</strong>: 🎯 <strong>PRIORITY 1</strong> - Statistical Evidence Generation</p>
+<h4 id="week-9-validation-study-launch"><strong>Week 9: Validation Study Launch</strong></h4>
+<ul>
+<li>[ ] <strong>Live Validation Study Execution</strong></li>
+<li>Launch n=500 participant study with expert-approved protocol</li>
+<li>Real-time quality monitoring using existing QA infrastructure</li>
+<li>Data collection with MFQ-30 correlations and cross-LLM reliability</li>
+<li>Budget monitoring and API cost control during execution</li>
+</ul>
+<h4 id="week-10-statistical-analysis-results"><strong>Week 10: Statistical Analysis &amp; Results</strong></h4>
+<ul>
+<li>
+<p>[ ] <strong>Comprehensive Statistical Validation</strong>
+  <code>r
+  # Validation analysis using existing R integration
+  mft_correlation &lt;- cor.test(discernus_scores, mfq30_scores)
+  # Target overall correlation: r=0.83+, p&lt;0.001
+  # Foundation-specific targets: Care/Harm r=0.89+, etc.</code></p>
+</li>
+<li>
+<p>[ ] <strong>Statistical Framework Implementation</strong></p>
+</li>
+<li>Confidence interval calculation for all correlations</li>
+<li>Effect size analysis for practical significance (target: d&gt;0.8)</li>
+<li>Multi-level modeling for nested data structure</li>
+<li>Cross-LLM reliability analysis and reporting</li>
+</ul>
+<h4 id="week-11-academic-documentation-development"><strong>Week 11: Academic Documentation Development</strong></h4>
+<ul>
+<li>[ ] <strong>Methodology Paper Drafting</strong></li>
+<li>Title: "Systematic Framework Validation for Computational Text Analysis: The Discernus Platform"</li>
+<li>Co-authors: Expert consultants (based on Phase 2 collaboration agreements)</li>
+<li>Statistical results integration with publication-quality reporting</li>
+<li>Target venue: Computational Social Science or Political Psychology journals</li>
+</ul>
+<h4 id="week-12-publication-community-preparation"><strong>Week 12: Publication &amp; Community Preparation</strong></h4>
+<ul>
+<li>[ ] <strong>Replication Package Assembly</strong></li>
+<li>Complete Discernus MFT implementation code with validation evidence</li>
+<li>Validation study data and analysis scripts using existing export system</li>
+<li>Expert consultation documentation and collaboration acknowledgments</li>
+<li>
+<p>Statistical analysis reproducibility materials with confidence reporting</p>
+</li>
+<li>
+<p>[ ] <strong>Community Outreach Foundation</strong></p>
+</li>
+<li>Academic workshop proposal for computational social science methodology</li>
+<li>Conference presentation applications with validated results (CSS Society, APSA)</li>
+<li>Platform documentation for researcher adoption with expert endorsements</li>
+</ul>
+<hr />
+<h2 id="technical-infrastructure-pipeline-upgrades">🏗️ <strong>TECHNICAL INFRASTRUCTURE &amp; PIPELINE UPGRADES</strong></h2>
+<h3 id="core-production-capabilities-june-20-2025"><strong>✅ Core Production Capabilities (June 20, 2025)</strong></h3>
+<ul>
+<li><strong>Framework Integration</strong>: ✅ <strong>BREAKTHROUGH</strong> - Unified YAML architecture operational.</li>
+<li><strong>API Integration</strong>: ✅ OpenAI, Anthropic, Google AI operational.</li>
+<li><strong>Core Orchestrator</strong>: ✅ Transaction management and asset storage working.</li>
+<li><strong>Asset Management</strong>: ✅ Content-addressable storage operational.</li>
+</ul>
+<h3 id="proposed-pipeline-integrations"><strong>🚀 Proposed Pipeline Integrations</strong></h3>
+<p>The following supporting modules will be integrated into the production pipeline to build a robust, end-to-end academic validation workflow. See <a href="../production_pipeline_upgrade_proposal/"><code>production_pipeline_upgrade_proposal.md</code></a> for details.</p>
+<ul>
+<li><strong>Pre-Flight Validation</strong>: <code>corpus.validator</code> to ensure data integrity.</li>
+<li><strong>Resilience &amp; Cost Control</strong>: <code>utils.api_retry_handler</code> and <code>utils.cost_manager</code> to be used by the <code>direct_api_client</code>.</li>
+<li><strong>Post-Processing &amp; Publication</strong>:</li>
+<li><code>academic.documentation</code> to generate paper drafts.</li>
+<li><code>academic.analysis_templates</code> to generate replication scripts.</li>
+<li><code>corpus.exporter</code> to create datasets.</li>
+<li><code>visualization.themes</code> for professional plots.</li>
+</ul>
+<h3 id="blocked-capabilities-technical-debt"><strong>⚠️ Blocked Capabilities (Technical Debt)</strong></h3>
+<ul>
+<li><strong>Enhanced Analysis Pipeline</strong>: ❌ Import path issues (<code>No module named 'scripts'</code>) prevent loading of statistical and visualization scripts. This is the <strong>primary technical blocker</strong>.</li>
+</ul>
+<h3 id="immediate-required-actions"><strong>🔄 Immediate Required Actions</strong></h3>
+<ul>
+<li><strong>Pipeline Integration</strong>: Modify <code>comprehensive_experiment_orchestrator.py</code> to call the supporting utilities outlined in the upgrade proposal.</li>
+<li><strong>Import Path Fixes</strong>: Resolve <code>PYTHONPATH=src</code> requirements for the enhanced analysis pipeline scripts.</li>
+<li><strong>Academic Validation</strong>: Leverage working framework infrastructure for validation studies.</li>
+<li><strong>Expert Consultation</strong>: Use working MFT integration for expert demonstration.</li>
+</ul>
+<h2 id="success-criteria-validation-metrics">🎯 <strong>SUCCESS CRITERIA &amp; VALIDATION METRICS</strong></h2>
+<h3 id="academic-validation-success"><strong>Academic Validation Success</strong></h3>
+<ul>
+<li>[ ] <strong>Expert Endorsement</strong>: Formal collaboration with Jonathan Haidt lab ✓</li>
+<li>[ ] <strong>Statistical Validation</strong>: r&gt;0.8 correlation with MFQ-30 across all foundations ✓</li>
+<li>[ ] <strong>Publication Acceptance</strong>: Academic paper accepted with expert co-authorship ✓</li>
+<li>[ ] <strong>Community Adoption</strong>: Computational social science researchers using platform ✓</li>
+</ul>
+<h3 id="technical-achievement-success"><strong>Technical Achievement Success</strong></h3>
+<ul>
+<li>[ ] <strong>Zero Critical Bugs</strong>: All validation pathways working reliably ✓</li>
+<li>[ ] <strong>Performance Optimization</strong>: Fast execution with comprehensive academic logging ✓</li>
+<li>[ ] <strong>Documentation Excellence</strong>: Complete methodology documentation for replication ✓</li>
+<li>[ ] <strong>Quality Assurance</strong>: Multi-layer validation preventing research failures ✓</li>
+</ul>
+<h3 id="strategic-success-metrics"><strong>Strategic Success Metrics</strong></h3>
+<ul>
+<li>[ ] <strong>Academic Credibility</strong>: Expert endorsement from framework originators</li>
+<li>[ ] <strong>Methodological Contribution</strong>: Publication-quality statistical validation evidence  </li>
+<li>[ ] <strong>Community Foundation</strong>: Researcher adoption and collaboration requests</li>
+<li>[ ] <strong>Publication Pipeline</strong>: Systematic academic output generation capability</li>
+</ul>
+<h2 id="risk-mitigation-contingency-planning">🚨 <strong>RISK MITIGATION &amp; CONTINGENCY PLANNING</strong></h2>
+<h3 id="academic-risks"><strong>Academic Risks</strong></h3>
+<ul>
+<li><strong>Expert Consultation Rejection</strong>: Have alternative framework expert contacts prepared</li>
+<li><strong>Low Statistical Validation</strong>: Prepare methodology refinement protocols</li>
+<li><strong>Publication Rejection</strong>: Identify 3+ target venues with different requirements</li>
+<li><strong>Community Adoption Barriers</strong>: Develop comprehensive onboarding documentation</li>
+</ul>
+<h3 id="technical-risks"><strong>Technical Risks</strong></h3>
+<ul>
+<li><strong>API Cost Overruns</strong>: Leverage existing cost monitoring and budget controls</li>
+<li><strong>Quality System Integration</strong>: Use proven 6-layer validation for MFT accuracy</li>
+<li><strong>Multi-LLM Reliability Issues</strong>: Fall back to single-LLM validation if needed</li>
+<li><strong>Database Performance</strong>: Leverage existing PostgreSQL optimization</li>
+</ul>
+<h3 id="strategic-risks"><strong>Strategic Risks</strong></h3>
+<ul>
+<li><strong>Scope Creep Beyond MVP</strong>: Focus ruthlessly on MFT validation first</li>
+<li><strong>Competition from Existing Tools</strong>: Emphasize expert collaboration advantage</li>
+<li><strong>Academic Timeline Pressures</strong>: Build in buffer time for review cycles</li>
+</ul>
+<h2 id="current-status-assessment-june-20-2025">🎯 <strong>CURRENT STATUS ASSESSMENT (June 20, 2025)</strong></h2>
+<h3 id="major-accomplishments-beyond-plan"><strong>Major Accomplishments Beyond Plan</strong></h3>
+<ul>
+<li>✅ <strong>Architectural Breakthrough</strong>: Unified YAML framework architecture eliminates fundamental configuration mismatches.</li>
+<li>✅ <strong>Codebase Audit &amp; Cleanup</strong>: Obsolete modules have been archived or removed.</li>
+<li>✅ <strong>Pipeline Upgrade Strategy</strong>: Clear plan for integrating supporting modules.</li>
+</ul>
+<h3 id="immediate-technical-debt-to-resolve"><strong>Immediate Technical Debt to Resolve</strong></h3>
+<ul>
+<li>⚠️ <strong>Import Path Issues</strong>: Enhanced analysis pipeline blocked by <code>PYTHONPATH=src</code> requirements. This is the #1 technical priority.</li>
+<li>⚠️ <strong>Pipeline Integration</strong>: The supporting modules must be integrated into the orchestrator script.</li>
+</ul>
+<h3 id="strategic-position-assessment"><strong>Strategic Position Assessment</strong></h3>
+<ul>
+<li><strong>Infrastructure</strong>: ✅ <strong>AHEAD OF PLAN</strong> - Major architectural breakthrough achieved.</li>
+<li><strong>Academic Validation Readiness</strong>: ⚠️ <strong>CORE READY</strong> - Framework integration working, but pipeline requires integration work and import fixes.</li>
+<li><strong>Expert Consultation</strong>: ✅ <strong>READY</strong> - Working MFT integration available for demonstration.</li>
+<li><strong>Publication Pipeline</strong>: ⚠️ <strong>PENDING</strong> - Requires integration work and import path resolution.</li>
+</ul>
+<h2 id="immediate-next-steps-june-20-27-2025">🚀 <strong>IMMEDIATE NEXT STEPS (June 20-27, 2025)</strong></h2>
+<h3 id="priority-1-integrate-supporting-modules-critical"><strong>Priority 1: Integrate Supporting Modules</strong> ⚡ <strong>CRITICAL</strong></h3>
+<ul>
+<li>Modify <code>comprehensive_experiment_orchestrator.py</code> to incorporate the pre-flight, execution, and post-processing steps outlined in the <code>production_pipeline_upgrade_proposal.md</code>.</li>
+</ul>
+<h3 id="priority-2-resolve-import-path-technical-debt"><strong>Priority 2: Resolve Import Path Technical Debt</strong> 🎯</h3>
+<pre><code class="language-bash"># This remains a key blocker for the post-processing part of the pipeline.
+# The following scripts need to be callable from the main orchestrator.
+- scripts/extract_experiment_results.py
+- scripts/statistical_hypothesis_testing.py
+- scripts/interrater_reliability_analysis.py
+- scripts/generate_comprehensive_visualizations.py
+</code></pre>
+<h3 id="priority-3-leverage-architectural-breakthrough-for-academic-validation"><strong>Priority 3: Leverage Architectural Breakthrough for Academic Validation</strong> 📊</h3>
+<ul>
+<li><strong>Immediate Action</strong>: Use working framework integration for expert consultation outreach.</li>
+<li><strong>Demonstration Ready</strong>: MFT framework architecture operational for Haidt lab demonstration.</li>
+<li><strong>Technical Capability</strong>: Multi-LLM connections proven and cost-controlled.</li>
+<li><strong>Strategic Position</strong>: Infrastructure advantage over anticipated timeline.</li>
+</ul>
+<h3 id="strategic-recommendation"><strong>Strategic Recommendation</strong></h3>
+<p><strong>Execute pipeline integration and technical debt resolution in parallel.</strong> The core orchestrator can be modified to call the supporting modules, while the import path issues preventing the <em>post-processing</em> scripts from running can be fixed concurrently. This allows us to advance on all fronts.</p>
+<h2 id="expected-strategic-outcomes">🎉 <strong>EXPECTED STRATEGIC OUTCOMES</strong></h2>
+<h3 id="academic-impact"><strong>Academic Impact</strong></h3>
+<ol>
+<li><strong>Expert Collaboration</strong>: Formal academic partnership with framework originators</li>
+<li><strong>Statistical Validation</strong>: Publication-quality evidence supporting computational methodology</li>
+<li><strong>Community Adoption</strong>: Computational social science researcher platform usage</li>
+<li><strong>Publication Success</strong>: Peer-reviewed methodology paper with expert co-authorship</li>
+</ol>
+<h3 id="platform-evolution-enhanced-by-architectural-breakthrough"><strong>Platform Evolution</strong> ⚡ <strong>ENHANCED BY ARCHITECTURAL BREAKTHROUGH</strong></h3>
+<ol>
+<li><strong>Academic Credibility</strong>: ✅ <strong>ADVANCED</strong> - Unified framework architecture demonstrates methodological sophistication</li>
+<li><strong>Community Foundation</strong>: ✅ <strong>POSITIONED</strong> - Working infrastructure ready for researcher adoption</li>
+<li><strong>Publication Pipeline</strong>: ⚠️ <strong>CORE READY</strong> - Framework integration working, enhanced analysis needs import fixes</li>
+<li><strong>Framework Expansion</strong>: ✅ <strong>FOUNDATION BUILT</strong> - Unified architecture supports multiple frameworks systematically</li>
+</ol>
+<h3 id="strategic-positioning-strengthened-by-infrastructure-advantage"><strong>Strategic Positioning</strong> 🎯 <strong>STRENGTHENED BY INFRASTRUCTURE ADVANTAGE</strong></h3>
+<ol>
+<li><strong>Market Differentiation</strong>: ✅ <strong>ENHANCED</strong> - Architectural breakthrough eliminates configuration complexity</li>
+<li><strong>Academic Integration</strong>: ✅ <strong>READY</strong> - Working framework integration available for institutional demonstration</li>
+<li><strong>Research Impact</strong>: ⚡ <strong>ACCELERATED</strong> - Infrastructure advantage enables faster validation study execution</li>
+<li><strong>Future Sustainability</strong>: ✅ <strong>STRONG FOUNDATION</strong> - Unified architecture scales to multiple frameworks efficiently</li>
+</ol>
+<h2 id="post-mvp-evolution-pathway">🔮 <strong>POST-MVP EVOLUTION PATHWAY</strong></h2>
+<h3 id="phase-4-framework-expansion-month-4"><strong>Phase 4: Framework Expansion</strong> (Month 4+)</h3>
+<ul>
+<li><strong>Additional Frameworks</strong>: Political Framing Theory, Cultural Theory validation</li>
+<li><strong>Cross-Framework Studies</strong>: Comparative validation across multiple theoretical approaches</li>
+<li><strong>Advanced Statistics</strong>: Sophisticated reliability and validity analysis protocols</li>
+</ul>
+<h3 id="phase-5-community-platform-month-6"><strong>Phase 5: Community Platform</strong> (Month 6+)</h3>
+<ul>
+<li><strong>Researcher Onboarding</strong>: Systematic training and support infrastructure</li>
+<li><strong>Collaborative Features</strong>: Multi-researcher project support and sharing</li>
+<li><strong>Institutional Integration</strong>: University and research center adoption protocols</li>
+</ul>
+<h3 id="phase-6-research-acceleration-month-12"><strong>Phase 6: Research Acceleration</strong> (Month 12+)</h3>
+<ul>
+<li><strong>Automated Analysis</strong>: Systematic computational analysis for ongoing research</li>
+<li><strong>Publication Automation</strong>: Research paper generation from validated analysis results</li>
+<li><strong>Academic Partnership</strong>: Institutional collaboration and grant proposal support</li>
+</ul>
+<hr />
+<p><strong>Strategic Direction</strong>: This iteration transforms successful technical infrastructure into academic credibility through systematic MFT validation, expert collaboration, and publication pathway establishment—creating sustainable foundation for computational social science platform evolution.</p>
+<hr />
+<p><strong>Last Updated:</strong> June 2025<br />
+<strong>Next Review:</strong> Weekly milestone assessments<br />
+<strong>Reference</strong>: <a href="../discernus_mvp_user_journeys.md"><code>docs/planning/discernus_mvp_user_journeys.md</code></a> for detailed user journey mapping </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1424 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Comprehensive Architectural Review: Narrative Gravity Maps Framework - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#comprehensive-architectural-review-narrative-gravity-maps-framework" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Comprehensive Architectural Review: Narrative Gravity Maps Framework
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-design-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Design Philosophy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-components-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Components Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Components Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-analysis-engine-narrative_gravity_ellipticalpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Analysis Engine (narrative_gravity_elliptical.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-web-interface-narrative_gravity_apppy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Web Interface (narrative_gravity_app.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-framework-management-framework_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Framework Management (framework_manager.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-prompt-generation-generate_promptpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Prompt Generation (generate_prompt.py)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-flow-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Flow Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-structure-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Structure Assessment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Project Structure Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Organization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strengths-of-current-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strengths of Current Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-model-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Model Assessment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Model Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-user-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current User Workflows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current User Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#research-workflow-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Workflow (Manual)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Development Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Strengths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Limitations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-capabilities-and-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Capabilities and Strengths
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Capabilities and Strengths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-mathematical-rigor" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Mathematical Rigor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-visualization-excellence" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Visualization Excellence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-framework-extensibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Framework Extensibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-research-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Research Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-limitations-and-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Limitations and Challenges
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current Limitations and Challenges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-llm-integration-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. LLM Integration Challenges
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. LLM Integration Challenges">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manual-workflow-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual Workflow Limitations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reproducibility-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reproducibility Concerns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-scalability-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Scalability Limitations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-research-workflow-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Research Workflow Gaps
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scalability-analysis-and-api-integration-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scalability Analysis and API Integration Assessment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scalability Analysis and API Integration Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-state-vs-research-needs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current State vs. Research Needs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current State vs. Research Needs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identified-scalability-bottlenecks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Identified Scalability Bottlenecks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-integration-benefits-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Integration Benefits Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Integration Benefits Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-systematic-variance-quantification" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Systematic Variance Quantification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-multi-model-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Multi-Model Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scalable-research-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Scalable Research Workflows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-api-integration-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommended API Integration Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommended API Integration Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-hugging-face-integration-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Hugging Face Integration Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-direct-provider-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternative: Direct Provider APIs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommended-technical-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommended Technical Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommended Technical Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-data-flow-with-api-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Data Flow with API Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-components-for-api-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Components for API Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-next-steps-and-implementation-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommended Next Steps and Implementation Roadmap
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommended Next Steps and Implementation Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immediate-priorities-1-2-months" class="md-nav__link">
+    <span class="md-ellipsis">
+      Immediate Priorities (1-2 months)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Immediate Priorities (1-2 months)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-api-integration-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. API Integration Foundation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-enhanced-framework-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Enhanced Framework Validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#medium-term-development-3-6-months" class="md-nav__link">
+    <span class="md-ellipsis">
+      Medium-term Development (3-6 months)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Medium-term Development (3-6 months)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-scalable-research-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Scalable Research Workflows
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-research-collaboration-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Research Collaboration Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#long-term-vision-6-12-months" class="md-nav__link">
+    <span class="md-ellipsis">
+      Long-term Vision (6-12 months)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Long-term Vision (6-12 months)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-advanced-analytics-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Advanced Analytics Platform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-academic-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Academic Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategic-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Recommendations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Strategic Recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-prioritize-api-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Prioritize API Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-maintain-current-architecture-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Maintain Current Architecture Strengths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-incremental-enhancement-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Incremental Enhancement Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="comprehensive-architectural-review-narrative-gravity-maps-framework">Comprehensive Architectural Review: Narrative Gravity Maps Framework</h1>
+<p><strong>Date:</strong> June 2025<br />
+<strong>Status:</strong> Production-Ready Research Tool with Manual LLM Integration<br />
+<strong>Version:</strong> v2025.06.04 (Civic Virtue Framework)</p>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>The Narrative Gravity Maps framework represents a mature, well-architected system for quantitative analysis of persuasive narratives. The current implementation successfully delivers on its core research objectives with a modular, extensible design that supports multiple analytical frameworks. However, the manual LLM integration workflow presents scalability limitations and reproducibility challenges that warrant systematic API-based automation.</p>
+<p><strong>Key Findings:</strong>
+- ✅ <strong>Solid Foundation</strong>: Robust modular architecture ready for enhancement
+- ✅ <strong>Research Validation</strong>: Proven methodology with academic publication readiness
+- ⚠️ <strong>Scalability Gap</strong>: Manual LLM workflow limits systematic analysis
+- 🎯 <strong>Clear Path Forward</strong>: API integration would significantly enhance research capabilities</p>
+<h2 id="current-architecture-overview">Current Architecture Overview</h2>
+<h3 id="system-design-philosophy">System Design Philosophy</h3>
+<p>The framework employs a <strong>separation-of-concerns architecture</strong> with clear boundaries between:</p>
+<ol>
+<li><strong>Conceptual Layer</strong> (<code>dipoles.json</code>) - Theoretical framework definitions</li>
+<li><strong>Mathematical Layer</strong> (<code>framework.json</code>) - Computational parameters and geometry</li>
+<li><strong>Processing Engine</strong> (<code>narrative_gravity_elliptical.py</code>) - Core analysis algorithms</li>
+<li><strong>Interface Layer</strong> (<code>narrative_gravity_app.py</code>) - User interaction and workflow management</li>
+<li><strong>Configuration Management</strong> (<code>framework_manager.py</code>) - Framework switching and validation</li>
+</ol>
+<h3 id="core-components-analysis">Core Components Analysis</h3>
+<h4 id="1-analysis-engine-narrative_gravity_ellipticalpy">1. Analysis Engine (<code>narrative_gravity_elliptical.py</code>)</h4>
+<p><strong>Strengths:</strong>
+- Robust mathematical implementation of narrative gravity calculations
+- Comprehensive visualization capabilities with professional-quality output
+- Excellent backward compatibility with legacy data formats
+- Sophisticated elliptical coordinate system with configurable parameters
+- Detailed metadata handling and version tracking</p>
+<p><strong>Architecture Quality:</strong>
+- Well-encapsulated class structure with clear method responsibilities
+- Effective error handling and fallback mechanisms
+- Modular configuration loading with validation
+- Clean separation of calculation, visualization, and I/O operations</p>
+<h4 id="2-web-interface-narrative_gravity_apppy">2. Web Interface (<code>narrative_gravity_app.py</code>)</h4>
+<p><strong>Strengths:</strong>
+- Intuitive Streamlit-based UI with logical workflow organization
+- Comprehensive framework management integration
+- Effective state management across user sessions
+- Multiple analysis modes (single, comparative, framework editing)
+- Good user guidance and error messaging</p>
+<p><strong>Current Limitations:</strong>
+- Manual copy-paste workflow for LLM interaction
+- Limited batch processing capabilities
+- No automated variance tracking across multiple runs
+- Dependency on external LLM platforms with varying compliance</p>
+<h4 id="3-framework-management-framework_managerpy">3. Framework Management (<code>framework_manager.py</code>)</h4>
+<p><strong>Strengths:</strong>
+- Clean symlink-based active configuration system
+- Comprehensive validation of framework consistency
+- Easy framework switching with proper state management
+- Good error handling and user feedback</p>
+<p><strong>Architecture Quality:</strong>
+- Proper separation between framework storage and active configuration
+- Extensible design supporting unlimited custom frameworks
+- Consistent JSON schema validation</p>
+<h4 id="4-prompt-generation-generate_promptpy">4. Prompt Generation (<code>generate_prompt.py</code>)</h4>
+<p><strong>Strengths:</strong>
+- Configuration-driven template system
+- Version tracking and metadata integration
+- Framework-agnostic design (recently improved)
+- Multiple prompt variants (interactive, batch, simple)</p>
+<p><strong>Recent Improvements:</strong>
+- Enhanced format compliance requirements
+- Clear model identification guidance
+- Explicit scoring scale requirements (0.0-1.0)</p>
+<h3 id="data-flow-architecture">Data Flow Architecture</h3>
+<pre><code>Text Input → Prompt Generation → LLM Analysis → JSON Scores → Visualization
+     ↑              ↑                ↑             ↑            ↑
+Framework    Config Loading    Manual Step   Validation   Math Engine
+Selection                    (Current Gap)
+</code></pre>
+<p><strong>Current Workflow:</strong>
+1. User selects framework and generates prompt
+2. <strong>Manual LLM interaction</strong> (copy-paste workflow)
+3. JSON response validation and processing
+4. Mathematical analysis and visualization generation
+5. Results display and comparison capabilities</p>
+<h2 id="project-structure-assessment">Project Structure Assessment</h2>
+<h3 id="directory-organization">Directory Organization</h3>
+<p>The project demonstrates excellent organizational principles:</p>
+<pre><code>narrative_gravity_analysis/
+├── 🎯 Core Engine (3 files)
+│   ├── narrative_gravity_elliptical.py    # Analysis engine
+│   ├── narrative_gravity_app.py           # Web interface  
+│   └── generate_prompt.py                 # Prompt generation
+├── 🔧 Management Tools
+│   └── framework_manager.py               # Framework management
+├── 📊 Configuration Architecture
+│   ├── config/                           # Active framework (symlinks)
+│   └── frameworks/                       # Framework definitions
+│       ├── civic_virtue/                 # Primary framework
+│       ├── moral_rhetorical_posture/     # Alternative frameworks
+│       └── political_spectrum/
+├── 📈 Data Management
+│   ├── model_output/                     # Analysis results
+│   ├── reference_texts/                  # Sample texts
+│   └── prompts/                          # Generated prompts
+├── 📚 Documentation
+│   ├── docs/development/                 # Technical documentation
+│   ├── docs/examples/                    # User guides
+│   └── docs/archive/                     # Historical records
+├── 🧪 Quality Assurance
+│   └── tests/                           # Test suite
+└── 📋 Project Management
+    ├── README.md, requirements.txt
+    └── PAPER_REPLICATION.md
+</code></pre>
+<h3 id="strengths-of-current-structure">Strengths of Current Structure</h3>
+<ol>
+<li><strong>Clear Separation of Concerns</strong> - Each directory has a specific purpose</li>
+<li><strong>Modular Framework Support</strong> - Easy addition of new analytical frameworks</li>
+<li><strong>Version Management</strong> - Comprehensive tracking of framework and prompt versions</li>
+<li><strong>Documentation Quality</strong> - Well-organized technical and user documentation</li>
+<li><strong>Research Readiness</strong> - Paper replication materials properly organized</li>
+</ol>
+<h2 id="usage-model-assessment">Usage Model Assessment</h2>
+<h3 id="current-user-workflows">Current User Workflows</h3>
+<h4 id="research-workflow-manual">Research Workflow (Manual)</h4>
+<ol>
+<li><strong>Framework Selection</strong> - Choose analytical lens (e.g., civic_virtue)</li>
+<li><strong>Prompt Generation</strong> - Auto-generate LLM analysis prompt</li>
+<li><strong>Text Preparation</strong> - Format narrative text for analysis</li>
+<li><strong>LLM Analysis</strong> - Manual copy-paste to external LLM platform</li>
+<li><strong>JSON Processing</strong> - Copy LLM output back to application</li>
+<li><strong>Visualization</strong> - Generate narrative gravity maps and metrics</li>
+<li><strong>Analysis</strong> - Interpret results and conduct comparisons</li>
+</ol>
+<h4 id="framework-development-workflow">Framework Development Workflow</h4>
+<ol>
+<li><strong>Conceptual Design</strong> - Define theoretical framework and dipoles</li>
+<li><strong>JSON Creation</strong> - Implement <code>dipoles.json</code> and <code>framework.json</code></li>
+<li><strong>Validation</strong> - Use framework_manager.py to verify consistency</li>
+<li><strong>Testing</strong> - Generate prompts and test with sample analyses</li>
+<li><strong>Refinement</strong> - Iterate based on results and theoretical considerations</li>
+</ol>
+<h3 id="current-strengths">Current Strengths</h3>
+<ul>
+<li><strong>Low Barrier to Entry</strong> - Streamlit interface is accessible to non-technical users</li>
+<li><strong>Framework Flexibility</strong> - Easy switching between different analytical lenses</li>
+<li><strong>Quality Output</strong> - Professional visualizations suitable for academic publication</li>
+<li><strong>Reproducibility</strong> - Comprehensive metadata and version tracking</li>
+</ul>
+<h3 id="current-limitations">Current Limitations</h3>
+<ul>
+<li><strong>Manual Bottleneck</strong> - LLM interaction requires human intervention</li>
+<li><strong>Platform Dependency</strong> - Reliance on external chatbot interfaces</li>
+<li><strong>Inconsistent Compliance</strong> - Varying adherence to prompt requirements across LLMs</li>
+<li><strong>Limited Scale</strong> - Difficult to process large corpora systematically</li>
+<li><strong>Variance Tracking</strong> - No systematic measurement of LLM scoring consistency</li>
+</ul>
+<h2 id="technical-capabilities-and-strengths">Technical Capabilities and Strengths</h2>
+<h3 id="1-mathematical-rigor">1. Mathematical Rigor</h3>
+<ul>
+<li><strong>Sophisticated Geometry</strong> - Elliptical coordinate system with configurable parameters</li>
+<li><strong>Vector Mathematics</strong> - Proper narrative position calculation using weighted vector sums</li>
+<li><strong>Scaling Algorithms</strong> - Appropriate normalization and distance metrics</li>
+<li><strong>Statistical Measures</strong> - Comprehensive metrics including narrative distance, positioning</li>
+</ul>
+<h3 id="2-visualization-excellence">2. Visualization Excellence</h3>
+<ul>
+<li><strong>Professional Quality</strong> - Publication-ready PNG outputs with comprehensive styling</li>
+<li><strong>Comparative Analysis</strong> - Side-by-side visualization of multiple narratives</li>
+<li><strong>Metadata Integration</strong> - Detailed annotations including model information and analysis parameters</li>
+<li><strong>Customizable Styling</strong> - Extensive configuration options for visual appearance</li>
+</ul>
+<h3 id="3-framework-extensibility">3. Framework Extensibility</h3>
+<ul>
+<li><strong>Modular Design</strong> - Easy addition of new analytical frameworks</li>
+<li><strong>Schema Validation</strong> - Consistent structure enforcement across frameworks</li>
+<li><strong>Backward Compatibility</strong> - Support for legacy data formats</li>
+<li><strong>Version Management</strong> - Comprehensive tracking of framework evolution</li>
+</ul>
+<h3 id="4-research-integration">4. Research Integration</h3>
+<ul>
+<li><strong>Academic Standards</strong> - Proper citation formatting and methodology documentation</li>
+<li><strong>Reproducibility</strong> - Complete provenance tracking from framework to visualization</li>
+<li><strong>Paper Integration</strong> - Purpose-built for academic publication workflows</li>
+<li><strong>Collaboration Support</strong> - Clear documentation for research team adoption</li>
+</ul>
+<h2 id="current-limitations-and-challenges">Current Limitations and Challenges</h2>
+<h3 id="1-llm-integration-challenges">1. LLM Integration Challenges</h3>
+<h4 id="manual-workflow-limitations">Manual Workflow Limitations</h4>
+<ul>
+<li><strong>Scalability Bottleneck</strong> - Human-in-the-loop requirement limits throughput</li>
+<li><strong>Inconsistent Compliance</strong> - Variable adherence to prompt formatting requirements</li>
+<li><strong>Platform Idiosyncrasies</strong> - Different LLMs exhibit varying behaviors and limitations</li>
+<li><strong>Model Identification Issues</strong> - Platforms often misreport underlying model information</li>
+</ul>
+<h4 id="reproducibility-concerns">Reproducibility Concerns</h4>
+<ul>
+<li><strong>Scoring Variance</strong> - Same LLM can produce different scores across runs</li>
+<li><strong>Platform Dependencies</strong> - Results tied to specific chatbot interface behaviors</li>
+<li><strong>Limited Variance Tracking</strong> - No systematic measurement of scoring consistency</li>
+<li><strong>Manual Error Introduction</strong> - Copy-paste workflow introduces human error possibilities</li>
+</ul>
+<h3 id="2-scalability-limitations">2. Scalability Limitations</h3>
+<ul>
+<li><strong>Corpus Analysis</strong> - Difficult to process large collections of texts systematically</li>
+<li><strong>Comparative Studies</strong> - Limited ability to conduct large-scale framework comparisons</li>
+<li><strong>Statistical Analysis</strong> - No built-in tools for analyzing scoring patterns across multiple runs</li>
+<li><strong>Batch Processing</strong> - No automated workflow for high-volume analysis</li>
+</ul>
+<h3 id="3-research-workflow-gaps">3. Research Workflow Gaps</h3>
+<ul>
+<li><strong>Variance Quantification</strong> - No systematic approach to measuring LLM consistency</li>
+<li><strong>Confidence Intervals</strong> - No statistical framework for result uncertainty</li>
+<li><strong>Multi-Run Analysis</strong> - No built-in support for averaging across multiple LLM runs</li>
+<li><strong>Quality Control</strong> - Limited systematic validation of LLM output quality</li>
+</ul>
+<h2 id="scalability-analysis-and-api-integration-assessment">Scalability Analysis and API Integration Assessment</h2>
+<h3 id="current-state-vs-research-needs">Current State vs. Research Needs</h3>
+<p>The framework's current manual LLM integration, while functional for small-scale research, presents significant limitations for systematic analysis:</p>
+<h4 id="identified-scalability-bottlenecks">Identified Scalability Bottlenecks</h4>
+<ol>
+<li><strong>Manual Copy-Paste Workflow</strong> - Prevents batch processing of large text corpora</li>
+<li><strong>Platform-Specific Idiosyncrasies</strong> - Inconsistent behavior across LLM providers</li>
+<li><strong>Limited Variance Tracking</strong> - No systematic measurement of scoring consistency</li>
+<li><strong>Reproducibility Challenges</strong> - Difficulty ensuring consistent prompt compliance</li>
+</ol>
+<h3 id="api-integration-benefits-analysis">API Integration Benefits Analysis</h3>
+<h4 id="1-systematic-variance-quantification">1. Systematic Variance Quantification</h4>
+<p><strong>Current Problem:</strong> LLM scoring varies across runs, but this variance is not systematically tracked.</p>
+<p><strong>API Solution:</strong> 
+- <strong>Multiple Run Automation</strong> - Execute 3-5 analysis runs per text automatically
+- <strong>Statistical Analysis</strong> - Calculate means, standard deviations, and confidence intervals
+- <strong>Variance Reporting</strong> - Include uncertainty measures in final results
+- <strong>Quality Metrics</strong> - Track compliance rates and scoring consistency across models</p>
+<h4 id="2-multi-model-validation">2. Multi-Model Validation</h4>
+<p><strong>Current Problem:</strong> Results dependent on single LLM platform with unknown biases.</p>
+<p><strong>API Solution:</strong>
+- <strong>Cross-Model Analysis</strong> - Compare results across GPT-4, Claude, Gemini simultaneously
+- <strong>Bias Detection</strong> - Identify systematic differences between model approaches
+- <strong>Consensus Scoring</strong> - Use ensemble methods to improve reliability
+- <strong>Model Performance Tracking</strong> - Evaluate which models best follow prompt requirements</p>
+<h4 id="3-scalable-research-workflows">3. Scalable Research Workflows</h4>
+<p><strong>Current Problem:</strong> Manual workflow limits corpus size and comparative studies.</p>
+<p><strong>API Solution:</strong>
+- <strong>Batch Processing</strong> - Automated analysis of hundreds of texts
+- <strong>Corpus-Level Analysis</strong> - Statistical patterns across large document collections
+- <strong>Longitudinal Studies</strong> - Track narrative trends over time periods
+- <strong>Framework Validation</strong> - Systematic testing of framework reliability and validity</p>
+<h3 id="recommended-api-integration-strategy">Recommended API Integration Strategy</h3>
+<h4 id="phase-1-hugging-face-integration-assessment">Phase 1: Hugging Face Integration Assessment</h4>
+<p><strong>Pros of Hugging Face Approach:</strong>
+- <strong>Multi-Model Access</strong> - Single API for GPT, Claude, Llama, Gemini models
+- <strong>Cost Efficiency</strong> - Competitive pricing across providers
+- <strong>Rate Limiting</strong> - Built-in handling of API limits and throttling
+- <strong>Model Standardization</strong> - Consistent interface across different LLM providers
+- <strong>Documentation Quality</strong> - Well-documented API with extensive examples</p>
+<p><strong>Technical Implementation Path:</strong>
+1. <strong>API Wrapper Development</strong> - Create unified interface for multiple LLM providers
+2. <strong>Batch Processing Engine</strong> - Queue management for large-scale analysis
+3. <strong>Variance Tracking System</strong> - Statistical analysis of multi-run results
+4. <strong>Quality Control Metrics</strong> - Automated validation of LLM response compliance
+5. <strong>Results Database</strong> - Structured storage for systematic analysis results</p>
+<h4 id="alternative-direct-provider-apis">Alternative: Direct Provider APIs</h4>
+<p><strong>Pros of Direct Integration:</strong>
+- <strong>Latest Model Access</strong> - Immediate access to newest model versions
+- <strong>Provider-Specific Features</strong> - Leverage unique capabilities of each platform
+- <strong>Maximum Control</strong> - Fine-tuned request parameters for each provider</p>
+<p><strong>Cons:</strong>
+- <strong>Complexity Overhead</strong> - Managing multiple API formats and authentication
+- <strong>Cost Management</strong> - Tracking usage across multiple billing systems
+- <strong>Rate Limit Coordination</strong> - Handling different rate limiting approaches</p>
+<h3 id="recommended-technical-architecture">Recommended Technical Architecture</h3>
+<h4 id="enhanced-data-flow-with-api-integration">Enhanced Data Flow with API Integration</h4>
+<pre><code>Text Input → Framework Selection → Automated LLM Analysis → Statistical Processing → Visualization
+     ↑              ↑                      ↑                      ↑               ↑
+Batch Queue    Config Loading    Multi-Run API Calls    Variance Analysis   Enhanced Metadata
+</code></pre>
+<h4 id="core-components-for-api-integration">Core Components for API Integration</h4>
+<ol>
+<li><strong>LLM Interface Layer</strong></li>
+<li>Unified API wrapper for multiple providers</li>
+<li>Request queue management and rate limiting</li>
+<li>Response validation and error handling</li>
+<li>
+<p>Cost tracking and usage monitoring</p>
+</li>
+<li>
+<p><strong>Statistical Analysis Engine</strong></p>
+</li>
+<li>Multi-run variance calculation</li>
+<li>Confidence interval generation</li>
+<li>Cross-model comparison metrics</li>
+<li>
+<p>Quality control assessment</p>
+</li>
+<li>
+<p><strong>Batch Processing Manager</strong></p>
+</li>
+<li>Large corpus handling capabilities</li>
+<li>Progress tracking and resumption</li>
+<li>Error recovery and retry logic</li>
+<li>
+<p>Results aggregation and reporting</p>
+</li>
+<li>
+<p><strong>Enhanced Database Layer</strong></p>
+</li>
+<li>Structured storage for analysis results</li>
+<li>Variance and uncertainty tracking</li>
+<li>Historical analysis comparison</li>
+<li>Export capabilities for academic use</li>
+</ol>
+<h2 id="recommended-next-steps-and-implementation-roadmap">Recommended Next Steps and Implementation Roadmap</h2>
+<h3 id="immediate-priorities-1-2-months">Immediate Priorities (1-2 months)</h3>
+<h4 id="1-api-integration-foundation">1. API Integration Foundation</h4>
+<p><strong>Objective:</strong> Establish reliable automated LLM integration</p>
+<p><strong>Implementation Steps:</strong>
+1. <strong>API Provider Selection</strong> - Evaluate Hugging Face vs. direct provider APIs
+2. <strong>Prototype Development</strong> - Build basic automated analysis pipeline
+3. <strong>Variance Testing</strong> - Implement multi-run statistical analysis
+4. <strong>Quality Validation</strong> - Develop automated prompt compliance checking</p>
+<p><strong>Success Criteria:</strong>
+- Automated analysis of single texts with variance quantification
+- Successful integration with 2-3 LLM providers
+- Statistical confidence intervals for all analyses
+- Reduced manual intervention by 80%</p>
+<h4 id="2-enhanced-framework-validation">2. Enhanced Framework Validation</h4>
+<p><strong>Objective:</strong> Improve framework development and validation workflows</p>
+<p><strong>Implementation Steps:</strong>
+1. <strong>Statistical Validation Suite</strong> - Tools for framework reliability testing
+2. <strong>Cross-Framework Comparison</strong> - Systematic analysis across different frameworks
+3. <strong>Framework Performance Metrics</strong> - Reliability and validity measurements</p>
+<h3 id="medium-term-development-3-6-months">Medium-term Development (3-6 months)</h3>
+<h4 id="1-scalable-research-workflows">1. Scalable Research Workflows</h4>
+<p><strong>Objective:</strong> Enable large-scale corpus analysis</p>
+<p><strong>Implementation Steps:</strong>
+1. <strong>Batch Processing Engine</strong> - Queue management for large text collections
+2. <strong>Corpus Analysis Tools</strong> - Statistical analysis across document collections
+3. <strong>Longitudinal Analysis</strong> - Time-series narrative trend analysis
+4. <strong>Advanced Visualization</strong> - Enhanced comparative and trend visualizations</p>
+<h4 id="2-research-collaboration-features">2. Research Collaboration Features</h4>
+<p><strong>Objective:</strong> Support multi-researcher collaborative analysis</p>
+<p><strong>Implementation Steps:</strong>
+1. <strong>Project Management System</strong> - Organize and share analysis projects
+2. <strong>Result Export Tools</strong> - Academic publication and presentation formats
+3. <strong>Collaboration Interface</strong> - Multi-user access and result sharing
+4. <strong>Version Control</strong> - Track analysis evolution and framework changes</p>
+<h3 id="long-term-vision-6-12-months">Long-term Vision (6-12 months)</h3>
+<h4 id="1-advanced-analytics-platform">1. Advanced Analytics Platform</h4>
+<p><strong>Objective:</strong> Comprehensive narrative analysis research platform</p>
+<p><strong>Features:</strong>
+- <strong>Machine Learning Integration</strong> - Pattern recognition across large corpora
+- <strong>Predictive Modeling</strong> - Narrative effectiveness prediction
+- <strong>Advanced Statistics</strong> - Sophisticated statistical analysis tools
+- <strong>Custom Framework Designer</strong> - Visual framework creation interface</p>
+<h4 id="2-academic-integration">2. Academic Integration</h4>
+<p><strong>Objective:</strong> Seamless integration with academic research workflows</p>
+<p><strong>Features:</strong>
+- <strong>Publication Pipeline</strong> - Direct export to academic paper formats
+- <strong>Citation Management</strong> - Automatic citation generation for frameworks and results
+- <strong>Peer Review Tools</strong> - Collaborative analysis validation workflows
+- <strong>Repository Integration</strong> - Direct connection to academic data repositories</p>
+<h2 id="strategic-recommendations">Strategic Recommendations</h2>
+<h3 id="1-prioritize-api-integration">1. Prioritize API Integration</h3>
+<p><strong>Rationale:</strong> Manual LLM workflow is the primary limitation to research scalability. API integration would immediately unlock systematic variance tracking, multi-model validation, and large-scale analysis capabilities.</p>
+<p><strong>Recommended Approach:</strong>
+- Start with Hugging Face integration for unified multi-model access
+- Implement statistical variance tracking as core requirement
+- Focus on reproducibility and academic rigor from the beginning</p>
+<h3 id="2-maintain-current-architecture-strengths">2. Maintain Current Architecture Strengths</h3>
+<p><strong>Rationale:</strong> The existing modular architecture is well-designed and should be preserved during enhancement.</p>
+<p><strong>Key Preservation Areas:</strong>
+- Framework modularity and switching capabilities
+- Comprehensive metadata and version tracking
+- Professional visualization quality
+- Academic publication readiness</p>
+<h3 id="3-incremental-enhancement-strategy">3. Incremental Enhancement Strategy</h3>
+<p><strong>Rationale:</strong> The current system is production-ready and actively used for research. Enhancements should be additive rather than disruptive.</p>
+<p><strong>Implementation Philosophy:</strong>
+- Maintain backward compatibility with existing analyses
+- Add API integration as optional enhanced workflow
+- Preserve manual workflow for edge cases and debugging
+- Ensure seamless transition for current users</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The Narrative Gravity Maps framework represents a mature, well-architected research tool that has successfully achieved its core objectives. The current manual LLM integration, while functional, presents clear scalability limitations that API integration would systematically address.</p>
+<p><strong>Key Strategic Insights:</strong></p>
+<ol>
+<li><strong>Strong Foundation</strong> - The existing architecture provides an excellent platform for enhancement</li>
+<li><strong>Clear Enhancement Path</strong> - API integration offers immediate research capability improvements</li>
+<li><strong>Systematic Reproducibility</strong> - Automated variance tracking would significantly strengthen academic rigor</li>
+<li><strong>Scalable Research</strong> - Batch processing capabilities would unlock new research possibilities</li>
+</ol>
+<p><strong>Recommended Priority:</strong> Proceed with API integration development, starting with Hugging Face evaluation, while maintaining the current system's architectural strengths and academic focus.</p>
+<p>The investment in API integration would transform the framework from a sophisticated manual tool into a scalable research platform capable of systematic, large-scale narrative analysis with robust statistical foundations. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

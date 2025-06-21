@@ -1,0 +1,1758 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>YouTube Transcript Intelligent Ingestion Service - User Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#youtube-transcript-intelligent-ingestion-service-user-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              YouTube Transcript Intelligent Ingestion Service - User Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-service-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      What This Service Does
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-this-service-does-not-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      What This Service Does NOT Do
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-expectations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Expectations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Expectations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#success-rates-by-content-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Rates by Content Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-time-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Time &amp; Costs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-expectations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Expectations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#system-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-for-enhanced-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional (for Enhanced Metadata)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation &amp; Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation &amp; Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Environment Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-verify-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Verify Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-test-with-sample-video" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Test with Sample Video
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-test-enhanced-accuracy-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Test Enhanced Accuracy Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enhanced-accuracy-features-june-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      🆕 Enhanced Accuracy Features (June 2025)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🆕 Enhanced Accuracy Features (June 2025)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-validation-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Validation System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-speaker-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Speaker Extraction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Assurance Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-video-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Video Processing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Video Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-video-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Video Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-output-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Output Directory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confidence-threshold-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confidence Threshold Control
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-language-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Language Support
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-processing-multiple-videos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Processing Multiple Videos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processing-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Output
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result-files-generated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result Files Generated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confidence-scoring-for-youtube-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confidence Scoring for YouTube Content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generated-text-ids-for-youtube-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated Text IDs for YouTube Content
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting Common Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting Common Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#video-access-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video Access Problems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Video Access Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-no-transcript-available-for-this-video" class="md-nav__link">
+    <span class="md-ellipsis">
+      "❌ Error: No transcript available for this video"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-could-not-extract-video-id-from-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      "❌ Error: Could not extract video ID from URL"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Processing Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#warning-yt-dlp-not-available-basic-metadata-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      "⚠️ Warning: yt-dlp not available - basic metadata only"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warning-openai_api_key-environment-variable-not-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      "⚠️ Warning: OPENAI_API_KEY environment variable not set"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#low-confidence-scores-for-political-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Low confidence scores for political content
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#speaker-identification-conflict-detected" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚨 Speaker identification conflict detected
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-and-rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network and Rate Limiting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network and Rate Limiting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processing-failures-or-slow-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing failures or slow responses
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#content-curation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Curation Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Content Curation Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-video-selection-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Video Selection Criteria
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-quality-assurance-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Quality Assurance Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-processing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Processing Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Batch Processing Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-large-video-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Large Video Collections
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cost Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-usage-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Usage Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-research-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Research Workflows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration with Research Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#academic-research-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Research Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replication-and-citation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replication and Citation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-youtubetranscriptextractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. YouTubeTranscriptExtractor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-youtubecorpusingestionservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. YouTubeCorpusIngestionService
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-enhanced-metadata-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Enhanced Metadata Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-and-privacy-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security and Privacy Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security and Privacy Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices-for-sensitive-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices for Sensitive Content
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-and-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance and Scaling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance and Scaling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expected-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expected Performance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scaling Considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Related Documentation
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="youtube-transcript-intelligent-ingestion-service-user-guide">YouTube Transcript Intelligent Ingestion Service - User Guide</h1>
+<h2 id="overview">Overview</h2>
+<p>The YouTube Transcript Intelligent Ingestion Service extends the corpus management system to automatically extract transcripts and metadata from YouTube videos, making it easy to build research corpora from video content. This is particularly valuable for political speeches, debates, and addresses that are frequently published on YouTube.</p>
+<h3 id="what-this-service-does">What This Service Does</h3>
+<p>✅ <strong>Automatic Transcript Extraction</strong>: Downloads transcripts from YouTube videos with captions/subtitles<br />
+✅ <strong>Enhanced Metadata Extraction</strong>: Combines YouTube video metadata with AI-powered content analysis<br />
+✅ <strong>Cross-Validation System</strong>: Detects conflicts between AI and YouTube metadata for improved accuracy<br />
+✅ <strong>Enhanced Speaker Identification</strong>: Advanced pattern matching for political figures and titles<br />
+✅ <strong>Multi-Language Support</strong>: Can extract transcripts in various languages (English preferred)<br />
+✅ <strong>Video Information Capture</strong>: Records view counts, upload dates, channel information, and video metrics<br />
+✅ <strong>Intelligent Content Classification</strong>: Automatically identifies speech types (address, debate, interview, etc.)<br />
+✅ <strong>Corpus Integration</strong>: Seamlessly integrates with existing corpus management system  </p>
+<h3 id="what-this-service-does-not-do">What This Service Does NOT Do</h3>
+<p>❌ <strong>Video Download</strong>: Only extracts text transcripts, not video files<br />
+❌ <strong>Audio Processing</strong>: Requires existing captions/subtitles, doesn't generate transcripts<br />
+❌ <strong>Private Content</strong>: Cannot access private, unlisted, or age-restricted videos<br />
+❌ <strong>Perfect Accuracy</strong>: YouTube auto-generated captions may contain errors<br />
+❌ <strong>Real-time Processing</strong>: Works with uploaded videos, not live streams  </p>
+<h2 id="setting-expectations">Setting Expectations</h2>
+<h3 id="success-rates-by-content-type">Success Rates by Content Type</h3>
+<ul>
+<li><strong>Professional political videos with manual captions</strong>: 90-100% success rate  </li>
+<li><strong>Major news channels with auto-captions</strong>: 80-95% success rate  </li>
+<li><strong>User-uploaded content with captions</strong>: 70-90% success rate  </li>
+<li><strong>Videos without any captions</strong>: 0% success rate (graceful failure)  </li>
+<li><strong>Private/restricted videos</strong>: 0% success rate (graceful failure)  </li>
+</ul>
+<h3 id="processing-time-costs">Processing Time &amp; Costs</h3>
+<ul>
+<li><strong>Single video processing</strong>: 10-30 seconds  </li>
+<li><strong>API cost per video</strong>: ~$0.01-0.03 (for LLM metadata extraction)  </li>
+<li><strong>Bulk processing</strong>: Limited by API rate limits (typically 100-200 videos/hour)  </li>
+<li><strong>No additional YouTube API costs</strong>: Uses free transcript extraction  </li>
+</ul>
+<h3 id="quality-expectations">Quality Expectations</h3>
+<ul>
+<li><strong>Manual captions</strong>: Excellent quality, punctuation preserved  </li>
+<li><strong>Auto-generated captions</strong>: Good quality, may lack punctuation  </li>
+<li><strong>Metadata confidence</strong>: 85-100% for videos with good titles and descriptions  </li>
+<li><strong>Speaker identification</strong>: 80-95% accuracy with enhanced pattern matching and conflict detection  </li>
+<li><strong>Cross-validation</strong>: Automatically flags potential speaker misidentification (15-point confidence reduction)  </li>
+<li><strong>Conflict detection</strong>: Warns users when AI and YouTube metadata disagree  </li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="required-dependencies">Required Dependencies</h3>
+<pre><code class="language-bash"># Install YouTube transcript dependencies
+pip install youtube-transcript-api yt-dlp
+
+# Verify installation
+python3 -c &quot;import youtube_transcript_api, yt_dlp; print('✅ YouTube dependencies installed')&quot;
+</code></pre>
+<h3 id="system-requirements">System Requirements</h3>
+<ol>
+<li><strong>Narrative Gravity environment</strong> set up with database</li>
+<li><strong>Python virtual environment</strong> activated</li>
+<li><strong>Internet connection</strong> for YouTube access</li>
+<li><strong>Valid YouTube URLs</strong> with available transcripts</li>
+</ol>
+<h3 id="optional-for-enhanced-metadata">Optional (for Enhanced Metadata)</h3>
+<ul>
+<li><strong>OpenAI API key</strong> for LLM-powered metadata enhancement</li>
+<li><strong>API credits</strong> for processing (typically $0.01-0.03 per video)</li>
+</ul>
+<h2 id="installation-setup">Installation &amp; Setup</h2>
+<h3 id="step-1-environment-setup">Step 1: Environment Setup</h3>
+<pre><code class="language-bash"># Navigate to project directory
+cd narrative_gravity_analysis
+
+# Activate virtual environment
+source venv/bin/activate
+
+# Set up development environment  
+source scripts/setup_dev_env.sh
+
+# Install YouTube dependencies
+pip install youtube-transcript-api yt-dlp
+</code></pre>
+<h3 id="step-2-verify-installation">Step 2: Verify Installation</h3>
+<pre><code class="language-bash"># Test YouTube transcript extraction
+python3 scripts/demo_youtube_ingestion.py
+</code></pre>
+<p><strong>Expected output:</strong></p>
+<pre><code>🎬 YouTube Transcript Intelligent Ingestion Demo
+✅ youtube-transcript-api available
+✅ yt-dlp available for enhanced metadata
+✅ YouTube ingestion service imported successfully
+</code></pre>
+<h3 id="step-3-test-with-sample-video">Step 3: Test with Sample Video</h3>
+<pre><code class="language-bash"># Test with a known working video (dry-run mode)
+python3 scripts/intelligent_ingest_youtube.py &quot;https://www.youtube.com/watch?v=dQw4w9WgXcQ&quot; --dry-run --verbose
+</code></pre>
+<h3 id="step-4-test-enhanced-accuracy-features">Step 4: Test Enhanced Accuracy Features</h3>
+<pre><code class="language-bash"># Test the improved cross-validation and speaker identification
+python3 scripts/test_youtube_improvements.py
+
+# Expected output shows all tests passing:
+# ✅ Perry/Abbott misidentification - PASS
+# ✅ Correct identification - PASS  
+# ✅ Enhanced speaker extraction - PASS
+</code></pre>
+<h2 id="enhanced-accuracy-features-june-2025">🆕 Enhanced Accuracy Features (June 2025)</h2>
+<h3 id="cross-validation-system">Cross-Validation System</h3>
+<p>The service now includes <strong>automatic conflict detection</strong> between AI analysis and YouTube metadata:</p>
+<p><strong>What it does:</strong>
+- Compares LLM speaker identification with YouTube title patterns
+- Detects potential misidentifications (e.g., "Greg Abbott" vs "Gov Perry")
+- Automatically reduces confidence scores by 15 points when conflicts detected
+- Flags extraction notes for manual review</p>
+<p><strong>Example conflict detection:</strong></p>
+<pre><code class="language-bash">⚠️  Speaker identification conflict detected!
+   LLM identified: Greg Abbott
+   YouTube title: Gov Perry ALEC 2016
+
+# Result: Confidence reduced from 85% to 70%
+# Flagged for manual review in extraction notes
+</code></pre>
+<h3 id="enhanced-speaker-extraction">Enhanced Speaker Extraction</h3>
+<p><strong>Improved accuracy</strong> through advanced pattern matching:</p>
+<p>✅ <strong>Direct speaker identification</strong>:
+- "My name is Rick Perry..."
+- "I'm Governor Abbott..."
+- "This is Senator Warren..."</p>
+<p>✅ <strong>Political title recognition</strong>:
+- "Governor Abbott speaking..."
+- "President Obama addresses..."
+- "Senator McCain remarks..."</p>
+<p>✅ <strong>Content validation</strong>:
+- Analyzes first 2000 characters (vs 1000 previously)
+- Filters out organization names that match person patterns
+- Validates name components for realistic human names</p>
+<p>✅ <strong>Fallback hierarchy</strong>:
+1. Direct speaker introductions (highest priority)
+2. Political title + name patterns<br />
+3. Channel name analysis (with validation)
+4. Channel name as fallback</p>
+<h3 id="quality-assurance-testing">Quality Assurance Testing</h3>
+<pre><code class="language-bash"># Verify the improvements work correctly
+python3 scripts/test_youtube_improvements.py
+
+# Test specific conflict scenarios
+python3 -c &quot;
+from src.narrative_gravity.corpus.youtube_ingestion import YouTubeCorpusIngestionService
+service = YouTubeCorpusIngestionService(None)
+conflict = service._check_speaker_conflict('Greg Abbott', 'Gov Perry ALEC 2016')
+print(f'Conflict detected: {conflict}')  # Should be True
+&quot;
+</code></pre>
+<h2 id="usage-guide">Usage Guide</h2>
+<h3 id="basic-video-processing">Basic Video Processing</h3>
+<h4 id="single-video-processing">Single Video Processing</h4>
+<pre><code class="language-bash"># Process one video with defaults
+python3 scripts/intelligent_ingest_youtube.py &quot;YOUTUBE_URL&quot;
+
+# With verbose output
+python3 scripts/intelligent_ingest_youtube.py &quot;YOUTUBE_URL&quot; --verbose
+
+# Test without database registration
+python3 scripts/intelligent_ingest_youtube.py &quot;YOUTUBE_URL&quot; --dry-run --verbose
+</code></pre>
+<h4 id="custom-output-directory">Custom Output Directory</h4>
+<pre><code class="language-bash"># Specify output location
+python3 scripts/intelligent_ingest_youtube.py &quot;YOUTUBE_URL&quot; --output-dir my_youtube_analysis/
+</code></pre>
+<h4 id="confidence-threshold-control">Confidence Threshold Control</h4>
+<pre><code class="language-bash"># High-quality only (85% confidence)
+python3 scripts/intelligent_ingest_youtube.py &quot;YOUTUBE_URL&quot; --confidence-threshold 85
+
+# More permissive (50% confidence)  
+python3 scripts/intelligent_ingest_youtube.py &quot;YOUTUBE_URL&quot; --confidence-threshold 50
+</code></pre>
+<h3 id="advanced-features">Advanced Features</h3>
+<h4 id="multi-language-support">Multi-Language Support</h4>
+<pre><code class="language-bash"># Prefer specific languages (fallback order)
+python3 scripts/intelligent_ingest_youtube.py &quot;YOUTUBE_URL&quot; --languages en es fr
+
+# French-first extraction
+python3 scripts/intelligent_ingest_youtube.py &quot;YOUTUBE_URL&quot; --languages fr en
+</code></pre>
+<h4 id="batch-processing-multiple-videos">Batch Processing Multiple Videos</h4>
+<pre><code class="language-bash"># Process multiple videos (create shell script)
+#!/bin/bash
+videos=(
+    &quot;https://www.youtube.com/watch?v=VIDEO1&quot;
+    &quot;https://www.youtube.com/watch?v=VIDEO2&quot;
+    &quot;https://www.youtube.com/watch?v=VIDEO3&quot;
+)
+
+for url in &quot;${videos[@]}&quot;; do
+    echo &quot;Processing: $url&quot;
+    python3 scripts/intelligent_ingest_youtube.py &quot;$url&quot; --verbose
+    sleep 2  # Rate limiting
+done
+</code></pre>
+<h2 id="understanding-results">Understanding Results</h2>
+<h3 id="processing-output">Processing Output</h3>
+<p><strong>Successful processing shows:</strong></p>
+<pre><code>🎬 Processing YouTube video: lipnBHeyvII
+📺 Title: Phil Davidson Stump Speech
+📺 Channel: National Review
+✅ Processed transcript (3904 chars)
+📊 Confidence: 100.0%
+
+📊 Results:
+  Video ID: lipnBHeyvII
+  Confidence: 100.0%
+  Content Length: 3904 characters
+
+📋 Extracted Metadata:
+  Title: Speech by Phil Davison at Star County Republican Party Executive Committee
+  Author: Phil Davison
+  Date: 2010-11-10
+  Type: speech
+  Description: Phil Davison's speech seeking nomination for Star County Treasurer
+
+📺 YouTube Metadata:
+  Channel: National Review
+  Upload Date: 2010-09-09
+  Duration: 356 seconds
+  Views: 126594
+
+✅ Registered in corpus as: davison_speech_2010_lipnBHey
+</code></pre>
+<h3 id="result-files-generated">Result Files Generated</h3>
+<p>Each processed video creates:
+- <strong><code>{video_id}_transcript.txt</code></strong>: Clean transcript text
+- <strong><code>{video_id}_result.json</code></strong>: Complete processing results and metadata
+- <strong>Processing summary</strong>: Overall statistics and status</p>
+<h3 id="confidence-scoring-for-youtube-content">Confidence Scoring for YouTube Content</h3>
+<p><strong>Enhanced scoring includes:</strong>
+- <strong>Base extraction confidence</strong> (0-100% from intelligent ingestion)
+- <strong>YouTube metadata bonus</strong> (+10 points for complete video info)
+- <strong>Channel credibility</strong> (news channels, official accounts get bonus)
+- <strong>Video engagement</strong> (high view/like counts improve confidence)
+- <strong>Transcript quality</strong> (manual captions score higher than auto-generated)</p>
+<h3 id="generated-text-ids-for-youtube-content">Generated Text IDs for YouTube Content</h3>
+<p><strong>Format</strong>: <code>{author}_{type}_{year}_{video_id_prefix}</code></p>
+<p><strong>Examples:</strong>
+- <code>davison_speech_2010_lipnBHey</code> (Phil Davidson treasurer speech)
+- <code>obama_address_2009_AbCdEfGh</code> (Obama address from 2009)
+- <code>youtube_interview_2020_XyZ12345</code> (Generic format when speaker unclear)</p>
+<h2 id="troubleshooting-common-issues">Troubleshooting Common Issues</h2>
+<h3 id="video-access-problems">Video Access Problems</h3>
+<h4 id="error-no-transcript-available-for-this-video">"❌ Error: No transcript available for this video"</h4>
+<p><strong>Causes:</strong>
+- Video has no captions/subtitles enabled
+- Captions are only available in unsupported languages
+- Video is private, unlisted, or age-restricted</p>
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Check if video has captions manually on YouTube
+# Try different language preferences
+python3 scripts/intelligent_ingest_youtube.py &quot;URL&quot; --languages en es fr de
+
+# Check video accessibility in browser first
+</code></pre>
+<h4 id="error-could-not-extract-video-id-from-url">"❌ Error: Could not extract video ID from URL"</h4>
+<p><strong>Causes:</strong>
+- Malformed YouTube URL
+- URL contains additional parameters
+- Not a valid YouTube URL</p>
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Verify URL format - supported formats:
+# https://www.youtube.com/watch?v=VIDEO_ID
+# https://youtu.be/VIDEO_ID
+# https://www.youtube.com/embed/VIDEO_ID
+
+# Clean URL by removing extra parameters
+# Use just: https://www.youtube.com/watch?v=VIDEO_ID
+</code></pre>
+<h3 id="processing-issues">Processing Issues</h3>
+<h4 id="warning-yt-dlp-not-available-basic-metadata-only">"⚠️ Warning: yt-dlp not available - basic metadata only"</h4>
+<p><strong>Impact</strong>: Limited video metadata (title, channel may be missing)
+<strong>Solution:</strong></p>
+<pre><code class="language-bash">pip install yt-dlp
+# Then retry processing
+</code></pre>
+<h4 id="warning-openai_api_key-environment-variable-not-set">"⚠️ Warning: OPENAI_API_KEY environment variable not set"</h4>
+<p><strong>Impact</strong>: Basic metadata extraction only (no AI enhancement)
+<strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Set API key for enhanced processing
+export OPENAI_API_KEY=sk-your-key-here
+
+# OR proceed with YouTube metadata only (still functional)
+# Processing will work but with basic metadata extraction
+</code></pre>
+<h4 id="low-confidence-scores-for-political-content">Low confidence scores for political content</h4>
+<p><strong>Causes:</strong>
+- Auto-generated captions with poor punctuation
+- Unclear speaker identification
+- Generic video titles</p>
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Lower confidence threshold
+python3 scripts/intelligent_ingest_youtube.py &quot;URL&quot; --confidence-threshold 50
+
+# Review uncertain results for manual correction
+cat output_dir/VIDEO_ID_result.json
+
+# Manual registration with corrected metadata
+python3 -c &quot;
+from src.narrative_gravity.corpus.registry import CorpusRegistry
+registry = CorpusRegistry()
+registry.register_document(
+    text_id='corrected_speaker_speech_2020',
+    file_path='path/to/transcript.txt',
+    metadata={
+        'title': 'Corrected Speech Title',
+        'author': 'Speaker Name',
+        'date': '2020-01-15',
+        'document_type': 'speech',
+        'youtube_video_id': 'VIDEO_ID',
+        'youtube_url': 'https://www.youtube.com/watch?v=VIDEO_ID'
+    }
+)
+&quot;
+</code></pre>
+<h4 id="speaker-identification-conflict-detected">🚨 Speaker identification conflict detected</h4>
+<p><strong>What you'll see:</strong></p>
+<pre><code class="language-bash">⚠️  Speaker identification conflict detected!
+   LLM identified: Greg Abbott
+   YouTube title: Gov Perry ALEC 2016
+</code></pre>
+<p><strong>Causes:</strong>
+- AI misidentified speaker from transcript content
+- YouTube title contains correct speaker information
+- Cross-validation system caught the discrepancy</p>
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># 1. Check the extraction notes for details
+jq '.metadata.extraction_notes' output_dir/VIDEO_ID_result.json
+
+# 2. Manually verify the actual speaker
+# Watch a portion of the video to confirm who is speaking
+
+# 3. Use manual registration with correct speaker
+python3 -c &quot;
+from src.narrative_gravity.corpus.registry import CorpusRegistry
+registry = CorpusRegistry()
+registry.register_document(
+    text_id='perry_alec_speech_2016',
+    file_path='path/to/transcript.txt', 
+    metadata={
+        'title': 'Gov Perry ALEC 2016 Speech',
+        'author': 'Rick Perry',  # Corrected speaker
+        'date': '2016-08-04',
+        'document_type': 'speech',
+        'youtube_video_id': 'VIDEO_ID',
+        'youtube_url': 'https://www.youtube.com/watch?v=VIDEO_ID',
+        'source': 'youtube_manual_correction'
+    }
+)
+print('✅ Registered with correct speaker identification')
+&quot;
+
+# 4. Report the pattern for future improvement
+# Document the misidentification case for training data
+</code></pre>
+<p><strong>Prevention:</strong></p>
+<pre><code class="language-bash"># Use the test suite to verify accuracy improvements
+python3 scripts/test_youtube_improvements.py
+
+# This specific Perry/Abbott case should now be caught automatically
+</code></pre>
+<h3 id="network-and-rate-limiting">Network and Rate Limiting</h3>
+<h4 id="processing-failures-or-slow-responses">Processing failures or slow responses</h4>
+<p><strong>Causes:</strong>
+- Network connectivity issues
+- YouTube API rate limiting
+- Server-side restrictions</p>
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Add delays between requests for batch processing
+for url in &quot;${urls[@]}&quot;; do
+    python3 scripts/intelligent_ingest_youtube.py &quot;$url&quot;
+    sleep 5  # 5-second delay
+done
+
+# Test connectivity first
+python3 -c &quot;
+import requests
+response = requests.get('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+print('✅ YouTube accessible' if response.status_code == 200 else '❌ Connection issue')
+&quot;
+</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="content-curation-strategy">Content Curation Strategy</h3>
+<h4 id="1-video-selection-criteria">1. Video Selection Criteria</h4>
+<pre><code class="language-bash"># Prioritize videos with:
+# ✅ Manual captions (professional content)
+# ✅ Clear titles indicating content type
+# ✅ Established channels (news, government, institutions)
+# ✅ Recent upload dates (better metadata)
+# ✅ High engagement (views, likes)
+
+# Avoid:
+# ❌ User-generated content without captions
+# ❌ Very old videos (may lack metadata)
+# ❌ Compilation videos (mixed content)
+# ❌ Live streams (incomplete transcripts)
+</code></pre>
+<h4 id="2-quality-assurance-workflow">2. Quality Assurance Workflow</h4>
+<pre><code class="language-bash"># Step 1: Test with small sample
+python3 scripts/intelligent_ingest_youtube.py &quot;TEST_URL&quot; --dry-run --verbose
+
+# Step 2: Process with confidence threshold
+python3 scripts/intelligent_ingest_youtube.py &quot;URL&quot; --confidence-threshold 75
+
+# Step 3: Review uncertain cases
+cat output_dir/*_result.json | grep -A5 -B5 '&quot;confidence&quot;: [4-6][0-9]'
+
+# Step 4: Manual correction for key videos
+# (Use manual registration code from troubleshooting section)
+</code></pre>
+<h3 id="batch-processing-strategy">Batch Processing Strategy</h3>
+<h4 id="for-large-video-collections">For Large Video Collections</h4>
+<pre><code class="language-bash"># Create video list file
+cat &gt; video_list.txt &lt;&lt; 'EOF'
+https://www.youtube.com/watch?v=VIDEO1  # Presidential Address 2020
+https://www.youtube.com/watch?v=VIDEO2  # UN Speech 2019
+https://www.youtube.com/watch?v=VIDEO3  # Campaign Rally 2018
+EOF
+
+# Process with rate limiting
+#!/bin/bash
+while IFS= read -r line; do
+    # Skip comments and empty lines
+    [[ $line =~ ^#.*$ ]] &amp;&amp; continue
+    [[ -z &quot;${line// }&quot; ]] &amp;&amp; continue
+
+    # Extract URL (first word)
+    url=$(echo $line | awk '{print $1}')
+    echo &quot;Processing: $url&quot;
+
+    python3 scripts/intelligent_ingest_youtube.py &quot;$url&quot; --verbose
+
+    # Rate limiting - adjust as needed
+    sleep 3
+done &lt; video_list.txt
+</code></pre>
+<h3 id="cost-management">Cost Management</h3>
+<h4 id="api-usage-optimization">API Usage Optimization</h4>
+<pre><code class="language-bash"># Process without LLM enhancement first (free)
+unset OPENAI_API_KEY
+python3 scripts/intelligent_ingest_youtube.py &quot;URL&quot; --dry-run
+
+# Review basic results, then decide which need LLM enhancement
+export OPENAI_API_KEY=sk-your-key-here
+python3 scripts/intelligent_ingest_youtube.py &quot;IMPORTANT_URL&quot; --confidence-threshold 80
+</code></pre>
+<h2 id="integration-with-research-workflows">Integration with Research Workflows</h2>
+<h3 id="academic-research-pipeline">Academic Research Pipeline</h3>
+<pre><code class="language-bash"># 1. Curate video collection (political speeches, debates)
+# 2. Process with YouTube ingestion
+for url in &quot;${political_videos[@]}&quot;; do
+    python3 scripts/intelligent_ingest_youtube.py &quot;$url&quot; --confidence-threshold 75
+done
+
+# 3. Verify corpus integration
+python3 -c &quot;
+from src.narrative_gravity.corpus.discovery import CorpusDiscovery
+discovery = CorpusDiscovery()
+results = discovery.search('source:youtube_intelligent_ingestion')
+print(f'📺 YouTube corpus: {results.total_matches} videos ingested')
+&quot;
+
+# 4. Export for analysis
+python3 -c &quot;
+from src.narrative_gravity.corpus.exporter import CorpusExporter
+exporter = CorpusExporter()
+exporter.export_csv('youtube_political_corpus.csv')
+&quot;
+</code></pre>
+<h3 id="replication-and-citation">Replication and Citation</h3>
+<pre><code class="language-bash"># Document video sources for academic citation
+python3 -c &quot;
+import json
+from pathlib import Path
+
+# Collect all YouTube processing results
+results_dir = Path('tmp/youtube_ingestion_*')
+video_citations = []
+
+for result_file in results_dir.glob('*_result.json'):
+    with open(result_file) as f:
+        data = json.load(f)
+        video_info = data.get('video_info', {})
+        citation = {
+            'title': video_info.get('title'),
+            'channel': video_info.get('channel'),
+            'url': video_info.get('url'),
+            'upload_date': video_info.get('upload_date'),
+            'view_count': video_info.get('view_count'),
+            'duration': video_info.get('duration')
+        }
+        video_citations.append(citation)
+
+# Save citation information
+with open('youtube_video_citations.json', 'w') as f:
+    json.dump(video_citations, f, indent=2)
+
+print(f'📋 Saved citations for {len(video_citations)} videos')
+&quot;
+</code></pre>
+<h2 id="technical-architecture">Technical Architecture</h2>
+<h3 id="system-components">System Components</h3>
+<h4 id="1-youtubetranscriptextractor">1. YouTubeTranscriptExtractor</h4>
+<ul>
+<li><strong>Handles</strong>: Video ID extraction, transcript download, content cleaning</li>
+<li><strong>Dependencies</strong>: youtube-transcript-api</li>
+<li><strong>Features</strong>: Multi-language support, auto/manual caption preference</li>
+</ul>
+<h4 id="2-youtubecorpusingestionservice">2. YouTubeCorpusIngestionService</h4>
+<ul>
+<li><strong>Extends</strong>: IntelligentIngestionService</li>
+<li><strong>Enhancements</strong>: Video metadata integration, speaker identification</li>
+<li><strong>Dependencies</strong>: yt-dlp (optional for enhanced metadata)</li>
+</ul>
+<h4 id="3-enhanced-metadata-pipeline">3. Enhanced Metadata Pipeline</h4>
+<ul>
+<li><strong>Combines</strong>: YouTube metadata + LLM content analysis</li>
+<li><strong>Confidence boost</strong>: +10 points for complete video information</li>
+<li><strong>Speaker extraction</strong>: Pattern matching for political figures</li>
+</ul>
+<h3 id="data-flow">Data Flow</h3>
+<pre><code>YouTube URL → Video ID extraction → Transcript download → Content cleaning → 
+Metadata extraction (YouTube + LLM) → Confidence scoring → 
+Corpus registration (if high confidence) → Result storage
+</code></pre>
+<h3 id="database-integration">Database Integration</h3>
+<ul>
+<li><strong>Extends existing corpus schema</strong> with YouTube-specific fields</li>
+<li><strong>Preserves compatibility</strong> with existing analysis tools</li>
+<li><strong>Adds tracking fields</strong>: video_id, youtube_url, channel, view_count, etc.</li>
+</ul>
+<h3 id="error-handling">Error Handling</h3>
+<ul>
+<li><strong>Graceful fallback</strong>: YouTube-only metadata when LLM fails</li>
+<li><strong>Network resilience</strong>: Retry logic for temporary failures</li>
+<li><strong>Validation</strong>: URL format checking, video accessibility verification</li>
+<li><strong>Comprehensive logging</strong>: Full audit trail for troubleshooting</li>
+</ul>
+<h2 id="security-and-privacy-considerations">Security and Privacy Considerations</h2>
+<h3 id="data-handling">Data Handling</h3>
+<ul>
+<li>✅ <strong>No video download</strong>: Only transcript text is processed</li>
+<li>✅ <strong>Local storage</strong>: All results stored locally, not on external servers</li>
+<li>✅ <strong>API transparency</strong>: Clear documentation of what data goes to OpenAI</li>
+<li>⚠️ <strong>YouTube terms</strong>: Subject to YouTube's terms of service for transcript access</li>
+<li>⚠️ <strong>Content sensitivity</strong>: Consider privacy implications for political content</li>
+</ul>
+<h3 id="best-practices-for-sensitive-content">Best Practices for Sensitive Content</h3>
+<pre><code class="language-bash"># Use dry-run mode for sensitive videos
+python3 scripts/intelligent_ingest_youtube.py &quot;SENSITIVE_URL&quot; --dry-run
+
+# Process without LLM enhancement to avoid sending content to external APIs
+unset OPENAI_API_KEY
+python3 scripts/intelligent_ingest_youtube.py &quot;SENSITIVE_URL&quot;
+
+# Review extracted content before corpus registration
+cat output_dir/VIDEO_ID_transcript.txt
+</code></pre>
+<h2 id="performance-and-scaling">Performance and Scaling</h2>
+<h3 id="expected-performance">Expected Performance</h3>
+<ul>
+<li><strong>Single video</strong>: 10-30 seconds processing time</li>
+<li><strong>Network-bound</strong>: Limited by YouTube response times</li>
+<li><strong>LLM-bound</strong>: Limited by OpenAI API rate limits (3000 requests/minute)</li>
+<li><strong>Storage</strong>: Minimal - transcripts typically 1-50KB per video</li>
+</ul>
+<h3 id="scaling-considerations">Scaling Considerations</h3>
+<pre><code class="language-bash"># For large-scale processing (100+ videos):
+# 1. Implement proper rate limiting
+# 2. Use batch processing with delays
+# 3. Monitor API usage and costs
+# 4. Consider processing in stages (YouTube metadata first, LLM enhancement later)
+</code></pre>
+<h2 id="related-documentation">Related Documentation</h2>
+<ul>
+<li><strong><a href="../INTELLIGENT_CORPUS_INGESTION_GUIDE/">Intelligent Corpus Ingestion Guide</a></strong> - Base ingestion system</li>
+<li><strong><a href="ENHANCED_CORPUS_MANAGEMENT_GUIDE.md">Enhanced Corpus Management Guide</a></strong> - Corpus system overview</li>
+<li><strong><a href="../CORPUS_WORKFLOW_INTEGRATION/">Corpus Workflow Integration Guide</a></strong> - Research workflow context</li>
+<li><strong><a href="../../LAUNCH_GUIDE.md">Launch Guide</a></strong> - System setup and operation</li>
+</ul>
+<hr />
+<p><em>This guide covers YouTube Transcript Intelligent Ingestion as of June 2025. The service extends the core intelligent ingestion system with YouTube-specific capabilities for video transcript extraction and enhanced metadata processing.</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

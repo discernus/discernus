@@ -1,0 +1,1113 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Formal Specification System - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#formal-specification-system" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Formal Specification System
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#discernus-framework-standardization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discernus Framework Standardization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-framework-specification-standard-yaml-v21" class="md-nav__link">
+    <span class="md-ellipsis">
+      📐 1. Framework Specification Standard (YAML v2.1)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📐 1. Framework Specification Standard (YAML v2.1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-current-framework-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Current Framework Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-framework-architecture-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Framework Architecture Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-framework-validation-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Framework Validation Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-experiment-definition-specification-yaml-v21" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 2. Experiment Definition Specification (YAML v2.1)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 2. Experiment Definition Specification (YAML v2.1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-experiment-definition-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Experiment Definition Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-experiment-validation-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Experiment Validation Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-component-integration-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 3. Component Integration Specifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 3. Component Integration Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-prompt-template-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Prompt Template Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-weighting-scheme-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Weighting Scheme Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-orchestrator-integration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Orchestrator Integration Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deprecated-system-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗑️ 4. Deprecated System Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🗑️ 4. Deprecated System Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-moved-to-deprecatedby-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Moved to deprecated/by-system/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-migration-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Migration Guidance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-quality-assurance-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 5. Quality Assurance Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 5. Quality Assurance Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-validation-pipeline-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Validation Pipeline Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-automated-quality-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Automated Quality Checks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-current-system-status-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 6. Current System Status &amp; Compliance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 6. Current System Status &amp; Compliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-mecec-compliance-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 MECEC Compliance Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-implementation-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Implementation Status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-developer-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 7. Developer Quick Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 7. Developer Quick Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-framework-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Framework Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-experiment-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Experiment Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-validation-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Validation Commands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="formal-specification-system">Formal Specification System</h1>
+<h2 id="discernus-framework-standardization">Discernus Framework Standardization</h2>
+<p><strong>Version:</strong> 2.1.0<br />
+<strong>Date:</strong> June 21, 2025<br />
+<strong>Status:</strong> Production (Updated post-validation consolidation)</p>
+<hr />
+<h2 id="executive-summary">🎯 <strong>Executive Summary</strong></h2>
+<p>This document establishes <strong>production-ready specifications</strong> for the Discernus analytical system, updated to reflect the <strong>unified validation architecture</strong> and current <strong>YAML-first format</strong>:</p>
+<ol>
+<li><strong>Framework Specifications</strong> - YAML-based frameworks supporting multiple architectures (dipole + independent wells)</li>
+<li><strong>Experiment Definition Specifications</strong> - Comprehensive experiment configuration format  </li>
+<li><strong>Validation System Architecture</strong> - Unified validation with deprecated system documentation</li>
+<li><strong>Component Integration Specifications</strong> - Prompt templates, weighting schemes, and orchestrator integration</li>
+</ol>
+<h2 id="1-framework-specification-standard-yaml-v21">📐 <strong>1. Framework Specification Standard (YAML v2.1)</strong></h2>
+<h3 id="11-current-framework-schema"><strong>1.1 Current Framework Schema</strong></h3>
+<p><strong>Primary Format</strong>: YAML (<code>.yaml</code> files in framework directories)</p>
+<pre><code class="language-yaml"># =============================================================================
+# FRAMEWORK METADATA  
+# =============================================================================
+name: framework_identifier
+framework_name: framework_identifier  # Legacy compatibility
+display_name: &quot;Human Readable Name&quot;
+version: vYYYY.MM.DD
+description: |
+  Academic description of theoretical foundation and methodology.
+  Multi-line descriptions supported.
+
+framework_type: enum[dipoles_based, independent_wells]
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: &quot;Coordinate system description&quot;
+
+positioning_strategy:
+  type: enum[opposing_pairs, clustered_positioning, equidistant_wells]
+  description: &quot;Positioning methodology description&quot;
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+theoretical_foundation:
+  primary_sources:
+    - &quot;Academic citation 1&quot;
+    - &quot;Academic citation 2&quot;
+  theoretical_approach: |
+    Methodological description and theoretical grounding
+  core_insight: |
+    Key theoretical insight driving the framework
+
+# =============================================================================
+# FRAMEWORK ARCHITECTURE (Dipole-Based)
+# =============================================================================
+dipoles:  # For dipole-based frameworks
+  - name: Dipole_Name
+    description: &quot;Theoretical foundation for this dipole&quot;
+
+    positive:
+      name: Positive_Well
+      description: &quot;Positive pole description&quot;
+      language_cues:
+        basic_terms:
+          - term1
+          - term2
+        moral_imperatives:
+          - &quot;imperative pattern&quot;
+      angle: 0
+      weight: 1.0
+      type: well_type
+      tier: primary
+
+    negative:
+      name: Negative_Well
+      description: &quot;Negative pole description&quot;
+      language_cues:
+        - basic_term1
+        - basic_term2
+      angle: 180
+      weight: -1.0
+      type: well_type_violation
+      tier: primary
+
+# =============================================================================
+# FRAMEWORK ARCHITECTURE (Independent Wells)
+# =============================================================================
+wells:  # For independent wells frameworks
+  well_identifier:
+    position:
+      angle_degrees: 0
+      coordinates: [1.0, 0.0]
+    name: &quot;Well Name&quot;
+    description: &quot;Well theoretical description&quot;
+    rich_description: &quot;Extended description&quot;
+    core_principles:
+      - &quot;Principle 1&quot;
+      - &quot;Principle 2&quot;
+    language_cues:
+      category_name:
+        - &quot;cue pattern 1&quot;
+        - &quot;cue pattern 2&quot;
+    weight: 1.0
+    type: independent
+    tier: primary
+
+# =============================================================================
+# ANALYSIS CONFIGURATION
+# =============================================================================
+weighting_philosophy:
+  description: &quot;Weighting methodology description&quot;
+  approach: enum[equal_weighting, empirical_validation_based, theoretical_weighting]
+
+metrics:
+  metric_code:
+    name: &quot;Metric Display Name&quot;
+    description: &quot;Metric calculation and interpretation&quot;
+    calculation: &quot;Mathematical formula description&quot;
+
+# =============================================================================
+# VALIDATION METADATA (Added post-consolidation)
+# =============================================================================
+validation_metadata:
+  last_validated: &quot;2025-06-21&quot;
+  validator_version: &quot;unified_framework_validator_v2.0&quot;
+  validation_result: VALID
+  architecture_detected: enum[dipole_based, independent_wells]
+  wells_count: integer
+  dipoles_count: integer
+
+# =============================================================================
+# INTEGRATION COMPATIBILITY
+# =============================================================================
+compatibility:
+  prompt_templates: [&quot;template_id_1&quot;, &quot;template_id_2&quot;]
+  weighting_schemes: [&quot;scheme_id_1&quot;, &quot;scheme_id_2&quot;]
+  orchestrator_version: &quot;v2.1.0&quot;
+</code></pre>
+<h3 id="12-framework-architecture-types"><strong>1.2 Framework Architecture Types</strong></h3>
+<p><strong>Dipole-Based Frameworks</strong> (e.g., Moral Foundations Theory):
+- Structure: <code>dipoles[]</code> array with <code>positive</code>/<code>negative</code> objects
+- Wells: Automatically derived from dipole endpoints
+- Use Case: Bipolar theoretical constructs (moral foundations, political spectrums)
+- Validation: Ensures opposing pairs have consistent structure</p>
+<p><strong>Independent Wells Frameworks</strong> (e.g., Three Wells Political):
+- Structure: <code>wells{}</code> dictionary with <code>position</code> objects
+- Wells: Independently positioned theoretical constructs
+- Use Case: Multiple competing theories, non-bipolar frameworks
+- Validation: Ensures well positioning and theoretical coherence</p>
+<h3 id="13-framework-validation-architecture"><strong>1.3 Framework Validation Architecture</strong></h3>
+<p><strong>Production Validator</strong>: <code>scripts/utilities/unified_framework_validator.py</code>
+- <strong>Multi-architecture support</strong>: Automatically detects dipole vs independent wells
+- <strong>Format support</strong>: YAML (primary) + JSON (legacy migration)
+- <strong>Validation layers</strong>: Format → Structure → Semantics → Academic → Integration
+- <strong>CLI interface</strong>: <code>python scripts/utilities/unified_framework_validator.py --all</code></p>
+<p><strong>Deprecated Systems</strong> (moved to <code>deprecated/by-system/</code>):
+- <code>validate_framework_spec.py</code> - Legacy JSON-only validator
+- Use unified validator for all new development</p>
+<p><strong>Validation Command Examples</strong>:</p>
+<pre><code class="language-bash"># Validate single framework
+python scripts/utilities/unified_framework_validator.py frameworks/moral_foundations_theory/
+
+# Validate all frameworks with verbose output
+python scripts/utilities/unified_framework_validator.py --all --verbose
+
+# Framework validation in orchestrator (automatic)
+python scripts/applications/comprehensive_experiment_orchestrator.py experiment.yaml
+</code></pre>
+<hr />
+<h2 id="2-experiment-definition-specification-yaml-v21">📋 <strong>2. Experiment Definition Specification (YAML v2.1)</strong></h2>
+<h3 id="21-experiment-definition-schema"><strong>2.1 Experiment Definition Schema</strong></h3>
+<pre><code class="language-yaml"># =============================================================================
+# EXPERIMENT METADATA
+# =============================================================================
+experiment_meta:
+  name: &quot;Experiment Name&quot;
+  version: &quot;v1.0.0&quot;
+  description: &quot;Comprehensive experiment description&quot;
+  created: &quot;2025-06-21T10:00:00&quot;
+
+  # Research Context
+  hypotheses:
+    - &quot;Research hypothesis 1&quot;
+    - &quot;Research hypothesis 2&quot;
+  research_context: &quot;Academic research context and background&quot;
+  success_criteria:
+    - &quot;Success criterion 1&quot;
+    - &quot;Success criterion 2&quot;
+
+  # Academic Metadata
+  principal_investigator: &quot;researcher@institution.edu&quot;
+  institution: &quot;Research Institution&quot;
+  funding_source: &quot;Funding agency&quot;
+  ethical_clearance: &quot;IRB-2025-001&quot;
+  tags: [&quot;tag1&quot;, &quot;tag2&quot;]
+
+# =============================================================================
+# COMPONENT SPECIFICATIONS
+# =============================================================================
+components:
+  frameworks:
+    - id: framework_id
+      type: file_path
+      file_path: &quot;frameworks/framework_name/framework_name_framework.yaml&quot;
+      version: &quot;v2025.06.19&quot;
+
+  prompt_templates:
+    - id: template_id
+      type: existing
+      version: &quot;v2.1&quot;
+
+  weighting_schemes:
+    - id: scheme_id
+      type: existing
+      version: &quot;v1.0&quot;
+
+  models:
+    - id: model_id
+      provider: &quot;openai&quot;
+      version: &quot;gpt-4.1-mini&quot;
+      parameters:
+        temperature: 0.1
+        max_tokens: 4000
+
+  corpus:
+    - id: corpus_id
+      type: file_collection
+      file_path: &quot;corpus/directory_name&quot;
+      pattern: &quot;*.txt&quot;
+
+# =============================================================================
+# EXECUTION CONFIGURATION
+# =============================================================================
+execution:
+  description: &quot;Execution methodology description&quot;
+
+  matrix:
+    - run_id: &quot;run_identifier&quot;
+      # Additional run parameters
+
+  cost_controls:
+    max_total_cost: 5.00
+    max_run_cost: 0.10
+    confirm_before_execution: true
+
+  quality_assurance:
+    enable_qa_validation: true
+    qa_confidence_threshold: 0.7
+    require_second_opinion_below: 0.5
+
+  academic_compliance:
+    generate_reproducibility_package: true
+    publication_ready_exports: true
+    statistical_analysis: true
+</code></pre>
+<h3 id="22-experiment-validation-architecture"><strong>2.2 Experiment Validation Architecture</strong></h3>
+<p><strong>Production Validator</strong>: <code>scripts/applications/experiment_validation_utils.py</code>
+- <strong>Orchestrator integration</strong>: Used by <code>comprehensive_experiment_orchestrator.py</code>
+- <strong>Comprehensive validation</strong>: Structure, components, execution parameters
+- <strong>Error guidance</strong>: Clear fix suggestions with examples
+- <strong>Academic standards</strong>: Publication readiness validation</p>
+<p><strong>Deprecated System</strong> (moved to <code>deprecated/by-system/</code>):
+- <code>experiment_validator.py</code> - Redundant standalone validator
+- Use orchestrator-integrated validation for all experiments</p>
+<p><strong>Validation Integration</strong>:</p>
+<pre><code class="language-python"># In comprehensive_experiment_orchestrator.py
+from scripts.applications.experiment_validation_utils import ExperimentValidator
+
+validator = ExperimentValidator()
+result = validator.validate_experiment_file(experiment_file)
+</code></pre>
+<hr />
+<h2 id="3-component-integration-specifications">🔧 <strong>3. Component Integration Specifications</strong></h2>
+<h3 id="31-prompt-template-integration"><strong>3.1 Prompt Template Integration</strong></h3>
+<p><strong>Current Implementation</strong>: Database-stored templates with framework compatibility
+- <strong>Template storage</strong>: Database with version control
+- <strong>Framework agnostic</strong>: Templates work across multiple frameworks<br />
+- <strong>LLM optimization</strong>: Model-specific adaptations
+- <strong>Output standardization</strong>: Consistent JSON response format</p>
+<p><strong>Template Registration</strong>:</p>
+<pre><code class="language-python"># Via orchestrator auto-registration
+component_registrar.register_prompt_template(template_id, version)
+</code></pre>
+<h3 id="32-weighting-scheme-integration"><strong>3.2 Weighting Scheme Integration</strong></h3>
+<p><strong>Current Implementation</strong>: Algorithm-based weighting with mathematical validation
+- <strong>Scheme storage</strong>: Database with parameter definitions
+- <strong>Mathematical validation</strong>: Formula verification and edge case handling
+- <strong>Framework compatibility</strong>: Multi-framework support
+- <strong>Performance requirements</strong>: Computational efficiency standards</p>
+<p><strong>Scheme Registration</strong>:</p>
+<pre><code class="language-python"># Via orchestrator auto-registration  
+component_registrar.register_weighting_scheme(scheme_id, version)
+</code></pre>
+<h3 id="33-orchestrator-integration-architecture"><strong>3.3 Orchestrator Integration Architecture</strong></h3>
+<p><strong>Production System</strong>: <code>scripts/applications/comprehensive_experiment_orchestrator.py</code>
+- <strong>Unified validation</strong>: Frameworks, experiments, components
+- <strong>Transaction safety</strong>: Checkpoint/resume capability
+- <strong>Cost protection</strong>: Budget controls and monitoring
+- <strong>Academic exports</strong>: Publication-ready outputs</p>
+<p><strong>Integration Flow</strong>:
+1. <strong>Experiment validation</strong> → experiment_validation_utils
+2. <strong>Framework validation</strong> → unified_framework_validator<br />
+3. <strong>Component validation</strong> → orchestrator internal systems
+4. <strong>Execution</strong> → transaction-safe pipeline
+5. <strong>Output generation</strong> → academic export systems</p>
+<hr />
+<h2 id="4-deprecated-system-documentation">🗑️ <strong>4. Deprecated System Documentation</strong></h2>
+<h3 id="41-moved-to-deprecatedby-system"><strong>4.1 Moved to <code>deprecated/by-system/</code></strong></h3>
+<p><strong>Framework Validation</strong>:
+- <code>validate_framework_spec.py</code> - Legacy JSON-only validator
+- <strong>Replacement</strong>: <code>scripts/utilities/unified_framework_validator.py</code>
+- <strong>Migration</strong>: No action needed - new validator auto-detects formats</p>
+<p><strong>Experiment Validation</strong>:
+- <code>experiment_validator.py</code> - Standalone validator not integrated with orchestrator
+- <strong>Replacement</strong>: <code>scripts/applications/experiment_validation_utils.py</code> (orchestrator-integrated)
+- <strong>Migration</strong>: Use orchestrator for all experiment execution</p>
+<h3 id="42-migration-guidance"><strong>4.2 Migration Guidance</strong></h3>
+<p><strong>For Framework Development</strong>:</p>
+<pre><code class="language-bash"># OLD (deprecated)
+python scripts/utilities/validate_framework_spec.py framework.json
+
+# NEW (production)
+python scripts/utilities/unified_framework_validator.py frameworks/framework_name/
+</code></pre>
+<p><strong>For Experiment Execution</strong>:</p>
+<pre><code class="language-bash"># OLD (deprecated)  
+python scripts/applications/experiment_validator.py experiment.yaml
+
+# NEW (production)
+python scripts/applications/comprehensive_experiment_orchestrator.py experiment.yaml
+</code></pre>
+<hr />
+<h2 id="5-quality-assurance-integration">📊 <strong>5. Quality Assurance Integration</strong></h2>
+<h3 id="51-validation-pipeline-architecture"><strong>5.1 Validation Pipeline Architecture</strong></h3>
+<p><strong>Multi-Layer Validation</strong> (automatically applied):
+1. <strong>Format Detection &amp; Parsing</strong> - YAML/JSON with error handling
+2. <strong>Structural Validation</strong> - Architecture-aware schema validation<br />
+3. <strong>Semantic Consistency</strong> - Cross-component compatibility
+4. <strong>Academic Standards</strong> - Citation format, theoretical foundation
+5. <strong>Integration Compatibility</strong> - Orchestrator and QA system integration</p>
+<h3 id="52-automated-quality-checks"><strong>5.2 Automated Quality Checks</strong></h3>
+<p><strong>Framework Validation</strong>:</p>
+<pre><code class="language-bash"># Single framework with detailed output
+python scripts/utilities/unified_framework_validator.py frameworks/framework_name/ --verbose
+
+# All frameworks with summary report
+python scripts/utilities/unified_framework_validator.py --all --summary
+</code></pre>
+<p><strong>Experiment Validation</strong>:</p>
+<pre><code class="language-bash"># Integrated with orchestrator (automatic)
+python scripts/applications/comprehensive_experiment_orchestrator.py experiment.yaml
+
+# Manual pre-flight validation
+python -c &quot;
+from scripts.applications.experiment_validation_utils import ExperimentValidator
+validator = ExperimentValidator()
+result = validator.validate_experiment_file('experiment.yaml')
+validator.print_report()
+&quot;
+</code></pre>
+<hr />
+<h2 id="6-current-system-status-compliance">🎯 <strong>6. Current System Status &amp; Compliance</strong></h2>
+<h3 id="61-mecec-compliance-assessment"><strong>6.1 MECEC Compliance Assessment</strong></h3>
+<p><strong>✅ Mutually Exclusive</strong>:
+- Framework validation: Unified validator only (deprecated systems moved)
+- Experiment validation: Orchestrator-integrated only (standalone deprecated)
+- Clear component boundaries: Frameworks, experiments, prompts, weighting schemes</p>
+<p><strong>✅ Collectively Exhaustive</strong>:
+- Framework architectures: Dipole-based + independent wells covered
+- Validation layers: Format, structure, semantics, academic, integration
+- Component types: All experiment components specified</p>
+<p><strong>✅ Current</strong>:
+- Updated: June 21, 2025 (post-validation consolidation)
+- Reflects: Current YAML format, unified validator, orchestrator integration
+- Validated: Production systems verified, deprecated systems documented</p>
+<h3 id="62-implementation-status"><strong>6.2 Implementation Status</strong></h3>
+<p><strong>✅ Production Ready</strong>:
+- Unified framework validator (1,054 lines) - comprehensive multi-architecture support
+- Experiment validation utils (463 lines) - orchestrator-integrated validation
+- Comprehensive orchestrator - transaction-safe execution with QA integration</p>
+<p><strong>✅ Migration Complete</strong>:
+- Legacy validators moved to <code>deprecated/by-system/</code>
+- Clear deprecation notices with replacement guidance
+- No breaking changes - backward compatibility maintained during transition</p>
+<hr />
+<h2 id="7-developer-quick-reference">📋 <strong>7. Developer Quick Reference</strong></h2>
+<h3 id="71-framework-development"><strong>7.1 Framework Development</strong></h3>
+<pre><code class="language-bash"># 1. Create framework directory
+mkdir frameworks/my_framework/
+
+# 2. Create framework YAML file  
+# Use existing framework as template (MFT for dipoles, Three Wells for independent)
+
+# 3. Validate framework
+python scripts/utilities/unified_framework_validator.py frameworks/my_framework/
+
+# 4. Test with orchestrator
+python scripts/applications/comprehensive_experiment_orchestrator.py test_experiment.yaml
+</code></pre>
+<h3 id="72-experiment-development"><strong>7.2 Experiment Development</strong></h3>
+<pre><code class="language-bash"># 1. Create experiment YAML file
+# Use experiment template from docs/specifications/
+
+# 2. Execute with validation
+python scripts/applications/comprehensive_experiment_orchestrator.py experiment.yaml
+
+# 3. Monitor execution and results
+# Orchestrator provides real-time progress and academic exports
+</code></pre>
+<h3 id="73-validation-commands"><strong>7.3 Validation Commands</strong></h3>
+<pre><code class="language-bash"># Framework validation
+python scripts/utilities/unified_framework_validator.py --all --verbose
+
+# Experiment execution (includes validation)
+python scripts/applications/comprehensive_experiment_orchestrator.py experiment.yaml
+
+# QA system integration (automatic in orchestrator)
+# No separate commands needed - integrated into all experiment execution
+</code></pre>
+<p>This specification system establishes <strong>Discernus</strong> as a rigorous, standardized framework for computational narrative analysis while maintaining the flexibility needed for ongoing research and development. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

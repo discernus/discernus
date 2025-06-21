@@ -1,0 +1,765 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>HuggingFace Inference Endpoints Setup Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#huggingface-inference-endpoints-setup-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HuggingFace Inference Endpoints Setup Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#perfect-models-for-multi-llm-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Perfect Models for Multi-LLM Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Perfect Models for Multi-LLM Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chatgpt-style-models-conversational-creative" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤖 ChatGPT-Style Models (Conversational, Creative)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claude-style-models-analytical-reasoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Claude-Style Models (Analytical, Reasoning)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistral-style-models-efficient-balanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ Mistral-Style Models (Efficient, Balanced)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-deployment-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      💰 Recommended Deployment Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💰 Recommended Deployment Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-budget-testing-34hour-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Budget Testing (~$3.4/hour total)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-advanced-testing-13hour-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Advanced Testing (~$13/hour total)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Step-by-Step Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Step-by-Step Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-deploy-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Deploy Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-get-endpoint-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Get Endpoint URLs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-update-your-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Update Your Code
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Code Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Expected Performance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Expected Performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quality-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Comparison:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#speed-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Speed Comparison:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#immediate-action-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ Immediate Action Items
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pro-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Pro Tips
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="huggingface-inference-endpoints-setup-guide">HuggingFace Inference Endpoints Setup Guide</h1>
+<h2 id="perfect-models-for-multi-llm-testing">🎯 <strong>Perfect Models for Multi-LLM Testing</strong></h2>
+<p>Based on the HuggingFace Inference Endpoints catalog, here are the <strong>optimal models</strong> representing ChatGPT, Claude, and Mistral capabilities:</p>
+<h3 id="chatgpt-style-models-conversational-creative"><strong>🤖 ChatGPT-Style Models (Conversational, Creative)</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Cost/Hour</th>
+<th>GPU</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>microsoft/phi-4</code></td>
+<td>$1.8</td>
+<td>1x L40S</td>
+<td>Latest Microsoft LLM, GPT-4 class</td>
+</tr>
+<tr>
+<td><code>meta-llama/Llama-3.1-8B-Instruct</code></td>
+<td>$0.8</td>
+<td>1x L4</td>
+<td>Strong instruction following</td>
+</tr>
+<tr>
+<td><code>Qwen/Qwen2.5-7B-Instruct</code></td>
+<td>$1.8</td>
+<td>1x L40S</td>
+<td>Excellent conversational AI</td>
+</tr>
+</tbody>
+</table>
+<h3 id="claude-style-models-analytical-reasoning"><strong>🧠 Claude-Style Models (Analytical, Reasoning)</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Cost/Hour</th>
+<th>GPU</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Qwen/Qwen2.5-14B-Instruct</code></td>
+<td>$5.0</td>
+<td>1x H200</td>
+<td>Strong analytical reasoning</td>
+</tr>
+<tr>
+<td><code>deepseek-ai/DeepSeek-R1-Distill-Qwen-32B</code></td>
+<td>$3.8</td>
+<td>4x L4</td>
+<td>Advanced reasoning focus</td>
+</tr>
+<tr>
+<td><code>QwQ-32B</code></td>
+<td>$3.8</td>
+<td>4x L4</td>
+<td>Question-answering specialist</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mistral-style-models-efficient-balanced"><strong>⚡ Mistral-Style Models (Efficient, Balanced)</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Cost/Hour</th>
+<th>GPU</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mistralai/Mistral-7B-Instruct-v0.3</code></td>
+<td>$0.8</td>
+<td>1x L4</td>
+<td>✅ <strong>Already working!</strong></td>
+</tr>
+<tr>
+<td><code>mistralai/Mistral-Nemo-Instruct-2407</code></td>
+<td>$3.8</td>
+<td>4x L4</td>
+<td>Advanced Mistral (12B params)</td>
+</tr>
+<tr>
+<td><code>mistralai/Mistral-Small-24B-Instruct-2501</code></td>
+<td>$3.8</td>
+<td>4x L4</td>
+<td>Latest Mistral (24B params)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recommended-deployment-strategy">💰 <strong>Recommended Deployment Strategy</strong></h2>
+<h3 id="phase-1-budget-testing-34hour-total"><strong>Phase 1: Budget Testing</strong> (~$3.4/hour total)</h3>
+<p>Deploy these 3 models first:</p>
+<pre><code>✅ mistralai/Mistral-7B-Instruct-v0.3     ($0.8/hour)
+✅ meta-llama/Llama-3.1-8B-Instruct       ($0.8/hour)  
+✅ microsoft/phi-4                         ($1.8/hour)
+</code></pre>
+<h3 id="phase-2-advanced-testing-13hour-total"><strong>Phase 2: Advanced Testing</strong> (~$13/hour total)</h3>
+<p>Add these for comprehensive analysis:</p>
+<pre><code>✅ Qwen/Qwen2.5-14B-Instruct             ($5.0/hour)
+✅ deepseek-ai/DeepSeek-R1-Distill-Qwen-32B ($3.8/hour)
+✅ mistralai/Mistral-Nemo-Instruct-2407   ($3.8/hour)
+</code></pre>
+<h2 id="step-by-step-deployment">🚀 <strong>Step-by-Step Deployment</strong></h2>
+<h3 id="step-1-deploy-endpoints"><strong>Step 1: Deploy Endpoints</strong></h3>
+<ol>
+<li>Go to your <strong>HuggingFace Endpoints dashboard</strong></li>
+<li>Click <strong>"Browse Catalog"</strong></li>
+<li>Search for each model above</li>
+<li>Click <strong>"Deploy"</strong> for each one</li>
+<li>Choose your preferred region/hardware</li>
+</ol>
+<h3 id="step-2-get-endpoint-urls"><strong>Step 2: Get Endpoint URLs</strong></h3>
+<p>After deployment, you'll get URLs like:</p>
+<pre><code>https://abc123.us-east-1.aws.endpoints.huggingface.cloud
+https://def456.us-east-1.aws.endpoints.huggingface.cloud
+https://ghi789.us-east-1.aws.endpoints.huggingface.cloud
+</code></pre>
+<h3 id="step-3-update-your-code"><strong>Step 3: Update Your Code</strong></h3>
+<p>I'll help you modify <code>test_multi_llm.py</code> to use these endpoints instead of the free API.</p>
+<h2 id="code-integration">🔧 <strong>Code Integration</strong></h2>
+<p>Once you have your endpoint URLs, we'll update your test script like this:</p>
+<pre><code class="language-python"># Updated model configuration for Inference Endpoints
+ENDPOINT_MODELS = {
+    &quot;gpt_style&quot;: {
+        &quot;microsoft/phi-4&quot;: &quot;https://your-phi4-endpoint.aws.endpoints.huggingface.cloud&quot;,
+        &quot;meta-llama/Llama-3.1-8B-Instruct&quot;: &quot;https://your-llama-endpoint.aws.endpoints.huggingface.cloud&quot;
+    },
+    &quot;claude_style&quot;: {
+        &quot;Qwen/Qwen2.5-14B-Instruct&quot;: &quot;https://your-qwen-endpoint.aws.endpoints.huggingface.cloud&quot;,
+        &quot;deepseek-ai/DeepSeek-R1-Distill-Qwen-32B&quot;: &quot;https://your-deepseek-endpoint.aws.endpoints.huggingface.cloud&quot;
+    },
+    &quot;mistral_style&quot;: {
+        &quot;mistralai/Mistral-7B-Instruct-v0.3&quot;: &quot;https://your-mistral-endpoint.aws.endpoints.huggingface.cloud&quot;,
+        &quot;mistralai/Mistral-Nemo-Instruct-2407&quot;: &quot;https://your-nemo-endpoint.aws.endpoints.huggingface.cloud&quot;
+    }
+}
+</code></pre>
+<h2 id="expected-performance">📊 <strong>Expected Performance</strong></h2>
+<h3 id="quality-comparison"><strong>Quality Comparison:</strong></h3>
+<ul>
+<li><strong>microsoft/phi-4</strong>: Excellent at reasoning, coding, general chat</li>
+<li><strong>Qwen/Qwen2.5-14B-Instruct</strong>: Top-tier analytical capabilities</li>
+<li><strong>mistralai/Mistral-Nemo-Instruct-2407</strong>: Best balance of speed/quality</li>
+</ul>
+<h3 id="speed-comparison"><strong>Speed Comparison:</strong></h3>
+<ul>
+<li><strong>Single GPU models</strong> (L4): ~0.8-1.8/hour, fast inference</li>
+<li><strong>Multi-GPU models</strong> (4x L4): ~3.8-5/hour, slower but higher quality</li>
+</ul>
+<h2 id="immediate-action-items">⚡ <strong>Immediate Action Items</strong></h2>
+<ol>
+<li><strong>Deploy 3 budget models</strong> for immediate testing</li>
+<li><strong>Get endpoint URLs</strong> from your dashboard  </li>
+<li><strong>Test one endpoint</strong> manually to confirm it works</li>
+<li><strong>Share the URLs with me</strong> so I can update your code</li>
+<li><strong>Run comprehensive multi-LLM analysis</strong></li>
+</ol>
+<h2 id="pro-tips">💡 <strong>Pro Tips</strong></h2>
+<ul>
+<li><strong>Start small</strong>: Deploy 1-2 models first to test</li>
+<li><strong>Monitor costs</strong>: Check your billing dashboard regularly</li>
+<li><strong>Scale up</strong>: Add more models as needed</li>
+<li><strong>Auto-shutdown</strong>: Set up auto-scaling to minimize costs</li>
+<li><strong>Compare results</strong>: Use your narrative gravity framework to compare model outputs</li>
+</ul>
+<p>Once you deploy these endpoints, you'll have <strong>true multi-LLM access</strong> through HuggingFace with models that rival ChatGPT, Claude, and Mistral! 🎉 </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

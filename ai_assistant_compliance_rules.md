@@ -22,7 +22,7 @@
 You **must always** run the production system check first:
 
 \`\`\`bash
-python3 scripts/production/check_existing_systems.py "functionality description"
+python3 scripts/applications/check_existing_systems.py "functionality description"
 \`\`\`
 
 If you suggest building something **without first checking** for existing systems, you are violating project standards.
@@ -34,13 +34,13 @@ If you suggest building something **without first checking** for existing system
 For **any statistical analysis, hypothesis testing, data export, or report generation**, you must use:
 
 \`\`\`bash
-python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.json
+python3 scripts/applications/comprehensive_experiment_orchestrator.py experiment.json
 \`\`\`
 
 To resume interrupted experiments:
 
 \`\`\`bash
-python3 scripts/production/comprehensive_experiment_orchestrator.py --resume
+python3 scripts/applications/comprehensive_experiment_orchestrator.py --resume
 \`\`\`
 
 **You must not suggest writing custom scripts** for:
@@ -62,7 +62,7 @@ These functions are already supported via the orchestrator and must be used for 
 Always run the existing systems checker before proposing new work:
 
 \`\`\`bash
-python3 scripts/production/check_existing_systems.py "functionality description"
+python3 scripts/applications/check_existing_systems.py "functionality description"
 \`\`\`
 
 ### ❌ Rule 2: Never Use Deprecated Systems
@@ -90,8 +90,8 @@ Do **not** duplicate or replace existing production systems unnecessarily
 ## 🔍 SEARCH STRATEGY
 
 ### ✅ Always Search These:
-- \`src/narrative_gravity/\` – Core production code
-- \`scripts/production/\` – Production orchestration and validation scripts
+- \`src/\` – Core production code
+- \`scripts/applications/\` – Production orchestration and validation scripts
 - \`docs/specifications/\` – Technical and implementation specs
 
 ### ⚠️ Conditionally Search:
@@ -114,14 +114,14 @@ Do **not** duplicate or replace existing production systems unnecessarily
 
 ### Experiment Execution
 
-- \`scripts/production/execute_experiment_definition.py\`
-- \`scripts/production/comprehensive_experiment_orchestrator.py\` – Full orchestration with checkpoint/resume
+- \`scripts/applications/execute_experiment_definition.py\`
+- \`scripts/applications/comprehensive_experiment_orchestrator.py\` – Full orchestration with checkpoint/resume
 
 ### Academic Export
 
 - \`QAEnhancedDataExporter\`
-- \`src/narrative_gravity/academic/data_export.py\`
-- \`src/narrative_gravity/cli/academic_analysis_pipeline.py\`
+- \`src/academic/data_export.py\`
+- \`scripts/cli/export_academic_data.py\`
 
 ---
 
@@ -131,7 +131,7 @@ AI assistants must use and reference these docs when reasoning about project str
 
 1. \`docs/EXISTING_SYSTEMS_INVENTORY.md\` – Catalog of implemented systems  
 2. \`docs/CODE_ORGANIZATION_STANDARDS.md\` – Where functionality belongs  
-3. \`DEVELOPMENT.md\` – End-to-end guide for development workflows  
+3. \`docs/platform-development/DEV_ENVIRONMENT.md\` – End-to-end guide for development workflows  
 4. \`.ai_assistant_compliance_rules.md\` – This file  
 
 ---
@@ -143,7 +143,7 @@ Use these regularly to manage assistant context during extended development:
 ### Session Recap
 
 \`\`\`
-Summarize the current state of this session. Include the goal, key files involved, major decisions made, and what’s been completed.
+Summarize the current state of this session. Include the goal, key files involved, major decisions made, and what's been completed.
 \`\`\`
 
 ### Assumptions Check
@@ -160,7 +160,7 @@ You're joining an in-progress development effort. Here's the most recent context
 - Changed files
 - High-level summary
 
-What is in progress, what’s likely done, and what still needs to happen?
+What is in progress, what's likely done, and what still needs to happen?
 \`\`\`
 
 ---
@@ -181,7 +181,7 @@ An assistant is **compliant** if it:
 | Violation | Why It's Wrong |
 |----------|----------------|
 | Suggesting new QA system | Use \`LLMQualityAssuranceSystem\` instead |
-| Using “AI Academic Advisor” | Deprecated and ineffective |
+| Using "AI Academic Advisor" | Deprecated and ineffective |
 | Creating new files in \`src/\` | Must go through \`experimental/\` first |
 | Suggesting statistical scripts | Use orchestrator pipeline instead |
 | Using code from \`deprecated/\` | Violates architectural compliance rules |

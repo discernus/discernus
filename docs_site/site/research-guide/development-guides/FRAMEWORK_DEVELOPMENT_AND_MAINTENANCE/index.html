@@ -1,0 +1,1199 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Framework Development and Maintenance Process - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#framework-development-and-maintenance-process" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Framework Development and Maintenance Process
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-first-source-of-truth-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database-First Source of Truth Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database-First Source of Truth Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-database-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Database-First:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filesystem-development-workspace-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filesystem Development Workspace Role:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-cycle-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Cycle Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-development-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Development Lifecycle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Development Lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-creating-new-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Creating New Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-modifying-existing-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Modifying Existing Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-color-optimization-workflow-enhanced-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Color Optimization Workflow ✅ ENHANCED PROCESS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-quality-assured-development-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Quality-Assured Development Process
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-standards-and-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Standards and Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Standards and Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-framework-structure-requirements-v20-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Framework Structure Requirements (v2.0 Specification)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-academic-publication-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Academic Publication Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-version-management-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Version Management Standards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-validation-statuses" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Validation Statuses
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-tools-and-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Tools and Workflows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Tools and Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-framework-sync-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Framework Sync Tool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Framework Sync Tool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-output-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Output Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-development-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Development Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Development Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaboration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-troubleshooting-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Troubleshooting Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Troubleshooting Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-production-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Production Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Production Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-current-framework-status-june-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Current Framework Status ✅ JUNE 2025
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Current Framework Status ✅ JUNE 2025">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-frameworks-all-v20250614" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Frameworks (All v2025.06.14)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infrastructure Status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-integration-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Integration Points
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Integration Points">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#application-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-migration-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Migration History
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Migration History">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-establish-database-authority-completed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Establish Database Authority ✅ COMPLETED
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-migrate-to-v20-specification-completed-june-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Migrate to v2.0 Specification ✅ COMPLETED (June 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-enhanced-framework-standards-partially-completed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Enhanced Framework Standards ✅ PARTIALLY COMPLETED
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-reference-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Reference Information
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Reference Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-database-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Database Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-related-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Related Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-contact-and-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Contact and Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="framework-development-and-maintenance-process">Framework Development and Maintenance Process</h1>
+<p><strong>The Definitive Guide to Framework Development, Quality Assurance, and Production Management</strong></p>
+<p><em>Last Updated: June 14, 2025</em><br />
+<em>Current Framework Standard: v2025.06.14 with WCAG AA Compliance</em></p>
+<hr />
+<h2 id="table-of-contents">📋 <strong>Table of Contents</strong></h2>
+<ol>
+<li><a href="#1-architecture-overview">Architecture Overview</a></li>
+<li><a href="#2-development-lifecycle">Development Lifecycle</a></li>
+<li><a href="#3-standards-and-requirements">Standards and Requirements</a></li>
+<li><a href="#4-tools-and-workflows">Tools and Workflows</a></li>
+<li><a href="#5-production-management">Production Management</a></li>
+<li><a href="#6-reference-information">Reference Information</a></li>
+</ol>
+<hr />
+<h2 id="1-architecture-overview"><strong>1. Architecture Overview</strong></h2>
+<h3 id="database-first-source-of-truth-architecture"><strong>Database-First Source of Truth Architecture</strong></h3>
+<p><strong>Core Principle</strong>: Database = Source of Truth | Filesystem = Development Workspace</p>
+<h4 id="why-database-first"><strong>Why Database-First:</strong></h4>
+<ul>
+<li>✅ <strong>Versioning</strong>: Built-in version control with timestamps and provenance</li>
+<li>✅ <strong>Integration</strong>: Already connected to analysis pipeline</li>
+<li>✅ <strong>Consistency</strong>: Single source used by all application components</li>
+<li>✅ <strong>Backup/Recovery</strong>: Part of database backup strategy</li>
+<li>✅ <strong>Concurrent access</strong>: Multiple developers can work safely</li>
+<li>✅ <strong>Validation</strong>: Schema enforcement and consistency checks</li>
+<li>✅ <strong>Metadata</strong>: Rich metadata (creator, validation status, usage stats)</li>
+</ul>
+<h4 id="filesystem-development-workspace-role"><strong>Filesystem Development Workspace Role:</strong></h4>
+<ul>
+<li>🔧 <strong>Development workspace</strong>: Edit and test new framework versions</li>
+<li>🔧 <strong>Import/Export</strong>: Tools to sync with database when ready</li>
+<li>🔧 <strong>Version control</strong>: Git tracks development history and collaboration</li>
+<li>🔧 <strong>Documentation</strong>: README files and development notes</li>
+<li>🔧 <strong>Validation</strong>: Test frameworks before importing to database</li>
+</ul>
+<h4 id="development-cycle-architecture"><strong>Development Cycle Architecture</strong></h4>
+<pre><code class="language-mermaid">graph TD
+    A[Database&lt;br/&gt;Source of Truth] --&gt;|export| B[Filesystem&lt;br/&gt;Development]
+    B --&gt;|edit &amp; test| C[Modified Framework]
+    C --&gt;|validate| D{Valid?}
+    D --&gt;|No| B
+    D --&gt;|Yes| E[Import to Database]
+    E --&gt; A
+
+    F[New Framework] --&gt; B
+    G[Git Collaboration] --&gt; B
+    B --&gt; G
+</code></pre>
+<hr />
+<h2 id="2-development-lifecycle"><strong>2. Development Lifecycle</strong></h2>
+<h3 id="21-creating-new-framework"><strong>2.1 Creating New Framework</strong></h3>
+<pre><code class="language-bash"># 1. Create framework files in filesystem
+mkdir frameworks/new_framework
+cd frameworks/new_framework
+
+# 2. Create framework files following v2.0 specification
+# - framework.json (uses &quot;framework_name&quot; field, not &quot;name&quot;)
+# - dipoles.json, weights.json
+# - Include accessibility-compliant colors
+
+# 3. Comprehensive validation
+python scripts/framework_sync.py validate new_framework  # v2.0 schema validation
+python scripts/optimize_framework_colors.py --report-only # Color accessibility check
+
+# 4. Import with quality assurance
+python scripts/framework_sync.py import new_framework
+</code></pre>
+<h3 id="22-modifying-existing-framework"><strong>2.2 Modifying Existing Framework</strong></h3>
+<pre><code class="language-bash"># 1. Export current version from database to filesystem
+python scripts/framework_sync.py export existing_framework
+
+# 2. Edit files in filesystem
+# - Make changes to framework.json, dipoles.json, weights.json
+# - Update version number
+# - Document changes in development notes
+
+# 3. Validate changes
+python scripts/framework_sync.py validate existing_framework
+
+# 4. Import new version to database
+python scripts/framework_sync.py import existing_framework
+</code></pre>
+<h3 id="23-color-optimization-workflow-enhanced-process"><strong>2.3 Color Optimization Workflow</strong> ✅ <strong>ENHANCED PROCESS</strong></h3>
+<pre><code class="language-bash"># 1. Optimize framework colors for accessibility and academic standards
+python scripts/optimize_framework_colors.py --dry-run  # Preview changes
+python scripts/optimize_framework_colors.py           # Apply optimizations
+
+# 2. Update version numbers to reflect color changes
+# (automatically handled by optimization script)
+
+# 3. Synchronize to database
+python scripts/framework_sync.py migrate-all
+
+# 4. Verify accessibility compliance
+python scripts/framework_sync.py validate framework_name
+</code></pre>
+<p><strong>Color Optimization Features:</strong>
+- <strong>WCAG AA Compliance</strong>: All colors pass 4.5:1 contrast ratio requirements
+- <strong>Academic Publication Ready</strong>: Journal-compatible colors with grayscale print optimization
+- <strong>Framework-Specific Rationales</strong>: Each framework has optimized color choices with theoretical justification
+- <strong>Consistency</strong>: Coherent visual identity while maintaining framework distinctions</p>
+<h3 id="24-quality-assured-development-process"><strong>2.4 Quality-Assured Development Process</strong></h3>
+<p><strong>Development Standards:</strong>
+- <strong>v2.0 Schema Compliance</strong>: Proper framework_name field and structure
+- <strong>Color Accessibility</strong>: WCAG AA compliant color schemes
+- <strong>Academic Standards</strong>: Publication-ready visualization requirements
+- <strong>Validation Pipeline</strong>: 3-tier validation (Schema, Semantic, Academic)</p>
+<hr />
+<h2 id="3-standards-and-requirements"><strong>3. Standards and Requirements</strong></h2>
+<h3 id="31-framework-structure-requirements-v20-specification"><strong>3.1 Framework Structure Requirements (v2.0 Specification)</strong></h3>
+<p><strong>Required Fields:</strong></p>
+<pre><code class="language-json">{
+  &quot;framework_name&quot;: &quot;framework_name&quot;,        // NOT &quot;name&quot; (legacy)
+  &quot;display_name&quot;: &quot;Framework Display Name&quot;,
+  &quot;version&quot;: &quot;v2025.06.14&quot;,
+  &quot;description&quot;: &quot;Framework description&quot;,
+  &quot;coordinate_system&quot;: { ... },
+  &quot;positioning_strategy&quot;: { ... },
+  &quot;wells&quot;: { ... },
+  &quot;well_type_colors&quot;: {                      // WCAG AA compliant
+    &quot;integrative&quot;: &quot;#2E7D32&quot;,
+    &quot;disintegrative&quot;: &quot;#C62828&quot;
+  },
+  &quot;theoretical_foundation&quot;: { ... },
+  &quot;compatibility&quot;: { ... },
+  &quot;last_modified&quot;: &quot;2025-06-14T13:31:04.925899&quot;
+}
+</code></pre>
+<h3 id="32-academic-publication-requirements"><strong>3.2 Academic Publication Requirements</strong></h3>
+<p><strong>Color Accessibility Standards:</strong>
+- <strong>WCAG AA Compliance</strong>: 4.5:1 contrast ratio minimum for all framework colors
+- <strong>Colorblind Compatibility</strong>: Deuteranopia/Protanopia safe color choices
+- <strong>Grayscale Rendering</strong>: Colors distinguishable when printed in black and white
+- <strong>Journal Compatibility</strong>: Colors meet requirements for major academic journals</p>
+<p><strong>Framework Color Assignments (Current Standards):</strong>
+- <strong>civic_virtue</strong>: Green/red (#2E7D32/#C62828) - classic virtue/vice clarity
+- <strong>political_spectrum</strong>: Blue/red (#1565C0/#B71C1C) - improved accessibility over previous blue
+- <strong>fukuyama_identity</strong>: Teal/red (#00695C/#C62828) - identity distinction from civic virtue
+- <strong>mft_persuasive_force</strong>: Green/red (#2E7D32/#C62828) - maintains MFT theoretical foundations
+- <strong>moral_rhetorical_posture</strong>: Purple/red (#4A148C/#C62828) - rhetorical distinction</p>
+<h3 id="33-version-management-standards"><strong>3.3 Version Management Standards</strong></h3>
+<ul>
+<li><strong>Date-based versioning</strong>: <code>v2025.06.14</code> for major updates (current standard)</li>
+<li><strong>Semantic versioning</strong>: <code>v1.0</code>, <code>v1.1</code>, <code>v2.0</code> for logical increments</li>
+<li><strong>Color optimization versions</strong>: New versions created when colors are optimized</li>
+<li><strong>Schema updates</strong>: Version increments for structural changes</li>
+</ul>
+<h3 id="34-validation-statuses"><strong>3.4 Validation Statuses</strong></h3>
+<ul>
+<li><strong>draft</strong>: Newly created, not yet tested</li>
+<li><strong>tested</strong>: Has been used in analysis runs</li>
+<li><strong>validated</strong>: Passed formal validation (v2.0 spec compliance)</li>
+<li><strong>deprecated</strong>: Superseded by newer version</li>
+</ul>
+<hr />
+<h2 id="4-tools-and-workflows"><strong>4. Tools and Workflows</strong></h2>
+<h3 id="41-framework-sync-tool"><strong>4.1 Framework Sync Tool</strong></h3>
+<p>The <code>scripts/framework_sync.py</code> tool manages the relationship between filesystem and database:</p>
+<h4 id="commands"><strong>Commands</strong></h4>
+<pre><code class="language-bash"># Show synchronization status
+python scripts/framework_sync.py status
+
+# Export framework from database to filesystem
+python scripts/framework_sync.py export framework_name [--version v1.0]
+
+# Import framework from filesystem to database
+python scripts/framework_sync.py import framework_name [--force]
+
+# Validate framework files in filesystem
+python scripts/framework_sync.py validate framework_name
+
+# Migrate all frameworks to v2.0 specification
+python scripts/framework_sync.py migrate-all
+</code></pre>
+<h4 id="status-output-example"><strong>Status Output Example</strong></h4>
+<pre><code>🔄 Framework Synchronization Status
+==================================================
+
+📁 Filesystem: 5 frameworks
+🗄️  Database: 5 framework versions
+
+📁 Filesystem Frameworks (Development Workspace):
+   📄 civic_virtue:v2025.06.14 (hash:3bdb3d40, modified:2025-06-14 13:31)
+   📄 political_spectrum:v2025.06.14 (hash:befcd111, modified:2025-06-14 13:31)
+
+🗄️  Database Frameworks (Source of Truth):
+   ✅ civic_virtue:v2025.06.14 (validated, created:2025-06-14 14:48)
+   ✅ political_spectrum:v2025.06.14 (validated, created:2025-06-14 14:49)
+
+🔍 Sync Analysis:
+   ✅ All frameworks are in sync!
+</code></pre>
+<h3 id="42-development-best-practices"><strong>4.2 Development Best Practices</strong></h3>
+<h4 id="development-workflow"><strong>Development Workflow</strong></h4>
+<ol>
+<li><strong>Always check sync status</strong> before starting work</li>
+<li><strong>Export before editing</strong> existing frameworks</li>
+<li><strong>Validate before importing</strong> new versions</li>
+<li><strong>Use descriptive version numbers</strong> (semantic versioning)</li>
+<li><strong>Document changes</strong> in framework description</li>
+<li><strong>Test frameworks</strong> before marking as validated</li>
+</ol>
+<h4 id="collaboration"><strong>Collaboration</strong></h4>
+<ul>
+<li><strong>Git tracks filesystem changes</strong> for collaboration</li>
+<li><strong>Database provides deployment consistency</strong></li>
+<li><strong>Use branches</strong> for experimental framework development</li>
+<li><strong>Merge to main</strong> only after validation</li>
+</ul>
+<h3 id="43-troubleshooting-guide"><strong>4.3 Troubleshooting Guide</strong></h3>
+<h4 id="common-issues"><strong>Common Issues</strong></h4>
+<p><strong>"Framework validation failed - missing 'name' field"</strong></p>
+<pre><code class="language-bash"># This error indicates legacy validation logic
+# Framework should use &quot;framework_name&quot; not &quot;name&quot; (v2.0 spec)
+# Check framework.json structure:
+grep -n &quot;framework_name\|\&quot;name\&quot;&quot; frameworks/framework_name/framework.json
+</code></pre>
+<p><strong>"Color accessibility validation failed"</strong></p>
+<pre><code class="language-bash"># Run color optimization to fix accessibility issues
+python scripts/optimize_framework_colors.py framework_name
+</code></pre>
+<p><strong>"Framework version conflicts after color optimization"</strong></p>
+<pre><code class="language-bash"># Color optimization automatically updates version numbers
+# Check sync status and migrate if needed
+python scripts/framework_sync.py status
+python scripts/framework_sync.py import framework_name --force
+</code></pre>
+<p><strong>"Schema validation failed"</strong></p>
+<pre><code class="language-bash"># Ensure framework follows v2.0 specification
+python scripts/framework_sync.py validate framework_name
+
+# Use migration tool if needed
+python scripts/migrate_frameworks_to_v2.py framework_name
+</code></pre>
+<hr />
+<h2 id="5-production-management"><strong>5. Production Management</strong></h2>
+<h3 id="51-current-framework-status-june-2025"><strong>5.1 Current Framework Status</strong> ✅ <strong>JUNE 2025</strong></h3>
+<h4 id="production-frameworks-all-v20250614"><strong>Production Frameworks (All v2025.06.14)</strong></h4>
+<ul>
+<li>✅ <strong>civic_virtue</strong>: WCAG AA compliant, v2.0 schema, fully operational</li>
+<li>✅ <strong>political_spectrum</strong>: WCAG AA compliant, v2.0 schema, fully operational  </li>
+<li>✅ <strong>fukuyama_identity</strong>: WCAG AA compliant, v2.0 schema, fully operational</li>
+<li>✅ <strong>mft_persuasive_force</strong>: WCAG AA compliant, v2.0 schema, fully operational</li>
+<li>✅ <strong>moral_rhetorical_posture</strong>: WCAG AA compliant, v2.0 schema, fully operational</li>
+</ul>
+<h4 id="infrastructure-status"><strong>Infrastructure Status</strong></h4>
+<ul>
+<li>✅ <strong>Database Synchronization</strong>: All frameworks synced to v2025.06.14</li>
+<li>✅ <strong>Validation System</strong>: Updated for v2.0 schema compliance</li>
+<li>✅ <strong>Color Optimization</strong>: WCAG AA accessibility compliance achieved</li>
+<li>✅ <strong>Quality Assurance</strong>: 6-layer validation system integrated</li>
+<li>✅ <strong>Academic Standards</strong>: Publication-ready visualization requirements met</li>
+</ul>
+<h3 id="52-integration-points"><strong>5.2 Integration Points</strong></h3>
+<h4 id="application-usage"><strong>Application Usage</strong></h4>
+<pre><code class="language-python"># CORRECT: Load from database (source of truth)
+from narrative_gravity.models.component_models import FrameworkVersion
+
+session = Session()
+framework = session.query(FrameworkVersion).filter_by(
+    framework_name=&quot;civic_virtue&quot;,
+    validation_status=&quot;validated&quot;
+).order_by(FrameworkVersion.created_at.desc()).first()
+
+# DEPRECATED: Direct filesystem loading
+# with open('frameworks/civic_virtue/framework.json') as f:
+#     framework = json.load(f)
+</code></pre>
+<h4 id="analysis-pipeline"><strong>Analysis Pipeline</strong></h4>
+<p>The analysis pipeline automatically uses the latest validated framework version from the database, ensuring consistency across all runs.</p>
+<h4 id="api-endpoints"><strong>API Endpoints</strong></h4>
+<p>Framework management API endpoints use database as source:
+- <code>GET /api/frameworks</code> - List all framework versions
+- <code>GET /api/frameworks/{name}/latest</code> - Get latest version
+- <code>POST /api/frameworks/{name}/validate</code> - Validate framework</p>
+<h3 id="53-migration-history"><strong>5.3 Migration History</strong></h3>
+<h4 id="phase-1-establish-database-authority-completed"><strong>Phase 1: Establish Database Authority</strong> ✅ <strong>COMPLETED</strong></h4>
+<ul>
+<li>✅ Create framework sync tool</li>
+<li>✅ Populate database with existing frameworks</li>
+<li>✅ Establish clear workflow documentation</li>
+</ul>
+<h4 id="phase-2-migrate-to-v20-specification-completed-june-2025"><strong>Phase 2: Migrate to v2.0 Specification</strong> ✅ <strong>COMPLETED</strong> (June 2025)</h4>
+<ul>
+<li>✅ <strong>All 5 frameworks migrated</strong> to v2.0 spec (v2025.06.14)</li>
+<li>✅ <strong>Validation system updated</strong> to v2.0 schema (framework_name field)</li>
+<li>✅ <strong>Color optimization implemented</strong> with WCAG AA compliance</li>
+<li>✅ <strong>Database synchronization</strong> fully operational</li>
+<li>✅ <strong>Quality assurance integration</strong> with 6-layer validation system</li>
+</ul>
+<h4 id="phase-3-enhanced-framework-standards-partially-completed"><strong>Phase 3: Enhanced Framework Standards</strong> ✅ <strong>PARTIALLY COMPLETED</strong></h4>
+<ul>
+<li>✅ <strong>Academic accessibility standards</strong> (WCAG AA compliance)</li>
+<li>✅ <strong>Production validation pipeline</strong> operational</li>
+<li>✅ <strong>Color optimization workflow</strong> established</li>
+<li>🔄 <strong>Community contribution guidelines</strong> (planned)</li>
+<li>🔄 <strong>Framework lifecycle management</strong> (in development)</li>
+</ul>
+<hr />
+<h2 id="6-reference-information"><strong>6. Reference Information</strong></h2>
+<h3 id="61-database-schema"><strong>6.1 Database Schema</strong></h3>
+<p>Frameworks are stored in the <code>framework_versions</code> table with complete metadata:</p>
+<pre><code class="language-sql">CREATE TABLE framework_versions (
+    id VARCHAR(36) PRIMARY KEY,
+    framework_name VARCHAR(100) NOT NULL,
+    version VARCHAR(20) NOT NULL,
+    dipoles_json JSON NOT NULL,
+    framework_json JSON NOT NULL,
+    weights_json JSON NOT NULL,
+    description TEXT,
+    theoretical_foundation TEXT,
+    created_by INTEGER REFERENCES user(id),
+    created_at TIMESTAMP DEFAULT NOW(),
+    parent_version_id VARCHAR(36) REFERENCES framework_versions(id),
+    usage_count INTEGER DEFAULT 0,
+    validation_status VARCHAR(20) DEFAULT 'draft',
+    UNIQUE(framework_name, version)
+);
+</code></pre>
+<h3 id="62-related-documentation"><strong>6.2 Related Documentation</strong></h3>
+<ul>
+<li><strong>Implementation Status</strong>: <code>docs/specifications/IMPLEMENTATION_STATUS.md</code></li>
+<li><strong>Migration Summary</strong>: <code>docs/specifications/FRAMEWORK_MIGRATION_V2_SUMMARY.md</code></li>
+<li><strong>Framework Architecture</strong>: <code>docs/architecture/FRAMEWORK_ARCHITECTURE.md</code></li>
+<li><strong>Project Structure</strong>: <code>docs/architecture/PROJECT_STRUCTURE.md</code></li>
+</ul>
+<h3 id="63-contact-and-support"><strong>6.3 Contact and Support</strong></h3>
+<ul>
+<li><strong>Framework Issues</strong>: Use GitHub issues with <code>framework</code> label</li>
+<li><strong>Development Questions</strong>: Reference this document and related architecture docs</li>
+<li><strong>Migration Support</strong>: Contact development team with specific framework migration needs</li>
+</ul>
+<hr />
+<p><strong>This comprehensive guide ensures consistent, traceable, and collaborative framework development while maintaining development flexibility and academic rigor.</strong></p>
+<p><em>Document maintained by: Narrative Gravity Development Team</em><br />
+<em>Next Review: After community contribution guidelines implementation</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,700 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Research input workflow - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#please-generate-a-technical-workflow-narrative-and-diagram-that-illustrates-the-iterative-experimentation-plumbing-involved-in-the-phase-1-and-phase-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Research input workflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/></p>
+<h1 id="please-generate-a-technical-workflow-narrative-and-diagram-that-illustrates-the-iterative-experimentation-plumbing-involved-in-the-phase-1-and-phase-2">Please generate a technical workflow narrative and diagram that illustrates the iterative experimentation plumbing involved in the phase 1 and phase 2.</h1>
+<p>🧠 <strong>Technical Workflow Overview:</strong></p>
+<ul>
+<li>Iterative three-pillar system with systematic feedback loops for component optimization</li>
+<li>Database-centric version control enabling rapid experimentation and rollback capabilities</li>
+<li>CLI orchestration providing statistical validation pipeline for manual development decisions</li>
+<li>Academic tool integration ensuring publication-ready analysis throughout development process</li>
+<li>Comprehensive provenance tracking supporting academic reproducibility requirements</li>
+</ul>
+<h1 id="technical-workflow-narrative-iterative-experimentation-infrastructure">Technical Workflow Narrative: Iterative Experimentation Infrastructure</h1>
+<h2 id="phase-1-2-systematic-component-development-and-validation-pipeline"><strong>Phase 1 \&amp; 2: Systematic Component Development and Validation Pipeline</strong></h2>
+<h3 id="core-technical-architecture"><strong>Core Technical Architecture</strong></h3>
+<p>The iterative experimentation system operates through three integrated layers that form continuous feedback loops: <strong>Manual Development Layer</strong> (structured LLM interaction), <strong>CLI Orchestration Layer</strong> (systematic testing and analysis), and <strong>Academic Validation Layer</strong> (statistical rigor and documentation). Each iteration cycle generates versioned components, experimental data, and statistical insights that inform subsequent development decisions.</p>
+<h3 id="iteration-cycle-technical-flow"><strong>Iteration Cycle Technical Flow</strong></h3>
+<p><strong>Development Session Initialization</strong>
+Each experimentation cycle begins with structured session initialization through the CLI:</p>
+<pre><code class="language-bash">python start_dev_session.py \
+  --component-type framework \
+  --base-version civic_virtue:v1.0 \
+  --objective &quot;resolve_compression_extremes&quot; \
+  --hypothesis &quot;enhanced_dipole_specificity&quot;
+</code></pre>
+<p>This creates a database record in <code>development_sessions</code> table, establishing experimental provenance and linking to parent component versions. The system generates structured seed prompts based on component type and development objective, ensuring consistent methodological approach across researchers and sessions.</p>
+<p><strong>Manual Component Development</strong>
+Researchers engage with LLM interfaces (Claude/GPT-4) using standardized seed prompts that encode best practices for each component type. Development conversations are guided by explicit success criteria (CV &lt; 0.20, hierarchy detection, theoretical coherence) while maintaining conversational flexibility for hypothesis exploration.</p>
+<p><strong>Component Versioning and Storage</strong>
+Successful development sessions generate new component versions stored in PostgreSQL with complete metadata:</p>
+<pre><code class="language-sql">INSERT INTO framework_versions (
+    framework_name, version, dipoles_json, framework_json,
+    description, parent_version_id, development_session_id
+) VALUES (
+    'civic_virtue', 'v1.1', {...}, {...},
+    'Enhanced dipole specificity for compression resolution', 
+    parent_id, session_id
+);
+</code></pre>
+<p><strong>Systematic CLI Testing Pipeline</strong>
+New component versions trigger systematic testing through enhanced CLI infrastructure:</p>
+<pre><code class="language-bash">python test_component_version.py \
+  --component framework:civic_virtue:v1.1 \
+  --test-corpus synthetic_narratives.jsonl \
+  --baseline-version v1.0 \
+  --metrics cv,hierarchy_score,dominance_detection \
+  --runs 5
+</code></pre>
+<p>This executes controlled A/B testing between component versions using your existing multi-LLM infrastructure, generating statistical comparisons and performance metrics stored in the <code>experiments</code> and <code>runs</code> tables.</p>
+<p><strong>Academic Statistical Analysis</strong>
+CLI testing results automatically trigger academic tool integration through data export pipelines:</p>
+<pre><code class="language-python"># Automated Jupyter notebook generation
+python generate_analysis_notebook.py \
+  --experiment-data component_test_results.json \
+  --analysis-type version_comparison \
+  --statistical-tests t_test,effect_size,confidence_intervals
+</code></pre>
+<p>This creates publication-ready statistical analysis using Cursor-generated Jupyter notebooks, R scripts, and Stata integration, providing immediate feedback on component improvement effectiveness.</p>
+<p><strong>Feedback Loop Integration</strong>
+Statistical results inform subsequent development decisions through automated insights generation:</p>
+<ul>
+<li><strong>Performance Metrics</strong>: CV improvements, effect sizes, statistical significance</li>
+<li><strong>Compatibility Analysis</strong>: Cross-component interaction effects and optimization opportunities</li>
+<li><strong>Quality Indicators</strong>: Framework fit detection, outlier identification, and corpus quality assessment</li>
+<li><strong>Academic Readiness</strong>: Publication-standard statistical validation and documentation compliance</li>
+</ul>
+<h2 id="technical-workflow-diagram"><strong>Technical Workflow Diagram</strong></h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           ITERATIVE EXPERIMENTATION PIPELINE                    │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+MANUAL DEVELOPMENT LAYER
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  Development    │    │   Structured    │    │   Component     │
+│  Session Init   │───▶│   LLM Sessions  │───▶│   Refinement    │
+│  (CLI Trigger)  │    │  (Seed Prompts) │    │  (Hypothesis    │
+└─────────────────┘    └─────────────────┘    │   Testing)      │
+         │                       │             └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     DATABASE LAYER                              │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐  │
+│  │ development_    │  │ component_      │  │ component_     │  │
+│  │ sessions        │  │ versions        │  │ compatibility  │  │
+│  │ • hypothesis    │  │ • prompt_temps  │  │ • performance  │  │
+│  │ • objectives    │  │ • frameworks    │  │ • validation   │  │
+│  │ • provenance    │  │ • weightings    │  │ • matrices     │  │
+│  └─────────────────┘  └─────────────────┘  └────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+CLI ORCHESTRATION LAYER
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Component     │    │   Batch Multi-  │    │   Statistical   │
+│   Testing       │───▶│   Component     │───▶│   Analysis      │
+│   Pipeline      │    │   Analysis      │    │   Pipeline      │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                EXPERIMENTAL DATA LAYER                          │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐  │
+│  │ experiments     │  │ runs            │  │ statistical_   │  │
+│  │ • component_ids │  │ • cv_values     │  │ results        │  │
+│  │ • configurations│  │ • llm_outputs   │  │ • effect_sizes │  │
+│  │ • provenance    │  │ • timestamps    │  │ • significance │  │
+│  └─────────────────┘  └─────────────────┘  └────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+ACADEMIC VALIDATION LAYER
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Data Export   │    │   Statistical   │    │  Replication    │
+│   Pipeline      │───▶│   Analysis      │───▶│  Package        │
+│   (CSV/R/Stata) │    │  (Jupyter/R)    │    │  Generation     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 │
+                                 ▼
+         ┌─────────────────────────────────────────────────┐
+         │              FEEDBACK INTEGRATION               │
+         │  ┌─────────────────┐    ┌─────────────────┐     │
+         │  │   Performance   │    │   Development   │     │
+         │  │   Insights      │───▶│   Decision      │     │
+         │  │   Generation    │    │   Support       │     │
+         │  └─────────────────┘    └─────────────────┘     │
+         └─────────────────────────────────────────────────┘
+                                 │
+                                 │ ITERATION TRIGGER
+                                 ▼
+         ┌─────────────────────────────────────────────────┐
+         │              NEXT ITERATION CYCLE               │
+         │         (Based on Statistical Feedback)         │
+         └─────────────────────────────────────────────────┘
+</code></pre>
+<h2 id="phase-specific-technical-implementation"><strong>Phase-Specific Technical Implementation</strong></h2>
+<h3 id="phase-1-foundation-infrastructure-weeks-1-2"><strong>Phase 1: Foundation Infrastructure (Weeks 1-2)</strong></h3>
+<p><strong>Database Schema Extensions</strong></p>
+<pre><code class="language-sql">-- Component versioning with complete provenance
+CREATE TABLE component_versions (
+    id UUID PRIMARY KEY,
+    component_type VARCHAR(50) NOT NULL, -- 'prompt', 'framework', 'weighting'
+    name VARCHAR(100) NOT NULL,
+    version VARCHAR(20) NOT NULL,
+    content JSONB NOT NULL,
+    parent_version_id UUID REFERENCES component_versions(id),
+    development_session_id UUID REFERENCES development_sessions(id),
+    performance_metrics JSONB,
+    created_at TIMESTAMP DEFAULT NOW(),
+    UNIQUE(component_type, name, version)
+);
+
+-- Development session tracking with hypothesis management
+CREATE TABLE development_sessions (
+    id UUID PRIMARY KEY,
+    component_type VARCHAR(50) NOT NULL,
+    objective TEXT NOT NULL,
+    hypothesis TEXT NOT NULL,
+    base_version_id UUID REFERENCES component_versions(id),
+    resulting_version_id UUID REFERENCES component_versions(id),
+    session_metadata JSONB,
+    performance_delta JSONB,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+</code></pre>
+<p><strong>CLI Infrastructure Components</strong></p>
+<pre><code class="language-python">class ComponentVersionManager:
+    &quot;&quot;&quot;Systematic component version control with experimental tracking&quot;&quot;&quot;
+
+    def create_development_session(self, component_type, objective, hypothesis, base_version):
+        &quot;&quot;&quot;Initialize structured development session with database tracking&quot;&quot;&quot;
+        session = {
+            'component_type': component_type,
+            'objective': objective,
+            'hypothesis': hypothesis,
+            'base_version_id': base_version,
+            'seed_prompt': self.generate_seed_prompt(component_type, objective)
+        }
+        return self.db.insert_development_session(session)
+
+    def create_component_version(self, session_id, new_content, performance_metrics):
+        &quot;&quot;&quot;Generate new component version from development session&quot;&quot;&quot;
+        version = self.increment_version(session.base_version)
+        component = {
+            'version': version,
+            'content': new_content,
+            'session_id': session_id,
+            'metrics': performance_metrics
+        }
+        return self.db.insert_component_version(component)
+</code></pre>
+<h3 id="phase-2-validation-infrastructure-weeks-3-4"><strong>Phase 2: Validation Infrastructure (Weeks 3-4)</strong></h3>
+<p><strong>Systematic Testing Pipeline</strong></p>
+<pre><code class="language-python">class ExperimentalValidationPipeline:
+    &quot;&quot;&quot;Comprehensive component testing with statistical analysis&quot;&quot;&quot;
+
+    def execute_component_comparison(self, new_version, baseline_version, test_corpus):
+        &quot;&quot;&quot;A/B testing framework for component version validation&quot;&quot;&quot;
+
+        # Generate experimental matrix
+        experiment_config = {
+            'versions': [new_version, baseline_version],
+            'corpus': test_corpus,
+            'runs_per_version': 5,
+            'models': ['gpt-4o', 'claude-3.5-sonnet'],
+            'metrics': ['cv', 'hierarchy_score', 'dominance_detection']
+        }
+
+        # Execute systematic analysis
+        results = self.batch_analyzer.execute_experiment_matrix(experiment_config)
+
+        # Statistical validation
+        statistical_analysis = self.generate_statistical_comparison(results)
+
+        # Academic documentation
+        replication_package = self.generate_replication_materials(
+            experiment_config, results, statistical_analysis
+        )
+
+        return {
+            'experimental_results': results,
+            'statistical_analysis': statistical_analysis,
+            'replication_package': replication_package
+        }
+</code></pre>
+<p><strong>Academic Tool Integration Pipeline</strong></p>
+<pre><code class="language-python">class AcademicAnalysisIntegrator:
+    &quot;&quot;&quot;Automated statistical analysis through academic tools&quot;&quot;&quot;
+
+    def generate_jupyter_analysis(self, experimental_data, analysis_type):
+        &quot;&quot;&quot;Cursor-assisted Jupyter notebook generation for statistical analysis&quot;&quot;&quot;
+
+        notebook_template = f&quot;&quot;&quot;
+        # Component Version Comparison Analysis
+
+        ## Experimental Setup
+        - Baseline: {experimental_data['baseline_version']}
+        - Test Version: {experimental_data['test_version']}
+        - Corpus: {experimental_data['corpus_info']}
+
+        ## Statistical Analysis
+        {self.cursor_ai.generate_statistical_code(experimental_data, analysis_type)}
+
+        ## Results Interpretation
+        {self.cursor_ai.generate_results_interpretation(experimental_data)}
+        &quot;&quot;&quot;
+
+        return self.save_notebook(notebook_template, experimental_data['experiment_id'])
+
+    def export_for_stata_analysis(self, experimental_data):
+        &quot;&quot;&quot;Publication-grade statistical analysis preparation&quot;&quot;&quot;
+        stata_data = self.format_for_stata(experimental_data)
+        stata_script = self.cursor_ai.generate_stata_analysis(experimental_data)
+
+        return {
+            'data_file': stata_data,
+            'analysis_script': stata_script,
+            'variable_codebook': self.generate_codebook(experimental_data)
+        }
+</code></pre>
+<h2 id="feedback-loop-technical-implementation"><strong>Feedback Loop Technical Implementation</strong></h2>
+<h3 id="performance-monitoring-and-decision-support"><strong>Performance Monitoring and Decision Support</strong></h3>
+<pre><code class="language-python">class IterationFeedbackSystem:
+    &quot;&quot;&quot;Systematic feedback generation for development decision support&quot;&quot;&quot;
+
+    def analyze_development_effectiveness(self, session_id):
+        &quot;&quot;&quot;Generate insights from development session outcomes&quot;&quot;&quot;
+
+        session_data = self.db.get_development_session(session_id)
+        performance_data = self.db.get_performance_metrics(session_id)
+
+        feedback = {
+            'hypothesis_validation': self.validate_hypothesis(session_data, performance_data),
+            'effect_size_analysis': self.calculate_effect_sizes(performance_data),
+            'next_iteration_suggestions': self.generate_next_steps(session_data, performance_data),
+            'component_compatibility': self.assess_cross_component_effects(session_id)
+        }
+
+        return feedback
+
+    def trigger_next_iteration(self, feedback_analysis):
+        &quot;&quot;&quot;Automated iteration cycle initiation based on statistical feedback&quot;&quot;&quot;
+
+        if feedback_analysis['effect_size'] &gt; 0.5:  # Large effect size
+            return self.suggest_refinement_iteration(feedback_analysis)
+        elif feedback_analysis['hypothesis_validation'] == 'rejected':
+            return self.suggest_pivot_iteration(feedback_analysis)
+        else:
+            return self.suggest_alternative_approach(feedback_analysis)
+</code></pre>
+<p>This technical workflow infrastructure ensures that each development iteration is systematically tracked, statistically validated, and academically documented while maintaining the conversational flexibility essential for innovative component development. The integrated feedback loops enable rapid iteration while preserving complete experimental provenance for academic publication requirements.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

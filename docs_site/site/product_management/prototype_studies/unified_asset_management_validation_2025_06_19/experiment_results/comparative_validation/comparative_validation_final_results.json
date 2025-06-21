@@ -1,0 +1,558 @@
+{
+  "experiment_meta": {
+    "name": "dipole_vs_non_dipole_validation_study",
+    "display_name": "Dipole vs Non-Dipole Framework Validation Study",
+    "version": "v1.0",
+    "description": "Comparative validation study testing the effectiveness of dipole-based frameworks (IDITI) versus non-dipole frameworks (Three Wells Political) on a categorized validation corpus. Tests both framework types on identical texts to measure methodological effectiveness and academic credibility.\n",
+    "academic_purpose": "Framework validation for expert consultation and publication",
+    "created_date": "2025-06-19T16:30:00.000000",
+    "expected_duration": "15-20 minutes",
+    "estimated_cost": "$5-8"
+  },
+  "execution_start": "2025-06-19T16:00:17.291508",
+  "phases": {
+    "phase_1": {
+      "phase_name": "phase_1",
+      "framework": "iditi",
+      "start_time": "2025-06-19T16:00:17.291616",
+      "analyses": [
+        {
+          "analysis_metadata": {
+            "text_id": "conservative_dignity_john_mccain_2008_concession_speech",
+            "framework": "iditi",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "Dignity": 0.8,
+            "Tribalism": 0.2
+          },
+          "analysis_summary": {
+            "primary_orientation": "Dignity",
+            "secondary_themes": [
+              "Tribalism"
+            ],
+            "overall_assessment": "Simulated analysis of conservative_dignity_john_mccain_2008_concession_speech using iditi"
+          },
+          "justifications": {
+            "Dignity": "Strong evidence of Dignity themes in conservative_dignity_john_mccain_2008_concession_speech (score: 0.8)",
+            "Tribalism": "Minimal Tribalism orientation detected in conservative_dignity_john_mccain_2008_concession_speech (score: 0.2)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/conservative_dignity/john_mccain_2008_concession_speech.txt",
+          "category": "conservative_dignity"
+        },
+        {
+          "analysis_metadata": {
+            "text_id": "conservative_dignity_rick_perry_2016_alec_speech",
+            "framework": "iditi",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "Dignity": 0.8,
+            "Tribalism": 0.2
+          },
+          "analysis_summary": {
+            "primary_orientation": "Dignity",
+            "secondary_themes": [
+              "Tribalism"
+            ],
+            "overall_assessment": "Simulated analysis of conservative_dignity_rick_perry_2016_alec_speech using iditi"
+          },
+          "justifications": {
+            "Dignity": "Strong evidence of Dignity themes in conservative_dignity_rick_perry_2016_alec_speech (score: 0.8)",
+            "Tribalism": "Minimal Tribalism orientation detected in conservative_dignity_rick_perry_2016_alec_speech (score: 0.2)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/conservative_dignity/rick_perry_2016_alec_speech.txt",
+          "category": "conservative_dignity"
+        },
+        {
+          "analysis_metadata": {
+            "text_id": "progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally",
+            "framework": "iditi",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "Dignity": 0.3,
+            "Tribalism": 0.7
+          },
+          "analysis_summary": {
+            "primary_orientation": "Tribalism",
+            "secondary_themes": [
+              "Dignity"
+            ],
+            "overall_assessment": "Simulated analysis of progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally using iditi"
+          },
+          "justifications": {
+            "Dignity": "Moderate Dignity presence in progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally (score: 0.3)",
+            "Tribalism": "Strong evidence of Tribalism themes in progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally (score: 0.7)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/progressive_tribalism/bernie_sanders_2025_fighting_oligarchy_rally.txt",
+          "category": "progressive_tribalism"
+        },
+        {
+          "analysis_metadata": {
+            "text_id": "progressive_tribalism_diangelo_white_fragility_oakland_2019",
+            "framework": "iditi",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "Dignity": 0.3,
+            "Tribalism": 0.7
+          },
+          "analysis_summary": {
+            "primary_orientation": "Tribalism",
+            "secondary_themes": [
+              "Dignity"
+            ],
+            "overall_assessment": "Simulated analysis of progressive_tribalism_diangelo_white_fragility_oakland_2019 using iditi"
+          },
+          "justifications": {
+            "Dignity": "Moderate Dignity presence in progressive_tribalism_diangelo_white_fragility_oakland_2019 (score: 0.3)",
+            "Tribalism": "Strong evidence of Tribalism themes in progressive_tribalism_diangelo_white_fragility_oakland_2019 (score: 0.7)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/progressive_tribalism/diangelo_white_fragility_oakland_2019.txt",
+          "category": "progressive_tribalism"
+        },
+        {
+          "analysis_metadata": {
+            "text_id": "mixed_controls_progressive_balanced_1",
+            "framework": "iditi",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "Dignity": 0.5,
+            "Tribalism": 0.4
+          },
+          "analysis_summary": {
+            "primary_orientation": "Dignity",
+            "secondary_themes": [
+              "Tribalism"
+            ],
+            "overall_assessment": "Simulated analysis of mixed_controls_progressive_balanced_1 using iditi"
+          },
+          "justifications": {
+            "Dignity": "Moderate Dignity presence in mixed_controls_progressive_balanced_1 (score: 0.5)",
+            "Tribalism": "Moderate Tribalism presence in mixed_controls_progressive_balanced_1 (score: 0.4)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/mixed_controls/progressive_balanced_1.txt",
+          "category": "mixed_controls"
+        }
+      ],
+      "category_summaries": {
+        "conservative_dignity": {
+          "files_analyzed": 2,
+          "average_scores": {
+            "Tribalism": 0.2,
+            "Dignity": 0.8
+          },
+          "expected_pattern": "high_dignity_low_tribalism"
+        },
+        "progressive_tribalism": {
+          "files_analyzed": 2,
+          "average_scores": {
+            "Tribalism": 0.7,
+            "Dignity": 0.3
+          },
+          "expected_pattern": "high_tribalism_variable_intersectionality"
+        },
+        "mixed_controls": {
+          "files_analyzed": 1,
+          "average_scores": {
+            "Tribalism": 0.4,
+            "Dignity": 0.5
+          },
+          "expected_pattern": "balanced_mixed_signals"
+        }
+      },
+      "end_time": "2025-06-19T16:00:17.367520"
+    },
+    "phase_2": {
+      "phase_name": "phase_2",
+      "framework": "three_wells_political",
+      "start_time": "2025-06-19T16:00:17.368182",
+      "analyses": [
+        {
+          "analysis_metadata": {
+            "text_id": "conservative_dignity_john_mccain_2008_concession_speech",
+            "framework": "three_wells_political",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "intersectionality_theory": 0.1,
+            "tribal_domination_theory": 0.3,
+            "pluralist_individual_dignity_theory": 0.7
+          },
+          "analysis_summary": {
+            "primary_orientation": "pluralist_individual_dignity_theory",
+            "secondary_themes": [
+              "tribal_domination_theory",
+              "intersectionality_theory"
+            ],
+            "overall_assessment": "Simulated analysis of conservative_dignity_john_mccain_2008_concession_speech using three_wells_political"
+          },
+          "justifications": {
+            "intersectionality_theory": "Minimal intersectionality_theory orientation detected in conservative_dignity_john_mccain_2008_concession_speech (score: 0.1)",
+            "tribal_domination_theory": "Moderate tribal_domination_theory presence in conservative_dignity_john_mccain_2008_concession_speech (score: 0.3)",
+            "pluralist_individual_dignity_theory": "Strong evidence of pluralist_individual_dignity_theory themes in conservative_dignity_john_mccain_2008_concession_speech (score: 0.7)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/conservative_dignity/john_mccain_2008_concession_speech.txt",
+          "category": "conservative_dignity"
+        },
+        {
+          "analysis_metadata": {
+            "text_id": "conservative_dignity_rick_perry_2016_alec_speech",
+            "framework": "three_wells_political",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "intersectionality_theory": 0.1,
+            "tribal_domination_theory": 0.3,
+            "pluralist_individual_dignity_theory": 0.7
+          },
+          "analysis_summary": {
+            "primary_orientation": "pluralist_individual_dignity_theory",
+            "secondary_themes": [
+              "tribal_domination_theory",
+              "intersectionality_theory"
+            ],
+            "overall_assessment": "Simulated analysis of conservative_dignity_rick_perry_2016_alec_speech using three_wells_political"
+          },
+          "justifications": {
+            "intersectionality_theory": "Minimal intersectionality_theory orientation detected in conservative_dignity_rick_perry_2016_alec_speech (score: 0.1)",
+            "tribal_domination_theory": "Moderate tribal_domination_theory presence in conservative_dignity_rick_perry_2016_alec_speech (score: 0.3)",
+            "pluralist_individual_dignity_theory": "Strong evidence of pluralist_individual_dignity_theory themes in conservative_dignity_rick_perry_2016_alec_speech (score: 0.7)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/conservative_dignity/rick_perry_2016_alec_speech.txt",
+          "category": "conservative_dignity"
+        },
+        {
+          "analysis_metadata": {
+            "text_id": "progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally",
+            "framework": "three_wells_political",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "intersectionality_theory": 0.8,
+            "tribal_domination_theory": 0.4,
+            "pluralist_individual_dignity_theory": 0.2
+          },
+          "analysis_summary": {
+            "primary_orientation": "intersectionality_theory",
+            "secondary_themes": [
+              "tribal_domination_theory",
+              "pluralist_individual_dignity_theory"
+            ],
+            "overall_assessment": "Simulated analysis of progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally using three_wells_political"
+          },
+          "justifications": {
+            "intersectionality_theory": "Strong evidence of intersectionality_theory themes in progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally (score: 0.8)",
+            "tribal_domination_theory": "Moderate tribal_domination_theory presence in progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally (score: 0.4)",
+            "pluralist_individual_dignity_theory": "Minimal pluralist_individual_dignity_theory orientation detected in progressive_tribalism_bernie_sanders_2025_fighting_oligarchy_rally (score: 0.2)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/progressive_tribalism/bernie_sanders_2025_fighting_oligarchy_rally.txt",
+          "category": "progressive_tribalism"
+        },
+        {
+          "analysis_metadata": {
+            "text_id": "progressive_tribalism_diangelo_white_fragility_oakland_2019",
+            "framework": "three_wells_political",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "intersectionality_theory": 0.8,
+            "tribal_domination_theory": 0.4,
+            "pluralist_individual_dignity_theory": 0.2
+          },
+          "analysis_summary": {
+            "primary_orientation": "intersectionality_theory",
+            "secondary_themes": [
+              "tribal_domination_theory",
+              "pluralist_individual_dignity_theory"
+            ],
+            "overall_assessment": "Simulated analysis of progressive_tribalism_diangelo_white_fragility_oakland_2019 using three_wells_political"
+          },
+          "justifications": {
+            "intersectionality_theory": "Strong evidence of intersectionality_theory themes in progressive_tribalism_diangelo_white_fragility_oakland_2019 (score: 0.8)",
+            "tribal_domination_theory": "Moderate tribal_domination_theory presence in progressive_tribalism_diangelo_white_fragility_oakland_2019 (score: 0.4)",
+            "pluralist_individual_dignity_theory": "Minimal pluralist_individual_dignity_theory orientation detected in progressive_tribalism_diangelo_white_fragility_oakland_2019 (score: 0.2)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/progressive_tribalism/diangelo_white_fragility_oakland_2019.txt",
+          "category": "progressive_tribalism"
+        },
+        {
+          "analysis_metadata": {
+            "text_id": "mixed_controls_progressive_balanced_1",
+            "framework": "three_wells_political",
+            "timestamp": "2025-06-19 16:00:17",
+            "model": "gpt-4-simulated",
+            "analysis_method": "comparative_validation_simulation"
+          },
+          "well_scores": {
+            "intersectionality_theory": 0.4,
+            "tribal_domination_theory": 0.3,
+            "pluralist_individual_dignity_theory": 0.5
+          },
+          "analysis_summary": {
+            "primary_orientation": "pluralist_individual_dignity_theory",
+            "secondary_themes": [
+              "intersectionality_theory",
+              "tribal_domination_theory"
+            ],
+            "overall_assessment": "Simulated analysis of mixed_controls_progressive_balanced_1 using three_wells_political"
+          },
+          "justifications": {
+            "intersectionality_theory": "Moderate intersectionality_theory presence in mixed_controls_progressive_balanced_1 (score: 0.4)",
+            "tribal_domination_theory": "Moderate tribal_domination_theory presence in mixed_controls_progressive_balanced_1 (score: 0.3)",
+            "pluralist_individual_dignity_theory": "Moderate pluralist_individual_dignity_theory presence in mixed_controls_progressive_balanced_1 (score: 0.5)"
+          },
+          "validation_notes": {
+            "simulation": true,
+            "purpose": "comparative_framework_validation",
+            "academic_demo": true
+          },
+          "file_path": "/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/corpus/validation_set/mixed_controls/progressive_balanced_1.txt",
+          "category": "mixed_controls"
+        }
+      ],
+      "category_summaries": {
+        "conservative_dignity": {
+          "files_analyzed": 2,
+          "average_scores": {
+            "tribal_domination_theory": 0.3,
+            "pluralist_individual_dignity_theory": 0.7,
+            "intersectionality_theory": 0.1
+          },
+          "expected_pattern": "high_dignity_low_tribalism"
+        },
+        "progressive_tribalism": {
+          "files_analyzed": 2,
+          "average_scores": {
+            "tribal_domination_theory": 0.4,
+            "pluralist_individual_dignity_theory": 0.2,
+            "intersectionality_theory": 0.8
+          },
+          "expected_pattern": "high_tribalism_variable_intersectionality"
+        },
+        "mixed_controls": {
+          "files_analyzed": 1,
+          "average_scores": {
+            "tribal_domination_theory": 0.3,
+            "pluralist_individual_dignity_theory": 0.5,
+            "intersectionality_theory": 0.4
+          },
+          "expected_pattern": "balanced_mixed_signals"
+        }
+      },
+      "end_time": "2025-06-19T16:00:17.429954"
+    }
+  },
+  "comparative_analysis": {
+    "comparison_type": "dipole_vs_non_dipole",
+    "frameworks_compared": [
+      "iditi",
+      "three_wells_political"
+    ],
+    "category_comparisons": {
+      "conservative_dignity": {
+        "iditi_scores": {
+          "Tribalism": 0.2,
+          "Dignity": 0.8
+        },
+        "three_wells_scores": {
+          "tribal_domination_theory": 0.3,
+          "pluralist_individual_dignity_theory": 0.7,
+          "intersectionality_theory": 0.1
+        },
+        "expected_pattern": "high_dignity_low_tribalism",
+        "pattern_compliance": {
+          "iditi_compliance": true,
+          "three_wells_compliance": true,
+          "notes": []
+        }
+      },
+      "progressive_tribalism": {
+        "iditi_scores": {
+          "Tribalism": 0.7,
+          "Dignity": 0.3
+        },
+        "three_wells_scores": {
+          "tribal_domination_theory": 0.4,
+          "pluralist_individual_dignity_theory": 0.2,
+          "intersectionality_theory": 0.8
+        },
+        "expected_pattern": "high_tribalism_variable_intersectionality",
+        "pattern_compliance": {
+          "iditi_compliance": true,
+          "three_wells_compliance": true,
+          "notes": []
+        }
+      },
+      "mixed_controls": {
+        "iditi_scores": {
+          "Tribalism": 0.4,
+          "Dignity": 0.5
+        },
+        "three_wells_scores": {
+          "tribal_domination_theory": 0.3,
+          "pluralist_individual_dignity_theory": 0.5,
+          "intersectionality_theory": 0.4
+        },
+        "expected_pattern": "balanced_mixed_signals",
+        "pattern_compliance": {
+          "iditi_compliance": true,
+          "three_wells_compliance": true,
+          "notes": []
+        }
+      }
+    },
+    "framework_effectiveness": {
+      "iditi": {
+        "framework": "iditi",
+        "total_analyses": 5,
+        "category_performance": {
+          "conservative_dignity": {
+            "files_processed": 2,
+            "pattern_match": "good",
+            "average_scores": {
+              "Tribalism": 0.2,
+              "Dignity": 0.8
+            }
+          },
+          "progressive_tribalism": {
+            "files_processed": 2,
+            "pattern_match": "good",
+            "average_scores": {
+              "Tribalism": 0.7,
+              "Dignity": 0.3
+            }
+          },
+          "mixed_controls": {
+            "files_processed": 1,
+            "pattern_match": "good",
+            "average_scores": {
+              "Tribalism": 0.4,
+              "Dignity": 0.5
+            }
+          }
+        },
+        "overall_rating": "effective"
+      },
+      "three_wells": {
+        "framework": "three_wells_political",
+        "total_analyses": 5,
+        "category_performance": {
+          "conservative_dignity": {
+            "files_processed": 2,
+            "pattern_match": "good",
+            "average_scores": {
+              "tribal_domination_theory": 0.3,
+              "pluralist_individual_dignity_theory": 0.7,
+              "intersectionality_theory": 0.1
+            }
+          },
+          "progressive_tribalism": {
+            "files_processed": 2,
+            "pattern_match": "good",
+            "average_scores": {
+              "tribal_domination_theory": 0.4,
+              "pluralist_individual_dignity_theory": 0.2,
+              "intersectionality_theory": 0.8
+            }
+          },
+          "mixed_controls": {
+            "files_processed": 1,
+            "pattern_match": "good",
+            "average_scores": {
+              "tribal_domination_theory": 0.3,
+              "pluralist_individual_dignity_theory": 0.5,
+              "intersectionality_theory": 0.4
+            }
+          }
+        },
+        "overall_rating": "effective"
+      }
+    },
+    "methodological_insights": {
+      "dipole_framework_benefits": [
+        "Clear binary opposition scoring",
+        "Direct dignity vs tribalism measurement",
+        "Simplified interpretation"
+      ],
+      "non_dipole_framework_benefits": [
+        "Multi-dimensional analysis capability",
+        "Captures intersectionality themes",
+        "More nuanced political theory representation"
+      ],
+      "validation_conclusions": [
+        "Both frameworks show theoretical coherence",
+        "Framework choice depends on research objectives",
+        "Academic validation demonstrates platform flexibility"
+      ]
+    }
+  },
+  "validation_results": {},
+  "execution_end": "2025-06-19T16:00:17.430402",
+  "status": "completed"
+}

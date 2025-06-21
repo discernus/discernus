@@ -1,0 +1,909 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>User story 2 requirements - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ok-proceed-to-the-next-user-story" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User story 2 requirements
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#priority-1-conversational-variance-study-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 1: Conversational Variance Study Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority 1: Conversational Variance Study Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-statistical-experiment-configuration-through-chat" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Statistical Experiment Configuration Through Chat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-integration-with-existing-multi-run-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Integration with Existing Multi-Run Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-2-real-time-statistical-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 2: Real-Time Statistical Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority 2: Real-Time Statistical Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-live-pattern-recognition-during-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Live Pattern Recognition During Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-statistical-anomaly-investigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Statistical Anomaly Investigation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-3-framework-fit-detection-through-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 3: Framework Fit Detection Through Variance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority 3: Framework Fit Detection Through Variance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-high-variance-as-framework-mismatch-indicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 High-Variance as Framework Mismatch Indicator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-llm-specific-bias-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 LLM-Specific Bias Detection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-4-academic-statistical-rigor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 4: Academic Statistical Rigor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority 4: Academic Statistical Rigor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-publication-ready-statistical-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Publication-Ready Statistical Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-variance-threshold-establishment" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Variance Threshold Establishment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap-for-cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Roadmap for Cursor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Roadmap for Cursor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-variance-study-infrastructure-week-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Variance Study Infrastructure (Week 1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-statistical-analysis-engine-week-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Statistical Analysis Engine (Week 2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-framework-fit-detection-week-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Framework Fit Detection (Week 3)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specific-technical-requirements-for-cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Specific Technical Requirements for Cursor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Specific Technical Requirements for Cursor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-extensions-for-variance-studies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Extensions for Variance Studies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-api-endpoints-for-statistical-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      New API Endpoints for Statistical Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistical-computing-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistical Computing Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chainlit-integration-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chainlit Integration Points
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-strategy-for-variance-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Strategy for Variance Validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Success Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Success Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#statistical-reliability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistical Reliability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-fit-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Fit Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-experience" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Experience
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/></p>
+<h1 id="ok-proceed-to-the-next-user-story">OK. Proceed to the next user story.</h1>
+<p>🧠 <strong>Essential Requirements for Dr. Maria Santos's Variance Validation Journey:</strong></p>
+<ul>
+<li>Conversational variance study design with multi-dimensional statistical analysis</li>
+<li>Real-time pattern recognition during batch analysis execution</li>
+<li>Statistical anomaly investigation through natural language queries</li>
+<li>Framework fit detection through variance threshold analysis</li>
+<li>Academic rigor maintained through comprehensive reliability metrics</li>
+</ul>
+<p>Based on your comprehensive system capabilities and the second user story (Dr. Maria Santos conducting variance validation studies), here are the prioritized requirements for the essential conversational statistical validation experience:</p>
+<h2 id="priority-1-conversational-variance-study-design"><strong>Priority 1: Conversational Variance Study Design</strong></h2>
+<h3 id="11-statistical-experiment-configuration-through-chat"><strong>1.1 Statistical Experiment Configuration Through Chat</strong></h3>
+<p><strong>User Story Reference</strong>: "I need to design a comprehensive variance study for the Civic Virtue framework. I want to test both single-LLM consistency across multiple runs and cross-LLM agreement patterns using our golden set corpus."</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Chainlit interface for natural language experiment specification</li>
+<li>Multi-dimensional study parameter configuration (texts × frameworks × LLMs × runs)</li>
+<li>Real-time cost estimation and completion time projection</li>
+<li>Automatic study matrix generation (17 texts × 3 LLMs × 5 runs = 255 analyses)</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<pre><code class="language-python">@cl.on_message
+async def handle_variance_study_design(message: cl.Message):
+    # Parse variance study parameters from conversation
+    # Generate analysis matrix: texts × frameworks × models × runs
+    # Calculate cost and time estimates
+    # Display study configuration for approval
+</code></pre>
+<h3 id="12-integration-with-existing-multi-run-infrastructure"><strong>1.2 Integration with Existing Multi-Run Infrastructure</strong></h3>
+<p><strong>User Story Reference</strong>: "The system will automatically calculate coefficient of variation, confidence intervals, and inter-model correlations"</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Leverage your existing universal multi-run dashboard capabilities</li>
+<li>Connect to your PostgreSQL v2.1 schema with runs table</li>
+<li>Utilize your real LLM integration (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro)</li>
+<li>Integration with your CostManager for budget tracking</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Extend your existing <code>RealAnalysisService</code> for batch variance studies</li>
+<li>Use your current <code>DirectAPIClient</code> with systematic parameter tracking</li>
+<li>Leverage PostgreSQL <code>experiments</code> and <code>runs</code> tables for variance data storage</li>
+</ul>
+<h2 id="priority-2-real-time-statistical-analysis"><strong>Priority 2: Real-Time Statistical Analysis</strong></h2>
+<h3 id="21-live-pattern-recognition-during-execution"><strong>2.1 Live Pattern Recognition During Execution</strong></h3>
+<p><strong>User Story Reference</strong>: "After the first 50 analyses complete, Maria notices something interesting: 'The variance patterns are already showing structure. Most texts are showing CV values below 0.15, which is excellent for reliability.'"</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Streaming statistical analysis as results arrive</li>
+<li>Real-time coefficient of variation calculations</li>
+<li>Automatic outlier detection and flagging</li>
+<li>Progressive confidence interval updates</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<pre><code class="language-python">@cl.on_message
+async def monitor_variance_study_progress():
+    # Stream results from ongoing analysis
+    # Calculate running CV statistics
+    # Identify and flag high-variance texts
+    # Update confidence intervals progressively
+</code></pre>
+<h3 id="22-statistical-anomaly-investigation"><strong>2.2 Statistical Anomaly Investigation</strong></h3>
+<p><strong>User Story Reference</strong>: "The system highlights three texts with concerning variance patterns: a technical policy document about cryptocurrency regulation, a philosophical essay on environmental ethics, and a corporate diversity statement."</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Automatic identification of texts with CV &gt; threshold (e.g., 0.20)</li>
+<li>Library panel highlighting of problematic analyses</li>
+<li>Cross-reference with framework fit scores</li>
+<li>Comparative analysis against corpus baseline</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Statistical threshold detection algorithms</li>
+<li>Integration with your existing framework fit detection</li>
+<li>Library panel updates for anomaly visualization</li>
+</ul>
+<h2 id="priority-3-framework-fit-detection-through-variance"><strong>Priority 3: Framework Fit Detection Through Variance</strong></h2>
+<h3 id="31-high-variance-as-framework-mismatch-indicator"><strong>3.1 High-Variance as Framework Mismatch Indicator</strong></h3>
+<p><strong>User Story Reference</strong>: "High variance isn't just a reliability problem—it's a diagnostic tool for framework fit. Texts that don't belong in our corpus reveal themselves through inconsistent scoring patterns."</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Variance-based framework fit assessment</li>
+<li>Automatic corpus quality evaluation</li>
+<li>Text categorization: Core Texts, Boundary Cases, Outliers</li>
+<li>Framework domain boundary detection</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<pre><code class="language-python">def analyze_framework_fit_through_variance(variance_results):
+    # Identify high-variance texts (CV &gt; 0.20)
+    # Assess framework fit correlation with variance patterns
+    # Generate framework boundary recommendations
+    # Flag texts for corpus refinement
+</code></pre>
+<h3 id="32-llm-specific-bias-detection"><strong>3.2 LLM-Specific Bias Detection</strong></h3>
+<p><strong>User Story Reference</strong>: "GPT-4o and Claude are showing strong inter-model correlation (r = 0.82), but Gemini is consistently divergent. Show me the systematic differences."</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Inter-model correlation analysis</li>
+<li>Systematic bias identification</li>
+<li>Model-specific performance patterns</li>
+<li>Consensus threshold establishment</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Correlation matrix generation (Pearson, Spearman, Kendall's tau)</li>
+<li>Model bias pattern analysis</li>
+<li>Consensus scoring algorithms</li>
+</ul>
+<h2 id="priority-4-academic-statistical-rigor"><strong>Priority 4: Academic Statistical Rigor</strong></h2>
+<h3 id="41-publication-ready-statistical-documentation"><strong>4.1 Publication-Ready Statistical Documentation</strong></h3>
+<p><strong>User Story Reference</strong>: "Calculate Cronbach's alpha for internal consistency, intraclass correlation coefficients for inter-rater reliability treating LLMs as raters, and confidence intervals for all major metrics."</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Comprehensive reliability statistics generation</li>
+<li>Academic-quality statistical reporting</li>
+<li>Automated methodology documentation</li>
+<li>Replication package creation</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<pre><code class="language-python">def generate_academic_statistics(variance_data):
+    # Calculate Cronbach's alpha for internal consistency
+    # Compute ICC for inter-rater reliability
+    # Generate confidence intervals for all metrics
+    # Create publication-ready statistical tables
+</code></pre>
+<h3 id="42-variance-threshold-establishment"><strong>4.2 Variance Threshold Establishment</strong></h3>
+<p><strong>User Story Reference</strong>: "I propose establishing CV &lt; 0.20 as our reliability threshold for individual texts, and ICC &gt; 0.75 as our minimum inter-model agreement standard."</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Statistical threshold configuration</li>
+<li>Quality control automation</li>
+<li>Reliability benchmarking</li>
+<li>Framework validation protocols</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Threshold-based quality assessment</li>
+<li>Automated flagging systems</li>
+<li>Validation protocol generation</li>
+</ul>
+<h2 id="implementation-roadmap-for-cursor"><strong>Implementation Roadmap for Cursor</strong></h2>
+<h3 id="phase-1-variance-study-infrastructure-week-1"><strong>Phase 1: Variance Study Infrastructure (Week 1)</strong></h3>
+<pre><code class="language-python"># Essential Chainlit components for variance validation:
+1. Multi-dimensional study configuration parser
+2. Integration with existing experiment/runs database schema
+3. Real-time statistical analysis streaming
+4. Cost and time estimation for large studies
+</code></pre>
+<h3 id="phase-2-statistical-analysis-engine-week-2"><strong>Phase 2: Statistical Analysis Engine (Week 2)</strong></h3>
+<pre><code class="language-python"># Statistical computation components:
+1. Coefficient of variation calculation pipeline
+2. Inter-model correlation analysis (Pearson, Spearman, Kendall's tau)
+3. Cronbach's alpha and ICC computation
+4. Confidence interval generation
+</code></pre>
+<h3 id="phase-3-framework-fit-detection-week-3"><strong>Phase 3: Framework Fit Detection (Week 3)</strong></h3>
+<pre><code class="language-python"># Variance-based quality assessment:
+1. High-variance text identification
+2. Framework fit correlation analysis
+3. Corpus quality evaluation algorithms
+4. Model bias detection systems
+</code></pre>
+<h2 id="specific-technical-requirements-for-cursor"><strong>Specific Technical Requirements for Cursor</strong></h2>
+<h3 id="database-extensions-for-variance-studies"><strong>Database Extensions for Variance Studies</strong></h3>
+<ul>
+<li>Extend PostgreSQL schema to support variance study metadata</li>
+<li>Add statistical results storage for reliability metrics</li>
+<li>Framework fit assessment tracking tables</li>
+</ul>
+<h3 id="new-api-endpoints-for-statistical-analysis"><strong>New API Endpoints for Statistical Analysis</strong></h3>
+<pre><code class="language-python"># Statistical analysis endpoints:
+POST /api/experiments/variance-study/create
+GET /api/experiments/{id}/variance-analysis
+POST /api/statistical-analysis/reliability-metrics
+GET /api/framework-fit/variance-assessment
+</code></pre>
+<h3 id="statistical-computing-integration"><strong>Statistical Computing Integration</strong></h3>
+<ul>
+<li>NumPy/SciPy integration for advanced statistical functions</li>
+<li>Pandas for data manipulation and analysis</li>
+<li>Statistical libraries for reliability metrics (pingouin, scipy.stats)</li>
+</ul>
+<h3 id="chainlit-integration-points"><strong>Chainlit Integration Points</strong></h3>
+<ul>
+<li>Real-time streaming of analysis results</li>
+<li>Statistical visualization in chat interface</li>
+<li>Interactive threshold setting and quality assessment</li>
+<li>Integration with your existing cost tracking and authentication</li>
+</ul>
+<h3 id="testing-strategy-for-variance-validation"><strong>Testing Strategy for Variance Validation</strong></h3>
+<ul>
+<li>Unit tests for statistical calculation functions</li>
+<li>Integration tests for multi-run variance studies</li>
+<li>Performance tests for large-scale statistical analysis</li>
+<li>Validation tests against known statistical benchmarks</li>
+</ul>
+<h2 id="key-success-metrics"><strong>Key Success Metrics</strong></h2>
+<h3 id="statistical-reliability"><strong>Statistical Reliability</strong></h3>
+<ul>
+<li>Coefficient of variation &lt; 0.15 for 80% of well dimensions</li>
+<li>Inter-LLM correlation &gt; 0.75 for primary model pairs</li>
+<li>Framework internal consistency (Cronbach's α) &gt; 0.80</li>
+</ul>
+<h3 id="framework-fit-detection"><strong>Framework Fit Detection</strong></h3>
+<ul>
+<li>Accurate identification of misfit texts through variance patterns</li>
+<li>Reliable corpus quality assessment</li>
+<li>Effective model bias detection and characterization</li>
+</ul>
+<h3 id="user-experience"><strong>User Experience</strong></h3>
+<ul>
+<li>Natural language configuration of complex variance studies</li>
+<li>Real-time insights during analysis execution</li>
+<li>Publication-ready statistical documentation generation</li>
+</ul>
+<p>This prioritized list focuses on enabling Dr. Maria Santos's systematic approach to variance validation while leveraging your existing statistical infrastructure and ensuring academic rigor for publication-quality research.</p>
+<div style="text-align: center">⁂</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

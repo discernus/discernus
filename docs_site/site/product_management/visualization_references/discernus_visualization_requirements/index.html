@@ -1,0 +1,764 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Discernus Visualization System Requirements - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#discernus-visualization-system-requirements" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Discernus Visualization System Requirements
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Purpose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-questions-visualizations-should-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❓ Key Questions Visualizations Should Answer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❓ Key Questions Visualizations Should Answer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-worldview-is-being-communicated" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What worldview is being communicated?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-which-moralemotional-forces-dominate-the-speech" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Which moral/emotional forces dominate the speech?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-is-the-speech-integrative-or-disintegrative" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Is the speech integrative or disintegrative?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-how-stable-or-consistent-is-the-model-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. How stable or consistent is the model output?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-how-do-llms-compare-to-human-raters" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. How do LLMs compare to human raters?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-how-does-worldview-shift-over-time-or-across-speakers" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. How does worldview shift over time or across speakers?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-are-rhetorical-contradictions-present" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Are rhetorical contradictions present?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization-types-and-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧱 Visualization Types and Function
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimum-viable-visualizations-baseline-for-research-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Minimum Viable Visualizations (Baseline for Research Use)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#surprisingly-delightful-visualizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✨ Surprisingly Delightful Visualizations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      📐 Design Guidelines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-format-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      📤 Output Format Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-tests-to-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Integration Tests to Pass
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="discernus-visualization-system-requirements">Discernus Visualization System Requirements</h1>
+<p><strong>Version:</strong> v0.9<br />
+<strong>Author:</strong> Discernus Systems Team<br />
+<strong>Last Updated:</strong> 2025-06-20<br />
+<strong>Scope:</strong> Requirements and design intent for the Discernus visualization subsystem, based on the rhetorical worldview scoring architecture, LLM benchmarking experiments, and end-user narrative diagnostics.</p>
+<hr />
+<h2 id="purpose">🎯 Purpose</h2>
+<p>The Discernus visualization system transforms structured scoring outputs (e.g., dipole scores, function wells, coherence indices) into <strong>interpretable, theory-aligned, and insight-rich graphics</strong> for both researchers and civic users. It bridges human judgment and model inference through rhetorical transparency.</p>
+<hr />
+<h2 id="key-questions-visualizations-should-answer">❓ Key Questions Visualizations Should Answer</h2>
+<h3 id="1-what-worldview-is-being-communicated">1. What worldview is being communicated?</h3>
+<ul>
+<li><strong>Visual Type</strong>: Elliptical worldview map or dipole slider</li>
+<li><strong>Purpose</strong>: Show whether a speaker leans populist, pluralist, tribalist, integrative, etc.</li>
+</ul>
+<h3 id="2-which-moralemotional-forces-dominate-the-speech">2. Which moral/emotional forces dominate the speech?</h3>
+<ul>
+<li><strong>Visual Type</strong>: Gravity well ellipse with poles (e.g., Truth, Dignity, Resentment, Fear)</li>
+<li><strong>Purpose</strong>: Visualize magnitude and direction of rhetorical emphasis</li>
+</ul>
+<h3 id="3-is-the-speech-integrative-or-disintegrative">3. Is the speech integrative or disintegrative?</h3>
+<ul>
+<li><strong>Visual Type</strong>: Split bar chart (green for integrative, red for disintegrative)</li>
+<li><strong>Purpose</strong>: Show positive vs negative moral alignment</li>
+</ul>
+<h3 id="4-how-stable-or-consistent-is-the-model-output">4. How stable or consistent is the model output?</h3>
+<ul>
+<li><strong>Visual Type</strong>: Error bar plots across runs</li>
+<li><strong>Purpose</strong>: Track variance; diagnose hallucination or stochastic noise</li>
+</ul>
+<h3 id="5-how-do-llms-compare-to-human-raters">5. How do LLMs compare to human raters?</h3>
+<ul>
+<li><strong>Visual Type</strong>: Heatmaps, scatterplots, correlation matrices</li>
+<li><strong>Purpose</strong>: Quantify alignment by foundation across sources</li>
+</ul>
+<h3 id="6-how-does-worldview-shift-over-time-or-across-speakers">6. How does worldview shift over time or across speakers?</h3>
+<ul>
+<li><strong>Visual Type</strong>: Trajectory map (linked narrative centers), time series plots</li>
+<li><strong>Purpose</strong>: Show rhetorical drift or strategic reframing</li>
+</ul>
+<h3 id="7-are-rhetorical-contradictions-present">7. Are rhetorical contradictions present?</h3>
+<ul>
+<li><strong>Visual Type</strong>: Contradiction flags, bidirectional barplots</li>
+<li><strong>Purpose</strong>: Alert users to tension within worldviews</li>
+</ul>
+<hr />
+<h2 id="visualization-types-and-function">🧱 Visualization Types and Function</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Required?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elliptical Gravity Well Map</td>
+<td>✅</td>
+<td>Shows rhetorical pull toward/away from core civic virtues</td>
+</tr>
+<tr>
+<td>Integrative vs Disintegrative Bars</td>
+<td>✅</td>
+<td>Contrasts moral uplift vs tribal/resentful content</td>
+</tr>
+<tr>
+<td>Narrative Center Coordinate</td>
+<td>✅</td>
+<td>Summarizes rhetorical balance and coherence</td>
+</tr>
+<tr>
+<td>Model Variance Chart</td>
+<td>✅</td>
+<td>Error bars across 5+ model runs</td>
+</tr>
+<tr>
+<td>Multi-Model Overlay Map</td>
+<td>⚠️</td>
+<td>Compare model outputs on same moral field</td>
+</tr>
+<tr>
+<td>Rater vs Model Heatmap</td>
+<td>✅</td>
+<td>Scores compared across dimensions and agents</td>
+</tr>
+<tr>
+<td>Temporal Drift Tracker</td>
+<td>⚠️</td>
+<td>Sequence of narrative centers for same speaker or corpus</td>
+</tr>
+<tr>
+<td>Contradiction Index Display</td>
+<td>✅</td>
+<td>Visual flag + value for worldview inconsistency</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="minimum-viable-visualizations-baseline-for-research-use">📌 Minimum Viable Visualizations (Baseline for Research Use)</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Why Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gravity Well Ellipse</td>
+<td>Core worldview diagnostic</td>
+</tr>
+<tr>
+<td>Integrative/Disintegrative Bar</td>
+<td>Core virtue–vice orientation measure</td>
+</tr>
+<tr>
+<td>Narrative Center Dot</td>
+<td>Rhetorical coherence summary</td>
+</tr>
+<tr>
+<td>Variance/Error Bars</td>
+<td>Model trust + validation signal</td>
+</tr>
+<tr>
+<td>Correlation Plot (Model vs Human)</td>
+<td>Critical for LLM validation studies</td>
+</tr>
+<tr>
+<td>Downloadable Summary Card</td>
+<td>Needed for reporting and publication snapshots</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="surprisingly-delightful-visualizations">✨ Surprisingly Delightful Visualizations</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Delight Factor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multi-Model Sonar Overlay</td>
+<td>Visually intuitive multi-agent comparison</td>
+</tr>
+<tr>
+<td>Narrative Trajectory Animation</td>
+<td>Animates worldview shift across time/speeches</td>
+</tr>
+<tr>
+<td>Contradiction Arc Ribbon</td>
+<td>Shows worldview tension overlaid on ellipse</td>
+</tr>
+<tr>
+<td>Ellipse Heat Cloud</td>
+<td>Aggregated moral “weather” for campaigns or timeframes</td>
+</tr>
+<tr>
+<td>Interactive Explorer</td>
+<td>Clickable poles, hoverable quotes, time slider</td>
+</tr>
+<tr>
+<td>Auto-generated Composite Reports</td>
+<td>Multi-speech dashboards in one frame</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="design-guidelines">📐 Design Guidelines</h2>
+<ul>
+<li><strong>Coordinate Consistency</strong>: All gravity well ellipses should share fixed pole positions.</li>
+<li><strong>Color Logic</strong>: Green = Integrative; Red = Disintegrative; Blue = Model scoring; Orange = Center</li>
+<li><strong>Label Discipline</strong>: Every axis and label should trace directly to framework theory (e.g., MFT, Civic Virtue)</li>
+<li><strong>Responsiveness</strong>: Visuals must be embeddable in web, printable in PDF</li>
+<li><strong>Data Provenance</strong>: Tooltip or metadata should trace score to source/model/run</li>
+</ul>
+<hr />
+<h2 id="output-format-requirements">📤 Output Format Requirements</h2>
+<ul>
+<li><strong>SVG + PNG</strong> for visuals</li>
+<li><strong>JSON + CSV</strong> for raw scores and metrics</li>
+<li><strong>Markdown Summary Cards</strong> for publication artifacts</li>
+<li><strong>HTML Dashboard (optional)</strong> for real-time or longitudinal corpora</li>
+</ul>
+<hr />
+<h2 id="integration-tests-to-pass">🧪 Integration Tests to Pass</h2>
+<ul>
+<li>✅ All well poles render correctly and in stable coordinates  </li>
+<li>✅ Scores match input data (cross-verified from CSV to visual)  </li>
+<li>✅ Hover reveals correct label, score, variance  </li>
+<li>✅ Contradiction index flags render when &gt; 0.5  </li>
+<li>✅ Export includes both visuals and metrics bundle</li>
+</ul>
+<hr />
+<h2 id="summary">🧠 Summary</h2>
+<p>The Discernus visualization system must convert abstract rhetorical theory into <strong>immediate, interpretable, empirically useful diagnostics</strong>. It serves both researchers running validation pipelines and civic users auditing political speech. Its success will rest not on flashy graphics—but on the <strong>clarity, coherence, and trustworthiness</strong> of what it shows about rhetorical worldview structure.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

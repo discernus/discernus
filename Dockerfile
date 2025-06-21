@@ -20,7 +20,7 @@ ENV PYTHONPATH "${PYTHONPATH}:/app/src"
 
 # Define the entrypoint for the container.
 # This makes the container executable, running the orchestrator by default.
-ENTRYPOINT ["python3", "scripts/production/comprehensive_experiment_orchestrator.py"]
+ENTRYPOINT ["python3", "scripts/applications/comprehensive_experiment_orchestrator.py"]
 
 # Set a default command (e.g., to show help if no arguments are passed)
 CMD ["--help"] 

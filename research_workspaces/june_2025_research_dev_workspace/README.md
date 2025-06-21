@@ -22,6 +22,48 @@ This workspace represents the **Phase 0** implementation of the unified asset ma
 
 ## **Asset Inventory**
 
+This inventory provides a comprehensive list of all research assets contained within this workspace.
+
+### **Frameworks Index**
+
+The following table lists all available analysis frameworks.
+
+<!-- FRAMEWORK_INDEX_START -->
+| Framework Name | Purpose & Key Results |
+| :--- | :--- |
+| `business_ethics` | |
+| `civic_virtue` | |
+| `iditi` | |
+| `moral_foundations_theory` | |
+| `political_framing_theory` | |
+| `populism_pluralism` | |
+| `three_theories_political` | |
+<!-- FRAMEWORK_INDEX_END -->
+
+### **Experiments Index**
+
+The following table lists all experiment definitions and execution results.
+
+<!-- EXPERIMENTS_INDEX_START -->
+| Experiment Name | Type | Purpose & Notes |
+| :--- | :--- | :--- |
+| `MFT_Academic_Validation_Study_20250620_160529` | Directory | |
+| `MFT_Academic_Validation_Study_20250620_164052` | Directory | |
+| `MFT_Academic_Validation_Study_20250620_164605` | Directory | |
+| `MFT_Academic_Validation_Study_20250620_165908` | Directory | |
+| `MFT_Architecture_Validation_Test_20250620_173007` | Directory | |
+| `MFT_Architecture_Validation_Test_v1.0.0_20250621_025638_20250621_025638` | Directory | |
+| `MFT_Architecture_Validation_Test_v1.0.0_20250621_040726_20250621_040756` | Directory | |
+| `MFT_Architecture_Validation_Test_v1.0.0_20250621_041516_20250621_041547` | Directory | |
+| `MFT_Architecture_Validation_Test_v1.0.0_20250621_041751_20250621_041820` | Directory | |
+| `MFT_Architecture_Validation_Test_v1.0.0_20250621_042500_20250621_042531` | Directory | |
+| `MFT_Architecture_Validation_Test_v1.0.0_20250621_042625_20250621_042656` | Directory | |
+| `MFT_Working_Validation_Study_1.0.0_20250620_141620` | Directory | |
+| `mft_architecture_validation_test.yaml` | File | |
+| `mft_validation_study.yaml` | File | |
+| `populism_prompt_validation_study.yaml` | File | |
+<!-- EXPERIMENTS_INDEX_END -->
+
 ### **✅ Frameworks Developed**
 - **`moral_foundations_theory`**: Complete 5-foundation dipole implementation
   - Theoretically validated per Haidt literature

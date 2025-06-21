@@ -1,0 +1,575 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Production Pipeline Upgrade Proposal: Integrating Supporting Systems for Academic Validation - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#production-pipeline-upgrade-proposal-integrating-supporting-systems-for-academic-validation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Production Pipeline Upgrade Proposal: Integrating Supporting Systems for Academic Validation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-problem-from-technical-success-to-academic-credibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Problem: From Technical Success to Academic Credibility
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-components-for-immediate-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Components for Immediate Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Components for Immediate Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#group-1-the-academic-validation-replication-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group 1: The "Academic Validation &amp; Replication" Suite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-2-the-publication-acceleration-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group 2: The "Publication Acceleration" Suite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-3-the-financial-governance-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group 3: The "Financial Governance" Module
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-proposed-upgraded-pipeline-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Proposed Upgraded Pipeline Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-components-to-defer-archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Components to Defer / Archive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="production-pipeline-upgrade-proposal-integrating-supporting-systems-for-academic-validation">Production Pipeline Upgrade Proposal: Integrating Supporting Systems for Academic Validation</h1>
+<p><em>Date: June 20, 2025</em><br />
+<em>Status: Proposed</em><br />
+<em>Author: AI Assistant (based on user discussion)</em></p>
+<h2 id="1-executive-summary">1. Executive Summary</h2>
+<p>This document proposes the strategic integration of several key supporting modules into the core production pipeline. Following a comprehensive review of existing but unused components, it has become clear that many of these modules directly address the project's immediate strategic goals of <strong>academic validation, publication, and robust financial governance</strong>.</p>
+<p>Instead of being "dead code," these modules are critical enablers for the current MVP iteration. This proposal outlines which components to promote into the production workflow and provides a clear rationale tied to our strategic objectives.</p>
+<h2 id="2-core-problem-from-technical-success-to-academic-credibility">2. Core Problem: From Technical Success to Academic Credibility</h2>
+<p>The current production pipeline is technically successful but lacks the integrated tooling required for an efficient, end-to-end academic validation workflow. Key processes like data validation, replication package creation, and financial oversight are currently manual and disconnected from the core orchestrator.</p>
+<p>This proposal aims to create a fully integrated, "academically-aware" pipeline that automates these critical functions, reducing risk and accelerating the timeline to publication.</p>
+<h2 id="3-components-for-immediate-integration">3. Components for Immediate Integration</h2>
+<p>The following modules, previously considered for removal, are prime candidates for immediate integration into the production pipeline.</p>
+<h3 id="group-1-the-academic-validation-replication-suite">Group 1: The "Academic Validation &amp; Replication" Suite</h3>
+<p>These modules are essential for ensuring the integrity of our research and producing replicable results suitable for peer review.</p>
+<ul>
+<li><strong><code>corpus.validator</code></strong>: Automates integrity checks on input corpora, ensuring that all validation studies are built on a solid foundation.</li>
+<li><strong><code>corpus.exporter</code></strong>: Automates the creation of "replication packages" by exporting datasets and generating academic citations, a cornerstone of reproducible research.</li>
+<li><strong><code>utils.api_retry_handler</code></strong>: Provides the resilience needed for large-scale, multi-hour validation studies, ensuring that transient network errors do not derail an entire experiment. This is a critical dependency of the <code>direct_api_client</code>.</li>
+</ul>
+<h3 id="group-2-the-publication-acceleration-suite">Group 2: The "Publication Acceleration" Suite</h3>
+<p>These components automate the most labor-intensive parts of preparing a manuscript for publication.</p>
+<ul>
+<li><strong><code>academic.documentation</code></strong>: Automatically generates draft <strong>Methodology</strong> and <strong>Results</strong> sections for papers by reading experiment data directly from the database.</li>
+<li><strong><code>academic.analysis_templates</code></strong>: Generates starter analysis scripts in R, Python, and Stata, which are required for replication packages.</li>
+<li><strong><code>visualization.themes</code></strong>: Ensures all charts and plots are consistent, professional, and publication-ready, abstracting away tedious manual styling.</li>
+</ul>
+<h3 id="group-3-the-financial-governance-module">Group 3: The "Financial Governance" Module</h3>
+<p>This module addresses the significant financial risk associated with large-scale experiments.</p>
+<ul>
+<li><strong><code>utils.cost_manager</code></strong>: Provides essential, programmatic budget protection by estimating API costs before execution and enforcing spending limits. This should be tightly integrated with the orchestrator.</li>
+</ul>
+<h2 id="4-proposed-upgraded-pipeline-architecture">4. Proposed Upgraded Pipeline Architecture</h2>
+<p>The integration of these components would result in a more robust and efficient end-to-end research pipeline.</p>
+<pre><code class="language-mermaid">graph TD;
+    subgraph &quot;A. Pre-Flight Validation&quot;;
+        A1[Corpus Texts] --&gt; A2[&quot;corpus.validator&quot;];
+        A2 --&gt; A3[Experiment Definition (.yaml)];
+    end
+
+    subgraph &quot;B. Core Production Execution&quot;;
+        A3 --&gt; B1[&quot;Production Orchestrator&quot;];
+        B1 -- uses --&gt; B2[&quot;direct_api_client&quot;];
+        B2 -- uses --&gt; B3[&quot;utils.api_retry_handler&quot;];
+        B2 -- uses --&gt; B4[&quot;utils.cost_manager&quot;];
+    end
+
+    B1 --&gt; C1[Results Database];
+
+    subgraph &quot;C. Post-Processing &amp; Publication&quot;;
+        C1 --&gt; C2[&quot;Enhanced Analysis Pipeline&quot;];
+        C2 --&gt; C3[&quot;academic.documentation&lt;br/&gt;(Drafts Paper Sections)&quot;];
+        C2 --&gt; C4[&quot;academic.analysis_templates&lt;br/&gt;(Generates R/Stata/Python Scripts)&quot;];
+        C2 --&gt; C5[&quot;visualization.themes&lt;br/&gt;(Styles Plots &amp; Charts)&quot;];
+        C2 --&gt; C6[&quot;corpus.exporter&lt;br/&gt;(Builds Replication Data)&quot;];
+    end
+
+    subgraph &quot;D. Final Output&quot;;
+        C3 &amp; C4 &amp; C5 &amp; C6 --&gt; D1[&quot;Publication &amp; Replication Package&quot;];
+    end
+
+    style B1 fill:#D5E8D4,stroke:#82B366,stroke-width:2px;
+    style C2 fill:#DAE8FC,stroke:#6C8EBF,stroke-width:2px;
+    style D1 fill:#FFE6CC,stroke:#D79B00,stroke-width:2px;
+</code></pre>
+<h2 id="5-components-to-defer-archive">5. Components to Defer / Archive</h2>
+<p>The following modules are well-designed but are not required for the current academic validation MVP. They are associated with a potential future web front-end and should be <strong>archived</strong>, not deleted, to preserve their value.</p>
+<ul>
+<li><strong><code>utils.auth</code></strong>: A full-featured user authentication and authorization system.</li>
+<li><strong><code>utils.sanitization</code></strong>: A security module for cleaning web-based user inputs.</li>
+<li><strong><code>celery_app.py</code> &amp; <code>tasks/</code> directory</strong>: An asynchronous task queue system for running background jobs initiated from a web interface.</li>
+</ul>
+<h2 id="6-conclusion">6. Conclusion</h2>
+<p>By promoting these key utilities into the main production workflow, we create a more powerful, secure, and efficient pipeline that directly supports our strategic goals. This approach maximizes the value of our existing codebase while focusing our efforts squarely on achieving the academic credibility required for the success of the Discernus MVP. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

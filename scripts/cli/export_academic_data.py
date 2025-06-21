@@ -22,29 +22,45 @@ from src.academic import AcademicDataExporter, ReplicationPackageBuilder
 
 def export_data_cli():
     """CLI interface for academic data export."""
-    parser = argparse.ArgumentParser(description="Export academic data from PostgreSQL")
+    parser = argparse.ArgumentParser(
+        description="A command-line tool to export experiment data for academic use, creating datasets in various statistical software formats.",
+        epilog="""
+Example Usage:
+  # Export specific experiments to CSV and Stata formats
+  python %(prog)s --experiment-ids exp_01,exp_02 --formats csv,stata --output-dir ./my_study_data
+
+  # Export all experiments within a date range for a specific framework
+  python %(prog)s --start-date 2025-01-01 --end-date 2025-03-31 --frameworks moral_foundations_theory --study-name Q1_MFT_Study
+
+  # Create a full replication package for all experiments
+  python %(prog)s --all-experiments --create-replication-package --study-name "Full_Replication"
+"""
+    )
     
-    # Data selection
-    parser.add_argument("--experiment-ids", type=str, help="Comma-separated experiment IDs")
-    parser.add_argument("--all-experiments", action="store_true", help="Export all experiments")
-    parser.add_argument("--start-date", type=str, help="Start date (YYYY-MM-DD)")
-    parser.add_argument("--end-date", type=str, help="End date (YYYY-MM-DD)")
-    parser.add_argument("--frameworks", type=str, help="Comma-separated framework names")
+    # Data selection group
+    data_group = parser.add_argument_group('Data Selection', 'Arguments to select which data to export.')
+    data_group.add_argument("--experiment-ids", type=str, help="Comma-separated list of specific experiment IDs to export.")
+    data_group.add_argument("--all-experiments", action="store_true", help="Flag to export all experiments in the database.")
+    data_group.add_argument("--start-date", type=str, help="The start date for filtering experiments (format: YYYY-MM-DD).")
+    data_group.add_argument("--end-date", type=str, help="The end date for filtering experiments (format: YYYY-MM-DD).")
+    data_group.add_argument("--frameworks", type=str, help="Comma-separated list of framework names to filter experiments by.")
     
-    # Output options
-    parser.add_argument("--study-name", type=str, help="Study name for output files")
-    parser.add_argument("--output-dir", type=str, default="exports/academic_formats", 
-                       help="Output directory")
-    parser.add_argument("--formats", type=str, default="csv,json,feather",
-                       help="Export formats (csv,json,feather,stata)")
+    # Output options group
+    output_group = parser.add_argument_group('Output Configuration', 'Arguments to control the output format and location.')
+    output_group.add_argument("--study-name", type=str, help="A descriptive name for the study, used for naming output files.")
+    output_group.add_argument("--output-dir", type=str, default="exports/academic_formats", 
+                       help="The directory where exported files will be saved. Defaults to 'exports/academic_formats'.")
+    output_group.add_argument("--formats", type=str, default="csv,json,feather",
+                       help="Comma-separated list of export formats. Supported: csv, json, feather, stata. Defaults to 'csv,json,feather'.")
     
-    # Additional options
-    parser.add_argument("--include-metadata", action="store_true", 
-                       help="Include comprehensive metadata")
-    parser.add_argument("--include-component-analysis", action="store_true",
-                       help="Include component development analysis")
-    parser.add_argument("--create-replication-package", action="store_true",
-                       help="Create complete replication package")
+    # Additional options group
+    additional_group = parser.add_argument_group('Additional Features', 'Extra features like metadata and replication packages.')
+    additional_group.add_argument("--include-metadata", action="store_true", 
+                       help="Flag to include a comprehensive JSON file with experiment metadata.")
+    additional_group.add_argument("--include-component-analysis", action="store_true",
+                       help="Flag to include data from component development analysis in the export.")
+    additional_group.add_argument("--create-replication-package", action="store_true",
+                       help="Flag to create a complete, self-contained replication package (ZIP file) for the study.")
     
     args = parser.parse_args()
     

@@ -1,0 +1,32 @@
+{
+  // See https://github.com/DavidAnson/markdownlint/blob/main/schema/markdownlint-config-schema.json for the full schema
+  // See https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md for rule descriptions
+
+  // Default state for all rules
+  "default": true,
+
+  // MD007/ul-indent: Unordered list indentation
+  "ul-indent": {
+    "indent": 2
+  },
+
+  // MD013/line-length: Line length
+  // We disable this rule as it can be overly restrictive for documentation that includes code snippets or long links.
+  "line-length": false,
+
+  // MD029/ol-prefix: Ordered list prefix
+  // This rule ensures consistent numbering (e.g., "1. 1. 1." instead of "1. 2. 3."). We'll set it to "ordered" to enforce sequential numbering.
+  "ol-prefix": {
+    "style": "ordered"
+  },
+
+  // MD033/no-inline-html: No inline HTML
+  // Allow inline HTML as it can be useful for certain formatting needs, like <br> tags.
+  "no-inline-html": false,
+
+  // MD046/code-block-style: Code block style
+  // Enforce the use of fenced code blocks (```) for consistency.
+  "code-block-style": {
+    "style": "fenced"
+  }
+} 

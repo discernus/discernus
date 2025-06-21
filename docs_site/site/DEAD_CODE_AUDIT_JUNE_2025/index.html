@@ -1,0 +1,701 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Dead Code Audit Report - June 20, 2025 (Revised) - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dead-code-audit-report-june-20-2025-revised" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dead Code Audit Report - June 20, 2025 (Revised)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary-revised" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Executive Summary - REVISED
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit-statistics-revised" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Audit Statistics - REVISED
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules-to-keep-integrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Modules to Keep &amp; Integrate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Modules to Keep &amp; Integrate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-core-17-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Core (17 modules)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supporting-research-publication-tools-8-modules-to-integrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supporting Research &amp; Publication Tools (8 modules) - TO INTEGRATE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-project-utilities-4-modules-to-integrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Project Utilities (4 modules) - TO INTEGRATE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules-to-archive-or-remove-30-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗑️ Modules to Archive or Remove (30 modules)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🗑️ Modules to Archive or Remove (30 modules)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-entire-cli-system-to-remove-15-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Entire CLI System ❌ TO REMOVE (15 modules)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-abandoned-web-application-components-to-archive-8-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Abandoned Web Application Components 🗄️ TO ARCHIVE (8 modules)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-deprecated-development-utility-tools-to-remove-7-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Deprecated Development &amp; Utility Tools ❌ TO REMOVE (7 modules)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revised-cleanup-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Revised Cleanup Recommendations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Revised Cleanup Recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immediate-actions-high-confidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Immediate Actions (High Confidence)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-work-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Work (Next Steps)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-cleanup-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Post-Cleanup Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Post-Cleanup Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#target-29-core-supporting-modules-from-59" class="md-nav__link">
+    <span class="md-ellipsis">
+      Target: ~29 Core &amp; Supporting Modules (from 59)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dead-code-audit-report-june-20-2025-revised">Dead Code Audit Report - June 20, 2025 (Revised)</h1>
+<p><em>Systematic analysis of unused src/ components after architectural breakthrough</em></p>
+<h2 id="executive-summary-revised">🎯 <strong>Executive Summary - REVISED</strong></h2>
+<p>Following the <strong>unified framework architecture breakthrough</strong>, a systematic audit was conducted to identify obsolete code. Initial findings suggested 57.6% of modules were dead. However, a deeper strategic review revealed that many of these modules are <strong>critical supporting utilities</strong> for the project's immediate goal of academic validation and publication.</p>
+<p>This revised audit re-categorizes these modules, providing a more accurate picture of the codebase. The new focus is on archiving components related to a deprecated web-interface architecture, while promoting essential academic and utility modules for integration.</p>
+<hr />
+<h2 id="audit-statistics-revised">📊 <strong>Audit Statistics - REVISED</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Count</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Total <code>src/</code> modules</strong></td>
+<td>59</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>Production-critical modules</strong></td>
+<td>17</td>
+<td>28.8%</td>
+</tr>
+<tr>
+<td><strong>Supporting Tools to Integrate</strong></td>
+<td>12</td>
+<td>20.3%</td>
+</tr>
+<tr>
+<td><strong>Modules to Archive/Remove</strong></td>
+<td>30</td>
+<td>50.8%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Revised Action</strong>: Archive/remove <strong>50.8%</strong> of modules, integrate <strong>20.3%</strong> into the production pipeline.</p>
+<hr />
+<h2 id="modules-to-keep-integrate">✅ <strong>Modules to Keep &amp; Integrate</strong></h2>
+<h3 id="production-core-17-modules"><strong>Production Core (17 modules)</strong></h3>
+<p><em>(This list remains unchanged)</em></p>
+<h3 id="supporting-research-publication-tools-8-modules-to-integrate"><strong>Supporting Research &amp; Publication Tools (8 modules) - TO INTEGRATE</strong></h3>
+<p>These modules are essential for the academic validation and publication workflow.</p>
+<ul>
+<li><code>corpus.discovery</code>: Corpus exploration and search.</li>
+<li><code>corpus.exporter</code>: Creation of replication packages and academic datasets.</li>
+<li><code>corpus.validator</code>: Corpus integrity and FAIR compliance validation.</li>
+<li><code>corpus.youtube_ingestion</code>: Specialized ingestion for video-based corpora.</li>
+<li><code>academic.analysis_templates</code>: Automated generation of R/Python/Stata analysis scripts.</li>
+<li><code>academic.documentation</code>: Automated generation of methodology and results sections for papers.</li>
+</ul>
+<h3 id="core-project-utilities-4-modules-to-integrate"><strong>Core Project Utilities (4 modules) - TO INTEGRATE</strong></h3>
+<p>These modules provide critical, cross-cutting functionality for finance, security, and presentation.</p>
+<ul>
+<li><code>utils.cost_manager</code>: Essential cost-control and financial safety management.</li>
+<li><code>utils.manage_costs</code>: CLI for the cost management utility.</li>
+<li><code>utils.api_retry_handler</code>: Critical resilience component for all API calls.</li>
+<li><code>visualization.themes</code>: Centralized styling for professional, publication-ready plots.</li>
+</ul>
+<hr />
+<h2 id="modules-to-archive-or-remove-30-modules">🗑️ <strong>Modules to Archive or Remove (30 modules)</strong></h2>
+<h3 id="1-entire-cli-system-to-remove-15-modules"><strong>1. Entire CLI System</strong> ❌ <strong>TO REMOVE (15 modules)</strong></h3>
+<p>The legacy CLI system is fully superseded by the <code>comprehensive_experiment_orchestrator.py</code>.
+<em>(List of 15 modules remains the same)</em></p>
+<pre><code>cli.academic_analysis_pipeline
+cli.academic_pipeline
+cli.analyze_batch
+cli.component_manager
+cli.dev_session
+cli.export_academic_data
+cli.generate_analysis_templates
+cli.generate_documentation
+cli.jsonl_generator
+cli.log_iteration
+cli.manage_components
+cli.schema_generator
+cli.start_dev_session
+cli.validate_component
+</code></pre>
+<h3 id="2-abandoned-web-application-components-to-archive-8-modules"><strong>2. Abandoned Web Application Components</strong> 🗄️ <strong>TO ARCHIVE (8 modules)</strong></h3>
+<p>This code is well-designed for a web front-end but is not used by the current synchronous pipeline. It should be <strong>archived</strong> for potential future use.</p>
+<ul>
+<li><code>api.auth</code>, <code>api.crud</code>, <code>api.main</code>, <code>api.services</code>: The core web server.</li>
+<li><code>utils.auth</code>: User authentication and JWT token handling.</li>
+<li><code>utils.sanitization</code>: Security module for web inputs.</li>
+<li><code>celery_app</code>: Asynchronous task queue application.</li>
+<li><code>tasks/</code> directory (2 modules): Background job definitions.</li>
+</ul>
+<h3 id="3-deprecated-development-utility-tools-to-remove-7-modules"><strong>3. Deprecated Development &amp; Utility Tools</strong> ❌ <strong>TO REMOVE (7 modules)</strong></h3>
+<p>These tools have been replaced by functionality within the production core or the modules listed above.</p>
+<pre><code>development.quality_assurance
+development.seed_prompts
+development.session_manager
+prompts.template_manager
+</code></pre>
+<hr />
+<h2 id="revised-cleanup-recommendations">🎯 <strong>Revised Cleanup Recommendations</strong></h2>
+<h3 id="immediate-actions-high-confidence"><strong>Immediate Actions (High Confidence)</strong></h3>
+<ol>
+<li><strong>Archive Web Application Components</strong>: Move the 8 modules related to the web interface and task queue system to <code>deprecated/by-system/</code>. This preserves their value while cleaning the <code>src/</code> directory.<ul>
+<li><code>git mv src/narrative_gravity/api/auth.py deprecated/by-system/web_app/</code></li>
+<li><code>git mv src/narrative_gravity/celery_app.py deprecated/by-system/web_app/</code></li>
+<li>etc.</li>
+</ul>
+</li>
+<li><strong>Remove Legacy CLI System</strong>: Delete the 15 modules in <code>src/narrative_gravity/cli/</code>, as they are fully replaced.</li>
+<li><strong>Remove Deprecated Dev Tools</strong>: Delete the remaining development and utility tools that are no longer needed.</li>
+</ol>
+<h3 id="integration-work-next-steps"><strong>Integration Work (Next Steps)</strong></h3>
+<ol>
+<li><strong>Integrate Utilities</strong>: Explicitly call the <code>cost_manager</code>, <code>validator</code>, and <code>exporter</code> from the main orchestrator script at the appropriate stages.</li>
+<li><strong>Formalize Dependencies</strong>: Ensure that <code>api_retry_handler</code> is correctly treated as a production dependency for the <code>direct_api_client</code>.</li>
+<li><strong>Enhance Reporting</strong>: Use the <code>academic.documentation</code> and <code>visualization.themes</code> modules in the post-processing phase to automate the creation of publication-ready reports.</li>
+</ol>
+<hr />
+<h2 id="post-cleanup-architecture">🚀 <strong>Post-Cleanup Architecture</strong></h2>
+<h3 id="target-29-core-supporting-modules-from-59"><strong>Target: ~29 Core &amp; Supporting Modules</strong> (from 59)</h3>
+<p>The new architecture will consist of the 17 production-critical modules plus the 12 supporting tools, creating a lean but powerful, academically-focused codebase.</p>
+<p><strong>Benefits:</strong>
+- <strong>51% code reduction</strong> in the active <code>src/</code> directory.
+- <strong>Clearer Architecture</strong>: Production core is distinct from supporting tools.
+- <strong>Preserved Value</strong>: Code for a potential web front-end is safely archived.
+- <strong>Accelerated Research</strong>: Integrated tools for validation, publication, and cost management.</p>
+<hr />
+<p><em>This document was revised on June 20, 2025, to reflect a deeper strategic analysis of module utility in service of the project's academic validation goals.</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

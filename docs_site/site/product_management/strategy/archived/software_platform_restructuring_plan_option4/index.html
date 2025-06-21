@@ -1,0 +1,1535 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Discernus Software Platform Restructuring Plan (Option 4) - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#discernus-software-platform-restructuring-plan-option-4" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Discernus Software Platform Restructuring Plan (Option 4)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-platform-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Platform Assessment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current Platform Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-system-status-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current System Status Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-architecture-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Architecture Strengths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-architecture-weaknesses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Architecture Weaknesses
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-restructuring-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Restructuring Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Restructuring Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-framework-implementation-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Framework Implementation Infrastructure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Framework Implementation Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-established-framework-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Established Framework Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Established Framework Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moral-foundations-theory-mft-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moral Foundations Theory (MFT) Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#political-framing-theory-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Political Framing Theory Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cultural-theory-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cultural Theory Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-framework-architecture-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Framework Architecture Enhancements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-llm-integration-infrastructure-overhaul" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. LLM Integration Infrastructure Overhaul
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. LLM Integration Infrastructure Overhaul">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-automated-api-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Automated API Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-systematic-validation-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Systematic Validation Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-human-computer-comparison-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Human-Computer Comparison Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-database-and-storage-architecture-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Database and Storage Architecture Updates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Database and Storage Architecture Updates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-validation-data-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Validation Data Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-framework-metadata-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Framework Metadata Enhancement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-visualization-and-reporting-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Visualization and Reporting Infrastructure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Visualization and Reporting Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-enhanced-visualization-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Enhanced Visualization System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-academic-publication-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Academic Publication Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-platform-integration-and-testing-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Platform Integration and Testing Infrastructure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Platform Integration and Testing Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-integration-testing-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Integration Testing Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-performance-and-scalability-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Performance and Scalability Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-timeline-and-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Timeline and Phases
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Timeline and Phases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-foundation-infrastructure-months-1-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Foundation Infrastructure (Months 1-3)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-established-framework-implementation-months-4-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Established Framework Implementation (Months 4-6)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-validation-infrastructure-months-7-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Validation Infrastructure (Months 7-9)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-platform-optimization-and-publication-months-10-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Platform Optimization and Publication (Months 10-12)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#critical-dependencies-and-risk-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critical Dependencies and Risk Mitigation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Critical Dependencies and Risk Mitigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expert-consultation-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expert Consultation Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-api-integration-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM API Integration Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-study-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Study Complexity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-migration-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Migration Challenges
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics-and-evaluation-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Metrics and Evaluation Criteria
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Success Metrics and Evaluation Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#technical-performance-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Performance Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-impact-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Impact Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-quality-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Quality Metrics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resource-requirements-and-budget-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Requirements and Budget Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resource Requirements and Budget Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#development-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Resources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-and-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infrastructure and Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#human-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Human Resources
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="discernus-software-platform-restructuring-plan-option-4">Discernus Software Platform Restructuring Plan (Option 4)</h1>
+<p><strong>Discernus: Technical Implementation for Established Frameworks</strong></p>
+<p><em>Date: December 2024</em><br />
+<em>Status: Comprehensive Technical Plan</em><br />
+<em>Strategic Approach: Option 4 - Platform Infrastructure for Established Academic Frameworks</em></p>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This document outlines the comprehensive technical restructuring required to transform the current Discernus platform from a research prototype supporting novel theoretical frameworks into production-ready methodological infrastructure for established academic frameworks. The restructuring focuses on implementing three validated frameworks (Moral Foundations Theory, Political Framing Theory, Cultural Theory) with systematic validation infrastructure and expert consultation capabilities.</p>
+<p><strong>Core Technical Transformation</strong>: From prototype research tool to production methodological infrastructure<br />
+<strong>Primary Goal</strong>: Build credible platform for systematic framework comparison and validation<br />
+<strong>Success Criteria</strong>: Platform adoption by computational social science community, validation against established measures, expert endorsement</p>
+<hr />
+<h2 id="current-platform-assessment">Current Platform Assessment</h2>
+<h3 id="current-system-status-analysis">Current System Status Analysis</h3>
+<p>Based on comprehensive platform review from June 2025:</p>
+<p><strong>✅ Strong Foundation Components</strong>:
+- <strong>Framework Architecture</strong>: Production-ready with database as source of truth
+- <strong>Mathematical Foundation</strong>: Circular coordinate system operational
+- <strong>Database Infrastructure</strong>: PostgreSQL with complete schema and framework_data JSON storage
+- <strong>Development Tools</strong>: Comprehensive CLI and validation tools working
+- <strong>Framework Management</strong>: Symlink-based switching system with 4-5 frameworks available</p>
+<p><strong>🚨 Critical Gaps Identified</strong> (102 distinct issues):
+- <strong>LLM Integration</strong>: Manual workflow rather than automated API calls
+- <strong>Import/Dependency Issues</strong>: 20 errors including get_db_session import failures
+- <strong>Visualization Pipeline</strong>: HTML output format issues, rendering problems
+- <strong>Service Integration</strong>: Backend services not fully connected to pipeline
+- <strong>Configuration Management</strong>: Missing framework config files</p>
+<p><strong>Current Pipeline Success Rate</strong>: 0% (0/10 tests passed)<br />
+<strong>Manual Interventions Required</strong>: 30 across different system components</p>
+<h3 id="platform-architecture-strengths">Platform Architecture Strengths</h3>
+<ol>
+<li><strong>Transaction Integrity Architecture</strong>: Fail-fast, fail-clean philosophy implemented</li>
+<li><strong>Framework Agnostic Design</strong>: Universal core with framework extensions</li>
+<li><strong>Quality Assurance</strong>: Six-layer validation focusing on procedural reliability</li>
+<li><strong>Experimental Design Framework</strong>: Five-dimensional space (TEXTS × FRAMEWORKS × PROMPTS × WEIGHTING × EVALUATORS)</li>
+<li><strong>Professional Documentation</strong>: World-class documentation architecture with MECE principles</li>
+</ol>
+<h3 id="platform-architecture-weaknesses">Platform Architecture Weaknesses</h3>
+<ol>
+<li><strong>Novel Framework Dependence</strong>: Current frameworks are unvalidated theoretical constructs</li>
+<li><strong>Manual Validation Workflow</strong>: No systematic comparison with established measures</li>
+<li><strong>Limited Expert Integration</strong>: No formal expert consultation infrastructure</li>
+<li><strong>Academic Validation Gap</strong>: No convergent/discriminant validity testing</li>
+<li><strong>Community Adoption Barriers</strong>: Complex theoretical requirements limit adoption</li>
+</ol>
+<hr />
+<h2 id="technical-restructuring-requirements">Technical Restructuring Requirements</h2>
+<h3 id="1-framework-implementation-infrastructure">1. Framework Implementation Infrastructure</h3>
+<h4 id="11-established-framework-integration">1.1 Established Framework Integration</h4>
+<p><strong>Objective</strong>: Replace current novel frameworks with rigorous implementations of established academic frameworks</p>
+<p><strong>Current Framework Removal</strong>:
+- Remove/archive existing frameworks: <code>civic_virtue</code>, <code>fukuyama_identity</code>, <code>three_wells_political</code>
+- Maintain framework architecture and switching infrastructure
+- Preserve framework management and validation systems</p>
+<p><strong>New Framework Implementation</strong>:</p>
+<h5 id="moral-foundations-theory-mft-framework">Moral Foundations Theory (MFT) Framework</h5>
+<p><strong>Technical Requirements</strong>:
+- Import validated MFT lexicons from established research (Haidt et al.)
+- Implement five-foundation scoring system (Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation)
+- Build prompt templates based on validated MFT instruments
+- Create validation protocols comparing Discernus outputs to Moral Foundations Questionnaire (MFQ)
+- Integrate expert consultation hooks for Jonathan Haidt and collaborators</p>
+<p><strong>Implementation Details</strong>:</p>
+<pre><code class="language-yaml"># frameworks/moral_foundations_theory/framework.json
+{
+  &quot;framework_id&quot;: &quot;moral_foundations_theory&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;theoretical_grounding&quot;: &quot;Haidt et al. (2009-2024)&quot;,
+  &quot;expert_consultants&quot;: [&quot;Jonathan Haidt&quot;, &quot;Jesse Graham&quot;, &quot;Ravi Iyer&quot;],
+  &quot;foundations&quot;: {
+    &quot;care_harm&quot;: {
+      &quot;positive_lexicon&quot;: [&quot;care&quot;, &quot;compassion&quot;, &quot;protect&quot;, &quot;nurture&quot;],
+      &quot;negative_lexicon&quot;: [&quot;harm&quot;, &quot;hurt&quot;, &quot;suffering&quot;, &quot;cruelty&quot;],
+      &quot;validation_instrument&quot;: &quot;MFQ-30 Care subscale&quot;
+    }
+  },
+  &quot;validation_protocols&quot;: {
+    &quot;construct_validity&quot;: &quot;MFQ correlation study&quot;,
+    &quot;convergent_validity&quot;: &quot;Behavioral measure correlation&quot;,
+    &quot;expert_review&quot;: &quot;Haidt lab approval process&quot;
+  }
+}
+</code></pre>
+<h5 id="political-framing-theory-framework">Political Framing Theory Framework</h5>
+<p><strong>Technical Requirements</strong>:
+- Implement Entman's frame definition operationalization
+- Build Lakoff conceptual metaphor detection algorithms
+- Create frame competition analysis capabilities
+- Develop validation against established framing studies
+- Integrate expert consultation with political communication scholars</p>
+<p><strong>Implementation Details</strong>:</p>
+<pre><code class="language-yaml"># frameworks/political_framing_theory/framework.json
+{
+  &quot;framework_id&quot;: &quot;political_framing_theory&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;theoretical_grounding&quot;: &quot;Entman (1993), Lakoff (2002)&quot;,
+  &quot;expert_consultants&quot;: [&quot;Robert Entman&quot;, &quot;Shanto Iyengar&quot;],
+  &quot;frame_types&quot;: {
+    &quot;problem_definition&quot;: {
+      &quot;indicators&quot;: [&quot;crisis&quot;, &quot;challenge&quot;, &quot;opportunity&quot;],
+      &quot;detection_algorithms&quot;: &quot;keyword_contextual_analysis&quot;
+    },
+    &quot;causal_interpretation&quot;: {
+      &quot;indicators&quot;: [&quot;because&quot;, &quot;due to&quot;, &quot;caused by&quot;],
+      &quot;detection_algorithms&quot;: &quot;causal_chain_analysis&quot;
+    },
+    # ... other frame elements
+  },
+  &quot;validation_protocols&quot;: {
+    &quot;replication_studies&quot;: [&quot;Classic framing experiments&quot;],
+    &quot;expert_coding_comparison&quot;: &quot;Inter-rater reliability assessment&quot;
+  }
+}
+</code></pre>
+<h5 id="cultural-theory-framework">Cultural Theory Framework</h5>
+<p><strong>Technical Requirements</strong>:
+- Implement Douglas &amp; Wildavsky grid-group theory
+- Build four ways of life classification (Hierarchist, Individualist, Egalitarian, Fatalist)
+- Create cultural bias indicators and worldview protocols
+- Develop validation against cultural cognition scales
+- Integrate expert consultation with cultural theory researchers</p>
+<p><strong>Implementation Details</strong>:</p>
+<pre><code class="language-yaml"># frameworks/cultural_theory/framework.json
+{
+  &quot;framework_id&quot;: &quot;cultural_theory&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;theoretical_grounding&quot;: &quot;Douglas &amp; Wildavsky (1982), Kahan et al. (2012)&quot;,
+  &quot;expert_consultants&quot;: [&quot;Dan Kahan&quot;, &quot;Cultural Cognition Project&quot;],
+  &quot;worldviews&quot;: {
+    &quot;hierarchist&quot;: {
+      &quot;indicators&quot;: [&quot;authority&quot;, &quot;tradition&quot;, &quot;order&quot;, &quot;respect&quot;],
+      &quot;risk_perception&quot;: &quot;technology_optimistic&quot;
+    },
+    &quot;egalitarian&quot;: {
+      &quot;indicators&quot;: [&quot;equality&quot;, &quot;social justice&quot;, &quot;collective action&quot;],
+      &quot;risk_perception&quot;: &quot;environmental_concern&quot;
+    },
+    # ... other worldviews
+  },
+  &quot;validation_protocols&quot;: {
+    &quot;cultural_cognition_scales&quot;: &quot;CCS correlation study&quot;,
+    &quot;risk_perception_validation&quot;: &quot;Behavioral consistency check&quot;
+  }
+}
+</code></pre>
+<h4 id="12-framework-architecture-enhancements">1.2 Framework Architecture Enhancements</h4>
+<p><strong>Required Modifications</strong>:</p>
+<ol>
+<li><strong>Expert Consultation Integration</strong></li>
+<li>Add expert_consultants field to framework configuration</li>
+<li>Build expert review workflow integration</li>
+<li>Create expert approval tracking system</li>
+<li>
+<p>Implement collaborative development protocols</p>
+</li>
+<li>
+<p><strong>Validation Infrastructure</strong></p>
+</li>
+<li>Add validation_protocols configuration section</li>
+<li>Implement systematic validation study management</li>
+<li>Build convergent/discriminant validity testing</li>
+<li>
+<p>Create expert validation approval workflows</p>
+</li>
+<li>
+<p><strong>Academic Integration</strong></p>
+</li>
+<li>Add theoretical_grounding documentation requirements</li>
+<li>Implement citation tracking and bibliography management</li>
+<li>Build replication study support infrastructure</li>
+<li>Create academic publication integration hooks</li>
+</ol>
+<h3 id="2-llm-integration-infrastructure-overhaul">2. LLM Integration Infrastructure Overhaul</h3>
+<h4 id="21-automated-api-integration">2.1 Automated API Integration</h4>
+<p><strong>Objective</strong>: Replace manual LLM workflow with automated, scalable API-based analysis</p>
+<p><strong>Current Manual Workflow Issues</strong>:
+- Human-in-the-loop requirement limits throughput
+- Inconsistent prompt compliance across LLMs
+- No systematic variance tracking
+- Limited scalability for large corpora analysis</p>
+<p><strong>Required API Integration</strong>:</p>
+<ol>
+<li><strong>Multi-Provider API Wrapper</strong></li>
+</ol>
+<pre><code class="language-python"># src/api_clients/unified_llm_client.py
+class UnifiedLLMClient:
+    def __init__(self):
+        self.providers = {
+            'openai': OpenAIClient(),
+            'anthropic': AnthropicClient(), 
+            'google': GoogleClient()
+        }
+
+    def analyze_text(self, text, framework_id, model, validation_runs=3):
+        &quot;&quot;&quot;Execute multi-run analysis with variance tracking&quot;&quot;&quot;
+        results = []
+        for run in range(validation_runs):
+            result = self._single_analysis(text, framework_id, model)
+            results.append(result)
+
+        return self._aggregate_with_confidence(results)
+</code></pre>
+<ol>
+<li><strong>Batch Processing Engine</strong></li>
+</ol>
+<pre><code class="language-python"># src/processing/batch_analyzer.py
+class BatchAnalyzer:
+    def __init__(self, llm_client, framework_manager):
+        self.llm_client = llm_client
+        self.framework_manager = framework_manager
+        self.queue_manager = QueueManager()
+
+    def process_corpus(self, corpus_id, framework_id, model_list):
+        &quot;&quot;&quot;Process large corpus with systematic analysis&quot;&quot;&quot;
+        # Queue management and batch processing
+        pass
+
+    def track_progress(self, batch_id):
+        &quot;&quot;&quot;Real-time progress tracking with resumption&quot;&quot;&quot;
+        # Progress monitoring implementation
+        pass
+</code></pre>
+<ol>
+<li><strong>Quality Control and Variance Tracking</strong></li>
+</ol>
+<pre><code class="language-python"># src/quality/variance_tracker.py
+class VarianceTracker:
+    def analyze_consistency(self, multi_run_results):
+        &quot;&quot;&quot;Analyze LLM response consistency across runs&quot;&quot;&quot;
+        # Statistical variance analysis
+        pass
+
+    def detect_anomalies(self, results, thresholds):
+        &quot;&quot;&quot;Identify suspicious or inconsistent responses&quot;&quot;&quot;
+        # Anomaly detection implementation
+        pass
+
+    def generate_confidence_metrics(self, results):
+        &quot;&quot;&quot;Generate statistical confidence measures&quot;&quot;&quot;
+        # Confidence interval calculation
+        pass
+</code></pre>
+<h4 id="22-systematic-validation-infrastructure">2.2 Systematic Validation Infrastructure</h4>
+<p><strong>Objective</strong>: Build comprehensive validation system for framework implementations</p>
+<p><strong>Validation Study Management</strong>:</p>
+<ol>
+<li><strong>Construct Validation System</strong></li>
+</ol>
+<pre><code class="language-python"># src/validation/construct_validator.py
+class ConstructValidator:
+    def __init__(self, framework_id):
+        self.framework_id = framework_id
+        self.established_measures = self._load_established_measures()
+
+    def run_construct_validation(self, text_corpus, participant_responses):
+        &quot;&quot;&quot;Compare Discernus outputs with established measures&quot;&quot;&quot;
+        # Correlation analysis with validated instruments
+        pass
+
+    def convergent_validity_test(self, related_constructs):
+        &quot;&quot;&quot;Test convergent validity with theoretically related measures&quot;&quot;&quot;
+        # Convergent validity implementation
+        pass
+
+    def discriminant_validity_test(self, unrelated_constructs):
+        &quot;&quot;&quot;Test discriminant validity with theoretically unrelated measures&quot;&quot;&quot;
+        # Discriminant validity implementation
+        pass
+</code></pre>
+<ol>
+<li><strong>Expert Validation System</strong></li>
+</ol>
+<pre><code class="language-python"># src/validation/expert_validator.py
+class ExpertValidator:
+    def __init__(self, framework_id):
+        self.framework_id = framework_id
+        self.expert_panel = self._load_expert_panel()
+
+    def submit_for_expert_review(self, implementation_details):
+        &quot;&quot;&quot;Submit framework implementation for expert evaluation&quot;&quot;&quot;
+        # Expert consultation workflow
+        pass
+
+    def track_expert_feedback(self, review_id):
+        &quot;&quot;&quot;Track and integrate expert feedback&quot;&quot;&quot;
+        # Feedback integration system
+        pass
+
+    def approval_workflow(self, expert_reviews):
+        &quot;&quot;&quot;Manage expert approval process&quot;&quot;&quot;
+        # Approval tracking implementation
+        pass
+</code></pre>
+<h4 id="23-human-computer-comparison-infrastructure">2.3 Human-Computer Comparison Infrastructure</h4>
+<p><strong>Objective</strong>: Systematic comparison between human expert analysis and computational analysis</p>
+<p><strong>Comparative Analysis System</strong>:</p>
+<ol>
+<li><strong>Human Expert Integration</strong></li>
+</ol>
+<pre><code class="language-python"># src/validation/human_computer_comparator.py
+class HumanComputerComparator:
+    def setup_comparison_study(self, text_sample, expert_panel, framework_id):
+        &quot;&quot;&quot;Setup systematic human vs computer comparison&quot;&quot;&quot;
+        # Study design and management
+        pass
+
+    def collect_human_analyses(self, study_id):
+        &quot;&quot;&quot;Collect and validate human expert analyses&quot;&quot;&quot;
+        # Human analysis collection system
+        pass
+
+    def run_comparative_analysis(self, human_results, computer_results):
+        &quot;&quot;&quot;Statistical comparison of human vs computer analyses&quot;&quot;&quot;
+        # Comparative statistical analysis
+        pass
+
+    def identify_boundary_conditions(self, comparison_results):
+        &quot;&quot;&quot;Identify contexts where human analysis is superior&quot;&quot;&quot;
+        # Boundary condition analysis
+        pass
+</code></pre>
+<h3 id="3-database-and-storage-architecture-updates">3. Database and Storage Architecture Updates</h3>
+<h4 id="31-validation-data-storage">3.1 Validation Data Storage</h4>
+<p><strong>Required Schema Extensions</strong>:</p>
+<pre><code class="language-sql">-- Expert consultation tracking
+CREATE TABLE expert_consultations (
+    id UUID PRIMARY KEY,
+    framework_id VARCHAR NOT NULL,
+    expert_id VARCHAR NOT NULL,
+    consultation_type VARCHAR NOT NULL, -- 'implementation_review', 'validation_approval'
+    status VARCHAR NOT NULL, -- 'pending', 'in_progress', 'completed', 'approved'
+    feedback JSONB,
+    approval_decision VARCHAR, -- 'approved', 'rejected', 'revision_required'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Validation study management
+CREATE TABLE validation_studies (
+    id UUID PRIMARY KEY,
+    framework_id VARCHAR NOT NULL,
+    study_type VARCHAR NOT NULL, -- 'construct', 'convergent', 'discriminant', 'expert'
+    study_design JSONB NOT NULL,
+    status VARCHAR NOT NULL, -- 'planned', 'active', 'completed', 'published'
+    participant_count INTEGER,
+    results JSONB,
+    statistical_summary JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    completed_at TIMESTAMP
+);
+
+-- Multi-run analysis results
+CREATE TABLE multi_run_analyses (
+    id UUID PRIMARY KEY,
+    text_content_hash VARCHAR NOT NULL,
+    framework_id VARCHAR NOT NULL,
+    model_id VARCHAR NOT NULL,
+    run_count INTEGER NOT NULL,
+    individual_results JSONB NOT NULL, -- Array of individual run results
+    aggregated_results JSONB NOT NULL, -- Mean scores with confidence intervals
+    variance_metrics JSONB NOT NULL, -- Statistical variance analysis
+    quality_flags JSONB, -- Anomaly detection flags
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Human-computer comparison studies
+CREATE TABLE human_computer_comparisons (
+    id UUID PRIMARY KEY,
+    study_id UUID REFERENCES validation_studies(id),
+    text_id UUID NOT NULL,
+    human_results JSONB NOT NULL,
+    computer_results JSONB NOT NULL,
+    agreement_metrics JSONB NOT NULL,
+    expert_consensus JSONB,
+    boundary_conditions JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+</code></pre>
+<h4 id="32-framework-metadata-enhancement">3.2 Framework Metadata Enhancement</h4>
+<p><strong>Enhanced Framework Configuration Storage</strong>:</p>
+<pre><code class="language-sql">-- Enhanced framework metadata
+ALTER TABLE frameworks ADD COLUMN expert_consultants JSONB;
+ALTER TABLE frameworks ADD COLUMN validation_protocols JSONB;
+ALTER TABLE frameworks ADD COLUMN theoretical_grounding JSONB;
+ALTER TABLE frameworks ADD COLUMN implementation_status VARCHAR DEFAULT 'development';
+ALTER TABLE frameworks ADD COLUMN expert_approval_status VARCHAR DEFAULT 'pending';
+ALTER TABLE frameworks ADD COLUMN validation_summary JSONB;
+</code></pre>
+<h3 id="4-visualization-and-reporting-infrastructure">4. Visualization and Reporting Infrastructure</h3>
+<h4 id="41-enhanced-visualization-system">4.1 Enhanced Visualization System</h4>
+<p><strong>Required Visualization Enhancements</strong>:</p>
+<ol>
+<li><strong>Validation Dashboard</strong></li>
+</ol>
+<pre><code class="language-python"># src/visualization/validation_dashboard.py
+class ValidationDashboard:
+    def generate_construct_validity_report(self, validation_study_id):
+        &quot;&quot;&quot;Generate comprehensive construct validity visualization&quot;&quot;&quot;
+        # Correlation matrices, scatterplots, statistical summaries
+        pass
+
+    def expert_consensus_visualization(self, expert_comparison_id):
+        &quot;&quot;&quot;Visualize expert agreement and disagreement patterns&quot;&quot;&quot;
+        # Inter-rater reliability charts, consensus mapping
+        pass
+
+    def human_computer_comparison_charts(self, comparison_study_id):
+        &quot;&quot;&quot;Visualize human vs computer analysis comparison&quot;&quot;&quot;
+        # Agreement visualizations, boundary condition maps
+        pass
+</code></pre>
+<ol>
+<li><strong>Multi-Run Analysis Visualization</strong></li>
+</ol>
+<pre><code class="language-python"># src/visualization/multi_run_visualizer.py
+class MultiRunVisualizer:
+    def confidence_interval_charts(self, multi_run_results):
+        &quot;&quot;&quot;Visualize confidence intervals for multi-run analysis&quot;&quot;&quot;
+        # Error bars, confidence bands, variance indicators
+        pass
+
+    def variance_analysis_dashboard(self, variance_metrics):
+        &quot;&quot;&quot;Dashboard for LLM response variance analysis&quot;&quot;&quot;
+        # Variance trends, consistency metrics, quality indicators
+        pass
+</code></pre>
+<h4 id="42-academic-publication-integration">4.2 Academic Publication Integration</h4>
+<p><strong>Publication-Ready Output Generation</strong>:</p>
+<ol>
+<li><strong>Academic Report Generator</strong></li>
+</ol>
+<pre><code class="language-python"># src/reporting/academic_reporter.py
+class AcademicReporter:
+    def generate_validation_report(self, framework_id):
+        &quot;&quot;&quot;Generate comprehensive validation report for publication&quot;&quot;&quot;
+        # Statistical tables, methodology description, results summary
+        pass
+
+    def create_replication_package(self, study_id):
+        &quot;&quot;&quot;Create complete replication package for academic sharing&quot;&quot;&quot;
+        # Data, code, documentation, metadata
+        pass
+
+    def expert_endorsement_summary(self, framework_id):
+        &quot;&quot;&quot;Generate expert consultation and endorsement summary&quot;&quot;&quot;
+        # Expert credentials, consultation process, approval decisions
+        pass
+</code></pre>
+<h3 id="5-platform-integration-and-testing-infrastructure">5. Platform Integration and Testing Infrastructure</h3>
+<h4 id="51-integration-testing-framework">5.1 Integration Testing Framework</h4>
+<p><strong>Comprehensive Testing for New Infrastructure</strong>:</p>
+<ol>
+<li><strong>Framework Implementation Testing</strong></li>
+</ol>
+<pre><code class="language-python"># tests/integration/test_framework_implementations.py
+class TestFrameworkImplementations:
+    def test_mft_implementation_validity(self):
+        &quot;&quot;&quot;Test MFT implementation against known validation data&quot;&quot;&quot;
+        pass
+
+    def test_framing_theory_replication(self):
+        &quot;&quot;&quot;Test Political Framing Theory implementation through study replication&quot;&quot;&quot;
+        pass
+
+    def test_cultural_theory_consistency(self):
+        &quot;&quot;&quot;Test Cultural Theory implementation consistency&quot;&quot;&quot;
+        pass
+</code></pre>
+<ol>
+<li><strong>Validation Infrastructure Testing</strong></li>
+</ol>
+<pre><code class="language-python"># tests/integration/test_validation_infrastructure.py
+class TestValidationInfrastructure:
+    def test_construct_validation_pipeline(self):
+        &quot;&quot;&quot;Test complete construct validation workflow&quot;&quot;&quot;
+        pass
+
+    def test_expert_consultation_workflow(self):
+        &quot;&quot;&quot;Test expert consultation integration&quot;&quot;&quot;
+        pass
+
+    def test_human_computer_comparison(self):
+        &quot;&quot;&quot;Test human-computer comparison infrastructure&quot;&quot;&quot;
+        pass
+</code></pre>
+<h4 id="52-performance-and-scalability-testing">5.2 Performance and Scalability Testing</h4>
+<p><strong>Platform Performance Validation</strong>:</p>
+<ol>
+<li><strong>Load Testing for API Integration</strong></li>
+</ol>
+<pre><code class="language-python"># tests/performance/test_api_performance.py
+class TestAPIPerformance:
+    def test_batch_processing_scalability(self):
+        &quot;&quot;&quot;Test batch processing with large corpora&quot;&quot;&quot;
+        pass
+
+    def test_multi_provider_reliability(self):
+        &quot;&quot;&quot;Test reliability across multiple LLM providers&quot;&quot;&quot;
+        pass
+
+    def test_concurrent_validation_studies(self):
+        &quot;&quot;&quot;Test concurrent validation study execution&quot;&quot;&quot;
+        pass
+</code></pre>
+<hr />
+<h2 id="implementation-timeline-and-phases">Implementation Timeline and Phases</h2>
+<h3 id="phase-1-foundation-infrastructure-months-1-3">Phase 1: Foundation Infrastructure (Months 1-3)</h3>
+<p><strong>Objective</strong>: Establish core infrastructure for established framework support</p>
+<p><strong>Month 1: Database and Architecture</strong>
+- Implement enhanced database schema for validation data
+- Update framework configuration architecture
+- Build expert consultation infrastructure
+- Create validation study management system</p>
+<p><strong>Month 2: LLM Integration Overhaul</strong> 
+- Implement unified LLM API client
+- Build batch processing engine
+- Create variance tracking and quality control systems
+- Implement multi-run analysis with confidence intervals</p>
+<p><strong>Month 3: Framework Implementation Foundation</strong>
+- Remove/archive existing novel frameworks
+- Build framework implementation infrastructure
+- Create validation protocol integration
+- Implement expert consultation workflow</p>
+<h3 id="phase-2-established-framework-implementation-months-4-6">Phase 2: Established Framework Implementation (Months 4-6)</h3>
+<p><strong>Objective</strong>: Implement and validate three established academic frameworks</p>
+<p><strong>Month 4: Moral Foundations Theory Implementation</strong>
+- Import validated MFT lexicons and instruments
+- Implement five-foundation scoring system
+- Build MFT-specific prompt templates
+- Create validation protocols against MFQ
+- Initiate expert consultation with Haidt lab</p>
+<p><strong>Month 5: Political Framing Theory Implementation</strong>
+- Implement Entman frame definition operationalization
+- Build Lakoff conceptual metaphor detection
+- Create frame competition analysis capabilities
+- Implement validation against established framing studies
+- Initiate expert consultation with political communication scholars</p>
+<p><strong>Month 6: Cultural Theory Implementation</strong>
+- Implement Douglas &amp; Wildavsky grid-group theory
+- Build four ways of life classification system
+- Create cultural bias indicators and worldview protocols
+- Implement validation against cultural cognition scales
+- Initiate expert consultation with cultural theory researchers</p>
+<h3 id="phase-3-validation-infrastructure-months-7-9">Phase 3: Validation Infrastructure (Months 7-9)</h3>
+<p><strong>Objective</strong>: Build and execute comprehensive validation studies</p>
+<p><strong>Month 7: Construct Validation System</strong>
+- Implement construct validation infrastructure
+- Build convergent and discriminant validity testing
+- Create systematic validation study management
+- Execute initial validation studies for all three frameworks</p>
+<p><strong>Month 8: Human-Computer Comparison Infrastructure</strong>
+- Implement human expert integration system
+- Build comparative analysis infrastructure
+- Create boundary condition identification system
+- Execute human-computer comparison studies</p>
+<p><strong>Month 9: Expert Validation and Approval</strong>
+- Complete expert consultation process for all frameworks
+- Integrate expert feedback and approval decisions
+- Finalize framework implementations based on expert guidance
+- Document expert endorsement process</p>
+<h3 id="phase-4-platform-optimization-and-publication-months-10-12">Phase 4: Platform Optimization and Publication (Months 10-12)</h3>
+<p><strong>Objective</strong>: Optimize platform and prepare for publication and community adoption</p>
+<p><strong>Month 10: Platform Optimization</strong>
+- Performance optimization based on validation study experience
+- User experience improvements for research workflow
+- Documentation enhancement for community adoption
+- Integration testing and quality assurance</p>
+<p><strong>Month 11: Publication Preparation</strong>
+- Generate comprehensive validation reports
+- Create academic publication materials
+- Build replication packages for community sharing
+- Prepare platform for public release</p>
+<p><strong>Month 12: Community Release and Adoption</strong>
+- Public platform release with documentation
+- Academic publication submission
+- Community engagement and adoption facilitation
+- Ongoing support infrastructure establishment</p>
+<hr />
+<h2 id="critical-dependencies-and-risk-mitigation">Critical Dependencies and Risk Mitigation</h2>
+<h3 id="expert-consultation-dependencies">Expert Consultation Dependencies</h3>
+<p><strong>Risk</strong>: Expert availability and engagement limitations
+<strong>Mitigation</strong>: Early engagement, flexible timelines, multiple expert options</p>
+<h3 id="llm-api-integration-risks">LLM API Integration Risks</h3>
+<p><strong>Risk</strong>: API reliability, cost, and rate limiting issues
+<strong>Mitigation</strong>: Multi-provider redundancy, cost monitoring, graceful degradation</p>
+<h3 id="validation-study-complexity">Validation Study Complexity</h3>
+<p><strong>Risk</strong>: Validation studies require significant resources
+<strong>Mitigation</strong>: Phased approach, automated infrastructure, strategic partnerships</p>
+<h3 id="platform-migration-challenges">Platform Migration Challenges</h3>
+<p><strong>Risk</strong>: Disruption to existing platform functionality during restructuring
+<strong>Mitigation</strong>:
+- Parallel development approach maintaining current functionality
+- Comprehensive testing infrastructure and rollback procedures
+- Staged migration with user communication and training
+- Maintaining backward compatibility where possible</p>
+<hr />
+<h2 id="success-metrics-and-evaluation-criteria">Success Metrics and Evaluation Criteria</h2>
+<h3 id="technical-performance-metrics">Technical Performance Metrics</h3>
+<ol>
+<li><strong>Platform Reliability</strong>: 99%+ uptime for API integration</li>
+<li><strong>Validation Success</strong>: Successful validation against established measures for all three frameworks</li>
+<li><strong>Expert Approval</strong>: Formal approval from framework originators</li>
+<li><strong>Performance Scalability</strong>: Support for large-scale corpus analysis (10,000+ documents)</li>
+<li><strong>Community Adoption</strong>: Platform usage by external researchers</li>
+</ol>
+<h3 id="academic-impact-metrics">Academic Impact Metrics</h3>
+<ol>
+<li><strong>Publication Success</strong>: Acceptance in top-tier computational social science journal</li>
+<li><strong>Expert Endorsement</strong>: Formal endorsement from framework originators</li>
+<li><strong>Replication Studies</strong>: Successful replication of established findings using Discernus</li>
+<li><strong>Community Engagement</strong>: External researcher adoption and collaboration</li>
+<li><strong>Methodological Contribution</strong>: Recognition as methodological advancement</li>
+</ol>
+<h3 id="platform-quality-metrics">Platform Quality Metrics</h3>
+<ol>
+<li><strong>Validation Coverage</strong>: 100% validation against established measures</li>
+<li><strong>Expert Integration</strong>: Successful consultation workflow with all framework experts</li>
+<li><strong>Documentation Quality</strong>: Comprehensive documentation enabling community adoption</li>
+<li><strong>User Experience</strong>: Streamlined workflow for academic researchers</li>
+<li><strong>Open Science</strong>: Complete replication packages and open-source availability</li>
+</ol>
+<hr />
+<h2 id="resource-requirements-and-budget-considerations">Resource Requirements and Budget Considerations</h2>
+<h3 id="development-resources">Development Resources</h3>
+<ol>
+<li><strong>Backend Development</strong>: 6-8 months full-time for infrastructure development</li>
+<li><strong>Framework Implementation</strong>: 3-4 months per framework (parallel development possible)</li>
+<li><strong>Validation Infrastructure</strong>: 4-6 months for comprehensive validation system</li>
+<li><strong>Expert Consultation</strong>: Ongoing engagement throughout development process</li>
+<li><strong>Testing and QA</strong>: 2-3 months for comprehensive testing and validation</li>
+</ol>
+<h3 id="infrastructure-and-tools">Infrastructure and Tools</h3>
+<ol>
+<li><strong>Database Infrastructure</strong>: Enhanced PostgreSQL configuration with validation data storage</li>
+<li><strong>LLM API Costs</strong>: Budget for systematic validation studies and testing</li>
+<li><strong>Compute Resources</strong>: Scalable infrastructure for batch processing and analysis</li>
+<li><strong>Expert Consultation</strong>: Budget for expert time and collaboration</li>
+<li><strong>Publication Costs</strong>: Open access publication fees and conference presentation</li>
+</ol>
+<h3 id="human-resources">Human Resources</h3>
+<ol>
+<li><strong>Technical Lead</strong>: Full-time development coordination and architecture</li>
+<li><strong>Framework Specialists</strong>: Part-time specialists for each framework implementation</li>
+<li><strong>Validation Coordinator</strong>: Full-time validation study design and execution</li>
+<li><strong>Expert Relations</strong>: Part-time coordination of expert consultation process</li>
+<li><strong>Documentation Specialist</strong>: Technical writing and documentation development</li>
+</ol>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p>This comprehensive restructuring plan transforms the current Discernus platform from a research prototype into production-ready methodological infrastructure for computational social science. The plan addresses all critical gaps identified in the current system while building the validation infrastructure necessary for academic credibility and community adoption.</p>
+<p>The restructuring eliminates dependence on novel theoretical frameworks in favor of rigorous implementation of established academic approaches, creating a solid foundation for methodological contribution rather than theoretical discovery. Success depends on systematic execution of the implementation phases, meaningful expert consultation, and comprehensive validation against established measures.</p>
+<p>The resulting platform will provide genuine value to the computational social science community while establishing credibility for future theoretical innovation within a validated methodological framework. This approach maximizes the probability of successful publication and long-term platform adoption while creating sustainable infrastructure for academic research collaboration. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,756 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Perplexity AI Verification Prompt for Custom Instructions - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#perplexity-ai-verification-prompt-for-custom-instructions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Perplexity AI Verification Prompt for Custom Instructions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#copy-paste-ready-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Copy-Paste Ready Prompt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-prompt-works-for-perplexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Why This Prompt Works for Perplexity
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Why This Prompt Works for Perplexity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leverages-perplexitys-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leverages Perplexity's Strengths:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addresses-perplexitys-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Addresses Perplexity's Risks:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provides-clear-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provides Clear Structure:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Implementation Tips
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Implementation Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-instructions-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Instructions Setup:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-the-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing the Prompt:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimization:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Expected Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Expected Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-safeguard-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before Safeguard Prompt:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-safeguard-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      After Safeguard Prompt:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-and-adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Monitoring and Adjustment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ Monitoring and Adjustment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#weekly-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weekly Review:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#red-flags-to-watch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Red Flags to Watch:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-improvement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous Improvement:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Advanced Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Advanced Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow Integration:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#team-coordination" class="md-nav__link">
+    <span class="md-ellipsis">
+      Team Coordination:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Success Metrics
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="perplexity-ai-verification-prompt-for-custom-instructions">Perplexity AI Verification Prompt for Custom Instructions</h1>
+<p><strong>For Discernus Research and Academic Work</strong></p>
+<hr />
+<h2 id="copy-paste-ready-prompt">📋 <strong>Copy-Paste Ready Prompt</strong></h2>
+<pre><code>CRITICAL: CITATION VERIFICATION PROTOCOL
+
+For ALL academic citations you provide:
+
+1. VERIFICATION REQUIREMENTS:
+   - Include direct links to: Google Scholar result, DOI resolver, journal page
+   - Mark confidence level: HIGH/MEDIUM/LOW/UNCERTAIN for each citation
+   - If you cannot find a working link to the actual paper, explicitly state &quot;LINK NOT VERIFIED&quot;
+   - Flag any citation you're not 100% certain exists with ⚠️
+
+2. PROHIBITED ACTIONS:
+   - NEVER create or suggest citations without verified web sources
+   - NEVER assume a paper exists based on logical reasoning
+   - NEVER cite papers you cannot directly link to
+
+3. REQUIRED FORMAT for each citation:
+   [Author, Year] - &quot;Title&quot; - Journal
+   🔗 Verification: [Google Scholar link] | [DOI link] | [Journal link]
+   📊 Confidence: HIGH/MEDIUM/LOW/UNCERTAIN
+   ⚠️ [Flag if uncertain]
+
+4. WHEN UNCERTAIN:
+   Say &quot;I found references to this topic but cannot verify specific citations&quot; rather than providing unverified citations.
+
+5. SEARCH STRATEGY:
+   Use multiple search approaches and cross-reference sources before citing.
+
+This is for academic research where citation accuracy is critical.
+</code></pre>
+<hr />
+<h2 id="why-this-prompt-works-for-perplexity">🎯 <strong>Why This Prompt Works for Perplexity</strong></h2>
+<h3 id="leverages-perplexitys-strengths"><strong>Leverages Perplexity's Strengths:</strong></h3>
+<ul>
+<li><strong>Web search integration</strong> - Forces use of Perplexity's search capabilities</li>
+<li><strong>Link generation</strong> - Requires actual verification links</li>
+<li><strong>Source cross-referencing</strong> - Encourages multiple search strategies</li>
+</ul>
+<h3 id="addresses-perplexitys-risks"><strong>Addresses Perplexity's Risks:</strong></h3>
+<ul>
+<li><strong>False confidence</strong> - Requires explicit confidence rating</li>
+<li><strong>Link hallucination</strong> - Demands working verification links</li>
+<li><strong>Citation fabrication</strong> - Prohibits unverified citations</li>
+</ul>
+<h3 id="provides-clear-structure"><strong>Provides Clear Structure:</strong></h3>
+<ul>
+<li><strong>Verification requirements</strong> - Specific, actionable steps</li>
+<li><strong>Prohibited actions</strong> - Clear boundaries</li>
+<li><strong>Required format</strong> - Consistent output structure</li>
+<li><strong>Fallback strategy</strong> - What to do when uncertain</li>
+</ul>
+<hr />
+<h2 id="implementation-tips">🔧 <strong>Implementation Tips</strong></h2>
+<h3 id="custom-instructions-setup"><strong>Custom Instructions Setup:</strong></h3>
+<ol>
+<li><strong>Copy the prompt</strong> from the box above</li>
+<li><strong>Paste into Perplexity Pro</strong> custom instructions</li>
+<li><strong>Test with known citations</strong> to verify it's working</li>
+<li><strong>Adjust if needed</strong> based on Perplexity's response patterns</li>
+</ol>
+<h3 id="testing-the-prompt"><strong>Testing the Prompt:</strong></h3>
+<p>Ask Perplexity to find citations for a topic you know well and check if:
+- ✅ All links actually work
+- ✅ Confidence levels are provided
+- ✅ Uncertain citations are flagged
+- ✅ Format is consistent</p>
+<h3 id="optimization"><strong>Optimization:</strong></h3>
+<p>If the prompt is too long for custom instructions, use this <strong>condensed version</strong>:</p>
+<pre><code>CITATION PROTOCOL: For all academic citations provide: (1) Working verification links (Google Scholar + DOI + Journal), (2) Confidence level (HIGH/MEDIUM/LOW), (3) ⚠️ flag if uncertain, (4) Say &quot;cannot verify citations&quot; instead of guessing. Academic research requires verified citations only.
+</code></pre>
+<hr />
+<h2 id="expected-results">📊 <strong>Expected Results</strong></h2>
+<h3 id="before-safeguard-prompt"><strong>Before Safeguard Prompt:</strong></h3>
+<pre><code>Perplexity: &quot;Recent studies show this trend (Smith et al., 2024; Jones, 2023)&quot;
+User: *copies citations without verification*
+Result: Potential hallucinations in bibliography
+</code></pre>
+<h3 id="after-safeguard-prompt"><strong>After Safeguard Prompt:</strong></h3>
+<pre><code>Perplexity: &quot;I found references to this trend but cannot verify specific recent citations. Here are verified sources I can confirm:
+[Author, 2022] - 'Verified Title' - Real Journal
+🔗 Verification: [working Scholar link] | [working DOI] | [working journal link]  
+📊 Confidence: HIGH
+</code></pre>
+<hr />
+<h2 id="monitoring-and-adjustment">⚠️ <strong>Monitoring and Adjustment</strong></h2>
+<h3 id="weekly-review"><strong>Weekly Review:</strong></h3>
+<ul>
+<li>Check if Perplexity is following the verification protocol</li>
+<li>Note any citations that slip through without proper verification</li>
+<li>Adjust prompt language if needed</li>
+</ul>
+<h3 id="red-flags-to-watch"><strong>Red Flags to Watch:</strong></h3>
+<ul>
+<li>Citations without working verification links</li>
+<li>Missing confidence ratings</li>
+<li>"Perfect" citations that seem too convenient</li>
+<li>Recent papers (2023-2024) without DOIs</li>
+</ul>
+<h3 id="continuous-improvement"><strong>Continuous Improvement:</strong></h3>
+<p>Based on your experience, you might need to:
+- Add specific instructions for your research domain
+- Include examples of acceptable vs. unacceptable citations
+- Adjust confidence level requirements
+- Add domain-specific verification sources</p>
+<hr />
+<h2 id="advanced-integration">🚀 <strong>Advanced Integration</strong></h2>
+<h3 id="workflow-integration"><strong>Workflow Integration:</strong></h3>
+<ol>
+<li><strong>Perplexity search</strong> with verification prompt</li>
+<li><strong>Immediate verification</strong> of provided links</li>
+<li><strong>Documentation</strong> in your verification log</li>
+<li><strong>Bibliography addition</strong> only after verification</li>
+</ol>
+<h3 id="team-coordination"><strong>Team Coordination:</strong></h3>
+<p>If sharing Perplexity results with team members:
+- Include the verification status in shared documents
+- Copy the verification links for team review
+- Flag any citations that need additional human verification</p>
+<hr />
+<h2 id="success-metrics">📝 <strong>Success Metrics</strong></h2>
+<p>You'll know the prompt is working when:
+- ✅ Every Perplexity citation comes with working verification links
+- ✅ Confidence levels help you prioritize verification efforts
+- ✅ Uncertain citations are clearly flagged
+- ✅ You catch potential issues before they enter your bibliography
+- ✅ Perplexity says "I cannot verify" instead of guessing</p>
+<hr />
+<p><strong>Start today</strong>: Copy the prompt into your Perplexity custom instructions and test it with your next research query! </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

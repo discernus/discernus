@@ -1,0 +1,785 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Storage Architecture for Modular Narrative Gravity Wells - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#storage-architecture-for-modular-narrative-gravity-wells" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Storage Architecture for Modular Narrative Gravity Wells
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommended Directory Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage Principles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Storage Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-framework-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Framework Separation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-version-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Version Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-active-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Active Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-extensibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Extensibility
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Benefits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Benefits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-researchers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Researchers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Developers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-reorganize-current-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Reorganize Current System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-enable-framework-switching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Enable Framework Switching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-research-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Research Extensions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-framework-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Framework Definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Framework Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternative-framework-political-spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternative Framework: Political Spectrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-research-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Research Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#switch-active-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch Active Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyze-with-specific-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analyze with Specific Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compare-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compare Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="storage-architecture-for-modular-narrative-gravity-wells">Storage Architecture for Modular Narrative Gravity Wells</h1>
+<h2 id="overview">Overview</h2>
+<p>The modular architecture supports multiple dipole frameworks and generated prompts. This document outlines the recommended storage structure for maintainability, extensibility, and research reproducibility.</p>
+<h2 id="recommended-directory-structure">Recommended Directory Structure</h2>
+<pre><code>moral_gravity_analysis/
+├── frameworks/                    # Multiple dipole frameworks
+│   ├── moral_foundations/         # Original 5-dipole system
+│   │   ├── dipoles.json
+│   │   ├── framework.json
+│   │   └── README.md
+│   ├── political_spectrum/        # Alternative: left-right political analysis
+│   │   ├── dipoles.json
+│   │   ├── framework.json
+│   │   └── README.md
+│   └── custom_research/           # User-defined frameworks
+│       ├── dipoles.json
+│       ├── framework.json
+│       └── README.md
+├── prompts/                       # Generated prompts by framework and version
+│   ├── moral_foundations/
+│   │   ├── v2025.06.04/
+│   │   │   ├── interactive.txt
+│   │   │   ├── batch.txt
+│   │   │   └── metadata.json
+│   │   └── v2025.01.03/
+│   │       ├── interactive.txt
+│   │       └── metadata.json
+│   └── political_spectrum/
+│       └── v2025.01.06/
+│           ├── interactive.txt
+│           └── metadata.json
+├── config/                        # Current active configuration (symlink)
+│   ├── dipoles.json -&gt; ../frameworks/moral_foundations/dipoles.json
+│   └── framework.json -&gt; ../frameworks/moral_foundations/framework.json
+└── model_output/                  # Analysis results (unchanged)
+</code></pre>
+<h2 id="storage-principles">Storage Principles</h2>
+<h3 id="1-framework-separation">1. <strong>Framework Separation</strong></h3>
+<ul>
+<li>Each complete dipole system gets its own directory under <code>frameworks/</code></li>
+<li>Contains both conceptual (<code>dipoles.json</code>) and mathematical (<code>framework.json</code>) definitions</li>
+<li>Includes documentation explaining the theoretical basis</li>
+</ul>
+<h3 id="2-version-management">2. <strong>Version Management</strong></h3>
+<ul>
+<li>Prompts organized by framework and version</li>
+<li>Metadata tracks generation parameters and config versions</li>
+<li>Clear lineage from configuration to generated prompt</li>
+</ul>
+<h3 id="3-active-configuration">3. <strong>Active Configuration</strong></h3>
+<ul>
+<li><code>config/</code> directory points to currently active framework via symlinks</li>
+<li>Maintains backward compatibility with existing code</li>
+<li>Easy switching between frameworks</li>
+</ul>
+<h3 id="4-extensibility">4. <strong>Extensibility</strong></h3>
+<ul>
+<li>New frameworks can be added without affecting existing ones</li>
+<li>Researchers can develop custom dipole systems</li>
+<li>Clear separation between core system and research extensions</li>
+</ul>
+<h2 id="implementation-benefits">Implementation Benefits</h2>
+<h3 id="for-researchers">For Researchers</h3>
+<ul>
+<li><strong>Multiple Frameworks</strong>: Compare different moral psychology theories</li>
+<li><strong>Version Control</strong>: Track evolution of frameworks and prompts</li>
+<li><strong>Reproducibility</strong>: Clear provenance from theory to analysis</li>
+<li><strong>Customization</strong>: Develop domain-specific dipole systems</li>
+</ul>
+<h3 id="for-developers">For Developers</h3>
+<ul>
+<li><strong>Modularity</strong>: Clean separation of concerns</li>
+<li><strong>Maintainability</strong>: Framework changes don't affect core code</li>
+<li><strong>Extensibility</strong>: Plugin-like architecture for new frameworks</li>
+<li><strong>Compatibility</strong>: Existing analyses continue to work</li>
+</ul>
+<h2 id="migration-strategy">Migration Strategy</h2>
+<h3 id="phase-1-reorganize-current-system">Phase 1: Reorganize Current System</h3>
+<ol>
+<li>Create <code>frameworks/moral_foundations/</code> with current configs</li>
+<li>Move generated prompts to <code>prompts/civic_virtue/v2025.06.04/</code></li>
+<li>Create symlinks in <code>config/</code> to active framework</li>
+</ol>
+<h3 id="phase-2-enable-framework-switching">Phase 2: Enable Framework Switching</h3>
+<ol>
+<li>Update <code>NarrativeGravityWellsElliptical</code> to accept framework parameter</li>
+<li>Add framework selection to command-line tools</li>
+<li>Update <code>generate_prompt.py</code> for multi-framework support</li>
+</ol>
+<h3 id="phase-3-research-extensions">Phase 3: Research Extensions</h3>
+<ol>
+<li>Develop alternative frameworks (political, cultural, etc.)</li>
+<li>Create framework validation tools</li>
+<li>Add comparative analysis capabilities</li>
+</ol>
+<h2 id="example-framework-definitions">Example Framework Definitions</h2>
+<h3 id="alternative-framework-political-spectrum">Alternative Framework: Political Spectrum</h3>
+<pre><code class="language-json">// frameworks/political_spectrum/dipoles.json
+{
+  &quot;version&quot;: &quot;2025.01.06&quot;,
+  &quot;description&quot;: &quot;Left-Right Political Analysis Framework&quot;,
+  &quot;dipoles&quot;: [
+    {
+      &quot;name&quot;: &quot;Economic&quot;,
+      &quot;positive&quot;: {&quot;name&quot;: &quot;Solidarity&quot;, &quot;description&quot;: &quot;...&quot;},
+      &quot;negative&quot;: {&quot;name&quot;: &quot;Competition&quot;, &quot;description&quot;: &quot;...&quot;}
+    },
+    {
+      &quot;name&quot;: &quot;Social&quot;,
+      &quot;positive&quot;: {&quot;name&quot;: &quot;Equality&quot;, &quot;description&quot;: &quot;...&quot;},
+      &quot;negative&quot;: {&quot;name&quot;: &quot;Tradition&quot;, &quot;description&quot;: &quot;...&quot;}
+    }
+    // ... additional dipoles
+  ]
+}
+</code></pre>
+<h3 id="custom-research-framework">Custom Research Framework</h3>
+<pre><code class="language-json">// frameworks/environmental_ethics/dipoles.json
+{
+  &quot;version&quot;: &quot;2025.01.06&quot;,
+  &quot;description&quot;: &quot;Environmental Ethics Analysis Framework&quot;,
+  &quot;dipoles&quot;: [
+    {
+      &quot;name&quot;: &quot;Stewardship&quot;,
+      &quot;positive&quot;: {&quot;name&quot;: &quot;Sustainability&quot;, &quot;description&quot;: &quot;...&quot;},
+      &quot;negative&quot;: {&quot;name&quot;: &quot;Exploitation&quot;, &quot;description&quot;: &quot;...&quot;}
+    }
+    // ... domain-specific dipoles
+  ]
+}
+</code></pre>
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="switch-active-framework">Switch Active Framework</h3>
+<pre><code class="language-bash"># Switch to political spectrum framework
+ln -sf ../frameworks/political_spectrum/dipoles.json config/dipoles.json
+ln -sf ../frameworks/political_spectrum/framework.json config/framework.json
+
+# Generate new prompt for active framework
+python generate_prompt.py --output prompts/political_spectrum/v2025.01.06/
+</code></pre>
+<h3 id="analyze-with-specific-framework">Analyze with Specific Framework</h3>
+<pre><code class="language-python"># Use specific framework for analysis
+analyzer = NarrativeGravityWellsElliptical(framework=&quot;political_spectrum&quot;)
+results = analyzer.analyze_text(text)
+</code></pre>
+<h3 id="compare-frameworks">Compare Frameworks</h3>
+<pre><code class="language-python"># Compare same text across different frameworks
+moral_results = NarrativeGravityWellsElliptical(framework=&quot;moral_foundations&quot;).analyze_text(text)
+political_results = NarrativeGravityWellsElliptical(framework=&quot;political_spectrum&quot;).analyze_text(text)
+</code></pre>
+<p>This architecture provides a solid foundation for research extensibility while maintaining the simplicity and power of the current system.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

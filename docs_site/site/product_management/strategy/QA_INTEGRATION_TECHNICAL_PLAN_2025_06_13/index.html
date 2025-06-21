@@ -1,0 +1,968 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>QA Integration Technical Plan - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#qa-integration-technical-plan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              QA Integration Technical Plan
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-academic-pipeline-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Current Academic Pipeline Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Current Academic Pipeline Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-components-analyzed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Components Analyzed:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Classes:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Integration Points
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Integration Points">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-data-export-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Data Export Enhancement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-analysis-template-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Analysis Template Enhancement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-documentation-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Documentation Enhancement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-statistical-reporting-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Statistical Reporting Enhancement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Implementation Phases
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Implementation Phases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-core-qa-integration-june-14-focus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Core QA Integration (June 14 Focus)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-template-enhancement-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Template Enhancement (Future)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-documentation-integration-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Documentation Integration (Future)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Validation Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Validation Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unit Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-to-end-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      End-to-End Tests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tomorrows-implementation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Tomorrow's Implementation Checklist
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Tomorrow&#39;s Implementation Checklist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immediate-tasks-june-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      Immediate Tasks (June 14):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Criteria:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="qa-integration-technical-plan">QA Integration Technical Plan</h1>
+<p><em>Generated: June 13, 2025</em>
+<em>Implementation Target: June 14, 2025</em></p>
+<h2 id="overview"><strong>🎯 Overview</strong></h2>
+<p>This document provides the detailed technical specification for integrating the 6-layer Quality Assurance system into the academic templates pipeline. This integration will enhance all academic outputs (data exports, Jupyter notebooks, R scripts, methodology papers) with confidence scoring and quality validation.</p>
+<h2 id="current-academic-pipeline-analysis"><strong>📋 Current Academic Pipeline Analysis</strong></h2>
+<h3 id="core-components-analyzed"><strong>Core Components Analyzed</strong>:</h3>
+<ol>
+<li><strong><code>src/narrative_gravity/academic/data_export.py</code></strong> - Data export to academic formats</li>
+<li><strong><code>src/narrative_gravity/academic/analysis_templates.py</code></strong> - Jupyter/R/Stata template generation  </li>
+<li><strong><code>src/narrative_gravity/academic/documentation.py</code></strong> - Methodology and results documentation</li>
+</ol>
+<h3 id="key-classes"><strong>Key Classes</strong>:</h3>
+<ul>
+<li><code>AcademicDataExporter</code> - PostgreSQL to CSV/Feather/Stata/JSON export</li>
+<li><code>JupyterTemplateGenerator</code> - Exploratory analysis notebook generation</li>
+<li><code>RScriptGenerator</code> - R statistical analysis script generation</li>
+<li><code>MethodologyPaperGenerator</code> - Academic methodology documentation</li>
+<li><code>StatisticalReportFormatter</code> - APA-style results formatting</li>
+</ul>
+<h2 id="integration-points"><strong>🔧 Integration Points</strong></h2>
+<h3 id="1-data-export-enhancement"><strong>1. Data Export Enhancement</strong></h3>
+<p><strong>Target</strong>: <code>AcademicDataExporter._prepare_academic_dataframe()</code></p>
+<p><strong>Current Behavior</strong>: 
+- Exports raw analysis data to academic formats
+- Creates data dictionaries with variable descriptions
+- Handles JSON field expansion and categorical variables</p>
+<p><strong>QA Enhancement</strong>:</p>
+<pre><code class="language-python"># New method to add
+def _add_qa_validation(self, df: pd.DataFrame) -&gt; pd.DataFrame:
+    &quot;&quot;&quot;Add Quality Assurance validation to exported data.&quot;&quot;&quot;
+    from ..utils.llm_quality_assurance import LLMQualityAssuranceSystem
+
+    qa_system = LLMQualityAssuranceSystem()
+    qa_results = []
+
+    for idx, row in df.iterrows():
+        # Run QA validation on each analysis
+        assessment = qa_system.validate_llm_analysis(
+            text_input=row['text_content'],
+            framework=row['framework'],
+            llm_response=json.loads(row['raw_scores']) if row['raw_scores'] else {},
+            parsed_scores=self._extract_well_scores(row)
+        )
+
+        qa_results.append({
+            'qa_confidence_level': assessment.confidence_level,
+            'qa_confidence_score': assessment.confidence_score,
+            'qa_requires_second_opinion': assessment.requires_second_opinion,
+            'qa_anomalies_count': len(assessment.anomalies_detected),
+            'qa_checks_passed': len([c for c in assessment.individual_checks if c.passed]),
+            'qa_total_checks': len(assessment.individual_checks)
+        })
+
+    # Add QA columns to dataframe
+    qa_df = pd.DataFrame(qa_results)
+    return pd.concat([df, qa_df], axis=1)
+</code></pre>
+<p><strong>Data Dictionary Updates</strong>:</p>
+<pre><code class="language-python"># Enhanced data dictionary generation
+qa_field_descriptions = {
+    'qa_confidence_level': 'Quality assurance confidence level (HIGH/MEDIUM/LOW)',
+    'qa_confidence_score': 'Numeric confidence score (0.0-1.0)',
+    'qa_requires_second_opinion': 'Boolean flag for analyses requiring validation',
+    'qa_anomalies_count': 'Number of statistical anomalies detected',
+    'qa_checks_passed': 'Number of quality checks that passed',
+    'qa_total_checks': 'Total number of quality checks performed'
+}
+</code></pre>
+<h3 id="2-analysis-template-enhancement"><strong>2. Analysis Template Enhancement</strong></h3>
+<p><strong>Target</strong>: <code>JupyterTemplateGenerator._get_reliability_analysis_code()</code></p>
+<p><strong>Current Behavior</strong>:
+- Generates CV-based reliability analysis code
+- Creates framework performance comparisons
+- Includes statistical significance testing</p>
+<p><strong>QA Enhancement</strong>:</p>
+<pre><code class="language-python">def _get_qa_analysis_code(self):
+    &quot;&quot;&quot;Generate Quality Assurance analysis code for notebooks.&quot;&quot;&quot;
+    return '''# Quality Assurance Analysis
+print(&quot;\\n🔍 Quality Assurance Assessment:&quot;)
+
+# QA confidence level distribution
+if 'qa_confidence_level' in data.columns:
+    qa_distribution = data['qa_confidence_level'].value_counts()
+    print(&quot;\\nConfidence Level Distribution:&quot;)
+    print(qa_distribution)
+
+    # QA confidence by framework
+    qa_by_framework = data.groupby('framework')['qa_confidence_score'].agg([
+        'count', 'mean', 'std', 'min', 'max'
+    ]).round(4)
+    print(&quot;\\nQA Confidence by Framework:&quot;)
+    print(qa_by_framework)
+
+    # High confidence rate analysis
+    high_confidence_rate = (data['qa_confidence_level'] == 'HIGH').mean() * 100
+    print(f&quot;\\nHigh Confidence Rate: {high_confidence_rate:.1f}%&quot;)
+
+    # Anomaly detection summary
+    if 'qa_anomalies_count' in data.columns:
+        anomaly_summary = data.groupby('framework')['qa_anomalies_count'].agg([
+            'mean', 'sum', 'max'
+        ]).round(2)
+        print(&quot;\\nAnomaly Detection Summary by Framework:&quot;)
+        print(anomaly_summary)
+
+# QA-Enhanced Reliability Visualization
+if 'qa_confidence_score' in data.columns and 'cv' in data.columns:
+    qa_reliability_fig = px.scatter(
+        data, 
+        x='cv', 
+        y='qa_confidence_score',
+        color='qa_confidence_level',
+        facet_col='framework',
+        title='QA Confidence vs Traditional Reliability (CV)',
+        labels={
+            'cv': 'Coefficient of Variation', 
+            'qa_confidence_score': 'QA Confidence Score',
+            'qa_confidence_level': 'QA Level'
+        }
+    )
+    qa_reliability_fig.update_layout(title_font_size=18)
+    qa_reliability_fig.write_html('qa_reliability_analysis.html')
+    qa_reliability_fig.write_image('qa_reliability_analysis.png', width=1500, height=800, scale=2)
+    print(&quot;✅ QA reliability analysis: qa_reliability_analysis.html/.png&quot;)
+
+# Only use high-confidence analyses for final conclusions
+high_confidence_data = data[data['qa_confidence_level'] == 'HIGH']
+print(f&quot;\\n📊 High-Confidence Dataset: {len(high_confidence_data)} of {len(data)} analyses ({len(high_confidence_data)/len(data)*100:.1f}%)&quot;)
+'''
+</code></pre>
+<h3 id="3-documentation-enhancement"><strong>3. Documentation Enhancement</strong></h3>
+<p><strong>Target</strong>: <code>MethodologyPaperGenerator._build_methodology_content()</code></p>
+<p><strong>QA Methodology Section Addition</strong>:</p>
+<pre><code class="language-python">qa_methodology_section = &quot;&quot;&quot;
+### Quality Assurance Protocol
+
+#### Multi-Layer Validation System
+
+The analysis employs a comprehensive 6-layer quality assurance system designed to prevent silent failures and artificial precision in LLM-based analysis:
+
+**Layer 1: Input Validation**
+- Text length and quality assessment (100-50,000 characters)
+- Framework compatibility verification
+- Content appropriateness evaluation
+
+**Layer 2: LLM Response Validation**
+- JSON format structure verification
+- Required field completeness checking
+- Score range validation (0.0-1.0)
+- Well completeness assessment (≥80% expected wells present)
+
+**Layer 3: Statistical Coherence Validation**
+- Default value ratio detection (critical for identifying parsing failures)
+- Score variance adequacy assessment
+- Pattern uniformity detection
+- Roosevelt 1933 case prevention (artificial precision detection)
+
+**Layer 4: Mathematical Consistency Verification**
+- Narrative position calculation validation
+- Coordinate system consistency checking
+- Zero-position anomaly detection
+- Calculation reproducibility verification
+
+**Layer 5: LLM Second Opinion Cross-Validation**
+- Required for analyses with critical failures
+- Triggered by high default value ratios (≥40%)
+- Applied to multiple anomaly detections
+
+**Layer 6: Anomaly Detection**
+- Perfect symmetry identification
+- Statistical outlier analysis
+- Identical score detection
+- Temporal consistency assessment
+
+#### Confidence Scoring Framework
+
+**Confidence Levels**:
+- **HIGH** (≥0.8): Publication-ready analyses with full statistical reliability
+- **MEDIUM** (0.5-0.79): Analyses suitable for exploratory research with caveats
+- **LOW** (&lt;0.5): Analyses requiring revision or exclusion from conclusions
+
+**Layer Weighting**:
+- Input Validation: 10% weight
+- LLM Response Validation: 30% weight  
+- Statistical Coherence: 40% weight (highest priority)
+- Mathematical Consistency: 15% weight
+- Anomaly Detection: 5% weight
+
+**Critical Failure Penalties**:
+- Default ratio failures: 95% confidence reduction
+- General critical failures: 70% confidence reduction
+- Multiple anomaly penalty: Progressive confidence reduction
+
+#### Quality-Assured Research Standards
+
+**Inclusion Criteria**: Only HIGH and MEDIUM confidence analyses included in statistical conclusions, with appropriate confidence level reporting.
+
+**Transparency Requirements**: All analyses report confidence levels and QA metrics alongside traditional reliability measures.
+
+**Replication Standards**: Complete QA assessment data included in replication packages for independent verification.
+&quot;&quot;&quot;
+</code></pre>
+<h3 id="4-statistical-reporting-enhancement"><strong>4. Statistical Reporting Enhancement</strong></h3>
+<p><strong>Target</strong>: <code>StatisticalReportFormatter._build_results_content()</code></p>
+<p><strong>QA-Enhanced Results Section</strong>:</p>
+<pre><code class="language-python">def _add_qa_results_section(self, results: Dict[str, Any]) -&gt; str:
+    &quot;&quot;&quot;Add QA-specific results reporting.&quot;&quot;&quot;
+
+    qa_content = &quot;&quot;&quot;
+## Quality Assurance Results
+
+### Confidence Assessment Overview
+
+&quot;&quot;&quot;
+
+    if 'qa_summary' in results:
+        qa = results['qa_summary']
+        qa_content += f&quot;&quot;&quot;
+The 6-layer quality assurance system assessed {qa.get('total_analyses', 0)} analyses:
+
+- **HIGH Confidence**: {qa.get('high_confidence_count', 0)} analyses ({qa.get('high_confidence_rate', 0):.1f}%)
+- **MEDIUM Confidence**: {qa.get('medium_confidence_count', 0)} analyses ({qa.get('medium_confidence_rate', 0):.1f}%)
+- **LOW Confidence**: {qa.get('low_confidence_count', 0)} analyses ({qa.get('low_confidence_rate', 0):.1f}%)
+
+**Quality-Assured Conclusions**: All statistical conclusions based exclusively on HIGH confidence analyses (n = {qa.get('high_confidence_count', 0)}).
+&quot;&quot;&quot;
+
+    qa_content += &quot;&quot;&quot;
+### Anomaly Detection Results
+
+Statistical anomaly detection identified systematic patterns requiring attention:
+&quot;&quot;&quot;
+
+    if 'anomaly_summary' in results:
+        anomalies = results['anomaly_summary']
+        qa_content += f&quot;&quot;&quot;
+- **Default Value Patterns**: {anomalies.get('default_value_cases', 0)} cases with high default ratios
+- **Low Variance Issues**: {anomalies.get('low_variance_cases', 0)} cases with insufficient score variation
+- **Perfect Symmetry**: {anomalies.get('perfect_symmetry_cases', 0)} mathematically perfect patterns
+- **Outlier Analyses**: {anomalies.get('outlier_cases', 0)} statistical outliers identified
+
+These patterns were automatically flagged and excluded from final statistical conclusions to ensure research integrity.
+&quot;&quot;&quot;
+
+    return qa_content
+</code></pre>
+<h2 id="implementation-phases"><strong>🚀 Implementation Phases</strong></h2>
+<h3 id="phase-1-core-qa-integration-june-14-focus"><strong>Phase 1: Core QA Integration</strong> (June 14 Focus)</h3>
+<ol>
+<li><strong>Create QA-Enhanced Data Exporter</strong></li>
+<li>Extend <code>AcademicDataExporter</code> with QA validation</li>
+<li>Add <code>_add_qa_validation()</code> method</li>
+<li>Update data dictionary generation</li>
+<li>
+<p>Test with sample dataset</p>
+</li>
+<li>
+<p><strong>Integration Testing</strong></p>
+</li>
+<li>Unit tests for QA validation integration</li>
+<li>Export format verification (CSV, Feather, JSON)</li>
+<li>Data dictionary completeness verification</li>
+</ol>
+<h3 id="phase-2-template-enhancement-future"><strong>Phase 2: Template Enhancement</strong> (Future)</h3>
+<ol>
+<li><strong>Jupyter Template Updates</strong></li>
+<li>Add <code>_get_qa_analysis_code()</code> method</li>
+<li>Integrate QA visualizations</li>
+<li>
+<p>Update reliability analysis sections</p>
+</li>
+<li>
+<p><strong>R Script Generation Updates</strong></p>
+</li>
+<li>Add confidence-weighted analysis code</li>
+<li>Include QA assessment in statistical modeling</li>
+</ol>
+<h3 id="phase-3-documentation-integration-future"><strong>Phase 3: Documentation Integration</strong> (Future)</h3>
+<ol>
+<li><strong>Methodology Enhancement</strong></li>
+<li>Add QA methodology sections</li>
+<li>
+<p>Include confidence level documentation</p>
+</li>
+<li>
+<p><strong>Results Reporting Enhancement</strong></p>
+</li>
+<li>Add QA results sections</li>
+<li>Implement confidence-filtered reporting</li>
+</ol>
+<h2 id="validation-approach"><strong>✅ Validation Approach</strong></h2>
+<h3 id="unit-tests"><strong>Unit Tests</strong></h3>
+<pre><code class="language-python">def test_qa_enhanced_data_export():
+    &quot;&quot;&quot;Test QA integration in data export.&quot;&quot;&quot;
+    exporter = QAEnhancedDataExporter()
+
+    # Test data with known QA characteristics
+    test_data = create_test_dataset_with_qa_issues()
+    result = exporter.export_experiments_data(test_data)
+
+    # Verify QA columns present
+    assert 'qa_confidence_level' in result
+    assert 'qa_confidence_score' in result
+
+    # Verify QA detection working
+    assert result['qa_confidence_level'].isin(['HIGH', 'MEDIUM', 'LOW']).all()
+    assert (result['qa_confidence_score'] &gt;= 0.0).all()
+    assert (result['qa_confidence_score'] &lt;= 1.0).all()
+</code></pre>
+<h3 id="integration-tests"><strong>Integration Tests</strong></h3>
+<ul>
+<li>Compare QA-enhanced vs standard exports</li>
+<li>Verify all academic formats include QA data</li>
+<li>Test complete notebook generation with QA sections</li>
+</ul>
+<h3 id="end-to-end-tests"><strong>End-to-End Tests</strong></h3>
+<ul>
+<li>Generate complete research package with QA integration</li>
+<li>Validate all components work together</li>
+<li>Test replication package includes QA documentation</li>
+</ul>
+<h2 id="tomorrows-implementation-checklist"><strong>📋 Tomorrow's Implementation Checklist</strong></h2>
+<h3 id="immediate-tasks-june-14"><strong>Immediate Tasks (June 14)</strong>:</h3>
+<ul>
+<li>[ ] Create <code>QAEnhancedDataExporter</code> class</li>
+<li>[ ] Implement <code>_add_qa_validation()</code> method</li>
+<li>[ ] Update <code>_prepare_academic_dataframe()</code> integration</li>
+<li>[ ] Enhance data dictionary generation</li>
+<li>[ ] Write unit tests for core functionality</li>
+<li>[ ] Test with real experimental data</li>
+<li>[ ] Validate export formats include QA columns</li>
+</ul>
+<h3 id="success-criteria"><strong>Success Criteria</strong>:</h3>
+<ul>
+<li>[ ] QA-enhanced data export fully operational</li>
+<li>[ ] All export formats (CSV, Feather, JSON) include QA data</li>
+<li>[ ] Data dictionaries document QA fields</li>
+<li>[ ] Unit tests pass for QA integration</li>
+<li>[ ] Manual validation confirms QA data accuracy</li>
+</ul>
+<hr />
+<p><em>This technical plan provides the complete specification for Phase 1 QA integration implementation.</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

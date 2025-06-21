@@ -26,43 +26,57 @@ except ImportError as e:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="YouTube Transcript Intelligent Ingestion Service - Extract transcripts and metadata from YouTube videos"
+        description="A CLI tool to fetch transcripts from YouTube videos, use an LLM to extract structured metadata, and ingest them into the corpus database.",
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog="""
+Example Usage:
+  # Ingest a YouTube video with default settings
+  python %(prog)s "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --verbose
+
+  # Ingest a video and attempt to get the Spanish or German transcript
+  python %(prog)s "https://www.youtube.com/watch?v=some_video" -l es de -v
+
+  # Perform a dry run without saving to the database
+  python %(prog)s "https://youtu.be/another_video" --dry-run
+"""
     )
     
+    # Core arguments
     parser.add_argument(
         "url",
-        help="YouTube video URL (supports youtube.com/watch, youtu.be, etc.)"
+        help="The full URL of the YouTube video to ingest (e.g., 'https://www.youtube.com/watch?v=...')'."
     )
     
-    parser.add_argument(
+    # Configuration arguments
+    config_group = parser.add_argument_group('Configuration', 'Fine-tune the ingestion process.')
+    config_group.add_argument(
         "--output-dir", "-o",
-        help="Output directory for results (default: tmp/youtube_ingestion_TIMESTAMP)"
+        help="Directory to save the transcript and metadata logs. Defaults to a timestamped directory in 'tmp/'."
     )
-    
-    parser.add_argument(
+    config_group.add_argument(
         "--confidence-threshold", "-c",
         type=float,
         default=70.0,
-        help="Confidence threshold for automatic registration (default: 70.0)"
+        help="The minimum confidence score (0-100) from the LLM required to automatically register the transcript. Default: 70.0."
     )
-    
-    parser.add_argument(
-        "--dry-run", "-n",
-        action="store_true",
-        help="Process video but don't register in corpus database"
-    )
-    
-    parser.add_argument(
+    config_group.add_argument(
         "--languages", "-l",
         nargs="+",
         default=["en"],
-        help="Preferred transcript languages (default: en)"
+        help="A list of preferred language codes for the transcript, in order of preference (e.g., 'en' 'es' 'de'). Default: 'en'."
     )
     
-    parser.add_argument(
+    # Execution control arguments
+    exec_group = parser.add_argument_group('Execution Control', 'Control how the script runs.')
+    exec_group.add_argument(
+        "--dry-run", "-n",
+        action="store_true",
+        help="Perform a 'dry run'. The script will fetch and process the video but will NOT write to the database."
+    )
+    exec_group.add_argument(
         "--verbose", "-v",
         action="store_true",
-        help="Verbose output"
+        help="Enable verbose output, showing detailed metadata and progress."
     )
     
     args = parser.parse_args()

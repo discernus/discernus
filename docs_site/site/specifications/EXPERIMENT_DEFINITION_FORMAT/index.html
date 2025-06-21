@@ -1,0 +1,1192 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Experiment Definition Format Specification - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#experiment-definition-format-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Experiment Definition Format Specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-case-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Case Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-definition-format-experimentjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Definition Format (experiment.json)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Execution Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Execution Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-prepare-experiment-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Prepare Experiment Package
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-validate-experiment-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Validate Experiment Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-execute-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Execute Experiment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-automated-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Automated Execution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-definition-format-frameworksjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Definition Format (frameworks/*.json)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits-of-this-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of This Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Benefits of This Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-researchers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Researchers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-reproducibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Reproducibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-system-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      For System Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-core-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Core Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-enhanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Enhanced Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-advanced-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Advanced Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-execution-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Execution Output
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-output-format-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Output Format Specifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Academic Output Format Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-export-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Export Formats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-package-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Package Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistical-analysis-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistical Analysis Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualization-package-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization Package Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manuscript-support-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manuscript Support Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-academic-workflow-configurations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Academic Workflow Configurations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="experiment-definition-format-specification">Experiment Definition Format Specification</h1>
+<h2 id="overview">Overview</h2>
+<p>This specification defines a declarative format for experiment definitions, enabling researchers to specify complex multi-dimensional experiments using structured configuration files rather than custom Python scripts.</p>
+<h2 id="use-case-example">Use Case Example</h2>
+<p><strong>Research Scenario</strong>: A researcher wants to analyze 4 texts (2 existing, 2 new) using 2 frameworks (1 new, 1 modified CV framework) across 2 specific LLMs with standard templates.</p>
+<p><strong>Solution</strong>: Create an experiment package with definition file + resources.</p>
+<h2 id="directory-structure">Directory Structure</h2>
+<pre><code>my_comparative_study/
+├── experiment.json              # Main experiment definition
+├── texts/                       # New texts to ingest
+│   ├── new_speech_1.txt
+│   └── new_speech_2.txt
+├── frameworks/                  # New/modified frameworks
+│   ├── my_innovation_framework.json
+│   └── cv_modified_v2.json
+├── prompts/                     # Custom prompt templates (optional)
+│   └── evidence_focused_v1.json
+├── metadata.json                # Study metadata
+└── results/                     # Generated output directory
+    ├── raw_data/
+    ├── analysis_reports/
+    └── qa_reports/
+</code></pre>
+<h2 id="experiment-definition-format-experimentjson">Experiment Definition Format (<code>experiment.json</code>)</h2>
+<pre><code class="language-json">{
+  &quot;experiment&quot;: {
+    &quot;name&quot;: &quot;Cross-Framework Presidential Rhetoric Analysis&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;description&quot;: &quot;Comparative analysis of presidential rhetoric using innovation framework vs modified civic virtue&quot;,
+    &quot;hypothesis&quot;: &quot;Innovation-focused framework will show different patterns than civic virtue in technology-era speeches&quot;,
+    &quot;research_context&quot;: &quot;Testing new theoretical framework against established baseline&quot;,
+    &quot;tags&quot;: [&quot;comparative&quot;, &quot;framework-validation&quot;, &quot;presidential-rhetoric&quot;],
+    &quot;created_by&quot;: &quot;researcher@university.edu&quot;,
+    &quot;created_date&quot;: &quot;2025-06-13&quot;
+  },
+  &quot;texts&quot;: {
+    &quot;sources&quot;: [
+      {
+        &quot;type&quot;: &quot;existing&quot;,
+        &quot;text_id&quot;: &quot;obama_inaugural_2009&quot;,
+        &quot;notes&quot;: &quot;Baseline modern presidential rhetoric&quot;
+      },
+      {
+        &quot;type&quot;: &quot;existing&quot;, 
+        &quot;text_id&quot;: &quot;biden_sotu_2024&quot;,
+        &quot;notes&quot;: &quot;Technology-era policy discourse&quot;
+      },
+      {
+        &quot;type&quot;: &quot;new&quot;,
+        &quot;file_path&quot;: &quot;texts/new_speech_1.txt&quot;,
+        &quot;text_id&quot;: &quot;tech_ceo_address_2025&quot;,
+        &quot;metadata&quot;: {
+          &quot;title&quot;: &quot;Technology Innovation Address&quot;,
+          &quot;author&quot;: &quot;Tech CEO&quot;,
+          &quot;date&quot;: &quot;2025-03-15&quot;,
+          &quot;document_type&quot;: &quot;address&quot;
+        }
+      },
+      {
+        &quot;type&quot;: &quot;new&quot;,
+        &quot;file_path&quot;: &quot;texts/new_speech_2.txt&quot;, 
+        &quot;text_id&quot;: &quot;academic_innovation_speech&quot;,
+        &quot;metadata&quot;: {
+          &quot;title&quot;: &quot;Academic Innovation in Democracy&quot;,
+          &quot;author&quot;: &quot;University President&quot;,
+          &quot;date&quot;: &quot;2025-05-20&quot;,
+          &quot;document_type&quot;: &quot;speech&quot;
+        }
+      }
+    ]
+  },
+  &quot;frameworks&quot;: {
+    &quot;configurations&quot;: [
+      {
+        &quot;type&quot;: &quot;existing&quot;,
+        &quot;framework_id&quot;: &quot;civic_virtue&quot;,
+        &quot;version&quot;: &quot;v2025.06.12&quot;,
+        &quot;alias&quot;: &quot;cv_baseline&quot;,
+        &quot;notes&quot;: &quot;Standard civic virtue framework for comparison&quot;
+      },
+      {
+        &quot;type&quot;: &quot;modified&quot;,
+        &quot;base_framework_id&quot;: &quot;civic_virtue&quot;, 
+        &quot;file_path&quot;: &quot;frameworks/cv_modified_v2.json&quot;,
+        &quot;alias&quot;: &quot;cv_innovation_focused&quot;,
+        &quot;notes&quot;: &quot;CV framework with innovation-oriented weighting&quot;
+      },
+      {
+        &quot;type&quot;: &quot;new&quot;,
+        &quot;file_path&quot;: &quot;frameworks/my_innovation_framework.json&quot;,
+        &quot;alias&quot;: &quot;innovation_framework&quot;,
+        &quot;notes&quot;: &quot;Novel framework focusing on innovation vs tradition dimensions&quot;
+      }
+    ]
+  },
+  &quot;models&quot;: {
+    &quot;evaluators&quot;: [
+      {
+        &quot;model&quot;: &quot;gpt-4.1-mini&quot;,
+        &quot;alias&quot;: &quot;gpt4_mini&quot;,
+        &quot;parameters&quot;: {
+          &quot;temperature&quot;: 0.1,
+          &quot;max_tokens&quot;: 4000
+        }
+      },
+      {
+        &quot;model&quot;: &quot;claude-3-sonnet&quot;,
+        &quot;alias&quot;: &quot;claude3&quot;,
+        &quot;parameters&quot;: {
+          &quot;temperature&quot;: 0.1,
+          &quot;max_tokens&quot;: 4000
+        }
+      }
+    ]
+  },
+  &quot;templates&quot;: {
+    &quot;prompt_templates&quot;: [
+      {
+        &quot;type&quot;: &quot;existing&quot;,
+        &quot;template_id&quot;: &quot;hierarchical_v2.1.0&quot;,
+        &quot;alias&quot;: &quot;standard_hierarchical&quot;
+      }
+    ],
+    &quot;weighting_schemes&quot;: [
+      {
+        &quot;type&quot;: &quot;existing&quot;,
+        &quot;scheme_id&quot;: &quot;standard&quot;,
+        &quot;alias&quot;: &quot;standard_weighting&quot;
+      }
+    ]
+  },
+  &quot;execution&quot;: {
+    &quot;design_matrix&quot;: {
+      &quot;type&quot;: &quot;full_factorial&quot;,
+      &quot;dimensions&quot;: [&quot;texts&quot;, &quot;frameworks&quot;, &quot;models&quot;],
+      &quot;fixed_components&quot;: {
+        &quot;prompt_template&quot;: &quot;standard_hierarchical&quot;,
+        &quot;weighting_scheme&quot;: &quot;standard_weighting&quot;
+      }
+    },
+    &quot;replication&quot;: {
+      &quot;runs_per_combination&quot;: 3,
+      &quot;randomize_order&quot;: true
+    },
+    &quot;quality_assurance&quot;: {
+      &quot;enabled&quot;: true,
+      &quot;confidence_threshold&quot;: 0.7,
+      &quot;require_second_opinion_below&quot;: 0.5
+    },
+    &quot;cost_controls&quot;: {
+      &quot;max_total_cost&quot;: 5.00,
+      &quot;cost_per_run_limit&quot;: 0.10,
+      &quot;confirm_before_execution&quot;: true
+    }
+  },
+  &quot;outputs&quot;: {
+    &quot;data_formats&quot;: [&quot;csv&quot;, &quot;feather&quot;, &quot;json&quot;, &quot;stata_dta&quot;],
+    &quot;include_qa_reports&quot;: true,
+    &quot;include_visualizations&quot;: true,
+    &quot;academic_export&quot;: {
+      &quot;enabled&quot;: true,
+      &quot;primary_format&quot;: &quot;r_package&quot;,
+      &quot;additional_formats&quot;: [&quot;python_package&quot;, &quot;stata_package&quot;],
+      &quot;statistical_analysis&quot;: {
+        &quot;descriptive_statistics&quot;: true,
+        &quot;reliability_analysis&quot;: true,
+        &quot;comparative_analysis&quot;: true,
+        &quot;correlation_matrices&quot;: true,
+        &quot;significance_tests&quot;: [&quot;t_test&quot;, &quot;anova&quot;, &quot;chi_square&quot;]
+      },
+      &quot;visualization_package&quot;: {
+        &quot;individual_plots&quot;: true,
+        &quot;comparative_plots&quot;: true,
+        &quot;interactive_html&quot;: true,
+        &quot;publication_ready_pdf&quot;: true,
+        &quot;custom_themes&quot;: [&quot;academic&quot;, &quot;presentation&quot;]
+      },
+      &quot;replication_package&quot;: {
+        &quot;include_code&quot;: true,
+        &quot;include_data&quot;: true,
+        &quot;include_documentation&quot;: true,
+        &quot;analysis_scripts&quot;: [&quot;r_analysis.R&quot;, &quot;python_analysis.py&quot;, &quot;stata_analysis.do&quot;],
+        &quot;readme_documentation&quot;: true
+      },
+      &quot;manuscript_support&quot;: {
+        &quot;methods_section&quot;: true,
+        &quot;results_tables&quot;: true,
+        &quot;figure_captions&quot;: true,
+        &quot;supplementary_materials&quot;: true
+      }
+    }
+  }
+}
+</code></pre>
+<h2 id="execution-workflow">Execution Workflow</h2>
+<h3 id="step-1-prepare-experiment-package">Step 1: Prepare Experiment Package</h3>
+<pre><code class="language-bash"># Create experiment directory
+mkdir my_comparative_study
+cd my_comparative_study
+
+# Add new texts
+mkdir texts
+cp /path/to/tech_ceo_speech.txt texts/new_speech_1.txt
+cp /path/to/academic_speech.txt texts/new_speech_2.txt
+
+# Add new/modified frameworks  
+mkdir frameworks
+# (Create framework JSON files using framework specification)
+
+# Create experiment definition
+# (Use experiment.json template above)
+</code></pre>
+<h3 id="step-2-validate-experiment-definition">Step 2: Validate Experiment Definition</h3>
+<pre><code class="language-bash"># Validate experiment specification
+python3 scripts/validate_experiment.py my_comparative_study/
+
+# Output:
+# ✅ Experiment definition valid
+# ✅ All text files found
+# ✅ Framework specifications valid  
+# ✅ Model configurations valid
+# 📊 Estimated execution: 36 runs, ~$1.20, 45 minutes
+</code></pre>
+<h3 id="step-3-execute-experiment">Step 3: Execute Experiment</h3>
+<pre><code class="language-bash"># Execute experiment with QA integration
+python3 scripts/execute_experiment.py my_comparative_study/ --qa-enhanced
+
+# Interactive confirmation:
+# 🧪 Experiment: Cross-Framework Presidential Rhetoric Analysis
+# 📊 Design Matrix: 4 texts × 3 frameworks × 2 models × 3 runs = 72 total runs
+# 💰 Estimated cost: $1.20 (within $5.00 limit)
+# ⏱️  Estimated time: 45 minutes
+# 
+# Proceed? [y/N]: y
+</code></pre>
+<h3 id="step-4-automated-execution">Step 4: Automated Execution</h3>
+<pre><code class="language-bash"># System automatically:
+# 1. Ingests new texts using intelligent ingestion
+# 2. Validates and registers new frameworks  
+# 3. Executes full experimental matrix
+# 4. Applies QA validation to all runs
+# 5. Generates academic exports and reports
+# 6. Creates replication package
+</code></pre>
+<h2 id="framework-definition-format-frameworksjson">Framework Definition Format (<code>frameworks/*.json</code>)</h2>
+<pre><code class="language-json">{
+  &quot;framework_specification&quot;: {
+    &quot;name&quot;: &quot;Innovation vs Tradition Framework&quot;,
+    &quot;version&quot;: &quot;v1.0.0&quot;,
+    &quot;description&quot;: &quot;Framework analyzing rhetoric along innovation-tradition dimensions&quot;,
+    &quot;theoretical_foundation&quot;: &quot;Technology adoption theory, institutional change theory&quot;,
+    &quot;domain&quot;: &quot;technology_policy&quot;,
+    &quot;coordinate_system&quot;: &quot;circular&quot;
+  },
+  &quot;wells&quot;: [
+    {
+      &quot;name&quot;: &quot;Innovation&quot;,
+      &quot;description&quot;: &quot;Emphasis on technological progress, disruption, future-orientation&quot;,
+      &quot;angle_degrees&quot;: 0,
+      &quot;well_type&quot;: &quot;constructive&quot;,
+      &quot;weight&quot;: 1.0
+    },
+    {
+      &quot;name&quot;: &quot;Adaptation&quot;, 
+      &quot;description&quot;: &quot;Balanced approach to technological change with institutional stability&quot;,
+      &quot;angle_degrees&quot;: 45,
+      &quot;well_type&quot;: &quot;constructive&quot;, 
+      &quot;weight&quot;: 0.8
+    },
+    {
+      &quot;name&quot;: &quot;Tradition&quot;,
+      &quot;description&quot;: &quot;Emphasis on established institutions, proven approaches, stability&quot;,
+      &quot;angle_degrees&quot;: 180,
+      &quot;well_type&quot;: &quot;constructive&quot;,
+      &quot;weight&quot;: 0.9
+    },
+    {
+      &quot;name&quot;: &quot;Resistance&quot;,
+      &quot;description&quot;: &quot;Opposition to change, technological skepticism, status quo bias&quot;,
+      &quot;angle_degrees&quot;: 225, 
+      &quot;well_type&quot;: &quot;problematic&quot;,
+      &quot;weight&quot;: 1.0
+    }
+  ],
+  &quot;positioning_strategy&quot;: &quot;dipole_clustering&quot;,
+  &quot;validation_status&quot;: &quot;experimental&quot;,
+  &quot;academic_citations&quot;: [
+    &quot;Rogers, E. (2003). Diffusion of Innovations&quot;,
+    &quot;March, J. (1991). Exploration and Exploitation in Organizational Learning&quot;
+  ]
+}
+</code></pre>
+<h2 id="benefits-of-this-approach">Benefits of This Approach</h2>
+<h3 id="for-researchers">For Researchers</h3>
+<ul>
+<li><strong>Declarative</strong>: Specify what you want, not how to code it</li>
+<li><strong>Reusable</strong>: Share experiment definitions with colleagues</li>
+<li><strong>Traceable</strong>: Complete provenance from definition to results</li>
+<li><strong>Validatable</strong>: Check feasibility before execution</li>
+<li><strong>Extensible</strong>: Add new resources without changing core definition</li>
+</ul>
+<h3 id="for-reproducibility">For Reproducibility</h3>
+<ul>
+<li><strong>Self-Contained</strong>: Everything needed for replication in one package</li>
+<li><strong>Version Controlled</strong>: Track changes to experimental design</li>
+<li><strong>Platform Independent</strong>: JSON format works across tools</li>
+<li><strong>Academic Standard</strong>: Meets publication requirements for transparency</li>
+</ul>
+<h3 id="for-system-integration">For System Integration</h3>
+<ul>
+<li><strong>QA Enhanced</strong>: Automatic integration with 6-layer quality assurance</li>
+<li><strong>Cost Controlled</strong>: Built-in budget management and confirmation</li>
+<li><strong>Resource Management</strong>: Intelligent handling of new vs existing resources</li>
+<li><strong>Output Standardized</strong>: Consistent academic export formats</li>
+</ul>
+<h2 id="implementation-plan">Implementation Plan</h2>
+<h3 id="phase-1-core-infrastructure">Phase 1: Core Infrastructure</h3>
+<ul>
+<li><code>scripts/validate_experiment.py</code> - Experiment definition validation</li>
+<li><code>scripts/execute_experiment.py</code> - Automated execution engine</li>
+<li>JSON schema validation for experiment definitions</li>
+<li>Resource ingestion pipeline integration</li>
+</ul>
+<h3 id="phase-2-enhanced-features">Phase 2: Enhanced Features</h3>
+<ul>
+<li>Interactive experiment builder CLI tool</li>
+<li>Web interface for experiment definition</li>
+<li>Template library for common experimental designs</li>
+<li>Advanced design matrix generators</li>
+</ul>
+<h3 id="phase-3-advanced-capabilities">Phase 3: Advanced Capabilities</h3>
+<ul>
+<li>Experiment scheduling and queuing</li>
+<li>Distributed execution across multiple LLM providers</li>
+<li>Real-time progress monitoring and cost tracking</li>
+<li>Automatic result interpretation and reporting</li>
+</ul>
+<h2 id="example-execution-output">Example Execution Output</h2>
+<pre><code>🧪 Executing Experiment: Cross-Framework Presidential Rhetoric Analysis
+📋 Validated experiment definition: ✅ 
+📥 Ingesting new texts: ✅ 2 texts processed
+🔧 Registering frameworks: ✅ 2 new frameworks validated
+🚀 Starting experimental matrix execution...
+
+Progress: [████████████████████████████████████████] 72/72 runs (100%)
+⏱️  Total time: 43m 15s
+💰 Total cost: $1.18 (within budget)
+🔍 QA Summary: 68 HIGH confidence, 4 MEDIUM confidence, 0 LOW confidence
+
+📊 Generating reports...
+✅ Academic data export: my_comparative_study/results/academic_export_20250613.csv
+✅ QA validation report: my_comparative_study/results/qa_validation_report.json  
+✅ Visualization package: my_comparative_study/results/visualizations/
+✅ Replication package: my_comparative_study/results/replication_package.zip
+
+🎉 Experiment complete! Results ready for analysis.
+</code></pre>
+<h2 id="academic-output-format-specifications">Academic Output Format Specifications</h2>
+<h3 id="data-export-formats">Data Export Formats</h3>
+<p><strong>Available Data Formats:</strong>
+- <code>"csv"</code> - Universal compatibility, Excel-readable
+- <code>"feather"</code> - Optimized for R/Python, fast loading
+- <code>"json"</code> - Python-friendly with metadata
+- <code>"stata_dta"</code> - Native Stata format (requires pyreadstat)
+- <code>"parquet"</code> - Efficient columnar format for large datasets
+- <code>"excel"</code> - Excel workbook with multiple sheets</p>
+<h3 id="academic-package-types">Academic Package Types</h3>
+<p><strong>Primary Format Options:</strong>
+- <code>"r_package"</code> - Complete R analysis package with .Rmd templates
+- <code>"python_package"</code> - Jupyter notebooks with pandas/scipy analysis
+- <code>"stata_package"</code> - .do files with publication-ready analysis
+- <code>"spss_package"</code> - SPSS syntax files and data formats
+- <code>"universal"</code> - Multi-platform package with all formats</p>
+<p><strong>R Package Contents:</strong></p>
+<pre><code>study_name_r_package/
+├── data/
+│   ├── experiment_data.feather
+│   ├── qa_validation_results.csv
+│   └── metadata.json
+├── analysis/
+│   ├── descriptive_analysis.Rmd
+│   ├── reliability_analysis.Rmd
+│   ├── comparative_analysis.Rmd
+│   └── visualization_templates.R
+├── output/
+│   ├── figures/
+│   ├── tables/
+│   └── reports/
+└── README.md
+</code></pre>
+<p><strong>Python Package Contents:</strong></p>
+<pre><code>study_name_python_package/
+├── data/
+│   ├── experiment_data.feather
+│   ├── qa_validation_results.csv
+│   └── metadata.json
+├── notebooks/
+│   ├── 01_descriptive_analysis.ipynb
+│   ├── 02_reliability_analysis.ipynb
+│   ├── 03_comparative_analysis.ipynb
+│   └── 04_visualization_dashboard.ipynb
+├── scripts/
+│   ├── analysis_functions.py
+│   └── plotting_utilities.py
+└── requirements.txt
+</code></pre>
+<h3 id="statistical-analysis-options">Statistical Analysis Options</h3>
+<p><strong>Descriptive Statistics:</strong>
+- Summary statistics (mean, median, std, CV)
+- Distribution analysis with normality tests
+- Missing data patterns and quality metrics
+- Text-level and well-level summaries</p>
+<p><strong>Reliability Analysis:</strong>
+- Coefficient of variation across runs
+- Intraclass correlation coefficients
+- Cronbach's alpha for internal consistency
+- Test-retest reliability metrics</p>
+<p><strong>Comparative Analysis:</strong>
+- ANOVA for group comparisons
+- Post-hoc tests (Tukey HSD, Bonferroni)
+- Effect size calculations (Cohen's d, eta-squared)
+- Non-parametric alternatives (Kruskal-Wallis, Mann-Whitney)</p>
+<p><strong>Advanced Statistics:</strong>
+- Correlation matrices with significance tests
+- Regression analysis (linear, logistic)
+- Factor analysis and dimensionality reduction
+- Cluster analysis and pattern detection</p>
+<h3 id="visualization-package-options">Visualization Package Options</h3>
+<p><strong>Individual Plots:</strong>
+- Well score distributions (histograms, boxplots)
+- Narrative positioning scatter plots
+- QA confidence score distributions
+- Framework fit score analysis</p>
+<p><strong>Comparative Plots:</strong>
+- Multi-text comparison matrices
+- Framework comparison heatmaps
+- Model consistency analysis
+- Reliability trend analysis</p>
+<p><strong>Interactive Visualizations:</strong>
+- Plotly-based interactive dashboards
+- Hoverable data points with full context
+- Zoomable narrative positioning maps
+- Filterable multi-dimensional views</p>
+<p><strong>Publication-Ready Outputs:</strong>
+- High-resolution PDF figures (300+ DPI)
+- Vector graphics (SVG, EPS) for journals
+- Customizable themes (APA style, journal-specific)
+- Figure captions and numbering</p>
+<h3 id="manuscript-support-features">Manuscript Support Features</h3>
+<p><strong>Methods Section Generation:</strong></p>
+<pre><code class="language-markdown">## Methods
+
+### Narrative Analysis Framework
+This study employed the Civic Virtue framework (v2025.06.12) for analyzing 
+presidential discourse. The framework positions ten conceptual wells on a 
+circular coordinate system, measuring rhetoric along five dipoles: 
+Dignity-Tribalism, Justice-Resentment, Truth-Manipulation, 
+Pragmatism-Fear, and Hope-Fantasy.
+
+### Quality Assurance Protocol
+All analyses underwent 6-layer quality validation including input validation,
+LLM response verification, statistical coherence checking, mathematical 
+consistency verification, cross-validation, and anomaly detection.
+</code></pre>
+<p><strong>Results Tables Generation:</strong>
+- APA-style statistical tables
+- Correlation matrices with significance indicators
+- Descriptive statistics tables
+- ANOVA results with effect sizes</p>
+<p><strong>Supplementary Materials:</strong>
+- Complete analysis provenance logs
+- Raw data with data dictionary
+- Code reproducibility documentation
+- Quality assurance detailed reports</p>
+<h3 id="example-academic-workflow-configurations">Example Academic Workflow Configurations</h3>
+<p><strong>Political Science Researcher (R-focused):</strong></p>
+<pre><code class="language-json">&quot;academic_export&quot;: {
+  &quot;primary_format&quot;: &quot;r_package&quot;,
+  &quot;statistical_analysis&quot;: {
+    &quot;descriptive_statistics&quot;: true,
+    &quot;comparative_analysis&quot;: true,
+    &quot;significance_tests&quot;: [&quot;anova&quot;, &quot;t_test&quot;]
+  },
+  &quot;visualization_package&quot;: {
+    &quot;publication_ready_pdf&quot;: true,
+    &quot;custom_themes&quot;: [&quot;academic&quot;]
+  },
+  &quot;manuscript_support&quot;: {
+    &quot;methods_section&quot;: true,
+    &quot;results_tables&quot;: true
+  }
+}
+</code></pre>
+<p><strong>Computational Social Science (Multi-platform):</strong></p>
+<pre><code class="language-json">&quot;academic_export&quot;: {
+  &quot;primary_format&quot;: &quot;python_package&quot;,
+  &quot;additional_formats&quot;: [&quot;r_package&quot;, &quot;stata_package&quot;],
+  &quot;statistical_analysis&quot;: {
+    &quot;descriptive_statistics&quot;: true,
+    &quot;reliability_analysis&quot;: true,
+    &quot;correlation_matrices&quot;: true
+  },
+  &quot;replication_package&quot;: {
+    &quot;analysis_scripts&quot;: [&quot;python_analysis.py&quot;, &quot;r_analysis.R&quot;, &quot;stata_analysis.do&quot;]
+  }
+}
+</code></pre>
+<p><strong>Psychology Researcher (SPSS/Stata focus):</strong></p>
+<pre><code class="language-json">&quot;academic_export&quot;: {
+  &quot;primary_format&quot;: &quot;stata_package&quot;, 
+  &quot;additional_formats&quot;: [&quot;spss_package&quot;],
+  &quot;data_formats&quot;: [&quot;stata_dta&quot;, &quot;csv&quot;],
+  &quot;statistical_analysis&quot;: {
+    &quot;reliability_analysis&quot;: true,
+    &quot;significance_tests&quot;: [&quot;t_test&quot;, &quot;chi_square&quot;]
+  }
+}
+</code></pre>
+<p>This approach transforms complex experimental design from a programming task into a declarative specification task, dramatically lowering the barrier for sophisticated comparative research. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

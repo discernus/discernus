@@ -1,0 +1,1290 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Conversational Interface Architecture Proposal - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#conversational-interface-architecture-proposal" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Conversational Interface Architecture Proposal
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#narrative-gravity-research-workbench-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Narrative Gravity Research Workbench Enhancement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-situation-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Situation Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Situation Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-current-architecture-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Current Architecture State
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-user-story-requirements-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 User Story Requirements Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 User Story Requirements Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#critical-conversational-interface-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critical Conversational Interface Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-requirements-derived" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Requirements Derived
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-previous-development-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Previous Development Challenges
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-framework-research-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Framework Research Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Framework Research Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-research-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Research Methodology
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-market-landscape-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Market Landscape Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Market Landscape Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tier-1-production-ready-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tier 1: Production-Ready Solutions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-2-enterprisepremium-solutions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tier 2: Enterprise/Premium Solutions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-detailed-framework-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Detailed Framework Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Detailed Framework Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nlux-primary-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      NLUX (Primary Recommendation)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assistant-ui-alternative-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      assistant-ui (Alternative Option)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chatscope-stability-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chatscope (Stability Fallback)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-architecture-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Architecture Recommendation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Architecture Recommendation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-recommended-architecture-react-native-conversational-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Recommended Architecture: React-Native Conversational UI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Recommended Architecture: React-Native Conversational UI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-choice-nlux-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Choice: NLUX Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Approach
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-alternative-architecture-chatscope-stability-focus" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Alternative Architecture: Chatscope (Stability Focus)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-rationale-for-react-native-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Rationale for React-Native Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Rationale for React-Native Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-why-not-chainlit-hybrid" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Why Not Chainlit Hybrid?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-react-native-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 React-Native Benefits
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-risk-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Risk Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Risk Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-technical-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Technical Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-project-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Project Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-fallback-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Fallback Strategies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-implementation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Implementation Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Implementation Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-development-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Development Phases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Success Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-resource-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Resource Requirements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-expert-review-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Expert Review Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Expert Review Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-technical-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Technical Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-research-application-suitability" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Research Application Suitability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-implementation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Implementation Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appendix-a-technical-integration-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix A: Technical Integration Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appendix-b-framework-comparison-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix B: Framework Comparison Matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appendix-c-user-story-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix C: User Story Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appendix-d-performance-benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix D: Performance Benchmarks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="conversational-interface-architecture-proposal">Conversational Interface Architecture Proposal</h1>
+<h2 id="narrative-gravity-research-workbench-enhancement">Narrative Gravity Research Workbench Enhancement</h2>
+<p><strong>Document Version</strong>: 1.0<br />
+<strong>Date</strong>: 10 June 2025<br />
+<strong>Author</strong>: Development Team<br />
+<strong>Status</strong>: Draft for Expert Review  </p>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This proposal evaluates architectural approaches for implementing conversational AI interfaces within the Narrative Gravity Research Workbench. After comprehensive analysis of available technologies, we recommend adopting <strong>NLUX</strong> as the primary React-based conversational framework, integrated directly into our existing React frontend architecture.</p>
+<p><strong>Key Decision</strong>: Abandon Chainlit hybrid approach in favor of React-native conversational UI framework.</p>
+<p><strong>Primary Recommendation</strong>: NLUX + existing React Research Workbench architecture.</p>
+<p><strong>Timeline Impact</strong>: 4-6 weeks faster development vs. hybrid approach.</p>
+<p><strong>Risk Mitigation</strong>: Proven production frameworks, extensive fallback options.</p>
+<hr />
+<h2 id="1-situation-analysis">1. Situation Analysis</h2>
+<h3 id="11-current-architecture-state">1.1 Current Architecture State</h3>
+<ul>
+<li><strong>Frontend</strong>: React Research Workbench (port 3000) - functional but basic</li>
+<li><strong>Backend</strong>: FastAPI server (port 8000) with PostgreSQL database</li>
+<li><strong>Services</strong>: Celery workers, Redis, comprehensive API layer</li>
+<li><strong>Pain Points</strong>: Previous React development stability issues, complex async communication patterns</li>
+</ul>
+<h3 id="12-user-story-requirements-analysis">1.2 User Story Requirements Analysis</h3>
+<p>Based on the four detailed user stories in our on_deck planning documents:</p>
+<h4 id="critical-conversational-interface-requirements"><strong>Critical Conversational Interface Requirements</strong></h4>
+<ol>
+<li><strong>Natural Language Framework Development</strong> (User Story 1)</li>
+<li>Conversational iteration on framework design</li>
+<li>Real-time parameter adjustment through dialogue</li>
+<li>
+<p>Context preservation across research sessions</p>
+</li>
+<li>
+<p><strong>Interactive Variance Studies</strong> (User Story 2)</p>
+</li>
+<li>Multi-step experimental design through conversation</li>
+<li>Dynamic parameter selection and validation</li>
+<li>
+<p>Results discussion and iteration</p>
+</li>
+<li>
+<p><strong>Research Synthesis Workflows</strong> (User Story 3)</p>
+</li>
+<li>Literature integration through conversational queries</li>
+<li>Cross-framework comparison discussions</li>
+<li>
+<p>Collaborative analysis sessions</p>
+</li>
+<li>
+<p><strong>Advanced Prompt Development</strong> (User Story 4)</p>
+</li>
+<li>Conversational prompt engineering</li>
+<li>A/B testing design through dialogue</li>
+<li>Performance analysis discussions</li>
+</ol>
+<h4 id="technical-requirements-derived"><strong>Technical Requirements Derived</strong></h4>
+<ul>
+<li><strong>Streaming responses</strong>: Essential for real-time research feedback</li>
+<li><strong>Context preservation</strong>: Multi-turn research conversations</li>
+<li><strong>File handling</strong>: Upload research documents, export results</li>
+<li><strong>Multimodal support</strong>: Text, data visualizations, charts</li>
+<li><strong>Database integration</strong>: Direct connection to PostgreSQL research data</li>
+<li><strong>Library panel integration</strong>: Side-by-side with conversational interface</li>
+</ul>
+<h3 id="13-previous-development-challenges">1.3 Previous Development Challenges</h3>
+<ul>
+<li><strong>React stability concerns</strong>: Server crashes, async race conditions</li>
+<li><strong>Complex state management</strong>: Cross-component communication issues</li>
+<li><strong>Development velocity</strong>: Slow iteration cycles, debugging difficulties</li>
+<li><strong>Integration complexity</strong>: Multiple frameworks causing maintenance burden</li>
+</ul>
+<hr />
+<h2 id="2-framework-research-analysis">2. Framework Research Analysis</h2>
+<h3 id="21-research-methodology">2.1 Research Methodology</h3>
+<ul>
+<li><strong>Scope</strong>: React-based conversational UI frameworks suitable for research applications</li>
+<li><strong>Criteria</strong>: Production readiness, community support, research workbench compatibility</li>
+<li><strong>Sources</strong>: GitHub metrics, production usage analysis, expert community feedback</li>
+</ul>
+<h3 id="22-market-landscape-overview">2.2 Market Landscape Overview</h3>
+<h4 id="tier-1-production-ready-solutions"><strong>Tier 1: Production-Ready Solutions</strong></h4>
+<table>
+<thead>
+<tr>
+<th>Framework</th>
+<th>GitHub Stars</th>
+<th>Maintenance</th>
+<th>Research Suitability</th>
+<th>Production Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NLUX</td>
+<td>1.3k</td>
+<td>Active</td>
+<td>Excellent</td>
+<td>Growing</td>
+</tr>
+<tr>
+<td>assistant-ui</td>
+<td>3k</td>
+<td>Very Active</td>
+<td>Excellent</td>
+<td>YC-backed</td>
+</tr>
+<tr>
+<td>Chatscope</td>
+<td>1.5k</td>
+<td>Stable</td>
+<td>Good</td>
+<td>Enterprise proven</td>
+</tr>
+<tr>
+<td>React ChatBotify</td>
+<td>-</td>
+<td>Active</td>
+<td>Moderate</td>
+<td>Community focused</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tier-2-enterprisepremium-solutions"><strong>Tier 2: Enterprise/Premium Solutions</strong></h4>
+<ul>
+<li><strong>Telerik KendoReact</strong>: Premium licensing, enterprise support</li>
+<li><strong>Botonic</strong>: Framework-agnostic but complex setup</li>
+<li><strong>Microsoft Bot Framework</strong>: Enterprise-focused, Azure dependency</li>
+</ul>
+<h3 id="23-detailed-framework-analysis">2.3 Detailed Framework Analysis</h3>
+<h4 id="nlux-primary-recommendation"><strong>NLUX (Primary Recommendation)</strong></h4>
+<p><strong>Strengths for Research Applications:</strong>
+- Purpose-built for AI/LLM conversations (not generic chat)
+- Native streaming support with context preservation
+- Multiple adapter system (LangChain, Vercel AI, custom backends)
+- Multimodal components (text, images, data visualizations)
+- React/TypeScript native with modern patterns
+- Enterprise support available
+- Active development with regular releases</p>
+<p><strong>Technical Integration:</strong></p>
+<pre><code class="language-javascript">// Direct FastAPI integration example
+const researchAdapter = useAsStreamAdapter(async (message) =&gt; {
+  return fetch('/api/narrative-gravity/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message,
+      research_context: currentFramework,
+      session_id: researchSessionId
+    })
+  });
+});
+</code></pre>
+<p><strong>Research-Specific Features:</strong>
+- Context-aware conversations
+- File upload/download support
+- Custom component rendering
+- Theme customization
+- Event system for research workflow integration</p>
+<h4 id="assistant-ui-alternative-option"><strong>assistant-ui (Alternative Option)</strong></h4>
+<p><strong>Strengths:</strong>
+- ChatGPT-like UX out of the box
+- YC-backed with strong development momentum
+- shadcn/ui integration (modern design system)
+- Built-in tool calling support
+- TypeScript-first approach</p>
+<p><strong>Considerations:</strong>
+- Newer project (higher velocity, less stability)
+- More opinionated design patterns
+- Limited customization vs. NLUX</p>
+<h4 id="chatscope-stability-fallback"><strong>Chatscope (Stability Fallback)</strong></h4>
+<p><strong>Strengths:</strong>
+- Most mature React chat library (39 releases)
+- Battle-tested in production environments
+- Comprehensive component library
+- Well-documented with extensive examples
+- Conservative update cycle (stability focus)</p>
+<p><strong>Limitations:</strong>
+- Generic chat focus (not AI/LLM optimized)
+- Less sophisticated streaming support
+- Manual implementation of AI-specific features</p>
+<hr />
+<h2 id="3-architecture-recommendation">3. Architecture Recommendation</h2>
+<h3 id="31-recommended-architecture-react-native-conversational-ui">3.1 Recommended Architecture: React-Native Conversational UI</h3>
+<h4 id="primary-choice-nlux-integration"><strong>Primary Choice: NLUX Integration</strong></h4>
+<pre><code>┌─────────────────────────────────────────────────┐
+│                React Frontend                   │
+│  ┌─────────────────┬─────────────────────────┐  │
+│  │   Research      │    NLUX Conversational  │  │
+│  │   Library       │    Interface            │  │
+│  │   Panel         │                         │  │
+│  │                 │  ┌─────────────────────┐│  │
+│  │  - Frameworks   │  │  Streaming Chat     ││  │
+│  │  - Experiments  │  │  Context Aware      ││  │
+│  │  - Results      │  │  File Handling      ││  │
+│  │                 │  │  Research Tools     ││  │
+│  └─────────────────┴─────────────────────────┘  │
+└─────────────────────────────────────────────────┘
+                        │
+                  FastAPI REST
+                        │
+┌─────────────────────────────────────────────────┐
+│              Backend Services                   │
+│  ┌─────────────┬─────────────┬─────────────────┐│
+│  │ PostgreSQL  │   Celery    │   LLM Services  ││
+│  │ Research DB │   Workers   │   Integration   ││
+│  └─────────────┴─────────────┴─────────────────┘│
+└─────────────────────────────────────────────────┘
+</code></pre>
+<h4 id="implementation-approach"><strong>Implementation Approach</strong></h4>
+<p><strong>Phase 1: Core Integration (Week 1-2)</strong></p>
+<pre><code class="language-javascript">// Minimal viable conversational interface
+import { AiChat, useAsStreamAdapter } from '@nlux/react';
+
+const ResearchWorkbench = () =&gt; {
+  const adapter = useAsStreamAdapter(streamingChatEndpoint);
+
+  return (
+    &lt;div className=&quot;workbench-layout&quot;&gt;
+      &lt;ResearchLibraryPanel /&gt;
+      &lt;AiChat 
+        adapter={adapter}
+        conversationOptions={{ enableContext: true }}
+        displayOptions={{ colorScheme: &quot;dark&quot; }}
+      /&gt;
+    &lt;/div&gt;
+  );
+};
+</code></pre>
+<p><strong>Phase 2: Research-Specific Features (Week 3-4)</strong>
+- Framework selection integration
+- Experiment parameter passing
+- Results visualization in chat
+- File upload for research documents</p>
+<p><strong>Phase 3: Advanced Workflows (Week 5-6)</strong>
+- Multi-turn research conversations
+- Cross-framework comparison tools
+- Export functionality
+- Advanced prompt engineering tools</p>
+<h3 id="32-alternative-architecture-chatscope-stability-focus">3.2 Alternative Architecture: Chatscope (Stability Focus)</h3>
+<p>If maximum stability is prioritized over AI-native features:
+- Use Chatscope as base chat interface
+- Manually implement streaming with server-sent events
+- Custom components for research-specific features
+- More development work but proven stability</p>
+<hr />
+<h2 id="4-rationale-for-react-native-approach">4. Rationale for React-Native Approach</h2>
+<h3 id="41-why-not-chainlit-hybrid">4.1 Why Not Chainlit Hybrid?</h3>
+<p><strong>Technical Complexity Issues:</strong>
+- iframe embedding creates cross-frame communication complexity
+- State synchronization between React and Chainlit instances
+- Deployment pipeline multiplication (React + Chainlit services)
+- Different technology stacks require separate expertise</p>
+<p><strong>Development Velocity Impact:</strong>
+- Debugging requires knowledge of both React and Chainlit
+- Feature development spans multiple codebases
+- Testing complexity increases significantly
+- Maintenance burden grows over time</p>
+<p><strong>Performance Considerations:</strong>
+- Cross-frame communication overhead
+- Memory usage from multiple framework instances
+- Potential security considerations with iframe embedding</p>
+<h3 id="42-react-native-benefits">4.2 React-Native Benefits</h3>
+<p><strong>Architectural Unity:</strong>
+- Single technology stack (React + FastAPI)
+- Consistent state management patterns
+- Unified deployment pipeline
+- Single development environment</p>
+<p><strong>Development Efficiency:</strong>
+- Leverage existing React expertise
+- Reuse existing components and patterns
+- Faster debugging and iteration cycles
+- Consistent styling and theming</p>
+<p><strong>Integration Advantages:</strong>
+- Direct access to research library panel state
+- Seamless data flow with PostgreSQL backend
+- No cross-framework communication layer
+- Native performance characteristics</p>
+<hr />
+<h2 id="5-risk-analysis">5. Risk Analysis</h2>
+<h3 id="51-technical-risks">5.1 Technical Risks</h3>
+<table>
+<thead>
+<tr>
+<th>Risk Category</th>
+<th>Probability</th>
+<th>Impact</th>
+<th>Mitigation Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NLUX adoption/support</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Fallback to Chatscope; active community</td>
+</tr>
+<tr>
+<td>Integration complexity</td>
+<td>Medium</td>
+<td>High</td>
+<td>Phased implementation; extensive testing</td>
+</tr>
+<tr>
+<td>Performance issues</td>
+<td>Low</td>
+<td>Medium</td>
+<td>React optimization; streaming design</td>
+</tr>
+<tr>
+<td>Feature limitations</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Custom component development</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-project-risks">5.2 Project Risks</h3>
+<p><strong>Development Timeline:</strong>
+- <strong>Risk</strong>: Underestimating React-specific complexity
+- <strong>Mitigation</strong>: Phased approach, early prototyping</p>
+<p><strong>Team Expertise:</strong>
+- <strong>Risk</strong>: Limited React/conversational UI experience
+- <strong>Mitigation</strong>: NLUX documentation, community support</p>
+<p><strong>Requirements Evolution:</strong>
+- <strong>Risk</strong>: Research needs changing during development
+- <strong>Mitigation</strong>: Flexible architecture, modular components</p>
+<h3 id="53-fallback-strategies">5.3 Fallback Strategies</h3>
+<ol>
+<li><strong>Primary Fallback</strong>: Switch from NLUX to Chatscope if AI-specific features prove insufficient</li>
+<li><strong>Architecture Fallback</strong>: Maintain FastAPI chat endpoints for potential future framework migration</li>
+<li><strong>Feature Fallback</strong>: Implement core chat first, add research features incrementally</li>
+</ol>
+<hr />
+<h2 id="6-implementation-plan">6. Implementation Plan</h2>
+<h3 id="61-development-phases">6.1 Development Phases</h3>
+<p><strong>Phase 1: Foundation (Weeks 1-2)</strong>
+- NLUX integration with existing React app
+- Basic chat interface with FastAPI backend
+- Streaming response implementation
+- Core research context passing</p>
+<p><strong>Phase 2: Research Features (Weeks 3-4)</strong>
+- Framework selection integration
+- Parameter passing and validation
+- File upload/download functionality
+- Basic result visualization</p>
+<p><strong>Phase 3: Advanced Capabilities (Weeks 5-6)</strong>
+- Multi-turn conversation context
+- Research workflow automation
+- Export and sharing features
+- Performance optimization</p>
+<p><strong>Phase 4: Polish &amp; Production (Weeks 7-8)</strong>
+- Error handling and edge cases
+- Accessibility improvements
+- Documentation and testing
+- Deployment pipeline integration</p>
+<h3 id="62-success-metrics">6.2 Success Metrics</h3>
+<p><strong>Technical Metrics:</strong>
+- Response time &lt; 500ms for non-streaming responses
+- Successful streaming for responses &gt; 2s generation time
+- 99% uptime for conversational interface
+- Zero cross-framework communication errors</p>
+<p><strong>User Experience Metrics:</strong>
+- Natural language framework development workflows
+- Successful multi-turn research conversations
+- Seamless integration with library panel
+- Intuitive research tool access</p>
+<h3 id="63-resource-requirements">6.3 Resource Requirements</h3>
+<p><strong>Development Resources:</strong>
+- 1 senior React developer (primary)
+- 1 backend developer (FastAPI integration)
+- 1 UX/UI designer (research workflow optimization)</p>
+<p><strong>Infrastructure:</strong>
+- No additional services required
+- Leverages existing React/FastAPI deployment
+- Minimal performance impact on current architecture</p>
+<hr />
+<h2 id="7-expert-review-questions">7. Expert Review Questions</h2>
+<p>To facilitate expert evaluation of this proposal, we request specific feedback on:</p>
+<h3 id="71-technical-architecture">7.1 Technical Architecture</h3>
+<ol>
+<li><strong>Framework Choice</strong>: Do you agree with NLUX as the primary recommendation? Alternative suggestions?</li>
+<li><strong>Integration Approach</strong>: Are there technical risks we haven't considered in React-native integration?</li>
+<li><strong>Fallback Strategy</strong>: Is Chatscope an appropriate technical fallback for stability concerns?</li>
+</ol>
+<h3 id="72-research-application-suitability">7.2 Research Application Suitability</h3>
+<ol>
+<li><strong>User Story Alignment</strong>: Does this architecture adequately address the four research user stories?</li>
+<li><strong>Research Workflow</strong>: Are there conversational interface patterns specific to research applications we should consider?</li>
+<li><strong>Scalability</strong>: Will this architecture support growth to more complex research workflows?</li>
+</ol>
+<h3 id="73-implementation-strategy">7.3 Implementation Strategy</h3>
+<ol>
+<li><strong>Phased Approach</strong>: Is the 8-week timeline realistic for this complexity?</li>
+<li><strong>Risk Mitigation</strong>: Are there additional risks or mitigation strategies to consider?</li>
+<li><strong>Success Metrics</strong>: Are the proposed metrics appropriate for evaluating success?</li>
+</ol>
+<hr />
+<h2 id="8-conclusion">8. Conclusion</h2>
+<p>The React-native conversational interface approach using NLUX represents the optimal balance of:
+- <strong>Technical feasibility</strong> with proven, production-ready frameworks
+- <strong>Development efficiency</strong> by leveraging existing React architecture
+- <strong>Research capability</strong> through AI-native conversational features
+- <strong>Risk management</strong> with clear fallback options and phased implementation</p>
+<p>This approach avoids the complexity pitfalls of hybrid architectures while providing the sophisticated conversational capabilities required for advanced research workflows.</p>
+<p><strong>Recommendation</strong>: Proceed with NLUX integration as outlined, with Chatscope as documented fallback strategy.</p>
+<p><strong>Next Steps</strong>: Expert review and feedback incorporation, followed by Phase 1 implementation planning.</p>
+<hr />
+<h2 id="appendices">Appendices</h2>
+<h3 id="appendix-a-technical-integration-examples">Appendix A: Technical Integration Examples</h3>
+<p>[Detailed code examples for NLUX integration]</p>
+<h3 id="appendix-b-framework-comparison-matrix">Appendix B: Framework Comparison Matrix</h3>
+<p>[Comprehensive feature comparison across all evaluated frameworks]</p>
+<h3 id="appendix-c-user-story-mapping">Appendix C: User Story Mapping</h3>
+<p>[Detailed mapping of conversational interface features to research user stories]</p>
+<h3 id="appendix-d-performance-benchmarks">Appendix D: Performance Benchmarks</h3>
+<p>[Expected performance characteristics and optimization strategies] </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

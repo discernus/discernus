@@ -1,0 +1,756 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>IDITI Framework Documentation - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#iditi-framework-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IDITI Framework Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#theoretical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theoretical Foundation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Theoretical Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Sources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theoretical Approach
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-dipole-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Dipole: Identity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis-focus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis Focus
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analysis Focus">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scoring-emphasis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scoring Emphasis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appropriate-texts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appropriate Texts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scoring-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scoring Approach
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Status
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Applications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Academic Applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#research-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Targets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Notes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compatible-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compatible Systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics-generated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics Generated
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development History
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development History">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#version-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version History
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="iditi-framework-documentation">IDITI Framework Documentation</h1>
+<p><strong>Individual Dignity Identity v Tribal Identity</strong></p>
+<h2 id="overview">Overview</h2>
+<p>The IDITI framework analyzes the fundamental tension between individual dignity and tribal identity in political discourse. This specialized implementation of the Narrative Gravity Map methodology focuses on how texts either affirm universal human worth or prioritize group-based identity and loyalty.</p>
+<h2 id="theoretical-foundation">Theoretical Foundation</h2>
+<h3 id="primary-sources">Primary Sources</h3>
+<ul>
+<li><strong>Fukuyama, F. (2018)</strong>. <em>Identity: The Demand for Dignity and the Politics of Resentment</em></li>
+<li><strong>Jung, C. G. (1921)</strong>. <em>Psychological Types</em> (Concepts of Individual vs. Collective Identity)</li>
+</ul>
+<h3 id="theoretical-approach">Theoretical Approach</h3>
+<p>This framework examines narratives through the lens of individual dignity versus tribal identity, drawing on theories of identity formation and collective psychology. It analyzes how language reinforces or challenges the tension between personal autonomy and group allegiance.</p>
+<h2 id="framework-structure">Framework Structure</h2>
+<h3 id="core-dipole-identity">Core Dipole: Identity</h3>
+<p><strong>Dignity (Positive, Integrative)</strong>
+- <strong>Position</strong>: 90° (top of circle)
+- <strong>Weight</strong>: +1.0
+- <strong>Description</strong>: Affirms individual moral worth and universal rights, regardless of group identity
+- <strong>Key Concepts</strong>: Universal rights, individual agency, character over affiliation</p>
+<p><strong>Tribalism (Negative, Disintegrative)</strong><br />
+- <strong>Position</strong>: 270° (bottom of circle)
+- <strong>Weight</strong>: -1.0
+- <strong>Description</strong>: Prioritizes group dominance, loyalty, or identity over individual agency
+- <strong>Key Concepts</strong>: In-group/out-group dynamics, group-based moral worth, identity politics</p>
+<h2 id="analysis-focus">Analysis Focus</h2>
+<h3 id="primary-questions">Primary Questions</h3>
+<ol>
+<li>Does the text treat people as individuals with inherent worth?</li>
+<li>Does the text define moral worth through group membership?</li>
+<li>How does the text balance individual agency vs. group loyalty?</li>
+</ol>
+<h3 id="scoring-emphasis">Scoring Emphasis</h3>
+<ul>
+<li>Focus on identity-based moral frameworks rather than policy positions</li>
+<li>Examine how the text treats human worth: universal vs. conditional on group membership</li>
+<li>Analyze the tension between personal autonomy and group allegiance</li>
+</ul>
+<h2 id="usage-guidelines">Usage Guidelines</h2>
+<h3 id="appropriate-texts">Appropriate Texts</h3>
+<ul>
+<li>Political speeches and campaign materials</li>
+<li>Social commentary and editorial content</li>
+<li>Policy arguments with identity components</li>
+<li>Cultural and social movement discourse</li>
+</ul>
+<h3 id="scoring-approach">Scoring Approach</h3>
+<ul>
+<li><strong>Dignity</strong>: Look for language affirming individual worth, universal rights, cross-group solidarity</li>
+<li><strong>Tribalism</strong>: Identify appeals to group loyalty, exclusion markers, identity-based moral hierarchies</li>
+</ul>
+<h2 id="validation-status">Validation Status</h2>
+<ul>
+<li><strong>Format Version</strong>: YAML v1.0</li>
+<li><strong>Conversion Date</strong>: 2025-06-19</li>
+<li><strong>Source</strong>: Converted from obsolete_frameworks_need_upgrade/iditi/framework.json</li>
+<li><strong>Validation Status</strong>: Pending academic review</li>
+<li><strong>Hash Verified</strong>: No (pending content-addressable storage implementation)</li>
+</ul>
+<h2 id="academic-applications">Academic Applications</h2>
+<h3 id="research-questions">Research Questions</h3>
+<ul>
+<li>How do political figures balance individual dignity vs. tribal appeals?</li>
+<li>What linguistic patterns indicate identity-based moral frameworks?</li>
+<li>How does identity framing affect democratic discourse quality?</li>
+</ul>
+<h3 id="validation-targets">Validation Targets</h3>
+<ul>
+<li>Correlation with established identity politics measures</li>
+<li>Cross-cultural validation of dignity vs. tribalism dimensions</li>
+<li>Temporal analysis of identity rhetoric evolution</li>
+</ul>
+<h2 id="integration-notes">Integration Notes</h2>
+<h3 id="compatible-systems">Compatible Systems</h3>
+<ul>
+<li><strong>Prompt Templates</strong>: hierarchical_v2.1, standard_v2.0</li>
+<li><strong>Weighting Schemes</strong>: winner_take_most, proportional</li>
+<li><strong>API Versions</strong>: v2.0, v2.1</li>
+</ul>
+<h3 id="metrics-generated">Metrics Generated</h3>
+<ul>
+<li><strong>Center of Mass (COM)</strong>: Overall dignity vs. tribalism orientation</li>
+<li><strong>Narrative Polarity Score (NPS)</strong>: Strength of identity orientation</li>
+<li><strong>Directional Purity Score (DPS)</strong>: Clarity of dignity vs. tribalism orientation</li>
+</ul>
+<h2 id="development-history">Development History</h2>
+<h3 id="version-history">Version History</h3>
+<ul>
+<li><strong>v2025.06.19</strong>: Converted to unified YAML format for asset management architecture</li>
+<li><strong>v2025.06.17</strong>: Final JSON version with complete prompt configuration</li>
+<li><strong>Earlier versions</strong>: Iterative development and validation</li>
+</ul>
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li><strong>Academic Review</strong>: Submit for expert consultation on theoretical accuracy</li>
+<li><strong>Validation Study</strong>: Test correlation with established identity measures</li>
+<li><strong>Hash Integration</strong>: Implement content-addressable storage for version control</li>
+<li><strong>Template Development</strong>: Create framework-specific prompt templates</li>
+</ol>
+<hr />
+<p><em>Last Updated: June 19, 2025</em><br />
+<em>Format: Unified Asset Management YAML v1.0</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

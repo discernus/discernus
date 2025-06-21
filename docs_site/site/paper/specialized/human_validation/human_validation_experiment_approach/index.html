@@ -1,0 +1,692 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Human validation experiment approach - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#revised-human-validation-study-plan-strategic-single-dipole-validation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Human validation experiment approach
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#revised-human-validation-study-plan-strategic-single-dipole-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Revised Human Validation Study Plan: Strategic Single-Dipole Validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Revised Human Validation Study Plan: Strategic Single-Dipole Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#executive-summary-of-strategic-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary of Strategic Decisions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-selection-single-dipole-civic-virtue-dignity-vs-tribalism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Selection: Single Dipole Civic Virtue (Dignity vs Tribalism)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-selection-anonymous-political-excerpts-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Text Selection: Anonymous Political Excerpts Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompting-strategy-conceptually-equivalent-adaptive-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompting Strategy: Conceptually Equivalent Adaptive Prompts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#statistical-analysis-plan-and-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistical Analysis Plan and Success Criteria
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-allocation-and-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Allocation and Timeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-documentation-and-replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Documentation and Replication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-strategic-excellence-through-methodological-focus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary: Strategic Excellence Through Methodological Focus
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Human validation experiment approach</h1>
+
+<h2 id="revised-human-validation-study-plan-strategic-single-dipole-validation">Revised Human Validation Study Plan: Strategic Single-Dipole Validation</h2>
+<h3 id="executive-summary-of-strategic-decisions"><strong>Executive Summary of Strategic Decisions</strong></h3>
+<p>Based on systematic analysis of cognitive load, academic defensibility, and resource optimization, this human validation study employs a <strong>strategic single-dipole approach</strong> focusing on the theoretically most powerful dimension of the Civic Virtue framework. This design maximizes interpretive clarity, minimizes complexity barriers, and provides the strongest foundation for demonstrating computational-human alignment in political discourse analysis.</p>
+<h3 id="framework-selection-single-dipole-civic-virtue-dignity-vs-tribalism"><strong>Framework Selection: Single Dipole Civic Virtue (Dignity vs Tribalism)</strong></h3>
+<p><strong>Strategic Rationale:</strong></p>
+<ul>
+<li><strong>Theoretical Centrality:</strong> The Identity dipole (Dignity vs Tribalism) represents the Primary Tier (1.0 weighting) in the Civic Virtue framework's theoretical hierarchy, capturing the most psychologically powerful moral-political distinction in virtue ethics approaches to persuasive discourse.</li>
+<li><strong>Cognitive Optimization:</strong> Single dipole reduces cognitive load by 80% compared to full 5-dipole framework while preserving core theoretical construct validation.</li>
+<li><strong>Maximum Reliability:</strong> Literature demonstrates that simpler annotation tasks yield higher inter-rater reliability, increasing probability of achieving target ≥0.70 agreement.</li>
+<li><strong>Clear Success Metrics:</strong> Binary success/failure determination rather than complex multi-dimensional assessment patterns.</li>
+</ul>
+<p><strong>Academic Justification:</strong></p>
+<blockquote>
+<p>"To establish proof-of-concept for computational-human alignment in political discourse analysis, we focus validation on the theoretically most powerful dimension of our framework—the Identity dipole (Dignity vs Tribalism)—which represents the primary tier of moral-political distinction in virtue ethics approaches to persuasive discourse. This strategic focus enables rigorous validation of core theoretical constructs while maintaining methodological rigor within resource constraints."</p>
+</blockquote>
+<p><strong>Implementation Specifications:</strong></p>
+<ul>
+<li><strong>Single Question Format:</strong> "On a scale of 1-7, how much does this text emphasize personal dignity and respect (high) vs tribal us-versus-them thinking (low)?"</li>
+<li><strong>Evidence Requirement:</strong> Annotators highlight 1-2 key passages supporting their scores</li>
+<li><strong>Simplified Codebook:</strong> 3-5 pages with concrete examples and boundary cases</li>
+<li><strong>Quality Control:</strong> Single gold standard cases easier to develop and validate</li>
+</ul>
+<h3 id="text-selection-anonymous-political-excerpts-strategy"><strong>Text Selection: Anonymous Political Excerpts Strategy</strong></h3>
+<p><strong>Strategic Rationale:</strong></p>
+<ul>
+<li><strong>Bias Elimination:</strong> Anonymous excerpts eliminate the strongest confounding variable (speaker identity bias) while preserving authentic political discourse patterns.</li>
+<li><strong>Methodological Superiority:</strong> Forces evaluation based on textual content analysis rather than partisan associations, enabling clean assessment of framework validity.</li>
+<li><strong>Ecological Validity:</strong> Maintains authentic linguistic and rhetorical patterns of political communication while controlling for measurement contamination.</li>
+</ul>
+<p><strong>Corpus Composition (15-20 Texts):</strong></p>
+<p><strong>Dignity Pole Exemplars (4-5 texts):</strong></p>
+<ul>
+<li>Excerpts emphasizing unity, individual worth, and respectful disagreement</li>
+<li>Sources: Regional governors' bipartisan initiatives, lesser-known historical unity speeches</li>
+<li>Anonymous excerpts from post-disaster speeches emphasizing community resilience</li>
+</ul>
+<p><strong>Tribalism Pole Exemplars (4-5 texts):</strong></p>
+<ul>
+<li>Clear us-vs-them rhetoric without policy substance</li>
+<li>Sources: Local political rallies, regional campaign events</li>
+<li>Anonymous excerpts demonstrating pure tribal messaging patterns</li>
+</ul>
+<p><strong>Balanced/Moderate Cases (4-5 texts):</strong></p>
+<ul>
+<li>Policy-focused content with mixed dignity/tribal elements</li>
+<li>Sources: State legislative debates, regional political forums</li>
+<li>Excerpts showing substantive disagreement without personal attacks</li>
+</ul>
+<p><strong>Edge Cases and Controls (2-3 texts):</strong></p>
+<ul>
+<li>Pure policy statements (low framework fit controls)</li>
+<li>Ceremonial speeches (neutral content)</li>
+<li>Historical documents testing temporal framework applicability</li>
+</ul>
+<p><strong>Text Preparation Protocol:</strong></p>
+<ul>
+<li><strong>Strategic Excerpting:</strong> 400-600 word segments capturing moral positioning without identifying context</li>
+<li><strong>Metadata Removal:</strong> Strip identifying references (dates, places, specific events)</li>
+<li><strong>Context Neutralization:</strong> Remove positional identifiers while preserving rhetorical structure</li>
+<li><strong>Recognition Testing:</strong> Pre-test with political science students to ensure non-recognition</li>
+</ul>
+<p><strong>Academic Justification:</strong></p>
+<blockquote>
+<p>"To isolate textual moral content from speaker identity effects, we utilize anonymized excerpts from political discourse by regionally prominent but nationally unknown speakers. This approach preserves the authentic linguistic and rhetorical patterns of political communication while eliminating the strongest potential confounding variable—partisan bias triggered by speaker recognition."</p>
+</blockquote>
+<h3 id="prompting-strategy-conceptually-equivalent-adaptive-prompts"><strong>Prompting Strategy: Conceptually Equivalent Adaptive Prompts</strong></h3>
+<p><strong>Strategic Rationale:</strong></p>
+<ul>
+<li><strong>Methodological Best Practice:</strong> Computational social science literature establishes that task equivalence (not linguistic identity) is the standard for human-LLM validation studies.</li>
+<li><strong>Evaluator Optimization:</strong> Adapted prompts maximize reliability for each evaluator type by addressing cognitive processing differences.</li>
+<li><strong>Academic Defensibility:</strong> Systematic adaptation process with empirical validation provides stronger evidence than naive identical prompting.</li>
+</ul>
+<p><strong>LLM Prompt Template:</strong></p>
+<pre><code>Role: You are an expert political discourse analyst.
+Task: Analyze the following text for Dignity vs. Tribalism positioning.
+Scale: Rate on 1-7 scale where 1=Strong Tribalism, 7=Strong Dignity
+
+Definitions:
+- Dignity (6-7): Emphasizes individual worth, respectful disagreement, unity across differences
+- Tribalism (1-2): Emphasizes us-vs-them divisions, group superiority, exclusionary language
+- Mixed/Moderate (3-5): Contains elements of both approaches
+
+Instructions: Provide numerical score and identify 2-3 supporting passages
+Format: Score: X/7, Evidence: [specific passages]
+</code></pre>
+<p><strong>Human Annotation Instructions:</strong></p>
+<pre><code>You will read political texts and evaluate them on how much they emphasize 
+personal dignity and respect versus tribal us-versus-them thinking.
+
+Please rate each text on a scale of 1-7:
+- 1-2: Strongly emphasizes tribal divisions, us-vs-them language
+- 3-4: Moderately tribal with some dignity elements  
+- 5-6: Moderately emphasizes dignity with some tribal elements
+- 7: Strongly emphasizes personal dignity, respect, unity
+
+For each rating, please highlight 1-2 key passages that support your decision.
+
+Take your time to read carefully and consider the overall moral approach of the text.
+</code></pre>
+<p><strong>Equivalence Validation Protocol:</strong></p>
+<ul>
+<li><strong>Pilot Testing:</strong> Both prompt versions tested on 5 control texts to ensure comparable score distributions</li>
+<li><strong>Statistical Validation:</strong> Correlation analysis confirming equivalent results on validation texts</li>
+<li><strong>Documentation:</strong> Systematic record of adaptation rationale and empirical validation</li>
+</ul>
+<p><strong>Academic Justification:</strong></p>
+<blockquote>
+<p>"To optimize reliability and validity for each evaluator type while maintaining task equivalence, we adapted prompt formulations following established practices in computational social science validation. LLM prompts utilize structured templates optimized for computational processing, while human annotation instructions employ conversational language with contextual examples. Both versions maintain identical analytical frameworks, scoring scales, and evaluation criteria, with equivalence validated through pilot testing and statistical comparison of score distributions."</p>
+</blockquote>
+<h3 id="statistical-analysis-plan-and-success-criteria"><strong>Statistical Analysis Plan and Success Criteria</strong></h3>
+<p><strong>Primary Hypotheses:</strong></p>
+<ul>
+<li><strong>H1 (Inter-Rater Reliability):</strong> Human annotators will achieve ≥0.70 agreement on Dignity vs Tribalism scoring</li>
+<li><strong>H2 (Human-LLM Alignment):</strong> Human and LLM scores will show ≥0.80 correlation for single dipole validation</li>
+<li><strong>H3 (Framework Fit Validation):</strong> High-fit texts will show better human-LLM agreement than low-fit controls</li>
+</ul>
+<p><strong>Statistical Validation:</strong></p>
+<ul>
+<li><strong>Inter-Rater Reliability:</strong> Intraclass correlation coefficient (ICC) for human-human agreement</li>
+<li><strong>Human-LLM Correlation:</strong> Pearson correlation with confidence intervals</li>
+<li><strong>Score Distribution Analysis:</strong> Range utilization and boundary case performance</li>
+<li><strong>Evidence Quality Assessment:</strong> Thematic analysis of supporting passages</li>
+</ul>
+<p><strong>Success Criteria:</strong></p>
+<ul>
+<li><strong>Minimum Acceptable:</strong> ICC ≥ 0.70, Human-LLM r ≥ 0.70</li>
+<li><strong>Target Performance:</strong> ICC ≥ 0.80, Human-LLM r ≥ 0.80</li>
+<li><strong>Excellence Threshold:</strong> ICC ≥ 0.85, Human-LLM r ≥ 0.85</li>
+</ul>
+<h3 id="resource-allocation-and-timeline"><strong>Resource Allocation and Timeline</strong></h3>
+<p><strong>Phase 1: Materials Development (Week 1)</strong></p>
+<ul>
+<li>Finalize 15-20 text corpus with anonymization</li>
+<li>Complete simplified codebook and training materials</li>
+<li>Develop gold standard cases and attention checks</li>
+</ul>
+<p><strong>Phase 2: Platform Setup and Pilot (Week 2)</strong></p>
+<ul>
+<li>CloudResearch/MTurk account configuration</li>
+<li>Pilot study with 5 texts × 5 annotators</li>
+<li>Prompt refinement based on pilot feedback</li>
+</ul>
+<p><strong>Phase 3: Main Study Execution (Week 3)</strong></p>
+<ul>
+<li>Launch full study: 20 texts × 4 annotators = 80 HITs</li>
+<li>Real-time quality monitoring and anomaly detection</li>
+<li>Cost management within \$400 budget allocation</li>
+</ul>
+<p><strong>Phase 4: Analysis and Documentation (Week 4)</strong></p>
+<ul>
+<li>Statistical analysis and validation testing</li>
+<li>Academic documentation and replication package</li>
+<li>Results interpretation and next-phase planning</li>
+</ul>
+<p><strong>Budget Allocation:</strong></p>
+<ul>
+<li><strong>Annotation Payments:</strong> \$150 (80 HITs × \$1.50 + platform fees)</li>
+<li><strong>Platform Fees:</strong> \$50 (CloudResearch/MTurk charges)</li>
+<li><strong>Contingency Reserve:</strong> \$200 (additional validation if needed)</li>
+</ul>
+<h3 id="academic-documentation-and-replication"><strong>Academic Documentation and Replication</strong></h3>
+<p><strong>Methodological Transparency:</strong></p>
+<ul>
+<li>Complete documentation of text selection and anonymization process</li>
+<li>Systematic record of prompt adaptation rationale and validation</li>
+<li>Full statistical analysis plan with pre-registered hypotheses</li>
+</ul>
+<p><strong>Replication Package:</strong></p>
+<ul>
+<li>Anonymized text corpus with metadata</li>
+<li>Both LLM and human prompt versions</li>
+<li>Complete annotation codebook and training materials</li>
+<li>Statistical analysis scripts and validation procedures</li>
+</ul>
+<p><strong>Publication Strategy:</strong></p>
+<blockquote>
+<p>"This validation establishes a methodological template for computational-human alignment testing in political discourse analysis, demonstrating how systematic validation can build confidence in computational approaches through strategic focus on theoretically central constructs. Having established alignment for the most psychologically powerful moral-political distinction, future research can systematically extend validation to additional dimensions, building a comprehensive empirical foundation for multi-dimensional computational analysis."</p>
+</blockquote>
+<hr />
+<h2 id="summary-strategic-excellence-through-methodological-focus">Summary: Strategic Excellence Through Methodological Focus</h2>
+<p>This revised human validation plan transforms resource constraints into strategic advantages through:</p>
+<ul>
+<li><strong>Theoretical Focus:</strong> Single dipole approach concentrates validation resources on the most theoretically powerful construct</li>
+<li><strong>Bias Control:</strong> Anonymous text strategy eliminates confounding variables while maintaining ecological validity</li>
+<li><strong>Methodological Sophistication:</strong> Adapted prompting approach reflects computational social science best practices</li>
+<li><strong>Academic Credibility:</strong> Systematic documentation and pre-registration demonstrate methodological rigor</li>
+<li><strong>Foundation Building:</strong> Success provides clear pathway for extending validation to additional dimensions</li>
+</ul>
+<p>The plan positions your research as methodologically sophisticated rather than resource-constrained, providing a strong foundation for academic publication and future research expansion.</p>
+<div style="text-align: center">⁂</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

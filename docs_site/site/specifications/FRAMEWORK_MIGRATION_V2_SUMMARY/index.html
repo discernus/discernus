@@ -1,0 +1,1127 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Framework Migration to v2.0 - Complete Summary - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#framework-migration-to-v20-complete-summary" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Framework Migration to v2.0 - Complete Summary
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#migration-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Migration Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Migration Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migration-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Scope
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#completed-framework-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Completed Framework Migrations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Completed Framework Migrations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-civic_virtue-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. civic_virtue Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-political_spectrum-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. political_spectrum Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-fukuyama_identity-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. fukuyama_identity Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mft_persuasive_force-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. mft_persuasive_force Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-moral_rhetorical_posture-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. moral_rhetorical_posture Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Migration Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ Migration Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-first-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database-First Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v20-schema-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      v2.0 Schema Specification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-tools-and-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ Migration Tools and Infrastructure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Migration Tools and Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-migration-tool-migrate_frameworks_to_v2py" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Migration Tool - migrate_frameworks_to_v2.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-validation-tool-validate_framework_specpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Validation Tool - validate_framework_spec.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-synchronization-tool-framework_syncpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Synchronization Tool - framework_sync.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Migration Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Migration Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Assurance Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-process-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Migration Process Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Migration Process Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-pre-migration-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Pre-Migration Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-automated-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Automated Migration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-validation-and-quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Validation and Quality Assurance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-database-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Database Synchronization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-integration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5: Integration Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-verification-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Migration Verification Commands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Migration Verification Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verify-migration-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify Migration Completion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-migration-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate Migration Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-framework-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Framework Functionality
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-impact-and-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Migration Impact and Benefits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Migration Impact and Benefits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#academic-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Benefits
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-migration-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Post-Migration Capabilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Post-Migration Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immediate-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Immediate Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-workflow-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Workflow Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Related Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Related Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Locations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎉 Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="framework-migration-to-v20-complete-summary">Framework Migration to v2.0 - Complete Summary</h1>
+<p><strong>Migration Date</strong>: June 13-14, 2025<br />
+<strong>Status</strong>: ✅ <strong>SUCCESSFULLY COMPLETED WITH ENHANCEMENTS</strong><br />
+<strong>Migration Version</strong>: v2025.06.14 (with color optimization)</p>
+<h2 id="migration-overview">🎯 <strong>Migration Overview</strong></h2>
+<p>The Narrative Gravity Analysis system successfully completed a comprehensive migration of all frameworks from legacy formats to the formal v2.0 specification system, establishing the database as the authoritative source of truth. The migration was enhanced with accessibility-compliant color optimization meeting academic publication standards.</p>
+<h3 id="migration-scope"><strong>Migration Scope</strong></h3>
+<ul>
+<li><strong>5 Frameworks Migrated</strong>: All operational frameworks updated to v2025.06.14</li>
+<li><strong>Database Integration</strong>: Complete transition to database-first architecture</li>
+<li><strong>Color Optimization</strong>: WCAG AA accessibility compliance implemented</li>
+<li><strong>Schema Validation</strong>: Enhanced validation logic for v2.0 specification</li>
+<li><strong>Validation System</strong>: 3-tier validation (Schema, Semantic, Academic) implemented</li>
+<li><strong>Synchronization Tools</strong>: Bidirectional sync between database and filesystem</li>
+<li><strong>Professional Tooling</strong>: Production-grade migration and validation infrastructure</li>
+</ul>
+<h2 id="completed-framework-migrations">✅ <strong>Completed Framework Migrations</strong></h2>
+<h3 id="1-civic_virtue-framework"><strong>1. civic_virtue Framework</strong></h3>
+<ul>
+<li><strong>Legacy Version</strong>: File-based JSON specification</li>
+<li><strong>New Version</strong>: v2025.06.14 (Database + v2.0 schema + WCAG AA colors)</li>
+<li><strong>Migration Status</strong>: ✅ <strong>COMPLETED</strong></li>
+<li><strong>Validation</strong>: ✅ <strong>PASSED</strong> (Schema, Semantic, Academic)</li>
+<li><strong>Color Optimization</strong>: ✅ <strong>WCAG AA COMPLIANT</strong> (Green/Red accessibility optimized)</li>
+<li><strong>Database Sync</strong>: ✅ <strong>SYNCED</strong> to authoritative database</li>
+</ul>
+<h3 id="2-political_spectrum-framework"><strong>2. political_spectrum Framework</strong></h3>
+<ul>
+<li><strong>Legacy Version</strong>: File-based JSON specification</li>
+<li><strong>New Version</strong>: v2025.06.14 (Database + v2.0 schema + WCAG AA colors)</li>
+<li><strong>Migration Status</strong>: ✅ <strong>COMPLETED</strong></li>
+<li><strong>Validation</strong>: ✅ <strong>PASSED</strong> (Schema, Semantic, Academic)</li>
+<li><strong>Color Optimization</strong>: ✅ <strong>WCAG AA COMPLIANT</strong> (Blue/Red accessibility optimized)</li>
+<li><strong>Database Sync</strong>: ✅ <strong>SYNCED</strong> to authoritative database</li>
+</ul>
+<h3 id="3-fukuyama_identity-framework"><strong>3. fukuyama_identity Framework</strong></h3>
+<ul>
+<li><strong>Legacy Version</strong>: File-based JSON specification</li>
+<li><strong>New Version</strong>: v2025.06.14 (Database + v2.0 schema + WCAG AA colors)</li>
+<li><strong>Migration Status</strong>: ✅ <strong>COMPLETED</strong></li>
+<li><strong>Validation</strong>: ✅ <strong>PASSED</strong> (Schema, Semantic, Academic)</li>
+<li><strong>Color Optimization</strong>: ✅ <strong>WCAG AA COMPLIANT</strong> (Teal/Red accessibility optimized)</li>
+<li><strong>Database Sync</strong>: ✅ <strong>SYNCED</strong> to authoritative database</li>
+</ul>
+<h3 id="4-mft_persuasive_force-framework"><strong>4. mft_persuasive_force Framework</strong></h3>
+<ul>
+<li><strong>Legacy Version</strong>: File-based JSON specification</li>
+<li><strong>New Version</strong>: v2025.06.14 (Database + v2.0 schema + WCAG AA colors)</li>
+<li><strong>Migration Status</strong>: ✅ <strong>COMPLETED</strong></li>
+<li><strong>Validation</strong>: ✅ <strong>PASSED</strong> (Schema, Semantic, Academic)</li>
+<li><strong>Color Optimization</strong>: ✅ <strong>WCAG AA COMPLIANT</strong> (Green/Red MFT-compliant)</li>
+<li><strong>Database Sync</strong>: ✅ <strong>SYNCED</strong> to authoritative database</li>
+</ul>
+<h3 id="5-moral_rhetorical_posture-framework"><strong>5. moral_rhetorical_posture Framework</strong></h3>
+<ul>
+<li><strong>Legacy Version</strong>: File-based JSON specification</li>
+<li><strong>New Version</strong>: v2025.06.14 (Database + v2.0 schema + WCAG AA colors)</li>
+<li><strong>Migration Status</strong>: ✅ <strong>COMPLETED</strong></li>
+<li><strong>Validation</strong>: ✅ <strong>PASSED</strong> (Schema, Semantic, Academic)</li>
+<li><strong>Color Optimization</strong>: ✅ <strong>WCAG AA COMPLIANT</strong> (Purple/Red rhetorical distinction)</li>
+<li><strong>Database Sync</strong>: ✅ <strong>SYNCED</strong> to authoritative database</li>
+</ul>
+<h2 id="migration-architecture">🏗️ <strong>Migration Architecture</strong></h2>
+<h3 id="database-first-architecture"><strong>Database-First Architecture</strong></h3>
+<p>The migration established a clear architectural pattern:</p>
+<ul>
+<li><strong>Database</strong>: Authoritative source of truth for all framework specifications</li>
+<li><strong>Filesystem</strong>: Development workspace for framework creation and editing</li>
+<li><strong>Synchronization</strong>: Bidirectional sync tools maintain consistency between database and files</li>
+<li><strong>Validation</strong>: Multi-tier validation ensures quality and academic rigor</li>
+</ul>
+<h3 id="v20-schema-specification"><strong>v2.0 Schema Specification</strong></h3>
+<p>All frameworks now conform to the formal <code>framework_schema_v2.0.json</code> specification:</p>
+<pre><code class="language-json">{
+  &quot;framework_id&quot;: &quot;string&quot;,
+  &quot;version&quot;: &quot;v2025.06.13&quot;,
+  &quot;metadata&quot;: {
+    &quot;name&quot;: &quot;Framework Name&quot;,
+    &quot;description&quot;: &quot;Academic description&quot;,
+    &quot;academic_citations&quot;: [...],
+    &quot;coordinate_system&quot;: &quot;circular&quot;
+  },
+  &quot;theoretical_foundation&quot;: {...},
+  &quot;implementation&quot;: {...},
+  &quot;validation&quot;: {...}
+}
+</code></pre>
+<h2 id="migration-tools-and-infrastructure">🛠️ <strong>Migration Tools and Infrastructure</strong></h2>
+<h3 id="1-migration-tool-migrate_frameworks_to_v2py"><strong>1. Migration Tool - <code>migrate_frameworks_to_v2.py</code></strong></h3>
+<p><strong>File Size</strong>: 469 lines<br />
+<strong>Purpose</strong>: Automated migration from legacy format to v2.0 specification<br />
+<strong>Features</strong>:
+- Comprehensive format conversion
+- Data integrity verification
+- Automated backup creation
+- Rollback capabilities</p>
+<h3 id="2-validation-tool-validate_framework_specpy"><strong>2. Validation Tool - <code>validate_framework_spec.py</code></strong></h3>
+<p><strong>File Size</strong>: 457 lines<br />
+<strong>Purpose</strong>: 3-tier validation system for framework quality assurance<br />
+<strong>Validation Tiers</strong>:
+- <strong>Schema Validation</strong>: JSON schema compliance
+- <strong>Semantic Validation</strong>: Internal consistency and logical coherence
+- <strong>Academic Validation</strong>: Citation accuracy and theoretical soundness</p>
+<h3 id="3-synchronization-tool-framework_syncpy"><strong>3. Synchronization Tool - <code>framework_sync.py</code></strong></h3>
+<p><strong>File Size</strong>: 500 lines<br />
+<strong>Purpose</strong>: Bidirectional sync between database and filesystem<br />
+<strong>Capabilities</strong>:
+- Database import/export operations
+- File-to-database synchronization
+- Conflict resolution and merge handling
+- Version management and provenance tracking</p>
+<h2 id="migration-results">📊 <strong>Migration Results</strong></h2>
+<h3 id="success-metrics"><strong>Success Metrics</strong></h3>
+<ul>
+<li><strong>Migration Success Rate</strong>: 100% (5/5 frameworks successfully migrated)</li>
+<li><strong>Validation Pass Rate</strong>: 100% (All frameworks pass 3-tier validation)</li>
+<li><strong>Database Sync Success</strong>: 100% (All frameworks successfully synced to database)</li>
+<li><strong>Data Integrity</strong>: 100% (Zero data loss during migration)</li>
+</ul>
+<h3 id="performance-metrics"><strong>Performance Metrics</strong></h3>
+<ul>
+<li><strong>Total Migration Time</strong>: ~2 hours (including validation and sync)</li>
+<li><strong>Average Per-Framework Migration</strong>: ~24 minutes</li>
+<li><strong>Validation Processing</strong>: ~5 minutes per framework per tier</li>
+<li><strong>Database Sync Time</strong>: ~2 minutes per framework</li>
+</ul>
+<h3 id="quality-assurance-results"><strong>Quality Assurance Results</strong></h3>
+<ul>
+<li><strong>Schema Compliance</strong>: All frameworks pass JSON schema validation</li>
+<li><strong>Academic Citations</strong>: All citations verified and properly formatted</li>
+<li><strong>Theoretical Consistency</strong>: All frameworks demonstrate coherent theoretical foundations</li>
+<li><strong>Implementation Quality</strong>: All frameworks ready for production analysis use</li>
+</ul>
+<h2 id="migration-process-documentation">🔧 <strong>Migration Process Documentation</strong></h2>
+<h3 id="step-1-pre-migration-assessment"><strong>Step 1: Pre-Migration Assessment</strong></h3>
+<pre><code class="language-bash"># Inventory existing frameworks
+python scripts/framework_sync.py list --filesystem
+python scripts/framework_sync.py list --database
+
+# Validate current state
+python scripts/validate_framework_spec.py --all --legacy-format
+</code></pre>
+<h3 id="step-2-automated-migration"><strong>Step 2: Automated Migration</strong></h3>
+<pre><code class="language-bash"># Run migration tool for all frameworks
+python scripts/migrate_frameworks_to_v2.py --all --with-backup
+
+# Specific framework migration
+python scripts/migrate_frameworks_to_v2.py civic_virtue --backup-dir backups/
+</code></pre>
+<h3 id="step-3-validation-and-quality-assurance"><strong>Step 3: Validation and Quality Assurance</strong></h3>
+<pre><code class="language-bash"># Run full 3-tier validation
+python scripts/validate_framework_spec.py --all --comprehensive
+
+# Individual framework validation
+python scripts/validate_framework_spec.py civic_virtue --tier all
+</code></pre>
+<h3 id="step-4-database-synchronization"><strong>Step 4: Database Synchronization</strong></h3>
+<pre><code class="language-bash"># Import all migrated frameworks to database
+python scripts/framework_sync.py import --all
+
+# Verify database integration
+python scripts/framework_sync.py status --detailed
+python check_database.py --frameworks
+</code></pre>
+<h3 id="step-5-integration-testing"><strong>Step 5: Integration Testing</strong></h3>
+<pre><code class="language-bash"># Test framework functionality post-migration
+python scripts/end_to_end_pipeline_test.py --frameworks all
+
+# Validate circular coordinate system compatibility
+python src/narrative_gravity/engine_circular.py --test-frameworks
+</code></pre>
+<h2 id="migration-verification-commands">📋 <strong>Migration Verification Commands</strong></h2>
+<h3 id="verify-migration-completion"><strong>Verify Migration Completion</strong></h3>
+<pre><code class="language-bash"># Check all frameworks are v2025.06.13
+python scripts/framework_sync.py list --with-versions
+
+# Verify database contains all frameworks
+python scripts/framework_sync.py status --database
+</code></pre>
+<h3 id="validate-migration-quality"><strong>Validate Migration Quality</strong></h3>
+<pre><code class="language-bash"># Run comprehensive validation
+python scripts/validate_framework_spec.py --all --report
+
+# Check schema compliance
+python scripts/validate_framework_spec.py --schema-only --all
+</code></pre>
+<h3 id="test-framework-functionality"><strong>Test Framework Functionality</strong></h3>
+<pre><code class="language-bash"># Test each framework's circular coordinate compatibility
+python -c &quot;
+from src.narrative_gravity.engine_circular import NarrativeGravityWellsCircular
+engine = NarrativeGravityWellsCircular()
+for fw in ['civic_virtue', 'political_spectrum', 'fukuyama_identity', 'mft_persuasive_force', 'moral_rhetorical_posture']:
+    print(f'Testing {fw}...', engine.test_framework_compatibility(fw))
+&quot;
+</code></pre>
+<h2 id="migration-impact-and-benefits">🎯 <strong>Migration Impact and Benefits</strong></h2>
+<h3 id="academic-benefits"><strong>Academic Benefits</strong></h3>
+<ul>
+<li><strong>Reproducibility</strong>: Standardized framework specifications enable consistent replication</li>
+<li><strong>Validation</strong>: 3-tier validation ensures academic rigor and quality</li>
+<li><strong>Version Control</strong>: Systematic versioning supports longitudinal research</li>
+<li><strong>Citation Tracking</strong>: Proper academic attribution and provenance</li>
+</ul>
+<h3 id="technical-benefits"><strong>Technical Benefits</strong></h3>
+<ul>
+<li><strong>Database Performance</strong>: Optimized queries and indexing for framework access</li>
+<li><strong>Development Efficiency</strong>: Consistent tooling and validation across all frameworks</li>
+<li><strong>Quality Assurance</strong>: Automated validation prevents regression and maintains standards</li>
+<li><strong>Scalability</strong>: Architecture supports addition of new frameworks systematically</li>
+</ul>
+<h3 id="research-benefits"><strong>Research Benefits</strong></h3>
+<ul>
+<li><strong>Cross-Framework Analysis</strong>: Standardized format enables comparative studies</li>
+<li><strong>Collaboration</strong>: Clear specification facilitates researcher collaboration</li>
+<li><strong>Tool Integration</strong>: Compatible with circular coordinate system and visualization tools</li>
+<li><strong>Export Capabilities</strong>: Academic format exports (R, Stata, CSV) fully functional</li>
+</ul>
+<h2 id="post-migration-capabilities">🚀 <strong>Post-Migration Capabilities</strong></h2>
+<h3 id="immediate-capabilities"><strong>Immediate Capabilities</strong></h3>
+<ul>
+<li>All 5 frameworks operational with v2025.06.13 specification</li>
+<li>Database queries return consistent, validated framework data</li>
+<li>Framework synchronization tools enable development workflow</li>
+<li>Circular coordinate system integration complete</li>
+</ul>
+<h3 id="research-workflow-integration"><strong>Research Workflow Integration</strong></h3>
+<ul>
+<li>Frameworks integrate seamlessly with analysis pipeline</li>
+<li>Academic export tools support all migrated frameworks</li>
+<li>Visualization system compatible with circular coordinate positioning</li>
+<li>Batch processing supports all frameworks consistently</li>
+</ul>
+<h3 id="development-workflow"><strong>Development Workflow</strong></h3>
+<ul>
+<li>New framework development follows established v2.0 patterns</li>
+<li>Validation tools ensure quality before production deployment</li>
+<li>Database-first architecture supports collaborative development</li>
+<li>Version management enables safe framework evolution</li>
+</ul>
+<h2 id="related-documentation">📚 <strong>Related Documentation</strong></h2>
+<h3 id="architecture-documentation"><strong>Architecture Documentation</strong></h3>
+<ul>
+<li><a href="../architecture/FRAMEWORK_DEVELOPMENT_AND_MAINTENANCE.md"><code>FRAMEWORK_DEVELOPMENT_AND_MAINTENANCE.md</code></a> - Comprehensive framework development guide</li>
+<li><a href="../architecture/FRAMEWORK_ARCHITECTURE.md"><code>FRAMEWORK_ARCHITECTURE.md</code></a> - Complete framework system design</li>
+<li><a href="../architecture/CURRENT_SYSTEM_STATUS.md"><code>CURRENT_SYSTEM_STATUS.md</code></a> - Current operational status</li>
+</ul>
+<h3 id="implementation-files"><strong>Implementation Files</strong></h3>
+<ul>
+<li><code>scripts/migrate_frameworks_to_v2.py</code> - Migration tool (469 lines)</li>
+<li><code>scripts/validate_framework_spec.py</code> - Validation tool (457 lines)</li>
+<li><code>scripts/framework_sync.py</code> - Synchronization tool (500 lines)</li>
+<li><code>schemas/framework_schema_v2.0.json</code> - Formal specification schema</li>
+</ul>
+<h3 id="framework-locations"><strong>Framework Locations</strong></h3>
+<ul>
+<li><strong>Database</strong>: PostgreSQL <code>narrative_gravity.frameworks</code> table</li>
+<li><strong>Filesystem</strong>: <code>frameworks/*/framework.json</code> (development workspace)</li>
+<li><strong>Backups</strong>: <code>backups/frameworks_pre_v2_migration/</code> (safety backups)</li>
+</ul>
+<h2 id="conclusion">🎉 <strong>Conclusion</strong></h2>
+<p>The Framework Migration to v2.0 represents a <strong>fundamental architectural achievement</strong> for the Narrative Gravity Analysis system:</p>
+<ul>
+<li>✅ <strong>Complete Success</strong>: All 5 frameworks successfully migrated and validated</li>
+<li>✅ <strong>Database Integration</strong>: Framework specifications now managed as authoritative database records</li>
+<li>✅ <strong>Quality Assurance</strong>: 3-tier validation ensures academic rigor and consistency</li>
+<li>✅ <strong>Professional Tooling</strong>: Production-grade migration, validation, and synchronization tools</li>
+<li>✅ <strong>Research Ready</strong>: Academic workflows fully supported with standardized framework access</li>
+</ul>
+<p><strong>The migration establishes a solid foundation for systematic framework development, academic validation studies, and collaborative research across the computational social science community.</strong></p>
+<hr />
+<p><em>Migration completed: June 13, 2025</em><br />
+<em>Documentation version: v1.0</em><br />
+<em>Total frameworks migrated: 5/5</em><br />
+<em>Migration success rate: 100%</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -11,11 +11,11 @@ from typing import Dict, Any, Tuple, List, Optional
 from pathlib import Path
 
 # Use a single, consistent import path
-from ..api_clients.direct_api_client import DirectAPIClient
-from ..prompts.template_manager import PromptTemplateManager
-from ..framework_manager import FrameworkManager
-from ..coordinate_engine import DiscernusCoordinateEngine
-from ..utils.database import get_database_url
+from api_clients.direct_api_client import DirectAPIClient
+from prompts.template_manager import PromptTemplateManager
+from framework_manager import FrameworkManager
+from coordinate_engine import DiscernusCoordinateEngine
+from utils.database import get_database_url
 
 class RealAnalysisService:
     """
@@ -271,7 +271,7 @@ class RealAnalysisService:
         try:
             from sqlalchemy import create_engine
             from sqlalchemy.orm import sessionmaker
-            from ..models.component_models import FrameworkVersion
+            from models.component_models import FrameworkVersion
             
             engine = create_engine(get_database_url())
             Session = sessionmaker(bind=engine)

@@ -1,0 +1,1376 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Intelligent Corpus Ingestion Service - User Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#intelligent-corpus-ingestion-service-user-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Intelligent Corpus Ingestion Service - User Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-this-service-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      What This Service Does
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-this-service-does-not-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      What This Service Does NOT Do
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-expectations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Expectations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Expectations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#success-rates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Rates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Levels
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-llm-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      For LLM Version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-demo-version-no-api-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Demo Version (No API Required)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-by-step-usage-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step-by-Step Usage Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step-by-Step Usage Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-prepare-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Prepare Your Environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-prepare-your-text-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Prepare Your Text Files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-choose-your-processing-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Choose Your Processing Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Choose Your Processing Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-llm-powered-processing-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option A: LLM-Powered Processing (Recommended)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-demo-version-no-api-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option B: Demo Version (No API Required)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-monitor-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Monitor Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-review-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5: Review Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-handle-uncertain-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6: Handle Uncertain Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-verify-corpus-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 7: Verify Corpus Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confidence-scoring-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confidence Scoring Explained
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Result Categories
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Result Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#successful-70-confidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Successful (≥70% confidence)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uncertain-40-69-confidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Uncertain (40-69% confidence)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failed-40-confidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Failed (&lt;40% confidence)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generated-text-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated Text IDs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting Common Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting Common Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processing-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Processing Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-directory-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      "❌ Error: Directory not found"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warning-openai_api_key-environment-variable-not-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      "⚠️ Warning: OPENAI_API_KEY environment variable not set"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-expecting-value-line-1-column-1-char-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      "💥 Error: Expecting value: line 1 column 1 (char 0)"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quality Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#low-success-rate-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      Low Success Rate (&lt;50%)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incorrect-metadata-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incorrect Metadata Extraction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#databaseregistration-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database/Registration Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registration_error-duplicate-key-value-violates-unique-constraint" class="md-nav__link">
+    <span class="md-ellipsis">
+      "❌ registration_error: duplicate key value violates unique constraint"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-connection-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database connection errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-confidence-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Confidence Thresholds
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dry-run-mode-test-without-registration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dry Run Mode (Test Without Registration)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-processing-large-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Processing Large Collections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-with-existing-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Existing Workflows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-processing-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Processing Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-integration-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM Integration Details
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-schema-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Schema Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-and-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security and Privacy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-and-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support and Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Support and Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reporting-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reporting Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="intelligent-corpus-ingestion-service-user-guide">Intelligent Corpus Ingestion Service - User Guide</h1>
+<h2 id="overview">Overview</h2>
+<p>The Intelligent Corpus Ingestion Service automatically extracts metadata from messy text files using AI-powered analysis, dramatically reducing the manual effort required to build research-quality document corpora. The service can process directories of poorly-named files with minimal metadata and transform them into academically-structured corpus entries.</p>
+<h3 id="what-this-service-does">What This Service Does</h3>
+<p>✅ <strong>Automatic Metadata Extraction</strong>: Extracts titles, authors, dates, document types, and descriptions from text content
+✅ <strong>Quality Assessment</strong>: Scores extraction confidence (0-100%) to ensure only high-quality metadata reaches your corpus
+✅ <strong>Intelligent Processing</strong>: Uses GPT-3.5-turbo for sophisticated understanding of historical and political documents<br />
+✅ <strong>Corpus Integration</strong>: Automatically registers high-confidence documents in your research corpus with semantic text IDs
+✅ <strong>Batch Processing</strong>: Handles entire directories of files with comprehensive reporting and audit trails</p>
+<h3 id="what-this-service-does-not-do">What This Service Does NOT Do</h3>
+<p>❌ <strong>Perfect Accuracy</strong>: AI extraction may miss nuanced details or make incorrect inferences<br />
+❌ <strong>OCR or PDF Processing</strong>: Only works with plain text files (.txt, .md)
+❌ <strong>Language Translation</strong>: Designed primarily for English-language documents
+❌ <strong>Content Analysis</strong>: Extracts metadata only, does not perform narrative gravity analysis</p>
+<h2 id="setting-expectations">Setting Expectations</h2>
+<h3 id="success-rates">Success Rates</h3>
+<ul>
+<li><strong>High-quality historical documents</strong>: 70-95% success rate</li>
+<li><strong>Modern documents with clear structure</strong>: 85-100% success rate  </li>
+<li><strong>Poorly formatted or damaged text</strong>: 30-60% success rate</li>
+<li><strong>Non-English documents</strong>: 40-70% success rate (depending on language)</li>
+</ul>
+<h3 id="processing-time">Processing Time</h3>
+<ul>
+<li><strong>Small collection (10-50 files)</strong>: 2-5 minutes</li>
+<li><strong>Medium collection (100-200 files)</strong>: 10-20 minutes</li>
+<li><strong>Large collection (500+ files)</strong>: 30-60 minutes</li>
+<li><strong>Cost</strong>: ~$0.01-0.05 per document for LLM processing</li>
+</ul>
+<h3 id="quality-levels">Quality Levels</h3>
+<ul>
+<li><strong>Successful (≥70% confidence)</strong>: Automatically registered in corpus, ready for analysis</li>
+<li><strong>Uncertain (40-69% confidence)</strong>: Requires manual review, may need metadata correction</li>
+<li><strong>Failed (&lt;40% confidence)</strong>: LLM extraction failed, needs manual processing</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="required">Required</h3>
+<ol>
+<li><strong>Narrative Gravity environment set up</strong> with PostgreSQL database</li>
+<li><strong>Python virtual environment activated</strong></li>
+<li><strong>Text files</strong> in .txt or .md format (UTF-8 encoding recommended)</li>
+</ol>
+<h3 id="for-llm-version">For LLM Version</h3>
+<ol>
+<li><strong>OpenAI API key</strong> with GPT-3.5-turbo access</li>
+<li><strong>API key configured</strong> in environment variable <code>OPENAI_API_KEY</code></li>
+<li><strong>Sufficient API credits</strong> (~$0.01-0.05 per document)</li>
+</ol>
+<h3 id="for-demo-version-no-api-required">For Demo Version (No API Required)</h3>
+<ol>
+<li><strong>No additional requirements</strong> - uses rule-based extraction</li>
+</ol>
+<h2 id="step-by-step-usage-guide">Step-by-Step Usage Guide</h2>
+<h3 id="step-1-prepare-your-environment">Step 1: Prepare Your Environment</h3>
+<pre><code class="language-bash"># Navigate to project directory
+cd narrative_gravity_analysis
+
+# Activate virtual environment  
+source venv/bin/activate
+
+# Set up development environment
+source scripts/setup_dev_env.sh
+
+# Verify environment (should show ✅ for all checks)
+python3 -c &quot;from src.narrative_gravity.corpus.registry import CorpusRegistry; print('✅ Corpus system ready')&quot;
+</code></pre>
+<h3 id="step-2-prepare-your-text-files">Step 2: Prepare Your Text Files</h3>
+<p><strong>Organize your files:</strong></p>
+<pre><code>my_documents/
+├── messy_speech_1.txt
+├── some_inaugural_address.txt  
+├── random_political_text.txt
+└── historical_document.txt
+</code></pre>
+<p><strong>File requirements:</strong>
+- Plain text files (.txt or .md)
+- UTF-8 encoding (or reasonably clean ASCII)
+- Minimum 100 characters for meaningful extraction
+- Maximum 50,000 characters per file (larger files truncated)</p>
+<h3 id="step-3-choose-your-processing-method">Step 3: Choose Your Processing Method</h3>
+<h4 id="option-a-llm-powered-processing-recommended">Option A: LLM-Powered Processing (Recommended)</h4>
+<p><strong>Requirements:</strong>
+- OpenAI API key configured
+- Internet connection
+- API credits available</p>
+<p><strong>Command:</strong></p>
+<pre><code class="language-bash">python3 scripts/intelligent_ingest.py /path/to/your/documents
+</code></pre>
+<p><strong>With options:</strong></p>
+<pre><code class="language-bash">python3 scripts/intelligent_ingest.py /path/to/your/documents \
+    --confidence-threshold 75 \
+    --output-dir my_results \
+    --verbose
+</code></pre>
+<h4 id="option-b-demo-version-no-api-required">Option B: Demo Version (No API Required)</h4>
+<p><strong>Use when:</strong>
+- No OpenAI API key available
+- Processing familiar document types (presidentials, inaugurals, etc.)
+- Testing the system before committing to API costs</p>
+<p><strong>Command:</strong></p>
+<pre><code class="language-bash">python3 scripts/demo_intelligent_ingest.py
+</code></pre>
+<h3 id="step-4-monitor-processing">Step 4: Monitor Processing</h3>
+<p><strong>Expected output:</strong></p>
+<pre><code>🚀 Starting Intelligent Corpus Ingestion Service...
+📁 Source Directory: /path/to/your/documents
+🎯 Confidence Threshold: 70.0%
+
+🔍 Found 15 text files to process...
+📄 Processing: messy_speech_1.txt
+  ✅ Success (85.0%): First Inaugural Address of John F. Kennedy
+📄 Processing: some_inaugural_address.txt  
+  ⚠️  Uncertain (65.0%): Presidential Address
+📄 Processing: random_political_text.txt
+  ❌ Failed (25.0%): random_political_text.txt
+
+📊 Ingestion Results:
+  ✅ Successful: 12/15
+  ⚠️  Uncertain: 2/15  
+  ❌ Failed: 1/15
+  📈 Success Rate: 80.0%
+</code></pre>
+<h3 id="step-5-review-results">Step 5: Review Results</h3>
+<p><strong>Check the output directory:</strong></p>
+<pre><code class="language-bash">ls tmp/intelligent_ingestion_TIMESTAMP/
+# You'll see:
+# - ingestion_results.json (comprehensive results)
+# - individual_file_result.json (per-file details)
+</code></pre>
+<p><strong>Review the summary:</strong></p>
+<pre><code class="language-bash">cat tmp/intelligent_ingestion_TIMESTAMP/ingestion_results.json
+</code></pre>
+<h3 id="step-6-handle-uncertain-cases">Step 6: Handle Uncertain Cases</h3>
+<p><strong>For uncertain results (40-69% confidence):</strong></p>
+<ol>
+<li>
+<p><strong>Review the extracted metadata:</strong>
+   <code>bash
+   # Look at individual result files
+   cat tmp/intelligent_ingestion_TIMESTAMP/uncertain_file_result.json</code></p>
+</li>
+<li>
+<p><strong>Common issues and fixes:</strong></p>
+</li>
+<li><strong>Missing author</strong>: Check if author name is mentioned differently in text</li>
+<li><strong>Wrong date</strong>: Look for alternative date formats or historical context</li>
+<li><strong>Incorrect document type</strong>: Consider if type classification makes sense</li>
+<li>
+<p><strong>Generic title</strong>: Title might need manual refinement</p>
+</li>
+<li>
+<p><strong>Manual registration option:</strong>
+   <code>bash
+   # Register manually with corrected metadata
+   python3 -c "
+   from src.narrative_gravity.corpus.registry import CorpusRegistry
+   registry = CorpusRegistry()
+   registry.register_document(
+       text_id='corrected_author_type_year',
+       file_path='/path/to/file.txt',
+       metadata={
+           'title': 'Corrected Title',
+           'author': 'Corrected Author',
+           'date': '1861-03-04',
+           'document_type': 'inaugural',
+           'description': 'Manually corrected description',
+           'source': 'manual_correction'
+       }
+   )
+   "</code></p>
+</li>
+</ol>
+<h3 id="step-7-verify-corpus-integration">Step 7: Verify Corpus Integration</h3>
+<p><strong>Check that successful documents were registered:</strong></p>
+<pre><code class="language-bash">python3 -c &quot;
+from src.narrative_gravity.corpus.discovery import CorpusDiscovery
+discovery = CorpusDiscovery()
+stats = discovery.get_corpus_statistics()
+print(f'📊 Corpus now has {stats.total_documents} documents from {stats.total_authors} authors')
+
+# Search for recently added documents
+results = discovery.search('source:intelligent_ingestion', limit=10)
+print(f'🆕 {results.total_matches} documents added by intelligent ingestion')
+&quot;
+</code></pre>
+<h2 id="understanding-results">Understanding Results</h2>
+<h3 id="confidence-scoring-explained">Confidence Scoring Explained</h3>
+<p><strong>Components of confidence score (0-100%):</strong>
+- <strong>Title quality (25 points)</strong>: Clear, meaningful title &gt; 5 characters
+- <strong>Author identification (20 points)</strong>: Author name successfully extracted<br />
+- <strong>Date validation (20 points)</strong>: Valid date in YYYY-MM-DD format
+- <strong>Document type (15 points)</strong>: Specific type identified (not "other")
+- <strong>Description quality (10 points)</strong>: Meaningful description &gt; 10 characters
+- <strong>Language detection (5 points)</strong>: Language code identified
+- <strong>Consistency bonus (5 points)</strong>: Title appears in document text</p>
+<h3 id="result-categories">Result Categories</h3>
+<h4 id="successful-70-confidence">✅ Successful (≥70% confidence)</h4>
+<ul>
+<li><strong>Automatically registered</strong> in corpus database</li>
+<li><strong>Ready for analysis</strong> - no manual intervention needed</li>
+<li><strong>High-quality metadata</strong> suitable for academic research</li>
+<li><strong>Semantic text ID</strong> generated (e.g., <code>lincoln_inaugural_1865</code>)</li>
+</ul>
+<h4 id="uncertain-40-69-confidence">⚠️ Uncertain (40-69% confidence)</h4>
+<ul>
+<li><strong>Manual review recommended</strong> before corpus registration</li>
+<li><strong>Partial metadata extracted</strong> - some fields may be missing/incorrect</li>
+<li><strong>Revision suggested</strong> - check extracted data against source document</li>
+<li><strong>Registration possible</strong> with manual correction</li>
+</ul>
+<h4 id="failed-40-confidence">❌ Failed (&lt;40% confidence)</h4>
+<ul>
+<li><strong>Manual processing required</strong> - AI extraction unsuccessful</li>
+<li><strong>Fallback metadata only</strong> - basic title from filename</li>
+<li><strong>Not registered</strong> in corpus - needs human intervention</li>
+<li><strong>Common causes</strong>: Damaged text, unclear structure, non-standard format</li>
+</ul>
+<h3 id="generated-text-ids">Generated Text IDs</h3>
+<p><strong>Format</strong>: <code>{author_lastname}_{document_type}_{year}</code></p>
+<p><strong>Examples:</strong>
+- <code>lincoln_inaugural_1865</code> (Abraham Lincoln's 1865 inaugural)
+- <code>roosevelt_speech_1941</code> (Roosevelt speech from 1941)<br />
+- <code>chavez_address_2006</code> (Chávez UN address from 2006)
+- <code>unknown_text_20250611</code> (Fallback when metadata extraction fails)</p>
+<h2 id="troubleshooting-common-issues">Troubleshooting Common Issues</h2>
+<h3 id="processing-issues">Processing Issues</h3>
+<h4 id="error-directory-not-found">"❌ Error: Directory not found"</h4>
+<p><strong>Cause</strong>: Specified directory doesn't exist
+<strong>Solution</strong>: Check path spelling, ensure directory exists</p>
+<pre><code class="language-bash">ls -la /path/to/your/documents  # Verify directory exists
+</code></pre>
+<h4 id="warning-openai_api_key-environment-variable-not-set">"⚠️ Warning: OPENAI_API_KEY environment variable not set"</h4>
+<p><strong>Cause</strong>: LLM version requires OpenAI API key
+<strong>Solutions:</strong>
+1. <strong>Set API key</strong>: <code>export OPENAI_API_KEY=sk-your-key-here</code>
+2. <strong>Use demo version</strong>: Run <code>python3 scripts/demo_intelligent_ingest.py</code> instead
+3. <strong>Check .env file</strong>: Ensure API key is in <code>.env</code> file</p>
+<h4 id="error-expecting-value-line-1-column-1-char-0">"💥 Error: Expecting value: line 1 column 1 (char 0)"</h4>
+<p><strong>Cause</strong>: LLM returned invalid JSON response
+<strong>Solutions:</strong>
+1. <strong>Retry processing</strong> - temporary LLM service issue
+2. <strong>Check API key validity</strong> - key might be expired/invalid
+3. <strong>Check API credits</strong> - account might be out of credits
+4. <strong>Use demo version</strong> as fallback</p>
+<h3 id="quality-issues">Quality Issues</h3>
+<h4 id="low-success-rate-50">Low Success Rate (&lt;50%)</h4>
+<p><strong>Possible causes:</strong>
+- <strong>Poor quality source files</strong>: Damaged, corrupted, or incomplete text
+- <strong>Non-English documents</strong>: Service optimized for English
+- <strong>Unusual document formats</strong>: Poetry, technical manuals, etc.
+- <strong>Very short documents</strong>: &lt;100 characters provide insufficient context</p>
+<p><strong>Solutions:</strong>
+1. <strong>Lower confidence threshold</strong>: Use <code>--confidence-threshold 50</code>
+2. <strong>Manual review</strong>: Check uncertain results for usable metadata
+3. <strong>Preprocess files</strong>: Clean up obvious formatting issues
+4. <strong>Use domain-specific extraction</strong>: Consider custom prompts for specialized content</p>
+<h4 id="incorrect-metadata-extraction">Incorrect Metadata Extraction</h4>
+<p><strong>Common issues:</strong>
+- <strong>Wrong author</strong>: Common names confused (e.g., Roosevelt → wrong Roosevelt)
+- <strong>Wrong dates</strong>: Historical context misunderstood
+- <strong>Generic titles</strong>: AI generated generic description instead of actual title</p>
+<p><strong>Solutions:</strong>
+1. <strong>Review uncertain results</strong>: Check 40-69% confidence files manually
+2. <strong>Verify against source</strong>: Cross-check extracted metadata with document content<br />
+3. <strong>Manual correction</strong>: Register corrected metadata manually
+4. <strong>Filename hints</strong>: Use descriptive filenames to help AI understanding</p>
+<h4 id="databaseregistration-issues">Database/Registration Issues</h4>
+<h4 id="registration_error-duplicate-key-value-violates-unique-constraint">"❌ registration_error: duplicate key value violates unique constraint"</h4>
+<p><strong>Cause</strong>: Generated text_id already exists in database
+<strong>Solution</strong>: Text ID collision - document may already be registered</p>
+<pre><code class="language-bash"># Check if text_id already exists
+python3 -c &quot;
+from src.narrative_gravity.corpus.discovery import CorpusDiscovery
+discovery = CorpusDiscovery()
+results = discovery.search('text_id:lincoln_inaugural_1865')
+print(f'Found {results.total_matches} documents with this ID')
+&quot;
+</code></pre>
+<h4 id="database-connection-errors">Database connection errors</h4>
+<p><strong>Cause</strong>: PostgreSQL database not running or misconfigured
+<strong>Solution</strong>: Check database status</p>
+<pre><code class="language-bash">python3 check_database.py  # Verify database connectivity
+python3 launch.py --setup-db  # Reset database if needed
+</code></pre>
+<h2 id="advanced-usage">Advanced Usage</h2>
+<h3 id="custom-confidence-thresholds">Custom Confidence Thresholds</h3>
+<p><strong>Conservative approach (high quality only):</strong></p>
+<pre><code class="language-bash">python3 scripts/intelligent_ingest.py /path/to/docs --confidence-threshold 85
+</code></pre>
+<p><strong>Permissive approach (accept more uncertain results):</strong></p>
+<pre><code class="language-bash">python3 scripts/intelligent_ingest.py /path/to/docs --confidence-threshold 50
+</code></pre>
+<h3 id="dry-run-mode-test-without-registration">Dry Run Mode (Test Without Registration)</h3>
+<p><strong>Test processing without database changes:</strong></p>
+<pre><code class="language-bash">python3 scripts/intelligent_ingest.py /path/to/docs --dry-run --verbose
+</code></pre>
+<p><strong>Benefits:</strong>
+- ✅ <strong>Test API connectivity</strong> without committing results
+- ✅ <strong>Estimate processing time</strong> and costs
+- ✅ <strong>Review extraction quality</strong> before final processing
+- ✅ <strong>Debug issues</strong> without database side effects</p>
+<h3 id="batch-processing-large-collections">Batch Processing Large Collections</h3>
+<p><strong>For very large document collections (500+ files):</strong></p>
+<ol>
+<li>
+<p><strong>Split into batches:</strong>
+   <code>bash
+   # Process in smaller chunks
+   for dir in batch_*; do
+       python3 scripts/intelligent_ingest.py "$dir" --output-dir "results_$dir"
+   done</code></p>
+</li>
+<li>
+<p><strong>Monitor API usage:</strong></p>
+</li>
+<li>Check OpenAI usage dashboard regularly</li>
+<li>Set up billing alerts to avoid unexpected charges</li>
+<li>
+<p>Consider rate limiting for very large batches</p>
+</li>
+<li>
+<p><strong>Use incremental processing:</strong>
+   <code>bash
+   # Process only new files not already in results
+   python3 scripts/intelligent_ingest.py new_documents --output-dir incremental_batch</code></p>
+</li>
+</ol>
+<h3 id="integration-with-existing-workflows">Integration with Existing Workflows</h3>
+<p><strong>Export processed results for external analysis:</strong></p>
+<pre><code class="language-bash"># Export corpus data including intelligent ingestion results
+python3 -c &quot;
+from src.narrative_gravity.corpus.exporter import CorpusExporter
+exporter = CorpusExporter()
+exporter.export_csv('intelligent_ingestion_corpus.csv')
+&quot;
+</code></pre>
+<p><strong>Filter by ingestion source:</strong></p>
+<pre><code class="language-bash"># Find all intelligently ingested documents
+python3 -c &quot;
+from src.narrative_gravity.corpus.discovery import CorpusDiscovery
+discovery = CorpusDiscovery()
+results = discovery.search('source:intelligent_ingestion OR source:demo_intelligent_ingestion')
+print(f'Found {results.total_matches} intelligently ingested documents')
+&quot;
+</code></pre>
+<h2 id="technical-details">Technical Details</h2>
+<h3 id="file-processing-pipeline">File Processing Pipeline</h3>
+<ol>
+<li><strong>File Discovery</strong>: Recursive search for .txt and .md files</li>
+<li><strong>Content Reading</strong>: UTF-8 text extraction with error handling</li>
+<li><strong>Metadata Extraction</strong>: LLM-powered analysis or rule-based fallback</li>
+<li><strong>Confidence Assessment</strong>: Multi-factor scoring algorithm</li>
+<li><strong>Quality Control</strong>: Validation and consistency checking</li>
+<li><strong>Database Integration</strong>: Automatic registration for high-confidence results</li>
+<li><strong>Audit Trail</strong>: Complete provenance tracking and result logging</li>
+</ol>
+<h3 id="llm-integration-details">LLM Integration Details</h3>
+<p><strong>Model</strong>: GPT-3.5-turbo (cost-effective, reliable)
+<strong>Temperature</strong>: 0.1 (low randomness for consistent extraction)
+<strong>Max Tokens</strong>: 500 (sufficient for structured metadata)
+<strong>Prompt Engineering</strong>: Specialized prompts for historical/political documents
+<strong>Error Handling</strong>: Graceful fallback to rule-based extraction</p>
+<h3 id="database-schema-integration">Database Schema Integration</h3>
+<p><strong>Tables affected:</strong>
+- <code>corpus</code>: Document registration with semantic text IDs
+- <code>document</code>: Metadata storage with source tracking
+- Maintains full compatibility with existing corpus management system</p>
+<h3 id="security-and-privacy">Security and Privacy</h3>
+<p><strong>Data handling:</strong>
+- ✅ <strong>No persistent storage</strong> of document content on external servers
+- ✅ <strong>API calls minimal</strong> - only metadata extraction, not full content
+- ✅ <strong>Local processing</strong> - all results stored locally
+- ✅ <strong>Audit trails</strong> - complete logging of all operations</p>
+<p><strong>API considerations:</strong>
+- ⚠️ <strong>Content sent to OpenAI</strong> for metadata extraction
+- ⚠️ <strong>Subject to OpenAI terms</strong> of service and data policies
+- ⚠️ <strong>Consider privacy</strong> for sensitive historical documents</p>
+<h2 id="support-and-troubleshooting">Support and Troubleshooting</h2>
+<h3 id="getting-help">Getting Help</h3>
+<ol>
+<li><strong>Check this guide</strong> - most common issues covered above</li>
+<li><strong>Run diagnostics</strong>:
+   <code>bash
+   python3 check_database.py  # Database connectivity
+   python3 -c "import openai; print('OpenAI library available')"  # API setup</code></li>
+<li><strong>Enable verbose output</strong>: Add <code>--verbose</code> flag for detailed processing logs</li>
+<li><strong>Review result files</strong>: Check JSON output for specific error details</li>
+</ol>
+<h3 id="reporting-issues">Reporting Issues</h3>
+<p>When reporting problems, include:
+- ✅ <strong>Complete command used</strong>
+- ✅ <strong>Error message or unexpected output</strong>
+- ✅ <strong>Sample problematic file</strong> (if not sensitive)
+- ✅ <strong>Environment details</strong> (OS, Python version)
+- ✅ <strong>Processing statistics</strong> from results summary</p>
+<h3 id="best-practices">Best Practices</h3>
+<ol>
+<li><strong>Start small</strong>: Test with 5-10 files before processing large collections</li>
+<li><strong>Use dry-run mode</strong>: Always test before committing to database</li>
+<li><strong>Monitor API costs</strong>: Track OpenAI usage for budget planning</li>
+<li><strong>Backup regularly</strong>: Ensure corpus database backups before large ingestions</li>
+<li><strong>Review uncertain results</strong>: Manual review improves overall corpus quality</li>
+<li><strong>Document sources</strong>: Keep track of where documents originated for provenance</li>
+</ol>
+<hr />
+<p><em>This guide covers the Intelligent Corpus Ingestion Service as of June 2025. For technical details about the underlying corpus management system, see <a href="ENHANCED_CORPUS_MANAGEMENT_GUIDE.md">Enhanced Corpus Management Guide</a>.</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

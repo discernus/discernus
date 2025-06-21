@@ -1,0 +1,1072 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Transaction Integrity Architecture - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#transaction-integrity-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Transaction Integrity Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔒 Core Philosophy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architectural-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      📐 Architectural Principles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📐 Architectural Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-fail-fast-fail-clean" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Fail Fast, Fail Clean
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-single-source-of-truth-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Single Source of Truth Enforcement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-transaction-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Transaction Safety
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-user-centric-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. User-Centric Error Handling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ System Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ System Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-layered-transaction-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Layered Transaction Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transaction-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transaction Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transaction-manager-implementations" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔒 Transaction Manager Implementations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔒 Transaction Manager Implementations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-framework-transaction-manager-implemented" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Framework Transaction Manager ✅ IMPLEMENTED
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data-transaction-manager-in-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Data Transaction Manager 🚧 IN PROGRESS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-quality-transaction-manager-in-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Quality Transaction Manager 🚧 IN PROGRESS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pipeline-transaction-manager-planned" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Pipeline Transaction Manager 📋 PLANNED
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-compliance-transaction-manager-planned" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Compliance Transaction Manager 📋 PLANNED
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Integration Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Integration Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transaction-manager-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transaction Manager Interface
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orchestrator-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orchestrator Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-hierarchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling Hierarchy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Monitoring &amp; Observability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Monitoring &amp; Observability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transaction-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transaction Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audit Trail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Deployment Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Deployment Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-foundation-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Foundation ✅ COMPLETE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-core-validation-in-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Core Validation 🚧 IN PROGRESS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-pipeline-safety-planned" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Pipeline Safety 📋 PLANNED
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-compliance-integration-planned" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Compliance Integration 📋 PLANNED
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-advanced-features-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 5: Advanced Features 📋 FUTURE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Benefits &amp; Impact
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Benefits &amp; Impact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experiment-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Integrity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#developer-experience" class="md-nav__link">
+    <span class="md-ellipsis">
+      Developer Experience
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-reliability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Reliability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scientific-validity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scientific Validity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="transaction-integrity-architecture">Transaction Integrity Architecture</h1>
+<p><strong>Last Updated</strong>: June 17, 2025<br />
+<strong>Status</strong>: Phase 1 Complete (Framework), Phase 2 In Progress (Data + Quality)<br />
+<strong>Version</strong>: v1.0.0</p>
+<hr />
+<h2 id="core-philosophy">🔒 <strong>Core Philosophy</strong></h2>
+<p><strong>"Any uncertainty that could compromise experiment validity should trigger graceful termination and rollback."</strong></p>
+<p>The Transaction Integrity Architecture ensures that experimental results are never contaminated by uncertain or invalid states. Rather than producing questionable results, the system fails fast and clean, providing clear guidance for resolution.</p>
+<h2 id="architectural-principles"><strong>📐 Architectural Principles</strong></h2>
+<h3 id="1-fail-fast-fail-clean"><strong>1. Fail Fast, Fail Clean</strong></h3>
+<ul>
+<li>Detect uncertainty early in the experiment lifecycle</li>
+<li>Terminate immediately upon detection of integrity violations</li>
+<li>Provide comprehensive rollback to maintain clean state</li>
+</ul>
+<h3 id="2-single-source-of-truth-enforcement"><strong>2. Single Source of Truth Enforcement</strong></h3>
+<ul>
+<li>Database is authoritative for production systems</li>
+<li>File systems serve development and ingestion only</li>
+<li>Version detection prevents silent configuration drift</li>
+</ul>
+<h3 id="3-transaction-safety"><strong>3. Transaction Safety</strong></h3>
+<ul>
+<li>All changes tracked across experiment lifecycle</li>
+<li>Complete rollback capability for partial failures</li>
+<li>Audit trail for all transaction decisions</li>
+</ul>
+<h3 id="4-user-centric-error-handling"><strong>4. User-Centric Error Handling</strong></h3>
+<ul>
+<li>Specific, actionable guidance for each failure type</li>
+<li>Clear explanation of why failure protects experiment integrity</li>
+<li>Step-by-step commands for issue resolution</li>
+</ul>
+<hr />
+<h2 id="system-architecture">🏗️ <strong>System Architecture</strong></h2>
+<h3 id="multi-layered-transaction-management"><strong>Multi-Layered Transaction Management</strong></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                    EXPERIMENT ORCHESTRATOR                     │
+├─────────────────────────────────────────────────────────────────┤
+│  Pre-Flight Validation → Execute → Post-Analysis → Cleanup     │
+│         ↓                   ↓           ↓            ↓         │
+├─────────────────────────────────────────────────────────────────┤
+│ 🔒 FRAMEWORK TRANSACTION MANAGER                               │
+│   • Database-first framework loading                           │
+│   • Content change detection &amp; auto-versioning                │
+│   • Framework boundary compliance validation                   │
+├─────────────────────────────────────────────────────────────────┤
+│ 🔒 DATA TRANSACTION MANAGER                                    │
+│   • Corpus integrity validation                                │
+│   • Content hash verification                                  │
+│   • Data encoding &amp; format validation                          │
+├─────────────────────────────────────────────────────────────────┤
+│ 🔒 QUALITY TRANSACTION MANAGER                                 │
+│   • Analysis quality threshold enforcement                     │
+│   • Framework fit score validation                             │
+│   • Statistical significance requirements                      │
+├─────────────────────────────────────────────────────────────────┤
+│ 🔒 PIPELINE TRANSACTION MANAGER (Future)                       │
+│   • LLM model availability validation                          │
+│   • Dependency version compatibility                           │
+│   • Tool integration verification                              │
+├─────────────────────────────────────────────────────────────────┤
+│ 🔒 COMPLIANCE TRANSACTION MANAGER (Future)                     │
+│   • Academic compliance validation                             │
+│   • Ethical clearance verification                             │
+│   • Data classification enforcement                            │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="transaction-lifecycle"><strong>Transaction Lifecycle</strong></h3>
+<ol>
+<li><strong>Pre-Flight Validation</strong></li>
+<li>All transaction managers validate their domain</li>
+<li>Any failure triggers immediate termination</li>
+<li>
+<p>Rollback any changes made during validation</p>
+</li>
+<li>
+<p><strong>Execution Monitoring</strong></p>
+</li>
+<li>Continuous validation during experiment execution</li>
+<li>Quality thresholds monitored in real-time</li>
+<li>
+<p>Transaction state tracking for audit trail</p>
+</li>
+<li>
+<p><strong>Post-Analysis Verification</strong></p>
+</li>
+<li>Results quality validation</li>
+<li>Data integrity confirmation</li>
+<li>
+<p>Transaction completion verification</p>
+</li>
+<li>
+<p><strong>Cleanup &amp; Rollback</strong></p>
+</li>
+<li>Clean rollback on any failure</li>
+<li>Complete audit trail generation</li>
+<li>User guidance for issue resolution</li>
+</ol>
+<hr />
+<h2 id="transaction-manager-implementations">🔒 <strong>Transaction Manager Implementations</strong></h2>
+<h3 id="1-framework-transaction-manager-implemented"><strong>1. Framework Transaction Manager</strong> ✅ <strong>IMPLEMENTED</strong></h3>
+<p><strong>File</strong>: <code>src/narrative_gravity/utils/framework_transaction_manager.py</code></p>
+<p><strong>Responsibilities</strong>:
+- Framework definition validation and versioning
+- Database single source of truth enforcement
+- Content change detection with automatic version increment
+- Framework boundary compliance verification</p>
+<p><strong>Failure Triggers</strong>:
+- Framework not found in database or filesystem
+- Framework content changes without version update
+- Framework validation errors or malformed definitions
+- Database transaction failures during framework operations</p>
+<p><strong>Example User Experience</strong>:</p>
+<pre><code class="language-bash">🚨 EXPERIMENT TERMINATED: Framework Transaction Integrity Failure
+
+Framework 'custom_framework' content changed but version unchanged
+
+🔧 Recommended Actions:
+• Version auto-incremented: custom_framework v1.0.1 → v1.0.2
+• Verify new version: python3 scripts/framework_sync.py status
+• Update experiment definition to specify version: v1.0.2
+</code></pre>
+<h3 id="2-data-transaction-manager-in-progress"><strong>2. Data Transaction Manager</strong> 🚧 <strong>IN PROGRESS</strong></h3>
+<p><strong>File</strong>: <code>src/narrative_gravity/utils/data_transaction_manager.py</code></p>
+<p><strong>Responsibilities</strong>:
+- Corpus data integrity validation
+- Content hash verification for data drift detection
+- Text encoding and format validation
+- Database schema version compatibility</p>
+<p><strong>Failure Triggers</strong>:
+- Corpus files missing, corrupted, or empty
+- Content hash mismatches indicating data drift
+- Text encoding issues affecting semantic analysis
+- Database schema incompatibilities
+- Data corruption detected during critical operations</p>
+<p><strong>Example User Experience</strong>:</p>
+<pre><code class="language-bash">🚨 EXPERIMENT TERMINATED: Data Transaction Integrity Failure
+
+Corpus file hash mismatch detected: presidential_speeches/obama_2009.txt
+Expected: a1b2c3d4, Found: e5f6g7h8
+
+🔧 Recommended Actions:
+• Verify corpus file integrity: check for accidental modifications
+• Update corpus manifest: python3 scripts/corpus_sync.py update presidential_speeches
+• Re-import corpus: python3 scripts/corpus_sync.py import presidential_speeches
+</code></pre>
+<h3 id="3-quality-transaction-manager-in-progress"><strong>3. Quality Transaction Manager</strong> 🚧 <strong>IN PROGRESS</strong></h3>
+<p><strong>File</strong>: <code>src/narrative_gravity/utils/quality_transaction_manager.py</code></p>
+<p><strong>Responsibilities</strong>:
+- Analysis quality threshold enforcement
+- Framework fit score validation
+- Statistical significance requirement verification
+- LLM response quality assessment</p>
+<p><strong>Failure Triggers</strong>:
+- Framework fit scores below acceptable thresholds (e.g., &lt; 0.7)
+- LLM response quality indicators suggesting invalid analysis
+- Statistical significance requirements not met
+- Analysis confidence intervals too wide for meaningful conclusions
+- Systematic analysis failures indicating pipeline issues</p>
+<p><strong>Example User Experience</strong>:</p>
+<pre><code class="language-bash">🚨 EXPERIMENT TERMINATED: Quality Transaction Integrity Failure
+
+Analysis quality below threshold: Framework fit score 0.45 &lt; required 0.70
+
+🔧 Recommended Actions:
+• Review framework-text compatibility
+• Verify LLM model selection appropriate for text type
+• Check text preprocessing quality
+• Consider alternative framework for this corpus type
+</code></pre>
+<h3 id="4-pipeline-transaction-manager-planned"><strong>4. Pipeline Transaction Manager</strong> 📋 <strong>PLANNED</strong></h3>
+<p><strong>Responsibilities</strong>:
+- LLM model availability and version validation
+- Critical dependency version compatibility
+- Analysis tool integration verification
+- API authentication and connectivity validation</p>
+<h3 id="5-compliance-transaction-manager-planned"><strong>5. Compliance Transaction Manager</strong> 📋 <strong>PLANNED</strong></h3>
+<p><strong>Responsibilities</strong>:
+- Academic compliance requirement validation
+- Ethical clearance verification for data types
+- Data classification enforcement
+- Institutional policy compliance verification</p>
+<hr />
+<h2 id="integration-patterns">⚙️ <strong>Integration Patterns</strong></h2>
+<h3 id="transaction-manager-interface"><strong>Transaction Manager Interface</strong></h3>
+<p>All transaction managers implement a common interface:</p>
+<pre><code class="language-python">class TransactionManager:
+    def validate_for_experiment(self, context: Dict[str, Any]) -&gt; TransactionState
+    def is_transaction_valid(self) -&gt; Tuple[bool, List[str]]
+    def generate_rollback_guidance(self) -&gt; Dict[str, Any]
+    def rollback_transaction(self) -&gt; bool
+</code></pre>
+<h3 id="orchestrator-integration"><strong>Orchestrator Integration</strong></h3>
+<p>The Experiment Orchestrator coordinates all transaction managers:</p>
+<pre><code class="language-python">def enhanced_pre_flight_validation(self, experiment: Dict[str, Any]) -&gt; bool:
+    # Initialize all transaction managers
+    managers = [
+        FrameworkTransactionManager(self.transaction_id),
+        DataTransactionManager(self.transaction_id),
+        QualityTransactionManager(self.transaction_id)
+    ]
+
+    # Validate each domain
+    for manager in managers:
+        manager.validate_for_experiment(experiment)
+
+    # Check overall transaction validity
+    for manager in managers:
+        is_valid, errors = manager.is_transaction_valid()
+        if not is_valid:
+            # Generate guidance and rollback
+            guidance = manager.generate_rollback_guidance()
+            rollback_success = manager.rollback_transaction()
+
+            # Terminate with specific error
+            raise TransactionIntegrityError(manager.domain, errors, guidance)
+
+    return True
+</code></pre>
+<h3 id="error-handling-hierarchy"><strong>Error Handling Hierarchy</strong></h3>
+<pre><code class="language-python">TransactionIntegrityError
+├── FrameworkTransactionIntegrityError
+├── DataTransactionIntegrityError  
+├── QualityTransactionIntegrityError
+├── PipelineTransactionIntegrityError
+└── ComplianceTransactionIntegrityError
+</code></pre>
+<hr />
+<h2 id="monitoring-observability">📊 <strong>Monitoring &amp; Observability</strong></h2>
+<h3 id="transaction-metrics"><strong>Transaction Metrics</strong></h3>
+<ul>
+<li><strong>Transaction Success Rate</strong>: Percentage of experiments passing all integrity checks</li>
+<li><strong>Failure Distribution</strong>: Breakdown of failures by transaction manager type</li>
+<li><strong>Resolution Time</strong>: Time from failure detection to user issue resolution</li>
+<li><strong>Rollback Success Rate</strong>: Percentage of successful rollbacks maintaining clean state</li>
+</ul>
+<h3 id="audit-trail"><strong>Audit Trail</strong></h3>
+<p>Every transaction maintains complete audit trail:
+- Transaction ID linking all validation decisions
+- Timestamp and hash information for all integrity checks
+- User actions taken in response to guidance
+- Final transaction state (success/failure/rollback)</p>
+<h3 id="dashboard-integration"><strong>Dashboard Integration</strong></h3>
+<p>Transaction integrity metrics integrated into experiment monitoring dashboard:
+- Real-time transaction status across all active experiments
+- Historical failure analysis and trending
+- User guidance effectiveness metrics
+- System reliability indicators</p>
+<hr />
+<h2 id="deployment-strategy">🔄 <strong>Deployment Strategy</strong></h2>
+<h3 id="phase-1-foundation-complete"><strong>Phase 1: Foundation</strong> ✅ <strong>COMPLETE</strong></h3>
+<ul>
+<li>Framework Transaction Manager implementation</li>
+<li>Basic orchestrator integration</li>
+<li>Error handling and user guidance patterns</li>
+</ul>
+<h3 id="phase-2-core-validation-in-progress"><strong>Phase 2: Core Validation</strong> 🚧 <strong>IN PROGRESS</strong></h3>
+<ul>
+<li>Data Transaction Manager implementation</li>
+<li>Quality Transaction Manager implementation</li>
+<li>Enhanced orchestrator coordination</li>
+</ul>
+<h3 id="phase-3-pipeline-safety-planned"><strong>Phase 3: Pipeline Safety</strong> 📋 <strong>PLANNED</strong></h3>
+<ul>
+<li>Pipeline Transaction Manager implementation</li>
+<li>Tool dependency validation</li>
+<li>API reliability enforcement</li>
+</ul>
+<h3 id="phase-4-compliance-integration-planned"><strong>Phase 4: Compliance Integration</strong> 📋 <strong>PLANNED</strong></h3>
+<ul>
+<li>Compliance Transaction Manager implementation</li>
+<li>Academic workflow integration</li>
+<li>Institutional policy enforcement</li>
+</ul>
+<h3 id="phase-5-advanced-features-future"><strong>Phase 5: Advanced Features</strong> 📋 <strong>FUTURE</strong></h3>
+<ul>
+<li>Predictive failure detection</li>
+<li>Automated issue resolution</li>
+<li>Advanced rollback strategies</li>
+</ul>
+<hr />
+<h2 id="benefits-impact">📚 <strong>Benefits &amp; Impact</strong></h2>
+<h3 id="experiment-integrity"><strong>Experiment Integrity</strong></h3>
+<ul>
+<li><strong>Zero contaminated results</strong> from uncertain states</li>
+<li><strong>Complete reproducibility</strong> through transaction safety</li>
+<li><strong>Audit compliance</strong> with full transaction history</li>
+</ul>
+<h3 id="developer-experience"><strong>Developer Experience</strong></h3>
+<ul>
+<li><strong>Clear failure guidance</strong> reduces debugging time</li>
+<li><strong>Fail-fast principle</strong> prevents late-stage issues discovery</li>
+<li><strong>Transaction safety</strong> enables confident experimentation</li>
+</ul>
+<h3 id="production-reliability"><strong>Production Reliability</strong></h3>
+<ul>
+<li><strong>Database consistency</strong> enforcement prevents corruption</li>
+<li><strong>Version control</strong> prevents silent configuration drift</li>
+<li><strong>Rollback capability</strong> ensures clean recovery from failures</li>
+</ul>
+<h3 id="scientific-validity"><strong>Scientific Validity</strong></h3>
+<ul>
+<li><strong>Quality thresholds</strong> ensure meaningful results</li>
+<li><strong>Data integrity</strong> prevents analysis of corrupted data</li>
+<li><strong>Statistical rigor</strong> maintained through automated validation</li>
+</ul>
+<hr />
+<p>This architecture provides the foundation for reliable, high-integrity experimental systems where any uncertainty that could compromise validity triggers appropriate failure handling with complete rollback capability and user guidance for resolution. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

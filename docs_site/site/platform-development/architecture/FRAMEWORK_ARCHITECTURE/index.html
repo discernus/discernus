@@ -1,0 +1,1342 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Framework Architecture Documentation - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#framework-architecture-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Framework Architecture Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Principles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-universal-core-framework-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Universal Core + Framework Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-three-stage-data-population-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Three-Stage Data Population Model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-switching-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Switching System
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework Switching System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#active-framework-configuration-config-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Active Framework Configuration (config/ directory)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-manager-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Manager Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-framework-switching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual Framework Switching
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-selection-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Selection Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework Selection Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-corpus-ingestion-framework-agnostic" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Corpus Ingestion (Framework-Agnostic)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-job-creation-runtime-framework-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Job Creation (Runtime Framework Selection)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-task-processing-framework-specific-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Task Processing (Framework-Specific Analysis)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-framework-analysis-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Framework Analysis Capabilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-Framework Analysis Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-same-text-multiple-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Same Text, Multiple Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-comparative-analysis-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Comparative Analysis Queries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-framework-agreement-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Framework Agreement Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-current-framework-architecture-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary: Current Framework Architecture Status
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary: Current Framework Architecture Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-working" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ What's Working
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      📍 Current State
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#management-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Management Commands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Frameworks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Available Frameworks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-civic-virtue-framework-frameworkscivic_virtue" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Civic Virtue Framework (frameworks/civic_virtue/)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-political-spectrum-framework-frameworkspolitical_spectrum-currently-active" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Political Spectrum Framework (frameworks/political_spectrum/) [CURRENTLY ACTIVE]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-moral-rhetorical-posture-framework-frameworksmoral_rhetorical_posture" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Moral Rhetorical Posture Framework (frameworks/moral_rhetorical_posture/)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fukuyama-identity-framework-frameworksfukuyama_identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Fukuyama Identity Framework (frameworks/fukuyama_identity/)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-development-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Development Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework Development Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits-of-this-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of This Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Benefits of This Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-flexibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Flexibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-comparative-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Comparative Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scalability" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Scalability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-academic-rigor" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Academic Rigor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-cost-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Cost Efficiency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Enhancements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Future Enhancements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-framework-recommendation-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Framework Recommendation Engine
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-meta-framework-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Meta-Framework Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dynamic-framework-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Dynamic Framework Loading
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="framework-architecture-documentation">Framework Architecture Documentation</h1>
+<p><strong>Last Updated</strong>: June 13, 2025<br />
+<strong>Current Active Framework</strong>: political_spectrum (via config/ symlinks)<br />
+<strong>Status</strong>: Production Ready with 4 Available Frameworks</p>
+<h2 id="overview">Overview</h2>
+<p>The Narrative Gravity Analysis system implements a <strong>framework-agnostic ingestion with runtime framework selection</strong> architecture. This design enables:</p>
+<ul>
+<li><strong>Universal corpus ingestion</strong> that works with any framework</li>
+<li><strong>Cross-framework comparative analysis</strong> on the same texts</li>
+<li><strong>Flexible framework evolution</strong> without requiring corpus re-ingestion</li>
+<li><strong>Scalable processing</strong> with multiple frameworks running in parallel</li>
+<li><strong>Dynamic framework switching</strong> via symlink-based configuration</li>
+</ul>
+<h2 id="architecture-principles">Architecture Principles</h2>
+<h3 id="1-universal-core-framework-extensions">1. Universal Core + Framework Extensions</h3>
+<p><strong>Core Schema (<code>core_schema_v1.0.0.json</code>)</strong>
+- Universal document+chunk structure that ALL narratives conform to
+- Framework-agnostic fields: text content, metadata, chunk structure
+- <code>framework_data</code> field serves as extension point for framework-specific data</p>
+<p><strong>Framework Configuration Files</strong> (actual implementation)
+Each framework directory contains sophisticated configuration:
+- <code>dipoles.json</code> - Detailed well definitions with language cues and descriptions
+- <code>framework.json</code> - Mathematical parameters, weighting philosophy, and metrics
+- <code>README.md</code> - Framework documentation and usage guidelines</p>
+<h3 id="2-three-stage-data-population-model">2. Three-Stage Data Population Model</h3>
+<p>The <code>framework_data</code> field supports data population at different stages:</p>
+<pre><code class="language-json">{
+  &quot;framework_data&quot;: {
+    &quot;ingestion_metadata&quot;: {
+      // Populated during corpus upload
+      &quot;pre_analysis_tags&quot;: [&quot;political_speech&quot;, &quot;moral_argument&quot;],
+      &quot;language_complexity&quot;: &quot;moderate&quot;,
+      &quot;content_type&quot;: &quot;narrative&quot;
+    },
+    &quot;preprocessing_markers&quot;: {
+      // Populated during ingestion processing
+      &quot;dignity_markers&quot;: [&quot;individual worth&quot;, &quot;human rights&quot;],
+      &quot;truth_indicators&quot;: [&quot;evidence shows&quot;, &quot;data indicates&quot;]
+    },
+    &quot;analysis_results&quot;: {
+      // Populated during framework analysis
+      &quot;civic_virtue&quot;: {
+        &quot;well_scores&quot;: {
+          &quot;Dignity&quot;: 0.85, &quot;Truth&quot;: 0.72, &quot;Justice&quot;: 0.68, &quot;Hope&quot;: 0.74, &quot;Pragmatism&quot;: 0.61,
+          &quot;Tribalism&quot;: 0.23, &quot;Manipulation&quot;: 0.31, &quot;Resentment&quot;: 0.28, &quot;Fantasy&quot;: 0.34, &quot;Fear&quot;: 0.29
+        },
+        &quot;narrative_position&quot;: {&quot;x&quot;: 0.34, &quot;y&quot;: 0.67},
+        &quot;calculated_metrics&quot;: {
+          &quot;narrative_elevation&quot;: 0.73,
+          &quot;polarity&quot;: 0.42,
+          &quot;coherence&quot;: 0.68,
+          &quot;directional_purity&quot;: 0.71
+        },
+        &quot;hierarchical_ranking&quot;: {
+          &quot;primary_wells&quot;: [
+            {&quot;well&quot;: &quot;Dignity&quot;, &quot;score&quot;: 0.85, &quot;relative_weight&quot;: 35.2},
+            {&quot;well&quot;: &quot;Hope&quot;, &quot;score&quot;: 0.74, &quot;relative_weight&quot;: 30.7},
+            {&quot;well&quot;: &quot;Truth&quot;, &quot;score&quot;: 0.72, &quot;relative_weight&quot;: 29.8}
+          ]
+        }
+      },
+      &quot;political_spectrum&quot;: {
+        &quot;well_scores&quot;: {&quot;Progressive&quot;: 0.78, &quot;Conservative&quot;: 0.23, &quot;Libertarian&quot;: 0.45},
+        &quot;political_metrics&quot;: {&quot;left_right_position&quot;: -0.65, &quot;authority_orientation&quot;: 0.12}
+      }
+    }
+  }
+}
+</code></pre>
+<h2 id="framework-switching-system">Framework Switching System</h2>
+<h3 id="active-framework-configuration-config-directory">Active Framework Configuration (<code>config/</code> directory)</h3>
+<p>The system uses <strong>symlink-based framework switching</strong> for dynamic configuration:</p>
+<pre><code class="language-bash">config/
+├── dipoles.json -&gt; ../frameworks/political_spectrum/dipoles.json
+└── framework.json -&gt; ../frameworks/political_spectrum/framework.json
+</code></pre>
+<p><strong>Current Status</strong>: <code>political_spectrum</code> framework is active</p>
+<h3 id="framework-manager-integration">Framework Manager Integration</h3>
+<p>The system includes a FrameworkManager for programmatic switching:</p>
+<pre><code class="language-python">from src.narrative_gravity.framework_manager import FrameworkManager
+
+# Switch to civic virtue framework
+framework_manager = FrameworkManager()
+framework_manager.switch_framework(&quot;civic_virtue&quot;)
+
+# Verify current framework
+current = framework_manager.get_current_framework()
+print(f&quot;Active framework: {current}&quot;)
+</code></pre>
+<h3 id="manual-framework-switching">Manual Framework Switching</h3>
+<pre><code class="language-bash"># Switch to civic virtue
+cd config
+ln -sf ../frameworks/civic_virtue/dipoles.json dipoles.json
+ln -sf ../frameworks/civic_virtue/framework.json framework.json
+
+# Verify switch
+ls -la config/
+</code></pre>
+<h2 id="framework-selection-workflow">Framework Selection Workflow</h2>
+<h3 id="1-corpus-ingestion-framework-agnostic">1. Corpus Ingestion (Framework-Agnostic)</h3>
+<pre><code class="language-mermaid">graph TD
+    A[Upload JSONL File] --&gt; B[Validate Core Schema]
+    B --&gt; C[Extract Universal Fields]
+    C --&gt; D[Populate Basic framework_data]
+    D --&gt; E[Store in Database]
+    E --&gt; F[Ready for Any Framework Analysis]
+</code></pre>
+<p><strong>Process:</strong>
+- Upload validates against <code>core_schema_v1.0.0.json</code> only
+- Universal fields extracted (text_id, content, metadata)
+- Optional <code>ingestion_metadata</code> and <code>preprocessing_markers</code> populated
+- Corpus becomes available for analysis by ANY framework</p>
+<h3 id="2-job-creation-runtime-framework-selection">2. Job Creation (Runtime Framework Selection)</h3>
+<pre><code class="language-mermaid">graph TD
+    A[Create Analysis Job] --&gt; B[Select Corpus/Text IDs]
+    B --&gt; C[Choose Frameworks]
+    C --&gt; D[Select Models]
+    D --&gt; E[Set Run Count]
+    E --&gt; F[Generate Task Matrix]
+    F --&gt; G[Enqueue Tasks]
+
+    C --&gt; C1[civic_virtue]
+    C --&gt; C2[political_spectrum] 
+    C --&gt; C3[moral_rhetorical_posture]
+</code></pre>
+<p><strong>Job Creation Parameters:</strong></p>
+<pre><code class="language-json">{
+  &quot;corpus_id&quot;: 123,
+  &quot;text_ids&quot;: [&quot;speech_001&quot;, &quot;speech_002&quot;],
+  &quot;frameworks&quot;: [&quot;civic_virtue&quot;, &quot;political_spectrum&quot;],
+  &quot;models&quot;: [&quot;gpt-4&quot;, &quot;claude-3&quot;],
+  &quot;run_count&quot;: 3
+}
+</code></pre>
+<p><strong>Task Generation:</strong>
+- <strong>Total Tasks</strong> = chunks × frameworks × models × runs
+- Each task processes one chunk with one framework using one model
+- Enables cross-framework comparison on identical content</p>
+<h3 id="3-task-processing-framework-specific-analysis">3. Task Processing (Framework-Specific Analysis)</h3>
+<pre><code class="language-mermaid">graph TD
+    A[Task Worker] --&gt; B[Load Chunk Content]
+    B --&gt; C[Load Framework Configuration]
+    C --&gt; D[Generate Framework Prompt]
+    D --&gt; E[Call LLM API]
+    E --&gt; F[Parse Framework Results]
+    F --&gt; G[Store in framework_data.analysis_results]
+</code></pre>
+<p><strong>Framework-Specific Processing:</strong>
+- Worker loads framework configuration (wells, prompts, weights)
+- Generates framework-specific prompts for LLM analysis
+- Parses results according to framework schema
+- Stores results under framework key in <code>analysis_results</code></p>
+<h2 id="cross-framework-analysis-capabilities">Cross-Framework Analysis Capabilities</h2>
+<h3 id="1-same-text-multiple-frameworks">1. Same Text, Multiple Frameworks</h3>
+<p>A single presidential speech can be analyzed by all three frameworks:</p>
+<pre><code class="language-json">{
+  &quot;text_id&quot;: &quot;obama_inaugural_2009&quot;,
+  &quot;framework_data&quot;: {
+    &quot;analysis_results&quot;: {
+      &quot;civic_virtue&quot;: {
+        &quot;well_scores&quot;: {
+          &quot;Dignity&quot;: 0.89, &quot;Hope&quot;: 0.82, &quot;Pragmatism&quot;: 0.75, &quot;Truth&quot;: 0.71, &quot;Justice&quot;: 0.78,
+          &quot;Tribalism&quot;: 0.18, &quot;Manipulation&quot;: 0.12, &quot;Resentment&quot;: 0.15, &quot;Fantasy&quot;: 0.22, &quot;Fear&quot;: 0.16
+        },
+        &quot;narrative_elevation&quot;: 0.78,
+        &quot;calculated_metrics&quot;: {
+          &quot;polarity&quot;: 0.62, &quot;coherence&quot;: 0.83, &quot;directional_purity&quot;: 0.74
+        },
+        &quot;hierarchical_ranking&quot;: {
+          &quot;primary_wells&quot;: [
+            {&quot;well&quot;: &quot;Dignity&quot;, &quot;score&quot;: 0.89, &quot;relative_weight&quot;: 36.1},
+            {&quot;well&quot;: &quot;Hope&quot;, &quot;score&quot;: 0.82, &quot;relative_weight&quot;: 33.2},
+            {&quot;well&quot;: &quot;Justice&quot;, &quot;score&quot;: 0.78, &quot;relative_weight&quot;: 31.7}
+          ]
+        }
+      },
+      &quot;political_spectrum&quot;: {
+        &quot;well_scores&quot;: {&quot;Progressive&quot;: 0.72, &quot;Conservative&quot;: 0.28, &quot;Libertarian&quot;: 0.45},
+        &quot;left_right_position&quot;: -0.45,
+        &quot;political_metrics&quot;: {&quot;authority_orientation&quot;: 0.15, &quot;ideological_consistency&quot;: 0.67}
+      },
+      &quot;moral_rhetorical_posture&quot;: {
+        &quot;well_scores&quot;: {&quot;Restorative&quot;: 0.85, &quot;Universalist&quot;: 0.79, &quot;Collaborative&quot;: 0.73},
+        &quot;primary_posture&quot;: &quot;healer&quot;,
+        &quot;rhetorical_metrics&quot;: {&quot;inclusive_language&quot;: 0.81, &quot;bridge_building&quot;: 0.78}
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="2-comparative-analysis-queries">2. Comparative Analysis Queries</h3>
+<p>The architecture enables powerful comparative queries:</p>
+<pre><code class="language-sql">-- Compare civic virtue vs political spectrum positioning
+SELECT 
+    text_id,
+    framework_data-&gt;'analysis_results'-&gt;'civic_virtue'-&gt;&gt;'civic_elevation' as civic_score,
+    framework_data-&gt;'analysis_results'-&gt;'political_spectrum'-&gt;&gt;'left_right_position' as political_score
+FROM chunks 
+WHERE framework_data-&gt;'analysis_results' ? 'civic_virtue' 
+  AND framework_data-&gt;'analysis_results' ? 'political_spectrum';
+</code></pre>
+<h3 id="3-framework-agreement-analysis">3. Framework Agreement Analysis</h3>
+<p>Measure how different frameworks assess the same content:</p>
+<pre><code class="language-python"># Framework correlation analysis
+def analyze_framework_agreement(chunks):
+    civic_scores = [c.civic_virtue.dignity for c in chunks]
+    political_scores = [c.political_spectrum.progressive for c in chunks]
+    return correlation(civic_scores, political_scores)
+</code></pre>
+<h2 id="summary-current-framework-architecture-status">Summary: Current Framework Architecture Status</h2>
+<h3 id="whats-working">✅ <strong>What's Working</strong></h3>
+<ol>
+<li><strong>4 Production Frameworks</strong>: All frameworks are fully implemented and available</li>
+<li><strong>Symlink-based Switching</strong>: Dynamic framework configuration via <code>config/</code> directory  </li>
+<li><strong>Sophisticated Configuration</strong>: Rich JSON structures with weighting philosophies and metrics</li>
+<li><strong>Cross-framework Analysis</strong>: Single texts can be analyzed by multiple frameworks</li>
+<li><strong>Runtime Framework Selection</strong>: Jobs can specify multiple frameworks for comparison</li>
+</ol>
+<h3 id="current-state">📍 <strong>Current State</strong></h3>
+<ul>
+<li><strong>Active Framework</strong>: <code>political_spectrum</code> (via config/ symlinks)</li>
+<li><strong>Framework Count</strong>: 4 available (civic_virtue, political_spectrum, moral_rhetorical_posture, fukuyama_identity)</li>
+<li><strong>Configuration Quality</strong>: Sophisticated with 3-tier weighting, detailed metrics, versioning</li>
+<li><strong>Database Integration</strong>: Full PostgreSQL support with framework_data JSON storage</li>
+</ul>
+<h3 id="management-commands">🔧 <strong>Management Commands</strong></h3>
+<pre><code class="language-bash"># Check current framework
+ls -la config/
+
+# Switch framework (manual)
+cd config &amp;&amp; ln -sf ../frameworks/civic_virtue/dipoles.json dipoles.json
+
+# Switch framework (programmatic)  
+python -c &quot;from src.narrative_gravity.framework_manager import FrameworkManager; FrameworkManager().switch_framework('civic_virtue')&quot;
+
+# List available frameworks
+ls frameworks/
+</code></pre>
+<p>The architecture is <strong>production-ready</strong> and significantly more sophisticated than initially documented.</p>
+<h2 id="available-frameworks">Available Frameworks</h2>
+<h3 id="1-civic-virtue-framework-frameworkscivic_virtue">1. Civic Virtue Framework (<code>frameworks/civic_virtue/</code>)</h3>
+<ul>
+<li><strong>Status</strong>: ✅ <strong>FULLY IMPLEMENTED</strong> (v2025.06.04)</li>
+<li><strong>Purpose</strong>: Moral analysis of political discourse</li>
+<li><strong>Dimensions</strong>: 5 dipoles, 10 wells (Dignity↔Tribalism, Truth↔Manipulation, etc.)</li>
+<li><strong>Weighting</strong>: Sophisticated 3-tier system (Primary 1.0, Secondary 0.8, Tertiary 0.6)</li>
+<li><strong>Metrics</strong>: Civic elevation, narrative polarity, directional purity</li>
+<li><strong>Use Case</strong>: Assessing moral character of political narratives</li>
+</ul>
+<h3 id="2-political-spectrum-framework-frameworkspolitical_spectrum-currently-active">2. Political Spectrum Framework (<code>frameworks/political_spectrum/</code>) <strong>[CURRENTLY ACTIVE]</strong></h3>
+<ul>
+<li><strong>Status</strong>: ✅ <strong>ACTIVE FRAMEWORK</strong> (via config/ symlinks)</li>
+<li><strong>Purpose</strong>: Traditional political positioning</li>
+<li><strong>Dimensions</strong>: Liberal, Conservative, Libertarian, Authoritarian orientations</li>
+<li><strong>Metrics</strong>: Left-right position, authority orientation, ideological consistency</li>
+<li><strong>Use Case</strong>: Political ideology classification and comparison</li>
+</ul>
+<h3 id="3-moral-rhetorical-posture-framework-frameworksmoral_rhetorical_posture">3. Moral Rhetorical Posture Framework (<code>frameworks/moral_rhetorical_posture/</code>)</h3>
+<ul>
+<li><strong>Status</strong>: ✅ <strong>AVAILABLE</strong></li>
+<li><strong>Purpose</strong>: Communication style and moral stance analysis</li>
+<li><strong>Dimensions</strong>: Restorative↔Retributive, Universalist↔Partisan, etc.</li>
+<li><strong>Use Case</strong>: Analyzing communication patterns and rhetorical strategies</li>
+</ul>
+<h3 id="4-fukuyama-identity-framework-frameworksfukuyama_identity">4. Fukuyama Identity Framework (<code>frameworks/fukuyama_identity/</code>)</h3>
+<ul>
+<li><strong>Status</strong>: ✅ <strong>AVAILABLE</strong></li>
+<li><strong>Purpose</strong>: Identity-based political analysis following Francis Fukuyama's framework</li>
+<li><strong>Focus</strong>: Dignity, recognition, and identity politics dynamics</li>
+<li><strong>Use Case</strong>: Analysis of identity-driven political movements and rhetoric</li>
+<li><strong>Metrics</strong>: Justice orientation, moral scope, epistemic stance</li>
+<li><strong>Use Case</strong>: Rhetorical strategy and moral posture assessment</li>
+</ul>
+<h2 id="framework-development-guidelines">Framework Development Guidelines</h2>
+<h3 id="adding-new-frameworks">Adding New Frameworks</h3>
+<ol>
+<li>
+<p><strong>Create Framework Configuration</strong>
+   <code>json
+   // frameworks/new_framework/framework.json
+   {
+     "framework_name": "new_framework",
+     "version": "v1.0.0",
+     "wells": { /* framework wells */ },
+     "metrics": { /* framework metrics */ }
+   }</code></p>
+</li>
+<li>
+<p><strong>Create Extension Schema</strong>
+   <code>json
+   // schemas/new_extension_v1.0.0.json
+   {
+     "properties": {
+       "analysis_results": {
+         "properties": {
+           "well_scores": { /* framework wells */ },
+           "framework_metrics": { /* specific metrics */ }
+         }
+       }
+     }
+   }</code></p>
+</li>
+<li>
+<p><strong>Implement Analysis Logic</strong>
+   <code>python
+   # src/tasks/analysis_tasks.py
+   def analyze_new_framework(text_content, model):
+       # Framework-specific analysis
+       return results, cost</code></p>
+</li>
+<li>
+<p><strong>Update Framework Registry</strong>
+   <code>python
+   # src/api/schemas.py
+   SUPPORTED_FRAMEWORKS = [
+       'civic_virtue', 
+       'political_spectrum', 
+       'moral_rhetorical_posture',
+       'new_framework'  # Add here
+   ]</code></p>
+</li>
+</ol>
+<h2 id="benefits-of-this-architecture">Benefits of This Architecture</h2>
+<h3 id="1-flexibility">1. <strong>Flexibility</strong></h3>
+<ul>
+<li>Any framework can analyze any corpus</li>
+<li>New frameworks work with existing data</li>
+<li>Framework evolution doesn't break existing corpora</li>
+</ul>
+<h3 id="2-comparative-analysis">2. <strong>Comparative Analysis</strong></h3>
+<ul>
+<li>Cross-framework studies on identical texts</li>
+<li>Framework agreement/disagreement analysis</li>
+<li>Multi-dimensional narrative positioning</li>
+</ul>
+<h3 id="3-scalability">3. <strong>Scalability</strong></h3>
+<ul>
+<li>Parallel processing across frameworks</li>
+<li>Independent framework development</li>
+<li>Modular system architecture</li>
+</ul>
+<h3 id="4-academic-rigor">4. <strong>Academic Rigor</strong></h3>
+<ul>
+<li>Consistent data structures across frameworks</li>
+<li>Reproducible analysis with version tracking</li>
+<li>Framework-specific validation and confidence scoring</li>
+</ul>
+<h3 id="5-cost-efficiency">5. <strong>Cost Efficiency</strong></h3>
+<ul>
+<li>Single corpus ingestion for multiple frameworks</li>
+<li>Selective framework application based on research needs</li>
+<li>Efficient cross-framework comparison without re-processing</li>
+</ul>
+<h2 id="future-enhancements">Future Enhancements</h2>
+<h3 id="1-framework-recommendation-engine">1. Framework Recommendation Engine</h3>
+<ul>
+<li>Suggest optimal frameworks based on content type</li>
+<li>Confidence scoring for framework suitability</li>
+<li>Automatic framework selection for broad analysis</li>
+</ul>
+<h3 id="2-meta-framework-analysis">2. Meta-Framework Analysis</h3>
+<ul>
+<li>Compare framework results across multiple dimensions</li>
+<li>Identify framework consensus and divergence patterns</li>
+<li>Develop framework-agnostic narrative metrics</li>
+</ul>
+<h3 id="3-dynamic-framework-loading">3. Dynamic Framework Loading</h3>
+<ul>
+<li>Runtime framework registration</li>
+<li>Plugin-based framework architecture</li>
+<li>User-defined custom frameworks</li>
+</ul>
+<p>This architecture positions the Narrative Gravity Analysis system as a flexible, scalable platform for multi-dimensional narrative analysis across diverse theoretical frameworks.</p>
+<h1 id="framework-agnostic-definition-for-circular-engine-v110">Framework-Agnostic Definition for Circular Engine (v1.1.0+)</h1>
+<p><strong>New in v1.1.0:</strong> The Narrative Gravity circular engine is now fully framework-agnostic. Frameworks can define any set of wells, well types, clusters, and type-to-color mappings. The engine does not assume any special meaning for type names (e.g., 'integrative', 'disintegrative', 'progressive', etc.).</p>
+<h2 id="how-to-define-a-framework-agnostic-conventions">How to Define a Framework (Agnostic Conventions)</h2>
+<ul>
+<li><strong>Wells</strong>: Each well must have a unique name, an angle (degrees), a type (arbitrary string), and a narrative_weight (float).</li>
+<li><strong>Well Types</strong>: The 'type' field is a free-form string. Use any label that fits your theoretical model (e.g., 'type_1', 'identity', 'virtue', 'axis_A', etc.).</li>
+<li><strong>Clusters</strong>: If using clustered positioning, clusters are defined by name and can group any set of well types. No type names are assumed by the engine.</li>
+<li><strong>Type-to-Color Mapping</strong>: Optionally, specify a 'well_type_colors' mapping in your framework.json to control the color for each well type in visualizations. If omitted, the engine assigns colors from a default palette.</li>
+</ul>
+<h3 id="example-minimal-agnostic-frameworkjson">Example: Minimal Agnostic framework.json</h3>
+<pre><code class="language-json">{
+  &quot;framework_name&quot;: &quot;agnostic_example&quot;,
+  &quot;version&quot;: &quot;v1.0.0&quot;,
+  &quot;circle&quot;: { &quot;radius&quot;: 1.0 },
+  &quot;positioning_strategy&quot;: {
+    &quot;type&quot;: &quot;clustered_positioning&quot;,
+    &quot;clusters&quot;: {
+      &quot;cluster_A&quot;: { &quot;center_angle&quot;: 90, &quot;span&quot;: 60, &quot;well_types&quot;: [&quot;type_1&quot;] },
+      &quot;cluster_B&quot;: { &quot;center_angle&quot;: 270, &quot;span&quot;: 60, &quot;well_types&quot;: [&quot;type_2&quot;] }
+    }
+  },
+  &quot;wells&quot;: {
+    &quot;Well_A&quot;: { &quot;angle&quot;: 80, &quot;type&quot;: &quot;type_1&quot;, &quot;weight&quot;: 1.0 },
+    &quot;Well_B&quot;: { &quot;angle&quot;: 100, &quot;type&quot;: &quot;type_1&quot;, &quot;weight&quot;: 0.8 },
+    &quot;Well_C&quot;: { &quot;angle&quot;: 260, &quot;type&quot;: &quot;type_2&quot;, &quot;weight&quot;: 0.8 },
+    &quot;Well_D&quot;: { &quot;angle&quot;: 280, &quot;type&quot;: &quot;type_2&quot;, &quot;weight&quot;: 0.6 }
+  },
+  &quot;well_type_colors&quot;: {
+    &quot;type_1&quot;: &quot;#1976D2&quot;,
+    &quot;type_2&quot;: &quot;#C62828&quot;
+  },
+  &quot;scaling_factor&quot;: 0.8,
+  &quot;metrics&quot;: {
+    &quot;example_metric&quot;: { &quot;name&quot;: &quot;Example Metric&quot;, &quot;description&quot;: &quot;A sample metric.&quot; }
+  }
+}
+</code></pre>
+<p><strong>Key Points:</strong>
+- The engine will use the color mapping for 'type_1' and 'type_2' in all visualizations.
+- You may use any type names and as many types as needed for your framework.
+- If 'well_type_colors' is omitted or a type is missing, the engine will assign a color from a default palette.
+- Clusters, weights, and angles are all fully customizable. </p>
+<h1 id="positioning-strategies-for-framework-developers">Positioning Strategies for Framework Developers</h1>
+<p>Framework developers can choose from several positioning strategies to match their theoretical goals and visual rhetoric needs. Below are the most common strategies, with use cases, JSON configuration snippets, and explanations. You can run <code>positioning_strategies_demo.py</code> to visualize these options in practice.</p>
+<hr />
+<h2 id="1-vertical-clustering-normativemoral-hierarchy">1. Vertical Clustering (Normative/Moral Hierarchy)</h2>
+<p><strong>Use Case:</strong> Normative frameworks emphasizing moral hierarchy (e.g., Civic Virtue)</p>
+<pre><code class="language-json">{
+  &quot;positioning_strategy&quot;: {
+    &quot;type&quot;: &quot;clustered_positioning&quot;,
+    &quot;description&quot;: &quot;Wells clustered around vertical axis to emphasize moral hierarchy&quot;,
+    &quot;clusters&quot;: {
+      &quot;top_cluster&quot;: {
+        &quot;center_angle&quot;: 90,
+        &quot;span&quot;: 60,
+        &quot;well_types&quot;: [&quot;virtue&quot;, &quot;positive&quot;, &quot;integrative&quot;],
+        &quot;description&quot;: &quot;Positive wells clustered around top (90°)&quot;
+      },
+      &quot;bottom_cluster&quot;: {
+        &quot;center_angle&quot;: 270,
+        &quot;span&quot;: 60,
+        &quot;well_types&quot;: [&quot;problem&quot;, &quot;negative&quot;, &quot;disintegrative&quot;],
+        &quot;description&quot;: &quot;Negative wells clustered around bottom (270°)&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p><em>Wells are positioned at 60°-120° (positive) and 240°-300° (negative) for strong moral clustering.</em></p>
+<hr />
+<h2 id="2-individual-angles-maximum-control">2. Individual Angles (Maximum Control)</h2>
+<p><strong>Use Case:</strong> Frameworks with specific theoretical positioning requirements (e.g., custom research frameworks)</p>
+<pre><code class="language-json">{
+  &quot;positioning_strategy&quot;: {
+    &quot;type&quot;: &quot;individual_angles&quot;,
+    &quot;description&quot;: &quot;Framework developer specifies exact angle for each well based on theoretical model&quot;
+  },
+  &quot;wells&quot;: {
+    &quot;Primary_Concept&quot;: {&quot;angle&quot;: 45, &quot;weight&quot;: 1.0, &quot;type&quot;: &quot;integrative&quot;},
+    &quot;Secondary_Concept&quot;: {&quot;angle&quot;: 135, &quot;weight&quot;: 0.8, &quot;type&quot;: &quot;integrative&quot;},
+    &quot;Opposing_Force&quot;: {&quot;angle&quot;: 225, &quot;weight&quot;: -1.0, &quot;type&quot;: &quot;disintegrative&quot;},
+    &quot;Balancing_Factor&quot;: {&quot;angle&quot;: 315, &quot;weight&quot;: -0.8, &quot;type&quot;: &quot;disintegrative&quot;}
+  }
+}
+</code></pre>
+<p><em>Each well is positioned exactly where the framework developer specifies.</em></p>
+<hr />
+<h2 id="3-even-distribution-descriptiveneutral">3. Even Distribution (Descriptive/Neutral)</h2>
+<p><strong>Use Case:</strong> Descriptive frameworks avoiding moral hierarchy implications (e.g., Moral Foundations Theory)</p>
+<pre><code class="language-json">{
+  &quot;positioning_strategy&quot;: {
+    &quot;type&quot;: &quot;even_distribution&quot;,
+    &quot;description&quot;: &quot;Wells distributed evenly around circle to avoid visual hierarchy&quot;,
+    &quot;distribution_method&quot;: &quot;equal_spacing&quot;,
+    &quot;start_angle&quot;: 0,
+    &quot;rotation_offset&quot;: 0
+  }
+}
+</code></pre>
+<p><em>For 8 wells: positioned at 0°, 45°, 90°, 135°, 180°, 225°, 270°, 315° (neutral distribution).</em> </p>
+<hr />
+<h2 id="4-horizontal-clustering-political-spectrum">4. Horizontal Clustering (Political Spectrum)</h2>
+<p><strong>Use Case:</strong> Political frameworks emphasizing left-right spectrum</p>
+<pre><code class="language-json">{
+  &quot;positioning_strategy&quot;: {
+    &quot;type&quot;: &quot;clustered_positioning&quot;,
+    &quot;description&quot;: &quot;Wells clustered around horizontal axis for political left-right emphasis&quot;,
+    &quot;clusters&quot;: {
+      &quot;left_cluster&quot;: {
+        &quot;center_angle&quot;: 180,
+        &quot;span&quot;: 80,
+        &quot;well_types&quot;: [&quot;progressive&quot;, &quot;left&quot;, &quot;liberal&quot;],
+        &quot;description&quot;: &quot;Progressive wells clustered around left (180°)&quot;
+      },
+      &quot;right_cluster&quot;: {
+        &quot;center_angle&quot;: 0,
+        &quot;span&quot;: 80,
+        &quot;well_types&quot;: [&quot;conservative&quot;, &quot;right&quot;, &quot;traditional&quot;],
+        &quot;description&quot;: &quot;Conservative wells clustered around right (0°)&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p><em>Wells are positioned at 140°-220° (left) and 320°-40° (right) for political spectrum clustering.</em></p>
+<hr />
+<h2 id="5-diagonal-clustering-multi-dimensional">5. Diagonal Clustering (Multi-Dimensional)</h2>
+<p><strong>Use Case:</strong> Frameworks with diagonal opposition (e.g., authoritarian-libertarian vs left-right)</p>
+<pre><code class="language-json">{
+  &quot;positioning_strategy&quot;: {
+    &quot;type&quot;: &quot;clustered_positioning&quot;,
+    &quot;description&quot;: &quot;Wells clustered around diagonal axes for complex multi-dimensional frameworks&quot;,
+    &quot;clusters&quot;: {
+      &quot;upper_right_cluster&quot;: {
+        &quot;center_angle&quot;: 45,
+        &quot;span&quot;: 50,
+        &quot;well_types&quot;: [&quot;auth_right&quot;, &quot;traditional_authority&quot;],
+        &quot;description&quot;: &quot;Authoritarian-right cluster&quot;
+      },
+      &quot;lower_left_cluster&quot;: {
+        &quot;center_angle&quot;: 225,
+        &quot;span&quot;: 50,
+        &quot;well_types&quot;: [&quot;lib_left&quot;, &quot;progressive_liberty&quot;],
+        &quot;description&quot;: &quot;Libertarian-left cluster&quot;
+      },
+      &quot;upper_left_cluster&quot;: {
+        &quot;center_angle&quot;: 135,
+        &quot;span&quot;: 40,
+        &quot;well_types&quot;: [&quot;auth_left&quot;, &quot;state_control&quot;],
+        &quot;description&quot;: &quot;Authoritarian-left cluster&quot;
+      },
+      &quot;lower_right_cluster&quot;: {
+        &quot;center_angle&quot;: 315,
+        &quot;span&quot;: 40,
+        &quot;well_types&quot;: [&quot;lib_right&quot;, &quot;free_market&quot;],
+        &quot;description&quot;: &quot;Libertarian-right cluster&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<p><em>Four-quadrant clustering for political compass style frameworks.</em></p>
+<hr />
+<p><strong>Tip:</strong>
+- You can mix and match these strategies, or define your own, as the engine is fully agnostic.
+- See <code>positioning_strategies_demo.py</code> for live visualizations of each strategy.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

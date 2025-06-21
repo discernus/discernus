@@ -1,0 +1,907 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Corpus Organization Guide - Smart File Management - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#corpus-organization-guide-smart-file-management" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Corpus Organization Guide - Smart File Management
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#three-stage-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂️ Three-Stage Organization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🗂️ Three-Stage Organization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stage-1-discovery-area-user-managed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 1: Discovery Area (User-Managed)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2-processed-storage-system-managed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 2: Processed Storage (System-Managed)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-3-database-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 3: Database Registry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Recommended Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Recommended Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-add-new-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Add New Documents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-check-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Check Status
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-process-new-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Process New Files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-organize-your-discovery-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Organize Your Discovery Area
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Key Benefits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Key Benefits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#duplicate-prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Duplicate Prevention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stable-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stable References
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incremental-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incremental Discovery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-freedom" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Freedom
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Status Commands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Status Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview Status
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-processed-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      List Processed Files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Important Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ Important Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-not-touch-processed-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      DO NOT Touch Processed Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discovery-area-freedom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discovery Area Freedom
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Guidelines
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Advanced Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Advanced Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#content-hash-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Hash Verification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Organization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-from-processed-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Export from Processed Storage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-structure-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Directory Structure Example
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="corpus-organization-guide-smart-file-management">Corpus Organization Guide - Smart File Management</h1>
+<h2 id="overview">Overview</h2>
+<p>The Narrative Gravity corpus system helps you manage documents through three organized stages, preventing confusion and ensuring your processed files are never lost or duplicated.</p>
+<h2 id="three-stage-organization">🗂️ Three-Stage Organization</h2>
+<h3 id="stage-1-discovery-area-user-managed"><strong>Stage 1: Discovery Area</strong> (User-Managed)</h3>
+<pre><code>corpus/raw_sources/
+├── batch_2025_june/           # Organize however you want
+├── presidential_speeches/     # Any structure works
+├── new_findings/             # Keep adding files here
+└── messy_documents/          # No cleanup required
+</code></pre>
+<p><strong>Purpose</strong>: Your "inbox" for new documents
+- ✅ Add files in any organization
+- ✅ Rename and reorganize freely
+- ✅ No impact on processed documents
+- ❌ Don't rely on this for stable references</p>
+<h3 id="stage-2-processed-storage-system-managed"><strong>Stage 2: Processed Storage</strong> (System-Managed)</h3>
+<pre><code>corpus/processed/
+├── .manifest.json                        # Index of all processed files
+├── ab/cd/abcd1234567890.../              # Content-addressable directories
+│   ├── lincoln_inaugural_1865.txt        # Stable semantic filename
+│   ├── .metadata.json                   # Extracted metadata
+│   └── .provenance.json                 # Processing history
+└── ef/gh/efgh0987654321.../
+    ├── obama_sotu_2012.txt
+    ├── .metadata.json
+    └── .provenance.json
+</code></pre>
+<p><strong>Purpose</strong>: Permanent, stable storage for processed documents
+- ✅ <strong>Never move or edit these files</strong>
+- ✅ Content-addressable (prevents duplicates)
+- ✅ Database references point here
+- ✅ Safe for long-term citations</p>
+<h3 id="stage-3-database-registry"><strong>Stage 3: Database Registry</strong></h3>
+<ul>
+<li>Metadata and relationships tracked in PostgreSQL</li>
+<li>References point to stable processed storage</li>
+<li>Academic metadata for citations</li>
+<li>Analysis results and annotations</li>
+</ul>
+<h2 id="recommended-workflow">🚀 Recommended Workflow</h2>
+<h3 id="1-add-new-documents"><strong>1. Add New Documents</strong></h3>
+<pre><code class="language-bash"># Put new files anywhere in raw_sources
+cp ~/Downloads/*.txt corpus/raw_sources/new_batch/
+
+# Or organize by source
+mkdir corpus/raw_sources/presidential_library_2025
+cp library_docs/*.txt corpus/raw_sources/presidential_library_2025/
+</code></pre>
+<h3 id="2-check-status"><strong>2. Check Status</strong></h3>
+<pre><code class="language-bash"># See what's processed vs what needs processing
+python3 scripts/corpus_status.py
+
+# List all processed documents
+python3 scripts/corpus_status.py --list-processed
+
+# Get details about a specific document
+python3 scripts/corpus_status.py --details lincoln_inaugural_1865
+</code></pre>
+<h3 id="3-process-new-files"><strong>3. Process New Files</strong></h3>
+<pre><code class="language-bash"># Process everything in raw_sources (skips duplicates automatically)
+python3 scripts/intelligent_ingest.py corpus/raw_sources --verbose
+
+# Or process a specific subdirectory
+python3 scripts/intelligent_ingest.py corpus/raw_sources/new_batch
+</code></pre>
+<h3 id="4-organize-your-discovery-area"><strong>4. Organize Your Discovery Area</strong></h3>
+<pre><code class="language-bash"># After processing, you can safely reorganize raw_sources
+mkdir corpus/raw_sources/archive_2025
+mv corpus/raw_sources/old_batch corpus/raw_sources/archive_2025/
+
+# Processed files remain safe in corpus/processed/
+</code></pre>
+<h2 id="key-benefits">🎯 Key Benefits</h2>
+<h3 id="duplicate-prevention"><strong>Duplicate Prevention</strong></h3>
+<ul>
+<li><strong>Content hashing</strong>: Same content = same storage location</li>
+<li><strong>Automatic detection</strong>: System tells you "already processed as lincoln_inaugural_1865"</li>
+<li><strong>No wasted processing</strong>: Skip re-analysis of identical content</li>
+</ul>
+<h3 id="stable-references"><strong>Stable References</strong></h3>
+<ul>
+<li><strong>Database integrity</strong>: References never break when you reorganize</li>
+<li><strong>Academic citations</strong>: Stable text_ids for publication references</li>
+<li><strong>Long-term storage</strong>: Files organized by content, not user preferences</li>
+</ul>
+<h3 id="incremental-discovery"><strong>Incremental Discovery</strong></h3>
+<ul>
+<li><strong>Add files anytime</strong>: Drop new documents in raw_sources freely</li>
+<li><strong>Batch processing</strong>: Process hundreds of files efficiently</li>
+<li><strong>Progress tracking</strong>: Always know what's been processed</li>
+</ul>
+<h3 id="user-freedom"><strong>User Freedom</strong></h3>
+<ul>
+<li><strong>Organize raw_sources</strong>: Any structure, rename freely</li>
+<li><strong>No system impact</strong>: Changes don't affect processed documents</li>
+<li><strong>Clear separation</strong>: Discovery vs permanent storage</li>
+</ul>
+<h2 id="status-commands">📋 Status Commands</h2>
+<h3 id="overview-status"><strong>Overview Status</strong></h3>
+<pre><code class="language-bash">python3 scripts/corpus_status.py
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>🗂️  Narrative Gravity Corpus Organization Status
+============================================================
+
+📦 PROCESSED STORAGE: corpus/processed
+  ✅ Total processed: 15
+  📅 Last updated: 2025-06-11T19:45:23
+  📄 Recent documents:
+     • lincoln_inaugural_1865 (100% confidence, 2025-06-11)
+     • obama_sotu_2012 (95% confidence, 2025-06-11)
+
+📁 DISCOVERY AREA: corpus/raw_sources
+  📝 Total text files: 23
+
+📊 PROCESSING STATUS:
+  🆕 Unprocessed files: 8
+  🔄 Already processed: 15
+
+🆕 NEEDS PROCESSING:
+     • new_batch/speech_001.txt (4,523 bytes)
+     • presidential_docs/state_union_2024.txt (12,045 bytes)
+
+💡 RECOMMENDATIONS:
+  🚀 Process new files:
+     python3 scripts/intelligent_ingest.py corpus/raw_sources --verbose
+</code></pre>
+<h3 id="list-processed-files"><strong>List Processed Files</strong></h3>
+<pre><code class="language-bash">python3 scripts/corpus_status.py --list-processed
+</code></pre>
+<h3 id="file-details"><strong>File Details</strong></h3>
+<pre><code class="language-bash">python3 scripts/corpus_status.py --details lincoln_inaugural_1865
+</code></pre>
+<h2 id="important-guidelines">⚠️ Important Guidelines</h2>
+<h3 id="do-not-touch-processed-storage"><strong>DO NOT Touch Processed Storage</strong></h3>
+<ul>
+<li>❌ <strong>Never edit files in <code>corpus/processed/</code></strong></li>
+<li>❌ <strong>Never move or rename processed files</strong></li>
+<li>❌ <strong>Never delete from processed storage</strong></li>
+<li>✅ <strong>Use corpus management tools only</strong></li>
+</ul>
+<h3 id="discovery-area-freedom"><strong>Discovery Area Freedom</strong></h3>
+<ul>
+<li>✅ <strong>Reorganize <code>corpus/raw_sources/</code> freely</strong></li>
+<li>✅ <strong>Create any subdirectory structure</strong></li>
+<li>✅ <strong>Rename files before processing</strong></li>
+<li>✅ <strong>Archive old batches after processing</strong></li>
+</ul>
+<h3 id="processing-guidelines"><strong>Processing Guidelines</strong></h3>
+<ul>
+<li>✅ <strong>Always check status before processing</strong></li>
+<li>✅ <strong>Use <code>--dry-run</code> to test first</strong></li>
+<li>✅ <strong>Review uncertain results manually</strong></li>
+<li>✅ <strong>Keep temporary processing results for debugging</strong></li>
+</ul>
+<h2 id="advanced-usage">🔧 Advanced Usage</h2>
+<h3 id="content-hash-verification"><strong>Content Hash Verification</strong></h3>
+<pre><code class="language-bash"># Check integrity of processed storage
+python3 -c &quot;
+from src.narrative_gravity.corpus.registry import CorpusRegistry
+registry = CorpusRegistry()
+integrity = registry.validate_integrity()
+print(f'Valid: {len(integrity[\&quot;valid\&quot;])}')
+print(f'Issues: {len(integrity[\&quot;hash_mismatches\&quot;])}')
+&quot;
+</code></pre>
+<h3 id="batch-organization"><strong>Batch Organization</strong></h3>
+<pre><code class="language-bash"># Organize raw_sources by date
+mkdir corpus/raw_sources/batch_$(date +%Y_%m_%d)
+mv corpus/raw_sources/*.txt corpus/raw_sources/batch_$(date +%Y_%m_%d)/
+
+# Process specific batch
+python3 scripts/intelligent_ingest.py corpus/raw_sources/batch_2025_06_11
+</code></pre>
+<h3 id="export-from-processed-storage"><strong>Export from Processed Storage</strong></h3>
+<pre><code class="language-bash"># Export corpus for analysis (references processed storage)
+python3 -c &quot;
+from src.narrative_gravity.corpus.exporter import CorpusExporter
+exporter = CorpusExporter()
+exporter.export_csv('my_corpus.csv')
+&quot;
+</code></pre>
+<h2 id="directory-structure-example">🏗️ Directory Structure Example</h2>
+<pre><code>narrative_gravity_analysis/
+├── corpus/
+│   ├── raw_sources/              # 🗂️ DISCOVERY AREA (yours to organize)
+│   │   ├── archive_2025/
+│   │   ├── new_batch_june/
+│   │   └── presidential_stuff/
+│   └── processed/                # 🔒 PROCESSED STORAGE (system managed)
+│       ├── .manifest.json
+│       ├── ab/cd/abcd1234.../
+│       │   ├── lincoln_inaugural_1865.txt
+│       │   ├── .metadata.json
+│       │   └── .provenance.json
+│       └── ef/gh/efgh5678.../
+├── tmp/                          # 🚧 TEMPORARY (processing workspace)
+│   └── intelligent_ingestion_*/
+└── scripts/
+    ├── corpus_status.py          # 📊 Your status dashboard
+    └── intelligent_ingest.py     # 🚀 Processing engine
+</code></pre>
+<p>This organization ensures your corpus grows systematically while maintaining full academic integrity for long-term research projects. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

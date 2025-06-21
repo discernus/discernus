@@ -1,0 +1,110 @@
+# Direct Analysis Prompt Template
+# Version: v2025.06.19 (Extracted from PromptTemplateManager)
+# Purpose: Streamlined narrative analysis for efficient processing
+
+template_meta:
+  name: "direct_analysis"
+  display_name: "Direct Narrative Analysis"
+  version: "v2025.06.19"
+  description: >
+    Streamlined prompt template for efficient narrative analysis with simplified
+    methodology. Optimized for API usage and batch processing with focus on
+    reliable JSON output and consistent scoring.
+  
+  target_modes: ["api", "batch"]
+  template_type: "streamlined_analysis"
+  last_modified: "2025-06-19T16:00:00.000000"
+  created_by: "unified_asset_management_extraction"
+
+# Template structure and components
+template_structure:
+  header:
+    dynamic: true
+    variables: ["timestamp", "framework", "mode"]
+    template: |
+      Narrative Gravity Analysis
+      Version: {timestamp} | Framework: {framework} | Mode: {mode}
+
+  role_definition:
+    default: >
+      You are an expert narrative analyst. Analyze the provided text using 
+      the narrative gravity wells framework and provide accurate scoring.
+
+  scoring_requirements:
+    enforce_decimal_scale: true
+    content: |
+      **SCORING REQUIREMENTS:**
+      - Use decimal values between 0.0 and 1.0 only
+      - Score based on conceptual strength, not keyword frequency
+      - Provide brief justification for each score
+
+  framework_wells:
+    dynamic: true
+    source: "framework_configuration"
+    description: "Framework wells section is dynamically generated from framework YAML files"
+
+  analysis_methodology:
+    simplified: |
+      **ANALYSIS APPROACH:**
+      - Focus on conceptual strength, not keyword frequency
+      - Score based on how strongly each orientation shapes the narrative's structure
+      - Provide brief justification for scores
+
+  json_format:
+    dynamic: true
+    source: "framework_wells"
+    description: "JSON format specification is dynamically generated based on framework wells"
+    template_structure: |
+      {
+        "analysis_metadata": {
+          "text_id": "string",
+          "framework": "string", 
+          "timestamp": "YYYY-MM-DD HH:MM:SS"
+        },
+        "well_scores": {
+          // Dynamic wells from framework
+        },
+        "justifications": {
+          // Brief justifications for each well
+        }
+      }
+
+  instructions:
+    default: |
+      **INSTRUCTIONS:**
+      1. Analyze the text for core themes and orientations
+      2. Score each well from 0.0 to 1.0 based on conceptual strength
+      3. Provide brief justifications
+      4. Return results in JSON format only
+
+# Framework compatibility
+compatibility:
+  framework_types: ["dipole", "non_dipole", "independent_wells"]
+  supported_frameworks: ["moral_foundations_theory", "iditi", "three_wells_political"]
+  weighting_schemes: ["winner_take_most", "proportional", "independent_wells"]
+  api_versions: ["v2.0", "v2.1"]
+
+# Template settings
+settings:
+  enforce_decimal_scale: true
+  include_model_identification: false
+  include_analysis_methodology: true
+  max_language_cues: 3
+  temperature_guidance: 0.3
+  abbreviated_methodology: true
+
+# Performance features
+performance_features:
+  optimized_for_api: true
+  batch_processing: true
+  minimal_output: true
+  fast_execution: true
+
+# Asset management metadata
+asset_metadata:
+  format_version: "yaml_v1.0"
+  extraction_source: "src/narrative_gravity/prompts/template_manager.py"
+  extraction_date: "2025-06-19T16:00:00.000000"
+  validation_status: "pending"
+  hash_verified: false
+  template_type: "streamlined_direct" 

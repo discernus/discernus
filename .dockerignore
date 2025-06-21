@@ -24,6 +24,7 @@ tmp/
 asset_storage/
 deprecated/
 research_workspaces/
+product_management/
 
 # IDE
 .vscode/

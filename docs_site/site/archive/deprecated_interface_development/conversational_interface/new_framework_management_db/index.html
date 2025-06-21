@@ -1,0 +1,681 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>New framework management db - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#thanks-one-thing-i-have-been-wondering-about-in-the-architecture-is-where-frameworks-are-stored-we-have-them-in-folders-and-there-is-a-framework-switcher-but-while-this-is-clear-to-new-users-it-seems-kind-of-janky-to-me-shouldnt-the-framework-library-and-versioning-system-be-in-the-database-with-everything-else" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              New framework management db
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#current-architecture-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Architecture Limitations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-storage-advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Storage Advantages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-database-schema-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommended Database Schema Extension
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommended Database Schema Extension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#framework-storage-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Storage Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoints-for-framework-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Endpoints for Framework Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-database-schema-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Database Schema Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-application-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Application Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-enhanced-framework-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Enhanced Framework Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-benefits-for-your-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Benefits for Your Research
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategic-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Alignment
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/></p>
+<h1 id="thanks-one-thing-i-have-been-wondering-about-in-the-architecture-is-where-frameworks-are-stored-we-have-them-in-folders-and-there-is-a-framework-switcher-but-while-this-is-clear-to-new-users-it-seems-kind-of-janky-to-me-shouldnt-the-framework-library-and-versioning-system-be-in-the-database-with-everything-else">Thanks. One thing I have been wondering about in the architecture is where frameworks are stored. We have them in folders and there is a framework switcher, but while this is clear to new users, it seems kind of janky to me. Shouldn't the framework library and versioning system be in the database with everything else?</h1>
+<p>🧠 <strong>Key Architectural Insight:</strong></p>
+<ul>
+<li>Current filesystem + symlink approach is development-friendly but lacks research rigor</li>
+<li>Database storage enables proper versioning, audit trails, and multi-user collaboration</li>
+<li>Conversational framework development requires database integration for real-time creation</li>
+<li>Academic reproducibility demands systematic version tracking beyond Git commits</li>
+</ul>
+<p>You're absolutely right - the current filesystem + symlink approach is architecturally inconsistent with the sophistication of the rest of your system. For a research platform requiring academic rigor and the conversational framework development interface we've been designing, database storage is clearly the superior approach.</p>
+<h2 id="current-architecture-limitations"><strong>Current Architecture Limitations</strong></h2>
+<p><strong>Filesystem Storage Problems</strong>
+The current <code>frameworks/civic_virtue/dipoles.json</code> + <code>config/</code> symlink system creates several issues:</p>
+<ul>
+<li><strong>Manual Version Management</strong>: Framework versioning relies on Git commits rather than systematic semantic versioning</li>
+<li><strong>No Audit Trails</strong>: No tracking of who modified frameworks when, or why changes were made</li>
+<li><strong>Atomic Update Issues</strong>: Framework modifications aren't transactional - partial updates can leave the system in inconsistent states</li>
+<li><strong>Access Control Gaps</strong>: File permissions don't integrate with your JWT authentication system</li>
+<li><strong>Research Reproducibility Challenges</strong>: Linking experimental results to exact framework versions requires Git SHA tracking</li>
+</ul>
+<p><strong>Symlink Management Complexity</strong>
+The <code>config/</code> directory approach, while functional, introduces operational complexity that doesn't scale:</p>
+<ul>
+<li>New users must understand symlink mechanics</li>
+<li>Framework switching requires file system operations rather than API calls</li>
+<li>No programmatic validation that symlink targets exist</li>
+<li>Difficult to implement framework usage analytics or performance tracking</li>
+</ul>
+<h2 id="database-storage-advantages"><strong>Database Storage Advantages</strong></h2>
+<p><strong>Academic Research Requirements</strong>
+Your validation-first development strategy demands systematic tracking that database storage provides:</p>
+<ul>
+<li><strong>Complete Provenance</strong>: Every experimental result links to exact framework version with database foreign keys</li>
+<li><strong>Semantic Versioning</strong>: Systematic version incrementing with change descriptions and compatibility tracking</li>
+<li><strong>Research Audit Trails</strong>: Complete history of framework evolution with researcher attribution and rationale</li>
+<li><strong>Experimental Reproducibility</strong>: Database constraints ensure referenced framework versions always exist</li>
+</ul>
+<p><strong>Conversational Interface Integration</strong>
+The hybrid Chainlit-Streamlit interface we've been designing requires database integration:</p>
+<ul>
+<li><strong>Real-time Framework Creation</strong>: Natural language framework development needs immediate database persistence</li>
+<li><strong>Version Comparison</strong>: Conversational queries like "compare civic virtue v1.2 with v1.4" require database indexing</li>
+<li><strong>Framework Analytics</strong>: Questions about framework performance across experiments need database aggregation</li>
+<li><strong>Collaborative Development</strong>: Multiple researchers modifying frameworks requires database-level coordination</li>
+</ul>
+<p><strong>System Architecture Consistency</strong>
+Database storage aligns with your existing sophisticated infrastructure:</p>
+<ul>
+<li><strong>PostgreSQL Integration</strong>: Leverage your existing database with proper schema, migrations, and backup procedures</li>
+<li><strong>API-First Design</strong>: Framework management through REST endpoints rather than file operations</li>
+<li><strong>Multi-User Support</strong>: Database permissions integrate with your existing JWT authentication</li>
+<li><strong>Validation Logic</strong>: Framework schema validation at database level with proper error handling</li>
+</ul>
+<h2 id="recommended-database-schema-extension"><strong>Recommended Database Schema Extension</strong></h2>
+<h3 id="framework-storage-tables"><strong>Framework Storage Tables</strong></h3>
+<pre><code class="language-sql">-- Framework definitions with versioning
+CREATE TABLE frameworks (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    version VARCHAR(20) NOT NULL,
+    description TEXT,
+    created_by UUID REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT NOW(),
+    is_active BOOLEAN DEFAULT FALSE,
+    parent_version_id UUID REFERENCES frameworks(id),
+    UNIQUE(name, version)
+);
+
+-- Framework dipoles and wells
+CREATE TABLE framework_dipoles (
+    id UUID PRIMARY KEY,
+    framework_id UUID REFERENCES frameworks(id),
+    dipole_name VARCHAR(100) NOT NULL,
+    positive_well JSONB NOT NULL,
+    negative_well JSONB NOT NULL,
+    dipole_order INTEGER NOT NULL
+);
+
+-- Framework mathematical configuration
+CREATE TABLE framework_config (
+    framework_id UUID REFERENCES frameworks(id),
+    mathematical_params JSONB NOT NULL,
+    weighting_philosophy JSONB NOT NULL,
+    scoring_methodology JSONB NOT NULL
+);
+
+-- Framework usage tracking
+CREATE TABLE framework_usage (
+    id UUID PRIMARY KEY,
+    framework_id UUID REFERENCES frameworks(id),
+    experiment_id UUID REFERENCES experiments(id),
+    usage_timestamp TIMESTAMP DEFAULT NOW()
+);
+</code></pre>
+<h3 id="api-endpoints-for-framework-management"><strong>API Endpoints for Framework Management</strong></h3>
+<pre><code class="language-python"># Framework management endpoints
+POST /api/frameworks/create
+PUT /api/frameworks/{id}/update
+GET /api/frameworks/list
+GET /api/frameworks/{id}/versions
+POST /api/frameworks/{id}/fork
+PUT /api/frameworks/{id}/activate
+GET /api/frameworks/active
+</code></pre>
+<h2 id="migration-strategy"><strong>Migration Strategy</strong></h2>
+<h3 id="phase-1-database-schema-implementation"><strong>Phase 1: Database Schema Implementation</strong></h3>
+<ul>
+<li>Extend PostgreSQL schema with framework tables</li>
+<li>Create migration scripts to import existing filesystem frameworks</li>
+<li>Implement framework management API endpoints</li>
+<li>Add framework versioning logic with semantic versioning</li>
+</ul>
+<h3 id="phase-2-application-integration"><strong>Phase 2: Application Integration</strong></h3>
+<ul>
+<li>Update FrameworkManager to use database rather than filesystem</li>
+<li>Modify experiment tracking to reference framework database IDs</li>
+<li>Implement framework validation at database level</li>
+<li>Add framework performance analytics</li>
+</ul>
+<h3 id="phase-3-enhanced-framework-features"><strong>Phase 3: Enhanced Framework Features</strong></h3>
+<ul>
+<li>Framework comparison and diff capabilities</li>
+<li>Collaborative framework development with merge conflict resolution</li>
+<li>Framework template system for rapid prototyping</li>
+<li>Advanced framework analytics and usage patterns</li>
+</ul>
+<h2 id="implementation-benefits-for-your-research"><strong>Implementation Benefits for Your Research</strong></h2>
+<p><strong>Conversational Framework Development</strong>
+Database storage enables the natural language framework creation we discussed:</p>
+<ul>
+<li>"Create new framework based on civic virtue but focused on environmental themes"</li>
+<li>"Fork political spectrum v1.3 and modify the economic dipole"</li>
+<li>"Show me all frameworks created by Dr. Chen last month"</li>
+</ul>
+<p><strong>Academic Validation Enhancement</strong>
+Your 765-analysis validation study becomes more rigorous:</p>
+<ul>
+<li>Exact framework version tracking for every analysis</li>
+<li>Framework performance metrics across different text types</li>
+<li>Systematic framework evolution documentation for publication</li>
+<li>Replication package generation with complete framework definitions</li>
+</ul>
+<p><strong>Research Collaboration</strong>
+Database storage supports the multi-researcher environment you'll need:</p>
+<ul>
+<li>Framework access control and modification permissions</li>
+<li>Change approval workflows for shared frameworks</li>
+<li>Framework usage analytics showing which researchers use which approaches</li>
+<li>Collaborative framework development with proper attribution</li>
+</ul>
+<h2 id="strategic-alignment"><strong>Strategic Alignment</strong></h2>
+<p>This database migration aligns perfectly with your validation-first development strategy and the sophisticated conversational interface we've been designing. It transforms framework management from a development convenience into a research-grade system that supports the academic rigor essential for your publication goals.</p>
+<p>The current filesystem approach served well for initial development, but you're right that it's architecturally inconsistent with the research platform sophistication you've achieved. Database storage will enable the systematic framework development, validation, and documentation that your academic credibility requirements demand.</p>
+<p>Your instinct about this architectural inconsistency demonstrates the kind of systematic thinking that will make the difference between a research prototype and a publication-quality analytical framework.</p>
+<div style="text-align: center">⁂</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,846 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Code Organization Standards - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#code-organization-standards" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Code Organization Standards
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 The Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-structure-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Directory Structure Standards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📁 Directory Structure Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-tier-searchable-maintained-stable" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ PRODUCTION TIER (Searchable, Maintained, Stable)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#in-code-documentation-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ In-Code Documentation Standards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docstring-format-google-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docstring Format (Google Style)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experimental-tier-limited-searchability" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 EXPERIMENTAL TIER (Limited Searchability)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deprecated-tier-no-searchability" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗑️ DEPRECATED TIER (No Searchability)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promotion-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Promotion Process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Promotion Process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experimental-production-promotion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experimental → Production Promotion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-deprecated-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production → Deprecated Process
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-strategy-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Search Strategy Updates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Search Strategy Updates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ai-assistant-search-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI Assistant Search Rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updated-search-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated Search Scripts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ Implementation Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛡️ Implementation Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-reorganize-existing-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Reorganize Existing Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-update-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Update Tooling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-establish-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Establish Process
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Benefits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Success Metrics
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="code-organization-standards">Code Organization Standards</h1>
+<p><em>Preventing Production Code Pollution</em></p>
+<h2 id="the-problem">🎯 <strong>The Problem</strong></h2>
+<p><strong>Issue</strong>: Codebase cluttered with experimental code, temporary files, and obsolete systems that:
+- Confuse AI assistants during searches
+- Lead to using deprecated patterns<br />
+- Make it hard to find actual production code
+- Result in building on unstable foundations</p>
+<p><strong>Solution</strong>: Clear separation with promotion process.</p>
+<hr />
+<h2 id="directory-structure-standards">📁 <strong>Directory Structure Standards</strong></h2>
+<h3 id="production-tier-searchable-maintained-stable"><strong>✅ PRODUCTION TIER</strong> (Searchable, Maintained, Stable)</h3>
+<pre><code>src/narrative_gravity/          # Core production code
+├── api/                       # Production API components
+├── models/                    # Production data models  
+├── utils/                     # Production utilities
+├── visualization/             # Production visualization
+└── academic/                  # Production academic tools
+
+scripts/production/            # Production-ready scripts
+├── check_existing_systems.py  # System prevention tools
+├── execute_experiment.py      # Core experiment execution
+└── architectural_compliance.py # Production validation
+
+docs/specifications/           # Production documentation
+docs/user-guides/             # Production user guides
+frameworks/                   # Production framework definitions
+</code></pre>
+<p><strong>Criteria for Production Tier</strong>:
+- ✅ <strong>Fully tested</strong> and working
+- ✅ <strong>Documented</strong> with clear usage
+- ✅ <strong>Maintained</strong> and up-to-date
+- ✅ <strong>Used in actual research</strong> workflows
+- ✅ <strong>No "TODO" or "experimental" markers</strong></p>
+<h3 id="in-code-documentation-standards"><strong>✍️ In-Code Documentation Standards</strong></h3>
+<p>To ensure code is clear, maintainable, and readable, all Python functions and classes in the <strong>Production Tier</strong> (<code>src/</code> and <code>scripts/applications/</code>) <strong>must</strong> include Google-style docstrings.</p>
+<h3 id="docstring-format-google-style">Docstring Format (Google Style)</h3>
+<p>Docstrings should provide a clear summary of the object's purpose, its arguments, any expected return values, and any exceptions it might raise.</p>
+<p><strong>Example of a well-documented function:</strong></p>
+<pre><code class="language-python">def example_function(arg1, arg2):
+    &quot;&quot;&quot;Summarizes the function's behavior in one line.
+
+    A more detailed description of the function's purpose, behavior,
+    and any side effects. Can be multiple lines.
+
+    Args:
+        arg1 (str): Description of the first argument.
+        arg2 (int): Description of the second argument, including its
+            default value if applicable.
+
+    Returns:
+        bool: Description of the return value, explaining what True or
+              False represents.
+
+    Raises:
+        ValueError: If `arg2` is a negative number.
+        TypeError: If `arg1` is not a string.
+    &quot;&quot;&quot;
+    if not isinstance(arg1, str):
+        raise TypeError(&quot;arg1 must be a string.&quot;)
+    if arg2 &lt; 0:
+        raise ValueError(&quot;arg2 cannot be negative.&quot;)
+    return True
+</code></pre>
+<p>This standard enables automated tools to generate documentation and helps developers understand code without having to read its implementation.</p>
+<h3 id="experimental-tier-limited-searchability"><strong>🧪 EXPERIMENTAL TIER</strong> (Limited Searchability)</h3>
+<pre><code>experimental/                 # All experimental code
+├── prototypes/              # Early-stage development
+├── testing/                 # Ad hoc testing scripts
+├── iterations/              # Development iterations
+├── tmp/                     # Temporary files
+└── deprecated/              # Code marked for deletion
+
+sandbox/                     # Individual development areas
+├── researcher1/             # Personal experimental space
+├── researcher2/             # Personal experimental space
+└── shared/                  # Shared experimental work
+</code></pre>
+<p><strong>Criteria for Experimental Tier</strong>:
+- 🧪 <strong>Unfinished</strong> or exploratory code
+- 🧪 <strong>Ad hoc testing</strong> and validation scripts
+- 🧪 <strong>Prototype implementations</strong>
+- 🧪 <strong>Temporary files</strong> and one-off analyses
+- 🧪 <strong>Personal research</strong> iterations</p>
+<h3 id="deprecated-tier-no-searchability"><strong>🗑️ DEPRECATED TIER</strong> (No Searchability)</h3>
+<pre><code>deprecated/                  # Clearly obsolete code
+├── by-date/                # Organized by deprecation date
+│   ├── 2025-06-18/        # What was deprecated when
+│   └── 2025-06-17/
+└── by-system/             # Organized by system replaced
+    ├── old-qa-system/     # What system this replaced
+    └── legacy-api/
+</code></pre>
+<hr />
+<h2 id="promotion-process">🔄 <strong>Promotion Process</strong></h2>
+<h3 id="experimental-production-promotion"><strong>Experimental → Production Promotion</strong></h3>
+<p><strong>Requirements for Promotion</strong>:
+1. ✅ <strong>Code Quality</strong>: Passes all quality checks
+2. ✅ <strong>Testing</strong>: Comprehensive test coverage
+3. ✅ <strong>Documentation</strong>: Clear usage documentation
+4. ✅ <strong>Integration</strong>: Works with existing production systems
+5. ✅ <strong>Review</strong>: Peer review completed
+6. ✅ <strong>Performance</strong>: Meets production performance standards</p>
+<p><strong>Promotion Checklist</strong>:</p>
+<pre><code class="language-bash"># 1. Run quality checks
+python3 scripts/production/validate_for_promotion.py experimental/prototypes/new_system.py
+
+# 2. Ensure no experimental dependencies
+python3 scripts/production/check_production_dependencies.py new_system
+
+# 3. Add to production inventory
+echo &quot;new_system: Description and usage&quot; &gt;&gt; docs/EXISTING_SYSTEMS_INVENTORY.md
+
+# 4. Move to production location
+mv experimental/prototypes/new_system.py src/narrative_gravity/production_module/
+
+# 5. Update production documentation
+# 6. Add to production test suite
+</code></pre>
+<h3 id="production-deprecated-process"><strong>Production → Deprecated Process</strong></h3>
+<p><strong>When Replacing Production Code</strong>:
+1. 📝 <strong>Document replacement reason</strong> in deprecation log
+2. 🏷️ <strong>Tag with deprecation date</strong> and replacement system
+3. 📦 <strong>Move to <code>deprecated/by-system/old-system-name/</code></strong>
+4. 🔗 <strong>Update all references</strong> to point to new system
+5. 📚 <strong>Update documentation</strong> and inventory</p>
+<hr />
+<h2 id="search-strategy-updates">🔍 <strong>Search Strategy Updates</strong></h2>
+<h3 id="ai-assistant-search-rules"><strong>AI Assistant Search Rules</strong></h3>
+<p><strong>ALWAYS Search These</strong> (Production Tier):
+- <code>src/narrative_gravity/</code> - Core production code
+- <code>scripts/production/</code> - Production scripts
+- <code>docs/specifications/</code> - Production documentation<br />
+- <code>docs/user-guides/</code> - Production guides
+- <code>frameworks/</code> - Production frameworks</p>
+<p><strong>CONDITIONAL Search</strong> (Experimental Tier):
+- <code>experimental/</code> - Only when explicitly looking for experimental work
+- <code>sandbox/</code> - Only when asked about specific research</p>
+<p><strong>NEVER Search</strong> (Deprecated Tier):
+- <code>deprecated/</code> - Should not appear in normal searches
+- <code>tmp/</code> - Temporary files
+- Files marked with <code># DEPRECATED</code> comments</p>
+<h3 id="updated-search-scripts"><strong>Updated Search Scripts</strong></h3>
+<p>Update <code>scripts/check_existing_systems.py</code> to focus on production:</p>
+<pre><code class="language-bash"># Search production code first
+grep -r &quot;$query&quot; src/narrative_gravity/
+grep -r &quot;$query&quot; scripts/production/
+grep -r &quot;$query&quot; docs/specifications/
+
+# Only search experimental if no production matches
+if [[ $production_matches == 0 ]]; then
+    echo &quot;⚠️  No production systems found. Checking experimental...&quot;
+    grep -r &quot;$query&quot; experimental/
+fi
+</code></pre>
+<hr />
+<h2 id="implementation-plan">🛡️ <strong>Implementation Plan</strong></h2>
+<h3 id="phase-1-reorganize-existing-code"><strong>Phase 1: Reorganize Existing Code</strong></h3>
+<ol>
+<li>
+<p><strong>Audit Current Code</strong>:
+   <code>bash
+   # Create inventory of what we have
+   find . -name "*.py" -type f | grep -E "(test|tmp|old|backup|archive)" &gt; experimental_candidates.txt
+   find . -name "*.py" -type f | grep -vE "(test|tmp|old|backup|archive)" &gt; production_candidates.txt</code></p>
+</li>
+<li>
+<p><strong>Create New Directory Structure</strong>:
+   <code>bash
+   mkdir -p experimental/{prototypes,testing,iterations,tmp,deprecated}
+   mkdir -p sandbox/{shared}
+   mkdir -p scripts/production
+   mkdir -p deprecated/{by-date,by-system}</code></p>
+</li>
+<li>
+<p><strong>Move Code to Appropriate Tiers</strong>:</p>
+</li>
+<li>Identify truly production-ready code → <code>src/</code> and <code>scripts/production/</code></li>
+<li>Move experimental/testing code → <code>experimental/</code></li>
+<li>Archive obsolete code → <code>deprecated/</code></li>
+</ol>
+<h3 id="phase-2-update-tooling"><strong>Phase 2: Update Tooling</strong></h3>
+<ol>
+<li><strong>Update Search Tools</strong>:</li>
+<li>Modify <code>check_existing_systems.py</code> to focus on production</li>
+<li>Add production-only search mode</li>
+<li>
+<p>Add experimental search mode (explicit opt-in)</p>
+</li>
+<li>
+<p><strong>Create Promotion Tools</strong>:</p>
+</li>
+<li><code>scripts/production/validate_for_promotion.py</code></li>
+<li><code>scripts/production/promote_to_production.py</code></li>
+<li>
+<p><code>scripts/production/deprecate_system.py</code></p>
+</li>
+<li>
+<p><strong>Update Documentation Tools</strong>:</p>
+</li>
+<li>Auto-generate production inventory</li>
+<li>Flag experimental dependencies in production code</li>
+</ol>
+<h3 id="phase-3-establish-process"><strong>Phase 3: Establish Process</strong></h3>
+<ol>
+<li><strong>Development Workflow</strong>:</li>
+<li>All new development starts in <code>experimental/</code></li>
+<li>Use promotion checklist for moving to production</li>
+<li>
+<p>Regular cleanup of experimental code</p>
+</li>
+<li>
+<p><strong>Maintenance Workflow</strong>:</p>
+</li>
+<li>Monthly review of experimental code (promote or delete)</li>
+<li>Quarterly audit of production code (ensure still maintained)</li>
+<li>Document all deprecations</li>
+</ol>
+<hr />
+<h2 id="benefits">📋 <strong>Benefits</strong></h2>
+<ol>
+<li><strong>🔍 Clean Searches</strong>: AI assistants find only production-ready code</li>
+<li><strong>🏗️ Stable Foundation</strong>: Building on maintained, tested systems</li>
+<li><strong>🧪 Freedom to Experiment</strong>: Clear space for iteration without pollution</li>
+<li><strong>📚 Clear Documentation</strong>: Production inventory stays accurate</li>
+<li><strong>🚀 Faster Development</strong>: Less time sorting through obsolete code</li>
+</ol>
+<hr />
+<h2 id="success-metrics">🎯 <strong>Success Metrics</strong></h2>
+<ul>
+<li><strong>Search Accuracy</strong>: 90%+ of searches return production-ready results</li>
+<li><strong>Build Quality</strong>: No new systems built on deprecated foundations  </li>
+<li><strong>Code Reuse</strong>: Measurable increase in reusing existing production systems</li>
+<li><strong>Maintenance</strong>: Clear ownership and update responsibility for production code</li>
+</ul>
+<p><strong>This organization standard should prevent both "rebuilding worse systems" AND "building on rotten foundations" problems!</strong> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

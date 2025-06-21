@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>api &mdash; Discernus API 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Discernus API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">api package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Discernus API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">api</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api">
+<h1>api<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">api package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#api-analysis-service-module">api.analysis_service module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-api.schemas">api.schemas module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.BaseSchema"><code class="docutils literal notranslate"><span class="pre">BaseSchema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.BaseSchema.model_config"><code class="docutils literal notranslate"><span class="pre">BaseSchema.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.CalculatedMetrics"><code class="docutils literal notranslate"><span class="pre">CalculatedMetrics</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CalculatedMetrics.coherence"><code class="docutils literal notranslate"><span class="pre">CalculatedMetrics.coherence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CalculatedMetrics.directional_purity"><code class="docutils literal notranslate"><span class="pre">CalculatedMetrics.directional_purity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CalculatedMetrics.model_config"><code class="docutils literal notranslate"><span class="pre">CalculatedMetrics.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CalculatedMetrics.narrative_elevation"><code class="docutils literal notranslate"><span class="pre">CalculatedMetrics.narrative_elevation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CalculatedMetrics.polarity"><code class="docutils literal notranslate"><span class="pre">CalculatedMetrics.polarity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ChunkBase"><code class="docutils literal notranslate"><span class="pre">ChunkBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.chunk_content"><code class="docutils literal notranslate"><span class="pre">ChunkBase.chunk_content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.chunk_id"><code class="docutils literal notranslate"><span class="pre">ChunkBase.chunk_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.chunk_overlap"><code class="docutils literal notranslate"><span class="pre">ChunkBase.chunk_overlap</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.chunk_size"><code class="docutils literal notranslate"><span class="pre">ChunkBase.chunk_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.chunk_type"><code class="docutils literal notranslate"><span class="pre">ChunkBase.chunk_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.document_position"><code class="docutils literal notranslate"><span class="pre">ChunkBase.document_position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.framework_data"><code class="docutils literal notranslate"><span class="pre">ChunkBase.framework_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.model_config"><code class="docutils literal notranslate"><span class="pre">ChunkBase.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.total_chunks"><code class="docutils literal notranslate"><span class="pre">ChunkBase.total_chunks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.unique_words"><code class="docutils literal notranslate"><span class="pre">ChunkBase.unique_words</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.word_count"><code class="docutils literal notranslate"><span class="pre">ChunkBase.word_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkBase.word_density"><code class="docutils literal notranslate"><span class="pre">ChunkBase.word_density</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ChunkResponse"><code class="docutils literal notranslate"><span class="pre">ChunkResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkResponse.created_at"><code class="docutils literal notranslate"><span class="pre">ChunkResponse.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkResponse.document_id"><code class="docutils literal notranslate"><span class="pre">ChunkResponse.document_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkResponse.id"><code class="docutils literal notranslate"><span class="pre">ChunkResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkResponse.model_config"><code class="docutils literal notranslate"><span class="pre">ChunkResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkResponse.processing_status"><code class="docutils literal notranslate"><span class="pre">ChunkResponse.processing_status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkResponse.updated_at"><code class="docutils literal notranslate"><span class="pre">ChunkResponse.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ChunkType"><code class="docutils literal notranslate"><span class="pre">ChunkType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkType.fixed"><code class="docutils literal notranslate"><span class="pre">ChunkType.fixed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkType.sectional"><code class="docutils literal notranslate"><span class="pre">ChunkType.sectional</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ChunkType.semantic"><code class="docutils literal notranslate"><span class="pre">ChunkType.semantic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.CompleteProvenance"><code class="docutils literal notranslate"><span class="pre">CompleteProvenance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CompleteProvenance.experiment_id"><code class="docutils literal notranslate"><span class="pre">CompleteProvenance.experiment_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CompleteProvenance.framework_version"><code class="docutils literal notranslate"><span class="pre">CompleteProvenance.framework_version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CompleteProvenance.llm_model"><code class="docutils literal notranslate"><span class="pre">CompleteProvenance.llm_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CompleteProvenance.model_config"><code class="docutils literal notranslate"><span class="pre">CompleteProvenance.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CompleteProvenance.prompt_template_hash"><code class="docutils literal notranslate"><span class="pre">CompleteProvenance.prompt_template_hash</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CompleteProvenance.scoring_algorithm_version"><code class="docutils literal notranslate"><span class="pre">CompleteProvenance.scoring_algorithm_version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CompleteProvenance.timestamp"><code class="docutils literal notranslate"><span class="pre">CompleteProvenance.timestamp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.CorpusBase"><code class="docutils literal notranslate"><span class="pre">CorpusBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CorpusBase.description"><code class="docutils literal notranslate"><span class="pre">CorpusBase.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CorpusBase.model_config"><code class="docutils literal notranslate"><span class="pre">CorpusBase.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CorpusBase.name"><code class="docutils literal notranslate"><span class="pre">CorpusBase.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.CorpusResponse"><code class="docutils literal notranslate"><span class="pre">CorpusResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CorpusResponse.id"><code class="docutils literal notranslate"><span class="pre">CorpusResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CorpusResponse.model_config"><code class="docutils literal notranslate"><span class="pre">CorpusResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CorpusResponse.record_count"><code class="docutils literal notranslate"><span class="pre">CorpusResponse.record_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CorpusResponse.upload_timestamp"><code class="docutils literal notranslate"><span class="pre">CorpusResponse.upload_timestamp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.CorpusResponse.uploader_id"><code class="docutils literal notranslate"><span class="pre">CorpusResponse.uploader_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.DocumentBase"><code class="docutils literal notranslate"><span class="pre">DocumentBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.audience_size"><code class="docutils literal notranslate"><span class="pre">DocumentBase.audience_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.author"><code class="docutils literal notranslate"><span class="pre">DocumentBase.author</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.campaign_name"><code class="docutils literal notranslate"><span class="pre">DocumentBase.campaign_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.date"><code class="docutils literal notranslate"><span class="pre">DocumentBase.date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.date_to_datetime"><code class="docutils literal notranslate"><span class="pre">DocumentBase.date_to_datetime()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.document_metadata"><code class="docutils literal notranslate"><span class="pre">DocumentBase.document_metadata</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.document_type"><code class="docutils literal notranslate"><span class="pre">DocumentBase.document_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.medium"><code class="docutils literal notranslate"><span class="pre">DocumentBase.medium</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.model_config"><code class="docutils literal notranslate"><span class="pre">DocumentBase.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.publication"><code class="docutils literal notranslate"><span class="pre">DocumentBase.publication</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.schema_version"><code class="docutils literal notranslate"><span class="pre">DocumentBase.schema_version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.source_url"><code class="docutils literal notranslate"><span class="pre">DocumentBase.source_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.text_id"><code class="docutils literal notranslate"><span class="pre">DocumentBase.text_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentBase.title"><code class="docutils literal notranslate"><span class="pre">DocumentBase.title</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.DocumentResponse"><code class="docutils literal notranslate"><span class="pre">DocumentResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentResponse.corpus_id"><code class="docutils literal notranslate"><span class="pre">DocumentResponse.corpus_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentResponse.created_at"><code class="docutils literal notranslate"><span class="pre">DocumentResponse.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentResponse.id"><code class="docutils literal notranslate"><span class="pre">DocumentResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentResponse.model_config"><code class="docutils literal notranslate"><span class="pre">DocumentResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentResponse.updated_at"><code class="docutils literal notranslate"><span class="pre">DocumentResponse.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.DocumentType"><code class="docutils literal notranslate"><span class="pre">DocumentType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentType.article"><code class="docutils literal notranslate"><span class="pre">DocumentType.article</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentType.op_ed"><code class="docutils literal notranslate"><span class="pre">DocumentType.op_ed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentType.other"><code class="docutils literal notranslate"><span class="pre">DocumentType.other</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentType.pamphlet"><code class="docutils literal notranslate"><span class="pre">DocumentType.pamphlet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentType.social_media"><code class="docutils literal notranslate"><span class="pre">DocumentType.social_media</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentType.speech"><code class="docutils literal notranslate"><span class="pre">DocumentType.speech</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentType.tv_ad_script"><code class="docutils literal notranslate"><span class="pre">DocumentType.tv_ad_script</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.DocumentType.web_page"><code class="docutils literal notranslate"><span class="pre">DocumentType.web_page</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ErrorResponse"><code class="docutils literal notranslate"><span class="pre">ErrorResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ErrorResponse.detail"><code class="docutils literal notranslate"><span class="pre">ErrorResponse.detail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ErrorResponse.error_code"><code class="docutils literal notranslate"><span class="pre">ErrorResponse.error_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ErrorResponse.model_config"><code class="docutils literal notranslate"><span class="pre">ErrorResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ErrorResponse.timestamp"><code class="docutils literal notranslate"><span class="pre">ErrorResponse.timestamp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.analysis_mode"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.analysis_mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.description"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.framework_config_id"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.framework_config_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.hypothesis"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.hypothesis</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.model_config"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.name"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.prompt_template_id"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.prompt_template_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.research_context"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.research_context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.research_notes"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.research_notes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.scoring_algorithm_id"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.scoring_algorithm_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.selected_models"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.selected_models</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentCreate.tags"><code class="docutils literal notranslate"><span class="pre">ExperimentCreate.tags</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.Config"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.Config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.analysis_mode"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.analysis_mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.created_at"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.creator_id"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.creator_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.description"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.framework_config_id"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.framework_config_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.hypothesis"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.hypothesis</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.id"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.model_config"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.name"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.prompt_template_id"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.prompt_template_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.publication_status"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.publication_status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.research_context"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.research_context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.research_notes"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.research_notes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.scoring_algorithm_id"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.scoring_algorithm_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.selected_models"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.selected_models</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.status"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.successful_runs"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.successful_runs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.tags"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.tags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.total_runs"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.total_runs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentResponse.updated_at"><code class="docutils literal notranslate"><span class="pre">ExperimentResponse.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.description"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.hypothesis"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.hypothesis</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.model_config"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.name"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.publication_status"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.publication_status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.research_context"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.research_context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.research_notes"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.research_notes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.status"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ExperimentUpdate.tags"><code class="docutils literal notranslate"><span class="pre">ExperimentUpdate.tags</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.FrameworkConfigResponse"><code class="docutils literal notranslate"><span class="pre">FrameworkConfigResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.FrameworkConfigResponse.description"><code class="docutils literal notranslate"><span class="pre">FrameworkConfigResponse.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.FrameworkConfigResponse.dipoles"><code class="docutils literal notranslate"><span class="pre">FrameworkConfigResponse.dipoles</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.FrameworkConfigResponse.id"><code class="docutils literal notranslate"><span class="pre">FrameworkConfigResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.FrameworkConfigResponse.model_config"><code class="docutils literal notranslate"><span class="pre">FrameworkConfigResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.FrameworkConfigResponse.name"><code class="docutils literal notranslate"><span class="pre">FrameworkConfigResponse.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.FrameworkConfigResponse.version"><code class="docutils literal notranslate"><span class="pre">FrameworkConfigResponse.version</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.HierarchicalRanking"><code class="docutils literal notranslate"><span class="pre">HierarchicalRanking</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.HierarchicalRanking.model_config"><code class="docutils literal notranslate"><span class="pre">HierarchicalRanking.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.HierarchicalRanking.primary_wells"><code class="docutils literal notranslate"><span class="pre">HierarchicalRanking.primary_wells</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.HierarchicalRanking.secondary_wells"><code class="docutils literal notranslate"><span class="pre">HierarchicalRanking.secondary_wells</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.HierarchicalRanking.total_weight"><code class="docutils literal notranslate"><span class="pre">HierarchicalRanking.total_weight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.HierarchicalRanking.validate_total_weight"><code class="docutils literal notranslate"><span class="pre">HierarchicalRanking.validate_total_weight()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.JSONLRecord"><code class="docutils literal notranslate"><span class="pre">JSONLRecord</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.chunk_content"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.chunk_content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.chunk_id"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.chunk_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.chunk_overlap"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.chunk_overlap</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.chunk_size"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.chunk_size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.chunk_type"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.chunk_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.document"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.document_position"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.document_position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.framework_data"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.framework_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.model_config"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.total_chunks"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.total_chunks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.unique_words"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.unique_words</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.validate_chunk_consistency"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.validate_chunk_consistency()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.word_count"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.word_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JSONLRecord.word_density"><code class="docutils literal notranslate"><span class="pre">JSONLRecord.word_density</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.JobCreate"><code class="docutils literal notranslate"><span class="pre">JobCreate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.corpus_id"><code class="docutils literal notranslate"><span class="pre">JobCreate.corpus_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.frameworks"><code class="docutils literal notranslate"><span class="pre">JobCreate.frameworks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.job_config"><code class="docutils literal notranslate"><span class="pre">JobCreate.job_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.job_name"><code class="docutils literal notranslate"><span class="pre">JobCreate.job_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.model_config"><code class="docutils literal notranslate"><span class="pre">JobCreate.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.models"><code class="docutils literal notranslate"><span class="pre">JobCreate.models</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.run_count"><code class="docutils literal notranslate"><span class="pre">JobCreate.run_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.text_ids"><code class="docutils literal notranslate"><span class="pre">JobCreate.text_ids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobCreate.validate_frameworks"><code class="docutils literal notranslate"><span class="pre">JobCreate.validate_frameworks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.JobDetailResponse"><code class="docutils literal notranslate"><span class="pre">JobDetailResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobDetailResponse.model_config"><code class="docutils literal notranslate"><span class="pre">JobDetailResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobDetailResponse.progress_percentage"><code class="docutils literal notranslate"><span class="pre">JobDetailResponse.progress_percentage</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobDetailResponse.task_status_counts"><code class="docutils literal notranslate"><span class="pre">JobDetailResponse.task_status_counts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobDetailResponse.tasks"><code class="docutils literal notranslate"><span class="pre">JobDetailResponse.tasks</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.JobResponse"><code class="docutils literal notranslate"><span class="pre">JobResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.actual_cost"><code class="docutils literal notranslate"><span class="pre">JobResponse.actual_cost</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.completed_at"><code class="docutils literal notranslate"><span class="pre">JobResponse.completed_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.completed_tasks"><code class="docutils literal notranslate"><span class="pre">JobResponse.completed_tasks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.corpus_id"><code class="docutils literal notranslate"><span class="pre">JobResponse.corpus_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.created_at"><code class="docutils literal notranslate"><span class="pre">JobResponse.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.estimated_cost"><code class="docutils literal notranslate"><span class="pre">JobResponse.estimated_cost</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.failed_tasks"><code class="docutils literal notranslate"><span class="pre">JobResponse.failed_tasks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.frameworks"><code class="docutils literal notranslate"><span class="pre">JobResponse.frameworks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.id"><code class="docutils literal notranslate"><span class="pre">JobResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.job_name"><code class="docutils literal notranslate"><span class="pre">JobResponse.job_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.model_config"><code class="docutils literal notranslate"><span class="pre">JobResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.models"><code class="docutils literal notranslate"><span class="pre">JobResponse.models</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.run_count"><code class="docutils literal notranslate"><span class="pre">JobResponse.run_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.started_at"><code class="docutils literal notranslate"><span class="pre">JobResponse.started_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.status"><code class="docutils literal notranslate"><span class="pre">JobResponse.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.text_ids"><code class="docutils literal notranslate"><span class="pre">JobResponse.text_ids</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.total_tasks"><code class="docutils literal notranslate"><span class="pre">JobResponse.total_tasks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobResponse.updated_at"><code class="docutils literal notranslate"><span class="pre">JobResponse.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.JobStatus"><code class="docutils literal notranslate"><span class="pre">JobStatus</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobStatus.cancelled"><code class="docutils literal notranslate"><span class="pre">JobStatus.cancelled</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobStatus.completed"><code class="docutils literal notranslate"><span class="pre">JobStatus.completed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobStatus.failed"><code class="docutils literal notranslate"><span class="pre">JobStatus.failed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobStatus.pending"><code class="docutils literal notranslate"><span class="pre">JobStatus.pending</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.JobStatus.running"><code class="docutils literal notranslate"><span class="pre">JobStatus.running</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ModelComparisonResult"><code class="docutils literal notranslate"><span class="pre">ModelComparisonResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ModelComparisonResult.consistency_score"><code class="docutils literal notranslate"><span class="pre">ModelComparisonResult.consistency_score</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ModelComparisonResult.mean_scores"><code class="docutils literal notranslate"><span class="pre">ModelComparisonResult.mean_scores</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ModelComparisonResult.model"><code class="docutils literal notranslate"><span class="pre">ModelComparisonResult.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ModelComparisonResult.model_config"><code class="docutils literal notranslate"><span class="pre">ModelComparisonResult.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ModelComparisonResult.runs"><code class="docutils literal notranslate"><span class="pre">ModelComparisonResult.runs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ModelComparisonResult.score_variance"><code class="docutils literal notranslate"><span class="pre">ModelComparisonResult.score_variance</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest.experiment_id"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest.experiment_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest.framework_config_id"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest.framework_config_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest.model_config"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest.prompt_template_id"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest.prompt_template_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest.runs_per_model"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest.runs_per_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest.scoring_algorithm_id"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest.scoring_algorithm_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest.selected_models"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest.selected_models</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisRequest.text_content"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisRequest.text_content</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.analysis_id"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.analysis_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.consensus_scores"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.consensus_scores</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.execution_time"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.execution_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.framework"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.framework</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.model_agreement"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.model_agreement</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.model_config"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.model_results"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.model_results</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.scoring_algorithm"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.scoring_algorithm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.stability_metrics"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.stability_metrics</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.text_content"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.text_content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.total_cost"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.total_cost</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.MultiModelAnalysisResponse.total_runs"><code class="docutils literal notranslate"><span class="pre">MultiModelAnalysisResponse.total_runs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.NarrativePosition"><code class="docutils literal notranslate"><span class="pre">NarrativePosition</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.NarrativePosition.model_config"><code class="docutils literal notranslate"><span class="pre">NarrativePosition.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.NarrativePosition.x"><code class="docutils literal notranslate"><span class="pre">NarrativePosition.x</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.NarrativePosition.y"><code class="docutils literal notranslate"><span class="pre">NarrativePosition.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.PasswordChange"><code class="docutils literal notranslate"><span class="pre">PasswordChange</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PasswordChange.current_password"><code class="docutils literal notranslate"><span class="pre">PasswordChange.current_password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PasswordChange.model_config"><code class="docutils literal notranslate"><span class="pre">PasswordChange.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PasswordChange.new_password"><code class="docutils literal notranslate"><span class="pre">PasswordChange.new_password</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.PromptTemplateResponse"><code class="docutils literal notranslate"><span class="pre">PromptTemplateResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PromptTemplateResponse.content"><code class="docutils literal notranslate"><span class="pre">PromptTemplateResponse.content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PromptTemplateResponse.framework_compatibility"><code class="docutils literal notranslate"><span class="pre">PromptTemplateResponse.framework_compatibility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PromptTemplateResponse.id"><code class="docutils literal notranslate"><span class="pre">PromptTemplateResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PromptTemplateResponse.model_config"><code class="docutils literal notranslate"><span class="pre">PromptTemplateResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PromptTemplateResponse.name"><code class="docutils literal notranslate"><span class="pre">PromptTemplateResponse.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.PromptTemplateResponse.version"><code class="docutils literal notranslate"><span class="pre">PromptTemplateResponse.version</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.RunCreate"><code class="docutils literal notranslate"><span class="pre">RunCreate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunCreate.llm_model"><code class="docutils literal notranslate"><span class="pre">RunCreate.llm_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunCreate.llm_version"><code class="docutils literal notranslate"><span class="pre">RunCreate.llm_version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunCreate.model_config"><code class="docutils literal notranslate"><span class="pre">RunCreate.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunCreate.text_content"><code class="docutils literal notranslate"><span class="pre">RunCreate.text_content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunCreate.text_id"><code class="docutils literal notranslate"><span class="pre">RunCreate.text_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.RunResponse"><code class="docutils literal notranslate"><span class="pre">RunResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.Config"><code class="docutils literal notranslate"><span class="pre">RunResponse.Config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.api_cost"><code class="docutils literal notranslate"><span class="pre">RunResponse.api_cost</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.coherence"><code class="docutils literal notranslate"><span class="pre">RunResponse.coherence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.complete_provenance"><code class="docutils literal notranslate"><span class="pre">RunResponse.complete_provenance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.created_at"><code class="docutils literal notranslate"><span class="pre">RunResponse.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.directional_purity"><code class="docutils literal notranslate"><span class="pre">RunResponse.directional_purity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.duration_seconds"><code class="docutils literal notranslate"><span class="pre">RunResponse.duration_seconds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.error_message"><code class="docutils literal notranslate"><span class="pre">RunResponse.error_message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.execution_time"><code class="docutils literal notranslate"><span class="pre">RunResponse.execution_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.experiment_id"><code class="docutils literal notranslate"><span class="pre">RunResponse.experiment_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.framework_fit_score"><code class="docutils literal notranslate"><span class="pre">RunResponse.framework_fit_score</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.framework_version"><code class="docutils literal notranslate"><span class="pre">RunResponse.framework_version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.hierarchical_ranking"><code class="docutils literal notranslate"><span class="pre">RunResponse.hierarchical_ranking</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.id"><code class="docutils literal notranslate"><span class="pre">RunResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.input_length"><code class="docutils literal notranslate"><span class="pre">RunResponse.input_length</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.llm_model"><code class="docutils literal notranslate"><span class="pre">RunResponse.llm_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.llm_version"><code class="docutils literal notranslate"><span class="pre">RunResponse.llm_version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.model_config"><code class="docutils literal notranslate"><span class="pre">RunResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.narrative_elevation"><code class="docutils literal notranslate"><span class="pre">RunResponse.narrative_elevation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.narrative_position_x"><code class="docutils literal notranslate"><span class="pre">RunResponse.narrative_position_x</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.narrative_position_y"><code class="docutils literal notranslate"><span class="pre">RunResponse.narrative_position_y</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.polarity"><code class="docutils literal notranslate"><span class="pre">RunResponse.polarity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.prompt_template_version"><code class="docutils literal notranslate"><span class="pre">RunResponse.prompt_template_version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.raw_scores"><code class="docutils literal notranslate"><span class="pre">RunResponse.raw_scores</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.run_number"><code class="docutils literal notranslate"><span class="pre">RunResponse.run_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.status"><code class="docutils literal notranslate"><span class="pre">RunResponse.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.success"><code class="docutils literal notranslate"><span class="pre">RunResponse.success</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.text_content"><code class="docutils literal notranslate"><span class="pre">RunResponse.text_content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.text_id"><code class="docutils literal notranslate"><span class="pre">RunResponse.text_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.RunResponse.well_justifications"><code class="docutils literal notranslate"><span class="pre">RunResponse.well_justifications</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ScoringAlgorithmResponse"><code class="docutils literal notranslate"><span class="pre">ScoringAlgorithmResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ScoringAlgorithmResponse.description"><code class="docutils literal notranslate"><span class="pre">ScoringAlgorithmResponse.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ScoringAlgorithmResponse.id"><code class="docutils literal notranslate"><span class="pre">ScoringAlgorithmResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ScoringAlgorithmResponse.model_config"><code class="docutils literal notranslate"><span class="pre">ScoringAlgorithmResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ScoringAlgorithmResponse.name"><code class="docutils literal notranslate"><span class="pre">ScoringAlgorithmResponse.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ScoringAlgorithmResponse.version"><code class="docutils literal notranslate"><span class="pre">ScoringAlgorithmResponse.version</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.experiment_id"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.experiment_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.framework_config_id"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.framework_config_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.include_hierarchical_ranking"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.include_hierarchical_ranking</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.include_justifications"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.include_justifications</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.llm_model"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.llm_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.model_config"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.model_parameters"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.model_parameters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.prompt_template_id"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.prompt_template_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.scoring_algorithm_id"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.scoring_algorithm_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisRequest.text_content"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisRequest.text_content</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.analysis_id"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.analysis_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.api_cost"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.api_cost</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.calculated_metrics"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.calculated_metrics</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.dominant_wells"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.dominant_wells</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.duration_seconds"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.duration_seconds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.execution_time"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.execution_time</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.framework"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.framework</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.framework_fit_score"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.framework_fit_score</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.hierarchical_ranking"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.hierarchical_ranking</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.model"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.model_config"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.narrative_position"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.narrative_position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.raw_scores"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.raw_scores</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.text_content"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.text_content</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SingleTextAnalysisResponse.well_justifications"><code class="docutils literal notranslate"><span class="pre">SingleTextAnalysisResponse.well_justifications</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.SystemStats"><code class="docutils literal notranslate"><span class="pre">SystemStats</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.active_jobs"><code class="docutils literal notranslate"><span class="pre">SystemStats.active_jobs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.completed_tasks"><code class="docutils literal notranslate"><span class="pre">SystemStats.completed_tasks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.database_size_mb"><code class="docutils literal notranslate"><span class="pre">SystemStats.database_size_mb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.failed_jobs"><code class="docutils literal notranslate"><span class="pre">SystemStats.failed_jobs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.failed_tasks"><code class="docutils literal notranslate"><span class="pre">SystemStats.failed_tasks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.model_config"><code class="docutils literal notranslate"><span class="pre">SystemStats.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.system_health"><code class="docutils literal notranslate"><span class="pre">SystemStats.system_health</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.total_chunks"><code class="docutils literal notranslate"><span class="pre">SystemStats.total_chunks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.total_corpora"><code class="docutils literal notranslate"><span class="pre">SystemStats.total_corpora</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.total_documents"><code class="docutils literal notranslate"><span class="pre">SystemStats.total_documents</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.total_jobs"><code class="docutils literal notranslate"><span class="pre">SystemStats.total_jobs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.SystemStats.total_tasks"><code class="docutils literal notranslate"><span class="pre">SystemStats.total_tasks</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.TaskResponse"><code class="docutils literal notranslate"><span class="pre">TaskResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.api_cost"><code class="docutils literal notranslate"><span class="pre">TaskResponse.api_cost</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.attempts"><code class="docutils literal notranslate"><span class="pre">TaskResponse.attempts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.chunk_id"><code class="docutils literal notranslate"><span class="pre">TaskResponse.chunk_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.created_at"><code class="docutils literal notranslate"><span class="pre">TaskResponse.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.error_count"><code class="docutils literal notranslate"><span class="pre">TaskResponse.error_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.finished_at"><code class="docutils literal notranslate"><span class="pre">TaskResponse.finished_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.framework"><code class="docutils literal notranslate"><span class="pre">TaskResponse.framework</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.id"><code class="docutils literal notranslate"><span class="pre">TaskResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.job_id"><code class="docutils literal notranslate"><span class="pre">TaskResponse.job_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.last_error"><code class="docutils literal notranslate"><span class="pre">TaskResponse.last_error</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.max_attempts"><code class="docutils literal notranslate"><span class="pre">TaskResponse.max_attempts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.model"><code class="docutils literal notranslate"><span class="pre">TaskResponse.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.model_config"><code class="docutils literal notranslate"><span class="pre">TaskResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.result_data"><code class="docutils literal notranslate"><span class="pre">TaskResponse.result_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.run_number"><code class="docutils literal notranslate"><span class="pre">TaskResponse.run_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.started_at"><code class="docutils literal notranslate"><span class="pre">TaskResponse.started_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.status"><code class="docutils literal notranslate"><span class="pre">TaskResponse.status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskResponse.updated_at"><code class="docutils literal notranslate"><span class="pre">TaskResponse.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.TaskStatus"><code class="docutils literal notranslate"><span class="pre">TaskStatus</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskStatus.completed"><code class="docutils literal notranslate"><span class="pre">TaskStatus.completed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskStatus.failed"><code class="docutils literal notranslate"><span class="pre">TaskStatus.failed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskStatus.pending"><code class="docutils literal notranslate"><span class="pre">TaskStatus.pending</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskStatus.retrying"><code class="docutils literal notranslate"><span class="pre">TaskStatus.retrying</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TaskStatus.running"><code class="docutils literal notranslate"><span class="pre">TaskStatus.running</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.TokenRefresh"><code class="docutils literal notranslate"><span class="pre">TokenRefresh</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TokenRefresh.model_config"><code class="docutils literal notranslate"><span class="pre">TokenRefresh.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TokenRefresh.refresh_token"><code class="docutils literal notranslate"><span class="pre">TokenRefresh.refresh_token</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.TokenResponse"><code class="docutils literal notranslate"><span class="pre">TokenResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TokenResponse.access_token"><code class="docutils literal notranslate"><span class="pre">TokenResponse.access_token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TokenResponse.expires_in"><code class="docutils literal notranslate"><span class="pre">TokenResponse.expires_in</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TokenResponse.model_config"><code class="docutils literal notranslate"><span class="pre">TokenResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TokenResponse.refresh_token"><code class="docutils literal notranslate"><span class="pre">TokenResponse.refresh_token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TokenResponse.token_type"><code class="docutils literal notranslate"><span class="pre">TokenResponse.token_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.TokenResponse.user"><code class="docutils literal notranslate"><span class="pre">TokenResponse.user</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.UserCreate"><code class="docutils literal notranslate"><span class="pre">UserCreate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.email"><code class="docutils literal notranslate"><span class="pre">UserCreate.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.full_name"><code class="docutils literal notranslate"><span class="pre">UserCreate.full_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.model_config"><code class="docutils literal notranslate"><span class="pre">UserCreate.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.organization"><code class="docutils literal notranslate"><span class="pre">UserCreate.organization</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.password"><code class="docutils literal notranslate"><span class="pre">UserCreate.password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.role"><code class="docutils literal notranslate"><span class="pre">UserCreate.role</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.username"><code class="docutils literal notranslate"><span class="pre">UserCreate.username</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.validate_email_format"><code class="docutils literal notranslate"><span class="pre">UserCreate.validate_email_format()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserCreate.validate_username"><code class="docutils literal notranslate"><span class="pre">UserCreate.validate_username()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.UserLogin"><code class="docutils literal notranslate"><span class="pre">UserLogin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserLogin.model_config"><code class="docutils literal notranslate"><span class="pre">UserLogin.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserLogin.password"><code class="docutils literal notranslate"><span class="pre">UserLogin.password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserLogin.username"><code class="docutils literal notranslate"><span class="pre">UserLogin.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.UserResponse"><code class="docutils literal notranslate"><span class="pre">UserResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.created_at"><code class="docutils literal notranslate"><span class="pre">UserResponse.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.email"><code class="docutils literal notranslate"><span class="pre">UserResponse.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.full_name"><code class="docutils literal notranslate"><span class="pre">UserResponse.full_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.id"><code class="docutils literal notranslate"><span class="pre">UserResponse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.is_active"><code class="docutils literal notranslate"><span class="pre">UserResponse.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.is_verified"><code class="docutils literal notranslate"><span class="pre">UserResponse.is_verified</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.last_login"><code class="docutils literal notranslate"><span class="pre">UserResponse.last_login</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.model_config"><code class="docutils literal notranslate"><span class="pre">UserResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.organization"><code class="docutils literal notranslate"><span class="pre">UserResponse.organization</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.rate_limit_quota"><code class="docutils literal notranslate"><span class="pre">UserResponse.rate_limit_quota</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.role"><code class="docutils literal notranslate"><span class="pre">UserResponse.role</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserResponse.username"><code class="docutils literal notranslate"><span class="pre">UserResponse.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.UserRole"><code class="docutils literal notranslate"><span class="pre">UserRole</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserRole.admin"><code class="docutils literal notranslate"><span class="pre">UserRole.admin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserRole.user"><code class="docutils literal notranslate"><span class="pre">UserRole.user</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.UserUpdate"><code class="docutils literal notranslate"><span class="pre">UserUpdate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserUpdate.email"><code class="docutils literal notranslate"><span class="pre">UserUpdate.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserUpdate.full_name"><code class="docutils literal notranslate"><span class="pre">UserUpdate.full_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserUpdate.model_config"><code class="docutils literal notranslate"><span class="pre">UserUpdate.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserUpdate.organization"><code class="docutils literal notranslate"><span class="pre">UserUpdate.organization</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.UserUpdate.validate_email"><code class="docutils literal notranslate"><span class="pre">UserUpdate.validate_email()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.ValidationErrorResponse"><code class="docutils literal notranslate"><span class="pre">ValidationErrorResponse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ValidationErrorResponse.error_type"><code class="docutils literal notranslate"><span class="pre">ValidationErrorResponse.error_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ValidationErrorResponse.field_errors"><code class="docutils literal notranslate"><span class="pre">ValidationErrorResponse.field_errors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ValidationErrorResponse.line_number"><code class="docutils literal notranslate"><span class="pre">ValidationErrorResponse.line_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ValidationErrorResponse.model_config"><code class="docutils literal notranslate"><span class="pre">ValidationErrorResponse.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.ValidationErrorResponse.raw_content"><code class="docutils literal notranslate"><span class="pre">ValidationErrorResponse.raw_content</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.schemas.WellJustification"><code class="docutils literal notranslate"><span class="pre">WellJustification</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.WellJustification.confidence"><code class="docutils literal notranslate"><span class="pre">WellJustification.confidence</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.WellJustification.evidence_quotes"><code class="docutils literal notranslate"><span class="pre">WellJustification.evidence_quotes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.WellJustification.model_config"><code class="docutils literal notranslate"><span class="pre">WellJustification.model_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.WellJustification.reasoning"><code class="docutils literal notranslate"><span class="pre">WellJustification.reasoning</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.schemas.WellJustification.score"><code class="docutils literal notranslate"><span class="pre">WellJustification.score</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-api">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Discernus Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+analysis_id,text_id,framework,model,success,api_cost,duration_seconds,quality_score,narrative_position_x,narrative_position_y,timestamp,well_care,well_harm,well_fairness,well_cheating,well_loyalty,well_betrayal,well_authority,well_subversion,well_sanctity,well_degradation,well_liberty,well_oppression
+8abdbecf-5b90-490a-8031-39a3688facc0,text_0,moral_foundations_theory,unknown,True,0.0114,7.92,0.8,0.0,0.0,2025-06-21T04:07:56.751782,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3
+11eb9900-bb5c-4d0d-8900-836c84fb3961,text_1,moral_foundations_theory,unknown,True,0.0353,7.72,0.8,0.0,0.0,2025-06-21T04:07:56.762555,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3
+a9740af1-9116-4ac3-bf41-0ec0b1c73d5a,text_2,moral_foundations_theory,unknown,True,0.0112,5.99,0.8,0.0,0.0,2025-06-21T04:07:56.775914,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3
+68fd0f75-5017-4bef-b16b-cfc4c64d8ef3,text_3,moral_foundations_theory,unknown,True,0.0354,7.42,0.8,0.0,0.0,2025-06-21T04:07:56.786113,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3

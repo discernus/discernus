@@ -1,0 +1,590 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Narrative Gravity Model Epic 1: Corpus & Job Management Backend - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#narrative-gravity-model-epic-1-corpus-job-management-backend" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Narrative Gravity Model Epic 1: Corpus &amp; Job Management Backend
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="narrative-gravity-model-epic-1-corpus-job-management-backend">Narrative Gravity Model Epic 1: Corpus &amp; Job Management Backend</h1>
+<h1 id="personalwritingnarrativegravity">personal/writing/narrativegravity</h1>
+<h2 id="status-completed-january-2025">✅ STATUS: COMPLETED (January 2025)</h2>
+<p><strong>Epic 1 has been successfully implemented with full backend infrastructure, multi-LLM integration, and golden set corpus.</strong></p>
+<p><strong>Next Phase</strong>: Validation-First Development - See <code>VALIDATION_FIRST_DEVELOPMENT_STRATEGY.md</code> for current priorities.</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>Build the backend services that let the Project Founder ingest, validate, store, and orchestrate batch jobs on the universal "consequential narratives" corpus. All functionality is exposed via APIs that the Admin Interface (Epic 4) will call.</p>
+<p><strong>✅ IMPLEMENTATION STATUS:</strong>
+- Backend Infrastructure: Complete (Celery + Redis + PostgreSQL + FastAPI)
+- Multi-LLM Integration: Complete (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro)
+- Golden Set Corpus: Complete (17 curated texts)
+- Universal Multi-Run Dashboard: Complete with auto-detection
+- Framework Support: Complete (Civic Virtue, Political Spectrum, Moral Foundations)</p>
+<hr />
+<h2 id="data-format-schema">Data Format &amp; Schema</h2>
+<h3 id="1-universal-core-schema">1. Universal Core Schema</h3>
+<p>Every narrative—speech, op-ed, article, ad script, pamphlet, web page, social media post—must conform to this core document+chunk schema.  </p>
+<h4 id="documentlevel-fields-in-each-json-record-under-document">Document‐Level Fields (in each JSON record under <code>document</code>)</h4>
+<ul>
+<li><code>text_id</code> (string, required): Unique identifier  </li>
+<li><code>title</code> (string, required)  </li>
+<li><code>document_type</code> (string, required): one of <code>speech</code>, <code>op_ed</code>, <code>article</code>, <code>tv_ad_script</code>, <code>pamphlet</code>, <code>web_page</code>, <code>social_media</code>, <code>other</code>  </li>
+<li><code>author</code> (string, required)  </li>
+<li><code>date</code> (string, required, ISO 8601)  </li>
+<li><code>publication</code> (string, optional)  </li>
+<li><code>medium</code> (string, optional): e.g. <code>print</code>, <code>online</code>, <code>TV</code>, <code>radio</code>  </li>
+<li><code>campaign_name</code> (string, optional)  </li>
+<li><code>audience_size</code> (integer, optional)  </li>
+<li><code>source_url</code> (string, optional)  </li>
+<li><code>schema_version</code> (string, required): core schema version  </li>
+<li><code>metadata</code> (object, optional): arbitrary extra fields  </li>
+</ul>
+<h4 id="chunklevel-fields-each-json-record-extends-document-with-these">Chunk‐Level Fields (each JSON record extends <code>document</code> with these)</h4>
+<ul>
+<li><code>chunk_id</code> (integer, required): zero‐based index  </li>
+<li><code>total_chunks</code> (integer, required)  </li>
+<li><code>chunk_type</code> (string, required): <code>fixed</code>, <code>sectional</code>, or <code>semantic</code>  </li>
+<li><code>chunk_size</code> (integer, required): characters in this chunk  </li>
+<li><code>chunk_overlap</code> (integer, optional): chars overlapping previous chunk  </li>
+<li><code>document_position</code> (float, required): 0.0–1.0 normalized start  </li>
+<li><code>word_count</code> (integer, required)  </li>
+<li><code>unique_words</code> (integer, required)  </li>
+<li><code>word_density</code> (float, required): unique_words ÷ word_count  </li>
+<li><code>chunk_content</code> (string, required)  </li>
+<li><code>framework_data</code> (object, optional): extension fields per framework</li>
+</ul>
+<h3 id="2-frameworkspecific-extensions">2. Framework‐Specific Extensions</h3>
+<p>Frameworks may define additional fields in <code>framework_data</code> but do <strong>not</strong> alter core ingestion. Example extension schemas:<br />
+- <strong>Civic Virtue:</strong> definitions of gravity‐well weights<br />
+- <strong>Moral-Rhetorical Posture:</strong> dipole marker lists<br />
+- <strong>Political Spectrum:</strong> ideological lexicon mappings  </p>
+<h3 id="3-chunking-specification">3. Chunking Specification</h3>
+<ul>
+<li><strong>Fixed‐size:</strong> e.g. 5 000 chars + 10% overlap  </li>
+<li><strong>Sectional:</strong> split on headings/paragraphs (Markdown, HTML, LaTeX)  </li>
+<li><strong>Semantic:</strong> NLP‐driven (spaCy sentence clusters, recursive heuristics)<br />
+Tool must preserve semantic coherence and record chunk metadata.</li>
+</ul>
+<h3 id="4-schema-evolution">4. Schema Evolution</h3>
+<ul>
+<li>Store JSON Schema files (core + each extension) in repo with version tags  </li>
+<li>Include <code>schema_version</code> in records  </li>
+<li>Provide migration scripts (jq/Python) for upgrading old records  </li>
+<li>Maintain a small "golden set" of test records for regression checks</li>
+</ul>
+<hr />
+<h2 id="user-stories">User Stories</h2>
+<ol>
+<li><strong>JSONL Ingestion</strong>  </li>
+<li>As the Project Founder, I want to upload a newline-delimited JSON file so the system can ingest multiple document+chunk records at once.  </li>
+<li>
+<p>As the Project Founder, I want immediate validation feedback (schema errors, missing fields) so I can correct and re-upload.</p>
+</li>
+<li>
+<p><strong>Corpus Browsing &amp; Metadata</strong>  </p>
+</li>
+<li>As the Project Founder, I want to list all corpora (name, upload date, record count) so I can choose which to process.  </li>
+<li>
+<p>As the Project Founder, I want to view document-level metadata for each text so I can confirm my selections.</p>
+</li>
+<li>
+<p><strong>Job Queuing &amp; Parameters</strong>  </p>
+</li>
+<li>As the Project Founder, I want to select corpora or individual <code>text_id</code>s, choose frameworks, pick Hugging Face models, and set <code>run_count</code> so I can launch batch jobs.  </li>
+<li>
+<p>As the Project Founder, I want each job to have a unique Job ID capturing parameters for later auditing.</p>
+</li>
+<li>
+<p><strong>Resumable &amp; Fault‐Tolerant Processing</strong>  </p>
+</li>
+<li>As the Project Founder, I want jobs to resume from the last successful chunk if interrupted so I don't lose progress.  </li>
+<li>
+<p>As the Project Founder, I want failed tasks retried automatically up to a configurable limit so transient API errors don't require manual fixes.</p>
+</li>
+<li>
+<p><strong>Status Tracking &amp; History</strong>  </p>
+</li>
+<li>As the Project Founder, I want to query job status (<code>pending</code>, <code>running</code>, <code>completed</code>, <code>failed</code>) so I can monitor progress.  </li>
+<li>As the Project Founder, I want per-chunk status (e.g. "chunk 3 of 5 runs done") to diagnose bottlenecks.  </li>
+<li>As the Project Founder, I want a history of past jobs with timestamps and outcomes for audit and replication.</li>
+</ol>
+<hr />
+<h2 id="technical-requirements">Technical Requirements</h2>
+<h3 id="a-data-models-storage">A. Data Models &amp; Storage</h3>
+<ul>
+<li><strong>Corpus</strong>: <code>id</code>, <code>name</code>, <code>upload_timestamp</code>, <code>record_count</code>, <code>uploader_id</code>  </li>
+<li><strong>Document</strong>: <code>id</code>, <code>corpus_id</code>, <code>text_id</code>, <code>title</code>, <code>document_type</code>, <code>author</code>, <code>date</code>, <code>publication</code>, <code>medium</code>, <code>campaign_name</code>, <code>audience_size</code>, <code>source_url</code>, <code>schema_version</code>, <code>metadata JSON</code>  </li>
+<li><strong>Chunk</strong>: <code>id</code>, <code>document_id</code>, <code>chunk_id</code>, <code>total_chunks</code>, <code>chunk_type</code>, <code>chunk_size</code>, <code>chunk_overlap</code>, <code>document_position</code>, <code>word_count</code>, <code>unique_words</code>, <code>word_density</code>, <code>chunk_content</code>, <code>framework_data JSON</code>  </li>
+<li><strong>Job</strong>: <code>id</code>, <code>corpus_id</code>, <code>text_ids[]</code>, <code>frameworks[]</code>, <code>models[]</code>, <code>run_count</code>, <code>status</code>, <code>created_at</code>, <code>updated_at</code>  </li>
+<li><strong>Task</strong>: <code>id</code>, <code>job_id</code>, <code>chunk_id</code>, <code>framework</code>, <code>model</code>, <code>run_number</code>, <code>status</code>, <code>attempts</code>, <code>last_error</code>, <code>started_at</code>, <code>finished_at</code></li>
+</ul>
+<h3 id="b-jsonl-parsing-validation">B. JSONL Parsing &amp; Validation</h3>
+<ul>
+<li>Accept ingestion via <code>POST /api/corpora/upload</code> (multipart/form-data or direct JSONL)  </li>
+<li>Validate each line against the core JSON Schema; if a framework is selected, also validate against the extension schema  </li>
+<li>Return a structured error report with line numbers and schema violations  </li>
+</ul>
+<h3 id="c-queue-orchestration">C. Queue &amp; Orchestration</h3>
+<ul>
+<li>Use a durable task queue (e.g. Celery + Redis/RabbitMQ)  </li>
+<li>On job creation, enqueue one Task per <code>(chunk_id × framework × model × run_number)</code>  </li>
+<li>Task workers call the Hugging Face Inference API, store raw responses in a Results table  </li>
+</ul>
+<h3 id="d-resumability-retry-logic">D. Resumability &amp; Retry Logic</h3>
+<ul>
+<li>Persist task state to database on success/failure  </li>
+<li>Automatic retry on transient errors (HTTP 5xx, timeouts) with exponential backoff  </li>
+<li>Configurable max retries per task  </li>
+</ul>
+<h3 id="e-apis">E. APIs</h3>
+<ul>
+<li><strong>POST</strong> <code>/api/corpora/upload</code> → ingest JSONL corpus  </li>
+<li><strong>GET</strong>  <code>/api/corpora</code> → list corpora  </li>
+<li><strong>GET</strong>  <code>/api/corpora/{corpus_id}/documents</code> → list documents+metadata  </li>
+<li><strong>GET</strong>  <code>/api/corpora/{corpus_id}/chunks</code> → list chunk metadata  </li>
+<li><strong>POST</strong> <code>/api/jobs</code> → launch processing job  </li>
+<li><strong>GET</strong>  <code>/api/jobs</code> → list jobs  </li>
+<li><strong>GET</strong>  <code>/api/jobs/{job_id}</code> → job + task status  </li>
+</ul>
+<h3 id="f-validation-logging">F. Validation &amp; Logging</h3>
+<ul>
+<li>Centralized logging for ingestion, orchestration, and task execution  </li>
+<li>Structured logs capturing error codes, stack traces, and API error details  </li>
+<li>Summary metrics: total tasks, successes, failures, retries  </li>
+</ul>
+<h3 id="g-security-access-control">G. Security &amp; Access Control</h3>
+<ul>
+<li>Token‐based authentication for all endpoints  </li>
+<li>Role‐based checks: only the Project Founder (admin role) may upload corpora or start jobs  </li>
+<li>Input sanitization to prevent injection attacks  </li>
+</ul>
+<h3 id="h-tooling-for-corpus-json-generation">H. Tooling for Corpus JSON Generation</h3>
+<p>To ensure all narratives conform to the core+extension schema, provide automated tooling that:</p>
+<ul>
+<li><strong>Generates JSON Schema Skeletons</strong><br />
+  Use a schema‐generation tool to create draft JSON Schemas from example records, then refine with descriptions and <code>required</code> flags for each field[1].  </li>
+<li><strong>Creates JSON Lines Corpus Files</strong><br />
+  Implement a command‐line utility (e.g. Python script or Node.js CLI) that:  </li>
+<li>Reads source transcripts (CSV, Markdown, plain text) and front‐matter metadata  </li>
+<li>Validates and normalizes fields against the core JSON Schema  </li>
+<li>Applies the chunking algorithm (fixed, sectional, semantic) and computes chunk‐level metadata  </li>
+<li>Emits well‐formed JSON Lines files, one chunk record per line, for ingestion  </li>
+</ul>
+<h3 id="i-tooling-for-schema-migration-versioning">I. Tooling for Schema Migration &amp; Versioning</h3>
+<p>To gracefully evolve schemas and migrate existing corpora:</p>
+<ul>
+<li><strong>Versioned Schemas Repository</strong><br />
+  Maintain semantically versioned JSON Schema files in Git using a tool like <code>jsonschema-tools</code> to materialize each new version as a static file[4].  </li>
+<li><strong>Automated Migration Scripts</strong><br />
+  Provide migration scripts (e.g., <code>jq</code>, <code>fx</code>, or Python) that transform old records to the latest schema version when a <code>schema_version</code> mismatch is detected[2].  </li>
+<li><strong>Schema Version Check &amp; Upgrade</strong><br />
+  On ingestion, detect <code>schema_version</code>; if outdated, prompt or automatically run the appropriate migration pipeline to upgrade data before validation.  </li>
+<li><strong>Compatibility Strategies</strong><br />
+  Follow additive‐only changes for backward compatibility and deprecate fields rather than remove them; document migration paths in a central registry[3].  </li>
+</ul>
+<h3 id="j-testing-monitoring-requirements">J. Testing &amp; Monitoring Requirements</h3>
+<p>To ensure validation infrastructure is robust, observable, and ready for rigorous academic use
+* <strong>Golden-Set End-to-End Tests</strong>Maintain 5–10 fully annotated JSONL records ("golden set") and include CI tests that ingest → chunk → enqueue → process → export results to verify the entire pipeline works on known data.
+* <strong>Automated Validation Tests</strong> <a href="https://www.getambassador.io/blog/complete-roadmap-effective-api-testing">1</a>In CI, run schema-compliance checks, verify chunk counts match <strong>total_chunks</strong>, and assert job→task linkage integrity (every task corresponds to a chunk × model run).
+* <strong>Failure-Mode Definitions</strong> <a href="https://docs.mulesoft.com/mule-runtime/latest/batch-error-handling-faq">2</a>Define how the system behaves when a chunk errors repeatedly beyond retry limits (e.g., mark as "failed", notify admin, skip remaining runs) and include tests for each scenario.
+* <strong>Baseline Performance &amp; Cost Benchmarks</strong> <a href="https://www.getambassador.io/blog/complete-roadmap-effective-api-testing">1</a>On a small sample corpus, measure end-to-end latency and API call counts to establish performance baselines and cost per run, then assert against budget thresholds in CI.
+* <strong>Health Check Endpoint</strong> <a href="https://thinhdanggroup.github.io/health-check-api/">4</a>Implement and monitor <strong>/api/health</strong> that verifies connectivity to Redis, DB, and Hugging Face; include automated uptime alerts to ensure early detection of service degradation.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

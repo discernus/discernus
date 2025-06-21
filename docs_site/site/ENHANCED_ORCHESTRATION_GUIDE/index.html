@@ -1,0 +1,1395 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Enhanced End-to-End Orchestration Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#enhanced-end-to-end-orchestration-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Enhanced End-to-End Orchestration Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-pipeline-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Production Pipeline Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ Production Pipeline Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-orchestrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Orchestrator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-analysis-pipeline-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Analysis Pipeline Components
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-workflow-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Complete Workflow Execution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Complete Workflow Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-experiment-definition-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Experiment Definition Loading
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-component-validation-registration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Component Validation &amp; Registration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-real-experiment-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Real Experiment Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-enhanced-analysis-pipeline-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Enhanced Analysis Pipeline Execution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 4: Enhanced Analysis Pipeline Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-results-extraction-import-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Results Extraction ⚠️ Import Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-statistical-hypothesis-testing-import-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Statistical Hypothesis Testing ⚠️ Import Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-reliability-analysis-import-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Reliability Analysis ⚠️ Import Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-comprehensive-visualizations-import-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Comprehensive Visualizations ⚠️ Import Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-enhanced-html-report-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5: Enhanced HTML Report Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-academic-export-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6: Academic Export Generation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-output-organization-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 5: Output Organization &amp; Documentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Configuration &amp; Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Configuration &amp; Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-analysis-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Analysis Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orchestrator-command-line-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orchestrator Command Line Interface
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-current-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ Troubleshooting &amp; Current Limitations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Troubleshooting &amp; Current Limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-path-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import Path Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-fallback-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Fallback Behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-analysis-pipeline-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enhanced Analysis Pipeline Status
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graceful Degradation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demo-production-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Demo Production Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-pipeline-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Production Pipeline Outputs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Production Pipeline Outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#statistical-analysis-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistical Analysis Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reliability-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reliability Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualization-suite-8-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization Suite (8 Types)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-export-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Export Package
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-workflow-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎓 Academic Workflow Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎓 Academic Workflow Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#statistical-software-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistical Software Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publication-ready-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publication-Ready Outputs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-workflow-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Workflow Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-system-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Production System Verification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ Production System Verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actual-production-test-results-june-20-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actual Production Test Results (June 20, 2025)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-components-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Components Status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-production-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Key Production Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Key Production Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automated-end-to-end-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automated End-to-End Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-research-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Research Standards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-scalability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Scalability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Usage Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-production-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Production Experiment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-research-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Research Study
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-model-reliability-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Model Reliability Study
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-working-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Current Working Components:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pending-import-path-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Pending Import Path Fixes:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="enhanced-end-to-end-orchestration-guide">Enhanced End-to-End Orchestration Guide</h1>
+<p><strong>Status:</strong> ⚠️ <strong>CORE ARCHITECTURE WORKING - IMPORT ISSUES REMAIN</strong><br />
+<strong>Date:</strong> June 20, 2025<br />
+<strong>Version:</strong> 1.1.0<br />
+<strong>Production Pipeline:</strong> <code>comprehensive_experiment_orchestrator.py</code> → Enhanced Analysis Pipeline → Academic Exports</p>
+<p><strong>🎯 CURRENT STATUS:</strong> Framework integration and orchestrator infrastructure fully working. Import path technical debt prevents full enhanced analysis pipeline completion.</p>
+<h2 id="overview">🎯 Overview</h2>
+<p>The <strong>Enhanced End-to-End Orchestration</strong> system provides complete automated workflow orchestration from raw experiment definition to publication-ready academic outputs. The orchestrator automatically executes experiments using real LLM APIs, then seamlessly transitions into comprehensive analysis, statistical validation, visualization generation, and academic export creation - all in a single unified workflow.</p>
+<h2 id="production-pipeline-architecture">🏗️ Production Pipeline Architecture</h2>
+<h3 id="primary-orchestrator"><strong>Primary Orchestrator</strong></h3>
+<ul>
+<li><strong>File:</strong> <code>scripts/comprehensive_experiment_orchestrator.py</code></li>
+<li><strong>Class:</strong> <code>ExperimentOrchestrator</code></li>
+<li><strong>Purpose:</strong> Master controller for complete experiment lifecycle</li>
+</ul>
+<h3 id="enhanced-analysis-pipeline-components"><strong>Enhanced Analysis Pipeline Components</strong></h3>
+<p>The orchestrator automatically invokes these production components:</p>
+<ol>
+<li><strong>📊 <code>ExperimentResultsExtractor</code></strong> (<code>scripts/extract_experiment_results.py</code>)</li>
+<li>Extracts and structures raw experiment results</li>
+<li>Converts API outputs to analysis-ready DataFrames</li>
+<li>
+<p>Handles both production database and StatisticalLogger formats</p>
+</li>
+<li>
+<p><strong>🧪 <code>StatisticalHypothesisTester</code></strong> (<code>scripts/statistical_hypothesis_testing.py</code>)</p>
+</li>
+<li>Performs comprehensive hypothesis testing</li>
+<li>Tests discriminative validity, ideological agnosticism, ground truth alignment</li>
+<li>
+<p>Generates statistical summaries with effect sizes</p>
+</li>
+<li>
+<p><strong>🔍 <code>InterraterReliabilityAnalyzer</code></strong> (<code>scripts/interrater_reliability_analysis.py</code>)</p>
+</li>
+<li>Calculates inter-rater reliability metrics</li>
+<li>Performs consistency analysis across multiple runs/models</li>
+<li>
+<p>Handles single-rater descriptive analysis when appropriate</p>
+</li>
+<li>
+<p><strong>🎨 <code>VisualizationGenerator</code></strong> (<code>scripts/generate_comprehensive_visualizations.py</code>)</p>
+</li>
+<li>Generates 8 types of comprehensive visualizations</li>
+<li>Creates interactive dashboards and publication-quality graphics</li>
+<li>
+<p>Includes narrative gravity maps and statistical plots</p>
+</li>
+<li>
+<p><strong>🎓 Academic Export Generator</strong> (integrated in orchestrator)</p>
+</li>
+<li>Exports data in academic-standard formats (CSV, JSON)</li>
+<li>Generates metadata documentation and provenance records</li>
+<li>
+<p>Creates replication packages when requested</p>
+</li>
+<li>
+<p><strong>📄 Enhanced HTML Report Generator</strong> (integrated in orchestrator)</p>
+</li>
+<li>Creates comprehensive interactive HTML reports</li>
+<li>Embeds visualizations and statistical summaries</li>
+<li>Provides executive summaries and key findings</li>
+</ol>
+<h2 id="complete-workflow-execution">🚀 Complete Workflow Execution</h2>
+<h3 id="phase-1-experiment-definition-loading"><strong>Phase 1: Experiment Definition Loading</strong></h3>
+<pre><code class="language-python"># In ExperimentOrchestrator.load_experiment_definition()
+experiment = self.load_experiment_definition(experiment_file)
+self.experiment_context = self._create_experiment_context(experiment)
+</code></pre>
+<p><strong>Process:</strong>
+1. Load JSON experiment definition
+2. Validate academic research requirements
+3. Create <code>ExperimentContext</code> with hypotheses and success criteria
+4. Perform pre-flight component validation</p>
+<h3 id="phase-2-component-validation-registration"><strong>Phase 2: Component Validation &amp; Registration</strong></h3>
+<pre><code class="language-python"># In ExperimentOrchestrator.pre_flight_validation()
+is_valid, components = self.pre_flight_validation(experiment)
+if not is_valid and self.force_reregister:
+    self.auto_register_missing_components(missing_components)
+</code></pre>
+<p><strong>Process:</strong>
+1. Validate frameworks, prompt templates, models, corpus files
+2. Auto-register missing components if <code>--force-reregister</code> flag used
+3. Ensure database registration and filesystem availability</p>
+<h3 id="phase-3-real-experiment-execution"><strong>Phase 3: Real Experiment Execution</strong></h3>
+<pre><code class="language-python"># In ExperimentOrchestrator.execute_analysis_matrix()
+execution_results = self.execute_analysis_matrix(experiment, components)
+</code></pre>
+<p><strong>Process:</strong>
+1. Initialize <code>RealAnalysisService</code> for live LLM API calls
+2. Execute analysis matrix (multiple runs, models, corpus items)
+3. Track costs, timing, and success rates
+4. Generate context-aware outputs with experimental provenance</p>
+<h3 id="phase-4-enhanced-analysis-pipeline-execution"><strong>Phase 4: Enhanced Analysis Pipeline Execution</strong></h3>
+<pre><code class="language-python"># In ExperimentOrchestrator.execute_enhanced_analysis_pipeline()
+enhanced_results = self.execute_enhanced_analysis_pipeline(execution_summary, experiment)
+</code></pre>
+<p><strong>Automatic Pipeline Steps:</strong></p>
+<h4 id="step-1-results-extraction-import-issues"><strong>Step 1: Results Extraction</strong> ⚠️ <em>Import Issues</em></h4>
+<pre><code class="language-python"># Current (failing due to import paths):
+from extract_experiment_results import ExperimentResultsExtractor
+
+# Required fix (when import paths are resolved):
+from scripts.extract_experiment_results import ExperimentResultsExtractor
+extractor = ExperimentResultsExtractor()
+structured_results = extractor.extract_results(execution_results)
+</code></pre>
+<ul>
+<li>Converts raw API outputs to structured DataFrames</li>
+<li>Standardizes well scores and metadata</li>
+<li>Handles multiple framework types (IDITI, MFT, Civic Virtue)</li>
+</ul>
+<h4 id="step-2-statistical-hypothesis-testing-import-issues"><strong>Step 2: Statistical Hypothesis Testing</strong> ⚠️ <em>Import Issues</em></h4>
+<pre><code class="language-python"># Current (failing due to import paths):
+from statistical_hypothesis_testing import StatisticalHypothesisTester
+
+# Required fix (when import paths are resolved):
+from scripts.statistical_hypothesis_testing import StatisticalHypothesisTester
+tester = StatisticalHypothesisTester()
+statistical_results = tester.test_hypotheses(structured_results)
+</code></pre>
+<ul>
+<li>Tests H1: Discriminative Validity (wells distinguish between texts)</li>
+<li>Tests H2: Ideological Agnosticism (no systematic bias)</li>
+<li>Tests H3: Ground Truth Alignment (scores match expected patterns)</li>
+<li>Calculates descriptive statistics and effect sizes</li>
+</ul>
+<h4 id="step-3-reliability-analysis-import-issues"><strong>Step 3: Reliability Analysis</strong> ⚠️ <em>Import Issues</em></h4>
+<pre><code class="language-python"># Current (failing due to import paths):
+from interrater_reliability_analysis import InterraterReliabilityAnalyzer
+
+# Required fix (when import paths are resolved):
+from scripts.interrater_reliability_analysis import InterraterReliabilityAnalyzer
+reliability_analyzer = InterraterReliabilityAnalyzer()
+reliability_results = reliability_analyzer.analyze_reliability(structured_results)
+</code></pre>
+<ul>
+<li>Calculates inter-rater reliability for multi-model experiments</li>
+<li>Performs consistency analysis across replications</li>
+<li>Handles single-rater descriptive analysis appropriately</li>
+</ul>
+<h4 id="step-4-comprehensive-visualizations-import-issues"><strong>Step 4: Comprehensive Visualizations</strong> ⚠️ <em>Import Issues</em></h4>
+<pre><code class="language-python"># Current (failing due to import paths):
+from generate_comprehensive_visualizations import VisualizationGenerator
+
+# Required fix (when import paths are resolved):
+from scripts.generate_comprehensive_visualizations import VisualizationGenerator
+visualizer = VisualizationGenerator(output_dir=str(viz_output_dir))
+visualization_results = visualizer.generate_visualizations(
+    structured_results, statistical_results, reliability_results
+)
+</code></pre>
+<ul>
+<li><strong>8 Visualization Types Generated:</strong></li>
+<li><code>descriptive_analysis.png</code> - Statistical summaries</li>
+<li><code>hypothesis_testing_results.png</code> - H1/H2/H3 test outcomes</li>
+<li><code>reliability_analysis.png</code> - Inter-rater reliability metrics</li>
+<li><code>correlation_matrix.png</code> - Well correlation heatmap</li>
+<li><code>score_distributions.png</code> - Well score distributions</li>
+<li><code>narrative_gravity_map.png</code> - 2D narrative positioning</li>
+<li><code>well_scores_radar.png</code> - Radar chart analysis</li>
+<li><code>interactive_dashboard.html</code> - 4.5MB comprehensive dashboard</li>
+</ul>
+<h4 id="step-5-enhanced-html-report-generation"><strong>Step 5: Enhanced HTML Report Generation</strong></h4>
+<pre><code class="language-python">html_report_path = self._generate_comprehensive_html_report(
+    structured_results, statistical_results, reliability_results, 
+    visualization_results, output_dir
+)
+</code></pre>
+<ul>
+<li>Creates interactive HTML report with embedded analysis</li>
+<li>Includes executive summary and key findings</li>
+<li>Links to all generated visualizations and data files</li>
+</ul>
+<h4 id="step-6-academic-export-generation"><strong>Step 6: Academic Export Generation</strong></h4>
+<pre><code class="language-python">academic_results = self._generate_academic_exports(
+    structured_results, output_dir, experiment
+)
+</code></pre>
+<ul>
+<li>Exports <code>analysis_data.csv</code> for statistical software (R, SPSS, Stata)</li>
+<li>Generates <code>academic_report.json</code> with complete metadata</li>
+<li>Creates replication package when configured</li>
+</ul>
+<h3 id="phase-5-output-organization-documentation"><strong>Phase 5: Output Organization &amp; Documentation</strong></h3>
+<pre><code class="language-python"># Intelligent experiment output location detection
+if self._is_research_workspace_experiment(experiment_file):
+    # Research workspace experiments: results alongside experiment definition
+    output_dir = workspace_experiments_dir / f&quot;{experiment_name}_{timestamp}&quot; / 'enhanced_analysis'
+else:
+    # Standalone experiments: results in main experiments directory
+    output_dir = Path('experiments') / f&quot;{experiment_name}_{timestamp}&quot; / 'enhanced_analysis'
+
+# Transaction tracking always in main experiments directory
+checkpoint_dir = Path('experiments') / f&quot;{experiment_transaction_id}&quot;
+</code></pre>
+<p><strong>Generated Structure (Research Workspace Experiments):</strong></p>
+<pre><code>research_workspaces/[workspace_name]/experiments/
+├── [experiment_definition].yaml           # Original experiment definition
+├── [ExperimentName_YYYYMMDD_HHMMSS]/     # Results alongside definition
+│   └── enhanced_analysis/
+│       ├── README.md                      # Executive summary
+│       ├── pipeline_results.json          # Complete pipeline results
+│       ├── structured_results.json        # Extracted experiment data
+│       ├── statistical_results.json       # H1/H2/H3 testing results
+│       ├── reliability_results.json       # Inter-rater reliability
+│       ├── enhanced_analysis_report.html  # Interactive report
+│       ├── visualizations/               # (Generated when pipeline completes)
+│       │   ├── interactive_dashboard.html
+│       │   ├── descriptive_analysis.png
+│       │   └── [additional visualization files]
+│       └── academic_exports/             # (Generated when pipeline completes)
+│           ├── analysis_data.csv
+│           └── academic_report.json
+
+experiments/                              # Transaction tracking (separate)
+├── [ExperimentTransactionID]/
+│   └── checkpoint.json                   # Transaction state management
+</code></pre>
+<h2 id="configuration-control">🔧 Configuration &amp; Control</h2>
+<h3 id="enhanced-analysis-configuration"><strong>Enhanced Analysis Configuration</strong></h3>
+<p>In experiment JSON definitions:</p>
+<pre><code class="language-json">{
+  &quot;enhanced_analysis&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;generate_html_report&quot;: true,
+    &quot;generate_academic_exports&quot;: true,
+    &quot;configuration&quot;: {
+      &quot;statistical_testing&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;significance_level&quot;: 0.05,
+        &quot;tests&quot;: [&quot;descriptive_stats&quot;, &quot;correlation_analysis&quot;, &quot;hypothesis_testing&quot;]
+      },
+      &quot;reliability_analysis&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;methods&quot;: [&quot;consistency_measures&quot;, &quot;agreement_analysis&quot;]
+      },
+      &quot;visualizations&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;types&quot;: [&quot;scatter_plots&quot;, &quot;distribution_plots&quot;, &quot;correlation_matrix&quot;, 
+                 &quot;narrative_map&quot;, &quot;well_analysis&quot;],
+        &quot;interactive&quot;: true,
+        &quot;publication_ready&quot;: true
+      },
+      &quot;academic_integration&quot;: {
+        &quot;export_formats&quot;: [&quot;csv&quot;, &quot;json&quot;],
+        &quot;include_metadata&quot;: true,
+        &quot;generate_replication_package&quot;: false
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="orchestrator-command-line-interface"><strong>Orchestrator Command Line Interface</strong></h3>
+<pre><code class="language-bash"># Full end-to-end orchestration (with required PYTHONPATH)
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.yaml --force-reregister
+
+# Dry run (validation only)
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.yaml --dry-run
+
+# Verbose output
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.yaml --verbose
+</code></pre>
+<h2 id="troubleshooting-current-limitations">🛠️ <strong>Troubleshooting &amp; Current Limitations</strong></h2>
+<h3 id="import-path-issues"><strong>Import Path Issues</strong></h3>
+<p><strong>Problem:</strong> Import errors like <code>No module named 'src'</code> or <code>No module named 'scripts'</code></p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-bash"># Required: Set PYTHONPATH to include src directory
+export PYTHONPATH=src
+# Or run with inline PYTHONPATH
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py experiment.yaml
+</code></pre>
+<h3 id="database-fallback-behavior"><strong>Database Fallback Behavior</strong></h3>
+<p>When database components are unavailable, the orchestrator gracefully degrades:
+- ✅ <strong>Framework Integration:</strong> Still works (loads from YAML)
+- ✅ <strong>Experiment Execution:</strong> Continues with file-based storage
+- ⚠️ <strong>StatisticalLogger:</strong> Disabled but experiment proceeds
+- ⚠️ <strong>Enhanced Analysis:</strong> May fail on import issues</p>
+<h3 id="enhanced-analysis-pipeline-status"><strong>Enhanced Analysis Pipeline Status</strong></h3>
+<p><strong>Current Status:</strong> ⚠️ Import path technical debt prevents completion
+- ✅ <strong>Core Orchestrator:</strong> Working correctly
+- ✅ <strong>Framework Integration:</strong> YAML unified architecture working
+- ✅ <strong>LLM Connections:</strong> Real API connections operational
+- ❌ <strong>Analysis Pipeline:</strong> <code>PromptTemplateManager</code> import issues
+- ❌ <strong>Enhanced Analysis:</strong> <code>extract_experiment_results</code> import issues</p>
+<h3 id="graceful-degradation"><strong>Graceful Degradation</strong></h3>
+<p>The orchestrator implements fallback behavior:</p>
+<pre><code>INFO: ✅ Analysis service import successful
+❌ Analysis failed: PromptTemplateManager is required for proper analysis but could not be imported: No module named 'src'
+ERROR: ❌ Enhanced analysis pipeline failed: No module named 'scripts'
+</code></pre>
+<p>Results: Framework validation succeeds, basic experiment structure created, but full analysis requires import fixes.</p>
+<h3 id="demo-production-pipeline"><strong>Demo Production Pipeline</strong></h3>
+<pre><code class="language-bash"># Demonstrate architectural validation (current working functionality)
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py \
+    research_workspaces/june_2025_research_dev_workspace/experiments/mft_architecture_validation_test.yaml
+
+# Note: Enhanced analysis demo requires import path fixes
+# python3 scripts/demo_enhanced_orchestration.py  # Currently blocked by import issues
+</code></pre>
+<h2 id="production-pipeline-outputs">📊 Production Pipeline Outputs</h2>
+<h3 id="statistical-analysis-results"><strong>Statistical Analysis Results</strong></h3>
+<ul>
+<li><strong>Hypothesis Testing:</strong> H1 (Discriminative Validity), H2 (Ideological Agnosticism), H3 (Ground Truth Alignment)</li>
+<li><strong>Effect Sizes:</strong> Cohen's d, eta-squared for significant differences</li>
+<li><strong>Descriptive Statistics:</strong> Means, standard deviations, confidence intervals</li>
+<li><strong>Correlation Analysis:</strong> Inter-well correlations and factor structure</li>
+</ul>
+<h3 id="reliability-metrics"><strong>Reliability Metrics</strong></h3>
+<ul>
+<li><strong>Inter-Rater Reliability:</strong> When multiple models/runs available</li>
+<li><strong>Consistency Measures:</strong> Coefficient of variation, standard error</li>
+<li><strong>Agreement Analysis:</strong> Consensus patterns across raters</li>
+<li><strong>Quality Indicators:</strong> Framework fit scores and anomaly detection</li>
+</ul>
+<h3 id="visualization-suite-8-types"><strong>Visualization Suite (8 Types)</strong></h3>
+<ol>
+<li><strong>Descriptive Analysis:</strong> Box plots, histograms, summary statistics</li>
+<li><strong>Hypothesis Testing:</strong> Results visualization for H1/H2/H3</li>
+<li><strong>Reliability Analysis:</strong> Agreement plots and consistency metrics</li>
+<li><strong>Correlation Matrix:</strong> Heatmap of well intercorrelations  </li>
+<li><strong>Score Distributions:</strong> Well-specific distribution analysis</li>
+<li><strong>Narrative Gravity Map:</strong> 2D positioning of texts in narrative space</li>
+<li><strong>Well Scores Radar:</strong> Multi-dimensional well analysis</li>
+<li><strong>Interactive Dashboard:</strong> Complete analysis in single HTML file</li>
+</ol>
+<h3 id="academic-export-package"><strong>Academic Export Package</strong></h3>
+<ul>
+<li><strong>CSV Data Export:</strong> Clean, labeled data for statistical software</li>
+<li><strong>Metadata Documentation:</strong> Complete experimental provenance</li>
+<li><strong>Variable Codebook:</strong> Detailed description of all measures</li>
+<li><strong>Replication Package:</strong> Optional complete materials for reproduction</li>
+</ul>
+<h2 id="academic-workflow-integration">🎓 Academic Workflow Integration</h2>
+<h3 id="statistical-software-compatibility"><strong>Statistical Software Compatibility</strong></h3>
+<p>The <code>analysis_data.csv</code> export is designed for immediate use in:
+- <strong>R:</strong> Direct import with proper variable types
+- <strong>SPSS:</strong> Labeled variables with value labels
+- <strong>Stata:</strong> Compatible format with variable labels
+- <strong>Python/Pandas:</strong> Ready for analysis scripts</p>
+<h3 id="publication-ready-outputs"><strong>Publication-Ready Outputs</strong></h3>
+<ul>
+<li><strong>High-Resolution Graphics:</strong> PNG files at publication quality (300 DPI)</li>
+<li><strong>Interactive Visualizations:</strong> HTML files for online supplementary materials</li>
+<li><strong>Statistical Reporting:</strong> APA-style results tables and effect sizes</li>
+<li><strong>Complete Provenance:</strong> Full experimental methodology documentation</li>
+</ul>
+<h3 id="research-workflow-features"><strong>Research Workflow Features</strong></h3>
+<ul>
+<li><strong>Hypothesis-Aware Analysis:</strong> Results directly linked to research questions</li>
+<li><strong>Effect Size Reporting:</strong> Practical significance assessment</li>
+<li><strong>Confidence Intervals:</strong> Uncertainty quantification</li>
+<li><strong>Reproducible Research:</strong> Complete methodology and data documentation</li>
+</ul>
+<h2 id="production-system-verification">⚠️ Production System Verification</h2>
+<h3 id="actual-production-test-results-june-20-2025"><strong>Actual Production Test Results (June 20, 2025)</strong></h3>
+<pre><code>🎯 ARCHITECTURAL BREAKTHROUGH VALIDATED
+============================================================
+
+✅ Framework integration and orchestrator infrastructure working!
+⚠️ Enhanced analysis pipeline blocked by import path issues
+
+📁 Experiment directory: research_workspaces/june_2025_research_dev_workspace/experiments/
+📁 Enhanced analysis outputs: MFT_Architecture_Validation_Test_20250620_173007/enhanced_analysis/
+📁 Transaction tracking: experiments/MFT_Architecture_Validation_Test_v1.0.0_20250620_173002/
+
+📊 Analysis Summary:
+   • Total Analyses: 4 (framework architecture validated)
+   • Total Cost: $0.000 (import issues prevented real LLM calls)
+   • LLM Connections: ✅ OpenAI, Anthropic, Google AI operational
+   • Framework Loading: ✅ 12 wells loaded from MFT database
+   • Corpus Processing: ✅ 67,783 characters processed successfully
+   • Enhanced Pipeline: ❌ Import path issues prevent completion
+</code></pre>
+<h3 id="production-components-status"><strong>Production Components Status</strong></h3>
+<ul>
+<li>✅ <strong>ExperimentOrchestrator</strong> - Master workflow coordination WORKING</li>
+<li>✅ <strong>Framework Integration</strong> - YAML unified architecture WORKING  </li>
+<li>✅ <strong>LLM Connections</strong> - Real API connections operational</li>
+<li>✅ <strong>Asset Management</strong> - Content-addressable storage WORKING</li>
+<li>✅ <strong>Transaction Management</strong> - Checkpoint system WORKING</li>
+<li>⚠️ <strong>ExperimentResultsExtractor</strong> - Import path issues prevent loading</li>
+<li>⚠️ <strong>StatisticalHypothesisTester</strong> - Import path issues prevent loading</li>
+<li>⚠️ <strong>InterraterReliabilityAnalyzer</strong> - Import path issues prevent loading</li>
+<li>⚠️ <strong>VisualizationGenerator</strong> - Import path issues prevent loading</li>
+<li>⚠️ <strong>Academic Export System</strong> - Import path issues prevent completion</li>
+<li>⚠️ <strong>HTML Report Generator</strong> - Import path issues prevent completion</li>
+</ul>
+<h2 id="key-production-features">🎯 Key Production Features</h2>
+<h3 id="automated-end-to-end-execution"><strong>Automated End-to-End Execution</strong></h3>
+<ul>
+<li><strong>Single Command Operation:</strong> Complete workflow from definition to publication</li>
+<li><strong>Intelligent Error Handling:</strong> Graceful degradation with detailed error reporting</li>
+<li><strong>Cost Control Integration:</strong> Budget limits and per-analysis cost monitoring</li>
+<li><strong>Quality Assurance:</strong> Automatic validation and anomaly detection</li>
+</ul>
+<h3 id="academic-research-standards"><strong>Academic Research Standards</strong></h3>
+<ul>
+<li><strong>Hypothesis-Driven Analysis:</strong> Direct testing of research questions</li>
+<li><strong>Statistical Rigor:</strong> Proper hypothesis testing with effect size reporting</li>
+<li><strong>Reproducible Research:</strong> Complete methodology and data documentation</li>
+<li><strong>Publication Standards:</strong> APA-style reporting and high-quality graphics</li>
+</ul>
+<h3 id="production-scalability"><strong>Production Scalability</strong></h3>
+<ul>
+<li><strong>Multi-Model Support:</strong> Parallel execution across different LLM providers</li>
+<li><strong>Flexible Frameworks:</strong> Support for IDITI, MFT, Civic Virtue, and custom frameworks</li>
+<li><strong>Configurable Pipeline:</strong> Modular components can be enabled/disabled</li>
+<li><strong>Resource Management:</strong> Intelligent cost and time optimization</li>
+</ul>
+<h2 id="usage-examples">🚀 Usage Examples</h2>
+<h3 id="basic-production-experiment"><strong>Basic Production Experiment</strong></h3>
+<pre><code class="language-bash"># Execute complete workflow (with required PYTHONPATH)
+PYTHONPATH=src python3 scripts/production/comprehensive_experiment_orchestrator.py \
+    research_workspaces/my_workspace/experiments/my_research_study.yaml \
+    --force-reregister
+
+# Note: Currently validates framework architecture but enhanced analysis 
+# requires import path fixes to complete
+</code></pre>
+<h3 id="academic-research-study"><strong>Academic Research Study</strong></h3>
+<pre><code class="language-json">{
+  &quot;experiment_meta&quot;: {
+    &quot;name&quot;: &quot;Political_Narrative_Analysis_2025&quot;,
+    &quot;hypothesis&quot;: &quot;Liberal and conservative texts show distinct narrative patterns&quot;,
+    &quot;principal_investigator&quot;: &quot;Dr. Researcher&quot;,
+    &quot;institution&quot;: &quot;University&quot;,
+    &quot;publication_intent&quot;: true
+  },
+  &quot;enhanced_analysis&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;generate_academic_exports&quot;: true,
+    &quot;configuration&quot;: {
+      &quot;statistical_testing&quot;: {&quot;enabled&quot;: true, &quot;significance_level&quot;: 0.05},
+      &quot;academic_integration&quot;: {&quot;generate_replication_package&quot;: true}
+    }
+  }
+}
+</code></pre>
+<h3 id="multi-model-reliability-study"><strong>Multi-Model Reliability Study</strong></h3>
+<pre><code class="language-json">{
+  &quot;components&quot;: {
+    &quot;models&quot;: [
+      {&quot;id&quot;: &quot;gpt-4o&quot;, &quot;provider&quot;: &quot;openai&quot;},
+      {&quot;id&quot;: &quot;claude-3.5-sonnet&quot;, &quot;provider&quot;: &quot;anthropic&quot;},
+      {&quot;id&quot;: &quot;gemini-2.0-flash&quot;, &quot;provider&quot;: &quot;google_ai&quot;}
+    ]
+  },
+  &quot;execution&quot;: {
+    &quot;matrix&quot;: [
+      {&quot;run_id&quot;: &quot;replication_1&quot;, &quot;model&quot;: &quot;gpt-4o&quot;},
+      {&quot;run_id&quot;: &quot;replication_2&quot;, &quot;model&quot;: &quot;claude-3.5-sonnet&quot;},
+      {&quot;run_id&quot;: &quot;replication_3&quot;, &quot;model&quot;: &quot;gemini-2.0-flash&quot;}
+    ]
+  },
+  &quot;enhanced_analysis&quot;: {
+    &quot;configuration&quot;: {
+      &quot;reliability_analysis&quot;: {&quot;enabled&quot;: true, &quot;methods&quot;: [&quot;inter_rater_reliability&quot;]}
+    }
+  }
+}
+</code></pre>
+<h2 id="summary">📝 Summary</h2>
+<p>The <strong>Enhanced End-to-End Orchestration</strong> system has achieved a major architectural breakthrough in framework integration while maintaining compatibility with the complete academic research pipeline design. </p>
+<h3 id="current-working-components"><strong>✅ Current Working Components:</strong></h3>
+<ol>
+<li><strong>Framework-Aware Architecture</strong> - YAML unified system eliminates configuration mismatches</li>
+<li><strong>Real LLM API Connections</strong> - OpenAI, Anthropic, Google AI operational  </li>
+<li><strong>Intelligent Output Routing</strong> - Research workspace experiments get co-located results</li>
+<li><strong>Transaction Management</strong> - Robust checkpointing and state management</li>
+<li><strong>Asset Management</strong> - Content-addressable storage with integrity verification</li>
+<li><strong>Database Graceful Degradation</strong> - System works with or without database</li>
+</ol>
+<h3 id="pending-import-path-fixes"><strong>⚠️ Pending Import Path Fixes:</strong></h3>
+<ol>
+<li><strong>Enhanced Statistical Analysis</strong> - Blocked by <code>scripts.</code> import path issues</li>
+<li><strong>Inter-Rater Reliability Assessment</strong> - Import path technical debt</li>
+<li><strong>Publication-Quality Visualizations</strong> - Import path technical debt  </li>
+<li><strong>Academic Export Generation</strong> - Import path technical debt</li>
+<li><strong>Interactive Report Creation</strong> - Import path technical debt</li>
+</ol>
+<p><strong>The core orchestration infrastructure and framework integration is production-ready. The enhanced analysis pipeline awaits import path cleanup to achieve full end-to-end capability.</strong> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

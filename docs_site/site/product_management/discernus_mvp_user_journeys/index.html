@@ -1,0 +1,883 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Discernus MVP User Journeys - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#discernus-mvp-user-journeys" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Discernus MVP User Journeys
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#journey-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Journey Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#journey-1-dr-sarah-chen-validation-researcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      Journey 1: Dr. Sarah Chen - Validation Researcher
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Journey 1: Dr. Sarah Chen - Validation Researcher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-1-platform-discovery-and-initial-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: Platform Discovery and Initial Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-pilot-testing-and-academic-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Pilot Testing and Academic Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-collaborative-research-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: Collaborative Research Planning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-4-data-collection-and-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 4: Data Collection and Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-5-academic-documentation-and-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 5: Academic Documentation and Collaboration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-6-publication-and-community-building" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 6: Publication and Community Building
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#journey-2-independent-research-author-platform-developer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Journey 2: Independent Research Author - Platform Developer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Journey 2: Independent Research Author - Platform Developer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-1-expert-consultation-initiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: Expert Consultation Initiation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-dual-framework-validation-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Dual Framework Validation Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-expert-feedback-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: Expert Feedback Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-4-validation-execution-and-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 4: Validation Execution and Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-5-academic-documentation-and-publication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 5: Academic Documentation and Publication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-6-publication-and-platform-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 6: Publication and Platform Launch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#journey-3-framework-originators-expert-endorsement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Journey 3: Framework Originators - Expert Endorsement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Journey 3: Framework Originators - Expert Endorsement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dr-jonathan-haidt-moral-foundations-theory-expert" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dr. Jonathan Haidt - Moral Foundations Theory Expert
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-1-initial-assessment-and-skeptical-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: Initial Assessment and Skeptical Evaluation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-detailed-implementation-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Detailed Implementation Feedback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-validation-study-oversight" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: Validation Study Oversight
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-4-statistical-validation-and-academic-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 4: Statistical Validation and Academic Standards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-5-academic-endorsement-and-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 5: Academic Endorsement and Collaboration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-6-academic-integration-and-future-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 6: Academic Integration and Future Collaboration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dr-political-communication-researcher-political-framing-theory-expert" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dr. Political Communication Researcher - Political Framing Theory Expert
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-1-framework-integration-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: Framework Integration Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-theoretical-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Theoretical Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-methodological-approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: Methodological Approval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-4-frame-detection-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 4: Frame Detection Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-5-collaboration-agreement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 5: Collaboration Agreement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-6-community-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 6: Community Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-journey-success-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Journey Success Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-Journey Success Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-success-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Success Factors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Success Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation Success Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moral-foundations-theory-mft" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moral Foundations Theory (MFT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#political-framing-theory-pft" class="md-nav__link">
+    <span class="md-ellipsis">
+      Political Framing Theory (PFT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overall-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overall Platform
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="discernus-mvp-user-journeys">Discernus MVP User Journeys</h1>
+<p><strong>From Current State to Validated Academic Platform</strong></p>
+<p><em>Date: June 2025</em><br />
+<em>Status: Strategic User Journey Mapping</em><br />
+<em>Focus: MVP-Critical Personas and Dual Framework Validation Approach</em></p>
+<hr />
+<h2 id="journey-overview">Journey Overview</h2>
+<p>This document maps detailed user journeys for the three MVP-critical personas as they engage with Discernus during the validation phase. Each journey follows a 6-8 week timeline focused on establishing academic credibility through rigorous validation of both Moral Foundations Theory (MFT) and Political Framing Theory (PFT) implementations.</p>
+<p><strong>Strategic Focus</strong>: Validation of established frameworks from moral psychology and political communication rather than novel framework development<br />
+<strong>Primary Goal</strong>: Academic credibility and expert endorsement leading to dual framework publications<br />
+<strong>Success Criteria</strong>: Expert approval across both frameworks, statistical validation, community adoption in computational social science and political psychology</p>
+<hr />
+<h2 id="journey-1-dr-sarah-chen-validation-researcher">Journey 1: Dr. Sarah Chen - Validation Researcher</h2>
+<p><strong>From Conference Discovery to Collaborative Validation Study</strong></p>
+<p>Dr. Sarah Chen returns from the Computational Social Science Society conference where she heard whispers about a new platform for systematic framework analysis. As a tenure-track professor specializing in political communication, she needs methodologically rigorous tools that can withstand peer review. Her next six weeks will determine whether Discernus can support her research program.</p>
+<h3 id="week-1-platform-discovery-and-initial-assessment"><strong>Week 1: Platform Discovery and Initial Assessment</strong></h3>
+<p>Sarah opens the Discernus platform URL she scribbled at the conference. She's immediately drawn to the validation evidence prominently displayed:</p>
+<ul>
+<li>MFT implementation correlation with MFQ-30: r=0.83 (n=500)</li>
+<li>PFT frame detection accuracy: &gt;80% precision/recall on known exemplars</li>
+<li>Inter-LLM reliability: r=0.91 (GPT-4, Claude, Gemini) across both frameworks</li>
+<li>Expert consultation: "MFT reviewed and approved by Jonathan Haidt lab; PFT validated by political communication researchers"</li>
+</ul>
+<p>The rigorous dual-framework approach surprises her—this isn't another AI tool making inflated claims, but systematic academic methodology across both moral psychology and political communication.</p>
+<h3 id="week-2-pilot-testing-and-academic-integration"><strong>Week 2: Pilot Testing and Academic Integration</strong></h3>
+<p>Sarah trains her graduate student on both Discernus MFT and PFT analysis using their existing corpus of campaign speeches. The dual framework approach provides complementary insights—moral foundations reveal underlying values while political framing analysis captures strategic communication patterns. The learning curve is minimal—the interface is designed for researchers, not technologists.</p>
+<h3 id="week-3-collaborative-research-planning"><strong>Week 3: Collaborative Research Planning</strong></h3>
+<p>Sarah designs a systematic validation study comparing Discernus dual framework analysis with human expert coding. She develops IRB protocols for a study involving 100 political texts coded by both Discernus and expert human coders from both moral psychology and political communication backgrounds.</p>
+<h3 id="week-4-data-collection-and-analysis"><strong>Week 4: Data Collection and Analysis</strong></h3>
+<p>The validation data reveals that Discernus consistently outperforms human coders on consistency (lower variance) while maintaining equivalent accuracy across both frameworks. The human-computer correlation reaches r=0.82 for MFT and 85% agreement for PFT frame detection, exceeding her success thresholds for both frameworks.</p>
+<h3 id="week-5-academic-documentation-and-collaboration"><strong>Week 5: Academic Documentation and Collaboration</strong></h3>
+<p>Sarah writes the methodology section for her paper, describing Discernus dual framework validation in detail. She reaches out to the Discernus development team requesting collaboration on methodological papers for both moral psychology and political communication venues.</p>
+<h3 id="week-6-publication-and-community-building"><strong>Week 6: Publication and Community Building</strong></h3>
+<p>Sarah finalizes her comparative paper incorporating both MFT and PFT Discernus methodology. She develops curriculum materials teaching dual framework analysis using Discernus for next-generation computational social scientists, demonstrating how moral and framing perspectives provide complementary insights into political discourse.</p>
+<p><strong>Strategic Outcome</strong>: Sarah transforms from skeptical evaluator to validated adopter and academic advocate, providing crucial early academic credibility for Discernus platform adoption.</p>
+<hr />
+<h2 id="journey-2-independent-research-author-platform-developer">Journey 2: Independent Research Author - Platform Developer</h2>
+<p><strong>From Prototype to Validated Academic Infrastructure</strong></p>
+<p>The Independent Research Author faces a critical six-week period determining whether months of development work can achieve academic credibility. The goal: transform Discernus from research prototype to validated academic infrastructure worthy of publication and community adoption across both moral psychology and political communication.</p>
+<h3 id="week-1-expert-consultation-initiation"><strong>Week 1: Expert Consultation Initiation</strong></h3>
+<p>The researcher crafts detailed outreach to both Jonathan Haidt's lab and political framing theory researchers, approaching as academic collaboration rather than endorsement request. Complete MFT and PFT implementation documentation and preliminary validation results (MFT r=0.78 in pilot; PFT 78% frame detection accuracy) are prepared.</p>
+<h3 id="week-2-dual-framework-validation-infrastructure"><strong>Week 2: Dual Framework Validation Infrastructure</strong></h3>
+<p>The researcher designs systematic validation comparing Discernus MFT outputs with MFQ-30 responses (n=500 participants) and PFT outputs with expert-coded frame detection studies. Cross-LLM reliability testing reveals inter-LLM consistency (r=0.91 between GPT-4 and Claude across both frameworks).</p>
+<h3 id="week-3-expert-feedback-integration"><strong>Week 3: Expert Feedback Integration</strong></h3>
+<p>The Haidt lab provides detailed feedback: "Highly faithful to MFT theory" with methodological suggestions for enhanced lexical markers. Political communication researchers approve PFT implementation: "Accurate operationalization of both Entman and Lakoff frameworks." Both validation studies approved: "Design appropriate for academic publication."</p>
+<h3 id="week-4-validation-execution-and-analysis"><strong>Week 4: Validation Execution and Analysis</strong></h3>
+<p>Comprehensive statistical analysis reveals strong validation with MFT overall correlation r=0.83 (p&lt;0.001) and foundation-specific correlations ranging from r=0.78 to r=0.89. PFT validation shows 85% frame detection accuracy and successful arc clustering hypothesis testing for Lakoff framework.</p>
+<h3 id="week-5-academic-documentation-and-publication"><strong>Week 5: Academic Documentation and Publication</strong></h3>
+<p>With validation complete and expert approval across both frameworks, the researcher drafts dual academic papers: "Computational Validation of Moral Foundations Theory" with Jonathan Haidt as co-author, and "Systematic Political Framing Analysis: Computational Implementation of Entman-Lakoff Integration" with political communication researchers.</p>
+<h3 id="week-6-publication-and-platform-launch"><strong>Week 6: Publication and Platform Launch</strong></h3>
+<p>Discernus launches publicly with validated dual framework implementation, academic documentation prominent, expert endorsements clearly attributed across both moral psychology and political communication, and research-grade reliability standards for both frameworks.</p>
+<p><strong>Strategic Outcome</strong>: Transformation from research prototype to academically validated platform with expert endorsement and publication pathway established.</p>
+<hr />
+<h2 id="journey-3-framework-originators-expert-endorsement">Journey 3: Framework Originators - Expert Endorsement</h2>
+<p><strong>From Initial Skepticism to Academic Endorsement</strong></p>
+<h3 id="dr-jonathan-haidt-moral-foundations-theory-expert">Dr. Jonathan Haidt - Moral Foundations Theory Expert</h3>
+<p>Dr. Jonathan Haidt receives an email requesting consultation on computational implementation of Moral Foundations Theory. As the framework originator, he's seen numerous attempts to operationalize MFT computationally—most oversimplify or misrepresent the theory.</p>
+<h3 id="week-1-initial-assessment-and-skeptical-evaluation"><strong>Week 1: Initial Assessment and Skeptical Evaluation</strong></h3>
+<p>Haidt receives detailed documentation showing unusual sophistication: foundation-specific lexicons derived from validated MFT research, prompt templates that capture theoretical nuances, and scoring protocols that avoid common MFT misinterpretations.</p>
+<h3 id="week-2-detailed-implementation-feedback"><strong>Week 2: Detailed Implementation Feedback</strong></h3>
+<p>Haidt provides detailed feedback on each foundation implementation, from Care/Harm ("accurately capture care vs. harm distinction") to Sanctity/Degradation ("most challenging foundation operationalized well").</p>
+<h3 id="week-3-validation-study-oversight"><strong>Week 3: Validation Study Oversight</strong></h3>
+<p>After reviewing implementation refinements, Haidt provides final approval for validation study with formal endorsement for proceeding with full validation.</p>
+<h3 id="week-4-statistical-validation-and-academic-standards"><strong>Week 4: Statistical Validation and Academic Standards</strong></h3>
+<p>Haidt reviews final validation results showing foundation-specific correlations with MFQ-30 ranging from r=0.78 to r=0.89, all p&lt;0.001. Academic judgment: "Methodology suitable for top-tier journal publication."</p>
+<h3 id="week-5-academic-endorsement-and-collaboration"><strong>Week 5: Academic Endorsement and Collaboration</strong></h3>
+<p>Haidt provides formal academic endorsement and agrees to co-author methodology paper: "Computational Validation of Moral Foundations Theory."</p>
+<h3 id="week-6-academic-integration-and-future-collaboration"><strong>Week 6: Academic Integration and Future Collaboration</strong></h3>
+<p>Haidt establishes ongoing collaboration including quarterly consultation on Discernus MFT refinements and joint grant proposals for computational psychology research.</p>
+<h3 id="dr-political-communication-researcher-political-framing-theory-expert">Dr. Political Communication Researcher - Political Framing Theory Expert</h3>
+<p>Concurrently, leading political communication researchers receive similar outreach regarding the computational implementation of Political Framing Theory (Entman-Lakoff integration).</p>
+<h3 id="week-1-framework-integration-assessment"><strong>Week 1: Framework Integration Assessment</strong></h3>
+<p>Political communication experts review the sophisticated integration of Entman's four framing functions with Lakoff's family model theory, noting the novel arc clustering hypothesis testing approach.</p>
+<h3 id="week-2-theoretical-validation"><strong>Week 2: Theoretical Validation</strong></h3>
+<p>Experts provide feedback on both Lakoff framework implementation ("Arc clustering hypothesis provides innovative empirical test of family model coherence") and Entman framework ("Independent wells approach correctly preserves function independence").</p>
+<h3 id="week-3-methodological-approval"><strong>Week 3: Methodological Approval</strong></h3>
+<p>After reviewing the geometric clustering analysis methodology and frame detection protocols, experts approve the validation study design as "methodologically sound for testing both frameworks."</p>
+<h3 id="week-4-frame-detection-validation"><strong>Week 4: Frame Detection Validation</strong></h3>
+<p>Experts review validation results showing 85% frame detection accuracy and successful arc clustering hypothesis validation. Assessment: "First systematic computational validation of political framing theory integration."</p>
+<h3 id="week-5-collaboration-agreement"><strong>Week 5: Collaboration Agreement</strong></h3>
+<p>Political communication researchers agree to co-author methodology paper: "Systematic Political Framing Analysis: Computational Implementation of Entman-Lakoff Integration."</p>
+<h3 id="week-6-community-integration"><strong>Week 6: Community Integration</strong></h3>
+<p>Experts facilitate integration with political communication research community and establish ongoing consultation framework for PFT refinements.</p>
+<p><strong>Strategic Outcome</strong>: Both Haidt and political communication researchers transform from skeptical evaluators to academic collaborators and endorsers, providing crucial credibility across both moral psychology and political communication for Discernus academic adoption.</p>
+<hr />
+<h2 id="cross-journey-success-patterns">Cross-Journey Success Patterns</h2>
+<h3 id="common-success-factors"><strong>Common Success Factors</strong></h3>
+<ol>
+<li><strong>Academic Rigor</strong>: All journeys emphasize statistical validation and methodological thoroughness across both frameworks</li>
+<li><strong>Expert Collaboration</strong>: Genuine partnership rather than superficial endorsement with both moral psychology and political communication researchers</li>
+<li><strong>Systematic Evidence</strong>: Comprehensive validation evidence supporting academic claims for both MFT and PFT</li>
+<li><strong>Community Building</strong>: Academic network effects amplifying platform credibility across computational social science and political psychology</li>
+<li><strong>Complementary Insights</strong>: Dual framework approach provides richer analysis than either framework alone</li>
+</ol>
+<h3 id="validation-success-metrics"><strong>Validation Success Metrics</strong></h3>
+<h4 id="moral-foundations-theory-mft">Moral Foundations Theory (MFT)</h4>
+<ul>
+<li><strong>Statistical</strong>: r&gt;0.8 correlation with MFQ-30 across all foundations</li>
+<li><strong>Expert</strong>: Formal endorsement from Haidt lab</li>
+<li><strong>Cross-LLM Reliability</strong>: r&gt;0.91 between models</li>
+</ul>
+<h4 id="political-framing-theory-pft">Political Framing Theory (PFT)</h4>
+<ul>
+<li><strong>Frame Detection</strong>: &gt;80% precision/recall for both Lakoff and Entman frameworks</li>
+<li><strong>Arc Clustering</strong>: &gt;75% of texts following predicted family model patterns</li>
+<li><strong>Expert</strong>: Formal endorsement from political communication researchers</li>
+</ul>
+<h4 id="overall-platform">Overall Platform</h4>
+<ul>
+<li><strong>Academic</strong>: Publication-quality methodology and evidence for both frameworks</li>
+<li><strong>Community</strong>: Adoption by computational social science and political psychology researchers</li>
+<li><strong>Integration</strong>: Successful demonstration of complementary framework insights</li>
+</ul>
+<p><strong>Overall Strategic Outcome</strong>: Six-week coordinated journey establishing Discernus academic credibility through systematic dual framework validation, expert collaboration across disciplines, and community adoption—creating foundation for sustainable academic platform development with broader research community appeal.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

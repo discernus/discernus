@@ -1,0 +1,1168 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Priority 3: Academic Tool Integration Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#priority-3-academic-tool-integration-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Priority 3: Academic Tool Integration Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategic-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Strategic Alignment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Strategic Alignment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elenas-user-journey-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elena's User Journey Support
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-with-prior-priorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Prior Priorities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Technical Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Technical Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#module-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Module Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-tool-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLI Tool Suite
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Component Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Component Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-academic-data-exporter-data_exportpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Academic Data Exporter (data_export.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-analysis-template-generator-analysis_templatespy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Analysis Template Generator (analysis_templates.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-documentation-generator-documentationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Documentation Generator (documentation.py)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Usage Workflows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Usage Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elenas-week-3-statistical-analysis-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elena's Week 3: Statistical Analysis Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Elena&#39;s Week 3: Statistical Analysis Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-export-data-for-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Export Data for Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-generate-analysis-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Generate Analysis Templates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-execute-statistical-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Execute Statistical Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elenas-week-5-publication-preparation-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elena's Week 5: Publication Preparation Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Elena&#39;s Week 5: Publication Preparation Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-generate-methodology-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Generate Methodology Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-generate-results-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Generate Results Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-build-replication-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Build Replication Package
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Integration Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Integration Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-development-to-academic-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Development to Academic Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-framework-validation-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Framework Validation Study
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-tool-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 Academic Tool Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔗 Academic Tool Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-notebook-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jupyter Notebook Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r-script-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      R Script Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stata-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stata Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Quality Assurance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Quality Assurance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-export-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Export Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-template-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Template Quality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Standards
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-output-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Academic Output Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Academic Output Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generated-methodology-section-sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated Methodology Section (Sample)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generated-statistical-results-sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated Statistical Results (Sample)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-prior-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      📖 Integration with Prior Infrastructure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Integration with Prior Infrastructure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#priority-1-database-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 1 Database Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority-2-development-session-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 2 Development Session Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-priority-4-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Next Steps: Priority 4 Preparation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Implementation Notes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Implementation Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#development-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing and Validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Success Metrics
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="priority-3-academic-tool-integration-guide">Priority 3: Academic Tool Integration Guide</h1>
+<p><strong>Status</strong>: ✅ Complete<br />
+<strong>Implementation Date</strong>: January 6, 2025<br />
+<strong>Strategic Impact</strong>: Bridges systematic development infrastructure with academic publication requirements</p>
+<h2 id="overview">🎯 Overview</h2>
+<p>Priority 3 transforms the validation-first research platform into a publication-ready academic toolkit. Building on the systematic development infrastructure from Priorities 1 &amp; 2, this phase enables researchers to seamlessly transition from component development to academic analysis and publication.</p>
+<p><strong>Core Capabilities</strong>:
+- <strong>Data Export Pipeline</strong>: Academic-format data preparation (CSV, R, Stata, JSON)
+- <strong>AI-Generated Analysis Templates</strong>: Jupyter notebooks, R scripts, Stata integration<br />
+- <strong>Academic Documentation Generators</strong>: Methodology papers, replication packages</p>
+<h2 id="strategic-alignment">📊 Strategic Alignment</h2>
+<h3 id="elenas-user-journey-support">Elena's User Journey Support</h3>
+<p>Priority 3 specifically enables:
+- <strong>Week 3</strong>: Jupyter Notebook Statistical Analysis, Stata Integration, R Visualization Discovery
+- <strong>Week 5</strong>: Documentation/Replication package generation</p>
+<h3 id="integration-with-prior-priorities">Integration with Prior Priorities</h3>
+<ul>
+<li><strong>Priority 1 Foundation</strong>: Leverages component versioning and database infrastructure</li>
+<li><strong>Priority 2 Enhancement</strong>: Uses development sessions for methodology documentation</li>
+<li><strong>Priority 4 Preparation</strong>: Creates publication-ready datasets for human validation studies</li>
+</ul>
+<h2 id="technical-architecture">🔧 Technical Architecture</h2>
+<h3 id="module-structure">Module Structure</h3>
+<pre><code>src/narrative_gravity/academic/
+├── __init__.py              # Module exports and integration
+├── data_export.py           # Academic data export pipeline  
+├── analysis_templates.py    # Jupyter, R, Stata code generation
+└── documentation.py         # Methodology papers, statistical reports
+</code></pre>
+<h3 id="cli-tool-suite">CLI Tool Suite</h3>
+<pre><code>src/narrative_gravity/cli/
+├── export_academic_data.py         # Data export in academic formats
+├── generate_analysis_templates.py  # Analysis code generation
+└── generate_documentation.py       # Academic documentation generation
+</code></pre>
+<h2 id="component-documentation">📚 Component Documentation</h2>
+<h3 id="1-academic-data-exporter-data_exportpy">1. Academic Data Exporter (<code>data_export.py</code>)</h3>
+<p><strong>Purpose</strong>: Convert experimental data from PostgreSQL into publication-ready formats for statistical analysis in R, Stata, Python, and other academic tools.</p>
+<p><strong>Key Features</strong>:
+- <strong>Multi-format Export</strong>: CSV (universal), Feather (R-optimized), DTA (Stata), JSON (Python with metadata)
+- <strong>Academic Variable Naming</strong>: Standardized lowercase, underscore conventions
+- <strong>Data Dictionary Generation</strong>: Comprehensive variable documentation
+- <strong>Component Development Data</strong>: Export development sessions and quality metrics
+- <strong>Replication Package Builder</strong>: Complete ZIP packages with data, code, and documentation</p>
+<p><strong>Core Classes</strong>:
+- <code>AcademicDataExporter</code>: Main data export functionality
+- <code>ReplicationPackageBuilder</code>: Complete replication package assembly</p>
+<h3 id="2-analysis-template-generator-analysis_templatespy">2. Analysis Template Generator (<code>analysis_templates.py</code>)</h3>
+<p><strong>Purpose</strong>: Generate AI-powered analysis code for academic research in multiple languages with Cursor-assisted development.</p>
+<p><strong>Key Features</strong>:
+- <strong>Jupyter Notebook Templates</strong>: Interactive exploration with visualization
+- <strong>R Script Generation</strong>: Statistical modeling with mixed-effects analysis
+- <strong>Stata Integration</strong>: Publication-grade statistical analysis and LaTeX export
+- <strong>Academic Best Practices</strong>: Publication-ready code styling and documentation</p>
+<p><strong>Core Classes</strong>:
+- <code>JupyterTemplateGenerator</code>: Creates exploration and analysis notebooks
+- <code>RScriptGenerator</code>: Generates comprehensive R statistical analysis scripts
+- <code>StataIntegration</code>: Produces publication-ready Stata analysis code</p>
+<h3 id="3-documentation-generator-documentationpy">3. Documentation Generator (<code>documentation.py</code>)</h3>
+<p><strong>Purpose</strong>: Automated generation of methodology papers, statistical reports, and academic documentation from experimental data.</p>
+<p><strong>Key Features</strong>:
+- <strong>Methodology Paper Generation</strong>: Complete methodology sections from database
+- <strong>Statistical Report Formatting</strong>: APA-style results with publication formatting
+- <strong>Component Development Documentation</strong>: Systematic development process description
+- <strong>Academic Standard Compliance</strong>: Citation-ready documentation</p>
+<p><strong>Core Classes</strong>:
+- <code>MethodologyPaperGenerator</code>: Creates comprehensive methodology sections
+- <code>StatisticalReportFormatter</code>: Formats results for academic publication</p>
+<h2 id="usage-workflows">🚀 Usage Workflows</h2>
+<h3 id="elenas-week-3-statistical-analysis-workflow">Elena's Week 3: Statistical Analysis Workflow</h3>
+<h4 id="1-export-data-for-analysis">1. Export Data for Analysis</h4>
+<pre><code class="language-bash"># Export comprehensive experimental data
+python src/narrative_gravity/cli/export_academic_data.py \
+    --study-name week3_validation \
+    --format all \
+    --frameworks civic_virtue,political_spectrum
+</code></pre>
+<p><strong>Output</strong>: Multi-format dataset (CSV, Feather, Stata, JSON) with data dictionary</p>
+<h4 id="2-generate-analysis-templates">2. Generate Analysis Templates</h4>
+<pre><code class="language-bash"># Create analysis code in all languages
+python src/narrative_gravity/cli/generate_analysis_templates.py \
+    --study-name week3_validation \
+    --templates all
+</code></pre>
+<p><strong>Output</strong>: 
+- Jupyter notebook for exploration
+- R script for statistical modeling
+- Stata script for publication analysis</p>
+<h4 id="3-execute-statistical-analysis">3. Execute Statistical Analysis</h4>
+<p><strong>Jupyter Notebook Analysis</strong>:</p>
+<pre><code class="language-bash">jupyter lab notebooks/week3_validation_exploration.ipynb
+</code></pre>
+<p><strong>R Statistical Analysis</strong>:</p>
+<pre><code class="language-bash">Rscript r_scripts/week3_validation_analysis.R
+</code></pre>
+<p><strong>Stata Publication Analysis</strong>:</p>
+<pre><code class="language-stata">do &quot;stata_scripts/week3_validation_publication.do&quot;
+</code></pre>
+<h3 id="elenas-week-5-publication-preparation-workflow">Elena's Week 5: Publication Preparation Workflow</h3>
+<h4 id="1-generate-methodology-documentation">1. Generate Methodology Documentation</h4>
+<pre><code class="language-bash"># Create comprehensive methodology section
+python src/narrative_gravity/cli/generate_documentation.py \
+    --study-name week5_publication \
+    --doc-type methodology \
+    --include-development-process
+</code></pre>
+<p><strong>Output</strong>: Complete methodology section with component development process</p>
+<h4 id="2-generate-results-documentation">2. Generate Results Documentation</h4>
+<pre><code class="language-bash"># Format statistical results for publication
+python src/narrative_gravity/cli/generate_documentation.py \
+    --study-name week5_publication \
+    --doc-type results \
+    --results-file analysis_results.json
+</code></pre>
+<p><strong>Output</strong>: APA-formatted results section with statistical significance tests</p>
+<h4 id="3-build-replication-package">3. Build Replication Package</h4>
+<pre><code class="language-bash"># Create complete replication package
+python src/narrative_gravity/cli/export_academic_data.py \
+    --study-name week5_publication \
+    --replication-package \
+    --description &quot;Validation study for LLM narrative analysis&quot;
+</code></pre>
+<p><strong>Output</strong>: ZIP package with data, code, documentation, and replication guide</p>
+<h2 id="integration-examples">📋 Integration Examples</h2>
+<h3 id="component-development-to-academic-analysis">Component Development to Academic Analysis</h3>
+<p><strong>Scenario</strong>: Research team has developed new prompt templates using Priority 2 infrastructure and wants to analyze their performance academically.</p>
+<pre><code class="language-bash"># 1. Export component development data
+python src/narrative_gravity/cli/export_academic_data.py \
+    --study-name prompt_evolution_study \
+    --component-analysis \
+    --component-type prompt_template \
+    --include-development-sessions
+
+# 2. Generate analysis templates for component performance
+python src/narrative_gravity/cli/generate_analysis_templates.py \
+    --study-name prompt_evolution_study \
+    --templates jupyter,r
+
+# 3. Generate methodology documentation including development process
+python src/narrative_gravity/cli/generate_documentation.py \
+    --study-name prompt_evolution_study \
+    --doc-type methodology \
+    --include-development-process
+</code></pre>
+<h3 id="cross-framework-validation-study">Cross-Framework Validation Study</h3>
+<p><strong>Scenario</strong>: Comparative analysis of multiple moral frameworks for publication.</p>
+<pre><code class="language-bash"># 1. Export data for all frameworks
+python src/narrative_gravity/cli/export_academic_data.py \
+    --study-name framework_comparison \
+    --frameworks civic_virtue,political_spectrum,moral_foundations \
+    --start-date 2025-06-01 \
+    --end-date 2025-06-30 \
+    --format all
+
+# 2. Generate comprehensive analysis templates
+python src/narrative_gravity/cli/generate_analysis_templates.py \
+    --study-name framework_comparison \
+    --templates all \
+    --include-model-validation
+
+# 3. Generate complete documentation
+python src/narrative_gravity/cli/generate_documentation.py \
+    --study-name framework_comparison \
+    --doc-type all \
+    --publication-ready
+</code></pre>
+<h2 id="academic-tool-integration">🔗 Academic Tool Integration</h2>
+<h3 id="jupyter-notebook-features">Jupyter Notebook Features</h3>
+<ul>
+<li><strong>Interactive Exploration</strong>: Dataset overview, missing data analysis, descriptive statistics</li>
+<li><strong>Reliability Analysis</strong>: Framework performance comparison, model consistency assessment</li>
+<li><strong>Visualization</strong>: Publication-ready plots with seaborn and plotly</li>
+<li><strong>Statistical Modeling</strong>: Mixed-effects models, correlation analysis, effect size calculation</li>
+</ul>
+<h3 id="r-script-capabilities">R Script Capabilities</h3>
+<ul>
+<li><strong>Statistical Analysis</strong>: <code>lme4</code> mixed-effects modeling, <code>performance</code> model assessment</li>
+<li><strong>Data Manipulation</strong>: <code>tidyverse</code> data processing, <code>arrow</code> feather format support</li>
+<li><strong>Visualization</strong>: <code>ggplot2</code> publication-grade plots, <code>corrplot</code> correlation matrices</li>
+<li><strong>Academic Output</strong>: Automated statistical reporting, effect size calculation</li>
+</ul>
+<h3 id="stata-integration">Stata Integration</h3>
+<ul>
+<li><strong>Publication Analysis</strong>: Mixed-effects regression, ANOVA, model comparison</li>
+<li><strong>LaTeX Export</strong>: Automated table generation for manuscript inclusion</li>
+<li><strong>Statistical Testing</strong>: Framework effects, model performance, reliability analysis</li>
+<li><strong>Academic Standards</strong>: APA-style statistical reporting, publication-ready output</li>
+</ul>
+<h2 id="quality-assurance">📊 Quality Assurance</h2>
+<h3 id="data-export-validation">Data Export Validation</h3>
+<ul>
+<li><strong>Database Integration</strong>: Seamless connection to Priority 1 infrastructure</li>
+<li><strong>Variable Naming</strong>: Academic standard compliance (lowercase, underscores)</li>
+<li><strong>Missing Data Handling</strong>: Appropriate missing value coding</li>
+<li><strong>Metadata Preservation</strong>: Complete experimental provenance tracking</li>
+</ul>
+<h3 id="code-template-quality">Code Template Quality</h3>
+<ul>
+<li><strong>Academic Best Practices</strong>: Publication-ready styling and documentation</li>
+<li><strong>Statistical Rigor</strong>: Appropriate models, effect size calculation, significance testing</li>
+<li><strong>Reproducibility</strong>: Complete analysis pipelines with version tracking</li>
+<li><strong>Cross-Tool Compatibility</strong>: Consistent analysis across Python, R, and Stata</li>
+</ul>
+<h3 id="documentation-standards">Documentation Standards</h3>
+<ul>
+<li><strong>Methodology Completeness</strong>: All experimental details for replication</li>
+<li><strong>Statistical Formatting</strong>: APA-style results with proper significance reporting</li>
+<li><strong>Replication Guidance</strong>: Step-by-step instructions with troubleshooting</li>
+<li><strong>Academic Citation</strong>: Proper citation formats and version tracking</li>
+</ul>
+<h2 id="academic-output-examples">🎯 Academic Output Examples</h2>
+<h3 id="generated-methodology-section-sample">Generated Methodology Section (Sample)</h3>
+<pre><code class="language-markdown"># Methodology
+
+## Overview
+
+This study employs Large Language Models (LLMs) for systematic narrative analysis 
+using structured moral framework application. The methodology combines component-based 
+architecture, systematic prompt engineering, and statistical validation to achieve 
+reliable thematic assessment of political narratives.
+
+## Analytical Framework
+
+### Component-Based Architecture
+
+The analysis system consists of three integrated components:
+
+1. **Prompt Templates**: Structured instructions with explicit reasoning requirements
+2. **Moral Frameworks**: Theoretical structures through dipole-based architecture  
+3. **Weighting Methodologies**: Mathematical approaches for score integration
+
+[Generated from actual experimental data and component specifications]
+</code></pre>
+<h3 id="generated-statistical-results-sample">Generated Statistical Results (Sample)</h3>
+<pre><code class="language-markdown"># Results
+
+## Reliability Analysis
+
+The analysis achieved a mean coefficient of variation of 0.1547 (SD = 0.0892) 
+across all framework-text combinations.
+
+**Reliability Rate**: 78.4% of analyses achieved the target reliability threshold 
+(CV ≤ 0.20).
+
+## Framework Performance
+
+Mixed-effects analysis revealed a significant main effect of framework on 
+reliability (p = 0.0023), indicating that framework choice significantly 
+impacts analysis consistency.
+
+[Formatted in APA style from actual statistical analysis]
+</code></pre>
+<h2 id="integration-with-prior-infrastructure">📖 Integration with Prior Infrastructure</h2>
+<h3 id="priority-1-database-integration">Priority 1 Database Integration</h3>
+<ul>
+<li><strong>Component Versioning</strong>: Uses established component tracking for methodology documentation</li>
+<li><strong>Experimental Data</strong>: Leverages comprehensive experiment and run data</li>
+<li><strong>Statistical Metrics</strong>: Exports CV, ICC, and other reliability measures</li>
+</ul>
+<h3 id="priority-2-development-session-integration">Priority 2 Development Session Integration</h3>
+<ul>
+<li><strong>Development Process Documentation</strong>: Includes systematic development workflow in methodology</li>
+<li><strong>Quality Assessment</strong>: Uses component quality scores for academic validation</li>
+<li><strong>Session Tracking</strong>: Documents iterative improvement process for methodology papers</li>
+</ul>
+<h2 id="next-steps-priority-4-preparation">🚀 Next Steps: Priority 4 Preparation</h2>
+<p>Priority 3 creates the foundation for Priority 4 (Human Validation Studies) by:</p>
+<ul>
+<li><strong>Publication-Ready Datasets</strong>: Formatted data for human validation study design</li>
+<li><strong>Methodology Documentation</strong>: Complete experimental protocols for human study replication</li>
+<li><strong>Statistical Infrastructure</strong>: Analysis pipelines for comparing LLM vs. human performance</li>
+<li><strong>Replication Packages</strong>: Self-contained validation study materials</li>
+</ul>
+<h2 id="implementation-notes">📝 Implementation Notes</h2>
+<h3 id="development-approach">Development Approach</h3>
+<ul>
+<li><strong>Database-First</strong>: All functionality integrates with Priority 1 PostgreSQL infrastructure</li>
+<li><strong>Academic Standards</strong>: Code generation follows publication best practices</li>
+<li><strong>Multi-Tool Support</strong>: Equal emphasis on Python, R, and Stata workflows</li>
+<li><strong>Reproducibility Focus</strong>: Complete provenance tracking and version control</li>
+</ul>
+<h3 id="testing-and-validation">Testing and Validation</h3>
+<ul>
+<li><strong>Code Generation Testing</strong>: Template functionality verified across all supported languages</li>
+<li><strong>Data Export Validation</strong>: Multi-format export verified with academic data standards</li>
+<li><strong>Documentation Quality</strong>: Generated content reviewed for academic publication readiness</li>
+</ul>
+<h2 id="success-metrics">🎯 Success Metrics</h2>
+<p><strong>Quantitative Achievements</strong>:
+- ✅ 3 core academic modules implemented (1,200+ lines of code)
+- ✅ 3 CLI tools with comprehensive functionality
+- ✅ Multi-format data export (CSV, Feather, Stata, JSON)
+- ✅ 3-language analysis template generation (Python, R, Stata)
+- ✅ Complete replication package builder</p>
+<p><strong>Qualitative Achievements</strong>:
+- ✅ Elena's Week 3 &amp; Week 5 workflows fully supported
+- ✅ Seamless Priority 1 &amp; 2 integration maintained
+- ✅ Academic publication standards met across all outputs
+- ✅ Foundation prepared for Priority 4 human validation studies</p>
+<hr />
+<p><strong>Generated</strong>: January 6, 2025<br />
+<strong>Framework Version</strong>: Priority 3 Implementation<br />
+<strong>Integration Status</strong>: ✅ Complete - Ready for Priority 4 </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

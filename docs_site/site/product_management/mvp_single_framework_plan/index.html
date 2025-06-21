@@ -1,0 +1,1220 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Discernus Dual Framework MVP Implementation Plan - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#discernus-dual-framework-mvp-implementation-plan" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Discernus Dual Framework MVP Implementation Plan
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-moral-foundations-theory-and-political-framing-theory-as-mvp-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Moral Foundations Theory and Political Framing Theory as MVP Frameworks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Moral Foundations Theory and Political Framing Theory as MVP Frameworks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strategic-advantages-of-dual-framework-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Advantages of Dual Framework Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Strategic Advantages of Dual Framework Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moral-foundations-theory-mft" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moral Foundations Theory (MFT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#political-framing-theory-pft" class="md-nav__link">
+    <span class="md-ellipsis">
+      Political Framing Theory (PFT)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complementary-framework-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complementary Framework Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Advantages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Advantages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#moral-foundations-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moral Foundations Theory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#political-framing-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Political Framing Theory
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp-scope-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      MVP Scope Definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MVP Scope Definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-mvp-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core MVP Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core MVP Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-dual-framework-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Dual Framework Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-essential-technical-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Essential Technical Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-expert-consultation-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Expert Consultation Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-academic-publication-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Academic Publication Package
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-excluded-from-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's Excluded from MVP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-core-infrastructure-months-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Core Infrastructure (Months 1-2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-validation-infrastructure-months-3-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Validation Infrastructure (Months 3-4)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-expert-collaboration-months-5-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Expert Collaboration (Months 5-6)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-academic-publication-months-7-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Academic Publication (Months 7-8)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-study-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Study Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation Study Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-validation-studies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Validation Studies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Primary Validation Studies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mft-validation-mfq-correlation-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      MFT Validation: MFQ Correlation Study
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pft-validation-frame-detection-accuracy-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      PFT Validation: Frame Detection Accuracy Study
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secondary-validation-studies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secondary Validation Studies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dual-expert-validation-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dual Expert Validation Process
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-architecture-simplifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Architecture Simplifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Architecture Simplifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#llm-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risk-mitigation-for-dual-framework-mvp-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Risk Mitigation for Dual Framework MVP Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Risk Mitigation for Dual Framework MVP Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#technical-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Risks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics-for-dual-framework-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Metrics for Dual Framework MVP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Success Metrics for Dual Framework MVP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#technical-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Success
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Success
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#platform-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Success
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expansion-strategy-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expansion Strategy Post-MVP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expansion Strategy Post-MVP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-5-framework-integration-enhancement-months-9-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 5: Framework Integration Enhancement (Months 9-12)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-6-third-framework-addition-year-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 6: Third Framework Addition (Year 2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#long-term-vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Long-Term Vision
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="discernus-dual-framework-mvp-implementation-plan">Discernus Dual Framework MVP Implementation Plan</h1>
+<p><strong>Moral Foundations Theory and Political Framing Theory as Comprehensive Proof-of-Concept</strong></p>
+<p><em>Date: June 2025</em><br />
+<em>Status: Focused MVP Strategy</em><br />
+<em>Approach: Dual Framework End-to-End Validation</em></p>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This document outlines a comprehensive implementation strategy that demonstrates Discernus's core value proposition through systematic validation of two complementary established frameworks: Moral Foundations Theory (MFT) and Political Framing Theory (PFT). This approach provides robust proof-of-concept across both moral psychology and political communication while demonstrating the platform's capability for multi-framework integration.</p>
+<p><strong>Core Strategy</strong>: Prove the concept works excellently with two complementary frameworks that provide comprehensive discourse analysis capabilities<br />
+<strong>Primary Goal</strong>: End-to-end validation of Discernus approach using both Moral Foundations Theory and Political Framing Theory<br />
+<strong>Success Criteria</strong>: Academic publications across both moral psychology and political communication, expert endorsement from both research communities, community adoption across computational social science disciplines</p>
+<hr />
+<h2 id="why-moral-foundations-theory-and-political-framing-theory-as-mvp-frameworks">Why Moral Foundations Theory and Political Framing Theory as MVP Frameworks</h2>
+<h3 id="strategic-advantages-of-dual-framework-approach">Strategic Advantages of Dual Framework Approach</h3>
+<h4 id="moral-foundations-theory-mft">Moral Foundations Theory (MFT)</h4>
+<ol>
+<li><strong>Most Established</strong>: Extensive validation instruments (MFQ-30), large research community, clear expert leadership</li>
+<li><strong>Clear Operationalization</strong>: Well-defined constructs with validated lexicons and measurement approaches</li>
+<li><strong>Active Research Area</strong>: Ongoing academic interest ensures relevance and adoption potential</li>
+<li><strong>Expert Accessibility</strong>: Jonathan Haidt, Jesse Graham, and team have established collaboration patterns</li>
+<li><strong>Replication Opportunities</strong>: Abundant published studies for validation comparisons</li>
+</ol>
+<h4 id="political-framing-theory-pft">Political Framing Theory (PFT)</h4>
+<ol>
+<li><strong>Theoretical Innovation</strong>: Novel integration of Entman and Lakoff frameworks provides methodological contribution</li>
+<li><strong>Political Communication Relevance</strong>: High demand in political psychology and communication research</li>
+<li><strong>Complementary Analysis</strong>: Provides strategic communication perspective alongside moral psychology</li>
+<li><strong>Geometric Validation</strong>: Arc clustering hypothesis enables innovative empirical testing</li>
+<li><strong>Methodological Advancement</strong>: First systematic computational implementation of integrated framing theory</li>
+</ol>
+<h3 id="complementary-framework-benefits">Complementary Framework Benefits</h3>
+<ol>
+<li><strong>Comprehensive Analysis</strong>: Moral foundations (underlying values) + political framing (strategic communication)</li>
+<li><strong>Broader Academic Appeal</strong>: Attracts both moral psychology and political communication researchers</li>
+<li><strong>Methodological Validation</strong>: Demonstrates platform capability across different theoretical approaches</li>
+<li><strong>Comparative Insights</strong>: Enables research questions impossible with single framework</li>
+<li><strong>Community Building</strong>: Establishes Discernus across multiple research communities</li>
+</ol>
+<h3 id="technical-advantages">Technical Advantages</h3>
+<h4 id="moral-foundations-theory">Moral Foundations Theory</h4>
+<ol>
+<li><strong>Clear Dimensional Structure</strong>: Five foundations provide manageable complexity for initial implementation</li>
+<li><strong>Validated Instruments</strong>: MFQ provides gold standard for construct validation</li>
+<li><strong>Lexical Resources</strong>: Established vocabulary lists and linguistic indicators available</li>
+<li><strong>Behavioral Correlates</strong>: Known relationships with other measures for convergent/discriminant validity</li>
+<li><strong>Cross-Cultural Data</strong>: International validation studies provide robustness testing opportunities</li>
+</ol>
+<h4 id="political-framing-theory">Political Framing Theory</h4>
+<ol>
+<li><strong>Innovative Architecture</strong>: Dipole vs. independent wells comparison enables methodological research</li>
+<li><strong>Geometric Analysis</strong>: Arc clustering provides quantitative validation of theoretical predictions</li>
+<li><strong>Frame Detection</strong>: Clear success metrics through precision/recall on known exemplars</li>
+<li><strong>Strategic Analysis</strong>: Enables detection of audience-specific messaging patterns</li>
+<li><strong>Theory Testing</strong>: Empirical validation of cognitive linguistics predictions</li>
+</ol>
+<hr />
+<h2 id="mvp-scope-definition">MVP Scope Definition</h2>
+<h3 id="core-mvp-components">Core MVP Components</h3>
+<h4 id="1-dual-framework-implementation">1. Dual Framework Implementation</h4>
+<p><strong>Moral Foundations Theory (MFT) Framework</strong>
+- Five-foundation scoring system (Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation)
+- Validated lexical markers from established MFT research
+- Prompt templates based on MFQ methodology
+- Circular coordinate system for visualization (existing architecture)</p>
+<p><strong>Political Framing Theory (PFT) Framework</strong>
+- Entman four framing functions (problem definition, causal interpretation, moral evaluation, solution recommendation)
+- Lakoff family model analysis with arc clustering hypothesis testing
+- Independent wells architecture for function independence
+- Geometric clustering analysis for family model validation</p>
+<h4 id="2-essential-technical-infrastructure">2. Essential Technical Infrastructure</h4>
+<p><strong>Automated Analysis Pipeline</strong>
+- Single LLM provider integration (OpenAI GPT-4 as primary)
+- Batch processing for systematic analysis across both frameworks
+- Basic quality assurance and error handling
+- Database storage for results and provenance with dual framework support</p>
+<p><strong>Validation Infrastructure</strong>
+- MFT: MFQ correlation studies (construct validity)
+- PFT: Frame detection accuracy on known exemplars
+- Test-retest reliability assessment across both frameworks
+- Inter-rater agreement measurement
+- Statistical reporting and visualization for both frameworks</p>
+<h4 id="3-expert-consultation-integration">3. Expert Consultation Integration</h4>
+<p><strong>Dual Expert Collaboration</strong>
+- Haidt Lab: MFT framework implementation review and approval
+- Political Communication Researchers: PFT framework implementation review and approval
+- Validation study design consultation across both frameworks
+- Results interpretation and publication collaboration
+- Platform endorsement for academic credibility in both communities</p>
+<h4 id="4-academic-publication-package">4. Academic Publication Package</h4>
+<p><strong>Dual-Framework Methodology Papers</strong>
+- MFT Paper: "Computational Validation of Moral Foundations Theory"
+- PFT Paper: "Systematic Political Framing Analysis: Computational Implementation of Entman-Lakoff Integration"
+- Platform description and implementation details for both frameworks
+- Comparative analysis demonstrating complementary insights
+- Replication of classic findings using Discernus across both frameworks</p>
+<h3 id="whats-excluded-from-mvp">What's Excluded from MVP</h3>
+<ul>
+<li>Additional frameworks beyond MFT and PFT</li>
+<li>Complex experimental design infrastructure (initially)</li>
+<li>Advanced statistical modeling beyond validation requirements</li>
+<li>Cross-cultural validation (initially)</li>
+<li>Human-computer comparison studies (initially)</li>
+<li>Multi-LLM provider integration (initially)</li>
+</ul>
+<hr />
+<h2 id="implementation-plan">Implementation Plan</h2>
+<h3 id="phase-1-core-infrastructure-months-1-2">Phase 1: Core Infrastructure (Months 1-2)</h3>
+<p><strong>Objective</strong>: Get basic pipeline working end-to-end with both MFT and PFT frameworks</p>
+<p><strong>Month 1: Foundation</strong>
+- Fix current platform critical gaps (import errors, database sessions)
+- Implement single LLM provider integration (OpenAI)
+- Build unified framework configuration system supporting both MFT and PFT
+- Create batch processing capability for dual framework analysis</p>
+<p><strong>Month 2: Dual Framework Implementation</strong>
+- Import validated MFT lexicons and scoring rubrics
+- Build MFT-specific prompt templates
+- Implement PFT framework with Entman functions and Lakoff family models
+- Create PFT-specific prompt templates with arc clustering analysis
+- Implement basic visualization output for both frameworks</p>
+<p><strong>Success Criteria</strong>: 
+- Process 100 texts through complete MFT analysis pipeline
+- Process 100 texts through complete PFT analysis pipeline
+- Generate visualization outputs for both frameworks
+- Store results in database with provenance tracking</p>
+<h3 id="phase-2-validation-infrastructure-months-3-4">Phase 2: Validation Infrastructure (Months 3-4)</h3>
+<p><strong>Objective</strong>: Build validation capabilities for academic credibility across both frameworks</p>
+<p><strong>Month 3: Dual Framework Validation Framework</strong>
+- Implement MFQ correlation study infrastructure for MFT validation
+- Build frame detection accuracy testing infrastructure for PFT validation
+- Create statistical analysis and reporting tools for both frameworks
+- Develop test-retest reliability testing across both frameworks
+- Design validation data collection protocols for both MFT and PFT</p>
+<p><strong>Month 4: Initial Validation Studies</strong>
+- Execute MFQ correlation study (n=500+ participants) for MFT validation
+- Conduct frame detection accuracy study on known exemplars for PFT validation
+- Perform test-retest reliability assessment across both frameworks
+- Execute inter-rater agreement analysis for both frameworks
+- Generate preliminary validation results showing both frameworks working</p>
+<p><strong>Success Criteria</strong>:
+- MFT: Significant correlation with MFQ subscales (r &gt; 0.6)
+- PFT: Frame detection accuracy &gt;75% precision/recall
+- Test-retest reliability (r &gt; 0.8) for both frameworks
+- Inter-rater agreement (α &gt; 0.7) across both frameworks</p>
+<h3 id="phase-3-expert-collaboration-months-5-6">Phase 3: Expert Collaboration (Months 5-6)</h3>
+<p><strong>Objective</strong>: Secure expert endorsement and academic credibility across both research communities</p>
+<p><strong>Month 5: Dual Expert Engagement</strong>
+- Initial contact and collaboration proposal with Haidt lab for MFT validation
+- Initial contact and collaboration proposal with political communication researchers for PFT validation
+- Framework implementation review and feedback from both expert communities
+- Validation study design consultation across both frameworks
+- Platform demonstration and expert evaluation with both research communities</p>
+<p><strong>Month 6: Expert Integration</strong>
+- Implement expert feedback and recommendations for both frameworks
+- Conduct expert-supervised validation studies for both MFT and PFT
+- Secure expert approval and endorsement from both research communities
+- Prepare collaborative publication materials for both frameworks</p>
+<p><strong>Success Criteria</strong>:
+- Formal expert approval of MFT implementation from Haidt lab
+- Formal expert approval of PFT implementation from political communication researchers
+- Expert collaboration agreements for dual publication strategy
+- Expert endorsement of platform approach across both communities</p>
+<h3 id="phase-4-academic-publication-months-7-8">Phase 4: Academic Publication (Months 7-8)</h3>
+<p><strong>Objective</strong>: Publish validated dual-framework methodology across both research communities</p>
+<p><strong>Month 7: Dual Publication Preparation</strong>
+- Complete validation study analysis for both frameworks
+- Write MFT methodology paper with Haidt lab collaboration
+- Write PFT methodology paper with political communication researcher collaboration
+- Prepare replication package and open-source release for both frameworks
+- Create comprehensive platform documentation for community adoption</p>
+<p><strong>Month 8: Publication Submission and Launch</strong>
+- Submit MFT paper to moral psychology journal (e.g., Political Psychology)
+- Submit PFT paper to political communication journal (e.g., Political Communication)
+- Release platform publicly with documentation for both frameworks
+- Begin community engagement and adoption facilitation across both research communities
+- Demonstrate comparative analysis capabilities unique to dual framework approach</p>
+<p><strong>Success Criteria</strong>:
+- Both papers submitted to target journals in their respective fields
+- Platform publicly available with comprehensive documentation
+- Community interest and initial adoption across both research communities
+- Demonstrated value of dual framework comparative analysis approach</p>
+<hr />
+<h2 id="validation-study-design">Validation Study Design</h2>
+<h3 id="primary-validation-studies">Primary Validation Studies</h3>
+<h4 id="mft-validation-mfq-correlation-study">MFT Validation: MFQ Correlation Study</h4>
+<p><strong>Design</strong>: Participants complete both MFQ-30 and provide text samples for Discernus MFT analysis
+<strong>Sample Size</strong>: 500+ participants across diverse demographics
+<strong>Analysis</strong>: Correlation between MFQ subscale scores and Discernus MFT foundation scores
+<strong>Expected Results</strong>: Significant correlations (r &gt; 0.6) demonstrating construct validity</p>
+<h4 id="pft-validation-frame-detection-accuracy-study">PFT Validation: Frame Detection Accuracy Study</h4>
+<p><strong>Design</strong>: Expert-coded frame detection on known exemplars compared with Discernus PFT analysis
+<strong>Sample Size</strong>: 200+ texts with established frame annotations from political communication research
+<strong>Analysis</strong>: Precision/recall analysis for frame detection across both Entman functions and Lakoff family models
+<strong>Expected Results</strong>: &gt;75% precision/recall demonstrating accurate frame detection</p>
+<h3 id="secondary-validation-studies">Secondary Validation Studies</h3>
+<ol>
+<li><strong>Test-Retest Reliability</strong>: Same texts analyzed multiple times to assess consistency across both frameworks</li>
+<li><strong>Inter-Rater Agreement</strong>: Multiple human coders analyze subset for comparison with both MFT and PFT results</li>
+<li><strong>Known Groups Validation</strong>: Test on texts from groups with expected differences in both moral foundations and framing patterns</li>
+<li><strong>MFT Replication Study</strong>: Replicate classic MFT finding using Discernus</li>
+<li><strong>PFT Arc Clustering Validation</strong>: Test Lakoff family model predictions using geometric clustering analysis</li>
+</ol>
+<h3 id="dual-expert-validation-process">Dual Expert Validation Process</h3>
+<ol>
+<li><strong>Implementation Review</strong>: Expert evaluation of both framework operationalizations</li>
+<li><strong>Validation Design</strong>: Expert input on validation study methodology for both frameworks</li>
+<li><strong>Results Interpretation</strong>: Expert collaboration on findings analysis across both frameworks</li>
+<li><strong>Platform Endorsement</strong>: Expert approval for academic publication from both research communities</li>
+</ol>
+<hr />
+<h2 id="technical-architecture-simplifications">Technical Architecture Simplifications</h2>
+<h3 id="llm-integration">LLM Integration</h3>
+<p><strong>Single Provider Approach</strong>
+- OpenAI GPT-4 as primary LLM
+- Simple API integration without multi-provider complexity
+- Basic error handling and retry logic
+- Cost monitoring and rate limiting</p>
+<h3 id="database-schema">Database Schema</h3>
+<p><strong>Minimal Required Tables for Dual Framework Support</strong></p>
+<pre><code class="language-sql">-- Unified analysis table supporting both frameworks
+CREATE TABLE discourse_analyses (
+    id UUID PRIMARY KEY,
+    text_content TEXT NOT NULL,
+    framework_type VARCHAR NOT NULL, -- 'MFT' or 'PFT'
+
+    -- MFT specific fields
+    care_score DECIMAL(3,2),
+    fairness_score DECIMAL(3,2), 
+    loyalty_score DECIMAL(3,2),
+    authority_score DECIMAL(3,2),
+    sanctity_score DECIMAL(3,2),
+
+    -- PFT specific fields
+    problem_definition JSONB,
+    causal_interpretation JSONB,
+    moral_evaluation JSONB,
+    solution_recommendation JSONB,
+    family_model_classification VARCHAR,
+    arc_clustering_data JSONB,
+
+    -- Shared fields
+    narrative_position JSONB,
+    analysis_metadata JSONB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE validation_studies (
+    id UUID PRIMARY KEY,
+    study_type VARCHAR NOT NULL, -- 'MFT_correlation', 'PFT_frame_detection', etc.
+    framework_type VARCHAR NOT NULL,
+    participant_data JSONB,
+    discernus_results JSONB,
+    validation_results JSONB, -- correlations, precision/recall, etc.
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+</code></pre>
+<h3 id="visualization">Visualization</h3>
+<p><strong>Dual Framework Output</strong>
+- MFT: Basic radar chart with five moral foundation dimensions
+- PFT: Frame detection visualization showing Entman functions and Lakoff family model positioning
+- Combined narrative positioning visualization showing both moral and framing perspectives
+- Arc clustering visualization for Lakoff family model validation
+- Statistical summary tables for both frameworks
+- Export capabilities for academic use supporting both frameworks</p>
+<hr />
+<h2 id="risk-mitigation-for-dual-framework-mvp-approach">Risk Mitigation for Dual Framework MVP Approach</h2>
+<h3 id="technical-risks">Technical Risks</h3>
+<p><strong>Risk</strong>: Dual framework complexity proves too challenging
+<strong>Mitigation</strong>: Start with manual validation before full automation, iterative development, fall back to single framework if necessary</p>
+<p><strong>Risk</strong>: MFT or PFT implementation doesn't achieve adequate validity
+<strong>Mitigation</strong>: Early expert consultation for both frameworks, multiple validation approaches, pivot readiness</p>
+<p><strong>Risk</strong>: Framework integration challenges
+<strong>Mitigation</strong>: Design unified analysis pipeline with framework-specific modules, independent validation paths</p>
+<h3 id="academic-risks">Academic Risks</h3>
+<p><strong>Risk</strong>: Dual framework papers insufficient for publication
+<strong>Mitigation</strong>: Focus on methodological rigor for both frameworks, expert collaboration across both communities, demonstrate unique value of comparative analysis</p>
+<p><strong>Risk</strong>: Expert collaboration challenges across multiple communities
+<strong>Mitigation</strong>: Multiple expert contacts in both research areas, clear value propositions for each community, flexible collaboration terms</p>
+<p><strong>Risk</strong>: Comparative analysis methodology not accepted
+<strong>Mitigation</strong>: Validate frameworks independently first, then demonstrate added value of combined analysis</p>
+<h3 id="platform-risks">Platform Risks</h3>
+<p><strong>Risk</strong>: Technical infrastructure proves inadequate for dual framework support
+<strong>Mitigation</strong>: Address current gaps systematically, focus on core functionality first, use unified architecture</p>
+<hr />
+<h2 id="success-metrics-for-dual-framework-mvp">Success Metrics for Dual Framework MVP</h2>
+<h3 id="technical-success">Technical Success</h3>
+<ol>
+<li><strong>Pipeline Functionality</strong>: 100% success rate for both MFT and PFT analysis pipelines</li>
+<li><strong>MFT Validation Results</strong>: Significant correlations with MFQ (r &gt; 0.6)</li>
+<li><strong>PFT Validation Results</strong>: Frame detection accuracy &gt;75% precision/recall</li>
+<li><strong>Reliability Metrics</strong>: Test-retest reliability (r &gt; 0.8) for both frameworks</li>
+<li><strong>Expert Approval</strong>: Formal endorsement from both Haidt lab and political communication researchers</li>
+</ol>
+<h3 id="academic-success">Academic Success</h3>
+<ol>
+<li><strong>Dual Publications</strong>: Acceptance in both moral psychology and political communication journals</li>
+<li><strong>Expert Collaboration</strong>: Co-authorship or endorsement from experts in both framework areas</li>
+<li><strong>Community Interest</strong>: Platform adoption by researchers across both communities</li>
+<li><strong>Replication Success</strong>: Successful replication of established findings in both MFT and PFT</li>
+<li><strong>Comparative Analysis</strong>: Demonstration of unique insights from dual framework approach</li>
+</ol>
+<h3 id="platform-success">Platform Success</h3>
+<ol>
+<li><strong>Usability</strong>: Researchers can use both frameworks without extensive training</li>
+<li><strong>Reliability</strong>: Consistent results across multiple analyses for both frameworks</li>
+<li><strong>Documentation</strong>: Complete documentation enabling community adoption across both research areas</li>
+<li><strong>Framework Integration</strong>: Successful demonstration of complementary framework insights</li>
+<li><strong>Expansion Ready</strong>: Clear pathway to additional frameworks based on dual framework architecture</li>
+</ol>
+<hr />
+<h2 id="expansion-strategy-post-mvp">Expansion Strategy Post-MVP</h2>
+<h3 id="phase-5-framework-integration-enhancement-months-9-12">Phase 5: Framework Integration Enhancement (Months 9-12)</h3>
+<ul>
+<li>Advanced comparative analysis capabilities leveraging both MFT and PFT</li>
+<li>Cross-framework validation studies demonstrating unique insights</li>
+<li>Multi-text analysis with dual framework perspective</li>
+<li>Enhanced visualization showing framework interactions</li>
+</ul>
+<h3 id="phase-6-third-framework-addition-year-2">Phase 6: Third Framework Addition (Year 2)</h3>
+<ul>
+<li>Add Cultural Theory as third framework, building on dual framework architecture</li>
+<li>Implement advanced experimental design capabilities across all frameworks</li>
+<li>Build community contribution infrastructure</li>
+<li>Develop framework marketplace concept with proven dual framework foundation</li>
+</ul>
+<h3 id="long-term-vision">Long-Term Vision</h3>
+<ul>
+<li>Standard infrastructure for computational social science with validated multi-framework capability</li>
+<li>Community-contributed framework library building on successful dual framework model</li>
+<li>Integration with major research platforms across multiple disciplines</li>
+<li>Academic course adoption and training programs demonstrating comparative framework analysis</li>
+</ul>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p>This dual framework MVP approach establishes Discernus as comprehensive methodological infrastructure while maintaining academic rigor. By proving the concept works excellently with two complementary established frameworks, we create a robust foundation for expansion while generating immediate academic value and community adoption across multiple research communities.</p>
+<p>The dual-framework approach addresses the current platform gaps systematically while building credibility through expert collaboration and rigorous validation across both moral psychology and political communication. Success with both MFT and PFT provides comprehensive proof-of-concept for the broader vision while creating sustainable momentum for long-term platform development with broader academic appeal.</p>
+<p>The combination of moral foundations analysis (underlying values) and political framing analysis (strategic communication) provides researchers with unprecedented analytical depth, demonstrating Discernus's unique value proposition for computational discourse analysis.</p>
+<p><strong>Next Action</strong>: Begin Phase 1 implementation focusing on getting both MFT and PFT analysis pipelines working end-to-end with current platform infrastructure, leveraging the comprehensive framework development strategy already established for both frameworks. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

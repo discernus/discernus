@@ -21,36 +21,51 @@ from src.corpus.intelligent_ingestion import IntelligentIngestionService
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Intelligent Corpus Ingestion Service - Extract metadata from messy text files using LLM"
+        description="A CLI tool to intelligently ingest a directory of text files, using an LLM to extract structured metadata (e.g., author, date) and automatically register them in the corpus database.",
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog="""
+Example Usage:
+  # Process a directory and register documents with a 75% confidence threshold
+  python %(prog)s ./corpus/raw_sources/recent_us_presidents/ --confidence-threshold 75.0 --verbose
+
+  # Perform a dry run to see what the service would do without writing to the database
+  python %(prog)s ./corpus/raw_sources/other_texts/ --dry-run -v
+
+  # Process a directory and save the output to a specific location
+  python %(prog)s ./my_new_texts/ --output-dir ./ingestion_results/
+"""
     )
     
+    # Core arguments
     parser.add_argument(
         "directory",
-        help="Directory containing text files to ingest"
+        help="Path to the directory containing text files to ingest."
     )
     
-    parser.add_argument(
+    # Configuration arguments
+    config_group = parser.add_argument_group('Configuration', 'Fine-tune the ingestion process.')
+    config_group.add_argument(
         "--output-dir", "-o",
-        help="Output directory for results (default: tmp/intelligent_ingestion_TIMESTAMP)"
+        help="Directory to save detailed output logs. If not provided, a timestamped directory is created in 'tmp/'."
     )
-    
-    parser.add_argument(
+    config_group.add_argument(
         "--confidence-threshold", "-c",
         type=float,
         default=70.0,
-        help="Confidence threshold for automatic registration (default: 70.0)"
+        help="The minimum confidence score (0-100) required to automatically register a document. Default: 70.0."
     )
     
-    parser.add_argument(
+    # Execution control arguments
+    exec_group = parser.add_argument_group('Execution Control', 'Control how the script runs.')
+    exec_group.add_argument(
         "--dry-run", "-n",
         action="store_true",
-        help="Process files but don't register in corpus database"
+        help="Perform a 'dry run'. The script will process all files and show potential results but will NOT write to the database."
     )
-    
-    parser.add_argument(
+    exec_group.add_argument(
         "--verbose", "-v",
         action="store_true",
-        help="Verbose output"
+        help="Enable verbose output, showing detailed results for each file processed."
     )
     
     args = parser.parse_args()

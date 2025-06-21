@@ -1,0 +1,1130 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>LLM Validation Workbench Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#llm-validation-workbench-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM Validation Workbench Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chainlit-interface-for-user-story-11-multi-variable-llm-validation-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chainlit Interface for User Story 1.1: Multi-Variable LLM Validation Experiments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chainlit Interface for User Story 1.1: Multi-Variable LLM Validation Experiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Purpose &amp; Context
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-story-11-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 User Story 1.1 Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-step-validation-experimentation-cycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 15-Step Validation Experimentation Cycle
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 15-Step Validation Experimentation Cycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-experiment-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Experiment Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-execution-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Execution &amp; Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-deep-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Deep Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-evidence-synthesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Evidence Synthesis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface-access-launch" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Interface Access &amp; Launch
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Interface Access &amp; Launch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-launch-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Launch Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access URL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-workbench-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Validation Workbench Capabilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Validation Workbench Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-validation-experiment-designer" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 🧪 Validation Experiment Designer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-framework-comparison-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. ⚖️ Framework Comparison Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-batch-analysis-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 📊 Batch Analysis Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-academic-export-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 📄 Academic Export Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-framework-fit-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 🎯 Framework Fit Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-evidence-extraction-quality-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 🔍 Evidence Extraction &amp; Quality Assessment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critical-success-metrics-user-story-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Critical Success Metrics (User Story 1.1)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Critical Success Metrics (User Story 1.1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Targets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-implementation-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Implementation Status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critical-blockers-backend-development-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔴 Critical Blockers (Backend Development Required)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔴 Critical Blockers (Backend Development Required)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-api-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required API Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-schema-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Schema Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-engine-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Execution Engine Components
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-workflow-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Research Workflow Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💡 Research Workflow Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-framework-validation-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 1: Framework Validation Study
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-multi-text-validation-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 2: Multi-Text Validation Experiment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-cross-framework-correlation-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 3: Cross-Framework Correlation Study
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-validation-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎓 Academic Validation Benefits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎓 Academic Validation Benefits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#research-integrity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Integrity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publication-readiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publication Readiness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confidence-building" class="md-nav__link">
+    <span class="md-ellipsis">
+      Confidence Building
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Technical Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Technical Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chainlit-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chainlit Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend Features
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Preparation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      📈 Development Roadmap
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Development Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-backend-api-development-3-4-weeks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Backend API Development (3-4 weeks)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-advanced-validation-features-2-3-weeks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Advanced Validation Features (2-3 weeks)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-production-deployment-1-2-weeks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Production Deployment (1-2 weeks)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Resources &amp; Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Resources &amp; Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#technical-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical References
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Context
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="llm-validation-workbench-guide">LLM Validation Workbench Guide</h1>
+<h2 id="chainlit-interface-for-user-story-11-multi-variable-llm-validation-experiments">Chainlit Interface for User Story 1.1: Multi-Variable LLM Validation Experiments</h2>
+<h3 id="purpose-context">🎯 <strong>Purpose &amp; Context</strong></h3>
+<p>The <strong>LLM Validation Workbench</strong> serves as the primary research interface for <strong>User Story 1.1: Multi-Variable LLM Validation Experiments</strong>. This sophisticated chainlit-based interface enables systematic validation experiments designed to build academic confidence in the LLM-based approach to political discourse analysis.</p>
+<h3 id="user-story-11-requirements">📋 <strong>User Story 1.1 Requirements</strong></h3>
+<blockquote>
+<p><strong>As an</strong> independent research author, <strong>I want</strong> to systematically construct experiments with multiple variables (texts + metadata, framework variants, prompt templates, LLM configurations, scoring methodologies), <strong>so that</strong> I can build confidence in the LLM-based approach through comprehensive validation evidence.</p>
+</blockquote>
+<h3 id="15-step-validation-experimentation-cycle">🧪 <strong>15-Step Validation Experimentation Cycle</strong></h3>
+<p>The workbench supports the comprehensive validation process:</p>
+<h4 id="phase-1-experiment-design"><strong>Phase 1: Experiment Design</strong></h4>
+<ol>
+<li><strong>Text Corpus Assembly</strong> - Upload and organize multiple texts with metadata</li>
+<li><strong>Framework Variant Configuration</strong> - Test different weighting configurations  </li>
+<li><strong>Prompt Template Selection</strong> - Compare analysis prompt approaches</li>
+<li><strong>LLM Configuration Setup</strong> - Multi-model validation parameters</li>
+</ol>
+<h4 id="phase-2-execution-monitoring"><strong>Phase 2: Execution &amp; Monitoring</strong></h4>
+<ol>
+<li><strong>Batch Processing Initiation</strong> - Systematically analyze text collections</li>
+<li><strong>Framework Fit Assessment</strong> - Automatic quality gates and appropriateness detection</li>
+<li><strong>Real-time Progress Monitoring</strong> - Track multi-LLM validation runs</li>
+<li><strong>Cost &amp; Resource Tracking</strong> - Monitor API usage and computational expenses</li>
+</ol>
+<h4 id="phase-3-deep-analysis"><strong>Phase 3: Deep Analysis</strong></h4>
+<ol>
+<li><strong>Cross-LLM Consensus Analysis</strong> - Target &gt;0.90 correlation measurement</li>
+<li><strong>Evidence Passage Extraction</strong> - Supporting quote identification and quality assessment</li>
+<li><strong>Metadata Pattern Analysis</strong> - Historical trends and speaker difference detection</li>
+<li><strong>Statistical Validation</strong> - Significance testing and confidence intervals</li>
+</ol>
+<h4 id="phase-4-evidence-synthesis"><strong>Phase 4: Evidence Synthesis</strong></h4>
+<ol>
+<li><strong>Academic Export Generation</strong> - R, Python, CSV formats for publication</li>
+<li><strong>Methodology Documentation</strong> - Complete replication package creation</li>
+<li><strong>Confidence Assessment Reporting</strong> - Academic-grade validation summaries</li>
+</ol>
+<h3 id="interface-access-launch">🚀 <strong>Interface Access &amp; Launch</strong></h3>
+<h4 id="primary-launch-methods"><strong>Primary Launch Methods</strong></h4>
+<pre><code class="language-bash"># Dedicated launcher with environment checks
+python launch_chainlit.py
+
+# Integrated platform option  
+python launch.py --chainlit-only
+
+# Direct chainlit for development
+chainlit run chainlit_chat.py --host 0.0.0.0 --port 8002
+</code></pre>
+<h4 id="access-url"><strong>Access URL</strong></h4>
+<ul>
+<li><strong>Primary Interface</strong>: http://localhost:8002</li>
+<li><strong>Port Configuration</strong>: 8002 (avoids conflicts with API:8000, Streamlit:8501, Web:5001)</li>
+</ul>
+<h3 id="validation-workbench-capabilities">🔧 <strong>Validation Workbench Capabilities</strong></h3>
+<h4 id="1-validation-experiment-designer"><strong>1. 🧪 Validation Experiment Designer</strong></h4>
+<ul>
+<li><strong>Multi-Variable Configuration</strong>: Text corpus, framework variants, LLM selection</li>
+<li><strong>Quality Gate Setup</strong>: Framework fit thresholds, statistical significance levels</li>
+<li><strong>Experimental Parameters</strong>: Batch sizes, timeout settings, cost limits</li>
+<li><strong>Replication Settings</strong>: Number of runs per model for statistical validation</li>
+</ul>
+<h4 id="2-framework-comparison-analysis"><strong>2. ⚖️ Framework Comparison Analysis</strong></h4>
+<ul>
+<li><strong>Single Text, Multiple Frameworks</strong>: Understand dimensional differences</li>
+<li><strong>Framework Sensitivity Testing</strong>: Response to different content types</li>
+<li><strong>Cross-Framework Correlation Studies</strong>: Measure output relationships across frameworks</li>
+<li><strong>Comparative Validation</strong>: Multi-framework consensus analysis</li>
+</ul>
+<h4 id="3-batch-analysis-configuration"><strong>3. 📊 Batch Analysis Configuration</strong></h4>
+<ul>
+<li><strong>Corpus Processing</strong>: Systematic analysis across document collections</li>
+<li><strong>Multi-LLM Validation</strong>: Parallel processing with consensus measurement</li>
+<li><strong>Progress Monitoring</strong>: Real-time updates with quality control</li>
+<li><strong>Results Compilation</strong>: Statistical analysis and evidence collection</li>
+</ul>
+<h4 id="4-academic-export-tools"><strong>4. 📄 Academic Export Tools</strong></h4>
+<ul>
+<li><strong>Statistical Software Formats</strong>: R packages, Python/Pandas, SPSS/Stata exports</li>
+<li><strong>Publication-Ready Outputs</strong>: Methodology documentation, evidence tables</li>
+<li><strong>Replication Packages</strong>: Complete datasets with analysis scripts</li>
+<li><strong>Academic Validation</strong>: Inter-rater reliability, cross-model consensus metrics</li>
+</ul>
+<h4 id="5-framework-fit-assessment"><strong>5. 🎯 Framework Fit Assessment</strong></h4>
+<ul>
+<li><strong>Automatic Quality Gates</strong>: 0.0-1.0 fit scoring with confidence metrics</li>
+<li><strong>Content Appropriateness</strong>: Genre, theme, and context evaluation</li>
+<li><strong>Alternative Suggestions</strong>: Framework recommendations for poor-fit cases</li>
+<li><strong>Quality Control Integration</strong>: Prevents inappropriate analyses</li>
+</ul>
+<h4 id="6-evidence-extraction-quality-assessment"><strong>6. 🔍 Evidence Extraction &amp; Quality Assessment</strong></h4>
+<ul>
+<li><strong>Supporting Passage Analysis</strong>: High-score passage identification</li>
+<li><strong>Cross-LLM Evidence Consensus</strong>: Agreement measurement across models</li>
+<li><strong>Quality Metrics</strong>: Relevance scoring and coherence assessment</li>
+<li><strong>Academic Citation Standards</strong>: Publication-suitable evidence extraction</li>
+</ul>
+<h3 id="critical-success-metrics-user-story-11">📊 <strong>Critical Success Metrics (User Story 1.1)</strong></h3>
+<h4 id="validation-targets"><strong>Validation Targets</strong></h4>
+<ul>
+<li>✅ <strong>Multi-variable experiment construction</strong> working end-to-end</li>
+<li>✅ <strong>Framework fit assessment</strong> preventing inappropriate analyses</li>
+<li>🎯 <strong>Cross-LLM consensus analysis</strong> achieving &gt;0.90 correlation targets</li>
+<li>🎯 <strong>Evidence passage extraction</strong> providing coherent supporting quotes</li>
+<li>🎯 <strong>Metadata pattern analysis</strong> detecting historical/speaker trends</li>
+<li>🎯 <strong>Academic export formats</strong> generating publication-ready datasets</li>
+<li>🎯 <strong>Statistical confidence</strong> enabling academic paper methodology claims</li>
+</ul>
+<h4 id="current-implementation-status"><strong>Current Implementation Status</strong></h4>
+<ul>
+<li>✅ <strong>Interface Design &amp; UX</strong>: Complete validation workbench interface</li>
+<li>✅ <strong>Conversation Capabilities</strong>: Enhanced bot with validation context</li>
+<li>✅ <strong>Action Button Integration</strong>: Six specialized validation functions</li>
+<li>✅ <strong>Framework Integration</strong>: Full framework manager connectivity</li>
+<li>🔴 <strong>Backend API Services</strong>: Critical blocker - need experiment/run endpoints</li>
+<li>🔴 <strong>Database Schema</strong>: Multi-variable experiment storage requirements</li>
+<li>🔴 <strong>Execution Engine</strong>: Batch processing with cross-LLM validation</li>
+</ul>
+<h3 id="critical-blockers-backend-development-required">🔴 <strong>Critical Blockers (Backend Development Required)</strong></h3>
+<p>The chainlit interface is complete and functional, but <strong>backend API integration</strong> remains the critical blocker for full User Story 1.1 implementation:</p>
+<h4 id="required-api-endpoints"><strong>Required API Endpoints</strong></h4>
+<pre><code class="language-typescript">POST /api/experiments          // Create new experiment
+GET  /api/experiments          // List experiments  
+PUT  /api/experiments/:id      // Update experiment
+POST /api/experiments/:id/run  // Execute experiment
+GET  /api/runs                 // List analysis runs
+GET  /api/configurations       // Framework/prompt/scoring configs
+</code></pre>
+<h4 id="database-schema-requirements"><strong>Database Schema Requirements</strong></h4>
+<ul>
+<li><strong>Experiments Table</strong>: Multi-variable experiment configuration storage</li>
+<li><strong>Runs Table</strong>: Individual analysis execution records</li>
+<li><strong>Results Table</strong>: Cross-LLM consensus and statistical validation data</li>
+<li><strong>Evidence Table</strong>: Supporting passage extraction and quality metrics</li>
+</ul>
+<h4 id="execution-engine-components"><strong>Execution Engine Components</strong></h4>
+<ul>
+<li><strong>Batch Processing</strong>: Systematic text corpus analysis</li>
+<li><strong>Multi-LLM Coordination</strong>: Parallel model execution with consensus measurement</li>
+<li><strong>Quality Gates</strong>: Framework fit assessment integration</li>
+<li><strong>Statistical Analysis</strong>: Correlation analysis and significance testing</li>
+</ul>
+<h3 id="research-workflow-examples">💡 <strong>Research Workflow Examples</strong></h3>
+<h4 id="example-1-framework-validation-study"><strong>Example 1: Framework Validation Study</strong></h4>
+<pre><code>1. Switch to fukuyama_identity framework
+2. Analyze Lincoln's Second Inaugural address  
+3. Compare with Trump 2015 campaign announcement
+4. Generate cross-LLM consensus analysis
+5. Export academic comparison dataset
+</code></pre>
+<h4 id="example-2-multi-text-validation-experiment"><strong>Example 2: Multi-Text Validation Experiment</strong></h4>
+<pre><code>1. Create validation experiment with presidential speeches corpus
+2. Test framework fit across historical periods
+3. Run batch analysis with GPT-4, Claude, and Mistral
+4. Analyze temporal patterns in identity dynamics
+5. Export replication package for academic review
+</code></pre>
+<h4 id="example-3-cross-framework-correlation-study"><strong>Example 3: Cross-Framework Correlation Study</strong></h4>
+<pre><code>1. Load corpus of 100+ presidential speeches (1789-2025)
+2. Configure civic_virtue vs fukuyama_identity comparison
+3. Execute batch processing with quality gates
+4. Measure cross-framework correlation coefficients
+5. Generate R package with statistical analysis scripts
+</code></pre>
+<h3 id="academic-validation-benefits">🎓 <strong>Academic Validation Benefits</strong></h3>
+<h4 id="research-integrity"><strong>Research Integrity</strong></h4>
+<ul>
+<li><strong>Quality Gates</strong>: Prevents meaningless analyses through framework fit assessment</li>
+<li><strong>Statistical Rigor</strong>: Cross-LLM consensus targets &gt;0.90 correlation for confidence</li>
+<li><strong>Evidence Standards</strong>: Supporting passage extraction meets academic citation requirements</li>
+<li><strong>Replication Support</strong>: Complete methodology documentation and data packages</li>
+</ul>
+<h4 id="publication-readiness"><strong>Publication Readiness</strong></h4>
+<ul>
+<li><strong>Methodological Transparency</strong>: Full replication packages with computational environment</li>
+<li><strong>Statistical Validation</strong>: Correlation matrices, significance tests, confidence intervals</li>
+<li><strong>Evidence Documentation</strong>: Organized supporting passages with quality assessments</li>
+<li><strong>Academic Formats</strong>: R, Python, SPSS/Stata exports for peer review</li>
+</ul>
+<h4 id="confidence-building"><strong>Confidence Building</strong></h4>
+<ul>
+<li><strong>Multi-Model Consensus</strong>: Reduces single-LLM bias through systematic comparison</li>
+<li><strong>Historical Validation</strong>: Temporal trend analysis validates framework applicability</li>
+<li><strong>Cross-Cultural Testing</strong>: Framework performance across different political contexts</li>
+<li><strong>Expert Validation</strong>: Interface supports human annotation comparison studies</li>
+</ul>
+<h3 id="technical-implementation">🔧 <strong>Technical Implementation</strong></h3>
+<h4 id="chainlit-integration"><strong>Chainlit Integration</strong></h4>
+<ul>
+<li><strong>Framework Manager</strong>: Full integration with existing framework system</li>
+<li><strong>Bot Enhancement</strong>: Validation-aware message processing</li>
+<li><strong>Action Callbacks</strong>: Six specialized validation function handlers</li>
+<li><strong>Session Management</strong>: Persistent validation experiment state</li>
+</ul>
+<h4 id="frontend-features"><strong>Frontend Features</strong></h4>
+<ul>
+<li><strong>Professional UI</strong>: Custom CSS styling for academic research environment</li>
+<li><strong>Interactive Elements</strong>: Action buttons, progress indicators, result visualization</li>
+<li><strong>File Upload</strong>: Support for text corpus assembly and batch processing</li>
+<li><strong>Export Integration</strong>: Academic format generation with download capabilities</li>
+</ul>
+<h4 id="backend-preparation"><strong>Backend Preparation</strong></h4>
+<ul>
+<li><strong>Database Models</strong>: Schema designed for multi-variable experiment storage</li>
+<li><strong>API Architecture</strong>: RESTful endpoints for experiment management</li>
+<li><strong>Processing Pipeline</strong>: Batch analysis with quality control integration</li>
+<li><strong>Statistical Engine</strong>: Cross-LLM correlation and significance testing</li>
+</ul>
+<h3 id="development-roadmap">📈 <strong>Development Roadmap</strong></h3>
+<h4 id="phase-1-backend-api-development-3-4-weeks"><strong>Phase 1: Backend API Development (3-4 weeks)</strong></h4>
+<ol>
+<li><strong>Week 1-2</strong>: Implement experiment management API endpoints</li>
+<li><strong>Week 3</strong>: Statistical analysis engine with cross-LLM correlation</li>
+<li><strong>Week 4</strong>: Frontend-backend integration and end-to-end testing</li>
+</ol>
+<h4 id="phase-2-advanced-validation-features-2-3-weeks"><strong>Phase 2: Advanced Validation Features (2-3 weeks)</strong></h4>
+<ol>
+<li><strong>Framework fit assessment algorithms</strong></li>
+<li><strong>Evidence extraction quality metrics</strong></li>
+<li><strong>Academic export format generation</strong></li>
+</ol>
+<h4 id="phase-3-production-deployment-1-2-weeks"><strong>Phase 3: Production Deployment (1-2 weeks)</strong></h4>
+<ol>
+<li><strong>Performance optimization for large corpora</strong></li>
+<li><strong>Cost monitoring and budget controls</strong></li>
+<li><strong>User acceptance testing and documentation</strong></li>
+</ol>
+<h3 id="resources-documentation">📚 <strong>Resources &amp; Documentation</strong></h3>
+<h4 id="technical-references"><strong>Technical References</strong></h4>
+<ul>
+<li><strong>User Stories</strong>: <code>docs/development/USER_STORIES_CONSOLIDATED.md</code></li>
+<li><strong>Database Architecture</strong>: <code>docs/architecture/database_architecture.md</code></li>
+<li><strong>Framework Documentation</strong>: <code>frameworks/fukuyama_identity/README.md</code></li>
+<li><strong>Launch Instructions</strong>: <code>LAUNCH_GUIDE.md</code></li>
+</ul>
+<h4 id="academic-context"><strong>Academic Context</strong></h4>
+<ul>
+<li><strong>Theoretical Foundation</strong>: Based on conversational model refinement process</li>
+<li><strong>Framework Development</strong>: Three-dipole Fukuyama Identity Framework implementation</li>
+<li><strong>Validation Methodology</strong>: Systematic evidence generation for academic confidence</li>
+</ul>
+<h3 id="conclusion">🎯 <strong>Conclusion</strong></h3>
+<p>The <strong>LLM Validation Workbench</strong> successfully implements the interface requirements for <strong>User Story 1.1</strong>, providing a sophisticated research environment for systematic validation experiments. The chainlit-based interface offers comprehensive capabilities for multi-variable experiment design, execution monitoring, and academic evidence synthesis.</p>
+<p><strong>Current Status</strong>: Interface complete, backend API development required for full functionality.</p>
+<p><strong>Next Steps</strong>: Focus on backend API implementation to remove critical blockers and enable end-to-end validation workflows that build academic confidence in the LLM-based approach to political discourse analysis. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

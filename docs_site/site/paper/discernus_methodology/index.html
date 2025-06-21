@@ -1,0 +1,844 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Discernus Methodology Paper Development - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#discernus-methodology-paper-development" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Discernus Methodology Paper Development
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#paper-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Paper Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Paper Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#title-working" class="md-nav__link">
+    <span class="md-ellipsis">
+      Title (Working)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategic-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Objective
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Transformation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp-paper-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 MVP Paper Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 MVP Paper Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-framework-moral-foundations-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary Framework: Moral Foundations Theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Primary Framework: Moral Foundations Theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expert-consultation-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expert Consultation Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publication-pathway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Publication Pathway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 File Organization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📁 File Organization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-planning-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Planning Documents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planned-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Planned Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-validation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔬 Academic Validation Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔬 Academic Validation Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#statistical-validation-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Statistical Validation Targets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expert-consultation-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expert Consultation Protocol
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Criteria
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      📅 Development Timeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📅 Development Timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-mft-implementation-weeks-1-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: MFT Implementation (Weeks 1-4)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-expert-consultation-weeks-5-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Expert Consultation (Weeks 5-8)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-validation-execution-weeks-9-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Validation Execution (Weeks 9-12)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-publication-preparation-months-4-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Publication Preparation (Months 4-6)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-differences-from-previous-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Key Differences from Previous Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Key Differences from Previous Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-eliminated" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's Eliminated
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-emphasized" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's Emphasized
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📖 Related Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Related Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#platform-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Platform Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategic-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Context
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="discernus-methodology-paper-development">Discernus Methodology Paper Development</h1>
+<p><strong>Strategic Focus:</strong> Computational discourse analysis platform validation through systematic framework implementation and expert consultation</p>
+<hr />
+<h2 id="paper-overview">📋 <strong>Paper Overview</strong></h2>
+<h3 id="title-working">Title (Working)</h3>
+<p>"Systematic Framework Validation for Computational Text Analysis: The Discernus Platform"</p>
+<h3 id="strategic-objective">Strategic Objective</h3>
+<p>Position Discernus as credible <strong>methodological infrastructure</strong> for computational social science through rigorous validation of established frameworks rather than novel theoretical claims.</p>
+<h3 id="core-transformation">Core Transformation</h3>
+<ul>
+<li><strong>From</strong>: Theoretical discovery (Three Wells Model) → <strong>To</strong>: Methodological infrastructure (systematic framework comparison)</li>
+<li><strong>From</strong>: Novel framework development → <strong>To</strong>: Established framework validation (MFT, Political Framing Theory, Cultural Theory)  </li>
+<li><strong>From</strong>: Normative advocacy → <strong>To</strong>: Academic methodology contribution</li>
+<li><strong>From</strong>: Universal claims → <strong>To</strong>: Domain-specific validation with clear scope conditions</li>
+</ul>
+<hr />
+<h2 id="mvp-paper-strategy">🎯 <strong>MVP Paper Strategy</strong></h2>
+<h3 id="primary-framework-moral-foundations-theory">Primary Framework: Moral Foundations Theory</h3>
+<p><strong>Academic Strategy</strong>: Establish credibility through systematic MFT validation before expanding to additional frameworks</p>
+<h4 id="expert-consultation-approach">Expert Consultation Approach</h4>
+<ul>
+<li><strong>Phase 1</strong>: Build working MFT implementation with preliminary validation</li>
+<li><strong>Phase 2</strong>: Approach Jonathan Haidt lab with demonstration + evidence  </li>
+<li><strong>Phase 3</strong>: Refine implementation based on expert feedback</li>
+<li><strong>Phase 4</strong>: Execute large-scale validation study (n=500, r&gt;0.8 target with MFQ-30)</li>
+</ul>
+<h4 id="publication-pathway">Publication Pathway</h4>
+<ul>
+<li><strong>Co-authorship</strong>: Jonathan Haidt and collaborators (based on expert consultation success)</li>
+<li><strong>Target Venue</strong>: Computational Social Science, Political Psychology journals</li>
+<li><strong>Methodology Contribution</strong>: Systematic framework validation for computational text analysis</li>
+<li><strong>Replication Package</strong>: Complete code, data, and analysis scripts</li>
+</ul>
+<hr />
+<h2 id="file-organization">📁 <strong>File Organization</strong></h2>
+<h3 id="core-planning-documents">Core Planning Documents</h3>
+<ul>
+<li><strong><code>paper_restructuring_plan_option4.md</code></strong> - Comprehensive restructuring strategy and implementation plan</li>
+<li><strong>Future</strong>: Paper outline, section drafts, validation study protocols</li>
+</ul>
+<h3 id="planned-structure">Planned Structure</h3>
+<pre><code>discernus_methodology/
+├── planning/
+│   ├── paper_restructuring_plan_option4.md  ✅ Current
+│   ├── discernus_paper_outline.md           📋 Planned  
+│   ├── validation_study_protocols.md        📋 Planned
+│   └── expert_consultation_timeline.md      📋 Planned
+├── drafts/
+│   ├── discernus_methodology_v1.0.md        📋 Planned
+│   ├── section_drafts/                      📋 Planned
+│   └── revision_tracking/                   📋 Planned
+├── validation_studies/
+│   ├── mft_validation_protocol.md           📋 Planned
+│   ├── expert_consultation_docs/            📋 Planned
+│   └── statistical_analysis_plans/          📋 Planned
+└── submission/
+    ├── journal_selection_analysis.md        📋 Planned
+    ├── submission_materials/                📋 Planned
+    └── peer_review_responses/               📋 Planned
+</code></pre>
+<hr />
+<h2 id="academic-validation-strategy">🔬 <strong>Academic Validation Strategy</strong></h2>
+<h3 id="statistical-validation-targets">Statistical Validation Targets</h3>
+<ul>
+<li><strong>Overall MFT Correlation</strong>: r&gt;0.8 with MFQ-30 (p&lt;0.001)</li>
+<li><strong>Foundation-Specific</strong>: Care/Harm r&gt;0.89, Fairness r&gt;0.81, Loyalty r&gt;0.78, Authority r&gt;0.85, Sanctity r&gt;0.79</li>
+<li><strong>Cross-LLM Reliability</strong>: r&gt;0.91 between GPT-4, Claude, Gemini</li>
+<li><strong>Effect Sizes</strong>: d&gt;0.8 for practical significance</li>
+</ul>
+<h3 id="expert-consultation-protocol">Expert Consultation Protocol</h3>
+<ul>
+<li><strong>Implementation Review</strong>: Technical accuracy assessment by framework originators</li>
+<li><strong>Methodology Validation</strong>: Academic standards compliance verification</li>
+<li><strong>Collaboration Framework</strong>: Co-authorship and publication planning</li>
+<li><strong>Community Endorsement</strong>: Computational social science network recommendations</li>
+</ul>
+<h3 id="success-criteria">Success Criteria</h3>
+<ul>
+<li><strong>Academic</strong>: Expert endorsement + Statistical validation + Publication acceptance</li>
+<li><strong>Community</strong>: Computational social science researcher adoption</li>
+<li><strong>Platform</strong>: Credible infrastructure for systematic framework comparison</li>
+<li><strong>Methodological</strong>: Contribution to computational social science validation practices</li>
+</ul>
+<hr />
+<h2 id="development-timeline">📅 <strong>Development Timeline</strong></h2>
+<h3 id="phase-1-mft-implementation-weeks-1-4">Phase 1: MFT Implementation (Weeks 1-4)</h3>
+<ul>
+<li>Build working MFT analysis using existing Discernus infrastructure</li>
+<li>Internal validation testing on political texts</li>
+<li>Professional demonstration system for expert review</li>
+<li>Preliminary correlation evidence generation</li>
+</ul>
+<h3 id="phase-2-expert-consultation-weeks-5-8">Phase 2: Expert Consultation (Weeks 5-8)</h3>
+<ul>
+<li>Haidt lab outreach with working demonstration</li>
+<li>Implementation refinement based on expert feedback</li>
+<li>Large-scale validation study design (expert-approved)</li>
+<li>Academic collaboration framework establishment</li>
+</ul>
+<h3 id="phase-3-validation-execution-weeks-9-12">Phase 3: Validation Execution (Weeks 9-12)</h3>
+<ul>
+<li>n=500 participant study with MFQ-30 correlations</li>
+<li>Multi-LLM reliability analysis</li>
+<li>Statistical evidence generation</li>
+<li>Paper drafting with expert co-authorship</li>
+</ul>
+<h3 id="phase-4-publication-preparation-months-4-6">Phase 4: Publication Preparation (Months 4-6)</h3>
+<ul>
+<li>Academic paper completion</li>
+<li>Replication package assembly</li>
+<li>Journal submission and peer review</li>
+<li>Community outreach and conference presentations</li>
+</ul>
+<hr />
+<h2 id="key-differences-from-previous-approach">🎯 <strong>Key Differences from Previous Approach</strong></h2>
+<h3 id="whats-eliminated">What's Eliminated</h3>
+<ul>
+<li>❌ <strong>Three Wells Model theoretical content</strong> - moved to separate future paper</li>
+<li>❌ <strong>Gravitational metaphor</strong> - replaced with neutral framework terminology</li>
+<li>❌ <strong>Framework-agnostic claims</strong> - replaced with explicit theoretical dependence</li>
+<li>❌ <strong>Normative advocacy</strong> - eliminated entirely from methodology paper</li>
+<li>❌ <strong>Universal methodology claims</strong> - replaced with domain-specific validation</li>
+</ul>
+<h3 id="whats-emphasized">What's Emphasized</h3>
+<ul>
+<li>✅ <strong>Established framework implementations</strong> - rigorous operationalization of MFT</li>
+<li>✅ <strong>Systematic validation studies</strong> - correlation with established measures</li>
+<li>✅ <strong>Expert consultation process</strong> - collaboration with framework originators</li>
+<li>✅ <strong>Methodological contribution</strong> - clear value for computational social science</li>
+<li>✅ <strong>Academic credibility</strong> - professional standards and community adoption</li>
+</ul>
+<hr />
+<h2 id="related-documentation">📖 <strong>Related Documentation</strong></h2>
+<h3 id="platform-development">Platform Development</h3>
+<ul>
+<li><strong>MVP Iteration Plan</strong>: <a href="../../project-management/planning/active/CURRENT_ITERATION_DISCERNUS_MVP.md"><code>../../project-management/planning/active/CURRENT_ITERATION_DISCERNUS_MVP.md</code></a></li>
+<li><strong>User Journeys</strong>: <a href="../../planning/discernus_mvp_user_journeys.md"><code>../../planning/discernus_mvp_user_journeys.md</code></a></li>
+<li><strong>Technical Architecture</strong>: <a href="../platform-development/architecture/"><code>../platform-development/architecture/</code></a></li>
+</ul>
+<h3 id="strategic-context">Strategic Context</h3>
+<ul>
+<li><strong>Software Platform Plan</strong>: <a href="../../planning/software_platform_restructuring_plan_option4.md"><code>../../planning/software_platform_restructuring_plan_option4.md</code></a></li>
+<li><strong>MVP Single Framework Plan</strong>: <a href="../../planning/mvp_single_framework_plan.md"><code>../../planning/mvp_single_framework_plan.md</code></a></li>
+<li><strong>Literature Review</strong>: <a href="../research/literature_review_discernus_gap/"><code>../../paper/research/literature_review_discernus_gap.md</code></a></li>
+</ul>
+<hr />
+<p><strong>Strategic Direction</strong>: This paper development directly supports the Discernus MVP strategy by establishing academic credibility through systematic MFT validation, expert consultation, and publication pathway—creating foundation for sustainable computational social science platform development. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

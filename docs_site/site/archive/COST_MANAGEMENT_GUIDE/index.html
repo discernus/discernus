@@ -1,0 +1,844 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>HuggingFace Inference Endpoints Cost Management Guide - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#huggingface-inference-endpoints-cost-management-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HuggingFace Inference Endpoints Cost Management Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#critical-avoid-unexpected-charges" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚨 CRITICAL: Avoid Unexpected Charges
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#billing-model-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      💰 Billing Model Explained
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💰 Billing Model Explained">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-you-pay-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      What You Pay For:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#billing-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      Billing Formula:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-strategy-for-your-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Recommended Strategy for Your Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Recommended Strategy for Your Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-budget-testing-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Budget Testing Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-active-testing-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Active Testing Protocol
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-protection-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ Cost Protection Strategies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛡️ Cost Protection Strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strategy-1-manual-control-safest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategy 1: Manual Control (Safest)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategy-2-auto-scale-to-zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategy 2: Auto Scale-to-Zero
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strategy-3-testing-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategy 3: Testing Windows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-examples-for-your-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Cost Examples for Your Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Cost Examples for Your Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conservative-testing-2-hoursday" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conservative Testing (2 hours/day)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intensive-testing-8-hoursday" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intensive Testing (8 hours/day)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accidental-always-on-247" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accidental Always-On (24/7)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-setup-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ Quick Setup Commands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚡ Quick Setup Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-with-cost-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy with Cost Controls:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#safe-testing-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Safe Testing Pattern:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-and-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Monitoring and Alerts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Monitoring and Alerts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard Monitoring:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Alerts:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-immediate-action-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Your Immediate Action Plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Your Immediate Action Plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-deploy-with-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Deploy with Safety
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-test-safely" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Test Safely
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-scale-gradually" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Scale Gradually
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pro-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 Pro Tips
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bottom-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Bottom Line
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="huggingface-inference-endpoints-cost-management-guide">HuggingFace Inference Endpoints Cost Management Guide</h1>
+<h2 id="critical-avoid-unexpected-charges">🚨 <strong>CRITICAL: Avoid Unexpected Charges</strong></h2>
+<p><strong>HuggingFace Inference Endpoints charge by UPTIME, not usage!</strong> You pay every minute an endpoint is running, even if you're not making requests.</p>
+<h2 id="billing-model-explained">💰 <strong>Billing Model Explained</strong></h2>
+<h3 id="what-you-pay-for"><strong>What You Pay For:</strong></h3>
+<ul>
+<li>✅ <strong>Uptime</strong>: Every minute endpoint is "Running" </li>
+<li>✅ <strong>Initialization time</strong>: While endpoint starts up</li>
+<li>❌ <strong>NOT per request</strong>: Unlike OpenAI/Anthropic APIs</li>
+<li>❌ <strong>NOT per token</strong>: Unlike traditional LLM APIs</li>
+</ul>
+<h3 id="billing-formula"><strong>Billing Formula:</strong></h3>
+<pre><code>Cost = Hourly Rate × (Hours Running × Min Replicas + Scale-up Hours × Additional Replicas)
+</code></pre>
+<h2 id="recommended-strategy-for-your-testing">🎯 <strong>Recommended Strategy for Your Testing</strong></h2>
+<h3 id="phase-1-budget-testing-setup"><strong>Phase 1: Budget Testing Setup</strong></h3>
+<pre><code>✅ Deploy 3 endpoints with MANUAL management:
+   - mistralai/Mistral-7B-Instruct-v0.3     ($0.8/hour)
+   - meta-llama/Llama-3.1-8B-Instruct       ($0.8/hour)  
+   - microsoft/phi-4                         ($1.8/hour)
+
+✅ Set Min Replicas = 0, Max Replicas = 1
+✅ Enable &quot;Auto Scale-to-Zero&quot; after 15 minutes
+</code></pre>
+<h3 id="phase-2-active-testing-protocol"><strong>Phase 2: Active Testing Protocol</strong></h3>
+<ol>
+<li><strong>Before Testing Session:</strong></li>
+<li>Resume all endpoints you need</li>
+<li>Wait 2-5 minutes for initialization</li>
+<li>
+<p>Run your test suite</p>
+</li>
+<li>
+<p><strong>During Testing:</strong></p>
+</li>
+<li>Run tests efficiently in batches</li>
+<li>
+<p>Monitor costs in dashboard</p>
+</li>
+<li>
+<p><strong>After Testing Session:</strong></p>
+</li>
+<li><strong>IMMEDIATELY PAUSE</strong> all endpoints</li>
+<li>Check billing dashboard</li>
+<li>Save results</li>
+</ol>
+<h2 id="cost-protection-strategies">🛡️ <strong>Cost Protection Strategies</strong></h2>
+<h3 id="strategy-1-manual-control-safest"><strong>Strategy 1: Manual Control (Safest)</strong></h3>
+<pre><code class="language-python"># Programmatic endpoint management
+endpoint.pause()    # Stop billing immediately
+endpoint.resume()   # Start billing again
+endpoint.wait()     # Wait until ready
+</code></pre>
+<h3 id="strategy-2-auto-scale-to-zero"><strong>Strategy 2: Auto Scale-to-Zero</strong></h3>
+<ul>
+<li><strong>Pros</strong>: Automatic shutdown after 15 min inactivity</li>
+<li><strong>Cons</strong>: Still counts against GPU quota, cold start delays</li>
+<li><strong>Setup</strong>: Enable in endpoint settings</li>
+</ul>
+<h3 id="strategy-3-testing-windows"><strong>Strategy 3: Testing Windows</strong></h3>
+<ul>
+<li><strong>Schedule testing sessions</strong>: 2-3 hours blocks</li>
+<li><strong>Batch all tests</strong>: Run multiple frameworks together</li>
+<li><strong>Immediate shutdown</strong>: Pause endpoints right after</li>
+</ul>
+<h2 id="cost-examples-for-your-testing">📊 <strong>Cost Examples for Your Testing</strong></h2>
+<h3 id="conservative-testing-2-hoursday"><strong>Conservative Testing (2 hours/day)</strong></h3>
+<pre><code>3 endpoints × $3.4/hour × 2 hours/day × 5 days/week = $34/week
+</code></pre>
+<h3 id="intensive-testing-8-hoursday"><strong>Intensive Testing (8 hours/day)</strong></h3>
+<pre><code>3 endpoints × $3.4/hour × 8 hours/day × 5 days/week = $136/week
+</code></pre>
+<h3 id="accidental-always-on-247"><strong>Accidental Always-On (24/7)</strong></h3>
+<pre><code>3 endpoints × $3.4/hour × 24 hours × 7 days = $571.2/week ⚠️
+</code></pre>
+<h2 id="quick-setup-commands">⚡ <strong>Quick Setup Commands</strong></h2>
+<h3 id="deploy-with-cost-controls"><strong>Deploy with Cost Controls:</strong></h3>
+<pre><code class="language-python">endpoint = create_inference_endpoint(
+    endpoint_name,
+    # ... other params ...
+    min_replica=0,          # 🛡️ Can scale to zero
+    max_replica=1,          # 🛡️ Limit max scaling
+    type=&quot;protected&quot;,
+)
+
+# Immediately pause after creation
+endpoint.pause()
+</code></pre>
+<h3 id="safe-testing-pattern"><strong>Safe Testing Pattern:</strong></h3>
+<pre><code class="language-python"># Start testing session
+endpoint.resume()
+endpoint.wait()
+
+# Run your tests
+test_results = run_multi_llm_tests()
+
+# End testing session  
+endpoint.pause()
+print(f&quot;Session complete. Billing stopped.&quot;)
+</code></pre>
+<h2 id="monitoring-and-alerts">🔧 <strong>Monitoring and Alerts</strong></h2>
+<h3 id="dashboard-monitoring"><strong>Dashboard Monitoring:</strong></h3>
+<ol>
+<li><strong>Usage &amp; Cost tab</strong>: Real-time billing</li>
+<li><strong>Analytics tab</strong>: Usage patterns  </li>
+<li><strong>Settings tab</strong>: Auto-scaling config</li>
+</ol>
+<h3 id="cost-alerts"><strong>Cost Alerts:</strong></h3>
+<ul>
+<li>Set up billing alerts in your HF account</li>
+<li>Monitor daily spend limits</li>
+<li>Check endpoint status regularly</li>
+</ul>
+<h2 id="your-immediate-action-plan">🚀 <strong>Your Immediate Action Plan</strong></h2>
+<h3 id="step-1-deploy-with-safety"><strong>Step 1: Deploy with Safety</strong></h3>
+<ol>
+<li>Deploy 3 endpoints with <code>min_replica=0</code></li>
+<li>Enable auto scale-to-zero (15 min)</li>
+<li><strong>Immediately pause</strong> all endpoints after creation</li>
+</ol>
+<h3 id="step-2-test-safely"><strong>Step 2: Test Safely</strong></h3>
+<ol>
+<li>Resume 1 endpoint at a time</li>
+<li>Run quick test (&lt; 30 minutes)</li>
+<li>Pause immediately after testing</li>
+<li>Repeat for other endpoints</li>
+</ol>
+<h3 id="step-3-scale-gradually"><strong>Step 3: Scale Gradually</strong></h3>
+<ol>
+<li>Once comfortable, resume multiple endpoints</li>
+<li>Run comprehensive test suite</li>
+<li>Always pause when done</li>
+</ol>
+<h2 id="pro-tips">💡 <strong>Pro Tips</strong></h2>
+<ul>
+<li><strong>Start small</strong>: Test 1 endpoint first to understand billing</li>
+<li><strong>Use timers</strong>: Set phone alarms to remind you to pause endpoints</li>
+<li><strong>Batch testing</strong>: Run all 3 frameworks in one session</li>
+<li><strong>Monitor actively</strong>: Check billing dashboard every hour during testing</li>
+<li><strong>Pause by default</strong>: Only resume when actively testing</li>
+</ul>
+<h2 id="bottom-line">🎯 <strong>Bottom Line</strong></h2>
+<p><strong>Manual pause/resume is your safest bet for testing.</strong> Auto-scaling helps but doesn't eliminate costs. The key is treating these like cloud servers that need to be turned off when not in use, not like API services that charge per call.</p>
+<p>With proper management, your testing costs should be <strong>$20-50/week</strong> instead of hundreds per week! </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

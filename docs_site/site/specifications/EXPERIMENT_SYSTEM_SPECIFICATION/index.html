@@ -1,0 +1,1276 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Experiment System Specification - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#experiment-system-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Experiment System Specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Experiment Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Experiment Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-experiment-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Experiment Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experimental-design-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experimental Design Philosophy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-type-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Component Type Specifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ Component Type Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-framework-configurations" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Framework Configurations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Framework Configurations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#framework-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Frameworks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Development
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-prompt-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Prompt Templates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Prompt Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prompt-template-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Template Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-template-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Template Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-quality-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Quality Standards
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scoring-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Scoring Algorithms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Scoring Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-scoring-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Scoring Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithm-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-llm-configurations" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. LLM Configurations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. LLM Configurations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supported-llm-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported LLM Providers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-configuration-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Configuration Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Experiment Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Experiment Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experiment-definition-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Definition Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis Modes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Assurance Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimental-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Experimental Outputs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Experimental Outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-level-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run-Level Results
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-level-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment-Level Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-experimental-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔬 Advanced Experimental Capabilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔬 Advanced Experimental Capabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-matrix-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Matrix Experiments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#longitudinal-studies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Longitudinal Studies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-studies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Studies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Usage Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Usage Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#experimental-design-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experimental Design Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Development Workflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-integration-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Integration Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="experiment-system-specification">Experiment System Specification</h1>
+<p><em>Version: 2.1.0</em>
+<em>Last Updated: June 13, 2025</em></p>
+<h2 id="overview"><strong>🎯 Overview</strong></h2>
+<p>The Narrative Gravity Analysis System provides a comprehensive experimental framework for systematic research using Large Language Models (LLMs) to analyze text narratives. This document specifies all available options, parameters, and capabilities for designing and executing experiments.</p>
+<h2 id="experiment-architecture"><strong>📋 Experiment Architecture</strong></h2>
+<h3 id="core-experiment-components"><strong>Core Experiment Components</strong></h3>
+<p>Every experiment consists of <strong>four independent component types</strong> that combine at runtime:</p>
+<ol>
+<li><strong>Framework Configuration</strong> - Defines the analytical dimensions and theoretical foundation</li>
+<li><strong>Prompt Template</strong> - Specifies how the LLM should perform the analysis</li>
+<li><strong>Scoring Algorithm</strong> - Determines mathematical interpretation of results</li>
+<li><strong>LLM Configuration</strong> - Controls model selection and analysis parameters</li>
+</ol>
+<h3 id="experimental-design-philosophy"><strong>Experimental Design Philosophy</strong></h3>
+<p><strong>Component Independence</strong>: Each component type has independent lifecycles and can be combined in any valid configuration, enabling systematic methodological research.</p>
+<p><strong>Clean Separation of Concerns</strong>:
+- <strong>Frameworks</strong> = What theoretical dimensions to analyze
+- <strong>Prompts</strong> = How to instruct the LLM to perform analysis
+- <strong>Algorithms</strong> = How to mathematically interpret the results
+- <strong>Models</strong> = Which LLM provider and configuration to use</p>
+<h2 id="component-type-specifications"><strong>🏗️ Component Type Specifications</strong></h2>
+<h3 id="1-framework-configurations"><strong>1. Framework Configurations</strong></h3>
+<p><strong>Purpose</strong>: Define the theoretical space for narrative analysis through dimensional structures.</p>
+<h4 id="framework-structure"><strong>Framework Structure</strong></h4>
+<pre><code class="language-json">{
+  &quot;framework_name&quot;: &quot;string (unique identifier)&quot;,
+  &quot;display_name&quot;: &quot;string (human-readable name)&quot;,
+  &quot;version&quot;: &quot;string (semantic versioning)&quot;,
+  &quot;description&quot;: &quot;string (theoretical foundation description)&quot;,
+
+  &quot;coordinate_system&quot;: {
+    &quot;type&quot;: &quot;enum[circle, ellipse, linear]&quot;,
+    &quot;radius&quot;: &quot;number (for circle)&quot;,
+    &quot;semi_major_axis&quot;: &quot;number (for ellipse)&quot;,
+    &quot;semi_minor_axis&quot;: &quot;number (for ellipse)&quot;,
+    &quot;description&quot;: &quot;string (geometric interpretation)&quot;
+  },
+
+  &quot;wells&quot;: {
+    &quot;WellName&quot;: {
+      &quot;angle&quot;: &quot;number (0-360 degrees)&quot;,
+      &quot;weight&quot;: &quot;number (relative importance)&quot;,
+      &quot;type&quot;: &quot;enum[integrative, disintegrative]&quot;,
+      &quot;tier&quot;: &quot;enum[primary, secondary, tertiary]&quot;,
+      &quot;description&quot;: &quot;string (analytical dimension meaning)&quot;
+    }
+  },
+
+  &quot;theoretical_foundation&quot;: {
+    &quot;primary_sources&quot;: [&quot;array of academic references&quot;],
+    &quot;theoretical_approach&quot;: &quot;string (methodological foundation)&quot;
+  },
+
+  &quot;metrics&quot;: {
+    &quot;MetricName&quot;: {
+      &quot;name&quot;: &quot;string (human-readable name)&quot;,
+      &quot;description&quot;: &quot;string (calculation and interpretation)&quot;
+    }
+  }
+}
+</code></pre>
+<h4 id="available-frameworks"><strong>Available Frameworks</strong></h4>
+<p><strong>Civic Virtue Framework</strong> (<code>civic_virtue v2025.06.04</code>)
+- <strong>Dimensions</strong>: 10 wells across 5 dipoles (Dignity/Tribalism, Truth/Resentment, Justice/Manipulation, Hope/Fear, Pragmatism/Fantasy)
+- <strong>Theoretical Foundation</strong>: Aristotelian virtue ethics + contemporary civic republican theory
+- <strong>Use Case</strong>: Political discourse analysis, democratic engagement assessment
+- <strong>Coordinate System</strong>: Circular (clustered positioning)</p>
+<p><strong>Political Spectrum Framework</strong> (<code>political_spectrum v2025.06.04</code>)
+- <strong>Dimensions</strong>: Traditional left-right political analysis
+- <strong>Theoretical Foundation</strong>: Political science spectrum analysis
+- <strong>Use Case</strong>: Partisan rhetoric analysis, political positioning
+- <strong>Coordinate System</strong>: Linear or elliptical</p>
+<p><strong>Moral-Rhetorical Posture Framework</strong> (<code>moral_rhetorical_posture v2025.06.04</code>)
+- <strong>Dimensions</strong>: Moral foundations + rhetorical strategies
+- <strong>Theoretical Foundation</strong>: Haidt's moral foundations + rhetorical analysis
+- <strong>Use Case</strong>: Moral argumentation patterns, persuasive strategy analysis
+- <strong>Coordinate System</strong>: Elliptical</p>
+<h4 id="framework-development"><strong>Framework Development</strong></h4>
+<ul>
+<li><strong>Versioning</strong>: Semantic versioning (major.minor.patch)</li>
+<li><strong>Validation</strong>: Theoretical coherence, dimensional distinctness, empirical testability</li>
+<li><strong>Compatibility</strong>: Must specify compatible prompt templates and scoring algorithms</li>
+</ul>
+<h3 id="2-prompt-templates"><strong>2. Prompt Templates</strong></h3>
+<p><strong>Purpose</strong>: Define how LLMs should perform narrative analysis within the framework structure.</p>
+<h4 id="prompt-template-types"><strong>Prompt Template Types</strong></h4>
+<p><strong>Hierarchical Analysis</strong> (<code>hierarchical_v2.1</code>)
+- <strong>Approach</strong>: LLM ranks dimensions by importance and provides evidence
+- <strong>Output Format</strong>: Hierarchical ranking with primary/secondary/tertiary wells
+- <strong>Advantages</strong>: Clear interpretability, evidence-based reasoning
+- <strong>Use Cases</strong>: Academic research, detailed justification requirements</p>
+<p><strong>Traditional Analysis</strong> (<code>traditional_v2.0</code>)
+- <strong>Approach</strong>: LLM provides scores for all dimensions simultaneously<br />
+- <strong>Output Format</strong>: Numeric scores (0.0-1.0) for each framework dimension
+- <strong>Advantages</strong>: Computational efficiency, statistical comparability
+- <strong>Use Cases</strong>: Large-scale analysis, quantitative research</p>
+<p><strong>Evidence-Based Analysis</strong> (<code>evidence_based_v1.0</code>)
+- <strong>Approach</strong>: Requires specific textual citations for all assessments
+- <strong>Output Format</strong>: Scores + mandatory textual evidence for each dimension
+- <strong>Advantages</strong>: Academic rigor, auditability
+- <strong>Use Cases</strong>: Publication-quality research, validation studies</p>
+<h4 id="prompt-template-configuration"><strong>Prompt Template Configuration</strong></h4>
+<pre><code class="language-json">{
+  &quot;template_id&quot;: &quot;string (unique identifier)&quot;,
+  &quot;name&quot;: &quot;string (human-readable name)&quot;, 
+  &quot;version&quot;: &quot;string (semantic versioning)&quot;,
+  &quot;type&quot;: &quot;enum[hierarchical, traditional, evidence_based]&quot;,
+  &quot;description&quot;: &quot;string (methodological approach)&quot;,
+
+  &quot;analysis_requirements&quot;: {
+    &quot;evidence_required&quot;: &quot;boolean&quot;,
+    &quot;justification_depth&quot;: &quot;enum[minimal, standard, comprehensive]&quot;,
+    &quot;ranking_required&quot;: &quot;boolean&quot;, 
+    &quot;framework_fit_assessment&quot;: &quot;boolean&quot;
+  },
+
+  &quot;output_format&quot;: {
+    &quot;structure&quot;: &quot;enum[json, structured_text, hybrid]&quot;,
+    &quot;required_fields&quot;: [&quot;array of mandatory response fields&quot;],
+    &quot;scoring_scale&quot;: &quot;string (e.g., '0.0-1.0', 'ordinal')&quot;
+  },
+
+  &quot;llm_guidance&quot;: {
+    &quot;temperature_recommendation&quot;: &quot;number (0.0-1.0)&quot;,
+    &quot;max_tokens&quot;: &quot;number (response length)&quot;,
+    &quot;model_compatibility&quot;: [&quot;array of compatible LLM models&quot;]
+  }
+}
+</code></pre>
+<h4 id="prompt-quality-standards"><strong>Prompt Quality Standards</strong></h4>
+<ul>
+<li><strong>Framework Agnostic</strong>: Templates should work across multiple frameworks</li>
+<li><strong>Model Independent</strong>: Compatible with different LLM providers  </li>
+<li><strong>Output Consistency</strong>: Reliable JSON structure for parsing</li>
+<li><strong>Evidence Standards</strong>: Clear requirements for supporting evidence</li>
+</ul>
+<h3 id="3-scoring-algorithms"><strong>3. Scoring Algorithms</strong></h3>
+<p><strong>Purpose</strong>: Define mathematical methods for interpreting LLM analysis results and calculating narrative positions.</p>
+<h4 id="available-scoring-algorithms"><strong>Available Scoring Algorithms</strong></h4>
+<p><strong>Linear Average</strong> (<code>linear_v1.0</code>)
+- <strong>Method</strong>: Standard averaging of all dimensional scores
+- <strong>Formula</strong>: <code>position = Σ(score_i * unit_vector_i) / n</code>
+- <strong>Use Cases</strong>: Baseline analysis, simple interpretability
+- <strong>Advantages</strong>: Mathematically straightforward, equal treatment of dimensions</p>
+<p><strong>Winner-Take-Most</strong> (<code>winner_take_most_v1.0</code>)
+- <strong>Method</strong>: Amplifies dominant dimensions while suppressing weaker ones
+- <strong>Formula</strong>: <code>weight_i = score_i^boost_factor if score_i &gt; threshold else score_i * suppress_factor</code>
+- <strong>Parameters</strong>: <code>dominance_threshold</code>, <code>boost_factor</code>, <code>suppress_factor</code>
+- <strong>Use Cases</strong>: Clear thematic dominance, reducing noise from weak signals</p>
+<p><strong>Hierarchical Dominance</strong> (<code>hierarchical_v1.0</code>)
+- <strong>Method</strong>: Uses LLM-provided rankings and weights from hierarchical prompts
+- <strong>Formula</strong>: <code>position = primary_weight * primary_vector + secondary_weight * secondary_vector + tertiary_weight * tertiary_vector</code>
+- <strong>Parameters</strong>: <code>primary_weight</code> (0.6), <code>secondary_weight</code> (0.3), <code>tertiary_weight</code> (0.1)
+- <strong>Use Cases</strong>: Evidence-based weighting, academic research</p>
+<p><strong>Exponential Weighting</strong> (<code>exponential_v1.0</code>)
+- <strong>Method</strong>: Exponential transformation to enhance score differences
+- <strong>Formula</strong>: <code>weight_i = score_i^exponent / Σ(score_j^exponent)</code>
+- <strong>Parameters</strong>: <code>exponent</code>, <code>normalization</code>
+- <strong>Use Cases</strong>: Emphasizing clear patterns, reducing ambiguous middle-ground results</p>
+<p><strong>Nonlinear Transform</strong> (<code>nonlinear_v1.0</code>)
+- <strong>Method</strong>: Sigmoid transformation to exaggerate pole positions
+- <strong>Formula</strong>: <code>transformed_score = 1 / (1 + exp(-steepness * (score - center)))</code>
+- <strong>Parameters</strong>: <code>steepness</code>, <code>center_point</code>
+- <strong>Use Cases</strong>: Clear categorization, reducing center-bias</p>
+<h4 id="algorithm-configuration"><strong>Algorithm Configuration</strong></h4>
+<pre><code class="language-json">{
+  &quot;algorithm_id&quot;: &quot;string (unique identifier)&quot;,
+  &quot;name&quot;: &quot;string (human-readable name)&quot;,
+  &quot;version&quot;: &quot;string (semantic versioning)&quot;,
+  &quot;type&quot;: &quot;enum[linear, winner_take_most, hierarchical, exponential, nonlinear]&quot;,
+  &quot;description&quot;: &quot;string (mathematical approach)&quot;,
+
+  &quot;mathematical_foundation&quot;: {
+    &quot;primary_formula&quot;: &quot;string (LaTeX or description)&quot;,
+    &quot;normalization_method&quot;: &quot;string&quot;,
+    &quot;edge_case_handling&quot;: &quot;string&quot;
+  },
+
+  &quot;parameters&quot;: {
+    &quot;parameter_name&quot;: {
+      &quot;default_value&quot;: &quot;number&quot;,
+      &quot;valid_range&quot;: &quot;string (min-max)&quot;,
+      &quot;description&quot;: &quot;string (parameter meaning)&quot;
+    }
+  },
+
+  &quot;compatibility&quot;: {
+    &quot;framework_types&quot;: [&quot;array of compatible frameworks&quot;],
+    &quot;prompt_types&quot;: [&quot;array of compatible prompt templates&quot;],
+    &quot;mathematical_requirements&quot;: [&quot;array of input requirements&quot;]
+  }
+}
+</code></pre>
+<h3 id="4-llm-configurations"><strong>4. LLM Configurations</strong></h3>
+<p><strong>Purpose</strong>: Specify model providers, versions, and analysis parameters.</p>
+<h4 id="supported-llm-providers"><strong>Supported LLM Providers</strong></h4>
+<p><strong>OpenAI Models</strong>
+- <strong>GPT-4.1 Series</strong>: <code>gpt-4.1</code>, <code>gpt-4.1-mini</code>, <code>gpt-4.1-nano</code>
+- <strong>GPT-4o Series</strong>: <code>gpt-4o</code>, <code>gpt-4o-mini</code>
+- <strong>O-Series Reasoning</strong>: <code>o1</code>, <code>o3</code>, <code>o4-mini</code>
+- <strong>Cost Range</strong>: $0.0001-0.06 per 1K tokens
+- <strong>Strengths</strong>: Consistency, JSON reliability, cost-effectiveness</p>
+<p><strong>Anthropic Models</strong>
+- <strong>Claude 4 Series</strong>: <code>claude-4-opus</code>, <code>claude-4-sonnet</code>
+- <strong>Claude 3.7 Series</strong>: <code>claude-3.7-sonnet</code> (extended thinking)
+- <strong>Claude 3.5 Series</strong>: <code>claude-3-5-sonnet-20241022</code>, <code>claude-3-5-haiku-20241022</code>
+- <strong>Cost Range</strong>: $0.0003-0.075 per 1K tokens
+- <strong>Strengths</strong>: Evidence quality, analytical depth, reasoning</p>
+<p><strong>Mistral Models</strong>
+- <strong>Large Series</strong>: <code>mistral-large-2411</code>
+- <strong>Efficient Series</strong>: <code>mistral-tiny</code>, <code>mistral-small</code>
+- <strong>Cost Range</strong>: $0.0002-0.024 per 1K tokens
+- <strong>Strengths</strong>: Multilingual, efficiency, European perspective</p>
+<p><strong>Google AI Models</strong>
+- <strong>Gemini 2.x Series</strong>: <code>gemini-2.0-flash-exp</code>
+- <strong>Gemini 1.5 Series</strong>: <code>gemini-1.5-flash</code>, <code>gemini-1.5-pro</code>
+- <strong>Cost Range</strong>: $0.000125-0.05 per 1K tokens
+- <strong>Strengths</strong>: Multimodal capabilities, technical analysis</p>
+<h4 id="model-configuration-parameters"><strong>Model Configuration Parameters</strong></h4>
+<pre><code class="language-json">{
+  &quot;llm_model&quot;: &quot;string (model identifier)&quot;,
+  &quot;provider&quot;: &quot;enum[openai, anthropic, mistral, google_ai]&quot;,
+  &quot;version&quot;: &quot;string (model version)&quot;,
+
+  &quot;analysis_parameters&quot;: {
+    &quot;temperature&quot;: &quot;number (0.0-1.0, creativity level)&quot;,
+    &quot;max_tokens&quot;: &quot;number (response length limit)&quot;,
+    &quot;top_p&quot;: &quot;number (nucleus sampling parameter)&quot;,
+    &quot;frequency_penalty&quot;: &quot;number (repetition control)&quot;,
+    &quot;presence_penalty&quot;: &quot;number (topic diversity)&quot;
+  },
+
+  &quot;cost_parameters&quot;: {
+    &quot;input_cost_per_1k&quot;: &quot;number (USD per 1K input tokens)&quot;,
+    &quot;output_cost_per_1k&quot;: &quot;number (USD per 1K output tokens)&quot;,
+    &quot;rate_limit&quot;: &quot;number (requests per minute)&quot;
+  },
+
+  &quot;capability_profile&quot;: {
+    &quot;context_window&quot;: &quot;number (maximum input tokens)&quot;,
+    &quot;json_reliability&quot;: &quot;enum[high, medium, low]&quot;,
+    &quot;reasoning_depth&quot;: &quot;enum[high, medium, low]&quot;,
+    &quot;evidence_quality&quot;: &quot;enum[high, medium, low]&quot;,
+    &quot;consistency&quot;: &quot;enum[high, medium, low]&quot;
+  }
+}
+</code></pre>
+<h2 id="experiment-configuration"><strong>⚙️ Experiment Configuration</strong></h2>
+<h3 id="experiment-definition-schema"><strong>Experiment Definition Schema</strong></h3>
+<pre><code class="language-json">{
+  &quot;experiment&quot;: {
+    &quot;name&quot;: &quot;string (required, unique identifier)&quot;,
+    &quot;hypothesis&quot;: &quot;string (research hypothesis)&quot;,
+    &quot;description&quot;: &quot;string (experiment overview)&quot;,
+    &quot;research_context&quot;: &quot;string (academic context and background)&quot;,
+
+    &quot;metadata&quot;: {
+      &quot;researcher&quot;: &quot;string (creator identifier)&quot;,
+      &quot;institution&quot;: &quot;string (research affiliation)&quot;,
+      &quot;tags&quot;: [&quot;array of research tags&quot;],
+      &quot;research_notes&quot;: &quot;string (methodology notes)&quot;,
+      &quot;publication_status&quot;: &quot;enum[draft, active, completed, published]&quot;
+    }
+  },
+
+  &quot;configuration&quot;: {
+    &quot;framework_config_id&quot;: &quot;string (required)&quot;,
+    &quot;prompt_template_id&quot;: &quot;string (required)&quot;, 
+    &quot;scoring_algorithm_id&quot;: &quot;string (required)&quot;,
+    &quot;analysis_mode&quot;: &quot;enum[single_model, multi_model, comparative]&quot;,
+    &quot;selected_models&quot;: [&quot;array of LLM model identifiers&quot;]
+  },
+
+  &quot;execution_parameters&quot;: {
+    &quot;runs_per_text&quot;: &quot;number (reliability validation)&quot;,
+    &quot;randomize_order&quot;: &quot;boolean (reduce order effects)&quot;,
+    &quot;cost_limit&quot;: &quot;number (USD maximum)&quot;,
+    &quot;timeout_seconds&quot;: &quot;number (per-run timeout)&quot;,
+    &quot;retry_attempts&quot;: &quot;number (failure handling)&quot;
+  },
+
+  &quot;quality_assurance&quot;: {
+    &quot;enable_qa_validation&quot;: &quot;boolean&quot;,
+    &quot;confidence_threshold&quot;: &quot;number (minimum QA confidence)&quot;,
+    &quot;require_evidence&quot;: &quot;boolean&quot;,
+    &quot;manual_review_triggers&quot;: [&quot;array of conditions&quot;]
+  }
+}
+</code></pre>
+<h3 id="analysis-modes"><strong>Analysis Modes</strong></h3>
+<p><strong>Single Model Analysis</strong> (<code>single_model</code>)
+- <strong>Purpose</strong>: Focused analysis with one LLM model
+- <strong>Use Cases</strong>: Cost-efficient analysis, model-specific research
+- <strong>Reliability</strong>: Multiple runs with same model for consistency
+- <strong>Output</strong>: Single model results with statistical reliability measures</p>
+<p><strong>Multi-Model Comparison</strong> (<code>multi_model</code>)
+- <strong>Purpose</strong>: Cross-model validation and consensus analysis
+- <strong>Use Cases</strong>: Academic research, validation studies, bias detection
+- <strong>Reliability</strong>: Correlation analysis across different LLM providers
+- <strong>Output</strong>: Consensus analysis with inter-model agreement metrics</p>
+<p><strong>Comparative Analysis</strong> (<code>comparative</code>)
+- <strong>Purpose</strong>: Systematic comparison across multiple experimental conditions
+- <strong>Use Cases</strong>: Methodological research, framework validation, prompt optimization
+- <strong>Reliability</strong>: Controlled comparison with statistical significance testing
+- <strong>Output</strong>: Comparative results with effect size calculations</p>
+<h3 id="quality-assurance-integration"><strong>Quality Assurance Integration</strong></h3>
+<p><strong>6-Layer QA System</strong>: All experiments can optionally include comprehensive quality validation:</p>
+<ol>
+<li><strong>Input Validation</strong>: Text quality, framework compatibility, parameter validation</li>
+<li><strong>LLM Response Validation</strong>: JSON format, required fields, score ranges</li>
+<li><strong>Statistical Coherence</strong>: Default value detection, variance analysis, pattern recognition</li>
+<li><strong>Mathematical Consistency</strong>: Position calculation validation, reproducibility verification</li>
+<li><strong>Cross-Validation</strong>: Second opinion requirements, anomaly flagging</li>
+<li><strong>Anomaly Detection</strong>: Perfect symmetry, outliers, identical scores</li>
+</ol>
+<p><strong>QA Configuration Options</strong>:
+- <strong>Confidence Thresholds</strong>: HIGH (≥0.8), MEDIUM (0.5-0.79), LOW (&lt;0.5)
+- <strong>Automatic Filtering</strong>: Exclude low-confidence results from analysis
+- <strong>Manual Review Triggers</strong>: Flag analyses requiring human validation
+- <strong>Reporting Integration</strong>: Include QA metrics in all academic outputs</p>
+<h2 id="experimental-outputs"><strong>📊 Experimental Outputs</strong></h2>
+<h3 id="run-level-results"><strong>Run-Level Results</strong></h3>
+<p>Each individual LLM analysis produces:</p>
+<pre><code class="language-json">{
+  &quot;run_id&quot;: &quot;string (unique identifier)&quot;,
+  &quot;text_id&quot;: &quot;string (source text identifier)&quot;,
+  &quot;llm_model&quot;: &quot;string (model used)&quot;,
+  &quot;execution_time&quot;: &quot;timestamp&quot;,
+  &quot;duration_seconds&quot;: &quot;number&quot;,
+  &quot;api_cost&quot;: &quot;number (USD)&quot;,
+
+  &quot;analysis_results&quot;: {
+    &quot;raw_scores&quot;: {&quot;WellName&quot;: &quot;number&quot;, ...},
+    &quot;hierarchical_ranking&quot;: {...} // if hierarchical prompt
+    &quot;well_justifications&quot;: {...} // if evidence required
+    &quot;framework_fit_score&quot;: &quot;number (0.0-1.0)&quot;,
+    &quot;narrative_position&quot;: {&quot;x&quot;: &quot;number&quot;, &quot;y&quot;: &quot;number&quot;}
+  },
+
+  &quot;quality_metadata&quot;: {
+    &quot;qa_confidence_level&quot;: &quot;enum[HIGH, MEDIUM, LOW]&quot;,
+    &quot;qa_confidence_score&quot;: &quot;number (0.0-1.0)&quot;,
+    &quot;anomalies_detected&quot;: [&quot;array of anomaly types&quot;],
+    &quot;requires_second_opinion&quot;: &quot;boolean&quot;
+  },
+
+  &quot;provenance&quot;: {
+    &quot;framework_version&quot;: &quot;string&quot;,
+    &quot;prompt_template_version&quot;: &quot;string&quot;,
+    &quot;scoring_algorithm_version&quot;: &quot;string&quot;,
+    &quot;complete_configuration&quot;: {...}
+  }
+}
+</code></pre>
+<h3 id="experiment-level-results"><strong>Experiment-Level Results</strong></h3>
+<p>Aggregated analysis across all runs:</p>
+<pre><code class="language-json">{
+  &quot;experiment_summary&quot;: {
+    &quot;total_runs&quot;: &quot;number&quot;,
+    &quot;successful_runs&quot;: &quot;number&quot;, 
+    &quot;total_cost&quot;: &quot;number (USD)&quot;,
+    &quot;average_duration&quot;: &quot;number (seconds)&quot;,
+    &quot;execution_period&quot;: &quot;string (start - end dates)&quot;
+  },
+
+  &quot;reliability_analysis&quot;: {
+    &quot;coefficient_variation&quot;: &quot;number (consistency measure)&quot;,
+    &quot;intraclass_correlation&quot;: &quot;number (if multi-model)&quot;,
+    &quot;reliability_rate&quot;: &quot;number (% achieving target CV)&quot;,
+    &quot;framework_fit_statistics&quot;: {...}
+  },
+
+  &quot;academic_outputs&quot;: {
+    &quot;publication_ready_dataset&quot;: &quot;path to CSV/Feather/JSON exports&quot;,
+    &quot;jupyter_analysis_notebook&quot;: &quot;path to generated notebook&quot;,
+    &quot;r_analysis_scripts&quot;: &quot;path to R statistical scripts&quot;,
+    &quot;methodology_documentation&quot;: &quot;path to methods documentation&quot;,
+    &quot;replication_package&quot;: &quot;path to complete replication materials&quot;
+  }
+}
+</code></pre>
+<h2 id="advanced-experimental-capabilities"><strong>🔬 Advanced Experimental Capabilities</strong></h2>
+<h3 id="component-matrix-experiments"><strong>Component Matrix Experiments</strong></h3>
+<p>Systematic testing across multiple component combinations:</p>
+<pre><code class="language-json">{
+  &quot;matrix_experiment&quot;: {
+    &quot;frameworks&quot;: [&quot;civic_virtue&quot;, &quot;political_spectrum&quot;],
+    &quot;prompt_templates&quot;: [&quot;hierarchical_v2.1&quot;, &quot;traditional_v2.0&quot;],
+    &quot;scoring_algorithms&quot;: [&quot;linear_v1.0&quot;, &quot;hierarchical_v1.0&quot;],
+    &quot;models&quot;: [&quot;gpt-4.1-mini&quot;, &quot;claude-3-5-sonnet&quot;]
+  }
+}
+</code></pre>
+<p><strong>Output</strong>: Complete factorial analysis with:
+- Component interaction effects
+- Optimal configuration identification<br />
+- Methodological recommendations
+- Statistical significance testing</p>
+<h3 id="longitudinal-studies"><strong>Longitudinal Studies</strong></h3>
+<p>Time-series analysis capabilities:</p>
+<pre><code class="language-json">{
+  &quot;longitudinal_experiment&quot;: {
+    &quot;temporal_corpus&quot;: {
+      &quot;time_periods&quot;: [&quot;2020-01&quot;, &quot;2020-02&quot;, ...],
+      &quot;texts_per_period&quot;: &quot;number&quot;,
+      &quot;temporal_metadata&quot;: &quot;required&quot;
+    },
+    &quot;trend_analysis&quot;: {
+      &quot;enable_trend_detection&quot;: &quot;boolean&quot;,
+      &quot;periodicity_detection&quot;: &quot;boolean&quot;, 
+      &quot;change_point_analysis&quot;: &quot;boolean&quot;
+    }
+  }
+}
+</code></pre>
+<h3 id="validation-studies"><strong>Validation Studies</strong></h3>
+<p>Human-LLM comparison protocols:</p>
+<pre><code class="language-json">{
+  &quot;validation_experiment&quot;: {
+    &quot;human_coding&quot;: {
+      &quot;expert_coders&quot;: &quot;number&quot;,
+      &quot;inter_rater_reliability_target&quot;: &quot;number&quot;,
+      &quot;coding_protocol&quot;: &quot;string (methodology)&quot;
+    },
+    &quot;llm_comparison&quot;: {
+      &quot;correlation_targets&quot;: &quot;number (human-LLM agreement)&quot;,
+      &quot;bias_detection&quot;: &quot;boolean&quot;,
+      &quot;systematic_error_analysis&quot;: &quot;boolean&quot;
+    }
+  }
+}
+</code></pre>
+<h2 id="usage-guidelines"><strong>📚 Usage Guidelines</strong></h2>
+<h3 id="experimental-design-best-practices"><strong>Experimental Design Best Practices</strong></h3>
+<ol>
+<li><strong>Component Selection Strategy</strong>:</li>
+<li>Choose frameworks appropriate for text type and research question</li>
+<li>Select prompt templates matching analytical depth requirements</li>
+<li>Pick scoring algorithms aligned with interpretability needs</li>
+<li>
+<p>Balance model cost/quality based on research budget</p>
+</li>
+<li>
+<p><strong>Reliability Requirements</strong>:</p>
+</li>
+<li>Single model: ≥3 runs per text for statistical validation</li>
+<li>Multi-model: ≥2 models with correlation analysis</li>
+<li>
+<p>Academic research: Target CV ≤ 0.20, ICC ≥ 0.80</p>
+</li>
+<li>
+<p><strong>Quality Assurance Standards</strong>:</p>
+</li>
+<li>Enable QA validation for academic research</li>
+<li>Set HIGH confidence thresholds for publication-quality work</li>
+<li>Include evidence requirements for peer review</li>
+<li>Plan manual review for edge cases</li>
+</ol>
+<h3 id="component-development-workflow"><strong>Component Development Workflow</strong></h3>
+<ol>
+<li><strong>Framework Development</strong>:</li>
+<li>Literature review and theoretical foundation</li>
+<li>Dimensional definition and differentiation testing</li>
+<li>Pilot testing with representative texts</li>
+<li>
+<p>Academic validation with expert review</p>
+</li>
+<li>
+<p><strong>Prompt Engineering</strong>:</p>
+</li>
+<li>Framework-agnostic design principles</li>
+<li>Multi-model compatibility testing</li>
+<li>Output format standardization</li>
+<li>
+<p>Evidence quality optimization</p>
+</li>
+<li>
+<p><strong>Algorithm Innovation</strong>:</p>
+</li>
+<li>Mathematical soundness verification</li>
+<li>Edge case handling</li>
+<li>Computational efficiency</li>
+<li>Interpretability validation</li>
+</ol>
+<h3 id="academic-integration-workflow"><strong>Academic Integration Workflow</strong></h3>
+<ol>
+<li><strong>Experimental Design</strong>: Use this specification to design methodologically sound experiments</li>
+<li><strong>Execution</strong>: Run experiments with complete provenance tracking</li>
+<li><strong>Analysis</strong>: Generate academic outputs with QA-enhanced data</li>
+<li><strong>Publication</strong>: Include complete replication packages</li>
+<li><strong>Validation</strong>: Support independent replication and verification</li>
+</ol>
+<hr />
+<p><em>This specification provides the complete experimental design space for systematic narrative analysis research using the Narrative Gravity Analysis System.</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

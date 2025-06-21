@@ -1,0 +1,1177 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>LLM Validation Workbench Requirements - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#llm-validation-workbench-requirements" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LLM Validation Workbench Requirements
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-user-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core User Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core User Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-multi-variable-experiment-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Multi-Variable Experiment Construction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Multi-Variable Experiment Construction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-text-corpus-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Text Corpus Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-framework-configuration-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Framework Configuration Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-prompt-template-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Prompt Template System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-llm-configuration-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 LLM Configuration Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-scoring-methodology-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 Scoring Methodology Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-framework-fit-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Framework Fit Assessment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Framework Fit Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-automatic-fit-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Automatic Fit Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-fit-threshold-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Fit Threshold Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-alternative-framework-suggestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Alternative Framework Suggestions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-experiment-execution-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Experiment Execution Engine
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Experiment Execution Engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-batch-processing-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Batch Processing System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-error-handling-reliability" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Error Handling &amp; Reliability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-real-time-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Real-Time Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-results-analysis-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Results Analysis &amp; Visualization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Results Analysis &amp; Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-cross-llm-consensus-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Cross-LLM Consensus Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-evidence-passage-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Evidence Passage Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-metadata-pattern-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Metadata Pattern Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-framework-sensitivity-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Framework Sensitivity Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-academic-export-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Academic Export &amp; Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Academic Export &amp; Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-publication-ready-data-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Publication-Ready Data Export
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-statistical-analysis-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Statistical Analysis Scripts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-methodology-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Methodology Documentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-data-architecture-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Data Architecture Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Data Architecture Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-database-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Database Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-api-service-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 API Service Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-performance-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Performance Requirements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-user-interface-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. User Interface Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. User Interface Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-experiment-design-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Experiment Design Interface
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-monitoring-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Monitoring Dashboard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-analysis-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Analysis Dashboard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-integration-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Integration Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Integration Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-llm-provider-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 LLM Provider Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-statistical-software-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 Statistical Software Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-quality-assurance-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Quality Assurance Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Quality Assurance Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-validation-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 Validation Testing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-reproducibility-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 Reproducibility Assurance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Success Criteria
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Success Criteria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-statistical-validation-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.1 Statistical Validation Goals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-academic-publication-readiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2 Academic Publication Readiness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-research-efficiency-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3 Research Efficiency Goals
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="llm-validation-workbench-requirements">LLM Validation Workbench Requirements</h1>
+<p><strong>Document Version:</strong> 1.0<br />
+<strong>Date:</strong> January 6, 2025<br />
+<strong>Based on:</strong> Independent Research Author user journey and validation requirements</p>
+<h2 id="overview">Overview</h2>
+<p>The LLM Validation Workbench is a research platform designed to systematically validate Large Language Model performance in narrative analysis. It enables rigorous experimentation with multiple variables, comprehensive result analysis, and evidence generation for academic publication.</p>
+<h2 id="core-user-requirements">Core User Requirements</h2>
+<h3 id="1-multi-variable-experiment-construction">1. Multi-Variable Experiment Construction</h3>
+<h4 id="11-text-corpus-management">1.1 Text Corpus Management</h4>
+<p><strong>Requirement</strong>: Flexible text ingestion with rich metadata support
+- <strong>Text Storage</strong>: Support for variable-length texts (100-10,000+ words)
+- <strong>Metadata Schema</strong>: Flexible key-value pairs supporting:
+  - <code>speaker</code> (string): Text author/speaker identification
+  - <code>date</code> (ISO 8601): When text was created/delivered
+  - <code>location</code> (string): Geographic location of delivery
+  - <code>audience</code> (string): Intended audience description
+  - <code>occasion</code> (string): Context/event description
+  - <code>word_count</code> (integer): Automatic calculation
+  - <code>historical_context</code> (text): Narrative description of circumstances
+  - Custom fields: User-defined metadata as needed
+- <strong>Import Methods</strong>: Manual entry, CSV bulk import, API ingestion
+- <strong>Search &amp; Filter</strong>: Query texts by any metadata field or content</p>
+<h4 id="12-framework-configuration-management">1.2 Framework Configuration Management</h4>
+<p><strong>Requirement</strong>: Version-controlled framework definitions with iterative testing
+- <strong>Framework Versions</strong>: Semantic versioning (v1.0, v1.1, v2.0) with change tracking
+- <strong>Dipole Definitions</strong>: JSON-based configuration of:
+  - Dipole pairs (e.g., Dignity vs. Tribalism)
+  - Conceptual descriptions for each pole
+  - Language cues and detection patterns
+- <strong>Weight Configuration</strong>: Numerical weights for each dipole with validation
+- <strong>Framework Comparison</strong>: Side-by-side framework definition comparison
+- <strong>Experimental Variants</strong>: Ability to create test versions (equal-weighted, enhanced-dimension, etc.)</p>
+<h4 id="13-prompt-template-system">1.3 Prompt Template System</h4>
+<p><strong>Requirement</strong>: Systematic prompt engineering with A/B testing capability
+- <strong>Template Versioning</strong>: Track prompt evolution with semantic versioning
+- <strong>Template Components</strong>:
+  - Core instruction text
+  - Scoring methodology explanation
+  - Output format requirements (JSON schema compliance)
+  - Context instructions (historical, audience awareness)
+- <strong>Variable Substitution</strong>: Dynamic insertion of framework definitions, text content
+- <strong>Template Testing</strong>: Compare performance across prompt variations
+- <strong>Best Practice Tracking</strong>: Document which prompts produce optimal results</p>
+<h4 id="14-llm-configuration-management">1.4 LLM Configuration Management</h4>
+<p><strong>Requirement</strong>: Multi-provider LLM integration with parameter control
+- <strong>Provider Support</strong>: OpenAI, Anthropic, Mistral, Google AI
+- <strong>Model Selection</strong>: Current and future model variants
+- <strong>Parameter Control</strong>:
+  - <code>temperature</code>: Creativity/consistency control
+  - <code>max_tokens</code>: Response length limits
+  - <code>top_p</code>: Nucleus sampling control
+  - Provider-specific parameters
+- <strong>Cost Tracking</strong>: Real-time cost estimation and budget management
+- <strong>Reliability Testing</strong>: Multiple runs per configuration for statistical validity</p>
+<h4 id="15-scoring-methodology-framework">1.5 Scoring Methodology Framework</h4>
+<p><strong>Requirement</strong>: Flexible post-processing of LLM outputs
+- <strong>Score Weighting</strong>: Apply secondary weights to LLM scores based on:
+  - Salience estimates from LLM
+  - Historical performance data
+  - Domain-specific importance
+- <strong>Aggregation Methods</strong>: Multiple approaches for combining scores:
+  - Simple averaging
+  - Weighted averaging
+  - Confidence-weighted averaging
+  - Outlier-filtered averaging
+- <strong>Methodology Versioning</strong>: Track scoring approach evolution
+- <strong>Custom Algorithms</strong>: Plugin architecture for new scoring methods</p>
+<h3 id="2-framework-fit-assessment">2. Framework Fit Assessment</h3>
+<h4 id="21-automatic-fit-detection">2.1 Automatic Fit Detection</h4>
+<p><strong>Requirement</strong>: Real-time assessment of framework appropriateness for text
+- <strong>Fit Scoring</strong>: Numerical assessment (0.0-1.0) of framework-text compatibility
+- <strong>Confidence Metrics</strong>: LLM confidence in fit assessment
+- <strong>Threshold Management</strong>: Configurable fit thresholds with warnings
+- <strong>Explanation Generation</strong>: Natural language explanation of fit assessment
+- <strong>Problematic Dimension Detection</strong>: Identify which dipoles are poor fits</p>
+<h4 id="22-fit-threshold-management">2.2 Fit Threshold Management</h4>
+<p><strong>Requirement</strong>: Configurable quality gates for experiment validity
+- <strong>Global Thresholds</strong>: System-wide minimum fit requirements
+- <strong>Framework-Specific Thresholds</strong>: Different standards for different frameworks
+- <strong>Alert System</strong>: Warnings when texts fall below fit thresholds
+- <strong>Batch Filtering</strong>: Automatic exclusion of poor-fit texts from analysis
+- <strong>Override Capabilities</strong>: Manual override with justification tracking</p>
+<h4 id="23-alternative-framework-suggestions">2.3 Alternative Framework Suggestions</h4>
+<p><strong>Requirement</strong>: Intelligent recommendations for better framework matches
+- <strong>Suggestion Algorithm</strong>: Analyze text characteristics to recommend alternatives
+- <strong>Framework Database</strong>: Maintain catalog of available frameworks with fit profiles
+- <strong>Custom Framework Prompts</strong>: Suggest new framework development when no good fit exists
+- <strong>Historical Performance</strong>: Track which frameworks work well for similar texts</p>
+<h3 id="3-experiment-execution-engine">3. Experiment Execution Engine</h3>
+<h4 id="31-batch-processing-system">3.1 Batch Processing System</h4>
+<p><strong>Requirement</strong>: Scalable execution of large experiment suites
+- <strong>Job Queueing</strong>: Background processing of experiment batches
+- <strong>Progress Tracking</strong>: Real-time progress indicators with ETA
+- <strong>Randomization</strong>: Configurable execution order randomization to prevent bias
+- <strong>Parallel Execution</strong>: Concurrent LLM calls within provider rate limits
+- <strong>Resume Capability</strong>: Restart failed or interrupted experiments
+- <strong>Resource Management</strong>: CPU, memory, and API quota management</p>
+<h4 id="32-error-handling-reliability">3.2 Error Handling &amp; Reliability</h4>
+<p><strong>Requirement</strong>: Robust handling of LLM API failures and inconsistencies
+- <strong>Retry Logic</strong>: Exponential backoff for temporary failures
+- <strong>Provider Fallback</strong>: Automatic fallback to alternative providers
+- <strong>Partial Failure Recovery</strong>: Continue experiments despite individual call failures
+- <strong>Data Integrity</strong>: Ensure no partial or corrupted results in database
+- <strong>Audit Trail</strong>: Complete logging of all execution events and errors</p>
+<h4 id="33-real-time-monitoring">3.3 Real-Time Monitoring</h4>
+<p><strong>Requirement</strong>: Live visibility into experiment execution
+- <strong>Dashboard View</strong>: Current experiment status, progress, and performance
+- <strong>Cost Tracking</strong>: Running total of API costs with budget alerts
+- <strong>Quality Indicators</strong>: Live updates on fit assessments and correlation metrics
+- <strong>Performance Metrics</strong>: Response times, success rates, error frequencies
+- <strong>Resource Utilization</strong>: API quota usage, rate limiting status</p>
+<h3 id="4-results-analysis-visualization">4. Results Analysis &amp; Visualization</h3>
+<h4 id="41-cross-llm-consensus-analysis">4.1 Cross-LLM Consensus Analysis</h4>
+<p><strong>Requirement</strong>: Statistical analysis of multi-model agreement
+- <strong>Correlation Matrices</strong>: Pairwise correlation coefficients between all LLM combinations
+- <strong>Statistical Significance</strong>: p-values, confidence intervals, effect sizes
+- <strong>Consensus Metrics</strong>: 
+  - Overall correlation scores (target: &gt;0.90)
+  - Dimension-specific reliability
+  - Position stability measurements
+- <strong>Outlier Detection</strong>: Identify and flag unusual results for investigation
+- <strong>Confidence Intervals</strong>: Statistical bounds on consensus measurements</p>
+<h4 id="42-evidence-passage-analysis">4.2 Evidence Passage Analysis</h4>
+<p><strong>Requirement</strong>: Deep analysis of supporting text evidence
+- <strong>Passage Extraction</strong>: Automatic identification of supporting quotes
+- <strong>Evidence Quality</strong>: Scoring of how well passages support dimensional scores
+- <strong>Consistency Analysis</strong>: Compare evidence selection across different LLMs
+- <strong>Quote Management</strong>: Organize and categorize supporting passages
+- <strong>Citation Generation</strong>: Proper academic citation format for evidence passages</p>
+<h4 id="43-metadata-pattern-analysis">4.3 Metadata Pattern Analysis</h4>
+<p><strong>Requirement</strong>: Statistical analysis across text characteristics
+- <strong>Grouping Analysis</strong>: Compare results by speaker, date, audience, occasion
+- <strong>Trend Detection</strong>: Identify historical or categorical patterns
+- <strong>Statistical Testing</strong>: ANOVA, t-tests, correlation analysis across metadata
+- <strong>Effect Size Calculation</strong>: Practical significance of detected differences
+- <strong>Visualization</strong>: Charts and graphs showing metadata-based patterns</p>
+<h4 id="44-framework-sensitivity-testing">4.4 Framework Sensitivity Testing</h4>
+<p><strong>Requirement</strong>: Analysis of framework parameter sensitivity
+- <strong>Weight Sensitivity</strong>: How results change with different dipole weights
+- <strong>Position Stability</strong>: Variance in narrative positioning across configurations
+- <strong>Elevation Variance</strong>: How framework changes affect narrative elevation scores
+- <strong>Robustness Metrics</strong>: Measure of framework stability under parameter changes
+- <strong>Optimization Suggestions</strong>: Recommend framework improvements based on sensitivity analysis</p>
+<h3 id="5-academic-export-documentation">5. Academic Export &amp; Documentation</h3>
+<h4 id="51-publication-ready-data-export">5.1 Publication-Ready Data Export</h4>
+<p><strong>Requirement</strong>: Generate research-quality datasets for academic use
+- <strong>Format Support</strong>: CSV, JSON, R-compatible formats
+- <strong>Statistical Package Integration</strong>: SPSS, R, Stata, Python pandas compatibility
+- <strong>Metadata Inclusion</strong>: Complete provenance and experimental parameters
+- <strong>Replication Packages</strong>: Self-contained analysis reproduction bundles
+- <strong>Version Control</strong>: Track and export specific experimental versions</p>
+<h4 id="52-statistical-analysis-scripts">5.2 Statistical Analysis Scripts</h4>
+<p><strong>Requirement</strong>: Automated generation of analysis code
+- <strong>R Script Generation</strong>: Complete statistical analysis scripts with results
+- <strong>Python Notebook Creation</strong>: Jupyter notebooks with analysis workflows
+- <strong>SPSS Syntax Files</strong>: Command syntax for commercial statistical software
+- <strong>Custom Analysis</strong>: User-defined statistical procedures and outputs
+- <strong>Documentation</strong>: Commented code explaining all analysis steps</p>
+<h4 id="53-methodology-documentation">5.3 Methodology Documentation</h4>
+<p><strong>Requirement</strong>: Comprehensive documentation for academic transparency
+- <strong>Experimental Protocols</strong>: Step-by-step methodology descriptions
+- <strong>Parameter Documentation</strong>: Complete record of all experimental settings
+- <strong>Framework Specifications</strong>: Detailed framework definitions and rationale
+- <strong>Prompt Documentation</strong>: Full prompt templates with version history
+- <strong>Reliability Reports</strong>: Statistical validation summaries with confidence measures</p>
+<h3 id="6-data-architecture-requirements">6. Data Architecture Requirements</h3>
+<h4 id="61-database-schema">6.1 Database Schema</h4>
+<p><strong>Requirement</strong>: Comprehensive data model supporting all experimental needs</p>
+<p><strong>Core Entities:</strong>
+- <code>experiments</code>: Experiment configurations and metadata
+- <code>text_corpus</code>: Text storage with flexible metadata
+- <code>frameworks</code>: Framework definitions with versioning
+- <code>prompt_templates</code>: Prompt storage with versioning
+- <code>llm_configurations</code>: LLM provider and parameter settings
+- <code>experimental_runs</code>: Individual LLM analysis executions
+- <code>results</code>: Processed analysis results with evidence
+- <code>consensus_analysis</code>: Cross-run statistical analysis
+- <code>metadata_analysis</code>: Pattern analysis across text characteristics</p>
+<p><strong>Relationship Requirements:</strong>
+- Many-to-many relationships between experiments and all configuration entities
+- Complete audit trail for all changes
+- Efficient querying for analysis aggregations
+- Scalable storage for large experimental datasets</p>
+<h4 id="62-api-service-architecture">6.2 API Service Architecture</h4>
+<p><strong>Requirement</strong>: RESTful API supporting all workbench functionality</p>
+<p><strong>Core Endpoints:</strong></p>
+<pre><code># Experiment Management
+POST   /api/experiments
+GET    /api/experiments
+GET    /api/experiments/{id}
+PUT    /api/experiments/{id}
+DELETE /api/experiments/{id}
+POST   /api/experiments/{id}/execute
+GET    /api/experiments/{id}/status
+
+# Configuration Management
+GET    /api/text-corpus
+POST   /api/text-corpus
+GET    /api/frameworks
+POST   /api/frameworks
+GET    /api/prompt-templates
+POST   /api/prompt-templates
+GET    /api/llm-configurations
+
+# Results &amp; Analysis
+GET    /api/experiments/{id}/results
+GET    /api/runs/{run_id}
+POST   /api/analysis/consensus
+POST   /api/analysis/metadata-patterns
+POST   /api/analysis/framework-sensitivity
+POST   /api/analysis/fit-assessment
+
+# Export &amp; Documentation
+POST   /api/export/academic-formats
+POST   /api/export/statistical-scripts
+POST   /api/export/replication-package
+GET    /api/documentation/methodology
+</code></pre>
+<h4 id="63-performance-requirements">6.3 Performance Requirements</h4>
+<p><strong>Requirement</strong>: System performance suitable for research workflows
+- <strong>Response Times</strong>: 
+  - Configuration operations: &lt;500ms
+  - Simple queries: &lt;1s
+  - Complex analysis: &lt;30s
+  - Export operations: &lt;2 minutes
+- <strong>Throughput</strong>: Support 1000+ concurrent LLM calls
+- <strong>Scalability</strong>: Handle experiments with 1000+ texts and 100+ framework variants
+- <strong>Reliability</strong>: 99.5% uptime, robust error recovery
+- <strong>Data Integrity</strong>: ACID compliance, backup and recovery systems</p>
+<h3 id="7-user-interface-requirements">7. User Interface Requirements</h3>
+<h4 id="71-experiment-design-interface">7.1 Experiment Design Interface</h4>
+<p><strong>Requirement</strong>: Intuitive experiment configuration workflow
+- <strong>Wizard-Style Setup</strong>: Step-by-step experiment creation
+- <strong>Configuration Templates</strong>: Pre-built experiment types for common scenarios
+- <strong>Real-Time Validation</strong>: Immediate feedback on configuration validity
+- <strong>Cost Estimation</strong>: Preview of execution costs before launch
+- <strong>Save/Load Drafts</strong>: Persist incomplete experiment configurations</p>
+<h4 id="72-monitoring-dashboard">7.2 Monitoring Dashboard</h4>
+<p><strong>Requirement</strong>: Real-time experiment execution visibility
+- <strong>Progress Indicators</strong>: Visual progress bars with completion estimates
+- <strong>Live Results</strong>: Streaming updates of completed analyses
+- <strong>Alert System</strong>: Notifications for errors, threshold violations, completion
+- <strong>Resource Monitoring</strong>: API quota usage, cost tracking, performance metrics
+- <strong>Intervention Controls</strong>: Pause, resume, abort experiment capabilities</p>
+<h4 id="73-analysis-dashboard">7.3 Analysis Dashboard</h4>
+<p><strong>Requirement</strong>: Comprehensive results exploration interface
+- <strong>Correlation Visualization</strong>: Heat maps, scatter plots, correlation matrices
+- <strong>Evidence Explorer</strong>: Drill-down interface for supporting passages
+- <strong>Metadata Analysis</strong>: Charts and filters for pattern exploration
+- <strong>Comparison Tools</strong>: Side-by-side experiment comparison
+- <strong>Export Interface</strong>: One-click academic format generation</p>
+<h3 id="8-integration-requirements">8. Integration Requirements</h3>
+<h4 id="81-llm-provider-integration">8.1 LLM Provider Integration</h4>
+<p><strong>Requirement</strong>: Robust integration with major LLM providers
+- <strong>Provider APIs</strong>: OpenAI, Anthropic, Mistral, Google AI
+- <strong>Rate Limiting</strong>: Respect provider limits with intelligent throttling
+- <strong>Cost Management</strong>: Real-time cost tracking with budget controls
+- <strong>Model Availability</strong>: Dynamic detection of new models and capabilities
+- <strong>Error Handling</strong>: Provider-specific error interpretation and handling</p>
+<h4 id="82-statistical-software-integration">8.2 Statistical Software Integration</h4>
+<p><strong>Requirement</strong>: Seamless integration with research tools
+- <strong>R Integration</strong>: Direct R script execution and package support
+- <strong>Python Integration</strong>: Jupyter notebook generation and execution
+- <strong>Database Connectivity</strong>: Direct connections for external analysis tools
+- <strong>File Format Compatibility</strong>: Support for all major statistical software formats
+- <strong>API Access</strong>: External tool access to analysis results via API</p>
+<h3 id="9-quality-assurance-requirements">9. Quality Assurance Requirements</h3>
+<h4 id="91-validation-testing">9.1 Validation Testing</h4>
+<p><strong>Requirement</strong>: Comprehensive testing of all validation capabilities
+- <strong>Known-Answer Tests</strong>: Validate system with texts having known characteristics
+- <strong>Synthetic Narrative Testing</strong>: Test with artificially constructed texts
+- <strong>Historical Validation</strong>: Compare against established political science analyses
+- <strong>Cross-Reference Testing</strong>: Validate against other computational methods
+- <strong>Human Baseline</strong>: Initial testing against human expert annotations</p>
+<h4 id="92-reproducibility-assurance">9.2 Reproducibility Assurance</h4>
+<p><strong>Requirement</strong>: Guarantee of experimental reproducibility
+- <strong>Deterministic Results</strong>: Consistent results for identical experimental parameters
+- <strong>Version Control</strong>: Complete versioning of all experimental components
+- <strong>Environment Documentation</strong>: Capture and reproduce execution environments
+- <strong>Audit Trails</strong>: Complete logs enabling exact result reproduction
+- <strong>External Validation</strong>: Independent reproduction of key findings</p>
+<h3 id="10-success-criteria">10. Success Criteria</h3>
+<h4 id="101-statistical-validation-goals">10.1 Statistical Validation Goals</h4>
+<ul>
+<li><strong>Cross-LLM Correlation</strong>: Achieve &gt;0.90 correlation across major LLMs</li>
+<li><strong>Test-Retest Reliability</strong>: Demonstrate &lt;0.05 variance in repeated analyses</li>
+<li><strong>Framework Fit</strong>: Achieve &gt;0.80 average fit scores for appropriate texts</li>
+<li><strong>Evidence Quality</strong>: Generate coherent supporting passages for &gt;95% of scores</li>
+<li><strong>Statistical Significance</strong>: Detect meaningful patterns with p&lt;0.05</li>
+</ul>
+<h4 id="102-academic-publication-readiness">10.2 Academic Publication Readiness</h4>
+<ul>
+<li><strong>Methodology Documentation</strong>: Complete, reproducible methodology descriptions</li>
+<li><strong>Evidence Portfolio</strong>: Comprehensive statistical validation results</li>
+<li><strong>Replication Package</strong>: Self-contained materials for independent reproduction</li>
+<li><strong>Peer Review Readiness</strong>: Address anticipated academic reviewer concerns</li>
+<li><strong>Contribution Clarity</strong>: Demonstrate clear advancement over existing methods</li>
+</ul>
+<h4 id="103-research-efficiency-goals">10.3 Research Efficiency Goals</h4>
+<ul>
+<li><strong>Experiment Turnaround</strong>: Complete 300+ analysis experiment in &lt;2 hours</li>
+<li><strong>Analysis Automation</strong>: Reduce manual analysis effort by &gt;80%</li>
+<li><strong>Evidence Generation</strong>: Automatic generation of publication-quality results</li>
+<li><strong>Iteration Speed</strong>: Enable rapid framework refinement and testing</li>
+<li><strong>Confidence Building</strong>: Systematic evidence generation for methodology validation</li>
+</ul>
+<hr />
+<p><strong>Document Status</strong>: Draft v1.0 - Requires stakeholder review and technical validation<br />
+<strong>Next Steps</strong>: Technical architecture design, implementation planning, development prioritization </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

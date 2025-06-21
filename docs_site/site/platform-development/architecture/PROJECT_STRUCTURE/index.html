@@ -1,0 +1,797 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Narrative Gravity Maps - Project Structure - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#narrative-gravity-maps-project-structure" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Narrative Gravity Maps - Project Structure
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-application-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Core Application Files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Application Components
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Operational Infrastructure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-and-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Data and Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archive-and-development-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗃️ Archive and Development History
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-infrastructure-995-success-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Testing Infrastructure (99.5% Success Rate)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Key Principles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Key Principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clean-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clean Separation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Organization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maintainability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maintainability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#daily-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Daily Workflow
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="narrative-gravity-maps-project-structure">Narrative Gravity Maps - Project Structure</h1>
+<p>This document outlines the clean project organization after reorganization and comprehensive testing overhaul in June 2025.</p>
+<h2 id="core-application-files">📁 Core Application Files</h2>
+<pre><code>narrative_gravity_analysis/
+├── README.md                           # Main project documentation
+├── requirements.txt                    # Python dependencies
+├── LICENSE                             # Project license
+├── .gitignore                          # Git ignore rules
+├── PROJECT_STRUCTURE.md               # This file
+├── CHANGELOG.md                        # Version history
+├── test_input.txt                      # Test input file
+└── test_output.jsonl                   # Test output results
+</code></pre>
+<h2 id="application-components">🚀 Application Components</h2>
+<pre><code>├── launch_app.py                       # Application launcher
+├── narrative_gravity_app.py            # Main Streamlit interface
+├── narrative_gravity_elliptical.py     # Core analysis engine
+├── framework_manager.py                # Framework switching system
+├── generate_prompt.py                  # LLM prompt generator
+├── create_generic_multi_run_dashboard.py # Universal multi-run dashboard system
+└── env.example                         # Environment configuration template
+</code></pre>
+<h2 id="operational-infrastructure">🔧 Operational Infrastructure</h2>
+<pre><code>├── scripts/                           # Startup and utility scripts
+│   ├── run_api.py                     # FastAPI server startup
+│   ├── run_celery.py                  # Celery worker startup
+│   ├── setup_database.py              # Database setup utility
+│   ├── run_flagship_analysis.py       # Analysis runner script
+│   ├── run_golden_set_gpt4o.py        # Golden set analysis
+│   └── README.md                      # Scripts documentation
+│
+├── src/                               # Source code modules
+│   ├── __init__.py                    # Package initialization
+│   ├── celery_app.py                  # Celery application configuration
+│   ├── api/                          # FastAPI application
+│   ├── api_clients/                   # External API client modules
+│   ├── models/                       # Database models
+│   ├── tasks/                        # Celery task definitions
+│   ├── utils/                        # Utility functions
+│   │   ├── api_costs.json            # API cost tracking
+│   │   ├── cost_limits.json          # Cost management limits
+│   │   └── manage_costs.py           # Cost management system
+│   ├── prompts/                      # Prompt templates and management
+│   │   ├── moral_rhetorical_posture_prompt.txt
+│   │   ├── political_spectrum_prompt.txt
+│   │   └── template_manager.py
+│   └── cli/                          # Command line tools
+│
+├── alembic/                          # Database migrations
+└── alembic.ini                       # Database migration config
+</code></pre>
+<h2 id="data-and-configuration">📊 Data and Configuration</h2>
+<pre><code>├── frameworks/                         # Framework definitions
+│   ├── civic_virtue/                  # Primary framework
+│   │   ├── framework.json             # Mathematical parameters
+│   │   ├── dipoles.json               # Conceptual definitions
+│   │   └── README.md                  # Framework documentation
+│   ├── political_spectrum/            # Alternative framework
+│   └── moral_rhetorical_posture/      # Communication style framework
+│
+├── config/                            # Active configuration (symlinks)
+│   ├── dipoles.json -&gt; ../frameworks/civic_virtue/dipoles.json
+│   └── framework.json -&gt; ../frameworks/civic_virtue/framework.json
+│
+├── schemas/                           # JSON schema definitions
+│   ├── core_schema_v1.0.0.json       # Core document schema
+│   ├── cv_extension_v1.0.0.json      # Civic virtue extension
+│   └── README.md                      # Schema documentation
+│
+├── corpus/                            # Text corpus for analysis
+│   └── golden_set/                   # Curated reference texts
+│       └── presidential_speeches/    # Presidential speech collection
+│
+├── model_output/                      # Analysis results
+│   ├── *.json                        # Analysis data
+│   └── *.png                         # Generated visualizations
+│
+├── analysis_results/                  # Structured analysis outputs
+│   └── golden_set_gpt4o_*/           # Golden set analysis results
+│
+├── test_results/                      # Test outputs and results
+│   ├── *.json                        # Test analysis data
+│   └── *.png                         # Test visualizations
+│
+└── reference_texts/                   # Sample texts for analysis
+    ├── recent_us_presidents/          # Recent presidential speeches
+    ├── other_texts/                   # Historical political texts
+    └── synthetic_narratives/          # Generated test narratives
+</code></pre>
+<h2 id="documentation">📚 Documentation</h2>
+<pre><code>├── docs/                              # All documentation
+│   ├── architecture/                  # Technical architecture
+│   │   ├── COMPREHENSIVE_ARCHITECTURAL_REVIEW.md
+│   │   ├── MODULAR_ARCHITECTURE.md
+│   │   ├── STORAGE_ARCHITECTURE.md
+│   │   ├── FRAMEWORK_ARCHITECTURE.md
+│   │   └── PROMPT_ARCHITECTURE.md
+│   │
+│   ├── development/                   # Developer documentation
+│   │   ├── planning/                  # Strategic planning documents
+│   │   │   ├── COMPREHENSIVE_PROJECT_DOCUMENTATION.md
+│   │   │   ├── User Personas - Narrative Gravity Model.md
+│   │   │   ├── Project Milestones - Narrative Gravity Model.md
+│   │   │   └── database_first_architecture_todos.md
+│   │   ├── CONTRIBUTING.md
+│   │   └── RELEASE_PROCESS.md
+│   │
+│   ├── academic/                      # Academic documentation
+│   │   └── PAPER_REPLICATION.md       # Academic paper replication guide
+│   │
+│   ├── generalization/               # Multi-run dashboard documentation
+│   │   ├── GENERIC_DASHBOARD_USAGE.md  # Comprehensive usage guide
+│   │   └── GENERALIZATION_SUMMARY.md   # Technical transformation details
+│   │
+│   ├── user-guides/                  # User documentation
+│   │   ├── CORPUS_TOOLING_SUMMARY.md
+│   │   ├── EPIC_1_COMPLETION_SUMMARY.md
+│   │   ├── GOLDEN_SET_SUMMARY.md
+│   │   └── STREAMLIT_APP_STATUS.md
+│   │
+│   ├── api/                          # API documentation
+│   │   └── CSV_FORMAT_STANDARD.md
+│   │
+│   ├── narrative_gravity_wells_paper.md # Academic paper
+│   ├── API_COST_PROTECTION_GUIDE.md    # Cost management
+│   ├── COST_MANAGEMENT_GUIDE.md         # Cost controls
+│   ├── DIRECT_API_INTEGRATION.md        # API integration
+│   ├── ENDPOINT_SETUP_GUIDE.md          # Setup instructions
+│   ├── FOUR_LLM_INTEGRATION_SUMMARY.md  # Multi-LLM support
+│   ├── MULTI_LLM_STATUS.md              # LLM status tracking
+│   ├── PROGRESS_LOG.md                  # Development progress
+│   ├── PROJECT_STATUS.md                # Current project status
+│   ├── SYSTEM_UPGRADE_2025.md           # System upgrade notes
+│   └── TESTING_GUIDE.md                 # Testing documentation
+│
+├── examples/                          # Usage examples and demos
+│   ├── corpus_generation_demo.py      # Corpus generation example
+│   ├── *.jsonl                       # Example JSONL files
+│   └── sample_*.md                    # Sample documents
+│
+├── snapshots/                         # Project snapshots
+│   └── obama_multirun_elliptical_v1/  # Obama multi-run snapshot
+│
+
+
+│
+
+    ├── COMPREHENSIVE_PROJECT_DOCUMENTATION.md
+    ├── User Personas - Narrative Gravity Model.md
+    └── [various development guides]
+</code></pre>
+<h2 id="archive-and-development-history">🗃️ Archive and Development History</h2>
+<pre><code>├── archive/                           # Historical/backup files
+│   ├── development_versions/          # Previous dashboard versions
+│   │   ├── create_obama_elliptical_dashboard_v*.py
+│   │   ├── create_obama_elliptical_enhanced_v*.py
+│   │   ├── test_multi_run_obama.py
+│   │   └── [various development iterations]
+│   │
+│   ├── test_outputs/                  # Development dashboard outputs
+│   │   ├── obama_dashboard_v*.png
+│   │   ├── obama_elliptical_enhanced*.png
+│   │   └── [various test visualizations]
+│   │
+│   ├── experimental_tests/            # Experimental test files (NEW)
+│   │   ├── test_trump_joint_*.py      # Trump analysis experiments
+│   │   ├── test_comparative_*.py      # Comparative analysis tests
+│   │   ├── test_multi_llm.py          # Multi-LLM testing
+│   │   ├── debug_api_response.py      # API debugging tools
+│   │   └── [various experimental scripts]
+│   │
+│   ├── temp_results/                  # Temporary analysis results (NEW)
+│   │   ├── trump_joint_*.json         # Trump analysis results
+│   │   ├── test_2025_analysis/        # 2025 test analysis
+│   │   ├── test_balanced_analysis/    # Balanced analysis tests
+│   │   └── test_results_direct_apis.json
+│   │
+│   └── RENAME_LOG.md                  # Historical rename log
+│
+├── tests/                            # Formal test suite
+│   ├── integration/                  # Integration tests
+│   ├── test_data/                    # Test data files
+│   ├── test_results/                 # Test result outputs
+│   ├── utilities/                    # Test utilities
+│   └── README.md                     # Testing documentation
+│
+├── api_integration_upload/           # API integration materials
+│   ├── COMPREHENSIVE_PROJECT_DOCUMENTATION.md
+│   ├── SOURCE_CODE_SUMMARY.md
+│   └── [various integration files]
+│
+└── venv/                             # Python virtual environment
+</code></pre>
+<h2 id="testing-infrastructure-995-success-rate">🧪 Testing Infrastructure (99.5% Success Rate)</h2>
+<pre><code>├── tests/                            # Comprehensive test suite
+│   ├── README.md                     # Testing documentation
+│   ├── TESTING_SUMMARY.md            # Testing overhaul summary
+│   ├── TESTING_QUICK_REFERENCE.md    # Quick testing reference
+│   ├── test_requirements.txt         # Testing dependencies
+│   ├── run_tests.py                  # Test runner script
+│   ├── test.sh                       # Shell test runner
+│   ├── test_golden_set_e2e.py        # End-to-end golden set tests
+│   ├── unit/                         # Unit tests (31/31 passing)
+│   ├── integration/                  # Integration tests (30/31 passing)
+│   ├── test_data/                    # Test data files
+│   ├── test_results/                 # Test result outputs
+│   └── utilities/                    # Test utilities
+│
+├── pytest.ini                       # Pytest configuration
+└── test_results/                     # Test outputs and results
+    ├── *.json                        # Test analysis data
+    └── *.png                         # Test visualizations
+</code></pre>
+<h2 id="key-principles">🎯 Key Principles</h2>
+<h3 id="clean-separation">Clean Separation</h3>
+<ul>
+<li><strong>Core files</strong>: Application logic in root directory</li>
+<li><strong>Source code</strong>: Organized modules in <code>src/</code> directory with proper initialization</li>
+<li><strong>Data</strong>: Organized by type (frameworks, outputs, corpus)</li>
+<li><strong>Documentation</strong>: Centralized in <code>docs/</code> with logical subdirectories</li>
+<li><strong>Archive</strong>: Historical and experimental files moved out of active workspace</li>
+<li><strong>Testing</strong>: Comprehensive test suite with 99.5% success rate</li>
+</ul>
+<h3 id="framework-architecture">Framework Architecture</h3>
+<ul>
+<li><strong>Multiple frameworks</strong>: Each in its own subdirectory</li>
+<li><strong>Active configuration</strong>: Symlinks in <code>config/</code> point to active framework</li>
+<li><strong>Version management</strong>: Prompts organized by framework and version</li>
+<li><strong>Extensibility</strong>: Easy to add new frameworks without affecting existing ones</li>
+</ul>
+<h3 id="development-organization">Development Organization</h3>
+<ul>
+<li><strong>Experimental work</strong>: Archived in <code>archive/experimental_tests/</code></li>
+<li><strong>Temporary results</strong>: Organized in <code>archive/temp_results/</code></li>
+<li><strong>Production code</strong>: Clean separation in <code>src/</code> modules with proper imports</li>
+<li><strong>Documentation</strong>: Comprehensive guides in <code>docs/</code> hierarchy</li>
+<li><strong>Testing</strong>: Robust test infrastructure with automated runners</li>
+</ul>
+<h3 id="maintainability">Maintainability</h3>
+<ul>
+<li><strong>Clear naming</strong>: Files and directories have descriptive names</li>
+<li><strong>Logical grouping</strong>: Related files are grouped together</li>
+<li><strong>Documentation</strong>: Each major component has associated documentation</li>
+<li><strong>Version control</strong>: Clean <code>.gitignore</code> prevents clutter accumulation</li>
+<li><strong>Archive system</strong>: Historical files preserved but organized</li>
+<li><strong>Test coverage</strong>: 99.5% test success rate ensures code reliability</li>
+</ul>
+<h2 id="daily-workflow">🔄 Daily Workflow</h2>
+<ol>
+<li><strong>Development</strong>: Work with core files in root directory</li>
+<li><strong>Testing</strong>: Run comprehensive test suite with <code>./test.sh</code> or <code>python run_tests.py</code></li>
+<li><strong>Analysis</strong>: Results automatically saved to <code>model_output/</code></li>
+<li><strong>Framework switching</strong>: Use <code>framework_manager.py</code> to change active framework</li>
+<li><strong>Documentation</strong>: Add development notes to <code>docs/</code> subdirectories</li>
+<li><strong>Experimentation</strong>: Use <code>archive/experimental_tests/</code> for temporary work</li>
+<li><strong>Archive</strong>: Move completed experimental work to appropriate archive directories</li>
+<li><strong>Quality assurance</strong>: Maintain high test success rate (currently 99.5%)</li>
+</ol>
+<p>This structure supports both research use and software development while maintaining clarity and organization. The recent comprehensive testing overhaul ensures robust code quality with extensive unit and integration test coverage. The root directory contains only essential files, with all experimental and temporary work properly archived. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

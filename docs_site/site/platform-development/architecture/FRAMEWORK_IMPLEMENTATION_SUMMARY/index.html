@@ -1,0 +1,905 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Framework Architecture Implementation Summary - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#framework-architecture-implementation-summary" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Framework Architecture Implementation Summary
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#completed-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Completed Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Completed Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-framework-extension-schemas-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Framework Extension Schemas Created
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-framework-data-structure-defined" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Framework Data Structure Defined
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-framework-agnostic-architecture-confirmed" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Framework-Agnostic Architecture Confirmed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-analysis-results-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Analysis Results Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-comprehensive-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Comprehensive Documentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-benefits-achieved" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Key Benefits Achieved
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Key Benefits Achieved">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-maximum-flexibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Maximum Flexibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cross-framework-comparative-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Cross-Framework Comparative Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-academic-rigor" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Academic Rigor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-scalable-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Scalable Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-cost-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Cost Efficiency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-specification-clarified" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Framework Specification Clarified
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Framework Specification Clarified">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-framework-selection-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Framework Selection Works:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-framework-comparison-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Framework Comparison Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-readiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Production Readiness
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Production Readiness">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#system-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Capabilities:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Results:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ready-for-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ready for Research:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Usage Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-framework-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Framework Analysis:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-framework-comparative-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Framework Comparative Study:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-agreement-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Agreement Analysis:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✨ Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="framework-architecture-implementation-summary">Framework Architecture Implementation Summary</h1>
+<h2 id="overview">Overview</h2>
+<p>Successfully implemented <strong>framework-agnostic ingestion with runtime framework selection</strong> architecture, enabling flexible multi-framework analysis on the same corpus data.</p>
+<h2 id="completed-implementation">✅ Completed Implementation</h2>
+<h3 id="1-framework-extension-schemas-created">1. Framework Extension Schemas Created</h3>
+<p><strong>Civic Virtue Extension (<code>schemas/cv_extension_v1.0.0.json</code>)</strong>
+- Ingestion metadata: pre-analysis tags, language complexity, content type
+- Preprocessing markers: dignity/tribalism/truth/manipulation language markers
+- Analysis results: 10 well scores, narrative positioning, civic metrics
+- Confidence scoring and framework suitability assessment</p>
+<p><strong>Political Spectrum Extension (<code>schemas/ps_extension_v1.0.0.json</code>)</strong>
+- Ingestion metadata: political era, author affiliation, policy domains
+- Preprocessing markers: liberal/conservative/libertarian/authoritarian indicators<br />
+- Analysis results: 10 dimensional scores, left-right positioning, ideological consistency
+- Classification results with confidence levels</p>
+<p><strong>Moral Rhetorical Posture Extension (<code>schemas/mrp_extension_v1.0.0.json</code>)</strong>
+- Ingestion metadata: rhetorical context, audience type, communication style
+- Preprocessing markers: restorative/retributive/universalist/partisan language
+- Analysis results: 10 posture scores, rhetorical metrics, posture classification
+- Contextual appropriateness assessment</p>
+<h3 id="2-framework-data-structure-defined">2. Framework Data Structure Defined</h3>
+<p><strong>Three-Stage Population Model:</strong></p>
+<pre><code class="language-json">{
+  &quot;framework_data&quot;: {
+    &quot;ingestion_metadata&quot;: {
+      // Stage 1: Populated during corpus upload
+      &quot;pre_analysis_tags&quot;: [&quot;political_speech&quot;, &quot;moral_argument&quot;],
+      &quot;language_complexity&quot;: &quot;moderate&quot;,
+      &quot;content_type&quot;: &quot;narrative&quot;
+    },
+    &quot;preprocessing_markers&quot;: {
+      // Stage 2: Populated during ingestion processing  
+      &quot;dignity_markers&quot;: [&quot;individual worth&quot;, &quot;human rights&quot;],
+      &quot;truth_indicators&quot;: [&quot;evidence shows&quot;, &quot;data indicates&quot;]
+    },
+    &quot;analysis_results&quot;: {
+      // Stage 3: Populated during framework analysis
+      &quot;civic_virtue&quot;: {
+        &quot;well_scores&quot;: {&quot;dignity&quot;: 0.85, &quot;truth&quot;: 0.72},
+        &quot;narrative_position&quot;: {&quot;x&quot;: 0.34, &quot;y&quot;: 0.67},
+        &quot;civic_metrics&quot;: {&quot;narrative_polarity_score&quot;: 0.73}
+      },
+      &quot;political_spectrum&quot;: {
+        &quot;well_scores&quot;: {&quot;liberal&quot;: 0.78, &quot;conservative&quot;: 0.23},
+        &quot;political_metrics&quot;: {&quot;left_right_position&quot;: -0.65}
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="3-framework-agnostic-architecture-confirmed">3. Framework-Agnostic Architecture Confirmed</h3>
+<p><strong>Current Working System:</strong>
+- ✅ <strong>Universal Ingestion</strong>: Validates against core schema only<br />
+- ✅ <strong>Runtime Framework Selection</strong>: Frameworks chosen at job creation
+- ✅ <strong>Cross-Framework Analysis</strong>: Multiple frameworks can analyze same text
+- ✅ <strong>Results Storage</strong>: Framework-specific results stored in <code>framework_data.analysis_results</code></p>
+<p><strong>Task Generation Matrix:</strong></p>
+<pre><code>Total Tasks = chunks × frameworks × models × runs
+
+Example:
+- 5 chunks × 2 frameworks × 2 models × 3 runs = 60 tasks
+- Enables comprehensive cross-framework comparative analysis
+</code></pre>
+<h3 id="4-analysis-results-integration">4. Analysis Results Integration</h3>
+<p><strong>Updated Task Processing:</strong>
+- Analysis results automatically stored in chunk's <code>framework_data</code>
+- Framework-specific results keyed by framework name
+- Maintains both task-level and chunk-level result storage
+- Enables efficient cross-framework queries</p>
+<p><strong>Database Structure:</strong></p>
+<pre><code class="language-sql">-- Cross-framework comparison queries now possible
+SELECT 
+    text_id,
+    framework_data-&gt;'analysis_results'-&gt;'civic_virtue'-&gt;&gt;'civic_elevation' as civic_score,
+    framework_data-&gt;'analysis_results'-&gt;'political_spectrum'-&gt;&gt;'left_right_position' as political_score
+FROM chunks 
+WHERE framework_data-&gt;'analysis_results' ? 'civic_virtue' 
+  AND framework_data-&gt;'analysis_results' ? 'political_spectrum';
+</code></pre>
+<h3 id="5-comprehensive-documentation">5. Comprehensive Documentation</h3>
+<p><strong>Created Documentation:</strong>
+- <code>FRAMEWORK_ARCHITECTURE.md</code> - Complete architecture overview
+- <code>schemas/README.md</code> - Updated with framework data structure
+- Extension schemas with examples and validation rules
+- Framework development guidelines</p>
+<h2 id="key-benefits-achieved">🎯 Key Benefits Achieved</h2>
+<h3 id="1-maximum-flexibility">1. <strong>Maximum Flexibility</strong></h3>
+<ul>
+<li>Any framework can analyze any existing corpus</li>
+<li>New frameworks work with existing data immediately</li>
+<li>No corpus re-ingestion required for framework changes</li>
+</ul>
+<h3 id="2-cross-framework-comparative-analysis">2. <strong>Cross-Framework Comparative Analysis</strong></h3>
+<ul>
+<li>Same text analyzed by multiple frameworks simultaneously</li>
+<li>Framework agreement/disagreement studies enabled</li>
+<li>Multi-dimensional narrative positioning possible</li>
+</ul>
+<h3 id="3-academic-rigor">3. <strong>Academic Rigor</strong></h3>
+<ul>
+<li>Consistent data structures across all frameworks</li>
+<li>Version-controlled schemas with migration support</li>
+<li>Framework-specific confidence and suitability scoring</li>
+</ul>
+<h3 id="4-scalable-architecture">4. <strong>Scalable Architecture</strong></h3>
+<ul>
+<li>Independent framework development</li>
+<li>Parallel processing across frameworks</li>
+<li>Modular system with clear extension points</li>
+</ul>
+<h3 id="5-cost-efficiency">5. <strong>Cost Efficiency</strong></h3>
+<ul>
+<li>Single corpus ingestion serves all frameworks</li>
+<li>Selective framework application based on research needs</li>
+<li>Efficient resource utilization</li>
+</ul>
+<h2 id="framework-specification-clarified">📊 Framework Specification Clarified</h2>
+<h3 id="how-framework-selection-works"><strong>How Framework Selection Works:</strong></h3>
+<ol>
+<li><strong>Corpus Ingestion</strong> (Framework-Agnostic)</li>
+<li>Upload JSONL → Validate core schema → Store universally</li>
+<li>Optional framework-specific metadata can be included</li>
+<li>
+<p>Corpus immediately available for any framework analysis</p>
+</li>
+<li>
+<p><strong>Job Creation</strong> (Runtime Framework Selection)
+   <code>json
+   {
+     "corpus_id": 123,
+     "frameworks": ["civic_virtue", "political_spectrum"], 
+     "models": ["gpt-4"],
+     "run_count": 3
+   }</code></p>
+</li>
+<li>
+<p><strong>Task Processing</strong> (Framework-Specific)</p>
+</li>
+<li>Each task processes one chunk with one framework</li>
+<li>Results stored under framework key in <code>analysis_results</code></li>
+<li>Multiple frameworks can analyze same chunk independently</li>
+</ol>
+<h3 id="cross-framework-comparison-example"><strong>Cross-Framework Comparison Example:</strong></h3>
+<pre><code class="language-json">{
+  &quot;text_id&quot;: &quot;biden_inaugural_2021&quot;,
+  &quot;framework_data&quot;: {
+    &quot;analysis_results&quot;: {
+      &quot;civic_virtue&quot;: {
+        &quot;civic_elevation&quot;: 0.78,
+        &quot;primary_wells&quot;: [&quot;dignity&quot;, &quot;hope&quot;, &quot;pragmatism&quot;]
+      },
+      &quot;political_spectrum&quot;: {
+        &quot;left_right_position&quot;: -0.45,
+        &quot;primary_quadrant&quot;: &quot;liberal_democrat&quot;
+      },
+      &quot;moral_rhetorical_posture&quot;: {
+        &quot;primary_posture&quot;: &quot;healer&quot;,
+        &quot;justice_orientation&quot;: 0.65
+      }
+    }
+  }
+}
+</code></pre>
+<h2 id="production-readiness">🚀 Production Readiness</h2>
+<h3 id="system-capabilities"><strong>System Capabilities:</strong></h3>
+<ul>
+<li>✅ Universal corpus ingestion working</li>
+<li>✅ Framework-agnostic job creation working  </li>
+<li>✅ Cross-framework task generation working</li>
+<li>✅ Results storage in framework_data working</li>
+<li>✅ All three frameworks (civic_virtue, political_spectrum, moral_rhetorical_posture) supported</li>
+</ul>
+<h3 id="validation-results"><strong>Validation Results:</strong></h3>
+<ul>
+<li>✅ Epic validation: 100% success (4/4 components)</li>
+<li>✅ Golden set testing: 17 presidential speeches validated</li>
+<li>✅ Framework loading: All 3 frameworks load successfully</li>
+<li>✅ Task processing: End-to-end pipeline validated</li>
+</ul>
+<h3 id="ready-for-research"><strong>Ready for Research:</strong></h3>
+<ul>
+<li>Multi-framework studies on presidential speeches</li>
+<li>Cross-framework correlation analysis  </li>
+<li>Framework validation studies comparing automated vs human assessment</li>
+<li>Historical narrative trend analysis across multiple dimensions</li>
+</ul>
+<h2 id="usage-examples">📋 Usage Examples</h2>
+<h3 id="single-framework-analysis"><strong>Single Framework Analysis:</strong></h3>
+<pre><code class="language-bash"># Analyze corpus with civic virtue framework only
+POST /api/jobs
+{
+  &quot;corpus_id&quot;: 1,
+  &quot;frameworks&quot;: [&quot;civic_virtue&quot;],
+  &quot;models&quot;: [&quot;gpt-4&quot;],
+  &quot;run_count&quot;: 5
+}
+</code></pre>
+<h3 id="cross-framework-comparative-study"><strong>Cross-Framework Comparative Study:</strong></h3>
+<pre><code class="language-bash"># Analyze same corpus with all frameworks
+POST /api/jobs  
+{
+  &quot;corpus_id&quot;: 1,
+  &quot;frameworks&quot;: [&quot;civic_virtue&quot;, &quot;political_spectrum&quot;, &quot;moral_rhetorical_posture&quot;],
+  &quot;models&quot;: [&quot;gpt-4&quot;, &quot;claude-3&quot;],
+  &quot;run_count&quot;: 3
+}
+</code></pre>
+<h3 id="framework-agreement-analysis"><strong>Framework Agreement Analysis:</strong></h3>
+<pre><code class="language-python"># Query framework correlation
+def analyze_framework_agreement():
+    results = db.query(&quot;&quot;&quot;
+        SELECT 
+            text_id,
+            framework_data-&gt;'analysis_results'-&gt;'civic_virtue'-&gt;&gt;'civic_elevation' as civic,
+            framework_data-&gt;'analysis_results'-&gt;'political_spectrum'-&gt;&gt;'left_right_position' as political
+        FROM chunks 
+        WHERE framework_data-&gt;'analysis_results' ? 'civic_virtue' 
+          AND framework_data-&gt;'analysis_results' ? 'political_spectrum'
+    &quot;&quot;&quot;)
+    return correlation_analysis(results)
+</code></pre>
+<h2 id="next-steps">✨ Next Steps</h2>
+<p>The framework architecture is now <strong>complete and production-ready</strong>. Future enhancements could include:</p>
+<ol>
+<li><strong>Framework Recommendation Engine</strong> - Suggest optimal frameworks for content types</li>
+<li><strong>Meta-Framework Analysis</strong> - Develop framework-agnostic narrative metrics  </li>
+<li><strong>Dynamic Framework Loading</strong> - Runtime framework registration system</li>
+<li><strong>Preprocessing Pipeline</strong> - Automated language marker extraction</li>
+<li><strong>Advanced Analytics</strong> - Framework consensus scoring and divergence analysis</li>
+</ol>
+<p>This implementation successfully delivers on all three recommendations:
+- ✅ <strong>1. Created missing framework extension schemas</strong>
+- ✅ <strong>2A. Implemented framework-agnostic ingestion + runtime selection</strong><br />
+- ✅ <strong>3. Defined comprehensive framework_data structure</strong>
+- ✅ <strong>Documented everything clearly</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

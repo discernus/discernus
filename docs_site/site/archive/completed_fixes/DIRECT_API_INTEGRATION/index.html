@@ -1,0 +1,759 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Direct API Integration for Flagship LLMs - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#direct-api-integration-for-flagship-llms" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Direct API Integration for Flagship LLMs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-right-solution-for-academic-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 The Right Solution for Academic Research
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Setup Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Setup Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-get-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Get API Keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-install-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Install Libraries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Environment Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-your-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Integration with Your Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Integration with Your Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-huggingface-client-for-direct-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update HuggingFace Client for Direct APIs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-your-test-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Your Test Script
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-estimates-much-cheaper" class="md-nav__link">
+    <span class="md-ellipsis">
+      💰 Cost Estimates (Much Cheaper!)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💰 Cost Estimates (Much Cheaper!)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-analysis-1000-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per Analysis (1000 words):
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-research-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Research Budget:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎓 Academic Benefits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎓 Academic Benefits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#research-credibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Credibility:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paper-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paper Submission:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Quick Start
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bottom-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Bottom Line
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="direct-api-integration-for-flagship-llms">Direct API Integration for Flagship LLMs</h1>
+<h2 id="the-right-solution-for-academic-research">🎯 <strong>The Right Solution for Academic Research</strong></h2>
+<p>For your narrative gravity analysis to have academic credibility, you need <strong>direct access to flagship models</strong>:
+- <strong>OpenAI GPT-4</strong> (ChatGPT)
+- <strong>Anthropic Claude-3</strong> 
+- <strong>Mistral Large</strong></p>
+<h2 id="setup-guide">📋 <strong>Setup Guide</strong></h2>
+<h3 id="1-get-api-keys"><strong>1. Get API Keys</strong></h3>
+<pre><code class="language-bash"># Get API keys from:
+# OpenAI: https://platform.openai.com/api-keys
+# Anthropic: https://console.anthropic.com/
+# Mistral: https://console.mistral.ai/
+</code></pre>
+<h3 id="2-install-libraries"><strong>2. Install Libraries</strong></h3>
+<pre><code class="language-bash">pip install openai anthropic mistralai python-dotenv
+</code></pre>
+<h3 id="3-environment-setup"><strong>3. Environment Setup</strong></h3>
+<pre><code class="language-bash"># Create .env file
+echo &quot;OPENAI_API_KEY=your_openai_key&quot; &gt;&gt; .env
+echo &quot;ANTHROPIC_API_KEY=your_anthropic_key&quot; &gt;&gt; .env  
+echo &quot;MISTRAL_API_KEY=your_mistral_key&quot; &gt;&gt; .env
+</code></pre>
+<h2 id="integration-with-your-framework">🔧 <strong>Integration with Your Framework</strong></h2>
+<h3 id="update-huggingface-client-for-direct-apis"><strong>Update HuggingFace Client for Direct APIs</strong></h3>
+<pre><code class="language-python">import openai
+import anthropic
+from mistralai.client import MistralClient
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class DirectAPIClient:
+    &quot;&quot;&quot;Direct API client for flagship LLMs&quot;&quot;&quot;
+
+    def __init__(self):
+        self.openai_client = openai.OpenAI(api_key=os.getenv(&quot;OPENAI_API_KEY&quot;))
+        self.anthropic_client = anthropic.Anthropic(api_key=os.getenv(&quot;ANTHROPIC_API_KEY&quot;))
+        self.mistral_client = MistralClient(api_key=os.getenv(&quot;MISTRAL_API_KEY&quot;))
+
+    def analyze_with_gpt4(self, prompt: str) -&gt; tuple[dict, float]:
+        &quot;&quot;&quot;Analyze text with GPT-4&quot;&quot;&quot;
+        response = self.openai_client.chat.completions.create(
+            model=&quot;gpt-4&quot;,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt}],
+            temperature=0.1
+        )
+
+        # Calculate cost (approximate)
+        input_tokens = len(prompt.split()) * 1.3  # rough estimate
+        output_tokens = len(response.choices[0].message.content.split()) * 1.3
+        cost = (input_tokens * 0.00003) + (output_tokens * 0.00006)  # GPT-4 pricing
+
+        return self.parse_response(response.choices[0].message.content), cost
+
+    def analyze_with_claude(self, prompt: str) -&gt; tuple[dict, float]:
+        &quot;&quot;&quot;Analyze text with Claude-3&quot;&quot;&quot;
+        response = self.anthropic_client.messages.create(
+            model=&quot;claude-3-sonnet-20240229&quot;,
+            max_tokens=1000,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt}]
+        )
+
+        # Calculate cost
+        input_tokens = response.usage.input_tokens
+        output_tokens = response.usage.output_tokens
+        cost = (input_tokens * 0.000003) + (output_tokens * 0.000015)  # Claude pricing
+
+        return self.parse_response(response.content[0].text), cost
+
+    def analyze_with_mistral(self, prompt: str) -&gt; tuple[dict, float]:
+        &quot;&quot;&quot;Analyze text with Mistral Large&quot;&quot;&quot;
+        response = self.mistral_client.chat(
+            model=&quot;mistral-large-latest&quot;,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt}],
+            temperature=0.1
+        )
+
+        # Calculate cost (approximate)
+        input_tokens = len(prompt.split()) * 1.3
+        output_tokens = len(response.choices[0].message.content.split()) * 1.3
+        cost = (input_tokens * 0.000002) + (output_tokens * 0.000008)  # Mistral pricing
+
+        return self.parse_response(response.choices[0].message.content), cost
+
+    def parse_response(self, content: str) -&gt; dict:
+        &quot;&quot;&quot;Parse LLM response into structured format&quot;&quot;&quot;
+        try:
+            # Try to parse as JSON first
+            import json
+            return json.loads(content)
+        except:
+            # Fallback parsing logic
+            return {&quot;raw_response&quot;: content, &quot;parsed&quot;: False}
+</code></pre>
+<h3 id="update-your-test-script"><strong>Update Your Test Script</strong></h3>
+<pre><code class="language-python"># Replace HuggingFace client with direct API client
+from direct_api_client import DirectAPIClient
+
+class DirectAPITester:
+    &quot;&quot;&quot;Test narrative gravity with direct flagship APIs&quot;&quot;&quot;
+
+    def __init__(self, framework: str):
+        self.framework = framework
+        self.client = DirectAPIClient()
+
+    def test_all_models(self, text: str) -&gt; dict:
+        &quot;&quot;&quot;Test with all flagship models&quot;&quot;&quot;
+        results = {}
+
+        # Get framework prompt
+        prompt = self.generate_prompt(text, self.framework)
+
+        # Test with each model
+        print(&quot;🤖 Testing with GPT-4...&quot;)
+        gpt4_result, gpt4_cost = self.client.analyze_with_gpt4(prompt)
+        results[&quot;gpt4&quot;] = {&quot;result&quot;: gpt4_result, &quot;cost&quot;: gpt4_cost}
+
+        print(&quot;🤖 Testing with Claude-3...&quot;)
+        claude_result, claude_cost = self.client.analyze_with_claude(prompt)
+        results[&quot;claude&quot;] = {&quot;result&quot;: claude_result, &quot;cost&quot;: claude_cost}
+
+        print(&quot;🤖 Testing with Mistral...&quot;)
+        mistral_result, mistral_cost = self.client.analyze_with_mistral(prompt)
+        results[&quot;mistral&quot;] = {&quot;result&quot;: mistral_result, &quot;cost&quot;: mistral_cost}
+
+        total_cost = gpt4_cost + claude_cost + mistral_cost
+        print(f&quot;✅ Total cost: ${total_cost:.4f}&quot;)
+
+        return results
+</code></pre>
+<h2 id="cost-estimates-much-cheaper">💰 <strong>Cost Estimates (Much Cheaper!)</strong></h2>
+<h3 id="per-analysis-1000-words"><strong>Per Analysis (1000 words)</strong>:</h3>
+<ul>
+<li><strong>GPT-4</strong>: ~$0.05-0.10</li>
+<li><strong>Claude-3</strong>: ~$0.02-0.05  </li>
+<li><strong>Mistral</strong>: ~$0.01-0.03</li>
+<li><strong>Total per test</strong>: ~$0.08-0.18</li>
+</ul>
+<h3 id="academic-research-budget"><strong>Academic Research Budget</strong>:</h3>
+<ul>
+<li><strong>100 test cases</strong>: ~$8-18 total</li>
+<li><strong>1000 test cases</strong>: ~$80-180 total</li>
+<li><strong>No infrastructure costs</strong></li>
+<li><strong>No management overhead</strong></li>
+</ul>
+<h2 id="academic-benefits">🎓 <strong>Academic Benefits</strong></h2>
+<h3 id="research-credibility"><strong>Research Credibility</strong>:</h3>
+<ul>
+<li>✅ <strong>"We tested with GPT-4, Claude-3, and Mistral"</strong></li>
+<li>✅ <strong>Reproducible results</strong> with exact model versions</li>
+<li>✅ <strong>Direct comparison</strong> of flagship models</li>
+<li>✅ <strong>No confounding variables</strong> from alternative models</li>
+</ul>
+<h3 id="paper-submission"><strong>Paper Submission</strong>:</h3>
+<ul>
+<li>✅ <strong>Reviewers recognize</strong> flagship model names</li>
+<li>✅ <strong>Standard benchmarks</strong> in academic literature</li>
+<li>✅ <strong>Clear methodology</strong> for replication</li>
+</ul>
+<h2 id="quick-start">🚀 <strong>Quick Start</strong></h2>
+<ol>
+<li><strong>Get API keys</strong> from OpenAI, Anthropic, Mistral</li>
+<li><strong>Update your existing prompt generation</strong> system</li>
+<li><strong>Replace HuggingFace calls</strong> with direct API calls</li>
+<li><strong>Run comprehensive tests</strong> with all three models</li>
+<li><strong>Generate comparison analysis</strong> for your paper</li>
+</ol>
+<h2 id="bottom-line">🎯 <strong>Bottom Line</strong></h2>
+<p><strong>Direct APIs are:</strong>
+- ✅ <strong>10x simpler</strong> than HuggingFace Endpoints
+- ✅ <strong>10x cheaper</strong> for research use cases
+- ✅ <strong>100% academic credible</strong> 
+- ✅ <strong>Zero infrastructure management</strong>
+- ✅ <strong>Actual flagship models</strong> you need</p>
+<p>Your existing prompt generation and analysis framework is perfect - you just need to swap out the model access layer! </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,703 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Prompt Engineering Strategy - Hierarchical Theme Detection - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prompt-engineering-strategy-hierarchical-theme-detection" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prompt Engineering Strategy - Hierarchical Theme Detection
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#situation-analysis-current-state-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Situation Analysis: Current State Assessment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Situation Analysis: Current State Assessment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-prompt-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Prompt Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observed-failure-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observed Failure Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-cause-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Root Cause Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategic-redesign-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Redesign Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Strategic Redesign Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-principle-shift-from-presence-to-dominance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Principle Shift: From Presence to Dominance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-stage-prompt-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Three-Stage Prompt Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specific-prompt-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Specific Prompt Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-against-synthetic-benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Against Synthetic Benchmarks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-gameplan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Gameplan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Gameplan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-1-prompt-development-and-initial-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: Prompt Development and Initial Testing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-systematic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Systematic Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-quality-assurance-and-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: Quality Assurance and Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#success-criteria-and-exit-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Criteria and Exit Conditions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="prompt-engineering-strategy-hierarchical-theme-detection">Prompt Engineering Strategy - Hierarchical Theme Detection</h1>
+<p>11 June 2025</p>
+<h2 id="situation-analysis-current-state-assessment">Situation Analysis: Current State Assessment</h2>
+<h3 id="current-prompt-architecture"><strong>Current Prompt Architecture</strong></h3>
+<p>The existing Civic Virtue Framework prompt instructs LLMs to "assess each well independently on a 0.0-1.0 scale based on conceptual strength," focusing on "how strongly each orientation shapes the narrative's structure." This approach treats all wells as potentially relevant and allows for distributed scoring across multiple dimensions.</p>
+<h3 id="observed-failure-patterns"><strong>Observed Failure Patterns</strong></h3>
+<p><strong>Flat Score Distributions</strong>: Real-world narratives consistently produce moderate scores (0.3-0.7) across multiple wells rather than sharp hierarchical distinctions. Trump's Joint Session Address exemplifies this: dominant themes (Tribalism 0.8, Fantasy 0.8) coexist with substantial scores for competing wells (Hope 0.52, Justice 0.38).</p>
+<p><strong>Synthetic Validation Failures</strong>: Even engineered texts designed for maximum extremity (synthetic positive/negative narratives) fail to produce truly polarized scores. The "perfect positive" synthetic achieved Dignity 0.7, Truth 0.9, Justice 0.8 rather than approaching 1.0, while disintegrative wells scored 0.1-0.2 rather than true zeros.</p>
+<p><strong>Missing Hierarchy Signal</strong>: Current prompts provide no mechanism for LLMs to express that one theme overwhelmingly dominates while others are peripheral noise. The scoring treats a narrative driven 80% by Tribalism identically to one where Tribalism is merely present alongside other themes.</p>
+<h3 id="root-cause-analysis"><strong>Root Cause Analysis</strong></h3>
+<p><strong>Prompt Psychology</strong>: LLMs trained on balanced, nuanced human feedback tend toward moderate, "reasonable" responses unless explicitly forced toward extremes. The current prompt rewards comprehensive analysis over hierarchical clarity.</p>
+<p><strong>Conceptual vs. Relative Assessment</strong>: Asking "how present is this theme?" yields different responses than "what are the top driving forces and how do they rank?" The former allows for multiple moderate scores; the latter demands hierarchical thinking.</p>
+<p><strong>Evidence Requirements</strong>: Current prompts don't require textual evidence for scores, allowing LLMs to rely on impressionistic rather than grounded assessment.</p>
+<h2 id="strategic-redesign-framework">Strategic Redesign Framework</h2>
+<h3 id="core-principle-shift-from-presence-to-dominance"><strong>Core Principle Shift: From Presence to Dominance</strong></h3>
+<p>Transform the analytical task from "detect all themes" to "identify the hierarchy of driving forces." This fundamental reframing should produce sharper, more defensible results.</p>
+<h3 id="three-stage-prompt-architecture"><strong>Three-Stage Prompt Architecture</strong></h3>
+<p><strong>Stage 1: Thematic Ranking</strong></p>
+<ul>
+<li>Require identification of top 2-3 dominant wells</li>
+<li>Force rank ordering with explicit justification</li>
+<li>Establish that only truly central themes qualify for "dominant" status</li>
+</ul>
+<p><strong>Stage 2: Relative Weighting</strong></p>
+<ul>
+<li>Assign percentage weights to dominant themes (must sum to 80-100%)</li>
+<li>Remaining wells receive residual weighting (0-20% total)</li>
+<li>Create mathematical forcing function for hierarchy</li>
+</ul>
+<p><strong>Stage 3: Evidence Grounding</strong></p>
+<ul>
+<li>Mandate specific text excerpts for all wells scoring &gt;0.3</li>
+<li>Require explanation of why minor themes are truly minor</li>
+<li>Build accountability for scoring decisions</li>
+</ul>
+<h3 id="specific-prompt-template"><strong>Specific Prompt Template</strong></h3>
+<pre><code>**TASK: Hierarchical Thematic Analysis**
+
+**STAGE 1 - IDENTIFY DOMINANT THEMES**
+After reading this narrative, identify the 2-3 themes that most fundamentally shape its moral architecture. These should be forces that, if removed, would fundamentally alter the narrative's character.
+
+Rank your selections 1-3 and provide one-sentence justification for each.
+
+**STAGE 2 - ASSIGN RELATIVE WEIGHTS**
+Distribute 100 percentage points across ALL ten wells, with the following constraints:
+- Your top-ranked theme must receive 40-60% 
+- Your second-ranked theme must receive 20-40%
+- Your third-ranked theme (if any) must receive 10-30%
+- All remaining wells must receive 0-5% unless you can provide strong textual evidence
+
+**STAGE 3 - EVIDENCE AND SCORING**
+For each well receiving &gt;5% weight:
+- Provide specific text excerpt (5-20 words) demonstrating its presence
+- Convert percentage weight to 0.0-1.0 score using: Score = (Weight% ÷ 60) capped at 1.0
+- For wells receiving ≤5% weight, assign scores 0.0-0.2 based on minimal presence
+
+**QUALITY CONTROLS**
+- If no theme achieves &gt;40% weight, this narrative may not fit the Civic Virtue framework
+- If you cannot find strong textual evidence for a well, it should score &lt;0.2
+- Dominant themes should be visually obvious to any reader of this text
+</code></pre>
+<h3 id="validation-against-synthetic-benchmarks"><strong>Validation Against Synthetic Benchmarks</strong></h3>
+<p><strong>Perfect Positive Synthetic</strong>: Should yield Dignity 90%+, all disintegrative wells 0-2%
+<strong>Perfect Negative Synthetic</strong>: Should yield Tribalism 90%+, all integrative wells 0-2%
+<strong>Balanced Historical Speech</strong>: Should distribute weight across 4-5 wells, no single well &gt;40%</p>
+<h2 id="implementation-gameplan">Implementation Gameplan</h2>
+<h3 id="week-1-prompt-development-and-initial-testing"><strong>Week 1: Prompt Development and Initial Testing</strong></h3>
+<p><strong>Days 1-2: Template Refinement</strong></p>
+<ul>
+<li>Draft 3-4 variant prompt templates using the hierarchical approach</li>
+<li>Test against current synthetic validation set</li>
+<li>Identify which template produces sharpest hierarchical distinctions</li>
+</ul>
+<p><strong>Days 3-4: Cross-Model Validation</strong></p>
+<ul>
+<li>Run best template against Claude 3.5, GPT-4, and Gemini</li>
+<li>Document cross-model consistency in hierarchical rankings</li>
+<li>Identify systematic biases or failure modes per model</li>
+</ul>
+<p><strong>Days 5-7: Iterative Refinement</strong></p>
+<ul>
+<li>Adjust template based on observed patterns</li>
+<li>Focus on cases where hierarchy isn't clearly emerging</li>
+<li>Establish final template for broader testing</li>
+</ul>
+<h3 id="week-2-systematic-validation"><strong>Week 2: Systematic Validation</strong></h3>
+<p><strong>Days 1-3: Golden Set Analysis</strong></p>
+<ul>
+<li>Apply refined prompt to full 30-text validation corpus</li>
+<li>Calculate percentage of narratives achieving clear hierarchical dominance (target: 80%+)</li>
+<li>Document cases where framework fit appears poor</li>
+</ul>
+<p><strong>Days 4-5: Statistical Benchmarking</strong></p>
+<ul>
+<li>Compare new vs. old prompt outputs on identical texts</li>
+<li>Measure increase in score variance and hierarchical clarity</li>
+<li>Validate that extreme cases now produce extreme scores</li>
+</ul>
+<p><strong>Days 6-7: Cross-Framework Testing</strong></p>
+<ul>
+<li>Apply hierarchical prompting to Fukuyama Identity framework</li>
+<li>Confirm approach generalizes beyond Civic Virtue wells</li>
+<li>Document any framework-specific adjustments needed</li>
+</ul>
+<h3 id="week-3-quality-assurance-and-documentation"><strong>Week 3: Quality Assurance and Documentation</strong></h3>
+<p><strong>Days 1-3: Reliability Testing</strong></p>
+<ul>
+<li>10-run consistency testing on 10 diverse narratives</li>
+<li>Coefficient of variation analysis for multi-run stability</li>
+<li>Document any remaining inconsistency patterns</li>
+</ul>
+<p><strong>Days 4-5: Edge Case Validation</strong></p>
+<ul>
+<li>Test boundary conditions: very short texts, non-English translations, ambiguous cases</li>
+<li>Establish clear guidance for when framework doesn't apply</li>
+<li>Create "poor fit" detection criteria</li>
+</ul>
+<p><strong>Days 6-7: Documentation and Handoff</strong></p>
+<ul>
+<li>Complete technical documentation of prompt evolution</li>
+<li>Create training materials for human annotators</li>
+<li>Prepare for visualization mathematics integration</li>
+</ul>
+<h3 id="success-criteria-and-exit-conditions"><strong>Success Criteria and Exit Conditions</strong></h3>
+<p><strong>Primary Success Metrics</strong>:</p>
+<ul>
+<li>Synthetic extremes achieve 90%+ single-well dominance</li>
+<li>Real-world narratives show clear 2-3 theme hierarchy in 80%+ of cases</li>
+<li>Cross-model consistency (Spearman's ρ &gt; 0.85) for hierarchical rankings</li>
+<li>Multi-run reliability (CV &lt; 0.1) for dominant theme identification</li>
+</ul>
+<p><strong>Secondary Validation Targets</strong>:</p>
+<ul>
+<li>Framework fit detection identifies obvious mismatches</li>
+<li>Evidence excerpts provide clear textual grounding</li>
+<li>Relative weights align with human intuitive assessment</li>
+</ul>
+<p><strong>Exit Criteria for Moving to Human Validation</strong>:</p>
+<ul>
+<li>All primary success metrics achieved</li>
+<li>Technical documentation complete</li>
+<li>Prompt template locked for stability</li>
+<li>Integration ready for visualization mathematics track</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

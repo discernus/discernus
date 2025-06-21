@@ -1,0 +1,1334 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Unified Prompt Template Architecture - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unified-prompt-template-architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unified Prompt Template Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Benefits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Benefits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-consistency-across-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Consistency Across Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-experimentation-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Experimentation Support
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-framework-agnostic-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Framework Agnostic Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-production-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Production Quality
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="System Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-prompttemplatemanager-srcpromptstemplate_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. PromptTemplateManager (src/prompts/template_manager.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-prompt-settings-srcnarrative_gravitypromptsprompt_settingsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Prompt Settings (src/narrative_gravity/prompts/prompt_settings.json)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-experimental-framework-srcnarrative_gravitypromptstemplatesexperiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Experimental Framework (src/narrative_gravity/prompts/templates/experiments/)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-api-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production API Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-research-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual Research Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experimental-research-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experimental Research Usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-current-prompt-architecture-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary: Current Prompt Architecture Status
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary: Current Prompt Architecture Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#whats-working" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ What's Working
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Implementation Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Current Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Usage Commands
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prompt-generation-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Generation Modes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prompt Generation Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-api-mode-production-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. API Mode - Production Automation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-interactive-mode-manual-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Interactive Mode - Manual Research
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-experimental-mode-ab-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Experimental Mode - A/B Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#framework-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-framework-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Framework Discovery
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-implementation-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Implementation Notes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current Implementation Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#programmatic-vs-template-based-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Programmatic vs Template-Based Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-generation-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Generation Process
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimentation-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experimentation Framework
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experimentation Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-experiments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Experiments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-experiment-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Experiment Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Available Experiment Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scoring-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scoring Methodology
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#role-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Role Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis Methodology
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-and-backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration and Backward Compatibility
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration and Backward Compatibility">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-from-v20-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrading from v2.0 System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-system-benefits-over-v20" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current System Benefits Over v2.0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Enhancements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Future Enhancements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#planned-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Planned Features
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Usage Scenarios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Usage Scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-1-academic-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scenario 1: Academic Research
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-2-production-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scenario 2: Production Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-3-prompt-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scenario 3: Prompt Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="unified-prompt-template-architecture">Unified Prompt Template Architecture</h1>
+<p><strong>Last Updated</strong>: June 13, 2025<br />
+<strong>Implementation Status</strong>: Production Ready with Programmatic Generation<br />
+<strong>Template Structure</strong>: Minimal with Experimental Support</p>
+<h2 id="overview">Overview</h2>
+<p>The Unified Prompt Template Architecture combines the sophistication of the v2.0 prompt generation system with the flexibility needed for production API use. The current implementation emphasizes <strong>programmatic prompt generation</strong> rather than static templates, with sophisticated logic built into the PromptTemplateManager class.</p>
+<h2 id="architecture-benefits">Architecture Benefits</h2>
+<h3 id="1-consistency-across-use-cases"><strong>1. Consistency Across Use Cases</strong></h3>
+<ul>
+<li><strong>Same prompt quality</strong> for manual and API use</li>
+<li><strong>Unified template system</strong> eliminates hard-coded prompts</li>
+<li><strong>Version tracking</strong> and metadata embedding across all prompts</li>
+</ul>
+<h3 id="2-experimentation-support"><strong>2. Experimentation Support</strong></h3>
+<ul>
+<li><strong>A/B testing framework</strong> for prompt optimization</li>
+<li><strong>Configurable components</strong> for easy tweaking</li>
+<li><strong>Experimental tracking</strong> with variant management</li>
+</ul>
+<h3 id="3-framework-agnostic-design"><strong>3. Framework Agnostic Design</strong></h3>
+<ul>
+<li><strong>Universal template system</strong> works with all frameworks</li>
+<li><strong>Dynamic content generation</strong> from framework configurations</li>
+<li><strong>Automatic adaptation</strong> to new frameworks</li>
+</ul>
+<h3 id="4-production-quality"><strong>4. Production Quality</strong></h3>
+<ul>
+<li><strong>Reliable JSON extraction</strong> optimized for API use</li>
+<li><strong>Sophisticated methodology</strong> for human interaction</li>
+<li><strong>Consistent scoring requirements</strong> across all modes</li>
+</ul>
+<h2 id="system-components">System Components</h2>
+<h3 id="1-prompttemplatemanager-srcpromptstemplate_managerpy">1. PromptTemplateManager (<code>src/prompts/template_manager.py</code>)</h3>
+<p><strong>Core class providing unified prompt generation:</strong></p>
+<pre><code class="language-python">from src.prompts.template_manager import PromptTemplateManager
+
+# Initialize manager
+template_manager = PromptTemplateManager()
+
+# API prompts (optimized for automation)
+api_prompt = template_manager.generate_api_prompt(text, &quot;civic_virtue&quot;, &quot;gpt-4&quot;)
+
+# Interactive prompts (full v2.0 sophistication)
+interactive_prompt = template_manager.generate_interactive_prompt(&quot;civic_virtue&quot;)
+
+# Experimental prompts (A/B testing)
+experimental_prompt = template_manager.generate_experimental_prompt(
+    text, &quot;civic_virtue&quot;, &quot;scoring_methodology&quot;, &quot;treatment_a&quot;
+)
+</code></pre>
+<h3 id="2-prompt-settings-srcnarrative_gravitypromptsprompt_settingsjson">2. Prompt Settings (<code>src/narrative_gravity/prompts/prompt_settings.json</code>)</h3>
+<p><strong>Actual configuration file for prompt behavior:</strong></p>
+<pre><code class="language-json">{
+  &quot;enforce_decimal_scale&quot;: true,
+  &quot;include_model_identification&quot;: true,
+  &quot;include_analysis_methodology&quot;: true,
+  &quot;include_examples&quot;: false,
+  &quot;max_language_cues&quot;: 3,
+  &quot;temperature_guidance&quot;: null,
+  &quot;experimental_features&quot;: [],
+  &quot;api_mode_settings&quot;: {
+    &quot;abbreviated_methodology&quot;: true,
+    &quot;focus_on_json_reliability&quot;: true,
+    &quot;include_scoring_examples&quot;: false
+  },
+  &quot;interactive_mode_settings&quot;: {
+    &quot;include_workflow_guidance&quot;: true,
+    &quot;include_comparative_analysis&quot;: true,
+    &quot;include_response_structure&quot;: true
+  },
+  &quot;prompt_optimization&quot;: {
+    &quot;version&quot;: &quot;v1.0.0&quot;,
+    &quot;description&quot;: &quot;Base prompt settings for production use&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-15&quot;,
+    &quot;notes&quot;: &quot;Optimized for reliable JSON extraction and consistent scoring&quot;
+  }
+}
+</code></pre>
+<h3 id="3-experimental-framework-srcnarrative_gravitypromptstemplatesexperiments">3. Experimental Framework (<code>src/narrative_gravity/prompts/templates/experiments/</code>)</h3>
+<p><strong>Current Implementation</strong>: Single experimental configuration file</p>
+<p><strong>File</strong>: <code>scoring_methodology.json</code> - Testing different scoring guidance approaches</p>
+<pre><code class="language-json">{
+  &quot;description&quot;: &quot;Experiment with different scoring methodologies for narrative gravity analysis&quot;,
+  &quot;purpose&quot;: &quot;Test whether explicit scoring examples improve LLM accuracy and consistency&quot;,
+
+  &quot;control&quot;: {
+    &quot;description&quot;: &quot;Standard scoring methodology without examples&quot;,
+    &quot;scoring_requirements&quot;: &quot;🚨 **MANDATORY DECIMAL SCALE: 0.0 to 1.0 ONLY** 🚨...&quot;
+  },
+
+  &quot;treatment_a&quot;: {
+    &quot;description&quot;: &quot;Enhanced scoring with concrete examples and thresholds&quot;,
+    &quot;scoring_requirements&quot;: &quot;**SCORING THRESHOLDS:**\n- 0.0-0.2: Minimal/no presence...&quot;
+  },
+
+  &quot;treatment_b&quot;: {
+    &quot;description&quot;: &quot;Comparative scoring with explicit anchor points&quot;,
+    &quot;scoring_requirements&quot;: &quot;**ANCHOR POINT METHOD:**\nThink of MLK 'I Have a Dream'...&quot;
+  },
+
+  &quot;treatment_c&quot;: {
+    &quot;description&quot;: &quot;Process-focused scoring with step-by-step methodology&quot;,
+    &quot;scoring_requirements&quot;: &quot;**SCORING PROCESS:**\n1. Identify 2. Extract 3. Assess...&quot;
+  }
+}
+</code></pre>
+<p><strong>Status</strong>: Minimal but functional template structure focused on experimental scoring methodologies</p>
+<h2 id="usage-patterns">Usage Patterns</h2>
+<h3 id="production-api-usage"><strong>Production API Usage</strong></h3>
+<pre><code class="language-python"># In HuggingFaceClient
+class HuggingFaceClient:
+    def __init__(self):
+        self.template_manager = PromptTemplateManager()
+
+    def analyze_text(self, text: str, framework: str, model: str):
+        # Generate optimized API prompt
+        prompt = self.template_manager.generate_api_prompt(text, framework, model)
+
+        # Process with LLM...
+        return analysis_result
+</code></pre>
+<p><strong>API prompts are optimized for:</strong>
+- ✅ <strong>Reliable JSON extraction</strong>
+- ✅ <strong>Consistent scoring behavior</strong>
+- ✅ <strong>Minimal prompt length</strong> (cost optimization)
+- ✅ <strong>Clear instructions</strong> without verbosity</p>
+<h3 id="manual-research-usage"><strong>Manual Research Usage</strong></h3>
+<pre><code class="language-bash"># Generate interactive prompt for manual LLM use
+python generate_prompt.py --framework civic_virtue --mode interactive --output research_prompt.txt
+</code></pre>
+<p><strong>Interactive prompts include:</strong>
+- ✅ <strong>Model identification verification</strong>
+- ✅ <strong>Workflow guidance</strong> for multi-file analysis
+- ✅ <strong>Comprehensive methodology</strong> explanation
+- ✅ <strong>Response structure</strong> guidance
+- ✅ <strong>Comparative analysis</strong> instructions</p>
+<h3 id="experimental-research-usage"><strong>Experimental Research Usage</strong></h3>
+<pre><code class="language-python"># Test different scoring methodologies
+client = HuggingFaceClient()
+
+# Control group
+control_result = client.analyze_text(text, &quot;civic_virtue&quot;, &quot;gpt-4&quot;)
+
+# Treatment group  
+treatment_result = client.analyze_text_experimental(
+    text, &quot;civic_virtue&quot;, &quot;gpt-4&quot;, &quot;scoring_methodology&quot;, &quot;treatment_a&quot;
+)
+
+# Compare results for prompt optimization
+</code></pre>
+<h2 id="summary-current-prompt-architecture-status">Summary: Current Prompt Architecture Status</h2>
+<h3 id="whats-working">✅ <strong>What's Working</strong></h3>
+<ol>
+<li><strong>PromptTemplateManager</strong>: Production-ready with 442 lines of sophisticated prompt generation logic</li>
+<li><strong>Three Prompt Modes</strong>: API (optimized), Interactive (full featured), Experimental (A/B testing)  </li>
+<li><strong>Framework Integration</strong>: Automatic loading of all 4 available frameworks</li>
+<li><strong>Programmatic Generation</strong>: Dynamic prompt building from JSON configurations</li>
+<li><strong>Experimental Support</strong>: Functional A/B testing with <code>scoring_methodology.json</code></li>
+</ol>
+<h3 id="implementation-approach">📁 <strong>Implementation Approach</strong></h3>
+<ul>
+<li><strong>Strategy</strong>: <strong>Programmatic over static templates</strong> - More maintainable and consistent</li>
+<li><strong>Templates</strong>: Minimal static files, sophisticated programmatic generation</li>
+<li><strong>Configuration</strong>: Rich JSON-based settings with optimization tracking</li>
+<li><strong>Flexibility</strong>: Easy framework addition without template creation</li>
+</ul>
+<h3 id="current-capabilities">🎯 <strong>Current Capabilities</strong></h3>
+<ul>
+<li><strong>Real-time prompt generation</strong> for any framework</li>
+<li><strong>Consistent formatting and requirements</strong> across all prompt types  </li>
+<li><strong>A/B testing infrastructure</strong> with 4 experimental variants</li>
+<li><strong>Production-optimized API prompts</strong> with reliable JSON extraction</li>
+<li><strong>Research-grade interactive prompts</strong> with full methodology</li>
+</ul>
+<h3 id="usage-commands">🔧 <strong>Usage Commands</strong></h3>
+<pre><code class="language-bash"># Generate API prompt programmatically  
+python -c &quot;from src.narrative_gravity.prompts.template_manager import PromptTemplateManager; tm = PromptTemplateManager(); print(tm.generate_api_prompt('test text', 'civic_virtue', 'gpt-4'))&quot;
+
+# Check prompt settings
+cat src/narrative_gravity/prompts/prompt_settings.json
+
+# View experimental configurations
+cat src/narrative_gravity/prompts/templates/experiments/scoring_methodology.json
+</code></pre>
+<p>The prompt architecture is <strong>production-ready</strong> with a focus on programmatic generation rather than static templates.</p>
+<h2 id="prompt-generation-modes">Prompt Generation Modes</h2>
+<h3 id="1-api-mode-production-automation">1. <strong>API Mode</strong> - Production Automation</h3>
+<pre><code class="language-python">prompt = template_manager.generate_api_prompt(text, framework, model)
+</code></pre>
+<p><strong>Characteristics:</strong>
+- Concise and focused
+- Optimized for JSON reliability
+- Abbreviated methodology section
+- No interactive workflow elements</p>
+<h3 id="2-interactive-mode-manual-research">2. <strong>Interactive Mode</strong> - Manual Research</h3>
+<pre><code class="language-python">prompt = template_manager.generate_interactive_prompt(framework)
+</code></pre>
+<p><strong>Characteristics:</strong>
+- Full v2.0 sophistication
+- Model identification verification
+- Workflow guidance for comparative analysis
+- Comprehensive methodology explanation</p>
+<h3 id="3-experimental-mode-ab-testing">3. <strong>Experimental Mode</strong> - A/B Testing</h3>
+<pre><code class="language-python">prompt = template_manager.generate_experimental_prompt(
+    text, framework, experiment_id, variant
+)
+</code></pre>
+<p><strong>Characteristics:</strong>
+- Configurable prompt components
+- Variant tracking for analysis
+- Hypothesis testing support
+- Performance metrics collection</p>
+<h2 id="framework-integration">Framework Integration</h2>
+<h3 id="automatic-framework-discovery"><strong>Automatic Framework Discovery</strong></h3>
+<p>The system automatically loads framework configurations from the actual directory structure:</p>
+<pre><code>frameworks/
+├── civic_virtue/
+│   ├── dipoles.json      # Well definitions with language cues
+│   ├── framework.json    # Sophisticated mathematical configuration  
+│   └── README.md         # Framework documentation
+├── political_spectrum/    # [CURRENTLY ACTIVE via config/ symlinks]
+│   ├── dipoles.json
+│   ├── framework.json
+│   └── README.md
+├── moral_rhetorical_posture/
+│   ├── dipoles.json
+│   ├── framework.json
+│   └── README.md
+└── fukuyama_identity/     # Fourth framework available
+    ├── dipoles.json
+    ├── framework.json
+    └── README.md
+</code></pre>
+<p><strong>Framework Loading Process</strong>:
+1. PromptTemplateManager scans <code>frameworks/</code> directory
+2. Loads <code>dipoles.json</code> for well definitions and language cues
+3. Loads <code>framework.json</code> for mathematical parameters and weighting
+4. Generates framework-specific prompts dynamically
+5. Active framework determined by <code>config/</code> symlinks</p>
+<h2 id="current-implementation-notes">Current Implementation Notes</h2>
+<h3 id="programmatic-vs-template-based-generation"><strong>Programmatic vs Template-Based Generation</strong></h3>
+<p>The current implementation prioritizes <strong>programmatic prompt generation</strong> over static template files:</p>
+<p><strong>✅ What Works</strong>:
+- <strong>PromptTemplateManager</strong>: Sophisticated prompt building logic with 442 lines of code
+- <strong>Dynamic content generation</strong>: Framework-specific prompts built from JSON configurations<br />
+- <strong>Multiple modes</strong>: API, Interactive, and Experimental prompt variants
+- <strong>Sophisticated components</strong>: Role definition, scoring requirements, methodology, JSON formatting</p>
+<p><strong>📁 Template File Status</strong>:
+- <strong>Minimal static templates</strong>: Only <code>experiments/scoring_methodology.json</code> exists
+- <strong>Most prompts generated programmatically</strong>: Using <code>_build_*()</code> methods in PromptTemplateManager
+- <strong>Framework-specific content</strong>: Dynamically loaded from <code>frameworks/*/dipoles.json</code> and <code>framework.json</code></p>
+<p><strong>Benefits of Current Approach</strong>:
+- <strong>Consistency</strong>: All prompts use same logic and formatting
+- <strong>Maintainability</strong>: Changes to prompt structure update all variants automatically
+- <strong>Framework independence</strong>: New frameworks work immediately without template creation
+- <strong>Experimentation</strong>: Easy A/B testing through configuration rather than template duplication</p>
+<h3 id="template-generation-process"><strong>Template Generation Process</strong></h3>
+<ol>
+<li><strong>Load Framework Config</strong> - Dipoles and framework metadata</li>
+<li><strong>Build Components</strong> - Header, wells, methodology, format</li>
+<li><strong>Apply Mode Settings</strong> - API/Interactive/Experimental variations</li>
+<li><strong>Assemble Prompt</strong> - Combine components into final prompt</li>
+<li><strong>Version Tracking</strong> - Embed metadata for reproducibility</li>
+</ol>
+<h2 id="experimentation-framework">Experimentation Framework</h2>
+<h3 id="creating-experiments"><strong>Creating Experiments</strong></h3>
+<ol>
+<li><strong>Define Hypothesis</strong></li>
+</ol>
+<pre><code class="language-json">{
+  &quot;hypothesis&quot;: &quot;Explicit scoring examples improve inter-rater reliability&quot;,
+  &quot;metrics&quot;: [&quot;score_variance&quot;, &quot;consistency_across_models&quot;]
+}
+</code></pre>
+<ol>
+<li><strong>Create Variants</strong></li>
+</ol>
+<pre><code class="language-json">{
+  &quot;control&quot;: {&quot;scoring_requirements&quot;: &quot;Standard instructions&quot;},
+  &quot;treatment&quot;: {&quot;scoring_requirements&quot;: &quot;Enhanced with examples&quot;}
+}
+</code></pre>
+<ol>
+<li><strong>Run Experiment</strong></li>
+</ol>
+<pre><code class="language-python">for variant in [&quot;control&quot;, &quot;treatment&quot;]:
+    result = client.analyze_text_experimental(
+        text, framework, model, experiment_id, variant
+    )
+    collect_metrics(result)
+</code></pre>
+<h3 id="available-experiment-types"><strong>Available Experiment Types</strong></h3>
+<h4 id="scoring-methodology"><strong>Scoring Methodology</strong></h4>
+<ul>
+<li><strong>Control</strong>: Standard 0.0-1.0 scale instructions</li>
+<li><strong>Treatment A</strong>: Concrete examples and thresholds</li>
+<li><strong>Treatment B</strong>: Comparative anchor points</li>
+<li><strong>Treatment C</strong>: Process-focused step-by-step methodology</li>
+</ul>
+<h4 id="role-definition"><strong>Role Definition</strong></h4>
+<ul>
+<li><strong>Control</strong>: Basic analyst role</li>
+<li><strong>Treatment A</strong>: Domain expert with credentials</li>
+<li><strong>Treatment B</strong>: Academic researcher persona</li>
+<li><strong>Treatment C</strong>: Experienced political analyst</li>
+</ul>
+<h4 id="analysis-methodology"><strong>Analysis Methodology</strong></h4>
+<ul>
+<li><strong>Control</strong>: Standard conceptual approach</li>
+<li><strong>Treatment A</strong>: Abbreviated for API efficiency</li>
+<li><strong>Treatment B</strong>: Enhanced with philosophical context</li>
+<li><strong>Treatment C</strong>: Step-by-step analytical process</li>
+</ul>
+<h2 id="migration-and-backward-compatibility">Migration and Backward Compatibility</h2>
+<h3 id="upgrading-from-v20-system"><strong>Upgrading from v2.0 System</strong></h3>
+<ol>
+<li><strong>Existing Scripts Continue Working</strong></li>
+<li><code>generate_prompt.py</code> updated to use new system</li>
+<li>Old command-line interface preserved</li>
+<li>
+<p>Output format maintained</p>
+</li>
+<li>
+<p><strong>API Integration</strong></p>
+</li>
+<li><code>HuggingFaceClient</code> updated to use template manager</li>
+<li>Prompt quality improved automatically</li>
+<li>
+<p>No breaking changes to public interface</p>
+</li>
+<li>
+<p><strong>Configuration Migration</strong></p>
+</li>
+<li>Framework configs remain unchanged</li>
+<li>Settings moved to <code>prompt_settings.json</code></li>
+<li>Experimental configs added to <code>templates/experiments/</code></li>
+</ol>
+<h3 id="current-system-benefits-over-v20"><strong>Current System Benefits Over v2.0</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong>v2.0 System</strong></th>
+<th><strong>New Unified System</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Prompt Generation</strong></td>
+<td>Hard-coded in <code>generate_prompt.py</code></td>
+<td>Template-based, modular</td>
+</tr>
+<tr>
+<td><strong>API Integration</strong></td>
+<td>Basic string building</td>
+<td>Sophisticated template manager</td>
+</tr>
+<tr>
+<td><strong>Experimentation</strong></td>
+<td>Manual prompt editing</td>
+<td>A/B testing framework</td>
+</tr>
+<tr>
+<td><strong>Framework Support</strong></td>
+<td>Single framework focus</td>
+<td>Universal multi-framework</td>
+</tr>
+<tr>
+<td><strong>Consistency</strong></td>
+<td>Manual coordination</td>
+<td>Automatic synchronization</td>
+</tr>
+<tr>
+<td><strong>Production Use</strong></td>
+<td>Research-oriented only</td>
+<td>Both research and production</td>
+</tr>
+</tbody>
+</table>
+<h2 id="future-enhancements">Future Enhancements</h2>
+<h3 id="planned-features"><strong>Planned Features</strong></h3>
+<ol>
+<li><strong>Machine Learning Integration</strong></li>
+<li>Automatic prompt optimization based on results</li>
+<li>Performance-driven template selection</li>
+<li>
+<p>Adaptive prompt generation</p>
+</li>
+<li>
+<p><strong>Advanced Experimentation</strong></p>
+</li>
+<li>Multi-variant testing (A/B/C/D)</li>
+<li>Statistical significance testing</li>
+<li>
+<p>Automated experiment management</p>
+</li>
+<li>
+<p><strong>Template Library</strong></p>
+</li>
+<li>Community-contributed prompt templates</li>
+<li>Framework-specific optimizations</li>
+<li>
+<p>Domain-adapted variations</p>
+</li>
+<li>
+<p><strong>Performance Analytics</strong></p>
+</li>
+<li>Prompt effectiveness metrics</li>
+<li>Cost optimization analysis</li>
+<li>Quality improvement tracking</li>
+</ol>
+<h2 id="example-usage-scenarios">Example Usage Scenarios</h2>
+<h3 id="scenario-1-academic-research"><strong>Scenario 1: Academic Research</strong></h3>
+<pre><code class="language-python"># Generate sophisticated interactive prompt for manual analysis
+template_manager = PromptTemplateManager()
+prompt = template_manager.generate_interactive_prompt(&quot;civic_virtue&quot;)
+
+# Save for use with ChatGPT/Claude
+with open(&quot;research_prompt.txt&quot;, &quot;w&quot;) as f:
+    f.write(prompt)
+</code></pre>
+<h3 id="scenario-2-production-analysis"><strong>Scenario 2: Production Analysis</strong></h3>
+<pre><code class="language-python"># Automated analysis of large corpus
+client = HuggingFaceClient()
+for chunk in corpus_chunks:
+    result = client.analyze_text(chunk.content, &quot;civic_virtue&quot;, &quot;gpt-4&quot;)
+    store_results(result)
+</code></pre>
+<h3 id="scenario-3-prompt-optimization"><strong>Scenario 3: Prompt Optimization</strong></h3>
+<pre><code class="language-python"># A/B test different scoring methodologies
+results = {}
+for variant in [&quot;control&quot;, &quot;treatment_a&quot;, &quot;treatment_b&quot;]:
+    results[variant] = []
+    for text in test_corpus:
+        result = client.analyze_text_experimental(
+            text, &quot;civic_virtue&quot;, &quot;gpt-4&quot;, &quot;scoring_methodology&quot;, variant
+        )
+        results[variant].append(result)
+
+# Analyze which prompt variant produces most reliable results
+analyze_experiment_results(results)
+</code></pre>
+<h2 id="summary">Summary</h2>
+<p>The Unified Prompt Template Architecture provides:</p>
+<p>✅ <strong>Production Quality</strong> - Reliable, consistent prompts for API use<br />
+✅ <strong>Research Sophistication</strong> - Full v2.0 capabilities for manual analysis<br />
+✅ <strong>Experimentation Support</strong> - A/B testing framework for optimization<br />
+✅ <strong>Framework Agnostic</strong> - Works with all current and future frameworks<br />
+✅ <strong>Easy Configuration</strong> - JSON-based settings for rapid iteration<br />
+✅ <strong>Version Tracking</strong> - Reproducible research with metadata embedding</p>
+<p>This system eliminates the gap between sophisticated research prompts and production API prompts, providing a unified foundation for both manual research and automated analysis while supporting continuous improvement through systematic experimentation. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

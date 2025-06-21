@@ -1,0 +1,1032 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Narrative Gravity Wells Modular Architecture v2.0 - Technical Documentation - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#narrative-gravity-wells-modular-architecture-v20-technical-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Narrative Gravity Wells Modular Architecture v2.0 - Technical Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#technical-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-structure-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class Structure Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Class Structure Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#narrativegravitywellselliptical-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      NarrativeGravityWellsElliptical Enhancements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-format-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      JSON Format Specification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JSON Format Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-minimal-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Minimal Format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#legacy-format-deprecated-but-supported" class="md-nav__link">
+    <span class="md-ellipsis">
+      Legacy Format (Deprecated but Supported)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-file-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration File Schemas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration File Schemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dipolesjson-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      dipoles.json Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frameworkjson-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      framework.json Schema
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-generation-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt Generation Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prompt Generation Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metric-calculation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metric Calculation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metric Calculation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#runtime-calculation-from-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime Calculation from Scores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Framework Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consistency-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consistency Checks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Optimizations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Optimizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Caching
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Utilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Utilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#json-format-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      JSON Format Transformer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-loading-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Loading Errors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime Errors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framework-validation-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Framework Validation Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="narrative-gravity-wells-modular-architecture-v20-technical-documentation">Narrative Gravity Wells Modular Architecture v2.0 - Technical Documentation</h1>
+<p>This document provides technical implementation details for the modular architecture introduced in v2.0.</p>
+<h2 id="technical-architecture">Technical Architecture</h2>
+<h3 id="class-structure-changes">Class Structure Changes</h3>
+<h4 id="narrativegravitywellselliptical-enhancements"><code>NarrativeGravityWellsElliptical</code> Enhancements</h4>
+<p><strong>New Constructor Parameters:</strong></p>
+<pre><code class="language-python">def __init__(self, config_dir=&quot;config&quot;):
+    &quot;&quot;&quot;
+    Initialize with modular configuration loading.
+
+    Args:
+        config_dir (str): Directory containing dipoles.json and framework.json
+                         Defaults to &quot;config&quot; for backward compatibility
+    &quot;&quot;&quot;
+</code></pre>
+<p><strong>Configuration Loading:</strong></p>
+<pre><code class="language-python">def load_configuration(self, config_dir):
+    &quot;&quot;&quot;Load dipoles and framework from JSON files with fallback to defaults.&quot;&quot;&quot;
+    dipoles_file = Path(config_dir) / &quot;dipoles.json&quot;
+    framework_file = Path(config_dir) / &quot;framework.json&quot;
+
+    if dipoles_file.exists() and framework_file.exists():
+        # Load modular configuration
+        self.dipoles_data = self._load_dipoles(dipoles_file)
+        self.framework_data = self._load_framework(framework_file)
+        self.well_definitions = self._build_well_definitions()
+        print(f&quot;✅ Loaded framework v{self.framework_data['version']} from {framework_file}&quot;)
+    else:
+        # Fallback to hardcoded defaults
+        self._load_default_configuration()
+        print(&quot;⚠️  Using default configuration (config files not found)&quot;)
+</code></pre>
+<p><strong>Backward Compatibility Methods:</strong></p>
+<pre><code class="language-python">def normalize_analysis_data(self, data):
+    &quot;&quot;&quot;Convert old JSON format to new format for processing.&quot;&quot;&quot;
+    if &quot;wells&quot; in data and &quot;scores&quot; not in data:
+        # Old format: {&quot;wells&quot;: [{&quot;name&quot;: &quot;Dignity&quot;, &quot;score&quot;: 1.0}]}
+        scores = {well[&quot;name&quot;]: well[&quot;score&quot;] for well in data[&quot;wells&quot;]}
+        data[&quot;scores&quot;] = scores
+
+    # Ensure all wells have scores (fill missing with 0.0)
+    for well_name in self.well_definitions:
+        if well_name not in data[&quot;scores&quot;]:
+            data[&quot;scores&quot;][well_name] = 0.0
+
+    return data
+</code></pre>
+<h3 id="json-format-specification">JSON Format Specification</h3>
+<h4 id="new-minimal-format">New Minimal Format</h4>
+<pre><code class="language-json">{
+  &quot;metadata&quot;: {
+    &quot;title&quot;: &quot;Analysis Title&quot;,
+    &quot;model&quot;: &quot;gpt-4&quot;,
+            &quot;prompt_version&quot;: &quot;2025.06.04&quot;,
+        &quot;dipoles_version&quot;: &quot;2025.06.04&quot;,
+        &quot;framework_version&quot;: &quot;2025.06.04&quot;
+  },
+  &quot;scores&quot;: {
+    &quot;Dignity&quot;: 1.0,
+    &quot;Truth&quot;: 0.8,
+    &quot;Hope&quot;: 0.6,
+    &quot;Justice&quot;: 0.7,
+    &quot;Pragmatism&quot;: 0.4,
+    &quot;Tribalism&quot;: 0.2,
+    &quot;Manipulation&quot;: 0.1,
+    &quot;Resentment&quot;: 0.3,
+    &quot;Fear&quot;: 0.2,
+    &quot;Fantasy&quot;: 0.1
+  }
+}
+</code></pre>
+<h4 id="legacy-format-deprecated-but-supported">Legacy Format (Deprecated but Supported)</h4>
+<pre><code class="language-json">{
+  &quot;metadata&quot;: {...},
+  &quot;wells&quot;: [
+    {&quot;name&quot;: &quot;Dignity&quot;, &quot;score&quot;: 1.0, &quot;angle&quot;: 90, &quot;weight&quot;: 1.0},
+    {&quot;name&quot;: &quot;Truth&quot;, &quot;score&quot;: 0.8, &quot;angle&quot;: 45, &quot;weight&quot;: 0.8}
+  ],
+  &quot;com&quot;: {&quot;x&quot;: 0.1, &quot;y&quot;: 0.2},
+  &quot;mps&quot;: 0.25,
+  &quot;dps&quot;: 0.85
+}
+</code></pre>
+<h3 id="configuration-file-schemas">Configuration File Schemas</h3>
+<h4 id="dipolesjson-schema"><code>dipoles.json</code> Schema</h4>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [&quot;version&quot;, &quot;description&quot;, &quot;dipoles&quot;],
+  &quot;properties&quot;: {
+    &quot;version&quot;: {&quot;type&quot;: &quot;string&quot;},
+    &quot;description&quot;: {&quot;type&quot;: &quot;string&quot;},
+    &quot;dipoles&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;required&quot;: [&quot;name&quot;, &quot;description&quot;, &quot;positive&quot;, &quot;negative&quot;],
+        &quot;properties&quot;: {
+          &quot;name&quot;: {&quot;type&quot;: &quot;string&quot;},
+          &quot;description&quot;: {&quot;type&quot;: &quot;string&quot;},
+          &quot;positive&quot;: {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;required&quot;: [&quot;name&quot;, &quot;description&quot;, &quot;language_cues&quot;],
+            &quot;properties&quot;: {
+              &quot;name&quot;: {&quot;type&quot;: &quot;string&quot;},
+              &quot;description&quot;: {&quot;type&quot;: &quot;string&quot;},
+              &quot;language_cues&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {&quot;type&quot;: &quot;string&quot;}
+              }
+            }
+          },
+          &quot;negative&quot;: {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;required&quot;: [&quot;name&quot;, &quot;description&quot;, &quot;language_cues&quot;],
+            &quot;properties&quot;: {
+              &quot;name&quot;: {&quot;type&quot;: &quot;string&quot;},
+              &quot;description&quot;: {&quot;type&quot;: &quot;string&quot;},
+              &quot;language_cues&quot;: {
+                &quot;type&quot;: &quot;array&quot;,
+                &quot;items&quot;: {&quot;type&quot;: &quot;string&quot;}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<h4 id="frameworkjson-schema"><code>framework.json</code> Schema</h4>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [&quot;version&quot;, &quot;description&quot;, &quot;wells&quot;],
+  &quot;properties&quot;: {
+    &quot;version&quot;: {&quot;type&quot;: &quot;string&quot;},
+    &quot;description&quot;: {&quot;type&quot;: &quot;string&quot;},
+    &quot;ellipse&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;semi_major_axis&quot;: {&quot;type&quot;: &quot;number&quot;},
+        &quot;semi_minor_axis&quot;: {&quot;type&quot;: &quot;number&quot;},
+        &quot;orientation&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [&quot;vertical&quot;, &quot;horizontal&quot;]}
+      }
+    },
+    &quot;wells&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;patternProperties&quot;: {
+        &quot;^[A-Za-z]+$&quot;: {
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;required&quot;: [&quot;angle&quot;, &quot;weight&quot;, &quot;type&quot;],
+          &quot;properties&quot;: {
+            &quot;angle&quot;: {&quot;type&quot;: &quot;number&quot;, &quot;minimum&quot;: 0, &quot;maximum&quot;: 360},
+            &quot;weight&quot;: {&quot;type&quot;: &quot;number&quot;},
+            &quot;type&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [&quot;integrative&quot;, &quot;disintegrative&quot;]},
+            &quot;tier&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [&quot;primary&quot;, &quot;secondary&quot;, &quot;tertiary&quot;]}
+          }
+        }
+      }
+    },
+    &quot;scaling_factor&quot;: {&quot;type&quot;: &quot;number&quot;}
+  }
+}
+</code></pre>
+<h3 id="prompt-generation-algorithm">Prompt Generation Algorithm</h3>
+<h4 id="template-structure">Template Structure</h4>
+<pre><code class="language-python">def generate_prompt(dipoles_data, framework_data, interactive=True):
+    &quot;&quot;&quot;Generate LLM prompt from configuration data.&quot;&quot;&quot;
+
+    # Extract dipole information
+    dipoles = []
+    for dipole in dipoles_data['dipoles']:
+        positive = dipole['positive']
+        negative = dipole['negative']
+
+        dipoles.append({
+            'name': dipole['name'],
+            'positive_name': positive['name'],
+            'positive_desc': positive['description'],
+            'positive_cues': positive['language_cues'],
+            'negative_name': negative['name'],
+            'negative_desc': negative['description'],
+            'negative_cues': negative['language_cues']
+        })
+
+    # Build prompt template
+    if interactive:
+        template = INTERACTIVE_TEMPLATE
+    else:
+        template = SIMPLE_TEMPLATE
+
+    return template.format(
+        dipoles=dipoles,
+        version=dipoles_data['version'],
+        framework_version=framework_data['version']
+    )
+</code></pre>
+<h3 id="metric-calculation">Metric Calculation</h3>
+<h4 id="runtime-calculation-from-scores">Runtime Calculation from Scores</h4>
+<pre><code class="language-python">def calculate_metrics(self, scores):
+    &quot;&quot;&quot;Calculate metrics from well scores and framework configuration.&quot;&quot;&quot;
+
+    # Get well positions and weights from framework
+    positions = []
+    weighted_forces = []
+
+    for well_name, score in scores.items():
+        if well_name in self.well_definitions:
+            well = self.well_definitions[well_name]
+            angle_rad = math.radians(well['angle'])
+            weight = well['weight']
+
+            # Calculate position on ellipse
+            x, y = self._ellipse_position(angle_rad)
+            positions.append((x, y, score * weight))
+
+            # Calculate weighted force vector
+            force_x = x * score * weight
+            force_y = y * score * weight
+            weighted_forces.append((force_x, force_y))
+
+    # Calculate center of mass
+    total_weight = sum(abs(pos[2]) for pos in positions)
+    if total_weight &gt; 0:
+        com_x = sum(pos[0] * abs(pos[2]) for pos in positions) / total_weight
+        com_y = sum(pos[1] * abs(pos[2]) for pos in positions) / total_weight
+    else:
+        com_x = com_y = 0.0
+
+    # Calculate derived metrics
+    moral_polarity_score = math.sqrt(com_x**2 + com_y**2)
+    directional_purity_score = com_y  # Vertical component
+
+    return {
+        'com': {'x': com_x, 'y': com_y},
+        'mps': moral_polarity_score,
+        'dps': directional_purity_score
+    }
+</code></pre>
+<h3 id="framework-validation">Framework Validation</h3>
+<h4 id="consistency-checks">Consistency Checks</h4>
+<pre><code class="language-python">def validate_framework_consistency(dipoles_data, framework_data):
+    &quot;&quot;&quot;Validate that dipoles and framework definitions are consistent.&quot;&quot;&quot;
+
+    # Extract well names from dipoles
+    dipole_wells = set()
+    for dipole in dipoles_data['dipoles']:
+        dipole_wells.add(dipole['positive']['name'])
+        dipole_wells.add(dipole['negative']['name'])
+
+    # Extract well names from framework
+    framework_wells = set(framework_data['wells'].keys())
+
+    # Check consistency
+    missing_in_framework = dipole_wells - framework_wells
+    extra_in_framework = framework_wells - dipole_wells
+
+    if missing_in_framework or extra_in_framework:
+        raise ValueError(f&quot;Inconsistent well definitions: &quot;
+                        f&quot;Missing: {missing_in_framework}, &quot;
+                        f&quot;Extra: {extra_in_framework}&quot;)
+
+    # Validate weights and angles
+    for well_name, well_config in framework_data['wells'].items():
+        if not 0 &lt;= well_config['angle'] &lt; 360:
+            raise ValueError(f&quot;Invalid angle for {well_name}: {well_config['angle']}&quot;)
+
+        if well_config['type'] == 'integrative' and well_config['weight'] &lt; 0:
+            raise ValueError(f&quot;Integrative well {well_name} has negative weight&quot;)
+
+        if well_config['type'] == 'disintegrative' and well_config['weight'] &gt; 0:
+            raise ValueError(f&quot;Disintegrative well {well_name} has positive weight&quot;)
+
+    return True
+</code></pre>
+<h3 id="performance-optimizations">Performance Optimizations</h3>
+<h4 id="configuration-caching">Configuration Caching</h4>
+<pre><code class="language-python">class NarrativeGravityWellsElliptical:
+    def __init__(self, config_dir=&quot;config&quot;):
+        self._config_cache = {}
+        self._config_dir = config_dir
+        self.load_configuration(config_dir)
+
+    def load_configuration(self, config_dir):
+        &quot;&quot;&quot;Load configuration with caching.&quot;&quot;&quot;
+        cache_key = str(Path(config_dir).resolve())
+
+        if cache_key in self._config_cache:
+            cached = self._config_cache[cache_key]
+            self.dipoles_data = cached['dipoles']
+            self.framework_data = cached['framework']
+            self.well_definitions = cached['wells']
+            return
+
+        # Load and cache configuration
+        # ... loading logic ...
+
+        self._config_cache[cache_key] = {
+            'dipoles': self.dipoles_data,
+            'framework': self.framework_data,
+            'wells': self.well_definitions
+        }
+</code></pre>
+<h3 id="migration-utilities">Migration Utilities</h3>
+<h4 id="json-format-transformer">JSON Format Transformer</h4>
+<pre><code class="language-python">def transform_legacy_to_new_format(legacy_json_path, output_path):
+    &quot;&quot;&quot;Transform legacy JSON files to new minimal format.&quot;&quot;&quot;
+
+    with open(legacy_json_path) as f:
+        data = json.load(f)
+
+    # Extract scores from wells array
+    scores = {}
+    if 'wells' in data:
+        for well in data['wells']:
+            scores[well['name']] = well['score']
+
+    # Create new format
+    new_data = {
+        'metadata': data.get('metadata', {}),
+        'scores': scores
+    }
+
+    # Add version information
+    new_data['metadata']['format_version'] = '2.0'
+    new_data['metadata']['migrated_from'] = 'legacy'
+
+    with open(output_path, 'w') as f:
+        json.dump(new_data, f, indent=2)
+</code></pre>
+<h2 id="error-handling">Error Handling</h2>
+<h3 id="configuration-loading-errors">Configuration Loading Errors</h3>
+<ul>
+<li>Missing config files → Fall back to defaults</li>
+<li>Invalid JSON → Detailed parsing error</li>
+<li>Schema validation failure → Specific field errors</li>
+<li>Inconsistent wells → List missing/extra wells</li>
+</ul>
+<h3 id="runtime-errors">Runtime Errors</h3>
+<ul>
+<li>Unknown wells in analysis data → Warning + default angle</li>
+<li>Missing scores → Fill with 0.0</li>
+<li>Invalid metric calculations → Use fallback values</li>
+</ul>
+<h3 id="framework-validation-errors">Framework Validation Errors</h3>
+<ul>
+<li>Structural validation via JSON schema</li>
+<li>Semantic validation for well consistency</li>
+<li>Mathematical validation for angles and weights</li>
+</ul>
+<p>This technical documentation should be sufficient for developers working with the modular architecture while avoiding duplication with the user-facing README.md. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

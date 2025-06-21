@@ -1,0 +1,697 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Dynamic scaling - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#summary-document-why-the-polarcartesian-hybrid-is-superior-and-why-scaling-should-be-dynamic" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dynamic scaling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary-document-why-the-polarcartesian-hybrid-is-superior-and-why-scaling-should-be-dynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary Document: Why the Polar/Cartesian Hybrid is Superior, and Why Scaling Should Be Dynamic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Document: Why the Polar/Cartesian Hybrid is Superior, and Why Scaling Should Be Dynamic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Insights
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-why-the-polarcartesian-hybrid-is-superior" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Why the Polar/Cartesian Hybrid is Superior
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Why the Polar/Cartesian Hybrid is Superior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-mathematical-and-interpretive-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Mathematical and Interpretive Strengths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-system-and-framework-flexibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. System and Framework Flexibility
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-limitation-of-fixed-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The Limitation of Fixed Scaling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Limitation of Fixed Scaling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-why-scaling-is-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Why Scaling Is Used
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-drawbacks-of-fixed-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Drawbacks of Fixed Scaling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-recommendation-dynamic-scaling-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Recommendation: Dynamic Scaling at Runtime
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Recommendation: Dynamic Scaling at Runtime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-rationale-and-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Rationale and Benefits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-implementation-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Implementation Steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-system-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. System Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-benefits-of-dynamic-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Benefits of Dynamic Scaling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Dynamic scaling</h1>
+
+<p><img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/></p>
+<h2 id="summary-document-why-the-polarcartesian-hybrid-is-superior-and-why-scaling-should-be-dynamic">Summary Document: Why the Polar/Cartesian Hybrid is Superior, and Why Scaling Should Be Dynamic</h2>
+<hr />
+<h3 id="key-insights">Key Insights</h3>
+<ul>
+<li>The polar/Cartesian hybrid approach is mathematically and interpretively superior for narrative gravity mapping.</li>
+<li>Fixed scaling factors (e.g., 0.8) ensure no narrative position falls outside the boundary, but may mute differences.</li>
+<li>Dynamic scaling at runtime maximizes visual space and preserves analytical clarity.</li>
+<li>The Narrative Gravity Maps architecture is fully compatible with this enhancement.</li>
+</ul>
+<hr />
+<h2 id="1-why-the-polarcartesian-hybrid-is-superior">1. Why the Polar/Cartesian Hybrid is Superior</h2>
+<h3 id="a-mathematical-and-interpretive-strengths"><strong>A. Mathematical and Interpretive Strengths</strong></h3>
+<ul>
+<li><strong>Well Positioning (Polar/Elliptical):</strong><ul>
+<li>Gravity wells (thematic poles) are placed at fixed angles around a circle or ellipse using polar or elliptical parametric equations, directly reflecting theoretical structure and symmetry<a href="narrative_gravity_maps_v1.0.1.md">^1</a>.</li>
+<li>This allows for intuitive, theory-driven arrangement of conceptual poles, supporting frameworks with any number of wells, arbitrary angular spacing, and elliptical distortion.</li>
+</ul>
+</li>
+<li><strong>Narrative Positioning (Cartesian):</strong><ul>
+<li>The position of a narrative is calculated as the weighted center of mass (COM) of the wells, using their (x, y) coordinates and the narrative’s scores<a href="narrative_gravity_maps_v1.0.1.md">^1</a>.</li>
+<li>Cartesian averaging is mathematically straightforward, visually interpretable, and compatible with standard metrics (distance, clustering, etc.).</li>
+</ul>
+</li>
+<li><strong>Why Not Pure Polar?</strong><ul>
+<li>Summing or averaging in polar coordinates is mathematically awkward and less intuitive for multidimensional, weighted systems.</li>
+<li>Most geometric and statistical analyses (distance, clustering, etc.) are easier and more meaningful in Cartesian space<a href="narrative_gravity_maps_v1.0.1.md">^1</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="b-system-and-framework-flexibility"><strong>B. System and Framework Flexibility</strong></h3>
+<ul>
+<li>The hybrid approach supports:<ul>
+<li>Elliptical and circular frameworks.</li>
+<li>Arbitrary well weighting and non-uniform angular spacing.</li>
+<li>Extension to new frameworks without breaking compatibility or interpretive clarity<a href="FRAMEWORK_ARCHITECTURE.md">^1</a>.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="2-the-limitation-of-fixed-scaling">2. The Limitation of Fixed Scaling</h2>
+<h3 id="a-why-scaling-is-used"><strong>A. Why Scaling Is Used</strong></h3>
+<ul>
+<li>The weighted COM can fall outside the circle/ellipse if scores are highly imbalanced.</li>
+<li>A fixed scaling factor (e.g., 0.8) is applied to keep all narrative positions inside the boundary<a href="narrative_gravity_maps_v1.0.1.md">^1</a>.</li>
+</ul>
+<h3 id="b-drawbacks-of-fixed-scaling"><strong>B. Drawbacks of Fixed Scaling</strong></h3>
+<ul>
+<li><strong>Muted Differences:</strong>
+All data points are proportionally shrunk toward the center, reducing the absolute spread and potentially muting distinctions between narratives, especially for those that would otherwise be near the edge<a href="narrative_gravity_maps_v1.0.1.md">^1</a>.</li>
+<li><strong>Wasted Visual Space:</strong>
+In datasets where no narrative is near the boundary, much of the visual space remains unused.</li>
+</ul>
+<hr />
+<h2 id="3-recommendation-dynamic-scaling-at-runtime">3. Recommendation: Dynamic Scaling at Runtime</h2>
+<h3 id="a-rationale-and-benefits"><strong>A. Rationale and Benefits</strong></h3>
+<ul>
+<li><strong>Maximizes Use of Space:</strong>
+Dynamically scaling so the furthest narrative position just touches the boundary ensures all available visual space is utilized, making distinctions between narratives clearer.</li>
+<li><strong>Preserves Relative Differences:</strong>
+All positions are scaled by the same factor, so relative distances and analytical relationships are preserved.</li>
+<li><strong>Adapts to Data:</strong>
+Works equally well for datasets with tightly clustered or widely spread narratives.</li>
+<li><strong>Avoids Out-of-Bounds Artifacts:</strong>
+No narrative will ever be plotted outside the conceptual space, maintaining interpretive integrity.</li>
+</ul>
+<h3 id="b-implementation-steps"><strong>B. Implementation Steps</strong></h3>
+<ol>
+<li><strong>Compute Raw Narrative Positions:</strong>
+Calculate the (x, y) positions for all narratives using the standard weighted COM formula.</li>
+<li><strong>Determine Maximum Distance:</strong>
+For each narrative, compute its normalized distance from the center to the ellipse/circle boundary.</li>
+<li><strong>Calculate Scaling Factor:</strong>
+Set the scaling factor to \$ min(1, 1 / max observed distance) \$, or slightly less (e.g., 0.99) for a margin.</li>
+<li><strong>Apply Scaling:</strong>
+Multiply all narrative (x, y) positions by the scaling factor before plotting.</li>
+<li><strong>Document Scaling:</strong>
+Store and display the scaling factor used for each visualization to ensure transparency and reproducibility.</li>
+</ol>
+<h3 id="c-system-compatibility"><strong>C. System Compatibility</strong></h3>
+<ul>
+<li>The Narrative Gravity Maps architecture already supports runtime framework selection and dynamic configuration<a href="FRAMEWORK_ARCHITECTURE.md">^3</a>.</li>
+<li>Scaling can be implemented as:<ul>
+<li>A runtime parameter in the visualization module.</li>
+<li>A configurable option in framework.json or as a visualization override.</li>
+<li>An experimental variable in systematic methodological research.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="4-benefits-of-dynamic-scaling">4. Benefits of Dynamic Scaling</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Benefit</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Maximized Visual Spread</td>
+<td style="text-align: left;">Ensures the most extreme narrative fills the available space, improving interpretability</td>
+</tr>
+<tr>
+<td style="text-align: left;">Preserved Analytical Clarity</td>
+<td style="text-align: left;">Maintains proportional relationships between narratives</td>
+</tr>
+<tr>
+<td style="text-align: left;">Adaptability</td>
+<td style="text-align: left;">Automatically adjusts to the distribution of each dataset</td>
+</tr>
+<tr>
+<td style="text-align: left;">Transparency</td>
+<td style="text-align: left;">Scaling factor can be logged for reproducibility and cross-dataset comparison</td>
+</tr>
+<tr>
+<td style="text-align: left;">Methodological Rigor</td>
+<td style="text-align: left;">Compatible with systematic experimental design and comparative research</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-conclusion">5. Conclusion</h2>
+<p><strong>The polar/Cartesian hybrid approach is mathematically optimal and interpretively robust for narrative gravity mapping.</strong> Fixed scaling, while safe, can mute differences and waste visual space. <strong>Dynamic scaling at runtime is a recommended enhancement:</strong> it maximizes visual and analytical clarity without sacrificing rigor or compatibility. The Narrative Gravity Maps system is fully capable of supporting this improvement, and its adoption will further strengthen both research quality and practical utility<a href="FRAMEWORK_ARCHITECTURE.md">^1</a><a href="narrative_gravity_maps_v1.0.1.md">^2</a>.</p>
+<hr />
+<blockquote>
+<p>“The computational procedures work identically across all framework implementations, ensuring mathematical consistency while supporting diverse theoretical commitments and experimental comparisons... Wells are positioned using parametric ellipse equations... Narrative positions are calculated as weighted averages of well positions... Where 0.8 scaling factor to keep narratives inside ellipse.”
+— Narrative Gravity Maps v1.3.0<a href="narrative_gravity_maps_v1.3.0.md">^1</a></p>
+</blockquote>
+<hr />
+<p><strong>Implementation of dynamic scaling should be prioritized as a core upgrade for all future framework releases.</strong></p>
+<div style="text-align: center">⁂</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

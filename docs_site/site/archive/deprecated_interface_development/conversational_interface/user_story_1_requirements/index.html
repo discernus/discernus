@@ -1,0 +1,804 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>User story 1 requirements - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ok-based-on-the-capabilities-of-the-system-as-you-understand-them-please-generate-a-prioritized-list-of-requirements-for-realizing-the-most-essential-elements-of-the-first-user-story-it-is-not-strictly-necessary-to-do-everything-in-that-user-story-just-the-essential-elements-that-embody-the-type-of-analysis-represented-we-can-loop-around-to-additional-elements-in-a-future-iteration-but-i-need-to-be-able-to-tell-cursor-my-developer-what-to-focus-on-in-the-next-iteraction-referencing-specifics-in-the-user-story-so-they-can-build-tests-accordingly-as-we-go-well-do-the-other-user-stories-next-but-for-now-focus-just-on-the-first-user-story-remember-we-are-using-chainlit-and-python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User story 1 requirements
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#priority-1-core-conversational-framework-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 1: Core Conversational Framework Development
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority 1: Core Conversational Framework Development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-chainlit-chat-interface-for-framework-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Chainlit Chat Interface for Framework Construction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-dynamic-framework-creation-and-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Dynamic Framework Creation and Storage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-2-library-panel-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 2: Library Panel Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority 2: Library Panel Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-reference-text-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Reference Text Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-real-time-library-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Real-Time Library Updates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-3-immediate-framework-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 3: Immediate Framework Testing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority 3: Immediate Framework Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-conversational-analysis-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Conversational Analysis Execution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-iterative-framework-refinement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Iterative Framework Refinement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-4-academic-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority 4: Academic Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Priority 4: Academic Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-automatic-documentation-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Automatic Documentation Generation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-roadmap-for-cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Roadmap for Cursor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Roadmap for Cursor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-basic-conversational-framework-development-week-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Basic Conversational Framework Development (Week 1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-library-integration-week-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Library Integration (Week 2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-analysis-integration-week-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Analysis Integration (Week 3)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specific-technical-requirements-for-cursor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Specific Technical Requirements for Cursor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Specific Technical Requirements for Cursor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-endpoints-to-create" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Endpoints to Create
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chainlit-integration-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chainlit Integration Points
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/></p>
+<h1 id="ok-based-on-the-capabilities-of-the-system-as-you-understand-them-please-generate-a-prioritized-list-of-requirements-for-realizing-the-most-essential-elements-of-the-first-user-story-it-is-not-strictly-necessary-to-do-everything-in-that-user-story-just-the-essential-elements-that-embody-the-type-of-analysis-represented-we-can-loop-around-to-additional-elements-in-a-future-iteration-but-i-need-to-be-able-to-tell-cursor-my-developer-what-to-focus-on-in-the-next-iteraction-referencing-specifics-in-the-user-story-so-they-can-build-tests-accordingly-as-we-go-well-do-the-other-user-stories-next-but-for-now-focus-just-on-the-first-user-story-remember-we-are-using-chainlit-and-python">OK. Based on the capabilities of the system as you understand them. Please generate a prioritized list of requirements for realizing the most essential elements of the first user story. It is not strictly necessary to do everything in that user story, just the essential elements that embody the type of analysis represented. We can loop around to additional elements in a future iteration. But I need to be able to tell Cursor (my developer!), what to focus on in the next iteraction, referencing specifics in the user story so they can build tests accordingly as we go. We'll do the other user stories next, but for now, focus just on the first user story. Remember we are using Chainlit and Python.</h1>
+<p>🧠 <strong>Essential Requirements for Dr. Sarah Chen's Framework Development Journey:</strong></p>
+<ul>
+<li>Conversational framework construction through iterative dialogue with reference text analysis</li>
+<li>Real-time library navigation and cross-referencing during framework development</li>
+<li>Hypothesis testing through immediate application to diverse text corpus</li>
+<li>Academic rigor maintained through systematic documentation and version control</li>
+</ul>
+<p>Based on your comprehensive system capabilities and the first user story (Dr. Sarah Chen developing the Mill-Digital Governance Framework), here are the prioritized requirements for the essential conversational framework development experience:</p>
+<h2 id="priority-1-core-conversational-framework-development"><strong>Priority 1: Core Conversational Framework Development</strong></h2>
+<h3 id="11-chainlit-chat-interface-for-framework-construction"><strong>1.1 Chainlit Chat Interface for Framework Construction</strong></h3>
+<p><strong>User Story Reference</strong>: "I want to develop a framework based on Mill's harm principle from 'On Liberty' to analyze digital platform governance narratives"</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Chainlit chat interface that accepts natural language framework descriptions</li>
+<li>Conversational guidance for dipole construction ("Let's start with your core dipole...")</li>
+<li>Real-time framework validation and suggestion system</li>
+<li>Session persistence for iterative framework development</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<pre><code class="language-python">@cl.on_message
+async def handle_framework_development(message: cl.Message):
+    # Parse framework development intent
+    # Guide dipole construction through conversation
+    # Validate framework structure
+    # Store framework state in session
+</code></pre>
+<h3 id="12-dynamic-framework-creation-and-storage"><strong>1.2 Dynamic Framework Creation and Storage</strong></h3>
+<p><strong>User Story Reference</strong>: Sarah's evolution from "Individual Autonomy vs Collective Protection" to the final four-dipole system</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Create new framework configurations through conversation</li>
+<li>Store framework definitions in your existing <code>frameworks/</code> directory structure</li>
+<li>Generate <code>dipoles.json</code> and <code>framework.json</code> files programmatically</li>
+<li>Version control for framework iterations (v1.0, v1.1, etc.)</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Leverage your existing <code>FrameworkManager</code> class</li>
+<li>Extend to support conversational framework creation</li>
+<li>Integrate with PostgreSQL for framework versioning</li>
+</ul>
+<h2 id="priority-2-library-panel-integration"><strong>Priority 2: Library Panel Integration</strong></h2>
+<h3 id="21-reference-text-integration"><strong>2.1 Reference Text Integration</strong></h3>
+<p><strong>User Story Reference</strong>: "Mill quotations from previous analyses" and "highlighted passage from 'On Liberty'"</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Upload and chunk reference texts (Mill's "On Liberty")</li>
+<li>Display relevant passages in library panel during conversation</li>
+<li>Auto-highlight related content based on conversation context</li>
+<li>Quote extraction and citation capabilities</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Extend your existing corpus upload system for reference texts</li>
+<li>Create reference text retrieval API endpoints</li>
+<li>Implement semantic search for relevant passages</li>
+</ul>
+<h3 id="22-real-time-library-updates"><strong>2.2 Real-Time Library Updates</strong></h3>
+<p><strong>User Story Reference</strong>: "library panel automatically highlighting relevant items"</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Dynamic library content updates based on conversation</li>
+<li>Cross-reference existing frameworks during development</li>
+<li>Display related theoretical concepts and previous analyses</li>
+<li>Framework comparison suggestions</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<pre><code class="language-python"># Library update system
+async def update_library_panel(conversation_context):
+    relevant_items = search_related_content(conversation_context)
+    await cl.Message(content=library_update, author=&quot;Library&quot;).send()
+</code></pre>
+<h2 id="priority-3-immediate-framework-testing"><strong>Priority 3: Immediate Framework Testing</strong></h2>
+<h3 id="31-conversational-analysis-execution"><strong>3.1 Conversational Analysis Execution</strong></h3>
+<p><strong>User Story Reference</strong>: "Apply it to that Facebook whistleblower testimony from my corpus—Frances Haugen's congressional hearing"</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Immediate framework testing through conversation</li>
+<li>Integration with your existing analysis pipeline</li>
+<li>Real-time analysis results display</li>
+<li>Framework performance feedback</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Connect to your existing <code>RealAnalysisService</code></li>
+<li>Use your <code>DirectAPIClient</code> for LLM analysis</li>
+<li>Display results in chat interface with visualizations</li>
+</ul>
+<h3 id="32-iterative-framework-refinement"><strong>3.2 Iterative Framework Refinement</strong></h3>
+<p><strong>User Story Reference</strong>: Sarah's discovery that "traditional political coalitions break down on digital governance issues"</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Framework modification based on analysis results</li>
+<li>Dipole splitting and refinement through conversation</li>
+<li>Performance comparison between framework versions</li>
+<li>Statistical validation of framework changes</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Framework diff and comparison system</li>
+<li>Integration with your multi-run validation capabilities</li>
+<li>Conversational interpretation of statistical results</li>
+</ul>
+<h2 id="priority-4-academic-documentation"><strong>Priority 4: Academic Documentation</strong></h2>
+<h3 id="41-automatic-documentation-generation"><strong>4.1 Automatic Documentation Generation</strong></h3>
+<p><strong>User Story Reference</strong>: "Save this as Mill-Digital Governance Framework v1.0 and create a theoretical justification document"</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li>Generate framework documentation from conversation</li>
+<li>Create theoretical justification documents</li>
+<li>Link framework development to source texts</li>
+<li>Export academic-ready documentation</li>
+</ul>
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+<li>Leverage your existing documentation systems</li>
+<li>Generate markdown/PDF exports</li>
+<li>Integration with your PostgreSQL experiment tracking</li>
+</ul>
+<h2 id="implementation-roadmap-for-cursor"><strong>Implementation Roadmap for Cursor</strong></h2>
+<h3 id="phase-1-basic-conversational-framework-development-week-1"><strong>Phase 1: Basic Conversational Framework Development (Week 1)</strong></h3>
+<pre><code class="language-python"># Essential Chainlit components to build:
+1. Framework development chat handler
+2. Session state management for framework construction
+3. Basic dipole creation through conversation
+4. Integration with existing FrameworkManager
+</code></pre>
+<h3 id="phase-2-library-integration-week-2"><strong>Phase 2: Library Integration (Week 2)</strong></h3>
+<pre><code class="language-python"># Library panel components:
+1. Reference text upload and chunking
+2. Dynamic content highlighting based on conversation
+3. Cross-reference system for existing frameworks
+4. Real-time library updates
+</code></pre>
+<h3 id="phase-3-analysis-integration-week-3"><strong>Phase 3: Analysis Integration (Week 3)</strong></h3>
+<pre><code class="language-python"># Analysis execution components:
+1. Conversational analysis triggering
+2. Real-time results display in chat
+3. Framework performance feedback
+4. Iterative refinement capabilities
+</code></pre>
+<h2 id="specific-technical-requirements-for-cursor"><strong>Specific Technical Requirements for Cursor</strong></h2>
+<h3 id="database-extensions"><strong>Database Extensions</strong></h3>
+<ul>
+<li>Extend your PostgreSQL schema to support framework development sessions</li>
+<li>Add framework version tracking tables</li>
+<li>Reference text storage and indexing</li>
+</ul>
+<h3 id="api-endpoints-to-create"><strong>API Endpoints to Create</strong></h3>
+<pre><code class="language-python"># New endpoints needed:
+POST /api/frameworks/create-conversational
+PUT /api/frameworks/{id}/refine
+GET /api/reference-texts/search
+POST /api/analysis/immediate-test
+</code></pre>
+<h3 id="chainlit-integration-points"><strong>Chainlit Integration Points</strong></h3>
+<ul>
+<li>Connect to your existing FastAPI backend</li>
+<li>Leverage your <code>PromptTemplateManager</code> for new frameworks</li>
+<li>Use your <code>CostManager</code> for analysis cost tracking</li>
+<li>Integrate with your authentication system</li>
+</ul>
+<h3 id="testing-strategy"><strong>Testing Strategy</strong></h3>
+<ul>
+<li>Unit tests for conversational framework parsing</li>
+<li>Integration tests for framework creation pipeline</li>
+<li>End-to-end tests for the complete user journey</li>
+<li>Performance tests for real-time analysis execution</li>
+</ul>
+<p>This prioritized list focuses on the essential elements that enable Dr. Sarah Chen's framework development journey while leveraging your existing production-ready infrastructure. The implementation builds incrementally, ensuring each phase delivers functional value while maintaining your academic rigor standards.</p>
+<div style="text-align: center">⁂</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

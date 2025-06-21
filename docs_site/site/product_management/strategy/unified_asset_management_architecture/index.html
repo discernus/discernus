@@ -1,0 +1,1288 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Unified Asset Management Architecture Strategy - Discernus Project</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unified-asset-management-architecture-strategy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Discernus Project" class="md-header__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Discernus Project
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unified Asset Management Architecture Strategy
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Discernus Project" class="md-nav__button md-logo" aria-label="Discernus Project" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Discernus Project
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/DOCUMENTATION_INDEX.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentation Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CONTRIBUTING.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/DEV_ENVIRONMENT.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/CODE_ORGANIZATION_STANDARDS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/platform-development/RELEASE_PROCESS.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Release Process
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-state-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current State Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current State Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asset-management-maturity-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asset Management Maturity Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critical-gap-theoretical-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critical Gap: Theoretical Accuracy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strategic-architecture-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strategic Architecture Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Strategic Architecture Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-unified-asset-format-standard" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Unified Asset Format Standard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-two-tier-architecture-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Two-Tier Architecture Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-researcher-development-workspace-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Researcher Development Workspace Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-content-addressable-storage-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Content-Addressable Storage Extension
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-foundation-week-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Foundation (Week 1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-hash-based-storage-week-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Hash-Based Storage (Week 2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-experiment-integration-week-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Experiment Integration (Week 3)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-4-replication-packages-week-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 4: Replication Packages (Week 4)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academic-credibility-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Credibility Benefits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Academic Credibility Benefits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-complete-transparency" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Complete Transparency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-replication-guarantees" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Replication Guarantees
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-expert-consultation-ready" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Expert Consultation Ready
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-timeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Timeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-1-foundation-framework-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: Foundation &amp; Framework Conversion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-hash-based-storage-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Hash-Based Storage System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-3-experiment-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 3: Experiment Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-4-replication-audit-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 4: Replication &amp; Audit Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Success Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#technical-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#research-impact-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Research Impact Metrics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risk-mitigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Risk Mitigation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Risk Mitigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#technical-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#academic-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Academic Risks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operational-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operational Risks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-evolution-digital-preservation-phase-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Evolution: Digital Preservation (Phase 2)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Future Evolution: Digital Preservation (Phase 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#long-term-preservation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Long-Term Preservation Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="unified-asset-management-architecture-strategy">Unified Asset Management Architecture Strategy</h1>
+<p><strong>Document Version</strong>: 1.0<br />
+<strong>Created</strong>: June 19, 2025<br />
+<strong>Status</strong>: Strategic Implementation Plan<br />
+<strong>Implementation Timeline</strong>: Weeks 1-4 of Current Iteration</p>
+<hr />
+<h2 id="executive-summary"><strong>Executive Summary</strong></h2>
+<p>This strategy document outlines the comprehensive redesign of Discernus asset management infrastructure to achieve <strong>disciplined, defensible, replicable, and auditable</strong> research capabilities. The current five-dimensional experiment architecture (texts, frameworks, prompt templates, weighting schemes, evaluators) suffers from inconsistent asset management patterns, format inconsistencies, and insufficient auditing capabilities for academic credibility.</p>
+<p><strong>Core Strategic Objectives:</strong>
+1. <strong>Unified Asset Format</strong>: Standardize on YAML for all researcher-developed assets
+2. <strong>Content-Addressable Storage</strong>: Extend corpus hash-based pattern to all asset types<br />
+3. <strong>Two-Tier Architecture</strong>: Separate development workspace from immutable storage
+4. <strong>Academic Audit Trail</strong>: Complete replication packages with human-readable verification
+5. <strong>Systematic Version Control</strong>: Comprehensive provenance tracking across all dimensions</p>
+<hr />
+<h2 id="current-state-analysis"><strong>Current State Analysis</strong></h2>
+<h3 id="asset-management-maturity-assessment"><strong>Asset Management Maturity Assessment</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Current State</th>
+<th>Issues Identified</th>
+<th>Target State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>📁 Texts (Corpus)</strong></td>
+<td>✅ <strong>Well-Architected</strong></td>
+<td><em>(none - reference model)</em></td>
+<td>✅ <strong>Maintain Excellence</strong></td>
+</tr>
+<tr>
+<td><strong>🏗️ Frameworks</strong></td>
+<td>🔄 <strong>Partially Architected</strong></td>
+<td>Format inconsistency, sync issues</td>
+<td>🎯 <strong>Unified YAML + Hash Storage</strong></td>
+</tr>
+<tr>
+<td><strong>📝 Prompt Templates</strong></td>
+<td>❌ <strong>Under-Architected</strong></td>
+<td>No content hashing, minimal organization</td>
+<td>🎯 <strong>Full Asset Management</strong></td>
+</tr>
+<tr>
+<td><strong>⚖️ Weighting Schemes</strong></td>
+<td>🔄 <strong>Database Only</strong></td>
+<td>No development workspace</td>
+<td>🎯 <strong>Development → Storage Pipeline</strong></td>
+</tr>
+<tr>
+<td><strong>🤖 Evaluators (LLMs)</strong></td>
+<td>❌ <strong>Ad-hoc Integration</strong></td>
+<td>No systematic versioning</td>
+<td>🎯 <strong>Complete Asset Lifecycle</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-gap-theoretical-accuracy"><strong>Critical Gap: Theoretical Accuracy</strong></h3>
+<p><strong>Immediate Issue Identified</strong>: Current <code>mft_persuasive_force</code> framework incorrectly implements Haidt's Moral Foundations Theory as 10 independent wells instead of 5 dipole pairs, compromising academic credibility for expert consultation.</p>
+<p><strong>Resolution</strong>: ✅ <strong>Completed</strong> - Created theoretically accurate <code>moral_foundations_theory</code> framework with proper dipole structure.</p>
+<hr />
+<h2 id="strategic-architecture-design"><strong>Strategic Architecture Design</strong></h2>
+<h3 id="1-unified-asset-format-standard"><strong>1. Unified Asset Format Standard</strong></h3>
+<p><strong>Decision</strong>: <strong>YAML for All Researcher-Developed Assets</strong></p>
+<p><strong>Rationale:</strong>
+- <strong>Human Readability</strong>: Comments, multi-line strings, minimal syntax noise
+- <strong>Academic Collaboration</strong>: Easier for researchers to read, edit, and understand
+- <strong>Version Control Friendly</strong>: Git-compatible, meaningful diffs
+- <strong>Consistency</strong>: Matches existing experiment definition format</p>
+<p><strong>Implementation Scope:</strong></p>
+<pre><code class="language-yaml"># Asset Type Classification
+researcher_developed_assets:
+  format: YAML
+  types:
+    - experiments          # ✅ Already YAML
+    - frameworks          # 🔄 Convert from JSON
+    - prompt_templates    # 🔄 Convert from database-only
+    - weighting_schemes   # 🔄 Convert from database-only  
+    - evaluator_configs   # 🆕 Create new
+
+system_generated_assets:
+  format: JSON/Binary
+  types:
+    - corpus_metadata     # ✅ Stay JSON
+    - experiment_results  # ✅ Stay JSON
+    - database_exports    # ✅ Stay JSON
+</code></pre>
+<h3 id="2-two-tier-architecture-pattern"><strong>2. Two-Tier Architecture Pattern</strong></h3>
+<p><strong>Principle</strong>: <strong>Separate Development Workflow from Immutable Storage</strong></p>
+<pre><code>Development Workspace              Content-Addressable Storage
+(Semantic, Mutable)               (Hash-Based, Immutable)
+
+frameworks/                       asset_storage/
+├── moral_foundations_theory/     ├── frameworks/
+│   ├── framework.yaml           │   └── a7/f3/a7f3d8e2.../
+│   ├── README.md                │       ├── framework.yaml
+│   └── iterations/              │       ├── .metadata.yaml
+│       ├── v1.0_initial.yaml    │       └── .provenance.yaml
+│       └── v2.0_validated.yaml  └── prompt_templates/
+                                     └── b2/c4/b2c4f1a9.../
+</code></pre>
+<h3 id="3-researcher-development-workspace-structure"><strong>3. Researcher Development Workspace Structure</strong></h3>
+<p><strong>Principle</strong>: <strong>Project-Focused Asset Development with Clear Asset Type Separation</strong></p>
+<pre><code>research_workspaces/
+├── {project_name}_research_dev_workspace/
+│   ├── README.md                          # Project overview and objectives
+│   ├── project_manifest.yaml             # Asset inventory and status
+│   │
+│   ├── frameworks/                        # Framework development
+│   │   ├── {framework_name}/
+│   │   │   ├── framework.yaml            # Main framework definition
+│   │   │   ├── README.md                 # Framework documentation  
+│   │   │   ├── validation_notes.md       # Expert consultation notes
+│   │   │   └── iterations/               # Development history
+│   │   │       ├── v1.0_initial.yaml
+│   │   │       ├── v1.1_expert_feedback.yaml
+│   │   │       └── v2.0_validated.yaml
+│   │   └── [other_frameworks]/
+│   │
+│   ├── prompt_templates/                  # Template development
+│   │   ├── {template_name}/
+│   │   │   ├── template.yaml             # Main template definition
+│   │   │   ├── README.md                 # Usage documentation
+│   │   │   ├── validation_results.md     # Testing and validation
+│   │   │   └── iterations/               # Development history
+│   │   │       ├── v1.0_initial.yaml
+│   │   │       └── v1.1_optimized.yaml
+│   │   └── [other_templates]/
+│   │
+│   ├── weighting_schemes/                 # Weighting methodology development
+│   │   ├── {scheme_name}/
+│   │   │   ├── scheme.yaml               # Main scheme definition
+│   │   │   ├── README.md                 # Theoretical justification
+│   │   │   ├── validation_study.md       # Empirical validation results
+│   │   │   └── iterations/               # Development history
+│   │   └── [other_schemes]/
+│   │
+│   ├── evaluator_configs/                 # LLM evaluator configurations
+│   │   ├── {evaluator_name}/
+│   │   │   ├── config.yaml               # Evaluator configuration
+│   │   │   ├── README.md                 # Usage and optimization notes
+│   │   │   └── performance_logs/         # Testing and optimization data
+│   │   └── [other_evaluators]/
+│   │
+│   ├── experiments/                       # Experiment definitions and results
+│   │   ├── {experiment_name}/
+│   │   │   ├── definition.yaml           # Experiment configuration
+│   │   │   ├── README.md                 # Experiment objectives and methodology
+│   │   │   ├── results/                  # Execution results and analysis
+│   │   │   └── replication_package/      # Complete replication materials
+│   │   └── [other_experiments]/
+│   │
+│   ├── validation_studies/                # Academic validation work
+│   │   ├── mfq_correlation_study/
+│   │   ├── expert_consultation_feedback/
+│   │   └── cross_cultural_validation/
+│   │
+│   └── collaboration/                     # External collaboration materials
+│       ├── expert_consultation_packages/
+│       ├── academic_partnership_proposals/
+│       └── publication_drafts/
+</code></pre>
+<p><strong>Workspace Benefits:</strong>
+- <strong>Project Focus</strong>: Clear boundaries for research initiatives
+- <strong>Asset Type Separation</strong>: Frameworks, templates, schemes develop independently
+- <strong>Iteration Tracking</strong>: Complete development history with validation milestones
+- <strong>Collaboration Ready</strong>: Expert consultation and academic partnership materials
+- <strong>Academic Standards</strong>: Validation studies and replication package preparation</p>
+<p><strong>Development Tier Benefits:</strong>
+- Human-readable organization (<code>moral_foundations_theory</code>, not <code>a7f3d8e2...</code>)
+- Mutable for iteration and experimentation
+- Git-friendly structure for version control
+- Researcher-focused workflow</p>
+<p><strong>Storage Tier Benefits:</strong>
+- Content-addressable deduplication (same content = same hash)
+- Immutable integrity protection
+- Experiment replication guarantees
+- Database references to exact versions</p>
+<h3 id="4-content-addressable-storage-extension"><strong>4. Content-Addressable Storage Extension</strong></h3>
+<p><strong>Strategy</strong>: <strong>Extend Proven Corpus Pattern to All Asset Types</strong></p>
+<p>The corpus system demonstrates ideal asset management:</p>
+<pre><code>Content → Hash → Storage → Database Reference → Experiment Integration
+</code></pre>
+<p><strong>Universal Storage Pattern:</strong></p>
+<pre><code>{asset_type}/{hash_prefix}/{hash_middle}/{hash_full}/
+├── {semantic_name}.yaml          # Main asset definition
+├── .metadata.yaml                # Performance metrics, usage stats
+├── .provenance.yaml              # Development lineage
+└── .validation.yaml              # Compatibility testing results
+</code></pre>
+<p><strong>Hash-Based Benefits:</strong>
+- <strong>Deduplication</strong>: Same content stored once regardless of naming
+- <strong>Integrity Verification</strong>: Detect corruption or tampering
+- <strong>Exact Replication</strong>: Experiments reference specific content versions
+- <strong>Audit Trail</strong>: Complete provenance from development to production</p>
+<hr />
+<h2 id="implementation-architecture"><strong>Implementation Architecture</strong></h2>
+<h3 id="phase-1-foundation-week-1"><strong>Phase 1: Foundation (Week 1)</strong></h3>
+<p><strong>Objective</strong>: Establish unified format and basic two-tier structure</p>
+<p><strong>Deliverables:</strong>
+1. <strong>Framework YAML Conversion</strong>
+   <code>bash
+   # Convert existing frameworks to YAML
+   frameworks/
+   ├── moral_foundations_theory/framework.yaml  # ✅ Completed
+   ├── civic_virtue/framework.yaml              # 🔄 Convert from JSON
+   ├── iditi/framework.yaml                     # 🔄 Convert from JSON
+   └── three_wells_political/framework.yaml     # ✅ Already consolidated</code></p>
+<ol>
+<li>
+<p><strong>Prompt Template Development Workspace</strong>
+   <code>bash
+   prompt_templates/
+   ├── hierarchical_analysis/
+   │   ├── template.yaml           # Main template
+   │   ├── README.md              # Usage documentation
+   │   └── iterations/            # Development history
+   ├── direct_analysis/
+   └── comparative_analysis/</code></p>
+</li>
+<li>
+<p><strong>Asset Ingestion Pipeline Design</strong>
+   ```python
+   class UnifiedAssetIngestion:
+       """Extend corpus pattern to all asset types"""</p>
+<p>def ingest_framework(self, development_path: Path) -&gt; AssetStorageResult:
+       # Calculate content hash
+       content_hash = self._calculate_asset_hash(development_path)</p>
+<pre><code>   # Check for existing version
+   existing = self._check_existing_hash(content_hash)
+   if existing:
+       return AssetStorageResult(duplicate=True, existing_id=existing)
+
+   # Create content-addressable storage
+   storage_path = self._create_hash_storage(content_hash, development_path)
+
+   # Register in database
+   asset_id = self._register_asset(storage_path, content_hash)
+
+   return AssetStorageResult(success=True, asset_id=asset_id, storage_path=storage_path)
+</code></pre>
+<p>```</p>
+</li>
+</ol>
+<h3 id="phase-2-hash-based-storage-week-2"><strong>Phase 2: Hash-Based Storage (Week 2)</strong></h3>
+<p><strong>Objective</strong>: Implement content-addressable storage for all asset types</p>
+<p><strong>Deliverables:</strong>
+1. <strong>Universal Asset Storage System</strong>
+   <code>asset_storage/
+   ├── frameworks/
+   │   ├── a7/f3/a7f3d8e2.../     # MFT framework
+   │   ├── b1/c2/b1c2d3e4.../     # Civic Virtue framework
+   │   └── c4/d5/c4d5e6f7.../     # IDITI framework
+   ├── prompt_templates/
+   │   ├── e8/f9/e8f9a0b1.../     # Hierarchical analysis template
+   │   └── g2/h3/g2h3i4j5.../     # Direct analysis template
+   ├── weighting_schemes/
+   │   ├── k6/l7/k6l7m8n9.../     # Winner-take-most methodology
+   │   └── o0/p1/o0p1q2r3.../     # Proportional weighting
+   └── evaluator_configs/
+       ├── s4/t5/s4t5u6v7.../     # GPT-4 configuration
+       └── w8/x9/w8x9y0z1.../     # Claude-3.5 configuration</code></p>
+<ol>
+<li><strong>Database Schema Extensions</strong>
+   ```sql
+   -- Universal asset versioning table
+   CREATE TABLE asset_versions (
+       id UUID PRIMARY KEY,
+       asset_type VARCHAR(50) NOT NULL,  -- 'framework', 'prompt_template', etc.
+       name VARCHAR(100) NOT NULL,
+       version VARCHAR(20) NOT NULL,
+       content_hash VARCHAR(64) NOT NULL,
+       storage_path TEXT NOT NULL,
+       development_session_id UUID,
+       created_at TIMESTAMP DEFAULT NOW(),
+       UNIQUE(asset_type, name, version),
+       UNIQUE(content_hash)  -- Enforce deduplication
+   );</li>
+</ol>
+<p>-- Asset provenance tracking
+   CREATE TABLE asset_provenance (
+       id UUID PRIMARY KEY,
+       asset_version_id UUID REFERENCES asset_versions(id),
+       source_type VARCHAR(50),  -- 'development_session', 'migration', 'import'
+       source_metadata JSONB,
+       created_at TIMESTAMP DEFAULT NOW()
+   );
+   ```</p>
+<h3 id="phase-3-experiment-integration-week-3"><strong>Phase 3: Experiment Integration (Week 3)</strong></h3>
+<p><strong>Objective</strong>: Update experiment orchestration to use unified asset system</p>
+<p><strong>Deliverables:</strong>
+1. <strong>Enhanced Experiment Definition Format</strong>
+   ```yaml
+   experiment_meta:
+     name: "MFT Academic Validation Study"
+     version: "v1.0"</p>
+<p>components:
+     framework:
+       name: "moral_foundations_theory"
+       version: "v2025.06.19"
+       # System resolves to content hash: a7f3d8e2bc4a1509...</p>
+<pre><code> prompt_template:
+   name: "hierarchical_analysis"  
+   version: "v2.1"
+   # System resolves to content hash: b2c4f1a98e7d3621...
+
+ weighting_scheme:
+   name: "foundation_pairs"
+   version: "v1.0"
+   # System resolves to content hash: c5d7e9f2a8b3c014...
+
+ evaluator:
+   name: "gpt4_academic"
+   version: "v2025.06"
+   # System resolves to content hash: d8f2a7c5b9e1f634...
+</code></pre>
+<p>```</p>
+<ol>
+<li>
+<p><strong>Asset Resolution System</strong>
+   ```python
+   class ExperimentAssetResolver:
+       """Resolve semantic asset references to hash-based storage"""</p>
+<p>def resolve_experiment_assets(self, experiment_config: Dict) -&gt; ResolvedAssets:
+       resolved = {}</p>
+<pre><code>   for component_type, component_spec in experiment_config['components'].items():
+       # Look up asset by name + version
+       asset_record = self.db.get_asset_version(
+           asset_type=component_type,
+           name=component_spec['name'],
+           version=component_spec['version']
+       )
+
+       if not asset_record:
+           raise AssetNotFoundError(f"{component_type}:{component_spec['name']}:{component_spec['version']}")
+
+       # Verify hash integrity
+       if not self._verify_hash_integrity(asset_record):
+           raise AssetIntegrityError(f"Content hash mismatch: {asset_record.content_hash}")
+
+       resolved[component_type] = {
+           'asset_id': asset_record.id,
+           'content_hash': asset_record.content_hash,
+           'storage_path': asset_record.storage_path,
+           'resolved_content': self._load_asset_content(asset_record.storage_path)
+       }
+
+   return ResolvedAssets(resolved)
+</code></pre>
+<p>```</p>
+</li>
+</ol>
+<h3 id="phase-4-replication-packages-week-4"><strong>Phase 4: Replication Packages (Week 4)</strong></h3>
+<p><strong>Objective</strong>: Create comprehensive audit-ready replication packages</p>
+<p><strong>Deliverables:</strong>
+1. <strong>Replication Package Generator</strong>
+   ```python
+   class ReplicationPackageGenerator:
+       """Generate comprehensive, auditor-friendly experiment packages"""</p>
+<pre><code>   def create_replication_package(self, experiment_id: str) -&gt; ReplicationPackage:
+       package_dir = f"replication_packages/{experiment_id}_{timestamp}"
+
+       # Human-readable summary
+       self._create_rosetta_stone(experiment_id, package_dir)
+
+       # Asset copies in both formats
+       self._copy_human_readable_assets(experiment_id, package_dir)
+       self._copy_hash_verified_assets(experiment_id, package_dir)
+
+       # Complete execution logs
+       self._export_execution_logs(experiment_id, package_dir)
+
+       # Verification tools
+       self._create_verification_tools(experiment_id, package_dir)
+
+       # Academic documentation
+       self._generate_methodology_docs(experiment_id, package_dir)
+
+       return ReplicationPackage(package_dir)
+</code></pre>
+<p>```</p>
+<ol>
+<li><strong>"Rosetta Stone" Manifest</strong>
+   ```yaml
+   # EXPERIMENT_MANIFEST.yaml - The human auditor's guide
+   experiment_metadata:
+     name: "MFT Academic Validation Study"
+     experiment_id: "mft_validation_20250619_143025"
+     executed_at: "2025-06-19T14:30:25Z"
+     total_cost: "$47.23"</li>
+</ol>
+<p>human_readable_summary: |
+     This experiment validated Haidt's Moral Foundations Theory framework
+     using hierarchical analysis prompts on 125 political texts, evaluated
+     by GPT-4 and Claude-3.5, using foundation-pairs weighting methodology.</p>
+<p>asset_manifest:
+     framework:
+       name: "Moral Foundations Theory (Haidt)"
+       version: "v2025.06.19"
+       human_file: "assets/human_readable/framework_mft.yaml"
+       hash_file: "assets/hash_verified/a7/f3/a7f3d8e2.../framework.yaml"
+       content_hash: "a7f3d8e2bc4a1509..."
+       theoretical_basis: "Haidt (2012), Graham et al. (2013)"</p>
+<p>execution_summary:
+     total_llm_calls: 250
+     success_rate: "98.4%"
+     qa_validation_passes: 246
+     statistical_significance: "p &lt; 0.001"</p>
+<p>verification_instructions: |
+     1. Run <code>python verification_tools/verify_integrity.py</code>
+     2. Compare human_readable with hash_verified assets
+     3. Review execution_logs/ for complete audit trail
+     4. Use <code>python replay_experiment.py</code> to replicate results
+   ```</p>
+<hr />
+<h2 id="academic-credibility-benefits"><strong>Academic Credibility Benefits</strong></h2>
+<h3 id="1-complete-transparency"><strong>1. Complete Transparency</strong></h3>
+<ul>
+<li><strong>Asset Provenance</strong>: Full development lineage from initial creation to experiment use</li>
+<li><strong>Content Integrity</strong>: Hash verification proves no post-experiment tampering</li>
+<li><strong>Human Audit Trail</strong>: Persnickety auditors can examine everything without using our system</li>
+</ul>
+<h3 id="2-replication-guarantees"><strong>2. Replication Guarantees</strong></h3>
+<ul>
+<li><strong>Exact Asset Versions</strong>: Content-addressable storage ensures experiments use identical assets</li>
+<li><strong>Independent Verification</strong>: Replication packages work outside our infrastructure</li>
+<li><strong>Academic Standards</strong>: Publication-ready with proper documentation and verification tools</li>
+</ul>
+<h3 id="3-expert-consultation-ready"><strong>3. Expert Consultation Ready</strong></h3>
+<ul>
+<li><strong>Theoretical Accuracy</strong>: MFT framework now correctly implements Haidt's dipole structure</li>
+<li><strong>Professional Presentation</strong>: Clean YAML format for academic review</li>
+<li><strong>Complete Documentation</strong>: Theoretical foundations, implementation rationale, validation results</li>
+</ul>
+<hr />
+<h2 id="implementation-timeline"><strong>Implementation Timeline</strong></h2>
+<h3 id="week-1-foundation-framework-conversion"><strong>Week 1: Foundation &amp; Framework Conversion</strong></h3>
+<p><strong>Days 1-2</strong>: MFT framework validation and testing
+<strong>Days 3-4</strong>: Convert remaining frameworks to YAML format<br />
+<strong>Day 5</strong>: Create prompt template development workspace</p>
+<h3 id="week-2-hash-based-storage-system"><strong>Week 2: Hash-Based Storage System</strong></h3>
+<p><strong>Days 1-2</strong>: Implement universal asset ingestion pipeline
+<strong>Days 3-4</strong>: Create content-addressable storage for all asset types
+<strong>Day 5</strong>: Database schema updates and migration scripts</p>
+<h3 id="week-3-experiment-integration"><strong>Week 3: Experiment Integration</strong></h3>
+<p><strong>Days 1-2</strong>: Update experiment orchestrator for unified asset resolution
+<strong>Days 3-4</strong>: Test end-to-end workflow with all asset types
+<strong>Day 5</strong>: Performance optimization and error handling</p>
+<h3 id="week-4-replication-audit-infrastructure"><strong>Week 4: Replication &amp; Audit Infrastructure</strong></h3>
+<p><strong>Days 1-2</strong>: Build replication package generator
+<strong>Days 3-4</strong>: Create verification tools and human audit workflows
+<strong>Day 5</strong>: Documentation and academic compliance validation</p>
+<hr />
+<h2 id="success-metrics"><strong>Success Metrics</strong></h2>
+<h3 id="technical-metrics"><strong>Technical Metrics</strong></h3>
+<ul>
+<li>✅ <strong>Asset Deduplication</strong>: Same content stored once across all asset types</li>
+<li>✅ <strong>Integrity Verification</strong>: 100% hash-verified asset loading</li>
+<li>✅ <strong>Format Consistency</strong>: All researcher assets in YAML format</li>
+<li>✅ <strong>Development Workflow</strong>: Semantic workspace → hash storage pipeline</li>
+</ul>
+<h3 id="academic-metrics"><strong>Academic Metrics</strong></h3>
+<ul>
+<li>✅ <strong>Expert Review Ready</strong>: MFT framework suitable for Haidt lab consultation</li>
+<li>✅ <strong>Audit Compliance</strong>: Human auditor can independently verify all experiments</li>
+<li>✅ <strong>Replication Success</strong>: Independent reproduction using replication packages</li>
+<li>✅ <strong>Publication Quality</strong>: Academic-standard documentation and provenance</li>
+</ul>
+<h3 id="research-impact-metrics"><strong>Research Impact Metrics</strong></h3>
+<ul>
+<li>✅ <strong>Researcher Adoption</strong>: YAML format increases researcher engagement</li>
+<li>✅ <strong>Collaboration Facilitation</strong>: Clear asset structure enables academic partnerships</li>
+<li>✅ <strong>Scientific Credibility</strong>: Hash-verified integrity supports peer review process</li>
+<li>✅ <strong>Long-term Preservation</strong>: BagIt-ready packages for institutional repositories</li>
+</ul>
+<hr />
+<h2 id="risk-mitigation"><strong>Risk Mitigation</strong></h2>
+<h3 id="technical-risks"><strong>Technical Risks</strong></h3>
+<p><strong>Risk</strong>: Asset migration corruption during format conversion
+<strong>Mitigation</strong>: Complete backups + hash verification of all conversions</p>
+<p><strong>Risk</strong>: Performance degradation from hash-based lookups<br />
+<strong>Mitigation</strong>: Database indexing on content hashes + caching layer</p>
+<h3 id="academic-risks"><strong>Academic Risks</strong></h3>
+<p><strong>Risk</strong>: Framework theoretical accuracy questioned by experts
+<strong>Mitigation</strong>: ✅ <strong>Resolved</strong> - MFT framework now theoretically accurate per Haidt literature</p>
+<p><strong>Risk</strong>: Audit trail insufficient for peer review
+<strong>Mitigation</strong>: Comprehensive replication packages with human-readable verification</p>
+<h3 id="operational-risks"><strong>Operational Risks</strong></h3>
+<p><strong>Risk</strong>: Development workflow disruption during transition
+<strong>Mitigation</strong>: Maintain existing system during parallel implementation + phased cutover</p>
+<hr />
+<h2 id="future-evolution-digital-preservation-phase-2"><strong>Future Evolution: Digital Preservation (Phase 2)</strong></h2>
+<h3 id="long-term-preservation-strategy"><strong>Long-Term Preservation Strategy</strong></h3>
+<p><strong>Timeline</strong>: 6-12 months post-implementation</p>
+<p><strong>BagIt Integration:</strong></p>
+<pre><code class="language-python"># Preservation-grade packaging
+def create_bagit_archive(replication_package_path):
+    bag = bagit.make_bag(replication_package_path, {
+        'Contact-Name': 'Discernus Research Team',
+        'Experiment-Type': 'Computational Discourse Analysis',
+        'Software-Agent': 'Discernus v2025.06',
+        'Digital-Preservation-Standard': 'BagIt-1.0'
+    })
+    return bag
+</code></pre>
+<p><strong>Academic Integration:</strong>
+- DOI assignment for experiments
+- Research Data Alliance metadata compliance<br />
+- Institutional repository integration
+- Citation standard development</p>
+<hr />
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+<p>This unified asset management architecture establishes Discernus as a <strong>disciplined, defensible, replicable, and auditable</strong> research platform. By extending the proven corpus pattern to all asset types, standardizing on YAML for researcher workflows, and implementing comprehensive audit trails, we create the foundation for credible academic adoption and expert collaboration.</p>
+<p>The immediate focus on MFT framework theoretical accuracy and expert consultation readiness positions us for successful academic validation while building long-term infrastructure for scientific excellence.</p>
+<p><strong>Next Steps</strong>: Await approval to proceed with Phase 1 implementation as outlined in updated iteration plans and daily TODO items.</p>
+<hr />
+<p><em>This strategy document supersedes previous asset management approaches and establishes the architectural foundation for academic credibility and scientific reproducibility.</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
