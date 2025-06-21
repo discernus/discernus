@@ -1242,6 +1242,14 @@ This comprehensive fix resolves the disconnect between framework definitions, da
 - Added `mkdocs` and `mkdocs-material` to `requirements.txt` to ensure they are included in the Docker build environment.
 - Created a `.dockerignore` file to exclude the `paper/` directory, `venv`, and other non-production assets from Docker images, optimizing build size.
 
+### Added
+- Created a dedicated `docs` service in `docker-compose.yml` to simplify starting the documentation server. New contributors can now run `docker-compose up docs` to view the documentation locally.
+- Updated the `PLATFORM_DEV_ONBOARDING.md` guide with clear instructions for using the new `docs` service.
+
 ## [1.0.0] - 2025-06-21
+
+*For complete historical changelog, see previous versions*
+
+## [0.1.0] - 2025-06-21
 
 *For complete historical changelog, see previous versions*
