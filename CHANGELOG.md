@@ -906,7 +906,7 @@ Fixed
 - AI Academic Advisor Methodology v2.0 - Enhanced with Phase 13: Architectural Compliance Validation
 - Automated architectural compliance validator (`scripts/architectural_compliance_validator.py`)
 - Framework boundary compliance checking (ensures extraction matches framework well definitions)
-- Production system usage validation (enforces NarrativeGravityVisualizationEngine usage)
+- Production system usage validation (enforces DiscernusVisualizationEngine usage)
 - compliance scoring and violation reporting
 - Integration with orchestration system for automatic validation
 - Framework-Aware Data Extraction - Enhanced `ExperimentResultsExtractor` to respect framework boundaries
@@ -914,7 +914,7 @@ Fixed
 - IDITI now correctly extracts only 2 wells instead of all 10 from template output
 - Prevents framework boundary violations in enhanced analysis pipeline
 - Production Visualization Engine Integration - Modified `VisualizationGenerator` to use production systems
-- Replaced custom matplotlib/seaborn visualizations with NarrativeGravityVisualizationEngine calls
+- Replaced custom matplotlib/seaborn visualizations with DiscernusVisualizationEngine calls
 - Ensures theme-aware, consistent visualization output across all experiments
 - Maintains centralized design standards and production quality
 
@@ -1252,3 +1252,14 @@ Added
 [0.1.0] - 2025-06-21
 
 *For complete historical changelog, see previous versions*
+
+### Added
+- **MAJOR ARCHITECTURAL ENHANCEMENT: Transaction Checkpoint System** - Implemented 5 critical fail-fast checkpoints in experiment orchestrator to prevent expensive failures:
+  - **API Connectivity Validation**: Tests OpenAI/Anthropic/Mistral APIs before execution to prevent mid-experiment failures
+  - **Cost Control Validation**: Estimates total experiment cost vs budget limits with detailed cost breakdown
+  - **Experiment Quality Validation**: Validates minimum research standards (>30% success rate, QA confidence thresholds)
+  - **Output Generation Validation**: Ensures all expected enhanced pipeline files created before completion
+  - **Data Persistence Validation**: Confirms run data properly saved to PostgreSQL before marking experiment complete
+  - **Enhanced Transaction States**: Extended `ExperimentState` with 9 checkpoint states for granular progress tracking
+  - **Fail-Fast Architecture**: Experiments fail immediately at first checkpoint failure with detailed error guidance
+  - **Result**: Prevents expensive LLM analysis when prerequisites not met, eliminates "works locally but fails in production" issues

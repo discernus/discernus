@@ -1,7 +1,7 @@
 # Database
 
 **Module:** `src.utils.database`
-**File:** `/app/src/utils/database.py`
+**File:** `/Volumes/dev/discernus/src/utils/database.py`
 **Package:** `utils`
 
 Database utilities for Discernus Analysis Platform.
@@ -48,4 +48,4 @@ Returns:
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

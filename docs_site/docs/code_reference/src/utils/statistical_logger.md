@@ -1,7 +1,7 @@
 # Statistical Logger
 
 **Module:** `src.utils.statistical_logger`
-**File:** `/app/src/utils/statistical_logger.py`
+**File:** `/Volumes/dev/discernus/src/utils/statistical_logger.py`
 **Package:** `utils`
 
 Enhanced Statistical Logger with PostgreSQL Backend
@@ -257,4 +257,4 @@ Get complete data needed for dashboard generation from database
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

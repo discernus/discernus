@@ -1,11 +1,11 @@
 # Visualization
 
 **Module:** `src.analysis.visualization`
-**File:** `/app/src/analysis/visualization.py`
+**File:** `/Volumes/dev/discernus/src/analysis/visualization.py`
 **Package:** `analysis`
 
-Framework-Aware Visualization Generator for Narrative Gravity Analysis
-Uses production NarrativeGravityVisualizationEngine for consistent, theme-aware visualizations
+Framework-Aware Visualization Generator for Discernus Analysis
+Uses production DiscernusVisualizationEngine for consistent, theme-aware visualizations
 
 ## Dependencies
 
@@ -131,4 +131,4 @@ Save index of generated visualizations.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

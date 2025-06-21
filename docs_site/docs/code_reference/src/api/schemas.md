@@ -1,7 +1,7 @@
 # Schemas
 
 **Module:** `src.api.schemas`
-**File:** `/app/src/api/schemas.py`
+**File:** `/Volumes/dev/discernus/src/api/schemas.py`
 **Package:** `api`
 
 Pydantic schemas for API request/response validation.
@@ -409,4 +409,4 @@ Response schema for multi-model comparison analysis.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

@@ -1,7 +1,7 @@
 # Coordinate Engine
 
 **Module:** `src.coordinate_engine`
-**File:** `/app/src/coordinate_engine.py`
+**File:** `/Volumes/dev/discernus/src/coordinate_engine.py`
 
 ## Dependencies
 
@@ -124,4 +124,4 @@ CLI interface for circular coordinate system visualization.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

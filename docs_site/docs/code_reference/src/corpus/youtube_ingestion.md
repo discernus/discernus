@@ -1,7 +1,7 @@
 # Youtube Ingestion
 
 **Module:** `src.corpus.youtube_ingestion`
-**File:** `/app/src/corpus/youtube_ingestion.py`
+**File:** `/Volumes/dev/discernus/src/corpus/youtube_ingestion.py`
 **Package:** `corpus`
 
 YouTube Transcript Extraction for Intelligent Corpus Ingestion
@@ -157,4 +157,4 @@ Generate semantic text ID for YouTube content
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

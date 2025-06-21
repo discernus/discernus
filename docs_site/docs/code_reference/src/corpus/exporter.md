@@ -1,7 +1,7 @@
 # Exporter
 
 **Module:** `src.corpus.exporter`
-**File:** `/app/src/corpus/exporter.py`
+**File:** `/Volumes/dev/discernus/src/corpus/exporter.py`
 **Package:** `corpus`
 
 Corpus Exporter - Academic format exports with citation support.
@@ -209,4 +209,4 @@ Export metadata as XML (placeholder implementation).
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

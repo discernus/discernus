@@ -1,7 +1,7 @@
 # Component Models
 
 **Module:** `src.models.component_models`
-**File:** `/app/src/models/component_models.py`
+**File:** `/Volumes/dev/discernus/src/models/component_models.py`
 **Package:** `models`
 
 Component versioning models for Priority 1 infrastructure.
@@ -118,4 +118,4 @@ These will be added via Alembic migration.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

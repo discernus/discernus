@@ -1,7 +1,7 @@
 # Reliability
 
 **Module:** `src.analysis.reliability`
-**File:** `/app/src/analysis/reliability.py`
+**File:** `/Volumes/dev/discernus/src/analysis/reliability.py`
 **Package:** `analysis`
 
 Interrater Reliability Analysis System for Multi-LLM Narrative Gravity Analysis
@@ -167,4 +167,4 @@ Generate overall reliability summary.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

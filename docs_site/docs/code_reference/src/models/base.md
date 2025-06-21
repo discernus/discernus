@@ -1,7 +1,7 @@
 # Base
 
 **Module:** `src.models.base`
-**File:** `/app/src/models/base.py`
+**File:** `/Volumes/dev/discernus/src/models/base.py`
 **Package:** `models`
 
 Database configuration and base classes for Narrative Gravity Analysis.
@@ -74,4 +74,4 @@ Drop all tables - used for testing cleanup.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

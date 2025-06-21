@@ -1,7 +1,7 @@
 # Analysis Service
 
 **Module:** `src.api.analysis_service`
-**File:** `/app/src/api/analysis_service.py`
+**File:** `/Volumes/dev/discernus/src/api/analysis_service.py`
 **Package:** `api`
 
 Real Analysis Service - Integrates existing LLM and analysis components
@@ -152,4 +152,4 @@ Better than random data but clearly marked as fallback. Uses dynamic framework l
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

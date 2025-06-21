@@ -1,7 +1,7 @@
 # Logging Config
 
 **Module:** `src.utils.logging_config`
-**File:** `/app/src/utils/logging_config.py`
+**File:** `/Volumes/dev/discernus/src/utils/logging_config.py`
 **Package:** `utils`
 
 Centralized logging configuration for Narrative Gravity Analysis.
@@ -170,4 +170,4 @@ Get a structured logger instance for a module.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

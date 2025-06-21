@@ -17,6 +17,83 @@
 
 ---
 
+## 🐳 RULE 0: DOCKER-FIRST DEVELOPMENT ENVIRONMENT
+
+**ALL development and testing MUST use the Docker containerized environment.**
+
+### ✅ MANDATORY: Use Docker for Testing
+```bash
+# Start the environment
+docker-compose up -d
+
+# Run tests inside containers
+docker-compose exec app python3 check_database.py
+docker-compose exec app python3 scripts/applications/comprehensive_experiment_orchestrator.py
+
+# Database operations inside containers
+docker-compose exec db psql -U postgres -d discernus
+```
+
+### ❌ FORBIDDEN: Host/Local Testing
+- **Never test against host PostgreSQL** (localhost:5432)
+- **Never run Python scripts directly on host** (python3 script.py)
+- **Never assume local file paths** (/Volumes/dev/discernus)
+
+### 🎯 Why This Rule Exists
+The project is designed for **transportable, self-contained environments**. Testing outside Docker:
+- Creates false positives (works locally, fails in deployment)
+- Uses wrong database instances
+- Misses container networking issues
+- Violates the "transportable environment" architecture goal
+
+### 🔍 Environment Validation
+Before any development work, verify you're in the correct environment:
+```bash
+# This should show container networking (DB_HOST=db, not localhost)
+docker-compose exec app env | grep -E "(DB_HOST|DATABASE_URL)"
+```
+
+---
+
+## 📋 PRODUCTION CLASSIFICATION
+
+### ✅ Production Systems (Use These)
+Code that is **stable, tested, and approved for research use**:
+- `src/` - Core application code with established APIs
+- `scripts/applications/` - Orchestration and production workflows
+- `frameworks/` - Validated analysis frameworks
+- Systems documented in `docs/EXISTING_SYSTEMS_INVENTORY.md`
+- Code with comprehensive tests and documentation
+
+**Characteristics of Production Code:**
+- Has been used successfully in real experiments
+- Has proper error handling and logging
+- Follows project architectural standards
+- Is maintained and actively supported
+
+### 🧪 Development Systems (Build Here)
+Code under active development or validation:
+- `experimental/prototypes/` - New feature development
+- `sandbox/` - Personal/exploratory work
+- `research_workspaces/` - Research-specific experiments
+- `scripts/utilities/` - Helper scripts and tools
+
+### 🗑️ Deprecated Systems (Never Use)
+Code that has been superseded or identified as problematic:
+- `deprecated/` - Explicitly moved obsolete code
+- Files marked with `# DEPRECATED` comments
+- Systems listed as deprecated in inventory documentation
+- Code that violates current architectural standards
+
+### 🎯 When In Doubt
+If unsure whether something is production-ready:
+1. Check `docs/EXISTING_SYSTEMS_INVENTORY.md`
+2. Look for usage in successful experiments
+3. Check for proper documentation and tests
+4. Ask: "Would I trust this for an academic publication?"
+
+---
+
 ## 🚨 CRITICAL: BEFORE YOU SUGGEST ANYTHING
 
 You **must always** run the production system check first:
@@ -180,6 +257,8 @@ An assistant is **compliant** if it:
 
 | Violation | Why It's Wrong |
 |----------|----------------|
+| **Testing on host system** | **Must use Docker containers (Rule 0)** |
+| **Connecting to localhost:5432** | **Must use containerized database** |
 | Suggesting new QA system | Use \`LLMQualityAssuranceSystem\` instead |
 | Using "AI Academic Advisor" | Deprecated and ineffective |
 | Creating new files in \`src/\` | Must go through \`experimental/\` first |

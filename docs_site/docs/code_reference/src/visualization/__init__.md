@@ -1,7 +1,7 @@
 #   Init  
 
 **Module:** `src.visualization.__init__`
-**File:** `/app/src/visualization/__init__.py`
+**File:** `/Volumes/dev/discernus/src/visualization/__init__.py`
 **Package:** `visualization`
 
 Narrative Gravity Visualization Package
@@ -64,4 +64,4 @@ Returns:
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

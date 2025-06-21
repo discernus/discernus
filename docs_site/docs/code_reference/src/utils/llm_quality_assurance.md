@@ -1,7 +1,7 @@
 # Llm Quality Assurance
 
 **Module:** `src.utils.llm_quality_assurance`
-**File:** `/app/src/utils/llm_quality_assurance.py`
+**File:** `/Volumes/dev/discernus/src/utils/llm_quality_assurance.py`
 **Package:** `utils`
 
 LLM Quality Assurance System
@@ -79,7 +79,7 @@ __init__(self)
 
 ##### `validate_experiment_alignment`
 ```python
-validate_experiment_alignment(self, analysis_results: List[Dict[Any]], experiment_context: [ExperimentContext](scripts/applications/comprehensive_experiment_orchestrator.md#experimentcontext), framework_id: str) -> List[[QualityCheck](src/utils/llm_quality_assurance.md#qualitycheck)]
+validate_experiment_alignment(self, analysis_results: List[Dict[Any]], experiment_context: [ExperimentContext](src/utils/llm_quality_assurance.md#experimentcontext), framework_id: str) -> List[[QualityCheck](src/utils/llm_quality_assurance.md#qualitycheck)]
 ```
 
 Validate analysis results against experiment-specific requirements.
@@ -122,14 +122,14 @@ Assess how well the framework fits the research context.
 
 ##### `_validate_framework_corpus_fit`
 ```python
-_validate_framework_corpus_fit(self, results: List[Dict[Any]], experiment_context: [ExperimentContext](scripts/applications/comprehensive_experiment_orchestrator.md#experimentcontext), framework_id: str) -> List[[QualityCheck](src/utils/llm_quality_assurance.md#qualitycheck)]
+_validate_framework_corpus_fit(self, results: List[Dict[Any]], experiment_context: [ExperimentContext](src/utils/llm_quality_assurance.md#experimentcontext), framework_id: str) -> List[[QualityCheck](src/utils/llm_quality_assurance.md#qualitycheck)]
 ```
 
 Validate framework is appropriate for the corpus being analyzed.
 
 ##### `_validate_statistical_requirements`
 ```python
-_validate_statistical_requirements(self, results: List[Dict[Any]], experiment_context: [ExperimentContext](scripts/applications/comprehensive_experiment_orchestrator.md#experimentcontext)) -> List[[QualityCheck](src/utils/llm_quality_assurance.md#qualitycheck)]
+_validate_statistical_requirements(self, results: List[Dict[Any]], experiment_context: [ExperimentContext](src/utils/llm_quality_assurance.md#experimentcontext)) -> List[[QualityCheck](src/utils/llm_quality_assurance.md#qualitycheck)]
 ```
 
 Validate statistical power and requirements.
@@ -159,7 +159,7 @@ __init__(self)
 
 ##### `validate_llm_analysis`
 ```python
-validate_llm_analysis(self, text_input: str, framework: str, llm_response: Dict[Any], parsed_scores: Dict[Any], experiment_context: [ExperimentContext](scripts/applications/comprehensive_experiment_orchestrator.md#experimentcontext)) -> [QualityAssessment](src/utils/llm_quality_assurance.md#qualityassessment)
+validate_llm_analysis(self, text_input: str, framework: str, llm_response: Dict[Any], parsed_scores: Dict[Any], experiment_context: [ExperimentContext](src/utils/llm_quality_assurance.md#experimentcontext)) -> [QualityAssessment](src/utils/llm_quality_assurance.md#qualityassessment)
 ```
 
 Run complete quality assurance validation on LLM analysis.
@@ -274,4 +274,4 @@ Detect statistical outliers in scores.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

@@ -1,7 +1,7 @@
 # Experiment Logging
 
 **Module:** `src.utils.experiment_logging`
-**File:** `/app/src/utils/experiment_logging.py`
+**File:** `/Volumes/dev/discernus/src/utils/experiment_logging.py`
 **Package:** `utils`
 
 Comprehensive Experiment Logging System for Narrative Gravity Analysis
@@ -240,4 +240,4 @@ Setup experiment logging with extended configuration
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

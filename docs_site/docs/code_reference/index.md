@@ -80,44 +80,12 @@ Core application modules.
 - **[Plotly Circular](src/visualization/plotly_circular.md)** - 1 classes, 0 functions
 - **[Themes](src/visualization/themes.md)** - 6 classes, 0 functions
 
-## Scripts (`scripts/`)
-
-Utility and application scripts.
-
-- **[Audit Code Organization](scripts/applications/audit_code_organization.md)** - 0 classes, 3 functions
-- **[Auto Bloat Prevention](scripts/applications/auto_bloat_prevention.md)** - 1 classes, 2 functions
-- **[Bloat Prevention System](scripts/applications/bloat_prevention_system.md)** - 2 classes, 1 functions
-- **[Check Existing Systems](scripts/applications/check_existing_systems.md)** - 1 classes, 2 functions
-- **[Check Rule Enforcement](scripts/applications/check_rule_enforcement.md)** - 0 classes, 4 functions
-- **[Comprehensive Experiment Orchestrator](scripts/applications/comprehensive_experiment_orchestrator.md)** - 11 classes, 2 functions
-- **[Create Experiment Package](scripts/applications/create_experiment_package.md)** - 1 classes, 1 functions
-- **[Demonstrate Transaction Integrity](scripts/applications/demonstrate_transaction_integrity.md)** - 2 classes, 1 functions
-- **[Documentation Date Management](scripts/applications/documentation_date_management.md)** - 1 classes, 1 functions
-- **[End To End Pipeline Test](scripts/applications/end_to_end_pipeline_test.md)** - 2 classes, 1 functions
-- **[Enhanced Experiment Reports](scripts/applications/enhanced_experiment_reports.md)** - 1 classes, 0 functions
-- **[Execute Experiment Definition](scripts/applications/execute_experiment_definition.md)** - 2 classes, 0 functions
-- **[Experiment Validation Utils](scripts/applications/experiment_validation_utils.md)** - 4 classes, 1 functions
-- **[Framework Sync](scripts/applications/framework_sync.md)** - 1 classes, 1 functions
-- **[Generate Api Docs](scripts/applications/generate_api_docs.md)** - 0 classes, 1 functions
-- **[Generate Comprehensive Docs](scripts/applications/generate_comprehensive_docs.md)** - 0 classes, 1 functions
-- **[New Development Workflow](scripts/applications/new_development_workflow.md)** - 0 classes, 4 functions
-- **[Validate Ai Assistant Compliance](scripts/applications/validate_ai_assistant_compliance.md)** - 1 classes, 2 functions
-- **[Export Academic Data](scripts/cli/export_academic_data.md)** - 0 classes, 1 functions
-- **[Intelligent Ingest](scripts/cli/intelligent_ingest.md)** - 0 classes, 1 functions
-- **[Intelligent Ingest Youtube](scripts/cli/intelligent_ingest_youtube.md)** - 0 classes, 1 functions
-- **[Generate Corpus Manifest](scripts/utilities/generate_corpus_manifest.md)** - 0 classes, 6 functions
-- **[Optimize Framework Colors](scripts/utilities/optimize_framework_colors.md)** - 1 classes, 1 functions
-- **[Setup Database](scripts/utilities/setup_database.md)** - 0 classes, 4 functions
-- **[Setup Research Workspace](scripts/utilities/setup_research_workspace.md)** - 0 classes, 1 functions
-- **[Unified Framework Validator](scripts/utilities/unified_framework_validator.md)** - 5 classes, 3 functions
-- **[Update Research Workspace Index](scripts/utilities/update_research_workspace_index.md)** - 0 classes, 2 functions
-
 ## Documentation Statistics
 
-- **73 modules** documented
-- **170 classes** with methods and properties
-- **86 functions** with type annotations
-- **169 classes** cross-referenced
-- **347 functions** cross-referenced
+- **46 modules** documented
+- **134 classes** with methods and properties
+- **38 functions** with type annotations
+- **135 classes** cross-referenced
+- **229 functions** cross-referenced
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*

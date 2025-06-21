@@ -1,7 +1,7 @@
 # Cost Manager
 
 **Module:** `src.utils.cost_manager`
-**File:** `/app/src/utils/cost_manager.py`
+**File:** `/Volumes/dev/discernus/src/utils/cost_manager.py`
 **Package:** `utils`
 
 API Cost Management Utility - Updated for 2025 Models
@@ -178,4 +178,4 @@ Add a new cost entry and save to file.
 
 ---
 
-*Generated on 2025-06-21 20:19:04*
+*Generated on 2025-06-21 18:56:11*
