@@ -2,6 +2,25 @@ Discernus - Changelog
 
 [Unreleased]
 
+### Added
+- **MECEC ACTIONABLE Items Reconciliation**: Comprehensive integration of 5 strategic ACTIONABLE documents into current MVP iteration
+  - `MECEC_ACTIONABLE_RECONCILIATION_2025_06_22.md` - Master reconciliation document resolving timeline conflicts
+  - Staged implementation approach: 1-week core refactor + 12-week extended plan
+  - Color optimization integration with new cartographic terminology
+  - Extensible cartography foundation implementation with adapter architecture
+  - Architectural review scheduling for Week 3 validation checkpoint
+  - Timeline conflict resolution enabling academic validation timeline maintenance
+- **Staged Terminology Refactor Strategy**: Practical approach to systematic terminology change
+  - Stage 1 (Week 2): Core API and framework terminology only (`Anchor`, `Axis`, `Signature` classes)
+  - Stage 2 (Weeks 3-14): Complete systematic refactor per 12-week implementation plan
+  - Deprecation bridge system maintaining backward compatibility with warnings
+  - Integration with MVP phases for sustainable refactor approach
+- **Updated Iteration Planning**: Revised Week 2 success criteria reflecting staged approach
+  - Core API terminology updates (revised scope from full codebase)  
+  - Single Radar v2 prototype (revised from full adapter ecosystem)
+  - Maintained academic validation timeline and expert consultation schedule
+  - DAILY_TODO_2025_06_23.md with iteration launch actions
+
 ### Fixed
 - **CRITICAL: JSON Export System Restored** - Fixed missing JSON output files in enhanced analysis pipeline that were blocking experiment completion validation
   - Root Cause: Docker container was using cached code without JSON file saving functionality
