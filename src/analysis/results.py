@@ -20,6 +20,7 @@ import json
 from ..utils.statistical_logger import StatisticalLogger
 from ..utils.database import get_database_url
 from ..framework_manager import FrameworkManager
+from ..framework_utils import get_framework_yaml_path
 
 # Add production database imports
 try:
@@ -129,41 +130,8 @@ class ExperimentResultsExtractor:
             return []
     
     def _get_framework_yaml_path(self, framework_name: str) -> Optional[str]:
-        """
-        Map framework name to its YAML file path.
-        """
-        # Normalize framework name
-        framework_name = framework_name.replace('_', '').lower()
-        
-        # Framework name mappings
-        framework_mappings = {
-            'moralfoundationstheory': 'moral_foundations_theory',
-            'mft': 'moral_foundations_theory',
-            'moralfoundations': 'moral_foundations_theory',
-            'civicvirtue': 'civic_virtue',
-            'iditi': 'iditi'
-        }
-        
-        # Get canonical framework name
-        canonical_name = framework_mappings.get(framework_name, framework_name)
-        
-        # Search paths in order of preference
-        search_paths = [
-            # Research workspace (primary)
-            f"research_workspaces/june_2025_research_dev_workspace/frameworks/{canonical_name}/{canonical_name}_framework.yaml",
-            f"research_workspaces/june_2025_research_dev_workspace/frameworks/{canonical_name}/framework.yaml",
-            # Main frameworks directory (fallback)  
-            f"frameworks/{canonical_name}/framework.yaml",
-            f"frameworks/{canonical_name}/{canonical_name}_framework.yaml",
-        ]
-        
-        for path in search_paths:
-            # This needs to be adjusted to look relative to project root, not current file
-            project_root = Path().resolve() # A bit of a hack
-            if (project_root / path).exists():
-                return str(project_root / path)
-        
-        return None
+        """Map framework name to its YAML file path using the shared utility."""
+        return get_framework_yaml_path(framework_name)
 
     def extract_results(self, execution_results: Dict) -> Dict:
         """

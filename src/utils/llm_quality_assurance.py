@@ -27,6 +27,8 @@ from datetime import datetime
 import re
 import logging
 
+from ..framework_utils import get_framework_yaml_path
+
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -966,42 +968,8 @@ class LLMQualityAssuranceSystem:
     # Helper methods
     
     def _get_framework_yaml_path(self, framework_name: str) -> Optional[str]:
-        """
-        Map framework name to its YAML file path for framework-aware QA.
-        """
-        from pathlib import Path
-        from typing import Optional
-        
-        # Normalize framework name
-        framework_name = framework_name.replace('_', '').lower()
-        
-        # Framework name mappings
-        framework_mappings = {
-            'moralfoundationstheory': 'moral_foundations_theory',
-            'mft': 'moral_foundations_theory', 
-            'moralfoundations': 'moral_foundations_theory',
-            'civicvirtue': 'civic_virtue',
-            'iditi': 'iditi'
-        }
-        
-        # Get canonical framework name
-        canonical_name = framework_mappings.get(framework_name, framework_name)
-        
-        # Search paths in order of preference
-        search_paths = [
-            # Research workspace (primary)
-            f"research_workspaces/june_2025_research_dev_workspace/frameworks/{canonical_name}/{canonical_name}_framework.yaml",
-            f"research_workspaces/june_2025_research_dev_workspace/frameworks/{canonical_name}/framework.yaml",
-            # Main frameworks directory (fallback)  
-            f"frameworks/{canonical_name}/framework.yaml",
-            f"frameworks/{canonical_name}/{canonical_name}_framework.yaml",
-        ]
-        
-        for path in search_paths:
-            if Path(path).exists():
-                return path
-        
-        return None
+        """Map framework name to its YAML file path for framework-aware QA."""
+        return get_framework_yaml_path(framework_name)
 
     def _get_expected_wells(self, framework: str) -> List[str]:
         """Get expected wells for a framework."""
