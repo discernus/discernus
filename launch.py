@@ -10,8 +10,11 @@ import os
 import argparse
 import time
 import signal
+import logging
 from pathlib import Path
 from threading import Thread
+
+logger = logging.getLogger(__name__)
 try:
     import psutil
     HAS_PSUTIL = True
@@ -20,7 +23,7 @@ except ImportError:
 
 def check_dependencies():
     """Check if required dependencies are installed."""
-    print("✅ Dependencies checked")
+    logger.info("✅ Dependencies checked")
     return True
 
 def check_database():
@@ -35,23 +38,23 @@ def check_database():
         # Verify it's PostgreSQL
         db_url = str(engine.url)
         if not db_url.startswith('postgresql'):
-            print(f"⚠️  Expected PostgreSQL, found: {db_url}")
-            print("💡 Check your DATABASE_URL in .env file")
+            logger.warning("⚠️  Expected PostgreSQL, found: %s", db_url)
+            logger.info("💡 Check your DATABASE_URL in .env file")
             return False
             
         with engine.connect():
             pass
-        print("✅ PostgreSQL connection verified")
+        logger.info("✅ PostgreSQL connection verified")
         return True
     except Exception as e:
-        print(f"⚠️  PostgreSQL not accessible: {e}")
-        print("💡 Run: python launch.py --setup-db")
-        print("💡 Or see: docs/architecture/database_architecture.md")
+        logger.warning("⚠️  PostgreSQL not accessible: %s", e)
+        logger.info("💡 Run: python launch.py --setup-db")
+        logger.info("💡 Or see: docs/architecture/database_architecture.md")
         return False
 
 def run_service(name, command, cwd=None):
     """Run a service in a subprocess."""
-    print(f"🚀 Starting {name}...")
+    logger.info("🚀 Starting %s...", name)
     try:
         process = subprocess.Popen(
             command,
@@ -66,11 +69,11 @@ def run_service(name, command, cwd=None):
         # Stream output with service name prefix
         for line in iter(process.stdout.readline, ''):
             if line.strip():
-                print(f"[{name}] {line.strip()}")
+                logger.info("[%s] %s", name, line.strip())
         
         return process
     except Exception as e:
-        print(f"❌ Failed to start {name}: {e}")
+        logger.error("❌ Failed to start %s: %s", name, e)
         return None
 
 def kill_process_tree(pid):
@@ -110,12 +113,12 @@ class ServiceManager:
     
     def stop_all(self):
         """Stop all running services."""
-        print("\n🛑 Stopping all services...")
+        logger.info("\n🛑 Stopping all services...")
         for name, process in self.processes.items():
             if process and process.poll() is None:
-                print(f"   Stopping {name}...")
+                logger.info("   Stopping %s...", name)
                 kill_process_tree(process.pid)
-        print("✅ All services stopped")
+        logger.info("✅ All services stopped")
 
 def main():
     """Main launcher function."""
@@ -148,18 +151,18 @@ Focus is on core research pipeline: database, API, and batch processing.
     
     args = parser.parse_args()
     
-    print("🎯 Narrative Gravity Wells Research Platform")
-    print("🔬 Backend Services for Academic Pipeline")
-    print("=" * 60)
+    logger.info("🎯 Narrative Gravity Wells Research Platform")
+    logger.info("🔬 Backend Services for Academic Pipeline")
+    logger.info("=" * 60)
     
     # Check if we're in the right directory
     if not Path("src/narrative_gravity/engine_circular.py").exists():
-        print("❌ Error: Please run this script from the narrative_gravity_analysis directory")
+        logger.error("❌ Error: Please run this script from the narrative_gravity_analysis directory")
         sys.exit(1)
     
     # Setup database only
     if args.setup_db:
-        print("🗄️  Setting up database...")
+        logger.info("🗄️  Setting up database...")
         result = subprocess.run([sys.executable, "scripts/setup_database.py"])
         sys.exit(result.returncode)
     
@@ -169,7 +172,7 @@ Focus is on core research pipeline: database, API, and batch processing.
     
     # Check database (unless skipped)
     if not args.no_db_check and not check_database():
-        print("💡 Run with --setup-db to initialize the database")
+        logger.info("💡 Run with --setup-db to initialize the database")
         sys.exit(1)
     
     manager = ServiceManager()
@@ -179,33 +182,33 @@ Focus is on core research pipeline: database, API, and batch processing.
         # Determine which services to start
         services_to_start = []
         if args.api_only:
-            print("🌐 Starting API server only...")
+            logger.info("🌐 Starting API server only...")
             services_to_start.append(("API", [sys.executable, "scripts/run_api.py"]))
         elif args.celery_only:
-            print("🔄 Starting Celery worker only...")
+            logger.info("🔄 Starting Celery worker only...")
             services_to_start.append(("Celery", [sys.executable, "scripts/run_celery.py"]))
         else:
             # Default to full backend platform launch
-            print("🚀 Starting backend services for research pipeline...")
-            print("🌐 API Server: http://localhost:8000")
-            print("📚 API Docs: http://localhost:8000/api/docs")
-            print("🔄 Celery Worker: Background processing")
-            print("")
+            logger.info("🚀 Starting backend services for research pipeline...")
+            logger.info("🌐 API Server: http://localhost:8000")
+            logger.info("📚 API Docs: http://localhost:8000/api/docs")
+            logger.info("🔄 Celery Worker: Background processing")
+            logger.info("")
             services_to_start.append(("API", [sys.executable, "scripts/run_api.py"]))
             services_to_start.append(("Celery", [sys.executable, "scripts/run_celery.py"]))
 
         if not services_to_start:
-            print("No services to start. Exiting.")
+            logger.info("No services to start. Exiting.")
             return
 
         # Start services
         for name, cmd in services_to_start:
             manager.start_service(name, cmd)
         
-        print("✅ Backend services running.")
-        print("🔬 Ready for academic research pipeline operations.")
-        print("\n⏹️  Press Ctrl+C to stop all services")
-        print("=" * 60)
+        logger.info("✅ Backend services running.")
+        logger.info("🔬 Ready for academic research pipeline operations.")
+        logger.info("\n⏹️  Press Ctrl+C to stop all services")
+        logger.info("=" * 60)
 
         # Keep running until interrupted
         try:
@@ -215,7 +218,7 @@ Focus is on core research pipeline: database, API, and batch processing.
             pass
         
     except KeyboardInterrupt:
-        print("\n👋 Shutting down...")
+        logger.info("\n👋 Shutting down...")
     finally:
         manager.stop_all()
 

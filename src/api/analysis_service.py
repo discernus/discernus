@@ -6,6 +6,7 @@ Replaces fake/mock analysis with actual AI-powered narrative analysis
 import uuid
 import time
 import re
+import logging
 from datetime import datetime
 from typing import Dict, Any, Tuple, List, Optional
 from pathlib import Path
@@ -16,6 +17,8 @@ from src.prompts.template_manager import PromptTemplateManager
 from src.framework_manager import FrameworkManager
 from src.coordinate_engine import DiscernusCoordinateEngine
 from src.utils.database import get_database_url
+
+logger = logging.getLogger(__name__)
 
 class RealAnalysisService:
     """
@@ -32,7 +35,7 @@ class RealAnalysisService:
         
         # Check what LLM providers are available
         self.available_connections = self.llm_client.test_connections()
-        print(f"🔗 LLM Connections: {self.available_connections}")
+        logger.info("🔗 LLM Connections: %s", self.available_connections)
     
     async def analyze_single_text(
         self, 
@@ -57,7 +60,7 @@ class RealAnalysisService:
             framework_name = self._normalize_framework_name(framework_config_id)
             
             # Step 1: Generate real prompt using PromptTemplateManager
-            print(f"🔄 Generating prompt for framework: {framework_name}")
+            logger.info("🔄 Generating prompt for framework: %s", framework_name)
             prompt = self.prompt_manager.generate_api_prompt(
                 text=text_content,
                 framework=framework_name,
@@ -65,7 +68,7 @@ class RealAnalysisService:
             )
             
             # Step 2: Get real LLM analysis using DirectAPIClient
-            print(f"🧠 Calling {llm_model} for analysis...")
+            logger.info("🧠 Calling %s for analysis...", llm_model)
             llm_response, api_cost = self.llm_client.analyze_text(
                 text=text_content,
                 framework=framework_name, 
@@ -79,10 +82,10 @@ class RealAnalysisService:
             framework_path = self._get_framework_yaml_path(framework_name)
             if framework_path:
                 engine = DiscernusCoordinateEngine(framework_path=framework_path)
-                print(f"✅ Using framework-aware circular engine: {framework_path}")
+                logger.info("✅ Using framework-aware circular engine: %s", framework_path)
             else:
                 engine = DiscernusCoordinateEngine()  # Fallback to default
-                print(f"⚠️ Using default circular engine (framework YAML not found)")
+                logger.warning("⚠️ Using default circular engine (framework YAML not found)")
             
             # Calculate narrative position using framework-aware engine
             narrative_position = engine.calculate_narrative_position(parsed_analysis['raw_scores'])
@@ -132,11 +135,11 @@ class RealAnalysisService:
                 "api_cost": round(api_cost, 4)
             }
             
-            print(f"✅ Real analysis completed in {execution_time:.2f}s, cost: ${api_cost:.4f}")
+            logger.info("✅ Real analysis completed in %.2fs, cost: $%.4f", execution_time, api_cost)
             return response
             
         except Exception as e:
-            print(f"❌ Analysis failed: {e}")
+            logger.error("❌ Analysis failed: %s", e)
             # Fallback to mock data if real analysis fails
             return self._generate_fallback_analysis(
                 text_content, framework_config_id, llm_model, analysis_id, start_time
@@ -165,7 +168,7 @@ class RealAnalysisService:
             }
             
         except Exception as e:
-            print(f"⚠️ LLM response parsing failed: {e}")
+            logger.warning("⚠️ LLM response parsing failed: %s", e)
             return self._generate_default_scores(framework)
     
     def _extract_scores_from_text(self, response_text: str, framework: str = "civic_virtue") -> Dict[str, float]:
@@ -250,7 +253,7 @@ class RealAnalysisService:
                     return wells
                     
         except Exception as e:
-            print(f"⚠️ Could not load framework {framework} dynamically: {e}")
+            logger.warning("⚠️ Could not load framework %s dynamically: %s", framework, e)
         
         # Last resort: Known framework mappings
         framework_wells = {
@@ -306,14 +309,14 @@ class RealAnalysisService:
                                 wells.append(neg_name)
                 
                 if wells:
-                    print(f"✅ Loaded {len(wells)} wells from database for {framework_name}")
+                    logger.info("✅ Loaded %d wells from database for %s", len(wells), framework_name)
                     return wells
                 
             finally:
                 session.close()
                 
         except Exception as e:
-            print(f"⚠️ Database framework loading failed for {framework_name}: {e}")
+            logger.warning("⚠️ Database framework loading failed for %s: %s", framework_name, e)
         
         return []
     

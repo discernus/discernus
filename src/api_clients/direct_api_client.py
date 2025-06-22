@@ -7,9 +7,12 @@ Integrates OpenAI, Anthropic, Mistral, and Google AI APIs with latest model vers
 import os
 import json
 import time
+import logging
 from typing import Dict, Tuple, Any
 from dotenv import load_dotenv
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 # Import cost manager
 try:
@@ -24,28 +27,28 @@ load_dotenv()
 try:
     import openai
 except ImportError:
-    print("Installing OpenAI library...")
+    logger.info("Installing OpenAI library...")
     os.system("pip install openai")
     import openai
 
 try:
     import anthropic
 except ImportError:
-    print("Installing Anthropic library...")
+    logger.info("Installing Anthropic library...")
     os.system("pip install anthropic")
     import anthropic
 
 try:
     from mistralai.client import MistralClient
 except ImportError:
-    print("Installing Mistral library...")
+    logger.info("Installing Mistral library...")
     os.system("pip install mistralai")
     from mistralai.client import MistralClient
 
 try:
     import google.generativeai as genai
 except ImportError:
-    print("Installing Google AI library...")
+    logger.info("Installing Google AI library...")
     os.system("pip install google-generativeai")
     import google.generativeai as genai
 
@@ -82,7 +85,7 @@ class DirectAPIClient:
             self.retry_handler = APIRetryHandler()
             self.failover_handler = ProviderFailoverHandler()
         except ImportError:
-            print("⚠️ Retry handler not available - using basic error handling")
+            logger.warning("⚠️ Retry handler not available - using basic error handling")
             self.retry_handler = None
             self.failover_handler = None
         
@@ -90,29 +93,29 @@ class DirectAPIClient:
         openai_key = os.getenv("OPENAI_API_KEY")
         if openai_key:
             self.openai_client = openai.OpenAI(api_key=openai_key)
-            print("✅ OpenAI client initialized (2025 models available)")
+            logger.info("✅ OpenAI client initialized (2025 models available)")
         else:
-            print("⚠️ OpenAI API key not found in environment")
+            logger.warning("⚠️ OpenAI API key not found in environment")
         
         # Initialize Anthropic
         anthropic_key = os.getenv("ANTHROPIC_API_KEY")
         if anthropic_key:
             self.anthropic_client = anthropic.Anthropic(api_key=anthropic_key)
-            print("✅ Anthropic client initialized (Claude 4 series available)")
+            logger.info("✅ Anthropic client initialized (Claude 4 series available)")
         else:
-            print("⚠️ Anthropic API key not found in environment")
+            logger.warning("⚠️ Anthropic API key not found in environment")
         
         # Initialize Mistral (handle deprecated client gracefully)
         mistral_key = os.getenv("MISTRAL_API_KEY")
         if mistral_key:
             try:
                 self.mistral_client = MistralClient(api_key=mistral_key)
-                print("✅ Mistral client initialized (2025 models available)")
+                logger.info("✅ Mistral client initialized (2025 models available)")
             except NotImplementedError:
-                print("⚠️ Mistral client deprecated - skipping Mistral support")
+                logger.warning("⚠️ Mistral client deprecated - skipping Mistral support")
                 self.mistral_client = None
         else:
-            print("⚠️ Mistral API key not found in environment")
+            logger.warning("⚠️ Mistral API key not found in environment")
             self.mistral_client = None
         
         # Initialize Google AI
@@ -120,9 +123,9 @@ class DirectAPIClient:
         if google_ai_key:
             genai.configure(api_key=google_ai_key)
             self.google_ai_client = genai
-            print("✅ Google AI client initialized (Gemini 2.5 series available)")
+            logger.info("✅ Google AI client initialized (Gemini 2.5 series available)")
         else:
-            print("⚠️ Google AI API key not found in environment")
+            logger.warning("⚠️ Google AI API key not found in environment")
     
     def test_connections(self) -> Dict[str, bool]:
         """Test all API connections with latest models"""
@@ -137,7 +140,7 @@ class DirectAPIClient:
                     max_tokens=5
                 )
                 results["openai"] = True
-                print("✅ OpenAI connection successful (GPT-4.1 series)")
+                logger.info("✅ OpenAI connection successful (GPT-4.1 series)")
             except Exception as e:
                 # Fallback to older model if 4.1 not available yet
                 try:
@@ -147,10 +150,10 @@ class DirectAPIClient:
                         max_tokens=5
                     )
                     results["openai"] = True
-                    print("✅ OpenAI connection successful (fallback model)")
+                    logger.info("✅ OpenAI connection successful (fallback model)")
                 except Exception as e2:
                     results["openai"] = False
-                    print(f"❌ OpenAI connection failed: {e2}")
+                    logger.error("❌ OpenAI connection failed: %s", e2)
         else:
             results["openai"] = False
         
@@ -163,7 +166,7 @@ class DirectAPIClient:
                     messages=[{"role": "user", "content": "Hello"}]
                 )
                 results["anthropic"] = True
-                print("✅ Anthropic connection successful (Claude 3.5 Sonnet)")
+                logger.info("✅ Anthropic connection successful (Claude 3.5 Sonnet)")
             except Exception as e:
                 # Fallback to older model
                 try:
@@ -173,10 +176,10 @@ class DirectAPIClient:
                         messages=[{"role": "user", "content": "Hello"}]
                     )
                     results["anthropic"] = True
-                    print("✅ Anthropic connection successful (fallback model)")
+                    logger.info("✅ Anthropic connection successful (fallback model)")
                 except Exception as e2:
                     results["anthropic"] = False
-                    print(f"❌ Anthropic connection failed: {e2}")
+                    logger.error("❌ Anthropic connection failed: %s", e2)
         else:
             results["anthropic"] = False
         
@@ -189,7 +192,7 @@ class DirectAPIClient:
                     max_tokens=5
                 )
                 results["mistral"] = True
-                print("✅ Mistral connection successful (2024/2025 models)")
+                logger.info("✅ Mistral connection successful (2024/2025 models)")
             except Exception as e:
                 # Fallback to older model
                 try:
@@ -199,13 +202,13 @@ class DirectAPIClient:
                         max_tokens=5
                     )
                     results["mistral"] = True
-                    print("✅ Mistral connection successful (fallback model)")
+                    logger.info("✅ Mistral connection successful (fallback model)")
                 except Exception as e2:
                     results["mistral"] = False
-                    print(f"❌ Mistral connection failed: {e2}")
+                    logger.error("❌ Mistral connection failed: %s", e2)
         else:
             results["mistral"] = False
-            print("⚠️ Mistral client not available (deprecated or no API key)")
+            logger.warning("⚠️ Mistral client not available (deprecated or no API key)")
         
         # Test Google AI with Gemini 2.0 Flash
         if self.google_ai_client:
@@ -213,17 +216,17 @@ class DirectAPIClient:
                 model = self.google_ai_client.GenerativeModel('gemini-2.0-flash-exp')
                 response = model.generate_content("Hello")
                 results["google_ai"] = True
-                print("✅ Google AI connection successful (Gemini 2.x series)")
+                logger.info("✅ Google AI connection successful (Gemini 2.x series)")
             except Exception as e:
                 # Fallback to older model
                 try:
                     model = self.google_ai_client.GenerativeModel('gemini-1.5-flash')
                     response = model.generate_content("Hello")
                     results["google_ai"] = True
-                    print("✅ Google AI connection successful (fallback model)")
+                    logger.info("✅ Google AI connection successful (fallback model)")
                 except Exception as e2:
                     results["google_ai"] = False
-                    print(f"❌ Google AI connection failed: {e2}")
+                    logger.error("❌ Google AI connection failed: %s", e2)
         else:
             results["google_ai"] = False
         
@@ -239,7 +242,7 @@ class DirectAPIClient:
             
             if time_since_last < required_delay:
                 sleep_time = required_delay - time_since_last
-                print(f"💤 Rate limiting: waiting {sleep_time:.1f}s for {provider}")
+                logger.info("💤 Rate limiting: waiting %.1fs for %s", sleep_time, provider)
                 time.sleep(sleep_time)
         
         self._last_request_time[provider] = time.time()
@@ -272,10 +275,10 @@ class DirectAPIClient:
             can_proceed, message = self.cost_manager.check_limits_before_request(estimated_cost)
             
             if not can_proceed:
-                print(f"🚫 Cost limit check failed: {message}")
+                logger.warning("🚫 Cost limit check failed: %s", message)
                 return {"error": f"Cost limit exceeded: {message}"}, 0.0
             else:
-                print(f"💰 Estimated cost: ${estimated_cost:.4f} - {message}")
+                logger.info("💰 Estimated cost: $%.4f - %s", estimated_cost, message)
         
         # Route to appropriate model
         if model_name.startswith("gpt") or model_name.startswith("openai"):
@@ -479,7 +482,7 @@ class DirectAPIClient:
             return self._parse_response(content, self._current_text, self._current_framework), cost
             
         except Exception as e:
-            print(f"OpenAI API error: {e}")
+            logger.error("OpenAI API error: %s", e)
             return {"error": str(e)}, 0.0
     
     def _analyze_with_anthropic(self, prompt: str, model_name: str = "claude-4-opus") -> Tuple[Dict[str, Any], float]:
@@ -571,7 +574,7 @@ class DirectAPIClient:
             return self._parse_response(content, self._current_text, self._current_framework), cost
             
         except Exception as e:
-            print(f"Anthropic API error: {e}")
+            logger.error("Anthropic API error: %s", e)
             return {"error": str(e)}, 0.0
     
     def _analyze_with_mistral(self, prompt: str, model_name: str = "mistral-medium-3") -> Tuple[Dict[str, Any], float]:
@@ -658,7 +661,7 @@ class DirectAPIClient:
             return self._parse_response(content, self._current_text, self._current_framework), cost
             
         except Exception as e:
-            print(f"Mistral API error: {e}")
+            logger.error("Mistral API error: %s", e)
             return {"error": str(e)}, 0.0
     
     def _parse_response(self, content: str, text_input: str = None, framework: str = None) -> Dict[str, Any]:
@@ -743,21 +746,21 @@ class DirectAPIClient:
                 
                 # Log quality issues for monitoring
                 if quality_assessment.confidence_level == 'LOW':
-                    print(f"🚨 LOW confidence analysis detected: {quality_assessment.summary}")
+                    logger.warning("🚨 LOW confidence analysis detected: %s", quality_assessment.summary)
                 elif quality_assessment.requires_second_opinion:
-                    print(f"⚠️ Second opinion recommended: {quality_assessment.summary}")
+                    logger.warning("⚠️ Second opinion recommended: %s", quality_assessment.summary)
                 elif quality_assessment.anomalies_detected:
-                    print(f"📊 Anomalies detected: {len(quality_assessment.anomalies_detected)} issues")
+                    logger.info("📊 Anomalies detected: %d issues", len(quality_assessment.anomalies_detected))
                     
                 # Issue warnings for critical patterns (Roosevelt 1933 case)
                 for check in quality_assessment.individual_checks:
                     if check.check_name == 'default_value_ratio' and not check.passed:
-                        print(f"🔴 CRITICAL: High default value ratio detected - {check.message}")
+                        logger.error("🔴 CRITICAL: High default value ratio detected - %s", check.message)
                     elif check.check_name == 'position_calculation' and not check.passed:
-                        print(f"🔴 CRITICAL: Suspicious position calculation - {check.message}")
+                        logger.error("🔴 CRITICAL: Suspicious position calculation - %s", check.message)
                 
             except Exception as qa_error:
-                print(f"⚠️ Quality assurance validation failed: {qa_error}")
+                logger.warning("⚠️ Quality assurance validation failed: %s", qa_error)
                 # Add minimal quality info to indicate QA failure
                 raw_response['quality_assurance'] = {
                     'confidence_level': 'UNKNOWN',
@@ -792,7 +795,7 @@ class DirectAPIClient:
                     try:
                         scores[well_name] = float(well_data['score'])
                     except (ValueError, TypeError):
-                        print(f"⚠️ Could not parse score for {well_name}: {well_data}")
+                        logger.warning("⚠️ Could not parse score for %s: %s", well_name, well_data)
         
         # Fallback: try to extract from Stage 2 Weights (convert percentages to 0-1 scale)
         if not scores:
@@ -804,7 +807,7 @@ class DirectAPIClient:
                         score = min(float(weight) / 60.0, 1.0)  # Divide by 60 as per hierarchical template
                         scores[well_name] = score
                     except (ValueError, TypeError):
-                        print(f"⚠️ Could not parse weight for {well_name}: {weight}")
+                        logger.warning("⚠️ Could not parse weight for %s: %s", well_name, weight)
         
         return scores
     
@@ -924,7 +927,7 @@ class DirectAPIClient:
             return self._parse_response(content, self._current_text, self._current_framework), cost
             
         except Exception as e:
-            print(f"Google AI API error: {e}")
+            logger.error("Google AI API error: %s", e)
             return {"error": str(e)}, 0.0
     
     def get_available_models(self) -> Dict[str, list]:
@@ -1019,33 +1022,33 @@ class DirectAPIClient:
     
     def log_reliability_report(self):
         """Log comprehensive reliability report."""
-        print("\n📊 DIRECTAPICLIENT RELIABILITY REPORT")
-        print("=" * 50)
+        logger.info("\n📊 DIRECTAPICLIENT RELIABILITY REPORT")
+        logger.info("=" * 50)
         
         stats = self.get_retry_statistics()
         
         if stats['retry_handler_available']:
-            print(f"✅ Retry Handler: Active")
-            print(f"   Total API calls: {stats.get('total_calls', 0)}")
-            print(f"   Success rate: {stats.get('success_rate', 0):.1%}")
-            print(f"   Retry rate: {stats.get('retry_rate', 0):.1%}")
+            logger.info("✅ Retry Handler: Active")
+            logger.info("   Total API calls: %s", stats.get('total_calls', 0))
+            logger.info("   Success rate: %.1f%%", stats.get('success_rate', 0) * 100)
+            logger.info("   Retry rate: %.1f%%", stats.get('retry_rate', 0) * 100)
             
             if stats.get('retries_by_reason'):
-                print("   Retries by reason:")
+                logger.info("   Retries by reason:")
                 for reason, count in stats['retries_by_reason'].items():
-                    print(f"     {reason}: {count}")
+                    logger.info("     %s: %s", reason, count)
         else:
-            print("⚠️ Retry Handler: Not available (basic error handling)")
+            logger.warning("⚠️ Retry Handler: Not available (basic error handling)")
         
         if stats['failover_handler_available']:
             provider_health = stats['provider_health']
-            print(f"✅ Failover Handler: Active")
-            print(f"   Healthy providers: {len(provider_health['healthy_providers'])}")
+            logger.info("✅ Failover Handler: Active")
+            logger.info("   Healthy providers: %d", len(provider_health['healthy_providers']))
             for provider, healthy in provider_health['provider_health'].items():
                 status = "✅ Healthy" if healthy else "❌ Unhealthy"
                 failures = provider_health['failure_counts'].get(provider, 0)
-                print(f"     {provider}: {status} ({failures} failures)")
+                logger.info("     %s: %s (%s failures)", provider, status, failures)
         else:
-            print("⚠️ Failover Handler: Not available")
+            logger.warning("⚠️ Failover Handler: Not available")
         
-        print("=" * 50) 
+        logger.info("=" * 50)
