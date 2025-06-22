@@ -28,8 +28,8 @@ import pandas as pd
 # Add project root to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.narrative_gravity.models import get_db_session, Experiment, Run, FrameworkVersion
-from src.narrative_gravity.api.analysis_service import RealAnalysisService
+from src.models import get_db_session, Experiment, Run, FrameworkVersion
+from src.api.analysis_service import RealAnalysisService
 
 
 class ExperimentReportGenerator:

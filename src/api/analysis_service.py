@@ -16,6 +16,12 @@ from src.prompts.template_manager import PromptTemplateManager
 from src.framework_manager import FrameworkManager
 from src.coordinate_engine import DiscernusCoordinateEngine
 from src.utils.database import get_database_url
+from src.api.analysis import (
+    parse_llm_response,
+    generate_hierarchical_ranking,
+    extract_well_justifications,
+    calculate_circular_metrics,
+)
 
 class RealAnalysisService:
     """
@@ -35,7 +41,7 @@ class RealAnalysisService:
         print(f"🔗 LLM Connections: {self.available_connections}")
     
     async def analyze_single_text(
-        self, 
+        self,
         text_content: str,
         framework_config_id: str = "civic_virtue",
         prompt_template_id: str = "hierarchical_v1",
@@ -44,130 +50,45 @@ class RealAnalysisService:
         include_justifications: bool = True,
         include_hierarchical_ranking: bool = True
     ) -> Dict[str, Any]:
-        """
-        Perform real LLM analysis using existing working components.
-        Returns data structure expected by the research workbench frontend.
-        """
-        
+        """Run full analysis pipeline and return structured results."""
         start_time = time.time()
         analysis_id = str(uuid.uuid4())
-        
         try:
-            # Normalize framework name (remove version suffix)
             framework_name = self._normalize_framework_name(framework_config_id)
-            
-            # Step 1: Generate real prompt using PromptTemplateManager
-            print(f"🔄 Generating prompt for framework: {framework_name}")
-            prompt = self.prompt_manager.generate_api_prompt(
-                text=text_content,
-                framework=framework_name,
-                model=llm_model
-            )
-            
-            # Step 2: Get real LLM analysis using DirectAPIClient
-            print(f"🧠 Calling {llm_model} for analysis...")
-            llm_response, api_cost = self.llm_client.analyze_text(
-                text=text_content,
-                framework=framework_name, 
-                model_name=llm_model
-            )
-            
-            # Step 3: Parse LLM response into structured data
-            parsed_analysis = self._parse_llm_response(llm_response, framework_name)
-            
-            # Step 4: Initialize framework-aware circular engine
-            framework_path = self._get_framework_yaml_path(framework_name)
-            if framework_path:
-                engine = DiscernusCoordinateEngine(framework_path=framework_path)
-                print(f"✅ Using framework-aware circular engine: {framework_path}")
-            else:
-                engine = DiscernusCoordinateEngine()  # Fallback to default
-                print(f"⚠️ Using default circular engine (framework YAML not found)")
-            
-            # Calculate narrative position using framework-aware engine
-            narrative_position = engine.calculate_narrative_position(parsed_analysis['raw_scores'])
-            
-            # Step 5: Calculate advanced metrics (circular engine compatible)
-            calculated_metrics = self._calculate_circular_metrics(
-                narrative_position[0], 
-                narrative_position[1], 
-                parsed_analysis['raw_scores']
-            )
-            
-            # Step 6: Generate hierarchical ranking
-            hierarchical_ranking = self._generate_hierarchical_ranking(parsed_analysis['raw_scores'])
-            
-            # Step 7: Extract well justifications from LLM response
-            well_justifications = self._extract_well_justifications(
-                llm_response, 
-                parsed_analysis['raw_scores'],
-                text_content
-            )
-            
-            execution_time = time.time() - start_time
-            
-            # Step 8: Build response in expected format
-            response = {
+            prompt = self.prompt_manager.generate_api_prompt(text=text_content, framework=framework_name, model=llm_model)
+            llm_response, api_cost = self.llm_client.analyze_text(text=text_content, framework=framework_name, model_name=llm_model)
+            parsed = parse_llm_response(self, llm_response, framework_name)
+            path = self._get_framework_yaml_path(framework_name)
+            engine = DiscernusCoordinateEngine(framework_path=path) if path else DiscernusCoordinateEngine()
+            pos = engine.calculate_narrative_position(parsed['raw_scores'])
+            metrics = calculate_circular_metrics(pos[0], pos[1], parsed['raw_scores'])
+            ranking = generate_hierarchical_ranking(parsed['raw_scores'])
+            justifications = extract_well_justifications(llm_response, parsed['raw_scores'], text_content)
+            exec_time = time.time() - start_time
+            return {
                 "analysis_id": analysis_id,
                 "text_content": text_content,
                 "framework": framework_config_id,
                 "model": llm_model,
-                "raw_scores": parsed_analysis['raw_scores'],
-                "hierarchical_ranking": hierarchical_ranking,
-                "well_justifications": well_justifications,
+                "raw_scores": parsed['raw_scores'],
+                "hierarchical_ranking": ranking,
+                "well_justifications": justifications,
                 "calculated_metrics": {
-                    "narrative_elevation": calculated_metrics.get('narrative_elevation', 0.0),
-                    "polarity": calculated_metrics.get('polarity', 0.0),
-                    "coherence": calculated_metrics.get('coherence', 0.0),
-                    "directional_purity": calculated_metrics.get('directional_purity', 0.0)
+                    "narrative_elevation": metrics.get("narrative_elevation", 0.0),
+                    "polarity": metrics.get("polarity", 0.0),
+                    "coherence": metrics.get("coherence", 0.0),
+                    "directional_purity": metrics.get("directional_purity", 0.0),
                 },
-                "narrative_position": {
-                    "x": round(narrative_position[0], 3),
-                    "y": round(narrative_position[1], 3)
-                },
-                "framework_fit_score": parsed_analysis.get('framework_fit_score', 0.8),
-                "dominant_wells": hierarchical_ranking['primary_wells'][:3],
+                "narrative_position": {"x": round(pos[0], 3), "y": round(pos[1], 3)},
+                "framework_fit_score": parsed.get("framework_fit_score", 0.8),
+                "dominant_wells": ranking["primary_wells"][:3],
                 "execution_time": datetime.now(),
-                "duration_seconds": round(execution_time, 2),
-                "api_cost": round(api_cost, 4)
+                "duration_seconds": round(exec_time, 2),
+                "api_cost": round(api_cost, 4),
             }
-            
-            print(f"✅ Real analysis completed in {execution_time:.2f}s, cost: ${api_cost:.4f}")
-            return response
-            
         except Exception as e:
             print(f"❌ Analysis failed: {e}")
-            # Fallback to mock data if real analysis fails
-            return self._generate_fallback_analysis(
-                text_content, framework_config_id, llm_model, analysis_id, start_time
-            )
-    
-    def _parse_llm_response(self, llm_response: Dict[str, Any], framework: str) -> Dict[str, Any]:
-        """
-        Parse LLM response into structured well scores.
-        Uses existing DirectAPIClient parsing logic.
-        """
-        try:
-            # DirectAPIClient should return structured data
-            if isinstance(llm_response, dict) and 'scores' in llm_response:
-                raw_scores = llm_response['scores']
-            else:
-                # Fallback parsing if format is different
-                raw_scores = self._extract_scores_from_text(str(llm_response))
-            
-            # Ensure we have all expected wells for the framework
-            raw_scores = self._normalize_scores_for_framework(raw_scores, framework)
-            
-            return {
-                'raw_scores': raw_scores,
-                'framework_fit_score': llm_response.get('framework_fit_score', 0.8),
-                'full_response': llm_response
-            }
-            
-        except Exception as e:
-            print(f"⚠️ LLM response parsing failed: {e}")
-            return self._generate_default_scores(framework)
-    
+            return self._generate_fallback_analysis(text_content, framework_config_id, llm_model, analysis_id, start_time)
     def _extract_scores_from_text(self, response_text: str, framework: str = "civic_virtue") -> Dict[str, float]:
         """
         Fallback method to extract scores from text response.
@@ -403,146 +324,6 @@ class RealAnalysisService:
             'full_response': "Default scores due to parsing failure"
         }
     
-    def _generate_hierarchical_ranking(self, raw_scores: Dict[str, float]) -> Dict[str, Any]:
-        """
-        Generate hierarchical ranking from well scores.
-        Finds top wells and calculates relative weights.
-        """
-        # Sort wells by score
-        sorted_wells = sorted(raw_scores.items(), key=lambda x: x[1], reverse=True)
-        
-        # Calculate relative weights for top 3 wells
-        top_3_scores = [score for _, score in sorted_wells[:3]]
-        total_top_3 = sum(top_3_scores)
-        
-        if total_top_3 > 0:
-            weights = [score / total_top_3 * 100 for score in top_3_scores]
-        else:
-            weights = [33.3, 33.3, 33.3]
-        
-        primary_wells = []
-        for i, (well, score) in enumerate(sorted_wells[:3]):
-            primary_wells.append({
-                "well": well,
-                "score": round(score, 3),
-                "relative_weight": round(weights[i], 1)
-            })
-        
-        return {
-            "primary_wells": primary_wells,
-            "secondary_wells": [],
-            "total_weight": 100.0
-        }
-    
-    def _extract_well_justifications(
-        self, 
-        llm_response: Dict[str, Any], 
-        raw_scores: Dict[str, float],
-        text_content: str
-    ) -> Dict[str, Any]:
-        """
-        Extract evidence and reasoning for each well from LLM response.
-        """
-        justifications = {}
-        
-        for well, score in raw_scores.items():
-            # Try to extract specific evidence from LLM response
-            evidence_quotes = self._extract_evidence_quotes(llm_response, well, text_content)
-            reasoning = f"Analysis indicates {well.lower()} themes present with score {score:.3f}. "
-            
-            if score > 0.6:
-                reasoning += "Strong thematic presence detected."
-            elif score > 0.4:
-                reasoning += "Moderate thematic presence detected."
-            else:
-                reasoning += "Minimal thematic presence detected."
-            
-            justifications[well] = {
-                "score": score,
-                "reasoning": reasoning,
-                "evidence_quotes": evidence_quotes,
-                "confidence": min(0.95, max(0.65, score + 0.2))
-            }
-        
-        return justifications
-    
-    def _extract_evidence_quotes(
-        self, 
-        llm_response: Dict[str, Any], 
-        well: str, 
-        text_content: str
-    ) -> List[str]:
-        """
-        🔒 FRAMEWORK COMPLIANCE: Extract relevant quotes from text that support the well score.
-        Uses framework-agnostic keyword extraction for any well type.
-        """
-        # Try to get quotes from structured LLM response
-        if isinstance(llm_response, dict) and 'evidence' in llm_response:
-            evidence = llm_response['evidence']
-            if isinstance(evidence, dict) and well in evidence:
-                return evidence[well][:2]  # Limit to 2 quotes
-        
-        # Fallback: extract sentences that might be relevant
-        sentences = text_content.split('. ')
-        relevant_sentences = []
-        
-        # 🔒 FRAMEWORK COMPLIANCE FIX: Use generic keyword extraction based on well name
-        # Extract keywords from the well name itself for framework-agnostic matching
-        well_keywords = [well.lower()]
-        
-        # Add common variants and related terms
-        if 'dignity' in well.lower():
-            well_keywords.extend(['dignity', 'respect', 'honor', 'worth', 'value'])
-        elif 'tribal' in well.lower():
-            well_keywords.extend(['us', 'them', 'group', 'loyalty', 'belonging'])
-        elif 'truth' in well.lower():
-            well_keywords.extend(['truth', 'honest', 'fact', 'reality'])
-        elif 'justice' in well.lower():
-            well_keywords.extend(['justice', 'fair', 'equal', 'right'])
-        elif 'hope' in well.lower():
-            well_keywords.extend(['hope', 'future', 'better', 'optimism'])
-        elif 'compassion' in well.lower():
-            well_keywords.extend(['compassion', 'care', 'empathy', 'kindness'])
-        elif 'fear' in well.lower():
-            well_keywords.extend(['fear', 'afraid', 'threat', 'danger'])
-        
-        for sentence in sentences[:10]:  # Check first 10 sentences
-            if any(keyword.lower() in sentence.lower() for keyword in well_keywords):
-                relevant_sentences.append(sentence.strip())
-                if len(relevant_sentences) >= 2:
-                    break
-        
-        return relevant_sentences[:2] if relevant_sentences else [f"Thematic elements related to {well.lower()} detected in the narrative."]
-    
-    def _calculate_circular_metrics(
-        self, 
-        x: float, 
-        y: float, 
-        raw_scores: Dict[str, float]
-    ) -> Dict[str, float]:
-        """
-        Calculate metrics compatible with circular coordinate system.
-        """
-        import math
-        
-        # Convert circular coordinates to metrics
-        radius = math.sqrt(x*x + y*y)
-        angle = math.atan2(y, x) if x != 0 or y != 0 else 0
-        
-        # Calculate well score statistics
-        scores = list(raw_scores.values())
-        positive_scores = [s for s in scores if s > 0.5]
-        negative_scores = [s for s in scores if s <= 0.5]
-        
-        metrics = {
-            "narrative_elevation": radius,  # Distance from center
-            "polarity": (sum(positive_scores) - sum(negative_scores)) / len(scores) if scores else 0.0,
-            "coherence": 1.0 - (max(scores) - min(scores)) if scores else 0.8,  # Inverse of score range
-            "directional_purity": abs(math.cos(angle)) + abs(math.sin(angle))  # How close to axes
-        }
-        
-        return metrics
-    
     def _generate_fallback_analysis(
         self, 
         text_content: str, 
@@ -576,7 +357,7 @@ class RealAnalysisService:
             else:
                 fallback_scores[well] = round(random.uniform(base_negative, base_negative + 0.2), 3)
         
-        hierarchical_ranking = self._generate_hierarchical_ranking(fallback_scores)
+        hierarchical_ranking = generate_hierarchical_ranking(fallback_scores)
         execution_time = time.time() - start_time
         
         return {
@@ -586,7 +367,7 @@ class RealAnalysisService:
             "model": f"{model} (FALLBACK)",
             "raw_scores": fallback_scores,
             "hierarchical_ranking": hierarchical_ranking,
-            "well_justifications": self._extract_well_justifications({}, fallback_scores, text_content),
+            "well_justifications": extract_well_justifications({}, fallback_scores, text_content),
             "calculated_metrics": {
                 "narrative_elevation": round(random.uniform(0.4, 0.7), 3),
                 "polarity": round(random.uniform(-0.2, 0.2), 3),
