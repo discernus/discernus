@@ -4,14 +4,35 @@
 ## **Purpose**
 Items discovered or decided but not yet prioritized for current iteration. Gets reviewed during iteration planning.
 
-## **📋 STATUS NOTE** (June 13, 2025 Evening)
-**Current iteration (June 13-14) COMPLETED with outstanding success** - All major deliverables achieved:
-- ✅ QA-enhanced academic pipeline fully operational
-- ✅ Declarative experiment execution engine operational (100% success rate)
-- ✅ Critical narrative position calculation issue resolved
-- ✅ Complete academic output generation with quality assurance
+## **📋 STATUS NOTE** (June 22, 2025)
+**MAJOR INFRASTRUCTURE BREAKTHROUGH COMPLETED** (June 21-22, 2025) - Critical blocking issues resolved:
+- ✅ **CRITICAL FIXES**: Test suite architecture mismatch, JSON export system, Docker documentation setup
+- ✅ **COMPLETE API DOCUMENTATION**: Auto-generated docs for all 73 Python modules with cross-references  
+- ✅ **UNIFIED FRAMEWORK VALIDATION**: Consolidated validator supporting all architectures
+- ✅ **MECEC STRATEGIC RECONCILIATION**: 5 ACTIONABLE documents integrated with staged implementation
+- ✅ **PRODUCTION PIPELINE ENHANCEMENTS**: Transaction checkpoint system and orchestrator improvements
 
-**Next iteration planning** (June 17, 2025) should focus on leveraging these newly operational capabilities.
+**Tomorrow's Launch** (June 23): Week 2 staged terminology refactor and extensible cartography foundation per reconciliation plan.
+
+---
+
+## ✅ **RECENTLY COMPLETED INFRASTRUCTURE** (June 21-23, 2025)
+
+### **Critical System Fixes**
+- ✅ **Test Suite Architecture Mismatch** - Fixed 15+ test files with incorrect `src.narrative_gravity.*` imports blocking onboarding workflow
+- ✅ **JSON Export System Restoration** - Fixed missing JSON output files in enhanced analysis pipeline (structured_results.json, statistical_results.json, reliability_results.json)
+- ✅ **Docker Documentation Setup** - Fixed docs service entrypoint enabling localhost:8000 access for new developers
+- ✅ **Import Path Issues Resolution** - Fixed 12+ import statements using obsolete `narrative_gravity.` package references
+
+### **Documentation and Validation Systems**
+- ✅ **Complete API Documentation System** - Auto-generated documentation for all 73 Python modules with cross-references, inheritance tracking, and MkDocs integration
+- ✅ **Unified Framework Validator** - Consolidated validation system supporting both dipole-based and independent wells architectures with YAML/JSON support
+- ✅ **Validation System Consolidation** - Deprecated redundant validators, established clear validation responsibilities per domain
+
+### **Strategic Planning and Architecture**
+- ✅ **MECEC Strategic Reconciliation** - Integrated 5 ACTIONABLE documents with staged implementation approach resolving timeline conflicts
+- ✅ **Production Pipeline Integration** - Transaction checkpoint system and experiment orchestrator enhancements
+- ✅ **Framework Architecture Unification** - Unified YAML framework system eliminating configuration mismatches
 
 ---
 
@@ -349,33 +370,10 @@ Items discovered or decided but not yet prioritized for current iteration. Gets 
   - Document approach to maintaining quality assurance while enabling community extension
   - Position research as catalyst for advancing computational discourse analysis standards
 
-## 🎯 **Dynamic Scaling Enhancement** (High Priority)
+## 🎯 **Dynamic Scaling Enhancement** (Superseded)
 *Reference: `docs/development/planning/strategic/dynamic_scaling.md`*
 
-**Strategic Justification**: Current fixed 0.8 scaling factor "mutes differences" and "wastes visual space" - dynamic runtime scaling will maximize visual clarity and analytical precision while preserving mathematical relationships.
-
-- [ ] **Platform Implementation: Dynamic Scaling Algorithm** - Implement runtime scaling factor calculation (min(1, 1/max_observed_distance)) in visualization engine (discovered: June 13, priority: HIGH)
-  - Replace fixed 0.8 scaling with dynamic calculation based on actual narrative positions
-  - Add scaling factor logging for transparency and reproducibility
-  - Ensure compatibility with both circular and elliptical coordinate systems
-  - Implement configurable margin (e.g., 0.99 factor) to prevent boundary artifacts
-  
-- [ ] **Paper Update: Dynamic Scaling Documentation** - Update academic paper v1.3.0 to reflect dynamic scaling methodology (discovered: June 13, priority: MEDIUM)
-  - Replace references to fixed 0.8 scaling factor with dynamic scaling description
-  - Add mathematical formulation for runtime scaling calculation
-  - Document benefits: maximized visual space, preserved analytical clarity, adaptability
-  - Update methodology section with implementation details and transparency requirements
-
-- [ ] **Framework Updates: Database and Filesystem** - Update all 5 frameworks to support dynamic scaling parameters (discovered: June 13, priority: MEDIUM)
-  - Add scaling configuration options to framework.json specifications
-  - Update database framework records with dynamic scaling metadata
-  - Ensure backward compatibility with existing fixed scaling configurations
-  - Migrate civic_virtue, political_spectrum, fukuyama_identity, mft_persuasive_force, moral_rhetorical_posture
-
-- [ ] **Quality Assurance Integration** - Integrate dynamic scaling validation into 6-layer QA system (discovered: June 13, priority: MEDIUM)
-  - Add scaling factor validation (reasonable bounds, no extreme distortion)
-  - Include scaling transparency in quality reports
-  - Flag potential issues with over-scaling or under-utilization of visual space
+**✅ STATUS (June 22, 2025)**: This has been superseded by the more comprehensive **Extensible Cartography Plan**. The goal of dynamic scaling is now addressed by the new visualization adapter architecture, which decouples rendering from core analytics and allows for multiple, purpose-built visualization types (UMAP, Radar v2, etc.).
 
 ## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
 *Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
@@ -681,7 +679,7 @@ Items discovered or decided but not yet prioritized for current iteration. Gets 
   - Paper documentation updates (MEDIUM priority) 
   - Framework database/filesystem updates (MEDIUM priority)
   - QA system integration (MEDIUM priority)
-- **Strategic Impact**: Will maximize visual clarity and analytical precision while preserving mathematical relationships
+  - **Strategic Impact**: Will maximize visual clarity and analytical precision while preserving mathematical relationships
 
 - **Human Validation Study Implementation**: Critical validation study extraction with LLM-first approach
   - **Phase 1**: LLM Baseline Development (4 HIGH priority tasks) - Text corpus, LLM prompt development, baseline experiment, results analysis & refinement
@@ -689,10 +687,2098 @@ Items discovered or decided but not yet prioritized for current iteration. Gets 
   - **Phase 3**: Human Study Platform Setup (2 MEDIUM priority tasks) - CloudResearch/MTurk config, pilot testing with refined corpus
   - **Phase 4**: Study Execution (1 MEDIUM priority task) - Full study launch with quality monitoring
   - **Phase 5**: Analysis & Documentation (2 MEDIUM, 1 LOW priority tasks) - Statistical analysis, replication package, results integration
-- **Strategic Impact**: Establishes computational-human alignment validation using iterative LLM-first refinement approach
-- **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
-- **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
-- **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
-- **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
+  - **Strategic Impact**: Establishes computational-human alignment validation using iterative LLM-first refinement approach
+  - **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
+  - **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
+  - **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
+  - **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
 
-- [ ] Execute deep internal rebrand: Refactor all internal code, package names, and module references from previous names (e.g., narrative_gravity) to Discernus. Ensure all imports, documentation, and configuration files are updated. Schedule for completion before public launch. 
+## 🎯 **Dynamic Scaling Enhancement** (Superseded)
+*Reference: `docs/development/planning/strategic/dynamic_scaling.md`*
+
+**✅ STATUS (June 22, 2025)**: This has been superseded by the more comprehensive **Extensible Cartography Plan**. The goal of dynamic scaling is now addressed by the new visualization adapter architecture, which decouples rendering from core analytics and allows for multiple, purpose-built visualization types (UMAP, Radar v2, etc.).
+
+## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
+*Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
+
+**✅ MIGRATION UPDATE** (June 17, 2025): Business Ethics framework successfully migrated from obsolete JSON format to standardized YAML format in research workspace with complete documentation.
+
+**Strategic Justification**: Comprehensive specifications and user guides needed for the research workspace structure and YAML formats validated in the unified asset management prototype. Critical for production integration and researcher adoption.
+
+- [ ] **Research Workspace Specification Documentation** - Create comprehensive technical specification for the research workspace structure and workflows (discovered: June 19, priority: HIGH)
+  - Document complete directory structure: frameworks/, prompt_templates/, weighting_schemes/, experiments/, etc.
+  - Specify YAML format standards for all asset types with complete schema documentation
+  - Include project_manifest.yaml specification with dependency tracking and version management
+  - Document two-tier architecture: development workspace + immutable storage integration
+  - Create technical requirements for hash-based content addressing and provenance tracking
+  - Include migration pathways from legacy JSON formats to new YAML standards
+
+- [ ] **YAML Format Standards and Schema Documentation** - Establish formal standards for all YAML asset formats (discovered: June 19, priority: HIGH)
+  - Create comprehensive schema documentation for framework YAML format with validation rules
+  - Document prompt template YAML structure with methodology integration requirements
+  - Specify weighting scheme YAML format with mathematical constraint validation
+  - Include metadata and provenance tracking YAML schemas
+  - Create validation tools and examples for each YAML format type
+  - Document version evolution and backward compatibility requirements
+
+- [ ] **Research Workspace User Guide** - Create comprehensive user guide for researchers working with the workspace structure (discovered: June 19, priority: HIGH)
+  - Write step-by-step guide for creating new frameworks in YAML format
+  - Document workflow for developing and testing prompt templates
+  - Include best practices for research workspace organization and asset management
+  - Create troubleshooting guide for common YAML format and validation issues
+  - Document integration pathways between research workspace and production systems
+  - Include collaboration workflows and version control best practices
+
+- [ ] **Content-Addressable Storage Integration Guide** - Document the production integration pathway for hash-based asset storage (discovered: June 19, priority: MEDIUM)
+  - Create technical specification for asset_storage/ directory structure and hash algorithms
+  - Document integration with existing FrameworkManager and PromptTemplateManager systems
+  - Specify database schema requirements for asset_versions and asset_provenance tables
+  - Include migration strategy from prototype to production implementation
+  - Document integrity verification and deduplication capabilities
+  - Create troubleshooting guide for hash-based storage and retrieval operations
+
+- [ ] **Framework Portfolio Management Guide** - Document systematic approach to managing diverse framework types (dipole vs non-dipole) (discovered: June 19, priority: MEDIUM)
+  - Create guide for converting legacy JSON frameworks to YAML format
+  - Document framework validation and theoretical coherence testing procedures
+  - Include best practices for framework versioning and iteration management
+  - Specify quality assurance requirements for framework academic documentation
+  - Create comparative analysis guidelines for different framework architectures
+  - Document expert consultation preparation and validation evidence requirements
+
+## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
+*Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
+
+**Strategic Justification**: Multi-layered transaction management system that treats any uncertainty that could compromise experiment validity as grounds for graceful termination and rollback. Ensures zero contaminated results while providing clear user guidance for resolution.
+
+### **Architecture Status Overview**
+- ✅ **Phase 1 Complete**: Framework Transaction Manager - Database-first loading, content change detection, automatic version increment
+- ✅ **Phase 2 Complete**: Data Transaction Manager - Corpus integrity validation, content hash verification, encoding validation
+- ✅ **Phase 2 Complete**: Quality Transaction Manager - Analysis quality thresholds, framework fit validation, statistical significance enforcement
+- 📋 **Phase 3 Planned**: Pipeline Transaction Manager - LLM availability, dependency compatibility, API reliability
+- 📋 **Phase 4 Planned**: Compliance Transaction Manager - Academic compliance, ethical clearance, institutional policy
+
+### **Implementation Follow-up Tasks**
+- [ ] **Enhanced Orchestrator Integration** - Integrate all transaction managers into comprehensive pre-flight validation (discovered: June 17, priority: HIGH)
+  - Update `comprehensive_experiment_orchestrator.py` to use all transaction managers
+  - Implement coordinated rollback across all transaction types
+  - Add transaction-aware error handling with specific guidance
+  - Include transaction metrics in monitoring dashboard
+
+- [ ] **Transaction Integrity Exception Hierarchy** - Implement complete exception hierarchy for different transaction failures (discovered: June 17, priority: MEDIUM)
+  - Create `TransactionIntegrityError` base class
+  - Implement domain-specific exceptions: `FrameworkTransactionIntegrityError`, `DataTransactionIntegrityError`, `QualityTransactionIntegrityError`
+  - Add structured error handling with rollback guidance
+  - Integrate with existing error monitoring systems
+
+- [ ] **Transaction Audit Trail System** - Implement comprehensive audit logging for all transaction decisions (discovered: June 17, priority: MEDIUM)
+  - Add transaction ID tracking across all experiment operations
+  - Store transaction state history in database
+  - Implement query interface for transaction analysis
+  - Create dashboard for transaction success/failure trends
+
+- [ ] **User Experience Enhancement** - Improve transaction failure user experience (discovered: June 17, priority: MEDIUM)
+  - Create user-friendly error messages with specific guidance
+  - Implement step-by-step recovery commands
+  - Add transaction status indicators in CLI
+  - Create transaction integrity validation tools
+
+- [ ] **Documentation and Training** - Complete transaction integrity documentation and training materials (discovered: June 17, priority: LOW)
+  - Update user guides with transaction integrity concepts
+  - Create troubleshooting guide for transaction failures
+  - Add developer documentation for extending transaction managers
+  - Include transaction integrity in academic methodology documentation
+
+## 🔧 **Infrastructure & Performance**
+
+- [ ] **Performance Benchmarking** - Measure visualization generation speed improvements (discovered: June 13, priority: TBD)
+- [ ] **Theme Expansion** - Additional academic themes (journal-specific, conference-specific) (discovered: June 13, priority: TBD)
+- [ ] **Export Format Enhancement** - Additional academic formats (EPS, TIFF for specific journals) (discovered: June 13, priority: TBD)
+- [ ] **Interactive Feature Enhancement** - Advanced hover info, annotation capabilities (discovered: June 13, priority: TBD)
+- [ ] **Framework-Specific Styling** - Custom styling overrides for different framework types (discovered: June 13, priority: TBD)
+
+## 📊 **Testing & Validation**
+
+- [ ] **Comprehensive Test System Review and Optimization** - Stem-to-stern review of all test infrastructure and test data following academic validation completion (discovered: June 19, priority: HIGH)
+  - **Current State Assessment**: 161 test result files (226.4MB) across 22 categories with comprehensive QA validation reports
+  - **Review Scope**: Complete audit of test coverage, test result quality, data organization, and preservation strategies
+  - **Test Data Analysis**: Systematic review of QA test exports (qa_convenience_test/, qa_integration_test/) with validation report quality assessment
+  - **Infrastructure Evaluation**: Assessment of test isolation system, bloat prevention integration, and result preservation effectiveness
+  - **Strategic Justification**: Ensure test infrastructure scales appropriately for production academic validation runs and maintains research-grade quality standards
+  - **Deliverables**: Test strategy optimization, data retention policies, quality metrics enhancement, and comprehensive testing best practices documentation
+  - **Dependencies**: Complete after major academic validation runs to capture lessons learned and scale requirements
+
+- [ ] **Experiment QA System Status Review and Enhancement** - Comprehensive review of discovered experiment QA system capabilities and integration status (discovered: June 19, priority: HIGH)
+  - **Discovery Context**: QA system found operational with comprehensive validation reports, confidence scoring, and multi-format exports during test infrastructure inspection
+  - **System Assessment**: Evaluate QAEnhancedDataExporter, LLMQualityAssuranceSystem (6-layer validation), and ComponentQualityValidator integration status
+  - **Quality Metrics Review**: Analysis of current confidence score statistics (mean: 0.037, all LOW confidence), quality issue detection (10 anomalies, 8 critical issues), and validation effectiveness
+  - **Integration Analysis**: Review QA system integration with orchestrator, export pipeline, and academic validation workflows
+  - **Enhancement Opportunities**: Identify gaps in current QA coverage, threshold optimization, and academic validation integration
+  - **Strategic Justification**: Ensure QA system meets academic rigor standards and provides meaningful quality assurance for research publications
+  - **Deliverables**: QA system status report, enhancement recommendations, integration optimization, and academic validation alignment strategy
+  - **Priority Rationale**: Critical for ensuring research quality and publication readiness of academic validation outputs
+
+- [ ] **Unit Testing Framework** - CLI component tests, database integration tests (discovered: June 13, priority: TBD)
+- [ ] **Integration Testing Suite** - Cross-component compatibility tests (discovered: June 13, priority: TBD)
+- [ ] **Academic Standard Compliance Tests** - Ensure outputs meet publication requirements (discovered: June 13, priority: TBD)
+- [ ] **Statistical Accuracy Validation** - Verify calculations against known benchmarks (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Replication Package Tests** - Include quality metadata validation (discovered: June 13, priority: TBD)
+
+## 🧪 **Human Validation Study Implementation** (High Priority)
+*Reference: `docs/development/planning/specialized/human_validation/human_validation_experiment_approach.md`*
+
+**Strategic Justification**: Critical validation study to establish computational-human alignment in political discourse analysis using strategic single-dipole approach (Dignity vs Tribalism) with anonymous political excerpts.
+
+### **Methodological Design Review and Enhancement**
+*Reference: `docs/project-management/planning/specialized/human_validation/reviewer_feedback_validation_design_gaps.md`*
+
+- [ ] **Integrate Reviewer Feedback on Validation Study Methodology** - Address five critical methodological gaps identified by external reviewer for journal-level acceptance (discovered: December 2024, priority: HIGH)
+  - Implement inter-rater reliability (IRR) metrics: Fleiss' Kappa for 3+ raters, target ≥0.6 (good), ≥0.8 (excellent)
+  - Design stratified rater recruitment across ideological spectrum (liberal, conservative, moderate) to address single-source bias
+  - Add null model baselines: random vector baseline and majority sentiment model for comparative performance
+  - Develop comprehensive rater training protocol with 1-2 page primer, plain-language well definitions, annotated examples
+  - Conduct power analysis for statistical significance: target 100-150 triplets per well for medium effect detection
+  - Strategic decision: Pilot with 3 wells (Dignity/Tribalism, Truth/Fantasy, Justice/Resentment) before full 10-well study
+  - Budget impact: ~$1,500-2,000 for quality diverse rater pool vs original design
+
+### **Phase 1: LLM Baseline Development and Validation**
+*Reordered from Phase 2 to enable iterative refinement before human annotation investment*
+
+- [ ] **Initial Text Corpus Creation** - Develop 15-20 anonymous political excerpts for LLM baseline testing (discovered: June 13, priority: HIGH)
+  - Create 4-5 Dignity pole exemplars (unity, individual worth, respectful disagreement)
+  - Create 4-5 Tribalism pole exemplars (us-vs-them rhetoric without policy substance)
+  - Create 4-5 balanced/moderate cases (policy-focused content with mixed elements)
+  - Create 2-3 edge cases and controls (pure policy, ceremonial speeches, historical documents)
+  - Apply strategic excerpting protocol (400-600 words, metadata removal, context neutralization)
+  - Conduct recognition testing with political science students to ensure anonymity
+
+- [ ] **LLM Prompt Template Development** - Create optimized LLM prompt for Dignity vs Tribalism analysis (discovered: June 13, priority: HIGH)
+  - Create structured LLM prompt template with expert role, definitions, and formatting
+  - Design clear 1-7 scale definitions (1=Strong Tribalism, 7=Strong Dignity)
+  - Include evidence requirement instructions (identify 2-3 supporting passages)
+  - Test prompt clarity and consistency across multiple LLM runs
+
+- [ ] **LLM Baseline Experiment Execution** - Run full computational analysis and iterative refinement (discovered: June 13, priority: HIGH)
+  - Execute LLM analysis on 15-20 anonymous political excerpts using civic virtue framework
+  - Use Dignity vs Tribalism dipole configuration with appropriate weighting scheme
+  - Generate computational scores for all validation texts with evidence passages
+  - Analyze score distributions, range utilization, and differentiation quality
+  - Document LLM parameters (model, temperature, etc.) for reproducibility
+  - Store results in standardized format for human comparison preparation
+
+- [ ] **LLM Results Analysis and Refinement** - Evaluate and optimize LLM performance before human study (discovered: June 13, priority: HIGH)
+  - Analyze score distributions to ensure meaningful differentiation across text types
+  - Evaluate evidence passage quality and relevance to dignity/tribalism distinction
+  - Refine text corpus based on LLM performance (replace low-performing texts)
+  - Optimize prompt template based on consistency and clarity of outputs
+  - Validate that LLM successfully distinguishes expected pole exemplars from balanced cases
+  - Document refinement decisions and rationale for human study design
+
+### **Phase 2: Human Annotation Materials Development**
+*Depends on Phase 1 LLM results for optimal human prompt and corpus design*
+
+- [ ] **Human Annotation Codebook Development** - Create simplified codebook based on refined LLM approach (discovered: June 13, priority: MEDIUM)
+  - Develop clear 1-7 scale definitions adapted from validated LLM prompt
+  - Include concrete examples and boundary cases identified through LLM analysis
+  - Create evidence requirement instructions (1-2 key passages per rating)
+  - Design quality control gold standard cases based on LLM performance patterns
+
+- [ ] **Human Prompt Adaptation** - Create human-optimized version of validated LLM prompt (discovered: June 13, priority: MEDIUM)
+  - Adapt validated LLM prompt structure to conversational human annotation format
+  - Maintain conceptual equivalence while optimizing for human cognitive processing
+  - Include examples and guidance derived from successful LLM analysis patterns
+  - Document systematic adaptation rationale and maintain task equivalence
+
+### **Phase 3: Human Study Platform Setup and Pilot Testing**
+*Uses refined corpus and validated prompts from Phases 1-2*
+
+- [ ] **CloudResearch/MTurk Platform Configuration** - Set up crowdsourcing platform for human annotation study (discovered: June 13, priority: MEDIUM)
+  - Configure CloudResearch/MTurk account with academic verification
+  - Design HIT template with quality control mechanisms and attention checks
+  - Implement real-time quality monitoring and anomaly detection systems
+  - Set up budget controls within $400 allocation
+
+- [ ] **Pilot Study Execution** - Run small-scale validation before main study (discovered: June 13, priority: MEDIUM)
+  - Execute pilot with 5 texts × 5 annotators = 25 HITs using refined corpus
+  - Analyze pilot results for prompt refinement and quality issues
+  - Validate score distributions between refined LLM baseline and human annotators
+  - Refine materials based on pilot feedback and performance metrics
+
+### **Phase 4: Main Study Execution and Quality Control**
+- [ ] **Full Study Launch** - Execute main validation study with quality monitoring (discovered: June 13, priority: MEDIUM)
+  - Launch study: 15-20 refined texts × 4 annotators = 60-80 HITs total
+  - Implement real-time quality monitoring and response validation
+  - Maintain cost management within budget constraints
+  - Monitor inter-rater reliability and flag quality issues
+
+### **Phase 5: Analysis and Academic Documentation**
+- [ ] **Statistical Analysis Implementation** - Comprehensive validation analysis with pre-registered hypotheses (discovered: June 13, priority: MEDIUM)
+  - Calculate inter-rater reliability (ICC) with target ≥0.70 (success ≥0.80)
+  - Measure human-LLM correlation with target ≥0.80 (success ≥0.85)
+  - Conduct score distribution analysis and range utilization assessment
+  - Perform evidence quality thematic analysis of supporting passages
+
+- [ ] **Academic Replication Package Creation** - Complete documentation and reproducibility materials (discovered: June 13, priority: MEDIUM)
+  - Document complete text selection and anonymization process
+  - Create systematic record of prompt adaptation rationale and validation
+  - Prepare anonymized text corpus with metadata for sharing
+  - Develop statistical analysis scripts and validation procedures
+  - Write methodological transparency documentation for publication
+
+- [ ] **Results Integration and Next Phase Planning** - Incorporate validation results into broader research program (discovered: June 13, priority: LOW)
+  - Interpret results against success criteria and academic standards
+  - Document methodological template for computational-human alignment testing
+  - Plan systematic extension to additional framework dimensions
+  - Prepare publication strategy and academic dissemination plan
+
+## 📈 **Academic & Research Enhancements**
+
+- [ ] **R Script Generators** - Cursor-assisted R code for advanced visualization and statistical modeling (discovered: June 13, priority: TBD)
+- [ ] **Stata Integration Scripts** - PyStata workflows for publication-grade statistical analysis (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Bibliography Management** - Automated citation and reference management (discovered: June 13, priority: TBD)
+- [ ] **Cross-Tool Workflow Orchestrator** - Seamless integration between Jupyter, R, and Stata (discovered: June 13, priority: TBD)
+
+## 🎯 **User Experience & Research Process**
+
+- [ ] **Circle Math in Paper Audit** - Ensure mathematical accuracy and academic rigor in paper v1.2.0 (discovered: June 13, priority: TBD)
+- [ ] **User Persona, Story, and Journey Audit** - Validate user experience design against actual research workflows (discovered: June 13, priority: TBD)
+- [ ] **YouTube Ingestion Accuracy Comparison** - Test case: Trump Joint Session Speech analysis accuracy validation (discovered: June 13, priority: TBD)
+- [ ] **Visualization Source of Truth vs Repository Architecture** - Establish clear architecture for visualization code and assets (discovered: June 13, priority: TBD)
+- [ ] **Experiment Design Process** - Formalize systematic approach to framework development and validation (discovered: June 13, priority: TBD)
+
+## 🏗️ **Architecture & Best Practices**
+
+- [ ] **Framework Development Best Practices** - Systematize framework development methodology based on 5 operational frameworks (discovered: June 13, priority: TBD)
+- [ ] **Architecture Refinement** - Improve architecture based on lessons learned from migrations (discovered: June 13, priority: TBD)
+- [ ] **Component Quality Validators** - Automated checks for prompt clarity, framework coherence (discovered: June 13, priority: TBD)
+- [ ] **Development Analytics Dashboard** - Progress tracking and pattern recognition across sessions (discovered: June 13, priority: TBD)
+
+## 📋 **Documentation & Training**
+
+- [ ] **Technical Documentation Updates** - API documentation, database schema docs (discovered: June 13, priority: TBD)
+- [ ] **Process Documentation** - Research workflow guides, quality assurance manuals (discovered: June 13, priority: TBD)
+- [ ] **Training Materials** - Best practices compendium, troubleshooting guides (discovered: June 13, priority: TBD)
+
+---
+
+## **Review Process**
+- **Weekly Review**: During iteration planning, items move from BACKLOG → CURRENT_ITERATION
+- **Priority Assignment**: Items get priority levels (HIGH/MEDIUM/LOW) when moved to current iteration
+- **Archive**: Completed items move to CHANGELOG.md
+
+**Next Review**: June 17, 2025 (next iteration planning)
+
+## **🎯 Recent Additions** (June 13, 2025 Evening)
+- **Future Directions and Research Extensions**: Comprehensive future research agenda demonstrating framework extensibility and academic trajectory positioning
+  - **Temporal Analysis Development** (3 MEDIUM/LOW priority tasks): Temporal category analysis, author evolution tracking, temporal quality assurance enhancement
+  - **Comparative Analysis Documentation** (2 MEDIUM/LOW priority tasks): Systematic text comparison framework, multi-context evaluation methodology
+  - **Integration Strategy** (2 MEDIUM/LOW priority tasks): Unified analytical framework documentation, research program expansion roadmap
+  - **Academic Positioning** (2 MEDIUM/LOW priority tasks): Future directions literature integration, computational discourse analysis advancement positioning
+  - **Community Development** (2 LOW priority tasks): Framework extensibility documentation, research community impact documentation
+  - **Strategic Impact**: Positions framework within broader computational discourse analysis trajectory while demonstrating extensibility and long-term research potential
+
+- **Alternative Validation and Methodological Positioning**: Comprehensive academic positioning framework independent of human validation outcomes
+  - **Methodological Innovation** (3 HIGH/MEDIUM priority tasks): Five-dimensional experimental design documentation, framework-agnostic architecture, computational reproducibility standards
+  - **Algorithmic Consistency** (2 HIGH/MEDIUM priority tasks): Cross-model reliability documentation, algorithmic innovation positioning
+  - **Alternative Validation** (3 MEDIUM/LOW priority tasks): Internal coherence validation, convergent validity approaches, longitudinal consistency analysis
+  - **Academic Positioning** (3 HIGH/MEDIUM priority tasks): Tool development contribution, computational social science methodology advancement, community development strategy
+  - **Practical Applications** (3 MEDIUM/LOW priority tasks): Exploratory analysis positioning, comparative framework documentation, future research trajectory
+  - **Strategic Impact**: Establishes robust academic defensibility and scholarly contribution claims regardless of human validation outcomes
+
+- **Human Validation Research Integration**: Comprehensive paper-writing agenda incorporating extensive human validation research findings
+  - **Literature Integration** (3 HIGH priority tasks): ValiText framework, prompt sensitivity research, computational social science standards
+  - **Methodology Enhancement** (3 HIGH/MEDIUM priority tasks): Validation framework section, quality assurance documentation, LLM-as-a-judge integration
+  - **Academic Defense** (3 HIGH/MEDIUM priority tasks): Strategic decision defense, methodological sophistication positioning, criticism response framework
+  - **Bibliography Enhancement** (2 MEDIUM/LOW priority tasks): Comprehensive citation expansion, academic formatting integration
+  - **Strategic Impact**: Transforms extensive validation research into academically rigorous paper sections with proper citations and methodological defense
+
+- **Theoretical Foundation Research**: Comprehensive research agenda to strengthen academic argument for core methodological innovation
+  - **Literature Reviews** (3 HIGH priority tasks): Spatial metaphors in text analysis, center of mass concepts, circular vs linear coordinate systems
+  - **Academic Development** (3 MEDIUM priority tasks): Bibliography expansion, paper section development, positioning strategy
+  - **Strategic Impact**: Establishes rigorous theoretical foundation for dipole-circular mapping as novel contribution to computational discourse analysis
+  - **Innovation Focus**: Positions center of mass calculation and circular coordinate mapping as unique methodological advances
+
+- **Dynamic Scaling Enhancement**: High-priority enhancement based on strategic analysis in `dynamic_scaling.md`
+  - Platform implementation (HIGH priority)
+  - Paper documentation updates (MEDIUM priority) 
+  - Framework database/filesystem updates (MEDIUM priority)
+  - QA system integration (MEDIUM priority)
+  - **Strategic Impact**: Will maximize visual clarity and analytical precision while preserving mathematical relationships
+
+- **Human Validation Study Implementation**: Critical validation study extraction with LLM-first approach
+  - **Phase 1**: LLM Baseline Development (4 HIGH priority tasks) - Text corpus, LLM prompt development, baseline experiment, results analysis & refinement
+  - **Phase 2**: Human Materials Development (2 MEDIUM priority tasks) - Codebook based on LLM results, human prompt adaptation
+  - **Phase 3**: Human Study Platform Setup (2 MEDIUM priority tasks) - CloudResearch/MTurk config, pilot testing with refined corpus
+  - **Phase 4**: Study Execution (1 MEDIUM priority task) - Full study launch with quality monitoring
+  - **Phase 5**: Analysis & Documentation (2 MEDIUM, 1 LOW priority tasks) - Statistical analysis, replication package, results integration
+  - **Strategic Impact**: Establishes computational-human alignment validation using iterative LLM-first refinement approach
+  - **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
+  - **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
+  - **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
+  - **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
+
+## 🎯 **Dynamic Scaling Enhancement** (Superseded)
+*Reference: `docs/development/planning/strategic/dynamic_scaling.md`*
+
+**✅ STATUS (June 22, 2025)**: This has been superseded by the more comprehensive **Extensible Cartography Plan**. The goal of dynamic scaling is now addressed by the new visualization adapter architecture, which decouples rendering from core analytics and allows for multiple, purpose-built visualization types (UMAP, Radar v2, etc.).
+
+## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
+*Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
+
+**✅ MIGRATION UPDATE** (June 17, 2025): Business Ethics framework successfully migrated from obsolete JSON format to standardized YAML format in research workspace with complete documentation.
+
+**Strategic Justification**: Comprehensive specifications and user guides needed for the research workspace structure and YAML formats validated in the unified asset management prototype. Critical for production integration and researcher adoption.
+
+- [ ] **Research Workspace Specification Documentation** - Create comprehensive technical specification for the research workspace structure and workflows (discovered: June 19, priority: HIGH)
+  - Document complete directory structure: frameworks/, prompt_templates/, weighting_schemes/, experiments/, etc.
+  - Specify YAML format standards for all asset types with complete schema documentation
+  - Include project_manifest.yaml specification with dependency tracking and version management
+  - Document two-tier architecture: development workspace + immutable storage integration
+  - Create technical requirements for hash-based content addressing and provenance tracking
+  - Include migration pathways from legacy JSON formats to new YAML standards
+
+- [ ] **YAML Format Standards and Schema Documentation** - Establish formal standards for all YAML asset formats (discovered: June 19, priority: HIGH)
+  - Create comprehensive schema documentation for framework YAML format with validation rules
+  - Document prompt template YAML structure with methodology integration requirements
+  - Specify weighting scheme YAML format with mathematical constraint validation
+  - Include metadata and provenance tracking YAML schemas
+  - Create validation tools and examples for each YAML format type
+  - Document version evolution and backward compatibility requirements
+
+- [ ] **Research Workspace User Guide** - Create comprehensive user guide for researchers working with the workspace structure (discovered: June 19, priority: HIGH)
+  - Write step-by-step guide for creating new frameworks in YAML format
+  - Document workflow for developing and testing prompt templates
+  - Include best practices for research workspace organization and asset management
+  - Create troubleshooting guide for common YAML format and validation issues
+  - Document integration pathways between research workspace and production systems
+  - Include collaboration workflows and version control best practices
+
+- [ ] **Content-Addressable Storage Integration Guide** - Document the production integration pathway for hash-based asset storage (discovered: June 19, priority: MEDIUM)
+  - Create technical specification for asset_storage/ directory structure and hash algorithms
+  - Document integration with existing FrameworkManager and PromptTemplateManager systems
+  - Specify database schema requirements for asset_versions and asset_provenance tables
+  - Include migration strategy from prototype to production implementation
+  - Document integrity verification and deduplication capabilities
+  - Create troubleshooting guide for hash-based storage and retrieval operations
+
+- [ ] **Framework Portfolio Management Guide** - Document systematic approach to managing diverse framework types (dipole vs non-dipole) (discovered: June 19, priority: MEDIUM)
+  - Create guide for converting legacy JSON frameworks to YAML format
+  - Document framework validation and theoretical coherence testing procedures
+  - Include best practices for framework versioning and iteration management
+  - Specify quality assurance requirements for framework academic documentation
+  - Create comparative analysis guidelines for different framework architectures
+  - Document expert consultation preparation and validation evidence requirements
+
+## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
+*Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
+
+**Strategic Justification**: Multi-layered transaction management system that treats any uncertainty that could compromise experiment validity as grounds for graceful termination and rollback. Ensures zero contaminated results while providing clear user guidance for resolution.
+
+### **Architecture Status Overview**
+- ✅ **Phase 1 Complete**: Framework Transaction Manager - Database-first loading, content change detection, automatic version increment
+- ✅ **Phase 2 Complete**: Data Transaction Manager - Corpus integrity validation, content hash verification, encoding validation
+- ✅ **Phase 2 Complete**: Quality Transaction Manager - Analysis quality thresholds, framework fit validation, statistical significance enforcement
+- 📋 **Phase 3 Planned**: Pipeline Transaction Manager - LLM availability, dependency compatibility, API reliability
+- 📋 **Phase 4 Planned**: Compliance Transaction Manager - Academic compliance, ethical clearance, institutional policy
+
+### **Implementation Follow-up Tasks**
+- [ ] **Enhanced Orchestrator Integration** - Integrate all transaction managers into comprehensive pre-flight validation (discovered: June 17, priority: HIGH)
+  - Update `comprehensive_experiment_orchestrator.py` to use all transaction managers
+  - Implement coordinated rollback across all transaction types
+  - Add transaction-aware error handling with specific guidance
+  - Include transaction metrics in monitoring dashboard
+
+- [ ] **Transaction Integrity Exception Hierarchy** - Implement complete exception hierarchy for different transaction failures (discovered: June 17, priority: MEDIUM)
+  - Create `TransactionIntegrityError` base class
+  - Implement domain-specific exceptions: `FrameworkTransactionIntegrityError`, `DataTransactionIntegrityError`, `QualityTransactionIntegrityError`
+  - Add structured error handling with rollback guidance
+  - Integrate with existing error monitoring systems
+
+- [ ] **Transaction Audit Trail System** - Implement comprehensive audit logging for all transaction decisions (discovered: June 17, priority: MEDIUM)
+  - Add transaction ID tracking across all experiment operations
+  - Store transaction state history in database
+  - Implement query interface for transaction analysis
+  - Create dashboard for transaction success/failure trends
+
+- [ ] **User Experience Enhancement** - Improve transaction failure user experience (discovered: June 17, priority: MEDIUM)
+  - Create user-friendly error messages with specific guidance
+  - Implement step-by-step recovery commands
+  - Add transaction status indicators in CLI
+  - Create transaction integrity validation tools
+
+- [ ] **Documentation and Training** - Complete transaction integrity documentation and training materials (discovered: June 17, priority: LOW)
+  - Update user guides with transaction integrity concepts
+  - Create troubleshooting guide for transaction failures
+  - Add developer documentation for extending transaction managers
+  - Include transaction integrity in academic methodology documentation
+
+## 🔧 **Infrastructure & Performance**
+
+- [ ] **Performance Benchmarking** - Measure visualization generation speed improvements (discovered: June 13, priority: TBD)
+- [ ] **Theme Expansion** - Additional academic themes (journal-specific, conference-specific) (discovered: June 13, priority: TBD)
+- [ ] **Export Format Enhancement** - Additional academic formats (EPS, TIFF for specific journals) (discovered: June 13, priority: TBD)
+- [ ] **Interactive Feature Enhancement** - Advanced hover info, annotation capabilities (discovered: June 13, priority: TBD)
+- [ ] **Framework-Specific Styling** - Custom styling overrides for different framework types (discovered: June 13, priority: TBD)
+
+## 📊 **Testing & Validation**
+
+- [ ] **Comprehensive Test System Review and Optimization** - Stem-to-stern review of all test infrastructure and test data following academic validation completion (discovered: June 19, priority: HIGH)
+  - **Current State Assessment**: 161 test result files (226.4MB) across 22 categories with comprehensive QA validation reports
+  - **Review Scope**: Complete audit of test coverage, test result quality, data organization, and preservation strategies
+  - **Test Data Analysis**: Systematic review of QA test exports (qa_convenience_test/, qa_integration_test/) with validation report quality assessment
+  - **Infrastructure Evaluation**: Assessment of test isolation system, bloat prevention integration, and result preservation effectiveness
+  - **Strategic Justification**: Ensure test infrastructure scales appropriately for production academic validation runs and maintains research-grade quality standards
+  - **Deliverables**: Test strategy optimization, data retention policies, quality metrics enhancement, and comprehensive testing best practices documentation
+  - **Dependencies**: Complete after major academic validation runs to capture lessons learned and scale requirements
+
+- [ ] **Experiment QA System Status Review and Enhancement** - Comprehensive review of discovered experiment QA system capabilities and integration status (discovered: June 19, priority: HIGH)
+  - **Discovery Context**: QA system found operational with comprehensive validation reports, confidence scoring, and multi-format exports during test infrastructure inspection
+  - **System Assessment**: Evaluate QAEnhancedDataExporter, LLMQualityAssuranceSystem (6-layer validation), and ComponentQualityValidator integration status
+  - **Quality Metrics Review**: Analysis of current confidence score statistics (mean: 0.037, all LOW confidence), quality issue detection (10 anomalies, 8 critical issues), and validation effectiveness
+  - **Integration Analysis**: Review QA system integration with orchestrator, export pipeline, and academic validation workflows
+  - **Enhancement Opportunities**: Identify gaps in current QA coverage, threshold optimization, and academic validation integration
+  - **Strategic Justification**: Ensure QA system meets academic rigor standards and provides meaningful quality assurance for research publications
+  - **Deliverables**: QA system status report, enhancement recommendations, integration optimization, and academic validation alignment strategy
+  - **Priority Rationale**: Critical for ensuring research quality and publication readiness of academic validation outputs
+
+- [ ] **Unit Testing Framework** - CLI component tests, database integration tests (discovered: June 13, priority: TBD)
+- [ ] **Integration Testing Suite** - Cross-component compatibility tests (discovered: June 13, priority: TBD)
+- [ ] **Academic Standard Compliance Tests** - Ensure outputs meet publication requirements (discovered: June 13, priority: TBD)
+- [ ] **Statistical Accuracy Validation** - Verify calculations against known benchmarks (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Replication Package Tests** - Include quality metadata validation (discovered: June 13, priority: TBD)
+
+## 🧪 **Human Validation Study Implementation** (High Priority)
+*Reference: `docs/development/planning/specialized/human_validation/human_validation_experiment_approach.md`*
+
+**Strategic Justification**: Critical validation study to establish computational-human alignment in political discourse analysis using strategic single-dipole approach (Dignity vs Tribalism) with anonymous political excerpts.
+
+### **Methodological Design Review and Enhancement**
+*Reference: `docs/project-management/planning/specialized/human_validation/reviewer_feedback_validation_design_gaps.md`*
+
+- [ ] **Integrate Reviewer Feedback on Validation Study Methodology** - Address five critical methodological gaps identified by external reviewer for journal-level acceptance (discovered: December 2024, priority: HIGH)
+  - Implement inter-rater reliability (IRR) metrics: Fleiss' Kappa for 3+ raters, target ≥0.6 (good), ≥0.8 (excellent)
+  - Design stratified rater recruitment across ideological spectrum (liberal, conservative, moderate) to address single-source bias
+  - Add null model baselines: random vector baseline and majority sentiment model for comparative performance
+  - Develop comprehensive rater training protocol with 1-2 page primer, plain-language well definitions, annotated examples
+  - Conduct power analysis for statistical significance: target 100-150 triplets per well for medium effect detection
+  - Strategic decision: Pilot with 3 wells (Dignity/Tribalism, Truth/Fantasy, Justice/Resentment) before full 10-well study
+  - Budget impact: ~$1,500-2,000 for quality diverse rater pool vs original design
+
+### **Phase 1: LLM Baseline Development and Validation**
+*Reordered from Phase 2 to enable iterative refinement before human annotation investment*
+
+- [ ] **Initial Text Corpus Creation** - Develop 15-20 anonymous political excerpts for LLM baseline testing (discovered: June 13, priority: HIGH)
+  - Create 4-5 Dignity pole exemplars (unity, individual worth, respectful disagreement)
+  - Create 4-5 Tribalism pole exemplars (us-vs-them rhetoric without policy substance)
+  - Create 4-5 balanced/moderate cases (policy-focused content with mixed elements)
+  - Create 2-3 edge cases and controls (pure policy, ceremonial speeches, historical documents)
+  - Apply strategic excerpting protocol (400-600 words, metadata removal, context neutralization)
+  - Conduct recognition testing with political science students to ensure anonymity
+
+- [ ] **LLM Prompt Template Development** - Create optimized LLM prompt for Dignity vs Tribalism analysis (discovered: June 13, priority: HIGH)
+  - Create structured LLM prompt template with expert role, definitions, and formatting
+  - Design clear 1-7 scale definitions (1=Strong Tribalism, 7=Strong Dignity)
+  - Include evidence requirement instructions (identify 2-3 supporting passages)
+  - Test prompt clarity and consistency across multiple LLM runs
+
+- [ ] **LLM Baseline Experiment Execution** - Run full computational analysis and iterative refinement (discovered: June 13, priority: HIGH)
+  - Execute LLM analysis on 15-20 anonymous political excerpts using civic virtue framework
+  - Use Dignity vs Tribalism dipole configuration with appropriate weighting scheme
+  - Generate computational scores for all validation texts with evidence passages
+  - Analyze score distributions, range utilization, and differentiation quality
+  - Document LLM parameters (model, temperature, etc.) for reproducibility
+  - Store results in standardized format for human comparison preparation
+
+- [ ] **LLM Results Analysis and Refinement** - Evaluate and optimize LLM performance before human study (discovered: June 13, priority: HIGH)
+  - Analyze score distributions to ensure meaningful differentiation across text types
+  - Evaluate evidence passage quality and relevance to dignity/tribalism distinction
+  - Refine text corpus based on LLM performance (replace low-performing texts)
+  - Optimize prompt template based on consistency and clarity of outputs
+  - Validate that LLM successfully distinguishes expected pole exemplars from balanced cases
+  - Document refinement decisions and rationale for human study design
+
+### **Phase 2: Human Annotation Materials Development**
+*Depends on Phase 1 LLM results for optimal human prompt and corpus design*
+
+- [ ] **Human Annotation Codebook Development** - Create simplified codebook based on refined LLM approach (discovered: June 13, priority: MEDIUM)
+  - Develop clear 1-7 scale definitions adapted from validated LLM prompt
+  - Include concrete examples and boundary cases identified through LLM analysis
+  - Create evidence requirement instructions (1-2 key passages per rating)
+  - Design quality control gold standard cases based on LLM performance patterns
+
+- [ ] **Human Prompt Adaptation** - Create human-optimized version of validated LLM prompt (discovered: June 13, priority: MEDIUM)
+  - Adapt validated LLM prompt structure to conversational human annotation format
+  - Maintain conceptual equivalence while optimizing for human cognitive processing
+  - Include examples and guidance derived from successful LLM analysis patterns
+  - Document systematic adaptation rationale and maintain task equivalence
+
+### **Phase 3: Human Study Platform Setup and Pilot Testing**
+*Uses refined corpus and validated prompts from Phases 1-2*
+
+- [ ] **CloudResearch/MTurk Platform Configuration** - Set up crowdsourcing platform for human annotation study (discovered: June 13, priority: MEDIUM)
+  - Configure CloudResearch/MTurk account with academic verification
+  - Design HIT template with quality control mechanisms and attention checks
+  - Implement real-time quality monitoring and anomaly detection systems
+  - Set up budget controls within $400 allocation
+
+- [ ] **Pilot Study Execution** - Run small-scale validation before main study (discovered: June 13, priority: MEDIUM)
+  - Execute pilot with 5 texts × 5 annotators = 25 HITs using refined corpus
+  - Analyze pilot results for prompt refinement and quality issues
+  - Validate score distributions between refined LLM baseline and human annotators
+  - Refine materials based on pilot feedback and performance metrics
+
+### **Phase 4: Main Study Execution and Quality Control**
+- [ ] **Full Study Launch** - Execute main validation study with quality monitoring (discovered: June 13, priority: MEDIUM)
+  - Launch study: 15-20 refined texts × 4 annotators = 60-80 HITs total
+  - Implement real-time quality monitoring and response validation
+  - Maintain cost management within budget constraints
+  - Monitor inter-rater reliability and flag quality issues
+
+### **Phase 5: Analysis and Academic Documentation**
+- [ ] **Statistical Analysis Implementation** - Comprehensive validation analysis with pre-registered hypotheses (discovered: June 13, priority: MEDIUM)
+  - Calculate inter-rater reliability (ICC) with target ≥0.70 (success ≥0.80)
+  - Measure human-LLM correlation with target ≥0.80 (success ≥0.85)
+  - Conduct score distribution analysis and range utilization assessment
+  - Perform evidence quality thematic analysis of supporting passages
+
+- [ ] **Academic Replication Package Creation** - Complete documentation and reproducibility materials (discovered: June 13, priority: MEDIUM)
+  - Document complete text selection and anonymization process
+  - Create systematic record of prompt adaptation rationale and validation
+  - Prepare anonymized text corpus with metadata for sharing
+  - Develop statistical analysis scripts and validation procedures
+  - Write methodological transparency documentation for publication
+
+- [ ] **Results Integration and Next Phase Planning** - Incorporate validation results into broader research program (discovered: June 13, priority: LOW)
+  - Interpret results against success criteria and academic standards
+  - Document methodological template for computational-human alignment testing
+  - Plan systematic extension to additional framework dimensions
+  - Prepare publication strategy and academic dissemination plan
+
+## 📈 **Academic & Research Enhancements**
+
+- [ ] **R Script Generators** - Cursor-assisted R code for advanced visualization and statistical modeling (discovered: June 13, priority: TBD)
+- [ ] **Stata Integration Scripts** - PyStata workflows for publication-grade statistical analysis (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Bibliography Management** - Automated citation and reference management (discovered: June 13, priority: TBD)
+- [ ] **Cross-Tool Workflow Orchestrator** - Seamless integration between Jupyter, R, and Stata (discovered: June 13, priority: TBD)
+
+## 🎯 **User Experience & Research Process**
+
+- [ ] **Circle Math in Paper Audit** - Ensure mathematical accuracy and academic rigor in paper v1.2.0 (discovered: June 13, priority: TBD)
+- [ ] **User Persona, Story, and Journey Audit** - Validate user experience design against actual research workflows (discovered: June 13, priority: TBD)
+- [ ] **YouTube Ingestion Accuracy Comparison** - Test case: Trump Joint Session Speech analysis accuracy validation (discovered: June 13, priority: TBD)
+- [ ] **Visualization Source of Truth vs Repository Architecture** - Establish clear architecture for visualization code and assets (discovered: June 13, priority: TBD)
+- [ ] **Experiment Design Process** - Formalize systematic approach to framework development and validation (discovered: June 13, priority: TBD)
+
+## 🏗️ **Architecture & Best Practices**
+
+- [ ] **Framework Development Best Practices** - Systematize framework development methodology based on 5 operational frameworks (discovered: June 13, priority: TBD)
+- [ ] **Architecture Refinement** - Improve architecture based on lessons learned from migrations (discovered: June 13, priority: TBD)
+- [ ] **Component Quality Validators** - Automated checks for prompt clarity, framework coherence (discovered: June 13, priority: TBD)
+- [ ] **Development Analytics Dashboard** - Progress tracking and pattern recognition across sessions (discovered: June 13, priority: TBD)
+
+## 📋 **Documentation & Training**
+
+- [ ] **Technical Documentation Updates** - API documentation, database schema docs (discovered: June 13, priority: TBD)
+- [ ] **Process Documentation** - Research workflow guides, quality assurance manuals (discovered: June 13, priority: TBD)
+- [ ] **Training Materials** - Best practices compendium, troubleshooting guides (discovered: June 13, priority: TBD)
+
+---
+
+## **Review Process**
+- **Weekly Review**: During iteration planning, items move from BACKLOG → CURRENT_ITERATION
+- **Priority Assignment**: Items get priority levels (HIGH/MEDIUM/LOW) when moved to current iteration
+- **Archive**: Completed items move to CHANGELOG.md
+
+**Next Review**: June 17, 2025 (next iteration planning)
+
+## **🎯 Recent Additions** (June 13, 2025 Evening)
+- **Future Directions and Research Extensions**: Comprehensive future research agenda demonstrating framework extensibility and academic trajectory positioning
+  - **Temporal Analysis Development** (3 MEDIUM/LOW priority tasks): Temporal category analysis, author evolution tracking, temporal quality assurance enhancement
+  - **Comparative Analysis Documentation** (2 MEDIUM/LOW priority tasks): Systematic text comparison framework, multi-context evaluation methodology
+  - **Integration Strategy** (2 MEDIUM/LOW priority tasks): Unified analytical framework documentation, research program expansion roadmap
+  - **Academic Positioning** (2 MEDIUM/LOW priority tasks): Future directions literature integration, computational discourse analysis advancement positioning
+  - **Community Development** (2 LOW priority tasks): Framework extensibility documentation, research community impact documentation
+  - **Strategic Impact**: Positions framework within broader computational discourse analysis trajectory while demonstrating extensibility and long-term research potential
+
+- **Alternative Validation and Methodological Positioning**: Comprehensive academic positioning framework independent of human validation outcomes
+  - **Methodological Innovation** (3 HIGH/MEDIUM priority tasks): Five-dimensional experimental design documentation, framework-agnostic architecture, computational reproducibility standards
+  - **Algorithmic Consistency** (2 HIGH/MEDIUM priority tasks): Cross-model reliability documentation, algorithmic innovation positioning
+  - **Alternative Validation** (3 MEDIUM/LOW priority tasks): Internal coherence validation, convergent validity approaches, longitudinal consistency analysis
+  - **Academic Positioning** (3 HIGH/MEDIUM priority tasks): Tool development contribution, computational social science methodology advancement, community development strategy
+  - **Practical Applications** (3 MEDIUM/LOW priority tasks): Exploratory analysis positioning, comparative framework documentation, future research trajectory
+  - **Strategic Impact**: Establishes robust academic defensibility and scholarly contribution claims regardless of human validation outcomes
+
+- **Human Validation Research Integration**: Comprehensive paper-writing agenda incorporating extensive human validation research findings
+  - **Literature Integration** (3 HIGH priority tasks): ValiText framework, prompt sensitivity research, computational social science standards
+  - **Methodology Enhancement** (3 HIGH/MEDIUM priority tasks): Validation framework section, quality assurance documentation, LLM-as-a-judge integration
+  - **Academic Defense** (3 HIGH/MEDIUM priority tasks): Strategic decision defense, methodological sophistication positioning, criticism response framework
+  - **Bibliography Enhancement** (2 MEDIUM/LOW priority tasks): Comprehensive citation expansion, academic formatting integration
+  - **Strategic Impact**: Transforms extensive validation research into academically rigorous paper sections with proper citations and methodological defense
+
+- **Theoretical Foundation Research**: Comprehensive research agenda to strengthen academic argument for core methodological innovation
+  - **Literature Reviews** (3 HIGH priority tasks): Spatial metaphors in text analysis, center of mass concepts, circular vs linear coordinate systems
+  - **Academic Development** (3 MEDIUM priority tasks): Bibliography expansion, paper section development, positioning strategy
+  - **Strategic Impact**: Establishes rigorous theoretical foundation for dipole-circular mapping as novel contribution to computational discourse analysis
+  - **Innovation Focus**: Positions center of mass calculation and circular coordinate mapping as unique methodological advances
+
+- **Dynamic Scaling Enhancement**: High-priority enhancement based on strategic analysis in `dynamic_scaling.md`
+  - Platform implementation (HIGH priority)
+  - Paper documentation updates (MEDIUM priority) 
+  - Framework database/filesystem updates (MEDIUM priority)
+  - QA system integration (MEDIUM priority)
+  - **Strategic Impact**: Will maximize visual clarity and analytical precision while preserving mathematical relationships
+
+- **Human Validation Study Implementation**: Critical validation study extraction with LLM-first approach
+  - **Phase 1**: LLM Baseline Development (4 HIGH priority tasks) - Text corpus, LLM prompt development, baseline experiment, results analysis & refinement
+  - **Phase 2**: Human Materials Development (2 MEDIUM priority tasks) - Codebook based on LLM results, human prompt adaptation
+  - **Phase 3**: Human Study Platform Setup (2 MEDIUM priority tasks) - CloudResearch/MTurk config, pilot testing with refined corpus
+  - **Phase 4**: Study Execution (1 MEDIUM priority task) - Full study launch with quality monitoring
+  - **Phase 5**: Analysis & Documentation (2 MEDIUM, 1 LOW priority tasks) - Statistical analysis, replication package, results integration
+  - **Strategic Impact**: Establishes computational-human alignment validation using iterative LLM-first refinement approach
+  - **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
+  - **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
+  - **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
+  - **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
+
+## 🎯 **Dynamic Scaling Enhancement** (Superseded)
+*Reference: `docs/development/planning/strategic/dynamic_scaling.md`*
+
+**✅ STATUS (June 22, 2025)**: This has been superseded by the more comprehensive **Extensible Cartography Plan**. The goal of dynamic scaling is now addressed by the new visualization adapter architecture, which decouples rendering from core analytics and allows for multiple, purpose-built visualization types (UMAP, Radar v2, etc.).
+
+## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
+*Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
+
+**✅ MIGRATION UPDATE** (June 17, 2025): Business Ethics framework successfully migrated from obsolete JSON format to standardized YAML format in research workspace with complete documentation.
+
+**Strategic Justification**: Comprehensive specifications and user guides needed for the research workspace structure and YAML formats validated in the unified asset management prototype. Critical for production integration and researcher adoption.
+
+- [ ] **Research Workspace Specification Documentation** - Create comprehensive technical specification for the research workspace structure and workflows (discovered: June 19, priority: HIGH)
+  - Document complete directory structure: frameworks/, prompt_templates/, weighting_schemes/, experiments/, etc.
+  - Specify YAML format standards for all asset types with complete schema documentation
+  - Include project_manifest.yaml specification with dependency tracking and version management
+  - Document two-tier architecture: development workspace + immutable storage integration
+  - Create technical requirements for hash-based content addressing and provenance tracking
+  - Include migration pathways from legacy JSON formats to new YAML standards
+
+- [ ] **YAML Format Standards and Schema Documentation** - Establish formal standards for all YAML asset formats (discovered: June 19, priority: HIGH)
+  - Create comprehensive schema documentation for framework YAML format with validation rules
+  - Document prompt template YAML structure with methodology integration requirements
+  - Specify weighting scheme YAML format with mathematical constraint validation
+  - Include metadata and provenance tracking YAML schemas
+  - Create validation tools and examples for each YAML format type
+  - Document version evolution and backward compatibility requirements
+
+- [ ] **Research Workspace User Guide** - Create comprehensive user guide for researchers working with the workspace structure (discovered: June 19, priority: HIGH)
+  - Write step-by-step guide for creating new frameworks in YAML format
+  - Document workflow for developing and testing prompt templates
+  - Include best practices for research workspace organization and asset management
+  - Create troubleshooting guide for common YAML format and validation issues
+  - Document integration pathways between research workspace and production systems
+  - Include collaboration workflows and version control best practices
+
+- [ ] **Content-Addressable Storage Integration Guide** - Document the production integration pathway for hash-based asset storage (discovered: June 19, priority: MEDIUM)
+  - Create technical specification for asset_storage/ directory structure and hash algorithms
+  - Document integration with existing FrameworkManager and PromptTemplateManager systems
+  - Specify database schema requirements for asset_versions and asset_provenance tables
+  - Include migration strategy from prototype to production implementation
+  - Document integrity verification and deduplication capabilities
+  - Create troubleshooting guide for hash-based storage and retrieval operations
+
+- [ ] **Framework Portfolio Management Guide** - Document systematic approach to managing diverse framework types (dipole vs non-dipole) (discovered: June 19, priority: MEDIUM)
+  - Create guide for converting legacy JSON frameworks to YAML format
+  - Document framework validation and theoretical coherence testing procedures
+  - Include best practices for framework versioning and iteration management
+  - Specify quality assurance requirements for framework academic documentation
+  - Create comparative analysis guidelines for different framework architectures
+  - Document expert consultation preparation and validation evidence requirements
+
+## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
+*Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
+
+**Strategic Justification**: Multi-layered transaction management system that treats any uncertainty that could compromise experiment validity as grounds for graceful termination and rollback. Ensures zero contaminated results while providing clear user guidance for resolution.
+
+### **Architecture Status Overview**
+- ✅ **Phase 1 Complete**: Framework Transaction Manager - Database-first loading, content change detection, automatic version increment
+- ✅ **Phase 2 Complete**: Data Transaction Manager - Corpus integrity validation, content hash verification, encoding validation
+- ✅ **Phase 2 Complete**: Quality Transaction Manager - Analysis quality thresholds, framework fit validation, statistical significance enforcement
+- 📋 **Phase 3 Planned**: Pipeline Transaction Manager - LLM availability, dependency compatibility, API reliability
+- 📋 **Phase 4 Planned**: Compliance Transaction Manager - Academic compliance, ethical clearance, institutional policy
+
+### **Implementation Follow-up Tasks**
+- [ ] **Enhanced Orchestrator Integration** - Integrate all transaction managers into comprehensive pre-flight validation (discovered: June 17, priority: HIGH)
+  - Update `comprehensive_experiment_orchestrator.py` to use all transaction managers
+  - Implement coordinated rollback across all transaction types
+  - Add transaction-aware error handling with specific guidance
+  - Include transaction metrics in monitoring dashboard
+
+- [ ] **Transaction Integrity Exception Hierarchy** - Implement complete exception hierarchy for different transaction failures (discovered: June 17, priority: MEDIUM)
+  - Create `TransactionIntegrityError` base class
+  - Implement domain-specific exceptions: `FrameworkTransactionIntegrityError`, `DataTransactionIntegrityError`, `QualityTransactionIntegrityError`
+  - Add structured error handling with rollback guidance
+  - Integrate with existing error monitoring systems
+
+- [ ] **Transaction Audit Trail System** - Implement comprehensive audit logging for all transaction decisions (discovered: June 17, priority: MEDIUM)
+  - Add transaction ID tracking across all experiment operations
+  - Store transaction state history in database
+  - Implement query interface for transaction analysis
+  - Create dashboard for transaction success/failure trends
+
+- [ ] **User Experience Enhancement** - Improve transaction failure user experience (discovered: June 17, priority: MEDIUM)
+  - Create user-friendly error messages with specific guidance
+  - Implement step-by-step recovery commands
+  - Add transaction status indicators in CLI
+  - Create transaction integrity validation tools
+
+- [ ] **Documentation and Training** - Complete transaction integrity documentation and training materials (discovered: June 17, priority: LOW)
+  - Update user guides with transaction integrity concepts
+  - Create troubleshooting guide for transaction failures
+  - Add developer documentation for extending transaction managers
+  - Include transaction integrity in academic methodology documentation
+
+## 🔧 **Infrastructure & Performance**
+
+- [ ] **Performance Benchmarking** - Measure visualization generation speed improvements (discovered: June 13, priority: TBD)
+- [ ] **Theme Expansion** - Additional academic themes (journal-specific, conference-specific) (discovered: June 13, priority: TBD)
+- [ ] **Export Format Enhancement** - Additional academic formats (EPS, TIFF for specific journals) (discovered: June 13, priority: TBD)
+- [ ] **Interactive Feature Enhancement** - Advanced hover info, annotation capabilities (discovered: June 13, priority: TBD)
+- [ ] **Framework-Specific Styling** - Custom styling overrides for different framework types (discovered: June 13, priority: TBD)
+
+## 📊 **Testing & Validation**
+
+- [ ] **Comprehensive Test System Review and Optimization** - Stem-to-stern review of all test infrastructure and test data following academic validation completion (discovered: June 19, priority: HIGH)
+  - **Current State Assessment**: 161 test result files (226.4MB) across 22 categories with comprehensive QA validation reports
+  - **Review Scope**: Complete audit of test coverage, test result quality, data organization, and preservation strategies
+  - **Test Data Analysis**: Systematic review of QA test exports (qa_convenience_test/, qa_integration_test/) with validation report quality assessment
+  - **Infrastructure Evaluation**: Assessment of test isolation system, bloat prevention integration, and result preservation effectiveness
+  - **Strategic Justification**: Ensure test infrastructure scales appropriately for production academic validation runs and maintains research-grade quality standards
+  - **Deliverables**: Test strategy optimization, data retention policies, quality metrics enhancement, and comprehensive testing best practices documentation
+  - **Dependencies**: Complete after major academic validation runs to capture lessons learned and scale requirements
+
+- [ ] **Experiment QA System Status Review and Enhancement** - Comprehensive review of discovered experiment QA system capabilities and integration status (discovered: June 19, priority: HIGH)
+  - **Discovery Context**: QA system found operational with comprehensive validation reports, confidence scoring, and multi-format exports during test infrastructure inspection
+  - **System Assessment**: Evaluate QAEnhancedDataExporter, LLMQualityAssuranceSystem (6-layer validation), and ComponentQualityValidator integration status
+  - **Quality Metrics Review**: Analysis of current confidence score statistics (mean: 0.037, all LOW confidence), quality issue detection (10 anomalies, 8 critical issues), and validation effectiveness
+  - **Integration Analysis**: Review QA system integration with orchestrator, export pipeline, and academic validation workflows
+  - **Enhancement Opportunities**: Identify gaps in current QA coverage, threshold optimization, and academic validation integration
+  - **Strategic Justification**: Ensure QA system meets academic rigor standards and provides meaningful quality assurance for research publications
+  - **Deliverables**: QA system status report, enhancement recommendations, integration optimization, and academic validation alignment strategy
+  - **Priority Rationale**: Critical for ensuring research quality and publication readiness of academic validation outputs
+
+- [ ] **Unit Testing Framework** - CLI component tests, database integration tests (discovered: June 13, priority: TBD)
+- [ ] **Integration Testing Suite** - Cross-component compatibility tests (discovered: June 13, priority: TBD)
+- [ ] **Academic Standard Compliance Tests** - Ensure outputs meet publication requirements (discovered: June 13, priority: TBD)
+- [ ] **Statistical Accuracy Validation** - Verify calculations against known benchmarks (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Replication Package Tests** - Include quality metadata validation (discovered: June 13, priority: TBD)
+
+## 🧪 **Human Validation Study Implementation** (High Priority)
+*Reference: `docs/development/planning/specialized/human_validation/human_validation_experiment_approach.md`*
+
+**Strategic Justification**: Critical validation study to establish computational-human alignment in political discourse analysis using strategic single-dipole approach (Dignity vs Tribalism) with anonymous political excerpts.
+
+### **Methodological Design Review and Enhancement**
+*Reference: `docs/project-management/planning/specialized/human_validation/reviewer_feedback_validation_design_gaps.md`*
+
+- [ ] **Integrate Reviewer Feedback on Validation Study Methodology** - Address five critical methodological gaps identified by external reviewer for journal-level acceptance (discovered: December 2024, priority: HIGH)
+  - Implement inter-rater reliability (IRR) metrics: Fleiss' Kappa for 3+ raters, target ≥0.6 (good), ≥0.8 (excellent)
+  - Design stratified rater recruitment across ideological spectrum (liberal, conservative, moderate) to address single-source bias
+  - Add null model baselines: random vector baseline and majority sentiment model for comparative performance
+  - Develop comprehensive rater training protocol with 1-2 page primer, plain-language well definitions, annotated examples
+  - Conduct power analysis for statistical significance: target 100-150 triplets per well for medium effect detection
+  - Strategic decision: Pilot with 3 wells (Dignity/Tribalism, Truth/Fantasy, Justice/Resentment) before full 10-well study
+  - Budget impact: ~$1,500-2,000 for quality diverse rater pool vs original design
+
+### **Phase 1: LLM Baseline Development and Validation**
+*Reordered from Phase 2 to enable iterative refinement before human annotation investment*
+
+- [ ] **Initial Text Corpus Creation** - Develop 15-20 anonymous political excerpts for LLM baseline testing (discovered: June 13, priority: HIGH)
+  - Create 4-5 Dignity pole exemplars (unity, individual worth, respectful disagreement)
+  - Create 4-5 Tribalism pole exemplars (us-vs-them rhetoric without policy substance)
+  - Create 4-5 balanced/moderate cases (policy-focused content with mixed elements)
+  - Create 2-3 edge cases and controls (pure policy, ceremonial speeches, historical documents)
+  - Apply strategic excerpting protocol (400-600 words, metadata removal, context neutralization)
+  - Conduct recognition testing with political science students to ensure anonymity
+
+- [ ] **LLM Prompt Template Development** - Create optimized LLM prompt for Dignity vs Tribalism analysis (discovered: June 13, priority: HIGH)
+  - Create structured LLM prompt template with expert role, definitions, and formatting
+  - Design clear 1-7 scale definitions (1=Strong Tribalism, 7=Strong Dignity)
+  - Include evidence requirement instructions (identify 2-3 supporting passages)
+  - Test prompt clarity and consistency across multiple LLM runs
+
+- [ ] **LLM Baseline Experiment Execution** - Run full computational analysis and iterative refinement (discovered: June 13, priority: HIGH)
+  - Execute LLM analysis on 15-20 anonymous political excerpts using civic virtue framework
+  - Use Dignity vs Tribalism dipole configuration with appropriate weighting scheme
+  - Generate computational scores for all validation texts with evidence passages
+  - Analyze score distributions, range utilization, and differentiation quality
+  - Document LLM parameters (model, temperature, etc.) for reproducibility
+  - Store results in standardized format for human comparison preparation
+
+- [ ] **LLM Results Analysis and Refinement** - Evaluate and optimize LLM performance before human study (discovered: June 13, priority: HIGH)
+  - Analyze score distributions to ensure meaningful differentiation across text types
+  - Evaluate evidence passage quality and relevance to dignity/tribalism distinction
+  - Refine text corpus based on LLM performance (replace low-performing texts)
+  - Optimize prompt template based on consistency and clarity of outputs
+  - Validate that LLM successfully distinguishes expected pole exemplars from balanced cases
+  - Document refinement decisions and rationale for human study design
+
+### **Phase 2: Human Annotation Materials Development**
+*Depends on Phase 1 LLM results for optimal human prompt and corpus design*
+
+- [ ] **Human Annotation Codebook Development** - Create simplified codebook based on refined LLM approach (discovered: June 13, priority: MEDIUM)
+  - Develop clear 1-7 scale definitions adapted from validated LLM prompt
+  - Include concrete examples and boundary cases identified through LLM analysis
+  - Create evidence requirement instructions (1-2 key passages per rating)
+  - Design quality control gold standard cases based on LLM performance patterns
+
+- [ ] **Human Prompt Adaptation** - Create human-optimized version of validated LLM prompt (discovered: June 13, priority: MEDIUM)
+  - Adapt validated LLM prompt structure to conversational human annotation format
+  - Maintain conceptual equivalence while optimizing for human cognitive processing
+  - Include examples and guidance derived from successful LLM analysis patterns
+  - Document systematic adaptation rationale and maintain task equivalence
+
+### **Phase 3: Human Study Platform Setup and Pilot Testing**
+*Uses refined corpus and validated prompts from Phases 1-2*
+
+- [ ] **CloudResearch/MTurk Platform Configuration** - Set up crowdsourcing platform for human annotation study (discovered: June 13, priority: MEDIUM)
+  - Configure CloudResearch/MTurk account with academic verification
+  - Design HIT template with quality control mechanisms and attention checks
+  - Implement real-time quality monitoring and anomaly detection systems
+  - Set up budget controls within $400 allocation
+
+- [ ] **Pilot Study Execution** - Run small-scale validation before main study (discovered: June 13, priority: MEDIUM)
+  - Execute pilot with 5 texts × 5 annotators = 25 HITs using refined corpus
+  - Analyze pilot results for prompt refinement and quality issues
+  - Validate score distributions between refined LLM baseline and human annotators
+  - Refine materials based on pilot feedback and performance metrics
+
+### **Phase 4: Main Study Execution and Quality Control**
+- [ ] **Full Study Launch** - Execute main validation study with quality monitoring (discovered: June 13, priority: MEDIUM)
+  - Launch study: 15-20 refined texts × 4 annotators = 60-80 HITs total
+  - Implement real-time quality monitoring and response validation
+  - Maintain cost management within budget constraints
+  - Monitor inter-rater reliability and flag quality issues
+
+### **Phase 5: Analysis and Academic Documentation**
+- [ ] **Statistical Analysis Implementation** - Comprehensive validation analysis with pre-registered hypotheses (discovered: June 13, priority: MEDIUM)
+  - Calculate inter-rater reliability (ICC) with target ≥0.70 (success ≥0.80)
+  - Measure human-LLM correlation with target ≥0.80 (success ≥0.85)
+  - Conduct score distribution analysis and range utilization assessment
+  - Perform evidence quality thematic analysis of supporting passages
+
+- [ ] **Academic Replication Package Creation** - Complete documentation and reproducibility materials (discovered: June 13, priority: MEDIUM)
+  - Document complete text selection and anonymization process
+  - Create systematic record of prompt adaptation rationale and validation
+  - Prepare anonymized text corpus with metadata for sharing
+  - Develop statistical analysis scripts and validation procedures
+  - Write methodological transparency documentation for publication
+
+- [ ] **Results Integration and Next Phase Planning** - Incorporate validation results into broader research program (discovered: June 13, priority: LOW)
+  - Interpret results against success criteria and academic standards
+  - Document methodological template for computational-human alignment testing
+  - Plan systematic extension to additional framework dimensions
+  - Prepare publication strategy and academic dissemination plan
+
+## 📈 **Academic & Research Enhancements**
+
+- [ ] **R Script Generators** - Cursor-assisted R code for advanced visualization and statistical modeling (discovered: June 13, priority: TBD)
+- [ ] **Stata Integration Scripts** - PyStata workflows for publication-grade statistical analysis (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Bibliography Management** - Automated citation and reference management (discovered: June 13, priority: TBD)
+- [ ] **Cross-Tool Workflow Orchestrator** - Seamless integration between Jupyter, R, and Stata (discovered: June 13, priority: TBD)
+
+## 🎯 **User Experience & Research Process**
+
+- [ ] **Circle Math in Paper Audit** - Ensure mathematical accuracy and academic rigor in paper v1.2.0 (discovered: June 13, priority: TBD)
+- [ ] **User Persona, Story, and Journey Audit** - Validate user experience design against actual research workflows (discovered: June 13, priority: TBD)
+- [ ] **YouTube Ingestion Accuracy Comparison** - Test case: Trump Joint Session Speech analysis accuracy validation (discovered: June 13, priority: TBD)
+- [ ] **Visualization Source of Truth vs Repository Architecture** - Establish clear architecture for visualization code and assets (discovered: June 13, priority: TBD)
+- [ ] **Experiment Design Process** - Formalize systematic approach to framework development and validation (discovered: June 13, priority: TBD)
+
+## 🏗️ **Architecture & Best Practices**
+
+- [ ] **Framework Development Best Practices** - Systematize framework development methodology based on 5 operational frameworks (discovered: June 13, priority: TBD)
+- [ ] **Architecture Refinement** - Improve architecture based on lessons learned from migrations (discovered: June 13, priority: TBD)
+- [ ] **Component Quality Validators** - Automated checks for prompt clarity, framework coherence (discovered: June 13, priority: TBD)
+- [ ] **Development Analytics Dashboard** - Progress tracking and pattern recognition across sessions (discovered: June 13, priority: TBD)
+
+## 📋 **Documentation & Training**
+
+- [ ] **Technical Documentation Updates** - API documentation, database schema docs (discovered: June 13, priority: TBD)
+- [ ] **Process Documentation** - Research workflow guides, quality assurance manuals (discovered: June 13, priority: TBD)
+- [ ] **Training Materials** - Best practices compendium, troubleshooting guides (discovered: June 13, priority: TBD)
+
+---
+
+## **Review Process**
+- **Weekly Review**: During iteration planning, items move from BACKLOG → CURRENT_ITERATION
+- **Priority Assignment**: Items get priority levels (HIGH/MEDIUM/LOW) when moved to current iteration
+- **Archive**: Completed items move to CHANGELOG.md
+
+**Next Review**: June 17, 2025 (next iteration planning)
+
+## **🎯 Recent Additions** (June 13, 2025 Evening)
+- **Future Directions and Research Extensions**: Comprehensive future research agenda demonstrating framework extensibility and academic trajectory positioning
+  - **Temporal Analysis Development** (3 MEDIUM/LOW priority tasks): Temporal category analysis, author evolution tracking, temporal quality assurance enhancement
+  - **Comparative Analysis Documentation** (2 MEDIUM/LOW priority tasks): Systematic text comparison framework, multi-context evaluation methodology
+  - **Integration Strategy** (2 MEDIUM/LOW priority tasks): Unified analytical framework documentation, research program expansion roadmap
+  - **Academic Positioning** (2 MEDIUM/LOW priority tasks): Future directions literature integration, computational discourse analysis advancement positioning
+  - **Community Development** (2 LOW priority tasks): Framework extensibility documentation, research community impact documentation
+  - **Strategic Impact**: Positions framework within broader computational discourse analysis trajectory while demonstrating extensibility and long-term research potential
+
+- **Alternative Validation and Methodological Positioning**: Comprehensive academic positioning framework independent of human validation outcomes
+  - **Methodological Innovation** (3 HIGH/MEDIUM priority tasks): Five-dimensional experimental design documentation, framework-agnostic architecture, computational reproducibility standards
+  - **Algorithmic Consistency** (2 HIGH/MEDIUM priority tasks): Cross-model reliability documentation, algorithmic innovation positioning
+  - **Alternative Validation** (3 MEDIUM/LOW priority tasks): Internal coherence validation, convergent validity approaches, longitudinal consistency analysis
+  - **Academic Positioning** (3 HIGH/MEDIUM priority tasks): Tool development contribution, computational social science methodology advancement, community development strategy
+  - **Practical Applications** (3 MEDIUM/LOW priority tasks): Exploratory analysis positioning, comparative framework documentation, future research trajectory
+  - **Strategic Impact**: Establishes robust academic defensibility and scholarly contribution claims regardless of human validation outcomes
+
+- **Human Validation Research Integration**: Comprehensive paper-writing agenda incorporating extensive human validation research findings
+  - **Literature Integration** (3 HIGH priority tasks): ValiText framework, prompt sensitivity research, computational social science standards
+  - **Methodology Enhancement** (3 HIGH/MEDIUM priority tasks): Validation framework section, quality assurance documentation, LLM-as-a-judge integration
+  - **Academic Defense** (3 HIGH/MEDIUM priority tasks): Strategic decision defense, methodological sophistication positioning, criticism response framework
+  - **Bibliography Enhancement** (2 MEDIUM/LOW priority tasks): Comprehensive citation expansion, academic formatting integration
+  - **Strategic Impact**: Transforms extensive validation research into academically rigorous paper sections with proper citations and methodological defense
+
+- **Theoretical Foundation Research**: Comprehensive research agenda to strengthen academic argument for core methodological innovation
+  - **Literature Reviews** (3 HIGH priority tasks): Spatial metaphors in text analysis, center of mass concepts, circular vs linear coordinate systems
+  - **Academic Development** (3 MEDIUM priority tasks): Bibliography expansion, paper section development, positioning strategy
+  - **Strategic Impact**: Establishes rigorous theoretical foundation for dipole-circular mapping as novel contribution to computational discourse analysis
+  - **Innovation Focus**: Positions center of mass calculation and circular coordinate mapping as unique methodological advances
+
+- **Dynamic Scaling Enhancement**: High-priority enhancement based on strategic analysis in `dynamic_scaling.md`
+  - Platform implementation (HIGH priority)
+  - Paper documentation updates (MEDIUM priority) 
+  - Framework database/filesystem updates (MEDIUM priority)
+  - QA system integration (MEDIUM priority)
+  - **Strategic Impact**: Will maximize visual clarity and analytical precision while preserving mathematical relationships
+
+- **Human Validation Study Implementation**: Critical validation study extraction with LLM-first approach
+  - **Phase 1**: LLM Baseline Development (4 HIGH priority tasks) - Text corpus, LLM prompt development, baseline experiment, results analysis & refinement
+  - **Phase 2**: Human Materials Development (2 MEDIUM priority tasks) - Codebook based on LLM results, human prompt adaptation
+  - **Phase 3**: Human Study Platform Setup (2 MEDIUM priority tasks) - CloudResearch/MTurk config, pilot testing with refined corpus
+  - **Phase 4**: Study Execution (1 MEDIUM priority task) - Full study launch with quality monitoring
+  - **Phase 5**: Analysis & Documentation (2 MEDIUM, 1 LOW priority tasks) - Statistical analysis, replication package, results integration
+  - **Strategic Impact**: Establishes computational-human alignment validation using iterative LLM-first refinement approach
+  - **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
+  - **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
+  - **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
+  - **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
+
+## 🎯 **Dynamic Scaling Enhancement** (Superseded)
+*Reference: `docs/development/planning/strategic/dynamic_scaling.md`*
+
+**✅ STATUS (June 22, 2025)**: This has been superseded by the more comprehensive **Extensible Cartography Plan**. The goal of dynamic scaling is now addressed by the new visualization adapter architecture, which decouples rendering from core analytics and allows for multiple, purpose-built visualization types (UMAP, Radar v2, etc.).
+
+## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
+*Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
+
+**✅ MIGRATION UPDATE** (June 17, 2025): Business Ethics framework successfully migrated from obsolete JSON format to standardized YAML format in research workspace with complete documentation.
+
+**Strategic Justification**: Comprehensive specifications and user guides needed for the research workspace structure and YAML formats validated in the unified asset management prototype. Critical for production integration and researcher adoption.
+
+- [ ] **Research Workspace Specification Documentation** - Create comprehensive technical specification for the research workspace structure and workflows (discovered: June 19, priority: HIGH)
+  - Document complete directory structure: frameworks/, prompt_templates/, weighting_schemes/, experiments/, etc.
+  - Specify YAML format standards for all asset types with complete schema documentation
+  - Include project_manifest.yaml specification with dependency tracking and version management
+  - Document two-tier architecture: development workspace + immutable storage integration
+  - Create technical requirements for hash-based content addressing and provenance tracking
+  - Include migration pathways from legacy JSON formats to new YAML standards
+
+- [ ] **YAML Format Standards and Schema Documentation** - Establish formal standards for all YAML asset formats (discovered: June 19, priority: HIGH)
+  - Create comprehensive schema documentation for framework YAML format with validation rules
+  - Document prompt template YAML structure with methodology integration requirements
+  - Specify weighting scheme YAML format with mathematical constraint validation
+  - Include metadata and provenance tracking YAML schemas
+  - Create validation tools and examples for each YAML format type
+  - Document version evolution and backward compatibility requirements
+
+- [ ] **Research Workspace User Guide** - Create comprehensive user guide for researchers working with the workspace structure (discovered: June 19, priority: HIGH)
+  - Write step-by-step guide for creating new frameworks in YAML format
+  - Document workflow for developing and testing prompt templates
+  - Include best practices for research workspace organization and asset management
+  - Create troubleshooting guide for common YAML format and validation issues
+  - Document integration pathways between research workspace and production systems
+  - Include collaboration workflows and version control best practices
+
+- [ ] **Content-Addressable Storage Integration Guide** - Document the production integration pathway for hash-based asset storage (discovered: June 19, priority: MEDIUM)
+  - Create technical specification for asset_storage/ directory structure and hash algorithms
+  - Document integration with existing FrameworkManager and PromptTemplateManager systems
+  - Specify database schema requirements for asset_versions and asset_provenance tables
+  - Include migration strategy from prototype to production implementation
+  - Document integrity verification and deduplication capabilities
+  - Create troubleshooting guide for hash-based storage and retrieval operations
+
+- [ ] **Framework Portfolio Management Guide** - Document systematic approach to managing diverse framework types (dipole vs non-dipole) (discovered: June 19, priority: MEDIUM)
+  - Create guide for converting legacy JSON frameworks to YAML format
+  - Document framework validation and theoretical coherence testing procedures
+  - Include best practices for framework versioning and iteration management
+  - Specify quality assurance requirements for framework academic documentation
+  - Create comparative analysis guidelines for different framework architectures
+  - Document expert consultation preparation and validation evidence requirements
+
+## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
+*Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
+
+**Strategic Justification**: Multi-layered transaction management system that treats any uncertainty that could compromise experiment validity as grounds for graceful termination and rollback. Ensures zero contaminated results while providing clear user guidance for resolution.
+
+### **Architecture Status Overview**
+- ✅ **Phase 1 Complete**: Framework Transaction Manager - Database-first loading, content change detection, automatic version increment
+- ✅ **Phase 2 Complete**: Data Transaction Manager - Corpus integrity validation, content hash verification, encoding validation
+- ✅ **Phase 2 Complete**: Quality Transaction Manager - Analysis quality thresholds, framework fit validation, statistical significance enforcement
+- 📋 **Phase 3 Planned**: Pipeline Transaction Manager - LLM availability, dependency compatibility, API reliability
+- 📋 **Phase 4 Planned**: Compliance Transaction Manager - Academic compliance, ethical clearance, institutional policy
+
+### **Implementation Follow-up Tasks**
+- [ ] **Enhanced Orchestrator Integration** - Integrate all transaction managers into comprehensive pre-flight validation (discovered: June 17, priority: HIGH)
+  - Update `comprehensive_experiment_orchestrator.py` to use all transaction managers
+  - Implement coordinated rollback across all transaction types
+  - Add transaction-aware error handling with specific guidance
+  - Include transaction metrics in monitoring dashboard
+
+- [ ] **Transaction Integrity Exception Hierarchy** - Implement complete exception hierarchy for different transaction failures (discovered: June 17, priority: MEDIUM)
+  - Create `TransactionIntegrityError` base class
+  - Implement domain-specific exceptions: `FrameworkTransactionIntegrityError`, `DataTransactionIntegrityError`, `QualityTransactionIntegrityError`
+  - Add structured error handling with rollback guidance
+  - Integrate with existing error monitoring systems
+
+- [ ] **Transaction Audit Trail System** - Implement comprehensive audit logging for all transaction decisions (discovered: June 17, priority: MEDIUM)
+  - Add transaction ID tracking across all experiment operations
+  - Store transaction state history in database
+  - Implement query interface for transaction analysis
+  - Create dashboard for transaction success/failure trends
+
+- [ ] **User Experience Enhancement** - Improve transaction failure user experience (discovered: June 17, priority: MEDIUM)
+  - Create user-friendly error messages with specific guidance
+  - Implement step-by-step recovery commands
+  - Add transaction status indicators in CLI
+  - Create transaction integrity validation tools
+
+- [ ] **Documentation and Training** - Complete transaction integrity documentation and training materials (discovered: June 17, priority: LOW)
+  - Update user guides with transaction integrity concepts
+  - Create troubleshooting guide for transaction failures
+  - Add developer documentation for extending transaction managers
+  - Include transaction integrity in academic methodology documentation
+
+## 🔧 **Infrastructure & Performance**
+
+- [ ] **Performance Benchmarking** - Measure visualization generation speed improvements (discovered: June 13, priority: TBD)
+- [ ] **Theme Expansion** - Additional academic themes (journal-specific, conference-specific) (discovered: June 13, priority: TBD)
+- [ ] **Export Format Enhancement** - Additional academic formats (EPS, TIFF for specific journals) (discovered: June 13, priority: TBD)
+- [ ] **Interactive Feature Enhancement** - Advanced hover info, annotation capabilities (discovered: June 13, priority: TBD)
+- [ ] **Framework-Specific Styling** - Custom styling overrides for different framework types (discovered: June 13, priority: TBD)
+
+## 📊 **Testing & Validation**
+
+- [ ] **Comprehensive Test System Review and Optimization** - Stem-to-stern review of all test infrastructure and test data following academic validation completion (discovered: June 19, priority: HIGH)
+  - **Current State Assessment**: 161 test result files (226.4MB) across 22 categories with comprehensive QA validation reports
+  - **Review Scope**: Complete audit of test coverage, test result quality, data organization, and preservation strategies
+  - **Test Data Analysis**: Systematic review of QA test exports (qa_convenience_test/, qa_integration_test/) with validation report quality assessment
+  - **Infrastructure Evaluation**: Assessment of test isolation system, bloat prevention integration, and result preservation effectiveness
+  - **Strategic Justification**: Ensure test infrastructure scales appropriately for production academic validation runs and maintains research-grade quality standards
+  - **Deliverables**: Test strategy optimization, data retention policies, quality metrics enhancement, and comprehensive testing best practices documentation
+  - **Dependencies**: Complete after major academic validation runs to capture lessons learned and scale requirements
+
+- [ ] **Experiment QA System Status Review and Enhancement** - Comprehensive review of discovered experiment QA system capabilities and integration status (discovered: June 19, priority: HIGH)
+  - **Discovery Context**: QA system found operational with comprehensive validation reports, confidence scoring, and multi-format exports during test infrastructure inspection
+  - **System Assessment**: Evaluate QAEnhancedDataExporter, LLMQualityAssuranceSystem (6-layer validation), and ComponentQualityValidator integration status
+  - **Quality Metrics Review**: Analysis of current confidence score statistics (mean: 0.037, all LOW confidence), quality issue detection (10 anomalies, 8 critical issues), and validation effectiveness
+  - **Integration Analysis**: Review QA system integration with orchestrator, export pipeline, and academic validation workflows
+  - **Enhancement Opportunities**: Identify gaps in current QA coverage, threshold optimization, and academic validation integration
+  - **Strategic Justification**: Ensure QA system meets academic rigor standards and provides meaningful quality assurance for research publications
+  - **Deliverables**: QA system status report, enhancement recommendations, integration optimization, and academic validation alignment strategy
+  - **Priority Rationale**: Critical for ensuring research quality and publication readiness of academic validation outputs
+
+- [ ] **Unit Testing Framework** - CLI component tests, database integration tests (discovered: June 13, priority: TBD)
+- [ ] **Integration Testing Suite** - Cross-component compatibility tests (discovered: June 13, priority: TBD)
+- [ ] **Academic Standard Compliance Tests** - Ensure outputs meet publication requirements (discovered: June 13, priority: TBD)
+- [ ] **Statistical Accuracy Validation** - Verify calculations against known benchmarks (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Replication Package Tests** - Include quality metadata validation (discovered: June 13, priority: TBD)
+
+## 🧪 **Human Validation Study Implementation** (High Priority)
+*Reference: `docs/development/planning/specialized/human_validation/human_validation_experiment_approach.md`*
+
+**Strategic Justification**: Critical validation study to establish computational-human alignment in political discourse analysis using strategic single-dipole approach (Dignity vs Tribalism) with anonymous political excerpts.
+
+### **Methodological Design Review and Enhancement**
+*Reference: `docs/project-management/planning/specialized/human_validation/reviewer_feedback_validation_design_gaps.md`*
+
+- [ ] **Integrate Reviewer Feedback on Validation Study Methodology** - Address five critical methodological gaps identified by external reviewer for journal-level acceptance (discovered: December 2024, priority: HIGH)
+  - Implement inter-rater reliability (IRR) metrics: Fleiss' Kappa for 3+ raters, target ≥0.6 (good), ≥0.8 (excellent)
+  - Design stratified rater recruitment across ideological spectrum (liberal, conservative, moderate) to address single-source bias
+  - Add null model baselines: random vector baseline and majority sentiment model for comparative performance
+  - Develop comprehensive rater training protocol with 1-2 page primer, plain-language well definitions, annotated examples
+  - Conduct power analysis for statistical significance: target 100-150 triplets per well for medium effect detection
+  - Strategic decision: Pilot with 3 wells (Dignity/Tribalism, Truth/Fantasy, Justice/Resentment) before full 10-well study
+  - Budget impact: ~$1,500-2,000 for quality diverse rater pool vs original design
+
+### **Phase 1: LLM Baseline Development and Validation**
+*Reordered from Phase 2 to enable iterative refinement before human annotation investment*
+
+- [ ] **Initial Text Corpus Creation** - Develop 15-20 anonymous political excerpts for LLM baseline testing (discovered: June 13, priority: HIGH)
+  - Create 4-5 Dignity pole exemplars (unity, individual worth, respectful disagreement)
+  - Create 4-5 Tribalism pole exemplars (us-vs-them rhetoric without policy substance)
+  - Create 4-5 balanced/moderate cases (policy-focused content with mixed elements)
+  - Create 2-3 edge cases and controls (pure policy, ceremonial speeches, historical documents)
+  - Apply strategic excerpting protocol (400-600 words, metadata removal, context neutralization)
+  - Conduct recognition testing with political science students to ensure anonymity
+
+- [ ] **LLM Prompt Template Development** - Create optimized LLM prompt for Dignity vs Tribalism analysis (discovered: June 13, priority: HIGH)
+  - Create structured LLM prompt template with expert role, definitions, and formatting
+  - Design clear 1-7 scale definitions (1=Strong Tribalism, 7=Strong Dignity)
+  - Include evidence requirement instructions (identify 2-3 supporting passages)
+  - Test prompt clarity and consistency across multiple LLM runs
+
+- [ ] **LLM Baseline Experiment Execution** - Run full computational analysis and iterative refinement (discovered: June 13, priority: HIGH)
+  - Execute LLM analysis on 15-20 anonymous political excerpts using civic virtue framework
+  - Use Dignity vs Tribalism dipole configuration with appropriate weighting scheme
+  - Generate computational scores for all validation texts with evidence passages
+  - Analyze score distributions, range utilization, and differentiation quality
+  - Document LLM parameters (model, temperature, etc.) for reproducibility
+  - Store results in standardized format for human comparison preparation
+
+- [ ] **LLM Results Analysis and Refinement** - Evaluate and optimize LLM performance before human study (discovered: June 13, priority: HIGH)
+  - Analyze score distributions to ensure meaningful differentiation across text types
+  - Evaluate evidence passage quality and relevance to dignity/tribalism distinction
+  - Refine text corpus based on LLM performance (replace low-performing texts)
+  - Optimize prompt template based on consistency and clarity of outputs
+  - Validate that LLM successfully distinguishes expected pole exemplars from balanced cases
+  - Document refinement decisions and rationale for human study design
+
+### **Phase 2: Human Annotation Materials Development**
+*Depends on Phase 1 LLM results for optimal human prompt and corpus design*
+
+- [ ] **Human Annotation Codebook Development** - Create simplified codebook based on refined LLM approach (discovered: June 13, priority: MEDIUM)
+  - Develop clear 1-7 scale definitions adapted from validated LLM prompt
+  - Include concrete examples and boundary cases identified through LLM analysis
+  - Create evidence requirement instructions (1-2 key passages per rating)
+  - Design quality control gold standard cases based on LLM performance patterns
+
+- [ ] **Human Prompt Adaptation** - Create human-optimized version of validated LLM prompt (discovered: June 13, priority: MEDIUM)
+  - Adapt validated LLM prompt structure to conversational human annotation format
+  - Maintain conceptual equivalence while optimizing for human cognitive processing
+  - Include examples and guidance derived from successful LLM analysis patterns
+  - Document systematic adaptation rationale and maintain task equivalence
+
+### **Phase 3: Human Study Platform Setup and Pilot Testing**
+*Uses refined corpus and validated prompts from Phases 1-2*
+
+- [ ] **CloudResearch/MTurk Platform Configuration** - Set up crowdsourcing platform for human annotation study (discovered: June 13, priority: MEDIUM)
+  - Configure CloudResearch/MTurk account with academic verification
+  - Design HIT template with quality control mechanisms and attention checks
+  - Implement real-time quality monitoring and anomaly detection systems
+  - Set up budget controls within $400 allocation
+
+- [ ] **Pilot Study Execution** - Run small-scale validation before main study (discovered: June 13, priority: MEDIUM)
+  - Execute pilot with 5 texts × 5 annotators = 25 HITs using refined corpus
+  - Analyze pilot results for prompt refinement and quality issues
+  - Validate score distributions between refined LLM baseline and human annotators
+  - Refine materials based on pilot feedback and performance metrics
+
+### **Phase 4: Main Study Execution and Quality Control**
+- [ ] **Full Study Launch** - Execute main validation study with quality monitoring (discovered: June 13, priority: MEDIUM)
+  - Launch study: 15-20 refined texts × 4 annotators = 60-80 HITs total
+  - Implement real-time quality monitoring and response validation
+  - Maintain cost management within budget constraints
+  - Monitor inter-rater reliability and flag quality issues
+
+### **Phase 5: Analysis and Academic Documentation**
+- [ ] **Statistical Analysis Implementation** - Comprehensive validation analysis with pre-registered hypotheses (discovered: June 13, priority: MEDIUM)
+  - Calculate inter-rater reliability (ICC) with target ≥0.70 (success ≥0.80)
+  - Measure human-LLM correlation with target ≥0.80 (success ≥0.85)
+  - Conduct score distribution analysis and range utilization assessment
+  - Perform evidence quality thematic analysis of supporting passages
+
+- [ ] **Academic Replication Package Creation** - Complete documentation and reproducibility materials (discovered: June 13, priority: MEDIUM)
+  - Document complete text selection and anonymization process
+  - Create systematic record of prompt adaptation rationale and validation
+  - Prepare anonymized text corpus with metadata for sharing
+  - Develop statistical analysis scripts and validation procedures
+  - Write methodological transparency documentation for publication
+
+- [ ] **Results Integration and Next Phase Planning** - Incorporate validation results into broader research program (discovered: June 13, priority: LOW)
+  - Interpret results against success criteria and academic standards
+  - Document methodological template for computational-human alignment testing
+  - Plan systematic extension to additional framework dimensions
+  - Prepare publication strategy and academic dissemination plan
+
+## 📈 **Academic & Research Enhancements**
+
+- [ ] **R Script Generators** - Cursor-assisted R code for advanced visualization and statistical modeling (discovered: June 13, priority: TBD)
+- [ ] **Stata Integration Scripts** - PyStata workflows for publication-grade statistical analysis (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Bibliography Management** - Automated citation and reference management (discovered: June 13, priority: TBD)
+- [ ] **Cross-Tool Workflow Orchestrator** - Seamless integration between Jupyter, R, and Stata (discovered: June 13, priority: TBD)
+
+## 🎯 **User Experience & Research Process**
+
+- [ ] **Circle Math in Paper Audit** - Ensure mathematical accuracy and academic rigor in paper v1.2.0 (discovered: June 13, priority: TBD)
+- [ ] **User Persona, Story, and Journey Audit** - Validate user experience design against actual research workflows (discovered: June 13, priority: TBD)
+- [ ] **YouTube Ingestion Accuracy Comparison** - Test case: Trump Joint Session Speech analysis accuracy validation (discovered: June 13, priority: TBD)
+- [ ] **Visualization Source of Truth vs Repository Architecture** - Establish clear architecture for visualization code and assets (discovered: June 13, priority: TBD)
+- [ ] **Experiment Design Process** - Formalize systematic approach to framework development and validation (discovered: June 13, priority: TBD)
+
+## 🏗️ **Architecture & Best Practices**
+
+- [ ] **Framework Development Best Practices** - Systematize framework development methodology based on 5 operational frameworks (discovered: June 13, priority: TBD)
+- [ ] **Architecture Refinement** - Improve architecture based on lessons learned from migrations (discovered: June 13, priority: TBD)
+- [ ] **Component Quality Validators** - Automated checks for prompt clarity, framework coherence (discovered: June 13, priority: TBD)
+- [ ] **Development Analytics Dashboard** - Progress tracking and pattern recognition across sessions (discovered: June 13, priority: TBD)
+
+## 📋 **Documentation & Training**
+
+- [ ] **Technical Documentation Updates** - API documentation, database schema docs (discovered: June 13, priority: TBD)
+- [ ] **Process Documentation** - Research workflow guides, quality assurance manuals (discovered: June 13, priority: TBD)
+- [ ] **Training Materials** - Best practices compendium, troubleshooting guides (discovered: June 13, priority: TBD)
+
+---
+
+## **Review Process**
+- **Weekly Review**: During iteration planning, items move from BACKLOG → CURRENT_ITERATION
+- **Priority Assignment**: Items get priority levels (HIGH/MEDIUM/LOW) when moved to current iteration
+- **Archive**: Completed items move to CHANGELOG.md
+
+**Next Review**: June 17, 2025 (next iteration planning)
+
+## **🎯 Recent Additions** (June 13, 2025 Evening)
+- **Future Directions and Research Extensions**: Comprehensive future research agenda demonstrating framework extensibility and academic trajectory positioning
+  - **Temporal Analysis Development** (3 MEDIUM/LOW priority tasks): Temporal category analysis, author evolution tracking, temporal quality assurance enhancement
+  - **Comparative Analysis Documentation** (2 MEDIUM/LOW priority tasks): Systematic text comparison framework, multi-context evaluation methodology
+  - **Integration Strategy** (2 MEDIUM/LOW priority tasks): Unified analytical framework documentation, research program expansion roadmap
+  - **Academic Positioning** (2 MEDIUM/LOW priority tasks): Future directions literature integration, computational discourse analysis advancement positioning
+  - **Community Development** (2 LOW priority tasks): Framework extensibility documentation, research community impact documentation
+  - **Strategic Impact**: Positions framework within broader computational discourse analysis trajectory while demonstrating extensibility and long-term research potential
+
+- **Alternative Validation and Methodological Positioning**: Comprehensive academic positioning framework independent of human validation outcomes
+  - **Methodological Innovation** (3 HIGH/MEDIUM priority tasks): Five-dimensional experimental design documentation, framework-agnostic architecture, computational reproducibility standards
+  - **Algorithmic Consistency** (2 HIGH/MEDIUM priority tasks): Cross-model reliability documentation, algorithmic innovation positioning
+  - **Alternative Validation** (3 MEDIUM/LOW priority tasks): Internal coherence validation, convergent validity approaches, longitudinal consistency analysis
+  - **Academic Positioning** (3 HIGH/MEDIUM priority tasks): Tool development contribution, computational social science methodology advancement, community development strategy
+  - **Practical Applications** (3 MEDIUM/LOW priority tasks): Exploratory analysis positioning, comparative framework documentation, future research trajectory
+  - **Strategic Impact**: Establishes robust academic defensibility and scholarly contribution claims regardless of human validation outcomes
+
+- **Human Validation Research Integration**: Comprehensive paper-writing agenda incorporating extensive human validation research findings
+  - **Literature Integration** (3 HIGH priority tasks): ValiText framework, prompt sensitivity research, computational social science standards
+  - **Methodology Enhancement** (3 HIGH/MEDIUM priority tasks): Validation framework section, quality assurance documentation, LLM-as-a-judge integration
+  - **Academic Defense** (3 HIGH/MEDIUM priority tasks): Strategic decision defense, methodological sophistication positioning, criticism response framework
+  - **Bibliography Enhancement** (2 MEDIUM/LOW priority tasks): Comprehensive citation expansion, academic formatting integration
+  - **Strategic Impact**: Transforms extensive validation research into academically rigorous paper sections with proper citations and methodological defense
+
+- **Theoretical Foundation Research**: Comprehensive research agenda to strengthen academic argument for core methodological innovation
+  - **Literature Reviews** (3 HIGH priority tasks): Spatial metaphors in text analysis, center of mass concepts, circular vs linear coordinate systems
+  - **Academic Development** (3 MEDIUM priority tasks): Bibliography expansion, paper section development, positioning strategy
+  - **Strategic Impact**: Establishes rigorous theoretical foundation for dipole-circular mapping as novel contribution to computational discourse analysis
+  - **Innovation Focus**: Positions center of mass calculation and circular coordinate mapping as unique methodological advances
+
+- **Dynamic Scaling Enhancement**: High-priority enhancement based on strategic analysis in `dynamic_scaling.md`
+  - Platform implementation (HIGH priority)
+  - Paper documentation updates (MEDIUM priority) 
+  - Framework database/filesystem updates (MEDIUM priority)
+  - QA system integration (MEDIUM priority)
+  - **Strategic Impact**: Will maximize visual clarity and analytical precision while preserving mathematical relationships
+
+- **Human Validation Study Implementation**: Critical validation study extraction with LLM-first approach
+  - **Phase 1**: LLM Baseline Development (4 HIGH priority tasks) - Text corpus, LLM prompt development, baseline experiment, results analysis & refinement
+  - **Phase 2**: Human Materials Development (2 MEDIUM priority tasks) - Codebook based on LLM results, human prompt adaptation
+  - **Phase 3**: Human Study Platform Setup (2 MEDIUM priority tasks) - CloudResearch/MTurk config, pilot testing with refined corpus
+  - **Phase 4**: Study Execution (1 MEDIUM priority task) - Full study launch with quality monitoring
+  - **Phase 5**: Analysis & Documentation (2 MEDIUM, 1 LOW priority tasks) - Statistical analysis, replication package, results integration
+  - **Strategic Impact**: Establishes computational-human alignment validation using iterative LLM-first refinement approach
+  - **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
+  - **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
+  - **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
+  - **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
+
+## 🎯 **Dynamic Scaling Enhancement** (Superseded)
+*Reference: `docs/development/planning/strategic/dynamic_scaling.md`*
+
+**✅ STATUS (June 22, 2025)**: This has been superseded by the more comprehensive **Extensible Cartography Plan**. The goal of dynamic scaling is now addressed by the new visualization adapter architecture, which decouples rendering from core analytics and allows for multiple, purpose-built visualization types (UMAP, Radar v2, etc.).
+
+## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
+*Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
+
+**✅ MIGRATION UPDATE** (June 17, 2025): Business Ethics framework successfully migrated from obsolete JSON format to standardized YAML format in research workspace with complete documentation.
+
+**Strategic Justification**: Comprehensive specifications and user guides needed for the research workspace structure and YAML formats validated in the unified asset management prototype. Critical for production integration and researcher adoption.
+
+- [ ] **Research Workspace Specification Documentation** - Create comprehensive technical specification for the research workspace structure and workflows (discovered: June 19, priority: HIGH)
+  - Document complete directory structure: frameworks/, prompt_templates/, weighting_schemes/, experiments/, etc.
+  - Specify YAML format standards for all asset types with complete schema documentation
+  - Include project_manifest.yaml specification with dependency tracking and version management
+  - Document two-tier architecture: development workspace + immutable storage integration
+  - Create technical requirements for hash-based content addressing and provenance tracking
+  - Include migration pathways from legacy JSON formats to new YAML standards
+
+- [ ] **YAML Format Standards and Schema Documentation** - Establish formal standards for all YAML asset formats (discovered: June 19, priority: HIGH)
+  - Create comprehensive schema documentation for framework YAML format with validation rules
+  - Document prompt template YAML structure with methodology integration requirements
+  - Specify weighting scheme YAML format with mathematical constraint validation
+  - Include metadata and provenance tracking YAML schemas
+  - Create validation tools and examples for each YAML format type
+  - Document version evolution and backward compatibility requirements
+
+- [ ] **Research Workspace User Guide** - Create comprehensive user guide for researchers working with the workspace structure (discovered: June 19, priority: HIGH)
+  - Write step-by-step guide for creating new frameworks in YAML format
+  - Document workflow for developing and testing prompt templates
+  - Include best practices for research workspace organization and asset management
+  - Create troubleshooting guide for common YAML format and validation issues
+  - Document integration pathways between research workspace and production systems
+  - Include collaboration workflows and version control best practices
+
+- [ ] **Content-Addressable Storage Integration Guide** - Document the production integration pathway for hash-based asset storage (discovered: June 19, priority: MEDIUM)
+  - Create technical specification for asset_storage/ directory structure and hash algorithms
+  - Document integration with existing FrameworkManager and PromptTemplateManager systems
+  - Specify database schema requirements for asset_versions and asset_provenance tables
+  - Include migration strategy from prototype to production implementation
+  - Document integrity verification and deduplication capabilities
+  - Create troubleshooting guide for hash-based storage and retrieval operations
+
+- [ ] **Framework Portfolio Management Guide** - Document systematic approach to managing diverse framework types (dipole vs non-dipole) (discovered: June 19, priority: MEDIUM)
+  - Create guide for converting legacy JSON frameworks to YAML format
+  - Document framework validation and theoretical coherence testing procedures
+  - Include best practices for framework versioning and iteration management
+  - Specify quality assurance requirements for framework academic documentation
+  - Create comparative analysis guidelines for different framework architectures
+  - Document expert consultation preparation and validation evidence requirements
+
+## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
+*Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
+
+**Strategic Justification**: Multi-layered transaction management system that treats any uncertainty that could compromise experiment validity as grounds for graceful termination and rollback. Ensures zero contaminated results while providing clear user guidance for resolution.
+
+### **Architecture Status Overview**
+- ✅ **Phase 1 Complete**: Framework Transaction Manager - Database-first loading, content change detection, automatic version increment
+- ✅ **Phase 2 Complete**: Data Transaction Manager - Corpus integrity validation, content hash verification, encoding validation
+- ✅ **Phase 2 Complete**: Quality Transaction Manager - Analysis quality thresholds, framework fit validation, statistical significance enforcement
+- 📋 **Phase 3 Planned**: Pipeline Transaction Manager - LLM availability, dependency compatibility, API reliability
+- 📋 **Phase 4 Planned**: Compliance Transaction Manager - Academic compliance, ethical clearance, institutional policy
+
+### **Implementation Follow-up Tasks**
+- [ ] **Enhanced Orchestrator Integration** - Integrate all transaction managers into comprehensive pre-flight validation (discovered: June 17, priority: HIGH)
+  - Update `comprehensive_experiment_orchestrator.py` to use all transaction managers
+  - Implement coordinated rollback across all transaction types
+  - Add transaction-aware error handling with specific guidance
+  - Include transaction metrics in monitoring dashboard
+
+- [ ] **Transaction Integrity Exception Hierarchy** - Implement complete exception hierarchy for different transaction failures (discovered: June 17, priority: MEDIUM)
+  - Create `TransactionIntegrityError` base class
+  - Implement domain-specific exceptions: `FrameworkTransactionIntegrityError`, `DataTransactionIntegrityError`, `QualityTransactionIntegrityError`
+  - Add structured error handling with rollback guidance
+  - Integrate with existing error monitoring systems
+
+- [ ] **Transaction Audit Trail System** - Implement comprehensive audit logging for all transaction decisions (discovered: June 17, priority: MEDIUM)
+  - Add transaction ID tracking across all experiment operations
+  - Store transaction state history in database
+  - Implement query interface for transaction analysis
+  - Create dashboard for transaction success/failure trends
+
+- [ ] **User Experience Enhancement** - Improve transaction failure user experience (discovered: June 17, priority: MEDIUM)
+  - Create user-friendly error messages with specific guidance
+  - Implement step-by-step recovery commands
+  - Add transaction status indicators in CLI
+  - Create transaction integrity validation tools
+
+- [ ] **Documentation and Training** - Complete transaction integrity documentation and training materials (discovered: June 17, priority: LOW)
+  - Update user guides with transaction integrity concepts
+  - Create troubleshooting guide for transaction failures
+  - Add developer documentation for extending transaction managers
+  - Include transaction integrity in academic methodology documentation
+
+## 🔧 **Infrastructure & Performance**
+
+- [ ] **Performance Benchmarking** - Measure visualization generation speed improvements (discovered: June 13, priority: TBD)
+- [ ] **Theme Expansion** - Additional academic themes (journal-specific, conference-specific) (discovered: June 13, priority: TBD)
+- [ ] **Export Format Enhancement** - Additional academic formats (EPS, TIFF for specific journals) (discovered: June 13, priority: TBD)
+- [ ] **Interactive Feature Enhancement** - Advanced hover info, annotation capabilities (discovered: June 13, priority: TBD)
+- [ ] **Framework-Specific Styling** - Custom styling overrides for different framework types (discovered: June 13, priority: TBD)
+
+## 📊 **Testing & Validation**
+
+- [ ] **Comprehensive Test System Review and Optimization** - Stem-to-stern review of all test infrastructure and test data following academic validation completion (discovered: June 19, priority: HIGH)
+  - **Current State Assessment**: 161 test result files (226.4MB) across 22 categories with comprehensive QA validation reports
+  - **Review Scope**: Complete audit of test coverage, test result quality, data organization, and preservation strategies
+  - **Test Data Analysis**: Systematic review of QA test exports (qa_convenience_test/, qa_integration_test/) with validation report quality assessment
+  - **Infrastructure Evaluation**: Assessment of test isolation system, bloat prevention integration, and result preservation effectiveness
+  - **Strategic Justification**: Ensure test infrastructure scales appropriately for production academic validation runs and maintains research-grade quality standards
+  - **Deliverables**: Test strategy optimization, data retention policies, quality metrics enhancement, and comprehensive testing best practices documentation
+  - **Dependencies**: Complete after major academic validation runs to capture lessons learned and scale requirements
+
+- [ ] **Experiment QA System Status Review and Enhancement** - Comprehensive review of discovered experiment QA system capabilities and integration status (discovered: June 19, priority: HIGH)
+  - **Discovery Context**: QA system found operational with comprehensive validation reports, confidence scoring, and multi-format exports during test infrastructure inspection
+  - **System Assessment**: Evaluate QAEnhancedDataExporter, LLMQualityAssuranceSystem (6-layer validation), and ComponentQualityValidator integration status
+  - **Quality Metrics Review**: Analysis of current confidence score statistics (mean: 0.037, all LOW confidence), quality issue detection (10 anomalies, 8 critical issues), and validation effectiveness
+  - **Integration Analysis**: Review QA system integration with orchestrator, export pipeline, and academic validation workflows
+  - **Enhancement Opportunities**: Identify gaps in current QA coverage, threshold optimization, and academic validation integration
+  - **Strategic Justification**: Ensure QA system meets academic rigor standards and provides meaningful quality assurance for research publications
+  - **Deliverables**: QA system status report, enhancement recommendations, integration optimization, and academic validation alignment strategy
+  - **Priority Rationale**: Critical for ensuring research quality and publication readiness of academic validation outputs
+
+- [ ] **Unit Testing Framework** - CLI component tests, database integration tests (discovered: June 13, priority: TBD)
+- [ ] **Integration Testing Suite** - Cross-component compatibility tests (discovered: June 13, priority: TBD)
+- [ ] **Academic Standard Compliance Tests** - Ensure outputs meet publication requirements (discovered: June 13, priority: TBD)
+- [ ] **Statistical Accuracy Validation** - Verify calculations against known benchmarks (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Replication Package Tests** - Include quality metadata validation (discovered: June 13, priority: TBD)
+
+## 🧪 **Human Validation Study Implementation** (High Priority)
+*Reference: `docs/development/planning/specialized/human_validation/human_validation_experiment_approach.md`*
+
+**Strategic Justification**: Critical validation study to establish computational-human alignment in political discourse analysis using strategic single-dipole approach (Dignity vs Tribalism) with anonymous political excerpts.
+
+### **Methodological Design Review and Enhancement**
+*Reference: `docs/project-management/planning/specialized/human_validation/reviewer_feedback_validation_design_gaps.md`*
+
+- [ ] **Integrate Reviewer Feedback on Validation Study Methodology** - Address five critical methodological gaps identified by external reviewer for journal-level acceptance (discovered: December 2024, priority: HIGH)
+  - Implement inter-rater reliability (IRR) metrics: Fleiss' Kappa for 3+ raters, target ≥0.6 (good), ≥0.8 (excellent)
+  - Design stratified rater recruitment across ideological spectrum (liberal, conservative, moderate) to address single-source bias
+  - Add null model baselines: random vector baseline and majority sentiment model for comparative performance
+  - Develop comprehensive rater training protocol with 1-2 page primer, plain-language well definitions, annotated examples
+  - Conduct power analysis for statistical significance: target 100-150 triplets per well for medium effect detection
+  - Strategic decision: Pilot with 3 wells (Dignity/Tribalism, Truth/Fantasy, Justice/Resentment) before full 10-well study
+  - Budget impact: ~$1,500-2,000 for quality diverse rater pool vs original design
+
+### **Phase 1: LLM Baseline Development and Validation**
+*Reordered from Phase 2 to enable iterative refinement before human annotation investment*
+
+- [ ] **Initial Text Corpus Creation** - Develop 15-20 anonymous political excerpts for LLM baseline testing (discovered: June 13, priority: HIGH)
+  - Create 4-5 Dignity pole exemplars (unity, individual worth, respectful disagreement)
+  - Create 4-5 Tribalism pole exemplars (us-vs-them rhetoric without policy substance)
+  - Create 4-5 balanced/moderate cases (policy-focused content with mixed elements)
+  - Create 2-3 edge cases and controls (pure policy, ceremonial speeches, historical documents)
+  - Apply strategic excerpting protocol (400-600 words, metadata removal, context neutralization)
+  - Conduct recognition testing with political science students to ensure anonymity
+
+- [ ] **LLM Prompt Template Development** - Create optimized LLM prompt for Dignity vs Tribalism analysis (discovered: June 13, priority: HIGH)
+  - Create structured LLM prompt template with expert role, definitions, and formatting
+  - Design clear 1-7 scale definitions (1=Strong Tribalism, 7=Strong Dignity)
+  - Include evidence requirement instructions (identify 2-3 supporting passages)
+  - Test prompt clarity and consistency across multiple LLM runs
+
+- [ ] **LLM Baseline Experiment Execution** - Run full computational analysis and iterative refinement (discovered: June 13, priority: HIGH)
+  - Execute LLM analysis on 15-20 anonymous political excerpts using civic virtue framework
+  - Use Dignity vs Tribalism dipole configuration with appropriate weighting scheme
+  - Generate computational scores for all validation texts with evidence passages
+  - Analyze score distributions, range utilization, and differentiation quality
+  - Document LLM parameters (model, temperature, etc.) for reproducibility
+  - Store results in standardized format for human comparison preparation
+
+- [ ] **LLM Results Analysis and Refinement** - Evaluate and optimize LLM performance before human study (discovered: June 13, priority: HIGH)
+  - Analyze score distributions to ensure meaningful differentiation across text types
+  - Evaluate evidence passage quality and relevance to dignity/tribalism distinction
+  - Refine text corpus based on LLM performance (replace low-performing texts)
+  - Optimize prompt template based on consistency and clarity of outputs
+  - Validate that LLM successfully distinguishes expected pole exemplars from balanced cases
+  - Document refinement decisions and rationale for human study design
+
+### **Phase 2: Human Annotation Materials Development**
+*Depends on Phase 1 LLM results for optimal human prompt and corpus design*
+
+- [ ] **Human Annotation Codebook Development** - Create simplified codebook based on refined LLM approach (discovered: June 13, priority: MEDIUM)
+  - Develop clear 1-7 scale definitions adapted from validated LLM prompt
+  - Include concrete examples and boundary cases identified through LLM analysis
+  - Create evidence requirement instructions (1-2 key passages per rating)
+  - Design quality control gold standard cases based on LLM performance patterns
+
+- [ ] **Human Prompt Adaptation** - Create human-optimized version of validated LLM prompt (discovered: June 13, priority: MEDIUM)
+  - Adapt validated LLM prompt structure to conversational human annotation format
+  - Maintain conceptual equivalence while optimizing for human cognitive processing
+  - Include examples and guidance derived from successful LLM analysis patterns
+  - Document systematic adaptation rationale and maintain task equivalence
+
+### **Phase 3: Human Study Platform Setup and Pilot Testing**
+*Uses refined corpus and validated prompts from Phases 1-2*
+
+- [ ] **CloudResearch/MTurk Platform Configuration** - Set up crowdsourcing platform for human annotation study (discovered: June 13, priority: MEDIUM)
+  - Configure CloudResearch/MTurk account with academic verification
+  - Design HIT template with quality control mechanisms and attention checks
+  - Implement real-time quality monitoring and anomaly detection systems
+  - Set up budget controls within $400 allocation
+
+- [ ] **Pilot Study Execution** - Run small-scale validation before main study (discovered: June 13, priority: MEDIUM)
+  - Execute pilot with 5 texts × 5 annotators = 25 HITs using refined corpus
+  - Analyze pilot results for prompt refinement and quality issues
+  - Validate score distributions between refined LLM baseline and human annotators
+  - Refine materials based on pilot feedback and performance metrics
+
+### **Phase 4: Main Study Execution and Quality Control**
+- [ ] **Full Study Launch** - Execute main validation study with quality monitoring (discovered: June 13, priority: MEDIUM)
+  - Launch study: 15-20 refined texts × 4 annotators = 60-80 HITs total
+  - Implement real-time quality monitoring and response validation
+  - Maintain cost management within budget constraints
+  - Monitor inter-rater reliability and flag quality issues
+
+### **Phase 5: Analysis and Academic Documentation**
+- [ ] **Statistical Analysis Implementation** - Comprehensive validation analysis with pre-registered hypotheses (discovered: June 13, priority: MEDIUM)
+  - Calculate inter-rater reliability (ICC) with target ≥0.70 (success ≥0.80)
+  - Measure human-LLM correlation with target ≥0.80 (success ≥0.85)
+  - Conduct score distribution analysis and range utilization assessment
+  - Perform evidence quality thematic analysis of supporting passages
+
+- [ ] **Academic Replication Package Creation** - Complete documentation and reproducibility materials (discovered: June 13, priority: MEDIUM)
+  - Document complete text selection and anonymization process
+  - Create systematic record of prompt adaptation rationale and validation
+  - Prepare anonymized text corpus with metadata for sharing
+  - Develop statistical analysis scripts and validation procedures
+  - Write methodological transparency documentation for publication
+
+- [ ] **Results Integration and Next Phase Planning** - Incorporate validation results into broader research program (discovered: June 13, priority: LOW)
+  - Interpret results against success criteria and academic standards
+  - Document methodological template for computational-human alignment testing
+  - Plan systematic extension to additional framework dimensions
+  - Prepare publication strategy and academic dissemination plan
+
+## 📈 **Academic & Research Enhancements**
+
+- [ ] **R Script Generators** - Cursor-assisted R code for advanced visualization and statistical modeling (discovered: June 13, priority: TBD)
+- [ ] **Stata Integration Scripts** - PyStata workflows for publication-grade statistical analysis (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Bibliography Management** - Automated citation and reference management (discovered: June 13, priority: TBD)
+- [ ] **Cross-Tool Workflow Orchestrator** - Seamless integration between Jupyter, R, and Stata (discovered: June 13, priority: TBD)
+
+## 🎯 **User Experience & Research Process**
+
+- [ ] **Circle Math in Paper Audit** - Ensure mathematical accuracy and academic rigor in paper v1.2.0 (discovered: June 13, priority: TBD)
+- [ ] **User Persona, Story, and Journey Audit** - Validate user experience design against actual research workflows (discovered: June 13, priority: TBD)
+- [ ] **YouTube Ingestion Accuracy Comparison** - Test case: Trump Joint Session Speech analysis accuracy validation (discovered: June 13, priority: TBD)
+- [ ] **Visualization Source of Truth vs Repository Architecture** - Establish clear architecture for visualization code and assets (discovered: June 13, priority: TBD)
+- [ ] **Experiment Design Process** - Formalize systematic approach to framework development and validation (discovered: June 13, priority: TBD)
+
+## 🏗️ **Architecture & Best Practices**
+
+- [ ] **Framework Development Best Practices** - Systematize framework development methodology based on 5 operational frameworks (discovered: June 13, priority: TBD)
+- [ ] **Architecture Refinement** - Improve architecture based on lessons learned from migrations (discovered: June 13, priority: TBD)
+- [ ] **Component Quality Validators** - Automated checks for prompt clarity, framework coherence (discovered: June 13, priority: TBD)
+- [ ] **Development Analytics Dashboard** - Progress tracking and pattern recognition across sessions (discovered: June 13, priority: TBD)
+
+## 📋 **Documentation & Training**
+
+- [ ] **Technical Documentation Updates** - API documentation, database schema docs (discovered: June 13, priority: TBD)
+- [ ] **Process Documentation** - Research workflow guides, quality assurance manuals (discovered: June 13, priority: TBD)
+- [ ] **Training Materials** - Best practices compendium, troubleshooting guides (discovered: June 13, priority: TBD)
+
+---
+
+## **Review Process**
+- **Weekly Review**: During iteration planning, items move from BACKLOG → CURRENT_ITERATION
+- **Priority Assignment**: Items get priority levels (HIGH/MEDIUM/LOW) when moved to current iteration
+- **Archive**: Completed items move to CHANGELOG.md
+
+**Next Review**: June 17, 2025 (next iteration planning)
+
+## **🎯 Recent Additions** (June 13, 2025 Evening)
+- **Future Directions and Research Extensions**: Comprehensive future research agenda demonstrating framework extensibility and academic trajectory positioning
+  - **Temporal Analysis Development** (3 MEDIUM/LOW priority tasks): Temporal category analysis, author evolution tracking, temporal quality assurance enhancement
+  - **Comparative Analysis Documentation** (2 MEDIUM/LOW priority tasks): Systematic text comparison framework, multi-context evaluation methodology
+  - **Integration Strategy** (2 MEDIUM/LOW priority tasks): Unified analytical framework documentation, research program expansion roadmap
+  - **Academic Positioning** (2 MEDIUM/LOW priority tasks): Future directions literature integration, computational discourse analysis advancement positioning
+  - **Community Development** (2 LOW priority tasks): Framework extensibility documentation, research community impact documentation
+  - **Strategic Impact**: Positions framework within broader computational discourse analysis trajectory while demonstrating extensibility and long-term research potential
+
+- **Alternative Validation and Methodological Positioning**: Comprehensive academic positioning framework independent of human validation outcomes
+  - **Methodological Innovation** (3 HIGH/MEDIUM priority tasks): Five-dimensional experimental design documentation, framework-agnostic architecture, computational reproducibility standards
+  - **Algorithmic Consistency** (2 HIGH/MEDIUM priority tasks): Cross-model reliability documentation, algorithmic innovation positioning
+  - **Alternative Validation** (3 MEDIUM/LOW priority tasks): Internal coherence validation, convergent validity approaches, longitudinal consistency analysis
+  - **Academic Positioning** (3 HIGH/MEDIUM priority tasks): Tool development contribution, computational social science methodology advancement, community development strategy
+  - **Practical Applications** (3 MEDIUM/LOW priority tasks): Exploratory analysis positioning, comparative framework documentation, future research trajectory
+  - **Strategic Impact**: Establishes robust academic defensibility and scholarly contribution claims regardless of human validation outcomes
+
+- **Human Validation Research Integration**: Comprehensive paper-writing agenda incorporating extensive human validation research findings
+  - **Literature Integration** (3 HIGH priority tasks): ValiText framework, prompt sensitivity research, computational social science standards
+  - **Methodology Enhancement** (3 HIGH/MEDIUM priority tasks): Validation framework section, quality assurance documentation, LLM-as-a-judge integration
+  - **Academic Defense** (3 HIGH/MEDIUM priority tasks): Strategic decision defense, methodological sophistication positioning, criticism response framework
+  - **Bibliography Enhancement** (2 MEDIUM/LOW priority tasks): Comprehensive citation expansion, academic formatting integration
+  - **Strategic Impact**: Transforms extensive validation research into academically rigorous paper sections with proper citations and methodological defense
+
+- **Theoretical Foundation Research**: Comprehensive research agenda to strengthen academic argument for core methodological innovation
+  - **Literature Reviews** (3 HIGH priority tasks): Spatial metaphors in text analysis, center of mass concepts, circular vs linear coordinate systems
+  - **Academic Development** (3 MEDIUM priority tasks): Bibliography expansion, paper section development, positioning strategy
+  - **Strategic Impact**: Establishes rigorous theoretical foundation for dipole-circular mapping as novel contribution to computational discourse analysis
+  - **Innovation Focus**: Positions center of mass calculation and circular coordinate mapping as unique methodological advances
+
+- **Dynamic Scaling Enhancement**: High-priority enhancement based on strategic analysis in `dynamic_scaling.md`
+  - Platform implementation (HIGH priority)
+  - Paper documentation updates (MEDIUM priority) 
+  - Framework database/filesystem updates (MEDIUM priority)
+  - QA system integration (MEDIUM priority)
+  - **Strategic Impact**: Will maximize visual clarity and analytical precision while preserving mathematical relationships
+
+- **Human Validation Study Implementation**: Critical validation study extraction with LLM-first approach
+  - **Phase 1**: LLM Baseline Development (4 HIGH priority tasks) - Text corpus, LLM prompt development, baseline experiment, results analysis & refinement
+  - **Phase 2**: Human Materials Development (2 MEDIUM priority tasks) - Codebook based on LLM results, human prompt adaptation
+  - **Phase 3**: Human Study Platform Setup (2 MEDIUM priority tasks) - CloudResearch/MTurk config, pilot testing with refined corpus
+  - **Phase 4**: Study Execution (1 MEDIUM priority task) - Full study launch with quality monitoring
+  - **Phase 5**: Analysis & Documentation (2 MEDIUM, 1 LOW priority tasks) - Statistical analysis, replication package, results integration
+  - **Strategic Impact**: Establishes computational-human alignment validation using iterative LLM-first refinement approach
+  - **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
+  - **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
+  - **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
+  - **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
+
+## 🎯 **Dynamic Scaling Enhancement** (Superseded)
+*Reference: `docs/development/planning/strategic/dynamic_scaling.md`*
+
+**✅ STATUS (June 22, 2025)**: This has been superseded by the more comprehensive **Extensible Cartography Plan**. The goal of dynamic scaling is now addressed by the new visualization adapter architecture, which decouples rendering from core analytics and allows for multiple, purpose-built visualization types (UMAP, Radar v2, etc.).
+
+## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
+*Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
+
+**✅ MIGRATION UPDATE** (June 17, 2025): Business Ethics framework successfully migrated from obsolete JSON format to standardized YAML format in research workspace with complete documentation.
+
+**Strategic Justification**: Comprehensive specifications and user guides needed for the research workspace structure and YAML formats validated in the unified asset management prototype. Critical for production integration and researcher adoption.
+
+- [ ] **Research Workspace Specification Documentation** - Create comprehensive technical specification for the research workspace structure and workflows (discovered: June 19, priority: HIGH)
+  - Document complete directory structure: frameworks/, prompt_templates/, weighting_schemes/, experiments/, etc.
+  - Specify YAML format standards for all asset types with complete schema documentation
+  - Include project_manifest.yaml specification with dependency tracking and version management
+  - Document two-tier architecture: development workspace + immutable storage integration
+  - Create technical requirements for hash-based content addressing and provenance tracking
+  - Include migration pathways from legacy JSON formats to new YAML standards
+
+- [ ] **YAML Format Standards and Schema Documentation** - Establish formal standards for all YAML asset formats (discovered: June 19, priority: HIGH)
+  - Create comprehensive schema documentation for framework YAML format with validation rules
+  - Document prompt template YAML structure with methodology integration requirements
+  - Specify weighting scheme YAML format with mathematical constraint validation
+  - Include metadata and provenance tracking YAML schemas
+  - Create validation tools and examples for each YAML format type
+  - Document version evolution and backward compatibility requirements
+
+- [ ] **Research Workspace User Guide** - Create comprehensive user guide for researchers working with the workspace structure (discovered: June 19, priority: HIGH)
+  - Write step-by-step guide for creating new frameworks in YAML format
+  - Document workflow for developing and testing prompt templates
+  - Include best practices for research workspace organization and asset management
+  - Create troubleshooting guide for common YAML format and validation issues
+  - Document integration pathways between research workspace and production systems
+  - Include collaboration workflows and version control best practices
+
+- [ ] **Content-Addressable Storage Integration Guide** - Document the production integration pathway for hash-based asset storage (discovered: June 19, priority: MEDIUM)
+  - Create technical specification for asset_storage/ directory structure and hash algorithms
+  - Document integration with existing FrameworkManager and PromptTemplateManager systems
+  - Specify database schema requirements for asset_versions and asset_provenance tables
+  - Include migration strategy from prototype to production implementation
+  - Document integrity verification and deduplication capabilities
+  - Create troubleshooting guide for hash-based storage and retrieval operations
+
+- [ ] **Framework Portfolio Management Guide** - Document systematic approach to managing diverse framework types (dipole vs non-dipole) (discovered: June 19, priority: MEDIUM)
+  - Create guide for converting legacy JSON frameworks to YAML format
+  - Document framework validation and theoretical coherence testing procedures
+  - Include best practices for framework versioning and iteration management
+  - Specify quality assurance requirements for framework academic documentation
+  - Create comparative analysis guidelines for different framework architectures
+  - Document expert consultation preparation and validation evidence requirements
+
+## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
+*Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
+
+**Strategic Justification**: Multi-layered transaction management system that treats any uncertainty that could compromise experiment validity as grounds for graceful termination and rollback. Ensures zero contaminated results while providing clear user guidance for resolution.
+
+### **Architecture Status Overview**
+- ✅ **Phase 1 Complete**: Framework Transaction Manager - Database-first loading, content change detection, automatic version increment
+- ✅ **Phase 2 Complete**: Data Transaction Manager - Corpus integrity validation, content hash verification, encoding validation
+- ✅ **Phase 2 Complete**: Quality Transaction Manager - Analysis quality thresholds, framework fit validation, statistical significance enforcement
+- 📋 **Phase 3 Planned**: Pipeline Transaction Manager - LLM availability, dependency compatibility, API reliability
+- 📋 **Phase 4 Planned**: Compliance Transaction Manager - Academic compliance, ethical clearance, institutional policy
+
+### **Implementation Follow-up Tasks**
+- [ ] **Enhanced Orchestrator Integration** - Integrate all transaction managers into comprehensive pre-flight validation (discovered: June 17, priority: HIGH)
+  - Update `comprehensive_experiment_orchestrator.py` to use all transaction managers
+  - Implement coordinated rollback across all transaction types
+  - Add transaction-aware error handling with specific guidance
+  - Include transaction metrics in monitoring dashboard
+
+- [ ] **Transaction Integrity Exception Hierarchy** - Implement complete exception hierarchy for different transaction failures (discovered: June 17, priority: MEDIUM)
+  - Create `TransactionIntegrityError` base class
+  - Implement domain-specific exceptions: `FrameworkTransactionIntegrityError`, `DataTransactionIntegrityError`, `QualityTransactionIntegrityError`
+  - Add structured error handling with rollback guidance
+  - Integrate with existing error monitoring systems
+
+- [ ] **Transaction Audit Trail System** - Implement comprehensive audit logging for all transaction decisions (discovered: June 17, priority: MEDIUM)
+  - Add transaction ID tracking across all experiment operations
+  - Store transaction state history in database
+  - Implement query interface for transaction analysis
+  - Create dashboard for transaction success/failure trends
+
+- [ ] **User Experience Enhancement** - Improve transaction failure user experience (discovered: June 17, priority: MEDIUM)
+  - Create user-friendly error messages with specific guidance
+  - Implement step-by-step recovery commands
+  - Add transaction status indicators in CLI
+  - Create transaction integrity validation tools
+
+- [ ] **Documentation and Training** - Complete transaction integrity documentation and training materials (discovered: June 17, priority: LOW)
+  - Update user guides with transaction integrity concepts
+  - Create troubleshooting guide for transaction failures
+  - Add developer documentation for extending transaction managers
+  - Include transaction integrity in academic methodology documentation
+
+## 🔧 **Infrastructure & Performance**
+
+- [ ] **Performance Benchmarking** - Measure visualization generation speed improvements (discovered: June 13, priority: TBD)
+- [ ] **Theme Expansion** - Additional academic themes (journal-specific, conference-specific) (discovered: June 13, priority: TBD)
+- [ ] **Export Format Enhancement** - Additional academic formats (EPS, TIFF for specific journals) (discovered: June 13, priority: TBD)
+- [ ] **Interactive Feature Enhancement** - Advanced hover info, annotation capabilities (discovered: June 13, priority: TBD)
+- [ ] **Framework-Specific Styling** - Custom styling overrides for different framework types (discovered: June 13, priority: TBD)
+
+## 📊 **Testing & Validation**
+
+- [ ] **Comprehensive Test System Review and Optimization** - Stem-to-stern review of all test infrastructure and test data following academic validation completion (discovered: June 19, priority: HIGH)
+  - **Current State Assessment**: 161 test result files (226.4MB) across 22 categories with comprehensive QA validation reports
+  - **Review Scope**: Complete audit of test coverage, test result quality, data organization, and preservation strategies
+  - **Test Data Analysis**: Systematic review of QA test exports (qa_convenience_test/, qa_integration_test/) with validation report quality assessment
+  - **Infrastructure Evaluation**: Assessment of test isolation system, bloat prevention integration, and result preservation effectiveness
+  - **Strategic Justification**: Ensure test infrastructure scales appropriately for production academic validation runs and maintains research-grade quality standards
+  - **Deliverables**: Test strategy optimization, data retention policies, quality metrics enhancement, and comprehensive testing best practices documentation
+  - **Dependencies**: Complete after major academic validation runs to capture lessons learned and scale requirements
+
+- [ ] **Experiment QA System Status Review and Enhancement** - Comprehensive review of discovered experiment QA system capabilities and integration status (discovered: June 19, priority: HIGH)
+  - **Discovery Context**: QA system found operational with comprehensive validation reports, confidence scoring, and multi-format exports during test infrastructure inspection
+  - **System Assessment**: Evaluate QAEnhancedDataExporter, LLMQualityAssuranceSystem (6-layer validation), and ComponentQualityValidator integration status
+  - **Quality Metrics Review**: Analysis of current confidence score statistics (mean: 0.037, all LOW confidence), quality issue detection (10 anomalies, 8 critical issues), and validation effectiveness
+  - **Integration Analysis**: Review QA system integration with orchestrator, export pipeline, and academic validation workflows
+  - **Enhancement Opportunities**: Identify gaps in current QA coverage, threshold optimization, and academic validation integration
+  - **Strategic Justification**: Ensure QA system meets academic rigor standards and provides meaningful quality assurance for research publications
+  - **Deliverables**: QA system status report, enhancement recommendations, integration optimization, and academic validation alignment strategy
+  - **Priority Rationale**: Critical for ensuring research quality and publication readiness of academic validation outputs
+
+- [ ] **Unit Testing Framework** - CLI component tests, database integration tests (discovered: June 13, priority: TBD)
+- [ ] **Integration Testing Suite** - Cross-component compatibility tests (discovered: June 13, priority: TBD)
+- [ ] **Academic Standard Compliance Tests** - Ensure outputs meet publication requirements (discovered: June 13, priority: TBD)
+- [ ] **Statistical Accuracy Validation** - Verify calculations against known benchmarks (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Replication Package Tests** - Include quality metadata validation (discovered: June 13, priority: TBD)
+
+## 🧪 **Human Validation Study Implementation** (High Priority)
+*Reference: `docs/development/planning/specialized/human_validation/human_validation_experiment_approach.md`*
+
+**Strategic Justification**: Critical validation study to establish computational-human alignment in political discourse analysis using strategic single-dipole approach (Dignity vs Tribalism) with anonymous political excerpts.
+
+### **Methodological Design Review and Enhancement**
+*Reference: `docs/project-management/planning/specialized/human_validation/reviewer_feedback_validation_design_gaps.md`*
+
+- [ ] **Integrate Reviewer Feedback on Validation Study Methodology** - Address five critical methodological gaps identified by external reviewer for journal-level acceptance (discovered: December 2024, priority: HIGH)
+  - Implement inter-rater reliability (IRR) metrics: Fleiss' Kappa for 3+ raters, target ≥0.6 (good), ≥0.8 (excellent)
+  - Design stratified rater recruitment across ideological spectrum (liberal, conservative, moderate) to address single-source bias
+  - Add null model baselines: random vector baseline and majority sentiment model for comparative performance
+  - Develop comprehensive rater training protocol with 1-2 page primer, plain-language well definitions, annotated examples
+  - Conduct power analysis for statistical significance: target 100-150 triplets per well for medium effect detection
+  - Strategic decision: Pilot with 3 wells (Dignity/Tribalism, Truth/Fantasy, Justice/Resentment) before full 10-well study
+  - Budget impact: ~$1,500-2,000 for quality diverse rater pool vs original design
+
+### **Phase 1: LLM Baseline Development and Validation**
+*Reordered from Phase 2 to enable iterative refinement before human annotation investment*
+
+- [ ] **Initial Text Corpus Creation** - Develop 15-20 anonymous political excerpts for LLM baseline testing (discovered: June 13, priority: HIGH)
+  - Create 4-5 Dignity pole exemplars (unity, individual worth, respectful disagreement)
+  - Create 4-5 Tribalism pole exemplars (us-vs-them rhetoric without policy substance)
+  - Create 4-5 balanced/moderate cases (policy-focused content with mixed elements)
+  - Create 2-3 edge cases and controls (pure policy, ceremonial speeches, historical documents)
+  - Apply strategic excerpting protocol (400-600 words, metadata removal, context neutralization)
+  - Conduct recognition testing with political science students to ensure anonymity
+
+- [ ] **LLM Prompt Template Development** - Create optimized LLM prompt for Dignity vs Tribalism analysis (discovered: June 13, priority: HIGH)
+  - Create structured LLM prompt template with expert role, definitions, and formatting
+  - Design clear 1-7 scale definitions (1=Strong Tribalism, 7=Strong Dignity)
+  - Include evidence requirement instructions (identify 2-3 supporting passages)
+  - Test prompt clarity and consistency across multiple LLM runs
+
+- [ ] **LLM Baseline Experiment Execution** - Run full computational analysis and iterative refinement (discovered: June 13, priority: HIGH)
+  - Execute LLM analysis on 15-20 anonymous political excerpts using civic virtue framework
+  - Use Dignity vs Tribalism dipole configuration with appropriate weighting scheme
+  - Generate computational scores for all validation texts with evidence passages
+  - Analyze score distributions, range utilization, and differentiation quality
+  - Document LLM parameters (model, temperature, etc.) for reproducibility
+  - Store results in standardized format for human comparison preparation
+
+- [ ] **LLM Results Analysis and Refinement** - Evaluate and optimize LLM performance before human study (discovered: June 13, priority: HIGH)
+  - Analyze score distributions to ensure meaningful differentiation across text types
+  - Evaluate evidence passage quality and relevance to dignity/tribalism distinction
+  - Refine text corpus based on LLM performance (replace low-performing texts)
+  - Optimize prompt template based on consistency and clarity of outputs
+  - Validate that LLM successfully distinguishes expected pole exemplars from balanced cases
+  - Document refinement decisions and rationale for human study design
+
+### **Phase 2: Human Annotation Materials Development**
+*Depends on Phase 1 LLM results for optimal human prompt and corpus design*
+
+- [ ] **Human Annotation Codebook Development** - Create simplified codebook based on refined LLM approach (discovered: June 13, priority: MEDIUM)
+  - Develop clear 1-7 scale definitions adapted from validated LLM prompt
+  - Include concrete examples and boundary cases identified through LLM analysis
+  - Create evidence requirement instructions (1-2 key passages per rating)
+  - Design quality control gold standard cases based on LLM performance patterns
+
+- [ ] **Human Prompt Adaptation** - Create human-optimized version of validated LLM prompt (discovered: June 13, priority: MEDIUM)
+  - Adapt validated LLM prompt structure to conversational human annotation format
+  - Maintain conceptual equivalence while optimizing for human cognitive processing
+  - Include examples and guidance derived from successful LLM analysis patterns
+  - Document systematic adaptation rationale and maintain task equivalence
+
+### **Phase 3: Human Study Platform Setup and Pilot Testing**
+*Uses refined corpus and validated prompts from Phases 1-2*
+
+- [ ] **CloudResearch/MTurk Platform Configuration** - Set up crowdsourcing platform for human annotation study (discovered: June 13, priority: MEDIUM)
+  - Configure CloudResearch/MTurk account with academic verification
+  - Design HIT template with quality control mechanisms and attention checks
+  - Implement real-time quality monitoring and anomaly detection systems
+  - Set up budget controls within $400 allocation
+
+- [ ] **Pilot Study Execution** - Run small-scale validation before main study (discovered: June 13, priority: MEDIUM)
+  - Execute pilot with 5 texts × 5 annotators = 25 HITs using refined corpus
+  - Analyze pilot results for prompt refinement and quality issues
+  - Validate score distributions between refined LLM baseline and human annotators
+  - Refine materials based on pilot feedback and performance metrics
+
+### **Phase 4: Main Study Execution and Quality Control**
+- [ ] **Full Study Launch** - Execute main validation study with quality monitoring (discovered: June 13, priority: MEDIUM)
+  - Launch study: 15-20 refined texts × 4 annotators = 60-80 HITs total
+  - Implement real-time quality monitoring and response validation
+  - Maintain cost management within budget constraints
+  - Monitor inter-rater reliability and flag quality issues
+
+### **Phase 5: Analysis and Academic Documentation**
+- [ ] **Statistical Analysis Implementation** - Comprehensive validation analysis with pre-registered hypotheses (discovered: June 13, priority: MEDIUM)
+  - Calculate inter-rater reliability (ICC) with target ≥0.70 (success ≥0.80)
+  - Measure human-LLM correlation with target ≥0.80 (success ≥0.85)
+  - Conduct score distribution analysis and range utilization assessment
+  - Perform evidence quality thematic analysis of supporting passages
+
+- [ ] **Academic Replication Package Creation** - Complete documentation and reproducibility materials (discovered: June 13, priority: MEDIUM)
+  - Document complete text selection and anonymization process
+  - Create systematic record of prompt adaptation rationale and validation
+  - Prepare anonymized text corpus with metadata for sharing
+  - Develop statistical analysis scripts and validation procedures
+  - Write methodological transparency documentation for publication
+
+- [ ] **Results Integration and Next Phase Planning** - Incorporate validation results into broader research program (discovered: June 13, priority: LOW)
+  - Interpret results against success criteria and academic standards
+  - Document methodological template for computational-human alignment testing
+  - Plan systematic extension to additional framework dimensions
+  - Prepare publication strategy and academic dissemination plan
+
+## 📈 **Academic & Research Enhancements**
+
+- [ ] **R Script Generators** - Cursor-assisted R code for advanced visualization and statistical modeling (discovered: June 13, priority: TBD)
+- [ ] **Stata Integration Scripts** - PyStata workflows for publication-grade statistical analysis (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Bibliography Management** - Automated citation and reference management (discovered: June 13, priority: TBD)
+- [ ] **Cross-Tool Workflow Orchestrator** - Seamless integration between Jupyter, R, and Stata (discovered: June 13, priority: TBD)
+
+## 🎯 **User Experience & Research Process**
+
+- [ ] **Circle Math in Paper Audit** - Ensure mathematical accuracy and academic rigor in paper v1.2.0 (discovered: June 13, priority: TBD)
+- [ ] **User Persona, Story, and Journey Audit** - Validate user experience design against actual research workflows (discovered: June 13, priority: TBD)
+- [ ] **YouTube Ingestion Accuracy Comparison** - Test case: Trump Joint Session Speech analysis accuracy validation (discovered: June 13, priority: TBD)
+- [ ] **Visualization Source of Truth vs Repository Architecture** - Establish clear architecture for visualization code and assets (discovered: June 13, priority: TBD)
+- [ ] **Experiment Design Process** - Formalize systematic approach to framework development and validation (discovered: June 13, priority: TBD)
+
+## 🏗️ **Architecture & Best Practices**
+
+- [ ] **Framework Development Best Practices** - Systematize framework development methodology based on 5 operational frameworks (discovered: June 13, priority: TBD)
+- [ ] **Architecture Refinement** - Improve architecture based on lessons learned from migrations (discovered: June 13, priority: TBD)
+- [ ] **Component Quality Validators** - Automated checks for prompt clarity, framework coherence (discovered: June 13, priority: TBD)
+- [ ] **Development Analytics Dashboard** - Progress tracking and pattern recognition across sessions (discovered: June 13, priority: TBD)
+
+## 📋 **Documentation & Training**
+
+- [ ] **Technical Documentation Updates** - API documentation, database schema docs (discovered: June 13, priority: TBD)
+- [ ] **Process Documentation** - Research workflow guides, quality assurance manuals (discovered: June 13, priority: TBD)
+- [ ] **Training Materials** - Best practices compendium, troubleshooting guides (discovered: June 13, priority: TBD)
+
+---
+
+## **Review Process**
+- **Weekly Review**: During iteration planning, items move from BACKLOG → CURRENT_ITERATION
+- **Priority Assignment**: Items get priority levels (HIGH/MEDIUM/LOW) when moved to current iteration
+- **Archive**: Completed items move to CHANGELOG.md
+
+**Next Review**: June 17, 2025 (next iteration planning)
+
+## **🎯 Recent Additions** (June 13, 2025 Evening)
+- **Future Directions and Research Extensions**: Comprehensive future research agenda demonstrating framework extensibility and academic trajectory positioning
+  - **Temporal Analysis Development** (3 MEDIUM/LOW priority tasks): Temporal category analysis, author evolution tracking, temporal quality assurance enhancement
+  - **Comparative Analysis Documentation** (2 MEDIUM/LOW priority tasks): Systematic text comparison framework, multi-context evaluation methodology
+  - **Integration Strategy** (2 MEDIUM/LOW priority tasks): Unified analytical framework documentation, research program expansion roadmap
+  - **Academic Positioning** (2 MEDIUM/LOW priority tasks): Future directions literature integration, computational discourse analysis advancement positioning
+  - **Community Development** (2 LOW priority tasks): Framework extensibility documentation, research community impact documentation
+  - **Strategic Impact**: Positions framework within broader computational discourse analysis trajectory while demonstrating extensibility and long-term research potential
+
+- **Alternative Validation and Methodological Positioning**: Comprehensive academic positioning framework independent of human validation outcomes
+  - **Methodological Innovation** (3 HIGH/MEDIUM priority tasks): Five-dimensional experimental design documentation, framework-agnostic architecture, computational reproducibility standards
+  - **Algorithmic Consistency** (2 HIGH/MEDIUM priority tasks): Cross-model reliability documentation, algorithmic innovation positioning
+  - **Alternative Validation** (3 MEDIUM/LOW priority tasks): Internal coherence validation, convergent validity approaches, longitudinal consistency analysis
+  - **Academic Positioning** (3 HIGH/MEDIUM priority tasks): Tool development contribution, computational social science methodology advancement, community development strategy
+  - **Practical Applications** (3 MEDIUM/LOW priority tasks): Exploratory analysis positioning, comparative framework documentation, future research trajectory
+  - **Strategic Impact**: Establishes robust academic defensibility and scholarly contribution claims regardless of human validation outcomes
+
+- **Human Validation Research Integration**: Comprehensive paper-writing agenda incorporating extensive human validation research findings
+  - **Literature Integration** (3 HIGH priority tasks): ValiText framework, prompt sensitivity research, computational social science standards
+  - **Methodology Enhancement** (3 HIGH/MEDIUM priority tasks): Validation framework section, quality assurance documentation, LLM-as-a-judge integration
+  - **Academic Defense** (3 HIGH/MEDIUM priority tasks): Strategic decision defense, methodological sophistication positioning, criticism response framework
+  - **Bibliography Enhancement** (2 MEDIUM/LOW priority tasks): Comprehensive citation expansion, academic formatting integration
+  - **Strategic Impact**: Transforms extensive validation research into academically rigorous paper sections with proper citations and methodological defense
+
+- **Theoretical Foundation Research**: Comprehensive research agenda to strengthen academic argument for core methodological innovation
+  - **Literature Reviews** (3 HIGH priority tasks): Spatial metaphors in text analysis, center of mass concepts, circular vs linear coordinate systems
+  - **Academic Development** (3 MEDIUM priority tasks): Bibliography expansion, paper section development, positioning strategy
+  - **Strategic Impact**: Establishes rigorous theoretical foundation for dipole-circular mapping as novel contribution to computational discourse analysis
+  - **Innovation Focus**: Positions center of mass calculation and circular coordinate mapping as unique methodological advances
+
+- **Dynamic Scaling Enhancement**: High-priority enhancement based on strategic analysis in `dynamic_scaling.md`
+  - Platform implementation (HIGH priority)
+  - Paper documentation updates (MEDIUM priority) 
+  - Framework database/filesystem updates (MEDIUM priority)
+  - QA system integration (MEDIUM priority)
+  - **Strategic Impact**: Will maximize visual clarity and analytical precision while preserving mathematical relationships
+
+- **Human Validation Study Implementation**: Critical validation study extraction with LLM-first approach
+  - **Phase 1**: LLM Baseline Development (4 HIGH priority tasks) - Text corpus, LLM prompt development, baseline experiment, results analysis & refinement
+  - **Phase 2**: Human Materials Development (2 MEDIUM priority tasks) - Codebook based on LLM results, human prompt adaptation
+  - **Phase 3**: Human Study Platform Setup (2 MEDIUM priority tasks) - CloudResearch/MTurk config, pilot testing with refined corpus
+  - **Phase 4**: Study Execution (1 MEDIUM priority task) - Full study launch with quality monitoring
+  - **Phase 5**: Analysis & Documentation (2 MEDIUM, 1 LOW priority tasks) - Statistical analysis, replication package, results integration
+  - **Strategic Impact**: Establishes computational-human alignment validation using iterative LLM-first refinement approach
+  - **Critical Reordering**: LLM baseline experiment moved to Phase 1 to enable iterative refinement before expensive human annotation
+  - **Paper Integration**: Human validation research findings now systematically integrated into paper-writing todos with comprehensive literature citations
+  - **Alternative Positioning**: Complemented by comprehensive alternative validation framework ensuring strong academic contribution regardless of validation outcomes
+  - **Future Extensions**: Enhanced by comprehensive future directions documentation positioning framework within broader computational discourse analysis trajectory
+
+## 🎯 **Dynamic Scaling Enhancement** (Superseded)
+*Reference: `docs/development/planning/strategic/dynamic_scaling.md`*
+
+**✅ STATUS (June 22, 2025)**: This has been superseded by the more comprehensive **Extensible Cartography Plan**. The goal of dynamic scaling is now addressed by the new visualization adapter architecture, which decouples rendering from core analytics and allows for multiple, purpose-built visualization types (UMAP, Radar v2, etc.).
+
+## 🏗️ **Asset Management & Research Workspace Architecture** (High Priority)
+*Reference: `docs/product_management/prototype_studies/unified_asset_management_validation_2025_06_19/`*
+
+**✅ MIGRATION UPDATE** (June 17, 2025): Business Ethics framework successfully migrated from obsolete JSON format to standardized YAML format in research workspace with complete documentation.
+
+**Strategic Justification**: Comprehensive specifications and user guides needed for the research workspace structure and YAML formats validated in the unified asset management prototype. Critical for production integration and researcher adoption.
+
+- [ ] **Research Workspace Specification Documentation** - Create comprehensive technical specification for the research workspace structure and workflows (discovered: June 19, priority: HIGH)
+  - Document complete directory structure: frameworks/, prompt_templates/, weighting_schemes/, experiments/, etc.
+  - Specify YAML format standards for all asset types with complete schema documentation
+  - Include project_manifest.yaml specification with dependency tracking and version management
+  - Document two-tier architecture: development workspace + immutable storage integration
+  - Create technical requirements for hash-based content addressing and provenance tracking
+  - Include migration pathways from legacy JSON formats to new YAML standards
+
+- [ ] **YAML Format Standards and Schema Documentation** - Establish formal standards for all YAML asset formats (discovered: June 19, priority: HIGH)
+  - Create comprehensive schema documentation for framework YAML format with validation rules
+  - Document prompt template YAML structure with methodology integration requirements
+  - Specify weighting scheme YAML format with mathematical constraint validation
+  - Include metadata and provenance tracking YAML schemas
+  - Create validation tools and examples for each YAML format type
+  - Document version evolution and backward compatibility requirements
+
+- [ ] **Research Workspace User Guide** - Create comprehensive user guide for researchers working with the workspace structure (discovered: June 19, priority: HIGH)
+  - Write step-by-step guide for creating new frameworks in YAML format
+  - Document workflow for developing and testing prompt templates
+  - Include best practices for research workspace organization and asset management
+  - Create troubleshooting guide for common YAML format and validation issues
+  - Document integration pathways between research workspace and production systems
+  - Include collaboration workflows and version control best practices
+
+- [ ] **Content-Addressable Storage Integration Guide** - Document the production integration pathway for hash-based asset storage (discovered: June 19, priority: MEDIUM)
+  - Create technical specification for asset_storage/ directory structure and hash algorithms
+  - Document integration with existing FrameworkManager and PromptTemplateManager systems
+  - Specify database schema requirements for asset_versions and asset_provenance tables
+  - Include migration strategy from prototype to production implementation
+  - Document integrity verification and deduplication capabilities
+  - Create troubleshooting guide for hash-based storage and retrieval operations
+
+- [ ] **Framework Portfolio Management Guide** - Document systematic approach to managing diverse framework types (dipole vs non-dipole) (discovered: June 19, priority: MEDIUM)
+  - Create guide for converting legacy JSON frameworks to YAML format
+  - Document framework validation and theoretical coherence testing procedures
+  - Include best practices for framework versioning and iteration management
+  - Specify quality assurance requirements for framework academic documentation
+  - Create comparative analysis guidelines for different framework architectures
+  - Document expert consultation preparation and validation evidence requirements
+
+## 🔒 **Transaction Integrity Architecture** (Recently Implemented)
+*Reference: `docs/platform-development/architecture/TRANSACTION_INTEGRITY_ARCHITECTURE.md`*
+
+**Strategic Justification**: Multi-layered transaction management system that treats any uncertainty that could compromise experiment validity as grounds for graceful termination and rollback. Ensures zero contaminated results while providing clear user guidance for resolution.
+
+### **Architecture Status Overview**
+- ✅ **Phase 1 Complete**: Framework Transaction Manager - Database-first loading, content change detection, automatic version increment
+- ✅ **Phase 2 Complete**: Data Transaction Manager - Corpus integrity validation, content hash verification, encoding validation
+- ✅ **Phase 2 Complete**: Quality Transaction Manager - Analysis quality thresholds, framework fit validation, statistical significance enforcement
+- 📋 **Phase 3 Planned**: Pipeline Transaction Manager - LLM availability, dependency compatibility, API reliability
+- 📋 **Phase 4 Planned**: Compliance Transaction Manager - Academic compliance, ethical clearance, institutional policy
+
+### **Implementation Follow-up Tasks**
+- [ ] **Enhanced Orchestrator Integration** - Integrate all transaction managers into comprehensive pre-flight validation (discovered: June 17, priority: HIGH)
+  - Update `comprehensive_experiment_orchestrator.py` to use all transaction managers
+  - Implement coordinated rollback across all transaction types
+  - Add transaction-aware error handling with specific guidance
+  - Include transaction metrics in monitoring dashboard
+
+- [ ] **Transaction Integrity Exception Hierarchy** - Implement complete exception hierarchy for different transaction failures (discovered: June 17, priority: MEDIUM)
+  - Create `TransactionIntegrityError` base class
+  - Implement domain-specific exceptions: `FrameworkTransactionIntegrityError`, `DataTransactionIntegrityError`, `QualityTransactionIntegrityError`
+  - Add structured error handling with rollback guidance
+  - Integrate with existing error monitoring systems
+
+- [ ] **Transaction Audit Trail System** - Implement comprehensive audit logging for all transaction decisions (discovered: June 17, priority: MEDIUM)
+  - Add transaction ID tracking across all experiment operations
+  - Store transaction state history in database
+  - Implement query interface for transaction analysis
+  - Create dashboard for transaction success/failure trends
+
+- [ ] **User Experience Enhancement** - Improve transaction failure user experience (discovered: June 17, priority: MEDIUM)
+  - Create user-friendly error messages with specific guidance
+  - Implement step-by-step recovery commands
+  - Add transaction status indicators in CLI
+  - Create transaction integrity validation tools
+
+- [ ] **Documentation and Training** - Complete transaction integrity documentation and training materials (discovered: June 17, priority: LOW)
+  - Update user guides with transaction integrity concepts
+  - Create troubleshooting guide for transaction failures
+  - Add developer documentation for extending transaction managers
+  - Include transaction integrity in academic methodology documentation
+
+## 🔧 **Infrastructure & Performance**
+
+- [ ] **Performance Benchmarking** - Measure visualization generation speed improvements (discovered: June 13, priority: TBD)
+- [ ] **Theme Expansion** - Additional academic themes (journal-specific, conference-specific) (discovered: June 13, priority: TBD)
+- [ ] **Export Format Enhancement** - Additional academic formats (EPS, TIFF for specific journals) (discovered: June 13, priority: TBD)
+- [ ] **Interactive Feature Enhancement** - Advanced hover info, annotation capabilities (discovered: June 13, priority: TBD)
+- [ ] **Framework-Specific Styling** - Custom styling overrides for different framework types (discovered: June 13, priority: TBD)
+
+## 📊 **Testing & Validation**
+
+- [ ] **Comprehensive Test System Review and Optimization** - Stem-to-stern review of all test infrastructure and test data following academic validation completion (discovered: June 19, priority: HIGH)
+  - **Current State Assessment**: 161 test result files (226.4MB) across 22 categories with comprehensive QA validation reports
+  - **Review Scope**: Complete audit of test coverage, test result quality, data organization, and preservation strategies
+  - **Test Data Analysis**: Systematic review of QA test exports (qa_convenience_test/, qa_integration_test/) with validation report quality assessment
+  - **Infrastructure Evaluation**: Assessment of test isolation system, bloat prevention integration, and result preservation effectiveness
+  - **Strategic Justification**: Ensure test infrastructure scales appropriately for production academic validation runs and maintains research-grade quality standards
+  - **Deliverables**: Test strategy optimization, data retention policies, quality metrics enhancement, and comprehensive testing best practices documentation
+  - **Dependencies**: Complete after major academic validation runs to capture lessons learned and scale requirements
+
+- [ ] **Experiment QA System Status Review and Enhancement** - Comprehensive review of discovered experiment QA system capabilities and integration status (discovered: June 19, priority: HIGH)
+  - **Discovery Context**: QA system found operational with comprehensive validation reports, confidence scoring, and multi-format exports during test infrastructure inspection
+  - **System Assessment**: Evaluate QAEnhancedDataExporter, LLMQualityAssuranceSystem (6-layer validation), and ComponentQualityValidator integration status
+  - **Quality Metrics Review**: Analysis of current confidence score statistics (mean: 0.037, all LOW confidence), quality issue detection (10 anomalies, 8 critical issues), and validation effectiveness
+  - **Integration Analysis**: Review QA system integration with orchestrator, export pipeline, and academic validation workflows
+  - **Enhancement Opportunities**: Identify gaps in current QA coverage, threshold optimization, and academic validation integration
+  - **Strategic Justification**: Ensure QA system meets academic rigor standards and provides meaningful quality assurance for research publications
+  - **Deliverables**: QA system status report, enhancement recommendations, integration optimization, and academic validation alignment strategy
+  - **Priority Rationale**: Critical for ensuring research quality and publication readiness of academic validation outputs
+
+- [ ] **Unit Testing Framework** - CLI component tests, database integration tests (discovered: June 13, priority: TBD)
+- [ ] **Integration Testing Suite** - Cross-component compatibility tests (discovered: June 13, priority: TBD)
+- [ ] **Academic Standard Compliance Tests** - Ensure outputs meet publication requirements (discovered: June 13, priority: TBD)
+- [ ] **Statistical Accuracy Validation** - Verify calculations against known benchmarks (discovered: June 13, priority: TBD)
+- [ ] **Enhanced Replication Package Tests** - Include quality metadata validation (discovered: June 13, priority: TBD)
+
+## 🧪 **Human Validation Study Implementation** (High Priority)
+*Reference: `docs/development/planning/specialized/human_validation/human_validation_experiment_approach.md`*
+
+**Strategic Justification**: Critical validation study to establish computational-human alignment in political discourse analysis using strategic single-dipole approach (Dignity vs Tribalism) with anonymous political excerpts.
+
+### **Methodological Design Review and Enhancement**
+*Reference: `docs/project-management/planning/specialized/human_validation/reviewer_feedback_validation_design_gaps.md`*
+
+- [ ] **Integrate Reviewer Feedback on Validation Study Methodology** - Address five critical methodological gaps identified by external reviewer for journal-level acceptance (discovered: December 2024, priority: HIGH)
+  - Implement inter-rater reliability (IRR) metrics: Fleiss' Kappa for 3+ raters, target ≥0.6 (good), ≥0.8 (excellent)
+  - Design stratified rater recruitment across ideological spectrum (liberal, conservative, moderate) to address single-source bias
+  - Add null model baselines: random vector baseline and majority sentiment model for comparative performance
+  - Develop comprehensive rater training protocol with 1-2 page primer, plain-language well definitions, annotated examples
+  - Conduct power analysis for statistical significance: target 100-150 triplets per well for medium effect detection
+  - Strategic decision: Pilot with 3 wells (Dignity/Tribalism, Truth/Fantasy, Justice/Resentment) before full 10-well study
+  - Budget impact: ~$1,500-2,000 for quality diverse rater pool vs original design
+
+### **Phase 1: LLM Baseline Development and Validation**
+*Reordered from Phase 2 to enable iterative refinement before human annotation investment*
+
+- [ ] **Initial Text Corpus Creation** - Develop 15-20 anonymous political excer

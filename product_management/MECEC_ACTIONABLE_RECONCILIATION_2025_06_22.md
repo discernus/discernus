@@ -23,12 +23,12 @@
 ### **1. COLOR_OPTIMIZATION_REPORT_20250614_133104.md**
 **Status:** ✅ **COMPLETED** - Colors optimized, pending database sync  
 **MECEC Classification:** Current - Immediate integration required  
-**Integration Issue:** Must be updated with new terminology (anchor/axis vs well/dipole)
+**Integration Issue:** Must be updated with new cartographic terminology (`Anchor`/`Axis` vs legacy well/dipole)
 
 **Reconciliation Actions:**
-- [ ] **Database Synchronization:** Update framework color schemes in PostgreSQL
-- [ ] **Terminology Update:** Replace all color documentation with new lexicon
-- [ ] **API Integration:** Ensure `/coordinates` endpoint returns updated colors
+- [ ] **Database Synchronization:** Update framework color schemes in PostgreSQL with `Anchor`/`Axis` references
+- [ ] **Terminology Update:** Replace all color documentation with cartographic lexicon
+- [ ] **API Integration:** Ensure `/coordinates` endpoint returns updated colors with `Anchor`/`Axis` terminology
 - **Timeline:** Complete by end of Week 2 (June 28)
 
 ### **2. ACTIONABLE - discernus_architectural_review_prompt.md**
@@ -87,12 +87,12 @@
 ### **The Solution: Staged Implementation Approach**
 
 #### **Stage 1: Core Refactor (Week 2 - June 23-28)**
-**Scope:** Minimal viable terminology change to unblock academic validation
-- ✅ API endpoints: `/coordinates`, `/frameworks`, `/export`
-- ✅ Framework YAML files: `anchor_id`, `axis_id` replacements
-- ✅ Core classes: `Anchor`, `Axis`, `AxisSignature`, `AnchorSignature`
-- ✅ Deprecation aliases: Backward compatibility for existing scripts
-- ✅ Key documentation: README, terminology strategy, onboarding guides
+**Scope:** Minimal viable cartographic terminology change to unblock academic validation
+- ✅ API endpoints: `/coordinates`, `/frameworks`, `/export` return `Anchor`/`Axis` vocabulary
+- ✅ Framework YAML files: `well_id`→`anchor_id`, `dipole_id`→`axis_id` replacements
+- ✅ Core classes: `Anchor`, `Axis`, `AxisSignature`, `AnchorSignature` replace `Well`, `Dipole`
+- ✅ Deprecation aliases: Backward compatibility for existing scripts using legacy terms
+- ✅ Key documentation: README, terminology strategy, onboarding guides use cartographic lexicon
 
 #### **Stage 2: Extended Refactor (Weeks 3-14)**
 **Scope:** Complete systematic refactor per implementation plan
@@ -155,12 +155,12 @@
 5. Updated README and onboarding docs ✅ **MAINTAINED**
 
 ### **Revised Criteria (Staged Approach)**
-1. **Core API terminology updated** - `/coordinates`, `/frameworks` use new terms ✅
-2. **API fully decoupled from visualization** - Data-only responses ✅
-3. **Radar v2 prototype functional** - Single reference adapter working ✅
-4. **Full MFT replication package** - With new terminology ✅
-5. **Key documentation updated** - README, strategy docs, onboarding ✅
-6. **Deprecation system active** - Backward compatibility maintained ✅
+1. **Core API terminology updated** - `/coordinates`, `/frameworks` return `Anchor`/`Axis` vocabulary ✅
+2. **API fully decoupled from visualization** - Data-only responses with `Axis Signatures` ✅
+3. **Radar v2 prototype functional** - Single reference adapter renders cartographic data ✅
+4. **Full MFT replication package** - With cartographic terminology ✅
+5. **Key documentation updated** - README, strategy docs, onboarding use cartographic lexicon ✅
+6. **Deprecation system active** - Legacy `well`/`dipole` terms work with warnings ✅
 
 ---
 
@@ -172,42 +172,42 @@
 - [ ] **API Refactor:** Start terminology changes in core endpoints
 
 ### **Tuesday-Wednesday June 24-25 - Core Implementation**
-- [ ] **Framework Updates:** Convert MFT YAML to new terminology
-- [ ] **Class Refactor:** Implement `Anchor`, `Axis`, `Signature` classes
-- [ ] **API Decoupling:** Remove presentation logic from `/coordinates`
-- [ ] **Deprecation Aliases:** Create backward compatibility layer
+- [ ] **Framework Updates:** Convert MFT YAML to cartographic terminology (`well_id`→`anchor_id`)
+- [ ] **Class Refactor:** Implement `Anchor`, `Axis`, `AxisSignature` classes replacing `Well`, `Dipole`
+- [ ] **API Decoupling:** Remove presentation logic from `/coordinates`, return pure `Axis Signature` data
+- [ ] **Deprecation Aliases:** Create backward compatibility layer for legacy `well`/`dipole` terms
 
 ### **Thursday June 26 - Integration Testing**
-- [ ] **End-to-End Test:** Run full MFT experiment with new terminology
-- [ ] **API Testing:** Verify data-only responses and new terms
-- [ ] **Compatibility Test:** Confirm deprecated terms still work with warnings
+- [ ] **End-to-End Test:** Run full MFT experiment with cartographic terminology
+- [ ] **API Testing:** Verify data-only responses return `Anchor`/`Axis` vocabulary
+- [ ] **Compatibility Test:** Confirm legacy `well`/`dipole` terms still work with warnings
 
 ### **Friday June 27 - Documentation & Handoff**
-- [ ] **Documentation Update:** README, terminology strategy, key guides
-- [ ] **Week 3 Preparation:** Schedule architectural review
-- [ ] **Extended Plan Integration:** Finalize Weeks 3-14 timeline
+- [ ] **Documentation Update:** README, terminology strategy, key guides use cartographic lexicon
+- [ ] **Week 3 Preparation:** Schedule architectural review focused on cartographic implementation
+- [ ] **Extended Plan Integration:** Finalize Weeks 3-14 cartographic refactor timeline
 
 ---
 
 ## 📈 **SUCCESS METRICS & VALIDATION**
 
 ### **Technical Validation**
-- [ ] `grep -R "(well|dipole)" src/api/` returns 0 hits (core API clean)
-- [ ] `/coordinates` returns identical numeric results with new terminology
-- [ ] MFT experiment generates complete replication package
-- [ ] Legacy scripts work with deprecation warnings logged
+- [ ] `grep -R "(well|dipole)" src/api/` returns 0 hits (core API uses cartographic terms)
+- [ ] `/coordinates` returns identical numeric results with `Anchor`/`Axis` terminology
+- [ ] MFT experiment generates complete replication package with cartographic vocabulary
+- [ ] Legacy scripts work with deprecation warnings logged for `well`/`dipole` usage
 
 ### **Academic Validation**
-- [ ] Framework colors correctly synchronized with new terms
-- [ ] Expert demonstration ready with clean terminology
-- [ ] Publication-quality outputs use consistent vocabulary
-- [ ] Academic documentation reflects cartographic language
+- [ ] Framework colors correctly synchronized with `Anchor`/`Axis` references
+- [ ] Expert demonstration ready with clean cartographic terminology
+- [ ] Publication-quality outputs use consistent cartographic vocabulary
+- [ ] Academic documentation reflects cartographic language throughout
 
 ### **Platform Validation**  
-- [ ] Radar v2 adapter renders data from decoupled API
-- [ ] Plugin architecture foundation supports new adapters
-- [ ] Extended refactor plan integrated with MVP phases
-- [ ] Team alignment on staged implementation approach
+- [ ] Radar v2 adapter renders `Axis Signatures` from decoupled API
+- [ ] Plugin architecture foundation supports new cartographic adapters
+- [ ] Extended refactor plan integrated with MVP phases using cartographic timeline
+- [ ] Team alignment on staged cartographic implementation approach
 
 ---
 

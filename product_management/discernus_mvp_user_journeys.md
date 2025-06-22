@@ -5,6 +5,8 @@
 *Status: Strategic User Journey Mapping*  
 *Focus: MVP-Critical Personas and Dual Framework Validation Approach*
 
+> **Note on Terminology (June 2025):** This document is pending updates from the cartographic terminology refactor currently underway. Legacy terms are being replaced as follows: `Well`→`Anchor` (fixed reference points), `Dipole`→`Axis` (paired anchor dimensions), `Gravity`→`Discernus Coordinate System`, and framework outputs become `Axis Signatures` (for frameworks like MFT) or `Anchor Signatures` (for frameworks like PFT). Please interpret user experience descriptions using the new cartographic vocabulary.
+
 ---
 
 ## Journey Overview
@@ -35,7 +37,7 @@ The rigorous dual-framework approach surprises her—this isn't another AI tool 
 
 ### **Week 2: Pilot Testing and Academic Integration**
 
-Sarah trains her graduate student on both Discernus MFT and PFT analysis using their existing corpus of campaign speeches. The dual framework approach provides complementary insights—moral foundations reveal underlying values while political framing analysis captures strategic communication patterns. The learning curve is minimal—the interface is designed for researchers, not technologists.
+Sarah trains her graduate student on both Discernus MFT and PFT analysis using their existing corpus of campaign speeches. The dual framework approach provides complementary insights—MFT Axis Signatures reveal underlying values while PFT Anchor Signatures capture strategic communication patterns. The learning curve is minimal—the cartographic interface is designed for researchers, not technologists.
 
 ### **Week 3: Collaborative Research Planning**
 
@@ -127,7 +129,7 @@ Concurrently, leading political communication researchers receive similar outrea
 
 ### **Week 1: Framework Integration Assessment**
 
-Political communication experts review the sophisticated integration of Entman's four framing functions with Lakoff's family model theory, noting the novel arc clustering hypothesis testing approach.
+Political communication experts review the sophisticated integration of Entman's four framing functions with Lakoff's family model theory, noting the novel arc clustering hypothesis testing approach using Anchor Signatures in the Discernus Coordinate System.
 
 ### **Week 2: Theoretical Validation**
 

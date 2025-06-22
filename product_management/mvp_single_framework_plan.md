@@ -5,6 +5,8 @@
 *Status: Focused MVP Strategy*  
 *Approach: Dual Framework End-to-End Validation*
 
+> **Note on Terminology (June 2025):** This document is pending updates from the cartographic terminology refactor currently underway. Legacy terms are being replaced as follows: `Well`→`Anchor` (fixed reference points), `Dipole`→`Axis` (paired anchor dimensions), `Gravity`→`Discernus Coordinate System`, and framework outputs become `Axis Signatures` (for frameworks like MFT) or `Anchor Signatures` (for frameworks like PFT). Please interpret future implementation references using the new cartographic vocabulary.
+
 ---
 
 ## Executive Summary
@@ -66,16 +68,16 @@ This document outlines a comprehensive implementation strategy that demonstrates
 
 #### 1. Dual Framework Implementation
 **Moral Foundations Theory (MFT) Framework**
-- Five-foundation scoring system (Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation)
+- Five-axis scoring system (Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation)
 - Validated lexical markers from established MFT research
 - Prompt templates based on MFQ methodology
-- Circular coordinate system for visualization (existing architecture)
+- Axis Signatures plotted in Discernus Coordinate System for visualization
 
 **Political Framing Theory (PFT) Framework**
 - Entman four framing functions (problem definition, causal interpretation, moral evaluation, solution recommendation)
 - Lakoff family model analysis with arc clustering hypothesis testing
-- Independent wells architecture for function independence
-- Geometric clustering analysis for family model validation
+- Independent anchors architecture for function independence
+- Geometric clustering analysis for family model validation using Anchor Signatures
 
 #### 2. Essential Technical Infrastructure
 **Automated Analysis Pipeline**
@@ -252,31 +254,36 @@ This document outlines a comprehensive implementation strategy that demonstrates
 - Cost monitoring and rate limiting
 
 ### Database Schema
-**Minimal Required Tables for Dual Framework Support**
+**Minimal Required Tables for Dual Framework Support (Updated for Cartographic Terminology)**
 ```sql
 -- Unified analysis table supporting both frameworks
 CREATE TABLE discourse_analyses (
     id UUID PRIMARY KEY,
     text_content TEXT NOT NULL,
-    framework_type VARCHAR NOT NULL, -- 'MFT' or 'PFT'
+    framework_id VARCHAR NOT NULL,
     
-    -- MFT specific fields
+    -- Signature is a flexible field to store the output vector in the Discernus Coordinate System.
+    -- For an Axis-Set Framework (ASFx) like MFT, it's an Axis Signature (vector of axis scores).
+    -- For an Anchor-Set Framework (ASFa) like PFT, it's an Anchor Signature (vector of anchor scores).
+    signature JSONB NOT NULL,
+    
+    -- Specific scores can be broken out for easier querying if needed,
+    -- but the primary data lives in the signature.
+    -- MFT specific fields (example)
     care_score DECIMAL(3,2),
     fairness_score DECIMAL(3,2), 
     loyalty_score DECIMAL(3,2),
     authority_score DECIMAL(3,2),
     sanctity_score DECIMAL(3,2),
     
-    -- PFT specific fields
-    problem_definition JSONB,
-    causal_interpretation JSONB,
-    moral_evaluation JSONB,
-    solution_recommendation JSONB,
+    -- PFT specific fields (example)
+    problem_definition_score JSONB,
+    causal_interpretation_score JSONB,
+    moral_evaluation_score JSONB,
+    solution_recommendation_score JSONB,
     family_model_classification VARCHAR,
-    arc_clustering_data JSONB,
     
     -- Shared fields
-    narrative_position JSONB,
     analysis_metadata JSONB,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -294,12 +301,12 @@ CREATE TABLE validation_studies (
 
 ### Visualization
 **Dual Framework Output**
-- MFT: Basic radar chart with five moral foundation dimensions
-- PFT: Frame detection visualization showing Entman functions and Lakoff family model positioning
-- Combined narrative positioning visualization showing both moral and framing perspectives
-- Arc clustering visualization for Lakoff family model validation
-- Statistical summary tables for both frameworks
-- Export capabilities for academic use supporting both frameworks
+- MFT: Basic radar chart with five moral foundation axes displaying Axis Signatures
+- PFT: Frame detection visualization showing Entman function anchors and Lakoff family model positioning via Anchor Signatures
+- Combined visualization showing both Axis Signatures (MFT) and Anchor Signatures (PFT) in unified Discernus Coordinate System
+- Arc clustering visualization for Lakoff family model validation using geometric analysis of Anchor Signatures
+- Statistical summary tables for both frameworks with signature-based metrics
+- Export capabilities for academic use supporting both framework signature types
 
 ---
 
