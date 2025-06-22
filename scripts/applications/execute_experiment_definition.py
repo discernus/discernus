@@ -350,7 +350,7 @@ class DeclarativeExperimentExecutor:
         start_time = datetime.now()
         framework_id = framework_spec.get("framework_id", "civic_virtue")
         
-        analysis_result = await self.analysis_service.analyze_single_text(
+        analysis_result = self.analysis_service.analyze_single_text(
             text_content=text_content,
             framework_config_id=framework_id,
             llm_model=model_spec.get("model_id", model_spec.get("model")),

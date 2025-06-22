@@ -34,8 +34,8 @@ class RealAnalysisService:
         self.available_connections = self.llm_client.test_connections()
         print(f"🔗 LLM Connections: {self.available_connections}")
     
-    async def analyze_single_text(
-        self, 
+    def analyze_single_text(
+        self,
         text_content: str,
         framework_config_id: str = "civic_virtue",
         prompt_template_id: str = "hierarchical_v1",

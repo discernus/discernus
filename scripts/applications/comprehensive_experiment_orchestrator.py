@@ -375,7 +375,7 @@ except ImportError as e:
     class RealAnalysisService:
         def __init__(self):
             logger.error("RealAnalysisService not available - using fallback")
-        async def analyze_single_text(self, *args, **kwargs):
+        def analyze_single_text(self, *args, **kwargs):
             raise ImportError("RealAnalysisService not properly imported")
 
 # Import QA system for quality validation
@@ -2929,15 +2929,14 @@ All experiment outputs have been saved to: `{experiment_dir}`
                     }
                     
                     # Execute real analysis using RealAnalysisService
-                    import asyncio
-                    analysis_result = asyncio.run(analysis_service.analyze_single_text(
+                    analysis_result = analysis_service.analyze_single_text(
                         text_content=text_content,
                         framework_config_id=framework_id,
                         prompt_template_id=prompt_template,
                         llm_model=model_id,
                         include_justifications=True,
                         include_hierarchical_ranking=True
-                    ))
+                    )
                     
                     # Track costs
                     analysis_cost = analysis_result.get('api_cost', 0.0)

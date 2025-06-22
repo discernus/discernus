@@ -367,7 +367,7 @@ async def analyze_single_text(
         analysis_service = RealAnalysisService()
         
         # Perform real analysis using existing working components
-        analysis_result = await analysis_service.analyze_single_text(
+        analysis_result = analysis_service.analyze_single_text(
             text_content=request.text_content,
             framework_config_id=request.framework_config_id or "civic_virtue",
             prompt_template_id=request.prompt_template_id or "hierarchical_v1",

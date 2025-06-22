@@ -126,11 +126,11 @@ class IDITIExperimentCorrect:
                 # Use correct RealAnalysisService API
                 start_time = datetime.now()
                 
-                analysis_result = await self.analysis_service.analyze_single_text(
+                analysis_result = self.analysis_service.analyze_single_text(
                     text_content=text_data['content'],
                     framework_config_id="iditi",  # Use IDITI framework
                     prompt_template_id="traditional_analysis",
-                    scoring_algorithm_id="linear_traditional", 
+                    scoring_algorithm_id="linear_traditional",
                     llm_model="gpt-4o",
                     include_justifications=True,
                     include_hierarchical_ranking=True
