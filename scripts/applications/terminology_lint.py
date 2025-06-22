@@ -11,51 +11,53 @@ import subprocess
 import sys
 from pathlib import Path
 
-FORBIDDEN_PATTERN = re.compile(r"well|dipole|gravity", re.IGNORECASE)
+FORBIDDEN_PATTERN = re.compile(r'\b(well|dipole|gravity)\b', re.IGNORECASE)
 
 
-def get_staged_files() -> list[str]:
-    """Return a list of staged files to check."""
+def get_staged_changes() -> list[tuple[str, int, str]]:
+    """Return a list of (file, line_number, line_content) for added lines in staged changes."""
     result = subprocess.run(
-        [
-            "git",
-            "diff",
-            "--cached",
-            "--name-only",
-            f"-G{FORBIDDEN_PATTERN.pattern}",
-        ],
+        ["git", "diff", "--cached", "--unified=0"],
         capture_output=True,
         text=True,
         check=False,
     )
-    return [f for f in result.stdout.splitlines() if f and Path(f).is_file()]
-
-
-def find_matches(files: list[str]) -> list[tuple[str, int, str]]:
-    """Scan the given files for forbidden terms."""
+    
     matches = []
-    for path in files:
-        try:
-            with open(path, "r", encoding="utf-8") as fh:
-                for idx, line in enumerate(fh, start=1):
-                    if FORBIDDEN_PATTERN.search(line):
-                        matches.append((path, idx, line.rstrip()))
-        except Exception:
-            # Skip binary or unreadable files
-            continue
+    current_file = None
+    line_number = 0
+    
+    for line in result.stdout.splitlines():
+        if line.startswith("+++"):
+            # New file being processed
+            current_file = line[6:]  # Remove "+++ b/"
+        elif line.startswith("@@"):
+            # Extract line number from hunk header like "@@ -1,4 +1,5 @@"
+            parts = line.split()
+            if len(parts) >= 3:
+                # Parse "+1,5" to get starting line number
+                plus_part = parts[2]
+                if plus_part.startswith("+"):
+                    line_number = int(plus_part[1:].split(",")[0])
+        elif line.startswith("+") and not line.startswith("+++"):
+            # This is an added line
+            line_content = line[1:]  # Remove the "+" prefix
+            if current_file and FORBIDDEN_PATTERN.search(line_content):
+                matches.append((current_file, line_number, line_content.rstrip()))
+            line_number += 1
+        elif not line.startswith("-"):
+            # This is a context line (unchanged)
+            line_number += 1
+    
     return matches
 
 
 def main() -> int:
-    files = get_staged_files()
-    if not files:
-        return 0
-
-    matches = find_matches(files)
+    matches = get_staged_changes()
     if matches:
-        for path, idx, text in matches:
-            print(f"{path}:{idx}: {text}")
-        print("❌ Forbidden terminology detected. See terminology strategy.")
+        for path, line_num, text in matches:
+            print(f"{path}:{line_num}: {text}")
+        print("❌ Forbidden terminology detected in staged changes. See terminology strategy.")
         return 1
     return 0
 
