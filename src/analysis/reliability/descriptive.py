@@ -5,6 +5,10 @@ import pandas as pd
 from scipy import stats
 from scipy.stats import pearsonr, spearmanr
 
+# Import the interpretive functions that were moved to other modules
+from .icc import interpret_icc
+from .cronbach import interpret_cronbach_alpha
+
 logger = logging.getLogger(__name__)
 
 
@@ -189,28 +193,53 @@ def generate_reliability_summary(reliability_results: Dict) -> Dict[str, any]:
         'recommendations': [],
         'quality_indicators': {}
     }
+    
+    # Process ICC results using the interpret_icc function
     icc_results = reliability_results.get('icc_analysis', {})
     if icc_results:
         icc_values = [r.get('icc_value') for r in icc_results.values() if r.get('icc_value') is not None]
         if icc_values:
             avg_icc = np.mean(icc_values)
             summary['quality_indicators']['average_icc'] = float(avg_icc)
-            summary['key_findings'].append(f"Average ICC: {avg_icc:.3f}")
+            
+            # Use the interpret_icc function for proper interpretation
+            icc_interpretation = interpret_icc(avg_icc)
+            summary['key_findings'].append(f"Average ICC: {avg_icc:.3f} ({icc_interpretation})")
+            
+            # Add specific recommendations based on ICC interpretation
+            if 'poor' in icc_interpretation.lower() or 'below' in icc_interpretation.lower():
+                summary['recommendations'].append("Consider increasing sample size or improving rater training - ICC indicates poor reliability")
+            elif 'moderate' in icc_interpretation.lower():
+                summary['recommendations'].append("ICC shows moderate reliability - consider refinements to improve consistency")
+    
+    # Process Cronbach's Alpha results using the interpret_cronbach_alpha function  
     alpha_result = reliability_results.get('cronbach_alpha', {})
     if alpha_result.get('alpha_value') is not None:
         alpha = alpha_result['alpha_value']
         summary['quality_indicators']['cronbach_alpha'] = float(alpha)
-        summary['key_findings'].append(f"Cronbach's Alpha: {alpha:.3f}")
-    icc_good = summary['quality_indicators'].get('average_icc', 0) >= 0.75
-    alpha_good = summary['quality_indicators'].get('cronbach_alpha', 0) >= 0.7
+        
+        # Use the interpret_cronbach_alpha function for proper interpretation
+        alpha_interpretation = interpret_cronbach_alpha(alpha)
+        summary['key_findings'].append(f"Cronbach's Alpha: {alpha:.3f} ({alpha_interpretation})")
+        
+        # Add specific recommendations based on Alpha interpretation
+        if 'unacceptable' in alpha_interpretation.lower() or 'poor' in alpha_interpretation.lower():
+            summary['recommendations'].append("Review internal consistency - Cronbach's Alpha indicates poor reliability")
+        elif 'questionable' in alpha_interpretation.lower():
+            summary['recommendations'].append("Consider reviewing scale items - Alpha suggests questionable internal consistency")
+    
+    # Determine overall reliability using interpretive functions instead of hardcoded thresholds
+    icc_good = 'good' in interpret_icc(summary['quality_indicators'].get('average_icc', 0)).lower() or \
+               'excellent' in interpret_icc(summary['quality_indicators'].get('average_icc', 0)).lower()
+    alpha_good = 'good' in interpret_cronbach_alpha(summary['quality_indicators'].get('cronbach_alpha', 0)).lower() or \
+                 'acceptable' in interpret_cronbach_alpha(summary['quality_indicators'].get('cronbach_alpha', 0)).lower() or \
+                 'excellent' in interpret_cronbach_alpha(summary['quality_indicators'].get('cronbach_alpha', 0)).lower()
+    
     if icc_good and alpha_good:
         summary['overall_reliability'] = 'excellent'
     elif icc_good or alpha_good:
         summary['overall_reliability'] = 'good'
     else:
         summary['overall_reliability'] = 'needs_improvement'
-    if not icc_good:
-        summary['recommendations'].append("Consider increasing sample size or improving rater training")
-    if not alpha_good:
-        summary['recommendations'].append("Review internal consistency - some wells may be measuring different constructs")
+    
     return summary
