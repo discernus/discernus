@@ -21,33 +21,11 @@ except ImportError:
 # Load environment variables
 load_dotenv()
 
-try:
-    import openai
-except ImportError:
-    print("Installing OpenAI library...")
-    os.system("pip install openai")
-    import openai
 
-try:
-    import anthropic
-except ImportError:
-    print("Installing Anthropic library...")
-    os.system("pip install anthropic")
-    import anthropic
-
-try:
-    from mistralai.client import MistralClient
-except ImportError:
-    print("Installing Mistral library...")
-    os.system("pip install mistralai")
-    from mistralai.client import MistralClient
-
-try:
-    import google.generativeai as genai
-except ImportError:
-    print("Installing Google AI library...")
-    os.system("pip install google-generativeai")
-    import google.generativeai as genai
+from .providers.openai_client import OpenAIProvider
+from .providers.anthropic_client import AnthropicProvider
+from .providers.mistral_client import MistralProvider
+from .providers.google_client import GoogleAIProvider
 
 
 class DirectAPIClient:
@@ -89,7 +67,7 @@ class DirectAPIClient:
         # Initialize OpenAI
         openai_key = os.getenv("OPENAI_API_KEY")
         if openai_key:
-            self.openai_client = openai.OpenAI(api_key=openai_key)
+            self.openai_client = OpenAIProvider(openai_key, self.cost_manager)
             print("✅ OpenAI client initialized (2025 models available)")
         else:
             print("⚠️ OpenAI API key not found in environment")
@@ -97,7 +75,7 @@ class DirectAPIClient:
         # Initialize Anthropic
         anthropic_key = os.getenv("ANTHROPIC_API_KEY")
         if anthropic_key:
-            self.anthropic_client = anthropic.Anthropic(api_key=anthropic_key)
+            self.anthropic_client = AnthropicProvider(anthropic_key, self.cost_manager)
             print("✅ Anthropic client initialized (Claude 4 series available)")
         else:
             print("⚠️ Anthropic API key not found in environment")
@@ -106,7 +84,7 @@ class DirectAPIClient:
         mistral_key = os.getenv("MISTRAL_API_KEY")
         if mistral_key:
             try:
-                self.mistral_client = MistralClient(api_key=mistral_key)
+                self.mistral_client = MistralProvider(mistral_key, self.cost_manager)
                 print("✅ Mistral client initialized (2025 models available)")
             except NotImplementedError:
                 print("⚠️ Mistral client deprecated - skipping Mistral support")
@@ -118,8 +96,7 @@ class DirectAPIClient:
         # Initialize Google AI
         google_ai_key = os.getenv("GOOGLE_AI_API_KEY")
         if google_ai_key:
-            genai.configure(api_key=google_ai_key)
-            self.google_ai_client = genai
+            self.google_ai_client = GoogleAIProvider(google_ai_key, self.cost_manager)
             print("✅ Google AI client initialized (Gemini 2.5 series available)")
         else:
             print("⚠️ Google AI API key not found in environment")
@@ -131,7 +108,7 @@ class DirectAPIClient:
         # Test OpenAI with GPT-4.1-mini (most cost-effective latest model)
         if self.openai_client:
             try:
-                response = self.openai_client.chat.completions.create(
+                response = self.openai_client.client.chat.completions.create(
                     model="gpt-4.1-mini",
                     messages=[{"role": "user", "content": "Hello"}],
                     max_tokens=5
@@ -141,7 +118,7 @@ class DirectAPIClient:
             except Exception as e:
                 # Fallback to older model if 4.1 not available yet
                 try:
-                    response = self.openai_client.chat.completions.create(
+                    response = self.openai_client.client.chat.completions.create(
                         model="gpt-3.5-turbo",
                         messages=[{"role": "user", "content": "Hello"}],
                         max_tokens=5
@@ -157,7 +134,7 @@ class DirectAPIClient:
         # Test Anthropic with Claude 3.5 Sonnet (current production model)
         if self.anthropic_client:
             try:
-                response = self.anthropic_client.messages.create(
+                response = self.anthropic_client.client.messages.create(
                     model="claude-3-5-sonnet-20241022",
                     max_tokens=5,
                     messages=[{"role": "user", "content": "Hello"}]
@@ -167,7 +144,7 @@ class DirectAPIClient:
             except Exception as e:
                 # Fallback to older model
                 try:
-                    response = self.anthropic_client.messages.create(
+                    response = self.anthropic_client.client.messages.create(
                         model="claude-3-haiku-20240307",
                         max_tokens=5,
                         messages=[{"role": "user", "content": "Hello"}]
@@ -183,7 +160,7 @@ class DirectAPIClient:
         # Test Mistral with latest production model
         if self.mistral_client:
             try:
-                response = self.mistral_client.chat(
+                response = self.mistral_client.client.chat(
                     model="mistral-large-2411",
                     messages=[{"role": "user", "content": "Hello"}],
                     max_tokens=5
@@ -193,7 +170,7 @@ class DirectAPIClient:
             except Exception as e:
                 # Fallback to older model
                 try:
-                    response = self.mistral_client.chat(
+                    response = self.mistral_client.client.chat(
                         model="mistral-tiny",
                         messages=[{"role": "user", "content": "Hello"}],
                         max_tokens=5
@@ -210,14 +187,14 @@ class DirectAPIClient:
         # Test Google AI with Gemini 2.0 Flash
         if self.google_ai_client:
             try:
-                model = self.google_ai_client.GenerativeModel('gemini-2.0-flash-exp')
+                model = self.google_ai_client.client.GenerativeModel('gemini-2.0-flash-exp')
                 response = model.generate_content("Hello")
                 results["google_ai"] = True
                 print("✅ Google AI connection successful (Gemini 2.x series)")
             except Exception as e:
                 # Fallback to older model
                 try:
-                    model = self.google_ai_client.GenerativeModel('gemini-1.5-flash')
+                    model = self.google_ai_client.client.GenerativeModel('gemini-1.5-flash')
                     response = model.generate_content("Hello")
                     results["google_ai"] = True
                     print("✅ Google AI connection successful (fallback model)")
@@ -307,48 +284,13 @@ class DirectAPIClient:
             return "unknown"
     
     def _analyze_with_openai(self, prompt: str, model_name: str = "gpt-4.1") -> Tuple[Dict[str, Any], float]:
-        """Analyze with OpenAI models - Updated for 2025 with retry handling"""
+        """Analyze with OpenAI models via provider class."""
         if not self.openai_client:
             raise ValueError("OpenAI client not initialized")
-        
-        # Updated model mappings for 2025
-        model_map = {
-            # Legacy mappings
-            "gpt-4": "gpt-4.1",
-            "gpt-3.5-turbo": "gpt-4.1-mini",
-            "openai": "gpt-4.1",
-            
-            # 2025 GPT-4.1 series (April 2025)
-            "gpt-4.1": "gpt-4.1",
-            "gpt-4.1-mini": "gpt-4.1-mini", 
-            "gpt-4.1-nano": "gpt-4.1-nano",
-            
-            # o-series reasoning models (2025)
-            "o1": "o1",
-            "o3": "o3",  
-            "o4-mini": "o4-mini",
-            
-            # GPT-4o variants
-            "gpt-4o": "gpt-4o",
-            "gpt-4o-mini": "gpt-4o-mini",
-            
-            # Open-source models (using compatible APIs)
-            "deepseek-r1": "gpt-4.1",  # Map to GPT-4.1 for now
-            "qwen3-235b": "gpt-4.1",   # Map to GPT-4.1 for now
-            "llama-4-scout": "gpt-4.1", # Map to GPT-4.1 for now
-            "llama-3.3-70b": "gpt-4.1", # Map to GPT-4.1 for now
-            
-            # Current production fallbacks
-            "gpt-4-turbo": "gpt-4-turbo-2024-04-09",
-        }
-        
-        model = model_map.get(model_name, "gpt-4.1")
-        
-        # Use retry handler if available, otherwise basic error handling
-        if self.retry_handler:
-            return self._openai_api_call_with_retry(prompt, model)
-        else:
-            return self._openai_api_call_basic(prompt, model)
+
+        self._enforce_rate_limit("openai")
+        content, cost, _ = self.openai_client._analyze(prompt, model_name)
+        return self._parse_response(content, self._current_text, self._current_framework), cost
     
     def _openai_api_call_with_retry(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
         """OpenAI API call with retry logic."""
@@ -483,183 +425,22 @@ class DirectAPIClient:
             return {"error": str(e)}, 0.0
     
     def _analyze_with_anthropic(self, prompt: str, model_name: str = "claude-4-opus") -> Tuple[Dict[str, Any], float]:
-        """Analyze with Anthropic models - Updated for 2025"""
+        """Analyze with Anthropic models via provider class."""
         if not self.anthropic_client:
             raise ValueError("Anthropic client not initialized")
-        
-        # Updated model mappings for 2025
-        model_map = {
-            # Legacy mappings updated to latest
-            "claude": "claude-3-5-sonnet-20241022",
-            "claude-3": "claude-3-5-sonnet-20241022",
-            "claude-3-sonnet": "claude-3-5-sonnet-20241022",
-            "claude-3-haiku": "claude-3-5-haiku-20241022",
-            "anthropic": "claude-4-sonnet",
-            
-            # Claude 4 series (May 2025)
-            "claude-4": "claude-4-sonnet",
-            "claude-4-opus": "claude-4-opus",
-            "claude-4-sonnet": "claude-4-sonnet",
-            
-            # Claude 3.7 with extended thinking (February 2025)
-            "claude-3.7": "claude-3-7-sonnet",
-            "claude-3.7-sonnet": "claude-3-7-sonnet",
-            
-            # Latest Claude 3.5 series
-            "claude-3.5-sonnet": "claude-3-5-sonnet-20241022",
-            "claude-3.5-haiku": "claude-3-5-haiku-20241022",
-            
-            # Production models
-            "claude-3-5-sonnet-20241022": "claude-3-5-sonnet-20241022",
-            "claude-3-5-haiku-20241022": "claude-3-5-haiku-20241022",
-        }
-        
-        model = model_map.get(model_name, "claude-3-5-sonnet-20241022")
-        
-        # Enforce polite rate limiting before making request
+
         self._enforce_rate_limit("anthropic")
-        
-        try:
-            # Adjust max tokens based on model capabilities
-            max_tokens = 2000
-            if "claude-4" in model:
-                max_tokens = 4000  # Claude 4 has enhanced output capabilities
-            elif "3.7" in model:
-                max_tokens = 3000  # Extended thinking models
-                
-            response = self.anthropic_client.messages.create(
-                model=model,
-                max_tokens=max_tokens,
-                temperature=0.1,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            
-            content = response.content[0].text
-            
-            # Calculate cost with updated 2025 pricing
-            usage = response.usage
-            
-            if "claude-4" in model:
-                if "opus" in model:
-                    # Claude 4 Opus - premium model
-                    cost = (usage.input_tokens * 0.025 / 1000) + (usage.output_tokens * 0.125 / 1000)
-                else:  # Claude 4 Sonnet
-                    cost = (usage.input_tokens * 0.006 / 1000) + (usage.output_tokens * 0.024 / 1000)
-            elif "3.7" in model:
-                # Claude 3.7 with extended thinking
-                cost = (usage.input_tokens * 0.004 / 1000) + (usage.output_tokens * 0.018 / 1000)
-            elif "3-5" in model or "3.5" in model:
-                if "sonnet" in model:
-                    cost = (usage.input_tokens * 0.003 / 1000) + (usage.output_tokens * 0.015 / 1000)
-                else:  # haiku
-                    cost = (usage.input_tokens * 0.00025 / 1000) + (usage.output_tokens * 0.00125 / 1000)
-            else:
-                # Fallback for older models
-                cost = (usage.input_tokens * 0.003 / 1000) + (usage.output_tokens * 0.015 / 1000)
-            
-            # Record actual cost
-            if self.cost_manager:
-                self.cost_manager.record_cost(
-                    provider="anthropic",
-                    model=model,
-                    actual_cost=cost,
-                    tokens_input=usage.input_tokens,
-                    tokens_output=usage.output_tokens,
-                    request_type="analysis"
-                )
-            
-            return self._parse_response(content, self._current_text, self._current_framework), cost
-            
-        except Exception as e:
-            print(f"Anthropic API error: {e}")
-            return {"error": str(e)}, 0.0
+        content, cost, _ = self.anthropic_client._analyze(prompt, model_name)
+        return self._parse_response(content, self._current_text, self._current_framework), cost
     
     def _analyze_with_mistral(self, prompt: str, model_name: str = "mistral-medium-3") -> Tuple[Dict[str, Any], float]:
-        """Analyze with Mistral models - Updated for 2025"""
+        """Analyze with Mistral models via provider class."""
         if not self.mistral_client:
             raise ValueError("Mistral client not initialized")
-        
-        # Updated model mappings for 2025
-        model_map = {
-            # Legacy mappings updated
-            "mistral": "mistral-large-2411",
-            "mistral-large": "mistral-large-2411",
-            "mistral-medium": "mistral-medium-3",
-            "mistral-small": "mistral-small-3.1",
-            
-            # 2025 Models
-            "mistral-medium-3": "mistral-medium-3",  # May 2025 - frontier multimodal
-            "mistral-small-3.1": "mistral-small-3.1",  # Latest small model
-            "codestral-2501": "codestral-2501",  # January 2025 - coding
-            "mistral-ocr-2505": "mistral-ocr-2505",  # May 2025 - OCR
-            "mistral-saba-2502": "mistral-saba-2502",  # February 2025 - multilingual
-            "devstral-small-2505": "devstral-small-2505",  # May 2025 - software engineering
-            
-            # Production models
-            "mistral-large-2411": "mistral-large-2411",
-            "mistral-small-2409": "mistral-small-2409",
-        }
-        
-        model = model_map.get(model_name, "mistral-large-2411")
-        
-        try:
-            # Adjust parameters based on model type
-            max_tokens = 2000
-            if "medium-3" in model:
-                max_tokens = 4000  # Frontier model with enhanced capabilities
-            elif "codestral" in model or "devstral" in model:
-                max_tokens = 3000  # Coding-optimized models
-                
-            response = self.mistral_client.chat(
-                model=model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,
-                max_tokens=max_tokens
-            )
-            
-            content = response.choices[0].message.content
-            
-            # Calculate cost with 2025 pricing
-            # Estimate tokens if not provided
-            input_tokens = len(prompt.split()) * 1.3
-            output_tokens = len(content.split()) * 1.3
-            
-            if "medium-3" in model:
-                # Frontier multimodal model - premium pricing
-                cost = (input_tokens * 0.02 / 1000) + (output_tokens * 0.06 / 1000)
-            elif "codestral-2501" in model or "devstral" in model:
-                # Specialized coding models
-                cost = (input_tokens * 0.012 / 1000) + (output_tokens * 0.036 / 1000)
-            elif "ocr" in model:
-                # OCR service pricing (per operation)
-                cost = 0.02  # Flat rate per OCR operation
-            elif "saba" in model:
-                # Multilingual model
-                cost = (input_tokens * 0.008 / 1000) + (output_tokens * 0.024 / 1000)
-            elif "large-2411" in model:
-                cost = (input_tokens * 0.008 / 1000) + (output_tokens * 0.024 / 1000)
-            elif "small" in model:
-                cost = (input_tokens * 0.002 / 1000) + (output_tokens * 0.006 / 1000)
-            else:
-                # Fallback pricing
-                cost = (input_tokens * 0.008 / 1000) + (output_tokens * 0.024 / 1000)
-            
-            # Record actual cost
-            if self.cost_manager:
-                self.cost_manager.record_cost(
-                    provider="mistral",
-                    model=model,
-                    actual_cost=cost,
-                    tokens_input=int(input_tokens),
-                    tokens_output=int(output_tokens),
-                    request_type="analysis"
-                )
-            
-            return self._parse_response(content, self._current_text, self._current_framework), cost
-            
-        except Exception as e:
-            print(f"Mistral API error: {e}")
-            return {"error": str(e)}, 0.0
+
+        self._enforce_rate_limit("mistral")
+        content, cost, _ = self.mistral_client._analyze(prompt, model_name)
+        return self._parse_response(content, self._current_text, self._current_framework), cost
     
     def _parse_response(self, content: str, text_input: str = None, framework: str = None) -> Dict[str, Any]:
         """Parse LLM response with integrated quality assurance validation - supports both simple and hierarchical formats"""
@@ -838,94 +619,15 @@ class DirectAPIClient:
                         continue
         
         return result
-    
     def _analyze_with_google_ai(self, prompt: str, model_name: str = "gemini-2.5-pro") -> Tuple[Dict[str, Any], float]:
-        """Analyze with Google AI models - Updated for 2025"""
+        """Analyze with Google AI models via provider class."""
         if not self.google_ai_client:
             raise ValueError("Google AI client not initialized")
-        
-        # Updated model mappings for 2025
-        model_map = {
-            # Legacy mappings updated
-            "gemini": "gemini-2-0-flash-exp",
-            "gemini-pro": "gemini-2-0-flash-exp",
-            "gemini-1.5-flash": "gemini-2-0-flash-exp",
-            "gemini-1.5-pro": "gemini-2-0-flash-exp",
-            "google": "gemini-2-0-flash-exp",
-            
-            # Gemini 2.5 series (2025)
-            "gemini-2.5-pro": "gemini-2-5-pro-preview",  # June 2025 - most intelligent
-            "gemini-2.5-flash": "gemini-2-5-flash-preview",  # May 2025 - adaptive thinking
-            
-            # Gemini 2.0 series
-            "gemini-2.0-flash": "gemini-2-0-flash-exp",
-            "gemini-2.0-pro": "gemini-2-0-flash-exp",
-            
-            # Production models (current availability)
-            "gemini-2-0-flash-exp": "gemini-2-0-flash-exp",
-            "gemini-2-5-pro-preview": "gemini-2-5-pro-preview",
-            "gemini-2-5-flash-preview": "gemini-2-5-flash-preview",
-        }
-        
-        model = model_map.get(model_name, "gemini-2-0-flash-exp")
-        
-        try:
-            # Create model instance with advanced configuration
-            generation_config = {
-                "temperature": 0.1,
-                "max_output_tokens": 4000 if "2.5" in model else 2000,
-            }
-            
-            # For Gemini 2.5, enable Deep Think reasoning
-            if "2.5" in model:
-                generation_config["reasoning_budget"] = "high"  # Enable adaptive thinking
-            
-            ai_model = self.google_ai_client.GenerativeModel(
-                model_name=model,
-                generation_config=generation_config
-            )
-            
-            # Generate content
-            response = ai_model.generate_content(prompt)
-            content = response.text
-            
-            # Calculate cost with 2025 pricing
-            input_chars = len(prompt)
-            output_chars = len(content)
-            
-            if "2.5-pro" in model:
-                # Gemini 2.5 Pro - premium with Deep Think
-                cost = (input_chars * 0.002 / 1000) + (output_chars * 0.008 / 1000)
-            elif "2.5-flash" in model:
-                # Gemini 2.5 Flash - adaptive thinking
-                cost = (input_chars * 0.001 / 1000) + (output_chars * 0.004 / 1000)
-            elif "2.0" in model or "2-0" in model:
-                # Gemini 2.0 series
-                cost = (input_chars * 0.0008 / 1000) + (output_chars * 0.003 / 1000)
-            else:
-                # Fallback pricing
-                cost = (input_chars * 0.0005 / 1000) + (output_chars * 0.0015 / 1000)
-            
-            # Estimate tokens for recording (chars / 4 approximate)
-            input_tokens = input_chars // 4
-            output_tokens = output_chars // 4
-            
-            # Record actual cost
-            if self.cost_manager:
-                self.cost_manager.record_cost(
-                    provider="google_ai",
-                    model=model,
-                    actual_cost=cost,
-                    tokens_input=input_tokens,
-                    tokens_output=output_tokens,
-                    request_type="analysis"
-                )
-            
-            return self._parse_response(content, self._current_text, self._current_framework), cost
-            
-        except Exception as e:
-            print(f"Google AI API error: {e}")
-            return {"error": str(e)}, 0.0
+
+        self._enforce_rate_limit("google_ai")
+        content, cost, _ = self.google_ai_client._analyze(prompt, model_name)
+        return self._parse_response(content, self._current_text, self._current_framework), cost
+
     
     def get_available_models(self) -> Dict[str, list]:
         """Get list of available models - Updated for 2025"""
