@@ -288,68 +288,21 @@ class DirectAPIClient:
         if not self.openai_client:
             raise ValueError("OpenAI client not initialized")
 
-        self._enforce_rate_limit("openai")
-        content, cost, _ = self.openai_client._analyze(prompt, model_name)
-        return self._parse_response(content, self._current_text, self._current_framework), cost
+        # Use retry handler if available, otherwise basic error handling
+        if self.retry_handler:
+            return self._openai_api_call_with_retry_provider(prompt, model_name)
+        else:
+            return self._openai_api_call_basic_provider(prompt, model_name)
     
-    def _openai_api_call_with_retry(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
-        """OpenAI API call with retry logic."""
+    def _openai_api_call_with_retry_provider(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """OpenAI API call with retry logic using provider."""
         
         # Enforce polite rate limiting before making request
         self._enforce_rate_limit("openai")
         
         @self.retry_handler.with_retry("openai", model)
         def make_openai_call():
-            # Check if model supports extended context for narrative analysis
-            max_tokens = 2000
-            if "4.1" in model:
-                max_tokens = 4000  # GPT-4.1 series supports longer outputs
-            elif model.startswith("o"):
-                max_tokens = 3000  # o-series optimized for reasoning
-                
-            response = self.openai_client.chat.completions.create(
-                model=model,
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=max_tokens,
-                temperature=0.1
-            )
-            
-            content = response.choices[0].message.content
-            usage = response.usage
-            
-            # Calculate cost with updated 2025 pricing
-            if "4.1" in model:
-                if "mini" in model:
-                    cost = (usage.prompt_tokens * 0.00015 / 1000) + (usage.completion_tokens * 0.0006 / 1000)
-                elif "nano" in model:
-                    cost = (usage.prompt_tokens * 0.0001 / 1000) + (usage.completion_tokens * 0.0004 / 1000)
-                else:  # GPT-4.1 standard
-                    cost = (usage.prompt_tokens * 0.005 / 1000) + (usage.completion_tokens * 0.015 / 1000)
-            elif model.startswith("o"):
-                # o-series reasoning models (premium pricing for reasoning)
-                if "mini" in model:
-                    cost = (usage.prompt_tokens * 0.003 / 1000) + (usage.completion_tokens * 0.012 / 1000)
-                else:
-                    cost = (usage.prompt_tokens * 0.015 / 1000) + (usage.completion_tokens * 0.06 / 1000)
-            elif "4o" in model:
-                if "mini" in model:
-                    cost = (usage.prompt_tokens * 0.00015 / 1000) + (usage.completion_tokens * 0.0006 / 1000)
-                else:
-                    cost = (usage.prompt_tokens * 0.0025 / 1000) + (usage.completion_tokens * 0.01 / 1000)
-            else:
-                # Fallback pricing for older models
-                cost = (usage.prompt_tokens * 0.01 / 1000) + (usage.completion_tokens * 0.03 / 1000)
-            
-            # Record actual cost
-            if self.cost_manager:
-                self.cost_manager.record_cost(
-                    provider="openai",
-                    model=model,
-                    actual_cost=cost,
-                    tokens_input=usage.prompt_tokens,
-                    tokens_output=usage.completion_tokens,
-                    request_type="analysis"
-                )
+            content, cost, _ = self.openai_client._analyze(prompt, model)
             
             # Mark provider as healthy on success
             if self.failover_handler:
@@ -359,67 +312,13 @@ class DirectAPIClient:
         
         return make_openai_call()
     
-    def _openai_api_call_basic(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
-        """Basic OpenAI API call with simple error handling (fallback)."""
-        # Enforce polite rate limiting before making request
+    def _openai_api_call_basic_provider(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """Basic OpenAI API call with simple error handling using provider."""
         self._enforce_rate_limit("openai")
         
         try:
-            # Check if model supports extended context for narrative analysis
-            max_tokens = 2000
-            if "4.1" in model:
-                max_tokens = 4000  # GPT-4.1 series supports longer outputs
-            elif model.startswith("o"):
-                max_tokens = 3000  # o-series optimized for reasoning
-                
-            response = self.openai_client.chat.completions.create(
-                model=model,
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=max_tokens,
-                temperature=0.1
-            )
-            
-            content = response.choices[0].message.content
-            
-            # Calculate cost with updated 2025 pricing
-            usage = response.usage
-            
-            # Updated pricing for 2025 models (significantly reduced costs)
-            if "4.1" in model:
-                if "mini" in model:
-                    cost = (usage.prompt_tokens * 0.00015 / 1000) + (usage.completion_tokens * 0.0006 / 1000)
-                elif "nano" in model:
-                    cost = (usage.prompt_tokens * 0.0001 / 1000) + (usage.completion_tokens * 0.0004 / 1000)
-                else:  # GPT-4.1 standard
-                    cost = (usage.prompt_tokens * 0.005 / 1000) + (usage.completion_tokens * 0.015 / 1000)
-            elif model.startswith("o"):
-                # o-series reasoning models (premium pricing for reasoning)
-                if "mini" in model:
-                    cost = (usage.prompt_tokens * 0.003 / 1000) + (usage.completion_tokens * 0.012 / 1000)
-                else:
-                    cost = (usage.prompt_tokens * 0.015 / 1000) + (usage.completion_tokens * 0.06 / 1000)
-            elif "4o" in model:
-                if "mini" in model:
-                    cost = (usage.prompt_tokens * 0.00015 / 1000) + (usage.completion_tokens * 0.0006 / 1000)
-                else:
-                    cost = (usage.prompt_tokens * 0.0025 / 1000) + (usage.completion_tokens * 0.01 / 1000)
-            else:
-                # Fallback pricing for older models
-                cost = (usage.prompt_tokens * 0.01 / 1000) + (usage.completion_tokens * 0.03 / 1000)
-            
-            # Record actual cost
-            if self.cost_manager:
-                self.cost_manager.record_cost(
-                    provider="openai",
-                    model=model,
-                    actual_cost=cost,
-                    tokens_input=usage.prompt_tokens,
-                    tokens_output=usage.completion_tokens,
-                    request_type="analysis"
-                )
-            
+            content, cost, _ = self.openai_client._analyze(prompt, model)
             return self._parse_response(content, self._current_text, self._current_framework), cost
-            
         except Exception as e:
             print(f"OpenAI API error: {e}")
             return {"error": str(e)}, 0.0
@@ -429,18 +328,80 @@ class DirectAPIClient:
         if not self.anthropic_client:
             raise ValueError("Anthropic client not initialized")
 
+        # Use retry handler if available, otherwise basic error handling
+        if self.retry_handler:
+            return self._anthropic_api_call_with_retry_provider(prompt, model_name)
+        else:
+            return self._anthropic_api_call_basic_provider(prompt, model_name)
+    
+    def _anthropic_api_call_with_retry_provider(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """Anthropic API call with retry logic using provider."""
+        
+        # Enforce polite rate limiting before making request
         self._enforce_rate_limit("anthropic")
-        content, cost, _ = self.anthropic_client._analyze(prompt, model_name)
-        return self._parse_response(content, self._current_text, self._current_framework), cost
+        
+        @self.retry_handler.with_retry("anthropic", model)
+        def make_anthropic_call():
+            content, cost, _ = self.anthropic_client._analyze(prompt, model)
+            
+            # Mark provider as healthy on success
+            if self.failover_handler:
+                self.failover_handler.mark_provider_healthy("anthropic")
+            
+            return self._parse_response(content, self._current_text, self._current_framework), cost
+        
+        return make_anthropic_call()
+    
+    def _anthropic_api_call_basic_provider(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """Basic Anthropic API call with simple error handling using provider."""
+        self._enforce_rate_limit("anthropic")
+        
+        try:
+            content, cost, _ = self.anthropic_client._analyze(prompt, model)
+            return self._parse_response(content, self._current_text, self._current_framework), cost
+        except Exception as e:
+            print(f"Anthropic API error: {e}")
+            return {"error": str(e)}, 0.0
     
     def _analyze_with_mistral(self, prompt: str, model_name: str = "mistral-medium-3") -> Tuple[Dict[str, Any], float]:
         """Analyze with Mistral models via provider class."""
         if not self.mistral_client:
             raise ValueError("Mistral client not initialized")
 
+        # Use retry handler if available, otherwise basic error handling
+        if self.retry_handler:
+            return self._mistral_api_call_with_retry_provider(prompt, model_name)
+        else:
+            return self._mistral_api_call_basic_provider(prompt, model_name)
+    
+    def _mistral_api_call_with_retry_provider(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """Mistral API call with retry logic using provider."""
+        
+        # Enforce polite rate limiting before making request
         self._enforce_rate_limit("mistral")
-        content, cost, _ = self.mistral_client._analyze(prompt, model_name)
-        return self._parse_response(content, self._current_text, self._current_framework), cost
+        
+        @self.retry_handler.with_retry("mistral", model)
+        def make_mistral_call():
+            content, cost, _ = self.mistral_client._analyze(prompt, model)
+            
+            # Mark provider as healthy on success
+            if self.failover_handler:
+                self.failover_handler.mark_provider_healthy("mistral")
+            
+            return self._parse_response(content, self._current_text, self._current_framework), cost
+        
+        return make_mistral_call()
+    
+    def _mistral_api_call_basic_provider(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """Basic Mistral API call with simple error handling using provider."""
+        self._enforce_rate_limit("mistral")
+        
+        try:
+            content, cost, _ = self.mistral_client._analyze(prompt, model)
+            return self._parse_response(content, self._current_text, self._current_framework), cost
+        except Exception as e:
+            print(f"Mistral API error: {e}")
+            return {"error": str(e)}, 0.0
     
     def _parse_response(self, content: str, text_input: str = None, framework: str = None) -> Dict[str, Any]:
         """Parse LLM response with integrated quality assurance validation - supports both simple and hierarchical formats"""
@@ -624,10 +585,40 @@ class DirectAPIClient:
         if not self.google_ai_client:
             raise ValueError("Google AI client not initialized")
 
+        # Use retry handler if available, otherwise basic error handling
+        if self.retry_handler:
+            return self._google_ai_api_call_with_retry_provider(prompt, model_name)
+        else:
+            return self._google_ai_api_call_basic_provider(prompt, model_name)
+    
+    def _google_ai_api_call_with_retry_provider(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """Google AI API call with retry logic using provider."""
+        
+        # Enforce polite rate limiting before making request
         self._enforce_rate_limit("google_ai")
-        content, cost, _ = self.google_ai_client._analyze(prompt, model_name)
-        return self._parse_response(content, self._current_text, self._current_framework), cost
-
+        
+        @self.retry_handler.with_retry("google_ai", model)
+        def make_google_ai_call():
+            content, cost, _ = self.google_ai_client._analyze(prompt, model)
+            
+            # Mark provider as healthy on success
+            if self.failover_handler:
+                self.failover_handler.mark_provider_healthy("google_ai")
+            
+            return self._parse_response(content, self._current_text, self._current_framework), cost
+        
+        return make_google_ai_call()
+    
+    def _google_ai_api_call_basic_provider(self, prompt: str, model: str) -> Tuple[Dict[str, Any], float]:
+        """Basic Google AI API call with simple error handling using provider."""
+        self._enforce_rate_limit("google_ai")
+        
+        try:
+            content, cost, _ = self.google_ai_client._analyze(prompt, model)
+            return self._parse_response(content, self._current_text, self._current_framework), cost
+        except Exception as e:
+            print(f"Google AI API error: {e}")
+            return {"error": str(e)}, 0.0
     
     def get_available_models(self) -> Dict[str, list]:
         """Get list of available models - Updated for 2025"""
