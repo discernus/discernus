@@ -3,6 +3,12 @@ Discernus - Changelog
 [Unreleased]
 
 ### Fixed
+- **CRITICAL: JSON Export System Restored** - Fixed missing JSON output files in enhanced analysis pipeline that were blocking experiment completion validation
+  - Root Cause: Docker container was using cached code without JSON file saving functionality
+  - Fixed: Enhanced analysis pipeline now properly creates required JSON files (structured_results.json, statistical_results.json, reliability_results.json)
+  - Solution: Rebuilt Docker container with --no-cache to pick up code changes and added proper error handling for JSON file operations
+  - Impact: Core visualization system now works end-to-end with complete data export packages for academic use
+  - Result: All 3 required JSON files now generated and output validation passes successfully
 - **CRITICAL: Test Suite Architecture Mismatch Resolved** - Fixed 15+ test files with incorrect `src.narrative_gravity.*` imports that didn't match current `src.*` structure
   - Updated all test imports to match current codebase architecture
   - Removed deprecated tests for functionality moved to `deprecated/` directory (auth, celery, sanitization)

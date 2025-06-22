@@ -29,6 +29,9 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=postgres
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+      - GOOGLE_AI_API_KEY=${GOOGLE_AI_API_KEY}
     volumes:
       - ./experiments:/app/experiments
       - ./frameworks:/app/frameworks
