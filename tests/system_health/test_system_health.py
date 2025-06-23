@@ -90,14 +90,30 @@ class DiscernusVisualizationEngine:
         
         # Plot analysis results
         colors = ['red', 'green', 'orange']
+        x_coords, y_coords = [], []
+        
         for i, result in enumerate(analysis_results):
             coords = result.get('coordinates', {})
             x, y = coords.get('x', 0), coords.get('y', 0)
+            x_coords.append(x)
+            y_coords.append(y)
             
             ax.plot(x, y, 's', markersize=12, color=colors[i % len(colors)], 
                    label=f"Run {i+1}", alpha=0.8)
             ax.annotate(f"Run {i+1}", (x, y), xytext=(10, 10), textcoords='offset points',
                        fontsize=9, bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.7))
+        
+        # Calculate and plot centroid
+        if x_coords and y_coords:
+            centroid_x = np.mean(x_coords)
+            centroid_y = np.mean(y_coords)
+            
+            # Plot centroid with distinctive marker
+            ax.plot(centroid_x, centroid_y, 'D', markersize=14, color='black', 
+                   label='Centroid', alpha=0.9, markeredgecolor='white', markeredgewidth=2)
+            ax.annotate('Centroid', (centroid_x, centroid_y), xytext=(-10, -25), textcoords='offset points',
+                       fontsize=10, fontweight='bold', ha='center',
+                       bbox=dict(boxstyle="round,pad=0.3", facecolor='yellow', alpha=0.8))
         
         ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
         ax.set_xlabel('Coordinate X', fontsize=12)
@@ -105,7 +121,7 @@ class DiscernusVisualizationEngine:
         ax.legend()
         
         # Add provenance stamp
-        self._add_chart_stamp(ax, 'coordinate_analysis')
+        self._add_chart_stamp(ax, 'coordinate_analysis', analysis_results)
         
         # Save plot
         plot_path = self.charts_dir / "coordinate_analysis.png"
@@ -114,25 +130,58 @@ class DiscernusVisualizationEngine:
         
         return plot_path
     
-    def _add_chart_stamp(self, ax, chart_type: str):
-        """Add provenance stamp to chart"""
+    def _add_chart_stamp(self, ax, chart_type: str, analysis_results: List[Dict] = None):
+        """Add provenance stamp to chart with hash for auditability"""
         from datetime import datetime
+        import hashlib
         
-        # Create stamp text
+        # Generate hash for provenance
+        hash_input = self._generate_hash_input(chart_type, analysis_results)
+        chart_hash = hashlib.sha256(hash_input.encode()).hexdigest()[:8]  # First 8 chars
+        
+        # Create stamp text with hash
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        stamp_text = f"Framework: MFT v2025.06.23 | {chart_type} | {timestamp} | Discernus v2.1"
+        stamp_text = f"Framework: MFT v2025.06.23 | {chart_type} | {timestamp} | Hash: {chart_hash} | Discernus v2.1"
         
         # Add stamp as text annotation
         ax.text(0.02, 0.02, stamp_text, transform=ax.transAxes, 
                 fontsize=8, color='gray', alpha=0.7, 
                 bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.8))
     
-    def generate_foundation_radar_chart(self, foundation_scores: Dict, title: str = "Foundation Analysis") -> Path:
+    def _generate_hash_input(self, chart_type: str, analysis_results: List[Dict] = None) -> str:
+        """Generate deterministic hash input for provenance"""
+        import json
+        
+        hash_components = {
+            'chart_type': chart_type,
+            'framework_version': 'MFT v2025.06.23',
+            'discernus_version': 'v2.1',
+            'generation_timestamp': datetime.now().strftime('%Y-%m-%d'),  # Date only for daily uniqueness
+        }
+        
+        # Add analysis data if provided
+        if analysis_results:
+            # Sort and standardize data for consistent hashing
+            sorted_data = []
+            for result in analysis_results:
+                sorted_result = {
+                    'run_id': result.get('run_id', 0),
+                    'coordinates': result.get('coordinates', {}),
+                    'foundation_scores': dict(sorted(result.get('foundation_scores', {}).items()))
+                }
+                sorted_data.append(sorted_result)
+            hash_components['analysis_data'] = sorted_data
+        
+        # Create deterministic JSON string
+        return json.dumps(hash_components, sort_keys=True, separators=(',', ':'))
+    
+    def generate_foundation_radar_chart(self, foundation_scores: Dict, title: str = "Coordinate Distribution") -> Path:
         """Generate radar chart showing moral foundation profile"""
         if not VISUALIZATION_AVAILABLE:
             return None
             
-        # Foundation order for consistent radar chart (using proper framework names)
+        # Foundation order matching MFT framework angles (using proper framework names)
+        # MFT Framework: Care=0°, Fairness=60°, Loyalty=120°, Authority=180°, Sanctity=240°, Liberty=300°
         foundations = ['Care', 'Fairness', 'Loyalty', 'Authority', 'Sanctity', 'Liberty']
         values = [foundation_scores.get(f, 0) for f in foundations]
         
@@ -140,9 +189,12 @@ class DiscernusVisualizationEngine:
         values += values[:1]
         foundations_display = [f.title() for f in foundations] + [foundations[0].title()]
         
-        # Calculate angles for radar chart
-        angles = np.linspace(0, 2 * np.pi, len(foundations), endpoint=False).tolist()
-        angles += angles[:1]
+        # Use MFT framework angles (convert degrees to radians, adjust for matplotlib polar coordinate system)
+        # Matplotlib polar: 0° = right, 90° = top, so we need to rotate by 90° 
+        framework_angles_deg = [0, 60, 120, 180, 240, 300]  # MFT framework angles
+        matplotlib_angles_deg = [(90 - angle) % 360 for angle in framework_angles_deg]  # Rotate to match matplotlib
+        angles = [np.deg2rad(angle) for angle in matplotlib_angles_deg]
+        angles += angles[:1]  # Close the radar chart
         
         fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(projection='polar'))
         ax.plot(angles, values, 'o-', linewidth=2, color='blue', alpha=0.7)
@@ -156,7 +208,7 @@ class DiscernusVisualizationEngine:
         ax.grid(True)
         
         # Add provenance stamp (adapted for polar plot)
-        self._add_polar_chart_stamp(ax, 'foundation_radar')
+        self._add_polar_chart_stamp(ax, 'foundation_radar', foundation_scores)
         
         # Save radar chart
         radar_path = self.charts_dir / "foundation_radar.png"
@@ -165,18 +217,41 @@ class DiscernusVisualizationEngine:
         
         return radar_path
     
-    def _add_polar_chart_stamp(self, ax, chart_type: str):
+    def _add_polar_chart_stamp(self, ax, chart_type: str, foundation_scores: Dict = None):
         """Add provenance stamp to polar chart"""
         from datetime import datetime
+        import hashlib
         
-        # Create stamp text  
+        # Generate hash for provenance
+        hash_input = self._generate_polar_hash_input(chart_type, foundation_scores)
+        chart_hash = hashlib.sha256(hash_input.encode()).hexdigest()[:8]  # First 8 chars
+        
+        # Create stamp text with hash
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        stamp_text = f"Framework: MFT v2025.06.23 | {chart_type} | {timestamp} | Discernus v2.1"
+        stamp_text = f"Framework: MFT v2025.06.23 | {chart_type} | {timestamp} | Hash: {chart_hash} | Discernus v2.1"
         
         # Add stamp for polar plot (position at bottom)
         ax.text(0.5, -0.15, stamp_text, transform=ax.transAxes, 
                 fontsize=8, color='gray', alpha=0.7, ha='center',
                 bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.8))
+    
+    def _generate_polar_hash_input(self, chart_type: str, foundation_scores: Dict = None) -> str:
+        """Generate deterministic hash input for polar chart provenance"""
+        import json
+        
+        hash_components = {
+            'chart_type': chart_type,
+            'framework_version': 'MFT v2025.06.23',
+            'discernus_version': 'v2.1',
+            'generation_timestamp': datetime.now().strftime('%Y-%m-%d'),  # Date only for daily uniqueness
+        }
+        
+        # Add foundation scores if provided
+        if foundation_scores:
+            hash_components['foundation_scores'] = dict(sorted(foundation_scores.items()))
+        
+        # Create deterministic JSON string
+        return json.dumps(hash_components, sort_keys=True, separators=(',', ':'))
     
     def generate_variance_analysis_chart(self, multi_run_data: List[Dict]) -> Path:
         """Generate variance analysis across multiple LLM runs"""
@@ -197,7 +272,7 @@ class DiscernusVisualizationEngine:
         # Box plots showing variance
         data_for_boxplot = [foundation_data[f] for f in foundations]
         ax1.boxplot(data_for_boxplot, labels=[f.title() for f in foundations])
-        ax1.set_title('Foundation Score Variance Across Runs', fontweight='bold')
+        ax1.set_title('Coordinate Score Variance Across Runs', fontweight='bold')
         ax1.set_ylabel('Foundation Score')
         ax1.tick_params(axis='x', rotation=45)
         
@@ -209,13 +284,18 @@ class DiscernusVisualizationEngine:
         ax2.bar(x_pos, means, yerr=stds, capsize=5, alpha=0.7, color='skyblue')
         ax2.set_xticks(x_pos)
         ax2.set_xticklabels([f.title() for f in foundations], rotation=45)
-        ax2.set_title('Foundation Means with Standard Deviation', fontweight='bold')
+        ax2.set_title('Coordinate Means with Standard Deviation', fontweight='bold')
         ax2.set_ylabel('Foundation Score')
         
         plt.tight_layout()
         
-        # Add provenance stamp to the figure
-        fig.text(0.02, 0.02, f"Framework: MFT v2025.06.23 | variance_analysis | {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | Discernus v2.1",
+        # Add provenance stamp to the figure with hash
+        hash_input = self._generate_hash_input('variance_analysis', multi_run_data)
+        import hashlib
+        chart_hash = hashlib.sha256(hash_input.encode()).hexdigest()[:8]
+        
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        fig.text(0.02, 0.02, f"Framework: MFT v2025.06.23 | variance_analysis | {timestamp} | Hash: {chart_hash} | Discernus v2.1",
                 fontsize=8, color='gray', alpha=0.7,
                 bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.8))
         
@@ -1347,13 +1427,13 @@ def test_enhanced_visualization_analytics(skip_viz: bool = False, export_academi
         chart_paths = {}
         if not skip_viz and VISUALIZATION_AVAILABLE:
             print("🎯 Generating coordinate system visualization...")
-            coordinate_plot = viz_engine.generate_coordinate_plot(multi_run_data, "System Health Test Analysis")
+            coordinate_plot = viz_engine.generate_coordinate_plot(multi_run_data, "Discernus Coordinate Map")
             if coordinate_plot:
                 chart_paths['coordinate_plot'] = coordinate_plot
                 print(f"✅ Coordinate plot generated: {coordinate_plot}")
             
             print("📡 Generating foundation radar chart...")
-            radar_chart = viz_engine.generate_foundation_radar_chart(base_scores, "Foundation Profile Analysis")
+            radar_chart = viz_engine.generate_foundation_radar_chart(base_scores, "Coordinate Distribution")
             if radar_chart:
                 chart_paths['radar_chart'] = radar_chart
                 print(f"✅ Radar chart generated: {radar_chart}")
