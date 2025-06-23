@@ -64,37 +64,55 @@ class DiscernusCoordinateEngine:
             with open(framework_path, 'r', encoding='utf-8') as f:
                 framework_data = yaml.safe_load(f)
             
-            # Extract well definitions from dipoles
             self.well_definitions = {}
-            dipoles = framework_data.get('dipoles', [])
             
-            for dipole in dipoles:
-                # Add positive pole
-                if 'positive' in dipole:
-                    positive = dipole['positive']
-                    self.well_definitions[positive['name']] = {
-                        'angle': positive.get('angle', 0),
-                        'type': positive.get('type', 'positive'),
-                        'weight': abs(positive.get('weight', 1.0)),
-                        'description': positive.get('description', '')
+            # Try anchors-based format first (new format)
+            if 'anchors' in framework_data:
+                anchors = framework_data['anchors']
+                for anchor_name, anchor_info in anchors.items():
+                    self.well_definitions[anchor_name] = {
+                        'angle': anchor_info.get('angle', 0),
+                        'type': anchor_info.get('type', 'anchor'),
+                        'weight': abs(anchor_info.get('weight', 1.0)),
+                        'description': anchor_info.get('description', '')
                     }
                 
-                # Add negative pole  
-                if 'negative' in dipole:
-                    negative = dipole['negative']
-                    self.well_definitions[negative['name']] = {
-                        'angle': negative.get('angle', 180),
-                        'type': negative.get('type', 'negative'),
-                        'weight': abs(negative.get('weight', 1.0)),
-                        'description': negative.get('description', '')
-                    }
-            
-            # Update colors if provided in framework
-            if 'well_type_colors' in framework_data:
-                framework_colors = framework_data['well_type_colors']
-                self.type_to_color.update(framework_colors)
+                # Update colors from anchor_type_colors if provided
+                if 'anchor_type_colors' in framework_data:
+                    framework_colors = framework_data['anchor_type_colors']
+                    self.type_to_color.update(framework_colors)
+                    
+            # Fall back to dipoles format (legacy)
+            elif 'dipoles' in framework_data:
+                dipoles = framework_data.get('dipoles', [])
                 
-            print(f"✅ Loaded {len(self.well_definitions)} wells from YAML framework: {framework_path}")
+                for dipole in dipoles:
+                    # Add positive pole
+                    if 'positive' in dipole:
+                        positive = dipole['positive']
+                        self.well_definitions[positive['name']] = {
+                            'angle': positive.get('angle', 0),
+                            'type': positive.get('type', 'positive'),
+                            'weight': abs(positive.get('weight', 1.0)),
+                            'description': positive.get('description', '')
+                        }
+                    
+                    # Add negative pole  
+                    if 'negative' in dipole:
+                        negative = dipole['negative']
+                        self.well_definitions[negative['name']] = {
+                            'angle': negative.get('angle', 180),
+                            'type': negative.get('type', 'negative'),
+                            'weight': abs(negative.get('weight', 1.0)),
+                            'description': negative.get('description', '')
+                        }
+                
+                # Update colors from well_type_colors if provided
+                if 'well_type_colors' in framework_data:
+                    framework_colors = framework_data['well_type_colors']
+                    self.type_to_color.update(framework_colors)
+                
+            print(f"✅ Loaded {len(self.well_definitions)} anchors from YAML framework: {framework_path}")
             
         except Exception as e:
             raise FileNotFoundError(f"Failed to load YAML framework {framework_path}: {e}")

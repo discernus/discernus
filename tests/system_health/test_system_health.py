@@ -53,7 +53,7 @@ class DiscernusVisualizationEngine:
         self.charts_dir = results_dir / "charts"
         self.charts_dir.mkdir(exist_ok=True)
         
-    def generate_coordinate_plot(self, analysis_results: List[Dict], title: str = "Discernus Coordinate Analysis") -> Path:
+    def generate_coordinate_plot(self, analysis_results: List[Dict], title: str = "Discernus Coordinate Map") -> Path:
         """Generate coordinate system visualization showing narrative positioning"""
         if not VISUALIZATION_AVAILABLE:
             return None
@@ -72,14 +72,15 @@ class DiscernusVisualizationEngine:
         circle = patches.Circle((0, 0), 1.0, fill=False, color='gray', linestyle='--', alpha=0.5)
         ax.add_patch(circle)
         
-        # Add anchor positions (using proper terminology)
+        # Add anchor positions (using MFT framework geometry)
+        # Positions calculated from framework angles: Care=0°, Fairness=60°, Loyalty=120°, Authority=180°, Sanctity=240°, Liberty=300°
         anchors = {
-            'Care': (0, 1),
-            'Fairness': (0.866, 0.5),
-            'Loyalty': (0.866, -0.5),
-            'Authority': (0, -1),
-            'Sanctity': (-0.866, -0.5),
-            'Liberty': (-0.866, 0.5)
+            'Care': (0, 1),                    # 0° - top
+            'Fairness': (0.866, 0.5),         # 60° - upper right  
+            'Loyalty': (-0.5, 0.866),         # 120° - upper left
+            'Authority': (0, -1),              # 180° - bottom
+            'Sanctity': (-0.866, -0.5),       # 240° - lower left
+            'Liberty': (0.5, -0.866)          # 300° - lower right
         }
         
         for anchor_name, (x, y) in anchors.items():
@@ -103,6 +104,9 @@ class DiscernusVisualizationEngine:
         ax.set_ylabel('Coordinate Y', fontsize=12)
         ax.legend()
         
+        # Add provenance stamp
+        self._add_chart_stamp(ax, 'coordinate_analysis')
+        
         # Save plot
         plot_path = self.charts_dir / "coordinate_analysis.png"
         plt.savefig(plot_path, dpi=300, bbox_inches='tight', facecolor='white')
@@ -110,13 +114,26 @@ class DiscernusVisualizationEngine:
         
         return plot_path
     
+    def _add_chart_stamp(self, ax, chart_type: str):
+        """Add provenance stamp to chart"""
+        from datetime import datetime
+        
+        # Create stamp text
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        stamp_text = f"Framework: MFT v2025.06.23 | {chart_type} | {timestamp} | Discernus v2.1"
+        
+        # Add stamp as text annotation
+        ax.text(0.02, 0.02, stamp_text, transform=ax.transAxes, 
+                fontsize=8, color='gray', alpha=0.7, 
+                bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.8))
+    
     def generate_foundation_radar_chart(self, foundation_scores: Dict, title: str = "Foundation Analysis") -> Path:
         """Generate radar chart showing moral foundation profile"""
         if not VISUALIZATION_AVAILABLE:
             return None
             
-        # Foundation order for consistent radar chart
-        foundations = ['care', 'fairness', 'loyalty', 'authority', 'sanctity', 'liberty']
+        # Foundation order for consistent radar chart (using proper framework names)
+        foundations = ['Care', 'Fairness', 'Loyalty', 'Authority', 'Sanctity', 'Liberty']
         values = [foundation_scores.get(f, 0) for f in foundations]
         
         # Close the radar chart
@@ -138,6 +155,9 @@ class DiscernusVisualizationEngine:
         ax.set_title(title, fontsize=14, fontweight='bold', pad=30)
         ax.grid(True)
         
+        # Add provenance stamp (adapted for polar plot)
+        self._add_polar_chart_stamp(ax, 'foundation_radar')
+        
         # Save radar chart
         radar_path = self.charts_dir / "foundation_radar.png"
         plt.savefig(radar_path, dpi=300, bbox_inches='tight', facecolor='white')
@@ -145,12 +165,25 @@ class DiscernusVisualizationEngine:
         
         return radar_path
     
+    def _add_polar_chart_stamp(self, ax, chart_type: str):
+        """Add provenance stamp to polar chart"""
+        from datetime import datetime
+        
+        # Create stamp text  
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        stamp_text = f"Framework: MFT v2025.06.23 | {chart_type} | {timestamp} | Discernus v2.1"
+        
+        # Add stamp for polar plot (position at bottom)
+        ax.text(0.5, -0.15, stamp_text, transform=ax.transAxes, 
+                fontsize=8, color='gray', alpha=0.7, ha='center',
+                bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.8))
+    
     def generate_variance_analysis_chart(self, multi_run_data: List[Dict]) -> Path:
         """Generate variance analysis across multiple LLM runs"""
         if not VISUALIZATION_AVAILABLE:
             return None
             
-        foundations = ['care', 'fairness', 'loyalty', 'authority', 'sanctity', 'liberty']
+        foundations = ['Care', 'Fairness', 'Loyalty', 'Authority', 'Sanctity', 'Liberty']
         
         # Extract scores for each foundation across runs
         foundation_data = {}
@@ -181,6 +214,11 @@ class DiscernusVisualizationEngine:
         
         plt.tight_layout()
         
+        # Add provenance stamp to the figure
+        fig.text(0.02, 0.02, f"Framework: MFT v2025.06.23 | variance_analysis | {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | Discernus v2.1",
+                fontsize=8, color='gray', alpha=0.7,
+                bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.8))
+        
         # Save variance chart
         variance_path = self.charts_dir / "variance_analysis.png"
         plt.savefig(variance_path, dpi=300, bbox_inches='tight', facecolor='white')
@@ -205,9 +243,9 @@ class DiscernusAnalyticsEngine:
                 variance = np.random.normal(0, 0.05)  # Small variance
                 varied_scores[foundation] = max(0, min(1, base_score + variance))
             
-            # Calculate coordinates for each run
+            # Calculate coordinates for each run using proper framework path
             from src.coordinate_engine import DiscernusCoordinateEngine
-            engine = DiscernusCoordinateEngine()
+            engine = DiscernusCoordinateEngine(framework_path='tests/system_health/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml')
             x, y = engine.calculate_narrative_position(varied_scores)
             
             run_result = {
@@ -227,7 +265,7 @@ class DiscernusAnalyticsEngine:
         if not self.analysis_results:
             return {}
             
-        foundations = ['care', 'fairness', 'loyalty', 'authority', 'sanctity', 'liberty']
+        foundations = ['Care', 'Fairness', 'Loyalty', 'Authority', 'Sanctity', 'Liberty']
         
         stats_summary = {
             'foundation_statistics': {},
@@ -275,7 +313,7 @@ class DiscernusAnalyticsEngine:
         if len(self.analysis_results) < 2:
             return 1.0
             
-        foundations = ['care', 'fairness', 'loyalty', 'authority', 'sanctity', 'liberty']
+        foundations = ['Care', 'Fairness', 'Loyalty', 'Authority', 'Sanctity', 'Liberty']
         correlations = []
         
         for i in range(len(self.analysis_results)):
@@ -1284,14 +1322,14 @@ def test_enhanced_visualization_analytics(skip_viz: bool = False, export_academi
         # Test text for analysis
         test_text = "We must protect innocent children from harm while ensuring fair treatment and justice for all citizens."
         
-        # Base foundation scores for multi-run analysis
+        # Base foundation scores for multi-run analysis (using proper framework names)
         base_scores = {
-            'care': 0.85,
-            'fairness': 0.72,
-            'loyalty': 0.35,
-            'authority': 0.28,
-            'sanctity': 0.15,
-            'liberty': 0.45
+            'Care': 0.85,
+            'Fairness': 0.72,
+            'Loyalty': 0.35,
+            'Authority': 0.28,
+            'Sanctity': 0.15,
+            'Liberty': 0.45
         }
         
         # 1. MULTI-LLM VARIANCE ANALYSIS
