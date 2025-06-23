@@ -1,7 +1,7 @@
 # Intelligent Ingestion
 
 **Module:** `src.corpus.intelligent_ingestion`
-**File:** `/Volumes/dev/discernus/src/corpus/intelligent_ingestion.py`
+**File:** `/app/src/corpus/intelligent_ingestion.py`
 **Package:** `corpus`
 
 Intelligent Corpus Ingestion Service
@@ -157,4 +157,4 @@ Returns:
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

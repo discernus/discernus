@@ -1,7 +1,7 @@
 #   Init  
 
 **Module:** `src.corpus.__init__`
-**File:** `/Volumes/dev/discernus/src/corpus/__init__.py`
+**File:** `/app/src/corpus/__init__.py`
 **Package:** `corpus`
 
 Narrative Gravity Corpus Management System
@@ -22,4 +22,4 @@ Core Components:
 - `registry`
 - `validator`
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

@@ -22,13 +22,13 @@ Validation Layers:
 
 Usage:
     # CLI Interface
-    python scripts/utilities/unified_framework_validator.py frameworks/moral_foundations_theory/
+    python scripts/utilities/unified_framework_validator.py framework_templates/moral_foundations_theory/
     python scripts/utilities/unified_framework_validator.py --all --verbose
     
     # Programmatic Interface  
     from scripts.utilities.unified_framework_validator import UnifiedFrameworkValidator
     validator = UnifiedFrameworkValidator()
-    result = validator.validate_framework("frameworks/moral_foundations_theory/")
+    result = validator.validate_framework("framework_templates/moral_foundations_theory/")
 """
 
 import os
@@ -967,10 +967,10 @@ def main():
         epilog="""
 Examples:
   Validate single framework:
-    python scripts/utilities/unified_framework_validator.py frameworks/moral_foundations_theory/
+    python scripts/utilities/unified_framework_validator.py framework_templates/moral_foundations_theory/
     
   Validate specific framework file:
-    python scripts/utilities/unified_framework_validator.py frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+    python scripts/utilities/unified_framework_validator.py framework_templates/moral_foundations_theory/moral_foundations_theory_founding_template.yaml
     
   Validate all frameworks:
     python scripts/utilities/unified_framework_validator.py --all
@@ -1009,8 +1009,8 @@ Examples:
     
     parser.add_argument(
         "--frameworks-dir",
-        default="frameworks",
-        help="Directory containing frameworks (default: frameworks)"
+        default="framework_templates",
+        help="Directory containing framework templates (default: framework_templates)"
     )
     
     args = parser.parse_args()

@@ -1,7 +1,7 @@
 # Framework Transaction Manager
 
 **Module:** `src.utils.framework_transaction_manager`
-**File:** `/Volumes/dev/discernus/src/utils/framework_transaction_manager.py`
+**File:** `/app/src/utils/framework_transaction_manager.py`
 **Package:** `utils`
 
 Framework Transaction Manager
@@ -183,4 +183,4 @@ Log detailed validation result
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

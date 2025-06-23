@@ -1,0 +1,60 @@
+🏥 DISCERNUS SYSTEM HEALTH VALIDATION
+==================================================
+Run Time: 2025-06-23 07:51:09
+Duration: 0.5 seconds
+Status: HEALTHY
+Tests: 6/6 passed (100.0%)
+
+✅ PASS Core Imports
+   coordinate_engine: success
+   qa_system: success
+   framework_manager: success
+
+✅ PASS Coordinate System
+   initialization: success
+   coordinate_result: {'x': np.float64(0.581), 'y': np.float64(0.252), 'distance': np.float64(0.633)}
+   coordinate_calculation: warning: unexpected range
+   dominance_amplification: success
+   adaptive_scaling: 0.91
+   adaptive_scaling_status: success
+
+✅ PASS QA System
+   initialization: success
+   basic_functionality: available
+
+✅ PASS Framework Loading
+   loading: success
+   architecture: anchors
+   anchor_count: 6
+
+✅ PASS Experiment Definition
+   loading: success
+   structure: valid
+   experiment_name: System_Health_Test
+   description: Basic system health validation test - validates core system components
+   success_criteria_count: 3
+   component_types: ['frameworks', 'models']
+   framework_reference: correct
+
+✅ PASS End-to-End Experiment
+   design_validation: success
+   dependency_validation: success
+   llm_mode: mock
+   execution_integrity: success
+   coordinates: {'x': 0.0, 'y': 0.0}
+   foundation_scores: {'care': 0.85, 'fairness': 0.3, 'loyalty': 0.15, 'authority': 0.1, 'sanctity': 0.05, 'liberty': 0.2}
+   data_persistence: success
+   storage_location: tests/system_health/results/last_experiment_result.json
+   asset_management: success
+   report_location: tests/system_health/results/last_experiment_report.md
+   reproducibility: success
+   scientific_validity: success
+   qa_confidence: 0.78
+   design_alignment: success
+   expected_activations: {'care': True, 'fairness': True}
+   research_value: success
+   insights_generated: {'moral_profile': 'Care-focused with fairness concerns', 'coordinate_position': '(0.000, 0.000)', 'dominant_foundations': ['care'], 'evidence_quality': 6, 'confidence_level': 0.78}
+   overall_status: success
+   dimensions_validated: 9
+   validation_framework: complete
+

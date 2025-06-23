@@ -1,7 +1,7 @@
 # Statistics
 
 **Module:** `src.analysis.statistics`
-**File:** `/Volumes/dev/discernus/src/analysis/statistics.py`
+**File:** `/app/src/analysis/statistics.py`
 **Package:** `analysis`
 
 Statistical Hypothesis Testing System for Narrative Gravity Analysis
@@ -121,4 +121,4 @@ Generate overall summary of hypothesis testing results.
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

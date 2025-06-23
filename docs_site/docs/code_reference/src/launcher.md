@@ -1,7 +1,7 @@
 # Launcher
 
 **Module:** `src.launcher`
-**File:** `/Volumes/dev/discernus/src/launcher.py`
+**File:** `/app/src/launcher.py`
 
 🚨 DEPRECATED: Streamlit Interface Launcher
 
@@ -40,4 +40,4 @@ Main function - shows deprecation notice
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

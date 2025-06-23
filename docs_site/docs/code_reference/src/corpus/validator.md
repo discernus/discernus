@@ -1,7 +1,7 @@
 # Validator
 
 **Module:** `src.corpus.validator`
-**File:** `/Volumes/dev/discernus/src/corpus/validator.py`
+**File:** `/app/src/corpus/validator.py`
 **Package:** `corpus`
 
 Corpus Validator - Integrity checking and FAIR data compliance validation.
@@ -139,4 +139,4 @@ Check academic citation and metadata standards.
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

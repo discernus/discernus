@@ -1,0 +1,253 @@
+# Moral Foundations Theory Framework
+# Based on Jonathan Haidt's research into the psychological foundations of human morality
+# 
+# This framework implements Haidt's five-foundation model using the new anchors architecture,
+# representing the evolved psychological mechanisms that cultures build upon to create moral systems.
+#
+# Version: v2025.06.23-cartographic-refactor
+# Last Modified: 2025-06-23 (Updated for new anchors architecture)
+# Status: Updated for Discernus Coordinate System
+
+# =============================================================================
+# FRAMEWORK METADATA
+# =============================================================================
+
+name: moral_foundations_theory
+framework_name: moral_foundations_theory 
+display_name: "Moral Foundations Theory (Haidt)"
+version: v2025.06.23
+
+description: |
+  Enhanced Moral Foundations Theory framework implementing Jonathan Haidt's research 
+  with systematic methodological improvements for academic rigor. Uses the new 
+  anchors-based coordinate system for improved clarity and extensibility.
+
+framework_type: anchors_based
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: "Circular coordinate system using anchors for semantic positioning"
+  
+# =============================================================================
+# ANCHORS (SEMANTIC REFERENCE POINTS)
+# =============================================================================
+
+anchors:
+  # Individualizing Foundation Anchors
+  Care:
+    description: "Concern for the suffering of others, compassion, protection of vulnerable individuals"
+    angle: 0
+    weight: 1.0
+    type: individualizing
+    language_cues:
+      - compassion
+      - suffering
+      - protection
+      - kindness
+      - empathy
+      - helping others
+      - vulnerable
+      - innocent
+  
+  Fairness:
+    description: "Concern for proportional treatment, justice, reciprocity, equal opportunity"
+    angle: 60
+    weight: 1.0
+    type: individualizing
+    language_cues:
+      - fairness
+      - justice
+      - equality
+      - reciprocity
+      - proportional
+      - deserve
+      - earn
+      - merit
+  
+  # Binding Foundation Anchors
+  Loyalty:
+    description: "Commitment to group, patriotism, self-sacrifice for collective good"
+    angle: 120
+    weight: 1.0
+    type: binding
+    language_cues:
+      - loyalty
+      - patriotism
+      - solidarity
+      - team
+      - unity
+      - brotherhood
+      - sacrifice for group
+      - stick together
+  
+  Authority:
+    description: "Respect for legitimate hierarchy, tradition, leadership, social order"
+    angle: 180
+    weight: 1.0
+    type: binding
+    language_cues:
+      - authority
+      - hierarchy
+      - tradition
+      - respect
+      - leadership
+      - order
+      - stability
+      - established
+  
+  Sanctity:
+    description: "Concerns about spiritual purity, elevated living, sacred values"
+    angle: 240
+    weight: 1.0
+    type: binding
+    language_cues:
+      - sacred
+      - pure
+      - holy
+      - elevated
+      - noble
+      - spiritual
+      - dignity
+      - sanctity
+  
+  Liberty:
+    description: "Concerns about freedom, autonomy, resistance to domination and coercion"
+    angle: 300
+    weight: 1.0
+    type: liberty_based
+    language_cues:
+      - freedom
+      - liberty
+      - autonomy
+      - independence
+      - self-determination
+      - free choice
+      - individual rights
+      - personal freedom
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Haidt, J. (2012). The righteous mind: Why good people are divided by politics and religion."
+    - "Graham, J., Haidt, J., Koleva, S., Motyl, M., Iyer, R., Wojcik, S., & Ditto, P. H. (2013). Moral foundations theory: The pragmatic validity of moral pluralism. Advances in experimental social psychology, 47, 55-130."
+  
+  theoretical_approach: |
+    Based on Haidt's Moral Foundations Theory which identifies innate psychological 
+    foundations that cultures build upon to create diverse moral systems. Updated
+    to use anchors-based coordinate system for improved semantic clarity.
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION
+# =============================================================================
+
+anchor_type_colors:
+  individualizing: "#1976D2"           # Blue - Individual-focused foundations
+  binding: "#388E3C"                   # Green - Group-focused foundations
+  liberty_based: "#9C27B0"            # Purple - Liberty-focused foundations
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  individualizing_score:
+    name: "Individualizing Foundation Score"
+    description: "Strength of Care and Fairness concerns"
+    calculation: "Average of Care and Fairness anchor scores"
+  
+  binding_score:
+    name: "Binding Foundation Score" 
+    description: "Strength of Loyalty, Authority, and Sanctity concerns"
+    calculation: "Average of Loyalty, Authority, and Sanctity anchor scores"
+  
+  liberty_score:
+    name: "Liberty Foundation Score"
+    description: "Strength of Liberty/Freedom concerns"
+    calculation: "Liberty anchor score"
+
+# =============================================================================
+# PROMPT INTEGRATION
+# =============================================================================
+
+prompt_configuration:
+  bias_mitigation_approach: "Enhanced prompts designed to prevent circular validation"
+  
+  expert_role: |
+    You are an expert in moral psychology and value analysis with deep knowledge 
+    of how moral reasoning manifests in discourse across cultures and political 
+    orientations. You specialize in identifying implicit moral frameworks.
+  
+  bias_neutral_analysis_focus: |
+    Analyze the values, principles, and moral reasoning present in this text. 
+    Identify what moral concerns are emphasized, what behaviors are praised or 
+    criticized, and what underlying value systems guide the reasoning.
+  
+  detection_approach: |
+    Look for patterns of moral reasoning including: protection of vulnerable 
+    individuals, concerns about fair treatment, group loyalty and solidarity, 
+    respect for authority and tradition, and spiritual or purity concerns. 
+    Analyze both explicit statements and implicit moral assumptions.
+  
+  scoring_methodology: |
+    Score moral dimensions based on textual evidence of value emphasis, using 
+    0.0-1.0 scale with specific quotations supporting each assessment. Focus on 
+    strength of moral concern rather than political affiliation predictions.
+  
+  enhanced_detection_instructions: |
+    Beyond explicit moral vocabulary, identify: (1) Syntactic patterns like moral 
+    imperatives and causal moral reasoning, (2) Metaphorical expressions of values, 
+    (3) Narrative moral positioning and role assignments, (4) Agent-patient 
+    structures revealing moral agency, (5) Collective identity construction patterns.
+
+# =============================================================================
+# SYSTEM COMPATIBILITY
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - moral_foundations_v1.0
+    - political_psychology_v1.0
+  
+  weighting_schemes:
+    - individualizing_binding
+    - foundation_pairs
+  
+  api_versions:
+    - v2.0
+    - v2.1
+  
+  visualization_types:
+    - circular
+    - foundation_profile
+
+# =============================================================================
+# ACADEMIC VALIDATION
+# =============================================================================
+
+validation:
+  academic_standard: "Haidt Moral Foundations Theory"
+  measurement_instrument: "Moral Foundations Questionnaire (MFQ-30/MFQ-2)"
+  scope_limitation: "Current implementation limited to English-language political discourse"
+  political_correlation: "Strong correlation with liberal-conservative political orientation (pending validation)"
+  
+  key_findings:
+    - "Liberals prioritize Care and Fairness foundations"
+    - "Conservatives use all five foundations more equally" 
+    - "Foundation usage predicts political orientation"
+    - "Cross-cultural consistency in foundation recognition"
+
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-23T12:00:00.000000"
+theoretical_validation: "Expert consultation ready - Haidt lab standards"
+implementation_status: "Production ready with academic credibility" 

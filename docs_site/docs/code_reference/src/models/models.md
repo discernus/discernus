@@ -1,7 +1,7 @@
 # Models
 
 **Module:** `src.models.models`
-**File:** `/Volumes/dev/discernus/src/models/models.py`
+**File:** `/app/src/models/models.py`
 **Package:** `models`
 
 Core database models for Narrative Gravity Analysis.
@@ -151,4 +151,4 @@ __repr__(self)
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

@@ -1,0 +1,47 @@
+{
+  "experiment_id": "system_health_test",
+  "text_analyzed": "We must protect innocent children from harm and ensure they receive fair treatment in our justice system.",
+  "analysis_result": {
+    "moral_foundation_scores": {
+      "care": 0.85,
+      "fairness": 0.3,
+      "loyalty": 0.15,
+      "authority": 0.1,
+      "sanctity": 0.05,
+      "liberty": 0.2
+    },
+    "evidence": {
+      "care": [
+        "protect the innocent",
+        "from harm",
+        "safety of vulnerable"
+      ],
+      "fairness": [
+        "proportional response",
+        "equal treatment"
+      ],
+      "loyalty": [
+        "team solidarity"
+      ],
+      "authority": [
+        "respect hierarchy"
+      ],
+      "sanctity": [
+        "moral purity"
+      ],
+      "liberty": [
+        "individual freedom",
+        "personal choice"
+      ]
+    },
+    "reasoning": "This text demonstrates strong care foundation with explicit protection language, moderate fairness concerns about proportional treatment, and minimal binding foundation activation.",
+    "confidence": 0.78,
+    "total_tokens": 150,
+    "cost_estimate": 0.0
+  },
+  "coordinates": {
+    "x": 0.0,
+    "y": 0.0
+  },
+  "timestamp": "2025-06-23T07:51:38.920369"
+}

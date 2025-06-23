@@ -1,7 +1,7 @@
 # Plotly Circular
 
 **Module:** `src.visualization.plotly_circular`
-**File:** `/Volumes/dev/discernus/src/visualization/plotly_circular.py`
+**File:** `/app/src/visualization/plotly_circular.py`
 **Package:** `visualization`
 
 ## Dependencies
@@ -92,4 +92,4 @@ Args:
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

@@ -1,0 +1,38 @@
+🏥 DISCERNUS SYSTEM HEALTH VALIDATION
+==================================================
+Run Time: 2025-06-23 07:37:26
+Duration: 0.46 seconds
+Status: HEALTHY
+Tests: 5/5 passed (100.0%)
+
+✅ PASS Core Imports
+   coordinate_engine: success
+   qa_system: success
+   framework_manager: success
+
+✅ PASS Coordinate System
+   initialization: success
+   coordinate_result: {'x': np.float64(0.581), 'y': np.float64(0.252), 'distance': np.float64(0.633)}
+   coordinate_calculation: warning: unexpected range
+   dominance_amplification: success
+   adaptive_scaling: 0.91
+   adaptive_scaling_status: success
+
+✅ PASS QA System
+   initialization: success
+   basic_functionality: available
+
+✅ PASS Framework Loading
+   loading: success
+   architecture: anchors
+   anchor_count: 6
+
+✅ PASS Experiment Definition
+   loading: success
+   structure: valid
+   experiment_name: System_Health_Test
+   description: Basic system health validation test - validates core system components
+   success_criteria_count: 3
+   component_types: ['frameworks', 'models']
+   framework_reference: correct
+

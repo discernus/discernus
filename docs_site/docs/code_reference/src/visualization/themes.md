@@ -1,7 +1,7 @@
 # Themes
 
 **Module:** `src.visualization.themes`
-**File:** `/Volumes/dev/discernus/src/visualization/themes.py`
+**File:** `/app/src/visualization/themes.py`
 **Package:** `visualization`
 
 Narrative Gravity Visualization Themes
@@ -218,4 +218,4 @@ Set the default theme.
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

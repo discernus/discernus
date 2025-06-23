@@ -1,7 +1,7 @@
 # Quality Transaction Manager
 
 **Module:** `src.utils.quality_transaction_manager`
-**File:** `/Volumes/dev/discernus/src/utils/quality_transaction_manager.py`
+**File:** `/app/src/utils/quality_transaction_manager.py`
 **Package:** `utils`
 
 Quality Transaction Manager
@@ -248,4 +248,4 @@ Log detailed validation result
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

@@ -1,7 +1,7 @@
 # Analysis Templates
 
 **Module:** `src.academic.analysis_templates`
-**File:** `/Volumes/dev/discernus/src/academic/analysis_templates.py`
+**File:** `/app/src/academic/analysis_templates.py`
 **Package:** `academic`
 
 AI-Generated Analysis Templates - Priority 3
@@ -199,4 +199,4 @@ Quick Stata script generation.
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

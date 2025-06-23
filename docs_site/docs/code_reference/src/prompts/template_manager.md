@@ -1,7 +1,7 @@
 # Template Manager
 
 **Module:** `src.prompts.template_manager`
-**File:** `/Volumes/dev/discernus/src/prompts/template_manager.py`
+**File:** `/app/src/prompts/template_manager.py`
 **Package:** `prompts`
 
 Prompt Template Manager - Minimal implementation for analysis service
@@ -69,4 +69,4 @@ List available templates
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

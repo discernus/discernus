@@ -1,7 +1,7 @@
 # Discovery
 
 **Module:** `src.corpus.discovery`
-**File:** `/Volumes/dev/discernus/src/corpus/discovery.py`
+**File:** `/app/src/corpus/discovery.py`
 **Package:** `corpus`
 
 Corpus Discovery - Search and exploration tools for corpus navigation.
@@ -272,4 +272,4 @@ Export catalog as TSV.
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

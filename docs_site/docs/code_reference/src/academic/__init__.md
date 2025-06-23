@@ -1,7 +1,7 @@
 #   Init  
 
 **Module:** `src.academic.__init__`
-**File:** `/Volumes/dev/discernus/src/academic/__init__.py`
+**File:** `/app/src/academic/__init__.py`
 **Package:** `academic`
 
 Academic Tool Integration Module - Priority 3 Infrastructure
@@ -21,4 +21,4 @@ Components:
 - `data_export`
 - `documentation`
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

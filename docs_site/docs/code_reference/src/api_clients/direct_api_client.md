@@ -1,7 +1,7 @@
 # Direct Api Client
 
 **Module:** `src.api_clients.direct_api_client`
-**File:** `/Volumes/dev/discernus/src/api_clients/direct_api_client.py`
+**File:** `/app/src/api_clients/direct_api_client.py`
 **Package:** `api_clients`
 
 Direct API Client for Flagship LLMs - Updated for 2025 Models
@@ -167,4 +167,4 @@ Log comprehensive reliability report.
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

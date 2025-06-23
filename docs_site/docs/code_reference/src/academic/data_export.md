@@ -1,7 +1,7 @@
 # Data Export
 
 **Module:** `src.academic.data_export`
-**File:** `/Volumes/dev/discernus/src/academic/data_export.py`
+**File:** `/app/src/academic/data_export.py`
 **Package:** `academic`
 
 Academic Data Export Pipeline
@@ -322,4 +322,4 @@ Returns:
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

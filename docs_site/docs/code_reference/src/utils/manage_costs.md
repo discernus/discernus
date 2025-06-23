@@ -1,7 +1,7 @@
 # Manage Costs
 
 **Module:** `src.utils.manage_costs`
-**File:** `/Volumes/dev/discernus/src/utils/manage_costs.py`
+**File:** `/app/src/utils/manage_costs.py`
 **Package:** `utils`
 
 API Cost Management CLI - Updated for 2025 Models
@@ -132,4 +132,4 @@ Main CLI function
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

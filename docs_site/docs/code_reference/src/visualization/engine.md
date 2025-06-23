@@ -1,7 +1,7 @@
 # Engine
 
 **Module:** `src.visualization.engine`
-**File:** `/Volumes/dev/discernus/src/visualization/engine.py`
+**File:** `/app/src/visualization/engine.py`
 **Package:** `visualization`
 
 Narrative Gravity Visualization Engine
@@ -25,16 +25,16 @@ visualizations across the entire platform.
 ## Table of Contents
 
 ### Classes
-- [DiscernusVisualizationEngine](#discernusvisualizationengine)
+- [NarrativeGravityVisualizationEngine](#narrativegravityvisualizationengine)
 
 ### Functions
 - [create_visualization_engine](#create-visualization-engine)
 
 ## Classes
 
-### DiscernusVisualizationEngine
+### NarrativeGravityVisualizationEngine
 
-Centralized visualization engine for Discernus analysis.
+Centralized visualization engine for Narrative Gravity Maps.
 
 Features:
 - Theme-aware styling (academic, presentation, minimal, dark)
@@ -147,11 +147,11 @@ Get information about the current theme.
 
 ### `create_visualization_engine`
 ```python
-create_visualization_engine(theme: str, figure_size: int) -> [DiscernusVisualizationEngine](src/visualization/engine.md#discernusvisualizationengine)
+create_visualization_engine(theme: str, figure_size: int) -> [NarrativeGravityVisualizationEngine](src/visualization/engine.md#narrativegravityvisualizationengine)
 ```
 
 Create a themed visualization engine.
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

@@ -1,0 +1,87 @@
+{
+  "summary": {
+    "total_tests": 5,
+    "passed_tests": 5,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "overall_status": "HEALTHY",
+    "duration_seconds": 0.46,
+    "start_time": "2025-06-23T07:37:26.742221",
+    "end_time": "2025-06-23T07:37:27.198139"
+  },
+  "tests": [
+    {
+      "test_name": "Core Imports",
+      "passed": true,
+      "timestamp": "2025-06-23T07:37:27.188516",
+      "details": {
+        "coordinate_engine": "success",
+        "qa_system": "success",
+        "framework_manager": "success"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Coordinate System",
+      "passed": true,
+      "timestamp": "2025-06-23T07:37:27.188659",
+      "details": {
+        "initialization": "success",
+        "coordinate_result": {
+          "x": 0.581,
+          "y": 0.252,
+          "distance": 0.633
+        },
+        "coordinate_calculation": "warning: unexpected range",
+        "dominance_amplification": "success",
+        "adaptive_scaling": 0.91,
+        "adaptive_scaling_status": "success"
+      },
+      "error": null
+    },
+    {
+      "test_name": "QA System",
+      "passed": true,
+      "timestamp": "2025-06-23T07:37:27.188671",
+      "details": {
+        "initialization": "success",
+        "basic_functionality": "available"
+      },
+      "error": null
+    },
+    {
+      "test_name": "Framework Loading",
+      "passed": true,
+      "timestamp": "2025-06-23T07:37:27.195924",
+      "details": {
+        "loading": "success",
+        "architecture": "anchors",
+        "anchor_count": 6
+      },
+      "error": null
+    },
+    {
+      "test_name": "Experiment Definition",
+      "passed": true,
+      "timestamp": "2025-06-23T07:37:27.198131",
+      "details": {
+        "loading": "success",
+        "structure": "valid",
+        "experiment_name": "System_Health_Test",
+        "description": "Basic system health validation test - validates core system components",
+        "success_criteria_count": 3,
+        "component_types": [
+          "frameworks",
+          "models"
+        ],
+        "framework_reference": "correct"
+      },
+      "error": null
+    }
+  ],
+  "metadata": {
+    "test_suite_version": "1.0.0",
+    "python_version": "3.9.6 (default, Nov 11 2024, 03:15:38) \n[Clang 16.0.0 (clang-1600.0.26.6)]",
+    "platform": "darwin"
+  }
+}

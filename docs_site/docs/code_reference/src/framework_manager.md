@@ -1,7 +1,7 @@
 # Framework Manager
 
 **Module:** `src.framework_manager`
-**File:** `/Volumes/dev/discernus/src/framework_manager.py`
+**File:** `/app/src/framework_manager.py`
 
 Framework Manager for Narrative Gravity Wells
 
@@ -105,4 +105,4 @@ main()
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*

@@ -128,15 +128,15 @@ class TestPromptGeneratorIntegration:
         finally:
             os.chdir(original_cwd)
 
-class TestNarrativeGravityCircularIntegration:
-    """Integration tests for circular coordinate system engine."""
+class TestDiscernusCoordinateSystemIntegration:
+    """Integration tests for Discernus Coordinate System engine."""
 
-    def test_circular_engine_initialization(self, temp_test_dir):
-        """Test that the circular engine can be initialized properly."""
-        engine = NarrativeGravityWellsCircular(config_dir=temp_test_dir)
+    def test_coordinate_engine_initialization(self, temp_test_dir):
+        """Test that the coordinate engine can be initialized properly."""
+        engine = DiscernusCoordinateEngine(config_dir=temp_test_dir)
         assert hasattr(engine, 'circle_radius')
         assert engine.circle_radius == 1.0
-        assert hasattr(engine, 'well_definitions')
+        assert hasattr(engine, 'well_definitions')  # Legacy attribute name for compatibility
         assert isinstance(engine.well_definitions, dict)
 
 class TestCLIExecutionIntegration:
@@ -148,7 +148,7 @@ class TestCLIExecutionIntegration:
         return result.stdout, result.stderr, result.returncode
 
     def test_framework_manager_cli_help(self):
-        stdout, _, exit_code = self.run_cli_command(["python", "src/narrative_gravity/framework_manager.py", "--help"])
+        stdout, _, exit_code = self.run_cli_command(["python", "src/framework_manager.py", "--help"])
         assert exit_code == 0
         assert "usage:" in stdout
 
@@ -157,8 +157,8 @@ class TestCLIExecutionIntegration:
         assert exit_code == 0
         assert "usage:" in stdout
 
-    def test_narrative_gravity_circular_cli_help(self):
-        # Test the circular coordinate system engine CLI
-        stdout, _, exit_code = self.run_cli_command(["python", "src/narrative_gravity/engine_circular.py", "--help"])
+    def test_discernus_coordinate_system_cli_help(self):
+        # Test the Discernus Coordinate System engine CLI
+        stdout, _, exit_code = self.run_cli_command(["python", "src/coordinate_engine.py", "--help"])
         assert exit_code == 0
         assert "usage:" in stdout 

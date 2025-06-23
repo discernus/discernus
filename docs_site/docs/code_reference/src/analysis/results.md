@@ -1,7 +1,7 @@
 # Results
 
 **Module:** `src.analysis.results`
-**File:** `/Volumes/dev/discernus/src/analysis/results.py`
+**File:** `/app/src/analysis/results.py`
 **Package:** `analysis`
 
 Extract and parse experiment results from the database.
@@ -121,4 +121,4 @@ Args:
 
 ---
 
-*Generated on 2025-06-21 18:56:11*
+*Generated on 2025-06-23 10:38:43*
