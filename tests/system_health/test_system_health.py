@@ -72,16 +72,30 @@ class DiscernusVisualizationEngine:
         circle = patches.Circle((0, 0), 1.0, fill=False, color='gray', linestyle='--', alpha=0.5)
         ax.add_patch(circle)
         
-        # Add anchor positions (using MFT framework geometry)
-        # Positions calculated from framework angles: Care=0°, Fairness=60°, Loyalty=120°, Authority=180°, Sanctity=240°, Liberty=300°
-        anchors = {
-            'Care': (0, 1),                    # 0° - top
-            'Fairness': (0.866, 0.5),         # 60° - upper right  
-            'Loyalty': (-0.5, 0.866),         # 120° - upper left
-            'Authority': (0, -1),              # 180° - bottom
-            'Sanctity': (-0.866, -0.5),       # 240° - lower left
-            'Liberty': (0.5, -0.866)          # 300° - lower right
-        }
+        # Add anchor positions using the same coordinate system as the framework
+        # Load the actual framework to get consistent positioning
+        anchors = {}
+        try:
+            from src.coordinate_engine import DiscernusCoordinateEngine
+            engine = DiscernusCoordinateEngine(framework_path='tests/system_health/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml')
+            
+            # Use the same calculation method as the coordinate engine
+            for anchor_name, anchor_info in engine.well_definitions.items():
+                angle = anchor_info['angle']
+                x, y = engine.circle_point(angle)
+                anchors[anchor_name] = (x, y)
+                
+        except Exception as e:
+            print(f"Warning: Could not load framework for anchor positioning: {e}")
+            # Fallback to manual positioning if framework loading fails
+            anchors = {
+                'Care': (1, 0),     # 0° in standard coordinates
+                'Fairness': (0.5, 0.866),     # 60°
+                'Loyalty': (-0.5, 0.866),     # 120°
+                'Authority': (-1, 0),          # 180°
+                'Sanctity': (-0.5, -0.866),   # 240°
+                'Liberty': (0.5, -0.866)      # 300°
+            }
         
         for anchor_name, (x, y) in anchors.items():
             ax.plot(x, y, 'o', markersize=8, color='blue', alpha=0.7)
@@ -189,11 +203,26 @@ class DiscernusVisualizationEngine:
         values += values[:1]
         foundations_display = [f.title() for f in foundations] + [foundations[0].title()]
         
-        # Use MFT framework angles (convert degrees to radians, adjust for matplotlib polar coordinate system)
-        # Matplotlib polar: 0° = right, 90° = top, so we need to rotate by 90° 
-        framework_angles_deg = [0, 60, 120, 180, 240, 300]  # MFT framework angles
-        matplotlib_angles_deg = [(90 - angle) % 360 for angle in framework_angles_deg]  # Rotate to match matplotlib
-        angles = [np.deg2rad(angle) for angle in matplotlib_angles_deg]
+        # Use MFT framework angles directly from the framework definition
+        angles = []
+        try:
+            from src.coordinate_engine import DiscernusCoordinateEngine
+            engine = DiscernusCoordinateEngine(framework_path='tests/system_health/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml')
+            
+            # Get angles in the same order as foundations list
+            for foundation in foundations:
+                if foundation in engine.well_definitions:
+                    angle_deg = engine.well_definitions[foundation]['angle']
+                    angles.append(np.deg2rad(angle_deg))
+                else:
+                    angles.append(0)  # Default if not found
+                    
+        except Exception as e:
+            print(f"Warning: Could not load framework for radar angles: {e}")
+            # Fallback to standard angles if framework loading fails
+            framework_angles_deg = [0, 60, 120, 180, 240, 300]  # Standard MFT angles
+            angles = [np.deg2rad(angle) for angle in framework_angles_deg]
+            
         angles += angles[:1]  # Close the radar chart
         
         fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(projection='polar'))
