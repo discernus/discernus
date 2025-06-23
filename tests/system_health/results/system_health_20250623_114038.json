@@ -5,15 +5,15 @@
     "failed_tests": 0,
     "success_rate": 100.0,
     "overall_status": "HEALTHY",
-    "duration_seconds": 0.61,
-    "start_time": "2025-06-23T11:45:52.195993",
-    "end_time": "2025-06-23T11:45:52.808149"
+    "duration_seconds": 0.71,
+    "start_time": "2025-06-23T11:40:38.771143",
+    "end_time": "2025-06-23T11:40:39.477265"
   },
   "tests": [
     {
       "test_name": "Core Imports",
       "passed": true,
-      "timestamp": "2025-06-23T11:45:52.198449",
+      "timestamp": "2025-06-23T11:40:38.773913",
       "details": {
         "coordinate_engine": "success",
         "qa_system": "success",
@@ -24,7 +24,7 @@
     {
       "test_name": "Coordinate System",
       "passed": true,
-      "timestamp": "2025-06-23T11:45:52.198589",
+      "timestamp": "2025-06-23T11:40:38.774056",
       "details": {
         "initialization": "success",
         "coordinate_result": {
@@ -42,7 +42,7 @@
     {
       "test_name": "QA System",
       "passed": true,
-      "timestamp": "2025-06-23T11:45:52.198601",
+      "timestamp": "2025-06-23T11:40:38.774067",
       "details": {
         "initialization": "success",
         "basic_functionality": "available"
@@ -52,7 +52,7 @@
     {
       "test_name": "Framework Loading",
       "passed": true,
-      "timestamp": "2025-06-23T11:45:52.205910",
+      "timestamp": "2025-06-23T11:40:38.781313",
       "details": {
         "loading": "success",
         "architecture": "anchors",
@@ -63,7 +63,7 @@
     {
       "test_name": "Experiment Definition",
       "passed": true,
-      "timestamp": "2025-06-23T11:45:52.208483",
+      "timestamp": "2025-06-23T11:40:38.783603",
       "details": {
         "loading": "success",
         "structure": "valid",
@@ -81,7 +81,7 @@
     {
       "test_name": "End-to-End Experiment",
       "passed": true,
-      "timestamp": "2025-06-23T11:45:52.218809",
+      "timestamp": "2025-06-23T11:40:38.794138",
       "details": {
         "design_validation": "success",
         "dependency_validation": "success",
@@ -130,7 +130,7 @@
     {
       "test_name": "Enhanced Analytics",
       "passed": true,
-      "timestamp": "2025-06-23T11:45:52.808134",
+      "timestamp": "2025-06-23T11:40:39.477250",
       "details": {
         "engine_initialization": "success",
         "multi_run_analysis": {

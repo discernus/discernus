@@ -102,9 +102,10 @@ class DiscernusVisualizationEngine:
             ax.annotate(anchor_name, (x, y), xytext=(5, 5), textcoords='offset points',
                        fontsize=10, fontweight='bold')
         
-        # Plot analysis results
+        # Plot analysis results and collect label information for smart positioning
         colors = ['red', 'green', 'orange']
         x_coords, y_coords = [], []
+        texts = []  # Collect text annotations for smart positioning
         
         for i, result in enumerate(analysis_results):
             coords = result.get('coordinates', {})
@@ -114,8 +115,11 @@ class DiscernusVisualizationEngine:
             
             ax.plot(x, y, 's', markersize=12, color=colors[i % len(colors)], 
                    label=f"Run {i+1}", alpha=0.8)
-            ax.annotate(f"Run {i+1}", (x, y), xytext=(10, 10), textcoords='offset points',
-                       fontsize=9, bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.7))
+            
+            # Create text annotation (will be repositioned to avoid overlaps)
+            text = ax.annotate(f"Run {i+1}", (x, y), xytext=(10, 10), textcoords='offset points',
+                             fontsize=9, bbox=dict(boxstyle="round,pad=0.3", facecolor='white', alpha=0.7))
+            texts.append(text)
         
         # Calculate and plot centroid
         if x_coords and y_coords:
@@ -125,9 +129,15 @@ class DiscernusVisualizationEngine:
             # Plot centroid with distinctive marker
             ax.plot(centroid_x, centroid_y, 'D', markersize=14, color='black', 
                    label='Centroid', alpha=0.9, markeredgecolor='white', markeredgewidth=2)
-            ax.annotate('Centroid', (centroid_x, centroid_y), xytext=(-10, -25), textcoords='offset points',
-                       fontsize=10, fontweight='bold', ha='center',
-                       bbox=dict(boxstyle="round,pad=0.3", facecolor='yellow', alpha=0.8))
+            
+            # Add centroid annotation to smart positioning
+            text = ax.annotate('Centroid', (centroid_x, centroid_y), xytext=(-10, -25), textcoords='offset points',
+                             fontsize=10, fontweight='bold', ha='center',
+                             bbox=dict(boxstyle="round,pad=0.3", facecolor='yellow', alpha=0.8))
+            texts.append(text)
+        
+        # Apply smart label positioning to avoid overlaps
+        self._apply_smart_label_positioning(texts, ax)
         
         ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
         ax.set_xlabel('Coordinate X', fontsize=12)
@@ -143,6 +153,84 @@ class DiscernusVisualizationEngine:
         plt.close()
         
         return plot_path
+    
+    def _apply_smart_label_positioning(self, texts: List, ax):
+        """Universal smart label positioning to avoid overlaps"""
+        try:
+            # Try to use adjustText for optimal positioning
+            from adjustText import adjust_text
+            adjust_text(texts, 
+                       arrowprops=dict(arrowstyle='->', color='gray', alpha=0.6, lw=0.8),
+                       expand_points=(1.2, 1.2),      # Expand space around points
+                       expand_text=(1.1, 1.1),       # Expand space around text
+                       expand_align=(1.05, 1.05),    # Expand for alignment
+                       autoalign='xy',               # Allow both x and y alignment
+                       only_move={'points': 'xy', 'text': 'xy'},  # Allow movement in both directions
+                       force_points=0.3,             # Force to avoid points
+                       force_text=0.8,               # Force to avoid text overlap
+                       lim=10000)                    # Iteration limit
+        except ImportError:
+            # Fallback: Smart offset positioning algorithm
+            print("Note: Install 'adjusttext' for optimal label positioning (pip install adjusttext)")
+            self._apply_fallback_positioning(texts, ax)
+    
+    def _apply_fallback_positioning(self, texts: List, ax):
+        """Fallback smart positioning when adjustText is not available"""
+        if len(texts) <= 1:
+            return
+            
+        # Get plot limits for boundary checking
+        xlim = ax.get_xlim()
+        ylim = ax.get_ylim()
+        
+        # Calculate label positions and check for overlaps
+        positions = []
+        for text in texts:
+            # Get annotation position
+            x, y = text.xy
+            positions.append((x, y, text))
+        
+        # Sort by proximity to avoid clustering
+        positions.sort(key=lambda p: (p[0]**2 + p[1]**2))  # Sort by distance from origin
+        
+        # Apply smart offsets in different directions
+        offset_directions = [
+            (15, 15),   # Upper right
+            (-15, 15),  # Upper left  
+            (15, -15),  # Lower right
+            (-15, -15), # Lower left
+            (0, 20),    # Above
+            (0, -20),   # Below
+            (20, 0),    # Right
+            (-20, 0)    # Left
+        ]
+        
+        for i, (x, y, text) in enumerate(positions):
+            # Use different offset direction for each label
+            offset_x, offset_y = offset_directions[i % len(offset_directions)]
+            
+            # Adjust based on position relative to plot center
+            center_x = (xlim[0] + xlim[1]) / 2
+            center_y = (ylim[0] + ylim[1]) / 2
+            
+            # Push labels away from center when clustered
+            if abs(x - center_x) < 0.1 and abs(y - center_y) < 0.1:
+                # Near center - use radial offsets
+                angle = i * (360 / len(positions))
+                import math
+                offset_x = 25 * math.cos(math.radians(angle))
+                offset_y = 25 * math.sin(math.radians(angle))
+            
+            # Update annotation position
+            text.xytext = (offset_x, offset_y)
+            
+            # Add arrow if the offset is significant (indicating the label was moved)
+            if abs(offset_x) > 15 or abs(offset_y) > 15:
+                # Update the annotation to include an arrow
+                text.arrowprops = dict(arrowstyle='->', color='gray', alpha=0.6, lw=0.8)
+            else:
+                # For small adjustments, no arrow needed
+                text.arrowprops = None
     
     def _add_chart_stamp(self, ax, chart_type: str, analysis_results: List[Dict] = None):
         """Add provenance stamp to chart with hash for auditability"""
