@@ -10,7 +10,7 @@ The experiment_schema.json file has been deprecated as of Framework Specificatio
 ## Current Specifications
 
 See the current specifications:
-- [Experiment System Specification v3.1](../docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md)
+- [Experiment System Specification v3.1](../../docs_site/docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION_v3.1.0.md)
 
 ## Migration Date
 

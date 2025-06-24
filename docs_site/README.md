@@ -70,7 +70,7 @@ experiment:
     - "The analysis will successfully identify and quantify the five moral foundations in the text."
 
 # --- All the assets required to run the experiment ---
-# For a full reference of all options, see docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md
+# For a full reference of all options, see docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION_v3.1.0.md
 components:
   # Specify the analytical framework to use
   framework:
@@ -356,7 +356,7 @@ components:
     - provider: "openai"
       name: "gpt-4.1-mini"
 
-# For a full reference of all options, see docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md
+# For a full reference of all options, see docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION_v3.1.0.md
 ```
 
 Execute with:

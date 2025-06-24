@@ -1,16 +1,16 @@
 # Deprecated Experiment Definition Format
 
-The EXPERIMENT_DEFINITION_FORMAT.md specification has been deprecated and consolidated into EXPERIMENT_SYSTEM_SPECIFICATION.md.
+The EXPERIMENT_DEFINITION_FORMAT.md specification has been deprecated and consolidated into EXPERIMENT_SYSTEM_SPECIFICATION_v3.1.0.md.
 
 ## Migration
 
 - **Old**: Separate format guide (EXPERIMENT_DEFINITION_FORMAT.md) + system specification
-- **New**: Single comprehensive specification (EXPERIMENT_SYSTEM_SPECIFICATION.md)
+- **New**: Single comprehensive specification (EXPERIMENT_SYSTEM_SPECIFICATION_v3.1.0.md)
 
 ## Current Specification
 
 See the consolidated specification:
-- [Experiment System Specification v3.1](../docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md)
+- [Experiment System Specification v3.1](../../docs_site/docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION_v3.1.0.md)
 
 ## Migration Date
 
