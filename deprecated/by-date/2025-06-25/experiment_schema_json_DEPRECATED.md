@@ -4,14 +4,13 @@ The experiment_schema.json file has been deprecated as of Framework Specificatio
 
 ## Migration
 
-- **Old**: JSON-based experiment definitions with 
+- **Old**: JSON-based experiment definitions with `experiment_schema.json`
 - **New**: YAML-based experiment definitions following Framework Specification v3.1
 
 ## Current Specifications
 
 See the current specifications:
 - [Experiment System Specification v3.1](../docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md)
-- [Experiment Definition Format v3.1](../docs/specifications/EXPERIMENT_DEFINITION_FORMAT.md)
 
 ## Migration Date
 

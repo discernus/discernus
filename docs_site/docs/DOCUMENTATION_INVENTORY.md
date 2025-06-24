@@ -175,8 +175,7 @@
 
 | Document | Purpose | Audience | Status |
 |----------|---------|----------|--------|
-| [`EXPERIMENT_DEFINITION_FORMAT.md`](specifications/EXPERIMENT_DEFINITION_FORMAT.md) | Declarative experiment specification format | 🔬💻 Researchers/Developers | ✅ Complete |
-| [`EXPERIMENT_SYSTEM_SPECIFICATION.md`](specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md) | Complete experiment system architecture | 🔬💻 System Designers | ✅ Complete |
+| [`EXPERIMENT_SYSTEM_SPECIFICATION.md`](specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md) | Comprehensive experiment system documentation with practical implementation guide | 🔬💻 Researchers/Developers | ✅ Complete |
 | [`FRAMEWORK_AGNOSTICISM_GUIDE.md`](specifications/FRAMEWORK_AGNOSTICISM_GUIDE.md) | Framework-agnostic design principles | 🔬💻 Architects | ✅ Complete |
 
 ### **Migration & Evolution**

@@ -548,6 +548,257 @@ validation_experiment:
    - Include evidence requirements for peer review
    - Plan manual review for edge cases
 
+## **🛠️ Practical Implementation Guide**
+
+### **Directory Structure for Experiment Packages**
+
+```
+my_comparative_study/
+├── experiment.yaml              # Main experiment definition (v3.1 format)
+├── texts/                       # New texts to ingest
+│   ├── new_speech_1.txt
+│   └── new_speech_2.txt
+├── frameworks/                  # New/modified frameworks (v3.1 format)
+│   ├── my_innovation_framework.yaml
+│   └── political_worldview_modified_v2.yaml
+├── prompts/                     # Custom prompt templates (optional)
+│   └── evidence_focused_v1.yaml
+├── metadata.yaml                # Study metadata
+└── results/                     # Generated output directory
+    ├── raw_data/
+    ├── analysis_reports/
+    └── qa_reports/
+```
+
+### **Step-by-Step Execution Workflow**
+
+#### **Step 1: Prepare Experiment Package**
+
+```bash
+# Create experiment directory
+mkdir my_comparative_study
+cd my_comparative_study
+
+# Add new texts
+mkdir texts
+cp /path/to/tech_ceo_speech.txt texts/new_speech_1.txt
+cp /path/to/academic_speech.txt texts/new_speech_2.txt
+
+# Add new/modified frameworks  
+mkdir frameworks
+# (Create framework YAML files using Framework Specification v3.1)
+
+# Create experiment definition
+# (Use experiment.yaml template from this specification)
+```
+
+#### **Step 2: Validate Experiment Definition**
+
+```bash
+# Validate experiment specification
+python3 scripts/utilities/unified_framework_validator.py my_comparative_study/frameworks/
+python3 scripts/applications/comprehensive_experiment_orchestrator.py my_comparative_study/experiment.yaml --dry-run
+
+# Output:
+# ✅ Experiment definition valid
+# ✅ All text files found
+# ✅ Framework specifications valid (v3.1 compliant)
+# ✅ Model configurations valid
+# 📊 Estimated execution: 72 runs, ~$25.50, 45 minutes
+```
+
+#### **Step 3: Execute Experiment**
+
+```bash
+# Execute experiment with QA integration
+python3 scripts/applications/comprehensive_experiment_orchestrator.py my_comparative_study/experiment.yaml
+
+# Interactive confirmation:
+# 🧪 Experiment: Cross-Framework Presidential Rhetoric Analysis
+# 📊 Design Matrix: 4 texts × 3 frameworks × 2 models × 3 runs = 72 total runs
+# 💰 Estimated cost: $25.50 (within $50.00 limit)
+# ⏱️  Estimated time: 45 minutes
+# 
+# Proceed? [y/N]: y
+```
+
+#### **Step 4: Automated Execution and Output**
+
+```bash
+# System automatically:
+# 1. Ingests new texts using intelligent ingestion
+# 2. Validates and registers new frameworks with v3.1 compliance checking
+# 3. Executes full experimental matrix
+# 4. Applies 6-layer QA validation to all runs
+# 5. Generates academic exports and reports
+# 6. Creates complete replication package
+```
+
+### **Example Execution Output**
+
+```
+🧪 Executing Experiment: Cross-Framework Presidential Rhetoric Analysis
+📋 Validated experiment definition: ✅ 
+📋 Framework Specification v3.1 compliance: ✅
+📥 Ingesting new texts: ✅ 2 texts processed
+🔧 Registering frameworks: ✅ 2 new frameworks validated
+🚀 Starting experimental matrix execution...
+
+Progress: [████████████████████████████████████████] 72/72 runs (100%)
+⏱️  Total time: 43m 15s
+💰 Total cost: $24.18 (within budget)
+🔍 QA Summary: 68 HIGH confidence, 4 MEDIUM confidence, 0 LOW confidence
+
+📊 Generating reports...
+✅ Academic data export: my_comparative_study/results/academic_export_20250625.csv
+✅ QA validation report: my_comparative_study/results/qa_validation_report.yaml
+✅ Visualization package: my_comparative_study/results/visualizations/
+✅ Replication package: my_comparative_study/results/replication_package.zip
+
+🎉 Experiment complete! Results ready for analysis.
+```
+
+### **Academic Output Format Specifications**
+
+#### **Data Export Formats**
+
+**Available Data Formats:**
+- `"csv"` - Universal compatibility, Excel-readable
+- `"feather"` - Optimized for R/Python, fast loading
+- `"yaml"` - Human-readable with metadata
+- `"stata_dta"` - Native Stata format (requires pyreadstat)
+- `"parquet"` - Efficient columnar format for large datasets
+- `"excel"` - Excel workbook with multiple sheets
+
+#### **Academic Package Types**
+
+**Primary Format Options:**
+- `"r_package"` - Complete R analysis package with .Rmd templates
+- `"python_package"` - Jupyter notebooks with pandas/scipy analysis
+- `"stata_package"` - .do files with publication-ready analysis
+- `"spss_package"` - SPSS syntax files and data formats
+- `"universal"` - Multi-platform package with all formats
+
+**R Package Contents:**
+```
+study_name_r_package/
+├── data/
+│   ├── experiment_data.feather
+│   ├── qa_validation_results.csv
+│   └── metadata.yaml
+├── analysis/
+│   ├── descriptive_analysis.Rmd
+│   ├── reliability_analysis.Rmd
+│   ├── comparative_analysis.Rmd
+│   └── visualization_templates.R
+├── output/
+│   ├── figures/
+│   ├── tables/
+│   └── reports/
+└── README.md
+```
+
+**Python Package Contents:**
+```
+study_name_python_package/
+├── data/
+│   ├── experiment_data.feather
+│   ├── qa_validation_results.csv
+│   └── metadata.yaml
+├── notebooks/
+│   ├── 01_descriptive_analysis.ipynb
+│   ├── 02_reliability_analysis.ipynb
+│   ├── 03_comparative_analysis.ipynb
+│   └── 04_visualization_dashboard.ipynb
+├── scripts/
+│   ├── analysis_functions.py
+│   └── plotting_utilities.py
+└── requirements.txt
+```
+
+#### **Example Academic Workflow Configurations**
+
+**Political Science Researcher (R-focused):**
+```yaml
+academic_export:
+  primary_format: "r_package"
+  statistical_analysis:
+    descriptive_statistics: true
+    comparative_analysis: true
+    significance_tests: ["anova", "t_test"]
+  visualization_package:
+    publication_ready_pdf: true
+    custom_themes: ["academic"]
+  manuscript_support:
+    methods_section: true
+    results_tables: true
+```
+
+**Computational Social Science (Multi-platform):**
+```yaml
+academic_export:
+  primary_format: "python_package"
+  additional_formats: ["r_package", "stata_package"]
+  statistical_analysis:
+    descriptive_statistics: true
+    reliability_analysis: true
+    correlation_matrices: true
+  replication_package:
+    analysis_scripts: ["python_analysis.py", "r_analysis.R", "stata_analysis.do"]
+```
+
+**Psychology Researcher (SPSS/Stata focus):**
+```yaml
+academic_export:
+  primary_format: "stata_package"
+  additional_formats: ["spss_package"]
+  data_formats: ["stata_dta", "csv"]
+  statistical_analysis:
+    reliability_analysis: true
+    significance_tests: ["t_test", "chi_square"]
+```
+
+## **🚀 Implementation Roadmap**
+
+### **Phase 1: Core Infrastructure** ✅ **Complete**
+- `scripts/applications/comprehensive_experiment_orchestrator.py` - Production experiment orchestrator
+- `scripts/utilities/unified_framework_validator.py` - Framework Specification v3.1 validator
+- YAML-based experiment and framework definitions
+- 6-layer quality assurance system integration
+
+### **Phase 2: Enhanced Features** 🔄 **In Progress**
+- Interactive experiment builder CLI tool
+- Web interface for experiment definition
+- Template library for common experimental designs
+- Advanced design matrix generators
+
+### **Phase 3: Advanced Capabilities** 📋 **Planned**
+- Experiment scheduling and queuing
+- Distributed execution across multiple LLM providers
+- Real-time progress monitoring and cost tracking
+- Automatic result interpretation and reporting
+
+## **✅ Benefits of This Systematic Approach**
+
+### **For Researchers**
+- **Declarative**: Specify what you want, not how to code it
+- **Reusable**: Share experiment definitions with colleagues
+- **Traceable**: Complete provenance from definition to results
+- **Validatable**: Check feasibility before execution
+- **Extensible**: Add new resources without changing core definition
+
+### **For Reproducibility**
+- **Self-Contained**: Everything needed for replication in one package
+- **Version Controlled**: Track changes to experimental design
+- **Platform Independent**: YAML format works across tools
+- **Academic Standard**: Meets publication requirements for transparency
+
+### **For System Integration**
+- **QA Enhanced**: Automatic integration with 6-layer quality assurance
+- **Cost Controlled**: Built-in budget management and confirmation
+- **Resource Management**: Intelligent handling of new vs existing resources
+- **Output Standardized**: Consistent academic export formats
+
 ### **Component Development Workflow**
 
 1. **Framework Development**:
@@ -578,4 +829,4 @@ validation_experiment:
 
 ---
 
-*This specification provides the complete experimental design space for systematic narrative analysis research using the Narrative Gravity Analysis System.* 
+*This specification provides the complete experimental design space for systematic narrative analysis research using the Narrative Gravity Analysis System with Framework Specification v3.1 compatibility.* 
