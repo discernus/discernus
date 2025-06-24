@@ -147,7 +147,7 @@ implementation_status: "Framework Specification v3.1 compliant"
 
 **Hierarchical Analysis** (`hierarchical_v2.1`)
 - **Approach**: LLM ranks dimensions by importance and provides evidence
-- **Output Format**: Hierarchical ranking with primary/secondary/tertiary wells
+- **Output Format**: Hierarchical ranking with primary/secondary/tertiary anchors
 - **Advantages**: Clear interpretability, evidence-based reasoning
 - **Use Cases**: Academic research, detailed justification requirements
 
@@ -164,39 +164,34 @@ implementation_status: "Framework Specification v3.1 compliant"
 - **Use Cases**: Publication-quality research, validation studies
 
 #### **Prompt Template Configuration**
-```json
-{
-  "template_id": "string (unique identifier)",
-  "name": "string (human-readable name)", 
-  "version": "string (semantic versioning)",
-  "type": "enum[hierarchical, traditional, evidence_based]",
-  "description": "string (methodological approach)",
-  
-  "analysis_requirements": {
-    "evidence_required": "boolean",
-    "justification_depth": "enum[minimal, standard, comprehensive]",
-    "ranking_required": "boolean", 
-    "framework_fit_assessment": "boolean"
-  },
-  
-  "output_format": {
-    "structure": "enum[json, structured_text, hybrid]",
-    "required_fields": ["array of mandatory response fields"],
-    "scoring_scale": "string (e.g., '0.0-1.0', 'ordinal')"
-  },
-  
-  "llm_guidance": {
-    "temperature_recommendation": "number (0.0-1.0)",
-    "max_tokens": "number (response length)",
-    "model_compatibility": ["array of compatible LLM models"]
-  }
-}
+```yaml
+template_id: "unique_identifier"
+name: "human-readable name"
+version: "flexible_version"  # v3.1 flexible versioning
+type: "hierarchical|traditional|evidence_based"
+description: "methodological approach"
+
+analysis_requirements:
+  evidence_required: true/false
+  justification_depth: "minimal|standard|comprehensive"
+  ranking_required: true/false
+  framework_fit_assessment: true/false
+
+output_format:
+  structure: "yaml|structured_text|hybrid"
+  required_fields: ["array", "of", "mandatory", "response", "fields"]
+  scoring_scale: "0.0-1.0, ordinal, etc."
+
+llm_guidance:
+  temperature_recommendation: 0.1  # 0.0-1.0
+  max_tokens: 4000
+  model_compatibility: ["array", "of", "compatible", "llm", "models"]
 ```
 
 #### **Prompt Quality Standards**
 - **Framework Agnostic**: Templates should work across multiple frameworks
 - **Model Independent**: Compatible with different LLM providers  
-- **Output Consistency**: Reliable JSON structure for parsing
+- **Output Consistency**: Reliable YAML structure for parsing
 - **Evidence Standards**: Clear requirements for supporting evidence
 
 ### **3. Scoring Algorithms**
@@ -236,34 +231,28 @@ implementation_status: "Framework Specification v3.1 compliant"
 - **Use Cases**: Clear categorization, reducing center-bias
 
 #### **Algorithm Configuration**
-```json
-{
-  "algorithm_id": "string (unique identifier)",
-  "name": "string (human-readable name)",
-  "version": "string (semantic versioning)",
-  "type": "enum[linear, winner_take_most, hierarchical, exponential, nonlinear]",
-  "description": "string (mathematical approach)",
-  
-  "mathematical_foundation": {
-    "primary_formula": "string (LaTeX or description)",
-    "normalization_method": "string",
-    "edge_case_handling": "string"
-  },
-  
-  "parameters": {
-    "parameter_name": {
-      "default_value": "number",
-      "valid_range": "string (min-max)",
-      "description": "string (parameter meaning)"
-    }
-  },
-  
-  "compatibility": {
-    "framework_types": ["array of compatible frameworks"],
-    "prompt_types": ["array of compatible prompt templates"],
-    "mathematical_requirements": ["array of input requirements"]
-  }
-}
+```yaml
+algorithm_id: "unique_identifier"
+name: "human-readable name"
+version: "flexible_version"  # v3.1 flexible versioning
+type: "linear|winner_take_most|hierarchical|exponential|nonlinear"
+description: "mathematical approach"
+
+mathematical_foundation:
+  primary_formula: "LaTeX or description"
+  normalization_method: "normalization approach"
+  edge_case_handling: "edge case handling strategy"
+
+parameters:
+  parameter_name:
+    default_value: 0.7
+    valid_range: "0.0-1.0"
+    description: "parameter meaning and usage"
+
+compatibility:
+  framework_types: ["array", "of", "compatible", "frameworks"]
+  prompt_types: ["array", "of", "compatible", "prompt", "templates"]
+  mathematical_requirements: ["array", "of", "input", "requirements"]
 ```
 
 ### **4. LLM Configurations**
@@ -299,34 +288,29 @@ implementation_status: "Framework Specification v3.1 compliant"
 - **Strengths**: Multimodal capabilities, technical analysis
 
 #### **Model Configuration Parameters**
-```json
-{
-  "llm_model": "string (model identifier)",
-  "provider": "enum[openai, anthropic, mistral, google_ai]",
-  "version": "string (model version)",
-  
-  "analysis_parameters": {
-    "temperature": "number (0.0-1.0, creativity level)",
-    "max_tokens": "number (response length limit)",
-    "top_p": "number (nucleus sampling parameter)",
-    "frequency_penalty": "number (repetition control)",
-    "presence_penalty": "number (topic diversity)"
-  },
-  
-  "cost_parameters": {
-    "input_cost_per_1k": "number (USD per 1K input tokens)",
-    "output_cost_per_1k": "number (USD per 1K output tokens)",
-    "rate_limit": "number (requests per minute)"
-  },
-  
-  "capability_profile": {
-    "context_window": "number (maximum input tokens)",
-    "json_reliability": "enum[high, medium, low]",
-    "reasoning_depth": "enum[high, medium, low]",
-    "evidence_quality": "enum[high, medium, low]",
-    "consistency": "enum[high, medium, low]"
-  }
-}
+```yaml
+llm_model: "model_identifier"
+provider: "openai|anthropic|mistral|google_ai"
+version: "model_version"
+
+analysis_parameters:
+  temperature: 0.1  # 0.0-1.0, creativity level
+  max_tokens: 4000  # response length limit
+  top_p: 0.9  # nucleus sampling parameter
+  frequency_penalty: 0.0  # repetition control
+  presence_penalty: 0.0  # topic diversity
+
+cost_parameters:
+  input_cost_per_1k: 0.001  # USD per 1K input tokens
+  output_cost_per_1k: 0.003  # USD per 1K output tokens
+  rate_limit: 60  # requests per minute
+
+capability_profile:
+  context_window: 128000  # maximum input tokens
+  yaml_reliability: "high|medium|low"
+  reasoning_depth: "high|medium|low"
+  evidence_quality: "high|medium|low"
+  consistency: "high|medium|low"
 ```
 
 ## **⚙️ Experiment Configuration (v3.1 Compatible)**
@@ -428,67 +412,70 @@ academic_standards:
 ### **Run-Level Results**
 
 Each individual LLM analysis produces:
-```json
-{
-  "run_id": "string (unique identifier)",
-  "text_id": "string (source text identifier)",
-  "llm_model": "string (model used)",
-  "execution_time": "timestamp",
-  "duration_seconds": "number",
-  "api_cost": "number (USD)",
-  
-  "analysis_results": {
-    "raw_scores": {"WellName": "number", ...},
-    "hierarchical_ranking": {...} // if hierarchical prompt
-    "well_justifications": {...} // if evidence required
-    "framework_fit_score": "number (0.0-1.0)",
-    "narrative_position": {"x": "number", "y": "number"}
-  },
-  
-  "quality_metadata": {
-    "qa_confidence_level": "enum[HIGH, MEDIUM, LOW]",
-    "qa_confidence_score": "number (0.0-1.0)",
-    "anomalies_detected": ["array of anomaly types"],
-    "requires_second_opinion": "boolean"
-  },
-  
-  "provenance": {
-    "framework_version": "string",
-    "prompt_template_version": "string",
-    "scoring_algorithm_version": "string",
-    "complete_configuration": {...}
-  }
-}
+```yaml
+run_id: "unique_identifier"
+text_id: "source_text_identifier"
+llm_model: "model_used"
+execution_time: "2025-06-25T10:00:00Z"
+duration_seconds: 45.2
+api_cost: 0.15  # USD
+
+analysis_results:
+  raw_scores:
+    Care_Harm: 0.8
+    Fairness_Cheating: 0.6
+    # ... other axes
+  hierarchical_ranking:
+    primary: "Care"
+    secondary: "Fairness"
+    tertiary: "Authority"
+  anchor_justifications:
+    Care: "Evidence text supporting care emphasis"
+    # ... other justifications
+  framework_fit_score: 0.85  # 0.0-1.0
+  narrative_position:
+    x: 0.4
+    y: 0.7
+
+quality_metadata:
+  qa_confidence_level: "HIGH|MEDIUM|LOW"
+  qa_confidence_score: 0.92  # 0.0-1.0
+  anomalies_detected: ["anomaly_type_1", "anomaly_type_2"]
+  requires_second_opinion: false
+
+provenance:
+  framework_version: "v1.0"
+  prompt_template_version: "v2.1"
+  scoring_algorithm_version: "v1.0"
+  complete_configuration:
+    # ... full configuration details
 ```
 
 ### **Experiment-Level Results**
 
 Aggregated analysis across all runs:
-```json
-{
-  "experiment_summary": {
-    "total_runs": "number",
-    "successful_runs": "number", 
-    "total_cost": "number (USD)",
-    "average_duration": "number (seconds)",
-    "execution_period": "string (start - end dates)"
-  },
-  
-  "reliability_analysis": {
-    "coefficient_variation": "number (consistency measure)",
-    "intraclass_correlation": "number (if multi-model)",
-    "reliability_rate": "number (% achieving target CV)",
-    "framework_fit_statistics": {...}
-  },
-  
-  "academic_outputs": {
-    "publication_ready_dataset": "path to CSV/Feather/JSON exports",
-    "jupyter_analysis_notebook": "path to generated notebook",
-    "r_analysis_scripts": "path to R statistical scripts",
-    "methodology_documentation": "path to methods documentation",
-    "replication_package": "path to complete replication materials"
-  }
-}
+```yaml
+experiment_summary:
+  total_runs: 72
+  successful_runs: 70
+  total_cost: 25.50  # USD
+  average_duration: 42.3  # seconds
+  execution_period: "2025-06-25T10:00:00Z - 2025-06-25T12:30:00Z"
+
+reliability_analysis:
+  coefficient_variation: 0.15  # consistency measure
+  intraclass_correlation: 0.82  # if multi-model
+  reliability_rate: 0.95  # % achieving target CV
+  framework_fit_statistics:
+    mean_fit_score: 0.87
+    std_fit_score: 0.08
+
+academic_outputs:
+  publication_ready_dataset: "path/to/experiment_data.csv"
+  jupyter_analysis_notebook: "path/to/analysis.ipynb"
+  r_analysis_scripts: "path/to/analysis.R"
+  methodology_documentation: "path/to/methods.md"
+  replication_package: "path/to/replication_package.zip"
 ```
 
 ## **🔬 Advanced Experimental Capabilities**
@@ -496,15 +483,12 @@ Aggregated analysis across all runs:
 ### **Component Matrix Experiments**
 
 Systematic testing across multiple component combinations:
-```json
-{
-  "matrix_experiment": {
-    "frameworks": ["civic_virtue", "political_spectrum"],
-    "prompt_templates": ["hierarchical_v2.1", "traditional_v2.0"],
-    "scoring_algorithms": ["linear_v1.0", "hierarchical_v1.0"],
-    "models": ["gpt-4.1-mini", "claude-3-5-sonnet"]
-  }
-}
+```yaml
+matrix_experiment:
+  frameworks: ["civic_virtue", "political_worldview_triad"]
+  prompt_templates: ["hierarchical_v2.1", "traditional_v2.0"]
+  scoring_algorithms: ["linear_v1.0", "hierarchical_v1.0"]
+  models: ["gpt-4.1-mini", "claude-3-5-sonnet"]
 ```
 
 **Output**: Complete factorial analysis with:
@@ -516,41 +500,31 @@ Systematic testing across multiple component combinations:
 ### **Longitudinal Studies**
 
 Time-series analysis capabilities:
-```json
-{
-  "longitudinal_experiment": {
-    "temporal_corpus": {
-      "time_periods": ["2020-01", "2020-02", ...],
-      "texts_per_period": "number",
-      "temporal_metadata": "required"
-    },
-    "trend_analysis": {
-      "enable_trend_detection": "boolean",
-      "periodicity_detection": "boolean", 
-      "change_point_analysis": "boolean"
-    }
-  }
-}
+```yaml
+longitudinal_experiment:
+  temporal_corpus:
+    time_periods: ["2020-01", "2020-02", "2020-03"]
+    texts_per_period: 10
+    temporal_metadata: true
+  trend_analysis:
+    enable_trend_detection: true
+    periodicity_detection: true
+    change_point_analysis: true
 ```
 
 ### **Validation Studies**
 
 Human-LLM comparison protocols:
-```json
-{
-  "validation_experiment": {
-    "human_coding": {
-      "expert_coders": "number",
-      "inter_rater_reliability_target": "number",
-      "coding_protocol": "string (methodology)"
-    },
-    "llm_comparison": {
-      "correlation_targets": "number (human-LLM agreement)",
-      "bias_detection": "boolean",
-      "systematic_error_analysis": "boolean"
-    }
-  }
-}
+```yaml
+validation_experiment:
+  human_coding:
+    expert_coders: 3
+    inter_rater_reliability_target: 0.8
+    coding_protocol: "standardized methodology description"
+  llm_comparison:
+    correlation_targets: 0.7  # human-LLM agreement
+    bias_detection: true
+    systematic_error_analysis: true
 ```
 
 ## **📚 Usage Guidelines**
