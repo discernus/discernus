@@ -1,0 +1,45 @@
+{
+  "approved_licenses": [
+    "MIT License",
+    "MIT",
+    "Apache License 2.0",
+    "Apache-2.0",
+    "BSD License",
+    "BSD",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC License",
+    "ISC",
+    "Python Software Foundation License",
+    "PSF-2.0",
+    "PostgreSQL License",
+    "PostgreSQL"
+  ],
+  "conditional_licenses": [
+    "GNU Lesser General Public License v2.1",
+    "LGPL-2.1",
+    "LGPL-3.0",
+    "Mozilla Public License 2.0",
+    "MPL-2.0"
+  ],
+  "prohibited_licenses": [
+    "GNU General Public License v2.0",
+    "GPL-2.0",
+    "GNU General Public License v3.0",
+    "GPL-3.0",
+    "GNU Affero General Public License v3.0",
+    "AGPL-3.0"
+  ],
+  "attribution_required": [
+    "MIT License",
+    "MIT",
+    "Apache License 2.0",
+    "Apache-2.0",
+    "BSD License",
+    "BSD",
+    "BSD-2-Clause",
+    "BSD-3-Clause"
+  ],
+  "unknown_policy": "flag",
+  "require_all_known": true
+}

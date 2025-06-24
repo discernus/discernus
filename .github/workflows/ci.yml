@@ -57,13 +57,22 @@ jobs:
       run: |
         echo "📋 Checking license compliance..."
         cd product_management/license_audit
-        if python3 compliance_checker.py; then
-          echo "✅ License compliance validated"
+        echo "🔍 Installing pip-licenses for comprehensive scanning..."
+        pip install pip-licenses
+        echo "🎯 Running STRICT SaaS/Commercial license compliance check..."
+        if python3 compliance_checker.py --policy-file saas_commercial_policy.json; then
+          echo "✅ License compliance validated - Safe for SaaS/Commercial deployment"
         else
-          echo "⚠️ License compliance check failed (non-blocking for development velocity)"
-          echo "   This is often due to environment-specific package issues"
-          echo "   Manual license review recommended before production"
+          echo "🚨 CRITICAL: License compliance FAILED"
+          echo "❌ Deployment BLOCKED due to license violations"
+          echo "🔧 Action required: Fix license issues before merging"
+          echo ""
+          echo "📋 License compliance report:"
+          python3 compliance_checker.py --policy-file saas_commercial_policy.json --output-format markdown || true
+          exit 1
         fi
+        echo "💾 Generating license audit trail..."
+        python3 run_audit.py --output-dir ci_audit_$(date +%Y%m%d_%H%M%S) --policy-file saas_commercial_policy.json
     
     - name: Test configuration validation
       run: |

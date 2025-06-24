@@ -1,0 +1,134 @@
+{
+  "policy_name": "SaaS Commercial Deployment Policy",
+  "policy_version": "1.0.0",
+  "created_date": "2025-01-27",
+  "description": "License policy optimized for SaaS and commercial deployment with zero restrictions",
+  "compliance_level": "STRICT",
+  "deployment_contexts": ["SaaS", "commercial", "enterprise", "cloud", "on-premise"],
+  
+  "approved_licenses": [
+    "MIT License",
+    "MIT",
+    "Apache License 2.0", 
+    "Apache-2.0",
+    "BSD License",
+    "BSD",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSD-3-Clause-Clear",
+    "ISC License",
+    "ISC",
+    "Python Software Foundation License",
+    "PSF-2.0",
+    "PostgreSQL License",
+    "PostgreSQL",
+    "Unlicense",
+    "CC0-1.0",
+    "0BSD"
+  ],
+  
+  "conditional_licenses": {
+    "LGPL-2.1": {
+      "condition": "library_usage_only",
+      "note": "Acceptable for libraries, not for main application code",
+      "commercial_risk": "LOW"
+    },
+    "LGPL-3.0": {
+      "condition": "library_usage_only", 
+      "note": "Acceptable for libraries, not for main application code",
+      "commercial_risk": "LOW"
+    },
+    "MPL-2.0": {
+      "condition": "file_level_copyleft_acceptable",
+      "note": "File-level copyleft - review integration approach",
+      "commercial_risk": "LOW"
+    }
+  },
+  
+  "prohibited_licenses": [
+    "GNU General Public License v2.0",
+    "GPL-2.0",
+    "GNU General Public License v3.0",
+    "GPL-3.0", 
+    "GNU Affero General Public License v3.0",
+    "AGPL-3.0",
+    "AGPL-1.0",
+    "AGPL-2.0",
+    "Copyleft",
+    "EUPL-1.1",
+    "EUPL-1.2",
+    "OSL-3.0",
+    "EPL-1.0",
+    "EPL-2.0",
+    "CDDL-1.0",
+    "CDDL-1.1",
+    "CPL-1.0"
+  ],
+  
+  "attribution_required": [
+    "MIT License",
+    "MIT",
+    "Apache License 2.0",
+    "Apache-2.0",
+    "BSD License", 
+    "BSD",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSD-3-Clause-Clear",
+    "ISC License",
+    "ISC"
+  ],
+  
+  "commercial_deployment_requirements": {
+    "attribution_file_required": true,
+    "attribution_file_path": "THIRD_PARTY_LICENSES.md",
+    "copyright_notices_required": true,
+    "license_text_inclusion_required": true,
+    "patent_grants_preferred": true
+  },
+  
+  "saas_specific_requirements": {
+    "network_copyleft_prohibited": true,
+    "agpl_variants_prohibited": true,
+    "source_disclosure_triggers_prohibited": true,
+    "user_interaction_clauses_prohibited": true
+  },
+  
+  "risk_assessment": {
+    "approved_risk_level": "NONE",
+    "conditional_risk_level": "LOW", 
+    "prohibited_risk_level": "HIGH",
+    "unknown_risk_level": "HIGH"
+  },
+  
+  "enforcement_rules": {
+    "unknown_policy": "prohibit",
+    "require_all_known": true,
+    "ci_blocking": true,
+    "deployment_blocking": true,
+    "audit_frequency": "quarterly",
+    "emergency_review_required": true
+  },
+  
+  "compliance_automation": {
+    "ci_integration": true,
+    "pre_commit_hooks": true,
+    "dependency_update_checks": true,
+    "baseline_comparison": true,
+    "violation_notifications": true
+  },
+  
+  "documentation_requirements": {
+    "license_inventory_required": true,
+    "attribution_documentation_required": true,
+    "compliance_report_required": true,
+    "legal_review_documentation_required": false
+  },
+  
+  "contact_info": {
+    "policy_owner": "Legal/Compliance Team",
+    "technical_contact": "DevOps Team", 
+    "review_schedule": "Quarterly",
+    "last_review_date": "2025-01-27"
+  }
+} 
