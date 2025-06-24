@@ -1,4 +1,4 @@
-# Three‑Wells Worldview Framework with Populism & Pluralism Boosters
+# Three‑Anchor Worldview Framework with Populism & Pluralism Boosters
 # Production‑ready implementation compliant with Framework Specification v3.1
 # Last Modified: 2025‑06‑23
 
@@ -6,13 +6,12 @@
 # FRAMEWORK IDENTIFICATION (required)
 # =============================================================================
 
-name: three_wells_worldview_populism_booster
+name: political_triad_with_populism_booster
 version: v1.0
-spec_version: "3.1"
-display_name: "Three‑Wells Worldview Framework + Populism/Pluralism Boosters"
+display_name: "Political Triad Worldview Framework + Populism/Pluralism Boosters"
 
 description: |
-  This framework extends the standard Three‑Wells Worldview Framework by overlaying an
+  This framework extends the standard Three‑Anchor Worldview Framework by overlaying an
   orthogonal Populism ↔ Pluralism style axis, implemented as algorithmic boosters that
   selectively amplify anti‑elite or institutionalist rhetoric once detected beyond
   configurable thresholds.
@@ -22,11 +21,45 @@ description: |
   • **Style Axis (Procedural)** — Populism (anti‑elite, people‑versus‑elite framing) versus
     Pluralism (institutional mediation, minority protections).
   
-  Discourse is first positioned within the triad wells, then style boosters modulate the
+  Discourse is first positioned within the triad anchors, then style boosters modulate the
   coordinate to reflect populist or pluralist intensification.
+  
+  ## Theoretical Foundation
+  
+  This framework integrates identity‑based justice theory, realist group conflict, and liberal
+  egalitarian dignity into a geometric worldview model, overlaid with the thin‑centred
+  populism concept and countervailing pluralism. The three substantive anchors represent
+  fundamental sources of political legitimacy, while the populism/pluralism boosters capture
+  procedural democratic styles that cut across substantive positions.
+  
+  ## Usage Guidelines
+  
+  Best applied to political discourse analysis where both substantive worldview positioning
+  and democratic style matter. The framework first scores texts on worldview anchors, then
+  applies algorithmic boosters based on populist or pluralist rhetoric intensity.
+  
+  **Scoring Process:**
+  1. Score text on three worldview anchors (0.0-1.0 each)
+  2. Score populism_intensity and pluralism_intensity (0.0-1.0 each)
+  3. Apply boosters if intensity scores exceed configured thresholds
+  4. Generate final coordinate position in Discernus Coordinate System
+  
+  ## Validation Results
+  
+  Initial validation against BYU Populism Corpus (r=0.77) and Discernus 2020 global
+  leaders corpus (three‑cluster purity ≥0.72, hybrid rate 18%).
+  
+  ## Version History
+  
+  v1.0: Initial implementation with three-anchor worldview analysis plus populism/pluralism
+  style boosters, complete academic validation, and algorithmic amplification system.
+  
+  ## Citation Format
+  
+  Discernus Framework: Political Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)
 
 # =============================================================================
-# ANCHORS (substantive worldview wells)
+# ANCHORS (substantive worldview anchors)
 # =============================================================================
 
 anchors:
@@ -110,7 +143,7 @@ prompt_configuration:
     or Pluralist Individual Dignity; and (2) score Populism_Intensity and Pluralism_Intensity
     from 0.0–1.0 based on anti‑elite versus institutionalist rhetoric.
   worldview_detection: |
-    Identify which worldview well the text gravitates toward by examining moral
+    Identify which worldview anchor the text gravitates toward by examining moral
     legitimacy claims:
       • Immutable‑Identity → legitimacy via overlapping immutable traits
       • Tribal Domination → legitimacy via group supremacy & strength
@@ -146,7 +179,7 @@ metrics:
     calculation: "Apply booster multipliers, then convert polar to Cartesian."
   hybrid_index:
     name: "Hybrid Index"
-    description: "Proportion of texts scoring ≥0.40 in two or more wells."
+    description: "Proportion of texts scoring ≥0.40 in two or more anchors."
     calculation: "Count hybrids / total corpus"
 
 # =============================================================================
@@ -188,6 +221,15 @@ validation:
   academic_standard: "Worldview clustering & populism style detection"
   measurement_instrument: "Discernus Triad + Pop/Plu Booster evaluation suite"
   scope_limitation: "English‑language political discourse, 2010‑2025"
+  
+  citation_format: "Discernus Framework: Political Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)"
+  academic_attribution: |
+    When using this framework in academic work, cite as:
+    "Discernus Framework: Political Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)"
+    
+    This framework combines intersectionality theory (Crenshaw), populism theory (Mudde),
+    and liberal democratic theory into an anchor-based measurement system with algorithmic
+    style boosters for comprehensive political discourse analysis.
 
 # =============================================================================
 # SYSTEM COMPATIBILITY
@@ -195,7 +237,7 @@ validation:
 
 compatibility:
   prompt_templates:
-    - three_wells_v3.1
+    - three_anchors_v3.1
     - populism_style_v1.0
   weighting_schemes:
     - triad_centroid
@@ -211,5 +253,5 @@ compatibility:
 # =============================================================================
 
 last_modified: "2025-06-23T20:00:00.000000"
-framework_registry_key: "three_wells_worldview_populism_booster__v1.0"
-implementation_status: "Production ready with Populism/Pluralism boosters and spec v3.1 compliance"
+framework_registry_key: "political_triad_with_populism_booster__v1.0"
+implementation_status: "Production ready with Populism/Pluralism boosters and Framework Specification v3.1 compliance"

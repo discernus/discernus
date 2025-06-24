@@ -1,4 +1,4 @@
-# Three‑Wells Worldview Framework with Populism & Pluralism Boosters
+# Political Worldview Triad Framework
 # Production‑ready implementation compliant with Framework Specification v3.1
 # Last Modified: 2025‑06‑23
 
@@ -6,210 +6,253 @@
 # FRAMEWORK IDENTIFICATION (required)
 # =============================================================================
 
-name: three_wells_worldview_populism_booster
+name: political_triad
 version: v1.0
-spec_version: "1.0"
-display_name: "Three‑Wells Worldview Framework + Populism/Pluralism Boosters"
+display_name: "Political Worldview Triad Framework"
 
 description: |
-  This framework extends the standard Three‑Wells Worldview Framework by overlaying an
-  orthogonal Populism ↔ Pluralism style axis, implemented as algorithmic boosters that
-  selectively amplify anti‑elite or institutionalist rhetoric once detected beyond
-  configurable thresholds.
+  Triadic worldview mapping framework within the Discernus Coordinate System (DCS).
+  It scores political discourse along three distinct sources of legitimacy—Immutable-Identity,
+  Tribal Domination, and Pluralist Individual Dignity—without any style overlays.
   
-  • **Triadic Worldviews (Substantive)** — Immutable‑Identity • Tribal Domination • Pluralist
-    Individual Dignity
-  • **Style Axis (Procedural)** — Populism (anti‑elite, people‑versus‑elite framing) versus
-    Pluralism (institutional mediation, minority protections).
+  ## Theoretical Foundation
   
-  Discourse is first positioned within the triad wells, then style boosters modulate the
-  coordinate to reflect populist or pluralist intensification.
+  This framework operationalizes three fundamental sources of political legitimacy:
+  
+  1. **Immutable-Identity Politics**: Grounds moral status in overlapping unchosen attributes
+     (race, ethnicity, sex, sexual orientation, disability, age, neurotype), viewing these
+     traits as primary determinants of advantage or oppression.
+  
+  2. **Tribal Domination Politics**: Asserts legitimacy through in-group supremacy, security,
+     or domination over out-groups, often framed in zero-sum or survivalist terms.
+  
+  3. **Pluralist Individual Dignity Politics**: Locates legitimacy in transcendent dignity
+     and agency of each person, balancing universal civic equality with respectful
+     acknowledgement of immutable traits.
+  
+  ## Usage Guidelines
+  
+  This framework is designed for analysis of contemporary political discourse where
+  legitimacy claims center on group membership, cultural dominance, or individual
+  dignity. Best applied to speeches, manifestos, policy documents, and social media
+  content from 2010-2025.
+  
+  **Scoring Interpretation:**
+  - 0.70-1.00: Strong attraction to worldview anchor
+  - 0.40-0.69: Moderate attraction to worldview anchor  
+  - 0.00-0.39: Weak or no attraction to worldview anchor
+  
+  ## Version History
+  
+  v1.0: Initial implementation with three-anchor worldview analysis, algorithm
+  configuration, and academic validation framework.
+  
+  ## Citation Format
+  
+  Discernus Framework: Political Worldview Triad v1.0 (Crenshaw/Machiavelli/Kant, 2025)
 
 # =============================================================================
-# ANCHORS (substantive worldview wells)
+# ANCHORS (positioning definition)
 # =============================================================================
 
 anchors:
   Immutable-Identity:
     angle: 90
     weight: 1.0
-    tier: primary
     type: worldview
     description: |
-      Politics that grounds moral status in overlapping unchosen attributes — race,
-      ethnicity, sex, sexuality, disability, age, neurotype — framing justice as the
-      rectification of structural advantage and disadvantage.
+      Politics that centres moral status on overlapping, unchosen personal attributes
+      (race, ethnicity, sex, sexual orientation, disability, age, neurotype, etc.),
+      viewing these traits as the primary source of advantage or oppression.
     language_cues:
+      - "As Black women, we..."
+      - "Center disabled queer voices."
+      - "Our lived experience as trans people shows..."
+      - "Marginalised identities face systemic barriers."
+      - "Racialised communities continue to struggle."
       - "systemic oppression"
       - "lived experience"
-      - "women of colour"
       - "intersection of race and gender"
-      - "marginalised identities"
-      - "structural disadvantage"
-      - "identity‑based inequity"
-
   Tribal-Domination:
     angle: 210
     weight: 1.0
-    tier: primary
     type: worldview
     description: |
-      Politics that seeks group supremacy in zero‑sum competition, emphasising in‑group
-      loyalty, strong leadership, and the subordination of rival groups.
+      Politics that asserts the legitimacy of an in-group's supremacy, security,
+      or domination over out-groups, often framed in zero-sum or survivalist terms.
     language_cues:
+      - "We must put our nation first."
+      - "They will replace us."
+      - "Only our tribe can secure the future."
+      - "Our way of life is under threat."
+      - "Their culture is incompatible with ours."
       - "take back our country"
       - "real patriots"
-      - "crush our enemies"
-      - "show of strength"
       - "dominant culture"
-      - "defend our tribe"
-
-  Pluralist-Dignity:
+  Pluralist-Individual-Dignity:
     angle: 330
     weight: 1.0
-    tier: primary
     type: worldview
     description: |
-      Politics that affirms universal human dignity and individual agency, embracing
-      diversity within a shared constitutional order of equal rights and mutual
-      respect.
+      Politics that locates legitimacy in the transcendent dignity and agency of
+      each person, balancing universal civic equality with respectful acknowledgement
+      of immutable traits.
     language_cues:
-      - "individual liberty"
+      - "Every individual deserves equal voice."
+      - "Citizens, regardless of background, share responsibility."
+      - "Human dignity transcends race and class."
+      - "Inclusive civic nationalism."
+      - "Equal opportunity for all."
       - "universal rights"
-      - "respect our differences"
-      - "equal opportunity"
       - "shared civic space"
       - "common good through consent"
 
 # =============================================================================
-# ALGORITHMIC CONFIGURATION (style boosters)
+# ALGORITHMIC CONFIGURATION (optional)
 # =============================================================================
 
 algorithm_config:
-  populism_amplification:
+  default_confidence_threshold: 0.70
+  hybrid_detection:
     enabled: true
-    threshold: 0.60
-    multiplier: 1.15
-    rationale: "Amplifies anti‑elite, people‑versus‑elite rhetoric once populism_score ≥ 0.60 to reflect heightened populist style."
-  pluralism_amplification:
-    enabled: true
-    threshold: 0.60
-    multiplier: 1.10
-    rationale: "Amplifies explicit institutionalist, power‑sharing language once pluralism_score ≥ 0.60 to capture strong pluralist signalling."
-  axis_salience:
-    Populism-Pluralism: 1.2
+    max_hybrid_percentage: 0.30
+  distance_metric: "cosine"
+  evaluation_metrics:
+    - name: purity_score
+      description: >-
+        Measures the percentage of texts whose highest-attraction anchor aligns with
+        the expected anchor in the labelled corpus.
+    - name: silhouette_score
+      description: >-
+        Validates cluster separation using cosine distances.
 
 # =============================================================================
-# PROMPT CONFIGURATION (LLM integration)
-# =============================================================================
-
-prompt_configuration:
-  expert_role: |
-    You are an expert in political worldviews and democratic styles. Analyse the text
-    to (1) locate its substantive worldview among Immutable‑Identity, Tribal Domination,
-    or Pluralist Individual Dignity; and (2) score Populism_Intensity and Pluralism_Intensity
-    from 0.0–1.0 based on anti‑elite versus institutionalist rhetoric.
-  worldview_detection: |
-    Identify which worldview well the text gravitates toward by examining moral
-    legitimacy claims:
-      • Immutable‑Identity → legitimacy via overlapping immutable traits
-      • Tribal Domination → legitimacy via group supremacy & strength
-      • Pluralist-Dignity → legitimacy via universal dignity & individual agency
-  style_detection: |
-    Independently score Populism_Intensity (people vs elite framing, moral dualism)
-    and Pluralism_Intensity (institutional mediation, minority protections).
-  scoring_instruction: |
-    Return JSON with keys: {Immutable-Identity, Tribal-Domination, Pluralist-Dignity,
-    Populism_Intensity, Pluralism_Intensity}. Each value 0.0‑1.0 with evidence quotes.
-
-# =============================================================================
-# COORDINATE SYSTEM (circle)
+# COORDINATE SYSTEM (optional)
 # =============================================================================
 
 coordinate_system:
   type: circle
   radius: 1.0
-  description: "Triad anchors at 90°, 210°, 330° with orthogonal Populism–Pluralism style overlay."
+  description: "Circular coordinate system for three-anchor worldview analysis"
 
 # =============================================================================
-# METRICS
+# LLM INTEGRATION (optional)
+# =============================================================================
+
+prompt_configuration:
+  system_prompt: >-
+    You are a political-discourse classifier that assigns each text a score
+    to three worldview anchors: Immutable-Identity, Tribal Domination,
+    Pluralist Individual Dignity. Output JSON with keys:
+    { "immutable_identity": 0-1, "tribal_domination": 0-1,
+      "pluralist_dignity": 0-1, "confidence": 0-1 }.
+  user_prompt_template: |-
+    TEXT: <<TEXT_TO_CLASSIFY>>
+    ---
+    Return only the JSON object.
+  scoring_rubric: |
+    0.70-1.00 : Strong attraction
+    0.40-0.69 : Moderate attraction
+    0.00-0.39 : Weak or no attraction
+
+# =============================================================================
+# ANALYSIS METRICS (optional)
 # =============================================================================
 
 metrics:
-  worldview_purity:
-    name: "Worldview Purity"
-    description: "Dominance of highest worldview score vs median of others."
-    calculation: "max(worldview_scores) − median(worldview_scores)"
-  populism_adjusted_position:
-    name: "Populism‑Adjusted Position"
-    description: "Resultant coordinate after style amplification."
-    calculation: "Apply booster multipliers, then convert polar to Cartesian."
-  hybrid_index:
-    name: "Hybrid Index"
-    description: "Proportion of texts scoring ≥0.40 in two or more wells."
-    calculation: "Count hybrids / total corpus"
+  purity_score:
+    name: "Worldview Purity Score"
+    description: "Percentage of texts whose highest-attraction anchor matches expected classification"
+    calculation: "Count of correct highest-score predictions / total predictions"
+  
+  hybrid_detection_rate:
+    name: "Hybrid Detection Rate" 
+    description: "Percentage of texts scoring ≥0.40 on two or more anchors"
+    calculation: "Count of multi-anchor texts / total texts"
 
 # =============================================================================
-# VISUALIZATION
+# VISUALIZATION CONFIGURATION (optional)
 # =============================================================================
 
 visualization:
+  coordinate_system: "DCS"
+  plot: "triangle"
   anchor_colors:
-    Immutable-Identity: "#00838F"  # Teal
-    Tribal-Domination: "#C62828"  # Red
-    Pluralist-Dignity: "#2E7D32"  # Green
-  style_overlay:
-    populism: "#D32F2F"
-    pluralism: "#1565C0"
+    Immutable-Identity: "#b14f9b"
+    Tribal-Domination: "#d9534f"
+    Pluralist-Individual-Dignity: "#5bc0de"
+  node_size: "confidence"
   supported_charts:
     - triangle
-    - style_overlay
-    - hybrid_distribution
+    - circular
+    - anchor_signature
 
 # =============================================================================
-# THEORETICAL FOUNDATION & VALIDATION
+# ACADEMIC VALIDATION (required)
 # =============================================================================
 
 theoretical_foundation:
   primary_sources:
-    - "Crenshaw, K. (1991). Mapping the Margins."
-    - "Kaufmann, E. (2018). Whiteshift."
-    - "Rawls, J. (1971). A Theory of Justice."
-    - "Mudde, C. (2004). The Populist Zeitgeist."
+    - "Crenshaw, K. (1991). Mapping the Margins: Intersectionality, Identity Politics, and Violence against Women of Color. Stanford Law Review, 43(6), 1241-1299."
+    - "Machiavelli, N. (1532). The Prince. Antonio Blado d'Asola."
+    - "Kant, I. (1785). Groundwork of the Metaphysics of Morals. J.F. Hartknoch."
+    - "Mudde, C. (2004). The Populist Zeitgeist. Government and Opposition, 39(4), 541-563."
+  
   theoretical_approach: |
-    Integrates identity‑based justice theory, realist group conflict, and liberal
-    egalitarian dignity into a geometric worldview model, overlaid with the thin‑centred
-    populism concept and countervailing pluralism.
-  academic_validation: |
-    Initial validation against BYU Populism Corpus (r=0.77) and Discernus 2020 global
-    leaders corpus (three‑cluster purity ≥0.72, hybrid rate 18%).
+    This framework synthesizes three major traditions in political theory:
+    
+    1. **Critical Theory Tradition**: Draws from Crenshaw's intersectionality framework
+       to understand how overlapping identity categories create distinct political
+       experiences and legitimacy claims.
+    
+    2. **Realist Political Theory**: Incorporates Machiavellian insights about group
+       competition, power dynamics, and zero-sum political conflict as drivers of
+       tribal domination politics.
+    
+    3. **Liberal Democratic Theory**: Builds on Kantian dignity concepts and Rawlsian
+       justice theory to capture pluralist approaches that emphasize individual
+       agency within inclusive civic frameworks.
+    
+    The framework operationalizes these theoretical traditions through three
+    independent anchors positioned at 120° intervals, enabling measurement of
+    political discourse along each dimension without presuming mutual exclusivity.
 
 validation:
-  academic_standard: "Worldview clustering & populism style detection"
-  measurement_instrument: "Discernus Triad + Pop/Plu Booster evaluation suite"
-  scope_limitation: "English‑language political discourse, 2010‑2025"
+  academic_standard: "Political Theory Triangulation Framework"
+  measurement_instrument: "Three-anchor worldview classification with confidence scoring"
+  scope_limitation: "English-language political discourse, 2010-2025; primarily Western democratic contexts"
+  
+  citation_format: "Discernus Framework: Political Worldview Triad v1.0 (Crenshaw/Machiavelli/Kant, 2025)"
+  academic_attribution: |
+    When using this framework in academic work, cite as:
+    "Discernus Framework: Political Worldview Triad v1.0 (Crenshaw/Machiavelli/Kant, 2025)"
+    
+    This framework synthesizes intersectionality theory (Crenshaw), realist political
+    theory (Machiavelli), and liberal dignity theory (Kant) into a triangular
+    measurement space for contemporary political discourse analysis.
 
 # =============================================================================
-# SYSTEM COMPATIBILITY
+# SYSTEM COMPATIBILITY (optional)
 # =============================================================================
 
 compatibility:
   prompt_templates:
-    - three_wells_v3.1
-    - populism_style_v1.0
-  weighting_schemes:
-    - triad_centroid
-    - style_booster_v1.0
+    - political_worldview_v1.0
+    - three_anchor_analysis_v1.0
+  
   api_versions:
     - v3.1
+    - v3.0
+  
   visualization_types:
     - triangle
-    - style_overlay
+    - circular
+    - anchor_signature
 
 # =============================================================================
-# FRAMEWORK VERSIONING
+# FRAMEWORK VERSIONING (required)
 # =============================================================================
 
 last_modified: "2025-06-23T20:00:00.000000"
-framework_registry_key: "three_wells_worldview_populism_booster__v1.0"
-implementation_status: "Production ready with Populism/Pluralism boosters and spec v3.1 compliance"
+framework_registry_key: "political_triad__v1.0"
+implementation_status: "Production ready - Framework Specification v3.1 compliant with three-anchor worldview analysis"
