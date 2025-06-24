@@ -80,14 +80,14 @@ class DirectAPIClient:
         else:
             print("⚠️ Anthropic API key not found in environment")
         
-        # Initialize Mistral (handle deprecated client gracefully)
+        # Initialize Mistral
         mistral_key = os.getenv("MISTRAL_API_KEY")
         if mistral_key:
             try:
                 self.mistral_client = MistralProvider(mistral_key, self.cost_manager)
-                print("✅ Mistral client initialized (2025 models available)")
-            except NotImplementedError:
-                print("⚠️ Mistral client deprecated - skipping Mistral support")
+                print("✅ Mistral client initialized (latest models available)")
+            except Exception as e:
+                print(f"⚠️ Mistral client initialization failed: {e}")
                 self.mistral_client = None
         else:
             print("⚠️ Mistral API key not found in environment")
@@ -160,18 +160,18 @@ class DirectAPIClient:
         # Test Mistral with latest production model
         if self.mistral_client:
             try:
-                response = self.mistral_client.client.chat(
-                    model="mistral-large-2411",
+                response = self.mistral_client.client.chat.complete(
+                    model="mistral-large-latest",
                     messages=[{"role": "user", "content": "Hello"}],
                     max_tokens=5
                 )
                 results["mistral"] = True
-                print("✅ Mistral connection successful (2024/2025 models)")
+                print("✅ Mistral connection successful (latest models)")
             except Exception as e:
-                # Fallback to older model
+                # Fallback to small model
                 try:
-                    response = self.mistral_client.client.chat(
-                        model="mistral-tiny",
+                    response = self.mistral_client.client.chat.complete(
+                        model="mistral-small-latest",
                         messages=[{"role": "user", "content": "Hello"}],
                         max_tokens=5
                     )
@@ -182,15 +182,15 @@ class DirectAPIClient:
                     print(f"❌ Mistral connection failed: {e2}")
         else:
             results["mistral"] = False
-            print("⚠️ Mistral client not available (deprecated or no API key)")
+            print("⚠️ Mistral client not available (no API key)")
         
-        # Test Google AI with Gemini 2.0 Flash
+        # Test Google AI with Gemini 2.5 Flash (confirmed working)
         if self.google_ai_client:
             try:
-                model = self.google_ai_client.client.GenerativeModel('gemini-2.0-flash-exp')
+                model = self.google_ai_client.client.GenerativeModel('gemini-2.5-flash')
                 response = model.generate_content("Hello")
                 results["google_ai"] = True
-                print("✅ Google AI connection successful (Gemini 2.x series)")
+                print("✅ Google AI connection successful (Gemini 2.5 series)")
             except Exception as e:
                 # Fallback to older model
                 try:

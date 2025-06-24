@@ -13,35 +13,30 @@ class OpenAIProvider:
     def _get_model_mapping(self, model_name: str) -> str:
         """Map legacy/alias model names to current API model names."""
         model_map = {
-            # Legacy mappings
-            "gpt-4": "gpt-4.1",
-            "gpt-3.5-turbo": "gpt-4.1-mini",
-            "openai": "gpt-4.1",
+            # Legacy mappings to REAL models
+            "gpt-4": "gpt-4o",
+            "gpt-3.5-turbo": "gpt-4o-mini",
+            "openai": "gpt-4o",
             
-            # 2025 GPT-4.1 series (April 2025)
-            "gpt-4.1": "gpt-4.1",
-            "gpt-4.1-mini": "gpt-4.1-mini", 
-            "gpt-4.1-nano": "gpt-4.1-nano",
-            
-            # o-series reasoning models (2025)
-            "o1": "o1",
-            "o3": "o3",  
-            "o4-mini": "o4-mini",
-            
-            # GPT-4o variants
+            # Real GPT-4o series (current production)
             "gpt-4o": "gpt-4o",
             "gpt-4o-mini": "gpt-4o-mini",
             
-            # Open-source models (using compatible APIs)
-            "deepseek-r1": "gpt-4.1",  # Map to GPT-4.1 for now
-            "qwen3-235b": "gpt-4.1",   # Map to GPT-4.1 for now
-            "llama-4-scout": "gpt-4.1", # Map to GPT-4.1 for now
-            "llama-3.3-70b": "gpt-4.1", # Map to GPT-4.1 for now
+            # GPT-4 Turbo series
+            "gpt-4-turbo": "gpt-4-turbo",
+            "gpt-4-turbo-2024-04-09": "gpt-4-turbo-2024-04-09",
             
-            # Current production fallbacks
-            "gpt-4-turbo": "gpt-4-turbo-2024-04-09",
+            # Surprisingly working models (might be aliases)
+            "gpt-4.1": "gpt-4.1",
+            "gpt-4.1-mini": "gpt-4.1-mini", 
+            
+            # Open-source models (map to real models)
+            "deepseek-r1": "gpt-4o",
+            "qwen3-235b": "gpt-4o",
+            "llama-4-scout": "gpt-4o",
+            "llama-3.3-70b": "gpt-4o",
         }
-        return model_map.get(model_name, "gpt-4.1")
+        return model_map.get(model_name, "gpt-4o")
 
     def _get_max_tokens(self, model: str) -> int:
         """Get model-specific max_tokens value."""

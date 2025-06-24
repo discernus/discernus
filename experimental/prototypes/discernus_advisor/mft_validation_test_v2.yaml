@@ -1,0 +1,153 @@
+experiment_meta:
+  name: "MFT_Validation_Pipeline_Test"
+  version: "v2.0.0"
+  created: "2025-06-25T15:30:00Z"
+  description: "Pipeline validation test for comprehensive MFT study before multi-LLM run"
+  hypothesis: "Experiment pipeline functions correctly with enhanced analysis features before scaling to multi-LLM comprehensive study"
+  research_context: "Pre-flight test for Custom GPT context generation experiment"
+  principal_investigator: "Discernus Research Team"
+  institution: "Discernus Research Lab"
+  ethical_clearance: "ACADEMIC-2025-MFT-TEST"
+  funding_source: "Internal Development"
+  data_classification: "research"
+  publication_intent: false
+  tags: ["moral_foundations_theory", "pipeline_test", "mft", "validation"]
+  
+  hypotheses:
+    - "Experiment pipeline correctly processes corpus files"
+    - "Enhanced analysis features generate expected output formats"
+    - "Quality assurance triggers function as expected"
+    - "Statistical analysis components work properly"
+  
+  success_criteria:
+    - "All corpus files are successfully processed"
+    - "Enhanced analysis outputs are generated"
+    - "Academic export formats are created"
+    - "No pipeline errors or failures"
+    - "Output structure is suitable for Custom GPT context"
+
+components:
+  frameworks:
+    - id: "moral_foundations_theory"
+      version: "v2025.06.19"
+      type: "file_path"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml"
+      
+  prompt_templates:
+    - id: "moral_foundations_analysis"
+      version: "v1.0"
+      type: "workspace_asset"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/prompt_templates/moral_foundations_analysis/template.yaml"
+      
+  weighting_schemes:
+    - id: "foundation_pairs"
+      version: "v1.0"
+      type: "workspace_asset"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/weighting_schemes/foundation_pairs/scheme.yaml"
+      
+  models:
+    - id: "gpt-4o-mini"
+      provider: "openai"
+      version: "2024-07-18"
+      
+  corpus:
+    - id: "conservative_dignity"
+      type: "file_collection"
+      file_path: "corpus/validation_set/conservative_dignity"
+      pattern: "*.txt"
+      description: "Conservative dignity-focused texts for pipeline validation"
+    - id: "progressive_dignity"
+      type: "file_collection"
+      file_path: "corpus/validation_set/progressive_dignity"
+      pattern: "*.txt"
+      description: "Progressive dignity-focused texts for pipeline validation"
+
+execution:
+  description: "Pipeline validation test with core corpus categories"
+  matrix:
+    - run_id: "conservative_dignity_test"
+      description: "Conservative dignity texts - pipeline validation"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o-mini"
+      corpus_subset: "conservative_dignity"
+      
+    - run_id: "progressive_dignity_test"
+      description: "Progressive dignity texts - pipeline validation"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o-mini"
+      corpus_subset: "progressive_dignity"
+      
+  cost_controls:
+    max_total_cost: 10.0
+    cost_per_analysis_limit: 1.00
+    
+  quality_controls:
+    min_framework_fit_score: 0.7
+    enable_qa_validation: true
+    require_evidence: true
+    
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.75
+    require_evidence: true
+    manual_review_triggers: ["low_confidence", "anomaly_detected", "foundation_scoring_inconsistency"]
+
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+  
+  configuration:
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests: ["descriptive_stats", "correlation_analysis", "foundation_comparison"]
+      
+    reliability_analysis:
+      enabled: true
+      methods: ["foundation_consistency", "cross_text_reliability", "theoretical_coherence"]
+      
+    visualizations:
+      enabled: true
+      types: ["foundation_radar_charts", "foundation_comparison_plots", "correlation_matrix", "foundation_distribution"]
+      interactive: true
+      publication_ready: true
+      
+    academic_integration:
+      export_formats: ["csv", "json", "r_data"]
+      include_metadata: true
+      generate_replication_package: true
+      
+    mft_specific_analysis:
+      foundation_correlation_analysis: true
+      conservative_liberal_comparison: true
+      theoretical_coherence_validation: true
+      foundation_independence_testing: true
+
+outputs:
+  save_to_database: true
+  export_formats: ["json", "csv", "r_data"]
+  include_raw_responses: true
+  include_provenance: true
+  
+  academic_exports:
+    enabled: true
+    formats: ["csv", "r_data", "json"]
+    include_replication_package: true
+    mft_specific_outputs:
+      foundation_scores_matrix: true
+      theoretical_validation_report: true
+      pipeline_test_summary: true
+
+validation_criteria:
+  min_successful_analyses: 4
+  max_total_cost: 10.0
+  required_quality_score: 0.70
+  mft_specific_criteria:
+    min_foundation_coverage: 5
+    required_theoretical_coherence: 0.7
+    min_statistical_significance: 0.10 

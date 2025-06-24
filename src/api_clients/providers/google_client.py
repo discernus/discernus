@@ -14,27 +14,29 @@ class GoogleAIProvider:
     def _get_model_mapping(self, model_name: str) -> str:
         """Map legacy/alias model names to current API model names."""
         model_map = {
-            # Legacy mappings updated
-            "gemini": "gemini-2-0-flash-exp",
-            "gemini-pro": "gemini-2-0-flash-exp",
-            "gemini-1.5-flash": "gemini-2-0-flash-exp",
-            "gemini-1.5-pro": "gemini-2-0-flash-exp",
-            "google": "gemini-2-0-flash-exp",
+            # Legacy mappings to REAL models
+            "gemini": "gemini-2.5-flash",
+            "gemini-pro": "gemini-2.5-pro",
+            "google": "gemini-2.5-flash",
             
-            # Gemini 2.5 series (2025)
-            "gemini-2.5-pro": "gemini-2-5-pro-preview",  # June 2025 - most intelligent
-            "gemini-2.5-flash": "gemini-2-5-flash-preview",  # May 2025 - adaptive thinking
+            # Real Gemini 2.5 series (June 2025 - CONFIRMED WORKING)
+            "gemini-2.5-pro": "gemini-2.5-pro",
+            "gemini-2.5-flash": "gemini-2.5-flash",
+            "gemini-2.5-flash-lite-preview-06-17": "gemini-2.5-flash-lite-preview-06-17",
+            "gemini-2.5-pro-preview-06-05": "gemini-2.5-pro-preview-06-05",
+            "gemini-2.5-flash-preview-05-20": "gemini-2.5-flash-preview-05-20",
             
-            # Gemini 2.0 series
-            "gemini-2.0-flash": "gemini-2-0-flash-exp",
-            "gemini-2.0-pro": "gemini-2-0-flash-exp",
+            # Real Gemini 1.5 series (fallback)
+            "gemini-1.5-flash": "gemini-1.5-flash",
+            "gemini-1.5-flash-002": "gemini-1.5-flash-002",
+            "gemini-1.5-pro": "gemini-1.5-pro",
             
-            # Production models (current availability)
-            "gemini-2-0-flash-exp": "gemini-2-0-flash-exp",
-            "gemini-2-5-pro-preview": "gemini-2-5-pro-preview",
-            "gemini-2-5-flash-preview": "gemini-2-5-flash-preview",
+            # Real Gemini 2.0 series (experimental)
+            "gemini-2.0-flash": "gemini-2.0-flash-exp",
+            "gemini-2.0-flash-exp": "gemini-2.0-flash-exp",
+            "gemini-2-0-flash-exp": "gemini-2.0-flash-exp",
         }
-        return model_map.get(model_name, "gemini-2-0-flash-exp")
+        return model_map.get(model_name, "gemini-2.5-flash")
 
     def _get_generation_config(self, model: str) -> Dict:
         """Get model-specific generation configuration."""
@@ -43,9 +45,8 @@ class GoogleAIProvider:
             "max_output_tokens": 4000 if "2.5" in model else 2000,
         }
         
-        # For Gemini 2.5, enable Deep Think reasoning
-        if "2.5" in model:
-            generation_config["reasoning_budget"] = "high"  # Enable adaptive thinking
+        # Note: reasoning_budget is not yet supported in the API
+        # Keeping this simple for now until the feature is available
         
         return generation_config
 

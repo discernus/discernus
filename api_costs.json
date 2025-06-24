@@ -1,0 +1,209 @@
+[
+  {
+    "timestamp": "2025-06-24T16:04:15.606478",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.0026490000000000003,
+    "tokens_input": 43,
+    "tokens_output": 168,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:04:20.906924",
+    "provider": "anthropic",
+    "model": "claude-3-5-haiku-20241022",
+    "cost": 0.00034575000000000003,
+    "tokens_input": 43,
+    "tokens_output": 268,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:04:26.506406",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.0028589999999999996,
+    "tokens_input": 43,
+    "tokens_output": 182,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:04:31.833837",
+    "provider": "anthropic",
+    "model": "claude-3-5-haiku-20241022",
+    "cost": 0.0003395,
+    "tokens_input": 43,
+    "tokens_output": 263,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:07:05.489360",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.002493,
+    "tokens_input": 41,
+    "tokens_output": 158,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:08:10.374699",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.004383,
+    "tokens_input": 41,
+    "tokens_output": 284,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:09:28.906367",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.0031529999999999996,
+    "tokens_input": 41,
+    "tokens_output": 202,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:15:18.606215",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.002703,
+    "tokens_input": 41,
+    "tokens_output": 172,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:15:20.921095",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.00314,
+    "tokens_input": 37,
+    "tokens_output": 197,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:18:02.847289",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.002688,
+    "tokens_input": 41,
+    "tokens_output": 171,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:18:05.714427",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.0031249999999999997,
+    "tokens_input": 37,
+    "tokens_output": 196,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:18:55.555524",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.003333,
+    "tokens_input": 41,
+    "tokens_output": 214,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:18:57.840109",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.00323,
+    "tokens_input": 37,
+    "tokens_output": 203,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:19:44.328406",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.0025229999999999996,
+    "tokens_input": 41,
+    "tokens_output": 160,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:19:51.594766",
+    "provider": "google_ai",
+    "model": "gemini-1.5-pro",
+    "cost": 0.0021139999999999996,
+    "tokens_input": 38,
+    "tokens_output": 339,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:19:55.394424",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.0032149999999999995,
+    "tokens_input": 37,
+    "tokens_output": 202,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:24:59.125994",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.004158,
+    "tokens_input": 41,
+    "tokens_output": 269,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:25:07.292521",
+    "provider": "google_ai",
+    "model": "gemini-1.5-pro",
+    "cost": 0.0021035,
+    "tokens_input": 38,
+    "tokens_output": 337,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:25:10.144473",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.00314,
+    "tokens_input": 37,
+    "tokens_output": 197,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:26:25.546760",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.0029879999999999998,
+    "tokens_input": 41,
+    "tokens_output": 191,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:30:15.948245",
+    "provider": "google_ai",
+    "model": "gemini-2.5-flash",
+    "cost": 0.010461999999999999,
+    "tokens_input": 38,
+    "tokens_output": 644,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:30:19.289478",
+    "provider": "openai",
+    "model": "gpt-4.1",
+    "cost": 0.003335,
+    "tokens_input": 37,
+    "tokens_output": 210,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:30:23.627917",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.011632,
+    "tokens_input": 41,
+    "tokens_output": 471,
+    "request_type": "analysis"
+  }
+]
