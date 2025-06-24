@@ -6,9 +6,9 @@
 # FRAMEWORK IDENTIFICATION (required)
 # =============================================================================
 
-name: political_triad_with_populism_booster
+name: political_worldview_triad_with_populism_booster
 version: v1.0
-display_name: "Political Triad Worldview Framework + Populism/Pluralism Boosters"
+display_name: "Political Worldview Triad Framework + Populism/Pluralism Boosters"
 
 description: |
   This framework extends the standard Three‑Anchor Worldview Framework by overlaying an
@@ -56,7 +56,7 @@ description: |
   
   ## Citation Format
   
-  Discernus Framework: Political Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)
+  Discernus Framework: Political Worldview Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)
 
 # =============================================================================
 # ANCHORS (substantive worldview anchors)
@@ -222,10 +222,10 @@ validation:
   measurement_instrument: "Discernus Triad + Pop/Plu Booster evaluation suite"
   scope_limitation: "English‑language political discourse, 2010‑2025"
   
-  citation_format: "Discernus Framework: Political Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)"
+  citation_format: "Discernus Framework: Political Worldview Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)"
   academic_attribution: |
     When using this framework in academic work, cite as:
-    "Discernus Framework: Political Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)"
+    "Discernus Framework: Political Worldview Triad with Populism/Pluralism Boosters v1.0 (Crenshaw/Mudde, 2025)"
     
     This framework combines intersectionality theory (Crenshaw), populism theory (Mudde),
     and liberal democratic theory into an anchor-based measurement system with algorithmic
@@ -253,5 +253,5 @@ compatibility:
 # =============================================================================
 
 last_modified: "2025-06-23T20:00:00.000000"
-framework_registry_key: "political_triad_with_populism_booster__v1.0"
+framework_registry_key: "political_worldview_triad_with_populism_booster__v1.0"
 implementation_status: "Production ready with Populism/Pluralism boosters and Framework Specification v3.1 compliance"

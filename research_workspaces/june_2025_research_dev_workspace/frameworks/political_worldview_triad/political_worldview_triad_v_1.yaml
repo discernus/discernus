@@ -6,7 +6,7 @@
 # FRAMEWORK IDENTIFICATION (required)
 # =============================================================================
 
-name: political_triad
+name: political_worldview_triad
 version: v1.0
 display_name: "Political Worldview Triad Framework"
 
@@ -254,5 +254,5 @@ compatibility:
 # =============================================================================
 
 last_modified: "2025-06-23T20:00:00.000000"
-framework_registry_key: "political_triad__v1.0"
+framework_registry_key: "political_worldview_triad__v1.0"
 implementation_status: "Production ready - Framework Specification v3.1 compliant with three-anchor worldview analysis"
