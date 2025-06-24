@@ -1,5 +1,0 @@
-This is a test document for the JSONL generator.
-
-It has multiple paragraphs to test the chunking functionality.
-
-The tool should be able to process this text and generate proper JSONL output.

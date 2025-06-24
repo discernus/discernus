@@ -48,10 +48,9 @@ import math
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
 
 class FrameworkArchitecture(Enum):
-    """Framework architecture types"""
-    DIPOLE_BASED = "dipole_based"
-    INDEPENDENT_WELLS = "independent_wells" 
-    LEGACY_JSON = "legacy_json"
+    """Framework architecture types (Discernus Coordinates terminology)"""
+    AXIS_SET = "axis_set"        # Paired coordinate axes (was dipole-based)
+    ANCHOR_SET = "anchor_set"    # Independent coordinate points (was independent wells)
     UNKNOWN = "unknown"
 
 class ValidationSeverity(Enum):
@@ -134,21 +133,17 @@ class UnifiedFrameworkValidator:
     def __init__(self, verbose: bool = False):
         self.verbose = verbose
         
-        # Expected framework files by architecture
+        # Expected framework files by architecture (Discernus Coordinates)
         self.framework_file_patterns = {
-            FrameworkArchitecture.DIPOLE_BASED: [
+            FrameworkArchitecture.AXIS_SET: [
                 "*_framework.yaml",
                 "framework.yaml", 
                 "framework_consolidated.yaml"
             ],
-            FrameworkArchitecture.INDEPENDENT_WELLS: [
+            FrameworkArchitecture.ANCHOR_SET: [
                 "*_framework.yaml",
-                "framework.yaml",
-                "framework_consolidated.yaml"  
-            ],
-            FrameworkArchitecture.LEGACY_JSON: [
-                "framework.json",
-                "framework_consolidated.json"
+                "framework.yaml", 
+                "framework_consolidated.yaml"
             ]
         }
     
@@ -286,61 +281,58 @@ class UnifiedFrameworkValidator:
         return None
     
     def _detect_architecture(self, framework_data: Dict) -> FrameworkArchitecture:
-        """Detect framework architecture from data structure"""
+        """Detect framework architecture from data structure (Discernus Coordinates)"""
         
-        # Check for dipole-based structure
-        if 'dipoles' in framework_data and isinstance(framework_data['dipoles'], list):
-            # Check if dipoles have positive/negative structure
-            dipoles = framework_data['dipoles']
-            if dipoles and isinstance(dipoles[0], dict):
-                if 'positive' in dipoles[0] and 'negative' in dipoles[0]:
-                    return FrameworkArchitecture.DIPOLE_BASED
+        # Check for anchor set structure (independent coordinate points)
+        if 'anchors' in framework_data and isinstance(framework_data['anchors'], dict):
+            anchors = framework_data['anchors']
+            if anchors:
+                # Check if anchors have independent coordinate structure
+                first_anchor = list(anchors.values())[0]
+                if isinstance(first_anchor, dict) and 'angle' in first_anchor:
+                    return FrameworkArchitecture.ANCHOR_SET
         
-        # Check for independent wells structure
-        if 'wells' in framework_data and isinstance(framework_data['wells'], dict):
-            wells = framework_data['wells']
-            if wells:
-                # Check if wells have independent structure (not dipole-derived)
-                first_well = list(wells.values())[0]
-                if isinstance(first_well, dict) and 'position' in first_well:
-                    return FrameworkArchitecture.INDEPENDENT_WELLS
-                elif isinstance(first_well, dict) and 'angle' in first_well:
-                    return FrameworkArchitecture.LEGACY_JSON
-        
-        # Check for legacy JSON structure
-        if 'framework_name' in framework_data and 'wells' in framework_data:
-            return FrameworkArchitecture.LEGACY_JSON
+        # Check for axis set structure (paired coordinate axes)
+        if 'axes' in framework_data and isinstance(framework_data['axes'], dict):
+            axes = framework_data['axes']
+            if axes:
+                # Check if axes have paired structure
+                first_axis = list(axes.values())[0]
+                if isinstance(first_axis, dict):
+                    # Look for any valid axis pair types
+                    pair_keys = ['positive', 'negative', 'integrative', 'disintegrative']
+                    found_pairs = [key for key in pair_keys if key in first_axis]
+                    if len(found_pairs) >= 2:
+                        return FrameworkArchitecture.AXIS_SET
         
         return FrameworkArchitecture.UNKNOWN
     
     def _validate_structure(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate framework structure based on detected architecture"""
+        """Validate framework structure based on detected architecture (Discernus Coordinates)"""
         
         is_valid = True
         
-        if result.architecture == FrameworkArchitecture.DIPOLE_BASED:
-            is_valid = self._validate_dipole_structure(framework_data, result)
-        elif result.architecture == FrameworkArchitecture.INDEPENDENT_WELLS:
-            is_valid = self._validate_wells_structure(framework_data, result)
-        elif result.architecture == FrameworkArchitecture.LEGACY_JSON:
-            is_valid = self._validate_legacy_structure(framework_data, result)
+        if result.architecture == FrameworkArchitecture.ANCHOR_SET:
+            is_valid = self._validate_anchor_set_structure(framework_data, result)
+        elif result.architecture == FrameworkArchitecture.AXIS_SET:
+            is_valid = self._validate_axis_set_structure(framework_data, result)
         else:
             result.add_issue(
                 ValidationSeverity.ERROR,
                 "structure_validation",
-                "Unknown framework architecture - cannot validate structure",
-                fix_suggestion="Ensure framework follows dipole-based or independent wells structure"
+                "Unknown framework architecture - must use Discernus Coordinates structure (anchor-set or axis-set)",
+                fix_suggestion="Convert framework to use 'anchors' (anchor-set) or 'axes' (axis-set) architecture"
             )
             is_valid = False
         
         return is_valid
     
-    def _validate_dipole_structure(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate dipole-based framework structure"""
+    def _validate_anchor_set_structure(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
+        """Validate anchor-set framework structure (independent coordinate points)"""
         is_valid = True
         
-        # Required fields for dipole frameworks
-        required_fields = ['name', 'dipoles', 'coordinate_system']
+        # Required fields for anchor-set frameworks
+        required_fields = ['name', 'anchors', 'coordinate_system']
         for field in required_fields:
             if field not in framework_data:
                 result.add_issue(
@@ -352,291 +344,261 @@ class UnifiedFrameworkValidator:
                 )
                 is_valid = False
         
-        # Validate dipoles structure
-        if 'dipoles' in framework_data:
-            dipoles = framework_data['dipoles']
-            if not isinstance(dipoles, list):
+        # Validate anchors structure
+        if 'anchors' in framework_data:
+            anchors = framework_data['anchors']
+            if not isinstance(anchors, dict):
                 result.add_issue(
                     ValidationSeverity.ERROR,
                     "structure_validation",
-                    "Dipoles must be a list",
-                    location="dipoles"
+                    "Anchors must be a dictionary",
+                    location="anchors"
                 )
                 is_valid = False
             else:
-                result.dipoles_count = len(dipoles)
-                wells_count = 0
+                result.wells_count = len(anchors)  # anchors == coordinate points
                 
-                for i, dipole in enumerate(dipoles):
-                    if not isinstance(dipole, dict):
+                for anchor_name, anchor_data in anchors.items():
+                    if not isinstance(anchor_data, dict):
                         result.add_issue(
                             ValidationSeverity.ERROR,
                             "structure_validation",
-                            f"Dipole {i} must be an object",
-                            location=f"dipoles[{i}]"
+                            f"Anchor '{anchor_name}' must be an object",
+                            location=f"anchors.{anchor_name}"
                         )
                         is_valid = False
                         continue
                     
-                    # Check required dipole fields
-                    required_dipole_fields = ['name', 'positive', 'negative']
-                    for field in required_dipole_fields:
-                        if field not in dipole:
+                    # Check required anchor fields
+                    required_anchor_fields = ['description', 'angle', 'weight', 'type']
+                    for field in required_anchor_fields:
+                        if field not in anchor_data:
                             result.add_issue(
                                 ValidationSeverity.ERROR,
                                 "structure_validation",
-                                f"Dipole {i} missing required field: {field}",
-                                location=f"dipoles[{i}]"
+                                f"Anchor '{anchor_name}' missing required field: {field}",
+                                location=f"anchors.{anchor_name}"
                             )
                             is_valid = False
                     
-                    # Validate positive/negative well structure
-                    for pole in ['positive', 'negative']:
-                        if pole in dipole:
-                            pole_data = dipole[pole]
-                            if not isinstance(pole_data, dict):
-                                result.add_issue(
-                                    ValidationSeverity.ERROR,
-                                    "structure_validation",
-                                    f"Dipole {i} {pole} pole must be an object",
-                                    location=f"dipoles[{i}].{pole}"
-                                )
-                                is_valid = False
-                            else:
-                                wells_count += 1
-                                # Check required pole fields
-                                required_pole_fields = ['name', 'description']
-                                for field in required_pole_fields:
-                                    if field not in pole_data:
-                                        result.add_issue(
-                                            ValidationSeverity.WARNING,
-                                            "structure_validation",
-                                            f"Dipole {i} {pole} pole missing recommended field: {field}",
-                                            location=f"dipoles[{i}].{pole}"
-                                        )
-                
-                result.wells_count = wells_count
-        
-        return is_valid
-    
-    def _validate_wells_structure(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate independent wells framework structure"""
-        is_valid = True
-        
-        # Required fields for wells frameworks
-        required_fields = ['framework_meta', 'wells', 'coordinate_system']
-        for field in required_fields:
-            if field not in framework_data:
-                result.add_issue(
-                    ValidationSeverity.ERROR,
-                    "structure_validation", 
-                    f"Missing required field: {field}",
-                    location="root",
-                    fix_suggestion=f"Add {field} field to framework definition"
-                )
-                is_valid = False
-        
-        # Validate wells structure
-        if 'wells' in framework_data:
-            wells = framework_data['wells']
-            if not isinstance(wells, dict):
-                result.add_issue(
-                    ValidationSeverity.ERROR,
-                    "structure_validation",
-                    "Wells must be an object/dictionary",
-                    location="wells"
-                )
-                is_valid = False
-            else:
-                result.wells_count = len(wells)
-                
-                for well_name, well_data in wells.items():
-                    if not isinstance(well_data, dict):
-                        result.add_issue(
-                            ValidationSeverity.ERROR,
-                            "structure_validation",
-                            f"Well '{well_name}' must be an object",
-                            location=f"wells.{well_name}"
-                        )
-                        is_valid = False
-                        continue
+                    # Validate angle range
+                    if 'angle' in anchor_data:
+                        angle = anchor_data['angle']
+                        if not isinstance(angle, (int, float)) or not (0 <= angle < 360):
+                            result.add_issue(
+                                ValidationSeverity.ERROR,
+                                "structure_validation",
+                                f"Anchor '{anchor_name}' angle must be numeric between 0-359",
+                                location=f"anchors.{anchor_name}.angle"
+                            )
+                            is_valid = False
                     
-                    # Check required well fields
-                    required_well_fields = ['name', 'description', 'position']
-                    for field in required_well_fields:
-                        if field not in well_data:
+                    # Validate weight
+                    if 'weight' in anchor_data:
+                        weight = anchor_data['weight']
+                        if not isinstance(weight, (int, float)) or weight <= 0:
+                            result.add_issue(
+                                ValidationSeverity.ERROR,
+                                "structure_validation",
+                                f"Anchor '{anchor_name}' weight must be positive number",
+                                location=f"anchors.{anchor_name}.weight"
+                            )
+                            is_valid = False
+                    
+                    # Validate type
+                    if 'type' in anchor_data:
+                        anchor_type = anchor_data['type']
+                        valid_types = ['individualizing', 'binding', 'liberty_based', 'integrative', 'disintegrative']
+                        if anchor_type not in valid_types:
                             result.add_issue(
                                 ValidationSeverity.WARNING,
                                 "structure_validation",
-                                f"Well '{well_name}' missing recommended field: {field}",
-                                location=f"wells.{well_name}"
+                                f"Anchor '{anchor_name}' has non-standard type: {anchor_type}",
+                                location=f"anchors.{anchor_name}.type",
+                                fix_suggestion=f"Consider using standard types: {', '.join(valid_types)}"
                             )
-                    
-                    # Validate position structure
-                    if 'position' in well_data:
-                        position = well_data['position']
-                        if not isinstance(position, dict):
-                            result.add_issue(
-                                ValidationSeverity.ERROR,
-                                "structure_validation",
-                                f"Well '{well_name}' position must be an object",
-                                location=f"wells.{well_name}.position"
-                            )
-                            is_valid = False
-                        else:
-                            if 'angle_degrees' not in position and 'coordinates' not in position:
-                                result.add_issue(
-                                    ValidationSeverity.WARNING,
-                                    "structure_validation",
-                                    f"Well '{well_name}' position missing angle_degrees or coordinates",
-                                    location=f"wells.{well_name}.position"
-                                )
         
         return is_valid
-        
-    def _validate_legacy_structure(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate legacy JSON framework structure"""
+    
+    def _validate_axis_set_structure(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
+        """Validate axis-set framework structure (paired coordinate axes)"""
         is_valid = True
         
-        result.add_issue(
-            ValidationSeverity.WARNING,
-            "structure_validation",
-            "Legacy JSON format detected - consider migrating to YAML format",
-            fix_suggestion="Use framework migration tools to convert to current YAML format"
-        )
-        
-        # Basic validation for legacy format
-        required_fields = ['framework_name', 'wells']
+        # Required fields for axis-set frameworks
+        required_fields = ['name', 'axes', 'coordinate_system']
         for field in required_fields:
             if field not in framework_data:
                 result.add_issue(
                     ValidationSeverity.ERROR,
                     "structure_validation",
                     f"Missing required field: {field}",
-                    location="root"
+                    location="root",
+                    fix_suggestion=f"Add {field} field to framework definition"
                 )
                 is_valid = False
         
-        if 'wells' in framework_data:
-            wells = framework_data['wells']
-            if isinstance(wells, dict):
-                result.wells_count = len(wells)
-            else:
+        # Validate axes structure
+        if 'axes' in framework_data:
+            axes = framework_data['axes']
+            if not isinstance(axes, dict):
                 result.add_issue(
                     ValidationSeverity.ERROR,
                     "structure_validation",
-                    "Wells must be an object",
-                    location="wells"
+                    "Axes must be a dictionary",
+                    location="axes"
                 )
                 is_valid = False
+            else:
+                coordinate_count = 0
+                
+                for axis_name, axis_data in axes.items():
+                    if not isinstance(axis_data, dict):
+                        result.add_issue(
+                            ValidationSeverity.ERROR,
+                            "structure_validation",
+                            f"Axis '{axis_name}' must be an object",
+                            location=f"axes.{axis_name}"
+                        )
+                        is_valid = False
+                        continue
+                    
+                    # Check for paired structure (positive/negative or integrative/disintegrative)
+                    pair_keys = ['positive', 'negative', 'integrative', 'disintegrative']
+                    found_pairs = [key for key in pair_keys if key in axis_data]
+                    
+                    if len(found_pairs) < 2:
+                        result.add_issue(
+                            ValidationSeverity.ERROR,
+                            "structure_validation",
+                            f"Axis '{axis_name}' must have paired coordinates (e.g., positive/negative)",
+                            location=f"axes.{axis_name}",
+                            fix_suggestion="Add paired coordinate definitions for this axis"
+                        )
+                        is_valid = False
+                    else:
+                        coordinate_count += len(found_pairs)
+                
+                result.wells_count = coordinate_count
         
         return is_valid
     
+
+    
     def _validate_semantics(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate semantic consistency"""
+        """Validate semantic consistency (Discernus Coordinates)"""
         is_valid = True
         
         # Architecture-specific semantic validation
-        if result.architecture == FrameworkArchitecture.DIPOLE_BASED:
-            is_valid = self._validate_dipole_semantics(framework_data, result)
-        elif result.architecture == FrameworkArchitecture.INDEPENDENT_WELLS:
-            is_valid = self._validate_wells_semantics(framework_data, result)
+        if result.architecture == FrameworkArchitecture.ANCHOR_SET:
+            is_valid = self._validate_anchor_set_semantics(framework_data, result)
+        elif result.architecture == FrameworkArchitecture.AXIS_SET:
+            is_valid = self._validate_axis_set_semantics(framework_data, result)
         
         return is_valid
     
-    def _validate_dipole_semantics(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate dipole framework semantics"""
+    def _validate_anchor_set_semantics(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
+        """Validate anchor-set framework semantics (independent coordinate points)"""
         is_valid = True
         
-        if 'dipoles' not in framework_data:
+        if 'anchors' not in framework_data:
             return is_valid
         
-        # Check angle uniqueness and opposition
-        angles = []
-        well_names = []
-        
-        for i, dipole in enumerate(framework_data['dipoles']):
-            if not isinstance(dipole, dict):
-                continue
-                
-            for pole in ['positive', 'negative']:
-                if pole in dipole and isinstance(dipole[pole], dict):
-                    pole_data = dipole[pole]
-                    
-                    # Check well name uniqueness
-                    if 'name' in pole_data:
-                        name = pole_data['name']
-                        if name in well_names:
-                            result.add_issue(
-                                ValidationSeverity.ERROR,
-                                "semantic_validation",
-                                f"Duplicate well name: {name}",
-                                location=f"dipoles[{i}].{pole}.name",
-                                fix_suggestion="Ensure all well names are unique"
-                            )
-                            is_valid = False
-                        well_names.append(name)
-                    
-                    # Check angle if present
-                    if 'angle' in pole_data:
-                        angle = pole_data['angle']
-                        if angle in angles:
-                            result.add_issue(
-                                ValidationSeverity.WARNING,
-                                "semantic_validation",
-                                f"Duplicate angle: {angle}°",
-                                location=f"dipoles[{i}].{pole}.angle",
-                                fix_suggestion="Consider using unique angles for better visualization"
-                            )
-                        angles.append(angle)
-        
-        return is_valid
-    
-    def _validate_wells_semantics(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate independent wells semantics"""
-        is_valid = True
-        
-        if 'wells' not in framework_data:
-            return is_valid
-        
-        wells = framework_data['wells']
+        anchors = framework_data['anchors']
         angles = []
         
-        for well_name, well_data in wells.items():
-            if not isinstance(well_data, dict):
+        for anchor_name, anchor_data in anchors.items():
+            if not isinstance(anchor_data, dict):
                 continue
             
-            # Check position consistency
-            if 'position' in well_data:
-                position = well_data['position']
-                if isinstance(position, dict):
-                    # Check angle uniqueness
-                    if 'angle_degrees' in position:
-                        angle = position['angle_degrees']
-                        if angle in angles:
-                            result.add_issue(
-                                ValidationSeverity.WARNING,
-                                "semantic_validation",
-                                f"Duplicate angle: {angle}° for well '{well_name}'",
-                                location=f"wells.{well_name}.position.angle_degrees"
-                            )
-                        angles.append(angle)
-                    
-                    # Validate coordinates if present
-                    if 'coordinates' in position:
-                        coords = position['coordinates']
-                        if isinstance(coords, list) and len(coords) == 2:
-                            x, y = coords
-                            # Check if coordinates are on unit circle
-                            distance = math.sqrt(x*x + y*y)
-                            if abs(distance - 1.0) > 0.1:  # Allow some tolerance
+            # Check angle uniqueness
+            if 'angle' in anchor_data:
+                angle = anchor_data['angle']
+                if angle in angles:
+                    result.add_issue(
+                        ValidationSeverity.WARNING,
+                        "semantic_validation",
+                        f"Duplicate angle: {angle}° for anchor '{anchor_name}'",
+                        location=f"anchors.{anchor_name}.angle",
+                        fix_suggestion="Consider using unique angles for better coordinate distribution"
+                    )
+                angles.append(angle)
+            
+            # Validate language cues if present
+            if 'language_cues' in anchor_data:
+                cues = anchor_data['language_cues']
+                if isinstance(cues, list):
+                    if len(cues) < 3:
+                        result.add_issue(
+                            ValidationSeverity.WARNING,
+                            "semantic_validation",
+                            f"Anchor '{anchor_name}' has few language cues ({len(cues)})",
+                            location=f"anchors.{anchor_name}.language_cues",
+                            fix_suggestion="Consider adding more language cues for better detection"
+                        )
+                elif cues is not None:
+                    result.add_issue(
+                        ValidationSeverity.ERROR,
+                        "semantic_validation",
+                        f"Anchor '{anchor_name}' language_cues must be a list",
+                        location=f"anchors.{anchor_name}.language_cues"
+                    )
+                    is_valid = False
+        
+        return is_valid
+    
+    def _validate_axis_set_semantics(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
+        """Validate axis-set framework semantics (paired coordinate axes)"""
+        is_valid = True
+        
+        if 'axes' not in framework_data:
+            return is_valid
+        
+        axes = framework_data['axes']
+        angles = []
+        
+        for axis_name, axis_data in axes.items():
+            if not isinstance(axis_data, dict):
+                continue
+            
+            # Validate paired coordinates
+            pair_keys = ['positive', 'negative', 'integrative', 'disintegrative']
+            for pair_key in pair_keys:
+                if pair_key in axis_data:
+                    coordinate_data = axis_data[pair_key]
+                    if isinstance(coordinate_data, dict):
+                        # Check angle uniqueness
+                        if 'angle' in coordinate_data:
+                            angle = coordinate_data['angle']
+                            if angle in angles:
                                 result.add_issue(
                                     ValidationSeverity.WARNING,
                                     "semantic_validation",
-                                    f"Well '{well_name}' coordinates not on unit circle (distance: {distance:.2f})",
-                                    location=f"wells.{well_name}.position.coordinates",
-                                    fix_suggestion="Normalize coordinates to unit circle"
+                                    f"Duplicate angle: {angle}° for {axis_name}.{pair_key}",
+                                    location=f"axes.{axis_name}.{pair_key}.angle",
+                                    fix_suggestion="Consider using unique angles for better coordinate distribution"
                                 )
+                            angles.append(angle)
+                        
+                        # Validate language cues if present
+                        if 'language_cues' in coordinate_data:
+                            cues = coordinate_data['language_cues']
+                            if isinstance(cues, list):
+                                if len(cues) < 3:
+                                    result.add_issue(
+                                        ValidationSeverity.WARNING,
+                                        "semantic_validation",
+                                        f"Coordinate '{axis_name}.{pair_key}' has few language cues ({len(cues)})",
+                                        location=f"axes.{axis_name}.{pair_key}.language_cues",
+                                        fix_suggestion="Consider adding more language cues for better detection"
+                                    )
+                            elif cues is not None:
+                                result.add_issue(
+                                    ValidationSeverity.ERROR,
+                                    "semantic_validation",
+                                    f"Coordinate '{axis_name}.{pair_key}' language_cues must be a list",
+                                    location=f"axes.{axis_name}.{pair_key}.language_cues"
+                                )
+                                is_valid = False
         
         return is_valid
     
@@ -771,14 +733,20 @@ class UnifiedFrameworkValidator:
                 metadata['description'] = desc
                 break
         
-        # Architecture-specific metadata
-        if result.architecture == FrameworkArchitecture.DIPOLE_BASED:
-            if 'dipoles' in framework_data:
-                metadata['dipoles'] = len(framework_data['dipoles'])
-                metadata['wells'] = len(framework_data['dipoles']) * 2  # Each dipole has 2 wells
-        elif result.architecture == FrameworkArchitecture.INDEPENDENT_WELLS:
-            if 'wells' in framework_data:
-                metadata['wells'] = len(framework_data['wells'])
+        # Architecture-specific metadata (Discernus Coordinates)
+        if result.architecture == FrameworkArchitecture.ANCHOR_SET:
+            if 'anchors' in framework_data:
+                metadata['anchors'] = len(framework_data['anchors'])
+                metadata['coordinate_points'] = len(framework_data['anchors'])  # Independent coordinate points
+        elif result.architecture == FrameworkArchitecture.AXIS_SET:
+            if 'axes' in framework_data:
+                metadata['axes'] = len(framework_data['axes'])
+                # Count total coordinate points from all axes
+                coordinate_count = 0
+                for axis_data in framework_data['axes'].values():
+                    if isinstance(axis_data, dict):
+                        coordinate_count += len([k for k in ['positive', 'negative', 'integrative', 'disintegrative'] if k in axis_data])
+                metadata['coordinate_points'] = coordinate_count
         
         result.framework_metadata = metadata
     
@@ -846,7 +814,17 @@ def print_validation_report(result: FrameworkValidationResult, verbose: bool = F
     print(f"📁 Path: {result.framework_path}")
     print(f"📐 Architecture: {result.architecture.value}")
     print(f"📄 Format: {result.format_type}")
-    print(f"📊 Wells: {result.wells_count}, Dipoles: {result.dipoles_count}")
+    
+    # Use new Discernus Coordinates terminology
+    if result.architecture == FrameworkArchitecture.AXIS_SET:
+        # For axis_set, show both coordinate points and axes count
+        axes_count = result.framework_metadata.get('axes', 0)
+        print(f"📊 Anchors: {result.wells_count}, Axes: {axes_count}")
+    elif result.architecture == FrameworkArchitecture.ANCHOR_SET:
+        print(f"📊 Anchors: {result.wells_count}")
+    else:
+        print(f"📊 Coordinate Points: {result.wells_count}")
+    
     print(f"⏰ Validated: {result.validation_timestamp}")
     
     # Overall status

@@ -55,7 +55,7 @@ class AIAssistantComplianceValidator:
                 "src/narrative_gravity/utils/llm_quality_assurance.py"
             ],
             "experiment_execution": [
-                "execute_experiment_definition.py",
+                "comprehensive_experiment_orchestrator.py",
                 "comprehensive_experiment_orchestrator.py",
                 "DeclarativeExperimentExecutor"
             ],

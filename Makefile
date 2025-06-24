@@ -1,26 +1,27 @@
 # Discernus Development Makefile
-# Enforces Docker-first development (Rule 0)
+# Local development workflow commands
 
-.PHONY: help start stop test experiment database shell clean
+.PHONY: help setup test experiment database clean health
 
 help: ## Show this help message
-	@echo "🐳 Discernus Docker-First Development Commands"
-	@echo "=============================================="
+	@echo "🖥️  Discernus Local Development Commands"
+	@echo "======================================="
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@echo ""
-	@echo "⚠️  NEVER run Python commands directly on host system!"
-	@echo "✅ Always use these Docker commands instead."
+	@echo "💡 All commands run in your local Python environment"
+	@echo "⚠️  Make sure to activate your virtual environment first!"
 
-start: ## Start the containerized environment
-	docker-compose up -d
-	@echo "✅ Environment started. Use 'make test' to validate."
-
-stop: ## Stop the containerized environment
-	docker-compose down
+setup: ## Set up local development environment
+	@echo "🔧 Setting up local development environment..."
+	@if [ ! -d "venv" ]; then python3 -m venv venv; fi
+	@echo "📦 Installing dependencies..."
+	@. venv/bin/activate && pip install -r requirements.txt
+	@if [ ! -f ".env" ]; then cp env.example .env; echo "📝 Created .env file from template - please edit with your settings"; fi
+	@echo "✅ Setup complete! Don't forget to activate your venv: source venv/bin/activate"
 
 test: ## Run database and environment validation
-	docker-compose exec app python3 check_database.py
+	python3 check_database.py
 
 experiment: ## Run experiment orchestrator (provide EXPERIMENT_FILE=path)
 	@if [ -z "$(EXPERIMENT_FILE)" ]; then \
@@ -28,28 +29,24 @@ experiment: ## Run experiment orchestrator (provide EXPERIMENT_FILE=path)
 		echo "Example: make experiment EXPERIMENT_FILE=experiments/my_experiment.json"; \
 		exit 1; \
 	fi
-	docker-compose exec app python3 scripts/applications/comprehensive_experiment_orchestrator.py $(EXPERIMENT_FILE)
+	python3 scripts/applications/comprehensive_experiment_orchestrator.py $(EXPERIMENT_FILE)
 
-database: ## Access PostgreSQL database shell
-	docker-compose exec db psql -U postgres -d discernus
+health: ## Run system health check
+	python3 scripts/applications/comprehensive_experiment_orchestrator.py --system-health-mode
 
-shell: ## Access application container shell
-	docker-compose exec app /bin/bash
+database: ## Access PostgreSQL database shell (local)
+	psql -h localhost -U postgres -d discernus
 
-logs: ## View application logs
-	docker-compose logs -f app
+clean: ## Clean up local cache and temporary files
+	find . -name "*.pyc" -delete
+	find . -name "__pycache__" -delete
+	rm -rf .pytest_cache/
+	@echo "🧹 Cleaned up local cache files"
 
-clean: ## Clean up containers and volumes
-	docker-compose down -v
-	docker system prune -f
-
-# Prevent accidental host usage
-python3:
-	@echo "❌ BLOCKED: Direct python3 usage violates Rule 0"
-	@echo "✅ Use: make shell"
-	@exit 1
-
-psql:
-	@echo "❌ BLOCKED: Direct psql usage violates Rule 0"  
-	@echo "✅ Use: make database"
-	@exit 1 
+# Helpful environment checks
+venv-check:
+	@if [ -z "$$VIRTUAL_ENV" ]; then \
+		echo "⚠️  Virtual environment not activated!"; \
+		echo "💡 Run: source venv/bin/activate"; \
+		exit 1; \
+	fi 

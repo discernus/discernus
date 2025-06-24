@@ -44,12 +44,27 @@ class InterraterReliabilityAnalyzer:
             logger.error("No structured data available for reliability analysis")
             return {'error': 'No data available'}
         
-        # Get well columns
-        well_columns = [col for col in df.columns if col.startswith('well_')]
+        # Get foundation/anchor score columns (updated from deprecated "well_" terminology)
+        # Look for current foundation names from Moral Foundations Theory
+        foundation_names = ['Care', 'Fairness', 'Loyalty', 'Authority', 'Sanctity', 'Liberty', 
+                           'Harm', 'Oppression']  # Including bipolar opposites
         
-        if not well_columns:
-            logger.error("No well score columns found in data")
-            return {'error': 'No well scores found'}
+        # Find columns that match foundation names (case-insensitive)
+        foundation_columns = []
+        for col in df.columns:
+            if col in foundation_names or col.lower() in [f.lower() for f in foundation_names]:
+                foundation_columns.append(col)
+        
+        # Fallback: look for any numeric columns that might be scores
+        if not foundation_columns:
+            numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+            # Exclude metadata columns
+            exclude_cols = ['text_id', 'model', 'timestamp', 'run_id', 'analysis_id']
+            foundation_columns = [col for col in numeric_cols if col not in exclude_cols]
+        
+        if not foundation_columns:
+            logger.error("No foundation score columns found in data")
+            return {'error': 'No foundation scores found'}
         
         # Check if we have multiple raters (models) for reliability analysis
         models = df['model'].unique() if 'model' in df.columns else []

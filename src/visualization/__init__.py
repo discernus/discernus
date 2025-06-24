@@ -31,6 +31,8 @@ fig = engine.create_dashboard(analyses, title="Dashboard")
 from .engine import NarrativeGravityVisualizationEngine, create_visualization_engine
 from .themes import get_theme, list_themes, theme_manager
 from .plotly_circular import PlotlyCircularVisualizer
+# Enhanced capabilities properly integrated into existing Plotly system
+# (Advanced features should be added to PlotlyCircularVisualizer, not as separate matplotlib classes)
 
 # Main exports - centralized system
 __all__ = [
@@ -39,7 +41,7 @@ __all__ = [
     'get_theme',
     'list_themes',
     'theme_manager',
-    # Legacy export for backward compatibility
+    # Production Plotly-based system
     'PlotlyCircularVisualizer'
 ]
 

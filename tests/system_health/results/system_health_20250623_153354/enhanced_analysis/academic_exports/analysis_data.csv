@@ -1,0 +1,2 @@
+analysis_id,text_id,framework,model,success,api_cost,duration_seconds,quality_score,narrative_position_x,narrative_position_y,timestamp
+analysis_0,text_0,moral_foundations_theory,unknown,True,0.0,0.0,0.0,0.0,0.0,2025-06-23T15:33:54.279926

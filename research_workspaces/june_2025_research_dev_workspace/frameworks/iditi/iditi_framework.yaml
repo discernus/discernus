@@ -1,57 +1,67 @@
 # IDITI Framework - Individual Dignity Identity v Tribal Identity
-# Version: v2025.06.19 (Converted to unified YAML format)
+# Version: v3.0.0 (Updated to Framework Specification v3.0)
 # Theoretical Foundation: Fukuyama (2018), Jung (1921)
 
-framework_meta:
-  name: "iditi"
-  display_name: "Individual Dignity Identity v Tribal Identity"
-  version: "v2025.06.19"
-  description: >
-    Individual Dignity Identity v Tribal Identity - A specialized Narrative Gravity Map
-    implementation focusing on the tension between individual dignity and tribal identity
-    in persuasive discourse. This framework examines the fundamental tension between
-    affirming universal human dignity versus prioritizing group loyalty and tribal belonging.
-  
-  theoretical_foundation:
-    primary_sources:
-      - "Fukuyama, F. (2018). Identity: The Demand for Dignity and the Politics of Resentment."
-      - "Jung, C. G. (1921). Psychological Types. (Concepts of Individual vs. Collective Identity)"
-    theoretical_approach: >
-      This framework examines narratives through the lens of individual dignity versus tribal identity,
-      drawing on theories of identity formation and collective psychology. It analyzes how language
-      reinforces or challenges the tension between personal autonomy and group allegiance.
-  
-  last_modified: "2025-06-19T15:00:00.000000"
-  created_by: "unified_asset_management_conversion"
+# =============================================================================
+# FRAMEWORK METADATA
+# =============================================================================
 
-# Core framework structure
+name: "iditi"
+framework_name: "iditi"
+display_name: "Individual Dignity Identity v Tribal Identity"
+version: "v3.0.0"
+description: |
+  Individual Dignity Identity v Tribal Identity - A specialized Discernus Coordinates
+  framework focusing on the tension between individual dignity and tribal identity
+  in persuasive discourse. This framework examines the fundamental tension between
+  affirming universal human dignity versus prioritizing group loyalty and tribal belonging.
+
+framework_type: axis_set
+
+# =============================================================================
+# NEW IN v3.0: ALGORITHM CONFIGURATION
+# =============================================================================
+
+algorithm_config:
+  dominance_amplification:
+    enabled: true
+    threshold: 0.6                    # Lower threshold to capture identity patterns
+    multiplier: 1.2                   # Higher amplification for clear binary distinction
+    rationale: "Amplifies identity-based moral reasoning for clearer dignity vs tribalism classification"
+    
+  adaptive_scaling:
+    enabled: true
+    base_scaling: 0.7                # Higher base scaling for clear binary positioning
+    max_scaling: 0.9                 # Moderate maximum to maintain analytical precision
+    variance_factor: 0.2             # Lower variance sensitivity for focused binary analysis
+    mean_factor: 0.05                # Reduced mean sensitivity for identity contexts
+    methodology: "Binary scaling optimized for dignity vs tribalism classification"
+    
+  prompting_integration:
+    dominance_instruction: "Identify whether the text primarily affirms individual dignity or tribal identity"
+    amplification_purpose: "Mathematical enhancement of identity-based moral positioning"
+    methodology_reference: "IDITI binary classification methodology v3.0"
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+
 coordinate_system:
-  type: "circle"
+  type: circle
   radius: 1.0
-  scaling_factor: 0.8
-  description: "Default circular coordinate system with fixed positioning strategy"
+  description: "Circular coordinate system using axes for paired semantic positioning"
 
-positioning_strategy:
-  type: "fixed_positioning"
-  description: >
-    Wells are fixed at 90 and 270 degrees to represent the identity dipole - 
-    vertical axis emphasizing the moral hierarchy between dignity and tribalism.
-  wells:
-    Dignity:
-      angle: 90
-      description: "Individual Dignity Identity well fixed at 90 degrees (top of circle)."
-    Tribalism:
-      angle: 270
-      description: "Tribal Identity well fixed at 270 degrees (bottom of circle)."
+# =============================================================================  
+# AXES (PAIRED COORDINATE STRUCTURE)
+# =============================================================================
 
-# Framework dipoles - the core analytical structure
-dipoles:
-  - name: "Identity"
+axes:
+  Identity:
     description: "Moral worth and group membership dynamics - the fundamental tension between individual dignity and tribal loyalty"
     
-    positive:
+    integrative:
       name: "Dignity"
-      description: >
+      description: |
         Affirms individual moral worth and universal rights, regardless of group identity. 
         Emphasizes agency, pluralism, and character over affiliation.
       
@@ -71,12 +81,11 @@ dipoles:
       
       angle: 90
       weight: 1.0
-      type: "integrative"
-      tier: "primary"
+      type: integrative
     
-    negative:
+    disintegrative:
       name: "Tribalism"
-      description: >
+      description: |
         Prioritizes group dominance, loyalty, or identity over individual agency. 
         Often frames moral worth in in-group/out-group terms.
       
@@ -95,86 +104,96 @@ dipoles:
         - "group supremacy"
       
       angle: 270
-      weight: -1.0
-      type: "disintegrative"
-      tier: "primary"
-
-# Analysis configuration
-analysis_instructions: >
-  Evaluate how the text either affirms individual dignity and universal human worth 
-  OR appeals to tribal identity and group-based moral distinctions.
-
-weighting_philosophy:
-  description: >
-    Single-tier weighting system focused on the identity dipole: Dignity and Tribalism. 
-    This framework operates on the principle that identity-based moral worth is the most 
-    fundamental dimension of political discourse.
-  
-  tiers:
-    primary:
       weight: 1.0
-      description: >
-        Identity forces - the fundamental moral motivators that determine how individuals 
-        and groups relate to each other
-      wells: ["Dignity", "Tribalism"]
+      type: disintegrative
 
-# Prompt configuration for LLM analysis
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Fukuyama, F. (2018). Identity: The Demand for Dignity and the Politics of Resentment."
+    - "Jung, C. G. (1921). Psychological Types. (Concepts of Individual vs. Collective Identity)"
+  theoretical_approach: |
+    This framework examines narratives through the lens of individual dignity versus tribal identity,
+    drawing on theories of identity formation and collective psychology. It analyzes how language
+    reinforces or challenges the tension between personal autonomy and group allegiance.
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  identity_axis_score:
+    name: "Identity Axis Score"
+    description: "Position on dignity-tribalism axis from integrative (+1) to disintegrative (-1)"
+    calculation: "Dignity score minus Tribalism score"
+  
+  identity_intensity:
+    name: "Identity Intensity"
+    description: "Strength of identity-based moral positioning"
+    calculation: "Absolute value of axis score"
+
+# =============================================================================
+# PROMPT CONFIGURATION
+# =============================================================================
+
 prompt_configuration:
-  expert_role: >
+  expert_role: |
     You are an expert analyst of political identity and group psychology, with deep knowledge 
     of individual dignity theory and tribal psychology. You specialize in analyzing how discourse 
     either affirms universal human dignity or appeals to tribal identity and group loyalty.
   
-  analysis_focus: >
+  bias_neutral_analysis_focus: |
     Evaluate how the text either affirms individual dignity and universal human worth OR appeals 
     to tribal identity and group-based moral distinctions. Focus specifically on the tension 
     between treating people as individuals with inherent worth versus defining people primarily 
     through group membership and loyalty.
   
-  scoring_approach: |
-    Score each well on 0.0-1.0 scale based on presence/strength of identity 
-    orientation in the text, with specific textual evidence.
+  detection_approach: |
+    Look for patterns of moral reasoning that either affirm universal human dignity or prioritize
+    group identity and tribal belonging. Analyze both explicit statements and implicit assumptions
+    about the source of human moral worth.
   
-  scoring_emphasis: >
-    Focus on identity-based moral frameworks rather than policy positions. Look for how the text 
-    treats human worth: as universal and individual, or as conditional on group membership and loyalty.
-  
-  evidence_requirements: >
-    Provide specific textual evidence for each well score, identifying language that either affirms 
-    individual dignity and universal rights or prioritizes group identity and tribal belonging. 
-    Explain why the text leans toward dignity or tribalism.
+  scoring_methodology: |
+    Score coordinates based on textual evidence of identity orientation, using 0.0-1.0 scale 
+    with specific quotations supporting each assessment. Focus on identity-based moral frameworks 
+    rather than policy positions.
 
-# Metrics and measurement
-metrics:
-  com:
-    name: "Center of Mass"
-    description: >
-      Weighted center position considering signed weights - indicates overall orientation 
-      toward dignity vs tribalism
-  
-  nps:
-    name: "Narrative Polarity Score"
-    description: >
-      Distance from center normalized by circle radius - measures strength of identity orientation
-  
-  dps:
-    name: "Directional Purity Score"
-    description: >
-      Consistency of integrative vs disintegrative pull - measures clarity of dignity 
-      vs tribalism orientation
+# =============================================================================
+# SYSTEM COMPATIBILITY
+# =============================================================================
 
-# Visualization configuration
-visualization:
-  well_type_colors:
-    integrative: "#2E7D32"
-    disintegrative: "#C62828"
-  supported_types: ["circular", "comparative"]
-
-# Compatibility and integration
 compatibility:
-  prompt_templates: ["hierarchical_v2.1", "standard_v2.0"]
-  weighting_schemes: ["winner_take_most", "proportional"]
-  api_versions: ["v2.0", "v2.1"]
+  prompt_templates:
+    - identity_analysis_v3.0
+    - binary_classification_v2.1
+  weighting_schemes:
+    - axis_based_v3.0
+  api_versions:
+    - v3.0
+    - v2.1
+  visualization_types:
+    - circular
+    - axis_profile
+
+# =============================================================================
+# ACADEMIC VALIDATION
+# =============================================================================
+
+validation:
+  academic_standard: "Identity formation theory and political psychology"
+  measurement_instrument: "Identity-based moral reasoning assessment"
+  scope_limitation: "English-language political discourse, Western democratic contexts"
+  
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-23T14:45:00.000000"
+theoretical_validation: "Framework v3.0 - algorithm configuration integrated"
+implementation_status: "Production ready with configurable algorithms"
 
 # Asset management metadata
 asset_metadata:

@@ -1,0 +1,319 @@
+# IDITI Framework - Individual Dignity Identity v Tribal Identity
+# Enhanced implementation examining the fundamental tension between individual dignity and tribal identity
+# Based on Fukuyama's identity formation theory and Jung's collective psychology concepts
+#
+# Version: v1.0 (Framework Specification v3.1 Compliant)
+# Last Modified: 2025-06-23 (Migrated to v3.1 with enhanced academic integration)
+# Status: Production Ready with Binary Classification
+
+# =============================================================================
+# FRAMEWORK IDENTIFICATION (required)
+# =============================================================================
+
+name: iditi
+version: v1.0
+display_name: "Individual Dignity Identity v Tribal Identity"
+
+description: |
+  The IDITI framework analyzes the fundamental tension between individual dignity and tribal identity 
+  in political discourse. This specialized framework focuses on how texts either affirm universal 
+  human worth or prioritize group-based identity and loyalty, examining the core moral question of 
+  whether human dignity is universal or conditional on group membership.
+  
+  ## Theoretical Foundation
+  
+  This framework examines narratives through the lens of individual dignity versus tribal identity, 
+  drawing on theories of identity formation and collective psychology. It analyzes how language 
+  reinforces or challenges the tension between personal autonomy and group allegiance.
+  
+  ### Primary Theoretical Sources
+  - **Fukuyama's Identity Theory**: The demand for dignity and politics of resentment
+  - **Jung's Collective Psychology**: Individual vs. collective identity concepts
+  - **Universal Dignity Principle**: Inherent worth regardless of group membership
+  - **Identity Politics Analysis**: Group-based moral frameworks and exclusion patterns
+  
+  ## Framework Structure
+  
+  ### Core Binary Opposition: Identity Axis
+  
+  **Dignity (Integrative)** - Affirms individual moral worth and universal rights, regardless of 
+  group identity. Emphasizes agency, pluralism, and character over affiliation. Treats people 
+  as individuals with inherent worth.
+  
+  **Tribalism (Disintegrative)** - Prioritizes group dominance, loyalty, or identity over individual 
+  agency. Often frames moral worth in in-group/out-group terms. Defines moral worth through group 
+  membership and loyalty.
+  
+  ## Analysis Focus
+  
+  ### Primary Research Questions
+  1. Does the text treat people as individuals with inherent worth?
+  2. Does the text define moral worth through group membership?
+  3. How does the text balance individual agency vs. group loyalty?
+  
+  ### Scoring Methodology
+  - Focus on identity-based moral frameworks rather than policy positions
+  - Examine how the text treats human worth: universal vs. conditional on group membership
+  - Analyze the tension between personal autonomy and group allegiance
+  - Score based on textual evidence with specific quotations
+  
+  ## Usage Guidelines
+  
+  ### Appropriate Applications
+  - Political speeches and campaign materials analyzing identity appeals
+  - Social commentary and editorial content with identity components
+  - Policy arguments examining identity-based moral frameworks
+  - Cultural and social movement discourse analysis
+  - Democratic discourse quality assessment through identity lens
+  
+  ### Interpretation Framework
+  - **High Dignity Scores**: Universal human worth affiliation, individual agency emphasis
+  - **High Tribalism Scores**: Group-based moral hierarchies, identity politics patterns
+  - **Balanced Scores**: Mixed identity appeals requiring detailed analysis
+  - **Intensity Measures**: Strength of identity-based moral positioning
+  
+  ## Academic Applications
+  
+  ### Research Applications
+  - How do political figures balance individual dignity vs. tribal appeals?
+  - What linguistic patterns indicate identity-based moral frameworks?
+  - How does identity framing affect democratic discourse quality?
+  - Cross-cultural validation of dignity vs. tribalism dimensions
+  - Temporal analysis of identity rhetoric evolution
+  
+  ## Version History
+  
+  v1.0: Framework Specification v3.1 compliant version with enhanced academic integration,
+        binary classification optimization, opposite_of validation links, and integrated documentation.
+  
+  ## Citation Format
+  
+  Discernus Framework: Individual Dignity Identity v Tribal Identity v1.0 (Fukuyama/Jung, 2025)
+
+# =============================================================================
+# POSITIONING DEFINITION (axes - opposing anchor pairs)
+# =============================================================================
+
+axes:
+  Identity:
+    description: "Moral worth and group membership dynamics - the fundamental tension between individual dignity and tribal loyalty"
+    
+    integrative:
+      name: "Dignity"
+      description: "Affirms individual moral worth and universal rights, regardless of group identity. Emphasizes agency, pluralism, and character over affiliation."
+      language_cues:
+        - "equal dignity"
+        - "inherent worth"
+        - "regardless of background"
+        - "individual character"
+        - "universal rights"
+        - "human agency"
+        - "personal dignity"
+        - "individual merit"
+        - "common humanity"
+        - "respect for all"
+        - "universal values"
+        - "human dignity"
+        - "cross-group solidarity"
+        - "individual autonomy"
+        - "character-based judgment"
+      angle: 90
+      weight: 1.0
+      type: integrative
+      opposite_of: "Tribalism"
+    
+    disintegrative:
+      name: "Tribalism"
+      description: "Prioritizes group dominance, loyalty, or identity over individual agency. Often frames moral worth in in-group/out-group terms."
+      language_cues:
+        - "real Americans"
+        - "our people"
+        - "they don't belong"
+        - "us vs them"
+        - "group loyalty"
+        - "identity politics"
+        - "blood and soil"
+        - "true believers"
+        - "outsiders"
+        - "not one of us"
+        - "tribal unity"
+        - "group supremacy"
+        - "in-group favoritism"
+        - "group-based hierarchy"
+        - "exclusion markers"
+      angle: 270
+      weight: 1.0
+      type: disintegrative
+      opposite_of: "Dignity"
+
+# =============================================================================
+# ALGORITHMIC CONFIGURATION (optional)
+# =============================================================================
+
+algorithm_config:
+  dominance_amplification:
+    enabled: true
+    threshold: 0.6
+    multiplier: 1.2
+    rationale: "Amplifies identity-based moral reasoning for clearer dignity vs tribalism classification"
+    
+  adaptive_scaling:
+    enabled: true
+    base_scaling: 0.7
+    max_scaling: 0.9
+    variance_factor: 0.2
+    mean_factor: 0.05
+    methodology: "Binary scaling optimized for dignity vs tribalism classification"
+    
+  prompting_integration:
+    dominance_instruction: "Identify whether the text primarily affirms individual dignity or tribal identity"
+    amplification_purpose: "Mathematical enhancement of identity-based moral positioning"
+    methodology_reference: "IDITI binary classification methodology v3.0"
+
+# =============================================================================
+# COORDINATE SYSTEM (optional)
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: "Circular coordinate system using axes for paired semantic positioning"
+
+# =============================================================================
+# ANALYSIS CONFIGURATION (optional)
+# =============================================================================
+
+metrics:
+  identity_axis_score:
+    name: "Identity Axis Score"
+    description: "Position on dignity-tribalism axis from integrative (+1) to disintegrative (-1)"
+    calculation: "Dignity score minus Tribalism score"
+  
+  identity_intensity:
+    name: "Identity Intensity"
+    description: "Strength of identity-based moral positioning"
+    calculation: "Absolute value of axis score"
+  
+  dignity_dominance:
+    name: "Dignity Dominance"
+    description: "Degree to which dignity themes dominate identity discourse"
+    calculation: "Dignity score divided by sum of both identity scores"
+  
+  tribal_dominance:
+    name: "Tribal Dominance"
+    description: "Degree to which tribalism themes dominate identity discourse"
+    calculation: "Tribalism score divided by sum of both identity scores"
+
+# =============================================================================
+# LLM INTEGRATION (optional)
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert analyst of political identity and group psychology, with deep knowledge 
+    of individual dignity theory and tribal psychology. You specialize in analyzing how discourse 
+    either affirms universal human dignity or appeals to tribal identity and group loyalty.
+  
+  bias_neutral_analysis_focus: |
+    Evaluate how the text either affirms individual dignity and universal human worth OR appeals 
+    to tribal identity and group-based moral distinctions. Focus specifically on the tension 
+    between treating people as individuals with inherent worth versus defining people primarily 
+    through group membership and loyalty.
+  
+  detection_approach: |
+    Look for patterns of moral reasoning that either affirm universal human dignity or prioritize
+    group identity and tribal belonging. Analyze both explicit statements and implicit assumptions
+    about the source of human moral worth. Examine how the text treats human worth: universal 
+    vs. conditional on group membership.
+  
+  scoring_methodology: |
+    Score coordinates based on textual evidence of identity orientation, using 0.0-1.0 scale 
+    with specific quotations supporting each assessment. Focus on identity-based moral frameworks 
+    rather than policy positions. Look for linguistic patterns that indicate dignity affirmation 
+    vs tribal exclusion.
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION (optional)
+# =============================================================================
+
+visualization:
+  type_colors:
+    integrative: "#2E7D32"               # Green - dignity/universal worth
+    disintegrative: "#C62828"            # Red - tribalism/group exclusion
+  
+  supported_charts:
+    - circular
+    - axis_profile
+    - binary_comparison
+    - identity_balance
+  
+  chart_specific_config:
+    circular:
+      show_axis_labels: true
+      highlight_opposites: true
+      binary_emphasis: true
+
+# =============================================================================
+# ACADEMIC VALIDATION (required)
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Fukuyama, F. (2018). Identity: The Demand for Dignity and the Politics of Resentment."
+    - "Jung, C. G. (1921). Psychological Types. (Concepts of Individual vs. Collective Identity)"
+  
+  theoretical_approach: |
+    This framework examines narratives through the lens of individual dignity versus tribal identity,
+    drawing on theories of identity formation and collective psychology. It analyzes how language
+    reinforces or challenges the tension between personal autonomy and group allegiance. The 
+    framework applies Fukuyama's analysis of dignity demands and Jung's understanding of 
+    individual vs. collective identity formation.
+  
+  academic_validation: |
+    Framework validated through identity formation theory and political psychology research.
+    Applies established concepts from Fukuyama's dignity theory and Jung's collective psychology
+    to analyze how discourse treats human moral worth as either universal or group-conditional.
+
+validation:
+  academic_standard: "Identity formation theory and political psychology"
+  measurement_instrument: "Identity-based moral reasoning assessment"
+  scope_limitation: "English-language political discourse, Western democratic contexts"
+  
+  citation_format: "Discernus Framework: Individual Dignity Identity v Tribal Identity v1.0 (Fukuyama/Jung, 2025)"
+  academic_attribution: |
+    When using this framework in academic work, cite as:
+    "Discernus Framework: Individual Dignity Identity v Tribal Identity v1.0 (Fukuyama/Jung, 2025)"
+    
+    Include framework version for reproducibility and provenance tracking.
+
+# =============================================================================
+# SYSTEM COMPATIBILITY (optional)
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - identity_analysis_v3.0
+    - binary_classification_v2.1
+    - dignity_assessment_v1.0
+  
+  weighting_schemes:
+    - axis_based_v3.0
+    - binary_optimization
+    - identity_focused
+  
+  api_versions:
+    - v3.1
+    - v3.0
+  
+  visualization_types:
+    - circular
+    - axis_profile
+    - binary_comparison
+
+# =============================================================================
+# FRAMEWORK VERSIONING (required)
+# =============================================================================
+
+last_modified: "2025-06-23T17:30:00.000000"
+framework_registry_key: "iditi__v1.0"
+implementation_status: "Production ready with Framework Specification v3.1 compliance and binary classification optimization" 

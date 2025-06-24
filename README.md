@@ -21,5 +21,5 @@ See the [Platform Development Onboarding](docs_site/docs/platform-development/PL
 - **Enterprise LLM Integration**: OpenAI, Anthropic, and multi-provider support with cost controls
 - **Academic Research Pipeline**: End-to-end workflow from corpus ingestion to publication-ready results
 - **Quality Assurance System**: 6-layer mathematical validation ensuring analysis reliability
-- **Scalable Architecture**: Docker containerization with database-first design
+- **Scalable Architecture**: Local development with PostgreSQL database-first design
 - **Auto-Generated Documentation**: Comprehensive API documentation automatically generated from source code 

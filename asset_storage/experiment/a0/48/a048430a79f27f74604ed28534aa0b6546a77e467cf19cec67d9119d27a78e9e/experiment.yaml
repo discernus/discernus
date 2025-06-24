@@ -1,0 +1,70 @@
+experiment_meta:
+  name: System_Health_Test
+  version: v1.0.0
+  created: '2025-06-25T00:00:00Z'
+  description: Basic system health validation test - validates core system components
+  hypothesis: Core system components load and function correctly
+  research_context: System health validation
+  principal_investigator: System Test
+  institution: Discernus Test Suite
+  ethical_clearance: TEST-2025-001
+  funding_source: Internal Testing
+  data_classification: test
+  publication_intent: false
+  tags:
+  - system_health
+  - validation
+  - testing
+  hypotheses:
+  - Framework loading works correctly
+  - Coordinate engine calculates positions
+  - QA system initializes successfully
+  - Enhanced analysis pipeline generates reports
+  - Visualization system creates charts
+  - Academic export system functions
+  success_criteria:
+  - Framework loads without errors
+  - Coordinate calculations produce valid results
+  - QA system reports confidence scores
+  - HTML reports are generated
+  - Visualizations are created
+  - Academic exports are produced
+components:
+  frameworks:
+  - id: moral_foundations_theory
+    version: test
+    type: file_path
+    file_path: tests/system_health/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+  models:
+  - id: gpt-4o
+    provider: openai
+    version: '2024-05-13'
+execution:
+  description: Basic system health validation
+  matrix:
+  - run_id: health_check
+    description: Basic system component health check
+    framework: moral_foundations_theory
+    model: gpt-4o
+  cost_controls:
+    max_total_cost: 1.0
+    cost_per_analysis_limit: 0.1
+  quality_controls:
+    min_framework_fit_score: 0.5
+    enable_qa_validation: true
+    require_evidence: false
+outputs:
+  save_to_database: false
+  export_formats:
+  - json
+  - html
+  - csv
+  include_raw_responses: false
+  include_provenance: true
+  enhanced_analysis: true
+  generate_visualizations: true
+  create_academic_exports: true
+validation_criteria:
+  min_successful_analyses: 1
+  max_total_cost: 1.0
+  required_quality_score: 0.5

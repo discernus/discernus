@@ -1,0 +1,7 @@
+asset_id: moral_foundations_theory
+content_hash: 28d7594469cf85057a2237d81aedd555cfd44428ef4b47cad7d65ccfc63931d0
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-23T14:35:17.268020'
+source_path: tests/system_health/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+validation_status: validated_before_storage
+version: test

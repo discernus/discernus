@@ -1,275 +1,172 @@
 #!/usr/bin/env python3
 """
-Check Existing Systems - Production-First Search
-
-Run this script before building any new functionality to see if we already
-have something that does what you want to build.
-
-Uses clean search strategy:
-1. Search PRODUCTION code first (src/, scripts/production/, docs/specifications/)
-2. Only search experimental if no production matches found
-3. Never search deprecated code unless explicitly requested
-
-Usage:
-    python3 scripts/applications/check_existing_systems.py "quality assurance"
-python3 scripts/applications/check_existing_systems.py "experiment execution"
-python3 scripts/applications/check_existing_systems.py "data export" --include-experimental
+Enhanced system discovery tool with provenance tracking information.
 """
 
 import sys
-import subprocess
-import argparse
+import os
 from pathlib import Path
+import json
+import hashlib
+import sqlite3
+from datetime import datetime
 
-class ProductionCodeSearcher:
-    """Clean search focusing on production-ready code."""
-    
-    def __init__(self, include_experimental=False, include_deprecated=False):
-        self.include_experimental = include_experimental
-        self.include_deprecated = include_deprecated
-        self.project_root = Path(__file__).parent.parent.parent
-        
-        # Production directories (always searched)
-        self.production_dirs = [
-            "src/narrative_gravity/",
-            "scripts/production/", 
-            "docs/specifications/",
-            "docs/user-guides/",
-            "frameworks/"
-        ]
-        
-        # Experimental directories (conditional search)
-        self.experimental_dirs = [
-            "experimental/",
-            "sandbox/",
-            "tests/",  # Include tests in experimental for now
-        ]
-        
-        # Deprecated directories (rarely searched)
-        self.deprecated_dirs = [
-            "deprecated/",
-            "tmp/",
-        ]
-        
-        # Known problematic patterns to avoid
-        self.avoid_patterns = [
-            "# DEPRECATED",
-            "# TODO: Remove",
-            "# OBSOLETE",
-            "archive/",
-            ".bak",
-            "_old",
-            "_backup"
-        ]
-    
-    def search_production_code(self, query: str):
-        """Search production code directories first."""
-        print(f"🔍 Searching PRODUCTION systems for: '{query}'")
-        print("=" * 60)
-        
-        production_matches = 0
-        
-        for directory in self.production_dirs:
-            if not (self.project_root / directory).exists():
-                continue
-                
-            print(f"\n📁 {directory.upper()}:")
-            try:
-                result = subprocess.run(
-                    ["grep", "-r", "-i", "--include=*.py", "--include=*.md", query, directory],
-                    capture_output=True, text=True, cwd=self.project_root
-                )
-                
-                if result.stdout:
-                    # Filter out problematic patterns
-                    lines = result.stdout.split('\n')
-                    clean_lines = []
-                    
-                    for line in lines:
-                        if line.strip() and not any(pattern in line for pattern in self.avoid_patterns):
-                            clean_lines.append(line)
-                    
-                    if clean_lines:
-                        production_matches += len(clean_lines)
-                        # Show limited output to avoid overwhelming
-                        for line in clean_lines[:10]:
-                            print(line)
-                        if len(clean_lines) > 10:
-                            print(f"... and {len(clean_lines) - 10} more matches")
-                    else:
-                        print("No clean matches found.")
-                else:
-                    print("No matches found.")
-                    
-            except Exception as e:
-                print(f"Error searching {directory}: {e}")
-        
-        return production_matches
-    
-    def search_experimental_code(self, query: str):
-        """Search experimental code if no production matches."""
-        print(f"\n🧪 Searching EXPERIMENTAL systems for: '{query}'")
-        print("=" * 60)
-        print("⚠️  These results may include unstable or obsolete code!")
-        
-        experimental_matches = 0
-        
-        for directory in self.experimental_dirs:
-            if not (self.project_root / directory).exists():
-                continue
-                
-            print(f"\n📂 {directory.upper()}:")
-            try:
-                result = subprocess.run(
-                    ["grep", "-r", "-i", "--include=*.py", "--include=*.md", query, directory],
-                    capture_output=True, text=True, cwd=self.project_root
-                )
-                
-                if result.stdout:
-                    lines = result.stdout.split('\n')
-                    clean_lines = [line for line in lines if line.strip()]
-                    experimental_matches += len(clean_lines)
-                    
-                    # Show limited output
-                    for line in clean_lines[:5]:
-                        print(line)
-                    if len(clean_lines) > 5:
-                        print(f"... and {len(clean_lines) - 5} more experimental matches")
-                else:
-                    print("No matches found.")
-                    
-            except Exception as e:
-                print(f"Error searching {directory}: {e}")
-        
-        return experimental_matches
-    
-    def search_deprecated_code(self, query: str):
-        """Search deprecated code (only if explicitly requested)."""
-        print(f"\n🗑️ Searching DEPRECATED systems for: '{query}'")
-        print("=" * 60)
-        print("⚠️  These results are obsolete and should not be used!")
-        
-        for directory in self.deprecated_dirs:
-            if not (self.project_root / directory).exists():
-                continue
-                
-            print(f"\n📂 {directory.upper()}:")
-            try:
-                result = subprocess.run(
-                    ["grep", "-r", "-i", "--include=*.py", "--include=*.md", query, directory],
-                    capture_output=True, text=True, cwd=self.project_root
-                )
-                
-                if result.stdout:
-                    lines = result.stdout.split('\n')[:3]  # Very limited output
-                    for line in lines:
-                        if line.strip():
-                            print(line)
-                    print("... (deprecated code - use production alternatives)")
-                else:
-                    print("No matches found.")
-                    
-            except Exception as e:
-                print(f"Error searching {directory}: {e}")
+# Add src to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
-def show_inventory():
-    """Show the existing systems inventory."""
-    inventory_path = Path(__file__).parent.parent.parent / "docs_site" / "docs" / "EXISTING_SYSTEMS_INVENTORY.md"
+def check_existing_systems(functionality_query: str):
+    """
+    Check existing production systems and provide guidance on results organization.
     
-    if inventory_path.exists():
-        print("\n📋 PRODUCTION SYSTEMS INVENTORY:")
-        print("=" * 40)
-        with open(inventory_path, 'r') as f:
-            content = f.read()
-            # Show production systems only
-            lines = content.split('\n')
-            in_production_section = False
-            
-            for line in lines:
-                if "🔍 Quality Assurance Systems" in line:
-                    in_production_section = True
-                elif line.startswith("## ⚠️"):  # Deprecation section
-                    in_production_section = False
-                elif line.startswith("---"):
-                    in_production_section = False
-                    
-                if in_production_section or "✅" in line:
-                    print(line)
-    else:
-        print("⚠️ EXISTING_SYSTEMS_INVENTORY.md not found!")
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Search for existing systems before building new ones",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  python3 scripts/applications/check_existing_systems.py "quality assurance"
-python3 scripts/applications/check_existing_systems.py "experiment execution" --include-experimental
-python3 scripts/applications/check_existing_systems.py "validation" --include-deprecated
-        """
-    )
+    Enhanced with provenance tracking and workspace organization information.
+    """
+    print(f"🔍 Searching for existing systems: '{functionality_query}'")
+    print("=" * 60)
     
-    parser.add_argument("query", help="Search query for existing functionality")
-    parser.add_argument("--include-experimental", action="store_true", 
-                       help="Also search experimental code")
-    parser.add_argument("--include-deprecated", action="store_true",
-                       help="Also search deprecated code")
+    # Core production systems
+    systems = {
+        "Quality Assurance": {
+            "system": "LLMQualityAssuranceSystem",
+            "location": "src/analysis/llm_quality_assurance.py",
+            "description": "6-layer mathematical validation system",
+            "capabilities": [
+                "Syntactic validation",
+                "Semantic coherence checking", 
+                "Statistical analysis",
+                "Confidence scoring",
+                "Bias detection",
+                "Academic compliance"
+            ]
+        },
+        "Component Validation": {
+            "system": "ComponentQualityValidator", 
+            "location": "src/utils/component_quality_validator.py",
+            "description": "Component validation and registration",
+            "capabilities": [
+                "Framework validation",
+                "Corpus validation", 
+                "Prompt template validation",
+                "Asset integrity checking"
+            ]
+        },
+        "Academic Export": {
+            "system": "QAEnhancedDataExporter",
+            "location": "src/academic/qa_enhanced_data_exporter.py", 
+            "description": "Academic export with quality assurance",
+            "capabilities": [
+                "CSV export with metadata",
+                "Statistical summaries",
+                "Quality metrics",
+                "Academic documentation"
+            ]
+        },
+        "Experiment Orchestration": {
+            "system": "ComprehensiveExperimentOrchestrator",
+            "location": "scripts/applications/comprehensive_experiment_orchestrator.py",
+            "description": "Complete experiment execution pipeline",
+            "capabilities": [
+                "Experiment execution",
+                "Results management", 
+                "Enhanced analysis pipeline",
+                "Provenance tracking",
+                "Research workspace integration"
+            ]
+        },
+        "System Health": {
+            "system": "SystemHealthCheck",
+            "location": "scripts/system_health_check.sh",
+            "description": "Comprehensive system validation",
+            "capabilities": [
+                "Database connectivity",
+                "Framework loading",
+                "API validation",
+                "Mock analysis testing",
+                "Results generation"
+            ]
+        }
+    }
     
-    args = parser.parse_args()
+    # Check which systems are relevant
+    relevant_systems = []
+    query_lower = functionality_query.lower()
     
-    print("🚨 PREVENTION CHECK: Searching for existing systems...")
-    print("🎯 FOCUS: Production-ready code first!")
-    print("Rule: ALWAYS search before building!")
+    for system_name, system_info in systems.items():
+        if (query_lower in system_name.lower() or 
+            query_lower in system_info["description"].lower() or
+            any(query_lower in cap.lower() for cap in system_info["capabilities"])):
+            relevant_systems.append((system_name, system_info))
     
-    searcher = ProductionCodeSearcher(
-        include_experimental=args.include_experimental,
-        include_deprecated=args.include_deprecated
-    )
+    if relevant_systems:
+        print("✅ FOUND RELEVANT PRODUCTION SYSTEMS:")
+        print()
+        
+        for system_name, system_info in relevant_systems:
+            print(f"📦 {system_name}")
+            print(f"   System: {system_info['system']}")
+            print(f"   Location: {system_info['location']}")
+            print(f"   Description: {system_info['description']}")
+            print(f"   Capabilities:")
+            for cap in system_info['capabilities']:
+                print(f"     - {cap}")
+            print()
     
-    # Search production code first
-    production_matches = searcher.search_production_code(args.query)
+    # Enhanced results organization information
+    print("📁 RESULTS ORGANIZATION & PROVENANCE TRACKING:")
+    print()
+    print("🏥 System Health Results:")
+    print("   Location: tests/system_health/results/")
+    print("   Retention: Only most recent result kept")
+    print("   Contents: HTML reports, visualizations, academic exports")
+    print()
+    print("🔬 Live Experiment Results:")
+    print("   Location: {research_workspace}/results/")
+    print("   Naming: {experiment}_{version}_{timestamp}_{run_hash}")
+    print("   Provenance: Database run ID hash for audit trail")
+    print("   Contents: Complete replication packages")
+    print()
+    print("🔗 Provenance Tracking Features:")
+    print("   - Content-addressable storage")
+    print("   - Hash-based integrity verification")
+    print("   - Complete audit trails")
+    print("   - Research workspace integration")
+    print("   - Database run ID correlation")
+    print()
     
-    # Search experimental code if requested OR if no production matches
-    experimental_matches = 0
-    if args.include_experimental or production_matches == 0:
-        if production_matches == 0:
-            print("\n⚠️  No production systems found. Checking experimental...")
-        experimental_matches = searcher.search_experimental_code(args.query)
+    # Workspace setup guidance
+    print("🚀 RECOMMENDED WORKFLOW:")
+    print()
+    print("1. System Health Check:")
+    print("   ./scripts/system_health_check.sh basic")
+    print("   Results → tests/system_health/results/")
+    print()
+    print("2. Live Experiments:")
+    print("   python3 scripts/applications/comprehensive_experiment_orchestrator.py \\")
+    print("     --experiment-config path/to/experiment.yaml \\")
+    print("     --research-workspace path/to/workspace")
+    print("   Results → workspace/results/{experiment}_{hash}/")
+    print()
+    print("3. Provenance Verification:")
+    print("   - Check database run IDs in results folder names")
+    print("   - Verify content hashes in .provenance.yaml files")
+    print("   - Use replication packages for independent verification")
+    print()
     
-    # Search deprecated code only if explicitly requested
-    if args.include_deprecated:
-        searcher.search_deprecated_code(args.query)
+    if not relevant_systems:
+        print("⚠️  NO DIRECT MATCHES FOUND")
+        print()
+        print("Consider using these general-purpose systems:")
+        print("- ComprehensiveExperimentOrchestrator for most functionality")
+        print("- LLMQualityAssuranceSystem for quality validation")
+        print("- SystemHealthCheck for validation testing")
     
-    # Show inventory
-    show_inventory()
-    
-    # Generate recommendations
-    print("\n" + "=" * 60)
-    print("🎯 SEARCH RESULTS SUMMARY:")
-    print(f"Production matches: {production_matches}")
-    print(f"Experimental matches: {experimental_matches}")
-    
-    if production_matches > 0:
-        print("\n✅ FOUND PRODUCTION SYSTEMS!")
-        print("Recommendation: Use or enhance existing production code")
-        print("⚠️  Avoid rebuilding - enhance what exists!")
-    elif experimental_matches > 0:
-        print("\n🧪 Found experimental systems only")
-        print("Recommendation: Consider promoting experimental code to production")
-        print("📋 Review experimental code for production readiness")
-    else:
-        print("\n🔍 No existing systems found")
-        print("✅ Safe to build new - but double-check inventory first!")
-    
-    print("\n✅ PREVENTION CHECKLIST:")
-    print("1. ☐ Did you find existing functionality above?")
-    print("2. ☐ Can you enhance existing code instead of rebuilding?") 
-    print("3. ☐ If building new, will it be clearly superior?")
-    print("4. ☐ Have you documented why existing solutions are insufficient?")
-    print("5. ☐ Will you update EXISTING_SYSTEMS_INVENTORY.md when done?")
-    print("6. ☐ Are you building in experimental/ first?")
-    print("\n🛡️ Remember: Production code first, experimental second, deprecated never!")
+    print("=" * 60)
+    print("✅ REMEMBER: Always check existing systems before building new ones!")
+    print("📖 See ai_assistant_compliance_rules.md for complete guidance")
 
 if __name__ == "__main__":
-    main() 
+    if len(sys.argv) > 1:
+        query = " ".join(sys.argv[1:])
+        check_existing_systems(query)
+    else:
+        print("Usage: python3 check_existing_systems.py <functionality_description>")
+        print("Example: python3 check_existing_systems.py 'system health check'") 

@@ -497,7 +497,8 @@ class LLMQualityAssuranceSystem:
         framework: str,
         llm_response: Dict[str, Any],
         parsed_scores: Dict[str, float],
-        experiment_context: ExperimentContext = None
+        experiment_context: ExperimentContext = None,
+        algorithm_config: Dict[str, Any] = None
     ) -> QualityAssessment:
         """
         Run complete quality assurance validation on LLM analysis.
@@ -539,7 +540,12 @@ class LLMQualityAssuranceSystem:
         quality_checks.extend(anomaly_checks)
         anomalies.extend(detected_anomalies)
         
-        # NEW: Layer 6: Experiment-Specific Validation
+        # NEW: Layer 6: Algorithm Configuration Validation
+        if algorithm_config:
+            algorithm_checks = self._validate_algorithm_configuration(algorithm_config, parsed_scores)
+            quality_checks.extend(algorithm_checks)
+        
+        # NEW: Layer 7: Experiment-Specific Validation
         if experiment_context:
             # Create mock analysis result for experiment validation
             analysis_result = {
@@ -836,6 +842,124 @@ class LLMQualityAssuranceSystem:
         
         return checks
     
+    def _validate_algorithm_configuration(self, algorithm_config: Dict[str, Any], parsed_scores: Dict[str, float]) -> List[QualityCheck]:
+        """Layer 6: Algorithm Configuration Validation."""
+        checks = []
+        
+        # Validate dominance amplification configuration
+        if 'dominance_amplification' in algorithm_config:
+            dom_config = algorithm_config['dominance_amplification']
+            
+            # Check if amplification parameters are valid
+            if 'enabled' in dom_config and dom_config['enabled']:
+                threshold = dom_config.get('threshold', 0.7)
+                multiplier = dom_config.get('multiplier', 1.1)
+                
+                # Validate threshold range
+                threshold_valid = 0.0 <= threshold <= 1.0
+                checks.append(QualityCheck(
+                    layer="ALGORITHM_CONFIG",
+                    check_name="dominance_threshold_valid",
+                    passed=threshold_valid,
+                    score=1.0 if threshold_valid else 0.0,
+                    message=f"Dominance amplification threshold: {threshold} {'(valid)' if threshold_valid else '(invalid range)'}",
+                    severity="CRITICAL" if not threshold_valid else "INFO",
+                    details={'threshold': threshold, 'valid_range': '0.0-1.0'}
+                ))
+                
+                # Validate multiplier range
+                multiplier_valid = 1.0 <= multiplier <= 2.0
+                checks.append(QualityCheck(
+                    layer="ALGORITHM_CONFIG",
+                    check_name="dominance_multiplier_valid",
+                    passed=multiplier_valid,
+                    score=1.0 if multiplier_valid else 0.0,
+                    message=f"Dominance amplification multiplier: {multiplier} {'(valid)' if multiplier_valid else '(invalid range)'}",
+                    severity="WARNING" if not multiplier_valid else "INFO",
+                    details={'multiplier': multiplier, 'valid_range': '1.0-2.0'}
+                ))
+                
+                # Check if any scores would be amplified
+                amplified_count = sum(1 for score in parsed_scores.values() if score > threshold)
+                checks.append(QualityCheck(
+                    layer="ALGORITHM_CONFIG",
+                    check_name="dominance_amplification_application",
+                    passed=True,  # This is informational
+                    score=1.0,
+                    message=f"Dominance amplification applied to {amplified_count}/{len(parsed_scores)} scores (threshold: {threshold})",
+                    severity="INFO",
+                    details={'amplified_scores': amplified_count, 'total_scores': len(parsed_scores), 'threshold': threshold}
+                ))
+        
+        # Validate adaptive scaling configuration
+        if 'adaptive_scaling' in algorithm_config:
+            scale_config = algorithm_config['adaptive_scaling']
+            
+            if 'enabled' in scale_config and scale_config['enabled']:
+                base_scaling = scale_config.get('base_scaling', 0.65)
+                max_scaling = scale_config.get('max_scaling', 0.95)
+                variance_factor = scale_config.get('variance_factor', 0.3)
+                mean_factor = scale_config.get('mean_factor', 0.1)
+                
+                # Validate scaling range ordering
+                scaling_order_valid = base_scaling < max_scaling
+                checks.append(QualityCheck(
+                    layer="ALGORITHM_CONFIG",
+                    check_name="scaling_range_valid",
+                    passed=scaling_order_valid,
+                    score=1.0 if scaling_order_valid else 0.0,
+                    message=f"Adaptive scaling range: {base_scaling}-{max_scaling} {'(valid)' if scaling_order_valid else '(invalid: base >= max)'}",
+                    severity="CRITICAL" if not scaling_order_valid else "INFO",
+                    details={'base_scaling': base_scaling, 'max_scaling': max_scaling}
+                ))
+                
+                # Validate sensitivity factors
+                factors_valid = variance_factor > 0 and mean_factor > 0
+                checks.append(QualityCheck(
+                    layer="ALGORITHM_CONFIG",
+                    check_name="sensitivity_factors_valid",
+                    passed=factors_valid,
+                    score=1.0 if factors_valid else 0.0,
+                    message=f"Sensitivity factors: variance={variance_factor}, mean={mean_factor} {'(valid)' if factors_valid else '(invalid: must be > 0)'}",
+                    severity="WARNING" if not factors_valid else "INFO",
+                    details={'variance_factor': variance_factor, 'mean_factor': mean_factor}
+                ))
+        
+        # Validate prompting integration configuration
+        if 'prompting_integration' in algorithm_config:
+            prompt_config = algorithm_config['prompting_integration']
+            
+            # Check for required documentation fields
+            required_fields = ['dominance_instruction', 'amplification_purpose', 'methodology_reference']
+            missing_fields = [field for field in required_fields if not prompt_config.get(field, '').strip()]
+            
+            documentation_complete = len(missing_fields) == 0
+            checks.append(QualityCheck(
+                layer="ALGORITHM_CONFIG",
+                check_name="prompting_documentation_complete",
+                passed=documentation_complete,
+                score=1.0 - (len(missing_fields) / len(required_fields)),
+                message=f"Prompting integration documentation: {'complete' if documentation_complete else f'missing {missing_fields}'}",
+                severity="WARNING" if not documentation_complete else "INFO",
+                details={'missing_fields': missing_fields, 'required_fields': required_fields}
+            ))
+        
+        # Overall algorithm configuration assessment
+        config_sections = ['dominance_amplification', 'adaptive_scaling', 'prompting_integration']
+        present_sections = [section for section in config_sections if section in algorithm_config]
+        
+        checks.append(QualityCheck(
+            layer="ALGORITHM_CONFIG",
+            check_name="algorithm_config_completeness",
+            passed=len(present_sections) >= 2,  # At least 2 sections should be present
+            score=len(present_sections) / len(config_sections),
+            message=f"Algorithm configuration sections: {len(present_sections)}/{len(config_sections)} present",
+            severity="INFO",
+            details={'present_sections': present_sections, 'total_sections': config_sections}
+        ))
+        
+        return checks
+    
     def _detect_anomalies(self, parsed_scores: Dict[str, float]) -> Tuple[List[QualityCheck], List[str]]:
         """Layer 6: Anomaly Detection."""
         checks = []
@@ -1065,7 +1189,8 @@ def validate_llm_analysis(
     framework: str, 
     llm_response: Dict[str, Any], 
     parsed_scores: Dict[str, float],
-    experiment_context: ExperimentContext = None
+    experiment_context: ExperimentContext = None,
+    algorithm_config: Dict[str, Any] = None
 ) -> QualityAssessment:
     """
     Convenience function to run LLM quality assurance validation.
@@ -1081,7 +1206,7 @@ def validate_llm_analysis(
         QualityAssessment with confidence scoring and validation results
     """
     qa_system = LLMQualityAssuranceSystem()
-    return qa_system.validate_llm_analysis(text_input, framework, llm_response, parsed_scores, experiment_context) 
+    return qa_system.validate_llm_analysis(text_input, framework, llm_response, parsed_scores, experiment_context, algorithm_config) 
 
 # Module exports
 __all__ = [

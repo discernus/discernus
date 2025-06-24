@@ -1,266 +1,109 @@
-# System Health Test Suite
+# System Health Test Assets
 
 ## Overview
 
-This directory contains self-contained system health validation tests for the Discernus platform. These tests verify that core system components work correctly without depending on external research workspaces or framework templates.
+This directory contains **test assets** used by the production orchestrator when running system health validation. The standalone test system has been **deprecated** and replaced with integrated system health mode in the production orchestrator.
+
+## 🔄 Migration Status: COMPLETE
+
+- ❌ **Old**: Standalone `test_system_health.py` (deprecated)
+- ✅ **New**: `scripts/system_health_check.sh` (uses production orchestrator)
 
 ## Directory Structure
 
 ```
 tests/system_health/
 ├── README.md                           # This documentation
-├── test_system_health.py              # Main system health validation script
-├── frameworks/                        # Dedicated test frameworks
-│   └── moral_foundations_theory/      # Test framework for MFT validation
+├── frameworks/                        # Test framework assets
+│   └── moral_foundations_theory/      # MFT test framework
 │       └── moral_foundations_theory_framework.yaml
-├── test_experiments/                  # Dedicated test experiments
-│   └── system_health_test.yaml        # Basic system health experiment
+├── test_experiments/                  # Test experiment definitions
+│   └── system_health_test.yaml        # System health validation experiment
 └── results/                           # Test result storage
-    ├── latest.json                    # Latest test results (JSON)
-    ├── system_health_YYYYMMDD_HHMMSS.json # Timestamped detailed results
-    └── summary_YYYYMMDD_HHMMSS.txt    # Human-readable summaries
+    ├── latest.json                    # Latest test results
+    └── system_health_*.json           # Timestamped results
 ```
 
 ## Purpose
 
-The system health tests are designed to validate:
+This directory provides **dedicated test assets** for system health validation that are:
+- **Self-contained** - No dependencies on research workspaces
+- **Stable** - Won't change with research work
+- **Production-integrated** - Used by the actual production orchestrator
 
-1. **Core Imports** - All critical system components can be imported
-2. **Coordinate System** - Enhanced coordinate algorithms work correctly
-3. **QA System** - Quality assurance system initializes and functions
-4. **Framework Loading** - Framework manager can load YAML frameworks
-5. **Experiment Definition** - Experiment definitions can be parsed and validated
-6. **End-to-End Experiment Execution** - Complete experiment pipeline with 9-dimensional validation
+## Current Usage
 
-## 🎯 9-Dimensional Experiment Validation Framework
-
-The end-to-end test validates that the system can deliver truly successful experiments according to your comprehensive framework:
-
-### **✅ All 9 Dimensions Validated**
-
-1. **Design Validation** - Experiment definition YAML loads and validates
-2. **Dependency Validation** - All experiment components (frameworks, engines, QA) initialize
-3. **Execution Integrity** - Complete analysis pipeline executes successfully
-4. **Data Persistence** - Results stored and retrievable from database/files
-5. **Asset Management** - Reports, visualizations, and academic packages generated
-6. **Reproducibility** - Results stored for immediate use and future reproduction
-7. **Scientific Validity** - QA system validates results meet confidence thresholds
-8. **Design Alignment** - Results appropriate to experiment design and expectations
-9. **Research Value** - Complete workflow delivers actionable insights to researchers
-
-## Design Principles
-
-### Self-Contained Testing
-- **No external dependencies** on research workspaces or template archives
-- **Dedicated test assets** that are purpose-built for validation
-- **Consistent test environment** that doesn't change with research work
-
-### Clear Separation of Concerns
-- **`framework_templates/`** = Archive of "original DNA" framework templates (not for testing)
-- **`research_workspaces/`** = Active research frameworks and experiments (not for testing)
-- **`tests/system_health/`** = Dedicated system validation assets (for testing only)
-
-## Usage
-
-Run the system health validation:
-
+### 🏥 System Health Checks (Recommended)
 ```bash
-# From project root
-python tests/system_health/test_system_health.py
+# Basic health check
+scripts/system_health_check.sh
 
-# Or from the test directory
-cd tests/system_health
-python test_system_health.py
+# CI/CD mode
+scripts/system_health_check.sh ci
 
-# Disable result storage (console output only)
-python tests/system_health/test_system_health.py --no-save
-
-# Include real LLM integration test (costs money!)
-python tests/system_health/test_system_health.py --include-real-llm
-
-# Fast CI/CD mode: no storage, mock-only
-python tests/system_health/test_system_health.py --no-save
+# Pre-release validation  
+scripts/system_health_check.sh release
 ```
 
-## Result Storage
-
-Test results are automatically saved to `tests/system_health/results/` in multiple formats:
-
-### 1. **JSON Results** (Machine-readable)
-- **`latest.json`** - Always contains the most recent test results
-- **`system_health_YYYYMMDD_HHMMSS.json`** - Timestamped detailed results
-
-**JSON Structure:**
-```json
-{
-  "summary": {
-    "total_tests": 5,
-    "passed_tests": 5,
-    "success_rate": 100.0,
-    "overall_status": "HEALTHY",
-    "duration_seconds": 0.46,
-    "start_time": "2025-06-23T07:37:26.742221"
-  },
-  "tests": [
-    {
-      "test_name": "Core Imports",
-      "passed": true,
-      "details": { "coordinate_engine": "success" },
-      "error": null
-    }
-  ],
-  "metadata": {
-    "test_suite_version": "1.0.0",
-    "python_version": "3.9.6",
-    "platform": "darwin"
-  }
-}
-```
-
-### 2. **Text Summaries** (Human-readable)
-- **`summary_YYYYMMDD_HHMMSS.txt`** - Human-readable test reports
-
-**Text Format:**
-```
-🏥 DISCERNUS SYSTEM HEALTH VALIDATION
-==================================================
-Run Time: 2025-06-23 07:37:26
-Duration: 0.46 seconds
-Status: HEALTHY
-Tests: 5/5 passed (100.0%)
-
-✅ PASS Core Imports
-   coordinate_engine: success
-   qa_system: success
-   framework_manager: success
-```
-
-### 3. **Accessing Results**
-
-**Latest Results (JSON):**
+### 🔧 Direct Orchestrator Usage
 ```bash
-# View latest test status
-cat tests/system_health/results/latest.json | jq '.summary.overall_status'
-
-# Check specific test details
-cat tests/system_health/results/latest.json | jq '.tests[] | select(.test_name=="Framework Loading")'
+# Direct production orchestrator with system health mode
+python3 scripts/applications/comprehensive_experiment_orchestrator.py \
+  tests/system_health/test_experiments/system_health_test.yaml \
+  --system-health-mode
 ```
 
-**Historical Results:**
-```bash
-# List all test runs
-ls tests/system_health/results/system_health_*.json
+## Asset Details
 
-# View specific run
-cat tests/system_health/results/system_health_20250623_073726.json
-```
+### Test Framework
+- **Location**: `frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml`
+- **Purpose**: Provides stable MFT framework for testing coordinate calculations
+- **Referenced by**: Production orchestrator when `--system-health-mode` is enabled
 
-Expected output:
-```
-🏥 DISCERNUS SYSTEM HEALTH VALIDATION
-==================================================
-🧪 Testing Core System Imports...
-✅ DiscernusCoordinateEngine import successful
-✅ LLMQualityAssuranceSystem import successful
-✅ FrameworkManager import successful
+### Test Experiment
+- **Location**: `test_experiments/system_health_test.yaml`
+- **Purpose**: Defines system health validation experiment specification
+- **Features**: Mock LLM analysis, zero API costs, comprehensive validation
 
-🎯 Testing Enhanced Coordinate System...
-✅ Coordinate engine initialization successful
-✅ Coordinate calculation working: (0.581, 0.252), distance: 0.633
-✅ Dominance amplification working
-✅ Adaptive scaling working: 0.910
+### Results Storage
+- **Location**: `results/`
+- **Format**: JSON results with detailed validation tracking
+- **Latest**: Always available at `results/latest.json`
 
-🛡️ Testing QA System...
-✅ QA system initialization successful
-✅ QA system basic functionality available
+## Integration Points
 
-🏗️ Testing Framework Loading...
-✅ Test framework loading successful
-✅ Framework has 6 anchors (anchors terminology)
+The production orchestrator automatically:
+1. **Switches framework base directory** to `tests/system_health` in system health mode
+2. **Uses mock LLM client** to avoid API costs
+3. **Validates all 9 dimensions** of experiment execution
+4. **Saves results** to this directory's results folder
 
-📋 Testing Experiment Definition...
-✅ Test experiment definition loading successful
-✅ Experiment definition structure valid
-✅ Experiment: System_Health_Test
-✅ Description: Basic system health validation test - validates core...
-✅ Has 3 success criteria defined
-✅ Component types: frameworks, models
-✅ Experiment correctly references test framework
+## Maintenance
 
-🎪 Testing End-to-End Experiment Execution...
-✅ Design validation: Experiment definition loaded
-✅ Dependency validation: All components loaded successfully
-🎭 Using mock LLM for analysis...
-✅ Execution integrity: Full pipeline executed successfully
-✅ Data persistence: Results saved successfully
-✅ Asset management: Report generated successfully
-✅ Reproducibility: Results successfully stored and retrieved
-✅ Scientific validity: QA confidence threshold met
-✅ Design alignment: Results match expected moral foundation activations
-✅ Research value: Complete workflow delivers actionable insights
-🎉 End-to-end experiment execution: ALL 9 DIMENSIONS VALIDATED
+### When to Update
+- **Framework structure changes**: Update test framework YAML
+- **Experiment specification changes**: Update system health experiment
+- **New validation requirements**: Modify experiment success criteria
 
-==================================================
-🏆 VALIDATION SUMMARY: 6/6 tests passed
-🎉 System is healthy and ready for experiments!
-```
+### Files NOT to Modify
+- Don't add production frameworks here (use `framework_templates/` instead)
+- Don't add research experiments here (use `research_workspaces/` instead)
+- Don't modify production orchestrator references to this directory
 
-## Maintenance Notes
-
-### Adding New Tests
-1. Add test functions to `test_system_health.py`
-2. Update the `tests` list in `run_comprehensive_validation()`
-3. Add any required test assets to the appropriate subdirectories
-
-### Framework Updates
-If core framework structure changes:
-1. Update `frameworks/moral_foundations_theory/` with new structure
-2. Update validation logic in `test_framework_loading()`
-3. Ensure test experiment still references correct framework path
-
-### Integration with CI/CD
-This test suite should be run as part of:
-- Pre-commit hooks
-- CI/CD pipeline validation
-- Development environment setup verification
-- Release candidate validation
-
-**CI/CD Integration Examples:**
+## CI/CD Integration
 
 ```yaml
 # GitHub Actions example
 - name: System Health Check
+  run: scripts/system_health_check.sh ci
+  
+- name: Check Health Status
   run: |
-    python tests/system_health/test_system_health.py
-    # Upload results as artifacts
-    echo "HEALTH_STATUS=$(cat tests/system_health/results/latest.json | jq -r '.summary.overall_status')" >> $GITHUB_ENV
-
-# Jenkins pipeline example
-stage('Health Check') {
-    steps {
-        sh 'python tests/system_health/test_system_health.py'
-        archiveArtifacts artifacts: 'tests/system_health/results/*.json'
-        script {
-            def healthStatus = readJSON file: 'tests/system_health/results/latest.json'
-            if (healthStatus.summary.overall_status != 'HEALTHY') {
-                error "System health check failed: ${healthStatus.summary.overall_status}"
-            }
-        }
-    }
-}
+    if [[ "$(cat tests/system_health/results/latest.json | jq -r '.summary.overall_status')" != "HEALTHY" ]]; then
+      exit 1
+    fi
 ```
 
-**Monitoring Integration:**
-```bash
-# Automated monitoring script
-#!/bin/bash
-python tests/system_health/test_system_health.py
-STATUS=$(cat tests/system_health/results/latest.json | jq -r '.summary.overall_status')
-if [ "$STATUS" != "HEALTHY" ]; then
-    # Send alert to monitoring system
-    curl -X POST "https://monitoring.example.com/alert" \
-         -d "status=$STATUS&component=discernus-system-health"
-fi
-```
+---
 
-The self-contained nature ensures consistent results across all environments. 
+**📚 For complete system health documentation, see**: [PRODUCTION_ORCHESTRATOR_SYSTEM_HEALTH_ENHANCEMENT_PLAN.md](../../PRODUCTION_ORCHESTRATOR_SYSTEM_HEALTH_ENHANCEMENT_PLAN.md) 

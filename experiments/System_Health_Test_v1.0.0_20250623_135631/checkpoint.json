@@ -1,0 +1,10 @@
+{
+  "experiment_id": "System_Health_Test_v1.0.0_20250623_135631",
+  "state": "pre_flight_validation",
+  "timestamp": "2025-06-23T13:56:31.148830",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "message": "Starting pre-flight validation"
+  }
+}

@@ -3,6 +3,81 @@ Discernus - Changelog
 [Unreleased]
 
 ### Added
+
+## [Framework Specification v3.1 - Phase 2 Complete] - 2025-06-23
+
+### Completed - All Core Frameworks Migrated to v3.1 Compliance
+- **7 frameworks successfully migrated** to Framework Specification v3.1 architecture
+  - **Moral Foundations Theory v1.0**: 6 axes with angle conflict resolution and opposite_of validation
+  - **Civic Virtue v1.0**: 10-anchor structure restored from degraded 2-anchor version  
+  - **IDITI v1.0**: Binary framework (Individual Dignity ↔ Tribal Identity)
+  - **Lakoff v1.0**: Arc clustering framework testing family model coherence hypothesis
+  - **Entman v1.0**: 4 independent anchors testing framing function independence
+  - **Populism vs Pluralism v1.0**: Binary democratic theory framework
+  - **Business Ethics v1.0**: 5 axes with stakeholder theory domain clustering
+- **Test framework aligned**: System health MFT framework updated to match v3.1 structure
+- **Handoff documentation created**: Complete project status and next steps documented
+
+### Architecture Revolution - Framework Specification v3.1
+- **BREAKING**: Eliminated rigid `framework_type` field in favor of attribute-based architecture
+- **Enhanced**: Frameworks now define capabilities through component presence (axes, anchors, positioning_strategy)
+- **Innovation**: Mixed positioning system supporting both degrees and clock positions within same framework
+- **Validation**: Added `opposite_of` links for bidirectional validation and angle conflict detection
+- **Academic**: Integrated README content into framework descriptions for self-documenting systems
+- **Versioning**: Clean slate approach - all frameworks reset to v1.0 for fresh academic start
+
+### Technical Implementation Changes
+- **Positioning flexibility**: Clock face positions (3 o'clock = 90°, 6 o'clock = 180°) mixed with traditional degrees
+- **Self-documenting**: README content integrated directly into framework YAML descriptions
+- **Enhanced validation**: Bidirectional opposite_of links enable sophisticated angle validation
+- **Citation standardization**: "Discernus Framework: Name vX.Y (Author, Year)" format enforced
+- **Registry keys**: Systematic framework_registry_key generation for database integration
+
+### Documentation & Project Management  
+- **Comprehensive handoff**: `research_workspaces/june_2025_research_dev_workspace/HANDOFF_DOCUMENTATION.md`
+- **Phase 3 planning**: Validator and normalization tools implementation roadmap
+- **Framework locations**: All migrated frameworks in `research_workspaces/june_2025_research_dev_workspace/frameworks/`
+- **Compliance integration**: Updated AI assistant rules reflecting v3.1 architecture
+
+### Ready for Phase 3: Validator & Tools Development
+- Framework Validator: `experimental/prototypes/framework_validator_v3_1.py` (priority 1)
+- Normalization Tools: Version cleanup and standardization automation
+- Integration Testing: Compatibility with existing LLMQualityAssuranceSystem and related tools
+- Production Deployment: Framework loading logic updates and system integration
+
+### Changed
+- **BREAKING**: De-dockerized project for improved local development workflow
+- Removed Docker validation from comprehensive experiment orchestrator
+- Updated AI assistant compliance rules for local development approach
+- Simplified database configuration for localhost connections
+- Updated documentation and setup guides to reflect local development
+- Modified Makefile commands for local Python environment instead of Docker
+
+### Removed
+- Dockerfile, docker-compose.yml, and .dockerignore configuration files
+- Docker environment validation and container networking requirements
+- Docker-specific database host expectations and warnings
+
+### Added
+- Local development setup instructions in updated documentation
+- Enhanced environment validation for local PostgreSQL connections
+- Streamlined testing workflow without container overhead
+
+### Deprecated
+- **execute_experiment_definition.py** - DEPRECATED and moved to `deprecated/by-date/2025-06-25/`
+  - **Replacement**: Use `scripts/applications/comprehensive_experiment_orchestrator.py` instead
+  - **Rationale**: Obsolete - superseded by comprehensive orchestrator (4759 lines vs 642 lines)
+  - **Key Limitations of Deprecated Script**:
+    - JSON only (no YAML support)
+    - Basic validation (no 9-dimensional framework)
+    - No checkpoint/resume capability
+    - Basic academic exports (no advanced pipeline)
+    - No research workspace integration
+    - No transaction safety
+  - **Migration Command**: Replace `execute_experiment_definition.py experiment.json` with `comprehensive_experiment_orchestrator.py experiment.yaml`
+  - **Updated References**: ai_assistant_compliance_rules.md, .cursorrules, validate_ai_assistant_compliance.py
+
+### Added
 - **MECEC ACTIONABLE Items Reconciliation**: Comprehensive integration of 5 strategic ACTIONABLE documents into current MVP iteration
   - `MECEC_ACTIONABLE_RECONCILIATION_2025_06_22.md` - Master reconciliation document resolving timeline conflicts
   - Staged implementation approach: 1-week core refactor + 12-week extended plan

@@ -17,40 +17,48 @@
 
 ---
 
-## 🐳 RULE 0: DOCKER-FIRST DEVELOPMENT ENVIRONMENT
+## 🖥️ RULE 0: LOCAL DEVELOPMENT ENVIRONMENT
 
-**ALL development and testing MUST use the Docker containerized environment.**
+**ALL development and testing uses local Python environment with PostgreSQL.**
 
-### ✅ MANDATORY: Use Docker for Testing
+### ✅ MANDATORY: Local Development Setup
 ```bash
-# Start the environment
-docker-compose up -d
+# Set up local development environment
+python3 -m venv venv
+source venv/bin/activate  # or `venv\Scripts\activate` on Windows
+pip install -r requirements.txt
 
-# Run tests inside containers
-docker-compose exec app python3 check_database.py
-docker-compose exec app python3 scripts/applications/comprehensive_experiment_orchestrator.py
+# Set up environment variables
+cp env.example .env
+# Edit .env with your API keys and database settings
 
-# Database operations inside containers
-docker-compose exec db psql -U postgres -d discernus
+# Run local PostgreSQL (macOS with Homebrew)
+brew install postgresql
+brew services start postgresql
+createdb discernus
+
+# Test database connection
+python3 check_database.py
+
+# Run the orchestrator locally
+python3 scripts/applications/comprehensive_experiment_orchestrator.py
 ```
 
-### ❌ FORBIDDEN: Host/Local Testing
-- **Never test against host PostgreSQL** (localhost:5432)
-- **Never run Python scripts directly on host** (python3 script.py)
-- **Never assume local file paths** (/Volumes/dev/discernus)
-
-### 🎯 Why This Rule Exists
-The project is designed for **transportable, self-contained environments**. Testing outside Docker:
-- Creates false positives (works locally, fails in deployment)
-- Uses wrong database instances
-- Misses container networking issues
-- Violates the "transportable environment" architecture goal
+### 🎯 Why This Rule Changed
+Local development provides:
+- **Faster iteration cycles** - No container rebuild delays
+- **Easier debugging** - Direct access to code and processes  
+- **Better file system performance** - No Docker file sync issues
+- **Simplified setup** - Single environment instead of Docker + local hybrid
 
 ### 🔍 Environment Validation
-Before any development work, verify you're in the correct environment:
+Before any development work, verify your local setup:
 ```bash
-# This should show container networking (DB_HOST=db, not localhost)
-docker-compose exec app env | grep -E "(DB_HOST|DATABASE_URL)"
+# Check database connectivity
+python3 -c "from src.utils.database import get_database_url; print('DB OK:', get_database_url())"
+
+# Check API keys
+python3 -c "import os; from dotenv import load_dotenv; load_dotenv(); print('OpenAI:', 'OK' if os.getenv('OPENAI_API_KEY') else 'Missing')"
 ```
 
 ---
@@ -191,7 +199,7 @@ Do **not** duplicate or replace existing production systems unnecessarily
 
 ### Experiment Execution
 
-- \`scripts/applications/execute_experiment_definition.py\`
+- \`scripts/applications/comprehensive_experiment_orchestrator.py\` (the comprehensive production orchestrator)
 - \`scripts/applications/comprehensive_experiment_orchestrator.py\` – Full orchestration with checkpoint/resume
 
 ### Academic Export
@@ -257,8 +265,8 @@ An assistant is **compliant** if it:
 
 | Violation | Why It's Wrong |
 |----------|----------------|
-| **Testing on host system** | **Must use Docker containers (Rule 0)** |
-| **Connecting to localhost:5432** | **Must use containerized database** |
+| **Not setting up local environment** | **Must use proper local development setup (Rule 0)** |
+| **Missing .env configuration** | **Must configure local environment variables** |
 | Suggesting new QA system | Use \`LLMQualityAssuranceSystem\` instead |
 | Using "AI Academic Advisor" | Deprecated and ineffective |
 | Creating new files in \`src/\` | Must go through \`experimental/\` first |

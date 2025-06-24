@@ -43,20 +43,20 @@ cp env.example .env
 python3 -m pytest tests/unit/ -v
 ```
 
-### **🐳 Docker (CI/CD and Final Validation)**
+### **🧪 Testing and Validation**
 
-**When to Use Docker:**
-- ✅ Final integration testing before commits
-- ✅ Production deployment simulation
-- ✅ CI/CD pipeline (GitHub Actions)
-- ✅ Environment consistency validation
+**When to Test:**
+- ✅ Before committing changes
+- ✅ After major modifications
+- ✅ During development iterations
+- ✅ System health validation
 
-**Quick Docker Validation:**
+**Quick Local Testing:**
 ```bash
-# Validate your changes work in Docker before committing
-docker-compose up -d
-docker-compose run --rm app python3 -m pytest tests/unit/ -v
-docker-compose down
+# Validate your changes work locally before committing
+python3 -m pytest tests/unit/ -v
+python3 check_database.py
+python3 scripts/applications/comprehensive_experiment_orchestrator.py --system-health-mode
 ```
 
 ---
@@ -68,14 +68,14 @@ docker-compose down
 2. **Enhance Don't Replace**: Use existing production systems when possible
 3. **Build in Experimental**: New code goes in `experimental/` first
 4. **Test Locally**: `python3 -m pytest tests/unit/ -v`
-5. **Validate in Docker**: Quick Docker validation before commits
+5. **Run Tests**: Local testing and validation before commits
 
 ### **For Human Developers:**
 1. **Search First**: Check existing systems before building
 2. **Follow Guided Workflow**: `python3 scripts/production/new_development_workflow.py`
 3. **Build in Experimental**: Prototype in `experimental/` first
 4. **Test Locally**: Fast local testing during development
-5. **Docker Validation**: Final validation in containerized environment
+5. **Local Testing**: Final validation in local environment
 
 ---
 
@@ -136,11 +136,12 @@ sudo apt-get install postgresql  # Ubuntu
 # Update .env: DATABASE_URL=sqlite:///discernus.db
 ```
 
-### **Docker (Final Validation):**
+### **Local PostgreSQL:**
 ```bash
-# Uses Docker Compose managed PostgreSQL
-docker-compose up -d db  # Start just the database
-# App connects to Docker-managed database
+# Uses local PostgreSQL installation
+brew services start postgresql  # macOS
+sudo service postgresql start   # Linux
+# App connects to localhost database
 ```
 
 ---
@@ -168,18 +169,18 @@ A successful development session:
 - ✅ Enhanced existing systems when possible  
 - ✅ Built new development in experimental/ first
 - ✅ Fast local testing during development
-- ✅ Docker validation before commits
+- ✅ Local testing before commits
 - ✅ Followed clean code organization standards
 - ✅ Never referenced deprecated code
 
 ---
 
-## 🔄 **Path to Full Containerization**
+## 🔄 **Path to Production Deployment**
 
-**This hybrid approach maintains containerization readiness:**
+**This local development approach maintains production readiness:**
 - 📋 All dependencies tracked in `requirements.txt`
-- 🔧 Docker files maintained and tested
-- 🧪 Regular Docker validation prevents drift
-- 📦 Easy transition back to Docker-first when stability increases
+- 🔧 Environment configuration properly managed
+- 🧪 Regular local testing ensures reliability
+- 📦 Simplified workflow eliminates development complexity
 
 **🛡️ These rules exist because this project has repeatedly wasted time rebuilding inferior versions of existing sophisticated systems. Following these rules prevents that waste.** 

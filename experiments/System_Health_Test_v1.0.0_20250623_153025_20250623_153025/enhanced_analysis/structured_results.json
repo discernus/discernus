@@ -1,0 +1,89 @@
+{
+  "structured_data": "  analysis_id text_id  ... narrative_position_y                   timestamp\n0  analysis_0  text_0  ...                  0.0  2025-06-23T15:30:25.801199\n\n[1 rows x 11 columns]",
+  "metadata": {
+    "total_analyses": 1,
+    "successful_analyses": 1,
+    "failed_analyses": 0,
+    "total_cost": 0.0,
+    "cost_efficiency": 0.0,
+    "extraction_timestamp": "2025-06-23T15:30:25.831904",
+    "well_columns": [],
+    "frameworks_used": [
+      "moral_foundations_theory"
+    ],
+    "models_used": [
+      "unknown"
+    ]
+  },
+  "raw_execution_results": {
+    "results": [
+      {
+        "run_id": "health_check",
+        "framework": "moral_foundations_theory",
+        "text_content": "We must protect innocent children from harm and ensure they receive fair treatment in our justice system.",
+        "analysis_result": {
+          "moral_foundation_scores": {
+            "care": 0.85,
+            "fairness": 0.3,
+            "loyalty": 0.15,
+            "authority": 0.1,
+            "sanctity": 0.05,
+            "liberty": 0.2
+          },
+          "evidence": {
+            "care": [
+              "protect the innocent",
+              "from harm",
+              "safety of vulnerable"
+            ],
+            "fairness": [
+              "proportional response",
+              "equal treatment"
+            ],
+            "loyalty": [
+              "team solidarity"
+            ],
+            "authority": [
+              "respect hierarchy"
+            ],
+            "sanctity": [
+              "moral purity"
+            ],
+            "liberty": [
+              "individual freedom",
+              "personal choice"
+            ]
+          },
+          "reasoning": "System health test analysis with realistic mock data for validation purposes.",
+          "confidence": 0.78,
+          "total_tokens": 150,
+          "cost_estimate": 0.0,
+          "api_cost": 0.0,
+          "raw_scores": {
+            "care": 0.85,
+            "fairness": 0.3,
+            "loyalty": 0.15,
+            "authority": 0.1,
+            "sanctity": 0.05,
+            "liberty": 0.2
+          },
+          "narrative_position": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "success": true,
+          "coordinates_calculated": true
+        },
+        "success": true,
+        "api_cost": 0.0,
+        "timestamp": "2025-06-23T15:30:25.801199",
+        "mode": "system_health_mock"
+      }
+    ],
+    "total_analyses": 1,
+    "successful_analyses": 1,
+    "total_cost": 0.0,
+    "mode": "system_health",
+    "timestamp": "2025-06-23T15:30:25.801203"
+  }
+}

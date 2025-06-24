@@ -1,0 +1,7 @@
+asset_id: System_Health_Test_v1.0.0_20250623_135631
+content_hash: a997099d7ed5df402257fb96822ba0116f282fa8b2ba27f57bbebcaf93252aa0
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-23T13:56:31.110377'
+source_path: tests/system_health/test_experiments/system_health_test.yaml
+validation_status: validated_before_storage
+version: v1.0.0

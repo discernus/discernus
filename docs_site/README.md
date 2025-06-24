@@ -39,14 +39,18 @@ This guide provides the minimum steps to get the platform running and execute yo
 
 ### 1. Environment Setup
 
-First, set up your development environment. We strongly recommend using Docker for a consistent and hassle-free setup. For detailed instructions, see the [`docs/platform-development/DEV_ENVIRONMENT.md`](docs/platform-development/DEV_ENVIRONMENT.md).
+First, set up your local development environment. For detailed instructions, see the [`docs/platform-development/DEV_ENVIRONMENT.md`](docs/platform-development/DEV_ENVIRONMENT.md).
 
 ```bash
-# Build and start the Docker containers (app and database)
-docker-compose up --build -d
+# Set up local development environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
 
-# Set up the database schema (only needs to be run once)
-docker-compose exec app python launch.py --setup-db
+# Configure environment and database
+cp env.example .env
+# Edit .env with your local database settings and API keys
+python3 check_database.py
 ```
 
 ### 2. Create an Experiment Definition File
@@ -92,11 +96,11 @@ execution_settings:
 
 ### 3. Run the Experiment
 
-With your `experiment.yaml` file ready, execute it using the orchestrator script from within the Docker container.
+With your `experiment.yaml` file ready, execute it using the orchestrator script locally.
 
 ```bash
 # Run the experiment orchestrator
-docker-compose exec app python scripts/applications/comprehensive_experiment_orchestrator.py my_first_experiment.yaml
+python3 scripts/applications/comprehensive_experiment_orchestrator.py my_first_experiment.yaml
 ```
 
 ### 4. Check the Results

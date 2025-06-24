@@ -58,4 +58,12 @@ def create_all_tables():
 
 def drop_all_tables():
     """Drop all tables - used for testing cleanup."""
-    Base.metadata.drop_all(bind=engine) 
+    Base.metadata.drop_all(bind=engine)
+
+def initialize_database():
+    """Initialize database connection and return engine, SessionLocal tuple.
+    
+    This function provides compatibility with existing code that expects
+    initialize_database() to return (engine, SessionLocal).
+    """
+    return engine, SessionLocal 
