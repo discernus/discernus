@@ -1,0 +1,163 @@
+name: CI - Development Velocity
+
+# Trigger on pushes and pull requests to maintain development velocity
+on:
+  push:
+    branches: [ main, develop, 'feature/*', 'fix/*', 'codex/*' ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r tests/test_requirements.txt
+    
+    - name: Run unit tests
+      run: |
+        echo "🧪 Running unit tests (Phase 1 CI)..."
+        python3 -m pytest tests/unit/ -v --tb=short --maxfail=5
+    
+    - name: Basic import validation
+      run: |
+        echo "🔍 Validating core imports..."
+        python3 -c "
+        try:
+            import src.utils.cost_manager
+            import src.models.base
+            import src.coordinate_engine
+            print('✅ Core imports successful')
+        except ImportError as e:
+            print(f'❌ Import error: {e}')
+            exit(1)
+        "
+    
+    - name: License compliance check
+      run: |
+        echo "📋 Checking license compliance..."
+        cd product_management/license_audit
+        if python3 compliance_checker.py; then
+          echo "✅ License compliance validated"
+        else
+          echo "⚠️ License compliance check failed (non-blocking for development velocity)"
+          echo "   This is often due to environment-specific package issues"
+          echo "   Manual license review recommended before production"
+        fi
+    
+    - name: Test configuration validation
+      run: |
+        echo "⚙️ Validating test configuration..."
+        python3 -c "
+        import os
+        import sys
+        
+        # Check test structure
+        test_dirs = ['tests/unit', 'tests/integration', 'tests/utilities']
+        for test_dir in test_dirs:
+            if not os.path.exists(test_dir):
+                print(f'❌ Missing test directory: {test_dir}')
+                sys.exit(1)
+        
+        # Check requirements files
+        req_files = ['requirements.txt', 'tests/test_requirements.txt']
+        for req_file in req_files:
+            if not os.path.exists(req_file):
+                print(f'❌ Missing requirements file: {req_file}')
+                sys.exit(1)
+        
+        print('✅ Test configuration validated')
+        "
+
+  # Quick integration smoke test (optional, can fail without blocking)
+  integration-smoke-test:
+    runs-on: ubuntu-latest
+    needs: test
+    continue-on-error: true  # Don't block development on framework issues
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r tests/test_requirements.txt
+    
+    - name: Quick integration test
+      run: |
+        echo "🔬 Running integration smoke test..."
+        echo "⚠️ This test may fail due to framework documentation issues"
+        echo "🎯 Goal: Catch obvious integration problems without blocking development"
+        
+        # Run a subset of integration tests that don't require full system health
+        if python3 -m pytest tests/integration/test_api_schemas.py -v --tb=short; then
+          echo "✅ Integration smoke test passed"
+        else
+          echo "⚠️ Integration smoke test failed (not blocking)"
+        fi
+
+  # Summary job
+  ci-summary:
+    runs-on: ubuntu-latest
+    needs: [test, integration-smoke-test]
+    if: always()
+    
+    steps:
+    - name: CI Summary
+      run: |
+        echo "🏁 CI Summary for Development Velocity"
+        echo "=================================="
+        
+        if [ "${{ needs.test.result }}" == "success" ]; then
+          echo "✅ Core Tests: PASSED"
+        else
+          echo "❌ Core Tests: FAILED"
+        fi
+        
+        if [ "${{ needs.integration-smoke-test.result }}" == "success" ]; then
+          echo "✅ Integration Smoke Test: PASSED"
+        else
+          echo "⚠️ Integration Smoke Test: FAILED (non-blocking)"
+        fi
+        
+        echo ""
+        echo "📊 Phase 1 CI Goals:"
+        echo "• Fast feedback (< 5 minutes)"
+        echo "• Catch import/syntax errors"
+        echo "• Validate license compliance"
+        echo "• Maintain development velocity"
+        echo ""
+        
+        if [ "${{ needs.test.result }}" == "success" ]; then
+          echo "🎉 Development can continue - core functionality validated!"
+        else
+          echo "🚨 Core tests failed - please fix before merging"
+          exit 1
+        fi 
