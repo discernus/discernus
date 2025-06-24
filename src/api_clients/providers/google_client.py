@@ -1,4 +1,4 @@
-from typing import Tuple, Dict
+from typing import Tuple, Dict, Optional
 import google.generativeai as genai
 
 from src.utils.cost_manager import CostManager
@@ -6,7 +6,7 @@ from src.utils.cost_manager import CostManager
 class GoogleAIProvider:
     """Wrapper around the Google Generative AI client with cost tracking."""
 
-    def __init__(self, api_key: str, cost_manager: CostManager | None = None):
+    def __init__(self, api_key: str, cost_manager: Optional[CostManager] = None):
         genai.configure(api_key=api_key)
         self.client = genai
         self.cost_manager = cost_manager

@@ -1,0 +1,280 @@
+name: moral_foundations_theory_test
+version: v1.0
+display_name: Moral Foundations Theory (System Health Test)
+description: "Simplified test version of Jonathan Haidt's Moral Foundations Theory\
+  \ framework \nfor system health testing and validation. This version matches the\
+  \ main MFT \nframework structure but is optimized for testing scenarios.\n\n## Test\
+  \ Framework Purpose\n\nThis framework is specifically designed for:\n- System health\
+  \ monitoring and validation\n- Pipeline testing with known expected outputs\n- Framework\
+  \ compatibility verification\n- Algorithm configuration testing\n\n## Usage Guidelines\n\
+  \nThis test framework should be used for:\n- **System Health Testing**: Validate\
+  \ that the MFT analysis pipeline functions correctly\n- **Development Validation**:\
+  \ Ensure framework loading and processing works before production\n- **Integration\
+  \ Testing**: Verify compatibility with orchestrator and validation systems\n- **NOT\
+  \ for Production Analysis**: This is a simplified test version only\n\nFor production\
+  \ moral foundations analysis, use the main production framework instead.\n\n## Theoretical\
+  \ Foundation (Simplified)\n\nBased on Haidt's Moral Foundations Theory with six\
+  \ foundation pairs:\n1. **Care \u2194 Harm**: Compassion vs cruelty\n2. **Fairness\
+  \ \u2194 Cheating**: Justice vs exploitation  \n3. **Loyalty \u2194 Betrayal**:\
+  \ Group commitment vs disloyalty\n4. **Authority \u2194 Subversion**: Respect for\
+  \ order vs chaos\n5. **Sanctity \u2194 Degradation**: Purity vs contamination\n\
+  6. **Liberty \u2194 Oppression**: Freedom vs domination\n\n## Version History\n\n\
+  - **v1.0** (2025-06-23): Initial test framework version\n  - Framework Specification\
+  \ v3.1 compliant\n  - Six moral foundation axes with proper opposite_of validation\n\
+  \  - Algorithm configuration for testing scenarios\n  - Compatible with system health\
+  \ orchestrator\n\n## Citation Format\n\nDiscernus Framework: Moral Foundations Theory\
+  \ Test v1.0 (Haidt, 2025)\n"
+axes:
+  Care_Harm:
+    description: Care for others vs causing harm - individualizing foundation
+    integrative:
+      name: Care
+      description: Concern for the suffering of others, compassion, protection
+      language_cues:
+      - compassion
+      - suffering
+      - protection
+      - kindness
+      - empathy
+      - helping others
+      position: 12 o'clock
+      weight: 1.0
+      type: individualizing
+      opposite_of: Harm
+    disintegrative:
+      name: Harm
+      description: Actions that cause suffering, cruelty, violence
+      language_cues:
+      - harm
+      - cruelty
+      - violence
+      - suffering
+      - pain
+      - abuse
+      position: 6 o'clock
+      weight: 1.0
+      type: individualizing
+      opposite_of: Care
+  Fairness_Cheating:
+    description: Fairness and justice vs exploitation
+    integrative:
+      name: Fairness
+      description: Concern for proportional treatment, justice, reciprocity
+      language_cues:
+      - fairness
+      - justice
+      - equality
+      - reciprocity
+      - deserve
+      - merit
+      angle: 60
+      weight: 1.0
+      type: individualizing
+      opposite_of: Cheating
+    disintegrative:
+      name: Cheating
+      description: Violations of fairness, exploitation, corruption
+      language_cues:
+      - cheating
+      - unfair
+      - exploitation
+      - corrupt
+      - rigged
+      - taking advantage
+      angle: 240
+      weight: 1.0
+      type: individualizing
+      opposite_of: Fairness
+  Loyalty_Betrayal:
+    description: Loyalty to group vs betrayal of group
+    integrative:
+      name: Loyalty
+      description: Commitment to group, patriotism, solidarity
+      language_cues:
+      - loyalty
+      - patriotism
+      - solidarity
+      - team
+      - unity
+      - sacrifice for group
+      angle: 120
+      weight: 1.0
+      type: binding
+      opposite_of: Betrayal
+    disintegrative:
+      name: Betrayal
+      description: Disloyalty to group, treason, abandoning collective
+      language_cues:
+      - betrayal
+      - treason
+      - disloyal
+      - abandoning group
+      - turncoat
+      - selling out
+      angle: 300
+      weight: 1.0
+      type: binding
+      opposite_of: Loyalty
+  Authority_Subversion:
+    description: Respect for authority vs subversion of order
+    integrative:
+      name: Authority
+      description: Respect for legitimate hierarchy, tradition, leadership
+      language_cues:
+      - authority
+      - hierarchy
+      - tradition
+      - respect
+      - leadership
+      - order
+      position: 3 o'clock
+      weight: 1.0
+      type: binding
+      opposite_of: Subversion
+    disintegrative:
+      name: Subversion
+      description: Illegitimate challenge to authority, chaos, rebellion
+      language_cues:
+      - subversion
+      - chaos
+      - disrespect
+      - rebellion
+      - undermining
+      - disorder
+      position: 9 o'clock
+      weight: 1.0
+      type: binding
+      opposite_of: Authority
+  Sanctity_Degradation:
+    description: Spiritual purity vs moral contamination
+    integrative:
+      name: Sanctity
+      description: Concerns about spiritual purity, sacred values
+      language_cues:
+      - sacred
+      - pure
+      - holy
+      - noble
+      - spiritual
+      - sanctity
+      angle: 30
+      weight: 1.0
+      type: binding
+      opposite_of: Degradation
+    disintegrative:
+      name: Degradation
+      description: Contamination, debasement, violation of sacred
+      language_cues:
+      - degradation
+      - contamination
+      - pollution
+      - debasement
+      - profane
+      - perverted
+      angle: 210
+      weight: 1.0
+      type: binding
+      opposite_of: Sanctity
+  Liberty_Oppression:
+    description: Freedom and autonomy vs coercion
+    integrative:
+      name: Liberty
+      description: Concerns about freedom, autonomy, resistance to domination
+      language_cues:
+      - freedom
+      - liberty
+      - autonomy
+      - independence
+      - free choice
+      - individual rights
+      angle: 330
+      weight: 1.0
+      type: liberty_based
+      opposite_of: Oppression
+    disintegrative:
+      name: Oppression
+      description: Domination, coercion, restriction of freedom
+      language_cues:
+      - oppression
+      - domination
+      - coercion
+      - tyranny
+      - control
+      - restriction
+      angle: 150
+      weight: 1.0
+      type: liberty_based
+      opposite_of: Liberty
+algorithm_config:
+  dominance_amplification:
+    enabled: true
+    threshold: 0.7
+    multiplier: 1.1
+    rationale: Test configuration for dominance amplification
+  adaptive_scaling:
+    enabled: true
+    base_scaling: 0.65
+    max_scaling: 0.95
+    variance_factor: 0.3
+    mean_factor: 0.1
+    methodology: Test configuration for adaptive scaling
+  prompting_integration:
+    dominance_instruction: Identify dominant moral foundations for testing
+    amplification_purpose: Test mathematical emphasis of moral themes
+    methodology_reference: MFT test pipeline v1.0
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: Circular coordinate system for test framework
+metrics:
+  individualizing_score:
+    name: Individualizing Foundation Score
+    description: Strength of Care and Fairness foundations
+    calculation: Average of Care_Harm and Fairness_Cheating axis scores
+  binding_score:
+    name: Binding Foundation Score
+    description: Strength of Loyalty, Authority, and Sanctity foundations
+    calculation: Average of Loyalty_Betrayal, Authority_Subversion, and Sanctity_Degradation
+      axis scores
+  liberty_score:
+    name: Liberty Foundation Score
+    description: Strength of Liberty vs Oppression
+    calculation: Liberty_Oppression axis score
+visualization:
+  type_colors:
+    individualizing: '#1976D2'
+    binding: '#388E3C'
+    liberty_based: '#9C27B0'
+theoretical_foundation:
+  primary_sources:
+  - 'Haidt, J. (2012). The righteous mind: Why good people are divided by politics
+    and religion.'
+  - Graham, J., Haidt, J., Koleva, S., Motyl, M., Iyer, R., Wojcik, S., & Ditto, P.
+    H. (2013). Moral foundations theory.
+  theoretical_approach: "Simplified test version based on Haidt's Moral Foundations\
+    \ Theory for \nsystem health testing and validation purposes.\n"
+validation:
+  academic_standard: Haidt Moral Foundations Theory (Test Version)
+  measurement_instrument: System Health Testing
+  scope_limitation: Simplified for testing purposes only
+  citation_format: 'Discernus Framework: Moral Foundations Theory Test v1.0 (Haidt,
+    2025)'
+  academic_attribution: 'Test framework based on Haidt''s Moral Foundations Theory.
+
+    For production use, see main Moral Foundations Theory framework.
+
+    '
+compatibility:
+  prompt_templates:
+  - moral_foundations_v3.0
+  - political_psychology_v1.0
+  api_versions:
+  - v3.1
+  - v3.0
+  visualization_types:
+  - circular
+  - foundation_profile
+last_modified: '2025-06-23T16:00:00.000000'
+framework_registry_key: moral_foundations_theory_test__v1.0
+implementation_status: System health testing ready - Framework Specification v3.1
+  compliant

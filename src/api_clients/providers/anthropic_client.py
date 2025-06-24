@@ -1,4 +1,4 @@
-from typing import Tuple, Dict
+from typing import Tuple, Dict, Optional
 import anthropic
 
 from src.utils.cost_manager import CostManager
@@ -6,7 +6,7 @@ from src.utils.cost_manager import CostManager
 class AnthropicProvider:
     """Wrapper around the Anthropic client with cost tracking."""
 
-    def __init__(self, api_key: str, cost_manager: CostManager | None = None):
+    def __init__(self, api_key: str, cost_manager: Optional[CostManager] = None):
         self.client = anthropic.Anthropic(api_key=api_key)
         self.cost_manager = cost_manager
 

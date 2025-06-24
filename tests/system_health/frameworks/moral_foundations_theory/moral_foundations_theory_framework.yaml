@@ -29,6 +29,16 @@ description: |
   - Framework compatibility verification
   - Algorithm configuration testing
   
+  ## Usage Guidelines
+  
+  This test framework should be used for:
+  - **System Health Testing**: Validate that the MFT analysis pipeline functions correctly
+  - **Development Validation**: Ensure framework loading and processing works before production
+  - **Integration Testing**: Verify compatibility with orchestrator and validation systems
+  - **NOT for Production Analysis**: This is a simplified test version only
+  
+  For production moral foundations analysis, use the main production framework instead.
+  
   ## Theoretical Foundation (Simplified)
   
   Based on Haidt's Moral Foundations Theory with six foundation pairs:
@@ -38,6 +48,14 @@ description: |
   4. **Authority ↔ Subversion**: Respect for order vs chaos
   5. **Sanctity ↔ Degradation**: Purity vs contamination
   6. **Liberty ↔ Oppression**: Freedom vs domination
+  
+  ## Version History
+  
+  - **v1.0** (2025-06-23): Initial test framework version
+    - Framework Specification v3.1 compliant
+    - Six moral foundation axes with proper opposite_of validation
+    - Algorithm configuration for testing scenarios
+    - Compatible with system health orchestrator
   
   ## Citation Format
   

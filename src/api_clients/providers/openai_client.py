@@ -1,4 +1,4 @@
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, Optional
 import openai
 
 from src.utils.cost_manager import CostManager
@@ -6,7 +6,7 @@ from src.utils.cost_manager import CostManager
 class OpenAIProvider:
     """Wrapper around the OpenAI client with cost tracking."""
 
-    def __init__(self, api_key: str, cost_manager: CostManager | None = None):
+    def __init__(self, api_key: str, cost_manager: Optional[CostManager] = None):
         self.client = openai.OpenAI(api_key=api_key)
         self.cost_manager = cost_manager
 
