@@ -3,6 +3,19 @@ Discernus - Changelog
 [Unreleased]
 
 ### Added
+- **Strategic Vision**: Created mega-scale research platform vision document outlining planetary-scale computational social science capabilities with hybrid human-AI evaluation
+- **Architectural Safeguards**: Documented architectural decisions needed to support massive multi-dimensional research campaigns involving thousands of concurrent evaluators
+
+### Fixed
+- **Specification Versioning**: Renamed `EXPERIMENT_SYSTEM_SPECIFICATION.md` to `EXPERIMENT_SYSTEM_SPECIFICATION_v3.1.0.md` for consistency with Framework Specification v3.1
+- **Documentation Overlap**: Eliminated 230+ lines of duplicated content between Framework Specification v3.1 and Experiment System Specification v3.1.0
+- **Separation of Concerns**: Established clean architecture where Framework Specification owns canonical definitions and Experiment Specification references them
+- **Cross-References**: Updated all documentation links to point to correctly versioned specification files
+
+### Changed
+- **Framework Specification v3.1**: Now serves as single source of truth for framework schemas, validation, examples, and academic standards
+- **Experiment System Specification v3.1.0**: Refocused on experiment orchestration, prompt templates, scoring algorithms, and LLM configurations with clean references to Framework Specification
+- **Reference Architecture**: Implemented hub-and-spoke documentation model eliminating content duplication and ensuring deterministic content ownership
 
 ## [Framework Specification v3.1 - Phase 2 Complete] - 2025-06-23
 
