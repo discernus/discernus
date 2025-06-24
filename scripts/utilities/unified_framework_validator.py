@@ -1,23 +1,27 @@
 #!/usr/bin/env python3
 """
-Unified Framework Validator v2.0
+Unified Framework Validator v3.1
 ===============================
 
-🎯 CONSOLIDATED VALIDATOR - Replaces all fragmented validation systems
+🎯 FRAMEWORK SPECIFICATION v3.1 COMPLIANT VALIDATOR
 
-Comprehensive framework validation supporting:
-- ✅ Dipole-based frameworks (MFT style)
-- ✅ Independent wells frameworks (Three Wells style) 
+Comprehensive framework validation supporting Framework Specification v3.1:
+- ✅ Attribute-based frameworks (axes, anchors, clusters)
+- ✅ Self-documenting frameworks with integrated documentation
+- ✅ Mandatory citation format validation
+- ✅ Mixed positioning support (degrees + clock face)
+- ✅ Flexible versioning (v1.0, v1.204, v215.44)
+- ✅ Enhanced academic validation
 - ✅ YAML format (current standard)
 - ✅ Legacy JSON format (migration support)
 - ✅ CLI interface for manual validation
 - ✅ Importable component for orchestrator integration
 
-Validation Layers:
+Framework Specification v3.1 Validation Layers:
 1. Format Detection & Parsing
-2. Structural Validation (architecture-aware)
-3. Semantic Consistency Checks
-4. Academic Standards Validation
+2. Structural Validation (v3.1 required fields)
+3. Semantic Consistency (angle conflicts, positioning)
+4. Academic Standards (v3.1 citation format)
 5. Integration & Compatibility Checks
 
 Usage:
@@ -48,9 +52,10 @@ import math
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
 
 class FrameworkArchitecture(Enum):
-    """Framework architecture types (Discernus Coordinates terminology)"""
-    AXIS_SET = "axis_set"        # Paired coordinate axes (was dipole-based)
-    ANCHOR_SET = "anchor_set"    # Independent coordinate points (was independent wells)
+    """Framework architecture types (Framework Specification v3.1)"""
+    AXIS_SET = "axis_set"        # Paired coordinate axes
+    ANCHOR_SET = "anchor_set"    # Independent coordinate points
+    CLUSTER_SET = "cluster_set"  # Grouped positioning strategy
     UNKNOWN = "unknown"
 
 class ValidationSeverity(Enum):
@@ -59,6 +64,13 @@ class ValidationSeverity(Enum):
     WARNING = "warning"
     SUGGESTION = "suggestion"
     INFO = "info"
+
+# Framework Specification v3.1 Clock Position Conversion
+CLOCK_POSITIONS = {
+    "12 o'clock": 0, "1 o'clock": 30, "2 o'clock": 60, "3 o'clock": 90,
+    "4 o'clock": 120, "5 o'clock": 150, "6 o'clock": 180, "7 o'clock": 210,
+    "8 o'clock": 240, "9 o'clock": 270, "10 o'clock": 300, "11 o'clock": 330
+}
 
 @dataclass
 class ValidationIssue:
@@ -133,7 +145,7 @@ class UnifiedFrameworkValidator:
     def __init__(self, verbose: bool = False):
         self.verbose = verbose
         
-        # Expected framework files by architecture (Discernus Coordinates)
+        # Expected framework files by architecture (Framework Specification v3.1)
         self.framework_file_patterns = {
             FrameworkArchitecture.AXIS_SET: [
                 "*_framework.yaml",
@@ -141,6 +153,11 @@ class UnifiedFrameworkValidator:
                 "framework_consolidated.yaml"
             ],
             FrameworkArchitecture.ANCHOR_SET: [
+                "*_framework.yaml",
+                "framework.yaml", 
+                "framework_consolidated.yaml"
+            ],
+            FrameworkArchitecture.CLUSTER_SET: [
                 "*_framework.yaml",
                 "framework.yaml", 
                 "framework_consolidated.yaml"
@@ -281,7 +298,7 @@ class UnifiedFrameworkValidator:
         return None
     
     def _detect_architecture(self, framework_data: Dict) -> FrameworkArchitecture:
-        """Detect framework architecture from data structure (Discernus Coordinates)"""
+        """Detect framework architecture from data structure (Framework Specification v3.1)"""
         
         # Check for anchor set structure (independent coordinate points)
         if 'anchors' in framework_data and isinstance(framework_data['anchors'], dict):
@@ -305,23 +322,144 @@ class UnifiedFrameworkValidator:
                     if len(found_pairs) >= 2:
                         return FrameworkArchitecture.AXIS_SET
         
+        # Check for cluster set structure (grouped positioning strategy)
+        if 'clusters' in framework_data and isinstance(framework_data['clusters'], dict):
+            clusters = framework_data['clusters']
+            if clusters:
+                # Check if clusters have grouped positioning structure
+                first_cluster = list(clusters.values())[0]
+                if isinstance(first_cluster, dict) and 'position' in first_cluster:
+                    return FrameworkArchitecture.CLUSTER_SET
+        
         return FrameworkArchitecture.UNKNOWN
     
     def _validate_structure(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate framework structure based on detected architecture (Discernus Coordinates)"""
+        """Validate framework structure based on detected architecture (Framework Specification v3.1)"""
         
         is_valid = True
         
+        # Framework Specification v3.1 Required Fields
+        v3_1_required_fields = ['name', 'version', 'display_name', 'description']
+        for field in v3_1_required_fields:
+            if field not in framework_data:
+                result.add_issue(
+                    ValidationSeverity.ERROR,
+                    "structure_validation",
+                    f"Missing Framework Specification v3.1 required field: {field}",
+                    location="root",
+                    fix_suggestion=f"Add {field} field to framework definition"
+                )
+                is_valid = False
+        
+        # Version format validation (Framework Specification v3.1)
+        if 'version' in framework_data:
+            version = framework_data['version']
+            if not self._validate_version_format(version):
+                result.add_issue(
+                    ValidationSeverity.ERROR,
+                    "structure_validation",
+                    f"Invalid version format: {version}. Must start with 'v' and use dot notation (e.g., v1.0, v1.204)",
+                    location="version",
+                    fix_suggestion="Use flexible dot notation starting with 'v' (e.g., v1.0, v1.2.3, v215.44)"
+                )
+                is_valid = False
+        
+        # Framework Specification v3.1 Versioning Fields
+        v3_1_versioning_fields = ['last_modified', 'framework_registry_key', 'implementation_status']
+        for field in v3_1_versioning_fields:
+            if field not in framework_data:
+                result.add_issue(
+                    ValidationSeverity.ERROR,
+                    "structure_validation",
+                    f"Missing Framework Specification v3.1 versioning field: {field}",
+                    location="root",
+                    fix_suggestion=f"Add {field} field to framework versioning section"
+                )
+                is_valid = False
+        
+        # Validate self-documenting requirements (Framework Specification v3.1)
+        if not self._validate_self_documenting_requirements(framework_data, result):
+            is_valid = False
+        
+        # Validate positioning architecture
         if result.architecture == FrameworkArchitecture.ANCHOR_SET:
-            is_valid = self._validate_anchor_set_structure(framework_data, result)
+            is_valid = self._validate_anchor_set_structure(framework_data, result) and is_valid
         elif result.architecture == FrameworkArchitecture.AXIS_SET:
-            is_valid = self._validate_axis_set_structure(framework_data, result)
+            is_valid = self._validate_axis_set_structure(framework_data, result) and is_valid
+        elif result.architecture == FrameworkArchitecture.CLUSTER_SET:
+            is_valid = self._validate_cluster_set_structure(framework_data, result) and is_valid
         else:
             result.add_issue(
                 ValidationSeverity.ERROR,
                 "structure_validation",
-                "Unknown framework architecture - must use Discernus Coordinates structure (anchor-set or axis-set)",
-                fix_suggestion="Convert framework to use 'anchors' (anchor-set) or 'axes' (axis-set) architecture"
+                "Unknown framework architecture - must use Framework Specification v3.1 structure (anchor-set, axis-set, or cluster-set)",
+                fix_suggestion="Convert framework to use 'anchors' (anchor-set), 'axes' (axis-set), or 'clusters' (cluster-set) architecture"
+            )
+            is_valid = False
+        
+        return is_valid
+    
+    def _validate_version_format(self, version: str) -> bool:
+        """Validate Framework Specification v3.1 flexible version format"""
+        if not isinstance(version, str) or not version.startswith('v'):
+            return False
+        
+        # Extract numeric part
+        numeric_part = version[1:]
+        if not numeric_part:
+            return False
+        
+        # Validate dot notation
+        parts = numeric_part.split('.')
+        if len(parts) < 2:  # Must have at least major.minor
+            return False
+        
+        # Each part must be numeric
+        for part in parts:
+            if not part.isdigit():
+                return False
+        
+        return True
+    
+    def _validate_self_documenting_requirements(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
+        """Validate Framework Specification v3.1 self-documenting requirements"""
+        is_valid = True
+        
+        if 'description' not in framework_data:
+            return is_valid  # Already caught by required fields check
+        
+        description = framework_data['description']
+        if not isinstance(description, str):
+            return is_valid
+        
+        # Check for required sections in description
+        required_sections = [
+            ('## Theoretical Foundation', 'Theoretical Foundation'),
+            ('## Usage Guidelines', 'Usage Guidelines'), 
+            ('## Version History', 'Version History'),
+            ('## Citation Format', 'Citation Format')
+        ]
+        
+        for section_marker, section_name in required_sections:
+            if section_marker not in description:
+                result.add_issue(
+                    ValidationSeverity.ERROR,
+                    "structure_validation",
+                    f"Self-documenting framework missing required section: {section_name}",
+                    location="description",
+                    fix_suggestion=f"Add '{section_marker}' section to framework description"
+                )
+                is_valid = False
+        
+        # Check for Framework Specification v3.1 mandatory citation format
+        citation_pattern = r'Discernus Framework: .+ v\d+(?:\.\d+)* \(.+, \d{4}\)'
+        if not re.search(citation_pattern, description):
+            result.add_issue(
+                ValidationSeverity.ERROR,
+                "structure_validation",
+                "Missing mandatory Framework Specification v3.1 citation format",
+                location="description",
+                fix_suggestion='Add citation format: "Discernus Framework: Framework Name vX.Y (Author, Year)"'
             )
             is_valid = False
         
@@ -369,8 +507,8 @@ class UnifiedFrameworkValidator:
                         is_valid = False
                         continue
                     
-                    # Check required anchor fields
-                    required_anchor_fields = ['description', 'angle', 'weight', 'type']
+                    # Check required anchor fields (Framework Specification v3.1)
+                    required_anchor_fields = ['description', 'weight', 'type']
                     for field in required_anchor_fields:
                         if field not in anchor_data:
                             result.add_issue(
@@ -381,7 +519,18 @@ class UnifiedFrameworkValidator:
                             )
                             is_valid = False
                     
-                    # Validate angle range
+                    # Validate positioning (angle OR position) - Framework Specification v3.1 mixed positioning
+                    if 'angle' not in anchor_data and 'position' not in anchor_data:
+                        result.add_issue(
+                            ValidationSeverity.ERROR,
+                            "structure_validation",
+                            f"Anchor '{anchor_name}' must have either 'angle' (degrees) or 'position' (clock face)",
+                            location=f"anchors.{anchor_name}",
+                            fix_suggestion="Add 'angle: 0-359' or 'position: \"12 o'clock\"' field"
+                        )
+                        is_valid = False
+                    
+                    # Validate angle if present
                     if 'angle' in anchor_data:
                         angle = anchor_data['angle']
                         if not isinstance(angle, (int, float)) or not (0 <= angle < 360):
@@ -390,6 +539,19 @@ class UnifiedFrameworkValidator:
                                 "structure_validation",
                                 f"Anchor '{anchor_name}' angle must be numeric between 0-359",
                                 location=f"anchors.{anchor_name}.angle"
+                            )
+                            is_valid = False
+                    
+                    # Validate position if present (Framework Specification v3.1 mixed positioning)
+                    if 'position' in anchor_data:
+                        position = anchor_data['position']
+                        if position not in CLOCK_POSITIONS:
+                            result.add_issue(
+                                ValidationSeverity.ERROR,
+                                "structure_validation",
+                                f"Anchor '{anchor_name}' position must be valid clock format (e.g., '12 o'clock')",
+                                location=f"anchors.{anchor_name}.position",
+                                fix_suggestion=f"Use valid clock positions: {', '.join(list(CLOCK_POSITIONS.keys())[:6])}..."
                             )
                             is_valid = False
                     
@@ -482,10 +644,68 @@ class UnifiedFrameworkValidator:
         
         return is_valid
     
-
+    def _validate_cluster_set_structure(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
+        """Validate cluster-set framework structure (grouped positioning strategy)"""
+        is_valid = True
+        
+        # Required fields for cluster-set frameworks
+        required_fields = ['name', 'clusters', 'coordinate_system']
+        for field in required_fields:
+            if field not in framework_data:
+                result.add_issue(
+                    ValidationSeverity.ERROR,
+                    "structure_validation",
+                    f"Missing required field: {field}",
+                    location="root",
+                    fix_suggestion=f"Add {field} field to framework definition"
+                )
+                is_valid = False
+        
+        # Validate clusters structure
+        if 'clusters' in framework_data:
+            clusters = framework_data['clusters']
+            if not isinstance(clusters, dict):
+                result.add_issue(
+                    ValidationSeverity.ERROR,
+                    "structure_validation",
+                    "Clusters must be a dictionary",
+                    location="clusters"
+                )
+                is_valid = False
+            else:
+                cluster_count = 0
+                
+                for cluster_name, cluster_data in clusters.items():
+                    if not isinstance(cluster_data, dict):
+                        result.add_issue(
+                            ValidationSeverity.ERROR,
+                            "structure_validation",
+                            f"Cluster '{cluster_name}' must be an object",
+                            location=f"clusters.{cluster_name}"
+                        )
+                        is_valid = False
+                        continue
+                    
+                    # Check for valid positioning
+                    if 'position' in cluster_data:
+                        position = cluster_data['position']
+                        if not isinstance(position, (int, float)) or not (0 <= position < 360):
+                            result.add_issue(
+                                ValidationSeverity.ERROR,
+                                "structure_validation",
+                                f"Cluster '{cluster_name}' position must be numeric between 0-359",
+                                location=f"clusters.{cluster_name}.position"
+                            )
+                            is_valid = False
+                    
+                    cluster_count += 1
+                
+                result.wells_count = cluster_count
+        
+        return is_valid
     
     def _validate_semantics(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate semantic consistency (Discernus Coordinates)"""
+        """Validate semantic consistency (Framework Specification v3.1)"""
         is_valid = True
         
         # Architecture-specific semantic validation
@@ -493,6 +713,8 @@ class UnifiedFrameworkValidator:
             is_valid = self._validate_anchor_set_semantics(framework_data, result)
         elif result.architecture == FrameworkArchitecture.AXIS_SET:
             is_valid = self._validate_axis_set_semantics(framework_data, result)
+        elif result.architecture == FrameworkArchitecture.CLUSTER_SET:
+            is_valid = self._validate_cluster_set_semantics(framework_data, result)
         
         return is_valid
     
@@ -510,18 +732,27 @@ class UnifiedFrameworkValidator:
             if not isinstance(anchor_data, dict):
                 continue
             
-            # Check angle uniqueness
+            # Convert positioning to angles for comparison (Framework Specification v3.1 mixed positioning)
+            effective_angle = None
             if 'angle' in anchor_data:
-                angle = anchor_data['angle']
-                if angle in angles:
+                effective_angle = anchor_data['angle']
+            elif 'position' in anchor_data:
+                position = anchor_data['position']
+                if position in CLOCK_POSITIONS:
+                    effective_angle = CLOCK_POSITIONS[position]
+            
+            # Check angle uniqueness (converted from mixed positioning)
+            if effective_angle is not None:
+                if effective_angle in angles:
+                    positioning_desc = f"angle {effective_angle}°" if 'angle' in anchor_data else f"position '{anchor_data['position']}' (= {effective_angle}°)"
                     result.add_issue(
                         ValidationSeverity.WARNING,
                         "semantic_validation",
-                        f"Duplicate angle: {angle}° for anchor '{anchor_name}'",
-                        location=f"anchors.{anchor_name}.angle",
-                        fix_suggestion="Consider using unique angles for better coordinate distribution"
+                        f"Duplicate {positioning_desc} for anchor '{anchor_name}'",
+                        location=f"anchors.{anchor_name}",
+                        fix_suggestion="Consider using unique positions for better coordinate distribution"
                     )
-                angles.append(angle)
+                angles.append(effective_angle)
             
             # Validate language cues if present
             if 'language_cues' in anchor_data:
@@ -602,11 +833,61 @@ class UnifiedFrameworkValidator:
         
         return is_valid
     
-    def _validate_academic_standards(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
-        """Validate academic rigor and standards"""
+    def _validate_cluster_set_semantics(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
+        """Validate cluster-set framework semantics (grouped positioning strategy)"""
         is_valid = True
         
-        # Check for theoretical foundation
+        if 'clusters' not in framework_data:
+            return is_valid
+        
+        clusters = framework_data['clusters']
+        positions = []
+        
+        for cluster_name, cluster_data in clusters.items():
+            if not isinstance(cluster_data, dict):
+                continue
+            
+            # Validate positioning
+            if 'position' in cluster_data:
+                position = cluster_data['position']
+                if position in positions:
+                    result.add_issue(
+                        ValidationSeverity.WARNING,
+                        "semantic_validation",
+                        f"Duplicate position: {position}° for cluster '{cluster_name}'",
+                        location=f"clusters.{cluster_name}.position",
+                        fix_suggestion="Consider using unique positions for better grouping"
+                    )
+                positions.append(position)
+            
+            # Validate language cues if present
+            if 'language_cues' in cluster_data:
+                cues = cluster_data['language_cues']
+                if isinstance(cues, list):
+                    if len(cues) < 3:
+                        result.add_issue(
+                            ValidationSeverity.WARNING,
+                            "semantic_validation",
+                            f"Cluster '{cluster_name}' has few language cues ({len(cues)})",
+                            location=f"clusters.{cluster_name}.language_cues",
+                            fix_suggestion="Consider adding more language cues for better detection"
+                        )
+                elif cues is not None:
+                    result.add_issue(
+                        ValidationSeverity.ERROR,
+                        "semantic_validation",
+                        f"Cluster '{cluster_name}' language_cues must be a list",
+                        location=f"clusters.{cluster_name}.language_cues"
+                    )
+                    is_valid = False
+        
+        return is_valid
+    
+    def _validate_academic_standards(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
+        """Validate academic rigor and standards (Framework Specification v3.1)"""
+        is_valid = True
+        
+        # Check for theoretical foundation (Framework Specification v3.1 required)
         theoretical_found = False
         theoretical_locations = ['theoretical_foundation', 'framework_meta.theoretical_foundation']
         
@@ -651,30 +932,65 @@ class UnifiedFrameworkValidator:
         
         if not theoretical_found:
             result.add_issue(
-                ValidationSeverity.WARNING,
+                ValidationSeverity.ERROR,
                 "academic_validation",
-                "No theoretical foundation section found",
-                fix_suggestion="Add theoretical_foundation section with primary sources and methodology"
+                "Framework Specification v3.1 requires theoretical_foundation section",
+                fix_suggestion="Add theoretical_foundation section with primary sources and theoretical approach"
             )
+            is_valid = False
         
-        # Check for version information
-        version_found = False
-        version_locations = ['version', 'framework_meta.version']
+        # Check for validation section (Framework Specification v3.1 required)
+        validation_found = False
+        validation_locations = ['validation', 'framework_meta.validation']
         
-        for location in version_locations:
-            if self._get_nested_value(framework_data, location):
-                version_found = True
+        for location in validation_locations:
+            validation_data = self._get_nested_value(framework_data, location)
+            if validation_data:
+                validation_found = True
+                
+                if isinstance(validation_data, dict):
+                    # Check for Framework Specification v3.1 mandatory citation format in validation
+                    if 'citation_format' in validation_data:
+                        citation_format = validation_data['citation_format']
+                        if not self._validate_v3_1_citation_format(citation_format):
+                            result.add_issue(
+                                ValidationSeverity.ERROR,
+                                "academic_validation",
+                                "Invalid Framework Specification v3.1 citation format",
+                                location=f"{location}.citation_format",
+                                fix_suggestion='Use format: "Discernus Framework: Framework Name vX.Y (Author, Year)"'
+                            )
+                            is_valid = False
+                    else:
+                        result.add_issue(
+                            ValidationSeverity.ERROR,
+                            "academic_validation",
+                            "Framework Specification v3.1 requires citation_format in validation section",
+                            location=location,
+                            fix_suggestion='Add citation_format: "Discernus Framework: Framework Name vX.Y (Author, Year)"'
+                        )
+                        is_valid = False
                 break
         
-        if not version_found:
+        if not validation_found:
             result.add_issue(
-                ValidationSeverity.WARNING,
+                ValidationSeverity.ERROR,
                 "academic_validation",
-                "No version information found",
-                fix_suggestion="Add version field for reproducibility"
+                "Framework Specification v3.1 requires validation section",
+                fix_suggestion="Add validation section with academic_standard, measurement_instrument, scope_limitation, and citation_format"
             )
+            is_valid = False
         
         return is_valid
+    
+    def _validate_v3_1_citation_format(self, citation_format: str) -> bool:
+        """Validate Framework Specification v3.1 mandatory citation format"""
+        if not isinstance(citation_format, str):
+            return False
+        
+        # Must match: "Discernus Framework: Name vX.Y (Author, Year)"
+        pattern = r'^Discernus Framework: .+ v\d+(?:\.\d+)* \(.+, \d{4}\)$'
+        return bool(re.match(pattern, citation_format))
     
     def _validate_integration(self, framework_data: Dict, result: FrameworkValidationResult) -> bool:
         """Validate integration compatibility"""
@@ -733,7 +1049,7 @@ class UnifiedFrameworkValidator:
                 metadata['description'] = desc
                 break
         
-        # Architecture-specific metadata (Discernus Coordinates)
+        # Architecture-specific metadata (Framework Specification v3.1)
         if result.architecture == FrameworkArchitecture.ANCHOR_SET:
             if 'anchors' in framework_data:
                 metadata['anchors'] = len(framework_data['anchors'])
@@ -747,6 +1063,10 @@ class UnifiedFrameworkValidator:
                     if isinstance(axis_data, dict):
                         coordinate_count += len([k for k in ['positive', 'negative', 'integrative', 'disintegrative'] if k in axis_data])
                 metadata['coordinate_points'] = coordinate_count
+        elif result.architecture == FrameworkArchitecture.CLUSTER_SET:
+            if 'clusters' in framework_data:
+                metadata['clusters'] = len(framework_data['clusters'])
+                metadata['group_count'] = len(framework_data['clusters'])  # Independent groups
         
         result.framework_metadata = metadata
     
@@ -815,13 +1135,15 @@ def print_validation_report(result: FrameworkValidationResult, verbose: bool = F
     print(f"📐 Architecture: {result.architecture.value}")
     print(f"📄 Format: {result.format_type}")
     
-    # Use new Discernus Coordinates terminology
+    # Use new Framework Specification v3.1 terminology
     if result.architecture == FrameworkArchitecture.AXIS_SET:
         # For axis_set, show both coordinate points and axes count
         axes_count = result.framework_metadata.get('axes', 0)
         print(f"📊 Anchors: {result.wells_count}, Axes: {axes_count}")
     elif result.architecture == FrameworkArchitecture.ANCHOR_SET:
         print(f"📊 Anchors: {result.wells_count}")
+    elif result.architecture == FrameworkArchitecture.CLUSTER_SET:
+        print(f"📊 Clusters: {result.wells_count}")
     else:
         print(f"📊 Coordinate Points: {result.wells_count}")
     
@@ -940,7 +1262,7 @@ def print_summary_report(results: List[FrameworkValidationResult]):
 def main():
     """CLI main function"""
     parser = argparse.ArgumentParser(
-        description="Unified Framework Validator v2.0 - Comprehensive framework validation",
+        description="Unified Framework Validator v3.1 - Comprehensive framework validation",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -997,7 +1319,7 @@ Examples:
         parser.print_help()
         sys.exit(1)
     
-    print("🎯 Unified Framework Validator v2.0")
+    print("🎯 Unified Framework Validator v3.1")
     print("="*50)
     
     # Initialize validator
