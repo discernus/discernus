@@ -1363,3 +1363,12 @@ Added
   - **Enhanced Transaction States**: Extended `ExperimentState` with 9 checkpoint states for granular progress tracking
   - **Fail-Fast Architecture**: Experiments fail immediately at first checkpoint failure with detailed error guidance
   - **Result**: Prevents expensive LLM analysis when prerequisites not met, eliminates "works locally but fails in production" issues
+
+### Migration to Framework Specification v3.1
+
+- **Framework Structure**: Updated from "wells" to "axes" with opposing anchor pairs
+- **Flexible Versioning**: Support for v1.0, v2025.06.04, and semantic versioning
+- **Citation Requirements**: Mandatory "Discernus Framework: Name vX.Y (Author, Year)" format
+- **YAML Format**: Standardized on YAML for both frameworks and experiments (JSON deprecated)
+- **Migration Command**: Update experiment definitions from JSON to YAML format with v3.1 structure
+- **Academic Standards**: Enhanced validation with theoretical foundation requirements

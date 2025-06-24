@@ -70,7 +70,7 @@ experiment:
     - "The analysis will successfully identify and quantify the five moral foundations in the text."
 
 # --- All the assets required to run the experiment ---
-# For a full reference of all options, see docs/specifications/experiment_schema.json
+# For a full reference of all options, see docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md
 components:
   # Specify the analytical framework to use
   framework:
@@ -333,3 +333,33 @@ This project is proprietary software designed for academic research collaboratio
 ---
 
 **🔬 Academic Research Focus**: This platform prioritizes methodological rigor, expert consultation, and publication-quality evidence over user interface development. Our goal is establishing Discernus as the validated standard for computational discourse analysis in academic research.
+
+## Quick Start
+
+### Running Experiments
+
+Create an experiment definition in YAML format:
+
+```yaml
+experiment:
+  name: "My Analysis"
+  version: "v1.0"
+  description: "Analysis description"
+
+components:
+  framework:
+    name: "civic_virtue"
+    version: "v2025.06.04"
+    citation_format: "Discernus Framework: Civic Virtue v2025.06.04 (Aristotle, 2025)"
+  
+  models:
+    - provider: "openai"
+      name: "gpt-4.1-mini"
+
+# For a full reference of all options, see docs/specifications/EXPERIMENT_SYSTEM_SPECIFICATION.md
+```
+
+Execute with:
+```bash
+python3 scripts/applications/comprehensive_experiment_orchestrator.py experiment.yaml
+```

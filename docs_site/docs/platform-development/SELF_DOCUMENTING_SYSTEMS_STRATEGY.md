@@ -42,4 +42,14 @@ This strategy is built on four core pillars:
 -   **Contribution Guidelines**: The [`CONTRIBUTING.md`](../CONTRIBUTING.md) file provides a clear "Golden Path" for all contributors.
 -   **Pull Request Template**: The [`.github/pull_request_template.md`](../../../.github/pull_request_template.md) includes a mandatory checklist. This forces every developer to consciously consider documentation tasks—such as updating the `CHANGELOG.md` and running the docstring linter—before their code can be merged.
 
-By adhering to these four pillars, we create a system where documentation is not an afterthought, but a core, integrated, and sustainable part of our engineering culture. 
+By adhering to these four pillars, we create a system where documentation is not an afterthought, but a core, integrated, and sustainable part of our engineering culture.
+
+## **✅ Benefits of Self-Documenting Systems**
+
+**Reduced Maintenance Burden**: Code changes automatically propagate to documentation, reducing the overhead of keeping docs synchronized.
+
+**Real-Time Documentation**: Users always have access to current, accurate information about system capabilities and interfaces.
+
+**Example**: The Framework Specification v3.1 and YAML-based experiment definitions serve as the canonical reference for all valid framework and experiment options.
+
+**Enforcement**: Our core scripts, like the experiment orchestrator, should validate all configurations against these specifications to ensure consistency. 

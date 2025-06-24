@@ -25,8 +25,9 @@ test: ## Run database and environment validation
 
 experiment: ## Run experiment orchestrator (provide EXPERIMENT_FILE=path)
 	@if [ -z "$(EXPERIMENT_FILE)" ]; then \
-		echo "❌ Must provide EXPERIMENT_FILE=path"; \
-		echo "Example: make experiment EXPERIMENT_FILE=experiments/my_experiment.json"; \
+		echo "Error: EXPERIMENT_FILE not specified"; \
+		echo "Usage: make experiment EXPERIMENT_FILE=path/to/experiment.yaml"; \
+		echo "Example: make experiment EXPERIMENT_FILE=experiments/my_experiment.yaml"; \
 		exit 1; \
 	fi
 	python3 scripts/applications/comprehensive_experiment_orchestrator.py $(EXPERIMENT_FILE)

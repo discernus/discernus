@@ -286,3 +286,24 @@ By following these standards, AI assistants help the team:
 - Improve productivity over time
 
 ---
+
+### Rule 1: ALWAYS Search Production Systems First
+Before suggesting ANY development work, you MUST run:
+```bash
+python3 scripts/applications/check_existing_systems.py "functionality description"
+```
+
+### Rule 2: NEVER Use Deprecated Systems
+- ❌ NEVER mention "AI Academic Advisor" (it's just file existence checks)
+- ❌ NEVER reference `deprecated/` directory code
+- ❌ NEVER use `architectural_compliance_validator.py` (moved to deprecated)
+- ❌ NEVER use JSON format for experiments (use YAML: experiment.yaml)
+
+### Rule 3: ALWAYS Use Production Systems
+- ✅ USE: `LLMQualityAssuranceSystem` (6-layer mathematical validation)
+- ✅ USE: `ComponentQualityValidator` (component validation)
+- ✅ USE: `QAEnhancedDataExporter` (academic export)
+- ✅ USE: `scripts/applications/comprehensive_experiment_orchestrator.py experiment.yaml` (experiments)
+- ✅ USE: YAML format for all frameworks and experiments (Framework Specification v3.1)
+
+---

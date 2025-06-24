@@ -1,10 +1,13 @@
 # Experiment System Specification
-*Version: 2.1.0*
-*Last Updated: June 13, 2025*
+*Version: 3.1.0*
+*Last Updated: June 25, 2025*
+*Framework Specification v3.1 Compatible*
 
 ## **🎯 Overview**
 
 The Narrative Gravity Analysis System provides a comprehensive experimental framework for systematic research using Large Language Models (LLMs) to analyze text narratives. This document specifies all available options, parameters, and capabilities for designing and executing experiments.
+
+**Framework Specification v3.1 Compatibility**: This specification is fully aligned with Framework Specification v3.1, supporting the new axes-based structure, flexible versioning, mandatory citation formats, and enhanced academic validation requirements.
 
 ## **📋 Experiment Architecture**
 
@@ -29,74 +32,112 @@ Every experiment consists of **four independent component types** that combine a
 
 ## **🏗️ Component Type Specifications**
 
-### **1. Framework Configurations**
+### **1. Framework Configurations (Framework Specification v3.1)**
 
-**Purpose**: Define the theoretical space for narrative analysis through dimensional structures.
+**Purpose**: Define the theoretical space for narrative analysis through dimensional structures using the Framework Specification v3.1 standard.
 
-#### **Framework Structure**
-```json
-{
-  "framework_name": "string (unique identifier)",
-  "display_name": "string (human-readable name)",
-  "version": "string (semantic versioning)",
-  "description": "string (theoretical foundation description)",
-  
-  "coordinate_system": {
-    "type": "enum[circle, ellipse, linear]",
-    "radius": "number (for circle)",
-    "semi_major_axis": "number (for ellipse)",
-    "semi_minor_axis": "number (for ellipse)",
-    "description": "string (geometric interpretation)"
-  },
-  
-  "wells": {
-    "WellName": {
-      "angle": "number (0-360 degrees)",
-      "weight": "number (relative importance)",
-      "type": "enum[integrative, disintegrative]",
-      "tier": "enum[primary, secondary, tertiary]",
-      "description": "string (analytical dimension meaning)"
-    }
-  },
-  
-  "theoretical_foundation": {
-    "primary_sources": ["array of academic references"],
-    "theoretical_approach": "string (methodological foundation)"
-  },
-  
-  "metrics": {
-    "MetricName": {
-      "name": "string (human-readable name)",
-      "description": "string (calculation and interpretation)"
-    }
-  }
-}
+#### **Framework Structure (v3.1)**
+```yaml
+# =============================================================================
+# FRAMEWORK IDENTIFICATION (required)
+# =============================================================================
+name: "framework_name"
+version: "flexible_version" # v1.0, v2025.06.04, etc.
+display_name: "Human-readable Framework Name"
+description: |
+  Framework description with mandatory citation format:
+  "Discernus Framework: Framework Name vX.Y (Author, Year)"
+
+# =============================================================================
+# POSITIONING DEFINITION (axes - opposing anchor pairs)
+# =============================================================================
+axes:
+  Axis_Name:
+    description: "Axis description explaining the opposing anchors"
+    
+    integrative:
+      name: "Positive Anchor"
+      description: "Description of the positive/constructive dimension"
+      language_cues: ["keyword1", "keyword2", "keyword3"]
+      position: "12 o'clock"  # or angle: 0
+      weight: 1.0
+      type: category_type
+      opposite_of: "Negative Anchor"
+    
+    disintegrative:
+      name: "Negative Anchor"
+      description: "Description of the negative/destructive dimension"
+      language_cues: ["keyword1", "keyword2", "keyword3"]
+      position: "6 o'clock"  # or angle: 180
+      weight: 1.0
+      type: category_type
+      opposite_of: "Positive Anchor"
+
+# =============================================================================
+# ALGORITHM CONFIGURATION (optional)
+# =============================================================================
+algorithm_config:
+  dominance_amplification:
+    enabled: true/false
+    threshold: number
+    multiplier: number
+    rationale: "Description of algorithmic approach"
+
+# =============================================================================
+# ACADEMIC VALIDATION (required)
+# =============================================================================
+theoretical_foundation:
+  primary_sources: ["Academic citation 1", "Academic citation 2"]
+  theoretical_approach: "Description of methodological foundation"
+
+validation:
+  academic_standard: "Academic validation standard"
+  measurement_instrument: "Measurement approach"
+  scope_limitation: "Scope and limitations"
+  citation_format: "Discernus Framework: Name vX.Y (Author, Year)"
+  academic_attribution: "Academic attribution and source acknowledgment"
+
+# =============================================================================
+# FRAMEWORK VERSIONING (required)
+# =============================================================================
+last_modified: "ISO 8601 timestamp"
+framework_registry_key: "unique_registry_identifier"
+implementation_status: "Framework Specification v3.1 compliant"
 ```
 
-#### **Available Frameworks**
+#### **Available Frameworks (v3.1 Compliant)**
 
-**Civic Virtue Framework** (`civic_virtue v2025.06.04`)
-- **Dimensions**: 10 wells across 5 dipoles (Dignity/Tribalism, Truth/Resentment, Justice/Manipulation, Hope/Fear, Pragmatism/Fantasy)
+**Civic Virtue Framework** (`civic_virtue_v2025.06.04`)
+- **Dimensions**: 5 axes with opposing anchor pairs (Dignity↔Tribalism, Truth↔Resentment, Justice↔Manipulation, Hope↔Fear, Pragmatism↔Fantasy)
 - **Theoretical Foundation**: Aristotelian virtue ethics + contemporary civic republican theory
 - **Use Case**: Political discourse analysis, democratic engagement assessment
-- **Coordinate System**: Circular (clustered positioning)
+- **Citation**: "Discernus Framework: Civic Virtue v2025.06.04 (Aristotle, 2025)"
 
-**Political Spectrum Framework** (`political_spectrum v2025.06.04`)
-- **Dimensions**: Traditional left-right political analysis
-- **Theoretical Foundation**: Political science spectrum analysis
-- **Use Case**: Partisan rhetoric analysis, political positioning
-- **Coordinate System**: Linear or elliptical
+**Political Worldview Triad Framework** (`political_worldview_triad_v1.0`)
+- **Dimensions**: 3 axes representing core political orientations
+- **Theoretical Foundation**: Political psychology and worldview analysis
+- **Use Case**: Political orientation analysis, worldview assessment
+- **Citation**: "Discernus Framework: Political Worldview Triad v1.0 (Political Scientists, 2025)"
 
-**Moral-Rhetorical Posture Framework** (`moral_rhetorical_posture v2025.06.04`)
-- **Dimensions**: Moral foundations + rhetorical strategies
-- **Theoretical Foundation**: Haidt's moral foundations + rhetorical analysis
-- **Use Case**: Moral argumentation patterns, persuasive strategy analysis
-- **Coordinate System**: Elliptical
+**Moral Foundations Theory Framework** (`moral_foundations_theory_v1.0`)
+- **Dimensions**: 6 axes based on Haidt's moral foundations (Care↔Harm, Fairness↔Cheating, Loyalty↔Betrayal, Authority↔Subversion, Sanctity↔Degradation, Liberty↔Oppression)
+- **Theoretical Foundation**: Haidt's Moral Foundations Theory
+- **Use Case**: Moral argumentation patterns, ethical stance analysis
+- **Citation**: "Discernus Framework: Moral Foundations Theory v1.0 (Haidt, 2025)"
 
-#### **Framework Development**
-- **Versioning**: Semantic versioning (major.minor.patch)
-- **Validation**: Theoretical coherence, dimensional distinctness, empirical testability
+#### **Framework Development (v3.1 Standards)**
+- **Versioning**: Flexible versioning (v1.0, v2025.06.04, etc.)
+- **Validation**: 5-layer validation (Format → Structure → Semantics → Academic → Integration)
+- **Citation Requirements**: Mandatory "Discernus Framework: Name vX.Y (Author, Year)" format
+- **Academic Standards**: Required theoretical_foundation and validation sections
 - **Compatibility**: Must specify compatible prompt templates and scoring algorithms
+
+#### **Framework Quality Standards (v3.1)**
+- **Academic Rigor**: Required theoretical foundation and academic validation
+- **Self-Documentation**: Frameworks must document their theoretical basis and limitations
+- **Citation Compliance**: All frameworks must include proper citation format
+- **Validation Coverage**: Must pass all 5 validation layers
+- **Mixed Positioning**: Support for both degree-based and clock-face positioning
 
 ### **2. Prompt Templates**
 
@@ -288,88 +329,99 @@ Every experiment consists of **four independent component types** that combine a
 }
 ```
 
-## **⚙️ Experiment Configuration**
+## **⚙️ Experiment Configuration (v3.1 Compatible)**
 
-### **Experiment Definition Schema**
+### **Experiment Definition Schema (v3.1)**
 
-```json
-{
-  "experiment": {
-    "name": "string (required, unique identifier)",
-    "hypothesis": "string (research hypothesis)",
-    "description": "string (experiment overview)",
-    "research_context": "string (academic context and background)",
+```yaml
+# =============================================================================
+# EXPERIMENT METADATA (required)
+# =============================================================================
+experiment:
+  name: "Unique experiment identifier"
+  version: "flexible_version"  # v1.0, v2025.06.04, etc.
+  description: "Comprehensive experiment description"
+  hypothesis: "Research hypothesis"
+  research_context: "Academic context and background"
+  
+  metadata:
+    researcher: "Creator identifier"
+    institution: "Research affiliation"
+    tags: ["array", "of", "research", "tags"]
+    research_notes: "Methodology notes"
+    publication_status: "draft|active|completed|published"
+    citation_format_compliance: true  # v3.1 requirement
+
+# =============================================================================
+# COMPONENT CONFIGURATION (v3.1)
+# =============================================================================
+configuration:
+  framework_config:
+    name: "framework_name"
+    version: "flexible_version"  # v3.1 flexible versioning
+    registry_key: "framework_registry_key"
+    citation_format: "Discernus Framework: Name vX.Y (Author, Year)"
     
-    "metadata": {
-      "researcher": "string (creator identifier)",
-      "institution": "string (research affiliation)",
-      "tags": ["array of research tags"],
-      "research_notes": "string (methodology notes)",
-      "publication_status": "enum[draft, active, completed, published]"
-    }
-  },
-  
-  "configuration": {
-    "framework_config_id": "string (required)",
-    "prompt_template_id": "string (required)", 
-    "scoring_algorithm_id": "string (required)",
-    "analysis_mode": "enum[single_model, multi_model, comparative]",
-    "selected_models": ["array of LLM model identifiers"]
-  },
-  
-  "execution_parameters": {
-    "runs_per_text": "number (reliability validation)",
-    "randomize_order": "boolean (reduce order effects)",
-    "cost_limit": "number (USD maximum)",
-    "timeout_seconds": "number (per-run timeout)",
-    "retry_attempts": "number (failure handling)"
-  },
-  
-  "quality_assurance": {
-    "enable_qa_validation": "boolean",
-    "confidence_threshold": "number (minimum QA confidence)",
-    "require_evidence": "boolean",
-    "manual_review_triggers": ["array of conditions"]
-  }
-}
+  prompt_template:
+    name: "template_name"
+    version: "flexible_version"
+    type: "hierarchical|traditional|evidence_based"
+    
+  scoring_algorithm:
+    name: "algorithm_name"
+    version: "flexible_version"
+    type: "linear|winner_take_most|hierarchical|exponential|nonlinear"
+    
+  analysis_mode: "single_model|multi_model|comparative"
+  selected_models: ["array", "of", "llm", "models"]
+
+# =============================================================================
+# EXECUTION PARAMETERS (v3.1)
+# =============================================================================
+execution_parameters:
+  runs_per_text: 3  # Reliability validation
+  randomize_order: true  # Reduce order effects
+  cost_limit: 50.00  # USD maximum
+  timeout_seconds: 300  # Per-run timeout
+  retry_attempts: 3  # Failure handling
+
+# =============================================================================
+# QUALITY ASSURANCE (v3.1 Enhanced)
+# =============================================================================
+quality_assurance:
+  enable_qa_validation: true
+  confidence_threshold: 0.7  # Minimum QA confidence
+  require_evidence: true  # v3.1 academic standards
+  framework_compliance_check: true  # v3.1 validation
+  citation_format_validation: true  # v3.1 requirement
+  manual_review_triggers: ["low_confidence", "anomaly_detected", "framework_mismatch"]
+
+# =============================================================================
+# ACADEMIC STANDARDS (v3.1)
+# =============================================================================
+academic_standards:
+  theoretical_validation_required: true
+  citation_format_enforcement: true
+  academic_attribution_required: true
+  replication_package_generation: true
+  methodology_documentation: true
 ```
 
-### **Analysis Modes**
+### **Framework Specification v3.1 Integration**
 
-**Single Model Analysis** (`single_model`)
-- **Purpose**: Focused analysis with one LLM model
-- **Use Cases**: Cost-efficient analysis, model-specific research
-- **Reliability**: Multiple runs with same model for consistency
-- **Output**: Single model results with statistical reliability measures
+**Enhanced Validation Pipeline**:
+1. **Framework Validation**: Verify v3.1 compliance before experiment execution
+2. **Citation Format Validation**: Ensure all components use proper citation formats
+3. **Academic Standards Validation**: Check theoretical foundation and academic rigor
+4. **Component Compatibility**: Verify framework-prompt-algorithm compatibility
+5. **Versioning Validation**: Support flexible versioning patterns
 
-**Multi-Model Comparison** (`multi_model`)
-- **Purpose**: Cross-model validation and consensus analysis
-- **Use Cases**: Academic research, validation studies, bias detection
-- **Reliability**: Correlation analysis across different LLM providers
-- **Output**: Consensus analysis with inter-model agreement metrics
-
-**Comparative Analysis** (`comparative`)
-- **Purpose**: Systematic comparison across multiple experimental conditions
-- **Use Cases**: Methodological research, framework validation, prompt optimization
-- **Reliability**: Controlled comparison with statistical significance testing
-- **Output**: Comparative results with effect size calculations
-
-### **Quality Assurance Integration**
-
-**6-Layer QA System**: All experiments can optionally include comprehensive quality validation:
-
-1. **Input Validation**: Text quality, framework compatibility, parameter validation
-2. **LLM Response Validation**: JSON format, required fields, score ranges
-3. **Statistical Coherence**: Default value detection, variance analysis, pattern recognition
-4. **Mathematical Consistency**: Position calculation validation, reproducibility verification
-5. **Cross-Validation**: Second opinion requirements, anomaly flagging
-6. **Anomaly Detection**: Perfect symmetry, outliers, identical scores
-
-**QA Configuration Options**:
-- **Confidence Thresholds**: HIGH (≥0.8), MEDIUM (0.5-0.79), LOW (<0.5)
-- **Automatic Filtering**: Exclude low-confidence results from analysis
-- **Manual Review Triggers**: Flag analyses requiring human validation
-- **Reporting Integration**: Include QA metrics in all academic outputs
+**Academic Enhancement Features**:
+- **Mandatory Academic Attribution**: All frameworks must include proper academic sources
+- **Self-Documenting Requirements**: Frameworks must explain their theoretical basis
+- **Enhanced Quality Assurance**: 6-layer QA system with v3.1 compliance checking
+- **Replication Package Generation**: Automatic generation of complete replication materials
+- **Citation Format Enforcement**: Systematic validation of "Discernus Framework: Name vX.Y (Author, Year)" format
 
 ## **📊 Experimental Outputs**
 
