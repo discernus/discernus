@@ -225,9 +225,12 @@ class RealAnalysisService:
                     # Convert score to 0-1 range if needed
                     if isinstance(score_value, (int, float)):
                         if score_value > 1.0:
-                            normalized_score = score_value / 100.0  # Convert percentage
+                            # Legacy format: -100 to +100 percentage scale
+                            normalized_score = abs(score_value) / 100.0  # Convert percentage, handle negatives
+                            print(f"🔄 Converting legacy score {score_value} → {normalized_score}")
                         else:
-                            normalized_score = abs(score_value)  # Handle negative scores
+                            # New format: 0.0-1.0 direct scale (Framework Specification v3.1 compliant)
+                            normalized_score = abs(score_value)  # Ensure positive, direct use
                         
                         # Map to positive/negative well pair
                         positive_well, negative_well = mft_mappings[key]
@@ -549,15 +552,36 @@ class RealAnalysisService:
     ) -> List[str]:
         """
         🔒 FRAMEWORK COMPLIANCE: Extract relevant quotes from text that support the well score.
-        Uses framework-agnostic keyword extraction for any well type.
+        🔧 FIXED: Now handles MFT paired format (care_harm.evidence, etc.) + fallback extraction
         """
-        # Try to get quotes from structured LLM response
+        # 🔧 FIX: Handle MFT paired foundation format
+        mft_well_mappings = {
+            'Care': 'care_harm', 'Harm': 'care_harm',
+            'Fairness': 'fairness_cheating', 'Cheating': 'fairness_cheating',
+            'Loyalty': 'loyalty_betrayal', 'Betrayal': 'loyalty_betrayal',
+            'Authority': 'authority_subversion', 'Subversion': 'authority_subversion',
+            'Sanctity': 'sanctity_degradation', 'Degradation': 'sanctity_degradation',
+            'Liberty': 'liberty_oppression', 'Oppression': 'liberty_oppression'
+        }
+        
+        # Try to get quotes from MFT paired format first (MAIN FIX)
+        if isinstance(llm_response, dict) and well in mft_well_mappings:
+            pair_key = mft_well_mappings[well]
+            if pair_key in llm_response:
+                pair_data = llm_response[pair_key]
+                if isinstance(pair_data, dict) and 'evidence' in pair_data:
+                    evidence = pair_data['evidence']
+                    if evidence and evidence.strip():
+                        print(f"✅ Found real evidence for {well}: {evidence[:50]}...")
+                        return [evidence.strip()]
+        
+        # Try original format for backward compatibility
         if isinstance(llm_response, dict) and 'evidence' in llm_response:
             evidence = llm_response['evidence']
             if isinstance(evidence, dict) and well in evidence:
                 return evidence[well][:2]  # Limit to 2 quotes
         
-        # Fallback: extract sentences that might be relevant
+        # Enhanced fallback: extract sentences that might be relevant
         sentences = text_content.split('. ')
         relevant_sentences = []
         
@@ -566,28 +590,46 @@ class RealAnalysisService:
         well_keywords = [well.lower()]
         
         # Add common variants and related terms
-        if 'dignity' in well.lower():
-            well_keywords.extend(['dignity', 'respect', 'honor', 'worth', 'value'])
-        elif 'tribal' in well.lower():
-            well_keywords.extend(['us', 'them', 'group', 'loyalty', 'belonging'])
-        elif 'truth' in well.lower():
-            well_keywords.extend(['truth', 'honest', 'fact', 'reality'])
-        elif 'justice' in well.lower():
-            well_keywords.extend(['justice', 'fair', 'equal', 'right'])
-        elif 'hope' in well.lower():
-            well_keywords.extend(['hope', 'future', 'better', 'optimism'])
-        elif 'compassion' in well.lower():
-            well_keywords.extend(['compassion', 'care', 'empathy', 'kindness'])
-        elif 'fear' in well.lower():
-            well_keywords.extend(['fear', 'afraid', 'threat', 'danger'])
+        if 'care' in well.lower():
+            well_keywords.extend(['care', 'help', 'protect', 'support', 'nurture', 'compassion'])
+        elif 'harm' in well.lower():
+            well_keywords.extend(['harm', 'hurt', 'damage', 'pain', 'suffering', 'violence'])
+        elif 'fairness' in well.lower():
+            well_keywords.extend(['fair', 'equal', 'justice', 'balanced', 'impartial'])
+        elif 'cheating' in well.lower():
+            well_keywords.extend(['cheat', 'unfair', 'biased', 'advantage', 'corrupt'])
+        elif 'loyalty' in well.lower():
+            well_keywords.extend(['loyal', 'together', 'unity', 'solidarity', 'group', 'team'])
+        elif 'betrayal' in well.lower():
+            well_keywords.extend(['betray', 'abandon', 'disloyal', 'turncoat'])
+        elif 'authority' in well.lower():
+            well_keywords.extend(['authority', 'leader', 'order', 'respect', 'hierarchy'])
+        elif 'subversion' in well.lower():
+            well_keywords.extend(['rebel', 'resist', 'challenge', 'overthrow', 'revolution'])
+        elif 'sanctity' in well.lower():
+            well_keywords.extend(['sacred', 'holy', 'pure', 'dignity', 'reverence'])
+        elif 'degradation' in well.lower():
+            well_keywords.extend(['degrade', 'corrupt', 'pollute', 'disgust', 'filthy'])
+        elif 'liberty' in well.lower():
+            well_keywords.extend(['free', 'freedom', 'liberty', 'independent', 'choice'])
+        elif 'oppression' in well.lower():
+            well_keywords.extend(['oppress', 'control', 'restrict', 'tyranny', 'suppress'])
         
-        for sentence in sentences[:10]:  # Check first 10 sentences
+        print(f"🔍 Fallback extraction for {well}: keywords = {well_keywords[:3]}...")
+        
+        for sentence in sentences[:15]:  # Check first 15 sentences
             if any(keyword.lower() in sentence.lower() for keyword in well_keywords):
-                relevant_sentences.append(sentence.strip())
-                if len(relevant_sentences) >= 2:
-                    break
+                if len(sentence.strip()) > 15:  # Ensure substantive quotes
+                    relevant_sentences.append(sentence.strip())
+                    if len(relevant_sentences) >= 2:
+                        break
         
-        return relevant_sentences[:2] if relevant_sentences else [f"Thematic elements related to {well.lower()} detected in the narrative."]
+        if relevant_sentences:
+            print(f"✅ Found fallback evidence for {well}: {relevant_sentences[0][:50]}...")
+            return relevant_sentences[:2]
+        else:
+            print(f"❌ No evidence found for {well}, using generic template")
+            return [f"Thematic elements related to {well.lower()} detected in the narrative."]
     
     def _calculate_circular_metrics(
         self, 

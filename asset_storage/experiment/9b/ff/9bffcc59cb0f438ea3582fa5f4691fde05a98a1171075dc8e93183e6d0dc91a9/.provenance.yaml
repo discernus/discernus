@@ -1,0 +1,7 @@
+asset_id: Cloud_Model_Comparison_Experiment_v1.0.0_20250624_225824
+content_hash: 9bffcc59cb0f438ea3582fa5f4691fde05a98a1171075dc8e93183e6d0dc91a9
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-24T22:58:24.624994'
+source_path: research_workspaces/june_2025_research_dev_workspace/cloud_model_comparison_experiment.yaml
+validation_status: validated_before_storage
+version: v1.0.0

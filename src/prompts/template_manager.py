@@ -32,7 +32,7 @@ class PromptTemplateManager:
         # Basic prompt template for moral foundations theory
         if framework == "moral_foundations_theory":
             prompt = f"""
-Analyze the following text using Moral Foundations Theory. Score each foundation from -100 to +100:
+Analyze the following text using Moral Foundations Theory. Score each foundation from 0.0 to 1.0:
 
 FOUNDATIONS TO ANALYZE:
 - Care/Harm: Concern for suffering and protection of vulnerable
@@ -42,19 +42,26 @@ FOUNDATIONS TO ANALYZE:
 - Sanctity/Degradation: Reverence, purity, spiritual significance
 - Liberty/Oppression: Freedom from control and domination
 
+SCORING SCALE:
+- 0.0: Foundation completely absent from text
+- 0.1-0.3: Minimal presence - weak or indirect references  
+- 0.4-0.6: Moderate presence - clear but not central to argument
+- 0.7-0.9: Strong presence - central to text's moral reasoning
+- 1.0: Dominant presence - primary moral framework of text
+
 TEXT TO ANALYZE:
 {text}
 
 RESPONSE FORMAT (JSON):
 {{
-    "care_harm": {{ "score": 0, "evidence": "quote from text", "reasoning": "explanation" }},
-    "fairness_cheating": {{ "score": 0, "evidence": "quote from text", "reasoning": "explanation" }},
-    "loyalty_betrayal": {{ "score": 0, "evidence": "quote from text", "reasoning": "explanation" }},
-    "authority_subversion": {{ "score": 0, "evidence": "quote from text", "reasoning": "explanation" }},
-    "sanctity_degradation": {{ "score": 0, "evidence": "quote from text", "reasoning": "explanation" }},
-    "liberty_oppression": {{ "score": 0, "evidence": "quote from text", "reasoning": "explanation" }},
+    "care_harm": {{ "score": 0.0, "evidence": "quote from text", "reasoning": "explanation" }},
+    "fairness_cheating": {{ "score": 0.0, "evidence": "quote from text", "reasoning": "explanation" }},
+    "loyalty_betrayal": {{ "score": 0.0, "evidence": "quote from text", "reasoning": "explanation" }},
+    "authority_subversion": {{ "score": 0.0, "evidence": "quote from text", "reasoning": "explanation" }},
+    "sanctity_degradation": {{ "score": 0.0, "evidence": "quote from text", "reasoning": "explanation" }},
+    "liberty_oppression": {{ "score": 0.0, "evidence": "quote from text", "reasoning": "explanation" }},
     "overall_analysis": "summary of moral foundations profile",
-    "confidence": 85
+    "confidence": 0.85
 }}
 
 Provide only valid JSON in your response.

@@ -4831,19 +4831,43 @@ All experiment outputs have been saved to: `{experiment_dir}`
                 logger.warning("⚠️  Cannot estimate costs - missing matrix or corpus info")
                 return True  # Allow execution when cost estimation is impossible
             
-            # Check if all models are local (Ollama) - they're free
-            models = experiment.get('components', {}).get('models', [])
-            all_local_models = all(model.get('id', '').startswith('ollama/') for model in models)
+            # Use actual model cost estimation instead of artificial limits
+            estimated_analyses = len(matrix)  # Each matrix entry is one analysis
             
-            if all_local_models:
-                # Local models are free - set cost to $0
-                estimated_analyses = len(matrix)  # Each matrix entry is one analysis
-                estimated_cost = 0.0
+            # Calculate real costs based on models in the experiment
+            models = experiment.get('components', {}).get('models', [])
+            total_estimated_cost = 0.0
+            
+            for model_spec in models:
+                model_id = model_spec.get('id', '')
+                
+                if model_id.startswith('ollama/'):
+                    # Local models are free
+                    model_cost = 0.0
+                else:
+                    # Estimate cloud model costs based on typical pricing
+                    if 'gpt-4o-mini' in model_id:
+                        model_cost = 0.0009  # Per analysis estimate
+                    elif 'mistral' in model_id:
+                        model_cost = 0.0044  # Per analysis estimate
+                    elif 'claude-3-haiku' in model_id:
+                        model_cost = 0.0087  # Per analysis estimate
+                    elif 'gemini' in model_id and 'flash' in model_id:
+                        model_cost = 0.0009  # Per analysis estimate
+                    else:
+                        # Default reasonable estimate for unknown cloud models
+                        model_cost = 0.005
+                
+                # Each model will run multiple analyses (one per corpus text)
+                analyses_per_model = len([run for run in matrix if run.get('model') == model_id])
+                total_estimated_cost += model_cost * analyses_per_model
+            
+            estimated_cost = total_estimated_cost
+            
+            if all(model.get('id', '').startswith('ollama/') for model in models):
                 logger.info("🏠 Local models detected - cost estimation: $0.00")
             else:
-                # For cloud models, estimate cost properly (matrix entries specify corpus)
-                estimated_analyses = len(matrix)  # Each matrix entry is one analysis
-                estimated_cost = estimated_analyses * cost_per_analysis_limit
+                logger.info(f"☁️ Cloud models detected - realistic cost estimation: ${estimated_cost:.4f}")
             
             logger.info(f"📊 Cost Estimation:")
             logger.info(f"   Estimated analyses: {estimated_analyses}")

@@ -1,0 +1,10 @@
+{
+  "experiment_id": "Cloud_Model_Comparison_Experiment_v1.0.0_20250624_230023",
+  "state": "cost_control_validation",
+  "timestamp": "2025-06-24T23:00:25.994898",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "message": "Validating cost controls"
+  }
+}
