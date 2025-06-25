@@ -1,0 +1,10 @@
+{
+  "experiment_id": "Local_Model_Comparison_Experiment_v1.0.0_20250624_221953",
+  "state": "cost_control_validation",
+  "timestamp": "2025-06-24T22:19:53.858853",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "message": "Validating cost controls"
+  }
+}

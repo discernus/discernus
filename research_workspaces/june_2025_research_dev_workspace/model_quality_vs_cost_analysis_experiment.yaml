@@ -75,33 +75,25 @@ components:
       type: "file_collection"
       file_path: "corpus/validation_set/conservative_dignity"
       pattern: "*.txt"
-      description: "Conservative dignity texts - includes Reagan Challenger address (1,153 tokens)"
+      description: "Conservative dignity-focused texts including Reagan Challenger address"
       
     - id: "progressive_dignity"
       type: "file_collection"
       file_path: "corpus/validation_set/progressive_dignity"
       pattern: "*.txt"
-      description: "Progressive dignity texts - includes Obama 2004 DNC keynote (3,272 tokens)"
+      description: "Progressive dignity-focused texts including Obama 2004 DNC keynote"
 
 execution:
   description: "Systematic comparison of cheap high-TPM vs premium flagship models across text sizes"
   
   matrix:
-    # Phase 1: Baseline Validation with conservative texts
+    # Phase 1: Conservative dignity texts - model comparison
     - run_id: "gpt35_conservative_dignity"
       description: "GPT-3.5-turbo - conservative dignity texts (high TPM model)"
       framework: "moral_foundations_theory"
       prompt_template: "moral_foundations_analysis"
       weighting_scheme: "foundation_pairs"
       model: "gpt-3.5-turbo"
-      corpus_subset: "conservative_dignity"
-      
-    - run_id: "claude_haiku_conservative_dignity"
-      description: "Claude Haiku - conservative dignity texts (high TPM model)"
-      framework: "moral_foundations_theory"
-      prompt_template: "moral_foundations_analysis"
-      weighting_scheme: "foundation_pairs"
-      model: "claude-3-5-haiku"
       corpus_subset: "conservative_dignity"
       
     - run_id: "gpt4o_conservative_dignity"
@@ -112,15 +104,7 @@ execution:
       model: "gpt-4o"
       corpus_subset: "conservative_dignity"
       
-    - run_id: "claude_sonnet_conservative_dignity"
-      description: "Claude Sonnet - conservative dignity texts (premium model)"
-      framework: "moral_foundations_theory"
-      prompt_template: "moral_foundations_analysis"
-      weighting_scheme: "foundation_pairs"
-      model: "claude-3-5-sonnet"
-      corpus_subset: "conservative_dignity"
-      
-    # Phase 2: Progressive texts for comparison
+    # Phase 2: Progressive dignity texts for comparison  
     - run_id: "gpt35_progressive_dignity"
       description: "GPT-3.5-turbo - progressive dignity texts (high TPM model)"
       framework: "moral_foundations_theory"
@@ -197,7 +181,7 @@ outputs:
     include_architecture_implications: true
 
 validation_criteria:
-  min_successful_analyses: 6  # All 6 planned analyses
+  min_successful_analyses: 4  # All 4 planned analyses
   max_total_cost: 50.0
   required_quality_score: 0.70
   

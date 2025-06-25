@@ -1,0 +1,10 @@
+{
+  "experiment_id": "Local_Model_Comparison_Experiment_v1.0.0_20250624_223434",
+  "state": "pre_flight_validation",
+  "timestamp": "2025-06-24T22:34:34.350696",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "message": "Starting pre-flight validation"
+  }
+}

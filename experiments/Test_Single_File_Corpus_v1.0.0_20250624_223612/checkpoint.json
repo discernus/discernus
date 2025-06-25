@@ -1,0 +1,10 @@
+{
+  "experiment_id": "Test_Single_File_Corpus_v1.0.0_20250624_223612",
+  "state": "pre_flight_validation",
+  "timestamp": "2025-06-24T22:36:12.511316",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "message": "Starting pre-flight validation"
+  }
+}

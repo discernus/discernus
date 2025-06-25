@@ -1,0 +1,7 @@
+asset_id: Local_Model_Comparison_Experiment_v1.0.0_20250624_221908
+content_hash: 0b5744c7c7fd5360996cb2ec092309bf6e3431eddc956933b13884ceaaa5cc9d
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-24T22:19:08.540397'
+source_path: research_workspaces/june_2025_research_dev_workspace/local_model_comparison_experiment.yaml
+validation_status: validated_before_storage
+version: v1.0.0

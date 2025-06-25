@@ -335,23 +335,44 @@ class ExperimentValidator:
                 "model",
                 "Model should specify 'provider' for clarity",
                 location,
-                "Add provider field (e.g., 'openai', 'anthropic', 'huggingface')",
+                "Add provider field (e.g., 'openai', 'anthropic', 'ollama')",
                 'provider: "openai"'
             )
         
-        # Check for common model name typos
+        # Validate model ID format and provide guidance
         if 'id' in model:
             model_id = model['id']
-            known_models = ['gpt-4', 'gpt-3.5-turbo', 'claude-3-sonnet', 'claude-3-haiku']
-            if model_id not in known_models and not any(known in model_id for known in ['gpt', 'claude']):
+            provider = model.get('provider', '')
+            
+            # Provider-specific validation
+            if provider == 'ollama' and not model_id.startswith('ollama/'):
                 self.report.add_issue(
                     ValidationSeverity.INFO,
                     "model",
-                    f"Unknown model ID: {model_id}",
+                    f"Ollama model IDs typically start with 'ollama/': {model_id}",
                     location,
-                    f"Verify model availability. Common models: {', '.join(known_models[:3])}",
-                    "Check with your model provider for available models"
+                    "Consider using format 'ollama/model_name' for clarity",
+                    'id: "ollama/llama3.2"'
                 )
+            elif provider in ['openai', 'anthropic', 'mistral', 'google_ai']:
+                # These are well-known cloud providers - just info if unknown
+                well_known_models = {
+                    'openai': ['gpt-4', 'gpt-4o', 'gpt-3.5-turbo'],
+                    'anthropic': ['claude-3-5-sonnet', 'claude-3-haiku'],
+                    'mistral': ['mistral-large', 'mistral-medium', 'mistral-small'],
+                    'google_ai': ['gemini-1.5-pro', 'gemini-1.5-flash']
+                }
+                known_for_provider = well_known_models.get(provider, [])
+                if known_for_provider and model_id not in known_for_provider:
+                    self.report.add_issue(
+                        ValidationSeverity.INFO,
+                        "model",
+                        f"Verify model availability for {provider}: {model_id}",
+                        location,
+                        f"Common {provider} models: {', '.join(known_for_provider[:3])}",
+                        "Check provider documentation for available models"
+                    )
+            # No validation for unknown providers - they might be valid local/custom providers
     
     def _validate_execution_section(self, execution: Dict[str, Any], file_path: Path):
         """Validate execution section"""

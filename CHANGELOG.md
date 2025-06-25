@@ -1387,6 +1387,32 @@ Added
 *For complete historical changelog, see previous versions*
 
 ### Added
+
+### Fixed
+- **CRITICAL:** Refactored statistical analysis system to be framework-agnostic
+  - Replaced hardcoded dignity/tribalism assumptions with dynamic framework loading
+  - H1 discriminative validity tests now adapt to any Framework Specification v3.1 structure
+  - H3 ground truth alignment tests work with any framework anchors
+  - System automatically loads framework YAML definitions and extracts axis pairs
+  - **EXTENDED:** Added full support for anchor-set frameworks (like Political Worldview Triad)
+  - Creates pairwise combinations for H1 testing from independent anchors
+  - Maintains backward compatibility with legacy fallback for systems without framework structure
+  - Resolves issue where all non-Civic Virtue frameworks failed statistical validation
+  - Successfully tested with Moral Foundations Theory (6 axis pairs: Care_Harm, Fairness_Cheating, etc.)
+  - Successfully tested with Political Worldview Triad (3 anchor pairs: Immutable-Identity, Tribal-Domination, Pluralist-Individual-Dignity)
+  - Enables Model Quality vs Cost Analysis and other MFT experiments to proceed
+  - **EXTENDED FURTHER:** Added full support for booster frameworks (anchor-set + algorithmic boosters)
+  - Correctly isolates primary anchors from booster dimensions in statistical tests
+  - Successfully tested with Political Worldview Triad + Populism/Pluralism Boosters
+  - Handles complex column matching with hyphen/underscore conversion
+  - **FULLY Framework Specification v3.1 COMPLIANT:** Complete attribute-based statistical analysis system
+  - Follows "Attribute Presence = Capability" philosophy - adapts to framework structure rather than imposing assumptions
+  - Removed ALL hardcoded integrative/disintegrative assumptions (Civic Virtue artifacts)
+  - Implements framework-adaptive testing: axes-based (opposing pair validity), anchor-based (distinctiveness), cluster-based (coherence)
+  - No forced pairwise comparisons for independent anchors - respects framework intent
+  - Graceful handling of unknown frameworks with generic fallback approach
+  - Successfully tested with comprehensive v3.1 compliance validation suite
+  - **System now supports ANY Framework Specification v3.1 structure:** axes-based, anchor-set, clustered, hybrid, legacy dipoles, boosters
 - **MAJOR ARCHITECTURAL ENHANCEMENT: Transaction Checkpoint System** - Implemented 5 critical fail-fast checkpoints in experiment orchestrator to prevent expensive failures:
   - **API Connectivity Validation**: Tests OpenAI/Anthropic/Mistral APIs before execution to prevent mid-experiment failures
   - **Cost Control Validation**: Estimates total experiment cost vs budget limits with detailed cost breakdown

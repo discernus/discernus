@@ -1,4 +1,4 @@
-name: CI - Development Velocity
+name: CI - Development Velocity with Python 3.13 Support
 
 # Trigger on pushes and pull requests to maintain development velocity
 on:
@@ -10,22 +10,35 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false  # Continue testing other Python versions if one fails
+      matrix:
+        python-version: ['3.11', '3.13']
+        include:
+          - python-version: '3.11'
+            label: 'stable'
+            required: true
+          - python-version: '3.13'
+            label: 'future'
+            required: false  # Allow 3.13 to fail without blocking PRs initially
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: ${{ matrix.python-version }}
+        allow-prereleases: true  # Important for Python 3.13
     
     - name: Cache dependencies
       uses: actions/cache@v3
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ runner.os }}-py${{ matrix.python-version }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
+          ${{ runner.os }}-py${{ matrix.python-version }}-pip-
           ${{ runner.os }}-pip-
     
     - name: Install dependencies
@@ -36,24 +49,56 @@ jobs:
     
     - name: Run unit tests
       run: |
-        echo "🧪 Running unit tests (Phase 1 CI)..."
+        echo "🧪 Running unit tests on Python ${{ matrix.python-version }} (Phase 1 CI)..."
         python3 -m pytest tests/unit/ -v --tb=short --maxfail=5
     
     - name: Basic import validation
       run: |
-        echo "🔍 Validating core imports..."
+        echo "🔍 Validating core imports on Python ${{ matrix.python-version }}..."
         python3 -c "
         try:
             import src.utils.cost_manager
             import src.models.base
             import src.coordinate_engine
-            print('✅ Core imports successful')
+            print('✅ Core imports successful on Python ${{ matrix.python-version }}')
         except ImportError as e:
-            print(f'❌ Import error: {e}')
+            print(f'❌ Import error on Python ${{ matrix.python-version }}: {e}')
+            exit(1)
+        "
+
+    - name: Python 3.13 specific tests
+      if: matrix.python-version == '3.13'
+      run: |
+        echo "🚀 Running Python 3.13 specific validation..."
+        python3 -c "
+        import sys
+        print(f'✅ Python version: {sys.version}')
+        
+        # Test new 3.13 features compatibility
+        try:
+            # Test that our codebase works with 3.13's improved error messages
+            import src.analysis.statistics
+            print('✅ Framework Specification v3.1 compatible with Python 3.13')
+            
+            # Test scientific computing stack
+            import numpy as np
+            import pandas as pd
+            import scipy as sp
+            print(f'✅ Scientific stack: NumPy {np.__version__}, Pandas {pd.__version__}, SciPy {sp.__version__}')
+            
+            # Test LLM clients 
+            import openai
+            import anthropic
+            print('✅ LLM API clients compatible with Python 3.13')
+            
+        except Exception as e:
+            print(f'❌ Python 3.13 compatibility issue: {e}')
             exit(1)
         "
     
     - name: License compliance check
+      # Only run on Python 3.11 to avoid duplicate license checks
+      if: matrix.python-version == '3.11'
       run: |
         echo "📋 Checking license compliance..."
         cd product_management/license_audit
@@ -76,7 +121,7 @@ jobs:
     
     - name: Test configuration validation
       run: |
-        echo "⚙️ Validating test configuration..."
+        echo "⚙️ Validating test configuration on Python ${{ matrix.python-version }}..."
         python3 -c "
         import os
         import sys
@@ -103,15 +148,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     continue-on-error: true  # Don't block development on framework issues
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.13']
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Set up Python 3.11
-      uses: actions/setup-python@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: ${{ matrix.python-version }}
+        allow-prereleases: true
     
     - name: Install dependencies
       run: |
@@ -121,15 +170,15 @@ jobs:
     
     - name: Quick integration test
       run: |
-        echo "🔬 Running integration smoke test..."
+        echo "🔬 Running integration smoke test on Python ${{ matrix.python-version }}..."
         echo "⚠️ This test may fail due to framework documentation issues"
         echo "🎯 Goal: Catch obvious integration problems without blocking development"
         
         # Run a subset of integration tests that don't require full system health
         if python3 -m pytest tests/integration/test_api_schemas.py -v --tb=short; then
-          echo "✅ Integration smoke test passed"
+          echo "✅ Integration smoke test passed on Python ${{ matrix.python-version }}"
         else
-          echo "⚠️ Integration smoke test failed (not blocking)"
+          echo "⚠️ Integration smoke test failed on Python ${{ matrix.python-version }} (not blocking)"
         fi
 
   # Summary job
@@ -141,32 +190,40 @@ jobs:
     steps:
     - name: CI Summary
       run: |
-        echo "🏁 CI Summary for Development Velocity"
-        echo "=================================="
+        echo "🏁 CI Summary for Development Velocity + Python 3.13 Support"
+        echo "============================================================"
         
-        if [ "${{ needs.test.result }}" == "success" ]; then
-          echo "✅ Core Tests: PASSED"
+        # Check Python 3.11 results (required)
+        python311_test_result="${{ needs.test.result }}"
+        if [[ "$python311_test_result" == "success" ]]; then
+          echo "✅ Python 3.11 Tests: PASSED (Required)"
         else
-          echo "❌ Core Tests: FAILED"
+          echo "❌ Python 3.11 Tests: FAILED (Required)"
         fi
         
+        # Check Python 3.13 results (future target)
+        echo "🚀 Python 3.13 Tests: Checked (Future compatibility)"
+        
         if [ "${{ needs.integration-smoke-test.result }}" == "success" ]; then
-          echo "✅ Integration Smoke Test: PASSED"
+          echo "✅ Integration Smoke Tests: PASSED"
         else
-          echo "⚠️ Integration Smoke Test: FAILED (non-blocking)"
+          echo "⚠️ Integration Smoke Tests: FAILED (non-blocking)"
         fi
         
         echo ""
-        echo "📊 Phase 1 CI Goals:"
-        echo "• Fast feedback (< 5 minutes)"
-        echo "• Catch import/syntax errors"
+        echo "📊 Enhanced CI Goals:"
+        echo "• Fast feedback (< 8 minutes with matrix)"
+        echo "• Python 3.11 stability (required for merge)"
+        echo "• Python 3.13 future compatibility (informational)"
+        echo "• Catch import/syntax/compatibility errors"
         echo "• Validate license compliance"
         echo "• Maintain development velocity"
         echo ""
         
-        if [ "${{ needs.test.result }}" == "success" ]; then
-          echo "🎉 Development can continue - core functionality validated!"
+        if [[ "$python311_test_result" == "success" ]]; then
+          echo "🎉 Development can continue - Python 3.11 core functionality validated!"
+          echo "🚀 Python 3.13 compatibility status available in detailed logs"
         else
-          echo "🚨 Core tests failed - please fix before merging"
+          echo "🚨 Python 3.11 tests failed - please fix before merging"
           exit 1
         fi 

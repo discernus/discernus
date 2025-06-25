@@ -1,0 +1,68 @@
+{
+  "study_metadata": {
+    "name": "Model_Quality_vs_Cost_Analysis_Experiment",
+    "version": "v1.0.0",
+    "created": "2025-06-25T16:00:00Z",
+    "description": "Strategic experiment to determine if cheap high-TPM models (GPT-3.5-turbo, Claude Haiku) provide sufficient quality vs flagship models (GPT-4o, Claude Sonnet) for narrative analysis",
+    "hypothesis": "Cheap models with high TPM limits provide sufficient quality for academic research, eliminating need for complex LiteLLM architecture",
+    "research_context": "Critical decision point: Build simple high-throughput system vs complex multi-tier architecture",
+    "principal_investigator": "Discernus Research Team",
+    "institution": "Discernus Research Lab",
+    "ethical_clearance": "ACADEMIC-2025-COST-001",
+    "funding_source": "Internal Development",
+    "data_classification": "research",
+    "publication_intent": true,
+    "tags": [
+      "model_comparison",
+      "cost_analysis",
+      "tpm_testing",
+      "flagship_vs_throughput",
+      "academic_feasibility"
+    ],
+    "research_question": "Do flagship models (GPT-4o, Claude Sonnet) provide sufficient quality improvement over high-TPM models (GPT-3.5-turbo, Claude Haiku) to justify 10-20x higher cost and TPM complexity?",
+    "hypotheses": [
+      "Cheap models (GPT-3.5-turbo, Claude Haiku) achieve >85% quality of premium models across text sizes",
+      "Premium models show significant quality advantage only on extra-large texts (>15K tokens)",
+      "TPM constraints create practical limitations for premium models in large-scale research",
+      "Cost per quality point favors cheap models for most academic use cases"
+    ],
+    "success_criteria": [
+      "Clear quality differentiation between cheap and premium models measured",
+      "Cost per quality point calculated for academic decision framework",
+      "TPM boundary effects identified and quantified",
+      "Actionable architecture recommendations generated for each academic use case"
+    ]
+  },
+  "analysis_summary": {
+    "total_analyses": 8,
+    "successful_analyses": 0,
+    "failed_analyses": 8,
+    "total_cost": 0.3833,
+    "cost_efficiency": 0.0479,
+    "extraction_timestamp": "2025-06-24T20:43:40.684033",
+    "well_columns": [
+      "well_care",
+      "well_harm",
+      "well_fairness",
+      "well_cheating",
+      "well_loyalty",
+      "well_betrayal",
+      "well_authority",
+      "well_subversion",
+      "well_sanctity",
+      "well_degradation",
+      "well_liberty",
+      "well_oppression"
+    ],
+    "frameworks_used": [
+      "moral_foundations_theory"
+    ],
+    "models_used": [
+      "unknown"
+    ]
+  },
+  "export_timestamp": "2025-06-24T20:43:41.109006",
+  "files_generated": [
+    "analysis_data.csv"
+  ]
+}

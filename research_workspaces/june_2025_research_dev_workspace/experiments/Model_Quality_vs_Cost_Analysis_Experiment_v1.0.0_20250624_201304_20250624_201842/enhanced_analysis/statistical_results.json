@@ -1,0 +1,466 @@
+{
+  "hypothesis_testing": {
+    "H1_discriminative_validity": {
+      "hypothesis": "Discriminative validity: Dignity and Tribalism wells differentiate expected text categories",
+      "dignity_wells": [],
+      "tribalism_wells": [],
+      "tests_performed": [],
+      "status": "insufficient_data",
+      "message": "Missing wells - Dignity: [], Tribalism: []"
+    },
+    "H2_ideological_agnosticism": {
+      "hypothesis": "Ideological agnosticism: Framework should not systematically favor conservative vs progressive content",
+      "tests_performed": [],
+      "sample_sizes": {
+        "conservative": 0,
+        "progressive": 0,
+        "unknown": 8
+      },
+      "status": "insufficient_data",
+      "message": "Could not identify both conservative and progressive texts for comparison"
+    },
+    "H3_ground_truth_alignment": {
+      "hypothesis": "Ground truth alignment: Extreme control texts should score >0.8 on expected wells",
+      "target_threshold": 0.8,
+      "tests_performed": [],
+      "extreme_controls_found": 0,
+      "status": "insufficient_data",
+      "message": "No extreme control texts identified"
+    }
+  },
+  "descriptive_statistics": {
+    "well_care": {
+      "count": 8,
+      "mean": 0.8500000000000001,
+      "std": 0.053452248382484864,
+      "min": 0.8,
+      "max": 0.9,
+      "median": 0.8500000000000001,
+      "q25": 0.8,
+      "q75": 0.9,
+      "skewness": 0.0,
+      "kurtosis": -2.8
+    },
+    "well_harm": {
+      "count": 8,
+      "mean": 0.14999999999999997,
+      "std": 0.053452248382484864,
+      "min": 0.09999999999999998,
+      "max": 0.19999999999999996,
+      "median": 0.14999999999999997,
+      "q25": 0.09999999999999998,
+      "q75": 0.19999999999999996,
+      "skewness": 0.0,
+      "kurtosis": -2.8000000000000007
+    },
+    "well_fairness": {
+      "count": 8,
+      "mean": 0.7749999999999999,
+      "std": 0.08017837257372733,
+      "min": 0.7,
+      "max": 0.85,
+      "median": 0.7749999999999999,
+      "q25": 0.7,
+      "q75": 0.85,
+      "skewness": 0.0,
+      "kurtosis": -2.8
+    },
+    "well_cheating": {
+      "count": 8,
+      "mean": 0.22500000000000003,
+      "std": 0.08017837257372733,
+      "min": 0.15000000000000002,
+      "max": 0.30000000000000004,
+      "median": 0.22500000000000003,
+      "q25": 0.15000000000000002,
+      "q75": 0.30000000000000004,
+      "skewness": 0.0,
+      "kurtosis": -2.8000000000000003
+    },
+    "well_loyalty": {
+      "count": 8,
+      "mean": 0.6499999999999999,
+      "std": 0.053452248382484864,
+      "min": 0.6,
+      "max": 0.7,
+      "median": 0.6499999999999999,
+      "q25": 0.6,
+      "q75": 0.7,
+      "skewness": 0.0,
+      "kurtosis": -2.8
+    },
+    "well_betrayal": {
+      "count": 8,
+      "mean": 0.35000000000000003,
+      "std": 0.053452248382484864,
+      "min": 0.30000000000000004,
+      "max": 0.4,
+      "median": 0.35000000000000003,
+      "q25": 0.30000000000000004,
+      "q75": 0.4,
+      "skewness": 0.0,
+      "kurtosis": -2.8000000000000007
+    },
+    "well_authority": {
+      "count": 8,
+      "mean": 0.5687500000000001,
+      "std": 0.059386746958271036,
+      "min": 0.5,
+      "max": 0.65,
+      "median": 0.6,
+      "q25": 0.5,
+      "q75": 0.6,
+      "skewness": -0.28775119820832434,
+      "kurtosis": -1.746130427816051
+    },
+    "well_subversion": {
+      "count": 8,
+      "mean": 0.43125,
+      "std": 0.059386746958271036,
+      "min": 0.35,
+      "max": 0.5,
+      "median": 0.4,
+      "q25": 0.4,
+      "q75": 0.5,
+      "skewness": 0.287751198208317,
+      "kurtosis": -1.746130427816055
+    },
+    "well_sanctity": {
+      "count": 8,
+      "mean": 0.4375,
+      "std": 0.09161253813129043,
+      "min": 0.3,
+      "max": 0.5,
+      "median": 0.5,
+      "q25": 0.375,
+      "q75": 0.5,
+      "skewness": -0.9986554631966837,
+      "kurtosis": -1.0393843368039835
+    },
+    "well_degradation": {
+      "count": 8,
+      "mean": 0.5625,
+      "std": 0.09161253813129042,
+      "min": 0.5,
+      "max": 0.7,
+      "median": 0.5,
+      "q25": 0.5,
+      "q75": 0.625,
+      "skewness": 0.9986554631966827,
+      "kurtosis": -1.0393843368039848
+    },
+    "well_liberty": {
+      "count": 8,
+      "mean": 0.68125,
+      "std": 0.29512406592095175,
+      "min": 0.3,
+      "max": 0.95,
+      "median": 0.75,
+      "q25": 0.4,
+      "q75": 0.95,
+      "skewness": -0.1817512212636715,
+      "kurtosis": -2.4230792289094087
+    },
+    "well_oppression": {
+      "count": 8,
+      "mean": 0.31875,
+      "std": 0.29512406592095175,
+      "min": 0.050000000000000044,
+      "max": 0.7,
+      "median": 0.25,
+      "q25": 0.050000000000000044,
+      "q75": 0.6,
+      "skewness": 0.18175122126367124,
+      "kurtosis": -2.423079228909409
+    }
+  },
+  "effect_sizes": {
+    "well_care_vs_well_harm": {
+      "cohens_d": 13.095800853708802,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_fairness": {
+      "cohens_d": 1.1006990785580169,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_cheating": {
+      "cohens_d": 9.172492321316787,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_loyalty": {
+      "cohens_d": 3.7416573867739458,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_betrayal": {
+      "cohens_d": 9.354143466934856,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_authority": {
+      "cohens_d": 4.978098887272986,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_subversion": {
+      "cohens_d": 7.411836121050891,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_sanctity": {
+      "cohens_d": 5.500000000000002,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_degradation": {
+      "cohens_d": 3.8333333333333353,
+      "effect_magnitude": "large"
+    },
+    "well_care_vs_well_liberty": {
+      "cohens_d": 0.7956924976826707,
+      "effect_magnitude": "medium"
+    },
+    "well_care_vs_well_oppression": {
+      "cohens_d": 2.5049578630750737,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_fairness": {
+      "cohens_d": -9.172492321316787,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_cheating": {
+      "cohens_d": -1.1006990785580153,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_loyalty": {
+      "cohens_d": -9.354143466934854,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_betrayal": {
+      "cohens_d": -3.7416573867739435,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_authority": {
+      "cohens_d": -7.411836121050892,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_subversion": {
+      "cohens_d": -4.978098887272987,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_sanctity": {
+      "cohens_d": -3.833333333333334,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_degradation": {
+      "cohens_d": -5.500000000000002,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_liberty": {
+      "cohens_d": -2.5049578630750733,
+      "effect_magnitude": "large"
+    },
+    "well_harm_vs_well_oppression": {
+      "cohens_d": -0.7956924976826705,
+      "effect_magnitude": "medium"
+    },
+    "well_fairness_vs_well_cheating": {
+      "cohens_d": 6.859705209085556,
+      "effect_magnitude": "large"
+    },
+    "well_fairness_vs_well_loyalty": {
+      "cohens_d": 1.834498464263357,
+      "effect_magnitude": "large"
+    },
+    "well_fairness_vs_well_betrayal": {
+      "cohens_d": 6.2372947784954125,
+      "effect_magnitude": "large"
+    },
+    "well_fairness_vs_well_authority": {
+      "cohens_d": 2.9233481020159955,
+      "effect_magnitude": "large"
+    },
+    "well_fairness_vs_well_subversion": {
+      "cohens_d": 4.8722468366933285,
+      "effect_magnitude": "large"
+    },
+    "well_fairness_vs_well_sanctity": {
+      "cohens_d": 3.92052061947273,
+      "effect_magnitude": "large"
+    },
+    "well_fairness_vs_well_degradation": {
+      "cohens_d": 2.4684759455939407,
+      "effect_magnitude": "large"
+    },
+    "well_fairness_vs_well_liberty": {
+      "cohens_d": 0.4335291155544371,
+      "effect_magnitude": "small"
+    },
+    "well_fairness_vs_well_oppression": {
+      "cohens_d": 2.1098416956982624,
+      "effect_magnitude": "large"
+    },
+    "well_cheating_vs_well_loyalty": {
+      "cohens_d": -6.2372947784954125,
+      "effect_magnitude": "large"
+    },
+    "well_cheating_vs_well_betrayal": {
+      "cohens_d": -1.834498464263357,
+      "effect_magnitude": "large"
+    },
+    "well_cheating_vs_well_authority": {
+      "cohens_d": -4.87224683669333,
+      "effect_magnitude": "large"
+    },
+    "well_cheating_vs_well_subversion": {
+      "cohens_d": -2.9233481020159977,
+      "effect_magnitude": "large"
+    },
+    "well_cheating_vs_well_sanctity": {
+      "cohens_d": -2.468475945593941,
+      "effect_magnitude": "large"
+    },
+    "well_cheating_vs_well_degradation": {
+      "cohens_d": -3.9205206194727302,
+      "effect_magnitude": "large"
+    },
+    "well_cheating_vs_well_liberty": {
+      "cohens_d": -2.109841695698263,
+      "effect_magnitude": "large"
+    },
+    "well_cheating_vs_well_oppression": {
+      "cohens_d": -0.43352911555443735,
+      "effect_magnitude": "small"
+    },
+    "well_loyalty_vs_well_betrayal": {
+      "cohens_d": 5.612486080160911,
+      "effect_magnitude": "large"
+    },
+    "well_loyalty_vs_well_authority": {
+      "cohens_d": 1.438117456323304,
+      "effect_magnitude": "large"
+    },
+    "well_loyalty_vs_well_subversion": {
+      "cohens_d": 3.871854690101209,
+      "effect_magnitude": "large"
+    },
+    "well_loyalty_vs_well_sanctity": {
+      "cohens_d": 2.833333333333332,
+      "effect_magnitude": "large"
+    },
+    "well_loyalty_vs_well_degradation": {
+      "cohens_d": 1.1666666666666656,
+      "effect_magnitude": "large"
+    },
+    "well_loyalty_vs_well_liberty": {
+      "cohens_d": -0.14735046253382836,
+      "effect_magnitude": "negligible"
+    },
+    "well_loyalty_vs_well_oppression": {
+      "cohens_d": 1.5619149028585748,
+      "effect_magnitude": "large"
+    },
+    "well_betrayal_vs_well_authority": {
+      "cohens_d": -3.871854690101212,
+      "effect_magnitude": "large"
+    },
+    "well_betrayal_vs_well_subversion": {
+      "cohens_d": -1.4381174563233068,
+      "effect_magnitude": "large"
+    },
+    "well_betrayal_vs_well_sanctity": {
+      "cohens_d": -1.1666666666666663,
+      "effect_magnitude": "large"
+    },
+    "well_betrayal_vs_well_degradation": {
+      "cohens_d": -2.8333333333333335,
+      "effect_magnitude": "large"
+    },
+    "well_betrayal_vs_well_liberty": {
+      "cohens_d": -1.561914902858575,
+      "effect_magnitude": "large"
+    },
+    "well_betrayal_vs_well_oppression": {
+      "cohens_d": 0.1473504625338281,
+      "effect_magnitude": "negligible"
+    },
+    "well_authority_vs_well_subversion": {
+      "cohens_d": 2.3153314003984162,
+      "effect_magnitude": "large"
+    },
+    "well_authority_vs_well_sanctity": {
+      "cohens_d": 1.700132182567653,
+      "effect_magnitude": "large"
+    },
+    "well_authority_vs_well_degradation": {
+      "cohens_d": 0.08095867536036554,
+      "effect_magnitude": "negligible"
+    },
+    "well_authority_vs_well_liberty": {
+      "cohens_d": -0.5284981975632329,
+      "effect_magnitude": "medium"
+    },
+    "well_authority_vs_well_oppression": {
+      "cohens_d": 1.1744404390294076,
+      "effect_magnitude": "large"
+    },
+    "well_subversion_vs_well_sanctity": {
+      "cohens_d": -0.08095867536036408,
+      "effect_magnitude": "negligible"
+    },
+    "well_subversion_vs_well_degradation": {
+      "cohens_d": -1.7001321825676519,
+      "effect_magnitude": "large"
+    },
+    "well_subversion_vs_well_liberty": {
+      "cohens_d": -1.174440439029407,
+      "effect_magnitude": "large"
+    },
+    "well_subversion_vs_well_oppression": {
+      "cohens_d": 0.5284981975632334,
+      "effect_magnitude": "medium"
+    },
+    "well_sanctity_vs_well_degradation": {
+      "cohens_d": -1.3644420572745386,
+      "effect_magnitude": "large"
+    },
+    "well_sanctity_vs_well_liberty": {
+      "cohens_d": -1.115522255189596,
+      "effect_magnitude": "large"
+    },
+    "well_sanctity_vs_well_oppression": {
+      "cohens_d": 0.5434595602205725,
+      "effect_magnitude": "medium"
+    },
+    "well_degradation_vs_well_liberty": {
+      "cohens_d": -0.5434595602205725,
+      "effect_magnitude": "medium"
+    },
+    "well_degradation_vs_well_oppression": {
+      "cohens_d": 1.1155222551895962,
+      "effect_magnitude": "large"
+    },
+    "well_liberty_vs_well_oppression": {
+      "cohens_d": 1.2282969837407118,
+      "effect_magnitude": "large"
+    }
+  },
+  "metadata": {
+    "sample_size": 8,
+    "well_count": 12,
+    "frameworks_tested": [
+      "moral_foundations_theory"
+    ],
+    "models_tested": [
+      "unknown"
+    ],
+    "significance_level": 0.05,
+    "testing_timestamp": "2025-06-24T20:18:42.507980"
+  },
+  "summary": {
+    "overall_assessment": "validation_concerns",
+    "hypotheses_supported": 0,
+    "hypotheses_tested": 3,
+    "key_findings": [],
+    "recommendations": [
+      "Consider refining well definitions for better discriminative validity",
+      "Investigate and address potential ideological bias in framework",
+      "Improve ground truth alignment - consider threshold adjustments or control text selection"
+    ]
+  }
+}

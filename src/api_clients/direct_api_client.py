@@ -309,8 +309,21 @@ class DirectAPIClient:
             result, cost = self._analyze_with_mistral(prompt, model_name)
         elif model_name.startswith("gemini") or model_name.startswith("google"):
             result, cost = self._analyze_with_google_ai(prompt, model_name)
+        elif model_name.startswith("ollama/"):
+            result, cost = self._analyze_with_ollama(prompt, model_name)
         else:
-            raise ValueError(f"Unknown model: {model_name}")
+            # Try to determine provider by model name
+            provider = self._get_provider_from_model(model_name)
+            if provider == "openai":
+                result, cost = self._analyze_with_openai(prompt, model_name)
+            elif provider == "anthropic":
+                result, cost = self._analyze_with_anthropic(prompt, model_name)
+            elif provider == "mistral":
+                result, cost = self._analyze_with_mistral(prompt, model_name)
+            elif provider == "google_ai":
+                result, cost = self._analyze_with_google_ai(prompt, model_name)
+            else:
+                raise ValueError(f"Unknown model: {model_name}. Supported providers: openai, anthropic, mistral, google_ai, ollama")
         
         # 🚀 NEW: Record actual token usage for TPM tracking
         if self.tpm_limiter and 'error' not in result:
@@ -343,7 +356,9 @@ class DirectAPIClient:
     
     def _get_provider_from_model(self, model_name: str) -> str:
         """Get provider name from model name"""
-        if any(x in model_name.lower() for x in ["gpt", "openai", "o1", "o3", "o4"]):
+        if model_name.startswith("ollama/"):
+            return "ollama"
+        elif any(x in model_name.lower() for x in ["gpt", "openai", "o1", "o3", "o4"]):
             return "openai"
         elif any(x in model_name.lower() for x in ["claude", "anthropic"]):
             return "anthropic"
@@ -352,7 +367,7 @@ class DirectAPIClient:
         elif any(x in model_name.lower() for x in ["gemini", "google"]):
             return "google_ai"
         elif any(x in model_name.lower() for x in ["deepseek", "qwen", "llama"]):
-            # For open-source models, we'll use OpenAI-compatible APIs
+            # For open-source models hosted on cloud services
             # Many hosting services (like Together AI, Fireworks) provide these
             return "openai"  # Use OpenAI client for compatibility
         else:
@@ -694,6 +709,51 @@ class DirectAPIClient:
         except Exception as e:
             print(f"Google AI API error: {e}")
             return {"error": str(e)}, 0.0
+
+    def _analyze_with_ollama(self, prompt: str, model_name: str = "ollama/llama3.2") -> Tuple[Dict[str, Any], float]:
+        """Analyze with Ollama models running locally."""
+        try:
+            import requests
+            import json
+            
+            # Extract actual model name from ollama/model_name format
+            actual_model = model_name.replace("ollama/", "")
+            
+            # Ollama API endpoint (local)
+            url = "http://localhost:11434/api/generate"
+            
+            payload = {
+                "model": actual_model,
+                "prompt": prompt,
+                "stream": False,
+                "format": "json"
+            }
+            
+            print(f"🦙 Calling Ollama: {model_name} (local, $0 cost)")
+            
+            response = requests.post(url, json=payload, timeout=300)  # 5 min timeout for local models
+            
+            if response.status_code == 200:
+                result = response.json()
+                content = result.get("response", "")
+                
+                # Ollama models are free (local)
+                cost = 0.0
+                
+                return self._parse_response(content, self._current_text, self._current_framework), cost
+            else:
+                error_msg = f"Ollama API error {response.status_code}: {response.text}"
+                print(f"❌ {error_msg}")
+                return {"error": error_msg}, 0.0
+                
+        except requests.exceptions.ConnectionError:
+            error_msg = "Ollama server not running. Start with: ollama serve"
+            print(f"❌ {error_msg}")
+            return {"error": error_msg}, 0.0
+        except Exception as e:
+            error_msg = f"Ollama error: {str(e)}"
+            print(f"❌ {error_msg}")
+            return {"error": error_msg}, 0.0
     
     def get_available_models(self) -> Dict[str, list]:
         """Get list of available models - Updated for 2025"""
@@ -765,6 +825,18 @@ class DirectAPIClient:
                 "gemini-1.5-flash",
                 "gemini-1.5-pro",
             ]
+        
+        # Ollama models (local, cost-free)
+        models["ollama"] = [
+            "ollama/llama3.2",      # Meta Llama 3.2 (3B/11B/90B)
+            "ollama/llama3.1",      # Meta Llama 3.1 (8B/70B/405B)
+            "ollama/mistral",       # Mistral 7B
+            "ollama/codellama",     # Code Llama
+            "ollama/phi3",          # Microsoft Phi-3
+            "ollama/gemma2",        # Google Gemma 2
+            "ollama/qwen2.5",       # Alibaba Qwen 2.5
+            "ollama/deepseek-v2",   # DeepSeek V2
+        ]
         
         return {k: v for k, v in models.items() if v}  # Only return providers with models
     

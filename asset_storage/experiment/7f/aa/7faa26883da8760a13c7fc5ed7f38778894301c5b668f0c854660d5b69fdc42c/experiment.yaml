@@ -1,0 +1,76 @@
+experiment_meta:
+  name: Test_Single_File_Corpus
+  version: v1.0.0
+  created: '2025-12-25T22:40:00Z'
+  description: Minimal test to debug single file corpus configuration
+  hypothesis: Single file corpus configuration should work
+  research_context: Debug corpus validation issue
+  principal_investigator: Debug Team
+  institution: Test Lab
+  ethical_clearance: DEBUG-001
+  funding_source: Debug
+  data_classification: test
+  publication_intent: false
+  tags:
+  - debug
+  - corpus_test
+  research_question: Can we load a single file corpus properly?
+  hypotheses:
+  - Single file should load without pattern matching errors
+  success_criteria:
+  - File found and loaded successfully
+components:
+  frameworks:
+  - id: moral_foundations_theory
+    version: v2025.06.19
+    type: file_path
+    file_path: research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+  prompt_templates:
+  - id: moral_foundations_analysis
+    version: v1.0
+    type: workspace_asset
+    file_path: research_workspaces/june_2025_research_dev_workspace/prompt_templates/moral_foundations_analysis/template.yaml
+  weighting_schemes:
+  - id: foundation_pairs
+    version: v1.0
+    type: workspace_asset
+    file_path: research_workspaces/june_2025_research_dev_workspace/weighting_schemes/foundation_pairs/scheme.yaml
+  models:
+  - id: ollama/llama3.2
+    provider: ollama
+    version: latest
+    description: Local Llama 3.2 for testing
+  corpus:
+  - id: test_reagan
+    type: file_path
+    file_path: corpus/validation_set/conservative_dignity/ronald_reagan_1986_challenger_address.txt
+    description: Single Reagan file test
+execution:
+  description: Test single file corpus loading
+  matrix:
+  - run_id: test_single_file
+    description: Test loading single corpus file
+    framework: moral_foundations_theory
+    prompt_template: moral_foundations_analysis
+    weighting_scheme: foundation_pairs
+    model: ollama/llama3.2
+    corpus_subset: test_reagan
+  cost_controls:
+    max_total_cost: 1.0
+    cost_per_analysis_limit: 1.0
+  quality_controls:
+    min_framework_fit_score: 0.5
+    enable_qa_validation: false
+    require_evidence: false
+enhanced_analysis:
+  enabled: false
+outputs:
+  save_to_database: true
+  export_formats:
+  - json
+  include_raw_responses: false
+  include_provenance: false
+validation_criteria:
+  min_successful_analyses: 1
+  max_total_cost: 1.0
+  required_quality_score: 0.5

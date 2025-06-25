@@ -1,0 +1,169 @@
+experiment_meta:
+  name: Local_Model_Comparison_Experiment
+  version: v1.0.0
+  created: '2025-12-25T17:00:00Z'
+  description: Cost-free experiment comparing local Ollama models (Llama 3.2 vs Mistral)
+    for narrative analysis capabilities and processing efficiency
+  hypothesis: Local models provide sufficient quality for academic research while
+    offering unlimited TPM throughput and zero operating costs
+  research_context: Evaluate local model capabilities as foundation for cost-free
+    academic research infrastructure
+  principal_investigator: Discernus Research Team
+  institution: Discernus Research Lab
+  ethical_clearance: ACADEMIC-2025-LOCAL-001
+  funding_source: Internal Development
+  data_classification: research
+  publication_intent: true
+  tags:
+  - local_models
+  - ollama
+  - cost_free
+  - tpm_unlimited
+  - academic_feasibility
+  - llama
+  - mistral
+  research_question: How do local Ollama models (Llama 3.2 vs Mistral) compare in
+    narrative analysis quality, and can they provide adequate capabilities for academic
+    research without API costs or TPM constraints?
+  hypotheses:
+  - Local models provide consistent narrative analysis across text sizes without TPM
+    limitations
+  - Llama 3.2 and Mistral show distinct analytical patterns suitable for different
+    research contexts
+  - Local models eliminate cost barriers while maintaining research-quality analysis
+    capabilities
+  - Processing time for local models is acceptable for academic research workflows
+  success_criteria:
+  - Clear quality comparison between Llama 3.2 and Mistral models measured
+  - Processing efficiency and throughput capabilities documented
+  - Framework compliance and analytical consistency validated
+  - Academic viability assessment for cost-free research infrastructure
+components:
+  frameworks:
+  - id: moral_foundations_theory
+    version: v2025.06.19
+    type: file_path
+    file_path: research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml
+  prompt_templates:
+  - id: moral_foundations_analysis
+    version: v1.0
+    type: workspace_asset
+    file_path: research_workspaces/june_2025_research_dev_workspace/prompt_templates/moral_foundations_analysis/template.yaml
+  weighting_schemes:
+  - id: foundation_pairs
+    version: v1.0
+    type: workspace_asset
+    file_path: research_workspaces/june_2025_research_dev_workspace/weighting_schemes/foundation_pairs/scheme.yaml
+  models:
+  - id: ollama/llama3.2
+    provider: ollama
+    version: latest
+    description: Meta Llama 3.2 - 3.2B parameter model running locally
+  - id: ollama/mistral
+    provider: ollama
+    version: latest
+    description: Mistral 7B model running locally
+  corpus:
+    id: test_corpus
+    type: file_collection
+    path: ./tmp/test_corpus/
+    pattern: '*.txt'
+    description: Test corpus for local model validation
+execution:
+  description: Comprehensive comparison of local Ollama models across representative
+    text collections
+  matrix:
+  - run_id: llama32_test_corpus
+    description: Llama 3.2 - test corpus analysis (unlimited TPM local model)
+    framework: moral_foundations_theory
+    prompt_template: moral_foundations_analysis
+    weighting_scheme: foundation_pairs
+    model: ollama/llama3.2
+    corpus_subset: test_corpus
+  - run_id: mistral_test_corpus
+    description: Mistral 7B - test corpus analysis (unlimited TPM local model)
+    framework: moral_foundations_theory
+    prompt_template: moral_foundations_analysis
+    weighting_scheme: foundation_pairs
+    model: ollama/mistral
+    corpus_subset: test_corpus
+  cost_controls:
+    max_total_cost: 0.0
+    cost_per_analysis_limit: 0.0
+  quality_controls:
+    min_framework_fit_score: 0.6
+    enable_qa_validation: true
+    require_evidence: true
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.7
+    require_evidence: true
+    manual_review_triggers:
+    - low_confidence
+    - quality_degradation
+    - processing_anomaly
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+  configuration:
+    local_model_analysis:
+      enabled: true
+      processing_time_tracking: true
+      tpm_utilization_analysis: true
+      model_characteristic_comparison: true
+    performance_comparison:
+      enabled: true
+      llama_vs_mistral_comparison: true
+      text_size_performance_patterns: true
+      academic_workflow_suitability: true
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests:
+      - model_consistency
+      - text_type_sensitivity
+      - academic_quality
+    visualizations:
+      enabled: true
+      types:
+      - model_comparison_radar
+      - processing_time_plots
+      - quality_consistency_charts
+outputs:
+  save_to_database: true
+  export_formats:
+  - json
+  - csv
+  - r_data
+  include_raw_responses: true
+  include_provenance: true
+  academic_exports:
+    enabled: true
+    formats:
+    - csv
+    - r_data
+    include_replication_package: true
+  local_model_report:
+    enabled: true
+    include_performance_metrics: true
+    include_processing_times: true
+    include_academic_viability_assessment: true
+validation_criteria:
+  min_successful_analyses: 2
+  max_total_cost: 0.0
+  required_quality_score: 0.6
+  success_metrics:
+    model_differentiation: Clear analytical differences between Llama 3.2 and Mistral
+      documented
+    processing_efficiency: Processing times and throughput capabilities measured
+    academic_viability: Suitability for academic research workflows assessed
+  decision_outcomes:
+    primary_local_model: Identify best-performing local model for primary research
+      use
+    workflow_optimization: Optimize local model workflows for academic productivity
+    infrastructure_planning: Plan local model infrastructure for research scaling
+tpm_validation_notes:
+  expected_behavior: Local models should show unlimited TPM capacity
+  validation_bypass: TPM validation should pass immediately for ollama/* models
+  cost_verification: All costs should be $0.00 for local model execution

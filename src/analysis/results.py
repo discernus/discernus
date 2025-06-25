@@ -68,17 +68,30 @@ class ExperimentResultsExtractor:
                 with open(framework_path, 'r', encoding='utf-8') as f:
                     framework_data = yaml.safe_load(f)
                 
-                # Extract wells from dipoles
+                # Extract wells from axes (v3.1+) or dipoles (legacy)
                 wells = []
-                dipoles = framework_data.get('dipoles', [])
-                for dipole in dipoles:
-                    if isinstance(dipole, dict):
-                        if 'positive' in dipole and 'name' in dipole['positive']:
-                            wells.append(dipole['positive']['name'])
-                        if 'negative' in dipole and 'name' in dipole['negative']:
-                            wells.append(dipole['negative']['name'])
                 
-                logger.info(f"✅ Loaded {len(wells)} wells for {framework_name} from YAML: {wells}")
+                # Try new axes format first (v3.1+) - label-agnostic extraction
+                axes = framework_data.get('axes', {})
+                if axes:
+                    for axis_name, axis_data in axes.items():
+                        if isinstance(axis_data, dict):
+                            # Extract all anchors from this axis regardless of organizational labels
+                            for label, anchor_config in axis_data.items():
+                                if isinstance(anchor_config, dict) and 'name' in anchor_config:
+                                    wells.append(anchor_config['name'])
+                    logger.info(f"✅ Loaded {len(wells)} wells for {framework_name} from YAML (v3.1 axes, label-agnostic): {wells}")
+                else:
+                    # Fall back to legacy dipoles format
+                    dipoles = framework_data.get('dipoles', [])
+                    for dipole in dipoles:
+                        if isinstance(dipole, dict):
+                            if 'positive' in dipole and 'name' in dipole['positive']:
+                                wells.append(dipole['positive']['name'])
+                            if 'negative' in dipole and 'name' in dipole['negative']:
+                                wells.append(dipole['negative']['name'])
+                    logger.info(f"✅ Loaded {len(wells)} wells for {framework_name} from YAML (legacy dipoles): {wells}")
+                
                 return wells
             
             # Fallback to old JSON format for legacy frameworks

@@ -1,0 +1,70 @@
+{
+  "study_metadata": {
+    "name": "Local_Model_Comparison_Experiment",
+    "version": "v1.0.0",
+    "created": "2025-12-25T17:00:00Z",
+    "description": "Cost-free experiment comparing local Ollama models (Llama 3.2 vs Mistral) for narrative analysis capabilities and processing efficiency",
+    "hypothesis": "Local models provide sufficient quality for academic research while offering unlimited TPM throughput and zero operating costs",
+    "research_context": "Evaluate local model capabilities as foundation for cost-free academic research infrastructure",
+    "principal_investigator": "Discernus Research Team",
+    "institution": "Discernus Research Lab",
+    "ethical_clearance": "ACADEMIC-2025-LOCAL-001",
+    "funding_source": "Internal Development",
+    "data_classification": "research",
+    "publication_intent": true,
+    "tags": [
+      "local_models",
+      "ollama",
+      "cost_free",
+      "tpm_unlimited",
+      "academic_feasibility",
+      "llama",
+      "mistral"
+    ],
+    "research_question": "How do local Ollama models (Llama 3.2 vs Mistral) compare in narrative analysis quality, and can they provide adequate capabilities for academic research without API costs or TPM constraints?",
+    "hypotheses": [
+      "Local models provide consistent narrative analysis across text sizes without TPM limitations",
+      "Llama 3.2 and Mistral show distinct analytical patterns suitable for different research contexts",
+      "Local models eliminate cost barriers while maintaining research-quality analysis capabilities",
+      "Processing time for local models is acceptable for academic research workflows"
+    ],
+    "success_criteria": [
+      "Clear quality comparison between Llama 3.2 and Mistral models measured",
+      "Processing efficiency and throughput capabilities documented",
+      "Framework compliance and analytical consistency validated",
+      "Academic viability assessment for cost-free research infrastructure"
+    ]
+  },
+  "analysis_summary": {
+    "total_analyses": 2,
+    "successful_analyses": 0,
+    "failed_analyses": 2,
+    "total_cost": 0.0,
+    "cost_efficiency": 0.0,
+    "extraction_timestamp": "2025-06-24T22:26:23.193009",
+    "well_columns": [
+      "well_care",
+      "well_harm",
+      "well_fairness",
+      "well_cheating",
+      "well_loyalty",
+      "well_betrayal",
+      "well_authority",
+      "well_subversion",
+      "well_sanctity",
+      "well_degradation",
+      "well_liberty",
+      "well_oppression"
+    ],
+    "frameworks_used": [
+      "moral_foundations_theory"
+    ],
+    "models_used": [
+      "unknown"
+    ]
+  },
+  "export_timestamp": "2025-06-24T22:26:23.550263",
+  "files_generated": [
+    "analysis_data.csv"
+  ]
+}

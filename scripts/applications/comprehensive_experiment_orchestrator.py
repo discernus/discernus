@@ -2294,16 +2294,32 @@ In addition to the standard analysis output, please consider how your findings r
         if file_path:
             corpus_path = Path(file_path)
             if not corpus_path.exists():
-                logger.error(f"❌ Corpus directory not found: {file_path}")
+                logger.error(f"❌ Corpus path not found: {file_path}")
                 component.exists_on_filesystem = False
                 return component
             
-            # Check for text files matching pattern
-            text_files = list(corpus_path.glob(pattern))
-            if not text_files:
-                logger.error(f"❌ No files found matching pattern '{pattern}' in {corpus_path}")
-                component.exists_on_filesystem = False
-                return component
+            # Handle individual files vs collections differently
+            if corpus_path.is_file():
+                # For individual files, just check if it's readable and non-empty
+                try:
+                    if corpus_path.stat().st_size > 0:
+                        logger.info(f"✅ Found valid individual file: {corpus_path.name}")
+                        text_files = [corpus_path]
+                    else:
+                        logger.error(f"❌ File is empty: {corpus_path}")
+                        component.exists_on_filesystem = False
+                        return component
+                except Exception as e:
+                    logger.error(f"❌ Cannot read file {corpus_path}: {e}")
+                    component.exists_on_filesystem = False
+                    return component
+            else:
+                # For directories, use pattern matching as before
+                text_files = list(corpus_path.glob(pattern))
+                if not text_files:
+                    logger.error(f"❌ No files found matching pattern '{pattern}' in {corpus_path}")
+                    component.exists_on_filesystem = False
+                    return component
             
             logger.info(f"✅ Found {len(text_files)} files matching pattern '{pattern}'")
             
@@ -2705,9 +2721,94 @@ In addition to the standard analysis output, please consider how your findings r
         
         return guidance
     
+    def _validate_tpm_requirements(self, experiment: Dict[str, Any]) -> bool:
+        """
+        Validate TPM requirements for experiment before execution.
+        Prevents expensive experiment failures due to token limits.
+        """
+        try:
+            # Import the TPM validator
+            from scripts.applications.experiment_tpm_validator import ExperimentTPMValidator
+            
+            logger.info("🔍 Validating TPM requirements...")
+            
+            # Create temporary experiment file for validation
+            import tempfile
+            import yaml
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as tmp_file:
+                yaml.dump(experiment, tmp_file)
+                tmp_file.flush()
+                
+                validator = ExperimentTPMValidator()
+                result = validator.validate_experiment(Path(tmp_file.name))
+                
+                # Clean up temporary file
+                os.unlink(tmp_file.name)
+            
+            # Print validation results
+            if result.is_feasible:
+                logger.info("✅ TPM validation passed")
+                logger.info(f"   • Estimated duration: {result.estimated_duration_minutes:.1f} minutes")
+                logger.info(f"   • Estimated cost: ${result.estimated_cost:.4f}")
+                
+                # Print warnings and recommendations
+                for warning in result.warnings:
+                    logger.warning(f"⚠️ {warning}")
+                
+                for rec in result.recommendations:
+                    logger.info(f"💡 {rec}")
+                
+                return True
+            
+            else:
+                logger.error("❌ TPM validation failed - experiment cannot proceed")
+                logger.error(f"   • Total tokens required: {result.total_estimated_tokens:,}")
+                
+                # Print blocking issues
+                for issue in result.blocking_issues:
+                    logger.error(f"   🚫 {issue}")
+                
+                # Print suggested alternatives
+                if result.suggested_models:
+                    logger.info("💡 Suggested alternative models:")
+                    for model in result.suggested_models[:3]:  # Top 3 suggestions
+                        tpm = validator.get_model_tpm_limit(model)
+                        cost = validator.get_model_cost(model)
+                        logger.info(f"   • {model} (TPM: {tpm:,}, Cost: ${cost:.4f}/1K tokens)")
+                
+                if result.suggested_corpus_modifications:
+                    logger.info("💡 Suggested corpus modifications:")
+                    for mod in result.suggested_corpus_modifications[:3]:  # Top 3 suggestions
+                        logger.info(f"   • {mod}")
+                
+                if result.suggested_batching_strategy:
+                    strategy = result.suggested_batching_strategy
+                    logger.info("💡 Suggested batching strategy:")
+                    logger.info(f"   • Chunk into {strategy['estimated_chunks']} pieces of {strategy['chunk_size_tokens']:,} tokens")
+                    logger.info(f"   • Use {strategy['aggregation_method']} for final results")
+                
+                return False
+                
+        except ImportError:
+            logger.warning("⚠️ TPM validator not available - skipping TPM validation")
+            logger.warning("   Install tiktoken for accurate token counting: pip install tiktoken")
+            return True  # Don't block if validator unavailable
+            
+        except Exception as e:
+            logger.error(f"❌ TPM validation failed with error: {e}")
+            logger.warning("⚠️ Proceeding without TPM validation - experiment may hit rate limits")
+            return True  # Don't block on validation errors
+    
     def pre_flight_validation(self, experiment: Dict[str, Any]) -> Tuple[bool, List[ComponentInfo]]:
-        """Enhanced pre-flight validation with component existence checks."""
+        """Enhanced pre-flight validation with component existence checks and TPM validation."""
         logger.info("🔍 Starting enhanced pre-flight validation with framework transaction integrity...")
+        
+        # STEP 1: TPM Validation (NEW - prevents expensive failures)
+        tpm_validation_passed = self._validate_tpm_requirements(experiment)
+        if not tpm_validation_passed:
+            logger.error("❌ TPM validation failed - experiment blocked")
+            return False, []
         
         components = []
         ftx_manager = FrameworkTransactionManager(self.current_experiment_id)
@@ -4730,8 +4831,19 @@ All experiment outputs have been saved to: `{experiment_dir}`
                 logger.warning("⚠️  Cannot estimate costs - missing matrix or corpus info")
                 return True  # Allow execution when cost estimation is impossible
             
-            estimated_analyses = len(matrix) * corpus_items
-            estimated_cost = estimated_analyses * cost_per_analysis_limit
+            # Check if all models are local (Ollama) - they're free
+            models = experiment.get('components', {}).get('models', [])
+            all_local_models = all(model.get('id', '').startswith('ollama/') for model in models)
+            
+            if all_local_models:
+                # Local models are free - set cost to $0
+                estimated_analyses = len(matrix)  # Each matrix entry is one analysis
+                estimated_cost = 0.0
+                logger.info("🏠 Local models detected - cost estimation: $0.00")
+            else:
+                # For cloud models, estimate cost properly (matrix entries specify corpus)
+                estimated_analyses = len(matrix)  # Each matrix entry is one analysis
+                estimated_cost = estimated_analyses * cost_per_analysis_limit
             
             logger.info(f"📊 Cost Estimation:")
             logger.info(f"   Estimated analyses: {estimated_analyses}")

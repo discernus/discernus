@@ -90,31 +90,20 @@ class DiscernusCoordinateEngine:
             self.framework_data = framework_data
             self.well_definitions = {}
             
-            # Try Framework Specification v3.1 axes format first
+            # Try Framework Specification v3.1 axes format first - label-agnostic
             if 'axes' in framework_data:
                 axes = framework_data['axes']
                 for axis_name, axis_info in axes.items():
-                    # Extract integrative pole
-                    if 'integrative' in axis_info:
-                        integrative = axis_info['integrative']
-                        well_name = integrative['name']
-                        self.well_definitions[well_name] = {
-                            'angle': integrative.get('angle', 0),
-                            'type': integrative.get('type', 'integrative'),
-                            'weight': abs(integrative.get('weight', 1.0)),
-                            'description': integrative.get('description', '')
-                        }
-                    
-                    # Extract disintegrative pole
-                    if 'disintegrative' in axis_info:
-                        disintegrative = axis_info['disintegrative']
-                        well_name = disintegrative['name']
-                        self.well_definitions[well_name] = {
-                            'angle': disintegrative.get('angle', 180),
-                            'type': disintegrative.get('type', 'disintegrative'),
-                            'weight': abs(disintegrative.get('weight', 1.0)),
-                            'description': disintegrative.get('description', '')
-                        }
+                    # Extract all anchors from this axis regardless of organizational labels
+                    for label, anchor_config in axis_info.items():
+                        if isinstance(anchor_config, dict) and 'name' in anchor_config:
+                            well_name = anchor_config['name']
+                            self.well_definitions[well_name] = {
+                                'angle': anchor_config.get('angle', 0),
+                                'type': anchor_config.get('type', label),  # Use the label as type, don't assume meaning
+                                'weight': abs(anchor_config.get('weight', 1.0)),
+                                'description': anchor_config.get('description', '')
+                            }
                 
                 # Update colors from axis_type_colors if provided
                 if 'axis_type_colors' in framework_data:

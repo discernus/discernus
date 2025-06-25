@@ -1,0 +1,7 @@
+asset_id: Test_Single_File_Corpus_v1.0.0_20250624_223612
+content_hash: 7faa26883da8760a13c7fc5ed7f38778894301c5b668f0c854660d5b69fdc42c
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-24T22:36:12.476821'
+source_path: test_single_file_experiment.yaml
+validation_status: validated_before_storage
+version: v1.0.0
