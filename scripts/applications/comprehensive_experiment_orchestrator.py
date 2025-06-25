@@ -3310,16 +3310,36 @@ All experiment outputs have been saved to: `{experiment_dir}`
                         'text_path': corpus_component.file_path
                     }
                     
-                    # Execute real analysis using RealAnalysisService
-                    import asyncio
-                    analysis_result = asyncio.run(analysis_service.analyze_single_text(
-                        text_content=text_content,
-                        framework_config_id=framework_id,
-                        prompt_template_id=prompt_template,
-                        llm_model=model_id,
-                        include_justifications=True,
-                        include_hierarchical_ranking=True
-                    ))
+                    # Execute real analysis using RealAnalysisService with comprehensive debugging
+                    try:
+                        logger.info(f"🔍 DEBUG: Starting analysis with parameters:")
+                        logger.info(f"   framework_config_id: {framework_id}")
+                        logger.info(f"   prompt_template_id: {prompt_template}")
+                        logger.info(f"   llm_model: {model_id}")
+                        logger.info(f"   text_length: {len(text_content)} chars")
+                        
+                        import asyncio
+                        analysis_result = asyncio.run(analysis_service.analyze_single_text(
+                            text_content=text_content,
+                            framework_config_id=framework_id,
+                            prompt_template_id=prompt_template,
+                            llm_model=model_id,
+                            include_justifications=True,
+                            include_hierarchical_ranking=True
+                        ))
+                        
+                        logger.info(f"🔍 DEBUG: Analysis completed successfully")
+                        logger.info(f"   result_keys: {list(analysis_result.keys())}")
+                        logger.info(f"   raw_scores available: {'raw_scores' in analysis_result}")
+                        if 'raw_scores' in analysis_result:
+                            logger.info(f"   score_count: {len(analysis_result['raw_scores'])}")
+                            
+                    except Exception as analysis_error:
+                        logger.error(f"🔍 DEBUG: Analysis execution failed: {analysis_error}")
+                        logger.error(f"🔍 DEBUG: Analysis error type: {type(analysis_error)}")
+                        import traceback
+                        logger.error(f"🔍 DEBUG: Analysis traceback: {traceback.format_exc()}")
+                        raise
                     
                     # Track costs
                     analysis_cost = analysis_result.get('api_cost', 0.0)
@@ -3484,6 +3504,8 @@ All experiment outputs have been saved to: `{experiment_dir}`
                     
                     # 🚨 FIX: Save individual run data to database to eliminate multiple sources of truth
                     try:
+                        logger.info(f"🔍 DEBUG: Preparing run data for database save...")
+                        
                         # NEW: Extract algorithm configuration for logging
                         algorithm_config_info = {}
                         if 'algorithm_config' in analysis_result:
@@ -3527,8 +3549,18 @@ All experiment outputs have been saved to: `{experiment_dir}`
                                 'timestamp': datetime.now().isoformat()
                             }
                         }
+                        
+                        logger.info(f"🔍 DEBUG: Run data prepared. Key field lengths:")
+                        logger.info(f"   text_id: '{run_data['text_id']}' ({len(str(run_data['text_id']))} chars)")
+                        logger.info(f"   llm_model: '{run_data['llm_model']}' ({len(str(run_data['llm_model']))} chars)")
+                        logger.info(f"   framework_version: '{run_data['framework_version']}' ({len(str(run_data['framework_version']))} chars)")
+                        
                         self._save_run_to_database(run_data)
+                        
                     except Exception as db_error:
+                        logger.error(f"🔍 DEBUG: Database save failed: {db_error}")
+                        import traceback
+                        logger.error(f"🔍 DEBUG: Database save traceback: {traceback.format_exc()}")
                         logger.warning(f"⚠️  Failed to save run to database: {db_error}")
                         # Continue execution - don't fail experiment due to database issues
                     
@@ -4318,68 +4350,143 @@ All experiment outputs have been saved to: `{experiment_dir}`
 
     def _save_run_to_database(self, run_data: Dict[str, Any]) -> None:
         """
-        Save individual run data to PostgreSQL database.
+        Save individual run data to PostgreSQL database with comprehensive field validation.
         Fixes the multiple sources of truth problem by ensuring all run data is persisted.
         """
         if not self.database_experiment_id or not DATABASE_AVAILABLE:
             logger.warning("⚠️  Database not available - run data will only be stored in files")
             return
             
+        logger.info(f"🔍 DEBUG: Attempting to save run data for: {run_data.get('text_id', 'unknown')}")
+        
         try:
             from src.models.models import Run
             from src.utils.database import get_database_url
             from sqlalchemy import create_engine
             from sqlalchemy.orm import sessionmaker
-            from sqlalchemy.exc import SQLAlchemyError
+            from sqlalchemy.exc import SQLAlchemyError, DataError
             import json
+            import traceback
             
-            engine = create_engine(get_database_url())
-            Session = sessionmaker(bind=engine)
-            session = Session()
+            # Comprehensive field validation and sanitization
+            def safe_truncate(value, max_length, field_name="field"):
+                """Safely truncate string values with logging"""
+                if value is None:
+                    return None
+                str_value = str(value)
+                if len(str_value) > max_length:
+                    original_length = len(str_value)
+                    truncated = str_value[:max_length]
+                    logger.warning(f"🔍 DEBUG: Truncating {field_name}: {original_length} → {max_length} chars")
+                    return truncated
+                return str_value
             
+            def safe_json_dumps(obj, field_name="field"):
+                """Safely serialize to JSON with fallback"""
+                try:
+                    return json.dumps(obj)
+                except Exception as e:
+                    logger.warning(f"🔍 DEBUG: JSON serialization failed for {field_name}: {e}")
+                    return "{}"
+            
+            # Extract and validate all fields with proper constraints
             try:
-                # Create Run record
-                db_run = Run(
-                    experiment_id=self.database_experiment_id,
-                    run_number=run_data.get('run_number', 1),
-                    text_id=run_data.get('text_id', 'unknown'),
-                    text_content=run_data.get('text_content', '')[:5000],  # Truncate for storage
-                    input_length=len(run_data.get('text_content', '')),
-                    llm_model=run_data.get('llm_model', 'unknown'),
-                    llm_version=run_data.get('llm_version', 'latest'),
-                    prompt_template_version=run_data.get('prompt_template_version', 'v1.0'),
-                    framework_version=run_data.get('framework_version', 'v1.0'),
-                    raw_scores=json.dumps(run_data.get('raw_scores', {})),
-                    hierarchical_ranking=json.dumps(run_data.get('hierarchical_ranking', {})),
-                    framework_fit_score=run_data.get('framework_fit_score', 0.0),
-                    narrative_elevation=run_data.get('narrative_elevation', 0.0),
-                    polarity=run_data.get('polarity', 0.0),
-                    coherence=run_data.get('coherence', 0.0),
-                    directional_purity=run_data.get('directional_purity', 0.0),
-                    narrative_position_x=run_data.get('narrative_position', {}).get('x', 0.0),
-                    narrative_position_y=run_data.get('narrative_position', {}).get('y', 0.0),
-                    duration_seconds=run_data.get('duration_seconds', 0.0),
-                    api_cost=run_data.get('api_cost', 0.0),
-                    raw_prompt=run_data.get('raw_prompt', ''),
-                    raw_response=run_data.get('raw_response', ''),
-                    model_parameters=json.dumps(run_data.get('model_parameters', {})),
-                    success=run_data.get('success', True),
-                    error_message=run_data.get('error_message'),
-                    complete_provenance=json.dumps(run_data.get('complete_provenance', {}))
-                )
+                validated_data = {
+                    'experiment_id': self.database_experiment_id,
+                    'run_number': run_data.get('run_number', 1),
+                    'text_id': safe_truncate(run_data.get('text_id', 'unknown'), 50, 'text_id'),
+                    'text_content': safe_truncate(run_data.get('text_content', ''), 5000, 'text_content'),
+                    'input_length': len(run_data.get('text_content', '')),
+                    'llm_model': safe_truncate(run_data.get('llm_model', 'unknown'), 20, 'llm_model'),
+                    'llm_version': safe_truncate(run_data.get('llm_version', 'latest'), 20, 'llm_version'),
+                    'prompt_template_version': safe_truncate(run_data.get('prompt_template_version', 'v1.0'), 20, 'prompt_template_version'),
+                    'framework_version': safe_truncate(run_data.get('framework_version', 'v1.0'), 20, 'framework_version'),
+                    'raw_scores': safe_json_dumps(run_data.get('raw_scores', {}), 'raw_scores'),
+                    'hierarchical_ranking': safe_json_dumps(run_data.get('hierarchical_ranking', {}), 'hierarchical_ranking'),
+                    'framework_fit_score': float(run_data.get('framework_fit_score', 0.0)),
+                    'narrative_elevation': float(run_data.get('narrative_elevation', 0.0)),
+                    'polarity': float(run_data.get('polarity', 0.0)),
+                    'coherence': float(run_data.get('coherence', 0.0)),
+                    'directional_purity': float(run_data.get('directional_purity', 0.0)),
+                    'narrative_position_x': float(run_data.get('narrative_position', {}).get('x', 0.0)),
+                    'narrative_position_y': float(run_data.get('narrative_position', {}).get('y', 0.0)),
+                    'duration_seconds': float(run_data.get('duration_seconds', 0.0)),
+                    'api_cost': float(run_data.get('api_cost', 0.0)),
+                    'raw_prompt': safe_truncate(run_data.get('raw_prompt', ''), 10000, 'raw_prompt'),
+                    'raw_response': safe_truncate(run_data.get('raw_response', ''), 10000, 'raw_response'),
+                    'model_parameters': safe_json_dumps(run_data.get('model_parameters', {}), 'model_parameters'),
+                    'success': bool(run_data.get('success', True)),
+                    'error_message': safe_truncate(run_data.get('error_message'), 500, 'error_message'),
+                    'complete_provenance': safe_json_dumps(run_data.get('complete_provenance', {}), 'complete_provenance')
+                }
                 
+                logger.info(f"🔍 DEBUG: Field validation completed. Key lengths:")
+                logger.info(f"   text_id: {len(validated_data['text_id'])} chars")
+                logger.info(f"   llm_model: {len(validated_data['llm_model'])} chars")
+                logger.info(f"   framework_version: {len(validated_data['framework_version'])} chars")
+                
+            except Exception as validation_error:
+                logger.error(f"🔍 DEBUG: Field validation failed: {validation_error}")
+                logger.error(f"🔍 DEBUG: Validation traceback: {traceback.format_exc()}")
+                raise
+            
+            # Database connection with detailed error handling
+            try:
+                engine = create_engine(get_database_url())
+                Session = sessionmaker(bind=engine)
+                session = Session()
+                logger.info(f"🔍 DEBUG: Database session created successfully")
+                
+            except Exception as db_connection_error:
+                logger.error(f"🔍 DEBUG: Database connection failed: {db_connection_error}")
+                logger.error(f"🔍 DEBUG: Connection traceback: {traceback.format_exc()}")
+                raise
+            
+            # Database insertion with comprehensive error handling
+            try:
+                logger.info(f"🔍 DEBUG: Creating Run object...")
+                
+                # Create Run record with validated data
+                db_run = Run(**validated_data)
+                
+                logger.info(f"🔍 DEBUG: Run object created, adding to session...")
                 session.add(db_run)
+                
+                logger.info(f"🔍 DEBUG: Committing transaction...")
                 session.commit()
-                logger.info(f"✅ Run data saved to database: {run_data.get('text_id', 'unknown')}")
+                
+                logger.info(f"✅ Run data saved to database: {validated_data['text_id']}")
+                
+            except DataError as de:
+                session.rollback()
+                logger.error(f"🔍 DEBUG: Database data error: {de}")
+                logger.error(f"🔍 DEBUG: Data error details: {de.orig}")
+                logger.error(f"🔍 DEBUG: Problematic data inspection:")
+                for key, value in validated_data.items():
+                    if isinstance(value, str):
+                        logger.error(f"   {key}: '{value}' (length: {len(value)})")
+                    else:
+                        logger.error(f"   {key}: {type(value)} = {value}")
+                raise
                 
             except SQLAlchemyError as se:
                 session.rollback()
-                logger.error(f"❌ Database error saving run: {se}")
+                logger.error(f"🔍 DEBUG: SQLAlchemy error: {se}")
+                logger.error(f"🔍 DEBUG: SQL error type: {type(se)}")
+                logger.error(f"🔍 DEBUG: SQL traceback: {traceback.format_exc()}")
+                raise
+                
             finally:
+                logger.info(f"🔍 DEBUG: Closing database session...")
                 session.close()
                 
         except Exception as e:
-            logger.error(f"❌ Failed to save run to database: {e}")
+            logger.error(f"🔍 DEBUG: Top-level error saving run to database: {e}")
+            logger.error(f"🔍 DEBUG: Top-level error type: {type(e)}")
+            logger.error(f"🔍 DEBUG: Full traceback: {traceback.format_exc()}")
+            
+            # Continue execution - don't fail experiment due to database issues
+            logger.warning("⚠️  Continuing experiment execution despite database error")
 
     def _validate_data_persistence(self, execution_results: Dict[str, Any]) -> bool:
         """

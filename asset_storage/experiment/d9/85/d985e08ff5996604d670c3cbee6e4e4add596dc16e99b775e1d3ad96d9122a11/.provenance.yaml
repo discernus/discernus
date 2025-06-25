@@ -1,0 +1,7 @@
+asset_id: MFT_Multi_LLM_Comprehensive_Study_v2.0.0_20250624_175711
+content_hash: d985e08ff5996604d670c3cbee6e4e4add596dc16e99b775e1d3ad96d9122a11
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-24T17:57:11.123836'
+source_path: research_workspaces/june_2025_research_dev_workspace/mft_multi_llm_comprehensive_v2.yaml
+validation_status: validated_before_storage
+version: v2.0.0

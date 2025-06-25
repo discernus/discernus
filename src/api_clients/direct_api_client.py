@@ -10,6 +10,18 @@ import time
 from typing import Dict, Tuple, Any
 from dotenv import load_dotenv
 from pathlib import Path
+import sys
+
+# Add project root to path for TPM rate limiter import
+project_root = os.path.join(os.path.dirname(__file__), '..', '..')
+if project_root not in sys.path:
+    sys.path.append(project_root)
+
+try:
+    from experimental.prototypes.tpm_rate_limiter import TPMRateLimiter
+    TPM_RATE_LIMITER_AVAILABLE = True
+except ImportError:
+    TPM_RATE_LIMITER_AVAILABLE = False
 
 # Import cost manager
 try:
@@ -100,6 +112,14 @@ class DirectAPIClient:
             print("✅ Google AI client initialized (Gemini 2.5 series available)")
         else:
             print("⚠️ Google AI API key not found in environment")
+        
+        # Initialize TPM rate limiter if available
+        if TPM_RATE_LIMITER_AVAILABLE:
+            self.tpm_limiter = TPMRateLimiter()
+            print("✅ TPM Rate Limiter initialized")
+        else:
+            self.tpm_limiter = None
+            print("⚠️ TPM Rate Limiter not available - rate limiting disabled")
     
     def test_connections(self) -> Dict[str, bool]:
         """Test all API connections with latest models"""
@@ -225,6 +245,7 @@ class DirectAPIClient:
         """
         Analyze text using specified model and framework
         Compatible with existing narrative gravity framework
+        🚀 ENHANCED: Now includes TPM-aware rate limiting
         """
         # Store context for quality assurance
         self._current_text = text
@@ -242,6 +263,29 @@ class DirectAPIClient:
             # Error out on any prompt generation failure
             raise RuntimeError(f"Failed to generate proper analysis prompt: {e}")
         
+        # 🚀 NEW: TPM Rate Limiting Logic
+        if self.tpm_limiter:
+            try:
+                # Estimate tokens for the full prompt (text + framework + instructions)
+                estimated_tokens = self.tpm_limiter.estimate_tokens(prompt, model_name)
+                
+                print(f"🔍 TPM Check: {model_name} - {estimated_tokens:,} tokens estimated")
+                
+                # Wait if needed to respect TPM limits
+                can_proceed = self.tpm_limiter.wait_if_needed(
+                    model=model_name, 
+                    estimated_tokens=estimated_tokens,
+                    prompt_text=text[:200]  # Preview for debugging
+                )
+                
+                if not can_proceed:
+                    print("🚫 TPM rate limiting cancelled the request")
+                    return {"error": "TPM rate limiting cancelled request"}, 0.0
+                    
+            except Exception as tpm_error:
+                print(f"⚠️ TPM rate limiting failed: {tpm_error}")
+                print("🔄 Continuing without TPM protection...")
+        
         # Check cost limits before proceeding
         if self.cost_manager:
             provider = self._get_provider_from_model(model_name)
@@ -255,16 +299,47 @@ class DirectAPIClient:
                 print(f"💰 Estimated cost: ${estimated_cost:.4f} - {message}")
         
         # Route to appropriate model
+        start_time = time.time()
+        
         if model_name.startswith("gpt") or model_name.startswith("openai"):
-            return self._analyze_with_openai(prompt, model_name)
+            result, cost = self._analyze_with_openai(prompt, model_name)
         elif model_name.startswith("claude") or model_name.startswith("anthropic"):
-            return self._analyze_with_anthropic(prompt, model_name)
+            result, cost = self._analyze_with_anthropic(prompt, model_name)
         elif model_name.startswith("mistral"):
-            return self._analyze_with_mistral(prompt, model_name)
+            result, cost = self._analyze_with_mistral(prompt, model_name)
         elif model_name.startswith("gemini") or model_name.startswith("google"):
-            return self._analyze_with_google_ai(prompt, model_name)
+            result, cost = self._analyze_with_google_ai(prompt, model_name)
         else:
             raise ValueError(f"Unknown model: {model_name}")
+        
+        # 🚀 NEW: Record actual token usage for TPM tracking
+        if self.tpm_limiter and 'error' not in result:
+            try:
+                # Estimate tokens used (input + output)
+                response_text = result.get('raw_response', '')
+                output_tokens = self.tpm_limiter.estimate_tokens(response_text, model_name)
+                total_tokens = estimated_tokens + output_tokens
+                
+                # Record usage for future rate limiting
+                self.tpm_limiter.record_usage(model_name, total_tokens)
+                
+                end_time = time.time()
+                duration = end_time - start_time
+                
+                print(f"✅ TPM Tracking: {model_name} used {total_tokens:,} tokens in {duration:.1f}s")
+                
+                # Add TPM info to result for monitoring
+                if 'tpm_info' not in result:
+                    result['tpm_info'] = {}
+                result['tpm_info']['estimated_input_tokens'] = estimated_tokens
+                result['tpm_info']['estimated_output_tokens'] = output_tokens
+                result['tpm_info']['total_tokens'] = total_tokens
+                result['tpm_info']['model'] = model_name
+                
+            except Exception as tracking_error:
+                print(f"⚠️ TPM usage tracking failed: {tracking_error}")
+        
+        return result, cost
     
     def _get_provider_from_model(self, model_name: str) -> str:
         """Get provider name from model name"""

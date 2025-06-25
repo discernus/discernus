@@ -1,0 +1,125 @@
+{
+  "analysis_type": "single_rater_descriptive",
+  "metadata": {
+    "model_count": 1,
+    "well_count": 12,
+    "sample_size": 4,
+    "analysis_timestamp": "2025-06-24T16:48:13.511920"
+  },
+  "descriptive_statistics": {
+    "well_care": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_harm": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_fairness": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_cheating": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_loyalty": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_betrayal": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_authority": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_subversion": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_sanctity": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_degradation": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_liberty": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    },
+    "well_oppression": {
+      "count": 4,
+      "mean": 0.3,
+      "std": 0.0,
+      "min": 0.3,
+      "max": 0.3,
+      "range": 0.0,
+      "cv": 0.0
+    }
+  },
+  "internal_consistency": {
+    "split_half_correlation": NaN,
+    "split_half_p_value": NaN,
+    "spearman_brown_coefficient": NaN
+  },
+  "message": "Single rater detected - full reliability analysis requires multiple raters"
+}

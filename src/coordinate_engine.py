@@ -90,8 +90,39 @@ class DiscernusCoordinateEngine:
             self.framework_data = framework_data
             self.well_definitions = {}
             
-            # Try anchors-based format first (new format)
-            if 'anchors' in framework_data:
+            # Try Framework Specification v3.1 axes format first
+            if 'axes' in framework_data:
+                axes = framework_data['axes']
+                for axis_name, axis_info in axes.items():
+                    # Extract integrative pole
+                    if 'integrative' in axis_info:
+                        integrative = axis_info['integrative']
+                        well_name = integrative['name']
+                        self.well_definitions[well_name] = {
+                            'angle': integrative.get('angle', 0),
+                            'type': integrative.get('type', 'integrative'),
+                            'weight': abs(integrative.get('weight', 1.0)),
+                            'description': integrative.get('description', '')
+                        }
+                    
+                    # Extract disintegrative pole
+                    if 'disintegrative' in axis_info:
+                        disintegrative = axis_info['disintegrative']
+                        well_name = disintegrative['name']
+                        self.well_definitions[well_name] = {
+                            'angle': disintegrative.get('angle', 180),
+                            'type': disintegrative.get('type', 'disintegrative'),
+                            'weight': abs(disintegrative.get('weight', 1.0)),
+                            'description': disintegrative.get('description', '')
+                        }
+                
+                # Update colors from axis_type_colors if provided
+                if 'axis_type_colors' in framework_data:
+                    framework_colors = framework_data['axis_type_colors']
+                    self.type_to_color.update(framework_colors)
+                    
+            # Try anchors-based format (alternative v3.1 format)
+            elif 'anchors' in framework_data:
                 anchors = framework_data['anchors']
                 for anchor_name, anchor_info in anchors.items():
                     self.well_definitions[anchor_name] = {
@@ -136,7 +167,7 @@ class DiscernusCoordinateEngine:
                     framework_colors = framework_data['well_type_colors']
                     self.type_to_color.update(framework_colors)
                 
-            print(f"✅ Loaded {len(self.well_definitions)} anchors from YAML framework: {framework_path}")
+            print(f"✅ Loaded {len(self.well_definitions)} wells from YAML framework: {framework_path}")
             
         except Exception as e:
             raise FileNotFoundError(f"Failed to load YAML framework {framework_path}: {e}")
@@ -158,7 +189,8 @@ class DiscernusCoordinateEngine:
         angle_rad = np.deg2rad(angle_deg)
         x = self.circle_radius * np.cos(angle_rad)
         y = self.circle_radius * np.sin(angle_rad)
-        return x, y
+        # Convert numpy types to Python native types for database compatibility
+        return float(x), float(y)
 
     def apply_dominance_amplification(self, score: float) -> float:
         """
@@ -197,7 +229,7 @@ class DiscernusCoordinateEngine:
         max_score = max(scores)
         min_score = min(scores)
         score_variance = max_score - min_score
-        mean_score = np.mean(scores)
+        mean_score = float(np.mean(scores))  # Convert numpy type to Python float
         
         # Adaptive scaling based on narrative characteristics using configurable parameters
         # High variance + high mean = strong narrative = higher scaling
@@ -270,7 +302,8 @@ class DiscernusCoordinateEngine:
                 final_x = base_x * scale_factor
                 final_y = base_y * scale_factor
                 
-                return final_x, final_y
+                # Convert to Python native types for database compatibility
+                return float(final_x), float(final_y)
             
             return 0.0, 0.0
         

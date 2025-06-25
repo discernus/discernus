@@ -1,0 +1,7 @@
+asset_id: MFT_Validation_Pipeline_Test_v2.0.0_20250624_164554
+content_hash: 6431567029a00a8c43d88eb1a7903a6eca6b1e7ee009e9743ca0721be3cefadd
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-24T16:45:54.506520'
+source_path: experimental/prototypes/discernus_advisor/mft_validation_test_v2.yaml
+validation_status: validated_before_storage
+version: v2.0.0

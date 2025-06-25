@@ -1,0 +1,7 @@
+asset_id: Model_Quality_vs_Cost_Analysis_Experiment_v1.0.0_20250624_194550
+content_hash: 72db47f704f60b32067fb13d98814cb5b4a239f3bfd509597a21dd3489db9bcf
+ingestion_method: orchestrator_validation
+ingestion_timestamp: '2025-06-24T19:45:50.566996'
+source_path: research_workspaces/june_2025_research_dev_workspace/model_quality_vs_cost_analysis_experiment.yaml
+validation_status: validated_before_storage
+version: v1.0.0

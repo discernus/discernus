@@ -64,6 +64,12 @@ class RealAnalysisService:
                 model=llm_model
             )
             
+            # 🔍 DEBUG: Print the actual prompt being sent to LLM
+            print("🔍 FULL PROMPT CONTENT:")
+            print("=" * 80)
+            print(prompt)
+            print("=" * 80)
+            
             # Step 2: Get real LLM analysis using DirectAPIClient
             print(f"🧠 Calling {llm_model} for analysis...")
             llm_response, api_cost = self.llm_client.analyze_text(
@@ -72,8 +78,20 @@ class RealAnalysisService:
                 model_name=llm_model
             )
             
+            # 🔍 DEBUG: Print the LLM response
+            print("🔍 FULL LLM RESPONSE:")
+            print("=" * 80)
+            print(llm_response)
+            print("=" * 80)
+            
             # Step 3: Parse LLM response into structured data
             parsed_analysis = self._parse_llm_response(llm_response, framework_name)
+            
+            # 🔍 DEBUG: Print parsed scores
+            print("🔍 PARSED SCORES:")
+            print("=" * 80)
+            print(parsed_analysis['raw_scores'])
+            print("=" * 80)
             
             # Step 4: Initialize framework-aware circular engine
             framework_path = self._get_framework_yaml_path(framework_name)
@@ -148,11 +166,25 @@ class RealAnalysisService:
         Uses existing DirectAPIClient parsing logic.
         """
         try:
+            # 🔍 DEBUG: Print what we're trying to parse
+            print(f"🔍 PARSING: {type(llm_response)}")
+            
             # DirectAPIClient should return structured data
             if isinstance(llm_response, dict) and 'scores' in llm_response:
                 raw_scores = llm_response['scores']
+                print("✅ Found 'scores' key in response")
+            elif isinstance(llm_response, dict):
+                # Try to parse MFT-style response format
+                print("🔍 Trying MFT-style parsing...")
+                raw_scores = self._parse_mft_response_format(llm_response, framework)
+                if raw_scores:
+                    print(f"✅ MFT parsing extracted {len(raw_scores)} scores")
+                else:
+                    print("❌ MFT parsing failed, falling back to text extraction")
+                    raw_scores = self._extract_scores_from_text(str(llm_response))
             else:
                 # Fallback parsing if format is different
+                print("❌ Falling back to text extraction")
                 raw_scores = self._extract_scores_from_text(str(llm_response))
             
             # Ensure we have all expected wells for the framework
@@ -167,6 +199,49 @@ class RealAnalysisService:
         except Exception as e:
             print(f"⚠️ LLM response parsing failed: {e}")
             return self._generate_default_scores(framework)
+    
+    def _parse_mft_response_format(self, llm_response: Dict[str, Any], framework: str) -> Dict[str, float]:
+        """
+        Parse MFT-style JSON response format into individual well scores.
+        Handles formats like: {"care_harm": {"score": 90}, "fairness_cheating": {"score": 95}}
+        """
+        scores = {}
+        
+        # MFT paired foundation mappings
+        mft_mappings = {
+            'care_harm': ('Care', 'Harm'),
+            'fairness_cheating': ('Fairness', 'Cheating'), 
+            'loyalty_betrayal': ('Loyalty', 'Betrayal'),
+            'authority_subversion': ('Authority', 'Subversion'),
+            'sanctity_degradation': ('Sanctity', 'Degradation'),
+            'liberty_oppression': ('Liberty', 'Oppression')
+        }
+        
+        for key, value in llm_response.items():
+            if key in mft_mappings:
+                if isinstance(value, dict) and 'score' in value:
+                    score_value = value['score']
+                    
+                    # Convert score to 0-1 range if needed
+                    if isinstance(score_value, (int, float)):
+                        if score_value > 1.0:
+                            normalized_score = score_value / 100.0  # Convert percentage
+                        else:
+                            normalized_score = abs(score_value)  # Handle negative scores
+                        
+                        # Map to positive/negative well pair
+                        positive_well, negative_well = mft_mappings[key]
+                        
+                        if score_value >= 0:
+                            # Positive score -> high positive well, low negative well
+                            scores[positive_well] = min(1.0, normalized_score)
+                            scores[negative_well] = max(0.0, 1.0 - normalized_score)
+                        else:
+                            # Negative score -> low positive well, high negative well  
+                            scores[positive_well] = max(0.0, 1.0 - normalized_score)
+                            scores[negative_well] = min(1.0, normalized_score)
+        
+        return scores
     
     def _extract_scores_from_text(self, response_text: str, framework: str = "civic_virtue") -> Dict[str, float]:
         """

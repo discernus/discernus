@@ -3,6 +3,16 @@ Discernus - Changelog
 [Unreleased]
 
 ### Added
+- **TPM Rate Limiting System**: Complete solution for token-per-minute rate limiting to prevent API quota failures
+  - Core `TPMRateLimiter` class with model-specific limits and intelligent waiting (`experimental/prototypes/tpm_rate_limiter.py`)
+  - Integration into `DirectAPIClient` with automatic TPM protection for all API calls
+  - Test suite validating multi-model TPM tracking and cost integration
+  - **Problem Solved**: GPT-4o TPM limit crashes that blocked Multi-LLM experiments (30K limit exceeded by 40,666 token requests)
+- **Model Quality vs Cost Analysis Experiment**: 3.1-compliant experiment definition for strategic architecture decisions
+  - Corpus selection from validation_set with TPM-aware text sizing (1K-21K token range)
+  - Framework for comparing cheap high-TPM vs premium flagship models (GPT-3.5-turbo vs GPT-4o)
+  - Cost tracking integration providing 40x cost difference insights ($0.0003 vs $0.12 per analysis)
+  - Strategic decision enablement: Simple vs LiteLLM architecture choice now data-driven
 - **CI/CD Pipeline Implementation**: Phase 1 CI focused on development velocity
   - Fast unit test execution (< 3 minutes) with 75 tests passing
   - Core import validation to catch syntax errors early

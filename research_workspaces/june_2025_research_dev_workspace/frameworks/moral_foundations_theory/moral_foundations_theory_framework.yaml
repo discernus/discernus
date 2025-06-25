@@ -4,9 +4,9 @@
 # This framework implements Haidt's foundation model using the new axes architecture,
 # representing the evolved psychological mechanisms that cultures build upon to create moral systems.
 #
-# Version: v3.0.0 (Updated to Framework Specification v3.0)
-# Last Modified: 2025-06-23 (Updated for v3.0 spec with configurable algorithms)
-# Status: Production Ready with Configurable Algorithms
+# Version: v3.1.0 (Updated to Framework Specification v3.1)
+# Last Modified: 2025-06-25 (Updated for v3.1 spec compliance)
+# Status: Production Ready with Framework Specification v3.1 Compliance
 
 # =============================================================================
 # FRAMEWORK METADATA
@@ -15,13 +15,43 @@
 name: moral_foundations_theory
 framework_name: moral_foundations_theory 
 display_name: "Moral Foundations Theory (Haidt)"
-version: v3.0.0
+version: v3.1.0
 
 description: |
   Enhanced Moral Foundations Theory framework implementing Jonathan Haidt's research 
   with systematic methodological improvements for academic rigor and configurable 
   algorithm support. Uses the new axes-based coordinate system for improved 
   clarity and extensibility with LLM-prompting-amplification pipeline integration.
+
+  ## Theoretical Foundation
+  
+  This framework implements Jonathan Haidt's Moral Foundations Theory, which identifies 
+  innate psychological foundations that cultures build upon to create diverse moral systems. 
+  The theory proposes that moral judgments are based on multiple foundations including 
+  Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, 
+  and Liberty/Oppression. This implementation uses an axes-based coordinate system for 
+  improved semantic clarity and mathematical rigor.
+  
+  ## Usage Guidelines
+  
+  This framework is designed for analyzing moral discourse in political texts, opinion 
+  pieces, and policy discussions. It identifies moral foundations present in text and 
+  provides quantitative scores for each foundation. Best used for:
+  - Political discourse analysis
+  - Moral psychology research
+  - Cross-cultural value studies
+  - Policy communication analysis
+  
+  ## Version History
+  
+  - v3.1.0 (2025-06-25): Updated to Framework Specification v3.1 compliance
+  - v3.0.0 (2025-06-23): Added configurable algorithms and axes-based architecture
+  - v2.0.0 (2025-06-19): Enhanced with systematic methodological improvements
+  - v1.0.0 (2025-06-01): Initial implementation
+  
+  ## Citation Format
+  
+  When using this framework, cite as: "Discernus Framework: Moral Foundations Theory v3.1.0 (Discernus Research Team, 2025)"
 
 framework_type: axis_set
 
@@ -384,6 +414,7 @@ validation:
   measurement_instrument: "Moral Foundations Questionnaire (MFQ-30/MFQ-2)"
   scope_limitation: "Current implementation limited to English-language political discourse"
   political_correlation: "Strong correlation with liberal-conservative political orientation (pending validation)"
+  citation_format: "Discernus Framework: Moral Foundations Theory v3.1.0 (Discernus Research Team, 2025)"
   
   key_findings:
     - "Liberals prioritize Care and Fairness foundations"
@@ -395,6 +426,7 @@ validation:
 # FRAMEWORK VERSIONING
 # =============================================================================
 
-last_modified: "2025-06-23T15:00:00.000000"
-theoretical_validation: "Framework v3.0 - configurable algorithms with proper axis pairings"
-implementation_status: "Production ready with axis_set architecture" 
+framework_registry_key: "moral_foundations_theory_v3.1.0"
+last_modified: "2025-06-25T16:45:00.000000"
+theoretical_validation: "Framework v3.1 - Framework Specification v3.1 compliance with configurable algorithms"
+implementation_status: "Production ready with Framework Specification v3.1 compliance" 

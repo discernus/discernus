@@ -33,11 +33,7 @@ components:
       type: "file_path"
       file_path: "research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml"
       
-  prompt_templates:
-    - id: "moral_foundations_analysis"
-      version: "v1.0"
-      type: "workspace_asset"
-      file_path: "research_workspaces/june_2025_research_dev_workspace/prompt_templates/moral_foundations_analysis/template.yaml"
+
       
   weighting_schemes:
     - id: "foundation_pairs"
@@ -68,7 +64,6 @@ execution:
     - run_id: "conservative_dignity_test"
       description: "Conservative dignity texts - pipeline validation"
       framework: "moral_foundations_theory"
-      prompt_template: "moral_foundations_analysis"
       weighting_scheme: "foundation_pairs"
       model: "gpt-4o-mini"
       corpus_subset: "conservative_dignity"
@@ -76,7 +71,6 @@ execution:
     - run_id: "progressive_dignity_test"
       description: "Progressive dignity texts - pipeline validation"
       framework: "moral_foundations_theory"
-      prompt_template: "moral_foundations_analysis"
       weighting_scheme: "foundation_pairs"
       model: "gpt-4o-mini"
       corpus_subset: "progressive_dignity"

@@ -1,0 +1,11 @@
+{
+  "experiment_id": "MFT_Multi_LLM_Comprehensive_Study_v2.0.0_20250624_180215",
+  "state": "analysis_execution",
+  "timestamp": "2025-06-24T18:02:18.006674",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "components_validated": 13,
+    "total_analyses_planned": 6
+  }
+}

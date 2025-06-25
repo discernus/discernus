@@ -1,0 +1,300 @@
+experiment_meta:
+  name: "MFT_Multi_LLM_Comprehensive_Study"
+  version: "v2.0.0"
+  created: "2025-06-25T16:00:00Z"
+  description: "Comprehensive multi-LLM validation of Moral Foundations Theory implementation across full validation corpus for rich Custom GPT context generation"
+  hypothesis: "Discernus MFT implementation demonstrates robust performance across multiple LLMs and diverse political text categories with statistically significant foundation patterns"
+  research_context: "Multi-LLM comprehensive study designed to generate maximally rich, diverse output for Custom GPT training context"
+  principal_investigator: "Discernus Research Team"
+  institution: "Discernus Research Lab"
+  ethical_clearance: "ACADEMIC-2025-MFT-003"
+  funding_source: "Internal Development"
+  data_classification: "research"
+  publication_intent: true
+  tags: ["moral_foundations_theory", "multi_llm_validation", "mft", "custom_gpt_context", "comprehensive"]
+  
+  hypotheses:
+    - "MFT framework correctly identifies moral foundation patterns across all validation corpus categories and LLMs"
+    - "Conservative texts show higher Authority/Loyalty scores vs Progressive texts across all LLMs"
+    - "Progressive texts show higher Care/Fairness scores vs Conservative texts across all LLMs"
+    - "Tribalism-focused texts show distinct foundation patterns from dignity-focused texts across LLMs"
+    - "Different LLMs show consistent foundation pattern recognition with model-specific variations"
+    - "Extreme control texts demonstrate expected foundation scoring extremes across LLMs"
+    - "Mixed control texts show balanced foundation distributions across LLMs"
+  
+  success_criteria:
+    - "All five moral foundations are correctly identified and scored across categories and LLMs"
+    - "Conservative dignity texts show expected foundation patterns across LLMs (Authority>0.6, Loyalty>0.5)"
+    - "Progressive dignity texts show expected Care/Fairness emphasis across LLMs (Care>0.6, Fairness>0.5)"
+    - "Tribalism texts show higher Loyalty/Authority scores than dignity texts across LLMs"
+    - "Foundation scoring consistency within categories per LLM (r>0.7)"
+    - "Cross-LLM correlation for same texts shows reasonable consistency (r>0.6)"
+    - "Statistically significant differences between expected category patterns across LLMs"
+    - "Maximally rich, diverse output suitable for Custom GPT context training"
+
+components:
+  frameworks:
+    - id: "moral_foundations_theory"
+      version: "v2025.06.19"
+      type: "file_path"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml"
+      
+  prompt_templates:
+    - id: "moral_foundations_analysis"
+      version: "v1.0"
+      type: "workspace_asset"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/prompt_templates/moral_foundations_analysis/template.yaml"
+      
+  weighting_schemes:
+    - id: "foundation_pairs"
+      version: "v1.0"
+      type: "workspace_asset"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/weighting_schemes/foundation_pairs/scheme.yaml"
+      
+  models:
+    - id: "claude-3-5-sonnet-20241022"
+      provider: "anthropic"
+      version: "2024-10-22"
+    - id: "gpt-4o"
+      provider: "openai"
+      version: "2024-05-13"
+    - id: "gemini-2.5-flash"
+      provider: "google"
+      version: "2024-12-01"
+    - id: "mistral-large-latest"
+      provider: "mistral"
+      version: "latest"
+      
+  corpus:
+    - id: "conservative_dignity"
+      type: "file_collection"
+      file_path: "corpus/validation_set/conservative_dignity"
+      pattern: "*.txt"
+      description: "Conservative dignity-focused texts for multi-LLM comprehensive MFT validation"
+    - id: "progressive_dignity"
+      type: "file_collection"
+      file_path: "corpus/validation_set/progressive_dignity"
+      pattern: "*.txt"
+      description: "Progressive dignity-focused texts for multi-LLM comprehensive MFT validation"
+    - id: "conservative_tribalism"
+      type: "file_collection"
+      file_path: "corpus/validation_set/conservative_tribalism"
+      pattern: "*.txt"
+      description: "Conservative tribalism-focused texts for multi-LLM comprehensive MFT validation"
+    - id: "progressive_tribalism"
+      type: "file_collection"
+      file_path: "corpus/validation_set/progressive_tribalism"
+      pattern: "*.txt"
+      description: "Progressive tribalism-focused texts for multi-LLM comprehensive MFT validation"
+    - id: "mixed_controls"
+      type: "file_collection"
+      file_path: "corpus/validation_set/mixed_controls"
+      pattern: "*.txt"
+      description: "Mixed political content for balanced multi-LLM MFT validation"
+    - id: "extreme_controls"
+      type: "file_collection"
+      file_path: "corpus/validation_set/extreme_controls"
+      pattern: "*.txt"
+      description: "Extreme control texts for boundary condition testing across LLMs"
+
+execution:
+  description: "Multi-LLM MFT framework validation across core corpus categories for cross-model comparison"
+  matrix:
+    # Core dignity comparison across all 4 LLMs
+    - run_id: "claude_conservative_dignity"
+      description: "Claude 3.5 Sonnet: Conservative dignity texts - expected high Authority/Loyalty, moderate Care"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-5-sonnet-20241022"
+      corpus_subset: "conservative_dignity"
+      
+    - run_id: "gpt4o_conservative_dignity"
+      description: "GPT-4o: Conservative dignity texts - expected high Authority/Loyalty, moderate Care"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o"
+      corpus_subset: "conservative_dignity"
+      
+    - run_id: "gemini_conservative_dignity"
+      description: "Gemini 2.5 Flash: Conservative dignity texts - expected high Authority/Loyalty, moderate Care"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gemini-2.5-flash"
+      corpus_subset: "conservative_dignity"
+      
+    - run_id: "mistral_conservative_dignity"
+      description: "Mistral Large: Conservative dignity texts - expected high Authority/Loyalty, moderate Care"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "mistral-large-latest"
+      corpus_subset: "conservative_dignity"
+      
+    - run_id: "claude_progressive_dignity"
+      description: "Claude 3.5 Sonnet: Progressive dignity texts - expected high Care/Fairness, moderate Authority"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-5-sonnet-20241022"
+      corpus_subset: "progressive_dignity"
+      
+    - run_id: "gpt4o_progressive_dignity"
+      description: "GPT-4o: Progressive dignity texts - expected high Care/Fairness, moderate Authority"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o"
+      corpus_subset: "progressive_dignity"
+      
+    - run_id: "gemini_progressive_dignity"
+      description: "Gemini 2.5 Flash: Progressive dignity texts - expected high Care/Fairness, moderate Authority"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gemini-2.5-flash"
+      corpus_subset: "progressive_dignity"
+      
+    - run_id: "mistral_progressive_dignity"
+      description: "Mistral Large: Progressive dignity texts - expected high Care/Fairness, moderate Authority"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "mistral-large-latest"
+      corpus_subset: "progressive_dignity"
+      
+    # Tribalism comparison with Claude and GPT-4o (most reliable models)
+    - run_id: "claude_conservative_tribalism"
+      description: "Claude 3.5 Sonnet: Conservative tribalism texts - expected very high Loyalty/Authority, low Care"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-5-sonnet-20241022"
+      corpus_subset: "conservative_tribalism"
+      
+    - run_id: "gpt4o_conservative_tribalism"
+      description: "GPT-4o: Conservative tribalism texts - expected very high Loyalty/Authority, low Care"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o"
+      corpus_subset: "conservative_tribalism"
+      
+    - run_id: "claude_progressive_tribalism"
+      description: "Claude 3.5 Sonnet: Progressive tribalism texts - expected high Loyalty to group, variable Care/Fairness"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-5-sonnet-20241022"
+      corpus_subset: "progressive_tribalism"
+      
+    - run_id: "gpt4o_progressive_tribalism"
+      description: "GPT-4o: Progressive tribalism texts - expected high Loyalty to group, variable Care/Fairness"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o"
+      corpus_subset: "progressive_tribalism"
+      
+    # Control conditions with Claude (most reliable for complex analysis)
+    - run_id: "claude_mixed_controls"
+      description: "Claude 3.5 Sonnet: Mixed political content - expected balanced foundation distributions"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-5-sonnet-20241022"
+      corpus_subset: "mixed_controls"
+      
+    - run_id: "claude_extreme_controls"
+      description: "Claude 3.5 Sonnet: Extreme control texts - expected boundary condition foundation patterns"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-5-sonnet-20241022"
+      corpus_subset: "extreme_controls"
+      
+  cost_controls:
+    max_total_cost: 300.0
+    cost_per_analysis_limit: 3.00
+    
+  quality_controls:
+    min_framework_fit_score: 0.7
+    enable_qa_validation: true
+    require_evidence: true
+    
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.75
+    require_evidence: true
+    manual_review_triggers: ["low_confidence", "anomaly_detected", "foundation_scoring_inconsistency", "unexpected_pattern", "cross_llm_divergence"]
+
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+  
+  configuration:
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests: ["descriptive_stats", "correlation_analysis", "foundation_comparison", "hypothesis_testing", "anova", "category_comparison", "cross_llm_analysis"]
+      
+    reliability_analysis:
+      enabled: true
+      methods: ["foundation_consistency", "cross_text_reliability", "theoretical_coherence", "category_discrimination", "cross_llm_reliability"]
+      
+    visualizations:
+      enabled: true
+      types: ["foundation_radar_charts", "foundation_comparison_plots", "correlation_matrix", "foundation_distribution", "narrative_positioning", "category_heatmaps", "foundation_scatter_plots", "cross_llm_comparison_charts"]
+      interactive: true
+      publication_ready: true
+      
+    academic_integration:
+      export_formats: ["csv", "json", "r_data", "stata"]
+      include_metadata: true
+      generate_replication_package: true
+      
+    mft_specific_analysis:
+      foundation_correlation_analysis: true
+      conservative_liberal_comparison: true
+      dignity_tribalism_comparison: true
+      theoretical_coherence_validation: true
+      foundation_independence_testing: true
+      category_discrimination_analysis: true
+      extreme_boundary_testing: true
+      cross_llm_consistency_analysis: true
+      llm_specific_pattern_analysis: true
+
+outputs:
+  save_to_database: true
+  export_formats: ["json", "csv", "r_data", "stata", "feather", "parquet"]
+  include_raw_responses: true
+  include_provenance: true
+  
+  academic_exports:
+    enabled: true
+    formats: ["csv", "r_data", "stata", "feather", "parquet", "hdf5"]
+    include_replication_package: true
+    mft_specific_outputs:
+      foundation_scores_matrix: true
+      category_comparison_matrix: true
+      cross_llm_analysis_matrix: true
+      theoretical_validation_report: true
+      custom_gpt_context_package: true
+      comprehensive_analysis_summary: true
+      multi_llm_reliability_report: true
+
+validation_criteria:
+  min_successful_analyses: 12
+  max_total_cost: 300.0
+  required_quality_score: 0.75
+  mft_specific_criteria:
+    min_foundation_coverage: 5
+    required_theoretical_coherence: 0.8
+    min_statistical_significance: 0.05
+    min_category_discrimination: 0.6
+    required_boundary_condition_coverage: true
+    min_cross_llm_consistency: 0.6
+    required_multi_llm_coverage: 4 

@@ -205,5 +205,770 @@
     "tokens_input": 41,
     "tokens_output": 471,
     "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:47:37.160184",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0021,
+    "tokens_input": 12004,
+    "tokens_output": 499,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:47:56.655925",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0036844499999999997,
+    "tokens_input": 21855,
+    "tokens_output": 677,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:48:03.564420",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0020981999999999997,
+    "tokens_input": 12004,
+    "tokens_output": 496,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:48:13.347326",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00367425,
+    "tokens_input": 21855,
+    "tokens_output": 660,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:51:08.807951",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0020843999999999997,
+    "tokens_input": 12004,
+    "tokens_output": 473,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:51:17.505834",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00362505,
+    "tokens_input": 21855,
+    "tokens_output": 578,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:51:27.182193",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0020994,
+    "tokens_input": 12004,
+    "tokens_output": 498,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:51:39.208227",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00361605,
+    "tokens_input": 21855,
+    "tokens_output": 563,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:55:04.845141",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0020946,
+    "tokens_input": 12004,
+    "tokens_output": 490,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:55:14.094386",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0036094499999999997,
+    "tokens_input": 21855,
+    "tokens_output": 552,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:55:25.331383",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0021035999999999997,
+    "tokens_input": 12004,
+    "tokens_output": 505,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:55:36.596341",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00367485,
+    "tokens_input": 21855,
+    "tokens_output": 661,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:57:03.549897",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0020892,
+    "tokens_input": 12004,
+    "tokens_output": 481,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:57:12.624648",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00361365,
+    "tokens_input": 21855,
+    "tokens_output": 559,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:57:20.945470",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0021054,
+    "tokens_input": 12004,
+    "tokens_output": 508,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T16:57:31.191556",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00366105,
+    "tokens_input": 21855,
+    "tokens_output": 638,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:02:11.149532",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0021,
+    "tokens_input": 12004,
+    "tokens_output": 499,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:02:22.859091",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0036850499999999996,
+    "tokens_input": 21855,
+    "tokens_output": 678,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:02:30.706060",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0020957999999999997,
+    "tokens_input": 12004,
+    "tokens_output": 492,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:02:45.865240",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00365565,
+    "tokens_input": 21855,
+    "tokens_output": 629,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:04:15.667036",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.002094,
+    "tokens_input": 12004,
+    "tokens_output": 489,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:04:30.618455",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00361425,
+    "tokens_input": 21855,
+    "tokens_output": 560,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:04:38.969207",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0021024,
+    "tokens_input": 12004,
+    "tokens_output": 503,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:04:49.667763",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0036406499999999996,
+    "tokens_input": 21855,
+    "tokens_output": 604,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:09:57.545991",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0020957999999999997,
+    "tokens_input": 12004,
+    "tokens_output": 492,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:10:08.745243",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00365325,
+    "tokens_input": 21855,
+    "tokens_output": 625,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:10:16.501029",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0021078,
+    "tokens_input": 12004,
+    "tokens_output": 512,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T17:10:30.301122",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00361425,
+    "tokens_input": 21855,
+    "tokens_output": 560,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:02:34.261338",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.047034000000000006,
+    "tokens_input": 13078,
+    "tokens_output": 520,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:02:49.313218",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.08058299999999999,
+    "tokens_input": 23731,
+    "tokens_output": 626,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:03:03.856333",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.121695,
+    "tokens_input": 37855,
+    "tokens_output": 542,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:03:25.708389",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.152367,
+    "tokens_input": 48054,
+    "tokens_output": 547,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:03:34.367084",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.01446,
+    "tokens_input": 2470,
+    "tokens_output": 470,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:03:44.819355",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.016908,
+    "tokens_input": 2891,
+    "tokens_output": 549,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:03:55.361071",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.06812,
+    "tokens_input": 12004,
+    "tokens_output": 540,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:04:14.543211",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.11796000000000001,
+    "tokens_input": 21855,
+    "tokens_output": 579,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:11:59.938904",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.01988,
+    "tokens_input": 2332,
+    "tokens_output": 548,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:12:08.460722",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.02228,
+    "tokens_input": 2707,
+    "tokens_output": 583,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:14:22.175444",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.130752,
+    "tokens_input": 14037,
+    "tokens_output": 769,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:14:46.943781",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.21854400000000002,
+    "tokens_input": 24885,
+    "tokens_output": 811,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:15:18.904926",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.335272,
+    "tokens_input": 39632,
+    "tokens_output": 759,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:15:50.134981",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.42312,
+    "tokens_input": 50829,
+    "tokens_output": 687,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:15:56.689588",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.036664,
+    "tokens_input": 2579,
+    "tokens_output": 668,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:16:02.218198",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.038696,
+    "tokens_input": 3004,
+    "tokens_output": 611,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:16:15.637899",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.046974,
+    "tokens_input": 13078,
+    "tokens_output": 516,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:16:34.168539",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.08061299999999999,
+    "tokens_input": 23731,
+    "tokens_output": 628,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:16:48.713490",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.121665,
+    "tokens_input": 37855,
+    "tokens_output": 540,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:17:06.585011",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.15235200000000002,
+    "tokens_input": 48054,
+    "tokens_output": 546,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:17:15.863169",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.014339999999999999,
+    "tokens_input": 2470,
+    "tokens_output": 462,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:17:25.674267",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.016803,
+    "tokens_input": 2891,
+    "tokens_output": 542,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:17:34.482983",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.06804500000000001,
+    "tokens_input": 12004,
+    "tokens_output": 535,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:17:54.144608",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.11772000000000002,
+    "tokens_input": 21855,
+    "tokens_output": 563,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:25:43.661030",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.01997,
+    "tokens_input": 2332,
+    "tokens_output": 554,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:25:56.425717",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.022385000000000002,
+    "tokens_input": 2707,
+    "tokens_output": 590,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:27:41.565218",
+    "provider": "google_ai",
+    "model": "gemini-2.5-flash",
+    "cost": 0.025008000000000002,
+    "tokens_input": 2849,
+    "tokens_output": 850,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:28:14.591833",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.12948,
+    "tokens_input": 14037,
+    "tokens_output": 716,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:28:49.149657",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.217584,
+    "tokens_input": 24885,
+    "tokens_output": 771,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:29:31.961900",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.334576,
+    "tokens_input": 39632,
+    "tokens_output": 730,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:30:06.090078",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.424776,
+    "tokens_input": 50829,
+    "tokens_output": 756,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:30:17.131011",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.037408,
+    "tokens_input": 2579,
+    "tokens_output": 699,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:30:23.217357",
+    "provider": "mistral",
+    "model": "mistral-large-latest",
+    "cost": 0.036824,
+    "tokens_input": 3004,
+    "tokens_output": 533,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:30:34.585250",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.046719000000000004,
+    "tokens_input": 13078,
+    "tokens_output": 499,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:30:49.997231",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.08058299999999999,
+    "tokens_input": 23731,
+    "tokens_output": 626,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:31:04.747119",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.12186,
+    "tokens_input": 37855,
+    "tokens_output": 553,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:31:20.338377",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.151482,
+    "tokens_input": 48054,
+    "tokens_output": 488,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:31:29.161198",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.01497,
+    "tokens_input": 2470,
+    "tokens_output": 504,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:31:40.295906",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.016427999999999998,
+    "tokens_input": 2891,
+    "tokens_output": 517,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:31:52.568568",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.06794,
+    "tokens_input": 12004,
+    "tokens_output": 528,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T18:32:12.893416",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.118275,
+    "tokens_input": 21855,
+    "tokens_output": 600,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:46:50.658783",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00032324999999999997,
+    "tokens_input": 407,
+    "tokens_output": 437,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:47:00.243872",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.00967,
+    "tokens_input": 407,
+    "tokens_output": 509,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:47:08.355466",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.00895,
+    "tokens_input": 407,
+    "tokens_output": 461,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:47:18.980084",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.009325,
+    "tokens_input": 407,
+    "tokens_output": 486,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:49:42.194854",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.002106,
+    "tokens_input": 12004,
+    "tokens_output": 509,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:49:51.763653",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.00363945,
+    "tokens_input": 21855,
+    "tokens_output": 602,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:50:04.564702",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.046974,
+    "tokens_input": 13078,
+    "tokens_output": 516,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:50:19.239927",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.08044799999999999,
+    "tokens_input": 23731,
+    "tokens_output": 617,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:50:32.213018",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.06764,
+    "tokens_input": 12004,
+    "tokens_output": 508,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:51:56.121784",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.117555,
+    "tokens_input": 21855,
+    "tokens_output": 552,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:52:07.529023",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.04706400000000001,
+    "tokens_input": 13078,
+    "tokens_output": 522,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:53:26.674142",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
+    "cost": 0.08005799999999999,
+    "tokens_input": 23731,
+    "tokens_output": 591,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:53:35.277690",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.002094,
+    "tokens_input": 12004,
+    "tokens_output": 489,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:53:45.684044",
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "cost": 0.0036736499999999997,
+    "tokens_input": 21855,
+    "tokens_output": 659,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:53:55.000906",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.06822500000000001,
+    "tokens_input": 12004,
+    "tokens_output": 547,
+    "request_type": "analysis"
+  },
+  {
+    "timestamp": "2025-06-24T19:55:20.484705",
+    "provider": "openai",
+    "model": "gpt-4o",
+    "cost": 0.11742000000000001,
+    "tokens_input": 21855,
+    "tokens_output": 543,
+    "request_type": "analysis"
   }
 ]

@@ -1,0 +1,67 @@
+{
+  "study_metadata": {
+    "name": "MFT_Validation_Pipeline_Test",
+    "version": "v2.0.0",
+    "created": "2025-06-25T15:30:00Z",
+    "description": "Pipeline validation test for comprehensive MFT study before multi-LLM run",
+    "hypothesis": "Experiment pipeline functions correctly with enhanced analysis features before scaling to multi-LLM comprehensive study",
+    "research_context": "Pre-flight test for Custom GPT context generation experiment",
+    "principal_investigator": "Discernus Research Team",
+    "institution": "Discernus Research Lab",
+    "ethical_clearance": "ACADEMIC-2025-MFT-TEST",
+    "funding_source": "Internal Development",
+    "data_classification": "research",
+    "publication_intent": false,
+    "tags": [
+      "moral_foundations_theory",
+      "pipeline_test",
+      "mft",
+      "validation"
+    ],
+    "hypotheses": [
+      "Experiment pipeline correctly processes corpus files",
+      "Enhanced analysis features generate expected output formats",
+      "Quality assurance triggers function as expected",
+      "Statistical analysis components work properly"
+    ],
+    "success_criteria": [
+      "All corpus files are successfully processed",
+      "Enhanced analysis outputs are generated",
+      "Academic export formats are created",
+      "No pipeline errors or failures",
+      "Output structure is suitable for Custom GPT context"
+    ]
+  },
+  "analysis_summary": {
+    "total_analyses": 4,
+    "successful_analyses": 0,
+    "failed_analyses": 4,
+    "total_cost": 0.0116,
+    "cost_efficiency": 0.0029,
+    "extraction_timestamp": "2025-06-24T17:02:46.021354",
+    "well_columns": [
+      "well_care",
+      "well_harm",
+      "well_fairness",
+      "well_cheating",
+      "well_loyalty",
+      "well_betrayal",
+      "well_authority",
+      "well_subversion",
+      "well_sanctity",
+      "well_degradation",
+      "well_liberty",
+      "well_oppression"
+    ],
+    "frameworks_used": [
+      "moral_foundations_theory"
+    ],
+    "models_used": [
+      "unknown"
+    ]
+  },
+  "export_timestamp": "2025-06-24T17:02:46.331122",
+  "files_generated": [
+    "analysis_data.csv"
+  ]
+}
