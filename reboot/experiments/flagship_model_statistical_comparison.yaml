@@ -1,0 +1,280 @@
+# Discernus Reboot - Flagship Model Statistical Comparison Experiment
+# Version: 1.0
+# Purpose: Statistical comparison of flagship cloud LLMs across political discourse corpus
+# Research Question: "Do different flagship cloud LLMs produce statistically similar results for substantive texts?"
+
+experiment_meta:
+  name: "Flagship_Model_Statistical_Comparison"
+  display_name: "Flagship Cloud LLM Statistical Comparison Study"
+  version: "1.0"
+  description: "A comprehensive statistical comparison of flagship cloud LLMs analyzing political discourse using Moral Foundations Theory with proper statistical validation."
+  tags: ["statistical_comparison", "flagship_models", "multi_text", "corpus_analysis", "research"]
+  
+  # Study design parameters
+  study_design:
+    comparison_type: "multi_model"
+    corpus_based: true
+    statistical_validation: true
+    sample_size_target: 32  # Use full validation set
+    statistical_methods: 
+      - "geometric_similarity"
+      - "dimensional_correlation" 
+      - "hypothesis_testing"
+      - "effect_size_analysis"
+      - "confidence_intervals"
+
+# Corpus configuration for multi-text analysis
+corpus:
+  source_type: "directory_collection"
+  file_path: "src/reboot/corpus/validation_set"
+  pattern: "**/*.txt"  # Include all subdirectories
+  sampling_strategy: "stratified"  # Sample from each category
+  categories:
+    - "conservative_dignity"
+    - "conservative_tribalism"
+    - "progressive_dignity"
+    - "progressive_tribalism"
+    - "extreme_controls"
+    - "mixed_controls"
+  sample_per_category: "all"  # Use all available texts
+  total_expected_texts: 32
+
+# Flagship model configuration
+models:
+  comparison_set: "flagship_only"
+  
+  flagship_models:
+    openai_flagship:
+      model_id: "gpt-4o"
+      provider: "openai"
+      tier: "flagship"
+      estimated_cost_per_analysis: 0.015
+      
+    anthropic_flagship:
+      model_id: "claude-3-5-sonnet-20241022" 
+      provider: "anthropic"
+      tier: "flagship"
+      estimated_cost_per_analysis: 0.018
+      
+    # google_flagship:  # Temporarily disabled until Vertex AI setup
+    #   model_id: "gemini/gemini-1.5-pro" 
+    #   provider: "google"
+    #   tier: "flagship"
+    #   estimated_cost_per_analysis: 0.012
+
+# Enhanced framework definition optimized for statistical comparison
+framework:
+  name: moral_foundations_theory
+  version: "1.2-statistical"
+  description: |
+    Moral Foundations Theory implementation optimized for cross-model statistical comparison.
+    Emphasizes consistent scoring patterns and reduced interpretation variance across different LLMs.
+
+  axes:
+    Care_Harm:
+      description: "Concerns about caring for others and preventing harm."
+      integrative:
+        name: "Care"
+        angle: 90
+        description: "Compassion, protection of vulnerable individuals, concern for suffering."
+        statistical_indicators: ["empathy expressions", "protective language", "concern for wellbeing"]
+      disintegrative:
+        name: "Harm"
+        angle: 270
+        description: "Actions causing suffering, cruelty, violence, neglect."
+        statistical_indicators: ["violence references", "cruel actions", "harm to others"]
+
+    Fairness_Cheating:
+      description: "Concerns about fairness, justice, and proportionality."
+      integrative:
+        name: "Fairness"
+        angle: 60
+        description: "Justice, equal treatment, proportional outcomes, merit-based decisions."
+        statistical_indicators: ["justice language", "equality references", "fair process mentions"]
+      disintegrative:
+        name: "Cheating"
+        angle: 240
+        description: "Unfair advantage, exploitation, corruption, rule violations."
+        statistical_indicators: ["corruption mentions", "unfair advantage", "rule breaking"]
+
+    Loyalty_Betrayal:
+      description: "Concerns about loyalty to the in-group and betrayal of it."
+      integrative:
+        name: "Loyalty"
+        angle: 120
+        description: "Group commitment, patriotism, collective solidarity, team unity."
+        statistical_indicators: ["group solidarity", "patriotic language", "team loyalty"]
+      disintegrative:
+        name: "Betrayal"
+        angle: 300
+        description: "Disloyalty, treason, abandoning the group, self-interest over collective."
+        statistical_indicators: ["betrayal language", "abandoning allies", "self over group"]
+
+    Authority_Subversion:
+      description: "Concerns about social order, hierarchy, and legitimate authority."
+      integrative:
+        name: "Authority"
+        angle: 0
+        description: "Respect for hierarchy, legitimate leadership, traditional order, institutional respect."
+        statistical_indicators: ["respect for leadership", "institutional language", "hierarchical order"]
+      disintegrative:
+        name: "Subversion"
+        angle: 180
+        description: "Illegitimate challenges to authority, chaos, institutional disrespect."
+        statistical_indicators: ["authority challenges", "institutional criticism", "disruptive language"]
+
+    Sanctity_Degradation:
+      description: "Concerns about spiritual and bodily purity, sacred values."
+      integrative:
+        name: "Sanctity"
+        angle: 30
+        description: "Sacred values, purity, dignity, elevated principles, spiritual concerns."
+        statistical_indicators: ["sacred language", "purity concepts", "dignity references"]
+      disintegrative:
+        name: "Degradation"
+        angle: 210
+        description: "Contamination, debasement, violation of sacred values, degrading actions."
+        statistical_indicators: ["degrading language", "contamination metaphors", "debasement"]
+
+    Liberty_Oppression:
+      description: "Concerns about individual freedom and resistance to domination."
+      integrative:
+        name: "Liberty"
+        angle: 330
+        description: "Individual freedom, autonomy, self-determination, resistance to coercion."
+        statistical_indicators: ["freedom language", "autonomy references", "choice emphasis"]
+      disintegrative:
+        name: "Oppression"
+        angle: 150
+        description: "Domination, coercion, restriction of freedom, tyrannical control."
+        statistical_indicators: ["coercion language", "domination references", "freedom restrictions"]
+
+# Enhanced prompt guidance for consistent cross-model scoring
+prompt_guidance:
+  role_definition: |
+    You are a moral psychology expert conducting a rigorous cross-model comparison study. Your analysis must be precise, consistent, and focused on objective moral foundations present in the text. This analysis will be compared statistically with other AI models, so consistency and precision are critical.
+
+  framework_summary_instructions: |
+    Analyze using Moral Foundations Theory. Score the six integrative anchors: Care, Fairness, Loyalty, Authority, Sanctity, and Liberty. Your scoring will be used in statistical comparison with other flagship AI models.
+
+  analysis_methodology: |
+    **STATISTICAL COMPARISON METHODOLOGY:**
+    1. **Objective Assessment**: Focus on clear, measurable moral content rather than subjective interpretation
+    2. **Consistent Scaling**: Use the full 0.0-1.0 range appropriately - avoid clustering around middle values
+    3. **Evidence-Based Scoring**: Every score must be supported by specific textual evidence
+    4. **Cross-Model Reliability**: Score as if this text will be analyzed by multiple AI systems for comparison
+
+  scoring_requirements: |
+    **CRITICAL SCORING REQUIREMENTS FOR STATISTICAL ANALYSIS:**
+    - Use decimal values between 0.0 and 1.0 (e.g., 0.1, 0.3, 0.7, 0.9)
+    - Distribute scores across the full range when appropriate
+    - Avoid default/neutral scores unless truly justified
+    - Each score must reflect genuine moral foundation strength in the text
+    - Consider that these scores will be statistically compared across AI models
+
+  consistency_guidelines: |
+    **CROSS-MODEL CONSISTENCY GUIDELINES:**
+    - 0.0-0.2: Foundation essentially absent or contradicted
+    - 0.3-0.4: Foundation present but weak/secondary
+    - 0.5-0.6: Foundation moderately present and relevant
+    - 0.7-0.8: Foundation strongly present and influential
+    - 0.9-1.0: Foundation dominant/central to the text's moral framework
+
+  json_format_instructions: |
+    **STATISTICAL ANALYSIS JSON FORMAT:**
+    Return a JSON object with keys for each anchor (Care, Fairness, Loyalty, Authority, Sanctity, Liberty).
+    Each value must include:
+    - "score": decimal 0.0-1.0
+    - "evidence": direct quote supporting the score
+    - "reasoning": brief justification focusing on objective moral content
+    - "confidence": your confidence in this score (0.0-1.0)
+    
+    Example:
+    "Care": { 
+      "score": 0.8, 
+      "evidence": "[direct quote from text]", 
+      "reasoning": "Clear expressions of compassion and concern for others' wellbeing",
+      "confidence": 0.9
+    }
+
+# Statistical analysis configuration
+statistical_analysis:
+  primary_methods:
+    geometric_similarity:
+      enabled: true
+      metrics: ["euclidean_distance", "manhattan_distance", "cosine_similarity"]
+      
+    dimensional_correlation:
+      enabled: true
+      methods: ["pearson", "spearman"]
+      
+    hypothesis_testing:
+      enabled: true
+      tests: ["paired_t_test", "wilcoxon_signed_rank"]
+      alpha: 0.05
+      bonferroni_correction: true
+      
+    effect_size_analysis:
+      enabled: true
+      measures: ["cohens_d", "hedges_g"]
+      
+    confidence_intervals:
+      enabled: true
+      confidence_levels: [0.90, 0.95, 0.99]
+
+  similarity_classification:
+    thresholds:
+      highly_similar: 
+        geometric_distance: 0.15
+        correlation_threshold: 0.85
+        p_value_threshold: 0.05
+      moderately_similar:
+        geometric_distance: 0.35
+        correlation_threshold: 0.65
+        p_value_threshold: 0.01
+      statistically_different:
+        geometric_distance: 0.50
+        correlation_threshold: 0.40
+        p_value_threshold: 0.001
+
+# Report generation configuration
+report_configuration:
+  template_type: "statistical_comparison"
+  
+  visualization_strategy:
+    model_summary_charts: true  # One chart per model with average centroid
+    individual_text_charts: false  # Don't show 32 separate charts
+    statistical_summary_cards: true
+    correlation_heatmaps: true
+    distribution_plots: true
+    
+  content_sections:
+    - "executive_summary"
+    - "methodology_overview" 
+    - "model_comparison_overview"
+    - "statistical_results"
+    - "detailed_analysis"
+    - "corpus_characteristics"
+    - "prompt_documentation"
+    - "technical_appendix"
+    
+  statistical_presentation:
+    complexity_level: "accessible"  # Present complex stats in digestible way
+    traffic_light_indicators: true  # Green/yellow/red for similarity
+    expandable_technical_details: true
+    confidence_indicators: true
+
+# Cost and resource estimation (updated for 2 models - OpenAI + Anthropic)
+resource_estimation:
+  total_analyses: 64  # 32 texts × 2 flagship models (OpenAI + Anthropic)
+  estimated_total_cost: 1.06  # $0.0165 average × 64
+  estimated_duration_minutes: 20  # ~15-20 seconds per analysis
+  
+# Quality assurance
+quality_assurance:
+  validation_checks:
+    - "corpus_file_availability"
+    - "model_api_connectivity" 
+    - "prompt_template_validation"
+    - "statistical_method_availability"
+    - "database_schema_compatibility" 
