@@ -195,6 +195,47 @@ class RebootPlotlyCircularVisualizer:
             
         return fig
 
+    def plot_comparison(self, anchors: Dict, 
+                        analysis_a: Dict, label_a: str,
+                        analysis_b: Dict, label_b: str,
+                        title: Optional[str] = None,
+                        output_html: Optional[str] = None, show: bool = True) -> go.Figure:
+        """Creates a side-by-side comparison plot of two signatures."""
+        fig = make_subplots(
+            rows=1, cols=2,
+            subplot_titles=[label_a, label_b],
+            specs=[[{"type": "scatter"}, {"type": "scatter"}]]
+        )
+
+        # Generate each plot individually
+        fig_a = self.plot(anchors, signature_scores=analysis_a['scores'], centroid_coords=analysis_a['centroid'], show=False)
+        fig_b = self.plot(anchors, signature_scores=analysis_b['scores'], centroid_coords=analysis_b['centroid'], show=False)
+
+        # Add traces to the subplots
+        for trace in fig_a.data:
+            fig.add_trace(trace, row=1, col=1)
+        for trace in fig_b.data:
+            fig.add_trace(trace, row=1, col=2)
+            
+        fig.update_layout(
+            title=dict(text=title or "Comparative Analysis"),
+            height=self.figure_size,
+            width=self.figure_size * 2,
+            showlegend=False
+        )
+        
+        fig.update_xaxes(scaleanchor="y", scaleratio=1, range=[-1.2, 1.2])
+        fig.update_yaxes(range=[-1.2, 1.2])
+        
+        if output_html:
+            Path(output_html).parent.mkdir(parents=True, exist_ok=True)
+            fig.write_html(output_html)
+        
+        if show:
+            fig.show()
+            
+        return fig
+
     def create_comparison(self, analyses: List[Dict], title: str = "Comparative Analysis",
                          output_html: Optional[str] = None,
                          output_png: Optional[str] = None) -> go.Figure:

@@ -32,4 +32,25 @@ class ReportBuilder:
             show=False
         )
 
+        return str(output_filename)
+
+    def generate_comparison_report(
+        self,
+        anchors: Dict,
+        analysis_a: Dict, label_a: str,
+        analysis_b: Dict, label_b: str,
+        run_id: str
+    ) -> str:
+        """Generates a side-by-side HTML comparison report."""
+        output_filename = self.output_dir / f"comparison_report_{run_id}.html"
+
+        self.visualizer.plot_comparison(
+            anchors=anchors,
+            analysis_a=analysis_a,
+            label_a=label_a,
+            analysis_b=analysis_b,
+            label_b=label_b,
+            output_html=str(output_filename),
+            show=False
+        )
         return str(output_filename) 
