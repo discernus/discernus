@@ -27,69 +27,32 @@ except ImportError:
 # Import existing components to preserve architecture
 load_dotenv()
 
-# Import cost and rate limiting (preserved for compatibility)  
-try:
-    from ..utils.cost_management import CostManager, TPMRateLimiter
-    COST_MANAGER_AVAILABLE = True
-    TPM_RATE_LIMITER_AVAILABLE = True
-except ImportError:
-    print("⚠️ Cost management not available")
-    COST_MANAGER_AVAILABLE = False
-    TPM_RATE_LIMITER_AVAILABLE = False
+# Import stubbed dependencies for full isolation
+from ..utils.stubs import CostManager, TPMRateLimiter, APIRetryHandler, ProviderFailoverHandler
 
 from ..engine.prompt_engine import create_prompt_from_experiment
 from ..engine.signature_engine import FrameworkLoader as ExperimentLoader # Rename for clarity
 
 class LiteLLMClient:
     """
-    Unified LLM client using LiteLLM for cloud APIs + local Ollama models
-    ENHANCED: Uses LiteLLM's native rate limiting for maximum experiment speed
+    Unified LLM client using LiteLLM for cloud APIs + local Ollama models.
+    This version is fully isolated for the rebooted application.
     """
     
     def __init__(self):
         if not LITELLM_AVAILABLE:
             raise ImportError("LiteLLM is required but not available. Install with: pip install litellm")
         
-        print("🚀 Initializing LiteLLM Unified Client with NATIVE RATE LIMITING")
+        print("🚀 Initializing ISOLATED LiteLLM Unified Client")
         
-        # Cost and QA management (preserved from DirectAPIClient)
-        if COST_MANAGER_AVAILABLE:
-            self.cost_manager = CostManager()
-            print("✅ Cost Manager initialized")
-        else:
-            self.cost_manager = None
-            print("⚠️ Cost Manager not available")
-        
-        # Context for quality assurance (preserved from DirectAPIClient)
+        self.cost_manager = CostManager()
         self._current_text = None
         self._current_framework = None
-
-        # REMOVED: Custom rate limiting - using LiteLLM native instead
-        # No more: self._last_request_time = {} or self._rate_limits = {}
-        print("✅ Using LiteLLM native rate limiting (FASTER for experiments!)")
+        self.retry_handler = APIRetryHandler()
+        self.failover_handler = ProviderFailoverHandler()
+        self.tpm_limiter = TPMRateLimiter()
         
-        # Initialize retry handler (preserved)
-        try:
-            from ..utils.api_retry_handler import APIRetryHandler, ProviderFailoverHandler
-            self.retry_handler = APIRetryHandler()
-            self.failover_handler = ProviderFailoverHandler()
-        except ImportError:
-            print("⚠️ Retry handler not available - using basic error handling")
-            self.retry_handler = None
-            self.failover_handler = None
-        
-        # Initialize TPM rate limiter (preserved)
-        if TPM_RATE_LIMITER_AVAILABLE:
-            self.tpm_limiter = TPMRateLimiter()
-            print("✅ TPM Rate Limiter initialized")
-        else:
-            self.tpm_limiter = None
-            print("⚠️ TPM Rate Limiter not available")
-        
-        # Configure LiteLLM settings with NATIVE RATE LIMITING
         self._configure_litellm()
-        
-        # Test available models
         self._test_model_availability()
     
     def _configure_litellm(self):
