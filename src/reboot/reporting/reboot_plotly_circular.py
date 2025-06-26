@@ -198,10 +198,38 @@ class RebootPlotlyCircularVisualizer:
     def plot_group_comparison(self, anchors: Dict, 
                               centroid_a: Tuple[float, float], label_a: str,
                               centroid_b: Tuple[float, float], label_b: str,
+                              group_a_signatures: Optional[List[Dict]] = None,
+                              group_b_signatures: Optional[List[Dict]] = None,
                               title: Optional[str] = None,
                               output_html: Optional[str] = None, show: bool = True) -> go.Figure:
         """Creates a plot comparing the centroids of two groups."""
         fig = self.plot(anchors=anchors, show=False) # Get the base plot with anchors
+
+        # Plot individual points for Group A
+        if group_a_signatures:
+            group_a_xs = [s['centroid'][0] for s in group_a_signatures if 'centroid' in s]
+            group_a_ys = [s['centroid'][1] for s in group_a_signatures if 'centroid' in s]
+            fig.add_trace(go.Scatter(
+                x=group_a_xs, y=group_a_ys,
+                mode='markers',
+                marker=dict(size=10, color='blue', opacity=0.4),
+                name=f'{label_a} points',
+                showlegend=False,
+                hoverinfo='skip'
+            ))
+
+        # Plot individual points for Group B
+        if group_b_signatures:
+            group_b_xs = [s['centroid'][0] for s in group_b_signatures if 'centroid' in s]
+            group_b_ys = [s['centroid'][1] for s in group_b_signatures if 'centroid' in s]
+            fig.add_trace(go.Scatter(
+                x=group_b_xs, y=group_b_ys,
+                mode='markers',
+                marker=dict(size=10, color='red', opacity=0.4),
+                name=f'{label_b} points',
+                showlegend=False,
+                hoverinfo='skip'
+            ))
 
         # Plot Centroid A
         fig.add_trace(go.Scatter(
@@ -210,7 +238,8 @@ class RebootPlotlyCircularVisualizer:
             marker=dict(size=self.style['centroid_marker_size'], color='blue', line=dict(width=3, color='darkblue')),
             text=[label_a],
             textposition='top center',
-            name=label_a
+            name=label_a,
+            hovertemplate='<b>%{text}</b><br>x: %{x:.3f}<br>y: %{y:.3f}<extra></extra>'
         ))
 
         # Plot Centroid B
@@ -220,7 +249,8 @@ class RebootPlotlyCircularVisualizer:
             marker=dict(size=self.style['centroid_marker_size'], color='red', line=dict(width=3, color='darkred')),
             text=[label_b],
             textposition='bottom center',
-            name=label_b
+            name=label_b,
+            hovertemplate='<b>%{text}</b><br>x: %{x:.3f}<br>y: %{y:.3f}<extra></extra>'
         ))
 
         fig.update_layout(

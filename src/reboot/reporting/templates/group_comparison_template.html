@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ report_title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { padding: 20px; }
+        .table { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>{{ report_title }}</h1>
+        <p>Generated: {{ generation_date }}</p>
+
+        <div class="row">
+            <div class="col-md-9">
+                {{ plot_html|safe }}
+            </div>
+            <div class="col-md-3">
+                <h2>Comparison Summary</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Group</strong></td>
+                            <td>{{ label_a }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Group</strong></td>
+                            <td>{{ label_b }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Distance between Centroids</strong></td>
+                            <td>{{ distance }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

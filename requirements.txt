@@ -48,3 +48,9 @@ python-multipart>=0.0.9
 # Asynchronous Task Queue
 celery>=5.4.0
 redis>=5.0.4
+
+# Added from the code block
+sqlalchemy
+asyncio
+pathlib
+kaleido

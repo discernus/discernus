@@ -3,6 +3,7 @@ import logging
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 import numpy as np
+import math
 
 # Set up a logger for this module
 logger = logging.getLogger(__name__)
@@ -99,4 +100,12 @@ def calculate_coordinates(
     if total_weight > 0:
         return weighted_x / total_weight, weighted_y / total_weight
         
-    return 0.0, 0.0 
+    return 0.0, 0.0
+
+def _get_anchor_coordinates(experiment_def: Dict[str, Any]) -> Dict[str, Tuple[float, float]]:
+    anchors = _extract_anchors_from_framework(experiment_def)
+    return {anchor: calculate_coordinates(experiment_def, {anchor: 1.0}) for anchor in anchors}
+
+def calculate_distance(point_a: Tuple[float, float], point_b: Tuple[float, float]) -> float:
+    """Calculates the Euclidean distance between two points."""
+    return math.sqrt((point_b[0] - point_a[0])**2 + (point_b[1] - point_a[1])**2) 

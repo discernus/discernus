@@ -20,34 +20,45 @@ Our development is prioritized along the following sequence of questions:
 > *"What is the moral signature of this single piece of text according to a specific framework, and what does that look like geometrically?"*
 
 - **Status:** Implemented and delivered.
-- **Capabilities:** Analysis of a single text against a self-contained experiment file, producing a shareable HTML visualization.
+- **Capabilities:** Analysis of a single text against a self-contained experiment file, producing a shareable HTML visualization via the `/analyze` endpoint.
 
-### Question #2: Comparative Analysis (Next Up)
+### Question #2: Comparative Analysis (Complete)
 > *"I have the signature for Text A. Now, how does it compare directly to Text B using the same framework?"*
+
+- **Status:** Complete.
+- **Capabilities:** Direct comparison of two texts via the `/compare` endpoint, producing a unified visual report showing both signatures.
+
+### Question #3: Group-Level Analysis (Complete)
+> *"How does the average moral signature of this group of texts compare to the average signature of this other group?"*
+
+- **Status:** Complete.
+- **Capabilities:** 
+    - Asynchronous batch analysis of text corpora via `/analyze-corpus`.
+    - Comparison of job-based results via `/compare-groups`.
+    - High-performance, direct comparison of text groups via `/compare-groups-direct`.
+    - Calculates and visualizes the `centroid` for each group.
+- **Note:** The current implementation uses a temporary file-based result store. This can be upgraded to a persistent `PostgreSQL` database in a future iteration.
+
+### Question #4: Distance Metrics (Complete)
+> *"What's the distance between the centroids of text A and text B?"*
+> *"What's the distance between the average centroid position of text group A and text group B?"*
+
+- **Status:** Complete.
+- **Capabilities:**
+    - The `Signature Engine` now includes a `calculate_distance` function.
+    - The `/compare` endpoint response and report now include the distance between the two text centroids.
+    - The `/compare-groups` and `/compare-groups-direct` endpoints and reports now include the distance between the two group centroids.
+
+## Next Up: Multi-LLM Comparison
+> *"Do different flagship cloud LLMs produce statistically similar results for a substantive text?"*
 
 - **Status:** Next in the development queue.
 - **Required Evolution:**
-    - A mechanism to handle state (i.e., remembering the first analysis).
-    - An API endpoint that can accept two texts for comparison.
-    - Integration with the visualizer's built-in comparison modes.
-    - *This will likely drive the introduction of a simple persistence layer (e.g., an in-memory cache or a simple database table).*
+    - A new endpoint, likely `/compare-models`, that accepts a single text and a list of models to compare.
+    - A new report type that visualizes the signatures from multiple models on a single chart.
+    - A mechanism to calculate and display statistical similarity (e.g., variance in centroid positions).
 
-### Question #3: Group-Level Analysis (Future)
-> *"How does the average moral signature of this group of texts compare to the average signature of this other group?"*
-
-- **Status:** Post-comparative analysis.
-- **Required Evolution:**
-    - A robust corpus ingestion system to handle collections of texts.
-    - An asynchronous task queue (`Celery`) to process batches of texts without blocking the UI.
-    - A full database (`PostgreSQL`) to store all results for aggregation.
-    - The ability to calculate and visualize a `centroid` for a group of signatures. 
-
-
-
-##Question Backlog
-- Do different flagship cloud LLMs produce statistically similar results?
+## Question Backlog
 - Do local models produce statistically similar results to flagship cloud LLMs?
 - Do LLMs produce statistically significant runs across multipe runs of the same experiment?
-- What's the distance between the centroids of text A and text B?
-- What's the distance between the average centroid position of text group and text group B?
 - Ceteris parabis, what's the difference between the way framework A based experiment 1 and framework B based experiment 2 analyzes text A?
