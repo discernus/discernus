@@ -220,66 +220,61 @@ async def analyze_corpus(request: CorpusAnalysisRequest):
     
     return JobResponse(job_id=job_id)
 
-@app.get("/results/{job_id}", response_model=ResultResponse)
-async def get_results(job_id: str):
-    """
-    Retrieves the status and results of a job from the temporary file store.
-    """
+async def _get_job_results(job_id: str) -> List[Dict[str, Any]]:
+    """Helper function to retrieve all result files for a given job_id."""
     job_dir = TEMP_RESULTS_DIR / job_id
     if not job_dir.is_dir():
-        raise HTTPException(status_code=404, detail="Job ID not found.")
-
+        return []
+    
     results = []
-    # Note: We don't know the total number of expected files here yet.
-    # This is a limitation of the simple file-based approach.
     for result_file in job_dir.glob("*.json"):
         with open(result_file, 'r') as f:
             results.append(json.load(f))
-            
-    # A more robust system would know the total tasks dispatched.
-    # For now, we'll just return what we have.
-    status = "COMPLETE" # Placeholder status
-    if not results:
-        status = "PENDING"
+    return results
 
+@app.get("/results/{job_id}", response_model=ResultResponse)
+async def get_results(job_id: str):
+    """Retrieves the status and results of a job."""
+    results = await _get_job_results(job_id)
+    status = "COMPLETE" if results else "PENDING"
     return ResultResponse(job_id=job_id, status=status, results=results)
 
 @app.post("/compare-groups", response_model=GroupComparisonResponse)
 async def compare_groups(request: GroupComparisonRequest):
     """
-    Retrieves results for two jobs, calculates the centroid for each group,
-    and generates a comparative report.
+    Compares two groups of analysis results and generates a report.
     """
     run_id = str(uuid.uuid4())
     try:
-        # Step 1: Fetch results for both jobs
-        results_a = await get_results(request.job_id_a)
-        results_b = await get_results(request.job_id_b)
-        
-        # Step 2: Load experiment definition to get anchors
+        results_a = await _get_job_results(request.job_id_a)
+        results_b = await _get_job_results(request.job_id_b)
+
+        if not results_a or not results_b:
+            raise HTTPException(status_code=400, detail="One or both jobs have no results yet.")
+
         with open(request.experiment_file_path, 'r') as f:
             experiment_def = yaml.safe_load(f)
         anchors = _extract_anchors_from_framework(experiment_def)
 
-        # Step 3: Generate the group comparison report
         report_path = report_builder.generate_group_comparison_report(
             anchors=anchors,
-            group_a_signatures=results_a.results,
+            group_a_signatures=results_a,
             label_a=request.label_a,
-            group_b_signatures=results_b.results,
+            group_b_signatures=results_b,
             label_b=request.label_b,
             run_id=run_id
         )
         
-        # Calculate centroids to return in the response
         def _calculate_centroid(signatures):
             if not signatures: return (0.0, 0.0)
             coords = [s['centroid'] for s in signatures if 'centroid' in s]
             if not coords: return (0.0, 0.0)
-            return sum(c[0] for c in coords)/len(coords), sum(c[1] for c in coords)/len(coords)
+            avg_x = sum(c[0] for c in coords) / len(coords)
+            avg_y = sum(c[1] for c in coords) / len(coords)
+            return (avg_x, avg_y)
 
-        centroid_a = _calculate_centroid(results_a.results)
-        centroid_b = _calculate_centroid(results_b.results)
+        centroid_a = _calculate_centroid(results_a)
+        centroid_b = _calculate_centroid(results_b)
 
         return GroupComparisonResponse(
             report_url=f"/{report_path}",

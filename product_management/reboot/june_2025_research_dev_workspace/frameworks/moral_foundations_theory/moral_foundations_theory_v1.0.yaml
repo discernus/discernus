@@ -1,0 +1,490 @@
+# Moral Foundations Theory Framework
+# Enhanced implementation of Jonathan Haidt's research into the psychological foundations of human morality
+# Based on Haidt's Moral Foundations Theory with systematic methodological improvements for academic rigor
+#
+# Version: v1.0 (Framework Specification v3.1 Compliant)
+# Last Modified: 2025-06-23 (Migrated to v3.1 with enhanced academic integration)
+# Status: Production Ready with Configurable Algorithms
+
+# =============================================================================
+# FRAMEWORK IDENTIFICATION (required)
+# =============================================================================
+
+name: moral_foundations_theory
+version: v1.0
+display_name: "Moral Foundations Theory (Haidt)"
+
+description: |
+  Enhanced Moral Foundations Theory framework implementing Jonathan Haidt's research 
+  with systematic methodological improvements for academic rigor and configurable 
+  algorithm support. This framework analyzes moral reasoning through six foundation 
+  pairs that represent evolved psychological mechanisms cultures build upon to create moral systems.
+  
+  ## Theoretical Foundation
+  
+  Based on Haidt's Moral Foundations Theory which identifies innate psychological foundations 
+  that cultures build upon to create diverse moral systems. The theory proposes that human 
+  morality is built upon several foundations, not just care and fairness as traditionally 
+  emphasized in moral psychology. These foundations evolved to address adaptive challenges 
+  faced by humans living in groups.
+  
+  ### The Six Foundation Pairs
+  
+  1. **Care ↔ Harm**: Evolved from mammalian attachment and empathy
+     - Care: Compassion, protection, helping others
+     - Harm: Cruelty, violence, causing suffering
+  
+  2. **Fairness ↔ Cheating**: Evolved from reciprocal altruism
+     - Fairness: Justice, equality, proportional treatment
+     - Cheating: Exploitation, unfair advantage, corruption
+  
+  3. **Loyalty ↔ Betrayal**: Evolved from group cooperation needs
+     - Loyalty: Patriotism, solidarity, sacrifice for group
+     - Betrayal: Disloyalty, treason, abandoning group
+  
+  4. **Authority ↔ Subversion**: Evolved from hierarchical social structures
+     - Authority: Respect for hierarchy, tradition, order
+     - Subversion: Rebellion, chaos, undermining leadership
+  
+  5. **Sanctity ↔ Degradation**: Evolved from contamination avoidance
+     - Sanctity: Purity, sacredness, spiritual elevation
+     - Degradation: Contamination, debasement, pollution
+  
+  6. **Liberty ↔ Oppression**: Evolved from responses to domination
+     - Liberty: Freedom, autonomy, resistance to coercion
+     - Oppression: Domination, restriction of autonomy, tyranny
+  
+  ### Political Psychology Insights
+  
+  - **Liberals**: Primarily rely on individualizing foundations (Care, Fairness)
+  - **Conservatives**: Use all foundations more equally
+  - **Libertarians**: Emphasize Liberty foundation when included
+  
+  ## Usage Guidelines
+  
+  ### Appropriate Text Types
+  - Political speeches and statements
+  - Policy documents and arguments  
+  - Social commentary and opinion pieces
+  - Campaign materials and manifestos
+  - Legislative debates and justifications
+  
+  ### Analysis Metrics
+  - **Individualizing Score**: Care + Fairness foundation strength
+  - **Binding Score**: Loyalty + Authority + Sanctity foundation strength  
+  - **Liberty Score**: Liberty vs Oppression positioning
+  - **Moral Diversity Index**: Breadth across all foundations
+  
+  ## Enhanced Detection Methodology
+  
+  Beyond basic keywords, this framework uses sophisticated moral reasoning detection:
+  - **Syntactic Analysis**: Moral imperatives, causal moral language, conditional statements
+  - **Semantic Analysis**: Agent-patient structures, moral justification patterns, value attribution
+  - **Metaphorical Analysis**: Care metaphors ("safety net"), fairness metaphors ("level playing field")
+  - **Narrative Analysis**: Victim-perpetrator-rescuer roles, moral hero/villain characterization
+  
+  ## Version History
+  
+  v1.0: Framework Specification v3.1 compliant version with enhanced academic integration,
+        configurable algorithms, opposite_of validation links, and integrated documentation.
+  
+  ## Citation Format
+  
+  Discernus Framework: Moral Foundations Theory v1.0 (Haidt, 2025)
+
+# =============================================================================
+# POSITIONING DEFINITION (axes - opposing anchor pairs)
+# =============================================================================
+
+axes:
+  # Individualizing Foundation Axes
+  Care_Harm:
+    description: "Foundation evolved from mammalian attachment systems - care for others vs causing harm"
+    
+    integrative:
+      name: "Care"
+      description: "Concern for the suffering of others, compassion, protection of vulnerable individuals"
+      language_cues:
+        - compassion
+        - suffering
+        - protection
+        - kindness
+        - empathy
+        - helping others
+        - vulnerable
+        - innocent
+      position: "12 o'clock"
+      weight: 1.0
+      type: individualizing
+      opposite_of: "Harm"
+    
+    disintegrative:
+      name: "Harm"
+      description: "Actions that cause suffering, cruelty, violence, neglect of those in need"
+      language_cues:
+        - harm
+        - cruelty
+        - violence
+        - suffering
+        - pain
+        - neglect
+        - abuse
+        - hurt
+      position: "6 o'clock"
+      weight: 1.0
+      type: individualizing
+      opposite_of: "Care"
+  
+  Fairness_Cheating:
+    description: "Foundation evolved from reciprocal altruism - fairness and justice vs exploitation"
+    
+    integrative:
+      name: "Fairness"
+      description: "Concern for proportional treatment, justice, reciprocity, equal opportunity"
+      language_cues:
+        - fairness
+        - justice
+        - equality
+        - reciprocity
+        - proportional
+        - deserve
+        - earn
+        - merit
+      angle: 60
+      weight: 1.0
+      type: individualizing
+      opposite_of: "Cheating"
+    
+    disintegrative:
+      name: "Cheating"
+      description: "Violations of fairness, exploitation, free-riding, undeserved advantage"
+      language_cues:
+        - cheating
+        - unfair
+        - exploitation
+        - free rider
+        - undeserved
+        - taking advantage
+        - rigged
+        - corrupt
+      angle: 240
+      weight: 1.0
+      type: individualizing
+      opposite_of: "Fairness"
+
+  # Binding Foundation Axes
+  Loyalty_Betrayal:
+    description: "Foundation evolved from group cooperation - loyalty to group vs betrayal of group"
+    
+    integrative:
+      name: "Loyalty"
+      description: "Commitment to group, patriotism, self-sacrifice for collective good"
+      language_cues:
+        - loyalty
+        - patriotism
+        - solidarity
+        - team
+        - unity
+        - brotherhood
+        - sacrifice for group
+        - stick together
+      angle: 120
+      weight: 1.0
+      type: binding
+      opposite_of: "Betrayal"
+    
+    disintegrative:
+      name: "Betrayal"
+      description: "Disloyalty to group, treason, putting self above collective"
+      language_cues:
+        - betrayal
+        - treason
+        - disloyal
+        - selfish
+        - abandoning group
+        - turncoat
+        - backstabbing
+        - selling out
+      angle: 300
+      weight: 1.0
+      type: binding
+      opposite_of: "Loyalty"
+  
+  Authority_Subversion:
+    description: "Foundation evolved from primate hierarchies - respect for authority vs subversion of order"
+    
+    integrative:
+      name: "Authority"
+      description: "Respect for legitimate hierarchy, tradition, leadership, social order"
+      language_cues:
+        - authority
+        - hierarchy
+        - tradition
+        - respect
+        - leadership
+        - order
+        - stability
+        - established
+      position: "3 o'clock"
+      weight: 1.0
+      type: binding
+      opposite_of: "Subversion"
+    
+    disintegrative:
+      name: "Subversion"
+      description: "Illegitimate challenge to authority, chaos, disrespect for tradition"
+      language_cues:
+        - subversion
+        - chaos
+        - disrespect
+        - rebellion
+        - undermining
+        - lawlessness
+        - disorder
+        - anarchy
+      position: "9 o'clock"
+      weight: 1.0
+      type: binding
+      opposite_of: "Authority"
+  
+  Sanctity_Degradation:
+    description: "Foundation evolved from disgust psychology - spiritual purity vs moral contamination"
+    
+    integrative:
+      name: "Sanctity"
+      description: "Concerns about spiritual purity, elevated living, sacred values"
+      language_cues:
+        - sacred
+        - pure
+        - holy
+        - elevated
+        - noble
+        - spiritual
+        - dignity
+        - sanctity
+      angle: 30
+      weight: 1.0
+      type: binding
+      opposite_of: "Degradation"
+    
+    disintegrative:
+      name: "Degradation"
+      description: "Contamination, debasement, violation of sacred, moral pollution"
+      language_cues:
+        - degradation
+        - contamination
+        - pollution
+        - debasement
+        - profane
+        - dirty
+        - perverted
+        - disgusting
+      angle: 210
+      weight: 1.0
+      type: binding
+      opposite_of: "Sanctity"
+  
+  Liberty_Oppression:
+    description: "Foundation evolved from responses to domination - freedom and autonomy vs coercion"
+    
+    integrative:
+      name: "Liberty"
+      description: "Concerns about freedom, autonomy, resistance to domination and coercion"
+      language_cues:
+        - freedom
+        - liberty
+        - autonomy
+        - independence
+        - self-determination
+        - free choice
+        - individual rights
+        - personal freedom
+      angle: 330
+      weight: 1.0
+      type: liberty_based
+      opposite_of: "Oppression"
+    
+    disintegrative:
+      name: "Oppression"
+      description: "Domination, coercion, restriction of freedom and autonomy"
+      language_cues:
+        - oppression
+        - domination
+        - coercion
+        - tyranny
+        - control
+        - restriction
+        - subjugation
+        - authoritarianism
+      angle: 150
+      weight: 1.0
+      type: liberty_based
+      opposite_of: "Liberty"
+
+# =============================================================================
+# ALGORITHMIC CONFIGURATION (optional)
+# =============================================================================
+
+algorithm_config:
+  dominance_amplification:
+    enabled: true
+    threshold: 0.7
+    multiplier: 1.1
+    rationale: "Enhances LLM-identified dominant moral foundations for clearer political positioning"
+    
+  adaptive_scaling:
+    enabled: true
+    base_scaling: 0.65
+    max_scaling: 0.95
+    variance_factor: 0.3
+    mean_factor: 0.1
+    methodology: "Optimizes coordinate space for moral foundation visualization in political texts"
+    
+  prompting_integration:
+    dominance_instruction: "Identify which moral foundations dominate the text's moral reasoning and value judgments"
+    amplification_purpose: "Mathematical emphasis of LLM-identified dominant moral themes for political analysis"
+    methodology_reference: "MFT LLM-prompting-amplification pipeline v3.0"
+
+# =============================================================================
+# COORDINATE SYSTEM (optional)
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: "Circular coordinate system using axes for paired semantic positioning"
+
+# =============================================================================
+# ANALYSIS CONFIGURATION (optional)
+# =============================================================================
+
+metrics:
+  individualizing_score:
+    name: "Individualizing Foundation Score"
+    description: "Strength of Care/Fairness vs Harm/Cheating"
+    calculation: "Average of Care_Harm and Fairness_Cheating axis scores"
+  
+  binding_score:
+    name: "Binding Foundation Score" 
+    description: "Strength of Loyalty/Authority/Sanctity vs Betrayal/Subversion/Degradation"
+    calculation: "Average of Loyalty_Betrayal, Authority_Subversion, and Sanctity_Degradation axis scores"
+  
+  liberty_score:
+    name: "Liberty Foundation Score"
+    description: "Strength of Liberty vs Oppression"
+    calculation: "Liberty_Oppression axis score"
+
+# =============================================================================
+# LLM INTEGRATION (optional)
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert in moral psychology and value analysis with deep knowledge 
+    of how moral reasoning manifests in discourse across cultures and political 
+    orientations. You specialize in identifying implicit moral frameworks.
+  
+  bias_neutral_analysis_focus: |
+    Analyze the values, principles, and moral reasoning present in this text. 
+    Identify what moral concerns are emphasized, what behaviors are praised or 
+    criticized, and what underlying value systems guide the reasoning.
+  
+  detection_approach: |
+    Look for patterns of moral reasoning including: protection of vulnerable 
+    individuals, concerns about fair treatment, group loyalty and solidarity, 
+    respect for authority and tradition, and spiritual or purity concerns. 
+    Also identify moral violations: harm, cheating, betrayal, subversion, degradation, oppression.
+    Analyze both explicit statements and implicit moral assumptions.
+  
+  scoring_methodology: |
+    Score moral dimensions based on textual evidence of value emphasis, using 
+    0.0-1.0 scale with specific quotations supporting each assessment. Focus on 
+    strength of moral concern rather than political affiliation predictions.
+  
+  enhanced_detection_instructions: |
+    Beyond explicit moral vocabulary, identify: (1) Syntactic patterns like moral 
+    imperatives and causal moral reasoning, (2) Metaphorical expressions of values, 
+    (3) Narrative moral positioning and role assignments, (4) Agent-patient 
+    structures revealing moral agency, (5) Collective identity construction patterns.
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION (optional)
+# =============================================================================
+
+visualization:
+  type_colors:
+    individualizing: "#1976D2"           # Blue - Individual-focused foundations
+    binding: "#388E3C"                   # Green - Group-focused foundations
+    liberty_based: "#9C27B0"            # Purple - Liberty-focused foundations
+  
+  supported_charts:
+    - circular
+    - foundation_profile
+    - radar
+  
+  chart_specific_config:
+    circular:
+      show_grid: true
+      highlight_opposites: true
+
+# =============================================================================
+# ACADEMIC VALIDATION (required)
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Haidt, J. (2012). The righteous mind: Why good people are divided by politics and religion."
+    - "Graham, J., Haidt, J., Koleva, S., Motyl, M., Iyer, R., Wojcik, S., & Ditto, P. H. (2013). Moral foundations theory: The pragmatic validity of moral pluralism. Advances in experimental social psychology, 47, 55-130."
+  
+  theoretical_approach: |
+    Based on Haidt's Moral Foundations Theory which identifies innate psychological 
+    foundations that cultures build upon to create diverse moral systems. This 
+    implementation uses axes-based coordinate system for improved semantic clarity 
+    and configurable algorithm support with proper foundation/violation pairings.
+  
+  academic_validation: |
+    Framework validated through cross-cultural studies across 67+ countries with 
+    strong correlation to liberal-conservative political orientation. Validated 
+    instruments include MFQ-30 and MFQ-2 questionnaires with robust empirical 
+    support in political psychology literature.
+
+validation:
+  academic_standard: "Haidt Moral Foundations Theory"
+  measurement_instrument: "Moral Foundations Questionnaire (MFQ-30/MFQ-2)"
+  scope_limitation: "Current implementation optimized for English-language political discourse"
+  
+  citation_format: "Discernus Framework: Moral Foundations Theory v1.0 (Haidt, 2025)"
+  academic_attribution: |
+    When using this framework in academic work, cite as:
+    "Discernus Framework: Moral Foundations Theory v1.0 (Haidt, 2025)"
+    
+    Include framework version for reproducibility and provenance tracking.
+
+# =============================================================================
+# SYSTEM COMPATIBILITY (optional)
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - moral_foundations_v3.0
+    - political_psychology_v1.0
+  
+  weighting_schemes:
+    - individualizing_binding
+    - foundation_pairs
+  
+  api_versions:
+    - v3.1
+    - v3.0
+  
+  visualization_types:
+    - circular
+    - foundation_profile
+
+# =============================================================================
+# FRAMEWORK VERSIONING (required)
+# =============================================================================
+
+last_modified: "2025-06-23T16:00:00.000000"
+framework_registry_key: "moral_foundations_theory__v1.0"
+implementation_status: "Production ready with Framework Specification v3.1 compliance" 

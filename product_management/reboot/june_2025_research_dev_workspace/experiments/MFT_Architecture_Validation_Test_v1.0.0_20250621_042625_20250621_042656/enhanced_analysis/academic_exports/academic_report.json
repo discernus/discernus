@@ -1,0 +1,69 @@
+{
+  "study_metadata": {
+    "name": "MFT_Architecture_Validation_Test",
+    "version": "v1.0.0",
+    "created": "2025-06-20T22:00:00Z",
+    "description": "Comprehensive test of unified framework architecture breakthrough - validates YAML integration and QA improvements",
+    "hypothesis": "Unified framework architecture correctly integrates YAML frameworks with circular engine and achieves HIGH QA confidence (12+/13 checks)",
+    "research_context": "Post-architectural breakthrough validation - Testing framework-aware circular engine and QA system integration",
+    "principal_investigator": "Architecture Team",
+    "institution": "Discernus Research Lab",
+    "ethical_clearance": "TECH-2025-ARCH-001",
+    "funding_source": "Internal Development",
+    "data_classification": "research",
+    "publication_intent": false,
+    "tags": [
+      "architecture_validation",
+      "framework_integration",
+      "qa_testing",
+      "yaml_unification"
+    ],
+    "hypotheses": [
+      "Framework-aware circular engine correctly reads YAML framework definitions",
+      "QA system achieves MEDIUM+ confidence (11+/13 checks) with no configuration errors",
+      "Coordinate calculations produce meaningful positions (not 0,0)",
+      "Analysis pipeline completes without framework mismatch warnings",
+      "Enhanced analysis pipeline generates complete reports with visualizations"
+    ],
+    "success_criteria": [
+      "QA confidence MEDIUM or higher (11+/13 checks passing)",
+      "Zero configuration file errors or warnings",
+      "Meaningful coordinate positions (not all zeros)",
+      "Complete enhanced analysis report generation",
+      "Real evidence quotes in analysis results",
+      "Statistical analysis components functioning"
+    ]
+  },
+  "analysis_summary": {
+    "total_analyses": 4,
+    "successful_analyses": 0,
+    "failed_analyses": 4,
+    "total_cost": 0.0933,
+    "cost_efficiency": 0.0233,
+    "extraction_timestamp": "2025-06-21T04:26:56.780954",
+    "well_columns": [
+      "well_care",
+      "well_harm",
+      "well_fairness",
+      "well_cheating",
+      "well_loyalty",
+      "well_betrayal",
+      "well_authority",
+      "well_subversion",
+      "well_sanctity",
+      "well_degradation",
+      "well_liberty",
+      "well_oppression"
+    ],
+    "frameworks_used": [
+      "moral_foundations_theory"
+    ],
+    "models_used": [
+      "unknown"
+    ]
+  },
+  "export_timestamp": "2025-06-21T04:26:57.117098",
+  "files_generated": [
+    "analysis_data.csv"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "pipeline_status": "failed",
+  "error": "No module named 'statistical_hypothesis_testing'",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/jeffwhatcott/Library/Mobile Documents/com~apple~CloudDocs/Coding Projects/narrative_gravity_analysis/scripts/production/comprehensive_experiment_orchestrator.py\", line 2249, in execute_enhanced_analysis_pipeline\n    from statistical_hypothesis_testing import StatisticalHypothesisTester\nModuleNotFoundError: No module named 'statistical_hypothesis_testing'\n",
+  "timestamp": "2025-06-20T16:05:29.269681"
+}

@@ -1,0 +1,15 @@
+{
+  "experiment_id": "MFT_Architecture_Validation_Test_v1.0.0_20250621_155049",
+  "state": "component_registration",
+  "timestamp": "2025-06-21T15:50:49.705632",
+  "can_resume": true,
+  "orchestrator_version": "2.1.0",
+  "data": {
+    "missing_components": 3,
+    "components_to_register": [
+      "framework:moral_foundations_theory",
+      "corpus:mixed_controls",
+      "corpus:conservative_dignity"
+    ]
+  }
+}

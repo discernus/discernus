@@ -1,0 +1,468 @@
+# Business Ethics Framework
+# Analyzes business communications across three domains of ethical concern:
+# stakeholder relationships, operational integrity, and strategic vision
+#
+# This framework implements stakeholder-based ethical analysis with domain-specific
+# clustering, demonstrating flexible dipole organization within defined business ethics arcs.
+#
+# Version: v2025.06.17
+# Last Modified: 2025-06-17
+# Status: Production Ready
+
+# =============================================================================
+# FRAMEWORK METADATA
+# =============================================================================
+
+name: business_ethics
+framework_name: business_ethics
+display_name: "Business Ethics Framework"
+version: v2025.06.17
+
+description: |
+  Analyzes business communications across three domains of ethical concern: 
+  stakeholder relationships, operational integrity, and strategic vision. 
+  Demonstrates flexible dipole clustering on defined arcs representing 
+  distinct domains of business responsibility.
+
+framework_type: clustered_dipoles
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  scaling_factor: 1.0
+  description: "Circular coordinate system with dipoles clustered in three defined business ethics domains"
+
+positioning_strategy:
+  type: domain_arc_clustering
+  description: "Dipoles clustered within specific arcs representing distinct domains of business ethics"
+  
+  clusters:
+    stakeholder_relations:
+      center_angle: 45
+      span: 60
+      arc_range: [15, 75]
+      dipole_count: 2
+      description: "Stakeholder relationship ethics clustered in upper-right quadrant"
+      positioning_method: even_distribution_within_arc
+    
+    operational_integrity:
+      center_angle: 165
+      span: 90
+      arc_range: [120, 210]
+      dipole_count: 2
+      description: "Operational and governance ethics clustered in left quadrant"
+      positioning_method: even_distribution_within_arc
+    
+    strategic_vision:
+      center_angle: 315
+      span: 90
+      arc_range: [270, 360]
+      dipole_count: 1
+      description: "Strategic and long-term vision ethics clustered in lower-right quadrant"
+      positioning_method: center_focused
+  
+  cluster_separation: minimum_30_degrees
+  allow_overlap: false
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Freeman, R.E. (1984). Strategic Management: A Stakeholder Approach"
+    - "Solomon, R.C. (1992). Ethics and Excellence: Cooperation and Integrity in Business"
+  
+  theoretical_approach: |
+    Stakeholder-based ethical analysis focusing on three domains of business 
+    responsibility clustered around specific arcs of analytical space. Each domain 
+    represents distinct ethical concerns that businesses must navigate in their 
+    communications and operations.
+  
+  core_insight: |
+    Business ethics manifests across distinct domains (stakeholder relations, 
+    operational integrity, strategic vision) that can be systematically analyzed 
+    through clustered dipole positioning to reveal ethical orientation patterns.
+
+# =============================================================================
+# BUSINESS ETHICS DIPOLES
+# =============================================================================
+
+dipoles:
+  
+  # Stakeholder Relations Cluster - Customer Focus
+  - name: Customer_Relations
+    cluster: stakeholder_relations
+    description: "How business communications treat customer needs and rights"
+    
+    positive:
+      name: Customer_Service
+      description: "Prioritizes genuine customer benefit and transparent value delivery"
+      language_cues:
+        - customer success
+        - genuine value
+        - long-term relationship
+        - customer feedback
+        - solving real problems
+        - transparent pricing
+        - honest communication
+        - customer-first
+      angle: 30
+      weight: 1.0
+      type: integrative
+      tier: primary
+    
+    negative:
+      name: Customer_Exploitation
+      description: "Prioritizes extraction of value from customers over genuine service"
+      language_cues:
+        - maximize extraction
+        - hidden fees
+        - planned obsolescence
+        - vendor lock-in
+        - dark patterns
+        - manipulative marketing
+        - bait and switch
+        - profit maximization
+      angle: 210
+      weight: -1.0
+      type: disintegrative
+      tier: primary
+
+  # Stakeholder Relations Cluster - Employee Focus
+  - name: Employee_Relations
+    cluster: stakeholder_relations
+    description: "How business communications address worker dignity and development"
+    
+    positive:
+      name: Employee_Development
+      description: "Invests in worker growth, safety, and meaningful contribution"
+      language_cues:
+        - employee growth
+        - professional development
+        - workplace safety
+        - meaningful work
+        - work-life balance
+        - fair compensation
+        - career advancement
+        - team empowerment
+      angle: 60
+      weight: 0.9
+      type: integrative
+      tier: secondary
+    
+    negative:
+      name: Employee_Exploitation
+      description: "Treats workers as disposable resources for profit extraction"
+      language_cues:
+        - human resources
+        - cost cutting
+        - efficiency gains
+        - lean operations
+        - expendable workforce
+        - maximize productivity
+        - reduce labor costs
+        - streamline operations
+      angle: 240
+      weight: -0.9
+      type: disintegrative
+      tier: secondary
+
+  # Operational Integrity Cluster - Governance
+  - name: Governance_Transparency
+    cluster: operational_integrity
+    description: "How business communications handle accountability and decision-making processes"
+    
+    positive:
+      name: Accountability
+      description: "Demonstrates transparent governance and responsible decision-making"
+      language_cues:
+        - transparent governance
+        - accountable leadership
+        - open decision-making
+        - stakeholder input
+        - ethical standards
+        - responsible practices
+        - oversight mechanisms
+        - public reporting
+      angle: 135
+      weight: 0.8
+      type: integrative
+      tier: secondary
+    
+    negative:
+      name: Opacity
+      description: "Conceals decision-making processes and avoids accountability"
+      language_cues:
+        - proprietary information
+        - confidential strategy
+        - need to know basis
+        - trade secrets
+        - competitive advantage
+        - internal matters
+        - executive privilege
+        - strategic confidentiality
+      angle: 315
+      weight: -0.8
+      type: disintegrative
+      tier: secondary
+
+  # Operational Integrity Cluster - Financial
+  - name: Financial_Integrity
+    cluster: operational_integrity
+    description: "How business communications handle financial responsibility and reporting"
+    
+    positive:
+      name: Financial_Responsibility
+      description: "Demonstrates prudent financial management and honest reporting"
+      language_cues:
+        - sustainable growth
+        - prudent management
+        - accurate reporting
+        - financial discipline
+        - long-term stability
+        - responsible investment
+        - sound fundamentals
+        - fiscal responsibility
+      angle: 195
+      weight: 0.8
+      type: integrative
+      tier: secondary
+    
+    negative:
+      name: Financial_Manipulation
+      description: "Engages in accounting manipulation or unsustainable financial practices"
+      language_cues:
+        - aggressive accounting
+        - revenue recognition
+        - financial engineering
+        - off-balance sheet
+        - creative bookkeeping
+        - earnings management
+        - regulatory arbitrage
+        - financial optimization
+      angle: 15
+      weight: -0.8
+      type: disintegrative
+      tier: secondary
+
+  # Strategic Vision Cluster
+  - name: Strategic_Purpose
+    cluster: strategic_vision
+    description: "How business communications frame long-term purpose and societal impact"
+    
+    positive:
+      name: Sustainable_Purpose
+      description: "Articulates long-term value creation for society and stakeholders"
+      language_cues:
+        - sustainable impact
+        - societal benefit
+        - long-term value
+        - positive contribution
+        - meaningful mission
+        - stakeholder capitalism
+        - social responsibility
+        - environmental stewardship
+      angle: 315
+      weight: 0.7
+      type: integrative
+      tier: tertiary
+    
+    negative:
+      name: Short_term_Extraction
+      description: "Focuses solely on short-term profit extraction without regard for long-term consequences"
+      language_cues:
+        - quarterly results
+        - shareholder value
+        - cost optimization
+        - market efficiency
+        - competitive advantage
+        - profit maximization
+        - operational leverage
+        - margin expansion
+      angle: 135
+      weight: -0.7
+      type: disintegrative
+      tier: tertiary
+
+# =============================================================================
+# CALCULATION METHODOLOGY
+# =============================================================================
+
+calculation_method:
+  type: clustered_dipole_center_of_mass
+  description: "Calculate center of mass accounting for cluster-based dipole organization"
+  
+  cluster_weighting:
+    stakeholder_relations: 0.4
+    operational_integrity: 0.4
+    strategic_vision: 0.2
+  
+  formula: "COM = Σ(cluster_weight × dipole_COM) for each cluster"
+
+# =============================================================================
+# WEIGHTING PHILOSOPHY
+# =============================================================================
+
+weighting_philosophy:
+  description: "Hierarchical weighting based on business ethics domain importance and stakeholder impact"
+  approach: domain_cluster_weighting
+  
+  tiers:
+    primary:
+      weight: 1.0
+      description: "Customer relations - fundamental business ethics foundation"
+      dipoles:
+        - Customer_Relations
+    
+    secondary:
+      weight: 0.8-0.9
+      description: "Employee relations and operational integrity - core business responsibilities"
+      dipoles:
+        - Employee_Relations
+        - Governance_Transparency
+        - Financial_Integrity
+    
+    tertiary:
+      weight: 0.7
+      description: "Strategic purpose - long-term sustainability concerns"
+      dipoles:
+        - Strategic_Purpose
+  
+  domain_priorities:
+    stakeholder_relations: "Primary focus on customer and employee treatment"
+    operational_integrity: "Secondary focus on transparent governance and financial responsibility"
+    strategic_vision: "Tertiary focus on long-term purpose and sustainability"
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION
+# =============================================================================
+
+visualization:
+  cluster_colors:
+    stakeholder_relations: "#4CAF50"    # Green - relationship focus
+    operational_integrity: "#2196F3"     # Blue - integrity focus
+    strategic_vision: "#FF9800"          # Orange - vision focus
+  
+  cluster_boundaries:
+    show_arc_boundaries: true
+    boundary_style: dashed
+    boundary_opacity: 0.3
+  
+  well_colors:
+    integrative: "#2E7D32"      # Dark green - positive business ethics
+    disintegrative: "#C62828"   # Dark red - negative business ethics
+  
+  supported_types:
+    - circular
+    - clustered
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  center_of_mass:
+    name: "Center of Mass"
+    description: "Overall ethical orientation considering cluster-weighted dipole forces"
+  
+  cluster_coherence_score:
+    name: "Cluster Coherence Score"
+    description: "Consistency of ethical orientation within each domain cluster"
+  
+  domain_ethics_score:
+    name: "Domain Ethics Score"
+    description: "Ethical performance score for each of the three business domains"
+  
+  stakeholder_focus_index:
+    name: "Stakeholder Focus Index"
+    description: "Relative emphasis on stakeholder versus shareholder interests"
+  
+  operational_integrity_index:
+    name: "Operational Integrity Index"
+    description: "Strength of governance and financial transparency practices"
+
+# =============================================================================
+# PROMPT INTEGRATION
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert business ethics analyst specializing in stakeholder capitalism, 
+    corporate governance, and sustainable business practices with deep knowledge of 
+    ethical frameworks for evaluating business communications.
+  
+  analysis_focus: |
+    Evaluate how business communications demonstrate ethical orientation across three 
+    domains: stakeholder relationships, operational integrity, and strategic vision, 
+    noting clustering patterns within each domain.
+  
+  scoring_approach: |
+    Score each well independently on 0.0-1.0 scale based on presence/strength 
+    of ethical orientation in the text, with specific textual evidence.
+  
+  scoring_emphasis: |
+    Assess ethical positioning within each domain cluster, considering how different 
+    business ethics concerns manifest in distinct areas of corporate communication.
+  
+  evidence_requirements: |
+    Provide specific textual evidence supporting each well score, explaining how 
+    language patterns reflect underlying business ethics assumptions within each 
+    domain cluster.
+  
+  framework_specific_guidance:
+    cluster_awareness:
+      - "Recognize that dipoles are clustered by business domain"
+      - "Stakeholder relations cluster focuses on customer and employee treatment"
+      - "Operational integrity cluster addresses governance and financial practices"
+      - "Strategic vision cluster examines long-term purpose and sustainability"
+      - "Consider domain-specific ethical patterns and language"
+
+# =============================================================================
+# SYSTEM COMPATIBILITY
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - clustered_dipoles_v1.0
+    - business_ethics_v2.1
+  
+  calculation_methods:
+    - clustered_dipole_center_of_mass
+  
+  api_versions:
+    - v2.1
+  
+  visualization_types:
+    - circular
+    - clustered
+
+# =============================================================================
+# ACADEMIC VALIDATION
+# =============================================================================
+
+validation:
+  academic_standard: "Stakeholder Theory and Business Ethics"
+  theoretical_foundation: "Freeman Stakeholder Approach"
+  domain_expertise: "Corporate governance and ethical business practices"
+  
+  key_principles:
+    - "Stakeholder capitalism over shareholder primacy"
+    - "Transparent governance and accountability"
+    - "Sustainable long-term value creation"
+    - "Employee dignity and development"
+    - "Customer service over exploitation"
+
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-17T16:00:00.000000"
+theoretical_validation: "Stakeholder theory and business ethics literature validated"
+implementation_status: "Production ready for business communication analysis"
+prompt_template: "business_ethics_v2.1"
+analysis_instructions: "Evaluate how business communications demonstrate ethical orientation across three domains: stakeholder relationships, operational integrity, and strategic vision." 

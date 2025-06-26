@@ -45,7 +45,9 @@ Our development is prioritized along the following sequence of questions:
 
 
 ##Question Backlog
+- Do different flagship cloud LLMs produce statistically similar results?
+- Do local models produce statistically similar results to flagship cloud LLMs?
+- Do LLMs produce statistically significant runs across multipe runs of the same experiment?
 - What's the distance between the centroids of text A and text B?
 - What's the distance between the average centroid position of text group and text group B?
-- What the average variance of LLM A and LLM B for each axis and centroid for text A?
 - Ceteris parabis, what's the difference between the way framework A based experiment 1 and framework B based experiment 2 analyzes text A?

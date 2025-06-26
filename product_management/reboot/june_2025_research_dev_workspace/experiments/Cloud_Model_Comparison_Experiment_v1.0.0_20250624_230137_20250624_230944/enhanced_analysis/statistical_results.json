@@ -1,0 +1,467 @@
+{
+  "hypothesis_testing": {
+    "H1_framework_specified": {
+      "status": "not_implemented",
+      "message": "Framework provides explicit testing instructions but not yet implemented",
+      "instructions_found": [
+        "measurement_instrument",
+        "metric_individualizing_score",
+        "metric_binding_score",
+        "metric_liberty_score",
+        "algorithm_config"
+      ],
+      "hypothesis": "Framework-specified validation approach"
+    },
+    "H2_ideological_agnosticism": {
+      "hypothesis": "Ideological agnosticism: Framework should not systematically favor political orientations",
+      "status": "supported",
+      "tests_performed": [],
+      "message": "Generic ideological bias testing applied"
+    },
+    "H3_extreme_anchor_alignment": {
+      "hypothesis": "Extreme anchor alignment: Control texts should score highly on expected anchors",
+      "status": "insufficient_data",
+      "tests_performed": [],
+      "message": "No extreme control texts found matching any anchor names",
+      "approach": "label_agnostic",
+      "extreme_controls_found": 0
+    }
+  },
+  "framework_specific_tests": [],
+  "descriptive_statistics": {
+    "well_care": {
+      "count": 36,
+      "mean": 0.8555555555555556,
+      "std": 0.10742291440694829,
+      "min": 0.3,
+      "max": 0.9,
+      "median": 0.9
+    },
+    "well_harm": {
+      "count": 36,
+      "mean": 0.13333333333333328,
+      "std": 0.05732115042211108,
+      "min": 0.09999999999999998,
+      "max": 0.3,
+      "median": 0.09999999999999998
+    },
+    "well_fairness": {
+      "count": 36,
+      "mean": 0.7027777777777777,
+      "std": 0.23051013130645825,
+      "min": 0.1,
+      "max": 0.95,
+      "median": 0.8
+    },
+    "well_cheating": {
+      "count": 36,
+      "mean": 0.2861111111111112,
+      "std": 0.2199386638884029,
+      "min": 0.050000000000000044,
+      "max": 0.9,
+      "median": 0.19999999999999996
+    },
+    "well_loyalty": {
+      "count": 36,
+      "mean": 0.7069444444444445,
+      "std": 0.12936812246883356,
+      "min": 0.3,
+      "max": 0.9,
+      "median": 0.7
+    },
+    "well_betrayal": {
+      "count": 36,
+      "mean": 0.28194444444444444,
+      "std": 0.10899067966559461,
+      "min": 0.09999999999999998,
+      "max": 0.5,
+      "median": 0.30000000000000004
+    },
+    "well_authority": {
+      "count": 36,
+      "mean": 0.3611111111111111,
+      "std": 0.28911468587275463,
+      "min": 0.0,
+      "max": 0.7,
+      "median": 0.5
+    },
+    "well_subversion": {
+      "count": 36,
+      "mean": 0.6277777777777778,
+      "std": 0.2943381059851419,
+      "min": 0.3,
+      "max": 1.0,
+      "median": 0.5
+    },
+    "well_sanctity": {
+      "count": 36,
+      "mean": 0.4833333333333334,
+      "std": 0.25579009251449014,
+      "min": 0.0,
+      "max": 0.8,
+      "median": 0.5
+    },
+    "well_degradation": {
+      "count": 36,
+      "mean": 0.5055555555555555,
+      "std": 0.2562860505032213,
+      "min": 0.19999999999999996,
+      "max": 1.0,
+      "median": 0.45
+    },
+    "well_liberty": {
+      "count": 36,
+      "mean": 0.7827777777777777,
+      "std": 0.18835545592782224,
+      "min": 0.3,
+      "max": 1.0,
+      "median": 0.85
+    },
+    "well_oppression": {
+      "count": 36,
+      "mean": 0.2061111111111111,
+      "std": 0.16996264762382818,
+      "min": 0.0,
+      "max": 0.5,
+      "median": 0.15000000000000002
+    }
+  },
+  "testing_approach": "explicit_framework_guided",
+  "framework_analysis": {
+    "framework_name": "moral_foundations_theory",
+    "structure_analysis": {
+      "positioning_type": "framework_specified",
+      "components": {
+        "all_anchors": [
+          {
+            "name": "Care",
+            "source": "axis_Care_Harm",
+            "organizational_label": "integrative",
+            "config": {
+              "name": "Care",
+              "description": "Concern for the suffering of others, compassion, protection of vulnerable individuals",
+              "language_cues": [
+                "compassion",
+                "suffering",
+                "protection",
+                "kindness",
+                "empathy",
+                "helping others",
+                "vulnerable",
+                "innocent"
+              ],
+              "angle": 0,
+              "weight": 1.0,
+              "type": "individualizing"
+            }
+          },
+          {
+            "name": "Harm",
+            "source": "axis_Care_Harm",
+            "organizational_label": "disintegrative",
+            "config": {
+              "name": "Harm",
+              "description": "Actions that cause suffering, cruelty, violence, neglect of those in need",
+              "language_cues": [
+                "harm",
+                "cruelty",
+                "violence",
+                "suffering",
+                "pain",
+                "neglect",
+                "abuse",
+                "hurt"
+              ],
+              "angle": 180,
+              "weight": 1.0,
+              "type": "individualizing"
+            }
+          },
+          {
+            "name": "Fairness",
+            "source": "axis_Fairness_Cheating",
+            "organizational_label": "integrative",
+            "config": {
+              "name": "Fairness",
+              "description": "Concern for proportional treatment, justice, reciprocity, equal opportunity",
+              "language_cues": [
+                "fairness",
+                "justice",
+                "equality",
+                "reciprocity",
+                "proportional",
+                "deserve",
+                "earn",
+                "merit"
+              ],
+              "angle": 60,
+              "weight": 1.0,
+              "type": "individualizing"
+            }
+          },
+          {
+            "name": "Cheating",
+            "source": "axis_Fairness_Cheating",
+            "organizational_label": "disintegrative",
+            "config": {
+              "name": "Cheating",
+              "description": "Violations of fairness, exploitation, free-riding, undeserved advantage",
+              "language_cues": [
+                "cheating",
+                "unfair",
+                "exploitation",
+                "free rider",
+                "undeserved",
+                "taking advantage",
+                "rigged",
+                "corrupt"
+              ],
+              "angle": 240,
+              "weight": 1.0,
+              "type": "individualizing"
+            }
+          },
+          {
+            "name": "Loyalty",
+            "source": "axis_Loyalty_Betrayal",
+            "organizational_label": "integrative",
+            "config": {
+              "name": "Loyalty",
+              "description": "Commitment to group, patriotism, self-sacrifice for collective good",
+              "language_cues": [
+                "loyalty",
+                "patriotism",
+                "solidarity",
+                "team",
+                "unity",
+                "brotherhood",
+                "sacrifice for group",
+                "stick together"
+              ],
+              "angle": 120,
+              "weight": 1.0,
+              "type": "binding"
+            }
+          },
+          {
+            "name": "Betrayal",
+            "source": "axis_Loyalty_Betrayal",
+            "organizational_label": "disintegrative",
+            "config": {
+              "name": "Betrayal",
+              "description": "Disloyalty to group, treason, putting self above collective",
+              "language_cues": [
+                "betrayal",
+                "treason",
+                "disloyal",
+                "selfish",
+                "abandoning group",
+                "turncoat",
+                "backstabbing",
+                "selling out"
+              ],
+              "angle": 300,
+              "weight": 1.0,
+              "type": "binding"
+            }
+          },
+          {
+            "name": "Authority",
+            "source": "axis_Authority_Subversion",
+            "organizational_label": "integrative",
+            "config": {
+              "name": "Authority",
+              "description": "Respect for legitimate hierarchy, tradition, leadership, social order",
+              "language_cues": [
+                "authority",
+                "hierarchy",
+                "tradition",
+                "respect",
+                "leadership",
+                "order",
+                "stability",
+                "established"
+              ],
+              "angle": 180,
+              "weight": 1.0,
+              "type": "binding"
+            }
+          },
+          {
+            "name": "Subversion",
+            "source": "axis_Authority_Subversion",
+            "organizational_label": "disintegrative",
+            "config": {
+              "name": "Subversion",
+              "description": "Illegitimate challenge to authority, chaos, disrespect for tradition",
+              "language_cues": [
+                "subversion",
+                "chaos",
+                "disrespect",
+                "rebellion",
+                "undermining",
+                "lawlessness",
+                "disorder",
+                "anarchy"
+              ],
+              "angle": 0,
+              "weight": 1.0,
+              "type": "binding"
+            }
+          },
+          {
+            "name": "Sanctity",
+            "source": "axis_Sanctity_Degradation",
+            "organizational_label": "integrative",
+            "config": {
+              "name": "Sanctity",
+              "description": "Concerns about spiritual purity, elevated living, sacred values",
+              "language_cues": [
+                "sacred",
+                "pure",
+                "holy",
+                "elevated",
+                "noble",
+                "spiritual",
+                "dignity",
+                "sanctity"
+              ],
+              "angle": 240,
+              "weight": 1.0,
+              "type": "binding"
+            }
+          },
+          {
+            "name": "Degradation",
+            "source": "axis_Sanctity_Degradation",
+            "organizational_label": "disintegrative",
+            "config": {
+              "name": "Degradation",
+              "description": "Contamination, debasement, violation of sacred, moral pollution",
+              "language_cues": [
+                "degradation",
+                "contamination",
+                "pollution",
+                "debasement",
+                "profane",
+                "dirty",
+                "perverted",
+                "disgusting"
+              ],
+              "angle": 60,
+              "weight": 1.0,
+              "type": "binding"
+            }
+          },
+          {
+            "name": "Liberty",
+            "source": "axis_Liberty_Oppression",
+            "organizational_label": "integrative",
+            "config": {
+              "name": "Liberty",
+              "description": "Concerns about freedom, autonomy, resistance to domination and coercion",
+              "language_cues": [
+                "freedom",
+                "liberty",
+                "autonomy",
+                "independence",
+                "self-determination",
+                "free choice",
+                "individual rights",
+                "personal freedom"
+              ],
+              "angle": 300,
+              "weight": 1.0,
+              "type": "liberty_based"
+            }
+          },
+          {
+            "name": "Oppression",
+            "source": "axis_Liberty_Oppression",
+            "organizational_label": "disintegrative",
+            "config": {
+              "name": "Oppression",
+              "description": "Domination, coercion, restriction of freedom and autonomy",
+              "language_cues": [
+                "oppression",
+                "domination",
+                "coercion",
+                "tyranny",
+                "control",
+                "restriction",
+                "subjugation",
+                "authoritarianism"
+              ],
+              "angle": 120,
+              "weight": 1.0,
+              "type": "liberty_based"
+            }
+          }
+        ]
+      },
+      "suggested_tests": [
+        "custom_framework_metrics"
+      ],
+      "statistical_approach": "explicit_framework_guided",
+      "custom_metrics": {
+        "individualizing_score": {
+          "name": "Individualizing Foundation Score",
+          "description": "Strength of Care/Fairness vs Harm/Cheating",
+          "calculation": "Average of Care_Harm and Fairness_Cheating axis scores"
+        },
+        "binding_score": {
+          "name": "Binding Foundation Score",
+          "description": "Strength of Loyalty/Authority/Sanctity vs Betrayal/Subversion/Degradation",
+          "calculation": "Average of Loyalty_Betrayal, Authority_Subversion, and Sanctity_Degradation axis scores"
+        },
+        "liberty_score": {
+          "name": "Liberty Foundation Score",
+          "description": "Strength of Liberty vs Oppression",
+          "calculation": "Liberty_Oppression axis score"
+        }
+      },
+      "explicit_testing_instructions": {
+        "measurement_instrument": "Moral Foundations Questionnaire (MFQ-30/MFQ-2)",
+        "metric_individualizing_score": {
+          "name": "Individualizing Foundation Score",
+          "description": "Strength of Care/Fairness vs Harm/Cheating",
+          "calculation": "Average of Care_Harm and Fairness_Cheating axis scores"
+        },
+        "metric_binding_score": {
+          "name": "Binding Foundation Score",
+          "description": "Strength of Loyalty/Authority/Sanctity vs Betrayal/Subversion/Degradation",
+          "calculation": "Average of Loyalty_Betrayal, Authority_Subversion, and Sanctity_Degradation axis scores"
+        },
+        "metric_liberty_score": {
+          "name": "Liberty Foundation Score",
+          "description": "Strength of Liberty vs Oppression",
+          "calculation": "Liberty_Oppression axis score"
+        },
+        "algorithm_config": {
+          "dominance_amplification": {
+            "enabled": true,
+            "threshold": 0.7,
+            "multiplier": 1.1,
+            "rationale": "Enhances LLM-identified dominant moral foundations for clearer political positioning"
+          },
+          "adaptive_scaling": {
+            "enabled": true,
+            "base_scaling": 0.65,
+            "max_scaling": 0.95,
+            "variance_factor": 0.3,
+            "mean_factor": 0.1,
+            "methodology": "Optimizes coordinate space for moral foundation visualization in political texts"
+          },
+          "prompting_integration": {
+            "dominance_instruction": "Identify which moral foundations dominate the text's moral reasoning and value judgments",
+            "amplification_purpose": "Mathematical emphasis of LLM-identified dominant moral themes for political analysis",
+            "methodology_reference": "MFT LLM-prompting-amplification pipeline v3.0"
+          }
+        }
+      }
+    },
+    "testing_approach": "explicit_framework_guided",
+    "data_dimensions": 12,
+    "sample_size": 36
+  }
+}

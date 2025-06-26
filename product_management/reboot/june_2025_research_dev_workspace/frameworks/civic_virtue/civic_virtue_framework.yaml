@@ -1,0 +1,199 @@
+# Civic Virtue Framework
+# Version: v3.0.0 (Updated to Framework Specification v3.0)
+# Theoretical Foundation: Aristotle, Civic Republican tradition, Putnam (2000)
+
+# =============================================================================
+# FRAMEWORK METADATA
+# =============================================================================
+
+name: "civic_virtue"
+framework_name: "civic_virtue"
+display_name: "Civic Virtue"
+version: "v3.0.0"
+description: |
+  Civic Virtue - A specialized Discernus Coordinates framework analyzing the tension 
+  between civic engagement and civic disengagement in political discourse. This framework 
+  examines how discourse either promotes active citizenship and democratic participation 
+  or reflects withdrawal from civic life and democratic responsibilities.
+
+framework_type: axis_set
+
+# =============================================================================
+# NEW IN v3.0: ALGORITHM CONFIGURATION
+# =============================================================================
+
+algorithm_config:
+  dominance_amplification:
+    enabled: true
+    threshold: 0.62                   # Lower threshold to capture civic themes
+    multiplier: 1.18                  # Higher amplification for civic distinction
+    rationale: "Amplifies civic engagement vs disengagement for clearer citizenship analysis"
+    
+  adaptive_scaling:
+    enabled: true
+    base_scaling: 0.75               # Higher base scaling for clear civic positioning
+    max_scaling: 0.90                # High maximum for civic distinction
+    variance_factor: 0.22            # Lower variance sensitivity for civic themes
+    mean_factor: 0.06                # Reduced mean sensitivity for civic contexts
+    methodology: "Binary scaling optimized for civic engagement analysis"
+    
+  prompting_integration:
+    dominance_instruction: "Identify whether the text primarily promotes civic engagement or reflects civic disengagement"
+    amplification_purpose: "Mathematical enhancement of civic positioning"
+    methodology_reference: "Civic Virtue citizenship analysis methodology v3.0"
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: "Circular coordinate system using axes for paired civic positioning"
+
+# =============================================================================  
+# AXES (PAIRED COORDINATE STRUCTURE)
+# =============================================================================
+
+axes:
+  Citizenship:
+    description: "Civic engagement approaches - the fundamental tension between active civic participation and withdrawal from democratic life"
+    
+    integrative:
+      name: "Civic_Engagement"
+      description: |
+        Promotes active citizenship, democratic participation, community involvement, 
+        and civic responsibility. Emphasizes the importance of citizen engagement 
+        in democratic governance and community life.
+      
+      language_cues:
+        - "civic duty"
+        - "citizen participation"
+        - "community involvement"
+        - "democratic engagement"
+        - "public service"
+        - "civic responsibility"
+        - "active citizenship"
+        - "political participation"
+        - "community organizing"
+        - "civic education"
+        - "democratic citizenship"
+        - "public good"
+      
+      angle: 90
+      weight: 1.0
+      type: integrative
+    
+    disintegrative:
+      name: "Civic_Disengagement"
+      description: |
+        Reflects withdrawal from civic life, cynicism about democratic institutions, 
+        and disengagement from community responsibilities. Often expresses distrust 
+        of democratic processes and civic institutions.
+      
+      language_cues:
+        - "politics is corrupt"
+        - "system is rigged"
+        - "doesn't matter who you vote for"
+        - "politicians are all the same"
+        - "government can't be trusted"
+        - "civic institutions failing"
+        - "democracy doesn't work"
+        - "political disillusionment"
+        - "civic cynicism"
+        - "democratic deficit"
+        - "institutional distrust"
+        - "political apathy"
+      
+      angle: 270
+      weight: 1.0
+      type: disintegrative
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Aristotle. Nicomachean Ethics and Politics."
+    - "Putnam, R. D. (2000). Bowling Alone: The Collapse and Revival of American Community."
+    - "Tocqueville, A. de. Democracy in America."
+  theoretical_approach: |
+    This framework draws on civic republican tradition and social capital theory 
+    to analyze how discourse either strengthens or weakens civic bonds and democratic 
+    participation. It examines the balance between civic engagement and disengagement 
+    in political communication.
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  civic_axis_score:
+    name: "Civic Axis Score"
+    description: "Position on engagement-disengagement axis from integrative (+1) to disintegrative (-1)"
+    calculation: "Civic Engagement score minus Civic Disengagement score"
+  
+  civic_intensity:
+    name: "Civic Intensity"
+    description: "Strength of civic positioning"
+    calculation: "Absolute value of axis score"
+
+# =============================================================================
+# PROMPT CONFIGURATION
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert analyst of civic life and democratic participation, with deep 
+    knowledge of civic republican theory and social capital research. You specialize 
+    in analyzing how discourse either promotes or undermines civic engagement.
+  
+  bias_neutral_analysis_focus: |
+    Evaluate how the text either promotes civic engagement and democratic participation 
+    OR reflects civic disengagement and democratic withdrawal. Focus specifically on 
+    attitudes toward citizen responsibilities, democratic institutions, and community involvement.
+  
+  detection_approach: |
+    Look for patterns that either encourage active citizenship and civic participation 
+    or express cynicism about democratic institutions and civic life. Analyze both 
+    explicit calls for engagement and implicit assumptions about civic duty.
+  
+  scoring_methodology: |
+    Score civic orientations based on textual evidence, using 0.0-1.0 scale with 
+    specific quotations supporting each assessment. Focus on civic frameworks rather 
+    than specific policy positions.
+
+# =============================================================================
+# SYSTEM COMPATIBILITY
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - civic_engagement_v3.0
+    - citizenship_analysis_v2.1
+  weighting_schemes:
+    - axis_based_v3.0
+  api_versions:
+    - v3.0
+    - v2.1
+  visualization_types:
+    - circular
+    - axis_profile
+
+# =============================================================================
+# ACADEMIC VALIDATION
+# =============================================================================
+
+validation:
+  academic_standard: "Civic republican theory and social capital research"
+  measurement_instrument: "Civic engagement orientation assessment"
+  scope_limitation: "English-language political discourse, Western democratic contexts"
+  
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-23T14:54:00.000000"
+theoretical_validation: "Framework v3.0 - algorithm configuration integrated"
+implementation_status: "Production ready with configurable algorithms" 

@@ -1,0 +1,615 @@
+# Entman Framing Functions Framework - Political Framing Theory
+# Tests Entman's systematic communication analysis through four independent framing functions
+# Based on Robert Entman's foundational framing theory and integration research by Chong & Druckman
+# demonstrating "frames in communication" systematic message construction
+#
+# Version: v2025.06.17
+# Last Modified: 2025-06-17
+# Status: Production Ready
+
+# =============================================================================
+# FRAMEWORK METADATA
+# =============================================================================
+
+name: entman_framing_functions
+framework_name: entman_framing_functions
+display_name: "Entman Framing Functions Framework (Political Framing Theory)"
+version: v2025.06.17
+
+description: |
+  Entman Framing Functions Framework implements Robert Entman's systematic communication 
+  analysis through four independent framing functions. Tests whether Problem Definition, 
+  Causal Attribution, Moral Evaluation, and Treatment Recommendation operate independently 
+  as predicted by communication theory, representing "frames in communication" systematic 
+  message construction.
+
+framework_type: independent_wells
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  scaling_factor: 1.0
+  description: "Circular coordinate system with four independent wells testing framing function independence"
+
+positioning_strategy:
+  type: independent_wells_equidistant
+  description: "Four independent framing functions positioned at equal 90° intervals"
+  
+  independence_hypothesis: "Framing functions operate as independent analytical dimensions"
+  positioning_rationale: "Equal spacing tests function independence without assumed correlations"
+  
+  wells:
+    problem_definition:
+      angle: 0
+      position: "North (top of circle)"
+      independence_prediction: "Can vary independently of other functions"
+    
+    causal_attribution:
+      angle: 90
+      position: "East (right side of circle)"
+      independence_prediction: "Can vary independently of other functions"
+    
+    moral_evaluation:
+      angle: 180
+      position: "South (bottom of circle)"
+      independence_prediction: "Can vary independently of other functions"
+    
+    treatment_recommendation:
+      angle: 270
+      position: "West (left side of circle)"
+      independence_prediction: "Can vary independently of other functions"
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Entman, R. M. (1993). Framing: Toward clarification of a fractured paradigm. Journal of Communication, 43(4), 51-58."
+    - "Entman, R. M. (2007). Framing bias: Media in the distribution of power. Journal of Communication, 57(1), 163-173."
+    - "Chong, D., & Druckman, J. N. (2007). Framing theory. Annual Review of Political Science, 10, 103-126."
+    - "Chong, D., & Druckman, J. N. (2007). Framing public opinion in competitive democracies. American Political Science Review, 101(4), 637-655."
+  
+  theoretical_approach: |
+    Tests Entman's systematic communication analysis theory that framing operates through 
+    four distinct, independent functions that can vary separately. Examines whether political 
+    communications actually demonstrate function independence and how strategic message 
+    construction utilizes different combinations of framing functions.
+  
+  core_insight: |
+    Political frames operate through systematic communication processes involving selection 
+    and salience across four essential functions. Each function can be present or absent 
+    independently, creating sophisticated patterns of strategic communication.
+
+  integration_research: |
+    Based on Chong & Druckman's finding that this addresses "frames in communication" 
+    (systematic message construction) as distinct from "frames in thought" 
+    (deep cognitive structures).
+
+  entman_four_functions: |
+    "Framing essentially involves selection and salience. To frame is to select some 
+    aspects of a perceived reality and make them more salient in a communicating text, 
+    in such a way as to promote a particular problem definition, causal interpretation, 
+    moral evaluation, and/or treatment recommendation."
+
+# =============================================================================
+# ENTMAN FRAMING FUNCTION WELLS
+# =============================================================================
+
+wells:
+  
+  # Function 1: Problem Definition (North - 0°)
+  problem_definition:
+    position:
+      angle: 0
+      coordinates: [0.0, 1.0]
+    
+    name: "Problem Definition"
+    description: "What issues are identified as requiring attention and how problems are conceptualized"
+    
+    rich_description: |
+      Identifies what issues deserve attention, how problems are conceptualized and bounded, 
+      and what aspects of complex situations are highlighted as requiring response. 
+      Determines the scope and nature of issues requiring action.
+    
+    entman_definition: "What issues are identified as requiring attention?"
+    
+    language_cues:
+      issue_identification:
+        - the real issue is
+        - we face a crisis of
+        - the challenge before us
+        - the problem we must address
+        - the urgent need to
+        - what's really at stake
+        - the fundamental issue
+        - the core problem
+      
+      problem_scope:
+        - this affects everyone
+        - this is a narrow technical issue
+        - this threatens our way of life
+        - widespread implications
+        - limited in scope
+        - far-reaching consequences
+        - isolated incident
+        - systemic problem
+      
+      problem_urgency:
+        - immediate action required
+        - long-term challenge
+        - crisis demands response
+        - urgent priority
+        - can wait
+        - emergency situation
+        - pressing concern
+        - future consideration
+      
+      problem_framing:
+        - the nature of this problem
+        - how we understand this issue
+        - the way to think about this
+        - frame this challenge
+        - conceptualize the difficulty
+        - define the situation
+        - characterize the issue
+        - understand the problem
+    
+    weight: 1.0
+    type: communication_function
+    tier: primary
+
+  # Function 2: Causal Attribution (East - 90°)
+  causal_attribution:
+    position:
+      angle: 90
+      coordinates: [1.0, 0.0]
+    
+    name: "Causal Attribution"
+    description: "What factors or actors are presented as causing problems and how responsibility is assigned"
+    
+    rich_description: |
+      Assigns responsibility and blame, explains what factors or actors caused problems, 
+      and identifies causal mechanisms that are emphasized or ignored. Determines who 
+      or what is held accountable for situations requiring response.
+    
+    entman_definition: "What factors/actors are presented as causing problems?"
+    
+    language_cues:
+      actor_responsibility:
+        - X is responsible for
+        - this stems from Y's actions
+        - the fault lies with
+        - caused by
+        - due to
+        - blame
+        - accountable for
+        - at fault
+      
+      systemic_causes:
+        - this results from broader patterns
+        - structural problems require
+        - the system creates
+        - institutional factors
+        - systemic issues
+        - underlying causes
+        - root causes
+        - structural origins
+      
+      historical_causation:
+        - this goes back to
+        - the roots of this problem
+        - historical forces explain
+        - legacy of
+        - stems from past
+        - historical pattern
+        - long-standing issue
+        - generational effects
+      
+      causal_mechanisms:
+        - the process that led to
+        - chain of events
+        - how this happened
+        - mechanism behind
+        - sequence of causes
+        - what triggered
+        - dynamics that created
+        - pathway to this result
+    
+    weight: 1.0
+    type: communication_function
+    tier: primary
+
+  # Function 3: Moral Evaluation (South - 180°)
+  moral_evaluation:
+    position:
+      angle: 180
+      coordinates: [0.0, -1.0]
+    
+    name: "Moral Evaluation"
+    description: "What values and moral judgments are invoked and how actions are evaluated ethically"
+    
+    rich_description: |
+      Invokes values and moral judgments, evaluates actions and policies ethically, 
+      and establishes moral frameworks that justify positions. Determines the moral 
+      significance and ethical implications of situations and responses.
+    
+    entman_definition: "What values and moral judgments are invoked?"
+    
+    language_cues:
+      value_invocation:
+        - justice demands
+        - fairness requires
+        - liberty is at stake
+        - fundamental rights
+        - core values
+        - moral imperative
+        - ethical obligation
+        - principle at stake
+      
+      moral_judgment:
+        - this is fundamentally wrong
+        - ethically unacceptable
+        - morally justified
+        - right thing to do
+        - moral outrage
+        - ethical violation
+        - morally defensible
+        - unconscionable
+      
+      moral_framework:
+        - our principles dictate
+        - core values include
+        - what we stand for
+        - moral foundation
+        - ethical framework
+        - value system
+        - moral compass
+        - guiding principles
+      
+      ethical_evaluation:
+        - morally required
+        - ethically sound
+        - moral implications
+        - ethical considerations
+        - moral responsibility
+        - ethical duty
+        - moral obligation
+        - ethical standard
+    
+    weight: 1.0
+    type: communication_function
+    tier: primary
+
+  # Function 4: Treatment Recommendation (West - 270°)
+  treatment_recommendation:
+    position:
+      angle: 270
+      coordinates: [-1.0, 0.0]
+    
+    name: "Treatment Recommendation"
+    description: "What solutions are proposed and how policy options are presented and prioritized"
+    
+    rich_description: |
+      Proposes or endorses solutions, presents and prioritizes policy options, 
+      and recommends or discourages specific actions. Determines what should be 
+      done to address identified problems and achieve desired outcomes.
+    
+    entman_definition: "What solutions are proposed or endorsed?"
+    
+    language_cues:
+      solution_advocacy:
+        - we must immediately
+        - the answer is
+        - the only way forward
+        - solution requires
+        - we should
+        - necessary action
+        - recommended approach
+        - best path forward
+      
+      policy_specificity:
+        - specific steps include
+        - concrete measures
+        - detailed implementation
+        - policy proposal
+        - legislative action
+        - regulatory approach
+        - administrative solution
+        - implementation plan
+      
+      action_urgency:
+        - delay is dangerous
+        - gradual change is sufficient
+        - revolutionary transformation needed
+        - immediate implementation
+        - phased approach
+        - urgent action
+        - careful consideration
+        - swift response
+      
+      recommendation_strength:
+        - absolutely must
+        - strongly recommend
+        - consider options
+        - explore possibilities
+        - mandatory requirement
+        - suggested approach
+        - optimal solution
+        - preferred method
+    
+    weight: 1.0
+    type: communication_function
+    tier: primary
+
+# =============================================================================
+# FUNCTION INDEPENDENCE ANALYSIS CONFIGURATION
+# =============================================================================
+
+independence_analysis:
+  
+  hypothesis_testing:
+    function_independence:
+      hypothesis: "Framing functions can vary independently without correlation"
+      expected_pattern: "Low correlation between function scores"
+      independence_threshold: 0.3
+      correlation_analysis: "statistical_correlation_matrix"
+    
+    function_completeness:
+      hypothesis: "Texts can utilize any combination of functions"
+      measurement: "percentage_of_functions_present_per_text"
+      completeness_categories: ["single_function", "partial_framing", "complete_framing"]
+    
+    strategic_combinations:
+      hypothesis: "Strategic communications use specific function combinations"
+      pattern_detection: "identify_common_function_combinations"
+      strategic_sophistication: "measure_systematic_vs_ad_hoc_framing"
+  
+  function_interaction_analysis:
+    competition_detection:
+      description: "Identify conflicting frames within same text"
+      indicators: ["competing_problem_definitions", "contradictory_solutions"]
+      measurement: "frame_competition_index"
+    
+    coherence_assessment:
+      description: "Measure internal consistency across functions"
+      coherence_indicators: ["logical_consistency", "value_alignment", "solution_fit"]
+      measurement: "frame_coherence_score"
+    
+    sophistication_measurement:
+      description: "Assess strategic vs ad hoc use of framing functions"
+      sophistication_indicators: ["systematic_coverage", "function_integration", "strategic_emphasis"]
+      measurement: "framing_sophistication_index"
+  
+  validation_metrics:
+    independence_validation: "correlation_matrix_below_threshold"
+    completeness_distribution: "percentage_breakdown_of_function_usage"
+    strategic_pattern_identification: "common_function_combination_patterns"
+    message_sophistication_assessment: "systematic_vs_random_function_usage"
+
+# =============================================================================
+# CALCULATION METHODOLOGY
+# =============================================================================
+
+calculation_method:
+  type: independent_wells_center_of_mass
+  description: "Calculate center of mass treating each function as independent dimension"
+  
+  independence_preservation:
+    method: "equal_weighting_no_correlation_assumptions"
+    rationale: "Maintains theoretical prediction of function independence"
+  
+  function_weighting:
+    problem_definition: 1.0
+    causal_attribution: 1.0
+    moral_evaluation: 1.0
+    treatment_recommendation: 1.0
+  
+  formula: "COM = (1/4) × Σ(function_score × function_position_vector)"
+
+# =============================================================================
+# WEIGHTING PHILOSOPHY
+# =============================================================================
+
+weighting_philosophy:
+  description: "Equal weighting testing Entman's prediction of function independence and equal importance"
+  approach: function_independence_equal_weighting
+  
+  rationale: |
+    All four framing functions are equally important in Entman's theory and should 
+    be able to vary independently. Equal weighting tests theoretical prediction 
+    that no single function dominates systematic communication.
+  
+  tiers:
+    primary:
+      weight: 1.0
+      description: "All framing functions equally important - tests independence hypothesis"
+      functions:
+        - problem_definition
+        - causal_attribution  
+        - moral_evaluation
+        - treatment_recommendation
+  
+  independence_testing: |
+    Equal weights enable testing whether functions actually operate independently 
+    as Entman predicts, rather than clustering or correlating in predictable patterns.
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION
+# =============================================================================
+
+visualization:
+  function_colors:
+    problem_definition: "#FF5722"      # Deep Orange - Problem identification
+    causal_attribution: "#3F51B5"     # Indigo - Causal analysis
+    moral_evaluation: "#9C27B0"       # Purple - Moral judgment
+    treatment_recommendation: "#4CAF50" # Green - Solution advocacy
+  
+  independence_indicators:
+    show_function_independence: true
+    correlation_matrix_overlay: true
+    function_combination_patterns: true
+  
+  function_analysis:
+    show_completeness_indicators: true
+    highlight_frame_competition: true
+    sophistication_measurements: true
+    independence_validation: true
+  
+  supported_types:
+    - circular
+    - independent_wells
+    - function_analysis
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  center_of_mass:
+    name: "Center of Mass"
+    description: "Overall framing orientation across all four independent functions"
+  
+  function_independence_score:
+    name: "Function Independence Score"
+    description: "Measure of how independently framing functions vary (low correlation indicates independence)"
+  
+  message_completeness_score:
+    name: "Message Completeness Score"
+    description: "Percentage of Entman's four functions present in the communication"
+  
+  frame_competition_index:
+    name: "Frame Competition Index"
+    description: "Detection of competing or conflicting frames within single text"
+  
+  framing_sophistication_index:
+    name: "Framing Sophistication Index"
+    description: "Assessment of systematic vs ad hoc use of framing functions"
+  
+  strategic_communication_score:
+    name: "Strategic Communication Score"
+    description: "Overall assessment of strategic message construction using framing functions"
+
+# =============================================================================
+# PROMPT INTEGRATION
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert in communication theory and political framing analysis, specializing 
+    in Robert Entman's systematic communication analysis and framing function theory. You have 
+    deep knowledge of how Problem Definition, Causal Attribution, Moral Evaluation, and 
+    Treatment Recommendation manifest in political communications as independent analytical dimensions.
+  
+  analysis_focus: |
+    Analyze this text to identify Entman's four framing functions: Problem Definition 
+    (what issues require attention), Causal Attribution (what/who caused problems), 
+    Moral Evaluation (what values/judgments apply), and Treatment Recommendation 
+    (what solutions are proposed). Assess each function independently.
+  
+  scoring_approach: |
+    Score each function well on 0.0-1.0 scale based on presence/strength of that 
+    specific framing function in the text, with specific textual evidence. Functions 
+    operate independently - text can score high on all functions simultaneously.
+  
+  scoring_emphasis: |
+    Focus on systematic communication analysis. Look for strategic use of framing 
+    functions, frame competition (conflicting problem definitions or solutions), 
+    and message completeness (which functions are present/absent). Assess 
+    communication sophistication and strategic message construction.
+  
+  evidence_requirements: |
+    Provide specific textual evidence for each function score, explaining how 
+    language patterns demonstrate systematic framing. Note frame competition, 
+    function combinations, and strategic communication patterns.
+  
+  framework_specific_guidance:
+    independence_awareness:
+      - "Treat each framing function as independent analytical dimension"
+      - "Problem Definition: What issues are identified as requiring attention?"
+      - "Causal Attribution: What/who is presented as causing problems?"
+      - "Moral Evaluation: What values and moral judgments are invoked?"
+      - "Treatment Recommendation: What solutions are proposed or endorsed?"
+      - "Look for frame competition and systematic vs ad hoc framing patterns"
+
+# =============================================================================
+# RESEARCH QUESTIONS ENABLED
+# =============================================================================
+
+research_questions:
+  function_independence_testing:
+    question: "Do Entman's four framing functions actually vary independently in political communications?"
+    methodology: "Statistical correlation analysis across function scores"
+    success_criteria: "Low correlations between function scores indicating independence"
+  
+  strategic_communication_analysis:
+    question: "How do sophisticated political communications systematically utilize different combinations of framing functions?"
+    methodology: "Pattern analysis of function combinations and strategic usage"
+    success_criteria: "Identification of systematic vs ad hoc framing patterns"
+  
+  frame_competition_detection:
+    question: "How frequently do political texts contain competing or conflicting frames within the same communication?"
+    methodology: "Conflict detection algorithms across framing functions"
+    success_criteria: "Systematic identification and categorization of frame competition"
+  
+  message_completeness_analysis:
+    question: "What percentage of political communications utilize all four framing functions versus partial framing?"
+    methodology: "Completeness analysis across function presence/absence patterns"
+    success_criteria: "Distribution analysis of function usage patterns"
+  
+  comparative_sophistication_assessment:
+    question: "How does framing sophistication vary across different types of political communications and actors?"
+    methodology: "Sophistication scoring across communication types and political figures"
+    success_criteria: "Systematic differences in strategic framing usage"
+
+# =============================================================================
+# SYSTEM COMPATIBILITY
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - independent_wells_v1.0
+    - entman_framing_functions_v2.1
+  
+  calculation_methods:
+    - independent_wells_center_of_mass
+    - function_independence_analysis
+  
+  api_versions:
+    - v2.1
+  
+  visualization_types:
+    - circular
+    - independent_wells
+    - function_analysis
+
+# =============================================================================
+# ACADEMIC VALIDATION
+# =============================================================================
+
+validation:
+  academic_standard: "Entman Framing Theory and Communication Research"
+  theoretical_foundation: "Robert Entman's systematic communication analysis"
+  empirical_validation: "Chong & Druckman integration research on framing function independence"
+  communication_theory: "Systematic message construction and strategic communication analysis"
+  
+  key_principles:
+    - "Framing involves selection and salience across four essential functions"
+    - "Framing functions operate as independent analytical dimensions"
+    - "Strategic communication utilizes systematic combinations of framing functions"
+    - "Frame competition occurs when conflicting frames appear in same communication"
+    - "Message sophistication measured by systematic vs ad hoc framing function usage"
+
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-17T19:30:00.000000"
+theoretical_validation: "Entman framing theory with Chong & Druckman integration research"
+implementation_status: "Production ready for testing framing function independence hypothesis"
+prompt_template: "entman_framing_functions_v2.1"
+analysis_instructions: "Analyze Entman's four framing functions independently: Problem Definition (what issues require attention), Causal Attribution (what/who caused problems), Moral Evaluation (what values apply), Treatment Recommendation (what solutions proposed). Assess function independence, frame competition, and strategic communication sophistication." 

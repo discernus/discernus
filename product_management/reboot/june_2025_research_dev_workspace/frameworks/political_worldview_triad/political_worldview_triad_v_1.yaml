@@ -1,0 +1,258 @@
+# Political Worldview Triad Framework
+# Production‑ready implementation compliant with Framework Specification v3.1
+# Last Modified: 2025‑06‑23
+
+# =============================================================================
+# FRAMEWORK IDENTIFICATION (required)
+# =============================================================================
+
+name: political_worldview_triad
+version: v1.0
+display_name: "Political Worldview Triad Framework"
+
+description: |
+  Triadic worldview mapping framework within the Discernus Coordinate System (DCS).
+  It scores political discourse along three distinct sources of legitimacy—Immutable-Identity,
+  Tribal Domination, and Pluralist Individual Dignity—without any style overlays.
+  
+  ## Theoretical Foundation
+  
+  This framework operationalizes three fundamental sources of political legitimacy:
+  
+  1. **Immutable-Identity Politics**: Grounds moral status in overlapping unchosen attributes
+     (race, ethnicity, sex, sexual orientation, disability, age, neurotype), viewing these
+     traits as primary determinants of advantage or oppression.
+  
+  2. **Tribal Domination Politics**: Asserts legitimacy through in-group supremacy, security,
+     or domination over out-groups, often framed in zero-sum or survivalist terms.
+  
+  3. **Pluralist Individual Dignity Politics**: Locates legitimacy in transcendent dignity
+     and agency of each person, balancing universal civic equality with respectful
+     acknowledgement of immutable traits.
+  
+  ## Usage Guidelines
+  
+  This framework is designed for analysis of contemporary political discourse where
+  legitimacy claims center on group membership, cultural dominance, or individual
+  dignity. Best applied to speeches, manifestos, policy documents, and social media
+  content from 2010-2025.
+  
+  **Scoring Interpretation:**
+  - 0.70-1.00: Strong attraction to worldview anchor
+  - 0.40-0.69: Moderate attraction to worldview anchor  
+  - 0.00-0.39: Weak or no attraction to worldview anchor
+  
+  ## Version History
+  
+  v1.0: Initial implementation with three-anchor worldview analysis, algorithm
+  configuration, and academic validation framework.
+  
+  ## Citation Format
+  
+  Discernus Framework: Political Worldview Triad v1.0 (Crenshaw/Machiavelli/Kant, 2025)
+
+# =============================================================================
+# ANCHORS (positioning definition)
+# =============================================================================
+
+anchors:
+  Immutable-Identity:
+    angle: 90
+    weight: 1.0
+    type: worldview
+    description: |
+      Politics that centres moral status on overlapping, unchosen personal attributes
+      (race, ethnicity, sex, sexual orientation, disability, age, neurotype, etc.),
+      viewing these traits as the primary source of advantage or oppression.
+    language_cues:
+      - "As Black women, we..."
+      - "Center disabled queer voices."
+      - "Our lived experience as trans people shows..."
+      - "Marginalised identities face systemic barriers."
+      - "Racialised communities continue to struggle."
+      - "systemic oppression"
+      - "lived experience"
+      - "intersection of race and gender"
+  Tribal-Domination:
+    angle: 210
+    weight: 1.0
+    type: worldview
+    description: |
+      Politics that asserts the legitimacy of an in-group's supremacy, security,
+      or domination over out-groups, often framed in zero-sum or survivalist terms.
+    language_cues:
+      - "We must put our nation first."
+      - "They will replace us."
+      - "Only our tribe can secure the future."
+      - "Our way of life is under threat."
+      - "Their culture is incompatible with ours."
+      - "take back our country"
+      - "real patriots"
+      - "dominant culture"
+  Pluralist-Individual-Dignity:
+    angle: 330
+    weight: 1.0
+    type: worldview
+    description: |
+      Politics that locates legitimacy in the transcendent dignity and agency of
+      each person, balancing universal civic equality with respectful acknowledgement
+      of immutable traits.
+    language_cues:
+      - "Every individual deserves equal voice."
+      - "Citizens, regardless of background, share responsibility."
+      - "Human dignity transcends race and class."
+      - "Inclusive civic nationalism."
+      - "Equal opportunity for all."
+      - "universal rights"
+      - "shared civic space"
+      - "common good through consent"
+
+# =============================================================================
+# ALGORITHMIC CONFIGURATION (optional)
+# =============================================================================
+
+algorithm_config:
+  default_confidence_threshold: 0.70
+  hybrid_detection:
+    enabled: true
+    max_hybrid_percentage: 0.30
+  distance_metric: "cosine"
+  evaluation_metrics:
+    - name: purity_score
+      description: >-
+        Measures the percentage of texts whose highest-attraction anchor aligns with
+        the expected anchor in the labelled corpus.
+    - name: silhouette_score
+      description: >-
+        Validates cluster separation using cosine distances.
+
+# =============================================================================
+# COORDINATE SYSTEM (optional)
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: "Circular coordinate system for three-anchor worldview analysis"
+
+# =============================================================================
+# LLM INTEGRATION (optional)
+# =============================================================================
+
+prompt_configuration:
+  system_prompt: >-
+    You are a political-discourse classifier that assigns each text a score
+    to three worldview anchors: Immutable-Identity, Tribal Domination,
+    Pluralist Individual Dignity. Output JSON with keys:
+    { "immutable_identity": 0-1, "tribal_domination": 0-1,
+      "pluralist_dignity": 0-1, "confidence": 0-1 }.
+  user_prompt_template: |-
+    TEXT: <<TEXT_TO_CLASSIFY>>
+    ---
+    Return only the JSON object.
+  scoring_rubric: |
+    0.70-1.00 : Strong attraction
+    0.40-0.69 : Moderate attraction
+    0.00-0.39 : Weak or no attraction
+
+# =============================================================================
+# ANALYSIS METRICS (optional)
+# =============================================================================
+
+metrics:
+  purity_score:
+    name: "Worldview Purity Score"
+    description: "Percentage of texts whose highest-attraction anchor matches expected classification"
+    calculation: "Count of correct highest-score predictions / total predictions"
+  
+  hybrid_detection_rate:
+    name: "Hybrid Detection Rate" 
+    description: "Percentage of texts scoring ≥0.40 on two or more anchors"
+    calculation: "Count of multi-anchor texts / total texts"
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION (optional)
+# =============================================================================
+
+visualization:
+  coordinate_system: "DCS"
+  plot: "triangle"
+  anchor_colors:
+    Immutable-Identity: "#b14f9b"
+    Tribal-Domination: "#d9534f"
+    Pluralist-Individual-Dignity: "#5bc0de"
+  node_size: "confidence"
+  supported_charts:
+    - triangle
+    - circular
+    - anchor_signature
+
+# =============================================================================
+# ACADEMIC VALIDATION (required)
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Crenshaw, K. (1991). Mapping the Margins: Intersectionality, Identity Politics, and Violence against Women of Color. Stanford Law Review, 43(6), 1241-1299."
+    - "Machiavelli, N. (1532). The Prince. Antonio Blado d'Asola."
+    - "Kant, I. (1785). Groundwork of the Metaphysics of Morals. J.F. Hartknoch."
+    - "Mudde, C. (2004). The Populist Zeitgeist. Government and Opposition, 39(4), 541-563."
+  
+  theoretical_approach: |
+    This framework synthesizes three major traditions in political theory:
+    
+    1. **Critical Theory Tradition**: Draws from Crenshaw's intersectionality framework
+       to understand how overlapping identity categories create distinct political
+       experiences and legitimacy claims.
+    
+    2. **Realist Political Theory**: Incorporates Machiavellian insights about group
+       competition, power dynamics, and zero-sum political conflict as drivers of
+       tribal domination politics.
+    
+    3. **Liberal Democratic Theory**: Builds on Kantian dignity concepts and Rawlsian
+       justice theory to capture pluralist approaches that emphasize individual
+       agency within inclusive civic frameworks.
+    
+    The framework operationalizes these theoretical traditions through three
+    independent anchors positioned at 120° intervals, enabling measurement of
+    political discourse along each dimension without presuming mutual exclusivity.
+
+validation:
+  academic_standard: "Political Theory Triangulation Framework"
+  measurement_instrument: "Three-anchor worldview classification with confidence scoring"
+  scope_limitation: "English-language political discourse, 2010-2025; primarily Western democratic contexts"
+  
+  citation_format: "Discernus Framework: Political Worldview Triad v1.0 (Crenshaw/Machiavelli/Kant, 2025)"
+  academic_attribution: |
+    When using this framework in academic work, cite as:
+    "Discernus Framework: Political Worldview Triad v1.0 (Crenshaw/Machiavelli/Kant, 2025)"
+    
+    This framework synthesizes intersectionality theory (Crenshaw), realist political
+    theory (Machiavelli), and liberal dignity theory (Kant) into a triangular
+    measurement space for contemporary political discourse analysis.
+
+# =============================================================================
+# SYSTEM COMPATIBILITY (optional)
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - political_worldview_v1.0
+    - three_anchor_analysis_v1.0
+  
+  api_versions:
+    - v3.1
+    - v3.0
+  
+  visualization_types:
+    - triangle
+    - circular
+    - anchor_signature
+
+# =============================================================================
+# FRAMEWORK VERSIONING (required)
+# =============================================================================
+
+last_modified: "2025-06-23T20:00:00.000000"
+framework_registry_key: "political_worldview_triad__v1.0"
+implementation_status: "Production ready - Framework Specification v3.1 compliant with three-anchor worldview analysis"

@@ -1,0 +1,276 @@
+# =============================================================================
+# CLOUD MODEL COMPARISON EXPERIMENT (v3.1 Format)
+# =============================================================================
+# Strategic comparison of optimized cloud models for narrative analysis
+# Companion to Local_Model_Comparison_Experiment for cost/quality analysis
+
+experiment_meta:
+  name: "Cloud_Model_Comparison_Experiment"
+  version: "v1.0.0"
+  created: "2025-12-25T23:00:00Z"
+  description: "Strategic comparison of optimized cloud models (GPT-4o Mini, Mistral Medium 3, Claude 3 Haiku, Gemini Flash) for narrative analysis across political speeches"
+  hypothesis: "Optimized cloud models provide superior quality and consistency for academic research, justifying their cost vs free local alternatives"
+  research_context: "Evaluate cloud model capabilities using same political speeches as local model experiment to enable direct cost/quality comparison"
+  principal_investigator: "Discernus Research Team"
+  institution: "Discernus Research Lab"
+  ethical_clearance: "ACADEMIC-2025-CLOUD-001"
+  funding_source: "Internal Development"
+  data_classification: "research"
+  publication_intent: true
+  tags: ["cloud_models", "cost_quality_analysis", "academic_feasibility", "openai", "anthropic", "mistral", "google"]
+  
+  research_question: "How do optimized cloud models (GPT-4o Mini, Mistral Medium 3, Claude 3 Haiku, Gemini Flash) compare in moral foundations analysis quality and cost-effectiveness for academic research?"
+  
+  hypotheses:
+    - "Cloud models provide superior analytical consistency and depth compared to local models"
+    - "GPT-4o Mini offers the best cost/quality ratio for academic research workflows"
+    - "Different cloud providers show distinct analytical approaches suitable for different research contexts"
+    - "Cloud model quality improvements justify API costs for critical academic research"
+  
+  success_criteria:
+    - "Clear quality and cost comparison across 4 major cloud providers documented"
+    - "Processing consistency and analytical depth measured across political content"
+    - "Cost per quality point calculated for academic decision framework"
+    - "Direct comparison data available vs local model experiment results"
+
+components:
+  frameworks:
+    - id: "moral_foundations_theory"
+      version: "v2025.06.19"
+      type: "file_path"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/frameworks/moral_foundations_theory/moral_foundations_theory_framework.yaml"
+      
+  prompt_templates:
+    - id: "moral_foundations_analysis"
+      version: "v1.0"
+      type: "workspace_asset"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/prompt_templates/moral_foundations_analysis/template.yaml"
+      
+  weighting_schemes:
+    - id: "foundation_pairs"
+      version: "v1.0"
+      type: "workspace_asset"
+      file_path: "research_workspaces/june_2025_research_dev_workspace/weighting_schemes/foundation_pairs/scheme.yaml"
+      
+  models:
+    - id: "gpt-4o-mini"
+      provider: "openai"
+      version: "2024-07-18"
+      description: "OpenAI GPT-4o Mini - optimized for speed, cost, and reliability"
+      
+    - id: "mistral-medium-latest"
+      provider: "mistral"
+      version: "latest"
+      description: "Mistral Medium 3 - balanced performance and cost"
+      
+    - id: "claude-3-haiku-20240307"
+      provider: "anthropic"
+      version: "20240307"
+      description: "Claude 3 Haiku - fast, cost-effective with safety features"
+      
+    - id: "gemini-1.5-flash"
+      provider: "google"
+      version: "latest"
+      description: "Google Gemini Flash - solid performance in Google ecosystem"
+      
+  corpus:
+    # Same political speeches as local model experiment for direct comparison
+    - id: "reagan_challenger"
+      type: "file_path"
+      file_path: "corpus/validation_set/conservative_dignity/ronald_reagan_1986_challenger_address.txt"
+      description: "Reagan 1986 Challenger Address - Conservative dignity baseline (4.6KB)"
+      
+    - id: "obama_dnc_2004"
+      type: "file_path"
+      file_path: "corpus/validation_set/progressive_dignity/obama_2004_dnc.txt"
+      description: "Obama 2004 DNC Keynote - Progressive dignity baseline (13KB)"
+      
+    - id: "john_lewis_march"
+      type: "file_path"
+      file_path: "corpus/validation_set/progressive_dignity/john_lewis_1963_march_washington.txt"
+      description: "John Lewis 1963 March on Washington - Civil rights speech (5.9KB)"
+
+execution:
+  description: "Comprehensive comparison of optimized cloud models across diverse political speeches"
+  
+  matrix:
+    # GPT-4o Mini analysis (OpenAI's optimized model)
+    - run_id: "gpt4o_mini_reagan_challenger"
+      description: "GPT-4o Mini - Reagan Challenger Address (speed/cost optimized)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o-mini"
+      corpus_subset: "reagan_challenger"
+      
+    - run_id: "gpt4o_mini_obama_dnc"
+      description: "GPT-4o Mini - Obama 2004 DNC Keynote (speed/cost optimized)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o-mini"
+      corpus_subset: "obama_dnc_2004"
+      
+    - run_id: "gpt4o_mini_lewis_march"
+      description: "GPT-4o Mini - John Lewis March on Washington (speed/cost optimized)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gpt-4o-mini"
+      corpus_subset: "john_lewis_march"
+      
+    # Mistral Medium 3 analysis
+    - run_id: "mistral_medium_reagan_challenger"
+      description: "Mistral Medium 3 - Reagan Challenger Address (balanced performance)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "mistral-medium-latest"
+      corpus_subset: "reagan_challenger"
+      
+    - run_id: "mistral_medium_obama_dnc"
+      description: "Mistral Medium 3 - Obama 2004 DNC Keynote (balanced performance)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "mistral-medium-latest"
+      corpus_subset: "obama_dnc_2004"
+      
+    - run_id: "mistral_medium_lewis_march"
+      description: "Mistral Medium 3 - John Lewis March on Washington (balanced performance)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "mistral-medium-latest"
+      corpus_subset: "john_lewis_march"
+      
+    # Claude 3 Haiku analysis (Anthropic safety + speed)
+    - run_id: "claude_haiku_reagan_challenger"
+      description: "Claude 3 Haiku - Reagan Challenger Address (safety + large context)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-haiku-20240307"
+      corpus_subset: "reagan_challenger"
+      
+    - run_id: "claude_haiku_obama_dnc"
+      description: "Claude 3 Haiku - Obama 2004 DNC Keynote (safety + large context)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-haiku-20240307"
+      corpus_subset: "obama_dnc_2004"
+      
+    - run_id: "claude_haiku_lewis_march"
+      description: "Claude 3 Haiku - John Lewis March on Washington (safety + large context)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "claude-3-haiku-20240307"
+      corpus_subset: "john_lewis_march"
+      
+    # Gemini Flash analysis (Google ecosystem)
+    - run_id: "gemini_flash_reagan_challenger"
+      description: "Gemini Flash - Reagan Challenger Address (Google ecosystem)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gemini-1.5-flash"
+      corpus_subset: "reagan_challenger"
+      
+    - run_id: "gemini_flash_obama_dnc"
+      description: "Gemini Flash - Obama 2004 DNC Keynote (Google ecosystem)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gemini-1.5-flash"
+      corpus_subset: "obama_dnc_2004"
+      
+    - run_id: "gemini_flash_lewis_march"
+      description: "Gemini Flash - John Lewis March on Washington (Google ecosystem)"
+      framework: "moral_foundations_theory"
+      prompt_template: "moral_foundations_analysis"
+      weighting_scheme: "foundation_pairs"
+      model: "gemini-1.5-flash"
+      corpus_subset: "john_lewis_march"
+
+  cost_controls:
+    max_total_cost: 5.0  # Realistic budget based on fixed cost estimation (~$0.15 expected)
+    cost_per_analysis_limit: 0.50  # Reasonable per-analysis limit
+    
+  quality_controls:
+    min_framework_fit_score: 0.7  # Higher threshold for cloud models
+    enable_qa_validation: true
+    require_evidence: true
+    
+  quality_assurance:
+    enable_qa_validation: true
+    confidence_threshold: 0.75  # Higher expectation for cloud models
+    require_evidence: true
+    manual_review_triggers: ["low_confidence", "cost_anomaly", "quality_degradation"]
+
+enhanced_analysis:
+  enabled: true
+  generate_html_report: true
+  generate_academic_exports: true
+  
+  configuration:
+    cloud_model_analysis:
+      enabled: true
+      cost_per_quality_tracking: true
+      provider_comparison_analysis: true
+      processing_speed_tracking: true
+      
+    comparative_analysis:
+      enabled: true
+      cross_provider_comparison: true
+      cost_efficiency_analysis: true
+      quality_consistency_patterns: true
+      local_vs_cloud_comparison: true  # Compare with local model results
+      
+    statistical_testing:
+      enabled: true
+      significance_level: 0.05
+      tests: ["provider_consistency", "cost_effectiveness", "quality_differentiation"]
+      
+    visualizations:
+      enabled: true
+      types: ["provider_comparison_radar", "cost_quality_scatter", "processing_speed_comparison"]
+
+outputs:
+  save_to_database: true
+  export_formats: ["json", "csv", "r_data"]
+  include_raw_responses: true
+  include_provenance: true
+  
+  academic_exports:
+    enabled: true
+    formats: ["csv", "r_data"]
+    include_replication_package: true
+    
+  cost_analysis_report:
+    enabled: true
+    include_cost_breakdowns: true
+    include_efficiency_metrics: true
+    include_local_model_comparison: true
+
+validation_criteria:
+  min_successful_analyses: 12  # All planned analyses (3 texts × 4 models)
+  max_total_cost: 5.0  # Realistic budget based on fixed cost estimation
+  required_quality_score: 0.70  # Higher expectations for cloud models
+  
+  success_metrics:
+    provider_differentiation: "Clear analytical differences between cloud providers documented"
+    cost_effectiveness: "Cost per quality point measured for each provider"
+    quality_consistency: "Consistent high-quality analysis across diverse political content"
+    academic_value: "Superior quality justifies API costs for critical research"
+    
+  decision_outcomes:
+    optimal_cloud_provider: "Identify best cost/quality cloud provider for primary research use"
+    cost_justification: "Determine when cloud model costs are justified vs local alternatives"
+    provider_specialization: "Map provider strengths to specific research use cases"
+
+experimental_design_notes:
+  comparison_framework: "Direct comparison with Local_Model_Comparison_Experiment results using identical political speeches"
+  cost_tracking: "Precise cost tracking for academic budgeting and ROI analysis"
+  quality_benchmarking: "Higher quality thresholds reflect cloud model capabilities and cost" 

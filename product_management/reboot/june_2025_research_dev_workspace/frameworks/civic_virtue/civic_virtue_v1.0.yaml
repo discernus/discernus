@@ -1,0 +1,483 @@
+# Civic Virtue Framework
+# Enhanced implementation of classical virtue ethics and civic republican theory for political discourse analysis
+# Based on Aristotelian virtue ethics and contemporary civic republican theory for democratic discourse quality assessment
+#
+# Version: v1.0 (Framework Specification v3.1 Compliant)
+# Last Modified: 2025-06-23 (Migrated to v3.1 with complete 10-anchor restoration)
+# Status: Production Ready with Full Civic Analysis
+
+# =============================================================================
+# FRAMEWORK IDENTIFICATION (required)
+# =============================================================================
+
+name: civic_virtue
+version: v1.0
+display_name: "Civic Virtue Framework"
+
+description: |
+  The Civic Virtue Framework analyzes moral dimensions of persuasive political discourse through 
+  classical virtue ethics and contemporary civic republican theory. This framework identifies 
+  dimensions that strengthen or weaken democratic discourse and civic engagement using clustered 
+  positioning around civic virtues and vices.
+  
+  ## Theoretical Foundation
+  
+  Based on Aristotelian virtue ethics and contemporary civic republican theory, this framework 
+  examines civic virtues and vices in political communication:
+  
+  - **Classical Foundation**: Aristotle's *Nicomachean Ethics* (Book VI) on virtue and character
+  - **Contemporary Application**: Sandel's civic republican theory on moral limits and civic engagement
+  - **Core Insight**: Democratic discourse quality depends on the balance of civic virtues versus civic vices
+  
+  ## Framework Architecture
+  
+  ### Clustered Positioning Strategy
+  - **Virtue Cluster (Top)**: 5 anchors clustered around 90° emphasizing civic strengths
+  - **Vice Cluster (Bottom)**: 5 anchors clustered around 270° emphasizing civic weaknesses
+  - **Moral Hierarchy**: Vertical orientation emphasizing virtue-vice distinction
+  
+  ### The Ten Civic Dimensions
+  
+  **Civic Virtues (Integrative Anchors):**
+  1. **Dignity** - Individual moral worth and universal human dignity
+  2. **Truth** - Factual accuracy and intellectual honesty
+  3. **Justice** - Fairness, proportionality, and procedural equity
+  4. **Hope** - Constructive vision and democratic optimism
+  5. **Pragmatism** - Practical solutions and workable compromise
+  
+  **Civic Vices (Disintegrative Anchors):**
+  1. **Tribalism** - Group loyalty over universal principles
+  2. **Resentment** - Grievance, victimization, and blame
+  3. **Manipulation** - Deceptive rhetoric and emotional exploitation
+  4. **Fear** - Anxiety appeals and catastrophic thinking
+  5. **Fantasy** - Unrealistic expectations and magical thinking
+  
+  ## Usage Guidelines
+  
+  ### Ideal Applications
+  - Political speech analysis for civic virtue content
+  - Democratic discourse quality assessment
+  - Campaign communication ethics evaluation
+  - Public debate moral dimension analysis
+  
+  ### Scoring Approach
+  - Each anchor scored 0.0-1.0 based on presence/strength in text
+  - Specific textual evidence required for each score
+  - Cluster-based analysis considering virtue vs. vice balance
+  - Overall civic discourse quality metrics
+  
+  ### Interpretation Framework
+  - **High Virtue Cluster Scores**: Strengthens democratic discourse and civic engagement
+  - **High Vice Cluster Scores**: Undermines democratic discourse and civic participation
+  - **Balanced Patterns**: Mixed civic impact requiring detailed analysis
+  - **Cluster Dominance**: Clear moral orientation toward virtue or vice
+  
+  ## Version History
+  
+  v1.0: Framework Specification v3.1 compliant version with complete 10-anchor restoration,
+        clustered positioning strategy, hierarchical weighting, and enhanced academic integration.
+  
+  ## Citation Format
+  
+  Discernus Framework: Civic Virtue v1.0 (Aristotle/Sandel, 2025)
+
+# =============================================================================
+# POSITIONING DEFINITION (anchors - independent semantic reference points)
+# =============================================================================
+
+anchors:
+  # Virtue Cluster (Top) - Integrative Anchors
+  Dignity:
+    description: "Individual moral worth and universal human dignity - recognition of inherent human worth and respect for individual agency"
+    language_cues:
+      - "human dignity"
+      - "individual worth"
+      - "respect for persons"
+      - "human rights"
+      - "inherent value"
+      - "moral worth"
+      - "personal dignity"
+      - "universal dignity"
+      - "human agency"
+      - "individual respect"
+    angle: 90
+    weight: 1.0
+    type: integrative
+    tier: primary
+    cluster: virtue
+  
+  Truth:
+    description: "Factual accuracy and intellectual honesty - commitment to truth-telling and evidence-based reasoning"
+    language_cues:
+      - "factual accuracy"
+      - "intellectual honesty"
+      - "evidence-based"
+      - "truth-telling"
+      - "honest discourse"
+      - "accurate information"
+      - "factual claims"
+      - "empirical evidence"
+      - "transparent reasoning"
+      - "verifiable facts"
+    angle: 75
+    weight: 0.8
+    type: integrative
+    tier: secondary
+    cluster: virtue
+  
+  Justice:
+    description: "Fairness, proportionality, and procedural equity - commitment to fair treatment and just outcomes"
+    language_cues:
+      - "fairness"
+      - "justice"
+      - "equity"
+      - "proportionality"
+      - "fair treatment"
+      - "just outcomes"
+      - "procedural fairness"
+      - "equal treatment"
+      - "impartial"
+      - "due process"
+    angle: 105
+    weight: 0.8
+    type: integrative
+    tier: secondary
+    cluster: virtue
+  
+  Hope:
+    description: "Constructive vision and democratic optimism - forward-looking perspective with positive possibilities"
+    language_cues:
+      - "hope"
+      - "optimism"
+      - "positive vision"
+      - "constructive future"
+      - "democratic possibility"
+      - "progress"
+      - "improvement"
+      - "better tomorrow"
+      - "positive change"
+      - "inspiring vision"
+    angle: 60
+    weight: 0.6
+    type: integrative
+    tier: tertiary
+    cluster: virtue
+  
+  Pragmatism:
+    description: "Practical solutions and workable compromise - focus on effective governance and realistic problem-solving"
+    language_cues:
+      - "practical solutions"
+      - "workable compromise"
+      - "realistic approach"
+      - "effective governance"
+      - "pragmatic policy"
+      - "feasible plans"
+      - "common ground"
+      - "practical wisdom"
+      - "workable solutions"
+      - "realistic goals"
+    angle: 120
+    weight: 0.6
+    type: integrative
+    tier: tertiary
+    cluster: virtue
+  
+  # Vice Cluster (Bottom) - Disintegrative Anchors
+  Tribalism:
+    description: "Group loyalty over universal principles - in-group favoritism and out-group hostility that undermines civic unity"
+    language_cues:
+      - "us vs them"
+      - "tribal loyalty"
+      - "group superiority"
+      - "in-group favoritism"
+      - "out-group hostility"
+      - "identity politics"
+      - "group solidarity"
+      - "tribal identity"
+      - "partisan loyalty"
+      - "group conflict"
+    angle: 270
+    weight: 1.0
+    type: disintegrative
+    tier: primary
+    cluster: vice
+  
+  Resentment:
+    description: "Grievance, victimization, and blame - dwelling on past wrongs and assigning blame rather than constructive solutions"
+    language_cues:
+      - "grievance"
+      - "victimization"
+      - "blame"
+      - "resentment"
+      - "past wrongs"
+      - "historical injustice"
+      - "victim mentality"
+      - "grievance politics"
+      - "assigning blame"
+      - "dwelling on wrongs"
+    angle: 255
+    weight: 0.8
+    type: disintegrative
+    tier: secondary
+    cluster: vice
+  
+  Manipulation:
+    description: "Deceptive rhetoric and emotional exploitation - using misleading information or emotional manipulation to influence"
+    language_cues:
+      - "deceptive rhetoric"
+      - "emotional manipulation"
+      - "misleading information"
+      - "propaganda"
+      - "spin"
+      - "distortion"
+      - "emotional exploitation"
+      - "false claims"
+      - "manipulative language"
+      - "deceptive framing"
+    angle: 285
+    weight: 0.8
+    type: disintegrative
+    tier: secondary
+    cluster: vice
+  
+  Fear:
+    description: "Anxiety appeals and catastrophic thinking - using fear-based messaging and worst-case scenarios to motivate"
+    language_cues:
+      - "fear appeals"
+      - "catastrophic thinking"
+      - "worst-case scenarios"
+      - "anxiety-inducing"
+      - "scary outcomes"
+      - "disaster predictions"
+      - "fear-mongering"
+      - "panic-inducing"
+      - "threatening language"
+      - "doomsday scenarios"
+    angle: 240
+    weight: 0.6
+    type: disintegrative
+    tier: tertiary
+    cluster: vice
+  
+  Fantasy:
+    description: "Unrealistic expectations and magical thinking - promoting impossible solutions or utopian outcomes without realistic plans"
+    language_cues:
+      - "unrealistic expectations"
+      - "magical thinking"
+      - "impossible solutions"
+      - "utopian outcomes"
+      - "wishful thinking"
+      - "fantasy solutions"
+      - "unrealistic promises"
+      - "magical fixes"
+      - "impossible goals"
+      - "dreamlike scenarios"
+    angle: 300
+    weight: 0.6
+    type: disintegrative
+    tier: tertiary
+    cluster: vice
+
+# =============================================================================
+# POSITIONING STRATEGY (optional)
+# =============================================================================
+
+positioning_strategy:
+  type: clustered
+  description: "Anchors clustered by moral orientation rather than random distribution - virtue cluster around 90° (top) and vice cluster around 270° (bottom) with 60° span for each cluster"
+  
+  clusters:
+    virtue:
+      center_angle: 90
+      span: 60
+      anchor_types: ["integrative"]
+      description: "Virtue anchors clustered around top (90°) within 60° span emphasizing civic strengths"
+    
+    vice:
+      center_angle: 270
+      span: 60
+      anchor_types: ["disintegrative"] 
+      description: "Vice anchors clustered around bottom (270°) within 60° span emphasizing civic weaknesses"
+
+# =============================================================================
+# ALGORITHMIC CONFIGURATION (optional)
+# =============================================================================
+
+algorithm_config:
+  dominance_amplification:
+    enabled: true
+    threshold: 0.62
+    multiplier: 1.18
+    rationale: "Amplifies civic engagement vs disengagement for clearer citizenship analysis"
+    
+  adaptive_scaling:
+    enabled: true
+    base_scaling: 0.75
+    max_scaling: 0.90
+    variance_factor: 0.22
+    mean_factor: 0.06
+    methodology: "Binary scaling optimized for civic engagement analysis"
+    
+  prompting_integration:
+    dominance_instruction: "Identify whether the text primarily promotes civic engagement or reflects civic disengagement"
+    amplification_purpose: "Mathematical enhancement of civic positioning"
+    methodology_reference: "Civic Virtue citizenship analysis methodology v3.0"
+
+# =============================================================================
+# COORDINATE SYSTEM (optional)
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: "Circular coordinate system using clustered anchors for civic virtue positioning"
+
+# =============================================================================
+# ANALYSIS CONFIGURATION (optional)
+# =============================================================================
+
+metrics:
+  virtue_cluster_score:
+    name: "Virtue Cluster Score"
+    description: "Strength of civic virtues (Dignity, Truth, Justice, Hope, Pragmatism)"
+    calculation: "Average of all virtue anchor scores weighted by tier"
+  
+  vice_cluster_score:
+    name: "Vice Cluster Score"
+    description: "Strength of civic vices (Tribalism, Resentment, Manipulation, Fear, Fantasy)"
+    calculation: "Average of all vice anchor scores weighted by tier"
+  
+  civic_balance:
+    name: "Civic Balance Score"
+    description: "Net civic orientation from virtue-focused (+1) to vice-focused (-1)"
+    calculation: "Virtue cluster score minus vice cluster score"
+  
+  civic_intensity:
+    name: "Civic Intensity"
+    description: "Overall strength of civic positioning regardless of direction"
+    calculation: "Sum of all anchor scores divided by number of anchors"
+  
+  moral_clarity:
+    name: "Moral Clarity Score"
+    description: "Distinctness of virtue vs vice positioning"
+    calculation: "Absolute value of civic balance score"
+
+# =============================================================================
+# LLM INTEGRATION (optional)
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert analyst of civic life and democratic participation, with deep 
+    knowledge of civic republican theory and social capital research. You specialize 
+    in analyzing how discourse either promotes or undermines civic engagement through 
+    virtue and vice patterns.
+  
+  bias_neutral_analysis_focus: |
+    Evaluate how the text demonstrates civic virtues (dignity, truth, justice, hope, pragmatism) 
+    OR civic vices (tribalism, resentment, manipulation, fear, fantasy). Focus specifically on 
+    moral dimensions that strengthen or weaken democratic discourse and civic participation.
+  
+  detection_approach: |
+    Look for patterns that either encourage civic virtues and democratic participation 
+    or express civic vices and democratic withdrawal. Analyze both explicit moral 
+    language and implicit assumptions about civic responsibility, democratic institutions, 
+    and community involvement.
+  
+  scoring_methodology: |
+    Score civic dimensions based on textual evidence of virtue/vice emphasis, using 
+    0.0-1.0 scale with specific quotations supporting each assessment. Focus on 
+    civic frameworks rather than specific policy positions. Consider hierarchical 
+    weighting: primary (1.0), secondary (0.8), tertiary (0.6).
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION (optional)
+# =============================================================================
+
+visualization:
+  cluster_colors:
+    virtue: "#2E7D32"                    # Green - civic virtues
+    vice: "#C62828"                      # Red - civic vices
+  
+  tier_colors:
+    primary: "#1565C0"                   # Blue - most important
+    secondary: "#F57C00"                 # Orange - important
+    tertiary: "#9E9E9E"                  # Gray - supporting
+  
+  supported_charts:
+    - circular
+    - clustered
+    - virtue_profile
+    - balance_comparison
+  
+  chart_specific_config:
+    circular:
+      show_clusters: true
+      highlight_balance: true
+      tier_sizing: true
+
+# =============================================================================
+# ACADEMIC VALIDATION (required)
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Aristotle. Nicomachean Ethics. Book VI."
+    - "Putnam, R. D. (2000). Bowling Alone: The Collapse and Revival of American Community."
+    - "Sandel, M. (2012). What Money Can't Buy: The Moral Limits of Markets."
+    - "Tocqueville, A. de. Democracy in America."
+  
+  theoretical_approach: |
+    This framework draws on civic republican tradition and social capital theory 
+    to analyze how discourse either strengthens or weakens civic bonds and democratic 
+    participation. It examines the balance between civic virtues and vices in 
+    political communication through clustered moral positioning.
+  
+  academic_validation: |
+    Framework grounded in classical virtue ethics tradition, supported by contemporary 
+    civic republican theory, and validated through democratic discourse research. 
+    Aligned with political communication ethics standards and social capital theory.
+
+validation:
+  academic_standard: "Civic republican theory and social capital research"
+  measurement_instrument: "Civic virtue orientation assessment"
+  scope_limitation: "English-language political discourse, Western democratic contexts"
+  
+  citation_format: "Discernus Framework: Civic Virtue v1.0 (Aristotle/Sandel, 2025)"
+  academic_attribution: |
+    When using this framework in academic work, cite as:
+    "Discernus Framework: Civic Virtue v1.0 (Aristotle/Sandel, 2025)"
+    
+    Include framework version for reproducibility and provenance tracking.
+
+# =============================================================================
+# SYSTEM COMPATIBILITY (optional)
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - civic_engagement_v3.0
+    - citizenship_analysis_v2.1
+    - clustered_anchors_v1.0
+  
+  weighting_schemes:
+    - clustered_center_of_mass
+    - hierarchical_weighting
+    - virtue_vice_balance
+  
+  api_versions:
+    - v3.1
+    - v3.0
+  
+  visualization_types:
+    - circular
+    - clustered
+    - virtue_profile
+
+# =============================================================================
+# FRAMEWORK VERSIONING (required)
+# =============================================================================
+
+last_modified: "2025-06-23T17:00:00.000000"
+framework_registry_key: "civic_virtue__v1.0"
+implementation_status: "Production ready with Framework Specification v3.1 compliance and complete 10-anchor restoration" 
