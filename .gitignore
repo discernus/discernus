@@ -90,3 +90,7 @@ tmp/
 # Debug files
 frontend-debug*.png
 analysis_results/
+
+# New additions
+/venv-py313
+/reports/
