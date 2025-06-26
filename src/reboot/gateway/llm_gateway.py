@@ -1,5 +1,6 @@
 from src.reboot.gateway.reboot_litellm_client import LiteLLMClient
 from dotenv import load_dotenv
+from typing import Dict, Any
 
 # Load environment variables from .env file
 load_dotenv()
@@ -8,7 +9,7 @@ load_dotenv()
 # This is more efficient than creating a new client for every request.
 llm_client = LiteLLMClient()
 
-async def get_llm_analysis(text: str, framework: str, model: str) -> dict:
+async def get_llm_analysis(text: str, experiment_def: Dict[str, Any], model: str) -> dict:
     """
     A simple wrapper to call the existing LiteLLMClient.
     
@@ -18,7 +19,7 @@ async def get_llm_analysis(text: str, framework: str, model: str) -> dict:
     # For now, we are not handling the 'cost' return value, but we can add it later.
     analysis_result, _ = llm_client.analyze_text(
         text=text,
-        framework=framework,
+        experiment_def=experiment_def,
         model_name=model
     )
     return analysis_result 

@@ -37,6 +37,9 @@ except ImportError:
     COST_MANAGER_AVAILABLE = False
     TPM_RATE_LIMITER_AVAILABLE = False
 
+from ..engine.prompt_engine import create_prompt_from_experiment
+from ..engine.signature_engine import FrameworkLoader as ExperimentLoader # Rename for clarity
+
 class LiteLLMClient:
     """
     Unified LLM client using LiteLLM for cloud APIs + local Ollama models
@@ -189,32 +192,16 @@ class LiteLLMClient:
         
         return results
     
-    def analyze_text(self, text: str, framework: str, model_name: str) -> Tuple[Dict[str, Any], float]:
+    def analyze_text(self, text: str, experiment_def: Dict[str, Any], model_name: str) -> Tuple[Dict[str, Any], float]:
         """
-        Analyze text using specified model and framework
-        ENHANCED: No custom rate limiting delays - uses LiteLLM native for speed
-        
-        Args:
-            text: Text to analyze
-            framework: Framework to use (e.g., 'moral_foundations_theory')
-            model_name: Model name (cloud: 'gpt-4o', local: 'ollama/llama3.2')
-        
-        Returns:
-            Tuple[analysis_result, cost]
+        Analyze text using an experiment definition file.
         """
         # Store context for quality assurance (preserved from DirectAPIClient)
         self._current_text = text
-        self._current_framework = framework
+        self._current_framework = experiment_def.get("framework", {}).get("name", "unknown")
         
-        # Generate prompt using existing template manager (preserved architecture)
-        try:
-            from src.prompts.template_manager import PromptTemplateManager
-            template_manager = PromptTemplateManager()
-            prompt = template_manager.generate_api_prompt(text, framework, model_name)
-        except ImportError as e:
-            raise RuntimeError(f"PromptTemplateManager is required but could not be imported: {e}")
-        except Exception as e:
-            raise RuntimeError(f"Failed to generate proper analysis prompt: {e}")
+        # Generate prompt using the new PromptEngine
+        prompt = create_prompt_from_experiment(experiment_def, text)
         
         # TPM Rate Limiting (preserved from DirectAPIClient)
         if self.tpm_limiter:
