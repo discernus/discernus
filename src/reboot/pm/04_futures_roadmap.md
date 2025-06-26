@@ -7,6 +7,50 @@ This document outlines the planned evolution of the Discernus platform, guided b
 - **Introduce Complexity Only When Necessary:** Powerful technologies like `PostgreSQL` and `Celery` are part of the long-term vision, but they will only be implemented when the scale of the user's question demands them.
 - **Preserve the Core IP:** The unique geometric visualization and the academic rigor of the frameworks remain the project's core assets. All architectural choices are in service of making this IP more accessible and powerful.
 
+## Cross-Phase Architectural Decisions
+
+### Workflow Engine Integration Strategy
+**Decision Timeline**: The platform will transition from native async/await orchestration to battle-tested workflow engines based on complexity triggers, not arbitrary timelines.
+
+**Current State (Phase 1)**: 
+- Native FastAPI async/await handles simple experiments (20 min, 64-96 analyses)
+- Sequential processing prevents TPM limit violations
+- Database persistence provides basic checkpointing
+
+**Integration Triggers** (likely Phase 3-4):
+- **Duration**: Experiments exceeding 1-2 hours consistently
+- **Complexity**: Multi-step experiments requiring sophisticated retry logic
+- **Concurrency**: Multiple simultaneous experiments with resource conflicts
+- **Scheduling**: Time-based or event-driven experiment execution needs
+
+**Candidate Technologies**:
+- **Prefect**: Research-friendly, Python-native, excellent observability
+- **Airflow**: Battle-tested for complex DAGs, extensive ecosystem
+- **Temporal**: Modern approach with strong consistency guarantees
+
+**Integration Strategy**: Build clean async/await foundation that can wrap existing experiment logic in workflow engine tasks without major refactoring. The current `execute_experiment()` functions become workflow tasks.
+
+### Conversational Interface Strategy
+**Vision**: "English as Code" - Natural language experiment design and execution that democratizes access to sophisticated research capabilities.
+
+**Current State**: 
+- Researchers manually construct YAML experiment definitions
+- API endpoints require technical knowledge of parameters
+- Complex statistical concepts require domain expertise to interpret
+
+**Evolution Path**:
+- **Phase 2-3**: Natural language experiment queries ("Compare OpenAI and Anthropic on political speeches")
+- **Phase 3-4**: Conversational analysis ("What if we excluded the extreme texts?", "Show me the correlation breakdown")
+- **Phase 4**: Full research assistant with memory, context, and iterative refinement
+
+**Technical Foundation**:
+- Experiment YAML as intermediate representation (researchers can still access)
+- LLM-powered query translation to structured experiment definitions
+- Conversational state management for iterative research workflows
+- Natural language result interpretation and recommendations
+
+**Risk Mitigation**: Maintain transparency - researchers can always inspect/modify the underlying experiment configuration generated from their natural language requests.
+
 ## Phase 2: Comparative, Temporal, and Longitudinal Analysis
 
 - **Driving Question:** *"I have the signature for Text A. Now, how does it compare to Text B, and how do signatures for a single author evolve over time?"*

@@ -230,8 +230,12 @@ class LiteLLMClient:
             # For local Ollama: simple delay is more efficient
             self._enforce_simple_rate_limit(provider, 0.1)  # Minimal delay for local
             print(f"🏠 Making local Ollama call with simple rate limiting to {model_name}")
+        elif provider == "anthropic":
+            # For Claude: More aggressive rate limiting due to overload issues
+            self._enforce_simple_rate_limit(provider, 3.0)  # 3 second delay between Claude calls
+            print(f"🐌 Making Claude API call with AGGRESSIVE rate limiting to {model_name}")
         else:
-            # For cloud APIs: use LiteLLM native for maximum speed
+            # For other cloud APIs: use LiteLLM native for maximum speed
             print(f"☁️ Making cloud API call with NATIVE rate limiting to {model_name}")
 
         # Use retry handler if available (preserved from DirectAPIClient)
@@ -258,6 +262,9 @@ class LiteLLMClient:
     def _litellm_call_with_retry(self, prompt: str, model_name: str) -> Tuple[Dict[str, Any], float]:
         """LiteLLM call with retry logic and NATIVE rate limiting"""
         provider = self._get_provider_from_model(model_name)
+        
+        # Track current model for parsing
+        self._last_model_used = model_name
 
         @self.retry_handler.with_retry(provider, model_name)
         def make_litellm_call():
@@ -284,6 +291,9 @@ class LiteLLMClient:
 
     def _litellm_call_basic(self, prompt: str, model_name: str) -> Tuple[Dict[str, Any], float]:
         """Basic LiteLLM call with NATIVE rate limiting (much faster!)"""
+        # Track current model for parsing
+        self._last_model_used = model_name
+        
         try:
             response = completion(
                 model=model_name,
@@ -324,48 +334,55 @@ class LiteLLMClient:
 
     def _parse_response(self, content: str, text_input: str = None, framework: str = None) -> Dict[str, Any]:
         """
-        Parse LLM response with integrated quality assurance validation
-        PRESERVED from DirectAPIClient for full compatibility
+        Parse LLM response using robust multi-strategy parsing
+        ENHANCED: Uses RobustResponseParser to handle Claude "Extra data" issues
         """
-        # Step 1: Parse the LLM response
-        raw_response = {}
-        parsed_scores = {}
-
+        from ..utils.robust_parser import parse_llm_response
+        
         try:
-            # Try to parse as JSON first
-            raw_response = json.loads(content)
-
-            # Check if it's a hierarchical response (3-stage format)
-            if self._is_hierarchical_response(raw_response):
-                # Convert hierarchical format to simple format
-                parsed_scores = self._extract_hierarchical_scores(raw_response)
-                # Create a simplified response in the expected format
-                simplified_response = {
-                    "scores": parsed_scores,
-                    "analysis": raw_response.get("analysis", "Hierarchical analysis completed"),
-                    "hierarchical_details": raw_response,  # Keep original for debugging
-                }
-                raw_response = simplified_response
-            else:
-                # Handle simple format
-                parsed_scores = raw_response.get("scores", {})
-
-        except json.JSONDecodeError:
-            # Fallback: extract scores from text format
-            parsed_scores = self._extract_narrative_scores(content)
-            raw_response = {"scores": parsed_scores, "analysis": "Text format response parsed", "raw_text": content}
-
-        # The old QA system has been removed from this client.
-        # We now return the parsed scores and raw response directly.
-        result = {"scores": parsed_scores, "raw_response": content, "parsed": True}
-
-        # Add any additional analysis info from the original response
-        if isinstance(raw_response, dict):
-            for key, value in raw_response.items():
-                if key not in result:
+            # Use the new robust parser with model name for debugging
+            model_name = getattr(self, '_last_model_used', 'unknown')
+            parsed_result = parse_llm_response(content, model_name)
+            
+            # Extract scores - handle both direct scores and nested format
+            parsed_scores = parsed_result.get("scores", {})
+            
+            # Handle nested score format like {"Care": {"score": 0.8, "evidence": "..."}}
+            normalized_scores = {}
+            for key, value in parsed_scores.items():
+                if isinstance(value, dict) and "score" in value:
+                    normalized_scores[key] = value["score"]
+                elif isinstance(value, (int, float)):
+                    normalized_scores[key] = value
+                else:
+                    # Skip non-numeric scores
+                    continue
+            
+            # Check if it's a hierarchical response (3-stage format) for backward compatibility
+            if self._is_hierarchical_response(parsed_result):
+                hierarchical_scores = self._extract_hierarchical_scores(parsed_result)
+                if hierarchical_scores:
+                    normalized_scores.update(hierarchical_scores)
+            
+            # Build final result
+            result = {
+                "scores": normalized_scores,
+                "raw_response": content,
+                "parsed": True,
+                "parsing_method": parsed_result.get("parsing_method", "robust_parser")
+            }
+            
+            # Add any additional analysis info from the parsed result
+            for key, value in parsed_result.items():
+                if key not in result and key != "scores":
                     result[key] = value
-
-        return result
+            
+            return result
+            
+        except Exception as e:
+            # Final fallback to old parsing method
+            print(f"⚠️ Robust parser failed for model {getattr(self, '_last_model_used', 'unknown')}: {e}")
+            return self._parse_response_fallback(content, text_input, framework)
 
     def _is_hierarchical_response(self, response: Dict[str, Any]) -> bool:
         """Check if response is in hierarchical 3-stage format (preserved from DirectAPIClient)"""
@@ -430,6 +447,37 @@ class LiteLLMClient:
                 continue
 
         return scores
+    
+    def _parse_response_fallback(self, content: str, text_input: str = None, framework: str = None) -> Dict[str, Any]:
+        """
+        Fallback parsing method using original logic
+        Used when robust parser fails
+        """
+        raw_response = {}
+        parsed_scores = {}
+
+        try:
+            # Try to parse as JSON first
+            raw_response = json.loads(content)
+
+            # Check if it's a hierarchical response (3-stage format)
+            if self._is_hierarchical_response(raw_response):
+                # Convert hierarchical format to simple format
+                parsed_scores = self._extract_hierarchical_scores(raw_response)
+            else:
+                # Handle simple format
+                parsed_scores = raw_response.get("scores", {})
+
+        except json.JSONDecodeError:
+            # Fallback: extract scores from text format
+            parsed_scores = self._extract_narrative_scores(content)
+
+        return {
+            "scores": parsed_scores, 
+            "raw_response": content, 
+            "parsed": True,
+            "parsing_method": "fallback"
+        }
 
     def get_available_models(self) -> Dict[str, list]:
         """

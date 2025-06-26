@@ -101,7 +101,7 @@ def calculate_coordinates(
             total_weight += force
 
     if total_weight > 0:
-        return weighted_x / total_weight, weighted_y / total_weight
+        return float(weighted_x / total_weight), float(weighted_y / total_weight)
 
     return 0.0, 0.0
 

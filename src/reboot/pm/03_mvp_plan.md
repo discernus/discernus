@@ -1,10 +1,10 @@
 # 03: System Architecture & Capabilities
 
-This document details the components and workflow of the Discernus Reboot platform, which currently answers **Researcher Questions #1, #2, #3, and #4**.
+This document details the components and workflow of the Discernus Reboot platform, which currently answers **Researcher Questions #1, #2, #3, #4, and #5**.
 
 ## Goal
 
-> *"What is the moral signature of a text? How do two texts compare? How do groups of texts compare? And what is the geometric distance between them?"*
+> *"What is the moral signature of a text? How do two texts compare? How do groups of texts compare? What is the geometric distance between them? And do different LLMs produce statistically similar results?"*
 
 ## Architecture
 
@@ -20,6 +20,7 @@ graph TD
         B -- "/analyze" --> S1[Single Analysis];
         B -- "/compare" --> S2[Two-Text Comparison];
         B -- "/compare-groups-direct" --> S3[Direct Group Comparison];
+        B -- "/compare-statistical" --> S4[Statistical Comparison];
         B -- "/analyze-corpus" --> T[Celery Task Dispatch];
     end
 
@@ -31,13 +32,14 @@ graph TD
     end
 
     subgraph "Shared Services"
-        S1 & S2 & S3 --> E[Experiment Loader];
+        S1 & S2 & S3 & S4 --> E[Experiment Loader];
         E --> F[(reboot_mft_experiment.yaml)];
-        S1 & S2 & S3 --> LG[LLM Gateway];
+        S1 & S2 & S3 & S4 --> LG[LLM Gateway];
         LG --> D{LiteLLM};
-        S1 & S2 & S3 --> SE[Signature Engine];
+        S1 & S2 & S3 & S4 --> SE[Signature Engine];
         S1 & S2 & S3 --> RB[Report Builder];
-        S1 & S2 & S3 --> DBS[Database Session];
+        S4 --> SM[Statistical Methods Registry];
+        S1 & S2 & S3 & S4 --> DBS[Database Session];
         DBS --> DB;
     end
     
@@ -55,6 +57,7 @@ graph TD
         - `/analyze`: For a single text.
         - `/compare`: For direct two-text comparison.
         - `/compare-groups-direct`: For high-performance, parallel comparison of two text groups.
+        - `/compare-statistical`: For multi-model statistical comparisons with pluggable analysis methods.
         - `/analyze-corpus`: For asynchronous batch processing of a list of text files.
         - `/results/{job_id}`: To retrieve batch results.
         - `/compare-groups`: To compare the results of two completed batch jobs.
@@ -85,19 +88,25 @@ graph TD
     - The reports for group comparisons now visualize the individual texts as well as the group centroids.
 
 7.  **Persistence Layer (`database/`):**
-    - **Models (`models.py`):** SQLAlchemy ORM models for `AnalysisJob` and `AnalysisResult` tables.
+    - **Models (`models.py`):** SQLAlchemy ORM models for both V1 (`AnalysisJob`, `AnalysisResult`) and V2 (`AnalysisJobV2`, `AnalysisResultV2`, `StatisticalComparison`) tables.
     - **Session (`session.py`):** Database session management with dependency injection for FastAPI.
     - **Migration (`alembic/`):** Dedicated Alembic environment for schema management, isolated from legacy systems.
-    - **Storage:** All asynchronous job data is now persisted in PostgreSQL, eliminating temporary file dependencies.
+    - **Storage:** All analysis data and statistical comparisons are persisted in PostgreSQL with proper relational integrity.
 
 8.  **Background Processing (`tasks.py`):**
     - Celery workers that process analysis tasks asynchronously.
     - Results are saved directly to the `AnalysisResult` table with proper error handling.
     - Job status tracking through the `AnalysisJob` model.
 
+9.  **Statistical Methods Registry (`analysis/statistical_methods.py`):**
+    - Pluggable architecture for statistical analysis methods.
+    - Built-in analyzers: `GeometricSimilarityAnalyzer` (Euclidean distances) and `DimensionalCorrelationAnalyzer` (Pearson correlations).
+    - Extensible framework for adding new statistical comparison methods.
+    - Handles edge cases like insufficient data and zero-variance scenarios.
+
 ## Outcome
 
-The result is a lean but robust system that correctly analyzes and compares texts and groups of texts, providing both data responses (centroids, distances) and rich visual artifacts (the reports). The system fully answers the first four researcher questions and is built on a scalable, production-ready foundation with persistent data storage.
+The result is a comprehensive system that analyzes and compares texts, groups of texts, and statistical distributions across different models. It provides data responses (centroids, distances, statistical metrics), rich visual artifacts (reports), and sophisticated statistical analysis capabilities. The system fully answers the first five researcher questions and is built on a scalable, production-ready foundation with advanced database persistence and pluggable statistical methods.
 
 ## Foundational Improvements
 
@@ -158,6 +167,41 @@ A comprehensive testing harness and CI/CD pipeline has been implemented to ensur
 
 This robust testing and CI infrastructure provides immediate feedback on code changes, prevents regressions, and maintains high code quality standards.
 
-### Next Up: Multi-LLM Comparison
+### ✅ Completed: Statistical Comparison Infrastructure
 
-With a solid foundation of persistence, testing, and CI in place, the next major feature development will focus on answering **Research Question #5**: "How do different LLMs compare when analyzing the same texts?" 
+**Status:** Successfully implemented and deployed.
+
+A comprehensive statistical comparison system has been built to answer Research Question #5:
+
+#### Database Schema (V2)
+
+- **Advanced Models:** `AnalysisJobV2`, `AnalysisResultV2`, and `StatisticalComparison` tables with proper foreign key relationships.
+- **Migration Applied:** New schema created using Alembic migration `58bd99eb37cd_add_statistical_comparison_tables.py`.
+- **Enhanced Tracking:** Job configuration storage, detailed analysis metadata, and statistical comparison results persistence.
+
+#### Statistical Methods Framework
+
+- **Pluggable Architecture:** `StatisticalMethodRegistry` allows easy addition of new statistical analysis methods.
+- **Built-in Analyzers:**
+  - `GeometricSimilarityAnalyzer`: Calculates Euclidean distances between centroids with mean, max, and variance metrics.
+  - `DimensionalCorrelationAnalyzer`: Computes Pearson correlations between score dimensions with correlation matrices.
+- **Robust Implementation:** Handles edge cases like insufficient data, zero variance, and NaN scenarios.
+- **Test Coverage:** 11 comprehensive tests ensuring statistical accuracy and error handling.
+
+#### API Enhancement
+
+- **Generic Endpoint:** `/compare-statistical` supports multi-model, multi-framework, and multi-run comparisons.
+- **Concurrent Processing:** Uses `asyncio.gather()` for parallel LLM analysis across multiple models.
+- **Database Integration:** Proper job tracking with status updates and comprehensive result persistence.
+- **Statistical Output:** Returns both individual condition results and aggregated statistical metrics.
+
+#### Technical Achievements
+
+- **Production Ready:** Full integration testing with real database operations.
+- **Extensible Design:** Easy to add new statistical methods and comparison types.
+- **Data Integrity:** Proper foreign key constraints and transactional database operations.
+- **Performance Optimized:** Concurrent analysis execution and efficient database queries.
+
+### Next Up: Extended Statistical Analysis
+
+With the statistical comparison infrastructure complete, the next development phase will focus on expanding analytical capabilities to support local models, multi-run consistency analysis, and framework-to-framework comparisons. We will also work to make sure that experiment definitions include all the information necessary to run experiments - no complex curl commands at the command line.

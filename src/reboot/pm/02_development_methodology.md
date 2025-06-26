@@ -4,13 +4,15 @@ This document outlines the core development methodology for the Discernus Reboot
 
 ## The Core Principle: Answer the Next Question
 
-All development work is anchored around a sequence of "researcher questions." Each question represents a distinct, valuable capability that a researcher would want from the Discernus platform.
+All development work is anchored around a sequence of "researcher questions." Each question represents a distinct, valuable capability that a researcher would want from the Discernus platform. As we do build solutions to answer the questions, we always take a step back to make sure that what we build and configure consitutes scalable platform infrastructure that can help answer all future similar questions, not just temporary scripting to get an answer to a narrowly scoped question as fast as possible.
 
 This approach provides several key benefits:
 - **Clarity of Purpose:** Every development cycle has a clear, non-technical goal.
 - **Natural Scoping:** The work required to answer the current question defines the scope of the next release.
 - **User-Centricity:** It forces us to think from the researcher's perspective at all times.
 - **Incremental Value:** The platform becomes more useful with each question we answer.
+
+As we build out the platform to answering plausible user questions, we will inevitably encounter concerns about project hygiene, development velocity, scalability, security, and documentation. We look for opportunities to address these problems at the right time, but we are careful not to jump too far ahead of present concerns. This requires careful consideration and planning, but that's what we're paid to do, so we strive to do it well.
 
 ## The Development Sequence
 
@@ -49,16 +51,30 @@ Our development is prioritized along the following sequence of questions:
     - The `/compare` endpoint response and report now include the distance between the two text centroids.
     - The `/compare-groups` and `/compare-groups-direct` endpoints and reports now include the distance between the two group centroids.
 
-## Next Up: Multi-LLM Comparison
+### Question #5: Statistical Comparison Infrastructure (Complete)
 > *"Do different flagship cloud LLMs produce statistically similar results for a substantive text?"*
+
+- **Status:** Complete.
+- **Capabilities:**
+    - ✅ **Multi-Model Analysis Pipeline**: Generic `/compare-statistical` endpoint handles multi-model, multi-framework, and multi-run comparisons.
+    - ✅ **Advanced Statistical Methods**: Pluggable statistical method registry with geometric similarity and dimensional correlation analyzers.
+    - ✅ **Production Database Schema**: Advanced V2 database schema with `AnalysisJobV2`, `AnalysisResultV2`, and `StatisticalComparison` tables.
+    - ✅ **Concurrent Execution**: Parallel LLM analysis execution with comprehensive database persistence.
+    - ✅ **Statistical Metrics**: Real-time calculation of mean distances, correlation matrices, and significance tests.
+    - ✅ **Validated Results**: Successfully demonstrated with gpt-4o-mini vs gpt-3.5-turbo showing 0.0546 distance and 0.94 correlation.
+    - 🔧 **Visual Reports**: Report generation infrastructure added, minor template rendering issue under investigation.
+
+## Next Up: Extended Statistical Comparisons
+> *"Do local models produce statistically similar results to flagship cloud LLMs?"*
+> *"Do LLMs produce consistent results across multiple runs of the same experiment?"*
 
 - **Status:** Next in the development queue.
 - **Required Evolution:**
-    - A new endpoint, likely `/compare-models`, that accepts a single text and a list of models to compare.
-    - A new report type that visualizes the signatures from multiple models on a single chart.
-    - A mechanism to calculate and display statistical similarity (e.g., variance in centroid positions).
+    - Extension of the statistical comparison framework to support local model integration.
+    - Multi-run consistency analysis with temporal statistical methods.
+    - Framework-to-framework comparison capabilities.
 
 ## Question Backlog
-- Do local models produce statistically similar results to flagship cloud LLMs?
-- Do LLMs produce statistically significant runs across multipe runs of the same experiment?
-- Ceteris parabis, what's the difference between the way framework A based experiment 1 and framework B based experiment 2 analyzes text A?
+- Ceteris paribus, what's the difference between the way framework A based experiment 1 and framework B based experiment 2 analyzes text A?
+- How do different prompt templates affect the statistical consistency of results within the same framework?
+- What is the optimal sample size for detecting statistically significant differences between model behaviors?

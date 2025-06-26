@@ -66,10 +66,9 @@ class RebootPlotlyCircularVisualizer:
         fig.add_hline(y=0, line_dash="dot", line_color=self.style["grid_color"], opacity=0.7)
         fig.add_vline(x=0, line_dash="dot", line_color=self.style["grid_color"], opacity=0.7)
 
-        # Base layout with locked aspect ratio
+        # Base layout with locked aspect ratio and responsive sizing
         fig.update_layout(
-            width=self.figure_size,
-            height=self.figure_size,
+            # Remove hardcoded width/height for responsive design
             title=dict(
                 text=title or "Discernus Coordinate System",
                 font=dict(size=self.style["title_size"], family=self.style["font_family"]),
@@ -87,6 +86,9 @@ class RebootPlotlyCircularVisualizer:
             plot_bgcolor="white",
             paper_bgcolor="white",
             showlegend=False,
+            # Add responsive configuration
+            autosize=True,
+            margin=dict(l=20, r=20, t=60, b=20),
         )
 
         return fig
@@ -364,9 +366,10 @@ class RebootPlotlyCircularVisualizer:
 
         fig.update_layout(
             title=dict(text=title or "Comparative Analysis"),
-            height=self.figure_size,
-            width=self.figure_size * 2,
+            # Remove hardcoded dimensions for responsive design
             showlegend=False,
+            autosize=True,
+            margin=dict(l=20, r=20, t=60, b=20),
         )
 
         fig.update_xaxes(scaleanchor="y", scaleratio=1, range=[-1.2, 1.2])
