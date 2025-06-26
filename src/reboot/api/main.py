@@ -4,11 +4,15 @@ from pydantic import BaseModel
 import json
 import uuid
 import yaml # For loading the experiment file
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, List
+from celery.result import AsyncResult
+import os
+from pathlib import Path
 
 from src.reboot.gateway.llm_gateway import get_llm_analysis
 from src.reboot.engine.signature_engine import calculate_coordinates, _extract_anchors_from_framework
 from src.reboot.reporting.report_builder import ReportBuilder
+from src.reboot.tasks import analyze_text_task
 
 class AnalysisRequest(BaseModel):
     text: str
@@ -35,6 +39,19 @@ class ComparisonResponse(BaseModel):
     text_a_centroid: Tuple[float, float]
     text_b_centroid: Tuple[float, float]
 
+class CorpusAnalysisRequest(BaseModel):
+    file_paths: List[str]
+    experiment_file_path: str = "src/reboot/experiments/reboot_mft_experiment.yaml"
+    model: str = "gpt-4o"
+
+class JobResponse(BaseModel):
+    job_id: str
+
+class ResultResponse(BaseModel):
+    job_id: str
+    status: str
+    results: Any | None = None
+
 app = FastAPI()
 
 # Mount a directory to serve the static report files
@@ -42,6 +59,8 @@ app.mount("/reports", StaticFiles(directory="reports"), name="reports")
 
 # No longer need a global framework loader, it will be loaded per request.
 report_builder = ReportBuilder(output_dir="reports/reboot_mvp") # Keep reports organized
+TEMP_RESULTS_DIR = Path("temp_results")
+TEMP_RESULTS_DIR.mkdir(exist_ok=True)
 
 async def _run_single_analysis(text: str, model: str, experiment_def: Dict[str, Any]) -> Dict[str, Any]:
     """Helper function to run the full analysis pipeline for a single text."""
@@ -151,6 +170,48 @@ async def compare_texts(request: ComparisonRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/analyze-corpus", response_model=JobResponse)
+async def analyze_corpus(request: CorpusAnalysisRequest):
+    """
+    Submits a batch of texts for analysis.
+    """
+    job_id = str(uuid.uuid4())
+    job_dir = TEMP_RESULTS_DIR / job_id
+    job_dir.mkdir()
+
+    try:
+        with open(request.experiment_file_path, 'r') as f:
+            experiment_def = yaml.safe_load(f)
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=f"Could not load experiment file: {e}")
+
+    for file_path in request.file_paths:
+        try:
+            with open(file_path, 'r') as f:
+                text = f.read()
+            # Dispatch a task for each file
+            analyze_text_task.delay(text, experiment_def, request.model)
+        except Exception as e:
+            # Log this error but continue
+            print(f"Failed to process file {file_path}: {e}")
+    
+    return JobResponse(job_id=job_id)
+
+@app.get("/results/{job_id}", response_model=ResultResponse)
+async def get_results(job_id: str):
+    """
+    Retrieves the status and results of a job.
+    NOTE: This is a temporary file-based implementation.
+    """
+    # This is a simplified example. A real implementation would need to
+    # aggregate results from multiple tasks. For now, let's assume
+    # we're just checking the status of one task.
+    # We will improve this when we add a proper database.
+    
+    # This part needs a proper implementation to check celery results.
+    # For now, we'll just return a placeholder.
+    return ResultResponse(job_id=job_id, status="PENDING", results="Result aggregation not yet implemented.")
 
 @app.get("/health")
 async def health_check():

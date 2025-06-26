@@ -41,3 +41,10 @@ Our development is prioritized along the following sequence of questions:
     - An asynchronous task queue (`Celery`) to process batches of texts without blocking the UI.
     - A full database (`PostgreSQL`) to store all results for aggregation.
     - The ability to calculate and visualize a `centroid` for a group of signatures. 
+
+
+
+##Question Backlog
+- What's the distance between the centroids of text A and text B?
+- What's the distance between the average centroid position of text group and text group B?
+- What the average variance of LLM A and LLM B
