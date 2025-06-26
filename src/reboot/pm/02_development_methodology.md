@@ -48,4 +48,4 @@ Our development is prioritized along the following sequence of questions:
 - What's the distance between the centroids of text A and text B?
 - What's the distance between the average centroid position of text group and text group B?
 - What the average variance of LLM A and LLM B for each axis and centroid for text A?
-- What's the difference between the way framework A based experiment 1 analyzes text A?
+- Ceteris parabis, what's the difference between the way framework A based experiment 1 and framework B based experiment 2 analyzes text A?

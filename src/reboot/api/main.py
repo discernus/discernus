@@ -52,6 +52,18 @@ class ResultResponse(BaseModel):
     status: str
     results: Any | None = None
 
+class GroupComparisonRequest(BaseModel):
+    job_id_a: str
+    label_a: str
+    job_id_b: str
+    label_b: str
+    experiment_file_path: str = "src/reboot/experiments/reboot_mft_experiment.yaml"
+
+class GroupComparisonResponse(BaseModel):
+    report_url: str
+    group_a_centroid: Tuple[float, float]
+    group_b_centroid: Tuple[float, float]
+
 app = FastAPI()
 
 # Mount a directory to serve the static report files
@@ -231,6 +243,51 @@ async def get_results(job_id: str):
         status = "PENDING"
 
     return ResultResponse(job_id=job_id, status=status, results=results)
+
+@app.post("/compare-groups", response_model=GroupComparisonResponse)
+async def compare_groups(request: GroupComparisonRequest):
+    """
+    Retrieves results for two jobs, calculates the centroid for each group,
+    and generates a comparative report.
+    """
+    run_id = str(uuid.uuid4())
+    try:
+        # Step 1: Fetch results for both jobs
+        results_a = await get_results(request.job_id_a)
+        results_b = await get_results(request.job_id_b)
+        
+        # Step 2: Load experiment definition to get anchors
+        with open(request.experiment_file_path, 'r') as f:
+            experiment_def = yaml.safe_load(f)
+        anchors = _extract_anchors_from_framework(experiment_def)
+
+        # Step 3: Generate the group comparison report
+        report_path = report_builder.generate_group_comparison_report(
+            anchors=anchors,
+            group_a_signatures=results_a.results,
+            label_a=request.label_a,
+            group_b_signatures=results_b.results,
+            label_b=request.label_b,
+            run_id=run_id
+        )
+        
+        # Calculate centroids to return in the response
+        def _calculate_centroid(signatures):
+            if not signatures: return (0.0, 0.0)
+            coords = [s['centroid'] for s in signatures if 'centroid' in s]
+            if not coords: return (0.0, 0.0)
+            return sum(c[0] for c in coords)/len(coords), sum(c[1] for c in coords)/len(coords)
+
+        centroid_a = _calculate_centroid(results_a.results)
+        centroid_b = _calculate_centroid(results_b.results)
+
+        return GroupComparisonResponse(
+            report_url=f"/{report_path}",
+            group_a_centroid=centroid_a,
+            group_b_centroid=centroid_b,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/health")
 async def health_check():

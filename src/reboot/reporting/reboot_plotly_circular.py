@@ -195,6 +195,48 @@ class RebootPlotlyCircularVisualizer:
             
         return fig
 
+    def plot_group_comparison(self, anchors: Dict, 
+                              centroid_a: Tuple[float, float], label_a: str,
+                              centroid_b: Tuple[float, float], label_b: str,
+                              title: Optional[str] = None,
+                              output_html: Optional[str] = None, show: bool = True) -> go.Figure:
+        """Creates a plot comparing the centroids of two groups."""
+        fig = self.plot(anchors=anchors, show=False) # Get the base plot with anchors
+
+        # Plot Centroid A
+        fig.add_trace(go.Scatter(
+            x=[centroid_a[0]], y=[centroid_a[1]],
+            mode='markers+text',
+            marker=dict(size=self.style['centroid_marker_size'], color='blue', line=dict(width=3, color='darkblue')),
+            text=[label_a],
+            textposition='top center',
+            name=label_a
+        ))
+
+        # Plot Centroid B
+        fig.add_trace(go.Scatter(
+            x=[centroid_b[0]], y=[centroid_b[1]],
+            mode='markers+text',
+            marker=dict(size=self.style['centroid_marker_size'], color='red', line=dict(width=3, color='darkred')),
+            text=[label_b],
+            textposition='bottom center',
+            name=label_b
+        ))
+
+        fig.update_layout(
+            title=dict(text=title or "Group Centroid Comparison"),
+            showlegend=True
+        )
+        
+        if output_html:
+            Path(output_html).parent.mkdir(parents=True, exist_ok=True)
+            fig.write_html(output_html)
+        
+        if show:
+            fig.show()
+            
+        return fig
+
     def plot_comparison(self, anchors: Dict, 
                         analysis_a: Dict, label_a: str,
                         analysis_b: Dict, label_b: str,

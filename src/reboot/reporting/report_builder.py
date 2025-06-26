@@ -83,4 +83,33 @@ class ReportBuilder:
             output_html=str(output_filename),
             show=False
         )
+        return str(output_filename)
+
+    def generate_group_comparison_report(self, anchors: Dict, 
+                                         group_a_signatures: List[Dict], label_a: str,
+                                         group_b_signatures: List[Dict], label_b: str,
+                                         run_id: str) -> str:
+        """Generates a report comparing the centroids of two groups."""
+        
+        def _calculate_group_centroid(signatures: List[Dict]) -> Tuple[float, float]:
+            if not signatures: return (0.0, 0.0)
+            all_coords = [s['centroid'] for s in signatures if 'centroid' in s]
+            if not all_coords: return (0.0, 0.0)
+            avg_x = sum(c[0] for c in all_coords) / len(all_coords)
+            avg_y = sum(c[1] for c in all_coords) / len(all_coords)
+            return (avg_x, avg_y)
+
+        centroid_a = _calculate_group_centroid(group_a_signatures)
+        centroid_b = _calculate_group_centroid(group_b_signatures)
+
+        output_filename = self.output_dir / f"group_comparison_{run_id}.html"
+
+        self.visualizer.plot_group_comparison(
+            anchors=anchors,
+            centroid_a=centroid_a, label_a=label_a,
+            centroid_b=centroid_b, label_b=label_b,
+            title=f"Group Comparison: {label_a} vs. {label_b}",
+            output_html=str(output_filename),
+            show=False
+        )
         return str(output_filename) 
