@@ -2,6 +2,8 @@ from celery import Celery
 import yaml
 import json
 from typing import Dict, Any
+from pathlib import Path
+import os
 
 from src.reboot.gateway.llm_gateway import get_llm_analysis
 from src.reboot.engine.signature_engine import calculate_coordinates, _extract_anchors_from_framework
@@ -17,11 +19,14 @@ celery_app = Celery(
     backend=CELERY_RESULT_BACKEND
 )
 
+# Temporary directory for storing task results
+TEMP_RESULTS_DIR = Path("temp_results")
+TEMP_RESULTS_DIR.mkdir(exist_ok=True)
+
 @celery_app.task(name='reboot.analyze_text_task')
-def analyze_text_task(text: str, experiment_def: Dict[str, Any], model: str) -> Dict[str, Any]:
+def analyze_text_task(text: str, experiment_def: Dict[str, Any], model: str, job_id: str, result_filename: str) -> bool:
     """
-    Celery task to run the full analysis pipeline for a single text.
-    This encapsulates the logic previously in the API helper.
+    Celery task to run the full analysis pipeline for a single text and save the result to a file.
     """
     # This task is synchronous internally, but runs asynchronously as a Celery worker.
     # The 'async' keyword is not used here, but we need to handle the async call
@@ -59,4 +64,20 @@ def analyze_text_task(text: str, experiment_def: Dict[str, Any], model: str) -> 
         
         return {"scores": scores, "centroid": (x, y)}
 
-    return asyncio.run(run_analysis()) 
+    # Run the analysis
+    result_data = asyncio.run(run_analysis())
+
+    # Save the result to a file in the job-specific directory
+    try:
+        job_dir = TEMP_RESULTS_DIR / job_id
+        job_dir.mkdir(exist_ok=True) # Ensure directory exists
+        result_file_path = job_dir / result_filename
+        
+        with open(result_file_path, 'w') as f:
+            json.dump(result_data, f)
+        
+        return True
+    except Exception as e:
+        # In a real system, we would have more robust error logging here.
+        print(f"Failed to save result for job {job_id}: {e}")
+        return False 

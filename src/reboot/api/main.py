@@ -186,12 +186,22 @@ async def analyze_corpus(request: CorpusAnalysisRequest):
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"Could not load experiment file: {e}")
 
-    for file_path in request.file_paths:
+    for i, file_path in enumerate(request.file_paths):
         try:
             with open(file_path, 'r') as f:
                 text = f.read()
-            # Dispatch a task for each file
-            analyze_text_task.delay(text, experiment_def, request.model)
+            
+            # Create a unique filename for the result
+            result_filename = f"result_{i}_{Path(file_path).stem}.json"
+            
+            # Dispatch a task for each file, including job_id and filename
+            analyze_text_task.delay(
+                text=text,
+                experiment_def=experiment_def,
+                model=request.model,
+                job_id=job_id,
+                result_filename=result_filename
+            )
         except Exception as e:
             # Log this error but continue
             print(f"Failed to process file {file_path}: {e}")
@@ -201,17 +211,26 @@ async def analyze_corpus(request: CorpusAnalysisRequest):
 @app.get("/results/{job_id}", response_model=ResultResponse)
 async def get_results(job_id: str):
     """
-    Retrieves the status and results of a job.
-    NOTE: This is a temporary file-based implementation.
+    Retrieves the status and results of a job from the temporary file store.
     """
-    # This is a simplified example. A real implementation would need to
-    # aggregate results from multiple tasks. For now, let's assume
-    # we're just checking the status of one task.
-    # We will improve this when we add a proper database.
-    
-    # This part needs a proper implementation to check celery results.
-    # For now, we'll just return a placeholder.
-    return ResultResponse(job_id=job_id, status="PENDING", results="Result aggregation not yet implemented.")
+    job_dir = TEMP_RESULTS_DIR / job_id
+    if not job_dir.is_dir():
+        raise HTTPException(status_code=404, detail="Job ID not found.")
+
+    results = []
+    # Note: We don't know the total number of expected files here yet.
+    # This is a limitation of the simple file-based approach.
+    for result_file in job_dir.glob("*.json"):
+        with open(result_file, 'r') as f:
+            results.append(json.load(f))
+            
+    # A more robust system would know the total tasks dispatched.
+    # For now, we'll just return what we have.
+    status = "COMPLETE" # Placeholder status
+    if not results:
+        status = "PENDING"
+
+    return ResultResponse(job_id=job_id, status=status, results=results)
 
 @app.get("/health")
 async def health_check():
