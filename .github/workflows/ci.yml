@@ -1,147 +1,122 @@
-name: CI - Development Velocity with Python 3.13 Support
+name: Discernus Reboot CI
 
 # Trigger on pushes and pull requests to maintain development velocity
 on:
   push:
-    branches: [ main, develop, 'feature/*', 'fix/*', 'codex/*' ]
+    branches: [ main, refactor/discernus_rebuild ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, refactor/discernus_rebuild ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false  # Continue testing other Python versions if one fails
-      matrix:
-        python-version: ['3.11', '3.13']
-        include:
-          - python-version: '3.11'
-            label: 'stable'
-            required: true
-          - python-version: '3.13'
-            label: 'future'
-            required: false  # Allow 3.13 to fail without blocking PRs initially
     
+    strategy:
+      matrix:
+        python-version: [3.11, 3.12, 3.13]
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: discernus_reboot_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
     
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-        allow-prereleases: true  # Important for Python 3.13
     
-    - name: Cache dependencies
+    - name: Cache pip dependencies
       uses: actions/cache@v3
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-py${{ matrix.python-version }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-py${{ matrix.python-version }}-pip-
           ${{ runner.os }}-pip-
     
     - name: Install dependencies
       run: |
-        python3 -m pip install --upgrade pip
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r tests/test_requirements.txt
     
-    - name: Run unit tests
+    - name: Set up environment variables
       run: |
-        echo "🧪 Running unit tests on Python ${{ matrix.python-version }} (Phase 1 CI)..."
-        python3 -m pytest tests/unit/ -v --tb=short --maxfail=5
+        echo "REBOOT_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/discernus_reboot_test" >> $GITHUB_ENV
+        echo "REDIS_URL=redis://localhost:6379/0" >> $GITHUB_ENV
+        echo "SQL_DEBUG=false" >> $GITHUB_ENV
     
-    - name: Basic import validation
+    - name: Run database migrations
       run: |
-        echo "🔍 Validating core imports on Python ${{ matrix.python-version }}..."
-        python3 -c "
-        try:
-            import src.utils.cost_manager
-            import src.models.base
-            import src.coordinate_engine
-            print('✅ Core imports successful on Python ${{ matrix.python-version }}')
-        except ImportError as e:
-            print(f'❌ Import error on Python ${{ matrix.python-version }}: {e}')
-            exit(1)
-        "
-
-    - name: Python 3.13 specific tests
+        python3 scripts/run_reboot_migration.py
+    
+    - name: Run reboot tests
+      run: |
+        python -m pytest tests/reboot/ -v --tb=short --color=yes
+    
+    - name: Run reboot tests with coverage
       if: matrix.python-version == '3.13'
       run: |
-        echo "🚀 Running Python 3.13 specific validation..."
-        python3 -c "
-        import sys
-        print(f'✅ Python version: {sys.version}')
-        
-        # Test new 3.13 features compatibility
-        try:
-            # Test that our codebase works with 3.13's improved error messages
-            import src.analysis.statistics
-            print('✅ Framework Specification v3.1 compatible with Python 3.13')
-            
-            # Test scientific computing stack
-            import numpy as np
-            import pandas as pd
-            import scipy as sp
-            print(f'✅ Scientific stack: NumPy {np.__version__}, Pandas {pd.__version__}, SciPy {sp.__version__}')
-            
-            # Test LLM clients 
-            import openai
-            import anthropic
-            print('✅ LLM API clients compatible with Python 3.13')
-            
-        except Exception as e:
-            print(f'❌ Python 3.13 compatibility issue: {e}')
-            exit(1)
-        "
+        pip install coverage
+        coverage run -m pytest tests/reboot/
+        coverage report --include="src/reboot/*"
+        coverage xml --include="src/reboot/*"
     
-    - name: License compliance check
-      # Only run on Python 3.11 to avoid duplicate license checks
-      if: matrix.python-version == '3.11'
-      run: |
-        echo "📋 Checking license compliance..."
-        cd product_management/license_audit
-        echo "🔍 Installing pip-licenses for comprehensive scanning..."
-        pip install pip-licenses
-        echo "🎯 Running STRICT SaaS/Commercial license compliance check..."
-        if python3 compliance_checker.py --policy-file saas_commercial_policy.json; then
-          echo "✅ License compliance validated - Safe for SaaS/Commercial deployment"
-        else
-          echo "🚨 CRITICAL: License compliance FAILED"
-          echo "❌ Deployment BLOCKED due to license violations"
-          echo "🔧 Action required: Fix license issues before merging"
-          echo ""
-          echo "📋 License compliance report:"
-          python3 compliance_checker.py --policy-file saas_commercial_policy.json --output-format markdown || true
-          exit 1
-        fi
-        echo "💾 Generating license audit trail..."
-        python3 run_audit.py --output-dir ci_audit_$(date +%Y%m%d_%H%M%S) --policy-file saas_commercial_policy.json
+    - name: Upload coverage to Codecov
+      if: matrix.python-version == '3.13'
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: reboot
+        name: reboot-coverage
+        fail_ci_if_error: false
+
+  lint:
+    runs-on: ubuntu-latest
     
-    - name: Test configuration validation
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.13
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.13
+    
+    - name: Install linting dependencies
       run: |
-        echo "⚙️ Validating test configuration on Python ${{ matrix.python-version }}..."
-        python3 -c "
-        import os
-        import sys
-        
-        # Check test structure
-        test_dirs = ['tests/unit', 'tests/integration', 'tests/utilities']
-        for test_dir in test_dirs:
-            if not os.path.exists(test_dir):
-                print(f'❌ Missing test directory: {test_dir}')
-                sys.exit(1)
-        
-        # Check requirements files
-        req_files = ['requirements.txt', 'tests/test_requirements.txt']
-        for req_file in req_files:
-            if not os.path.exists(req_file):
-                print(f'❌ Missing requirements file: {req_file}')
-                sys.exit(1)
-        
-        print('✅ Test configuration validated')
-        "
+        python -m pip install --upgrade pip
+        pip install black flake8
+    
+    - name: Run Black formatter check
+      continue-on-error: true
+      run: |
+        black --check --diff src/reboot/ tests/reboot/
+    
+    - name: Run Flake8 linter
+      continue-on-error: true
+      run: |
+        flake8 src/reboot/ tests/reboot/ --max-line-length=120 --extend-ignore=E203,W503 --statistics
 
   # Quick integration smoke test (optional, can fail without blocking)
   integration-smoke-test:

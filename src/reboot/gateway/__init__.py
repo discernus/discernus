@@ -1,1 +1,1 @@
-# This file makes the 'gateway' directory a Python package. 
+# This file makes the 'gateway' directory a Python package.

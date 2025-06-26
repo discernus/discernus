@@ -94,3 +94,7 @@ analysis_results/
 # New additions
 /venv-py313
 /reports/
+
+# Test databases and temporary results
+test.db
+temp_results/

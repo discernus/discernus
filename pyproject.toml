@@ -1,0 +1,42 @@
+[tool.black]
+line-length = 120
+target-version = ['py311', 'py312', 'py313']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.nox
+  | \.tox
+  | \.venv
+  | venv
+  | venv-py313-testing
+  | _build
+  | buck-out
+  | build
+  | dist
+  | deprecated
+  | temp_results
+  | experiments
+)/
+'''
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+    "--color=yes"
+]
+markers = [
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "slow: marks tests as slow running"
+] 
