@@ -14,7 +14,7 @@ class ReportBuilder:
 
     def generate_report(
         self,
-        framework_def: Dict,
+        anchors: Dict,
         scores: Dict,
         coordinates: Tuple[float, float],
         run_id: str
@@ -22,22 +22,14 @@ class ReportBuilder:
         """
         Generates an HTML visualization and returns the file path.
         """
-        # Extract the anchors from the framework axes
-        anchors = {}
-        axes = framework_def.get("framework", {}).get("axes", {})
-        for axis in axes.values():
-            if 'integrative' in axis:
-                anchors[axis['integrative']['name']] = axis['integrative']
-            if 'disintegrative' in axis:
-                anchors[axis['disintegrative']['name']] = axis['disintegrative']
-
         output_filename = self.output_dir / f"analysis_report_{run_id}.html"
 
         self.visualizer.plot(
             anchors=anchors,
             signature_scores=scores,
+            centroid_coords=coordinates,
             output_html=str(output_filename),
-            show=False # We don't want to pop up a browser window on the server
+            show=False
         )
 
         return str(output_filename) 

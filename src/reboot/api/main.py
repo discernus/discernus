@@ -6,7 +6,7 @@ import uuid
 import yaml # For loading the experiment file
 
 from src.reboot.gateway.llm_gateway import get_llm_analysis
-from src.reboot.engine.signature_engine import calculate_coordinates
+from src.reboot.engine.signature_engine import calculate_coordinates, _extract_anchors_from_framework
 from src.reboot.reporting.report_builder import ReportBuilder
 
 class AnalysisRequest(BaseModel):
@@ -32,8 +32,8 @@ report_builder = ReportBuilder(output_dir="reports/reboot_mvp") # Keep reports o
 @app.post("/analyze", response_model=FinalResponse)
 async def analyze_text(request: AnalysisRequest):
     """
-    This endpoint receives a text and an experiment file path,
-    and returns the final geometric coordinates and a visual report.
+    This endpoint orchestrates a single-text analysis and returns the
+    centroid coordinates and a URL to a visual report.
     """
     run_id = str(uuid.uuid4())
     try:
@@ -54,7 +54,7 @@ async def analyze_text(request: AnalysisRequest):
         if llm_result.get("error"):
             raise HTTPException(status_code=500, detail=f"LLM Error: {llm_result.get('error')}")
 
-        # Step 3: Extract the scores from the LLM response
+        # Step 3: Parse the scores from the LLM response
         try:
             raw_response_str = llm_result.get("raw_response", "")
             if raw_response_str.startswith("```json"):
@@ -63,19 +63,19 @@ async def analyze_text(request: AnalysisRequest):
                 raw_response_str = raw_response_str[:-3]
             raw_response_str = raw_response_str.strip()
             raw_response_json = json.loads(raw_response_str)
-            # The scores are now the top-level keys in the JSON response
             scores = {k: v.get('score', 0.0) for k, v in raw_response_json.items() if isinstance(v, dict) and 'score' in v}
             if not scores:
                 raise ValueError("Could not extract scores from the parsed JSON.")
         except (json.JSONDecodeError, ValueError) as e:
             raise HTTPException(status_code=500, detail=f"Failed to parse scores from LLM response: {e}")
 
-        # Step 4: Calculate the coordinates using the Signature Engine
+        # Step 4: Calculate the centroid using the Signature Engine
         x, y = calculate_coordinates(experiment_def, scores)
         
         # Step 5: Generate the visual report
+        anchors = _extract_anchors_from_framework(experiment_def)
         report_path = report_builder.generate_report(
-            framework_def=experiment_def,
+            anchors=anchors,
             scores=scores,
             coordinates=(x, y),
             run_id=run_id
@@ -87,7 +87,7 @@ async def analyze_text(request: AnalysisRequest):
             y=y,
             framework_id=experiment_def.get("framework", {}).get("name"),
             model=request.model,
-            report_url=f"/{report_path}" # Return a URL path instead of a file path
+            report_url=f"/{report_path}"
         )
 
     except Exception as e:

@@ -109,6 +109,7 @@ class RebootPlotlyCircularVisualizer:
         return 0.0, 0.0
 
     def plot(self, anchors: Dict, signature_scores: Optional[Dict] = None,
+            centroid_coords: Optional[Tuple[float, float]] = None,
             centroid_label: Optional[str] = None, title: Optional[str] = None,
             output_html: Optional[str] = None, output_png: Optional[str] = None,
             show: bool = True) -> go.Figure:
@@ -118,6 +119,8 @@ class RebootPlotlyCircularVisualizer:
         Args:
             anchors: dict of {anchor_name: {'angle': deg, 'type': str, ...}}
             signature_scores: dict of {anchor_name: score} (the signature)
+            centroid_coords: Optional pre-calculated (x, y) tuple for the centroid.
+                             If provided, this will be used instead of recalculating.
             centroid_label: str (optional label for the centroid)
             title: str (optional)
             output_html: path to save interactive HTML (optional)
@@ -152,9 +155,12 @@ class RebootPlotlyCircularVisualizer:
             hovertemplate='<b>%{text}</b><extra></extra>'
         ))
         
-        # Plot centroid if a signature is provided
-        if signature_scores:
-            centroid_x, centroid_y = self.calculate_centroid(anchors, signature_scores)
+        # Plot centroid if a signature or pre-calculated coords are provided
+        if signature_scores or centroid_coords:
+            if centroid_coords:
+                centroid_x, centroid_y = centroid_coords
+            else:
+                centroid_x, centroid_y = self.calculate_centroid(anchors, signature_scores)
             
             fig.add_trace(go.Scatter(
                 x=[centroid_x], y=[centroid_y],

@@ -55,36 +55,38 @@ class FrameworkLoader:
         logger.error(f"No valid framework file found for '{framework_name}' in {framework_dir}")
         return None
 
+def _extract_anchors_from_framework(framework_def: Dict[str, Any]) -> Dict[str, Any]:
+    """Extracts a flat dictionary of all anchors from a framework definition."""
+    anchors = {}
+    axes = framework_def.get("framework", {}).get("axes", {})
+    for axis in axes.values():
+        if 'integrative' in axis:
+            anchors[axis['integrative']['name']] = axis['integrative']
+        if 'disintegrative' in axis:
+            anchors[axis['disintegrative']['name']] = axis['disintegrative']
+    return anchors
+
 def calculate_coordinates(
-    framework: Dict[str, Any], 
+    experiment_def: Dict[str, Any], 
     llm_scores: Dict[str, float], 
     circle_radius: float = 1.0
 ) -> Tuple[float, float]:
     """
-    Calculates the (x, y) coordinates for a set of LLM scores based on a framework.
-    This logic is extracted from the PlotlyCircularVisualizer.
+    Calculates the (x, y) centroid for a set of LLM scores based on a framework.
     """
-    wells = framework.get("wells", {})
-    if not wells:
-        # Handle new format where wells are derived from dipoles
-        dipoles = framework.get("dipoles", [])
-        for dipole in dipoles:
-            if 'positive' in dipole:
-                wells[dipole['positive']['name']] = dipole['positive']
-            if 'negative' in dipole:
-                wells[dipole['negative']['name']] = dipole['negative']
+    anchors = _extract_anchors_from_framework(experiment_def)
 
-    if not wells:
-        logger.error("Framework definition does not contain 'wells' or 'dipoles'.")
+    if not anchors:
+        logger.error("Could not extract any anchors from the framework definition.")
         return 0.0, 0.0
 
     weighted_x, weighted_y, total_weight = 0.0, 0.0, 0.0
     
-    for well_name, score in llm_scores.items():
-        if well_name in wells:
-            well_info = wells[well_name]
-            angle = well_info.get('angle', 0)
-            weight = abs(well_info.get('weight', 1.0))
+    for anchor_name, score in llm_scores.items():
+        if anchor_name in anchors:
+            anchor_info = anchors[anchor_name]
+            angle = anchor_info.get('angle', 0)
+            weight = abs(anchor_info.get('weight', 1.0))
             
             x_pos = circle_radius * np.cos(np.deg2rad(angle))
             y_pos = circle_radius * np.sin(np.deg2rad(angle))
