@@ -1,63 +1,128 @@
 # Discernus Reboot MVP - Moral Foundations Theory Experiment
-# Version: 1.0
+# Version: 1.1
 # This file is a self-contained experiment definition, compliant with the
-# new "cartographic" glossary. It merges framework, prompt, and experiment metadata.
+# new "cartographic" glossary. It merges a detailed framework definition and
+# rich prompt guidance to ensure high-quality, reproducible analysis.
 
 experiment_meta:
   name: "MFT_Reboot_MVP_Analysis"
   display_name: "Moral Foundations Theory (Reboot MVP)"
-  version: "1.0"
-  description: "A minimal, self-contained experiment for analyzing a single text using Moral Foundations Theory."
-  tags: ["mvp", "reboot", "mft"]
+  version: "1.1"
+  description: "A minimal, self-contained experiment for analyzing a single text using a detailed implementation of Moral Foundations Theory."
+  tags: ["mvp", "reboot", "mft", "prompt_precision"]
 
 # This section defines the 'map' for our analysis, containing the axes and anchors.
 # It is an Axis-Set Framework (ASFx).
 framework:
   name: moral_foundations_theory
-  version: "1.0-reboot"
+  version: "1.1-reboot"
+  description: |
+    Based on Haidt's Moral Foundations Theory, which identifies innate psychological foundations 
+    that cultures build upon to create diverse moral systems. This framework uses a detailed,
+    axes-based coordinate system for improved semantic clarity and analysis.
+
   axes:
     Care_Harm:
-      integrative: { name: "Care", angle: 90 }
-      disintegrative: { name: "Harm", angle: 270 }
+      description: "Concerns about caring for others and preventing harm."
+      integrative:
+        name: "Care"
+        angle: 90
+        description: "Concern for the suffering of others, compassion, and the protection of vulnerable individuals."
+        language_cues: ["compassion", "suffering", "protection", "kindness", "empathy"]
+      disintegrative:
+        name: "Harm"
+        angle: 270
+        description: "Actions that cause suffering, cruelty, violence, or neglect of those in need."
+        language_cues: ["harm", "cruelty", "violence", "pain", "abuse"]
+
     Fairness_Cheating:
-      integrative: { name: "Fairness", angle: 60 }
-      disintegrative: { name: "Cheating", angle: 240 }
+      description: "Concerns about fairness, justice, and proportionality."
+      integrative:
+        name: "Fairness"
+        angle: 60
+        description: "Concern for proportional treatment, justice, reciprocity, and equal opportunity."
+        language_cues: ["fairness", "justice", "equality", "reciprocity", "merit"]
+      disintegrative:
+        name: "Cheating"
+        angle: 240
+        description: "Violations of fairness, exploitation, free-riding, or gaining an undeserved advantage."
+        language_cues: ["cheating", "unfair", "exploitation", "rigged", "corrupt"]
+
     Loyalty_Betrayal:
-      integrative: { name: "Loyalty", angle: 120 }
-      disintegrative: { name: "Betrayal", angle: 300 }
+      description: "Concerns about loyalty to the in-group and betrayal of it."
+      integrative:
+        name: "Loyalty"
+        angle: 120
+        description: "Commitment to one's group, patriotism, and self-sacrifice for the collective good."
+        language_cues: ["loyalty", "patriotism", "solidarity", "team", "unity"]
+      disintegrative:
+        name: "Betrayal"
+        angle: 300
+        description: "Disloyalty to the group, treason, or putting self-interest above the collective."
+        language_cues: ["betrayal", "treason", "disloyal", "selfish", "selling out"]
+
     Authority_Subversion:
-      integrative: { name: "Authority", angle: 0 }
-      disintegrative: { name: "Subversion", angle: 180 }
+      description: "Concerns about social order, hierarchy, and respect for legitimate authority."
+      integrative:
+        name: "Authority"
+        angle: 0
+        description: "Respect for legitimate hierarchy, tradition, leadership, and social order."
+        language_cues: ["authority", "hierarchy", "tradition", "respect", "leadership"]
+      disintegrative:
+        name: "Subversion"
+        angle: 180
+        description: "Illegitimate challenges to authority, chaos, and disrespect for tradition."
+        language_cues: ["subversion", "chaos", "disrespect", "rebellion", "undermining"]
+
     Sanctity_Degradation:
-      integrative: { name: "Sanctity", angle: 30 }
-      disintegrative: { name: "Degradation", angle: 210 }
+      description: "Concerns about spiritual and bodily purity, and the avoidance of contamination."
+      integrative:
+        name: "Sanctity"
+        angle: 30
+        description: "Concerns about spiritual purity, elevated living, and the protection of sacred values."
+        language_cues: ["sacred", "pure", "holy", "noble", "dignity"]
+      disintegrative:
+        name: "Degradation"
+        angle: 210
+        description: "Actions that lead to contamination, debasement, or the violation of what is held sacred."
+        language_cues: ["degradation", "contamination", "pollution", "profane", "disgusting"]
+
     Liberty_Oppression:
-      integrative: { name: "Liberty", angle: 330 }
-      disintegrative: { name: "Oppression", angle: 150 }
+      description: "Concerns about individual freedom, autonomy, and resistance to domination."
+      integrative:
+        name: "Liberty"
+        angle: 330
+        description: "Concerns about freedom, autonomy, and resistance to domination and coercion."
+        language_cues: ["freedom", "liberty", "autonomy", "independence", "free choice"]
+      disintegrative:
+        name: "Oppression"
+        angle: 150
+        description: "Actions of domination, coercion, and the restriction of freedom and autonomy."
+        language_cues: ["oppression", "domination", "coercion", "tyranny", "control"]
 
 # This section provides the specific instructions for the LLM.
 prompt_guidance:
-  role_definition: >
-    You are an expert in moral psychology. Analyze the provided text using 
-    Moral Foundations Theory.
+  role_definition: |
+    You are an expert in moral psychology and value analysis with deep knowledge of how moral reasoning manifests in discourse. Your task is to analyze the provided text using the detailed Moral Foundations Theory framework defined below.
 
-  scoring_requirements: |
-    **SCORING REQUIREMENTS:**
-    - Use decimal values between 0.0 and 1.0 only for each of the 6 foundations.
-    - Score based on conceptual strength, not keyword frequency.
-    - Provide brief justification for each score.
+  framework_summary_instructions: |
+    Your analysis will use the Moral Foundations Theory. You must score the text against the **six integrative anchors**: Care, Fairness, Loyalty, Authority, Sanctity, and Liberty. The full definition of the framework's axes and anchors is provided for your reference.
 
   analysis_methodology: |
-    **ANALYSIS APPROACH:**
-    - Focus on conceptual strength, not keyword frequency.
-    - Score based on how strongly each foundation shapes the narrative's structure.
-    
+    **CONCEPTUAL ASSESSMENT METHODOLOGY:**
+    This framework employs a conceptual assessment approach that prioritizes semantic understanding over surface-level keyword counting. You should:
+    1. **Identify Underlying Values**: First, identify the underlying moral values being expressed in the narrative, regardless of the specific language used.
+    2. **Assess Conceptual Strength**: Score based on how strongly each anchor shapes the narrative's fundamental structure and arguments, not just the frequency of related words. The provided language cues are illustrative examples, not an exhaustive list.
+
+  scoring_requirements: |
+    **CRITICAL SCORING REQUIREMENTS:**
+    - Use ONLY decimal values between 0.0 and 1.0 (e.g., 0.3, 0.7, 0.9).
+    - Provide a score for each of the six integrative anchors.
+
   json_format_instructions: |
     **JSON FORMAT:**
-    Return a single JSON object. The keys should be the names of the 6 foundations 
-    (e.g., "Care", "Fairness", "Loyalty", "Authority", "Sanctity", "Liberty").
-    The value for each key should be an object containing a "score" (float 0.0-1.0),
-    "evidence" (a quote), and "reasoning" (your justification).
+    Return a single JSON object. The keys should be the names of the 6 integrative anchors (Care, Fairness, Loyalty, Authority, Sanctity, Liberty).
+    The value for each key should be an object containing a "score" (float 0.0-1.0), "evidence" (a direct quote from the text that best represents the foundation), and "reasoning" (a brief justification for your score).
     
-    Example for one foundation:
+    Example for one anchor:
     "Care": { "score": 0.8, "evidence": "...", "reasoning": "..." } 

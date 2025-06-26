@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import json
 import uuid
@@ -21,6 +22,10 @@ class FinalResponse(BaseModel):
     report_url: str
 
 app = FastAPI()
+
+# Mount a directory to serve the static report files
+app.mount("/reports", StaticFiles(directory="reports"), name="reports")
+
 # No longer need a global framework loader, it will be loaded per request.
 report_builder = ReportBuilder(output_dir="reports/reboot_mvp") # Keep reports organized
 
@@ -82,7 +87,7 @@ async def analyze_text(request: AnalysisRequest):
             y=y,
             framework_id=experiment_def.get("framework", {}).get("name"),
             model=request.model,
-            report_url=report_path
+            report_url=f"/{report_path}" # Return a URL path instead of a file path
         )
 
     except Exception as e:
