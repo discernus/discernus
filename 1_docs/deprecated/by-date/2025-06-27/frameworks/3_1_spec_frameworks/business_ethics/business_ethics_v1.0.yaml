@@ -1,0 +1,559 @@
+# Business Ethics Framework
+# Enhanced implementation analyzing business communications across three domains of ethical concern
+# Based on Freeman's stakeholder theory and Solomon's ethics approach for corporate governance analysis
+#
+# Version: v1.0 (Framework Specification v3.1 Compliant)
+# Last Modified: 2025-06-23 (Migrated to v3.1 with enhanced theoretical integration)
+# Status: Production Ready with Domain Clustering Analysis
+
+# =============================================================================
+# FRAMEWORK IDENTIFICATION (required)
+# =============================================================================
+
+name: business_ethics
+version: v1.0
+display_name: "Business Ethics Framework"
+
+description: |
+  The Business Ethics Framework analyzes business communications across three domains of ethical 
+  concern: stakeholder relationships, operational integrity, and strategic vision. This framework 
+  demonstrates flexible anchor clustering within defined business ethics domains, providing 
+  systematic analysis of corporate ethical orientation patterns through stakeholder-based analysis.
+  
+  ## Theoretical Foundation
+  
+  Based on Freeman's stakeholder theory and Solomon's ethics approach, this framework examines 
+  business ethics through three distinct domains that represent core areas of corporate 
+  responsibility. The framework implements stakeholder-based ethical analysis with domain-specific 
+  clustering, demonstrating how different ethical concerns manifest in distinct areas of business operation.
+  
+  ### Three Domains of Business Ethics
+  
+  **1. Stakeholder Relations Domain** - How businesses treat key stakeholders:
+  - **Customer Relations**: Service orientation vs exploitation patterns
+  - **Employee Relations**: Development investment vs resource extraction approaches
+  
+  **2. Operational Integrity Domain** - How businesses manage governance and operations:
+  - **Governance Transparency**: Accountability vs opacity in decision-making
+  - **Financial Integrity**: Responsible management vs manipulation practices
+  
+  **3. Strategic Vision Domain** - How businesses frame long-term purpose:
+  - **Strategic Purpose**: Sustainable value creation vs short-term extraction focus
+  
+  ## Methodological Innovation
+  
+  ### Domain Arc Clustering
+  This framework tests stakeholder theory through computational analysis:
+  - **Stakeholder Relations Arc**: Customer and employee treatment clustered (15° to 75°)
+  - **Operational Integrity Arc**: Governance and financial practices clustered (120° to 210°)
+  - **Strategic Vision Arc**: Long-term purpose positioning (270° to 360°)
+  - **Domain Separation**: Clear analytical boundaries between ethical concern areas
+  
+  ### Stakeholder vs Shareholder Analysis
+  The framework systematically evaluates whether business communications prioritize 
+  stakeholder capitalism (multiple stakeholder interests) or shareholder primacy 
+  (profit maximization focus) across the three ethical domains.
+  
+  ## Research Applications
+  
+  ### Corporate Ethics Assessment
+  - Corporate communication analysis for stakeholder orientation evaluation
+  - ESG (Environmental, Social, Governance) messaging consistency assessment
+  - Stakeholder capitalism vs shareholder primacy positioning analysis
+  - Corporate governance transparency and accountability evaluation
+  
+  ### Business Communication Research
+  - Customer service vs exploitation pattern identification in marketing
+  - Employee development vs resource extraction analysis in HR communications
+  - Financial responsibility vs manipulation detection in investor relations
+  - Strategic purpose vs short-term focus analysis in mission statements
+  
+  ## Usage Guidelines
+  
+  ### Appropriate Applications
+  - Corporate communication analysis for ethical orientation assessment
+  - ESG reporting evaluation for stakeholder focus measurement
+  - Business strategy analysis examining ethical framework consistency
+  - Corporate governance assessment through communication patterns
+  - Stakeholder capitalism implementation evaluation across domains
+  
+  ### Analysis Focus
+  - Test stakeholder orientation through domain-specific clustering
+  - Measure ethical consistency across three business responsibility areas
+  - Detect contradiction patterns between stakeholder claims and practices
+  - Evaluate corporate governance transparency through communication analysis
+  
+  ## Version History
+  
+  v1.0: Framework Specification v3.1 compliant version with enhanced theoretical integration,
+        domain clustering methodology, opposite_of validation links, and integrated documentation.
+  
+  ## Citation Format
+  
+  Discernus Framework: Business Ethics v1.0 (Freeman/Solomon, 2025)
+
+# =============================================================================
+# POSITIONING DEFINITION (axes - opposing anchor pairs)
+# =============================================================================
+
+axes:
+  Customer_Relations:
+    description: "How business communications treat customer needs and rights - service orientation vs exploitation approaches"
+    
+    integrative:
+      name: "Customer_Service"
+      description: "Prioritizes genuine customer benefit and transparent value delivery"
+      language_cues:
+        - "customer success"
+        - "genuine value"
+        - "long-term relationship"
+        - "customer feedback"
+        - "solving real problems"
+        - "transparent pricing"
+        - "honest communication"
+        - "customer-first"
+        - "customer satisfaction"
+        - "value delivery"
+        - "customer experience"
+        - "trust building"
+      angle: 30
+      weight: 1.0
+      type: integrative
+      tier: primary
+      cluster: stakeholder_relations
+      opposite_of: "Customer_Exploitation"
+    
+    disintegrative:
+      name: "Customer_Exploitation"
+      description: "Prioritizes extraction of value from customers over genuine service"
+      language_cues:
+        - "maximize extraction"
+        - "hidden fees"
+        - "planned obsolescence"
+        - "vendor lock-in"
+        - "dark patterns"
+        - "manipulative marketing"
+        - "bait and switch"
+        - "profit maximization"
+        - "revenue optimization"
+        - "customer acquisition cost"
+        - "lifetime value extraction"
+        - "upselling tactics"
+      angle: 210
+      weight: 1.0
+      type: disintegrative
+      tier: primary
+      cluster: stakeholder_relations
+      opposite_of: "Customer_Service"
+
+  Employee_Relations:
+    description: "How business communications address worker dignity and development - investment vs extraction approaches"
+    
+    integrative:
+      name: "Employee_Development"
+      description: "Invests in worker growth, safety, and meaningful contribution"
+      language_cues:
+        - "employee growth"
+        - "professional development"
+        - "workplace safety"
+        - "meaningful work"
+        - "work-life balance"
+        - "fair compensation"
+        - "career advancement"
+        - "team empowerment"
+        - "skill building"
+        - "employee wellbeing"
+        - "human capital investment"
+        - "talent development"
+      angle: 60
+      weight: 0.9
+      type: integrative
+      tier: secondary
+      cluster: stakeholder_relations
+      opposite_of: "Employee_Exploitation"
+    
+    disintegrative:
+      name: "Employee_Exploitation"
+      description: "Treats workers as disposable resources for profit extraction"
+      language_cues:
+        - "human resources"
+        - "cost cutting"
+        - "efficiency gains"
+        - "lean operations"
+        - "expendable workforce"
+        - "maximize productivity"
+        - "reduce labor costs"
+        - "streamline operations"
+        - "workforce optimization"
+        - "operational leverage"
+        - "labor arbitrage"
+        - "headcount reduction"
+      angle: 240
+      weight: 0.9
+      type: disintegrative
+      tier: secondary
+      cluster: stakeholder_relations
+      opposite_of: "Employee_Development"
+
+  Governance_Transparency:
+    description: "How business communications handle accountability and decision-making processes - transparency vs opacity"
+    
+    integrative:
+      name: "Accountability"
+      description: "Demonstrates transparent governance and responsible decision-making"
+      language_cues:
+        - "transparent governance"
+        - "accountable leadership"
+        - "open decision-making"
+        - "stakeholder input"
+        - "ethical standards"
+        - "responsible practices"
+        - "oversight mechanisms"
+        - "public reporting"
+        - "governance standards"
+        - "board oversight"
+        - "stakeholder engagement"
+        - "transparent processes"
+      angle: 135
+      weight: 0.8
+      type: integrative
+      tier: secondary
+      cluster: operational_integrity
+      opposite_of: "Opacity"
+    
+    disintegrative:
+      name: "Opacity"
+      description: "Conceals decision-making processes and avoids accountability"
+      language_cues:
+        - "proprietary information"
+        - "confidential strategy"
+        - "need to know basis"
+        - "trade secrets"
+        - "competitive advantage"
+        - "internal matters"
+        - "executive privilege"
+        - "strategic confidentiality"
+        - "business sensitive"
+        - "insider information"
+        - "confidential discussions"
+        - "closed door meetings"
+      angle: 315
+      weight: 0.8
+      type: disintegrative
+      tier: secondary
+      cluster: operational_integrity
+      opposite_of: "Accountability"
+
+  Financial_Integrity:
+    description: "How business communications handle financial responsibility and reporting - responsibility vs manipulation"
+    
+    integrative:
+      name: "Financial_Responsibility"
+      description: "Demonstrates prudent financial management and honest reporting"
+      language_cues:
+        - "sustainable growth"
+        - "prudent management"
+        - "accurate reporting"
+        - "financial discipline"
+        - "long-term stability"
+        - "responsible investment"
+        - "sound fundamentals"
+        - "fiscal responsibility"
+        - "transparent accounting"
+        - "conservative estimates"
+        - "reliable metrics"
+        - "ethical reporting"
+      angle: 195
+      weight: 0.8
+      type: integrative
+      tier: secondary
+      cluster: operational_integrity
+      opposite_of: "Financial_Manipulation"
+    
+    disintegrative:
+      name: "Financial_Manipulation"
+      description: "Engages in accounting manipulation or unsustainable financial practices"
+      language_cues:
+        - "aggressive accounting"
+        - "revenue recognition"
+        - "financial engineering"
+        - "off-balance sheet"
+        - "creative bookkeeping"
+        - "earnings management"
+        - "regulatory arbitrage"
+        - "financial optimization"
+        - "accounting flexibility"
+        - "earnings smoothing"
+        - "special items"
+        - "pro forma metrics"
+      angle: 15
+      weight: 0.8
+      type: disintegrative
+      tier: secondary
+      cluster: operational_integrity
+      opposite_of: "Financial_Responsibility"
+
+  Strategic_Purpose:
+    description: "How business communications frame long-term purpose and societal impact - sustainable purpose vs extraction focus"
+    
+    integrative:
+      name: "Sustainable_Purpose"
+      description: "Articulates long-term value creation for society and stakeholders"
+      language_cues:
+        - "sustainable impact"
+        - "societal benefit"
+        - "long-term value"
+        - "positive contribution"
+        - "meaningful mission"
+        - "stakeholder capitalism"
+        - "social responsibility"
+        - "environmental stewardship"
+        - "purpose-driven"
+        - "shared value"
+        - "sustainable business"
+        - "ESG commitment"
+      angle: 315
+      weight: 0.7
+      type: integrative
+      tier: tertiary
+      cluster: strategic_vision
+      opposite_of: "Short_term_Extraction"
+    
+    disintegrative:
+      name: "Short_term_Extraction"
+      description: "Focuses solely on short-term profit extraction without regard for long-term consequences"
+      language_cues:
+        - "quarterly results"
+        - "shareholder value"
+        - "cost optimization"
+        - "market efficiency"
+        - "competitive advantage"
+        - "profit maximization"
+        - "operational leverage"
+        - "margin expansion"
+        - "cost reduction"
+        - "efficiency gains"
+        - "shareholder returns"
+        - "financial performance"
+      angle: 135
+      weight: 0.7
+      type: disintegrative
+      tier: tertiary
+      cluster: strategic_vision
+      opposite_of: "Sustainable_Purpose"
+
+# =============================================================================
+# POSITIONING STRATEGY (optional)
+# =============================================================================
+
+positioning_strategy:
+  type: clustered
+  description: "Anchors clustered within specific arcs representing distinct domains of business ethics"
+  
+  clusters:
+    stakeholder_relations:
+      center_angle: 45
+      span: 60
+      anchor_types: ["integrative", "disintegrative"]
+      description: "Stakeholder relationship ethics clustered in upper-right quadrant (15° to 75°)"
+      focus: "Customer and employee treatment approaches"
+    
+    operational_integrity:
+      center_angle: 165
+      span: 90
+      anchor_types: ["integrative", "disintegrative"]
+      description: "Operational and governance ethics clustered in left quadrant (120° to 210°)"
+      focus: "Governance transparency and financial responsibility"
+    
+    strategic_vision:
+      center_angle: 315
+      span: 90
+      anchor_types: ["integrative", "disintegrative"]
+      description: "Strategic and long-term vision ethics clustered in lower-right quadrant (270° to 360°)"
+      focus: "Long-term purpose and sustainability orientation"
+
+# =============================================================================
+# ALGORITHMIC CONFIGURATION (optional)
+# =============================================================================
+
+algorithm_config:
+  cluster_analysis:
+    enabled: true
+    domain_coherence_measurement: true
+    cross_domain_consistency: true
+    rationale: "Tests stakeholder theory implementation across business ethics domains"
+    
+  domain_weighting:
+    stakeholder_relations: 0.4
+    operational_integrity: 0.4
+    strategic_vision: 0.2
+    methodology: "Weighted by stakeholder impact and business responsibility importance"
+    
+  clustering_validation:
+    domain_separation_requirement: true
+    ethical_consistency_measurement: true
+    stakeholder_orientation_assessment: true
+
+# =============================================================================
+# COORDINATE SYSTEM (optional)
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: "Circular coordinate system with anchors clustered in three defined business ethics domains"
+
+# =============================================================================
+# ANALYSIS CONFIGURATION (optional)
+# =============================================================================
+
+metrics:
+  cluster_coherence_score:
+    name: "Cluster Coherence Score"
+    description: "Consistency of ethical orientation within each domain cluster"
+    calculation: "Intra-domain ethical positioning consistency measurement"
+  
+  domain_ethics_score:
+    name: "Domain Ethics Score"
+    description: "Ethical performance score for each of the three business domains"
+    calculation: "Weighted average of domain-specific anchor scores"
+  
+  stakeholder_focus_index:
+    name: "Stakeholder Focus Index"
+    description: "Relative emphasis on stakeholder versus shareholder interests"
+    calculation: "Stakeholder-oriented scores vs shareholder-oriented scores"
+  
+  operational_integrity_index:
+    name: "Operational Integrity Index"
+    description: "Strength of governance and financial transparency practices"
+    calculation: "Governance and financial responsibility anchor scores"
+  
+  strategic_sustainability_score:
+    name: "Strategic Sustainability Score"
+    description: "Long-term sustainable purpose vs short-term extraction orientation"
+    calculation: "Strategic vision domain ethical positioning"
+
+# =============================================================================
+# LLM INTEGRATION (optional)
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert business ethics analyst specializing in stakeholder capitalism, 
+    corporate governance, and sustainable business practices with deep knowledge of 
+    ethical frameworks for evaluating business communications and corporate responsibility.
+  
+  bias_neutral_analysis_focus: |
+    Evaluate how business communications demonstrate ethical orientation across three 
+    domains: stakeholder relationships, operational integrity, and strategic vision. 
+    Analyze whether communications prioritize stakeholder capitalism or shareholder 
+    primacy across these distinct business responsibility areas.
+  
+  detection_approach: |
+    Look for ethical positioning patterns within each domain cluster - stakeholder 
+    relations (customer/employee treatment), operational integrity (governance/financial 
+    practices), and strategic vision (long-term purpose). Note clustering patterns 
+    within each domain and overall stakeholder vs shareholder orientation.
+  
+  scoring_methodology: |
+    Score each axis pole on 0.0-1.0 scale based on presence/strength of ethical 
+    orientation in the text, with specific textual evidence. Consider domain-specific 
+    clustering and how different business ethics concerns manifest in distinct areas 
+    of corporate communication.
+
+# =============================================================================
+# VISUALIZATION CONFIGURATION (optional)
+# =============================================================================
+
+visualization:
+  cluster_colors:
+    stakeholder_relations: "#4CAF50"     # Green - relationship focus
+    operational_integrity: "#2196F3"     # Blue - integrity focus  
+    strategic_vision: "#FF9800"          # Orange - vision focus
+  
+  anchor_colors:
+    integrative: "#2E7D32"               # Dark green - positive business ethics
+    disintegrative: "#C62828"            # Dark red - negative business ethics
+  
+  cluster_boundaries:
+    show_arc_boundaries: true
+    boundary_style: "dashed"
+    boundary_opacity: 0.3
+  
+  domain_analysis:
+    show_domain_coherence: true
+    highlight_stakeholder_focus: true
+    stakeholder_vs_shareholder_indicators: true
+    ethical_consistency_measurements: true
+  
+  supported_charts:
+    - circular
+    - clustered
+    - domain_analysis
+    - stakeholder_assessment
+
+# =============================================================================
+# ACADEMIC VALIDATION (required)
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Freeman, R.E. (1984). Strategic Management: A Stakeholder Approach."
+    - "Solomon, R.C. (1992). Ethics and Excellence: Cooperation and Integrity in Business."
+  
+  theoretical_approach: |
+    Stakeholder-based ethical analysis focusing on three domains of business 
+    responsibility clustered around specific arcs of analytical space. Each domain 
+    represents distinct ethical concerns that businesses must navigate in their 
+    communications and operations. Framework tests Freeman's stakeholder theory 
+    implementation across corporate communication patterns.
+  
+  academic_validation: |
+    Framework validated through stakeholder theory research and business ethics 
+    studies. Provides systematic methodology for evaluating corporate ethical 
+    orientation across three domains of business responsibility through clustered 
+    anchor analysis.
+
+validation:
+  academic_standard: "Stakeholder Theory and Business Ethics"
+  measurement_instrument: "Business ethics domain assessment through stakeholder-based analysis"
+  scope_limitation: "English-language business communications, corporate stakeholder contexts"
+  
+  citation_format: "Discernus Framework: Business Ethics v1.0 (Freeman/Solomon, 2025)"
+  academic_attribution: |
+    When using this framework in academic work, cite as:
+    "Discernus Framework: Business Ethics v1.0 (Freeman/Solomon, 2025)"
+    
+    Include framework version for reproducibility and provenance tracking.
+
+# =============================================================================
+# SYSTEM COMPATIBILITY (optional)
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - business_ethics_v3.0
+    - stakeholder_analysis_v2.1
+    - domain_clustering_v1.0
+  
+  weighting_schemes:
+    - clustered_domain_weighting
+    - stakeholder_focus_analysis
+    - business_ethics_hierarchy
+  
+  api_versions:
+    - v3.1
+    - v3.0
+  
+  visualization_types:
+    - circular
+    - clustered
+    - domain_analysis
+
+# =============================================================================
+# FRAMEWORK VERSIONING (required)
+# =============================================================================
+
+last_modified: "2025-06-23T19:30:00.000000"
+framework_registry_key: "business_ethics__v1.0"
+implementation_status: "Production ready with Framework Specification v3.1 compliance and domain clustering analysis" 

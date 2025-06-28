@@ -1,0 +1,116 @@
+# Multi-Model Statistical Comparison Test
+# Version: 1.0
+# Tests statistical comparison capabilities using local and cloud models
+
+experiment_meta:
+  name: "Multi_Model_Statistical_Test"
+  display_name: "Multi-Model Statistical Comparison Test"
+  version: "1.0"
+  description: "Statistical comparison experiment testing local Ollama vs cheap cloud models to exercise the statistical analysis engine."
+  tags: ["test", "statistical", "multi-model", "comparison"]
+
+# Test corpus for comparison
+corpus:
+  source_type: "single_text"
+  default_text: |
+    "Justice and fairness are the foundation of a good society. We must protect individual liberty while ensuring everyone has equal opportunities to succeed."
+
+# Simplified framework for clear statistical comparison
+framework:
+  name: test_moral_framework_statistical
+  version: "1.0"
+  description: "Simplified framework optimized for statistical comparison testing"
+
+  axes:
+    Fairness_Unfairness:
+      description: "Concerns about fairness and justice"
+      integrative:
+        name: "Fairness"
+        angle: 0
+        description: "Concern for justice and equal treatment"
+        language_cues: ["fairness", "justice", "equality", "equal"]
+      disintegrative:
+        name: "Unfairness"
+        angle: 180
+        description: "Violations of fairness and justice"
+        language_cues: ["unfair", "unjust", "inequality", "bias"]
+
+    Liberty_Control:
+      description: "Concerns about freedom and autonomy"
+      integrative:
+        name: "Liberty"
+        angle: 90
+        description: "Concern for freedom and individual autonomy"
+        language_cues: ["freedom", "liberty", "autonomy", "choice"]
+      disintegrative:
+        name: "Control"
+        angle: 270
+        description: "Excessive control and restriction of freedom"
+        language_cues: ["control", "restriction", "oppression", "domination"]
+
+# Prompt guidance optimized for consistent responses
+prompt_guidance:
+  role_definition: |
+    You are analyzing text for a statistical comparison study. Provide consistent, precise scoring.
+
+  framework_summary_instructions: |
+    Score the text against Fairness and Liberty anchors with high precision for statistical analysis.
+
+  analysis_methodology: |
+    1. Analyze conceptual strength of fairness and liberty themes
+    2. Provide precise decimal scores for statistical comparison
+    3. Be consistent in scoring methodology
+
+  scoring_requirements: |
+    - Use precise decimal values between 0.0 and 1.0 (e.g., 0.75, 0.83)
+    - Provide scores for both Fairness and Liberty anchors
+    - Maintain consistent scoring criteria
+
+  json_format_instructions: |
+    Return JSON with this exact structure:
+    {
+      "Fairness": {"score": 0.0-1.0, "evidence": "quote", "reasoning": "brief explanation"},
+      "Liberty": {"score": 0.0-1.0, "evidence": "quote", "reasoning": "brief explanation"}
+    }
+
+# Multi-model configuration for statistical comparison
+models:
+  supported_providers: ["ollama", "anthropic"]
+  
+  # Models to compare
+  comparison_models:
+    local: "ollama/llama3.2"
+    cloud: "claude-3-5-haiku-20241022"
+  
+  # Statistical comparison configuration
+  statistical_comparison:
+    runs_per_model: 3  # Multiple runs for better statistical analysis
+    comparison_type: "multi_model"
+
+# Statistical analysis configuration
+statistical_analysis:
+  enabled: true
+  primary_methods:
+    geometric_similarity:
+      enabled: true
+      description: "Calculate geometric distance between model centroids"
+    dimensional_correlation:
+      enabled: true
+      description: "Analyze correlation between model score dimensions"
+    hypothesis_testing:
+      enabled: true
+      description: "Statistical significance testing"
+    effect_size_analysis:
+      enabled: true
+      description: "Calculate effect sizes (Cohen's d)"
+    confidence_intervals:
+      enabled: true
+      description: "95% confidence intervals for differences"
+
+# Output configuration for testing
+output:
+  format: "json"
+  include_metadata: true
+  generate_visualization: false  # Skip for test
+  save_to_database: false       # Don't pollute production DB
+  statistical_report: false     # Skip HTML report for test - focus on engine 

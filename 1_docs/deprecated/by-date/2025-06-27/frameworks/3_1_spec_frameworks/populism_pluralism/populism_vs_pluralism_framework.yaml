@@ -1,0 +1,202 @@
+# Populism vs Pluralism Framework
+# Version: v3.0.0 (Updated to Framework Specification v3.0)
+# Theoretical Foundation: Müller (2016), Urbinati (2019), Levitsky & Ziblatt (2018)
+
+# =============================================================================
+# FRAMEWORK METADATA
+# =============================================================================
+
+name: "populism_pluralism"
+framework_name: "populism_pluralism"
+display_name: "Populism vs Pluralism"
+version: "v3.0.0"
+description: |
+  Populism vs Pluralism - A specialized Discernus Coordinates framework analyzing 
+  the tension between populist and pluralist approaches to democratic governance. 
+  This framework examines how discourse either promotes singular "will of the people" 
+  narratives or embraces democratic pluralism and institutional mediation.
+
+framework_type: axis_set
+
+# =============================================================================
+# NEW IN v3.0: ALGORITHM CONFIGURATION
+# =============================================================================
+
+algorithm_config:
+  dominance_amplification:
+    enabled: true
+    threshold: 0.65                   # Moderate threshold for political theory analysis
+    multiplier: 1.15                  # Balanced amplification for theoretical clarity
+    rationale: "Amplifies populist vs pluralist orientation for clearer democratic theory classification"
+    
+  adaptive_scaling:
+    enabled: true
+    base_scaling: 0.72               # Higher base scaling for clear theoretical positioning
+    max_scaling: 0.92                # High maximum for theoretical distinction
+    variance_factor: 0.25            # Moderate variance sensitivity for political theory
+    mean_factor: 0.08                # Reduced mean sensitivity for theoretical frameworks
+    methodology: "Scaling optimized for democratic theory and governance classification"
+    
+  prompting_integration:
+    dominance_instruction: "Identify whether the text primarily embraces populist or pluralist approaches to democracy"
+    amplification_purpose: "Mathematical enhancement of democratic theory positioning"
+    methodology_reference: "Populism vs Pluralism political theory methodology v3.0"
+
+# =============================================================================
+# COORDINATE SYSTEM
+# =============================================================================
+
+coordinate_system:
+  type: circle
+  radius: 1.0
+  description: "Circular coordinate system using axes for paired democratic theory positioning"
+
+# =============================================================================  
+# AXES (PAIRED COORDINATE STRUCTURE)
+# =============================================================================
+
+axes:
+  Democracy:
+    description: "Democratic governance approaches - the fundamental tension between populist and pluralist visions of legitimate democratic authority"
+    
+    integrative:
+      name: "Pluralism"
+      description: |
+        Emphasizes institutional mediation, minority rights, checks and balances, 
+        and multiple legitimate voices in democratic governance. Values procedural 
+        democracy and constitutional protections.
+      
+      language_cues:
+        - "constitutional protections"
+        - "minority rights"
+        - "checks and balances"
+        - "institutional mediation"
+        - "democratic norms"
+        - "procedural democracy"
+        - "multiple perspectives"
+        - "compromise"
+        - "deliberation"
+        - "constitutional democracy"
+        - "rule of law"
+        - "institutional safeguards"
+      
+      angle: 90
+      weight: 1.0
+      type: integrative
+    
+    disintegrative:
+      name: "Populism"
+      description: |
+        Emphasizes direct expression of popular will, dismisses institutional 
+        constraints, and frames politics as struggle between "pure people" 
+        and "corrupt elite." Prioritizes majoritarian democracy over constitutional limits.
+      
+      language_cues:
+        - "will of the people"
+        - "corrupt elite"
+        - "establishment"
+        - "real Americans"
+        - "silent majority"
+        - "drain the swamp"
+        - "take back our country"
+        - "people vs elite"
+        - "common people"
+        - "ordinary citizens"
+        - "political class"
+        - "deep state"
+      
+      angle: 270
+      weight: 1.0
+      type: disintegrative
+
+# =============================================================================
+# THEORETICAL FOUNDATION
+# =============================================================================
+
+theoretical_foundation:
+  primary_sources:
+    - "Müller, J. W. (2016). What Is Populism? University of Pennsylvania Press."
+    - "Urbinati, N. (2019). Me the People: How Populism Transforms Democracy."
+    - "Levitsky, S., & Ziblatt, D. (2018). How Democracies Die."
+  theoretical_approach: |
+    This framework examines democratic discourse through the lens of populist versus 
+    pluralist approaches to legitimate authority. It analyzes how language either 
+    reinforces populist claims to direct popular sovereignty or supports pluralist 
+    democratic institutions and norms.
+
+# =============================================================================
+# ANALYSIS METRICS
+# =============================================================================
+
+metrics:
+  democracy_axis_score:
+    name: "Democracy Axis Score"
+    description: "Position on pluralism-populism axis from integrative (+1) to disintegrative (-1)"
+    calculation: "Pluralism score minus Populism score"
+  
+  democracy_intensity:
+    name: "Democracy Intensity"
+    description: "Strength of democratic theory positioning"
+    calculation: "Absolute value of axis score"
+
+# =============================================================================
+# PROMPT CONFIGURATION
+# =============================================================================
+
+prompt_configuration:
+  expert_role: |
+    You are an expert analyst of democratic theory and political systems, with deep 
+    knowledge of populist and pluralist approaches to democratic governance. You 
+    specialize in analyzing how discourse supports different visions of legitimate 
+    democratic authority.
+  
+  bias_neutral_analysis_focus: |
+    Evaluate how the text either supports pluralist democratic institutions and norms 
+    OR embraces populist direct democracy and majoritarian sovereignty. Focus specifically 
+    on attitudes toward institutional mediation, minority rights, and the source of 
+    legitimate political authority.
+  
+  detection_approach: |
+    Look for patterns of democratic reasoning that either affirm institutional democracy 
+    with constitutional protections or prioritize direct popular will over institutional 
+    constraints. Analyze both explicit democratic theory and implicit assumptions about 
+    legitimate governance.
+  
+  scoring_methodology: |
+    Score coordinates based on textual evidence of democratic orientation, using 0.0-1.0 
+    scale with specific quotations supporting each assessment. Focus on democratic theory 
+    frameworks rather than specific policy positions.
+
+# =============================================================================
+# SYSTEM COMPATIBILITY
+# =============================================================================
+
+compatibility:
+  prompt_templates:
+    - democratic_theory_v3.0
+    - political_systems_v2.1
+  weighting_schemes:
+    - axis_based_v3.0
+  api_versions:
+    - v3.0
+    - v2.1
+  visualization_types:
+    - circular
+    - axis_profile
+
+# =============================================================================
+# ACADEMIC VALIDATION
+# =============================================================================
+
+validation:
+  academic_standard: "Democratic theory and comparative politics"
+  measurement_instrument: "Democratic governance orientation assessment"
+  scope_limitation: "English-language political discourse, Western democratic contexts"
+  
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+
+last_modified: "2025-06-23T14:52:00.000000"
+theoretical_validation: "Framework v3.0 - algorithm configuration integrated"
+implementation_status: "Production ready with configurable algorithms"

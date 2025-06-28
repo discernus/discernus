@@ -1,0 +1,89 @@
+# Discernus Test Pipeline Experiment
+# Version: 1.0
+# This is a minimal test experiment to verify the pipeline works with both
+# local (Ollama) and cheap cloud models. Used for automated testing.
+
+experiment_meta:
+  name: "Test_Pipeline"
+  display_name: "Pipeline Test (Local + Cloud)"
+  version: "1.0"
+  description: "Minimal test experiment using local Ollama and cheap cloud models to verify pipeline functionality."
+  tags: ["test", "pipeline", "local", "cloud"]
+
+# Simple test corpus
+corpus:
+  source_type: "single_text"
+  default_text: |
+    "Justice and fairness are the foundation of a good society. We must protect individual liberty while ensuring everyone has equal opportunities to succeed."
+
+# Simplified framework for testing
+framework:
+  name: test_moral_framework
+  version: "1.0"
+  description: "Simplified moral framework for pipeline testing"
+
+  axes:
+    Fairness_Unfairness:
+      description: "Concerns about fairness and justice"
+      integrative:
+        name: "Fairness"
+        angle: 0
+        description: "Concern for justice and equal treatment"
+        language_cues: ["fairness", "justice", "equality", "equal"]
+      disintegrative:
+        name: "Unfairness"
+        angle: 180
+        description: "Violations of fairness and justice"
+        language_cues: ["unfair", "unjust", "inequality", "bias"]
+
+    Liberty_Control:
+      description: "Concerns about freedom and autonomy"
+      integrative:
+        name: "Liberty"
+        angle: 90
+        description: "Concern for freedom and individual autonomy"
+        language_cues: ["freedom", "liberty", "autonomy", "choice"]
+      disintegrative:
+        name: "Control"
+        angle: 270
+        description: "Excessive control and restriction of freedom"
+        language_cues: ["control", "restriction", "oppression", "domination"]
+
+# Prompt guidance for testing
+prompt_guidance:
+  role_definition: |
+    You are testing a moral analysis pipeline. Analyze the provided text using the simple framework below.
+
+  framework_summary_instructions: |
+    Score the text against the two integrative anchors: Fairness and Liberty.
+
+  analysis_methodology: |
+    1. Identify mentions of fairness, justice, freedom, and autonomy concepts
+    2. Score based on conceptual strength, not just keyword frequency
+
+  scoring_requirements: |
+    - Use decimal values between 0.0 and 1.0
+    - Provide scores for both Fairness and Liberty anchors
+
+  json_format_instructions: |
+    Return JSON with this structure:
+    {
+      "Fairness": {"score": 0.0-1.0, "evidence": "quote", "reasoning": "brief explanation"},
+      "Liberty": {"score": 0.0-1.0, "evidence": "quote", "reasoning": "brief explanation"}
+    }
+
+# Test models - local and cheap cloud
+models:
+  supported_providers: ["ollama", "anthropic"]
+  default_model: "ollama/llama3.2"
+  
+  test_models:
+    local: "ollama/llama3.2"
+    cloud: "claude-3-5-haiku-20241022"
+
+# Output configuration for testing
+output:
+  format: "json"
+  include_metadata: true
+  generate_visualization: false  # Skip visualization for tests
+  save_to_database: false       # Don't pollute production DB 

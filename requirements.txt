@@ -33,3 +33,9 @@ PyYAML>=6.0
 tqdm>=4.65.0
 httpx>=0.24.0
 kaleido
+pytest
+pytest-asyncio
+httpx
+black
+isort
+flake8
