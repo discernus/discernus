@@ -1,5 +1,5 @@
 # DCS Research Vocabulary: Comprehensive Glossary v2.0
-**Version:** 3.2  
+**Version:** 2.0  
 **Date:** June 27, 2025  
 **Author:** Jeffrey Whatcott
 **Status:** DEVELOPMENT - Advanced Multi-Dimensional Analysis
@@ -50,7 +50,7 @@ This comprehensive glossary establishes the complete academic vocabulary for Dis
 |------|------------|------------------|
 | **Axis‑Set Framework (ASFx)** | Framework architecture using exactly two opposing anchors per axis to create mathematically rigorous bipolar dimensions with zero-sum relationships. | "Moral Foundations Theory employs an **Axis‑Set Framework** with care-harm and fairness-cheating oppositions, each axis containing exactly two poles." |
 | **Anchor‑Set Framework (ASFa)** | Framework architecture using independent anchors without requiring oppositional relationships, enabling complex ideological positioning. | "The Political Theories **Anchor‑Set Framework** maps liberal, conservative, and libertarian positions independently." |
-| **Clustered Framework** | Framework architecture grouping related anchors within defined arcs to create semantic density zones. | "The **Clustered Framework** concentrated virtue-related anchors in the upper quadrant." |
+| **Clustered Framework** | Framework architecture grouping related anchors within defined arcs to create theoretically weighted zones. | "The **Clustered Framework** concentrated virtue-related anchors in the upper quadrant." |
 | **Hybrid Framework** | Framework combining axis-set and anchor-set elements within the same analytical structure. | "The **Hybrid Framework** used axes for core dimensions while adding independent anchors for contextual factors." |
 | **Hybrid Axes-Anchors Architecture** | v3.2 recommended framework structure where anchors are registered as independent components and axes reference them by ID with optional anchor summaries. | "The **Hybrid Axes-Anchors Architecture** provides structural rigor through component registry while maintaining rapid comprehension via anchor summaries." |
 | **Multi-Reference Architecture Selection** | Framework design decision to use anchor-set rather than axis-set when needing three or more reference points. | "**Multi-reference architecture selection** guided the team toward anchor-set framework for the five-point political spectrum." |
@@ -220,13 +220,13 @@ axes:
 
 ---
 
-## 7. Arc Positioning & Semantic Density
+## 7. Arc Positioning & Theoretical Weighting
 
 | Term | Definition | Example Sentence |
 |------|------------|------------------|
 | **Arc Definition** | Specification of angular span and distribution method for grouping related anchors within defined circle segments. | "The virtue cluster's **arc definition** concentrated five anchors within a 60° span around 90°." |
-| **Semantic Density** | Mathematical measure of anchor concentration and theoretical importance within any angular region of the DCS. | "High **semantic density** in the upper quadrant created systematic bias toward virtue-oriented positioning." |
-| **Density Distribution** | The pattern of semantic density across the entire coordinate space, affecting signature interpretation. | "Non-uniform **density distribution** required correction factors for accurate cross-framework comparison." |
+| **Theoretical Weighting** | Mathematical measure of anchor concentration and deliberate theoretical importance within any angular region of the DCS. | "High **theoretical weighting** in the upper quadrant created systematic bias toward virtue-oriented positioning." |
+| **Weighting Distribution Pattern** | The pattern of theoretical weighting across the entire coordinate space, affecting signature interpretation. | "Non-uniform **weighting distribution** required correction factors for accurate cross-framework comparison." |
 | **Arc Span** | The angular width of a clustered anchor grouping, measured in degrees. | "A 45° **arc span** provided sufficient theoretical resolution while maintaining cluster coherence." |
 | **Even Distribution** | Anchor spacing strategy placing clustered anchors at equal angular intervals within their arc. | "**Even distribution** within the arc ensured balanced theoretical representation of civic virtue dimensions." |
 | **Weighted Distribution** | Anchor spacing strategy based on theoretical importance, with more significant concepts receiving optimal positions. | "**Weighted distribution** placed the primary anchor at arc center with secondary anchors at reduced angles." |
@@ -246,15 +246,15 @@ axes:
 
 ---
 
-## 9. Density Corrections & Spatial Mathematics
+## 9. Theoretical Weighting Corrections & Spatial Mathematics
 
 | Term | Definition | Example Sentence |
 |------|------------|------------------|
-| **Density Correction Factor** | Mathematical adjustment compensating for non-uniform semantic density when calculating distances or centroids. | "Applying the **density correction factor** revealed true ideological movement independent of anchor clustering effects." |
-| **Density-Weighted Distance** | Distance metric adjusted for semantic density variations across the coordinate space. | "**Density-weighted distance** provided more accurate similarity measures between frameworks with different arc configurations." |
+| **Weighting Correction Factor** | Mathematical adjustment compensating for non-uniform theoretical weighting when calculating distances or centroids. | "Applying the **weighting correction factor** revealed true ideological movement independent of anchor clustering effects." |
+| **Weighting-Adjusted Distance** | Distance metric adjusted for theoretical weighting variations across the coordinate space. | "**Weighting-adjusted distance** provided more accurate similarity measures between frameworks with different arc configurations." |
 | **Semantic Space Allocation** | Mathematical modeling of how competing theoretical concepts share limited discursive space within the coordinate system. | "**Semantic space allocation** analysis revealed nationalism and populism competing for the same conceptual territory." |
 | **Arc Bias Compensation** | Correction for systematic positioning tendencies created by clustered anchor arrangements. | "**Arc bias compensation** eliminated false drift patterns caused by virtue cluster concentration." |
-| **Density Uniformity Factor** | Measure of how evenly semantic density distributes across the coordinate space, affecting framework validity. | "Low **density uniformity factor** indicated problematic anchor clustering requiring framework redesign." |
+| **Weighting Uniformity Factor** | Measure of how evenly theoretical weighting distributes across the coordinate space, affecting framework validity. | "Low **weighting uniformity factor** indicated problematic anchor clustering requiring framework redesign." |
 
 ---
 
@@ -373,16 +373,16 @@ axes:
 ## 19. Multi-Paragraph Writing Sample
 
 > **Framework Architecture and Validation**  
-> Modern computational discourse analysis employs the **Discernus Coordinate System** as a unified mathematical foundation for mapping theoretical positions. The v3.2 **Hybrid Axes-Anchors Architecture** registers all anchors in a **component registry** with unique **component IDs**, while axes utilize **anchor ID referencing** to specify participating anchors. Each framework defines its **anchor configuration** through precise **angular positioning** or intuitive **clock face positioning**, creating a structured **semantic density** distribution across the coordinate space. **Axis-Set Frameworks** establish bipolar relationships through opposing anchor pairs, while **Anchor-Set Frameworks** enable independent positioning without theoretical constraints.
+> Modern computational discourse analysis employs the **Discernus Coordinate System** as a unified mathematical foundation for mapping theoretical positions. The v3.2 **Hybrid Axes-Anchors Architecture** registers all anchors in a **component registry** with unique **component IDs**, while axes utilize **anchor ID referencing** to specify participating anchors. Each framework defines its **anchor configuration** through precise **angular positioning** or intuitive **clock face positioning**, creating a structured **theoretical weighting** distribution across the coordinate space. **Axis-Set Frameworks** establish bipolar relationships through opposing anchor pairs, while **Anchor-Set Frameworks** enable independent positioning without theoretical constraints.
 >
 > **Quality Assurance Through Mathematical Rigor**  
-> Framework validation requires comprehensive **cartographic fidelity** assessment through **territorial coverage** analysis and **anchor independence** measurement. **Registry validation** ensures consistency between **component registry** definitions and **anchor ID referencing** in axes, while **anchor summary** blocks provide rapid comprehension without compromising **component-based positioning** precision. **Bootstrap validation** with stratified sampling confirms **centroid stability** across diverse data conditions, while **silhouette analysis** verifies meaningful **cartographic resolution**. **Cross-framework portability** enables systematic comparison between different theoretical approaches through **density-corrected distance** calculations.
+> Framework validation requires comprehensive **cartographic fidelity** assessment through **territorial coverage** analysis and **anchor independence** measurement. **Registry validation** ensures consistency between **component registry** definitions and **anchor ID referencing** in axes, while **anchor summary** blocks provide rapid comprehension without compromising **component-based positioning** precision. **Bootstrap validation** with stratified sampling confirms **centroid stability** across diverse data conditions, while **silhouette analysis** verifies meaningful **cartographic resolution**. **Cross-framework portability** enables systematic comparison between different theoretical approaches through **weighting-adjusted distance** calculations.
 >
 > **Temporal Evolution and Competitive Dynamics**  
 > Longitudinal analysis tracks **centroid displacement** and **angular drift** to reveal systematic theoretical evolution over time. **Velocity vectors** and **acceleration analysis** capture the pace and consistency of ideological change, while **trajectory curvature** measurements distinguish deliberate positioning from random variation. **Ideological competition** modeling quantifies how different theoretical concepts compete for limited **discourse space allocation**, creating **dilution effects** that reduce individual anchor influence.
 >
 > **Advanced Validation and Optimization**  
-> **Cartographic optimization** through iterative refinement improves **framework fitness scores** by maximizing **territorial coverage** while maintaining **anchor independence**. **Density uniformity factors** correct for **semantic crowding** effects in clustered configurations, while **arc bias compensation** eliminates systematic positioning tendencies. **Framework ensemble analysis** enables comprehensive theoretical coverage through coordinated application of multiple analytical perspectives.
+> **Cartographic optimization** through iterative refinement improves **framework fitness scores** by maximizing **territorial coverage** while maintaining **anchor independence**. **Weighting uniformity factors** correct for **semantic crowding** effects in clustered configurations, while **arc bias compensation** eliminates systematic positioning tendencies. **Framework ensemble analysis** enables comprehensive theoretical coverage through coordinated application of multiple analytical perspectives.
 >
 > **Academic Standards and Reproducibility**  
 > Research transparency requires complete **methodological documentation** including **framework registry keys** for precise replication. **Provenance tracking** ensures validated frameworks meet **reproducibility standards**, while **citation format compliance** maintains academic consistency. **Domain boundary detection** and **contextual calibration** guide appropriate framework selection for specific research contexts, ensuring optimal analytical performance across diverse applications.

@@ -150,7 +150,7 @@ algorithm_config:
     enabled: true
     base_scaling: 0.7
     max_scaling: 0.9
-    density_adjustment: true
+    weighting_adjustment: true
     methodology: "Binary scaling optimized for dignity vs tribalism classification"
     
   competitive_processing:
@@ -161,7 +161,7 @@ algorithm_config:
 coordinate_system:
   type: circle
   radius: 1.0
-  density_modeling: true
+  theoretical_weighting_modeling: true
   description: "Advanced DCS with competitive dynamics for identity analysis"
 
 metrics:

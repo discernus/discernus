@@ -25,6 +25,38 @@ The DCS employs a **unit circle coordinate system** where all discourse position
 - **Angular Domain**: [0°, 360°) with 0° = "12 o'clock" (positive y-axis)
 - **Cartesian Mapping**: Standard (x, y) coordinates with y-axis oriented upward
 
+#### 1.1.1 DCS Circularity Requirement (CRITICAL)
+
+**Mathematical Foundation**: The DCS coordinate system MUST maintain perfect circularity at all visualization scales and zoom levels. Elliptical distortion breaks the fundamental mathematical properties of the coordinate system.
+
+**Implementation Requirements:**
+```
+aspect_ratio = 1:1 (MANDATORY)
+scaleanchor = "y" with scaleratio = 1
+constrain = "domain" (prevents axis stretching)
+width = height (for visualization containers)
+```
+
+**Mathematical Justification:**
+- Angular relationships between anchors depend on circular geometry
+- Distance metrics assume Euclidean space within unit circle
+- Centroid positions are meaningful only in circular coordinate space
+- Temporal evolution analysis requires consistent geometric properties
+
+**Validation Test:**
+```
+For any DCS visualization V:
+aspect_ratio_test = (x_axis_range / y_axis_range) = 1.0 ± 0.001
+circular_constraint_test = all anchor positions lie on unit circle
+geometric_integrity = aspect_ratio_test ∧ circular_constraint_test
+```
+
+**Failure Modes to Prevent:**
+- Subplot systems that don't inherit aspect ratio constraints
+- Zoom operations that stretch coordinate axes non-uniformly  
+- Responsive layouts that prioritize container fit over geometric accuracy
+- Export formats that compress or stretch the coordinate space
+
 **Coordinate Transformation:**
 ```
 x = r × cos(θ - π/2)
@@ -135,25 +167,25 @@ anchor_angle_i = θ_center + theoretical_offset_i
 subject to: |theoretical_offset_i| ≤ σ_arc/2
 ```
 
-### 1.4 Semantic Density Mathematics
+### 1.4 Theoretical Weighting Mathematics
 
-**Density Function:**
+**Weighting Function:**
 ```
 For angular position θ:
-semantic_density(θ) = Σ(w_i × gaussian_kernel(θ - θ_i, bandwidth))
+theoretical_weighting(θ) = Σ(w_i × gaussian_kernel(θ - θ_i, bandwidth))
 where gaussian_kernel(Δθ, h) = exp(-Δθ²/(2h²))
 ```
 
-**Anchor Density Impact:**
+**Anchor Weighting Impact:**
 ```
-local_anchor_density_i = Σ(w_j × distance_weight(θ_i, θ_j)) for j ≠ i
-where distance_weight(θ₁, θ₂) = exp(-|θ₁ - θ₂|/density_radius)
+local_anchor_weighting_i = Σ(w_j × distance_weight(θ_i, θ_j)) for j ≠ i
+where distance_weight(θ₁, θ₂) = exp(-|θ₁ - θ₂|/weighting_radius)
 ```
 
-**High-Density Zone Detection:**
+**High-Weighting Zone Detection:**
 ```
-high_density_threshold = mean(semantic_density) + std(semantic_density)
-high_density_zones = {θ : semantic_density(θ) > high_density_threshold}
+high_weighting_threshold = mean(theoretical_weighting) + std(theoretical_weighting)
+high_weighting_zones = {θ : theoretical_weighting(θ) > high_weighting_threshold}
 ```
 
 ---
@@ -168,11 +200,11 @@ signature_position = Σ(anchor_vector_i) for i ∈ {1...n_anchors}
 raw_signature = signature_position
 ```
 
-**Arc-Density Corrected Signature:**
+**Arc-Weighting Corrected Signature:**
 ```
-For signature in non-uniform semantic space:
-density_correction_vector = calculate_density_bias(anchor_positions)
-corrected_signature = raw_signature - α × density_correction_vector
+For signature in non-uniform theoretical weighting space:
+weighting_correction_vector = calculate_weighting_bias(anchor_positions)
+corrected_signature = raw_signature - α × weighting_correction_vector
 where α ∈ [0, 1] is correction strength parameter
 ```
 
@@ -222,7 +254,7 @@ signature_position = Σ(cluster_weight_c × cluster_centroid_c) for all clusters
 
 ---
 
-## 3. Distance Metrics with Density Corrections
+## 3. Distance Metrics with Weighting Corrections
 
 ### 3.1 Standard Distance Metrics
 
@@ -246,42 +278,42 @@ d_angular(p₁, p₂) = angular_diff
 d_cosine(p₁, p₂) = 1 - (p₁ · p₂)/(||p₁|| × ||p₂||)
 ```
 
-### 3.2 Density-Corrected Distance Metrics
+### 3.2 Weighting-Adjusted Distance Metrics
 
-**Semantic Density Path Integral:**
+**Theoretical Weighting Path Integral:**
 ```
 For path from p₁ to p₂:
-path_density_weight = ∫[path] semantic_density(θ(t)) dt
-density_correction_factor = 1 / path_density_weight
+path_weighting_integral = ∫[path] theoretical_weighting(θ(t)) dt
+weighting_correction_factor = 1 / path_weighting_integral
 ```
 
-**Density-Weighted Euclidean Distance:**
+**Weighting-Adjusted Euclidean Distance:**
 ```
-d_density_euclidean(p₁, p₂) = d_euclidean(p₁, p₂) × density_correction_factor
+d_weighting_adjusted_euclidean(p₁, p₂) = d_euclidean(p₁, p₂) × weighting_correction_factor
 ```
 
-**Practical Density Correction (Discrete Approximation):**
+**Practical Weighting Correction (Discrete Approximation):**
 ```
 For positions p₁ and p₂:
-midpoint_density = semantic_density(atan2((y₁+y₂)/2, (x₁+x₂)/2))
-density_correction = baseline_density / midpoint_density
-d_corrected(p₁, p₂) = d_euclidean(p₁, p₂) × density_correction
+midpoint_weighting = theoretical_weighting(atan2((y₁+y₂)/2, (x₁+x₂)/2))
+weighting_correction = baseline_weighting / midpoint_weighting
+d_corrected(p₁, p₂) = d_euclidean(p₁, p₂) × weighting_correction
 ```
 
 ### 3.3 Cross-Framework Distance Corrections
 
-**Framework Density Profiles:**
+**Framework Weighting Profiles:**
 ```
 For framework F:
-density_profile_F = {semantic_density_F(θ) for θ ∈ [0, 2π]}
-mean_density_F = mean(density_profile_F)
+weighting_profile_F = {theoretical_weighting_F(θ) for θ ∈ [0, 2π]}
+mean_weighting_F = mean(weighting_profile_F)
 ```
 
 **Cross-Framework Distance Normalization:**
 ```
 For signatures from frameworks F₁ and F₂:
-density_ratio = mean_density_F₁ / mean_density_F₂
-normalized_distance = raw_distance × √density_ratio
+weighting_ratio = mean_weighting_F₁ / mean_weighting_F₂
+normalized_distance = raw_distance × √weighting_ratio
 ```
 
 ---
@@ -290,10 +322,10 @@ normalized_distance = raw_distance × √density_ratio
 
 ### 4.1 Cartographic Fidelity Metrics
 
-**Territorial Coverage with Density Weighting:**
+**Territorial Coverage with Theoretical Weighting:**
 ```
-For signature matrix S with density weights D:
-weighted_signature_matrix = S ⊙ D  (element-wise multiplication)
+For signature matrix S with theoretical weights W:
+weighted_signature_matrix = S ⊙ W  (element-wise multiplication)
 pca = PCA(weighted_signature_matrix)
 territorial_coverage = Σ(explained_variance_ratio_i) for i capturing 95% variance
 ```
@@ -305,21 +337,21 @@ off_diagonal_correlations = {r_ij : i ≠ j}
 anchor_independence = 1 - max(|off_diagonal_correlations|)
 ```
 
-**Arc-Adjusted Cartographic Resolution:**
+**Weighting-Adjusted Cartographic Resolution:**
 ```
 For signatures with arc positioning:
-density_adjusted_signatures = signatures × local_density_corrections
-silhouette_score = silhouette_analysis(density_adjusted_signatures, cluster_labels)
+weighting_adjusted_signatures = signatures × local_weighting_corrections
+silhouette_score = silhouette_analysis(weighting_adjusted_signatures, cluster_labels)
 ```
 
-### 4.2 Density Bias Detection
+### 4.2 Theoretical Weighting Bias Detection
 
-**Systematic Density Bias:**
+**Systematic Weighting Bias:**
 ```
 For corpus signatures {s₁, s₂, ..., s_n}:
 observed_centroid = mean(signatures)
 expected_centroid_uniform = (0, 0)  // For balanced corpus
-density_bias_magnitude = ||observed_centroid - expected_centroid_uniform||
+weighting_bias_magnitude = ||observed_centroid - expected_centroid_uniform||
 ```
 
 **Arc Concentration Bias:**
@@ -331,12 +363,12 @@ concentration_bias = ||mean(signatures) - arc_pull_vector||
 
 ### 4.3 Survey Completeness with Arc Considerations
 
-**Density-Adjusted Completeness:**
+**Weighting-Adjusted Completeness:**
 ```
 completeness_score = (territorial_coverage × anchor_independence × 
-                     cartographic_resolution) × density_uniformity_factor
+                     cartographic_resolution) × weighting_uniformity_factor
 
-where density_uniformity_factor = 1 - coefficient_of_variation(semantic_density)
+where weighting_uniformity_factor = 1 - coefficient_of_variation(theoretical_weighting)
 ```
 
 **Arc Coverage Assessment:**
@@ -351,35 +383,35 @@ optimal_coverage = coverage_efficiency ∈ [0.6, 0.9]
 
 ## 5. Temporal Evolution with Arc Effects
 
-### 5.1 Density-Corrected Centroid Calculation
+### 5.1 Weighting-Adjusted Centroid Calculation
 
 **Basic Centroid:**
 ```
 centroid(S) = (1/|S|) × Σ(signature_i) for signature_i ∈ S
 ```
 
-**Density-Corrected Centroid:**
+**Weighting-Adjusted Centroid:**
 ```
-For signatures with density corrections:
-density_weights = {1/semantic_density(signature_i) for signature_i ∈ S}
-corrected_centroid = Σ(density_weights_i × signature_i) / Σ(density_weights_i)
+For signatures with weighting corrections:
+weighting_factors = {1/theoretical_weighting(signature_i) for signature_i ∈ S}
+corrected_centroid = Σ(weighting_factors_i × signature_i) / Σ(weighting_factors_i)
 ```
 
 **Arc-Aware Temporal Centroid:**
 ```
 For time sequence with arc framework:
-temporal_centroid_t = density_corrected_centroid(signatures_t)
+temporal_centroid_t = weighting_adjusted_centroid(signatures_t)
 arc_drift_correction = compensate_for_arc_bias(temporal_centroid_t)
 final_centroid_t = temporal_centroid_t + arc_drift_correction
 ```
 
-### 5.2 Displacement Analysis with Density Effects
+### 5.2 Displacement Analysis with Weighting Effects
 
-**Density-Corrected Displacement:**
+**Weighting-Adjusted Displacement:**
 ```
 raw_displacement = centroid_final - centroid_initial
-path_density_effect = estimate_path_density(centroid_initial, centroid_final)
-corrected_displacement = raw_displacement / path_density_effect
+path_weighting_effect = estimate_path_weighting(centroid_initial, centroid_final)
+corrected_displacement = raw_displacement / path_weighting_effect
 ```
 
 **Arc-Influenced Angular Drift:**
@@ -392,12 +424,12 @@ intrinsic_angular_drift = raw_angular_drift - arc_influence_vector
 
 ### 5.3 Velocity and Acceleration Corrections
 
-**Density-Corrected Velocity:**
+**Weighting-Adjusted Velocity:**
 ```
 For centroid sequence {c₁, c₂, ..., c_T}:
 raw_velocity_i = (c_{i+1} - c_i) / (t_{i+1} - t_i)
-density_resistance_i = local_semantic_density((c_i + c_{i+1})/2)
-corrected_velocity_i = raw_velocity_i / density_resistance_i
+weighting_resistance_i = local_theoretical_weighting((c_i + c_{i+1})/2)
+corrected_velocity_i = raw_velocity_i / weighting_resistance_i
 ```
 
 **Arc-Compensated Acceleration:**
@@ -410,7 +442,7 @@ intrinsic_acceleration_i = raw_acceleration_i - arc_acceleration_bias
 
 ---
 
-## 6. Competitive Dynamics with Semantic Space Effects
+## 6. Competitive Dynamics with Theoretical Weighting Effects
 
 ### 6.1 Arc-Mediated Competition
 
@@ -421,20 +453,20 @@ angular_distance_AB = |θ_A - θ_B|
 spatial_competition_AB = exp(-angular_distance_AB / competition_radius)
 ```
 
-**Arc Density Competition:**
+**Arc Weighting Competition:**
 ```
-For anchors in same high-density arc:
-intra_arc_competition_AB = (density_A × density_B) / total_arc_density
+For anchors in same high-weighting arc:
+intra_arc_competition_AB = (weighting_A × weighting_B) / total_arc_weighting
 competition_dilution_A = score_B × intra_arc_competition_AB
 adjusted_score_A = original_score_A × (1 - competition_dilution_A)
 ```
 
 ### 6.2 Semantic Space Allocation
 
-**Density-Weighted Space Allocation:**
+**Weighting-Adjusted Space Allocation:**
 ```
 For anchor i in semantic space:
-available_semantic_space_i = local_density_capacity / local_anchor_count
+available_semantic_space_i = local_weighting_capacity / local_anchor_count
 space_utilization_i = score_i / available_semantic_space_i
 if space_utilization_i > 1.0:
     crowding_effect_i = space_utilization_i - 1.0
@@ -471,18 +503,18 @@ arc_configuration_distance = Σ(|arc_center_F₁_i - arc_center_F₂_i| +
                                |arc_span_F₁_i - arc_span_F₂_i|)
 ```
 
-**Density Profile Correlation:**
+**Theoretical Weighting Profile Correlation:**
 ```
-density_profile_correlation = corr(density_F₁(θ), density_F₂(θ)) for θ ∈ [0, 2π]
+weighting_profile_correlation = corr(weighting_F₁(θ), weighting_F₂(θ)) for θ ∈ [0, 2π]
 ```
 
 ### 7.2 Cross-Framework Signature Comparison
 
-**Density-Normalized Signature Distance:**
+**Weighting-Normalized Signature Distance:**
 ```
 For signatures s₁ (Framework F₁) and s₂ (Framework F₂):
-density_normalization_factor = √(mean_density_F₁ × mean_density_F₂)
-normalized_distance = euclidean_distance(s₁, s₂) / density_normalization_factor
+weighting_normalization_factor = √(mean_weighting_F₁ × mean_weighting_F₂)
+normalized_distance = euclidean_distance(s₁, s₂) / weighting_normalization_factor
 ```
 
 **Arc-Compensated Centroid Comparison:**
@@ -499,7 +531,7 @@ comparable_distance = ||compensated_centroid_F₁ - compensated_centroid_F₂||
 
 **Arc-Adjusted Performance Metrics:**
 ```
-territorial_coverage_adjusted = territorial_coverage × density_uniformity_penalty
+territorial_coverage_adjusted = territorial_coverage × weighting_uniformity_penalty
 cartographic_resolution_adjusted = silhouette_score × arc_concentration_penalty
 navigational_accuracy_adjusted = prediction_accuracy × cross_framework_bias_penalty
 
@@ -511,16 +543,16 @@ composite_performance = w₁ × territorial_coverage_adjusted +
 
 ---
 
-## 8. Statistical Validation with Density Considerations
+## 8. Statistical Validation with Theoretical Weighting Considerations
 
 ### 8.1 Bootstrap Validation for Arc Frameworks
 
-**Density-Stratified Bootstrap:**
+**Weighting-Stratified Bootstrap:**
 ```
-For corpus with non-uniform density:
-density_strata = partition_by_semantic_density(corpus)
-bootstrap_sample = stratified_sample(density_strata, sample_size)
-bootstrap_centroid = density_corrected_centroid(bootstrap_sample)
+For corpus with non-uniform weighting:
+weighting_strata = partition_by_theoretical_weighting(corpus)
+bootstrap_sample = stratified_sample(weighting_strata, sample_size)
+bootstrap_centroid = weighting_adjusted_centroid(bootstrap_sample)
 ```
 
 **Arc-Robust Confidence Intervals:**
@@ -534,11 +566,11 @@ confidence_interval = [percentile(corrected_bootstrap_centroids, α/2),
 
 ### 8.2 Cross-Validation with Arc Effects
 
-**Density-Aware Cross-Validation:**
+**Weighting-Aware Cross-Validation:**
 ```
-For k folds stratified by semantic density:
-fold_performance_j = evaluate_framework(fold_j, density_corrections=True)
-cv_performance = mean(fold_performance_j) × density_correction_penalty
+For k folds stratified by theoretical weighting:
+fold_performance_j = evaluate_framework(fold_j, weighting_corrections=True)
+cv_performance = mean(fold_performance_j) × weighting_correction_penalty
 ```
 
 ### 8.3 Significance Testing for Arc Frameworks
@@ -634,7 +666,7 @@ def validate_hybrid_architecture(framework):
 ```
 def optimize_arc_configuration(anchors, semantic_relationships):
     objective_function = territorial_coverage × anchor_independence - 
-                        density_bias_penalty
+                        weighting_bias_penalty
     constraints = {
         arc_span_i ≥ minimum_span,
         Σ(arc_span_i) ≤ maximum_total_coverage,
@@ -643,14 +675,14 @@ def optimize_arc_configuration(anchors, semantic_relationships):
     return optimize(objective_function, constraints)
 ```
 
-**Dynamic Density Calculation:**
+**Dynamic Weighting Calculation:**
 ```
-def calculate_semantic_density(anchor_positions, weights, bandwidth=π/6):
-    density_function = lambda theta: sum(
+def calculate_theoretical_weighting(anchor_positions, weights, bandwidth=π/6):
+    weighting_function = lambda theta: sum(
         weight_i * exp(-(theta - position_i)**2 / (2 * bandwidth**2))
         for position_i, weight_i in zip(anchor_positions, weights)
     )
-    return density_function
+    return weighting_function
 ```
 
 ### 9.3 Numerical Stability for Arc Calculations
@@ -669,9 +701,9 @@ def safe_angular_mean(angles, weights=None):
     return atan2(y, x)
 ```
 
-**Density Correction Bounds:**
+**Weighting Correction Bounds:**
 ```
-def bounded_density_correction(raw_correction, max_correction=0.5):
+def bounded_weighting_correction(raw_correction, max_correction=0.5):
     correction_magnitude = min(norm(raw_correction), max_correction)
     if norm(raw_correction) > 0:
         return correction_magnitude * raw_correction / norm(raw_correction)
@@ -697,12 +729,12 @@ def detect_arc_overlap(arc_configurations):
     return overlaps
 ```
 
-**Density Uniformity Assessment:**
+**Theoretical Weighting Uniformity Assessment:**
 ```
-def assess_density_uniformity(framework):
+def assess_weighting_uniformity(framework):
     theta_samples = linspace(0, 2*pi, 360)
-    density_values = [semantic_density(theta) for theta in theta_samples]
-    uniformity_coefficient = std(density_values) / mean(density_values)
+    weighting_values = [theoretical_weighting(theta) for theta in theta_samples]
+    uniformity_coefficient = std(weighting_values) / mean(weighting_values)
     return 1 - min(uniformity_coefficient, 1.0)  # Higher = more uniform
 ```
 
@@ -711,12 +743,12 @@ def assess_density_uniformity(framework):
 **Arc-Induced Anomaly Detection:**
 ```
 def detect_arc_anomalies(signatures, framework):
-    expected_signature_density = predict_signature_density(framework)
-    observed_signature_density = calculate_observed_density(signatures)
+    expected_signature_weighting = predict_signature_weighting(framework)
+    observed_signature_weighting = calculate_observed_weighting(signatures)
     
-    anomaly_threshold = 2 * std(expected_signature_density)
+    anomaly_threshold = 2 * std(expected_signature_weighting)
     anomalies = find_signatures_outside_threshold(
-        signatures, expected_signature_density, anomaly_threshold
+        signatures, expected_signature_weighting, anomaly_threshold
     )
     return anomalies
 ```
@@ -742,24 +774,24 @@ def detect_temporal_arc_drift(centroid_sequence, arc_configuration):
 ### 11.1 Algorithm Complexity with Arc Calculations
 
 **Core Operations:**
-- **Signature Calculation with Density Correction:** O(n × d) where n = anchors, d = density calculation points
+- **Signature Calculation with Weighting Correction:** O(n × d) where n = anchors, d = weighting calculation points
 - **Arc-Adjusted Distance Matrix:** O(m² × d) where m = signatures
-- **Density-Corrected PCA:** O(min(m³, k³) × d) where k = feature dimensions
+- **Weighting-Adjusted PCA:** O(min(m³, k³) × d) where k = feature dimensions
 - **Cross-Framework Arc Comparison:** O(n₁ × n₂ × d) for frameworks with n₁, n₂ anchors
 
 **Memory Requirements:**
-- **Density Function Storage:** d floating-point numbers for discretized density
+- **Weighting Function Storage:** d floating-point numbers for discretized weighting
 - **Arc Configuration:** 3 × n_arcs numbers (center, span, weight per arc)
-- **Density-Corrected Signatures:** 2m + m×d numbers for positions and corrections
+- **Weighting-Adjusted Signatures:** 2m + m×d numbers for positions and corrections
 
 ### 11.2 Optimization Strategies
 
-**Density Calculation Optimization:**
+**Weighting Calculation Optimization:**
 ```
-# Precompute density values at fixed angular resolution
-density_cache = precompute_density_values(angular_resolution=1°)
+# Precompute weighting values at fixed angular resolution
+weighting_cache = precompute_weighting_values(angular_resolution=1°)
 # Use interpolation for intermediate values
-density_at_theta = interpolate(density_cache, theta)
+weighting_at_theta = interpolate(weighting_cache, theta)
 ```
 
 **Parallel Arc Processing:**
@@ -782,10 +814,10 @@ position_uncertainty_i = √(σ_θ² + (σ_span/n_anchors)²)
 signature_uncertainty = √(Σ(position_uncertainty_i² × weight_i²))
 ```
 
-**Density Estimation Uncertainty:**
+**Weighting Estimation Uncertainty:**
 ```
-For estimated density function with bandwidth uncertainty:
-density_uncertainty(θ) = √(Σ(anchor_uncertainty_i² × kernel_variance_i(θ)))
+For estimated weighting function with bandwidth uncertainty:
+weighting_uncertainty(θ) = √(Σ(anchor_uncertainty_i² × kernel_variance_i(θ)))
 ```
 
 ### 12.2 Systematic Error Detection in Arc Frameworks
@@ -824,5 +856,5 @@ bias_significance = differential_bias / pooled_signature_variance
 **Mathematical Verification:** Complete with Arc Extensions and Hybrid Architecture Support  
 **Implementation Ready:** Yes  
 **Dependencies:** None (standalone mathematical specification)  
-**Arc Framework Support:** Full mathematical foundation for non-uniform semantic space analysis  
+**Arc Framework Support:** Full mathematical foundation for non-uniform theoretical weighting analysis  
 **Hybrid Architecture Support:** Complete mathematical specification for v3.2 component registry and axis referencing

@@ -7,17 +7,17 @@
 
 ## 🎯 **OVERVIEW**
 
-Framework Specification v3.2 introduces **advanced multi-dimensional analysis capabilities** including arc positioning with semantic density modeling, competitive dynamics between theoretical concepts, comprehensive framework validation metrics, and systematic framework comparison protocols. This specification enables sophisticated computational discourse analysis while maintaining the flexible attribute-based architecture of v3.1.
+Framework Specification v3.2 introduces **advanced multi-dimensional analysis capabilities** including arc positioning with theoretical weighting modeling, competitive dynamics between theoretical concepts, comprehensive framework validation metrics, and systematic framework comparison protocols. This specification enables sophisticated computational discourse analysis while maintaining the flexible attribute-based architecture of v3.1.
 
 ## 🚀 **VERSION 3.2 ENHANCEMENTS**
 
 ### **Revolutionary Additions**
-- ✅ **Arc Positioning Architecture**: Semantic density modeling with clustered anchor positioning
+- ✅ **Arc Positioning Architecture**: Theoretical weighting modeling with clustered anchor positioning
 - ✅ **Competitive Dynamics Engine**: Mathematical modeling of ideological competition and dilution effects  
 - ✅ **Framework Fit Validation**: Comprehensive cartographic fidelity and territorial coverage metrics
 - ✅ **Temporal Evolution Tracking**: Centroid displacement, velocity, and acceleration analysis
 - ✅ **Olympics Validation Protocols**: Systematic framework comparison and optimization methodology
-- ✅ **Density Correction Mathematics**: Spatial bias compensation and cross-framework normalization
+- ✅ **Theoretical Weighting Corrections**: Spatial bias compensation and cross-framework normalization
 - ✅ **Cross-Framework Standards**: Rigorous comparison protocols for different analytical approaches
 - ✅ **Hybrid Axes-Anchors Architecture**: Component registry with axes referencing anchors by ID and anchor_summary for rapid comprehension
 - ✅ **Polar Constraint Enforcement**: Mathematical requirement that axes contain exactly 2 anchors for theoretical rigor and interpretability
@@ -63,21 +63,17 @@ version: v3.2
 # POSITIONING COMPONENTS (enhanced with arc support)
 anchors: {...}           # Independent semantic anchors
 axes: {...}              # Opposing anchor pairs  
-arcs: {...}              # Clustered positioning with density modeling
-positioning_strategy: {...} # Arc distribution and density configuration
+arcs: {...}              # Clustered positioning with theoretical weighting
+positioning_strategy: {...} # Arc distribution and weighting configuration
 
 # COMPETITIVE DYNAMICS (new in v3.2)
 competitive_relationships: {...} # Ideological competition modeling
-semantic_space_allocation: {...} # Discourse space competition effects
-
-# VALIDATION COMPONENTS (new in v3.2)  
-framework_fit_metrics: {...}    # Cartographic fidelity requirements
 temporal_analysis: {...}        # Evolution tracking configuration
 olympics_protocols: {...}       # Systematic comparison standards
 
 # ALGORITHMIC ENHANCEMENT (expanded from v3.1)
 algorithm_config: {...}         # Advanced mathematical processing
-density_corrections: {...}      # Spatial bias compensation
+weighting_corrections: {...}      # Spatial bias compensation
 ```
 
 ## 📖 **FRAMEWORK CONSUMPTION GUIDE**
@@ -137,6 +133,124 @@ assert axis.pole_a != axis.pole_b, "Identical poles invalid"
 Framework Load → Component Registry Validation → Axis Validation → 
 Anchor Resolution → Mathematical Processing
 ```
+
+## 📦 **FRAMEWORK EMBEDDING BEST PRACTICES**
+
+### **Experiment System Integration Considerations**
+
+When frameworks are embedded in experiment definitions (see **[Experiment System Specification v3.2](Discernus_Experiment_System_Specification_v3.2.0.md)**), proper prompt element placement becomes critical for optimal LLM processing and cognitive context establishment.
+
+### **Core Principle: Sequential LLM Processing Optimization**
+
+**LLM Processing Challenge**: When frameworks are embedded in experiments, LLMs process content sequentially, requiring strategic placement of prompt elements to establish proper cognitive context before framework interpretation.
+
+**Solution: Early Context Setting + Late Detailed References**
+
+### **Recommended Prompt Placement Architecture**
+
+```yaml
+# OPTIMAL: Early Context Setting (immediately after framework metadata)
+name: framework_name
+version: v3.2
+display_name: "Framework Display Name"
+description: |
+  [Comprehensive framework description]
+
+# EARLY: Essential cognitive priming elements
+expert_role: |
+  You are an expert analyst with specialized knowledge relevant to this framework's
+  theoretical domain. This establishes analytical perspective before encountering
+  framework components and guides interpretation of language cues and concepts.
+
+methodological_approach: |
+  High-level analytical methodology that affects how framework components should
+  be interpreted. Places LLM in appropriate analytical mode before processing
+  detailed framework structure.
+
+# MIDDLE: Framework structure definitions
+components:
+  [Complete framework component definitions]
+
+axes:
+  [Axis definitions with anchor references]
+
+competitive_relationships:
+  [Competition modeling configurations]
+
+# LATE: Detailed prompts referencing framework elements
+detailed_prompts:
+  specific_analysis_guidance: |
+    Detailed instructions that reference specific components, language_cues,
+    competitive_relationships, and other framework elements defined above.
+    These can safely use forward references because the elements exist.
+  
+  scoring_methodology: |
+    Precise scoring instructions that reference specific anchor definitions,
+    competition_pairs, and metrics defined in the framework structure.
+```
+
+### **Cognitive Processing Benefits**
+
+**Early Context Setting Advantages:**
+- **Cognitive Priming**: LLM knows analytical perspective before encountering technical elements
+- **Domain Contextualization**: Proper theoretical context for interpreting language cues
+- **Methodological Frame**: Analysis approach guides framework component interpretation
+- **No Forward References**: Early elements don't reference undefined framework components
+
+**Late Detailed Prompts Advantages:**
+- **Technical Precision**: Can reference specific framework elements with confidence
+- **Forward Reference Resolution**: All referenced elements have been defined
+- **Implementation Details**: Specific guidance for applying framework components
+- **Embedded Context Clarity**: Works seamlessly when framework is embedded in experiments
+
+### **Implementation Guidelines**
+
+**For Framework Developers:**
+
+**Required Sequence:**
+1. **Framework Metadata** (name, version, description)
+2. **Early Context Setting** (expert_role, methodological_approach)
+3. **Framework Structure** (components, axes, competitive_relationships)
+4. **Late Detailed Prompts** (detailed analysis guidance referencing framework elements)
+
+**Early Context Elements:**
+```yaml
+expert_role: |
+  Establish domain expertise and analytical perspective without referencing
+  specific framework components. Focus on theoretical domain and approach.
+
+methodological_approach: |
+  High-level methodology that guides framework interpretation. Should work
+  for any framework in this theoretical family.
+```
+
+**Late Detailed Elements:**
+```yaml
+detailed_prompts:
+  component_application: |
+    Specific guidance for applying framework components, referencing actual
+    language_cues, competition_pairs, and metrics defined above.
+  
+  scoring_precision: |
+    Detailed scoring instructions that reference specific framework elements
+    and use precise technical terminology from component definitions.
+```
+
+**For Experiment System Integration:**
+
+When frameworks are embedded in experiments, this architecture ensures:
+- **Proper Context Layering**: Experiment → Framework → Analysis guidance
+- **Sequential Processing**: Each layer builds on previous context
+- **Reference Resolution**: No broken forward references
+- **Cognitive Clarity**: LLM understanding improves with each processing layer
+
+### **Theoretical Foundation**
+
+**LLM Sequential Processing Research**: Studies of LLM attention mechanisms demonstrate that early context significantly affects interpretation of later content. Cognitive priming through early expert role and methodological guidance improves accuracy of framework component interpretation.
+
+**Framework Embedding Context**: Unlike standalone frameworks, embedded frameworks must account for experiment-level context and sequential processing constraints. The dual-phase prompt architecture addresses these constraints while maintaining framework precision.
+
+**Cross-Reference**: For complete implementation details and experiment-specific considerations, see **[Experiment System Specification v3.2 - Framework Embedding Optimization](Discernus_Experiment_System_Specification_v3.2.0.md#framework-embedding-optimization)**.
 
 ## 🏗️ **HYBRID AXES-ANCHORS ARCHITECTURE SPECIFICATION**
 
@@ -435,7 +549,7 @@ description: |
   Complete academic grounding including primary sources and methodological approach.
   
   ## v3.2 Capabilities
-  - Arc positioning with semantic density modeling
+  - Arc positioning with theoretical weighting modeling
   - Competitive dynamics between theoretical concepts  
   - Framework fit validation with mathematical metrics
   - Temporal evolution tracking and analysis
@@ -578,10 +692,10 @@ positioning_strategy:
           type: cluster_semantic_type
           language_cues: [...]
           
-      # v3.2 Enhancement: Semantic Density Modeling
-      density_profile: gaussian   # gaussian/uniform/custom
-      density_strength: 1.5       # Relative density compared to baseline
-      bandwidth: 15               # Density calculation bandwidth (degrees)
+      # v3.2 Enhancement: Theoretical Weighting Modeling
+      weighting_profile: gaussian   # gaussian/uniform/custom
+      weighting_strength: 1.5       # Relative weighting compared to baseline
+      bandwidth: 15               # Weighting calculation bandwidth (degrees)
       
       # v3.2 Enhancement: Cluster Competition
       competes_with_arcs: ["other_arc_name"]
@@ -635,7 +749,7 @@ framework_fit_metrics:
     enabled: true
     minimum_threshold: 0.85          # Minimum acceptable coverage
     pca_components: 3                # Components for 95% variance
-    density_weighting: true          # Account for semantic density
+    theoretical_weighting: true          # Account for theoretical weighting
     
   anchor_independence:
     enabled: true
@@ -647,7 +761,7 @@ framework_fit_metrics:
     enabled: true
     minimum_silhouette: 0.60         # Minimum silhouette score
     cluster_method: kmeans           # kmeans/hierarchical/custom
-    density_correction: true         # Apply density corrections
+    weighting_correction: true         # Apply weighting corrections
     
   navigational_accuracy:
     enabled: true
@@ -661,10 +775,10 @@ framework_fit_metrics:
     theoretical_coverage: 0.90       # Minimum theoretical space coverage
     redundancy_threshold: 0.3        # Maximum acceptable redundancy
     
-  density_bias_detection:
+  weighting_bias_detection:
     systematic_bias_threshold: 0.15  # Maximum acceptable systematic bias
     arc_bias_compensation: true      # Compensate for arc positioning effects
-    uniformity_requirement: 0.75     # Minimum density uniformity score
+    uniformity_requirement: 0.75     # Minimum weighting uniformity score
 
 # =============================================================================
 # TEMPORAL ANALYSIS CONFIGURATION (new in v3.2)
@@ -701,10 +815,10 @@ temporal_analysis:
     stability_window: 5              # Window for stability measurement
     prediction_horizon: 2            # Periods ahead for prediction testing
     
-  # Density-corrected temporal analysis
-  density_corrections:
-    apply_corrections: true          # Apply density corrections to temporal analysis
-    path_density_weighting: true     # Weight by semantic density along path
+  # Weighting-corrected temporal analysis
+  weighting_corrections:
+    apply_corrections: true          # Apply weighting corrections to temporal analysis
+    path_weighting: true     # Weight by theoretical weighting along path
     arc_bias_compensation: true      # Compensate for arc positioning effects
 
 # =============================================================================
@@ -773,8 +887,8 @@ algorithm_config:
     max_scaling: 0.95                # Maximum scaling factor
     variance_factor: 0.3             # Variance sensitivity
     mean_factor: 0.1                 # Mean sensitivity
-    density_adjustment: true         # Adjust for semantic density
-    methodology: "Density-aware adaptive scaling for optimal discrimination"
+    weighting_adjustment: true         # Adjust for theoretical weighting
+    methodology: "Weighting-aware adaptive scaling for optimal discrimination"
     
   # v3.2 Enhancement: Competitive Algorithm Integration
   competitive_processing:
@@ -783,8 +897,8 @@ algorithm_config:
     dilution_calculation: multiplicative  # multiplicative/additive/threshold
     crowding_effects: gaussian       # gaussian/linear/exponential
     
-  # v3.2 Enhancement: Density Correction Integration
-  density_corrections:
+  # v3.2 Enhancement: Weighting Correction Integration
+  weighting_corrections:
     enabled: true
     correction_strength: 0.8         # How strongly to apply corrections (0.0-1.0)
     bias_compensation: true          # Compensate for systematic biases
@@ -805,15 +919,15 @@ algorithm_config:
 coordinate_system:
   type: circle                       # Enhanced circular coordinate system
   radius: 1.0                        # Standard unit circle
-  density_modeling: true             # Enable semantic density modeling
-  density_resolution: 360            # Angular resolution for density calculation (points)
-  description: "Advanced DCS with semantic density modeling and competitive dynamics"
+  weighting_modeling: true             # Enable theoretical weighting modeling
+  weighting_resolution: 360            # Angular resolution for weighting calculation (points)
+  description: "Advanced DCS with theoretical weighting modeling and competitive dynamics"
   
-  # v3.2 Enhancement: Density Configuration
-  density_configuration:
-    baseline_density: 1.0            # Baseline semantic density
-    max_density_ratio: 5.0           # Maximum density relative to baseline
-    density_smoothing: gaussian      # gaussian/linear/none
+  # v3.2 Enhancement: Weighting Configuration
+  weighting_configuration:
+    baseline_weighting: 1.0            # Baseline theoretical weighting
+    max_weighting_ratio: 5.0           # Maximum weighting relative to baseline
+    weighting_smoothing: gaussian      # gaussian/linear/none
     smoothing_bandwidth: 15          # Smoothing bandwidth (degrees)
 
 # =============================================================================
@@ -824,8 +938,8 @@ metrics:
   # Core metrics (enhanced)
   territorial_coverage:
     name: "Territorial Coverage Score"  
-    description: "PCA-based measure of theoretical space explanation with density weighting"
-    calculation: "Density-weighted explained variance ratio for 95% coverage"
+    description: "PCA-based measure of theoretical space explanation with weighting"
+    calculation: "Weighting-adjusted explained variance ratio for 95% coverage"
     target_range: [0.85, 1.0]
     
   anchor_independence:
@@ -836,8 +950,8 @@ metrics:
     
   cartographic_resolution:
     name: "Cartographic Resolution Score"
-    description: "Silhouette-based clustering quality with density corrections"
-    calculation: "Density-corrected silhouette coefficient"
+    description: "Silhouette-based clustering quality with weighting corrections"
+    calculation: "Weighting-corrected silhouette coefficient"
     target_range: [0.60, 1.0]
     
   # v3.2 New Metrics
@@ -860,8 +974,8 @@ metrics:
     target_range: [0.75, 1.0]
     
   # Advanced validation metrics
-  density_bias_index:
-    name: "Systematic Density Bias Index"
+  weighting_bias_index:
+    name: "Systematic Weighting Bias Index"
     description: "Measure of systematic positioning bias from arc configuration"
     calculation: "Magnitude of systematic centroid deviation from expected"
     target_range: [0.0, 0.15]
@@ -869,7 +983,7 @@ metrics:
   cross_framework_portability:
     name: "Cross-Framework Comparison Validity"
     description: "Ability to meaningfully compare with other frameworks"
-    calculation: "Correlation stability under density normalization"
+    calculation: "Correlation stability under weighting normalization"
     target_range: [0.80, 1.0]
 
 # =============================================================================
@@ -884,7 +998,7 @@ prompt_configuration:
   
   bias_neutral_analysis_focus: |
     Evaluate theoretical positioning across multiple dimensions simultaneously,
-    detecting competitive relationships between concepts, semantic density variations,
+    detecting competitive relationships between concepts, theoretical weighting variations,
     and temporal evolution patterns without imposing normative judgments on 
     theoretical orientations.
   
@@ -896,7 +1010,7 @@ prompt_configuration:
   
   scoring_methodology: |
     Provide precise 0.0-1.0 scores with detailed textual evidence. Account for
-    competitive relationships between concepts, semantic density effects, and
+    competitive relationships between concepts, theoretical weighting effects, and
     temporal positioning. Consider theoretical clustering and hierarchical
     importance when assigning scores across multiple dimensions.
     
@@ -912,8 +1026,8 @@ prompt_configuration:
     theoretical positioning. Identify gradual drift, sudden changes, cyclical
     patterns, and acceleration/deceleration in conceptual emphasis over time.
     
-  density_awareness_instructions: |
-    Consider semantic clustering effects and density variations when interpreting
+  weighting_awareness_instructions: |
+    Consider semantic clustering effects and weighting variations when interpreting
     theoretical positioning. Account for anchor concentration effects and 
     systematic biases introduced by clustered positioning strategies.
     
@@ -938,7 +1052,7 @@ visualization:
   # Enhanced visualization types
   supported_charts:
     - circular                       # Standard circular plot
-    - density_heatmap               # Semantic density visualization  
+    - weighting_heatmap               # Theoretical weighting visualization  
     - temporal_evolution            # Centroid movement over time
     - competitive_dynamics          # Competition relationship network
     - framework_comparison          # Multi-framework overlay
@@ -955,8 +1069,8 @@ visualization:
     
   # Arc visualization configuration
   arc_visualization:
-    show_density_gradients: true     # Display semantic density gradients
-    density_opacity_range: [0.3, 0.9]  # Opacity range for density visualization
+    show_weighting_gradients: true     # Display theoretical weighting gradients
+    weighting_opacity_range: [0.3, 0.9]  # Opacity range for weighting visualization
     arc_boundary_style: "dashed"     # Arc boundary visualization style
     cluster_highlight: true          # Highlight anchor clusters
     
@@ -987,8 +1101,8 @@ theoretical_foundation:
   theoretical_approach: |
     Comprehensive explanation of theoretical grounding, methodological innovation,
     competitive dynamics modeling approach, temporal analysis methodology,
-    and framework fit validation principles. Include discussion of semantic
-    density modeling and cross-framework comparison strategies.
+    and framework fit validation principles. Include discussion of theoretical
+    weighting modeling and cross-framework comparison strategies.
   
   # v3.2 Enhancement: Advanced Validation
   validation_methodology: |
@@ -1018,7 +1132,7 @@ validation:
     "Discernus Framework: Framework Name v3.2 (Jeffrey Whatcott, 2025)"
     
     Include complete version number and specify v3.2 capabilities used:
-    - Arc positioning and semantic density modeling (if applicable)
+    - Arc positioning and theoretical weighting modeling (if applicable)
     - Competitive dynamics analysis (if applicable)  
     - Temporal evolution tracking (if applicable)
     - Olympics validation protocols (if applicable)
@@ -1040,7 +1154,7 @@ compatibility:
     - olympics_validation_v1.0
   
   weighting_schemes:
-    - density_corrected_weighting
+    - weighting_corrected_weighting
     - competitive_dynamics_weighting
     - temporal_coherence_weighting
     - olympics_composite_scoring
@@ -1051,7 +1165,7 @@ compatibility:
     - v3.0
   
   visualization_types:
-    - circular_with_density
+    - circular_with_weighting
     - temporal_evolution
     - competitive_network
     - olympics_comparison
@@ -1072,7 +1186,7 @@ capabilities:
   temporal_analysis: true           # Tracks evolution over time
   framework_fit_validation: true    # Comprehensive validation metrics
   olympics_protocols: true          # Olympics competition ready
-  density_corrections: true         # Semantic density bias compensation
+  weighting_corrections: true         # Theoretical weighting bias compensation
   cross_framework_comparison: true  # Rigorous comparison standards
 ```
 
@@ -1212,10 +1326,10 @@ def validate_framework(framework):
 ## 🎯 **v3.2 SUCCESS METRICS**
 
 ### **Technical Achievement**
-- [ ] **Arc Positioning**: Semantic density modeling fully functional
+- [ ] **Arc Positioning**: Theoretical weighting modeling fully functional
 - [ ] **Competitive Dynamics**: Mathematical modeling operational
 - [ ] **Framework Fit**: All validation metrics implemented
-- [ ] **Temporal Analysis**: Evolution tracking with density corrections
+- [ ] **Temporal Analysis**: Evolution tracking with weighting corrections
 - [ ] **Olympics Protocols**: Systematic comparison methodology complete
 
 ### **Academic Impact**

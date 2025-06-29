@@ -18,7 +18,7 @@ description: |
   Advanced Moral Foundations Theory framework implementing Jonathan Haidt's research 
   with v3.2 competitive dynamics modeling and framework fit validation. This framework 
   analyzes moral reasoning through six foundation pairs with competitive relationships, 
-  temporal evolution tracking, and sophisticated density modeling.
+  temporal evolution tracking, and sophisticated theoretical weighting modeling.
   
   ## Theoretical Foundation
   
@@ -49,7 +49,7 @@ description: |
   - **Framework Fit Validation**: Cartographic fidelity and territorial coverage metrics
   - **Temporal Evolution**: Foundation stability tracking and evolution patterns
   - **Olympics Protocols**: Systematic comparison with other moral frameworks
-  - **Arc Positioning**: Semantic density modeling for foundation clustering
+  - **Arc Positioning**: Theoretical weighting modeling for foundation clustering
   - **Density Corrections**: Spatial bias compensation and cross-framework normalization
   
   ## Usage Guidelines
@@ -547,7 +547,7 @@ algorithm_config:
     zero_sum_enforcement: false
     methodology: "Models foundation competition and mutual inhibition effects"
   
-  density_corrections:
+  weighting_corrections:
     spatial_bias_compensation: true
     cross_framework_normalization: true
     territorial_overlap_adjustment: true
@@ -567,21 +567,21 @@ coordinate_system:
       center_angle: 30
       span: 120
       foundations: [care, fairness]
-      density_modeling: true
+      theoretical_weighting_modeling: true
     
     binding_arc:
       center_angle: 150
       span: 180
       foundations: [loyalty, authority, sanctity]
-      density_modeling: true
+      theoretical_weighting_modeling: true
     
     liberty_arc:
       center_angle: 330
       span: 60
       foundations: [liberty]
-      density_modeling: true
+      theoretical_weighting_modeling: true
   
-  semantic_density_modeling:
+  theoretical_weighting_modeling:
     foundation_clustering: true
     category_coherence_measurement: true
     spatial_distribution_optimization: true

@@ -315,6 +315,220 @@ framework:
 - 🔄 Version management
 - 🔄 Quality assurance
 
+## **🎯 Framework Embedding Optimization**
+
+### **LLM Processing Optimization for Embedded Frameworks**
+
+When frameworks are embedded directly in experiment YAML definitions, optimal **prompt element placement** becomes critical for LLM processing efficiency and analytical accuracy. This implements **[Framework Specification v3.2 - Framework Embedding Best Practices](Discernus_Coordinate_System_Framework_Specification_3_2.md#framework-embedding-best-practices)**.
+
+### **Core Challenge: Sequential Processing Context**
+
+**Processing Order**: Experiment YAML → Embedded Framework → LLM Analysis  
+**Problem**: LLMs process sequentially, requiring proper cognitive context establishment before encountering framework components  
+**Solution**: Strategic prompt placement optimized for embedded framework context
+
+### **Optimal Embedded Framework Architecture**
+
+```yaml
+# =============================================================================
+# EXPERIMENT METADATA (establishes research context)
+# =============================================================================
+experiment_meta:
+  name: "research_experiment_identifier"
+  display_name: "Human-readable experiment name"
+  description: "Experiment purpose and research context"
+
+# =============================================================================
+# EMBEDDED FRAMEWORK WITH OPTIMIZED PROMPT PLACEMENT
+# =============================================================================
+framework:
+  name: "framework_name"
+  version: "v3.2"
+  display_name: "Framework Display Name"
+  description: |
+    Comprehensive framework description with theoretical foundation.
+    This provides initial framework context before LLM encounters technical elements.
+  
+  # EARLY: Essential cognitive priming (CRITICAL for embedded frameworks)
+  expert_role: |
+    You are an expert analyst of [domain] discourse with deep knowledge of 
+    [theoretical approach]. You specialize in [analytical methodology] using
+    [framework approach] standards.
+    
+    ** No framework component references - establishes cognitive frame only **
+  
+  methodological_approach: |
+    Following [theoretical methodology], analyze discourse as [approach type].
+    Apply [analytical principles] without fragmenting into separate parts.
+    Use [scoring principles] for comprehensive evaluation.
+    
+    ** High-level methodology that guides framework interpretation **
+  
+  # MIDDLE: Complete framework structure definitions
+  components:
+    anchor_id_1:
+      component_id: anchor_id_1
+      type: anchor
+      description: "Complete anchor definition with theoretical grounding"
+      language_cues: ["cue1", "cue2", "cue3"]
+      # ... complete component definition
+  
+  axes:
+    Axis_Name:
+      anchor_ids: [anchor_id_1, anchor_id_2]
+      description: "Axis relationship description"
+      anchor_summary:
+        anchor_id_1: "Brief anchor description"
+        anchor_id_2: "Brief opposing anchor description"
+  
+  competitive_relationships:
+    enabled: true
+    competition_pairs:
+      - anchors: ["anchor_id_1", "anchor_id_2"]
+        strength: 0.8
+        mechanism: "crowding_out"
+  
+  # LATE: Detailed prompts with framework element references
+  detailed_prompts:
+    scoring_scale_guidance: |
+      Use the [specific scale] where 0 = [definition], 1 = [definition].
+      Apply this scale to each anchor defined in the components section above.
+      Reference the specific language_cues and competition_pairs for precision.
+    
+    framework_application: |
+      Apply the competitive_relationships defined above to detect ideological
+      competition. Reference the specific anchor definitions and language_cues
+      from the components section for accurate analysis.
+    
+    domain_expertise: |
+      Apply specialized knowledge of [domain] discourse, including the cultural
+      terminology defined in the components section above. Reference the
+      specific theoretical framework elements for detailed guidance.
+
+# =============================================================================
+# EXPERIMENT EXECUTION CONFIGURATION
+# =============================================================================
+models:
+  # Model configuration for experiment execution
+```
+
+### **Implementation Benefits**
+
+**Early Context Setting Advantages:**
+- **Domain Expertise Establishment**: LLM adopts appropriate analytical perspective before processing framework components
+- **Methodological Priming**: Analysis approach established before encountering technical framework structure
+- **No Forward References**: Early prompts don't break by referencing undefined framework elements
+- **Experiment Integration**: Works seamlessly in experiment context with proper layering
+
+**Late Detailed Prompts Advantages:**
+- **Technical Precision**: Can reference specific framework components with confidence
+- **Forward Reference Safety**: All referenced elements have been defined in framework structure
+- **Implementation Specificity**: Detailed guidance for applying framework components in analysis
+- **Framework Element Integration**: Natural referencing of language_cues, competition_pairs, and metrics
+
+### **Framework Embedding Implementation Guidelines**
+
+**Required Implementation Sequence:**
+
+```yaml
+# 1. EXPERIMENT CONTEXT (research framing)
+experiment_meta: {...}
+
+# 2. FRAMEWORK IDENTIFICATION (basic framework info)
+framework:
+  name: "..."
+  version: "v3.2"
+  description: "..."
+
+# 3. EARLY COGNITIVE PRIMING (domain and methodology)
+  expert_role: |
+    Domain expertise without component references
+  methodological_approach: |
+    Analysis methodology without technical details
+
+# 4. FRAMEWORK STRUCTURE (technical definitions)
+  components: {...}
+  axes: {...}
+  competitive_relationships: {...}
+
+# 5. DETAILED IMPLEMENTATION (component references)
+  detailed_prompts:
+    framework_application: |
+      Specific guidance referencing components above
+    scoring_methodology: |
+      Precise instructions using framework elements
+
+# 6. EXPERIMENT EXECUTION (analysis workflow)
+models: {...}
+corpus: {...}
+```
+
+### **Common Implementation Mistakes**
+
+**❌ Anti-Pattern: Forward References in Early Prompts**
+```yaml
+# WRONG: Early prompt references undefined framework elements
+expert_role: |
+  Apply the language_cues defined in the components section...  # BROKEN REFERENCE
+  
+components:
+  # Components defined after being referenced above
+```
+
+**❌ Anti-Pattern: Late Context Setting**
+```yaml
+# WRONG: Domain expertise established after framework structure
+components: {...}
+axes: {...}
+
+expert_role: |  # TOO LATE - framework already processed without context
+  You are an expert analyst...
+```
+
+**✅ Correct Pattern: Sequential Context Building**
+```yaml
+# CORRECT: Context → Structure → Implementation
+expert_role: |
+  Domain expertise without forward references
+  
+components: {...}  # Framework structure with proper context
+axes: {...}
+
+detailed_prompts:  # Implementation guidance with backward references
+  framework_application: |
+    Apply the components defined above...
+```
+
+### **Framework Embedding Quality Assurance**
+
+**Validation Checklist:**
+- [ ] **Expert Role Early**: Domain expertise established before framework structure
+- [ ] **No Forward References**: Early prompts don't reference undefined elements
+- [ ] **Framework Structure Complete**: All components, axes, relationships defined
+- [ ] **Detailed Implementation**: Specific guidance references framework elements
+- [ ] **Sequential Flow**: Logical progression from context to structure to implementation
+
+**Processing Verification:**
+- [ ] **Context Priming**: LLM has domain expertise before encountering technical elements
+- [ ] **Reference Resolution**: All framework element references can be resolved
+- [ ] **Implementation Clarity**: Detailed prompts provide specific guidance for framework application
+- [ ] **Experiment Integration**: Framework embedding works seamlessly in experiment context
+
+### **Cross-Reference Documentation**
+
+- **Theoretical Foundation**: **[Framework Specification v3.2 - Framework Embedding Best Practices](Discernus_Coordinate_System_Framework_Specification_3_2.md#framework-embedding-best-practices)**
+- **Cognitive Processing Research**: LLM sequential attention and context establishment principles
+- **Implementation Examples**: Current production experiments demonstrating optimal prompt placement
+- **Quality Validation**: Framework embedding validation protocols and common error patterns
+
+### **Academic Integration Implications**
+
+**Research Reproducibility**: Proper prompt placement ensures consistent LLM processing across different research contexts and framework applications.
+
+**Methodological Rigor**: Sequential context establishment improves analytical reliability and reduces prompt-dependent variation in research results.
+
+**Framework Portability**: Standardized embedding architecture enables framework reuse across different experiments while maintaining analytical consistency.
+
 ## **📈 Statistical Analysis Capabilities**
 
 ### **Current Methods**

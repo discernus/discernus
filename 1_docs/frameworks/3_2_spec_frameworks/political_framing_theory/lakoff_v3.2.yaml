@@ -494,16 +494,16 @@ coordinate_system:
     strict_father_arc:
       center_angle: 0
       span: 90
-      density_modeling: true
+      theoretical_weighting_modeling: true
       competition_zone: true
     
     nurturant_parent_arc:
       center_angle: 180
       span: 90
-      density_modeling: true
+      theoretical_weighting_modeling: true
       competition_zone: true
   
-  semantic_density_modeling:
+  theoretical_weighting_modeling:
     family_model_clustering: true
     competitive_exclusion_zones: true
     coherence_boundary_detection: true

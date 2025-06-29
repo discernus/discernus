@@ -232,14 +232,14 @@ algorithm_config:
     competition_order: parallel
     dilution_calculation: additive  # Additive for low competition
     
-  density_corrections:
+  weighting_corrections:
     enabled: true
     correction_strength: 0.6
 
 coordinate_system:
   type: circle
   radius: 1.0
-  density_modeling: true
+  theoretical_weighting_modeling: true
   description: "Advanced DCS with four independent anchors testing framing function independence"
 
 metrics:
@@ -338,5 +338,5 @@ capabilities:
   temporal_analysis: true
   framework_fit_validation: true
   olympics_protocols: true
-  density_corrections: true
+  weighting_corrections: true
   function_independence_analysis: true

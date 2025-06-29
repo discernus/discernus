@@ -152,14 +152,14 @@ algorithm_config:
     competition_order: parallel
     dilution_calculation: multiplicative
     
-  density_corrections:
+  weighting_corrections:
     enabled: true
     correction_strength: 0.7
 
 coordinate_system:
   type: circle
   radius: 1.0
-  density_modeling: true
+  theoretical_weighting_modeling: true
   description: "Triad anchors at 90°, 210°, 330° with orthogonal Populism–Pluralism style overlay and v3.2 enhancements."
 
 metrics:
@@ -251,5 +251,5 @@ capabilities:
   temporal_analysis: true
   framework_fit_validation: true
   olympics_protocols: true
-  density_corrections: true
+  weighting_corrections: true
   algorithmic_boosters: true

@@ -42,7 +42,7 @@ description: |
   ## v3.2 Enhanced Capabilities
   
   ### Advanced Multi-Dimensional Analysis
-  - **Arc Positioning**: Semantic density modeling within ethics domains
+  - **Arc Positioning**: Theoretical weighting modeling within ethics domains
   - **Competitive Dynamics**: Analysis of competing ethical frameworks within discourse
   - **Framework Fit Validation**: Comprehensive metrics for stakeholder theory coverage
   - **Temporal Evolution**: Tracking ethical positioning changes over time
@@ -443,8 +443,8 @@ positioning_strategy:
         employee_development:
           relative_position: 0.75
           weight: 0.9
-      density_profile: gaussian
-      density_strength: 1.3
+      weighting_profile: gaussian
+      weighting_strength: 1.3
       bandwidth: 20
       
     operational_integrity:
@@ -459,8 +459,8 @@ positioning_strategy:
         financial_responsibility:
           relative_position: 0.67
           weight: 0.8
-      density_profile: gaussian
-      density_strength: 1.2
+      weighting_profile: gaussian
+      weighting_strength: 1.2
       bandwidth: 25
       
     strategic_vision:
@@ -472,8 +472,8 @@ positioning_strategy:
         sustainable_purpose:
           relative_position: 0.5
           weight: 0.7
-      density_profile: uniform
-      density_strength: 1.0
+      weighting_profile: uniform
+      weighting_strength: 1.0
       bandwidth: 30
 
 # =============================================================================
@@ -527,7 +527,7 @@ framework_fit_metrics:
     enabled: true
     minimum_threshold: 0.85
     pca_components: 3
-    density_weighting: true
+    weighting_modeling: true
     
   anchor_independence:
     enabled: true
@@ -539,7 +539,7 @@ framework_fit_metrics:
     enabled: true
     minimum_silhouette: 0.60
     cluster_method: kmeans
-    density_correction: true
+    weighting_correction: true
     
   survey_completeness:
     functional_mece: true
@@ -565,9 +565,9 @@ temporal_analysis:
     acceleration_threshold: 0.02
     classify_patterns: true
     
-  density_corrections:
+  weighting_corrections:
     apply_corrections: true
-    path_density_weighting: true
+    path_weighting_adjustment: true
     arc_bias_compensation: true
 
 # =============================================================================
@@ -621,7 +621,7 @@ algorithm_config:
     max_scaling: 0.95
     variance_factor: 0.3
     mean_factor: 0.1
-    density_adjustment: true
+    weighting_adjustment: true
     methodology: "Density-aware adaptive scaling for optimal discrimination"
     
   competitive_processing:
@@ -630,7 +630,7 @@ algorithm_config:
     dilution_calculation: multiplicative
     crowding_effects: gaussian
     
-  density_corrections:
+  weighting_corrections:
     enabled: true
     correction_strength: 0.8
     bias_compensation: true
@@ -650,14 +650,14 @@ algorithm_config:
 coordinate_system:
   type: circle
   radius: 1.0
-  density_modeling: true
-  density_resolution: 360
-  description: "Advanced DCS with semantic density modeling and competitive dynamics for business ethics"
+  theoretical_weighting_modeling: true
+  weighting_resolution: 360
+  description: "Advanced DCS with theoretical weighting modeling and competitive dynamics for business ethics"
   
-  density_configuration:
-    baseline_density: 1.0
-    max_density_ratio: 5.0
-    density_smoothing: gaussian
+  theoretical_weighting_configuration:
+    baseline_weighting: 1.0
+    max_weighting_ratio: 5.0
+    weighting_smoothing: gaussian
     smoothing_bandwidth: 15
 
 # =============================================================================
@@ -667,7 +667,7 @@ coordinate_system:
 metrics:
   territorial_coverage:
     name: "Territorial Coverage Score"
-    description: "PCA-based measure of business ethics space explanation with density weighting"
+    description: "PCA-based measure of business ethics space explanation with theoretical weighting"
     calculation: "Density-weighted explained variance ratio for 95% coverage"
     target_range: [0.85, 1.0]
     
@@ -679,7 +679,7 @@ metrics:
     
   cartographic_resolution:
     name: "Cartographic Resolution Score"
-    description: "Silhouette-based clustering quality with density corrections"
+    description: "Silhouette-based clustering quality with weighting corrections"
     calculation: "Density-corrected silhouette coefficient"
     target_range: [0.60, 1.0]
     
@@ -765,7 +765,7 @@ visualization:
   
   supported_charts:
     - circular
-    - density_heatmap
+    - weighting_heatmap
     - temporal_evolution
     - competitive_dynamics
     - framework_comparison
@@ -789,8 +789,8 @@ visualization:
     ethical_negative: "#C62828"
   
   arc_visualization:
-    show_density_gradients: true
-    density_opacity_range: [0.3, 0.9]
+    show_weighting_gradients: true
+    weighting_opacity_range: [0.3, 0.9]
     arc_boundary_style: "dashed"
     cluster_highlight: true
     
@@ -848,7 +848,7 @@ validation:
     "Discernus Framework: Business Ethics v3.2 (Freeman/Solomon, 2025)"
     
     Include complete version number and specify v3.2 capabilities used:
-    - Arc positioning and semantic density modeling (if applicable)
+    - Arc positioning and theoretical weighting modeling (if applicable)
     - Competitive dynamics analysis (if applicable)
     - Temporal evolution tracking (if applicable)
     - Olympics validation protocols (if applicable)
@@ -882,7 +882,7 @@ compatibility:
     - v3.0
   
   visualization_types:
-    - circular_with_density
+    - circular_with_weighting
     - temporal_evolution
     - competitive_network
     - olympics_comparison
@@ -903,6 +903,6 @@ capabilities:
   temporal_analysis: true
   framework_fit_validation: true
   olympics_protocols: true
-  density_corrections: true
+  weighting_corrections: true
   cross_framework_comparison: true
   hybrid_axes_anchors_architecture: true 

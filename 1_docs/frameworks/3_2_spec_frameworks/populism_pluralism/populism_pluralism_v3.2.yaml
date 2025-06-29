@@ -163,7 +163,7 @@ algorithm_config:
     enabled: true
     base_scaling: 0.72
     max_scaling: 0.92
-    density_adjustment: true
+    weighting_adjustment: true
     methodology: "Scaling optimized for democratic theory and governance classification"
     
   competitive_processing:
@@ -174,7 +174,7 @@ algorithm_config:
 coordinate_system:
   type: circle
   radius: 1.0
-  density_modeling: true
+  theoretical_weighting_modeling: true
   description: "Advanced DCS with competitive dynamics for democratic theory analysis"
 
 metrics:

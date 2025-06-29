@@ -29,7 +29,7 @@ description: |
   ## v3.2 Enhanced Capabilities
   
   ### Advanced Multi-Dimensional Analysis
-  - **Arc Positioning**: Semantic density modeling with virtue/vice clustering
+  - **Arc Positioning**: Theoretical weighting modeling with virtue/vice clustering
   - **Competitive Dynamics**: Analysis of moral tension and virtue-vice competition
   - **Framework Fit Validation**: Comprehensive metrics for civic virtue theory coverage
   - **Temporal Evolution**: Tracking moral positioning changes in discourse over time
@@ -321,7 +321,7 @@ anchors:
 
 positioning_strategy:
   type: arc_clustering
-  description: "Anchors clustered by moral orientation with semantic density modeling - virtue cluster around 90° (top) and vice cluster around 270° (bottom)"
+  description: "Anchors clustered by moral orientation with theoretical weighting modeling - virtue cluster around 90° (top) and vice cluster around 270° (bottom)"
   
   arcs:
     virtue:
@@ -345,8 +345,8 @@ positioning_strategy:
         Pragmatism:
           relative_position: 0.875
           weight: 0.6
-      density_profile: gaussian
-      density_strength: 1.5
+      weighting_profile: gaussian
+      weighting_strength: 1.5
       bandwidth: 18
       competes_with_arcs: ["vice"]
       inter_arc_competition: 0.7
@@ -372,8 +372,8 @@ positioning_strategy:
         Fantasy:
           relative_position: 0.875
           weight: 0.6
-      density_profile: gaussian
-      density_strength: 1.3
+      weighting_profile: gaussian
+      weighting_strength: 1.3
       bandwidth: 18
       competes_with_arcs: ["virtue"]
       inter_arc_competition: 0.7
@@ -434,7 +434,7 @@ framework_fit_metrics:
     enabled: true
     minimum_threshold: 0.85
     pca_components: 3
-    density_weighting: true
+    weighting_modeling: true
     
   anchor_independence:
     enabled: true
@@ -446,7 +446,7 @@ framework_fit_metrics:
     enabled: true
     minimum_silhouette: 0.60
     cluster_method: hierarchical
-    density_correction: true
+    weighting_correction: true
     
   navigational_accuracy:
     enabled: true
@@ -489,9 +489,9 @@ temporal_analysis:
     stability_window: 5
     prediction_horizon: 2
     
-  density_corrections:
+  weighting_corrections:
     apply_corrections: true
-    path_density_weighting: true
+    path_weighting_adjustment: true
     arc_bias_compensation: true
 
 # =============================================================================
@@ -545,7 +545,7 @@ algorithm_config:
     max_scaling: 0.90
     variance_factor: 0.22
     mean_factor: 0.06
-    density_adjustment: true
+    weighting_adjustment: true
     methodology: "Binary scaling optimized for civic engagement analysis"
     
   competitive_processing:
@@ -554,7 +554,7 @@ algorithm_config:
     dilution_calculation: multiplicative
     crowding_effects: gaussian
     
-  density_corrections:
+  weighting_corrections:
     enabled: true
     correction_strength: 0.8
     bias_compensation: true
@@ -574,14 +574,14 @@ algorithm_config:
 coordinate_system:
   type: circle
   radius: 1.0
-  density_modeling: true
-  density_resolution: 360
-  description: "Advanced DCS with semantic density modeling and competitive dynamics for civic virtue analysis"
+  theoretical_weighting_modeling: true
+  weighting_resolution: 360
+  description: "Advanced DCS with theoretical weighting modeling and competitive dynamics for civic virtue analysis"
   
-  density_configuration:
-    baseline_density: 1.0
-    max_density_ratio: 4.0
-    density_smoothing: gaussian
+  theoretical_weighting_configuration:
+    baseline_weighting: 1.0
+    max_weighting_ratio: 4.0
+    weighting_smoothing: gaussian
     smoothing_bandwidth: 12
 
 # =============================================================================
@@ -671,8 +671,8 @@ prompt_configuration:
     directional shifts in virtue-vice balance. Identify moral drift, virtue decay, 
     civic restoration patterns, and acceleration/deceleration in moral emphasis.
     
-  density_awareness_instructions: |
-    Consider moral clustering effects and density variations when interpreting civic 
+  theoretical_weighting_awareness_instructions: |
+    Consider moral clustering effects and theoretical weighting variations when interpreting civic 
     positioning. Account for virtue-vice concentration effects and systematic biases 
     introduced by clustered moral positioning strategies.
 
@@ -685,7 +685,7 @@ visualization:
   
   supported_charts:
     - circular
-    - density_heatmap
+    - weighting_heatmap
     - temporal_evolution
     - competitive_dynamics
     - framework_comparison
@@ -711,8 +711,8 @@ visualization:
     tertiary: "#9E9E9E"
   
   arc_visualization:
-    show_density_gradients: true
-    density_opacity_range: [0.3, 0.9]
+    show_weighting_gradients: true
+    weighting_opacity_range: [0.3, 0.9]
     arc_boundary_style: "dashed"
     cluster_highlight: true
     
@@ -761,7 +761,7 @@ theoretical_foundation:
   innovation_contributions: |
     Novel arc clustering methodology for civic virtue domains, competitive dynamics 
     modeling between moral orientations, temporal coherence tracking for civic 
-    evolution, and advanced density modeling for virtue-vice competition analysis.
+    evolution, and advanced theoretical weighting modeling for virtue-vice competition analysis.
 
 validation:
   academic_standard: "Advanced Multi-Dimensional Civic Virtue Analysis Framework v3.2"
@@ -778,7 +778,7 @@ validation:
     "Discernus Framework: Civic Virtue v3.2 (Aristotle/Sandel, 2025)"
     
     Include complete version number and specify v3.2 capabilities used:
-    - Arc positioning and semantic density modeling (if applicable)
+    - Arc positioning and theoretical weighting modeling (if applicable)
     - Competitive dynamics analysis (if applicable)
     - Temporal evolution tracking (if applicable)
     - Olympics validation protocols (if applicable)
@@ -801,7 +801,7 @@ compatibility:
     - civic_virtue_v3.2
   
   weighting_schemes:
-    - density_corrected_weighting
+    - weighting_corrected_analysis
     - competitive_dynamics_weighting
     - temporal_coherence_weighting
     - olympics_composite_scoring
@@ -815,7 +815,7 @@ compatibility:
     - v3.0
   
   visualization_types:
-    - circular_with_density
+    - circular_with_weighting
     - temporal_evolution
     - competitive_network
     - olympics_comparison
@@ -837,6 +837,6 @@ capabilities:
   temporal_analysis: true
   framework_fit_validation: true
   olympics_protocols: true
-  density_corrections: true
+  weighting_corrections: true
   cross_framework_comparison: true
   clustered_anchors_architecture: true 
