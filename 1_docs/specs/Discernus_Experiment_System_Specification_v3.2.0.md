@@ -315,6 +315,118 @@ framework:
 - 🔄 Version management
 - 🔄 Quality assurance
 
+## **📓 Stage 6 Interactive Analysis Architecture**
+
+### **Triple-Agnostic Notebook Template System**
+
+The Stage 6 interactive analysis uses a **single, triple-agnostic notebook template** that automatically adapts to ANY combination of Framework Specification v3.2 compliant framework, experiment design, and results pattern, eliminating the need for custom notebooks per framework OR experiment type.
+
+### **Triple-Agnostic Architecture Principles**
+
+**🔬 Framework Agnosticism:**
+- Works with ANY Framework Specification v3.2 structure (3-anchor Tamaki-Fuks, 5-anchor MFT, 8-anchor Civic Virtue, etc.)
+- Adapts to different theoretical relationships (competitive, complementary, hierarchical)
+- Auto-configures anchor positioning, colors, and semantic interpretations
+
+**🧪 Experiment Agnosticism:**
+- **Temporal Analysis**: Single corpus evolution over time (campaign discourse patterns)
+- **Comparative Analysis**: Multiple entities with same framework (Trump vs Biden rhetoric)
+- **Cross-Framework Validation**: Same corpus through multiple theoretical lenses
+- **Longitudinal Studies**: Multi-cycle analysis (multiple election years)
+- **Cross-Cultural Studies**: Same framework across different political contexts
+
+**📊 Results Agnosticism:**
+- Adapts to different statistical patterns, significance levels, and confidence intervals
+- Handles variable temporal structures, data sizes, and validation correlations
+- Adjusts narrative complexity and visualization based on results characteristics
+- Scales analytical sophistication based on framework complexity and data quality
+
+**Platform Infrastructure Benefits:**
+- ✅ **Universal Compatibility**: Single template works for ANY (Framework × Experiment × Results) combination
+- ✅ **Framework Specification Compliance**: Automatically validates and adapts to v3.2/v3.1 standards
+- ✅ **Standard Library Foundation**: Built on NumPy/Matplotlib/Pandas for peer review acceptance
+- ✅ **Academic Publication Ready**: Nature journal standards with intelligent adaptation
+- ✅ **Future-Proof Design**: New frameworks, experiment types, or result patterns require zero template changes
+
+### **Generic Configuration System**
+
+```python
+# Framework-agnostic configuration that adapts to any framework
+DCS_PLATFORM_CONFIG = {
+    'framework': {
+        'source_type': 'yaml_file',
+        'framework_path': None,  # Dynamically set
+        'validate_spec': True
+    },
+    'coordinate_system': {
+        'scale_range': (-1.2, 1.2),
+        'auto_scale': True,
+        'preserve_aspect_ratio': True
+    },
+    'anchors': {
+        'auto_color': True,
+        'color_palette': 'Set1',  # ColorBrewer academic standard
+        'marker_symbol': 's'
+    },
+    'publication': {
+        'figure_size_nature': (3.5, 3.5),
+        'dpi_export': 300,
+        'font_family': 'Arial',
+        'export_formats': ['eps', 'pdf', 'png', 'svg']
+    }
+}
+```
+
+### **Automated Framework Adaptation**
+
+```python
+def load_framework_config(framework_path):
+    """Auto-adapt notebook to ANY Framework Spec v3.2 framework"""
+    framework = yaml.safe_load(open(framework_path))
+    
+    # Extract framework metadata
+    anchors = framework.get('anchors', {})
+    anchor_colors = auto_assign_colors(anchors)
+    expected_columns = [f"{name}_score" for name in anchors.keys()]
+    
+    return {
+        'framework_name': framework.get('name'),
+        'anchors': anchors,
+        'anchor_colors': anchor_colors,
+        'expected_columns': expected_columns,
+        'anchor_count': len(anchors)
+    }
+```
+
+### **Supported Framework Types**
+
+**Automatically supports:**
+- Tamaki-Fuks Competitive Populism (3 anchors)
+- Moral Foundations Theory (5 anchors)
+- Political Worldview Triad (3 anchors)  
+- Business Ethics Framework (4 anchors)
+- ANY Framework Specification v3.2 compliant framework
+
+### **Integration with Experiment Execution**
+
+**Automatic Generation Flow:**
+1. `run_experiment.py` completes Stage 5 analysis
+2. Framework YAML path extracted from experiment definition
+3. Generic notebook template instantiated with framework-specific config
+4. Experiment results pre-loaded as Pandas DataFrame
+5. Publication-ready exports configured
+6. Notebook saved to `results/{job_id}/stage6_interactive_analysis.ipynb`
+
+**User Experience:**
+```bash
+python3 run_experiment.py my_experiment.yaml
+# ... Stage 5 execution ...
+# 📓 Stage 6 notebook ready: results/abc123/stage6_interactive_analysis.ipynb
+# Run: jupyter notebook results/abc123/stage6_interactive_analysis.ipynb
+```
+
+This architecture provides **true platform infrastructure** - researchers can create new frameworks and immediately use the same Stage 6 notebook without any code changes.
+
 ## **🎯 Framework Embedding Optimization**
 
 ### **LLM Processing Optimization for Embedded Frameworks**

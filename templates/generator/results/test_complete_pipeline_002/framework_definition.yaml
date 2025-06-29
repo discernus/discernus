@@ -1,0 +1,50 @@
+name: "Tamaki-Fuks Competitive Populism"
+version: "1.0"
+description: "Theoretical framework from Tamaki & Fuks (2018) analyzing competitive populism dynamics in political discourse"
+
+anchors:
+  populism:
+    angle: 90  # 12 o'clock position
+    color: "#d62728"  # Red
+    description: "Anti-elite, people vs establishment discourse"
+    type: "ideological_anchor"
+  
+  nationalism:
+    angle: 330  # 4 o'clock position  
+    color: "#1f77b4"  # Blue
+    description: "Nation-first, sovereignty, cultural identity"
+    type: "ideological_anchor"
+    
+  patriotism:
+    angle: 210  # 8 o'clock position
+    color: "#2ca02c"  # Green
+    description: "Constitutional values, institutional respect"
+    type: "ideological_anchor"
+
+competitive_relationships:
+  - anchors: ["populism", "nationalism"]
+    strength: 0.8
+    type: "ideological_competition"
+    description: "High competition between populist and nationalist appeals"
+    
+  - anchors: ["populism", "patriotism"] 
+    strength: 0.6
+    type: "legitimacy_competition"
+    description: "Moderate competition over legitimacy claims"
+    
+  - anchors: ["nationalism", "patriotism"]
+    strength: 0.4
+    type: "loyalty_competition"
+    description: "Low competition over loyalty and allegiance"
+
+metadata:
+  theoretical_foundation: "Tamaki & Fuks (2018) - competitive populism theory"
+  domain: "political_discourse_analysis"
+  application: "campaign_speech_analysis"
+  validation_status: "peer_reviewed"
+  
+analysis_capabilities:
+  temporal_evolution: true
+  competitive_dynamics: true
+  strategic_positioning: true
+  discourse_intensity: true 

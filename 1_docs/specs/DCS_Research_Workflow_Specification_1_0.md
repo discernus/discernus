@@ -1,6 +1,6 @@
 # DCS Research Workflow Specification v1.0
 **Version:** 1.0  
-**Date:** January 27, 2025  
+**Date:** June 27, 2025  
 **Author:** Jeffrey Whatcott  
 **Status:** FOUNDATIONAL REFERENCE  
 **Scope:** Complete research lifecycle specification for DCS-based discourse analysis
@@ -56,9 +56,40 @@ Corpus Preparation → Analysis Execution → Results Interpretation
 
 **Stage 6: Results Interpretation** (Jupyter-Optimized)
 - **Primary Task**: Interactive exploration, visualization, and narrative construction
-- **Environment**: Jupyter notebooks for analysis, visualization, and academic deliverable creation
+- **Environment**: Auto-generated Jupyter notebooks with experiment data pre-loaded
+- **Integration**: Automatic handoff from run_experiment.py after successful Stage 5 completion
 - **Output**: Publication-ready analyses, figures, tables, and academic narratives
 - **Duration**: Days to weeks of analytical exploration and interpretation
+
+**Stage 5 → Stage 6 Handoff Protocol:**
+
+Stage 6 operates at the intersection of **Framework × Experiment × Results**, requiring universal templates that adapt to:
+
+**🔬 Framework Variability:**
+- Any Framework Specification v3.2 compliant structure (3-8+ anchors)
+- Different theoretical relationships (competitive, complementary, hierarchical)
+- Variable anchor positioning, semantic meanings, and visualization requirements
+
+**🧪 Experiment Variability:**
+- Single corpus temporal analysis (campaign discourse evolution)
+- Comparative studies (candidate A vs candidate B rhetoric)
+- Cross-framework validation (same corpus, multiple theoretical lenses)
+- Longitudinal research (multi-election cycle studies)
+- Cross-cultural analysis (same framework, different political contexts)
+
+**📊 Results Variability:**
+- Different statistical patterns, significance levels, and confidence intervals
+- Variable temporal structures, data sizes, and validation correlations
+- Different analytical insights requiring distinct narrative approaches
+
+**Triple-Agnostic Architecture:**
+```
+run_experiment.py completes → Extract (Framework + Experiment + Results) metadata 
+→ Universal template instantiated → All three dimensions auto-configured
+→ Notebook saved to results/{job_id}/stage6_interactive_analysis.ipynb
+```
+
+**Universal Template Design**: Single notebook architecture works with ANY combination of framework type, experiment design, and results pattern through intelligent auto-detection and adaptive configuration rather than framework-specific or experiment-specific templates.
 
 ---
 
