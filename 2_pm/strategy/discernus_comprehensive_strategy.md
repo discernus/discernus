@@ -12,6 +12,8 @@ Discernus will become the **essential professional workbench and infrastructure 
 
 **Strategic Foundation:** Create a massive user base of individual researchers who naturally discover the need for our paid institutional solutions as their work scales in complexity and collaborative scope.
 
+**Strategic Enhancement:** Our academic viral adoption strategy leverages the DROI (Discernus Research Object Identifier) system to transform computational research into citable academic contributions, driving unprecedented viral adoption through the most powerful academic motivator: career advancement. (See: Academic Viral Adoption Strategy)
+
 ## The Problem: The "Last Mile" Problem in Computational Social Science
 
 Computational social science is hampered by a lack of standardized, high-quality infrastructure. This creates a "last mile" problem where brilliant research is slowed down by inadequate tooling.
@@ -287,6 +289,18 @@ This governance model transforms Pillar 1 from being "our project" into "a commu
 - **Framework Ecosystem**: More frameworks → Larger research ecosystem → Higher adoption
 - **Institutional Adoption**: More institutions → Better corpus diversity → Higher quality analysis
 
+### Academic Viral Adoption Architecture
+The DROI system creates a revolutionary viral adoption mechanism specifically designed for academic environments. By providing persistent, citable identifiers for computational discourse analysis, we transform "invisible work" into academic capital that directly advances researchers' careers. This approach leverages the academic obsession with citations to drive viral adoption that naturally progresses from individual use to institutional need.
+
+**Key Components:**
+- **Local provenance systems** in GPL package prepare analyses for future citation
+- **DROI generation** provides immediate academic credit for computational work
+- **Citation tracking** integrates with Google Scholar and academic databases
+- **Collaboration discovery** connects researchers through methodological compatibility
+- **Institutional analytics** drive enterprise sales through departmental competition
+
+(See: Academic Viral Adoption Strategy for complete technical implementation and business model integration)
+
 ### Elimination of Traditional Academic Software Barriers
 - ❌ **Cost Concerns** → Free to start, grant-fundable upgrades
 - ❌ **Vendor Lock-in Fears** → GPL licensing guarantees freedom
@@ -447,4 +461,12 @@ Discernus represents a unique opportunity to establish the foundational infrastr
 
 The strategy leverages proven open-source business models while addressing the specific needs and constraints of academic research environments. Success depends on executing the delicate balance between free value delivery and premium service differentiation, while maintaining the trust and credibility essential for academic adoption.
 
-**The ultimate vision: Discernus becomes the standard infrastructure that enables the next generation of computational social science research, making rigorous comparative analysis as accessible and reliable as basic statistical computing is today.** 
+**The ultimate vision: Discernus becomes the standard infrastructure that enables the next generation of computational social science research, making rigorous comparative analysis as accessible and reliable as basic statistical computing is today.**
+
+---
+
+## Strategic Documents
+
+### Complementary Strategic Frameworks
+- **Academic Viral Adoption Strategy:** DROI system implementation and viral adoption mechanics
+- **Digital Provenance Architecture Strategy:** Technical infrastructure for research provenance 
