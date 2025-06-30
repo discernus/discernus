@@ -285,6 +285,10 @@ class LiteLLMClient:
             content = response.choices[0].message.content
             cost = getattr(response, "response_cost", 0.0) if hasattr(response, "response_cost") else 0.0
 
+            # Record actual cost for tracking
+            if self.cost_manager and cost > 0:
+                self.cost_manager.record_actual_cost(cost)
+
             return self._parse_response(content, self._current_text, self._current_framework), cost
 
         return make_litellm_call()
@@ -307,6 +311,10 @@ class LiteLLMClient:
             # Extract response content and cost
             content = response.choices[0].message.content
             cost = getattr(response, "response_cost", 0.0) if hasattr(response, "response_cost") else 0.0
+
+            # Record actual cost for tracking
+            if self.cost_manager and cost > 0:
+                self.cost_manager.record_actual_cost(cost)
 
             return self._parse_response(content, self._current_text, self._current_framework), cost
 

@@ -277,6 +277,40 @@ This tactical roadmap translates our **five validation gates** into specific, ti
 
 ---
 
+---
+
+## Strategic Architecture Update (January 27, 2025)
+
+### GPL Runtime Simplification Implementation
+
+**Strategic Alignment:** Implementing GPL → Pillar 3 Conversion Strategy ("Free Will Trap")  
+**Cross-Reference:** GPL → Pillar 3 Conversion Strategy, Technical Implementation Plan v2.0
+
+**Immediate Architecture Changes Required:**
+
+**Phase A: GPL Runtime Cleanup (Parallel to Phase 1)**
+- [ ] **Remove Report Builder** from `discernus/api/main.py` 
+- [ ] **Extract Statistical Methods** from GPL runtime to Stage 6 templates
+- [ ] **Simplify Database Schema** to results-only (remove enterprise analytics)
+- [ ] **Consolidate API Endpoints** to essential GPL functionality only
+- [ ] **Clean Export Interface** for Stage 5→6 handoff
+
+**Phase B: Stage 5→6 Handoff Integration (Week 10-11)**
+- [ ] **Handoff Orchestrator** - automatic trigger after `run_experiment.py` completion
+- [ ] **Metadata Extraction** - framework, experiment, results for notebook generation
+- [ ] **Template Configuration** - universal template with dynamic data injection
+- [ ] **Notebook Placement** - save to `results/{job_id}/stage6_interactive_analysis.ipynb`
+
+**Strategic Benefits:**
+- **GPL Focus:** Faster development, cleaner architecture, clearer value prop
+- **Researcher Love:** Perfect individual experience with auto-generated notebooks
+- **Natural Scaling Pain:** Multiple notebooks create enterprise conversion opportunities
+- **Pillar 3 Readiness:** Clear enterprise differentiation from simplified GPL
+
+**Implementation Priority:** High - foundational for all subsequent development
+
+---
+
 **Implementation Status:** READY FOR EXECUTION  
 **Dependencies:** BYU Partnership Engagement, Technical Infrastructure, Academic Validation Requirements  
 **Next Steps:** Phase 1 initiation with foundation setup and corpus preparation 

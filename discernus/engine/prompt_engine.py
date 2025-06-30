@@ -11,20 +11,43 @@ def create_prompt_from_experiment(experiment_def: Dict[str, Any], text_to_analyz
 
     # Build the dynamic framework description for the prompt
     framework_description_parts = [framework.get("description", "")]
+    
+    # Support Framework Specification v3.2 format
+    components = framework.get("components", {})
     axes = framework.get("axes", {})
-    for axis_name, axis_details in axes.items():
-        integrative = axis_details.get("integrative", {})
+    
+    if components and axes:
+        # Framework Specification v3.2: Build from components + axes
+        for axis_name, axis_details in axes.items():
+            axis_desc = axis_details.get("description", axis_name.replace("_", " vs "))
+            framework_description_parts.append(f"\n- **{axis_name.replace('_', ' ')}**: {axis_desc}")
+            
+            # Get anchor components referenced by this axis
+            anchor_ids = axis_details.get("anchor_ids", [])
+            for anchor_id in anchor_ids:
+                if anchor_id in components:
+                    component = components[anchor_id]
+                    if component.get("type") == "anchor":
+                        anchor_name = component.get("component_id", anchor_id).replace("_", " ").title()
+                        framework_description_parts.append(f"  - **{anchor_name}**: {component.get('description', '')}")
+                        if component.get("language_cues"):
+                            cues = ", ".join(component["language_cues"][:5])  # Limit for readability
+                            framework_description_parts.append(f"    *Cues: {cues}...*")
+    else:
+        # Legacy format: Original logic
+        for axis_name, axis_details in axes.items():
+            integrative = axis_details.get("integrative", {})
 
-        # Add axis description, cleaned up for presentation
-        axis_desc = axis_details.get("description", axis_name.replace("_", " vs "))
-        framework_description_parts.append(f"\n- **{axis_name.replace('_', ' ')}**: {axis_desc}")
+            # Add axis description, cleaned up for presentation
+            axis_desc = axis_details.get("description", axis_name.replace("_", " vs "))
+            framework_description_parts.append(f"\n- **{axis_name.replace('_', ' ')}**: {axis_desc}")
 
-        # Add integrative anchor description
-        if integrative.get("name"):
-            framework_description_parts.append(f"  - **{integrative['name']}**: {integrative.get('description', '')}")
-            if integrative.get("language_cues"):
-                cues = ", ".join(integrative["language_cues"])
-                framework_description_parts.append(f"    *Cues: {cues}*")
+            # Add integrative anchor description
+            if integrative.get("name"):
+                framework_description_parts.append(f"  - **{integrative['name']}**: {integrative.get('description', '')}")
+                if integrative.get("language_cues"):
+                    cues = ", ".join(integrative["language_cues"])
+                    framework_description_parts.append(f"    *Cues: {cues}*")
 
     framework_summary = "\n".join(framework_description_parts)
 

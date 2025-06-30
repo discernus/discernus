@@ -160,18 +160,10 @@ class ExperimentRunner:
     
     def _extract_statistical_methods(self, statistical_config: Dict[str, Any]) -> list:
         """Extract enabled statistical methods from configuration"""
-        primary_methods = statistical_config.get('primary_methods', {})
-        enabled_methods = []
-        
-        for method_name, method_config in primary_methods.items():
-            if method_config.get('enabled', False):
-                enabled_methods.append(method_name)
-        
-        # Default methods if none specified
-        if not enabled_methods:
-            enabled_methods = ["geometric_similarity", "dimensional_correlation"]
-            
-        return enabled_methods
+        # STRATEGIC DECISION: Defer all statistical analysis to Stage 6 notebooks
+        # Statistical configuration is preserved in YAML for experimental context
+        # but not executed during runtime for better research workflow flexibility
+        return []
     
     def _extract_enabled_models(self, models_config: Dict[str, Any]) -> list:
         """Extract enabled models from configuration"""
@@ -278,6 +270,22 @@ def main():
                 duration = end_time - start_time
                 
                 print(f"\n⏱️  Total execution time: {duration}")
+                
+                # STAGE 5→6 HANDOFF: Auto-generate analysis notebook
+                try:
+                    from discernus.stage6.handoff_orchestrator import trigger_stage6_handoff
+                    
+                    print("\n🔄 Generating Stage 6 analysis notebook...")
+                    experiment_def = runner._load_experiment_definition(yaml_path)
+                    notebook_path = trigger_stage6_handoff(result, yaml_path, experiment_def)
+                    
+                    print(f"✅ Stage 6 notebook generated: {notebook_path}")
+                    print(f"🚀 Ready for interactive analysis: jupyter lab {notebook_path}")
+                    
+                except Exception as e:
+                    logger.warning(f"⚠️  Stage 6 handoff failed: {e}")
+                    print(f"⚠️  Notebook generation failed, but experiment completed successfully")
+                
                 return result
                 
             except Exception as e:

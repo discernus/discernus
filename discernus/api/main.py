@@ -10,8 +10,7 @@ import asyncio
 from pathlib import Path
 from sqlalchemy.orm import Session
 import numpy as np
-import webbrowser
-import threading
+# Removed webbrowser and threading - no longer needed after report builder removal
 
 from discernus.gateway.llm_gateway import get_llm_analysis
 from discernus.engine.signature_engine import (
@@ -19,11 +18,13 @@ from discernus.engine.signature_engine import (
     _extract_anchors_from_framework,
     calculate_distance,
 )
-from discernus.reporting.report_builder import ReportBuilder
+# Report builder removed - Stage 6 notebooks handle visualization
+# from discernus.reporting.report_builder import ReportBuilder
 from scripts.tasks import analyze_text_task
 from discernus.database.session import get_db
 from discernus.database.models import AnalysisJob, AnalysisResult, JobStatus, AnalysisJobV2, AnalysisResultV2, StatisticalComparison
 from discernus.analysis.statistical_methods import StatisticalMethodRegistry
+from discernus.stage6.handoff_orchestrator import trigger_stage6_handoff
 
 
 class AnalysisRequest(BaseModel):
@@ -36,7 +37,7 @@ class FinalResponse(BaseModel):
     y: float
     framework_id: str
     model: str
-    report_url: Optional[str] = None
+    scores: Dict[str, float]  # Clean data export for Stage 6 consumption
 
 
 class ComparisonRequest(BaseModel):
@@ -126,8 +127,8 @@ app = FastAPI()
 # Mount a directory to serve the static report files
 app.mount("/reports", StaticFiles(directory="reports"), name="reports")
 
-# No longer need a global framework loader, it will be loaded per request.
-report_builder = ReportBuilder(output_dir="reports/reboot_mvp")  # Keep reports organized
+# Report builder removed - GPL runtime focuses on clean data export
+# report_builder = ReportBuilder(output_dir="reports/reboot_mvp")  # Keep reports organized
 TEMP_RESULTS_DIR = Path("temp_results")
 TEMP_RESULTS_DIR.mkdir(exist_ok=True)
 
@@ -160,12 +161,25 @@ def _load_experiment(experiment_name: str) -> Dict[str, Any]:
         raise HTTPException(status_code=404, detail=f"Could not load experiment '{experiment_name}': {e}")
 
 @app.post("/analyze", response_model=FinalResponse)
-async def analyze_text(request: AnalysisRequest):
+async def analyze_text(request: AnalysisRequest, db: Session = Depends(get_db)):
     """
     This endpoint orchestrates a single-text analysis using a completely self-contained experiment.
     Everything (model, corpus, framework, and optionally text) comes from the experiment YAML.
+    Now includes automatic Stage 6 notebook generation!
     """
-    run_id = str(uuid.uuid4())
+    job_id = str(uuid.uuid4())
+    
+    # Create database record for tracking
+    analysis_job = AnalysisJobV2(
+        id=job_id,
+        job_type="single_text_analysis",
+        configuration=json.dumps(request.model_dump()),
+        status="PENDING"
+    )
+    db.add(analysis_job)
+    db.commit()
+    db.refresh(analysis_job)
+    
     try:
         # Step 1: Load the self-contained experiment definition
         experiment_def = _load_experiment(request.experiment)
@@ -185,285 +199,72 @@ async def analyze_text(request: AnalysisRequest):
         # Step 4: Run the analysis
         analysis_result = await _run_single_analysis(text_to_analyze, model, experiment_def)
 
-        # Step 5: Generate the visual report (only if enabled)
-        output_config = experiment_def.get("output", {})
-        report_path = None
-        if output_config.get("generate_visualization", True):
-            anchors = _extract_anchors_from_framework(experiment_def)
-            report_path = report_builder.generate_report(
-                anchors=anchors, scores=analysis_result["scores"], coordinates=analysis_result["centroid"], run_id=run_id
-            )
-
-        # Step 6: Auto-launch browser to show results (only if report was generated)
-        if report_path:
-            def open_browser():
-                # Give the response time to complete, then open browser
-                import time
-                time.sleep(1)  # Small delay to ensure response is sent
-                full_url = f"http://127.0.0.1:8000/{report_path}"
-                webbrowser.open(full_url)
-                print(f"🌐 Opened browser: {full_url}")
-            
-            # Launch browser in background thread so API response isn't delayed
-            threading.Thread(target=open_browser, daemon=True).start()
+        # Step 5: Save to database
+        db_result = AnalysisResultV2(
+            job_id=job_id,
+            text_content=text_to_analyze,
+            model=model,
+            framework=experiment_def.get("framework", {}).get("name", "unknown"),
+            prompt_template=experiment_def.get("prompt_template", "unknown"),
+            centroid_x=analysis_result["centroid"][0],
+            centroid_y=analysis_result["centroid"][1],
+            raw_scores=json.dumps(analysis_result["scores"])
+        )
+        db.add(db_result)
+        db.commit()
         
-        # Step 7: Return the final response
+        # Step 6: Prepare experiment result for Stage 6 handoff
+        experiment_result = {
+            'job_id': job_id,
+            'comparison_type': 'single_text_analysis',
+            'similarity_classification': 'SINGLE_ANALYSIS',
+            'confidence_level': 1.0,
+            'condition_results': [
+                {
+                    'condition_identifier': model,
+                    'centroid': analysis_result["centroid"],
+                    'raw_scores': analysis_result["scores"],
+                    'total_analyses': 1
+                }
+            ],
+            'statistical_metrics': {
+                'single_analysis': {
+                    'model': model,
+                    'framework': experiment_def.get("framework", {}).get("name"),
+                    'text_length': len(text_to_analyze)
+                }
+            }
+        }
+        
+        # Step 7: Universal Stage 5→6 completion (generates enhanced notebook!)
+        experiment_file_path = f"discernus/experiments/{request.experiment}.yaml"
+        completion_result = complete_experiment_with_stage6_handoff(
+            job_id, experiment_result, experiment_file_path, 
+            experiment_def, analysis_job, db
+        )
+
+        # Step 8: Return clean data export
         return FinalResponse(
             x=analysis_result["centroid"][0],
             y=analysis_result["centroid"][1],
             framework_id=experiment_def.get("framework", {}).get("name"),
             model=model,
-            report_url=f"/{report_path}" if report_path else None,
+            scores=analysis_result["scores"],
         )
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/compare", response_model=ComparisonResponse)
-async def compare_texts(request: ComparisonRequest):
-    """
-    This endpoint orchestrates a two-text comparison analysis and returns
-    their centroids and a URL to a visual comparison report.
-    """
-    run_id = str(uuid.uuid4())
-    try:
-        # Step 1: Load the self-contained experiment definition
-        try:
-            with open(request.experiment_file_path, "r") as f:
-                experiment_def = yaml.safe_load(f)
-        except Exception as e:
-            raise HTTPException(status_code=404, detail=f"Could not load experiment file: {e}")
-
-        # Step 2: Run independent analyses for both texts
-        analysis_a = await _run_single_analysis(request.text_a, request.model, experiment_def)
-        analysis_b = await _run_single_analysis(request.text_b, request.model, experiment_def)
-
-        # Step 3: Calculate the distance between the centroids
-        distance = calculate_distance(analysis_a["centroid"], analysis_b["centroid"])
-
-        # Step 4: Generate the comparison visual report
-        anchors = _extract_anchors_from_framework(experiment_def)
-        report_path = report_builder.generate_comparison_report(
-            anchors=anchors,
-            analysis_a=analysis_a,
-            label_a=request.label_a,
-            analysis_b=analysis_b,
-            label_b=request.label_b,
-            run_id=run_id,
-            distance=distance,
-        )
-
-        return ComparisonResponse(
-            report_url=f"/{report_path}",
-            text_a_centroid=analysis_a["centroid"],
-            text_b_centroid=analysis_b["centroid"],
-            distance=distance,
-        )
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/analyze-corpus", response_model=JobResponse)
-async def analyze_corpus(request: CorpusAnalysisRequest, db: Session = Depends(get_db)):
-    """
-    Submits a batch of texts for analysis.
-    """
-    new_job = AnalysisJob()
-    db.add(new_job)
-    db.commit()
-    db.refresh(new_job)
-
-    job_id = new_job.id
-
-    try:
-        with open(request.experiment_file_path, "r") as f:
-            experiment_def = yaml.safe_load(f)
-    except Exception as e:
-        raise HTTPException(status_code=404, detail=f"Could not load experiment file: {e}")
-
-    task_count = 0
-    for i, file_path in enumerate(request.file_paths):
-        try:
-            with open(file_path, "r") as f:
-                text = f.read()
-
-            analyze_text_task.delay(text=text, experiment_def=experiment_def, model=request.model, job_id=job_id)
-            task_count += 1
-        except Exception as e:
-            # Log this error but continue
-            print(f"Failed to process file {file_path}: {e}")
-
-    if task_count == 0:
-        new_job.status = JobStatus.FAILED
+        # Mark job as failed
+        analysis_job.status = "FAILED"
         db.commit()
-        raise HTTPException(status_code=400, detail="No valid files were submitted for analysis.")
-
-    return JobResponse(job_id=job_id)
-
-
-@app.get("/results/{job_id}", response_model=ResultResponse)
-async def get_results(job_id: str, db: Session = Depends(get_db)):
-    """Retrieves the status and results of a job."""
-    job = db.query(AnalysisJob).filter(AnalysisJob.id == job_id).first()
-    if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
-
-    # A simple approach to check completion: if the number of results
-    # matches the number of tasks we intended to run.
-    # A more robust system might have a total_tasks count in the AnalysisJob model.
-    # For now, we assume if there are results, it's 'COMPLETE' for simplicity.
-    # This logic can be enhanced.
-
-    results = db.query(AnalysisResult).filter(AnalysisResult.job_id == job_id).all()
-
-    # Check if all tasks for the job are complete
-    # A more robust implementation would store the expected task count in the job model
-    # For now, if there are no results, we assume it's pending.
-    # We could also add a check to see if any tasks have failed.
-    if job.status == JobStatus.PENDING and results:
-        # This is a simplification. A real system would have a more robust
-        # way to track job completion. We could, for example, have the
-        # worker update the job status.
-        job.status = JobStatus.COMPLETE
-        db.commit()
-
-    return ResultResponse(
-        job_id=job_id,
-        status=job.status.value,
-        results=[{"centroid": (r.centroid_x, r.centroid_y), "scores": json.loads(r.scores)} for r in results],
-    )
-
-
-@app.post("/compare-groups", response_model=GroupComparisonResponse)
-async def compare_groups(request: GroupComparisonRequest, db: Session = Depends(get_db)):
-    """
-    Compares two groups of analysis results and generates a report.
-    """
-    run_id = str(uuid.uuid4())
-    try:
-        results_a = db.query(AnalysisResult).filter(AnalysisResult.job_id == request.job_id_a).all()
-        results_b = db.query(AnalysisResult).filter(AnalysisResult.job_id == request.job_id_b).all()
-
-        if not results_a or not results_b:
-            raise HTTPException(status_code=400, detail="One or both jobs have no results yet or jobs not found.")
-
-        # Convert SQLAlchemy objects to the dictionary format expected by the report builder
-        signatures_a = [{"centroid": (r.centroid_x, r.centroid_y), "scores": json.loads(r.scores)} for r in results_a]
-        signatures_b = [{"centroid": (r.centroid_x, r.centroid_y), "scores": json.loads(r.scores)} for r in results_b]
-
-        with open(request.experiment_file_path, "r") as f:
-            experiment_def = yaml.safe_load(f)
-        anchors = _extract_anchors_from_framework(experiment_def)
-
-        def _calculate_centroid(signatures):
-            if not signatures:
-                return (0.0, 0.0)
-            coords = [s["centroid"] for s in signatures if "centroid" in s]
-            if not coords:
-                return (0.0, 0.0)
-            avg_x = sum(c[0] for c in coords) / len(coords)
-            avg_y = sum(c[1] for c in coords) / len(coords)
-            return (avg_x, avg_y)
-
-        centroid_a = _calculate_centroid(signatures_a)
-        centroid_b = _calculate_centroid(signatures_b)
-
-        distance = calculate_distance(centroid_a, centroid_b)
-
-        report_path = report_builder.generate_group_comparison_report(
-            anchors=anchors,
-            group_a_signatures=signatures_a,
-            label_a=request.label_a,
-            group_b_signatures=signatures_b,
-            label_b=request.label_b,
-            run_id=run_id,
-            distance=distance,
-        )
-
-        return GroupComparisonResponse(
-            report_url=f"/{report_path}",
-            group_a_centroid=centroid_a,
-            group_b_centroid=centroid_b,
-            distance=distance,
-        )
-    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/compare-groups-direct", response_model=GroupComparisonResponse)
-async def compare_groups_direct(request: DirectGroupComparisonRequest):
-    """
-    Compares two groups of texts directly without requiring separate job submissions.
-    This version runs all analyses in parallel for better performance.
-    """
-    run_id = str(uuid.uuid4())
-    try:
-        # Load experiment definition
-        with open(request.experiment_file_path, "r") as f:
-            experiment_def = yaml.safe_load(f)
+# Enterprise endpoints removed - GPL focuses on core analysis only
+# Complex comparison, corpus analysis, and group analysis moved to Stage 6 notebooks
 
-        # Create a list of all analysis tasks to run in parallel
-        group1_texts = request.group1.get("texts", [])
-        group2_texts = request.group2.get("texts", [])
 
-        tasks = []
-        for text in group1_texts:
-            tasks.append(_run_single_analysis(text, request.model, experiment_def))
-        for text in group2_texts:
-            tasks.append(_run_single_analysis(text, request.model, experiment_def))
-
-        # Run all analysis tasks concurrently
-        all_results = await asyncio.gather(*tasks, return_exceptions=True)
-
-        # Check for errors from the gathered tasks
-        for result in all_results:
-            if isinstance(result, Exception):
-                # Propagate the first exception found
-                raise result
-
-        # Separate the results back into their original groups
-        group1_analyses = all_results[: len(group1_texts)]
-        group2_analyses = all_results[len(group1_texts) :]
-
-        # Format results for reporting
-        group1_results = [{"text": t, **a} for t, a in zip(group1_texts, group1_analyses)]
-        group2_results = [{"text": t, **a} for t, a in zip(group2_texts, group2_analyses)]
-
-        def _calculate_centroid(signatures):
-            if not signatures:
-                return (0.0, 0.0)
-            coords = [s["centroid"] for s in signatures if "centroid" in s]
-            if not coords:
-                return (0.0, 0.0)
-            avg_x = sum(c[0] for c in coords) / len(coords)
-            avg_y = sum(c[1] for c in coords) / len(coords)
-            return (avg_x, avg_y)
-
-        centroid_a = _calculate_centroid(group1_results)
-        centroid_b = _calculate_centroid(group2_results)
-
-        distance = calculate_distance(centroid_a, centroid_b)
-
-        # Generate comparison report
-        anchors = _extract_anchors_from_framework(experiment_def)
-        report_path = report_builder.generate_group_comparison_report(
-            anchors=anchors,
-            group_a_signatures=group1_results,
-            label_a=request.group1.get("name", "Group 1"),
-            group_b_signatures=group2_results,
-            label_b=request.group2.get("name", "Group 2"),
-            run_id=run_id,
-            distance=distance,
-        )
-
-        return GroupComparisonResponse(
-            report_url=f"/{report_path}", group_a_centroid=centroid_a, group_b_centroid=centroid_b, distance=distance
-        )
-    except Exception as e:
-        # This will now catch exceptions from asyncio.gather as well
-        raise HTTPException(status_code=500, detail=str(e))
+# Additional enterprise endpoints removed
+# Corpus analysis, job management, and group comparisons moved to Stage 6 notebooks
 
 
 @app.post("/compare-statistical", response_model=StatisticalComparisonResponse)
@@ -643,14 +444,8 @@ async def _handle_corpus_based_analysis(
             "raw_scores": avg_scores
         })
     
-    report_path = report_builder.generate_statistical_comparison_report(
-        anchors=anchors,
-        condition_results=condition_results_for_report,
-        statistical_metrics=final_statistical_metrics,
-        comparison_type=request.comparison_type,
-        job_id=job_id,
-        run_id=run_id,
-    )
+    # Report generation removed - visualization handled by Stage 6 notebooks
+    # report_path = report_builder.generate_statistical_comparison_report(...)
     
     # Save statistical comparison to database
     statistical_comparison = StatisticalComparison(
@@ -666,9 +461,28 @@ async def _handle_corpus_based_analysis(
     db.add(statistical_comparison)
     db.commit()
 
-    # Update job status to complete
-    analysis_job.status = "COMPLETE"
-    db.commit()
+    # Prepare experiment result for Stage 6 handoff
+    experiment_result = {
+        'job_id': job_id,
+        'comparison_type': request.comparison_type,
+        'similarity_classification': similarity_classification,
+        'confidence_level': final_statistical_metrics.get("confidence_intervals", {}).get("overall_confidence", 0.0),
+        'condition_results': [
+            {
+                'condition_identifier': cr.condition_identifier,
+                'centroid': cr.centroid,
+                'raw_scores': cr.raw_scores,
+                'total_analyses': len(model_groups.get(cr.condition_identifier, []))
+            } for cr in condition_results_api
+        ],
+        'statistical_metrics': final_statistical_metrics
+    }
+    
+    # Universal Stage 5→6 completion
+    completion_result = complete_experiment_with_stage6_handoff(
+        job_id, experiment_result, request.experiment_file_path, 
+        experiment_def, analysis_job, db
+    )
 
     return StatisticalComparisonResponse(
         job_id=job_id,
@@ -676,7 +490,7 @@ async def _handle_corpus_based_analysis(
         similarity_classification=similarity_classification,
         condition_results=condition_results_api,
         statistical_metrics=final_statistical_metrics,
-        report_url=f"/{report_path}"
+        report_url=None  # Clean data export - visualization in Stage 6 notebooks
     )
 
 
@@ -731,42 +545,37 @@ async def _handle_single_text_analysis(
         except Exception as e:
             final_statistical_metrics[method] = {"error": str(e)}
 
-    # Generate the visual report (only if enabled in experiment config)
-    output_config = experiment_def.get("output", {})
-    report_path = None
-    if output_config.get("generate_visualization", True):
-        anchors = _extract_anchors_from_framework(experiment_def)
-        run_id = str(uuid.uuid4())
-        
-        # Convert condition results to dict format for report generation
-        condition_results_for_report = [
-            {
-                "condition_identifier": cr.condition_identifier,
-                "centroid": cr.centroid,
-                "raw_scores": cr.raw_scores
-            }
-            for cr in condition_results_api
-        ]
-        
-        report_path = report_builder.generate_statistical_comparison_report(
-            anchors=anchors,
-            condition_results=condition_results_for_report,
-            statistical_metrics=final_statistical_metrics,
-            comparison_type=request.comparison_type,
-            job_id=job_id,
-            run_id=run_id,
-        )
+    # Report generation removed - visualization handled by Stage 6 notebooks
 
-    # Update job status to complete
-    analysis_job.status = "COMPLETE"
-    db.commit()
+    # Prepare experiment result for Stage 6 handoff
+    experiment_result = {
+        'job_id': job_id,
+        'comparison_type': request.comparison_type,
+        'similarity_classification': 'PENDING_ANALYSIS',  # Would need classification logic for single-text
+        'confidence_level': 0.0,
+        'condition_results': [
+            {
+                'condition_identifier': cr.condition_identifier,
+                'centroid': cr.centroid,
+                'raw_scores': cr.raw_scores,
+                'total_analyses': 1  # Single text analysis
+            } for cr in condition_results_api
+        ],
+        'statistical_metrics': final_statistical_metrics
+    }
+    
+    # Universal Stage 5→6 completion
+    completion_result = complete_experiment_with_stage6_handoff(
+        job_id, experiment_result, request.experiment_file_path, 
+        experiment_def, analysis_job, db
+    )
 
     return StatisticalComparisonResponse(
         job_id=job_id,
         comparison_type=request.comparison_type,
         condition_results=condition_results_api,
         statistical_metrics=final_statistical_metrics,
-        report_url=f"/{report_path}" if report_path else None
+        report_url=None  # Clean data export - visualization in Stage 6 notebooks
     )
 
 
@@ -1155,7 +964,157 @@ def _calculate_average_scores(scores_list: List[Dict[str, float]]) -> Dict[str, 
     return avg_scores
 
 
+@app.post("/stage6/{job_id}")
+async def regenerate_stage6_notebook(job_id: str, db: Session = Depends(get_db)):
+    """
+    Manually regenerate Stage 6 analysis notebook for any completed experiment.
+    Useful for notebook updates or if original generation failed.
+    """
+    try:
+        # Load experiment job from database
+        analysis_job = db.query(AnalysisJobV2).filter(AnalysisJobV2.id == job_id).first()
+        if not analysis_job:
+            raise HTTPException(status_code=404, detail=f"Job {job_id} not found")
+        
+        if analysis_job.status != "COMPLETE":
+            raise HTTPException(status_code=400, detail=f"Job {job_id} is not complete (status: {analysis_job.status})")
+        
+        # Load experiment configuration
+        job_config = json.loads(analysis_job.configuration)
+        experiment_file_path = job_config.get("experiment_file_path")
+        
+        if not experiment_file_path:
+            # For simple analyze requests, reconstruct the path
+            experiment_name = job_config.get("experiment", "mft_experiment")
+            experiment_file_path = f"discernus/experiments/{experiment_name}.yaml"
+        
+        # Load experiment definition
+        try:
+            with open(experiment_file_path, "r") as f:
+                experiment_def = yaml.safe_load(f)
+        except Exception as e:
+            raise HTTPException(status_code=404, detail=f"Could not load experiment file: {e}")
+        
+        # Load experiment results from database
+        results = db.query(AnalysisResultV2).filter(AnalysisResultV2.job_id == job_id).all()
+        if not results:
+            raise HTTPException(status_code=404, detail=f"No results found for job {job_id}")
+        
+        # Reconstruct experiment result format
+        condition_results = []
+        for result in results:
+            condition_results.append({
+                'condition_identifier': result.model,
+                'centroid': [result.centroid_x, result.centroid_y],
+                'raw_scores': json.loads(result.raw_scores),
+                'total_analyses': 1
+            })
+        
+        # Group by model if multiple results
+        model_groups = {}
+        for result in condition_results:
+            model = result['condition_identifier']
+            if model not in model_groups:
+                model_groups[model] = []
+            model_groups[model].append(result)
+        
+        # Calculate averages for models with multiple results
+        final_condition_results = []
+        for model, model_results in model_groups.items():
+            if len(model_results) == 1:
+                final_condition_results.append(model_results[0])
+            else:
+                # Average multiple results for the same model
+                avg_centroid = _calculate_average_centroid([r['centroid'] for r in model_results])
+                avg_scores = _calculate_average_scores([r['raw_scores'] for r in model_results])
+                final_condition_results.append({
+                    'condition_identifier': model,
+                    'centroid': avg_centroid,
+                    'raw_scores': avg_scores,
+                    'total_analyses': len(model_results)
+                })
+        
+        # Reconstruct experiment result
+        experiment_result = {
+            'job_id': job_id,
+            'comparison_type': analysis_job.job_type,
+            'similarity_classification': 'REGENERATED',
+            'confidence_level': 1.0,
+            'condition_results': final_condition_results,
+            'statistical_metrics': {
+                'regenerated_analysis': {
+                    'original_job_type': analysis_job.job_type,
+                    'models_count': len(model_groups),
+                    'total_results': len(results)
+                }
+            }
+        }
+        
+        # Generate new Stage 6 notebook
+        notebook_path = trigger_stage6_handoff(
+            experiment_result, 
+            experiment_file_path, 
+            experiment_def
+        )
+        
+        return {
+            "job_id": job_id,
+            "status": "success",
+            "message": "Stage 6 notebook regenerated successfully",
+            "notebook_path": notebook_path
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to regenerate notebook: {str(e)}")
+
+
 @app.get("/health")
 async def health_check():
     """A simple health check endpoint."""
     return {"status": "ok"}
+
+
+# Universal experiment completion handler
+def complete_experiment_with_stage6_handoff(
+    job_id: str,
+    experiment_result: Dict[str, Any],
+    experiment_file_path: str,
+    experiment_def: Dict[str, Any],
+    analysis_job: AnalysisJobV2,
+    db: Session
+) -> Dict[str, str]:
+    """
+    Universal completion handler for ALL experiment types.
+    Handles Stage 5 completion + automatic Stage 6 handoff.
+    
+    Returns:
+        Dict with stage5_status and stage6_notebook_path
+    """
+    
+    # Stage 5: Mark experiment as complete
+    analysis_job.status = "COMPLETE"
+    db.commit()
+    
+    # Stage 6: Automatically generate interactive analysis notebook
+    stage6_result = {"status": "success", "notebook_path": None}
+    
+    try:
+        notebook_path = trigger_stage6_handoff(
+            experiment_result, 
+            experiment_file_path, 
+            experiment_def
+        )
+        stage6_result["notebook_path"] = notebook_path
+        print(f"✅ Stage 6 notebook generated: {notebook_path}")
+        
+    except Exception as e:
+        print(f"⚠️ Warning: Stage 6 notebook generation failed: {e}")
+        stage6_result["error"] = str(e)
+    
+    return {
+        "stage5_status": "COMPLETE",
+        "stage6_notebook_path": stage6_result.get("notebook_path"),
+        "stage6_error": stage6_result.get("error")
+    }

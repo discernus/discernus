@@ -1,0 +1,349 @@
+# ================================================================
+# BYU BOLSONARO VALIDATION EXPERIMENT
+# Four-Condition Methodological Validation Protocol
+# ================================================================
+
+name: "BYU Bolsonaro Validation - Democratic Tension Analysis"
+version: "v1.0"
+description: |
+  Four-condition experimental validation of the Democratic Tension Axis Model against 
+  BYU Team Populism manual coding methodology. Tests computational populism analysis 
+  using 12 Bolsonaro speeches from the 2018 Brazilian presidential campaign.
+  
+  **Research Question**: Can computational analysis achieve r > 0.80 correlation 
+  with manual human coding of Brazilian populist discourse?
+
+# ================================================================
+# EXPERIMENT METADATA
+# ================================================================
+experiment_id: "byu_bolsonaro_validation_2025"
+created: "2025-01-25"
+academic_partnership: "BYU Team Populism Project"
+theoretical_basis: "Tamaki & Fuks (2019) competitive populism framework"
+target_correlation: 0.80
+success_threshold: "r > 0.80 with manual coding scores"
+
+# ================================================================
+# FRAMEWORK CONFIGURATION
+# ================================================================
+framework:
+  path: "1_docs/frameworks/3_2_spec_frameworks/populism_pluralism/democratic_tension_axis_model_brazil_2018.yaml"
+  version: "v3.2"
+  optimization: "Brazilian Portuguese political discourse"
+  
+scoring_approach:
+  scale: "0-2 (matching Tamaki & Fuks methodology)"
+  baseline_target: "0.5 average score (Bolsonaro baseline)"
+  temporal_pattern: "0.5→0.9 progression (July-October 2018)"
+  turning_point: "October 7 intensification detection"
+
+# ================================================================  
+# FOUR-CONDITION EXPERIMENTAL DESIGN
+# ================================================================
+experimental_conditions:
+  
+  condition_1:
+    name: "Manual Speaker Isolation (Ground Truth)"
+    description: "Manually extracted Bolsonaro-only utterances from transcripts"
+    method: "preprocessing"
+    process: |
+      - Extract only [Speaker 0] tags identified as Bolsonaro
+      - Remove crowd reactions, other speakers, musical interludes  
+      - Preserve timestamps for temporal analysis
+      - Serves as baseline for isolation accuracy validation
+    
+  condition_2:
+    name: "Full Context Analysis (Baseline)" 
+    description: "Complete rally transcripts with all speakers and contextual elements"
+    method: "full_transcript"
+    process: |
+      - Analyze complete rally transcripts with all contextual elements
+      - Include crowd reactions, other speakers, musical elements
+      - Provides measurement baseline for contextual effects
+      - Replicates BYU original methodology approach
+      
+  condition_3:
+    name: "Controlled AI Pipeline (Target Methodology)"
+    description: "AI-prompted speaker isolation via systematic pipeline"
+    method: "controlled_prompting"
+    process: |
+      - Systematic computational pipeline with documented prompts
+      - Instruct LLM to focus only on Bolsonaro's direct utterances
+      - Controlled methodology with statistical reliability testing
+      - Target methodology for academic standards validation
+      
+  condition_4:
+    name: "Conversational Analysis (Comparative Validation)"
+    description: "Conversational chatbot analysis for methodological comparison"
+    method: "chatbot_interface"
+    process: |
+      - Conversational AI interface for comparative validation
+      - Documents methodological rigor impact on results quality
+      - Validates importance of systematic approaches over ad-hoc methods
+
+# ================================================================
+# CORPUS SPECIFICATION (12 BOLSONARO SPEECHES)
+# ================================================================
+corpus:
+  source_directory: "0_workspace/byu_populism_project/populism in brazil 2018/speeches-zip/rev-transcripts/"
+  total_speeches: 12
+  language: "Portuguese (Brazilian)"
+  timeframe: "July 22 - October 28, 2018"
+  
+  speech_inventory:
+    - filename: "22 de julho - Oficialização da Candidatura à presidência – Conferência PSL.m4a.txt"
+      date: "2018-07-22"
+      event: "Campaign Launch"
+      duration_lines: 1322
+      significance: "Official candidacy announcement"
+      
+    - filename: "23 de Agosto - Araçatuba (1).m4a.txt" 
+      date: "2018-08-23"
+      event: "Regional Rally"
+      duration_lines: 65
+      significance: "Early campaign regional engagement"
+      
+    - filename: "23 de Agosto - Araçatuba (2) A PARTIR DE 11;20.m4a.txt"
+      date: "2018-08-23" 
+      event: "Regional Rally (Extended)"
+      duration_lines: 305
+      significance: "Extended regional campaign event"
+      
+    - filename: "31 de Agosto - Porto Velho (RO).m4a.txt"
+      date: "2018-08-31"
+      event: "Regional Rally"
+      duration_lines: 356
+      significance: "Amazon region campaign outreach"
+      
+    - filename: "6 de Setembro - Associaçao Comercial e Empresarial Juiz de Fora.m4a.txt"
+      date: "2018-09-06"
+      event: "Business Association Speech"
+      duration_lines: 323
+      significance: "Pre-attack formal event (last major speech before attack)"
+      
+    - filename: "16 de Setembro - Apos Atentado.m4a.txt"
+      date: "2018-09-16"
+      event: "Post-Attack Hospital Statement"
+      duration_lines: 788
+      significance: "Critical post-attack messaging from hospital"
+      
+    - filename: "30 de Setembro - Av. Paulista (2).m4a.txt"
+      date: "2018-09-30"
+      event: "São Paulo Rally"
+      duration_lines: 14
+      significance: "Brief appearance during recovery"
+      
+    - filename: "7 de Outubro - Logo apos 1o turno.m4a.txt"
+      date: "2018-10-07"
+      event: "Post-First Round Victory"
+      duration_lines: 116
+      significance: "Turning point victory speech"
+      
+    - filename: "6 de Outubro - 1 dia antes das eleiçoes.m4a.txt"
+      date: "2018-10-06"
+      event: "Pre-Election Rally"
+      duration_lines: 116
+      significance: "Final first-round campaign push"
+      
+    - filename: "22 de Outubro - Av. Paulista.m4a.txt"
+      date: "2018-10-22"
+      event: "Runoff Campaign Rally"  
+      duration_lines: 272
+      significance: "Second round campaign intensification"
+      
+    - filename: "27 de Outubro - Ultima Live antes do 2o turno.m4a.txt"
+      date: "2018-10-27"
+      event: "Final Pre-Election Live Stream"
+      duration_lines: 212
+      significance: "Last campaign message before runoff victory"
+      
+    - filename: "28 de Outubro - Primeiro discurso após eleito (not used).m4a.txt"
+      date: "2018-10-28" 
+      event: "Victory Speech"
+      duration_lines: 200
+      significance: "Post-election victory (marked as 'not used' - may exclude)"
+
+# ================================================================
+# ANALYSIS CONFIGURATION
+# ================================================================
+llm_models:
+  primary: "gpt-4"
+  reliability_testing:
+    - "claude-3-sonnet"
+    - "gemini-pro"
+  cross_validation: true
+  stability_runs: 3  # Multiple runs per model for consistency testing
+
+prompting_strategy:
+  sequential_analysis:
+    description: "Single-axis analysis per prompt (matching human methodology)"
+    populism_prompt: |
+      Analise este discurso considerando APENAS o eixo Populismo↔Pluralismo. 
+      Ignore completamente apelos à identidade nacional ou patrióticos.
+      Foque exclusivamente em: retórica anti-elite, centralidade do povo, 
+      visão maniqueísta versus respeito institucional, representação diversa.
+      
+    nationalism_prompt: |
+      Analise este discurso considerando APENAS o eixo Patriotismo↔Nacionalismo.
+      Ignore completamente retórica populista ou anti-elite.  
+      Foque exclusivamente em: apegos cívicos constitucionais versus 
+      apelos à identidade étnica/cultural e supremacia nacional.
+      
+  parallel_analysis:
+    description: "Multi-axis analysis in single prompt (testing LLM capability)"
+    combined_prompt: |
+      Analise este discurso usando ambos os eixos simultaneamente:
+      1. Eixo Populismo↔Pluralismo (score 0-2)
+      2. Eixo Patriotismo↔Nacionalismo (score 0-2)
+      
+      Forneça raciocínio separado para cada eixo com evidências textuais específicas.
+
+# ================================================================
+# STATISTICAL VALIDATION PROTOCOL  
+# ================================================================
+validation_metrics:
+  primary_correlation:
+    target: "r > 0.80 with BYU manual coding"
+    significance: "p < 0.05"
+    
+  inter_condition_reliability:
+    cronbach_alpha: "> 0.80 across four conditions"
+    effect_size: "Cohen's d > 0.3 for condition differences"
+    
+  cross_llm_consistency:
+    inter_rater_reliability: "> 0.70 across models"
+    intra_model_stability: "< 0.1 variance across runs"
+    
+  temporal_validation:
+    baseline_reproduction: "0.50 ±0.02 average score accuracy"
+    progression_match: "0.5→0.9 temporal pattern recognition"
+    turning_point: "October 7 intensification detection"
+
+statistical_tests:
+  - "Pearson correlation coefficients (all conditions vs manual coding)"
+  - "ANOVA for condition effects and interaction terms"  
+  - "Cronbach's alpha for internal consistency"
+  - "Cohen's d for practical significance"
+  - "Temporal regression analysis for campaign progression"
+
+# ================================================================
+# OUTPUT SPECIFICATIONS
+# ================================================================
+deliverables:
+  jupyter_notebook: "byu_bolsonaro_methodological_validation.ipynb"
+  analysis_approach: "Stage 5→6 integration with auto-generated templates"
+  
+  required_outputs:
+    statistical_validation:
+      - "Four-condition correlation matrix with manual coding"
+      - "Cross-LLM reliability coefficients"  
+      - "Temporal progression analysis vs BYU findings"
+      - "Effect size analysis for methodological differences"
+      
+    visualization_suite:
+      - "Quadrant scatter plots (populism vs nationalism dimensions)"
+      - "Temporal evolution charts (July-October campaign timeline)"
+      - "Cross-condition comparison visualizations"
+      - "Correlation validation plots vs manual coding"
+      
+    academic_documentation:
+      - "Complete methodological transparency documentation"
+      - "Four-condition experimental design specification"
+      - "Statistical validation protocol and results"
+      - "BYU replication accuracy assessment"
+
+# ================================================================
+# SUCCESS CRITERIA & DECISION GATES
+# ================================================================
+success_gates:
+  gate_1: "Basic LLM+DCS Replication"
+  criteria_1: 
+    - "Framework produces theoretically coherent results"
+    - "Directional accuracy confirmed vs BYU findings"  
+    - "Portuguese language processing validated"
+    
+  gate_2: "Extension/Improvement Capabilities"
+  criteria_2:
+    - "r > 0.70 correlation with manual coding achieved"
+    - "Novel insights beyond manual coding demonstrated"
+    - "Cross-condition reliability validated"
+    
+  go_no_go_decision:
+    proceed_if: "Gates 1-2 both validated successfully"
+    pivot_if: "Fundamental disconnect or quality gap requires methodology overhaul"
+
+# ================================================================
+# ACADEMIC INTEGRATION
+# ================================================================
+byu_partnership:
+  collaboration_model: "Charter customer validation approach"
+  deliverable_timeline: "Phase 1: Internal validation → Phase 2: BYU engagement"  
+  value_proposition: "Computational methodology exceeding human coding reliability"
+  
+methodology_contributions:
+  - "First systematic quantitative measurement of discourse competition"
+  - "Speaker isolation methodological innovation for video-based analysis"
+  - "Cross-LLM reliability validation for political discourse analysis"
+  - "Temporal progression detection for campaign strategy evolution"
+
+expected_outcomes:
+  validation_success: "r > 0.80 correlation establishes computational credibility"
+  methodological_advance: "Four-condition validation sets new standards"
+  partnership_foundation: "Proven value drives 6-month pilot collaboration"
+  academic_publication: "Novel insights enable joint publication opportunity"
+
+# ================================================================
+# RESOURCE REQUIREMENTS
+# ================================================================
+computational_resources:
+  llm_api_calls: "~360 calls (12 speeches × 4 conditions × 3 models × 2.5 avg)"
+  estimated_cost: "$45-60 (assuming GPT-4 pricing)"
+  processing_time: "~90 minutes total analysis time"
+  
+human_resources:
+  experiment_execution: "2-3 days (includes manual isolation preprocessing)"
+  analysis_validation: "1-2 days (statistical validation and visualization)"
+  documentation: "2-3 days (academic documentation and methodology write-up)"
+  
+data_requirements:
+  corpus_preprocessing: "Manual extraction of Bolsonaro-only utterances"
+  metadata_enrichment: "Temporal sequence, event context, speaker identification"
+  ground_truth_establishment: "BYU manual coding scores for validation"
+
+# ================================================================
+# IMPLEMENTATION NOTES
+# ================================================================
+preprocessing_steps:
+  condition_1_prep:
+    - "Extract [Speaker 0] utterances from each transcript"
+    - "Remove timestamp markers while preserving sequence"
+    - "Clean crowd reactions/contextual markers"
+    - "Validate speaker identification accuracy"
+    
+  quality_controls:
+    - "Transcript fidelity validation (sample audio comparison)"
+    - "Speaker identification accuracy verification"  
+    - "Temporal sequence preservation confirmation"
+    - "Portuguese language authenticity review"
+
+stage_5_to_6_integration:
+  - "Experiment runs through standard Discernus pipeline"
+  - "Results automatically trigger Stage 6 handoff"
+  - "Auto-generated Jupyter notebook with embedded analysis"
+  - "Publication-ready visualizations and statistical validation"
+  - "Export capabilities (Stata, Excel) for academic workflows"
+
+# ================================================================
+# CROSS-REFERENCES
+# ================================================================
+related_documentation:
+  - "BYU_METHODOLOGICAL_VALIDATION_PROTOCOL.md"
+  - "BYU_EXPERIMENT_REQUIREMENTS_SCRATCHPAD.md" 
+  - "experiment_design_considerations.md"
+  - "democratic_tension_axis_model_brazil_2018.yaml"
+  
+strategic_context:
+  - "Charter customer acquisition via proven methodology"
+  - "Academic viral adoption through research acceleration"
+  - "Stage 5→6 integration validation using real-world corpus"
+  - "GPL runtime simplification with enterprise differentiation" 

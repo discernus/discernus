@@ -1,0 +1,196 @@
+# ================================================================
+# BYU BOLSONARO DEBUG EXPERIMENT - Quick Test Version
+# ================================================================
+
+experiment_meta:
+  name: "BYU_Bolsonaro_Debug"
+  display_name: "BYU Bolsonaro Validation - Debug (3 Speeches, Cloud LLMs)"
+  version: "1.0-debug-cloud"
+  description: "Fast debug version of BYU validation using 3 key Bolsonaro speeches and fast cloud LLMs (Claude Haiku + GPT-3.5) for reliable analysis"
+  tags: ["byu_validation", "debug", "local_llm", "brazilian_corpus", "tamaki_fuks_replication"]
+  
+  # Study design parameters
+  study_design:
+    comparison_type: "multi_model"
+    corpus_based: true
+    statistical_validation: true
+    sample_size_target: 3  # Debug subset
+    statistical_methods: 
+      - "geometric_similarity"
+      - "dimensional_correlation" 
+      - "hypothesis_testing"
+
+# Debug corpus configuration - 3 key speeches for fast testing
+corpus:
+  source_type: "directory_collection"
+  file_path: "0_workspace/byu_populism_project/populism in brazil 2018/speeches-zip/rev-transcripts"
+  pattern: "**/*.txt"
+  sampling_strategy: "manual_selection"
+  
+  # Three strategically selected speeches for debugging
+  debug_selection:
+    - "22 de julho - Oficialização da Candidatura à presidência – Conferência PSL.m4a.txt"  # Campaign launch
+    - "16 de Setembro - Apos Atentado.m4a.txt"  # Critical post-attack messaging  
+    - "22 de Outubro - Av. Paulista.m4a.txt"  # Final runoff intensification
+  
+  selection_rationale: "Covers campaign arc: launch → crisis → final push"
+
+# Four-condition design as flagship models (format required by runner)
+models:
+  comparison_set: "flagship_only"
+  
+  flagship_models:
+    # Condition 1: Claude Haiku (Fast Cloud Model)
+    condition_claude_haiku:
+      model_id: "claude-3-5-haiku-20241022"
+      provider: "anthropic"
+      tier: "cloud"
+      enabled: true
+      condition_type: "cloud_analysis"
+      preprocessing: "clean_transcript_analysis"
+      description: "Claude Haiku - fast and reliable cloud analysis"
+      
+    # Condition 2: GPT-3.5 Turbo (Fast Cloud Model)  
+    condition_gpt_turbo:
+      model_id: "gpt-3.5-turbo"
+      provider: "openai"
+      tier: "cloud"
+      enabled: true
+      condition_type: "cloud_analysis"
+      preprocessing: "clean_transcript_analysis"
+      description: "GPT-3.5 Turbo - fast and reliable cloud analysis"
+      
+    # Condition 3: Claude Haiku Variant (Methodological Comparison)
+    condition_claude_variant:
+      model_id: "claude-3-5-haiku-20241022"
+      provider: "anthropic"
+      tier: "cloud"
+      enabled: true
+      condition_type: "variant_analysis"
+      preprocessing: "systematic_computational_pipeline"
+      description: "Claude Haiku with systematic prompting for comparison"
+      
+    # Condition 4: GPT-3.5 Turbo Variant (Methodological Comparison)
+    condition_gpt_variant:
+      model_id: "gpt-3.5-turbo"
+      provider: "openai"
+      tier: "cloud"
+      enabled: true
+      condition_type: "variant_analysis"
+      preprocessing: "systematic_computational_pipeline"
+      description: "GPT-3.5 Turbo with systematic prompting for comparison"
+
+# Framework configuration (embedded directly - no file_path reference)
+framework:
+  name: "democratic_tension_axis_br_2018"
+  version: "v3.2"
+  display_name: "Democratic Tension Axis Model - Brazil 2018"
+  description: "Democratic Tension Axis Model optimized for Brazilian political discourse. Two orthogonal axes: Populism↔Pluralism (vertical) and Patriotism↔Nationalism (horizontal). Compatible with Tamaki & Fuks (2019) methodology."
+  
+  components:
+    populism:
+      component_id: "populism"
+      type: "anchor"
+      angle: 90
+      weight: 1.0
+      description: "Direct popular sovereignty and anti-elite sentiment"
+      language_cues: ["povo", "elite", "estabelecimento", "corrupção", "nós contra eles"]
+      
+    pluralism:
+      component_id: "pluralism" 
+      type: "anchor"
+      angle: 270
+      weight: 1.0
+      description: "Institutional mediation and democratic procedures"
+      language_cues: ["democracia", "instituições", "diálogo", "compromisso", "pluralidade"]
+      
+    nationalism:
+      component_id: "nationalism"
+      type: "anchor" 
+      angle: 0
+      weight: 1.0
+      description: "Ethnic/cultural supremacy and exclusivity"
+      language_cues: ["Brasil primeiro", "verdadeiros brasileiros", "tradição", "valores nacionais"]
+      
+    patriotism:
+      component_id: "patriotism"
+      type: "anchor"
+      angle: 180
+      weight: 1.0
+      description: "Civic attachment and inclusive national identity"
+      language_cues: ["amor ao país", "cidadania", "união nacional", "orgulho brasileiro"]
+  
+  axes:
+    PopulismPluralism:
+      description: "Direct popular sovereignty vs. institutional mediation"
+      anchor_ids: ["populism", "pluralism"]
+      
+    PatriotismNationalism:
+      description: "Civic attachment vs. ethnic/cultural supremacy"
+      anchor_ids: ["patriotism", "nationalism"]
+
+# Statistical analysis configuration (executed in Stage 6 notebooks)
+statistical_analysis:
+  primary_methods:
+    geometric_similarity:
+      enabled: true
+      metrics: ["euclidean_distance", "cosine_similarity"]
+      
+    dimensional_correlation:
+      enabled: true
+      methods: ["pearson", "spearman"]
+      
+    hypothesis_testing:
+      enabled: true
+      tests: ["paired_t_test"]
+      alpha: 0.05
+
+  similarity_classification:
+    thresholds:
+      highly_similar: 
+        geometric_distance: 0.15
+        correlation_threshold: 0.80  # BYU target: r > 0.80
+      moderately_similar:
+        geometric_distance: 0.35
+        correlation_threshold: 0.65
+      different:
+        geometric_distance: 0.50
+        correlation_threshold: 0.40
+
+# BYU validation goals
+validation_targets:
+  primary_correlation: "r > 0.80 with manual coding (Tamaki & Fuks 2019)"
+  methodological_rigor: "Four-condition experimental validation"
+  stage_5_to_6: "Auto-generated Jupyter notebook via handoff orchestrator"
+  academic_output: "Publication-ready analysis for BYU charter customer demo"
+
+# Report generation configuration
+report_configuration:
+  template_type: "byu_tamaki_fuks_validation"
+  
+  visualization_strategy:
+    condition_comparison_charts: true
+    brazilian_quadrant_plots: true  
+    temporal_progression: false  # Only 3 speeches in debug
+    correlation_validation: true
+    
+  content_sections:
+    - "byu_validation_summary"
+    - "four_condition_methodology" 
+    - "tamaki_fuks_correlation_analysis"
+    - "stage_6_handoff_demo"
+    - "charter_customer_value_prop"
+
+# Resource estimation for debug run
+resource_estimation:
+  total_analyses: 12  # 3 speeches × 4 conditions
+  estimated_duration_minutes: 3  # Fast cloud LLMs
+  estimated_cost: 0.50  # Claude Haiku + GPT-3.5 Turbo (very cheap)
+  
+# Quality assurance
+quality_assurance:
+  validation_checks:
+    - "corpus_file_availability"
+    - "ollama_connectivity" 
+    - "framework_compatibility"
+    - "stage_6_handoff_trigger" 

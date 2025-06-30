@@ -1,0 +1,12 @@
+{
+  "job_id": "a7ba7997-a076-4c1b-b34a-2b93b31085d8",
+  "experiment_file": "discernus/experiments/mft_experiment.yaml",
+  "run_timestamp": "2025-06-30_12-35-56",
+  "experiment_name": "mft_experiment",
+  "framework_name": "moral_foundations_theory",
+  "models_analyzed": [
+    "gpt-4o"
+  ],
+  "total_analyses": 1,
+  "generation_timestamp": "2025-06-30T12:35:56.731899"
+}

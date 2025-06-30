@@ -61,14 +61,37 @@ class FrameworkLoader:
 
 
 def _extract_anchors_from_framework(framework_def: Dict[str, Any]) -> Dict[str, Any]:
-    """Extracts a flat dictionary of all anchors from a framework definition."""
+    """
+    Extracts a flat dictionary of all anchors from a framework definition.
+    Supports both legacy format and Framework Specification v3.2.
+    """
     anchors = {}
-    axes = framework_def.get("framework", {}).get("axes", {})
+    
+    # Check for Framework Specification v3.2 format first
+    framework_data = framework_def.get("framework", framework_def)
+    components = framework_data.get("components", {})
+    
+    if components:
+        # Framework Specification v3.2: Extract from components
+        for component_id, component_data in components.items():
+            if component_data.get("type") == "anchor":
+                anchors[component_id] = component_data
+        logger.info(f"Loaded {len(anchors)} anchors from Framework Specification v3.2 components")
+        return anchors
+    
+    # Fallback to legacy format for backward compatibility
+    axes = framework_data.get("axes", {})
     for axis in axes.values():
-        if "integrative" in axis:
+        if "integrative" in axis and isinstance(axis["integrative"], dict):
             anchors[axis["integrative"]["name"]] = axis["integrative"]
-        if "disintegrative" in axis:
+        if "disintegrative" in axis and isinstance(axis["disintegrative"], dict):
             anchors[axis["disintegrative"]["name"]] = axis["disintegrative"]
+    
+    if anchors:
+        logger.info(f"Loaded {len(anchors)} anchors from legacy framework format")
+    else:
+        logger.warning("No anchors found in framework definition")
+    
     return anchors
 
 
