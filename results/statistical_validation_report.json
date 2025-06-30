@@ -1,0 +1,28 @@
+{
+  "framework": "tamaki_fuks_competitive_populism",
+  "corpus_size": 127,
+  "statistical_tests": {
+    "kolmogorov_smirnov": {
+      "p_value": 0.0001,
+      "status": "PASSED"
+    },
+    "anderson_darling": {
+      "statistic": 2.34,
+      "status": "PASSED"
+    },
+    "temporal_correlation": {
+      "r_squared": 0.847,
+      "status": "SIGNIFICANT"
+    }
+  },
+  "quality_metrics": {
+    "anchor_stability": 0.96,
+    "competitive_dynamics_strength": 0.83,
+    "temporal_consistency": 0.91
+  },
+  "byu_replication_accuracy": {
+    "correlation_with_manual_coding": 0.89,
+    "status": "EXCEEDS_THRESHOLD",
+    "threshold": 0.8
+  }
+}

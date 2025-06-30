@@ -19,4 +19,28 @@ from .theoretical_weighting_viz import TheoreticalWeightingVisualizer
 __all__ = [
     'AdvancedDCSVisualizer',
     'TheoreticalWeightingVisualizer'
-] 
+]
+
+"""
+Discernus Visualization Module
+
+Provides distinctive identity with seamless academic compliance.
+"""
+
+from .discernus_typography import setup_style, TYPOGRAPHY_PROFILES
+
+# Simple interface for immediate use
+def discernus_style():
+    """Apply distinctive Discernus identity styling"""
+    setup_style('discernus')
+
+def nature_style():
+    """Apply Nature journal compliance styling"""
+    setup_style('nature')
+
+def science_style():
+    """Apply Science journal compliance styling"""
+    setup_style('science')
+
+# Export key functions  
+__all__.extend(['setup_style', 'discernus_style', 'nature_style', 'science_style', 'TYPOGRAPHY_PROFILES']) 

@@ -1,0 +1,91 @@
+Metadata-Version: 2.4
+Name: discernus
+Version: 0.1.0
+Summary: A framework for statistical analysis of text-based moral reasoning
+Author: Discernus Team
+License: MIT
+Project-URL: Homepage, https://github.com/discernus/discernus
+Project-URL: Repository, https://github.com/discernus/discernus.git
+Project-URL: Issues, https://github.com/discernus/discernus/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi
+Requires-Dist: uvicorn[standard]
+Requires-Dist: sqlalchemy
+Requires-Dist: alembic
+Requires-Dist: pydantic
+Requires-Dist: numpy
+Requires-Dist: python-dotenv
+Requires-Dist: jinja2
+Requires-Dist: plotly
+Requires-Dist: litellm
+Requires-Dist: requests
+Requires-Dist: pyyaml
+Requires-Dist: celery
+Requires-Dist: redis
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-asyncio; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+
+# Discernus: AI Model Analysis Platform
+
+Clean, production-ready implementation of the Discernus platform for analyzing and comparing AI model outputs across moral, political, and psychological frameworks.
+
+## Quick Start
+
+1. **Setup Environment**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+2. **Configure Database**:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your database and API credentials
+   alembic upgrade head
+   ```
+
+3. **Start API Server**:
+   ```bash
+   python3 -m uvicorn reboot.api.main:app --host 0.0.0.0 --port 8000 --reload
+   ```
+
+4. **Run Analysis**:
+   ```bash
+   python3 reboot/experiments/run_experiment.py reboot/experiments/flagship_model_statistical_comparison.yaml
+   ```
+
+## Core Features
+
+- **Multi-Model Comparison**: Compare GPT-4, Claude, and other LLMs
+- **Statistical Analysis**: Rigorous correlation and significance testing  
+- **Beautiful Reports**: Interactive visualizations with circular coordinate systems
+- **Robust Parsing**: Handles various LLM response formats
+- **Database Persistence**: PostgreSQL with Alembic migrations
+
+## Architecture
+
+- `reboot/api/` - FastAPI web server
+- `reboot/analysis/` - Statistical methods and comparison logic
+- `reboot/database/` - SQLAlchemy models and migrations
+- `reboot/engine/` - Core analysis engine
+- `reboot/gateway/` - LLM API clients  
+- `reboot/reporting/` - Visualization and report generation
+
+Built for production research use.

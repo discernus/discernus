@@ -14,13 +14,17 @@ def select_template_pattern(framework_path):
         framework_path: Path to framework YAML file
         
     Returns:
-        str: Template pattern name (competitive_dynamics, complementary_moral, etc.)
+        str: Template pattern name (two_axis_orthogonal, competitive_dynamics, complementary_moral, etc.)
     """
     
     with open(framework_path, 'r') as f:
         framework = yaml.safe_load(f)
     
     framework_name = framework.get('name', '').lower()
+    
+    # NEW: Check for revolutionary two-axis orthogonal architecture first
+    if 'axes' in framework:
+        return 'two_axis_orthogonal'
     
     # Handle v3.1 (anchors) and v3.2 (components) format according to spec
     # v3.2 frameworks use components, v3.1 frameworks use anchors
@@ -35,7 +39,7 @@ def select_template_pattern(framework_path):
     
     # Pattern matching logic based on framework characteristics
     
-    # 1. COMPETITIVE DYNAMICS PATTERN
+    # 1. COMPETITIVE DYNAMICS PATTERN (Legacy - to be deprecated)
     if has_competitive and anchor_count <= 4:
         return 'competitive_dynamics'
     
@@ -77,8 +81,30 @@ def get_template_info(pattern_name):
     """
     
     template_patterns = {
+        'two_axis_orthogonal': {
+            'description': 'Revolutionary two-axis orthogonal framework (Populism/Pluralism × Patriotism/Nationalism)',
+            'anchor_range': [0, 0],  # Uses axes instead of anchors
+            'features': [
+                'orthogonal_dimensional_analysis',
+                'quadrant_based_classification', 
+                'sequential_single_pass_scoring',
+                'dimensional_independence_validation',
+                'bolsonaro_problem_resolution'
+            ],
+            'visualizations': [
+                'quadrant_scatter_plot',
+                'dimensional_distribution',
+                'temporal_quadrant_evolution',
+                'comparative_quadrant_analysis',
+                'axis_independence_validation'
+            ],
+            'frameworks': ['political_discourse_two_axis', 'orthogonal_discourse_analysis'],
+            'complexity': 'medium',
+            'innovation': 'eliminates_crowding_out_effects'
+        },
+        
         'competitive_dynamics': {
-            'description': 'Competitive ideological dynamics with temporal evolution',
+            'description': 'Competitive ideological dynamics with temporal evolution (Legacy - being deprecated)',
             'anchor_range': [3, 4],
             'features': [
                 'competitive_dilution_modeling',
@@ -93,7 +119,8 @@ def get_template_info(pattern_name):
                 'strategic_trajectory_mapping'
             ],
             'frameworks': ['tamaki_fuks_competitive_populism', 'ideological_competition'],
-            'complexity': 'medium'
+            'complexity': 'medium',
+            'status': 'legacy_deprecated'
         },
         
         'complementary_moral': {
@@ -195,12 +222,7 @@ def validate_template_compatibility(framework_path, pattern_name):
     with open(framework_path, 'r') as f:
         framework = yaml.safe_load(f)
     
-    # Handle v3.1/v3.2 format correctly in validation too
-    if 'components' in framework:
-        anchor_count = len(framework['components'])
-    else:
-        anchor_count = len(framework.get('anchors', {}))
-        
+    framework_name = framework.get('name', '').lower()
     template_info = get_template_info(pattern_name)
     
     validation_result = {
@@ -209,7 +231,42 @@ def validate_template_compatibility(framework_path, pattern_name):
         'recommendations': []
     }
     
-    # Check anchor count compatibility
+    # NEW: Handle two-axis orthogonal frameworks
+    if pattern_name == 'two_axis_orthogonal':
+        if 'axes' not in framework:
+            validation_result['warnings'].append(
+                "Two-axis template selected but framework has no 'axes' section defined"
+            )
+            validation_result['recommendations'].append(
+                "Consider using traditional anchor-based template instead"
+            )
+        else:
+            # Validate two-axis structure - check for exactly 2 axes (any names)
+            axes = framework.get('axes', {})
+            if len(axes) != 2:
+                validation_result['warnings'].append(
+                    f"Two-axis framework should have exactly 2 axes, found {len(axes)}"
+                )
+            else:
+                # Validate each axis has the required structure
+                for axis_name, axis_config in axes.items():
+                    if 'anchor_ids' not in axis_config:
+                        validation_result['warnings'].append(
+                            f"Axis '{axis_name}' missing required 'anchor_ids' field"
+                        )
+                    elif len(axis_config['anchor_ids']) != 2:
+                        validation_result['warnings'].append(
+                            f"Axis '{axis_name}' should have exactly 2 anchor_ids, found {len(axis_config['anchor_ids'])}"
+                        )
+        return validation_result
+    
+    # Handle traditional anchor-based frameworks
+    if 'components' in framework:
+        anchor_count = len(framework['components'])
+    else:
+        anchor_count = len(framework.get('anchors', {}))
+    
+    # Check anchor count compatibility for traditional frameworks
     anchor_range = template_info.get('anchor_range', [1, 20])
     if anchor_count < anchor_range[0] or anchor_count > anchor_range[1]:
         validation_result['warnings'].append(

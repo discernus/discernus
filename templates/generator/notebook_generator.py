@@ -112,15 +112,24 @@ def generate_framework_config(framework_path, pattern_name):
         # v3.1 format - use anchors section
         anchor_configs = framework_yaml.get('anchors', {})
     
+    # Extract semantic type colors if present (v3.2 frameworks)
+    semantic_colors = framework_yaml.get('visualization', {}).get('semantic_type_colors', {})
+    if not semantic_colors:
+        # Fallback: check for direct semantic_type_colors at root level
+        semantic_colors = framework_yaml.get('semantic_type_colors', {})
+    
     for name, config in anchor_configs.items():
         angle = config.get('angle', 0)
         x = np.cos(np.deg2rad(angle))
         y = np.sin(np.deg2rad(angle))
         
+        # Priority: 1) semantic_type_colors, 2) individual config color, 3) auto-assign
+        color = semantic_colors.get(name, config.get('color', auto_assign_color(name)))
+        
         anchors[name] = {
             'position': [x, y],  # List for JSON serialization
             'angle': angle,
-            'color': config.get('color', auto_assign_color(name)),
+            'color': color,
             'description': config.get('description', ''),
             'type': config.get('type', 'anchor')
         }

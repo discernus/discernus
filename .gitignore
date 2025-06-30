@@ -26,3 +26,8 @@ temp_results/
 # OS
 .DS_Store
 Thumbs.db
+
+# Generated visualization outputs
+outputs/
+*.pdf
+*.eps
