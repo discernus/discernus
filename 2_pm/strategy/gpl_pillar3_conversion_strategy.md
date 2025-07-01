@@ -80,17 +80,44 @@ The **GPL → Pillar 3 Conversion Strategy** establishes how we position Pillar 
 - **Conversion Impact:** Well-structured data makes notebooks more complex over time
 - **Academic Fit:** Researchers value data portability and format flexibility
 
-### 2.2 Stage 6 Integration: The Beautiful Trap
+### 2.2 Database Architecture: Strategic Scope Separation
 
-**Jupyter Notebook Auto-Generation:**
+**GPL Database (Individual Research Focus):**
+```sql
+-- Individual researcher workflow support
+experiments (id, name, created_at, framework_used)
+experiment_runs (id, experiment_id, timestamp, results_path) 
+local_analysis_cache (id, text_hash, framework, results)
+research_provenance (id, analysis_id, full_lineage)
+personal_analytics (experiment_count, total_analyses, research_velocity)
 ```
-Experiment Completion → Auto-generate Analysis Notebook → Pre-loaded Data + Statistical Methods
+
+**Enterprise Database (Institutional Coordination):**
+```sql
+-- Multi-user coordination features (EXCLUDED from GPL)
+multi_user_projects (user_id, project_id, permissions)
+institutional_analytics (university_id, department_metrics)
+cross_institutional_corpus_sharing (...)
+enterprise_compliance_audit_logs (...)
+team_collaboration_workflows (...)
+```
+
+**Strategic Benefits:**
+- **GPL Simplicity:** Database serves individual research needs only
+- **Enterprise Value:** Clear coordination features impossible in local database
+- **Natural Scaling:** Individual success creates need for institutional coordination
+
+### 2.3 Stage 6 Integration: The Beautiful Trap
+
+**Universal Template Approach:**
+```
+Experiment Completion → Copy Universal Template → Auto-load Data + Framework Config
 ```
 
 **Researcher Experience Design:**
-1. **"Wow!" Moment:** Complete analysis environment ready instantly
-2. **Academic Paradise:** Familiar tools with all capabilities pre-configured
-3. **Success Amplification:** Productive research creates more experiments
+1. **"Wow!" Moment:** Clean, executable template with data pre-loaded
+2. **Academic Paradise:** Standard libraries (NumPy, Matplotlib, Pandas) with transparent code
+3. **Success Amplification:** Productive research creates more experiments and notebooks
 4. **Natural Complexity:** Success breeds notebook management challenges
 5. **Problem Recognition:** "I need help organizing this growing research program"
 

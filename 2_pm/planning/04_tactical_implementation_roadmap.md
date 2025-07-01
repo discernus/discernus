@@ -1,8 +1,18 @@
 # 04: Tactical Implementation Roadmap
 
-**Status:** Current Operational Plan  
-**Strategic Alignment:** This roadmap executes the validation gates from `01_validation_plan.md` with specific milestones, bridging strategic intent with tactical execution.  
+**Status:** Updated Operational Plan v2.0  
+**Date:** January 25, 2025  
+**Strategic Alignment:** This roadmap executes the validation gates from `01_validation_plan.md` with universal template approach, implementing GPL → Pillar 3 conversion strategy.  
 **Dependencies:** `discernus_comprehensive_strategy.md`, `01_validation_plan.md`, BYU Partnership Requirements
+
+## 🔄 **Key Strategic Updates (January 2025)**
+
+**Architecture Change:** Moved from complex automated notebook generation to clean universal templates
+**Rationale:** 
+- **Academic Trust:** Transparent, executable code researchers can understand and modify
+- **Maintainability:** Single template instead of complex generation system  
+- **Standard Libraries:** NumPy, Matplotlib, Pandas - no custom abstractions
+- **GPL Simplification:** Remove enterprise features to enable "Free Will Trap" conversion strategy
 
 ## Core Principle: Gate-Driven Development with Time-Bound Milestones
 
@@ -90,51 +100,41 @@ This tactical roadmap translates our **five validation gates** into specific, ti
 **Target Gate:** Gate 3 - Results Analysis Usability  
 **Success Criteria:** Graduate student productive in <2 hours, 4/5 Jupyter Native Integration Heuristics satisfied
 
-### Week 9: Jupyter Integration Development
-**✅ COMPLETED AHEAD OF SCHEDULE (Weeks 1-4)**
+### Week 9: Universal Template Development
+**🔄 STRATEGIC PIVOT: Simplified Template Approach**
 
-**✅ COMPLETED Deliverables:**
-- ✅ **Stage 6 Notebook Auto-Generation System** - Framework-agnostic template integration ready for `run_experiment.py`
-- ✅ **Pattern-based template architecture** with 5 strategic framework patterns defined
-- ✅ **Framework Specification v3.2 compliance** supporting both components and anchors formats
-- ✅ **Academic publication standards** with Nature journal compliance built-in
-- ✅ **Standard library foundation** eliminating custom abstractions
+**Updated Deliverables:**
+- [ ] **Universal Template System** - Single template that adapts to any Framework Spec v3.2 experiment
+- [ ] **Standard Library Foundation** - Clean, executable code using NumPy, Matplotlib, Pandas
+- [ ] **Intelligent Data Loading** - Template automatically loads experiment data and framework configuration
+- [ ] **Template Copy Integration** - Simple handoff that copies template and saves data files
 
-**✅ COMPLETED Implementation:**
-- ✅ **Stage 6 pattern-based template system** architecture completed
-- ✅ **Template selection logic** with competitive dynamics, complementary moral, hierarchical institutional, triangular comparative, and regulatory compliance patterns
-- ✅ **Framework auto-detection** from YAML characteristics (v3.1/v3.2 compatible)
-- ✅ **Configuration injection system** for notebook generation
-- ✅ **End-to-end validation** with Tamaki-Fuks framework
+**Implementation Approach:**
+- **Simplified Architecture**: Copy universal template instead of complex generation
+- **Clean Code**: Transparent, executable notebooks researchers can understand and modify
+- **Standard Libraries**: No custom abstractions - proven academic tools only
+- **File-Based Data**: Simple JSON/YAML data loading instead of complex injection
 
-**✅ COMPLETED Stage 6 Implementation (Weeks 1-4):**
-- ✅ **Days 1-2**: Universal base infrastructure with standard library foundation
-- ✅ **Days 3-4**: Template selection and compatibility validation system  
-- ✅ **Day 5**: Notebook generation pipeline with configuration injection
-- ✅ **Testing**: System validation with spec-compliant framework detection
-
-**📋 CURRENT STATUS**: Core architecture complete, ready for template-specific development
-
-**🔄 UPDATED Week 9 Focus:**
-- [ ] **MFT Template Development** - 12-component complementary moral template
-- [ ] **Production Integration** - Connect with `run_experiment.py` pipeline
-- [ ] **Template Portfolio Expansion** - Complete 2-3 additional strategic templates
-- [ ] **Real Data Validation** - Test with actual experiment results
+**Week 9 Focus:**
+- [ ] **Universal Template Creation** - Single notebook template with intelligent data loading
+- [ ] **Data Loading Functions** - Clean functions to load experiment results and framework config
+- [ ] **Framework Adaptation Logic** - Template adapts visualization to framework structure
+- [ ] **Integration with run_experiment.py** - Simple copy-and-save handoff process
 
 ### Week 10: Usability Testing with BYU
 **Deliverables:**
-- [ ] **Stage 6 Auto-Generation System validation** with real experiment data
-- [ ] Graduate student usability testing session (including Stage 6 handoff)
+- [ ] **Universal Template System validation** with real experiment data
+- [ ] Graduate student usability testing session (including template handoff)
 - [ ] Jupyter Native Integration Heuristics evaluation
 - [ ] Workflow friction identification and resolution
 - [ ] Gate 3 validation report with usability metrics
 
 **Key Activities:**
-- **Test Stage 6 notebook generation** with BYU Tamaki-Fuks experiment
-- **Validate seamless CLI → Jupyter handoff** workflow 
-- Evaluate framework-agnostic template with multiple framework types
-- User testing of auto-generated publication-ready exports
-- Graduate student feedback on automated vs. manual notebook setup
+- **Test universal template workflow** with BYU Tamaki-Fuks experiment
+- **Validate seamless CLI → Template handoff** workflow 
+- Evaluate template adaptation to different framework types
+- User testing of template-based analysis and publication exports
+- Graduate student feedback on template approach vs. manual setup
 
 **Success Metrics:**
 - Target user (graduate student) productive within 2 hours
@@ -157,40 +157,40 @@ This tactical roadmap translates our **five validation gates** into specific, ti
 
 ### Week 11: Comprehensive Workflow Development
 **Deliverables:**
-- [ ] **End-to-end Stage 6 workflow optimization** based on Week 10 feedback
+- [ ] **Universal template workflow optimization** based on Week 10 feedback
 - [ ] Framework development environment integration
 - [ ] Experiment design and execution within Jupyter
 - [ ] Results analysis and interpretation workflows
 - [ ] Academic publication pipeline integration
 
 **Key Activities:**
-- **Refine Stage 6 auto-generation system** based on BYU usability feedback
-- **Optimize framework-agnostic template** for different research scenarios
+- **Refine universal template system** based on BYU usability feedback
+- **Optimize template adaptation logic** for different research scenarios
 - Integrate framework YAML editing with Jupyter
 - Develop experiment execution and monitoring tools
 - Create publication-ready output generation
 - Build comprehensive workflow documentation
 
-**Stage 6 Optimization Focus:**
-- Performance improvements for large datasets
+**Template Optimization Focus:**
+- Template loading performance for large datasets
 - Enhanced publication export options
-- Framework comparison capabilities
+- Multi-experiment analysis capabilities
 - Academic citation and provenance features
 
 ### Week 12: End-to-End Validation
 **Deliverables:**
-- [ ] **Complete Stage 6 template pattern development** for all 5 strategic frameworks (Tamaki-Fuks ✅, MFT, Civic Virtue, Political Triad, Business Ethics)
+- [ ] **Universal template validation** with multiple framework types and experiments
 - [ ] Complete end-to-end workflow demonstration
 - [ ] BYU team workflow training and feedback
 - [ ] Workflow optimization based on user feedback
 - [ ] Gate 4 validation report with workflow assessment
 
 **Success Metrics:**
-- **Seamless CLI experiment execution → auto-generated Jupyter analysis** workflow
+- **Seamless CLI experiment execution → template-based Jupyter analysis** workflow
 - Framework development → analysis execution → results interpretation
 - User satisfaction with integrated environment
 - Academic workflow compatibility
-- **Stage 6 notebook generation** completes in <10 seconds for typical experiment
+- **Template handoff process** completes in <5 seconds for typical experiment
 
 **Gate 4 Decision Point:**
 - **PASS**: Proceed to partnership development
@@ -290,22 +290,22 @@ This tactical roadmap translates our **five validation gates** into specific, ti
 
 **Phase A: GPL Runtime Cleanup (Parallel to Phase 1)**
 - [ ] **Remove Report Builder** from `discernus/api/main.py` 
-- [ ] **Extract Statistical Methods** from GPL runtime to Stage 6 templates
-- [ ] **Simplify Database Schema** to results-only (remove enterprise analytics)
+- [ ] **Delete Handoff Orchestrator** - remove complex `handoff_orchestrator.py` (479 lines of base64 generation)
+- [ ] **Simplify Database Schema** to individual research focus (remove enterprise features)
 - [ ] **Consolidate API Endpoints** to essential GPL functionality only
-- [ ] **Clean Export Interface** for Stage 5→6 handoff
+- [ ] **Clean Export Interface** for universal template handoff
 
-**Phase B: Stage 5→6 Handoff Integration (Week 10-11)**
-- [ ] **Handoff Orchestrator** - automatic trigger after `run_experiment.py` completion
-- [ ] **Metadata Extraction** - framework, experiment, results for notebook generation
-- [ ] **Template Configuration** - universal template with dynamic data injection
-- [ ] **Notebook Placement** - save to `results/{job_id}/stage6_interactive_analysis.ipynb`
+**Phase B: Universal Template Integration (Week 9-10)**
+- [ ] **Template Copy System** - simple file copy after `run_experiment.py` completion
+- [ ] **Data File Creation** - save experiment results and framework config as JSON/YAML
+- [ ] **Universal Template** - single template with intelligent data loading
+- [ ] **Template Placement** - copy to `results/{job_id}/stage6_interactive_analysis.ipynb`
 
 **Strategic Benefits:**
 - **GPL Focus:** Faster development, cleaner architecture, clearer value prop
-- **Researcher Love:** Perfect individual experience with auto-generated notebooks
-- **Natural Scaling Pain:** Multiple notebooks create enterprise conversion opportunities
-- **Pillar 3 Readiness:** Clear enterprise differentiation from simplified GPL
+- **Academic Trust:** Transparent, executable code researchers understand and can modify
+- **Natural Scaling Pain:** Multiple template notebooks create enterprise coordination needs
+- **Pillar 3 Readiness:** Clear enterprise differentiation for multi-experiment coordination
 
 **Implementation Priority:** High - foundational for all subsequent development
 

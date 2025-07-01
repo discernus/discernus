@@ -75,6 +75,31 @@ Our model mirrors RStudio/Posit's proven framework, adapted for computational so
 | **Pillar 3: The Commercial Institutional Infrastructure** | | | |
 | **Posit Workbench, Connect, Package Manager** | **`Discernus Cloud` & `Discernus Enterprise Server`** | A managed, server-side application: our **orchestrator, API, and database backend**. This is the **managed, server-side runtime.** | **Generates Revenue by Solving Institutional Problems.** This is our **proprietary, paid product.** It solves problems of scale, collaboration, compliance (IRB), security, and high-performance computation that are impossible to manage in a local notebook. |
 
+## Database Architecture: Strategic Scope Separation
+
+**Critical Strategic Decision:** Database features are carefully separated to maintain clear product differentiation and support the "Free Will Trap" conversion strategy.
+
+### GPL Database (Individual Research Focus)
+**Purpose:** Support individual researcher productivity and organization
+**Scope:** Local research workflow, personal analytics, experiment tracking
+**Features:**
+- Experiment tracking and provenance (local research history)
+- Personal analytics (research velocity, framework usage patterns)  
+- Local analysis caching (performance optimization)
+- Individual corpus management (small-scale, file-based)
+
+### Enterprise Database (Institutional Coordination)
+**Purpose:** Multi-user collaboration and institutional management
+**Scope:** Team coordination, compliance, cross-institutional features
+**Features:**
+- Multi-user project management and collaboration workflows
+- Institutional analytics and departmental dashboards
+- Cross-institutional corpus sharing and licensing
+- Enterprise compliance and audit logging
+- Advanced corpus management with database backend
+
+**Strategic Benefit:** This separation ensures GPL provides genuine individual excellence while creating natural scaling pressure toward enterprise coordination solutions.
+
 ## Monetization Strategy: Academic Freemium to Infrastructure
 
 ### Phase 1: Viral Adoption (GPL Community Package)

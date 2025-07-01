@@ -22,9 +22,9 @@ from discernus.engine.signature_engine import (
 # from discernus.reporting.report_builder import ReportBuilder
 from scripts.tasks import analyze_text_task
 from discernus.database.session import get_db
-from discernus.database.models import AnalysisJob, AnalysisResult, JobStatus, AnalysisJobV2, AnalysisResultV2, StatisticalComparison
-from discernus.analysis.statistical_methods import StatisticalMethodRegistry
-from discernus.stage6.handoff_orchestrator import trigger_stage6_handoff
+from discernus.database.models import AnalysisJob, AnalysisResult, JobStatus, AnalysisJobV2, AnalysisResultV2
+# Statistical analysis imports removed - all analysis deferred to Stage 6 notebooks
+from discernus.validation import ExperimentValidator, ValidationError
 
 
 class AnalysisRequest(BaseModel):
@@ -102,7 +102,7 @@ class StatisticalComparisonRequest(BaseModel):
     frameworks: Optional[List[str]] = None
     runs_per_condition: Optional[int] = 1
     experiment_file_path: str = "discernus/experiments/reboot_mft_experiment.yaml"
-    statistical_methods: List[str] = ["geometric_similarity", "dimensional_correlation"]
+    statistical_methods: List[str] = []  # No runtime statistical analysis - deferred to Stage 6
 
 
 class ConditionResult(BaseModel):
@@ -152,11 +152,25 @@ async def _run_single_analysis(text: str, model: str, experiment_def: Dict[str, 
 
 
 def _load_experiment(experiment_name: str) -> Dict[str, Any]:
-    """Load experiment definition by name from the experiments directory."""
+    """Load experiment definition by name from the experiments directory with validation."""
     experiment_file = f"discernus/experiments/{experiment_name}.yaml"
     try:
         with open(experiment_file, "r") as f:
-            return yaml.safe_load(f)
+            experiment_config = yaml.safe_load(f)
+            
+        # SPEC VALIDATION: Validate experiment and embedded framework
+        validator = ExperimentValidator()
+        validated_experiment = validator.validate_experiment(
+            experiment_config, 
+            experiment_file_path=experiment_file
+        )
+        return validated_experiment
+        
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Experiment validation failed: {str(e)}"
+        )
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"Could not load experiment '{experiment_name}': {e}")
 
@@ -288,7 +302,20 @@ async def compare_statistical(request: StatisticalComparisonRequest, db: Session
     
     try:
         with open(request.experiment_file_path, "r") as f:
-            experiment_def = yaml.safe_load(f)
+            experiment_config = yaml.safe_load(f)
+        
+        # SPEC VALIDATION: Validate experiment and embedded framework  
+        validator = ExperimentValidator()
+        experiment_def = validator.validate_experiment(
+            experiment_config, 
+            experiment_file_path=request.experiment_file_path
+        )
+        
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Experiment validation failed: {str(e)}"
+        )
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"Could not load experiment file: {e}")
 
@@ -382,13 +409,10 @@ async def _handle_corpus_based_analysis(
     db.add_all(db_results_to_save)
     db.commit()
     
-    # Perform statistical analysis
-    registry = StatisticalMethodRegistry()
-    statistical_methods = experiment_def.get("statistical_analysis", {}).get("primary_methods", {})
+    # ARCHITECTURAL DECISION: All statistical analysis deferred to Stage 6 notebooks
+    # Runtime focuses on pure data collection: LLM calls + coordinate generation + storage
     
-    final_statistical_metrics = {}
-    
-    # Group results by model for statistical comparison
+    # Group results by model for centroid calculation only
     model_groups = {}
     for result in analysis_results:
         model = result["model"]
@@ -396,25 +420,9 @@ async def _handle_corpus_based_analysis(
             model_groups[model] = []
         model_groups[model].append(result)
     
-    # Calculate statistical metrics
-    for method_name, method_config in statistical_methods.items():
-        if method_config.get("enabled", False):
-            try:
-                if method_name == "geometric_similarity":
-                    final_statistical_metrics[method_name] = _calculate_corpus_geometric_similarity(model_groups)
-                elif method_name == "dimensional_correlation":
-                    final_statistical_metrics[method_name] = _calculate_corpus_dimensional_correlation(model_groups)
-                elif method_name == "hypothesis_testing":
-                    final_statistical_metrics[method_name] = _perform_hypothesis_testing(model_groups)
-                elif method_name == "effect_size_analysis":
-                    final_statistical_metrics[method_name] = _calculate_effect_sizes(model_groups)
-                elif method_name == "confidence_intervals":
-                    final_statistical_metrics[method_name] = _calculate_confidence_intervals(model_groups)
-            except Exception as e:
-                final_statistical_metrics[method_name] = {"error": str(e)}
-    
-    # Generate overall similarity classification
-    similarity_classification = _classify_corpus_similarity(final_statistical_metrics, experiment_def)
+    # No statistical analysis in runtime - data only
+    final_statistical_metrics = {}
+    similarity_classification = "DEFERRED_TO_STAGE6"
     
     # Create condition results (model averages)
     condition_results_api = []
@@ -447,26 +455,15 @@ async def _handle_corpus_based_analysis(
     # Report generation removed - visualization handled by Stage 6 notebooks
     # report_path = report_builder.generate_statistical_comparison_report(...)
     
-    # Save statistical comparison to database
-    statistical_comparison = StatisticalComparison(
-        id=str(uuid.uuid4()),
-        comparison_type=request.comparison_type,
-        source_job_ids=[job_id],
-        comparison_dimension="model",
-        similarity_metrics=json.dumps(final_statistical_metrics, default=str),
-        significance_tests=json.dumps(final_statistical_metrics.get("hypothesis_testing", {}), default=str),
-        similarity_classification=similarity_classification,
-        confidence_level=final_statistical_metrics.get("confidence_intervals", {}).get("overall_confidence", 0.0)
-    )
-    db.add(statistical_comparison)
-    db.commit()
-
-    # Prepare experiment result for Stage 6 handoff
+    # No statistical comparison saved to database - analysis deferred to Stage 6
+    # Only save core data for notebook consumption
+    
+    # Prepare experiment result for Stage 6 handoff (pure data)
     experiment_result = {
         'job_id': job_id,
         'comparison_type': request.comparison_type,
         'similarity_classification': similarity_classification,
-        'confidence_level': final_statistical_metrics.get("confidence_intervals", {}).get("overall_confidence", 0.0),
+        'confidence_level': 0.0,  # No runtime statistical confidence calculation
         'condition_results': [
             {
                 'condition_identifier': cr.condition_identifier,
@@ -475,7 +472,7 @@ async def _handle_corpus_based_analysis(
                 'total_analyses': len(model_groups.get(cr.condition_identifier, []))
             } for cr in condition_results_api
         ],
-        'statistical_metrics': final_statistical_metrics
+        'statistical_metrics': {}  # No runtime statistical metrics
     }
     
     # Universal Stage 5→6 completion
@@ -489,8 +486,8 @@ async def _handle_corpus_based_analysis(
         comparison_type=request.comparison_type,
         similarity_classification=similarity_classification,
         condition_results=condition_results_api,
-        statistical_metrics=final_statistical_metrics,
-        report_url=None  # Clean data export - visualization in Stage 6 notebooks
+        statistical_metrics={},  # No runtime statistical analysis
+        report_url=None  # All analysis in Stage 6 notebooks
     )
 
 
@@ -537,21 +534,14 @@ async def _handle_single_text_analysis(
     db.add_all(db_results_to_save)
     db.commit()
 
-    registry = StatisticalMethodRegistry()
-    final_statistical_metrics = {}
-    for method in request.statistical_methods:
-        try:
-            final_statistical_metrics[method] = registry.analyze(method, db_results_to_save)
-        except Exception as e:
-            final_statistical_metrics[method] = {"error": str(e)}
-
-    # Report generation removed - visualization handled by Stage 6 notebooks
-
-    # Prepare experiment result for Stage 6 handoff
+    # ARCHITECTURAL DECISION: All statistical analysis deferred to Stage 6 notebooks
+    # Runtime focuses on pure data collection only
+    
+    # Prepare experiment result for Stage 6 handoff (pure data)
     experiment_result = {
         'job_id': job_id,
         'comparison_type': request.comparison_type,
-        'similarity_classification': 'PENDING_ANALYSIS',  # Would need classification logic for single-text
+        'similarity_classification': 'DEFERRED_TO_STAGE6',
         'confidence_level': 0.0,
         'condition_results': [
             {
@@ -561,7 +551,7 @@ async def _handle_single_text_analysis(
                 'total_analyses': 1  # Single text analysis
             } for cr in condition_results_api
         ],
-        'statistical_metrics': final_statistical_metrics
+        'statistical_metrics': {}  # No runtime statistical analysis
     }
     
     # Universal Stage 5→6 completion
@@ -574,8 +564,8 @@ async def _handle_single_text_analysis(
         job_id=job_id,
         comparison_type=request.comparison_type,
         condition_results=condition_results_api,
-        statistical_metrics=final_statistical_metrics,
-        report_url=None  # Clean data export - visualization in Stage 6 notebooks
+        statistical_metrics={},  # No runtime statistical analysis
+        report_url=None  # All analysis in Stage 6 notebooks
     )
 
 
@@ -629,310 +619,9 @@ def _get_models_for_comparison(models_config: Dict[str, Any], requested_models: 
     return enabled_models
 
 
-def _calculate_corpus_geometric_similarity(model_groups: Dict[str, List]) -> Dict[str, Any]:
-    """Calculate geometric similarity metrics across corpus"""
-    import numpy as np
-    from itertools import combinations
-    
-    results = {}
-    
-    # Calculate average centroids for each model
-    model_centroids = {}
-    for model, results_list in model_groups.items():
-        centroids = [r["centroid"] for r in results_list]
-        avg_centroid = _calculate_average_centroid(centroids)
-        model_centroids[model] = avg_centroid
-    
-    # Calculate pairwise distances between model averages
-    model_names = list(model_centroids.keys())
-    pairwise_distances = {}
-    
-    for model1, model2 in combinations(model_names, 2):
-        centroid1 = np.array(model_centroids[model1])
-        centroid2 = np.array(model_centroids[model2])
-        distance = np.linalg.norm(centroid1 - centroid2)
-        pairwise_distances[f"{model1}_vs_{model2}"] = float(distance)
-    
-    # Calculate overall statistics
-    distances = list(pairwise_distances.values())
-    
-    results = {
-        "model_average_centroids": model_centroids,
-        "pairwise_distances": pairwise_distances,
-        "mean_distance": float(np.mean(distances)) if distances else 0.0,
-        "max_distance": float(np.max(distances)) if distances else 0.0,
-        "min_distance": float(np.min(distances)) if distances else 0.0,
-        "std_distance": float(np.std(distances)) if distances else 0.0
-    }
-    
-    return results
-
-
-def _calculate_corpus_dimensional_correlation(model_groups: Dict[str, List]) -> Dict[str, Any]:
-    """Calculate dimensional correlation across corpus"""
-    import numpy as np
-    from scipy import stats
-    
-    # Get all unique score dimensions
-    all_dimensions = set()
-    for results_list in model_groups.values():
-        for result in results_list:
-            all_dimensions.update(result["scores"].keys())
-    
-    dimensions = sorted(list(all_dimensions))
-    
-    # Create correlation matrix between models
-    model_names = list(model_groups.keys())
-    correlation_matrix = np.eye(len(model_names))
-    
-    for i, model1 in enumerate(model_names):
-        for j, model2 in enumerate(model_names):
-            if i < j:  # Only calculate upper triangle
-                # Get scores for both models across all texts
-                scores1 = []
-                scores2 = []
-                
-                # Match texts between models
-                for result1 in model_groups[model1]:
-                    text_id = result1["text_id"]
-                    # Find corresponding result in model2
-                    result2 = next((r for r in model_groups[model2] if r["text_id"] == text_id), None)
-                    
-                    if result2:
-                        # Collect scores for all dimensions
-                        for dim in dimensions:
-                            score1 = result1["scores"].get(dim, 0.0)
-                            score2 = result2["scores"].get(dim, 0.0)
-                            scores1.append(score1)
-                            scores2.append(score2)
-                
-                if len(scores1) > 1:
-                    correlation, p_value = stats.pearsonr(scores1, scores2)
-                    correlation_matrix[i, j] = correlation
-                    correlation_matrix[j, i] = correlation
-    
-    return {
-        "model_names": model_names,
-        "correlation_matrix": correlation_matrix.tolist(),
-        "dimensions_analyzed": dimensions,
-        "total_comparisons": len(model_groups[model_names[0]]) * len(dimensions) if model_names else 0
-    }
-
-
-def _perform_hypothesis_testing(model_groups: Dict[str, List]) -> Dict[str, Any]:
-    """Perform statistical hypothesis testing"""
-    from scipy import stats
-    import numpy as np
-    from itertools import combinations
-    
-    results = {}
-    model_names = list(model_groups.keys())
-    
-    for model1, model2 in combinations(model_names, 2):
-        # Get matched centroid pairs
-        centroids1 = []
-        centroids2 = []
-        
-        for result1 in model_groups[model1]:
-            text_id = result1["text_id"]
-            result2 = next((r for r in model_groups[model2] if r["text_id"] == text_id), None)
-            
-            if result2:
-                centroids1.append(result1["centroid"])
-                centroids2.append(result2["centroid"])
-        
-        if len(centroids1) > 2:  # Need minimum sample size
-            # Separate x and y coordinates
-            x1 = [c[0] for c in centroids1]
-            y1 = [c[1] for c in centroids1]
-            x2 = [c[0] for c in centroids2]
-            y2 = [c[1] for c in centroids2]
-            
-            # Paired t-tests for x and y coordinates
-            t_stat_x, p_val_x = stats.ttest_rel(x1, x2)
-            t_stat_y, p_val_y = stats.ttest_rel(y1, y2)
-            
-            # Bonferroni correction
-            alpha = 0.05 / 2
-            
-            results[f"{model1}_vs_{model2}"] = {
-                "x_axis": {
-                    "t_statistic": float(t_stat_x),
-                    "p_value": float(p_val_x),
-                    "significant": bool(p_val_x < alpha)
-                },
-                "y_axis": {
-                    "t_statistic": float(t_stat_y),
-                    "p_value": float(p_val_y),
-                    "significant": bool(p_val_y < alpha)
-                },
-                "overall_similar": bool(p_val_x >= alpha and p_val_y >= alpha),
-                "sample_size": len(centroids1),
-                "alpha_corrected": alpha
-            }
-    
-    return results
-
-
-def _calculate_effect_sizes(model_groups: Dict[str, List]) -> Dict[str, Any]:
-    """Calculate effect sizes (Cohen's d) for model comparisons"""
-    import numpy as np
-    from itertools import combinations
-    
-    results = {}
-    model_names = list(model_groups.keys())
-    
-    for model1, model2 in combinations(model_names, 2):
-        # Get matched centroid pairs
-        centroids1 = []
-        centroids2 = []
-        
-        for result1 in model_groups[model1]:
-            text_id = result1["text_id"]
-            result2 = next((r for r in model_groups[model2] if r["text_id"] == text_id), None)
-            
-            if result2:
-                centroids1.append(result1["centroid"])
-                centroids2.append(result2["centroid"])
-        
-        if len(centroids1) > 1:
-            # Calculate Cohen's d for x and y coordinates
-            x1 = np.array([c[0] for c in centroids1])
-            y1 = np.array([c[1] for c in centroids1])
-            x2 = np.array([c[0] for c in centroids2])
-            y2 = np.array([c[1] for c in centroids2])
-            
-            # Pooled standard deviation
-            def cohens_d(group1, group2):
-                n1, n2 = len(group1), len(group2)
-                pooled_std = np.sqrt(((n1 - 1) * np.var(group1, ddof=1) + 
-                                    (n2 - 1) * np.var(group2, ddof=1)) / (n1 + n2 - 2))
-                return (np.mean(group1) - np.mean(group2)) / pooled_std if pooled_std > 0 else 0.0
-            
-            d_x = cohens_d(x1, x2)
-            d_y = cohens_d(y1, y2)
-            
-            # Interpretation
-            def interpret_cohens_d(d):
-                abs_d = abs(d)
-                if abs_d < 0.2:
-                    return "negligible"
-                elif abs_d < 0.5:
-                    return "small"
-                elif abs_d < 0.8:
-                    return "medium"
-                else:
-                    return "large"
-            
-            results[f"{model1}_vs_{model2}"] = {
-                "cohens_d_x": float(d_x),
-                "cohens_d_y": float(d_y),
-                "interpretation_x": interpret_cohens_d(d_x),
-                "interpretation_y": interpret_cohens_d(d_y),
-                "overall_effect_size": float(np.sqrt(d_x**2 + d_y**2)),
-                "sample_size": len(centroids1)
-            }
-    
-    return results
-
-
-def _calculate_confidence_intervals(model_groups: Dict[str, List]) -> Dict[str, Any]:
-    """Calculate confidence intervals for model centroids"""
-    import numpy as np
-    from scipy import stats
-    
-    results = {}
-    confidence_levels = [0.90, 0.95, 0.99]
-    
-    for model, results_list in model_groups.items():
-        centroids = [r["centroid"] for r in results_list]
-        
-        if len(centroids) > 1:
-            x_coords = [c[0] for c in centroids]
-            y_coords = [c[1] for c in centroids]
-            
-            model_cis = {}
-            
-            for confidence in confidence_levels:
-                n = len(centroids)
-                t_val = stats.t.ppf((1 + confidence) / 2, n - 1)
-                
-                # X coordinate CI
-                x_mean = np.mean(x_coords)
-                x_std_err = stats.sem(x_coords)
-                x_margin = t_val * x_std_err
-                
-                # Y coordinate CI
-                y_mean = np.mean(y_coords)
-                y_std_err = stats.sem(y_coords)
-                y_margin = t_val * y_std_err
-                
-                model_cis[f"{int(confidence*100)}%"] = {
-                    "x_axis": {
-                        "mean": float(x_mean),
-                        "lower": float(x_mean - x_margin),
-                        "upper": float(x_mean + x_margin),
-                        "margin_of_error": float(x_margin)
-                    },
-                    "y_axis": {
-                        "mean": float(y_mean),
-                        "lower": float(y_mean - y_margin),
-                        "upper": float(y_mean + y_margin),
-                        "margin_of_error": float(y_margin)
-                    }
-                }
-            
-            results[model] = model_cis
-    
-    return results
-
-
-def _classify_corpus_similarity(statistical_metrics: Dict[str, Any], experiment_def: Dict[str, Any]) -> str:
-    """Classify overall similarity based on statistical results"""
-    
-    thresholds = experiment_def.get("statistical_analysis", {}).get("similarity_classification", {}).get("thresholds", {})
-    
-    # Get key metrics
-    geometric = statistical_metrics.get("geometric_similarity", {})
-    correlation = statistical_metrics.get("dimensional_correlation", {})
-    hypothesis = statistical_metrics.get("hypothesis_testing", {})
-    
-    mean_distance = geometric.get("mean_distance", 1.0)
-    correlation_matrix = correlation.get("correlation_matrix", [[]])
-    
-    # Calculate average correlation (excluding diagonal)
-    avg_correlation = 0.0
-    if correlation_matrix and len(correlation_matrix) > 1:
-        correlations = []
-        for i in range(len(correlation_matrix)):
-            for j in range(len(correlation_matrix[i])):
-                if i != j:  # Exclude diagonal
-                    correlations.append(correlation_matrix[i][j])
-        avg_correlation = np.mean(correlations) if correlations else 0.0
-    
-    # Count significant differences
-    significant_differences = 0
-    total_comparisons = 0
-    for comparison, results in hypothesis.items():
-        if isinstance(results, dict):
-            total_comparisons += 1
-            if not results.get("overall_similar", True):
-                significant_differences += 1
-    
-    # Apply classification thresholds
-    highly_similar = thresholds.get("highly_similar", {})
-    moderately_similar = thresholds.get("moderately_similar", {})
-    
-    if (mean_distance <= highly_similar.get("geometric_distance", 0.15) and
-        avg_correlation >= highly_similar.get("correlation_threshold", 0.85) and
-        significant_differences == 0):
-        return "HIGHLY_SIMILAR"
-    elif (mean_distance <= moderately_similar.get("geometric_distance", 0.35) and
-          avg_correlation >= moderately_similar.get("correlation_threshold", 0.65) and
-          significant_differences <= total_comparisons * 0.3):
-        return "MODERATELY_SIMILAR"
-    else:
-        return "STATISTICALLY_DIFFERENT"
+# DEPRECATED STATISTICAL FUNCTIONS REMOVED
+# All statistical analysis has been moved to Stage 6 notebooks for better research workflow
+# Runtime focuses on pure data collection: LLM calls + coordinate generation + storage
 
 
 def _calculate_average_centroid(centroids: List[Tuple[float, float]]) -> Tuple[float, float]:
@@ -1050,12 +739,9 @@ async def regenerate_stage6_notebook(job_id: str, db: Session = Depends(get_db))
             }
         }
         
-        # Generate new Stage 6 notebook
-        notebook_path = trigger_stage6_handoff(
-            experiment_result, 
-            experiment_file_path, 
-            experiment_def
-        )
+        # TODO: Replace with universal template system
+        # notebook_path = setup_stage6_template(experiment_result, experiment_file_path, experiment_def)
+        notebook_path = "TEMPLATE_SYSTEM_PENDING"
         
         return {
             "job_id": job_id,
@@ -1101,16 +787,14 @@ def complete_experiment_with_stage6_handoff(
     stage6_result = {"status": "success", "notebook_path": None}
     
     try:
-        notebook_path = trigger_stage6_handoff(
-            experiment_result, 
-            experiment_file_path, 
-            experiment_def
-        )
+        # TODO: Replace with universal template system
+        # notebook_path = setup_stage6_template(experiment_result, experiment_file_path, experiment_def)
+        notebook_path = "TEMPLATE_SYSTEM_PENDING"
         stage6_result["notebook_path"] = notebook_path
-        print(f"✅ Stage 6 notebook generated: {notebook_path}")
+        print(f"✅ Stage 6 template system pending: {notebook_path}")
         
     except Exception as e:
-        print(f"⚠️ Warning: Stage 6 notebook generation failed: {e}")
+        print(f"⚠️ Warning: Stage 6 template setup failed: {e}")
         stage6_result["error"] = str(e)
     
     return {

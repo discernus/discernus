@@ -1,0 +1,277 @@
+# ================================================================
+# EXPERIMENT 01: CORE REPLICATION (RQ 1.1)
+# Tamaki & Fuks (2019) Methodology Replication
+# ================================================================
+
+name: "Exp 01: Core Replication - Tamaki & Fuks (2019)"
+version: "v1.0"
+description: |
+  A focused experiment to validate the core research question (RQ 1.1) from the BYU_MASTER_RESEARCH_PLAN.md.
+  This experiment replicates the original Tamaki & Fuks (2019) methodology using computational analysis on full speech transcripts.
+  
+  **Research Question 1.1**: Can our computational analysis achieve r > 0.80 correlation with the original manual human coding of Bolsonaro's populism scores?
+
+# ================================================================
+# EXPERIMENT METADATA
+# ================================================================
+experiment_meta:
+  name: "byu_exp_01_core_replication"
+  display_name: "BYU Core Replication - Tamaki & Fuks (2019)"
+  version: "1.0"
+  description: "Core replication experiment to validate computational analysis against manual human coding of Brazilian populist discourse"
+  tags: ["replication", "validation", "populism", "brazil", "tamaki_fuks"]
+  
+  study_design:
+    comparison_type: "multi_model"
+    corpus_based: true
+    statistical_validation: true
+    sample_size_target: 12
+    statistical_methods:
+      - "geometric_similarity"
+      - "dimensional_correlation"
+      - "hypothesis_testing"
+
+master_plan_reference: "BYU_MASTER_RESEARCH_PLAN.md"
+research_question: "RQ 1.1: Core Replication"
+theoretical_basis: "Tamaki & Fuks (2019) competitive populism framework"
+target_correlation: 0.80
+success_threshold: "r > 0.80 with manual coding scores"
+
+# ================================================================
+# FRAMEWORK CONFIGURATION (Framework Embedding Optimization)
+# ================================================================
+framework:
+  name: "democratic_tension_axis_model_brazil_2018"
+  version: "v3.2"
+  description: |
+    A computational framework for analyzing Brazilian political discourse based on the theoretical 
+    foundation established by Tamaki & Fuks (2019). This framework operationalizes the competitive 
+    dynamics between populist and pluralist democratic orientations, as well as between patriotic 
+    civic attachment and nationalist identity-based appeals in the context of Brazilian political discourse.
+
+  axes:
+    Populism_Pluralism:
+      description: "Competitive axis between anti-establishment populist appeals and pluralist democratic discourse"
+      integrative:
+        name: "Populism"
+        angle: 90
+        description: "Anti-establishment populist discourse that positions 'the people' against corrupt elites, emphasizing moral purity of popular will versus institutional corruption"
+        language_cues: ["elite corrupta", "establishment político", "vontade do povo", "nós contra eles", "políticos tradicionais", "sistema podre", "povo brasileiro", "anti-sistema"]
+      disintegrative:
+        name: "Pluralism"
+        angle: 270
+        description: "Pluralist democratic discourse emphasizing institutional respect, diverse representation, democratic norms, and collaborative governance"
+        language_cues: ["instituições democráticas", "estado de direito", "diversidade política", "diálogo democrático", "representação plural", "consenso democrático", "governança colaborativa"]
+    
+    Patriotism_Nationalism:
+      description: "Competitive axis between civic patriotism and ethnic/cultural nationalism"
+      integrative:
+        name: "Nationalism"
+        angle: 0
+        description: "Ethnic/cultural nationalism emphasizing cultural superiority, national identity based on ethnicity or culture, and exclusionary national definitions"
+        language_cues: ["identidade nacional", "cultura brasileira", "tradições nacionais", "superioridade nacional", "Brasil acima de tudo", "nacionalismo cultural", "identidade étnica"]
+      disintegrative:
+        name: "Patriotism"
+        angle: 180
+        description: "Civic patriotism emphasizing constitutional values, democratic institutions, and inclusive national identity based on shared civic principles"
+        language_cues: ["constituição brasileira", "valores democráticos", "cidadania brasileira", "orgulho cívico", "instituições nacionais", "democracia brasileira", "direitos constitucionais"]
+
+# Enhanced prompt guidance for Brazilian political discourse
+prompt_guidance:
+  role_definition: |
+    You are an expert analyst of Brazilian political discourse with deep knowledge of Latin American 
+    populism and democratic theory. You specialize in computational political science using established 
+    academic frameworks for analyzing competitive ideological dynamics in political rhetoric.
+
+  framework_summary_instructions: |
+    Analyze using the Democratic Tension Axis Model. Score the four anchors: Populism, Pluralism, 
+    Nationalism, and Patriotism. Your scoring will be used in statistical comparison with other AI models.
+
+  analysis_methodology: |
+    Following Tamaki & Fuks (2019) competitive populism methodology, analyze discourse as a 
+    multi-dimensional space where different democratic orientations compete for rhetorical prominence. 
+    Apply systematic content analysis principles using established political science frameworks.
+
+  scoring_requirements: |
+    Use decimal values between 0.0 and 1.0 for each anchor. Consider the competitive dynamics between 
+    populist and pluralist orientations, as well as between patriotic and nationalist appeals. 
+    Score each axis independently, recognizing that competitive relationships may result in 
+    inverse scoring patterns.
+
+  json_format_instructions: |
+    Return a JSON object with keys for each anchor (Populism, Pluralism, Nationalism, Patriotism).
+    Each value must include:
+    - "score": decimal 0.0-1.0
+    - "evidence": direct quote supporting the score
+    - "reasoning": brief justification focusing on objective content
+    
+    Example:
+    "Populism": { 
+      "score": 0.8, 
+      "evidence": "[direct quote from text]", 
+      "reasoning": "Clear anti-elite rhetoric and people vs establishment framing"
+    }
+
+scoring_approach:
+  scale: "0-1 (matching API expectations)"
+
+# ================================================================  
+# EXPERIMENTAL CONDITION
+# ================================================================
+experimental_condition:
+  name: "Full Context Analysis (Replicates BYU Methodology)" 
+  description: "Complete rally transcripts with all speakers and contextual elements are analyzed to replicate the original BYU methodology."
+  method: "full_transcript"
+  process: |
+    - Analyze complete rally transcripts with all contextual elements.
+    - Includes crowd reactions, other speakers, musical elements.
+    - Replicates BYU original methodology approach for direct comparison.
+
+# ================================================================
+# CORPUS SPECIFICATION (12 BOLSONARO SPEECHES)
+# ================================================================
+corpus:
+  source_type: "directory_collection"
+  file_path: "0_workspace/byu_populism_project/populism in brazil 2018/speeches-zip/rev-transcripts/"
+  pattern: "*.txt"
+  sampling_strategy: "all"
+  total_expected_texts: 11
+
+# ================================================================
+# ANALYSIS CONFIGURATION
+# ================================================================
+models:
+  comparison_set: "testing_ensemble"  # Use cheapo models for initial pipeline testing
+  
+  flagship_models:  # Key name expected by experiment runner
+    openai_efficient:
+      model_id: "gpt-4o-mini"
+      provider: "openai"
+      tier: "efficient"
+      enabled: true
+      estimated_cost_per_analysis: 0.003  # ~10x cheaper than GPT-4o
+      
+    anthropic_efficient:
+      model_id: "claude-3-haiku-20240307"
+      provider: "anthropic"
+      tier: "efficient"
+      enabled: true
+      estimated_cost_per_analysis: 0.004  # ~5x cheaper than Claude-3.5-Sonnet
+
+# NOTE: After successful testing, upgrade to actual flagship models:
+# flagship_models:
+#   openai_flagship:
+#     model_id: "gpt-4o"
+#     provider: "openai"
+#     tier: "flagship"
+#     enabled: true
+#     estimated_cost_per_analysis: 0.015
+#     
+#   anthropic_flagship:
+#     model_id: "claude-3-5-sonnet-20241022"
+#     provider: "anthropic"
+#     tier: "flagship"
+#     enabled: true
+#     estimated_cost_per_analysis: 0.018
+#     
+# portuguese_specialized:
+#   openeurollm_portuguese:
+#     model_id: "jobautomation/OpenEuroLLM-Portuguese"
+#     provider: "ollama"
+#     tier: "specialized"
+#     enabled: true
+#     estimated_cost_per_analysis: 0.000
+
+# ================================================================
+# STATISTICAL VALIDATION PROTOCOL  
+# ================================================================
+statistical_analysis:
+  primary_methods:
+    geometric_similarity:
+      enabled: true
+      metrics: ["euclidean_distance", "manhattan_distance"]
+      
+    dimensional_correlation:
+      enabled: true
+      methods: ["pearson", "spearman"]
+      
+    hypothesis_testing:
+      enabled: true
+      tests: ["paired_t_test"]
+      alpha: 0.05
+
+  similarity_classification:
+    thresholds:
+      highly_similar:
+        geometric_distance: 0.15
+        correlation_threshold: 0.85
+      moderately_similar:
+        geometric_distance: 0.35
+        correlation_threshold: 0.65
+      statistically_different:
+        geometric_distance: 0.50
+        correlation_threshold: 0.40
+
+validation_metrics:
+  primary_correlation:
+    target: "r > 0.80 with BYU manual coding"
+    significance: "p < 0.05"
+
+statistical_tests:
+  - "Pearson correlation coefficient (vs manual coding)"
+
+# ================================================================
+# OUTPUT SPECIFICATIONS
+# ================================================================
+report_configuration:
+  template_type: "statistical_comparison"
+  
+  visualization_strategy:
+    model_summary_charts: true
+    individual_text_charts: false
+    statistical_summary_cards: true
+    
+  content_sections:
+    - "executive_summary"
+    - "methodology_overview"
+    - "statistical_results"
+    - "detailed_analysis"
+
+deliverables:
+  jupyter_notebook: "exp_01_core_replication_analysis.ipynb"
+  required_outputs:
+    statistical_validation:
+      - "Correlation matrix with manual coding"
+      - "Scatter plot with regression line vs manual scores"
+    visualization_suite:
+      - "Quadrant scatter plot (populism vs nationalism dimensions)"
+
+# ================================================================
+# RESOURCE ESTIMATION
+# ================================================================
+resource_estimation:
+  # TESTING PHASE (current configuration)
+  total_analyses: 24  # 12 speeches × 2 testing models
+  estimated_total_cost: 0.084  # 12 × ($0.003 + $0.004) = ~$0.08
+  estimated_duration_minutes: 10
+  
+  # FINAL VALIDATION PHASE (after testing success)
+  # total_analyses: 36  # 12 speeches × 3 flagship models  
+  # estimated_total_cost: 0.396  # 12 × ($0.015 + $0.018 + $0.000) = ~$0.40
+  # estimated_duration_minutes: 20
+
+# ================================================================
+# QUALITY ASSURANCE
+# ================================================================
+quality_assurance:
+  validation_checks:
+    - "corpus_file_availability"
+    - "model_api_connectivity"
+    - "prompt_template_validation"
+
+# ================================================================
+# CROSS-REFERENCES
+# ================================================================
+related_documentation:
+  - "BYU_MASTER_RESEARCH_PLAN.md"
+  - "democratic_tension_axis_model_brazil_2018.yaml" 

@@ -1,16 +1,18 @@
-# Stage 6 Template Pattern Specification
-**Version:** 1.0  
-**Date:** January 27, 2025  
+# Stage 6 Universal Template Specification
+**Version:** 2.0  
+**Date:** January 25, 2025  
 **Status:** IMPLEMENTATION SPECIFICATION  
-**Companion Document:** 05_stage6_notebook_automation_architecture.md
+**Replaces:** Deprecated automated generation approach
 
 ---
 
 ## **Executive Summary**
 
-This document specifies the **pattern-based template architecture** for Stage 6 notebook auto-generation, defining the strategic framework portfolio, template patterns, and technical implementation strategy for production deployment.
+This document specifies the **universal template architecture** for Stage 6 analysis, defining clean, executable templates that adapt to any Framework Specification v3.2 compliant experiment.
 
-**Core Strategy**: Ship with 5 carefully selected frameworks covering 90% of research value, using pattern-based templates with academic validation, rather than attempting infinite framework generalization.
+**Core Strategy**: Universal template that intelligently loads experiment data and adapts to framework structure, using standard libraries (NumPy, Matplotlib, Pandas) with transparent, executable code that researchers run naturally.
+
+**Key Principle**: Templates provide excellent starting points that researchers can understand, modify, and extend, rather than automated generation with pre-executed outputs.
 
 ---
 
@@ -231,34 +233,38 @@ templates/
     └── framework_adapter.py
 ```
 
-### **Notebook Generation Workflow**
+### **Universal Template Workflow**
 
 ```python
-# Integration with run_experiment.py
-def generate_stage6_notebook(experiment_results, framework_path, job_id):
-    """Generate Stage 6 notebook after successful experiment completion"""
+# Simple template copying approach
+def setup_stage6_template(experiment_results, framework_path, results_dir):
+    """Copy universal template and save experiment data for loading"""
     
-    # 1. Load framework and detect pattern
-    framework = load_framework_yaml(framework_path)
-    pattern = select_template_pattern(framework)
+    # 1. Copy universal template to results directory
+    template_source = "templates/universal_analysis_template.ipynb"
+    template_destination = results_dir / "stage6_interactive_analysis.ipynb"
+    shutil.copy(template_source, template_destination)
     
-    # 2. Load appropriate template
-    template_path = f"templates/patterns/{pattern}/template.ipynb"
-    template = load_notebook_template(template_path)
+    # 2. Save experiment data in standard format for template to load
+    experiment_data = {
+        'results': experiment_results,
+        'framework_path': framework_path,
+        'timestamp': datetime.now().isoformat(),
+        'job_id': experiment_results.get('job_id')
+    }
     
-    # 3. Configure template with framework-specific parameters
-    config = generate_framework_config(framework, pattern)
+    data_path = results_dir / "experiment_data.json"
+    with open(data_path, 'w') as f:
+        json.dump(experiment_data, f, indent=2)
     
-    # 4. Inject experiment results and metadata
-    configured_notebook = inject_experiment_data(
-        template, experiment_results, config, job_id
-    )
+    # 3. Copy framework YAML for provenance
+    framework_dest = results_dir / "framework_definition.yaml"
+    shutil.copy(framework_path, framework_dest)
     
-    # 5. Save to results directory
-    output_path = f"results/{job_id}/stage6_interactive_analysis.ipynb"
-    save_notebook(configured_notebook, output_path)
-    
-    return output_path
+    return template_destination
+
+# Template intelligently loads data when user runs cells
+# No pre-execution, no base64 garbage, just clean executable code
 ```
 
 ---
@@ -385,9 +391,22 @@ Want complaining? There's Reddit."
 
 ---
 
-**Status:** IMPLEMENTATION SPECIFICATION APPROVED  
-**Next Steps:** Begin Week 1-2 pattern generalization development  
+**Status:** UPDATED FOR UNIVERSAL TEMPLATE APPROACH  
+**Architecture Change:** Moved from automated generation to clean, executable templates
+**Next Steps:** Implement universal template that adapts to any spec-validated experiment
+
+## **Strategic Architecture Change**
+
+**Previous Approach (DEPRECATED):** Complex automated generation with pre-executed cells
+**New Approach (APPROVED):** Universal template with intelligent data loading
+
+**Key Benefits:**
+- ✅ **Academic Trust**: Transparent, executable code researchers can understand
+- ✅ **Maintainable**: Single template instead of complex generation system  
+- ✅ **Flexible**: Researchers can adapt templates for their specific needs
+- ✅ **Reliable**: Standard library foundation eliminates custom bugs
+
 **Cross-References:** 
-- [Stage 6 Notebook Automation Architecture](05_stage6_notebook_automation_architecture.md)
 - [DCS Research Workflow Specification v1.0](../1_docs/specs/DCS_Research_Workflow_Specification_1_0.md)
-- [Discernus Experiment System Specification v3.2.0](../1_docs/specs/Discernus_Experiment_System_Specification_v3.2.0.md) 
+- [Discernus Experiment System Specification v3.2.0](../1_docs/specs/Discernus_Experiment_System_Specification_v3.2.0.md)
+- [Sarah Experience Notebook](../../examples/notebooks/stage5_to_stage6_sarah_experience.ipynb) (Reference implementation) 
