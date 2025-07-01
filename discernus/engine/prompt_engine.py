@@ -8,6 +8,9 @@ def create_prompt_from_experiment(experiment_def: Dict[str, Any], text_to_analyz
     """
     guidance = experiment_def.get("prompt_guidance", {})
     framework = experiment_def.get("framework", {})
+    
+    # CRITICAL FIX: Get detailed prompts from framework section (Framework Spec v3.2)
+    detailed_prompts = framework.get("detailed_prompts", {})
 
     # Build the dynamic framework description for the prompt
     framework_description_parts = [framework.get("description", "")]
@@ -52,15 +55,15 @@ def create_prompt_from_experiment(experiment_def: Dict[str, Any], text_to_analyz
     framework_summary = "\n".join(framework_description_parts)
 
     prompt_parts = [
-        guidance.get("role_definition", "Analyze the following text."),
-        guidance.get("framework_summary_instructions", "Analyze the text based on the following framework:"),
+        framework.get("expert_role", "Analyze the following text."),
+        framework.get("methodological_approach", "Analyze the text based on the following framework:"),
         "--- FRAMEWORK DEFINITION ---",
         framework_summary,
         "--------------------------",
-        guidance.get("analysis_methodology", ""),
-        guidance.get("scoring_requirements", ""),
+        detailed_prompts.get("dimensional_analysis_guidance", ""),
+        detailed_prompts.get("scoring_methodology", ""),
         f"--- TEXT TO ANALYZE ---\n{text_to_analyze}\n-----------------------",
-        guidance.get("json_format_instructions", "Provide your response in JSON format."),
+        detailed_prompts.get("json_output_format", "Provide your response in JSON format."),
     ]
 
     return "\n\n".join(part for part in prompt_parts if part)
