@@ -38,7 +38,7 @@ target_correlation: 0.80
 success_threshold: "r > 0.80 with manual coding scores"
 
 # ================================================================
-# FRAMEWORK CONFIGURATION (Framework Embedding Optimization)
+# FRAMEWORK CONFIGURATION (Framework Specification v3.2 Compliant)
 # ================================================================
 framework:
   name: "democratic_tension_axis_model_brazil_2018"
@@ -49,68 +49,236 @@ framework:
     dynamics between populist and pluralist democratic orientations, as well as between patriotic 
     civic attachment and nationalist identity-based appeals in the context of Brazilian political discourse.
 
+  # ================================================================
+  # COMPONENT REGISTRY (v3.2 Required - All anchors defined once)
+  # ================================================================
+  components:
+    populism:
+      component_id: populism
+      type: anchor
+      description: "Direct popular sovereignty, anti-elite rhetoric, Manichaean worldview"
+      angle: 90  # Top of circle (high vertical)
+      weight: 1.0
+      core_indicators:
+        - "anti-elite rhetoric"
+        - "people-centrism"
+        - "Manichaean worldview"
+        - "popular sovereignty claims"
+        - "institutional dismissal"
+      language_cues:
+        - "o povo"
+        - "vontade popular"
+        - "elite corrupta"
+        - "classe política"
+        - "estabelecimento"
+        - "nós contra eles"
+        - "povo brasileiro"
+        - "cidadãos de bem"
+
+    pluralism:
+      component_id: pluralism
+      type: anchor
+      description: "Institutional mediation, diverse representation, expert knowledge valorization"
+      angle: 270  # Bottom of circle (low vertical)
+      weight: 1.0
+      core_indicators:
+        - "institutional respect"
+        - "diverse representation"
+        - "expert knowledge valorization"
+        - "procedural emphasis"
+        - "compromise advocacy"
+      language_cues:
+        - "instituições"
+        - "especialistas"
+        - "diversidade de perspectivas"
+        - "processo democrático"
+        - "freios e contrapesos"
+        - "princípios constitucionais"
+
+    nationalism:
+      component_id: nationalism
+      type: anchor
+      description: "Emphasis on ethnic/cultural identity, national supremacy claims"
+      angle: 0  # Right of circle (high horizontal)
+      weight: 1.0
+      core_indicators:
+        - "ethnic identity focus"
+        - "cultural supremacy claims"
+        - "national superiority"
+        - "boundary marking"
+        - "identity-based appeals"
+      language_cues:
+        - "a nação"
+        - "pátria"
+        - "Brasil acima de tudo"
+        - "verde e amarelo"
+        - "bandeira nacional"
+        - "hino nacional"
+        - "orgulho nacional"
+        - "identidade brasileira"
+
+    patriotism:
+      component_id: patriotism
+      type: anchor
+      description: "Civic attachment to political institutions and constitutional values"
+      angle: 180  # Left of circle (low horizontal)
+      weight: 1.0
+      core_indicators:
+        - "constitutional attachment"
+        - "civic values"
+        - "institutional pride"
+        - "legal framework respect"
+        - "inclusive citizenship"
+      language_cues:
+        - "constituição"
+        - "valores democráticos"
+        - "estado de direito"
+        - "dever cívico"
+        - "direitos constitucionais"
+        - "instituições democráticas"
+
+  # ================================================================
+  # AXES (Reference exactly 2 anchors each - polar constraint)
+  # ================================================================
   axes:
     Populism_Pluralism:
-      description: "Competitive axis between anti-establishment populist appeals and pluralist democratic discourse"
-      integrative:
-        name: "Populism"
-        angle: 90
-        description: "Anti-establishment populist discourse that positions 'the people' against corrupt elites, emphasizing moral purity of popular will versus institutional corruption"
-        language_cues: ["elite corrupta", "establishment político", "vontade do povo", "nós contra eles", "políticos tradicionais", "sistema podre", "povo brasileiro", "anti-sistema"]
-      disintegrative:
-        name: "Pluralism"
-        angle: 270
-        description: "Pluralist democratic discourse emphasizing institutional respect, diverse representation, democratic norms, and collaborative governance"
-        language_cues: ["instituições democráticas", "estado de direito", "diversidade política", "diálogo democrático", "representação plural", "consenso democrático", "governança colaborativa"]
-    
+      component_id: populism_pluralism_axis
+      anchor_ids: [populism, pluralism]  # Exactly 2 anchors
+      description: "Vertical dimension of democratic legitimacy: Direct popular sovereignty vs. institutional mediation"
+      axis_type: bipolar
+      theoretical_basis: "Tension between direct popular will (populism) and institutional representation/pluralism (Mudde 2004, Tamaki & Fuks 2019)"
+      pole_a: populism
+      pole_b: pluralism
+
     Patriotism_Nationalism:
-      description: "Competitive axis between civic patriotism and ethnic/cultural nationalism"
-      integrative:
-        name: "Nationalism"
-        angle: 0
-        description: "Ethnic/cultural nationalism emphasizing cultural superiority, national identity based on ethnicity or culture, and exclusionary national definitions"
-        language_cues: ["identidade nacional", "cultura brasileira", "tradições nacionais", "superioridade nacional", "Brasil acima de tudo", "nacionalismo cultural", "identidade étnica"]
-      disintegrative:
-        name: "Patriotism"
-        angle: 180
-        description: "Civic patriotism emphasizing constitutional values, democratic institutions, and inclusive national identity based on shared civic principles"
-        language_cues: ["constituição brasileira", "valores democráticos", "cidadania brasileira", "orgulho cívico", "instituições nacionais", "democracia brasileira", "direitos constitucionais"]
+      component_id: patriotism_nationalism_axis
+      anchor_ids: [patriotism, nationalism]  # Exactly 2 anchors
+      description: "Horizontal dimension of national identity: Civic attachment vs. ethnic/cultural supremacy"
+      axis_type: bipolar
+      theoretical_basis: "Distinction between civic nationalism and ethnic nationalism (Brubaker 2020, Hawkins et al. 2010)"
+      pole_a: patriotism
+      pole_b: nationalism
 
-# Enhanced prompt guidance for Brazilian political discourse
+  # ================================================================
+  # COORDINATE SYSTEM (v3.2 Required)
+  # ================================================================
+  coordinate_system:
+    type: circle
+    radius: 1.0
+    weighting_modeling: false
+    description: "Orthogonal two-axis coordinate system optimized for Brazilian political discourse analysis"
+    layout_strategy: orthogonal_quadrants
+
+  # ================================================================
+  # ALGORITHM CONFIGURATION (v3.2 Required)
+  # ================================================================
+  algorithm_config:
+    dominance_amplification:
+      enabled: false
+      rationale: "Preserving T&F methodology compatibility with 0-2 scoring scale"
+    adaptive_scaling:
+      enabled: true
+      base_scaling: 0.5
+      max_scaling: 1.0
+      methodology: "Scale-preserving analysis for direct T&F comparison"
+
+  # ================================================================
+  # THEORETICAL FOUNDATION (v3.2 Required)
+  # ================================================================
+  theoretical_foundation:
+    primary_sources:
+      - "Tamaki, E. R., & Fuks, M. (2019). Populism in Brazil's 2018 General Elections"
+      - "Mudde, C. (2004). The Populist Zeitgeist. Government and Opposition"
+      - "Brubaker, R. (2020). Populism and nationalism. Nations and Nationalism"
+    theoretical_approach: |
+      Orthogonal dimensional analysis resolving crowding-out effects in competitive anchor models.
+      Enables independent measurement of democratic tensions (Populism↔Pluralism) and national identity 
+      orientations (Patriotism↔Nationalism).
+
+# Enhanced prompt guidance for Brazilian political discourse (LLM-Optimized Structure)
 prompt_guidance:
+  # UNIFIED EXPERT CONTEXT (Cognitive Priming in Portuguese - matches text language)
   role_definition: |
-    You are an expert analyst of Brazilian political discourse with deep knowledge of Latin American 
-    populism and democratic theory. You specialize in computational political science using established 
-    academic frameworks for analyzing competitive ideological dynamics in political rhetoric.
-
-  framework_summary_instructions: |
-    Analyze using the Democratic Tension Axis Model. Score the four anchors: Populism, Pluralism, 
-    Nationalism, and Patriotism. Your scoring will be used in statistical comparison with other AI models.
-
-  analysis_methodology: |
-    Following Tamaki & Fuks (2019) competitive populism methodology, analyze discourse as a 
-    multi-dimensional space where different democratic orientations compete for rhetorical prominence. 
-    Apply systematic content analysis principles using established political science frameworks.
-
-  scoring_requirements: |
-    Use decimal values between 0.0 and 1.0 for each anchor. Consider the competitive dynamics between 
-    populist and pluralist orientations, as well as between patriotic and nationalist appeals. 
-    Score each axis independently, recognizing that competitive relationships may result in 
-    inverse scoring patterns.
-
-  json_format_instructions: |
-    Return a JSON object with keys for each anchor (Populism, Pluralism, Nationalism, Patriotism).
-    Each value must include:
-    - "score": decimal 0.0-1.0
-    - "evidence": direct quote supporting the score
-    - "reasoning": brief justification focusing on objective content
+    Você é um especialista em análise de discurso político brasileiro com profundo conhecimento das tensões democráticas contemporâneas, teoria populista, e identidade nacional. Você possui expertise específica na metodologia de Tamaki & Fuks (2019) e nas dinâmicas políticas do Brasil.
     
-    Example:
-    "Populism": { 
-      "score": 0.8, 
-      "evidence": "[direct quote from text]", 
-      "reasoning": "Clear anti-elite rhetoric and people vs establishment framing"
+    Sua tarefa é analisar discursos políticos brasileiros usando o Modelo de Eixos de Tensão Democrática, focando em quatro dimensões: Populismo, Pluralismo, Nacionalismo, e Patriotismo.
+
+  # FRAMEWORK APPLICATION (Clear methodology in Portuguese)
+  framework_summary_instructions: |
+    **METODOLOGIA DE ANÁLISE:**
+    
+    Use o Modelo de Eixos de Tensão Democrática com dois eixos ortogonais:
+    - **Eixo Vertical (Populismo ↔ Pluralismo)**: Soberania popular direta versus mediação institucional
+    - **Eixo Horizontal (Patriotismo ↔ Nacionalismo)**: Apego cívico constitucional versus identidade étnica/cultural
+    
+    Avalie cada eixo independentemente para evitar efeitos de halo, focando nos indicadores linguísticos específicos definidos no framework.
+
+  # DETAILED ANALYSIS INSTRUCTIONS (Comprehensive guidance)
+  analysis_methodology: |
+    **INSTRUÇÕES DETALHADAS DE ANÁLISE:**
+    
+    **Para Populismo** (ângulo 90°):
+    - Procure por: retórica anti-elite, centralidade do povo, visão maniqueísta
+    - Indicadores-chave: "o povo", "elite corrupta", "nós contra eles", "povo brasileiro", "cidadãos de bem"
+    - Foque em: apelos à soberania popular direta, desconfiança institucional
+    
+    **Para Pluralismo** (ângulo 270°):
+    - Procure por: respeito institucional, representação diversa, valorização de especialistas
+    - Indicadores-chave: "instituições", "especialistas", "processo democrático", "freios e contrapesos"
+    - Foque em: mediação institucional, compromisso, diversidade de perspectivas
+    
+    **Para Nacionalismo** (ângulo 0°):
+    - Procure por: identidade étnica/cultural, supremacia nacional, apelos identitários
+    - Indicadores-chave: "a nação", "pátria", "Brasil acima de tudo", "identidade brasileira", "orgulho nacional"
+    - Foque em: superioridade cultural, definições excludentes de nacionalidade
+    
+    **Para Patriotismo** (ângulo 180°):
+    - Procure por: apego cívico constitucional, valores democráticos, identidade inclusiva
+    - Indicadores-chave: "constituição", "valores democráticos", "estado de direito", "instituições democráticas"
+    - Foque em: orgulho institucional, cidadania inclusiva, princípios constitucionais
+
+  # SCORING PRECISION (Clear scale with examples)
+  scoring_requirements: |
+    **ESCALA DE PONTUAÇÃO (0.0-1.0):**
+    
+    - **0.0-0.2**: Ausente ou negligível - dimensão não aparece ou é contradita
+    - **0.3-0.4**: Presente mas fraco - alguns indicadores, papel secundário
+    - **0.5-0.6**: Moderadamente presente - relevante mas não dominante
+    - **0.7-0.8**: Fortemente presente - múltiplos indicadores, papel importante
+    - **0.9-1.0**: Dominante - central ao discurso, múltiplos indicadores fortes
+    
+    **IMPORTANTE**: Use valores decimais precisos (ex: 0.3, 0.7, 0.8) baseados na força real dos indicadores no texto. Avalie cada dimensão independentemente.
+
+  # JSON OUTPUT FORMAT (Clear structure with Portuguese examples)
+  json_format_instructions: |
+    Retorne um objeto JSON com as quatro dimensões. Cada entrada deve conter:
+    
+    ```json
+    {
+      "Populism": {
+        "score": 0.8,
+        "evidence": "[citação direta do texto em português]",
+        "reasoning": "[justificativa breve focando nos indicadores do framework]"
+      },
+      "Pluralism": {
+        "score": 0.2,
+        "evidence": "[citação ou 'ausente/pouco presente']",
+        "reasoning": "[explicação da ausência ou presença fraca]"
+      },
+      "Nationalism": {
+        "score": 0.6,
+        "evidence": "[citação direta do texto]",
+        "reasoning": "[justificativa com base nos indicadores linguísticos]"
+      },
+      "Patriotism": {
+        "score": 0.3,
+        "evidence": "[citação ou explicação da presença limitada]",
+        "reasoning": "[justificativa baseada no framework]"
+      }
     }
+    ```
+    
+    **CRÍTICO**: Sempre inclua evidência textual em português e raciocínio baseado nos indicadores específicos do framework.
 
 scoring_approach:
   scale: "0-1 (matching API expectations)"

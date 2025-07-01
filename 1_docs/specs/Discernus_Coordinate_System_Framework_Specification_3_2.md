@@ -1354,3 +1354,315 @@ def validate_framework(framework):
 - Discernus Coordinate System: Mathematical Foundations v1.0
 - DCS Research Vocabulary: Comprehensive Glossary v2.0
 - Framework Olympics: Systematic Validation Methodology (planned)
+
+## 🧠 **LLM-OPTIMIZED PROMPTING ARCHITECTURE**
+
+### **Core Principle: Make the Right Thing Easy**
+
+The v3.2 specification introduces **systematic prompting guidelines** that make LLM-optimized patterns the default, easy path for framework authors. This eliminates the need to discover optimal prompting patterns independently.
+
+### **The Five-Phase Prompting Architecture**
+
+Based on LLM sequential processing research, optimal framework prompts follow a **five-phase cognitive flow**:
+
+```yaml
+# PHASE 1: COGNITIVE PRIMING (No forward references)
+expert_role: |
+  Establish domain expertise and analytical perspective.
+  Language should match text language for analysis.
+  No references to specific framework components.
+
+# PHASE 2: FRAMEWORK METHODOLOGY (High-level approach)  
+methodological_approach: |
+  High-level methodology that guides framework interpretation.
+  Should work for any framework in this theoretical family.
+  Sets analytical frame before technical details.
+
+# PHASE 3: FRAMEWORK STRUCTURE (Complete technical definitions)
+components: {...}    # All anchor definitions with language_cues
+axes: {...}         # Axis relationships  
+competitive_relationships: {...}  # Competition modeling
+
+# PHASE 4: DETAILED ANALYSIS INSTRUCTIONS (Reference framework elements)
+detailed_analysis_instructions: |
+  Comprehensive guidance that references specific components,
+  language_cues, and relationships defined in Phase 3.
+  Can safely use forward references because elements exist.
+
+# PHASE 5: OUTPUT SPECIFICATION (Complete examples)
+output_format: |
+  Complete JSON structure with examples in target language.
+  Shows exactly what the expected output should look like.
+```
+
+### **Language Consistency Principle**
+
+**Rule**: All prompting elements must use **consistent language** that matches the analysis target:
+- **Brazilian Portuguese texts** → All prompts in Portuguese
+- **English texts** → All prompts in English
+- **Mixed corpus** → Use framework's primary language consistently
+
+**Anti-Pattern** (breaks LLM processing):
+```yaml
+# WRONG - Language switching within single framework
+expert_role: |
+  You are an expert analyst...  # English
+
+analysis_methodology: |
+  Análise sistemática de...     # Portuguese  
+
+# This creates cognitive disruption
+```
+
+**Correct Pattern**:
+```yaml
+# RIGHT - Consistent language throughout
+expert_role: |
+  Você é um especialista...     # Portuguese
+
+analysis_methodology: |  
+  Análise sistemática de...     # Portuguese
+
+# Maintains cognitive coherence
+```
+
+### **Framework Prompting Templates**
+
+#### **Template 1: Political Discourse Analysis (Brazilian Portuguese)**
+
+```yaml
+# Use this template for Brazilian political discourse frameworks
+prompting_architecture:
+  # PHASE 1: COGNITIVE PRIMING
+  expert_role: |
+    Você é um especialista em análise de discurso político brasileiro com profundo 
+    conhecimento de [THEORETICAL_DOMAIN]. Você possui expertise específica em 
+    [METHODOLOGY_NAME] e nas dinâmicas políticas do Brasil.
+    
+    Sua tarefa é analisar discursos políticos brasileiros usando o [FRAMEWORK_NAME], 
+    focando em [PRIMARY_DIMENSIONS].
+
+  # PHASE 2: FRAMEWORK METHODOLOGY  
+  methodological_approach: |
+    **METODOLOGIA DE ANÁLISE:**
+    
+    Use o [FRAMEWORK_NAME] com [STRUCTURE_TYPE]:
+    - **[DIMENSION_1]**: [BRIEF_DESCRIPTION]
+    - **[DIMENSION_2]**: [BRIEF_DESCRIPTION]
+    
+    Avalie cada dimensão independentemente para evitar efeitos de halo, focando 
+    nos indicadores linguísticos específicos definidos no framework.
+
+  # PHASE 3: Framework structure goes here (components, axes, etc.)
+
+  # PHASE 4: DETAILED INSTRUCTIONS
+  detailed_analysis_instructions: |
+    **INSTRUÇÕES DETALHADAS DE ANÁLISE:**
+    
+    **Para [ANCHOR_1]** (ângulo [ANGLE]°):
+    - Procure por: [CORE_INDICATORS]
+    - Indicadores-chave: [LANGUAGE_CUES_LIST]
+    - Foque em: [FOCUS_AREAS]
+    
+    **Para [ANCHOR_2]** (ângulo [ANGLE]°):
+    - Procure por: [CORE_INDICATORS]  
+    - Indicadores-chave: [LANGUAGE_CUES_LIST]
+    - Foque em: [FOCUS_AREAS]
+    
+    [REPEAT_FOR_ALL_ANCHORS]
+
+  # PHASE 5: OUTPUT FORMAT
+  output_format: |
+    Retorne um objeto JSON com as [NUMBER] dimensões. Cada entrada deve conter:
+    
+    ```json
+    {
+      "[ANCHOR_1]": {
+        "score": 0.0-1.0,
+        "evidence": "[citação direta do texto em português]",
+        "reasoning": "[justificativa baseada nos indicadores do framework]"
+      }
+    }
+    ```
+    
+    **CRÍTICO**: Sempre inclua evidência textual em português e raciocínio 
+    baseado nos indicadores específicos do framework.
+```
+
+#### **Template 2: English Academic Analysis**
+
+```yaml
+# Use this template for English academic discourse frameworks
+prompting_architecture:
+  # PHASE 1: COGNITIVE PRIMING
+  expert_role: |
+    You are an expert analyst of [DISCOURSE_TYPE] with deep knowledge of 
+    [THEORETICAL_DOMAIN]. You specialize in [METHODOLOGY_NAME] using established 
+    academic frameworks for analyzing [CONTENT_TYPE].
+    
+    Your task is to analyze [TEXT_TYPE] using the [FRAMEWORK_NAME], focusing 
+    on [PRIMARY_DIMENSIONS].
+
+  # PHASE 2: FRAMEWORK METHODOLOGY
+  methodological_approach: |
+    **ANALYSIS METHODOLOGY:**
+    
+    Apply the [FRAMEWORK_NAME] with [STRUCTURE_TYPE]:
+    - **[DIMENSION_1]**: [BRIEF_DESCRIPTION]
+    - **[DIMENSION_2]**: [BRIEF_DESCRIPTION]
+    
+    Evaluate each dimension independently to avoid halo effects, focusing on 
+    specific linguistic indicators and textual evidence defined in the framework.
+
+  # PHASE 3: Framework structure goes here
+
+  # PHASE 4: DETAILED INSTRUCTIONS  
+  detailed_analysis_instructions: |
+    **DETAILED ANALYSIS INSTRUCTIONS:**
+    
+    **For [ANCHOR_1]** (angle [ANGLE]°):
+    - Look for: [CORE_INDICATORS]
+    - Key indicators: [LANGUAGE_CUES_LIST]
+    - Focus on: [FOCUS_AREAS]
+    
+    **For [ANCHOR_2]** (angle [ANGLE]°):
+    - Look for: [CORE_INDICATORS]
+    - Key indicators: [LANGUAGE_CUES_LIST]
+    - Focus on: [FOCUS_AREAS]
+    
+    [REPEAT_FOR_ALL_ANCHORS]
+
+  # PHASE 5: OUTPUT FORMAT
+  output_format: |
+    Return a JSON object with the [NUMBER] dimensions. Each entry should contain:
+    
+    ```json
+    {
+      "[ANCHOR_1]": {
+        "score": 0.0-1.0,
+        "evidence": "[direct quote from text]",
+        "reasoning": "[brief justification based on framework indicators]"
+      }
+    }
+    ```
+    
+    **CRITICAL**: Always include textual evidence and reasoning based on 
+    specific framework indicators.
+```
+
+### **Prompting Quality Validation**
+
+Framework authors should validate their prompting using this checklist:
+
+#### **✅ Language Consistency Check**
+- [ ] All prompting elements use the same language
+- [ ] Language matches the target text corpus language  
+- [ ] No mid-prompt language switching
+- [ ] Cultural/regional context appropriate (e.g., Brazilian Portuguese vs European Portuguese)
+
+#### **✅ Sequential Flow Check**
+- [ ] Phase 1: Context established before framework details
+- [ ] Phase 2: Methodology explained before technical components
+- [ ] Phase 3: All framework elements defined before being referenced
+- [ ] Phase 4: Detailed instructions reference existing framework elements
+- [ ] Phase 5: Complete output examples provided
+
+#### **✅ Forward Reference Check**
+- [ ] Early prompts don't reference undefined framework components
+- [ ] All referenced elements exist in framework structure
+- [ ] References use exact component_ids and language_cues
+- [ ] No broken or circular references
+
+#### **✅ Cognitive Load Check**
+- [ ] Expert role establishes domain without overwhelming detail
+- [ ] Each section has single, clear purpose
+- [ ] Instructions progress from general to specific
+- [ ] Examples are complete and realistic
+- [ ] Total prompt length manageable (< 3000 words recommended)
+
+### **Common Anti-Patterns to Avoid**
+
+#### **❌ Anti-Pattern 1: Language Inconsistency**
+```yaml
+# WRONG
+expert_role: |
+  You are an expert analyst...          # English
+analysis_instructions: |
+  Procure por retórica anti-elite...     # Portuguese
+```
+
+#### **❌ Anti-Pattern 2: Forward References**
+```yaml
+# WRONG  
+expert_role: |
+  Apply the language_cues defined in the components section below...
+# Problem: components section doesn't exist yet in LLM context
+```
+
+#### **❌ Anti-Pattern 3: Information Fragmentation**
+```yaml
+# WRONG
+prompt_guidance:
+  role_definition: "Brief role"
+  framework_instructions: "Brief framework"  
+  scoring_requirements: "Brief scoring"
+  json_format: "Brief format"
+# Problem: Information scattered, no logical flow
+```
+
+#### **❌ Anti-Pattern 4: Technical Details First**
+```yaml  
+# WRONG
+expert_role: |
+  Score the populism anchor at angle 90° using language_cues...
+# Problem: Technical details before cognitive context
+```
+
+### **Implementation Guidelines for Framework Authors**
+
+#### **Step 1: Choose Language**
+Determine target corpus language and use consistently throughout all prompting elements.
+
+#### **Step 2: Use Template**  
+Select appropriate template (Brazilian Portuguese Political, English Academic, etc.) and fill in framework-specific details.
+
+#### **Step 3: Validate Flow**
+Ensure prompting follows five-phase architecture with proper forward reference resolution.
+
+#### **Step 4: Test with Examples**
+Include complete, realistic JSON examples that demonstrate expected output format.
+
+#### **Step 5: Quality Check**
+Run through validation checklist to catch common anti-patterns.
+
+### **Framework Specification Integration**
+
+The prompting architecture integrates seamlessly with other v3.2 features:
+
+```yaml
+# Complete framework with optimized prompting
+name: example_framework
+version: v3.2
+
+# Standard framework structure
+components: {...}
+axes: {...}
+competitive_relationships: {...}
+
+# LLM-Optimized prompting (follows five-phase architecture)
+prompting_architecture:
+  expert_role: |
+    [Phase 1: Cognitive priming]
+  methodological_approach: |
+    [Phase 2: Framework methodology]
+  detailed_analysis_instructions: |
+    [Phase 4: Component-referencing instructions]
+  output_format: |
+    [Phase 5: Complete examples]
+  
+# Other v3.2 features
+temporal_analysis: {...}
+framework_fit_metrics: {...}
+```
+
+This architecture ensures framework authors naturally create LLM-optimized prompts without needing to understand the underlying cognitive processing principles.

@@ -1,0 +1,359 @@
+# ================================================================
+# FRAMEWORK TEMPLATE v3.2 - LLM-OPTIMIZED
+# Copy this template and fill in the [PLACEHOLDERS] with your framework details
+# ================================================================
+
+# =============================================================================
+# FRAMEWORK IDENTIFICATION (required)
+# =============================================================================
+name: [your_framework_name]           # Example: political_discourse_analysis
+version: v3.2
+display_name: "[Your Framework Display Name]"  # Example: "Political Discourse Analysis Framework"
+
+description: |
+  [Your comprehensive framework description with theoretical foundation]
+  
+  ## Theoretical Foundation
+  [Academic grounding including primary sources and methodological approach]
+  
+  ## v3.2 Capabilities
+  - [Key capability 1]
+  - [Key capability 2] 
+  - [Key capability 3]
+  
+  ## Usage Guidelines  
+  [Detailed instructions for appropriate application contexts]
+  
+  ## Citation Format
+  Discernus Framework: [Framework Name] v3.2 ([Your Name], 2025)
+
+# =============================================================================
+# COMPONENT REGISTRY (v3.2 Required - All anchors defined once)
+# =============================================================================
+components:
+  [anchor_1_id]:                      # Example: populism
+    component_id: [anchor_1_id]
+    type: anchor
+    description: "[Complete semantic description]"
+    angle: [0-359]                    # Example: 90 (top of circle)
+    weight: 1.0
+    core_indicators:
+      - "[theoretical indicator 1]"
+      - "[theoretical indicator 2]"
+      - "[theoretical indicator 3]"
+    language_cues:
+      - "[specific phrase 1]"
+      - "[specific phrase 2]"
+      - "[specific phrase 3]"
+      - "[specific phrase 4]"
+
+  [anchor_2_id]:                      # Example: pluralism  
+    component_id: [anchor_2_id]
+    type: anchor
+    description: "[Complete semantic description]"
+    angle: [0-359]                    # Example: 270 (bottom of circle)
+    weight: 1.0
+    core_indicators:
+      - "[theoretical indicator 1]"
+      - "[theoretical indicator 2]"
+      - "[theoretical indicator 3]"
+    language_cues:
+      - "[specific phrase 1]"
+      - "[specific phrase 2]"
+      - "[specific phrase 3]"
+      - "[specific phrase 4]"
+
+  [anchor_3_id]:                      # Example: nationalism
+    component_id: [anchor_3_id]
+    type: anchor
+    description: "[Complete semantic description]"
+    angle: [0-359]                    # Example: 0 (right of circle)
+    weight: 1.0
+    core_indicators:
+      - "[theoretical indicator 1]"
+      - "[theoretical indicator 2]"
+      - "[theoretical indicator 3]"
+    language_cues:
+      - "[specific phrase 1]"
+      - "[specific phrase 2]"
+      - "[specific phrase 3]"
+      - "[specific phrase 4]"
+
+  [anchor_4_id]:                      # Example: patriotism
+    component_id: [anchor_4_id]
+    type: anchor
+    description: "[Complete semantic description]"
+    angle: [0-359]                    # Example: 180 (left of circle)
+    weight: 1.0
+    core_indicators:
+      - "[theoretical indicator 1]"
+      - "[theoretical indicator 2]"
+      - "[theoretical indicator 3]"
+    language_cues:
+      - "[specific phrase 1]"
+      - "[specific phrase 2]"
+      - "[specific phrase 3]"
+      - "[specific phrase 4]"
+
+# =============================================================================
+# AXES (Reference exactly 2 anchors each - polar constraint)
+# =============================================================================
+axes:
+  [Axis_1_Name]:                      # Example: Populism_Pluralism
+    component_id: [axis_1_id]
+    anchor_ids: [[anchor_1_id], [anchor_2_id]]  # Exactly 2 anchors
+    description: "[Axis description explaining the theoretical relationship]"
+    axis_type: bipolar
+    theoretical_basis: "[Source literature or theory]"
+    pole_a: [anchor_1_id]
+    pole_b: [anchor_2_id]
+
+  [Axis_2_Name]:                      # Example: Patriotism_Nationalism  
+    component_id: [axis_2_id]
+    anchor_ids: [[anchor_3_id], [anchor_4_id]]  # Exactly 2 anchors
+    description: "[Axis description explaining the theoretical relationship]"
+    axis_type: bipolar
+    theoretical_basis: "[Source literature or theory]"
+    pole_a: [anchor_3_id]
+    pole_b: [anchor_4_id]
+
+# =============================================================================
+# COORDINATE SYSTEM (v3.2 Required)
+# =============================================================================
+coordinate_system:
+  type: circle
+  radius: 1.0
+  weighting_modeling: false
+  description: "[Description of your coordinate system approach]"
+  layout_strategy: orthogonal_quadrants
+
+# =============================================================================
+# ALGORITHM CONFIGURATION (v3.2 Required)
+# =============================================================================
+algorithm_config:
+  dominance_amplification:
+    enabled: false                    # Usually false for academic frameworks
+    rationale: "[Explanation of choice]"
+  adaptive_scaling:
+    enabled: true
+    base_scaling: 0.5
+    max_scaling: 1.0
+    methodology: "[Scaling approach description]"
+
+# =============================================================================
+# THEORETICAL FOUNDATION (v3.2 Required)
+# =============================================================================
+theoretical_foundation:
+  primary_sources:
+    - "[Author, Year. Title. Journal]"
+    - "[Author, Year. Title. Journal]"
+    - "[Author, Year. Title. Journal]"
+  theoretical_approach: |
+    [Explanation of your theoretical approach and how it differs from 
+    or builds upon existing frameworks]
+
+# =============================================================================
+# LLM-OPTIMIZED PROMPTING ARCHITECTURE
+# Choose the template that matches your target language and domain
+# =============================================================================
+
+# TEMPLATE A: Brazilian Portuguese Political Discourse
+# (Use this for Brazilian political text analysis)
+prompt_guidance:
+  # PHASE 1: COGNITIVE PRIMING (No forward references)
+  role_definition: |
+    Você é um especialista em análise de [DOMAIN TYPE] brasileiro com profundo 
+    conhecimento de [THEORETICAL_DOMAIN]. Você possui expertise específica em 
+    [METHODOLOGY_NAME] e nas dinâmicas [CONTEXT_SPECIFIC] do Brasil.
+    
+    Sua tarefa é analisar [TEXT_TYPE] brasileiros usando o [FRAMEWORK_NAME], 
+    focando em [PRIMARY_DIMENSIONS].
+
+  # PHASE 2: FRAMEWORK METHODOLOGY  
+  framework_summary_instructions: |
+    **METODOLOGIA DE ANÁLISE:**
+    
+    Use o [FRAMEWORK_NAME] com [STRUCTURE_TYPE]:
+    - **[DIMENSION_1]**: [BRIEF_DESCRIPTION]
+    - **[DIMENSION_2]**: [BRIEF_DESCRIPTION]
+    
+    Avalie cada dimensão independentemente para evitar efeitos de halo, focando 
+    nos indicadores linguísticos específicos definidos no framework.
+
+  # PHASE 4: DETAILED INSTRUCTIONS (References framework elements)
+  analysis_methodology: |
+    **INSTRUÇÕES DETALHADAS DE ANÁLISE:**
+    
+    **Para [ANCHOR_1_ID]** (ângulo [ANGLE]°):
+    - Procure por: [CORE_INDICATORS]
+    - Indicadores-chave: [LANGUAGE_CUES from components section]
+    - Foque em: [FOCUS_AREAS]
+    
+    **Para [ANCHOR_2_ID]** (ângulo [ANGLE]°):
+    - Procure por: [CORE_INDICATORS]
+    - Indicadores-chave: [LANGUAGE_CUES from components section]
+    - Foque em: [FOCUS_AREAS]
+    
+    **Para [ANCHOR_3_ID]** (ângulo [ANGLE]°):
+    - Procure por: [CORE_INDICATORS]
+    - Indicadores-chave: [LANGUAGE_CUES from components section]
+    - Foque em: [FOCUS_AREAS]
+    
+    **Para [ANCHOR_4_ID]** (ângulo [ANGLE]°):
+    - Procure por: [CORE_INDICATORS]
+    - Indicadores-chave: [LANGUAGE_CUES from components section]
+    - Foque em: [FOCUS_AREAS]
+
+  # PHASE 4: SCORING PRECISION
+  scoring_requirements: |
+    **ESCALA DE PONTUAÇÃO (0.0-1.0):**
+    
+    - **0.0-0.2**: Ausente ou negligível - dimensão não aparece ou é contradita
+    - **0.3-0.4**: Presente mas fraco - alguns indicadores, papel secundário
+    - **0.5-0.6**: Moderadamente presente - relevante mas não dominante
+    - **0.7-0.8**: Fortemente presente - múltiplos indicadores, papel importante
+    - **0.9-1.0**: Dominante - central ao discurso, múltiplos indicadores fortes
+    
+    **IMPORTANTE**: Use valores decimais precisos baseados na força real dos 
+    indicadores no texto. Avalie cada dimensão independentemente.
+
+  # PHASE 5: OUTPUT FORMAT
+  json_format_instructions: |
+    Retorne um objeto JSON com as [NUMBER] dimensões. Cada entrada deve conter:
+    
+    ```json
+    {
+      "[ANCHOR_1_ID]": {
+        "score": 0.0-1.0,
+        "evidence": "[citação direta do texto em português]",
+        "reasoning": "[justificativa baseada nos indicadores do framework]"
+      },
+      "[ANCHOR_2_ID]": {
+        "score": 0.0-1.0,
+        "evidence": "[citação direta do texto em português]",
+        "reasoning": "[justificativa baseada nos indicadores do framework]"
+      },
+      "[ANCHOR_3_ID]": {
+        "score": 0.0-1.0,
+        "evidence": "[citação direta do texto em português]",
+        "reasoning": "[justificativa baseada nos indicadores do framework]"
+      },
+      "[ANCHOR_4_ID]": {
+        "score": 0.0-1.0,
+        "evidence": "[citação direta do texto em português]",
+        "reasoning": "[justificativa baseada nos indicadores do framework]"
+      }
+    }
+    ```
+    
+    **CRÍTICO**: Sempre inclua evidência textual em português e raciocínio 
+    baseado nos indicadores específicos do framework.
+
+# TEMPLATE B: English Academic Discourse  
+# (Uncomment and use this for English text analysis)
+# prompt_guidance:
+#   # PHASE 1: COGNITIVE PRIMING
+#   role_definition: |
+#     You are an expert analyst of [DISCOURSE_TYPE] with deep knowledge of 
+#     [THEORETICAL_DOMAIN]. You specialize in [METHODOLOGY_NAME] using established 
+#     academic frameworks for analyzing [CONTENT_TYPE].
+#     
+#     Your task is to analyze [TEXT_TYPE] using the [FRAMEWORK_NAME], focusing 
+#     on [PRIMARY_DIMENSIONS].
+# 
+#   # PHASE 2: FRAMEWORK METHODOLOGY
+#   framework_summary_instructions: |
+#     **ANALYSIS METHODOLOGY:**
+#     
+#     Apply the [FRAMEWORK_NAME] with [STRUCTURE_TYPE]:
+#     - **[DIMENSION_1]**: [BRIEF_DESCRIPTION]
+#     - **[DIMENSION_2]**: [BRIEF_DESCRIPTION]
+#     
+#     Evaluate each dimension independently to avoid halo effects, focusing on 
+#     specific linguistic indicators and textual evidence defined in the framework.
+# 
+#   # PHASE 4: DETAILED INSTRUCTIONS  
+#   analysis_methodology: |
+#     **DETAILED ANALYSIS INSTRUCTIONS:**
+#     
+#     **For [ANCHOR_1_ID]** (angle [ANGLE]°):
+#     - Look for: [CORE_INDICATORS]
+#     - Key indicators: [LANGUAGE_CUES from components section]
+#     - Focus on: [FOCUS_AREAS]
+#     
+#     [REPEAT_FOR_ALL_ANCHORS]
+# 
+#   # PHASE 4: SCORING PRECISION
+#   scoring_requirements: |
+#     **SCORING SCALE (0.0-1.0):**
+#     
+#     - **0.0-0.2**: Absent or negligible
+#     - **0.3-0.4**: Present but weak/secondary
+#     - **0.5-0.6**: Moderately present and relevant
+#     - **0.7-0.8**: Strongly present and influential
+#     - **0.9-1.0**: Dominant/central to discourse
+#     
+#     Use precise decimal values based on actual indicator strength in text.
+# 
+#   # PHASE 5: OUTPUT FORMAT
+#   json_format_instructions: |
+#     Return a JSON object with the [NUMBER] dimensions:
+#     
+#     ```json
+#     {
+#       "[ANCHOR_1_ID]": {
+#         "score": 0.0-1.0,
+#         "evidence": "[direct quote from text]",
+#         "reasoning": "[justification based on framework indicators]"
+#       }
+#     }
+#     ```
+
+# =============================================================================
+# SYSTEM COMPATIBILITY (v3.2 Required)
+# =============================================================================
+compatibility:
+  framework_specification_version: "3.2"
+  language_optimization: "[target_language]"    # Example: "Portuguese (Brazilian)"
+  corpus_optimization: "[target_corpus_type]"   # Example: "Political speeches"
+  
+# =============================================================================
+# FRAMEWORK VERSIONING
+# =============================================================================
+last_modified: "[YYYY-MM-DD]T00:00:00.000000"
+framework_registry_key: "[framework_name]__v3.2"
+implementation_status: "Production ready - v3.2 [DOMAIN] Analysis"
+
+# Framework capabilities declaration
+capabilities:
+  [capability_1]: true               # Example: orthogonal_axis_analysis
+  [capability_2]: true               # Example: temporal_analysis  
+  [capability_3]: true               # Example: academic_validation_ready
+
+# =============================================================================
+# INSTRUCTIONS FOR FRAMEWORK AUTHORS
+# =============================================================================
+# 
+# 1. CHOOSE LANGUAGE TEMPLATE:
+#    - Use Template A (Portuguese) for Brazilian text analysis
+#    - Use Template B (English) for English text analysis
+#    - Comment out the template you're not using
+# 
+# 2. FILL IN ALL [PLACEHOLDERS]:
+#    - Replace every [PLACEHOLDER] with your framework-specific content
+#    - Use your actual anchor_ids consistently throughout
+#    - Include specific language_cues for your domain
+# 
+# 3. VALIDATE YOUR FRAMEWORK:
+#    - Check language consistency throughout all prompting elements
+#    - Ensure all referenced components exist in the components section
+#    - Test with real examples to verify JSON output format
+# 
+# 4. QUALITY CHECKLIST:
+#    - [ ] All prompting in consistent language
+#    - [ ] No forward references to undefined elements
+#    - [ ] Complete JSON examples provided
+#    - [ ] Specific language_cues for target corpus
+#    - [ ] Academic citations included
+# 
+# ============================================================================= 
