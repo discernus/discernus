@@ -1,0 +1,200 @@
+{
+  "experiment_metadata": {
+    "job_id": "demo_democratic_tension_2018_bolsonaro",
+    "framework_name": "Democratic Tension Axis Model \u2013 Brazil 2018",
+    "experiment_date": "2025-06-29",
+    "stage5_validation": {
+      "correlation_with_manual": 0.89,
+      "significance": "p < 0.001"
+    },
+    "corpus": "Bolsonaro 2018 Campaign Speeches",
+    "total_speeches": 127,
+    "temporal_phases": 3
+  },
+  "framework_specification": {
+    "name": "Democratic Tension Axis Model \u2013 Brazil 2018",
+    "version": "v3.2",
+    "theoretical_foundation": "Orthogonal democratic tensions with Portuguese optimization",
+    "components": {
+      "populism": {
+        "component_id": "populism",
+        "type": "anchor",
+        "angle": 90,
+        "position": [
+          0.0,
+          1.0
+        ],
+        "color": "#E53E3E",
+        "description": "Direct popular sovereignty, anti-elite rhetoric, Manichaean worldview"
+      },
+      "pluralism": {
+        "component_id": "pluralism",
+        "type": "anchor",
+        "angle": 270,
+        "position": [
+          0.0,
+          -1.0
+        ],
+        "color": "#3182CE",
+        "description": "Institutional mediation, diverse representation, expert knowledge valorization"
+      },
+      "nationalism": {
+        "component_id": "nationalism",
+        "type": "anchor",
+        "angle": 0,
+        "position": [
+          1.0,
+          0.0
+        ],
+        "color": "#D69E2E",
+        "description": "Emphasis on ethnic/cultural identity, national supremacy claims"
+      },
+      "patriotism": {
+        "component_id": "patriotism",
+        "type": "anchor",
+        "angle": 180,
+        "position": [
+          -1.0,
+          0.0
+        ],
+        "color": "#38A169",
+        "description": "Civic attachment to political institutions and constitutional values"
+      }
+    },
+    "axes": {
+      "PopulismPluralism": {
+        "component_id": "populism_pluralism_axis",
+        "anchor_ids": [
+          "populism",
+          "pluralism"
+        ],
+        "description": "Vertical dimension of democratic legitimacy",
+        "axis_type": "bipolar"
+      },
+      "PatriotismNationalism": {
+        "component_id": "patriotism_nationalism_axis",
+        "anchor_ids": [
+          "patriotism",
+          "nationalism"
+        ],
+        "description": "Horizontal dimension of national identity",
+        "axis_type": "bipolar"
+      }
+    }
+  },
+  "phase_analysis_results": {
+    "early_campaign": {
+      "speeches_count": 47,
+      "centroid_position": [
+        0.09709947655558883,
+        0.5364729533047119
+      ],
+      "discourse_intensity": 0.5451894514522901,
+      "ideological_scores": {
+        "populism": 1.412411202045371,
+        "pluralism": 0.3394652954359471,
+        "nationalism": 0.8027350803365173,
+        "patriotism": 0.6085361272253398
+      },
+      "dominant_emphasis": "populism"
+    },
+    "mid_campaign": {
+      "speeches_count": 41,
+      "centroid_position": [
+        0.14895116619911258,
+        0.34443049854247837
+      ],
+      "discourse_intensity": 0.37525833533486747,
+      "ideological_scores": {
+        "populism": 1.2294780195186594,
+        "pluralism": 0.5406170224337025,
+        "nationalism": 1.106397794253085,
+        "patriotism": 0.8084954618548598
+      },
+      "dominant_emphasis": "populism"
+    },
+    "final_push": {
+      "speeches_count": 39,
+      "centroid_position": [
+        0.5265382775706856,
+        0.6891359451781144
+      ],
+      "discourse_intensity": 0.8672663424137002,
+      "ideological_scores": {
+        "populism": 1.609559623421278,
+        "pluralism": 0.19731625650307844,
+        "nationalism": 1.5205613600838381,
+        "patriotism": 0.4364713175850078
+      },
+      "dominant_emphasis": "populism"
+    }
+  },
+  "academic_metadata": {
+    "study_design": {
+      "methodology": "Democratic Tension Axis Model \u2013 Brazil 2018 vv3.2",
+      "theoretical_foundation": "Orthogonal democratic tensions with Portuguese optimization",
+      "coordinate_system": "Discernus Coordinate System (DCS) Framework Specification v3.2",
+      "analysis_type": "Longitudinal computational discourse analysis",
+      "validation_method": "Cross-correlation with manual expert coding"
+    },
+    "corpus_characteristics": {
+      "dataset": "Bolsonaro 2018 Campaign Speeches",
+      "total_speeches": 127,
+      "temporal_span": "2018-01-15 to 2018-10-28",
+      "phase_structure": 3,
+      "analysis_date": "2025-06-29",
+      "speaker": "Jair Bolsonaro",
+      "election_context": "2018 Brazilian Presidential Campaign"
+    },
+    "statistical_validation": {
+      "manual_correlation": 0.89,
+      "significance_level": "p < 0.001",
+      "coordinate_space_utilization": 0.27931683324008133,
+      "overall_discourse_intensity": 0.5763567893289692,
+      "phase_differentiation": 0.20403757468389266
+    },
+    "orthogonal_dynamics": {
+      "framework_axes": 2,
+      "axis_independence": 0.264942699753973,
+      "innovation_validation": "High Populism + High Nationalism simultaneously achievable"
+    },
+    "trajectory_analysis": {
+      "total_movement": 0.7101862637359282,
+      "phase_transitions": 2,
+      "avg_movement_per_transition": 0.3550931318679641,
+      "max_single_transition": 0.5112669279487986,
+      "trajectory_linearity": 0.644427088180301
+    },
+    "methodological_innovations": [
+      "First computational application of orthogonal democratic tension theory",
+      "Novel coordinate space representation resolving crowding-out problem",
+      "Automated axis independence validation",
+      "Longitudinal discourse trajectory analysis",
+      "Cross-validated computational-manual coding correlation"
+    ]
+  },
+  "exported_files": {
+    "eps": {
+      "filename": "demo_democratic_tension_2018_bolsonaro_discourse_evolution.eps",
+      "description": "Vector format for Nature, Science journals",
+      "status": "success"
+    },
+    "pdf": {
+      "filename": "demo_democratic_tension_2018_bolsonaro_discourse_evolution.pdf",
+      "description": "High-quality vector for arXiv, academic conferences",
+      "status": "success"
+    },
+    "png": {
+      "filename": "demo_democratic_tension_2018_bolsonaro_discourse_evolution.png",
+      "description": "Raster format for online publications",
+      "status": "success"
+    },
+    "svg": {
+      "filename": "demo_democratic_tension_2018_bolsonaro_discourse_evolution.svg",
+      "description": "Web-ready vector format with text searchability",
+      "status": "success"
+    }
+  },
+  "results_summary": "\nCOMPUTATIONAL DEMOCRATIC TENSION ANALYSIS: RESULTS SUMMARY\n\nMETHODOLOGY:\n\u2022 Theoretical Framework: Orthogonal democratic tensions with Portuguese optimization\n\u2022 Coordinate System: Discernus Coordinate System (DCS) Framework Specification v3.2\n\u2022 Validation: r=0.89 \n  (p < 0.001)\n\nCORPUS & DESIGN:\n\u2022 Dataset: Bolsonaro 2018 Campaign Speeches\n\u2022 Temporal Coverage: 2018-01-15 to 2018-10-28\n\u2022 Analysis Units: 127 speeches\n\u2022 Phase Structure: 3 campaign phases\n\nKEY EMPIRICAL FINDINGS:\n\u2022 Strategic Discourse Evolution: Confirmed systematic repositioning across campaign phases\n\u2022 Orthogonal Independence: r=0.2649 axis correlation\n\u2022 Innovation Validation: High Populism + High Nationalism simultaneously achievable\n\u2022 Trajectory Characteristics: 0.710 coordinate units total movement\n\nSTATISTICAL ROBUSTNESS:\n\u2022 Cross-validation: r=0.89 with manual coding\n\u2022 Coordinate Space Utilization: \u03c3=0.279\n\u2022 Phase Differentiation: \u03c3=0.204\n\nMETHODOLOGICAL CONTRIBUTIONS:\n\u2022 First computational application of orthogonal democratic tension theory\n\u2022 Novel coordinate space representation resolving crowding-out problem\n\u2022 Automated axis independence validation\n\u2022 Longitudinal discourse trajectory analysis\n\u2022 Cross-validated computational-manual coding correlation",
+  "stage6_completion_timestamp": "2025-06-29T20:32:06.929687"
+}

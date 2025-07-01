@@ -1,0 +1,16 @@
+Experiment Analysis Summary
+=========================
+
+Experiment: Unknown
+Framework: Unknown Framework
+Job ID: Unknown
+Analysis Date: 2025-06-30T21:22:28.031838
+
+Models Analyzed: 3
+Total Analyses: 33
+Mean Magnitude: 0.570
+
+Model Details:
+  Sample Model A: (0.500, 0.200)
+  Sample Model B: (-0.300, 0.700)
+  Sample Model C: (0.100, -0.400)

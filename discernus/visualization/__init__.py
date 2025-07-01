@@ -15,10 +15,26 @@ Core Visualization Classes:
 
 from .advanced_plotly_dcs import AdvancedDCSVisualizer
 from .theoretical_weighting_viz import TheoreticalWeightingVisualizer
+from .dcs_plots import (
+    plot_dcs_framework,
+    plot_coordinate_space,
+    plot_competitive_dynamics,
+    plot_temporal_evolution,
+    setup_publication_style,
+    extract_framework_anchors,
+    calculate_signature_coordinates
+)
 
 __all__ = [
     'AdvancedDCSVisualizer',
-    'TheoreticalWeightingVisualizer'
+    'TheoreticalWeightingVisualizer',
+    'plot_dcs_framework',
+    'plot_coordinate_space', 
+    'plot_competitive_dynamics',
+    'plot_temporal_evolution',
+    'setup_publication_style',
+    'extract_framework_anchors',
+    'calculate_signature_coordinates'
 ]
 
 """

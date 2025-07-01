@@ -1,0 +1,15 @@
+Experiment Analysis Summary
+=========================
+
+Experiment: Unknown
+Framework: 
+Job ID: corpus_job_20250630_205854
+Analysis Date: 2025-06-30T21:34:19.762006
+
+Models Analyzed: 2
+Total Analyses: 1
+Mean Magnitude: 0.318
+
+Model Details:
+  claude-3-5-haiku-20241022: (0.000, 0.636)
+  gpt-3.5-turbo: (0.000, 0.000)

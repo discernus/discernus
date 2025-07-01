@@ -1,0 +1,4 @@
+model,centroid_x,centroid_y,total_analyses,magnitude
+Sample Model A,0.5,0.2,10,0.54
+Sample Model B,-0.3,0.7,15,0.76
+Sample Model C,0.1,-0.4,8,0.41

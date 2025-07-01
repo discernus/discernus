@@ -35,6 +35,14 @@ from discernus.validation import ExperimentValidator, ValidationError
 from discernus.gateway.llm_gateway import get_llm_analysis
 from discernus.engine.signature_engine import calculate_coordinates
 
+# 🎯 Import DCS Metrics System for validation
+from discernus.metrics import (
+    validate_hybrid_architecture,
+    validate_framework_v32_compliance,
+    calculate_framework_fitness_score,
+    validate_brazil_2018_specific_requirements
+)
+
 
 class ExperimentRunner:
     """
@@ -119,6 +127,49 @@ class ExperimentRunner:
             logger.info(f"✅ Experiment validation passed")
             logger.info(f"✅ Framework '{framework_name}' validation passed")
             logger.info(f"📊 Extracted {anchor_count} anchors: {list(anchors.keys())}")
+            
+            # 🎯 DCS METRICS VALIDATION: Mathematical foundation validation
+            logger.info("📊 Running DCS metrics validation...")
+            
+            framework_config = experiment_def.get('framework', {})
+            
+            # Component registry and architecture validation
+            hybrid_validation = validate_hybrid_architecture(framework_config)
+            v32_compliance = validate_framework_v32_compliance(framework_config)
+            
+            if hybrid_validation.get('framework_valid', False):
+                logger.info("✅ DCS hybrid architecture validation passed")
+            else:
+                logger.warning(f"⚠️ DCS hybrid architecture issues: {hybrid_validation.get('overall_errors', [])}")
+            
+            if v32_compliance.get('v32_compliant', False):
+                logger.info("✅ Framework Specification v3.2 compliance passed")
+                logger.info(f"📊 Compliance score: {v32_compliance.get('compliance_score', 0):.1%}")
+            else:
+                logger.warning(f"⚠️ v3.2 compliance issues: {v32_compliance.get('compliance_errors', [])}")
+            
+            # Brazil 2018 specific validation (if applicable)
+            if 'brazil' in framework_name.lower() or 'tension' in framework_name.lower():
+                brazil_validation = validate_brazil_2018_specific_requirements({
+                    'framework_config': framework_config,
+                    'signatures': []  # Will validate structure only
+                })
+                
+                if brazil_validation.get('brazil_2018_compliant', False):
+                    logger.info("✅ Brazil 2018 framework requirements passed")
+                    logger.info(f"📊 Brazil compliance: {brazil_validation.get('compliance_score', 0):.1%}")
+                else:
+                    logger.warning(f"⚠️ Brazil 2018 specific issues detected")
+            
+            # Store validation results in experiment definition for Stage 6
+            validated_experiment['_dcs_validation'] = {
+                'hybrid_architecture': hybrid_validation,
+                'v32_compliance': v32_compliance,
+                'brazil_2018_validation': brazil_validation if 'brazil_validation' in locals() else None,
+                'validation_timestamp': datetime.now().isoformat()
+            }
+            
+            logger.info("✅ DCS metrics validation complete")
             
             return validated_experiment
             
@@ -345,6 +396,81 @@ class ExperimentRunner:
             }
         }
         
+        # 🎯 POST-EXPERIMENT: Calculate DCS metrics on results
+        logger.info("📊 Calculating post-experiment DCS metrics...")
+        
+        if condition_results:
+            try:
+                # Extract signatures for metrics calculation
+                import numpy as np
+                all_signatures = []
+                model_signatures = {}
+                
+                for condition in condition_results:
+                    model_name = condition.get('condition_identifier', 'Unknown')
+                    coordinates = condition.get('coordinates', [])
+                    
+                    if coordinates:
+                        all_signatures.extend(coordinates)
+                        model_signatures[model_name] = np.array(coordinates)
+                
+                signatures_array = np.array(all_signatures) if all_signatures else np.array([[0, 0]])
+                
+                # Calculate framework fitness metrics
+                from discernus.metrics import (
+                    calculate_territorial_coverage,
+                    calculate_anchor_independence_index,
+                    calculate_cartographic_resolution
+                )
+                
+                # Calculate core metrics
+                territorial_coverage = calculate_territorial_coverage(
+                    signatures_array, 
+                    experiment_def.get('framework', {})
+                )
+                
+                # For anchor independence, extract anchor scores if available
+                anchor_scores = {}
+                for condition in condition_results:
+                    raw_scores = condition.get('raw_scores', [])
+                    if raw_scores:
+                        # Group by anchor from raw scores
+                        for score_dict in raw_scores:
+                            for anchor, score in score_dict.items():
+                                if anchor not in anchor_scores:
+                                    anchor_scores[anchor] = []
+                                anchor_scores[anchor].append(score)
+                
+                anchor_independence = calculate_anchor_independence_index(anchor_scores)
+                
+                cartographic_resolution = calculate_cartographic_resolution(signatures_array)
+                
+                # Calculate composite fitness score
+                fitness_score = calculate_framework_fitness_score(
+                    territorial_coverage.get('territorial_coverage', 0),
+                    anchor_independence.get('anchor_independence_index', 0),
+                    cartographic_resolution.get('cartographic_resolution', 0)
+                )
+                
+                # Store metrics in result
+                result['dcs_metrics'] = {
+                    'territorial_coverage': territorial_coverage,
+                    'anchor_independence': anchor_independence,
+                    'cartographic_resolution': cartographic_resolution,
+                    'framework_fitness': fitness_score,
+                    'signature_count': len(all_signatures),
+                    'model_count': len(condition_results)
+                }
+                
+                logger.info(f"✅ DCS metrics calculated successfully")
+                logger.info(f"📊 Framework fitness: {fitness_score.get('framework_fitness_score', 0):.3f} (Grade: {fitness_score.get('fitness_grade', 'Unknown')})")
+                logger.info(f"📊 Territorial coverage: {territorial_coverage.get('territorial_coverage', 0):.3f}")
+                logger.info(f"📊 Anchor independence: {anchor_independence.get('anchor_independence_index', 0):.3f}")
+                
+            except Exception as e:
+                logger.warning(f"⚠️ Error calculating DCS metrics: {e}")
+                result['dcs_metrics'] = {'error': str(e)}
+        
         return result
     
     def _display_results_summary(self, result: Dict[str, Any], experiment_def: Dict[str, Any]):
@@ -410,8 +536,15 @@ class ExperimentRunner:
         experiment_results_dir = experiment_results_dir_base / run_timestamp
         experiment_results_dir.mkdir(parents=True, exist_ok=True)
         
-        # Copy universal template
-        template_source = Path("templates/universal_stage6_template.ipynb")
+        # Copy universal template - find project root first
+        current = Path.cwd()
+        project_root = current
+        while project_root.parent != project_root:
+            if (project_root / 'discernus').exists():
+                break
+            project_root = project_root.parent
+        
+        template_source = project_root / "discernus/pipeline/notebook_generation/templates/universal_stage6_template.ipynb"
         template_destination = experiment_results_dir / "stage6_interactive_analysis.ipynb"
         
         if template_source.exists():
