@@ -1,0 +1,23 @@
+# CARA: Conversational Academic Research Architecture
+# Minimal dependencies following "strategically thin software" philosophy
+
+# Git operations for conversation logging
+GitPython>=3.1.0
+
+# Built-in Python modules used (no installation required):
+# - subprocess (code execution)
+# - json (data handling)
+# - logging (audit trails)
+# - pathlib (file operations)
+# - re (pattern matching)
+# - time (execution timing)
+# - datetime (timestamps)
+# - hashlib (code hashing)
+# - os (environment variables)
+# - typing (type hints)
+
+# Optional: If LiteLLM client is available
+# Existing Discernus dependencies will provide LiteLLM access
+
+# Philosophy: CARA intentionally has minimal dependencies
+# to reduce complexity and maintain thin software philosophy 
