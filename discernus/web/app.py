@@ -285,7 +285,7 @@ def _create_chat_session_folder(session_id, session):
         print(f"Failed to create session folder: {str(e)}")
 
 def _save_chat_message(session_id, participant, message, metadata=None):
-    """Save chat message to session conversation log"""
+    """Save chat message to session conversation log with deduplication"""
     try:
         session = chat_sessions.get(session_id)
         if not session:
@@ -294,6 +294,10 @@ def _save_chat_message(session_id, participant, message, metadata=None):
         conversation_file = session.get('conversation_file')
         if not conversation_file:
             return
+        
+        # Check for recent duplicates (last 5 messages to avoid performance issues)
+        if _is_duplicate_message(conversation_file, participant, message):
+            return  # Skip duplicate
         
         # Create log entry
         log_entry = {
@@ -309,6 +313,34 @@ def _save_chat_message(session_id, participant, message, metadata=None):
             
     except Exception as e:
         print(f"Failed to save chat message: {str(e)}")
+
+def _is_duplicate_message(conversation_file, participant, message):
+    """Check if this message is a duplicate of recent messages"""
+    try:
+        if not Path(conversation_file).exists():
+            return False
+        
+        # Read last 5 lines to check for duplicates
+        with open(conversation_file, 'r') as f:
+            lines = f.readlines()
+        
+        # Check last 5 messages
+        recent_lines = lines[-5:] if len(lines) >= 5 else lines
+        
+        for line in recent_lines:
+            try:
+                entry = json.loads(line.strip())
+                if (entry.get('participant') == participant and 
+                    entry.get('message') == message):
+                    return True  # Duplicate found
+            except json.JSONDecodeError:
+                continue
+        
+        return False
+        
+    except Exception as e:
+        print(f"Error checking for duplicates: {e}")
+        return False  # If error, allow message to be saved
 
 def _update_session_status(session_id, status, phase=None):
     """Update session status and metadata"""
@@ -746,7 +778,11 @@ def _start_orchestrator_monitoring(session_id, orchestrator_session_id):
                             if participant in ['system', 'user']:
                                 continue
                             
-                            # Save to web session chat
+                            # Skip empty messages
+                            if not message.strip():
+                                continue
+                            
+                            # Save to web session chat (deduplication handled in _save_chat_message)
                             _save_chat_message(session_id, participant, message, {
                                 'timestamp': timestamp,
                                 'orchestrator_source': True

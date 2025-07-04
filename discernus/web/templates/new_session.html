@@ -177,6 +177,7 @@ let isProcessing = false;
 let md = null;
 let liveUpdateInterval = null;
 let lastSeenMessageIndex = -1;
+let displayedMessages = new Set(); // Track displayed messages to prevent duplicates
 
 // Initialize markdown renderer when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -310,6 +311,18 @@ function addLiveUpdate(update) {
     const message = update.message;
     const timestamp = update.timestamp;
     
+    // Create unique message ID for deduplication
+    const messageId = `${participant}-${message.substring(0, 50)}-${timestamp}`;
+    
+    // Check if message already displayed
+    if (displayedMessages.has(messageId)) {
+        console.log('Skipping duplicate message:', messageId);
+        return;
+    }
+    
+    // Mark as displayed
+    displayedMessages.add(messageId);
+    
     // Determine message type and styling
     let messageType = 'system';
     let icon = '🔧';
@@ -338,6 +351,12 @@ function addLiveUpdate(update) {
         } else if (participant.includes('synthesis')) {
             icon = '🔬';
             label = 'Synthesis LLM';
+        } else if (participant.includes('corpus_linguist')) {
+            icon = '📊';
+            label = 'Corpus Linguist LLM';
+        } else if (participant.includes('rhetorical')) {
+            icon = '🎭';
+            label = 'Rhetorical Analyst LLM';
         } else {
             label = participant.replace('_llm', '').replace('_', ' ').toUpperCase() + ' LLM';
         }
@@ -347,6 +366,7 @@ function addLiveUpdate(update) {
     const chatMessages = document.getElementById('chat-messages');
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${messageType}-message`;
+    messageDiv.setAttribute('data-message-id', messageId);
     
     // Format timestamp
     const timeDisplay = timestamp ? new Date(timestamp).toLocaleTimeString() : '';
@@ -372,9 +392,22 @@ function addLiveUpdate(update) {
 
 // Add message to chat with optional markdown rendering
 function addMessage(type, content, renderMarkdown = false) {
+    // Create unique message ID for deduplication
+    const messageId = `${type}-${content.substring(0, 50)}-${Date.now()}`;
+    
+    // Check if message already displayed (less strict for regular messages)
+    if (displayedMessages.has(messageId)) {
+        console.log('Skipping duplicate regular message:', messageId);
+        return;
+    }
+    
+    // Mark as displayed
+    displayedMessages.add(messageId);
+    
     const chatMessages = document.getElementById('chat-messages');
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${type}-message`;
+    messageDiv.setAttribute('data-message-id', messageId);
     
     let icon = '';
     let label = '';
@@ -466,6 +499,7 @@ function clearChat() {
     
     currentSessionId = null;
     lastSeenMessageIndex = -1;
+    displayedMessages.clear(); // Reset deduplication tracking
     updateSessionStatus('Ready');
     setProcessing(false);
     stopLiveUpdates();

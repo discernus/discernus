@@ -8,20 +8,69 @@ with minimal integration code. No custom intelligence, just clean routing.
 """
 
 import os
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, Optional, List
 from dotenv import load_dotenv
+import json
+from pathlib import Path
+import time
+from datetime import datetime
 
 load_dotenv()
+
+# Add Vertex AI environment variable check
+def get_vertex_ai_config() -> Optional[Dict[str, Any]]:
+    """
+    Get Vertex AI configuration from environment variables.
+    Returns None if Vertex AI is not configured.
+    """
+    import os
+    
+    # Check for Google Cloud credentials
+    vertex_project = os.getenv('VERTEXAI_PROJECT') or os.getenv('VERTEX_PROJECT')
+    vertex_location = os.getenv('VERTEXAI_LOCATION') or os.getenv('VERTEX_LOCATION', 'us-central1')
+    vertex_credentials = os.getenv('GOOGLE_APPLICATION_CREDENTIALS') or os.getenv('VERTEX_CREDENTIALS')
+    
+    if vertex_project:
+        config = {
+            'project': vertex_project,
+            'location': vertex_location
+        }
+        
+        if vertex_credentials:
+            # If it's a file path, load the JSON
+            if vertex_credentials.endswith('.json') and Path(vertex_credentials).exists():
+                with open(vertex_credentials, 'r') as f:
+                    config['credentials'] = json.load(f)
+            else:
+                # Assume it's a JSON string
+                try:
+                    config['credentials'] = json.loads(vertex_credentials)
+                except:
+                    pass
+        
+        return config
+    
+    return None
 
 class ThinLiteLLMClient:
     """THIN integration with LiteLLM - use their infrastructure, keep our code minimal"""
     
-    def __init__(self):
+    def __init__(self, logger_name: str = "ThinLiteLLMClient"):
+        # Set up basic logging
+        import logging
+        self.logger = logging.getLogger(logger_name)
+        
         try:
             import litellm
             self.litellm = litellm
             self._configure_litellm()
             self.available = True
+            
+            # Check for Vertex AI availability
+            self.vertex_config = get_vertex_ai_config()
+            if self.vertex_config:
+                print("🌟 Vertex AI configuration detected - Gemini models available!")
+                self.logger.info("🌟 Vertex AI configuration detected - Gemini models available!")
         except ImportError:
             print("📦 LiteLLM not available - using direct API fallback")
             self.available = False
@@ -206,4 +255,66 @@ class ThinLiteLLMClient:
             'corpus_detective': f"**CORPUS ANALYSIS REPORT**\n\nI've analyzed the provided corpus systematically:\n\n**Document Types:** The corpus appears to contain political speeches and addresses.\n\n**Authors/Speakers:** Based on filenames and content analysis, I can identify the primary speakers.\n\n**Time Periods:** The documents span multiple time periods as indicated by dates in filenames.\n\n**Potential Issues:** Some files may need encoding verification, and there may be duplicate versions.\n\n**Metadata Inference:** From content analysis, I can determine context, audience, and occasion for most texts.\n\n**Questions for Clarification:** Are there specific aspects of the corpus you'd like me to focus on for your research?"
         }
         
-        return mock_responses.get(model_role, "I understand the request and would analyze accordingly.") 
+        return mock_responses.get(model_role, "I understand the request and would analyze accordingly.")
+
+    def get_available_models(self) -> List[str]:
+        """Get list of available models based on configured API keys"""
+        models = []
+        
+        # Add standard models based on existing API keys
+        if os.getenv('ANTHROPIC_API_KEY'):
+            models.extend(['claude-3-5-sonnet-20241022', 'claude-3-haiku-20240307'])
+        
+        if os.getenv('OPENAI_API_KEY'):
+            models.extend(['gpt-4-turbo', 'gpt-3.5-turbo'])
+        
+        # Add Vertex AI models if configured
+        if hasattr(self, 'vertex_config') and self.vertex_config:
+            gemini_models = [
+                "vertex_ai/gemini-1.5-flash",      # Fastest, cheapest: $0.13/$0.38 per 1M tokens
+                "vertex_ai/gemini-1.5-flash-002",  # Latest flash version
+                "vertex_ai/gemini-1.5-pro",        # Most capable: $1.25/$10 per 1M tokens
+                "vertex_ai/gemini-1.5-pro-002",    # Latest pro version
+                "vertex_ai/gemini-2.0-flash-exp",  # Experimental 2.0 models
+                "vertex_ai/gemini-2.5-flash",      # Latest fast model
+                "vertex_ai/gemini-2.5-pro",        # Latest thinking-native model
+            ]
+            models.extend(gemini_models)
+            print(f"✅ Added {len(gemini_models)} Vertex AI Gemini models (significantly cheaper than OpenAI)")
+        
+        if not models:
+            print("⚠️ No API keys configured - using mock responses")
+            models = ['mock_model']
+            
+        return models
+
+    def call_llm_with_vertex_support(self, model: str, messages: List[Dict[str, str]], **kwargs) -> Dict[str, Any]:
+        """Enhanced call_llm method with Vertex AI support"""
+        if not self.available:
+            return self._mock_response_with_metadata("", model)[0]
+        
+        try:
+            # Add Vertex AI specific parameters if using vertex models
+            if model.startswith("vertex_ai/"):
+                if hasattr(self, 'vertex_config') and self.vertex_config:
+                    # Add vertex-specific parameters
+                    if 'credentials' in self.vertex_config:
+                        kwargs['vertex_credentials'] = json.dumps(self.vertex_config['credentials'])
+                    kwargs['vertex_project'] = self.vertex_config['project']
+                    kwargs['vertex_location'] = self.vertex_config['location']
+                    
+                    print(f"🚀 Calling Vertex AI model: {model} (cheaper alternative to OpenAI)")
+                else:
+                    raise Exception("Vertex AI model requested but no Vertex AI configuration found")
+            
+            response = self.litellm.completion(
+                model=model,
+                messages=messages,
+                **kwargs
+            )
+            
+            return response.choices[0].message.content
+            
+        except Exception as e:
+            print(f"LiteLLM call failed ({e}), using fallback")
+            return self._mock_response("", model) 
