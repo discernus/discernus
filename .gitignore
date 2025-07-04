@@ -1,0 +1,29 @@
+
+__pycache__/
+.DS_Store
+.env
+.idea/
+.vscode/
+*.db
+*.eps
+*.log
+*.pdf
+*.py[cod]
+*.sqlite3
+*.swo
+*.swp
+*$py.class
+# Database
+# Generated visualization outputs
+# IDE
+# Logs
+# OS
+# Python
+# Reports (generated)
+keys/
+logs/
+outputs/
+reports/
+temp_results/
+Thumbs.db
+venv/

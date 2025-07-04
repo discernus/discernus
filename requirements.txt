@@ -1,0 +1,23 @@
+# Ultra-thin dependencies following "strategically thin software" philosophy
+
+# Core infrastructure - minimal dependencies
+python-dotenv>=0.19.0      # Environment configuration
+gitpython>=3.1.0           # Conversation logging with git transparency
+litellm>=1.0.0             # Rate limiting, retries, and provider management
+anthropic>=0.7.0           # Direct Anthropic API access
+
+# Scientific computing (when needed)
+pandas>=1.5.0              # Data analysis
+numpy>=1.24.0              # Numerical computing
+jupyter>=1.0.0             # Jupyter Notebook support
+
+# Philosophy: Discernus intentionally has minimal core dependencies
+# to reduce complexity and maintain thin software philosophy
+
+# Optional dependencies (install separately if needed):
+# openai>=1.0.0           # OpenAI API access
+# pytest                  # Testing framework
+# black                   # Code formatting
+# statsmodels             # Advanced statistics
+# scikit-learn            # Machine learning
+# plotly                  # Interactive visualization
