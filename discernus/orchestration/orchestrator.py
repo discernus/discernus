@@ -3,14 +3,14 @@
 Discernus Ultra-Thin Orchestration Engine
 ===========================================
 
-Implements the "strategically thin software" philosophy using Redis/Celery
-for multi-LLM conversation orchestration with secure code execution.
+Implements the "strategically thin software" philosophy for multi-LLM conversation orchestration.
 
-Core Design Principles:
-- Minimal custom code focused on enabling conversation
-- Leverage mature infrastructure (Redis, Celery, Git, Docker)
-- Software orchestrates rather than interprets or analyzes
-- Maximum functionality with minimum complexity
+Core THIN Design Principles:
+- LLMs talk to each other, software just orchestrates
+- NO parsing or interpretation of LLM responses
+- Raw text passing between LLMs
+- Software provides minimal routing infrastructure only
+- Design LLM → Human approval → Moderator LLM (no software intelligence)
 """
 
 import sys
@@ -19,17 +19,18 @@ import json
 import asyncio
 import logging
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime
 from dataclasses import dataclass
+from enum import Enum
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-# Import existing LiteLLM client
+# Import THIN LiteLLM client
 try:
-    from discernus.gateway.reboot_litellm_client import LiteLLMClient
+    from discernus.core.thin_litellm_client import ThinLiteLLMClient
     LITELLM_AVAILABLE = True
 except ImportError:
     LITELLM_AVAILABLE = False
@@ -44,382 +45,307 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 
+class SessionPhase(Enum):
+    """Phases of THIN research session"""
+    DESIGN_CONSULTATION = "design_consultation"
+    AWAITING_APPROVAL = "awaiting_approval"
+    EXECUTING_ANALYSIS = "executing_analysis"
+    COMPLETED = "completed"
+
+
 @dataclass
-class ConversationConfig:
-    """Configuration for a multi-LLM conversation"""
+class ResearchConfig:
+    """Minimal research session configuration"""
     research_question: str
-    participants: List[str]
-    speech_text: str
-    models: Dict[str, str]  # participant -> model mapping
-    max_turns: int = 10
+    source_texts: str
     enable_code_execution: bool = True
-    code_review_model: str = "claude-3-5-sonnet"
 
 
-class DiscernusOrchestrator:
+class ThinOrchestrator:
     """
-    Ultra-thin orchestration engine for multi-LLM conversations
+    Ultra-thin orchestrator implementing pure LLM-to-LLM communication
     
-    Implements Discernus's "strategically thin software" philosophy:
-    - Minimal custom orchestration logic
-    - Conversation-native processing (no parsing)
-    - Complete transparency through Git logging
-    - Secure code execution integration
+    THIN Principles:
+    1. NO parsing or interpretation of LLM responses
+    2. Raw text passing between LLMs  
+    3. Software provides routing only
+    4. LLMs handle ALL intelligence decisions
     """
     
     def __init__(self, project_root: str = "."):
         self.project_root = Path(project_root)
         
-        # Initialize Discernus components
+        # Initialize components
         self.conversation_logger = ConversationLogger(project_root)
         
         # Initialize LLM client
         if LITELLM_AVAILABLE:
-            self.llm_client = LiteLLMClient()
+            self.llm_client = ThinLiteLLMClient()
         else:
             self.llm_client = None
+            logger.warning("Running in mock mode - no actual LLM calls")
         
-        # Conversation state
-        self.active_conversations: Dict[str, ConversationConfig] = {}
+        # Session state (minimal)
+        self.sessions: Dict[str, Dict[str, Any]] = {}
         
-        logger.info(f"Discernus Orchestrator initialized: {project_root}")
+        logger.info(f"THIN Orchestrator initialized: {project_root}")
     
-    async def start_conversation(self, config: ConversationConfig) -> str:
-        """
-        Start a new multi-LLM conversation
+    async def start_research_session(self, config: ResearchConfig) -> str:
+        """Start new research session with design consultation"""
+        session_id = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         
-        Args:
-            config: Conversation configuration
-            
-        Returns:
-            conversation_id: Unique identifier for this conversation
+        self.sessions[session_id] = {
+            'config': config,
+            'phase': SessionPhase.DESIGN_CONSULTATION,
+            'design_history': [],  # Track design iterations
+            'approved_design': None,
+            'conversation_id': None
+        }
+        
+        logger.info(f"Started research session: {session_id}")
+        return session_id
+    
+    async def run_design_consultation(self, session_id: str, human_feedback: str = "") -> str:
         """
+        Get design proposal from design LLM
+        
+        THIN Principle: Pass feedback directly to LLM, no interpretation
+        """
+        if session_id not in self.sessions:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        session = self.sessions[session_id]
+        config = session['config']
+        
+        # Build design consultation prompt including any feedback
+        design_prompt = self._build_design_prompt(config, session['design_history'], human_feedback)
+        
+        logger.info("Consulting design LLM...")
+        
+        # Get design LLM response (raw text, no parsing)
+        if self.llm_client:
+            design_response = self.llm_client.call_llm(design_prompt, "design_llm")
+        else:
+            design_response = self._mock_design_response()
+        
+        # Store design response (as raw text)
+        session['design_history'].append({
+            'response': design_response,
+            'feedback': human_feedback,
+            'timestamp': datetime.now().isoformat()
+        })
+        
+        session['phase'] = SessionPhase.AWAITING_APPROVAL
+        
+        logger.info("Design LLM consultation complete")
+        return design_response
+    
+    def approve_design(self, session_id: str, approved: bool, feedback: str = "") -> bool:
+        """
+        Record human approval/rejection
+        
+        THIN Principle: Just record decision, no interpretation
+        """
+        if session_id not in self.sessions:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        session = self.sessions[session_id]
+        
+        if approved:
+            # Store approved design (as raw text)
+            session['approved_design'] = session['design_history'][-1]['response']
+            session['phase'] = SessionPhase.EXECUTING_ANALYSIS
+            logger.info("Design approved")
+            return True
+        else:
+            # Return to design consultation with feedback
+            session['phase'] = SessionPhase.DESIGN_CONSULTATION
+            logger.info(f"Design rejected, feedback: {feedback}")
+            return False
+    
+    async def execute_approved_analysis(self, session_id: str) -> Dict[str, Any]:
+        """
+        Execute analysis using approved design
+        
+        THIN Principle: Pass approved design text directly to moderator LLM
+        """
+        if session_id not in self.sessions:
+            raise ValueError(f"Session not found: {session_id}")
+        
+        session = self.sessions[session_id]
+        
+        if session['phase'] != SessionPhase.EXECUTING_ANALYSIS:
+            raise ValueError(f"Session not ready for execution")
+        
+        config = session['config']
+        approved_design = session['approved_design']
+        
         # Start conversation logging
         conversation_id = self.conversation_logger.start_conversation(
-            speech_text=config.speech_text,
+            speech_text=config.source_texts,
             research_question=config.research_question,
-            participants=config.participants
+            participants=["moderator_llm"]  # Moderator will determine actual participants
         )
         
-        # Store conversation config
-        self.active_conversations[conversation_id] = config
+        session['conversation_id'] = conversation_id
         
-        logger.info(f"Started conversation: {conversation_id}")
-        logger.info(f"Participants: {config.participants}")
-        logger.info(f"Code execution: {'enabled' if config.enable_code_execution else 'disabled'}")
+        # Execute analysis via moderator LLM (no parsing, just text passing)
+        results = await self._execute_via_moderator(
+            conversation_id, approved_design, config
+        )
         
-        return conversation_id
+        session['phase'] = SessionPhase.COMPLETED
+        
+        logger.info("Analysis execution completed")
+        return results
     
-    async def run_conversation(self, conversation_id: str) -> Dict[str, Any]:
+    async def _execute_via_moderator(self, 
+                                   conversation_id: str,
+                                   approved_design: str,
+                                   config: ResearchConfig) -> Dict[str, Any]:
         """
-        Run the complete conversation flow
+        Execute analysis by passing approved design to moderator LLM
         
-        Args:
-            conversation_id: Conversation identifier
-            
-        Returns:
-            Conversation results and metadata
+        THIN Principle: Moderator LLM interprets design and orchestrates analysis
         """
-        if conversation_id not in self.active_conversations:
-            raise ValueError(f"Conversation not found: {conversation_id}")
+        # Build moderator prompt with approved design
+        moderator_prompt = f"""
+You are the moderator_llm responsible for executing this approved research design.
+
+RESEARCH QUESTION: {config.research_question}
+
+SOURCE TEXTS:
+{config.source_texts}
+
+APPROVED DESIGN:
+{approved_design}
+
+Your Task:
+1. Read and interpret the approved design
+2. Determine what expert LLMs are needed
+3. Orchestrate the multi-LLM conversation to answer the research question
+4. Each time you want an expert to contribute, request their input
+5. Synthesize findings into a final analysis
+
+Begin by interpreting the design and requesting input from the first expert you need.
+If you need code execution for analysis, write Python code in ```python blocks.
+"""
         
-        config = self.active_conversations[conversation_id]
+        # Start moderator conversation
+        logger.info("Starting moderator-orchestrated analysis...")
         
-        # Initialize conversation with research question
-        context = self._build_initial_context(config)
+        if self.llm_client:
+            moderator_response = self.llm_client.call_llm(moderator_prompt, "moderator_llm")
+        else:
+            moderator_response = "[MOCK] Moderator would orchestrate analysis based on approved design"
         
-        # Run conversation turns
-        for turn in range(config.max_turns):
-            logger.info(f"Starting turn {turn + 1}/{config.max_turns}")
+        # Log moderator's initial response
+        self.conversation_logger.log_llm_message(
+            conversation_id, "moderator_llm", moderator_response,
+            metadata={'role': 'moderator', 'stage': 'design_interpretation'}
+        )
+        
+        # Handle code execution if needed
+        if config.enable_code_execution and '```python' in moderator_response:
+            enhanced_response = process_llm_notebook_request(
+                conversation_id, "moderator_llm", moderator_response
+            )
             
-            # Each participant speaks
-            for participant in config.participants:
-                model = config.models.get(participant, "claude-3-5-sonnet")
-                
-                # Get participant's response
-                response = await self._get_participant_response(
-                    conversation_id, participant, model, context
-                )
-                
-                # Log the response
+            if enhanced_response != moderator_response:
                 self.conversation_logger.log_llm_message(
-                    conversation_id, participant, response['message'],
-                    metadata={'model': model, 'turn': turn + 1}
+                    conversation_id, "moderator_llm", enhanced_response,
+                    metadata={'enhanced_with_code': True, 'stage': 'design_interpretation'}
                 )
-                
-                # Handle code execution if requested
-                if config.enable_code_execution and response.get('code_requested'):
-                    # Ultra-thin: just process code blocks and enhance response
-                    enhanced_response = process_llm_notebook_request(
-                        conversation_id, participant, response['message']
-                    )
-                    
-                    # Log the enhanced response (with code results)
-                    if enhanced_response != response['message']:
-                        self.conversation_logger.log_llm_message(
-                            conversation_id, f"{participant}_code_results", enhanced_response,
-                            metadata={'enhanced_with_code': True}
-                        )
-                
-                # Update context for next participant
-                context = self._update_context(context, participant, response)
-            
-            # Check for conversation completion
-            if self._is_conversation_complete(context):
-                logger.info(f"Conversation completed at turn {turn + 1}")
-                break
+        
+        # For now, this is a simplified implementation
+        # In full implementation, moderator would continue orchestrating expert conversations
         
         # End conversation
-        summary = self._generate_summary(conversation_id, context)
-        self.conversation_logger.end_conversation(conversation_id, summary)
-        
-        # Clean up
-        del self.active_conversations[conversation_id]
+        self.conversation_logger.end_conversation(
+            conversation_id, "Analysis orchestrated by moderator LLM"
+        )
         
         return {
             'conversation_id': conversation_id,
-            'turns_completed': turn + 1,
-            'summary': summary,
-            'participants': config.participants
+            'status': 'completed',
+            'summary': 'Analysis completed via moderator LLM orchestration'
         }
     
-    async def _get_participant_response(self, 
-                                      conversation_id: str,
-                                      participant: str,
-                                      model: str,
-                                      context: Dict[str, Any]) -> Dict[str, Any]:
+    def _build_design_prompt(self, 
+                           config: ResearchConfig,
+                           design_history: List[Dict[str, Any]],
+                           human_feedback: str) -> str:
         """
-        Get response from a specific participant
+        Build design consultation prompt
         
-        Args:
-            conversation_id: Conversation identifier
-            participant: Participant name
-            model: LLM model to use
-            context: Current conversation context
-            
-        Returns:
-            Dictionary with participant response
-        """
-        # Build participant-specific prompt
-        prompt = self._build_participant_prompt(participant, context)
-        
-        # Get LLM response
-        if self.llm_client:
-            try:
-                response_text, cost = await self.llm_client._litellm_call_basic(prompt, model)
-                if isinstance(response_text, dict) and 'raw_response' in response_text:
-                    response_text = response_text['raw_response']
-                
-                # Parse response for code execution requests
-                code_request = self._parse_code_request(response_text)
-                
-                return {
-                    'message': response_text,
-                    'code_requested': code_request['requested'],
-                    'code': code_request.get('code', ''),
-                    'cost': cost,
-                    'model': model
-                }
-            except Exception as e:
-                logger.error(f"LLM call failed for {participant}: {e}")
-                return {
-                    'message': f"[ERROR] LLM call failed: {str(e)}",
-                    'code_requested': False,
-                    'code': '',
-                    'cost': 0,
-                    'model': model
-                }
-        else:
-            # Mock response for testing
-            return {
-                'message': f"[MOCK] {participant} response to: {context['research_question']}",
-                'code_requested': False,
-                'code': '',
-                'cost': 0,
-                'model': model
-            }
-    
-    def _build_participant_prompt(self, 
-                                 participant: str,
-                                 context: Dict[str, Any]) -> str:
-        """
-        Build prompt for specific participant
-        
-        Args:
-            participant: Participant name
-            context: Current conversation context
-            
-        Returns:
-            Formatted prompt string
+        THIN Principle: Include feedback directly, no interpretation
         """
         base_prompt = f"""
-You are {participant}, an expert in political discourse analysis.
+You are a design_llm expert in computational research methodology.
 
-Research Question: {context['research_question']}
+RESEARCH QUESTION: {config.research_question}
 
-Text to Analyze:
-{context['speech_text']}
+SOURCE TEXTS:
+{config.source_texts}
 
-Previous Discussion:
-{context.get('previous_discussion', 'None yet.')}
+Your Task: Design a multi-LLM conversation approach to answer this research question.
 
-Your Task:
-Provide your expert analysis of this text. If you need to perform calculations, 
-statistical analysis, or create visualizations to support your analysis, 
-you can write Python code by starting a code block with ```python and ending with ```.
+Provide a detailed design proposal including:
+- Analysis approach and methodology
+- What expert perspectives are needed
+- How the conversation should be orchestrated
+- Any computational analysis required
 
-Focus on your area of expertise and engage with any previous analyses from other experts.
+Focus on rigorous, academically sound analysis.
 """
         
-        # Add participant-specific instructions
-        if participant == 'populist_expert':
-            base_prompt += """
-As a populist discourse expert, focus on:
-- People vs. elite framing
-- Anti-establishment rhetoric
-- Appeals to ordinary citizens
-- Moral boundary drawing
-- Claims of representation
-"""
-        elif participant == 'pluralist_expert':
-            base_prompt += """
-As a pluralist discourse expert, focus on:
-- Democratic cooperation
-- Institutional respect
-- Compromise and consensus
-- Diverse stakeholder inclusion
-- Procedural fairness
-"""
-        elif participant == 'code_reviewer':
-            base_prompt += """
-As a code reviewer, focus on:
-- Academic appropriateness of proposed code
-- Security concerns
-- Resource usage
-- Compliance with research standards
-"""
+        # Add design history and feedback
+        if design_history:
+            base_prompt += f"\n\nPREVIOUS DESIGN ITERATIONS:\n"
+            for i, iteration in enumerate(design_history):
+                base_prompt += f"\nIteration {i+1}:\n{iteration['response']}\n"
+                if iteration['feedback']:
+                    base_prompt += f"Feedback received: {iteration['feedback']}\n"
+        
+        if human_feedback:
+            base_prompt += f"\n\nHUMAN RESEARCHER FEEDBACK:\n{human_feedback}\n"
+            base_prompt += "\nPlease revise your design based on this feedback."
         
         return base_prompt
     
-    def _parse_code_request(self, response_text: str) -> Dict[str, Any]:
-        """
-        Check if response contains code blocks
+    def _mock_design_response(self) -> str:
+        """Mock design response for testing"""
+        return """
+I propose a multi-perspective analysis approach:
+
+1. Use computational linguistics expert for quantitative text analysis
+2. Use political discourse expert for rhetorical analysis  
+3. Use social cohesion expert for unity/division assessment
+4. Include enmity/amity dipole measurement as requested
+
+The moderator should orchestrate these experts in sequence, building on each other's findings.
+"""
+    
+    def get_session_status(self, session_id: str) -> Dict[str, Any]:
+        """Get session status"""
+        if session_id not in self.sessions:
+            return {'status': 'not_found'}
         
-        Args:
-            response_text: Raw LLM response
-            
-        Returns:
-            Dictionary with code request information
-        """
-        code_blocks = extract_code_blocks(response_text)
-        
+        session = self.sessions[session_id]
         return {
-            'requested': len(code_blocks) > 0,
-            'code_blocks': code_blocks
+            'status': session['phase'].value,
+            'research_question': session['config'].research_question,
+            'design_iterations': len(session['design_history']),
+            'conversation_id': session.get('conversation_id')
         }
     
-    def _build_initial_context(self, config: ConversationConfig) -> Dict[str, Any]:
-        """
-        Build initial conversation context
-        
-        Args:
-            config: Conversation configuration
-            
-        Returns:
-            Initial context dictionary
-        """
-        return {
-            'research_question': config.research_question,
-            'speech_text': config.speech_text,
-            'participants': config.participants,
-            'previous_discussion': '',
-            'turn': 0
-        }
-    
-    def _update_context(self, 
-                       context: Dict[str, Any],
-                       participant: str,
-                       response: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Update conversation context with new response
-        
-        Args:
-            context: Current context
-            participant: Participant who responded
-            response: Response dictionary
-            
-        Returns:
-            Updated context
-        """
-        # Simple context update - just append to discussion
-        context['previous_discussion'] += f"\n\n{participant}: {response['message']}"
-        context['turn'] += 1
-        
-        return context
-    
-    def _is_conversation_complete(self, context: Dict[str, Any]) -> bool:
-        """
-        Check if conversation is complete
-        
-        Args:
-            context: Current conversation context
-            
-        Returns:
-            True if conversation should end
-        """
-        # Simple completion check - could be enhanced
-        return context['turn'] >= len(context['participants']) * 2
-    
-    def _generate_summary(self, 
-                         conversation_id: str,
-                         context: Dict[str, Any]) -> str:
-        """
-        Generate conversation summary
-        
-        Args:
-            conversation_id: Conversation identifier
-            context: Final conversation context
-            
-        Returns:
-            Summary string
-        """
-        return f"Multi-LLM conversation completed with {len(context['participants'])} participants"
-    
-    def get_conversation_status(self, conversation_id: str) -> Dict[str, Any]:
-        """
-        Get status of active conversation
-        
-        Args:
-            conversation_id: Conversation identifier
-            
-        Returns:
-            Status dictionary
-        """
-        if conversation_id in self.active_conversations:
-            config = self.active_conversations[conversation_id]
-            return {
-                'status': 'active',
-                'participants': config.participants,
-                'research_question': config.research_question,
-                'code_execution_enabled': config.enable_code_execution
-            }
-        else:
-            return {
-                'status': 'not_found'
-            }
-    
-    def list_conversations(self) -> List[Dict[str, Any]]:
-        """
-        List all conversations (active and completed)
-        
-        Returns:
-            List of conversation summaries
-        """
-        return self.conversation_logger.list_conversations()
-    
-    def cleanup_resources(self) -> None:
-        """
-        Clean up resources for completed conversations
-        """
-        # Could implement cleanup logic here
-        pass 
+    def cleanup_session(self, session_id: str) -> None:
+        """Clean up session"""
+        if session_id in self.sessions:
+            del self.sessions[session_id]
+            logger.info(f"Cleaned up session: {session_id}")
+
+
+# Keep old names for compatibility
+ThinDiscernusOrchestrator = ThinOrchestrator
+ConversationConfig = ResearchConfig 
