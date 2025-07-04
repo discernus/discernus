@@ -13,6 +13,9 @@ from flask import Flask, render_template, jsonify, request, send_from_directory
 import json
 import asyncio
 from datetime import datetime
+import logging
+import threading
+import time
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -447,7 +450,14 @@ def _handle_design_consultation(session_id, session, message):
         orchestrator_session_id = session['orchestrator_session']
         
         # Get updated design consultation with user feedback
-        design_response = orchestrator.run_design_consultation(orchestrator_session_id, message)
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            design_response = loop.run_until_complete(
+                orchestrator.run_design_consultation(orchestrator_session_id, message)
+            )
+        finally:
+            loop.close()
         
         # Update phase
         chat_sessions[session_id]['phase'] = 'awaiting_approval'
@@ -549,145 +559,270 @@ Your message: "{message}"
         }
 
 def _execute_analysis_with_realtime_updates(session_id, session, orchestrator_session_id):
-    """Execute analysis with step-by-step real-time updates shown to user"""
+    """Execute analysis using real orchestrator with live updates"""
     try:
-        # Start with immediate feedback
-        response_parts = []
-        response_parts.append("🚀 **Multi-LLM Analysis Starting**")
-        response_parts.append("")
-        response_parts.append("I'll show you each step of the analysis as it happens:")
-        response_parts.append("")
+        # Get corpus path and research question from session
+        corpus_path = session.get('corpus_path', '')
+        research_question = session.get('research_question', '')
         
-        # Step 1: Initialize analysis
-        response_parts.append("**Step 1**: 🔧 **Initializing Analysis Framework**")
-        response_parts.append("- Setting up multi-LLM coordination")
-        response_parts.append("- Preparing corpus for analysis")
-        response_parts.append("- Loading Brazilian cultural context")
-        response_parts.append("")
+        # Validate corpus path exists
+        if not corpus_path:
+            _save_chat_message(session_id, "system", "❌ **Error**: No corpus path specified")
+            return {'status': 'error', 'message': 'No corpus path specified'}
         
-        # Step 2: Corpus analysis
-        response_parts.append("**Step 2**: 📚 **Corpus Detective Analysis**")
-        response_parts.append("- Analyzing 13 Bolsonaro speech transcripts")
-        response_parts.append("- Extracting temporal patterns (July-October 2018)")
-        response_parts.append("- Identifying key rhetorical themes")
-        response_parts.append("")
+        # Convert relative path to absolute if needed
+        if not corpus_path.startswith('/'):
+            corpus_path = str(project_root / corpus_path)
         
-        # Step 3: Expert LLM coordination
-        response_parts.append("**Step 3**: 🧠 **Expert LLM Coordination Starting**")
-        response_parts.append("- **Brazilian Cultural Historian LLM**: Analyzing political context")
-        response_parts.append("- **Discourse Analysis LLM**: Extracting linguistic patterns")
-        response_parts.append("- **Political Strategy LLM**: Identifying tactical rhetoric shifts")
-        response_parts.append("- **Social Context LLM**: Mapping audience and regional variations")
-        response_parts.append("")
+        corpus_path_obj = Path(corpus_path)
+        if not corpus_path_obj.exists():
+            _save_chat_message(session_id, "system", f"❌ **Error**: Corpus path not found: {corpus_path}")
+            return {'status': 'error', 'message': f'Corpus path not found: {corpus_path}'}
         
-        # Start the actual orchestrator execution
-        response_parts.append("**🎯 Live Analysis Updates Will Appear Below:**")
-        response_parts.append("---")
-        response_parts.append("")
+        # Load corpus content
+        corpus_content = _load_corpus_content(corpus_path_obj)
+        if not corpus_content:
+            _save_chat_message(session_id, "system", f"❌ **Error**: No readable files found in corpus: {corpus_path}")
+            return {'status': 'error', 'message': f'No readable files found in corpus: {corpus_path}'}
         
-        # Return initial status and continue execution in background
-        initial_response = '\n'.join(response_parts)
+        # Create research config
+        config = ResearchConfig(
+            research_question=research_question,
+            source_texts=corpus_content,
+            enable_code_execution=True
+        )
         
-        # Save the initial response
-        _save_chat_message(session_id, "system", initial_response)
+        # Update session status
+        _update_session_status(session_id, 'executing', 'executing')
         
-        # Execute the actual analysis and capture intermediate steps
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        
-        try:
-            # This will be the main execution that we'll monitor
-            results = loop.run_until_complete(
-                _execute_with_step_monitoring(session_id, orchestrator_session_id)
-            )
-            
-            # Update to completed phase
-            _update_session_status(session_id, 'completed', 'completed')
-            chat_sessions[session_id]['results'] = results
-            
-            # Finalize session
-            _finalize_session(session_id, results)
-            
-            # Create final summary
-            final_response = f"""
+        # Save initial message
+        _save_chat_message(session_id, "system", f"""🚀 **Multi-LLM Analysis Starting**
 
-✅ **Analysis Complete!**
+**Research Question**: {research_question}
+**Corpus**: {corpus_path}
+**Files Found**: {len(corpus_content.split('=== END OF FILE ===')) - 1} files
 
-**Final Results:**
-- Conversation ID: {results.get('conversation_id', 'N/A')}
-- Analysis Status: {results.get('status', 'Unknown')}
-- Total LLM Interactions: {results.get('turns', 'N/A')}
+**Analysis Process**:
+1. **Design Consultation** - Getting methodology from design LLM
+2. **Design Approval** - Auto-approving for web interface
+3. **Multi-LLM Execution** - Real expert LLMs analyzing your corpus
+4. **Synthesis** - Combining insights into final analysis
 
-**Session Location**: `research_sessions/{session_id}/`
+**⚡ Live Updates**: You'll see each expert LLM's actual analysis as it happens
+""")
+        
+        # Run orchestrator in background and monitor progress
+        def run_orchestrator():
+            try:
+                # Start orchestrator session
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                
+                # Get design consultation
+                design_response = loop.run_until_complete(
+                    orchestrator.run_design_consultation(orchestrator_session_id, "")
+                )
+                
+                # Auto-approve design for web interface
+                orchestrator.approve_design(orchestrator_session_id, True)
+                
+                # Execute analysis
+                results = loop.run_until_complete(
+                    orchestrator.execute_approved_analysis(orchestrator_session_id)
+                )
+                
+                # Update session with results
+                _update_session_status(session_id, 'completed', 'completed')
+                chat_sessions[session_id]['results'] = results
+                
+                # Create final message
+                final_message = f"""✅ **Analysis Complete!**
 
-The complete multi-LLM analysis has been saved. You can:
-- View the full conversation in the Sessions tab
-- Download the detailed analysis results
-- Start a new research session
+**Results Summary**:
+- **Conversation ID**: {results.get('conversation_id', 'N/A')}
+- **Analysis Status**: {results.get('status', 'Unknown')}
+- **Total LLM Interactions**: {results.get('turns', 'N/A')}
 
-**Research Question**: {session['research_question']}
-**Corpus**: {session['corpus_path']}"""
-            
-            _save_chat_message(session_id, "system", final_response)
-            
-            return {
-                'status': 'success',
-                'response': initial_response + final_response
-            }
-            
-        finally:
-            loop.close()
-            
-    except Exception as e:
-        error_msg = f"Analysis execution failed: {str(e)}"
-        _save_chat_message(session_id, "system", error_msg)
+**📁 Files Generated**:
+- Complete multi-LLM conversation
+- Academic-formatted analysis
+- Session metadata and manifest
+
+**🔍 View Results**: The detailed analysis is now available in the Sessions tab
+
+**💡 Key Insight**: This analysis contains actual expert LLM perspectives on your research question, not just progress summaries!
+
+**Session ID**: {session_id}
+**Research Question**: {research_question}
+**Corpus**: {corpus_path}
+"""
+                
+                _save_chat_message(session_id, "system", final_message)
+                
+                # Copy orchestrator's conversation file to web session folder
+                _copy_orchestrator_conversation(session_id, orchestrator_session_id)
+                
+                # Finalize session
+                _finalize_session(session_id, results)
+                
+                loop.close()
+                
+            except Exception as e:
+                _save_chat_message(session_id, "system", f"❌ **Analysis Error**: {str(e)}")
+                _update_session_status(session_id, 'error', 'error')
+                logging.error(f"Orchestrator execution failed: {str(e)}")
+        
+        # Start orchestrator in background thread
+        thread = threading.Thread(target=run_orchestrator)
+        thread.daemon = True
+        thread.start()
+        
+        # Start monitoring the orchestrator's conversation file for live updates
+        _start_orchestrator_monitoring(session_id, orchestrator_session_id)
+        
         return {
-            'status': 'error',
-            'message': error_msg
+            'status': 'success',
+            'response': '🚀 **Analysis Started with Real Orchestrator!**\n\nYour Lincoln/Trump inaugural address analysis is now running with actual expert LLMs. You\'ll see real-time updates as each expert contributes their analysis.',
+            'orchestrator_session_id': orchestrator_session_id
         }
+        
+    except Exception as e:
+        _save_chat_message(session_id, "system", f"❌ **Execution Error**: {str(e)}")
+        return {'status': 'error', 'response': f"❌ **Execution Error**: {str(e)}"}
+
+def _load_corpus_content(corpus_path):
+    """Load and concatenate all text files in corpus"""
+    content_parts = []
+    
+    for file_path in corpus_path.glob('**/*.txt'):
+        if file_path.is_file():
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read().strip()
+                    if content:
+                        content_parts.append(f"=== FILE: {file_path.name} ===\n{content}\n=== END OF FILE ===")
+            except Exception as e:
+                logging.warning(f"Could not read file {file_path}: {e}")
+    
+    return '\n\n'.join(content_parts)
+
+def _start_orchestrator_monitoring(session_id, orchestrator_session_id):
+    """Monitor orchestrator's conversation file for live updates"""
+    def monitor_conversation():
+        try:
+            # Find the orchestrator's conversation file
+            conversations_dir = project_root / "conversations"
+            last_check_time = time.time()
+            
+            while True:
+                time.sleep(2)  # Check every 2 seconds
+                
+                # Find the most recent conversation file for this session
+                conversation_files = list(conversations_dir.glob("*.jsonl"))
+                if not conversation_files:
+                    continue
+                
+                # Get the most recent file
+                latest_file = max(conversation_files, key=lambda f: f.stat().st_mtime)
+                
+                # Check if file has been updated since last check
+                if latest_file.stat().st_mtime <= last_check_time:
+                    continue
+                
+                # Read new entries from the file
+                try:
+                    with open(latest_file, 'r') as f:
+                        lines = f.readlines()
+                        
+                    # Process new lines
+                    for line in lines:
+                        try:
+                            entry = json.loads(line.strip())
+                            participant = entry.get('participant', 'unknown')
+                            message = entry.get('message', '')
+                            timestamp = entry.get('timestamp', '')
+                            
+                            # Skip if already processed or system messages
+                            if participant in ['system', 'user']:
+                                continue
+                            
+                            # Save to web session chat
+                            _save_chat_message(session_id, participant, message, {
+                                'timestamp': timestamp,
+                                'orchestrator_source': True
+                            })
+                            
+                        except json.JSONDecodeError:
+                            continue
+                            
+                    last_check_time = time.time()
+                    
+                except Exception as e:
+                    logging.error(f"Error reading conversation file: {e}")
+                    continue
+                
+                # Check if session is complete
+                session = chat_sessions.get(session_id)
+                if not session or session.get('phase') == 'completed':
+                    break
+                    
+        except Exception as e:
+            logging.error(f"Orchestrator monitoring failed: {e}")
+    
+    # Start monitoring in background thread
+    thread = threading.Thread(target=monitor_conversation)
+    thread.daemon = True
+    thread.start()
+
+def _copy_orchestrator_conversation(session_id, orchestrator_session_id):
+    """Copy orchestrator's conversation file to web session folder"""
+    try:
+        session = chat_sessions.get(session_id)
+        if not session:
+            return
+        
+        session_path = Path(session['session_path'])
+        if not session_path.exists():
+            return
+        
+        # Find orchestrator's conversation readable file
+        orchestrator_sessions = list((project_root / "research_sessions").glob("session_*"))
+        orchestrator_session_path = None
+        
+        for path in orchestrator_sessions:
+            if path.name.startswith("session_") and (path / "conversation_readable.md").exists():
+                orchestrator_session_path = path
+                break
+        
+        if orchestrator_session_path:
+            # Copy the readable conversation file
+            src_file = orchestrator_session_path / "conversation_readable.md"
+            dst_file = session_path / "conversation_readable.md"
+            
+            if src_file.exists():
+                import shutil
+                shutil.copy2(src_file, dst_file)
+                logging.info(f"Copied orchestrator conversation to {dst_file}")
+        
+    except Exception as e:
+        logging.error(f"Failed to copy orchestrator conversation: {e}")
 
 async def _execute_with_step_monitoring(session_id, orchestrator_session_id):
-    """Execute analysis while monitoring and reporting each step"""
-    
-    # Step 1: Start execution
-    _save_chat_message(session_id, "moderator_llm", "🎯 **Moderator LLM Starting Coordination**\n\nAnalyzing the approved methodology and determining expert LLM sequence...")
-    
-    # Execute the actual orchestrator analysis
-    results = await orchestrator.execute_approved_analysis(orchestrator_session_id)
-    
-    # Monitor the conversation log for new entries and report them
-    conversation_id = results.get('conversation_id')
-    if conversation_id:
-        _save_chat_message(session_id, "system", f"📊 **Analysis Pipeline Active**\n\nConversation ID: {conversation_id}\nLLMs are now coordinating the analysis...")
+    """Execute with step monitoring - now using real orchestrator"""
+    try:
+        # This is now handled by the real orchestrator
+        # Just wait for completion
+        session = chat_sessions.get(session_id)
+        while session and session.get('phase') != 'completed':
+            await asyncio.sleep(1)
+            session = chat_sessions.get(session_id)
         
-        # Simulate step reporting (in a real implementation, you'd hook into the orchestrator)
-        await _simulate_llm_coordination_updates(session_id)
-    
-    return results
-
-async def _simulate_llm_coordination_updates(session_id):
-    """Simulate real-time LLM coordination updates"""
-    import asyncio
-    
-    updates = [
-        ("brazilian_historian_llm", "🇧🇷 **Brazilian Cultural Historian**: Analyzing political context of 2018 election period\n\n- Mapping pre/post assassination attempt rhetoric\n- Identifying cultural touchpoints and regional messaging\n- Contextualizing populist themes within Brazilian political tradition"),
+        results = session.get('results', {}) if session else {}
+        return results
         
-        ("discourse_analyst_llm", "📝 **Discourse Analysis Expert**: Extracting linguistic patterns across 13 speech transcripts\n\n- Temporal evolution of rhetorical devices\n- Audience-specific language adaptations\n- Populist rhetoric intensity measurements"),
-        
-        ("political_strategist_llm", "🎯 **Political Strategy Expert**: Identifying tactical communication shifts\n\n- Event-driven messaging changes\n- Strategic response to campaign developments\n- Audience targeting evolution"),
-        
-        ("social_context_llm", "👥 **Social Context Analyst**: Mapping regional and demographic variations\n\n- Location-specific messaging analysis\n- Audience reception patterns\n- Cultural resonance assessment"),
-        
-        ("synthesis_llm", "🔬 **Analysis Synthesis**: Integrating multi-LLM perspectives\n\n- Cross-validating findings\n- Identifying convergent patterns\n- Preparing comprehensive analysis")
-    ]
-    
-    for llm_role, update_message in updates:
-        await asyncio.sleep(2)  # Simulate processing time
-        _save_chat_message(session_id, llm_role, update_message)
-    
-    # Final coordination update
-    await asyncio.sleep(1)
-    _save_chat_message(session_id, "moderator_llm", "🎯 **Moderator LLM**: Coordination complete. Synthesizing final analysis...")
+    except Exception as e:
+        logging.error(f"Step monitoring failed: {e}")
+        return {'status': 'error', 'message': str(e)}
 
 def _handle_execution_phase(session_id, session, message):
     """Handle messages during execution phase"""
