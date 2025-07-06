@@ -1,0 +1,20 @@
+{
+  "mission_type": "cff_v2_reconnaissance",
+  "start_time": "2025-07-06T00:40:14.561441",
+  "atomic_analyses": {
+    "identity_axis": {
+      "status": "completed",
+      "session_id": "conversation_20250706_001738_057fb622"
+    },
+    "fear_hope_axis": {
+      "status": "completed",
+      "session_id": "conversation_20250706_002516_d018610b"
+    }
+  },
+  "thin_synthesis": {
+    "status": "completed",
+    "session_id": "conversation_20250706_003307_d06e8dfa"
+  },
+  "mission_status": "completed",
+  "results_directory": "/Volumes/dev/discernus/projects/vanderveen/cff_v2_system_test_2025_01_07/atomic_results"
+}

@@ -1,0 +1,18 @@
+{
+  "analysis_type": "thin_synthesis",
+  "timestamp": "2025-07-06T00:40:14.561310",
+  "session_id": "session_20250706_003253",
+  "conversation_id": "conversation_20250706_003307_d06e8dfa",
+  "research_question": "\nYou are a CFF v2.0 synthesis specialist. I'm providing you with multiple focused analyses of the same text from different analytical perspectives.\n\nCORPUS OF ANALYSES:\n- identity_axis_analysis.json: Identity axis (Individual Dignity vs Tribal Dominance) analysis\n- fear_hope_axis_analysis.json: Fear/Hope emotional axis analysis\n- Original source text for reference\n\nYour task: Synthesize these atomic analyses into a comprehensive CFF v2.0 analysis that includes:\n\n1. **Integrated Axis Scoring**: Combine Identity and Fear/Hope axes with competitive dynamics\n2. **Cross-Axis Competitive Dynamics**: Model how Identity positioning amplifies or dilutes emotional patterns\n3. **Mathematical Consistency**: Apply proper competitive dynamics adjustments (dilution, replacement, amplification)\n4. **Confidence Harmonization**: Reconcile confidence assessments across analyses\n5. **Complete CFF v2.0 Package**: Generate full results structure with all required fields\n\nPreserve all evidence chains and reasoning from the atomic analyses. Apply competitive dynamics adjustments based on the integrated evidence. Flag any inconsistencies between atomic analyses for review.\n\nFocus especially on:\n- How tribal dominance positioning affects fear/hope competitive dynamics\n- Whether identity and emotional positioning show strategic coherence\n- Mathematical modeling of cross-axis amplification effects\n- Comprehensive confidence assessment across integrated results\n\nExpected output: Complete CFF v2.0 analysis meeting framework specification with cross-axis competitive dynamics modeling.\n",
+  "atomic_inputs": [
+    "/Volumes/dev/discernus/projects/vanderveen/cff_v2_system_test_2025_01_07/atomic_results/identity_axis_analysis.json",
+    "/Volumes/dev/discernus/projects/vanderveen/cff_v2_system_test_2025_01_07/atomic_results/fear_hope_axis_analysis.json"
+  ],
+  "status": "completed",
+  "results": {
+    "conversation_id": "conversation_20250706_003307_d06e8dfa",
+    "status": "completed",
+    "turns": 20,
+    "summary": "Multi-LLM analysis completed via moderator orchestration"
+  }
+}

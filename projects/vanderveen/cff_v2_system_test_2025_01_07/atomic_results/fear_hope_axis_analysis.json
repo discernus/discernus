@@ -1,0 +1,14 @@
+{
+  "analysis_type": "fear_hope_axis_only",
+  "timestamp": "2025-07-06T00:32:53.944516",
+  "session_id": "session_20250706_002500",
+  "conversation_id": "conversation_20250706_002516_d018610b",
+  "research_question": "\nUsing the Cohesive Flourishing Framework (CFF) v2.0, analyze ONLY the Fear/Hope emotional axis of this speech.\n\nFocus exclusively on:\n- Fear patterns: anxiety, threat perception, catastrophic thinking\n- Hope patterns: optimism, constructive vision, positive possibility  \n- Competitive dynamics between fear and hope messaging\n- Temporal patterns in emotional positioning\n- Evidence quality and confidence levels\n\nApply CFF Layer 1 (Descriptive Emotional Climate) for neutral analysis without normative judgment.\nAvoid cohesive/fragmentative language - focus purely on emotional patterns.\n\nProvide structured analysis with:\n1. Fear score (0.0-1.0) with specific evidence citations\n2. Hope score (0.0-1.0) with specific evidence citations\n3. Competitive dynamics analysis (dilution, replacement, amplification)\n4. Temporal emotional evolution patterns\n5. Confidence levels and uncertainty flags\n6. Reasoning chains for all assessments\n\nExpected format: Complete CFF v2.0 emotional climate analysis with mathematical competitive dynamics modeling.\n",
+  "status": "completed",
+  "results": {
+    "conversation_id": "conversation_20250706_002516_d018610b",
+    "status": "completed",
+    "turns": 20,
+    "summary": "Multi-LLM analysis completed via moderator orchestration"
+  }
+}
