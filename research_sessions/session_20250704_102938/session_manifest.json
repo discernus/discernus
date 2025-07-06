@@ -1,0 +1,9 @@
+{
+  "friendly_name": "Lincoln-Trump Inaugural Compare",
+  "summary": "Comparative linguistic analysis of inaugural addresses between Presidents Lincoln and Trump to identify stylistic, thematic and rhetorical differences.",
+  "key_findings": [],
+  "corpus_description": "Presidential inaugural addresses from the US National Archives, specifically Lincoln's addresses (1861, 1865) and Trump's address (2017)",
+  "session_path": "research_sessions/session_20250704_102938",
+  "timestamp": "2025-07-04T10:29:38.709424",
+  "research_question": "Corpus Path: data/inaugural_addresses\n\nI want to you know, like, understand how lincoln and trump say different stuff, so I can like create a report or something for my class today"
+}

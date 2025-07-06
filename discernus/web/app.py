@@ -30,8 +30,8 @@ app = Flask(__name__)
 # Configure Flask for academic interface
 app.config['SECRET_KEY'] = 'discernus-academic-research'
 
-# Initialize orchestrator for research sessions
-orchestrator = ThinOrchestrator(str(project_root))
+# Initialize orchestrator for research sessions (will be reinitialized per session)
+orchestrator = None
 
 # In-memory session state (simple approach)
 chat_sessions = {}
@@ -646,21 +646,26 @@ def _execute_analysis_with_realtime_updates(session_id, session, orchestrator_se
         # Run orchestrator in background and monitor progress
         def run_orchestrator():
             try:
+                # Create orchestrator with custom session path for direct logging
+                session_path = Path(chat_sessions[session_id]['session_path'])
+                from discernus.orchestration.orchestrator import ThinOrchestrator
+                session_orchestrator = ThinOrchestrator(str(project_root), str(session_path))
+                
                 # Start orchestrator session
                 loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(loop)
                 
                 # Get design consultation
                 design_response = loop.run_until_complete(
-                    orchestrator.run_design_consultation(orchestrator_session_id, "")
+                    session_orchestrator.run_design_consultation(orchestrator_session_id, "")
                 )
                 
                 # Auto-approve design for web interface
-                orchestrator.approve_design(orchestrator_session_id, True)
+                session_orchestrator.approve_design(orchestrator_session_id, True)
                 
                 # Execute analysis
                 results = loop.run_until_complete(
-                    orchestrator.execute_approved_analysis(orchestrator_session_id)
+                    session_orchestrator.execute_approved_analysis(orchestrator_session_id)
                 )
                 
                 # Update session with results
@@ -691,9 +696,6 @@ def _execute_analysis_with_realtime_updates(session_id, session, orchestrator_se
                 
                 _save_chat_message(session_id, "system", final_message)
                 
-                # Copy orchestrator's conversation file to web session folder
-                _copy_orchestrator_conversation(session_id, orchestrator_session_id)
-                
                 # Finalize session
                 _finalize_session(session_id, results)
                 
@@ -708,9 +710,6 @@ def _execute_analysis_with_realtime_updates(session_id, session, orchestrator_se
         thread = threading.Thread(target=run_orchestrator)
         thread.daemon = True
         thread.start()
-        
-        # Start monitoring the orchestrator's conversation file for live updates
-        _start_orchestrator_monitoring(session_id, orchestrator_session_id)
         
         return {
             'status': 'success',
@@ -738,110 +737,7 @@ def _load_corpus_content(corpus_path):
     
     return '\n\n'.join(content_parts)
 
-def _start_orchestrator_monitoring(session_id, orchestrator_session_id):
-    """Monitor orchestrator's conversation file for live updates"""
-    def monitor_conversation():
-        try:
-            # Find the orchestrator's conversation file
-            conversations_dir = project_root / "conversations"
-            last_check_time = time.time()
-            
-            while True:
-                time.sleep(2)  # Check every 2 seconds
-                
-                # Find the most recent conversation file for this session
-                conversation_files = list(conversations_dir.glob("*.jsonl"))
-                if not conversation_files:
-                    continue
-                
-                # Get the most recent file
-                latest_file = max(conversation_files, key=lambda f: f.stat().st_mtime)
-                
-                # Check if file has been updated since last check
-                if latest_file.stat().st_mtime <= last_check_time:
-                    continue
-                
-                # Read new entries from the file
-                try:
-                    with open(latest_file, 'r') as f:
-                        lines = f.readlines()
-                        
-                    # Process new lines
-                    for line in lines:
-                        try:
-                            entry = json.loads(line.strip())
-                            participant = entry.get('participant', 'unknown')
-                            message = entry.get('message', '')
-                            timestamp = entry.get('timestamp', '')
-                            
-                            # Skip if already processed or system messages
-                            if participant in ['system', 'user']:
-                                continue
-                            
-                            # Skip empty messages
-                            if not message.strip():
-                                continue
-                            
-                            # Save to web session chat (deduplication handled in _save_chat_message)
-                            _save_chat_message(session_id, participant, message, {
-                                'timestamp': timestamp,
-                                'orchestrator_source': True
-                            })
-                            
-                        except json.JSONDecodeError:
-                            continue
-                            
-                    last_check_time = time.time()
-                    
-                except Exception as e:
-                    logging.error(f"Error reading conversation file: {e}")
-                    continue
-                
-                # Check if session is complete
-                session = chat_sessions.get(session_id)
-                if not session or session.get('phase') == 'completed':
-                    break
-                    
-        except Exception as e:
-            logging.error(f"Orchestrator monitoring failed: {e}")
-    
-    # Start monitoring in background thread
-    thread = threading.Thread(target=monitor_conversation)
-    thread.daemon = True
-    thread.start()
-
-def _copy_orchestrator_conversation(session_id, orchestrator_session_id):
-    """Copy orchestrator's conversation file to web session folder"""
-    try:
-        session = chat_sessions.get(session_id)
-        if not session:
-            return
-        
-        session_path = Path(session['session_path'])
-        if not session_path.exists():
-            return
-        
-        # Find orchestrator's conversation readable file
-        orchestrator_sessions = list((project_root / "research_sessions").glob("session_*"))
-        orchestrator_session_path = None
-        
-        for path in orchestrator_sessions:
-            if path.name.startswith("session_") and (path / "conversation_readable.md").exists():
-                orchestrator_session_path = path
-                break
-        
-        if orchestrator_session_path:
-            # Copy the readable conversation file
-            src_file = orchestrator_session_path / "conversation_readable.md"
-            dst_file = session_path / "conversation_readable.md"
-            
-            if src_file.exists():
-                import shutil
-                shutil.copy2(src_file, dst_file)
-                logging.info(f"Copied orchestrator conversation to {dst_file}")
-        
-    except Exception as e:
-        logging.error(f"Failed to copy orchestrator conversation: {e}")
+# Removed redundant monitoring and copying functions - orchestrator now logs directly to session folder
 
 async def _execute_with_step_monitoring(session_id, orchestrator_session_id):
     """Execute with step monitoring - now using real orchestrator"""

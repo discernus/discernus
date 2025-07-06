@@ -1,0 +1,29 @@
+{
+  "friendly_name": "Campaign Rhetoric Analysis",
+  "summary": "Examination of populist rhetoric evolution and strategic deployment in Brazilian political speeches during the 2018 campaign period, with focus on audience-specific messaging.",
+  "corpus_description": "Collection of transcribed campaign speeches and public appearances from August-October 2018, including post-assassination attempt address and final campaign communications",
+  "key_metadata": {
+    "time_period": "August-October 2018",
+    "content_type": "Speech transcripts",
+    "key_events": [
+      "Ara\u00e7atuba speech",
+      "Assassination attempt",
+      "Final campaign live stream"
+    ],
+    "languages": [
+      "Portuguese"
+    ]
+  },
+  "research_focus": {
+    "primary": "Populist rhetoric evolution",
+    "secondary": "Audience-specific messaging strategies"
+  },
+  "recommended_analysis_angles": [
+    "Temporal changes in rhetoric",
+    "Audience influence on messaging",
+    "Impact of key events on discourse"
+  ],
+  "session_path": "research_sessions/session_20250704_083032",
+  "timestamp": "2025-07-04T08:30:32.412092",
+  "research_question": "I believe it shows the emergence and evolution of the candidates populist rhetoric over the course of the campaign. And I also think it shows how he strategically deploy popular rhetoric, depending on the audience."
+}
