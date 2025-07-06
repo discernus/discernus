@@ -36,14 +36,27 @@ except ImportError:
     LITELLM_AVAILABLE = False
     logging.warning("LiteLLM client not available - using mock responses")
 
+# Import knowledgenaut research infrastructure
+try:
+    from knowledgenaut import UltraThinKnowledgenaut
+    KNOWLEDGENAUT_AVAILABLE = True
+except ImportError:
+    KNOWLEDGENAUT_AVAILABLE = False
+    logging.warning("Knowledgenaut research infrastructure not available")
+
 # Import Discernus components
 from discernus.core.conversation_logger import ConversationLogger
 from discernus.core.conversation_formatter import format_conversation_to_markdown
 from discernus.core.simple_code_executor import process_llm_notebook_request, extract_code_blocks
+from discernus.core.llm_roles import get_expert_prompt, get_simulated_researcher_prompt
+from discernus.core.thin_validation import check_thin_compliance
 
-# Configure logging
+# Configure logging first
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+# THIN Architecture: For validation, run: 
+# python3 -c "from discernus.core.thin_validation import check_thin_compliance; check_thin_compliance()"
 
 
 class SessionPhase(Enum):
@@ -60,6 +73,8 @@ class ResearchConfig:
     research_question: str
     source_texts: str
     enable_code_execution: bool = True
+    dev_mode: bool = False  # Enable automated human simulation for testing
+    simulated_researcher_profile: str = "experienced_computational_social_scientist"  # Profile for AI responses
 
 
 class ThinOrchestrator:
@@ -73,11 +88,15 @@ class ThinOrchestrator:
     4. LLMs handle ALL intelligence decisions
     """
     
-    def __init__(self, project_root: str = "."):
+    def __init__(self, project_root: str = ".", custom_session_path: Optional[str] = None):
         self.project_root = Path(project_root)
+        self.custom_session_path = Path(custom_session_path) if custom_session_path else None
         
-        # Initialize components
-        self.conversation_logger = ConversationLogger(project_root)
+        # Initialize components - if custom session path is provided, log directly there
+        if self.custom_session_path:
+            self.conversation_logger = ConversationLogger(project_root, str(self.custom_session_path))
+        else:
+            self.conversation_logger = ConversationLogger(project_root)
         
         # Initialize LLM client
         if LITELLM_AVAILABLE:
@@ -93,7 +112,12 @@ class ThinOrchestrator:
     
     def _create_session_folder(self, session_id: str, config: ResearchConfig) -> Path:
         """Create session folder in research_sessions/ with proper structure"""
-        session_path = self.project_root / "research_sessions" / session_id
+        # Use custom session path if provided, otherwise use default
+        if self.custom_session_path:
+            session_path = self.custom_session_path
+        else:
+            session_path = self.project_root / "research_sessions" / session_id
+        
         session_path.mkdir(parents=True, exist_ok=True)
         
         # Create session metadata
@@ -204,12 +228,17 @@ class ThinOrchestrator:
         config = session['config']
         approved_design = session['approved_design']
         
-        # Start conversation logging
-        conversation_id = self.conversation_logger.start_conversation(
+        # Start conversation logging directly in session folder
+        session_path = session['session_path']
+        session_conversation_logger = ConversationLogger(str(self.project_root), str(session_path))
+        conversation_id = session_conversation_logger.start_conversation(
             speech_text=config.source_texts,
             research_question=config.research_question,
             participants=["moderator_llm"]  # Moderator will determine actual participants
         )
+        
+        # Use session-specific logger for this conversation
+        session['conversation_logger'] = session_conversation_logger
         
         session['conversation_id'] = conversation_id
         
@@ -227,25 +256,34 @@ class ThinOrchestrator:
         return results
     
     async def _create_session_readable_markdown(self, session_id: str, conversation_id: str):
-        """Create readable markdown file in the session folder"""
+        """Create readable markdown file in the session folder with session ID and metadata"""
         session = self.sessions[session_id]
         session_path = session['session_path']
+        config = session['config']
         
-        # Generate markdown content
-        markdown_content = format_conversation_to_markdown(conversation_id, str(self.project_root))
+        # Generate markdown content from session folder
+        markdown_content = format_conversation_to_markdown(conversation_id, str(session_path))
         
-        # Save to session folder
-        readable_file = session_path / "conversation_readable.md"
+        # Add metadata header to markdown
+        metadata_header = f"""---
+session_id: {session_id}
+conversation_id: {conversation_id}
+research_question: "{config.research_question}"
+created_at: {datetime.now().isoformat()}
+dev_mode: {config.dev_mode}
+researcher_profile: {config.simulated_researcher_profile if config.dev_mode else 'human'}
+status: completed
+---
+
+"""
+        
+        # Combine header with content
+        full_markdown = metadata_header + markdown_content
+        
+        # Save with session ID in filename
+        readable_file = session_path / f"{session_id}_conversation_readable.md"
         with open(readable_file, 'w', encoding='utf-8') as f:
-            f.write(markdown_content)
-        
-        # Also copy the JSONL file to session folder for completeness
-        jsonl_source = self.project_root / "conversations" / f"{conversation_id}.jsonl"
-        jsonl_dest = session_path / "conversation_log.jsonl"
-        
-        if jsonl_source.exists():
-            import shutil
-            shutil.copy2(jsonl_source, jsonl_dest)
+            f.write(full_markdown)
         
         logger.info(f"Created readable markdown: {readable_file}")
     
@@ -307,7 +345,7 @@ If you need code execution for analysis, write Python code in ```python blocks.
                 moderator_response = f"[MOCK] Moderator turn {turn}: Would request expert analysis and synthesize results"
             
             # Handle code execution BEFORE logging (to avoid duplicates)
-            if config.enable_code_execution and '```python' in moderator_response:
+            if config.enable_code_execution and moderator_response and '```python' in moderator_response:
                 enhanced_response = process_llm_notebook_request(
                     conversation_id, "moderator_llm", moderator_response
                 )
@@ -316,16 +354,16 @@ If you need code execution for analysis, write Python code in ```python blocks.
                     moderator_response = enhanced_response
             
             # Log moderator's response (enhanced if code was executed)
-            self.conversation_logger.log_llm_message(
+            session['conversation_logger'].log_llm_message(
                 conversation_id, "moderator_llm", moderator_response,
-                metadata={'role': 'moderator', 'turn': turn, 'code_executed': '```python' in moderator_response}
+                metadata={'role': 'moderator', 'turn': turn, 'code_executed': moderator_response and '```python' in moderator_response}
             )
             
             # Check if moderator is requesting expert input
-            if "REQUEST TO " in moderator_response:
+            if moderator_response and "REQUEST TO " in moderator_response:
                 # Extract expert request
                 expert_response = await self._handle_expert_request(
-                    conversation_id, moderator_response, config, turn
+                    conversation_id, moderator_response, config, turn, session
                 )
                 
                 # Update conversation history
@@ -347,7 +385,7 @@ Based on the expert response above, either:
 Continue the analysis.
 """
             
-            elif "FINAL ANALYSIS:" in moderator_response:
+            elif moderator_response and "FINAL ANALYSIS:" in moderator_response:
                 # Moderator has completed the analysis
                 logger.info("Moderator completed final analysis")
                 break
@@ -371,7 +409,7 @@ Either request expert input or provide your FINAL ANALYSIS.
             logger.warning("Moderator conversation reached maximum turns")
         
         # End conversation
-        self.conversation_logger.end_conversation(
+        session['conversation_logger'].end_conversation(
             conversation_id, "Multi-LLM analysis orchestrated by moderator LLM"
         )
         
@@ -386,7 +424,8 @@ Either request expert input or provide your FINAL ANALYSIS.
                                    conversation_id: str,
                                    moderator_request: str,
                                    config: ResearchConfig,
-                                   turn: int) -> str:
+                                   turn: int,
+                                   session: Dict[str, Any]) -> str:
         """
         Handle moderator's request for expert input
         
@@ -406,25 +445,19 @@ Either request expert input or provide your FINAL ANALYSIS.
         
         logger.info(f"Handling request to {expert_name}")
         
-        # Build expert prompt
-        expert_prompt = f"""
-You are {expert_name}, a specialized expert LLM.
-
-RESEARCH QUESTION: {config.research_question}
-
-SOURCE TEXTS:
-{config.source_texts}
-
-The moderator_llm has requested your expertise:
-
-MODERATOR REQUEST: {expert_request}
-
-Your Task:
-Provide your expert analysis based on your specialization. Be specific and thorough.
-If you need to perform calculations or analysis, write Python code in ```python blocks.
-
-Focus on your area of expertise and directly address the moderator's request.
-"""
+        # KNOWLEDGENAUT INTEGRATION: Execute actual research infrastructure
+        if expert_name == "knowledgenaut_agent":
+            return await self._execute_knowledgenaut_research(
+                conversation_id, expert_request, config, turn, session
+            )
+        
+        # Build specialized prompt using THIN expert system
+        expert_prompt = get_expert_prompt(
+            expert_name=expert_name,
+            research_question=config.research_question,
+            source_texts=config.source_texts,
+            expert_request=expert_request
+        )
         
         # Get expert response
         if self.llm_client:
@@ -433,21 +466,178 @@ Focus on your area of expertise and directly address the moderator's request.
             expert_response = f"[MOCK] {expert_name} would provide specialized analysis addressing: {expert_request}"
         
         # Handle code execution BEFORE logging (to avoid duplicates)
-        if config.enable_code_execution and '```python' in expert_response:
+        if config.enable_code_execution and expert_response and '```python' in expert_response:
             enhanced_response = process_llm_notebook_request(
                 conversation_id, expert_name, expert_response
             )
-            
-            if enhanced_response != expert_response:
+            if enhanced_response:
                 expert_response = enhanced_response
-        
-        # Log expert response (enhanced if code was executed)
-        self.conversation_logger.log_llm_message(
+                
+        # Log the expert response
+        session['conversation_logger'].log_llm_message(
             conversation_id, expert_name, expert_response,
-            metadata={'role': 'expert', 'turn': turn, 'requested_by': 'moderator_llm', 'code_executed': '```python' in expert_response}
+            metadata={'role': 'expert', 'turn': turn, 'requested_by': 'moderator_llm', 'code_executed': expert_response and '```python' in expert_response}
         )
         
         return expert_response
+    
+    async def _execute_knowledgenaut_research(self,
+                                            conversation_id: str,
+                                            expert_request: str,
+                                            config: ResearchConfig,
+                                            turn: int,
+                                            session: Dict[str, Any]) -> str:
+        """
+        Execute actual knowledgenaut research infrastructure
+        
+        THIN Principle: Research infrastructure executes, LLM provides intelligence
+        """
+        logger.info("🧭 Executing knowledgenaut research infrastructure")
+        
+        # Check if knowledgenaut is available
+        if not KNOWLEDGENAUT_AVAILABLE:
+            error_msg = "❌ Knowledgenaut research infrastructure not available. Please check knowledgenaut.py import."
+            logger.error(error_msg)
+            return error_msg
+        
+        try:
+            # Initialize knowledgenaut research engine
+            knowledgenaut = UltraThinKnowledgenaut()
+            
+            # Extract research question from expert request
+            research_question = self._extract_research_question(expert_request, config.research_question)
+            
+            logger.info(f"🔍 Knowledgenaut research question: {research_question}")
+            
+            # Execute research (this will return the complete research results)
+            research_results = knowledgenaut.research_question(research_question, save_results=False)
+            
+            # Format results for conversation
+            formatted_response = self._format_knowledgenaut_response(research_results, expert_request)
+            
+            # Log the knowledgenaut response
+            session['conversation_logger'].log_llm_message(
+                conversation_id, "knowledgenaut_agent", formatted_response,
+                metadata={
+                    'role': 'expert', 
+                    'turn': turn, 
+                    'requested_by': 'moderator_llm',
+                    'research_infrastructure': True,
+                    'papers_found': research_results.get('papers_found', 0),
+                    'research_question': research_question,
+                    'cost_optimization': research_results.get('cost_optimization', 'N/A')
+                }
+            )
+            
+            logger.info(f"✅ Knowledgenaut research completed - {research_results.get('papers_found', 0)} papers found")
+            return formatted_response
+            
+        except Exception as e:
+            error_msg = f"❌ Knowledgenaut research failed: {str(e)}"
+            logger.error(error_msg)
+            
+            # Log the error
+            session['conversation_logger'].log_llm_message(
+                conversation_id, "knowledgenaut_agent", error_msg,
+                metadata={
+                    'role': 'expert', 
+                    'turn': turn, 
+                    'requested_by': 'moderator_llm',
+                    'research_infrastructure': True,
+                    'error': True
+                }
+            )
+            
+            return error_msg
+    
+    def _extract_research_question(self, expert_request: str, fallback_question: str) -> str:
+        """Extract research question from expert request"""
+        # Look for explicit research questions in the request
+        request_lower = expert_request.lower()
+        
+        # Common research question patterns
+        if "research question:" in request_lower:
+            # Extract text after "research question:"
+            parts = expert_request.split("research question:", 1)
+            if len(parts) > 1:
+                return parts[1].strip()
+        
+        # If expert request seems to be a direct question, use it
+        if any(q in request_lower for q in ["what", "how", "why", "when", "where", "which"]):
+            return expert_request.strip()
+        
+        # Otherwise use the main research question
+        return fallback_question
+    
+    def _format_knowledgenaut_response(self, research_results: Dict[str, Any], expert_request: str) -> str:
+        """Format knowledgenaut research results for conversation"""
+        
+        # Extract key information
+        papers_found = research_results.get('papers_found', 0)
+        final_response = research_results.get('final_response', '')
+        synthesis = research_results.get('synthesis', '')
+        critique = research_results.get('critique', '')
+        papers = research_results.get('papers', [])
+        
+        # Build formatted response
+        response = f"""# 🧭 Knowledgenaut Research Analysis
+
+**Research Request**: {expert_request}
+
+**Research Question**: {research_results.get('question', 'N/A')}
+
+**Papers Found**: {papers_found}
+
+**Cost Optimization**: {research_results.get('cost_optimization', 'N/A')}
+
+---
+
+## 🔬 Research Synthesis
+
+{synthesis}
+
+---
+
+## 🥊 Red Team Critique
+
+{critique}
+
+---
+
+## 🎯 Final Research Analysis
+
+{final_response}
+
+---
+
+## 📚 Key Literature Found
+
+"""
+        
+        # Add top papers (limit to 5 for readability)
+        for i, paper in enumerate(papers[:5], 1):
+            response += f"""
+### {i}. {paper.get('title', 'No title')}
+
+- **Authors**: {', '.join(paper.get('authors', [])[:3])}
+- **Year**: {paper.get('year', 'Unknown')}
+- **Source**: {paper.get('source', 'Unknown')}
+- **Quality Score**: {paper.get('quality_score', 'N/A')}/5
+- **DOI**: {paper.get('doi', 'No DOI')}
+
+"""
+        
+        if papers_found > 5:
+            response += f"\n*({papers_found - 5} additional papers found but not shown for brevity)*\n"
+        
+        response += f"""
+---
+
+**Research Infrastructure**: Ultra-THIN Knowledgenaut with multi-API literature discovery
+**Analysis Date**: {research_results.get('timestamp', 'N/A')}
+"""
+        
+        return response
     
     def _build_design_prompt(self, 
                            config: ResearchConfig,
@@ -473,6 +663,10 @@ Provide a detailed design proposal including:
 - What expert perspectives are needed
 - How the conversation should be orchestrated
 - Any computational analysis required
+
+AVAILABLE EXPERT AGENTS:
+- knowledgenaut_agent: Research agent for literature discovery, citation validation, framework interrogation, and bias detection
+- Any other specialized expert LLMs you deem necessary
 
 Focus on rigorous, academically sound analysis.
 """
@@ -514,7 +708,8 @@ The moderator should orchestrate these experts in sequence, building on each oth
             'status': session['phase'].value,
             'research_question': session['config'].research_question,
             'design_iterations': len(session['design_history']),
-            'conversation_id': session.get('conversation_id')
+            'conversation_id': session.get('conversation_id'),
+            'session_path': session.get('session_path')
         }
     
     def cleanup_session(self, session_id: str) -> None:
@@ -522,6 +717,159 @@ The moderator should orchestrate these experts in sequence, building on each oth
         if session_id in self.sessions:
             del self.sessions[session_id]
             logger.info(f"Cleaned up session: {session_id}")
+
+    # Development Mode: Simulated Human Researcher
+    def _simulate_human_researcher_response(self, context: str, config: ResearchConfig) -> str:
+        """Simulate a human researcher's response for development mode"""
+        if not config.dev_mode:
+            raise ValueError("Simulated responses only available in dev_mode")
+        
+        # Use externalized THIN prompt system
+        researcher_prompt = get_simulated_researcher_prompt(
+            prompt_type='feedback',
+            researcher_profile=config.simulated_researcher_profile,
+            research_question=config.research_question,
+            context=context
+        )
+        
+        if self.llm_client:
+            response = self.llm_client.call_llm(researcher_prompt, "simulated_researcher")
+        else:
+            response = "The design looks reasonable. I'd like to see more emphasis on quantitative validation of qualitative findings, but overall the multi-expert approach should work well for this research question."
+        
+        return response
+
+    def _simulate_approval_decision(self, design_response: str, feedback: str, config: ResearchConfig) -> bool:
+        """Simulate human approval decision for development mode"""
+        if not config.dev_mode:
+            raise ValueError("Simulated approval only available in dev_mode")
+        
+        # Use externalized THIN prompt system
+        decision_prompt = get_simulated_researcher_prompt(
+            prompt_type='decision',
+            researcher_profile=config.simulated_researcher_profile,
+            research_question=config.research_question,
+            design_response=design_response,
+            feedback=feedback
+        )
+        
+        if self.llm_client:
+            decision_response = self.llm_client.call_llm(decision_prompt, "simulated_researcher_decision")
+        else:
+            decision_response = "APPROVE"
+        
+        # Parse the decision
+        decision_response = decision_response.strip().upper()
+        if decision_response.startswith("APPROVE"):
+            return True
+        else:
+            return False
+
+    async def run_automated_session(self, config: ResearchConfig) -> Dict[str, Any]:
+        """Run a complete automated session for development/testing
+        
+        This simulates the full research workflow:
+        1. Design consultation
+        2. Simulated human feedback  
+        3. Design iteration (if needed)
+        4. Simulated approval
+        5. Execution
+        
+        Returns complete session results.
+        """
+        if not config.dev_mode:
+            raise ValueError("Automated sessions require dev_mode=True")
+        
+        logger.info("🤖 Starting automated development session")
+        
+        # Start session
+        session_id = await self.start_research_session(config)
+        
+        # Design consultation loop with simulated feedback
+        max_design_iterations = 3
+        for iteration in range(max_design_iterations):
+            logger.info(f"🎨 Design iteration {iteration + 1}")
+            
+            # Get design proposal
+            if iteration == 0:
+                design_response = await self.run_design_consultation(session_id, "")
+            else:
+                # Use previous simulated feedback
+                design_response = await self.run_design_consultation(session_id, feedback)
+            
+            # Simulate human researcher feedback
+            feedback = self._simulate_human_researcher_response(design_response, config)
+            logger.info(f"🧑‍🔬 Simulated researcher feedback: {feedback[:100]}...")
+            
+            # Simulate approval decision
+            approved = self._simulate_approval_decision(design_response, feedback, config)
+            
+            if approved:
+                logger.info("✅ Design approved by simulated researcher")
+                self.approve_design(session_id, True, feedback)
+                break
+            else:
+                logger.info("🔄 Design needs revision, iterating...")
+                self.approve_design(session_id, False, feedback)
+                if iteration == max_design_iterations - 1:
+                    logger.warning("⚠️  Max design iterations reached, proceeding anyway")
+                    self.approve_design(session_id, True, "Proceeding after max iterations")
+        
+        # Execute the approved analysis
+        logger.info("🚀 Executing approved analysis")
+        results = await self.execute_approved_analysis(session_id)
+        
+        # Add session metadata to results
+        results.update({
+            'session_id': session_id,
+            'dev_mode': True,
+            'researcher_profile': config.simulated_researcher_profile,
+            'design_iterations': iteration + 1,
+            'session_path': str(self.sessions[session_id]['session_path'])
+        })
+        
+        logger.info(f"✅ Automated session completed: {session_id}")
+        return results
+
+    @classmethod
+    async def quick_analysis(cls, research_question: str, corpus_path: str, 
+                           researcher_profile: str = "experienced_computational_social_scientist") -> Dict[str, Any]:
+        """Convenience method for quick automated analysis
+        
+        Example:
+            results = await ThinOrchestrator.quick_analysis(
+                research_question="How does rhetoric differ between Lincoln and Trump?",
+                corpus_path="data/inaugural_addresses/",
+                researcher_profile="political_discourse_expert"
+            )
+        """
+        from pathlib import Path
+        
+        # Read corpus files
+        corpus_path = Path(corpus_path)
+        if corpus_path.is_file():
+            source_texts = corpus_path.read_text()
+        elif corpus_path.is_dir():
+            # Combine all text files in directory
+            texts = []
+            for file_path in corpus_path.glob("*.txt"):
+                texts.append(f"=== {file_path.name} ===\n{file_path.read_text()}\n")
+            source_texts = "\n".join(texts)
+        else:
+            raise ValueError(f"Corpus path not found: {corpus_path}")
+        
+        # Create config
+        config = ResearchConfig(
+            research_question=research_question,
+            source_texts=source_texts,
+            enable_code_execution=True,
+            dev_mode=True,
+            simulated_researcher_profile=researcher_profile
+        )
+        
+        # Run automated session
+        orchestrator = cls()
+        return await orchestrator.run_automated_session(config)
 
 
 # Keep old names for compatibility
