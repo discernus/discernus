@@ -1,4 +1,52 @@
-# Discernus: Conversational Academic Research Architecture
+# Discernus: Research Orchestration Platform
+
+## 🎯 **THIN Architecture Quick Guide for Cursor Agents**
+
+> **Make it easier to do the right thing, harder to do the wrong thing**
+
+### ✅ **THIN Principles (Do This)**
+- **Prompts** → `discernus/core/llm_roles.py` (separated from logic)
+- **Orchestration** → Raw text passing between LLMs (no parsing!)
+- **Intelligence** → In LLM prompts, not Python code
+- **Expert Agents** → Add to `EXPERT_AGENT_PROMPTS`, use `get_expert_prompt()`
+
+### ❌ **THICK Anti-Patterns (Don't Do This)**
+- Parsing JSON from LLM responses (`json.loads(response)`)
+- Hardcoded prompts in orchestrator code  
+- Complex if/else logic based on LLM responses
+- Intelligence decisions in Python rather than prompts
+
+### 🛠️ **Quick Start for Adding Expert Agents**
+```python
+# 1. Add to discernus/core/llm_roles.py:
+EXPERT_AGENT_PROMPTS['my_expert'] = """
+You are a my_expert, specializing in:
+- Your expertise area
+
+RESEARCH QUESTION: {research_question}
+SOURCE TEXTS: {source_texts}  
+MODERATOR REQUEST: {expert_request}
+
+Your Task: [Specific instructions]
+"""
+
+# 2. That's it! Orchestrator automatically uses it.
+```
+
+### 🔍 **Self-Validation**
+```python
+from discernus.core.thin_validation import check_thin_compliance, ThinHelper
+
+# Check if you're following THIN principles
+check_thin_compliance()
+
+# Get examples of correct patterns  
+ThinHelper.show_expert_pattern()
+```
+
+---
+
+## Overview
 
 Ultra-thin platform for LLM-native computational research through natural conversation with integrated code execution.
 

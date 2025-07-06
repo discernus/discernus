@@ -5,11 +5,17 @@ python-dotenv>=0.19.0      # Environment configuration
 gitpython>=3.1.0           # Conversation logging with git transparency
 litellm>=1.0.0             # Rate limiting, retries, and provider management
 anthropic>=0.7.0           # Direct Anthropic API access
+requests>=2.28.0           # HTTP requests for literature search APIs
 
 # Scientific computing (when needed)
 pandas>=1.5.0              # Data analysis
 numpy>=1.24.0              # Numerical computing
 jupyter>=1.0.0             # Jupyter Notebook support
+
+# Text analysis (commonly used by LLMs)
+nltk>=3.8                  # Natural language processing
+textblob>=0.15.3           # Sentiment analysis and text processing
+textstat>=0.7.3            # Readability metrics
 
 # Philosophy: Discernus intentionally has minimal core dependencies
 # to reduce complexity and maintain thin software philosophy

@@ -227,7 +227,32 @@ class ThinLiteLLMClient:
     
     def _map_role_to_model(self, role: str) -> str:
         """Simple role to model mapping with provider-specific format for LiteLLM"""
-        role_models = {
+        
+        # For testing/development: Use cheaper Gemini models (10-40x cheaper than Claude)
+        # Gemini 1.5 Flash: $0.13/$0.38 per 1M tokens vs Claude: $3/$15 per 1M tokens
+        
+        # Check if we have Vertex AI configured for cheaper models
+        if hasattr(self, 'vertex_config') and self.vertex_config:
+            # Use Gemini for cost optimization during testing
+            cost_optimized_models = {
+                'design': 'vertex_ai/gemini-2.5-flash',           # Design work - fast & cheap
+                'design_llm': 'vertex_ai/gemini-2.5-flash',      # Design work - fast & cheap  
+                'moderator': 'vertex_ai/gemini-2.5-pro',         # Coordination - more capable
+                'moderator_llm': 'vertex_ai/gemini-2.5-pro',     # Coordination - more capable
+                'specialist': 'vertex_ai/gemini-2.5-flash',      # Analysis - fast & cheap
+                'adversarial': 'vertex_ai/gemini-2.5-flash',     # Critique - fast & cheap
+                'analysis': 'vertex_ai/gemini-2.5-pro',          # Synthesis - more capable
+                'referee': 'vertex_ai/gemini-2.5-pro',           # Final review - more capable
+                'corpus_detective': 'vertex_ai/gemini-2.5-flash', # Detective work - fast & cheap
+                'simulated_researcher': 'vertex_ai/gemini-2.5-flash',  # Simulated human responses
+                'simulated_researcher_decision': 'vertex_ai/gemini-2.5-flash',  # Approval decisions
+                'knowledgenaut_agent': 'vertex_ai/gemini-2.5-pro'  # Research agent - more capable
+            }
+            print(f"💰 Using cost-optimized Gemini model for {role} (10-40x cheaper than Claude)")
+            return cost_optimized_models.get(role, 'vertex_ai/gemini-2.5-flash')
+        
+        # Fallback to Claude if Vertex AI not configured
+        expensive_models = {
             'design': 'claude-3-5-sonnet-20241022',
             'design_llm': 'claude-3-5-sonnet-20241022',
             'moderator': 'claude-3-5-sonnet-20241022',
@@ -236,26 +261,34 @@ class ThinLiteLLMClient:
             'adversarial': 'claude-3-5-sonnet-20241022',
             'analysis': 'claude-3-5-sonnet-20241022',
             'referee': 'claude-3-5-sonnet-20241022',
-            'corpus_detective': 'claude-3-5-sonnet-20241022'
+            'corpus_detective': 'claude-3-5-sonnet-20241022',
+            'simulated_researcher': 'claude-3-5-sonnet-20241022',
+            'simulated_researcher_decision': 'claude-3-5-sonnet-20241022',
+            'knowledgenaut_agent': 'claude-3-5-sonnet-20241022'
         }
-        return role_models.get(role, 'claude-3-5-sonnet-20241022')
+        print(f"💸 Using expensive Claude model for {role} (consider setting up Vertex AI)")
+        return expensive_models.get(role, 'claude-3-5-sonnet-20241022')
     
     def _mock_response(self, prompt: str, model_role: str) -> str:
         """Fallback to mock responses"""
-        # Simple mock responses based on role
+        # Enhanced mock responses based on role - more realistic for development
         mock_responses = {
-            'design': f"For analyzing unity vs division in inaugural addresses, I recommend this systematic methodology:\n\n**Step 1: Initial Reading**\n- Read both texts for overall themes\n- Identify key rhetorical patterns\n\n**Step 2: Theme Ranking**\n- Rank themes by frequency and prominence\n- Focus on unifying vs divisive language\n\n**Step 3: Targeted Analysis**\n- Examine specific passages for evidence\n- Quantify rhetorical devices\n\nDoes this methodology look right to you?",
-            'design_llm': f"For analyzing unity vs division in inaugural addresses, I recommend this systematic methodology:\n\n**Step 1: Initial Reading**\n- Read both texts for overall themes\n- Identify key rhetorical patterns\n\n**Step 2: Theme Ranking**\n- Rank themes by frequency and prominence\n- Focus on unifying vs divisive language\n\n**Step 3: Targeted Analysis**\n- Examine specific passages for evidence\n- Quantify rhetorical devices\n\nDoes this methodology look right to you?",
-            'moderator': f"Based on the methodology provided, I'll coordinate analysis of both inaugural addresses focusing on unity vs division themes. Let me start by examining the texts systematically...",
-            'moderator_llm': f"Based on the methodology provided, I'll coordinate analysis of both inaugural addresses focusing on unity vs division themes. Let me start by examining the texts systematically...",
-            'specialist': f"As requested, I'll analyze the specific rhetorical patterns in both texts. Looking at the evidence provided...",
-            'adversarial': f"I need to challenge some assumptions in this analysis. Have we considered alternative interpretations?",
-            'analysis': f"Synthesizing all perspectives, the key findings suggest...",
-            'referee': f"Final assessment: The methodology appears sound and the evidence supports the conclusions drawn.",
-            'corpus_detective': f"**CORPUS ANALYSIS REPORT**\n\nI've analyzed the provided corpus systematically:\n\n**Document Types:** The corpus appears to contain political speeches and addresses.\n\n**Authors/Speakers:** Based on filenames and content analysis, I can identify the primary speakers.\n\n**Time Periods:** The documents span multiple time periods as indicated by dates in filenames.\n\n**Potential Issues:** Some files may need encoding verification, and there may be duplicate versions.\n\n**Metadata Inference:** From content analysis, I can determine context, audience, and occasion for most texts.\n\n**Questions for Clarification:** Are there specific aspects of the corpus you'd like me to focus on for your research?"
+            'design': f"For analyzing the provided research question, I recommend this systematic methodology:\n\n**Step 1: Initial Reading**\n- Read all source texts for overall themes\n- Identify key patterns and concepts\n\n**Step 2: Expert Consultation**\n- Bring in knowledgenaut_agent for literature validation\n- Use specialist agents for focused analysis\n\n**Step 3: Targeted Analysis**\n- Examine specific evidence patterns\n- Quantify and qualify findings\n\nThis multi-expert approach should provide comprehensive analysis. Does this methodology look right to you?",
+            'design_llm': f"For analyzing the provided research question, I recommend this systematic methodology:\n\n**Step 1: Initial Reading**\n- Read all source texts for overall themes\n- Identify key patterns and concepts\n\n**Step 2: Expert Consultation**\n- Bring in knowledgenaut_agent for literature validation\n- Use specialist agents for focused analysis\n\n**Step 3: Targeted Analysis**\n- Examine specific evidence patterns\n- Quantify and qualify findings\n\nThis multi-expert approach should provide comprehensive analysis. Does this methodology look right to you?",
+            'moderator': f"Based on the approved methodology, I'll coordinate the multi-expert analysis. Let me start by consulting the knowledgenaut_agent for literature validation, then proceed with systematic analysis of the source texts.",
+            'moderator_llm': f"Based on the approved design, I'll coordinate the multi-expert analysis. Let me start by interpreting the design and requesting input from the first expert needed.\n\nREQUEST TO Historical_Context_Expert: Please provide historical context for the research question to establish our analytical foundation.",
+            'specialist': f"As requested, I'll analyze the specific patterns in the provided texts. Based on my examination, I can identify several key themes and provide detailed analysis of the evidence.",
+            'adversarial': f"I need to challenge some assumptions in this analysis. Have we considered alternative interpretations of the evidence? Are there potential biases in our analytical framework?",
+            'analysis': f"Synthesizing all expert perspectives, the key findings suggest significant patterns that address the research question. The evidence supports the following conclusions...",
+            'referee': f"Final assessment: The methodology appears sound and the evidence supports the conclusions drawn. The multi-expert approach has provided comprehensive coverage.",
+            'corpus_detective': f"**CORPUS ANALYSIS REPORT**\n\nI've analyzed the provided corpus systematically:\n\n**Document Types:** The corpus appears to contain political speeches and addresses.\n\n**Authors/Speakers:** Based on filenames and content analysis, I can identify the primary speakers.\n\n**Time Periods:** The documents span multiple time periods as indicated by dates in filenames.\n\n**Potential Issues:** Some files may need encoding verification, and there may be duplicate versions.\n\n**Metadata Inference:** From content analysis, I can determine context, audience, and occasion for most texts.\n\n**Questions for Clarification:** Are there specific aspects of the corpus you'd like me to focus on for your research?",
+            'simulated_researcher': f"This design looks solid overall. I appreciate the multi-expert approach and the systematic methodology. I'd like to see more emphasis on quantitative validation of qualitative findings, but the framework should work well for addressing the research question. Please proceed with the analysis.",
+            'simulated_researcher_decision': f"APPROVE",
+            'knowledgenaut_agent': f"I've conducted a thorough literature review and framework validation. Based on my analysis of academic sources, I can provide insights on the theoretical foundations, identify relevant prior work, and highlight potential gaps in the current approach. The terminology and concepts appear well-grounded in established scholarship."
         }
         
-        return mock_responses.get(model_role, "I understand the request and would analyze accordingly.")
+        # Return appropriate mock response or default
+        return mock_responses.get(model_role, "I understand the request and would analyze accordingly. [Mock response - LiteLLM API unavailable]")
 
     def get_available_models(self) -> List[str]:
         """Get list of available models based on configured API keys"""

@@ -32,9 +32,15 @@ class ConversationLogger:
     and reproducibility. No structured data extraction or analysis.
     """
     
-    def __init__(self, project_root: str = "."):
+    def __init__(self, project_root: str = ".", custom_conversations_dir: Optional[str] = None):
         self.project_root = Path(project_root)
-        self.conversations_dir = self.project_root / "conversations"
+        
+        # Use custom conversations directory if provided, otherwise use default
+        if custom_conversations_dir:
+            self.conversations_dir = Path(custom_conversations_dir)
+        else:
+            self.conversations_dir = self.project_root / "conversations"
+        
         self.conversations_dir.mkdir(exist_ok=True)
         
         # Initialize Git repo if not exists
