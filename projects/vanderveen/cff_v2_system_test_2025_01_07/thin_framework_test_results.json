@@ -1,0 +1,57 @@
+{
+  "test_suite": "THIN_Framework_Route_1",
+  "total_tests": 5,
+  "successful_tests": 4,
+  "success_rate": 0.8,
+  "overall_success": true,
+  "individual_results": [
+    {
+      "test_name": "framework_agnostic",
+      "session_id": "session_20250706_061550",
+      "framework_specified": null,
+      "success": true,
+      "message": "Architecture works without framework specification"
+    },
+    {
+      "test_name": "cff_framework_loading",
+      "framework_context_loaded": true,
+      "framework_name": "Generic Analysis Framework",
+      "dimensions_found": 1,
+      "output_requirements_present": true,
+      "success": true
+    },
+    {
+      "test_name": "enhanced_prompt_generation",
+      "prompt_length": 1898,
+      "has_framework_context": true,
+      "has_output_requirements": true,
+      "has_constraints": true,
+      "has_forbidden_behaviors": true,
+      "success": true
+    },
+    {
+      "test_name": "overwatch_detection",
+      "philosophical_drift_detected": true,
+      "drift_indicators": [
+        "philosophical_terms_7"
+      ],
+      "good_response_passes": true,
+      "json_detection_works": true,
+      "score_detection_works": true,
+      "success": true
+    },
+    {
+      "test_name": "cff_identity_axis_analysis",
+      "analysis_completed": false,
+      "session_id": null,
+      "framework_used": "cohesive_flourishing_framework_v2",
+      "error": "'NoneType' object has no attribute 'lower'",
+      "extraction_results": {
+        "extraction_failed": true,
+        "error": "'NoneType' object has no attribute 'lower'"
+      },
+      "success": false
+    }
+  ],
+  "timestamp": "2025-07-06T06:16:42.119812"
+}

@@ -38,18 +38,28 @@ except ImportError:
 
 # Import knowledgenaut research infrastructure
 try:
-    from knowledgenaut import UltraThinKnowledgenaut
+    from discernus.core.knowledgenaut import UltraThinKnowledgenaut
     KNOWLEDGENAUT_AVAILABLE = True
 except ImportError:
     KNOWLEDGENAUT_AVAILABLE = False
     logging.warning("Knowledgenaut research infrastructure not available")
 
+# Import corpus inspection infrastructure
+try:
+    from discernus.core.corpus_inspector import CorpusInspector
+    CORPUS_INSPECTOR_AVAILABLE = True
+except ImportError:
+    CORPUS_INSPECTOR_AVAILABLE = False
+    logging.warning("Corpus inspector infrastructure not available")
+
 # Import Discernus components
 from discernus.core.conversation_logger import ConversationLogger
 from discernus.core.conversation_formatter import format_conversation_to_markdown
-from discernus.core.simple_code_executor import process_llm_notebook_request, extract_code_blocks
+from discernus.core.secure_code_executor import process_llm_code_request, extract_code_blocks
 from discernus.core.llm_roles import get_expert_prompt, get_simulated_researcher_prompt
 from discernus.core.thin_validation import check_thin_compliance
+
+
 
 # Configure logging first
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -346,7 +356,7 @@ If you need code execution for analysis, write Python code in ```python blocks.
             
             # Handle code execution BEFORE logging (to avoid duplicates)
             if config.enable_code_execution and moderator_response and '```python' in moderator_response:
-                enhanced_response = process_llm_notebook_request(
+                enhanced_response = process_llm_code_request(
                     conversation_id, "moderator_llm", moderator_response
                 )
                 
@@ -451,6 +461,12 @@ Either request expert input or provide your FINAL ANALYSIS.
                 conversation_id, expert_request, config, turn, session
             )
         
+        # CORPUS DETECTIVE INTEGRATION: Execute actual file inspection infrastructure
+        if expert_name == "corpus_detective_agent":
+            return await self._execute_corpus_detective_inspection(
+                conversation_id, expert_request, config, turn, session
+            )
+        
         # Build specialized prompt using THIN expert system
         expert_prompt = get_expert_prompt(
             expert_name=expert_name,
@@ -467,7 +483,7 @@ Either request expert input or provide your FINAL ANALYSIS.
         
         # Handle code execution BEFORE logging (to avoid duplicates)
         if config.enable_code_execution and expert_response and '```python' in expert_response:
-            enhanced_response = process_llm_notebook_request(
+            enhanced_response = process_llm_code_request(
                 conversation_id, expert_name, expert_response
             )
             if enhanced_response:
@@ -544,6 +560,109 @@ Either request expert input or provide your FINAL ANALYSIS.
                     'turn': turn, 
                     'requested_by': 'moderator_llm',
                     'research_infrastructure': True,
+                    'error': True
+                }
+            )
+            
+            return error_msg
+    
+    async def _execute_corpus_detective_inspection(self,
+                                                  conversation_id: str,
+                                                  expert_request: str,
+                                                  config: ResearchConfig,
+                                                  turn: int,
+                                                  session: Dict[str, Any]) -> str:
+        """
+        Execute actual corpus inspection infrastructure
+        
+        THIN Principle: Use CorpusInspector to read files, corpus detective agent to analyze content
+        """
+        logger.info("🔍 Executing corpus detective inspection infrastructure")
+        
+        # Check if corpus inspector is available
+        if not CORPUS_INSPECTOR_AVAILABLE:
+            error_msg = "❌ Corpus inspector infrastructure not available. Please check corpus_inspector.py import."
+            logger.error(error_msg)
+            return error_msg
+        
+        try:
+            # Initialize corpus inspector
+            inspector = CorpusInspector()
+            
+            # Check if source_texts looks like a directory path
+            source_texts = config.source_texts.strip()
+            
+            if (source_texts.startswith('/') or 
+                source_texts.startswith('./') or 
+                source_texts.startswith('../') or
+                ('/' in source_texts and not source_texts.startswith('FILE:'))):
+                
+                logger.info(f"🗂️ Detected directory path: {source_texts}")
+                
+                # Read files from directory
+                files, errors = inspector.inspect_directory_corpus(source_texts)
+                
+                if not files:
+                    error_summary = "\n".join(errors) if errors else "No files found in directory"
+                    error_msg = f"❌ Could not read corpus from {source_texts}\n\nErrors:\n{error_summary}"
+                    logger.error(error_msg)
+                    return error_msg
+                
+                # Use corpus inspector to analyze with detective agent
+                analysis = await inspector.analyze_corpus_with_detective(files, config.research_question)
+                
+                # Add file reading results to analysis
+                if errors:
+                    analysis += f"\n\n⚠️ **File Reading Issues:**\n" + "\n".join(f"- {error}" for error in errors)
+                
+                # Add corpus statistics
+                stats = inspector.get_corpus_stats(files)
+                analysis += f"\n\n📊 **Corpus Statistics:**\n"
+                analysis += f"- Files read: {stats['file_count']}\n"
+                analysis += f"- Total characters: {stats['total_chars']:,}\n"
+                analysis += f"- Estimated tokens: {stats['total_tokens']:,}\n"
+                analysis += f"- File types: {', '.join(stats['file_types'])}\n"
+                analysis += f"- Average file size: {stats['avg_file_size']:,} characters\n"
+                
+                logger.info(f"✅ Corpus inspection completed - {stats['file_count']} files analyzed")
+                
+            else:
+                # Source texts are already provided as text content
+                logger.info("📄 Source texts provided as content, analyzing directly")
+                
+                # Create a single-file dict for consistency
+                files = {"provided_texts": source_texts}
+                
+                # Use corpus inspector to analyze with detective agent
+                analysis = await inspector.analyze_corpus_with_detective(files, config.research_question)
+            
+            # Log the corpus detective response
+            session['conversation_logger'].log_llm_message(
+                conversation_id, "corpus_detective_agent", analysis,
+                metadata={
+                    'role': 'expert', 
+                    'turn': turn, 
+                    'requested_by': 'moderator_llm',
+                    'corpus_inspection': True,
+                    'files_analyzed': len(files) if 'files' in locals() else 1,
+                    'inspection_type': 'directory' if '/' in source_texts else 'content'
+                }
+            )
+            
+            return analysis
+            
+        except Exception as e:
+            error_msg = f"❌ Corpus detective inspection failed: {str(e)}"
+            logger.error(error_msg)
+            
+            # Log the error
+            session['conversation_logger'].log_llm_message(
+                conversation_id, "corpus_detective_agent", error_msg,
+                metadata={
+                    'role': 'expert', 
+                    'turn': turn, 
+                    'requested_by': 'moderator_llm',
+                    'corpus_inspection': True,
                     'error': True
                 }
             )
