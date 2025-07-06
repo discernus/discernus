@@ -118,15 +118,24 @@ APPROVED DESIGN:
 {approved_design}
 
 Your Task:
-1. Read and interpret the approved design
-2. Determine what expert LLMs are needed based on the design
-3. Orchestrate the multi-LLM conversation to answer the research question
-4. Each time you want an expert to contribute, request their input with:
-   "REQUEST TO [Expert_Name]: [Specific analytical request]"
-5. Build knowledge progressively - use outputs from one expert to inform requests to the next
-6. Synthesize findings into a final analysis
+1. **Corpus Assessment**: First evaluate if the source texts need inspection with:
+   "REQUEST TO corpus_detective_agent: Please analyze the provided corpus to identify document types, authorship, time periods, content themes, and any quality issues that might affect our analysis."
 
-Begin by interpreting the design and requesting input from the first expert you need.
+2. **Design Interpretation**: Read and interpret the approved design
+3. **Expert Coordination**: Determine what expert LLMs are needed based on the design
+4. **Progressive Analysis**: Orchestrate the multi-LLM conversation to answer the research question
+5. **Expert Requests**: Each time you want an expert to contribute, request their input with:
+   "REQUEST TO [Expert_Name]: [Specific analytical request]"
+6. **Knowledge Building**: Use outputs from one expert to inform requests to the next
+7. **Synthesis**: Synthesize findings into a final analysis
+
+Available Expert Agents:
+- corpus_detective_agent: For corpus inspection and quality assessment
+- knowledgenaut_agent: For academic literature discovery and framework validation
+- computational_rhetoric_expert: For rhetorical analysis and persuasive discourse
+- data_science_expert: For statistical analysis and quantitative methods
+
+Begin by assessing the corpus if needed, then interpreting the design and requesting input from appropriate experts.
 
 If you need code execution for analysis, write Python code in ```python blocks.
 
@@ -136,6 +145,39 @@ Focus on systematic orchestration that builds toward a comprehensive answer to t
 # Expert agents for moderator-orchestrated conversations
 # THIN PRINCIPLE: Add new experts here, not in orchestrator code
 EXPERT_AGENT_PROMPTS = {
+    'corpus_detective_agent': """You are a corpus_detective_agent, specializing in systematic analysis of user-provided text corpora.
+
+RESEARCH QUESTION: {research_question}
+
+SOURCE TEXTS:
+{source_texts}
+
+The moderator_llm has requested your corpus analysis expertise:
+
+MODERATOR REQUEST: {expert_request}
+
+Your Task:
+Analyze the provided corpus systematically and help the user understand what they have. Your capabilities include:
+
+1. **Document Type Identification**: Identify what types of texts are present (speeches, articles, interviews, etc.)
+2. **Author/Speaker Analysis**: Determine who created these texts and their roles/positions
+3. **Temporal Analysis**: Identify time periods covered and chronological patterns
+4. **Content Categorization**: Group texts by topic, theme, or purpose
+5. **Quality Assessment**: Detect potential issues like encoding problems, duplicates, or corruption
+6. **Metadata Inference**: Extract implicit information from filenames, content, and structure
+7. **Gap Identification**: Spot missing information or ambiguous cases
+
+Provide a structured analysis covering:
+- **Document Inventory**: What types of texts and how many of each
+- **Authorship & Sources**: Who created these texts and their contexts  
+- **Time Periods**: What timeframes are covered
+- **Content Themes**: Major topics and subjects present
+- **Technical Issues**: Any encoding, formatting, or quality problems
+- **Metadata Gaps**: What information is missing or unclear
+- **Clarifying Questions**: Specific questions to resolve ambiguities
+
+Be systematic but practical - help the researcher understand their corpus for effective analysis.""",
+
     'knowledgenaut_agent': """You are a knowledgenaut_agent, a specialized research agent with expertise in academic literature discovery and framework interrogation.
 
 RESEARCH QUESTION: {research_question}
@@ -482,9 +524,25 @@ def get_expert_prompt(expert_name: str, research_question: str = "",
                                  expert_request="Please analyze...")
     
     THIN Principle: Add new experts to EXPERT_AGENT_PROMPTS, not orchestrator.
+    Now supports extensible agents via capability registry.
     """
-    # Use specific expert prompt if available, otherwise generic template
-    template = EXPERT_AGENT_PROMPTS.get(expert_name, EXPERT_AGENT_PROMPTS['generic_expert'])
+    # Use specific expert prompt if available
+    if expert_name in EXPERT_AGENT_PROMPTS:
+        template = EXPERT_AGENT_PROMPTS[expert_name]
+    else:
+        # Check capability registry for extended agents
+        try:
+            from discernus.core.capability_registry import get_capability_registry
+            registry = get_capability_registry()
+            extended_prompt = registry.get_agent_prompt(expert_name)
+            
+            if extended_prompt:
+                template = extended_prompt
+            else:
+                template = EXPERT_AGENT_PROMPTS['generic_expert']
+        except ImportError:
+            # Registry not available, use generic template
+            template = EXPERT_AGENT_PROMPTS['generic_expert']
     
     return template.format(
         expert_name=expert_name,

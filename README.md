@@ -2,6 +2,8 @@
 
 ## 🎯 **THIN Architecture Quick Guide for Cursor Agents**
 
+> **🚨 NEW AGENTS: Read [`AGENT_QUICK_START.md`](AGENT_QUICK_START.md) FIRST (5-minute orientation)**
+
 > **Make it easier to do the right thing, harder to do the wrong thing**
 
 ### ✅ **THIN Principles (Do This)**
@@ -57,6 +59,11 @@ Ultra-thin platform for LLM-native computational research through natural conver
 **Conversation-Native**: Analysis emerges from natural dialogue, not parsing or structured responses.
 
 **Academic Rigor**: Complete git transparency and reproducible computational workflows.
+
+## Documentation
+
+- **[Glossary](docs/GLOSSARY.md)** - System terminology and concepts
+- **[Dev Guide](docs/DEV_MODE_GUIDE.md)** - Development setup and workflows
 
 ## Quick Start
 
