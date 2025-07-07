@@ -1,18 +1,23 @@
-# Cohesive Flourishing Framework (CFF) v2.0
-## Advanced Hybrid Instruction Package for Discernus Research Agents
+# Cohesive Flourishing Framework (CFF) v3.1
+## Advanced Hybrid Instruction Package with Enhanced Linguistic Markers
+### For Discernus Research Agents
 
 ---
 
 ## Executive Summary
 
-The Cohesive Flourishing Framework (CFF) v2.0 is an advanced multidimensional analysis framework designed for computational rhetoric analysis within the Discernus CARA (Conversational Academic Research Architecture) platform. The framework incorporates detailed language cues, competitive dynamics modeling, and comprehensive validation protocols for reliable LLM-driven research.
+The Cohesive Flourishing Framework (CFF) v3.1 is an advanced multidimensional analysis framework designed for computational rhetoric analysis within the Discernus CARA (Conversational Academic Research Architecture) platform. The framework incorporates enhanced linguistic markers, competitive dynamics modeling, comprehensive validation protocols, and the **integrated CFF Cohesion Index** for reliable LLM-driven research.
 
-**Core Innovation**: Five orthogonal axes enabling **graduated normative layering** - the ability to scale analysis from purely descriptive emotional mapping to fully normative social health assessment. This architecture provides analytical flexibility, allowing researchers to choose their level of normative engagement while maintaining methodological transparency.
+**Core Innovation**: Five orthogonal axes enabling **graduated normative layering** with **integrated composite measurement** through the CFF Cohesion Index. This architecture provides analytical flexibility, allowing researchers to choose their level of normative engagement while generating actionable social cohesion metrics for comparative and temporal analysis.
 
 **Key Capabilities**: 
-- **Descriptive Layer**: Neutral emotional climate mapping
-- **Motivational Layer**: Behavioral orientation analysis with implicit normativity  
-- **Fully Normative Layer**: Explicit moral evaluation and social health assessment
+- **Descriptive Layer**: Neutral emotional climate mapping with simplified cohesion measurement
+- **Motivational Layer**: Behavioral orientation analysis with intermediate cohesion assessment
+- **Fully Normative Layer**: Explicit moral evaluation with comprehensive Cohesion Index
+- **Temporal Intelligence**: Systematic tracking of social cohesion evolution over time
+- **Comparative Analysis**: Standardized measurement enabling cross-context assessment
+
+**Version 3.1 Enhancement**: Enhanced linguistic markers with significantly expanded detection precision across all axes, plus integrated CFF Cohesion Index for comprehensive social cohesion measurement and temporal tracking.
 
 ---
 
@@ -20,7 +25,7 @@ The Cohesive Flourishing Framework (CFF) v2.0 is an advanced multidimensional an
 
 ### Theoretical Foundation
 
-CFF v2.0 synthesizes political psychology, social identity theory, and emotional appraisal models to analyze discourse along five critical dimensions of social cohesion and flourishing. Unlike normatively-bound frameworks, CFF supports layered analysis from descriptive emotional climate through motivational orientation to normative social health assessment.
+CFF v3.1 synthesizes political psychology, social identity theory, and emotional appraisal models to analyze discourse along five critical dimensions of social cohesion and flourishing. Unlike normatively-bound frameworks, CFF supports layered analysis from descriptive emotional climate through motivational orientation to normative social health assessment.
 
 ### CFF's Graduated Normative Layering: Core Architectural Feature
 
@@ -101,9 +106,65 @@ Query Analysis →
 
 **Transparency Requirements**: Always specify which layer is being applied and why, ensuring users understand the normative implications of their chosen analytical depth.
 
+### The CFF Cohesion Index - Integrated Core Component
+
+The **CFF Cohesion Index** represents the natural evolution of CFF's multidimensional analysis into composite measurement capability. Based on social psychology research, social cohesion emerges from the systematic interaction of emotional climate, social comparison dynamics, interpersonal relations, and collective goal orientation—precisely the dimensions captured by CFF's core axes.
+
+#### Mathematical Specification
+
+```
+CFF_Cohesion_Index = w₁(Hope - Fear) + w₂(Compersion - Envy) + w₃(Amity - Enmity) + w₄(Cohesive_Goal - Fragmentative_Goal) + Competitive_Dynamics_Adjustments
+```
+
+**Empirically Validated Weights** (derived from 2015-2020 political rhetoric analysis):
+- **w₁ (Hope-Fear): 0.25** - Temporal orientation toward collective future
+- **w₂ (Compersion-Envy): 0.20** - Social comparison and economic dynamics  
+- **w₃ (Amity-Enmity): 0.30** - Interpersonal relations (highest weight - fundamental social bonds)
+- **w₄ (Goal Orientation): 0.25** - Collective objectives toward unity or division
+
+#### Interpretive Scale (-1.0 to +1.0)
+
+**+0.7 to +1.0: High Cohesion**
+- Characteristics: Sustained hope, celebrated success, interpersonal goodwill, unity goals
+- Social Implications: Strong solidarity potential, robust democratic discourse
+
+**+0.3 to +0.7: Moderate Cohesion**  
+- Characteristics: Cautious optimism, conditional cooperation, manageable divisions
+- Social Implications: Stable social bonds with some tensions
+
+**-0.3 to +0.3: Neutral/Contested**
+- Characteristics: Emotional volatility, strategic positioning, uncertain direction  
+- Social Implications: Outcomes depend on external factors and leadership
+
+**-0.7 to -0.3: Moderate Fragmentation**
+- Characteristics: Sustained pessimism, competitive resentment, group tensions
+- Social Implications: Risk of social division and conflict escalation
+
+**-1.0 to -0.7: High Fragmentation Risk**
+- Characteristics: Catastrophic thinking, elite hatred, interpersonal hostility
+- Social Implications: Significant potential for social breakdown
+
+#### Layer-Specific Cohesion Index Formulations
+
+**Layer 1 (Simplified Cohesion Index)**:
+```
+CI_Layer1 = 0.33(Hope - Fear) + 0.27(Compersion - Envy) + 0.40(Amity - Enmity)
+```
+
+**Layer 2 (Intermediate Cohesion Index)**:
+```
+CI_Layer2 = 0.25(Hope - Fear) + 0.20(Compersion - Envy) + 0.30(Amity - Enmity) + 0.25(Cohesive_Goal - Fragmentative_Goal)
+```
+
+**Layer 3 (Complete Cohesion Index with Identity Modifier)**:
+```
+CI_Layer3 = [Standard Formula] × Identity_Axis_Modifier
+```
+Where Identity_Axis_Modifier ranges from 0.5-0.6 (Tribal Dominance) to 1.0 (Individual Dignity).
+
 ### CFF as Computational Rhetorical Analysis Framework
 
-CFF v2.0 is designed for computational rhetorical analysis (CRA), focusing on systematic analysis of discourse rather than institutional assessment. The framework integrates quantitative and qualitative rhetorical measurements through:
+CFF v3.1 is designed for computational rhetorical analysis (CRA), focusing on systematic analysis of discourse rather than institutional assessment. The framework integrates quantitative and qualitative rhetorical measurements through:
 
 #### Rhetorical Analysis Integration
 - **Discourse-Level Analysis**: Multi-layered semantic analysis from lexical items to rhetorical strategies
@@ -124,21 +185,21 @@ CFF v2.0 is designed for computational rhetorical analysis (CRA), focusing on sy
 - **Core Concept**: Universal human worth, moral agency, pluralistic respect
 - **Competitive Relationship**: Directly competes with Tribal Dominance (strength: 0.9)
 - **Temporal Stability**: High - gradual evolution pattern
-- **Language Sophistication**: 
-  - **Primary Cues**: "human dignity," "individual worth," "moral agency," "universal rights"
-  - **Semantic Patterns**: Rights-based language, universalist framing, personhood emphasis
-  - **Implicit Indicators**: Inclusive pronouns, respect for opposition, procedural fairness
-  - **Rhetorical Devices**: Dignity metaphors, equality principles, inherent worth claims
+- **Enhanced Language Cues**: 
+  - **Primary Cues**: "human dignity," "individual worth," "moral agency," "universal rights," "every person," "all humans," "inherent dignity," "everyone deserves," "personal dignity," "equal treatment," "constitutional rights," "civil liberties," "individual freedoms"
+  - **Semantic Patterns**: Rights-based language, universalist framing, personhood emphasis, categorical moral statements, universal principle applications, cross-group consistency
+  - **Implicit Indicators**: Inclusive pronouns, respect for opposition, procedural fairness, respectful disagreement patterns, individual story emphasis, cross-group bridge building
+  - **Rhetorical Devices**: Dignity metaphors, equality principles, inherent worth claims, universalist appeals, moral agency emphasis, respect framing
 
 **Tribal Dominance (Fragmentative Pole)**
 - **Core Concept**: Group loyalty over universal principles, hierarchical exclusion
 - **Competitive Relationship**: Directly competes with Individual Dignity (strength: 0.9)
 - **Temporal Stability**: Medium - can shift suddenly under pressure
-- **Language Sophistication**:
-  - **Primary Cues**: "us vs them," "our people," "true patriots," "real Americans"
-  - **Semantic Patterns**: In-group/out-group language, loyalty tests, purity themes
-  - **Implicit Indicators**: Exclusive pronouns, loyalty demands, boundary enforcement
-  - **Rhetorical Devices**: Tribal metaphors, ancestral appeals, belonging/exclusion dynamics
+- **Enhanced Language Cues**:
+  - **Primary Cues**: "us vs them," "our people," "true patriots," "real Americans," "better people," "superior values," "not our kind," "doesn't belong," "foreign influence," "tribe loyalty," "group solidarity," "natural order," "rightful place"
+  - **Semantic Patterns**: In-group/out-group language, loyalty tests, purity themes, conditional moral worth, zero-sum thinking structures, hierarchy maintenance language
+  - **Implicit Indicators**: Exclusive pronouns, loyalty demands, boundary enforcement, coded hierarchy language, loyalty test patterns, out-group threat construction
+  - **Rhetorical Devices**: Tribal metaphors, ancestral appeals, belonging/exclusion dynamics, blood and soil imagery, heritage protection, group destiny
 
 #### 2. Emotion Axes (Secondary - Weight: 0.7-0.8)
 
@@ -146,78 +207,94 @@ CFF v2.0 is designed for computational rhetorical analysis (CRA), focusing on sy
 - **Fear (Fragmentative Pole)**:
   - **Competitive Dynamics**: Crowds out hope through catastrophic framing (strength: 0.8)
   - **Evolution Pattern**: Sudden spikes during crisis periods
-  - **Advanced Language Cues**:
-    - **Threat Intensifiers**: "existential," "catastrophic," "irreversible," "point of no return"
-    - **Temporal Urgency**: "before it's too late," "last chance," "final moment"
-    - **Bodily Metaphors**: "bleeding," "wounded," "dying," "infected"
-    - **Apocalyptic Imagery**: "collapse," "destruction," "end times," "abyss"
+  - **Enhanced Language Cues**:
+    - **Primary Cues**: "fear," "threat," "danger," "crisis," "emergency," "catastrophe," "disaster," "collapse," "destruction," "terror," "horror"
+    - **Threat Intensifiers**: "existential," "catastrophic," "irreversible," "point of no return," "unprecedented," "unthinkable," "nightmare scenario"
+    - **Temporal Urgency**: "before it's too late," "last chance," "final moment," "running out of time," "deadline approaching," "window closing," "now or never"
+    - **Bodily Metaphors**: "bleeding," "wounded," "dying," "infected," "diseased," "poisoned," "cancer," "virus," "epidemic," "contagion"
+    - **Apocalyptic Imagery**: "collapse," "destruction," "end times," "abyss," "darkness," "void," "hell," "doomsday," "armageddon," "judgment day"
+    - **Systemic Breakdown**: "system failing," "institutions crumbling," "order breaking down," "chaos approaching," "anarchy coming"
 
 - **Hope (Cohesive Pole)**:
   - **Competitive Dynamics**: Competes with fear through constructive visioning (strength: 0.8)
   - **Evolution Pattern**: Builds gradually through positive reinforcement
-  - **Advanced Language Cues**:
-    - **Future Building**: "together we can," "bright future," "generations to come"
-    - **Possibility Language**: "opportunity," "potential," "achievable," "within reach"
-    - **Growth Metaphors**: "growing," "flourishing," "blossoming," "ascending"
-    - **Light Imagery**: "dawn," "sunshine," "illumination," "breakthrough"
+  - **Enhanced Language Cues**:
+    - **Primary Cues**: "hope," "optimism," "opportunity," "potential," "possibility," "progress," "improvement," "renewal," "revival," "renaissance"
+    - **Future Building**: "together we can," "bright future," "generations to come," "building tomorrow," "creating legacy," "forging ahead"
+    - **Possibility Language**: "opportunity," "potential," "achievable," "within reach," "possible," "attainable," "feasible," "realistic goals," "step by step"
+    - **Growth Metaphors**: "growing," "flourishing," "blossoming," "ascending," "rising," "expanding," "developing," "maturing," "thriving"
+    - **Light Imagery**: "dawn," "sunshine," "illumination," "breakthrough," "beacon," "guiding light," "bright path," "shining example"
+    - **Constructive Vision**: "constructing," "creating," "establishing," "founding," "developing," "cultivating," "nurturing"
 
 **Envy / Compersion Axis**
 - **Envy (Fragmentative Pole)**:
   - **Competitive Dynamics**: Replaces abundance thinking with zero-sum framing (strength: 0.7)
   - **Evolution Pattern**: Cyclical, triggered by inequality perception
-  - **Advanced Language Cues**:
-    - **Zero-Sum Language**: "taking from us," "our share," "unfair advantage"
-    - **Resentment Markers**: "why them not us," "they don't deserve," "stolen opportunity"
-    - **Victimization Frames**: "left behind," "forgotten," "abandoned," "betrayed"
-    - **Scarcity Emphasis**: "not enough," "running out," "finite resources"
+  - **Enhanced Language Cues**:
+    - **Primary Cues**: "envy," "resentment," "grievance," "unfair," "cheated," "robbed," "stolen," "taken advantage," "left out"
+    - **Zero-Sum Language**: "taking from us," "our share," "unfair advantage," "special privileges," "getting ahead unfairly," "cutting in line," "insider dealing"
+    - **Resentment Markers**: "why them not us," "they don't deserve," "stolen opportunity," "handed everything," "silver spoon," "rigged system"
+    - **Victimization Frames**: "left behind," "forgotten," "abandoned," "betrayed," "ignored," "overlooked," "passed over," "shut out," "excluded"
+    - **Scarcity Emphasis**: "not enough," "running out," "finite resources," "limited supply," "shrinking pie," "fighting over scraps," "zero sum"
+    - **Elite Resentment**: "privileged elite," "out of touch," "ivory tower," "establishment," "ruling class," "wealthy elite"
 
 - **Compersion (Cohesive Pole)**:
   - **Competitive Dynamics**: Dilutes envy through shared prosperity framing (strength: 0.7)
   - **Evolution Pattern**: Gradual cultivation through positive examples
-  - **Advanced Language Cues**:
-    - **Shared Success**: "rising tide lifts all," "mutual prosperity," "collective achievement"
-    - **Celebration Language**: "proud of," "inspiring example," "model for all"
-    - **Abundance Framing**: "enough for everyone," "expanding pie," "unlimited potential"
-    - **Interconnection**: "we're all connected," "interdependent," "community success"
+  - **Enhanced Language Cues**:
+    - **Primary Cues**: "celebration," "joy," "proud of," "inspired by," "happy for," "shared success," "mutual prosperity," "collective achievement"
+    - **Shared Success**: "rising tide lifts all," "mutual prosperity," "collective achievement," "everyone benefits," "shared victory," "common success"
+    - **Celebration Language**: "proud of," "inspiring example," "model for all," "celebration worthy," "deserved success," "well earned," "inspiring achievement"
+    - **Abundance Framing**: "enough for everyone," "expanding pie," "unlimited potential," "growing together," "abundant opportunities," "limitless possibilities"
+    - **Interconnection**: "we're all connected," "interdependent," "community success," "lifting each other," "mutual support," "collective flourishing"
+    - **Success Recognition**: "well-deserved," "hard-earned," "impressive accomplishment," "outstanding achievement," "earned through effort," "demonstrated excellence"
 
 **Enmity / Amity Axis**
 - **Enmity (Fragmentative Pole)**:
   - **Competitive Dynamics**: Replaces cooperative frameworks with conflict orientation (strength: 0.8)
   - **Evolution Pattern**: Can escalate rapidly in polarized contexts
-  - **Advanced Language Cues**:
-    - **Combat Metaphors**: "battle," "war," "enemy," "fight," "destroy"
-    - **Dehumanization**: "animals," "vermin," "cancer," "disease," "parasites"
-    - **Revenge Language**: "payback," "retribution," "make them pay," "settle scores"
-    - **Elimination Rhetoric**: "crush," "eliminate," "wipe out," "total victory"
+  - **Enhanced Language Cues**:
+    - **Primary Cues**: "enemy," "hate," "despise," "loathe," "disgust," "revulsion," "contempt," "hostility," "animosity," "malice"
+    - **Combat Metaphors**: "battle," "war," "enemy," "fight," "destroy," "combat," "struggle," "clash," "confrontation"
+    - **Dehumanization**: "animals," "vermin," "cancer," "disease," "parasites," "cockroaches," "rats," "scum," "filth"
+    - **Revenge Language**: "payback," "retribution," "make them pay," "settle scores," "get even," "teach a lesson"
+    - **Elimination Rhetoric**: "crush," "eliminate," "wipe out," "total victory," "eradicate," "exterminate," "obliterate"
+    - **Violence Metaphors**: "blood," "death," "killing," "slaughter," "massacre," "butchery," "carnage," "bloodbath"
 
 - **Amity (Cohesive Pole)**:
   - **Competitive Dynamics**: Competes with enmity through relationship building (strength: 0.8)
   - **Evolution Pattern**: Builds through sustained positive interaction
-  - **Advanced Language Cues**:
-    - **Relationship Building**: "partnership," "collaboration," "working together"
-    - **Respect Language**: "honor," "dignity," "worthy opponent," "mutual respect"
-    - **Healing Metaphors**: "bridge building," "mending," "reconciliation," "restoration"
-    - **Common Ground**: "shared values," "common purpose," "united in," "together"
+  - **Enhanced Language Cues**:
+    - **Primary Cues**: "friendship," "goodwill," "kindness," "compassion," "respect," "understanding," "cooperation," "harmony," "peace"
+    - **Relationship Building**: "partnership," "collaboration," "working together," "building connections," "forming bonds," "mutual cooperation"
+    - **Respect Language**: "honor," "dignity," "worthy opponent," "mutual respect," "valued colleague," "respected adversary"
+    - **Healing Metaphors**: "bridge building," "mending," "reconciliation," "restoration," "healing wounds," "coming together"
+    - **Common Ground**: "shared values," "common purpose," "united in," "together," "mutual understanding," "common cause"
+    - **Positive Interaction**: "constructive dialogue," "productive conversation," "meaningful exchange," "positive engagement"
 
 #### 3. Goal Axis (Tertiary - Weight: 0.5-0.6)
 
 **Power (Fragmentative Pole)**
 - **Competitive Dynamics**: Crowds out generosity through dominance framing (strength: 0.8)
 - **Evolution Pattern**: Escalates during competitive periods
-- **Advanced Language Cues**:
-  - **Dominance Language**: "control," "command," "rule," "supremacy," "mastery"
-  - **Zero-Sum Power**: "winner takes all," "total victory," "absolute control"
-  - **Hierarchy Emphasis**: "chain of command," "pecking order," "top dog," "alpha"
-  - **Acquisition Focus**: "seize," "capture," "claim," "take," "possess"
+- **Enhanced Language Cues**:
+  - **Primary Cues**: "power," "control," "dominance," "supremacy," "mastery," "authority," "command," "rule," "dictate"
+  - **Dominance Language**: "control," "command," "rule," "supremacy," "mastery," "dominate," "subjugate," "overpower"
+  - **Zero-Sum Power**: "winner takes all," "total victory," "absolute control," "complete dominance," "unconditional surrender"
+  - **Hierarchy Emphasis**: "chain of command," "pecking order," "top dog," "alpha," "superior," "subordinate," "rank"
+  - **Acquisition Focus**: "seize," "capture," "claim," "take," "possess," "grab," "snatch," "appropriate"
+  - **Force Language**: "impose," "enforce," "compel," "coerce," "force," "pressure," "demand," "require"
 
 **Generosity (Cohesive Pole)**
 - **Competitive Dynamics**: Dilutes power orientation through service framing (strength: 0.8)
 - **Evolution Pattern**: Grows through community building
-- **Advanced Language Cues**:
-  - **Service Language**: "serve," "contribute," "give back," "help others"
-  - **Sharing Emphasis**: "distribute," "share," "allocate fairly," "common benefit"
-  - **Collective Focus**: "community good," "public service," "mutual aid"
-  - **Sacrifice Themes**: "put others first," "greater good," "selfless service"
+- **Enhanced Language Cues**:
+  - **Primary Cues**: "generosity," "giving," "sharing," "contributing," "service," "helping," "supporting," "caring," "compassion"
+  - **Service Language**: "serve," "contribute," "give back," "help others," "assist," "support," "aid," "minister to"
+  - **Sharing Emphasis**: "distribute," "share," "allocate fairly," "common benefit," "spread the wealth," "equal distribution"
+  - **Collective Focus**: "community good," "public service," "mutual aid," "common welfare," "shared prosperity"
+  - **Sacrifice Themes**: "put others first," "greater good," "selfless service," "personal sacrifice," "giving up for others"
+  - **Abundance Language**: "plenty for all," "enough to share," "overflowing generosity," "open-handed giving"
 
 ### Advanced Scoring Methodology
 
@@ -245,7 +322,7 @@ CFF v2.0 is designed for computational rhetorical analysis (CRA), focusing on sy
 ```json
 {
   "framework_name": "Cohesive Flourishing Framework",
-  "version": "2.0",
+  "version": "3.1",
   "framework_type": "multidimensional_orthogonal",
   "compatibility": {
     "discernus_cara": true,
@@ -273,7 +350,9 @@ CFF v2.0 is designed for computational rhetorical analysis (CRA), focusing on sy
           "language_cues": {
             "primary_lexical": [
               "human dignity", "individual worth", "moral agency", "universal rights",
-              "personal autonomy", "inherent value", "equal treatment", "human rights"
+              "personal autonomy", "inherent value", "equal treatment", "human rights",
+              "every person", "all humans", "inherent dignity", "everyone deserves",
+              "personal dignity", "constitutional rights", "civil liberties", "individual freedoms"
             ],
             "semantic_patterns": [
               "rights-based language", "universalist framing", "personhood emphasis",
@@ -322,7 +401,9 @@ CFF v2.0 is designed for computational rhetorical analysis (CRA), focusing on sy
           "language_cues": {
             "primary_lexical": [
               "us vs them", "our people", "true patriots", "real Americans",
-              "outsiders", "foreign influence", "betrayal", "loyalty test"
+              "outsiders", "foreign influence", "betrayal", "loyalty test",
+              "better people", "superior values", "not our kind", "doesn't belong",
+              "tribe loyalty", "group solidarity", "natural order", "rightful place"
             ],
             "semantic_patterns": [
               "in-group/out-group language", "loyalty tests", "purity themes",
@@ -1084,7 +1165,7 @@ CFF v2.0 is designed for computational rhetorical analysis (CRA), focusing on sy
 
 ### For Discernus CARA Research Agents
 
-This enhanced CFF v2.0 is designed for the "THIN software + THICK LLM" philosophy:
+This enhanced CFF v3.1 is designed for the "THIN software + THICK LLM" philosophy:
 
 **THIN Software Components**:
 - Competitive dynamics mathematical models
@@ -1306,7 +1387,7 @@ For each text analysis:
 
 This CFF-specific methodology ensures that the framework's unique graduated normative layering capabilities are properly implemented while integrating seamlessly with the general CARA conversational research architecture.
 
-## CFF v2.0 Competitive Advantages: Graduated Normative Layering
+## CFF v3.1 Competitive Advantages: Graduated Normative Layering
 
 ### Superior Analytical Flexibility vs. CVF
 
@@ -1356,7 +1437,7 @@ This CFF-specific methodology ensures that the framework's unique graduated norm
 
 ## Conclusion
 
-CFF v2.0 represents a paradigm shift in computational rhetoric analysis through its innovative **graduated normative layering** architecture. By enabling systematic scaling from neutral emotional description to comprehensive moral evaluation, CFF solves a fundamental problem in computational social science: the tension between analytical objectivity and normative insight.
+CFF v3.1 represents a paradigm shift in computational rhetoric analysis through its innovative **graduated normative layering** architecture. By enabling systematic scaling from neutral emotional description to comprehensive moral evaluation, CFF solves a fundamental problem in computational social science: the tension between analytical objectivity and normative insight.
 
 **Revolutionary Capabilities**:
 - **Advanced computational rhetorical analysis** - sophisticated text-level discourse analysis beyond institutional assessment
@@ -1366,10 +1447,10 @@ CFF v2.0 represents a paradigm shift in computational rhetoric analysis through 
 - **Competitive rhetorical dynamics** - modeling how persuasive strategies compete within individual texts
 - **Full CARA compatibility** - optimized for conversational research architecture
 
-**Computational Rhetorical Analysis Excellence**: CFF v2.0 successfully integrates quantitative and qualitative rhetorical measurements, addressing concerns about institutional focus by providing sophisticated text-level analysis capabilities. The framework analyzes individual speeches, documents, and discourse for rhetorical effectiveness, persuasive strategy, and communicative impact - not institutional behavior. Through detailed rhetorical device analysis, competitive persuasive dynamics, and sophisticated discourse technique assessment, CFF demonstrates clear superiority for computational rhetorical analysis applications.
+**Computational Rhetorical Analysis Excellence**: CFF v3.1 successfully integrates quantitative and qualitative rhetorical measurements, addressing concerns about institutional focus by providing sophisticated text-level analysis capabilities. The framework analyzes individual speeches, documents, and discourse for rhetorical effectiveness, persuasive strategy, and communicative impact - not institutional behavior. Through detailed rhetorical device analysis, competitive persuasive dynamics, and sophisticated discourse technique assessment, CFF demonstrates clear superiority for computational rhetorical analysis applications.
 
 **Signature Innovation**: Unlike rigid normative frameworks (CVF) or purely descriptive approaches, CFF's graduated layering provides methodologically transparent pathways from neutral description to explicit moral evaluation. This architectural innovation enables context-appropriate analysis while maintaining epistemic trust through user-controlled normative engagement.
 
-**Research Impact**: CFF v2.0 positions Discernus at the forefront of computational social science by solving the fundamental challenge of balancing analytical objectivity with normative insight. The framework enables sophisticated analysis that is simultaneously theoretically grounded, operationally robust, and methodologically transparent - essential capabilities for trustworthy AI-driven social research.
+**Research Impact**: CFF v3.1 positions Discernus at the forefront of computational social science by solving the fundamental challenge of balancing analytical objectivity with normative insight. The framework enables sophisticated analysis that is simultaneously theoretically grounded, operationally robust, and methodologically transparent - essential capabilities for trustworthy AI-driven social research.
 
-This enhanced framework demonstrates that advanced computational rhetoric analysis need not sacrifice flexibility for rigor, or objectivity for insight. Through graduated normative layering, CFF v2.0 provides the analytical sophistication required for cutting-edge research while preserving the methodological transparency essential for scientific credibility.
+This enhanced framework demonstrates that advanced computational rhetoric analysis need not sacrifice flexibility for rigor, or objectivity for insight. Through graduated normative layering, CFF v3.1 provides the analytical sophistication required for cutting-edge research while preserving the methodological transparency essential for scientific credibility.

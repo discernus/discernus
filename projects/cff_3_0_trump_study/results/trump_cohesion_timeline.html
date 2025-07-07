@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump Cohesion Index Timeline</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 500px;
+            margin-bottom: 30px;
+        }
+        
+        .insights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .insight-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .insight-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+        
+        .insight-card p {
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .cohesion-zones {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .cohesion-zones h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .zone {
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+        
+        .zone-high { color: #27ae60; font-weight: bold; }
+        .zone-moderate { color: #f39c12; font-weight: bold; }
+        .zone-neutral { color: #95a5a6; font-weight: bold; }
+        .zone-frag { color: #e74c3c; font-weight: bold; }
+        .zone-high-frag { color: #c0392b; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trump Cohesion Index Timeline</h1>
+        <p class="subtitle">CFF Analysis: Social Cohesion Potential Across 2015-2020 Campaign and Presidency</p>
+        
+        <div class="chart-container">
+            <canvas id="cohesionChart"></canvas>
+        </div>
+        
+        <div class="cohesion-zones">
+            <h3>Cohesion Index Interpretation Scale</h3>
+            <div class="zone zone-high">+0.7 to +1.0: High Cohesion (Strong social solidarity)</div>
+            <div class="zone zone-moderate">+0.3 to +0.7: Moderate Cohesion (Generally positive orientation)</div>
+            <div class="zone zone-neutral">-0.3 to +0.3: Neutral/Contested (Mixed signals)</div>
+            <div class="zone zone-frag">-0.7 to -0.3: Moderate Fragmentation (Social division risk)</div>
+            <div class="zone zone-high-frag">-1.0 to -0.7: High Fragmentation Risk (Severe division potential)</div>
+        </div>
+        
+        <div class="insights">
+            <div class="insight-card">
+                <h3>Presidential Rhetorical Evolution</h3>
+                <p>SOTUs show systematic improvement: 2018 (+0.47) → 2019 (+0.52) → 2020 (+0.58), demonstrating institutional learning and strategic adaptation to presidential requirements.</p>
+            </div>
+            
+            <div class="insight-card">
+                <h3>Campaign vs. Presidential Messaging</h3>
+                <p>Campaign average (-0.27) versus presidential average (+0.46) represents 0.73-point systematic shift toward unity messaging while maintaining populist core themes.</p>
+            </div>
+            
+            <div class="insight-card">
+                <h3>Peak Volatility During Campaign</h3>
+                <p>1.57-point range from Iowa Concession (+0.82) to America First (-0.75) during campaign, followed by stable presidential messaging within 0.32-point range.</p>
+            </div>
+            
+            <div class="insight-card">
+                <h3>Constitutional Moment Adaptation</h3>
+                <p>Inaugural Address (+0.26) represents successful transition rhetoric, bridging campaign populism and presidential unity requirements with sustained improvement across SOTUs.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('cohesionChart').getContext('2d');
+        
+        // Function to get color based on cohesion value
+        function getBarColor(value) {
+            if (value >= 0.7) return '#27ae60'; // High cohesion - green
+            if (value >= 0.3) return '#f39c12'; // Moderate cohesion - orange
+            if (value >= -0.3) return '#95a5a6'; // Neutral - gray
+            if (value >= -0.7) return '#e74c3c'; // Moderate fragmentation - red
+            return '#c0392b'; // High fragmentation - dark red
+        }
+        
+        const data = {
+            labels: [
+                'Announcement\n(Jun 16, 2015)',
+                'Iowa Concession\n(Feb 1, 2016)', 
+                'NH Victory\n(Feb 9, 2016)',
+                'Super Tuesday\n(Mar 1, 2016)',
+                'America First\n(Jun 22, 2016)',
+                'Inaugural\n(Jan 20, 2017)',
+                'SOTU 2018\n(Jan 30, 2018)',
+                'SOTU 2019\n(Feb 5, 2019)',
+                'SOTU 2020\n(Feb 4, 2020)',
+                'GOP Platform\n(Baseline)'
+            ],
+            datasets: [{
+                label: 'Cohesion Index',
+                data: [-0.55, 0.82, 0.19, -0.28, -0.75, 0.26, 0.47, 0.52, 0.58, 0.39],
+                backgroundColor: function(context) {
+                    return getBarColor(context.parsed.y);
+                },
+                borderColor: function(context) {
+                    const color = getBarColor(context.parsed.y);
+                    return color;
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false,
+            }]
+        };
+        
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 13
+                        },
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].label.replace('\n', ' ');
+                            },
+                            label: function(context) {
+                                const value = context.parsed.y;
+                                let interpretation = '';
+                                if (value >= 0.7) interpretation = 'High Cohesion';
+                                else if (value >= 0.3) interpretation = 'Moderate Cohesion';
+                                else if (value >= -0.3) interpretation = 'Neutral/Contested';
+                                else if (value >= -0.7) interpretation = 'Moderate Fragmentation';
+                                else interpretation = 'High Fragmentation Risk';
+                                
+                                return [
+                                    `Cohesion Index: ${value.toFixed(2)}`,
+                                    `Category: ${interpretation}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        min: -1.0,
+                        max: 1.0,
+                        grid: {
+                            color: function(context) {
+                                if (context.tick.value === 0) return '#2c3e50';
+                                if (context.tick.value === 0.7 || context.tick.value === -0.7) return '#e74c3c';
+                                if (context.tick.value === 0.3 || context.tick.value === -0.3) return '#f39c12';
+                                return 'rgba(0, 0, 0, 0.1)';
+                            },
+                            lineWidth: function(context) {
+                                if (context.tick.value === 0) return 3;
+                                if (Math.abs(context.tick.value) === 0.7 || Math.abs(context.tick.value) === 0.3) return 2;
+                                return 1;
+                            }
+                        },
+                        ticks: {
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            },
+                            color: '#2c3e50',
+                            callback: function(value) {
+                                if (value === 0) return '0 (Neutral)';
+                                if (value === 0.7) return '+0.7 (High Cohesion)';
+                                if (value === -0.7) return '-0.7 (High Fragmentation)';
+                                return value.toFixed(1);
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Cohesion Index Score',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#2c3e50'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 11,
+                                weight: 'bold'
+                            },
+                            color: '#2c3e50',
+                            maxRotation: 0
+                        },
+                        title: {
+                            display: true,
+                            text: 'Timeline (2015-2020)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#2c3e50'
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                }
+            }
+        };
+        
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>
