@@ -59,6 +59,17 @@ soar analyze --framework pdaf --corpus speeches/ --output analysis_report.pdf
 - Every decision documented in audit trail
 - Every framework application validated against calibration standards
 
+### The Architectural Shift: From Hyperatomic to Ensemble
+
+**Why this architecture is possible now**: The **Context Window Revolution**. Previous agentic systems had to use many small, specialized agents because models couldn't handle the full context of a complex academic framework.
+
+**SOAR v2.0's approach**: With 1M+ token context windows, we can give a single, powerful AI model the *entire* framework, all its calibration materials, and the source text. This eliminates the #1 source of error in previous systems: context fragmentation.
+
+- **Old Way (Hyperatomic)**: 50 agents each analyze a tiny piece of the problem.
+- **New Way (Ensemble)**: 5 models each analyze the *entire* problem.
+
+This is our core architectural bet: full-context analysis leads to higher-quality results, and structured debate among a small ensemble provides the validation.
+
 -----
 
 ## THIN Architecture Philosophy: Orchestrate Intelligence, Don’t Build It
@@ -183,44 +194,16 @@ pdaf = PDFFramework()  # Tightly coupled
 
 ## Implementation Priorities: What Matters Most
 
-### Priority 1: Rock-Solid Framework Plugin System
+### Priority 1: AI-Powered Framework Validation
 
-**Why This Matters**: Researchers need to trust that SOAR applies their framework correctly
-**THIN Approach**: Simple file loading + LLM validation of framework specifications
+**Why This Matters**: Garbage in, garbage out. The single most important way to ensure high-quality analysis is to ensure the framework specification is clear, complete, and consistent *before* the analysis begins.
+
+**THIN Approach**: Instead of building complex runtime validation, we use an AI assistant to help the researcher perfect their framework upfront.
 
 **Quality Bar**:
-
-- Framework specifications load without modification
-- All framework calibration references preserved exactly
-- LLM validates framework completeness and internal consistency
-- Framework application matches manual implementation exactly
-
-```python
-# THIN framework validation
-async def validate_framework_spec(framework_spec):
-    validation_prompt = f"""
-    Validate this framework specification for completeness and internal consistency:
-    {json.dumps(framework_spec, indent=2)}
-    
-    Check for:
-    1. Required fields present
-    2. Dimension definitions complete
-    3. Calibration references adequate
-    4. Mathematical formulas valid
-    
-    Return validation result with specific issues if any.
-    """
-    return await llm_client.complete(validation_prompt, model="claude-3-sonnet")
-
-# Avoid: Complex rule-based validation
-def validate_framework_manually(spec):
-    errors = []
-    if 'name' not in spec:
-        errors.append("Missing name field")
-    if 'dimensions' not in spec:
-        errors.append("Missing dimensions")
-    # ... hundreds of lines checking every possible case
-```
+- The `FrameworkValidationAssistant` interactively guides a researcher to fix ambiguities, add missing calibration examples, and clarify scoring logic.
+- PDAF and CFF frameworks load successfully *after* passing through the validation assistant.
+- The system trusts a validated framework completely, treating it as an immutable source of truth.
 
 ### Priority 2: Reliable Multi-Model Coordination
 
@@ -350,71 +333,70 @@ def generate_report_from_template(results):
 
 -----
 
-## Technical Implementation Strategy
+## MVP Implementation Strategy
 
-### Phase 1: Foundation (Weeks 1-2)
+### Phase 1: Foundation with Framework Validation Focus (Weeks 1-2)
 
-**THIN Focus**: Simple service layer + LLM-validated framework loading
-**Core Services**:
-
-- ServiceRegistry (dependency injection)
-- FrameworkManager (with LLM validation)
-- ResponseValidator (LLM-powered response cleaning)
+**THIN Focus**: Simple service layer + AI-powered framework validation assistant.
+**Core Components**:
+- `ServiceRegistry` (for testability)
+- `FrameworkManager`
+- `FrameworkValidationAssistant` (the core of this phase)
+- Basic, file-based chronolog writer
 
 **Success Criteria**:
-
-- PDAF and CFF frameworks load with LLM validation
-- Service registry improves code testability
-- LLM response validation handles malformed outputs
-- No complex parsing or rule-based validation logic
+- The validation assistant helps a user improve a flawed framework spec.
+- PDAF and CFF frameworks load successfully.
+- The system architecture is demonstrably testable.
 
 ### Phase 2: Multi-Model Orchestration (Weeks 3-4)
 
-**THIN Focus**: Simple async coordination + LLM error recovery
+**THIN Focus**: Simple async coordination + LLM-powered error recovery.
 **Core Components**:
-
-- Agent spawning and basic coordination
-- LLM-powered response cleaning and validation
-- Timeout handling with graceful degradation
+- Agent spawning for a 5-model ensemble.
+- LLM-based response cleaning for malformed JSON.
+- Timeout handling and graceful failure for individual models.
 
 **Success Criteria**:
-
-- 5-model ensemble completes successfully
-- LLM fixes malformed responses automatically
-- Clear error messages for debugging
-- No complex retry state machines
+- A 5-model ensemble completes an analysis of a single text.
+- The system recovers from at least one model returning a malformed response.
 
 ### Phase 3: Structured Validation (Weeks 5-6)
 
-**THIN Focus**: LLM-orchestrated debates + LLM referee arbitration
+**THIN Focus**: LLM-orchestrated debates and LLM-referee arbitration.
 **Core Components**:
-
-- LLM debate moderator
-- LLM evidence quality assessment
-- LLM referee arbitration
+- `ModeratorAgent` to detect divergence and initiate debate.
+- `RefereeAgent` to evaluate evidence and make a final decision.
+- Audit trail that logs the key steps of the debate.
 
 **Success Criteria**:
+- A debate is successfully triggered, moderated, and arbitrated for a divergent score.
+- The audit trail clearly shows the reason for the final decision.
 
-- LLM moderator orchestrates meaningful debates
-- LLM referee evaluates evidence quality contextually
-- Audit trail captures LLM decision reasoning
-- No hardcoded debate scripts or evidence rules
+### Phase 4: MVP Validation and BYU Demo (Weeks 7-8)
 
-### Phase 4: Academic Integration (Weeks 7-8)
-
-**THIN Focus**: LLM-generated academic reports + researcher UX
+**THIN Focus**: LLM-generated reports and a simple, effective researcher CLI.
 **Core Components**:
-
-- LLM report synthesis
-- CLI interface
-- Documentation
+- `SynthesisAgent` to generate a final report.
+- A streamlined CLI for `validate`, `analyze`, `status`, `abort`, and `export`.
+- Simple deployment documentation for the BYU team.
 
 **Success Criteria**:
+- Van der Veen corpus replication completes successfully.
+- The generated report is suitable for academic review.
+- BYU researchers can run the system independently.
 
-- LLM generates publication-ready reports
-- CLI interface intuitive for researchers
-- Framework developers can add new frameworks easily
-- No template-based report generation
+-----
+
+## MVP Boundaries: What We Are NOT Building (Yet)
+
+To ensure we deliver a focused, high-quality MVP in 8 weeks, the following capabilities are explicitly **out of scope** for this initial version. They are part of our long-term vision, captured in the "Future Directions" of the main specification.
+
+1.  **No Runtime Human Intervention**: The MVP provides a read-only dashboard and an abort button. There are no features for a human to pause, edit, or steer the analysis while it's running.
+2.  **Basic Chronolog Only**: We will log key events to a simple `events.jsonl` file. There are no advanced forensic tools, hierarchical event systems, or checkpoint/resume capabilities in the MVP.
+3.  **No Overwatch Agents**: The MVP trusts the core ensemble and debate protocol. There is no higher-level meta-analysis, anomaly detection, or convergence monitoring.
+4.  **Simple, Monolithic Storage**: Each session's results are stored in a single directory. There is no chunking, indexing, or database for large-scale forensic analysis.
+5.  **Focus on Upfront Validation**: The core THIN principle for the MVP is using the `FrameworkValidationAssistant` to ensure quality *before* analysis, not building complex systems to police it during analysis.
 
 -----
 
