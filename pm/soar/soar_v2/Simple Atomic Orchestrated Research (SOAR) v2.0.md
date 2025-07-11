@@ -22,6 +22,7 @@ Create a SOAR architecture that enables researchers to:
 
 **Core Innovation**: Framework-agnostic multi-model ensemble analysis with structured debate protocols that transform LLM disagreement into academic validation strength rather than uncertainty.
 
+**Human Involvement Philosophy**: SOAR v2.0 emphasizes human expertise in framework specification and validation rather than runtime intervention. The system helps researchers create rigorous framework definitions upfront, then executes analysis autonomously with full transparency and auditability.
 -----
 
 ## Revolutionary Architecture Shift
@@ -36,6 +37,14 @@ Create a SOAR architecture that enables researchers to:
 **Context Revolution**: 1M+ token models enable complete framework analysis per model
 **No Compression Required**: Full framework specifications + reference materials within single context
 **Quality Enhancement**: Complete calibration context ensures consistent high-quality analysis
+
+### Strategic Assumptions on Model Capability
+
+**The Right Tool for the Job**: We assume that large-context models (1M+ tokens) possess sufficient reasoning capability for the bulk of our framework analysis needs, representing a major inflection point in price and performance.
+
+**Flexibility for Specialization**: The architecture remains flexible. We can employ more powerful, specialized (and potentially higher-cost) models for critical, low-token tasks like Referee arbitration where advanced reasoning is paramount.
+
+**Adapting to the Future**: If our primary models prove insufficient, the ensemble design allows us to adapt our model selection for different roles without a full architectural redesign. We are building for today's capabilities with an eye toward tomorrow's advancements.
 
 ### Structured Validation Protocol
 
@@ -90,6 +99,16 @@ LLMs generate framework-appropriate academic content rather than template-based 
 #### Quality Assurance
 
 LLMs assess methodology compliance and evidence quality through contextual understanding rather than mechanical rule checking.
+
+#### THIN Approach to Human Oversight
+
+Human oversight should follow THIN principles—use AI to determine when human input adds value rather than building complex intervention systems.
+
+**MVP Approach**:
+- Focus human attention on framework specification with AI-assisted validation
+- Provide transparency through progress indicators and audit trails
+- Defer runtime intervention systems until proven necessary
+- Trust AI orchestration while maintaining abort capability for researcher comfort
 
 ### THIN Compliance Requirements
 
@@ -217,8 +236,7 @@ quality_assurance:
 
 storage:
   results_retention_days: 90
-  audit_log_retention_days: 365
-  max_session_size_mb: 100
+  session_size_warning_mb: 50
 
 redis:
   host: "localhost"
@@ -284,6 +302,41 @@ class FrameworkInterface:
     ]
   }
 }
+```
+
+### Framework Validation Assistant
+
+MVP includes an AI-powered validation assistant to ensure framework quality upfront:
+
+```python
+class FrameworkValidationAssistant:
+    """THIN-compliant framework specification helper"""
+    
+    async def validate_framework(self, framework_spec):
+        """Interactive AI-assisted framework improvement"""
+        validation_prompt = f"""
+        Review this framework specification for completeness and clarity:
+        {framework_spec}
+        
+        Check for:
+        1. Ambiguous dimension definitions
+        2. Missing calibration examples  
+        3. Unclear measurement scales
+        4. Inconsistent scoring logic
+        5. Incomplete boundary conditions
+        
+        Suggest specific improvements in researcher-friendly language.
+        """
+        
+        feedback = await llm_client.complete(validation_prompt)
+        return feedback
+    
+    async def interactive_improvement_loop(self, researcher, framework):
+        """Guide researcher through framework refinement"""
+        while not framework.validated:
+            feedback = await self.validate_framework(framework)
+            framework = await researcher.revise(framework, feedback)
+        return framework
 ```
 
 ### Analysis Dimension Schema
@@ -690,6 +743,53 @@ QUALITY METRICS:
 
 -----
 
+## MVP Human Controls
+
+### Design Philosophy
+Rather than complex intervention systems, MVP provides simple controls that build researcher trust while maintaining system efficiency.
+
+### Minimal Control Interface
+
+```python
+class MVPResearcherControls:
+    """Simple controls for researcher confidence without complexity"""
+    
+    def __init__(self):
+        self.controls = {
+            "abort_session": self.simple_abort,
+            "view_progress": self.get_progress_indicators,
+            "adjust_speed": self.set_analysis_speed,
+            "export_audit": self.export_full_audit_trail
+        }
+    
+    async def simple_abort(self, session_id):
+        """Allow researchers to stop analysis and retrieve partial results"""
+        await redis.publish(f"soar.session.abort.{session_id}", {
+            "reason": "researcher_requested",
+            "timestamp": datetime.utcnow().isoformat()
+        })
+        return self.get_partial_results(session_id)
+    
+    def get_progress_indicators(self, session_id):
+        """Real-time progress without intervention capability"""
+        return {
+            "models_completed": self.count_completed_models(session_id),
+            "ensemble_agreement": self.calculate_agreement_percentage(session_id),
+            "debates_resolved": self.count_resolved_debates(session_id),
+            "estimated_completion": self.estimate_remaining_time(session_id)
+        }
+```
+
+### Researcher Dashboard (Read-Only)
+- Real-time progress indicators
+- Ensemble agreement percentages  
+- Current phase display
+- Estimated time to completion
+- Simple abort button
+- Post-analysis audit export
+
+-----
+
 ## Framework Integration Examples
 
 ### Example 1: PDAF Integration
@@ -822,36 +922,49 @@ QUALITY METRICS:
 }
 ```
 
+### MVP Event Types
+- `session.start` - Analysis session initiated
+- `session.end` - Analysis session completed
+- `session.abort` - Analysis session aborted
+- `analysis.start` - Model begins framework analysis
+- `analysis.complete` - Model completes framework analysis  
+- `debate.start` - Structured debate initiated
+- `debate.decision` - Referee decision made
+- `synthesis.complete` - Final report generated
+- `error` - Error occurred
+
+### MVP Storage Structure
+```
+/analyses/
+  /session_abc123/
+    events.jsonl          # All session events
+    manifest.json         # Basic session metadata
+    final_report.json     # Synthesis results
+    final_report.pdf      # Human-readable report
+```
+
 -----
 
 ## Implementation Phases
 
-### Phase 1: Service Foundation + THIN Principles (Weeks 1-2)
+### Phase 1: Foundation with Framework Validation Focus (Weeks 1-2)
 
 **Deliverables**:
-
-- Service registry implementation with dependency injection
-- Framework manager interface with LLM-based validation
-- THIN compliance configuration system
-- Framework interface definition with AI-powered validation
-
-**THIN Requirements**:
-
-- LLM validation for framework loading and response cleaning
-- Simple async coordination with intelligent error recovery
-- No complex parsing logic - LLM handles malformed responses
+- Service registry implementation
+- Framework manager with AI validation assistant
+- Interactive framework improvement loop
+- Basic chronolog writer (no complex forensics)
+- MVP configuration system
 
 **Success Metrics**:
-
-- Clean service access throughout codebase
-- LLM-validated framework loading for PDAF and CFF
-- THIN compliance monitoring and measurement
-- Improved code testability with reduced traditional logic
+- Framework validation assistant helps researchers improve specifications
+- Clean service architecture improves testability
+- Basic event logging works without over-engineering
+- PDAF and CFF frameworks load successfully
 
 ### Phase 2: Universal Ensemble Protocol with THIN Architecture (Weeks 3-4)
 
 **Deliverables**:
-
 - Framework-agnostic ensemble analysis with LLM-powered model orchestration
 - AI-based divergence detection with contextual understanding
 - LLM-moderated structured debate protocols
@@ -890,112 +1003,140 @@ QUALITY METRICS:
 - AI-generated publication-ready output for each framework
 - Framework development toolkit with LLM validation assistance
 
-### Phase 4: Production Validation with THIN Compliance (Weeks 7-8)
+### Phase 4: MVP Validation and BYU Demo (Weeks 7-8)
 
 **Deliverables**:
-
-- Large-scale multi-framework corpus analysis with AI scaling
-- AI-powered framework performance analytics
-- Academic validation across multiple research domains
-- Framework marketplace with intelligent community integration
-
-**THIN Compliance Validation**:
-
-- Code audit showing <50 lines of traditional logic per component
-- LLM-based validation replacing 90%+ of rule-based checking
-- AI content generation for all user-facing output
-- Intelligent error recovery handling 95%+ of response issues
+- Van der Veen corpus replication with PDAF
+- Basic researcher controls (abort, progress, audit)
+- Performance optimization for 100+ document analysis
+- Research-ready output generation
+- Simple deployment documentation
 
 **Success Metrics**:
-
-- Multi-framework analysis across 100+ documents with AI scaling
-- Academic adoption demonstrating AI-first architecture benefits
-- Framework performance optimization through AI-driven insights
-- THIN architecture compliance across all system components
+- Van der Veen replication shows quality improvements
+- BYU researchers can operate system independently
+- Analysis completes in reasonable time
+- Output suitable for academic publication
 
 -----
 
 ## CLI Interface Evolution
 
-### Framework-Agnostic Commands
+## MVP CLI Interface
+
+### Essential Commands
 
 ```bash
-# List available frameworks with AI-generated descriptions
-soar frameworks list --details
+# Framework validation and registration
+soar framework validate ./my_framework.json --interactive
+soar framework register ./my_framework.json
 
-# Analyze with specific framework using THIN architecture
-soar analyze --framework pdaf --version 1.0 --text speech.txt --layer descriptive
+# Analysis execution
+soar analyze --framework pdaf --version 1.0 --text speech.txt
+soar analyze --framework pdaf --corpus speeches/ --output-dir results/
 
-# Analyze with different framework
-soar analyze --framework cff --version 3.1 --text speech.txt --layer motivational
+# Progress monitoring
+soar status session_001
+soar abort session_001
 
-# Multi-framework comparison with AI synthesis
-soar analyze --frameworks pdaf,cff --text speech.txt --compare --ai-synthesis
-
-# Framework development with LLM validation
-soar framework validate ./my_framework.json --llm-check
-soar framework register ./my_framework.json --ai-optimization
-
-# Results and reports with AI content generation
-soar report session_001 --format academic --ai-generate
-soar export session_001 --format json,csv,pdf --ai-descriptions
-```
-
-### Framework Registration with THIN Compliance
-
-```bash
-# Register new framework with AI validation
-soar framework register \
-  --name "Sentiment Analysis Framework" \
-  --version "2.1" \
-  --specification ./saf_spec.json \
-  --reference-materials ./saf_corpus/ \
-  --validation-tests ./saf_tests.json \
-  --thin-compliance-check
-
-# Test framework integration with AI-powered testing
-soar framework test saf --sample-texts ./test_corpus/ --ai-validation
-
-# Framework performance analysis with LLM insights
-soar framework benchmark saf --corpus large_test_corpus/ --ai-optimization
+# Results export
+soar export session_001 --format json
+soar export session_001 --format pdf
+soar audit session_001 --output audit.jsonl
 ```
 
 -----
 
 ## Success Metrics
 
-### Technical Success (Universal with THIN Compliance)
+## MVP Success Metrics
 
-- ✅ Framework registration with LLM validation (no complex rule checking)
-- ✅ LLM-powered error recovery (no brittle parsing logic)
-- ✅ AI-based quality assessment (no mechanical validation rules)
-- ✅ Intelligent content generation (no template-based reports)
-- ✅ THIN architecture compliance (<50 lines traditional logic per component)
-- ✅ Cross-framework quality assurance with AI bias detection
-- ✅ Framework-agnostic audit trail with AI-generated methodology documentation
+### Technical Success
+- ✅ Framework validation assistant reduces specification errors by 80%
+- ✅ Ensemble analysis completes successfully for PDAF and CFF
+- ✅ Basic chronolog provides adequate audit trail
+- ✅ Van der Veen corpus processes in under 2 hours
+- ✅ Simple abort and progress monitoring work reliably
 
-### Academic Success (Multi-Domain with AI Enhancement)
+### Academic Success  
+- ✅ BYU Team Populism validates PDAF implementation
+- ✅ Output quality exceeds single-coder analysis
+- ✅ Methodology documentation suitable for publication
+- ✅ Researchers trust system without runtime intervention
 
-- ✅ Support for diverse research frameworks with AI adaptation
-- ✅ AI-generated framework-specific publication-ready output
-- ✅ Cross-framework comparative analysis with intelligent synthesis
-- ✅ Academic adoption demonstrating AI-first architecture benefits
-- ✅ Framework marketplace with AI-powered quality certification
+### User Experience Success
+- ✅ Framework specification takes <30 minutes with AI assistance
+- ✅ Researchers can operate system with minimal training
+- ✅ Progress indicators provide adequate transparency
+- ✅ Audit trails satisfy academic requirements
 
-### Ecosystem Success (Community with AI Intelligence)
+-----
 
-- ✅ Framework development toolkit with LLM validation assistance
-- ✅ AI-powered framework marketplace with intelligent quality assessment
-- ✅ Community-driven framework improvement with AI-assisted validation
-- ✅ Cross-institutional framework sharing with AI-optimized collaboration
+## Future Directions
 
-### THIN Architecture Success
+### Advanced Human-in-the-Loop Systems: The Overwatch Hierarchy
 
-- ✅ 90%+ of validation logic implemented via LLM rather than traditional code
-- ✅ AI-based error recovery handling 95%+ of response formatting issues
-- ✅ Intelligent content generation for all user-facing output
-- ✅ LLM-powered debate orchestration with contextual understanding
-- ✅ Code complexity reduction: <50 lines traditional logic per major component
+The long-term vision includes a sophisticated hierarchy of "Overwatch Agents" to ensure quality and prevent catastrophic failures at scale. This is a post-MVP capability.
+
+**Critical Failure Modes to Prevent**:
+- **Hallucination Amplification Cascades**: Where agents build upon each other's fabricated evidence.
+- **Methodology Drift Spirals**: Where the ensemble slowly reinterprets the framework to reach consensus.
+- **Resource Runaway Processes**: Where agents spawn new agents indefinitely without convergence.
+- **Confirmation Amplification Loops**: Where dissent is eliminated in favor of a confident but incorrect majority.
+
+**Overwatch Agent Hierarchy** (Post-MVP)
+- **Convergence Monitor**: Detects pathological debate patterns (e.g., endless loops).
+- **Quality Overwatch**: Identifies systematic analysis issues across multiple sessions.
+- **Anomaly Monitor**: Flags unusual patterns in scoring or evidence.
+- **Resource Monitor**: Prevents cost overruns and runaway processes.
+
+**Implementation Example**:
+```python
+class OverwatchSystem:
+    """Future: AI-powered monitoring with intelligent human escalation"""
+    
+    def __init__(self):
+        self.monitoring_agents = {
+            "convergence_monitor": ConvergenceOverwatch(),
+            "quality_monitor": QualityOverwatch(), 
+            "bias_monitor": BiasOverwatch(),
+            "cost_monitor": ResourceOverwatch(),
+            "anomaly_monitor": AnomalyOverwatch()
+        }
+```
+
+### Progressive Trust Model: Earning Autonomy
+
+Expanded agent autonomy will be earned through demonstrated reliability across a series of trust levels.
+
+- **Level 1: Constrained Template Selection (2026)**: Meta-orchestrator selects from pre-validated analysis patterns.
+- **Level 2: Parameter Optimization (2027)**: Dynamically sizes ensembles and selects agent types within validated patterns.
+- **Level 3: Pattern Adaptation (2028+)**: Composes novel analysis patterns from validated components for edge cases.
+- **Level 4: Framework Extension (2029+)**: Suggests framework improvements after extensive analysis, requiring human expert approval.
+
+### Mandatory Safety Architecture
+
+To enable this future, the MVP must be built on a foundation that can support these mandatory safety guardrails.
+
+- **Framework Immutability**: Core specifications are treated as read-only, validated with cryptographic hashes.
+- **Evidence Verification Chain**: All evidence citations are mechanically verified against the source text before being used.
+- **Resource Limitation**: Hard limits on agent count, session duration, and token consumption prevent runaways.
+- **Truth Decay Prevention**: Analysis is continuously validated against immutable calibration references to prevent drift.
+- **Human Escalation Protocols**: A multi-level system for notifying humans of failures and requesting approval for novel actions.
+
+---
+
+## Summary of Key MVP Simplifications
+
+1. **No runtime intervention** - Focus on upfront framework validation
+2. **Basic chronolog only** - Simple JSONL, no complex forensics  
+3. **Minimal human controls** - Progress viewing and abort only
+4. **No Overwatch agents** - Trust AI orchestration for MVP
+5. **Simple storage** - One JSONL file per session
+6. **Read-only dashboard** - No complex interaction capabilities
+7. **Framework validation focus** - Help researchers specify correctly upfront
+
+These edits maintain SOAR's innovative architecture while focusing MVP development on essential capabilities that demonstrate value to researchers. Complex features are preserved in Future Directions for implementation based on actual user needs.
 
 -----
 
