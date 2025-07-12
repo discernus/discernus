@@ -3,7 +3,7 @@
 **Date**: July 12, 2025  
 **Project**: SOAR PDAF v1.0 Validation Study  
 **Status**: ✅ Complete blind experiment setup - ready for analysis execution  
-**Git Branch**: `dev` (pushed with commit 30cc18a)
+**Git Branch**: `dev` (pushed with commit b76b2ca)
 
 ---
 
@@ -58,10 +58,12 @@ projects/soar_2_pdaf_poc/blind/
 │   ├── speaker_f.txt           # King 2017 House floor speech (scrubbed)
 │   ├── speaker_g.txt           # Sanders 2025 oligarchy speech (scrubbed)
 │   └── speaker_h.txt           # AOC 2025 oligarchy speech (scrubbed)
-└── pdaf_assets/
-    ├── Populist Discourse Analysis Framework (PDAF) v1.0.md
-    ├── SOAR PDAF Agent Spawning.md
-    └── [9 calibration packet files - one per anchor]
+├── pdaf_assets/
+│   ├── Populist Discourse Analysis Framework (PDAF) v1.0.md
+│   ├── SOAR PDAF Agent Spawning.md
+│   └── [9 calibration packet files - one per anchor]
+└── results/                     # Where SOAR system writes analysis results
+    └── .gitkeep                # Ensures empty folder is tracked by git
 ```
 
 ## 🎯 RESEARCH HYPOTHESES
@@ -156,10 +158,11 @@ The blind experiment is completely prepared with:
 - ✅ Self-contained asset structure following THIN principles
 - ✅ Comprehensive framework and calibration materials
 - ✅ Clear success criteria and validation protocols
+- ✅ Dedicated results folder for SOAR system output
 
 **Next Agent Mission**: Execute SOAR analysis on the blind experiment and generate comprehensive PDAF validation results.
 
 ---
 
-**Git Status**: All changes committed and pushed to `dev` branch (commit 30cc18a)
+**Git Status**: All changes committed and pushed to `dev` branch (commit b76b2ca)
 **Ready for handoff**: Complete context provided for seamless continuation 
