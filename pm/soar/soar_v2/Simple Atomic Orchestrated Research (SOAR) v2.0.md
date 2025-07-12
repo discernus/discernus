@@ -964,6 +964,380 @@ class MVPResearcherControls:
 
 -----
 
+## Implementation Priorities: What Matters Most
+
+### Priority 1: Cost Transparency & Budget Controls
+
+**Why This Matters**: Cost anxiety is the #1 adoption blocker. Researchers, especially in academia, are extremely budget-conscious. Without upfront cost estimation and budget controls, users will be too afraid to try the system.
+
+**THIN Approach**: Use LiteLLM's cost estimation utilities + simple budget enforcement rather than building complex cost tracking systems.
+
+**Quality Bar**:
+- Accurate cost estimation within 15% of actual costs using `litellm.utils.estimate_cost()`
+- Hard budget limits that abort analysis before exceeding researcher's budget
+- Fail-fast gate: 3k word analysis must complete under $0.40 and 90 seconds
+- Adaptive ensemble reduction when budget is tight
+
+```python
+# THIN cost control implementation
+async def estimate_and_enforce_budget(framework: str, text: str, budget: float):
+    # Use LiteLLM for cost estimation
+    total_tokens = estimate_framework_tokens(framework) + estimate_text_tokens(text)
+    estimated_cost = litellm.utils.estimate_cost(total_tokens)
+    
+    if estimated_cost > budget:
+        raise BudgetExceededError(f"Estimated cost ${estimated_cost} exceeds budget ${budget}")
+    
+    # Simple budget enforcement, not complex tracking
+    return {"estimated_cost": estimated_cost, "budget_remaining": budget - estimated_cost}
+
+# Avoid: Complex cost tracking systems
+class ComplexCostTracker:
+    # ... hundreds of lines of cost accounting logic
+    # This reimplements functionality that LiteLLM already provides
+```
+
+### Priority 2: Academic Validation with Krippendorff's Alpha
+
+**Why This Matters**: This is the most important addition. Academic credibility requires industry-standard inter-rater reliability metrics. Krippendorff's Alpha is the gold standard for measuring agreement between multiple raters (our ensemble models).
+
+**THIN Approach**: Use existing statistical libraries (like `krippendorff` package) + LLM interpretation rather than implementing complex statistical calculations.
+
+**Quality Bar**:
+- Calculate Krippendorff's Alpha ≥ 0.6 vs. gold standard corpus
+- Inter-LLM Alpha ≥ 0.5 for ensemble reliability
+- Fail CI builds if reliability falls below thresholds
+- Include Alpha scores in all academic reports
+
+```python
+# THIN academic validation implementation
+async def calculate_reliability_metrics(ensemble_results: List[AnalysisResult]) -> ReliabilityReport:
+    import krippendorff
+    
+    # Convert ensemble scores to reliability matrix (simple data transformation)
+    reliability_data = convert_to_reliability_matrix(ensemble_results)
+    alpha = krippendorff.alpha(reliability_data, level_of_measurement='interval')
+    
+    # Use LLM to interpret the statistical result
+    interpretation_prompt = f"""
+    Krippendorff's Alpha score: {alpha}
+    
+    Interpret this reliability score for academic researchers:
+    - What does this score mean for research validity?
+    - Should researchers trust these results for publication?
+    - How does this compare to manual coding reliability?
+    """
+    
+    interpretation = await llm_client.complete(interpretation_prompt)
+    
+    return ReliabilityReport(alpha=alpha, interpretation=interpretation)
+
+# Avoid: Implementing statistical calculations from scratch
+def calculate_alpha_manually(data):
+    # ... hundreds of lines of statistical computation
+    # This reimplements well-tested statistical libraries
+```
+
+### Priority 3: Durable Persistence & Audit Trails
+
+**Why This Matters**: Academic research requires audit-grade durability. A research audit trail that can be lost in a server crash is not an audit trail at all. This builds institutional trust.
+
+**THIN Approach**: Use Redis AOF + S3/MinIO backup rather than building complex database systems.
+
+**Quality Bar**:
+- Redis with `appendfsync=always` for crash-safe logging
+- Immutable backup to S3/MinIO after each job completion
+- Content hash verification for audit trail integrity
+- Simple JSONL format for easy analysis and debugging
+
+```python
+# THIN durable persistence implementation
+class DurableAuditLogger:
+    def __init__(self):
+        # Configure Redis for crash-safe logging (simple config change)
+        self.redis_client = redis.Redis()
+        self.redis_client.config_set('appendonly', 'yes')
+        self.redis_client.config_set('appendfsync', 'always')
+    
+    async def log_audit_event(self, session_id: str, event: Dict):
+        # Simple append-only logging
+        event_with_id = {**event, "event_id": str(uuid.uuid4())}
+        await self.redis_client.lpush(f"audit:{session_id}", json.dumps(event_with_id))
+    
+    async def create_immutable_backup(self, session_id: str):
+        # Simple S3 backup with content hash
+        audit_log = await self._get_complete_log(session_id)
+        content_hash = hashlib.sha256(audit_log.encode()).hexdigest()
+        
+        await self.s3_client.put_object(
+            Bucket="audit-logs",
+            Key=f"{session_id}/{datetime.utcnow().isoformat()}.jsonl",
+            Body=audit_log,
+            Metadata={"content_hash": content_hash, "immutable": "true"}
+        )
+
+# Avoid: Complex database schemas
+class ComplexAuditDatabase:
+    # ... hundreds of lines of database design and ORM mapping
+    # This adds complexity without improving reliability
+```
+
+### Priority 4: AI-Powered Framework Validation
+
+**Why This Matters**: Garbage in, garbage out. The single most important way to ensure high-quality analysis is to ensure the framework specification is clear, complete, and consistent *before* the analysis begins.
+
+**THIN Approach**: Instead of building complex runtime validation, we use an AI assistant to help the researcher perfect their framework upfront.
+
+**Quality Bar**:
+- The `FrameworkValidationAssistant` interactively guides a researcher to fix ambiguities, add missing calibration examples, and clarify scoring logic.
+- PDAF and CFF frameworks load successfully *after* passing through the validation assistant.
+- The system trusts a validated framework completely, treating it as an immutable source of truth.
+
+### Priority 5: Reliable Multi-Model Coordination
+
+**Why This Matters**: Ensemble validation only works if all models complete analysis successfully
+**THIN Approach**: Simple async coordination + LLM-powered error recovery
+
+**Quality Bar**:
+
+- Handles model failures without breaking ensemble
+- LLM-powered recovery from malformed responses
+- Partial results better than complete failure
+- Clear error reporting for debugging
+
+```python
+# THIN multi-model coordination
+async def ensemble_analysis(agents: List[Agent], context: AnalysisContext) -> EnsembleResult:
+    results = []
+    failures = []
+    
+    # Simple async coordination
+    async with asyncio.timeout(context.timeout_minutes * 60):
+        responses = await asyncio.gather(*[agent.analyze(context) for agent in agents], 
+                                       return_exceptions=True)
+    
+    # LLM-powered error recovery
+    for i, response in enumerate(responses):
+        if isinstance(response, Exception):
+            failures.append((agents[i], response))
+        elif not is_valid_json(response):
+            # Use LLM to fix malformed response
+            fixed_response = await response_validator.clean_response(response, context.schema)
+            results.append(fixed_response)
+        else:
+            results.append(response)
+    
+    if len(results) < MIN_ENSEMBLE_SIZE:
+        raise InsufficientAnalysisError(f"Only {len(results)} models completed successfully")
+    
+    return EnsembleResult(results, failures)
+
+# Avoid: Complex retry logic and response parsing
+def robust_ensemble_with_retries(agents):
+    # ... complex state machines for retry logic
+    # ... brittle response parsing with regex
+    # ... reimplements intelligence that LLMs have
+```
+
+### Priority 6: Evidence-Based Structured Debates
+
+**Why This Matters**: This is SOAR's key innovation—turning model disagreement into validation strength
+**THIN Approach**: LLM moderator orchestrates debates, LLM referee arbitrates based on evidence quality
+
+**Quality Bar**:
+
+- LLM moderator detects meaningful disagreements and orchestrates structured debates
+- LLM referee evaluates evidence quality rather than mechanical text matching
+- Complete audit trail of debate process
+- Framework-appropriate debate standards maintained
+
+```python
+# THIN debate orchestration
+class DebateModerator:
+    async def orchestrate_debate(self, disagreement: Disagreement, framework: Framework):
+        moderation_prompt = f"""
+        Framework: {framework.name}
+        Disagreement: Models scored dimension '{disagreement.dimension}' as {disagreement.scores}
+        
+        Orchestrate a structured debate:
+        1. Ask each model to defend their score with textual evidence
+        2. Allow one round of rebuttals
+        3. Summarize evidence quality for referee
+        
+        Generate specific prompts for each debate round.
+        """
+        
+        debate_plan = await llm_client.complete(moderation_prompt, model="claude-3-sonnet")
+        return await self.execute_debate_plan(debate_plan, disagreement)
+
+# Avoid: Hardcoded debate scripts
+def orchestrate_debate_manually(disagreement):
+    # Send fixed prompt: "Defend your score with evidence"
+    # Parse responses with regex
+    # Apply hardcoded evidence evaluation rules
+    # Misses nuanced debate dynamics and framework-specific requirements
+```
+
+### Priority 7: Academic-Grade Output Generation
+
+**Why This Matters**: Researchers need publication-ready methodology documentation
+**THIN Approach**: LLM synthesizes results into framework-appropriate academic reports
+
+**Quality Bar**:
+
+- LLM generates methodology section suitable for peer review
+- Framework-specific interpretation and significance
+- Complete audit trail from input to output
+- Reproducible analysis documentation
+
+```python
+# THIN report generation
+async def generate_academic_report(analysis_results: EnsembleResult, 
+                                 framework: Framework) -> AcademicReport:
+    report_prompt = f"""
+    Generate an academic report for this {framework.name} analysis:
+    
+    Results: {analysis_results.summary}
+    Framework: {framework.description}
+    Methodology: Ensemble analysis with structured debate validation
+    
+    Include:
+    1. Executive summary with key findings
+    2. Methodology section suitable for peer review
+    3. Framework-specific interpretation of results
+    4. Complete analysis transparency for reproducibility
+    
+    Write in academic style appropriate for {framework.academic_domain} journals.
+    """
+    
+    return await llm_client.complete(report_prompt, model="claude-3-opus")
+
+# Avoid: Template-based report generation
+def generate_report_from_template(results):
+    template = load_template("academic_report.txt")
+    # Fill in blanks with mechanical substitution
+    # Misses framework-specific interpretation and academic writing quality
+```
+
+-----
+
+## THIN Decision-Making Framework
+
+### When Facing Implementation Choices
+
+**1. Choose LLM Intelligence Over Complex Logic**
+
+```python
+# THIN: Use LLM contextual understanding
+async def assess_evidence_quality(evidence, framework_context):
+    prompt = f"Framework: {framework_context}\nEvidence: {evidence}\nAssess quality and appropriateness:"
+    return await llm_client.complete(prompt)
+
+# Avoid: Rule-based evidence scoring
+def score_evidence_mechanically(evidence):
+    score = 0
+    if len(evidence.text_span) > 10: score += 0.2
+    if evidence.marker_type in VALID_MARKERS: score += 0.3
+    # ... many more hardcoded rules that miss context
+```
+
+**2. Choose Proven Libraries Over Custom Implementation**
+
+```python
+# THIN: Use LiteLLM for cost estimation
+estimated_cost = litellm.utils.estimate_cost(total_tokens)
+
+# THIN: Use krippendorff package for reliability
+alpha = krippendorff.alpha(reliability_data, level_of_measurement='interval')
+
+# Avoid: Reimplementing statistical calculations or cost tracking
+def calculate_cost_manually():
+    # ... hundreds of lines reimplementing LiteLLM functionality
+```
+
+**3. Choose Simple Configuration Over Complex Systems**
+
+```python
+# THIN: Simple Redis AOF configuration
+redis_client.config_set('appendonly', 'yes')
+redis_client.config_set('appendfsync', 'always')
+
+# Avoid: Complex database design
+class ComplexAuditSchema:
+    # ... hundreds of lines of database tables and relationships
+```
+
+**4. Choose Upfront Prevention Over Runtime Policing**
+
+```python
+# THIN: Cost estimation before analysis
+if estimated_cost > budget:
+    raise BudgetExceededError("Cost exceeds budget")
+
+# THIN: Framework validation before analysis  
+validated_framework = await validation_assistant.validate(framework)
+
+# Avoid: Complex runtime monitoring systems
+class RuntimeCostMonitor:
+    # ... complex real-time cost tracking during analysis
+```
+
+-----
+
+## MVP Boundaries: What We Are NOT Building (Yet)
+
+To ensure we deliver a focused, high-quality MVP in 8 weeks, the following capabilities are explicitly **out of scope** for this initial version. They are part of our long-term vision, captured in the "Future Directions" of the main specification.
+
+1.  **No Runtime Human Intervention**: The MVP provides a read-only dashboard and an abort button. There are no features for a human to pause, edit, or steer the analysis while it's running.
+2.  **Basic Chronolog Only**: We will log key events to Redis AOF with S3/MinIO backup. There are no advanced forensic tools, hierarchical event systems, or checkpoint/resume capabilities in the MVP.
+3.  **No Overwatch Agents**: The MVP trusts the core ensemble and debate protocol. There is no higher-level meta-analysis, anomaly detection, or convergence monitoring.
+4.  **Simple, Monolithic Storage**: Each session's results are stored in a single directory with immutable backup. There is no chunking, indexing, or database for large-scale forensic analysis.
+5.  **Focus on Upfront Validation**: The core THIN principle for the MVP is using cost estimation and framework validation to ensure quality *before* analysis, not building complex systems to police it during analysis.
+
+**Added MVP Requirements**:
+6.  **Cost Transparency**: Upfront estimation and budget controls to build user trust
+7.  **Academic Validation**: Krippendorff's Alpha for statistical credibility
+8.  **Durable Persistence**: Crash-safe audit logs for institutional confidence
+9.  **Offline Capability**: Secure deployment for institutional requirements
+
+-----
+
+## Success Indicators During Development
+
+### Week 2 Check: Trust-Building Foundation Solid?
+
+- [ ] Cost estimation using LiteLLM within 15% accuracy
+- [ ] Budget controls prevent cost overruns
+- [ ] Fail-fast gate: 3k word analysis under $0.40 and 90 seconds
+- [ ] Framework validation assistant improves specifications
+- [ ] Redis AOF persistence survives system crashes
+
+### Week 4 Check: Academic Credibility Established?
+
+- [ ] Krippendorff's Alpha calculation works correctly
+- [ ] Alpha ≥ 0.6 vs. gold standard corpus
+- [ ] Inter-LLM Alpha ≥ 0.5 for ensemble reliability
+- [ ] Reliability metrics included in all outputs
+- [ ] Simple async coordination completes ensembles
+
+### Week 6 Check: Institutional Trust Built?
+
+- [ ] Immutable audit backup to S3/MinIO after job completion
+- [ ] Content hash verification for audit trail integrity
+- [ ] Structured debates with evidence-based arbitration
+- [ ] Complete audit trail from input to final decision
+- [ ] No data loss during system failures
+
+### Week 8 Check: Production Readiness Achieved?
+
+- [ ] Van der Veen corpus replication with reliability metrics
+- [ ] Academic-quality reports suitable for peer review
+- [ ] Offline mode for secure institutional deployment
+- [ ] BYU researchers can operate system independently
+- [ ] Cost transparency builds user confidence
+
+-----
+
 ## Implementation Phases
 
 ### Phase 1: Fix SOAR 1.0 Foundation - Get Sample Project Working (Weeks 1-2)
@@ -971,6 +1345,10 @@ class MVPResearcherControls:
 **Core Philosophy**: "Make the existing failing test pass with framework-agnostic THIN infrastructure"
 
 **Key Deliverables**:
+- **Service Registry Implementation**: Simple dependency injection container for cleaner code organization (already spec'd)
+- **Framework Manager Interface**: Clean abstraction for framework operations with THIN validation (already spec'd)  
+- **Framework Validation Assistant**: AI-powered framework specification helper with interactive improvement loop (already spec'd)
+- **Basic Configuration Management**: YAML configuration system with cost controls, model selection, offline mode (already spec'd)
 - Fix framework-agnostic orchestration gap: Framework context must reach analysis agents
 - Implement THIN validation agent spawning with framework-specific instructions
 - Establish framework-agnostic agent communication protocols
@@ -978,6 +1356,10 @@ class MVPResearcherControls:
 - Basic cost estimation and budget controls using LiteLLM
 
 **Success Metrics**:
+- Service Registry improves code testability and organization
+- Framework Manager loads and validates PDAF and CFF frameworks successfully
+- Framework Validation Assistant helps researchers improve flawed specifications
+- Configuration system externalizes key parameters for operational tuning
 - `soar_cff_sample_project` analysis completes successfully with framework-guided results
 - Framework specification reaches analysis agents and influences output
 - Systematic framework application visible in results (not generic text analysis)
@@ -985,6 +1367,7 @@ class MVPResearcherControls:
 - Fail-fast gate: 3k word analysis under $0.40 and 90 seconds
 
 **Critical Dependencies Resolved**:
+- Foundational infrastructure components (Service Registry, Framework Manager, Validation Assistant, Configuration)
 - Framework context propagation through orchestration pipeline
 - Agent spawning with framework-specific instructions (not framework-specific code)
 - Framework-agnostic validation agent that can handle any framework specification
