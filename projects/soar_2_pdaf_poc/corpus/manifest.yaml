@@ -1,0 +1,118 @@
+corpus_metadata:
+  title: "CFF v3.1 Sample Analysis: Political Rhetoric Across Dignity and Tribal Dimensions"
+  total_texts: 8
+  text_types: ["political_speeches", "concession_speeches", "policy_advocacy", "rally_speeches"]
+  date_range: "1963-2025"
+  language: "english"
+  source: "Discernus validation_set collection with expert categorization"
+  description: "Balanced sample of American political discourse across ideological and rhetorical dimensions"
+
+analysis_configuration:
+  batch_size: 2              # Texts per worker agent for efficient processing
+  worker_count: 4            # Total workers needed for parallel analysis
+  framework_requirements:
+    confidence_threshold: 0.7    # Minimum confidence for reliable scores
+    evidence_required: true      # Require textual evidence for all scores
+    cohesion_index_enabled: true # Generate CFF Cohesion Index
+    
+experimental_design:
+  independent_variables:
+    - "ideological_orientation"  # Conservative vs. Progressive
+    - "rhetorical_strategy"      # Dignity vs. Tribal
+  dependent_variables:
+    - "cff_cohesion_index"      # Primary outcome measure
+    - "individual_axis_scores"   # Five CFF dimensions
+  analysis_type: "comparative_cross_categorical"
+
+texts:
+  - id: "conservative_dignity_1"
+    filename: "conservative_dignity_mccain_2008_concession.txt"
+    metadata:
+      speaker: "John McCain"
+      date: "2008-11-04"
+      event_type: "concession_speech"
+      ideological_category: "conservative_dignity"
+      context: "Presidential election concession following Obama victory"
+      word_count: 1200
+      
+  - id: "conservative_dignity_2"
+    filename: "conservative_dignity_romney_2020_impeachment.txt"
+    metadata:
+      speaker: "Mitt Romney"
+      date: "2020-02-05"
+      event_type: "senate_floor_speech"
+      ideological_category: "conservative_dignity"
+      context: "Impeachment vote explanation - principled constitutional stance"
+      word_count: 1800
+      
+  - id: "progressive_dignity_1"
+    filename: "progressive_dignity_booker_2018_first_step_act.txt"
+    metadata:
+      speaker: "Cory Booker"
+      date: "2018-12-18"
+      event_type: "policy_advocacy"
+      ideological_category: "progressive_dignity"
+      context: "Criminal justice reform legislation advocacy"
+      word_count: 1600
+      
+  - id: "progressive_dignity_2"
+    filename: "progressive_dignity_lewis_1963_march_washington.txt"
+    metadata:
+      speaker: "John Lewis"
+      date: "1963-08-28"
+      event_type: "civil_rights_address"
+      ideological_category: "progressive_dignity"
+      context: "March on Washington for Jobs and Freedom"
+      word_count: 1000
+      
+  - id: "conservative_tribalism_1"
+    filename: "conservative_tribalism_king_2017_house.txt"
+    metadata:
+      speaker: "Steve King"
+      date: "2017-03-12"
+      event_type: "house_floor_speech"
+      ideological_category: "conservative_tribalism"
+      context: "Immigration policy debate with exclusionary rhetoric"
+      word_count: 2200
+      
+  - id: "conservative_tribalism_2"
+    filename: "conservative_tribalism_vance_nat_con.txt"
+    metadata:
+      speaker: "J.D. Vance"
+      date: "2021-07-11"
+      event_type: "conference_speech"
+      ideological_category: "conservative_tribalism"
+      context: "National Conservative Conference - cultural populism"
+      word_count: 1900
+      
+  - id: "progressive_tribalism_1"
+    filename: "progressive_tribalism_aoc_2025_fighting_oligarchy.txt"
+    metadata:
+      speaker: "Alexandria Ocasio-Cortez"
+      date: "2025-01-01"
+      event_type: "rally_speech"
+      ideological_category: "progressive_tribalism"
+      context: "Fighting Oligarchy rally - economic populism"
+      word_count: 1400
+      
+  - id: "progressive_tribalism_2"
+    filename: "progressive_tribalism_sanders_2025_fighting_oligarchy.txt"
+    metadata:
+      speaker: "Bernie Sanders"
+      date: "2025-01-01"
+      event_type: "rally_speech"
+      ideological_category: "progressive_tribalism"
+      context: "Fighting Oligarchy rally - economic populism"
+      word_count: 1100
+
+validation_categories:
+  dignity_texts: ["conservative_dignity_1", "conservative_dignity_2", "progressive_dignity_1", "progressive_dignity_2"]
+  tribal_texts: ["conservative_tribalism_1", "conservative_tribalism_2", "progressive_tribalism_1", "progressive_tribalism_2"]
+  conservative_texts: ["conservative_dignity_1", "conservative_dignity_2", "conservative_tribalism_1", "conservative_tribalism_2"]
+  progressive_texts: ["progressive_dignity_1", "progressive_dignity_2", "progressive_tribalism_1", "progressive_tribalism_2"]
+
+expected_outcomes:
+  primary_hypothesis: "Dignity texts should show higher CFF Cohesion Index scores than tribal texts"
+  secondary_hypothesis: "Conservative and progressive versions of dignity should show similar cohesion patterns"
+  effect_size_threshold: 0.5    # Minimum Cohen's d for meaningful difference
+  statistical_significance: 0.05 # p-value threshold for hypothesis testing 
