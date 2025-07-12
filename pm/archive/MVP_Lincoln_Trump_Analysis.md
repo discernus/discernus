@@ -22,7 +22,7 @@ This is a real, meaningful research question that requires:
 **A conversation-native research platform where LLMs conduct academic analysis through natural dialogue.**
 
 **Core Components (THIN SOFTWARE)**:
-- **Message Router**: Redis/Celery pub-sub between LLMs (~50 lines)
+- **Message Router**: Redis pub-sub between LLMs (~50 lines)
 - **Conversation Logger**: File-based append-only logging (~30 lines)  
 - **Code Executor**: Safe Python execution in LLM responses (~40 lines)
 - **Session Manager**: Basic lifecycle management (~20 lines)
@@ -226,7 +226,7 @@ research_sessions/
 ## 5. Expected Gnarly Parts
 
 ### 5.1 Message Routing Complexity
-**Challenge**: Redis/Celery pub-sub for LLM coordination without losing conversation context.
+**Challenge**: Redis pub-sub for LLM coordination without losing conversation context.
 
 **Mitigation**: 
 - Keep routing logic ultra-simple: detect patterns, route messages, log everything

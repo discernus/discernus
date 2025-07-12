@@ -18,11 +18,20 @@ import os
 import json
 import asyncio
 import logging
+import uuid
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime
 from dataclasses import dataclass
 from enum import Enum
+
+# SOAR v2.0 Redis chronolog import
+try:
+    import redis
+    REDIS_AVAILABLE = True
+except ImportError:
+    REDIS_AVAILABLE = False
+    logging.warning("Redis not available - chronolog events will not be published")
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -82,6 +91,7 @@ class ResearchConfig:
     """Minimal research session configuration"""
     research_question: str
     source_texts: str
+    framework_content: str = ""  # Framework specification content
     enable_code_execution: bool = True
     dev_mode: bool = False  # Enable automated human simulation for testing
     simulated_researcher_profile: str = "experienced_computational_social_scientist"  # Profile for AI responses
@@ -115,10 +125,45 @@ class ThinOrchestrator:
             self.llm_client = None
             logger.warning("Running in mock mode - no actual LLM calls")
         
+        # SOAR v2.0: Initialize Redis chronolog client
+        if REDIS_AVAILABLE:
+            try:
+                self.redis_client = redis.Redis(host='localhost', port=6379, db=0)
+                self.redis_client.ping()  # Test connection
+                logger.info("SOAR v2.0 chronolog connected")
+            except Exception as e:
+                self.redis_client = None
+                logger.warning(f"Redis chronolog unavailable: {e}")
+        else:
+            self.redis_client = None
+        
         # Session state (minimal)
         self.sessions: Dict[str, Dict[str, Any]] = {}
         
         logger.info(f"THIN Orchestrator initialized: {project_root}")
+    
+    def _publish_soar_event(self, channel: str, session_id: str, event_data: Dict[str, Any]) -> None:
+        """
+        THIN: Publish SOAR v2.0 chronolog event to Redis
+        
+        Software provides simple pub-sub routing; chronolog_capture handles persistence
+        """
+        if not self.redis_client:
+            return  # Silently skip if Redis unavailable
+        
+        try:
+            event_message = {
+                "timestamp": datetime.utcnow().isoformat() + "Z",  # Zulu time
+                "session_id": session_id,
+                "event_id": str(uuid.uuid4()),
+                **event_data
+            }
+            
+            self.redis_client.publish(channel, json.dumps(event_message))
+            logger.debug(f"Published SOAR event: {channel}")
+            
+        except Exception as e:
+            logger.warning(f"Failed to publish SOAR event {channel}: {e}")
     
     def _create_session_folder(self, session_id: str, config: ResearchConfig) -> Path:
         """Create session folder in research_sessions/ with proper structure"""
@@ -159,6 +204,15 @@ class ThinOrchestrator:
             'conversation_id': None,
             'session_path': session_path
         }
+        
+        # SOAR v2.0: Publish session start event
+        self._publish_soar_event("soar.session.start", session_id, {
+            "message_type": "session_started",
+            "research_question": config.research_question,
+            "framework_provided": bool(config.framework_content),
+            "dev_mode": config.dev_mode,
+            "researcher_profile": config.simulated_researcher_profile if config.dev_mode else "human"
+        })
         
         logger.info(f"Started research session: {session_id}")
         return session_id
@@ -254,13 +308,22 @@ class ThinOrchestrator:
         
         # Execute analysis via moderator LLM (no parsing, just text passing)
         results = await self._execute_via_moderator(
-            conversation_id, approved_design, config, session
+            conversation_id, approved_design, config, session, session_id
         )
         
         # Create readable markdown in session folder
         await self._create_session_readable_markdown(session_id, conversation_id)
         
         session['phase'] = SessionPhase.COMPLETED
+        
+        # SOAR v2.0: Publish session end event
+        self._publish_soar_event("soar.session.end", session_id, {
+            "message_type": "session_completed",
+            "conversation_id": conversation_id,
+            "results_summary": results.get('summary', 'Analysis completed'),
+            "session_path": str(session['session_path']),
+            "framework_used": bool(config.framework_content)
+        })
         
         logger.info("Analysis execution completed")
         return results
@@ -301,13 +364,14 @@ status: completed
                                    conversation_id: str,
                                    approved_design: str,
                                    config: ResearchConfig,
-                                   session: Dict[str, Any]) -> Dict[str, Any]:
+                                   session: Dict[str, Any],
+                                   session_id: str) -> Dict[str, Any]:
         """
         Execute analysis by passing approved design to moderator LLM
         
         THIN Principle: Moderator LLM interprets design and orchestrates analysis
         """
-        # Build moderator prompt with approved design
+        # Build moderator prompt with approved design and framework context
         moderator_prompt = f"""
 You are the moderator_llm responsible for executing this approved research design.
 
@@ -317,15 +381,27 @@ SOURCE TEXTS:
 {config.source_texts}
 
 APPROVED DESIGN:
-{approved_design}
+{approved_design}"""
+
+        # Add framework specification if available
+        if config.framework_content:
+            moderator_prompt += f"""
+
+FRAMEWORK SPECIFICATION:
+{config.framework_content}
+
+IMPORTANT: You must use this framework specification to guide your analysis. This is not a general conversation - you are conducting systematic framework-guided analysis."""
+
+        moderator_prompt += """
 
 Your Task:
 1. Read and interpret the approved design
-2. Determine what expert LLMs are needed
-3. Orchestrate the multi-LLM conversation to answer the research question
-4. Each time you want an expert to contribute, clearly request their input
-5. Continue until you have sufficient analysis to answer the research question
-6. Synthesize findings into a final analysis
+2. Apply the framework specification systematically to analyze the source texts
+3. Determine what expert LLMs are needed for framework-guided analysis
+4. Orchestrate the multi-LLM conversation to answer the research question using the framework
+5. Each time you want an expert to contribute, clearly request their input
+6. Continue until you have sufficient framework-based analysis to answer the research question
+7. Synthesize findings into a final analysis with framework dimensions and scores
 
 IMPORTANT: When you need expert input, format your request as:
 REQUEST TO [expert_name]: [your request]
@@ -333,9 +409,19 @@ REQUEST TO [expert_name]: [your request]
 When you're ready to provide final conclusions, format as:
 FINAL ANALYSIS: [your conclusions]
 
-Begin by interpreting the design and requesting input from the first expert you need.
+Begin by interpreting the design and framework, then request input from the first expert you need for systematic framework application.
 If you need code execution for analysis, write Python code in ```python blocks.
 """
+        
+        # SOAR v2.0: Publish moderator agent spawn event
+        moderator_agent_id = f"moderator_llm_{str(uuid.uuid4())[:8]}"
+        self._publish_soar_event("soar.agent.spawned", session_id, {
+            "message_type": "agent_spawned",
+            "agent_id": moderator_agent_id,
+            "agent_type": "moderator_llm",
+            "agent_role": "Research orchestration and multi-expert coordination",
+            "instructions_preview": moderator_prompt[:500] + "..." if len(moderator_prompt) > 500 else moderator_prompt
+        })
         
         # Start moderator conversation
         logger.info("Starting moderator-orchestrated analysis...")
@@ -369,11 +455,22 @@ If you need code execution for analysis, write Python code in ```python blocks.
                 metadata={'role': 'moderator', 'turn': turn, 'code_executed': moderator_response and '```python' in moderator_response}
             )
             
+            # SOAR v2.0: Publish moderator response event
+            self._publish_soar_event("soar.agent.completed", session_id, {
+                "message_type": "agent_response",
+                "agent_id": moderator_agent_id,
+                "agent_type": "moderator_llm", 
+                "turn": turn,
+                "response_preview": (moderator_response[:500] + "..." if len(moderator_response) > 500 else moderator_response) if moderator_response else "[NO_RESPONSE]",
+                "code_executed": moderator_response and '```python' in moderator_response,
+                "requesting_expert": "REQUEST TO " in moderator_response if moderator_response else False
+            })
+            
             # Check if moderator is requesting expert input
             if moderator_response and "REQUEST TO " in moderator_response:
                 # Extract expert request
                 expert_response = await self._handle_expert_request(
-                    conversation_id, moderator_response, config, turn, session
+                    conversation_id, moderator_response, config, turn, session, session_id
                 )
                 
                 # Update conversation history
@@ -423,6 +520,16 @@ Either request expert input or provide your FINAL ANALYSIS.
             conversation_id, "Multi-LLM analysis orchestrated by moderator LLM"
         )
         
+        # SOAR v2.0: Publish analysis completion event
+        self._publish_soar_event("soar.synthesis.ready", session_id, {
+            "message_type": "analysis_completed",
+            "conversation_id": conversation_id,
+            "total_turns": turn - 1,
+            "moderator_agent_id": moderator_agent_id,
+            "final_analysis_reached": "FINAL ANALYSIS:" in moderator_response if moderator_response else False,
+            "summary": "Multi-LLM analysis completed via moderator orchestration"
+        })
+        
         return {
             'conversation_id': conversation_id,
             'status': 'completed',
@@ -435,7 +542,8 @@ Either request expert input or provide your FINAL ANALYSIS.
                                    moderator_request: str,
                                    config: ResearchConfig,
                                    turn: int,
-                                   session: Dict[str, Any]) -> str:
+                                   session: Dict[str, Any],
+                                   session_id: str) -> str:
         """
         Handle moderator's request for expert input
         
@@ -454,6 +562,17 @@ Either request expert input or provide your FINAL ANALYSIS.
         expert_request = match.group(2).strip()
         
         logger.info(f"Handling request to {expert_name}")
+        
+        # SOAR v2.0: Publish expert agent spawn event
+        expert_agent_id = f"{expert_name}_{str(uuid.uuid4())[:8]}"
+        self._publish_soar_event("soar.agent.spawned", session_id, {
+            "message_type": "agent_spawned",
+            "agent_id": expert_agent_id,
+            "agent_type": expert_name,
+            "agent_role": f"Expert analysis for: {expert_request[:100]}...",
+            "requested_by": "moderator_llm",
+            "expert_request": expert_request[:300] + "..." if len(expert_request) > 300 else expert_request
+        })
         
         # KNOWLEDGENAUT INTEGRATION: Execute actual research infrastructure
         if expert_name == "knowledgenaut_agent":
@@ -475,6 +594,19 @@ Either request expert input or provide your FINAL ANALYSIS.
             expert_request=expert_request
         )
         
+        # THIN Framework Enhancement: Add framework context if available
+        if config.framework_content:
+            expert_prompt = f"""You are a {expert_name} agent. That means you analyze texts for patterns and insights using systematic frameworks.
+
+The researcher has provided this framework specification:
+{config.framework_content}
+
+Apply this framework systematically to analyze the source texts, then provide framework-guided analysis with specific evidence and scores.
+
+Original Task: {expert_prompt}
+
+Begin your framework-guided analysis:"""
+        
         # Get expert response
         if self.llm_client:
             expert_response = self.llm_client.call_llm(expert_prompt, expert_name)
@@ -494,6 +626,17 @@ Either request expert input or provide your FINAL ANALYSIS.
             conversation_id, expert_name, expert_response,
             metadata={'role': 'expert', 'turn': turn, 'requested_by': 'moderator_llm', 'code_executed': expert_response and '```python' in expert_response}
         )
+        
+        # SOAR v2.0: Publish expert completion event
+        self._publish_soar_event("soar.agent.completed", session_id, {
+            "message_type": "agent_response",
+            "agent_id": expert_agent_id,
+            "agent_type": expert_name,
+            "turn": turn,
+            "response_preview": expert_response[:500] + "..." if len(expert_response) > 500 else expert_response,
+            "code_executed": expert_response and '```python' in expert_response,
+            "requested_by": "moderator_llm"
+        })
         
         return expert_response
     

@@ -1,0 +1,49 @@
+# THIN Architecture Rules - Cursor AI must follow these STRICTLY
+
+## 🚨 FORBIDDEN PATTERNS - NEVER write these:
+- import re, regex, bs4, xml.etree (use LLM for parsing instead)
+- def parse_*, extract_*, validate_*, analyze_* (use LLM calls instead)
+- More than 3 if/elif statements in a function (use LLM logic instead)
+- String manipulation like .split(), .replace(), .strip() (use LLM formatting instead)
+- Complex try/except blocks with multiple handlers (use LLM error recovery)
+- Regex patterns, string parsing, content validation (use LLM processing)
+
+## ✅ REQUIRED PATTERNS - ALWAYS write these:
+- Read file → pass to LLM → store result (simple orchestration)
+- Route message → call LLM → store response (no processing)
+- Maximum 50 lines per function/class (complexity limit)
+- Use llm_client.call_llm() for ANY content processing
+- Simple file operations, Redis pub-sub, basic routing only
+- Store raw LLM responses, don't parse or validate them
+
+## 🤔 BEFORE WRITING ANY CODE, ASK:
+1. Could an LLM solve this problem better?
+2. Am I building intelligence into software? (Should be NO)
+3. Is this simple orchestration/routing? (Should be YES)
+4. Am I parsing or validating content? (Should be NO)
+5. Could I explain this to a non-programmer? (Should be YES)
+
+## 🎯 THIN SUCCESS PATTERNS:
+```python
+# GOOD - THIN pattern
+def load_framework(path):
+    content = Path(path).read_text()
+    validation = llm_client.call_llm(f"Validate this framework: {content}")
+    return {'content': content, 'validation': validation}
+
+# BAD - THICK pattern  
+def load_framework(path):
+    content = Path(path).read_text()
+    if not re.search(r'dimensions?:', content):
+        raise ValueError("Missing dimensions")
+    # ... complex parsing logic
+```
+
+## 🛑 IF YOU START WRITING PARSING/VALIDATION LOGIC, STOP!
+Use LLM calls instead. The software orchestrates, the LLM provides intelligence.
+
+## 🚀 SOAR 2.0 SPECIFIC:
+- Use Redis pub-sub for agent coordination
+- Framework specifications pass to LLM agents as-is
+- Store ensemble results without processing
+- Let LLMs handle framework application and validation 

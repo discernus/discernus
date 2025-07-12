@@ -498,3 +498,98 @@ Provide your assessment now."""
             'recommendations': recommendations,
             'component': 'ValidationAgent'
         } 
+
+    def validate_and_execute_sync(self, framework_path: str, experiment_path: str, corpus_path: str, dev_mode: bool = False) -> Dict[str, Any]:
+        """THIN: Read files from paths and validate/execute"""
+        import redis
+        import json
+        from datetime import datetime
+        
+        # Connect to Redis for event publishing
+        redis_client = redis.Redis(host='localhost', port=6379, db=0)
+        session_id = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        
+        try:
+            # Publish validation start event
+            redis_client.publish("soar.validation.started", json.dumps({
+                "timestamp": datetime.utcnow().isoformat(),
+                "session_id": session_id,
+                "framework_path": framework_path,
+                "experiment_path": experiment_path,
+                "corpus_path": corpus_path
+            }))
+            
+            # Read files (no parsing - just read content)
+            framework_content = Path(framework_path).read_text() if Path(framework_path).exists() else ""
+            experiment_content = Path(experiment_path).read_text() if Path(experiment_path).exists() else ""
+            corpus_files = list(Path(corpus_path).rglob("*.txt")) if Path(corpus_path).exists() else []
+            
+            if not framework_content:
+                return {"status": "error", "message": f"Framework file not found: {framework_path}"}
+            if not experiment_content:
+                return {"status": "error", "message": f"Experiment file not found: {experiment_path}"}
+            if not corpus_files:
+                return {"status": "error", "message": f"No corpus files found in: {corpus_path}"}
+            
+            # THIN: LLM validates compatibility with actual corpus content
+            if self.llm_client:
+                # Sample corpus content for validation
+                corpus_sample = ""
+                for i, file_path in enumerate(corpus_files[:3]):  # First 3 files
+                    content = Path(file_path).read_text()[:500]  # First 500 chars
+                    corpus_sample += f"\nFile {i+1}: {Path(file_path).name}\n{content}...\n"
+                
+                validation_prompt = f"""Do you think this corpus could be analyzed with this framework in the way described in this experiment?
+
+FRAMEWORK: {framework_content[:2000]}...
+
+EXPERIMENT: {experiment_content[:2000]}...
+
+CORPUS: {len(corpus_files)} files. Sample content:
+{corpus_sample}
+
+Answer: YES/NO with brief reasoning."""
+                
+                validation_response = self.llm_client.call_llm(validation_prompt, "compatibility_validator")
+                
+                if "YES" not in validation_response:
+                    return {"status": "validation_failed", "message": f"Compatibility validation failed: {validation_response}"}
+                
+                # Publish framework validation success
+                redis_client.publish("soar.framework.validated", json.dumps({
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "session_id": session_id,
+                    "status": "validated",
+                    "validation_response": validation_response
+                }))
+            
+            # THIN: LLM generates framework-agnostic analysis instructions
+            instruction_prompt = f"""Generate analysis agent instructions for this framework and experiment:
+
+FRAMEWORK: {framework_content[:2000]}...
+
+EXPERIMENT: {experiment_content[:2000]}...
+
+Create detailed instructions for an analysis agent to apply this framework to the described corpus. Include what outputs are expected."""
+
+            analysis_instructions = self.llm_client.call_llm(instruction_prompt, "instruction_generator")
+
+            # Publish instructions generated event
+            redis_client.publish("soar.instructions.generated", json.dumps({
+                "timestamp": datetime.utcnow().isoformat(),
+                "session_id": session_id,
+                "analysis_instructions": analysis_instructions,
+                "corpus_file_count": len(corpus_files)
+            }))
+
+            return {
+                "status": "validated", 
+                "message": f"Framework, experiment, and corpus are compatible - analysis ready",
+                "analysis_agent_instructions": analysis_instructions,
+                "corpus_files": [str(f) for f in corpus_files],
+                "framework_ready": True,
+                "session_id": session_id
+            }
+            
+        except Exception as e:
+            return {"status": "error", "message": f"Failed to load files: {str(e)}"} 

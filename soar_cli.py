@@ -29,7 +29,8 @@ sys.path.insert(0, str(project_root))
 try:
     from discernus.agents.validation_agent import ValidationAgent
     from discernus.core.framework_loader import FrameworkLoader
-    from discernus.orchestration.orchestrator import ThinOrchestrator, ResearchConfig
+    from discernus.core.thin_litellm_client import ThinLiteLLMClient
+    # Removed import of deprecated ThinOrchestrator
     SOAR_DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️  SOAR dependencies not available: {e}")
@@ -148,48 +149,43 @@ def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_p
             else:
                 click.echo("✅ Auto-validation passed")
         
-        # Load project components
+        # THIN: Validate first, then execute full orchestration
         click.echo(f"📁 Project Path: {project_path}")
-        click.echo("📚 Loading project components...")
+        click.echo("📚 Validating project components...")
         
-        framework_loader = FrameworkLoader()
-        project_components = _load_project_components(project_path, framework_loader)
+        project_path_obj = Path(project_path)
+        framework_path = str(project_path_obj / "framework.md")
+        experiment_path = str(project_path_obj / "experiment.md") 
+        corpus_path = str(project_path_obj / "corpus")
         
-        # Create research configuration
-        config = ResearchConfig(
-            research_question=project_components['research_question'],
-            source_texts=project_components['corpus_description'],
-            enable_code_execution=True,
-            dev_mode=dev_mode,
-            simulated_researcher_profile=researcher_profile if dev_mode else None
+        # Step 1: Validate project compatibility
+        validation_agent = ValidationAgent()
+        validation_results = validation_agent.validate_and_execute_sync(
+            framework_path=framework_path,
+            experiment_path=experiment_path,
+            corpus_path=corpus_path,
+            dev_mode=dev_mode
         )
         
-        click.echo(f"🔬 Research Question: {config.research_question}")
-        click.echo(f"📊 Corpus: {project_components['corpus_file_count']} files")
+        if validation_results['status'] != 'validated':
+            click.echo(f"❌ Project validation failed: {validation_results['message']}")
+            sys.exit(1)
         
-        if dev_mode:
-            click.echo(f"🤖 Dev Mode: Using {researcher_profile} profile")
+        click.echo("✅ Project validation passed - starting full analysis...")
         
-        # Execute using existing orchestration system
-        click.echo("\n⚡ Starting orchestrated analysis...")
+        # Step 2: Execute simple ensemble analysis
+        from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
         
-        # Run orchestration (async)
-        results = asyncio.run(_execute_orchestration(config, project_path))
+        # Initialize ensemble orchestrator
+        ensemble_orchestrator = EnsembleOrchestrator(project_path)
+        
+        # Execute ensemble analysis pipeline
+        results = asyncio.run(ensemble_orchestrator.execute_ensemble_analysis(validation_results))
         
         # Show results
         click.echo(f"\n🎉 Execution completed!")
-        click.echo(f"   Session ID: {results.get('session_id', 'Unknown')}")
-        click.echo(f"   Results saved to: {results.get('session_path', 'Unknown')}")
-        
-        if 'conversation_id' in results:
-            click.echo(f"   Conversation ID: {results['conversation_id']}")
-        
-        # Show final report path
-        if 'session_path' in results:
-            results_path = Path(results['session_path'])
-            readable_path = results_path / "conversation_readable.md"
-            if readable_path.exists():
-                click.echo(f"   📖 Human-readable results: {readable_path}")
+        click.echo(f"   Status: {results.get('status', 'Unknown')}")
+        click.echo(f"   Results: {results.get('message', 'No message')}")
         
     except Exception as e:
         click.echo(f"❌ Execution failed with error: {str(e)}", err=True)
@@ -312,64 +308,18 @@ def _show_validation_summary(validation_result: Dict[str, Any]):
     click.echo(f"   Timestamp: {validation_result.get('validation_timestamp', 'Unknown')}")
     click.echo(f"   Ready for execution: {'✅ Yes' if validation_result['ready_for_execution'] else '❌ No'}")
 
-def _load_project_components(project_path: str, framework_loader: FrameworkLoader) -> Dict[str, Any]:
-    """Load and parse project components"""
-    project_path = Path(project_path)
-    
-    # Load experiment file to extract research question
-    experiment_path = project_path / "experiment.md"
-    research_question = "Research question not found"
-    
-    if experiment_path.exists():
-        experiment_content = experiment_path.read_text()
-        # Simple extraction - look for research question
-        lines = experiment_content.split('\n')
-        for line in lines:
-            if 'research question' in line.lower() and ':' in line:
-                research_question = line.split(':', 1)[1].strip()
-                break
-    
-    # Count corpus files
-    corpus_path = project_path / "corpus"
-    corpus_files = list(corpus_path.rglob("*.txt")) if corpus_path.exists() else []
-    
-    return {
-        'research_question': research_question,
-        'corpus_description': f"Corpus from {corpus_path} ({len(corpus_files)} files)",
-        'corpus_file_count': len(corpus_files),
-        'project_name': project_path.name
-    }
+def _extract_research_question(experiment_content: str) -> str:
+    """THIN: Let LLM extract research question"""
+    try:
+        llm_client = ThinLiteLLMClient()
+        prompt = f"Extract the primary research question from this experiment:\n\n{experiment_content}\n\nReturn just the research question, nothing else."
+        return llm_client.call_llm(prompt, "research_question_extractor")
+    except:
+        return "Research question not found"
 
-async def _execute_orchestration(config: ResearchConfig, project_path: str) -> Dict[str, Any]:
-    """Execute orchestration using existing ThinOrchestrator"""
-    
-    # Create orchestrator with custom session path in project
-    project_path = Path(project_path)
-    results_path = project_path / "results"
-    results_path.mkdir(exist_ok=True)
-    
-    orchestrator = ThinOrchestrator(str(project_root), str(results_path))
-    
-    if config.dev_mode:
-        # Use automated session for development
-        results = await orchestrator.run_automated_session(config)
-    else:
-        # Use standard session flow
-        session_id = await orchestrator.start_research_session(config)
-        
-        # Get design consultation
-        design_response = await orchestrator.run_design_consultation(session_id)
-        
-        # For CLI execution, auto-approve design (user already validated project)
-        orchestrator.approve_design(session_id, True, "Auto-approved via SOAR CLI")
-        
-        # Execute analysis
-        results = await orchestrator.execute_approved_analysis(session_id)
-        
-        # Add session ID to results
-        results['session_id'] = session_id
-    
-    return results
+# Removed deprecated _load_project_components function - ValidationAgent handles this now
+
+# Removed deprecated _execute_orchestration function - using EnsembleOrchestrator now
 
 if __name__ == '__main__':
     soar() 

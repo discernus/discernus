@@ -7,6 +7,8 @@
 **Project**: SOAR v2.0 Framework-Agnostic Ensemble Research Platform  
 **Timeline**: 8 weeks to production-ready v2.0
 
+**Document Focus**: This document provides implementation guidance, technical architecture details, and development priorities. For strategic vision and academic rationale, see [SOAR v2.0 Specification](./Simple%20Atomic%20Orchestrated%20Research%20(SOAR)%20v2.0.md).
+
 -----
 
 ## Executive Summary: What You're Really Building
@@ -47,25 +49,16 @@ soar analyze --framework pdaf --corpus speeches/ --budget 15.00 --output analysi
 - Academic-grade report with Krippendorff's Alpha reliability metrics
 - Complete audit trail with crash-safe persistence
 
-### The Universal Platform Vision
+### The Implementation Challenge
 
-**Framework Agnostic**: Works with any systematic analysis methodology
+**Developer Focus**: Transform the strategic vision into working code that researchers trust with their careers.
 
-- Today: Political science (PDAF), social psychology (CFF)
-- Tomorrow: Sentiment analysis, content analysis, discourse analysis, etc.
-- Next year: Frameworks you haven't imagined yet
-
-**Ensemble Validation**: Multiple models provide reliability with statistical validation
-
-- Single model: "GPT-4 thinks this text is populist"
-- SOAR ensemble: "5 models analyzed, 3 agreed on populist pattern, 2 disagreed on specific dimensions, structured debate resolved via evidence quality, final confidence: 85%, Krippendorff's Alpha: 0.72 (excellent reliability)"
-
-**Academic Rigor**: Complete methodology transparency with industry-standard metrics
-
-- Every score traceable to specific text evidence
-- Every decision documented in crash-safe audit trail
-- Every framework application validated against calibration standards
-- Krippendorff's Alpha inter-rater reliability for academic credibility
+**Key Implementation Metrics**:
+- Upfront cost estimation within 15% accuracy
+- Framework specifications reach analysis agents  
+- Structured debates resolve disagreements systematically
+- Complete audit trails survive system crashes
+- Academic-grade reliability metrics (Krippendorff's Alpha ≥ 0.6)
 
 ### The Architectural Shift: From Hyperatomic to Ensemble
 
@@ -77,6 +70,375 @@ soar analyze --framework pdaf --corpus speeches/ --budget 15.00 --output analysi
 - **New Way (Ensemble)**: 5 models each analyze the *entire* problem.
 
 This is our core architectural bet: full-context analysis leads to higher-quality results, and structured debate among a small ensemble provides the validation.
+
+-----
+
+## Technical Innovation: Why Redis Coordination is Essential for Academic Rigor
+
+### The Adversarial Review Process
+
+**What We're Actually Building**: Not just "multiple AI models analyze text" but rather **"AI models systematically challenge each other's analysis in structured academic debates"**
+
+This is a **methodological innovation**, not just technical coordination. The academic value comes from the adversarial process itself:
+
+**Traditional Academic Peer Review** (what SOAR emulates):
+1. **Multiple Expert Analysis**: 3-4 reviewers independently analyze the paper
+2. **Structured Challenge Process**: Reviewers identify disagreements and present counter-arguments
+3. **Evidence-Based Defense**: Authors defend their methodology with specific citations and reasoning
+4. **Editorial Arbitration**: Editor evaluates arguments and makes final decisions
+5. **Iterative Refinement**: Process repeats until consensus or clear arbitration
+
+**SOAR Structured Debate Protocol** (AI implementation):
+1. **Multi-Model Analysis**: 4-6 AI models independently analyze text using complete framework
+2. **Automated Divergence Detection**: Moderator identifies significant score disagreements
+3. **Evidence Competition**: Models defend their scores with specific textual citations
+4. **Cross-Challenge Process**: Models present counter-evidence challenging other analyses
+5. **Referee Arbitration**: Specialized reasoning model evaluates evidence quality and selects best argument
+
+### Why Real-Time Coordination is Technically Necessary
+
+**The Challenge Process Requires Genuine Multi-Agent Interaction**:
+
+```
+Model A: "Text scores 1.8 on populist dimension based on evidence X, Y, Z"
+Model B: "I disagree - only 1.2 because evidence X is policy criticism, not populist rhetoric"
+Model A: "Counter-point: Evidence X includes moral people/elite dichotomy per PDAF calibration"
+Referee: "Model A's argument stronger - evidence X aligns with calibration reference P3"
+```
+
+**This Cannot Be Implemented with Simple File Coordination** because:
+
+1. **Dynamic Response Dependencies**: Each model's response depends on previous models' arguments
+2. **Turn-Taking Protocol**: Structured debate requires ordered message exchange
+3. **Context Accumulation**: Arguments build on each other, requiring shared state
+4. **Timeout Handling**: Failed models must not stall the entire debate process
+5. **Real-Time Arbitration**: Referee decisions need immediate propagation to all participants
+
+**Technical Implementation Requirements**:
+
+- **Message Routing**: Specific agents respond to specific challenges
+- **State Synchronization**: All agents see complete debate history
+- **Failure Recovery**: Graceful handling of model timeouts or errors
+- **Audit Integration**: Every message becomes part of academic audit trail
+
+### Redis Pub-Sub Architecture Justification
+
+**Why Redis Specifically**:
+
+```python
+# Structured debate requires real-time coordination
+redis.publish("soar.debate.challenge", {
+    "challenger": "claude-sonnet",
+    "target": "gpt-4",
+    "dimension": "manichaean_people_elite",
+    "challenge": "Evidence X is policy criticism, not populist moral dichotomy",
+    "counter_evidence": ["specific textual citations"]
+})
+
+# Target model responds to specific challenge
+redis.subscribe("soar.debate.challenge")  # GPT-4 receives challenge
+redis.publish("soar.debate.defense", {
+    "defender": "gpt-4", 
+    "response": "Evidence X includes explicit moral framing per PDAF calibration P3",
+    "supporting_evidence": ["additional citations"]
+})
+
+# Referee evaluates competing arguments
+redis.publish("soar.debate.arbitration", {
+    "referee": "claude-opus",
+    "decision": "gpt-4",
+    "rationale": "Stronger calibration alignment and boundary distinction"
+})
+```
+
+**Alternative Architectures Would Be Worse**:
+
+- **File Polling**: Too slow for interactive debate, creates race conditions
+- **Direct HTTP**: No message persistence, complex failure handling, no audit trail
+- **Database**: Over-engineered for message passing, adds unnecessary complexity
+- **Queue Systems**: Redis pub-sub is simpler than Kafka/RabbitMQ for this use case
+
+### Academic Value of Technical Complexity
+
+**What This Enables**:
+
+1. **Systematic Evidence Competition**: Models must defend analysis with specific citations
+2. **Bias Detection**: Cross-model challenges expose individual model limitations
+3. **Methodological Transparency**: Complete debate transcript provides audit trail
+4. **Quality Escalation**: Evidence competition elevates final analysis quality
+5. **Academic Credibility**: Structured validation exceeds single-model black box analysis
+
+**Comparison to Traditional Academic Process**:
+
+| Traditional Peer Review | SOAR Adversarial Review |
+|------------------------|-------------------------|
+| 3-4 human reviewers | 4-6 AI models |
+| Informal email exchanges | Structured debate protocol |
+| Weeks of back-and-forth | Minutes of real-time interaction |
+| Incomplete documentation | Complete audit trail |
+| Variable review quality | Consistent systematic validation |
+| Limited scalability | Unlimited corpus processing |
+
+### Why This is THIN Architecture
+
+**The Software Remains Thin**:
+- **Redis**: Simple message routing, no intelligence
+- **Orchestrator**: Basic pub-sub coordination, no reasoning
+- **All Intelligence in LLMs**: Debate moderation, evidence evaluation, arbitration
+
+**What Makes It Feel Complex**:
+- **Rich Academic Protocols**: Structured debate requires sophisticated coordination
+- **Multi-Agent Interaction**: Real peer review process requires genuine multi-agent coordination
+- **Evidence Standards**: Academic rigor demands systematic evidence validation
+
+**But the Code Stays Simple**:
+```python
+# THIN: Orchestrate intelligent agents, don't build intelligence
+async def moderate_debate(disagreement):
+    moderator_prompt = f"Orchestrate structured debate for: {disagreement}"
+    debate_plan = await llm_client.complete(moderator_prompt)
+    
+    # Simple message routing based on LLM-generated plan
+    for step in debate_plan.steps:
+        await redis.publish(step.channel, step.message)
+        await redis.wait_for_response(step.expected_response)
+    
+    return debate_plan.results
+
+# Avoid: Complex state machines and hardcoded debate logic
+```
+
+### Developer Mental Model: Academic Process Automation
+
+**Think of SOAR as**: Automated academic department with AI researchers
+**Not as**: Complex AI reasoning system
+
+The technical complexity comes from **accurately modeling academic peer review**, not from building artificial intelligence. The intelligence is in the LLMs; the software just coordinates their academic interactions.
+
+**Success Metric**: When computational social scientists say "SOAR's methodology is more rigorous than manual analysis," we've succeeded.
+
+-----
+
+## Developer Implementation Strategy: Phased Architecture
+
+### Why Phased Implementation is Critical
+
+**The Architectural Challenge**: Building adversarial review from scratch is complex and error-prone. The phased approach ensures each component works before adding the next layer of complexity.
+
+**Academic Validation Requirements**: Research institutions need to see **systematic evidence** that each architectural component works reliably before trusting the complete system.
+
+### Phase 1: Single-Model Framework Analysis (Weeks 1-2)
+
+**Developer Focus**: "Fix the framework context isolation problem"
+
+**What You're Building**:
+- Framework specifications successfully reach analysis agents
+- Single LLM produces systematic framework-guided analysis 
+- `soar_cff_sample_project` test case passes completely
+
+**Technical Implementation**:
+```python
+# Simple framework application - no multi-agent complexity
+class FrameworkAnalyzer:
+    async def analyze_text(self, framework_spec: str, text: str) -> AnalysisResult:
+        analysis_prompt = f"""
+        Framework: {framework_spec}
+        Text: {text}
+        
+        Apply this framework systematically to analyze the text.
+        Provide dimension scores and evidence citations.
+        """
+        return await llm_client.complete(analysis_prompt)
+
+# CLI chooses simple path for Phase 1
+if project_complexity == "simple":
+    result = await framework_analyzer.analyze_text(framework, text)
+else:
+    result = await thin_orchestrator.orchestrate_analysis(project)
+```
+
+**Success Criteria**:
+- Framework loading works (already implemented ✅)
+- Framework context reaches agents (fix required ❌)
+- Systematic analysis results (not generic conversation)
+
+### Phase 2: Multi-Model Ensemble (Weeks 3-4)
+
+**Developer Focus**: "Prove cross-model coordination works reliably"
+
+**What You're Building**:
+- 3-4 models analyze independently using same framework
+- Basic consensus checking and reliability metrics
+- Cost estimation and budget controls
+
+**Technical Implementation**:
+```python
+# Multi-model ensemble without debate complexity
+class EnsembleAnalyzer:
+    async def analyze_ensemble(self, framework_spec: str, text: str) -> EnsembleResult:
+        models = ["gpt-4", "claude-sonnet", "gemini-pro"]
+        
+        analyses = await asyncio.gather(*[
+            self.analyze_with_model(model, framework_spec, text)
+            for model in models
+        ])
+        
+        # Basic consensus without structured debate
+        consensus = await self.calculate_consensus(analyses)
+        reliability = await self.calculate_krippendorff_alpha(analyses)
+        
+        return EnsembleResult(analyses, consensus, reliability)
+
+# Redis coordination for ensemble (not debate)
+await redis.publish("soar.ensemble.started", {
+    "models": models,
+    "framework": framework_name
+})
+```
+
+**Success Criteria**:
+- Multiple models coordinate successfully
+- Framework-agnostic infrastructure works with any framework
+- Krippendorff's Alpha ≥ 0.5 for inter-model reliability
+- Cost estimation within 15% accuracy
+
+### Phase 3: Structured Debate (Weeks 5-6)
+
+**Developer Focus**: "Add adversarial review for quality improvement"
+
+**What You're Building**:
+- Divergence detection triggers structured challenges
+- Evidence-based debate with textual citations
+- Referee arbitration and final synthesis
+
+**Technical Implementation**:
+```python
+# Structured debate orchestration
+class DebateOrchestrator:
+    async def resolve_divergence(self, divergence: Divergence) -> DebateResult:
+        # Phase 3a: Challenge initiation
+        await redis.publish("soar.debate.challenge", {
+            "challenger": divergence.high_scorer,
+            "defendant": divergence.low_scorer,
+            "dimension": divergence.dimension,
+            "evidence_required": True
+        })
+        
+        # Phase 3b: Evidence competition
+        defense = await self.collect_response("soar.debate.defense")
+        challenge = await self.collect_response("soar.debate.challenge")
+        
+        # Phase 3c: Referee arbitration
+        arbitration_result = await self.referee_arbitration(defense, challenge)
+        
+        return DebateResult(final_score=arbitration_result.score)
+
+# Complete audit trail
+await redis.publish("soar.audit.debate_complete", {
+    "session_id": session_id,
+    "debate_transcript": complete_transcript,
+    "final_decision": arbitration_result,
+    "evidence_quality": evidence_assessment
+})
+```
+
+**Success Criteria**:
+- Structured debates resolve score disagreements
+- Evidence-based decisions, not simple averaging
+- Complete audit trail for academic transparency
+- System gracefully handles model failures
+
+### Developer Mental Model: Progressive Complexity
+
+**Phase 1**: Single smart agent with framework context
+**Phase 2**: Multiple smart agents with coordination
+**Phase 3**: Multiple smart agents with adversarial validation
+
+**Key Insight**: Each phase builds on the previous one, but **each phase is independently valuable** for academic research.
+
+### Academic Storage + Real-Time Coordination Integration
+
+**The Developer Challenge**: How do Redis events become permanent academic records?
+
+#### Technical Architecture
+
+**Real-Time Layer (Redis)**:
+```python
+# During analysis: Real-time coordination
+class RealtimeCoordinator:
+    async def coordinate_debate(self, session_id: str):
+        # Models exchange challenges in real-time
+        await redis.publish("soar.debate.challenge", challenge_data)
+        
+        # Moderator orchestrates turn-taking
+        await redis.publish("soar.debate.moderation", moderation_data)
+        
+        # Referee makes decisions
+        await redis.publish("soar.debate.arbitration", arbitration_data)
+
+# All events captured to session log
+conversation_logger.log_redis_event(redis_message)
+```
+
+**Academic Layer (Files)**:
+```python
+# After analysis: Persistent academic records
+class AcademicRecordGenerator:
+    async def generate_academic_record(self, session_id: str) -> AcademicRecord:
+        # Get complete debate transcript from Redis log
+        debate_transcript = await self.get_complete_transcript(session_id)
+        
+        # LLM synthesizes academic report
+        academic_report = await llm_client.complete(f"""
+        Debate Transcript: {debate_transcript}
+        
+        Generate publication-ready methodology section documenting:
+        - Complete adversarial review process
+        - Evidence-based decision rationale
+        - Reliability metrics and confidence intervals
+        """)
+        
+        # Save with content hash for immutability
+        await self.save_immutable_record(session_id, academic_report)
+        
+        return AcademicRecord(report=academic_report, audit_trail=debate_transcript)
+```
+
+#### Integration Pattern
+
+**The Complete Flow**:
+1. **Redis coordinates** structured debate during analysis
+2. **ConversationLogger captures** all Redis events to session JSONL
+3. **LLM synthesizes** complete transcript to academic report
+4. **Immutable storage** preserves academic records with content hash
+5. **Peer review ready** methodology documentation
+
+**Code Integration**:
+```python
+# Enhanced ConversationLogger (already implemented)
+class ConversationLogger:
+    async def log_redis_event(self, event: RedisEvent):
+        # Capture Redis coordination in academic log
+        await self.log_event({
+            "timestamp": event.timestamp,
+            "type": "redis_coordination",
+            "channel": event.channel,
+            "data": event.data,
+            "academic_significance": event.academic_significance
+        })
+
+# After analysis completion
+academic_record = await academic_record_generator.generate_record(session_id)
+await storage.backup_immutable_record(session_id, academic_record)
+```
+
+**Why This Architecture Works**:
+- **Redis enables the process**: Interactive validation through structured debate
+- **Files preserve the products**: Permanent academic records with complete provenance
+- **Integration ensures continuity**: Real-time coordination becomes permanent academic value
+- **THIN compliance**: LLM intelligence handles synthesis, not complex code
+
+**Developer Success Indicator**: When Redis debate transcripts become methodology sections that reviewers praise for transparency and rigor, you've succeeded.
 
 -----
 
@@ -208,6 +570,143 @@ pdaf = PDFFramework()  # Tightly coupled
 
 -----
 
+## LLM API Best Practices: Conversational Design Principles
+
+### Critical Lesson: API Parameter Sensitivity
+
+**Recent Discovery**: LLMs are extremely sensitive to API request parameters and formatting. Small, seemingly innocuous parameters can trigger unexpected behavioral changes, safety filters, or task drift.
+
+**Example**: The Vertex AI safety filter issue was caused by `max_tokens=2000` parameter triggering stricter content filtering for political content, not actual content policy violations. The same content worked perfectly in the web interface with default parameters.
+
+### The "Human Expert Simulation" Principle
+
+**Core Insight**: Web interfaces work reliably because they feel like natural conversations with human experts. API calls should mimic this conversational pattern rather than trying to be technical or programmatic.
+
+**Design Philosophy**: Interact with LLMs as if you're talking to a human research assistant who:
+- Understands academic frameworks
+- Can read and analyze texts systematically
+- Responds in the format you need
+- Explains their reasoning clearly
+
+### Framework Context Propagation - The Right Way
+
+**Wrong Approach** (Technical/Mechanical):
+```python
+# Brittle, parameter-heavy, unclear intent
+system_prompt = f"Framework: {framework_spec}\nAnalyze: {text}\nOutput: JSON"
+completion = llm_client.complete(
+    messages=[{"role": "system", "content": system_prompt}],
+    max_tokens=2000,
+    temperature=0.7,
+    top_p=0.9,
+    frequency_penalty=0.1
+)
+```
+
+**Right Approach** (Conversational):
+```python
+# Clean, conversational, clear intent
+user_prompt = f"""
+Hi! I'm a researcher studying political discourse, and I'd like your help analyzing a speech using a specific academic framework.
+
+Here's the framework I'm using - it's called the Civic Virtue Framework (CFF v3.1):
+{framework_spec}
+
+And here's the speech I want you to analyze:
+{text}
+
+Could you please analyze this speech using the CFF framework? I'd like you to:
+1. Score each dimension based on the framework's criteria
+2. Provide specific evidence from the text for each score
+3. Explain your reasoning clearly
+
+Please format your response as a structured analysis that I can use in my research.
+"""
+
+# Minimal parameters, maximum conversational context
+completion = llm_client.complete(
+    messages=[{"role": "user", "content": user_prompt}]
+    # Only add parameters if absolutely necessary for specific providers
+)
+```
+
+### API Hygiene Guidelines
+
+**1. Minimal Parameter Principle**
+- Only send necessary parameters to LLM APIs
+- Different providers have different parameter sensitivities
+- Clean, minimal requests = more predictable behavior
+- **Parameter bloat can break models in unexpected ways**
+
+**2. Provider-Specific Optimization**
+```python
+# Example: Vertex AI sensitivity to max_tokens
+if provider == "vertex_ai":
+    # Exclude max_tokens to avoid triggering safety filters
+    params = {k: v for k, v in params.items() if k != "max_tokens"}
+```
+
+**3. Conversational Context Over Technical Formatting**
+- Use natural language instructions instead of structured schemas
+- Embed complex data (frameworks, texts) in conversational context
+- Let LLMs use their natural language understanding capabilities
+- Avoid forcing LLMs into artificial technical communication patterns
+
+### Framework-Agnostic Implementation
+
+**The Conversational Wrapper Pattern**:
+```python
+class ConversationalFrameworkAnalyzer:
+    def generate_analysis_prompt(self, framework: Framework, text: str) -> str:
+        return f"""
+        Hi! I'm a researcher studying {framework.domain}, and I'd like your help analyzing some text using the {framework.name} framework.
+
+        Here's the framework specification:
+        {framework.specification}
+
+        And here's the text I want you to analyze:
+        {text}
+
+        Could you please apply this framework systematically? I need:
+        1. Scores for each dimension with clear justification
+        2. Specific evidence from the text supporting each score
+        3. Your reasoning explained step by step
+
+        Please structure your response so I can use it for academic research.
+        """
+    
+    async def analyze(self, framework: Framework, text: str) -> AnalysisResult:
+        # Conversational prompt with minimal parameters
+        prompt = self.generate_analysis_prompt(framework, text)
+        
+        # Clean API call - let LLM intelligence handle complexity
+        response = await self.llm_client.complete(
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        return self.parse_conversational_response(response)
+```
+
+### Why This Solves Multiple SOAR v2.0 Problems
+
+1. **Framework Context Isolation**: LLM understands its role as research collaborator
+2. **API Parameter Sensitivity**: Minimal technical parameters, maximum conversational context
+3. **Framework-Agnostic Design**: Any framework can be wrapped in conversational instructions
+4. **Natural Task Understanding**: LLM knows what kind of expert it should be
+5. **Debugging Simplicity**: When issues arise, check conversational clarity first
+
+### Debugging Strategy
+
+**When LLMs behave unexpectedly**:
+1. **Check parameter hygiene first** - eliminate unnecessary parameters
+2. **Test conversational clarity** - is the request clear to a human?
+3. **Verify provider-specific sensitivities** - some providers react differently to same parameters
+4. **Compare with web interface behavior** - if web works but API doesn't, it's likely a parameter issue
+
+**This approach is pure THIN philosophy**: Leverage LLM's natural conversational intelligence instead of fighting it with technical abstractions.
+
+-----
+
 ## Implementation Priorities: What Matters Most
 
 ### Priority 1: AI-Powered Framework Validation
@@ -269,42 +768,117 @@ def robust_ensemble_with_retries(agents):
 
 ### Priority 3: Evidence-Based Structured Debates
 
-**Why This Matters**: This is SOAR's key innovation—turning model disagreement into validation strength
+**Why This Matters**: This is SOAR's key innovation—turning model disagreement into validation strength through **systematic adversarial review**
+
+**The Academic Innovation**: SOAR implements the first AI-powered equivalent of academic peer review, where multiple expert models challenge each other's analysis through structured evidence-based debates.
+
 **THIN Approach**: LLM moderator orchestrates debates, LLM referee arbitrates based on evidence quality
 
 **Quality Bar**:
 
 - LLM moderator detects meaningful disagreements and orchestrates structured debates
 - LLM referee evaluates evidence quality rather than mechanical text matching
-- Complete audit trail of debate process
-- Framework-appropriate debate standards maintained
+- Complete audit trail of debate process provides academic transparency
+- Framework-appropriate debate standards maintained automatically
+- Evidence competition elevates final analysis quality beyond single-model approaches
+
+**Specific Agent Roles in Adversarial Review**:
+
+1. **Framework Analysis Agents** (4-6 models): Independent analysis with complete framework context
+2. **Moderator Agent**: Detects divergences, orchestrates structured challenges
+3. **Referee Agent**: Evaluates competing evidence and selects strongest arguments  
+4. **Quality Assurance Agent**: Monitors for systematic biases and methodology compliance
+
+**The Complete Adversarial Review Workflow**:
 
 ```python
-# THIN debate orchestration
-class DebateModerator:
-    async def orchestrate_debate(self, disagreement: Disagreement, framework: Framework):
-        moderation_prompt = f"""
-        Framework: {framework.name}
-        Disagreement: Models scored dimension '{disagreement.dimension}' as {disagreement.scores}
-        
-        Orchestrate a structured debate:
-        1. Ask each model to defend their score with textual evidence
-        2. Allow one round of rebuttals
-        3. Summarize evidence quality for referee
-        
-        Generate specific prompts for each debate round.
-        """
-        
-        debate_plan = await llm_client.complete(moderation_prompt, model="claude-3-sonnet")
-        return await self.execute_debate_plan(debate_plan, disagreement)
+# Phase 1: Independent Analysis
+async def ensemble_analysis(framework, text):
+    models = ["gpt-4", "claude-sonnet", "gemini-pro", "llama-3"]
+    analyses = await asyncio.gather(*[
+        model.analyze(framework, text) for model in models
+    ])
+    return analyses
 
-# Avoid: Hardcoded debate scripts
-def orchestrate_debate_manually(disagreement):
-    # Send fixed prompt: "Defend your score with evidence"
-    # Parse responses with regex
-    # Apply hardcoded evidence evaluation rules
-    # Misses nuanced debate dynamics and framework-specific requirements
+# Phase 2: Divergence Detection  
+async def detect_disagreements(analyses, framework):
+    moderator_prompt = f"""
+    Framework: {framework.name}
+    Analyses: {analyses}
+    
+    Identify significant disagreements requiring structured debate.
+    Consider framework thresholds and dimension importance.
+    """
+    return await moderator_llm.complete(moderator_prompt)
+
+# Phase 3: Structured Challenge Process
+async def orchestrate_debate(disagreement):
+    # Models defend their scores with specific evidence
+    for defending_model in disagreement.models:
+        defense = await defending_model.defend_score(
+            dimension=disagreement.dimension,
+            evidence_required=True,
+            calibration_references=True
+        )
+        await redis.publish("soar.debate.defense", defense)
+    
+    # Cross-challenges with counter-evidence
+    for challenging_model in disagreement.models:
+        challenge = await challenging_model.challenge_analysis(
+            target_analysis=defense,
+            counter_evidence_required=True
+        )
+        await redis.publish("soar.debate.challenge", challenge)
+
+# Phase 4: Referee Arbitration
+async def arbitrate_debate(debate_transcript, framework):
+    referee_prompt = f"""
+    Framework: {framework.name}
+    Debate: {debate_transcript}
+    
+    Evaluate evidence quality and select strongest argument.
+    Base decision on textual evidence accuracy and calibration alignment.
+    """
+    decision = await referee_llm.complete(referee_prompt)
+    await redis.publish("soar.debate.decision", decision)
+    return decision
+
+# THIN Orchestration: Simple coordination of intelligent agents
+class AdversarialReviewOrchestrator:
+    async def run_adversarial_review(self, framework, text):
+        # Step 1: Independent analyses
+        analyses = await self.ensemble_analysis(framework, text)
+        
+        # Step 2: Detect meaningful disagreements
+        disagreements = await self.detect_disagreements(analyses, framework)
+        
+        # Step 3: Structured debates for each disagreement
+        debate_results = []
+        for disagreement in disagreements:
+            result = await self.orchestrate_debate(disagreement)
+            debate_results.append(result)
+        
+        # Step 4: Synthesis with referee decisions
+        final_analysis = await self.synthesize_results(analyses, debate_results)
+        
+        return final_analysis
+
+# Avoid: Complex hardcoded debate logic
+def manual_debate_orchestration(disagreement):
+    # Send fixed prompts in predetermined order
+    # Parse responses with regex patterns  
+    # Apply mechanical scoring rules
+    # Miss nuanced argumentation and framework-specific requirements
+    # No adaptation to different types of disagreements
 ```
+
+**Academic Quality Assurance Through Adversarial Process**:
+
+- **Evidence Competition**: Models must provide specific textual citations to defend scores
+- **Cross-Validation**: Models challenge each other's interpretations and calibration
+- **Systematic Bias Detection**: Cross-model challenges expose individual model limitations  
+- **Methodological Transparency**: Complete debate transcripts enable replication
+- **Quality Escalation**: Final scores based on evidence strength, not averaging
 
 ### Priority 4: Cost Estimation and Budget Controls
 
