@@ -35,32 +35,32 @@ class ProviderParameterManager:
                 ]
             },
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 60
+            'timeout': 180  # Increased for large context processing (3 minutes)
         },
         'openai': {
             'forbidden_params': ['max_tokens'],  # Removed to avoid API sensitivity issues
             'required_params': {},
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 60
+            'timeout': 120  # 2 minutes - 2x safety margin for large context processing
         },
         'anthropic': {
             'forbidden_params': ['max_tokens'],  # Removed to avoid API sensitivity issues
             'required_params': {},
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 60
+            'timeout': 120  # 2 minutes - Claude is generally faster but needs margin for large context
         },
         'mistral': {
             'forbidden_params': ['max_tokens'],  # Removed to avoid API sensitivity issues
             'required_params': {},
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 60
+            'timeout': 120  # 2 minutes - similar performance to other cloud providers
         },
         'perplexity': {
             # Placeholder for future implementation
             'forbidden_params': ['max_tokens'],  # Removed to avoid API sensitivity issues
             'required_params': {},
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 60,
+            'timeout': 120,  # 2 minutes - similar to other cloud providers
             'status': 'placeholder'  # Not yet implemented
         }
     }
@@ -73,14 +73,14 @@ class ProviderParameterManager:
             'forbidden_params': ['max_tokens'],  # Removed to avoid API sensitivity issues
             'required_params': {},
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 300  # Longer timeout for local processing
+            'timeout': 600  # 10 minutes - local processing with large context requires more time
         },
         'ollama/mistral': {
             'provider': 'ollama',
             'forbidden_params': ['max_tokens'],  # Removed to avoid API sensitivity issues
             'required_params': {},
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 300,
+            'timeout': 600,  # 10 minutes - local processing with large context requires more time
             'notes': 'May need dropout parameter tweaks for stability'
         },
         'ollama/llama3.3': {
@@ -88,7 +88,7 @@ class ProviderParameterManager:
             'forbidden_params': ['max_tokens'],  # Removed to avoid API sensitivity issues
             'required_params': {},
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 300
+            'timeout': 600  # 10 minutes - local processing with large context requires more time
         }
     }
     

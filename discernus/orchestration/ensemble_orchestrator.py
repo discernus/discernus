@@ -29,11 +29,47 @@ sys.path.insert(0, str(project_root))
 
 try:
     from discernus.core.thin_litellm_client import ThinLiteLLMClient
+    from discernus.gateway.litellm_client import LiteLLMClient  # Add our improved client
     from discernus.core.conversation_logger import ConversationLogger
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"EnsembleOrchestrator dependencies not available: {e}")
     DEPENDENCIES_AVAILABLE = False
+
+class LiteLLMClientAdapter:
+    """Adapter to make LiteLLMClient compatible with EnsembleOrchestrator's expected interface"""
+    
+    def __init__(self):
+        self.client = LiteLLMClient()
+    
+    def call_llm(self, prompt: str, role: str) -> str:
+        """Adapt LiteLLMClient.analyze_text to the call_llm interface"""
+        # Create a minimal experiment definition for the analyze_text method
+        experiment_def = {
+            "framework": {"name": "ensemble_framework"},
+            "research_question": f"Ensemble analysis task: {role}"
+        }
+        
+        # Use a fast, cost-effective model for analysis tasks
+        model_name = "vertex_ai/gemini-2.5-flash"  # Fast and cheap
+        
+        try:
+            # Call our improved client with parameter manager
+            result, cost = self.client.analyze_text(prompt, experiment_def, model_name)
+            
+            # Extract the text response
+            if isinstance(result, dict) and 'raw_response' in result:
+                return result['raw_response']
+            elif isinstance(result, str):
+                return result
+            else:
+                print(f"⚠️ Unexpected result type from LiteLLMClient: {type(result)}")
+                return str(result) if result else ""
+                
+        except Exception as e:
+            print(f"⚠️ LiteLLMClientAdapter error: {e}")
+            # Fallback to empty string rather than None to avoid issues
+            return ""
 
 class EnsembleOrchestrator:
     """
@@ -45,8 +81,23 @@ class EnsembleOrchestrator:
         self.results_path = self.project_path / "results"
         self.results_path.mkdir(exist_ok=True)
         
-        # Core components
-        self.llm_client = ThinLiteLLMClient() if DEPENDENCIES_AVAILABLE else None
+        # Core components with improved LLM client
+        if DEPENDENCIES_AVAILABLE:
+            try:
+                # Use our improved LiteLLMClient with parameter manager
+                self.llm_client = LiteLLMClientAdapter()
+                print("✅ EnsembleOrchestrator using improved LiteLLMClient with parameter manager")
+            except:
+                try:
+                    # Fallback to original client if needed
+                    self.llm_client = ThinLiteLLMClient()
+                    print("⚠️ EnsembleOrchestrator falling back to ThinLiteLLMClient")
+                except:
+                    self.llm_client = None
+                    print("❌ EnsembleOrchestrator: No LLM client available")
+        else:
+            self.llm_client = None
+            
         self.redis_client = redis.Redis(host='localhost', port=6379, db=0)
         self.logger = None  # Will be initialized per session
         
