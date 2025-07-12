@@ -23,11 +23,47 @@ sys.path.insert(0, str(project_root))
 try:
     from discernus.core.framework_loader import FrameworkLoader
     from discernus.core.thin_litellm_client import ThinLiteLLMClient
+    from discernus.gateway.litellm_client import LiteLLMClient  # Add our improved client
     from discernus.core.llm_roles import get_expert_prompt
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"ValidationAgent dependencies not available: {e}")
     DEPENDENCIES_AVAILABLE = False
+
+class LiteLLMClientAdapter:
+    """Adapter to make LiteLLMClient compatible with ValidationAgent's expected interface"""
+    
+    def __init__(self):
+        self.client = LiteLLMClient()
+    
+    def call_llm(self, prompt: str, role: str) -> str:
+        """Adapt LiteLLMClient.analyze_text to the call_llm interface"""
+        # Create a minimal experiment definition for the analyze_text method
+        experiment_def = {
+            "framework": {"name": "validation_framework"},
+            "research_question": f"Validation task: {role}"
+        }
+        
+        # Use a fast, cost-effective model for validation tasks
+        model_name = "vertex_ai/gemini-2.5-flash"  # Fast and cheap
+        
+        try:
+            # Call our improved client with parameter manager
+            result, cost = self.client.analyze_text(prompt, experiment_def, model_name)
+            
+            # Extract the text response
+            if isinstance(result, dict) and 'raw_response' in result:
+                return result['raw_response']
+            elif isinstance(result, str):
+                return result
+            else:
+                print(f"⚠️ Unexpected result type from LiteLLMClient: {type(result)}")
+                return str(result) if result else ""
+                
+        except Exception as e:
+            print(f"⚠️ LiteLLMClientAdapter error: {e}")
+            # Fallback to empty string rather than None to avoid issues
+            return ""
 
 class ValidationAgent:
     """
@@ -42,9 +78,17 @@ class ValidationAgent:
             self.llm_client = llm_client
         else:
             try:
-                self.llm_client = ThinLiteLLMClient()
+                # Use our improved LiteLLMClient with parameter manager
+                self.llm_client = LiteLLMClientAdapter()
+                print("✅ ValidationAgent using improved LiteLLMClient with parameter manager")
             except:
-                self.llm_client = None
+                try:
+                    # Fallback to original client if needed
+                    self.llm_client = ThinLiteLLMClient()
+                    print("⚠️ ValidationAgent falling back to ThinLiteLLMClient")
+                except:
+                    self.llm_client = None
+                    print("❌ ValidationAgent: No LLM client available")
         
         # Get validation rubrics from FrameworkLoader
         self.framework_rubric = self.framework_loader.framework_rubric
@@ -541,9 +585,9 @@ Provide your assessment now."""
                 
                 validation_prompt = f"""Do you think this corpus could be analyzed with this framework in the way described in this experiment?
 
-FRAMEWORK: {framework_content[:2000]}...
+FRAMEWORK: {framework_content}
 
-EXPERIMENT: {experiment_content[:2000]}...
+EXPERIMENT: {experiment_content}
 
 CORPUS: {len(corpus_files)} files. Sample content:
 {corpus_sample}
@@ -566,9 +610,9 @@ Answer: YES/NO with brief reasoning."""
             # THIN: LLM generates framework-agnostic analysis instructions
             instruction_prompt = f"""Generate analysis agent instructions for this framework and experiment:
 
-FRAMEWORK: {framework_content[:2000]}...
+FRAMEWORK: {framework_content}
 
-EXPERIMENT: {experiment_content[:2000]}...
+EXPERIMENT: {experiment_content}
 
 Create detailed instructions for an analysis agent to apply this framework to the described corpus. Include what outputs are expected."""
 
