@@ -105,10 +105,10 @@ class ValidationAgent:
         THIN Principle: Software orchestrates validation steps;
         LLM provides validation intelligence using rubrics
         """
-        project_path = Path(project_path)
+        project_path_obj = Path(project_path)
         
         # Step 1: Project structure validation (software)
-        structure_result = self.framework_loader.validate_project_structure(str(project_path))
+        structure_result = self.framework_loader.validate_project_structure(str(project_path_obj))
         
         if not structure_result['validation_passed']:
             return {
@@ -120,7 +120,7 @@ class ValidationAgent:
             }
         
         # Step 2: Framework validation (LLM)
-        framework_result = self._validate_project_framework(project_path)
+        framework_result = self._validate_project_framework(project_path_obj)
         
         if not framework_result['validation_passed']:
             return {
@@ -132,7 +132,7 @@ class ValidationAgent:
             }
         
         # Step 3: Experiment validation (LLM)
-        experiment_result = self._validate_project_experiment(project_path)
+        experiment_result = self._validate_project_experiment(project_path_obj)
         
         if not experiment_result['validation_passed']:
             return {
@@ -144,13 +144,13 @@ class ValidationAgent:
             }
         
         # Step 4: Corpus validation (software + LLM)
-        corpus_result = self._validate_project_corpus(project_path)
+        corpus_result = self._validate_project_corpus(project_path_obj)
         
         # All validations passed
         return {
             'status': 'success',
             'validation_passed': True,
-            'project_path': str(project_path),
+            'project_path': str(project_path_obj),
             'validation_timestamp': datetime.now().isoformat(),
             'structure_result': structure_result,
             'framework_result': framework_result,
@@ -607,16 +607,26 @@ Answer: YES/NO with brief reasoning."""
                     "validation_response": validation_response
                 }))
             
-            # THIN: LLM generates framework-agnostic analysis instructions
+            # THIN: Discover and load assets as specified by experiment
+            project_dir = Path(framework_path).parent
+            discovered_assets = self._discover_experiment_assets(experiment_content, project_dir)
+            
+            # THIN: LLM generates framework-agnostic analysis instructions with discovered assets
             instruction_prompt = f"""Generate analysis agent instructions for this framework and experiment:
 
 FRAMEWORK: {framework_content}
 
 EXPERIMENT: {experiment_content}
 
-Create detailed instructions for an analysis agent to apply this framework to the described corpus. Include what outputs are expected."""
+DISCOVERED ASSETS (as specified by experiment):
+{discovered_assets}
 
-            analysis_instructions = self.llm_client.call_llm(instruction_prompt, "instruction_generator")
+Create detailed instructions for an analysis agent to apply this framework to the described corpus. Include the framework specification, calibration materials, and any other assets discovered according to the experiment's asset discovery protocol. Include what outputs are expected."""
+
+            if self.llm_client:
+                analysis_instructions = self.llm_client.call_llm(instruction_prompt, "instruction_generator")
+            else:
+                analysis_instructions = "[MOCK] Analysis instructions would be generated here"
 
             # Publish instructions generated event
             redis_client.publish("soar.instructions.generated", json.dumps({
@@ -636,4 +646,72 @@ Create detailed instructions for an analysis agent to apply this framework to th
             }
             
         except Exception as e:
-            return {"status": "error", "message": f"Failed to load files: {str(e)}"} 
+            return {"status": "error", "message": f"Failed to load files: {str(e)}"}
+    
+    def _discover_experiment_assets(self, experiment_content: str, project_dir: Path) -> str:
+        """
+        THIN asset discovery: Parse experiment specification for asset discovery protocols
+        
+        The experiment specification provides intelligence about what assets are needed;
+        software provides file system operations to load them.
+        """
+        discovered_assets = []
+        
+        try:
+            # Look for asset discovery protocols in experiment content
+            asset_patterns = [
+                ('pdaf_assets/', 'PDAF calibration materials'),
+                ('assets/', 'framework assets'),
+                ('calibration/', 'calibration materials'),
+                ('reference_texts/', 'reference materials')
+            ]
+            
+            for asset_dir, description in asset_patterns:
+                if asset_dir in experiment_content.lower():
+                    asset_path = project_dir / asset_dir.strip('/')
+                    if asset_path.exists():
+                        print(f"📁 Discovered asset directory: {asset_path}")
+                        asset_contents = self._load_asset_directory(asset_path, description)
+                        if asset_contents:
+                            discovered_assets.append(asset_contents)
+            
+            # Look for specific file mentions in experiment
+            if 'calibration assets:' in experiment_content.lower():
+                print("🔍 Experiment specifies calibration assets protocol")
+            
+            if 'thin asset discovery protocol:' in experiment_content.lower():
+                print("🔍 Experiment includes THIN asset discovery protocol")
+            
+            if not discovered_assets:
+                return "No additional assets discovered (following experiment specification)"
+            
+            return "\n\n".join(discovered_assets)
+            
+        except Exception as e:
+            print(f"⚠️ Asset discovery error: {e}")
+            return f"Asset discovery failed: {str(e)}"
+    
+    def _load_asset_directory(self, asset_path: Path, description: str) -> str:
+        """Load all files from an asset directory"""
+        
+        if not asset_path.exists() or not asset_path.is_dir():
+            return ""
+        
+        asset_content = f"=== {description.upper()} ===\nLocation: {asset_path}\n\n"
+        
+        # Load text files from asset directory
+        text_files = list(asset_path.glob("*.md")) + list(asset_path.glob("*.txt")) + list(asset_path.glob("*.yaml"))
+        
+        for file_path in text_files:
+            try:
+                content = file_path.read_text()
+                asset_content += f"--- {file_path.name} ---\n{content}\n\n"
+                print(f"📄 Loaded asset: {file_path.name} ({len(content)} chars)")
+            except Exception as e:
+                print(f"⚠️ Could not load {file_path}: {e}")
+                continue
+        
+        if len(text_files) == 0:
+            asset_content += "No readable text files found in this directory.\n"
+        
+        return asset_content 
