@@ -24,6 +24,7 @@ if project_root not in sys.path:
 try:
     import litellm
     from litellm import completion, acompletion
+    from .provider_parameter_manager import ProviderParameterManager
 
     LITELLM_AVAILABLE = True
 except ImportError:
@@ -110,6 +111,7 @@ class LiteLLMClient:
         self.retry_handler = APIRetryHandler()
         self.failover_handler = ProviderFailoverHandler()
         self.tpm_limiter = TPMRateLimiter()
+        self.parameter_manager = ProviderParameterManager()
 
         self._configure_litellm()
         self._test_model_availability()
@@ -370,34 +372,7 @@ Use specific evidence and examples from the text to support your analysis."""
 
         self._last_local_request[provider] = time.time()
 
-    # Add safety settings configuration for Vertex AI models
-    def _get_safety_settings_for_vertex_ai(self):
-        """
-        Configure safety settings for Vertex AI models to allow political content analysis.
-        
-        Based on user's successful web interface test, we know Gemini CAN analyze political content
-        when safety settings are configured appropriately. The API has stricter defaults than web interface.
-        
-        Using BLOCK_NONE for academic political discourse analysis.
-        """
-        return [
-            {
-                "category": "HARM_CATEGORY_HARASSMENT",
-                "threshold": "BLOCK_NONE",
-            },
-            {
-                "category": "HARM_CATEGORY_HATE_SPEECH",
-                "threshold": "BLOCK_NONE",
-            },
-            {
-                "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                "threshold": "BLOCK_NONE",
-            },
-            {
-                "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-                "threshold": "BLOCK_NONE",
-            },
-        ]
+
 
     def _preprocess_political_content(self, content: str) -> str:
         """
@@ -477,33 +452,27 @@ Use specific evidence and examples from the text to support your analysis."""
             return {"error": f"Model fallback error: {str(e)}"}, 0.0
 
     def _litellm_call_with_retry(self, prompt: str, model_name: str) -> Tuple[Dict[str, Any], float]:
-        """LiteLLM call with retry logic and native rate limiting"""
-        provider = self._get_provider_from_model(model_name)
+        """LiteLLM call with retry logic and clean parameter management"""
+        provider = self.parameter_manager.get_provider_from_model(model_name)
         
         # Track current model for parsing
         self._last_model_used = model_name
 
         @self.retry_handler.with_retry(provider, model_name)
         def make_litellm_call():
-            # Dynamic timeout based on provider
-            timeout_duration = 300 if provider == "ollama" else 60  # 5 minutes for Ollama, 1 minute for others
-            
-            # Configure safety settings for political content analysis
-            completion_params = {
+            # Base parameters
+            base_params = {
                 "model": model_name,
                 "messages": [{"role": "user", "content": prompt}],
-                "temperature": 0.7,  # Increased for analytical variation
-                "timeout": timeout_duration,
             }
             
-            # Only add max_tokens for non-Vertex AI models (Vertex AI safety filter is sensitive to this)
-            if provider != "vertex_ai":
-                completion_params["max_tokens"] = 2000
+            # Get clean parameters using the parameter manager
+            completion_params = self.parameter_manager.get_clean_parameters(model_name, base_params)
             
-            # Add safety settings for Vertex AI models to allow political content analysis
-            if provider == "vertex_ai":
-                completion_params["safety_settings"] = self._get_safety_settings_for_vertex_ai()
-                print(f"🔒 Added safety settings for Vertex AI political content analysis")
+            # Log parameter decisions for debugging
+            self.parameter_manager.log_parameter_decisions(model_name, base_params, completion_params)
+            
+            print(f"🔧 Making LiteLLM call to {model_name} with clean parameters")
             
             response = completion(**completion_params)
 
@@ -524,31 +493,24 @@ Use specific evidence and examples from the text to support your analysis."""
         return make_litellm_call()
 
     def _litellm_call_basic(self, prompt: str, model_name: str) -> Tuple[Dict[str, Any], float]:
-        """Basic LiteLLM call with native rate limiting (much faster!)"""
+        """Basic LiteLLM call with clean parameter management"""
         # Track current model for parsing
         self._last_model_used = model_name
         
         try:
-            # Dynamic timeout based on provider 
-            provider = self._get_provider_from_model(model_name)
-            timeout_duration = 300 if provider == "ollama" else 60  # 5 minutes for Ollama, 1 minute for others
-            
-            # Configure safety settings for political content analysis
-            completion_params = {
+            # Base parameters
+            base_params = {
                 "model": model_name,
                 "messages": [{"role": "user", "content": prompt}],
-                "temperature": 0.7,  # Increased for analytical variation
-                "timeout": timeout_duration,
             }
             
-            # Only add max_tokens for non-Vertex AI models (Vertex AI safety filter is sensitive to this)
-            if provider != "vertex_ai":
-                completion_params["max_tokens"] = 2000
+            # Get clean parameters using the parameter manager
+            completion_params = self.parameter_manager.get_clean_parameters(model_name, base_params)
             
-            # Add safety settings for Vertex AI models to allow political content analysis
-            if provider == "vertex_ai":
-                completion_params["safety_settings"] = self._get_safety_settings_for_vertex_ai()
-                print(f"🔒 Added safety settings for Vertex AI political content analysis")
+            # Log parameter decisions for debugging
+            self.parameter_manager.log_parameter_decisions(model_name, base_params, completion_params)
+            
+            print(f"🔧 Making basic LiteLLM call to {model_name} with clean parameters")
             
             response = completion(**completion_params)
 
@@ -568,23 +530,8 @@ Use specific evidence and examples from the text to support your analysis."""
             return {"error": str(e)}, 0.0
 
     def _get_provider_from_model(self, model_name: str) -> str:
-        """Get provider name from model name"""
-        model_lower = model_name.lower()
-
-        if model_lower.startswith("vertex_ai/"):
-            return "vertex_ai"
-        elif model_lower.startswith("ollama/"):
-            return "ollama"
-        elif any(x in model_lower for x in ["gpt", "openai", "o1", "o3", "o4"]):
-            return "openai"
-        elif any(x in model_lower for x in ["claude", "anthropic"]):
-            return "anthropic"
-        elif any(x in model_lower for x in ["mistral", "codestral"]):
-            return "mistral"
-        elif any(x in model_lower for x in ["gemini", "google"]):
-            return "vertex_ai"  # Default Gemini to Vertex AI
-        else:
-            return "unknown"
+        """Get provider name from model name - delegated to parameter manager"""
+        return self.parameter_manager.get_provider_from_model(model_name)
 
     def _parse_response(self, content: str, text_input: str = None, framework: str = None) -> Dict[str, Any]:
         """
