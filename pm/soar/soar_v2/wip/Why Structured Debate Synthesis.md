@@ -207,7 +207,7 @@
 - **Best Practices**: Reusable protocols for computational social science
 - **Error Analysis**: Systematic investigation of measurement challenges
 
-## Redis/Celery Integration
+## Redis Integration
 
 ### Technical Architecture
 

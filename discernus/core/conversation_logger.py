@@ -15,11 +15,19 @@ Core Discernus Principle: Conversation-Native Processing
 
 import json
 import uuid
+import threading
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 import git
 import logging
+
+# Import Redis for event capture
+try:
+    import redis
+    REDIS_AVAILABLE = True
+except ImportError:
+    REDIS_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +38,8 @@ class ConversationLogger:
     
     Records all LLM interactions verbatim to Git for complete transparency
     and reproducibility. No structured data extraction or analysis.
+    
+    Enhanced with Redis event capture for complete chronological logging.
     """
     
     def __init__(self, project_root: str = ".", custom_conversations_dir: Optional[str] = None):
@@ -46,8 +56,23 @@ class ConversationLogger:
         # Initialize Git repo if not exists
         try:
             self.git_repo = git.Repo(self.project_root)
-        except git.exc.InvalidGitRepositoryError:
+        except git.InvalidGitRepositoryError:
             self.git_repo = git.Repo.init(self.project_root)
+        
+        # Initialize Redis client for event capture
+        self.redis_client = None
+        self.redis_pubsub = None
+        self.redis_thread = None
+        self.active_conversations = set()
+        
+        if REDIS_AVAILABLE:
+            try:
+                self.redis_client = redis.Redis(host='localhost', port=6379, db=0)
+                self.redis_client.ping()  # Test connection
+                logger.info("Redis connected for event capture")
+            except Exception as e:
+                logger.warning(f"Redis unavailable for event capture: {e}")
+                self.redis_client = None
         
         logger.info(f"ConversationLogger initialized: {self.conversations_dir}")
     
@@ -81,8 +106,105 @@ class ConversationLogger:
         # Log conversation start
         self._log_message(conversation_id, "system", "CONVERSATION_START", metadata)
         
+        # Start Redis event capture for this conversation
+        self._start_redis_capture(conversation_id)
+        
         return conversation_id
     
+    def _start_redis_capture(self, conversation_id: str) -> None:
+        """
+        Start Redis event capture for a conversation
+        
+        Captures SOAR events (agent spawning, completions, etc.) and logs them
+        alongside LLM messages for complete chronological record.
+        """
+        if not self.redis_client:
+            return
+        
+        # Add to active conversations
+        self.active_conversations.add(conversation_id)
+        
+        # Start Redis subscriber thread if not already running
+        if not self.redis_thread or not self.redis_thread.is_alive():
+            self.redis_pubsub = self.redis_client.pubsub()
+            self.redis_pubsub.psubscribe('soar.*')
+            self.redis_thread = threading.Thread(target=self._redis_event_listener, daemon=True)
+            self.redis_thread.start()
+            logger.info(f"Started Redis event capture for conversation: {conversation_id}")
+    
+    def _redis_event_listener(self) -> None:
+        """
+        Listen for Redis events and log them to active conversations
+        """
+        if not self.redis_pubsub:
+            return
+        
+        try:
+            for message in self.redis_pubsub.listen():
+                if message['type'] == 'pmessage':
+                    # Parse Redis event
+                    channel = message['channel'].decode('utf-8')
+                    try:
+                        event_data = json.loads(message['data'].decode('utf-8'))
+                        session_id = event_data.get('session_id', 'unknown_session')
+                        
+                        # Log event to all active conversations
+                        # (In practice, there's usually only one active conversation)
+                        for conversation_id in list(self.active_conversations):
+                            self._log_redis_event(conversation_id, channel, event_data)
+                            
+                    except json.JSONDecodeError as e:
+                        logger.warning(f"Failed to parse Redis event: {e}")
+                        
+        except Exception as e:
+            logger.warning(f"Redis event listener error: {e}")
+    
+    def _log_redis_event(self, conversation_id: str, channel: str, event_data: Dict[str, Any]) -> None:
+        """
+        Log a Redis event to the conversation log
+        """
+        # Create a formatted message for the Redis event
+        event_message = self._format_redis_event(channel, event_data)
+        
+        # Log as a system message with Redis metadata
+        redis_metadata = {
+            "type": "redis_event",
+            "channel": channel,
+            "event_data": event_data,
+            "timestamp": event_data.get('timestamp', datetime.now().isoformat())
+        }
+        
+        self._log_message(conversation_id, "system", event_message, redis_metadata)
+    
+    def _format_redis_event(self, channel: str, event_data: Dict[str, Any]) -> str:
+        """
+        Format Redis event for human-readable logging
+        """
+        message_type = event_data.get('message_type', 'unknown')
+        
+        if channel == 'soar.agent.spawned':
+            agent_type = event_data.get('agent_type', 'unknown_agent')
+            agent_role = event_data.get('agent_role', 'unknown_role')
+            return f"AGENT_SPAWNED: {agent_type} ({agent_role})"
+        
+        elif channel == 'soar.agent.completed':
+            agent_type = event_data.get('agent_type', 'unknown_agent')
+            turn = event_data.get('turn', 'unknown')
+            return f"AGENT_COMPLETED: {agent_type} (turn {turn})"
+        
+        elif channel == 'soar.session.start':
+            research_question = event_data.get('research_question', 'unknown')
+            return f"SESSION_START: {research_question}"
+        
+        elif channel == 'soar.validation.started':
+            return f"VALIDATION_STARTED"
+        
+        elif channel == 'soar.framework.validated':
+            return f"FRAMEWORK_VALIDATED"
+        
+        else:
+            return f"SOAR_EVENT: {channel} - {message_type}"
+
     def log_llm_message(self, 
                        conversation_id: str,
                        speaker: str,
@@ -130,6 +252,9 @@ class ConversationLogger:
             conversation_id: Conversation identifier
             summary: Optional summary for Git commit
         """
+        # Remove from active conversations (stops Redis event capture)
+        self.active_conversations.discard(conversation_id)
+        
         metadata = {
             "ended_at": datetime.now().isoformat(),
             "summary": summary,
@@ -140,7 +265,13 @@ class ConversationLogger:
         
         # Commit conversation to Git
         self._commit_conversation(conversation_id, summary)
-    
+        
+        # Stop Redis listener if no active conversations
+        if not self.active_conversations and self.redis_pubsub:
+            self.redis_pubsub.close()
+            self.redis_pubsub = None
+            logger.info("Stopped Redis event capture - no active conversations")
+
     def _log_message(self, 
                     conversation_id: str,
                     speaker: str,
@@ -163,7 +294,7 @@ class ConversationLogger:
         
         with open(conversation_file, "a", encoding="utf-8") as f:
             f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
-    
+
     def _commit_conversation(self, conversation_id: str, summary: str) -> None:
         """
         Commit conversation to Git for transparency

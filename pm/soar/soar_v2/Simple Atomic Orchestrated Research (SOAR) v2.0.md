@@ -58,6 +58,92 @@ Create a SOAR architecture that enables researchers to:
 
 -----
 
+## Academic Innovation: AI-Powered Adversarial Review
+
+### The Academic Peer Review Problem
+
+**Traditional Peer Review Limitations**:
+- **Human Cognitive Load**: Reviewers overwhelmed by complex framework application across large corpora
+- **Inconsistency**: Variable human judgment and expertise across different texts and timeframes
+- **Scale Constraints**: Manual review infeasible for large-scale computational research projects
+- **Bias Introduction**: Reviewer preferences and fatigue influence synthesis decisions
+- **Limited Documentation**: Informal review processes with incomplete methodology transparency
+
+**SOAR's Adversarial Review Innovation**:
+- **Systematic Evidence Competition**: Multiple AI models defend their analyses with specific textual citations
+- **Structured Challenge Protocols**: Formal debate processes requiring calibration reference alignment
+- **Evidence-Based Arbitration**: Referee models evaluate argument quality based on framework compliance
+- **Complete Methodology Transparency**: Full debate transcripts provide unprecedented academic auditability
+- **Scalable Academic Rigor**: Consistent quality assurance across unlimited corpus sizes
+
+### Why Real-Time Coordination is Essential
+
+**The Academic Rigor Requirements**:
+
+Traditional academic peer review requires **interactive dialogue** between reviewers. SOAR's adversarial review process replicates this through genuine multi-agent coordination where models challenge each other's analysis with evidence-based arguments.
+
+**Technical Implementation**: See [SOAR v2.0 Developer Briefing](./SOAR%20v2.0%20Developer%20Briefing.md#technical-innovation-why-redis-coordination-is-essential-for-academic-rigor) for detailed technical architecture justification, Redis pub-sub implementation requirements, and alternative architecture analysis.
+
+### Academic Quality Advantages
+
+**Evidence-Based Validation**:
+```
+Traditional: "This text scores 1.7 on populist dimension" (black box)
+SOAR: "Model A scored 1.7 citing X, Y, Z evidence. Model B challenged with counter-evidence A, B, C. 
+       Referee selected Model A's argument based on stronger calibration alignment. 
+       Full debate transcript available."
+```
+
+**Systematic Bias Detection**:
+- Cross-model validation prevents individual model biases from affecting results
+- Structured challenge process forces explicit justification of controversial scores
+- Referee arbitration provides independent evaluation of evidence quality
+- Complete audit trail enables systematic bias pattern identification
+
+**Methodological Transparency**:
+- Every final score is traceable to specific evidence and reasoning
+- Competing interpretations are documented with explicit counter-arguments
+- Referee decisions include detailed reasoning based on framework criteria
+- Complete methodology replication is possible from audit trail
+
+**Academic Credibility**:
+- Krippendorff's Alpha reliability metrics provide statistical validation
+- Evidence competition exceeds manual inter-rater reliability standards
+- Structured protocols ensure consistent methodology across all texts
+- Peer review quality surpasses ad-hoc human synthesis approaches
+
+### Methodological Innovation Impact
+
+**For Computational Social Science**:
+- **Novel Validation Methodology**: AI adversarial review as systematic quality assurance
+- **Scalable Academic Rigor**: Consistent peer review quality for unlimited corpus sizes
+- **Transparency Standards**: Complete audit trails enabling methodology replication
+- **Cross-Framework Applicability**: Universal approach for any systematic analysis framework
+
+**For Academic Publishing**:
+- **Enhanced Methodology Sections**: Complete adversarial review process documentation
+- **Reliability Metrics**: Quantified confidence intervals and agreement measures
+- **Replication Support**: Full audit trails enabling independent verification
+- **Quality Assurance**: Evidence-based validation exceeding traditional manual approaches
+
+-----
+
+## Implementation Architecture: Storage Integration
+
+**Implementation Strategy**: See [SOAR v2.0 Developer Briefing](./SOAR%20v2.0%20Developer%20Briefing.md#developer-implementation-strategy-phased-architecture) for detailed phased implementation approach (Phase 1-3), technical focus areas, and success criteria for each development phase.
+
+### Academic Storage + Real-Time Coordination Integration
+
+**Two-Layer Architecture Overview**:
+
+SOAR v2.0 implements a dual-layer approach where **Redis enables the process** (real-time structured debate) while **files preserve the products** (permanent academic records). This integration ensures that interactive validation during analysis becomes permanent academic value after analysis.
+
+**Key Architectural Principle**: Redis coordinates transient debate interactions, while immutable file storage provides durable academic records suitable for peer review and replication.
+
+**Technical Details**: See [SOAR v2.0 Developer Briefing](./SOAR%20v2.0%20Developer%20Briefing.md#academic-storage--real-time-coordination-integration) for detailed technical architecture, integration patterns, code examples, and the complete flow from Redis events to academic records.
+
+-----
+
 ## THIN Architecture Principles
 
 ### Philosophy: Leverage AI Intelligence Rather Than Reimplementing It
@@ -73,64 +159,163 @@ SOAR v2.0 implements THIN (Thin Intelligent Networked) architecture: use AI capa
 
 ### THIN Implementation Guidelines
 
-#### Error Recovery and Validation
+**Core Guidelines**:
+- **Error Recovery**: Use LLMs to fix malformed responses and validate compliance
+- **Debate Orchestration**: LLM moderators understand context better than hardcoded flows
+- **Content Generation**: LLMs generate framework-appropriate content, not templates
+- **Quality Assurance**: Contextual LLM assessment over mechanical rule checking
+- **Human Oversight**: AI determines when human input adds value
 
-Use LLMs to fix malformed responses, validate compliance, and assess quality rather than building complex parsing and rule-based validation systems.
+**Implementation Standards**: See [SOAR v2.0 Developer Briefing](./SOAR%20v2.0%20Developer%20Briefing.md#thin-architecture-philosophy-orchestrate-intelligence-dont-build-it) for detailed implementation requirements, code examples, compliance requirements, and anti-patterns to avoid.
 
-**THIN Approach**:
+-----
 
+## LLM API Best Practices and Conversational Design
+
+### Critical Insight: API Parameter Sensitivity
+
+**Key Discovery**: LLMs are extremely sensitive to API request parameters and formatting. Small, seemingly innocuous parameters can trigger unexpected behavioral changes, safety filters, or task drift.
+
+**Example**: The Vertex AI safety filter issue was resolved by removing `max_tokens=2000` parameter, which was triggering stricter content filtering for political content despite the same content working perfectly in web interfaces.
+
+### The Human Expert Simulation Principle
+
+**Core Design Philosophy**: Web interfaces work reliably because they feel like natural conversations with human experts. SOAR v2.0 API calls should mimic this conversational pattern rather than trying to be technical or programmatic.
+
+**Framework Integration Approach**: Instead of passing framework specifications as technical data structures, embed them in natural language instructions that explain the research context and desired outcomes.
+
+### Conversational Framework Application
+
+**Traditional Approach** (Problematic):
 ```python
-# LLM validates and fixes responses
-async def validate_framework_response(response, framework_spec):
-    return await llm_client.complete(f"""
-    Framework: {framework_spec}
-    Response: {response}
-    
-    Validate compliance and fix any issues. Return corrected response.
-    """)
+# Technical/mechanical - prone to parameter sensitivity
+system_prompt = f"Framework: {framework_spec}\nAnalyze: {text}\nOutput: JSON"
+completion = llm_client.complete(
+    messages=[{"role": "system", "content": system_prompt}],
+    max_tokens=2000,
+    temperature=0.7,
+    top_p=0.9,
+    frequency_penalty=0.1
+)
 ```
 
-**Avoid**: Complex parsing logic and hardcoded validation rules.
+**SOAR v2.0 Approach** (Recommended):
+```python
+# Conversational - leverages natural language understanding
+user_prompt = f"""
+Hi! I'm a researcher studying {framework.domain}, and I'd like your help analyzing some text using the {framework.name} framework.
 
-#### Debate Orchestration
+Here's the framework specification:
+{framework.specification}
 
-LLM moderators understand context and framework requirements better than hardcoded conversation flows.
+And here's the text I want you to analyze:
+{text}
 
-#### Content Generation
+Could you please apply this framework systematically? I need:
+1. Scores for each dimension with clear justification
+2. Specific evidence from the text supporting each score
+3. Your reasoning explained step by step
 
-LLMs generate framework-appropriate academic content rather than template-based text substitution.
+Please structure your response so I can use it for academic research.
+"""
 
-#### Quality Assurance
+# Minimal parameters - maximum conversational context
+completion = llm_client.complete(
+    messages=[{"role": "user", "content": user_prompt}]
+    # Only add provider-specific parameters when absolutely necessary
+)
+```
 
-LLMs assess methodology compliance and evidence quality through contextual understanding rather than mechanical rule checking.
+### API Hygiene Guidelines for SOAR v2.0
 
-#### THIN Approach to Human Oversight
+**1. Minimal Parameter Principle**
+- Only send necessary parameters to LLM APIs
+- Different providers have different parameter sensitivities
+- Clean, minimal requests = more predictable behavior
+- Parameter bloat can break models in unexpected ways
 
-Human oversight should follow THIN principles—use AI to determine when human input adds value rather than building complex intervention systems.
+**2. Provider-Specific Optimization**
+```python
+# Example: Vertex AI parameter sensitivity handling
+if provider == "vertex_ai":
+    # Exclude max_tokens to avoid triggering safety filters
+    params = {k: v for k, v in params.items() if k != "max_tokens"}
+    
+    # Configure safety settings for academic research
+    params["safety_settings"] = [
+        {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+        {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+        {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+        {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
+    ]
+```
 
-**MVP Approach**:
-- Focus human attention on framework specification with AI-assisted validation
-- Provide transparency through progress indicators and audit trails
-- Defer runtime intervention systems until proven necessary
-- Trust AI orchestration while maintaining abort capability for researcher comfort
+**3. Conversational Context Over Technical Formatting**
+- Use natural language instructions instead of structured schemas
+- Embed complex framework specifications in conversational context
+- Let LLMs use their natural language understanding capabilities
+- Avoid forcing LLMs into artificial technical communication patterns
 
-### THIN Compliance Requirements
+### Framework-Agnostic Conversational Wrapper
 
-**Implementation components should prefer**:
+**The Universal Pattern**:
+```python
+class ConversationalFrameworkAnalyzer:
+    """SOAR v2.0 conversational framework application"""
+    
+    def generate_framework_analysis_prompt(self, framework: Framework, text: str) -> str:
+        """Generate conversational prompt for any framework"""
+        return f"""
+        Hi! I'm a researcher studying {framework.domain}, and I'd like your help analyzing some text using the {framework.name} framework.
 
-- LLM-based validation over regex parsing
-- AI content generation over template filling
-- Contextual assessment over rule-based scoring
-- Simple orchestration over complex state machines
+        Here's the framework specification:
+        {framework.specification}
 
-**Quality Gate**: Components requiring >50 lines of parsing, validation, or generation logic should be reviewed for THIN violations and potential LLM-based alternatives.
+        And here's the text I want you to analyze:
+        {text}
 
-**THIN Anti-Patterns to Avoid**:
+        Could you please apply this framework systematically? I need:
+        1. Scores for each dimension with clear justification
+        2. Specific evidence from the text supporting each score
+        3. Your reasoning explained step by step
 
-- Regex-heavy response parsing
-- Template-based content generation
-- Hardcoded quality scoring rules
-- Complex state machine logic for conversation flow
+        Please structure your response so I can use it for academic research.
+        """
+    
+    async def analyze_with_framework(self, framework: Framework, text: str) -> AnalysisResult:
+        """Framework-agnostic analysis using conversational approach"""
+        prompt = self.generate_framework_analysis_prompt(framework, text)
+        
+        # Clean API call with minimal parameters
+        response = await self.llm_client.complete(
+            messages=[{"role": "user", "content": prompt}]
+        )
+        
+        return self.parse_conversational_response(response, framework)
+```
+
+### Why This Solves Framework Context Propagation
+
+**The Root Problem**: Framework specifications were being passed as technical data but not reaching analysis agents as meaningful context.
+
+**The Solution**: Conversational wrapping makes the framework specification part of the natural language instruction, ensuring LLMs understand their role as domain experts applying specific methodologies.
+
+**Benefits**:
+1. **Framework Context Isolation Fixed**: LLM understands its role as research collaborator using specific framework
+2. **API Parameter Sensitivity Minimized**: Fewer technical parameters, more conversational context
+3. **Framework-Agnostic Design**: Any framework can be wrapped in conversational instructions
+4. **Natural Task Understanding**: LLM knows what kind of expert analysis is expected
+5. **Debugging Simplicity**: When issues arise, check conversational clarity first
+
+### SOAR v2.0 Debugging Strategy
+
+**When LLMs behave unexpectedly**:
+1. **Check parameter hygiene first** - eliminate unnecessary parameters
+2. **Test conversational clarity** - would the request be clear to a human expert?
+3. **Verify provider-specific sensitivities** - some providers react differently to same parameters
+4. **Compare with web interface behavior** - if web works but API doesn't, likely parameter issue
+
+**This approach exemplifies THIN philosophy**: Leverage LLM's natural conversational intelligence instead of fighting it with technical abstractions.
 
 -----
 
@@ -887,7 +1072,7 @@ class MVPResearcherControls:
 
 -----
 
-## Redis/Celery Pub-Sub Architecture
+## Redis Pub-Sub Architecture
 
 ### Universal Channel Specification
 
@@ -964,219 +1149,29 @@ class MVPResearcherControls:
 
 -----
 
-## Implementation Priorities: What Matters Most
+## Structured Debate Protocol
 
-### Priority 1: Cost Transparency & Budget Controls
+**Four-Phase Adversarial Review Process**:
 
-**Why This Matters**: Cost anxiety is the #1 adoption blocker. Researchers, especially in academia, are extremely budget-conscious. Without upfront cost estimation and budget controls, users will be too afraid to try the system.
+1. **Initial Analysis**: Models independently analyze text using complete framework
+2. **Divergence Detection**: Moderator identifies significant disagreements requiring debate
+3. **Structured Defense**: Models defend scores with textual evidence and calibration references
+4. **Referee Arbitration**: Independent evaluation selects strongest evidence-based arguments
 
-**THIN Approach**: Use LiteLLM's cost estimation utilities + simple budget enforcement rather than building complex cost tracking systems.
+**Quality Enhancement Through Evidence Competition**:
+- Models compete on citation quality and framework alignment
+- Systematic validation prevents conceptual drift
+- Academic transparency through complete debate documentation
 
-**Quality Bar**:
-- Accurate cost estimation within 15% of actual costs using `litellm.utils.estimate_cost()`
-- Hard budget limits that abort analysis before exceeding researcher's budget
-- Fail-fast gate: 3k word analysis must complete under $0.40 and 90 seconds
-- Adaptive ensemble reduction when budget is tight
+**Human Integration Strategy**: Strategic oversight for edge cases (10%) with automated processing for standard cases (90%).
 
-```python
-# THIN cost control implementation
-async def estimate_and_enforce_budget(framework: str, text: str, budget: float):
-    # Use LiteLLM for cost estimation
-    total_tokens = estimate_framework_tokens(framework) + estimate_text_tokens(text)
-    estimated_cost = litellm.utils.estimate_cost(total_tokens)
-    
-    if estimated_cost > budget:
-        raise BudgetExceededError(f"Estimated cost ${estimated_cost} exceeds budget ${budget}")
-    
-    # Simple budget enforcement, not complex tracking
-    return {"estimated_cost": estimated_cost, "budget_remaining": budget - estimated_cost}
+**Technical Implementation**: See [SOAR v2.0 Developer Briefing](./SOAR%20v2.0%20Developer%20Briefing.md#structured-debate-protocol-implementation) for concrete message formats, quality enhancement mechanisms, and academic validation details.
 
-# Avoid: Complex cost tracking systems
-class ComplexCostTracker:
-    # ... hundreds of lines of cost accounting logic
-    # This reimplements functionality that LiteLLM already provides
-```
+-----
 
-### Priority 2: Academic Validation with Krippendorff's Alpha
+## Implementation Priorities
 
-**Why This Matters**: This is the most important addition. Academic credibility requires industry-standard inter-rater reliability metrics. Krippendorff's Alpha is the gold standard for measuring agreement between multiple raters (our ensemble models).
-
-**THIN Approach**: Use existing statistical libraries (like `krippendorff` package) + LLM interpretation rather than implementing complex statistical calculations.
-
-**Quality Bar**:
-- Calculate Krippendorff's Alpha ≥ 0.6 vs. gold standard corpus
-- Inter-LLM Alpha ≥ 0.5 for ensemble reliability
-- Fail CI builds if reliability falls below thresholds
-- Include Alpha scores in all academic reports
-
-```python
-# THIN academic validation implementation
-async def calculate_reliability_metrics(ensemble_results: List[AnalysisResult]) -> ReliabilityReport:
-    import krippendorff
-    
-    # Convert ensemble scores to reliability matrix (simple data transformation)
-    reliability_data = convert_to_reliability_matrix(ensemble_results)
-    alpha = krippendorff.alpha(reliability_data, level_of_measurement='interval')
-    
-    # Use LLM to interpret the statistical result
-    interpretation_prompt = f"""
-    Krippendorff's Alpha score: {alpha}
-    
-    Interpret this reliability score for academic researchers:
-    - What does this score mean for research validity?
-    - Should researchers trust these results for publication?
-    - How does this compare to manual coding reliability?
-    """
-    
-    interpretation = await llm_client.complete(interpretation_prompt)
-    
-    return ReliabilityReport(alpha=alpha, interpretation=interpretation)
-
-# Avoid: Implementing statistical calculations from scratch
-def calculate_alpha_manually(data):
-    # ... hundreds of lines of statistical computation
-    # This reimplements well-tested statistical libraries
-```
-
-### Priority 3: Durable Persistence & Audit Trails
-
-**Why This Matters**: Academic research requires audit-grade durability. A research audit trail that can be lost in a server crash is not an audit trail at all. This builds institutional trust.
-
-**THIN Approach**: Use Redis AOF + S3/MinIO backup rather than building complex database systems.
-
-**Quality Bar**:
-- Redis with `appendfsync=always` for crash-safe logging
-- Immutable backup to S3/MinIO after each job completion
-- Content hash verification for audit trail integrity
-- Simple JSONL format for easy analysis and debugging
-
-```python
-# THIN durable persistence implementation
-class DurableAuditLogger:
-    def __init__(self):
-        # Configure Redis for crash-safe logging (simple config change)
-        self.redis_client = redis.Redis()
-        self.redis_client.config_set('appendonly', 'yes')
-        self.redis_client.config_set('appendfsync', 'always')
-    
-    async def log_audit_event(self, session_id: str, event: Dict):
-        # Simple append-only logging
-        event_with_id = {**event, "event_id": str(uuid.uuid4())}
-        await self.redis_client.lpush(f"audit:{session_id}", json.dumps(event_with_id))
-    
-    async def create_immutable_backup(self, session_id: str):
-        # Simple S3 backup with content hash
-        audit_log = await self._get_complete_log(session_id)
-        content_hash = hashlib.sha256(audit_log.encode()).hexdigest()
-        
-        await self.s3_client.put_object(
-            Bucket="audit-logs",
-            Key=f"{session_id}/{datetime.utcnow().isoformat()}.jsonl",
-            Body=audit_log,
-            Metadata={"content_hash": content_hash, "immutable": "true"}
-        )
-
-# Avoid: Complex database schemas
-class ComplexAuditDatabase:
-    # ... hundreds of lines of database design and ORM mapping
-    # This adds complexity without improving reliability
-```
-
-### Priority 4: AI-Powered Framework Validation
-
-**Why This Matters**: Garbage in, garbage out. The single most important way to ensure high-quality analysis is to ensure the framework specification is clear, complete, and consistent *before* the analysis begins.
-
-**THIN Approach**: Instead of building complex runtime validation, we use an AI assistant to help the researcher perfect their framework upfront.
-
-**Quality Bar**:
-- The `FrameworkValidationAssistant` interactively guides a researcher to fix ambiguities, add missing calibration examples, and clarify scoring logic.
-- PDAF and CFF frameworks load successfully *after* passing through the validation assistant.
-- The system trusts a validated framework completely, treating it as an immutable source of truth.
-
-### Priority 5: Reliable Multi-Model Coordination
-
-**Why This Matters**: Ensemble validation only works if all models complete analysis successfully
-**THIN Approach**: Simple async coordination + LLM-powered error recovery
-
-**Quality Bar**:
-
-- Handles model failures without breaking ensemble
-- LLM-powered recovery from malformed responses
-- Partial results better than complete failure
-- Clear error reporting for debugging
-
-```python
-# THIN multi-model coordination
-async def ensemble_analysis(agents: List[Agent], context: AnalysisContext) -> EnsembleResult:
-    results = []
-    failures = []
-    
-    # Simple async coordination
-    async with asyncio.timeout(context.timeout_minutes * 60):
-        responses = await asyncio.gather(*[agent.analyze(context) for agent in agents], 
-                                       return_exceptions=True)
-    
-    # LLM-powered error recovery
-    for i, response in enumerate(responses):
-        if isinstance(response, Exception):
-            failures.append((agents[i], response))
-        elif not is_valid_json(response):
-            # Use LLM to fix malformed response
-            fixed_response = await response_validator.clean_response(response, context.schema)
-            results.append(fixed_response)
-        else:
-            results.append(response)
-    
-    if len(results) < MIN_ENSEMBLE_SIZE:
-        raise InsufficientAnalysisError(f"Only {len(results)} models completed successfully")
-    
-    return EnsembleResult(results, failures)
-
-# Avoid: Complex retry logic and response parsing
-def robust_ensemble_with_retries(agents):
-    # ... complex state machines for retry logic
-    # ... brittle response parsing with regex
-    # ... reimplements intelligence that LLMs have
-```
-
-### Priority 6: Evidence-Based Structured Debates
-
-**Why This Matters**: This is SOAR's key innovation—turning model disagreement into validation strength
-**THIN Approach**: LLM moderator orchestrates debates, LLM referee arbitrates based on evidence quality
-
-**Quality Bar**:
-
-- LLM moderator detects meaningful disagreements and orchestrates structured debates
-- LLM referee evaluates evidence quality rather than mechanical text matching
-- Complete audit trail of debate process
-- Framework-appropriate debate standards maintained
-
-```python
-# THIN debate orchestration
-class DebateModerator:
-    async def orchestrate_debate(self, disagreement: Disagreement, framework: Framework):
-        moderation_prompt = f"""
-        Framework: {framework.name}
-        Disagreement: Models scored dimension '{disagreement.dimension}' as {disagreement.scores}
-        
-        Orchestrate a structured debate:
-        1. Ask each model to defend their score with textual evidence
-        2. Allow one round of rebuttals
-        3. Summarize evidence quality for referee
-        
-        Generate specific prompts for each debate round.
-        """
-        
-        debate_plan = await llm_client.complete(moderation_prompt, model="claude-3-sonnet")
-        return await self.execute_debate_plan(debate_plan, disagreement)
-
-# Avoid: Hardcoded debate scripts
-def orchestrate_debate_manually(disagreement):
-    # Send fixed prompt: "Defend your score with evidence"
-    # Parse responses with regex
-    # Apply hardcoded evidence evaluation rules
-    # Misses nuanced debate dynamics and framework-specific requirements
-```
+**Development Focus**: See [SOAR v2.0 Developer Briefing](./SOAR%20v2.0%20Developer%20Briefing.md#implementation-priorities-what-matters-most) for detailed implementation priorities including cost transparency, academic validation metrics, durable persistence, framework validation, multi-model coordination, and structured debate orchestration with specific quality bars, code examples, and THIN architecture compliance.
 
 -----
 
@@ -1289,6 +1284,16 @@ SOAR v2.0 transforms computational research from framework-specific tools to uni
 - **Quality**: Intelligent assessment surpasses rule-based validation
 - **Maintainability**: Minimal traditional code reduces technical debt
 - **Scalability**: AI capabilities improve automatically with better models
+
+-----
+
+## Document Scope and Implementation Guide
+
+**This Document Contains**: Strategic vision, academic innovation rationale, high-level architecture, framework interfaces, and future directions for SOAR v2.0.
+
+**For Implementation Details**: See [SOAR v2.0 Developer Briefing](./SOAR%20v2.0%20Developer%20Briefing.md) for technical implementation strategy, phased development approach, current state assessment, concrete code examples, and detailed debugging guidance.
+
+**Document Relationship**: These documents are designed to be complementary - this specification provides the "why" and high-level "what," while the developer briefing provides the "how" and detailed "when."
 
 -----
 

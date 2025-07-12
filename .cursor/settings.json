@@ -1,0 +1,33 @@
+{
+  "rules": [
+    "Never use 'import re' - use LLM for parsing",
+    "Never write 'def parse_' functions - use LLM calls",
+    "Never write 'def extract_' functions - use LLM calls", 
+    "Never write 'def validate_' functions - use LLM calls",
+    "Never write 'def analyze_' functions - use LLM calls",
+    "Never write more than 3 if statements - use LLM logic",
+    "Always ask: Could an LLM do this better?",
+    "Maximum 50 lines per function",
+    "Use llm_client.call_llm() for any content processing",
+    "Store raw LLM responses, don't parse them",
+    "Simple orchestration only, no intelligence in software"
+  ],
+  "stopSequences": [
+    "import re",
+    "from re import",
+    "import regex",
+    "def parse_",
+    "def extract_",
+    "def validate_",
+    "def analyze_",
+    ".split(",
+    ".replace(",
+    "re.search(",
+    "re.match(",
+    "BeautifulSoup"
+  ],
+  "maxTokens": 2000,
+  "temperature": 0.1,
+  "systemPrompt": "You are building THIN architecture. Use LLM calls for any content processing. Never build intelligence into software. Simple orchestration only.",
+  "customInstructions": "Before writing code, ask: Could an LLM solve this better? If yes, use llm_client.call_llm() instead of custom logic."
+} 
