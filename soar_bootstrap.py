@@ -278,14 +278,17 @@ def run_experiment(project_path: str, **kwargs) -> Dict[str, Any]:
         
         # Run ensemble analysis (infrastructure assumed ready)
         print("🎯 Running ensemble analysis...")
-        # Note: EnsembleOrchestrator integration will be completed by next agent
-        # For now, just demonstrate successful validation with HOT infrastructure
-        ensemble_result = {
-            "status": "validation_complete",
-            "message": "Infrastructure is HOT - ready for ensemble orchestration",
-            "instructions_length": len(result.get('analysis_agent_instructions', '')),
-            "next_step": "Integrate with EnsembleOrchestrator methods"
-        }
+        orchestrator = EnsembleOrchestrator(str(project_dir))
+        
+        # Run the complete ensemble analysis pipeline
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            ensemble_result = loop.run_until_complete(
+                orchestrator.execute_ensemble_analysis(result)
+            )
+        finally:
+            loop.close()
         
         return {
             "status": "completed",
