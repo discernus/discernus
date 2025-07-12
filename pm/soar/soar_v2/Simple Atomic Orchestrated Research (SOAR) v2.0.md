@@ -2,9 +2,9 @@
 
 ## Framework-Agnostic Multi-Model Ensemble Architecture for Systematic Academic Research
 
-**Date**: July 10, 2025  
+**Date**: July 11, 2025  
 **Status**: Production Specification - THIN Architecture Edition  
-**Philosophy**: THIN Software + LLM Intelligence + Ensemble Validation  
+**Philosophy**: THIN Software + LLM Intelligence + Ensemble Validation + Cost Transparency  
 **Objective**: Academic-grade computational research through structured multi-model debate
 
 **SOAR v2.0**: **S**imple **A**tomic **O**rchestration **R**esearch with **E**nsemble **V**alidation
@@ -19,10 +19,14 @@ Create a SOAR architecture that enables researchers to:
 2. **Leverage ensemble model capabilities** for comprehensive validation across frameworks
 3. **Utilize structured debate protocols** for divergence resolution with evidence-based arbitration
 4. **Receive publication-ready results** with complete methodology documentation
+5. **Maintain cost transparency and control** through upfront estimation and budget guardrails
 
 **Core Innovation**: Framework-agnostic multi-model ensemble analysis with structured debate protocols that transform LLM disagreement into academic validation strength rather than uncertainty.
 
 **Human Involvement Philosophy**: SOAR v2.0 emphasizes human expertise in framework specification and validation rather than runtime intervention. The system helps researchers create rigorous framework definitions upfront, then executes analysis autonomously with full transparency and auditability.
+
+**Cost & Quality Philosophy**: Academic adoption requires cost predictability and statistical validation. SOAR v2.0 provides upfront cost estimation, budget controls, and industry-standard reliability metrics (Krippendorff's Alpha) to build researcher trust.
+
 -----
 
 ## Revolutionary Architecture Shift
@@ -233,16 +237,31 @@ quality_assurance:
   confidence_threshold: 0.7
   evidence_verification_required: true
   bias_detection_enabled: true
+  krippendorff_alpha_threshold: 0.6
+
+cost_controls:
+  default_budget_limit: 5.00  # USD
+  fail_fast_cost_threshold: 0.40  # USD for 3k word acceptance test
+  fail_fast_time_threshold: 90  # seconds for 3k word acceptance test
+  adaptive_ensemble_reduction: true
 
 storage:
   results_retention_days: 90
   session_size_warning_mb: 50
+  redis_aof_enabled: true
+  immutable_backup_enabled: true
 
 redis:
   host: "localhost"
   port: 6379
   db: 0
   timeout_seconds: 30
+  appendfsync: "always"  # Crash-safe audit logs
+
+offline_mode:
+  enabled: false
+  disable_telemetry: true
+  force_local_endpoints: true
 ```
 
 -----
@@ -947,76 +966,97 @@ class MVPResearcherControls:
 
 ## Implementation Phases
 
-### Phase 1: Foundation with Framework Validation Focus (Weeks 1-2)
+### Phase 1: Fix SOAR 1.0 Foundation - Get Sample Project Working (Weeks 1-2)
 
-**Deliverables**:
-- Service registry implementation
-- Framework manager with AI validation assistant
-- Interactive framework improvement loop
-- Basic chronolog writer (no complex forensics)
-- MVP configuration system
+**Core Philosophy**: "Make the existing failing test pass with framework-agnostic THIN infrastructure"
 
-**Success Metrics**:
-- Framework validation assistant helps researchers improve specifications
-- Clean service architecture improves testability
-- Basic event logging works without over-engineering
-- PDAF and CFF frameworks load successfully
-
-### Phase 2: Universal Ensemble Protocol with THIN Architecture (Weeks 3-4)
-
-**Deliverables**:
-- Framework-agnostic ensemble analysis with LLM-powered model orchestration
-- AI-based divergence detection with contextual understanding
-- LLM-moderated structured debate protocols
-- AI-powered quality assurance and validation
-
-**THIN Requirements**:
-
-- LLM debate orchestration rather than hardcoded conversation flows
-- AI-based evidence assessment instead of rule-based scoring
-- Intelligent content generation for all communications
+**Key Deliverables**:
+- Fix framework-agnostic orchestration gap: Framework context must reach analysis agents
+- Implement THIN validation agent spawning with framework-specific instructions
+- Establish framework-agnostic agent communication protocols
+- Validate with existing `soar_cff_sample_project` - make it work end-to-end
+- Basic cost estimation and budget controls using LiteLLM
 
 **Success Metrics**:
+- `soar_cff_sample_project` analysis completes successfully with framework-guided results
+- Framework specification reaches analysis agents and influences output
+- Systematic framework application visible in results (not generic text analysis)
+- Cost estimation accuracy within 15% of actual costs
+- Fail-fast gate: 3k word analysis under $0.40 and 90 seconds
 
-- Complete ensemble analysis for both PDAF and CFF frameworks
-- LLM-moderated framework-appropriate debate resolution
-- Universal audit trail with AI-generated methodology documentation
+**Critical Dependencies Resolved**:
+- Framework context propagation through orchestration pipeline
+- Agent spawning with framework-specific instructions (not framework-specific code)
+- Framework-agnostic validation agent that can handle any framework specification
 
-### Phase 3: Framework Ecosystem with AI-First Approach (Weeks 5-6)
+### Phase 2: Validate Framework-Agnostic Approach - Dual Framework Support (Weeks 3-4)
 
-**Deliverables**:
+**Core Philosophy**: "Prove the infrastructure works with any framework, not just CFF"
 
-- Multiple framework integrations with AI-powered adaptation
-- LLM-based framework performance optimization
-- AI-generated synthesis reports appropriate to each framework
-- Framework development toolkit with intelligent validation
-
-**THIN Requirements**:
-
-- AI content generation for framework-specific reports
-- LLM performance analysis and optimization recommendations
-- Intelligent framework marketplace with AI-powered quality assessment
-
-**Success Metrics**:
-
-- Support for 3+ distinct framework types with AI adaptation
-- AI-generated publication-ready output for each framework
-- Framework development toolkit with LLM validation assistance
-
-### Phase 4: MVP Validation and BYU Demo (Weeks 7-8)
-
-**Deliverables**:
-- Van der Veen corpus replication with PDAF
-- Basic researcher controls (abort, progress, audit)
-- Performance optimization for 100+ document analysis
-- Research-ready output generation
-- Simple deployment documentation
+**Key Deliverables**:
+- Demonstrate same infrastructure works with both CFF v3.1 and PDAF v1.0
+- Framework-agnostic agent spawn instructions that adapt to framework type
+- Universal framework validation rubric using LLM intelligence
+- Framework-agnostic results schema that works for any systematic analysis
+- Simple multi-model ensemble (3 models minimum)
 
 **Success Metrics**:
-- Van der Veen replication shows quality improvements
-- BYU researchers can operate system independently
-- Analysis completes in reasonable time
-- Output suitable for academic publication
+- Same codebase successfully analyzes texts using both CFF and PDAF frameworks
+- Framework-specific results show appropriate dimension scores and evidence
+- No framework-specific code in core orchestration (THIN compliance)
+- Multi-model ensemble completes with basic consensus checking
+- Krippendorff's Alpha calculation functional (≥0.5 inter-model reliability)
+
+**Critical Dependencies Resolved**:
+- Framework plugin architecture that works with any specification
+- Agent instruction generation that adapts to framework requirements
+- Universal results processing that respects framework-specific outputs
+
+### Phase 3: Add Ensemble Validation - Structured Debates and Arbitration (Weeks 5-6)
+
+**Core Philosophy**: "Turn model disagreement into validation strength through structured debate"
+
+**Key Deliverables**:
+- LLM-powered divergence detection with framework-appropriate thresholds
+- Structured debate orchestration using LLM moderator intelligence
+- Evidence-based arbitration using LLM referee capabilities
+- Durable audit trail with Redis AOF and immutable backup
+- Quality assurance agent with bias detection
+
+**Success Metrics**:
+- Structured debates successfully resolve score disagreements
+- Referee decisions based on textual evidence quality, not model bias
+- Complete audit trail from input to final decision with content hash verification
+- Debates respect framework-specific evidence standards and validation requirements
+- System gracefully handles model failures and malformed responses
+
+**Critical Dependencies Resolved**:
+- LLM-orchestrated debate protocols that adapt to framework requirements
+- Crash-safe persistence for academic audit requirements
+- Framework-aware quality assessment and validation
+
+### Phase 4: Add Trust-Building Features - Academic Validation and Institutional Deployment (Weeks 7-8)
+
+**Core Philosophy**: "Build features that make researchers trust SOAR with their careers"
+
+**Key Deliverables**:
+- Academic-grade reliability metrics with Krippendorff's Alpha reporting
+- Offline deployment capability for secure institutional environments
+- Van der Veen corpus replication demonstrating quality improvements
+- Publication-ready report generation with methodology documentation
+- Simple researcher controls (progress monitoring, abort capability)
+
+**Success Metrics**:
+- Van der Veen corpus replication achieves Alpha ≥ 0.6 vs gold standard
+- BYU researchers can deploy and operate system independently
+- Generated reports suitable for peer review with complete methodology
+- Offline mode works without cloud dependencies
+- Cost transparency builds user confidence in system economics
+
+**Critical Dependencies Resolved**:
+- Statistical validation that meets academic standards
+- Secure deployment for institutional requirements
+- Academic-quality output generation using LLM synthesis
 
 -----
 
@@ -1024,25 +1064,61 @@ class MVPResearcherControls:
 
 ## MVP CLI Interface
 
-### Essential Commands
+### Essential Commands with Cost Controls
 
 ```bash
+# Cost estimation and budget controls
+soar estimate --framework pdaf --text speech.txt
+soar estimate --framework pdaf --corpus speeches/ --budget 10.00
+
 # Framework validation and registration
 soar framework validate ./my_framework.json --interactive
 soar framework register ./my_framework.json
 
-# Analysis execution
-soar analyze --framework pdaf --version 1.0 --text speech.txt
-soar analyze --framework pdaf --corpus speeches/ --output-dir results/
+# Analysis execution with budget controls
+soar analyze --framework pdaf --version 1.0 --text speech.txt --budget 5.00
+soar analyze --framework pdaf --corpus speeches/ --output-dir results/ --estimate
+soar analyze --framework pdaf --corpus speeches/ --offline
 
 # Progress monitoring
 soar status session_001
 soar abort session_001
 
-# Results export
-soar export session_001 --format json
-soar export session_001 --format pdf
-soar audit session_001 --output audit.jsonl
+# Results export with reliability metrics
+soar export session_001 --format json --include-alpha
+soar export session_001 --format pdf --include-reliability
+soar audit session_001 --output audit.jsonl --verify-hash
+```
+
+### Cost Control Examples
+
+```bash
+# Get cost estimate before running
+$ soar estimate --framework pdaf --text long_speech.txt
+Estimated cost: $0.85 USD
+Estimated time: 45 seconds
+Token breakdown:
+  Framework context: 15,000 tokens
+  Source text: 8,500 tokens  
+  Ensemble (5 models): 5x multiplier
+  Debate overhead: ~20%
+
+# Run with budget limit
+$ soar analyze --framework pdaf --text speech.txt --budget 0.50
+Analysis started with $0.50 budget limit
+Estimated cost: $0.35 (within budget)
+Session ID: session_abc123
+
+# Fail-fast on expensive analysis
+$ soar analyze --framework pdaf --text very_long_document.txt --budget 0.40
+ERROR: Estimated cost $1.20 exceeds budget $0.40
+Use --budget 1.50 or reduce document size
+
+# Offline mode for secure environments
+$ soar analyze --framework pdaf --text speech.txt --offline
+Running in offline mode (local models only)
+Telemetry disabled
+Session ID: session_def456
 ```
 
 -----
@@ -1054,25 +1130,65 @@ soar audit session_001 --output audit.jsonl
 ### Technical Success
 - ✅ Framework validation assistant reduces specification errors by 80%
 - ✅ Ensemble analysis completes successfully for PDAF and CFF
-- ✅ Basic chronolog provides adequate audit trail
+- ✅ Basic chronolog provides adequate audit trail with Redis AOF persistence
 - ✅ Van der Veen corpus processes in under 2 hours
 - ✅ Simple abort and progress monitoring work reliably
+- ✅ **Cost estimation accuracy within 15% of actual costs**
+- ✅ **Fail-fast gate: 3k word analysis completes under $0.40 and 90 seconds**
 
 ### Academic Success  
 - ✅ BYU Team Populism validates PDAF implementation
 - ✅ Output quality exceeds single-coder analysis
 - ✅ Methodology documentation suitable for publication
 - ✅ Researchers trust system without runtime intervention
+- ✅ **Krippendorff's Alpha ≥ 0.6 vs. gold standard corpus**
+- ✅ **Inter-LLM Alpha ≥ 0.5 for ensemble reliability**
 
 ### User Experience Success
 - ✅ Framework specification takes <30 minutes with AI assistance
 - ✅ Researchers can operate system with minimal training
 - ✅ Progress indicators provide adequate transparency
 - ✅ Audit trails satisfy academic requirements
+- ✅ **Cost transparency builds user confidence**
+- ✅ **Offline mode supports secure institutional deployment**
 
 -----
 
 ## Future Directions
+
+### Advanced Cost Optimization (Post-MVP)
+
+**Adaptive Model Routing**: Tier-1 local "triage" model → premium cloud only when uncertainty > threshold
+**Budget-Aware Automation**: Auto-reduce context window or ensemble size when projected spend exceeds budget
+**Fallback on Short Context**: Chunk-with-recap adapter; measure accuracy delta vs. full context
+
+### Enhanced Academic Validation (Post-MVP)
+
+**Multi-Metric Dashboard**: Krippendorff's Alpha, Cohen's Kappa, Pearson correlation tracking
+**Longitudinal Reliability**: Track Alpha scores across framework versions and model updates  
+**Cross-Framework Validation**: Compare reliability metrics across different analytical frameworks
+
+### Scaling and Performance (Post-MVP)
+
+**Future Optimizations**:
+- Distributed analysis across multiple machines
+- Intelligent caching of framework analyses  
+- Partial result aggregation for massive corpora
+- Real-time streaming of results
+
+**Scalable Messaging**: Swap Redis Streams for ordered delivery or offer Kafka/NATS adapter when throughput > 50k msg/s
+
+### Advanced Deployment Options (Post-MVP)
+
+**GPU/CPU Flexibility**: Pack CUDA in container; `docker compose --profile cpu` for laptop demos
+**Language Coverage**: Budget multiplier and fine-tune path for Arabic, Mandarin, Spanish corpora
+**Visualization & Reporting**: Web dashboard that replays debate traces; PDF/HTML export for policy briefs
+
+### Governance and Community (Post-MVP)
+
+**Governance**: Drupal-style MAINTAINERS.md, lightweight RFC process, dual license + trademark policy
+**Security**: Mandatory third-party security review for "core" status
+**Repository Durability**: Nightly mirror to Codeberg or self-hosted GitLab with signed releases
 
 ### Advanced Human-in-the-Loop Systems: The Overwatch Hierarchy
 
@@ -1126,17 +1242,23 @@ To enable this future, the MVP must be built on a foundation that can support th
 
 ---
 
-## Summary of Key MVP Simplifications
+## Summary of Key MVP Enhancements
 
-1. **No runtime intervention** - Focus on upfront framework validation
-2. **Basic chronolog only** - Simple JSONL, no complex forensics  
-3. **Minimal human controls** - Progress viewing and abort only
-4. **No Overwatch agents** - Trust AI orchestration for MVP
-5. **Simple storage** - One JSONL file per session
-6. **Read-only dashboard** - No complex interaction capabilities
-7. **Framework validation focus** - Help researchers specify correctly upfront
+**Added for User Trust & Adoption**:
+1. **Cost transparency** - Upfront estimation and budget controls
+2. **Academic validation** - Krippendorff's Alpha reliability metrics  
+3. **Fail-fast economics** - $0.40/90s acceptance test for user confidence
+4. **Durable persistence** - Redis AOF + immutable S3/MinIO backup
+5. **Offline deployment** - Secure institutional deployment capability
+6. **Adaptive ensemble** - Budget-aware complexity reduction
 
-These edits maintain SOAR's innovative architecture while focusing MVP development on essential capabilities that demonstrate value to researchers. Complex features are preserved in Future Directions for implementation based on actual user needs.
+**Preserved MVP Focus**:
+7. **No runtime intervention** - Focus on upfront framework validation
+8. **Basic chronolog** - Enhanced with crash-safe persistence
+9. **Minimal human controls** - Progress viewing and abort only
+10. **Framework validation focus** - Help researchers specify correctly upfront
+
+These enhancements address the core adoption blockers (cost anxiety, reliability uncertainty, institutional security) while maintaining the focused MVP scope and THIN architecture principles.
 
 -----
 

@@ -2,20 +2,22 @@
 
 ## Implementation Focus & Philosophy
 
-**Date**: July 10, 2025  
+**Date**: July 11, 2025  
 **Target Audience**: Full-Stack Python Developer  
 **Project**: SOAR v2.0 Framework-Agnostic Ensemble Research Platform  
 **Timeline**: 8 weeks to production-ready v2.0
 
 -----
 
-## Executive Summary: What You’re Really Building
+## Executive Summary: What You're Really Building
 
-You’re building **the first universal ensemble validation platform for academic research**. Think “GitHub Actions for academic analysis”—researchers submit analysis requests, multiple AI models independently analyze using any systematic framework, structured debates resolve disagreements, and publication-ready results emerge with complete methodology documentation.
+You're building **the first universal ensemble validation platform for academic research**. Think "GitHub Actions for academic analysis"—researchers submit analysis requests, multiple AI models independently analyze using any systematic framework, structured debates resolve disagreements, and publication-ready results emerge with complete methodology documentation.
 
-**Core Value Proposition**: Transform “single AI model gave me this result” into “ensemble of AI models debated and validated this conclusion using established academic framework.”
+**Core Value Proposition**: Transform "single AI model gave me this result" into "ensemble of AI models debated and validated this conclusion using established academic framework with industry-standard reliability metrics."
 
-**Success Metric**: When researchers trust SOAR ensemble results enough to submit to peer review, you’ve succeeded.
+**Success Metric**: When researchers trust SOAR ensemble results enough to submit to peer review, you've succeeded.
+
+**Trust Building**: Academic adoption requires cost predictability and statistical validation. SOAR v2.0 provides upfront cost estimation, budget controls, and Krippendorff's Alpha reliability metrics to build researcher confidence.
 
 -----
 
@@ -26,19 +28,24 @@ You’re building **the first universal ensemble validation platform for academi
 **Current State**: Researcher wants to analyze 100 political speeches for populist rhetoric
 
 - Manually code each speech (weeks of work)
-- OR use single AI model (untrustworthy results)
+- OR use single AI model (untrustworthy results, unknown cost)
 - OR build custom analysis pipeline (months of engineering)
 
 **SOAR v2.0 Solution**:
 
 ```bash
-soar analyze --framework pdaf --corpus speeches/ --output analysis_report.pdf
+soar estimate --framework pdaf --corpus speeches/
+# Estimated cost: $12.50 USD, Estimated time: 45 minutes
+
+soar analyze --framework pdaf --corpus speeches/ --budget 15.00 --output analysis_report.pdf
 ```
 
+- Upfront cost estimation builds researcher confidence
 - 5 AI models independently analyze using Populist Discourse Analysis Framework
 - Models debate disagreements with evidence citations
 - Referee model arbitrates based on textual evidence quality
-- Academic-grade report generated with complete methodology
+- Academic-grade report with Krippendorff's Alpha reliability metrics
+- Complete audit trail with crash-safe persistence
 
 ### The Universal Platform Vision
 
@@ -46,18 +53,19 @@ soar analyze --framework pdaf --corpus speeches/ --output analysis_report.pdf
 
 - Today: Political science (PDAF), social psychology (CFF)
 - Tomorrow: Sentiment analysis, content analysis, discourse analysis, etc.
-- Next year: Frameworks you haven’t imagined yet
+- Next year: Frameworks you haven't imagined yet
 
-**Ensemble Validation**: Multiple models provide reliability
+**Ensemble Validation**: Multiple models provide reliability with statistical validation
 
-- Single model: “GPT-4 thinks this text is populist”
-- SOAR ensemble: “5 models analyzed, 3 agreed on populist pattern, 2 disagreed on specific dimensions, structured debate resolved via evidence quality, final confidence: 85%”
+- Single model: "GPT-4 thinks this text is populist"
+- SOAR ensemble: "5 models analyzed, 3 agreed on populist pattern, 2 disagreed on specific dimensions, structured debate resolved via evidence quality, final confidence: 85%, Krippendorff's Alpha: 0.72 (excellent reliability)"
 
-**Academic Rigor**: Complete methodology transparency
+**Academic Rigor**: Complete methodology transparency with industry-standard metrics
 
 - Every score traceable to specific text evidence
-- Every decision documented in audit trail
+- Every decision documented in crash-safe audit trail
 - Every framework application validated against calibration standards
+- Krippendorff's Alpha inter-rater reliability for academic credibility
 
 ### The Architectural Shift: From Hyperatomic to Ensemble
 
@@ -72,498 +80,82 @@ This is our core architectural bet: full-context analysis leads to higher-qualit
 
 -----
 
-## THIN Architecture Philosophy: Orchestrate Intelligence, Don’t Build It
+## Critical Dependency Analysis: What We Actually Have vs. What We Need
 
-### Core THIN Principle: Use AI to Solve AI Problems
+### Current State Assessment: SOAR 1.0 Infrastructure
 
-**What SOAR Is**: Smart coordination of AI model analysis
-**What SOAR Is Not**: Complex AI reasoning system or rule-based intelligence
+**What We Have (Infrastructure) ✅**:
+- `ThinOrchestrator` (996 lines): Working multi-agent conversation orchestration
+- `FrameworkLoader` (455 lines): Framework file loading + LLM validation using rubrics
+- `ValidationAgent` (500 lines): Complete project validation (structure + framework + experiment + corpus)
+- `ThinLiteLLMClient`: Multi-provider LLM access with cost tracking
+- Conversation logging and session management: Complete audit trail infrastructure
 
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Researcher    │───▶│  SOAR Platform   │───▶│ Academic Report │
-│  (Input Text)   │    │ (Orchestration)  │    │ (Validated)     │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                              │
-                              ▼
-                    ┌──────────────────┐
-                    │  AI Model Pool   │
-                    │ • Claude Sonnet  │
-                    │ • GPT-4          │
-                    │ • Gemini Pro     │
-                    │ • Llama 3.3      │
-                    └──────────────────┘
-```
+**What We Have (Framework Support) ✅**:
+- **CFF v3.1 specification**: Complete framework with integration guide
+- **PDAF v1.0 specification**: Complete framework with integration guide
+- **Framework validation rubrics**: LLM-powered validation system
+- **Sample project**: `soar_cff_sample_project` with expected outcomes
 
-### THIN Implementation Examples
+**What We're Missing (The Core Gap) ❌**:
+- **Framework context never reaches analysis agents**: The critical orchestration gap
+- **No systematic framework application**: Framework specifications load but don't influence analysis
+- **No framework-guided results**: Agents produce generic text analysis, not framework-specific scores
+- **No ensemble validation**: Multi-model analysis doesn't exist
+- **No structured debate protocols**: Model disagreements aren't resolved
 
-**THIN: Use LLM for Response Validation**
+### The Fundamental Issue: Framework Specification Isolation
 
-```python
-# Good: Let AI fix AI problems
-async def validate_response(malformed_response, expected_schema):
-    cleaning_prompt = f"""
-    Fix this malformed JSON to match the expected schema:
-    Schema: {expected_schema}
-    Response: {malformed_response}
-    Return only valid JSON:
-    """
-    return await llm_client.complete(cleaning_prompt, model="claude-3-haiku")
+The test failure revealed that SOAR 1.0 has a complete orchestration system that successfully:
+1. Loads and validates framework specifications
+2. Spawns analysis agents
+3. Manages conversation flow
+4. Logs all interactions
 
-# Avoid: Complex parsing logic
-def robust_json_parser(response):
-    # ... 100 lines of regex and edge case handling
-    # This reimplements intelligence that LLMs already have
-```
+**But the framework specification never reaches the analysis agents.**
 
-**THIN: Use LLM for Evidence Verification**
+This is like having a perfect mail system that delivers empty envelopes—all the infrastructure works, but the crucial content (framework specification) gets lost in transit.
 
-```python
-# Good: AI understands context and citation quality
-async def verify_evidence_citation(citation, source_text, framework_context):
-    verification_prompt = f"""
-    Framework: {framework_context}
-    Source text: {source_text}
-    Citation: "{citation.text_span}" at position {citation.start}-{citation.end}
-    
-    Is this citation accurate and contextually appropriate? Return JSON:
-    {{"accurate": boolean, "contextual": boolean, "reasoning": "string"}}
-    """
-    return await llm_client.complete(verification_prompt)
+### Key Architectural Insight: Framework-Agnostic vs. Framework-Specific
 
-# Avoid: Mechanical text matching only
-def verify_citation(citation, source_text):
-    return source_text[citation.start:citation.end] == citation.text_span
-    # Misses context, meaning, appropriateness
-```
+**The Right Approach** (Framework-Agnostic THIN):
+- Core orchestration remains framework-agnostic
+- Framework specifications become agent instructions
+- LLM intelligence adapts to any framework
+- No framework-specific code in core system
 
-**THIN: Use LLM for Quality Assurance**
+**The Wrong Approach** (Framework-Specific THICK):
+- Core system hardcodes framework logic
+- Different code paths for different frameworks
+- Complex framework-specific processing
+- Violates THIN principles and framework-agnostic design
 
-```python
-# Good: AI can detect bias and methodology issues
-async def assess_analysis_quality(analysis_result, framework_spec):
-    qa_prompt = f"""
-    Framework: {framework_spec}
-    Analysis result: {analysis_result}
-    
-    Assess this analysis for:
-    1. Framework compliance
-    2. Evidence quality
-    3. Potential biases
-    4. Methodological rigor
-    
-    Return assessment JSON with specific issues and confidence scores.
-    """
-    return await llm_client.complete(qa_prompt, model="claude-3-sonnet")
+### Sample Project Reality Check
 
-# Avoid: Rule-based quality checking
-def check_analysis_quality(result):
-    issues = []
-    if len(result.evidence) < MIN_EVIDENCE_COUNT:
-        issues.append("Insufficient evidence")
-    # ... many more hardcoded rules that miss nuanced quality issues
-```
+The `soar_cff_sample_project` is perfectly designed for what we need to build:
+- **Framework**: Complete CFF v3.1 specification with calibration materials
+- **Corpus**: 8 political speeches across 4 categories
+- **Experiment**: Valid research design with clear expected outputs
+- **Expected Result**: Framework-guided analysis with dimension scores and evidence
 
-### Service Architecture: Minimal Dependency Injection
+**This project tests exactly what we need to build**: Framework-agnostic infrastructure that can apply any framework systematically.
 
-**Why Service Registry**: Makes testing easier, code cleaner, not for future speculation
-**Implementation**: Simple dictionary lookup, zero functional complexity
+### Dependencies for Phase 1 (Revised)
 
-```python
-# THIN: Simple service access
-class ServiceRegistry:
-    def __init__(self):
-        self._services = {}
-    
-    def register(self, name: str, service):
-        self._services[name] = service
-    
-    def get(self, name: str):
-        return self._services[name]
+**Critical Dependencies**:
+1. **Framework Context Propagation**: Framework specification must reach analysis agents
+2. **Agent Instruction Generation**: Framework-specific instructions without framework-specific code
+3. **Framework-Agnostic Validation**: Universal validation agent that adapts to any framework
+4. **Cost Estimation**: LiteLLM integration for upfront cost transparency
+5. **Basic Audit Trail**: Redis AOF for crash-safe logging
 
-# Usage: Clean dependencies, easy to test
-framework_manager = services.get("framework_manager")
-pdaf = framework_manager.load_framework("pdaf", "1.0")
-
-# Avoid: Hard dependencies, difficult to test
-from pdaf_framework import PDFFramework
-pdaf = PDFFramework()  # Tightly coupled
-```
+**Success Criteria for Phase 1**:
+- Framework specification visibly influences agent analysis
+- `soar_cff_sample_project` produces framework-guided results
+- Cost estimation builds user confidence
+- System remains framework-agnostic and THIN-compliant
 
 -----
 
-## Implementation Priorities: What Matters Most
-
-### Priority 1: AI-Powered Framework Validation
-
-**Why This Matters**: Garbage in, garbage out. The single most important way to ensure high-quality analysis is to ensure the framework specification is clear, complete, and consistent *before* the analysis begins.
-
-**THIN Approach**: Instead of building complex runtime validation, we use an AI assistant to help the researcher perfect their framework upfront.
-
-**Quality Bar**:
-- The `FrameworkValidationAssistant` interactively guides a researcher to fix ambiguities, add missing calibration examples, and clarify scoring logic.
-- PDAF and CFF frameworks load successfully *after* passing through the validation assistant.
-- The system trusts a validated framework completely, treating it as an immutable source of truth.
-
-### Priority 2: Reliable Multi-Model Coordination
-
-**Why This Matters**: Ensemble validation only works if all models complete analysis successfully
-**THIN Approach**: Simple async coordination + LLM-powered error recovery
-
-**Quality Bar**:
-
-- Handles model failures without breaking ensemble
-- LLM-powered recovery from malformed responses
-- Partial results better than complete failure
-- Clear error reporting for debugging
-
-```python
-# THIN multi-model coordination
-async def ensemble_analysis(agents: List[Agent], context: AnalysisContext) -> EnsembleResult:
-    results = []
-    failures = []
-    
-    # Simple async coordination
-    async with asyncio.timeout(context.timeout_minutes * 60):
-        responses = await asyncio.gather(*[agent.analyze(context) for agent in agents], 
-                                       return_exceptions=True)
-    
-    # LLM-powered error recovery
-    for i, response in enumerate(responses):
-        if isinstance(response, Exception):
-            failures.append((agents[i], response))
-        elif not is_valid_json(response):
-            # Use LLM to fix malformed response
-            fixed_response = await response_validator.clean_response(response, context.schema)
-            results.append(fixed_response)
-        else:
-            results.append(response)
-    
-    if len(results) < MIN_ENSEMBLE_SIZE:
-        raise InsufficientAnalysisError(f"Only {len(results)} models completed successfully")
-    
-    return EnsembleResult(results, failures)
-
-# Avoid: Complex retry logic and response parsing
-def robust_ensemble_with_retries(agents):
-    # ... complex state machines for retry logic
-    # ... brittle response parsing with regex
-    # ... reimplements intelligence that LLMs have
-```
-
-### Priority 3: Evidence-Based Structured Debates
-
-**Why This Matters**: This is SOAR’s key innovation—turning model disagreement into validation strength
-**THIN Approach**: LLM moderator orchestrates debates, LLM referee arbitrates based on evidence quality
-
-**Quality Bar**:
-
-- LLM moderator detects meaningful disagreements and orchestrates structured debates
-- LLM referee evaluates evidence quality rather than mechanical text matching
-- Complete audit trail of debate process
-- Framework-appropriate debate standards maintained
-
-```python
-# THIN debate orchestration
-class DebateModerator:
-    async def orchestrate_debate(self, disagreement: Disagreement, framework: Framework):
-        moderation_prompt = f"""
-        Framework: {framework.name}
-        Disagreement: Models scored dimension '{disagreement.dimension}' as {disagreement.scores}
-        
-        Orchestrate a structured debate:
-        1. Ask each model to defend their score with textual evidence
-        2. Allow one round of rebuttals
-        3. Summarize evidence quality for referee
-        
-        Generate specific prompts for each debate round.
-        """
-        
-        debate_plan = await llm_client.complete(moderation_prompt, model="claude-3-sonnet")
-        return await self.execute_debate_plan(debate_plan, disagreement)
-
-# Avoid: Hardcoded debate scripts
-def orchestrate_debate_manually(disagreement):
-    # Send fixed prompt: "Defend your score with evidence"
-    # Parse responses with regex
-    # Apply hardcoded evidence evaluation rules
-    # Misses nuanced debate dynamics and framework-specific requirements
-```
-
-### Priority 4: Academic-Grade Output Generation
-
-**Why This Matters**: Researchers need publication-ready methodology documentation
-**THIN Approach**: LLM synthesizes results into framework-appropriate academic reports
-
-**Quality Bar**:
-
-- LLM generates methodology section suitable for peer review
-- Framework-specific interpretation and significance
-- Complete audit trail from input to output
-- Reproducible analysis documentation
-
-```python
-# THIN report generation
-async def generate_academic_report(analysis_results: EnsembleResult, 
-                                 framework: Framework) -> AcademicReport:
-    report_prompt = f"""
-    Generate an academic report for this {framework.name} analysis:
-    
-    Results: {analysis_results.summary}
-    Framework: {framework.description}
-    Methodology: Ensemble analysis with structured debate validation
-    
-    Include:
-    1. Executive summary with key findings
-    2. Methodology section suitable for peer review
-    3. Framework-specific interpretation of results
-    4. Complete analysis transparency for reproducibility
-    
-    Write in academic style appropriate for {framework.academic_domain} journals.
-    """
-    
-    return await llm_client.complete(report_prompt, model="claude-3-opus")
-
-# Avoid: Template-based report generation
-def generate_report_from_template(results):
-    template = load_template("academic_report.txt")
-    # Fill in blanks with mechanical substitution
-    # Misses framework-specific interpretation and academic writing quality
-```
-
------
-
-## MVP Implementation Strategy
-
-### Phase 1: Foundation with Framework Validation Focus (Weeks 1-2)
-
-**THIN Focus**: Simple service layer + AI-powered framework validation assistant.
-**Core Components**:
-- `ServiceRegistry` (for testability)
-- `FrameworkManager`
-- `FrameworkValidationAssistant` (the core of this phase)
-- Basic, file-based chronolog writer
-
-**Success Criteria**:
-- The validation assistant helps a user improve a flawed framework spec.
-- PDAF and CFF frameworks load successfully.
-- The system architecture is demonstrably testable.
-
-### Phase 2: Multi-Model Orchestration (Weeks 3-4)
-
-**THIN Focus**: Simple async coordination + LLM-powered error recovery.
-**Core Components**:
-- Agent spawning for a 5-model ensemble.
-- LLM-based response cleaning for malformed JSON.
-- Timeout handling and graceful failure for individual models.
-
-**Success Criteria**:
-- A 5-model ensemble completes an analysis of a single text.
-- The system recovers from at least one model returning a malformed response.
-
-### Phase 3: Structured Validation (Weeks 5-6)
-
-**THIN Focus**: LLM-orchestrated debates and LLM-referee arbitration.
-**Core Components**:
-- `ModeratorAgent` to detect divergence and initiate debate.
-- `RefereeAgent` to evaluate evidence and make a final decision.
-- Audit trail that logs the key steps of the debate.
-
-**Success Criteria**:
-- A debate is successfully triggered, moderated, and arbitrated for a divergent score.
-- The audit trail clearly shows the reason for the final decision.
-
-### Phase 4: MVP Validation and BYU Demo (Weeks 7-8)
-
-**THIN Focus**: LLM-generated reports and a simple, effective researcher CLI.
-**Core Components**:
-- `SynthesisAgent` to generate a final report.
-- A streamlined CLI for `validate`, `analyze`, `status`, `abort`, and `export`.
-- Simple deployment documentation for the BYU team.
-
-**Success Criteria**:
-- Van der Veen corpus replication completes successfully.
-- The generated report is suitable for academic review.
-- BYU researchers can run the system independently.
-
------
-
-## MVP Boundaries: What We Are NOT Building (Yet)
-
-To ensure we deliver a focused, high-quality MVP in 8 weeks, the following capabilities are explicitly **out of scope** for this initial version. They are part of our long-term vision, captured in the "Future Directions" of the main specification.
-
-1.  **No Runtime Human Intervention**: The MVP provides a read-only dashboard and an abort button. There are no features for a human to pause, edit, or steer the analysis while it's running.
-2.  **Basic Chronolog Only**: We will log key events to a simple `events.jsonl` file. There are no advanced forensic tools, hierarchical event systems, or checkpoint/resume capabilities in the MVP.
-3.  **No Overwatch Agents**: The MVP trusts the core ensemble and debate protocol. There is no higher-level meta-analysis, anomaly detection, or convergence monitoring.
-4.  **Simple, Monolithic Storage**: Each session's results are stored in a single directory. There is no chunking, indexing, or database for large-scale forensic analysis.
-5.  **Focus on Upfront Validation**: The core THIN principle for the MVP is using the `FrameworkValidationAssistant` to ensure quality *before* analysis, not building complex systems to police it during analysis.
-
------
-
-## THIN Decision-Making Framework
-
-### When Facing Implementation Choices
-
-**1. Choose LLM Intelligence Over Complex Logic**
-
-```python
-# THIN: Use LLM contextual understanding
-async def assess_evidence_quality(evidence, framework_context):
-    prompt = f"Framework: {framework_context}\nEvidence: {evidence}\nAssess quality and appropriateness:"
-    return await llm_client.complete(prompt)
-
-# Avoid: Rule-based evidence scoring
-def score_evidence_mechanically(evidence):
-    score = 0
-    if len(evidence.text_span) > 10: score += 0.2
-    if evidence.marker_type in VALID_MARKERS: score += 0.3
-    # ... many more hardcoded rules that miss context
-```
-
-**2. Choose Simple Orchestration Over Complex State Management**
-
-```python
-# THIN: Simple message passing
-async def coordinate_debate(participants):
-    for round_num in range(MAX_ROUNDS):
-        responses = await asyncio.gather(*[p.respond(prompt) for p in participants])
-        prompt = await moderator_llm.generate_next_prompt(responses)
-    return await referee_llm.arbitrate(all_responses)
-
-# Avoid: Complex state machines
-class DebateStateMachine:
-    # ... hundreds of lines managing debate state transitions
-```
-
-**3. Choose LLM Validation Over Mechanical Checking**
-
-```python
-# THIN: LLM understands framework requirements
-async def validate_framework_compliance(analysis, framework_spec):
-    return await llm_client.complete(f"Check if this analysis follows {framework_spec.name} methodology correctly")
-
-# Avoid: Mechanical rule checking
-def check_compliance_mechanically(analysis, framework):
-    violations = []
-    if analysis.dimensions != framework.required_dimensions:
-        violations.append("Dimension mismatch")
-    # ... misses nuanced compliance issues
-```
-
-**4. Choose AI-Generated Content Over Templates**
-
-```python
-# THIN: LLM generates appropriate academic writing
-async def write_methodology_section(framework, ensemble_process):
-    return await llm_client.complete(f"Write methodology section for {framework.name} ensemble analysis suitable for peer review")
-
-# Avoid: Template filling
-def fill_methodology_template(framework, process):
-    template = "This study used {framework} with {process}..."
-    # Mechanical substitution misses academic writing quality
-```
-
------
-
-## Common THIN Violations to Avoid
-
-### 1. Building Complex Parsing Instead of Using LLM Validation
-
-**Violation**: Regex-heavy response parsing, edge case handling, format validation
-**THIN Solution**: LLM response validator that understands context and intent
-
-### 2. Rule-Based Evidence Assessment Instead of LLM Understanding
-
-**Violation**: Mechanical text matching, hardcoded evidence quality rules
-**THIN Solution**: LLM evidence assessor that understands framework context
-
-### 3. Template-Based Report Generation Instead of LLM Synthesis
-
-**Violation**: Fill-in-the-blank templates, mechanical text substitution
-**THIN Solution**: LLM report generator that writes appropriate academic content
-
-### 4. Complex State Machines Instead of Simple LLM Orchestration
-
-**Violation**: Elaborate debate state management, hardcoded conversation flows
-**THIN Solution**: LLM moderator that understands debate dynamics contextually
-
-### 5. Hardcoded Quality Rules Instead of LLM Assessment
-
-**Violation**: Mechanical quality scoring, checklist-based validation
-**THIN Solution**: LLM quality assessor that understands research methodology
-
------
-
-## Success Indicators During Development
-
-### Week 2 Check: THIN Foundation Solid?
-
-- [ ] LLM validates framework specifications (no complex rule checking)
-- [ ] LLM fixes malformed responses (no regex parsing)
-- [ ] Service registry improves testability (simple dependency injection)
-- [ ] Configuration externalized (no hardcoded parameters)
-- [ ] Framework loading preserves specifications exactly
-
-### Week 4 Check: THIN Coordination Working?
-
-- [ ] Simple async coordination completes ensembles
-- [ ] LLM response validation handles edge cases
-- [ ] Timeout handling prevents hung processes
-- [ ] Error recovery uses LLM intelligence, not complex logic
-- [ ] No brittle parsing or state management code
-
-### Week 6 Check: THIN Validation Effective?
-
-- [ ] LLM moderator orchestrates contextual debates
-- [ ] LLM referee evaluates evidence quality intelligently
-- [ ] LLM quality assessment catches methodology issues
-- [ ] Audit trail captures LLM reasoning (not just mechanical steps)
-- [ ] No hardcoded debate scripts or evidence rules
-
-### Week 8 Check: THIN Academic Integration?
-
-- [ ] LLM generates publication-quality reports
-- [ ] LLM writes framework-appropriate methodology sections
-- [ ] CLI interface intuitive and well-documented
-- [ ] Framework integration process simple and LLM-validated
-- [ ] No template-based content generation
-
------
-
-## The Big Picture: Why THIN Matters for SOAR
-
-### Immediate Benefits
-
-**Simpler Codebase**: LLM intelligence replaces complex logic
-**Higher Quality**: AI understanding beats mechanical rules
-**More Maintainable**: Fewer edge cases, less brittle code
-
-### Long-Term Vision
-
-**Self-Improving**: Better models automatically improve SOAR
-**Adaptable**: LLM components handle novel cases gracefully
-**Extensible**: New frameworks work without code changes
-
-### Your Role in THIN Architecture
-
-You’re building intelligent orchestration, not reimplementing intelligence.
-
-Every line of code should ask: **“Am I using AI to solve this problem, or am I rebuilding AI capabilities with traditional code?”**
-
-If you’re rebuilding AI capabilities, stop and use an LLM instead.
-
------
-
-## Final THIN Developer Mindset
-
-**Think like an orchestrator**: Coordinate AI intelligence rather than replace it with complex logic.
-
-**Use AI to solve AI problems**: Malformed responses? LLM fixes them. Evidence quality? LLM evaluates it. Report writing? LLM generates it.
-
-**Keep orchestration simple**: Message passing, async coordination, service lookup. Let LLMs handle the complex reasoning.
-
-**Trust AI capabilities**: Modern LLMs are better at understanding context, fixing format issues, and generating appropriate content than rule-based systems.
-
-**Optimize for intelligence leverage**: The best SOAR component is one that maximizes AI capability utilization while minimizing custom logic.
-
-*“Every time you write complex parsing, validation, or generation logic, ask: ‘Could an LLM do this better?’ The answer is usually yes.”*
+## THIN Architecture Philosophy: Orchestrate Intelligence, Don't Build It
+</rewritten_file>
