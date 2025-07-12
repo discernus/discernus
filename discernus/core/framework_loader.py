@@ -189,10 +189,11 @@ FRAMEWORK VALIDATION CRITERIA:
 PASSING THRESHOLD: 85% of criteria met (4+ out of 5 criteria)
 """
         
-        # Increase framework length limit to capture more content
-        max_framework_length = 4000  # increased from 2000
-        if len(framework_content) > max_framework_length:
-            framework_content = framework_content[:max_framework_length] + "\n\n[TRUNCATED - showing first 4000 chars]"
+        # ✅ THIN FIX: Remove truncation - let LLM handle full framework content
+        # OLD THICK CODE: 
+        # max_framework_length = 4000  # increased from 2000
+        # if len(framework_content) > max_framework_length:
+        #     framework_content = framework_content[:max_framework_length] + "\n\n[TRUNCATED - showing first 4000 chars]"
         
         validation_prompt = f"""You are a framework validation expert. Evaluate this framework efficiently and fairly.
 

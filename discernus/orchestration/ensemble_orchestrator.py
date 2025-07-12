@@ -274,7 +274,9 @@ Be precise and cite specific text passages to support your scores."""
         # Prepare synthesis prompt
         analysis_summaries = []
         for result in self.analysis_results:
-            analysis_summaries.append(f"File: {result['file_name']}\nAnalysis: {result['analysis_response'][:500]}...\n")
+            # ✅ THIN FIX: Remove truncation - let LLM handle full analysis content
+            # OLD THICK CODE: analysis_summaries.append(f"File: {result['file_name']}\nAnalysis: {result['analysis_response'][:500]}...\n")
+            analysis_summaries.append(f"File: {result['file_name']}\nAnalysis: {result['analysis_response']}\n")
         
         synthesis_prompt = f"""You are the synthesis_agent. Your job is to:
 
@@ -491,6 +493,19 @@ Format as structured academic output suitable for peer review."""
                 str(self.project_path),
                 str(self.results_path)
             )
+            
+            # ✅ FIX: Activate Redis capture by starting conversation
+            # This triggers ConversationLogger._start_redis_capture() which starts the Redis event listener
+            self.conversation_id = self.logger.start_conversation(
+                speech_text="Ensemble analysis session",
+                research_question=f"Multi-agent analysis for session {self.session_id}",
+                participants=["analysis_agent", "synthesis_agent", "moderator_agent", "referee_agent", "final_synthesis_agent"]
+            )
+            
+            print(f"✅ Redis event capture ACTIVATED for conversation: {self.conversation_id}")
+            
+        else:
+            self.conversation_id = None
     
     def _log_system_event(self, event_type: str, event_data: Dict[str, Any]):
         """Log system events to Redis and conversation log"""
@@ -511,7 +526,7 @@ Format as structured academic output suitable for peer review."""
         # Log to conversation logger if available
         if self.logger:
             self.logger.log_llm_message(
-                conversation_id=self.session_id or "unknown",
+                conversation_id=self.conversation_id or self.session_id or "unknown",
                 speaker="system",
                 message=f"{event_type}: {event_data}",
                 metadata={
@@ -537,7 +552,7 @@ Format as structured academic output suitable for peer review."""
             # Log the call
             if self.logger:
                 self.logger.log_llm_message(
-                    conversation_id=self.session_id or "unknown",
+                    conversation_id=self.conversation_id or self.session_id or "unknown",
                     speaker=agent_id,
                     message=prompt,
                     metadata={
@@ -569,7 +584,7 @@ Format as structured academic output suitable for peer review."""
             # Log the response
             if self.logger:
                 self.logger.log_llm_message(
-                    conversation_id=self.session_id or "unknown",
+                    conversation_id=self.conversation_id or self.session_id or "unknown",
                     speaker=agent_id,
                     message=response,
                     metadata={
@@ -587,7 +602,7 @@ Format as structured academic output suitable for peer review."""
             
             if self.logger:
                 self.logger.log_llm_message(
-                    conversation_id=self.session_id or "unknown",
+                    conversation_id=self.conversation_id or self.session_id or "unknown",
                     speaker="system",
                     message=error_msg,
                     metadata={
