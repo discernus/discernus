@@ -219,16 +219,37 @@ ensemble_requirements:
 
 ---
 
+## Experiment Configuration
+
+### Corpus Specification
+**Target Corpus**: `corpus_sanitized_english/`  
+**Bias Condition**: Speaker-blind analysis (identity sanitization protocol)  
+**Rationale**: This experiment tests bias isolation through speaker identity removal while maintaining English language analysis.
+
+**Security Protocol**: Analysis agents receive only sanitized hash-based filenames. Speaker identity mappings in `.speaker_mapping_secure.yaml` remain hidden from LLM analysis.
+
+### Alternative Corpus Configurations
+```yaml
+# For baseline condition (Phase 1):
+# corpus_path: "corpus_original"  
+
+# For cross-linguistic validation (Phase 4):  
+# corpus_path: "corpus_sanitized_esperanto"
+
+# Current experiment (Phase 2-3):
+corpus_path: "corpus_sanitized_english"
+```
+
+---
+
 ## Implementation Notes
 
 ### Corpus Organization
 
 ```
-corpus/
-├── original/           # Speaker-identified texts
-├── sanitized_english/  # Identity-removed English
-├── sanitized_esperanto/# Cross-linguistic versions
-└── corpus_manifest.yaml
+corpus_original/           # Speaker-identified texts (baseline)
+corpus_sanitized_english/  # Identity-removed English (bias isolation)
+corpus_sanitized_esperanto/# Cross-linguistic versions (ultimate control)
 ```
 
 ### Framework Assets
