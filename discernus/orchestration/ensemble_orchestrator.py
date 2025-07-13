@@ -110,9 +110,7 @@ class EnsembleOrchestrator:
         
     async def execute_ensemble_analysis(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Execute the complete ensemble analysis pipeline
-        
-        THIN Principle: Simple linear execution with LLM intelligence at each step
+        THIN Principle: LLM decides research workflow based on experiment requirements
         """
         try:
             # Initialize session
@@ -126,27 +124,45 @@ class EnsembleOrchestrator:
             # Step 1: Spawn analysis agents (one per corpus text)
             await self._spawn_analysis_agents(validation_results)
             
-            # Step 2: Synthesis agent aggregates results and notes outliers
-            await self._run_synthesis_agent()
+            # Step 2: Ask LLM what to do next based on experiment requirements
+            coordination_prompt = f"""
+            Analysis complete. Here are the analysis results:
+            {json.dumps(self.analysis_results, indent=2)}
             
-            # Step 3: Handle outliers if needed
-            if self.outliers:
-                await self._handle_outliers()
+            And here are the experiment requirements:
+            {validation_results.get('experiment', {}).get('definition', 'No experiment definition provided')}
             
-            # Step 4: Final synthesis and persistence
-            final_results = await self._final_synthesis()
+            Based on the experiment requirements, what should happen next?
+            Options:
+            - If experiment requires synthesis/moderation/referee: respond "ADVERSARIAL_SYNTHESIS"
+            - If experiment requires bias isolation (like Attesor study): respond "RAW_AGGREGATION" 
+            - If you need more information: respond "NEED_MORE_INFO"
+            
+            Respond with just the action name.
+            """
+            
+            next_action = await self._call_llm_async(coordination_prompt, "coordination_llm")
+            
+            # Step 3: Execute whatever the LLM decided (THIN: dumb execution)
+            if "RAW_AGGREGATION" in next_action.upper():
+                final_results = await self._simple_aggregation()
+            elif "ADVERSARIAL_SYNTHESIS" in next_action.upper():
+                final_results = await self._adversarial_workflow()
+            else:
+                # Default to simple aggregation if unclear
+                final_results = await self._simple_aggregation()
             
             self._log_system_event("ENSEMBLE_COMPLETED", {
                 "session_id": self.session_id,
                 "final_status": "success",
-                "outlier_count": len(self.outliers)
+                "workflow_used": next_action
             })
             
             return {
                 "status": "success",
                 "session_id": self.session_id,
                 "results": final_results,
-                "outliers_handled": len(self.outliers) > 0
+                "workflow": next_action
             }
             
         except Exception as e:
@@ -161,18 +177,29 @@ class EnsembleOrchestrator:
             }
     
     async def _spawn_analysis_agents(self, validation_results: Dict[str, Any]):
-        """Spawn one analysis agent per corpus text"""
+        """THIN: Let LLM validate inputs and decide analysis approach"""
         
-        if not validation_results:
-            raise ValueError("validation_results is None or empty")
+        validation_prompt = f"""
+        You are the input validation agent. Assess these validation results:
+        
+        {json.dumps(validation_results, indent=2)}
+        
+        Questions:
+        1. Are the inputs sufficient to proceed with analysis?
+        2. How many analysis agents should be spawned?
+        3. What should each agent analyze?
+        
+        If inputs are sufficient, respond with: "PROCEED_WITH_ANALYSIS"
+        If not, respond with: "INSUFFICIENT_INPUTS" followed by what's missing.
+        """
+        
+        validation_decision = await self._call_llm_async(validation_prompt, "input_validation_agent")
+        
+        if "INSUFFICIENT_INPUTS" in validation_decision.upper():
+            raise ValueError(f"LLM input validation failed: {validation_decision}")
         
         corpus_files = validation_results.get('corpus_files', [])
         analysis_instructions = validation_results.get('analysis_agent_instructions', '')
-        
-        if not corpus_files:
-            raise ValueError("No corpus files found in validation results")
-        if not analysis_instructions:
-            raise ValueError("No analysis instructions found in validation results")
         
         self._log_system_event("ANALYSIS_AGENTS_SPAWNING", {
             "agent_count": len(corpus_files),
@@ -186,19 +213,58 @@ class EnsembleOrchestrator:
             task = self._run_analysis_agent(agent_id, corpus_file, analysis_instructions)
             analysis_tasks.append(task)
         
-        # TEMPORARY: Run analysis agents sequentially to test concurrency theory
-        print("🔧 DEBUG: Running analysis agents SEQUENTIALLY to test concurrency theory")
-        self.analysis_results = []
-        for i, task in enumerate(analysis_tasks):
-            print(f"🔧 DEBUG: Running analysis agent {i+1} of {len(analysis_tasks)}")
-            result = await task
-            self.analysis_results.append(result)
-            print(f"🔧 DEBUG: Agent {i+1} completed, result length: {len(result.get('analysis_response', '')) if result and result.get('analysis_response') else 'None'}")
+        # THIN: Let LLM decide execution strategy
+        execution_prompt = f"""
+        You are the execution strategy agent. Decide how to run {len(analysis_tasks)} analysis tasks:
         
-        # Original parallel code:
-        # self.analysis_results = await asyncio.gather(*analysis_tasks, return_exceptions=True)
+        Options:
+        - "SEQUENTIAL": Run one at a time (safer, slower)
+        - "PARALLEL": Run all at once (faster, more resource intensive)
         
-        # Filter out any exceptions and log them
+        Consider system load and task complexity. Respond with just the strategy name.
+        """
+        
+        execution_strategy = await self._call_llm_async(execution_prompt, "execution_strategy_agent")
+        
+        if "SEQUENTIAL" in execution_strategy.upper():
+            print("🔧 LLM chose SEQUENTIAL execution")
+            self.analysis_results = []
+            for i, task in enumerate(analysis_tasks):
+                result = await task
+                self.analysis_results.append(result)
+        else:
+            print("🔧 LLM chose PARALLEL execution")
+            import asyncio
+            self.analysis_results = await asyncio.gather(*analysis_tasks, return_exceptions=True)
+        
+        # THIN: Let LLM decide how to handle results
+        result_types = []
+        for r in self.analysis_results:
+            if isinstance(r, Exception):
+                result_types.append(f"Exception: {type(r).__name__}")
+            else:
+                result_types.append("Success")
+        
+        results_prompt = f"""
+        You are the results processing agent. Process these analysis results:
+        
+        Results: {result_types}
+        
+        Should failed results be:
+        - "RETRY": Attempt to retry failed analyses
+        - "FILTER": Remove failed results and continue
+        - "ABORT": Stop processing due to failures
+        
+        Respond with just the action name.
+        """
+        
+        results_decision = await self._call_llm_async(results_prompt, "results_processing_agent")
+        
+        if "ABORT" in results_decision.upper():
+            failed_count = sum(1 for r in self.analysis_results if isinstance(r, Exception))
+            raise RuntimeError(f"LLM decided to abort due to {failed_count} failed analyses")
+        
+        # Filter successful results (for now, RETRY logic can be added later)
         successful_results = []
         for i, result in enumerate(self.analysis_results):
             if isinstance(result, Exception):
@@ -271,12 +337,16 @@ Be precise and cite specific text passages to support your scores."""
             "input_count": len(self.analysis_results)
         })
         
-        # Prepare synthesis prompt
-        analysis_summaries = []
-        for result in self.analysis_results:
-            # ✅ THIN FIX: Remove truncation - let LLM handle full analysis content
-            # OLD THICK CODE: analysis_summaries.append(f"File: {result['file_name']}\nAnalysis: {result['analysis_response'][:500]}...\n")
-            analysis_summaries.append(f"File: {result['file_name']}\nAnalysis: {result['analysis_response']}\n")
+        # THIN: Let LLM handle result formatting instead of assuming structure
+        formatting_prompt = f"""
+        You are the results formatting agent. Format these analysis results for synthesis:
+        
+        Raw results: {self.analysis_results}
+        
+        Convert to human-readable format for synthesis. Handle any errors gracefully.
+        """
+        
+        formatted_results = await self._call_llm_async(formatting_prompt, "results_formatting_agent")
         
         synthesis_prompt = f"""You are the synthesis_agent. Your job is to:
 
@@ -286,7 +356,7 @@ Be precise and cite specific text passages to support your scores."""
 4. Provide preliminary synthesis
 
 ANALYSIS RESULTS TO SYNTHESIZE:
-{chr(10).join(analysis_summaries)}
+{formatted_results}
 
 TASK: 
 1. Create aggregate statistics and patterns
@@ -315,24 +385,40 @@ CONFIDENCE LEVEL: [your confidence in these results]"""
         })
     
     async def _handle_outliers(self):
-        """Handle outliers through moderator and referee if needed"""
+        """THIN: Let LLM decide if outliers need handling"""
         
-        if not self.outliers:
-            return
+        outlier_assessment_prompt = f"""
+        You are the outlier assessment agent. Review the current outlier situation:
         
-        self._log_system_event("OUTLIER_DISCUSSION_STARTED", {
-            "outlier_count": len(self.outliers)
-        })
+        Current outliers identified: {getattr(self, 'outliers', [])}
         
-        # Moderator agent organizes discussion about outliers
-        await self._run_moderator_agent()
+        Do these outliers require discussion and resolution?
+        - If YES: respond "HANDLE_OUTLIERS" 
+        - If NO: respond "SKIP_OUTLIERS"
         
-        # Referee agent arbitrates if there are still disagreements
-        await self._run_referee_agent()
+        Respond with just the action name.
+        """
         
-        self._log_system_event("OUTLIER_DISCUSSION_COMPLETED", {
-            "resolution_method": "moderator_referee_arbitration"
-        })
+        outlier_decision = await self._call_llm_async(outlier_assessment_prompt, "outlier_assessment_agent")
+        
+        if "HANDLE_OUTLIERS" in outlier_decision.upper():
+            self._log_system_event("OUTLIER_DISCUSSION_STARTED", {
+                "outlier_count": len(getattr(self, 'outliers', []))
+            })
+            
+            # Moderator agent organizes discussion about outliers
+            await self._run_moderator_agent()
+            
+            # Referee agent arbitrates if there are still disagreements
+            await self._run_referee_agent()
+            
+            self._log_system_event("OUTLIER_DISCUSSION_COMPLETED", {
+                "resolution_method": "moderator_referee_arbitration"
+            })
+        else:
+            self._log_system_event("OUTLIER_DISCUSSION_SKIPPED", {
+                "reason": "LLM determined outliers do not need discussion"
+            })
     
     async def _run_moderator_agent(self):
         """Moderator agent organizes focused discussion about outliers only"""
@@ -459,6 +545,56 @@ Format as structured academic output suitable for peer review."""
             "synthesis_type": synthesis_type,
             "session_id": self.session_id
         }
+    
+    async def _simple_aggregation(self) -> Dict[str, Any]:
+        """THIN: Simple aggregation without adversarial synthesis"""
+        
+        final_report_prompt = f"""
+        Create a simple aggregation report from these analysis results:
+        
+        {json.dumps(self.analysis_results, indent=2)}
+        
+        Provide:
+        1. Summary of all analyses
+        2. Raw data aggregation  
+        3. Basic patterns observed
+        4. Complete methodology documentation
+        
+        No synthesis or arbitration - just clean aggregation for bias isolation.
+        """
+        
+        final_report = await self._call_llm_async(final_report_prompt, "aggregation_agent")
+        await self._save_results_to_project(final_report)
+        
+        return {
+            "type": "simple_aggregation",
+            "report": final_report,
+            "raw_analyses": self.analysis_results
+        }
+    
+    async def _adversarial_workflow(self) -> Dict[str, Any]:
+        """THIN: Original adversarial workflow when experiment requires it"""
+        
+        # Run synthesis agent
+        await self._run_synthesis_agent()
+        
+        # Ask LLM if outliers need handling
+        if hasattr(self, 'synthesis_result'):
+            outlier_prompt = f"""
+            Synthesis complete: {self.synthesis_result}
+            
+            Do any outliers need discussion? Respond "YES" or "NO".
+            """
+            
+            needs_outlier_discussion = await self._call_llm_async(outlier_prompt, "outlier_coordinator")
+            
+            if "YES" in needs_outlier_discussion.upper():
+                await self._handle_outliers()
+        
+        # Final synthesis
+        final_results = await self._final_synthesis()
+        
+        return final_results
     
     async def _save_results_to_project(self, final_report: str):
         """Save results back to the project directory"""
@@ -608,9 +744,9 @@ Format as structured academic output suitable for peer review."""
                     }
                 )
             
-                    # Make the LLM call (wrap sync call for async context)
-        import asyncio
-        if self.llm_client and hasattr(self.llm_client, 'call_llm'):
+            # Make the LLM call (wrap sync call for async context)
+            import asyncio
+            if self.llm_client and hasattr(self.llm_client, 'call_llm'):
                 print(f"🟡 DEBUG: Calling LLM via async executor for {agent_id}")
                 response = await asyncio.get_event_loop().run_in_executor(
                     None, 
