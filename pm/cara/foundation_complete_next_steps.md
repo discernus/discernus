@@ -19,13 +19,13 @@ Your 5-minute Gemini success proved that:
 We've created the foundation for the new strategic approach:
 
 #### 1. Framework Specification Validation Rubric v1.0 ✅
-- **File**: `pm/framework_specification_validation_rubric.md`
+- **File**: `docs/framework_specification_validation_rubric.md`
 - **Purpose**: Generic validation criteria for any analytical framework
 - **Features**: 6 core requirements, 85% completion threshold, LLM validation instructions
 - **Status**: **COMPLETE and TESTED** (CFF v2.0 passes with 95% completeness)
 
 #### 2. Experiment Specification Validation Rubric v1.0 ✅
-- **File**: `pm/experiment_specification_validation_rubric.md`  
+- **File**: `docs/experiment_specification_validation_rubric.md`  
 - **Purpose**: Generic validation criteria for research experiment designs
 - **Features**: 6 core requirements, 90% completion threshold, comprehensive evaluation protocol
 - **Status**: **COMPLETE and READY**

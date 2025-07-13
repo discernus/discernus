@@ -74,6 +74,12 @@
 - [ ] **Validation Procedures** - how results will be verified
 - [ ] **Quality Controls** - systematic quality assurance measures
 - [ ] **Interpretation Guidelines** - how to interpret different types of findings
+- [ ] **Ensemble Specifications** - if using multiple LLMs or multi-run analysis, specify requirements
+  - Model selection criteria (e.g., "4 most advanced models", "mix of local and cloud")
+  - Budget constraints (e.g., "$50 maximum cost")
+  - Statistical requirements (e.g., "inter-rater reliability analysis", "Cronbach's alpha")
+  - Performance requirements (e.g., "must handle 1000 texts per batch")
+  - **Note**: System will evaluate feasibility and guide you toward viable alternatives if constraints cannot be met
 
 **Validation Questions for LLM:**
 - Is the analysis strategy appropriate for the research question and data?
@@ -196,6 +202,15 @@ analysis_plan:
   statistical_methods: ["Method 1", "Method 2"]
   quality_controls: ["Control 1", "Control 2"]
   validation_procedures: ["Validation 1", "Validation 2"]
+  
+  # Optional: Ensemble/Multi-Run Specifications
+  ensemble_requirements:
+    model_selection_criteria: "4 most advanced models available"
+    budget_constraint: "$50.00 USD maximum"
+    statistical_requirements: ["inter-rater reliability", "Cronbach's alpha"]
+    performance_requirements: "must handle 100+ texts per batch"
+    multi_run_specifications: "3 runs per model for consistency testing"
+    # Note: System will evaluate feasibility and provide alternatives if needed
 
 expected_outcomes:
   predicted_results: "Specific expected findings"
@@ -325,6 +340,12 @@ An experiment **FAILS** validation if:
 ### Cross-Cultural Studies
 - **Additional Requirements**: Cultural sensitivity protocols, interpretation guidelines
 - **Validation Emphasis**: Appropriateness across cultural contexts
+
+### Ensemble and Multi-Run Studies
+- **Additional Requirements**: Clear model selection criteria, budget constraints, statistical analysis plan
+- **Validation Emphasis**: Feasibility assessment, constraint satisfaction, statistical validity
+- **Special Considerations**: System will evaluate technical feasibility and guide toward viable alternatives
+- **Examples**: Multi-LLM bias testing, inter-rater reliability studies, consistency validation
 
 ---
 
