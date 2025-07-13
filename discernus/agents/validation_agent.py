@@ -548,13 +548,52 @@ Provide your assessment now."""
         import redis
         import json
         from datetime import datetime
+        from discernus.core.project_chronolog import initialize_project_chronolog, log_project_event
+        import getpass
         
-        # Connect to Redis for event publishing
-        redis_client = redis.Redis(host='localhost', port=6379, db=0)
+        # Generate session ID
         session_id = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         
+        # Initialize project chronolog - CRITICAL first step for research provenance
+        project_path = Path(framework_path).parent
+        user = getpass.getuser()
+        command = f"ValidationAgent.validate_and_execute_sync(framework_path='{framework_path}', experiment_path='{experiment_path}', corpus_path='{corpus_path}', dev_mode={dev_mode})"
+        
+        # Log PROJECT_INITIALIZATION as first chronolog entry
         try:
-            # Publish validation start event
+            initialize_project_chronolog(
+                project_path=str(project_path),
+                user=user,
+                command=command,
+                session_id=session_id,
+                system_state={
+                    'validation_agent_version': '2.0',
+                    'framework_path': framework_path,
+                    'experiment_path': experiment_path,
+                    'corpus_path': corpus_path,
+                    'dev_mode': dev_mode
+                }
+            )
+        except Exception as e:
+            print(f"⚠️ ProjectChronolog initialization failed: {e}")
+        
+        # Connect to Redis for event publishing (legacy support)
+        redis_client = redis.Redis(host='localhost', port=6379, db=0)
+        
+        try:
+            # Log validation start to project chronolog
+            log_project_event(
+                str(project_path),
+                "VALIDATION_STARTED",
+                session_id,
+                {
+                    "framework_path": framework_path,
+                    "experiment_path": experiment_path,
+                    "corpus_path": corpus_path
+                }
+            )
+            
+            # Publish validation start event (legacy Redis)
             redis_client.publish("soar.validation.started", json.dumps({
                 "timestamp": datetime.utcnow().isoformat(),
                 "session_id": session_id,
@@ -599,7 +638,19 @@ Answer: YES/NO with brief reasoning."""
                 if "YES" not in validation_response:
                     return {"status": "validation_failed", "message": f"Compatibility validation failed: {validation_response}"}
                 
-                # Publish framework validation success
+                # Log framework validation to project chronolog
+                log_project_event(
+                    str(project_path),
+                    "FRAMEWORK_VALIDATED",
+                    session_id,
+                    {
+                        "status": "validated",
+                        "validation_response": validation_response,
+                        "corpus_file_count": len(corpus_files)
+                    }
+                )
+                
+                # Publish framework validation success (legacy Redis)
                 redis_client.publish("soar.framework.validated", json.dumps({
                     "timestamp": datetime.utcnow().isoformat(),
                     "session_id": session_id,
@@ -628,15 +679,8 @@ Create detailed instructions for an analysis agent to apply this framework to th
             else:
                 analysis_instructions = "[MOCK] Analysis instructions would be generated here"
 
-            # Publish instructions generated event
-            redis_client.publish("soar.instructions.generated", json.dumps({
-                "timestamp": datetime.utcnow().isoformat(),
-                "session_id": session_id,
-                "analysis_instructions": analysis_instructions,
-                "corpus_file_count": len(corpus_files)
-            }))
-
-            return {
+            # Log successful validation completion to project chronolog
+            final_result = {
                 "status": "validated", 
                 "message": f"Framework, experiment, and corpus are compatible - analysis ready",
                 "analysis_agent_instructions": analysis_instructions,
@@ -645,7 +689,43 @@ Create detailed instructions for an analysis agent to apply this framework to th
                 "session_id": session_id
             }
             
+            log_project_event(
+                str(project_path),
+                "VALIDATION_COMPLETED",
+                session_id,
+                {
+                    "status": "validated",
+                    "corpus_file_count": len(corpus_files),
+                    "framework_ready": True,
+                    "instructions_generated": True
+                }
+            )
+            
+            # Publish instructions generated event (legacy Redis)
+            redis_client.publish("soar.instructions.generated", json.dumps({
+                "timestamp": datetime.utcnow().isoformat(),
+                "session_id": session_id,
+                "analysis_instructions": analysis_instructions,
+                "corpus_file_count": len(corpus_files)
+            }))
+
+            return final_result
+            
         except Exception as e:
+            # Log error to project chronolog  
+            try:
+                log_project_event(
+                    str(project_path),
+                    "VALIDATION_ERROR",
+                    session_id,
+                    {
+                        "error": str(e),
+                        "error_type": type(e).__name__
+                    }
+                )
+            except:
+                pass  # Don't let chronolog errors mask the original error
+                
             return {"status": "error", "message": f"Failed to load files: {str(e)}"}
     
     def _discover_experiment_assets(self, experiment_content: str, project_dir: Path) -> str:

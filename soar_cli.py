@@ -135,6 +135,39 @@ def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_p
     click.echo("🚀 SOAR Project Execution")
     click.echo("=" * 40)
     
+    # Initialize project chronolog for comprehensive research provenance
+    try:
+        from discernus.core.project_chronolog import initialize_project_chronolog
+        from datetime import datetime
+        import getpass
+        
+        session_id = f"soar_session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        user = getpass.getuser()
+        command = f"soar execute {project_path}"
+        if auto_validate:
+            command += " --auto-validate"
+        if dev_mode:
+            command += " --dev-mode"
+        if researcher_profile != 'experienced_computational_social_scientist':
+            command += f" --researcher-profile {researcher_profile}"
+        
+        initialize_project_chronolog(
+            project_path=project_path,
+            user=user,
+            command=command,
+            session_id=session_id,
+            system_state={
+                'soar_cli_version': '2.0',
+                'auto_validate': auto_validate,
+                'dev_mode': dev_mode,
+                'researcher_profile': researcher_profile
+            }
+        )
+        click.echo(f"📝 Project chronolog initialized: {session_id}")
+        
+    except Exception as e:
+        click.echo(f"⚠️ ProjectChronolog initialization failed: {e}")
+    
     try:
         # Auto-validate if requested
         if auto_validate:

@@ -20,6 +20,7 @@ Create a SOAR architecture that enables researchers to:
 3. **Utilize structured debate protocols** for divergence resolution with evidence-based arbitration
 4. **Receive publication-ready results** with complete methodology documentation
 5. **Maintain cost transparency and control** through upfront estimation and budget guardrails
+6. **Provide comprehensive research provenance** through project-level chronolog capturing every action from initialization through completion
 
 **Core Innovation**: Framework-agnostic multi-model ensemble analysis with structured debate protocols that transform LLM disagreement into academic validation strength rather than uncertainty.
 
@@ -125,6 +126,88 @@ SOAR: "Model A scored 1.7 citing X, Y, Z evidence. Model B challenged with count
 - **Reliability Metrics**: Quantified confidence intervals and agreement measures
 - **Replication Support**: Full audit trails enabling independent verification
 - **Quality Assurance**: Evidence-based validation exceeding traditional manual approaches
+
+-----
+
+## Comprehensive Research Provenance: The Project Chronolog
+
+### Academic Integrity Foundation
+
+**The Chronolog Concept**: SOAR v2.0 implements a comprehensive project-level audit trail that captures every action from the moment a researcher initiates any experiment through final publication. This chronolog serves as the foundation for academic integrity and research replication.
+
+**Project-Level Scope**: Unlike session-specific logs, the chronolog spans the entire research lifecycle within a project, creating a complete narrative of:
+
+- **User Initialization**: The exact command that started the project chronolog
+- **All Agent Actions**: Every LLM spawn, analysis, debate, and arbitration
+- **User Interactions**: All feedback, approvals, modifications, and decisions
+- **System Events**: File operations, results generation, error recovery
+- **Cross-Session Continuity**: Multiple analysis sessions over time within the same project
+- **Final Outputs**: Publication materials and their generation process
+
+### Chronolog Implementation Requirements
+
+**Initialization Event**: The chronolog begins with the first user command targeting a project:
+
+```bash
+# This command initializes the project chronolog
+soar execute projects/my_research/experiment_01
+```
+
+**First Chronolog Entry**:
+```jsonl
+{"timestamp": "2025-01-13T21:00:00Z", "event": "PROJECT_INITIALIZATION", "user": "researcher_id", "command": "soar execute projects/my_research/experiment_01", "project": "my_research", "session_id": "session_20250113_210000", "git_commit": "abc123def", "system_state": {"soar_version": "2.0.1", "framework_version": "pdaf_v1.1"}}
+```
+
+**Comprehensive Capture**: From initialization forward, the chronolog records:
+
+- **Agent Lifecycle**: Spawn, instructions, inputs, outputs, termination
+- **LLM Interactions**: Model calls, token usage, costs, response times
+- **Decision Points**: User approvals, rejections, modifications
+- **System Operations**: File reads/writes, database updates, error recovery
+- **Cross-Session Events**: User returns, project resumption, iteration cycles
+- **Quality Assurance**: Validation steps, bias detection, confidence metrics
+- **Final Products**: Result generation, export operations, publication preparation
+
+### Storage and Durability
+
+**Master Chronolog Location**:
+```
+projects/my_research/PROJECT_CHRONOLOG.jsonl
+```
+
+**Immutable Append-Only Design**: Each entry is timestamped and cryptographically signed to prevent tampering. The chronolog provides irrefutable evidence of the complete research process.
+
+**Academic Publication Integration**: The chronolog enables peer reviewers to:
+- Trace every analysis decision to its source
+- Verify methodology consistency throughout the project
+- Identify human intervention points and their justifications
+- Reproduce the complete research process independently
+
+**Blockchain-Ready Architecture**: While MVP uses local files, the chronolog format is designed for future blockchain integration, providing ultimate academic integrity for commercialization.
+
+### Example Chronolog Sequence
+
+```jsonl
+{"timestamp": "2025-01-13T21:00:00Z", "event": "PROJECT_INITIALIZATION", "user": "researcher", "command": "soar execute projects/attesor/experiment_01", "project": "attesor", "session_id": "session_001"}
+{"timestamp": "2025-01-13T21:00:05Z", "event": "FRAMEWORK_LOADED", "framework": "pdaf_v1.1", "size_tokens": 25000, "validation_status": "passed"}
+{"timestamp": "2025-01-13T21:00:10Z", "event": "CORPUS_VALIDATED", "corpus_files": 8, "conditions": ["original", "sanitized", "esperanto"]}
+{"timestamp": "2025-01-13T21:00:15Z", "event": "AGENT_SPAWNED", "agent_id": "analysis_claude_001", "model": "claude-3.5-sonnet", "framework": "pdaf_v1.1", "target_text": "speech_001"}
+{"timestamp": "2025-01-13T21:02:30Z", "event": "ANALYSIS_COMPLETED", "agent_id": "analysis_claude_001", "scores": {"anchor_1": 1.2, "anchor_2": 0.8}, "tokens_used": 15000, "cost_usd": 0.045}
+{"timestamp": "2025-01-13T21:05:00Z", "event": "DIVERGENCE_DETECTED", "dimension": "anchor_1", "models": ["claude", "gpt4"], "scores": [1.2, 0.7], "threshold_exceeded": 0.4}
+{"timestamp": "2025-01-13T21:05:05Z", "event": "DEBATE_INITIATED", "moderator": "moderator_001", "participants": ["claude", "gpt4"], "topic": "anchor_1_evidence"}
+{"timestamp": "2025-01-13T21:07:45Z", "event": "REFEREE_DECISION", "referee": "referee_001", "winner": "claude", "final_score": 1.1, "reasoning": "stronger_calibration_alignment"}
+{"timestamp": "2025-01-13T21:15:00Z", "event": "USER_FEEDBACK", "user": "researcher", "action": "approve_results", "session_id": "session_001"}
+{"timestamp": "2025-01-13T21:15:30Z", "event": "SYNTHESIS_COMPLETED", "report_generated": "bias_detection_report.md", "academic_format": "journal_article", "word_count": 5500}
+{"timestamp": "2025-01-13T21:16:00Z", "event": "PROJECT_COMPLETED", "session_id": "session_001", "total_cost": 12.50, "duration_minutes": 16, "results_location": "projects/attesor/experiment_01/results/"}
+```
+
+### Privacy and Security
+
+**Sensitive Data Handling**: The chronolog captures metadata and decisions but not the full content of private research materials. Text analysis inputs are referenced by hash, not stored in full.
+
+**Access Control**: Chronologs are project-scoped and access-controlled to authorized researchers only. Enterprise deployments can implement additional encryption and access controls.
+
+**Audit Trail Integrity**: Cryptographic signatures ensure chronolog entries cannot be modified without detection, providing tamper-evident research documentation.
 
 -----
 
@@ -1169,6 +1252,9 @@ class MVPResearcherControls:
 - `soar.arbitration.completed`: Referee final decisions with framework compliance
 - `soar.synthesis.ready`: Quality-assured final results with framework interpretation
 - `soar.audit.log`: Complete JSONL chronological record with framework traceability
+- `soar.chronolog.append`: All events automatically captured in project-level chronolog
+
+**Chronolog Integration**: Every Redis pub-sub event is automatically captured in the project-level chronolog (`projects/{project}/PROJECT_CHRONOLOG.jsonl`) to maintain comprehensive research provenance from initialization through completion.
 
 ### Framework-Agnostic Message Format
 
