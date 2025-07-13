@@ -154,7 +154,7 @@ class LiteLLMClient:
 
         # Configure LiteLLM global settings for native rate limiting
         litellm.drop_params = True  # Drop unsupported params gracefully
-        litellm.set_verbose = False  # Can be enabled for debugging
+        litellm.set_verbose = False  # Model captured: vertex_ai/gemini-2.5-flash
 
         # Enhanced: Configure native rate limiting for faster experiments
         litellm.request_timeout = 60  # 60 second timeout

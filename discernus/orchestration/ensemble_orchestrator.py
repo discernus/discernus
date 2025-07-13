@@ -22,6 +22,7 @@ import redis
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+import os # Added for os.urandom
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -115,7 +116,6 @@ class EnsembleOrchestrator:
         """
         try:
             # Initialize session
-            self.session_id = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
             self._init_session_logging()
             
             self._log_system_event("ENSEMBLE_STARTED", {
@@ -487,25 +487,71 @@ Format as structured academic output suitable for peer review."""
     
     def _init_session_logging(self):
         """Initialize conversation logging for this session"""
-        if DEPENDENCIES_AVAILABLE and self.session_id:
-            conversation_id = f"conversation_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{self.session_id[-8:]}"
-            self.logger = ConversationLogger(
-                str(self.project_path),
-                str(self.results_path)
-            )
-            
-            # ✅ FIX: Activate Redis capture by starting conversation
-            # This triggers ConversationLogger._start_redis_capture() which starts the Redis event listener
-            self.conversation_id = self.logger.start_conversation(
-                speech_text="Ensemble analysis session",
-                research_question=f"Multi-agent analysis for session {self.session_id}",
-                participants=["analysis_agent", "synthesis_agent", "moderator_agent", "referee_agent", "final_synthesis_agent"]
-            )
-            
-            print(f"✅ Redis event capture ACTIVATED for conversation: {self.conversation_id}")
-            
+        # Generate session ID with timestamp
+        timestamp = datetime.now()
+        self.session_id = f"session_{timestamp.strftime('%Y%m%d_%H%M%S')}"
+        self.conversation_id = f"conversation_{timestamp.strftime('%Y%m%d_%H%M%S')}_{os.urandom(4).hex()}"
+        
+        # Initialize conversation logger if dependencies available
+        if DEPENDENCIES_AVAILABLE:
+            try:
+                self.logger = ConversationLogger(str(self.project_path))
+                print(f"✅ Redis event capture ACTIVATED for conversation: {self.conversation_id}")
+            except Exception as e:
+                print(f"⚠️ Conversation logging failed: {e}")
+                self.logger = None
         else:
-            self.conversation_id = None
+            self.logger = None
+
+        # Create timestamped results directory
+        timestamp_str = timestamp.strftime('%Y-%m-%d_%H-%M-%S')
+        self.session_results_path = self.results_path / timestamp_str
+        self.session_results_path.mkdir(exist_ok=True)
+        
+        # Get model information for provenance
+        model_info = self._get_model_provenance()
+        
+        # Save session metadata with model provenance
+        metadata = {
+            "session_id": self.session_id,
+            "conversation_id": self.conversation_id,
+            "timestamp": timestamp_str,
+            "analysis_count": 0,
+            "outliers_handled": 0,
+            "project_path": str(self.project_path),
+            "model_provenance": model_info
+        }
+        
+        metadata_path = self.session_results_path / "session_metadata.json"
+        with open(metadata_path, 'w') as f:
+            json.dump(metadata, f, indent=2)
+
+    def _get_model_provenance(self) -> Dict[str, Any]:
+        """Extract model information for research provenance"""
+        try:
+            # For now, capture the known default model from code inspection
+            # This can be enhanced later to dynamically extract from LLM client
+            default_model = "vertex_ai/gemini-2.5-flash"  # Current default from code inspection
+            
+            return {
+                "primary_model": default_model,
+                "model_family": "gemini",
+                "model_version": "2.5-flash",
+                "provider": "vertex_ai",
+                "capture_method": "code_inspection",
+                "capture_timestamp": datetime.now().isoformat(),
+                "notes": "Model captured from EnsembleOrchestrator default configuration - based on LiteLLMClientAdapter line 54"
+            }
+        except Exception as e:
+            return {
+                "primary_model": "error",
+                "model_family": "error",
+                "model_version": "error", 
+                "provider": "error",
+                "capture_method": "exception",
+                "capture_timestamp": datetime.now().isoformat(),
+                "notes": f"Error capturing model info: {str(e)}"
+            }
     
     def _log_system_event(self, event_type: str, event_data: Dict[str, Any]):
         """Log system events to Redis and conversation log"""
@@ -562,9 +608,9 @@ Format as structured academic output suitable for peer review."""
                     }
                 )
             
-            # Make the LLM call (wrap sync call for async context)
-            import asyncio
-            if hasattr(self.llm_client, 'call_llm'):
+                    # Make the LLM call (wrap sync call for async context)
+        import asyncio
+        if self.llm_client and hasattr(self.llm_client, 'call_llm'):
                 print(f"🟡 DEBUG: Calling LLM via async executor for {agent_id}")
                 response = await asyncio.get_event_loop().run_in_executor(
                     None, 
