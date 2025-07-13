@@ -22,6 +22,7 @@ import os
 import sys
 import redis
 import threading
+import git
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, Optional
@@ -63,6 +64,14 @@ class ProjectChronolog:
         
         # Project chronolog location per SOAR v2.0 specification
         self.chronolog_file = self.project_path / f"PROJECT_CHRONOLOG_{self.project_name}.jsonl"
+        
+        # Initialize Git repo for automatic commits
+        try:
+            self.git_repo = git.Repo(self.project_path, search_parent_directories=True)
+            print(f"✅ ProjectChronolog Git integration active for project: {self.project_name}")
+        except git.InvalidGitRepositoryError:
+            print(f"⚠️ ProjectChronolog: Not in a Git repository, chronolog persistence limited")
+            self.git_repo = None
         
         # Cryptographic signing for tamper evidence
         self.signing_key = signing_key or os.getenv('CHRONOLOG_SIGNING_KEY', 'default_dev_key')
@@ -155,7 +164,7 @@ class ProjectChronolog:
         return event.event_id
     
     def _append_event(self, event: ChronologEvent):
-        """Append event to chronolog with cryptographic integrity"""
+        """Append event to chronolog with cryptographic integrity and Git commit"""
         # Generate signature
         event.signature = self._sign_event(event)
         
@@ -165,6 +174,37 @@ class ProjectChronolog:
         with open(self.chronolog_file, 'a', encoding='utf-8') as f:
             f.write(json.dumps(event_dict, separators=(',', ':')) + '\n')
             f.flush()  # Ensure immediate write for crash safety
+        
+        # Automatically commit to Git for reliable persistence
+        self._commit_chronolog_event(event)
+    
+    def _commit_chronolog_event(self, event: ChronologEvent):
+        """Automatically commit chronolog event to Git for reliable persistence"""
+        if not self.git_repo:
+            return
+        
+        try:
+            # Add chronolog file to Git
+            self.git_repo.index.add([str(self.chronolog_file)])
+            
+            # Create descriptive commit message
+            commit_message = f"Chronolog: {event.event} - {self.project_name}"
+            if event.event == "PROJECT_INITIALIZATION":
+                commit_message += f"\n\nProject initialized by {event.data.get('user', 'unknown')}"
+                commit_message += f"\nCommand: {event.data.get('command', 'unknown')}"
+            else:
+                commit_message += f"\n\nEvent: {event.event}"
+                commit_message += f"\nSession: {event.session_id}"
+            
+            # Commit with tamper-evident signature
+            if event.signature:
+                commit_message += f"\nChronolog signature: {event.signature[:16]}..."
+            
+            self.git_repo.index.commit(commit_message)
+            print(f"📝 Chronolog event committed to Git: {event.event}")
+            
+        except Exception as e:
+            print(f"⚠️ Failed to commit chronolog event to Git: {e}")
     
     def _start_redis_capture(self, session_id: str):
         """Start automatic Redis event capture for this project"""
@@ -234,9 +274,12 @@ class ProjectChronolog:
     def _get_git_commit(self) -> Optional[str]:
         """Get current git commit hash for provenance"""
         try:
-            import git
-            repo = git.Repo(self.project_path, search_parent_directories=True)
-            return repo.head.commit.hexsha[:10]
+            if self.git_repo:
+                return self.git_repo.head.commit.hexsha[:10]
+            else:
+                # Fallback to searching for git repo
+                repo = git.Repo(self.project_path, search_parent_directories=True)
+                return repo.head.commit.hexsha[:10]
         except:
             return None
     
