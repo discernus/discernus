@@ -451,6 +451,91 @@ offline_mode:
 
 -----
 
+## Experiment Definition Requirements
+
+### Ensemble and Multi-Run Specifications
+
+**Important**: If you want to design an ensemble of LLMs, perform multi-runs across the same LLM, or both, describe your requirements in your experiment definition file. **Be aware that what you want might not be feasible**, and if constraints cannot be met, the system will guide you appropriately toward viable alternatives.
+
+**Required Information for Ensemble/Multi-Run Studies**:
+
+```yaml
+# experiment.md - Include these specifications when requesting ensemble analysis
+
+## Ensemble Requirements
+
+**Model Selection Criteria**: 
+- Describe your preferred approach: "four most advanced reasoning models" OR specific model list
+- Quality requirements: reasoning capability, multimodal support, context window needs
+- Cost constraints: maximum total budget for analysis
+
+**Statistical Requirements**:
+- Target reliability metric: "Krippendorff's Alpha ≥ 0.7" OR "sufficient for publication"
+- Required confidence level for inter-rater reliability
+- Acceptable disagreement thresholds between models
+
+**Corpus Specifications**:
+- Total content volume: number of texts, estimated tokens, maximum speech length
+- Batch size constraints: "process 8 speeches together" OR "one speech at a time"  
+- Context window requirements: framework size + content size estimates
+
+**Budget and Performance Constraints**:
+- Total budget limit: "$15.00 USD maximum" OR "minimize cost while maintaining quality"
+- Time constraints: "results needed within 2 hours" OR "overnight processing acceptable"
+- Performance vs. cost trade-offs: "prioritize accuracy" OR "balance cost and reliability"
+
+## Example Specifications
+
+### Basic Ensemble Request
+```yaml
+ensemble_requirements:
+  model_count: 4
+  selection_criteria: "premium reasoning models with 100k+ context"
+  budget_limit: 10.00 USD
+  reliability_target: "suitable for academic publication"
+  corpus_size: "8 political speeches, ~12k tokens each"
+```
+
+### Advanced Multi-Run Study  
+```yaml
+ensemble_requirements:
+  design_type: "cross-model validation with multi-run verification"
+  models: ["gpt-4o", "claude-3.5-sonnet", "gemini-2.5-pro", "grok-3"]
+  runs_per_model: 3
+  statistical_requirements:
+    - "Krippendorff's Alpha ≥ 0.6 between models"
+    - "Cronbach's Alpha ≥ 0.8 within-model consistency"
+  budget_limit: 25.00 USD
+  corpus_specifications:
+    total_documents: 1000
+    max_tokens_per_document: 15000
+    batch_processing: "constraint-based optimal batching"
+```
+
+### Constraint-Based Request
+```yaml
+ensemble_requirements:
+  constraint_priority: "maximize reliability within budget"
+  hard_constraints:
+    - budget_limit: 5.00 USD
+    - completion_time: "under 90 minutes"
+    - minimum_models: 3
+  optimization_target: "highest achievable Krippendorff's Alpha"
+  corpus_description: "50 news articles, approximately 8k tokens each"
+```
+
+**System Response to Infeasible Requests**:
+
+If your requirements cannot be met, the system will provide:
+- **Constraint Analysis**: "Your budget of $5 allows 3 models but requires batching speeches into groups of 6"
+- **Alternative Suggestions**: "Consider increasing budget to $8 for individual speech analysis OR accept batch processing"
+- **Trade-off Options**: "Reduce to 3 models for $4.50 OR increase budget to $7.25 for 4 models"
+- **Optimization Recommendations**: "Your corpus size suggests optimal batch size of 7 speeches per group"
+
+**THIN Philosophy**: The system will use LLM intelligence to understand your research goals and suggest optimal configurations rather than requiring rigid technical specifications.
+
+-----
+
 ## Framework Plugin Architecture
 
 ### Core Framework Interface

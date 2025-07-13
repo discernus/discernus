@@ -21,7 +21,7 @@ This creates the foundation for "**you've done your homework**" - the quality ba
 ## What We've Built
 
 ### 1. Framework Specification Validation Rubric v1.0
-**File**: `pm/framework_specification_validation_rubric.md`
+**File**: `docs/framework_specification_validation_rubric.md`
 
 **Purpose**: Generic validation criteria for any analytical framework
 
@@ -35,7 +35,7 @@ This creates the foundation for "**you've done your homework**" - the quality ba
 **Validation Test**: CFF v2.0 successfully passes (95% completeness) - proves the rubric works
 
 ### 2. Experiment Specification Validation Rubric v1.0  
-**File**: `pm/experiment_specification_validation_rubric.md`
+**File**: `docs/experiment_specification_validation_rubric.md`
 
 **Purpose**: Generic validation criteria for research experiment designs
 

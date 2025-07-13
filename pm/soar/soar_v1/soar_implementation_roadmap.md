@@ -12,8 +12,8 @@
 ### **What We Have (Leverage Assets) ✅**
 
 #### **1. Comprehensive Validation Infrastructure**
-- **Framework Specification Validation Rubric v1.0** (263 lines) - `pm/framework_specification_validation_rubric.md`
-- **Experiment Specification Validation Rubric v1.0** (348 lines) - `pm/experiment_specification_validation_rubric.md`
+- **Framework Specification Validation Rubric v1.0** (263 lines) - `docs/framework_specification_validation_rubric.md`
+- **Experiment Specification Validation Rubric v1.0** (348 lines) - `docs/experiment_specification_validation_rubric.md`
 - **Framework Specification v3.2** with validation requirements
 - **Validation Test Results** - CFF v2.0 passes (95% completeness)
 
