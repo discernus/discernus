@@ -552,10 +552,11 @@ Provide your assessment now."""
             'component': 'ValidationAgent'
         } 
 
-    def validate_and_execute_sync(self, framework_path: str, experiment_path: str, corpus_path: str, dev_mode: bool = False) -> Dict[str, Any]:
+    def validate_and_execute_sync(self, framework_path: str, experiment_path: str, corpus_path: Optional[str] = None, dev_mode: bool = False) -> Dict[str, Any]:
         """THIN: Read files from paths and validate/execute"""
         import redis
         import json
+        import re
         from datetime import datetime
         from discernus.core.project_chronolog import initialize_project_chronolog, log_project_event
         import getpass
@@ -566,6 +567,38 @@ Provide your assessment now."""
         # Initialize project chronolog - CRITICAL first step for research provenance
         project_path = Path(framework_path).parent
         user = getpass.getuser()
+        
+        # Extract corpus path from experiment if not provided
+        if corpus_path is None:
+            try:
+                experiment_content = Path(experiment_path).read_text()
+                
+                # THIN: Let LLM extract corpus path from experiment
+                if self.llm_client:
+                    corpus_prompt = f"""What corpus path does this experiment specify?
+
+EXPERIMENT: {experiment_content}
+
+Look for corpus_path specification. Answer with just the path (like 'corpus_sanitized_english' or 'corpus_original'), nothing else."""
+                    
+                    llm_response = self.llm_client.call_llm(corpus_prompt, "corpus_path_extractor")
+                    
+                    if llm_response and llm_response.strip():
+                        extracted_path = llm_response.strip().strip('"\'')
+                        corpus_path = str(project_path / extracted_path)
+                        print(f"📂 Corpus path extracted by LLM: {corpus_path}")
+                    else:
+                        corpus_path = str(project_path / "corpus")
+                        print(f"⚠️ LLM could not extract corpus path, using default: {corpus_path}")
+                else:
+                    # Fallback when no LLM available
+                    corpus_path = str(project_path / "corpus")
+                    print(f"⚠️ No LLM available for corpus extraction, using default: {corpus_path}")
+                    
+            except Exception as e:
+                corpus_path = str(project_path / "corpus")
+                print(f"⚠️ Failed to extract corpus path from experiment: {e}")
+        
         command = f"ValidationAgent.validate_and_execute_sync(framework_path='{framework_path}', experiment_path='{experiment_path}', corpus_path='{corpus_path}', dev_mode={dev_mode})"
         
         # Log PROJECT_INITIALIZATION as first chronolog entry
