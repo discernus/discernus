@@ -628,6 +628,21 @@ Format as structured academic output suitable for peer review."""
         self.session_id = f"session_{timestamp.strftime('%Y%m%d_%H%M%S')}"
         self.conversation_id = f"conversation_{timestamp.strftime('%Y%m%d_%H%M%S')}_{os.urandom(4).hex()}"
         
+        # Log session start to project chronolog
+        try:
+            from discernus.core.project_chronolog import log_project_event
+            log_project_event(
+                str(self.project_path),
+                "ENSEMBLE_SESSION_STARTED",
+                self.session_id,
+                {
+                    "conversation_id": self.conversation_id,
+                    "project_path": str(self.project_path)
+                }
+            )
+        except Exception as e:
+            print(f"⚠️ Failed to log to project chronolog: {e}")
+        
         # Initialize conversation logger if dependencies available
         if DEPENDENCIES_AVAILABLE:
             try:
