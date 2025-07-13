@@ -385,40 +385,49 @@ Provide your assessment now."""
             'fallback_used': True
         }
     
-    def _validate_project_corpus(self, project_path: Path) -> Dict[str, Any]:
+    def _validate_project_corpus(self, project_path: Path, corpus_path: Optional[str] = None) -> Dict[str, Any]:
         """Validate project corpus directory and manifest"""
         
-        corpus_path = project_path / "corpus"
+        # Use provided corpus path or default to project/corpus
+        if corpus_path:
+            actual_corpus_path = Path(corpus_path)
+        else:
+            actual_corpus_path = project_path / "corpus"
         
-        if not corpus_path.exists():
+        if not actual_corpus_path.exists():
             return {
                 'status': 'error',
                 'validation_passed': False,
-                'message': f'Corpus directory not found: {corpus_path}'
+                'message': f'Corpus directory not found: {actual_corpus_path}'
             }
         
         # Check for corpus files
         corpus_files = []
-        for file_path in corpus_path.rglob("*.txt"):
+        for file_path in actual_corpus_path.rglob("*.txt"):
+            corpus_files.append(str(file_path))
+        
+        # Also check for .md files (sanitized corpus uses markdown)
+        for file_path in actual_corpus_path.rglob("*.md"):
             corpus_files.append(str(file_path))
         
         if not corpus_files:
             return {
                 'status': 'error',
                 'validation_passed': False,
-                'message': f'No text files found in corpus directory: {corpus_path}'
+                'message': f'No text/markdown files found in corpus directory: {actual_corpus_path}'
             }
         
         # Check for manifest (optional but recommended)
-        manifest_path = corpus_path / "manifest.yaml"
-        has_manifest = manifest_path.exists()
+        manifest_files = list(actual_corpus_path.glob("manifest.yaml")) + list(actual_corpus_path.glob("*.yaml"))
+        has_manifest = len(manifest_files) > 0
         
         return {
             'status': 'success',
             'validation_passed': True,
-            'corpus_path': str(corpus_path),
+            'corpus_path': str(actual_corpus_path),
             'file_count': len(corpus_files),
             'has_manifest': has_manifest,
+            'manifest_files': [str(f) for f in manifest_files],
             'message': f"Corpus validation passed ({len(corpus_files)} files found)"
         }
     
