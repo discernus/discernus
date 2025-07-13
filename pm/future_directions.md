@@ -272,4 +272,125 @@ The chronolog system provides **excellent academic integrity for research use** 
 
 **Future Enterprise Strategy**: Leverage security insights for premium product differentiation in high-value markets (government, pharmaceutical, financial).
 
-This approach maximizes research impact immediately while positioning for long-term commercial success. 
+This approach maximizes research impact immediately while positioning for long-term commercial success.
+
+---
+
+## THIN Development Tools: Research Preparation Suite
+
+### **Identified Need** (from Attesor Study Development)
+
+During Attesor study setup, significant development time was spent on:
+- **Corpus Preparation**: Hash generation, speaker anonymization, file organization
+- **Framework Development**: Sanitization, calibration packet creation, validation
+- **Experiment Design**: Multi-condition setup, bias isolation protocols
+
+**Current Approach**: Custom scripts in project `.secure/` directories (archived after use)  
+**Problem**: Ad-hoc tooling, not reusable, requires programming skills
+
+### **THIN Development Tools Vision**
+
+**Principle**: Researchers describe what they want; LLMs generate the processing logic
+
+#### **1. THIN Corpus Preparation Assistant**
+```
+Researcher: "I need to anonymize 8 political speeches and create 3 corpus conditions: 
+original, speaker-blind English, and Esperanto translations."
+
+LLM: Generates custom processing scripts
+Software: Executes file operations, manages hashes, creates manifests
+```
+
+**Features**:
+- Natural language corpus preparation instructions
+- Automatic hash-based anonymization
+- Multi-condition corpus generation
+- Cryptographic integrity verification
+- Cross-linguistic translation coordination
+
+#### **2. THIN Framework Development Studio**
+```
+Researcher: "Convert my CFF framework to remove partisan examples and add 
+calibration packets for computational analysis."
+
+LLM: Analyzes framework, identifies bias, generates sanitized version
+Software: File management, validation, version control
+```
+
+**Features**:
+- Framework bias detection and sanitization
+- Calibration packet generation from research literature
+- Multi-version framework management
+- Specification compliance validation
+- Citation and provenance tracking
+
+#### **3. THIN Experiment Design Wizard**
+```
+Researcher: "Design a bias isolation study with 6 LLMs, 3 corpus conditions, 
+and statistical validation protocols."
+
+LLM: Generates complete experiment specification
+Software: Validates feasibility, estimates costs, creates directory structure
+```
+
+**Features**:
+- Natural language experiment specification
+- Multi-condition experimental design
+- Statistical power analysis
+- Cost estimation and budgeting
+- Reproducibility package generation
+
+### **Commercial Opportunity Assessment**
+
+**Market Size**: 
+- Academic researchers: 10,000+ computational social scientists globally
+- Corporate research teams: 1,000+ organizations doing content analysis
+- Government agencies: 100+ doing systematic text analysis
+
+**Product Tiers**:
+```
+Discernus Research Toolkit (Academic): $X,XXX/year
+- THIN corpus preparation
+- Framework development assistance
+- Basic experiment design
+
+Discernus Professional Studio ($XX,XXX/year):
+- Advanced multi-condition experiments
+- Enterprise corpus management
+- Team collaboration features
+
+Discernus Enterprise Research Platform ($XXX,XXX/year):
+- Custom framework development
+- Regulatory compliance packages
+- Professional services integration
+```
+
+**Technical Architecture**:
+- LLM-driven research preparation
+- Minimal software for file operations
+- Integration with main Discernus analysis platform
+- Academic workflow compatibility
+
+**Strategic Positioning**: 
+"Stop writing research preparation scripts. Describe what you need; we'll build it."
+
+### **Implementation Roadmap**
+
+**Phase 1** (Months 6-12): Academic MVP
+- THIN corpus preparation assistant
+- Basic framework sanitization
+- Simple experiment templates
+
+**Phase 2** (Months 12-18): Professional Features  
+- Advanced multi-condition experiments
+- Custom framework development
+- Team collaboration
+
+**Phase 3** (Months 18-24): Enterprise Platform
+- Regulatory compliance automation
+- Custom research pipeline generation
+- Professional services integration
+
+---
+
+## Conclusion 
