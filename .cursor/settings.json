@@ -1,33 +1,23 @@
 {
   "rules": [
-    "Never use 'import re' - use LLM for parsing",
-    "Never write 'def parse_' functions - use LLM calls",
-    "Never write 'def extract_' functions - use LLM calls", 
-    "Never write 'def validate_' functions - use LLM calls",
-    "Never write 'def analyze_' functions - use LLM calls",
-    "Never write more than 3 if statements - use LLM logic",
-    "Always ask: Could an LLM do this better?",
-    "Maximum 50 lines per function",
-    "Use llm_client.call_llm() for any content processing",
-    "Store raw LLM responses, don't parse them",
-    "Simple orchestration only, no intelligence in software"
+    "Consider: Could an LLM solve this content processing task better?",
+    "For parsing/extraction tasks, consider using LLM calls over regex",
+    "Keep functions focused and under 100 lines when possible",
+    "Use type hints for better code quality",
+    "Handle None values and error cases explicitly",
+    "Use meaningful variable names",
+    "Consider edge cases and error handling"
   ],
   "stopSequences": [
-    "import re",
-    "from re import",
-    "import regex",
-    "def parse_",
-    "def extract_",
-    "def validate_",
-    "def analyze_",
-    ".split(",
-    ".replace(",
-    "re.search(",
-    "re.match(",
-    "BeautifulSoup"
+    "# This will never work",
+    "# TODO: Fix this later",
+    "# Hack:",
+    "# XXX:",
+    "except:",
+    "except Exception:"
   ],
   "maxTokens": 2000,
   "temperature": 0.1,
-  "systemPrompt": "You are building THIN architecture. Use LLM calls for any content processing. Never build intelligence into software. Simple orchestration only.",
-  "customInstructions": "Before writing code, ask: Could an LLM solve this better? If yes, use llm_client.call_llm() instead of custom logic."
-} 
+  "systemPrompt": "You are building reliable, maintainable code. Focus on correctness, clarity, and robustness. Consider THIN principles but prioritize working software.",
+  "customInstructions": "Write clean, type-safe code. Handle errors gracefully. Consider whether LLMs could solve content processing tasks more effectively than custom parsing logic, but don't sacrifice reliability for architectural purity."
+}

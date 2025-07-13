@@ -22,10 +22,9 @@ import os
 import sys
 import redis
 import threading
-import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional
 from dataclasses import dataclass, asdict
 import uuid
 
@@ -37,7 +36,7 @@ class ChronologEvent:
     session_id: str
     project: str
     data: Dict[str, Any]
-    event_id: Optional[str] = None
+    event_id: str = ""
     signature: Optional[str] = None
     
     def __post_init__(self):
@@ -108,7 +107,7 @@ class ProjectChronolog:
         return signature
     
     def log_initialization(self, user: str, command: str, session_id: str, 
-                          system_state: Optional[Dict[str, Any]] = None) -> Optional[str]:
+                          system_state: Optional[Dict[str, Any]] = None) -> str:
         """
         Log project initialization - first chronolog entry per SOAR v2.0
         
@@ -188,6 +187,9 @@ class ProjectChronolog:
     
     def _redis_event_listener(self, primary_session_id: str):
         """Background thread that captures Redis events to chronolog"""
+        if not self.redis_subscriber:
+            return
+            
         try:
             for message in self.redis_subscriber.listen():
                 if message['type'] == 'pmessage':
@@ -208,18 +210,16 @@ class ProjectChronolog:
                         'capture_timestamp': datetime.utcnow().isoformat() + "Z"
                     }
                     
-                    event = ChronologEvent(
-                        timestamp=redis_data.get('timestamp', datetime.utcnow().isoformat() + "Z"),
-                        event="REDIS_EVENT_CAPTURED",
-                        session_id=event_session_id,
-                        project=self.project_name,
-                        data=chronolog_data
-                    )
+                    # Log as chronolog event
+                    self.log_event("REDIS_EVENT_CAPTURED", event_session_id, chronolog_data)
                     
-                    self._append_event(event)
-                    
+                    # Break if we're no longer active
+                    if not self._active:
+                        break
+                        
         except Exception as e:
-            print(f"❌ Redis event capture error: {e}")
+            print(f"⚠️ Redis event listener error: {e}")
+            self._active = False
     
     def stop_capture(self):
         """Stop Redis event capture for this project"""
