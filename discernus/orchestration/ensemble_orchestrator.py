@@ -71,6 +71,10 @@ class LiteLLMClientAdapter:
             print(f"⚠️ LiteLLMClientAdapter error: {e}")
             # Fallback to empty string rather than None to avoid issues
             return ""
+    
+    def get_model_provenance(self) -> Dict[str, Any]:
+        """Get model provenance from the underlying LiteLLMClient"""
+        return self.client.get_model_provenance()
 
 class EnsembleOrchestrator:
     """
@@ -717,19 +721,29 @@ Format as structured academic output suitable for peer review."""
     def _get_model_provenance(self) -> Dict[str, Any]:
         """Extract model information for research provenance"""
         try:
-            # For now, capture the known default model from code inspection
-            # This can be enhanced later to dynamically extract from LLM client
-            default_model = "vertex_ai/gemini-2.5-flash"  # Current default from code inspection
-            
-            return {
-                "primary_model": default_model,
-                "model_family": "gemini",
-                "model_version": "2.5-flash",
-                "provider": "vertex_ai",
-                "capture_method": "code_inspection",
-                "capture_timestamp": datetime.now().isoformat(),
-                "notes": "Model captured from EnsembleOrchestrator default configuration - based on LiteLLMClientAdapter line 54"
-            }
+            # Check if the client has the new get_model_provenance method
+            if hasattr(self.llm_client, 'get_model_provenance'):
+                # Get dynamic model information from the LiteLLMClient
+                provenance = self.llm_client.get_model_provenance()
+                
+                # Add orchestrator-specific metadata
+                provenance["orchestrator_timestamp"] = datetime.now().isoformat()
+                provenance["notes"] = "Extracted from active LiteLLMClient instance"
+                
+                return provenance
+            else:
+                # Fallback to the old method for ThinLiteLLMClient
+                default_model = "vertex_ai/gemini-2.5-flash"  # Current default from code inspection
+                
+                return {
+                    "primary_model": default_model,
+                    "model_family": "gemini",
+                    "model_version": "2.5-flash",
+                    "provider": "vertex_ai",
+                    "capture_method": "code_inspection_fallback",
+                    "capture_timestamp": datetime.now().isoformat(),
+                    "notes": "Fallback method - client doesn't support dynamic model extraction"
+                }
         except Exception as e:
             return {
                 "primary_model": "error",
