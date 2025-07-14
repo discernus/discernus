@@ -1,6 +1,6 @@
 # Experiment: 05 - Deeper Architectural Smoke Test
 **Project**: Attesor Bias Isolation Study
-**Date**: 2024-07-17
+**Date**: 2025-07-14
 **Status**: DESIGN
 
 ---
@@ -17,21 +17,17 @@
 
 ## 2. Methodology
 
-This experiment will analyze a small corpus of two political speeches using the PDAF v1.1 framework. The analysis will be conducted using a matrix of three different models from three distinct provider types, with two runs for each combination to test for reliability.
+This experiment will analyze a small corpus of two political speeches using this framework:
 
-We will use our preferred top-tier managed model (the Vertex AI version of Claude 3.5 Sonnet), the specialized uncensored reasoning model from OpenRouter (Perplexity's r1-1776), and our local Mistral model. To ensure we can test for reliability, please perform two runs for each model. This experiment requires a full adversarial synthesis at the end.
+/Volumes/dev/discernus/projects/attesor/experiments/05_deeper_smoke_test/framework_pdaf_v1.1_sanitized.md. 
 
-The primary goal is not the analytical substance of the results, but the validation of the end-to-end system architecture. However, we do hope that the final report will be substantive with regard to analysis of the corpus and be human readable and make sense to an academic reviewer.
+The analysis will be conducted using the Vertex AI version of Claude 3.5 Sonnet. To ensure we can test for reliability, please perform six runs for each speech. 
 
 ### 2.1. Statistical Analysis Plan
 
 The analysis will calculate inter-run reliability using Cronbach's Alpha to determine if the models produce consistent results across the two runs. This requires a structured JSON output from the analysis agents containing a `score` field. 
----
-**Generated Configuration (for reproducibility):**
-```yaml
-models:
-- vertex_ai/gemini-2.5-pro
-- anthropic/claude-3-5-sonnet-20240620
-num_runs: 2
-remove_synthesis: false
-```
+
+
+### 2.2 Reporting Requirements
+
+This experiment requires a final report that summarizes results in a way that will make sense to an academic reviewer and directly addresses the hypotheses.

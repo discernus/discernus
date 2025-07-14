@@ -17,6 +17,7 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime
 import re
 import yaml
+import asyncio
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -30,6 +31,7 @@ try:
     from discernus.agents.statistical_analysis_configuration_agent import StatisticalAnalysisConfigurationAgent
     from discernus.agents.execution_planner_agent import ExecutionPlannerAgent
     from discernus.gateway.model_registry import ModelRegistry # Corrected import path
+    from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"ValidationAgent dependencies not available: {e}")
@@ -187,7 +189,7 @@ class ValidationAgent:
             return {'validation_passed': False, 'message': f"Missing required file for coherence check: {e.filename}"}
 
         prompt = f"""
-You are a research methodology auditor. Your task is to ensure a research plan is internally coherent.
+You are a research methodology auditor. Your task is to ensure a research plan is internally coherent and self-contained.
 
 **Framework:**
 ---
@@ -203,9 +205,10 @@ You are a research methodology auditor. Your task is to ensure a research plan i
 1.  **Explicit Link**: Does the experiment plan explicitly state which framework it uses?
 2.  **Hypothesis Testability**: Are the hypotheses in the experiment testable using the concepts and anchors defined in the framework?
 3.  **Methodology Alignment**: Does the methodology described in the experiment align with the analysis prescribed by the framework?
+4.  **Self-Contained**: Are all required assets contained within the experiment folder? No external file references that would break portability?
 
 **Assessment:**
-Based on your audit, is this research plan internally coherent? Answer with a JSON object with the keys "validation_passed" (boolean) and "message" (a brief explanation of your reasoning).
+Based on your audit, is this research plan internally coherent and self-contained? Answer with a JSON object with the keys "validation_passed" (boolean) and "message" (a brief explanation of your reasoning).
 """
         try:
             model_name = self.model_registry.get_model_for_task('validation')
@@ -896,17 +899,27 @@ Create detailed instructions for an analysis agent to apply this framework to th
                     analysis_instructions, _ = self.gateway.execute_call(model=model_name, prompt=instruction_prompt)
             else:
                 analysis_instructions = "[MOCK] Analysis instructions would be generated here"
+            
+            # --- This is where the handoff to the orchestrator happens ---
+            
+            # A modern workflow is now required.
+            experiment_config = self._parse_config_from_experiment(experiment_content)
+            if 'workflow' not in experiment_config:
+                raise ValueError("Experiment is not valid. It must contain a `workflow` definition in its configuration block.")
+
+            print("✅ Modern workflow detected. Initializing WorkflowOrchestrator.")
+            orchestrator = WorkflowOrchestrator(str(project_path))
+            
+            # The initial state for the workflow is the validation result we have so far
+            initial_state = {
+                "corpus_files": [str(f) for f in corpus_files],
+                "analysis_agent_instructions": analysis_instructions,
+                "framework_content": framework_content,
+                "experiment_content": experiment_content
+            }
+            final_result = asyncio.run(orchestrator.execute_workflow(initial_state))
 
             # Log successful validation completion to project chronolog
-            final_result = {
-                "status": "validated", 
-                "message": f"Framework, experiment, and corpus are compatible - analysis ready",
-                "analysis_agent_instructions": analysis_instructions,
-                "corpus_files": [str(f) for f in corpus_files],
-                "framework_ready": True,
-                "session_id": session_id
-            }
-            
             log_project_event(
                 str(project_path),
                 "VALIDATION_COMPLETED",
@@ -945,7 +958,17 @@ Create detailed instructions for an analysis agent to apply this framework to th
                 pass  # Don't let chronolog errors mask the original error
                 
             return {"status": "error", "message": f"Failed to load files: {str(e)}"}
-    
+
+    def _parse_config_from_experiment(self, experiment_content: str) -> Dict[str, Any]:
+        """Helper to parse YAML config from experiment content."""
+        try:
+            yaml_match = re.search(r'```yaml\n(.*?)```', experiment_content, re.DOTALL)
+            if yaml_match:
+                return yaml.safe_load(yaml_match.group(1))
+        except Exception:
+            return {}
+        return {}
+
     def _discover_experiment_assets(self, experiment_content: str, project_dir: Path) -> str:
         """
         THIN asset discovery: Parse experiment specification for asset discovery protocols
