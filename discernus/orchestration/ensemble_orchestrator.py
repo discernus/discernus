@@ -90,16 +90,21 @@ class EnsembleOrchestrator:
             'num_runs': 1
         }
         
-        # Extract experiment definition from validation results
-        experiment_definition = validation_results.get('experiment', {}).get('definition', '')
+        # CRITICAL FIX: Read directly from experiment.md file to get latest configuration
+        # This ensures we get the configuration after any health check adjustments
+        experiment_file = self.project_path / "experiment.md"
         
-        if not experiment_definition:
+        if not experiment_file.exists():
+            print(f"⚠️  Experiment file not found: {experiment_file}")
             return default_config
             
-        # Extract YAML block from markdown
         try:
+            experiment_definition = experiment_file.read_text()
+            
+            # Extract YAML block from markdown
             yaml_match = re.search(r'```yaml\n(.*?)```', experiment_definition, re.DOTALL)
             if not yaml_match:
+                print(f"⚠️  No YAML configuration found in experiment.md")
                 return default_config
                 
             yaml_content = yaml_match.group(1)
@@ -107,6 +112,7 @@ class EnsembleOrchestrator:
             
             # Merge with defaults
             default_config.update(config)
+            print(f"✅ Parsed experiment config: {default_config}")
             return default_config
             
         except Exception as e:
@@ -138,9 +144,9 @@ class EnsembleOrchestrator:
                 "experiment_config": experiment_config
             })
             
-            # Step 1: Execute the analysis based on the pre-generated plan
-            execution_plan = validation_results.get('execution_plan', {})
-            await self._execute_planned_analysis(execution_plan.get('execution_plan', []))
+            # Step 1: Execute the analysis - use spawn_analysis_agents for multiple runs and statistical analysis
+            # This ensures proper analysis_matrix population for Cronbach's Alpha and other statistical tests
+            await self._spawn_analysis_agents(validation_results, experiment_config)
             
             # Step 2: MID-FLIGHT OVERWATCH CHECKPOINT
             overwatch_agent = MethodologicalOverwatchAgent()
