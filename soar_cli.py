@@ -19,8 +19,11 @@ Making world-class computational research as simple as pointing to a folder.
 import sys
 import asyncio
 import click
+import yaml
+import re
+import litellm
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, List
 
 # Add project root to path for imports
 project_root = Path(__file__).parent.parent
@@ -33,6 +36,7 @@ try:
     from discernus.core.project_chronolog import get_project_chronolog
     from discernus.agents.validation_agent import ValidationAgent
     from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
+    from discernus.gateway.model_registry import ModelRegistry
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"❌ SOAR CLI dependencies not available: {e}")
@@ -111,14 +115,13 @@ def validate(project_path: str, interactive: bool, verbose: bool):
         click.echo(f"❌ Validation failed with error: {str(e)}", err=True)
         sys.exit(1)
 
-@soar.command()
-@click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--dev-mode', is_flag=True, help='Run in development mode with simulated researcher')
-@click.option('--researcher-profile', default='experienced_computational_social_scientist', 
-              help='Simulated researcher profile for dev mode')
-def execute(project_path: str, dev_mode: bool, researcher_profile: str):
+def _execute_wrapper(project_path: str, dev_mode: bool, researcher_profile: str):
+    """Wrapper to run the async execute function."""
+    return asyncio.run(_execute_async(project_path, dev_mode, researcher_profile))
+
+async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: str):
     """
-    Validates and executes a SOAR project with pre-execution confirmation.
+    Async implementation of the execute function with model health verification.
     """
     click.echo("🚀 SOAR Project Execution")
     click.echo("=" * 40)
@@ -153,8 +156,39 @@ def execute(project_path: str, dev_mode: bool, researcher_profile: str):
         click.echo(f"⚠️ ProjectChronolog initialization failed: {e}")
     
     try:
-        # Step 1: Always validate the project first
-        click.echo("🔬 Phase 1: Comprehensive Project Validation...")
+        # Phase 0: Model Health Verification
+        click.echo("🔍 Phase 0: Model Health Verification...")
+        
+        # Extract models from experiment configuration
+        required_models = _extract_models_from_experiment(project_path)
+        
+        if required_models:
+            click.echo(f"   Found {len(required_models)} models to verify: {', '.join(required_models)}")
+            
+            # Run health checks
+            health_results = await _verify_model_health(required_models)
+            
+            if health_results["all_healthy"]:
+                click.secho(f"✅ All {health_results['total_models']} models are healthy.", fg='green')
+            else:
+                click.secho(f"❌ {len(health_results['failed_models'])} of {health_results['total_models']} models failed health checks:", fg='red')
+                for model in health_results['failed_models']:
+                    error_msg = health_results['results'][model]['message']
+                    click.echo(f"   • {model}: {error_msg}")
+                
+                click.echo("\n💡 Recommendations:")
+                click.echo("   • Check your API keys and provider configurations")
+                click.echo("   • Verify model names in your experiment.md file")
+                click.echo("   • Run 'python3 -m discernus.dev_tools.verify_model_health' for detailed diagnostics")
+                
+                if not click.confirm("\nDo you want to continue despite model health issues?"):
+                    click.echo("Execution cancelled.")
+                    sys.exit(1)
+        else:
+            click.echo("   No models found in experiment configuration. Skipping health check.")
+        
+        # Phase 1: Always validate the project first
+        click.echo("\n🔬 Phase 1: Comprehensive Project Validation...")
         validation_agent = ValidationAgent()
         validation_result = validation_agent.validate_project(project_path)
         
@@ -172,31 +206,46 @@ def execute(project_path: str, dev_mode: bool, researcher_profile: str):
         
         click.secho("✅ Validation PASSED.", fg='green')
 
-        # Step 2: Pre-Execution Confirmation
+        # Phase 2: Pre-Execution Confirmation
         click.echo("\n📋 Phase 2: Pre-Execution Confirmation")
         summary = validation_agent.get_pre_execution_summary(validation_result)
         
         click.echo("Please review the execution plan:")
         for key, value in summary.items():
-            click.echo(f"   - {key}: {value}")
+            click.echo(f"   {key}: {value}")
         
-        if not click.confirm('\nProceed with execution?', default=False):
+        if not click.confirm("\nProceed with execution?"):
             click.echo("Execution cancelled by user.")
             sys.exit(0)
-
-        # Step 3: Execute analysis
-        click.echo("\n🚀 Phase 3: Executing Analysis...")
-        ensemble_orchestrator = EnsembleOrchestrator(project_path)
-        results = asyncio.run(ensemble_orchestrator.execute_ensemble_analysis(validation_result))
         
-        click.secho(f"\n🎉 Execution Completed: {results.get('status', 'Unknown')}", fg='green')
+        # Phase 3: Execute the project
+        click.echo("\n🚀 Phase 3: Project Execution")
+        orchestrator = EnsembleOrchestrator(project_path)
         
+        # Run the experiment
+        results = await orchestrator.execute_ensemble_analysis(validation_result)
+        
+        if results.get('status') == 'success':
+            click.secho("✅ Experiment completed successfully!", fg='green')
+        else:
+            click.secho("❌ Experiment failed.", fg='red')
+            sys.exit(1)
+            
     except Exception as e:
-        click.secho(f"❌ Execution failed with error: {str(e)}", fg='red', err=True)
-        if dev_mode:
-            import traceback
-            traceback.print_exc()
+        click.echo(f"❌ Execution failed: {e}")
         sys.exit(1)
+
+# Update the click command to use the wrapper
+@soar.command()
+@click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--dev-mode', is_flag=True, help='Run in development mode with simulated researcher')
+@click.option('--researcher-profile', default='experienced_computational_social_scientist', 
+              help='Simulated researcher profile for dev mode')
+def execute(project_path: str, dev_mode: bool, researcher_profile: str):
+    """
+    Validates and executes a SOAR project with pre-execution confirmation.
+    """
+    _execute_wrapper(project_path, dev_mode, researcher_profile)
 
 def _generate_experiment_config(project_path: str):
     """Generates the experiment config YAML if it doesn't exist."""
@@ -324,6 +373,122 @@ def _show_validation_summary(validation_result: Dict[str, Any]):
     click.echo(f"   Project: {Path(validation_result['project_path']).name}")
     click.echo(f"   Timestamp: {validation_result.get('validation_timestamp', 'Unknown')}")
     click.echo(f"   Ready for execution: {'✅ Yes' if validation_result['ready_for_execution'] else '❌ No'}")
+
+def _extract_models_from_experiment(project_path: str) -> List[str]:
+    """
+    Extract the list of models from the experiment.md file.
+    """
+    experiment_file = Path(project_path) / "experiment.md"
+    
+    if not experiment_file.exists():
+        return []
+    
+    try:
+        content = experiment_file.read_text()
+        
+        # Look for YAML configuration blocks
+        yaml_pattern = r'```yaml\n(.*?)\n```'
+        matches = re.findall(yaml_pattern, content, re.DOTALL)
+        
+        for match in matches:
+            try:
+                config = yaml.safe_load(match)
+                if isinstance(config, dict) and 'models' in config:
+                    return config['models']
+            except yaml.YAMLError:
+                continue
+        
+        # Fallback: look for models listed in text
+        model_pattern = r'(?:models?|LLMs?):\s*\n((?:\s*[-*]\s*.+\n)*)'
+        matches = re.findall(model_pattern, content, re.IGNORECASE)
+        
+        for match in matches:
+            models = []
+            for line in match.split('\n'):
+                line = line.strip()
+                if line.startswith(('-', '*')):
+                    model = line[1:].strip()
+                    if model:
+                        models.append(model)
+            if models:
+                return models
+                
+    except Exception as e:
+        click.echo(f"⚠️ Error reading experiment file: {e}")
+    
+    return []
+
+async def _check_model_health(model_name: str) -> Dict[str, Any]:
+    """
+    Check the health of a single model.
+    """
+    try:
+        messages = [{"role": "user", "content": "Hello, are you there? Respond with just 'yes'."}]
+        
+        # Add safety settings specifically for Vertex AI models
+        # and REMOVE max_tokens which triggers safety filters
+        extra_kwargs = {}
+        if model_name.startswith("vertex_ai"):
+            extra_kwargs['safety_settings'] = [
+                {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+                {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+                {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+                {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
+            ]
+        else:
+            # For non-Vertex AI models, use a small max_tokens to keep costs low
+            extra_kwargs['max_tokens'] = 5
+        
+        response = await litellm.acompletion(
+            model=model_name,
+            messages=messages,
+            temperature=0.0,
+            **extra_kwargs
+        )
+        
+        # Use getattr for safer attribute access
+        content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
+        if content.strip():
+            return {"status": "success", "message": "Model responded successfully"}
+        else:
+            return {"status": "failed", "message": "Empty response received"}
+            
+    except Exception as e:
+        return {"status": "failed", "message": str(e)}
+
+async def _verify_model_health(models: List[str]) -> Dict[str, Any]:
+    """
+    Verify the health of all models in the list.
+    """
+    if not models:
+        return {"all_healthy": True, "results": {}}
+    
+    results = {}
+    tasks = []
+    
+    for model in models:
+        task = _check_model_health(model)
+        tasks.append((model, task))
+    
+    # Execute all health checks in parallel
+    for model, task in tasks:
+        try:
+            result = await task
+            results[model] = result
+        except Exception as e:
+            results[model] = {"status": "failed", "message": f"Health check failed: {str(e)}"}
+    
+    # Determine overall health
+    failed_models = [model for model, result in results.items() if result["status"] == "failed"]
+    all_healthy = len(failed_models) == 0
+    
+    return {
+        "all_healthy": all_healthy,
+        "results": results,
+        "failed_models": failed_models,
+        "total_models": len(models),
+        "healthy_models": len(models) - len(failed_models)
+    }
 
 # Removed deprecated _load_project_components function - ValidationAgent handles this now
 
