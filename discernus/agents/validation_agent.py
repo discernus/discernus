@@ -28,6 +28,7 @@ try:
     from discernus.core.llm_roles import get_expert_prompt
     from discernus.agents.ensemble_configuration_agent import EnsembleConfigurationAgent
     from discernus.agents.statistical_analysis_configuration_agent import StatisticalAnalysisConfigurationAgent
+    from discernus.agents.execution_planner_agent import ExecutionPlannerAgent
     from discernus.gateway.model_registry import ModelRegistry # Corrected import path
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
@@ -49,17 +50,20 @@ class ValidationAgent:
         if llm_gateway:
             self.gateway = llm_gateway
         else:
+            if not DEPENDENCIES_AVAILABLE:
+                raise ImportError("ValidationAgent dependencies not available. Please check your environment.")
             try:
                 # Pass the registry to the gateway
                 self.gateway = LLMGateway(self.model_registry)
                 print("✅ ValidationAgent using LLMGateway with ModelRegistry")
             except Exception as e:
-                self.gateway = None
-                print(f"❌ ValidationAgent: No LLM gateway available: {e}")
+                print(f"❌ ValidationAgent: Failed to initialize LLM gateway: {e}")
+                raise e
         
         # Instantiate other agents for comprehensive validation
         self.ensemble_config_agent = EnsembleConfigurationAgent()
         self.statistical_config_agent = StatisticalAnalysisConfigurationAgent()
+        self.execution_planner_agent = ExecutionPlannerAgent()
 
         # Get validation rubrics from FrameworkLoader
         self.framework_rubric = self.framework_loader.framework_rubric
@@ -93,6 +97,12 @@ class ValidationAgent:
         if not coherence_result['validation_passed']:
             return self._format_error('coherence', f"Project coherence validation failed: {coherence_result['message']}", {'coherence_result': coherence_result})
 
+        # Step 4.5: Statistical Coherence Validation (NEW)
+        framework_content = (project_path_obj / "framework.md").read_text()
+        statistical_coherence_result = self._validate_statistical_coherence(project_path_obj, framework_content, statistical_plan)
+        if not statistical_coherence_result['validation_passed']:
+            return self._format_error('statistical_coherence', f"Statistical coherence validation failed: {statistical_coherence_result['message']}", {'statistical_coherence_result': statistical_coherence_result})
+
         # Step 5: Framework validation
         framework_result = self._validate_project_framework(project_path_obj)
         if not framework_result['validation_passed']:
@@ -106,12 +116,29 @@ class ValidationAgent:
         # Step 7: Corpus validation
         corpus_result = self._validate_project_corpus(project_path_obj)
         
+        # Step 8: Execution Plan Generation
+        framework_content = (project_path_obj / "framework.md").read_text()
+        # This is a placeholder for getting the real analysis instructions
+        analysis_instructions = "Analyze the following texts using the provided framework." 
+        models = self._get_models_from_experiment(project_path_obj)
+
+        execution_plan = self.execution_planner_agent.create_execution_plan(
+            corpus_files=corpus_result['corpus_files'],
+            model_names=models,
+            framework_text=framework_content,
+            analysis_instructions=analysis_instructions
+        )
+        if "error" in execution_plan:
+             return self._format_error('execution_planning', f"Execution planning failed: {execution_plan['error']}", {'execution_plan': execution_plan})
+
         return {
             'status': 'success', 'validation_passed': True, 'project_path': str(project_path_obj),
             'validation_timestamp': datetime.now().isoformat(),
             'structure_result': structure_result, 'coherence_result': coherence_result,
             'framework_result': framework_result, 'experiment_result': experiment_result,
             'corpus_result': corpus_result, 'statistical_plan': statistical_plan,
+            'statistical_coherence_result': statistical_coherence_result,
+            'execution_plan': execution_plan,
             'ready_for_execution': True
         }
 
@@ -120,30 +147,30 @@ class ValidationAgent:
         if not validation_result.get('validation_passed'):
             return {"error": "Validation must pass before generating a summary."}
 
-        project_path = Path(validation_result['project_path'])
-        experiment_content = (project_path / "experiment.md").read_text()
-        
-        # Parse the YAML from the experiment file
-        yaml_config = {}
-        yaml_match = re.search(r'```yaml\n(.*?)```', experiment_content, re.DOTALL)
-        if yaml_match:
-            try:
-                yaml_config = yaml.safe_load(yaml_match.group(1))
-            except yaml.YAMLError:
-                pass # Ignore parsing errors, defaults will be used
-        
-        models = yaml_config.get('models', ['default_model'])
-        num_runs = yaml_config.get('num_runs', 1)
-        workflow = "Raw Aggregation" if yaml_config.get('remove_synthesis') else "Adversarial Synthesis"
+        plan = validation_result.get('execution_plan', {})
         
         return {
             "Framework": validation_result['framework_result']['framework_name'],
             "Corpus": f"{validation_result['corpus_result']['file_count']} files",
-            "Models": models,
-            "Runs per Model": num_runs,
-            "Workflow": workflow,
+            "Models": self._get_models_from_experiment(Path(validation_result['project_path'])),
+            "Total API Calls": plan.get('total_api_calls', 'N/A'),
+            "Estimated Cost": f"${plan.get('estimated_cost_usd', 0):.4f} USD",
+            "Estimated Duration": f"~{plan.get('estimated_duration_seconds', 0)} seconds",
+            "Workflow": "Batch Analysis via Execution Plan",
             "Statistical Plan": [test['test_name'] for test in validation_result['statistical_plan'].get('required_tests', [])]
         }
+
+    def _get_models_from_experiment(self, project_path: Path) -> List[str]:
+        """Helper to parse models from the experiment.md YAML block."""
+        try:
+            experiment_content = (project_path / "experiment.md").read_text()
+            yaml_match = re.search(r'```yaml\n(.*?)```', experiment_content, re.DOTALL)
+            if yaml_match:
+                yaml_config = yaml.safe_load(yaml_match.group(1))
+                return yaml_config.get('models', [])
+        except Exception:
+            return []
+        return []
 
     def _format_error(self, step: str, message: str, details: Dict[str, Any]) -> Dict[str, Any]:
         """Helper to format validation error dictionaries."""
@@ -191,6 +218,106 @@ Based on your audit, is this research plan internally coherent? Answer with a JS
             return {'validation_passed': False, 'message': f"LLM coherence check returned invalid JSON: {e}"}
         except Exception as e:
             return {'validation_passed': False, 'error_type': 'LLM_VALIDATION_FAILED', 'message': f"LLM coherence check failed: {e}"}
+
+    def _validate_statistical_coherence(self, project_path: Path, framework_content: str, statistical_plan: Dict[str, Any]) -> Dict[str, Any]:
+        """Ensures the framework's output format matches the statistical plan's needs."""
+        
+        # This is a placeholder for a more robust method of extracting required fields.
+        # For now, we assume 'score' is the key field needed if any statistical tests are planned.
+        required_tests = statistical_plan.get('required_tests', [])
+        if not required_tests:
+            return {'validation_passed': True, 'message': "No statistical tests planned; coherence check not required."}
+        
+        required_fields = ["score"] # Simple assumption for now.
+
+        prompt = f"""
+You are a meticulous Statistical Coherence Auditor. Your job is to verify that a research framework's output instructions will produce the specific data fields required for a planned statistical analysis.
+
+**Statistical Plan Requirements:**
+The statistical analysis requires the final output from each analysis run to be a JSON object containing the following key(s): `{', '.join(required_fields)}`.
+
+**Framework to Audit:**
+---
+{framework_content}
+---
+
+**Audit Question:**
+Does the framework above explicitly and unambiguously instruct the analysis agent to produce a JSON object that is guaranteed to contain the key(s): `{', '.join(required_fields)}`?
+
+-   Look for instructions about JSON formatting, schema definitions, or specific output keys.
+-   If the instructions are clear and guarantee the required keys, the validation passes.
+-   If the instructions are ambiguous, missing, or do not guarantee the keys, the validation fails.
+
+**Assessment:**
+Respond with a JSON object with two keys:
+1.  `"validation_passed"` (boolean): `true` if the framework guarantees the required JSON output, `false` otherwise.
+2.  `"message"` (string): A brief explanation for your decision. If it fails, explain what is missing from the framework instructions.
+"""
+        try:
+            model_name = self.model_registry.get_model_for_task('validation')
+            if not model_name:
+                return {'validation_passed': False, 'message': "No suitable model found for statistical coherence check."}
+            
+            response, metadata = self.gateway.execute_call(model=model_name, prompt=prompt)
+            if not metadata.get("success"):
+                return {'validation_passed': False, 'message': f"LLM API call failed: {metadata.get('error')}"}
+
+            result = json.loads(response)
+
+            # If validation fails, attempt to fix it automatically
+            if not result.get('validation_passed'):
+                print("⚠️ Statistical coherence check failed. Attempting to auto-correct framework...")
+                correction_result = self._inject_json_output_instruction(project_path, required_fields)
+                if correction_result['success']:
+                    # Return a success result indicating it was auto-corrected
+                    return {'validation_passed': True, 'message': correction_result['message'], 'auto_corrected': True}
+                else:
+                    # If correction fails, return the original failure message plus the correction error
+                    result['message'] += f" | Auto-correction failed: {correction_result['message']}"
+                    return result
+
+            return result
+        except json.JSONDecodeError as e:
+            return {'validation_passed': False, 'message': f"LLM returned invalid JSON for statistical coherence check: {e}"}
+        except Exception as e:
+            return {'validation_passed': False, 'message': f"An unexpected error occurred during statistical coherence check: {e}"}
+
+    def _inject_json_output_instruction(self, project_path: Path, required_fields: List[str]) -> Dict[str, Any]:
+        """Generates and appends a JSON output instruction block to the framework.md file."""
+        
+        prompt = f"""
+You are a helpful research assistant. Your task is to write a standardized markdown section that instructs an analysis agent to provide its output in a specific JSON format.
+
+The required JSON keys are: {required_fields}
+
+Generate a clear, friendly, and unambiguous markdown section that includes:
+1. A header like `### Required Output Format`.
+2. An explanation of why structured JSON output is necessary (for statistical analysis).
+3. A JSON schema example.
+
+The tone should be helpful and instructive.
+"""
+        try:
+            # Use a capable model for generating the instructional text
+            model_name = self.model_registry.get_model_for_task('synthesis')
+            if not model_name:
+                return {'success': False, 'message': "No suitable model found to generate correction text."}
+
+            instruction_text, _ = self.gateway.execute_call(model=model_name, prompt=prompt)
+            if not instruction_text:
+                return {'success': False, 'message': "LLM failed to generate instruction text."}
+
+            # Append the generated text to the framework.md file
+            framework_path = project_path / "framework.md"
+            with open(framework_path, 'a') as f:
+                f.write("\n\n" + instruction_text)
+            
+            print(f"✅ Automatically appended JSON output instructions to {framework_path}")
+            return {'success': True, 'message': "Successfully appended JSON output instruction to framework.md."}
+
+        except Exception as e:
+            print(f"❌ Failed to inject JSON output instruction: {e}")
+            return {'success': False, 'message': str(e)}
 
     def _validate_project_framework(self, project_path: Path) -> Dict[str, Any]:
         """Validate project framework using Framework Specification Validation Rubric"""

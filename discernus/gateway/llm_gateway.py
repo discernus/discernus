@@ -12,18 +12,20 @@ import litellm
 from typing import Dict, Any, Tuple
 from .model_registry import ModelRegistry
 import time
+import os
 
 class LLMGateway:
     """
-    A stateless gateway for executing LLM calls via LiteLLM, with intelligent retry and fallback logic.
+    A unified gateway for making calls to various Large Language Models (LLMs)
+    through the LiteLLM library. It includes logic for intelligent model fallback
+    in case of failures.
     """
-
     def __init__(self, model_registry: ModelRegistry):
         self.model_registry = model_registry
 
-    def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3) -> Tuple[str, Dict[str, Any]]:
+    def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, **kwargs) -> Tuple[str, Dict[str, Any]]:
         """
-        Executes a single, direct call to a specified LLM with retry and fallback logic.
+        Executes a call to an LLM provider via LiteLLM, with intelligent fallback.
         """
         current_model = model
         attempts = 0
@@ -37,7 +39,7 @@ class LLMGateway:
 
             try:
                 print(f"Attempting call with {current_model} (Attempt {attempts}/{max_retries})...")
-                response = litellm.completion(model=current_model, messages=messages, stream=False)
+                response = litellm.completion(model=current_model, messages=messages, stream=False, **kwargs)
                 
                 content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
                 usage_obj = getattr(response, 'usage', None)
@@ -51,21 +53,19 @@ class LLMGateway:
             
             except litellm.exceptions.APIConnectionError as e:
                 print(f"⚠️ APIConnectionError with {current_model}: {e}. Retrying after delay...")
-                time.sleep(2) # Wait 2 seconds before retry
-                continue # Retry with the same model
+                time.sleep(2)
+                continue
 
             except Exception as e:
-                print(f"❌ Unrecoverable error with {current_model}: {e}")
+                print(f"❌ Unhandled exception with {current_model}: {e}. Attempting fallback.")
                 fallback_model = self.model_registry.get_fallback_model(current_model)
                 if fallback_model:
-                    print(f"🔄 Falling back to {fallback_model}...")
+                    print(f"Retrying with fallback model: {fallback_model}")
                     current_model = fallback_model
-                    attempts = 0 # Reset attempts for the new model
                 else:
-                    print("🚫 No fallback models available. Call failed.")
-                    return "", {"success": False, "error": str(e), "model": current_model, "attempts": attempts}
+                    return "", {"success": False, "error": f"All fallbacks failed. Last error on {current_model}: {str(e)}", "model": current_model, "attempts": attempts}
         
-        return "", {"success": False, "error": "Max retries exceeded", "model": current_model, "attempts": attempts}
+        return "", {"success": False, "error": f"Max retries exceeded for {model}", "model": current_model, "attempts": max_retries}
 
 if __name__ == '__main__':
     # Demo of how to use the LLMGateway
