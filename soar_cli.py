@@ -211,19 +211,74 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
             failed_required = [model for model in required_models if model in global_health_results['failed_models']]
             
             if failed_required:
-                click.secho(f"❌ {len(failed_required)} required models are not healthy:", fg='red')
+                click.secho(f"⚠️  {len(failed_required)} required models have health issues:", fg='yellow')
                 for model in failed_required:
                     error_msg = global_health_results['results'][model]['message']
                     click.echo(f"   • {model}: {error_msg}")
                 
-                click.echo("\n💡 Recommendations:")
-                click.echo("   • Check your API keys and provider configurations")
-                click.echo("   • Consider using alternative models from the working set")
-                click.echo("   • Run 'python3 -m discernus.dev_tools.verify_model_health' for detailed diagnostics")
+                # Use EnsembleConfigurationAgent for intelligent recommendation
+                click.echo("\n🤖 Consulting EnsembleConfigurationAgent for recommendation...")
                 
-                if not click.confirm("\nDo you want to continue despite model health issues?"):
-                    click.echo("Execution cancelled.")
-                    sys.exit(1)
+                try:
+                    from discernus.agents.ensemble_configuration_agent import EnsembleConfigurationAgent
+                    config_agent = EnsembleConfigurationAgent()
+                    
+                    # Prepare context for the agent
+                    situation_context = {
+                        'required_models': required_models,
+                        'failed_models': failed_required,
+                        'healthy_models': [model for model, result in global_health_results['results'].items() 
+                                         if result['status'] == 'success'],
+                        'health_results': global_health_results,
+                        'project_path': project_path
+                    }
+                    
+                    # Get intelligent recommendation
+                    recommendation = config_agent.assess_model_health_situation(situation_context)
+                    
+                    # Present the agent's recommendation
+                    click.echo(f"\n💡 Agent Recommendation: {recommendation.get('action', 'Unknown')}")
+                    click.echo(f"   {recommendation.get('explanation', 'No explanation provided')}")
+                    
+                    if recommendation.get('adjusted_models'):
+                        click.echo(f"   Suggested models: {', '.join(recommendation['adjusted_models'])}")
+                    
+                    # Simple confirmation based on agent's recommendation
+                    if recommendation.get('action') == 'proceed':
+                        if not click.confirm(f"\nProceed with agent's recommendation?"):
+                            click.echo("Execution cancelled.")
+                            sys.exit(1)
+                    elif recommendation.get('action') == 'cancel':
+                        click.echo("Agent recommends cancelling. Please address the model issues first.")
+                        sys.exit(1)
+                    else:
+                        # For other recommendations, ask user to decide
+                        if not click.confirm(f"\nFollow agent's recommendation?"):
+                            click.echo("Execution cancelled.")
+                            sys.exit(1)
+                    
+                    # THIN Implementation: Apply agent's recommendations to experiment configuration
+                    if recommendation.get('adjusted_models'):
+                        click.echo(f"\n🔧 Applying agent's model adjustments...")
+                        validation_result = _apply_model_health_adjustments(
+                            validation_result, 
+                            recommendation['adjusted_models']
+                        )
+                        click.echo(f"   Updated models: {', '.join(recommendation['adjusted_models'])}")
+                        
+                    # Update status message
+                    click.secho("✅ Model health issues resolved with agent recommendations.", fg='green')
+                            
+                except ImportError:
+                    click.echo("⚠️  EnsembleConfigurationAgent not available. Using fallback logic.")
+                    if not click.confirm("\nDo you want to continue despite model health issues?"):
+                        click.echo("Execution cancelled.")
+                        sys.exit(1)
+                except Exception as e:
+                    click.echo(f"⚠️  Error consulting agent: {e}")
+                    if not click.confirm("\nDo you want to continue despite model health issues?"):
+                        click.echo("Execution cancelled.")
+                        sys.exit(1)
             else:
                 click.secho(f"✅ All required models are healthy.", fg='green')
         else:
@@ -396,6 +451,58 @@ def _show_validation_summary(validation_result: Dict[str, Any]):
     click.echo(f"   Project: {Path(validation_result['project_path']).name}")
     click.echo(f"   Timestamp: {validation_result.get('validation_timestamp', 'Unknown')}")
     click.echo(f"   Ready for execution: {'✅ Yes' if validation_result['ready_for_execution'] else '❌ No'}")
+
+def _apply_model_health_adjustments(validation_result: Dict[str, Any], adjusted_models: List[str]) -> Dict[str, Any]:
+    """
+    THIN implementation: Apply agent's model health recommendations to experiment configuration.
+    
+    Args:
+        validation_result: The validation result containing experiment definition
+        adjusted_models: List of healthy models recommended by the agent
+    
+    Returns:
+        Updated validation result with adjusted models in the experiment definition
+    """
+    if not adjusted_models:
+        return validation_result
+    
+    # Get the current experiment definition
+    experiment_definition = validation_result.get('experiment', {}).get('definition', '')
+    
+    if not experiment_definition:
+        click.echo("⚠️ No experiment definition found to update")
+        return validation_result
+    
+    # Replace the models in the YAML configuration
+    yaml_pattern = r'```yaml\n(.*?)\n```'
+    yaml_match = re.search(yaml_pattern, experiment_definition, re.DOTALL)
+    
+    if yaml_match:
+        # Parse existing YAML and update models
+        try:
+            existing_config = yaml.safe_load(yaml_match.group(1))
+            if isinstance(existing_config, dict):
+                existing_config['models'] = adjusted_models
+                
+                # Generate new YAML block
+                new_yaml = yaml.dump(existing_config, default_flow_style=False)
+                new_yaml_block = f"```yaml\n{new_yaml}```"
+                
+                # Replace the YAML block in the experiment definition
+                updated_definition = re.sub(yaml_pattern, new_yaml_block, experiment_definition, flags=re.DOTALL)
+                
+                # Update the validation result
+                validation_result['experiment']['definition'] = updated_definition
+                
+        except yaml.YAMLError as e:
+            click.echo(f"⚠️ Error updating YAML configuration: {e}")
+    else:
+        # If no YAML block exists, add one
+        yaml_block = f"\n```yaml\nmodels: {adjusted_models}\n```\n"
+        updated_definition = experiment_definition + yaml_block
+        validation_result['experiment']['definition'] = updated_definition
+    
+    return validation_result
 
 def _extract_models_from_experiment(project_path: str) -> List[str]:
     """
