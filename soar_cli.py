@@ -266,6 +266,14 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
                         )
                         click.echo(f"   Updated models: {', '.join(recommendation['adjusted_models'])}")
                         
+                        # CRITICAL: Re-run validation to get updated model configuration
+                        click.echo("   🔄 Re-running validation with adjusted models...")
+                        validation_result = validation_agent.validate_project(project_path)
+                        
+                        if not validation_result.get('validation_passed'):
+                            click.secho(f"❌ Re-validation failed: {validation_result.get('message')}", fg='red')
+                            sys.exit(1)
+                        
                     # Update status message
                     click.secho("✅ Model health issues resolved with agent recommendations.", fg='green')
                             
@@ -457,50 +465,64 @@ def _apply_model_health_adjustments(validation_result: Dict[str, Any], adjusted_
     THIN implementation: Apply agent's model health recommendations to experiment configuration.
     
     Args:
-        validation_result: The validation result containing experiment definition
+        validation_result: The validation result containing project path
         adjusted_models: List of healthy models recommended by the agent
     
     Returns:
-        Updated validation result with adjusted models in the experiment definition
+        Updated validation result (the actual experiment.md file is updated)
     """
     if not adjusted_models:
         return validation_result
     
-    # Get the current experiment definition
-    experiment_definition = validation_result.get('experiment', {}).get('definition', '')
-    
-    if not experiment_definition:
-        click.echo("⚠️ No experiment definition found to update")
+    # Get the project path from validation result
+    project_path = validation_result.get('project_path')
+    if not project_path:
+        click.echo("⚠️ No project path found in validation result")
         return validation_result
     
-    # Replace the models in the YAML configuration
-    yaml_pattern = r'```yaml\n(.*?)\n```'
-    yaml_match = re.search(yaml_pattern, experiment_definition, re.DOTALL)
+    # Read the experiment.md file directly
+    experiment_file = Path(project_path) / "experiment.md"
+    if not experiment_file.exists():
+        click.echo("⚠️ Experiment file not found")
+        return validation_result
     
-    if yaml_match:
-        # Parse existing YAML and update models
-        try:
-            existing_config = yaml.safe_load(yaml_match.group(1))
-            if isinstance(existing_config, dict):
-                existing_config['models'] = adjusted_models
-                
-                # Generate new YAML block
-                new_yaml = yaml.dump(existing_config, default_flow_style=False)
-                new_yaml_block = f"```yaml\n{new_yaml}```"
-                
-                # Replace the YAML block in the experiment definition
-                updated_definition = re.sub(yaml_pattern, new_yaml_block, experiment_definition, flags=re.DOTALL)
-                
-                # Update the validation result
-                validation_result['experiment']['definition'] = updated_definition
-                
-        except yaml.YAMLError as e:
-            click.echo(f"⚠️ Error updating YAML configuration: {e}")
-    else:
-        # If no YAML block exists, add one
-        yaml_block = f"\n```yaml\nmodels: {adjusted_models}\n```\n"
-        updated_definition = experiment_definition + yaml_block
-        validation_result['experiment']['definition'] = updated_definition
+    try:
+        experiment_content = experiment_file.read_text()
+        
+        # Replace the models in the YAML configuration
+        yaml_pattern = r'```yaml\n(.*?)\n```'
+        yaml_match = re.search(yaml_pattern, experiment_content, re.DOTALL)
+        
+        if yaml_match:
+            # Parse existing YAML and update models
+            try:
+                existing_config = yaml.safe_load(yaml_match.group(1))
+                if isinstance(existing_config, dict):
+                    existing_config['models'] = adjusted_models
+                    
+                    # Generate new YAML block
+                    new_yaml = yaml.dump(existing_config, default_flow_style=False)
+                    new_yaml_block = f"```yaml\n{new_yaml}```"
+                    
+                    # Replace the YAML block in the experiment content
+                    updated_content = re.sub(yaml_pattern, new_yaml_block, experiment_content, flags=re.DOTALL)
+                    
+                    # Write the updated content back to the file
+                    experiment_file.write_text(updated_content)
+                    
+                    click.echo(f"   ✅ Updated experiment.md with adjusted models")
+                    
+            except yaml.YAMLError as e:
+                click.echo(f"⚠️ Error updating YAML configuration: {e}")
+        else:
+            # If no YAML block exists, add one
+            yaml_block = f"\n```yaml\nmodels: {adjusted_models}\n```\n"
+            updated_content = experiment_content + yaml_block
+            experiment_file.write_text(updated_content)
+            click.echo(f"   ✅ Added YAML configuration to experiment.md")
+    
+    except Exception as e:
+        click.echo(f"⚠️ Error updating experiment file: {e}")
     
     return validation_result
 
