@@ -1,0 +1,17 @@
+{
+  "session_id": "session_20250713_190147",
+  "conversation_id": "conversation_20250713_190147_7f2f64f6",
+  "timestamp": "2025-07-13_19-01-47",
+  "analysis_count": 0,
+  "outliers_handled": 0,
+  "project_path": "projects/attesor/experiments/01_smoketest",
+  "model_provenance": {
+    "primary_model": "vertex_ai/gemini-2.5-flash",
+    "model_family": "gemini",
+    "model_version": "2.5-flash",
+    "provider": "vertex_ai",
+    "capture_method": "code_inspection",
+    "capture_timestamp": "2025-07-13T19:01:47.514959",
+    "notes": "Model captured from EnsembleOrchestrator default configuration - based on LiteLLMClientAdapter line 54"
+  }
+}
