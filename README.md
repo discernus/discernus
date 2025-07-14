@@ -64,6 +64,8 @@ Ultra-thin platform for LLM-native computational research through natural conver
 
 - **[Glossary](docs/GLOSSARY.md)** - System terminology and concepts
 - **[Dev Guide](docs/DEV_MODE_GUIDE.md)** - Development setup and workflows
+- **[Research Provenance Guide](docs/RESEARCH_PROVENANCE_GUIDE.md)** - Academic integrity and three-tier audit trail
+- **[Provenance Quick Reference](docs/PROVENANCE_QUICK_REFERENCE.md)** - Which file answers which research question
 
 ## Quick Start
 
