@@ -25,7 +25,7 @@ import threading
 import git
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from dataclasses import dataclass, asdict
 import uuid
 
@@ -359,6 +359,211 @@ class ProjectChronolog:
             'corrupted_events': corrupted_events,
             'total_events': verified_events + len(corrupted_events)
         }
+    
+    def create_run_chronolog(self, session_id: str, results_directory: str) -> Dict[str, Any]:
+        """
+        Create run-specific chronolog by filtering project chronolog by session_id
+        
+        Essential for academic integrity and statistical analysis:
+        - Each run has self-contained tamper-evident record
+        - Enables Cronbach's alpha calculations across multiple runs
+        - Supports debugging and performance analysis per run
+        - Maintains cryptographic integrity of original events
+        
+        Args:
+            session_id: The session to extract events for
+            results_directory: Directory to save the run chronolog
+            
+        Returns:
+            Dictionary with run chronolog statistics and file path
+        """
+        if not self.chronolog_file.exists():
+            return {'status': 'no_project_chronolog', 'created': False}
+        
+        # Create results directory if it doesn't exist
+        results_path = Path(results_directory)
+        results_path.mkdir(parents=True, exist_ok=True)
+        
+        # Run chronolog filename
+        run_chronolog_file = results_path / f"RUN_CHRONOLOG_{session_id}.jsonl"
+        
+        # Filter project chronolog for this session
+        session_events = []
+        total_events = 0
+        
+        with open(self.chronolog_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    event_dict = json.loads(line.strip())
+                    total_events += 1
+                    
+                    # Filter by session_id
+                    if event_dict.get('session_id') == session_id:
+                        session_events.append(event_dict)
+                        
+                except json.JSONDecodeError:
+                    continue
+        
+        # Write run-specific chronolog
+        with open(run_chronolog_file, 'w', encoding='utf-8') as f:
+            for event_dict in session_events:
+                f.write(json.dumps(event_dict, separators=(',', ':')) + '\n')
+        
+        # Calculate timing statistics for academic analysis
+        run_stats = self._calculate_run_statistics(session_events)
+        
+        # Commit run chronolog to Git for academic integrity
+        self._commit_run_chronolog(session_id, run_chronolog_file, len(session_events))
+        
+        return {
+            'status': 'run_chronolog_created',
+            'created': True,
+            'session_id': session_id,
+            'run_chronolog_file': str(run_chronolog_file),
+            'session_events': len(session_events),
+            'total_project_events': total_events,
+            'run_statistics': run_stats
+        }
+    
+    def _calculate_run_statistics(self, session_events: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Calculate timing and event statistics for academic analysis
+        
+        Critical for statistical analysis and Cronbach's alpha calculations
+        """
+        if not session_events:
+            return {'status': 'no_events'}
+        
+        # Extract timestamps and event types
+        timestamps = []
+        event_types = {}
+        
+        for event in session_events:
+            try:
+                timestamp = datetime.fromisoformat(event['timestamp'].replace('Z', '+00:00'))
+                timestamps.append(timestamp)
+                
+                event_type = event.get('event', 'unknown')
+                event_types[event_type] = event_types.get(event_type, 0) + 1
+                
+            except (ValueError, KeyError):
+                continue
+        
+        if not timestamps:
+            return {'status': 'no_valid_timestamps'}
+        
+        # Calculate timing statistics
+        timestamps.sort()
+        start_time = timestamps[0]
+        end_time = timestamps[-1]
+        duration = (end_time - start_time).total_seconds()
+        
+        # Find analysis phase timing (for performance analysis)
+        analysis_start = None
+        analysis_end = None
+        
+        for i, event in enumerate(session_events):
+            event_type = event.get('event', '')
+            if 'ANALYSIS_AGENTS_SPAWNING' in event_type and analysis_start is None:
+                try:
+                    analysis_start = datetime.fromisoformat(event['timestamp'].replace('Z', '+00:00'))
+                except (ValueError, KeyError):
+                    pass
+            elif 'ANALYSIS_AGENTS_COMPLETED' in event_type:
+                try:
+                    analysis_end = datetime.fromisoformat(event['timestamp'].replace('Z', '+00:00'))
+                except (ValueError, KeyError):
+                    pass
+        
+        analysis_duration = None
+        if analysis_start and analysis_end:
+            analysis_duration = (analysis_end - analysis_start).total_seconds()
+        
+        return {
+            'status': 'statistics_calculated',
+            'start_time': start_time.isoformat(),
+            'end_time': end_time.isoformat(),
+            'total_duration_seconds': duration,
+            'analysis_duration_seconds': analysis_duration,
+            'event_count': len(session_events),
+            'event_types': event_types,
+            'events_per_minute': (len(session_events) / (duration / 60)) if duration > 0 else 0
+        }
+    
+    def _commit_run_chronolog(self, session_id: str, run_chronolog_file: Path, event_count: int):
+        """Commit run chronolog to Git for academic integrity"""
+        if not self.git_repo:
+            return
+        
+        try:
+            # Add run chronolog file to Git
+            self.git_repo.index.add([str(run_chronolog_file)])
+            
+            # Create descriptive commit message
+            commit_message = f"Run Chronolog: {session_id} - {self.project_name}"
+            commit_message += f"\n\nRun-specific chronolog created for session: {session_id}"
+            commit_message += f"\nEvents captured: {event_count}"
+            commit_message += f"\nFile: {run_chronolog_file.name}"
+            commit_message += f"\nProject: {self.project_name}"
+            
+            self.git_repo.index.commit(commit_message)
+            print(f"📝 Run chronolog committed to Git: {session_id}")
+            
+        except Exception as e:
+            print(f"⚠️ Failed to commit run chronolog to Git: {e}")
+    
+    def get_session_events(self, session_id: str) -> List[Dict[str, Any]]:
+        """Get all events for a specific session without creating a file"""
+        if not self.chronolog_file.exists():
+            return []
+        
+        session_events = []
+        
+        with open(self.chronolog_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    event_dict = json.loads(line.strip())
+                    if event_dict.get('session_id') == session_id:
+                        session_events.append(event_dict)
+                except json.JSONDecodeError:
+                    continue
+        
+        return session_events
+    
+    def list_sessions(self) -> List[Dict[str, Any]]:
+        """List all sessions in the project chronolog with basic statistics"""
+        if not self.chronolog_file.exists():
+            return []
+        
+        sessions = {}
+        
+        with open(self.chronolog_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    event_dict = json.loads(line.strip())
+                    session_id = event_dict.get('session_id')
+                    
+                    if session_id:
+                        if session_id not in sessions:
+                            sessions[session_id] = {
+                                'session_id': session_id,
+                                'first_event': event_dict,
+                                'last_event': event_dict,
+                                'event_count': 0,
+                                'event_types': {}
+                            }
+                        
+                        sessions[session_id]['last_event'] = event_dict
+                        sessions[session_id]['event_count'] += 1
+                        
+                        event_type = event_dict.get('event', 'unknown')
+                        sessions[session_id]['event_types'][event_type] = sessions[session_id]['event_types'].get(event_type, 0) + 1
+                        
+                except json.JSONDecodeError:
+                    continue
+        
+        return list(sessions.values())
+
 
 # Global registry for active project chronologs
 _active_chronologs: Dict[str, ProjectChronolog] = {}
