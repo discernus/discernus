@@ -80,8 +80,8 @@ class ProviderParameterManager:
             'forbidden_params': ['max_tokens'],  # Removed to avoid API sensitivity issues
             'required_params': {},
             'default_params': {},  # Let provider use optimal defaults
-            'timeout': 600,  # 10 minutes - local processing with large context requires more time
-            'notes': 'May need dropout parameter tweaks for stability'
+            'timeout': 120,  # 2 minutes - reduced from 10 minutes to prevent hangs
+            'notes': 'Local model can be slow with complex prompts. Timeout set to 2 minutes to prevent hangs.'
         },
         'ollama/llama3.3': {
             'provider': 'ollama',
