@@ -32,7 +32,6 @@ The analysis will calculate inter-run reliability using Cronbach's Alpha to dete
 models:
 - vertex_ai/gemini-2.5-pro
 - anthropic/claude-3-5-sonnet-20240620
-- ollama/mistral
 num_runs: 2
 remove_synthesis: false
 ```

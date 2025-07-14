@@ -182,7 +182,7 @@ models:
       input_per_million_tokens: 0.00
       output_per_million_tokens: 0.00
     utility_tier: 3
-    task_suitability: [analysis, synthesis, coordination]
+    task_suitability: [development only]
     tpm: 1000000
     rpm: 10000
     optimal_batch_size: 1 # Reduced to 1 due to slow local processing
