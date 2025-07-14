@@ -36,6 +36,9 @@ try:
     from discernus.core.conversation_logger import ConversationLogger
     from discernus.core.secure_code_executor import SecureCodeExecutor
     from discernus.agents.statistical_analysis_configuration_agent import StatisticalAnalysisConfigurationAgent
+    from discernus.agents.statistical_interpretation_agent import StatisticalInterpretationAgent
+    from discernus.agents.experiment_conclusion_agent import ExperimentConclusionAgent
+    from discernus.agents.methodological_overwatch_agent import MethodologicalOverwatchAgent
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"EnsembleOrchestrator dependencies not available: {e}")
@@ -52,22 +55,18 @@ class EnsembleOrchestrator:
         self.results_path.mkdir(exist_ok=True)
         
         # Core components with improved LLM client
-        if DEPENDENCIES_AVAILABLE:
-            try:
-                # Use our new, clean components
-                self.model_registry = ModelRegistry()
-                self.gateway = LLMGateway(self.model_registry) # Pass registry to gateway
-                self.statistical_config_agent = StatisticalAnalysisConfigurationAgent()
-                print("✅ EnsembleOrchestrator using ModelRegistry, LLMGateway, and StatisticalAnalysisConfigurationAgent")
-            except Exception as e:
-                self.model_registry = None
-                self.gateway = None
-                self.statistical_config_agent = None
-                print(f"❌ EnsembleOrchestrator: Failed to initialize gateway components: {e}")
-        else:
-            self.model_registry = None
-            self.gateway = None
-            self.statistical_config_agent = None
+        if not DEPENDENCIES_AVAILABLE:
+            raise ImportError("EnsembleOrchestrator dependencies not available. Please check your environment.")
+            
+        try:
+            # Use our new, clean components
+            self.model_registry = ModelRegistry()
+            self.gateway = LLMGateway(self.model_registry) # Pass registry to gateway
+            self.statistical_config_agent = StatisticalAnalysisConfigurationAgent()
+            print("✅ EnsembleOrchestrator using ModelRegistry, LLMGateway, and StatisticalAnalysisConfigurationAgent")
+        except Exception as e:
+            print(f"❌ EnsembleOrchestrator: Failed to initialize gateway components: {e}")
+            raise e
             
         self.redis_client = redis.Redis(host='localhost', port=6379, db=0)
         self.logger = None  # Will be initialized per session
@@ -139,10 +138,20 @@ class EnsembleOrchestrator:
                 "experiment_config": experiment_config
             })
             
-            # Step 1: Spawn analysis agents (one per corpus text, per model)
-            await self._spawn_analysis_agents(validation_results, experiment_config)
+            # Step 1: Execute the analysis based on the pre-generated plan
+            execution_plan = validation_results.get('execution_plan', {})
+            await self._execute_planned_analysis(execution_plan.get('execution_plan', []))
             
-            # Step 2: Ask LLM what to do next based on experiment requirements
+            # Step 2: MID-FLIGHT OVERWATCH CHECKPOINT
+            overwatch_agent = MethodologicalOverwatchAgent()
+            # The analysis_results list is now clean and contains no exceptions
+            overwatch_decision = overwatch_agent.review_analysis_results(self.analysis_results)
+            self._log_system_event("OVERWATCH_AGENT_REVIEW", overwatch_decision)
+
+            if overwatch_decision.get("decision") == "TERMINATE":
+                raise SystemExit(f"METHODOLOGICAL OVERWATCH: Execution terminated. Reason: {overwatch_decision.get('reason')}")
+
+            # Step 3: Ask LLM what to do next based on experiment requirements
             coordination_prompt = f"""
             Analysis complete. Here are the analysis results:
             {json.dumps(self.analysis_results, indent=2)}
@@ -168,7 +177,7 @@ class EnsembleOrchestrator:
                 model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
             next_action = await self._call_llm_async(coordination_prompt, "coordination_llm", model_name)
             
-            # Step 3: Execute whatever the LLM decided (THIN: dumb execution)
+            # Step 4: Execute whatever the LLM decided (THIN: dumb execution)
             if "RAW_AGGREGATION" in next_action.upper():
                 final_results = await self._simple_aggregation()
             elif "ADVERSARIAL_SYNTHESIS" in next_action.upper():
@@ -177,8 +186,15 @@ class EnsembleOrchestrator:
                 # Default to simple aggregation if unclear
                 final_results = await self._simple_aggregation()
 
-            # Step 4: Run statistical analysis based on the validated plan
-            await self._run_statistical_analysis(self.statistical_plan)
+            # Step 5: Run statistical analysis based on the validated plan
+            stats_results_path = await self._run_statistical_analysis(self.statistical_plan)
+
+            # Step 6: Interpret statistical results and append to the report
+            if final_results.get("report_path") and stats_results_path:
+                await self._interpret_and_append_stats(final_results["report_path"], stats_results_path)
+
+                # Step 7: Perform the final methodological audit and append it
+                await self._perform_final_audit(final_results["report_path"], stats_results_path)
 
             self._log_system_event("ENSEMBLE_COMPLETED", {
                 "session_id": self.session_id,
@@ -203,7 +219,98 @@ class EnsembleOrchestrator:
                 "session_id": self.session_id,
                 "message": f"Ensemble analysis failed: {str(e)}"
             }
-    
+
+    async def _execute_planned_analysis(self, schedule: List[Dict[str, Any]]):
+        """
+        Executes a pre-computed analysis plan from the ExecutionPlannerAgent.
+        This is a THIN method that simply iterates through a schedule.
+        """
+        if not schedule:
+            raise ValueError("Execution plan schedule is empty. Cannot proceed.")
+
+        all_results = []
+        for i, step in enumerate(schedule):
+            self._log_system_event("EXECUTING_PLAN_STEP", {
+                "step": i + 1,
+                "total_steps": len(schedule),
+                "agent_id": step.get('agent_id'),
+                "model": step.get('model'),
+                "batch_size": len(step.get('file_batch', [])),
+            })
+            
+            try:
+                response = await self._call_llm_async(step['prompt'], step['agent_id'], step['model'])
+                # Here we would need to parse the single response to get individual results for each file in the batch.
+                # For now, we'll store the raw batch response.
+                all_results.append({
+                    "agent_id": step.get('agent_id'),
+                    "model_name": step.get('model'),
+                    "analysis_response": response,
+                    "file_batch": step.get('file_batch')
+                })
+            except Exception as e:
+                all_results.append(e) # Store exception to be filtered later
+
+            # Honor the calculated delay to respect rate limits
+            if step.get('delay_after_seconds', 0) > 0:
+                await asyncio.sleep(step['delay_after_seconds'])
+
+        # Filter out exceptions, similar to the old method
+        successful_results = [r for r in all_results if not isinstance(r, Exception)]
+        self.analysis_results = successful_results
+
+    async def _perform_final_audit(self, report_path: str, stats_path: str):
+        """Spawns the conclusion agent to perform a final audit and appends it."""
+        self._log_system_event("FINAL_AUDIT_STARTED", {
+            "project_path": str(self.project_path),
+            "report_path": report_path,
+        })
+        try:
+            conclusion_agent = ExperimentConclusionAgent()
+            audit_text = conclusion_agent.generate_final_audit(
+                project_path=str(self.project_path),
+                report_file_path=report_path,
+                stats_file_path=stats_path
+            )
+
+            # Append the audit to the final report
+            with open(report_path, "a") as f:
+                f.write("\n\n" + audit_text)
+
+            self._log_system_event("FINAL_AUDIT_COMPLETED", {
+                "report_path": report_path,
+                "audit_length": len(audit_text)
+            })
+        except Exception as e:
+            self._log_system_event("FINAL_AUDIT_FAILED", {"error": str(e)})
+
+    async def _interpret_and_append_stats(self, report_path: str, stats_path: str):
+        """Spawns an agent to interpret stats and appends them to the final report."""
+        self._log_system_event("STATISTICAL_INTERPRETATION_STARTED", {
+            "report_path": report_path,
+            "stats_path": stats_path
+        })
+
+        try:
+            interpretation_agent = StatisticalInterpretationAgent()
+            interpretation_text = interpretation_agent.interpret_statistical_results(
+                stats_file_path=stats_path,
+                report_file_path=report_path
+            )
+
+            # Append the interpretation to the final report
+            with open(report_path, "a") as f:
+                f.write("\n\n" + interpretation_text)
+            
+            self._log_system_event("STATISTICAL_INTERPRETATION_COMPLETED", {
+                "report_path": report_path,
+                "interpretation_length": len(interpretation_text)
+            })
+        except Exception as e:
+            self._log_system_event("STATISTICAL_INTERPRETATION_FAILED", {
+                "error": str(e)
+            })
+
     async def _spawn_analysis_agents(self, validation_results: Dict[str, Any], experiment_config: Dict[str, Any]):
         """THIN: Let LLM validate inputs and decide analysis approach"""
         
@@ -269,37 +376,42 @@ class EnsembleOrchestrator:
         
         if "SEQUENTIAL" in execution_strategy.upper():
             print("🔧 LLM chose SEQUENTIAL execution")
-            self.analysis_results = []
+            raw_results = []
             for i, task in enumerate(analysis_tasks):
                 result = await task
-                self.analysis_results.append(result)
+                raw_results.append(result)
         else:
             print("🔧 LLM chose PARALLEL execution")
             import asyncio
-            self.analysis_results = await asyncio.gather(*analysis_tasks, return_exceptions=True)
+            raw_results = await asyncio.gather(*analysis_tasks, return_exceptions=True)
         
-        # THIN: Let LLM decide how to handle results
-        result_types = []
-        for r in self.analysis_results:
-            if isinstance(r, Exception):
-                result_types.append(f"Exception: {type(r).__name__}")
+        # --- Single, Early Filtering of Exceptions ---
+        successful_results: List[Dict[str, Any]] = []
+        failed_count = 0
+        
+        for i, result in enumerate(raw_results):
+            if isinstance(result, Exception):
+                failed_count += 1
+                self._log_system_event("ANALYSIS_AGENT_ERROR", {
+                    "agent_id": f"analysis_agent_{i+1}",
+                    "error": str(result)
+                })
             else:
-                result_types.append("Success")
-        
-        # Count actual failures
-        failed_count = sum(1 for r in self.analysis_results if isinstance(r, Exception))
-        
-        # Only ask about failure handling if there are actual failures
-        if failed_count > 0:
+                # result is guaranteed to be Dict[str, Any] here - explicit cast for type checker
+                typed_result: Dict[str, Any] = result  # type: ignore
+                successful_results.append(typed_result)
+
+        # Overwrite self.analysis_results with the clean, typed list
+        self.analysis_results = successful_results
+
+        # Only ask about failure handling if there were actual failures and we have some successes
+        if failed_count > 0 and self.analysis_results:
             results_prompt = f"""
             You are the results processing agent. Process these analysis results:
             
-            Results: {result_types}
-            
-            There are {failed_count} failed analyses. What should we do?
-            - "RETRY": Attempt to retry failed analyses
-            - "FILTER": Remove failed results and continue with {len(self.analysis_results) - failed_count} successful results
-            - "ABORT": Stop processing due to failures
+            There are {failed_count} failed analyses and {len(self.analysis_results)} successful analyses. What should we do?
+            - "FILTER": Continue with the {len(self.analysis_results)} successful results
+            - "ABORT": Stop processing due to the failures
             
             Respond with just the action name.
             """
@@ -307,29 +419,13 @@ class EnsembleOrchestrator:
             model_name = self.model_registry.get_model_for_task('coordination')
             if not model_name:
                 print("⚠️ No suitable model found for results processing, using default.")
-                model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+                model_name = 'vertex_ai/gemini-1.5-flash-latest'
             results_decision = await self._call_llm_async(results_prompt, "results_processing_agent", model_name)
             
             if "ABORT" in results_decision.upper():
                 raise RuntimeError(f"LLM decided to abort due to {failed_count} failed analyses")
-            
-            # Handle RETRY or FILTER logic here if needed in the future
-            # For now, proceed with filtering successful results
         
-        # Filter successful results (whether we had failures or not)
-        successful_results = []
-        for i, result in enumerate(self.analysis_results):
-            if isinstance(result, Exception):
-                self._log_system_event("ANALYSIS_AGENT_ERROR", {
-                    "agent_id": f"analysis_agent_{i+1}",
-                    "error": str(result)
-                })
-            else:
-                successful_results.append(result)
-        
-        self.analysis_results = successful_results
-        
-        # Populate the analysis matrix
+        # Populate the analysis matrix from the now-clean results
         for result in self.analysis_results:
             file_name = result.get("file_name")
             model_name = result.get("model_name")
@@ -342,13 +438,13 @@ class EnsembleOrchestrator:
                 self.analysis_matrix[file_name][model_name][run_num] = result
 
         self._log_system_event("ANALYSIS_AGENTS_COMPLETED", {
-            "successful_count": len(successful_results),
+            "successful_count": len(self.analysis_results),
             "failed_count": failed_count,
             "analysis_matrix": self.analysis_matrix
         })
     
-    async def _run_statistical_analysis(self, statistical_plan: Dict[str, Any]):
-        """Run statistical analysis on the analysis matrix based on a dynamic plan."""
+    async def _run_statistical_analysis(self, statistical_plan: Dict[str, Any]) -> Optional[str]:
+        """Run statistical analysis and return the path to the results file."""
         
         self._log_system_event("STATISTICAL_ANALYSIS_STARTED", {
             "session_id": self.session_id,
@@ -386,19 +482,20 @@ class EnsembleOrchestrator:
 
         # Save the statistical analysis results
         if execution_result['success']:
-            timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-            results_dir = self.results_path / f"{timestamp}"
-            results_dir.mkdir(exist_ok=True)
-            (results_dir / "statistical_analysis_results.json").write_text(json.dumps(execution_result['result_data'], indent=2))
+            results_file = self.session_results_path / "statistical_analysis_results.json"
+            results_file.write_text(json.dumps(execution_result['result_data'], indent=2))
+            
             self._log_system_event("STATISTICAL_ANALYSIS_COMPLETED", {
                 "session_id": self.session_id,
-                "results_file": str(results_dir / "statistical_analysis_results.json")
+                "results_file": str(results_file)
             })
+            return str(results_file)
         else:
             self._log_system_event("STATISTICAL_ANALYSIS_FAILED", {
                 "session_id": self.session_id,
                 "error": execution_result['error']
             })
+        return None
 
     def _prepare_statistical_data(self):
         """Prepare the analysis matrix for statistical analysis."""
@@ -693,7 +790,7 @@ Format as structured academic output suitable for peer review."""
         final_report = await self._call_llm_async(final_prompt, "final_synthesis_agent", model_name)
         
         # Save results to project
-        await self._save_results_to_project(final_report)
+        final_report_path = await self._save_results_to_project(final_report)
         
         self._log_system_event("AGENT_COMPLETED", {
             "agent_id": "final_synthesis_agent",
@@ -706,7 +803,8 @@ Format as structured academic output suitable for peer review."""
             "analysis_count": len(self.analysis_results),
             "outliers_handled": len(self.outliers),
             "synthesis_type": synthesis_type,
-            "session_id": self.session_id
+            "session_id": self.session_id,
+            "report_path": final_report_path
         }
     
     async def _simple_aggregation(self) -> Dict[str, Any]:
@@ -731,11 +829,12 @@ Format as structured academic output suitable for peer review."""
             print("⚠️ No suitable model found for aggregation, using default.")
             model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
         final_report = await self._call_llm_async(final_report_prompt, "aggregation_agent", model_name)
-        await self._save_results_to_project(final_report)
+        report_path = await self._save_results_to_project(final_report)
         
         return {
             "type": "simple_aggregation",
             "report": final_report,
+            "report_path": report_path,
             "raw_analyses": self.analysis_results
         }
     
@@ -767,20 +866,21 @@ Format as structured academic output suitable for peer review."""
         
         return final_results
     
-    async def _save_results_to_project(self, final_report: str):
-        """Save results back to the project directory"""
+    async def _save_results_to_project(self, final_report: str) -> Optional[str]:
+        """Save results back to the project directory and return the report path."""
         
-        timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-        results_dir = self.results_path / f"{timestamp}"
+        # Use the session-specific results path
+        results_dir = self.session_results_path
         results_dir.mkdir(exist_ok=True)
         
         # Save final report
-        (results_dir / "final_report.md").write_text(final_report)
+        report_path = results_dir / "final_report.md"
+        report_path.write_text(final_report)
         
         # Save session metadata
         metadata = {
             "session_id": self.session_id,
-            "timestamp": timestamp,
+            "timestamp": results_dir.name,
             "analysis_count": len(self.analysis_results),
             "outliers_handled": len(self.outliers),
             "project_path": str(self.project_path)
@@ -825,6 +925,7 @@ Format as structured academic output suitable for peer review."""
             "results_directory": str(results_dir),
             "files_saved": files_saved
         })
+        return str(report_path)
     
     def _init_session_logging(self):
         """Initialize conversation logging for this session"""
@@ -934,7 +1035,7 @@ Format as structured academic output suitable for peer review."""
                 }
             )
     
-    async def _call_llm_async(self, prompt: str, agent_id: str, model_name: str = "vertex_ai/gemini-2.5-flash") -> str:
+    async def _call_llm_async(self, prompt: str, agent_id: str, model_name: str) -> str:
         """Call LLM asynchronously with proper logging"""
         
         if not self.gateway:

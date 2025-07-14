@@ -1,62 +1,194 @@
+# Discernus Model Registry
+# ==========================
+#
+# This file is the central knowledge base for all LLMs available to the SOAR platform.
+# It is the single source of truth for resource management, cost estimation, and execution planning.
+#
+# -- How to Update This File --
+# This file is updated manually. Values for pricing, context windows, and rate limits are subject
+# to change and should be verified on the providers' official websites.
+#
+# -- Provider Strategy --
+# 1. FOR MAX PERFORMANCE & STABILITY: Default to the 'vertex_ai/' provider when available.
+#    Vertex offers higher, more transparent rate limits (TPM/RPM) at a similar per-token cost.
+# 2. FOR SPECIALIZED MODELS: Use the 'openrouter/' provider to access a wider ecosystem of models,
+#    including specific fine-tunes like R1-1776, that are not available on major cloud platforms.
+# 3. FOR DIRECT ACCESS: Use direct provider paths ('anthropic/', 'openai/') for maximum flexibility
+#    or to access the absolute newest models not yet on Vertex/OpenRouter.
+# 4. FOR LOCAL & PRIVATE USE: Use the 'ollama/' provider for local testing or the proprietary
+#    template for in-house models.
+#
+# -- Context Fatigue and Batch Size --
+# Research (2024-2025) confirms the "Lost in the Middle" problem. 'optimal_batch_size' is a crucial
+# heuristic to mitigate this. It is NOT based on maximizing token count, but on keeping the number
+# of documents in a single prompt small enough to ensure high-quality analysis for each item.
+
 models:
-  claude-3-5-sonnet-20240620:
-    provider: "anthropic"
+  # --- PREFERRED PROVIDER: VERTEX AI (STABILITY & PERFORMANCE) ---
+  vertex_ai/claude-3-5-sonnet@20240620:
+    provider: "vertex_ai"
     performance_tier: "top-tier"
     context_window: 200000
     costs:
       input_per_million_tokens: 3.00
       output_per_million_tokens: 15.00
-
-  gpt-4o:
-    provider: "openai"
-    performance_tier: "top-tier"
-    context_window: 128000
-    costs:
-      input_per_million_tokens: 5.00
-      output_per_million_tokens: 15.00
-
-  claude-3-haiku-20240307:
-    provider: "anthropic"
-    performance_tier: "cost-effective"
-    context_window: 200000
-    costs:
-      input_per_million_tokens: 0.25
-      output_per_million_tokens: 1.25
-    utility_tier: 1
-    task_suitability:
-      - validation
-      - synthesis
-      - coordination
+    utility_tier: 1 # Highest priority
+    task_suitability: [synthesis, coordination, planning]
+    tpm: 350000 # Published by Google for us-east5
+    rpm: 80     # Published by Google for us-east5
+    optimal_batch_size: 8
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
+    notes: "PREFERRED path for this model due to high, stable rate limits."
 
   vertex_ai/gemini-1.5-pro-latest:
     provider: "vertex_ai"
     performance_tier: "top-tier"
     context_window: 1000000
     costs:
-      input_per_million_tokens: 7.00
-      output_per_million_tokens: 21.00
+      input_per_million_tokens: 3.50
+      output_per_million_tokens: 10.50
+    utility_tier: 3
+    task_suitability: [synthesis, planning]
+    tpm: 163840 # Published by Google for us-central1
+    rpm: 800
+    optimal_batch_size: 12
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
 
+  # --- SPECIALIZED MODEL PROVIDER: OPENROUTER (ECOSYSTEM ACCESS) ---
+  openrouter/perplexity/r1-1776:
+    provider: "openrouter"
+    performance_tier: "specialized-reasoning"
+    context_window: 128000
+    costs:
+      input_per_million_tokens: 2.00
+      output_per_million_tokens: 8.00
+    utility_tier: 10 # High utility for its specific purpose
+    task_suitability: [synthesis, validation]
+    # OpenRouter has global, not per-model, rate limits. These are placeholders.
+    tpm: 100000 # Placeholder
+    rpm: 100    # Placeholder
+    optimal_batch_size: 6
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
+    notes: "Uncensored DeepSeek R1 fine-tune. Requires an OpenRouter API key."
+
+  # --- DIRECT API PROVIDERS (FLEXIBILITY) ---
+  anthropic/claude-3.5-sonnet-20240620:
+    provider: "anthropic"
+    performance_tier: "top-tier"
+    context_window: 200000
+    costs:
+      input_per_million_tokens: 3.00
+      output_per_million_tokens: 15.00
+    utility_tier: 2 # Lower priority than the Vertex version
+    task_suitability: [synthesis, coordination, planning]
+    # Rate limits are for a standard starting tier and may vary.
+    tpm: 40000
+    rpm: 50
+    optimal_batch_size: 8
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
+    notes: "Direct API access. Good for flexibility or if outside the GCP ecosystem."
+
+  openai/gpt-4o:
+    provider: "openai"
+    performance_tier: "top-tier"
+    context_window: 128000
+    costs:
+      input_per_million_tokens: 5.00
+      output_per_million_tokens: 15.00
+    utility_tier: 4
+    task_suitability: [synthesis]
+    # Rate limits are highly tier-dependent and not publicly fixed. Verify against your account.
+    tpm: 300000 # Placeholder
+    rpm: 5000   # Placeholder
+    optimal_batch_size: 6
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
+
+  # --- COST-EFFECTIVE & HOSTED MODELS ---
   vertex_ai/gemini-1.5-flash-latest:
     provider: "vertex_ai"
     performance_tier: "cost-effective"
     context_window: 1000000
     costs:
-      input_per_million_tokens: 0.70
-      output_per_million_tokens: 2.10
-    utility_tier: 2
-    task_suitability:
-      - validation
-      - code_generation
-      - coordination
+      input_per_million_tokens: 0.35
+      output_per_million_tokens: 1.05
+    utility_tier: 5
+    task_suitability: [validation, code_generation, coordination]
+    tpm: 163840
+    rpm: 800
+    optimal_batch_size: 15
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
 
-  ollama/llama3:
+  vertex_ai/llama3-70b-instruct:
+    provider: "vertex_ai"
+    performance_tier: "hosted-open-source"
+    context_window: 8192
+    costs:
+      input_per_million_tokens: 0.00
+      output_per_million_tokens: 0.00
+      hosting_cost_per_hour: 2.50 # Example placeholder for a GPU instance
+    utility_tier: 90
+    task_suitability: [synthesis]
+    tpm: 1000000
+    rpm: 10000
+    optimal_batch_size: 1
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
+    notes: "High-performance hosted open-source model. You pay for infrastructure, not tokens. PDAF framework (~10k tokens) exceeds 50% of context window."
+
+  # --- LOCAL / SELF-HOSTED MODELS ---
+  ollama/llama3.2:
     provider: "ollama"
     performance_tier: "local-fallback"
     context_window: 8192
     costs:
       input_per_million_tokens: 0.00
       output_per_million_tokens: 0.00
-    utility_tier: 3
-    task_suitability:
-      - validation
-      - synthesis 
+    utility_tier: 99 # Lowest priority
+    task_suitability: [validation]
+    tpm: 1000000
+    rpm: 10000
+    optimal_batch_size: 1 # Research shows framework barely fits. Batching is not feasible.
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
+    notes: "The PDAF framework (~10k tokens) exceeds this model's context window. Use with extreme caution."
+
+  ollama/mistral:
+    provider: "ollama"
+    performance_tier: "local-fallback"
+    context_window: 32768
+    costs:
+      input_per_million_tokens: 0.00
+      output_per_million_tokens: 0.00
+    utility_tier: 98
+    task_suitability: [synthesis]
+    tpm: 1000000
+    rpm: 10000
+    optimal_batch_size: 2 # Can handle the framework plus one file comfortably.
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
+
+  ollama/jobautomation/OpenEuroLLM-Portuguese:
+    provider: "ollama"
+    performance_tier: "local-specialized"
+    context_window: 8192 # Assumed, based on Llama architecture.
+    costs:
+      input_per_million_tokens: 0.00
+      output_per_million_tokens: 0.00
+    utility_tier: 97
+    task_suitability: [synthesis]
+    tpm: 1000000
+    rpm: 10000
+    optimal_batch_size: 1
+    last_updated: "2024-07-17"
+    review_by: "2025-01-17"
+    notes: "Portuguese language model. Context window is an assumption. The PDAF framework (~10k tokens) exceeds this model's context window. Use with extreme caution."
+
+  # --- Template for Proprietary In-House Models ---
+  # proprietary/my-company-model-v1:
+  #   provider: "proprietary" 
