@@ -156,40 +156,32 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
         click.echo(f"⚠️ ProjectChronolog initialization failed: {e}")
     
     try:
-        # Phase 0: Model Health Verification
-        click.echo("🔍 Phase 0: Model Health Verification...")
+        # Phase 0: Global Model Health Check
+        click.echo("🔍 Phase 0: Global Model Health Check...")
         
-        # Extract models from experiment configuration
-        required_models = _extract_models_from_experiment(project_path)
+        # Check all models in the registry
+        model_registry = ModelRegistry()
+        all_models = list(model_registry.models.keys())
         
-        if required_models:
-            click.echo(f"   Found {len(required_models)} models to verify: {', '.join(required_models)}")
-            
-            # Run health checks
-            health_results = await _verify_model_health(required_models)
-            
-            if health_results["all_healthy"]:
-                click.secho(f"✅ All {health_results['total_models']} models are healthy.", fg='green')
-            else:
-                click.secho(f"❌ {len(health_results['failed_models'])} of {health_results['total_models']} models failed health checks:", fg='red')
-                for model in health_results['failed_models']:
-                    error_msg = health_results['results'][model]['message']
-                    click.echo(f"   • {model}: {error_msg}")
-                
-                click.echo("\n💡 Recommendations:")
-                click.echo("   • Check your API keys and provider configurations")
-                click.echo("   • Verify model names in your experiment.md file")
-                click.echo("   • Run 'python3 -m discernus.dev_tools.verify_model_health' for detailed diagnostics")
-                
-                if not click.confirm("\nDo you want to continue despite model health issues?"):
-                    click.echo("Execution cancelled.")
-                    sys.exit(1)
+        click.echo(f"   Checking {len(all_models)} models in registry...")
+        global_health_results = await _verify_model_health(all_models)
+        
+        if global_health_results["all_healthy"]:
+            click.secho(f"✅ All {global_health_results['total_models']} models are healthy.", fg='green')
         else:
-            click.echo("   No models found in experiment configuration. Skipping health check.")
+            click.secho(f"⚠️  {len(global_health_results['failed_models'])} of {global_health_results['total_models']} models have issues:", fg='yellow')
+            for model in global_health_results['failed_models']:
+                error_msg = global_health_results['results'][model]['message']
+                click.echo(f"   • {model}: {error_msg}")
+            
+            click.echo(f"   ✅ {global_health_results['healthy_models']} models are working correctly.")
         
-        # Phase 1: Always validate the project first
+        # Phase 1: Project Validation (now with model health context)
         click.echo("\n🔬 Phase 1: Comprehensive Project Validation...")
         validation_agent = ValidationAgent()
+        
+        # TODO: In future, could pass model health context to validation agent
+        # For now, the global health check provides valuable up-front feedback
         validation_result = validation_agent.validate_project(project_path)
         
         # Check for transient API errors first
@@ -205,9 +197,40 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
             sys.exit(1)
         
         click.secho("✅ Validation PASSED.", fg='green')
+        
+        # Phase 2: Experiment-Specific Model Verification
+        click.echo("\n🎯 Phase 2: Experiment-Specific Model Verification...")
+        
+        # Extract models from experiment configuration
+        required_models = _extract_models_from_experiment(project_path)
+        
+        if required_models:
+            click.echo(f"   Experiment requires: {', '.join(required_models)}")
+            
+            # Check if any required models failed global health check
+            failed_required = [model for model in required_models if model in global_health_results['failed_models']]
+            
+            if failed_required:
+                click.secho(f"❌ {len(failed_required)} required models are not healthy:", fg='red')
+                for model in failed_required:
+                    error_msg = global_health_results['results'][model]['message']
+                    click.echo(f"   • {model}: {error_msg}")
+                
+                click.echo("\n💡 Recommendations:")
+                click.echo("   • Check your API keys and provider configurations")
+                click.echo("   • Consider using alternative models from the working set")
+                click.echo("   • Run 'python3 -m discernus.dev_tools.verify_model_health' for detailed diagnostics")
+                
+                if not click.confirm("\nDo you want to continue despite model health issues?"):
+                    click.echo("Execution cancelled.")
+                    sys.exit(1)
+            else:
+                click.secho(f"✅ All required models are healthy.", fg='green')
+        else:
+            click.echo("   No specific models found in experiment configuration.")
 
-        # Phase 2: Pre-Execution Confirmation
-        click.echo("\n📋 Phase 2: Pre-Execution Confirmation")
+        # Phase 3: Pre-Execution Confirmation
+        click.echo("\n📋 Phase 3: Pre-Execution Confirmation")
         summary = validation_agent.get_pre_execution_summary(validation_result)
         
         click.echo("Please review the execution plan:")
@@ -218,8 +241,8 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
             click.echo("Execution cancelled by user.")
             sys.exit(0)
         
-        # Phase 3: Execute the project
-        click.echo("\n🚀 Phase 3: Project Execution")
+        # Phase 4: Execute the project
+        click.echo("\n🚀 Phase 4: Project Execution")
         orchestrator = EnsembleOrchestrator(project_path)
         
         # Run the experiment
