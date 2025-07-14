@@ -151,8 +151,52 @@ agents = {
 - **Context Window Optimization**: LLM-designed chunking strategies maintaining analytical integrity
 - **Cost Optimization**: Model selection and batch sizing for budget efficiency
 
+**Mathematical Reliability Architecture**:
+
+Critical insight: LLMs cannot be trusted for statistical calculations required for academic publication. The solution employs **Hybrid Intelligence Architecture** where LLMs design approaches and interpret results while secure code execution performs calculations:
+
+```python
+# THIN Pattern: LLM designs, code executes, LLM interprets
+class StatisticalAnalysisAgent:
+    def __init__(self):
+        self.code_executor = SecureCodeExecutor()  # From CARA implementation
+        
+    async def calculate_reliability_statistics(self, analysis_matrix):
+        # LLM INTELLIGENCE: Design statistical approach
+        calculation_design = await self.llm_client.call_llm(
+            "Design Python code for Cronbach's alpha, cross-model variance, bias magnitude...",
+            "statistical_designer"
+        )
+        
+        # SECURE CODE EXECUTION: Perform calculations
+        execution_result = await self.code_executor.execute_code(
+            calculation_design, analysis_matrix
+        )
+        
+        # LLM INTELLIGENCE: Interpret results for academic publication
+        interpretation = await self.llm_client.call_llm(
+            "Interpret statistical results for bias analysis...",
+            "statistical_interpreter"
+        )
+        
+        return {
+            "calculations": execution_result,      # Peer-reviewable calculations
+            "interpretation": interpretation,      # Academic meaning
+            "code_audit": calculation_design      # Complete transparency
+        }
+```
+
+**Secure Code Execution Features**:
+- **Multi-layer security**: AST analysis, import whitelisting, resource limits
+- **Academic libraries**: pandas, numpy, scipy, matplotlib, statistics
+- **Sandbox isolation**: Subprocess execution with CPU/memory limits
+- **Complete audit trail**: All code and results logged for experiment provenance
+- **Academic transparency**: "Show your work" capability for peer review
+
 **Implementation Status**:
 - ✅ Model provenance tracking (dynamic extraction)
+- ✅ Secure code execution infrastructure (SecureCodeExecutor with multi-layer security)
+- ✅ Mathematical reliability foundation (Hybrid Intelligence Architecture design)
 - 🔧 Agent-based architecture design
 - 🔧 Resource optimization intelligence
 - 🔧 Experiment configuration parsing 
@@ -160,7 +204,7 @@ agents = {
 - 🔧 Analysis matrix tracking (text×model×run)
 - 🔧 Comprehensive failure logging
 - 🔧 Multi-run orchestration
-- 🔧 Statistical analysis pipeline
+- 🔧 Statistical analysis pipeline integration
 
 ### Phase 2: Bias Characterization - Multi-LLM Premium Model Testing (BLOCKED - ARCHITECTURE)
 **Objective**: Systematically document bias universality and magnitude across state-of-the-art models
@@ -230,10 +274,12 @@ agents = {
    - **Academic integrity**: Comprehensive failure/fallback logging to all chronologs
 
 5. **Priority 5: Statistical Analysis Integration**
-   - **StatisticalAnalysisAgent**: LLM-driven cross-dimensional bias analysis
-   - **Multi-run orchestration**: Support N runs for Cronbach's alpha reliability testing
-   - **Real-time performance monitoring**: Engine performance analysis and optimization
-   - **Academic reporting**: Publication-ready statistical analysis with peer review transparency
+   - **StatisticalAnalysisAgent**: LLM designs statistical approaches, SecureCodeExecutor performs calculations
+   - **Hybrid Intelligence implementation**: Integration of existing secure code execution with agent framework
+   - **Academic statistical calculations**: Cronbach's alpha, cross-model variance, bias magnitude testing
+   - **Mathematical transparency**: Complete audit trail with Python code, results, and LLM interpretations
+   - **Multi-run orchestration**: Support N runs for reliability testing with statistical analysis
+   - **Academic reporting**: Publication-ready statistical analysis with peer-reviewable calculations
 
 **Phase 1B Completion Criteria**:
 - ✅ **THIN Engine Validation**: 2 texts × 3 models × 2 runs = 12 analyses with agent-driven coordination
@@ -315,6 +361,9 @@ The Attesor Study addresses potential reliability issues in AI-assisted social s
 - **Agent-based resource management**: Specialized agents for configuration parsing, matrix planning, execution coordination, failure recovery, and statistical analysis
 - **Intelligent expectation management**: LLM-driven realistic time/cost predictions with confidence intervals and dynamic optimization
 - **Cross-dimensional analysis matrix**: Text×model×run tracking with complete provenance for academic integrity and statistical analysis
+- **Hybrid Intelligence Architecture**: LLMs design statistical approaches while secure code execution performs calculations, ensuring mathematical reliability for academic publication
+- **Secure code execution integration**: Multi-layer security with AST analysis, resource limits, and complete audit trails for peer-reviewable mathematical operations
+- **Mathematical transparency framework**: "Show your work" capability where all statistical calculations are fully auditable with Python code, results, and LLM interpretations
 
 ---
 
