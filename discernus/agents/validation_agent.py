@@ -26,7 +26,6 @@ sys.path.insert(0, str(project_root))
 try:
     from discernus.core.framework_loader import FrameworkLoader
     from discernus.gateway.llm_gateway import LLMGateway
-    from discernus.core.llm_roles import get_expert_prompt
     from discernus.agents.ensemble_configuration_agent import EnsembleConfigurationAgent
     from discernus.agents.statistical_analysis_configuration_agent import StatisticalAnalysisConfigurationAgent
     from discernus.agents.execution_planner_agent import ExecutionPlannerAgent
@@ -45,6 +44,7 @@ class ValidationAgent:
     
     def __init__(self, llm_gateway=None, framework_loader=None):
         self.framework_loader = framework_loader or FrameworkLoader()
+        self.project_path = None # Initialize project_path
         
         # Instantiate registry first, as it's needed by the gateway
         self.model_registry = ModelRegistry()
@@ -131,7 +131,7 @@ class ValidationAgent:
             analysis_instructions=analysis_instructions
         )
         if "error" in execution_plan:
-             return self._format_error('execution_planning', f"Execution planning failed: {execution_plan['error']}", {'execution_plan': execution_plan})
+            return self._format_error('execution_planning', f"Execution planning failed: {execution_plan['error']}", {'execution_plan': execution_plan})
 
         final_result = {
             'status': 'success', 'validation_passed': True, 'project_path': str(project_path_obj),
@@ -276,10 +276,9 @@ Respond with a JSON object with two keys:
                 if correction_result['success']:
                     # Return a success result indicating it was auto-corrected
                     return {'validation_passed': True, 'message': correction_result['message'], 'auto_corrected': True}
-                else:
-                    # If correction fails, return the original failure message plus the correction error
-                    result['message'] += f" | Auto-correction failed: {correction_result['message']}"
-                    return result
+                # If correction fails, return the original failure message plus the correction error
+                result['message'] += f" | Auto-correction failed: {correction_result['message']}"
+                return result
 
             return result
         except json.JSONDecodeError as e:
@@ -431,7 +430,7 @@ Provide your assessment now."""
 
             # Handle None/empty response
             if not validation_response or validation_response.strip() == 'None':
-                print(f"🚨 DEBUG: Empty/None LLM response for experiment validation")
+                print("🚨 DEBUG: Empty/None LLM response for experiment validation")
                 print(f"   Prompt length: {len(validation_prompt)} chars")
                 print(f"   Response: '{validation_response}'")
                 print("   Using fallback validation...")
@@ -447,7 +446,7 @@ Provide your assessment now."""
                 'message': f'Experiment validation failed: {str(e)}'
             }
     
-    def _parse_experiment_validation(self, response: str, project_path: str) -> Dict[str, Any]:
+    def _parse_experiment_validation(self, response: str, _project_path: str) -> Dict[str, Any]:
         """Parse LLM experiment validation response"""
         
         # Check for None response or 'None' string
@@ -469,7 +468,7 @@ Provide your assessment now."""
             try:
                 completeness_line = [line for line in response.split('\n') if 'COMPLETENESS:' in line][0]
                 completeness = int(completeness_line.split('%')[0].split(':')[1].strip())
-            except:
+            except Exception:
                 completeness = 0
         
         # If no completeness found but response exists, use reasonable default
@@ -490,18 +489,18 @@ Provide your assessment now."""
             'message': f"Experiment {'passed' if validation_passed and passed_threshold else 'failed'} validation ({completeness}% completeness)"
         }
     
-    def _mock_experiment_validation(self, experiment_content: str, project_path: str) -> Dict[str, Any]:
+    def _mock_experiment_validation(self, _experiment_content: str, _project_path: str) -> Dict[str, Any]:
         """Mock experiment validation for testing"""
         return {
             'status': 'success',
             'validation_passed': True,
             'completeness_percentage': 93,
             'threshold_required': self.experiment_threshold,
-            'validation_details': f"[MOCK] Experiment validated with 93% completeness",
+            'validation_details': "[MOCK] Experiment validated with 93% completeness",
             'message': "Experiment passed validation (93% completeness)"
         }
     
-    def _fallback_experiment_validation(self, experiment_content: str, project_path: str) -> Dict[str, Any]:
+    def _fallback_experiment_validation(self, experiment_content: str, _project_path: str) -> Dict[str, Any]:
         """Fallback experiment validation when LLM returns None"""
         
         # Simple heuristic-based validation with improved detection
@@ -643,12 +642,11 @@ Provide your assessment now."""
         if choice == "1":
             print("\n📝 Please fix the issues listed above and run 'soar validate' again.")
             return {'status': 'user_action_required', 'action': 'fix_and_revalidate'}
-        elif choice == "2":
+        if choice == "2":
             self._show_detailed_report(validation_result)
             return {'status': 'user_action_required', 'action': 'show_report'}
-        else:
-            print("\n👋 Exiting validation. Fix issues and try again.")
-            return {'status': 'user_exit'}
+        print("\n👋 Exiting validation. Fix issues and try again.")
+        return {'status': 'user_exit'}
     
     def _show_structure_issues(self, structure_result: Dict[str, Any]):
         """Show project structure issues"""
@@ -731,168 +729,189 @@ Provide your assessment now."""
             'component': 'ValidationAgent'
         } 
 
+    async def _handle_failed_models(self, requested_models: List[str], health_results: Dict[str, Any]) -> List[str]:
+        """
+        Orchestrates the "Detect, Explain, Propose, Confirm" workflow for failed models.
+        """
+        failed_models = [m for m, r in health_results['results'].items() if not r['is_healthy'] and m in requested_models]
+        healthy_models = [m for m, r in health_results['results'].items() if r['is_healthy']]
+
+        # --- Detect & Explain ---
+        print("="*80)
+        print("⚠️ MODEL HEALTH WARNING")
+        print("="*80)
+        print("One or more of your requested models failed the health check:")
+        for model in failed_models:
+            print(f"- {model}: {health_results['results'][model]['message']}")
+        
+        # --- Propose ---
+        print("\nConsulting EnsembleConfigurationAgent for a recommendation...")
+        config_agent = EnsembleConfigurationAgent()
+        
+        recommendation = config_agent.assess_model_health_situation({
+            "required_models": requested_models,
+            "failed_models": failed_models,
+            "healthy_models": healthy_models, # Pass the full list of healthy alternatives
+            "health_results": health_results,
+            "project_path": self.project_path
+        })
+        
+        print(f"\nAGENT RECOMMENDATION: {recommendation.get('action', 'cancel').upper()}")
+        print(recommendation.get('explanation'))
+
+        # --- Confirm ---
+        if recommendation.get('action') == 'substitute':
+            adjusted_models = recommendation.get('adjusted_models', [])
+            print("\nPROPOSED CHANGE to experiment.md:")
+            print(f"  models: {adjusted_models}")
+            
+            choice = input("Apply this change and proceed? [Y]es / [N]o: ").strip().upper()
+            if choice == 'Y':
+                print("✅ Change approved. Proceeding with adjusted model list.")
+                # In a real implementation, we would now programmatically update experiment.md
+                # For now, we return the adjusted list to be used in memory.
+                return recommendation.get('adjusted_models', [])
+            print("❌ Change rejected. Terminating execution.")
+            raise SystemExit
+        
+        if recommendation.get('action') == 'proceed':
+            # Filter the original list to only include healthy models
+            final_models = [m for m in requested_models if m not in failed_models]
+            print(f"✅ Proceeding with the remaining healthy models: {final_models}")
+            return final_models
+        
+        # 'cancel' or any other case
+        print("❌ Execution cancelled as per agent recommendation.")
+        raise SystemExit
+
+    async def _perform_health_check(self, _requested_models: List[str]) -> List[str]:
+        # This method is now superseded by the logic in _handle_failed_models
+        # and the comprehensive check in validate_and_execute_sync.
+        # It can be removed or kept for other purposes if needed.
+        return []
+
     def validate_and_execute_sync(self, framework_path: str, experiment_path: str, corpus_path: Optional[str] = None, dev_mode: bool = False) -> Dict[str, Any]:
-        """THIN: Read files from paths and validate/execute"""
+        """Synchronous wrapper for the main async execution method."""
+        try:
+            return asyncio.run(self.validate_and_execute_async(framework_path, experiment_path, corpus_path, dev_mode))
+        except SystemExit:
+            print("\nExecution terminated by user.")
+            return {"status": "cancelled", "message": "User cancelled the operation."}
+        except Exception as e:
+            print(f"\n❌ An unexpected error occurred: {e}")
+            # Optionally log the full traceback here
+            return {"status": "error", "message": str(e)}
+
+    async def validate_and_execute_async(self, framework_path: str, experiment_path: str, corpus_path: Optional[str] = None, dev_mode: bool = False) -> Dict[str, Any]:
+        """Main async execution method for validation and orchestration."""
         import redis
-        import json
-        import re
         from datetime import datetime
         from discernus.core.project_chronolog import initialize_project_chronolog, log_project_event
         import getpass
         
-        # Generate session ID
         session_id = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        
-        # Initialize project chronolog - CRITICAL first step for research provenance
-        project_path = Path(framework_path).parent
+        project_path_obj = Path(framework_path).parent
         user = getpass.getuser()
         
-        # Extract corpus path from experiment if not provided
         if corpus_path is None:
             try:
-                experiment_content = Path(experiment_path).read_text()
-                
-                # THIN: Let LLM extract corpus path from experiment
+                experiment_content_for_path = Path(experiment_path).read_text()
                 if self.gateway:
-                    corpus_prompt = f"""What corpus path does this experiment specify?
-
-EXPERIMENT: {experiment_content}
-
-Look for corpus_path specification. Answer with just the path (like 'corpus_sanitized_english' or 'corpus_original'), nothing else."""
-                    
+                    corpus_prompt = f"What corpus path does this experiment specify?\n\nEXPERIMENT: {experiment_content_for_path}\n\nAnswer with just the path."
                     model_name = self.model_registry.get_model_for_task('validation')
-                    if not model_name:
-                        print(f"⚠️ No suitable model found for corpus extraction, using default.")
-                        corpus_path = str(project_path / "corpus")
-                    else:
+                    if model_name:
                         llm_response, _ = self.gateway.execute_call(model=model_name, prompt=corpus_prompt)
-                        
                         if llm_response and llm_response.strip():
                             extracted_path = llm_response.strip().strip('"\'')
-                            corpus_path = str(project_path / extracted_path)
-                            print(f"📂 Corpus path extracted by LLM: {corpus_path}")
-                        else:
-                            corpus_path = str(project_path / "corpus")
-                            print(f"⚠️ LLM could not extract corpus path, using default: {corpus_path}")
-                else:
-                    # Fallback when no LLM available
-                    corpus_path = str(project_path / "corpus")
-                    print(f"⚠️ No LLM available for corpus extraction, using default: {corpus_path}")
-                    
+                            corpus_path = str(project_path_obj / extracted_path)
+                if corpus_path is None:
+                    corpus_path = str(project_path_obj / "corpus")
             except Exception as e:
-                corpus_path = str(project_path / "corpus")
-                print(f"⚠️ Failed to extract corpus path from experiment: {e}")
+                corpus_path = str(project_path_obj / "corpus")
         
         command = f"ValidationAgent.validate_and_execute_sync(framework_path='{framework_path}', experiment_path='{experiment_path}', corpus_path='{corpus_path}', dev_mode={dev_mode})"
         
-        # Log PROJECT_INITIALIZATION as first chronolog entry
         try:
-            initialize_project_chronolog(
-                project_path=str(project_path),
-                user=user,
-                command=command,
-                session_id=session_id,
-                system_state={
-                    'validation_agent_version': '2.0',
-                    'framework_path': framework_path,
-                    'experiment_path': experiment_path,
-                    'corpus_path': corpus_path,
-                    'dev_mode': dev_mode
-                }
-            )
+            initialize_project_chronolog(project_path=str(project_path_obj), user=user, command=command, session_id=session_id)
         except Exception as e:
             print(f"⚠️ ProjectChronolog initialization failed: {e}")
         
-        # Connect to Redis for event publishing (legacy support)
         redis_client = redis.Redis(host='localhost', port=6379, db=0)
         
         try:
-            # Log validation start to project chronolog
-            log_project_event(str(project_path), "VALIDATION_STARTED", session_id, {"framework_path": framework_path, "experiment_path": experiment_path, "corpus_path": corpus_path})
+            # --- Set project_path for the instance ---
+            self.project_path = Path(framework_path).parent
+
+            log_project_event(str(self.project_path), "VALIDATION_STARTED", session_id, {"framework_path": framework_path, "experiment_path": experiment_path, "corpus_path": corpus_path})
             
-            # Publish validation start event (legacy Redis)
-            redis_client.publish("soar.validation.started", json.dumps({
-                "timestamp": datetime.utcnow().isoformat(),
-                "session_id": session_id,
-                "framework_path": framework_path,
-                "experiment_path": experiment_path,
-                "corpus_path": corpus_path
-            }))
-            
-            # Read files (no parsing - just read content)
             framework_content = Path(framework_path).read_text() if Path(framework_path).exists() else ""
             experiment_content = Path(experiment_path).read_text() if Path(experiment_path).exists() else ""
             corpus_files = list(Path(corpus_path).rglob("*.txt")) if Path(corpus_path).exists() else []
             
-            if not framework_content:
-                return {"status": "error", "message": f"Framework file not found: {framework_path}"}
-            if not experiment_content:
-                return {"status": "error", "message": f"Experiment file not found: {experiment_path}"}
-            if not corpus_files:
-                return {"status": "error", "message": f"No corpus files found in: {corpus_path}"}
+            if not framework_content or not experiment_content or not corpus_files:
+                raise FileNotFoundError("One or more essential files (framework, experiment, corpus) were not found.")
             
-            # THIN: LLM validates compatibility with actual corpus content
+            # --- NEW, CORRECTED HEALTH CHECK WORKFLOW ---
+            
+            # 1. Get all possible models from the registry
+            all_possible_models = self.model_registry.list_models()
+
+            # 2. Perform comprehensive health check on ALL models
+            print("\n--- Running Comprehensive Model Health Check ---")
+            health_checker = self.gateway
+            # This needs to be run in an event loop
+            health_results = await health_checker.check_many_models_health(all_possible_models)
+
+            # 3. Assess the situation for the specific models requested in the experiment
+            experiment_config = self._parse_config_from_experiment(experiment_content)
+            requested_models = experiment_config.get('models', [])
+            
+            failed_models = [m for m, r in health_results['results'].items() if not r['is_healthy'] and m in requested_models]
+            
+            if failed_models:
+                # 4. If there's an issue, get an intelligent recommendation
+                approved_models = await self._handle_failed_models(
+                    requested_models=requested_models,
+                    health_results=health_results
+                )
+            else:
+                print("✅ All requested models are healthy.")
+                approved_models = requested_models
+
+            # The rest of the process uses the final, approved_models list
+            
             if self.gateway:
-                # Sample corpus content for validation
                 corpus_sample = ""
-                for i, file_path in enumerate(corpus_files[:3]):  # First 3 files
-                    content = Path(file_path).read_text()[:500]  # First 500 chars
+                for i, file_path in enumerate(corpus_files[:3]):
+                    content = Path(file_path).read_text()[:500]
                     corpus_sample += f"\nFile {i+1}: {Path(file_path).name}\n{content}...\n"
                 
-                validation_prompt = f"""Do you think this corpus could be analyzed with this framework in the way described in this experiment?
-
-FRAMEWORK: {framework_content}
-
-EXPERIMENT: {experiment_content}
-
-CORPUS: {len(corpus_files)} files. Sample content:
-{corpus_sample}
-
-Answer: YES/NO with brief reasoning."""
+                validation_prompt = f"Do you think this corpus could be analyzed with this framework in the way described in this experiment?\n\nFRAMEWORK: {framework_content}\n\nEXPERIMENT: {experiment_content}\n\nCORPUS: {len(corpus_files)} files. Sample content:\n{corpus_sample}\n\nAnswer: YES/NO with brief reasoning."
                 
-                validation_response, _ = self.gateway.execute_call(model="anthropic/claude-3-haiku-20240307", prompt=validation_prompt)
+                reasoning, _ = self.gateway.execute_call(model="anthropic/claude-3-haiku-20240307", prompt=validation_prompt)
+
+                decision_prompt = f"Based on the following reasoning, should the experiment proceed? Answer only with 'YES' or 'NO'.\n\nREASONING:\n{reasoning}"
                 
-                if "YES" not in validation_response:
-                    return {"status": "validation_failed", "message": f"Compatibility validation failed: {validation_response}"}
-                
-                # Log framework validation to project chronolog
-                log_project_event(
-                    str(project_path),
-                    "FRAMEWORK_VALIDATED",
-                    session_id,
-                    {
-                        "status": "validated",
-                        "validation_response": validation_response,
-                        "corpus_file_count": len(corpus_files)
-                    }
-                )
-                
-                # Publish framework validation success (legacy Redis)
-                redis_client.publish("soar.framework.validated", json.dumps({
-                    "timestamp": datetime.utcnow().isoformat(),
-                    "session_id": session_id,
-                    "status": "validated",
-                    "validation_response": validation_response
-                }))
+                final_decision, _ = self.gateway.execute_call(model="anthropic/claude-3-haiku-20240307", prompt=decision_prompt)
+
+                if "YES" not in final_decision.upper():
+                    print("="*80)
+                    print("❌ EXPERIMENT VALIDATION FAILED: Compatibility Check")
+                    print("="*80)
+                    print("The initial LLM validation check determined that your framework, experiment, and corpus are not compatible as written.")
+                    print("\nLLM REASONING:")
+                    print(reasoning) # Print the original detailed reasoning
+                    print("\nRECOMMENDATION: Please review the framework and experiment files to ensure they are aligned.")
+                    print("="*80)
+                    return {"status": "validation_failed", "message": f"Compatibility validation failed: {reasoning}"}
             
-            # THIN: Discover and load assets as specified by experiment
             project_dir = Path(framework_path).parent
             discovered_assets = self._discover_experiment_assets(experiment_content, project_dir)
             
-            # THIN: LLM generates framework-agnostic analysis instructions with discovered assets
-            instruction_prompt = f"""Generate analysis agent instructions for this framework and experiment:
-
-FRAMEWORK: {framework_content}
-
-EXPERIMENT: {experiment_content}
-
-DISCOVERED ASSETS (as specified by experiment):
-{discovered_assets}
-
-Create detailed instructions for an analysis agent to apply this framework to the described corpus. Include the framework specification, calibration materials, and any other assets discovered according to the experiment's asset discovery protocol. Include what outputs are expected."""
-
+            instruction_prompt = f"Generate analysis agent instructions for this framework and experiment:\n\nFRAMEWORK: {framework_content}\n\nEXPERIMENT: {experiment_content}\n\nDISCOVERED ASSETS (as specified by experiment):\n{discovered_assets}\n\nCreate detailed instructions..."
+            
             if self.gateway:
-                model_name = self.model_registry.get_model_for_task('synthesis') # Use a synthesis-appropriate model
+                model_name = self.model_registry.get_model_for_task('synthesis')
                 if not model_name:
                     analysis_instructions = "[MOCK] No suitable model found for instruction generation."
                 else:
@@ -902,63 +921,47 @@ Create detailed instructions for an analysis agent to apply this framework to th
             
             # --- This is where the handoff to the orchestrator happens ---
             
-            # A modern workflow is now required.
             experiment_config = self._parse_config_from_experiment(experiment_content)
+            experiment_config['models'] = approved_models # Use the approved list
             if 'workflow' not in experiment_config:
-                raise ValueError("Experiment is not valid. It must contain a `workflow` definition in its configuration block.")
+                raise ValueError("Experiment must contain a `workflow` definition.")
+
+            # 1. Optimize model selection
+            config_agent = EnsembleConfigurationAgent()
+            requested_models = experiment_config.get('models', [])
+            optimized_models = config_agent.optimize_model_selection(requested_models)
+            
+            # 2. Create a safe execution plan
+            planner_agent = ExecutionPlannerAgent()
+            execution_plan = planner_agent.create_execution_plan(
+                corpus_files=[str(f) for f in corpus_files],
+                model_names=optimized_models,
+                framework_text=framework_content,
+                analysis_instructions=analysis_instructions
+            )
 
             print("✅ Modern workflow detected. Initializing WorkflowOrchestrator.")
-            orchestrator = WorkflowOrchestrator(str(project_path))
+            orchestrator = WorkflowOrchestrator(str(project_path_obj))
             
-            # The initial state for the workflow is the validation result we have so far
+            # The initial state for the workflow includes the optimized models and the execution plan
             initial_state = {
                 "corpus_files": [str(f) for f in corpus_files],
                 "analysis_agent_instructions": analysis_instructions,
                 "framework_content": framework_content,
-                "experiment_content": experiment_content
+                "experiment_content": experiment_content,
+                "optimized_models": optimized_models,
+                "execution_plan": execution_plan
             }
-            final_result = asyncio.run(orchestrator.execute_workflow(initial_state))
+            final_result = await orchestrator.execute_workflow(initial_state)
 
-            # Log successful validation completion to project chronolog
-            log_project_event(
-                str(project_path),
-                "VALIDATION_COMPLETED",
-                session_id,
-                {
-                    "status": "validated",
-                    "corpus_file_count": len(corpus_files),
-                    "framework_ready": True,
-                    "instructions_generated": True
-                }
-            )
+            log_project_event(str(project_path_obj), "VALIDATION_COMPLETED", session_id, {"status": "validated"})
             
-            # Publish instructions generated event (legacy Redis)
-            redis_client.publish("soar.instructions.generated", json.dumps({
-                "timestamp": datetime.utcnow().isoformat(),
-                "session_id": session_id,
-                "analysis_instructions": analysis_instructions,
-                "corpus_file_count": len(corpus_files)
-            }))
-
             return final_result
             
         except Exception as e:
-            # Log error to project chronolog  
-            try:
-                log_project_event(
-                    str(project_path),
-                    "VALIDATION_ERROR",
-                    session_id,
-                    {
-                        "error": str(e),
-                        "error_type": type(e).__name__
-                    }
-                )
-            except:
-                pass  # Don't let chronolog errors mask the original error
-                
+            log_project_event(str(project_path_obj), "VALIDATION_ERROR", session_id, {"error": str(e)})
             return {"status": "error", "message": f"Failed to load files: {str(e)}"}
-
+    
     def _parse_config_from_experiment(self, experiment_content: str) -> Dict[str, Any]:
         """Helper to parse YAML config from experiment content."""
         try:
