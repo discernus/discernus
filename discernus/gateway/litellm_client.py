@@ -112,6 +112,9 @@ class LiteLLMClient:
         self.failover_handler = ProviderFailoverHandler()
         self.tpm_limiter = TPMRateLimiter()
         self.parameter_manager = ProviderParameterManager()
+        
+        # Track the last used model for provenance
+        self._last_used_model = None
 
         self._configure_litellm()
         self._test_model_availability()
@@ -216,6 +219,9 @@ class LiteLLMClient:
         # Store context for quality assurance
         self._current_text = text
         self._current_framework = experiment_def.get("framework", {}).get("name", "unknown")
+        
+        # Track the model being used for provenance
+        self._last_used_model = model_name
 
         # Use framework-neutral prompt that doesn't trigger safety filters
         prompt = self._generate_analysis_prompt(text, experiment_def)
@@ -591,4 +597,93 @@ Use specific evidence and examples from the text to support your analysis."""
                 total_calls = data.get("total_calls", 0)
                 print(f"   {provider}: {success_rate:.1%} success rate ({total_calls} calls)")
         else:
-            print("⚠️ No reliability data available") 
+            print("⚠️ No reliability data available")
+
+    def get_model_provenance(self) -> Dict[str, Any]:
+        """
+        Get structured model information for research provenance.
+        
+        Returns:
+            Dict containing model provider, family, version, and other metadata
+        """
+        if not self._last_used_model:
+            return {
+                "primary_model": None,
+                "provider": "unknown",
+                "model_family": "unknown",
+                "model_version": "unknown",
+                "capture_method": "no_model_tracked",
+                "capture_timestamp": self._get_timestamp()
+            }
+            
+        model_name = self._last_used_model
+        provider = self.parameter_manager.get_provider_from_model(model_name)
+        
+        # Parse model name to extract family and version
+        model_family, model_version = self._parse_model_name(model_name, provider)
+        
+        return {
+            "primary_model": model_name,
+            "provider": provider,
+            "model_family": model_family,
+            "model_version": model_version,
+            "capture_method": "dynamic_extraction",
+            "capture_timestamp": self._get_timestamp()
+        }
+    
+    def _parse_model_name(self, model_name: str, provider: str) -> Tuple[str, str]:
+        """Parse model name to extract family and version"""
+        if provider == "vertex_ai":
+            # Handle vertex_ai/gemini-2.5-flash format
+            if "/" in model_name:
+                model_part = model_name.split("/", 1)[1]
+            else:
+                model_part = model_name
+                
+            if "gemini" in model_part.lower():
+                # Extract version from gemini-2.5-flash
+                if "-" in model_part:
+                    parts = model_part.split("-")
+                    family = parts[0]
+                    version = "-".join(parts[1:])
+                else:
+                    family = model_part
+                    version = "unknown"
+            else:
+                family = model_part
+                version = "unknown"
+                
+        elif provider == "openai":
+            # Handle gpt-4o, gpt-3.5-turbo, etc.
+            if "gpt" in model_name.lower():
+                family = "gpt"
+                version = model_name.replace("gpt-", "").replace("gpt", "")
+            else:
+                family = model_name
+                version = "unknown"
+                
+        elif provider == "anthropic":
+            # Handle claude-3-5-sonnet-20240620, etc.
+            if "claude" in model_name.lower():
+                family = "claude"
+                version = model_name.replace("claude-", "").replace("claude", "")
+            else:
+                family = model_name
+                version = "unknown"
+                
+        else:
+            # Default parsing - split on first dash
+            if "-" in model_name:
+                parts = model_name.split("-", 1)
+                family = parts[0]
+                version = parts[1]
+            else:
+                family = model_name
+                version = "unknown"
+                
+        return family, version
+    
+    def _get_timestamp(self) -> str:
+        """Get current timestamp in ISO format"""
+        from datetime import datetime
+        return datetime.now().isoformat() 
