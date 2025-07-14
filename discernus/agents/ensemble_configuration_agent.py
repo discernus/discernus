@@ -38,6 +38,86 @@ class EnsembleConfigurationAgent:
         self.model_registry = ModelRegistry()
         self.gateway = LLMGateway(self.model_registry)
 
+    def assess_model_health_situation(self, situation_context: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Assess a model health situation and provide intelligent recommendations.
+        
+        Args:
+            situation_context: Dictionary containing:
+                - required_models: List of models needed by experiment
+                - failed_models: List of models that failed health checks
+                - healthy_models: List of models that passed health checks
+                - health_results: Full health check results
+                - project_path: Path to the project
+        
+        Returns:
+            Dictionary with recommendation including:
+                - action: 'proceed', 'substitute', 'cancel'
+                - explanation: Human-readable explanation
+                - adjusted_models: Optional list of substitute models
+        """
+        try:
+            # Prepare context for the LLM
+            prompt = f"""
+You are an expert research configuration advisor. A researcher is trying to run an experiment but some of their requested models have health issues.
+
+SITUATION:
+- Required models: {situation_context['required_models']}
+- Failed models: {situation_context['failed_models']}
+- Available healthy models: {situation_context['healthy_models']}
+
+HEALTH ISSUES:
+"""
+            for model in situation_context['failed_models']:
+                error = situation_context['health_results']['results'][model]['message']
+                prompt += f"- {model}: {error}\n"
+
+            prompt += """
+TASK: Analyze this situation and provide a recommendation. Consider:
+1. Research impact of missing models
+2. Available alternatives from healthy models
+3. Whether the experiment can proceed meaningfully
+
+Respond with a JSON object containing:
+- "action": "proceed", "substitute", or "cancel"
+- "explanation": Clear explanation of your recommendation
+- "adjusted_models": Array of substitute models if applicable
+
+Be concise but helpful. Focus on maintaining research quality while being practical.
+"""
+
+            # Get LLM recommendation
+            response, _ = self.gateway.execute_call(
+                model="anthropic/claude-3-haiku-20240307",
+                prompt=prompt,
+                system_prompt="You are a helpful research configuration advisor. Always respond with valid JSON."
+            )
+            
+            # Parse the response
+            import json
+            try:
+                recommendation = json.loads(response.strip())
+                
+                # Validate the response has required fields
+                if 'action' not in recommendation:
+                    recommendation['action'] = 'cancel'
+                if 'explanation' not in recommendation:
+                    recommendation['explanation'] = 'Unable to generate recommendation'
+                    
+                return recommendation
+                
+            except json.JSONDecodeError:
+                return {
+                    'action': 'cancel',
+                    'explanation': 'Unable to parse agent recommendation. Please address model issues manually.'
+                }
+                
+        except Exception as e:
+            return {
+                'action': 'cancel',
+                'explanation': f'Error getting recommendation: {str(e)}'
+            }
+
     def generate_configuration(self, experiment_md_path: str) -> bool:
         """
         Reads an experiment.md file, generates a YAML config from the plain-English
