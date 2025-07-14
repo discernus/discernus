@@ -1,0 +1,18 @@
+{
+  "session_id": "session_20250714_083354",
+  "conversation_id": "conversation_20250714_083354_2e937054",
+  "timestamp": "2025-07-14_08-33-54",
+  "analysis_count": 0,
+  "outliers_handled": 0,
+  "project_path": "projects/attesor/experiments/04_deep_smoke_test",
+  "model_provenance": {
+    "primary_model": null,
+    "provider": "unknown",
+    "model_family": "unknown",
+    "model_version": "unknown",
+    "capture_method": "no_model_tracked",
+    "capture_timestamp": "2025-07-14T08:33:54.751702",
+    "orchestrator_timestamp": "2025-07-14T08:33:54.751706",
+    "notes": "Extracted from active LiteLLMClient instance"
+  }
+}

@@ -1,0 +1,40 @@
+models:
+  claude-3-5-sonnet-20240620:
+    provider: "anthropic"
+    performance_tier: "top-tier"
+    context_window: 200000
+    costs:
+      input_per_million_tokens: 3.00
+      output_per_million_tokens: 15.00
+
+  gpt-4o:
+    provider: "openai"
+    performance_tier: "top-tier"
+    context_window: 128000
+    costs:
+      input_per_million_tokens: 5.00
+      output_per_million_tokens: 15.00
+
+  claude-3-haiku-20240307:
+    provider: "anthropic"
+    performance_tier: "cost-effective"
+    context_window: 200000
+    costs:
+      input_per_million_tokens: 0.25
+      output_per_million_tokens: 1.25
+
+  vertex_ai/gemini-1.5-pro-latest:
+    provider: "vertex_ai"
+    performance_tier: "top-tier"
+    context_window: 1000000
+    costs:
+      input_per_million_tokens: 7.00
+      output_per_million_tokens: 21.00
+
+  vertex_ai/gemini-1.5-flash-latest:
+    provider: "vertex_ai"
+    performance_tier: "cost-effective"
+    context_window: 1000000
+    costs:
+      input_per_million_tokens: 0.70
+      output_per_million_tokens: 2.10 
