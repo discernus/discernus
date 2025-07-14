@@ -360,6 +360,27 @@ class ProjectChronolog:
             'total_events': verified_events + len(corrupted_events)
         }
     
+    def merge_run_log(self, run_chronolog_file_path: str):
+        """
+        Merges a run-specific chronolog into the main project chronolog.
+        """
+        run_log_path = Path(run_chronolog_file_path)
+        if not run_log_path.exists():
+            print(f"⚠️ Run chronolog file not found for merging: {run_log_path}")
+            return
+
+        with open(run_log_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    event_dict = json.loads(line.strip())
+                    # Re-create the event object to ensure it's correctly structured
+                    event = ChronologEvent(**event_dict)
+                    # Append to the main project chronolog
+                    self._append_event(event)
+                except (json.JSONDecodeError, TypeError) as e:
+                    print(f"⚠️ Could not parse or merge event from {run_log_path}: {e}")
+                    continue
+    
     def create_run_chronolog(self, session_id: str, results_directory: str) -> Dict[str, Any]:
         """
         Create run-specific chronolog by filtering project chronolog by session_id

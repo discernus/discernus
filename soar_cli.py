@@ -23,16 +23,16 @@ from pathlib import Path
 from typing import Dict, Any
 
 # Add project root to path for imports
-project_root = Path(__file__).parent
+project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 try:
     # Core SOAR components
     from discernus.core.framework_loader import FrameworkLoader
-    from discernus.core.thin_litellm_client import ThinLiteLLMClient
     from discernus.core.project_chronolog import initialize_project_chronolog
     from discernus.core.project_chronolog import get_project_chronolog
     from discernus.agents.validation_agent import ValidationAgent
+    from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"❌ SOAR CLI dependencies not available: {e}")
@@ -113,30 +113,17 @@ def validate(project_path: str, interactive: bool, verbose: bool):
 
 @soar.command()
 @click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--auto-validate', is_flag=True, help='Auto-validate before execution')
 @click.option('--dev-mode', is_flag=True, help='Run in development mode with simulated researcher')
 @click.option('--researcher-profile', default='experienced_computational_social_scientist', 
               help='Simulated researcher profile for dev mode')
-def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_profile: str):
+def execute(project_path: str, dev_mode: bool, researcher_profile: str):
     """
-    Execute validated SOAR project with dynamic orchestration
-    
-    PROJECT_PATH: Path to validated SOAR project directory
-    
-    Execution includes:
-    - Dynamic worker count determination based on experiment complexity
-    - Multi-agent analysis using framework specifications
-    - Synthesis and competitive validation
-    - Publication-ready results generation
-    
-    Example:
-        soar execute ./my_cff_analysis
-        soar execute ./my_cff_analysis --dev-mode
+    Validates and executes a SOAR project with pre-execution confirmation.
     """
     click.echo("🚀 SOAR Project Execution")
     click.echo("=" * 40)
     
-    # Initialize project chronolog for comprehensive research provenance
+    # Initialize project chronolog
     try:
         import datetime
         import getpass
@@ -144,8 +131,6 @@ def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_p
         session_id = f"soar_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
         user = getpass.getuser()
         command = f"soar execute {project_path}"
-        if auto_validate:
-            command += " --auto-validate"
         if dev_mode:
             command += " --dev-mode"
         if researcher_profile != 'experienced_computational_social_scientist':
@@ -158,7 +143,6 @@ def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_p
             session_id=session_id,
             system_state={
                 'soar_cli_version': '2.0',
-                'auto_validate': auto_validate,
                 'dev_mode': dev_mode,
                 'researcher_profile': researcher_profile
             }
@@ -169,62 +153,46 @@ def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_p
         click.echo(f"⚠️ ProjectChronolog initialization failed: {e}")
     
     try:
-        # Auto-validate if requested
-        if auto_validate:
-            click.echo("⏳ Auto-validating project...")
-            validation_agent = ValidationAgent()
-            validation_result = validation_agent.validate_project(project_path)
-            
-            if not validation_result['validation_passed']:
-                click.echo(f"❌ Auto-validation failed: {validation_result['message']}")
-                click.echo(f"   Use 'soar validate {project_path} --interactive' to fix issues")
-                sys.exit(1)
-            else:
-                click.echo("✅ Auto-validation passed")
+        # Step 1: Always validate the project first
+        click.echo("🔬 Phase 1: Comprehensive Project Validation...")
+        validation_agent = ValidationAgent()
+        validation_result = validation_agent.validate_project(project_path)
         
-        # Step 1: Generate YAML configuration from plain-English experiment file
-        _generate_experiment_config(project_path)
+        # Check for transient API errors first
+        if validation_result.get('error_type') == 'LLM_VALIDATION_FAILED':
+            click.secho(f"\n⚠️  Validation Halted: {validation_result.get('message', 'An unexpected error occurred during LLM validation.')}", fg='yellow')
+            click.echo("    This could be a temporary issue with the provider, a problem with your API key, or an issue with the prompt.")
+            click.echo("    Please review the error details and decide whether to retry the command or investigate your configuration.")
+            sys.exit(1)
 
-        # Step 2: Validate the complete project
-        click.echo("\n🚀 Phase 2: Validating project structure, framework, and experiment...")
-        if auto_validate:
-            validation_agent = ValidationAgent()
-            validation_results = validation_agent.validate_project(project_path)
-            
-            if not validation_results['validation_passed']:
-                click.echo(f"❌ Project validation failed: {validation_results['message']}")
-                sys.exit(1)
-            
-            click.echo("✅ Project validation passed.")
-        else:
-            # Create mock validation results for direct execution
-            validation_results = {
-                "status": "validated",
-                "validation_passed": True,
-                "corpus_files": [str(f) for f in Path(project_path, "corpus").glob("*.md")],
-                "analysis_agent_instructions": "Default analysis instructions",
-                "experiment": { "definition": Path(project_path, "experiment.md").read_text() }
-            }
-            click.echo("✅ Skipping validation as per user request.")
+        if not validation_result.get('validation_passed'):
+            click.secho(f"\n❌ Validation FAILED: {validation_result.get('message', 'Unknown error.')}", fg='red')
+            click.echo("   Please run 'soar validate' to diagnose and fix the issues in your project files.")
+            sys.exit(1)
+        
+        click.secho("✅ Validation PASSED.", fg='green')
 
-        click.echo("\n🚀 Phase 3: Executing analysis...")
+        # Step 2: Pre-Execution Confirmation
+        click.echo("\n📋 Phase 2: Pre-Execution Confirmation")
+        summary = validation_agent.get_pre_execution_summary(validation_result)
         
-        # Step 3: Execute simple ensemble analysis
-        from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
+        click.echo("Please review the execution plan:")
+        for key, value in summary.items():
+            click.echo(f"   - {key}: {value}")
         
-        # Initialize ensemble orchestrator
+        if not click.confirm('\nProceed with execution?', default=False):
+            click.echo("Execution cancelled by user.")
+            sys.exit(0)
+
+        # Step 3: Execute analysis
+        click.echo("\n🚀 Phase 3: Executing Analysis...")
         ensemble_orchestrator = EnsembleOrchestrator(project_path)
+        results = asyncio.run(ensemble_orchestrator.execute_ensemble_analysis(validation_result))
         
-        # Execute ensemble analysis pipeline
-        results = asyncio.run(ensemble_orchestrator.execute_ensemble_analysis(validation_results))
-        
-        # Show results
-        click.echo(f"\n🎉 Execution completed!")
-        click.echo(f"   Status: {results.get('status', 'Unknown')}")
-        click.echo(f"   Results: {results.get('message', 'No message')}")
+        click.secho(f"\n🎉 Execution Completed: {results.get('status', 'Unknown')}", fg='green')
         
     except Exception as e:
-        click.echo(f"❌ Execution failed with error: {str(e)}", err=True)
+        click.secho(f"❌ Execution failed with error: {str(e)}", fg='red', err=True)
         if dev_mode:
             import traceback
             traceback.print_exc()
@@ -356,15 +324,6 @@ def _show_validation_summary(validation_result: Dict[str, Any]):
     click.echo(f"   Project: {Path(validation_result['project_path']).name}")
     click.echo(f"   Timestamp: {validation_result.get('validation_timestamp', 'Unknown')}")
     click.echo(f"   Ready for execution: {'✅ Yes' if validation_result['ready_for_execution'] else '❌ No'}")
-
-def _extract_research_question(experiment_content: str) -> str:
-    """THIN: Let LLM extract research question"""
-    try:
-        llm_client = ThinLiteLLMClient()
-        prompt = f"Extract the primary research question from this experiment:\n\n{experiment_content}\n\nReturn just the research question, nothing else."
-        return llm_client.call_llm(prompt, "research_question_extractor")
-    except:
-        return "Research question not found"
 
 # Removed deprecated _load_project_components function - ValidationAgent handles this now
 

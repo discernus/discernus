@@ -15,6 +15,8 @@ import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+import re
+import yaml
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -22,48 +24,15 @@ sys.path.insert(0, str(project_root))
 
 try:
     from discernus.core.framework_loader import FrameworkLoader
-    from discernus.core.thin_litellm_client import ThinLiteLLMClient
-    from discernus.gateway.litellm_client import LiteLLMClient  # Add our improved client
+    from discernus.gateway.llm_gateway import LLMGateway
     from discernus.core.llm_roles import get_expert_prompt
+    from discernus.agents.ensemble_configuration_agent import EnsembleConfigurationAgent
+    from discernus.agents.statistical_analysis_configuration_agent import StatisticalAnalysisConfigurationAgent
+    from discernus.gateway.model_registry import ModelRegistry # Corrected import path
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"ValidationAgent dependencies not available: {e}")
     DEPENDENCIES_AVAILABLE = False
-
-class LiteLLMClientAdapter:
-    """Adapter to make LiteLLMClient compatible with ValidationAgent's expected interface"""
-    
-    def __init__(self):
-        self.client = LiteLLMClient()
-    
-    def call_llm(self, prompt: str, role: str) -> str:
-        """Adapt LiteLLMClient.analyze_text to the call_llm interface"""
-        # Create a minimal experiment definition for the analyze_text method
-        experiment_def = {
-            "framework": {"name": "validation_framework"},
-            "research_question": f"Validation task: {role}"
-        }
-        
-        # Use a fast, cost-effective model for validation tasks
-        model_name = "vertex_ai/gemini-2.5-flash"  # Fast and cheap
-        
-        try:
-            # Call our improved client with parameter manager
-            result, cost = self.client.analyze_text(prompt, experiment_def, model_name)
-            
-            # Extract the text response
-            if isinstance(result, dict) and 'raw_response' in result:
-                return result['raw_response']
-            elif isinstance(result, str):
-                return result
-            else:
-                print(f"⚠️ Unexpected result type from LiteLLMClient: {type(result)}")
-                return str(result) if result else ""
-                
-        except Exception as e:
-            print(f"⚠️ LiteLLMClientAdapter error: {e}")
-            # Fallback to empty string rather than None to avoid issues
-            return ""
 
 class ValidationAgent:
     """
@@ -71,25 +40,27 @@ class ValidationAgent:
     Software provides validation workflow; LLM provides validation intelligence
     """
     
-    def __init__(self, llm_client=None, framework_loader=None):
+    def __init__(self, llm_gateway=None, framework_loader=None):
         self.framework_loader = framework_loader or FrameworkLoader()
         
-        if llm_client:
-            self.llm_client = llm_client
+        # Instantiate registry first, as it's needed by the gateway
+        self.model_registry = ModelRegistry()
+
+        if llm_gateway:
+            self.gateway = llm_gateway
         else:
             try:
-                # Use our improved LiteLLMClient with parameter manager
-                self.llm_client = LiteLLMClientAdapter()
-                print("✅ ValidationAgent using improved LiteLLMClient with parameter manager")
-            except:
-                try:
-                    # Fallback to original client if needed
-                    self.llm_client = ThinLiteLLMClient()
-                    print("⚠️ ValidationAgent falling back to ThinLiteLLMClient")
-                except:
-                    self.llm_client = None
-                    print("❌ ValidationAgent: No LLM client available")
+                # Pass the registry to the gateway
+                self.gateway = LLMGateway(self.model_registry)
+                print("✅ ValidationAgent using LLMGateway with ModelRegistry")
+            except Exception as e:
+                self.gateway = None
+                print(f"❌ ValidationAgent: No LLM gateway available: {e}")
         
+        # Instantiate other agents for comprehensive validation
+        self.ensemble_config_agent = EnsembleConfigurationAgent()
+        self.statistical_config_agent = StatisticalAnalysisConfigurationAgent()
+
         # Get validation rubrics from FrameworkLoader
         self.framework_rubric = self.framework_loader.framework_rubric
         self.experiment_rubric = self.framework_loader.experiment_rubric
@@ -100,65 +71,127 @@ class ValidationAgent:
     
     def validate_project(self, project_path: str) -> Dict[str, Any]:
         """
-        Comprehensive SOAR project validation
-        
-        THIN Principle: Software orchestrates validation steps;
-        LLM provides validation intelligence using rubrics
+        Comprehensive SOAR project validation, including configuration and coherence.
         """
         project_path_obj = Path(project_path)
         
-        # Step 1: Project structure validation (software)
+        # Step 1: Project structure validation
         structure_result = self.framework_loader.validate_project_structure(str(project_path_obj))
-        
         if not structure_result['validation_passed']:
-            return {
-                'status': 'error',
-                'validation_passed': False,
-                'step_failed': 'structure',
-                'message': f"Project structure validation failed: {structure_result['missing_files']}",
-                'structure_result': structure_result
-            }
+            return self._format_error('structure', f"Project structure validation failed: {structure_result['missing_files']}", {'structure_result': structure_result})
+
+        # Step 2: Configuration Generation
+        self.ensemble_config_agent.generate_configuration(str(project_path_obj / "experiment.md"))
         
-        # Step 2: Framework validation (LLM)
+        # Step 3: Statistical Plan Validation
+        statistical_plan = self.statistical_config_agent.generate_statistical_plan(str(project_path_obj / "experiment.md"))
+        if statistical_plan.get("validation_status") != "complete":
+            return self._format_error('statistical_plan', f"Statistical plan validation failed: {statistical_plan.get('notes', 'No notes provided.')}", {'statistical_plan': statistical_plan})
+
+        # Step 4: Coherence validation
+        coherence_result = self._validate_project_coherence(project_path_obj)
+        if not coherence_result['validation_passed']:
+            return self._format_error('coherence', f"Project coherence validation failed: {coherence_result['message']}", {'coherence_result': coherence_result})
+
+        # Step 5: Framework validation
         framework_result = self._validate_project_framework(project_path_obj)
-        
         if not framework_result['validation_passed']:
-            return {
-                'status': 'error',
-                'validation_passed': False,
-                'step_failed': 'framework',
-                'message': f"Framework validation failed: {framework_result['message']}",
-                'framework_result': framework_result
-            }
+            return self._format_error('framework', f"Framework validation failed: {framework_result['message']}", {'framework_result': framework_result})
         
-        # Step 3: Experiment validation (LLM)
+        # Step 6: Experiment validation
         experiment_result = self._validate_project_experiment(project_path_obj)
-        
         if not experiment_result['validation_passed']:
-            return {
-                'status': 'error',
-                'validation_passed': False,
-                'step_failed': 'experiment',
-                'message': f"Experiment validation failed: {experiment_result['message']}",
-                'experiment_result': experiment_result
-            }
-        
-        # Step 4: Corpus validation (software + LLM)
+            return self._format_error('experiment', f"Experiment validation failed: {experiment_result['message']}", {'experiment_result': experiment_result})
+
+        # Step 7: Corpus validation
         corpus_result = self._validate_project_corpus(project_path_obj)
         
-        # All validations passed
         return {
-            'status': 'success',
-            'validation_passed': True,
-            'project_path': str(project_path_obj),
+            'status': 'success', 'validation_passed': True, 'project_path': str(project_path_obj),
             'validation_timestamp': datetime.now().isoformat(),
-            'structure_result': structure_result,
-            'framework_result': framework_result,
-            'experiment_result': experiment_result,
-            'corpus_result': corpus_result,
+            'structure_result': structure_result, 'coherence_result': coherence_result,
+            'framework_result': framework_result, 'experiment_result': experiment_result,
+            'corpus_result': corpus_result, 'statistical_plan': statistical_plan,
             'ready_for_execution': True
         }
-    
+
+    def get_pre_execution_summary(self, validation_result: Dict[str, Any]) -> Dict[str, Any]:
+        """Generates a structured summary of the execution plan for user confirmation."""
+        if not validation_result.get('validation_passed'):
+            return {"error": "Validation must pass before generating a summary."}
+
+        project_path = Path(validation_result['project_path'])
+        experiment_content = (project_path / "experiment.md").read_text()
+        
+        # Parse the YAML from the experiment file
+        yaml_config = {}
+        yaml_match = re.search(r'```yaml\n(.*?)```', experiment_content, re.DOTALL)
+        if yaml_match:
+            try:
+                yaml_config = yaml.safe_load(yaml_match.group(1))
+            except yaml.YAMLError:
+                pass # Ignore parsing errors, defaults will be used
+        
+        models = yaml_config.get('models', ['default_model'])
+        num_runs = yaml_config.get('num_runs', 1)
+        workflow = "Raw Aggregation" if yaml_config.get('remove_synthesis') else "Adversarial Synthesis"
+        
+        return {
+            "Framework": validation_result['framework_result']['framework_name'],
+            "Corpus": f"{validation_result['corpus_result']['file_count']} files",
+            "Models": models,
+            "Runs per Model": num_runs,
+            "Workflow": workflow,
+            "Statistical Plan": [test['test_name'] for test in validation_result['statistical_plan'].get('required_tests', [])]
+        }
+
+    def _format_error(self, step: str, message: str, details: Dict[str, Any]) -> Dict[str, Any]:
+        """Helper to format validation error dictionaries."""
+        return {'status': 'error', 'validation_passed': False, 'step_failed': step, 'message': message, **details}
+
+    def _validate_project_coherence(self, project_path: Path) -> Dict[str, Any]:
+        """Validate that the experiment, framework, and corpus are logically connected."""
+        try:
+            framework_content = (project_path / "framework.md").read_text()
+            experiment_content = (project_path / "experiment.md").read_text()
+        except FileNotFoundError as e:
+            return {'validation_passed': False, 'message': f"Missing required file for coherence check: {e.filename}"}
+
+        prompt = f"""
+You are a research methodology auditor. Your task is to ensure a research plan is internally coherent.
+
+**Framework:**
+---
+{framework_content[:1500]}
+---
+
+**Experiment Plan:**
+---
+{experiment_content[:1500]}
+---
+
+**Audit Checklist:**
+1.  **Explicit Link**: Does the experiment plan explicitly state which framework it uses?
+2.  **Hypothesis Testability**: Are the hypotheses in the experiment testable using the concepts and anchors defined in the framework?
+3.  **Methodology Alignment**: Does the methodology described in the experiment align with the analysis prescribed by the framework?
+
+**Assessment:**
+Based on your audit, is this research plan internally coherent? Answer with a JSON object with the keys "validation_passed" (boolean) and "message" (a brief explanation of your reasoning).
+"""
+        try:
+            model_name = self.model_registry.get_model_for_task('validation')
+            if not model_name:
+                return {'validation_passed': False, 'message': "No suitable model found for coherence check."}
+            response, metadata = self.gateway.execute_call(model=model_name, prompt=prompt)
+            if not metadata.get("success"):
+                return {'validation_passed': False, 'error_type': 'LLM_VALIDATION_FAILED', 'message': metadata.get('error', 'Unknown API error')}
+            result = json.loads(response)
+            return result
+        except json.JSONDecodeError as e:
+            return {'validation_passed': False, 'message': f"LLM coherence check returned invalid JSON: {e}"}
+        except Exception as e:
+            return {'validation_passed': False, 'error_type': 'LLM_VALIDATION_FAILED', 'message': f"LLM coherence check failed: {e}"}
+
     def _validate_project_framework(self, project_path: Path) -> Dict[str, Any]:
         """Validate project framework using Framework Specification Validation Rubric"""
         
@@ -221,7 +254,7 @@ class ValidationAgent:
             }
         
         # Validate experiment using LLM with rubric
-        if not self.llm_client:
+        if not self.gateway:
             return self._mock_experiment_validation(experiment_content, str(project_path))
         
         # Simplified experiment validation prompt
@@ -250,8 +283,20 @@ SUMMARY: [brief assessment]
 Provide your assessment now."""
 
         try:
-            validation_response = self.llm_client.call_llm(validation_prompt, "experiment_validator")
+            model_name = self.model_registry.get_model_for_task('validation')
+            if not model_name:
+                return self._format_error('experiment', "No suitable model found for experiment validation.", {})
             
+            validation_response, metadata = self.gateway.execute_call(model=model_name, prompt=validation_prompt)
+            
+            if not metadata.get("success"):
+                return {
+                    'status': 'error',
+                    'validation_passed': False,
+                    'error_type': 'LLM_VALIDATION_FAILED',
+                    'message': metadata.get('error', 'Unknown API error')
+                }
+
             # Handle None/empty response
             if not validation_response or validation_response.strip() == 'None':
                 print(f"🚨 DEBUG: Empty/None LLM response for experiment validation")
@@ -266,6 +311,7 @@ Provide your assessment now."""
             return {
                 'status': 'error',
                 'validation_passed': False,
+                'error_type': 'LLM_VALIDATION_FAILED',
                 'message': f'Experiment validation failed: {str(e)}'
             }
     
@@ -574,22 +620,27 @@ Provide your assessment now."""
                 experiment_content = Path(experiment_path).read_text()
                 
                 # THIN: Let LLM extract corpus path from experiment
-                if self.llm_client:
+                if self.gateway:
                     corpus_prompt = f"""What corpus path does this experiment specify?
 
 EXPERIMENT: {experiment_content}
 
 Look for corpus_path specification. Answer with just the path (like 'corpus_sanitized_english' or 'corpus_original'), nothing else."""
                     
-                    llm_response = self.llm_client.call_llm(corpus_prompt, "corpus_path_extractor")
-                    
-                    if llm_response and llm_response.strip():
-                        extracted_path = llm_response.strip().strip('"\'')
-                        corpus_path = str(project_path / extracted_path)
-                        print(f"📂 Corpus path extracted by LLM: {corpus_path}")
-                    else:
+                    model_name = self.model_registry.get_model_for_task('validation')
+                    if not model_name:
+                        print(f"⚠️ No suitable model found for corpus extraction, using default.")
                         corpus_path = str(project_path / "corpus")
-                        print(f"⚠️ LLM could not extract corpus path, using default: {corpus_path}")
+                    else:
+                        llm_response, _ = self.gateway.execute_call(model=model_name, prompt=corpus_prompt)
+                        
+                        if llm_response and llm_response.strip():
+                            extracted_path = llm_response.strip().strip('"\'')
+                            corpus_path = str(project_path / extracted_path)
+                            print(f"📂 Corpus path extracted by LLM: {corpus_path}")
+                        else:
+                            corpus_path = str(project_path / "corpus")
+                            print(f"⚠️ LLM could not extract corpus path, using default: {corpus_path}")
                 else:
                     # Fallback when no LLM available
                     corpus_path = str(project_path / "corpus")
@@ -624,16 +675,7 @@ Look for corpus_path specification. Answer with just the path (like 'corpus_sani
         
         try:
             # Log validation start to project chronolog
-            log_project_event(
-                str(project_path),
-                "VALIDATION_STARTED",
-                session_id,
-                {
-                    "framework_path": framework_path,
-                    "experiment_path": experiment_path,
-                    "corpus_path": corpus_path
-                }
-            )
+            log_project_event(str(project_path), "VALIDATION_STARTED", session_id, {"framework_path": framework_path, "experiment_path": experiment_path, "corpus_path": corpus_path})
             
             # Publish validation start event (legacy Redis)
             redis_client.publish("soar.validation.started", json.dumps({
@@ -657,7 +699,7 @@ Look for corpus_path specification. Answer with just the path (like 'corpus_sani
                 return {"status": "error", "message": f"No corpus files found in: {corpus_path}"}
             
             # THIN: LLM validates compatibility with actual corpus content
-            if self.llm_client:
+            if self.gateway:
                 # Sample corpus content for validation
                 corpus_sample = ""
                 for i, file_path in enumerate(corpus_files[:3]):  # First 3 files
@@ -675,7 +717,7 @@ CORPUS: {len(corpus_files)} files. Sample content:
 
 Answer: YES/NO with brief reasoning."""
                 
-                validation_response = self.llm_client.call_llm(validation_prompt, "compatibility_validator")
+                validation_response, _ = self.gateway.execute_call(model="anthropic/claude-3-haiku-20240307", prompt=validation_prompt)
                 
                 if "YES" not in validation_response:
                     return {"status": "validation_failed", "message": f"Compatibility validation failed: {validation_response}"}
@@ -716,8 +758,12 @@ DISCOVERED ASSETS (as specified by experiment):
 
 Create detailed instructions for an analysis agent to apply this framework to the described corpus. Include the framework specification, calibration materials, and any other assets discovered according to the experiment's asset discovery protocol. Include what outputs are expected."""
 
-            if self.llm_client:
-                analysis_instructions = self.llm_client.call_llm(instruction_prompt, "instruction_generator")
+            if self.gateway:
+                model_name = self.model_registry.get_model_for_task('synthesis') # Use a synthesis-appropriate model
+                if not model_name:
+                    analysis_instructions = "[MOCK] No suitable model found for instruction generation."
+                else:
+                    analysis_instructions, _ = self.gateway.execute_call(model=model_name, prompt=instruction_prompt)
             else:
                 analysis_instructions = "[MOCK] Analysis instructions would be generated here"
 

@@ -20,6 +20,8 @@
 
 For this experiment, I want to compare a top-tier model from Anthropic with a top-tier model from OpenAI for performance. I also want to include a cost-effective model from the Anthropic family as a baseline. Please run the analysis 3 times for each model to ensure reliability. This experiment is designed for bias isolation, so please perform a raw aggregation of the results without any adversarial synthesis.
 
+The analysis will be conducted using the **PDAF v1.1 (Sanitized)** framework.
+
 ---
 
 ## Success Criteria
