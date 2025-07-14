@@ -623,9 +623,39 @@ Format as structured academic output suitable for peer review."""
         }
         (results_dir / "session_metadata.json").write_text(json.dumps(metadata, indent=2))
         
+        # Create run-specific chronolog for academic integrity and statistical analysis
+        files_saved = ["final_report.md", "session_metadata.json"]
+        
+        # Only create chronolog if we have a valid session_id
+        if self.session_id:
+            try:
+                from discernus.core.project_chronolog import get_project_chronolog
+                chronolog = get_project_chronolog(str(self.project_path))
+                
+                chronolog_result = chronolog.create_run_chronolog(
+                    session_id=self.session_id,
+                    results_directory=str(results_dir)
+                )
+                
+                if chronolog_result.get('created', False):
+                    files_saved.append("RUN_CHRONOLOG_" + self.session_id + ".jsonl")
+                    print(f"📝 Run chronolog created: {chronolog_result['run_chronolog_file']}")
+                    print(f"📊 Run statistics: {chronolog_result['session_events']} events captured")
+                    
+                    # Log timing statistics for academic analysis
+                    run_stats = chronolog_result.get('run_statistics', {})
+                    if run_stats.get('status') == 'statistics_calculated':
+                        print(f"⏱️  Analysis duration: {run_stats.get('analysis_duration_seconds', 'N/A')} seconds")
+                        print(f"📈 Events per minute: {run_stats.get('events_per_minute', 'N/A'):.2f}")
+                        
+            except Exception as e:
+                print(f"⚠️ Failed to create run chronolog: {e}")
+        else:
+            print("⚠️ No session_id available, skipping run chronolog creation")
+        
         self._log_system_event("RESULTS_SAVED", {
             "results_directory": str(results_dir),
-            "files_saved": ["final_report.md", "session_metadata.json"]
+            "files_saved": files_saved
         })
     
     def _init_session_logging(self):
@@ -770,9 +800,11 @@ Format as structured academic output suitable for peer review."""
             import asyncio
             if self.llm_client and hasattr(self.llm_client, 'call_llm'):
                 print(f"🟡 DEBUG: Calling LLM via async executor for {agent_id}")
+                # Type check to satisfy linter
+                llm_client = self.llm_client
                 response = await asyncio.get_event_loop().run_in_executor(
                     None, 
-                    lambda: self.llm_client.call_llm(prompt, agent_id)
+                    lambda: llm_client.call_llm(prompt, agent_id)
                 )
                 print(f"🟢 DEBUG: Got response for {agent_id}, length: {len(response) if response else 'None'}")
                 print(f"🟢 DEBUG: Response preview: {str(response)[:200] if response else 'None'}")
