@@ -30,9 +30,9 @@ The analysis will calculate inter-run reliability using Cronbach's Alpha to dete
 **Generated Configuration (for reproducibility):**
 ```yaml
 models:
-  - vertex_ai/gemini-2.5-pro
-  - openrouter/perplexity/r1-1776
-  - ollama/mistral
+- vertex_ai/gemini-2.5-pro
+- anthropic/claude-3-5-sonnet-20240620
+- ollama/mistral
 num_runs: 2
 remove_synthesis: false
 ```
