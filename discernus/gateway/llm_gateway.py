@@ -11,6 +11,7 @@ of model capabilities, costs, or fallback logic.
 import litellm
 from typing import Dict, Any, Tuple
 from .model_registry import ModelRegistry
+from .provider_parameter_manager import ProviderParameterManager
 import time
 import os
 
@@ -22,6 +23,7 @@ class LLMGateway:
     """
     def __init__(self, model_registry: ModelRegistry):
         self.model_registry = model_registry
+        self.parameter_manager = ProviderParameterManager()
 
     def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, **kwargs) -> Tuple[str, Dict[str, Any]]:
         """
@@ -39,7 +41,11 @@ class LLMGateway:
 
             try:
                 print(f"Attempting call with {current_model} (Attempt {attempts}/{max_retries})...")
-                response = litellm.completion(model=current_model, messages=messages, stream=False, **kwargs)
+                
+                # Clean parameters based on provider requirements
+                clean_params = self.parameter_manager.get_clean_parameters(current_model, kwargs)
+                
+                response = litellm.completion(model=current_model, messages=messages, stream=False, **clean_params)
                 
                 content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
                 usage_obj = getattr(response, 'usage', None)
