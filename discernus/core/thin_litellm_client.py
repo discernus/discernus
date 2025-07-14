@@ -351,3 +351,7 @@ class ThinLiteLLMClient:
         except Exception as e:
             print(f"LiteLLM call failed ({e}), using fallback")
             return self._mock_response("", model) 
+
+    def get_model_provenance(self) -> Dict[str, Any]:
+        """Get model provenance from the underlying LiteLLMClient"""
+        return self.litellm.get_model_provenance() 

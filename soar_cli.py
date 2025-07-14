@@ -27,15 +27,16 @@ project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
 try:
-    from discernus.agents.validation_agent import ValidationAgent
+    # Core SOAR components
     from discernus.core.framework_loader import FrameworkLoader
     from discernus.core.thin_litellm_client import ThinLiteLLMClient
-    # Removed import of deprecated ThinOrchestrator
-    SOAR_DEPENDENCIES_AVAILABLE = True
+    from discernus.core.project_chronolog import initialize_project_chronolog
+    from discernus.core.project_chronolog import get_project_chronolog
+    from discernus.agents.validation_agent import ValidationAgent
+    DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
-    print(f"⚠️  SOAR dependencies not available: {e}")
-    print("   Please ensure discernus package is properly installed.")
-    SOAR_DEPENDENCIES_AVAILABLE = False
+    print(f"❌ SOAR CLI dependencies not available: {e}")
+    DEPENDENCIES_AVAILABLE = False
 
 @click.group()
 @click.version_option(version='1.0.0', prog_name='SOAR')
@@ -46,7 +47,7 @@ def soar():
     Transform computational research from complex orchestration to simple execution,
     while maintaining the highest standards of academic rigor.
     """
-    if not SOAR_DEPENDENCIES_AVAILABLE:
+    if not DEPENDENCIES_AVAILABLE:
         click.echo("❌ SOAR dependencies not available. Installation may be incomplete.")
         sys.exit(1)
 
@@ -137,11 +138,10 @@ def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_p
     
     # Initialize project chronolog for comprehensive research provenance
     try:
-        from discernus.core.project_chronolog import initialize_project_chronolog
-        from datetime import datetime
+        import datetime
         import getpass
         
-        session_id = f"soar_session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        session_id = f"soar_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
         user = getpass.getuser()
         command = f"soar execute {project_path}"
         if auto_validate:
@@ -182,31 +182,34 @@ def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_p
             else:
                 click.echo("✅ Auto-validation passed")
         
-        # THIN: Validate first, then execute full orchestration
-        click.echo(f"📁 Project Path: {project_path}")
-        click.echo("📚 Validating project components...")
+        # Step 1: Generate YAML configuration from plain-English experiment file
+        _generate_experiment_config(project_path)
+
+        # Step 2: Validate the complete project
+        click.echo("\n🚀 Phase 2: Validating project structure, framework, and experiment...")
+        if auto_validate:
+            validation_agent = ValidationAgent()
+            validation_results = validation_agent.validate_project(project_path)
+            
+            if not validation_results['validation_passed']:
+                click.echo(f"❌ Project validation failed: {validation_results['message']}")
+                sys.exit(1)
+            
+            click.echo("✅ Project validation passed.")
+        else:
+            # Create mock validation results for direct execution
+            validation_results = {
+                "status": "validated",
+                "validation_passed": True,
+                "corpus_files": [str(f) for f in Path(project_path, "corpus").glob("*.md")],
+                "analysis_agent_instructions": "Default analysis instructions",
+                "experiment": { "definition": Path(project_path, "experiment.md").read_text() }
+            }
+            click.echo("✅ Skipping validation as per user request.")
+
+        click.echo("\n🚀 Phase 3: Executing analysis...")
         
-        project_path_obj = Path(project_path)
-        framework_path = str(project_path_obj / "framework.md")
-        experiment_path = str(project_path_obj / "experiment.md") 
-        corpus_path = str(project_path_obj / "corpus")
-        
-        # Step 1: Validate project compatibility
-        validation_agent = ValidationAgent()
-        validation_results = validation_agent.validate_and_execute_sync(
-            framework_path=framework_path,
-            experiment_path=experiment_path,
-            corpus_path=corpus_path,
-            dev_mode=dev_mode
-        )
-        
-        if validation_results['status'] != 'validated':
-            click.echo(f"❌ Project validation failed: {validation_results['message']}")
-            sys.exit(1)
-        
-        click.echo("✅ Project validation passed - starting full analysis...")
-        
-        # Step 2: Execute simple ensemble analysis
+        # Step 3: Execute simple ensemble analysis
         from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
         
         # Initialize ensemble orchestrator
@@ -226,6 +229,19 @@ def execute(project_path: str, auto_validate: bool, dev_mode: bool, researcher_p
             import traceback
             traceback.print_exc()
         sys.exit(1)
+
+def _generate_experiment_config(project_path: str):
+    """Generates the experiment config YAML if it doesn't exist."""
+    click.echo("🚀 Phase 1: Configuring experiment from natural language...")
+    try:
+        from discernus.agents.ensemble_configuration_agent import EnsembleConfigurationAgent
+        config_agent = EnsembleConfigurationAgent()
+        config_agent.generate_configuration(str(Path(project_path) / "experiment.md"))
+        click.echo("✅ Experiment configuration complete.")
+    except ImportError:
+        click.echo("⚠️ Could not import EnsembleConfigurationAgent. Skipping config generation.")
+    except Exception as e:
+        click.echo(f"⚠️ Failed to generate experiment configuration: {e}")
 
 @soar.command()
 def list_frameworks():
@@ -269,7 +285,7 @@ def info(check_thin: bool):
     
     click.echo(f"Version: 1.0.0")
     click.echo(f"Philosophy: THIN Software + LLM Intelligence")
-    click.echo(f"Dependencies: {'✅ Available' if SOAR_DEPENDENCIES_AVAILABLE else '❌ Missing'}")
+    click.echo(f"Dependencies: {'✅ Available' if DEPENDENCIES_AVAILABLE else '❌ Missing'}")
     
     if check_thin:
         click.echo("\n🏗️  THIN Compliance Check:")

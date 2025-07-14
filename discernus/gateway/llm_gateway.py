@@ -1,33 +1,78 @@
 #!/usr/bin/env python3
 """
-LLM Gateway - Simplified API Wrapper
-===================================
+LLM Gateway
+===========
 
-THIN Principle: Ultra-thin wrapper around LiteLLM client for clean API access.
-Provides minimal abstraction layer for LLM calls without adding complexity.
-
-Purpose: Hide LiteLLM implementation details while maintaining simple interface.
+THIN Principle: This component is a pure, stateless execution gateway. It takes a
+prompt and a specific model identifier and executes the call. It has no knowledge
+of model capabilities, costs, or fallback logic.
 """
 
-from .litellm_client import LiteLLMClient
-from dotenv import load_dotenv
-from typing import Dict, Any
+import litellm
+from typing import Dict, Any, Tuple
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Instantiate a single, reusable client instance
-# This is more efficient than creating a new client for every request.
-llm_client = LiteLLMClient()
-
-
-async def get_llm_analysis(text: str, experiment_def: Dict[str, Any], model: str) -> dict:
+class LLMGateway:
     """
-    A simple wrapper to call the existing LiteLLMClient.
-
-    This function serves as the clean entry point,
-    hiding the implementation details of the underlying client.
+    A stateless gateway for executing LLM calls via LiteLLM.
     """
-    # For now, we are not handling the 'cost' return value, but we can add it later.
-    analysis_result, _ = llm_client.analyze_text(text=text, experiment_def=experiment_def, model_name=model)
-    return analysis_result
+
+    def __init__(self):
+        # The gateway itself is stateless and requires no initialization
+        pass
+
+    def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.") -> Tuple[str, Dict[str, Any]]:
+        """
+        Executes a single, direct call to a specified LLM.
+
+        Args:
+            model: The exact model identifier to use (e.g., "claude-3-5-sonnet-20240620").
+            prompt: The user prompt for the model.
+            system_prompt: The system prompt to set the model's persona.
+
+        Returns:
+            A tuple containing the raw response string and a metadata dictionary.
+        """
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": prompt}
+        ]
+
+        try:
+            response = litellm.completion(model=model, messages=messages, stream=False)
+            
+            # Extract content and usage with runtime attribute access
+            content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
+            
+            usage_obj = getattr(response, 'usage', None)
+            usage_data = {
+                "prompt_tokens": getattr(usage_obj, 'prompt_tokens', 0) if usage_obj else 0,
+                "completion_tokens": getattr(usage_obj, 'completion_tokens', 0) if usage_obj else 0,
+                "total_tokens": getattr(usage_obj, 'total_tokens', 0) if usage_obj else 0
+            }
+            
+            return content, {
+                "success": True,
+                "model": model,
+                "usage": usage_data
+            }
+            
+        except Exception as e:
+            error_message = f"LLM call failed for model {model}: {str(e)}"
+            print(f"❌ {error_message}")
+            return "", {"success": False, "error": error_message, "model": model}
+
+if __name__ == '__main__':
+    # Demo of how to use the LLMGateway
+    gateway = LLMGateway()
+    
+    print("Executing call with Claude Haiku...")
+    response, metadata = gateway.execute_call(
+        model="claude-3-haiku-20240307",
+        prompt="Tell me a short story about a robot who learns to paint."
+    )
+    
+    print("\nResponse:")
+    print(response)
+    
+    print("\nMetadata:")
+    print(metadata) 

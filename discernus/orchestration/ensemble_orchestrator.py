@@ -23,58 +23,22 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 import os # Added for os.urandom
+import yaml
+import re
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 try:
-    from discernus.core.thin_litellm_client import ThinLiteLLMClient
-    from discernus.gateway.litellm_client import LiteLLMClient  # Add our improved client
+    from discernus.gateway.model_registry import ModelRegistry
+    from discernus.gateway.llm_gateway import LLMGateway
     from discernus.core.conversation_logger import ConversationLogger
+    from discernus.core.secure_code_executor import SecureCodeExecutor
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"EnsembleOrchestrator dependencies not available: {e}")
     DEPENDENCIES_AVAILABLE = False
-
-class LiteLLMClientAdapter:
-    """Adapter to make LiteLLMClient compatible with EnsembleOrchestrator's expected interface"""
-    
-    def __init__(self):
-        self.client = LiteLLMClient()
-    
-    def call_llm(self, prompt: str, role: str) -> str:
-        """Adapt LiteLLMClient.analyze_text to the call_llm interface"""
-        # Create a minimal experiment definition for the analyze_text method
-        experiment_def = {
-            "framework": {"name": "ensemble_framework"},
-            "research_question": f"Ensemble analysis task: {role}"
-        }
-        
-        # Use a fast, cost-effective model for analysis tasks
-        model_name = "vertex_ai/gemini-2.5-flash"  # Fast and cheap
-        
-        try:
-            # Call our improved client with parameter manager
-            result, cost = self.client.analyze_text(prompt, experiment_def, model_name)
-            
-            # Extract the text response
-            if isinstance(result, dict) and 'raw_response' in result:
-                return result['raw_response']
-            elif isinstance(result, str):
-                return result
-            else:
-                print(f"⚠️ Unexpected result type from LiteLLMClient: {type(result)}")
-                return str(result) if result else ""
-                
-        except Exception as e:
-            print(f"⚠️ LiteLLMClientAdapter error: {e}")
-            # Fallback to empty string rather than None to avoid issues
-            return ""
-    
-    def get_model_provenance(self) -> Dict[str, Any]:
-        """Get model provenance from the underlying LiteLLMClient"""
-        return self.client.get_model_provenance()
 
 class EnsembleOrchestrator:
     """
@@ -89,19 +53,17 @@ class EnsembleOrchestrator:
         # Core components with improved LLM client
         if DEPENDENCIES_AVAILABLE:
             try:
-                # Use our improved LiteLLMClient with parameter manager
-                self.llm_client = LiteLLMClientAdapter()
-                print("✅ EnsembleOrchestrator using improved LiteLLMClient with parameter manager")
-            except:
-                try:
-                    # Fallback to original client if needed
-                    self.llm_client = ThinLiteLLMClient()
-                    print("⚠️ EnsembleOrchestrator falling back to ThinLiteLLMClient")
-                except:
-                    self.llm_client = None
-                    print("❌ EnsembleOrchestrator: No LLM client available")
+                # Use our new, clean components
+                self.model_registry = ModelRegistry()
+                self.gateway = LLMGateway()
+                print("✅ EnsembleOrchestrator using ModelRegistry and LLMGateway")
+            except Exception as e:
+                self.model_registry = None
+                self.gateway = None
+                print(f"❌ EnsembleOrchestrator: Failed to initialize gateway components: {e}")
         else:
-            self.llm_client = None
+            self.model_registry = None
+            self.gateway = None
             
         self.redis_client = redis.Redis(host='localhost', port=6379, db=0)
         self.logger = None  # Will be initialized per session
@@ -109,9 +71,44 @@ class EnsembleOrchestrator:
         # Session state
         self.session_id = None
         self.analysis_results = []
+        self.analysis_matrix = {}
         self.synthesis_result = None
         self.outliers = []
         
+    def _parse_experiment_config(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Parse YAML config block from experiment.md"""
+        
+        # Default configuration
+        default_config = {
+            'models': ['vertex_ai/gemini-2.5-flash'],
+            'remove_synthesis': False,
+            'batch_size': 1,
+            'num_runs': 1
+        }
+        
+        # Extract experiment definition from validation results
+        experiment_definition = validation_results.get('experiment', {}).get('definition', '')
+        
+        if not experiment_definition:
+            return default_config
+            
+        # Extract YAML block from markdown
+        try:
+            yaml_match = re.search(r'```yaml\n(.*?)```', experiment_definition, re.DOTALL)
+            if not yaml_match:
+                return default_config
+                
+            yaml_content = yaml_match.group(1)
+            config = yaml.safe_load(yaml_content)
+            
+            # Merge with defaults
+            default_config.update(config)
+            return default_config
+            
+        except Exception as e:
+            print(f"⚠️  Could not parse experiment YAML, using defaults. Error: {e}")
+            return default_config
+
     async def execute_ensemble_analysis(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
         """
         THIN Principle: LLM decides research workflow based on experiment requirements
@@ -120,13 +117,17 @@ class EnsembleOrchestrator:
             # Initialize session
             self._init_session_logging()
             
+            # Parse experiment configuration from YAML
+            experiment_config = self._parse_experiment_config(validation_results)
+            
             self._log_system_event("ENSEMBLE_STARTED", {
                 "corpus_file_count": len(validation_results.get('corpus_files', [])),
-                "session_id": self.session_id
+                "session_id": self.session_id,
+                "experiment_config": experiment_config
             })
             
-            # Step 1: Spawn analysis agents (one per corpus text)
-            await self._spawn_analysis_agents(validation_results)
+            # Step 1: Spawn analysis agents (one per corpus text, per model)
+            await self._spawn_analysis_agents(validation_results, experiment_config)
             
             # Step 2: Ask LLM what to do next based on experiment requirements
             coordination_prompt = f"""
@@ -136,10 +137,13 @@ class EnsembleOrchestrator:
             And here are the experiment requirements:
             {validation_results.get('experiment', {}).get('definition', 'No experiment definition provided')}
             
-            Based on the experiment requirements, what should happen next?
+            Experiment Configuration:
+            {json.dumps(experiment_config, indent=2)}
+
+            Based on all the information above (the analysis results, the experiment requirements, and the specific YAML configuration), what should happen next?
             Options:
             - If experiment requires synthesis/moderation/referee: respond "ADVERSARIAL_SYNTHESIS"
-            - If experiment requires bias isolation (like Attesor study): respond "RAW_AGGREGATION" 
+            - If experiment requires bias isolation (e.g., remove_synthesis: true): respond "RAW_AGGREGATION" 
             - If you need more information: respond "NEED_MORE_INFO"
             
             Respond with just the action name.
@@ -155,7 +159,10 @@ class EnsembleOrchestrator:
             else:
                 # Default to simple aggregation if unclear
                 final_results = await self._simple_aggregation()
-            
+
+            # Step 4: Run statistical analysis
+            await self._run_statistical_analysis()
+
             self._log_system_event("ENSEMBLE_COMPLETED", {
                 "session_id": self.session_id,
                 "final_status": "success",
@@ -180,7 +187,7 @@ class EnsembleOrchestrator:
                 "message": f"Ensemble analysis failed: {str(e)}"
             }
     
-    async def _spawn_analysis_agents(self, validation_results: Dict[str, Any]):
+    async def _spawn_analysis_agents(self, validation_results: Dict[str, Any], experiment_config: Dict[str, Any]):
         """THIN: Let LLM validate inputs and decide analysis approach"""
         
         validation_prompt = f"""
@@ -204,18 +211,23 @@ class EnsembleOrchestrator:
         
         corpus_files = validation_results.get('corpus_files', [])
         analysis_instructions = validation_results.get('analysis_agent_instructions', '')
+        models = experiment_config.get('models', ['vertex_ai/gemini-2.5-flash'])
         
         self._log_system_event("ANALYSIS_AGENTS_SPAWNING", {
-            "agent_count": len(corpus_files),
+            "agent_count": len(corpus_files) * len(models),
+            "models": models,
             "instructions_preview": analysis_instructions[:200] + "..." if len(analysis_instructions) > 200 else analysis_instructions
         })
         
-        # Process each corpus file with its own analysis agent
+        # Process each corpus file with its own analysis agent for each model
         analysis_tasks = []
-        for i, corpus_file in enumerate(corpus_files):
-            agent_id = f"analysis_agent_{i+1}"
-            task = self._run_analysis_agent(agent_id, corpus_file, analysis_instructions)
-            analysis_tasks.append(task)
+        num_runs = experiment_config.get('num_runs', 1)
+        for run in range(num_runs):
+            for model_name in models:
+                for i, corpus_file in enumerate(corpus_files):
+                    agent_id = f"analysis_agent_run{run+1}_{model_name.replace('/', '_')}_{i+1}"
+                    task = self._run_analysis_agent(agent_id, corpus_file, analysis_instructions, model_name, run + 1)
+                    analysis_tasks.append(task)
         
         # THIN: Let LLM decide execution strategy
         execution_prompt = f"""
@@ -288,18 +300,100 @@ class EnsembleOrchestrator:
         
         self.analysis_results = successful_results
         
+        # Populate the analysis matrix
+        for result in self.analysis_results:
+            file_name = result.get("file_name")
+            model_name = result.get("model_name")
+            run_num = result.get("run_num")
+            if file_name and model_name:
+                if file_name not in self.analysis_matrix:
+                    self.analysis_matrix[file_name] = {}
+                if model_name not in self.analysis_matrix[file_name]:
+                    self.analysis_matrix[file_name][model_name] = {}
+                self.analysis_matrix[file_name][model_name][run_num] = result
+
         self._log_system_event("ANALYSIS_AGENTS_COMPLETED", {
             "successful_count": len(successful_results),
-            "failed_count": failed_count
+            "failed_count": failed_count,
+            "analysis_matrix": self.analysis_matrix
         })
     
-    async def _run_analysis_agent(self, agent_id: str, corpus_file: str, instructions: str) -> Dict[str, Any]:
+    async def _run_statistical_analysis(self):
+        """Run statistical analysis on the analysis matrix."""
+        
+        self._log_system_event("STATISTICAL_ANALYSIS_STARTED", {
+            "session_id": self.session_id,
+        })
+
+        # Prepare data for statistical analysis
+        statistical_data = self._prepare_statistical_data()
+
+        # Generate Python code for statistical analysis
+        code_generation_prompt = f"""
+        You are a data science expert. Generate Python code to perform statistical analysis on the following data:
+
+        {json.dumps(statistical_data, indent=2)}
+
+        The data is a dictionary where the keys are text filenames and the values are dictionaries
+        where the keys are model names and the values are lists of analysis results for each run.
+
+        Your task is to generate Python code to:
+        1. Calculate Cronbach's alpha for each text-model pair to assess inter-run reliability.
+        2. Calculate the mean and standard deviation of the scores for each text-model pair.
+        3. Perform an analysis of variance (ANOVA) to compare the scores between models for each text.
+        4. Generate a summary report of the statistical analysis.
+
+        The code should use the pandas and scipy libraries and store the results in a dictionary named 'statistical_results'.
+        """
+
+        statistical_code = await self._call_llm_async(code_generation_prompt, "statistical_code_generator")
+
+        # Execute the statistical analysis code
+        executor = SecureCodeExecutor()
+        execution_result = executor.execute_code(statistical_code, {'statistical_data': statistical_data})
+
+        # Save the statistical analysis results
+        if execution_result['success']:
+            timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+            results_dir = self.results_path / f"{timestamp}"
+            results_dir.mkdir(exist_ok=True)
+            (results_dir / "statistical_analysis_results.json").write_text(json.dumps(execution_result['result_data'], indent=2))
+            self._log_system_event("STATISTICAL_ANALYSIS_COMPLETED", {
+                "session_id": self.session_id,
+                "results_file": str(results_dir / "statistical_analysis_results.json")
+            })
+        else:
+            self._log_system_event("STATISTICAL_ANALYSIS_FAILED", {
+                "session_id": self.session_id,
+                "error": execution_result['error']
+            })
+
+    def _prepare_statistical_data(self):
+        """Prepare the analysis matrix for statistical analysis."""
+        statistical_data = {}
+        for text, models in self.analysis_matrix.items():
+            statistical_data[text] = {}
+            for model, runs in models.items():
+                statistical_data[text][model] = []
+                for run, result in runs.items():
+                    # Assuming the analysis_response is a JSON string with a 'score' field
+                    try:
+                        analysis_data = json.loads(result['analysis_response'])
+                        statistical_data[text][model].append(analysis_data.get('score'))
+                    except (json.JSONDecodeError, KeyError):
+                        # Handle cases where the score is not available or the response is not a valid JSON
+                        statistical_data[text][model].append(None)
+        return statistical_data
+
+    async def _run_analysis_agent(self, agent_id: str, corpus_file: str, instructions: str, model_name: str, run_num: int) -> Dict[str, Any]:
         """Run a single analysis agent on one corpus text"""
         
         self._log_system_event("AGENT_SPAWNED", {
             "agent_id": agent_id,
             "agent_type": "analysis_agent",
-            "corpus_file": Path(corpus_file).name
+            "corpus_file": Path(corpus_file).name,
+            "model_name": model_name,
+            "run_num": run_num
         })
         
         # Read the corpus text
@@ -324,7 +418,7 @@ TASK: Apply the framework systematically to this text. Provide structured output
 Be precise and cite specific text passages to support your scores."""
 
         # Call LLM
-        response = await self._call_llm_async(analysis_prompt, agent_id)
+        response = await self._call_llm_async(analysis_prompt, agent_id, model_name)
         
         self._log_system_event("AGENT_COMPLETED", {
             "agent_id": agent_id,
@@ -336,7 +430,9 @@ Be precise and cite specific text passages to support your scores."""
             "agent_id": agent_id,
             "corpus_file": corpus_file,
             "analysis_response": response,
-            "file_name": Path(corpus_file).name
+            "file_name": Path(corpus_file).name,
+            "model_name": model_name,
+            "run_num": run_num
         }
     
     async def _run_synthesis_agent(self):
@@ -721,35 +817,21 @@ Format as structured academic output suitable for peer review."""
     def _get_model_provenance(self) -> Dict[str, Any]:
         """Extract model information for research provenance"""
         try:
-            # Check if the client has the new get_model_provenance method
-            if hasattr(self.llm_client, 'get_model_provenance'):
-                # Get dynamic model information from the LiteLLMClient
-                provenance = self.llm_client.get_model_provenance()
-                
-                # Add orchestrator-specific metadata
-                provenance["orchestrator_timestamp"] = datetime.now().isoformat()
-                provenance["notes"] = "Extracted from active LiteLLMClient instance"
-                
-                return provenance
-            else:
-                # Fallback to the old method for ThinLiteLLMClient
-                default_model = "vertex_ai/gemini-2.5-flash"  # Current default from code inspection
-                
-                return {
-                    "primary_model": default_model,
-                    "model_family": "gemini",
-                    "model_version": "2.5-flash",
-                    "provider": "vertex_ai",
-                    "capture_method": "code_inspection_fallback",
-                    "capture_timestamp": datetime.now().isoformat(),
-                    "notes": "Fallback method - client doesn't support dynamic model extraction"
-                }
+            if not self.model_registry:
+                raise ValueError("ModelRegistry not initialized")
+            
+            # Get all available models from the registry
+            available_models = self.model_registry.list_models()
+            
+            return {
+                "available_models": available_models,
+                "capture_method": "model_registry_query",
+                "capture_timestamp": datetime.now().isoformat(),
+                "notes": f"Registry loaded from {self.model_registry.config_path}"
+            }
         except Exception as e:
             return {
-                "primary_model": "error",
-                "model_family": "error",
-                "model_version": "error", 
-                "provider": "error",
+                "available_models": "error",
                 "capture_method": "exception",
                 "capture_timestamp": datetime.now().isoformat(),
                 "notes": f"Error capturing model info: {str(e)}"
@@ -784,67 +866,41 @@ Format as structured academic output suitable for peer review."""
                 }
             )
     
-    async def _call_llm_async(self, prompt: str, agent_id: str) -> str:
+    async def _call_llm_async(self, prompt: str, agent_id: str, model_name: str = "vertex_ai/gemini-2.5-flash") -> str:
         """Call LLM asynchronously with proper logging"""
         
-        if not self.llm_client:
-            print(f"🔴 DEBUG: No LLM client available for {agent_id}")
+        if not self.gateway:
+            print(f"🔴 DEBUG: No LLM gateway available for {agent_id}")
             return f"[MOCK RESPONSE] {agent_id} would analyze: {prompt[:100]}..."
         
         try:
-            # Debug logging
-            print(f"🟡 DEBUG: Starting LLM call for {agent_id}")
-            print(f"🟡 DEBUG: Prompt length: {len(prompt)}")
-            print(f"🟡 DEBUG: LLM client type: {type(self.llm_client)}")
+            print(f"🟡 DEBUG: Starting LLM call for {agent_id} with model {model_name}")
             
-            # Log the call
             if self.logger:
                 self.logger.log_llm_message(
                     conversation_id=self.conversation_id or self.session_id or "unknown",
                     speaker=agent_id,
                     message=prompt,
-                    metadata={
-                        "type": "llm_request",
-                        "agent_id": agent_id,
-                        "session_id": self.session_id
-                    }
+                    metadata={"type": "llm_request", "agent_id": agent_id, "session_id": self.session_id, "model_name": model_name}
                 )
             
-            # Make the LLM call (wrap sync call for async context)
-            import asyncio
-            if self.llm_client and hasattr(self.llm_client, 'call_llm'):
-                print(f"🟡 DEBUG: Calling LLM via async executor for {agent_id}")
-                # Type check to satisfy linter
-                llm_client = self.llm_client
-                response = await asyncio.get_event_loop().run_in_executor(
-                    None, 
-                    lambda: llm_client.call_llm(prompt, agent_id)
-                )
-                print(f"🟢 DEBUG: Got response for {agent_id}, length: {len(response) if response else 'None'}")
-                print(f"🟢 DEBUG: Response preview: {str(response)[:200] if response else 'None'}")
-            else:
-                print(f"🔴 DEBUG: LLM client missing call_llm method for {agent_id}")
-                response = f"[ERROR] LLM client missing call_llm method"
+            # Make the LLM call
+            content, metadata = await asyncio.get_event_loop().run_in_executor(
+                None,
+                lambda: self.gateway.execute_call(model=model_name, prompt=prompt)
+            )
             
-            # Handle None response
-            if response is None:
-                print(f"🔴 DEBUG: Got None response for {agent_id}")
-                response = f"[EMPTY RESPONSE] {agent_id} returned None"
+            print(f"🟢 DEBUG: Got response for {agent_id}, length: {len(content) if content else 'None'}")
             
-            # Log the response
             if self.logger:
                 self.logger.log_llm_message(
                     conversation_id=self.conversation_id or self.session_id or "unknown",
                     speaker=agent_id,
-                    message=response,
-                    metadata={
-                        "type": "llm_response",
-                        "agent_id": agent_id,
-                        "session_id": self.session_id
-                    }
+                    message=content,
+                    metadata={"type": "llm_response", "agent_id": agent_id, "session_id": self.session_id, **metadata}
                 )
             
-            return response
+            return content
             
         except Exception as e:
             error_msg = f"LLM call failed for {agent_id}: {str(e)}"
@@ -855,11 +911,7 @@ Format as structured academic output suitable for peer review."""
                     conversation_id=self.conversation_id or self.session_id or "unknown",
                     speaker="system",
                     message=error_msg,
-                    metadata={
-                        "type": "llm_error",
-                        "agent_id": agent_id,
-                        "session_id": self.session_id
-                    }
+                    metadata={"type": "llm_error", "agent_id": agent_id, "session_id": self.session_id, "model_name": model_name}
                 )
             
-            return f"[ERROR] {error_msg}" 
+            return f"[ERROR] {error_msg}"
