@@ -245,26 +245,33 @@ class EnsembleOrchestrator:
             else:
                 result_types.append("Success")
         
-        results_prompt = f"""
-        You are the results processing agent. Process these analysis results:
+        # Count actual failures
+        failed_count = sum(1 for r in self.analysis_results if isinstance(r, Exception))
         
-        Results: {result_types}
+        # Only ask about failure handling if there are actual failures
+        if failed_count > 0:
+            results_prompt = f"""
+            You are the results processing agent. Process these analysis results:
+            
+            Results: {result_types}
+            
+            There are {failed_count} failed analyses. What should we do?
+            - "RETRY": Attempt to retry failed analyses
+            - "FILTER": Remove failed results and continue with {len(self.analysis_results) - failed_count} successful results
+            - "ABORT": Stop processing due to failures
+            
+            Respond with just the action name.
+            """
+            
+            results_decision = await self._call_llm_async(results_prompt, "results_processing_agent")
+            
+            if "ABORT" in results_decision.upper():
+                raise RuntimeError(f"LLM decided to abort due to {failed_count} failed analyses")
+            
+            # Handle RETRY or FILTER logic here if needed in the future
+            # For now, proceed with filtering successful results
         
-        Should failed results be:
-        - "RETRY": Attempt to retry failed analyses
-        - "FILTER": Remove failed results and continue
-        - "ABORT": Stop processing due to failures
-        
-        Respond with just the action name.
-        """
-        
-        results_decision = await self._call_llm_async(results_prompt, "results_processing_agent")
-        
-        if "ABORT" in results_decision.upper():
-            failed_count = sum(1 for r in self.analysis_results if isinstance(r, Exception))
-            raise RuntimeError(f"LLM decided to abort due to {failed_count} failed analyses")
-        
-        # Filter successful results (for now, RETRY logic can be added later)
+        # Filter successful results (whether we had failures or not)
         successful_results = []
         for i, result in enumerate(self.analysis_results):
             if isinstance(result, Exception):
@@ -279,7 +286,7 @@ class EnsembleOrchestrator:
         
         self._log_system_event("ANALYSIS_AGENTS_COMPLETED", {
             "successful_count": len(successful_results),
-            "failed_count": len(corpus_files) - len(successful_results)
+            "failed_count": failed_count
         })
     
     async def _run_analysis_agent(self, agent_id: str, corpus_file: str, instructions: str) -> Dict[str, Any]:
