@@ -131,7 +131,7 @@ class ValidationAgent:
         if "error" in execution_plan:
              return self._format_error('execution_planning', f"Execution planning failed: {execution_plan['error']}", {'execution_plan': execution_plan})
 
-        return {
+        final_result = {
             'status': 'success', 'validation_passed': True, 'project_path': str(project_path_obj),
             'validation_timestamp': datetime.now().isoformat(),
             'structure_result': structure_result, 'coherence_result': coherence_result,
@@ -141,6 +141,8 @@ class ValidationAgent:
             'execution_plan': execution_plan,
             'ready_for_execution': True
         }
+        final_result.update(corpus_result)
+        return final_result
 
     def get_pre_execution_summary(self, validation_result: Dict[str, Any]) -> Dict[str, Any]:
         """Generates a structured summary of the execution plan for user confirmation."""
@@ -598,6 +600,7 @@ Provide your assessment now."""
             'status': 'success',
             'validation_passed': True,
             'corpus_path': str(actual_corpus_path),
+            'corpus_files': corpus_files,
             'file_count': len(corpus_files),
             'has_manifest': has_manifest,
             'manifest_files': [str(f) for f in manifest_files],
