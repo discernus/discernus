@@ -51,6 +51,48 @@ class ModelRegistry:
         details = self.get_model_details(model_name)
         return details.get('provider') if details else None
 
+    def get_model_for_task(self, task_type: str) -> Optional[str]:
+        """
+        Gets the best available model for a given task, based on utility tier.
+        """
+        # Filter models that are suitable for the task
+        suitable_models = [
+            name for name, details in self.models.items()
+            if task_type in details.get('task_suitability', [])
+        ]
+        
+        if not suitable_models:
+            return None
+            
+        # Sort by utility tier (lower is better)
+        sorted_models = sorted(suitable_models, key=lambda name: self.models[name].get('utility_tier', 99))
+        
+        return sorted_models[0]
+
+    def get_fallback_model(self, failed_model_name: str) -> Optional[str]:
+        """
+        Gets the next best model in the fallback chain.
+        """
+        failed_model_details = self.get_model_details(failed_model_name)
+        if not failed_model_details:
+            return None
+
+        current_tier = failed_model_details.get('utility_tier')
+        if current_tier is None:
+            return None
+
+        # Find all models with a higher utility tier number (lower priority)
+        fallback_candidates = [
+            name for name, details in self.models.items()
+            if details.get('utility_tier', 99) > current_tier
+        ]
+
+        if not fallback_candidates:
+            return None
+
+        # Return the best of the fallback options
+        return sorted(fallback_candidates, key=lambda name: self.models[name].get('utility_tier', 99))[0]
+
 # Singleton instance to be used across the application
 _model_registry_instance = None
 

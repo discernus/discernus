@@ -35,6 +35,7 @@ try:
     from discernus.gateway.llm_gateway import LLMGateway
     from discernus.core.conversation_logger import ConversationLogger
     from discernus.core.secure_code_executor import SecureCodeExecutor
+    from discernus.agents.statistical_analysis_configuration_agent import StatisticalAnalysisConfigurationAgent
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"EnsembleOrchestrator dependencies not available: {e}")
@@ -55,15 +56,18 @@ class EnsembleOrchestrator:
             try:
                 # Use our new, clean components
                 self.model_registry = ModelRegistry()
-                self.gateway = LLMGateway()
-                print("✅ EnsembleOrchestrator using ModelRegistry and LLMGateway")
+                self.gateway = LLMGateway(self.model_registry) # Pass registry to gateway
+                self.statistical_config_agent = StatisticalAnalysisConfigurationAgent()
+                print("✅ EnsembleOrchestrator using ModelRegistry, LLMGateway, and StatisticalAnalysisConfigurationAgent")
             except Exception as e:
                 self.model_registry = None
                 self.gateway = None
+                self.statistical_config_agent = None
                 print(f"❌ EnsembleOrchestrator: Failed to initialize gateway components: {e}")
         else:
             self.model_registry = None
             self.gateway = None
+            self.statistical_config_agent = None
             
         self.redis_client = redis.Redis(host='localhost', port=6379, db=0)
         self.logger = None  # Will be initialized per session
@@ -74,6 +78,7 @@ class EnsembleOrchestrator:
         self.analysis_matrix = {}
         self.synthesis_result = None
         self.outliers = []
+        self.statistical_plan = None
         
     def _parse_experiment_config(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
         """Parse YAML config block from experiment.md"""
@@ -116,7 +121,15 @@ class EnsembleOrchestrator:
         try:
             # Initialize session
             self._init_session_logging()
-            
+
+            # Step 1: Validate statistical analysis plan BEFORE running analysis
+            experiment_path = self.project_path / "experiment.md"
+            self.statistical_plan = self.statistical_config_agent.generate_statistical_plan(str(experiment_path))
+            self._log_system_event("STATISTICAL_PLAN_GENERATED", self.statistical_plan)
+
+            if self.statistical_plan.get("validation_status") != "complete":
+                raise ValueError(f"Statistical plan validation failed: {self.statistical_plan.get('notes', 'No notes provided.')}")
+
             # Parse experiment configuration from YAML
             experiment_config = self._parse_experiment_config(validation_results)
             
@@ -149,7 +162,11 @@ class EnsembleOrchestrator:
             Respond with just the action name.
             """
             
-            next_action = await self._call_llm_async(coordination_prompt, "coordination_llm")
+            model_name = self.model_registry.get_model_for_task('coordination')
+            if not model_name:
+                print("⚠️ No suitable model found for coordination, using default.")
+                model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+            next_action = await self._call_llm_async(coordination_prompt, "coordination_llm", model_name)
             
             # Step 3: Execute whatever the LLM decided (THIN: dumb execution)
             if "RAW_AGGREGATION" in next_action.upper():
@@ -160,8 +177,8 @@ class EnsembleOrchestrator:
                 # Default to simple aggregation if unclear
                 final_results = await self._simple_aggregation()
 
-            # Step 4: Run statistical analysis
-            await self._run_statistical_analysis()
+            # Step 4: Run statistical analysis based on the validated plan
+            await self._run_statistical_analysis(self.statistical_plan)
 
             self._log_system_event("ENSEMBLE_COMPLETED", {
                 "session_id": self.session_id,
@@ -204,7 +221,11 @@ class EnsembleOrchestrator:
         If not, respond with: "INSUFFICIENT_INPUTS" followed by what's missing.
         """
         
-        validation_decision = await self._call_llm_async(validation_prompt, "input_validation_agent")
+        model_name = self.model_registry.get_model_for_task('validation')
+        if not model_name:
+            print("⚠️ No suitable model found for input validation, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        validation_decision = await self._call_llm_async(validation_prompt, "input_validation_agent", model_name)
         
         if "INSUFFICIENT_INPUTS" in validation_decision.upper():
             raise ValueError(f"LLM input validation failed: {validation_decision}")
@@ -240,7 +261,11 @@ class EnsembleOrchestrator:
         Consider system load and task complexity. Respond with just the strategy name.
         """
         
-        execution_strategy = await self._call_llm_async(execution_prompt, "execution_strategy_agent")
+        model_name = self.model_registry.get_model_for_task('coordination')
+        if not model_name:
+            print("⚠️ No suitable model found for execution strategy, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        execution_strategy = await self._call_llm_async(execution_prompt, "execution_strategy_agent", model_name)
         
         if "SEQUENTIAL" in execution_strategy.upper():
             print("🔧 LLM chose SEQUENTIAL execution")
@@ -279,7 +304,11 @@ class EnsembleOrchestrator:
             Respond with just the action name.
             """
             
-            results_decision = await self._call_llm_async(results_prompt, "results_processing_agent")
+            model_name = self.model_registry.get_model_for_task('coordination')
+            if not model_name:
+                print("⚠️ No suitable model found for results processing, using default.")
+                model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+            results_decision = await self._call_llm_async(results_prompt, "results_processing_agent", model_name)
             
             if "ABORT" in results_decision.upper():
                 raise RuntimeError(f"LLM decided to abort due to {failed_count} failed analyses")
@@ -318,35 +347,38 @@ class EnsembleOrchestrator:
             "analysis_matrix": self.analysis_matrix
         })
     
-    async def _run_statistical_analysis(self):
-        """Run statistical analysis on the analysis matrix."""
+    async def _run_statistical_analysis(self, statistical_plan: Dict[str, Any]):
+        """Run statistical analysis on the analysis matrix based on a dynamic plan."""
         
         self._log_system_event("STATISTICAL_ANALYSIS_STARTED", {
             "session_id": self.session_id,
+            "statistical_plan": statistical_plan
         })
 
         # Prepare data for statistical analysis
         statistical_data = self._prepare_statistical_data()
 
-        # Generate Python code for statistical analysis
+        # Generate Python code for statistical analysis based on the plan
+        required_tests = [test['test_name'] for test in statistical_plan.get('required_tests', [])]
+        
         code_generation_prompt = f"""
-        You are a data science expert. Generate Python code to perform statistical analysis on the following data:
+        You are a data science expert. Generate Python code to perform the following statistical analyses on the provided data: {', '.join(required_tests)}
 
+        The data is in a dictionary named 'statistical_data':
         {json.dumps(statistical_data, indent=2)}
 
         The data is a dictionary where the keys are text filenames and the values are dictionaries
         where the keys are model names and the values are lists of analysis results for each run.
 
-        Your task is to generate Python code to:
-        1. Calculate Cronbach's alpha for each text-model pair to assess inter-run reliability.
-        2. Calculate the mean and standard deviation of the scores for each text-model pair.
-        3. Perform an analysis of variance (ANOVA) to compare the scores between models for each text.
-        4. Generate a summary report of the statistical analysis.
-
-        The code should use the pandas and scipy libraries and store the results in a dictionary named 'statistical_results'.
+        Your task is to generate Python code to perform the requested tests and store the results in a dictionary named 'statistical_results'.
+        The code should use the pandas and scipy libraries.
         """
 
-        statistical_code = await self._call_llm_async(code_generation_prompt, "statistical_code_generator")
+        model_name = self.model_registry.get_model_for_task('code_generation')
+        if not model_name:
+            print("⚠️ No suitable model found for code generation, using default.")
+            model_name = 'vertex_ai/gemini-1.5-pro-latest' # A powerful model for code
+        statistical_code = await self._call_llm_async(code_generation_prompt, "statistical_code_generator", model_name)
 
         # Execute the statistical analysis code
         executor = SecureCodeExecutor()
@@ -417,7 +449,7 @@ TASK: Apply the framework systematically to this text. Provide structured output
 
 Be precise and cite specific text passages to support your scores."""
 
-        # Call LLM
+        # Call LLM - The model_name for the core analysis is passed in from the experiment config
         response = await self._call_llm_async(analysis_prompt, agent_id, model_name)
         
         self._log_system_event("AGENT_COMPLETED", {
@@ -453,7 +485,11 @@ Be precise and cite specific text passages to support your scores."""
         Convert to human-readable format for synthesis. Handle any errors gracefully.
         """
         
-        formatted_results = await self._call_llm_async(formatting_prompt, "results_formatting_agent")
+        model_name = self.model_registry.get_model_for_task('synthesis')
+        if not model_name:
+            print("⚠️ No suitable model found for formatting, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        formatted_results = await self._call_llm_async(formatting_prompt, "results_formatting_agent", model_name)
         
         synthesis_prompt = f"""You are the synthesis_agent. Your job is to:
 
@@ -477,7 +513,11 @@ OUTLIERS DETECTED: [list any significant outliers with reasons]
 PRELIMINARY CONCLUSIONS: [initial synthesis]
 CONFIDENCE LEVEL: [your confidence in these results]"""
 
-        self.synthesis_result = await self._call_llm_async(synthesis_prompt, "synthesis_agent")
+        model_name = self.model_registry.get_model_for_task('synthesis')
+        if not model_name:
+            print("⚠️ No suitable model found for synthesis, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        self.synthesis_result = await self._call_llm_async(synthesis_prompt, "synthesis_agent", model_name)
         
         # Extract outliers for potential discussion
         if "OUTLIERS DETECTED:" in self.synthesis_result:
@@ -506,7 +546,11 @@ CONFIDENCE LEVEL: [your confidence in these results]"""
         Respond with just the action name.
         """
         
-        outlier_decision = await self._call_llm_async(outlier_assessment_prompt, "outlier_assessment_agent")
+        model_name = self.model_registry.get_model_for_task('coordination')
+        if not model_name:
+            print("⚠️ No suitable model found for outlier assessment, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        outlier_decision = await self._call_llm_async(outlier_assessment_prompt, "outlier_assessment_agent", model_name)
         
         if "HANDLE_OUTLIERS" in outlier_decision.upper():
             self._log_system_event("OUTLIER_DISCUSSION_STARTED", {
@@ -552,7 +596,11 @@ TASK: Organize a structured discussion about these outliers:
 
 Provide focused recommendations for outlier resolution."""
 
-        moderator_response = await self._call_llm_async(moderator_prompt, "moderator_agent")
+        model_name = self.model_registry.get_model_for_task('synthesis')
+        if not model_name:
+            print("⚠️ No suitable model found for moderator, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        moderator_response = await self._call_llm_async(moderator_prompt, "moderator_agent", model_name)
         
         self._log_system_event("AGENT_COMPLETED", {
             "agent_id": "moderator_agent",
@@ -587,7 +635,11 @@ TASK: Make final decisions about outliers:
 
 Provide clear, evidence-based arbitration decisions."""
 
-        referee_decision = await self._call_llm_async(referee_prompt, "referee_agent")
+        model_name = self.model_registry.get_model_for_task('synthesis')
+        if not model_name:
+            print("⚠️ No suitable model found for referee, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        referee_decision = await self._call_llm_async(referee_prompt, "referee_agent", model_name)
         
         self._log_system_event("AGENT_COMPLETED", {
             "agent_id": "referee_agent",
@@ -634,7 +686,11 @@ TASK: Create publication-ready final report including:
 
 Format as structured academic output suitable for peer review."""
 
-        final_report = await self._call_llm_async(final_prompt, "final_synthesis_agent")
+        model_name = self.model_registry.get_model_for_task('synthesis')
+        if not model_name:
+            print("⚠️ No suitable model found for final synthesis, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        final_report = await self._call_llm_async(final_prompt, "final_synthesis_agent", model_name)
         
         # Save results to project
         await self._save_results_to_project(final_report)
@@ -670,7 +726,11 @@ Format as structured academic output suitable for peer review."""
         No synthesis or arbitration - just clean aggregation for bias isolation.
         """
         
-        final_report = await self._call_llm_async(final_report_prompt, "aggregation_agent")
+        model_name = self.model_registry.get_model_for_task('synthesis')
+        if not model_name:
+            print("⚠️ No suitable model found for aggregation, using default.")
+            model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+        final_report = await self._call_llm_async(final_report_prompt, "aggregation_agent", model_name)
         await self._save_results_to_project(final_report)
         
         return {
@@ -693,7 +753,11 @@ Format as structured academic output suitable for peer review."""
             Do any outliers need discussion? Respond "YES" or "NO".
             """
             
-            needs_outlier_discussion = await self._call_llm_async(outlier_prompt, "outlier_coordinator")
+            model_name = self.model_registry.get_model_for_task('coordination')
+            if not model_name:
+                print("⚠️ No suitable model found for outlier coordination, using default.")
+                model_name = 'vertex_ai/gemini-1.5-flash-latest' # A reasonable default
+            needs_outlier_discussion = await self._call_llm_async(outlier_prompt, "outlier_coordinator", model_name)
             
             if "YES" in needs_outlier_discussion.upper():
                 await self._handle_outliers()
@@ -738,9 +802,13 @@ Format as structured academic output suitable for peer review."""
                 )
                 
                 if chronolog_result.get('created', False):
-                    files_saved.append("RUN_CHRONOLOG_" + self.session_id + ".jsonl")
-                    print(f"📝 Run chronolog created: {chronolog_result['run_chronolog_file']}")
-                    print(f"📊 Run statistics: {chronolog_result['session_events']} events captured")
+                    run_log_path = chronolog_result['run_chronolog_file']
+                    files_saved.append(Path(run_log_path).name)
+                    print(f"📝 Run chronolog created: {run_log_path}")
+                    
+                    # Merge the run log into the main project chronolog
+                    print(f"Merging run log into master project chronolog...")
+                    chronolog.merge_run_log(run_log_path)
                     
                     # Log timing statistics for academic analysis
                     run_stats = chronolog_result.get('run_statistics', {})
@@ -874,6 +942,7 @@ Format as structured academic output suitable for peer review."""
             return f"[MOCK RESPONSE] {agent_id} would analyze: {prompt[:100]}..."
         
         try:
+            # The model_name parameter is now passed in from the calling method
             print(f"🟡 DEBUG: Starting LLM call for {agent_id} with model {model_name}")
             
             if self.logger:

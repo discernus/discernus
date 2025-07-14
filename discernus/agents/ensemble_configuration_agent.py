@@ -18,7 +18,8 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 try:
-    from discernus.gateway.litellm_client import LiteLLMClient
+    from discernus.gateway.model_registry import ModelRegistry
+    from discernus.gateway.llm_gateway import LLMGateway
     from discernus.core.llm_roles import get_expert_prompt
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
@@ -34,7 +35,8 @@ class EnsembleConfigurationAgent:
     def __init__(self):
         if not DEPENDENCIES_AVAILABLE:
             raise ImportError("Could not import required dependencies for EnsembleConfigurationAgent")
-        self.llm_client = LiteLLMClient()
+        self.model_registry = ModelRegistry()
+        self.gateway = LLMGateway(self.model_registry)
 
     def generate_configuration(self, experiment_md_path: str) -> bool:
         """
@@ -92,17 +94,15 @@ class EnsembleConfigurationAgent:
     def _call_config_generator_llm(self, methodology_text: str) -> str:
         """Calls an LLM to generate the YAML configuration."""
         
-        # This prompt is the "THICK" intelligence part.
-        # It's given context about available models and its task.
+        # Dynamically get available models from the registry
+        available_models = self.model_registry.list_models()
+        model_details = [f"- {name}: {self.model_registry.get_model_details(name)}" for name in available_models]
+
         prompt = f"""
 You are an expert in computational social science experimental design. Your task is to convert a researcher's plain-English methodology into a precise, reproducible YAML configuration.
 
 **Available Models:**
-- **Top-Tier (High Performance, High Cost):**
-  - Anthropic: "claude-3-5-sonnet-20240620"
-  - OpenAI: "gpt-4o"
-- **Cost-Effective (Good Performance, Low Cost):**
-  - Anthropic: "claude-3-haiku-20240307"
+{chr(10).join(model_details)}
 
 **Researcher's Methodology:**
 ---
@@ -119,18 +119,15 @@ Based on the researcher's methodology, generate a YAML configuration block. The 
 **Output ONLY the raw YAML block, with no other text or explanation.**
 """
         
-        experiment_def = {"framework": {"name": "config_generation"}, "research_question": "Generate experiment YAML"}
-        model_name = "anthropic/claude-3-haiku-20240307" # Use a powerful and cost-effective model for this task
+        model_name = "anthropic/claude-3-haiku-20240307"
 
         try:
-            response, _ = self.llm_client.analyze_text(prompt, experiment_def, model_name)
+            yaml_content, _ = self.gateway.execute_call(model=model_name, prompt=prompt)
             
-            if not response or 'raw_response' not in response:
-                print("❌ LLM response was empty or did not contain 'raw_response'.")
+            if not yaml_content:
+                print("❌ LLM response was empty.")
                 return ""
                 
-            yaml_content = response['raw_response']
-            
             # Strip markdown fence if present
             yaml_match = re.search(r'```yaml\n(.*?)```', yaml_content, re.DOTALL)
             if yaml_match:

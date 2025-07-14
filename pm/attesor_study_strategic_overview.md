@@ -510,3 +510,74 @@ Initial findings indicate systematic speaker identity bias in LLM-based politica
 **Current Priority**: Complete integration work for multi-LLM analysis matrix architecture (Phase 1B)  
 **Next Update**: Post-Phase 1B completion and Phase 2-4 execution commencement  
 **Archive Location**: `pm/attesor_study_strategic_overview.md` 
+### Architectural Innovations for Methodological Rigor (Implemented January 14, 2025)
+
+Following a series of deep smoke tests and mindful architectural reviews, the SOAR platform has been significantly enhanced to enforce greater methodological rigor and improve reliability. These innovations move the system closer to its goal of providing a truly robust, transparent, and user-friendly environment for computational social science.
+
+#### 1. Comprehensive Pre-Execution Validation
+The system now includes a multi-stage validation process that occurs *before* any analysis is run, preventing wasted computation on incoherent experiments:
+
+*   **Coherence Validation**: A new `ValidationAgent` step ensures that the `experiment.md` and `framework.md` are logically connected. It uses an LLM auditor to confirm that the experiment explicitly references the correct framework and that its hypotheses are testable.
+*   **Statistical Plan Validation**: The new `StatisticalAnalysisConfigurationAgent` parses the experiment to create a structured statistical plan. If the plan is ambiguous or incomplete, validation fails, forcing methodological clarity upfront.
+
+#### 2. Interactive Pre-Execution Confirmation
+To empower the researcher and ensure alignment, the CLI now presents a "Pre-Execution Confirmation" prompt after a successful validation. This summary details the full execution plan (framework, models, runs, statistical tests) and requires explicit user approval before proceeding, eliminating the risk of running an unintended or misconfigured experiment.
+
+#### 3. Intelligent, Tiered Model Selection and Fallback
+To improve reliability and move away from brittle, hardcoded model names, the system now features a more intelligent model selection architecture:
+
+*   **`ModelRegistry`**: Serves as the central source of truth for all available models and their capabilities, including new `utility_tier` and `task_suitability` metadata.
+*   **Task-Based Model Selection**: Agents no longer use hardcoded model names. Instead, they request a model from the `ModelRegistry` based on the *task* they need to perform (e.g., `validation`, `synthesis`, `code_generation`).
+*   **Intelligent Fallback**: The `LLMGateway` now includes a robust retry-and-fallback loop. If a primary model fails with a transient error, the gateway automatically consults the `ModelRegistry` and retries the call with the next model in the fallback chain (e.g., from Claude Haiku to Gemini Flash to a local Ollama instance).
+
+#### 4. Transparent Error Reporting
+The system now distinguishes between user errors (e.g., an incoherent experimental design) and system errors (e.g., a transient API failure). When an external API fails, the CLI now transparently reports the raw error message and advises the user to retry, preventing them from mistakenly believing the fault lies in their own work.
+
+#### 5. Comprehensive Master Chronolog
+The logging system has been refactored to create a true, three-tier provenance record. All detailed, low-level events from a specific run are now merged back into the main `project_chronolog.jsonl`, creating a single, complete, and tamper-evident audit trail for the entire project lifecycle, as originally envisioned.
+
+### Updated System Workflow
+
+The following diagram illustrates the new, more robust and interactive workflow:
+
+```mermaid
+graph TD;
+    A["User executes<br/>`soar execute`"] --> B(soar_cli.py);
+    
+    subgraph "Phase 1: Configuration & Validation"
+        B --> C{EnsembleConfigurationAgent};
+        C --> D[ModelRegistry];
+        D -- "Provides model list" --> C;
+        C -- "Generates config via" --> E(LLMGateway);
+        C -- "Writes YAML to" --> F[experiment.md];
+        
+        B --> G{EnsembleOrchestrator};
+        G -- "Reads" --> F;
+        G --> H{StatisticalAnalysis<br/>ConfigurationAgent};
+        H -- "Generates plan via" --> E;
+        H -- "Validates Statistical Plan<br/>(FAIL FAST)" --> I{OK?};
+    end
+
+    subgraph "Phase 2: Core Analysis"
+        I -- Yes --> G;
+        I -- No --> X[Stop Execution];
+        G -- "Spawns N×M" --> J[Analysis Agents];
+        J -- "Analyze texts using" --> E;
+    end
+
+    subgraph "Phase 3: Synthesis & Reporting"
+        G -- "Aggregates results and<br/>coordinates next steps via" --> E;
+        G -- "Generates stats code via" --> E;
+        E -- "Provides code for" --> K[SecureCodeExecutor];
+        K -- "Calculates final metrics" --> L[Statistical Report];
+        G -- "Generates" --> M[Final Report];
+    end
+
+    classDef knowledge fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef execution fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef security fill:#cFC,stroke:#333,stroke-width:2px;
+
+    class D,F knowledge;
+    class E execution;
+    class K security;
+```
