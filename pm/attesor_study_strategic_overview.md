@@ -109,6 +109,7 @@ Systematic review revealed scale inversion in economic measurement creating syst
 - **Analysis matrix tracking**: Single model tracking incompatible with NxMxR analysis requirements
 - **Failure logging**: Model fallbacks not recorded in chronologs for academic integrity
 - **Multi-run capability**: No support for reliability testing (Cronbach's alpha requires multiple runs)
+- **Resource management**: No intelligent handling of TPM limits, context windows, cost optimization
 
 **Required Architecture**:
 ```
@@ -120,8 +121,40 @@ Text 3: Lewis    [R1,R2,R3]    [R1,R2,R3]    [R1,R2,R3]
 Text 4: Booker   [R1,R2,R3]    [R1,R2,R3]    [R1,R2,R3]
 ```
 
+**THIN Engine Architecture Innovation**:
+
+The solution employs a **THIN Engine Architecture** where LLMs function as intelligent "ECUs" (Engine Control Units) managing complex optimization decisions while software handles mechanical execution:
+
+- **Pistons** = Individual LLM analyses 
+- **Timing Chain** = Sequence coordination and dependency management
+- **Fuel Injection** = Resource allocation (TPM, context windows, cost)
+- **Exhaust System** = Output processing and cleanup
+- **ECU** = LLM-based resource optimization agents
+
+**Agent-Based Implementation**:
+```python
+agents = {
+    "configuration": ExperimentConfigurationAgent(),      # Parse experiment.md requirements
+    "matrix_planner": AnalysisMatrixPlannerAgent(),      # Optimize execution matrix with cost analysis
+    "execution_coordinator": MultiModelExecutionAgent(), # Coordinate model iteration with adaptive strategies  
+    "failure_recovery": FailureRecoveryAgent(),          # Analyze failures and determine recovery strategies
+    "matrix_tracker": MatrixTrackingAgent(),             # Organize results across matrix dimensions
+    "statistical_analyst": StatisticalAnalysisAgent(),   # Perform cross-dimensional statistical analysis
+    "resource_optimizer": ResourceOptimizationAgent()    # Real-time TPM, context, cost optimization
+}
+```
+
+**Resource Management Intelligence**:
+- **Expectation Setting**: LLM-driven realistic time estimates with best/expected/worst case scenarios
+- **Dynamic Optimization**: Real-time resource allocation based on current conditions
+- **Rate Limit Intelligence**: Adaptive recovery strategies (wait, switch models, reorder queue)
+- **Context Window Optimization**: LLM-designed chunking strategies maintaining analytical integrity
+- **Cost Optimization**: Model selection and batch sizing for budget efficiency
+
 **Implementation Status**:
 - ✅ Model provenance tracking (dynamic extraction)
+- 🔧 Agent-based architecture design
+- 🔧 Resource optimization intelligence
 - 🔧 Experiment configuration parsing 
 - 🔧 Multi-model iteration system
 - 🔧 Analysis matrix tracking (text×model×run)
@@ -171,36 +204,44 @@ Text 4: Booker   [R1,R2,R3]    [R1,R2,R3]    [R1,R2,R3]
 
 ## Our Plan of Action
 
-### Immediate Next Steps (Phase 1B Technical Infrastructure Completion)
-1. **Priority 1: Multi-Model Architecture Implementation**
-   - **Experiment configuration parsing**: Read model lists from experiment.md YAML blocks
-   - **Replace hardcoded models**: Dynamic model loading instead of vertex_ai/gemini-2.5-flash default
-   - **Multi-model orchestration**: Iterate through multiple models for same corpus text
-   - **Cost estimation**: Multi-model cost projection before execution
+### Immediate Next Steps (Phase 1B THIN Engine Implementation)
+1. **Priority 1: THIN Agent Infrastructure**
+   - **Agent spawning framework**: Infrastructure for specialized domain agents
+   - **ExperimentConfigurationAgent**: LLM-driven experiment.md YAML parsing and requirement extraction
+   - **ResourceOptimizationAgent**: LLM-based "ECU" for real-time resource management
+   - **Agent communication protocols**: Coordination between specialized agents
 
-2. **Priority 2: Analysis Matrix Tracking System**
-   - **Replace single model tracking**: Implement text×model×run dimensional tracking
-   - **Per-analysis model provenance**: Track model for each individual analysis (not just last used)
-   - **Analysis ID system**: Unique identifiers for each (text,model,run) combination
-   - **Result organization**: Model-specific result storage and retrieval
+2. **Priority 2: Multi-Model Engine Architecture**
+   - **AnalysisMatrixPlannerAgent**: LLM optimizes execution matrix with cost analysis
+   - **MultiModelExecutionAgent**: Intelligent model iteration and adaptive strategies
+   - **Context window optimization**: LLM-designed chunking maintaining analytical integrity
+   - **Dynamic model loading**: Replace hardcoded vertex_ai/gemini-2.5-flash default
 
-3. **Priority 3: Multi-Run Reliability Capability**
-   - **Multi-run orchestration**: Support N runs of same (text,model) pair for Cronbach's alpha
-   - **Run iteration logic**: Systematic execution of reliability testing protocols
-   - **Statistical integration**: Variance analysis across multiple runs
-   - **Academic integrity**: Complete run provenance for peer review
+3. **Priority 3: Intelligent Resource Management**
+   - **TPM optimization**: LLM-driven rate limit prediction and batch sizing
+   - **Expectation setting**: Best/expected/worst case scenario generation with confidence intervals
+   - **Dynamic optimization**: Real-time execution adjustment based on current conditions
+   - **Cost optimization**: Model selection and execution ordering for budget efficiency
 
-4. **Priority 4: Comprehensive Failure Logging**
-   - **Model fallback tracking**: Log all fallbacks to session, run, and project chronologs
-   - **Failure reason capture**: Document safety filters, API failures, cost limits
-   - **Academic transparency**: Complete model switching record for reproducibility
-   - **Cost impact tracking**: Track financial implications of fallbacks
+4. **Priority 4: Analysis Matrix Intelligence**
+   - **MatrixTrackingAgent**: LLM organizes results across text×model×run dimensions
+   - **Per-analysis provenance**: Complete model tracking for each individual analysis
+   - **FailureRecoveryAgent**: Intelligent fallback strategies (wait, switch, reorder)
+   - **Academic integrity**: Comprehensive failure/fallback logging to all chronologs
+
+5. **Priority 5: Statistical Analysis Integration**
+   - **StatisticalAnalysisAgent**: LLM-driven cross-dimensional bias analysis
+   - **Multi-run orchestration**: Support N runs for Cronbach's alpha reliability testing
+   - **Real-time performance monitoring**: Engine performance analysis and optimization
+   - **Academic reporting**: Publication-ready statistical analysis with peer review transparency
 
 **Phase 1B Completion Criteria**:
-- ✅ Successful execution of: 2 texts × 3 models × 2 runs = 12 analyses with full tracking
-- ✅ Complete analysis matrix with per-analysis model provenance
-- ✅ All failures and fallbacks logged to chronologs
-- ✅ Statistical analysis pipeline operational across matrix dimensions
+- ✅ **THIN Engine Validation**: 2 texts × 3 models × 2 runs = 12 analyses with agent-driven coordination
+- ✅ **Resource Optimization**: LLM-driven TPM management, context window optimization, cost efficiency
+- ✅ **Complete Matrix Tracking**: Per-analysis model provenance with text×model×run dimensions
+- ✅ **Intelligent Failure Recovery**: All fallbacks logged with LLM-analyzed recovery strategies
+- ✅ **Expectation Management**: Accurate time/cost predictions with confidence intervals
+- ✅ **Statistical Pipeline**: Cross-dimensional bias analysis operational for academic publication
 
 **Once Phase 1B Complete**: Phases 2-4 can proceed with full multi-LLM capabilities
 
@@ -270,6 +311,10 @@ The Attesor Study addresses potential reliability issues in AI-assisted social s
 - **Disambiguation architecture**: Cross-ideological validation, boundary case distinction, and false positive prevention systems
 - **Scale polarity correction methodology**: Systematic identification and resolution of measurement bias through dual-track architectural separation
 - **Methodological defensibility framework**: Unweighted raw score collection with comprehensive post-hoc analysis guidance for maximum academic rigor
+- **THIN Engine Architecture**: LLM-driven multi-model orchestration using intelligent "ECU" agents for resource optimization, failure recovery, and execution coordination
+- **Agent-based resource management**: Specialized agents for configuration parsing, matrix planning, execution coordination, failure recovery, and statistical analysis
+- **Intelligent expectation management**: LLM-driven realistic time/cost predictions with confidence intervals and dynamic optimization
+- **Cross-dimensional analysis matrix**: Text×model×run tracking with complete provenance for academic integrity and statistical analysis
 
 ---
 
@@ -309,9 +354,9 @@ Initial findings indicate systematic speaker identity bias in LLM-based politica
 - **Framework optimization**: 85% efficiency gain through inline calibration integration with enhanced disambiguation ✅
 - **Scale polarity correction**: Eliminated systematic ideological bias through 10-anchor dual-track architecture ✅
 - **Methodological enhancement**: Unweighted raw score collection ensuring maximum academic defensibility ✅
-- **Technical infrastructure**: Multi-LLM analysis matrix architecture 🔧 IN PROGRESS
+- **Technical infrastructure**: THIN Engine Architecture with LLM-driven resource optimization 🔧 IN PROGRESS
 
-**Current Phase**: Phase 1B technical infrastructure completion - building multi-model orchestration and analysis matrix tracking required for bias testing validation.
+**Current Phase**: Phase 1B THIN Engine implementation - agent-based multi-model orchestration with intelligent resource management, failure recovery, and expectation setting for bias testing validation.
 
 **Next Phase**: Once technical infrastructure complete, comprehensive multi-LLM bias testing across premium models with full statistical analysis capabilities.
 
