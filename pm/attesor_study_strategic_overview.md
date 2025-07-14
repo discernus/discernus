@@ -84,8 +84,8 @@ Systematic review revealed scale inversion in economic measurement creating syst
 
 ## How We're Responding: The Attesor Methodology
 
-### Phase 1: Infrastructure (COMPLETED ✅)
-**Objective**: Create methodologically bulletproof research architecture
+### Phase 1A: Content Infrastructure (COMPLETED ✅)
+**Objective**: Create methodologically bulletproof corpus and framework
 
 **Achievements**:
 - **Expert-level content sanitization**: Dr. Morgan Chen methodology for identity removal
@@ -100,7 +100,36 @@ Systematic review revealed scale inversion in economic measurement creating syst
 - **10-anchor expansion**: Added separate economic direction classification while maintaining unbiased populist intensity measurement
 - **Methodological defensibility**: Removed weighted composites from primary analysis, implementing unweighted raw score collection with post-hoc options
 
-### Phase 2: Bias Characterization - Multi-LLM Premium Model Testing (READY)
+### Phase 1B: Technical Infrastructure (IN PROGRESS 🔧)
+**Objective**: Build multi-LLM analysis matrix capabilities required for bias testing
+
+**Critical Gaps Identified**:
+- **Model configuration parsing**: Experiment YAML blocks not read by orchestrator
+- **Multi-model orchestration**: System hardcoded to single model (vertex_ai/gemini-2.5-flash)
+- **Analysis matrix tracking**: Single model tracking incompatible with NxMxR analysis requirements
+- **Failure logging**: Model fallbacks not recorded in chronologs for academic integrity
+- **Multi-run capability**: No support for reliability testing (Cronbach's alpha requires multiple runs)
+
+**Required Architecture**:
+```
+ANALYSIS MATRIX REQUIREMENTS:
+                 Model A        Model B        Model C
+Text 1: Romney   [R1,R2,R3]    [R1,R2,R3]    [R1,R2,R3]
+Text 2: McCain   [R1,R2,R3]    [R1,R2,R3]    [R1,R2,R3]  
+Text 3: Lewis    [R1,R2,R3]    [R1,R2,R3]    [R1,R2,R3]
+Text 4: Booker   [R1,R2,R3]    [R1,R2,R3]    [R1,R2,R3]
+```
+
+**Implementation Status**:
+- ✅ Model provenance tracking (dynamic extraction)
+- 🔧 Experiment configuration parsing 
+- 🔧 Multi-model iteration system
+- 🔧 Analysis matrix tracking (text×model×run)
+- 🔧 Comprehensive failure logging
+- 🔧 Multi-run orchestration
+- 🔧 Statistical analysis pipeline
+
+### Phase 2: Bias Characterization - Multi-LLM Premium Model Testing (BLOCKED - ARCHITECTURE)
 **Objective**: Systematically document bias universality and magnitude across state-of-the-art models
 
 **Approach**:
@@ -109,7 +138,9 @@ Systematic review revealed scale inversion in economic measurement creating syst
 - **Premium model hypothesis**: Determine if latest models show reduced bias
 - **Statistical documentation**: Quantify bias magnitude and consistency patterns
 
-### Phase 3: Bias Characterization - Multi-Run Consistency Testing (READY)
+**Dependency**: Requires Phase 1B completion - multi-model orchestration system
+
+### Phase 3: Bias Characterization - Multi-Run Consistency Testing (BLOCKED - ARCHITECTURE)
 **Objective**: Distinguish systematic bias from general model inconsistency
 
 **Approach**:
@@ -118,7 +149,9 @@ Systematic review revealed scale inversion in economic measurement creating syst
 - **Variance analysis**: Measure consistency of bias effects vs. general model variance
 - **Statistical significance**: Formal testing of bias vs. random variation
 
-### Phase 4: Comparative Analysis - Esperanto Bias Mitigation (READY)
+**Dependency**: Requires Phase 1B completion - multi-run orchestration and analysis matrix tracking
+
+### Phase 4: Comparative Analysis - Esperanto Bias Mitigation (BLOCKED - ARCHITECTURE)
 **Objective**: Test cross-linguistic bias elimination effectiveness
 
 **Approach**:
@@ -126,6 +159,8 @@ Systematic review revealed scale inversion in economic measurement creating syst
 - **Bias elimination testing**: Quantify effectiveness of each mitigation approach
 - **Framework validation**: Confirm PDAF performance across languages
 - **Cross-model verification**: Test universality of Esperanto bias mitigation
+
+**Dependency**: Requires Phase 1B completion - full analysis matrix capabilities
 
 ### Phase 5: Academic Publication (PLANNED)
 **Two-Paper Strategy**:
@@ -136,32 +171,38 @@ Systematic review revealed scale inversion in economic measurement creating syst
 
 ## Our Plan of Action
 
-### Immediate Next Steps (Phases 2-3 Execution)
-1. **Comprehensive Bias Testing with Enhanced Framework**
-   - Deploy PDAF v1.1 (sanitized, optimized, & methodologically enhanced) across all experimental conditions
-   - 6 analysis agents × 6 LLMs × 3 corpus sets = 108 analyses per speech
-   - Enhanced efficiency: 85% context window reduction accelerates processing and reduces costs
-   - Unbiased measurement: 10-anchor dual-track architecture eliminates systematic ideological bias
-   - Statistical analysis: inter-rater reliability, Cronbach's alpha, bias magnitude using raw anchor scores
-   - Cost-efficient pilot testing with cheaper models before full premium deployment
+### Immediate Next Steps (Phase 1B Technical Infrastructure Completion)
+1. **Priority 1: Multi-Model Architecture Implementation**
+   - **Experiment configuration parsing**: Read model lists from experiment.md YAML blocks
+   - **Replace hardcoded models**: Dynamic model loading instead of vertex_ai/gemini-2.5-flash default
+   - **Multi-model orchestration**: Iterate through multiple models for same corpus text
+   - **Cost estimation**: Multi-model cost projection before execution
 
-2. **Multi-LLM Premium Model Testing (Phase 2)**
-   - Run identical PDAF v1.1 analysis with Gemini 2.5 Pro, Claude 4 Sonnet, GPT-4o
-   - Test across original, sanitized, and Esperanto corpus conditions
-   - Measure bias magnitude and consistency patterns across model architectures
-   - Statistical documentation of bias universality vs. model-specific effects
+2. **Priority 2: Analysis Matrix Tracking System**
+   - **Replace single model tracking**: Implement text×model×run dimensional tracking
+   - **Per-analysis model provenance**: Track model for each individual analysis (not just last used)
+   - **Analysis ID system**: Unique identifiers for each (text,model,run) combination
+   - **Result organization**: Model-specific result storage and retrieval
 
-3. **Multi-Run Consistency Analysis (Phase 3)**
-   - Multiple runs per speech using confirmed original model (Gemini 2.5 Flash)
-   - Variance analysis: systematic bias effects vs. general model inconsistency
-   - Statistical significance testing with clean framework baseline
-   - Framework-level vs. content-level bias effect separation
+3. **Priority 3: Multi-Run Reliability Capability**
+   - **Multi-run orchestration**: Support N runs of same (text,model) pair for Cronbach's alpha
+   - **Run iteration logic**: Systematic execution of reliability testing protocols
+   - **Statistical integration**: Variance analysis across multiple runs
+   - **Academic integrity**: Complete run provenance for peer review
 
-4. **Esperanto Bias Mitigation Validation (Phase 4)**
-   - Three-way comparison with sanitized framework: Original vs. Sanitized vs. Esperanto
-   - Cross-linguistic bias elimination effectiveness assessment
-   - Framework validation: PDAF v1.1 performance across languages
-   - Comprehensive bias mitigation effectiveness documentation
+4. **Priority 4: Comprehensive Failure Logging**
+   - **Model fallback tracking**: Log all fallbacks to session, run, and project chronologs
+   - **Failure reason capture**: Document safety filters, API failures, cost limits
+   - **Academic transparency**: Complete model switching record for reproducibility
+   - **Cost impact tracking**: Track financial implications of fallbacks
+
+**Phase 1B Completion Criteria**:
+- ✅ Successful execution of: 2 texts × 3 models × 2 runs = 12 analyses with full tracking
+- ✅ Complete analysis matrix with per-analysis model provenance
+- ✅ All failures and fallbacks logged to chronologs
+- ✅ Statistical analysis pipeline operational across matrix dimensions
+
+**Once Phase 1B Complete**: Phases 2-4 can proceed with full multi-LLM capabilities
 
 ### Medium-Term Objectives (1-3 Months)
 1. **Academic Publication Preparation**
@@ -260,23 +301,26 @@ The Attesor Study addresses potential reliability issues in AI-assisted social s
 Initial findings indicate systematic speaker identity bias in LLM-based political analysis. The Attesor Study develops and tests cross-linguistic methodology as potential bias mitigation.
 
 **Research Progression**:
-- **Problem identification**: Systematic LLM identity bias documentation
-- **Mechanism assessment**: Training data association analysis
-- **Solution development**: Cross-linguistic bias mitigation approach
-- **Infrastructure implementation**: Secure, replicable research protocols
-- **Framework sanitization**: Dual-level bias elimination (content + analytical framework)
-- **Framework optimization**: 85% efficiency gain through inline calibration integration with enhanced disambiguation
-- **Scale polarity correction**: Eliminated systematic ideological bias through 10-anchor dual-track architecture
-- **Methodological enhancement**: Unweighted raw score collection ensuring maximum academic defensibility
-- **Methodology validation**: Ready for comprehensive multi-LLM bias testing with bias-free, optimized deployment architecture
+- **Problem identification**: Systematic LLM identity bias documentation ✅
+- **Mechanism assessment**: Training data association analysis ✅
+- **Solution development**: Cross-linguistic bias mitigation approach ✅
+- **Content infrastructure**: Secure, replicable research protocols ✅
+- **Framework sanitization**: Dual-level bias elimination (content + analytical framework) ✅
+- **Framework optimization**: 85% efficiency gain through inline calibration integration with enhanced disambiguation ✅
+- **Scale polarity correction**: Eliminated systematic ideological bias through 10-anchor dual-track architecture ✅
+- **Methodological enhancement**: Unweighted raw score collection ensuring maximum academic defensibility ✅
+- **Technical infrastructure**: Multi-LLM analysis matrix architecture 🔧 IN PROGRESS
 
-**Next Phase**: Validation testing will assess the effectiveness of Esperanto translation for bias mitigation while maintaining analytical validity.
+**Current Phase**: Phase 1B technical infrastructure completion - building multi-model orchestration and analysis matrix tracking required for bias testing validation.
+
+**Next Phase**: Once technical infrastructure complete, comprehensive multi-LLM bias testing across premium models with full statistical analysis capabilities.
 
 **Research Context**: These findings contribute to ongoing discussions about reliability and bias in computational social science methodology. Successful bias mitigation approaches may inform broader AI-assisted research standards.
 
 ---
 
 **Document Status**: Living document updated as Attesor Study progresses  
-**Last Update**: January 12, 2025 - Methodological enhancement completed (PDAF v1.1 with scale polarity correction and unweighted methodology)  
-**Next Update**: Post-comprehensive bias testing results  
+**Last Update**: January 13, 2025 - Technical infrastructure gaps identified, Phase 1B architecture requirements defined  
+**Current Priority**: Complete multi-LLM analysis matrix architecture (Phase 1B)  
+**Next Update**: Post-Phase 1B completion and bias testing capability validation  
 **Archive Location**: `pm/attesor_study_strategic_overview.md` 
