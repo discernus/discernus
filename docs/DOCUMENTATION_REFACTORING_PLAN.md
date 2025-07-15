@@ -449,7 +449,7 @@ This documentation refactoring is **foundational to project success**, not routi
 
 ### **Deliverable 2: docs/FRAMEWORK_INTEGRATION_GUIDE.md**
 
-**Source**: docs/framework_specification_validation_rubric.md  
+**Source**: discernus/core/framework_specification_validation_rubric.md  
 **Transform**: Academic language to developer-friendly  
 **Add**: Generic framework interface examples
 
