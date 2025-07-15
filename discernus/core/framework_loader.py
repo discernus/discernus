@@ -50,14 +50,14 @@ class FrameworkLoader:
     
     def _load_framework_rubric(self) -> str:
         """Load framework validation rubric text"""
-        rubric_path = self.project_root / "pm" / "framework_specification_validation_rubric.md"
+        rubric_path = self.project_root / "discernus" / "core" / "framework_specification_validation_rubric.md"
         if rubric_path.exists():
             return rubric_path.read_text()
         return "Framework validation rubric not found"
     
     def _load_experiment_rubric(self) -> str:
         """Load experiment validation rubric text"""
-        rubric_path = self.project_root / "pm" / "experiment_specification_validation_rubric.md"
+        rubric_path = self.project_root / "discernus" / "core" / "experiment_specification_validation_rubric.md"
         if rubric_path.exists():
             return rubric_path.read_text()
         return "Experiment validation rubric not found"

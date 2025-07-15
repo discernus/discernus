@@ -27,7 +27,9 @@
 ### Framework Developers
 1. **[Extension Development Guide](EXTENSION_DEVELOPMENT_GUIDE.md)** - Build platform extensions
 2. **[Governance Principles](GOVERNANCE_PRINCIPLES.md)** - Community standards and quality
-3. **[Framework Specification Validation Rubric](framework_specification_validation_rubric.md)** - Framework requirements
+3. **[Validation Process Guide](VALIDATION_PROCESS_GUIDE.md)** - Research quality standards
+4. **[Framework Validation Rubric](../discernus/core/framework_specification_validation_rubric.md)** - Technical requirements
+5. **[Experiment Validation Rubric](../discernus/core/experiment_specification_validation_rubric.md)** - Research design standards
 
 ---
 
@@ -79,8 +81,9 @@
 ### Academic Resources
 *Research standards and validation*
 
-- **[Framework Specification Validation Rubric](framework_specification_validation_rubric.md)** - Framework requirements
-- **[Experiment Specification Validation Rubric](experiment_specification_validation_rubric.md)** - Research design standards
+- **[Validation Process Guide](VALIDATION_PROCESS_GUIDE.md)** - Research quality standards and requirements
+- **[Framework Validation Rubric](../discernus/core/framework_specification_validation_rubric.md)** - Technical framework requirements
+- **[Experiment Validation Rubric](../discernus/core/experiment_specification_validation_rubric.md)** - Research design standards
 - **[Glossary](GLOSSARY.md)** - Technical terminology and definitions
 
 ### Deployment and Collaboration
@@ -97,8 +100,8 @@
 *Complete research process from question to publication*
 
 1. **Problem Definition**: [Strategic Vision](DISCERNUS_STRATEGIC_VISION.md) → [User Workflow Guide](USER_WORKFLOW_GUIDE.md)
-2. **Framework Selection**: [Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md) → [Framework Validation Rubric](framework_specification_validation_rubric.md)
-3. **Experiment Design**: [Experiment Validation Rubric](experiment_specification_validation_rubric.md) → [Quick Start Guide](QUICK_START_GUIDE.md)
+2. **Framework Selection**: [Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md) → [Framework Validation Rubric](../discernus/core/framework_specification_validation_rubric.md)
+3. **Experiment Design**: [Experiment Validation Rubric](../discernus/core/experiment_specification_validation_rubric.md) → [Quick Start Guide](QUICK_START_GUIDE.md)
 4. **Analysis Execution**: [User Workflow Guide](USER_WORKFLOW_GUIDE.md) → [Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md)
 5. **Publication Preparation**: [Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md) → [Glossary](GLOSSARY.md)
 
@@ -114,7 +117,7 @@
 *Building platform extensions*
 
 1. **Ecosystem Understanding**: [Platform Architecture Overview](PLATFORM_ARCHITECTURE_OVERVIEW.md) → [Extension Development Guide](EXTENSION_DEVELOPMENT_GUIDE.md)
-2. **Framework Integration**: [Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md) → [Framework Validation Rubric](framework_specification_validation_rubric.md)
+2. **Framework Integration**: [Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md) → [Framework Validation Rubric](../discernus/core/framework_specification_validation_rubric.md)
 3. **Community Standards**: [Governance Principles](GOVERNANCE_PRINCIPLES.md) → [Extension Guide](EXTENSION_GUIDE.md)
 4. **Deployment**: [Deployment Collaboration Guide](DEPLOYMENT_COLLABORATION_GUIDE.md)
 
