@@ -1,0 +1,1 @@
+{"timestamp":"2025-07-15T17:29:26.493625Z","event":"VALIDATION_ERROR","session_id":"session_20250715_132926","project":"discernus","data":{"error":"[Errno 2] No such file or directory: 'test'"},"event_id":"be043296-6151-4dec-a771-e987088b05c4","signature":"1ce75a402af69b25e201647e75ab099a29f316385fe2f4fb4bde9f07771980f8"}
