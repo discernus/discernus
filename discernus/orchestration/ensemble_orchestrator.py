@@ -1,0 +1,526 @@
+#!/usr/bin/env python3
+"""
+Simple Ensemble Orchestrator - THIN pipeline execution with Agent Registry
+==========================================================================
+
+THIN Principle: Simple linear pipeline with LLM intelligence at each step.
+No complex conversation management - just validated assets -> ensemble analysis -> synthesis.
+
+UPDATED: Now uses Agent Registry for dynamic agent loading and execution.
+
+Pipeline:
+1. Receive validated assets from ValidationAgent
+2. Spawn analysis agents (one per corpus text) via registry
+3. Use registry-based agents for synthesis and statistical analysis
+4. Moderator agent organizes discussion about outliers only (if needed)
+5. Referee agent arbitrates disagreements (if needed)
+6. Final synthesis agent packages results for persistence
+"""
+
+import sys
+import asyncio
+import json
+import redis
+from pathlib import Path
+from typing import Dict, Any, List, Optional
+from datetime import datetime
+import os
+import yaml
+import re
+import importlib
+
+# Add project root to path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+try:
+    from discernus.gateway.model_registry import ModelRegistry
+    from discernus.gateway.llm_gateway import LLMGateway
+    from discernus.core.conversation_logger import ConversationLogger
+    from discernus.core.secure_code_executor import SecureCodeExecutor
+    from discernus.core.project_chronolog import get_project_chronolog, log_project_event
+    DEPENDENCIES_AVAILABLE = True
+except ImportError as e:
+    print(f"EnsembleOrchestrator dependencies not available: {e}")
+    DEPENDENCIES_AVAILABLE = False
+
+class EnsembleOrchestrator:
+    """
+    THIN ensemble orchestrator with agent registry integration
+    """
+    
+    def __init__(self, project_path: str):
+        self.project_path = Path(project_path)
+        self.results_path = self.project_path / "results"
+        self.results_path.mkdir(exist_ok=True)
+        
+        # Core components with registry system
+        if not DEPENDENCIES_AVAILABLE:
+            raise ImportError("EnsembleOrchestrator dependencies not available. Please check your environment.")
+            
+        try:
+            self.model_registry = ModelRegistry()
+            self.gateway = LLMGateway(self.model_registry)
+            self._load_agent_registry()
+            print("✅ EnsembleOrchestrator using Agent Registry, ModelRegistry, and LLMGateway")
+        except Exception as e:
+            print(f"❌ EnsembleOrchestrator: Failed to initialize components: {e}")
+            raise e
+            
+        self.redis_client = redis.Redis(host='localhost', port=6379, db=0)
+        self.logger = None  # Will be initialized per session
+        
+        # Session state
+        self.session_id = None
+        self.analysis_results = []
+        self.analysis_matrix = {}
+        self.synthesis_result = None
+        self.outliers = []
+        self.statistical_plan = None
+        self.session_results_path = None
+        
+    def _load_agent_registry(self):
+        """Load agent registry from YAML file"""
+        registry_path = project_root / "discernus" / "core" / "agent_registry.yaml"
+        if not registry_path.exists():
+            raise FileNotFoundError(f"Agent registry not found at: {registry_path}")
+        with open(registry_path, 'r') as f:
+            registry_data = yaml.safe_load(f)
+        self.agent_registry = {agent['name']: agent for agent in registry_data['agents']}
+        print("✅ Agent Registry loaded successfully")
+
+    def _create_agent_instance(self, agent_def: Dict[str, Any]) -> Any:
+        """Dynamically create an agent instance from registry definition"""
+        module_path = agent_def['module']
+        class_name = agent_def['class']
+        
+        # Special case: if it's this orchestrator itself, return self
+        if class_name == 'EnsembleOrchestrator':
+            return self
+            
+        module = importlib.import_module(module_path)
+        agent_class = getattr(module, class_name)
+        return agent_class()
+        
+    async def _execute_agent(self, agent_name: str, **kwargs) -> Any:
+        """Execute an agent using the registry system"""
+        agent_def = self.agent_registry.get(agent_name)
+        if not agent_def:
+            raise ValueError(f"Agent '{agent_name}' not found in registry")
+            
+        agent_instance = self._create_agent_instance(agent_def)
+        execution_method = getattr(agent_instance, agent_def['execution_method'])
+        
+        if asyncio.iscoroutinefunction(execution_method):
+            return await execution_method(**kwargs)
+        else:
+            return execution_method(**kwargs)
+            
+    def _parse_experiment_config(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Parse YAML config block from experiment.md"""
+        
+        # Default configuration
+        default_config = {
+            'models': ['vertex_ai/gemini-2.5-flash'],
+            'remove_synthesis': False,
+            'batch_size': 1,
+            'num_runs': 1
+        }
+        
+        # Read directly from experiment.md file
+        experiment_file = self.project_path / "experiment.md"
+        
+        if not experiment_file.exists():
+            print(f"⚠️  Experiment file not found: {experiment_file}")
+            return default_config
+            
+        try:
+            experiment_definition = experiment_file.read_text()
+            
+            # Extract YAML block from markdown
+            yaml_match = re.search(r'```yaml\n(.*?)```', experiment_definition, re.DOTALL)
+            if not yaml_match:
+                print(f"⚠️  No YAML configuration found in experiment.md")
+                return default_config
+                
+            yaml_content = yaml_match.group(1)
+            config = yaml.safe_load(yaml_content)
+            
+            # Merge with defaults
+            default_config.update(config)
+            print(f"✅ Parsed experiment config: {default_config}")
+            return default_config
+            
+        except Exception as e:
+            print(f"⚠️  Could not parse experiment YAML, using defaults. Error: {e}")
+            return default_config
+
+    def _init_session_logging(self):
+        """Initialize session logging and chronolog"""
+        self.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.session_results_path = self.results_path / f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
+        self.session_results_path.mkdir(exist_ok=True)
+        
+        # Initialize conversation logger
+        self.logger = ConversationLogger(
+            project_root=str(self.project_path),
+            custom_conversations_dir=str(self.session_results_path)
+        )
+        
+        # Initialize project chronolog
+        log_project_event(str(self.project_path), "SESSION_STARTED", self.session_id, {
+            "session_id": self.session_id,
+            "session_path": str(self.session_results_path)
+        })
+
+    def _log_system_event(self, event_type: str, data: Dict[str, Any]):
+        """Log system events to chronolog only"""
+        # Log to project chronolog (session_id is guaranteed to be string after _init_session_logging)
+        if self.session_id:
+            log_project_event(str(self.project_path), event_type, self.session_id, data)
+
+    async def _call_llm_async(self, prompt: str, agent_id: str, model_name: str) -> str:
+        """Call LLM via gateway with proper logging"""
+        self._log_system_event("LLM_CALL_STARTED", {
+            "agent_id": agent_id,
+            "model_name": model_name,
+            "prompt_length": len(prompt)
+        })
+        
+        try:
+            response, metadata = self.gateway.execute_call(model_name, prompt)
+            
+            self._log_system_event("LLM_CALL_COMPLETED", {
+                "agent_id": agent_id,
+                "model_name": model_name,
+                "response_length": len(response),
+                "metadata": metadata
+            })
+            
+            return response
+            
+        except Exception as e:
+            self._log_system_event("LLM_CALL_FAILED", {
+                "agent_id": agent_id,
+                "model_name": model_name,
+                "error": str(e)
+            })
+            raise e
+
+    async def execute_ensemble_analysis(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Main execution method - uses Agent Registry for all agent operations
+        """
+        try:
+            # Initialize session
+            self._init_session_logging()
+
+            # Step 1: Generate statistical analysis plan using registry
+            self.statistical_plan = await self._execute_agent(
+                "StatisticalAnalysisConfigurationAgent",
+                experiment_md_path=str(self.project_path / "experiment.md")
+            )
+            
+            self._log_system_event("STATISTICAL_PLAN_GENERATED", self.statistical_plan)
+
+            if self.statistical_plan.get("validation_status") != "complete":
+                raise ValueError(f"Statistical plan validation failed: {self.statistical_plan.get('notes', 'No notes provided.')}")
+
+            # Parse experiment configuration
+            experiment_config = self._parse_experiment_config(validation_results)
+            
+            self._log_system_event("ENSEMBLE_STARTED", {
+                "corpus_file_count": len(validation_results.get('corpus_files', [])),
+                "session_id": self.session_id,
+                "experiment_config": experiment_config
+            })
+            
+            # Step 2: Execute analysis using registry-based AnalysisAgent
+            await self._spawn_analysis_agents(validation_results, experiment_config)
+            
+            # Step 3: Methodological overwatch using registry
+            overwatch_decision = await self._execute_agent(
+                "MethodologicalOverwatchAgent",
+                workflow_state={"analysis_results": self.analysis_results},
+                step_config={}
+            )
+            
+            self._log_system_event("OVERWATCH_AGENT_REVIEW", overwatch_decision)
+
+            if overwatch_decision.get("decision") == "TERMINATE":
+                raise SystemExit(f"METHODOLOGICAL OVERWATCH: Execution terminated. Reason: {overwatch_decision.get('reason')}")
+
+            # Step 4: Determine workflow using LLM
+            coordination_prompt = f"""
+            Analysis complete. Here are the analysis results:
+            {json.dumps(self.analysis_results, indent=2)}
+            
+            And here are the experiment requirements:
+            {validation_results.get('experiment', {}).get('definition', 'No experiment definition provided')}
+            
+            Experiment Configuration:
+            {json.dumps(experiment_config, indent=2)}
+
+            Based on all the information above, what should happen next?
+            Options:
+            - If experiment requires synthesis/moderation/referee: respond "ADVERSARIAL_SYNTHESIS"
+            - If experiment requires bias isolation (e.g., remove_synthesis: true): respond "RAW_AGGREGATION" 
+            - If you need more information: respond "NEED_MORE_INFO"
+            
+            Respond with just the action name.
+            """
+            
+            model_name = self.model_registry.get_model_for_task('coordination')
+            if not model_name:
+                model_name = 'vertex_ai/gemini-1.5-flash-latest'
+                
+            next_action = await self._call_llm_async(coordination_prompt, "coordination_llm", model_name)
+            
+            # Step 5: Execute workflow decision
+            if "RAW_AGGREGATION" in next_action.upper():
+                final_results = await self._simple_aggregation()
+            elif "ADVERSARIAL_SYNTHESIS" in next_action.upper():
+                final_results = await self._adversarial_workflow()
+            else:
+                final_results = await self._simple_aggregation()
+
+            # Step 6: Statistical analysis using registry
+            stats_results_path = await self._execute_agent(
+                "StatisticalAnalysisAgent",
+                workflow_state={
+                    "analysis_results": self.analysis_results,
+                    "session_results_path": str(self.session_results_path)
+                },
+                step_config={}
+            )
+
+            # Step 7: Statistical interpretation using registry
+            if final_results.get("report_path") and stats_results_path:
+                interpretation_text = await self._execute_agent(
+                    "StatisticalInterpretationAgent",
+                    workflow_state={
+                        "stats_file_path": stats_results_path,
+                        "project_path": str(self.project_path)
+                    },
+                    step_config={}
+                )
+                
+                # Append to report
+                with open(final_results["report_path"], "a") as f:
+                    f.write("\n\n" + interpretation_text)
+
+            # Step 8: Final audit using registry
+            if final_results.get("report_path") and stats_results_path:
+                audit_text = await self._execute_agent(
+                    "ExperimentConclusionAgent",
+                    workflow_state={
+                        "project_path": str(self.project_path),
+                        "report_file_path": final_results["report_path"],
+                        "stats_file_path": stats_results_path
+                    },
+                    step_config={}
+                )
+                
+                # Append to report
+                with open(final_results["report_path"], "a") as f:
+                    f.write("\n\n" + audit_text)
+
+            self._log_system_event("ENSEMBLE_COMPLETED", {
+                "session_id": self.session_id,
+                "final_status": "success",
+                "workflow_used": next_action
+            })
+            
+            return {
+                "status": "success",
+                "session_id": self.session_id,
+                "results": final_results,
+                "workflow": next_action
+            }
+            
+        except Exception as e:
+            self._log_system_event("ENSEMBLE_ERROR", {
+                "session_id": self.session_id,
+                "error": str(e)
+            })
+            return {
+                "status": "error",
+                "session_id": self.session_id,
+                "message": f"Ensemble analysis failed: {str(e)}"
+            }
+
+    async def _spawn_analysis_agents(self, validation_results: Dict[str, Any], experiment_config: Dict[str, Any]):
+        """Spawn analysis agents using registry system - this is called by the registry"""
+        
+        corpus_files = validation_results.get('corpus_files', [])
+        analysis_instructions = validation_results.get('analysis_agent_instructions', '')
+        models = experiment_config.get('models', ['vertex_ai/gemini-2.5-flash'])
+        num_runs = experiment_config.get('num_runs', 1)
+        
+        self._log_system_event("ANALYSIS_AGENTS_SPAWNING", {
+            "agent_count": len(corpus_files) * len(models) * num_runs,
+            "models": models,
+            "num_runs": num_runs,
+            "instructions_preview": analysis_instructions[:200] + "..." if len(analysis_instructions) > 200 else analysis_instructions
+        })
+        
+        # Create analysis tasks
+        analysis_tasks = []
+        for run in range(num_runs):
+            for model_name in models:
+                for i, corpus_file in enumerate(corpus_files):
+                    # corpus_file already contains the full absolute path
+                    corpus_file_path = corpus_file
+                    
+                    agent_id = f"analysis_agent_run{run+1}_{model_name.replace('/', '_')}_{i+1}"
+                    task = self._run_analysis_agent(
+                        agent_id=agent_id,
+                        corpus_file=corpus_file_path,
+                        instructions=analysis_instructions,
+                        model_name=model_name,
+                        run_num=run + 1
+                    )
+                    analysis_tasks.append(task)
+        
+        # Execute tasks in parallel
+        print(f"🔧 Executing {len(analysis_tasks)} analysis tasks in parallel")
+        raw_results = await asyncio.gather(*analysis_tasks, return_exceptions=True)
+        
+        # Filter exceptions
+        successful_results: List[Dict[str, Any]] = []
+        failed_count = 0
+        
+        for i, result in enumerate(raw_results):
+            if isinstance(result, Exception):
+                failed_count += 1
+                self._log_system_event("ANALYSIS_AGENT_ERROR", {
+                    "agent_id": f"analysis_agent_{i+1}",
+                    "error": str(result)
+                })
+            elif isinstance(result, dict):
+                successful_results.append(result)
+
+        self.analysis_results = successful_results
+        
+        print(f"INFO: Analysis complete. {len(successful_results)} successful, {failed_count} failed.")
+        
+        if failed_count > 0 and len(successful_results) > 0:
+            results_prompt = f"""
+            Analysis results processing. There are {failed_count} failed analyses and {len(successful_results)} successful analyses.
+            
+            Options:
+            - "FILTER": Continue with the {len(successful_results)} successful results
+            - "ABORT": Stop processing due to the failures
+            
+            What should we do? Respond with just the action name.
+            """
+            
+            model_name = self.model_registry.get_model_for_task('coordination')
+            if not model_name:
+                model_name = 'vertex_ai/gemini-1.5-flash-latest'
+                
+            processing_decision = await self._call_llm_async(results_prompt, "results_processing_agent", model_name)
+            
+            if "ABORT" in processing_decision.upper():
+                raise ValueError(f"Results processing aborted due to {failed_count} failures")
+
+    async def _run_analysis_agent(self, agent_id: str, corpus_file: str, instructions: str, model_name: str, run_num: int) -> Dict[str, Any]:
+        """Run a single analysis agent on one corpus text"""
+        
+        self._log_system_event("ANALYSIS_AGENT_SPAWNED", {
+            "agent_id": agent_id,
+            "corpus_file": Path(corpus_file).name,
+            "model_name": model_name,
+            "run_num": run_num
+        })
+        
+        # Read the corpus text
+        corpus_text = Path(corpus_file).read_text()
+        
+        # Create analysis prompt for structured output
+        analysis_prompt = f"""You are {agent_id}, a framework analysis specialist.
+
+ANALYSIS INSTRUCTIONS:
+{instructions}
+
+TEXT TO ANALYZE:
+File: {Path(corpus_file).name}
+Content:
+{corpus_text}
+
+TASK: Apply the framework systematically to this text. Provide structured JSON output with:
+1. Framework dimension scores (numerical values with confidence intervals)
+2. Specific textual evidence for each score
+3. Systematic reasoning for your analysis
+
+Return your response as a JSON object with a "score" field containing the primary numerical score, plus other analysis fields.
+
+Example format:
+{{
+  "score": 7.5,
+  "confidence_interval": [6.8, 8.2],
+  "evidence": "Specific textual evidence here...",
+  "reasoning": "Systematic reasoning here..."
+}}
+
+Be precise and cite specific text passages to support your scores."""
+
+        # Call LLM
+        response = await self._call_llm_async(analysis_prompt, agent_id, model_name)
+        
+        self._log_system_event("ANALYSIS_AGENT_RAW_RESPONSE", {
+            "agent_id": agent_id,
+            "raw_response": response
+        })
+        
+        return {
+            "agent_id": agent_id,
+            "corpus_file": corpus_file,
+            "analysis_response": response,
+            "file_name": Path(corpus_file).name,
+            "model_name": model_name,
+            "run_num": run_num
+        }
+
+    async def _simple_aggregation(self) -> Dict[str, Any]:
+        """Simple aggregation of results"""
+        
+        # Create simple report
+        report_content = f"""# Analysis Results Report
+
+## Session Information
+- Session ID: {self.session_id}
+- Results Path: {self.session_results_path}
+- Analysis Count: {len(self.analysis_results)}
+
+## Analysis Results
+"""
+        
+        for result in self.analysis_results:
+            report_content += f"""
+### {result['agent_id']}
+- File: {result['file_name']}
+- Model: {result['model_name']}
+- Run: {result['run_num']}
+
+Response:
+{result['analysis_response']}
+
+---
+"""
+        
+        # Save report
+        if self.session_results_path is None:
+            raise ValueError("Session results path not initialized")
+        report_path = self.session_results_path / "analysis_report.md"
+        report_path.write_text(report_content)
+        
+        return {
+            "report_path": str(report_path),
+            "session_id": self.session_id,
+            "analysis_count": len(self.analysis_results)
+        }
+
+    async def _adversarial_workflow(self) -> Dict[str, Any]:
+        """Adversarial synthesis workflow (simplified for now)"""
+        return await self._simple_aggregation()  # Fallback to simple aggregation 

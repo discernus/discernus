@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 import json
 import math
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Union
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -45,13 +45,14 @@ class ExecutionPlannerAgent:
         except:
             self.tokenizer = None
 
-    def create_execution_plan(self, corpus_files: List[str], model_names: List[str], framework_text: str, analysis_instructions: str) -> Dict[str, Any]:
+    def create_execution_plan(self, corpus_files: List[str], model_names: List[str], framework_text: str, analysis_instructions: str) -> List[Dict[str, Any]]:
         """
         Generates a comprehensive execution plan including cost/time estimates
         and a detailed run schedule.
         """
         if not self.tokenizer:
-            return {"error": "Tokenizer not available, cannot create plan."}
+            print("Error: Tokenizer not available, cannot create plan.")
+            return []
 
         framework_tokens = len(self.tokenizer.encode(framework_text))
         instruction_tokens = len(self.tokenizer.encode(analysis_instructions))
@@ -106,12 +107,7 @@ class ExecutionPlannerAgent:
                     "delay_after_seconds": delay_per_request
                 })
 
-        return {
-            "estimated_cost_usd": round(total_estimated_cost, 4),
-            "estimated_duration_seconds": math.ceil(total_estimated_duration_seconds),
-            "total_api_calls": len(run_schedule),
-            "execution_plan": run_schedule
-        }
+        return run_schedule
 
     def _create_batch_prompt(self, framework_text: str, instructions: str, files_content: Dict[str, str], agent_id: str) -> str:
         """

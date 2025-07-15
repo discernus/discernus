@@ -11,7 +11,7 @@ for an academic publication. It bridges the gap between numbers and meaning.
 import sys
 from pathlib import Path
 import json
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -36,36 +36,47 @@ class StatisticalInterpretationAgent:
         self.model_registry = ModelRegistry()
         self.gateway = LLMGateway(self.model_registry)
 
-    def interpret_statistical_results(self, stats_file_path: str, report_file_path: str) -> str:
+    def interpret_statistical_results(self, workflow_state: Dict[str, Any], step_config: Dict[str, Any]) -> str:
         """
-        Reads statistical results and the main report, and generates a human-readable interpretation.
+        Reads statistical results and generates a human-readable interpretation.
+        The agent finds its own data in the workflow_state.
         """
+        project_path = Path(workflow_state.get('project_path', '.'))
+        stats_file_path = workflow_state.get('stats_file_path')
+
+        if not stats_file_path:
+            return "Error: `stats_file_path` not found in workflow_state."
+
         stats_path = Path(stats_file_path)
-        report_path = Path(report_file_path)
+        
+        # For context, we'll use the experiment.md file from the project path.
+        context_content = ""
+        context_source = ""
+        context_path = project_path / "experiment.md"
+        if context_path.exists():
+            context_source = f"Experiment Definition ({context_path.name})"
+            context_content = context_path.read_text()
 
         if not stats_path.exists():
             return "Error: Statistical results file not found."
-        if not report_path.exists():
-            return "Error: Main report file not found."
-
+        
         try:
             stats_data = json.loads(stats_path.read_text())
-            main_report_content = report_path.read_text()
         except Exception as e:
             return f"Error reading input files: {e}"
 
-        return self._call_interpretation_llm(stats_data, main_report_content)
+        return self._call_interpretation_llm(stats_data, context_content, context_source)
 
-    def _call_interpretation_llm(self, stats_data: Dict[str, Any], main_report_content: str) -> str:
+    def _call_interpretation_llm(self, stats_data: Dict[str, Any], context_content: str, context_source: str) -> str:
         """Calls an LLM to generate the interpretation."""
         prompt = f"""
 You are an expert in computational social science methodology and statistics, specializing in explaining complex quantitative results to a non-expert academic audience.
 
-Your task is to write a new "Statistical Analysis" section for a research paper. You will be given the raw JSON output from the statistical analysis and the main body of the research report. You must synthesize these two sources to provide a clear, concise, and meaningful interpretation of the statistical findings.
+Your task is to write a new "Statistical Analysis" section for a research paper. You will be given the raw JSON output from a statistical analysis and contextual information from the project. You must synthesize these sources to provide a clear, concise, and meaningful interpretation of the statistical findings.
 
-**Main Research Report:**
+**Contextual Information ({context_source}):**
 ---
-{main_report_content}
+{context_content}
 ---
 
 **Raw Statistical Results (JSON):**
@@ -78,7 +89,7 @@ Write a markdown-formatted "Statistical Analysis" section that:
 1.  **Starts with a `## Statistical Analysis` header.**
 2.  Clearly explains the purpose and outcome of each statistical test (e.g., "Inter-run reliability was assessed using Cronbach's Alpha...").
 3.  Interprets the results in plain English (e.g., "A score of 0.85 indicates high reliability between analysis runs.").
-4.  Connects the statistical findings back to the main research questions and conclusions in the report.
+4.  Connects the statistical findings back to the main research questions and hypotheses in the provided context.
 5.  Is written in a clear, academic tone suitable for publication.
 
 **Do NOT simply repeat the JSON data. Your value is in the interpretation and synthesis.**

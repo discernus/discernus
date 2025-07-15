@@ -9,12 +9,12 @@ This sample project demonstrates the complete SOAR (Simple Atomic Orchestration 
 
 ### 1. Validate the Project
 ```bash
-python3 soar_cli.py validate ./examples/soar_cff_sample_project
+python3 discernus_cli.py validate ./examples/soar_cff_sample_project
 ```
 
 ### 2. Execute the Analysis
 ```bash
-python3 soar_cli.py execute ./examples/soar_cff_sample_project --dev-mode
+python3 discernus_cli.py execute ./examples/soar_cff_sample_project --dev-mode
 ```
 
 ### 3. View Results
@@ -123,37 +123,37 @@ CFF_Cohesion_Index = 0.25(Hope-Fear) + 0.20(Compersion-Envy) + 0.30(Amity-Enmity
 ### Basic Validation
 ```bash
 # Validate project structure and content
-python3 soar_cli.py validate ./examples/soar_cff_sample_project
+python3 discernus_cli.py validate ./examples/soar_cff_sample_project
 
 # Interactive validation with issue resolution
-python3 soar_cli.py validate ./examples/soar_cff_sample_project --interactive
+python3 discernus_cli.py validate ./examples/soar_cff_sample_project --interactive
 
 # Verbose validation output
-python3 soar_cli.py validate ./examples/soar_cff_sample_project --verbose
+python3 discernus_cli.py validate ./examples/soar_cff_sample_project --verbose
 ```
 
 ### Analysis Execution
 ```bash
 # Standard execution
-python3 soar_cli.py execute ./examples/soar_cff_sample_project
+python3 discernus_cli.py execute ./examples/soar_cff_sample_project
 
 # Development mode with simulated researcher
-python3 soar_cli.py execute ./examples/soar_cff_sample_project --dev-mode
+python3 discernus_cli.py execute ./examples/soar_cff_sample_project --dev-mode
 
 # Auto-validate before execution
-python3 soar_cli.py execute ./examples/soar_cff_sample_project --auto-validate
+python3 discernus_cli.py execute ./examples/soar_cff_sample_project --auto-validate
 ```
 
 ### System Information
 ```bash
 # List available frameworks
-python3 soar_cli.py list-frameworks
+python3 discernus_cli.py list-frameworks
 
 # Show system information
-python3 soar_cli.py info
+python3 discernus_cli.py info
 
 # Check THIN compliance
-python3 soar_cli.py info --check-thin
+python3 discernus_cli.py info --check-thin
 ```
 
 ---

@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-SOAR CLI - Simple Atomic Orchestration Research
-===============================================
+Discernus CLI - Computational Text Analysis Platform
+===================================================
 
-THIN Command-line interface for SOAR (Simple Atomic Orchestration Research).
+THIN Command-line interface for Discernus computational text analysis platform.
 Provides validate and execute commands for systematic computational research.
 
 USAGE:
-    soar validate ./my_project     # Validate project structure and specifications
-    soar execute ./my_project      # Execute validated project with dynamic orchestration
-    soar list-frameworks           # List available analytical frameworks
-    soar version                   # Show version information
+    discernus validate ./my_project     # Validate project structure and specifications
+    discernus execute ./my_project      # Execute validated project with dynamic orchestration
+    discernus list-frameworks           # List available analytical frameworks
+    discernus version                    # Show version information
 
 PHILOSOPHY:
 Making world-class computational research as simple as pointing to a folder.
@@ -30,7 +30,7 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 try:
-    # Core SOAR components
+    # Core Discernus components
     from discernus.core.framework_loader import FrameworkLoader
     from discernus.core.project_chronolog import initialize_project_chronolog
     from discernus.core.project_chronolog import get_project_chronolog
@@ -39,31 +39,31 @@ try:
     from discernus.gateway.model_registry import ModelRegistry
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
-    print(f"❌ SOAR CLI dependencies not available: {e}")
+    print(f"❌ Discernus CLI dependencies not available: {e}")
     DEPENDENCIES_AVAILABLE = False
 
 @click.group()
-@click.version_option(version='1.0.0', prog_name='SOAR')
-def soar():
+@click.version_option(version='1.0.0', prog_name='Discernus')
+def discernus():
     """
-    SOAR: Simple Atomic Orchestration Research
+    Discernus: Computational Text Analysis Platform
     
     Transform computational research from complex orchestration to simple execution,
     while maintaining the highest standards of academic rigor.
     """
     if not DEPENDENCIES_AVAILABLE:
-        click.echo("❌ SOAR dependencies not available. Installation may be incomplete.")
+        click.echo("❌ Discernus dependencies not available. Installation may be incomplete.")
         sys.exit(1)
 
-@soar.command()
+@discernus.command()
 @click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--interactive', '-i', is_flag=True, help='Interactive issue resolution')
 @click.option('--verbose', '-v', is_flag=True, help='Verbose validation output')
 def validate(project_path: str, interactive: bool, verbose: bool):
     """
-    Validate SOAR project structure and specifications
+    Validate Discernus project structure and specifications
     
-    PROJECT_PATH: Path to SOAR project directory
+    PROJECT_PATH: Path to Discernus project directory
     
     Validates:
     - Project structure (framework.md, experiment.md, corpus/)
@@ -72,9 +72,9 @@ def validate(project_path: str, interactive: bool, verbose: bool):
     - Corpus completeness and manifest
     
     Example:
-        soar validate ./my_cff_analysis
+        discernus validate ./my_cff_analysis
     """
-    click.echo("🔍 SOAR Project Validation")
+    click.echo("🔍 Discernus Project Validation")
     click.echo("=" * 40)
     
     try:
@@ -93,7 +93,7 @@ def validate(project_path: str, interactive: bool, verbose: bool):
         # Handle results
         if validation_result['validation_passed']:
             click.echo("\n✅ Project validation PASSED!")
-            click.echo(f"   Ready for execution with 'soar execute {project_path}'")
+            click.echo(f"   Ready for execution with 'discernus execute {project_path}'")
             
             if verbose:
                 _show_validation_summary(validation_result)
@@ -108,7 +108,7 @@ def validate(project_path: str, interactive: bool, verbose: bool):
                 if resolution_result['status'] == 'user_action_required':
                     sys.exit(1)
             else:
-                click.echo(f"\n💡 Use 'soar validate {project_path} --interactive' for guided issue resolution")
+                click.echo(f"\n💡 Use 'discernus validate {project_path} --interactive' for guided issue resolution")
                 sys.exit(1)
         
     except Exception as e:
@@ -123,7 +123,7 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
     """
     Async implementation of the execute function with model health verification.
     """
-    click.echo("🚀 SOAR Project Execution")
+    click.echo("🚀 Discernus Project Execution")
     click.echo("=" * 40)
     
     # Initialize project chronolog
@@ -131,9 +131,9 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
         import datetime
         import getpass
         
-        session_id = f"soar_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        session_id = f"discernus_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
         user = getpass.getuser()
-        command = f"soar execute {project_path}"
+        command = f"discernus execute {project_path}"
         if dev_mode:
             command += " --dev-mode"
         if researcher_profile != 'experienced_computational_social_scientist':
@@ -145,7 +145,7 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
             command=command,
             session_id=session_id,
             system_state={
-                'soar_cli_version': '2.0',
+                'discernus_cli_version': '2.0',
                 'dev_mode': dev_mode,
                 'researcher_profile': researcher_profile
             }
@@ -193,7 +193,7 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
 
         if not validation_result.get('validation_passed'):
             click.secho(f"\n❌ Validation FAILED: {validation_result.get('message', 'Unknown error.')}", fg='red')
-            click.echo("   Please run 'soar validate' to diagnose and fix the issues in your project files.")
+            click.echo("   Please run 'discernus validate' to diagnose and fix the issues in your project files.")
             sys.exit(1)
         
         click.secho("✅ Validation PASSED.", fg='green')
@@ -322,14 +322,14 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
         sys.exit(1)
 
 # Update the click command to use the wrapper
-@soar.command()
+@discernus.command()
 @click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--dev-mode', is_flag=True, help='Run in development mode with simulated researcher')
 @click.option('--researcher-profile', default='experienced_computational_social_scientist', 
               help='Simulated researcher profile for dev mode')
 def execute(project_path: str, dev_mode: bool, researcher_profile: str):
     """
-    Validates and executes a SOAR project with pre-execution confirmation.
+    Validates and executes a Discernus project with pre-execution confirmation.
     """
     _execute_wrapper(project_path, dev_mode, researcher_profile)
 
@@ -346,7 +346,7 @@ def _generate_experiment_config(project_path: str):
     except Exception as e:
         click.echo(f"⚠️ Failed to generate experiment configuration: {e}")
 
-@soar.command()
+@discernus.command()
 def list_frameworks():
     """List all available analytical frameworks in the system"""
     click.echo("📚 Available Analytical Frameworks")
@@ -379,11 +379,11 @@ def list_frameworks():
         click.echo(f"❌ Error listing frameworks: {str(e)}", err=True)
         sys.exit(1)
 
-@soar.command()
+@discernus.command()
 @click.option('--check-thin', is_flag=True, help='Check THIN compliance')
 def info(check_thin: bool):
-    """Show SOAR system information and status"""
-    click.echo("ℹ️  SOAR System Information")
+    """Show Discernus system information and status"""
+    click.echo("ℹ️  Discernus System Information")
     click.echo("=" * 40)
     
     click.echo(f"Version: 1.0.0")
@@ -647,4 +647,4 @@ async def _verify_model_health(models: List[str]) -> Dict[str, Any]:
 # Removed deprecated _execute_orchestration function - using EnsembleOrchestrator now
 
 if __name__ == '__main__':
-    soar() 
+    discernus() 

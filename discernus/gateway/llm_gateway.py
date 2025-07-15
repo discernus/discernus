@@ -9,11 +9,12 @@ of model capabilities, costs, or fallback logic.
 """
 
 import litellm
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, List, Optional
 from .model_registry import ModelRegistry
 from .provider_parameter_manager import ProviderParameterManager
 import time
 import os
+import asyncio
 
 class LLMGateway:
     """
@@ -72,6 +73,44 @@ class LLMGateway:
                     return "", {"success": False, "error": f"All fallbacks failed. Last error on {current_model}: {str(e)}", "model": current_model, "attempts": attempts}
         
         return "", {"success": False, "error": f"Max retries exceeded for {model}", "model": current_model, "attempts": max_retries}
+
+    async def check_model_health(self, model_name: str) -> Dict[str, Any]:
+        """
+        Checks the health of a single model by attempting a simple completion.
+        """
+        try:
+            # Attempt a very basic completion to check if the model is responsive
+            # This is a very basic check and might not cover all potential issues
+            # A more robust health check would involve model-specific parameters
+            # and potentially a more complex prompt.
+            messages = [{"role": "user", "content": "Hello, model!"}]
+            clean_params = self.parameter_manager.get_clean_parameters(model_name, {}) # Assuming no specific parameters needed for this basic check
+            litellm.completion(model=model_name, messages=messages, stream=False, **clean_params)
+            
+            # If the call completes without an exception, we consider it healthy.
+            return {'is_healthy': True, 'message': 'Model is responsive.'}
+        except litellm.exceptions.APIConnectionError as e:
+            return {'is_healthy': False, 'message': f'APIConnectionError: {e}'}
+        except Exception as e:
+            # Fallback for any other unexpected errors
+            print(f"ERROR: An unexpected error occurred during health check for {model_name}: {e}")
+            return {'is_healthy': False, 'message': f'Unexpected error: {str(e)}'}
+
+    async def check_many_models_health(self, model_names: List[str]) -> Dict[str, Any]:
+        """
+        Checks the health of multiple models concurrently.
+        """
+        tasks = [self.check_model_health(model_name) for model_name in model_names]
+        results = await asyncio.gather(*tasks)
+        
+        return {
+            "status": "completed",
+            "results": {model_name: result for model_name, result in zip(model_names, results)}
+        }
+
+    def _get_model_from_registry(self, model_name: str) -> Optional[Dict[str, Any]]:
+        """Helper to get model details from the registry."""
+        return self.model_registry.get_model_details(model_name)
 
 if __name__ == '__main__':
     # Demo of how to use the LLMGateway

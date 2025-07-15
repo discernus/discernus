@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 import yaml
 import re
-from typing import Dict, Any
+from typing import Dict, Any, List
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -117,6 +117,48 @@ Be concise but helpful. Focus on maintaining research quality while being practi
                 'action': 'cancel',
                 'explanation': f'Error getting recommendation: {str(e)}'
             }
+
+    def optimize_model_selection(self, requested_models: List[str]) -> List[str]:
+        """
+        Takes a list of requested models and returns an optimized list using the best available provider.
+        """
+        optimized_list = []
+        all_model_names = self.model_registry.list_models()
+
+        for requested_model in requested_models:
+            # Find all providers for the base model name (e.g., 'claude-3-5-sonnet')
+            base_model_name = self._get_base_model_name(requested_model)
+            
+            # Find all available model names that match the base name
+            candidates = [m for m in all_model_names if base_model_name in m]
+
+            if not candidates:
+                print(f"⚠️ Warning: Model '{requested_model}' not found in registry. Using as is.")
+                optimized_list.append(requested_model)
+                continue
+
+            # Get full details for sorting
+            candidate_details = [self.model_registry.get_model_details(c) for c in candidates]
+            candidate_details = [c for c in candidate_details if c is not None]
+            
+            # Sort candidates by utility_tier (lower is better)
+            candidate_details.sort(key=lambda x: x.get('utility_tier', 99))
+            
+            best_candidate = candidate_details[0]
+            best_candidate_name = next(name for name, details in self.model_registry.models.items() if details == best_candidate)
+
+            if best_candidate_name != requested_model:
+                print(f"✅ Optimized '{requested_model}' to use preferred provider: '{best_candidate_name}'")
+            optimized_list.append(best_candidate_name)
+            
+        return optimized_list
+
+    def _get_base_model_name(self, model_identifier: str) -> str:
+        """Extracts the base name from a model identifier (e.g., 'anthropic/claude-3-5-sonnet-20240620' -> 'claude-3-5-sonnet')."""
+        name_part = model_identifier.split('/')[-1]
+        # Remove date-like suffixes
+        base_name = re.sub(r'-\d{8}$', '', name_part)
+        return base_name
 
     def generate_configuration(self, experiment_md_path: str) -> bool:
         """

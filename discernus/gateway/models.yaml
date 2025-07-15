@@ -25,7 +25,12 @@
 
 models:
   # --- PREFERRED PROVIDER: VERTEX AI (STABILITY & PERFORMANCE) ---
-  # REMOVED: This model is not available in the configured GCP region (us-central1).
+  
+  # VERTEX AI CLAUDE MODELS - TEMPORARILY COMMENTED OUT
+  # These models are returning 404 errors and causing system delays
+  # Uncomment when GCP project access is confirmed working
+  
+  # # CLAUDE 3.5 SONNET - RESTORED: Available in multiple regions with excellent rate limits
   # vertex_ai/claude-3-5-sonnet@20240620:
   #   provider: "vertex_ai"
   #   performance_tier: "top-tier"
@@ -33,14 +38,76 @@ models:
   #   costs:
   #     input_per_million_tokens: 3.00
   #     output_per_million_tokens: 15.00
-  #   utility_tier: 1 # Highest priority
+  #   utility_tier: 5 # DEMOTED: Not available for this project - use direct Anthropic API instead
   #   task_suitability: [synthesis, coordination, planning]
-  #   tpm: 350000 # Published by Google for us-east5
-  #   rpm: 80     # Published by Google for us-east5
+  #   # Regional availability with rate limits
+  #   regions:
+  #     us-east5:
+  #       tpm: 350000
+  #       rpm: 80
+  #     europe-west1:
+  #       tpm: 600000
+  #       rpm: 130
+  #     asia-southeast1:
+  #       tpm: 150000
+  #       rpm: 35
   #   optimal_batch_size: 8
-  #   last_updated: "2024-07-17"
-  #   review_by: "2025-01-17"
-  #   notes: "PREFERRED path for this model due to high, stable rate limits."
+  #   last_updated: "2025-01-15"
+  #   review_by: "2025-07-15"
+  #   notes: "PREFERRED path for Claude 3.5 Sonnet due to high, stable rate limits on Vertex AI. Available in us-east5, europe-west1, and asia-southeast1."
+
+  # # CLAUDE 3.7 SONNET - NEWER MODEL: Available on Vertex AI (March 2025)
+  # vertex_ai/claude-3-7-sonnet@20250219:
+  #   provider: "vertex_ai"
+  #   performance_tier: "top-tier"
+  #   context_window: 200000
+  #   costs:
+  #     input_per_million_tokens: 3.00
+  #     output_per_million_tokens: 15.00
+  #   utility_tier: 5 # DEMOTED: Not available for this project - use direct Anthropic API instead
+  #   task_suitability: [synthesis, coordination, planning, reasoning]
+  #   regions:
+  #     us-east5:
+  #       tpm: 500000
+  #       rpm: 55
+  #     europe-west1:
+  #       tpm: 300000
+  #       rpm: 40
+  #     global:
+  #       tpm: 300000
+  #       rpm: 35
+  #   optimal_batch_size: 8
+  #   last_updated: "2025-01-15"
+  #   review_by: "2025-07-15"
+  #   notes: "Latest Claude model with enhanced reasoning capabilities. Supports extended thinking/reasoning_content."
+
+  # # CLAUDE SONNET 4 - NEWEST MODEL: Available on Vertex AI (May 2025)
+  # vertex_ai/claude-sonnet-4@20250514:
+  #   provider: "vertex_ai"
+  #   performance_tier: "top-tier"
+  #   context_window: 200000
+  #   costs:
+  #     input_per_million_tokens: 3.00
+  #     output_per_million_tokens: 15.00
+  #   utility_tier: 1 # RESTORED: Model is accessible, needs quota increase
+  #   task_suitability: [synthesis, coordination, planning, reasoning, coding]
+  #   regions:
+  #     us-east5:
+  #       tpm: 280000  # Input TPM
+  #       rpm: 35
+  #     europe-west1:
+  #       tpm: 180000  # Input TPM
+  #       rpm: 25
+  #     asia-east1:
+  #       tpm: 550000  # Input TPM
+  #       rpm: 70
+  #     global:
+  #       tpm: 276000  # Input TPM
+  #       rpm: 35
+  #   optimal_batch_size: 8
+  #   last_updated: "2025-01-15"
+  #   review_by: "2025-07-15"
+  #   notes: "Latest Claude 4 model with superior intelligence. Supports extended thinking and computer use."
 
   # --- SPECIALIZED MODEL PROVIDER: OPENROUTER (ECOSYSTEM ACCESS) ---
   openrouter/perplexity/r1-1776:
@@ -68,7 +135,7 @@ models:
     costs:
       input_per_million_tokens: 3.00
       output_per_million_tokens: 15.00
-    utility_tier: 2 # Lower priority than the Vertex version
+    utility_tier: 1 # PROMOTED: Higher priority until Vertex AI access is fixed
     task_suitability: [synthesis, coordination, planning]
     # Rate limits are for a standard starting tier and may vary.
     tpm: 40000
