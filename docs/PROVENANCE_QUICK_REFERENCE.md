@@ -90,14 +90,14 @@ for s in sessions: print(f'{s[\"session_id\"]}: {s[\"event_count\"]} events')
 ## 🧪 **Research Workflows**
 
 ### **Cronbach's Alpha Study**
-1. Run analysis 5-10 times: `python3 soar_cli.py execute project/experiment`
+1. Run analysis 5-10 times: `python3 discernus_cli.py execute project/experiment`
 2. Collect run chronologs: `ls results/*/RUN_CHRONOLOG_*.jsonl`
 3. Extract timing data: Use grep or Python parsing
 4. Calculate alpha across timing consistency
 
 ### **Content Replication**
 1. Copy framework and experiment files
-2. Run analysis: `python3 soar_cli.py execute project/experiment` 
+2. Run analysis: `python3 discernus_cli.py execute project/experiment` 
 3. Compare conversation files between runs
 4. Verify identical prompts and similar reasoning
 

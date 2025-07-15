@@ -38,27 +38,45 @@ class ExperimentConclusionAgent:
         self.model_registry = ModelRegistry()
         self.gateway = LLMGateway(self.model_registry)
 
-    def generate_final_audit(self, project_path: str, report_file_path: str, stats_file_path: str) -> str:
+    def generate_final_audit(self, workflow_state: Dict[str, Any], step_config: Dict[str, Any]) -> str:
         """
         Reads all experiment artifacts and generates a final methodological audit.
+        The agent is responsible for finding its own data in the workflow_state
+        using the keys provided in the step_config.
         """
-        project_path_obj = Path(project_path)
+        params = step_config.get('params', {})
+        project_path = Path(workflow_state.get('project_path', '.'))
         
+        # Use params to find the content/paths in the workflow state
+        report_content = workflow_state.get(params.get('report_content_key', '')) or ""
+        critique_content = workflow_state.get(params.get('critique_key', ''))
+        stats_file_path = workflow_state.get('stats_file_path')
+
+        # Fallback to reading from files if content isn't directly in the state
+        if not report_content and 'report_file_path' in workflow_state:
+            report_content = Path(workflow_state['report_file_path']).read_text()
+
+        if not stats_file_path:
+            return "## Methodological Audit\n\n**Error:** Could not perform final audit. `stats_file_path` not found in workflow state."
+
         # Gather all artifacts
         try:
-            experiment_md = (project_path_obj / "experiment.md").read_text()
-            framework_md = (project_path_obj / "framework.md").read_text()
-            final_report = Path(report_file_path).read_text()
+            experiment_md = (project_path / "experiment.md").read_text()
+            framework_md = (project_path / "framework.md").read_text()
             stats_json = json.loads(Path(stats_file_path).read_text())
-            # Read the last 100 lines of the chronolog to keep context manageable
-            chronolog_entries = self._read_last_n_lines_of_chronolog(project_path_obj, 100)
+            chronolog_entries = self._read_last_n_lines_of_chronolog(project_path, 100)
 
         except FileNotFoundError as e:
             return f"## Methodological Audit\n\n**Error:** Could not perform final audit. Missing required file: {e.filename}"
         except Exception as e:
             return f"## Methodological Audit\n\n**Error:** Could not perform final audit. Failed to read artifact files: {e}"
 
-        return self._call_audit_llm(experiment_md, framework_md, final_report, stats_json, chronolog_entries)
+        # Combine the report and critique for the LLM call
+        final_report_context = report_content
+        if critique_content:
+            final_report_context += "\n\n--- CRITIQUE FOR REVISION ---\n" + str(critique_content)
+
+        return self._call_audit_llm(experiment_md, framework_md, final_report_context, stats_json, chronolog_entries)
 
     def _read_last_n_lines_of_chronolog(self, project_path: Path, n: int) -> List[Dict]:
         """Reads the last N JSONL entries from the project chronolog."""

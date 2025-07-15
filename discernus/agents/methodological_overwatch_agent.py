@@ -38,10 +38,14 @@ class MethodologicalOverwatchAgent:
         self.model_registry = ModelRegistry()
         self.gateway = LLMGateway(self.model_registry)
 
-    def review_analysis_results(self, analysis_results: List[Dict[str, Any]]) -> Dict[str, str]:
+    def review_analysis_results(self, workflow_state: Dict[str, Any], step_config: Dict[str, Any]) -> Dict[str, str]:
         """
         Reviews a list of analysis results and decides whether to continue.
         """
+        params = step_config.get('params', {})
+        results_key = params.get('analysis_results_key', 'analysis_results')
+        analysis_results = workflow_state.get(results_key, [])
+
         if not analysis_results:
             return {"decision": "TERMINATE", "reason": "No analysis results were provided to the overwatch agent."}
 

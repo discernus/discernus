@@ -23,16 +23,9 @@ Test that the newly THIN-compliant orchestrator can:
 
 **Minimal Test Design**:
 - **Corpus**: 2 speeches only (Romney, McCain - both sanitized)
-- **Models**: 1 LLM only (Claude 3.5 Sonnet)
+- **Models**: Multi-model test (Claude 3.5 Sonnet + Gemini 2.5 Flash)
 - **Condition**: Sanitized English only (no bias testing)
 - **Workflow**: RAW_AGGREGATION (no adversarial synthesis)
-
-**Configuration**:
-```yaml
-remove_synthesis: true  # CRITICAL: Test bias isolation protocol
-batch_size: 2
-models: ["claude-3.5-sonnet"]
-```
 
 **Success Criteria**:
 - Orchestrator correctly chooses RAW_AGGREGATION workflow
@@ -42,13 +35,27 @@ models: ["claude-3.5-sonnet"]
 
 ---
 
+## Multi-Model Configuration
+
+Test multi-model execution capabilities:
+
+```yaml
+models:
+  - anthropic/claude-3-5-sonnet-20240620
+  - vertex_ai/gemini-2.5-flash
+num_runs: 1
+remove_synthesis: true
+```
+
+---
+
 ## Expected Outputs
 
 **Validation Targets**:
 1. **Workflow Selection**: Logs show "RAW_AGGREGATION" chosen
 2. **Agent Spawning**: Only analysis agents, no synthesis agents
 3. **Score Collection**: Raw PDAF anchor scores collected
-4. **Clean Results**: No adversarial discussion or arbitration
+4. **Multi-Model Execution**: Both models process corpus successfully
 
 This smoke test validates the orchestrator changes are working correctly before running the full 864-analysis Attesor study.
 

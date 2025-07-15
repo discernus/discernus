@@ -2,8 +2,8 @@ agents:
   - name: AnalysisAgent
     archetype: Role-Playing
     module: "discernus.orchestration.ensemble_orchestrator"
-    class: "AnalysisAgent" # Note: This is a conceptual class, its execution is handled inside the orchestrator
-    execution_method: "_run_analysis_agent"
+    class: "EnsembleOrchestrator" # Note: This is a conceptual class, its execution is handled inside the orchestrator
+    execution_method: "_spawn_analysis_agents"
     description: "The primary workhorse agent. Applies a given framework to a single text document to produce a structured analysis."
     prompt_source: "dynamic (receives framework and instructions from orchestrator)"
     inputs:
@@ -12,6 +12,19 @@ agents:
       - analysis_instructions: "Specific instructions for this analysis run."
     outputs:
       - analysis_results: "A list of structured JSON objects containing scores and evidence."
+
+  - name: StatisticalAnalysisAgent
+    archetype: Tool-Using
+    module: "discernus.agents.statistical_analysis_agent"
+    class: "StatisticalAnalysisAgent"
+    execution_method: "calculate_statistics"
+    description: "Performs statistical calculations on structured analysis results and saves them to a file."
+    prompt_source: "self-contained"
+    inputs:
+      - analysis_results: "A list of raw analysis results from the AnalysisAgent."
+      - session_results_path: "The path to the results directory for the current session."
+    outputs:
+      - stats_file_path: "The path to the JSON file containing the statistical results."
 
   - name: StatisticalInterpretationAgent
     archetype: Tool-Using
@@ -22,7 +35,7 @@ agents:
     prompt_source: "self-contained"
     inputs:
       - stats_file_path: "path to the raw statistical_analysis_results.json"
-      - report_file_path: "path to the main report file for context"
+      - project_path: "path to the project directory for context"
     outputs:
       - interpretation_text: "A formatted markdown string containing the full interpretation."
 
@@ -53,17 +66,6 @@ agents:
       - decision_json: "A JSON object with a 'decision' (PROCEED/TERMINATE) and a 'reason'."
 
   # Agents below are part of the initial validation phase, not typically part of the post-analysis workflow
-  - name: ValidationAgent
-    archetype: Hybrid
-    module: "discernus.agents.validation_agent"
-    class: "ValidationAgent"
-    execution_method: "validate_project"
-    description: "Orchestrates pre-execution validation of an experiment's framework, experiment definition, and corpus. Uses LLM-driven checks for coherence and readiness."
-    prompt_source: "self-contained"
-    inputs:
-      - project_path: "path to the project directory"
-    outputs:
-      - validation_result: "A JSON object summarizing the validation outcome, including readiness for execution."
 
   - name: EnsembleConfigurationAgent
     archetype: Tool-Using

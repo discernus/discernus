@@ -1,7 +1,7 @@
 # Experiment: Single-LLM Bias Isolation Pilot
 ## Test Bias Detection Protocol Before Multi-LLM Study
 
-**Date**: January 13, 2025  
+**Date**: July 15, 2025  
 **Framework**: PDAF v1.1 (Sanitized)  
 **Analysis Type**: Bias isolation validation  
 **Expected Duration**: 30-45 minutes  
