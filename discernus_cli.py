@@ -115,7 +115,7 @@ def validate(project_path: str, verbose: bool):
                 _show_verbose_validation(validation_result)
             
             # Handle results
-            if validation_result['validation_passed']:
+            if validation_result.get('validation_passed'):
                 click.echo("\n✅ Project validation PASSED!")
                 click.echo(f"   Ready for execution with 'discernus execute {project_path}'")
                 
@@ -123,10 +123,13 @@ def validate(project_path: str, verbose: bool):
                     _show_validation_summary(validation_result)
             else:
                 click.echo(f"\n❌ Project validation FAILED!")
-                click.echo(f"   Failed at step: {validation_result['step_failed']}")
-                click.echo(f"   Issue: {validation_result['message']}")
+                if "feedback" in validation_result:
+                    click.echo("   The project is not methodologically sound. The research assistant advises:")
+                    click.echo(f"   > {validation_result['feedback']}")
+                else:
+                    click.echo(f"   Failed at step: {validation_result.get('step_failed', 'Unknown')}")
+                    click.echo(f"   Issue: {validation_result.get('message', 'No details provided.')}")
                 
-                click.echo(f"\n💡 Use 'discernus validate {project_path} --interactive' for guided issue resolution")
                 sys.exit(1)
             
         except Exception as e:
@@ -167,7 +170,9 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
         for key, value in summary.items():
             click.echo(f"   {key}: {value}")
         
-        if not click.confirm("\nProceed with execution?"):
+        if dev_mode:
+            click.echo("\nDEV MODE: Auto-approving execution as requested.")
+        elif not click.confirm("\nProceed with execution?"):
             click.echo("Execution cancelled by user.")
             sys.exit(0)
         
