@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """
-Discernus Agents Package
-========================
-
-SOAR agents for Simple Atomic Orchestration Research.
-Following THIN principles - agents defined by text prompts, not code.
+Discernus Agents - A collection of specialized agents for computational text analysis.
 """
 
-# Version info
-__version__ = "1.0.0"
+from .project_coherence_analyst import ProjectCoherenceAnalyst
+from .ensemble_configuration_agent import EnsembleConfigurationAgent
+from .execution_planner_agent import ExecutionPlannerAgent
+from .statistical_analysis_agent import StatisticalAnalysisAgent
+from .statistical_interpretation_agent import StatisticalInterpretationAgent
+from .methodological_overwatch_agent import MethodologicalOverwatchAgent
+from .experiment_conclusion_agent import ExperimentConclusionAgent
+from .data_extraction_agent import DataExtractionAgent
 
-# Import key agents
-from .validation_agent import ValidationAgent
-
-__all__ = ['ValidationAgent'] 
+__all__ = ['ProjectCoherenceAnalyst'] 

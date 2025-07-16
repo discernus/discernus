@@ -34,7 +34,7 @@ try:
     from discernus.core.framework_loader import FrameworkLoader
     from discernus.core.project_chronolog import initialize_project_chronolog
     from discernus.core.project_chronolog import get_project_chronolog
-    from discernus.agents.validation_agent import ValidationAgent
+    from discernus.agents import ProjectCoherenceAnalyst
     from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
     from discernus.gateway.model_registry import ModelRegistry
     DEPENDENCIES_AVAILABLE = True
@@ -51,15 +51,38 @@ def discernus():
     Transform computational research from complex orchestration to simple execution,
     while maintaining the highest standards of academic rigor.
     """
+    # Initialize chronolog here to capture all CLI interactions
+    try:
+        import datetime
+        import getpass
+        
+        session_id = f"discernus_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        user = getpass.getuser()
+        command = " ".join(sys.argv)
+        
+        # This is a global initialization, so project_path is not yet known.
+        # We can log to a general system log or handle this differently later.
+        # For now, let's just print that we would be logging.
+        # initialize_project_chronolog(
+        #     project_path=".", # General log
+        #     user=user,
+        #     command=command,
+        #     session_id=session_id,
+        #     system_state={'discernus_cli_version': '2.0'}
+        # )
+        # click.echo(f"📝 Global chronolog initialized for session: {session_id}")
+        
+    except Exception as e:
+        click.echo(f"⚠️ Global Chronolog initialization failed: {e}")
+
     if not DEPENDENCIES_AVAILABLE:
         click.echo("❌ Discernus dependencies not available. Installation may be incomplete.")
         sys.exit(1)
 
 @discernus.command()
 @click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--interactive', '-i', is_flag=True, help='Interactive issue resolution')
 @click.option('--verbose', '-v', is_flag=True, help='Verbose validation output')
-def validate(project_path: str, interactive: bool, verbose: bool):
+def validate(project_path: str, verbose: bool):
     """
     Validate Discernus project structure and specifications
     
@@ -77,43 +100,40 @@ def validate(project_path: str, interactive: bool, verbose: bool):
     click.echo("🔍 Discernus Project Validation")
     click.echo("=" * 40)
     
-    try:
-        # Initialize validation agent
-        validation_agent = ValidationAgent()
-        
-        click.echo(f"📁 Project Path: {project_path}")
-        click.echo("⏳ Running comprehensive validation...")
-        
-        # Run validation
-        validation_result = validation_agent.validate_project(project_path)
-        
-        if verbose:
-            _show_verbose_validation(validation_result)
-        
-        # Handle results
-        if validation_result['validation_passed']:
-            click.echo("\n✅ Project validation PASSED!")
-            click.echo(f"   Ready for execution with 'discernus execute {project_path}'")
+    async def _validate_async():
+        try:
+            # Initialize validation agent
+            validation_agent = ProjectCoherenceAnalyst()
+            
+            click.echo(f"📁 Project Path: {project_path}")
+            click.echo("⏳ Running comprehensive validation...")
+            
+            # Run validation
+            validation_result = await validation_agent.validate_project(project_path)
             
             if verbose:
-                _show_validation_summary(validation_result)
-        else:
-            click.echo(f"\n❌ Project validation FAILED!")
-            click.echo(f"   Failed at step: {validation_result['step_failed']}")
-            click.echo(f"   Issue: {validation_result['message']}")
+                _show_verbose_validation(validation_result)
             
-            if interactive:
-                # Interactive resolution
-                resolution_result = validation_agent.interactive_resolution(validation_result)
-                if resolution_result['status'] == 'user_action_required':
-                    sys.exit(1)
+            # Handle results
+            if validation_result['validation_passed']:
+                click.echo("\n✅ Project validation PASSED!")
+                click.echo(f"   Ready for execution with 'discernus execute {project_path}'")
+                
+                if verbose:
+                    _show_validation_summary(validation_result)
             else:
+                click.echo(f"\n❌ Project validation FAILED!")
+                click.echo(f"   Failed at step: {validation_result['step_failed']}")
+                click.echo(f"   Issue: {validation_result['message']}")
+                
                 click.echo(f"\n💡 Use 'discernus validate {project_path} --interactive' for guided issue resolution")
                 sys.exit(1)
-        
-    except Exception as e:
-        click.echo(f"❌ Validation failed with error: {str(e)}", err=True)
-        sys.exit(1)
+            
+        except Exception as e:
+            click.echo(f"❌ Validation failed with error: {str(e)}", err=True)
+            sys.exit(1)
+
+    asyncio.run(_validate_async())
 
 def _execute_wrapper(project_path: str, dev_mode: bool, researcher_profile: str):
     """Wrapper to run the async execute function."""
@@ -126,71 +146,12 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
     click.echo("🚀 Discernus Project Execution")
     click.echo("=" * 40)
     
-    # Initialize project chronolog
     try:
-        import datetime
-        import getpass
-        
-        session_id = f"discernus_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        user = getpass.getuser()
-        command = f"discernus execute {project_path}"
-        if dev_mode:
-            command += " --dev-mode"
-        if researcher_profile != 'experienced_computational_social_scientist':
-            command += f" --researcher-profile {researcher_profile}"
-        
-        initialize_project_chronolog(
-            project_path=project_path,
-            user=user,
-            command=command,
-            session_id=session_id,
-            system_state={
-                'discernus_cli_version': '2.0',
-                'dev_mode': dev_mode,
-                'researcher_profile': researcher_profile
-            }
-        )
-        click.echo(f"📝 Project chronolog initialized: {session_id}")
-        
-    except Exception as e:
-        click.echo(f"⚠️ ProjectChronolog initialization failed: {e}")
-    
-    try:
-        # Phase 0: Global Model Health Check
-        click.echo("🔍 Phase 0: Global Model Health Check...")
-        
-        # Check all models in the registry
-        model_registry = ModelRegistry()
-        all_models = list(model_registry.models.keys())
-        
-        click.echo(f"   Checking {len(all_models)} models in registry...")
-        global_health_results = await _verify_model_health(all_models)
-        
-        if global_health_results["all_healthy"]:
-            click.secho(f"✅ All {global_health_results['total_models']} models are healthy.", fg='green')
-        else:
-            click.secho(f"⚠️  {len(global_health_results['failed_models'])} of {global_health_results['total_models']} models have issues:", fg='yellow')
-            for model in global_health_results['failed_models']:
-                error_msg = global_health_results['results'][model]['message']
-                click.echo(f"   • {model}: {error_msg}")
-            
-            click.echo(f"   ✅ {global_health_results['healthy_models']} models are working correctly.")
-        
-        # Phase 1: Project Validation (now with model health context)
+        # Phase 1: Project Validation
         click.echo("\n🔬 Phase 1: Comprehensive Project Validation...")
-        validation_agent = ValidationAgent()
+        validation_agent = ProjectCoherenceAnalyst()
+        validation_result = await validation_agent.validate_project(project_path)
         
-        # TODO: In future, could pass model health context to validation agent
-        # For now, the global health check provides valuable up-front feedback
-        validation_result = validation_agent.validate_project(project_path)
-        
-        # Check for transient API errors first
-        if validation_result.get('error_type') == 'LLM_VALIDATION_FAILED':
-            click.secho(f"\n⚠️  Validation Halted: {validation_result.get('message', 'An unexpected error occurred during LLM validation.')}", fg='yellow')
-            click.echo("    This could be a temporary issue with the provider, a problem with your API key, or an issue with the prompt.")
-            click.echo("    Please review the error details and decide whether to retry the command or investigate your configuration.")
-            sys.exit(1)
-
         if not validation_result.get('validation_passed'):
             click.secho(f"\n❌ Validation FAILED: {validation_result.get('message', 'Unknown error.')}", fg='red')
             click.echo("   Please run 'discernus validate' to diagnose and fix the issues in your project files.")
@@ -198,102 +159,8 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
         
         click.secho("✅ Validation PASSED.", fg='green')
         
-        # Phase 2: Experiment-Specific Model Verification
-        click.echo("\n🎯 Phase 2: Experiment-Specific Model Verification...")
-        
-        # Extract models from experiment configuration
-        required_models = _extract_models_from_experiment(project_path)
-        
-        if required_models:
-            click.echo(f"   Experiment requires: {', '.join(required_models)}")
-            
-            # Check if any required models failed global health check
-            failed_required = [model for model in required_models if model in global_health_results['failed_models']]
-            
-            if failed_required:
-                click.secho(f"⚠️  {len(failed_required)} required models have health issues:", fg='yellow')
-                for model in failed_required:
-                    error_msg = global_health_results['results'][model]['message']
-                    click.echo(f"   • {model}: {error_msg}")
-                
-                # Use EnsembleConfigurationAgent for intelligent recommendation
-                click.echo("\n🤖 Consulting EnsembleConfigurationAgent for recommendation...")
-                
-                try:
-                    from discernus.agents.ensemble_configuration_agent import EnsembleConfigurationAgent
-                    config_agent = EnsembleConfigurationAgent()
-                    
-                    # Prepare context for the agent
-                    situation_context = {
-                        'required_models': required_models,
-                        'failed_models': failed_required,
-                        'healthy_models': [model for model, result in global_health_results['results'].items() 
-                                         if result['status'] == 'success'],
-                        'health_results': global_health_results,
-                        'project_path': project_path
-                    }
-                    
-                    # Get intelligent recommendation
-                    recommendation = config_agent.assess_model_health_situation(situation_context)
-                    
-                    # Present the agent's recommendation
-                    click.echo(f"\n💡 Agent Recommendation: {recommendation.get('action', 'Unknown')}")
-                    click.echo(f"   {recommendation.get('explanation', 'No explanation provided')}")
-                    
-                    if recommendation.get('adjusted_models'):
-                        click.echo(f"   Suggested models: {', '.join(recommendation['adjusted_models'])}")
-                    
-                    # Simple confirmation based on agent's recommendation
-                    if recommendation.get('action') == 'proceed':
-                        if not click.confirm(f"\nProceed with agent's recommendation?"):
-                            click.echo("Execution cancelled.")
-                            sys.exit(1)
-                    elif recommendation.get('action') == 'cancel':
-                        click.echo("Agent recommends cancelling. Please address the model issues first.")
-                        sys.exit(1)
-                    else:
-                        # For other recommendations, ask user to decide
-                        if not click.confirm(f"\nFollow agent's recommendation?"):
-                            click.echo("Execution cancelled.")
-                            sys.exit(1)
-                    
-                    # THIN Implementation: Apply agent's recommendations to experiment configuration
-                    if recommendation.get('adjusted_models'):
-                        click.echo(f"\n🔧 Applying agent's model adjustments...")
-                        validation_result = _apply_model_health_adjustments(
-                            validation_result, 
-                            recommendation['adjusted_models']
-                        )
-                        click.echo(f"   Updated models: {', '.join(recommendation['adjusted_models'])}")
-                        
-                        # CRITICAL: Re-run validation to get updated model configuration
-                        click.echo("   🔄 Re-running validation with adjusted models...")
-                        validation_result = validation_agent.validate_project(project_path)
-                        
-                        if not validation_result.get('validation_passed'):
-                            click.secho(f"❌ Re-validation failed: {validation_result.get('message')}", fg='red')
-                            sys.exit(1)
-                        
-                    # Update status message
-                    click.secho("✅ Model health issues resolved with agent recommendations.", fg='green')
-                            
-                except ImportError:
-                    click.echo("⚠️  EnsembleConfigurationAgent not available. Using fallback logic.")
-                    if not click.confirm("\nDo you want to continue despite model health issues?"):
-                        click.echo("Execution cancelled.")
-                        sys.exit(1)
-                except Exception as e:
-                    click.echo(f"⚠️  Error consulting agent: {e}")
-                    if not click.confirm("\nDo you want to continue despite model health issues?"):
-                        click.echo("Execution cancelled.")
-                        sys.exit(1)
-            else:
-                click.secho(f"✅ All required models are healthy.", fg='green')
-        else:
-            click.echo("   No specific models found in experiment configuration.")
-
-        # Phase 3: Pre-Execution Confirmation
-        click.echo("\n📋 Phase 3: Pre-Execution Confirmation")
+        # Phase 2: Pre-Execution Confirmation
+        click.echo("\n📋 Phase 2: Pre-Execution Confirmation")
         summary = validation_agent.get_pre_execution_summary(validation_result)
         
         click.echo("Please review the execution plan:")
@@ -304,8 +171,8 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
             click.echo("Execution cancelled by user.")
             sys.exit(0)
         
-        # Phase 4: Execute the project
-        click.echo("\n🚀 Phase 4: Project Execution")
+        # Phase 3: Execute the project
+        click.echo("\n🚀 Phase 3: Project Execution")
         orchestrator = EnsembleOrchestrator(project_path)
         
         # Run the experiment
@@ -400,7 +267,7 @@ def info(check_thin: bool):
             _show_thin_check("FrameworkLoader", framework_check)
             
             # Check ValidationAgent  
-            validation_agent = ValidationAgent()
+            validation_agent = ProjectCoherenceAnalyst()
             validation_check = validation_agent.validate_thin_compliance()
             _show_thin_check("ValidationAgent", validation_check)
             
@@ -569,82 +436,6 @@ def _extract_models_from_experiment(project_path: str) -> List[str]:
         click.echo(f"⚠️ Error reading experiment file: {e}")
     
     return []
-
-async def _check_model_health(model_name: str) -> Dict[str, Any]:
-    """
-    Check the health of a single model.
-    """
-    try:
-        messages = [{"role": "user", "content": "Hello, are you there? Respond with just 'yes'."}]
-        
-        # Add safety settings specifically for Vertex AI models
-        # and REMOVE max_tokens which triggers safety filters
-        extra_kwargs = {}
-        if model_name.startswith("vertex_ai"):
-            extra_kwargs['safety_settings'] = [
-                {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
-                {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
-                {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
-                {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
-            ]
-        else:
-            # For non-Vertex AI models, use a small max_tokens to keep costs low
-            extra_kwargs['max_tokens'] = 5
-        
-        response = await litellm.acompletion(
-            model=model_name,
-            messages=messages,
-            temperature=0.0,
-            **extra_kwargs
-        )
-        
-        # Use getattr for safer attribute access
-        content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
-        if content.strip():
-            return {"status": "success", "message": "Model responded successfully"}
-        else:
-            return {"status": "failed", "message": "Empty response received"}
-            
-    except Exception as e:
-        return {"status": "failed", "message": str(e)}
-
-async def _verify_model_health(models: List[str]) -> Dict[str, Any]:
-    """
-    Verify the health of all models in the list.
-    """
-    if not models:
-        return {"all_healthy": True, "results": {}}
-    
-    results = {}
-    tasks = []
-    
-    for model in models:
-        task = _check_model_health(model)
-        tasks.append((model, task))
-    
-    # Execute all health checks in parallel
-    for model, task in tasks:
-        try:
-            result = await task
-            results[model] = result
-        except Exception as e:
-            results[model] = {"status": "failed", "message": f"Health check failed: {str(e)}"}
-    
-    # Determine overall health
-    failed_models = [model for model, result in results.items() if result["status"] == "failed"]
-    all_healthy = len(failed_models) == 0
-    
-    return {
-        "all_healthy": all_healthy,
-        "results": results,
-        "failed_models": failed_models,
-        "total_models": len(models),
-        "healthy_models": len(models) - len(failed_models)
-    }
-
-# Removed deprecated _load_project_components function - ValidationAgent handles this now
-
-# Removed deprecated _execute_orchestration function - using EnsembleOrchestrator now
 
 if __name__ == '__main__':
     discernus() 

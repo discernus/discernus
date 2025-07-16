@@ -105,3 +105,29 @@ agents:
       - analysis_instructions: "The instructions for the analysis agents."
     outputs:
       - execution_plan: "A JSON object detailing the estimated cost, time, and steps for the experiment." 
+      
+  - name: ProjectCoherenceAnalyst
+    archetype: Hybrid
+    module: "discernus.agents.project_coherence_analyst"
+    class: "ProjectCoherenceAnalyst"
+    execution_method: "validate_project"
+    description: "Acts as an intelligent research assistant, performing a holistic analysis of the project's framework, experiment, and corpus to ensure methodological coherence and readiness for execution."
+    prompt_source: "self-contained"
+    inputs:
+      - project_path: "The path to the root of the project directory."
+    outputs:
+      - validation_result: "A comprehensive JSON object detailing the project's validity, including any warnings, errors, or proactive recommendations." 
+      
+  - name: DataExtractionAgent
+    archetype: Tool-Using
+    module: "discernus.agents.data_extraction_agent"
+    class: "DataExtractionAgent"
+    execution_method: "extract_tidy_data"
+    description: "Parses a conversation.jsonl log file and extracts all structured analysis data (scores, metrics, classifications) into a single, tidy results.csv file, ready for statistical analysis."
+    prompt_source: "n/a (deterministic tool)"
+    inputs:
+      - conversation_log_path: "The path to the raw conversation.jsonl file for the session."
+      - output_csv_path: "The path where the final results.csv file should be written."
+      - framework_content: "The full content of the framework.md, used to identify calculated metrics."
+    outputs:
+      - tidy_data_path: "The path to the generated results.csv file." 
