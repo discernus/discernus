@@ -431,7 +431,9 @@ class EnsembleOrchestrator:
     async def _spawn_analysis_agents(self, validation_results: Dict[str, Any], experiment_config: Dict[str, Any]):
         """Spawn analysis agents using registry system - this is called by the registry"""
         
-        corpus_files = validation_results.get('corpus_files', [])
+        corpus_path = self.project_path / "corpus"
+        corpus_files = [str(f) for f in corpus_path.rglob('*') if f.is_file() and f.name.endswith(('.txt', '.md'))]
+        
         analysis_instructions = validation_results.get('analysis_agent_instructions', '')
         models = experiment_config.get('models', ['vertex_ai/gemini-2.5-flash'])
         num_runs = experiment_config.get('num_runs', 1)
@@ -516,7 +518,7 @@ class EnsembleOrchestrator:
         # Read the corpus text
         corpus_text = Path(corpus_file).read_text()
         
-        # Create analysis prompt for structured output
+        # Create analysis prompt for natural language output
         analysis_prompt = f"""You are {agent_id}, a framework analysis specialist.
 
 ANALYSIS INSTRUCTIONS:
@@ -527,22 +529,8 @@ File: {Path(corpus_file).name}
 Content:
 {corpus_text}
 
-TASK: Apply the framework systematically to this text. Provide structured JSON output with:
-1. Framework dimension scores (numerical values with confidence intervals)
-2. Specific textual evidence for each score
-3. Systematic reasoning for your analysis
-
-Return your response as a JSON object with a "score" field containing the primary numerical score, plus other analysis fields.
-
-Example format:
-{{
-  "score": 7.5,
-  "confidence_interval": [6.8, 8.2],
-  "evidence": "Specific textual evidence here...",
-  "reasoning": "Systematic reasoning here..."
-}}
-
-Be precise and cite specific text passages to support your scores."""
+TASK: Apply the framework systematically to this text. Provide your analysis in natural language with specific evidence.
+Be precise and cite specific text passages to support your analysis."""
 
         # Call LLM
         response = await self._call_llm_async(analysis_prompt, agent_id, model_name)
