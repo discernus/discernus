@@ -429,6 +429,12 @@ class ProjectChronolog:
         with open(run_chronolog_file, 'w', encoding='utf-8') as f:
             for event_dict in session_events:
                 f.write(json.dumps(event_dict, separators=(',', ':')) + '\n')
+            f.flush()  # Ensure data is written to disk
+        
+        # Ensure file exists before Git commit
+        if not run_chronolog_file.exists():
+            print(f"⚠️ Run chronolog file not found after write: {run_chronolog_file}")
+            return {'status': 'file_write_failed', 'created': False}
         
         # Calculate timing statistics for academic analysis
         run_stats = self._calculate_run_statistics(session_events)
@@ -517,8 +523,27 @@ class ProjectChronolog:
             return
         
         try:
+            # Ensure file exists before adding to Git
+            if not run_chronolog_file.exists():
+                print(f"⚠️ Run chronolog file doesn't exist for Git commit: {run_chronolog_file}")
+                return
+            
+            # Get relative path from git repo root for cleaner commits
+            try:
+                repo_root = Path(self.git_repo.working_dir)
+                # Ensure we're working with resolved absolute paths
+                absolute_file_path = run_chronolog_file.resolve()
+                absolute_repo_root = repo_root.resolve()
+                relative_path = absolute_file_path.relative_to(absolute_repo_root)
+                file_path_for_git = str(relative_path)
+            except ValueError:
+                # If relative path fails, use absolute path
+                file_path_for_git = str(run_chronolog_file)
+            
+
+            
             # Add run chronolog file to Git
-            self.git_repo.index.add([str(run_chronolog_file)])
+            self.git_repo.index.add([file_path_for_git])
             
             # Create descriptive commit message
             commit_message = f"Run Chronolog: {session_id} - {self.project_name}"

@@ -33,6 +33,7 @@ from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
 # No standalone AgentRegistry class, it's loaded from YAML
 
 from discernus.core.thin_validation import check_thin_compliance
+from discernus.agents.true_validation_agent import TrueValidationAgent
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -41,86 +42,121 @@ sys.path.insert(0, str(project_root))
 try:
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
-    print(f"ValidationAgent dependencies not available: {e}")
+    print(f"ProjectCoherenceAnalyst dependencies not available: {e}")
     DEPENDENCIES_AVAILABLE = False
 
 class ProjectCoherenceAnalyst:
     """
-    THIN validation agent - orchestrates LLM validation using rubrics
-    Software provides validation workflow; LLM provides validation intelligence
+    Acts as a Socratic Tutor for research design, validating and improving
+    the methodological soundness of a project before execution.
     """
     
-    def __init__(self, llm_gateway=None, framework_loader=None):
-        self.project_path: Optional[Path] = None # Initialize project_path
+    def __init__(self):
+        if not DEPENDENCIES_AVAILABLE:
+            raise ImportError("Could not import required dependencies for ProjectCoherenceAnalyst")
         
-        # Instantiate registry first, as it's needed by the gateway
         self.model_registry = ModelRegistry()
-        self._load_agent_registry() # Load the agent registry
-
-        if llm_gateway:
-            self.gateway = llm_gateway
-        else:
-            if not DEPENDENCIES_AVAILABLE:
-                raise ImportError("ValidationAgent dependencies not available. Please check your environment.")
-            try:
-                # Pass the registry to the gateway
-                self.gateway = LLMGateway(self.model_registry)
-                print("✅ ValidationAgent using LLMGateway with ModelRegistry")
-            except Exception as e:
-                print(f"❌ ValidationAgent: Failed to initialize LLM gateway: {e}")
-                raise e
+        self.gateway = LLMGateway(self.model_registry)
 
     async def validate_project(self, project_path: str) -> Dict[str, Any]:
         """
-        Validates the entire project structure and its components.
-        This is the main entry point for the 'validate' CLI command.
+        Performs a deep, Socratic analysis of the project's coherence.
         """
         self.project_path = Path(project_path)
         
-        # Step 1: Structural Validation
-        structure_result = self._validate_project_structure()
-        if not structure_result["validation_passed"]:
-            return structure_result
+        # 1. Load all project assets
+        framework_content = (self.project_path / "framework.md").read_text()
+        experiment_content = (self.project_path / "experiment.md").read_text()
+        
+        # 2. Perform the Socratic Validation
+        validation_prompt = self._create_socratic_prompt(framework_content, experiment_content)
+        model_name = self.model_registry.get_model_for_task('synthesis')
+        if not model_name:
+            return {"validation_passed": False, "error": "No suitable model found for validation."}
+            
+        response, _ = self.gateway.execute_call(model=model_name, prompt=validation_prompt)
+        
+        # 3. Use an LLM to clean and extract the JSON from the response
+        extraction_prompt = f"""
+You are an expert JSON extractor. Your sole task is to find and extract the valid JSON object embedded within the following text.
+Respond with ONLY the raw, string-escaped JSON object and nothing else.
 
-        # Step 2: Global Model Health Check
-        all_models = self.model_registry.list_models()
-        health_results = await self._verify_model_health(all_models)
+TEXT:
+---
+{response}
+---
+"""
+        extraction_model = self.model_registry.get_model_for_task('coordination')
+        if not extraction_model:
+            return {"validation_passed": False, "error": "No suitable model found for JSON extraction."}
+        
+        json_response, _ = self.gateway.execute_call(model=extraction_model, prompt=extraction_prompt)
 
-        # Step 3: Experiment Analysis & Coherence Check
-        experiment_path = self.project_path / "experiment.md"
-        experiment_content = experiment_path.read_text()
-        
-        # Extract requested models
-        requested_models = self._extract_models_from_experiment(experiment_content)
-        
-        # Model Coherence Analysis
-        if not requested_models:
-            # Proactive recommendation
-            # In a real implementation, a call to an LLM would happen here
-            # to determine the best model for the experiment.
-            pass
-        else:
-            for model in requested_models:
-                if model not in health_results["results"] or health_results["results"][model]["status"] == "failed":
-                    return {
-                        "validation_passed": False,
-                        "step_failed": "Model Health Check",
-                        "message": f"Requested model '{model}' is not available or failed health check.",
-                    }
+        # 4. Return the structured result
+        try:
+            # The LLM is instructed to return a JSON object.
+            # If it fails, we catch the error and return a failure state.
+            return json.loads(json_response)
+        except json.JSONDecodeError:
+            return {
+                "validation_passed": False,
+                "status": "ERROR",
+                "feedback": "The validation agent returned a malformed response. Please try again.",
+                "raw_response": response
+            }
 
-        # Corpus Coherence Analysis (placeholder)
-        corpus_path = self.project_path / "corpus"
-        corpus_files = [f.name for f in corpus_path.iterdir() if f.is_file()]
-        
-        # In a real implementation, we would compare corpus_files with experiment expectations
-        
-        return {
-            "validation_passed": True,
-            "message": "Project validation successful",
-            "project_path": str(self.project_path),
-            "ready_for_execution": True,
-            "validation_timestamp": datetime.now().isoformat(),
-        }
+    def _create_socratic_prompt(self, framework_content: str, experiment_content: str) -> str:
+        """Creates the Socratic prompt for the validation LLM call."""
+        return f"""
+You are a world-class research methodologist and a patient, helpful Socratic tutor.
+Your goal is not just to find errors, but to help the user improve their thinking.
+
+You will be given a research project consisting of a Framework and an Experiment.
+Your task is to assess the project's methodological soundness and return a single JSON object.
+
+**CRITERIA:**
+1.  **Falsifiable Hypothesis**: Does the experiment specify a clear, falsifiable hypothesis? A simple request to "analyze a text" is not an experiment.
+2.  **Appropriate Framework**: Is the chosen framework suitable for testing the hypothesis?
+3.  **Sufficient Corpus**: Is the corpus well-defined and sufficient for the experiment?
+
+**YOUR TASK:**
+
+1.  **Read and Analyze**: Read all the provided materials.
+2.  **Assess Soundness**: Assess the project against the criteria above.
+3.  **Formulate Response**:
+
+    *   **If the project is methodologically sound:**
+        Return a JSON object with `validation_passed: true`, `status: "SUCCESS"`, and an `execution_plan` key. The `execution_plan` should be a simple description of the steps to run the analysis.
+
+    *   **If the project is flawed:**
+        Return a JSON object with `validation_passed: false`, `status: "FLAWED"`, and a `feedback` key. The `feedback` should be a Socratic dialogue that:
+        a. Gently explains the methodological flaw.
+        b. Proposes a concrete, improved version of the experiment.
+        c. Asks the user if they would like to proceed with the improved version.
+
+**EXAMPLE OF FLAWED RESPONSE:**
+{{
+  "validation_passed": false,
+  "status": "FLAWED",
+  "feedback": "I see you've asked for an analysis of this text. While I can do that, a simple analysis won't test a specific hypothesis. A stronger experiment might hypothesize that this text will score below 4.0 on the 'Populist Discourse Index'. Would you like me to proceed with that hypothesis?"
+}}
+
+---
+**PROJECT ASSETS**
+
+**Framework:**
+```
+{framework_content}
+```
+
+**Experiment:**
+```
+{experiment_content}
+```
+---
+
+**Return only a single, valid JSON object.**
+"""
 
     def _extract_models_from_experiment(self, experiment_content: str) -> List[str]:
         """

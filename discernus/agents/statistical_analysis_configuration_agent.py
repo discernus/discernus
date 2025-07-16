@@ -45,58 +45,44 @@ class StatisticalAnalysisConfigurationAgent:
         """
         experiment_path = Path(experiment_md_path)
         if not experiment_path.exists():
-            print(f"❌ Experiment file not found at: {experiment_path}")
             return {"validation_status": "error", "notes": "Experiment file not found."}
 
         content = experiment_path.read_text()
-        methodology_section = self._extract_methodology(content)
-        if not methodology_section:
-            return {"validation_status": "error", "notes": "Could not find a methodology/design section."}
-
-        return self._call_statistical_planner_llm(methodology_section)
-
-    def _extract_methodology(self, content: str) -> str:
-        """Extracts the relevant methodology section from the markdown."""
-        match = re.search(r'(#+)\s*(Methodology|Experimental Design|Analysis Plan|Statistical Analysis)\s*#*', content, re.IGNORECASE)
-        if not match:
-            return content
         
-        start_index = match.start()
-        next_header_match = re.search(r'^#{{{level_num},}}\s+'.format(level_num=len(match.group(1))), content[start_index + len(match.group(0)):], re.MULTILINE)
-        if next_header_match:
-            end_index = start_index + len(match.group(0)) + next_header_match.start()
-            return content[start_index:end_index]
-        else:
-            return content[start_index:]
+        return self._call_statistical_planner_llm(content)
 
     def _call_statistical_planner_llm(self, methodology_text: str) -> Dict[str, Any]:
         """Calls an LLM to generate the statistical plan as a JSON object."""
         prompt = f"""
-You are an expert in computational social science methodology and statistics. Your task is to read a researcher's methodology and generate a structured JSON object representing their statistical analysis plan.
+You are an expert in computational social science methodology and statistics. Your task is to act as an intelligent research assistant. Read a researcher's full experiment specification and generate a structured JSON object representing their statistical analysis plan.
 
-**Researcher's Methodology:**
+**Full Experiment Specification:**
 ---
 {methodology_text}
 ---
 
 **Your Task:**
-Based on the researcher's methodology, generate a JSON object that specifies the required statistical tests.
 
-- Identify all statistical tests mentioned (e.g., Cronbach's Alpha, ANOVA, T-Test, Chi-squared).
-- For each test, specify its name and its purpose or scope (e.g., "inter-run reliability", "inter-model_comparison").
-- If the plan is clear and sufficient, set `validation_status` to "complete".
-- If the plan is ambiguous or missing key information, set `validation_status` to "incomplete" and provide notes on what is missing.
+1.  **Analyze the Experiment**: Carefully read the entire experiment specification to understand the researcher's goals, the number of models being tested, and the number of runs.
+2.  **Identify Explicit Plan**: Look for an explicit statistical analysis plan. If the researcher has specified tests (e.g., "perform Cronbach's Alpha," "compare models using ANOVA"), use that as your primary guide.
+3.  **Propose a Plan if Necessary**: If no explicit statistical plan is provided, you MUST infer a sensible default plan based on the experimental design.
+    *   If `num_runs` > 1 for a single model, a test for inter-run reliability (like Cronbach's Alpha) is appropriate.
+    *   If multiple `models` are listed, a test for inter-model comparison (like ANOVA or a T-test) is appropriate.
+    *   If the experiment is simple, it may be that no statistical tests are needed. In that case, return an empty list for `required_tests`.
+4.  **Generate JSON Output**: Generate a JSON object with the following structure:
+    *   `required_tests`: A list of dictionaries, where each dictionary specifies a `test_name` and a `scope`.
+    *   `validation_status`: Set to `"complete"` if the user provided a clear plan. Set to `"generated"` if you inferred the plan.
+    *   `notes`: Provide a brief, human-readable explanation of your reasoning. Explain what you found or what you inferred.
 
 **Output ONLY the raw JSON object, with no other text or explanation.**
 
-Example output:
+Example output for an experiment with multiple runs:
 {{
   "required_tests": [
-    {{"test_name": "cronbach_alpha", "scope": "inter_run_reliability"}},
-    {{"test_name": "anova", "scope": "inter_model_comparison"}}
+    {{"test_name": "cronbach_alpha", "scope": "inter_run_reliability"}}
   ],
-  "validation_status": "complete",
-  "notes": "The experiment clearly specifies the required statistical tests."
+  "validation_status": "generated",
+  "notes": "No explicit statistical plan was found. Based on the use of multiple runs, a Cronbach's Alpha test for inter-run reliability has been proposed."
 }}
 """
         

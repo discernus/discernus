@@ -42,6 +42,33 @@ Our MVA will be designed to service the most critical use cases first, while bei
     3.  Modify `discernus_cli.py` to use the `WorkflowOrchestrator` and a simple, default workflow.
 *   **Definition of Done**: The `simple_experiment` runs successfully using the `WorkflowOrchestrator`.
 
+### **Phase 2.5: Restore Academic Rigor to WorkflowOrchestrator**
+*   **Goal**: Enhance the `WorkflowOrchestrator` with the sophisticated academic capabilities that were present in the `EnsembleOrchestrator`, ensuring that validated experiments receive publication-quality execution.
+*   **Context**: The `ProjectCoherenceAnalyst` performs excellent Socratic validation, but the simplified `WorkflowOrchestrator` lacks the academic rigor needed to do justice to well-designed experiments.
+*   **Actions**:
+    1.  **Statistical Analysis Pipeline** (Priority 1):
+        *   Integrate `StatisticalAnalysisConfigurationAgent` into workflow for analysis planning
+        *   Enhance `StatisticalAnalysisAgent` to work with WorkflowOrchestrator
+        *   Integrate `StatisticalInterpretationAgent` for bridging numbers to academic meaning
+        *   Test with multi-run experiments requiring reliability analysis
+    2.  **Quality Control & Methodological Overwatch** (Priority 2):
+        *   Integrate `MethodologicalOverwatchAgent` as middleware checkpoint
+        *   Implement mid-flight termination capability for flawed analyses
+        *   Add intelligent failure recovery and resource optimization
+    3.  **Academic Audit & Conclusion** (Priority 3):
+        *   Integrate `ExperimentConclusionAgent` for final methodological audit
+        *   Implement final report synthesis with academic validation
+        *   Add comprehensive limitations and alternative interpretation analysis
+    4.  **Data Extraction & Structured Output** (Priority 4):
+        *   Integrate `DataExtractionAgent` for tidy CSV output
+        *   Implement structured results formatting for academic use
+        *   Add export capabilities for statistical analysis software
+    5.  **Adversarial Synthesis Foundation** (Priority 5):
+        *   Design adversarial synthesis workflow specification
+        *   Implement peer review simulation infrastructure
+        *   Create framework for multi-agent academic discussions
+*   **Definition of Done**: The `WorkflowOrchestrator` can execute a complete academic research workflow that includes statistical planning, quality control, interpretation, and final audit. A complex experiment (multi-model, multi-run) produces a publication-ready report with statistical analysis, methodological audit, and structured data output.
+
 ### **Phase 3: Implement the Planner Agent & Event-Driven Capabilities**
 *   **Goal**: Achieve the full MVA by implementing the "Planner Agent" and the "Walkie-Talkie" patterns.
 *   **Actions**:

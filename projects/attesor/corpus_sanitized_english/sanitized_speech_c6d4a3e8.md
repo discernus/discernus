@@ -1,4 +1,3 @@
-# john_lewis_1963_march_on_washington.txt
 
 We come here today with a great sense of misgiving. It is true that we support the administration's civil rights bill. We support it with great reservations, however. Unless key enforcement provisions are put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations. In its present form, this bill will not protect the citizens of affected communities, who must live in constant fear of a police state. It will not protect the hundreds and thousands of people who have been arrested upon trumped-up charges.
 

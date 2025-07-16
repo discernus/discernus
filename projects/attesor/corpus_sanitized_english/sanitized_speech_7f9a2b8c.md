@@ -1,4 +1,3 @@
-# alexandria_ocasio_cortez_2025_fighting_oligarchy.txt
 
 We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price. And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.
 

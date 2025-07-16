@@ -168,7 +168,7 @@ models:
       input_per_million_tokens: 5.00
       output_per_million_tokens: 15.00
     utility_tier: 4
-    task_suitability: [synthesis]
+    task_suitability: [synthesis, code_interpreter]
     # Rate limits are highly tier-dependent and not publicly fixed. Verify against your account.
     tpm: 300000 # Placeholder
     rpm: 5000   # Placeholder
@@ -185,7 +185,7 @@ models:
       input_per_million_tokens: 3.50
       output_per_million_tokens: 10.50
     utility_tier: 3
-    task_suitability: [synthesis, planning]
+    task_suitability: [synthesis, planning, code_interpreter]
     tpm: 81920 # Published by Google for us-central1
     rpm: 800
     optimal_batch_size: 12

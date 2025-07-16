@@ -159,7 +159,7 @@ class SecureCodeExecutor:
         self.enable_data_science = enable_data_science
         self.security_checker = CodeSecurityChecker()
     
-    def execute_code(self, code: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
+    def execute_code(self, code: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Execute code safely with full logging and resource limits
         
@@ -199,6 +199,13 @@ class SecureCodeExecutor:
         else:
             safe_imports = "import math, json, re, string, statistics\n"
         
+        # Inject context variables if provided
+        context_setup = ""
+        if context:
+            for key, value in context.items():
+                # Serialize context variables safely using repr to avoid JSON escaping issues
+                context_setup += f"    {key} = {repr(value)}\n"
+        
         # Wrap code with resource monitoring
         wrapped_code = f"""
 {safe_imports}
@@ -217,6 +224,9 @@ execution_success = True
 error_message = ""
 
 try:
+    # Inject context variables
+{context_setup}
+    
     # User code execution
 {self._indent_code(code, '    ')}
     

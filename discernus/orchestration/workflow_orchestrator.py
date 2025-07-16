@@ -30,6 +30,7 @@ from discernus.core.conversation_logger import ConversationLogger
 from discernus.core.project_chronolog import get_project_chronolog, log_project_event
 
 # Dynamically import all agent classes for runtime instantiation
+from discernus.agents.analysis_agent import AnalysisAgent
 from discernus.agents.statistical_analysis_agent import StatisticalAnalysisAgent
 from discernus.agents.statistical_interpretation_agent import StatisticalInterpretationAgent
 from discernus.agents.experiment_conclusion_agent import ExperimentConclusionAgent
