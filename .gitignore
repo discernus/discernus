@@ -105,6 +105,7 @@ experiments/*/results/
 experiments/*/outputs/
 research_sessions/
 conversation_logs/
+pm/ancient_archives/
 *.bak
 *.backup
 

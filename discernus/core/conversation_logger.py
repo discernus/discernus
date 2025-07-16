@@ -91,12 +91,12 @@ class ConversationLogger:
         Returns:
             conversation_id: Unique identifier for this conversation
         """
-        conversation_id = f"conversation_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
+        conversation_id = f"conversation_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
         
         # Create conversation metadata
         metadata = {
             "conversation_id": conversation_id,
-            "started_at": datetime.now().isoformat(),
+            "started_at": datetime.utcnow().isoformat() + "Z",
             "research_question": research_question,
             "participants": participants,
             "speech_text": speech_text,
@@ -171,7 +171,7 @@ class ConversationLogger:
             "type": "redis_event",
             "channel": channel,
             "event_data": event_data,
-            "timestamp": event_data.get('timestamp', datetime.now().isoformat())
+            "timestamp": event_data.get('timestamp', datetime.utcnow().isoformat() + "Z")
         }
         
         self._log_message(conversation_id, "system", event_message, redis_metadata)
@@ -239,7 +239,7 @@ class ConversationLogger:
             "type": "code_execution",
             "code": code,
             "execution_result": execution_result,
-            "executed_at": datetime.now().isoformat()
+            "executed_at": datetime.utcnow().isoformat() + "Z"
         }
         
         self._log_message(conversation_id, f"{speaker}_code", "CODE_EXECUTION", code_log)
@@ -256,7 +256,7 @@ class ConversationLogger:
         self.active_conversations.discard(conversation_id)
         
         metadata = {
-            "ended_at": datetime.now().isoformat(),
+            "ended_at": datetime.utcnow().isoformat() + "Z",
             "summary": summary,
             "status": "completed"
         }
@@ -283,7 +283,7 @@ class ConversationLogger:
         Uses JSONL format for streaming and easy reading
         """
         log_entry = {
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": datetime.utcnow().isoformat() + "Z",
             "conversation_id": conversation_id,
             "speaker": speaker,
             "message": message,

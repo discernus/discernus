@@ -1,6 +1,6 @@
-# SOAR Agent Design Principles
+# Discernus Agent Design Principles
 
-This document outlines the architectural philosophy and design patterns for creating, organizing, and deploying agents within the SOAR framework. Adherence to these principles ensures the system remains modular, maintainable, and methodologically transparent, in line with the project's core THIN (THick INtelligence, THIN software) philosophy.
+This document outlines the architectural philosophy and design patterns for creating, organizing, and deploying agents within the Discernus system. Adherence to these principles ensures the system remains modular, maintainable, and methodologically transparent, in line with the project's core THIN (THick INtelligence, THIN software) philosophy.
 
 ---
 

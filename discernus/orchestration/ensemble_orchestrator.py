@@ -28,6 +28,8 @@ import os
 import yaml
 import re
 import importlib
+import shutil
+import hashlib
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -39,6 +41,7 @@ try:
     from discernus.core.conversation_logger import ConversationLogger
     from discernus.core.secure_code_executor import SecureCodeExecutor
     from discernus.core.project_chronolog import get_project_chronolog, log_project_event
+    from discernus.agents.data_extraction_agent import DataExtractionAgent
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"EnsembleOrchestrator dependencies not available: {e}")
@@ -78,6 +81,7 @@ class EnsembleOrchestrator:
         self.outliers = []
         self.statistical_plan = None
         self.session_results_path = None
+        self.conversation_id = None
         
     def _load_agent_registry(self):
         """Load agent registry from YAML file"""
@@ -158,20 +162,79 @@ class EnsembleOrchestrator:
     def _init_session_logging(self):
         """Initialize session logging and chronolog"""
         self.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.session_results_path = self.results_path / f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
+        self.session_results_path = self.results_path / f"{self.session_id}"
         self.session_results_path.mkdir(exist_ok=True)
+
+        # Create the Immutable Session Package
+        try:
+            snapshot_path = self.session_results_path / "project_snapshot"
+            snapshot_path.mkdir(exist_ok=True)
+            
+            # Copy framework and experiment
+            shutil.copy(self.project_path / "framework.md", snapshot_path)
+            shutil.copy(self.project_path / "experiment.md", snapshot_path)
+            
+            # Copy corpus
+            corpus_snapshot_path = snapshot_path / "corpus"
+            shutil.copytree(self.project_path / "corpus", corpus_snapshot_path)
+            
+            print(f"✅ Created immutable session package at: {snapshot_path}")
+            
+        except Exception as e:
+            print(f"⚠️ Failed to create immutable session package: {e}")
         
+        # --- Asset Fingerprinting ---
+        asset_fingerprints = {}
+        try:
+            # Hash framework
+            framework_path = self.project_path / "framework.md"
+            asset_fingerprints['framework.md'] = self._hash_file(framework_path)
+            
+            # Hash experiment
+            experiment_path = self.project_path / "experiment.md"
+            asset_fingerprints['experiment.md'] = self._hash_file(experiment_path)
+            
+            # Hash corpus
+            corpus_path = self.project_path / "corpus"
+            for corpus_file in corpus_path.rglob('*'):
+                if corpus_file.is_file():
+                    relative_path = corpus_file.relative_to(self.project_path)
+                    asset_fingerprints[str(relative_path)] = self._hash_file(corpus_file)
+            
+            print("✅ Calculated asset fingerprints (barcodes)")
+
+        except Exception as e:
+            print(f"⚠️ Failed to calculate asset fingerprints: {e}")
+
+
         # Initialize conversation logger
         self.logger = ConversationLogger(
             project_root=str(self.project_path),
             custom_conversations_dir=str(self.session_results_path)
         )
+        self.conversation_id = self.logger.start_conversation(
+            speech_text="", # Not relevant for the main log
+            research_question="", # Not relevant for the main log
+            participants=[] # Dynamically added
+        )
         
         # Initialize project chronolog
         log_project_event(str(self.project_path), "SESSION_STARTED", self.session_id, {
             "session_id": self.session_id,
-            "session_path": str(self.session_results_path)
+            "session_path": str(self.session_results_path),
+            "asset_fingerprints": asset_fingerprints,
         })
+
+    def _hash_file(self, file_path: Path) -> str:
+        """Calculates the SHA-256 hash of a file's content."""
+        h = hashlib.sha256()
+        with open(file_path, 'rb') as f:
+            while True:
+                data = f.read(65536)  # Read in 64k chunks
+                if not data:
+                    break
+                h.update(data)
+        return h.hexdigest()
 
     def _log_system_event(self, event_type: str, data: Dict[str, Any]):
         """Log system events to chronolog only"""
@@ -325,6 +388,22 @@ class EnsembleOrchestrator:
                 with open(final_results["report_path"], "a") as f:
                     f.write("\n\n" + audit_text)
 
+            # Step 9: Tidy Data Extraction
+            self._log_system_event("DATA_EXTRACTION_STARTED", {"session_id": self.session_id})
+            if self.logger and self.conversation_id and self.session_results_path:
+                conversation_log_path = self.session_results_path / f"{self.conversation_id}.jsonl"
+                if conversation_log_path.exists():
+                    await self._execute_agent(
+                        "DataExtractionAgent",
+                        conversation_log_path=str(conversation_log_path),
+                        output_csv_path=str(self.session_results_path / "results.csv"),
+                        framework_content=validation_results.get('framework_content', '')
+                    )
+                    self._log_system_event("DATA_EXTRACTION_COMPLETED", {"session_id": self.session_id})
+                else:
+                    self._log_system_event("DATA_EXTRACTION_SKIPPED", {"reason": "Conversation log not found."})
+
+
             self._log_system_event("ENSEMBLE_COMPLETED", {
                 "session_id": self.session_id,
                 "final_status": "success",
@@ -468,6 +547,22 @@ Be precise and cite specific text passages to support your scores."""
         # Call LLM
         response = await self._call_llm_async(analysis_prompt, agent_id, model_name)
         
+        # Log the raw response with model name metadata
+        if self.logger and self.conversation_id:
+            self.logger.log_llm_message(
+                conversation_id=self.conversation_id,
+                speaker=agent_id,
+                message=response,
+                metadata={
+                    "type": "llm_response",
+                    "agent_id": agent_id,
+                    "session_id": self.session_id,
+                    "model_name": model_name,
+                    "file_name": Path(corpus_file).name,
+                    "run_num": run_num,
+                }
+            )
+
         self._log_system_event("ANALYSIS_AGENT_RAW_RESPONSE", {
             "agent_id": agent_id,
             "raw_response": response

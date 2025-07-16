@@ -3,26 +3,41 @@
 #
 # This file is the central knowledge base for all LLMs available to the SOAR platform.
 # It is the single source of truth for resource management, cost estimation, and execution planning.
-#
-# -- How to Update This File --
-# This file is updated manually. Values for pricing, context windows, and rate limits are subject
-# to change and should be verified on the providers' official websites.
-#
-# -- Provider Strategy --
-# 1. FOR MAX PERFORMANCE & STABILITY: Default to the 'vertex_ai/' provider when available.
-#    Vertex offers higher, more transparent rate limits (TPM/RPM) at a similar per-token cost.
-# 2. FOR SPECIALIZED MODELS: Use the 'openrouter/' provider to access a wider ecosystem of models,
-#    including specific fine-tunes like R1-1776, that are not available on major cloud platforms.
-# 3. FOR DIRECT ACCESS: Use direct provider paths ('anthropic/', 'openai/') for maximum flexibility
-#    or to access the absolute newest models not yet on Vertex/OpenRouter.
-# 4. FOR LOCAL & PRIVATE USE: Use the 'ollama/' provider for local testing or the proprietary
-#    template for in-house models.
-#
-# -- Context Fatigue and Batch Size --
-# Research (2024-2025) confirms the "Lost in the Middle" problem. 'optimal_batch_size' is a crucial
-# heuristic to mitigate this. It is NOT based on maximizing token count, but on keeping the number
-# of documents in a single prompt small enough to ensure high-quality analysis for each item.
 
+# --- Provider Defaults: Single Source of Truth for API Parameters ---
+provider_defaults:
+  vertex_ai:
+    forbidden_params: ['max_tokens']
+    required_params:
+      safety_settings:
+        - {category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE"}
+        - {category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE"}
+        - {category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE"}
+        - {category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE"}
+    timeout: 180
+  
+  openai:
+    forbidden_params: ['max_tokens']
+    timeout: 120
+
+  anthropic:
+    forbidden_params: ['max_tokens']
+    timeout: 120
+
+  mistral:
+    forbidden_params: ['max_tokens']
+    timeout: 120
+    
+  perplexity:
+    forbidden_params: ['max_tokens']
+    timeout: 120
+    status: 'placeholder'
+    
+  ollama:
+    forbidden_params: ['max_tokens']
+    timeout: 600 # Default for local models, can be overridden per model
+
+# --- Model Definitions ---
 models:
   # --- PREFERRED PROVIDER: VERTEX AI (STABILITY & PERFORMANCE) ---
   
