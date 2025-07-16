@@ -1,4 +1,3 @@
-# cory_booker_2018_first_step_act.txt
 
 I want to say good afternoon to everyone, and this is a moment really where I want to give open with a sense of gratitude. I don't want to thank my colleagues for their incredible work and leadership, and especially recognize the committee chairman. I want to thank the ranking member, who has been a hero of mine on issues of criminal justice reform, as well as other key senators, who have been champions. All of their staffs, everyone who's been involved in the tireless work and efforts that have been going on in what is a bill that is pending on the floor now - the criminal justice reform legislation.
 

@@ -1,4 +1,3 @@
-# mitt_romney_2020_impeachment.txt
 
 Thank you, Mr. President.
 

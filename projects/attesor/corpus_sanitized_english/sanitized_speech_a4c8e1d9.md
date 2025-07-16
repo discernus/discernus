@@ -1,4 +1,3 @@
-# bernie_sanders_2025_fighting_oligarchy.txt
 
 The American people are outraged at what's going on, and the American people are saying loud and clear, "We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over the capital, making cuts to the retirement administration, cuts to the veterans administration, almost destroying the education department, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%."
 

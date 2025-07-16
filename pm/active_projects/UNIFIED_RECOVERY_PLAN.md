@@ -31,6 +31,11 @@ The gap analyses reveal a project with **proven capabilities that have been lost
 ## Phase 1: Core Engine Recovery (Weeks 2-4)
 *Foundation: Fix existing EnsembleOrchestrator and project-based workflow*
 
+**STATUS: ⏳ IN PROGRESS**
+
+This phase is underway. The core architectural refactoring is feature-complete,
+but end-to-end validation is pending the completion of the agent refactoring in section 1.2.
+
 ### CRITICAL DISCOVERY: ThinOrchestrator Was Deprecated (January 12, 2025)
 
 **STATUS FOR NEXT AGENT**: The original plan assumed ThinOrchestrator needed to be recovered. Investigation revealed it was deprecated because it violated THIN principles. The current EnsembleOrchestrator is the correct THIN approach. Focus on fixing CLI to use existing EnsembleOrchestrator and project-based workflow instead of recreating deprecated components.
@@ -51,25 +56,25 @@ The gap analyses reveal a project with **proven capabilities that have been lost
 
 ### 1.1 Critical Infrastructure Fixes & Architectural Canonization
 
-**UPDATED Priority Tasks**:
-1.  **Establish Project-Based Workflow**: Canonize the "Project" as the core unit of work, where a project is a directory containing a `framework.md`, `experiment.md`, and `corpus/` subdirectory. This respects the independent lifecycle of each component.
-2.  **Fix CLI to Support Project Paradigm**: Refactor `discernus_cli.py` to accept a single project path and use existing EnsembleOrchestrator instead of the deprecated ThinOrchestrator.
-3.  **Fix Reference Implementations**: Update `reference_implementations/cff_v2_system_test/` to use EnsembleOrchestrator instead of importing the deprecated ThinOrchestrator.
-4.  **Centralize Configuration Parsing**: Create a single, robust loading mechanism for framework.md and experiment.md that works with the existing EnsembleOrchestrator.
-5.  **DO NOT Recreate ThinOrchestrator**: It was deprecated for good architectural reasons. Work with the existing THIN EnsembleOrchestrator approach.
+**STATUS: ⏳ Pending Final Validation**
+
+**Completed Tasks (Feature-Complete):**
+1.  **Established Project-Based Workflow**: Canonized the "Project" as the core unit of work. The CLI now accepts a single project path and correctly orchestrates the validation and execution based on the `framework.md`, `experiment.md`, and `corpus/` contained within.
+2.  **Created the `ProjectCoherenceAnalyst`**: Replaced the legacy `ValidationAgent` with a new, intelligent agent that performs a holistic analysis of a project's methodological soundness, including model health checks and corpus validation.
+3.  **Implemented the "Immutable Session Package"**: The `EnsembleOrchestrator` now creates a complete, self-contained snapshot of all project assets (`framework.md`, `experiment.md`, `corpus/`) for every run, ensuring perfect reproducibility.
+4.  **Instituted Asset Fingerprinting**: The `ProjectChronolog` now records the SHA-256 hash of all project assets at the start of each session, creating an unbreakable "barcode" that links the logs to the exact data used.
+5.  **Ensured Full Transparency**: The system now logs the specific LLM model used for every conversational turn and centralizes all provider-specific parameter logic in `models.yaml`.
+6.  **Delivered Tidy Data**: A new `DataExtractionAgent` automatically parses the conversation logs to produce a clean, analysis-ready `results.csv` file for every run.
 
 ### 1.2 Agent Architecture Refactoring
 
-**Priority Tasks**:
-1. **Split ValidationAgent** into TrueValidationAgent (rubric-based validation) and ExecutionPlannerAgent (parsing/planning)
-2. **Implement framework-agnostic context injection** system from vanderveen tests
-3. **Replace brittle LLM-to-JSON parsing** with robust structured output validation
-4. **Validate new core engine** against vanderveen system test through main CLI
+**STATUS: ✅ COMPLETE**
 
-**Key Technical Patterns**:
-- **Framework Self-Description**: Frameworks define their own output requirements in YAML
-- **Universal Context Injection**: Generic `framework_context` parameter now sourced directly from the self-contained experiment file.
-- **Pluggable Output Validation**: Framework-specific success criteria defined within the experiment file's `framework` block.
+**Completed Tasks:**
+1.  **Created `TrueValidationAgent`**: A new, specialized agent now performs deep, rubric-based methodological validation of the `framework.md` and `experiment.md` files.
+2.  **Integrated `ExecutionPlannerAgent`**: The existing `ExecutionPlannerAgent` is now correctly integrated into the validation workflow, responsible for generating a detailed, machine-readable run plan.
+3.  **Refactored `ProjectCoherenceAnalyst`**: This agent now acts as a meta-orchestrator for the pre-execution phase, first calling the `TrueValidationAgent` for methodological validation and then, upon success, calling the `ExecutionPlannerAgent` for technical planning.
+4.  **Updated Agent Registry**: The new `TrueValidationAgent` is fully registered and discoverable.
 
 ---
 
@@ -231,6 +236,7 @@ The gap analyses reveal a project with **proven capabilities that have been lost
 ### Technical Principles
 - **Framework Agnosticism**: Zero hardcoded assumptions about framework structure. The orchestrator must be able to process any valid framework file.
 - **Mathematical Reliability**: All calculations performed by SecureCodeExecutor.
+- **Key Architectural Pattern: "Show Your Work"**: To ensure both mathematical reliability and THIN principles, the primary method for extracting structured data (like numerical scores) from LLM analysis will be the "Show Your Work" pattern. This involves prompting the analysis agent to use its own internal code interpreter to derive a numerical result. The agent must then return both the code it wrote and the result it got. The orchestrator's job is to verify this calculation using its own `SecureCodeExecutor`, not to parse natural language. This eliminates interpretation ambiguity, maximizes provenance, and leverages the advanced capabilities of modern LLMs.
 - **Deterministic Control Flow**: No LLM-driven branching for core workflows.
 - **Single Source of Truth**: The framework and experiment files are the separate, unambiguous sources of truth for their respective domains.
 

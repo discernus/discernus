@@ -35,7 +35,7 @@ try:
     from discernus.core.project_chronolog import initialize_project_chronolog
     from discernus.core.project_chronolog import get_project_chronolog
     from discernus.agents import ProjectCoherenceAnalyst
-    from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
+    from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
     from discernus.gateway.model_registry import ModelRegistry
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
@@ -178,10 +178,34 @@ async def _execute_async(project_path: str, dev_mode: bool, researcher_profile: 
         
         # Phase 3: Execute the project
         click.echo("\n🚀 Phase 3: Project Execution")
-        orchestrator = EnsembleOrchestrator(project_path)
+        
+        # Generate analysis instructions
+        click.echo("📝 Generating analysis instructions...")
+        framework_content = Path(project_path) / "framework.md"
+        experiment_content = Path(project_path) / "experiment.md"
+        
+        analysis_instructions = await validation_agent._generate_analysis_instructions(
+            framework_content.read_text(),
+            experiment_content.read_text()
+        )
+        
+        # Parse experiment configuration from experiment.md
+        experiment_config = _parse_experiment_config(project_path)
+        
+        orchestrator = WorkflowOrchestrator(project_path)
+        
+        # Create initial workflow state with analysis workflow
+        initial_state = {
+            'workflow': [
+                {'agent': 'AnalysisAgent'}
+            ],
+            'analysis_agent_instructions': analysis_instructions,
+            'experiment_config': experiment_config,
+            'session_id': f"session_{project_path.replace('/', '_')}"
+        }
         
         # Run the experiment
-        results = await orchestrator.execute_ensemble_analysis(validation_result)
+        results = await orchestrator.execute_workflow(initial_state)
         
         if results.get('status') == 'success':
             click.secho("✅ Experiment completed successfully!", fg='green')
@@ -397,6 +421,44 @@ def _apply_model_health_adjustments(validation_result: Dict[str, Any], adjusted_
         click.echo(f"⚠️ Error updating experiment file: {e}")
     
     return validation_result
+
+def _parse_experiment_config(project_path: str) -> Dict[str, Any]:
+    """
+    Parse experiment configuration from experiment.md file.
+    """
+    experiment_file = Path(project_path) / "experiment.md"
+    
+    # Default configuration
+    default_config = {
+        'models': ['openai/gpt-4o'],  # Default to proven working model
+        'num_runs': 1,
+        'batch_size': 1
+    }
+    
+    if not experiment_file.exists():
+        return default_config
+    
+    try:
+        content = experiment_file.read_text()
+        
+        # Look for YAML configuration blocks
+        yaml_pattern = r'```yaml\n(.*?)\n```'
+        matches = re.findall(yaml_pattern, content, re.DOTALL)
+        
+        for match in matches:
+            try:
+                config = yaml.safe_load(match)
+                if isinstance(config, dict):
+                    # Merge with defaults
+                    default_config.update(config)
+                    return default_config
+            except yaml.YAMLError:
+                continue
+                
+    except Exception as e:
+        click.echo(f"⚠️ Error reading experiment file: {e}")
+    
+    return default_config
 
 def _extract_models_from_experiment(project_path: str) -> List[str]:
     """

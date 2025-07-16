@@ -1,4 +1,3 @@
-# jd_vance_2022_natcon_conference.txt
 
 But as much as our leaders have forgotten that and as much as I think that the most significant example of that is in the recent foreign conflicts, where we have sent hundreds of billions of dollars of weaponry with no obvious end in sight and no obvious conclusion or even objective that we're close to getting accomplished there. And so many of my colleagues ignore the basic realities of war. But I will say on the good news, the majority of our party in both chambers, in the most recent cycle, said no more to this, no more, right? That's a good thing, that's progress. Even though we didn't win the debate, we're starting to win the debate within our own party. And I think that really matters. 
 

@@ -1,17 +1,18 @@
 agents:
   - name: AnalysisAgent
     archetype: Role-Playing
-    module: "discernus.orchestration.ensemble_orchestrator"
-    class: "EnsembleOrchestrator" # Note: This is a conceptual class, its execution is handled inside the orchestrator
-    execution_method: "_spawn_analysis_agents"
-    description: "The primary workhorse agent. Applies a given framework to a single text document to produce a structured analysis."
-    prompt_source: "dynamic (receives framework and instructions from orchestrator)"
+    module: "discernus.agents.analysis_agent"
+    class: "AnalysisAgent"
+    execution_method: "run_analysis"
+    description: "The primary workhorse agent. Applies a given framework to corpus documents using the 'Show Your Work' pattern to produce verifiable analysis with numerical scores."
+    prompt_source: "dynamic (receives framework and instructions from workflow state)"
     inputs:
-      - framework_content: "The full text of the analytical framework."
-      - text_content: "The content of the single document to be analyzed."
-      - analysis_instructions: "Specific instructions for this analysis run."
+      - project_path: "Path to the project directory containing corpus files"
+      - analysis_agent_instructions: "Framework-based instructions for analysis"
+      - experiment_config: "Configuration including models and run parameters"
+      - session_id: "Session identifier for logging"
     outputs:
-      - analysis_results: "A list of structured JSON objects containing scores and evidence."
+      - analysis_results: "A list of structured objects containing analysis text and verified scores."
 
   - name: StatisticalAnalysisAgent
     archetype: Tool-Using

@@ -3,10 +3,10 @@
 Data Extraction Agent - THIN agent for tidying raw analysis data
 ================================================================
 
-THIN Principle: This agent acts as a classic "Tool-Using" agent. It takes a
-machine-readable input (the conversation.jsonl log) and uses a deterministic
-Python script to transform it into another machine-readable format (a CSV),
-making it immediately available for statistical analysis.
+THIN Principle: This agent is a Hybrid Agent. It uses deterministic Python
+for file I/O and orchestration, but it uses a specialized LLM call to perform
+the intelligent, non-deterministic task of extracting structured JSON from
+messy, conversational text. This avoids brittle parsing logic.
 """
 
 import sys
@@ -15,21 +15,35 @@ import csv
 import re
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+import asyncio
+
+# Add project root to path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+try:
+    from discernus.gateway.llm_gateway import LLMGateway
+    from discernus.gateway.model_registry import ModelRegistry
+    DEPENDENCIES_AVAILABLE = True
+except ImportError as e:
+    print(f"DataExtractionAgent dependencies not available: {e}")
+    DEPENDENCIES_AVAILABLE = False
 
 class DataExtractionAgent:
     """
     Parses a conversation log to extract structured numerical data into a
-    tidy CSV format.
+    tidy CSV format, using an LLM to reliably extract JSON from text.
     """
 
-    def extract_tidy_data(self, conversation_log_path: str, output_csv_path: str, framework_content: str):
-        """
-        Reads a JSONL conversation log, extracts analysis data, and writes a CSV.
+    def __init__(self):
+        if not DEPENDENCIES_AVAILABLE:
+            raise ImportError("Could not import dependencies for DataExtractionAgent")
+        self.model_registry = ModelRegistry()
+        self.gateway = LLMGateway(self.model_registry)
 
-        Args:
-            conversation_log_path: Path to the input conversation.jsonl file.
-            output_csv_path: Path to write the output results.csv file.
-            framework_content: The full content of the framework.md file to identify metrics.
+    async def extract_tidy_data(self, conversation_log_path: str, output_csv_path: str, framework_content: str):
+        """
+        Reads a JSONL conversation log, uses an LLM to extract analysis data, and writes a CSV.
         """
         print(f"DataExtractionAgent: Starting data extraction from {conversation_log_path}")
 
@@ -38,22 +52,18 @@ class DataExtractionAgent:
             for line in f:
                 try:
                     log_entry = json.loads(line)
-                    # We only care about responses from analysis agents
                     if not log_entry.get('speaker', '').startswith('analysis_agent'):
                         continue
 
-                    # The actual analysis is often in a JSON block inside the message
                     message_content = log_entry.get('message', '')
-                    json_match = re.search(r'```json\n(.*?)\n```', message_content, re.DOTALL)
                     
-                    if not json_match:
+                    # Use an LLM to reliably extract the JSON
+                    json_str = await self._extract_json_with_llm(message_content)
+                    if not json_str:
                         continue
                         
-                    analysis_json_str = json_match.group(1)
-                    analysis_data = json.loads(analysis_json_str)
+                    analysis_data = json.loads(json_str)
                     
-                    # --- Core Record Creation ---
-                    # The 'metadata' in the log entry has the model name and other details
                     metadata = log_entry.get('metadata', {})
                     base_record = {
                         'session_id': metadata.get('session_id', 'unknown'),
@@ -62,9 +72,6 @@ class DataExtractionAgent:
                         'corpus_file': metadata.get('file_name', 'unknown'),
                     }
 
-                    # --- Score Extraction ---
-                    # Assumes scores are in a nested dictionary (e.g., pdaf_v1_1_scores)
-                    # This part might need to be more robust or framework-aware
                     score_data = next((v for k, v in analysis_data.items() if 'scores' in k.lower()), None)
                     if not score_data:
                         continue
@@ -74,20 +81,16 @@ class DataExtractionAgent:
                             record = base_record.copy()
                             record['anchor'] = anchor
                             record['score'] = values.get('score')
-                            # Also capture classification for anchors like MFT's economic direction
                             record['classification'] = values.get('classification')
                             records.append(record)
 
-                except (json.JSONDecodeError, AttributeError) as e:
-                    # Silently skip lines that are not valid JSON or don't have the expected structure
+                except (json.JSONDecodeError, AttributeError):
                     continue
         
         if not records:
-            print("DataExtractionAgent: No valid analysis records found to extract.")
+            print("DataExtractionAgent: No valid analysis records found.")
             return
 
-        # --- Write to CSV ---
-        # Dynamically determine headers from the first record
         headers = list(records[0].keys())
         
         with open(output_csv_path, 'w', newline='', encoding='utf-8') as f:
@@ -97,11 +100,34 @@ class DataExtractionAgent:
 
         print(f"DataExtractionAgent: Successfully wrote {len(records)} records to {output_csv_path}")
 
+    async def _extract_json_with_llm(self, text_with_json: str) -> Optional[str]:
+        """Uses an LLM to extract a JSON object from a string."""
+        prompt = f"""
+You are an expert JSON extractor. Your sole task is to find and extract the valid JSON object embedded within the following text.
+Respond with ONLY the raw, string-escaped JSON object and nothing else.
+
+TEXT:
+---
+{text_with_json}
+---
+
+JSON:
+"""
+        model_name = self.model_registry.get_model_for_task('coordination')
+        if not model_name:
+            return None
+            
+        try:
+            response, _ = self.gateway.execute_call(model=model_name, prompt=prompt)
+            return response
+        except Exception:
+            return None
+
     def get_thin_compliance(self) -> Dict[str, Any]:
         """Returns THIN compliance information for this agent."""
         return {
             "thin_compliant": True,
-            "archetype": "Tool-Using",
-            "description": "Performs a deterministic data transformation from JSONL to CSV using standard Python libraries. No LLM calls are made.",
+            "archetype": "Hybrid",
+            "description": "Uses a deterministic Python script for file I/O but uses a specialized LLM call for the non-deterministic task of extracting JSON from messy text.",
             "issues": []
         } 
