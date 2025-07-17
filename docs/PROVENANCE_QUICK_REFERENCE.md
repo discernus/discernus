@@ -15,6 +15,24 @@
 | **"What evidence supports score X?"** | Conversation | Search for agent responses in conversation file |
 | **"Is this model reliable across runs?"** | Multiple Run Chronologs | Compare timing across multiple sessions |
 | **"When did we change our methodology?"** | Project Chronolog | Look for configuration changes over time |
+| **🚨 "Why can't I find my files?"** | **Nested Repo Check** | **`python3 scripts/prevent_nested_repos.py --scan`** |
+
+## 🚨 **START HERE: Repository Health Check**
+
+**Before analyzing ANY provenance files, run this command:**
+```bash
+python3 scripts/prevent_nested_repos.py --scan
+```
+
+**If you see nested repositories:**
+```bash
+# Fix the issue immediately
+python3 scripts/prevent_nested_repos.py --clean --confirm
+git add .
+git commit -m "Fix nested repository provenance issue"
+```
+
+**Why this matters**: Nested git repositories are the #1 cause of broken provenance. They prevent experiment files from being committed to the main repository, making replication impossible.
 
 ---
 

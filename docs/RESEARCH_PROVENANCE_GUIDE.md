@@ -158,6 +158,14 @@ Required Files (per run):
 | "Has methodology changed over time?" | Project Chronolog | Run Chronologs |
 | "Are there systematic performance issues?" | Run Chronologs | Project Chronolog |
 | "What exactly did the LLM conclude?" | Conversation Files | Final Reports |
+| **"Why can't I find my experiment files?"** | **Check for nested repos** | **Run prevention script** |
+
+### ⚠️ **Critical First Step: Verify Repository Structure**
+Before analyzing any provenance files, always check for nested git repositories:
+```bash
+python3 scripts/prevent_nested_repos.py --scan
+```
+If nested repositories are found, **all provenance analysis will be incomplete** until they are resolved.
 
 ---
 
@@ -221,6 +229,42 @@ Required Files (per run):
 
 ## Troubleshooting and Validation
 
+### Critical Infrastructure Issue: Nested Git Repositories
+
+**Problem**: The most common cause of broken provenance is nested git repositories that prevent the GitHub-as-persistence-layer architecture from working correctly.
+
+**Symptoms**:
+- Chronolog events get logged but experiment files don't appear in git history
+- `git status` shows experiment directories as untracked
+- Peer reviewers can't access complete research records
+- Replication becomes impossible due to missing files
+
+**Diagnosis**:
+```bash
+# Check for nested repositories
+python3 scripts/prevent_nested_repos.py --scan
+
+# If found, you'll see output like:
+# 🔍 Found 3 nested git repositories:
+#   - projects/my_experiment/.git
+#   - results/analysis_run/.git
+```
+
+**Resolution**:
+```bash
+# Remove nested repositories (safe - preserves files)
+python3 scripts/prevent_nested_repos.py --clean --confirm
+
+# Add files to main repository
+git add .
+git commit -m "Fix nested repository provenance issue"
+```
+
+**Prevention**: The system now includes automatic detection:
+- Git pre-commit hooks block nested repo creation
+- CLI checks for nested repos on startup
+- User guidance in `docs/GIT_BEST_PRACTICES.md`
+
 ### Integrity Verification
 ```bash
 # Verify chronolog signatures
@@ -238,6 +282,7 @@ print(f'Events: {result[\"verified_events\"]}')
 - **Empty conversation file**: LLM client connection issues
 - **Missing final report**: Aggregation phase failed
 - **Incomplete project chronolog**: Redis or Git commit issues
+- **Files not in git history**: **MOST COMMON** - Check for nested repositories first
 
 ### Performance Analysis
 ```bash
