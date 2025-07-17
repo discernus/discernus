@@ -131,4 +131,30 @@ agents:
       - output_csv_path: "The path where the final results.csv file should be written."
       - framework_content: "The full content of the framework.md, used to identify calculated metrics."
     outputs:
-      - tidy_data_path: "The path to the generated results.csv file." 
+      - tidy_data_path: "The path to the generated results.csv file."
+
+  - name: CalculationAgent
+    archetype: Tool-Using
+    module: "discernus.agents.calculation_agent"
+    class: "CalculationAgent"
+    execution_method: "execute"
+    description: "Performs deterministic mathematical calculations based on a 'calculation_spec' defined within a framework.md file."
+    prompt_source: "n/a (deterministic tool)"
+    inputs:
+      - analysis_results: "A list of analysis result objects from the AnalysisAgent."
+      - framework_spec: "The framework specification containing the calculation_spec."
+    outputs:
+      - calculation_results: "A dictionary containing the calculated indices and metrics."
+
+  - name: SynthesisAgent
+    archetype: Role-Playing
+    module: "discernus.agents.synthesis_agent"
+    class: "SynthesisAgent"
+    execution_method: "execute"
+    description: "Synthesizes final reports and data artifacts from workflow results using LLM intelligence."
+    prompt_source: "self-contained"
+    inputs:
+      - workflow_state: "The complete workflow state containing all analysis and calculation results."
+      - step_config: "Configuration specifying which output artifacts to generate."
+    outputs:
+      - artifact_paths: "A list of paths to the generated report and data files." 

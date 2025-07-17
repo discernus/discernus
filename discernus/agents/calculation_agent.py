@@ -61,11 +61,20 @@ class CalculationAgent:
         calculated_metrics = {}
 
         for calculation in calculation_spec:
-            name = calculation.get('name')
-            formula = calculation.get('formula')
-            data_source = calculation.get('data_source') # e.g., 'scores' from analysis
+            # Handle both direct format and nested metric format
+            if 'metric' in calculation:
+                # Handle nested format: {metric: {name: "...", formula: "..."}}
+                calc_data = calculation['metric']
+                name = calc_data.get('name')
+                formula = calc_data.get('formula')
+                data_source = calc_data.get('data_source', 'scores')  # Default to 'scores'
+            else:
+                # Handle direct format: {name: "...", formula: "..."}
+                name = calculation.get('name')
+                formula = calculation.get('formula')
+                data_source = calculation.get('data_source', 'scores')  # Default to 'scores'
 
-            if not all([name, formula, data_source]):
+            if not name or not formula:
                 print(f"- CalculationAgent: Skipping misconfigured calculation: {calculation}")
                 continue
 
