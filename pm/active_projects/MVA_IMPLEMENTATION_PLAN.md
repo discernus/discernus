@@ -42,9 +42,10 @@ Our MVA will be designed to service the most critical use cases first, while bei
     3.  Modify `discernus_cli.py` to use the `WorkflowOrchestrator` and a simple, default workflow.
 *   **Definition of Done**: The `simple_experiment` runs successfully using the `WorkflowOrchestrator`.
 
-### **Phase 2.5: Restore Academic Rigor to WorkflowOrchestrator**
+### **Phase 2.5: Restore Academic Rigor to WorkflowOrchestrator** - ✅ COMPLETE
 *   **Goal**: Enhance the `WorkflowOrchestrator` with the sophisticated academic capabilities that were present in the `EnsembleOrchestrator`, ensuring that validated experiments receive publication-quality execution.
-*   **Context**: The `ProjectCoherenceAnalyst` performs excellent Socratic validation, but the simplified `WorkflowOrchestrator` lacks the academic rigor needed to do justice to well-designed experiments.
+*   **Outcome**: The full academic pipeline, including statistical planning, quality control, multi-anchor analysis, final audit, and data extraction, has been successfully integrated into the `WorkflowOrchestrator`. The system was validated using the operational PDAF v1.1 framework, confirming that the new architecture can produce high-quality, multi-dimensional analysis from real-world assets. The `AnalysisAgent` has been refactored to be a strict, THIN executor with a robust, universal prompt template.
+*   **Context**: The `ProjectCoherenceAnalyst` performs excellent Socratic validation, but the simplified `WorkflowOrchestrator` lacked the academic rigor needed to do justice to well-designed experiments.
 *   **Actions**:
     1.  **Statistical Analysis Pipeline** (Priority 1):
         *   Integrate `StatisticalAnalysisConfigurationAgent` into workflow for analysis planning
@@ -76,6 +77,16 @@ Our MVA will be designed to service the most critical use cases first, while bei
     2.  Implement the Redis Pub/Sub channel for outlier detection.
 *   **Definition of Done**: All original MVA deliverables (functional core, planner agent, and operational walkie-talkie) are met.
 
+### **Phase 4: Self-Remediating Intelligence (Future Work)**
+*   **Goal**: To evolve the system from one that "fails loudly" to one that can "fix itself" by automating the prompt engineering process.
+*   **Vision**: Implement the "Genius Prompt Engineering Agent" pattern. This involves a new, specialized workflow to proactively detect and resolve LLM interaction failures.
+*   **Proposed Workflow**:
+    1.  **Pre-flight Check**: Before a full execution, a new `PreflightCheckAgent` will run a single, targeted analysis on a sample of the corpus with the specified framework.
+    2.  **Failure Detection**: If this check fails (e.g., due to a JSON decode error or a content moderation flag), the orchestrator will not halt. Instead, it will trigger a remediation workflow.
+    3.  **Automated Prompt Remediation**: A new `PromptRemediationAgent` will be spawned. This agent's purpose is to analyze the failed prompt and the LLM's error response. It will then iteratively tweak the prompt's instructional text (the "wrapper," not the framework content) and re-run the pre-flight check until it succeeds.
+    4.  **Proceed or Notify**: If the `PromptRemediationAgent` finds a working prompt, the main experiment will proceed using the newly-engineered instructions. If it cannot find a solution after a set number of attempts, it will halt and notify the user with a detailed report and suggestions.
+*   **THIN/THICK Alignment**: This approach is THICK in all the right ways—it dedicates a powerful LLM agent to the complex, creative task of prompt engineering. It is THIN in that the software simply provides the infrastructure to route the problem to the correct expert agent. This represents the next major evolution of the platform's intelligence.
+
 ## 4. MVA Definition of Done (Overall)
 
-The MVA project is "Done" when Phase 3 is complete and the system can robustly execute our core use cases using a flexible, planner-driven, and event-aware architecture. 
+The MVA project is "Done" when Phase 3 is complete and the system can robustly execute our core use cases using a flexible, planner-driven, and event-aware architecture. Phase 4 represents the next major strategic goal for the platform. 

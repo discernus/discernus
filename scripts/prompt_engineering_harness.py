@@ -29,55 +29,59 @@ def main():
     # We will target a model with known code interpreter capabilities.
     model_name = "openai/gpt-4o"
     
-    # --- Hardcoded Inputs (from simple_experiment) ---
-    instructions = """# Simple Test Framework
+    # --- Load Real-World Assets ---
+    try:
+        framework_path = project_root / "projects" / "attesor" / "pdaf_v1.1_sanitized_framework.md"
+        corpus_path = project_root / "projects" / "attesor" / "corpus_original" / "cory_booker_2018_first_step_act.txt"
+        
+        instructions = framework_path.read_text()
+        corpus_text = corpus_path.read_text()
+        print("✅ Successfully loaded real-world framework and corpus file.")
+    except FileNotFoundError as e:
+        print(f"❌ ERROR: Could not load required asset file: {e}")
+        sys.exit(1)
 
-This is a very simple framework for testing.
-
-## Analysis Dimensions
-
-- **Tone**: Is the overall tone positive, negative, or neutral?
-- **Main Idea**: What is the single main idea of the text?"""
-
-    corpus_text = """Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-   So long as men can breathe or eyes can see,
-   So long lives this, and this gives life to thee."""
 
     # --- The Prompt to be Engineered ---
+    # This is where we will iterate. The goal is a universal prompt template
+    # that works for any framework, including the complex PDAF.
     analysis_prompt = f"""You are an expert analyst with a secure code interpreter.
 Your task is to apply the following analytical framework to the provided text.
 
 FRAMEWORK:
+---
 {instructions}
+---
 
 TEXT TO ANALYZE:
+---
 {corpus_text}
+---
 
 Your analysis must have two parts:
-1.  A detailed, qualitative analysis in natural language.
-2.  A final numerical score from 0.0 to 1.0, which you must generate by writing and executing a simple Python script.
+1.  A detailed, qualitative analysis in natural language, explaining your reasoning for each of the 10 PDAF anchors.
+2.  A final JSON object containing a numerical score from 0.0 to 1.0 for each of the 10 anchors.
 
-You MUST return your response as a single, valid JSON object with the following structure:
+You MUST return your response as a single, raw JSON object and nothing else. Do not wrap it in markdown fences (e.g., '```json') or any other text. Your response must start with '{{' and end with '}}'.
+
+The JSON object must have the following structure:
 {{
-  "analysis_text": "Your detailed, qualitative analysis here...",
-  "score_calculation": {{
-    "code": "The simple Python script you wrote to generate the score. e.g., 'return 0.8'",
-    "result": "The numerical result of executing that script. e.g., 0.8"
+  "analysis_text": "Your detailed, qualitative analysis for all 10 anchors here...",
+  "pdaf_scores": {{
+    "manichaean_people_elite_framing": 0.8,
+    "crisis_restoration_narrative": 0.9,
+    "popular_sovereignty_claims": 0.6,
+    "anti_pluralist_exclusion": 0.1,
+    "elite_conspiracy_systemic_corruption": 0.7,
+    "authenticity_vs_political_class": 0.5,
+    "homogeneous_people_construction": 0.4,
+    "nationalist_exclusion": 0.2,
+    "economic_redistributive_appeals": 0.3,
+    "economic_direction_classification": 0.0
   }}
 }}
 
-Before returning your response, double-check that it is a single, valid JSON object and nothing else.
+Your response MUST be the raw JSON object, starting with '{{' and ending with '}}'.
 """
 
     # --- LLM Gateway Call ---

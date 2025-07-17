@@ -41,10 +41,23 @@ class DataExtractionAgent:
         self.model_registry = ModelRegistry()
         self.gateway = LLMGateway(self.model_registry)
 
-    async def extract_tidy_data(self, conversation_log_path: str, output_csv_path: str, framework_content: str):
+    async def extract_tidy_data(self, workflow_state: Dict[str, Any], step_config: Dict[str, Any]):
         """
         Reads a JSONL conversation log, uses an LLM to extract analysis data, and writes a CSV.
         """
+        session_results_path = workflow_state.get('session_results_path')
+        if not session_results_path:
+            raise ValueError("`session_results_path` not found in workflow_state.")
+
+        # Construct paths from workflow state
+        conversation_log_path = Path(session_results_path) / f"{workflow_state.get('conversation_id')}.jsonl"
+        output_csv_path = Path(session_results_path) / "results.csv"
+        framework_content = workflow_state.get('framework_content', '')
+
+        if not conversation_log_path.exists():
+            print(f"DataExtractionAgent: Conversation log not found at {conversation_log_path}. Skipping.")
+            return
+
         print(f"DataExtractionAgent: Starting data extraction from {conversation_log_path}")
 
         records = []

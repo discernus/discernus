@@ -37,31 +37,54 @@ class StatisticalAnalysisAgent:
 
         if not session_results_path:
             raise ValueError("`session_results_path` not found in workflow_state.")
+        
+        statistical_plan = workflow_state.get('statistical_plan', {})
+        required_tests = statistical_plan.get('required_tests', [])
 
         results_path = Path(session_results_path)
-        if not results_path.exists():
-            results_path.mkdir(parents=True, exist_ok=True)
+        results_path.mkdir(parents=True, exist_ok=True)
 
-        # Extract scores from the results, which are now pre-verified by the orchestrator.
-        all_scores = [
-            result.get('score') for result in analysis_results 
-            if result.get('score') is not None and isinstance(result.get('score'), (int, float))
-        ]
+        # New multi-anchor data structure
+        # Reorganize results for multi-anchor analysis
+        anchor_data = {}
+        for result in analysis_results:
+            scores = result.get('all_scores', {})
+            for anchor, score in scores.items():
+                if anchor not in anchor_data:
+                    anchor_data[anchor] = []
+                anchor_data[anchor].append({
+                    "score": score,
+                    "file_name": result.get("file_name"),
+                    "run_num": result.get("run_num")
+                })
         
-        # --- Basic Statistical Summary ---
-        statistical_summary = {
-            'num_observations': len(all_scores),
-            'mean_score': np.mean(all_scores) if all_scores else 0,
-            'std_dev': np.std(all_scores) if all_scores else 0,
-            'min_score': min(all_scores) if all_scores else 0,
-            'max_score': max(all_scores) if all_scores else 0,
-            'cronbachs_alpha': self._calculate_cronbachs_alpha(analysis_results)
-        }
-        
+        # --- Perform analysis for each anchor ---
+        final_statistics = {}
+        for anchor, results in anchor_data.items():
+            all_scores = [res.get('score') for res in results if res.get('score') is not None]
+
+            # --- Basic Statistical Summary (always included) ---
+            statistical_summary = {
+                'num_observations': len(all_scores),
+                'mean_score': np.mean(all_scores) if all_scores else 0,
+                'std_dev': np.std(all_scores) if all_scores else 0,
+                'min_score': min(all_scores) if all_scores else 0,
+                'max_score': max(all_scores) if all_scores else 0,
+            }
+
+            # --- Execute tests from the statistical plan ---
+            for test in required_tests:
+                test_name = test.get('test_name')
+                if test_name == 'cronbach_alpha':
+                    # Pass the filtered results for the current anchor to the calculation
+                    statistical_summary['cronbachs_alpha'] = self._calculate_cronbachs_alpha(results)
+            
+            final_statistics[anchor] = statistical_summary
+
         # --- Save Results ---
         stats_file_path = results_path / "statistical_analysis_results.json"
         with open(stats_file_path, 'w') as f:
-            json.dump(statistical_summary, f, indent=2)
+            json.dump(final_statistics, f, indent=2)
 
         return {'stats_file_path': str(stats_file_path)}
 

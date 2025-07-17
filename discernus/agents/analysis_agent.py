@@ -11,6 +11,7 @@ scores, then uses SecureCodeExecutor to verify the calculation.
 
 import sys
 import json
+import re # Add re import
 import asyncio
 from pathlib import Path
 from typing import Dict, Any, List
@@ -24,45 +25,67 @@ from discernus.gateway.llm_gateway import LLMGateway
 from discernus.core.secure_code_executor import SecureCodeExecutor
 from discernus.core.conversation_logger import ConversationLogger
 from discernus.core.project_chronolog import log_project_event
+import yaml # Add yaml import
 
 class AnalysisAgent:
     """
-    Applies analytical frameworks to text documents using the "Show Your Work" pattern.
+    Executes a framework-defined analysis prompt against corpus files.
+    This agent is a "dumb" executor. All intelligence resides in the
+    framework's YAML configuration block.
     """
 
     def __init__(self):
         """Initialize the agent with necessary components."""
         self.model_registry = ModelRegistry()
         self.gateway = LLMGateway(self.model_registry)
-        self.code_executor = SecureCodeExecutor()
+
+    def _extract_config_from_framework(self, framework_text: str) -> Dict[str, Any]:
+        """Parses the framework markdown to find the embedded YAML config."""
+        match = re.search(r'# --- Discernus Configuration ---\n```yaml\n(.*?)\n```', framework_text, re.DOTALL)
+        if not match:
+            raise ValueError("Framework file is missing the '# --- Discernus Configuration ---' YAML block.")
+        
+        try:
+            return yaml.safe_load(match.group(1))
+        except yaml.YAMLError as e:
+            raise ValueError(f"Error parsing framework YAML: {e}")
 
     async def run_analysis(self, workflow_state: Dict[str, Any], step_config: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Main execution method that runs analysis on all corpus files.
+        Main execution method that runs analysis on all corpus files based on the
+        framework's embedded YAML configuration.
         """
         project_path = Path(workflow_state.get('project_path', ''))
         corpus_path = project_path / "corpus"
+        framework_path = project_path / "framework.md"
         
         if not corpus_path.exists():
             raise ValueError(f"Corpus directory not found: {corpus_path}")
+        if not framework_path.exists():
+            raise ValueError(f"Framework file not found: {framework_path}")
         
-        # Get corpus files
+        framework_text = framework_path.read_text()
+        framework_config = self._extract_config_from_framework(framework_text)
+        
         corpus_files = [f for f in corpus_path.rglob('*') if f.is_file() and f.suffix in ['.txt', '.md']]
         
         if not corpus_files:
             raise ValueError(f"No corpus files found in {corpus_path}")
         
-        # Get analysis instructions from workflow state
-        analysis_instructions = workflow_state.get('analysis_agent_instructions', '')
-        if not analysis_instructions:
-            raise ValueError("No analysis instructions found in workflow state")
-        
-        # Get experiment configuration
         experiment_config = workflow_state.get('experiment_config', {})
-        models = experiment_config.get('models', ['openai/gpt-4o'])  # Default to proven working model
+        analysis_variant_name = experiment_config.get('analysis_variant', 'default')
+        analysis_variant = framework_config.get('analysis_variants', {}).get(analysis_variant_name)
+
+        if not analysis_variant:
+            raise ValueError(f"Analysis variant '{analysis_variant_name}' not found in framework configuration.")
+        
+        analysis_prompt_template = analysis_variant.get('analysis_prompt')
+        if not analysis_prompt_template:
+            raise ValueError(f"Variant '{analysis_variant_name}' is missing the 'analysis_prompt'.")
+            
+        models = experiment_config.get('models', ['openai/gpt-4o'])
         num_runs = experiment_config.get('num_runs', 1)
         
-        # Create analysis tasks
         analysis_tasks = []
         for run in range(num_runs):
             for model_name in models:
@@ -70,20 +93,20 @@ class AnalysisAgent:
                     agent_id = f"analysis_agent_run{run+1}_{model_name.replace('/', '_')}_{i+1}"
                     task = self._run_single_analysis(
                         agent_id=agent_id,
-                        corpus_file=str(corpus_file),
-                        instructions=analysis_instructions,
+                        corpus_file_path=str(corpus_file),
+                        framework_text=framework_text,
+                        prompt_template=analysis_prompt_template,
                         model_name=model_name,
                         run_num=run + 1,
                         project_path=str(project_path),
-                        session_id=workflow_state.get('session_id', 'unknown')
+                        session_id=workflow_state.get('session_id', 'unknown'),
+                        framework_config=framework_config
                     )
                     analysis_tasks.append(task)
         
-        # Execute all analysis tasks in parallel
         print(f"🔬 Executing {len(analysis_tasks)} analysis tasks in parallel")
         raw_results = await asyncio.gather(*analysis_tasks, return_exceptions=True)
         
-        # Filter results and handle exceptions
         successful_results = []
         failed_count = 0
         
@@ -101,122 +124,72 @@ class AnalysisAgent:
         
         return successful_results
 
-    async def _run_single_analysis(self, agent_id: str, corpus_file: str, instructions: str, 
-                                   model_name: str, run_num: int, project_path: str, session_id: str) -> Dict[str, Any]:
+    async def _run_single_analysis(self, agent_id: str, corpus_file_path: str, framework_text: str, 
+                                   prompt_template: str, model_name: str, run_num: int, 
+                                   project_path: str, session_id: str, framework_config: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Run a single analysis using the 'Show Your Work' pattern.
+        Runs a single analysis by populating the prompt template and validating the response.
         """
         try:
-            # Log the start of analysis
             log_project_event(project_path, "ANALYSIS_AGENT_SPAWNED", session_id, {
                 "agent_id": agent_id,
-                "corpus_file": Path(corpus_file).name,
+                "corpus_file": Path(corpus_file_path).name,
                 "model_name": model_name,
                 "run_num": run_num
             })
             
-            # Read corpus text
-            corpus_text = Path(corpus_file).read_text()
+            corpus_text = Path(corpus_file_path).read_text()
             
-            # Create the "Show Your Work" prompt
-            analysis_prompt = f"""You are an expert analyst with a secure code interpreter.
-Your task is to apply the following analytical framework to the provided text.
-
-FRAMEWORK:
-{instructions}
-
-TEXT TO ANALYZE:
-{corpus_text}
-
-Your analysis must have two parts:
-1. A detailed, qualitative analysis in natural language.
-2. A final numerical score from 0.0 to 1.0, which you must generate by writing and executing a simple Python script.
-
-You MUST return your response as a single, valid JSON object with the following structure:
-{{
-  "analysis_text": "Your detailed, qualitative analysis here...",
-  "score_calculation": {{
-    "code": "The simple Python script you wrote to generate the score. e.g., 'score = 0.8\\nreturn score'",
-    "result": 0.8
-  }}
-}}
-
-Before returning your response, double-check that it is a single, valid JSON object and nothing else.
-"""
+            # Populate the prompt template
+            final_prompt = prompt_template.format(
+                framework_text=framework_text,
+                corpus_text=corpus_text,
+                domain=framework_config.get('display_name', 'analysis') # Example of another variable
+            )
             
             # Call the LLM
-            raw_response = await self._call_llm_async(analysis_prompt, agent_id, model_name)
-            
-            # Parse the JSON response
+            raw_response = await self._call_llm_async(final_prompt, agent_id, model_name)
+
+            # --- Post-processing: Strict JSON validation, no fallbacks ---
             try:
                 parsed_response = json.loads(raw_response)
-                analysis_text = parsed_response.get("analysis_text", "LLM response was valid JSON but missing 'analysis_text'.")
-                score_calculation = parsed_response.get("score_calculation", {})
-                llm_code = score_calculation.get("code", "return 0.5  # Fallback: LLM response missing 'code'.")
-                llm_result = score_calculation.get("result", 0.5)
                 
+                # Basic validation, can be enhanced by reading schema from framework
+                if not isinstance(parsed_response, dict) or ("scores" not in parsed_response and "summary" not in parsed_response):
+                    raise ValueError("LLM response is valid JSON but does not match the required structure.")
+
             except json.JSONDecodeError as e:
-                log_project_event(project_path, "JSON_DECODE_ERROR", session_id, {
-                    "agent_id": agent_id,
-                    "error": str(e),
-                    "raw_response": raw_response[:500] + "..." if len(raw_response) > 500 else raw_response
-                })
-                
-                # Fallback to basic analysis
-                analysis_text = f"LLM RESPONSE WAS NOT VALID JSON. Error: {str(e)}\n\nRaw response: {raw_response}"
-                llm_code = "return 0.5  # Fallback due to LLM response format error"
-                llm_result = 0.5
-            
-            # Verify the calculation using SecureCodeExecutor
-            verification_result = self.code_executor.execute_code(llm_code)
-            verified_score = verification_result.get('result_data')
-            
-            if verified_score is None:
-                verified_score = 0.5  # Final fallback if code execution fails
-                log_project_event(project_path, "CODE_EXECUTION_FAILED", session_id, {
-                    "agent_id": agent_id,
-                    "code": llm_code,
-                    "verification_result": verification_result
-                })
-            
-            # Log any discrepancy between LLM claim and our verification
-            if abs(float(verified_score) - float(llm_result)) > 0.001:  # Allow for small floating point differences
-                log_project_event(project_path, "SCORE_VERIFICATION_MISMATCH", session_id, {
-                    "agent_id": agent_id,
-                    "llm_claimed_result": llm_result,
-                    "our_verified_result": verified_score,
-                    "code": llm_code
-                })
-            
-            # Log successful completion
+                error_msg = f"LLM response was not valid JSON. Error: {e}\nRaw response: {raw_response[:500]}"
+                log_project_event(project_path, "JSON_DECODE_ERROR", session_id, {"agent_id": agent_id, "error": error_msg})
+                raise ValueError(error_msg)
+
+            # Log successful completion and return the full, rich JSON object
             log_project_event(project_path, "ANALYSIS_AGENT_COMPLETED", session_id, {
                 "agent_id": agent_id,
-                "corpus_file": Path(corpus_file).name,
-                "verified_score": verified_score
+                "corpus_file": Path(corpus_file_path).name
             })
             
-            return {
+            # Add metadata to the results
+            parsed_response['agent_metadata'] = {
                 "agent_id": agent_id,
-                "corpus_file": corpus_file,
-                "file_name": Path(corpus_file).name,
+                "corpus_file": corpus_file_path,
+                "file_name": Path(corpus_file_path).name,
                 "model_name": model_name,
-                "run_num": run_num,
-                "analysis_response": analysis_text,
-                "score": verified_score,
-                "llm_code": llm_code,
-                "verification_status": "verified"
+                "run_num": run_num
             }
+            return parsed_response
             
         except Exception as e:
             log_project_event(project_path, "ANALYSIS_AGENT_ERROR", session_id, {
                 "agent_id": agent_id,
                 "error": str(e),
-                "corpus_file": Path(corpus_file).name
+                "corpus_file": Path(corpus_file_path).name
             })
             raise e
 
     async def _call_llm_async(self, prompt: str, agent_id: str, model_name: str) -> str:
         """Call LLM via gateway with proper error handling."""
+        # This method remains largely the same, but logging is now even more critical
         try:
             content, metadata = await asyncio.get_event_loop().run_in_executor(
                 None,
@@ -224,9 +197,10 @@ Before returning your response, double-check that it is a single, valid JSON obj
             )
             
             if not metadata.get("success", True):
-                raise Exception(f"LLM call failed: {metadata.get('error', 'Unknown error')}")
+                raise Exception(f"LLM Gateway returned an error: {metadata.get('error', 'Unknown error')}")
             
             return content
             
         except Exception as e:
+            # Re-raise the exception to be caught by the calling function
             raise Exception(f"LLM call failed for {agent_id} with model {model_name}: {str(e)}") 

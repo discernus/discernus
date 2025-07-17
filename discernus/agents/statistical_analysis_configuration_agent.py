@@ -39,10 +39,14 @@ class StatisticalAnalysisConfigurationAgent:
         self.model_registry = ModelRegistry()
         self.gateway = LLMGateway(self.model_registry)
 
-    def generate_statistical_plan(self, experiment_md_path: str) -> Dict[str, Any]:
+    def generate_statistical_plan(self, workflow_state: Dict[str, Any], step_config: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Reads an experiment.md file and generates a structured statistical plan.
+        Reads an experiment.md file from the workflow_state and generates a structured statistical plan.
         """
+        experiment_md_path = workflow_state.get('experiment_md_path')
+        if not experiment_md_path:
+            return {"validation_status": "error", "notes": "experiment_md_path not found in workflow_state."}
+
         experiment_path = Path(experiment_md_path)
         if not experiment_path.exists():
             return {"validation_status": "error", "notes": "Experiment file not found."}
@@ -102,9 +106,4 @@ Example output for an experiment with multiple runs:
             
             return json.loads(json_response)
         except (Exception, json.JSONDecodeError) as e:
-            return {"validation_status": "error", "notes": f"Error generating or parsing JSON from LLM: {e}"}
-
-if __name__ == '__main__':
-    agent = StatisticalAnalysisConfigurationAgent()
-    plan = agent.generate_statistical_plan("projects/attesor/experiments/04_deep_smoke_test/experiment.md")
-    print(json.dumps(plan, indent=2)) 
+            return {"validation_status": "error", "notes": f"Error generating or parsing JSON from LLM: {e}"} 
