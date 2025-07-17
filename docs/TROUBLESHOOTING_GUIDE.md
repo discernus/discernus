@@ -32,7 +32,7 @@ This guide provides strategic troubleshooting approaches for Discernus that **pr
 
 **Resolution Strategy**:
 1. **Identify Intelligence**: What decisions is the code making?
-2. **Extract to LLM**: Move intelligence to `llm_roles.py` prompts
+2. **Extract to LLM**: Move intelligence to `agent_roles.py` prompts
 3. **Simplify Infrastructure**: Reduce to basic routing and storage
 4. **Test Natural Language**: Verify LLM-to-LLM communication
 
@@ -107,13 +107,13 @@ This guide provides strategic troubleshooting approaches for Discernus that **pr
 **Symptom**: LLMs produce unexpected or inconsistent outputs
 
 **Diagnostic Questions**:
-- Are prompts centralized in `llm_roles.py`?
+- Are prompts centralized in `agent_roles.py`?
 - Is framework context properly injected?
 - Are conversation histories preserved?
 - Are handoff patterns working correctly?
 
 **Resolution Approach**:
-1. **Centralize Prompts**: Move hardcoded prompts to `llm_roles.py`
+1. **Centralize Prompts**: Move hardcoded prompts to `agent_roles.py`
 2. **Test Context**: Verify framework and conversation history injection
 3. **Validate Handoffs**: Check natural language coordination patterns
 4. **Monitor Quality**: Detect and prevent philosophical drift

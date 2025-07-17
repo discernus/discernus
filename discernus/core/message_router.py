@@ -63,7 +63,7 @@ class MessageRouter:
     
     def _build_role_prompt(self, role: str, message: str) -> str:
         """Build role-specific prompt"""
-        from .llm_roles import get_role_prompt
+        from .agent_roles import get_expert_prompt as get_role_prompt
         
         # Get base role prompt
         base_prompt = get_role_prompt(role)

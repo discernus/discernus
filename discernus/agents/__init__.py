@@ -6,10 +6,20 @@ Discernus Agents - A collection of specialized agents for computational text ana
 from .project_coherence_analyst import ProjectCoherenceAnalyst
 from .ensemble_configuration_agent import EnsembleConfigurationAgent
 from .execution_planner_agent import ExecutionPlannerAgent
-from .statistical_analysis_agent import StatisticalAnalysisAgent
-from .statistical_interpretation_agent import StatisticalInterpretationAgent
 from .methodological_overwatch_agent import MethodologicalOverwatchAgent
 from .experiment_conclusion_agent import ExperimentConclusionAgent
 from .data_extraction_agent import DataExtractionAgent
 
-__all__ = ['ProjectCoherenceAnalyst'] 
+__all__ = [
+    "AnalysisAgent",
+    "DataExtractionAgent",
+    "DetectiveAgent",
+    "GenericExpertAgent",
+    "InitializationAgent",
+    "KnowledgenautAgent",
+    "QualitativeAnalysisAgent",
+    "QuantitativeAnalysisAgent",
+    "ResearcherAgent",
+    "SynthesisAgent",
+    "ValidationAgent",
+] 

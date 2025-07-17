@@ -29,7 +29,7 @@ from discernus.agents.ensemble_configuration_agent import EnsembleConfigurationA
 from discernus.agents.statistical_analysis_configuration_agent import StatisticalAnalysisConfigurationAgent
 from discernus.agents.execution_planner_agent import ExecutionPlannerAgent
 from discernus.gateway.model_registry import ModelRegistry # Corrected import path
-from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
+from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
 # No standalone AgentRegistry class, it's loaded from YAML
 
 from discernus.core.thin_validation import check_thin_compliance
@@ -373,8 +373,8 @@ Your task is to assess the project's methodological soundness and return a singl
                 raise SystemExit("Execution cancelled by user.")
 
             # --- 5. Handoff to Orchestrator ---
-            print("✅ Plan approved. Initializing EnsembleOrchestrator.")
-            orchestrator = EnsembleOrchestrator(str(project_path_obj))
+            print("✅ Plan approved. Initializing WorkflowOrchestrator.")
+            orchestrator = WorkflowOrchestrator(str(project_path_obj))
             
             initial_state = {
                 "project_path": str(project_path_obj),
@@ -385,7 +385,7 @@ Your task is to assess the project's methodological soundness and return a singl
                 **execution_plan  # Unpack the generated plan into the state
             }
             
-            final_result = await orchestrator.execute_ensemble_analysis(initial_state)
+            final_result = orchestrator.execute_workflow(initial_state)
             
             log_project_event(str(project_path_obj), "VALIDATION_COMPLETED", session_id, {"status": "validated"})
             return final_result

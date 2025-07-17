@@ -149,7 +149,7 @@ class ThinValidator:
         
         if 'hardcoded_intelligence' in violation_categories:
             recommendations.append("Move decision logic to LLM prompts using get_expert_prompt()")
-            recommendations.append("Use prompt templates in llm_roles.py instead of hardcoded prompts")
+            recommendations.append("Use prompt templates in agent_roles.py instead of hardcoded prompts")
         
         if 'complex_orchestration' in violation_categories:
             recommendations.append("Simplify orchestration - just route messages between LLMs")
@@ -171,7 +171,7 @@ class ThinHelper:
         example = '''
 # ✅ CORRECT THIN PATTERN for adding expert agents:
 
-# 1. Add expert to llm_roles.py:
+# 1. Add expert to agent_roles.py:
 EXPERT_AGENT_PROMPTS['my_new_expert'] = """
 You are a my_new_expert, specializing in:
 - Your specific expertise area
@@ -231,10 +231,10 @@ next_response = llm_client.call_llm(next_prompt, next_expert)
         }
         
         # Check for prompt separation
-        llm_roles_file = project_root / "discernus/core/llm_roles.py"
+        llm_roles_file = project_root / "discernus/core/agent_roles.py"
         if not llm_roles_file.exists():
             results['is_thin'] = False
-            results['issues'].append("Missing llm_roles.py - prompts should be separated")
+            results['issues'].append("Missing agent_roles.py - prompts should be separated")
         
         # Check orchestrator size (should be minimal)
         orchestrator_file = project_root / "discernus/orchestration/orchestrator.py"
@@ -300,7 +300,7 @@ def check_thin_compliance() -> None:
     
     print()
     print("💡 Quick THIN Reminders:")
-    print("   - Prompts in llm_roles.py, not orchestrator code")
+    print("   - Prompts in agent_roles.py, not orchestrator code")
     print("   - Raw text passing between LLMs")
     print("   - No parsing or interpretation of LLM responses")
     print("   - LLMs handle ALL intelligence decisions")

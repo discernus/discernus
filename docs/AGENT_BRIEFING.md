@@ -18,7 +18,7 @@ Discernus exists to **dramatically advance understanding of human rhetoric using
 - **LLMs provide intelligence** (analysis, reasoning, content generation)
 - **Software provides infrastructure** (routing, execution, storage)
 - **Natural language flow** between LLMs (no parsing required)
-- **Centralized prompts** in `discernus/core/llm_roles.py`
+- **Centralized prompts** in `discernus/core/agent_roles.py`
 - **Secure code execution** for mathematical operations
 - **Domain-neutral core** with framework-specific modules
 

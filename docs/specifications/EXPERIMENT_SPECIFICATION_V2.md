@@ -74,14 +74,44 @@ models:
 # A value > 1 is required to calculate inter-run reliability statistics.
 num_runs: 3
 
-# OPTIONAL: Specifies which analysis variant from the framework to run.
-# If omitted, the system will use the 'default' variant.
-# The available variants are defined in the framework's embedded YAML config.
-analysis_variant: descriptive_only
+# REQUIRED: A sequence of workflow steps that define the execution pipeline.
+# The WorkflowOrchestrator executes these agents in the order they are listed.
+# Each agent's output is added to a master 'workflow_state' dictionary,
+# making it available to all subsequent agents.
+workflow:
+  # Step 1: Core analysis of the corpus texts.
+  - agent: AnalysisAgent
+    # The AnalysisAgent requires no special configuration. It uses the
+    # 'analysis_prompt' from the framework file and the 'corpus' and 'models'
+    # from this experiment file to perform its work.
+
+  # Step 2: Quality control checkpoint.
+  - agent: MethodologicalOverwatchAgent
+    config:
+      # If the failure rate of the AnalysisAgent runs exceeds this threshold,
+      # the workflow will be terminated to save resources.
+      failure_threshold: 0.25
+
+  # Step 3: Perform statistical calculations.
+  - agent: CalculationAgent
+    # The CalculationAgent uses the 'calculation_spec' from the framework
+    # file to perform deterministic math on the scores produced by the
+    # AnalysisAgent. It requires no additional configuration here.
+
+  # Step 4: Generate the final report and data artifacts.
+  - agent: SynthesisAgent
+    config:
+      # A list of artifacts to be generated.
+      output_artifacts:
+        - final_report.md
+        - results.csv
 
 # OPTIONAL: A plan for statistical tests to be run after the primary analysis.
 # This allows researchers to define the statistical methods needed to
 # validate their hypotheses.
+# DEPRECATION_NOTICE: The 'statistical_plan' block is being deprecated in favor
+# of a more robust 'CalculationAgent' and 'SynthesisAgent' workflow.
+# This block is maintained for backward compatibility but will be removed in v3.
 statistical_plan:
   - test:
       # A human-readable name for this statistical test.

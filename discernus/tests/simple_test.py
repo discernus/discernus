@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from discernus.core.session_manager import SessionManager
 from discernus.core.thin_conversation_logger import ThinConversationLogger
-from discernus.core.llm_roles import get_available_roles
+from discernus.core.agent_roles import get_available_experts as get_available_roles
 
 def test_thin_infrastructure():
     """Test the ultra-thin infrastructure components"""

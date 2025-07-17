@@ -81,7 +81,7 @@ results = await orchestrator.run_automated_session(config)
 
 ## 🛠️ **THIN Architecture Features**
 
-- **Expert Prompts**: Stored in `discernus/core/llm_roles.py`
+- **Expert Prompts**: Stored in `discernus/core/agent_roles.py`
 - **Validation**: Run `python3 -c "from discernus.core.thin_validation import check_thin_compliance; check_thin_compliance()"`
 - **Self-Documentation**: Built-in guidance prevents THICK anti-patterns
 - **Pattern Examples**: `ThinHelper.show_expert_pattern()` for templates

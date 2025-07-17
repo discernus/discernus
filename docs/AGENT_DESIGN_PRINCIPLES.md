@@ -33,14 +33,14 @@ We have identified three distinct agent archetypes. Choosing the correct archety
 
 ### 2. The "Role-Playing" Agent (The Generalist Consultant)
 
--   **Description:** A minimal software shell whose behavior is almost entirely defined by a prompt from a central library (e.g., `llm_roles.py`). It is designed to be composed with other agents in complex, conversational workflows.
+-   **Description:** A minimal software shell whose behavior is almost entirely defined by a prompt from a central library (e.g., `agent_roles.py`). It is designed to be composed with other agents in complex, conversational workflows.
 -   **Analogy:** A skilled but flexible line cook who can perfectly execute any recipe (prompt) they are given.
 -   **Key Characteristics:**
     -   Has little to no custom logic.
     -   Behavior is emergent and context-dependent.
     -   Primed for reasoning, critique, and synthesis.
 -   **Governing Principle:** [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern). The agent is the context, the prompt is the strategy.
--   **Examples:** The `moderator`, `analysis`, and `adversarial` roles defined in `llm_roles.py`.
+-   **Examples:** The `moderator`, `analysis`, and `adversarial` roles defined in `agent_roles.py`.
 
 ### 3. The "Hybrid" Agent (The Standard Pattern)
 
@@ -69,7 +69,7 @@ An orchestrator should be "registry-aware," meaning it consults this registry to
 ## Four Principles for Agent Design
 
 1.  **Principle 1: Choose the Right Archetype.** When creating a new agent, first decide if it's a Tool-User, a Role-Player, or a Hybrid. This forces intentionality in its design.
-2.  **Principle 2: Centralize Reusable Prompts.** General-purpose reasoning and workflow roles belong in a central library like `llm_roles.py`. Highly specialized, one-off prompts can remain inside their agent's code.
+2.  **Principle 2: Centralize Reusable Prompts.** General-purpose reasoning and workflow roles belong in a central library like `agent_roles.py`. Highly specialized, one-off prompts can remain inside their agent's code.
 3.  **Principle 3: Hardcode Service Interactions.** An agent's Python code should handle all deterministic I/O (file paths, database queries). It should pass *content* to the LLM for reasoning, not instructions on how to get the content.
 4.  **Principle 4: Register Every Agent.** Every new agent must have an entry in the `agent_registry.yaml`. This is non-negotiable and solves the discovery problem permanently.
 

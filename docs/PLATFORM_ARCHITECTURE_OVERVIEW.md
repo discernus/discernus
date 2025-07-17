@@ -100,7 +100,7 @@ This architecture enables a thriving ecosystem of extensions while maintaining c
 
 ### Natural Language Flow
 - **Minimal parsing requirements**: LLMs communicate through natural language, not complex JSON structures
-- **Centralized prompt management**: All LLM instructions stored in `discernus/core/llm_roles.py`
+- **Centralized prompt management**: All LLM instructions stored in `discernus/core/agent_roles.py`
 - **Conversational interfaces**: Researchers interact through natural dialogue, not technical configurations
 
 ### Mathematical Reliability

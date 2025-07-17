@@ -163,7 +163,76 @@ Your Task:
 Provide your expert analysis based on your specialization. Be specific and thorough.
 If you need to perform calculations or analysis, write Python code in ```python blocks.
 
-Focus on your area of expertise and directly address the moderator's request."""
+Focus on your area of expertise and directly address the moderator's request.""",
+
+    'statistical_interpreter': """You are an expert in computational social science methodology and statistics, specializing in explaining complex quantitative results to a non-expert academic audience.
+
+Your task is to write a new "Statistical Analysis" section for a research paper. You will be given the raw JSON output from a statistical analysis and contextual information from the project. You must synthesize these sources to provide a clear, concise, and meaningful interpretation of the statistical findings.
+
+**Contextual Information (from experiment.md):**
+---
+{context_content}
+---
+
+**Raw Statistical Results (JSON):**
+---
+{stats_data}
+---
+
+**Your Task:**
+Write a markdown-formatted "Statistical Analysis" section that:
+1.  **Starts with a `## Statistical Analysis` header.**
+2.  Clearly explains the purpose and outcome of each statistical test (e.g., "Inter-run reliability was assessed using Cronbach's Alpha...").
+3.  Interprets the results in plain English (e.g., "A score of 0.85 indicates high reliability between analysis runs.").
+4.  Connects the statistical findings back to the main research questions and hypotheses in the provided context.
+5.  Is written in a clear, academic tone suitable for publication.
+
+**Do NOT simply repeat the JSON data. Your value is in the interpretation and synthesis.**
+
+Begin the new section now:
+""",
+    
+    'methodological_auditor': """You are the Chief Methodologist and lead peer reviewer for a computational social science project. Your task is to conduct a final, holistic audit of the entire research process and write a concluding "Methodological Audit" section for the final report.
+
+You have been given all the project artifacts. Your job is to look for incoherencies, potential issues, and limitations that a human researcher might miss.
+
+**1. Original Experiment Plan (`experiment.md`):**
+---
+{experiment_md}
+---
+
+**2. Analytical Framework (`framework.md`):**
+---
+{framework_md}
+---
+
+**3. Final Report (including qualitative synthesis and statistical interpretation):**
+---
+{final_report}
+---
+
+**4. Raw Statistical Results (`statistical_analysis_results.json`):**
+---
+{stats_json}
+---
+
+**5. Recent Process Log (`project_chronolog.jsonl` excerpt):**
+---
+{chronolog_entries}
+---
+
+**Your Task:**
+Write a new markdown-formatted "## Methodological Audit" section. In this section, critically assess the project's execution against its original goals. Consider the following questions:
+
+-   **Goal Alignment:** Does the final report's conclusion directly address the research questions from the original `experiment.md`? Were the hypotheses from the experiment adequately tested by the statistical analysis?
+-   **Result Coherence:** Are there any apparent discrepancies between the raw statistical results and the human-readable interpretation written in the final report? Does the qualitative synthesis seem to gloss over any outliers or surprising findings present in the data?
+-   **Process Integrity:** Based on the process log, were there any system errors, model fallbacks, or other unexpected events that could have influenced the results? (For example, if a less-capable model was used as a fallback, this could be a limitation).
+-   **Limitations & Alternative Interpretations:** What are the primary limitations of this study, based on all available information? Are there any alternative interpretations of the findings that the main report did not consider?
+
+Your tone should be constructive and critical, like a good peer reviewer. Your goal is to increase the final report's credibility by transparently acknowledging its potential weaknesses.
+
+Begin the new section now:
+"""
 }
 
 # Simulated Human Researcher Prompts for Development Mode
@@ -387,8 +456,7 @@ Respond with just: "APPROVE" or "REVISE: [specific methodological concern]"
     }
 }
 
-def get_expert_prompt(expert_name: str, research_question: str = "", 
-                     source_texts: str = "", expert_request: str = "") -> str:
+def get_expert_prompt(expert_name: str, **kwargs) -> str:
     """Get system prompt for expert agent (THIN pattern)
     
     Example:
@@ -418,12 +486,7 @@ def get_expert_prompt(expert_name: str, research_question: str = "",
             # Registry not available, use generic template
             template = EXPERT_AGENT_PROMPTS['generic_expert']
     
-    return template.format(
-        expert_name=expert_name,
-        research_question=research_question,
-        source_texts=source_texts,
-        expert_request=expert_request
-    )
+    return template.format(**kwargs)
 
 def get_available_experts() -> list:
     """Get list of available expert agents"""

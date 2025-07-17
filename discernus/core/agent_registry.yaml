@@ -3,7 +3,7 @@ agents:
     archetype: Role-Playing
     module: "discernus.agents.analysis_agent"
     class: "AnalysisAgent"
-    execution_method: "run_analysis"
+    execution_method: "execute"
     description: "The primary workhorse agent. Applies a given framework to corpus documents using the 'Show Your Work' pattern to produce verifiable analysis with numerical scores."
     prompt_source: "dynamic (receives framework and instructions from workflow state)"
     inputs:

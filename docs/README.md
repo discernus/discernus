@@ -192,7 +192,7 @@ Works across domains:
 
 ### For Developers
 1. **No Parsing**: If you're parsing LLM responses, you're doing it wrong
-2. **Centralized Prompts**: All prompts in `discernus/core/llm_roles.py`
+2. **Centralized Prompts**: All prompts in `discernus/core/agent_roles.py`
 3. **Line Count Budgets**: Components must stay under complexity limits
 4. **Mathematical Reliability**: Use hybrid intelligence pattern for calculations
 5. **Complete Provenance**: Log everything for academic audit trails
