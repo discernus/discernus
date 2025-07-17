@@ -26,6 +26,7 @@ sys.path.insert(0, str(project_root))
 
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.base_gateway import BaseGateway
 from discernus.core.conversation_logger import ConversationLogger
 from discernus.core.project_chronolog import get_project_chronolog, log_project_event
 
@@ -48,7 +49,7 @@ class WorkflowOrchestrator:
         
         # Core components
         self.model_registry = ModelRegistry()
-        self.gateway = LLMGateway(self.model_registry)
+        self.gateway: BaseGateway = LLMGateway(self.model_registry)
         self._load_agent_registry()
         
         self.logger = None
@@ -97,6 +98,7 @@ class WorkflowOrchestrator:
                     self.workflow_state.update(step_output)
                 
                 self._log_system_event("WORKFLOW_STEP_COMPLETED", {"step": i + 1, "agent": agent_name, "output_keys": list(step_output.keys()) if step_output else []})
+                self._save_state_snapshot(f"state_after_step_{i+1}_{agent_name}.json")
 
             self._log_system_event("WORKFLOW_EXECUTION_COMPLETED", {"session_id": self.session_id})
             
@@ -145,6 +147,7 @@ class WorkflowOrchestrator:
             init_params = agent_class.__init__.__code__.co_varnames
             
             if 'gateway' in init_params:
+                # Pass the orchestrator's gateway instance (which could be real or mock)
                 return agent_class(gateway=self.gateway)
             else:
                 return agent_class()
@@ -158,11 +161,26 @@ class WorkflowOrchestrator:
         self.session_id = f"session_{timestamp.strftime('%Y%m%d_%H%M%S')}"
         self.conversation_id = f"conversation_{timestamp.strftime('%Y%m%d_%H%M%S')}_{os.urandom(4).hex()}"
         
-        self.logger = ConversationLogger(str(self.project_path))
+        # The CLI now creates the session directory, so we just need to use it.
+        # This resolves the chicken-and-egg problem.
+        if 'session_results_path' not in self.workflow_state or not self.workflow_state['session_results_path']:
+             timestamp_str = timestamp.strftime('%Y-%m-%d_%H-%M-%S')
+             self.session_results_path = self.results_path / timestamp_str
+             self.session_results_path.mkdir(exist_ok=True)
+        else:
+            self.session_results_path = Path(self.workflow_state['session_results_path'])
         
-        timestamp_str = timestamp.strftime('%Y-%m-%d_%H-%M-%S')
-        self.session_results_path = self.results_path / timestamp_str
-        self.session_results_path.mkdir(exist_ok=True)
+        self.logger = ConversationLogger(str(self.project_path))
+
+    def _save_state_snapshot(self, filename: str):
+        """Saves the current workflow_state to a file for debugging."""
+        snapshot_path = self.session_results_path / filename
+        try:
+            with open(snapshot_path, 'w', encoding='utf-8') as f:
+                # We need a custom default handler for non-serializable objects like Path
+                json.dump(self.workflow_state, f, indent=2, default=str)
+        except Exception as e:
+            print(f"⚠️  Warning: Could not save state snapshot to {snapshot_path}: {e}")
 
     def _log_system_event(self, event_type: str, event_data: Dict[str, Any]):
         """Logs a system event to both the session log and the project chronolog."""

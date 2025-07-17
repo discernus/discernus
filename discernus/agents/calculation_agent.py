@@ -46,92 +46,94 @@ class CalculationAgent:
         """
         print("🔬 Running CalculationAgent...")
         
-        analysis_results = workflow_state.get('analysis_results', [])
         framework_spec = workflow_state.get('framework', {})
         calculation_spec = framework_spec.get('calculation_spec')
 
         if not calculation_spec:
             print("- CalculationAgent: No 'calculation_spec' found in framework. Skipping.")
-            return {"calculation_results": {}}
+            # Pass through the results from the previous step
+            return {"analysis_results": workflow_state.get('analysis_results', [])}
+
+        analysis_results = workflow_state.get('analysis_results', [])
 
         if not analysis_results:
             print("- CalculationAgent: No 'analysis_results' in workflow_state. Skipping.")
-            return {"calculation_results": {}}
+            return {"analysis_results": []}
             
-        calculated_metrics = {}
+        # This agent should modify the results in place, adding new keys
+        # rather than creating a whole new structure.
+        for result in analysis_results:
+            if not result.get('success'):
+                continue
 
-        for calculation in calculation_spec:
-            # Handle both direct format and nested metric format
-            if 'metric' in calculation:
-                # Handle nested format: {metric: {name: "...", formula: "..."}}
-                calc_data = calculation['metric']
-                name = calc_data.get('name')
-                formula = calc_data.get('formula')
-                data_source = calc_data.get('data_source', 'scores')  # Default to 'scores'
+            json_output = result.get('json_output', {})
+            if not isinstance(json_output, dict):
+                continue
+            
+            # Prepare a local context for the secure executor
+            # Framework-agnostic: find ALL numeric fields in json_output for calculations
+            context = {}
+            for key, value in json_output.items():
+                if isinstance(value, dict):
+                    # Add all numeric values from nested dictionaries (e.g., scores, dimension_scores, emotion_metrics)
+                    for nested_key, nested_value in value.items():
+                        if isinstance(nested_value, (int, float)):
+                            context[nested_key] = nested_value
+                elif isinstance(value, (int, float)):
+                    # Add top-level numeric values
+                    context[key] = value
+            
+            if not context:
+                continue
+
+            # Handle both dictionary format (name: formula) and list format
+            if isinstance(calculation_spec, dict):
+                # Framework format: {"name": "formula", ...}
+                calculation_items = calculation_spec.items()
             else:
-                # Handle direct format: {name: "...", formula: "..."}
-                name = calculation.get('name')
-                formula = calculation.get('formula')
-                data_source = calculation.get('data_source', 'scores')  # Default to 'scores'
+                # List format: [{"name": "...", "formula": "..."}, ...]
+                calculation_items = [(calc.get('name'), calc.get('formula')) for calc in calculation_spec]
 
-            if not name or not formula:
-                print(f"- CalculationAgent: Skipping misconfigured calculation: {calculation}")
-                continue
+            for name, formula in calculation_items:
+                if isinstance(formula, dict):
+                    # Handle nested format where formula is a dict
+                    if 'metric' in formula:
+                        calc_data = formula['metric']
+                        name = calc_data.get('name', name)
+                        formula = calc_data.get('formula')
+                    else:
+                        formula = formula.get('formula')
 
-            # This example assumes we are processing a list of results,
-            # and the formula applies to values extracted from them.
-            # A more sophisticated implementation would handle various data shapes.
-            
-            # We'll prepare a local context for the secure executor
-            # For now, let's assume 'data_source' points to a key in each result's JSON
-            
-            # This is a simplified example. A real implementation needs to be
-            # more robust about how it prepares the context for the formula.
-            # For instance, it might aggregate all scores into a list.
-            
-            # Let's try to pass all scores as a list to the executor context
-            scores_list = []
-            for result in analysis_results:
-                json_output = result.get('result', {}).get('json_output', {})
-                if isinstance(json_output, dict):
-                    scores = json_output.get(data_source)
-                    if scores is not None:
-                         # This part is tricky and depends on the score format.
-                         # Assuming scores is a dict of key:value
-                         if isinstance(scores, dict):
-                             scores_list.extend(scores.values())
+                if not name or not formula:
+                    print(f"- CalculationAgent: Skipping misconfigured calculation: {name} -> {formula}")
+                    continue
+
+                try:
+                    # The SecureCodeExecutor runs the formula in the context of the scores
+                    # The formula should be a valid Python expression.
+                    # For example: "(score_identity_axis + score_goal_axis) / 2"
+                    # The executor will make the keys of the context dict available as variables.
+                    
+                    # We need to prepend 'result_data = ' for the executor
+                    code = f"result_data = {formula}"
+
+                    execution_result = self.executor.execute_code(code, context)
+                    
+                    if execution_result.get('success'):
+                        calculated_value = execution_result.get('result_data')
+                        # Framework-agnostic: store calculated metrics at the top level
+                        # This allows any framework to access them without assuming specific structure
+                        json_output[name] = calculated_value
+                    else:
+                        error_message = execution_result.get('error', 'Unknown execution error')
+                        # The orchestrator will handle logging failures
+                        result['error'] = error_message
+                        result['success'] = False
 
 
-            if not scores_list:
-                print(f"- CalculationAgent: Could not find any data for '{data_source}'")
-                continue
-
-            # The user's formula is executed in a context where 'scores' is a list of numbers.
-            # The result of the formula must be assigned to the 'result_data' variable.
-            code = f"""
-import numpy as np
-scores = {scores_list}
-result_data = {formula}
-"""
-            
-            try:
-                # The SecureCodeExecutor runs the code and returns a dictionary.
-                execution_result_dict = self.executor.execute_code(code)
-
-                if execution_result_dict.get('success'):
-                    # The actual calculated value is in the 'result_data' key.
-                    calculated_value = execution_result_dict.get('result_data')
-                    calculated_metrics[name] = calculated_value
-                    print(f"  - Calculated '{name}': {calculated_value}")
-                else:
-                    error_message = execution_result_dict.get('error', 'Unknown execution error')
-                    print(f"❌ CalculationAgent: Error executing formula for '{name}': {error_message}")
-                    calculated_metrics[name] = {"error": error_message}
-
-            except Exception as e:
-                print(f"❌ CalculationAgent: Infrastructure error executing formula for '{name}': {e}")
-                calculated_metrics[name] = {"error": str(e)}
-
+                except Exception as e:
+                    result['error'] = f"Infrastructure error: {e}"
+                    result['success'] = False
 
         print("✅ CalculationAgent finished.")
-        return {"calculation_results": calculated_metrics} 
+        return {"analysis_results": analysis_results} 

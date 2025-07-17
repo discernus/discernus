@@ -120,18 +120,9 @@ agents:
       - validation_result: "A comprehensive JSON object detailing the project's validity, including any warnings, errors, or proactive recommendations." 
       
   - name: DataExtractionAgent
-    archetype: Tool-Using
-    module: "discernus.agents.data_extraction_agent"
-    class: "DataExtractionAgent"
-    execution_method: "extract_tidy_data"
-    description: "Parses a conversation.jsonl log file and extracts all structured analysis data (scores, metrics, classifications) into a single, tidy results.csv file, ready for statistical analysis."
-    prompt_source: "n/a (deterministic tool)"
-    inputs:
-      - conversation_log_path: "The path to the raw conversation.jsonl file for the session."
-      - output_csv_path: "The path where the final results.csv file should be written."
-      - framework_content: "The full content of the framework.md, used to identify calculated metrics."
-    outputs:
-      - tidy_data_path: "The path to the generated results.csv file."
+    module: discernus.agents.data_extraction_agent
+    class: DataExtractionAgent
+    execution_method: execute
 
   - name: CalculationAgent
     archetype: Tool-Using
@@ -158,3 +149,21 @@ agents:
       - step_config: "Configuration specifying which output artifacts to generate."
     outputs:
       - artifact_paths: "A list of paths to the generated report and data files." 
+  - name: JsonExtractionAgent
+    module: discernus.agents.json_extraction_agent
+    class: JsonExtractionAgent
+    execution_method: execute
+  
+  - name: ForensicQAAgent
+    archetype: Validation
+    module: "discernus.agents.forensic_qa_agent"
+    class: "ForensicQAAgent"
+    execution_method: "validate_content_integrity"
+    description: "THIN forensic validation agent that uses LLM intelligence to detect text hallucination and ensure corpus integrity."
+    prompt_source: "self-contained"
+    inputs:
+      - corpus_file_path: "Path to the corpus file being analyzed"
+      - corpus_text: "The actual text content from the corpus file"
+      - llm_response: "The LLM response claiming to analyze this text"
+    outputs:
+      - validation_result: "A dictionary containing validation status, content hash, and forensic metadata" 

@@ -24,6 +24,9 @@ import re
 import json
 from pathlib import Path
 from typing import Dict, Any, List
+import datetime
+import getpass
+import unittest
 
 # Add project root to path for imports
 project_root = Path(__file__).parent.parent
@@ -77,9 +80,6 @@ def discernus():
 
     # Now that we've confirmed the git structure is clean, initialize the chronolog.
     try:
-        import datetime
-        import getpass
-        
         session_id = f"discernus_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
         user = getpass.getuser()
         command = " ".join(sys.argv)
@@ -197,15 +197,17 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
     click.echo(f"🧪 Experiment: {experiment_file}")
     click.echo(f"📁 Corpus: {corpus_dir}")
     
-    # Initialize chronolog for academic provenance using project-specific path
-    import datetime
-    import getpass
-    session_id = f"discernus_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    # --- Set up logging and chronolog ---
+    session_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    project_path = Path(experiment_file).parent # Use experiment file for project context
+    results_dir = project_path / "results" / session_timestamp
+    results_dir.mkdir(parents=True, exist_ok=True)
+    log_file_path = results_dir / "session_run.log"
+
+    session_id = f"discernus_session_{session_timestamp}"
     user = getpass.getuser()
     command = " ".join(sys.argv)
     
-    # Use the framework file path to determine the project
-    project_path = Path(framework_file).parent
     initialize_project_chronolog(
         project_path=str(project_path),
         user=user,
@@ -214,9 +216,11 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
         system_state={'discernus_cli_version': '1.0.0'}
     )
     
+    # --- Define the async execution function ---
     async def _execute_async():
+        # This function runs with its output redirected to the log file
         try:
-            click.echo("⏳ Loading specifications...")
+            print("⏳ Loading specifications...") # This will go to the log
             
             # Load specifications using new spec_loader
             spec_loader = SpecLoader()
@@ -234,7 +238,7 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
                         click.echo(f"  {spec_type}: {', '.join(validation['issues'])}")
                 sys.exit(1)
             
-            click.echo("✅ All specifications loaded and validated")
+            print("✅ All specifications loaded and validated")
             
             # Initialize orchestrator - use parent directory of experiment file as project path
             project_path = Path(experiment_file).parent
@@ -251,32 +255,55 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
                 'framework_path': framework_file,
                 'experiment_path': experiment_file,
                 'corpus_path': corpus_dir,
+                'session_results_path': str(results_dir) # Use the session-specific results directory
             }
 
             if not initial_state['workflow']:
                  raise ValueError("Experiment file must contain a 'workflow' definition.")
 
-            click.echo("⏳ Executing workflow...")
+            print("⏳ Executing workflow...") # This will go to the log
             results = orchestrator.execute_workflow(initial_state)
             
-            if results.get('status') == 'success':
-                click.secho("✅ Experiment completed successfully!", fg='green')
-                click.echo(f"📊 Results saved to: {results.get('results_path', 'results/')}")
-            else:
-                error_message = results.get('message', results.get('error', 'Unknown error'))
-                click.secho(f"❌ Experiment failed: {error_message}", fg='red')
-                
-                # Print full results for debugging
-                click.echo(f"Debug info: {results}")
-                sys.exit(1)
+            return results # Return results for handling outside the log context
                 
         except Exception as e:
-            click.secho(f"❌ Execution failed with an unexpected error: {e}", fg='red')
+            # This will be printed to the log file
+            print(f"❌ Execution failed with an unexpected error: {e}")
             import traceback
             traceback.print_exc()
-            sys.exit(1)
+            # Re-raise to be caught by the outer block
+            raise
+
+    # --- Execute and handle results ---
+    results = None
+    try:
+        # Capture all stdout/stderr to the log file for complete provenance
+        original_stdout = sys.stdout
+        original_stderr = sys.stderr
+        with open(log_file_path, 'w', encoding='utf-8') as log_file:
+            sys.stdout = log_file
+            sys.stderr = log_file
+            results = asyncio.run(_execute_async())
+
+    except Exception as e:
+        # This will be printed to the console
+        click.secho(f"❌ A critical error occurred during execution: {e}", fg='red')
     
-    asyncio.run(_execute_async())
+    finally:
+        # Always restore stdout/stderr
+        sys.stdout = original_stdout
+        sys.stderr = original_stderr
+        
+        # Always give the user feedback and the log path
+        click.echo("\n---")
+        click.echo(f"📝 Full session log available at: {log_file_path}")
+        
+        if results and results.get('status') == 'success':
+            click.secho("✅ Experiment completed successfully!", fg='green')
+            click.echo(f"📊 Results saved to: {results_dir}")
+        else:
+            click.secho("❌ Experiment failed. Please check the session log for details.", fg='red')
+            sys.exit(1)
 
 @discernus.command()
 def list_frameworks():
@@ -365,6 +392,27 @@ def info(check_thin: bool):
             
         except Exception as e:
             click.echo(f"   ❌ THIN compliance check failed: {str(e)}")
+
+@discernus.command()
+@click.option('--pattern', default='test_*.py', help='Pattern for test file discovery.')
+def test(pattern: str):
+    """
+    Discover and run all unit and integration tests for the Discernus platform.
+    """
+    click.echo("🔬 Running Discernus Test Suite...")
+    click.echo("=" * 40)
+    
+    test_loader = unittest.TestLoader()
+    test_suite = test_loader.discover(start_dir='./discernus/tests', pattern=pattern)
+    
+    test_runner = unittest.TextTestRunner()
+    result = test_runner.run(test_suite)
+    
+    if result.wasSuccessful():
+        click.secho("✅ All tests passed!", fg='green')
+    else:
+        click.secho("❌ Some tests failed.", fg='red')
+        sys.exit(1)
 
 def _show_thin_check(component: str, check_result: Dict[str, Any]):
     """Show THIN compliance check results"""

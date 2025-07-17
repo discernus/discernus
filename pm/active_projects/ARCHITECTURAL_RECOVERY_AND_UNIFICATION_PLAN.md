@@ -1,10 +1,12 @@
 # Architectural Recovery and Unification Plan
 
-**Version**: 1.0  
-**Date**: July 17, 2025  
-**Status**: DRAFT
+**Version**: 1.1  
+**Date**: January 13, 2025  
+**Status**: UPDATED - Post-MVA Experiment 2 Analysis
 
 This document outlines the strategic plan to unify the Discernus platform, recovering lost capabilities and establishing a robust, flexible, and philosophically coherent architecture for future development. It is based on a comprehensive review of the project's history, including successes and regressions.
+
+**Latest Update**: Realistic assessment of current workflow status and integration of fault-tolerant provenance system requirements based on actual experiment failure analysis.
 
 ---
 
@@ -116,18 +118,23 @@ This new architecture simplifies the orchestration flow significantly. The syste
     *   For each text file in the corpus, for each model, for each `num_runs`, the orchestrator spawns an `AnalysisAgent`.
     *   The orchestrator populates the variables in the `analysis_prompt` (e.g., `{framework_text}`, `{corpus_text}`).
     *   The `AnalysisAgent` sends the completed prompt to the `LLMGateway`.
-6.  **Response Validation**:
-    *   The `AnalysisAgent` receives the response from the LLM.
-    *   It performs a strict `json.loads()` check. If parsing fails, the run for that specific text fails loudly and is logged. There are no fallbacks.
-    *   The rich JSON output (with scores and evidence) is added to the `workflow_state`.
-7.  **Quality Control (`MethodologicalOverwatchAgent`)**:
+6.  **Response Capture**:
+    *   The `AnalysisAgent` receives the raw, potentially messy response from the LLM.
+    *   It performs NO validation. Its only job is to faithfully record the entire raw response to the Tier 3 `conversation.jsonl` file for the current session. A run is considered successful if a non-empty response is received.
+7.  **Data Extraction (`DataExtractionAgent` - New)**:
+    *   After all `AnalysisAgent` runs are complete, a new `DataExtractionAgent` is invoked.
+    *   It reads the raw responses from the session's `conversation.jsonl` file.
+    *   For each raw response, it uses a targeted "JSON fixer" prompt to ask a powerful LLM (e.g., GPT-4o) to extract the clean, valid JSON object.
+    *   If the extraction succeeds, the clean JSON is added to the `workflow_state`. If it fails, the error is logged, and the workflow continues with the successful extractions.
+8.  **Quality Control (`MethodologicalOverwatchAgent`)**:
     *   After all `AnalysisAgent` runs are complete, the `MethodologicalOverwatchAgent` inspects the collected results.
-    *   It checks for a high failure rate. If a significant percentage of analyses failed, it can halt the workflow to save resources.
-8.  **Calculation (`CalculationAgent` - New)**:
+    *   After the `DataExtractionAgent` runs, the `MethodologicalOverwatchAgent` inspects the cleaned JSON results.
+    *   It checks for a high failure rate in the extraction process. If a significant percentage of analyses could not be cleaned, it can halt the workflow to save resources.
+9.  **Calculation (`CalculationAgent` - New)**:
     *   If a `calculation_spec` exists in the framework's YAML config, a new `CalculationAgent` is invoked.
     *   It takes the `scores` dictionary from the `AnalysisAgent`'s output and performs the specified mathematical operations deterministically.
     *   The results (e.g., `cohesion_index`) are added to the `workflow_state`.
-9.  **Synthesis & Reporting (`SynthesisAgent` - New)**:
+10. **Synthesis & Reporting (`SynthesisAgent` - New)**:
     *   A new `SynthesisAgent` takes all the data from the `workflow_state` (qualitative summaries, scores, evidence, calculated indices).
     *   It generates the final, human-readable `final_report.md` and any other required artifacts (e.g., `results.csv`).
 
@@ -157,6 +164,7 @@ graph TD
         I[final_report.md]
         J[results.csv]
         K[project_chronolog.jsonl]
+        L[conversation.jsonl]
     end
 
     CLI -->|Invokes| D
@@ -165,8 +173,11 @@ graph TD
     C -->|Provides Content| D
 
     D -->|Spawns N Times| E
-    E -->|Returns Rich JSON| D
-    D -->|After Analysis| F
+    E -->|Writes Raw Responses| L
+    D -->|After Analysis| G_DE[DataExtractionAgent]
+    G_DE -->|Reads| L
+    G_DE -->|Returns Clean JSON| D
+    D -->|After Extraction| F
     F -->|Halts on High Failure Rate| D
     D -->|If Spec Exists| G
     G -->|Returns Calculated Index| D
@@ -195,11 +206,12 @@ These components are well-designed, THIN, and will be central to the new system:
 ### 4.2. Assets to Refactor (The Evolution)
 
 *   **`WorkflowOrchestrator`**: The core logic remains, but it will be simplified. It no longer needs to manage a complex, hardcoded sequence of agents. Its main loop will become a simple executor of the `AnalysisAgent` and the new post-processing agents.
-*   **`AnalysisAgent`**: This will undergo a significant, simplifying refactoring. All hardcoded prompt logic will be removed. Its new role is to parse the framework YAML, populate the prompt template, execute the call, and strictly validate the JSON response.
+*   **`AnalysisAgent`**: This will undergo a significant, simplifying refactoring. All hardcoded prompt logic and all JSON parsing/validation logic will be removed. Its new role is to parse the framework YAML, populate the prompt template, execute the call, and save the raw response to the conversation log.
 *   **`discernus_cli`**: The `execute` command will be simplified to just parse the `experiment.md` and pass the paths to the `WorkflowOrchestrator`.
 
 ### 4.3. Assets to Create (The New Components)
 
+*   **`DataExtractionAgent`**: A new agent whose sole responsibility is to read raw LLM responses from the conversation log and use a targeted "fixer" prompt to extract clean, valid JSON.
 *   **`CalculationAgent`**: A new, simple agent that takes a dictionary of scores and a formula from the `calculation_spec` and performs deterministic math.
 *   **`SynthesisAgent`**: A new agent responsible for taking all the rich data from the `workflow_state` (qualitative summaries, scores, evidence, calculations) and creating the final `final_report.md` and `results.csv`.
 
@@ -248,10 +260,12 @@ This new architecture is fundamentally more user-centric because it places the r
 ### 6.3. Definition of Done
 
 This architectural recovery project will be considered **DONE** when:
-1.  All specifications (`framework_v4.0`, `experiment_v2.0`, `corpus_v1.0`) are formally documented in the `docs/specifications/` directory.
-2.  The `AnalysisAgent`, `WorkflowOrchestrator`, and `discernus_cli` have been refactored to conform to the new architecture.
-3.  The new `CalculationAgent` and `SynthesisAgent` have been created and integrated.
-4.  The `pdaf_retest` project, using a `v4.0` compliant framework, executes successfully end-to-end, producing a rich, multi-anchor report with scores and evidence that are verifiably correct.
+1.  All specifications (`framework_v4.0`, `experiment_v2.0`, `corpus_v2.0`) are formally documented in the `docs/specifications/` directory.
+2.  **Fault-tolerant provenance system** (Research Provenance Guide v3.0) is fully implemented with immediate LLM persistence.
+3.  The `AnalysisAgent`, `WorkflowOrchestrator`, and `discernus_cli` have been refactored to conform to the new architecture.
+4.  The new `DataExtractionAgent`, `CalculationAgent`, and `SynthesisAgent` have been created and integrated.
+5.  **End-to-end workflow validation**: The `pdaf_retest` project executes successfully from start to finish, producing complete deliverables even with intentional failures at each stage.
+6.  **Cost protection verified**: Zero duplicate LLM calls during session resumption after crashes.
 
 ---
 
@@ -265,4 +279,87 @@ This architectural recovery project will be considered **DONE** when:
     *   The "intermediate file" violation (`statistical_plan.json`) has been removed.
     *   The CLI is now a "thin" invoker, passing only the `project_path` and `experiment_config` to the orchestrator.
     *   Legacy helper functions were removed, and the codebase was reduced by 33% while preserving all essential functionality.
-*   **AAR**: See specialist "After Action Report" for full details. 
+*   **AAR**: See specialist "After Action Report" for full details.
+
+### Step 2: Enhanced Provenance Architecture - ✅ COMPLETE  
+
+*   **Date**: January 13, 2025
+*   **Outcome**: Comprehensive provenance system redesign to address critical fault tolerance gaps
+*   **Documents Created**:
+    *   `docs/RESEARCH_PROVENANCE_GUIDE_V3.md` - Updated provenance specification with fault-tolerant design
+    *   `pm/active_projects/PROVENANCE_SYSTEM_GAP_ANALYSIS.md` - Detailed implementation roadmap
+*   **Key Insights**:
+    *   **Current three-tier provenance system works but has critical gaps**
+    *   **Fault tolerance failure**: $50+ in LLM costs lost per failed experiment
+    *   **MECE violations**: Overlapping file responsibilities cause confusion
+    *   **Model provenance gaps**: Insufficient forensic detail for academic replication
+*   **Priority**: Critical - blocking research progress until implemented
+
+### Current Status Assessment (January 13, 2025)
+
+**Reality Check: We are NOT "one bug away" from end-to-end workflow completion.**
+
+#### What MVA Experiment 2 Revealed:
+
+**✅ What's Working:**
+- **AnalysisAgent**: Successfully completed 46/48 analyses (95.8% success rate)
+- **Framework processing**: CFF v4.1 framework correctly loaded and applied
+- **Three-tier provenance**: Comprehensive data capture (943 lines of chronolog, 449KB session logs)
+- **LLM integration**: Reliable model calls with proper response capture
+
+**❌ What's Broken:**
+- **DataExtractionAgent**: Crashes with `'str' object has no attribute 'get'` parsing error
+- **Workflow continuation**: Stops after Step 1, never reaches CalculationAgent or SynthesisAgent
+- **Fault tolerance**: $50+ in LLM analyses lost when workflow fails
+- **Result accessibility**: 46 analyses trapped in 1,339-line JSON blob, unusable for researchers
+- **File organization**: MECE violations cause confusion about data location and purpose
+
+#### Remaining Implementation Gaps:
+
+**🔴 Critical (Blocking):**
+1. **Fault tolerance implementation** (Phase 1 of Gap Analysis)
+   - Immediate LLM persistence system
+   - Progressive checkpointing
+   - Session resumption capability
+2. **DataExtractionAgent bug fixes** 
+   - JSON parsing error resolution
+   - Robust error handling for malformed LLM responses
+3. **Workflow orchestration hardening**
+   - Continue execution despite agent failures
+   - Graceful degradation with partial results
+
+**🟡 Important (Quality):**
+4. **Directory structure migration** (Phase 2 of Gap Analysis)
+   - MECE file organization
+   - Experiment/framework snapshots
+   - Corpus manifest generation
+5. **CalculationAgent & SynthesisAgent completion**
+   - Currently unimplemented
+   - Required for final deliverables
+
+**🟢 Nice-to-Have (Polish):**
+6. **Enhanced model provenance** (Phase 3 of Gap Analysis)
+   - Forensic-grade model tracking
+   - Academic integrity compliance
+
+#### Next Steps (Prioritized):
+
+**Week 1: Critical Fault Tolerance**
+- [ ] Implement `LLMArchiveManager` for immediate persistence
+- [ ] Create `CheckpointManager` for progressive state saving
+- [ ] Fix DataExtractionAgent JSON parsing bug
+- [ ] Test workflow resumption without duplicate LLM calls
+
+**Week 2: Complete Core Workflow**
+- [ ] Implement missing `CalculationAgent` 
+- [ ] Implement missing `SynthesisAgent`
+- [ ] End-to-end workflow validation with `MVA/experiment2`
+- [ ] Verify complete deliverables generation
+
+**Week 3: Production Hardening**
+- [ ] Directory structure migration
+- [ ] Enhanced error handling and logging
+- [ ] Performance optimization
+- [ ] Academic integrity compliance
+
+**Estimated Completion: 3-4 weeks of focused development** 
