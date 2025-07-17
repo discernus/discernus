@@ -620,26 +620,10 @@ _active_chronologs: Dict[str, ProjectChronolog] = {}
 
 def _detect_project_root(path_str: str) -> Path:
     """
-    Detect the actual project root from a file path by finding the .git directory.
-    This is critical to prevent nested repository creation.
+    Detect the actual project root from a file path.
+    For Discernus projects, the project root is the first subdirectory under 'projects/'.
+    This ensures one chronolog per logical project (e.g., MVA, attesor) regardless of experiment subdirectories.
     """
-    current_path = Path(path_str).resolve()
-    
-    # If path is a file, start from its parent directory
-    if current_path.is_file():
-        current_path = current_path.parent
-        
-    # Search upwards for a .git directory, which signifies the project root
-    while current_path != current_path.parent:
-        if (current_path / ".git").is_dir():
-            return current_path
-        current_path = current_path.parent
-        
-    # If no .git directory is found after checking all parents, it means we are not
-    # in a git repository. In this case, we fall back to the old logic of finding
-    # a 'projects' directory, or ultimately just using the path as given. This
-    # ensures the system can still run in non-git environments without crashing.
-    
     original_path = Path(path_str).resolve()
     if original_path.is_file():
         original_path = original_path.parent
@@ -648,9 +632,18 @@ def _detect_project_root(path_str: str) -> Path:
     try:
         projects_index = parts.index('projects')
         if projects_index + 1 < len(parts):
+            # Return path up to the first subdirectory under 'projects/'
+            # e.g., projects/MVA/experiment_1 → projects/MVA
             return Path(*parts[:projects_index + 2])
     except ValueError:
         pass # 'projects' not in path
+        
+    # Fallback: search upwards for a .git directory for non-projects paths
+    current_path = original_path
+    while current_path != current_path.parent:
+        if (current_path / ".git").is_dir():
+            return current_path
+        current_path = current_path.parent
         
     return original_path
 

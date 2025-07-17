@@ -84,14 +84,7 @@ def discernus():
         user = getpass.getuser()
         command = " ".join(sys.argv)
         
-        # Initialize chronolog for academic provenance
-        initialize_project_chronolog(
-            project_path=".",  # CLI-level logging
-            user=user,
-            command=command,
-            session_id=session_id,
-            system_state={'discernus_cli_version': '1.0.0'}
-        )
+        # Chronolog will be initialized in the execute function with project-specific path
         click.echo(f"📝 Chronolog initialized for session: {session_id}")
         
     except Exception as e:
@@ -200,12 +193,29 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
     """
     click.echo("🚀 Discernus Experiment Execution")
     click.echo("=" * 40)
+    click.echo(f"📄 Framework: {framework_file}")
+    click.echo(f"🧪 Experiment: {experiment_file}")
+    click.echo(f"📁 Corpus: {corpus_dir}")
+    
+    # Initialize chronolog for academic provenance using project-specific path
+    import datetime
+    import getpass
+    session_id = f"discernus_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    user = getpass.getuser()
+    command = " ".join(sys.argv)
+    
+    # Use the framework file path to determine the project
+    project_path = Path(framework_file).parent
+    initialize_project_chronolog(
+        project_path=str(project_path),
+        user=user,
+        command=command,
+        session_id=session_id,
+        system_state={'discernus_cli_version': '1.0.0'}
+    )
     
     async def _execute_async():
         try:
-            click.echo(f"📄 Framework: {framework_file}")
-            click.echo(f"🧪 Experiment: {experiment_file}")
-            click.echo(f"📁 Corpus: {corpus_dir}")
             click.echo("⏳ Loading specifications...")
             
             # Load specifications using new spec_loader
