@@ -41,7 +41,7 @@ try:
     from discernus.core.conversation_logger import ConversationLogger
     from discernus.core.secure_code_executor import SecureCodeExecutor
     from discernus.core.project_chronolog import get_project_chronolog, log_project_event
-    from discernus.agents.data_extraction_agent import DataExtractionAgent
+    # Import DataExtractionAgent only when needed to avoid circular imports
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"EnsembleOrchestrator dependencies not available: {e}")
@@ -120,44 +120,7 @@ class EnsembleOrchestrator:
         else:
             return execution_method(**kwargs)
             
-    def _parse_experiment_config(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Parse YAML config block from experiment.md"""
-        
-        # Default configuration
-        default_config = {
-            'models': ['vertex_ai/gemini-2.5-flash'],
-            'remove_synthesis': False,
-            'batch_size': 1,
-            'num_runs': 1
-        }
-        
-        # Read directly from experiment.md file
-        experiment_file = self.project_path / "experiment.md"
-        
-        if not experiment_file.exists():
-            print(f"⚠️  Experiment file not found: {experiment_file}")
-            return default_config
-            
-        try:
-            experiment_definition = experiment_file.read_text()
-            
-            # Extract YAML block from markdown
-            yaml_match = re.search(r'```yaml\n(.*?)```', experiment_definition, re.DOTALL)
-            if not yaml_match:
-                print(f"⚠️  No YAML configuration found in experiment.md")
-                return default_config
-                
-            yaml_content = yaml_match.group(1)
-            config = yaml.safe_load(yaml_content)
-            
-            # Merge with defaults
-            default_config.update(config)
-            print(f"✅ Parsed experiment config: {default_config}")
-            return default_config
-            
-        except Exception as e:
-            print(f"⚠️  Could not parse experiment YAML, using defaults. Error: {e}")
-            return default_config
+
 
     def _init_session_logging(self):
         """Initialize session logging and chronolog"""
@@ -170,13 +133,24 @@ class EnsembleOrchestrator:
             snapshot_path = self.session_results_path / "project_snapshot"
             snapshot_path.mkdir(exist_ok=True)
             
-            # Copy framework and experiment
-            shutil.copy(self.project_path / "framework.md", snapshot_path)
-            shutil.copy(self.project_path / "experiment.md", snapshot_path)
-            
-            # Copy corpus
-            corpus_snapshot_path = snapshot_path / "corpus"
-            shutil.copytree(self.project_path / "corpus", corpus_snapshot_path)
+            # Copy framework and experiment using actual file paths
+            if hasattr(self, 'specifications') and self.specifications:
+                framework_path = Path(self.specifications['framework']['_metadata']['file_path'])
+                experiment_path = Path(self.specifications['experiment']['_metadata']['file_path'])
+                
+                shutil.copy(framework_path, snapshot_path / framework_path.name)
+                shutil.copy(experiment_path, snapshot_path / experiment_path.name)
+                
+                # Copy corpus
+                corpus_path = Path(self.specifications['corpus']['metadata']['corpus_path'])
+                corpus_snapshot_path = snapshot_path / "corpus"
+                shutil.copytree(corpus_path, corpus_snapshot_path)
+            else:
+                # Fallback to old behavior if specifications not available
+                shutil.copy(self.project_path / "framework.md", snapshot_path)
+                shutil.copy(self.project_path / "experiment.md", snapshot_path)
+                corpus_snapshot_path = snapshot_path / "corpus"
+                shutil.copytree(self.project_path / "corpus", corpus_snapshot_path)
             
             print(f"✅ Created immutable session package at: {snapshot_path}")
             
@@ -186,13 +160,20 @@ class EnsembleOrchestrator:
         # --- Asset Fingerprinting ---
         asset_fingerprints = {}
         try:
-            # Hash framework
-            framework_path = self.project_path / "framework.md"
-            asset_fingerprints['framework.md'] = self._hash_file(framework_path)
-            
-            # Hash experiment
-            experiment_path = self.project_path / "experiment.md"
-            asset_fingerprints['experiment.md'] = self._hash_file(experiment_path)
+            # Hash framework and experiment using actual file paths
+            if hasattr(self, 'specifications') and self.specifications:
+                framework_path = Path(self.specifications['framework']['_metadata']['file_path'])
+                experiment_path = Path(self.specifications['experiment']['_metadata']['file_path'])
+                
+                asset_fingerprints[framework_path.name] = self._hash_file(framework_path)
+                asset_fingerprints[experiment_path.name] = self._hash_file(experiment_path)
+            else:
+                # Fallback to old behavior if specifications not available
+                framework_path = self.project_path / "framework.md"
+                experiment_path = self.project_path / "experiment.md"
+                
+                asset_fingerprints['framework.md'] = self._hash_file(framework_path)
+                asset_fingerprints['experiment.md'] = self._hash_file(experiment_path)
             
             # Hash corpus
             corpus_path = self.project_path / "corpus"
@@ -270,36 +251,70 @@ class EnsembleOrchestrator:
             })
             raise e
 
-    async def execute_ensemble_analysis(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
+    async def execute_ensemble_analysis(self, specifications: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Main execution method - uses Agent Registry for all agent operations
+        Main execution method - uses Agent Registry with new specification format
         """
         try:
+            # Store specifications for use in other methods
+            self.specifications = specifications
+            
             # Initialize session
             self._init_session_logging()
 
-            # Step 1: Generate statistical analysis plan using registry
-            self.statistical_plan = await self._execute_agent(
-                "StatisticalAnalysisConfigurationAgent",
-                experiment_md_path=str(self.project_path / "experiment.md")
-            )
+            # Extract configuration from specifications
+            framework = specifications['framework']
+            experiment = specifications['experiment']
+            corpus = specifications['corpus']
             
-            self._log_system_event("STATISTICAL_PLAN_GENERATED", self.statistical_plan)
-
-            if self.statistical_plan.get("validation_status") != "complete":
-                raise ValueError(f"Statistical plan validation failed: {self.statistical_plan.get('notes', 'No notes provided.')}")
-
-            # Parse experiment configuration
-            experiment_config = self._parse_experiment_config(validation_results)
+            # Get analysis prompt from framework variant
+            analysis_variant = experiment.get('analysis_variant', 'default')
+            if analysis_variant not in framework['analysis_variants']:
+                available_variants = list(framework['analysis_variants'].keys())
+                # Use the first available variant if default not found
+                analysis_variant = available_variants[0] if available_variants else 'default'
+            
+            analysis_prompt = framework['analysis_variants'][analysis_variant]['analysis_prompt']
+            
+            # Extract experiment configuration
+            experiment_config = {
+                'models': experiment['models'],
+                'runs_per_model': experiment.get('runs_per_model', 1),
+                'analysis_variant': analysis_variant,
+                'framework_name': framework['name'],
+                'framework_version': framework['version']
+            }
             
             self._log_system_event("ENSEMBLE_STARTED", {
-                "corpus_file_count": len(validation_results.get('corpus_files', [])),
+                "corpus_file_count": len(corpus['files']),
                 "session_id": self.session_id,
-                "experiment_config": experiment_config
+                "experiment_config": experiment_config,
+                "framework_name": framework['name'],
+                "analysis_variant": analysis_variant
             })
             
+            # Step 1: Generate statistical analysis plan using registry (if experiment has statistical_plan)
+            if 'statistical_plan' in experiment:
+                # Use the experiment file path for the statistical analysis configuration
+                experiment_path = experiment['_metadata']['file_path']
+                workflow_state = {
+                    'experiment_md_path': experiment_path
+                }
+                step_config = {}
+                
+                self.statistical_plan = await self._execute_agent(
+                    "StatisticalAnalysisConfigurationAgent",
+                    workflow_state=workflow_state,
+                    step_config=step_config
+                )
+                
+                self._log_system_event("STATISTICAL_PLAN_GENERATED", self.statistical_plan)
+
+                if self.statistical_plan.get("validation_status") != "complete":
+                    raise ValueError(f"Statistical plan validation failed: {self.statistical_plan.get('notes', 'No notes provided.')}")
+            
             # Step 2: Execute analysis using registry-based AnalysisAgent
-            await self._spawn_analysis_agents(validation_results, experiment_config)
+            await self._spawn_analysis_agents(specifications, experiment_config, analysis_prompt)
             
             # Step 3: Methodological overwatch using registry
             overwatch_decision = await self._execute_agent(
@@ -319,7 +334,7 @@ class EnsembleOrchestrator:
             {json.dumps(self.analysis_results, indent=2)}
             
             And here are the experiment requirements:
-            {validation_results.get('experiment', {}).get('definition', 'No experiment definition provided')}
+            {specifications['experiment'].get('name', 'No experiment name')} - {specifications['experiment'].get('description', 'No experiment description')}
             
             Experiment Configuration:
             {json.dumps(experiment_config, indent=2)}
@@ -397,7 +412,7 @@ class EnsembleOrchestrator:
                         "DataExtractionAgent",
                         conversation_log_path=str(conversation_log_path),
                         output_csv_path=str(self.session_results_path / "results.csv"),
-                        framework_content=validation_results.get('framework_content', '')
+                        framework_content=specifications['framework']['_metadata']['full_content']
                     )
                     self._log_system_event("DATA_EXTRACTION_COMPLETED", {"session_id": self.session_id})
                 else:
@@ -428,15 +443,17 @@ class EnsembleOrchestrator:
                 "message": f"Ensemble analysis failed: {str(e)}"
             }
 
-    async def _spawn_analysis_agents(self, validation_results: Dict[str, Any], experiment_config: Dict[str, Any]):
-        """Spawn analysis agents using registry system - this is called by the registry"""
+    async def _spawn_analysis_agents(self, specifications: Dict[str, Any], experiment_config: Dict[str, Any], analysis_prompt: str):
+        """Spawn analysis agents using registry system with new specification format"""
         
-        corpus_path = self.project_path / "corpus"
-        corpus_files = [str(f) for f in corpus_path.rglob('*') if f.is_file() and f.name.endswith(('.txt', '.md'))]
+        # Get corpus files from specifications
+        corpus_files = []
+        for filename, file_data in specifications['corpus']['files'].items():
+            corpus_files.append(file_data['path'])
         
-        analysis_instructions = validation_results.get('analysis_agent_instructions', '')
+        analysis_instructions = analysis_prompt
         models = experiment_config.get('models', ['vertex_ai/gemini-2.5-flash'])
-        num_runs = experiment_config.get('num_runs', 1)
+        num_runs = experiment_config.get('runs_per_model', 1)
         
         self._log_system_event("ANALYSIS_AGENTS_SPAWNING", {
             "agent_count": len(corpus_files) * len(models) * num_runs,
@@ -506,96 +523,90 @@ class EnsembleOrchestrator:
                 raise ValueError(f"Results processing aborted due to {failed_count} failures")
 
     async def _run_analysis_agent(self, agent_id: str, corpus_file: str, instructions: str, model_name: str, run_num: int) -> Dict[str, Any]:
-        """Run a single analysis agent on one corpus text using the 'Show Your Work' pattern."""
+        """Run a single analysis agent on one corpus text using the framework's direct prompt."""
         
         self._log_system_event("ANALYSIS_AGENT_SPAWNED", {
             "agent_id": agent_id,
             "corpus_file": Path(corpus_file).name,
-            "model_name": model_name, # Note: We will select a better model below
+            "model_name": model_name,
             "run_num": run_num
         })
         
         corpus_text = Path(corpus_file).read_text()
         
-        # This is the prompt that was validated with the harness
-        analysis_prompt = f"""You are an expert analyst with a secure code interpreter.
-Your task is to apply the following analytical framework to the provided text.
-
-FRAMEWORK:
-{instructions}
+        # Use the framework's analysis prompt directly with the corpus text
+        analysis_prompt = f"""{instructions}
 
 TEXT TO ANALYZE:
+---
 {corpus_text}
+---
 
-Your analysis must have two parts:
-1.  A detailed, qualitative analysis in natural language.
-2.  A final numerical score from 0.0 to 1.0, which you must generate by writing and executing a simple Python script.
+Apply the framework systematically to this text and return the JSON object as specified above."""
 
-You MUST return your response as a single, valid JSON object with the following structure:
-{{
-  "analysis_text": "Your detailed, qualitative analysis here...",
-  "score_calculation": {{
-    "code": "The simple Python script you wrote to generate the score. e.g., 'return 0.8'",
-    "result": "The numerical result of executing that script. e.g., 0.8"
-  }}
-}}
-
-Before returning your response, double-check that it is a single, valid JSON object and nothing else.
-"""
-
-        # Ensure we use a model with proven code interpreter capabilities.
-        # Hardcoding to gpt-4o as it was verified to work in the harness.
-        # This proves the architecture is sound and the issue is model-specific.
-        code_interpreter_model = 'openai/gpt-4o'
+        # Use the specified model from the experiment configuration
+        raw_response = await self._call_llm_async(analysis_prompt, agent_id, model_name)
         
-        raw_response = await self._call_llm_async(analysis_prompt, agent_id, code_interpreter_model)
-        
-        # Parse the structured JSON response
+        # Parse the response - handle markdown fences and extract JSON
         try:
-            parsed_response = json.loads(raw_response)
-            analysis_text = parsed_response.get("analysis_text", "LLM response was valid JSON but missing 'analysis_text'.")
-            score_calculation = parsed_response.get("score_calculation", {})
-            llm_code = score_calculation.get("code", "return 0.5 # Fallback: LLM response missing 'code'.")
-            llm_result = score_calculation.get("result")
-        except json.JSONDecodeError:
-            self._log_system_event("JSON_DECODE_ERROR", {"agent_id": agent_id, "raw_response": raw_response})
+            # Find and extract JSON block from the response
+            clean_response = raw_response.strip()
+            
+            # Look for JSON block markers
+            json_start = -1
+            json_end = -1
+            
+            # Try to find ```json markers
+            if '```json' in clean_response:
+                json_start = clean_response.find('```json') + 7
+                json_end = clean_response.find('```', json_start)
+            # Try to find ``` markers 
+            elif '```' in clean_response:
+                json_start = clean_response.find('```') + 3
+                json_end = clean_response.find('```', json_start)
+            # Try to find JSON by looking for opening brace
+            elif '{' in clean_response:
+                json_start = clean_response.find('{')
+                json_end = clean_response.rfind('}') + 1
+            
+            if json_start != -1 and json_end != -1:
+                clean_response = clean_response[json_start:json_end].strip()
+            
+            parsed_response = json.loads(clean_response)
+            
+            # Extract the analysis text - could be in different fields depending on framework
+            analysis_text = parsed_response.get("analysis_text", "")
+            if not analysis_text:
+                # Try other common fields
+                analysis_text = parsed_response.get("reasoning", "")
+                if not analysis_text:
+                    analysis_text = str(parsed_response)  # Use the whole response as fallback
+            
+            # Create a comprehensive analysis response that includes all the rich data
+            comprehensive_analysis = f"Raw LLM Response:\n{raw_response}\n\nParsed JSON:\n{json.dumps(parsed_response, indent=2)}"
+            
+        except json.JSONDecodeError as e:
+            self._log_system_event("JSON_DECODE_ERROR", {"agent_id": agent_id, "raw_response": raw_response, "error": str(e)})
             analysis_text = f"LLM RESPONSE WAS NOT VALID JSON. Raw response: {raw_response}"
-            llm_code = "return 0.5 # Fallback due to LLM response format error"
-            llm_result = 0.5
+            comprehensive_analysis = analysis_text
+            parsed_response = {}
 
-        # Verify the calculation for security and provenance
-        code_executor = SecureCodeExecutor()
-        verification_result = code_executor.execute_code(llm_code)
-        verified_score = verification_result.get('result_data')
-
-        if verified_score is None:
-             verified_score = 0.5 # Final fallback if code execution fails
-
-        # Log any discrepancy
-        if verified_score != llm_result:
-            self._log_system_event("SCORE_VERIFICATION_MISMATCH", {
-                "agent_id": agent_id,
-                "llm_claimed_result": llm_result,
-                "our_verified_result": verified_score,
-                "code": llm_code
-            })
-
-        # Log the qualitative analysis
+        # Log the analysis
         if self.logger and self.conversation_id:
             self.logger.log_llm_message(
                 conversation_id=self.conversation_id,
                 speaker=agent_id,
-                message=analysis_text,
-                metadata={"type": "llm_analysis_text"}
+                message=comprehensive_analysis,
+                metadata={"type": "llm_analysis_text", "parsed_json": parsed_response}
             )
 
         return {
             "agent_id": agent_id,
             "corpus_file": corpus_file,
-            "analysis_response": analysis_text,
-            "score": verified_score,
+            "analysis_response": comprehensive_analysis,
+            "parsed_json": parsed_response,
             "file_name": Path(corpus_file).name,
-            "model_name": code_interpreter_model,
+            "model_name": model_name,
             "run_num": run_num
         }
 

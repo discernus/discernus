@@ -13,6 +13,7 @@ conversation with the LLM to resolve misunderstandings.
 import sys
 import os
 from pathlib import Path
+import json
 
 # Add project root to path for imports
 project_root = Path(__file__).parent.parent
@@ -31,71 +32,139 @@ def main():
     
     # --- Load Real-World Assets ---
     try:
-        framework_path = project_root / "projects" / "attesor" / "pdaf_v1.1_sanitized_framework.md"
-        corpus_path = project_root / "projects" / "attesor" / "corpus_original" / "cory_booker_2018_first_step_act.txt"
+        # Use the MVA framework and corpus
+        framework_path = project_root / "projects" / "MVA" / "experiment_1" / "cff_v4_mva.md"
+        corpus_path = project_root / "projects" / "MVA" / "experiment_1" / "corpus" / "sanitized_speech_a1c5e7d2.md"
         
-        instructions = framework_path.read_text()
+        framework_content = framework_path.read_text()
         corpus_text = corpus_path.read_text()
-        print("✅ Successfully loaded real-world framework and corpus file.")
+        print("✅ Successfully loaded MVA framework and corpus file.")
+        print(f"📄 Testing with corpus file: {corpus_path.name}")
+        print(f"📊 Corpus length: {len(corpus_text)} characters")
     except FileNotFoundError as e:
         print(f"❌ ERROR: Could not load required asset file: {e}")
         sys.exit(1)
 
+    # --- Extract the fully_normative prompt from the framework ---
+    # This is the new prompt format that should enforce evidence requirements
+    analysis_prompt = """You are an expert political discourse analyst executing a multi-part analysis using the Cohesive Flourishing Framework (CFF) v3.1.
 
-    # --- The Prompt to be Engineered ---
-    # This is where we will iterate. The goal is a universal prompt template
-    # that works for any framework, including the complex PDAF.
-    analysis_prompt = f"""You are an expert analyst with a secure code interpreter.
-Your task is to apply the following analytical framework to the provided text.
+Your task is to analyze the provided text according to this framework's rigorous methodology, which requires comprehensive evidence documentation for all analytical conclusions.
 
-FRAMEWORK:
----
-{instructions}
----
+Step 1: Classify the political worldview of the text.
+Determine whether this text primarily expresses a "Progressive", "Conservative", "Libertarian", or "Other" worldview based on the rhetorical patterns, policy positions, and value frameworks expressed.
+
+Step 2: Score the text on all five CFF axes.
+Analyze the text carefully for each dimension using the framework's linguistic markers and theoretical foundations. For each axis, provide a score from -1.0 to +1.0:
+- identity_axis: Individual Dignity (+1.0) ↔ Tribal Dominance (-1.0)
+- fear_hope_axis: Optimistic Possibility (+1.0) ↔ Threat Perception (-1.0)
+- envy_compersion_axis: Others' Success Celebration (+1.0) ↔ Elite Resentment (-1.0)
+- enmity_amity_axis: Social Goodwill (+1.0) ↔ Interpersonal Hostility (-1.0)
+- goal_axis: Cohesive Generosity (+1.0) ↔ Fragmentative Power (-1.0)
+
+Step 3: Provide comprehensive evidence documentation.
+For each axis score, you must provide:
+- At least 3 direct quotations from the text that support your assessment
+- Confidence rating (0.0-1.0) based on evidence strength and clarity
+- Evidence type classification for each quote (lexical/semantic/rhetorical)
+- Brief reasoning explaining how the evidence supports the score
+
+Step 4: Format the output as a single JSON object.
+Return a JSON object with these top-level keys:
+- "worldview": String classification from Step 1
+- "scores": Dictionary with all five axis scores
+- "evidence": Dictionary with axis names as keys and arrays of direct quotations as values
+- "confidence": Dictionary with axis names as keys and confidence ratings as values
+- "evidence_types": Dictionary with axis names as keys and arrays of evidence type classifications as values
+- "reasoning": Dictionary with axis names as keys and explanatory text as values
+
+The output MUST be a valid JSON object that implements the framework's evidence requirements."""
+
+    # Add the corpus text to the prompt
+    full_prompt = f"""{analysis_prompt}
 
 TEXT TO ANALYZE:
 ---
 {corpus_text}
 ---
 
-Your analysis must have two parts:
-1.  A detailed, qualitative analysis in natural language, explaining your reasoning for each of the 10 PDAF anchors.
-2.  A final JSON object containing a numerical score from 0.0 to 1.0 for each of the 10 anchors.
-
-You MUST return your response as a single, raw JSON object and nothing else. Do not wrap it in markdown fences (e.g., '```json') or any other text. Your response must start with '{{' and end with '}}'.
-
-The JSON object must have the following structure:
-{{
-  "analysis_text": "Your detailed, qualitative analysis for all 10 anchors here...",
-  "pdaf_scores": {{
-    "manichaean_people_elite_framing": 0.8,
-    "crisis_restoration_narrative": 0.9,
-    "popular_sovereignty_claims": 0.6,
-    "anti_pluralist_exclusion": 0.1,
-    "elite_conspiracy_systemic_corruption": 0.7,
-    "authenticity_vs_political_class": 0.5,
-    "homogeneous_people_construction": 0.4,
-    "nationalist_exclusion": 0.2,
-    "economic_redistributive_appeals": 0.3,
-    "economic_direction_classification": 0.0
-  }}
-}}
-
-Your response MUST be the raw JSON object, starting with '{{' and ending with '}}'.
-"""
+Apply the framework systematically to this text and return the JSON object as specified above."""
 
     # --- LLM Gateway Call ---
     print(f"--- Sending Prompt to {model_name} ---")
-    print(analysis_prompt)
+    print("PROMPT:")
+    print(full_prompt)
+    print("\n" + "="*80 + "\n")
     
     try:
         model_registry = ModelRegistry()
         gateway = LLMGateway(model_registry)
         
-        response, metadata = gateway.execute_call(model_name, analysis_prompt)
+        response, metadata = gateway.execute_call(model_name, full_prompt)
         
-        print("\n--- Raw LLM Response ---")
+        print("--- Raw LLM Response ---")
         print(response)
+        
+        print("\n--- Attempting to Parse JSON ---")
+        try:
+            # Find and extract JSON block from the response
+            clean_response = response.strip()
+            
+            # Look for JSON block markers
+            json_start = -1
+            json_end = -1
+            
+            # Try to find ```json markers
+            if '```json' in clean_response:
+                json_start = clean_response.find('```json') + 7
+                json_end = clean_response.find('```', json_start)
+            # Try to find ``` markers 
+            elif '```' in clean_response:
+                json_start = clean_response.find('```') + 3
+                json_end = clean_response.find('```', json_start)
+            # Try to find JSON by looking for opening brace
+            elif '{' in clean_response:
+                json_start = clean_response.find('{')
+                json_end = clean_response.rfind('}') + 1
+            
+            if json_start != -1 and json_end != -1:
+                clean_response = clean_response[json_start:json_end].strip()
+            
+            parsed = json.loads(clean_response)
+            print("✅ Valid JSON response!")
+            
+            # Check if it has the expected structure
+            required_keys = ["worldview", "scores", "evidence", "confidence", "evidence_types", "reasoning"]
+            missing_keys = [key for key in required_keys if key not in parsed]
+            
+            if missing_keys:
+                print(f"❌ Missing required keys: {missing_keys}")
+            else:
+                print("✅ All required keys present!")
+                
+                # Check evidence requirements
+                evidence_dict = parsed.get("evidence", {})
+                print("\n📊 Evidence Count Check:")
+                for axis, quotes in evidence_dict.items():
+                    quote_count = len(quotes) if isinstance(quotes, list) else 0
+                    print(f"  {axis}: {quote_count} quotes {'✅' if quote_count >= 3 else '❌'}")
+                
+                # Check axis scores
+                print("\n📊 Axis Scores:")
+                scores_dict = parsed.get("scores", {})
+                for axis, score in scores_dict.items():
+                    print(f"  {axis}: {score}")
+                    
+                # Check confidence ratings
+                print("\n📊 Confidence Ratings:")
+                confidence_dict = parsed.get("confidence", {})
+                for axis, conf in confidence_dict.items():
+                    print(f"  {axis}: {conf}")
+                    
+        except json.JSONDecodeError as e:
+            print(f"❌ Invalid JSON response: {e}")
+            print("First 200 chars of cleaned response:")
+            print(repr(clean_response[:200]))
         
         print("\n--- Metadata ---")
         print(metadata)
