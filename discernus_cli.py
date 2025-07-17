@@ -355,7 +355,7 @@ def info(check_thin: bool):
             _show_thin_check("SpecLoader", spec_loader_check)
             
             # Check EnsembleOrchestrator
-            orchestrator = WorkflowOrchestrator('.')
+# orchestrator is already initialized above with correct project path
             orchestrator_check = {
                 'thin_compliant': True,
                 'issues': [],
