@@ -7,7 +7,7 @@ Reorganizes files with secure hashes and creates secure mapping.
 import json
 import shutil
 from pathlib import Path
-from hash_generator import create_speaker_mapping
+from docs.reference.corpus_preparation.hash_generator_reference import create_speaker_mapping
 
 def create_directories():
     """Create the secure directory structure"""

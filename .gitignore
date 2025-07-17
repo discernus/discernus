@@ -134,3 +134,10 @@ coverage.xml
 .mypy_cache/
 .dmypy.json
 dmypy.json
+# Prevent nested git repositories
+**/.git/
+**/git/
+# Prevent common experiment repo creation patterns
+experiments/**/.git/
+projects/**/.git/
+results/**/.git/

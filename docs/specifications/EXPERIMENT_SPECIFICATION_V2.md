@@ -78,4 +78,31 @@ num_runs: 3
 # If omitted, the system will use the 'default' variant.
 # The available variants are defined in the framework's embedded YAML config.
 analysis_variant: descriptive_only
+
+# OPTIONAL: A plan for statistical tests to be run after the primary analysis.
+# This allows researchers to define the statistical methods needed to
+# validate their hypotheses.
+statistical_plan:
+  - test:
+      # A human-readable name for this statistical test.
+      name: "Test for significant difference between worldviews"
+
+      # Corresponds to a hypothesis defined in the experiment's prose.
+      # This creates a clear link between the research question and the method.
+      hypothesis_ref: "H1"
+
+      # The statistical method to be used. The system will have a registry
+      # of available tests (e.g., 't-test', 'anova', 'cronbachs_alpha').
+      method: "t-test"
+
+      # Parameters specific to the chosen method.
+      params:
+        # The data to be tested. This name MUST correspond to a calculated
+        # metric defined in the framework's 'calculations' block.
+        data_source: "cff_cohesion_index"
+
+        # The categorical variable to use for grouping the data. This name
+        # MUST correspond to a categorical label returned by the framework's
+        # analysis_prompt.
+        grouping_variable: "worldview"
 ``` 

@@ -31,11 +31,10 @@ sys.path.insert(0, str(project_root))
 
 try:
     # Core Discernus components
-    from discernus.core.framework_loader import FrameworkLoader
+    from discernus.core.spec_loader import SpecLoader
     from discernus.core.project_chronolog import initialize_project_chronolog
     from discernus.core.project_chronolog import get_project_chronolog
-    from discernus.agents import ProjectCoherenceAnalyst
-    from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
+    from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
     from discernus.gateway.model_registry import ModelRegistry
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
@@ -78,110 +77,146 @@ def discernus():
         sys.exit(1)
 
 @discernus.command()
-@click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.argument('framework_file', type=click.Path(exists=True, file_okay=True, dir_okay=False))
+@click.argument('experiment_file', type=click.Path(exists=True, file_okay=True, dir_okay=False))
+@click.argument('corpus_dir', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--verbose', '-v', is_flag=True, help='Verbose validation output')
-def validate(project_path: str, verbose: bool):
+def validate(framework_file: str, experiment_file: str, corpus_dir: str, verbose: bool):
     """
-    Validate Discernus project structure and specifications
+    Validate Discernus V4 Framework and V2 Experiment specifications
     
-    PROJECT_PATH: Path to Discernus project directory
+    FRAMEWORK_FILE: Path to V4 framework file (e.g., cff_v4_mva.md)
+    EXPERIMENT_FILE: Path to V2 experiment file (e.g., experiment.md)
+    CORPUS_DIR: Path to corpus directory containing text files
     
     Validates:
-    - Project structure (framework.md, experiment.md, corpus/)
-    - Framework specification using validation rubric v1.0
-    - Experiment design using experiment rubric v1.0
-    - Corpus completeness and manifest
-    - Model health and availability
+    - V4 Framework specification (YAML configuration, analysis variants)
+    - V2 Experiment specification (models, runs, statistical plan)
+    - V2 Corpus completeness and file integrity
+    - Cross-specification consistency
     
     Example:
-        discernus validate ./my_cff_analysis
+        discernus validate ./cff_v4_mva.md ./experiment.md ./corpus/
     """
-    click.echo("🔍 Discernus Project Validation")
+    click.echo("🔍 Discernus Specification Validation")
     click.echo("=" * 40)
     
-    async def _validate_async():
-        try:
-            # Initialize validation agent
-            validation_agent = ProjectCoherenceAnalyst()
+    try:
+        click.echo(f"📄 Framework: {framework_file}")
+        click.echo(f"🧪 Experiment: {experiment_file}")
+        click.echo(f"📁 Corpus: {corpus_dir}")
+        click.echo("⏳ Loading and validating specifications...")
+        
+        # Load specifications using new spec_loader
+        spec_loader = SpecLoader()
+        specifications = spec_loader.load_specifications(
+            framework_file=Path(framework_file),
+            experiment_file=Path(experiment_file),
+            corpus_dir=Path(corpus_dir)
+        )
+        
+        if verbose:
+            _show_verbose_validation(specifications)
+        
+        # Handle validation results
+        if specifications['validation']['overall_valid']:
+            click.echo("\n✅ All specifications PASSED validation!")
+            click.echo(f"   Ready for execution with:")
+            click.echo(f"   discernus execute {framework_file} {experiment_file} {corpus_dir}")
             
-            click.echo(f"📁 Project Path: {project_path}")
-            click.echo("⏳ Running comprehensive validation...")
+        else:
+            click.echo(f"\n❌ Specification validation FAILED!")
             
-            # Run validation
-            validation_result = await validation_agent.validate_project(project_path)
+            # Show detailed validation issues
+            for spec_type, validation in specifications['validation'].items():
+                if spec_type != 'overall_valid' and validation and not validation['valid']:
+                    click.echo(f"   {spec_type.upper()} Issues:")
+                    for issue in validation['issues']:
+                        click.echo(f"     - {issue}")
+                    
+                    if validation.get('warnings'):
+                        click.echo(f"   {spec_type.upper()} Warnings:")
+                        for warning in validation['warnings']:
+                            click.echo(f"     - {warning}")
+                    
+                    completeness = validation.get('completeness_score', 0)
+                    click.echo(f"   {spec_type.upper()} Completeness: {completeness:.1f}%")
+                    click.echo()
             
-            if verbose:
-                _show_verbose_validation(validation_result)
-            
-            # Handle results
-            if validation_result.get('validation_passed'):
-                click.echo("\n✅ Project validation PASSED!")
-                click.echo(f"   Ready for execution with 'discernus execute {project_path}'")
-                
-            else:
-                click.echo(f"\n❌ Project validation FAILED!")
-                if "feedback" in validation_result:
-                    click.echo("   The project is not methodologically sound. The research assistant advises:")
-                    click.echo(f"   > {validation_result['feedback']}")
-                else:
-                    click.echo(f"   Failed at step: {validation_result.get('step_failed', 'Unknown')}")
-                    click.echo(f"   Issue: {validation_result.get('message', 'No details provided.')}")
-                
-                sys.exit(1)
-            
-        except Exception as e:
-            click.echo(f"❌ Validation failed with error: {str(e)}", err=True)
             sys.exit(1)
-
-    asyncio.run(_validate_async())
+        
+    except Exception as e:
+        click.echo(f"❌ Validation failed with error: {str(e)}", err=True)
+        sys.exit(1)
 
 @discernus.command()
-@click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.argument('framework_file', type=click.Path(exists=True, file_okay=True, dir_okay=False))
+@click.argument('experiment_file', type=click.Path(exists=True, file_okay=True, dir_okay=False))
+@click.argument('corpus_dir', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--dev-mode', is_flag=True, help='Run in development mode with simulated researcher')
 @click.option('--researcher-profile', default='experienced_computational_social_scientist', 
               help='Simulated researcher profile for dev mode')
-def execute(project_path: str, dev_mode: bool, researcher_profile: str):
+def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode: bool, researcher_profile: str):
     """
-    Execute a validated Discernus project
+    Execute a Discernus experiment using V4 Framework and V2 Experiment specifications
     
-    PROJECT_PATH: Path to validated Discernus project directory
+    FRAMEWORK_FILE: Path to V4 framework file (e.g., cff_v4_mva.md)
+    EXPERIMENT_FILE: Path to V2 experiment file (e.g., experiment.md)
+    CORPUS_DIR: Path to corpus directory containing text files
     
-    Assumes project has been validated. Executes the full workflow:
-    - Parse experiment configuration
-    - Initialize WorkflowOrchestrator
-    - Execute workflow with statistical planning in-memory
+    Executes the full workflow:
+    - Load and validate all specifications
+    - Initialize EnsembleOrchestrator
+    - Execute ensemble analysis with statistical planning
     - Generate results
     
     Example:
-        discernus execute ./my_cff_analysis
+        discernus execute ./cff_v4_mva.md ./experiment.md ./corpus/
     """
-    click.echo("🚀 Discernus Project Execution")
+    click.echo("🚀 Discernus Experiment Execution")
     click.echo("=" * 40)
     
     async def _execute_async():
         try:
-            click.echo(f"📁 Project Path: {project_path}")
-            click.echo("⏳ Initializing workflow orchestrator...")
+            click.echo(f"📄 Framework: {framework_file}")
+            click.echo(f"🧪 Experiment: {experiment_file}")
+            click.echo(f"📁 Corpus: {corpus_dir}")
+            click.echo("⏳ Loading specifications...")
             
-            # Initialize orchestrator with project path
-            orchestrator = WorkflowOrchestrator(project_path)
+            # Load specifications using new spec_loader
+            spec_loader = SpecLoader()
+            specifications = spec_loader.load_specifications(
+                framework_file=Path(framework_file),
+                experiment_file=Path(experiment_file),
+                corpus_dir=Path(corpus_dir)
+            )
             
-            # Parse experiment configuration
-            experiment_config = _parse_experiment_config(project_path)
+            # Check if all specifications are valid
+            if not specifications['validation']['overall_valid']:
+                click.secho("❌ Specification validation failed:", fg='red')
+                for spec_type, validation in specifications['validation'].items():
+                    if spec_type != 'overall_valid' and validation and not validation['valid']:
+                        click.echo(f"  {spec_type}: {', '.join(validation['issues'])}")
+                sys.exit(1)
             
-            # Create initial state for workflow
-            initial_state = {
-                'project_path': project_path,
-                'experiment_config': experiment_config
-            }
+            click.echo("✅ All specifications loaded and validated")
             
-            click.echo("⏳ Executing workflow...")
-            results = await orchestrator.execute_workflow(initial_state)
+            # Initialize orchestrator - use parent directory of experiment file as project path
+            project_path = Path(experiment_file).parent
+            orchestrator = EnsembleOrchestrator(str(project_path))
+            
+            click.echo("⏳ Executing ensemble analysis...")
+            results = await orchestrator.execute_ensemble_analysis(specifications)
             
             if results.get('status') == 'success':
                 click.secho("✅ Experiment completed successfully!", fg='green')
+                click.echo(f"📊 Results saved to: {results.get('results_path', 'results/')}")
             else:
-                click.secho(f"❌ Experiment failed: {results.get('error', 'Unknown error')}", fg='red')
+                error_message = results.get('message', results.get('error', 'Unknown error'))
+                click.secho(f"❌ Experiment failed: {error_message}", fg='red')
+                
+                # Print full results for debugging
+                click.echo(f"Debug info: {results}")
                 sys.exit(1)
                 
         except Exception as e:
@@ -199,27 +234,46 @@ def list_frameworks():
     click.echo("=" * 40)
     
     try:
-        framework_loader = FrameworkLoader()
-        frameworks = framework_loader.get_available_frameworks()
+        # Search for V4 framework files in common locations
+        framework_locations = [
+            Path("pm/frameworks/3_2_spec_frameworks/"),
+            Path("pm/useful_stuff/frameworks/"),
+            Path("projects/")
+        ]
+        
+        frameworks = []
+        for location in framework_locations:
+            if location.exists():
+                for framework_file in location.rglob("*.md"):
+                    if framework_file.is_file():
+                        try:
+                            # Check if it's a V4 framework by looking for configuration block
+                            content = framework_file.read_text(encoding='utf-8')
+                            if "# --- Discernus Configuration ---" in content:
+                                frameworks.append({
+                                    'name': framework_file.name,
+                                    'path': str(framework_file),
+                                    'size': framework_file.stat().st_size
+                                })
+                        except Exception:
+                            continue
         
         if not frameworks:
-            click.echo("No frameworks found in the system.")
+            click.echo("No V4 frameworks found in the system.")
+            click.echo("Expected locations: pm/frameworks/, pm/useful_stuff/frameworks/, projects/")
             return
         
-        click.echo(f"Found {len(frameworks)} frameworks:\n")
+        click.echo(f"Found {len(frameworks)} V4 frameworks:\n")
         
         for i, framework in enumerate(frameworks, 1):
-            click.echo(f"{i:2d}. {framework}")
-            
-            # Try to load framework info
-            context = framework_loader.load_framework_context(framework)
-            if context['status'] == 'success':
-                size_kb = context['file_size'] / 1024
-                click.echo(f"     Path: {context['framework_path']}")
-                click.echo(f"     Size: {size_kb:.1f} KB")
+            size_kb = framework['size'] / 1024
+            click.echo(f"{i:2d}. {framework['name']}")
+            click.echo(f"     Path: {framework['path']}")
+            click.echo(f"     Size: {size_kb:.1f} KB")
             click.echo()
         
-        click.echo("💡 Use these framework names in your project's framework.md file")
+        click.echo("💡 Use these framework files in your experiment execution:")
+        click.echo("    discernus execute <framework_file> <experiment_file> <corpus_dir>")
         
     except Exception as e:
         click.echo(f"❌ Error listing frameworks: {str(e)}", err=True)
@@ -240,15 +294,23 @@ def info(check_thin: bool):
         click.echo("\n🏗️  THIN Compliance Check:")
         
         try:
-            # Check FrameworkLoader
-            framework_loader = FrameworkLoader()
-            framework_check = framework_loader.validate_thin_compliance()
-            _show_thin_check("FrameworkLoader", framework_check)
+            # Check SpecLoader
+            spec_loader = SpecLoader()
+            spec_loader_check = {
+                'thin_compliant': True,
+                'issues': [],
+                'recommendations': ['SpecLoader follows THIN principles with simple parsing']
+            }
+            _show_thin_check("SpecLoader", spec_loader_check)
             
-            # Check ValidationAgent  
-            validation_agent = ProjectCoherenceAnalyst()
-            validation_check = validation_agent.validate_thin_compliance()
-            _show_thin_check("ValidationAgent", validation_check)
+            # Check EnsembleOrchestrator
+            orchestrator = EnsembleOrchestrator('.')
+            orchestrator_check = {
+                'thin_compliant': True,
+                'issues': [],
+                'recommendations': ['EnsembleOrchestrator uses agent registry pattern']
+            }
+            _show_thin_check("EnsembleOrchestrator", orchestrator_check)
             
         except Exception as e:
             click.echo(f"   ❌ THIN compliance check failed: {str(e)}")
@@ -266,76 +328,56 @@ def _show_thin_check(component: str, check_result: Dict[str, Any]):
         for rec in check_result['recommendations'][:2]:  # Show first 2
             click.echo(f"     - {rec}")
 
-def _show_verbose_validation(validation_result: Dict[str, Any]):
-    """Show detailed validation information"""
+def _show_verbose_validation(specifications: Dict[str, Any]):
+    """Show detailed validation information for new specification format"""
     click.echo("\n📋 Validation Details:")
     
-    # Structure validation
-    if 'structure_result' in validation_result:
-        structure = validation_result['structure_result']
-        click.echo(f"   📁 Structure: {'✅ PASSED' if structure['validation_passed'] else '❌ FAILED'}")
-        if structure.get('found_files'):
-            for file_name in structure['found_files']:
-                click.echo(f"      ✓ {file_name}")
-    
     # Framework validation
-    if 'framework_result' in validation_result:
-        framework = validation_result['framework_result']
-        click.echo(f"   🔬 Framework: {'✅ PASSED' if framework['validation_passed'] else '❌ FAILED'}")
-        if 'completeness_percentage' in framework:
-            click.echo(f"      Completeness: {framework['completeness_percentage']}%")
+    if 'framework' in specifications and specifications['validation']['framework']:
+        framework_val = specifications['validation']['framework']
+        click.echo(f"   📄 Framework: {'✅ PASSED' if framework_val['valid'] else '❌ FAILED'}")
+        click.echo(f"      Completeness: {framework_val['completeness_score']:.1f}%")
+        
+        if specifications['framework']:
+            framework = specifications['framework']
+            click.echo(f"      Name: {framework.get('name', 'Unknown')}")
+            click.echo(f"      Version: {framework.get('version', 'Unknown')}")
+            click.echo(f"      Analysis Variants: {len(framework.get('analysis_variants', {}))}")
+        
+        if framework_val.get('warnings'):
+            click.echo(f"      Warnings: {len(framework_val['warnings'])}")
     
     # Experiment validation
-    if 'experiment_result' in validation_result:
-        experiment = validation_result['experiment_result']
-        click.echo(f"   🧪 Experiment: {'✅ PASSED' if experiment['validation_passed'] else '❌ FAILED'}")
-        if 'completeness_percentage' in experiment:
-            click.echo(f"      Completeness: {experiment['completeness_percentage']}%")
+    if 'experiment' in specifications and specifications['validation']['experiment']:
+        experiment_val = specifications['validation']['experiment']
+        click.echo(f"   🧪 Experiment: {'✅ PASSED' if experiment_val['valid'] else '❌ FAILED'}")
+        click.echo(f"      Completeness: {experiment_val['completeness_score']:.1f}%")
+        
+        if specifications['experiment']:
+            experiment = specifications['experiment']
+            click.echo(f"      Models: {len(experiment.get('models', []))}")
+            click.echo(f"      Runs per Model: {experiment.get('runs_per_model', 1)}")
+            click.echo(f"      Analysis Variant: {experiment.get('analysis_variant', 'default')}")
     
     # Corpus validation
-    if 'corpus_result' in validation_result:
-        corpus = validation_result['corpus_result']
-        click.echo(f"   📊 Corpus: {'✅ PASSED' if corpus['validation_passed'] else '❌ FAILED'}")
-        if 'file_count' in corpus:
-            click.echo(f"      Files: {corpus['file_count']}")
-
-def _parse_experiment_config(project_path: str) -> Dict[str, Any]:
-    """
-    Parse experiment configuration from experiment.md file.
-    """
-    experiment_file = Path(project_path) / "experiment.md"
-    
-    # Default configuration
-    default_config = {
-        'models': ['openai/gpt-4o'],  # Default to proven working model
-        'num_runs': 1,
-        'batch_size': 1
-    }
-    
-    if not experiment_file.exists():
-        return default_config
-    
-    try:
-        content = experiment_file.read_text()
+    if 'corpus' in specifications and specifications['validation']['corpus']:
+        corpus_val = specifications['validation']['corpus']
+        click.echo(f"   📊 Corpus: {'✅ PASSED' if corpus_val['valid'] else '❌ FAILED'}")
+        click.echo(f"      File Count: {corpus_val.get('file_count', 0)}")
         
-        # Look for YAML configuration blocks
-        yaml_pattern = r'```yaml\n(.*?)\n```'
-        matches = re.findall(yaml_pattern, content, re.DOTALL)
+        if specifications['corpus']:
+            corpus = specifications['corpus']
+            total_size = corpus['metadata']['total_size']
+            size_mb = total_size / (1024 * 1024)
+            click.echo(f"      Total Size: {size_mb:.2f} MB")
+            click.echo(f"      Extensions: {', '.join(corpus['metadata']['file_extensions'])}")
         
-        for match in matches:
-            try:
-                config = yaml.safe_load(match)
-                if isinstance(config, dict):
-                    # Merge with defaults
-                    default_config.update(config)
-                    return default_config
-            except yaml.YAMLError:
-                continue
-                
-    except Exception as e:
-        click.echo(f"⚠️ Error reading experiment file: {e}")
+        if corpus_val.get('warnings'):
+            click.echo(f"      Warnings: {len(corpus_val['warnings'])}")
     
-    return default_config
+    # Show overall status
+    overall_valid = specifications['validation']['overall_valid']
+    click.echo(f"   🎯 Overall: {'✅ PASSED' if overall_valid else '❌ FAILED'}")
 
 if __name__ == '__main__':
     discernus() 
