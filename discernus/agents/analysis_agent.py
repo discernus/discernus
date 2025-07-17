@@ -130,8 +130,22 @@ class AnalysisAgent:
 
         # --- Post-processing: Strict JSON validation ---
         try:
-            # The raw response from the LLM should be a JSON string
-            parsed_json = json.loads(content)
+            # Handle JSON wrapped in markdown code blocks
+            json_content = content.strip()
+            if json_content.startswith("```json"):
+                # Extract JSON from markdown code block
+                json_start = json_content.find("```json") + 7
+                json_end = json_content.find("```", json_start)
+                if json_end != -1:
+                    json_content = json_content[json_start:json_end].strip()
+            elif json_content.startswith("```"):
+                # Handle generic code block
+                json_start = json_content.find("```") + 3
+                json_end = json_content.find("```", json_start)
+                if json_end != -1:
+                    json_content = json_content[json_start:json_end].strip()
+            
+            parsed_json = json.loads(json_content)
         except json.JSONDecodeError as e:
             error_msg = f"LLM response was not valid JSON. Error: {e}\nRaw response: {content[:500]}"
             log_project_event(str(project_path), "JSON_DECODE_ERROR", session_id, {"agent_id": agent_id, "error": error_msg})

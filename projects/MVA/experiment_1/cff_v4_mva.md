@@ -12,6 +12,11 @@ analysis_variants:
       
       Your task is to analyze the provided text according to this framework's rigorous methodology, which requires comprehensive evidence documentation for all analytical conclusions.
       
+      TEXT TO ANALYZE:
+      {corpus_text}
+      
+      SOURCE FILE: {file_name}
+      
       Step 1: Classify the political worldview of the text.
       Determine whether this text primarily expresses a "Progressive", "Conservative", "Libertarian", or "Other" worldview based on the rhetorical patterns, policy positions, and value frameworks expressed.
       
@@ -48,6 +53,11 @@ analysis_variants:
       
       Your task is to analyze the provided text for the four core cohesion axes that drive social behavior, omitting the Identity axis for this simplified analysis.
       
+      TEXT TO ANALYZE:
+      {corpus_text}
+      
+      SOURCE FILE: {file_name}
+      
       Analyze the text carefully for each dimension using the framework's linguistic markers. For each axis, provide a score from -1.0 to +1.0:
       - fear_hope_axis: Optimistic Possibility (+1.0) ↔ Threat Perception (-1.0)
       - envy_compersion_axis: Others' Success Celebration (+1.0) ↔ Elite Resentment (-1.0)
@@ -74,6 +84,11 @@ analysis_variants:
       
       Your task is to analyze the provided text for the three core emotional dimensions that characterize social climate, omitting the Identity and Goal axes for this neutral descriptive analysis.
       
+      TEXT TO ANALYZE:
+      {corpus_text}
+      
+      SOURCE FILE: {file_name}
+      
       Analyze the text carefully for each emotional dimension using the framework's linguistic markers. For each axis, provide a score from -1.0 to +1.0:
       - fear_hope_axis: Optimistic Possibility (+1.0) ↔ Threat Perception (-1.0)
       - envy_compersion_axis: Others' Success Celebration (+1.0) ↔ Elite Resentment (-1.0)
@@ -92,7 +107,7 @@ analysis_variants:
       
       The output MUST be a valid JSON object that maintains the framework's evidence standards.
 
-calculations:
+calculation_spec:
   - metric:
       name: "cff_cohesion_index"
       formula: "(0.25 * scores.fear_hope_axis) + (0.20 * scores.envy_compersion_axis) + (0.30 * scores.enmity_amity_axis) + (0.25 * scores.goal_axis)"

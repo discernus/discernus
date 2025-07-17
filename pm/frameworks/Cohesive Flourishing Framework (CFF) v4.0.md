@@ -1,5 +1,4 @@
----
---- Discernus Configuration ---
+# --- Discernus Configuration ---
 name: cff_v4_0
 version: '4.0'
 display_name: "Cohesive Flourishing Framework v4.0"
@@ -84,6 +83,7 @@ calculation_spec:
   descriptive_cohesion_index: "(0.33 * (hope_score - fear_score)) + (0.27 * (compersion_score - envy_score)) + (0.40 * (amity_score - enmity_score))"
   motivational_cohesion_index: "(0.25 * (hope_score - fear_score)) + (0.20 * (compersion_score - envy_score)) + (0.30 * (amity_score - enmity_score)) + (0.25 * (cohesive_goal_score - fragmentative_goal_score))"
   full_cohesion_index: "(0.25 * (hope_score - fear_score)) + (0.20 * (compersion_score - envy_score)) + (0.30 * (amity_score - enmity_score)) + (0.25 * (cohesive_goal_score - fragmentative_goal_score))"
+
 ---
 
 # Cohesive Flourishing Framework (CFF) v4.0
@@ -194,4 +194,93 @@ The Cohesive Flourishing Framework (CFF) v4.0 introduces **independent anchor sc
 **Fear Markers**:
 - Crisis language: "emergency," "catastrophe," "disaster," "collapse," "breakdown"
 - Threat perception: "under attack," "existential threat," "mortal danger," "life or death"
-- Urgency mark
+- Urgency markers: "running out of time," "last chance," "point of no return," "critical moment"
+- Vulnerability terms: "defenseless," "exposed," "helpless," "at risk," "in jeopardy"
+
+**Hope Markers**:
+- Opportunity language: "bright future," "golden age," "breakthrough," "transformation"
+- Progress emphasis: "moving forward," "advancement," "improvement," "development"
+- Achievement focus: "success," "victory," "accomplishment," "milestone," "triumph"
+- Possibility markers: "potential," "opportunity," "chance," "opening," "pathway"
+
+### Envy-Compersion Axis
+
+**Envy Markers**:
+- Elite resentment: "privileged elite," "out of touch," "ivory tower," "rigged system"
+- Success dismissal: "lucky breaks," "didn't earn it," "handed everything," "connections"
+- Zero-sum thinking: "taking our share," "stealing from us," "unfair advantage," "hoarding wealth"
+- Status grievance: "don't deserve credit," "overrated," "artificially promoted," "media darling"
+
+**Compersion Markers**:
+- Success celebration: "well-deserved," "hard-earned," "impressive accomplishment," "outstanding achievement"
+- Merit recognition: "earned through effort," "demonstrated excellence," "proved themselves," "worked hard"
+- Abundance mindset: "rising tide lifts all boats," "everyone can win," "plenty of opportunity," "shared success"
+- Admiration language: "talented individual," "inspiring example," "role model," "lights the way"
+
+### Enmity-Amity Axis
+
+**Enmity Markers**:
+- Hostility language: "enemy," "adversary," "threat," "menace," "danger," "foe"
+- Aggressive terms: "attack," "destroy," "eliminate," "crush," "defeat," "annihilate"
+- Character assassination: "evil," "corrupt," "criminal," "degenerate," "immoral," "perverted"
+- Dehumanization: animal comparisons, object references, disease metaphors, vermin language
+
+**Amity Markers**:
+- Friendship language: "friend," "ally," "partner," "colleague," "teammate," "supporter"
+- Affection terms: "love," "care," "cherish," "value," "appreciate," "treasure"
+- Unity expressions: "together," "united," "connected," "joined," "linked," "unified"
+- Respect language: "honor," "esteem," "dignity," "worth," "respect," "regard"
+
+### Goal Axis
+
+**Fragmentative Goal Markers**:
+- Dominance seeking: "control," "dominate," "rule," "command," "master," "dictate"
+- Authority emphasis: "obey," "submit," "comply," "bow down," "surrender," "yield"
+- Zero-sum competition: "beat," "defeat," "outperform," "victory," "win," "triumph over"
+- Hierarchical power: "superior," "above," "elite," "privileged," "special," "chosen"
+
+**Cohesive Goal Markers**:
+- Service orientation: "serve," "help," "assist," "support," "aid," "contribute"
+- Generosity language: "give," "share," "donate," "contribute," "offer," "provide"
+- Unity building: "bring together," "connect," "join," "include," "unite," "integrate"
+- Empowerment focus: "empower," "enable," "strengthen," "uplift," "inspire," "elevate"
+
+---
+
+## Part 4: Quality Standards and Applications
+
+### Quality Assurance
+
+**Evidence Standards**:
+- Direct quotations must clearly relate to specific anchor concepts
+- Confidence ratings reflect evidence strength and interpretive certainty
+- Overall analysis confidence represents systematic assessment quality
+
+**Validation Approach**:
+- Independent anchor scoring enables cross-validation through pattern consistency
+- Rich evidence base supports inter-rater reliability testing
+- Competitive pattern recognition provides analytical triangulation
+
+### Research Applications
+
+**Large-Scale Analysis**: Framework optimized for computational deployment across extensive text corpora
+**Temporal Studies**: Independent anchor data enables sophisticated longitudinal analysis  
+**Comparative Research**: Consistent methodology across contexts, cultures, and time periods
+**Pattern Discovery**: Rich data supports machine learning and statistical pattern recognition
+
+### Post-Processing Flexibility
+
+**Normative Layering**: Apply different analytical depth based on research requirements
+**Visualization Options**: Support multiple visualization approaches from simple charts to complex geometric analysis
+**Statistical Analysis**: Raw anchor data enables advanced statistical modeling and correlation analysis
+**Cohesion Measurement**: Multiple cohesion index formulations for different analytical purposes
+
+---
+
+## Conclusion
+
+CFF v4.0 transforms discourse analysis from categorical assessment to nuanced pattern recognition through independent anchor scoring. By preserving complete competitive information, the framework enables detection of sophisticated rhetorical strategies while maintaining analytical rigor and computational scalability.
+
+The framework serves as a comprehensive data collection engine, providing rich, structured datasets that support diverse analytical approaches and visualization strategies while avoiding the mathematical pitfalls that plague high-dimensional analysis systems.
+
+**Key Innovation**: CFF v4.0 solves the fundamental information loss problem in discourse analysis, enabling researchers to capture and analyze the full complexity of rhetorical dynamics in democratic discourse.
