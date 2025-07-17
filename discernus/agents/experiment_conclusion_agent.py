@@ -79,8 +79,10 @@ class ExperimentConclusionAgent:
         return self._call_audit_llm(experiment_md, framework_md, final_report_context, stats_json, chronolog_entries)
 
     def _read_last_n_lines_of_chronolog(self, project_path: Path, n: int) -> List[Dict]:
-        """Reads the last N JSONL entries from the project chronolog."""
+        """Reads the last N JSONL entries from the main project chronolog."""
+        # Correctly point to the main project chronolog at the project root
         chronolog_path = project_path / "project_chronolog.jsonl"
+        
         if not chronolog_path.exists():
             return []
         

@@ -16,6 +16,9 @@ import time
 import os
 import asyncio
 
+# Add moderation import
+from litellm import moderation
+
 class LLMGateway:
     """
     A unified gateway for making calls to various Large Language Models (LLMs)
@@ -41,6 +44,17 @@ class LLMGateway:
             ]
 
             try:
+                # --- Moderation Guardrail ---
+                provider = self.parameter_manager.get_provider_from_model(current_model)
+                provider_config = self.parameter_manager.provider_defaults.get(provider, {})
+                
+                if provider_config.get("requires_pre_moderation"):
+                    mod_response = moderation(input=prompt)
+                    if mod_response and mod_response.results and mod_response.results[0].flagged:
+                        flagged_categories = [category for category, flagged in mod_response.results[0].categories.__dict__.items() if flagged]
+                        error_msg = f"Prompt flagged by moderation API for categories: {', '.join(flagged_categories)}"
+                        return "", {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
+
                 print(f"Attempting call with {current_model} (Attempt {attempts}/{max_retries})...")
                 
                 # Clean parameters based on provider requirements

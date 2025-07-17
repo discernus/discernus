@@ -82,6 +82,7 @@ class WorkflowOrchestrator:
             self.workflow_state = initial_state
             self.workflow_state['project_path'] = str(self.project_path)
             self.workflow_state['session_results_path'] = str(self.session_results_path)
+            self.workflow_state['conversation_id'] = self.conversation_id
 
             for i, step_config in enumerate(workflow_steps):
                 agent_name = step_config.get('agent')
@@ -95,6 +96,16 @@ class WorkflowOrchestrator:
                 # Update the master workflow state with the output
                 if step_output:
                     self.workflow_state.update(step_output)
+                
+                # --- Phase 2.5: Handle Overwatch Agent decision ---
+                if agent_name == 'MethodologicalOverwatchAgent':
+                    # The output from the overwatch agent is stored under the key defined in the registry ('decision_json')
+                    decision_json = self.workflow_state.get('decision_json', {})
+                    decision = decision_json.get('decision')
+                    if decision == 'TERMINATE':
+                        reason = decision_json.get('reason', 'No reason provided.')
+                        self._log_system_event("WORKFLOW_TERMINATED_BY_OVERWATCH", {"reason": reason})
+                        raise SystemExit(f"WORKFLOW HALTED by MethodologicalOverwatchAgent: {reason}")
 
                 self._log_system_event("WORKFLOW_STEP_COMPLETED", {"step": i + 1, "agent": agent_name, "output_keys": list(step_output.keys())})
 
@@ -135,11 +146,20 @@ class WorkflowOrchestrator:
         if not output_def:
             return {} # Agent has no declared outputs, return empty dict.
 
-        output_key = list(output_def[0].keys())[0]
-        
+        # The key for the output in the workflow_state, e.g., "analysis_results"
+        output_key = agent_def.get('outputs', [{}])[0].get('name')
+        if not output_key:
+             # Fallback for older registry format
+             output_key = list(agent_def.get('outputs', [{}])[0].keys())[0]
+
         # If the agent already returned a dictionary with the correct key, use it directly.
         if isinstance(result, dict) and output_key in result:
              return result
+
+        # --- Report Generation Convention ---
+        # If the StatisticalInterpretationAgent runs, its output becomes the initial final_report
+        if agent_name == 'StatisticalInterpretationAgent':
+            return {'final_report': result, output_key: result}
 
         # Otherwise, wrap the raw result in the expected output dictionary.
         return {output_key: result}
@@ -276,10 +296,18 @@ TASK: Apply the framework systematically to this text. Provide a thorough analys
 
     async def _save_final_artifacts(self):
         """Saves all final artifacts to the session results directory."""
+        # --- Final Report Aggregation ---
+        final_report_content = self.workflow_state.get('final_report', '')
+        
+        # Append audit text if it exists
+        if 'audit_text' in self.workflow_state:
+            final_report_content += "\n\n" + self.workflow_state['audit_text']
+
         # Save the final human-readable report
-        if 'final_report_content' in self.workflow_state:
+        if final_report_content:
             report_path = self.session_results_path / "final_report.md"
-            report_path.write_text(self.workflow_state['final_report_content'])
+            report_path.write_text(final_report_content)
+            self.workflow_state['final_report_path'] = str(report_path) # Save path for other agents
 
         # Save the entire final workflow state for debugging and provenance
         state_path = self.session_results_path / "final_workflow_state.json"
