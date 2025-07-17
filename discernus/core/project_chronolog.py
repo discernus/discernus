@@ -65,12 +65,16 @@ class ProjectChronolog:
         # Project chronolog location per SOAR v2.0 specification
         self.chronolog_file = self.project_path / f"PROJECT_CHRONOLOG_{self.project_name}.jsonl"
         
-        # Initialize Git repo for automatic commits
+        # Initialize Git repo for automatic commits, but NEVER create a new one.
         try:
+            # Search up from the project path to find the true git root.
+            # This prevents initializing a new repo in a subdirectory.
             self.git_repo = git.Repo(self.project_path, search_parent_directories=True)
-            print(f"✅ ProjectChronolog Git integration active for project: {self.project_name}")
+            self.true_project_root = Path(self.git_repo.working_dir)
+            print(f"✅ ProjectChronolog Git integration active for project: {self.project_name} at root {self.true_project_root}")
         except git.InvalidGitRepositoryError:
-            print(f"⚠️ ProjectChronolog: Not in a Git repository, chronolog persistence limited")
+            # This is the expected case when running in a non-git directory.
+            print(f"⚠️ ProjectChronolog: Not in a Git repository, chronolog persistence limited.")
             self.git_repo = None
         
         # Cryptographic signing for tamper evidence
@@ -616,40 +620,39 @@ _active_chronologs: Dict[str, ProjectChronolog] = {}
 
 def _detect_project_root(path_str: str) -> Path:
     """
-    Detect the actual project root from a file path
-    
-    Given paths like:
-    - projects/attesor/experiments/01_smoketest/framework.md
-    - projects/attesor/experiments/01_smoketest/
-    - projects/attesor/
-    
-    Returns: projects/attesor/ (the actual project directory)
+    Detect the actual project root from a file path by finding the .git directory.
+    This is critical to prevent nested repository creation.
     """
-    path = Path(path_str).resolve()
+    current_path = Path(path_str).resolve()
     
-    # If path is a file, get its directory
-    if path.is_file():
-        path = path.parent
+    # If path is a file, start from its parent directory
+    if current_path.is_file():
+        current_path = current_path.parent
+        
+    # Search upwards for a .git directory, which signifies the project root
+    while current_path != current_path.parent:
+        if (current_path / ".git").is_dir():
+            return current_path
+        current_path = current_path.parent
+        
+    # If no .git directory is found after checking all parents, it means we are not
+    # in a git repository. In this case, we fall back to the old logic of finding
+    # a 'projects' directory, or ultimately just using the path as given. This
+    # ensures the system can still run in non-git environments without crashing.
     
-    # Look for the pattern: projects/{project_name}/...
-    parts = path.parts
-    
+    original_path = Path(path_str).resolve()
+    if original_path.is_file():
+        original_path = original_path.parent
+        
+    parts = original_path.parts
     try:
-        # Find 'projects' in the path
         projects_index = parts.index('projects')
-        
-        # The project root should be projects/{project_name}/
         if projects_index + 1 < len(parts):
-            project_name = parts[projects_index + 1]
-            project_root = Path(*parts[:projects_index + 2])  # projects/{project_name}
-            return project_root
-        
+            return Path(*parts[:projects_index + 2])
     except ValueError:
-        # 'projects' not found in path, use the path as-is
-        pass
-    
-    # Fallback: if we can't detect the pattern, use the directory path as-is
-    return path
+        pass # 'projects' not in path
+        
+    return original_path
 
 def get_project_chronolog(project_path: str) -> ProjectChronolog:
     """Get or create project chronolog instance"""

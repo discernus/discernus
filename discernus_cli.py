@@ -34,7 +34,7 @@ try:
     from discernus.core.spec_loader import SpecLoader
     from discernus.core.project_chronolog import initialize_project_chronolog
     from discernus.core.project_chronolog import get_project_chronolog
-    from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
+    from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
     from discernus.gateway.model_registry import ModelRegistry
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
@@ -50,29 +50,8 @@ def discernus():
     Transform computational research from complex orchestration to simple execution,
     while maintaining the highest standards of academic rigor.
     """
-    # Initialize chronolog here to capture all CLI interactions
-    try:
-        import datetime
-        import getpass
-        
-        session_id = f"discernus_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        user = getpass.getuser()
-        command = " ".join(sys.argv)
-        
-        # Initialize chronolog for academic provenance
-        initialize_project_chronolog(
-            project_path=".",  # CLI-level logging
-            user=user,
-            command=command,
-            session_id=session_id,
-            system_state={'discernus_cli_version': '1.0.0'}
-        )
-        click.echo(f"📝 Chronolog initialized for session: {session_id}")
-        
-    except Exception as e:
-        click.echo(f"⚠️ Chronolog initialization failed: {e}")
-
-    # Check for nested repositories that break GitHub-as-persistence-layer
+    # CRITICAL: Check for nested repositories FIRST, before any other action
+    # that might interact with git, like the ProjectChronolog.
     try:
         from scripts.prevent_nested_repos import NestedRepoPreventionSystem
         prevention_system = NestedRepoPreventionSystem()
@@ -95,6 +74,28 @@ def discernus():
         click.echo("⚠️ Nested repository prevention system not available")
     except Exception as e:
         click.echo(f"⚠️ Nested repository check failed: {e}")
+
+    # Now that we've confirmed the git structure is clean, initialize the chronolog.
+    try:
+        import datetime
+        import getpass
+        
+        session_id = f"discernus_session_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        user = getpass.getuser()
+        command = " ".join(sys.argv)
+        
+        # Initialize chronolog for academic provenance
+        initialize_project_chronolog(
+            project_path=".",  # CLI-level logging
+            user=user,
+            command=command,
+            session_id=session_id,
+            system_state={'discernus_cli_version': '1.0.0'}
+        )
+        click.echo(f"📝 Chronolog initialized for session: {session_id}")
+        
+    except Exception as e:
+        click.echo(f"⚠️ Chronolog initialization failed: {e}")
 
     if not DEPENDENCIES_AVAILABLE:
         click.echo("❌ Discernus dependencies not available. Installation may be incomplete.")
@@ -227,10 +228,26 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
             
             # Initialize orchestrator - use parent directory of experiment file as project path
             project_path = Path(experiment_file).parent
-            orchestrator = EnsembleOrchestrator(str(project_path))
-            
-            click.echo("⏳ Executing ensemble analysis...")
-            results = await orchestrator.execute_ensemble_analysis(specifications)
+            orchestrator = WorkflowOrchestrator(str(project_path))
+
+            # Prepare initial state for the WorkflowOrchestrator
+            initial_state = {
+                'framework': specifications.get('framework'),
+                'experiment': specifications.get('experiment'),
+                'corpus': specifications.get('corpus'),
+                'workflow': specifications.get('experiment', {}).get('workflow', []),
+                'analysis_agent_instructions': specifications.get('framework', {}).get('analysis_variants', {}).get(specifications.get('experiment', {}).get('analysis_variant', 'default'), {}).get('analysis_prompt', ''),
+                'project_path': str(project_path),
+                'framework_path': framework_file,
+                'experiment_path': experiment_file,
+                'corpus_path': corpus_dir,
+            }
+
+            if not initial_state['workflow']:
+                 raise ValueError("Experiment file must contain a 'workflow' definition.")
+
+            click.echo("⏳ Executing workflow...")
+            results = orchestrator.execute_workflow(initial_state)
             
             if results.get('status') == 'success':
                 click.secho("✅ Experiment completed successfully!", fg='green')
@@ -328,7 +345,7 @@ def info(check_thin: bool):
             _show_thin_check("SpecLoader", spec_loader_check)
             
             # Check EnsembleOrchestrator
-            orchestrator = EnsembleOrchestrator('.')
+            orchestrator = WorkflowOrchestrator('.')
             orchestrator_check = {
                 'thin_compliant': True,
                 'issues': [],

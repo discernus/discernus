@@ -97,7 +97,7 @@ thin_conversation_logger.py: ≤40 lines
 
 **Configuration-Driven Testing**:
 - Agent behavior controlled by YAML configurations
-- Prompts managed centrally in `llm_roles.py`
+- Prompts managed centrally in `agent_roles.py`
 - Framework specifications loaded from files
 
 **Natural Language Assertions**:
@@ -130,7 +130,7 @@ thin_conversation_logger.py: ≤40 lines
 
 **Agent Drift Prevention**:
 - [ ] No complex parsing logic in new code
-- [ ] Prompts centralized in `llm_roles.py`
+- [ ] Prompts centralized in `agent_roles.py`
 - [ ] Line count budgets maintained
 - [ ] Domain-neutral language throughout
 
@@ -199,7 +199,7 @@ thin_conversation_logger.py: ≤40 lines
 
 **When Agents Drift**:
 1. **Run Complexity Analysis**: Check line counts and function complexity
-2. **Verify Prompt Centralization**: Are prompts in `llm_roles.py`?
+2. **Verify Prompt Centralization**: Are prompts in `agent_roles.py`?
 3. **Test Mathematical Reliability**: Is hybrid intelligence pattern used?
 4. **Validate Domain Neutrality**: Does solution work across domains?
 

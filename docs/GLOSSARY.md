@@ -9,7 +9,7 @@ Software design philosophy where minimal code enables LLM conversations rather t
 Specialized LLM with domain expertise (e.g., `knowledgenaut_agent`, `corpus_detective_agent`) that can be spawned by the moderator to provide specific analysis.
 
 ### **Agent Spawning Instruction Set**
-The system prompt and configuration that defines an expert agent's capabilities, stored in `llm_roles.py`.
+The system prompt and configuration that defines an expert agent's capabilities, stored in `agent_roles.py`.
 
 ### **Moderator Agent/LLM**
 The orchestrating LLM (`moderator_llm`) responsible for coordinating expert agents and managing the overall research workflow.

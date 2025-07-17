@@ -20,7 +20,7 @@ sys.path.insert(0, str(project_root))
 try:
     from discernus.gateway.model_registry import ModelRegistry
     from discernus.gateway.llm_gateway import LLMGateway
-    from discernus.core.llm_roles import get_expert_prompt
+    from discernus.core.agent_roles import get_expert_prompt
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"EnsembleConfigurationAgent dependencies not available: {e}")

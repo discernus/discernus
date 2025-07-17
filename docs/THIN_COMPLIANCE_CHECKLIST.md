@@ -13,7 +13,7 @@
 - [ ] **LLM Intelligence**: Complex reasoning and analysis done by LLMs
 - [ ] **Software Infrastructure**: Code handles routing, execution, storage only
 - [ ] **Natural Language Flow**: LLMs communicate in natural language
-- [ ] **Centralized Prompts**: Prompts in `discernus/core/llm_roles.py`
+- [ ] **Centralized Prompts**: Prompts in `discernus/core/agent_roles.py`
 - [ ] **Secure Math**: Mathematical operations use `SecureCodeExecutor`
 - [ ] **Registry-Based**: Uses agent registry and model registry
 
@@ -56,7 +56,7 @@
 
 ### Immediate Red Flags
 - **Parsing JSON from LLM responses** → Use natural language instead
-- **Hardcoded prompts in orchestrator** → Move to `llm_roles.py`
+- **Hardcoded prompts in orchestrator** → Move to `agent_roles.py`
 - **Complex if/else on LLM output** → Let LLM make decisions
 - **Mathematical operations in code** → Use LLM + SecureCodeExecutor
 - **Framework-specific hardcoding** → Make it domain-neutral

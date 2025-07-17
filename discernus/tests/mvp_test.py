@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from discernus.core.session_manager import SessionManager
 from discernus.core.message_router import MessageRouter
 from discernus.core.thin_conversation_logger import ThinConversationLogger
-from discernus.core.llm_roles import get_available_roles
+from discernus.core.agent_roles import get_available_experts as get_available_roles
 
 def test_infrastructure():
     """Test the ultra-thin infrastructure components"""
@@ -43,7 +43,7 @@ def test_infrastructure():
     print("\n4. Testing Message Router...")
     router = MessageRouter()
     print(f"   ✅ Message router initialized")
-    print(f"   ✅ Configured LLM roles: {list(router.llm_roles.keys())}")
+    print(f"   ✅ Configured LLM roles: {get_available_roles()}")
     
     print("\n🎉 All components initialized successfully!")
     print("\n📊 Line Count Analysis:")

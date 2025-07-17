@@ -53,11 +53,13 @@ class ConversationLogger:
         
         self.conversations_dir.mkdir(exist_ok=True)
         
-        # Initialize Git repo if not exists
+        # Initialize Git repo by searching parent directories (NEVER create a new one)
         try:
-            self.git_repo = git.Repo(self.project_root)
+            self.git_repo = git.Repo(self.project_root, search_parent_directories=True)
         except git.InvalidGitRepositoryError:
-            self.git_repo = git.Repo.init(self.project_root)
+            # This is the expected case when running in a non-git directory.
+            # NEVER create a new git repository - this prevents nested repos.
+            self.git_repo = None
         
         # Initialize Redis client for event capture
         self.redis_client = None
@@ -302,16 +304,19 @@ class ConversationLogger:
         conversation_file = self.conversations_dir / f"{conversation_id}.jsonl"
         
         if conversation_file.exists():
-            # Add to Git
-            self.git_repo.index.add([str(conversation_file)])
-            
-            # Commit with descriptive message
-            commit_message = f"Discernus conversation: {conversation_id}"
-            if summary:
-                commit_message += f"\n\n{summary}"
-            
-            self.git_repo.index.commit(commit_message)
-            logger.info(f"Committed conversation to Git: {conversation_id}")
+            # Add to Git (only if git repo is available)
+            if self.git_repo is not None:
+                self.git_repo.index.add([str(conversation_file)])
+                
+                # Commit with descriptive message
+                commit_message = f"Discernus conversation: {conversation_id}"
+                if summary:
+                    commit_message += f"\n\n{summary}"
+                
+                self.git_repo.index.commit(commit_message)
+                logger.info(f"Committed conversation to Git: {conversation_id}")
+            else:
+                logger.info(f"Git unavailable, conversation saved to file: {conversation_id}")
     
     def read_conversation(self, conversation_id: str) -> List[Dict[str, Any]]:
         """

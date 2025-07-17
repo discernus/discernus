@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from typing import List, Dict, Any
-from .llm_roles import get_expert_prompt
+from .agent_roles import get_expert_prompt
 
 
 def format_conversation_to_markdown(conversation_id: str, project_root: str = ".") -> str:

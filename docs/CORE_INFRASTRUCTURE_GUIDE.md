@@ -236,7 +236,7 @@ async def check_model_health(self, model_name: str) -> Dict[str, Any]:
 ## Centralized Prompt Management
 
 ### THIN Compliance System
-**Location**: `discernus/core/llm_roles.py`
+**Location**: `discernus/core/agent_roles.py`
 
 Centralized prompt management ensures consistency and prevents hardcoded intelligence in orchestrator code.
 

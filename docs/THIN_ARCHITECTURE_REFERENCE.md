@@ -15,7 +15,7 @@ THIN architecture maximizes LLM intelligence while minimizing software parsing a
 
 **✅ THIN Implementation**:
 ```python
-# discernus/core/llm_roles.py
+# discernus/core/agent_roles.py
 EXPERT_AGENT_PROMPTS = {
     'corpus_detective_agent': """You are a corpus_detective_agent, specializing in systematic analysis of user-provided text corpora.
 
@@ -85,7 +85,7 @@ def process_llm_code_request(conversation_id: str, speaker: str, response: str) 
 
 **✅ THIN Implementation**:
 ```python
-# discernus/core/llm_roles.py - Centralized prompt management
+# discernus/core/agent_roles.py - Centralized prompt management
 EXPERT_AGENT_PROMPTS = {
     'knowledgenaut_agent': """You are a knowledgenaut_agent, a specialized research agent with expertise in academic literature discovery and framework interrogation.
 
@@ -513,7 +513,7 @@ class ThinAnalysisOrchestrator:
 ### For Human Developers
 
 1. **Start with Natural Language**: Design LLM interactions first, then build minimal infrastructure around them
-2. **Centralize Intelligence**: Put all prompts in `llm_roles.py`, all configurations in YAML files
+2. **Centralize Intelligence**: Put all prompts in `agent_roles.py`, all configurations in YAML files
 3. **Use Secure Code Execution**: Never put mathematical operations in software - use the hybrid intelligence pattern
 4. **Log Everything**: Use the chronolog system for complete reproducibility
 5. **Avoid Parsing**: If you're parsing JSON from LLMs, you're probably doing it wrong
@@ -522,7 +522,7 @@ class ThinAnalysisOrchestrator:
 
 1. **Check for Parsing**: If your solution involves parsing LLM responses, reconsider the approach
 2. **Use Existing Infrastructure**: Leverage model registry, LLM gateway, and chronolog systems
-3. **Centralize Prompts**: Add new prompts to `llm_roles.py`, not inline in orchestrator code
+3. **Centralize Prompts**: Add new prompts to `agent_roles.py`, not inline in orchestrator code
 4. **Follow Configuration Patterns**: Use YAML configuration for new agents and models
 5. **Document Decisions**: Log rationale for architectural choices in chronolog
 
@@ -561,7 +561,7 @@ Look for:
 
 ### Step 2: Extract Intelligence
 Move intelligence to:
-- `llm_roles.py` for prompts
+- `agent_roles.py` for prompts
 - LLM agents for analysis
 - Secure code execution for calculations
 

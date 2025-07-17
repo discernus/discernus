@@ -355,7 +355,7 @@ This documentation refactoring is **foundational to project success**, not routi
 - Cost optimization strategies
 - Rate limiting approaches
 
-#### **Document 3: discernus/core/llm_roles.py**
+#### **Document 3: discernus/core/agent_roles.py**
 **Extract These Elements**:
 - Centralized prompt management
 - Role-based agent patterns
@@ -378,7 +378,7 @@ This documentation refactoring is **foundational to project success**, not routi
 [Extract from llm_gateway.py patterns]
 
 ## Centralized Prompt Management
-[Extract from llm_roles.py system]
+[Extract from agent_roles.py system]
 
 ## Chronolog and Provenance
 [Extract from chronolog system]
