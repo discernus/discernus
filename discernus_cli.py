@@ -72,6 +72,30 @@ def discernus():
     except Exception as e:
         click.echo(f"⚠️ Chronolog initialization failed: {e}")
 
+    # Check for nested repositories that break GitHub-as-persistence-layer
+    try:
+        from scripts.prevent_nested_repos import NestedRepoPreventionSystem
+        prevention_system = NestedRepoPreventionSystem()
+        nested_repos = prevention_system.scan_for_nested_repos()
+        
+        if nested_repos:
+            click.echo("❌ CRITICAL: Nested git repositories detected!")
+            click.echo("These break the GitHub-as-persistence-layer architecture.")
+            click.echo(f"Found {len(nested_repos)} nested repositories:")
+            for repo in nested_repos:
+                click.echo(f"  - {repo}")
+            click.echo("\n💡 To fix this issue:")
+            click.echo("   python3 scripts/prevent_nested_repos.py --clean --confirm")
+            click.echo("\n📚 For more information:")
+            click.echo("   See docs/GIT_BEST_PRACTICES.md")
+            sys.exit(1)
+            
+    except ImportError:
+        # Prevention system not available, continue with warning
+        click.echo("⚠️ Nested repository prevention system not available")
+    except Exception as e:
+        click.echo(f"⚠️ Nested repository check failed: {e}")
+
     if not DEPENDENCIES_AVAILABLE:
         click.echo("❌ Discernus dependencies not available. Installation may be incomplete.")
         sys.exit(1)
