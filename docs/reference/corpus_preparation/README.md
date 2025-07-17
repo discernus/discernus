@@ -11,8 +11,8 @@ This directory contains reference implementations of tools and prompts to help r
 *   `hash_generator.py`: A Python script to replace filenames with unique hashes based on a mapping file.
 *   `speaker_mapping.jsonl`: An example mapping file. This links original speaker identifiers or filenames to generated hashes.
 *   `reorganize_corpus.py`: A utility script for restructuring corpus files (use as needed).
-*   `attesor_sanitization_supreme.md`: A reference prompt for sanitizing text content to remove identifying linguistic styles.
-*   `attesor_esperanto_supreme.md`: A reference prompt using Esperanto as a "linguistic firewall" for advanced sanitization.
+*   `sanitization_prompt_context_removal.md`: A reference prompt for sanitizing text content to remove identifying linguistic styles.
+*   `sanitization_prompt_esperanto_translation.md`: A reference prompt using Esperanto as a "linguistic firewall" for advanced sanitization.
 
 ---
 
