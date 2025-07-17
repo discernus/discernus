@@ -47,9 +47,10 @@ python3 -m unittest discernus.tests.simple_working_tests -v
 - Basic agent workflows (calculation, data extraction)
 - Environment check utilities
 - Individual test isolation
+- **Provenance system validation** (chronolog, conversation logger, integrity verification)
 
 **Key Features**:
-- **8 comprehensive tests** covering all major components
+- **12 comprehensive tests** covering all major components
 - **Standard Python testing patterns** 
 - **Guaranteed to work** with simple, reliable mocks
 - **Clear failure modes** when something is actually broken
@@ -165,6 +166,22 @@ python3 discernus/tests/intelligent_integration_tests.py
 # Requires: ollama install && ollama pull mistral
 python3 discernus/tests/local_intelligent_tests.py
 ```
+
+## Provenance System Testing
+
+The simple working tests now include **comprehensive provenance system validation** ensuring academic integrity features work correctly:
+
+### What the Provenance Tests Cover:
+- **`test_chronolog_event_logging`**: Verifies that chronolog events are logged correctly with proper timestamps and signatures
+- **`test_chronolog_integrity_verification`**: Tests cryptographic integrity verification of chronolog events
+- **`test_conversation_logger_captures_llm_interactions`**: Ensures LLM interactions are captured for complete audit trails
+- **`test_provenance_system_integration`**: Validates integration with workflow orchestrator for end-to-end provenance
+
+### Why This Matters:
+- **Academic Integrity**: Ensures tamper-evident records for peer review
+- **Reproducibility**: Validates complete audit trails for replication studies
+- **Reliability**: Catches regressions in mission-critical provenance features
+- **Compliance**: Confirms the three-tier audit trail functions correctly
 
 **Note**: The cost is so negligible ($0.004 per full test suite) that you can run intelligent tests freely during development without budget concerns.
 

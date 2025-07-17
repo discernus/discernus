@@ -7,12 +7,12 @@ THIN Principle: Simple specification parsing with no complex intelligence.
 Software extracts structured data; LLM prompts contain all the intelligence.
 
 Supports:
-- V4 Framework files (markdown with embedded YAML configuration)
+- V4 Framework files (markdown with embedded JSON configuration in <details> section)
 - V2 Experiment files (structured YAML)
 - V2 Corpus directories (text file collections)
 
 Architecture:
-- FrameworkParser: Extracts YAML configuration from markdown files
+- FrameworkParser: Extracts JSON configuration from markdown files
 - ExperimentParser: Loads and validates V2 experiment YAML files
 - CorpusLoader: Scans directories and loads text files
 - SpecLoader: Main orchestrator class
@@ -48,14 +48,15 @@ class CorpusError(SpecificationError):
 
 class FrameworkParser:
     """
-    Parses V4 Framework files (markdown with embedded YAML configuration)
+    Parses V4 Framework files (markdown with embedded JSON configuration in <details> section)
     
-    THIN Principle: Simple YAML extraction, no framework intelligence
+    THIN Principle: Simple JSON extraction, no framework intelligence
     """
     
     def __init__(self):
-        self.yaml_config_pattern = re.compile(
-            r'# --- Discernus Configuration ---\n(.*?)(?=\n---|\n# |$)', 
+        # Updated to match Framework Specification v4.0 - JSON in <details> section
+        self.json_config_pattern = re.compile(
+            r'<details><summary>Machine-Readable Configuration</summary>\s*\n+```json\s*\n(.*?)\n```\s*\n+</details>', 
             re.DOTALL
         )
     
@@ -80,24 +81,24 @@ class FrameworkParser:
         except Exception as e:
             raise FrameworkError(f"Failed to read framework file: {e}")
         
-        # Extract YAML configuration block
-        yaml_match = self.yaml_config_pattern.search(content)
-        if not yaml_match:
+        # Extract JSON configuration from <details> section
+        json_match = self.json_config_pattern.search(content)
+        if not json_match:
             raise FrameworkError(
-                f"No YAML configuration block found in {framework_path}. "
-                f"Expected block starting with '# --- Discernus Configuration ---'"
+                f"No JSON configuration block found in {framework_path}. "
+                f"Expected block in format: <details><summary>Machine-Readable Configuration</summary>\\n```json\\n...\\n```\\n</details>"
             )
         
-        yaml_content = yaml_match.group(1)
+        json_content = json_match.group(1)
         
-        # Parse YAML
+        # Parse JSON
         try:
-            config = yaml.safe_load(yaml_content)
-        except yaml.YAMLError as e:
-            raise FrameworkError(f"Invalid YAML in configuration block: {e}")
+            config = json.loads(json_content)
+        except json.JSONDecodeError as e:
+            raise FrameworkError(f"Invalid JSON in configuration block: {e}")
         
         if not isinstance(config, dict):
-            raise FrameworkError("Framework configuration must be a YAML dictionary")
+            raise FrameworkError("Framework configuration must be a JSON dictionary")
         
         # Validate required fields
         required_fields = ['name', 'version', 'analysis_variants']

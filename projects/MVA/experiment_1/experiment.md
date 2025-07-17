@@ -24,8 +24,25 @@ runs_per_model: 3
 # WorkflowOrchestrator. This is the new, preferred way to define experiments.
 workflow:
   - agent: AnalysisAgent
+    inputs:
+      - experiment
+      - framework
+      - corpus
+    outputs:
+      - analysis_results
+  - agent: DataExtractionAgent
+    inputs:
+      - analysis_results
+    outputs:
+      - extracted_results
   - agent: CalculationAgent
+    inputs:
+      - extracted_results
+    outputs:
+      - calculation_results
   - agent: SynthesisAgent
+    inputs:
+      - calculation_results
     config:
       output_artifacts:
         - final_mva_report.md

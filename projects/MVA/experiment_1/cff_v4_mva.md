@@ -46,6 +46,8 @@ analysis_variants:
       
       The output MUST be a valid JSON object that implements the framework's evidence requirements.
 
+IMPORTANT: Your response MUST be a single, valid JSON object and nothing else. Do not include any text, explanations, or markdown code fences before or after the JSON object.
+---
   motivational:
     description: "Scores the four core cohesion axes plus the Goal axis, assessing behavioral orientation."
     analysis_prompt: |
@@ -75,8 +77,10 @@ analysis_variants:
       - "confidence": Dictionary with axis names as keys and confidence ratings as values
       - "reasoning": Dictionary with axis names as keys and explanatory text as values
       
-      The output MUST be a valid JSON object that maintains the framework's evidence standards.
+      The output MUST be a valid JSON object that implements the framework's evidence requirements.
 
+IMPORTANT: Your response MUST be a single, valid JSON object and nothing else. Do not include any text, explanations, or markdown code fences before or after the JSON object.
+---
   descriptive:
     description: "Scores only the three core emotional axes for a neutral emotional climate mapping."
     analysis_prompt: |
@@ -105,7 +109,10 @@ analysis_variants:
       - "confidence": Dictionary with axis names as keys and confidence ratings as values
       - "reasoning": Dictionary with axis names as keys and explanatory text as values
       
-      The output MUST be a valid JSON object that maintains the framework's evidence standards.
+      The output MUST be a valid JSON object that implements the framework's evidence requirements.
+
+IMPORTANT: Your response MUST be a single, valid JSON object and nothing else. Do not include any text, explanations, or markdown code fences before or after the JSON object.
+---
 
 calculation_spec:
   - metric:
@@ -353,4 +360,49 @@ CFF v3.1 provides a comprehensive, validated framework for analyzing discourse a
 4. **Practical Application**: Actionable insights for democratic institutions
 5. **Computational Optimization**: Enhanced linguistic markers for LLM analysis
 
-The framework serves as a powerful tool for understanding how political discourse affects social cohesion, providing both academic insights and practical intelligence for maintaining democratic stability. 
+The framework serves as a powerful tool for understanding how political discourse affects social cohesion, providing both academic insights and practical intelligence for maintaining democratic stability.
+
+<details>
+<summary>Machine-Readable Configuration</summary>
+
+```json
+{
+  "name": "CFF_MVA_Test",
+  "version": "4.0",
+  "display_name": "Cohesive Flourishing Framework (MVA Test)",
+  "analysis_variants": {
+    "fully_normative": {
+      "description": "Scores all five axes of the CFF and classifies the text's political worldview. This is the fully normative analysis.",
+      "analysis_prompt": "You are an expert political discourse analyst executing a multi-part analysis using the Cohesive Flourishing Framework (CFF) v3.1.\n\nYour task is to analyze the provided text according to this framework's rigorous methodology, which requires comprehensive evidence documentation for all analytical conclusions.\n\nTEXT TO ANALYZE:\n{corpus_text}\n\nSOURCE FILE: {file_name}\n\nStep 1: Classify the political worldview of the text.\nDetermine whether this text primarily expresses a \"Progressive\", \"Conservative\", \"Libertarian\", or \"Other\" worldview based on the rhetorical patterns, policy positions, and value frameworks expressed.\n\nStep 2: Score the text on all five CFF axes.\nAnalyze the text carefully for each dimension using the framework's linguistic markers and theoretical foundations. For each axis, provide a score from -1.0 to +1.0:\n- identity_axis: Individual Dignity (+1.0) ↔ Tribal Dominance (-1.0)\n- fear_hope_axis: Optimistic Possibility (+1.0) ↔ Threat Perception (-1.0)\n- envy_compersion_axis: Others' Success Celebration (+1.0) ↔ Elite Resentment (-1.0)\n- enmity_amity_axis: Social Goodwill (+1.0) ↔ Interpersonal Hostility (-1.0)\n- goal_axis: Cohesive Generosity (+1.0) ↔ Fragmentative Power (-1.0)\n\nStep 3: Provide comprehensive evidence documentation.\nFor each axis score, you must provide:\n- At least 3 direct quotations from the text that support your assessment\n- Confidence rating (0.0-1.0) based on evidence strength and clarity\n- Evidence type classification for each quote (lexical/semantic/rhetorical)\n- Brief reasoning explaining how the evidence supports the score\n\nStep 4: Format the output as a single JSON object."
+    },
+    "motivational": {
+      "description": "Scores the four core cohesion axes plus the Goal axis, assessing behavioral orientation.",
+      "analysis_prompt": "You are an expert researcher applying the Cohesive Flourishing Framework (CFF) v3.1 with focus on motivational and behavioral dimensions.\n\nYour task is to analyze the provided text for the four core cohesion axes that drive social behavior, omitting the Identity axis for this simplified analysis.\n\nTEXT TO ANALYZE:\n{corpus_text}\n\nSOURCE FILE: {file_name}\n\nAnalyze the text carefully for each dimension using the framework's linguistic markers. For each axis, provide a score from -1.0 to +1.0:\n- fear_hope_axis: Optimistic Possibility (+1.0) ↔ Threat Perception (-1.0)\n- envy_compersion_axis: Others' Success Celebration (+1.0) ↔ Elite Resentment (-1.0)\n- enmity_amity_axis: Social Goodwill (+1.0) ↔ Interpersonal Hostility (-1.0)\n- goal_axis: Cohesive Generosity (+1.0) ↔ Fragmentative Power (-1.0)\n\nFor each axis score, you must provide:\n- At least 3 direct quotations from the text that support your assessment\n- Confidence rating (0.0-1.0) based on evidence strength\n- Brief reasoning connecting evidence to score"
+    },
+    "descriptive": {
+      "description": "Scores only the three core emotional axes for a neutral emotional climate mapping.",
+      "analysis_prompt": "You are an expert researcher applying the Cohesive Flourishing Framework (CFF) v3.1 for descriptive emotional climate analysis.\n\nYour task is to analyze the provided text for the three core emotional dimensions that characterize social climate, omitting the Identity and Goal axes for this neutral descriptive analysis.\n\nTEXT TO ANALYZE:\n{corpus_text}\n\nSOURCE FILE: {file_name}\n\nAnalyze the text carefully for each emotional dimension using the framework's linguistic markers. For each axis, provide a score from -1.0 to +1.0:\n- fear_hope_axis: Optimistic Possibility (+1.0) ↔ Threat Perception (-1.0)\n- envy_compersion_axis: Others' Success Celebration (+1.0) ↔ Elite Resentment (-1.0)\n- enmity_amity_axis: Social Goodwill (+1.0) ↔ Interpersonal Hostility (-1.0)\n\nFor each axis score, you must provide:\n- At least 3 direct quotations from the text that support your assessment\n- Confidence rating (0.0-1.0) based on evidence strength\n- Brief reasoning connecting evidence to score"
+    }
+  },
+  "calculation_spec": [
+    {
+      "metric": {
+        "name": "cff_cohesion_index",
+        "formula": "(0.25 * scores.fear_hope_axis) + (0.20 * scores.envy_compersion_axis) + (0.30 * scores.enmity_amity_axis) + (0.25 * scores.goal_axis)"
+      }
+    }
+  ],
+  "output_contract": {
+    "schema": {
+      "worldview": "string",
+      "scores": "object",
+      "evidence": "object",
+      "confidence": "object",
+      "reasoning": "object"
+    },
+    "instructions": "IMPORTANT: Your response MUST be a single, valid JSON object and nothing else. Do not include any text, explanations, or markdown code fences before or after the JSON object."
+  }
+}
+```
+
+</details> 

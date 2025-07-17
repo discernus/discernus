@@ -1,93 +1,85 @@
-# Corpus Best Practices Guide (v2.0)
+# Corpus Specification (v2.0)
 
-**Version**: 2.0  
-**Status**: Active  
-**Principle**: The integrity of a computational analysis depends entirely on the integrity of the input corpus. This guide outlines the best practices for corpus preparation to enable rigorous, bias-controlled research. **It is the researcher's responsibility to prepare their corpus according to these principles *before* running an experiment.**
-
----
-
-### Corpus Preparation Best Practices
-
-1.  **Speaker/Author De-identification**: To mitigate speaker identity bias, all identifying information must be removed from the text and replaced with a unique, non-identifiable hash.
-    *   **Tooling**: A reference implementation of a hashing script (`hash_generator.py`) and a speaker mapping file (`speaker_mapping.jsonl`) are available in `docs/reference/corpus_preparation/`.
-    *   **Process**:
-        1.  Create a `speaker_mapping.jsonl` file that maps original filenames or speaker names to unique, randomly generated hashes.
-        2.  Run the `hash_generator.py` script to process the original corpus, replacing filenames with their corresponding hashes.
-
-2.  **Content Sanitization (Optional but Recommended)**: For an even stronger control against bias, the content of the texts can be sanitized to remove subtle linguistic cues that might betray author identity.
-    *   **Reference Prompts**: Example sanitization prompts from the Attesor Study are available for review in `docs/reference/corpus_preparation/`:
-        *   `attesor_sanitization_supreme.md`: A prompt for general-purpose content sanitization.
-        *   `attesor_esperanto_supreme.md`: A more advanced prompt that uses Esperanto as a "linguistic firewall" to neutralize stylistic idiosyncrasies.
-
-3.  **Directory Structure**: The corpus should be a single directory containing one text file per document. The experiment will process all files within this directory.
+**Version**: 2.0
+**Status**: Active
+**Principle**: The integrity of a computational analysis depends entirely on the integrity of the input corpus. This document defines the standard for creating a research-grade, self-documenting corpus.
 
 ---
 
-## 1. The "Corpus State" Methodology
+## Part I: The "Narrative + Appendix" Architecture
 
-For rigorous bias analysis, we recommend preparing your corpus in multiple states, each in a separate directory. A typical project might have:
+A Discernus corpus is not just a collection of text files; it is a complete, self-contained research artifact. To achieve this, a corpus directory MUST contain a `corpus.md` file that follows our "Narrative + Appendix" architecture.
 
-*   **`/corpus_original/`**: The raw, unmodified source texts with descriptive filenames (e.g., `speaker_name_speech_title.txt`).
-*   **`/corpus_sanitized/`**: The bias-reduced versions of the texts, using hashed filenames.
-*   **`/corpus_translated/`**: An optional, further sanitized version translated into a neutral language like Esperanto.
+1.  **The Narrative (Human-Focused)**: The main body of the `corpus.md` file. This section uses standard Markdown for the researcher to document the "story" of the corpus:
+    *   **Collection Methodology**: How and where were the source texts obtained?
+    *   **Ethical Considerations**: What steps were taken to ensure ethical use?
+    *   **Sanitization Process**: If the corpus was sanitized, what prompts and methods were used? This section should include the exact prompts for full reproducibility.
+    *   **Corpus State**: A clear statement of whether this corpus is `original`, `sanitized`, or `translated`.
 
-An experiment is then run against a specific corpus directory by pointing to it in the `experiment.md` `corpus:` key. For example, `corpus: corpus_sanitized/`.
-
----
-
-## 2. Best Practice: Sanitization and Hashing
-
-To mitigate the risk of LLMs activating biases based on speaker identity, we strongly recommend a sanitization and hashing process.
-
-### 2.1. Sanitization
-
-*   **Goal**: To remove all **Identity Vectors** (speaker names, specific locations, identifying dates, signature phrases) while preserving the core **Rhetorical Architecture** (argument structure, emotional tone, linguistic patterns).
-*   **Process**: This is a methodological step that should be performed with care. We recommend using a powerful LLM guided by a detailed prompt.
-*   **Recommendation**: A project SHOULD include a `/sanitization_prompts` directory containing the exact prompts used, ensuring the process is reproducible. An example can be found in `projects/attesor/sanitization_prompts/`.
-
-### 2.2. Hashed Filenames
-
-*   **Purpose**: To prevent the LLM from inferring speaker identity from filenames.
-*   **Requirement**: All files within a `sanitized/` or `translated/` corpus directory SHOULD use a hashed filename.
-*   **Mechanism**: A salted SHA-256 hash, truncated to 12 characters for manageability.
-*   **Tooling**: The project provides a reference implementation script to automate this process at `scripts/hash_generator.py`.
+2.  **The Appendix (Machine-Focused)**: A single, collapsible appendix at the end of the file that contains a single, unambiguous JSON object. This is the **single source of truth** for all machine-readable metadata about the corpus.
 
 ---
 
-## 3. Best Practice: The Secure Lookup Table
+## Part II: The JSON Appendix Schema
 
-To link anonymized files back to their sources for post-analysis interpretation, a secure lookup table is essential.
+The appendix MUST begin with `<details><summary>Machine-Readable Configuration</summary>` and end with `</details>`. It MUST contain a single JSON code block with the following schema:
 
-*   **Filename**: `speaker_mapping.jsonl`
-*   **Location**: This file MUST be placed in the project's root directory, **not** inside any `corpus/` directory, to prevent it from being accidentally fed to an LLM.
-*   **Format**: A JSONL file where each line is an object mapping a hash to its source metadata.
-
-#### **Schema**
 ```json
 {
-  "hash": "9c759f7025a4",
-  "speaker": "Mitt Romney",
-  "title": "2020 Impeachment Vote Speech",
-  "source": "mitt_romney_2020_impeachment.txt"
+  "file_manifest": [
+    {
+      "name": "9c759f7025a4.txt",
+      "expert_categorization": "statement_of_principle",
+      "political_party": "Republican"
+    },
+    {
+      "name": "cccec508db40.txt",
+      "expert_categorization": "legislative_action",
+      "political_party": "Democrat"
+    }
+  ],
+  "speaker_mapping": [
+    {
+      "hash": "9c759f7025a4",
+      "speaker": "Mitt Romney",
+      "title": "2020 Impeachment Vote Speech",
+      "source": "mitt_romney_2020_impeachment.txt"
+    },
+    {
+      "hash": "cccec508db40",
+      "speaker": "Cory Booker",
+      "title": "First Step Act Speech",
+      "source": "cory_booker_2018_first_step_act.txt"
+    }
+  ]
 }
 ```
 
+**Component Explanations**:
+
+*   **`file_manifest`**: (Optional) An array of objects, where each object contains metadata for a specific file in the corpus directory. The `name` field must match the filename exactly. This is used for experiments that require pre-categorized data.
+*   **`speaker_mapping`**: (Required for `sanitized` or `translated` corpora) An array of objects that serves as the secure lookup table, mapping anonymized hashes back to their original source information. Storing it here ensures that the mapping is intrinsically tied to the specific corpus it describes, enhancing provenance.
+
 ---
 
-## 4. Best Practice: The `corpus.md` Manifest
+## Part III: Corpus States and Best Practices
 
-For experiments requiring detailed, file-level metadata (e.g., for testing a hypothesis against pre-categorized data), we recommend creating a `corpus.md` manifest inside the specific corpus directory you are analyzing.
+### 1. The "Corpus State" Methodology
 
-*   **Example Location**: `corpus_sanitized/corpus.md`
-*   **Content**: A YAML file listing metadata for each file in that directory. The filenames in the manifest MUST match the filenames in the directory (i.e., hashed names for a sanitized corpus).
+For rigorous bias analysis, we recommend preparing your corpus in multiple states, each in its own directory with its own `corpus.md` file.
 
-#### **Schema**
-```yaml
-files:
-  - name: 9c759f7025a4.txt
-    expert_categorization: "statement_of_principle"
-    political_party: "Republican"
-  - name: cccec508db40.txt
-    expert_categorization: "legislative_action"
-    political_party: "Democrat"
-``` 
+*   **`/corpus_original/`**: Contains raw source texts and a `corpus.md` with an empty `speaker_mapping`.
+*   **`/corpus_sanitized/`**: Contains sanitized texts with hashed filenames and a `corpus.md` with a complete `speaker_mapping`.
+*   **`/corpus_translated/`**: Contains translated texts with hashed filenames and a corresponding `corpus.md`.
+
+An experiment is run against a specific corpus state by pointing to its directory in the `experiment.md`.
+
+### 2. Sanitization and Hashing
+
+*   **Goal**: To remove all **Identity Vectors** (speaker names, locations, etc.) while preserving the core **Rhetorical Architecture**.
+*   **Process**: The exact prompts used for sanitization MUST be documented in the narrative section of the `corpus.md` for that corpus state.
+*   **Tooling**: A reference script for generating hashed filenames is available in `scripts/hash_generator.py`.
+
+### 3. Security
+
+By embedding the `speaker_mapping` within the `corpus.md` appendix, we ensure it is never processed as part of the corpus text itself. The orchestrator is responsible for parsing this appendix and providing the mapping data to the final synthesis step, but it is never sent to the `AnalysisAgent`'s LLM call. This prevents accidental de-anonymization during analysis. 

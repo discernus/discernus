@@ -15,11 +15,12 @@ from .provider_parameter_manager import ProviderParameterManager
 import time
 import os
 import asyncio
+from .base_gateway import BaseGateway
 
 # Add moderation import
 from litellm import moderation
 
-class LLMGateway:
+class LLMGateway(BaseGateway):
     """
     A unified gateway for making calls to various Large Language Models (LLMs)
     through the LiteLLM library. It includes logic for intelligent model fallback
@@ -51,7 +52,10 @@ class LLMGateway:
                 if provider_config.get("requires_pre_moderation"):
                     mod_response = moderation(input=prompt)
                     if mod_response and mod_response.results and mod_response.results[0].flagged:
-                        flagged_categories = [category for category, flagged in mod_response.results[0].categories.__dict__.items() if flagged]
+                        categories = mod_response.results[0].categories
+                        flagged_categories = []
+                        if categories:
+                            flagged_categories = [category for category, flagged in categories.items() if flagged]
                         error_msg = f"Prompt flagged by moderation API for categories: {', '.join(flagged_categories)}"
                         return "", {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
 

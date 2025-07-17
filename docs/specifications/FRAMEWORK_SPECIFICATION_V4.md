@@ -93,14 +93,59 @@ LLMs excel at natural conversation, not technical specifications. Your prompts s
 
 ### 1. File Structure
 
-A framework file MUST be a standard Markdown (`.md`) file containing:
+A framework file MUST be a standard Markdown (`.md`) file containing two distinct sections:
 
-1. **Human-Readable Methodology**: Standard Markdown documentation
-2. **Machine-Executable Configuration**: Single YAML block beginning with `# --- Discernus Configuration ---`
+1.  **The Narrative (Human-Focused)**: The main body of the file. This section uses standard Markdown to explain the framework's theory, objectives, methodology, and references in clear, human-readable prose. It is the conceptual heart of the document.
+2.  **The Appendix (Machine-Focused)**: A single, collapsible appendix at the end of the file that contains a single, unambiguous JSON object. This JSON block is the **single source of truth for execution** and MUST be the only machine-parsable configuration in the file.
 
-### 2. LLM Processing Optimization
+### 2. The JSON Appendix: The Single Source of Truth
 
-Structure your `analysis_prompt` using this five-phase approach:
+The appendix MUST begin with `<details><summary>Machine-Readable Configuration</summary>` and end with `</details>`. It MUST contain a single JSON code block that defines the execution contract.
+
+#### Required JSON Schema
+
+```json
+{
+  "name": "unique_framework_name",
+  "version": "v4.0",
+  "display_name": "Human-Readable Framework Name",
+  "analysis_variants": {
+    "default": {
+      "description": "Complete implementation of the framework methodology",
+      "analysis_prompt": "Your five-phase prompt that implements ALL methodology requirements from your documentation, including evidence requirements, confidence assessments, and reasoning explanations."
+    },
+    "descriptive_only": {
+      "description": "Simplified version focusing on descriptive elements",
+      "analysis_prompt": "Simplified prompt that still maintains coherence with your methodology."
+    }
+  },
+  "calculation_spec": {
+    "composite_score": "(0.25 * dimension_1) + (0.75 * dimension_2)"
+  },
+  "output_contract": {
+    "schema": {
+      "worldview": "string",
+      "scores": "object",
+      "evidence": "object",
+      "confidence": "object",
+      "reasoning": "object"
+    },
+    "instructions": "IMPORTANT: Your response MUST be a single, valid JSON object and nothing else. Do not include any text, explanations, or markdown code fences before or after the JSON object."
+  }
+}
+```
+
+**Component Explanations**:
+*   **`name`, `version`, `display_name`**: Basic metadata for identification.
+*   **`analysis_variants`**: A dictionary of prompts. A `default` key is required. This allows a single framework to support multiple analysis types.
+*   **`calculation_spec`**: (Optional) A dictionary of formulas for the `CalculationAgent` to execute on the `scores` data.
+*   **`output_contract`**: (Required) A formal definition of the expected JSON output from the `AnalysisAgent`'s LLM call.
+    *   **`schema`**: Defines the required top-level keys and their expected data types.
+    *   **`instructions`**: Provides a boilerplate instruction that MUST be appended to every `analysis_prompt` to ensure reliable, clean JSON output.
+
+### 3. LLM Processing Optimization
+
+When constructing your `analysis_prompt`, follow this five-phase approach, and remember to append the `output_contract.instructions` at the very end.
 
 **Phase 1: Cognitive Priming**
 ```
@@ -132,67 +177,7 @@ For each dimension, follow this process:
 
 **Phase 5: Output Specification**
 ```
-Return a single JSON object with:
-- [Field 1]: [Specific requirements]
-- [Field 2]: [Specific requirements]
-- evidence: [Specific format for quotations and reasoning]
-```
-
-### 3. Required YAML Schema
-
-```yaml
-# --- Discernus Configuration ---
-
-# REQUIRED: Basic metadata
-name: unique_framework_name
-version: v4.0
-display_name: "Human-Readable Framework Name"
-
-# REQUIRED: Analysis variants implementing your methodology
-analysis_variants:
-  
-  default:
-    description: "Complete implementation of the framework methodology"
-    analysis_prompt: |
-      [Your five-phase prompt that implements ALL methodology requirements
-       from your documentation, including evidence requirements, confidence 
-       assessments, and reasoning explanations]
-
-  # OPTIONAL: Additional variants for specific use cases
-  descriptive_only:
-    description: "Simplified version focusing on descriptive elements"
-    analysis_prompt: |
-      [Simplified prompt that still maintains coherence with your methodology]
-
-# OPTIONAL: Post-analysis calculations
-calculation_spec:
-  composite_score: "(0.25 * dimension_1) + (0.75 * dimension_2)"
-```
-
-### 4. Evidence Requirements Integration
-
-**CRITICAL**: If your methodology specifies evidence requirements, your prompt must generate them:
-
-```yaml
-analysis_prompt: |
-  You are an expert analyst...
-  
-  For each score, you must provide:
-  - At least 3 direct quotations supporting your assessment
-  - Confidence rating (0.0-1.0) based on evidence strength
-  - Evidence type classification (lexical/semantic/rhetorical)
-  - Brief reasoning connecting evidence to score
-  
-  Return JSON with:
-  {
-    "scores": {"dimension_1": 0.5, "dimension_2": -0.3},
-    "evidence": {
-      "dimension_1": ["quote1", "quote2", "quote3"],
-      "dimension_2": ["quote4", "quote5", "quote6"]
-    },
-    "confidence": {"dimension_1": 0.8, "dimension_2": 0.6},
-    "reasoning": {"dimension_1": "explanation...", "dimension_2": "explanation..."}
-  }
+Return a single JSON object that conforms to the schema defined in the output_contract.
 ```
 
 ---
@@ -251,7 +236,8 @@ This specification document serves as a meta-prompt. Researchers can:
 I need to create a Discernus framework for analyzing political speeches 
 for authoritarian vs democratic discourse markers. Please help me create 
 a framework file that follows the Framework Specification v4.0 principles, 
-ensuring perfect coherence between documentation and execution.
+ensuring the final output contains a valid JSON appendix with a clear 
+output_contract.
 ```
 
 ---
