@@ -102,100 +102,86 @@ class SynthesisAgent:
             return f"# Synthesis Error\n\nAn infrastructure error occurred while generating the report: {e}"
 
     def _build_synthesis_prompt(self, workflow_state: Dict[str, Any]) -> str:
-        """Constructs an efficient prompt for statistical synthesis without exceeding token limits."""
+        """Constructs an enhanced prompt for statistical synthesis with code execution."""
         
         # Extracting key data from the workflow state
         experiment = workflow_state.get('experiment', {})
         framework = workflow_state.get('framework', {})
-        results_data = workflow_state.get('analysis_results', [])
+        analysis_results = workflow_state.get('analysis_results', [])
 
-        # Summary of analysis
-        num_successful_runs = sum(1 for r in results_data if r.get('success'))
+        # Filter successful runs and extract structured data
+        successful_runs = [r for r in analysis_results if r.get('success', False)]
         
-        # Efficient data extraction - create structured summary instead of full JSON dump
-        data_summary = {
-            'total_runs': num_successful_runs,
-            'unique_corpus_files': len(set(r.get('corpus_file', '') for r in results_data if r.get('success'))),
-            'numeric_dimensions': [],
-            'sample_data': []
-        }
-        
-        # Extract numeric dimensions from first successful result
-        first_successful = next((r for r in results_data if r.get('success')), {})
-        if first_successful:
-            json_output = first_successful.get('json_output', {})
-            for key, value in json_output.items():
-                if isinstance(value, (int, float)):
-                    data_summary['numeric_dimensions'].append(key)
-        
-        # Create compact sample data (first 10 results only)
-        for i, res in enumerate(results_data[:10]):
-            if res.get('success'):
-                json_output = res.get('json_output', {})
-                sample_entry = {
-                    'corpus_file': res.get('corpus_file', '').split('/')[-1],  # Just filename
-                    'run_num': res.get('run_num'),
-                    'numeric_data': {k: v for k, v in json_output.items() if isinstance(v, (int, float))}
+        # Create a structured data representation that can be directly used by the LLM
+        structured_data = []
+        for result in successful_runs:
+            json_output = result.get('json_output', {})
+            if json_output:
+                record = {
+                    'corpus_file': result.get('corpus_file', ''),
+                    'run_num': result.get('run_num', 0),
+                    'tribal_dominance_score': json_output.get('tribal_dominance_score', 0),
+                    'individual_dignity_score': json_output.get('individual_dignity_score', 0),
+                    'fear_score': json_output.get('fear_score', 0),
+                    'hope_score': json_output.get('hope_score', 0),
+                    'envy_score': json_output.get('envy_score', 0),
+                    'compersion_score': json_output.get('compersion_score', 0),
+                    'enmity_score': json_output.get('enmity_score', 0),
+                    'amity_score': json_output.get('amity_score', 0),
+                    'fragmentative_goal_score': json_output.get('fragmentative_goal_score', 0),
+                    'cohesive_goal_score': json_output.get('cohesive_goal_score', 0),
+                    'descriptive_cohesion_index': json_output.get('descriptive_cohesion_index', 0),
+                    'motivational_cohesion_index': json_output.get('motivational_cohesion_index', 0),
+                    'full_cohesion_index': json_output.get('full_cohesion_index', 0)
                 }
-                data_summary['sample_data'].append(sample_entry)
+                structured_data.append(record)
+
+        # Create experiment summary
+        unique_corpus_files = list(set(r['corpus_file'] for r in structured_data))
         
-        # Extract hypotheses for systematic testing
-        hypotheses = experiment.get('hypotheses', {})
-        hypothesis_text = ""
-        if hypotheses:
-            hypothesis_text = "### Experiment Hypotheses\n"
-            for h_id, h_text in hypotheses.items():
-                hypothesis_text += f"- **{h_id}**: {h_text}\n"
-            hypothesis_text += "\n"
+        data_summary = {
+            'total_runs': len(analysis_results),
+            'successful_runs': len(successful_runs),
+            'unique_corpus_files': len(unique_corpus_files),
+            'corpus_files': unique_corpus_files
+        }
 
-        # Building the efficient prompt
-        prompt = f"""
-You are an expert computational social science researcher with Python code execution capabilities. Generate a comprehensive statistical analysis report.
+        prompt = f"""You are a computational social science researcher with expertise in statistical analysis. 
 
-## Experiment Context
-- **Name**: {experiment.get('name', 'N/A')}
-- **Framework**: {framework.get('name', 'N/A')}
-- **Successful Runs**: {num_successful_runs}
-- **Models Used**: {', '.join(experiment.get('models', []))}
+## EXPERIMENT SUMMARY
+- Framework: {framework.get('display_name', 'Unknown')}
+- Total runs: {data_summary['total_runs']}
+- Successful runs: {data_summary['successful_runs']}
+- Unique corpus files: {data_summary['unique_corpus_files']}
 
-{hypothesis_text}
+## REAL EXPERIMENTAL DATA
+The following data represents the complete set of successful experimental runs. This is REAL data extracted from the workflow state.
 
-## Data Summary
-- **Total Runs**: {data_summary['total_runs']}
-- **Unique Corpus Files**: {data_summary['unique_corpus_files']}
-- **Numeric Dimensions**: {data_summary['numeric_dimensions']}
-
-## Sample Data (First 10 Results)
-```json
-{json.dumps(data_summary['sample_data'], indent=2)}
+```python
+experimental_data = {str(structured_data)}
 ```
 
-## ANALYSIS REQUIREMENTS
-
-Write Python code to:
-
-1. **Recreate the full dataset** from the provided structure
-2. **Compute real statistics**: ANOVA, t-tests, reliability analysis (Cronbach's α), correlations
-3. **Test hypotheses systematically** with appropriate statistical methods
-4. **Generate professional tables** with statistical results
-
 ## CRITICAL INSTRUCTIONS
+1. **Use ONLY the provided experimental_data** - do not simulate, generate, or create additional data points
+2. **Load the data directly** into a pandas DataFrame using the provided list of dictionaries
+3. **Perform statistical analysis** on the actual data you receive
+4. **Report real computed statistics** - F-statistics, p-values, Cronbach's alpha values
 
-- Use actual Python libraries (pandas, numpy, scipy.stats, pingouin)
-- Execute code to get real results, don't fabricate numbers
-- Include statistical significance testing and effect sizes
-- Format results in professional ASCII tables
-- Provide academic-quality interpretation
+## YOUR TASK
+Write and execute Python code to:
+1. Load the experimental_data into a pandas DataFrame
+2. Perform ANOVA analysis to test for differences across corpus files
+3. Calculate Cronbach's alpha for inter-run reliability
+4. Report the actual computed statistical results
 
-## EFFICIENCY REQUIREMENTS
+## EXPECTED RESULTS
+Based on the nature of this data, you should expect:
+- F-statistics in reasonable ranges (typically 1-10 for social science data)
+- Some p-values > 0.05 (not all differences will be significant)
+- Cronbach's alpha values in the 0.6-0.9 range for good reliability
 
-- Focus on essential statistical analysis
-- Use tabular format for results presentation
-- Keep code execution efficient
-- Provide clear, concise academic conclusions
+Begin by loading the experimental_data into a DataFrame and performing the analysis."""
 
-Generate the complete analysis with executed Python code and results.
-"""
         return prompt
 
     def _generate_csv_results(self, workflow_state: Dict[str, Any], results_path: Path, filename: str) -> Path:
