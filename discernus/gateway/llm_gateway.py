@@ -9,6 +9,7 @@ of model capabilities, costs, or fallback logic.
 """
 
 import litellm
+from litellm.cost_calculator import completion_cost
 from typing import Dict, Any, Tuple, List, Optional
 from .model_registry import ModelRegistry
 from .provider_parameter_manager import ProviderParameterManager
@@ -85,10 +86,25 @@ class LLMGateway(BaseGateway):
                 
                 content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
                 usage_obj = getattr(response, 'usage', None)
+                
+                # Extract cost data from LiteLLM response
+                response_cost = 0.0
+                try:
+                    # LiteLLM provides cost in response._hidden_params["response_cost"]
+                    hidden_params = getattr(response, '_hidden_params', {})
+                    response_cost = hidden_params.get('response_cost', 0.0)
+                except:
+                    # Fallback: calculate cost using LiteLLM's completion_cost function
+                    try:
+                        response_cost = completion_cost(completion_response=response)
+                    except:
+                        response_cost = 0.0
+                
                 usage_data = {
                     "prompt_tokens": getattr(usage_obj, 'prompt_tokens', 0) if usage_obj else 0,
                     "completion_tokens": getattr(usage_obj, 'completion_tokens', 0) if usage_obj else 0,
-                    "total_tokens": getattr(usage_obj, 'total_tokens', 0) if usage_obj else 0
+                    "total_tokens": getattr(usage_obj, 'total_tokens', 0) if usage_obj else 0,
+                    "response_cost_usd": response_cost
                 }
                 
                 # Archive successful LLM call

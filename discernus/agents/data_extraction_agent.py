@@ -131,6 +131,7 @@ class DataExtractionAgent:
     def _extract_json_from_result(self, result: Dict[str, Any], archive_manager: Optional[LLMArchiveManager]) -> Dict[str, Any]:
         """
         Extract clean JSON from a single analysis result using LLM-to-LLM communication.
+        Enhanced with schema transformation to match framework output contracts.
         """
         # Get the raw response text
         raw_response = result.get("content", "") or result.get("raw_response", "") or str(result)
@@ -144,18 +145,21 @@ class DataExtractionAgent:
                 extracted_json = self._llm_extract_json(raw_response, attempt)
                 
                 if extracted_json:
+                    # Transform hierarchical JSON to flat format if needed
+                    transformed_json = self._transform_to_flat_schema(extracted_json)
+                    
                     # Success! Create enriched result
                     enriched_result = result.copy()
                     enriched_result.update({
                         'success': True,
                         'error': None,
-                        'json_output': extracted_json,
+                        'json_output': transformed_json,
                         'extraction_attempts': attempt + 1
                     })
                     
                     # Save extracted JSON to individual file if archive manager available
                     if archive_manager:
-                        self._save_extracted_json(archive_manager, result.get('agent_id', 'unknown'), extracted_json)
+                        self._save_extracted_json(archive_manager, result.get('agent_id', 'unknown'), transformed_json)
                     
                     return enriched_result
                     
@@ -240,6 +244,243 @@ CRITICAL REQUIREMENTS:
                 
         except Exception as e:
             print(f"⚠️ Failed to save extracted JSON for {agent_id}: {e}")
+
+    def _transform_to_flat_schema(self, hierarchical_json: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Transform hierarchical JSON to flat schema format expected by framework contracts.
+        
+        This method handles the common case where LLMs generate nested JSON like:
+        {
+          "Political Worldview Classification": {"Worldview": "Progressive"},
+          "Cohesive Flourishing Framework v4.1 Analysis": {
+            "Identity Axis": {
+              "Tribal Dominance": {"Score": 0.1, "Confidence": 0.8, "Evidence": ["quote1", "quote2"]}
+            }
+          }
+        }
+        
+        And transforms it to the expected flat format:
+        {
+          "worldview": "Progressive",
+          "tribal_dominance_score": 0.1,
+          "tribal_dominance_confidence": 0.8,
+          "tribal_dominance_evidence": ["quote1", "quote2"]
+        }
+        """
+        flat_json = {}
+        
+        # Extract worldview from various possible locations
+        worldview = self._extract_worldview(hierarchical_json)
+        if worldview:
+            flat_json["worldview"] = worldview
+        
+        # Extract anchor scores, confidence, and evidence
+        anchor_data = self._extract_anchor_data(hierarchical_json)
+        flat_json.update(anchor_data)
+        
+        # Extract overall analysis confidence if available
+        overall_confidence = self._extract_overall_confidence(hierarchical_json)
+        if overall_confidence is not None:
+            flat_json["overall_analysis_confidence"] = overall_confidence
+        
+        # Extract competitive patterns if available
+        competitive_patterns = self._extract_competitive_patterns(hierarchical_json)
+        if competitive_patterns:
+            flat_json["competitive_patterns_observed"] = competitive_patterns
+        
+        # If no transformation was possible, return original
+        if not flat_json:
+            return hierarchical_json
+        
+        # If we only got a partial transformation, merge with original
+        if len(flat_json) < len(hierarchical_json):
+            # Check if original is already reasonably flat
+            if self._is_reasonably_flat(hierarchical_json):
+                return hierarchical_json
+            else:
+                # Merge transformed data with original
+                merged = hierarchical_json.copy()
+                merged.update(flat_json)
+                return merged
+            
+        return flat_json
+    
+    def _extract_worldview(self, data: Dict[str, Any]) -> Optional[str]:
+        """Extract worldview from hierarchical JSON."""
+        # Common patterns for worldview extraction
+        patterns = [
+            ["Political Worldview Classification", "Worldview"],
+            ["Worldview Classification", "Worldview"],
+            ["worldview"],
+            ["Worldview"],
+            ["political_worldview"],
+            ["classification", "worldview"]
+        ]
+        
+        for pattern in patterns:
+            value = self._deep_get(data, pattern)
+            if value and isinstance(value, str):
+                return value.strip()
+        
+        return None
+    
+    def _extract_anchor_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract all anchor scores, confidence, and evidence from hierarchical JSON."""
+        anchor_mapping = {
+            "Tribal Dominance": "tribal_dominance",
+            "Individual Dignity": "individual_dignity", 
+            "Fear": "fear",
+            "Hope": "hope",
+            "Envy": "envy",
+            "Compersion": "compersion",
+            "Enmity": "enmity", 
+            "Amity": "amity",
+            "Fragmentative Goals": "fragmentative_goal",
+            "Cohesive Goals": "cohesive_goal"
+        }
+        
+        result = {}
+        
+        for anchor_name, field_prefix in anchor_mapping.items():
+            # Look for anchor data in various locations
+            anchor_data = self._find_anchor_data(data, anchor_name)
+            
+            if anchor_data:
+                # Extract score
+                score = self._extract_numeric_field(anchor_data, ["Score", "score", "value"])
+                if score is not None:
+                    result[f"{field_prefix}_score"] = score
+                
+                # Extract confidence
+                confidence = self._extract_numeric_field(anchor_data, ["Confidence", "confidence", "certainty"])
+                if confidence is not None:
+                    result[f"{field_prefix}_confidence"] = confidence
+                
+                # Extract evidence
+                evidence = self._extract_array_field(anchor_data, ["Evidence", "evidence", "quotes", "examples"])
+                if evidence:
+                    result[f"{field_prefix}_evidence"] = evidence
+        
+        return result
+    
+    def _find_anchor_data(self, data: Dict[str, Any], anchor_name: str) -> Optional[Dict[str, Any]]:
+        """Find anchor data by searching through nested structures."""
+        # Search patterns for different nesting structures
+        search_paths = [
+            [anchor_name],
+            ["Cohesive Flourishing Framework v4.1 Analysis", "Identity Axis", anchor_name],
+            ["Cohesive Flourishing Framework v4.1 Analysis", "Fear-Hope Axis", anchor_name],
+            ["Cohesive Flourishing Framework v4.1 Analysis", "Envy-Compersion Axis", anchor_name],
+            ["Cohesive Flourishing Framework v4.1 Analysis", "Enmity-Amity Axis", anchor_name],
+            ["Cohesive Flourishing Framework v4.1 Analysis", "Goal Axis", anchor_name],
+            ["Analysis", "Identity Axis", anchor_name],
+            ["Analysis", "Fear-Hope Axis", anchor_name],
+            ["Analysis", "Envy-Compersion Axis", anchor_name],
+            ["Analysis", "Enmity-Amity Axis", anchor_name], 
+            ["Analysis", "Goal Axis", anchor_name],
+            ["Identity Axis", anchor_name],
+            ["Fear-Hope Axis", anchor_name],
+            ["Envy-Compersion Axis", anchor_name],
+            ["Enmity-Amity Axis", anchor_name],
+            ["Goal Axis", anchor_name]
+        ]
+        
+        for path in search_paths:
+            result = self._deep_get(data, path)
+            if result and isinstance(result, dict):
+                return result
+        
+        return None
+    
+    def _extract_numeric_field(self, data: Dict[str, Any], field_names: List[str]) -> Optional[float]:
+        """Extract numeric field from data using multiple possible field names."""
+        for field_name in field_names:
+            if field_name in data:
+                try:
+                    return float(data[field_name])
+                except (ValueError, TypeError):
+                    continue
+        return None
+    
+    def _extract_array_field(self, data: Dict[str, Any], field_names: List[str]) -> Optional[List[str]]:
+        """Extract array field from data using multiple possible field names."""
+        for field_name in field_names:
+            if field_name in data:
+                value = data[field_name]
+                if isinstance(value, list):
+                    return value
+                elif isinstance(value, str):
+                    return [value]
+        return None
+    
+    def _extract_overall_confidence(self, data: Dict[str, Any]) -> Optional[float]:
+        """Extract overall analysis confidence."""
+        patterns = [
+            ["overall_analysis_confidence"],
+            ["Overall Analysis Confidence"],
+            ["overall_confidence"],
+            ["confidence"],
+            ["Overall Confidence"]
+        ]
+        
+        for pattern in patterns:
+            value = self._deep_get(data, pattern)
+            if value is not None:
+                try:
+                    return float(value)
+                except (ValueError, TypeError):
+                    continue
+        
+        return None
+    
+    def _extract_competitive_patterns(self, data: Dict[str, Any]) -> Optional[str]:
+        """Extract competitive patterns description."""
+        patterns = [
+            ["competitive_patterns_observed"],
+            ["Competitive Patterns Observed"],
+            ["competitive_patterns"],
+            ["patterns"],
+            ["Competitive Patterns"]
+        ]
+        
+        for pattern in patterns:
+            value = self._deep_get(data, pattern)
+            if value and isinstance(value, str):
+                return value.strip()
+        
+        return None
+    
+    def _deep_get(self, data: Dict[str, Any], path: List[str]) -> Any:
+        """Safely get nested dictionary value by path."""
+        current = data
+        for key in path:
+            if isinstance(current, dict) and key in current:
+                current = current[key]
+            else:
+                return None
+        return current
+    
+    def _is_reasonably_flat(self, data: Dict[str, Any]) -> bool:
+        """Check if data structure is already reasonably flat and doesn't need transformation."""
+        if not isinstance(data, dict):
+            return True
+            
+        # Check if it has nested objects more than 2 levels deep
+        max_depth = self._get_max_depth(data)
+        return max_depth <= 2
+    
+    def _get_max_depth(self, data: Dict[str, Any], current_depth: int = 1) -> int:
+        """Get maximum nesting depth of a dictionary."""
+        if not isinstance(data, dict):
+            return current_depth
+            
+        max_depth = current_depth
+        for value in data.values():
+            if isinstance(value, dict):
+                depth = self._get_max_depth(value, current_depth + 1)
+                max_depth = max(max_depth, depth)
+                
+        return max_depth
 
     def _get_extraction_prompt(self, attempt: int = 0) -> str:
         """
