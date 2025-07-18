@@ -4,11 +4,12 @@ Discernus CLI - Computational Text Analysis Platform
 ===================================================
 
 THIN Command-line interface for Discernus computational text analysis platform.
-Provides validate and execute commands for systematic computational research.
+Provides validate, execute, and resume commands for systematic computational research.
 
 USAGE:
     discernus validate ./my_project     # Validate project structure and specifications
     discernus execute ./my_project      # Execute validated project with dynamic orchestration
+    discernus resume ./my_project       # Resume interrupted experiment from latest state
     discernus list-frameworks           # List available analytical frameworks
     discernus version                    # Show version information
 
@@ -23,7 +24,7 @@ import yaml
 import re
 import json
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import datetime
 import getpass
 import unittest
@@ -413,6 +414,230 @@ def test(pattern: str):
     else:
         click.secho("❌ Some tests failed.", fg='red')
         sys.exit(1)
+
+@discernus.command()
+@click.argument('project_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--state-file', type=click.Path(exists=True, file_okay=True, dir_okay=False), 
+              help='Specific state file to resume from')
+@click.option('--from-step', type=int, help='Step number to resume from (1-based)')
+@click.option('--dry-run', is_flag=True, help='Show what would be resumed without executing')
+@click.option('--list-states', is_flag=True, help='List available state files for resumption')
+def resume(project_path: str, state_file: str, from_step: int, dry_run: bool, list_states: bool):
+    """
+    Resume an interrupted Discernus experiment from a saved state
+    
+    PROJECT_PATH: Path to the project directory containing the interrupted experiment
+    
+    Resumes workflow execution from the latest state file or a specified state file.
+    Automatically detects the last completed step and continues from there.
+    
+    Examples:
+        discernus resume ./projects/my_experiment
+        discernus resume ./projects/my_experiment --state-file state_after_step_2.json
+        discernus resume ./projects/my_experiment --from-step 3
+        discernus resume ./projects/my_experiment --dry-run
+        discernus resume ./projects/my_experiment --list-states
+    """
+    click.echo("🔄 Discernus Experiment Resume")
+    click.echo("=" * 40)
+    
+    project_dir = Path(project_path)
+    
+    # Handle --list-states option
+    if list_states:
+        _list_available_states(project_dir)
+        return
+    
+    # Find state file
+    if state_file:
+        state_file_path = Path(state_file)
+        click.echo(f"📂 Using specified state file: {state_file_path}")
+    else:
+        state_file_path = _find_latest_state_file(project_dir)
+        if not state_file_path:
+            click.secho("❌ No state files found for resumption.", fg='red')
+            click.echo("💡 Run 'discernus resume PROJECT_PATH --list-states' to see available state files.")
+            sys.exit(1)
+        click.echo(f"📂 Using latest state file: {state_file_path}")
+    
+    # Load state data
+    try:
+        with open(state_file_path, 'r', encoding='utf-8') as f:
+            state_data = json.load(f)
+        click.echo(f"✅ Loaded state file with {len(state_data.keys())} top-level keys")
+    except Exception as e:
+        click.secho(f"❌ Failed to load state file: {e}", fg='red')
+        sys.exit(1)
+    
+    # Determine workflow steps and resume point
+    workflow_steps = state_data.get('workflow', [])
+    if not workflow_steps:
+        click.secho("❌ No workflow steps found in state file.", fg='red')
+        sys.exit(1)
+    
+    # Determine resume step
+    if from_step:
+        resume_step = from_step
+        click.echo(f"🎯 Resuming from user-specified step: {resume_step}")
+    else:
+        resume_step = _determine_resume_step(state_file_path, workflow_steps)
+        click.echo(f"🎯 Auto-detected resume step: {resume_step}")
+    
+    # Validate resume step
+    if resume_step < 1 or resume_step > len(workflow_steps):
+        click.secho(f"❌ Invalid resume step: {resume_step}. Must be between 1 and {len(workflow_steps)}", fg='red')
+        sys.exit(1)
+    
+    # Show workflow status
+    click.echo(f"\n📋 Workflow Status ({len(workflow_steps)} steps total):")
+    for i, step in enumerate(workflow_steps):
+        agent_name = step.get('agent', 'Unknown')
+        if i < resume_step - 1:
+            status = "✅ COMPLETED"
+        elif i == resume_step - 1:
+            status = "🚀 RESUMING"
+        else:
+            status = "⏳ PENDING"
+        click.echo(f"   Step {i+1}: {agent_name} - {status}")
+    
+    # Handle dry run
+    if dry_run:
+        click.echo(f"\n🧪 DRY RUN: Would resume from step {resume_step}")
+        click.echo("   No actual execution will occur.")
+        return
+    
+    # Confirm execution
+    if not click.confirm(f"\n🚀 Resume experiment from step {resume_step}?"):
+        click.echo("Resume cancelled.")
+        return
+    
+    # Execute resumption
+    try:
+        click.echo(f"\n🔄 Resuming experiment from step {resume_step}...")
+        
+        # Initialize orchestrator
+        orchestrator = WorkflowOrchestrator(str(project_dir))
+        
+        # Execute resumption
+        result = _execute_resumption(orchestrator, state_data, resume_step, workflow_steps)
+        
+        click.secho(f"\n🎉 Experiment resume completed successfully!", fg='green')
+        click.echo(f"   Session ID: {result['session_id']}")
+        click.echo(f"   Status: {result['status']}")
+        
+        # Show results location
+        if 'session_results_path' in result:
+            results_path = result['session_results_path']
+            click.echo(f"   Results: {results_path}")
+        
+    except Exception as e:
+        click.secho(f"\n❌ Resume failed: {str(e)}", fg='red')
+        sys.exit(1)
+
+def _list_available_states(project_path: Path):
+    """List all available state files for resumption."""
+    click.echo(f"📁 Scanning for state files in: {project_path}")
+    
+    results_dir = project_path / "results"
+    if not results_dir.exists():
+        click.echo("❌ No results directory found.")
+        return
+    
+    state_files = []
+    for session_dir in results_dir.iterdir():
+        if session_dir.is_dir():
+            for state_file in session_dir.glob("state_after_step_*.json"):
+                state_files.append(state_file)
+    
+    if not state_files:
+        click.echo("❌ No state files found.")
+        return
+    
+    # Sort by modification time (newest first)
+    state_files.sort(key=lambda x: x.stat().st_mtime, reverse=True)
+    
+    click.echo(f"\n📋 Found {len(state_files)} state files:")
+    for i, state_file in enumerate(state_files[:10]):  # Show top 10
+        relative_path = state_file.relative_to(project_path)
+        mod_time = datetime.datetime.fromtimestamp(state_file.stat().st_mtime)
+        click.echo(f"   {i+1}. {relative_path} ({mod_time.strftime('%Y-%m-%d %H:%M:%S')})")
+    
+    if len(state_files) > 10:
+        click.echo(f"   ... and {len(state_files) - 10} more")
+
+def _find_latest_state_file(project_path: Path) -> Optional[Path]:
+    """Find the most recent state file in the project."""
+    results_dir = project_path / "results"
+    if not results_dir.exists():
+        return None
+    
+    state_files = []
+    for session_dir in results_dir.iterdir():
+        if session_dir.is_dir():
+            for state_file in session_dir.glob("state_after_step_*.json"):
+                state_files.append(state_file)
+    
+    if not state_files:
+        return None
+    
+    # Return the most recently modified state file
+    return max(state_files, key=lambda x: x.stat().st_mtime)
+
+def _determine_resume_step(state_file_path: Path, workflow_steps: List[Dict]) -> int:
+    """Determine which step to resume from based on the state file name."""
+    # Extract step number from filename like "state_after_step_1_AnalysisAgent.json"
+    filename = state_file_path.name
+    match = re.search(r'state_after_step_(\d+)_', filename)
+    if match:
+        completed_step = int(match.group(1))
+        return completed_step + 1  # Resume from next step
+    
+    # Fallback: resume from step 1
+    return 1
+
+def _execute_resumption(orchestrator: WorkflowOrchestrator, state_data: Dict[str, Any], 
+                       resume_step: int, workflow_steps: List[Dict]) -> Dict[str, Any]:
+    """Execute the resumption workflow."""
+    # Initialize session logging
+    orchestrator._init_session_logging()
+    
+    # Prime the workflow state
+    orchestrator.workflow_state = state_data
+    orchestrator.workflow_state['session_results_path'] = str(orchestrator.session_results_path)
+    orchestrator.workflow_state['conversation_id'] = orchestrator.conversation_id
+    
+    # Execute remaining steps
+    for i in range(resume_step - 1, len(workflow_steps)):
+        step_config = workflow_steps[i]
+        agent_name = step_config.get('agent')
+        
+        click.echo(f"\n🚀 Executing Step {i+1}: {agent_name}")
+        
+        try:
+            if not agent_name:
+                raise ValueError(f"Step {i+1} is missing the 'agent' key.")
+            
+            step_output = orchestrator._execute_step(agent_name, step_config)
+            
+            # Update the master workflow state
+            if step_output:
+                orchestrator.workflow_state.update(step_output)
+            
+            # Save state snapshot
+            orchestrator._save_state_snapshot(f"state_after_step_{i+1}_{agent_name}.json")
+            
+            click.echo(f"✅ Step {i+1} completed successfully")
+            
+        except Exception as e:
+            click.secho(f"❌ Step {i+1} failed: {str(e)}", fg='red')
+            raise e
+    
+    return {
+        "status": "success",
+        "session_id": orchestrator.session_id,
+        "session_results_path": str(orchestrator.session_results_path),
+        "final_state": orchestrator.workflow_state
+    }
 
 def _show_thin_check(component: str, check_result: Dict[str, Any]):
     """Show THIN compliance check results"""
