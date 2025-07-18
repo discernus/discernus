@@ -1,346 +1,501 @@
 # 📋 **Complete Post-Partum Recovery Plan: MVA System Architecture Overhaul**
 
-### **🎯 Executive Summary**
-Transform the MVA system from "infantile but alive" to production-ready by addressing all architectural gaps identified in the post-partum analysis.
+**Date**: 2025-01-17  
+**Status**: Ready for Implementation  
+**Priority**: Critical Path to Production Readiness  
+
+## 🎯 **Executive Summary**
+
+Transform the MVA system from "infantile but alive" to production-ready by addressing all architectural gaps identified in the post-partum analysis. This plan addresses both immediate needs (completing MVA Experiment 3) and long-term architectural improvements for fault tolerance, performance, and academic reproducibility.
 
 ---
 
-## **✅ COMPLETED ITEMS (For Posterity)**
+## ✅ **COMPLETED ITEMS (For Posterity)**
 
-### **Fault Tolerance Foundation** 
+### **Fault Tolerance Foundation**
 - **LiteLLM Cost Tracking**: Response cost capture from `response._hidden_params["response_cost"]`
+  - File: `discernus/gateway/llm_gateway.py` (lines 200-220)
+  - Status: ✅ IMPLEMENTED - costs tracked and stored in archive metadata
 - **DataExtractionAgent Schema Transformation**: LLM-to-LLM schema flattening with fallback logic
+  - File: `discernus/agents/data_extraction_agent.py` (lines 248-424)  
+  - Status: ✅ IMPLEMENTED - handles both hierarchical and flat JSON formats
 - **CalculationAgent Bug Fix**: API standardization to `success`/`json_output`/`error` format
+  - File: `discernus/agents/calculation_agent.py`
+  - Status: ✅ IMPLEMENTED - consistent API across all agents
 - **SynthesisAgent Enhancement**: Fixed via upstream data improvements
-- **Zero Data Loss Protection**: LLM Archive Manager with <1ms persistence
+  - Status: ✅ IMPLEMENTED - receives clean data from DataExtractionAgent
+- **Zero Data Loss Protection**: LLM Archive Manager provides tamper-evident storage
+  - Files: `discernus/core/llm_archive_manager.py`
+  - Status: ✅ IMPLEMENTED - all LLM interactions safely archived
+
+### **Documentation & Guidelines**
+- **Framework Development Guide**: Critical schema requirements documented
+  - File: `docs/guides/FRAMEWORK_DEVELOPMENT_GUIDE.md` (section 2.4)
+  - Status: ✅ IMPLEMENTED - emphasizes output_contract.schema importance
+- **Test Coverage Gap Analysis**: Root cause analysis of missed schema issues
+  - File: `pm/active_projects/TEST_COVERAGE_GAP_ANALYSIS.md`
+  - Status: ✅ IMPLEMENTED - comprehensive analysis of test-reality mismatch
 
 ---
 
-## **🚨 OUTSTANDING CRITICAL ISSUES**
+## 🚨 **PHASE 1: IMMEDIATE RESUMPTION (Complete Experiment 3)**
 
-### **Phase 1: Infrastructure Overhaul (HIGH PRIORITY)**
+**Priority**: **CRITICAL** - Complete the experiment  
+**Timeline**: 2-3 hours  
+**Owner**: Next agent  
+**Dependencies**: None (uses existing fixed agents)
 
-#### **1.1 LiteLLM Proxy Migration** 
-**Issue**: Currently pounding Vertex AI APIs with no rate limiting
-**Impact**: Risk of hitting API limits, inefficient resource usage
-**Solution**: Migrate to LiteLLM proxy for enterprise-grade traffic management
+### **Critical Insight: Fault Tolerance Sweet Spot**
+The DataExtractionAgent failed while processing exactly this data:
+- **Source**: `projects/MVA/experiments/experiment_3/results/2025-07-17_21-59-15/state_after_step_1_AnalysisAgent.json`
+- **Content**: 94 markdown-formatted CFF analyses in `analysis_results` object
+- **Format**: Rich markdown with embedded scores like `* **Tribal Dominance: 0.1 / 1.0**`
 
-**Tasks:**
-- [ ] Create LiteLLM proxy configuration with Vertex AI models
-- [ ] Update LLMGateway to use proxy endpoint instead of direct SDK
-- [ ] Configure rate limiting rules (RPM/TPM per model, per user)
-- [ ] Set up cost budgets and alerts
-- [ ] Test proxy with existing experiments
-- [ ] Document proxy configuration and deployment
+### **Implementation Tasks**
 
-**Expected Benefits**:
-- ✅ Automatic rate limiting and queuing
-- ✅ Built-in cost tracking and budgets  
-- ✅ Request/response logging
-- ✅ Circuit breaker patterns
-- ✅ Health checks and monitoring
+#### **1.1 Create State-Based Resumption Script**
+```python
+# File: resume_experiment_3.py
+import json
+from pathlib import Path
+from discernus.agents.data_extraction_agent import DataExtractionAgent
+from discernus.agents.calculation_agent import CalculationAgent
+from discernus.agents.synthesis_agent import SynthesisAgent
+from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.model_registry import get_model_registry
 
-#### **1.2 Session Architecture Redesign**
-**Issue**: Directory structure chaos, no centralized session management
-**Impact**: Difficult to track experiment progress, poor provenance
-**Solution**: Implement proper project/experiment/session hierarchy
-
-**Tasks:**
-- [ ] Design unified session directory structure
-- [ ] Create SessionManager class for centralized session handling
-- [ ] Implement session resumption capabilities
-- [ ] Consolidate scattered logs into single session folder
-- [ ] Update WorkflowOrchestrator to use new session structure
-- [ ] Migrate existing experiments to new structure
-
-**Expected Structure**:
+def resume_experiment_3():
+    # Load exact state where failure occurred
+    state_file = "projects/MVA/experiments/experiment_3/results/2025-07-17_21-59-15/state_after_step_1_AnalysisAgent.json"
+    with open(state_file, 'r') as f:
+        state = json.load(f)
+    
+    # Resume from step 2 with our fixed agents
+    model_registry = get_model_registry()
+    gateway = LLMGateway(model_registry)
+    
+    # Step 2: Data Extraction
+    data_extraction_agent = DataExtractionAgent(gateway)
+    extraction_result = data_extraction_agent.execute(state, {})
+    
+    # Step 3: Calculation
+    calculation_agent = CalculationAgent(gateway)
+    calculation_result = calculation_agent.execute(extraction_result, {})
+    
+    # Step 4: Synthesis
+    synthesis_agent = SynthesisAgent(gateway)
+    final_result = synthesis_agent.execute(calculation_result, {})
+    
+    return final_result
 ```
-projects/MVA/
-├── PROJECT_CHRONOLOG_MVA.jsonl
-└── experiments/
-    └── experiment_3/
-        ├── experiment_snapshot.md
-        ├── framework_snapshot.md
-        └── sessions/
-            └── session_20250117_215915/
-                ├── session_chronolog.jsonl
-                ├── llm_archive/
-                ├── extracted/
-                ├── results/
-                └── logs/
+
+#### **1.2 Validation & Testing**
+- **Test Schema Transformation**: Verify LLM-to-LLM transformation works on markdown content
+- **Test Field Name Generation**: Confirm CFF-compatible field names (`tribal_dominance_score`, etc.)
+- **Test Calculation Logic**: Verify cohesion indices calculate correctly using framework's `calculation_spec`
+- **Test Complete Workflow**: Steps 2-4 complete successfully with meaningful results
+
+#### **1.3 Success Criteria**
+- ✅ MVA Experiment 3 produces complete CSV with correct CFF field names
+- ✅ Cohesion indices calculate correctly (descriptive_cohesion_index, etc.)
+- ✅ Academic-quality final report generated
+- ✅ All 94 analysis results properly processed
+
+---
+
+## 🏗️ **PHASE 2: INCREMENTAL STATE PERSISTENCE (Critical Architectural Fix)**
+
+**Priority**: **HIGH** - Fix fault tolerance gap  
+**Timeline**: 1-2 days  
+**Owner**: Next agent  
+**Dependencies**: Phase 1 completion
+
+### **Critical Problem Identified**
+> "State_after_step json file did not arrive until Step 1 was completed. That makes it risky to rely on generally, IMHO... if these step_after json files are critical path, we need to make them fault tolerant."
+
+### **The Fault Tolerance Paradox**
+- **✅ Individual LLM Calls**: Written to disk immediately (fault tolerant)
+- **❌ Workflow State**: Only written at step completion (NOT fault tolerant)
+
+**Current Risk:**
+```
+Step 1: 47 LLM calls over 30 minutes
+├── Call 1-46: ✅ Safely on disk  
+├── **CRASH at Call 47** 💥
+└── Result: ❌ 29 minutes of work LOST (no state file exists)
 ```
 
-#### **1.3 Real-Time Logging System**
-**Issue**: Session logs buffer in memory, not fault tolerant
-**Impact**: Lost logs if crash occurs in first 5 minutes
-**Solution**: Implement append-only real-time logging
+### **Incremental State Architecture**
 
-**Tasks:**
-- [ ] Replace buffered logging with immediate disk writes
-- [ ] Implement <500ms persistence requirement
-- [ ] Add log rotation and compression
-- [ ] Create log recovery mechanisms
-- [ ] Test fault tolerance with simulated crashes
+#### **2.1 Enhance WorkflowOrchestrator**
+**File**: `discernus/orchestration/workflow_orchestrator.py`
 
-#### **1.4 THIN Schema Transformation**
-**Issue**: Hardcoded CFF patterns break with other frameworks/models
-**Impact**: System fails with Claude, GPT, or custom frameworks
-**Solution**: Replace THICK parsing with LLM-to-LLM transformation
+```python
+def _update_incremental_state(self, workflow_state, step_num, call_num):
+    """Update state file after each successful LLM call"""
+    state_file = self.session_path / f"state_step_{step_num}_partial.json"
+    
+    # Atomic write (write to .tmp, then rename)
+    temp_file = state_file.with_suffix('.tmp')
+    with open(temp_file, 'w') as f:
+        json.dump(workflow_state, f, indent=2)
+    temp_file.rename(state_file)
+    
+    # Update call counter
+    workflow_state['_incremental_state'] = {
+        'step_num': step_num,
+        'last_completed_call': call_num,
+        'timestamp': datetime.utcnow().isoformat()
+    }
+```
 
-**Tasks:**
-- [ ] Remove hardcoded CFF extraction patterns
-- [ ] Implement LLM-driven schema flattening
-- [ ] Create framework-agnostic transformation prompts
-- [ ] Test with multiple LLM providers (Claude, GPT, Gemini)
-- [ ] Add fallback mechanisms for transformation failures
+#### **2.2 State File Management Pattern**
+- **During Step**: `state_step_N_partial.json` (updated after each LLM call)
+- **Step Complete**: `state_after_step_N.json` (final state)
+- **Crash Recovery**: Load from latest `state_step_N_partial.json`
 
-### **Phase 2: User Experience Improvements (MEDIUM PRIORITY)**
+#### **2.3 Resumption Logic**
+```python
+def resume_from_partial_state(partial_state_file):
+    """Resume workflow from incremental state file"""
+    state = load_json(partial_state_file)
+    last_completed_call = state['_incremental_state']['last_completed_call']
+    
+    # Resume from next call
+    return resume_from_call(last_completed_call + 1)
+```
 
-#### **2.1 Human-Readable Score Display**
-**Issue**: Logs show "tantalizing" score previews but cut off juicy details
-**Impact**: Researchers can't monitor actual CFF scores during runs
-**Solution**: Show full CFF anchor scores in human-readable format
+#### **2.4 CLI Integration**
+```bash
+# Resume from partial state
+discernus_cli.py resume --from-partial-state "state_step_1_partial.json"
 
-**Tasks:**
-- [ ] Modify session logging to show complete scores
-- [ ] Format scores for human readability (not hash truncation)
-- [ ] Add confidence levels and supporting evidence
-- [ ] Create real-time score monitoring dashboard
-- [ ] Implement score threshold alerts
+# Resume from specific call number
+discernus_cli.py resume --from-call 47 --state-file "state_step_1_partial.json"
+```
 
-#### **2.2 True Conversation Logging**
-**Issue**: "Conversation log" contains workflow telemetry, not LLM interactions
-**Impact**: No record of actual prompts/responses for debugging
-**Solution**: Capture actual LLM conversations with full context
-
-**Tasks:**
-- [ ] Separate workflow telemetry from conversation logs
-- [ ] Capture complete prompt/response pairs
-- [ ] Include model metadata and timing information
-- [ ] Add conversation replay capabilities
-- [ ] Implement conversation search and filtering
-
-#### **2.3 Performance Parallelization**
-**Issue**: Sequential processing makes experiments painfully slow
-**Impact**: Hour-long experiments could run in 15-20 minutes
-**Solution**: Implement intelligent parallelization across the workflow
-
-**Tasks:**
-- [ ] Parallel LLM analysis calls within batches
-- [ ] Concurrent data extraction while analysis continues
-- [ ] Progressive CSV writing as results arrive
-- [ ] Batch processing for similar operations
-- [ ] Resource management to prevent API overload
-
-#### **2.4 Session Resumption System**
-**Issue**: No way to resume failed experiments from checkpoint
-**Impact**: Expensive LLM costs lost when experiments crash
-**Solution**: Implement robust session resumption with state management
-
-**Tasks:**
-- [ ] Create comprehensive state checkpointing
-- [ ] Implement "resume from step X" CLI functionality
-- [ ] Add experiment state validation
-- [ ] Create resume conflict resolution
-- [ ] Test resumption with various failure scenarios
-
-### **Phase 3: Academic Integrity & Provenance (MEDIUM PRIORITY)**
-
-#### **3.1 Forensic LLM Version Tracking**
-**Issue**: Only records generic model names, not specific versions
-**Impact**: Cannot reproduce experiments with exact model versions
-**Solution**: Capture complete model provenance metadata
-
-**Tasks:**
-- [ ] Record exact model version hashes and build dates
-- [ ] Capture model configuration parameters
-- [ ] Store model capability metadata
-- [ ] Implement model version validation
-- [ ] Create provenance export for academic papers
-
-#### **3.2 Statistical Plan Clarification**
-**Issue**: Experiment has "deprecated" statistical plan but calculations still needed
-**Impact**: CalculationAgent unclear about required calculations
-**Solution**: Clarify calculation requirements in framework specifications
-
-**Tasks:**
-- [ ] Update Framework Specification v4.0 for calculation clarity
-- [ ] Migrate existing experiments to new calculation format
-- [ ] Document calculation specification standards
-- [ ] Create calculation validation tools
-- [ ] Test calculation accuracy across frameworks
-
-#### **3.3 Comprehensive Cost Reporting**
-**Issue**: Individual call costs tracked but no session/experiment summaries
-**Impact**: Researchers can't budget or optimize experiment costs
-**Solution**: Implement hierarchical cost reporting and budgeting
-
-**Tasks:**
-- [ ] Session-level cost aggregation
-- [ ] Experiment-level cost reporting
-- [ ] Cost projection for planned experiments
-- [ ] Budget alerts and limits
-- [ ] Cost optimization recommendations
-
-### **Phase 4: System Reliability & Monitoring (LOW PRIORITY)**
-
-#### **4.1 Health Monitoring Dashboard**
-**Issue**: No visibility into system health or performance
-**Impact**: Issues discovered too late, poor operational awareness
-**Solution**: Implement comprehensive monitoring and alerting
-
-**Tasks:**
-- [ ] Create system health dashboard
-- [ ] Implement performance metrics collection
-- [ ] Add alerting for system issues
-- [ ] Create operational runbooks
-- [ ] Implement automated health checks
-
-#### **4.2 Error Classification & Recovery**
-**Issue**: All errors treated equally, no intelligent recovery
-**Impact**: Experiments fail unnecessarily on recoverable errors
-**Solution**: Implement error taxonomy and recovery strategies
-
-**Tasks:**
-- [ ] Classify error types (transient, permanent, recoverable)
-- [ ] Implement error-specific recovery strategies
-- [ ] Add intelligent retry mechanisms
-- [ ] Create error reporting and analytics
-- [ ] Implement graceful degradation patterns
+### **Success Criteria**
+- ✅ System never loses more than 1 LLM call's worth of work
+- ✅ Resume from exact failure point
+- ✅ State files written incrementally during execution
+- ✅ Atomic write operations prevent corruption
 
 ---
 
-## **🎯 IMPLEMENTATION ROADMAP**
+## 📊 **PHASE 3: TEST COVERAGE GAP REMEDIATION**
 
-### **Week 1-2: Critical Infrastructure (Phase 1)**
-**Priority**: HIGHEST - Addresses fault tolerance and basic reliability
-**Estimated Effort**: 40-50 hours
-**Key Deliverables**:
-- [ ] LiteLLM proxy fully operational
-- [ ] Session architecture redesigned
-- [ ] Real-time logging implemented
-- [ ] THIN schema transformation working
+**Priority**: **HIGH** - Prevent future failures  
+**Timeline**: 2-3 days  
+**Owner**: Next agent  
+**Dependencies**: Phase 2 completion
 
-### **Week 3-4: User Experience (Phase 2)**
-**Priority**: HIGH - Improves researcher workflow and monitoring
-**Estimated Effort**: 30-40 hours
-**Key Deliverables**:
-- [ ] Human-readable score display
-- [ ] True conversation logging
-- [ ] Performance parallelization
-- [ ] Session resumption system
+### **Root Cause Analysis**
+**Source**: `pm/active_projects/TEST_COVERAGE_GAP_ANALYSIS.md`
 
-### **Week 5-6: Academic Integrity (Phase 3)**
-**Priority**: MEDIUM - Ensures research reproducibility
-**Estimated Effort**: 20-30 hours
-**Key Deliverables**:
-- [ ] Forensic LLM version tracking
-- [ ] Statistical plan clarification
-- [ ] Comprehensive cost reporting
+**The Critical Discovery**: Our test suite completely missed the schema transformation issues that caused MVA Experiment 3 to catastrophically fail.
 
-### **Week 7-8: System Reliability (Phase 4)**
-**Priority**: LOW - Operational excellence and monitoring
-**Estimated Effort**: 15-25 hours
-**Key Deliverables**:
-- [ ] Health monitoring dashboard
-- [ ] Error classification & recovery
+### **Test-Reality Mismatch Problem**
 
----
+#### **What Tests Were Testing (IDEALIZED)**
+```json
+// Test prompt constrains LLM to produce flat JSON:
+"Return JSON: {\"worldview\": \"Progressive\", \"scores\": {\"identity\": 0.5}}"
+```
 
-## **📊 SUCCESS METRICS**
+#### **What Production Actually Produces (REALISTIC)**
+```json
+// Real LLM produces complex hierarchical structures:
+{
+  "Political Worldview Classification": {
+    "Worldview": "Progressive"
+  },
+  "Cohesive Flourishing Framework v4.1 Analysis": {
+    "Identity Axis": {
+      "Tribal Dominance": {"Score": 0.1, "Confidence": 0.8}
+    }
+  }
+}
+```
 
-### **Fault Tolerance Metrics**
-- [ ] Zero data loss during simulated crashes
-- [ ] <500ms log persistence latency
-- [ ] 100% session resumption success rate
-- [ ] Complete cost tracking accuracy
+### **Implementation Tasks**
 
-### **Performance Metrics**
-- [ ] 50%+ reduction in experiment runtime
-- [ ] 90%+ API success rate with rate limiting
-- [ ] Real-time score monitoring availability
-- [ ] Parallel processing efficiency gains
+#### **3.1 Realistic Test Data Generation**
+**File**: `discernus/tests/realistic_test_data_generator.py`
 
-### **Research Quality Metrics**
-- [ ] 100% LLM version traceability
-- [ ] Complete conversation provenance
-- [ ] Accurate cost reporting within 5%
-- [ ] Framework-agnostic compatibility
+```python
+def generate_realistic_llm_responses():
+    """Generate test responses that match actual LLM behavior"""
+    # Use actual LLM calls with constrained prompts
+    # Capture real hierarchical structures
+    # Save as test fixtures for consistent testing
+```
 
-### **User Experience Metrics**
-- [ ] Researchers can monitor scores in real-time
-- [ ] Failed experiments recoverable within 5 minutes
-- [ ] Session organization intuitive and clear
-- [ ] Error messages actionable and helpful
+#### **3.2 Schema Transformation Test Suite**
+**File**: `discernus/tests/schema_transformation_tests.py`
 
----
+```python
+def test_hierarchical_json_transformation():
+    """Test transformation with real hierarchical JSON structures"""
+    # Test CFF v4.1 hierarchical patterns
+    # Test Claude/GPT/Mistral different nesting patterns
+    # Test framework-agnostic transformation
+```
 
-## **🔧 DEFINITION OF DONE**
+#### **3.3 End-to-End Integration Tests**
+**File**: `discernus/tests/end_to_end_workflow_tests.py`
 
-This recovery plan will be considered **COMPLETE** when:
+```python
+def test_complete_workflow_with_realistic_data():
+    """Test full workflow with realistic LLM responses"""
+    # Use real LLM responses from test fixtures
+    # Test complete 4-step workflow
+    # Verify CSV output matches framework expectations
+```
 
-1. **MVA Experiment 3 can be resumed** from any checkpoint without data loss
-2. **LiteLLM proxy handles all API calls** with proper rate limiting and cost tracking
-3. **Session directory structure is clean** with centralized organization
-4. **Real-time logging works** with <500ms persistence and no buffering
-5. **Schema transformation is framework-agnostic** and works with Claude/GPT/Gemini
-6. **Researchers can monitor CFF scores** in real-time during experiments
-7. **Conversation logs contain actual LLM interactions** not just workflow telemetry
-8. **Experiments run 50% faster** through intelligent parallelization
-9. **Complete LLM version provenance** is captured for academic reproducibility
-10. **Cost reporting is accurate** at session, experiment, and project levels
+### **Success Criteria**
+- ✅ Tests use realistic LLM response patterns
+- ✅ Schema transformation tested with actual hierarchical structures
+- ✅ End-to-end workflow validated with real data
+- ✅ Framework-agnostic testing (CFF, PDAF, custom frameworks)
 
 ---
 
-## **🚨 CRITICAL SUCCESS FACTORS**
+## ⚡ **PHASE 4: PERFORMANCE & INFRASTRUCTURE UPGRADES**
 
-### **1. Prioritization Discipline**
-- Focus on Phase 1 (Infrastructure) before moving to Phase 2
-- Do NOT gold-plate - ship working solutions then iterate
-- Measure success against actual researcher workflow needs
+**Priority**: **MEDIUM** - Optimize for production use  
+**Timeline**: 3-4 days  
+**Owner**: Next agent  
+**Dependencies**: Phase 3 completion
 
-### **2. Backward Compatibility**
-- Existing experiments must work with new architecture
-- Preserve all existing data and provenance
-- Provide migration tools for legacy experiments
+### **4.1 LiteLLM Proxy Integration**
+**Problem**: Currently pounding Vertex AI with basic retry logic
+**Solution**: Free, open-source LiteLLM proxy with sophisticated traffic management
 
-### **3. Testing Strategy**
-- Each phase must pass end-to-end validation
-- Use existing MVA experiments as integration tests
-- Simulate failure scenarios to validate fault tolerance
+#### **Current Architecture (RISKY)**
+```python
+# Direct SDK calls - no rate limiting
+response = litellm.completion(model="vertex_ai/gemini-2.5-pro", ...)
+```
 
-### **4. Documentation Excellence**
-- Every change must update relevant documentation
-- Create migration guides for existing users
-- Document operational procedures for system administrators
+#### **Target Architecture (ROBUST)**
+```python
+# Proxy-based calls with automatic rate limiting
+response = litellm.completion(
+    model="vertex_ai/gemini-2.5-pro", 
+    api_base="http://localhost:4000",  # LiteLLM proxy
+    ...
+)
+```
+
+#### **Implementation Tasks**
+- **Setup LiteLLM Proxy**: Docker container with rate limiting configuration
+- **Update LLMGateway**: Route all calls through proxy instead of direct SDK
+- **Configuration**: RPM/TPM limits, cost budgets, fallback models
+- **Files**: `discernus/gateway/llm_gateway.py`, `docker-compose.yml`
+
+### **4.2 Parallel Processing Architecture**
+**Problem**: Sequential processing - no parallelization
+**Files**: `discernus/orchestration/workflow_orchestrator.py`
+
+#### **Current Issues**
+- No parallel LLM calls within agents
+- No parallel data extraction while analysis runs
+- No progressive CSV writing
+- Memory accumulation during long runs
+
+#### **Target Architecture**
+```python
+# Parallel LLM calls within agents
+async def process_corpus_parallel(self, corpus_files):
+    tasks = [self.analyze_text(file) for file in corpus_files]
+    results = await asyncio.gather(*tasks)
+    return results
+
+# Progressive CSV writing
+def append_result_to_csv(self, result, csv_file):
+    # Append each result as it completes
+    # No memory accumulation
+```
+
+### **4.3 Real-Time Logging & Monitoring**
+**Problem**: Multiple logging issues identified
+
+#### **4.3.1 Session Run Log Buffering**
+**File**: `discernus/core/session_logger.py`
+**Problem**: Logs accumulate in memory, written only at end
+**Solution**: Immediate append-only logging (<500ms persistence)
+
+#### **4.3.2 Human-Readable Log Truncation**
+**File**: `projects/MVA/experiments/experiment_3/logs/session_20250717_215915/session_20250717_215915_human.md`
+**Problem**: Shows analysis start but cuts off scores ("72b9..." truncation)
+**Solution**: Full CFF anchor scores, confidence values, evidence quotes
+
+#### **4.3.3 Conversation Log Mislabeling**
+**File**: `projects/MVA/experiments/experiment_3/conversations/conversation_20250717_215915_2efa762b.jsonl`
+**Problem**: Just workflow step tracking, NOT actual conversation content
+**Solution**: Capture actual LLM prompts, responses, and analysis content
+
+### **Success Criteria**
+- ✅ 10x performance improvement via parallelization
+- ✅ Automatic rate limiting and cost management
+- ✅ Real-time logging with <500ms persistence
+- ✅ Human-readable logs show actual analysis scores
 
 ---
 
-## **📝 HANDOFF NOTES FOR IMPLEMENTATION AGENT**
+## 📁 **PHASE 5: PROVENANCE & ACADEMIC COMPLIANCE**
 
-### **Start Here**
-1. **Read the MVA Experiment 3 disaster notes** in `projects/MVA/experiment_2/DISASTER_NOTES.md`
-2. **Review the LiteLLM proxy documentation** to understand rate limiting capabilities
-3. **Examine the current session structure** in `projects/MVA/experiments/experiment_3/results/`
-4. **Test the current schema transformation** with different LLM providers
+**Priority**: **MEDIUM** - Academic reproducibility  
+**Timeline**: 2-3 days  
+**Owner**: Next agent  
+**Dependencies**: Phase 4 completion
 
-### **Don't Touch**
-- **Existing experiment data** - preserve all costly LLM analysis results
-- **Core LLMGateway logic** - extend, don't replace
-- **ProjectChronolog system** - it's working correctly
+### **5.1 Directory Structure Standardization**
+**Problem**: "project/experiments/experiment/ and then everything is chaotic after that"
+**Current**: Multiple dated folders for single runs
 
-### **Quick Wins**
-- **LiteLLM proxy setup** - should work within 2-4 hours
-- **Real-time logging fix** - replace buffered writes with immediate appends
-- **Human-readable score display** - modify log formatting only
+#### **Current Structure (CHAOTIC)**
+```
+projects/MVA/experiments/experiment_3/results/
+├── 2025-07-17_21-59-14/     # Why two folders?
+├── 2025-07-17_21-59-15/     # For single run?
+└── [scattered files]
+```
 
-### **Complex Areas**
-- **Session architecture redesign** - requires careful data migration
-- **THIN schema transformation** - needs framework-agnostic LLM prompts
-- **Performance parallelization** - must respect API rate limits
+#### **Target Structure (ORGANIZED)**
+```
+projects/MVA/experiments/experiment_3/sessions/
+└── session_20250717_215915/
+    ├── state_files/
+    ├── llm_archive/
+    ├── results/
+    ├── logs/
+    └── conversations/
+```
+
+### **5.2 LLM Version Tracking**
+**Problem**: Only records `vertex_ai/gemini-2.5-pro` - no version numbers or dates
+**Files**: LLM archive metadata, provenance records
+
+#### **Current (INADEQUATE)**
+```json
+{"model": "vertex_ai/gemini-2.5-pro"}
+```
+
+#### **Target (REPRODUCIBLE)**
+```json
+{
+  "model": "vertex_ai/gemini-2.5-pro",
+  "version_hash": "gemini-2.5-pro-20250115",
+  "training_cutoff": "2024-10-15",
+  "api_version": "v1beta",
+  "safety_settings": {...},
+  "generation_config": {...}
+}
+```
+
+### **5.3 Statistical Plan Clarification**
+**Problem**: Experiment has `# DEPRECATED: statistical_plan` but calculations still needed
+**Files**: `projects/MVA/experiments/experiment_3/experiment_snapshot.md`
+
+#### **Resolution Strategy**
+- **Framework-driven calculations**: Use `calculation_spec` from framework
+- **Clear deprecation guidance**: Document what replaces statistical_plan
+- **Calculation transparency**: Show formula source in results
+
+### **Success Criteria**
+- ✅ Clean project/experiment/session directory structure
+- ✅ Complete LLM version tracking for reproducibility
+- ✅ Clear statistical calculation methodology
+- ✅ Academic-grade provenance documentation
 
 ---
 
-**Total Estimated Effort**: 105-145 hours across 8 weeks
-**Expected ROI**: Production-ready system with 50%+ performance improvement
-**Risk Level**: Medium - most changes are additive, not replacements 
+## 🔧 **PHASE 6: SCHEMA TRANSFORMATION REFORM (THIN-ify)**
+
+**Priority**: **LOW** - Architectural purity  
+**Timeline**: 1-2 days  
+**Owner**: Next agent  
+**Dependencies**: Phase 5 completion
+
+### **Critical Issue: Current Approach is THICK**
+**Problem**: Hardcoded CFF knowledge violates THIN principles
+**File**: `discernus/agents/data_extraction_agent.py`
+
+#### **Current THICK Pattern**
+```python
+# This is hardcoded knowledge about CFF structure - THICK!
+["Cohesive Flourishing Framework v4.1 Analysis", "Identity Axis", "Tribal Dominance"]
+```
+
+#### **What Happens with Claude/GPT/Mistral?**
+- Different nesting patterns
+- Different field names
+- Different hierarchical structures
+- → **Parsing errors as predicted**
+
+### **THIN Alternative Implementation**
+
+#### **6.1 Pure LLM-to-LLM Transformation**
+```python
+def _llm_flatten_json(self, hierarchical_json, framework_schema):
+    """Use LLM to flatten JSON in framework-agnostic way"""
+    prompt = f"""
+    Transform this hierarchical JSON to flat format.
+    Target schema: {framework_schema}
+    Input: {hierarchical_json}
+    Output flat JSON with exact field names from schema.
+    """
+    return llm_gateway.call_model("vertex_ai/gemini-2.5-flash", prompt)
+```
+
+#### **6.2 Framework-Driven Schema Specification**
+```python
+def _get_target_schema(self, framework_spec):
+    """Extract target field names from framework output_contract"""
+    return framework_spec.get('output_contract', {}).get('schema', {})
+```
+
+### **Success Criteria**
+- ✅ Zero hardcoded framework knowledge
+- ✅ Pure LLM-to-LLM transformation
+- ✅ Claude/GPT/Mistral compatibility
+- ✅ Framework-agnostic architecture
+
+---
+
+## 🎯 **IMPLEMENTATION PRIORITY MATRIX**
+
+| Phase | Priority | Timeline | Blocking | Impact |
+|-------|----------|----------|----------|---------|
+| **Phase 1** | CRITICAL | 2-3 hours | None | Complete Experiment 3 |
+| **Phase 2** | HIGH | 1-2 days | Phase 1 | Fix fault tolerance gap |
+| **Phase 3** | HIGH | 2-3 days | Phase 2 | Prevent future failures |
+| **Phase 4** | MEDIUM | 3-4 days | Phase 3 | Production performance |
+| **Phase 5** | MEDIUM | 2-3 days | Phase 4 | Academic compliance |
+| **Phase 6** | LOW | 1-2 days | Phase 5 | Architectural purity |
+
+## 📋 **HANDOFF CHECKLIST**
+
+### **For Next Agent - Phase 1 Implementation**
+- [ ] Review state file: `projects/MVA/experiments/experiment_3/results/2025-07-17_21-59-15/state_after_step_1_AnalysisAgent.json`
+- [ ] Test DataExtractionAgent with markdown content
+- [ ] Verify schema transformation produces CFF-compatible field names
+- [ ] Create `resume_experiment_3.py` script
+- [ ] Execute steps 2-4 of workflow
+- [ ] Validate final CSV and cohesion calculations
+
+### **Key Files to Understand**
+- `discernus/agents/data_extraction_agent.py` - Fixed schema transformation
+- `discernus/agents/calculation_agent.py` - Cohesion index calculations
+- `discernus/orchestration/workflow_orchestrator.py` - Workflow execution
+- `projects/MVA/experiments/experiment_3/framework_snapshot.md` - CFF framework spec
+
+### **Success Metrics**
+- **Immediate**: MVA Experiment 3 completes with valid results
+- **Medium-term**: System fault tolerance prevents data loss
+- **Long-term**: Production-ready academic research platform
+
+---
+
+**Ready for immediate implementation. All architectural analysis complete.** 
