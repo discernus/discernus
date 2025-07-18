@@ -546,8 +546,11 @@ def _list_available_states(project_path: Path):
     state_files = []
     for session_dir in results_dir.iterdir():
         if session_dir.is_dir():
+            # Look for both final and partial state files
             for state_file in session_dir.glob("state_after_step_*.json"):
                 state_files.append(state_file)
+            for partial_state_file in session_dir.glob("state_step_*_partial.json"):
+                state_files.append(partial_state_file)
     
     if not state_files:
         click.echo("❌ No state files found.")
@@ -574,8 +577,11 @@ def _find_latest_state_file(project_path: Path) -> Optional[Path]:
     state_files = []
     for session_dir in results_dir.iterdir():
         if session_dir.is_dir():
+            # Look for both final and partial state files
             for state_file in session_dir.glob("state_after_step_*.json"):
                 state_files.append(state_file)
+            for partial_state_file in session_dir.glob("state_step_*_partial.json"):
+                state_files.append(partial_state_file)
     
     if not state_files:
         return None
@@ -585,11 +591,19 @@ def _find_latest_state_file(project_path: Path) -> Optional[Path]:
 
 def _determine_resume_step(state_file_path: Path, workflow_steps: List[Dict]) -> int:
     """Determine which step to resume from based on the state file name."""
-    # Extract step number from filename like "state_after_step_1_AnalysisAgent.json"
     filename = state_file_path.name
-    match = re.search(r'state_after_step_(\d+)_', filename)
-    if match:
-        completed_step = int(match.group(1))
+    
+    # Handle partial state files like "state_step_1_partial.json"
+    partial_match = re.search(r'state_step_(\d+)_partial', filename)
+    if partial_match:
+        current_step = int(partial_match.group(1))
+        # For partial state files, resume from the same step since it may be incomplete
+        return current_step
+    
+    # Handle completed state files like "state_after_step_1_AnalysisAgent.json"
+    completed_match = re.search(r'state_after_step_(\d+)_', filename)
+    if completed_match:
+        completed_step = int(completed_match.group(1))
         return completed_step + 1  # Resume from next step
     
     # Fallback: resume from step 1
