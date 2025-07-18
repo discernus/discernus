@@ -29,6 +29,7 @@ from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.base_gateway import BaseGateway
 from discernus.core.conversation_logger import ConversationLogger
 from discernus.core.project_chronolog import get_project_chronolog, log_project_event
+from discernus.core.llm_archive_manager import LLMArchiveManager
 
 # No longer need to import specific agents, they will be loaded dynamically
 # from discernus.agents.analysis_agent import AnalysisAgent
@@ -169,6 +170,15 @@ class WorkflowOrchestrator:
              self.session_results_path.mkdir(exist_ok=True)
         else:
             self.session_results_path = Path(self.workflow_state['session_results_path'])
+        
+        # Initialize archive manager for immediate LLM response persistence
+        self.archive_manager = LLMArchiveManager(self.session_results_path)
+        
+        # Update gateway to use archive manager
+        if hasattr(self.gateway, 'archive_manager') and isinstance(self.gateway, LLMGateway):
+            # Cast to LLMGateway since BaseGateway doesn't have archive_manager
+            self.gateway.archive_manager = self.archive_manager
+            print("✅ LLM Gateway configured with archive manager for immediate persistence")
         
         self.logger = ConversationLogger(str(self.project_path))
 

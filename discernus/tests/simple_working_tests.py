@@ -153,9 +153,13 @@ class TestSimpleWorkflows(unittest.TestCase):
         # Verify JSON was extracted
         self.assertIn('analysis_results', result)
         self.assertEqual(len(result['analysis_results']), 1)
-        self.assertIn('json_output', result['analysis_results'][0])
-        self.assertEqual(result['analysis_results'][0]['json_output']['score'], 0.8)
-        self.assertEqual(result['analysis_results'][0]['json_output']['category'], 'positive')
+        self.assertIn('extracted_json', result['analysis_results'][0])
+        self.assertEqual(result['analysis_results'][0]['extracted_json']['score'], 0.8)
+        self.assertEqual(result['analysis_results'][0]['extracted_json']['category'], 'positive')
+        
+        # Verify extraction status
+        self.assertTrue(result['analysis_results'][0]['extraction_success'])
+        self.assertIsNone(result['analysis_results'][0]['extraction_error'])
 
 class TestUtilityFunctions(unittest.TestCase):
     """Test utility functions from the enhanced __init__.py."""
