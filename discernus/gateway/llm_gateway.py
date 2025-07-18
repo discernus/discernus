@@ -20,15 +20,19 @@ from .base_gateway import BaseGateway
 # Add moderation import
 from litellm import moderation
 
+# Add LLMArchiveManager import
+from discernus.core.llm_archive_manager import LLMArchiveManager
+
 class LLMGateway(BaseGateway):
     """
     A unified gateway for making calls to various Large Language Models (LLMs)
     through the LiteLLM library. It includes logic for intelligent model fallback
     in case of failures.
     """
-    def __init__(self, model_registry: ModelRegistry):
+    def __init__(self, model_registry: ModelRegistry, archive_manager: Optional[LLMArchiveManager] = None):
         self.model_registry = model_registry
         self.parameter_manager = ProviderParameterManager()
+        self.archive_manager = archive_manager
 
     def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, **kwargs) -> Tuple[str, Dict[str, Any]]:
         """
@@ -57,6 +61,19 @@ class LLMGateway(BaseGateway):
                         if categories:
                             flagged_categories = [category for category, flagged in categories.items() if flagged]
                         error_msg = f"Prompt flagged by moderation API for categories: {', '.join(flagged_categories)}"
+                        
+                        # Archive moderation failure
+                        if self.archive_manager:
+                            self.archive_manager.save_call(
+                                prompt=prompt,
+                                system_prompt=system_prompt,
+                                response="",
+                                model=current_model,
+                                usage_data={},
+                                success=False,
+                                error=error_msg
+                            )
+                        
                         return "", {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
 
                 print(f"Attempting call with {current_model} (Attempt {attempts}/{max_retries})...")
@@ -74,6 +91,17 @@ class LLMGateway(BaseGateway):
                     "total_tokens": getattr(usage_obj, 'total_tokens', 0) if usage_obj else 0
                 }
                 
+                # Archive successful LLM call
+                if self.archive_manager:
+                    self.archive_manager.save_call(
+                        prompt=prompt,
+                        system_prompt=system_prompt,
+                        response=content,
+                        model=current_model,
+                        usage_data=usage_data,
+                        success=True
+                    )
+                
                 return content, {"success": True, "model": current_model, "usage": usage_data, "attempts": attempts}
             
             except litellm.exceptions.APIConnectionError as e:
@@ -88,9 +116,36 @@ class LLMGateway(BaseGateway):
                     print(f"Retrying with fallback model: {fallback_model}")
                     current_model = fallback_model
                 else:
-                    return "", {"success": False, "error": f"All fallbacks failed. Last error on {current_model}: {str(e)}", "model": current_model, "attempts": attempts}
+                    error_msg = f"All fallbacks failed. Last error on {current_model}: {str(e)}"
+                    
+                    # Archive failed LLM call
+                    if self.archive_manager:
+                        self.archive_manager.save_call(
+                            prompt=prompt,
+                            system_prompt=system_prompt,
+                            response="",
+                            model=current_model,
+                            usage_data={},
+                            success=False,
+                            error=error_msg
+                        )
+                    
+                    return "", {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
         
-        return "", {"success": False, "error": f"Max retries exceeded for {model}", "model": current_model, "attempts": max_retries}
+        # Archive final max retries failure
+        final_error = f"Max retries exceeded for {model}"
+        if self.archive_manager:
+            self.archive_manager.save_call(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                response="",
+                model=current_model,
+                usage_data={},
+                success=False,
+                error=final_error
+            )
+        
+        return "", {"success": False, "error": final_error, "model": current_model, "attempts": max_retries}
 
     async def check_model_health(self, model_name: str) -> Dict[str, Any]:
         """
