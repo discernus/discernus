@@ -15,7 +15,7 @@ import json
 import yaml
 import importlib
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from datetime import datetime
 import os
 import re
@@ -90,7 +90,12 @@ class WorkflowOrchestrator:
                 if not agent_name:
                     raise ValueError(f"Workflow step {i} is missing the 'agent' key.")
                 
-                self._log_system_event("WORKFLOW_STEP_STARTED", {"step": i + 1, "agent": agent_name})
+                step_num = i + 1
+                
+                self._log_system_event("WORKFLOW_STEP_STARTED", {"step": step_num, "agent": agent_name})
+                
+                # Save incremental state before step execution
+                self._update_incremental_state(step_num, agent_name, {"status": "starting"})
                 
                 step_output = self._execute_step(agent_name, step_config)
                 
@@ -98,8 +103,13 @@ class WorkflowOrchestrator:
                 if step_output:
                     self.workflow_state.update(step_output)
                 
-                self._log_system_event("WORKFLOW_STEP_COMPLETED", {"step": i + 1, "agent": agent_name, "output_keys": list(step_output.keys()) if step_output else []})
-                self._save_state_snapshot(f"state_after_step_{i+1}_{agent_name}.json")
+                # Save incremental state after step execution
+                self._update_incremental_state(step_num, agent_name, {"status": "completed", "output_keys": list(step_output.keys()) if step_output else []})
+                
+                self._log_system_event("WORKFLOW_STEP_COMPLETED", {"step": step_num, "agent": agent_name, "output_keys": list(step_output.keys()) if step_output else []})
+                
+                # Save final state snapshot for the completed step
+                self._save_state_snapshot(f"state_after_step_{step_num}_{agent_name}.json")
 
             self._log_system_event("WORKFLOW_EXECUTION_COMPLETED", {"session_id": self.session_id})
             
@@ -191,6 +201,71 @@ class WorkflowOrchestrator:
                 json.dump(self.workflow_state, f, indent=2, default=str)
         except Exception as e:
             print(f"⚠️  Warning: Could not save state snapshot to {snapshot_path}: {e}")
+    
+    def _update_incremental_state(self, step_num: int, agent_name: str, incremental_data: Optional[Dict[str, Any]] = None):
+        """
+        Update incremental state file with partial progress during workflow execution.
+        
+        This method provides fault tolerance by saving state after each significant operation,
+        ensuring that no more than one operation's worth of work is lost in case of failure.
+        
+        Args:
+            step_num: Current step number (1-based)
+            agent_name: Name of the current agent
+            incremental_data: Optional additional data to include in the state
+        """
+        if not self.session_results_path:
+            return
+            
+        # Create incremental state tracking
+        incremental_state = {
+            'step_num': step_num,
+            'agent_name': agent_name,
+            'timestamp': datetime.now().isoformat(),
+            'partial_progress': True
+        }
+        
+        if incremental_data:
+            incremental_state['incremental_data'] = incremental_data
+        
+        # Add incremental state to workflow state
+        self.workflow_state['_incremental_state'] = incremental_state
+        
+        # Save partial state file with atomic write
+        partial_state_file = self.session_results_path / f"state_step_{step_num}_partial.json"
+        self._atomic_write_state(partial_state_file, self.workflow_state)
+        
+        # Log incremental state update
+        self._log_system_event("INCREMENTAL_STATE_UPDATE", {
+            "step": step_num,
+            "agent": agent_name,
+            "file": str(partial_state_file),
+            "timestamp": incremental_state['timestamp']
+        })
+    
+    def _atomic_write_state(self, file_path: Path, state_data: Dict[str, Any]):
+        """
+        Atomically write state data to prevent corruption.
+        
+        Uses the write-to-temp-then-rename pattern to ensure atomic operations.
+        If the process is interrupted, either the old file exists or the new file
+        exists, but never a partially written file.
+        """
+        try:
+            # Write to temporary file first
+            temp_file = file_path.with_suffix('.tmp')
+            with open(temp_file, 'w', encoding='utf-8') as f:
+                json.dump(state_data, f, indent=2, default=str)
+            
+            # Atomically rename temp file to final name
+            temp_file.rename(file_path)
+            
+        except Exception as e:
+            print(f"⚠️  Warning: Could not atomically write state to {file_path}: {e}")
+            # Clean up temp file if it exists
+            temp_file = file_path.with_suffix('.tmp')
+            if temp_file.exists():
+                temp_file.unlink()
 
     def _log_system_event(self, event_type: str, event_data: Dict[str, Any]):
         """Logs a system event to both the session log and the project chronolog."""
