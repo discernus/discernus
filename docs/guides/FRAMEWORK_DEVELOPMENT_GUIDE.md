@@ -315,6 +315,52 @@ Use your LLM conversation to verify:
 - **Edge Case Handling**: "What happens when a text shows mixed or contradictory signals?"
 - **Domain Specificity**: "How should this framework adapt to different sub-domains?"
 
+### 2.4. ⚠️ CRITICAL: Output Contract Schema Requirements
+
+**🚨 The `output_contract.schema` is NOT optional for production use:**
+
+```json
+{
+  "output_contract": {
+    "schema": {
+      "worldview": "string",
+      "sentiment_score": "number",
+      "toxicity_level": "number", 
+      "readability_index": "number",
+      "evidence_quotes": "array",
+      "confidence_rating": "number"
+    }
+  }
+}
+```
+
+**Why Schema Is Critical:**
+- **Framework Agnostic Processing**: Without schema, your framework gets CFF-style field names as fallback
+- **Exact Field Names**: The system generates exactly the field names you specify
+- **Data Type Preservation**: Ensures strings, numbers, arrays, and objects are handled correctly
+- **Downstream Compatibility**: CalculationAgent and SynthesisAgent rely on predictable field names
+
+**✅ Framework Naming Freedom:**
+- Use ANY field names you want: `"sentiment_score"`, `"toxicity_level"`, `"readability_index"`
+- The system adapts to YOUR naming conventions
+- No hardcoded assumptions about field meanings
+
+**✅ Supported Data Types:**
+- `"string"`: Text values like worldview classifications
+- `"number"`: Numeric scores, confidence ratings, indices
+- `"array"`: Evidence quotes, supporting examples, keyword lists
+- `"object"`: Nested data structures for complex frameworks
+
+**❌ What Happens Without Schema:**
+```json
+// Your framework produces: {"sentiment_analysis": {"positive": 0.8}}
+// Without schema: Gets transformed to "tribal_dominance_score" (CFF fallback)
+// With schema: Gets transformed to "sentiment_score" (your specification)
+```
+
+**🎯 Best Practice:**
+Always include a complete schema that matches your analysis prompt's expected output. Every field your LLM generates should be defined in the schema.
+
 ---
 
 ## Framework Quality Standards
@@ -600,4 +646,3 @@ The goal is not to replace human analytical judgment but to systematize and scal
 ---
 
 *This guide supports the creation of frameworks that enable mathematical reliability, cost transparency, and complete reproducibility - the three foundational commitments of computational social science research.*
-```

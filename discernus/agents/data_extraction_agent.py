@@ -51,6 +51,11 @@ class DataExtractionAgent:
         # Get analysis results - handle both dict and list formats
         raw_results = workflow_state.get('analysis_results', {})
         
+        # Get framework schema for framework-aware transformation
+        framework_spec = workflow_state.get('framework', {})
+        output_contract = framework_spec.get('output_contract', {})
+        schema = output_contract.get('schema')
+        
         # Convert dict format to list format for processing
         if isinstance(raw_results, dict):
             results_list = list(raw_results.values())
@@ -75,7 +80,7 @@ class DataExtractionAgent:
         
         for result in results_list:
             try:
-                extraction_result = self._extract_json_from_result(result, archive_manager)
+                extraction_result = self._extract_json_from_result(result, archive_manager, schema)
                 extracted_results.append(extraction_result)
                 extraction_log.append({
                     'agent_id': result.get('agent_id', 'unknown'),
@@ -128,7 +133,7 @@ class DataExtractionAgent:
             }
         }
 
-    def _extract_json_from_result(self, result: Dict[str, Any], archive_manager: Optional[LLMArchiveManager]) -> Dict[str, Any]:
+    def _extract_json_from_result(self, result: Dict[str, Any], archive_manager: Optional[LLMArchiveManager], framework_schema: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Extract clean JSON from a single analysis result using LLM-to-LLM communication.
         Enhanced with schema transformation to match framework output contracts.
@@ -146,7 +151,7 @@ class DataExtractionAgent:
                 
                 if extracted_json:
                     # Transform hierarchical JSON to flat format if needed
-                    transformed_json = self._transform_to_flat_schema(extracted_json)
+                    transformed_json = self._transform_to_flat_schema(extracted_json, framework_schema)
                     
                     # Success! Create enriched result
                     enriched_result = result.copy()
@@ -245,220 +250,126 @@ CRITICAL REQUIREMENTS:
         except Exception as e:
             print(f"⚠️ Failed to save extracted JSON for {agent_id}: {e}")
 
-    def _transform_to_flat_schema(self, hierarchical_json: Dict[str, Any]) -> Dict[str, Any]:
+    def _transform_to_flat_schema(self, hierarchical_json: Dict[str, Any], framework_schema: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
-        Transform hierarchical JSON to flat schema format expected by framework contracts.
+        Transform hierarchical JSON to flat schema format using LLM-to-LLM transformation.
         
-        This method handles the common case where LLMs generate nested JSON like:
-        {
-          "Political Worldview Classification": {"Worldview": "Progressive"},
-          "Cohesive Flourishing Framework v4.1 Analysis": {
-            "Identity Axis": {
-              "Tribal Dominance": {"Score": 0.1, "Confidence": 0.8, "Evidence": ["quote1", "quote2"]}
-            }
-          }
-        }
+        This THIN approach uses Gemini Flash to intelligently flatten any hierarchical JSON
+        structure, making it framework-agnostic and compatible with any LLM provider.
         
-        And transforms it to the expected flat format:
-        {
-          "worldview": "Progressive",
-          "tribal_dominance_score": 0.1,
-          "tribal_dominance_confidence": 0.8,
-          "tribal_dominance_evidence": ["quote1", "quote2"]
-        }
+        Instead of hardcoded patterns, we let the LLM understand the structure and
+        flatten it appropriately, following THIN philosophy principles.
         """
-        flat_json = {}
-        
-        # Extract worldview from various possible locations
-        worldview = self._extract_worldview(hierarchical_json)
-        if worldview:
-            flat_json["worldview"] = worldview
-        
-        # Extract anchor scores, confidence, and evidence
-        anchor_data = self._extract_anchor_data(hierarchical_json)
-        flat_json.update(anchor_data)
-        
-        # Extract overall analysis confidence if available
-        overall_confidence = self._extract_overall_confidence(hierarchical_json)
-        if overall_confidence is not None:
-            flat_json["overall_analysis_confidence"] = overall_confidence
-        
-        # Extract competitive patterns if available
-        competitive_patterns = self._extract_competitive_patterns(hierarchical_json)
-        if competitive_patterns:
-            flat_json["competitive_patterns_observed"] = competitive_patterns
-        
-        # If no transformation was possible, return original
-        if not flat_json:
+        # Check if already reasonably flat - no transformation needed
+        if self._is_reasonably_flat(hierarchical_json):
             return hierarchical_json
         
-        # If we only got a partial transformation, merge with original
-        if len(flat_json) < len(hierarchical_json):
-            # Check if original is already reasonably flat
-            if self._is_reasonably_flat(hierarchical_json):
-                return hierarchical_json
-            else:
-                # Merge transformed data with original
-                merged = hierarchical_json.copy()
-                merged.update(flat_json)
-                return merged
+        # Use LLM-to-LLM transformation for complex hierarchical structures
+        try:
+            flattened_json = self._llm_flatten_json(hierarchical_json, framework_schema)
+            return flattened_json if flattened_json else hierarchical_json
+        except Exception as e:
+            print(f"⚠️ LLM transformation failed: {e}")
+            # Fallback to original if transformation fails
+            return hierarchical_json
+    
+    def _llm_flatten_json(self, hierarchical_json: Dict[str, Any], framework_schema: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
+        """
+        Use LLM to flatten hierarchical JSON structure in a framework-aware way.
+        """
+        # Import here to avoid circular imports
+        from ..gateway.llm_gateway import LLMGateway
+        from ..gateway.model_registry import get_model_registry
+        
+        # Create the flattening prompt (framework-aware if schema provided)
+        prompt = self._create_json_flattening_prompt(hierarchical_json, framework_schema)
+        
+        # Use fast, cheap model for transformation
+        model_registry = get_model_registry()
+        llm_gateway = LLMGateway(model_registry)
+        
+        try:
+            # Use Gemini Flash for fast, cheap transformation
+            content, metadata = llm_gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash",
+                prompt=prompt,
+                max_tokens=2000,
+                temperature=0.0  # Deterministic transformation
+            )
             
-        return flat_json
-    
-    def _extract_worldview(self, data: Dict[str, Any]) -> Optional[str]:
-        """Extract worldview from hierarchical JSON."""
-        # Common patterns for worldview extraction
-        patterns = [
-            ["Political Worldview Classification", "Worldview"],
-            ["Worldview Classification", "Worldview"],
-            ["worldview"],
-            ["Worldview"],
-            ["political_worldview"],
-            ["classification", "worldview"]
-        ]
-        
-        for pattern in patterns:
-            value = self._deep_get(data, pattern)
-            if value and isinstance(value, str):
-                return value.strip()
-        
-        return None
-    
-    def _extract_anchor_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Extract all anchor scores, confidence, and evidence from hierarchical JSON."""
-        anchor_mapping = {
-            "Tribal Dominance": "tribal_dominance",
-            "Individual Dignity": "individual_dignity", 
-            "Fear": "fear",
-            "Hope": "hope",
-            "Envy": "envy",
-            "Compersion": "compersion",
-            "Enmity": "enmity", 
-            "Amity": "amity",
-            "Fragmentative Goals": "fragmentative_goal",
-            "Cohesive Goals": "cohesive_goal"
-        }
-        
-        result = {}
-        
-        for anchor_name, field_prefix in anchor_mapping.items():
-            # Look for anchor data in various locations
-            anchor_data = self._find_anchor_data(data, anchor_name)
-            
-            if anchor_data:
-                # Extract score
-                score = self._extract_numeric_field(anchor_data, ["Score", "score", "value"])
-                if score is not None:
-                    result[f"{field_prefix}_score"] = score
+            if metadata.get("success") and content:
+                # Debug: Show successful transformation
+                print(f"✅ LLM transformation successful ({len(content)} chars)")
                 
-                # Extract confidence
-                confidence = self._extract_numeric_field(anchor_data, ["Confidence", "confidence", "certainty"])
-                if confidence is not None:
-                    result[f"{field_prefix}_confidence"] = confidence
+                # Clean the response - remove markdown code blocks
+                clean_content = content.strip()
+                if clean_content.startswith("```json"):
+                    clean_content = clean_content[7:]  # Remove ```json
+                if clean_content.startswith("```"):
+                    clean_content = clean_content[3:]  # Remove ```
+                if clean_content.endswith("```"):
+                    clean_content = clean_content[:-3]  # Remove trailing ```
+                clean_content = clean_content.strip()
                 
-                # Extract evidence
-                evidence = self._extract_array_field(anchor_data, ["Evidence", "evidence", "quotes", "examples"])
-                if evidence:
-                    result[f"{field_prefix}_evidence"] = evidence
-        
-        return result
-    
-    def _find_anchor_data(self, data: Dict[str, Any], anchor_name: str) -> Optional[Dict[str, Any]]:
-        """Find anchor data by searching through nested structures."""
-        # Search patterns for different nesting structures
-        search_paths = [
-            [anchor_name],
-            ["Cohesive Flourishing Framework v4.1 Analysis", "Identity Axis", anchor_name],
-            ["Cohesive Flourishing Framework v4.1 Analysis", "Fear-Hope Axis", anchor_name],
-            ["Cohesive Flourishing Framework v4.1 Analysis", "Envy-Compersion Axis", anchor_name],
-            ["Cohesive Flourishing Framework v4.1 Analysis", "Enmity-Amity Axis", anchor_name],
-            ["Cohesive Flourishing Framework v4.1 Analysis", "Goal Axis", anchor_name],
-            ["Analysis", "Identity Axis", anchor_name],
-            ["Analysis", "Fear-Hope Axis", anchor_name],
-            ["Analysis", "Envy-Compersion Axis", anchor_name],
-            ["Analysis", "Enmity-Amity Axis", anchor_name], 
-            ["Analysis", "Goal Axis", anchor_name],
-            ["Identity Axis", anchor_name],
-            ["Fear-Hope Axis", anchor_name],
-            ["Envy-Compersion Axis", anchor_name],
-            ["Enmity-Amity Axis", anchor_name],
-            ["Goal Axis", anchor_name]
-        ]
-        
-        for path in search_paths:
-            result = self._deep_get(data, path)
-            if result and isinstance(result, dict):
-                return result
-        
-        return None
-    
-    def _extract_numeric_field(self, data: Dict[str, Any], field_names: List[str]) -> Optional[float]:
-        """Extract numeric field from data using multiple possible field names."""
-        for field_name in field_names:
-            if field_name in data:
+                # Parse the JSON response
+                import json
                 try:
-                    return float(data[field_name])
-                except (ValueError, TypeError):
-                    continue
-        return None
-    
-    def _extract_array_field(self, data: Dict[str, Any], field_names: List[str]) -> Optional[List[str]]:
-        """Extract array field from data using multiple possible field names."""
-        for field_name in field_names:
-            if field_name in data:
-                value = data[field_name]
-                if isinstance(value, list):
-                    return value
-                elif isinstance(value, str):
-                    return [value]
-        return None
-    
-    def _extract_overall_confidence(self, data: Dict[str, Any]) -> Optional[float]:
-        """Extract overall analysis confidence."""
-        patterns = [
-            ["overall_analysis_confidence"],
-            ["Overall Analysis Confidence"],
-            ["overall_confidence"],
-            ["confidence"],
-            ["Overall Confidence"]
-        ]
-        
-        for pattern in patterns:
-            value = self._deep_get(data, pattern)
-            if value is not None:
-                try:
-                    return float(value)
-                except (ValueError, TypeError):
-                    continue
-        
-        return None
-    
-    def _extract_competitive_patterns(self, data: Dict[str, Any]) -> Optional[str]:
-        """Extract competitive patterns description."""
-        patterns = [
-            ["competitive_patterns_observed"],
-            ["Competitive Patterns Observed"],
-            ["competitive_patterns"],
-            ["patterns"],
-            ["Competitive Patterns"]
-        ]
-        
-        for pattern in patterns:
-            value = self._deep_get(data, pattern)
-            if value and isinstance(value, str):
-                return value.strip()
-        
-        return None
-    
-    def _deep_get(self, data: Dict[str, Any], path: List[str]) -> Any:
-        """Safely get nested dictionary value by path."""
-        current = data
-        for key in path:
-            if isinstance(current, dict) and key in current:
-                current = current[key]
+                    flattened = json.loads(clean_content)
+                    return flattened if isinstance(flattened, dict) else None
+                except json.JSONDecodeError as e:
+                    print(f"⚠️ JSON parsing failed: {e}")
+                    return None
             else:
-                return None
-        return current
+                print(f"⚠️ LLM call failed or returned empty content")
+                print(f"⚠️ Success: {metadata.get('success')}, Content length: {len(content) if content else 0}")
+            
+        except Exception as e:
+            print(f"⚠️ LLM flattening call failed: {e}")
+            
+        return None
+    
+    def _create_json_flattening_prompt(self, hierarchical_json: Dict[str, Any], framework_schema: Optional[Dict[str, Any]] = None) -> str:
+        """
+        Create a framework-aware prompt for JSON flattening.
+        """
+        import json
+        
+        json_str = json.dumps(hierarchical_json, indent=2)
+        
+        # If framework schema is provided, use it to guide field naming
+        if framework_schema:
+            schema_fields = list(framework_schema.keys())
+            schema_guidance = f"""
+5. Use EXACT field names from the framework schema:
+   - Required fields: {', '.join(schema_fields)}
+   - Match field names exactly as specified in the schema
+   - If the hierarchical JSON contains data for these fields, use the exact field names"""
+        else:
+            schema_guidance = """
+5. Use STANDARD field naming for framework compatibility:
+   - Anchor scores: tribal_dominance_score, individual_dignity_score, fear_score, hope_score, etc.
+   - Confidence: tribal_dominance_confidence, individual_dignity_confidence, fear_confidence, hope_confidence, etc.
+   - Evidence: tribal_dominance_evidence, individual_dignity_evidence, fear_evidence, hope_evidence, etc.
+   - Other fields: envy_score, compersion_score, enmity_score, amity_score, fragmentative_goal_score, cohesive_goal_score"""
+        
+        return f"""You are a JSON transformation specialist. Your job is to flatten hierarchical JSON structures into a flat, analysis-ready format.
+
+TASK: Transform the following hierarchical JSON into a flat structure suitable for data analysis.
+
+RULES:
+1. Convert nested paths to flat field names using underscores
+2. Preserve all numeric values (scores, confidence, etc.) 
+3. Preserve all text values (worldview, evidence, quotes, etc.)
+4. Preserve all arrays (evidence lists, quotes, etc.){schema_guidance}
+6. Remove unnecessary nesting but keep all meaningful data
+7. Return ONLY valid JSON - no explanations or comments
+
+INPUT JSON:
+{json_str}
+
+OUTPUT (flat JSON only):"""
+    
+    # THICK methods removed - replaced with LLM-to-LLM transformation
     
     def _is_reasonably_flat(self, data: Dict[str, Any]) -> bool:
         """Check if data structure is already reasonably flat and doesn't need transformation."""
