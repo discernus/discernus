@@ -78,7 +78,7 @@ class SynthesisAgent:
         
         # For synthesis, we typically want a powerful model.
         # This could be made configurable.
-        model_name = "openai/gpt-4o" 
+        model_name = "vertex_ai/gemini-2.5-pro" 
 
         try:
             # The gateway's method is synchronous and returns a tuple (content, metadata)
@@ -102,77 +102,99 @@ class SynthesisAgent:
             return f"# Synthesis Error\n\nAn infrastructure error occurred while generating the report: {e}"
 
     def _build_synthesis_prompt(self, workflow_state: Dict[str, Any]) -> str:
-        """Constructs the prompt for the synthesis LLM call."""
+        """Constructs an efficient prompt for statistical synthesis without exceeding token limits."""
         
         # Extracting key data from the workflow state
         experiment = workflow_state.get('experiment', {})
         framework = workflow_state.get('framework', {})
-        # The data is now a single, unified list of results
         results_data = workflow_state.get('analysis_results', [])
 
-        # We'll serialize parts of the state to include in the prompt
-        # Be mindful of token limits. We should summarize where possible.
-        
         # Summary of analysis
         num_successful_runs = sum(1 for r in results_data if r.get('success'))
         
-        # Framework-agnostic extraction of qualitative data
-        # We'll pass through all available data without making assumptions about structure
-        qualitative_data = []
-        for res in results_data:
+        # Efficient data extraction - create structured summary instead of full JSON dump
+        data_summary = {
+            'total_runs': num_successful_runs,
+            'unique_corpus_files': len(set(r.get('corpus_file', '') for r in results_data if r.get('success'))),
+            'numeric_dimensions': [],
+            'sample_data': []
+        }
+        
+        # Extract numeric dimensions from first successful result
+        first_successful = next((r for r in results_data if r.get('success')), {})
+        if first_successful:
+            json_output = first_successful.get('json_output', {})
+            for key, value in json_output.items():
+                if isinstance(value, (int, float)):
+                    data_summary['numeric_dimensions'].append(key)
+        
+        # Create compact sample data (first 10 results only)
+        for i, res in enumerate(results_data[:10]):
             if res.get('success'):
                 json_output = res.get('json_output', {})
-                # Include all non-score, non-calculated data as potential qualitative content
-                qualitative_entry = {
-                    'agent_id': res.get('agent_id'),
-                    'model_name': res.get('model_name'),
-                    'corpus_file': res.get('corpus_file'),
-                    'data': {k: v for k, v in json_output.items() 
-                           if k not in ['scores', 'calculated_metrics'] and isinstance(v, str)}
+                sample_entry = {
+                    'corpus_file': res.get('corpus_file', '').split('/')[-1],  # Just filename
+                    'run_num': res.get('run_num'),
+                    'numeric_data': {k: v for k, v in json_output.items() if isinstance(v, (int, float))}
                 }
-                qualitative_data.append(qualitative_entry)
+                data_summary['sample_data'].append(sample_entry)
         
-        # We can also now include the calculated metrics in the report
-        calculated_metrics = [
-            {**res.get('json_output', {}).get('calculated_metrics', {}), 'agent_id': res.get('agent_id')}
-            for res in results_data if res.get('success') and 'calculated_metrics' in res.get('json_output', {})
-        ]
+        # Extract hypotheses for systematic testing
+        hypotheses = experiment.get('hypotheses', {})
+        hypothesis_text = ""
+        if hypotheses:
+            hypothesis_text = "### Experiment Hypotheses\n"
+            for h_id, h_text in hypotheses.items():
+                hypothesis_text += f"- **{h_id}**: {h_text}\n"
+            hypothesis_text += "\n"
 
-        # Building the prompt string
+        # Building the efficient prompt
         prompt = f"""
-You are an expert academic research assistant. Your task is to write a final, comprehensive report for a computational social science experiment.
+You are an expert computational social science researcher with Python code execution capabilities. Generate a comprehensive statistical analysis report.
 
-Synthesize the following information into a clear, well-structured, and insightful academic report in Markdown format.
-
-## Experiment Overview
+## Experiment Context
 - **Name**: {experiment.get('name', 'N/A')}
-- **Description**: {experiment.get('description', 'N/A')}
-- **Hypothesis**: {experiment.get('hypothesis', 'N/A')}
-
-## Framework Details
-- **Name**: {framework.get('name', 'N/A')}
-- **Description**: {framework.get('description', 'N/A')}
-
-## Execution Summary
-- **Number of successful analysis runs**: {num_successful_runs}
+- **Framework**: {framework.get('name', 'N/A')}
+- **Successful Runs**: {num_successful_runs}
 - **Models Used**: {', '.join(experiment.get('models', []))}
 
-## Key Findings
+{hypothesis_text}
 
-### Qualitative Analysis Summary
-Synthesize the key themes and insights from the following qualitative data generated by the AnalysisAgent. Do not just list them; weave them into a coherent narrative that identifies patterns across the analysis runs.
----
-{json.dumps(qualitative_data, indent=2)}
----
+## Data Summary
+- **Total Runs**: {data_summary['total_runs']}
+- **Unique Corpus Files**: {data_summary['unique_corpus_files']}
+- **Numeric Dimensions**: {data_summary['numeric_dimensions']}
 
-### Quantitative & Calculated Results
-Here are the calculated metrics. Interpret these findings in the context of the experiment's hypothesis.
----
-{json.dumps(calculated_metrics, indent=2)}
----
+## Sample Data (First 10 Results)
+```json
+{json.dumps(data_summary['sample_data'], indent=2)}
+```
 
-## Conclusion
-Provide a final conclusion that addresses the original hypothesis. Discuss the implications of the findings, potential limitations of the study, and suggest directions for future research.
+## ANALYSIS REQUIREMENTS
+
+Write Python code to:
+
+1. **Recreate the full dataset** from the provided structure
+2. **Compute real statistics**: ANOVA, t-tests, reliability analysis (Cronbach's α), correlations
+3. **Test hypotheses systematically** with appropriate statistical methods
+4. **Generate professional tables** with statistical results
+
+## CRITICAL INSTRUCTIONS
+
+- Use actual Python libraries (pandas, numpy, scipy.stats, pingouin)
+- Execute code to get real results, don't fabricate numbers
+- Include statistical significance testing and effect sizes
+- Format results in professional ASCII tables
+- Provide academic-quality interpretation
+
+## EFFICIENCY REQUIREMENTS
+
+- Focus on essential statistical analysis
+- Use tabular format for results presentation
+- Keep code execution efficient
+- Provide clear, concise academic conclusions
+
+Generate the complete analysis with executed Python code and results.
 """
         return prompt
 
