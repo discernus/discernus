@@ -1,0 +1,74 @@
+name: ✨ Enhancement Request
+description: Suggest an improvement or new feature
+title: "[ENHANCEMENT] "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an enhancement! Help us understand the improvement you'd like to see.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What research workflow problem does this solve?
+      placeholder: Describe the current limitation or inefficiency
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this be implemented?
+      placeholder: Describe your ideal solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Benefits
+      description: What are the expected benefits?
+      placeholder: |
+        - Research quality: Better analysis accuracy
+        - Efficiency: Saves X hours per experiment  
+        - Cost: Reduces API calls by Y%
+        - User experience: Easier workflow
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other approaches did you consider?
+      placeholder: Other solutions or workarounds you've thought about
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this enhancement?
+      options:
+        - Critical - Blocks release
+        - High - Important for 1.0
+        - Medium - Nice to have
+        - Low - Future consideration
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Notes
+      description: Any technical considerations?
+      placeholder: |
+        - Affects components: Agent X, Y
+        - Framework compatibility: Should work with all frameworks
+        - THIN principles: Keeps software thin, LLM intelligent
+    validations:
+      required: false 
