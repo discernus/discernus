@@ -45,8 +45,8 @@ class WorkflowOrchestrator:
 
     def __init__(self, project_path: str):
         self.project_path = Path(project_path)
-        self.results_path = self.project_path / "results"
-        self.results_path.mkdir(exist_ok=True)
+        # Note: Session directories created dynamically in _init_session_logging 
+        # following Research Provenance Guide v3.0 structure
         
         # Core components
         self.model_registry = ModelRegistry()
@@ -167,17 +167,35 @@ class WorkflowOrchestrator:
             raise ImportError(f"Could not create agent '{class_name}' from module '{module_path}': {e}")
 
     def _init_session_logging(self):
-        """Initializes logging for the current session."""
+        """Initializes logging for the current session following Research Provenance Guide v3.0."""
         timestamp = datetime.now()
         self.session_id = f"session_{timestamp.strftime('%Y%m%d_%H%M%S')}"
         self.conversation_id = f"conversation_{timestamp.strftime('%Y%m%d_%H%M%S')}_{os.urandom(4).hex()}"
         
-        # The CLI now creates the session directory, so we just need to use it.
-        # This resolves the chicken-and-egg problem.
+        # Create directory structure following Research Provenance Guide v3.0:
+        # projects/{PROJECT_NAME}/experiments/{EXPERIMENT_NAME}/sessions/{SESSION_ID}/
         if 'session_results_path' not in self.workflow_state or not self.workflow_state['session_results_path']:
-             timestamp_str = timestamp.strftime('%Y-%m-%d_%H-%M-%S')
-             self.session_results_path = self.results_path / timestamp_str
-             self.session_results_path.mkdir(exist_ok=True)
+            # Extract experiment name from workflow_state
+            experiment_name = "unknown_experiment"
+            if 'experiment' in self.workflow_state and 'name' in self.workflow_state['experiment']:
+                experiment_name = self.workflow_state['experiment']['name']
+            
+            # Create provenance-compliant directory structure
+            experiments_path = self.project_path / "experiments" 
+            experiment_path = experiments_path / experiment_name
+            sessions_path = experiment_path / "sessions"
+            self.session_results_path = sessions_path / self.session_id
+            
+            # Create directory hierarchy
+            self.session_results_path.mkdir(parents=True, exist_ok=True)
+            
+            # Create required subdirectories per Research Provenance Guide v3.0
+            (self.session_results_path / "llm_archive").mkdir(exist_ok=True)
+            (self.session_results_path / "analysis_results").mkdir(exist_ok=True)
+            (self.session_results_path / "system_state").mkdir(exist_ok=True)
+            (self.session_results_path / "fault_recovery").mkdir(exist_ok=True)
+            
+            print(f"✅ Created provenance-compliant session directory: {self.session_results_path}")
         else:
             self.session_results_path = Path(self.workflow_state['session_results_path'])
         

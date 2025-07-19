@@ -201,9 +201,12 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
     # --- Set up logging and chronolog ---
     session_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     project_path = Path(experiment_file).parent # Use experiment file for project context
-    results_dir = project_path / "results" / session_timestamp
-    results_dir.mkdir(parents=True, exist_ok=True)
-    log_file_path = results_dir / "session_run.log"
+    
+    # Create temporary logs directory for CLI session log
+    # Actual session directories will be created by WorkflowOrchestrator following Provenance Guide v3.0
+    temp_logs_dir = project_path / "logs" / f"cli_session_{session_timestamp}"
+    temp_logs_dir.mkdir(parents=True, exist_ok=True)
+    log_file_path = temp_logs_dir / "session_run.log"
 
     session_id = f"discernus_session_{session_timestamp}"
     user = getpass.getuser()
@@ -256,7 +259,7 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
                 'framework_path': framework_file,
                 'experiment_path': experiment_file,
                 'corpus_path': corpus_dir,
-                'session_results_path': str(results_dir) # Use the session-specific results directory
+                # session_results_path will be created by WorkflowOrchestrator following Provenance Guide v3.0
             }
 
             if not initial_state['workflow']:
@@ -301,7 +304,7 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
         
         if results and results.get('status') == 'success':
             click.secho("✅ Experiment completed successfully!", fg='green')
-            click.echo(f"📊 Results saved to: {results_dir}")
+            click.echo("📊 Results saved to experiment session directory (see session log for details)")
         else:
             click.secho("❌ Experiment failed. Please check the session log for details.", fg='red')
             sys.exit(1)

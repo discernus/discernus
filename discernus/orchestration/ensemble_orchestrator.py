@@ -1,20 +1,30 @@
 #!/usr/bin/env python3
 """
-Simple Ensemble Orchestrator - THIN pipeline execution with Agent Registry
-==========================================================================
+🚨 DEPRECATED: EnsembleOrchestrator (January 18, 2025)
+===============================================
 
-THIN Principle: Simple linear pipeline with LLM intelligence at each step.
-No complex conversation management - just validated assets -> ensemble analysis -> synthesis.
+**DEPRECATION NOTICE**: This EnsembleOrchestrator is deprecated and will be removed in a future version.
 
-UPDATED: Now uses Agent Registry for dynamic agent loading and execution.
+**Why Deprecated**: 
+- Creates directory structures that violate Research Provenance Guide v3.0
+- Superseded by WorkflowOrchestrator which follows proper architectural patterns
+- Part of architectural cleanup to prevent confusion between orchestrator types
 
-Pipeline:
-1. Receive validated assets from ValidationAgent
-2. Spawn analysis agents (one per corpus text) via registry
-3. Use registry-based agents for synthesis and statistical analysis
-4. Moderator agent organizes discussion about outliers only (if needed)
-5. Referee agent arbitrates disagreements (if needed)
-6. Final synthesis agent packages results for persistence
+**Current Replacement**: Use `WorkflowOrchestrator` from `discernus.orchestration.workflow_orchestrator`
+
+**Migration Timeline**: 
+- Immediately: All new development should use WorkflowOrchestrator
+- Next release: EnsembleOrchestrator will be removed completely
+
+**For Existing Code**: Replace imports:
+```python
+# OLD (deprecated)
+from discernus.orchestration.ensemble_orchestrator import EnsembleOrchestrator
+
+# NEW (correct)  
+from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
+```
+===============================================
 """
 
 import sys
