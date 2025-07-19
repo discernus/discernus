@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-🚨 DEPRECATED: EnsembleOrchestrator (January 18, 2025)
+🚨 DEPRECATED: EnsembleOrchestrator (July 18, 2025)
 ===============================================
 
 **DEPRECATION NOTICE**: This EnsembleOrchestrator is deprecated and will be removed in a future version.
@@ -13,7 +13,7 @@
 **Current Replacement**: Use `WorkflowOrchestrator` from `discernus.orchestration.workflow_orchestrator`
 
 **Migration Timeline**: 
-- Immediately: All new development should use WorkflowOrchestrator
+- July 18, 2025: All new development should use WorkflowOrchestrator
 - Next release: EnsembleOrchestrator will be removed completely
 
 **For Existing Code**: Replace imports:
