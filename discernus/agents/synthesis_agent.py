@@ -102,7 +102,7 @@ class SynthesisAgent:
             return f"# Synthesis Error\n\nAn infrastructure error occurred while generating the report: {e}"
 
     def _build_synthesis_prompt(self, workflow_state: Dict[str, Any]) -> str:
-        """Constructs an enhanced prompt for statistical synthesis with code execution."""
+        """Constructs an enhanced prompt for comprehensive academic synthesis with statistical analysis."""
         
         # Extracting key data from the workflow state
         experiment = workflow_state.get('experiment', {})
@@ -112,30 +112,27 @@ class SynthesisAgent:
         # Filter successful runs and extract structured data
         successful_runs = [r for r in analysis_results if r.get('success', False)]
         
-        # Create a structured data representation that can be directly used by the LLM
+        # Create a structured data representation for the LLM
         structured_data = []
+        numeric_dimensions = set()
+        
         for result in successful_runs:
             json_output = result.get('json_output', {})
             if json_output:
+                # Extract all numeric fields dynamically (framework-agnostic)
                 record = {
                     'corpus_file': result.get('corpus_file', ''),
                     'run_num': result.get('run_num', 0),
-                    'tribal_dominance_score': json_output.get('tribal_dominance_score', 0),
-                    'individual_dignity_score': json_output.get('individual_dignity_score', 0),
-                    'fear_score': json_output.get('fear_score', 0),
-                    'hope_score': json_output.get('hope_score', 0),
-                    'envy_score': json_output.get('envy_score', 0),
-                    'compersion_score': json_output.get('compersion_score', 0),
-                    'enmity_score': json_output.get('enmity_score', 0),
-                    'amity_score': json_output.get('amity_score', 0),
-                    'fragmentative_goal_score': json_output.get('fragmentative_goal_score', 0),
-                    'cohesive_goal_score': json_output.get('cohesive_goal_score', 0),
-                    'descriptive_cohesion_index': json_output.get('descriptive_cohesion_index', 0),
-                    'motivational_cohesion_index': json_output.get('motivational_cohesion_index', 0),
-                    'full_cohesion_index': json_output.get('full_cohesion_index', 0)
                 }
+                
+                # Add all numeric fields from json_output
+                for key, value in json_output.items():
+                    if isinstance(value, (int, float)) and key.endswith('_score') or key.endswith('_index'):
+                        record[key] = value
+                        numeric_dimensions.add(key)
+                
                 structured_data.append(record)
-
+        
         # Create experiment summary
         unique_corpus_files = list(set(r['corpus_file'] for r in structured_data))
         
@@ -143,44 +140,86 @@ class SynthesisAgent:
             'total_runs': len(analysis_results),
             'successful_runs': len(successful_runs),
             'unique_corpus_files': len(unique_corpus_files),
-            'corpus_files': unique_corpus_files
+            'numeric_dimensions': sorted(list(numeric_dimensions))
         }
+        
+        # Extract hypotheses from experiment
+        hypotheses = experiment.get('hypotheses', {})
+        hypotheses_text = ""
+        if hypotheses:
+            hypotheses_text = "## HYPOTHESES TO TEST\n"
+            for h_id, h_text in hypotheses.items():
+                hypotheses_text += f'{h_id}: "{h_text}"\n'
+            hypotheses_text += "\n"
 
-        prompt = f"""You are a computational social science researcher with expertise in statistical analysis. 
+        prompt = f"""You are a computational social science researcher with expertise in statistical analysis and academic writing. You have access to a secure Python code execution environment with pandas, numpy, scipy, statsmodels, and pingouin libraries.
 
-## EXPERIMENT SUMMARY
-- Framework: {framework.get('display_name', 'Unknown')}
-- Total runs: {data_summary['total_runs']}
+## EXPERIMENT CONTEXT
+- Framework: {framework.get('display_name', framework.get('name', 'Unknown Framework'))}
+- Total experimental runs: {data_summary['total_runs']}
 - Successful runs: {data_summary['successful_runs']}
 - Unique corpus files: {data_summary['unique_corpus_files']}
+- Analysis method: {framework.get('analysis_method', 'Framework-specific scoring')}
 
-## REAL EXPERIMENTAL DATA
+{hypotheses_text}## REAL EXPERIMENTAL DATA
 The following data represents the complete set of successful experimental runs. This is REAL data extracted from the workflow state.
 
 ```python
 experimental_data = {str(structured_data)}
 ```
 
-## CRITICAL INSTRUCTIONS
-1. **Use ONLY the provided experimental_data** - do not simulate, generate, or create additional data points
-2. **Load the data directly** into a pandas DataFrame using the provided list of dictionaries
-3. **Perform statistical analysis** on the actual data you receive
-4. **Report real computed statistics** - F-statistics, p-values, Cronbach's alpha values
+## YOUR TASK: Generate a Comprehensive Academic Report
 
-## YOUR TASK
-Write and execute Python code to:
-1. Load the experimental_data into a pandas DataFrame
-2. Perform ANOVA analysis to test for differences across corpus files
-3. Calculate Cronbach's alpha for inter-run reliability
-4. Report the actual computed statistical results
+You must write and execute Python code to produce a complete academic report with this structure:
 
-## EXPECTED RESULTS
-Based on the nature of this data, you should expect:
-- F-statistics in reasonable ranges (typically 1-10 for social science data)
-- Some p-values > 0.05 (not all differences will be significant)
-- Cronbach's alpha values in the 0.6-0.9 range for good reliability
+### 1. EXECUTIVE SUMMARY
+- Brief overview of findings for each hypothesis (if specified)
+- Key statistical results summary
+- Major insights about framework performance
 
-Begin by loading the experimental_data into a DataFrame and performing the analysis."""
+### 2. STATISTICAL ANALYSIS
+Write code to perform appropriate statistical tests based on the data:
+- **Descriptive statistics** for all numeric dimensions
+- **Variance analysis** (ANOVA) across corpus files to test for significant differences
+- **Reliability analysis** (Cronbach's alpha) if multiple runs per corpus file exist
+- **Additional analyses** as appropriate for the experimental design
+
+### 3. RESULTS TABLES
+Generate professional ASCII tables using the tabulate library:
+- Descriptive statistics by corpus file
+- Statistical test results with effect sizes
+- Reliability analysis (if applicable)
+- Any additional relevant analyses
+
+### 4. ACADEMIC INTERPRETATION
+- Framework validation insights
+- Construct validity assessment using statistical patterns
+- Implications for computational discourse analysis
+- Limitations and recommendations for future research
+
+## CRITICAL REQUIREMENTS
+
+1. **Execute Real Code**: Write actual Python that runs and produces results
+2. **Use Only Provided Data**: No simulation or generation of additional data points
+3. **Professional Formatting**: Use tabulate library for publication-ready tables
+4. **Academic Tone**: Neutral, peer-review ready language
+5. **Framework Agnostic**: Adapt analysis to whatever numeric dimensions are present
+6. **Complete Analysis**: Address the experimental design systematically
+
+## EXPECTED STATISTICAL PATTERNS
+For computational social science data, expect:
+- F-statistics typically in range 1-10 for meaningful differences
+- Some non-significant results (p > 0.05) are normal and informative
+- Reliability coefficients (α) between 0.60-0.95 for different constructs
+- Effect sizes (η²) ranging from small (0.01) to large (0.14+)
+
+## FORMATTING REQUIREMENTS
+- Use professional section headers with clear hierarchy
+- Include complete statistical reporting (test statistics, p-values, effect sizes)
+- Generate ASCII tables that are readable and well-formatted
+- Maintain academic neutrality - report what the data shows, not what was hoped for
+
+Begin by loading the experimental_data into a DataFrame and performing systematic statistical analysis appropriate for this experimental design."""
 
         return prompt
 
