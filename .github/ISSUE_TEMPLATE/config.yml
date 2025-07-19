@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/discernus/discernus/tree/main/docs
+    about: Check the documentation for guides and specifications
+  - name: 💬 Discussions
+    url: https://github.com/discernus/discernus/discussions
+    about: General questions and community discussions 
