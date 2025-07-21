@@ -26,7 +26,7 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from discernus.orchestration.orchestrator import ThinOrchestrator, ResearchConfig
+from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
 from discernus.core.corpus_chunking import should_use_chunking, analyze_corpus_in_chunks, estimate_token_count, chunk_corpus_by_size
 
 def log_system_priors(session_id: str, research_question: str, corpus_preview: str):

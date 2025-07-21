@@ -23,7 +23,8 @@ sys.path.insert(0, str(project_root))
 
 from discernus.core.session_summarizer import summarize_all_sessions
 from discernus.core.corpus_library import discover_corpora
-from discernus.orchestration.orchestrator import ThinOrchestrator, ResearchConfig
+from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
+from discernus.core.spec_loader import SpecLoader
 
 app = Flask(__name__)
 

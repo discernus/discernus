@@ -129,10 +129,13 @@ def test_connection():
         load_dotenv()
         
         # Import our client
-        from discernus.core.thin_litellm_client import ThinLiteLLMClient, get_vertex_ai_config
+        from discernus.core.ultra_thin_llm_client import UltraThinLLMClient as ThinLiteLLMClient
         
         # Check configuration
-        vertex_config = get_vertex_ai_config()
+        vertex_config = {
+            'project': os.environ.get('VERTEXAI_PROJECT', 'gen-lang-client-0199646265'),
+            'location': os.environ.get('VERTEXAI_LOCATION', 'us-central1')
+        }
         if not vertex_config:
             print("❌ No Vertex AI configuration found")
             return False

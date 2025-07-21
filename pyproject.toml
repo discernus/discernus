@@ -77,7 +77,7 @@ profile = "black"
 line_length = 120
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["discernus/tests"]
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test*"] 
 python_functions = ["test_*"]
