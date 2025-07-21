@@ -47,14 +47,14 @@ jobs:
       - name: Run model registry update (dry-run)
         if: github.event.inputs.dry_run == 'true'
         run: |
-          python3 scripts/update_model_registry.py --dry-run
+          ./venv/bin/python3 scripts/update_model_registry.py --dry-run
         env:
           PYTHONPATH: ${{ github.workspace }}
 
       - name: Run model registry update (live)
         if: github.event.inputs.dry_run != 'true'
         run: |
-          python3 scripts/update_model_registry.py
+          ./venv/bin/python3 scripts/update_model_registry.py
         env:
           PYTHONPATH: ${{ github.workspace }}
 
