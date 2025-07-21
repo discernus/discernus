@@ -111,7 +111,8 @@ class ModelRegistryUpdater:
             "google/gemma-7b-it",
             "meta-llama/llama-3-8b-instruct",
             "meta-llama/llama-3-70b-instruct",
-            "cohere/command-r-plus"
+            "cohere/command-r-plus",
+            "deepseek/deepseek-r1"
         ]
 
         try:
@@ -215,7 +216,7 @@ class ModelRegistryUpdater:
                             new_input_cost = cost_info['input_cost_per_token'] * 1_000_000
                             old_input_cost = model_info.get('costs', {}).get('input_per_million_tokens', 0)
                             
-                            if abs(new_input_cost - old_input_cost) > 0.01:  # Significant change
+                            if isinstance(new_input_cost, (int, float)) and isinstance(old_input_cost, (int, float)) and abs(new_input_cost - old_input_cost) > 0.01:
                                 model_info.setdefault('costs', {})['input_per_million_tokens'] = new_input_cost
                                 updated_count += 1
                                 
@@ -223,7 +224,7 @@ class ModelRegistryUpdater:
                             new_output_cost = cost_info['output_cost_per_token'] * 1_000_000
                             old_output_cost = model_info.get('costs', {}).get('output_per_million_tokens', 0)
                             
-                            if abs(new_output_cost - old_output_cost) > 0.01:  # Significant change
+                            if isinstance(new_output_cost, (int, float)) and isinstance(old_output_cost, (int, float)) and abs(new_output_cost - old_output_cost) > 0.01:
                                 model_info.setdefault('costs', {})['output_per_million_tokens'] = new_output_cost
                                 updated_count += 1
                         
@@ -255,7 +256,10 @@ class ModelRegistryUpdater:
         
         for provider, models in discovered_models.items():
             for model in models:
-                model_key = f"{provider}/{model['id']}"
+                if provider == "openrouter":
+                    model_key = model['id']
+                else:
+                    model_key = f"{provider}/{model['id']}"
                 
                 if model_key not in self.current_config.get('models', {}):
                     # Add new model to registry
