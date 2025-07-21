@@ -103,6 +103,17 @@ class ModelRegistryUpdater:
     
     def get_openrouter_models(self) -> List[Dict[str, Any]]:
         """Query OpenRouter for available models"""
+        
+        # We only want a curated list of models from OpenRouter, not all of them.
+        whitelisted_models = [
+            "mistralai/mistral-7b-instruct",
+            "mistralai/mixtral-8x7b-instruct",
+            "google/gemma-7b-it",
+            "meta-llama/llama-3-8b-instruct",
+            "meta-llama/llama-3-70b-instruct",
+            "cohere/command-r-plus"
+        ]
+
         try:
             print("🔍 Querying OpenRouter for available models...")
             response = requests.get("https://openrouter.ai/api/v1/models", timeout=10)
@@ -110,18 +121,19 @@ class ModelRegistryUpdater:
                 data = response.json()
                 models = []
                 for model in data.get('data', []):
-                    models.append({
-                        "id": model['id'],
-                        "provider": "openrouter",
-                        "display_name": model.get('name', model['id']),
-                        "context_window": model.get('context_length', 4096),
-                        "performance_tier": self.infer_performance_tier(model),
-                        "costs": {
-                            "input_per_million_tokens": model.get('pricing', {}).get('prompt', 0) * 1000000,
-                            "output_per_million_tokens": model.get('pricing', {}).get('completion', 0) * 1000000
-                        }
-                    })
-                print(f"✅ Found {len(models)} models on OpenRouter")
+                    if model['id'] in whitelisted_models:
+                        models.append({
+                            "id": model['id'],
+                            "provider": "openrouter",
+                            "display_name": model.get('name', model['id']),
+                            "context_window": model.get('context_length', 4096),
+                            "performance_tier": self.infer_performance_tier(model),
+                            "costs": {
+                                "input_per_million_tokens": model.get('pricing', {}).get('prompt', 0) * 1000000,
+                                "output_per_million_tokens": model.get('pricing', {}).get('completion', 0) * 1000000
+                            }
+                        })
+                print(f"✅ Found {len(models)} whitelisted models on OpenRouter")
                 return models
         except Exception as e:
             print(f"⚠️  Failed to query OpenRouter: {e}")
