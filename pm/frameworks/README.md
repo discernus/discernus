@@ -1,32 +1,27 @@
-# ⚠️ DEPRECATED - PM Frameworks Workspace
+# PM Frameworks Directory - Migrated
 
-**Date Deprecated**: January 20, 2025  
-**Reason**: Framework library has been migrated to production structure  
-**Current Location**: `/frameworks/` directory (repository root)
+**Status**: ⚠️ **MIGRATED**  
+**Date**: January 20, 2025  
+**New Location**: `frameworks/` (repository root)
 
-**This PM workspace has been superseded.** All framework development now occurs in the main `frameworks/` directory with proper organization and v4.0 specification compliance.
+The framework library has been successfully migrated to the production location.
 
-**Migration Status**: ✅ **COMPLETED** - All 9 frameworks successfully migrated to production
+## Framework Migration Completed
 
----
+All framework development now occurs in:
+- **`frameworks/reference/`** - Reference frameworks (ECF, CAF, CHF, CFF)
+- **`frameworks/seed/`** - Seed frameworks organized by domain
+- **`frameworks/community/`** - Community-contributed frameworks
 
-## Superseded Content
+## Historical Workspace Archived
 
-The content below represents the historical PM workspace that was used for framework development in July 2025. This work has been completed and the frameworks have been migrated to their production locations.
+The complete PM frameworks workspace has been archived at:
+`deprecated/by-date/2025-01-20/pm_frameworks_migration_workspace/`
 
-### What Was Migrated
-- ✅ All 9 frameworks converted from v3.2 YAML → v4.0 Markdown
-- ✅ Directory structure reorganized: reference/core, reference/flagship, seed/domain
-- ✅ Framework Specification v4.0 compliance achieved
-- ✅ Quality standards implemented across all frameworks
+## Retrospective Documentation
 
-### Current Framework Locations
-- **Reference Frameworks**: `frameworks/reference/` (ECF, CAF, CHF, CFF)
-- **Seed Frameworks**: `frameworks/seed/` organized by domain
-- **Community**: `frameworks/community/` (ready for contributions)
+Migration work documented in GitHub issues:
+- [Epic #80](https://github.com/discernus/discernus/issues/80): Framework Library Modernization
+- Issues #81-85: Detailed migration documentation
 
 **For current framework work, use the main `frameworks/` directory.**
-
----
-
-# Historical Framework Migration Workspace 
