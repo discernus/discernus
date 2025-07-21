@@ -194,6 +194,93 @@ python3 -m unittest discernus.tests.simple_working_tests.TestBasicFunctionality.
 python3 -m unittest discover discernus/tests -v
 ```
 
+## Development Testing Tools
+
+### 🎯 Prompt Engineering Harness
+
+The prompt engineering harness is a flexible tool for testing specific models with specific prompts during development. It's designed for rapid iteration and prompt tuning **without fallback mechanisms** - when a model fails, it fails clearly.
+
+#### Quick Usage
+```bash
+# Use Make commands (recommended - handles environment automatically):
+
+# List all available models by provider
+make harness-list
+
+# Test a simple prompt with any model
+make harness-simple MODEL="vertex_ai/gemini-2.5-flash" PROMPT="What is 2+2?"
+
+# Test a prompt from file
+make harness-file MODEL="anthropic/claude-3-5-sonnet-20240620" FILE="test_prompt.txt"
+```
+
+#### Direct Usage
+```bash
+# Manual command (always use proper venv activation):
+source venv/bin/activate && python3 scripts/prompt_engineering_harness.py --help
+
+# List models
+source venv/bin/activate && python3 scripts/prompt_engineering_harness.py --list-models
+
+# Test with direct prompt
+source venv/bin/activate && python3 scripts/prompt_engineering_harness.py \
+  --model "openrouter/perplexity/r1-1776" \
+  --prompt "Explain quantum computing in exactly 10 words."
+
+# Test with prompt from file
+source venv/bin/activate && python3 scripts/prompt_engineering_harness.py \
+  --model "vertex_ai/gemini-2.5-pro" \
+  --prompt-file "my_test_prompt.txt"
+
+# Test with experiment assets
+source venv/bin/activate && python3 scripts/prompt_engineering_harness.py \
+  --model "anthropic/claude-3-5-sonnet-20240620" \
+  --experiment "projects/simple_experiment" \
+  --corpus "speech1.txt"
+```
+
+#### Key Features
+- **No Fallback Mechanisms**: Fails fast and clearly when models don't work
+- **Direct Model Testing**: Tests exactly the model you specify
+- **Multiple Input Methods**: Direct text, files, or experiment assets
+- **Model Registry Integration**: Lists available models with provider grouping
+- **Environment Loading**: Automatically loads API keys from .env file
+- **Clear Diagnostics**: Shows exactly what failed and why
+
+#### When to Use
+- **Model Validation**: Quickly test if a specific model is working
+- **Prompt Tuning**: Iterate on prompts with immediate feedback
+- **API Testing**: Verify API keys and model availability
+- **Debugging**: Isolate model-specific issues without complex workflows
+- **Development**: Test prompts before integrating into experiments
+
+#### Example Output
+```
+✅ Using direct prompt
+
+🚀 Testing Model: vertex_ai/gemini-2.5-flash
+================================================================================
+🎯 Making direct call to: vertex_ai/gemini-2.5-flash
+📝 System prompt: You are a helpful assistant.
+💬 User prompt: What is the capital of Japan? Answer in one sentence.
+================================================================================
+
+📊 RESULTS:
+================================================================================
+✅ SUCCESS
+📝 Response Length: 30 characters
+🔢 Token Usage: 20 prompt + 42 completion = 62 total
+
+📄 MODEL RESPONSE:
+----------------------------------------
+The capital of Japan is Tokyo.
+----------------------------------------
+
+🏁 Test completed for model: vertex_ai/gemini-2.5-flash
+```
+
+This tool is essential for development workflows and is integrated into the standardized Make commands for consistent environment handling.
+
 ## Test Development Guidelines
 
 ### For AI Agents: Use Simple Working Tests

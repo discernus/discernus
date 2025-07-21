@@ -61,6 +61,24 @@ python3 discernus_cli.py list-frameworks
 python3 discernus_cli.py info --check-thin
 ```
 
+## 🛠️ Development Tools
+
+```bash
+# Check environment setup
+make check
+
+# Run test suite  
+make test
+
+# Test models directly (prompt engineering)
+make harness-simple MODEL="vertex_ai/gemini-2.5-flash" PROMPT="Test prompt"
+
+# List available models
+make harness-list
+```
+
+*See [`discernus/tests/README.md`](discernus/tests/README.md) for comprehensive testing documentation and [`scripts/README.md`](scripts/README.md) for development scripts.*
+
 ## 🔗 Key Resources
 
 - **[Complete Documentation](docs/README.md)** - Master index and user guides
