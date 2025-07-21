@@ -1,8 +1,109 @@
-# Automated Model Registry Updater
+# Discernus Development Scripts
 
-This directory contains scripts to automatically maintain the model registry (`discernus/gateway/models.yaml`) with up-to-date information from various LLM providers.
+This directory contains utility scripts for development, testing, and maintenance of the Discernus platform.
 
-## Problem Solved
+## Scripts Overview
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `prompt_engineering_harness.py` | Test models/prompts directly | Development & debugging |
+| `update_model_registry.py` | Update model registry from APIs | Maintenance |
+| `check_environment.py` | Validate development environment | Environment setup |
+
+## 🎯 Prompt Engineering Harness
+
+**File**: `prompt_engineering_harness.py`  
+**Purpose**: Direct model and prompt testing for development workflows
+
+### Quick Usage (Recommended)
+```bash
+# Use Make commands (handles environment automatically):
+make harness-list                                              # List models
+make harness-simple MODEL="vertex_ai/gemini-2.5-flash" PROMPT="Test prompt"
+make harness-file MODEL="anthropic/claude-3-5-sonnet-20240620" FILE="prompt.txt"
+```
+
+### Direct Usage
+```bash
+# Always use proper environment activation:
+source venv/bin/activate && python3 scripts/prompt_engineering_harness.py --help
+
+# List available models grouped by provider
+python3 scripts/prompt_engineering_harness.py --list-models
+
+# Test with direct prompt
+python3 scripts/prompt_engineering_harness.py \
+  --model "openrouter/perplexity/r1-1776" \
+  --prompt "What is quantum computing in 10 words?"
+
+# Test with prompt from file
+python3 scripts/prompt_engineering_harness.py \
+  --model "vertex_ai/gemini-2.5-pro" \
+  --prompt-file "test_prompt.txt"
+
+# Test with experiment corpus
+python3 scripts/prompt_engineering_harness.py \
+  --model "anthropic/claude-3-5-sonnet-20240620" \
+  --experiment "projects/simple_experiment" \
+  --corpus "speech1.txt"
+```
+
+### Key Features
+- **No Fallback**: Fails clearly when models don't work (perfect for debugging)
+- **Direct Testing**: Tests exactly the specified model
+- **Multiple Inputs**: Direct text, files, or experiment assets
+- **Environment Integration**: Loads API keys from .env automatically
+- **Clear Output**: Detailed success/failure information with token usage
+
+### When to Use
+- **Model Validation**: Test if specific models are accessible
+- **Prompt Development**: Iterate on prompts with immediate feedback
+- **API Debugging**: Verify authentication and model availability
+- **Quick Testing**: Test models without full experiment setup
+
+## 🔧 Environment Checker
+
+**File**: `check_environment.py`  
+**Purpose**: Validate development environment setup
+
+### Usage
+```bash
+# Quick environment validation
+python3 scripts/check_environment.py
+
+# Or use Make command
+make check
+```
+
+### What It Checks
+- Project root location
+- Python version and executable path
+- Virtual environment status
+- Core package availability (PyYAML, litellm, requests, python-dotenv)
+- Environment file presence
+
+### Output Example
+```
+🔍 Environment Check
+==================================================
+✅ Project root: /Volumes/code/discernus
+🐍 Python executable: /Volumes/code/discernus/venv/bin/python3
+🐍 Python version: 3.13.5
+✅ Virtual environment: ACTIVE
+✅ Python executable: Correct venv path
+✅ Core packages: Available
+✅ Environment file: Found
+
+🎉 Environment check: ALL GOOD!
+💡 Ready to run Discernus commands
+```
+
+## 📊 Automated Model Registry Updater
+
+**File**: `update_model_registry.py`  
+**Purpose**: Automatically maintain the model registry (`discernus/gateway/models.yaml`) with up-to-date information from various LLM providers
+
+### Problem Solved
 
 The `models.yaml` file is the single source of truth for model availability, pricing, and rate limits. Manual maintenance leads to:
 - ❌ Outdated model information (like the Claude 3.5 Sonnet issue)
@@ -10,7 +111,7 @@ The `models.yaml` file is the single source of truth for model availability, pri
 - ❌ Incorrect pricing information
 - ❌ Stale rate limit data
 
-## Solution
+### Solution
 
 The automated updater:
 - ✅ **Queries providers directly** for available models
@@ -20,15 +121,7 @@ The automated updater:
 - ✅ **Runs on schedule** (weekly) via GitHub Actions
 - ✅ **Creates backups** before making changes
 
-## Files
-
-- `update_model_registry.py` - Main updater script
-- `../github/workflows/update-model-registry.yml` - GitHub Action workflow
-- `README.md` - This documentation
-
-## Usage
-
-### Manual Updates
+### Usage
 
 ```bash
 # Full update (live changes)
@@ -41,7 +134,7 @@ python3 scripts/update_model_registry.py --dry-run
 python3 scripts/update_model_registry.py --check
 ```
 
-### GitHub Actions
+### GitHub Actions Integration
 
 **Automatic Schedule:**
 - Runs every Monday at 2 AM UTC
