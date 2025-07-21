@@ -112,7 +112,7 @@ class ModelRegistryUpdater:
             "meta-llama/llama-3-8b-instruct",
             "meta-llama/llama-3-70b-instruct",
             "cohere/command-r-plus",
-            "deepseek/deepseek-r1"
+            "perplexity/r1-1776"
         ]
 
         try:
@@ -327,9 +327,17 @@ class ModelRegistryUpdater:
             import shutil
             shutil.copy2(self.config_path, backup_path)
         
+        try:
+            # Validate YAML before writing
+            output_yaml = yaml.dump(self.current_config, default_flow_style=False, indent=2, sort_keys=False)
+            yaml.safe_load(output_yaml) # Test if it's valid
+        except Exception as e:
+            print(f"❌ CRITICAL: Generated YAML is invalid! Aborting to prevent corruption. Error: {e}")
+            return
+
         # Save updated configuration
         with open(self.config_path, 'w') as f:
-            yaml.dump(self.current_config, f, default_flow_style=False, indent=2, sort_keys=False)
+            f.write(output_yaml)
         
         print(f"✅ Updated configuration saved to {self.config_path}")
         print(f"📄 Backup saved to {backup_path}")
