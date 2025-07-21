@@ -7,6 +7,22 @@ A Discernus framework is a self-contained markdown file that embodies the core p
 
 ---
 
+## Terminology Glossary
+
+To ensure consistency across all frameworks, these terms have specific meanings:
+
+**Framework**: The complete analytical system including theory, methodology, and implementation (e.g., Cohesive Flourishing Framework)
+
+**Domain**: Major conceptual area within a framework that groups related dimensions (e.g., "Emotional Climate Domain", "Stakeholder Relations Domain")
+
+**Dimension**: Individual measurable element that receives a 0.0-1.0 score (e.g., Fear, Hope, Customer Service, Employee Development). This is the primary term for scoreable elements.
+
+**Axis**: Bipolar continuum between opposing concepts, used only when true bipolar relationships exist (e.g., Populism ↔ Pluralism axis in orthogonal frameworks)
+
+**Analysis Variant**: Different analytical approaches within the same framework (e.g., "default" for complete analysis, "descriptive_only" for simplified scoring)
+
+---
+
 ## Part I: Core Principles
 
 ### 1. The THIN Philosophy
