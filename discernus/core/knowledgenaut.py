@@ -11,7 +11,8 @@ import xml.etree.ElementTree as ET
 import time
 from typing import Dict, List, Any, Optional
 from datetime import datetime
-from discernus.core.ultra_thin_llm_client import UltraThinLLMClient as ThinLiteLLMClient
+from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.model_registry import ModelRegistry
 
 class UltraThinKnowledgenaut:
     """
@@ -24,14 +25,16 @@ class UltraThinKnowledgenaut:
         os.environ['VERTEXAI_PROJECT'] = 'gen-lang-client-0199646265'
         os.environ['VERTEXAI_LOCATION'] = 'us-central1'
         
-        self.client = ThinLiteLLMClient()
+        # Use the working LLM Gateway infrastructure
+        self.model_registry = ModelRegistry()
+        self.gateway = LLMGateway(self.model_registry)
         
         # Model selection for cost optimization
         self.research_model = "vertex_ai/gemini-2.5-flash"  # Ultra-cheap: $0.13/$0.38 per 1M tokens
         self.synthesis_model = "vertex_ai/gemini-2.5-flash"  # Same model for consistency
-        self.critique_model = "claude-3-5-sonnet-20241022"   # Premium model for red team critique
+        self.critique_model = "vertex_ai/gemini-2.5-pro"     # Smart & cost-effective red team critique
         
-        print("🧭 Knowledgenaut initialized with ultra-cheap Vertex AI")
+        print("🧭 Knowledgenaut initialized with working LLM Gateway")
         print(f"💰 Research cost: $0.13/$0.38 per 1M tokens (Gemini 2.5 Flash)")
     
     def research_question(self, question: str, save_results: bool = True) -> Dict[str, Any]:
@@ -172,10 +175,12 @@ Create a focused research plan that includes:
 
 Be specific and actionable. Focus on findable, citable academic sources."""
 
-        return self.client.call_llm_with_vertex_support(
+        response, metadata = self.gateway.execute_call(
             model=self.research_model,
-            messages=[{"role": "user", "content": prompt}]
+            prompt=prompt,
+            system_prompt="You are a research librarian planning a comprehensive literature review."
         )
+        return response
     
     def _discover_literature(self, question: str, research_plan: str) -> List[Dict[str, Any]]:
         """Phase 2: Enhanced multi-API literature discovery with validation"""
@@ -185,35 +190,43 @@ Be specific and actionable. Focus on findable, citable academic sources."""
         papers = []
         sources_tried = []
         
-        # Try multiple APIs for better coverage - expanded for critical perspectives
-        for term in search_terms[:5]:  # Limit to 5 terms for cost control (increased for critical perspectives)
+        # Try multiple APIs for better coverage with respectful rate limiting
+        for i, term in enumerate(search_terms[:5]):  # Limit to 5 terms for cost control
             term_papers = []
             
-            # 1. Try Semantic Scholar first (often better abstracts)
+            # Add longer delay between search terms to be respectful
+            if i > 0:
+                print(f"⏱️ Waiting 3 seconds between search terms (respectful API usage)...")
+                time.sleep(3)
+            
+            # 1. Try Semantic Scholar first (often better abstracts, but strict rate limits)
             try:
+                print(f"🔍 Searching Semantic Scholar for: '{term}'")
                 semantic_papers = self._search_semantic_scholar(term)
                 term_papers.extend(semantic_papers)
                 sources_tried.append(f"Semantic Scholar: {len(semantic_papers)} papers for '{term}'")
-                time.sleep(0.5)  # Be respectful to API rate limits
+                time.sleep(2)  # Longer delay for Semantic Scholar (strict rate limits)
             except Exception as e:
                 print(f"⚠️ Semantic Scholar search failed for '{term}': {e}")
             
             # 2. Try CrossRef if we need more papers
             if len(term_papers) < 5:
                 try:
+                    print(f"🔍 Searching CrossRef for: '{term}'")
                     crossref_papers = self._search_crossref(term)
                     term_papers.extend(crossref_papers)
                     sources_tried.append(f"CrossRef: {len(crossref_papers)} papers for '{term}'")
-                    time.sleep(0.5)  # Be respectful to API rate limits
+                    time.sleep(1)  # Moderate delay for CrossRef
                 except Exception as e:
                     print(f"⚠️ CrossRef search failed for '{term}': {e}")
             
             # 3. Try arXiv for cutting-edge research
             try:
+                print(f"🔍 Searching arXiv for: '{term}'")
                 arxiv_papers = self._search_arxiv(term)
                 term_papers.extend(arxiv_papers)
                 sources_tried.append(f"arXiv: {len(arxiv_papers)} papers for '{term}'")
-                time.sleep(0.5)  # Be respectful to API rate limits
+                time.sleep(1)  # Moderate delay for arXiv
             except Exception as e:
                 print(f"⚠️ arXiv search failed for '{term}': {e}")
             
@@ -244,42 +257,59 @@ Be specific and actionable. Focus on findable, citable academic sources."""
         return validated_papers
     
     def _search_semantic_scholar(self, term: str) -> List[Dict[str, Any]]:
-        """Search Semantic Scholar API for papers"""
+        """Search Semantic Scholar API for papers with rate limit handling"""
         papers = []
-        try:
-            url = "https://api.semanticscholar.org/graph/v1/paper/search"
-            params = {
-                'query': term,
-                'limit': 5,
-                'fields': 'paperId,title,authors,year,abstract,openAccessPdf,citationCount'
-            }
-            
-            # Add user-agent header for better API compatibility
-            headers = {
-                'User-Agent': 'Knowledgenaut/1.0 (research tool)'
-            }
-            
-            response = requests.get(url, params=params, headers=headers, timeout=10)
-            print(f"Semantic Scholar API response status: {response.status_code}")
-            
-            if response.status_code == 200:
-                data = response.json()
-                for item in data.get('data', []):
-                    papers.append({
-                        'doi': f"semantic-scholar:{item.get('paperId', '')}",
-                        'title': item.get('title', ''),
-                        'authors': [author.get('name', '') for author in item.get('authors', [])],
-                        'year': item.get('year'),
-                        'abstract': item.get('abstract', ''),
-                        'url': item.get('openAccessPdf', {}).get('url', '') if item.get('openAccessPdf') else '',
-                        'citation_count': item.get('citationCount', 0),
-                        'search_term': term,
-                        'source': 'semantic_scholar'
-                    })
-            else:
-                print(f"Semantic Scholar API error: {response.status_code} - {response.text}")
-        except Exception as e:
-            print(f"Semantic Scholar error for '{term}': {e}")
+        max_retries = 3
+        base_delay = 2
+        
+        for attempt in range(max_retries):
+            try:
+                url = "https://api.semanticscholar.org/graph/v1/paper/search"
+                params = {
+                    'query': term,
+                    'limit': 5,
+                    'fields': 'paperId,title,authors,year,abstract,openAccessPdf,citationCount'
+                }
+                
+                # Add user-agent header for better API compatibility
+                headers = {
+                    'User-Agent': 'Knowledgenaut/1.0 (research tool) - Respectful API usage'
+                }
+                
+                response = requests.get(url, params=params, headers=headers, timeout=15)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    for item in data.get('data', []):
+                        papers.append({
+                            'doi': f"semantic-scholar:{item.get('paperId', '')}",
+                            'title': item.get('title', ''),
+                            'authors': [author.get('name', '') for author in item.get('authors', [])],
+                            'year': item.get('year'),
+                            'abstract': item.get('abstract', ''),
+                            'url': item.get('openAccessPdf', {}).get('url', '') if item.get('openAccessPdf') else '',
+                            'citation_count': item.get('citationCount', 0),
+                            'search_term': term,
+                            'source': 'semantic_scholar'
+                        })
+                    break  # Success, exit retry loop
+                    
+                elif response.status_code == 429:
+                    # Rate limited - exponential backoff
+                    delay = base_delay * (2 ** attempt)
+                    print(f"⚠️ Rate limited by Semantic Scholar. Waiting {delay} seconds (attempt {attempt + 1}/{max_retries})")
+                    time.sleep(delay)
+                    if attempt == max_retries - 1:
+                        print(f"❌ Semantic Scholar rate limit exceeded after {max_retries} attempts for '{term}'")
+                else:
+                    print(f"Semantic Scholar API error: {response.status_code} - {response.text}")
+                    break  # Don't retry non-rate-limit errors
+                    
+            except Exception as e:
+                print(f"Semantic Scholar error for '{term}' (attempt {attempt + 1}): {e}")
+                if attempt == max_retries - 1:
+                    break
+                time.sleep(base_delay)
         
         return papers
 
@@ -416,9 +446,10 @@ Include terms that would find:
 Return ONLY a JSON list of search terms, like: ["term 1", "term 2", "term 3", "criticism of term 1", "limitations of term 2", "bias in term 3"]
 Use precise academic terminology that would work well in academic database searches."""
 
-        response = self.client.call_llm_with_vertex_support(
+        response, metadata = self.gateway.execute_call(
             model=self.research_model,
-            messages=[{"role": "user", "content": prompt}]
+            prompt=prompt,
+            system_prompt="You are a research assistant extracting academic search terms."
         )
         
         try:
@@ -524,10 +555,12 @@ Address these areas:
 
 Be rigorous - err on the side of lower confidence if evidence is thin. Explicitly cite paper titles and DOIs for claims."""
 
-        return self.client.call_llm_with_vertex_support(
+        response, metadata = self.gateway.execute_call(
             model=self.synthesis_model,
-            messages=[{"role": "user", "content": prompt}]
+            prompt=prompt,
+            system_prompt="You are synthesizing academic research with rigorous, evidence-based confidence levels."
         )
+        return response
 
     def _analyze_corpus_quality(self, papers: List[Dict]) -> str:
         """Analyze the quality and characteristics of the paper corpus"""
@@ -838,10 +871,12 @@ Tear this apart systematically:
 Be harsh but constructive. Point out specific weaknesses and suggest improvements.
 Your goal is to make this research synthesis more robust and honest."""
 
-        return self.client.call_llm_with_vertex_support(
+        response, metadata = self.gateway.execute_call(
             model=self.critique_model,  # Use premium model for sophisticated critique
-            messages=[{"role": "user", "content": prompt}]
+            prompt=prompt,
+            system_prompt="You are a cranky, adversarial academic reviewer."
         )
+        return response
     
     def _final_synthesis(self, synthesis: str, critique: str, question: str) -> str:
         """Phase 5: Respond to critique and provide final research guidance"""
@@ -868,10 +903,12 @@ Provide an improved final synthesis that:
 Make this a robust, honest assessment that acknowledges uncertainty while providing clear guidance.
 Include explicit confidence levels and cite the DOIs of key papers."""
 
-        return self.client.call_llm_with_vertex_support(
+        response, metadata = self.gateway.execute_call(
             model=self.research_model,  # Back to ultra-cheap model for final synthesis
-            messages=[{"role": "user", "content": prompt}]
+            prompt=prompt,
+            system_prompt="You are responding to peer review and improving your research synthesis."
         )
+        return response
 
 def main():
     """Test the knowledgenaut with a sample research question"""
