@@ -16,24 +16,63 @@ Discernus exists to **dramatically advance understanding of human rhetoric using
 
 **Before doing ANY development**, run these tests to ensure the system works:
 
+### 🚨 CRITICAL: Environment Check First!
+
+**ALWAYS start with environment validation** to prevent the costly venv confusion dance:
+
+```bash
+make check
+```
+
+**If that fails, set up the environment:**
+```bash
+make install && make check
+```
+
+**Why This Matters**: Cursor agents often waste 10-20+ tool calls debugging environment issues. The `make check` command validates your setup in seconds and provides clear fix instructions.
+
 ### ⚡ Quick Test (30 seconds)
 ```bash
-python3 discernus/tests/quick_test.py
+# Use Make (recommended - handles venv automatically):
+make test
+
+# Or manual (ALWAYS use this pattern):
+source venv/bin/activate && python3 discernus/tests/quick_test.py
 ```
 **If this fails**: There's a fundamental problem. Check environment, imports, and basic setup.
 
 ### ✅ Simple Working Tests (3 minutes)
 ```bash
-python3 discernus/tests/simple_working_tests.py
-python3 -m unittest discernus.tests.simple_working_tests -v
+# Comprehensive test suite:
+make test
+
+# Or manual testing:
+source venv/bin/activate && python3 discernus/tests/simple_working_tests.py
+source venv/bin/activate && python3 -m unittest discernus.tests.simple_working_tests -v
 ```
 **If this fails**: Check the specific test failure and fix the underlying issue.
 
-### 🔍 Environment Check
+### 🔍 Environment Debugging
 ```bash
-python3 -c "from discernus.tests import print_test_environment; print_test_environment()"
+# Environment check utility:
+source venv/bin/activate && python3 -c "from discernus.tests import print_test_environment; print_test_environment()"
+
+# Or use the comprehensive checker:
+source venv/bin/activate && python3 scripts/check_environment.py
 ```
 **Use this**: To verify Python version, virtual environment, and dependencies.
+
+### 🎯 Model Testing (Quick Validation)
+```bash
+# Test any model quickly:
+make harness-simple MODEL="vertex_ai/gemini-2.5-flash" PROMPT="What is 2+2?"
+
+# List available models:
+make harness-list
+
+# See all Make commands:
+make help
+```
 
 ### ⚠️ Legacy Tests (Use with Caution)
 ```bash
@@ -136,20 +175,25 @@ python3 -m unittest discernus.tests.simple_working_tests.TestYourSpecificTest -v
 
 ## Common Pitfalls to Avoid
 
-1. **Parsing Obsession**: If you're parsing JSON from LLM responses, you're doing it wrong
-2. **Domain Lock-in**: Don't assume political science - think universal text analysis
-3. **Orchestrator Intelligence**: Keep orchestrators as simple message routers
-4. **Mathematical Software**: Let LLMs design math, secure code execute it
-5. **Framework-Specific Assumptions**: Never hardcode field names or assume specific data structures
-6. **SOAR Terminology**: We've moved past SOAR - it's just "Discernus" now
-7. **Testing Shortcuts**: Always run tests before, during, and after development
-8. **Legacy Test Reliance**: Use simple working tests, not complex legacy tests
+1. **Environment Confusion**: Always use `make check` first; NEVER recreate venv unless asked
+2. **Parsing Obsession**: If you're parsing JSON from LLM responses, you're doing it wrong
+3. **Domain Lock-in**: Don't assume political science - think universal text analysis
+4. **Orchestrator Intelligence**: Keep orchestrators as simple message routers
+5. **Mathematical Software**: Let LLMs design math, secure code execute it
+6. **Framework-Specific Assumptions**: Never hardcode field names or assume specific data structures
+7. **SOAR Terminology**: We've moved past SOAR - it's just "Discernus" now
+8. **Testing Shortcuts**: Always run tests before, during, and after development
+9. **Legacy Test Reliance**: Use simple working tests, not complex legacy tests
+10. **System Python Usage**: Always use `source venv/bin/activate && python3`, never bare `python`
 
 **🚨 CRITICAL**: The #1 cause of production failures is agents making hardcoded assumptions about framework field names. Always write framework-agnostic code.
 
+**🚨 VELOCITY KILLER**: The #2 cause of wasted Cursor usage is environment confusion. Use `make check` and standardized patterns.
+
 ## Emergency Contacts
 
-- **Testing**: `discernus/tests/README.md` - Complete testing guide
+- **Environment Management**: `docs/CURSOR_AGENT_ENVIRONMENT_GUIDE.md` - Quick patterns for venv
+- **Testing**: `discernus/tests/README.md` - Complete testing guide  
 - **Architecture questions**: `THIN_ARCHITECTURE_REFERENCE.md`
 - **Implementation patterns**: `AGENT_DESIGN_PRINCIPLES.md`
 - **Strategic context**: `DISCERNUS_STRATEGIC_VISION.md`
@@ -164,15 +208,17 @@ python3 -m unittest discernus.tests.simple_working_tests.TestYourSpecificTest -v
 
 ## Development Workflow
 
-1. **🧪 Test First**: Run `python3 discernus/tests/quick_test.py`
-2. **📖 Read Docs**: Understand the component you're working with
-3. **🔍 Check Environment**: Use environment check utility if needed
+1. **🔧 Environment First**: Run `make check` to validate setup (saves 10+ wasted tool calls)
+2. **🧪 Test Baseline**: Run `make test` to ensure system works before changes  
+3. **📖 Read Docs**: Understand the component you're working with
 4. **💻 Write Code**: Follow THIN principles and framework-agnostic patterns
-5. **✅ Test Changes**: Run simple working tests to validate
+5. **✅ Test Changes**: Run `make test` to validate your changes work
 6. **🔄 Iterate**: Refine based on test feedback
 7. **📝 Document**: Update relevant documentation
 
-**Never skip testing** - it's the fastest way to catch issues and ensure your changes work correctly.
+**Environment Pattern**: Always use `make` commands or `source venv/bin/activate && python3` pattern
+
+**Never skip environment check and testing** - it's the fastest way to catch issues and ensure your changes work correctly.
 
 ---
 
