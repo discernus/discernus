@@ -123,17 +123,17 @@ class ModelRegistryUpdater:
                 models = []
                 for model in data.get('data', []):
                     if model['id'] in whitelisted_models:
+                        # Only extract the fields we need, don't dump the whole object
                         models.append({
-                            "id": model['id'],
-                            "provider": "openrouter",
-                            "display_name": model.get('name', model['id']),
-                            "context_window": model.get('context_length', 4096),
-                            "performance_tier": self.infer_performance_tier(model),
+                            "id": model.get('id'),
+                            "display_name": model.get('name'),
+                            "context_window": model.get('context_length'),
                             "costs": {
-                                "input_per_million_tokens": model.get('pricing', {}).get('prompt', 0) * 1000000,
-                                "output_per_million_tokens": model.get('pricing', {}).get('completion', 0) * 1000000
+                                "input_per_million_tokens": round(float(model.get('pricing', {}).get('prompt', 0.0)) * 1000000, 4),
+                                "output_per_million_tokens": round(float(model.get('pricing', {}).get('completion', 0.0)) * 1000000, 4)
                             }
                         })
+
                 print(f"✅ Found {len(models)} whitelisted models on OpenRouter")
                 return models
         except Exception as e:
