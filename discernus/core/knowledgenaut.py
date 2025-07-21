@@ -11,7 +11,7 @@ import xml.etree.ElementTree as ET
 import time
 from typing import Dict, List, Any, Optional
 from datetime import datetime
-from discernus.core.thin_litellm_client import ThinLiteLLMClient
+from discernus.core.ultra_thin_llm_client import UltraThinLLMClient as ThinLiteLLMClient
 
 class UltraThinKnowledgenaut:
     """

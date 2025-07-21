@@ -32,7 +32,7 @@ from typing import Dict
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from discernus.orchestration.orchestrator import ThinOrchestrator, ResearchConfig
+from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
 from discernus.core.agent_roles import get_available_researcher_profiles, add_custom_researcher_profile
 
 # Configure logging for dev testing

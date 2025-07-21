@@ -18,7 +18,7 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 try:
-    from discernus.core.thin_litellm_client import ThinLiteLLMClient
+    from discernus.core.ultra_thin_llm_client import UltraThinLLMClient as ThinLiteLLMClient
     LITELLM_AVAILABLE = True
 except ImportError:
     LITELLM_AVAILABLE = False
