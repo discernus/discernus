@@ -16,7 +16,7 @@ USAGE:
     # Different researcher profile
     python3 dev_test_runner.py --profile "political_discourse_expert"
 
-    # Test knowledgenaut specifically
+    # Test DiscernusLibrarian specifically
     python3 dev_test_runner.py --test-knowledgenaut
 """
 
@@ -46,7 +46,7 @@ class DevTestRunner:
     """Development test runner for automated sessions"""
     
     def __init__(self):
-        self.orchestrator = ThinOrchestrator()
+        self.orchestrator = WorkflowOrchestrator("/tmp/test_project")  # Use current orchestrator
         # Get available profiles from the externalized system
         self.available_profiles = get_available_researcher_profiles()
     
@@ -101,7 +101,7 @@ class DevTestRunner:
             raise
     
     async def test_knowledgenaut_specifically(self) -> dict:
-        """Run a test specifically designed to test the knowledgenaut agent"""
+        """Run a test specifically designed to test the DiscernusLibrarian agent"""
         
         research_question = """
 I've developed the Cohesive Flourishing Framework (CFF) v2.0 as a comprehensive computational rhetoric analysis framework. 
@@ -127,7 +127,7 @@ Five Orthogonal Axes: Identity, Fear/Hope, Envy/Compersion, Enmity/Amity, Goal o
             simulated_researcher_profile="computational_social_scientist"
         )
         
-        logger.info("🧪 Testing knowledgenaut agent specifically")
+        logger.info("🧪 Testing DiscernusLibrarian agent specifically")
         logger.info("📋 Framework validation scenario")
         
         results = await self.orchestrator.run_automated_session(config)
@@ -232,7 +232,7 @@ Examples:
                        help='Simulated researcher profile')
     parser.add_argument('--test-knowledgenaut', 
                        action='store_true',
-                       help='Run specific test for knowledgenaut agent')
+                       help='Run specific test for DiscernusLibrarian agent')
     parser.add_argument('--list-profiles',
                        action='store_true', 
                        help='List available researcher profiles')

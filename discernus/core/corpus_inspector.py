@@ -6,7 +6,7 @@ Corpus Inspector - File Reading Infrastructure for Corpus Detective Agent
 THIN Principle: Provides robust file system operations for corpus detective agent.
 Software handles messy real-world file reading; LLM provides intelligence about content.
 
-This is the infrastructure equivalent of knowledgenaut.py - the corpus detective agent
+This is the infrastructure equivalent of discernuslibrarian.py - the corpus detective agent
 needs this to actually inspect files from user-provided directories.
 """
 
