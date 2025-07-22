@@ -8,6 +8,44 @@
 - **If imports fail, install missing packages, do NOT recreate venv**
 - **Check `which python3` shows venv path before running code**
 
+## 🚨 CRITICAL: GIT COMMAND RULES  
+- **ALWAYS use SHORT commit messages (under 50 characters)**
+- **NEVER write long multi-line commit messages**
+- **ALWAYS use `git status` before complex git operations**
+- **ALWAYS use `gh issue view [number] | cat` (never without | cat)**
+- **NEVER use complex git commit messages that can hang terminals**
+
+## ✅ REQUIRED GIT PATTERNS:
+```bash
+# GOOD - Short commit messages that won't hang
+git commit -m "Fix documentation structure"
+git commit -m "Add new feature X"
+git commit -m "Update config files"
+
+# GOOD - Safe GitHub CLI usage
+gh issue view 135 | cat
+gh issue list --limit 10
+gh auth status
+
+# ALWAYS check status first
+git status && git commit -m "Brief message"
+```
+
+## 🚫 FORBIDDEN GIT PATTERNS:
+```bash
+# BAD - Long messages that can hang AI terminals
+git commit -m "Very long commit message with lots of details and explanations that can cause terminal hanging in AI agent environments..."
+
+# BAD - Commands without pager bypass
+gh issue view 135  # Can hang indefinitely
+
+# BAD - Complex multi-line operations
+git commit -m """
+Multi-line message
+with lots of details
+""" # Can cause hanging
+```
+
 ## ✅ REQUIRED ENVIRONMENT PATTERNS:
 ```bash
 # ALWAYS start Python commands this way:
