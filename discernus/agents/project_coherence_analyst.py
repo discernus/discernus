@@ -72,7 +72,7 @@ class ProjectCoherenceAnalyst:
         
         # 2. Perform the Socratic Validation
         validation_prompt = self._create_socratic_prompt(framework_content, experiment_content)
-        model_name = self.model_registry.get_model_for_task('synthesis')
+        model_name = "vertex_ai/gemini-2.5-pro" # Use Gemini 2.5 Pro per user preference
         if not model_name:
             return {"validation_passed": False, "error": "No suitable model found for validation."}
             
@@ -88,7 +88,7 @@ TEXT:
 {response}
 ---
 """
-        extraction_model = self.model_registry.get_model_for_task('coordination')
+        extraction_model = "vertex_ai/gemini-2.5-flash" # Use Gemini 2.5 Flash per user preference  
         if not extraction_model:
             return {"validation_passed": False, "error": "No suitable model found for JSON extraction."}
         
@@ -350,9 +350,10 @@ Your task is to assess the project's methodological soundness and return a singl
         session_id = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         project_path_obj = Path(framework_path).parent
 
-        # Ensure corpus_path is set before use
+        # Use passed corpus_path directly - THIN: trust the caller
         if not corpus_path:
             corpus_path = str(project_path_obj / "corpus")
+        print(f"📂 Using corpus_path: {corpus_path}")
         
         try:
             # --- 1. Load Core Assets ---
@@ -383,7 +384,7 @@ Your task is to assess the project's methodological soundness and return a singl
                 "corpus_files": corpus_files,
                 "framework_content": framework_content,
                 "experiment_content": experiment_content,
-                "analysis_instructions": analysis_instructions,
+                "analysis_agent_instructions": analysis_instructions,
                 **execution_plan  # Unpack the generated plan into the state
             }
             
@@ -462,16 +463,26 @@ You are an expert research assistant responsible for creating a machine-readable
 ---
 
 **Your Task:**
-Read the experiment description and generate a structured JSON object representing the complete execution plan. The JSON object must contain the following keys:
+Read the experiment description and generate a complete execution plan as a JSON object.
+
+RESPONSE FORMAT: Start your response immediately with the opening brace. Do not include any text before or after the JSON. No markdown formatting.
+
+The JSON object must contain the following keys:
 1.  `models` (list[str]): A list of the exact model identifiers to use for the analysis. Infer this from the text.
 2.  `num_runs` (int): The number of times to run the analysis for each model and text file.
 3.  `workflow` (list[dict]): A list of dictionaries, where each dictionary represents a high-level step in the process. Each step must have an `agent` key and an optional `params` key.
 4.  `execution_plan` (list[dict]): A detailed, low-level schedule for the `AnalysisAgent` step. This should be a list where each item represents a single API call (a batch). Each item must have `agent_id`, `model`, `file_batch` (a list of filenames), and `delay_after_seconds`.
 
-**Important Considerations:**
-- The `execution_plan` is the most critical part. You must break the corpus files into appropriately sized batches for each model. For a simple case like this, you can put all files for a model in a single batch.
-- The `workflow` is a high-level sequence. The `params` for a step often refer to the *output* of a *previous* step. Use the output key names defined in the agent registry (e.g., `interpretation_text`, `stats_file_path`). For example, if a conclusion agent needs to review an interpretation, its params might be `{{ "report_content_key": "interpretation_text" }}`.
-- Pay close attention to requests for review cycles or revisions, as this implies multiple steps with the same agent but different parameters in the `workflow`.
+**JSON Structure Requirements:**
+- CRITICAL: Generate valid JSON with proper syntax. All string values must be quoted with double quotes.
+- CRITICAL: All parameters must be INSIDE the "params" object for each agent.
+- CRITICAL: Ensure all braces and brackets are properly matched and closed.
+- The `workflow` is a high-level sequence. The `params` for a step contain ALL configuration for that agent.
+- The `execution_plan` breaks corpus files into batches for each model.
+
+**Example of CORRECT agent structure:**
+- agent: SynthesisAgent with params containing model, description, and result keys
+- All parameters must be INSIDE the params object
 
 **Example JSON Output Structure:**
 ```json
@@ -499,21 +510,24 @@ Read the experiment description and generate a structured JSON object representi
 **Output ONLY the raw JSON object, with no other text or explanation.**
 """
         try:
-            model_name = self.model_registry.get_model_for_task('synthesis') # Use a powerful model
+            model_name = "vertex_ai/gemini-2.5-pro" # Use Gemini 2.5 Pro per user preference
             if not model_name:
                 raise ValueError("No suitable model found for plan generation.")
             
             response, _ = self.gateway.execute_call(model=model_name, prompt=prompt)
             
-            # Extract JSON from markdown code blocks if present
-            if '```json' in response and '```' in response:
-                json_start = response.find('```json') + 7
-                json_end = response.find('```', json_start)
-                json_content = response[json_start:json_end].strip()
-            else:
-                json_content = response.strip()
+            # THIN: Be flexible with LLM response format - accept common patterns
+            response_text = response.strip()
             
-            return json.loads(json_content)
+            # Handle common LLM response patterns gracefully
+            if response_text.startswith('```json') and response_text.endswith('```'):
+                # Extract JSON from markdown blocks
+                response_text = response_text[7:-3].strip()
+            elif response_text.startswith('```') and response_text.endswith('```'):
+                # Extract from generic code blocks  
+                response_text = response_text[3:-3].strip()
+            
+            return json.loads(response_text)
         except (json.JSONDecodeError, ValueError) as e:
             print(f"❌ Error generating or parsing execution plan: {e}")
             print(f"LLM Response was: {response}")
@@ -526,7 +540,7 @@ Read the experiment description and generate a structured JSON object representi
         
         instruction_prompt = f"Generate analysis agent instructions for this framework and experiment:\n\nFRAMEWORK: {framework_content}\n\nEXPERIMENT: {experiment_content}\n\nDISCOVERED ASSETS (as specified by experiment):\n{discovered_assets}\n\nCreate detailed instructions..."
         
-        model_name = self.model_registry.get_model_for_task('synthesis')
+        model_name = "vertex_ai/gemini-2.5-pro" # Use Gemini 2.5 Pro per user preference
         if not model_name:
             print("⚠️ No suitable model found for instruction generation. Using mock instructions.")
             return "[MOCK] Analysis instructions would be generated here."
