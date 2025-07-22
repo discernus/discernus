@@ -18,11 +18,12 @@ The docs directory contains comprehensive guides for:
 # Install dependencies
 pip install -r requirements.txt
 
-# Run validation
-python3 discernus_cli.py validate ./my_project
+# Execute analysis with THIN Experiment Lifecycle (includes validation gauntlet)
+python3 discernus_cli.py execute ./my_project/experiment.md
 
-# Execute analysis
-python3 discernus_cli.py execute ./my_project
+# Or validate first, then execute
+python3 discernus_cli.py validate ./my_project/experiment.md
+python3 discernus_cli.py execute ./my_project/experiment.md
 ```
 
 ## 🏗️ THIN Architecture Principles
@@ -48,11 +49,17 @@ python3 discernus_cli.py execute ./my_project
 ## 📋 Commands
 
 ```bash
-# Validate project structure and specifications
-python3 discernus_cli.py validate ./my_project
+# Execute experiment with THIN Experiment Lifecycle (validation gauntlet + enhancement + execution)
+python3 discernus_cli.py execute ./my_project/experiment.md
 
-# Execute validated project with full orchestration
-python3 discernus_cli.py execute ./my_project
+# Validate project structure and specifications only
+python3 discernus_cli.py validate ./my_project/experiment.md
+
+# Resume interrupted experiment with intelligent state analysis (Issue #132)
+python3 discernus_cli.py resume ./my_project
+
+# Resume with legacy direct continuation
+python3 discernus_cli.py resume ./my_project --legacy
 
 # List available analytical frameworks
 python3 discernus_cli.py list-frameworks

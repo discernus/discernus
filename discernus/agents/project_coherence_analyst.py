@@ -57,6 +57,8 @@ class ProjectCoherenceAnalyst:
         
         self.model_registry = ModelRegistry()
         self.gateway = LLMGateway(self.model_registry)
+        self._load_agent_registry()
+        self.project_path = None
 
     async def validate_project(self, project_path: str) -> Dict[str, Any]:
         """
