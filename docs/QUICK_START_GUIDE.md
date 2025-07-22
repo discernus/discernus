@@ -30,15 +30,8 @@ pip install -r requirements.txt
 
 **The Universal Command**:
 ```bash
-python3 -c "
-from discernus.agents.validation_agent import ValidationAgent
-agent = ValidationAgent()
-agent.validate_and_execute_sync(
-    'path/to/your/framework.md',
-    'path/to/your/experiment.md', 
-    'path/to/your/corpus/'
-)
-"
+# THIN Experiment Lifecycle - Intelligent validation and execution
+python3 discernus_cli.py execute ./my_project/experiment.md
 ```
 
 ## Multi-Domain Use Cases
@@ -50,20 +43,14 @@ agent.validate_and_execute_sync(
 **Corpus**: Campaign speeches, policy statements, debate transcripts
 
 ```bash
-python3 -c "
-from discernus.agents.validation_agent import ValidationAgent
-agent = ValidationAgent()
-agent.validate_and_execute_sync(
-    'frameworks/political_discourse_analysis.md',
-    'experiments/democratic_engagement_study.md', 
-    'corpus/political_speeches/'
-)
-"
+# Execute with THIN Experiment Lifecycle validation gauntlet
+python3 discernus_cli.py execute ./projects/political_discourse/experiment.md
 ```
 
 **What Happens**:
-- **Validation**: System validates framework completeness and experiment design
-- **Cost Estimation**: Provides upfront pricing based on corpus size and model selection
+- **Validation Gauntlet**: TrueValidationAgent, ProjectCoherenceAnalyst, StatisticalAnalysisConfigurationAgent, EnsembleConfigurationAgent, WorkflowCompletenessValidator
+- **Enhancement**: Automatic detection of missing SynthesisAgent and workflow completion
+- **Cost Estimation**: Provides upfront pricing based on corpus size and model selection  
 - **Analysis**: Ensemble of LLMs applies framework to each text
 - **Statistical Analysis**: Secure code execution calculates descriptive statistics
 - **Interpretation**: LLMs provide natural language analysis of results
@@ -76,15 +63,8 @@ agent.validate_and_execute_sync(
 **Corpus**: Customer reviews, social media posts, support tickets
 
 ```bash
-python3 -c "
-from discernus.agents.validation_agent import ValidationAgent
-agent = ValidationAgent()
-agent.validate_and_execute_sync(
-    'frameworks/brand_sentiment_analysis.md',
-    'experiments/customer_perception_study.md', 
-    'corpus/customer_communications/'
-)
-"
+# Execute with THIN Experiment Lifecycle validation gauntlet  
+python3 discernus_cli.py execute ./projects/brand_sentiment/experiment.md
 ```
 
 **Business Value**:
@@ -100,15 +80,8 @@ agent.validate_and_execute_sync(
 **Corpus**: Novels, short stories, poetry collections
 
 ```bash
-python3 -c "
-from discernus.agents.validation_agent import ValidationAgent
-agent = ValidationAgent()
-agent.validate_and_execute_sync(
-    'frameworks/narrative_analysis.md',
-    'experiments/authorial_technique_study.md', 
-    'corpus/literary_works/'
-)
-"
+# Execute with THIN Experiment Lifecycle validation gauntlet
+python3 discernus_cli.py execute ./projects/narrative_analysis/experiment.md
 ```
 
 **Academic Benefits**:
@@ -124,15 +97,8 @@ agent.validate_and_execute_sync(
 **Corpus**: Sermons, homilies, pastoral letters
 
 ```bash
-python3 -c "
-from discernus.agents.validation_agent import ValidationAgent
-agent = ValidationAgent()
-agent.validate_and_execute_sync(
-    'frameworks/theological_discourse.md',
-    'experiments/pastoral_communication_study.md', 
-    'corpus/religious_texts/'
-)
-"
+# Execute with THIN Experiment Lifecycle validation gauntlet
+python3 discernus_cli.py execute ./projects/theological_discourse/experiment.md
 ```
 
 **Institutional Applications**:
@@ -148,15 +114,8 @@ agent.validate_and_execute_sync(
 **Corpus**: Legislative proposals, regulatory documents, policy briefs
 
 ```bash
-python3 -c "
-from discernus.agents.validation_agent import ValidationAgent
-agent = ValidationAgent()
-agent.validate_and_execute_sync(
-    'frameworks/policy_analysis.md',
-    'experiments/implementation_feasibility_study.md', 
-    'corpus/policy_documents/'
-)
-"
+# Execute with THIN Experiment Lifecycle validation gauntlet
+python3 discernus_cli.py execute ./projects/policy_analysis/experiment.md
 ```
 
 **Policy Applications**:

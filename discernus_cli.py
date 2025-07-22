@@ -423,24 +423,40 @@ def test(pattern: str):
 @click.option('--from-step', type=int, help='Step number to resume from (1-based)')
 @click.option('--dry-run', is_flag=True, help='Show what would be resumed without executing')
 @click.option('--list-states', is_flag=True, help='List available state files for resumption')
-def resume(project_path: str, state_file: str, from_step: int, dry_run: bool, list_states: bool):
+@click.option('--intelligent/--legacy', default=True, help='Use intelligent resumption analysis (default: True)')
+def resume(project_path: str, state_file: str, from_step: int, dry_run: bool, list_states: bool, intelligent: bool):
     """
-    Resume an interrupted Discernus experiment from a saved state
+    Resume an interrupted Discernus experiment with intelligent state analysis
     
     PROJECT_PATH: Path to the project directory containing the interrupted experiment
     
-    Resumes workflow execution from the latest state file or a specified state file.
-    Automatically detects the last completed step and continues from there.
+    NEW: Intelligent resumption with state analysis, workflow change detection,
+    resource validation, and user guidance. Provides comprehensive pre-flight 
+    checks before resuming experiment execution.
+    
+    Features:
+    - State integrity validation
+    - Workflow change detection since interruption  
+    - Resource availability validation
+    - Clear progress reporting and user guidance
+    - Provenance-compliant audit trails
+    - Clean handoff to WorkflowOrchestrator
     
     Examples:
-        discernus resume ./projects/my_experiment
+        discernus resume ./projects/my_experiment                    # Intelligent analysis
+        discernus resume ./projects/my_experiment --dry-run          # Show analysis only
+        discernus resume ./projects/my_experiment --legacy          # Use legacy resume
         discernus resume ./projects/my_experiment --state-file state_after_step_2.json
         discernus resume ./projects/my_experiment --from-step 3
-        discernus resume ./projects/my_experiment --dry-run
         discernus resume ./projects/my_experiment --list-states
     """
-    click.echo("🔄 Discernus Experiment Resume")
-    click.echo("=" * 40)
+    if intelligent:
+        click.echo("🧠 Discernus Intelligent Experiment Resume")  
+        click.echo("=" * 45)
+        click.echo("✨ Enhanced with state analysis and workflow validation")
+    else:
+        click.echo("🔄 Discernus Experiment Resume (Legacy Mode)")
+        click.echo("=" * 40)
     
     project_dir = Path(project_path)
     
@@ -448,6 +464,58 @@ def resume(project_path: str, state_file: str, from_step: int, dry_run: bool, li
     if list_states:
         _list_available_states(project_dir)
         return
+        
+    # Route to intelligent or legacy resumption
+    if intelligent:
+        return _resume_with_intelligence(project_dir, state_file, from_step, dry_run)
+    else:
+        return _resume_legacy(project_dir, state_file, from_step, dry_run)
+
+
+def _resume_with_intelligence(project_dir: Path, state_file: str, from_step: int, dry_run: bool):
+    """Use intelligent resumption system with state analysis and validation"""
+    import asyncio
+    from discernus.core.experiment_lifecycle import ExperimentResumption
+    
+    try:
+        # Initialize intelligent resumption system
+        resumption = ExperimentResumption(str(project_dir))
+        
+        # Convert CLI arguments
+        state_file_path = Path(state_file) if state_file else None
+        
+        # Execute intelligent resumption
+        result = asyncio.run(resumption.resume_experiment(
+            state_file=state_file_path,
+            from_step=from_step,
+            dry_run=dry_run
+        ))
+        
+        if result.get('status') == 'cancelled':
+            click.echo("🚫 Resume cancelled by user.")
+            return
+        elif result.get('status') == 'dry_run_success':
+            analysis = result.get('analysis')
+            click.echo(f"🧪 DRY RUN COMPLETE - Would resume from step {analysis.resume_step}")
+            click.echo(f"📊 Analysis: {analysis.resumption_strategy}")
+            return
+        elif result.get('status') == 'success':
+            click.secho(f"\n🎉 Intelligent resume completed successfully!", fg='green')
+            click.echo(f"   Session ID: {result['session_id']}")
+            click.echo(f"   Results: {result['session_results_path']}")
+            if result.get('intelligent_resumption'):
+                click.echo("✨ Enhanced with intelligent state analysis")
+        else:
+            click.secho(f"❌ Resume failed: {result.get('status', 'Unknown error')}", fg='red')
+            
+    except Exception as e:
+        click.secho(f"❌ Intelligent resume failed: {str(e)}", fg='red')
+        click.echo("💡 Try using --legacy flag for traditional resume behavior")
+        sys.exit(1)
+
+
+def _resume_legacy(project_dir: Path, state_file: str, from_step: int, dry_run: bool):
+    """Legacy resumption using direct CLI logic (original implementation)"""
     
     # Find state file
     if state_file:
