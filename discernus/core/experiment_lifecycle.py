@@ -28,6 +28,14 @@ from discernus.agents.project_coherence_analyst import ProjectCoherenceAnalyst
 from discernus.agents.statistical_analysis_configuration_agent import StatisticalAnalysisConfigurationAgent
 from discernus.agents.ensemble_configuration_agent import EnsembleConfigurationAgent
 
+# Additional imports for intelligent resumption
+import asyncio
+import sys
+import re
+import datetime
+
+from discernus.gateway.model_registry import ModelRegistry
+
 
 @dataclass
 class ValidationGauntletResult:
@@ -52,6 +60,22 @@ class ExperimentValidationResult:
     validation_issues: List[str]
     recommendations: List[str]
     enhanced_workflow: Optional[List[Dict[str, Any]]] = None
+
+
+@dataclass
+class ResumeAnalysisResult:
+    """Result of intelligent resume analysis"""
+    can_resume: bool
+    state_file: Optional[Path]
+    resume_step: int
+    total_steps: int
+    workflow_changes: List[str]
+    resource_warnings: List[str]
+    resumption_strategy: str  # 'continue', 'restart_from_step', 'workflow_changed'
+    user_guidance: str
+    state_integrity: bool
+    completed_steps: List[str]
+    remaining_steps: List[str]
 
 
 class ExperimentLifecycleManager:
@@ -809,57 +833,530 @@ class ExperimentResumption:
     """
     
     def __init__(self, project_path: str):
-        self.project_path = project_path
+        self.project_path = Path(project_path)
+        
+        # Initialize LLM components for intelligent analysis
+        self.model_registry = ModelRegistry()
+        self.gateway = LLMGateway(self.model_registry)
+        
+        # Initialize validation agents for workflow analysis
+        self.validation_agent = TrueValidationAgent(self.gateway)
+        self.coherence_analyst = ProjectCoherenceAnalyst(self.gateway)
     
     async def resume_experiment(self, 
                                state_file: Optional[Path] = None,
-                               from_step: Optional[int] = None) -> Dict[str, Any]:
+                               from_step: Optional[int] = None,
+                               dry_run: bool = False) -> Dict[str, Any]:
         """
         Smart experiment resumption with state analysis.
         
         Process:
         1. Discover and analyze state files
-        2. Validate resumption point
+        2. Validate resumption point and state integrity
         3. Check for workflow changes since interruption
-        4. Resume via pristine WorkflowOrchestrator
+        4. Provide user guidance and options
+        5. Resume via pristine WorkflowOrchestrator
         
         Returns: Resume results
         """
         
-        print("🔍 Analyzing experiment state for resumption...")
+        print("🔍 Analyzing experiment state for intelligent resumption...")
         
-        # State discovery (enhanced version of current CLI logic)
+        # Phase 1: Enhanced State Discovery & Analysis
+        analysis_result = await self._analyze_resumption_context(state_file, from_step)
+        
+        if not analysis_result.can_resume:
+            print(f"❌ Cannot resume: {analysis_result.user_guidance}")
+            raise ValueError(analysis_result.user_guidance)
+        
+        # Phase 2: User Experience & Guidance  
+        if not dry_run:
+            self._display_resumption_status(analysis_result)
+            user_confirmed = self._get_user_resumption_consent(analysis_result)
+            if not user_confirmed:
+                print("🚫 Resume cancelled by user.")
+                return {"status": "cancelled"}
+        
+        if dry_run:
+            print("🧪 DRY RUN: Analysis complete, resumption would proceed")
+            return {
+                "status": "dry_run_success",
+                "analysis": analysis_result,
+                "would_resume_from_step": analysis_result.resume_step
+            }
+        
+        # Phase 3: Intelligent Resumption Execution
+        print("🔄 Executing intelligent resumption...")
+        return await self._execute_intelligent_resumption(analysis_result)
+    
+    async def _analyze_resumption_context(self, 
+                                        state_file: Optional[Path], 
+                                        from_step: Optional[int]) -> ResumeAnalysisResult:
+        """Phase 1: Enhanced State Discovery & Analysis"""
+        
+        # State discovery (enhanced version of CLI logic)
         if not state_file:
             state_file = self._find_latest_state_file()
         
         if not state_file:
-            raise ValueError("No state files found for resumption")
+            return ResumeAnalysisResult(
+                can_resume=False,
+                state_file=None,
+                resume_step=0,
+                total_steps=0,
+                workflow_changes=[],
+                resource_warnings=[],
+                resumption_strategy="no_state_found",
+                user_guidance="No state files found for resumption. Please verify the project path contains results/ or experiments/ directories with state files.",
+                state_integrity=False,
+                completed_steps=[],
+                remaining_steps=[]
+            )
         
-        print(f"📂 Using state file: {state_file}")
+        # Load and validate state integrity
+        try:
+            with open(state_file, 'r', encoding='utf-8') as f:
+                state_data = json.load(f)
+        except Exception as e:
+            return ResumeAnalysisResult(
+                can_resume=False,
+                state_file=state_file,
+                resume_step=0,
+                total_steps=0,
+                workflow_changes=[],
+                resource_warnings=[],
+                resumption_strategy="corrupted_state",
+                user_guidance=f"State file corrupted or unreadable: {str(e)}",
+                state_integrity=False,
+                completed_steps=[],
+                remaining_steps=[]
+            )
         
-        # Load and validate state
-        with open(state_file, 'r') as f:
-            state_data = json.load(f)
-        
-        # Resume via pristine WorkflowOrchestrator
-        print("🔄 Resuming via WorkflowOrchestrator...")
-        orchestrator = WorkflowOrchestrator(self.project_path)
-        
-        # Use existing resume logic from CLI
+        # Analyze workflow and determine resumption strategy
         workflow_steps = state_data.get('workflow', [])
-        resume_step = from_step or self._determine_resume_step(state_file, workflow_steps)
+        if not workflow_steps:
+            return ResumeAnalysisResult(
+                can_resume=False,
+                state_file=state_file,
+                resume_step=0,
+                total_steps=0,
+                workflow_changes=[],
+                resource_warnings=[],
+                resumption_strategy="no_workflow",
+                user_guidance="No workflow steps found in state file.",
+                state_integrity=False,
+                completed_steps=[],
+                remaining_steps=[]
+            )
         
-        return self._execute_resumption(orchestrator, state_data, resume_step, workflow_steps)
+        # Determine resume step
+        resume_step = from_step if from_step else self._determine_resume_step(state_file, workflow_steps)
+        
+        # Validate resume step
+        if resume_step < 1 or resume_step > len(workflow_steps):
+            return ResumeAnalysisResult(
+                can_resume=False,
+                state_file=state_file,
+                resume_step=resume_step,
+                total_steps=len(workflow_steps),
+                workflow_changes=[],
+                resource_warnings=[],
+                resumption_strategy="invalid_step",
+                user_guidance=f"Invalid resume step {resume_step}. Must be between 1 and {len(workflow_steps)}.",
+                state_integrity=True,
+                completed_steps=[],
+                remaining_steps=[]
+            )
+        
+        # Analyze completed vs remaining steps
+        completed_steps = []
+        remaining_steps = []
+        for i, step in enumerate(workflow_steps):
+            agent_name = step.get('agent', f'Step{i+1}')
+            if i < resume_step - 1:
+                completed_steps.append(f"Step {i+1}: {agent_name}")
+            else:
+                remaining_steps.append(f"Step {i+1}: {agent_name}")
+        
+        # Phase 2: Resumption Intelligence - Check for workflow changes
+        workflow_changes = await self._detect_workflow_changes(state_data)
+        
+        # Resource validation
+        resource_warnings = self._validate_resumption_resources(state_data)
+        
+        # Determine resumption strategy
+        resumption_strategy = "continue"
+        if workflow_changes:
+            resumption_strategy = "workflow_changed"
+        elif resource_warnings:
+            resumption_strategy = "resource_warnings"
+        
+        user_guidance = self._generate_user_guidance(resumption_strategy, workflow_changes, resource_warnings)
+        
+        return ResumeAnalysisResult(
+            can_resume=True,
+            state_file=state_file,
+            resume_step=resume_step,
+            total_steps=len(workflow_steps),
+            workflow_changes=workflow_changes,
+            resource_warnings=resource_warnings,
+            resumption_strategy=resumption_strategy,
+            user_guidance=user_guidance,
+            state_integrity=True,
+            completed_steps=completed_steps,
+            remaining_steps=remaining_steps
+        )
     
     def _find_latest_state_file(self) -> Optional[Path]:
-        """Enhanced state file discovery (same as current CLI logic)"""
-        # Implementation would mirror current CLI _find_latest_state_file
-        pass
+        """Enhanced state file discovery (implements CLI logic with improvements)"""
+        state_files = []
+        
+        # Search legacy results/ structure
+        results_dir = self.project_path / "results"
+        if results_dir.exists():
+            for session_dir in results_dir.iterdir():
+                if session_dir.is_dir():
+                    # Look for both final and partial state files
+                    for state_file in session_dir.glob("state_after_step_*.json"):
+                        state_files.append(state_file)
+                    for partial_state_file in session_dir.glob("state_step_*_partial.json"):
+                        state_files.append(partial_state_file)
+        
+        # Search experiments/ structure (WorkflowOrchestrator v3.0+)
+        experiments_dir = self.project_path / "experiments"
+        if experiments_dir.exists():
+            for experiment_dir in experiments_dir.iterdir():
+                if experiment_dir.is_dir():
+                    sessions_dir = experiment_dir / "sessions"
+                    if sessions_dir.exists():
+                        for session_dir in sessions_dir.iterdir():
+                            if session_dir.is_dir():
+                                # Look for both final and partial state files
+                                for state_file in session_dir.glob("state_after_step_*.json"):
+                                    state_files.append(state_file)
+                                for partial_state_file in session_dir.glob("state_step_*_partial.json"):
+                                    state_files.append(partial_state_file)
+        
+        if not state_files:
+            return None
+        
+        # Return the most recently modified state file
+        latest_file = max(state_files, key=lambda x: x.stat().st_mtime)
+        print(f"✅ Intelligent Resume: Found latest state file: {latest_file}")
+        return latest_file
     
     def _determine_resume_step(self, state_file: Path, workflow_steps: List[Dict]) -> int:
-        """Same logic as current CLI"""
-        pass
+        """Intelligent resume step determination with enhanced logic"""
+        filename = state_file.name
+        
+        # Handle partial state files like "state_step_1_partial.json"
+        partial_match = re.search(r'state_step_(\d+)_partial', filename)
+        if partial_match:
+            current_step = int(partial_match.group(1))
+            # For partial state files, resume from the same step since it may be incomplete
+            print(f"📍 Detected partial completion: resuming from step {current_step}")
+            return current_step
+        
+        # Handle completed state files like "state_after_step_1_AgentName.json"
+        completed_match = re.search(r'state_after_step_(\d+)_', filename)
+        if completed_match:
+            completed_step = int(completed_match.group(1))
+            resume_step = completed_step + 1
+            print(f"📍 Detected completion through step {completed_step}: resuming from step {resume_step}")
+            return resume_step
+        
+        # Fallback: resume from step 1
+        print("📍 Could not detect completion level: resuming from step 1")
+        return 1
     
-    def _execute_resumption(self, orchestrator, state_data, resume_step, workflow_steps):
-        """Same logic as current CLI"""
-        pass 
+    async def _detect_workflow_changes(self, state_data: Dict[str, Any]) -> List[str]:
+        """Phase 2: Intelligent workflow change detection"""
+        workflow_changes = []
+        
+        try:
+            # Look for current experiment.md file
+            experiment_files = list(self.project_path.glob("experiment.md"))
+            if not experiment_files:
+                # Try finding in experiments/ subdirectories
+                experiment_files = list(self.project_path.glob("experiments/*/experiment.md"))
+            
+            if not experiment_files:
+                workflow_changes.append("Current experiment.md file not found - cannot validate workflow consistency")
+                return workflow_changes
+            
+            current_experiment_file = experiment_files[0]
+            
+            # Parse YAML directly from experiment file instead of using SpecLoader
+            import yaml
+            experiment_content = current_experiment_file.read_text()
+            
+            # Extract YAML block
+            current_workflow = []
+            if '```yaml' in experiment_content:
+                yaml_start = experiment_content.find('```yaml') + 7
+                yaml_end = experiment_content.find('```', yaml_start)
+                if yaml_start > 6 and yaml_end > yaml_start:
+                    yaml_content = experiment_content[yaml_start:yaml_end].strip()
+                    experiment_config = yaml.safe_load(yaml_content)
+                    current_workflow = experiment_config.get('workflow', [])
+            
+            original_workflow = state_data.get('workflow', [])
+            
+            # Compare workflow structures
+            if len(current_workflow) != len(original_workflow):
+                workflow_changes.append(f"Workflow length changed: was {len(original_workflow)} steps, now {len(current_workflow)} steps")
+            
+            # Compare individual steps - focus on essential differences
+            for i, (orig_step, curr_step) in enumerate(zip(original_workflow, current_workflow)):
+                step_num = i + 1
+                
+                # Compare agent names (most important)
+                orig_agent = orig_step.get('agent', '')
+                curr_agent = curr_step.get('agent', '')
+                
+                if orig_agent != curr_agent:
+                    workflow_changes.append(f"Step {step_num} agent changed: was {orig_agent}, now {curr_agent}")
+                
+                # Compare models if both are specified
+                orig_model = orig_step.get('model')
+                curr_model = curr_step.get('model')
+                
+                if orig_model and curr_model and orig_model != curr_model:
+                    workflow_changes.append(f"Step {step_num} model changed: was {orig_model}, now {curr_model}")
+                
+                # Compare runs if both are specified  
+                orig_runs = orig_step.get('runs')
+                curr_runs = curr_step.get('runs')
+                
+                if orig_runs and curr_runs and orig_runs != curr_runs:
+                    workflow_changes.append(f"Step {step_num} runs changed: was {orig_runs}, now {curr_runs}")
+        
+        except Exception as e:
+            # Don't treat parsing errors as workflow changes - be conservative
+            print(f"⚠️  Could not detect workflow changes due to parsing error: {str(e)}")
+        
+        return workflow_changes
+    
+    def _validate_resumption_resources(self, state_data: Dict[str, Any]) -> List[str]:
+        """Phase 2: Resource availability validation"""
+        warnings = []
+        
+        # Check if framework file still exists
+        framework_file = state_data.get('framework_file')
+        if framework_file:
+            framework_path = self.project_path / framework_file
+            if not framework_path.exists():
+                warnings.append(f"Framework file not found: {framework_file}")
+        
+        # Check if corpus directory still exists
+        corpus_path = state_data.get('corpus_path')
+        if corpus_path:
+            corpus_dir = self.project_path / corpus_path
+            if not corpus_dir.exists():
+                warnings.append(f"Corpus directory not found: {corpus_path}")
+        
+        # Check model availability (basic check)
+        workflow_steps = state_data.get('workflow', [])
+        for i, step in enumerate(workflow_steps):
+            model_name = step.get('model')
+            if model_name:
+                try:
+                    # Attempt to validate model is accessible
+                    available_models = self.model_registry.list_models()
+                    if model_name not in [m['name'] for m in available_models]:
+                        warnings.append(f"Step {i+1} model may not be available: {model_name}")
+                except Exception:
+                    # If we can't check model availability, don't block resumption
+                    pass
+        
+        return warnings
+    
+    def _generate_user_guidance(self, strategy: str, workflow_changes: List[str], resource_warnings: List[str]) -> str:
+        """Generate human-readable guidance for resumption decision"""
+        if strategy == "continue":
+            return "✅ Ready to resume - no issues detected"
+        elif strategy == "workflow_changed":
+            guidance = "⚠️  Workflow changes detected since interruption:\n"
+            for change in workflow_changes:
+                guidance += f"   - {change}\n"
+            guidance += "Consider: resume with current workflow, or restart experiment with updated configuration"
+            return guidance
+        elif strategy == "resource_warnings":
+            guidance = "⚠️  Resource warnings detected:\n"
+            for warning in resource_warnings:
+                guidance += f"   - {warning}\n"
+            guidance += "Verify resources are accessible before resuming"
+            return guidance
+        else:
+            return "Unknown resumption strategy"
+    
+    def _display_resumption_status(self, analysis: ResumeAnalysisResult):
+        """Phase 3: Clear status reporting for user"""
+        print(f"\n📂 State File: {analysis.state_file}")
+        print(f"🎯 Resume Strategy: {analysis.resumption_strategy}")
+        print(f"📊 Progress: {len(analysis.completed_steps)}/{analysis.total_steps} steps completed")
+        
+        print(f"\n📋 Workflow Status:")
+        for step in analysis.completed_steps:
+            print(f"   ✅ {step}")
+        
+        if analysis.resume_step <= analysis.total_steps:
+            remaining_step = analysis.remaining_steps[0] if analysis.remaining_steps else "Unknown"
+            print(f"   🚀 RESUMING: {remaining_step}")
+            
+            for step in analysis.remaining_steps[1:]:
+                print(f"   ⏳ {step}")
+        
+        if analysis.workflow_changes:
+            print(f"\n⚠️  Workflow Changes Detected:")
+            for change in analysis.workflow_changes:
+                print(f"   - {change}")
+        
+        if analysis.resource_warnings:
+            print(f"\n⚠️  Resource Warnings:")
+            for warning in analysis.resource_warnings:
+                print(f"   - {warning}")
+        
+        if analysis.user_guidance and analysis.user_guidance != "✅ Ready to resume - no issues detected":
+            print(f"\n💡 Guidance: {analysis.user_guidance}")
+    
+    def _get_user_resumption_consent(self, analysis: ResumeAnalysisResult) -> bool:
+        """Phase 3: User experience - get consent for resumption"""
+        if analysis.resumption_strategy == "continue":
+            prompt = f"🚀 Resume experiment from step {analysis.resume_step}?"
+        elif analysis.resumption_strategy == "workflow_changed":
+            prompt = "⚠️  Workflow changes detected. Resume with CURRENT workflow configuration?"
+        elif analysis.resumption_strategy == "resource_warnings":
+            prompt = "⚠️  Resource warnings detected. Resume anyway?"
+        else:
+            prompt = f"Resume experiment from step {analysis.resume_step}?"
+        
+        while True:
+            response = input(f"{prompt} [y/N]: ").lower().strip()
+            if response in ['y', 'yes']:
+                return True
+            elif response in ['n', 'no', '']:
+                return False
+            else:
+                print("Please enter 'y' for yes or 'n' for no.")
+    
+    async def _execute_intelligent_resumption(self, analysis: ResumeAnalysisResult) -> Dict[str, Any]:
+        """Phase 4: Provenance-compliant handoff to WorkflowOrchestrator"""
+        
+        # Load state data
+        with open(analysis.state_file, 'r', encoding='utf-8') as f:
+            state_data = json.load(f)
+        
+        # Initialize WorkflowOrchestrator for clean handoff
+        orchestrator = WorkflowOrchestrator(str(self.project_path))
+        
+        # Use the existing CLI resumption execution logic (proven working)
+        workflow_steps = state_data.get('workflow', [])
+        
+        return self._execute_resumption_with_provenance(orchestrator, state_data, analysis.resume_step, workflow_steps, analysis)
+    
+    def _execute_resumption_with_provenance(self, orchestrator: WorkflowOrchestrator, 
+                                          state_data: Dict[str, Any], 
+                                          resume_step: int, 
+                                          workflow_steps: List[Dict],
+                                          analysis: ResumeAnalysisResult) -> Dict[str, Any]:
+        """Execute resumption with provenance trail (based on CLI logic)"""
+        
+        # Create resumption audit trail
+        resumption_audit = {
+            "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+            "resume_step": resume_step,
+            "total_steps": len(workflow_steps),
+            "resumption_strategy": analysis.resumption_strategy,
+            "workflow_changes": analysis.workflow_changes,
+            "resource_warnings": analysis.resource_warnings,
+            "state_file_used": str(analysis.state_file),
+            "intelligent_analysis": True
+        }
+        
+        # Extract existing session path from state data (CLI pattern)
+        existing_session_path = state_data.get('session_results_path')
+        if existing_session_path:
+            # Handle both absolute and relative paths from the state file
+            if not Path(existing_session_path).is_absolute():
+                # Path is relative to project directory
+                full_session_path = Path(orchestrator.project_path) / existing_session_path
+            else:
+                full_session_path = Path(existing_session_path)
+                
+            if full_session_path.exists():
+                # Reuse existing session directory
+                orchestrator.session_results_path = full_session_path
+                orchestrator.session_id = full_session_path.name  # Use directory name as session ID
+                orchestrator.conversation_id = state_data.get('conversation_id', f"resumed_conversation_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}")
+                
+                # Initialize logger and archive manager for existing session
+                from discernus.core.conversation_logger import ConversationLogger
+                orchestrator.logger = ConversationLogger(str(orchestrator.project_path))
+                
+                # Initialize archive manager if it doesn't exist
+                if not hasattr(orchestrator, 'archive_manager') or not orchestrator.archive_manager:
+                    from discernus.core.llm_archive_manager import LLMArchiveManager
+                    orchestrator.archive_manager = LLMArchiveManager(orchestrator.session_results_path)
+                    
+                    # Update gateway to use archive manager if it's an LLMGateway
+                    if hasattr(orchestrator.gateway, 'archive_manager') and hasattr(orchestrator.gateway, '__class__'):
+                        from discernus.gateway.llm_gateway import LLMGateway
+                        if isinstance(orchestrator.gateway, LLMGateway):
+                            orchestrator.gateway.archive_manager = orchestrator.archive_manager
+                
+                print(f"♻️  Resuming existing session: {orchestrator.session_id}")
+            else:
+                # Fallback to new session if existing session path not found
+                orchestrator._init_session_logging()
+                print(f"🆕 Creating new session (existing session not found at {full_session_path}): {orchestrator.session_id}")
+        else:
+            # Fallback to new session if no session path in state
+            orchestrator._init_session_logging()
+            print(f"🆕 Creating new session (no session path in state): {orchestrator.session_id}")
+        
+        # Save resumption audit trail
+        audit_file = orchestrator.session_results_path / "resumption_audit.json"
+        with open(audit_file, 'w', encoding='utf-8') as f:
+            json.dump(resumption_audit, f, indent=2)
+        
+        # Prime the workflow state
+        orchestrator.workflow_state = state_data
+        orchestrator.workflow_state['session_results_path'] = str(orchestrator.session_results_path)
+        orchestrator.workflow_state['conversation_id'] = orchestrator.conversation_id
+        orchestrator.workflow_state['resumption_audit'] = resumption_audit
+        
+        # Execute remaining steps (same as CLI logic)
+        for i in range(resume_step - 1, len(workflow_steps)):
+            step_config = workflow_steps[i]
+            agent_name = step_config.get('agent')
+            
+            print(f"\n🚀 Executing Step {i+1}: {agent_name}")
+            
+            try:
+                if not agent_name:
+                    raise ValueError(f"Step {i+1} is missing the 'agent' key.")
+                
+                step_output = orchestrator._execute_step(agent_name, step_config)
+                
+                # Update the master workflow state
+                if step_output:
+                    orchestrator.workflow_state.update(step_output)
+                
+                # Save state snapshot
+                orchestrator._save_state_snapshot(f"state_after_step_{i+1}_{agent_name}.json")
+                
+                print(f"✅ Step {i+1} completed successfully")
+                
+            except Exception as e:
+                print(f"❌ Step {i+1} failed: {str(e)}")
+                raise e
+        
+        return {
+            "status": "success",
+            "session_id": orchestrator.session_id,
+            "session_results_path": str(orchestrator.session_results_path),
+            "final_state": orchestrator.workflow_state,
+            "resumption_audit": resumption_audit,
+            "intelligent_resumption": True
+        } 
