@@ -379,5 +379,5 @@ Each dimension scored 0.0 to 1.0 based on:
 **Framework Status**: ✅ **Enhanced Character Assessment Ready**  
 **Identity Foundation**: ✅ **Dignity-Tribalism Gamma Ray Axis Established**  
 **Theoretical Grounding**: ✅ **Aristotelian + Civic Republican Integration**  
-**Trinity Integration**: ✅ **Modular Compatibility with ECF and IDF**  
+**Core Module Integration**: ✅ **Modular Compatibility with ECF and IDF**  
 **Democratic Applications**: ✅ **Leadership Evaluation and Accountability Assessment**

@@ -353,7 +353,7 @@ Each dimension can exhibit either **constitutional health** (supporting democrat
 
 ---
 
-## Integration with Trinity Core
+## Integration with Core Modules
 
 ### Relationship to ECF v1.0 (Emotional Climate)
 - **Independent Operation**: Constitutional health assessed regardless of emotional atmosphere
@@ -424,4 +424,4 @@ Each dimension can exhibit either **constitutional health** (supporting democrat
 **Theoretical Foundation**: ✅ **Bagehot + Fukuyama + Rauch Integration**  
 **System Agnosticism**: ✅ **Written/Unwritten Constitution Compatibility**  
 **Temporal Neutrality**: ✅ **Historical, Contemporary, and Future Application**  
-**Trinity Integration**: ✅ **Modular Compatibility with ECF and CVF**
+**Core Module Integration**: ✅ **Modular Compatibility with ECF and CVF**
