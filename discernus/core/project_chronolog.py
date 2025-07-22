@@ -3,10 +3,10 @@
 Project Chronolog: Comprehensive Research Provenance System
 ==========================================================
 
-Implements the comprehensive project-level audit trail specified in SOAR v2.0.
+Implements the comprehensive project-level audit trail specified in Discernus.
 Captures every action from user initialization through final publication.
 
-SOAR v2.0 Specification Compliance:
+Discernus Specification Compliance:
 - Project-level scope spanning entire research lifecycle
 - Initialization event as first chronolog entry
 - All agent actions, user interactions, system events
@@ -48,7 +48,7 @@ class ProjectChronolog:
     """
     Comprehensive project-level audit trail for academic research integrity
     
-    Implements SOAR v2.0 chronolog specification:
+    Implements Discernus chronolog specification:
     - Captures every action from initialization through completion
     - Project-scoped with cross-session continuity 
     - Immutable append-only design with cryptographic integrity
@@ -62,7 +62,7 @@ class ProjectChronolog:
         # Ensure project directory exists
         self.project_path.mkdir(parents=True, exist_ok=True)
         
-        # Project chronolog location per SOAR v2.0 specification
+        # Project chronolog location per Discernus specification
         self.chronolog_file = self.project_path / f"PROJECT_CHRONOLOG_{self.project_name}.jsonl"
         
         # Initialize Git repo for automatic commits, but NEVER create a new one.
@@ -122,7 +122,7 @@ class ProjectChronolog:
     def log_initialization(self, user: str, command: str, session_id: str, 
                           system_state: Optional[Dict[str, Any]] = None) -> str:
         """
-        Log project initialization - first chronolog entry per SOAR v2.0
+        Log project initialization - first chronolog entry per Discernus
         
         This is the critical entry that starts comprehensive research provenance.
         Everything else in the project builds from this initialization event.
@@ -217,7 +217,7 @@ class ProjectChronolog:
             
         self._active = True
         self.redis_subscriber = self.redis_client.pubsub()
-        self.redis_subscriber.psubscribe('soar.*')
+        self.redis_subscriber.psubscribe('discernus.*')
         
         # Start background thread for Redis event capture
         self.redis_thread = threading.Thread(

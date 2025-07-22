@@ -1,0 +1,81 @@
+[PROVENANCE:f86f994168e9@../corpus/progressive_tribalism_sanders_2025_fighting_oligarchy.txt]
+
+**Emotional Climate Analysis: "Fighting Oligarchy Rally Speech"**
+
+This analysis evaluates the emotional atmosphere of the provided text using the Emotional Climate Framework v1.0 - Refined, focusing on six independent emotional dimensions.
+
+---
+
+**AFFECTIVE CLIMATE DIMENSIONS:**
+
+1.  **Fear (Crisis/threat emotional climate)**
+    *   **Emotional Language Patterns:** The text frequently highlights immediate and severe threats posed by the "oligarchs" to essential public services and the general welfare, emphasizing vulnerability and potential disaster. There's a strong sense of an ongoing, dangerous situation that requires urgent attention.
+    *   **Supporting Quotations:**
+        *   "We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education..."
+        *   "But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs."
+        *   "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer."
+    *   **Score:** 0.8
+    *   **Confidence Rating:** 0.9 (The language is explicit in detailing threats and negative consequences, clearly aiming to evoke a sense of danger and urgency.)
+
+2.  **Hope (Opportunity/progress emotional climate)**
+    *   **Emotional Language Patterns:** While heavily focused on problems, the speech concludes with a strong call to action and a belief in the ability to overcome current challenges and create a better future through collective effort. This hope is primarily aspirational and conditional on collective action.
+    *   **Supporting Quotations:**
+        *   "That is what a rigged economy is about, and that is what we are going to change."
+        *   "Now everybody wants to do well in life. Everybody wants to make money."
+        *   "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve."
+    *   **Score:** 0.7
+    *   **Confidence Rating:** 0.9 (The concluding statements clearly articulate a vision for change and a belief in collective power to achieve it.)
+
+---
+
+**RELATIONAL CLIMATE DIMENSIONS:**
+
+3.  **Enmity (Hostility/conflict emotional climate)**
+    *   **Emotional Language Patterns:** The text creates a very strong "us vs. them" dynamic, consistently portraying the "oligarchs" and the "1%" as hostile, destructive adversaries. They are characterized as uncaring, manipulative, and actively working against the interests of the vast majority.
+    *   **Supporting Quotations:**
+        *   "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys."
+        *   "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer."
+        *   "The rich want to get richer and they don't care who they step on."
+    *   **Score:** 0.9
+    *   **Confidence Rating:** 1.0 (The entire speech is structured around a clear and intensely negative portrayal of an antagonistic group.)
+
+4.  **Amity (Friendship/unity emotional climate)**
+    *   **Emotional Language Patterns:** Despite the strong enmity towards the "oligarchs," the speech simultaneously cultivates a powerful sense of unity and solidarity among "the American people," "we," and implicitly, the 99%. It emphasizes shared struggles and the necessity of collective action.
+    *   **Supporting Quotations:**
+        *   "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'"
+        *   "So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve."
+        *   "I don't care if you are a Republican, Democrat, or independent, I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected..."
+    *   **Score:** 0.8
+    *   **Confidence Rating:** 0.9 (The consistent use of "we" and direct appeals for unity against a common foe establish a strong internal bond.)
+
+---
+
+**SUCCESS ORIENTATION CLIMATE DIMENSIONS:**
+
+5.  **Envy (Resentment/grievance emotional climate)**
+    *   **Emotional Language Patterns:** The text is replete with language highlighting unfairness, injustice, and economic inequality. The immense wealth and power of the "1%" are directly contrasted with the struggles of the majority, explicitly framing the economic system as "rigged" and wealth transfer as illegitimate.
+    *   **Supporting Quotations:**
+        *   "We will not accept the richest guy in the world running all over Washington... all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%."
+        *   "Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about..."
+        *   "They own mansions all over the world. They go on vacations to their own private islands."
+    *   **Score:** 0.9
+    *   **Confidence Rating:** 1.0 (The concept of a "rigged economy" and unfair wealth distribution is a core and frequently repeated theme.)
+
+6.  **Compersion (Celebration/merit emotional climate)**
+    *   **Emotional Language Patterns:** This dimension is largely absent. The speech does not celebrate existing success, shared prosperity, or meritocratic achievement within the current system. Any mention of success is typically used to highlight how it is unfairly gained or at the expense of others.
+    *   **Supporting Quotations:**
+        *   "Now everybody wants to do well in life. Everybody wants to make money. But you would think that if you had a few billion dollars... you would not feel obliged to step on the backs of poor people to become even richer." (This only acknowledges the desire for success to then critique its attainment under current conditions, not to celebrate it.)
+        *   No other clear examples of celebrating earned success or shared abundance.
+    *   **Score:** 0.1
+    *   **Confidence Rating:** 0.9 (The consistent absence of this emotional tone is notable and definitive.)
+
+---
+
+**SALIENCE RANKING (from most to least salient):**
+
+1.  **Enmity:** This is the most central and prominent emotional dimension. The entire speech is framed as a struggle against a clearly defined adversary ("the oligarchs," "the 1%"). The conflict is explicit, aggressive, and defines the narrative. Rhetorical emphasis and repetition are overwhelmingly focused on this hostile relationship.
+2.  **Envy:** Closely tied to Enmity, the grievance and resentment over the "rigged economy" and the massive "transfer of wealth" provide the fundamental justification and fuel for the conflict. It's the core injustice that the speech seeks to address, making it thematically central and highly repetitive.
+3.  **Amity:** While expressing conflict externally, the speech simultaneously fosters strong internal solidarity. The repeated appeals to "the American people" and the emphasis on "standing together" are crucial for the proposed solution, defining the collective "us" in the "us vs. them" dynamic.
+4.  **Fear:** The pervasive sense of threat to vital services, well-being, and the democratic system underpins the urgency of the speech. While not always explicit, the negative consequences described are designed to evoke a strong sense of alarm and vulnerability.
+5.  **Hope:** This dimension primarily functions as the aspirational outcome of the struggle. It provides the light at the end of the tunnel and the motivation for collective action, appearing most strongly in the concluding remarks. It's a goal rather than a current state.
+6.  **Compersion:** This dimension is almost entirely absent. The speech's focus is on the problems and injustices within the current system, not on celebrating any existing successes or the idea of widespread, merit-based prosperity.

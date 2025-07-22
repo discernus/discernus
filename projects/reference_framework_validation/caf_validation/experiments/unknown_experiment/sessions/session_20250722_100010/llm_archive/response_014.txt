@@ -1,0 +1,98 @@
+[PROVENANCE:6367a6946989@../corpus/progressive_dignity_booker_2018_first_step_act.txt]
+
+The speaker, Cory Booker, demonstrates a character deeply committed to civic virtues, particularly those related to justice, dignity, and truth, while actively rejecting common civic vices such as tribalism, manipulation, and fantasy. His rhetorical choices reveal a leader grounded in principle, informed by empirical reality, and driven by a pragmatic, hopeful vision for collective improvement.
+
+Here is the character assessment using the Character Assessment Framework v4.2 with Salience-Weighted Analysis:
+
+**CIVIC VIRTUES Displayed by the Speaker:**
+
+*   **Justice**
+    *   **Intensity:** 0.95
+    *   **Salience:** 0.98 (Justice is the ethical bedrock of the entire speech, explicitly invoked as the core ideal violated by the current system and the primary goal of reform.)
+    *   **Direct Quotations:**
+        *   "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation. We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values."
+        *   "Dr. King said justice is indivisible, and he was right. We cannot separate a system of oppression in our country and think that it won't affect us all as a whole. You cannot deny justice to any American without it affecting us all. You cannot keep injustice for some without it cheapening the justice of us all."
+    *   **Confidence:** 1.0
+
+*   **Dignity**
+    *   **Intensity:** 0.90
+    *   **Salience:** 0.95 (The speaker consistently grounds his arguments in the inherent worth of every individual and the nation's capacity for redemption, directly linking human dignity to the imperative for justice and reform.)
+    *   **Direct Quotations:**
+        *   "we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own."
+        *   "We are Americans. We have ideals of restoration, of rehabilitation. Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible."
+    *   **Confidence:** 1.0
+
+*   **Truth**
+    *   **Intensity:** 0.85
+    *   **Salience:** 0.90 (The speaker's argument for reform is heavily reliant on presenting stark, evidence-based facts and statistics about the criminal justice system, signaling a deep commitment to intellectual honesty as the basis for action.)
+    *   **Direct Quotations:**
+        *   "Since 1980 alone, our federal prison population has exploded by eight hundred percent - an 800 percent increase in our prison population."
+        *   "We know the data is clear - there is no difference between blacks and whites for using drugs or selling drugs in the United States of America. No difference. But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs."
+    *   **Confidence:** 1.0
+
+*   **Pragmatism**
+    *   **Intensity:** 0.85
+    *   **Salience:** 0.85 (The speaker frequently highlights the bipartisan nature of the bill and frames it as a "first step" and a "product of compromise," demonstrating a central commitment to achieving workable solutions through finding common ground.)
+    *   **Direct Quotations:**
+        *   "this is a bipartisan compromise bill with leadership - extraordinary leadership on both sides of the aisle..."
+        *   "This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms..."
+    *   **Confidence:** 1.0
+
+*   **Hope**
+    *   **Intensity:** 0.80
+    *   **Salience:** 0.80 (Despite detailing severe problems, the speaker consistently projects a constructive, forward-looking vision, emphasizing the "opportunity to reverse course," "healing," and the nation's capacity for redemption, making hope a significant rhetorical and moral anchor.)
+    *   **Direct Quotations:**
+        *   "But after decades of failed federal policies, and after decades of growing in the wrong direction, we now have an opportunity to reverse course in a significant way."
+        *   "This bill is a step - a step towards healing."
+    *   **Confidence:** 1.0
+
+**CIVIC VICES Displayed by the Speaker:**
+
+*   **Tribalism**
+    *   **Intensity:** 0.0 (The speaker actively and repeatedly champions multi-partisan and multi-group collaboration, explicitly arguing against division.)
+    *   **Salience:** 0.90 (While the *vice* itself is absent, the speaker's pronounced and frequent emphasis on rejecting "separateness," forging "common ground" across the political spectrum, and celebrating "e pluribus unum" makes the *anti-tribal* dimension exceptionally prominent in his moral identity and rhetorical strategy.)
+    *   **Direct Quotations:**
+        *   "I'm proud that the coalition has people all across the political spectrum. I'm proud of the coalition as people from diverse backgrounds."
+        *   "I've had the opportunity to sit down with people in common cause from Republicans on the far end of the conservative spectrum to individuals in organizations who on most issues I often disagree with, but we have found common ground..."
+    *   **Confidence:** 1.0
+
+*   **Resentment**
+    *   **Intensity:** 0.20 (The speaker clearly identifies past and ongoing injustices and "failed policies" but frames them as problems to be urgently addressed through collective action and redemption, rather than dwelling on blame or grievance.)
+    *   **Salience:** 0.30 (The historical context of injustice is present as a motivating factor and diagnostic element, but it does not define the speaker's overall emotional tone or focus, which is primarily forward-looking toward reform.)
+    *   **Direct Quotations:**
+        *   "And this is because of failed policies by this body that created harsh sentences, harsh mandatory minimum penalties, three-strikes-you're-out..."
+        *   "We now have a criminal justice system where there are more African-American men under criminal supervision than there were enslaved in 1850. This is a punishing reality."
+    *   **Confidence:** 0.9
+
+*   **Fear**
+    *   **Intensity:** 0.10 (While the speaker uses strong language to describe the severity of the problem, such as "savagely broken" or "cancer on the soul," these are primarily diagnostic statements of present reality used to underscore the urgency of reform, not to induce panic or catastrophic thinking.)
+    *   **Salience:** 0.15 (Fear appeals are minimal and not central to the speaker's rhetorical strategy. The primary emotional appeal is to shared values, justice, and the possibility of positive change.)
+    *   **Direct Quotations:**
+        *   "We stand poised today to pass this bill, to begin to deliver some reform to our savagely broken criminal justice system."
+        *   "This system as a whole is a cancer on the soul of our country, and it's hurting every single American."
+    *   **Confidence:** 0.9
+
+*   **Manipulation**
+    *   **Intensity:** 0.00 (There is no evidence of misleading information, false claims, or deceptive rhetorical strategies. The speech relies on factual data and appeals to shared principles.)
+    *   **Salience:** 0.00 (The absence of this vice means it is not a salient feature of the speaker's character or rhetorical approach.)
+    *   **Direct Quotations:** N/A (No evidence found)
+    *   **Confidence:** 1.0
+
+*   **Fantasy**
+    *   **Intensity:** 0.00 (The speaker explicitly states that the bill is a "first step" and a "product of compromise," directly countering any impression of offering magical or effortless solutions.)
+    *   **Salience:** 0.00 (The absence of this vice means it is not a salient feature of the speaker's character or rhetorical approach.)
+    *   **Direct Quotations:** N/A (No evidence found)
+    *   **Confidence:** 1.0
+
+**Salience-Weighted Ranking of Character Dimensions (from most to least salient):**
+
+1.  **Justice** (Salience: 0.98)
+2.  **Dignity** (Salience: 0.95)
+3.  **Truth** (Salience: 0.90)
+4.  **Tribalism** (Salience: 0.90 – noted for its explicit rejection/absence of the vice, which is highly salient in the speaker's anti-tribal identity)
+5.  **Pragmatism** (Salience: 0.85)
+6.  **Hope** (Salience: 0.80)
+7.  **Resentment** (Salience: 0.30)
+8.  **Fear** (Salience: 0.15)
+9.  **Manipulation** (Salience: 0.00)
+10. **Fantasy** (Salience: 0.00)

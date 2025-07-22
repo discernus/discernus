@@ -1,0 +1,86 @@
+[PROVENANCE:afefd5ff1c06@../corpus/progressive_dignity_lewis_1963_march_washington.txt]
+
+**Emotional Climate Analysis: John Lewis - Speech at the March on Washington for Jobs and Freedom (1963)**
+
+This analysis applies the Emotional Climate Framework v1.0 - Refined to assess the pure emotional atmosphere of John Lewis's 1963 March on Washington speech, transcending specific political content or temporal context.
+
+---
+
+**AFFECTIVE CLIMATE DIMENSIONS:**
+
+**Fear**
+*   **Analysis:** The speech powerfully conveys a climate of immediate and pervasive threat. It describes a population living under the shadow of state violence, arbitrary arrests, and even death for peaceful protest. The vulnerability of "young children and old women" facing "police dogs and fire hoses," the "constant fear of a police state," and the stark reality of "three young men... who face the death penalty" create a palpable sense of danger and precarity. The urgency of "running out of time" is implicit in the demand for immediate freedom.
+*   **Supporting Quotations:**
+    1.  "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations."
+    2.  "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state."
+    3.  "What about the three young men - SNCC field secretaries in Americus, Georgia - who face the death penalty for engaging in peaceful protest?"
+*   **Score:** 0.9
+*   **Confidence:** 1.0
+
+**Hope**
+*   **Analysis:** Despite the grim present, the speech is fundamentally imbued with a transformative hope for the future. It calls for a "great revolution" to achieve "true freedom" and complete "the revolution of 1776." The determination "We will not stop!" and the vision of "splinter[ing] the segregated South... and put[ting] them together in the image of God and democracy" project a strong belief in the possibility of a radically better society, achievable through collective action and an unwavering spirit of "love and dignity."
+*   **Supporting Quotations:**
+    1.  "I appeal to all of you to get in this great revolution that is sweeping this nation. Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete."
+    2.  "We will march with the spirit of love and with the spirit of dignity that we have shown here today."
+    3.  "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy."
+*   **Score:** 0.7
+*   **Confidence:** 1.0
+
+---
+
+**RELATIONAL CLIMATE DIMENSIONS:**
+
+**Enmity**
+*   **Analysis:** A powerful sense of conflict and direct opposition permeates the speech. Clear antagonists are identified: "politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation." The speech directly challenges "the forces of Eastland, Barnett, Wallace, and Thurmond" and speaks of being "tired of being beaten by policemen" and seeing people "locked up in jails." The intention to "splinter the segregated South into a thousand pieces" is a direct expression of aggressive intent against an oppressive system.
+*   **Supporting Quotations:**
+    1.  "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation."
+    2.  "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again."
+    3.  "All of the forces of Eastland, Barnett, Wallace, and Thurmond will not stop this revolution!"
+    4.  "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces..."
+*   **Score:** 0.9
+*   **Confidence:** 1.0
+
+**Amity**
+*   **Analysis:** Despite the external conflict, the speech cultivates a strong internal climate of unity and solidarity. It addresses the audience as "My friends" and speaks of "our brothers," emphasizing shared suffering and a collective purpose ("We march today for jobs and freedom"). The appeal for everyone to "get in this great revolution" and the willingness to go to jail for "love, brotherhood, and true peace" highlight a powerful bond and shared commitment among the movement's participants.
+*   **Supporting Quotations:**
+    1.  "We march today for jobs and freedom, but we have nothing to be proud of, for hundreds and thousands of our brothers are not here."
+    2.  "My friends, let us not forget that we are involved in a serious social revolution."
+    3.  "We do not want to go to jail, but we will go to jail if this is the price we must pay for love, brotherhood, and true peace."
+*   **Score:** 0.8
+*   **Confidence:** 1.0
+
+---
+
+**SUCCESS ORIENTATION CLIMATE DIMENSIONS:**
+
+**Envy**
+*   **Analysis:** This dimension is profoundly central to the speech. It articulates deep resentment and grievance over systemic economic and social injustice. The stark contrast between "starvation wages or no wages at all" for sharecroppers and a maid earning "five dollars a week in the home of a family whose total income is one hundred thousand dollars a year" vividly illustrates a rigged system and extreme wealth inequality. The accusations of "immoral compromises" and "exploitation" further underscore the perception of an unfair advantage held by a privileged few at the expense of the many.
+*   **Supporting Quotations:**
+    1.  "They're receiving starvation wages or no wages at all. While we stand here, there are sharecroppers in the Delta of Mississippi who are out in the field working for less than three dollars a day, twelve hours a day."
+    2.  "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year."
+    3.  "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation."
+*   **Score:** 0.95
+*   **Confidence:** 1.0
+
+**Compersion**
+*   **Analysis:** The climate of compersion is almost entirely absent. The speech does not celebrate any existing successes, achievements, or shared prosperity. On the contrary, it explicitly states, "we have nothing to be proud of," and expresses a "great sense of misgiving." The focus is overwhelmingly on the deep-seated problems, injustices, and the urgent need for change, rather than acknowledging or celebrating merit-based success or collective well-being in the present.
+*   **Supporting Quotations:**
+    1.  "We march today for jobs and freedom, but we have nothing to be proud of, for hundreds and thousands of our brothers are not here."
+    2.  "We come here today with a great sense of misgiving."
+    3.  "They're receiving starvation wages or no wages at all."
+*   **Score:** 0.05
+*   **Confidence:** 1.0
+
+---
+
+**SALIENCE RANKING:**
+
+1.  **Envy:** The core of the speech is the detailed exposition of profound economic and social injustice, exploitation, and systemic inequality. This grievance is the primary driver of the call for a "revolution."
+2.  **Enmity:** The speech strongly identifies and confronts explicit adversaries—corrupt politicians, oppressive state forces, and figures embodying segregation—making conflict and opposition a dominant theme.
+3.  **Fear:** The ever-present threats of violence, imprisonment, and even death faced by the community are vividly portrayed, establishing a critical, dangerous context for the struggle.
+4.  **Amity:** While crucial for the movement's cohesion and strength, the internal unity is presented as a necessary response to the external threats and injustices, rather than the primary emotional focus itself.
+5.  **Hope:** Hope serves as the ultimate aspirational goal and motivator for enduring the struggle, but the immediate emotional climate is dominated by the urgency of the present crisis and the grievances.
+6.  **Compersion:** This dimension is virtually nonexistent, highlighting the profound lack of positive outcomes and the pervasive sense of injustice that defines the emotional atmosphere.
+
+---
+[PROVENANCE:afefd5ff1c06@../corpus/progressive_dignity_lewis_1963_march_washington.txt]

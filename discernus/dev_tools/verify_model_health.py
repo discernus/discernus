@@ -73,7 +73,7 @@ async def check_model(model_name: str, console: Console):
 async def main():
     """Main function to load models and run checks."""
     console = Console()
-    console.print("[bold cyan]SOAR Model Registry Health Check[/bold cyan]")
+    console.print("[bold cyan]Discernus Model Registry Health Check[/bold cyan]")
     console.print("="*40)
 
     # Load the model registry

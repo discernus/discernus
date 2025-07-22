@@ -1,0 +1,75 @@
+[PROVENANCE:d3eb0b0145b6@../corpus/conservative_tribalism_king_2017_house.txt]
+
+**Emotional Climate Analysis: Congressman Steve King's Speech (2016-04-25)**
+
+This analysis uses the Emotional Climate Framework v1.0 - Refined to assess the pure emotional atmosphere of the provided text. The speech presents a predominantly negative and conflict-driven emotional landscape, characterized by intense fear and enmity, fueled by a pervasive sense of injustice. Hope and compersion are largely absent, while amity is limited to an in-group defined by shared grievances.
+
+**AFFECTIVE CLIMATE DIMENSIONS:**
+
+**1. Fear**
+*   **Analysis:** The speech strongly cultivates a climate of fear by consistently highlighting existential threats to the Constitution and immediate physical dangers to American citizens. The speaker uses vivid, often graphic, descriptions of negative outcomes, emphasizing a sense of vulnerability and urgency due to perceived failures in leadership and policy. The text frames the situation as a crisis ("destroyed," "costing lives," "precarious").
+*   **Quotations:**
+    1.  "We have a Constitution to preserve, protect, defend... And instead of being restored, it would be destroyed by another presidential appointment." (Highlights an existential threat to foundational principles).
+    2.  "And it kick the breath out of your gut to hear that if you're a constitutionist. And it bring you to a sad state of mourn. And you'd lay your head down on the pillow at night having trouble to sleep, thinking, 'What am I going to do tomorrow?'" (Evokes personal distress and a sense of impending doom for those who care about the Constitution).
+    3.  "This happens every day in this country. It happens hundreds of times in this country each year. These incidents of illegal aliens that are... costing lives in America. And it's costing, it's costing in the end thousands of lives in America." (Directly links a group to widespread death and danger, creating a sense of pervasive threat).
+    4.  "This President has, has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders. That's 135 dead Americans that would be alive today..." (Quantifies and personalizes the threat, making it feel immediate and lethal).
+*   **Score:** 0.9
+*   **Confidence:** 1.0
+
+**2. Hope**
+*   **Analysis:** The emotional climate is almost entirely devoid of hope. The speech focuses on existing problems, dire warnings, and the urgent need to prevent further damage, rather than on opportunities, progress, or a positive future. Any mention of hope is framed as a desperate, individual yearning for solutions to an overwhelming crisis, not as a broad, shared sense of optimism or forward momentum.
+*   **Quotations:**
+    1.  "Lord, wake me up with an idea on how to, how to preserve our Constitution," (Expresses a desperate personal plea for an idea, indicating a lack of present hope or solution).
+    2.  "that morning that I was hopeful that I would wake up with an idea and how to address the Supreme Court that's overreached," (Explicitly states a *desire* for hope and a solution, rather than hope being a current atmospheric condition).
+*   **Score:** 0.05
+*   **Confidence:** 1.0
+
+**RELATIONAL CLIMATE DIMENSIONS:**
+
+**3. Enmity**
+*   **Analysis:** Enmity is a dominant emotional force throughout the speech. The speaker clearly identifies various adversaries—the "lame duck President," the Supreme Court (for "making up" law), "the left," "illegal aliens," "activists," and those who "don't want to enforce the law." Language used is consistently accusatory, aggressive, and often dehumanizing, painting a picture of active conflict and betrayal. The graphic descriptions of crimes are deployed to amplify hostility towards "criminal aliens" and those perceived as enabling them.
+*   **Quotations:**
+    1.  "push Obamacare down the throats of the American people." (Aggressive and hostile imagery portraying forceful imposition on the populace).
+    2.  "It's a complete manufactured, not just a right, but a command by the Supreme Court of the United States... The judges are not. They're unelected. They're appointed for life. They're unaccountable." (Frames the Supreme Court as an antagonistic, illegitimate force that actively abuses its power).
+    3.  "He [the President] is not doing his job. In fact, he's ordering law enforcement officers not to do their job." (Directly blames the President for undermining law enforcement and national safety, portraying him as an antagonist).
+    4.  "Mauricio Hernandez, a sexual predator who impregnated a 13-year-old daughter of his living girlfriend... The baby was left to die. That baby died." (Uses a horrific crime description to foster extreme animosity towards "illegal aliens" and, by extension, the policies that allegedly enable them).
+*   **Score:** 0.95
+*   **Confidence:** 1.0
+
+**4. Amity**
+*   **Analysis:** Amity is largely absent from the overall climate. Any sense of unity present is highly conditional and defined by shared opposition to the identified threats and adversaries. It is a defensive unity among those who agree with the speaker's interpretation of the Constitution and immigration issues (e.g., "constitutionists," "families of these victims"), rather than a broad, inclusive atmosphere of cooperation, respect, or fellowship across broader society.
+*   **Quotations:**
+    1.  "all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter—we recognize that if we're going to support and defend the Constitution" (Indicates a unity based on a shared interpretation of duty and a common perceived threat, not broad collaboration).
+    2.  "I thank God for Laura Wilkerson and I ask God to bless the life and the memory and the soul of Joshua Wilkerson who has paid a tremendously high price because we have an ideological president..." (Expresses solidarity and compassion for victims, but frames it within the context of shared suffering and opposition to a common cause of that suffering).
+    3.  "I'd ask Mr. Speaker that this country keep the families of these victims in their prayers every day until such time as we rest." (A call for sympathetic unity and remembrance for victims, reinforcing a group identity based on shared grievance rather than universal positive connection).
+*   **Score:** 0.1
+*   **Confidence:** 1.0
+
+**SUCCESS ORIENTATION CLIMATE DIMENSIONS:**
+
+**5. Envy**
+*   **Analysis:** A strong undercurrent of resentment and grievance pervades the speech. While not explicitly focusing on economic inequality, the speaker frames the actions of the Supreme Court and the President as unfair advantages or abuses of power that undermine "the law" and harm "Americans." The repeated instances of "illegal aliens" being "released" or granted "de facto amnesty" after committing crimes, while victims suffer, creates a clear sense of a "rigged system" and unearned privilege at the expense of others.
+*   **Quotations:**
+    1.  "The judges are not. They're unelected. They're appointed for life. They're unaccountable." (Directly frames the judiciary as a privileged elite operating without proper accountability, fostering resentment).
+    2.  "This President has, has released over 30,000 criminals, criminal aliens onto the streets of America... Every American that dies at their hands is a life that could be saved if we just followed our laws." (Implies an unfair leniency or privilege granted to "criminal aliens" that directly causes harm to "Americans," creating a zero-sum grievance).
+    3.  "He was out on $5,000 bail, which was less than it cost him to bury his daughter. And that individual absconded back out of the United States" (Presents a stark example of perceived injustice and unfair advantage granted to a perpetrator over the suffering victim and family).
+    4.  "That being one of God's children is good enough to be protected by the law, but everybody treated equally." (Rhetorically calls for equality, implying that the current system is inherently unequal and unjustly favors some over others).
+*   **Score:** 0.7
+*   **Confidence:** 0.9
+
+**6. Compersion**
+*   **Analysis:** This dimension is completely absent from the emotional climate of the speech. There is no language celebrating achievement, shared success, abundance, or merit-based outcomes. The focus is entirely on perceived failures, injustices, and losses. The mention of Sarah Root's academic accomplishments serves to heighten the tragedy of her death, not as a point of shared positive celebration.
+*   **Quotations:** No relevant quotations reflecting a climate of compersion.
+*   **Score:** 0.0
+*   **Confidence:** 1.0
+
+---
+
+**SALIENT DIMENSIONS RANKING:**
+
+1.  **Enmity:** This is the most central and pervasive emotion. The speech is structured around identifying and condemning multiple antagonists (President, Supreme Court, "illegal aliens," "activists," "the Left"), using highly aggressive and condemning language. The narrative is fundamentally one of conflict and opposition.
+2.  **Fear:** Closely intertwined with enmity, fear serves as the primary emotional consequence and motivator for action. The threats to the Constitution and the physical safety of Americans, vividly portrayed, are constant and designed to evoke urgency and alarm. This fear drives the narrative forward.
+3.  **Envy:** This dimension provides the underlying moral indignation and sense of betrayal that fuels both enmity and fear. The consistent framing of a system that is "rigged," where certain groups (judges, "illegal aliens") are granted unfair advantages or immunity at the expense of "Americans" and the "rule of law," is highly salient in justifying the hostile emotional climate.
+4.  **Amity:** While present, amity is very low in salience. Any sense of unity is a reactive, in-group solidarity based on shared opposition to the dominant threats, rather than a proactive or broadly inclusive emotional atmosphere. It serves to reinforce the "us vs. them" narrative, rather than fostering broader cooperation.
+5.  **Hope:** Hope is remarkably absent. Its virtual non-existence in the text is salient because it underscores the grim and urgent nature of the problems presented, indicating a climate of despair and crisis rather than optimism.
+6.  **Compersion:** This dimension is entirely irrelevant to the emotional climate of the speech. It is not present in any form and does not contribute to or shape the overall atmosphere.

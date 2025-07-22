@@ -230,8 +230,8 @@ class ExperimentParser:
         if not isinstance(config, dict):
             raise ExperimentError("Experiment configuration must be a YAML dictionary")
         
-        # Validate required fields
-        required_fields = ['framework_file', 'models']
+        # Validate required fields per Experiment Specification v2.0
+        required_fields = ['name', 'description', 'hypothesis', 'framework_file', 'corpus', 'models', 'runs_per_model', 'workflow']
         for field in required_fields:
             if field not in config:
                 raise ExperimentError(f"Missing required field: {field}")
@@ -241,7 +241,6 @@ class ExperimentParser:
             raise ExperimentError("models must be a non-empty list")
         
         # Set defaults for optional fields
-        config.setdefault('runs_per_model', 1)
         config.setdefault('analysis_variant', 'default')
         
         # Resolve framework_file path relative to experiment file
@@ -276,8 +275,8 @@ class ExperimentParser:
             'completeness_score': 0
         }
         
-        # Check required fields
-        required_fields = ['framework_file', 'models']
+        # Check required fields per Experiment Specification v2.0
+        required_fields = ['name', 'description', 'hypothesis', 'framework_file', 'corpus', 'models', 'runs_per_model', 'workflow']
         present_fields = 0
         
         for field in required_fields:
@@ -307,10 +306,23 @@ class ExperimentParser:
                         validation_result['valid'] = False
         
         # Check runs_per_model
-        runs_per_model = experiment_config.get('runs_per_model', 1)
-        if not isinstance(runs_per_model, int) or runs_per_model < 1:
-            validation_result['issues'].append("runs_per_model must be a positive integer")
-            validation_result['valid'] = False
+        if 'runs_per_model' in experiment_config:
+            runs_per_model = experiment_config['runs_per_model']
+            if not isinstance(runs_per_model, int) or runs_per_model < 1:
+                validation_result['issues'].append("runs_per_model must be a positive integer")
+                validation_result['valid'] = False
+        
+        # Check workflow
+        if 'workflow' in experiment_config:
+            workflow = experiment_config['workflow']
+            if not isinstance(workflow, list) or not workflow:
+                validation_result['issues'].append("workflow must be a non-empty list")
+                validation_result['valid'] = False
+            else:
+                for i, step in enumerate(workflow):
+                    if not isinstance(step, dict) or 'agent' not in step:
+                        validation_result['issues'].append(f"workflow step {i} must have 'agent' field")
+                        validation_result['valid'] = False
         
         # Calculate completeness score
         total_checks = len(required_fields) + 2  # +2 for framework_file exists and models validation
@@ -554,7 +566,7 @@ class SpecLoader:
         Returns:
             Number of runs per model
         """
-        return specifications['experiment'].get('runs_per_model', 1)
+        return specifications['experiment']['runs_per_model']
     
     def get_corpus_files(self, specifications: Dict[str, Any]) -> Dict[str, str]:
         """

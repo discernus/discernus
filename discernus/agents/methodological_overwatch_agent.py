@@ -49,16 +49,25 @@ class MethodologicalOverwatchAgent:
         if not analysis_results:
             return {"decision": "TERMINATE", "reason": "No analysis results were provided to the overwatch agent."}
 
-        # For efficiency, we'll only sample a few results if the list is very long
+        # For efficiency, we'll only sample a few results if the collection is very long
         sample_size = 5
-        results_sample = analysis_results[:sample_size]
+        if isinstance(analysis_results, dict):
+            # Handle dictionary of results (keyed by filename or similar)
+            results_items = list(analysis_results.items())
+            results_sample = dict(results_items[:sample_size])
+        elif isinstance(analysis_results, list):
+            # Handle list of results
+            results_sample = analysis_results[:sample_size]
+        else:
+            # Fallback for other types
+            results_sample = analysis_results
 
         prompt = f"""
 You are a "Methodological Overwatch" agent, an expert in computational social science with a mandate to prevent wasted resources. You have been activated at a mid-flight checkpoint to review the initial results of an analysis.
 
 Your task is to determine if there are signs of systemic failure that justify terminating the experiment now, before more expensive synthesis and interpretation steps are run.
 
-**Initial Analysis Results (Sample of {len(results_sample)} out of {len(analysis_results)} total):**
+**Initial Analysis Results (Sample of {len(results_sample) if hasattr(results_sample, '__len__') else 'N/A'} out of {len(analysis_results) if hasattr(analysis_results, '__len__') else 'N/A'} total):**
 ---
 {json.dumps(results_sample, indent=2)}
 ---

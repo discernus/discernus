@@ -3,47 +3,47 @@
 **Version**: 2.0  
 **Status**: Active
 
-The `experiment.md` file is a simple, human-readable YAML file that defines the scope of an analysis run. It acts as a set of pointers, telling the Discernus system *what* to run, not *how* to run it. The "how" is defined in the framework file.
+The `experiment.md` file is a simple, human-readable YAML file that defines the complete scope of an analysis run. It acts as the **single source of truth** for experiment configuration, telling the Discernus system what framework to use, what corpus to analyze, and how to run it.
 
 ---
 
 ## 1. File Structure
 
-The experiment file MUST be a valid YAML file named `experiment.md` or `experiment.yaml`.
+The experiment file MUST be a valid YAML file named `experiment.md` containing a YAML configuration block with the header `# --- Discernus Configuration ---`.
 
 ---
 
 ## 2. Recommended Project Structure
 
-While the system is flexible, we recommend the following directory structure for clarity and reproducibility. The `discernus_cli.py` tool is designed to work seamlessly with this layout.
+The system uses a **single-source-of-truth** architecture where the experiment file defines all paths and configuration:
 
 ```
 my_research_project/
-├── framework.md
-├── experiment.md
-└── corpus/
+├── framework.md                  # Analytical framework (referenced by experiment)
+├── experiment.md                 # Single source of truth for experiment config
+└── corpus/                       # Corpus directory (referenced by experiment)
     ├── document_01.txt
     ├── document_02.txt
     └── ...
 ```
 
-*   `framework.md`: Defines the "how" – the analytical framework and instructions for the research agents.
-*   `experiment.md`: Defines the "what" – points to the framework, corpus, and models for this specific run.
-*   `corpus/`: Contains the raw text files to be analyzed.
-
-To run an experiment, you would execute the CLI from the root of your project directory like so:
+To run an experiment, execute the CLI with a single parameter:
 
 ```bash
-python3 /path/to/discernus/discernus_cli.py framework.md experiment.md corpus/
+python3 /path/to/discernus/discernus_cli.py experiment.md
 ```
+
+The experiment file defines the framework and corpus paths, eliminating parameter conflicts.
 
 ---
 
 ## 3. Schema
 
 ```yaml
+---
+# --- Discernus Configuration ---
+
 # REQUIRED: A unique, machine-readable name for the experiment.
-# Use snake_case.
 name: my_first_experiment
 
 # REQUIRED: A human-readable description of the experiment's purpose.
@@ -58,11 +58,9 @@ hypothesis: |
   when speaker identity is sanitized.
 
 # REQUIRED: A relative path to the framework file to be used.
-framework: framework.md
+framework_file: framework.md
 
 # REQUIRED: A relative path to the corpus directory to be analyzed.
-# It is the researcher's responsibility to ensure this directory contains
-# the correct version of the corpus (e.g., original, sanitized) for their experiment.
 corpus: corpus/
 
 # REQUIRED: A list of one or more LiteLLM-compatible model strings.
@@ -72,67 +70,105 @@ models:
 
 # REQUIRED: The number of times to run the analysis for each model.
 # A value > 1 is required to calculate inter-run reliability statistics.
-num_runs: 3
+runs_per_model: 3
+
+# OPTIONAL: Analysis variant to use from the framework (defaults to 'default')
+analysis_variant: default
 
 # REQUIRED: A sequence of workflow steps that define the execution pipeline.
-# The WorkflowOrchestrator executes these agents in the order they are listed.
-# Each agent's output is added to a master 'workflow_state' dictionary,
-# making it available to all subsequent agents.
 workflow:
-  # Step 1: Core analysis of the corpus texts.
+  # Step 1: Core analysis of the corpus texts
   - agent: AnalysisAgent
-    # The AnalysisAgent requires no special configuration. It uses the
-    # 'analysis_prompt' from the framework file and the 'corpus' and 'models'
-    # from this experiment file to perform its work.
+    inputs:
+      - experiment
+      - framework
+      - corpus
+    outputs:
+      - analysis_results
 
-  # Step 2: Quality control checkpoint.
+  # Step 2: Quality control checkpoint  
   - agent: MethodologicalOverwatchAgent
     config:
-      # If the failure rate of the AnalysisAgent runs exceeds this threshold,
-      # the workflow will be terminated to save resources.
       failure_threshold: 0.25
 
-  # Step 3: Perform statistical calculations.
+  # Step 3: Statistical calculations
   - agent: CalculationAgent
-    # The CalculationAgent uses the 'calculation_spec' from the framework
-    # file to perform deterministic math on the scores produced by the
-    # AnalysisAgent. It requires no additional configuration here.
+    inputs:
+      - analysis_results
+    outputs:
+      - calculation_results
 
-  # Step 4: Generate the final report and data artifacts.
+  # Step 4: Generate final report and artifacts
   - agent: SynthesisAgent
+    inputs:
+      - calculation_results
     config:
-      # A list of artifacts to be generated.
       output_artifacts:
         - final_report.md
         - results.csv
 
-# OPTIONAL: A plan for statistical tests to be run after the primary analysis.
-# This allows researchers to define the statistical methods needed to
-# validate their hypotheses.
-# DEPRECATION_NOTICE: The 'statistical_plan' block is being deprecated in favor
-# of a more robust 'CalculationAgent' and 'SynthesisAgent' workflow.
-# This block is maintained for backward compatibility but will be removed in v3.
-statistical_plan:
-  - test:
-      # A human-readable name for this statistical test.
-      name: "Test for significant difference between worldviews"
+# OPTIONAL: Additional hypotheses for multi-hypothesis experiments
+hypotheses:
+  H1: "At least two speeches will show statistically significant differences in scores"
+  H2: "Framework will maintain inter-run reliability with Cronbach's alpha > 0.70"
 
-      # Corresponds to a hypothesis defined in the experiment's prose.
-      # This creates a clear link between the research question and the method.
-      hypothesis_ref: "H1"
+---
 
-      # The statistical method to be used. The system will have a registry
-      # of available tests (e.g., 't-test', 'anova', 'cronbachs_alpha').
-      method: "t-test"
+# Human-Readable Experiment Description
 
-      # Parameters specific to the chosen method.
-      params:
-        # The data to be tested. This name MUST correspond to a calculated
-        # metric defined in the framework's 'calculations' block.
-        data_source: "cff_cohesion_index"
-
-        # The categorical variable to use for grouping the data. This name
-        # MUST correspond to a categorical label returned by the framework's
-        # analysis_prompt.
-        grouping_variable: "worldview"
+This section contains the full human-readable description of the experiment,
+including methodology, expected outcomes, and analysis rationale.
 ``` 
+
+## 4. Field Specifications
+
+### Required Fields
+
+- **`name`**: Unique identifier for the experiment (snake_case recommended)
+- **`description`**: Human-readable purpose statement
+- **`hypothesis`**: Primary falsifiable hypothesis being tested  
+- **`framework_file`**: Relative path to the framework specification file
+- **`corpus`**: Relative path to the corpus directory
+- **`models`**: List of LiteLLM-compatible model identifiers
+- **`runs_per_model`**: Number of analysis runs per model (integer ≥ 1)
+- **`workflow`**: Ordered list of agent execution steps
+
+### Optional Fields
+
+- **`analysis_variant`**: Framework variant to use (defaults to 'default')
+- **`hypotheses`**: Additional numbered hypotheses for complex experiments
+
+### Path Resolution
+
+All paths (`framework_file`, `corpus`) are resolved relative to the experiment file's directory.
+
+## 5. CLI Usage
+
+The Discernus CLI uses a **single-parameter pattern** to eliminate configuration conflicts:
+
+```bash
+# Run experiment (single source of truth)
+python3 discernus_cli.py path/to/experiment.md
+
+# All configuration comes from experiment.md:
+# - framework_file: which framework to use
+# - corpus: which corpus to analyze  
+# - models: which LLMs to run
+# - workflow: which agents to execute
+```
+
+This eliminates the anti-pattern of potential conflicts between CLI parameters and experiment configuration.
+
+## 6. Migration from v1.x
+
+Previous experiment formats using separate CLI parameters are deprecated:
+
+```bash
+# DEPRECATED (v1.x pattern)
+python3 discernus_cli.py framework.md experiment.md corpus/
+
+# CURRENT (v2.0 pattern)  
+python3 discernus_cli.py experiment.md
+```
+
+The experiment file now contains all configuration as the single source of truth. 

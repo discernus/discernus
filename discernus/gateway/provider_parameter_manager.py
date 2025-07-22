@@ -1,5 +1,5 @@
 """
-Provider Parameter Manager for SOAR v2.0
+Provider Parameter Manager for Discernus
 
 Centralizes provider-specific parameter handling to avoid API parameter sensitivity issues.
 Key insight: Different LLM providers have different parameter sensitivities that can trigger

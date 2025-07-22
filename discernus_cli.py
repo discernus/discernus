@@ -40,6 +40,10 @@ try:
     from discernus.core.project_chronolog import get_project_chronolog
     from discernus.orchestration.workflow_orchestrator import WorkflowOrchestrator
     from discernus.gateway.model_registry import ModelRegistry
+    
+    # THIN Experiment Lifecycle - replaces direct WorkflowOrchestrator calls
+    from discernus.core.experiment_lifecycle import ExperimentStartup
+    
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
     print(f"❌ Discernus CLI dependencies not available: {e}")
@@ -169,34 +173,43 @@ def validate(framework_file: str, experiment_file: str, corpus_dir: str, verbose
         sys.exit(1)
 
 @discernus.command()
-@click.argument('framework_file', type=click.Path(exists=True, file_okay=True, dir_okay=False))
 @click.argument('experiment_file', type=click.Path(exists=True, file_okay=True, dir_okay=False))
-@click.argument('corpus_dir', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--dev-mode', is_flag=True, help='Run in development mode with simulated researcher')
 @click.option('--researcher-profile', default='experienced_computational_social_scientist', 
               help='Simulated researcher profile for dev mode')
-def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode: bool, researcher_profile: str):
+def execute(experiment_file: str, dev_mode: bool, researcher_profile: str):
     """
-    Execute a Discernus experiment using V4 Framework and V2 Experiment specifications
+    Execute a Discernus experiment using THIN Experiment Lifecycle
     
-    FRAMEWORK_FILE: Path to V4 framework file (e.g., cff_v4_mva.md)
-    EXPERIMENT_FILE: Path to V2 experiment file (e.g., experiment.md)
-    CORPUS_DIR: Path to corpus directory containing text files
+    EXPERIMENT_FILE: Path to V2 experiment file containing all configuration (experiment.md)
     
-    Executes the full workflow:
-    - Load and validate all specifications
-    - Initialize EnsembleOrchestrator
-    - Execute ensemble analysis with statistical planning
-    - Generate results
+    NEW: Uses intelligent THIN Experiment Lifecycle (Issue #131):
+    - Comprehensive validation gauntlet (TrueValidationAgent, ProjectCoherenceAnalyst, etc.)
+    - Workflow completeness analysis (prevents "technically compliant but research useless")
+    - Intelligent enhancement with user consent
+    - Provenance-compliant snapshots (preserves original experiment.md)
+    - Clean handoff to pristine WorkflowOrchestrator
+    
+    Validation Gauntlet:
+    1. TrueValidationAgent - Rubric-based framework/experiment validation
+    2. ProjectCoherenceAnalyst - Socratic research methodology validation
+    3. StatisticalAnalysisConfigurationAgent - Statistical plan validation
+    4. EnsembleConfigurationAgent - Model health checks and resource planning
+    5. WorkflowCompletenessValidator - Ensure SynthesisAgent exists for reports
+    
+    Benefits:
+    - Solves Issue #68: No more "specification-compliant but useless" experiments
+    - Automatic enhancement of incomplete workflows
+    - Complete audit trail and provenance
+    - Human-centric UX with clear consent mechanisms
     
     Example:
-        discernus execute ./cff_v4_mva.md ./experiment.md ./corpus/
+        discernus execute ./experiment.md
+        discernus execute ./experiment.md --dev-mode
     """
     click.echo("🚀 Discernus Experiment Execution")
     click.echo("=" * 40)
-    click.echo(f"📄 Framework: {framework_file}")
     click.echo(f"🧪 Experiment: {experiment_file}")
-    click.echo(f"📁 Corpus: {corpus_dir}")
     
     # --- Set up logging and chronolog ---
     session_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
@@ -224,49 +237,34 @@ def execute(framework_file: str, experiment_file: str, corpus_dir: str, dev_mode
     async def _execute_async():
         # This function runs with its output redirected to the log file
         try:
-            print("⏳ Loading specifications...") # This will go to the log
+            print("🚀 THIN Experiment Lifecycle - Starting intelligent experiment validation...")
             
-            # Load specifications using new spec_loader
-            spec_loader = SpecLoader()
-            specifications = spec_loader.load_specifications(
-                framework_file=Path(framework_file),
-                experiment_file=Path(experiment_file),
-                corpus_dir=Path(corpus_dir)
+            # NEW: Use THIN Experiment Lifecycle instead of direct WorkflowOrchestrator
+            experiment_path = Path(experiment_file)
+            project_path = experiment_path.parent
+            
+            print(f"🧪 Experiment: {experiment_path}")
+            print(f"📁 Project: {project_path}")
+            
+            # Initialize the intelligent experiment startup
+            startup = ExperimentStartup(str(project_path))
+            
+            print("🔍 Running comprehensive validation gauntlet...")
+            print("   Phase 1: TrueValidationAgent (rubric-based)")
+            print("   Phase 2: ProjectCoherenceAnalyst (Socratic methodology)")
+            print("   Phase 3: StatisticalAnalysisConfiguration (statistical plan)")
+            print("   Phase 4: EnsembleConfiguration (model health)")
+            print("   Phase 5: WorkflowCompleteness (research deliverables)")
+            
+            # Execute with intelligent lifecycle management
+            # This replaces all the manual specification loading and orchestrator setup
+            results = await startup.start_experiment(
+                experiment_file=experiment_path,
+                dev_mode=dev_mode,
+                auto_enhance=True  # Allow automatic workflow enhancement
             )
             
-            # Check if all specifications are valid
-            if not specifications['validation']['overall_valid']:
-                click.secho("❌ Specification validation failed:", fg='red')
-                for spec_type, validation in specifications['validation'].items():
-                    if spec_type != 'overall_valid' and validation and not validation['valid']:
-                        click.echo(f"  {spec_type}: {', '.join(validation['issues'])}")
-                sys.exit(1)
-            
-            print("✅ All specifications loaded and validated")
-            
-            # Initialize orchestrator - use parent directory of experiment file as project path
-            project_path = Path(experiment_file).parent
-            orchestrator = WorkflowOrchestrator(str(project_path))
-
-            # Prepare initial state for the WorkflowOrchestrator
-            initial_state = {
-                'framework': specifications.get('framework'),
-                'experiment': specifications.get('experiment'),
-                'corpus': specifications.get('corpus'),
-                'workflow': specifications.get('experiment', {}).get('workflow', []),
-                'analysis_agent_instructions': specifications.get('framework', {}).get('analysis_variants', {}).get(specifications.get('experiment', {}).get('analysis_variant', 'default'), {}).get('analysis_prompt', ''),
-                'project_path': str(project_path),
-                'framework_path': framework_file,
-                'experiment_path': experiment_file,
-                'corpus_path': corpus_dir,
-                # session_results_path will be created by WorkflowOrchestrator following Provenance Guide v3.0
-            }
-
-            if not initial_state['workflow']:
-                 raise ValueError("Experiment file must contain a 'workflow' definition.")
-
-            print("⏳ Executing workflow...") # This will go to the log
-            results = orchestrator.execute_workflow(initial_state)
+            print("✅ THIN Experiment Lifecycle completed successfully!")
             
             return results # Return results for handling outside the log context
                 
@@ -572,25 +570,49 @@ def _list_available_states(project_path: Path):
         click.echo(f"   ... and {len(state_files) - 10} more")
 
 def _find_latest_state_file(project_path: Path) -> Optional[Path]:
-    """Find the most recent state file in the project."""
-    results_dir = project_path / "results"
-    if not results_dir.exists():
-        return None
+    """Find the most recent state file in the project.
     
+    Searches both directory structures:
+    1. results/ (legacy structure - MVA experiments)
+    2. experiments/ (current WorkflowOrchestrator structure)
+    
+    This fixes Issue #130 where resume auto-discovery failed due to directory mismatch.
+    """
     state_files = []
-    for session_dir in results_dir.iterdir():
-        if session_dir.is_dir():
-            # Look for both final and partial state files
-            for state_file in session_dir.glob("state_after_step_*.json"):
-                state_files.append(state_file)
-            for partial_state_file in session_dir.glob("state_step_*_partial.json"):
-                state_files.append(partial_state_file)
+    
+    # Search legacy results/ structure
+    results_dir = project_path / "results"
+    if results_dir.exists():
+        for session_dir in results_dir.iterdir():
+            if session_dir.is_dir():
+                # Look for both final and partial state files
+                for state_file in session_dir.glob("state_after_step_*.json"):
+                    state_files.append(state_file)
+                for partial_state_file in session_dir.glob("state_step_*_partial.json"):
+                    state_files.append(partial_state_file)
+    
+    # Search experiments/ structure (WorkflowOrchestrator v3.0+)
+    experiments_dir = project_path / "experiments"
+    if experiments_dir.exists():
+        for experiment_dir in experiments_dir.iterdir():
+            if experiment_dir.is_dir():
+                sessions_dir = experiment_dir / "sessions"
+                if sessions_dir.exists():
+                    for session_dir in sessions_dir.iterdir():
+                        if session_dir.is_dir():
+                            # Look for both final and partial state files
+                            for state_file in session_dir.glob("state_after_step_*.json"):
+                                state_files.append(state_file)
+                            for partial_state_file in session_dir.glob("state_step_*_partial.json"):
+                                state_files.append(partial_state_file)
     
     if not state_files:
         return None
     
-    # Return the most recently modified state file
-    return max(state_files, key=lambda x: x.stat().st_mtime)
+    # Return the most recently modified state file from either location
+    latest_file = max(state_files, key=lambda x: x.stat().st_mtime)
+    print(f"✅ Resume: Found latest state file: {latest_file}")
+    return latest_file
 
 def _determine_resume_step(state_file_path: Path, workflow_steps: List[Dict]) -> int:
     """Determine which step to resume from based on the state file name."""
@@ -603,7 +625,7 @@ def _determine_resume_step(state_file_path: Path, workflow_steps: List[Dict]) ->
         # For partial state files, resume from the same step since it may be incomplete
         return current_step
     
-    # Handle completed state files like "state_after_step_1_AnalysisAgent.json"
+    # Handle completed state files like "state_after_step_1_AgentName.json"
     completed_match = re.search(r'state_after_step_(\d+)_', filename)
     if completed_match:
         completed_step = int(completed_match.group(1))
@@ -615,8 +637,46 @@ def _determine_resume_step(state_file_path: Path, workflow_steps: List[Dict]) ->
 def _execute_resumption(orchestrator: WorkflowOrchestrator, state_data: Dict[str, Any], 
                        resume_step: int, workflow_steps: List[Dict]) -> Dict[str, Any]:
     """Execute the resumption workflow."""
-    # Initialize session logging
-    orchestrator._init_session_logging()
+    # Extract existing session path from state data instead of creating new session
+    existing_session_path = state_data.get('session_results_path')
+    if existing_session_path:
+        # Handle both absolute and relative paths from the state file
+        if not Path(existing_session_path).is_absolute():
+            # Path is relative to project directory
+            full_session_path = Path(orchestrator.project_path) / existing_session_path
+        else:
+            full_session_path = Path(existing_session_path)
+            
+        if full_session_path.exists():
+            # Reuse existing session directory
+            orchestrator.session_results_path = full_session_path
+            orchestrator.session_id = full_session_path.name  # Use directory name as session ID
+            orchestrator.conversation_id = state_data.get('conversation_id', f"resumed_conversation_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}")
+            
+            # Initialize logger and archive manager for existing session
+            from discernus.core.conversation_logger import ConversationLogger
+            orchestrator.logger = ConversationLogger(str(orchestrator.project_path))
+            
+            # Initialize archive manager if it doesn't exist
+            if not hasattr(orchestrator, 'archive_manager') or not orchestrator.archive_manager:
+                from discernus.core.llm_archive_manager import LLMArchiveManager
+                orchestrator.archive_manager = LLMArchiveManager(orchestrator.session_results_path)
+                
+                # Update gateway to use archive manager if it's an LLMGateway
+                if hasattr(orchestrator.gateway, 'archive_manager') and hasattr(orchestrator.gateway, '__class__'):
+                    from discernus.gateway.llm_gateway import LLMGateway
+                    if isinstance(orchestrator.gateway, LLMGateway):
+                        orchestrator.gateway.archive_manager = orchestrator.archive_manager
+            
+            click.echo(f"♻️  Resuming existing session: {orchestrator.session_id}")
+        else:
+            # Fallback to new session if existing session path not found
+            orchestrator._init_session_logging()
+            click.echo(f"🆕 Creating new session (existing session not found at {full_session_path}): {orchestrator.session_id}")
+    else:
+        # Fallback to new session if no session path in state
+        orchestrator._init_session_logging()
+        click.echo(f"🆕 Creating new session (no session path in state): {orchestrator.session_id}")
     
     # Prime the workflow state
     orchestrator.workflow_state = state_data

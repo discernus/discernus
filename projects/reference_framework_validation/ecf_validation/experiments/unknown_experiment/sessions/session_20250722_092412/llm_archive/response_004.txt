@@ -1,0 +1,71 @@
+[PROVENANCE:f86f994168e9@../corpus/progressive_tribalism_sanders_2025_fighting_oligarchy.txt]
+
+**Emotional Climate Framework v1.0 - Refined Analysis**
+
+**AFFECTIVE CLIMATE DIMENSIONS:**
+
+1.  **Fear**
+    *   **Emotional Language & Atmospheric Markers:** The text creates a strong sense of impending threat and crisis, primarily stemming from the actions and power of the "oligarchs." There's an emphasis on what will be lost or destroyed if their influence persists, framing the current situation as precarious and urgent.
+    *   **Direct Quotations:**
+        *   "We will not accept an oligarchic form of society." (Implies dire consequences if accepted)
+        *   "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer." (Highlights direct threat to public welfare)
+        *   "the worst and most dangerous addiction we have is the greed of the oligarchs." (Characterizes greed as an active, destructive force)
+    *   **Score:** 0.85
+    *   **Confidence:** 0.95
+
+2.  **Hope**
+    *   **Emotional Language & Atmospheric Markers:** Despite the dire assessment, the text concludes with a powerful call to action and an optimistic outlook on the ability to effect change. There's a clear belief in the collective power of people to overcome challenges and build a better future.
+    *   **Direct Quotations:**
+        *   "That is what a rigged economy is about, and that is what we are going to change." (Direct statement of intent for positive change)
+        *   "if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve." (Expresses confidence in collective agency and a positive future outcome)
+        *   "99% is a hell of a lot larger number than 1%." (Statistical grounding for the possibility of success)
+    *   **Score:** 0.70
+    *   **Confidence:** 0.90
+
+**RELATIONAL CLIMATE DIMENSIONS:**
+
+3.  **Enmity**
+    *   **Emotional Language & Atmospheric Markers:** The speech establishes a clear and intense adversarial relationship with the "oligarchs," "wealthy 1%," and specific financial firms. They are portrayed as actively malicious, self-serving, and destructive, creating a strong "us vs. them" dynamic.
+    *   **Direct Quotations:**
+        *   "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys." (Directly labels them negatively)
+        *   "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer." (Accuses them of destructive intent)
+        *   "The rich want to get richer and they don't care who they step on." (Portrays them as ruthless and uncaring)
+    *   **Score:** 0.95
+    *   **Confidence:** 0.98
+
+4.  **Amity**
+    *   **Emotional Language & Atmospheric Markers:** The text frequently invokes a sense of collective identity and unity among "the American people," "working families," and the "99%." The call for solidarity is presented as the essential means to combat the identified enemy.
+    *   **Direct Quotations:**
+        *   "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'" (Establishes a unified popular sentiment)
+        *   "if we stand together, are strong, are disciplined, are smart..." (Emphasizes the necessity of collective action)
+        *   "I don't care if you are a Republican, Democrat, or independent..." (Broadens the scope of unity beyond traditional political divides against a common adversary)
+    *   **Score:** 0.80
+    *   **Confidence:** 0.95
+
+**SUCCESS ORIENTATION CLIMATE DIMENSIONS:**
+
+5.  **Envy**
+    *   **Emotional Language & Atmospheric Markers:** The speech is saturated with language highlighting extreme wealth inequality, unfair advantages, and a "rigged system." It contrasts the opulent lives of the few with the struggles of the many, fostering a strong sense of grievance and resentment over perceived unearned privilege and injustice.
+    *   **Direct Quotations:**
+        *   "give over a trillion dollars in tax breaks to the wealthiest 1%." (Highlights unfair wealth distribution)
+        *   "if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer." (Implies moral failing and greed in accumulating more than needed)
+        *   "a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about." (Directly labels the system as unjust and highlights massive inequality)
+    *   **Score:** 0.98
+    *   **Confidence:** 0.99
+
+6.  **Compersion**
+    *   **Emotional Language & Atmospheric Markers:** There is virtually no language that celebrates success, merit, or shared prosperity in a positive or inclusive way. The success or wealth described is almost exclusively attributed to the "oligarchs" and is framed as unjustly acquired or at the expense of others, thus invoking grievance rather than celebration. The text critiques the existing distribution of success rather than celebrating it.
+    *   **Direct Quotations:** (No direct quotations supporting Compersion. The absence itself serves as evidence.)
+        *   (Lack of phrases like "well-deserved," "impressive accomplishment," "rising tide," or "shared prosperity" when discussing economic success.)
+        *   (The context of "make money" or "do well in life" is immediately followed by a critique of billionaires stepping on the poor, negating any celebratory aspect.)
+    *   **Score:** 0.05
+    *   **Confidence:** 0.95
+
+**Salience Ranking (from most to least salient):**
+
+1.  **Envy:** This dimension is the foundational premise of the entire speech. The identification of a "rigged economy," "wealth transfer," and the unfair privilege of the "1%" is the primary motivator for the outrage and call to action. It is pervasive and structurally central.
+2.  **Enmity:** Closely tied with Envy, the "oligarchs" and the "wealthy 1%" are explicitly named and characterized as the adversary. The conflictual framing against this clearly defined enemy dominates the narrative.
+3.  **Fear:** The perceived existential threats posed by the "oligarchs" to social programs and democratic principles lend urgency and gravity to the speech. This fear serves as the critical stakes that necessitate the fight.
+4.  **Amity:** The call for unity and collective action among "the American people" is presented as the essential strategy to address the threats and fight the enemy. It is the counterpoint to the identified problem.
+5.  **Hope:** While present as the desired future outcome and a motivating factor for collective action, the language of hope is less elaborated than the detailed description of the problem and the enemy. It primarily serves as the concluding promise.
+6.  **Compersion:** This dimension is almost entirely absent from the emotional landscape of the speech. The discourse focuses on economic injustice and the negative aspects of accumulated wealth, leaving no room for celebrating success in a positive, inclusive light.
