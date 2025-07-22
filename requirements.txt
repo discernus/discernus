@@ -6,8 +6,8 @@ gitpython>=3.1.0           # Conversation logging with git transparency
 litellm>=1.0.0             # Rate limiting, retries, and provider management
 anthropic>=0.7.0           # Direct Anthropic API access
 requests>=2.28.0           # HTTP requests for literature search APIs
-click>=8.0.0               # CLI interface for SOAR
-redis>=6.2.0               # Pub-sub coordination for SOAR v2.0
+click>=8.0.0               # CLI interface for Discernus
+redis>=6.2.0               # Pub-sub coordination for Discernus
 
 # Scientific computing (when needed)
 pandas>=1.5.0              # Data analysis

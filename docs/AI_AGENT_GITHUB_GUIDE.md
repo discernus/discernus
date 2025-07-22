@@ -1,15 +1,55 @@
 # AI Agent Guide: GitHub Issues Management
 ## Proven Methods for AI Agents Working with GitHub
 
-**Status**: ✅ **VERIFIED WORKING** - July 18, 2025  
+**Status**: ✅ **VERIFIED WORKING** - January 22, 2025  
 **Evidence**: Successfully created and managed issues #9-#12 in discernus/discernus repo  
-**Agent Tested**: Claude Sonnet 3.5 via Cursor
+**Agent Tested**: Claude Sonnet 3.5 via Cursor  
+**Critical Update**: Added pager bypass fixes for AI agent terminals
+
+---
+
+## ⚡ **Quick Reference for AI Agents**
+
+```bash
+# 🚨 ALWAYS use | cat to prevent hanging!
+gh issue view 68 | cat
+
+# Authentication fix if needed
+unset GITHUB_TOKEN && gh auth status  
+
+# Create issue
+gh issue create --title "Title" --body "Body" --label "bug"
+
+# List issues  
+gh issue list
+```
 
 ---
 
 ## 🎯 **For AI Agents: YES, YOU CAN DO THIS!**
 
 If another agent told you "I can't create GitHub Issues," they were wrong. Here's exactly how to do it.
+
+---
+
+## 🚨 **CRITICAL: Pager Issue Fix**
+
+**Problem**: `gh issue view` commands hang or truncate due to pager (less/more) issues in AI agent terminals.
+
+**Solutions** (use ONE of these):
+```bash
+# Solution 1: Bypass pager with cat (RECOMMENDED)
+gh issue view 68 | cat
+
+# Solution 2: JSON output for parsing
+gh issue view 68 --json title,body,state,labels --jq '{title: .title, body: (.body | .[0:200] + "...")}'
+
+# Solution 3: Disable pager globally (if persistent issues)
+export PAGER=""
+gh issue view 68
+```
+
+**Why This Matters**: Without these fixes, issue viewing commands will hang indefinitely, wasting tool calls.
 
 ---
 
@@ -56,8 +96,11 @@ gh issue create --title "Enhancement" --body "Description" --label "enhancement,
 # List issues
 gh issue list
 
-# View specific issue
-gh issue view 12
+# View specific issue (CRITICAL: Use | cat to bypass pager!)
+gh issue view 12 | cat
+
+# Alternative: JSON output (recommended for parsing)
+gh issue view 12 --json title,body,state,labels | jq '.'
 
 # Close issue
 gh issue close 12 --comment "Fixed in PR #15"
@@ -244,6 +287,21 @@ gh issue close 12 --comment "Test completed successfully"
 
 ## ⚠️ **Common Issues & Solutions**
 
+### **Pager Hanging/Truncation** (MOST COMMON)
+```
+gh issue view 68
+# Command hangs indefinitely or shows partial output
+```
+
+**Solution:**
+```bash
+# Use pipe to cat (RECOMMENDED)
+gh issue view 68 | cat
+
+# OR use JSON output  
+gh issue view 68 --json title,body,state | jq '.'
+```
+
 ### **"Bad Credentials" Error**
 ```
 HTTP 401: Bad credentials (https://api.github.com/graphql)
@@ -296,6 +354,7 @@ For any agent implementing GitHub Issues:
 - [ ] `gh auth status` shows active authentication
 - [ ] Can create issue: `gh issue create --title "Test" --body "Test"`
 - [ ] Can list issues: `gh issue list`  
+- [ ] Can view issues without hanging: `gh issue view [number] | cat`
 - [ ] Can close issues: `gh issue close [number]`
 
 **Advanced Features:**
@@ -337,6 +396,7 @@ For any agent implementing GitHub Issues:
 
 ---
 
-**Last Updated**: July 18, 2025  
+**Last Updated**: January 22, 2025  
 **Verified Working**: discernus/discernus repository  
-**Issues Created**: #9, #10, #11, #12 (all successful) 
+**Issues Created**: #9, #10, #11, #12 (all successful)  
+**Critical Fix**: Pager bypass with `| cat` prevents hanging/truncation 

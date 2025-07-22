@@ -1,0 +1,82 @@
+The analysis of Congressman Steve King's speech, using the Constitutional Health Framework v1.1 with SALIENCE-ENHANCED analysis, reveals a strong focus on perceived procedural and institutional pathologies, framed within a desire to restore constitutional norms.
+
+[PROVENANCE:d3eb0b0145b6@../corpus/conservative_tribalism_king_2017_house.txt]
+
+---
+
+**Constitutional Health Dimensions Analysis:**
+
+1.  **Procedural Legitimacy (PL)**
+    *   **Intensity:** 0.8
+        *   **Assessment:** The speaker strongly advocates for adherence to established constitutional procedures, particularly regarding legislative authority and the Senate's role in judicial nominations. He emphasizes that the Senate is acting within its rights by determining its own rules for advice and consent, and that legislative power rests solely with Congress.
+        *   **Quotations:**
+            *   "It's the Senate's job then to evaluate the nominations of the President. And they can do so with or without hearings, with or without interviews. The Senate writes its own rules just like the House writes its own rules, Mr. Speaker."
+            *   "All legislative power... shall be vested in a Congress of the United States. That's here. The House and the Senate. Article one, first words of our Constitution, all legislative powers."
+        *   **Confidence:** 0.9
+
+2.  **Institutional Respect (IR)**
+    *   **Intensity:** 0.5
+        *   **Assessment:** While the speaker acknowledges the constitutional roles and duties of institutions like the Senate, House, Presidency, and Supreme Court, his respect is conditional on their perceived adherence to the "text" and "original meaning" of the Constitution. He frames his critique as demanding that these institutions "do their job" correctly, which implies a fundamental respect for the *role* itself, even as he expresses profound disrespect for the *current occupants'* performance.
+        *   **Quotations:**
+            *   "It's the Senate's job then to evaluate the nominations of the President."
+            *   "We here who take an oath to support and defend the Constitution—and that's actually all of us here in the House of Representatives, Mr. Speaker, and everyone in the United States Senate for that matter—we recognize that if we're going to support and defend the Constitution..."
+        *   **Confidence:** 0.8
+
+3.  **Systemic Continuity (SC)**
+    *   **Intensity:** 0.7
+        *   **Assessment:** The speech demonstrates a strong desire to "preserve," "restore," and "defend" the existing constitutional system, rather than advocating for its replacement. The concerns raised are about preventing the "destruction" of the Constitution by perceived overreach, indicating a call to return to a prior, 'correct' state of continuity.
+        *   **Quotations:**
+            *   "We have a Constitution to preserve, protect, defend, and support and defend."
+            *   "We have a Constitution that's got to be restored. And instead of being restored, it would be destroyed by another presidential appointment."
+        *   **Confidence:** 0.9
+
+---
+
+**Constitutional Pathology Dimensions Analysis:**
+
+4.  **Procedural Rejection (PR)**
+    *   **Intensity:** 0.8
+        *   **Assessment:** The speaker heavily criticizes the Supreme Court and the Executive for actions he characterizes as bypassing or rejecting established legislative procedures. He repeatedly accuses the judiciary of "writing words into law" and "manufacturing a command," and the executive of implementing "amnesty by executive edict" that "suspends the rule of law" and "defies the very law."
+        *   **Quotations:**
+            *   "the Chief Justice of the Supreme Court decided that he could write words into Obamacare that didn't exist. They were not passed by this Congress."
+            *   "the President's policy of amnesty, de facto amnesty, amnesty by executive edict... suspends the rule of law, def law, defies the very law, the specified law itself."
+        *   **Confidence:** 0.95
+
+5.  **Institutional Subversion (IS)**
+    *   **Intensity:** 0.9
+        *   **Assessment:** This is a dominant theme. The speaker directly accuses the Supreme Court of "overreach" and acting on "imagination" rather than law, portraying judges as "unelected," "appointed for life," and "unaccountable." He charges the President with "not doing his job" and "ordering law enforcement officers not to do their job," implying a deliberate undermining of institutional authority and function.
+        *   **Quotations:**
+            *   "the Supreme Court that's overreached... where the Supreme Court created a new command in the Constitution."
+            *   "it's no longer possible to look at this Supreme Court and discern what a likely decision of the Court might be by studying the text of the Constitution and the text of the law because we have a court that will write, make it up as they go along, write laws."
+            *   "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them."
+        *   **Confidence:** 0.95
+
+6.  **Systemic Replacement (SR)**
+    *   **Intensity:** 0.2
+        *   **Assessment:** Despite the severe criticism of current institutional behavior, the speaker does not call for a new system or a fundamental change to the constitutional structure. His arguments consistently focus on restoring the existing system to its perceived intended function through proper interpretation and personnel changes, rather than a revolutionary overhaul.
+        *   **Quotations:**
+            *   "We have a Constitution that's got to be restored."
+            *   "This is the time we must defend our Constitution and we must nominate and elect a president of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says."
+        *   **Confidence:** 0.9
+
+---
+
+**Ranking by Salience (Highest to Lowest):**
+
+1.  **Procedural Rejection (PR) - Salience: 0.9**
+    *   This dimension is rhetorically paramount. The core of Congressman King's argument against both the judiciary and the executive branch is their perceived circumvention or outright rejection of established legal and constitutional procedures. The language used ("write words into Obamacare that didn't exist," "manufactured a command," "amnesty by executive edict," "suspends the rule of law") is highly charged and central to his emotional appeal, framing the actions as illegitimate deviations from proper process.
+
+2.  **Institutional Subversion (IS) - Salience: 0.9**
+    *   Equally prominent is the accusation that key institutions (Supreme Court, Presidency, and indirectly, parts of law enforcement) are actively undermining their own authority by failing to adhere to their constitutional duties or by exceeding their powers. Phrases like "court that's overreached," "President... not doing his job," and descriptions of judges as "unaccountable" and acting outside their oath are pervasive, forming the bedrock of his critique against the current operation of government.
+
+3.  **Procedural Legitimacy (PL) - Salience: 0.8**
+    *   This health indicator serves as the normative backdrop against which the pathologies are measured. The speech consistently refers to how things *should* be done constitutionally, particularly regarding the separation of powers and legislative authority. The initial discussion on the Senate's role in judicial nominations and the emphasis on Article I power are foundational to his entire argument, defining the "right way" before describing the "wrong way."
+
+4.  **Systemic Continuity (SC) - Salience: 0.7**
+    *   The desire to "preserve," "restore," and "defend" the Constitution is a recurring and significant theme. This reflects a commitment to the enduring framework of the U.S. system, even while criticizing its current operation. The speaker's ultimate stated goal is to prevent the Constitution from being "destroyed" and to return it to its "restored" state, making this a key motivating factor in his discourse.
+
+5.  **Institutional Respect (IR) - Salience: 0.6**
+    *   While the speaker does acknowledge institutional roles, the rhetorical emphasis on *respect* for the institutions themselves is less prominent than the detailed accusations of their *failures*. The discussion of "doing your job" points to a recognition of institutional duties, but it quickly pivots to criticisms of non-compliance, making the explicit affirmation of respect secondary to the concerns about subversion.
+
+6.  **Systemic Replacement (SR) - Salience: 0.1**
+    *   This dimension has very low salience. There is virtually no rhetorical emphasis on overthrowing or fundamentally replacing the existing constitutional system. The speaker's entire argument is centered on correcting perceived malfunctions within the current framework, whether through judicial appointments or stricter enforcement of existing laws, indicating a strong desire for restoration and reform within the established order, not its dissolution.

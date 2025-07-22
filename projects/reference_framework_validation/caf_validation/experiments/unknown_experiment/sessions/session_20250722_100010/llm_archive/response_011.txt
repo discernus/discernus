@@ -1,0 +1,104 @@
+[PROVENANCE:afefd5ff1c06@../corpus/progressive_dignity_lewis_1963_march_washington.txt]
+
+**Character Assessment Framework v4.2 Analysis: John Lewis (1963 March on Washington Speech)**
+
+John Lewis's speech at the March on Washington for Jobs and Freedom reveals a speaker whose moral character is profoundly shaped by a fervent commitment to civic virtues, especially justice, truth, dignity, and hope. While acknowledging the suffering and frustration of his community, Lewis primarily channels these into a constructive, action-oriented demand for systemic change, largely eschewing civic vices like manipulation, fantasy, and tribalism. His rhetoric is direct, unvarnished, and calls for immediate, revolutionary action grounded in the principles of equality and human worth.
+
+---
+
+**Civic Virtues:**
+
+1.  **Justice**
+    *   **Intensity:** 1.0
+    *   **Salience:** 1.0 (Justice is the foundational and all-encompassing principle guiding Lewis's rhetoric. The entire speech is a forceful demand for the rectification of profound injustices—economic, social, and political—and a restructuring of society based on fairness and equality. It is the core of his moral identity as presented here.)
+    *   **Quotations:**
+        *   "We march today for jobs and freedom, but we have nothing to be proud of, for hundreds and thousands of our brothers are not here. They're receiving starvation wages or no wages at all." (Highlights the fundamental injustice of economic deprivation and lack of freedom.)
+        *   "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year." (A concrete demand for economic justice and fair treatment.)
+    *   **Confidence Rating:** 1.0
+
+2.  **Truth**
+    *   **Intensity:** 0.9
+    *   **Salience:** 0.9 (Lewis's speech is built upon a stark, unflinching articulation of current realities. He uses verifiable facts and specific examples of suffering, police brutality, and legislative inadequacy to establish the urgent need for change, making intellectual honesty central to his argument's persuasive power.)
+    *   **Quotations:**
+        *   "While we stand here, there are sharecroppers in the Delta of Mississippi who are out in the field working for less than three dollars a day, twelve hours a day." (Directly states verifiable, uncomfortable facts about exploitation.)
+        *   "But what did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby?" (Forces acknowledgment of specific government inaction in the face of brutal truths.)
+    *   **Confidence Rating:** 1.0
+
+3.  **Dignity**
+    *   **Intensity:** 0.9
+    *   **Salience:** 0.9 (The implicit assertion of universal human worth underpins Lewis's outrage at the suffering described. His demands for freedom, protection, and equal rights are rooted in the belief that every individual possesses inherent dignity, and he calls for actions to be carried out with this spirit.)
+    *   **Quotations:**
+        *   "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations." (Emphasizes the need to protect the inherent worth and safety of vulnerable individuals.)
+        *   "But we will march with the spirit of love and with the spirit of dignity that we have shown here today." (Explicitly states a commitment to dignified, principle-driven action.)
+    *   **Confidence Rating:** 1.0
+
+4.  **Hope**
+    *   **Intensity:** 0.8
+    *   **Salience:** 0.8 (Despite the harsh critique of present conditions, Lewis's speech is ultimately a powerful expression of constructive vision and democratic optimism. He doesn't wallow in despair but rather offers a transformative future that can be achieved through sustained action and revolutionary commitment.)
+    *   **Quotations:**
+        *   "Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete." (Presents an inspiring, actionable vision of a future realized through effort.)
+        *   "We shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy." (Articulates a grand, positive vision for a unified and just America.)
+    *   **Confidence Rating:** 0.9
+
+5.  **Pragmatism**
+    *   **Intensity:** 0.7
+    *   **Salience:** 0.6 (Lewis demonstrates practical wisdom by analyzing the shortcomings of existing legislative proposals and outlining concrete, workable strategies—both legislative amendments and sustained direct action—to achieve desired outcomes. His focus is on tangible results, not just abstract ideals.)
+    *   **Quotations:**
+        *   "Unless Title Three is put in this bill, there's nothing to protect the young children and old women..." (Provides specific, results-oriented critique of the civil rights bill.)
+        *   "If we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington. We will march through the South..." (Articulates a clear, practical alternative strategy if legislative avenues fail.)
+    *   **Confidence Rating:** 0.8
+
+---
+
+**Civic Vices:**
+
+1.  **Resentment**
+    *   **Intensity:** 0.4
+    *   **Salience:** 0.3 (While Lewis clearly articulates grievances and a sense of being "tired" of injustice, this is framed as a catalyst for urgent action and a demand for a just future, rather than a focus on backward-looking blame or unconstructive bitterness. The anger is channeled proactively.)
+    *   **Quotations:**
+        *   "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again." (Expresses the deep exhaustion and frustration of ongoing injustice.)
+        *   "To those who have said, 'Be patient and wait,' we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!" (Rejects the slow pace of change that perpetuates suffering, signaling deep grievance.)
+    *   **Confidence Rating:** 0.8
+
+2.  **Fear**
+    *   **Intensity:** 0.2
+    *   **Salience:** 0.1 (Lewis describes the fearful realities faced by the oppressed, such as police violence and living in a "police state." However, he does not primarily use these descriptions to induce panic in his audience, but rather to highlight the urgency of the situation and call for courageous action to overcome such threats.)
+    *   **Quotations:**
+        *   "who must face police dogs and fire hoses in the South" (Describes the objective threats faced by protesters, not to evoke fear in the audience but to illustrate injustice.)
+        *   "the citizens of Danville, Virginia, who must live in constant fear of a police state." (States the fearful conditions under which people live, as a factual basis for demanding change.)
+    *   **Confidence Rating:** 0.9
+
+3.  **Tribalism**
+    *   **Intensity:** 0.1
+    *   **Salience:** 0.05 (Lewis speaks directly for the "black masses" and "our brothers," but the ultimate goals he articulates—"jobs and freedom," "true freedom," and restructuring society "in the image of God and democracy"—are universal principles applicable to all, not exclusive to one group or hostile to others.)
+    *   **Quotations:**
+        *   "hundreds and thousands of our brothers are not here." (Identifies with the collective suffering of his community.)
+        *   "the black masses are on the march for jobs and freedom." (Names the primary group advocating for change, but the demands are broadly applicable.)
+    *   **Confidence Rating:** 0.9
+
+4.  **Manipulation**
+    *   **Intensity:** 0.0
+    *   **Salience:** 0.0 (There is no evidence of misleading information, false claims, or deceptive rhetoric. Lewis's speech is remarkably direct, honest, and fact-based in its criticisms and demands.)
+    *   **Quotations:** (N/A - absence of evidence)
+    *   **Confidence Rating:** 1.0
+
+5.  **Fantasy**
+    *   **Intensity:** 0.0
+    *   **Salience:** 0.0 (Lewis explicitly calls for revolutionary effort, sacrifice, and sustained struggle, directly contradicting any notion of effortless or magical solutions. His vision is ambitious but presented as achievable through hard work and determination.)
+    *   **Quotations:** (N/A - absence of evidence)
+    *   **Confidence Rating:** 1.0
+
+---
+
+**Salience Ranking (Highest to Lowest):**
+
+1.  **Justice** (Salience: 1.0)
+2.  **Truth** (Salience: 0.9)
+3.  **Dignity** (Salience: 0.9)
+4.  **Hope** (Salience: 0.8)
+5.  **Pragmatism** (Salience: 0.6)
+6.  **Resentment** (Salience: 0.3)
+7.  **Fear** (Salience: 0.1)
+8.  **Tribalism** (Salience: 0.05)
+9.  **Manipulation** (Salience: 0.0)
+10. **Fantasy** (Salience: 0.0)

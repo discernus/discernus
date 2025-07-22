@@ -117,7 +117,7 @@ class ConversationLogger:
         """
         Start Redis event capture for a conversation
         
-        Captures SOAR events (agent spawning, completions, etc.) and logs them
+        Captures Discernus events (agent spawning, completions, etc.) and logs them
         alongside LLM messages for complete chronological record.
         """
         if not self.redis_client:
@@ -129,7 +129,7 @@ class ConversationLogger:
         # Start Redis subscriber thread if not already running
         if not self.redis_thread or not self.redis_thread.is_alive():
             self.redis_pubsub = self.redis_client.pubsub()
-            self.redis_pubsub.psubscribe('soar.*')
+            self.redis_pubsub.psubscribe('discernus.*')
             self.redis_thread = threading.Thread(target=self._redis_event_listener, daemon=True)
             self.redis_thread.start()
             logger.info(f"Started Redis event capture for conversation: {conversation_id}")
@@ -184,28 +184,28 @@ class ConversationLogger:
         """
         message_type = event_data.get('message_type', 'unknown')
         
-        if channel == 'soar.agent.spawned':
+        if channel == 'discernus.agent.spawned':
             agent_type = event_data.get('agent_type', 'unknown_agent')
             agent_role = event_data.get('agent_role', 'unknown_role')
             return f"AGENT_SPAWNED: {agent_type} ({agent_role})"
         
-        elif channel == 'soar.agent.completed':
+        elif channel == 'discernus.agent.completed':
             agent_type = event_data.get('agent_type', 'unknown_agent')
             turn = event_data.get('turn', 'unknown')
             return f"AGENT_COMPLETED: {agent_type} (turn {turn})"
         
-        elif channel == 'soar.session.start':
+        elif channel == 'discernus.session.start':
             research_question = event_data.get('research_question', 'unknown')
             return f"SESSION_START: {research_question}"
         
-        elif channel == 'soar.validation.started':
+        elif channel == 'discernus.validation.started':
             return f"VALIDATION_STARTED"
         
-        elif channel == 'soar.framework.validated':
+        elif channel == 'discernus.framework.validated':
             return f"FRAMEWORK_VALIDATED"
         
         else:
-            return f"SOAR_EVENT: {channel} - {message_type}"
+            return f"DISCERNUS_EVENT: {channel} - {message_type}"
 
     def log_llm_message(self, 
                        conversation_id: str,

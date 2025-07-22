@@ -1,0 +1,113 @@
+[PROVENANCE:d3eb0b0145b6@../corpus/conservative_tribalism_king_2017_house.txt]
+
+The speaker, Congressman Steve King, demonstrates a moral character heavily dominated by several civic vices, particularly tribalism, resentment, and fear, with a striking absence of virtues like universal dignity, hope, and pragmatism. While he lays claim to upholding "truth" and "justice," his rhetorical choices reveal a highly selective and partisan interpretation of these concepts, primarily in service of his perceived in-group. The salience-weighted analysis highlights how the *absence* of certain virtues, alongside the strong presence of vices, critically shapes his moral identity and rhetorical strategy.
+
+Here is the analysis of the speaker's moral character using the Character Assessment Framework v4.2:
+
+---
+
+**CIVIC VICES Displayed by the Speaker:**
+
+1.  **Tribalism**
+    *   **Intensity:** 1.0 (Pervasive and foundational to the speaker's argument.)
+    *   **Salience:** 1.0 (The most central and prominent feature of his moral identity and rhetorical strategy. The entire speech frames issues as "us" (American citizens, constitutionalists, victims) versus "them" (President Obama, the "left," liberal judges, "illegal aliens," "criminal aliens"). This in-group/out-group dynamic is the lens through which all issues are presented.)
+    *   **Quotations:**
+        *   "It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here..." (Establishes a clear distinction between "America" and the "illegal criminal alien" as an unwanted, threatening outsider.)
+        *   "This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders. That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets." (Directly contrasts "criminal aliens" as a threat to "Americans," reinforcing an existential "us vs. them" conflict.)
+    *   **Confidence:** 1.0 (The evidence for tribalism is explicit and overwhelming throughout the speech.)
+
+2.  **Resentment**
+    *   **Intensity:** 1.0 (Highly focused on grievances, blame, and perceived victimhood for the speaker's in-group.)
+    *   **Salience:** 0.9 (A driving force behind the speaker's rhetoric, defining why the "in-group" is under threat and who is responsible. It fuels his emotional appeals and accusatory tone.)
+    *   **Quotations:**
+        *   "And when you have justices to the Supreme Court that, that embody that belief and act on that belief, then we here who take an oath to support and defend the Constitution—...—we recognize that if we're going to support and defend the Constitution...it would be destroyed by another presidential appointment." (Expresses grievance against perceived judicial overreach that threatens the foundational principles he champions.)
+        *   "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them." (Directly assigns blame for a tragic death to the President's policies and the actions/inaction of law enforcement agencies, articulating a profound grievance.)
+    *   **Confidence:** 1.0 (The speaker's pervasive focus on blame and perceived wrongs demonstrates a high degree of resentment.)
+
+3.  **Fear**
+    *   **Intensity:** 1.0 (Pervasive use of catastrophic thinking and threat amplification.)
+    *   **Salience:** 0.9 (Fear appeals are a primary emotional lever used to galvanize his audience and highlight the perceived dangers posed by judicial actions and immigration policies.)
+    *   **Quotations:**
+        *   "And it bring you to a sad state of mourn. And you'd lay your head down on the pillow at night having trouble to sleep, thinking, 'What am I going to do tomorrow?...Lord, wake me up with an idea on how to, how to preserve our Constitution,' if the Supreme Court of the United States believes that they can write law." (Evokes personal anxiety and dread, portraying the Supreme Court's actions as an existential threat to the constitutional order.)
+        *   "This happens every day in this country. It happens hundreds of times in this country each year. These incidents of illegal aliens that are, that are arrested and turned loose on the street...is costing lives in America. And it's costing, it's costing in the end thousands of lives in America." (Amplifies the threat of "illegal aliens" by claiming widespread, ongoing danger and catastrophic loss of American lives.)
+    *   **Confidence:** 1.0 (The language and anecdotal evidence are consistently designed to induce fear and a sense of crisis.)
+
+4.  **Manipulation**
+    *   **Intensity:** 0.9 (Extensive use of emotional appeals, selective data, and loaded language.)
+    *   **Salience:** 0.8 (Manipulation, particularly through graphic anecdotes and highly framed statistics, is a core rhetorical strategy to persuade and activate the audience by eliciting strong emotional responses.)
+    *   **Quotations:**
+        *   "He hauled his body out and and put gas and poured gasoline on it and burned this Joshua Wilkerson's body and then he went and took a shower and went to a movie as if it was just another day in the life of." (Uses gruesome, specific detail to maximize emotional impact and outrage, arguably beyond what's necessary for the stated point.)
+        *   "This President has, has released, his administration has released over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders. That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets." (Presents highly specific numbers to imply direct causation and severe wrongdoing without providing context, counter-arguments, or nuanced analysis, a common tactic of misleading statistics.)
+    *   **Confidence:** 1.0 (The calculated use of emotional appeals and selective information is evident.)
+
+5.  **Fantasy**
+    *   **Intensity:** 0.7 (Demonstrates significant complexity denial and oversimplification, portraying simple solutions for complex problems.)
+    *   **Salience:** 0.5 (While not a direct promise of utopia, the speaker's insistence on simplistic solutions for multifaceted issues (e.g., "if we just followed our laws") is a salient characteristic, reflecting a detachment from practical realities and denying underlying complexities.)
+    *   **Quotations:**
+        *   "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them." (Oversimplifies causality, suggesting a tragic event with multiple contributing factors could have been entirely prevented by simple adherence to a specific policy view.)
+        *   "And every American that dies at their hands is a life that could be saved if we just followed our laws." (Presents a highly reductionist and seemingly effortless solution to a complex societal problem, implying perfect outcomes from simple adherence to his interpretation of legal enforcement.)
+    *   **Confidence:** 0.9 (The consistent oversimplification and belief in straightforward solutions for complex issues point to this vice.)
+
+---
+
+**CIVIC VIRTUES Displayed by the Speaker:**
+
+1.  **Dignity**
+    *   **Intensity:** 0.0 (The speaker demonstrates no respect for universal human worth, actively exhibiting its antithesis through dehumanizing language and selective concern for human life based on nationality/legal status.)
+    *   **Salience:** 0.9 (Critically, the *absence* of this virtue, and the prominent display of dehumanization and selective empathy, is highly salient to the speaker's moral character and rhetorical strategy. His arguments are built upon a clear distinction where the dignity of certain groups (e.g., "illegal aliens") is denied or devalued.)
+    *   **Quotations:**
+        *   "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body." (The focus on "illegal alien" as a descriptor for the perpetrator, combined with the gruesome details, emphasizes a lack of human dignity or universal empathy for the individual, framing them as solely defined by their legal status and horrific act.)
+        *   "Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives." (This statement, while advocating for enforcement, starkly demonstrates a lack of concern for the inherent worth or complex circumstances of the individuals, reducing them to "these people" to be incarcerated and removed.)
+    *   **Confidence:** 1.0 (The consistent dehumanizing language and group-specific empathy make this assessment highly confident.)
+
+2.  **Truth**
+    *   **Intensity:** 0.2 (The speaker presents his interpretations as absolute truth, but his approach lacks intellectual honesty, nuance, and willingness to acknowledge complexity or alternative valid perspectives.)
+    *   **Salience:** 0.7 (The *claim* to truth and objective fact, particularly regarding the Constitution's "original meaning" and the "facts" of immigration, is very salient to the speaker's self-presentation as a principled defender of fundamental principles, even if the actual demonstration of intellectual honesty is low.)
+    *   **Quotations:**
+        *   "the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification." (Positions his interpretation as the sole objective truth, dismissing others as intellectually dishonest.)
+        *   "I can read this Constitution and understand what it means. And I can read the precedent cases along the way that have flowed from Marberry on down to today." (Asserts a unique and definitive grasp of constitutional truth, implying a monopoly on correct interpretation.)
+    *   **Confidence:** 0.9 (The speaker strongly *claims* truth, but the delivery is clearly partisan and selective.)
+
+3.  **Justice**
+    *   **Intensity:** 0.1 (His conception of justice is highly selective and punitive, primarily focused on retribution against "criminal aliens" and enforcing a specific interpretation of law to benefit "Americans," rather than exhibiting impartial fairness or due process for all.)
+    *   **Salience:** 0.6 (The *idea* of justice is salient as the speaker repeatedly calls for "enforcement" and rectifying perceived "wrongs" against the Constitution and American victims. However, the *type* of justice championed is narrow and group-specific, making the *concept* salient even if the *virtue* (as broadly defined) is weakly demonstrated.)
+    *   **Quotations:**
+        *   "I don't want to see any more bail to criminal aliens. I want to see law enforcement. And I want an expectation that when the law is broken in the United States, that there's going to be an enforcement, that it'll be applied equally without regard to any of these categories that the President encourages us to be members of." (While claiming "equal" application, the immediate context points to a desire for harsher, less nuanced enforcement against a specific group, rather than a broad, impartial commitment to justice for all.)
+        *   "Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison. And when they're done, send them back to the country..." (His concrete calls for "justice" are overwhelmingly punitive and focused on the interests of his in-group, with little evidence of broader fairness or consideration for those subjected to these measures.)
+    *   **Confidence:** 1.0 (His calls for justice are consistently narrow and punitive.)
+
+4.  **Hope**
+    *   **Intensity:** 0.0 (The speaker presents an overwhelmingly negative and catastrophic outlook, devoid of constructive vision, democratic optimism, or uplifting messages for a shared future.)
+    *   **Salience:** 0.1 (The absence of hope is consistent with the speech's dire warnings, but it is not a strategically emphasized absence. The speech focuses on urgent threats rather than a lack of future vision.)
+    *   **Quotations:**
+        *   "instead of being restored, it would be destroyed by another presidential appointment." (Presents a future of constitutional destruction, lacking any optimistic counterpoint.)
+        *   "This is an infuriating topic that America needs to know a lot more about. And I'd ask Mr. Speaker that this country keep the families of these victims in their prayers every day until such time as we rest." (Concludes with a somber, ongoing struggle and calls for prayer for victims, not a vision of positive change.)
+    *   **Confidence:** 1.0 (No discernible elements of hope are present.)
+
+5.  **Pragmatism**
+    *   **Intensity:** 0.0 (The speaker offers no practical solutions, compromises, or calls for common ground. His stance is absolute, ideological, and rigid.)
+    *   **Salience:** 0.1 (Similar to hope, the absence of pragmatism is consistent with his confrontational stance, but it is not highlighted as a central rhetorical choice. The speech simply operates in a realm devoid of practical compromise.)
+    *   **Quotations:**
+        *   "I don't want to see any more bail to criminal aliens. I want to see law enforcement." (Presents an absolute, non-negotiable demand for policy, without room for practical considerations or compromise.)
+        *   "Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives." (Advocates for a rigid, singular solution to complex immigration challenges, demonstrating no inclination towards practical, multi-faceted approaches or workable compromises.)
+    *   **Confidence:** 1.0 (The speaker's rhetoric is consistently rigid and unyielding.)
+
+---
+
+**SALIENCE RANKING (Highest to Lowest):**
+
+1.  **Tribalism** (Salience: 1.0)
+2.  **Resentment** (Salience: 0.9)
+3.  **Fear** (Salience: 0.9)
+4.  **Dignity** (Salience: 0.9, Intensity: 0.0 - Due to the *salient absence* of universal human dignity and the prominent display of dehumanization towards out-groups.)
+5.  **Manipulation** (Salience: 0.8)
+6.  **Truth** (Salience: 0.7)
+7.  **Justice** (Salience: 0.6)
+8.  **Fantasy** (Salience: 0.5)
+9.  **Hope** (Salience: 0.1)
+10. **Pragmatism** (Salience: 0.1)
+
+---
+**Summary of Speaker's Moral Character:**
+
+Congressman Steve King's moral character, as revealed through this speech, is primarily defined by a strong adherence to **tribalism**, which dictates his perception of "us" versus "them." This tribal lens fuels intense **resentment** towards those he perceives as threats to his in-group, particularly the Obama administration, liberal judges, and "illegal aliens." His rhetoric is heavily imbued with **fear**, amplifying perceived dangers and catastrophic consequences to motivate action. He extensively uses **manipulation** through emotionally charged anecdotes and selective information to deepen these feelings. While he presents himself as a champion of **truth** and **justice** (salient claims), his application of these virtues is highly selective and partisan, lacking genuine intellectual honesty or impartial fairness. Most strikingly, there is a profound and **salient absence of universal dignity**, as evidenced by dehumanizing language and a clear prioritization of one group's lives over others. Similarly, **hope** and **pragmatism** are virtually non-existent in his discourse, replaced by a rigid, unyielding stance that denies complexity and offers simplistic, often punitive, solutions (revealing elements of **fantasy**). His moral character is thus characterized by a protective, often hostile, defense of his in-group, driven by grievance and fear, and executed through emotionally manipulative and dogmatic rhetoric.

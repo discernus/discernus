@@ -1,0 +1,75 @@
+**Analysis of John Lewis's Speech at the March on Washington for Jobs and Freedom**
+
+[PROVENANCE:afefd5ff1c06@../corpus/progressive_dignity_lewis_1963_march_washington.txt]
+
+This speech by John Lewis powerfully articulates a moment of profound constitutional tension, characterized by a pervasive sense of institutional failure and an urgent demand for radical systemic change. The analysis reveals a stark contrast between very low health indicators and very high pathology indicators, driven by a deep conviction that the existing system is failing to uphold its fundamental principles.
+
+---
+
+**Constitutional Health Dimensions:**
+
+1.  **Procedural Legitimacy**
+    *   **Intensity:** 0.4. While the speech acknowledges and engages with the legislative process ("We support the administration's civil rights bill"), it does so with "great reservations," highlighting the bill's profound inadequacies and the systemic violation of due process and basic legal protections. The demand is for *true* procedural legitimacy, implying its current absence.
+    *   **Salience:** 0.6. The focus on specific legislative demands (e.g., "Unless Title Three is put in this bill," "the voting section of this bill will not help") indicates that perfecting existing legal procedures is a significant, though critically framed, part of the discourse. The critique of "trumped-up charges" also directly invokes a lack of procedural fairness, making the call for legitimate procedures a notable underlying theme.
+    *   **Quotations:**
+        *   "It is true that we support the administration's civil rights bill. We support it with great reservations, however. Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations."
+        *   "While we stand here, there are students in jail on trumped-up charges."
+    *   **Confidence:** 0.9. The text directly references engagement with legislation while simultaneously detailing its flaws and procedural abuses.
+
+2.  **Institutional Respect**
+    *   **Intensity:** 0.1. The speech expresses deep distrust and condemnation of existing political and governmental institutions, accusing them of "immoral compromises," "exploitation," and complicity in injustice. There is almost no active recognition of their legitimate authority; instead, their failures and abuses are emphasized.
+    *   **Salience:** 0.3. While the critique of institutions is pervasive, the *concept* of "institutional respect" itself is not a rhetorical focus. Rather, the *lack* of respect for their current actions is highlighted. The speech does not argue for respecting institutions as they are, but for them to *become* worthy of respect.
+    *   **Quotations:**
+        *   "American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation."
+        *   "What did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead?"
+    *   **Confidence:** 0.9. The text is clear in its denouncement of institutional failures and complicity, leaving little room for explicit institutional respect.
+
+3.  **Systemic Continuity**
+    *   **Intensity:** 0.6. The speech calls for radical transformation and "revolution" but frames it as completing the "revolution of 1776" and rebuilding the South "in the image of God and democracy." This implies a desire for the existing system to fulfill its foundational principles and adapt to achieve its stated ideals, rather than being completely abandoned. The revolution is framed as necessary for the system to *truly* endure and live up to its promise.
+    *   **Salience:** 0.8. The idea of completing the American democratic project is a powerful and frequently invoked theme, blending calls for radical change with an appeal to core national ideals. The "revolution" is framed as necessary for the system to adapt and truly achieve its promised continuity.
+    *   **Quotations:**
+        *   "We must get in this revolution and complete the revolution. For in the Delta of Mississippi... the black masses are on the march for jobs and freedom." (The completion of *the* revolution of 1776).
+        *   "We shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy."
+    *   **Confidence:** 0.9. The phrasing "complete the revolution of 1776" is a strong indicator of seeking to fulfill the original system's promise.
+
+---
+
+**Constitutional Pathology Dimensions:**
+
+1.  **Procedural Rejection**
+    *   **Intensity:** 0.9. The speech vehemently rejects the current state and pace of established procedures as utterly insufficient and unjust, explicitly stating an unwillingness to wait for gradual change and threatening to escalate actions beyond traditional channels if legislation fails.
+    *   **Salience:** 0.9. The rhetorical emphasis on "We cannot be patient. We do not want our freedom gradually, but we want to be free now!" and the implied threat of non-traditional action if legislative channels fail, makes the rejection of inadequate procedures a core driver of the speech's urgency and call to action.
+    *   **Quotations:**
+        *   "To those who have said, 'Be patient and wait,' we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!"
+        *   "If we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington. We will march through the South..."
+    *   **Confidence:** 1.0. The language is extremely direct and unequivocal in its rejection of the current procedural pace and effectiveness.
+
+2.  **Institutional Subversion**
+    *   **Intensity:** 0.9. The speech systematically dismantles the perceived legitimacy and effectiveness of existing institutions (political parties, federal government, police) through accusations of corruption, complicity, and active abuse of power. It portrays them as actively undermining justice.
+    *   **Salience:** 1.0. The deep-seated critique of institutions and their actors is the primary justification for the urgency and necessity of the "revolution." It underpins almost every demand and complaint, serving as the fundamental diagnosis that necessitates radical change.
+    *   **Quotations:**
+        *   "American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation."
+        *   "What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby?"
+    *   **Confidence:** 1.0. The speech is a sustained critique of institutional failure and malfeasance.
+
+3.  **Systemic Replacement**
+    *   **Intensity:** 0.7. The pervasive use of "revolution" and calls to "splinter" and "overhaul" strongly indicate a demand for fundamental systemic change. While the goal is to complete the 1776 revolution, the *means* imply a radical transformation of the existing system's operational realities, moving far beyond mere reform. It is a demand for a *new* operating reality for the system.
+    *   **Salience:** 0.9. The concept of "revolution" is a defining rhetorical element of the speech, repeatedly invoked to convey the urgency and scope of the desired change. The call for a "complete overhaul" is very prominent.
+    *   **Quotations:**
+        *   "My friends, let us not forget that we are involved in a serious social revolution."
+        *   "We must get in this revolution and complete the revolution."
+    *   **Confidence:** 0.9. The constant use of "revolution" and "splinter" clearly points to a desire for profound systemic change.
+
+---
+
+**Salience Ranking (from most to least salient):**
+
+1.  **Institutional Subversion (Salience: 1.0):** The deep-seated failure and corruption of existing institutions are presented as the fundamental problem, necessitating the entire movement. This is the core diagnosis.
+2.  **Procedural Rejection (Salience: 0.9):** As a direct consequence of institutional subversion, the inadequacy and injustice of current procedures are vehemently rejected, driving the call for immediate, non-traditional action.
+3.  **Systemic Replacement (Salience: 0.9):** The pervasive "revolution" rhetoric signifies a demand for a radical overhaul of the system's operational reality, making this a central and rhetorically powerful call to action.
+4.  **Systemic Continuity (Salience: 0.8):** While calling for radical change, the framing of the "revolution" as a completion of the "revolution of 1776" and a realization of "democracy" anchors the desired transformation to the underlying ideals of the existing system, making this a salient ultimate goal.
+5.  **Procedural Legitimacy (Salience: 0.6):** While the speech engages with legislation and critiques procedural abuses, the rhetorical emphasis is more on the *failure* of current procedures than on an affirmation of the procedural framework itself. The call is for *just* procedures, highlighting their current absence.
+6.  **Institutional Respect (Salience: 0.3):** The speech is largely a profound critique of institutional performance and complicity; therefore, the concept of "respect" for the current state of institutions is not a prominent rhetorical feature.
+
+---
+[PROVENANCE:afefd5ff1c06@../corpus/progressive_dignity_lewis_1963_march_washington.txt]

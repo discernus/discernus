@@ -1,6 +1,21 @@
 ---
 # --- Discernus Configuration ---
+
+# REQUIRED: A unique, machine-readable name for the experiment.
+name: mva_experiment_3_cff_analysis
+
+# REQUIRED: A human-readable description of the experiment's purpose.
+description: |
+  MVA Experiment 3: CFF v4.1 analysis of 8 political speeches using Gemini 2.5 Pro
+  to test system reliability and framework consistency across multiple runs.
+
+# REQUIRED: A specific, falsifiable hypothesis to be tested.
+hypothesis: |
+  Six-run analysis of each corpus file using Gemini 2.5 Pro will exhibit 
+  Cronbach's alpha greater than 0.70 for inter-run reliability across all 10 CFF anchors.
+
 framework_file: ./framework_snapshot.md
+corpus: ../../corpus/
 analysis_variant: default
 
 # The 'hypotheses' block is a researcher's description of the scientific

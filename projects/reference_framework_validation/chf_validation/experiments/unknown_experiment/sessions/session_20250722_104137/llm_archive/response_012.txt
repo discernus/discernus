@@ -1,0 +1,76 @@
+The analysis of John Lewis's 1963 March on Washington speech reveals a profound crisis of constitutional health, characterized by strong patterns of pathology and a clear call for radical transformation. The speech, delivered amidst pervasive racial injustice, articulates a deep disillusionment with existing institutional frameworks and procedures, demanding immediate and fundamental change.
+
+[PROVENANCE:afefd5ff1c06@../corpus/progressive_dignity_lewis_1963_march_washington.txt]
+
+---
+
+**Constitutional Health Framework v1.1 Analysis:**
+
+**Constitutional Health Dimensions:**
+
+1.  **Procedural Legitimacy**
+    *   **Intensity:** 0.3
+    *   **Salience:** 0.4
+    *   **Assessment:** Lewis acknowledges the existence of and even conditional support for legislative processes, as seen in his discussion of the "civil rights bill." However, this support is heavily qualified by significant "reservations" due to the bill's perceived inadequacy in protecting fundamental rights and ensuring "due process" against "trumped-up charges." The speech articulates a demand for *effective* legislation that *would* provide procedural protection, indicating an underlying belief in the potential of proper legal frameworks, even as the current ones are failing.
+    *   **Quotations:**
+        *   "It is true that we support the administration's civil rights bill. We support it with great reservations, however."
+        *   "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote."
+    *   **Confidence Rating:** 0.8
+
+2.  **Institutional Respect**
+    *   **Intensity:** 0.1
+    *   **Salience:** 0.9
+    *   **Assessment:** The speech demonstrates extremely low respect for existing institutional authority. Lewis directly challenges the integrity and efficacy of political parties and the federal government, accusing them of "immoral compromises" and complicity in oppression through inaction. He highlights instances where institutions failed to protect citizens or actively perpetrated injustice, profoundly undermining their legitimacy in the eyes of the oppressed. The pervasive critique of institutional failure makes the *absence* of institutional respect highly salient.
+    *   **Quotations:**
+        *   "What did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead?"
+        *   "American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation."
+    *   **Confidence Rating:** 0.9
+
+3.  **Systemic Continuity**
+    *   **Intensity:** 0.1
+    *   **Salience:** 0.3
+    *   **Assessment:** Lewis's rhetoric strongly favors radical transformation over gradual adaptation or incremental reform. His repeated calls for a "revolution" and for "completing the revolution of 1776" indicate a desire for a fundamental break from the existing systemic trajectory. While specific legislative demands are made, they are framed within the context of a broader, urgent social upheaval, suggesting that the current system is beyond mere "institutional improvement" and requires a more profound overhaul.
+    *   **Quotations:**
+        *   "My friends, let us not forget that we are involved in a serious social revolution."
+        *   "We must get in this revolution and complete the revolution."
+    *   **Confidence Rating:** 0.8
+
+**Constitutional Pathology Dimensions:**
+
+4.  **Procedural Rejection**
+    *   **Intensity:** 0.8
+    *   **Salience:** 0.9
+    *   **Assessment:** The speech explicitly advocates for actions that defy or bypass established, yet unjust, procedures. Lewis's embrace of civil disobedience, his willingness to "go to jail," and his rejection of patience ("We do not want our freedom gradually, but we want to be free now!") demonstrate a clear and powerful rejection of the adequacy and legitimacy of current procedural frameworks. The repeated emphasis on marching and continuous protest ("We will not stop!") signifies a strategic choice to act outside of conventional channels when those channels are deemed insufficient or complicit.
+    *   **Quotations:**
+        *   "We do not want to go to jail, but we will go to jail if this is the price we must pay for love, brotherhood, and true peace."
+        *   "We do not want our freedom gradually, but we want to be free now!"
+    *   **Confidence Rating:** 0.9
+
+5.  **Institutional Subversion**
+    *   **Intensity:** 0.9
+    *   **Salience:** 0.9
+    *   **Assessment:** Lewis's speech aggressively undermines the perceived authority and legitimacy of various institutions. He labels politicians as morally compromised, exposes the federal government's failures to uphold justice, and highlights the brutality of local law enforcement. This direct critique and accusation of corruption and complicity are central to the speech, effectively portraying institutions as "failed" and actively working against the interests of the people, thus encouraging a loss of public trust in their authority.
+    *   **Quotations:**
+        *   "American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation."
+        *   "Do you know that in Albany, Georgia, nine of our leaders have been indicted, not by Dixiecrats, but by the federal government for peaceful protest?"
+    *   **Confidence Rating:** 0.9
+
+6.  **Systemic Replacement**
+    *   **Intensity:** 0.8
+    *   **Salience:** 0.8
+    *   **Assessment:** The consistent call for a "social revolution" and the aspiration to "complete the revolution of 1776" signify a desire for a profound systemic overhaul rather than mere reforms. Lewis envisions dismantling existing oppressive structures ("splinter the segregated South into a thousand pieces") and rebuilding them "in the image of God and democracy." This language moves beyond incremental change, indicating a belief that the current system is "failed" and requires fundamental restructuring to achieve true freedom and justice.
+    *   **Quotations:**
+        *   "My friends, let us not forget that we are involved in a serious social revolution."
+        *   "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy."
+    *   **Confidence Rating:** 0.9
+
+---
+
+**Ranking by Salience (Most Central and Prominent):**
+
+1.  **Institutional Subversion (Salience: 0.9)**: The profound critique of institutional failure and corruption is the primary rhetorical engine of the speech, justifying the urgency and revolutionary nature of the demands.
+2.  **Procedural Rejection (Salience: 0.9)**: Directly stemming from institutional failures, the advocacy for civil disobedience and immediate, extra-procedural action is a central and powerfully emphasized theme.
+3.  **Institutional Respect (Salience: 0.9)**: While the *score* is low, the *absence* of respect for existing institutions and the relentless exposure of their failures are profoundly salient, serving as a core driver for the entire discourse.
+4.  **Systemic Replacement (Salience: 0.8)**: The overarching goal of a "revolution" and the vision of fundamental systemic transformation are highly prominent, framing the ultimate aspirations of the movement.
+5.  **Procedural Legitimacy (Salience: 0.4)**: While mentioned, the discussion of legislative processes is quickly overshadowed by their perceived inadequacy and the urgent call for direct action, making its salience moderate.
+6.  **Systemic Continuity (Salience: 0.3)**: This dimension holds the lowest salience, as the speech actively promotes radical "revolution" and immediate change, directly opposing the idea of gradual system adaptation or continuity.

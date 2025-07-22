@@ -14,31 +14,8 @@ agents:
     outputs:
       - analysis_results: "A list of structured objects containing analysis text and verified scores."
 
-  - name: StatisticalAnalysisAgent
-    archetype: Tool-Using
-    module: "discernus.agents.statistical_analysis_agent"
-    class: "StatisticalAnalysisAgent"
-    execution_method: "calculate_statistics"
-    description: "Performs statistical calculations on structured analysis results and saves them to a file."
-    prompt_source: "self-contained"
-    inputs:
-      - analysis_results: "A list of raw analysis results from the AnalysisAgent."
-      - session_results_path: "The path to the results directory for the current session."
-    outputs:
-      - stats_file_path: "The path to the JSON file containing the statistical results."
-
-  - name: StatisticalInterpretationAgent
-    archetype: Tool-Using
-    module: "discernus.agents.statistical_interpretation_agent"
-    class: "StatisticalInterpretationAgent"
-    execution_method: "interpret_statistical_results"
-    description: "Translates raw JSON statistical output into a human-readable, qualitative interpretation suitable for an academic publication."
-    prompt_source: "self-contained"
-    inputs:
-      - stats_file_path: "path to the raw statistical_analysis_results.json"
-      - project_path: "path to the project directory for context"
-    outputs:
-      - interpretation_text: "A formatted markdown string containing the full interpretation."
+  # Note: StatisticalAnalysisAgent and StatisticalInterpretationAgent have been replaced by
+  # DataExtractionAgent + CalculationAgent + SynthesisAgent in the current production pipeline
 
   - name: ExperimentConclusionAgent
     archetype: Tool-Using
@@ -120,9 +97,19 @@ agents:
       - validation_result: "A comprehensive JSON object detailing the project's validity, including any warnings, errors, or proactive recommendations." 
       
   - name: DataExtractionAgent
-    module: discernus.agents.data_extraction_agent
-    class: DataExtractionAgent
-    execution_method: execute
+    archetype: Tool-Using
+    module: "discernus.agents.data_extraction_agent"
+    class: "DataExtractionAgent"
+    execution_method: "execute"
+    description: "Uses LLM-to-LLM communication to extract clean JSON from raw analysis responses. Enhanced with retry logic, framework-aware transformation, and graceful error handling."
+    prompt_source: "self-contained"
+    inputs:
+      - analysis_results: "Raw analysis results from AnalysisAgent (dict or list format)"
+      - framework_spec: "Framework specification for schema-aware transformation"
+      - session_results_path: "Path for archiving extracted data"
+    outputs:
+      - extracted_results: "List of structured results with JSON output and success metadata"
+      - extraction_statistics: "Success rates and failure counts for monitoring"
 
   - name: CalculationAgent
     archetype: Tool-Using
@@ -149,10 +136,8 @@ agents:
       - step_config: "Configuration specifying which output artifacts to generate."
     outputs:
       - artifact_paths: "A list of paths to the generated report and data files." 
-  - name: JsonExtractionAgent
-    module: discernus.agents.json_extraction_agent
-    class: JsonExtractionAgent
-    execution_method: execute
+  # Note: JsonExtractionAgent functionality has been absorbed into DataExtractionAgent
+  # which provides superior LLM-assisted extraction with retry logic and framework awareness
   
   - name: ForensicQAAgent
     archetype: Validation

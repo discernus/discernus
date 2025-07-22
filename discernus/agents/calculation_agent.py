@@ -60,10 +60,22 @@ class CalculationAgent:
             print("- CalculationAgent: No 'analysis_results' in workflow_state. Skipping.")
             return {"analysis_results": []}
             
+        # Handle both dictionary format (newer AnalysisAgent) and list format (older AnalysisAgent)
+        if isinstance(analysis_results, dict):
+            # Convert dictionary format to list format for processing
+            results_list = list(analysis_results.values())
+            was_dict_format = True
+        elif isinstance(analysis_results, list):
+            results_list = analysis_results
+            was_dict_format = False
+        else:
+            print(f"- CalculationAgent: Invalid analysis_results format: {type(analysis_results)}. Skipping.")
+            return {"analysis_results": analysis_results}
+            
         # This agent should modify the results in place, adding new keys
         # rather than creating a whole new structure.
-        for result in analysis_results:
-            if not result.get('success'):
+        for result in results_list:
+            if not isinstance(result, dict) or not result.get('success'):
                 continue
 
             json_output = result.get('json_output', {})
@@ -136,4 +148,14 @@ class CalculationAgent:
                     result['success'] = False
 
         print("✅ CalculationAgent finished.")
-        return {"analysis_results": analysis_results} 
+        
+        # Return the results in the same format they came in
+        if was_dict_format and isinstance(analysis_results, dict):
+            # Convert back to dictionary format using agent_id as key
+            results_dict = {}
+            for result in results_list:
+                agent_id = result.get('agent_id', f"unknown_{hash(str(result))}")
+                results_dict[agent_id] = result
+            return {"analysis_results": results_dict}
+        else:
+            return {"analysis_results": results_list} 

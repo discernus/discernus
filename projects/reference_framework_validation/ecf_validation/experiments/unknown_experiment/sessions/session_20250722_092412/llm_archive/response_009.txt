@@ -1,0 +1,72 @@
+[PROVENANCE:7bef0e681fbb@../corpus/conservative_tribalism_vance_nat_con.txt]
+
+**Emotional Climate Framework v1.0 - Refined Analysis**
+
+**1. Fear (Crisis/threat emotional climate)**
+*   **Assessment:** The text frequently invokes a sense of crisis and looming threats, particularly concerning foreign policy and uncontrolled immigration. It highlights vulnerabilities, precarious situations, and existential dangers to the nation's security, prosperity, and democratic integrity.
+*   **Quotations:**
+    1.  "no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced."
+    2.  "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more."
+    3.  "Let's send our entire machinery for making war to countries that hate us and then let's spend what little stockpiles that we have on a war that has no obvious end in sight."
+*   **Score:** 0.7
+*   **Confidence:** 0.9
+
+**2. Hope (Opportunity/progress emotional climate)**
+*   **Assessment:** Despite identifying numerous challenges, the text maintains a strong undercurrent of hope, emphasizing progress, victories, and positive momentum within the speaker's political movement. It projects a vision of a restored and successful future for the nation, particularly under specific leadership.
+*   **Quotations:**
+    1.  "That's a good thing, that's progress. Even though we didn't win the debate, we're starting to win the debate within, within our own party."
+    2.  "the Republican party is increasingly aggressively and with momentum rejecting it. So that is a great achievement and a great amount of progress that we've made."
+    3.  "the future of our country is because for the first time in a very long time, it is clear that the leader of the Republican party is not some donor... The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump."
+*   **Score:** 0.8
+*   **Confidence:** 0.9
+
+**3. Enmity (Hostility/conflict emotional climate)**
+*   **Assessment:** The text creates a very distinct "us vs. them" dynamic, actively identifying and criticizing various adversaries. These include foreign powers, specific media entities, domestic political elites, and the current administration. The language used is often accusatory, dismissive, and strongly adversarial.
+*   **Quotations:**
+    1.  "I have to take a shot... at the Wall Street Journal editorial page... the dumbest of all possible foreign policy solutions..."
+    2.  "our politicians keep on rewarding us with more. That is the threat to American democracy... our elites don't seem to care about it? Well, number one, they really benefit from the cheap labor. Okay? Number two, they actually don't really like the people who make up the domestic populations of their own country."
+    3.  "The only illegal people in this country are the people whose grandparents were born here, according to the Biden administration. They're the people... who are not allowed to have an opinion about what's going on in their country because they will be silenced. They will be censored. They will be called every name in the book."
+*   **Score:** 0.85
+*   **Confidence:** 0.95
+
+**4. Amity (Friendship/unity emotional climate)**
+*   **Assessment:** A pervasive sense of unity and shared identity defines the emotional atmosphere for the in-group. The text consistently builds a narrative of a cohesive "American nation" and a united "national conservative movement," emphasizing common history, shared purpose, and a collective destiny.
+*   **Quotations:**
+    1.  "the national conservative movement is winning the debate and we're changing the conversation. We're doing that and the very, very basic and simple principle that American leaders should look out for Americans."
+    2.  "America is a nation. It is a group of people with a common history and a common future."
+    3.  "People don't go and fight and die just for principles. They also, importantly, they go and fight and die for their home, for their families, and for the future of their children."
+*   **Score:** 0.9
+*   **Confidence:** 0.95
+
+**5. Envy (Resentment/grievance emotional climate)**
+*   **Assessment:** The text expresses significant resentment and grievance towards perceived elites who are seen as benefiting unfairly from a "rigged system" or policies that disadvantage ordinary citizens. There's a strong undercurrent of indignation over perceived injustices and neglect.
+*   **Quotations:**
+    1.  "our elites don't seem to care about it? Well, number one, they really benefit from the cheap labor. Okay? Number two, they actually don't really like the people who make up the domestic populations of their own country."
+    2.  "The only illegal people in this country are the people whose grandparents were born here, according to the Biden administration."
+    3.  "our elites love to accuse the residents there of having white privilege. Go to Breathitt County, Kentucky, and tell me that these are privileged people."
+*   **Score:** 0.75
+*   **Confidence:** 0.9
+
+**6. Compersion (Celebration/merit emotional climate)**
+*   **Assessment:** The text includes elements of celebrating progress, achievements, and the inherent worth of the in-group. It praises specific successes and the merit of "hardworking people" and foundational national accomplishments, though these celebrations are often framed within the context of overcoming adversity.
+*   **Quotations:**
+    1.  "So that is a great achievement and a great amount of progress that we've made."
+    2.  "a huge, huge win for you guys. But most importantly, it's a huge win for the American people because the American people, again, they need people who put the interests of their own citizens first..."
+    3.  "The Constitution, of course, had this incredible influence and political theory and that's why it has stood the test of time."
+*   **Score:** 0.6
+*   **Confidence:** 0.85
+
+---
+
+**Salience Ranking:**
+
+1.  **Amity:** This is the most central and prominent emotional dimension. The entire speech is anchored in establishing and reinforcing a shared identity, common history, and collective purpose for "the American nation" and the "national conservative movement." The narrative repeatedly returns to themes of belonging, mutual defense, and the future of "our home."
+2.  **Enmity:** Very high in salience due to the frequent and direct identification of various adversaries ("Wall Street Journal editorial page," "our elites," "Biden's open border policies," "countries that hate us"). The "us vs. them" dynamic is a constant rhetorical and emotional driver, explaining current problems and motivating collective action.
+3.  **Hope:** This dimension provides the overarching positive framing. Despite the pervasive threats and identified enemies, the speaker consistently emphasizes that "we are winning," "making progress," and that a positive future is attainable. Hope serves as the motivational force, converting fear and resentment into proactive engagement.
+4.  **Fear:** While important for creating urgency and highlighting dangers (e.g., threats to democracy, economic decline due to immigration, endless wars), fear is often presented as the problem that Amity and Hope will overcome. It is a significant background emotion but less dominant in shaping the overall forward-looking tone compared to Hope and Amity.
+5.  **Envy:** This dimension is salient in fueling the "us vs. them" dynamic by articulating specific grievances against elites and perceived unfairness. It provides a moral justification for the conflict and the in-group's efforts. However, its focus is more on the injustice rather than being a standalone emotional atmosphere.
+6.  **Compersion:** While present in celebrating achievements and progress, Compersion is less prominent than the other dimensions. The celebration often occurs within the context of fighting and overcoming challenges, making it feel more like a justified win against adversaries rather than a broad, expansive atmosphere of shared success or merit-based achievement.
+
+**Overall Emotional Climate Type and Intensity Patterns:**
+
+The overall emotional climate is **highly intense and deeply tribalistic**, dominated by a powerful interplay of **Amity** and **Enmity**. The speech actively works to forge a strong in-group identity ("America as a Nation") through shared values, history, and perceived common threats. Simultaneously, it cultivates intense **Enmity** towards defined out-groups (political elites, opposing media, foreign adversaries) by portraying them as hostile, corrupt, or detrimental to the nation's well-being. This climate is underscored by a palpable sense of **Fear** regarding national decline and security, which is then counterbalanced by a strong undercurrent of **Hope** in the movement's ability to achieve victory and national renewal. **Envy** provides a moral and emotional justification for this conflict, highlighting perceived injustices and the unfair advantages of the "elites," while **Compersion** offers moments of celebration for the in-group's progress in this ongoing struggle. The prevailing atmosphere is one of collective resolve, a call to arms against internal and external perceived threats, driven by a strong belief in the ultimate triumph of the in-group.

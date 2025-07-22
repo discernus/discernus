@@ -1,0 +1,75 @@
+[PROVENANCE:afefd5ff1c06@../corpus/progressive_dignity_lewis_1963_march_washington.txt]
+
+**Emotional Climate Analysis: John Lewis - Speech at the March on Washington for Jobs and Freedom (1963)**
+
+The emotional climate of John Lewis's 1963 March on Washington speech is intensely driven by a sense of deep-seated grievance and the urgent necessity for revolutionary change. It skillfully intertwines critical portrayals of present suffering and systemic injustice with a determined, albeit impatient, vision for a liberated future achieved through unified struggle.
+
+**AFFECTIVE CLIMATE DIMENSIONS:**
+
+1.  **Fear**
+    *   **Emotional Language Patterns:** The speech depicts a reality fraught with danger, insecurity, and existential threats for Black Americans. It highlights direct physical violence, legal jeopardy, and economic precarity, creating an atmosphere of vulnerability and urgency. The constant presence of state-sanctioned violence and the threat of severe punishment for peaceful protest are emphasized.
+    *   **Supporting Quotations:**
+        *   "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in **constant fear of a police state**."
+        *   "What about the three young men - SNCC field secretaries in Americus, Georgia - who **face the death penalty for engaging in peaceful protest**?"
+        *   "We are tired of being **beaten by policemen**. We are tired of seeing our people **locked up in jails over and over again**."
+    *   **Score:** 0.8 (The speech vividly portrays a highly threatening and precarious environment, where the immediate safety and fundamental rights of individuals are constantly under attack. The language of vulnerability, police brutality, and severe penalties for dissent is pervasive.)
+    *   **Confidence:** 0.9
+
+2.  **Hope**
+    *   **Emotional Language Patterns:** Despite the grim depiction of the present, the speech is fundamentally a powerful call to action rooted in a strong belief in the possibility of achieving a drastically better future. It speaks of a "great revolution" and expresses unwavering determination to secure "true freedom" and transform society into one aligned with "the image of God and democracy."
+    *   **Supporting Quotations:**
+        *   "I appeal to all of you to get in this **great revolution that is sweeping this nation**."
+        *   "Get in and stay in the streets of every city, every village and hamlet of this nation **until true freedom comes, until the revolution of 1776 is complete**."
+        *   "By the forces of our demands, our determination, and our numbers, **we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy**."
+    *   **Score:** 0.7 (While the immediate context is one of crisis, the speech’s ultimate objective is to instill and mobilize a powerful sense of hope for an achievable, radically transformed future, portraying progress as inevitable through sustained effort.)
+    *   **Confidence:** 0.8
+
+**RELATIONAL CLIMATE DIMENSIONS:**
+
+3.  **Enmity**
+    *   **Emotional Language Patterns:** The speech clearly delineates an adversarial relationship between the civil rights movement and various opposing forces. It identifies specific political figures and institutions as complicit in, or perpetrators of, exploitation and injustice. The language is sharp, condemnatory, and frames the struggle as a direct conflict against these identified adversaries.
+    *   **Supporting Quotations:**
+        *   "American politics is dominated by **politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation**."
+        *   "But what did the federal government do when Albany police deputies **beat Attorney C.B. King and left him half-dead**? What did the federal government do when local police officials **kicked and assaulted the pregnant wife of Slater King, and she lost her baby**?"
+        *   "All of the forces of **Eastland, Barnett, Wallace, and Thurmond will not stop this revolution**!"
+    *   **Score:** 0.8 (The speech is infused with a strong sense of conflict, clearly identifying specific individuals and systemic forces as antagonists who are actively perpetrating harm and obstructing justice.)
+    *   **Confidence:** 0.9
+
+4.  **Amity**
+    *   **Emotional Language Patterns:** Despite the external enmity, the speech fosters a powerful sense of internal unity and solidarity among those participating in the movement. It consistently uses collective pronouns like "we" and "our," directly appeals to "my friends," and calls for unified action based on shared values and purpose.
+    *   **Supporting Quotations:**
+        *   "**We march today for jobs and freedom**..."
+        *   "**My friends**, let us not forget that **we are involved in a serious social revolution**."
+        *   "I appeal to **all of you to get in this great revolution** that is sweeping this nation."
+        *   "We will march with the spirit of **love and with the spirit of dignity that we have shown here today**."
+    *   **Score:** 0.7 (A robust sense of internal unity and collective determination is paramount, serving as the foundation for confronting external adversaries and achieving the movement's goals.)
+    *   **Confidence:** 0.8
+
+**SUCCESS ORIENTATION CLIMATE DIMENSIONS:**
+
+5.  **Envy**
+    *   **Emotional Language Patterns:** The speech is profoundly rooted in articulating grievances and resentment over systemic injustices, particularly economic exploitation and the arbitrary denial of rights. It highlights stark wealth disparities, unfair labor practices, and a "rigged system" that grants privilege to some while brutally suppressing others.
+    *   **Supporting Quotations:**
+        *   "They're receiving **starvation wages or no wages at all**."
+        *   "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is **one hundred thousand dollars a year**."
+        *   "While we stand here, there are students in jail on **trumped-up charges**."
+        *   "What about the three young men... who **face the death penalty for engaging in peaceful protest**?"
+    *   **Score:** 0.9 (This is the dominant emotional dimension. The speech is an impassioned expose of profound social, economic, and political injustices, articulating deep resentment and a demand for rectification against a system perceived as fundamentally unfair and exploitative.)
+    *   **Confidence:** 0.9
+
+6.  **Compersion**
+    *   **Emotional Language Patterns:** This emotional dimension is virtually absent from the speech. The speaker explicitly states a lack of pride in the current situation and focuses entirely on the vast injustices and unmet needs. There is no celebration of existing successes, shared prosperity, or the idea that current systems reward merit; rather, the entire address critiques the profound lack thereof.
+    *   **Supporting Quotations:**
+        *   "We march today for jobs and freedom, but **we have nothing to be proud of**, for hundreds and thousands of our brothers are not here."
+        *   The entire speech details a list of societal failures and inequities, directly contradicting any notion of "shared prosperity" or "abundant opportunities" in the present.
+    *   **Score:** 0.0 (There are no discernible elements of celebration of current achievements, shared success, or merit-based outcomes within the system being critiqued. The climate is antithetical to compersion.)
+    *   **Confidence:** 0.95
+
+**SALIENCE RANKING (Most to Least Salient):**
+
+1.  **Envy (Grievance/Injustice):** This is the core emotional engine of the speech. The detailed enumeration of economic exploitation, legal injustice, and systemic discrimination forms the bedrock of the speaker's argument and the emotional appeal. It is the primary "why" for the urgent call to action.
+2.  **Enmity (Hostility/Conflict):** Directly stemming from the grievances, the identification of specific political and institutional adversaries and the description of their harmful actions creates a central 'us vs. them' dynamic, making conflict an unavoidable and dominant theme.
+3.  **Fear (Crisis/Threat):** The precarious and dangerous reality faced by the community, including physical violence and the threat of death, underscores the urgency and high stakes of the situation, making the current threat atmosphere highly salient.
+4.  **Hope (Opportunity/Progress):** While the present is dire, the speech's ultimate purpose is to galvanize action towards a radically better future. The belief in the possibility of achieving "true freedom" and transforming society provides the necessary counter-balance to the negative emotions and motivates sustained struggle.
+5.  **Amity (Friendship/Unity):** Essential for mobilizing the "revolution," the call for internal solidarity and collective action among the civil rights advocates is a vital, prominent theme that enables the movement to confront the prevailing enmity and fear.
+6.  **Compersion (Celebration/Merit):** This dimension is notably and powerfully absent, making its non-salience itself a prominent feature. The speech explicitly refutes any celebratory or merit-based assessment of the current state of affairs.

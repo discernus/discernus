@@ -1,0 +1,83 @@
+[PROVENANCE:563f9a0e138d@../corpus/conservative_dignity_mccain_2008_concession.txt]
+
+**Emotional Climate Framework v1.0 - Refined Analysis**
+
+**Text:** John McCain - 2008 Presidential Election Concession Speech
+
+---
+
+**AFFECTIVE CLIMATE DIMENSIONS:**
+
+**Fear**
+*   **Analysis:** The speech acknowledges difficulties and dangers but frames them as challenges to be overcome through collective action, rather than dwelling on existential dread or imminent catastrophe. The mention of a "dangerous world" and "difficult times" serves as a backdrop for the call to unity, rather than being the primary emotional driver.
+*   **Quotations:**
+    1.  "These are difficult times for our country..."
+    2.  "...defend our security in a dangerous world..."
+    3.  "...to not despair of our present difficulties, but to believe always in the promise and greatness of America."
+*   **Score:** 0.3 (Present as a contextual element, but quickly countered by hope and calls to action, preventing it from dominating the atmosphere.)
+*   **Confidence:** 0.8
+
+**Hope**
+*   **Analysis:** Hope is a prominent emotional undercurrent, particularly as it relates to the future of the country, the potential for overcoming challenges, and the historical significance of the election. McCain consistently points towards a better future achievable through unity and effort, emphasizing national progress and the American spirit.
+*   **Quotations:**
+    1.  "...inspiring the hopes of so many millions of Americans..."
+    2.  "...leave our children and grandchildren a stronger, better country than we inherited."
+    3.  "...to believe always in the promise and greatness of America."
+*   **Score:** 0.75 (Strong and consistent, especially in connecting national progress with the call for unity and perseverance.)
+*   **Confidence:** 0.9
+
+---
+
+**RELATIONAL CLIMATE DIMENSIONS:**
+
+**Enmity**
+*   **Analysis:** This dimension is remarkably absent. Despite having just lost a hard-fought election, the speech actively avoids any language of hostility, conflict, or animosity towards the opponent or their supporters. The "fight" mentioned refers to the campaign effort, not an ongoing battle of wills.
+*   **Quotations:**
+    1.  "Senator Obama and I have had and argued our differences, and he has prevailed." (Acknowledges differences without hostility)
+    2.  "I wish Godspeed to the man who was my former opponent and will be my president..." (Ultimate expression of non-enmity)
+    3.  "Whatever our differences, we are fellow Americans..." (Explicitly counters any sense of division or antagonism)
+*   **Score:** 0.05 (Virtually non-existent; the speech actively works against this emotion.)
+*   **Confidence:** 1.0
+
+**Amity**
+*   **Analysis:** Amity is the overwhelming emotional characteristic of this speech. It permeates every section, from addressing supporters as "friends" to extending profound respect, cooperation, and a call for national unity towards his opponent and all Americans. The emphasis is on shared identity and collaborative action.
+*   **Quotations:**
+    1.  "Thank you, thank you my friends."
+    2.  "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face."
+    3.  "I urge all Americans... to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together..."
+    4.  "Whatever our differences, we are fellow Americans..."
+*   **Score:** 0.95 (Dominant and central; the speech's primary emotional thrust is one of reconciliation and unity.)
+*   **Confidence:** 1.0
+
+---
+
+**SUCCESS ORIENTATION CLIMATE DIMENSIONS:**
+
+**Envy**
+*   **Analysis:** There is no discernible sense of resentment, grievance, or unfairness regarding the outcome of the election or the opponent's success. McCain takes full responsibility for the loss ("the failure is mine, not yours") and explicitly celebrates Obama's achievement.
+*   **Quotations:**
+    1.  "...his success alone commands my respect for his ability and perseverance." (Directly counters any sense of unfairness)
+    2.  "Senator Obama has achieved a great thing for himself and for his country." (Celebratory, not resentful)
+    3.  "I'll leave that to others to determine [what more we could have done]. Every candidate makes mistakes, and I'm sure I made my share of them." (Takes responsibility, not externalizes blame or expresses envy)
+*   **Score:** 0.05 (Almost entirely absent.)
+*   **Confidence:** 1.0
+
+**Compersion**
+*   **Analysis:** This dimension is very strong. McCain not only accepts the outcome but actively celebrates his opponent's victory as a significant, praiseworthy accomplishment for both Obama and the nation. He attributes success to merit and effort and frames the election as a positive historical moment.
+*   **Quotations:**
+    1.  "...his success alone commands my respect for his ability and perseverance. But that he managed to do so by inspiring the hopes... is something I deeply admire and commend him for achieving."
+    2.  "Senator Obama has achieved a great thing for himself and for his country. I applaud him for it..."
+    3.  "There is no better evidence of this than the election of an African-American to the presidency of the United States." (Celebrates the historic significance)
+*   **Score:** 0.85 (Highly present; a core component of the speech's gracious tone.)
+*   **Confidence:** 0.95
+
+---
+
+**SALIENCE RANKING (Most to Least Salient):**
+
+1.  **Amity:** This is by far the most salient emotional dimension. It is rhetorically emphasized throughout, forming the core message of the speech – a call for national unity and respectful transition. It defines the speech's purpose and structure.
+2.  **Compersion:** Highly salient, directly tied to the celebration of the election's historical significance and Obama's personal achievement. It's a key rhetorical choice to convey graciousness in defeat.
+3.  **Hope:** Strongly salient, as it provides the forward-looking motivation for the call to unity and action. The vision of a "stronger, better country" is a recurring theme.
+4.  **Fear:** Less salient. While challenges and difficulties are acknowledged, they are consistently framed as obstacles to be overcome rather than dominating the emotional atmosphere. They serve to contextualize the calls for unity and hope.
+5.  **Envy:** Extremely low in salience. There is no rhetoric or emotional tone associated with envy or grievance; the speech actively promotes the opposite.
+6.  **Enmity:** Extremely low in salience. The speech consciously and explicitly de-emphasizes any sense of conflict or hostility towards the opponent, making this dimension virtually absent.

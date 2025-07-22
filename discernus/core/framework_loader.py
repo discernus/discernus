@@ -354,7 +354,7 @@ dimensions, scoring criteria, and evidence requirements systematically to the ta
     
     def validate_project_structure(self, project_path: str) -> Dict[str, Any]:
         """
-        Validate SOAR project structure
+        Validate Discernus project structure
         
         THIN Principle: Software checks file existence; LLM validates content
         """
@@ -400,7 +400,7 @@ dimensions, scoring criteria, and evidence requirements systematically to the ta
         }
     
     def load_project_framework(self, project_path: str) -> Dict[str, Any]:
-        """Load framework from SOAR project directory"""
+        """Load framework from Discernus project directory"""
         project_path = Path(project_path)
         framework_path = project_path / "framework.md"
         
