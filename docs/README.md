@@ -9,238 +9,104 @@
 
 ## 🚀 Quick Start Paths
 
-### New Users
-1. **[Strategic Vision](DISCERNUS_STRATEGIC_VISION.md)** - Understand the mission and scope
-2. **[Quick Start Guide](QUICK_START_GUIDE.md)** - Get up and running in 15 minutes
-3. **[User Workflow Guide](USER_WORKFLOW_GUIDE.md)** - Learn the research process
+### 👤 New Users
+1. **[User Documentation](user/)** - **START HERE** - Complete user guides
+2. **[Quick Start Guide](user/quickstart/QUICK_START_GUIDE.md)** - Get up and running in 15 minutes
+3. **[User Workflow Guide](user/quickstart/USER_WORKFLOW_GUIDE.md)** - Learn the research process
 
-### Developers
-1. **[Agent Briefing](AGENT_BRIEFING.md)** - Essential principles and architecture
-2. **[THIN Architecture Reference](THIN_ARCHITECTURE_REFERENCE.md)** - Core technical patterns
-3. **[Core Infrastructure Guide](CORE_INFRASTRUCTURE_GUIDE.md)** - System components
+### 💻 Developers
+1. **[Developer Documentation](developer/)** - **START HERE** - Complete developer guides
+2. **[Agent Briefing](developer/setup/AGENT_BRIEFING.md)** - Essential principles and architecture
+3. **[THIN Architecture Reference](developer/architecture/THIN_ARCHITECTURE_REFERENCE.md)** - Core technical patterns
 
-### Researchers
-1. **[Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md)** - Bring your analytical framework
-2. **[Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md)** - Academic integrity and replication
-3. **[Interface Design Principles](INTERFACE_DESIGN_PRINCIPLES.md)** - Human-centered design
+### 🎯 Operations Teams
+1. **[Operations Documentation](operations/)** - **START HERE** - Deployment and maintenance
+2. **[Deployment Guide](operations/deployment/DEPLOYMENT_COLLABORATION_GUIDE.md)** - System deployment
+3. **[Platform Readiness](operations/monitoring/PLATFORM_READINESS_ASSESSMENT.md)** - System health
 
-### Framework Developers
-1. **[Extension Development Guide](EXTENSION_DEVELOPMENT_GUIDE.md)** - Build platform extensions
-2. **[Governance Principles](GOVERNANCE_PRINCIPLES.md)** - Community standards and quality
-3. **[Validation Process Guide](VALIDATION_PROCESS_GUIDE.md)** - Research quality standards
-4. **[Framework Validation Rubric](../discernus/core/framework_specification_validation_rubric.md)** - Technical requirements
-5. **[Experiment Validation Rubric](../discernus/core/experiment_specification_validation_rubric.md)** - Research design standards
+### 🏛️ Governance & Strategy
+1. **[Governance Documentation](governance/)** - **START HERE** - Strategy and principles
+2. **[Strategic Vision](governance/strategy/DISCERNUS_STRATEGIC_VISION.md)** - Mission and scope
+3. **[Governance Principles](governance/principles/GOVERNANCE_PRINCIPLES.md)** - Decision frameworks
 
 ---
 
-## 📚 Documentation by Category
+## 📁 Documentation Structure Overview
 
-### Foundation Documents
-*Strategic vision and core principles*
+### 📂 **[`developer/`](developer/)** - Developer Documentation Hub
+Complete developer resources organized by function:
+- **[`setup/`](developer/setup/)** - Environment, onboarding, GitHub, authentication
+- **[`workflows/`](developer/workflows/)** - Testing, Git, extensions, development patterns
+- **[`architecture/`](developer/architecture/)** - THIN patterns, system design, infrastructure
+- **[`troubleshooting/`](developer/troubleshooting/)** - Debugging, health monitoring
 
-- **[Discernus Strategic Vision](DISCERNUS_STRATEGIC_VISION.md)** - Mission, philosophy, and use cases
-- **[Platform Architecture Overview](PLATFORM_ARCHITECTURE_OVERVIEW.md)** - Core system design and components
-- **[Agent Briefing](AGENT_BRIEFING.md)** - Critical principles for contributors
+### 📂 **[`user/`](user/)** - User Documentation Hub  
+End-user guides for effective platform usage:
+- **[`quickstart/`](user/quickstart/)** - Getting started, workflows
+- **[`workflows/`](user/workflows/)** - CLI features, validation, experiment lifecycle
 
-### Core Infrastructure
-*Technical architecture and implementation*
+### 📂 **[`operations/`](operations/)** - Operations Documentation Hub
+System administration and maintenance:
+- **[`deployment/`](operations/deployment/)** - Deployment strategies  
+- **[`monitoring/`](operations/monitoring/)** - Health assessment
+- **[`maintenance/`](operations/maintenance/)** - Provenance, ongoing care
 
-- **[THIN Architecture Reference](THIN_ARCHITECTURE_REFERENCE.md)** - LLM intelligence + minimal software patterns
-- **[Core Infrastructure Guide](CORE_INFRASTRUCTURE_GUIDE.md)** - Agent registry, model registry, LLM gateway
-- **[THIN Compliance Checklist](THIN_COMPLIANCE_CHECKLIST.md)** - Architecture validation criteria
+### 📂 **[`governance/`](governance/)** - Governance Documentation Hub
+Strategic direction and principles:
+- **[`strategy/`](governance/strategy/)** - Vision, documentation futures
+- **[`principles/`](governance/principles/)** - Standards, design principles
+- **[`roadmap/`](governance/roadmap/)** - Development planning
 
-### User Experience
-*Workflows and interface design*
+### 📂 **[`specifications/`](specifications/)** - Technical Specifications
+Framework and system specifications:
+- **[Framework Specification v4.0](specifications/FRAMEWORK_SPECIFICATION_V4.md)**
+- **[Experiment Specification v2.0](specifications/EXPERIMENT_SPECIFICATION_V2.md)**  
+- **[Corpus Specification v2.0](specifications/CORPUS_SPECIFICATION_V2.md)**
 
-- **[Quick Start Guide](QUICK_START_GUIDE.md)** - Getting started with the platform
-- **[User Workflow Guide](USER_WORKFLOW_GUIDE.md)** - Research processes and optimization
-- **[Interface Design Principles](INTERFACE_DESIGN_PRINCIPLES.md)** - Human-centered design patterns
-
-### Extension Ecosystem
-*Framework integration and community development*
-
-- **[Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md)** - Bring your analytical framework
-- **[Extension Development Guide](EXTENSION_DEVELOPMENT_GUIDE.md)** - Build platform extensions
-- **[Governance Principles](GOVERNANCE_PRINCIPLES.md)** - Community standards and quality control
-
-### Quality Assurance
-*Testing, troubleshooting, and validation*
-
-- **[Testing Strategy](TESTING_STRATEGY.md)** - THIN architecture testing philosophy
-- **[Troubleshooting Guide](TROUBLESHOOTING_GUIDE.md)** - Strategic debugging approaches
-- **[Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md)** - Academic integrity and replication
-
-### Developer Resources
-*Technical references and tools*
-
-- **[Agent Design Principles](AGENT_DESIGN_PRINCIPLES.md)** - Multi-agent coordination patterns
-- **[Architecture Quick Reference](ARCHITECTURE_QUICK_REFERENCE.md)** - Essential technical patterns
-- **[Provenance Quick Reference](PROVENANCE_QUICK_REFERENCE.md)** - Research audit trails
-- **[Dev Mode Guide](DEV_MODE_GUIDE.md)** - Development and testing workflows
-
-### Academic Resources
-*Research standards and validation*
-
-- **[Validation Process Guide](VALIDATION_PROCESS_GUIDE.md)** - Research quality standards and requirements
-- **[Framework Validation Rubric](../discernus/core/framework_specification_validation_rubric.md)** - Technical framework requirements
-- **[Experiment Validation Rubric](../discernus/core/experiment_specification_validation_rubric.md)** - Research design standards
-- **[Glossary](GLOSSARY.md)** - Technical terminology and definitions
-
-### Deployment and Collaboration
-*Operational guides and community*
-
-- **[Deployment Collaboration Guide](DEPLOYMENT_COLLABORATION_GUIDE.md)** - Production deployment patterns
-- **[Extension Guide](EXTENSION_GUIDE.md)** - Platform extension development
+### 📂 **[`research/`](research/)** - Academic Research Content
+Research outputs, validation studies, and academic materials
 
 ---
 
-## 🎯 User Journey Navigation
+## 💡 Common Navigation Patterns
 
-### Research Workflow
-*Complete research process from question to publication*
+### **I'm completely new to Discernus**
+1. [`governance/strategy/DISCERNUS_STRATEGIC_VISION.md`](governance/strategy/DISCERNUS_STRATEGIC_VISION.md) - Understand the mission
+2. [`user/quickstart/QUICK_START_GUIDE.md`](user/quickstart/QUICK_START_GUIDE.md) - Start using the platform
+3. [`user/quickstart/USER_WORKFLOW_GUIDE.md`](user/quickstart/USER_WORKFLOW_GUIDE.md) - Learn research workflows
 
-1. **Problem Definition**: [Strategic Vision](DISCERNUS_STRATEGIC_VISION.md) → [User Workflow Guide](USER_WORKFLOW_GUIDE.md)
-2. **Framework Selection**: [Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md) → [Framework Validation Rubric](../discernus/core/framework_specification_validation_rubric.md)
-3. **Experiment Design**: [Experiment Validation Rubric](../discernus/core/experiment_specification_validation_rubric.md) → [Quick Start Guide](QUICK_START_GUIDE.md)
-4. **Analysis Execution**: [User Workflow Guide](USER_WORKFLOW_GUIDE.md) → [Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md)
-5. **Publication Preparation**: [Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md) → [Glossary](GLOSSARY.md)
+### **I want to develop or contribute**
+1. [`developer/setup/AGENT_BRIEFING.md`](developer/setup/AGENT_BRIEFING.md) - Essential developer onboarding
+2. [`developer/`](developer/) - Navigate all developer resources
+3. [`developer/workflows/DEV_MODE_GUIDE.md`](developer/workflows/DEV_MODE_GUIDE.md) - Start developing
 
-### Development Workflow
-*Contributing to the platform*
+### **I'm deploying or operating Discernus** 
+1. [`operations/`](operations/) - Complete operations hub
+2. [`operations/deployment/DEPLOYMENT_COLLABORATION_GUIDE.md`](operations/deployment/DEPLOYMENT_COLLABORATION_GUIDE.md) - Deploy the system
+3. [`operations/monitoring/PLATFORM_READINESS_ASSESSMENT.md`](operations/monitoring/PLATFORM_READINESS_ASSESSMENT.md) - Monitor health
 
-1. **Architecture Understanding**: [Agent Briefing](AGENT_BRIEFING.md) → [THIN Architecture Reference](THIN_ARCHITECTURE_REFERENCE.md)
-2. **Component Development**: [Core Infrastructure Guide](CORE_INFRASTRUCTURE_GUIDE.md) → [Agent Design Principles](AGENT_DESIGN_PRINCIPLES.md)
-3. **Testing and Validation**: [Testing Strategy](TESTING_STRATEGY.md) → [THIN Compliance Checklist](THIN_COMPLIANCE_CHECKLIST.md)
-4. **Quality Assurance**: [Troubleshooting Guide](TROUBLESHOOTING_GUIDE.md) → [Dev Mode Guide](DEV_MODE_GUIDE.md)
-
-### Extension Development
-*Building platform extensions*
-
-1. **Ecosystem Understanding**: [Platform Architecture Overview](PLATFORM_ARCHITECTURE_OVERVIEW.md) → [Extension Development Guide](EXTENSION_DEVELOPMENT_GUIDE.md)
-2. **Framework Integration**: [Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md) → [Framework Validation Rubric](../discernus/core/framework_specification_validation_rubric.md)
-3. **Community Standards**: [Governance Principles](GOVERNANCE_PRINCIPLES.md) → [Extension Guide](EXTENSION_GUIDE.md)
-4. **Deployment**: [Deployment Collaboration Guide](DEPLOYMENT_COLLABORATION_GUIDE.md)
+### **I need to understand the architecture**
+1. [`developer/architecture/ARCHITECTURE_QUICK_REFERENCE.md`](developer/architecture/ARCHITECTURE_QUICK_REFERENCE.md) - **QUICK** overview
+2. [`developer/architecture/THIN_ARCHITECTURE_REFERENCE.md`](developer/architecture/THIN_ARCHITECTURE_REFERENCE.md) - **COMPREHENSIVE** guide
+3. [`developer/architecture/PLATFORM_ARCHITECTURE_OVERVIEW.md`](developer/architecture/PLATFORM_ARCHITECTURE_OVERVIEW.md) - **HIGH-LEVEL** system view
 
 ---
 
-## 🏗️ Three Foundational Commitments
+## 🔍 Quick Reference
 
-Every aspect of Discernus is built on three equally important commitments:
+### Essential Files
+- **[`GLOSSARY.md`](GLOSSARY.md)** - Terminology and definitions (shared resource)
+- **[Technical Specifications](specifications/)** - Framework, experiment, and corpus specs
+- **[Framework Development Guide](guides/FRAMEWORK_DEVELOPMENT_GUIDE.md)** - Creating analytical frameworks
 
-### 1. Mathematical Reliability
-**Hybrid Intelligence Pattern**: LLM designs analytical approach → secure code executor performs calculations → LLM interprets results in natural language.
-
-**Key Documents**:
-- [THIN Architecture Reference](THIN_ARCHITECTURE_REFERENCE.md) - Implementation patterns
-- [Testing Strategy](TESTING_STRATEGY.md) - Validation approaches
-- [Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md) - Calculation transparency
-
-### 2. Cost Transparency
-**Predictable Pricing**: Upfront cost estimation, budget controls, and intelligent model selection for institutional adoption.
-
-**Key Documents**:
-- [Platform Architecture Overview](PLATFORM_ARCHITECTURE_OVERVIEW.md) - Model selection systems
-- [User Workflow Guide](USER_WORKFLOW_GUIDE.md) - Budget management workflows
-- [Quick Start Guide](QUICK_START_GUIDE.md) - Cost estimation tools
-
-### 3. Complete Reproducibility
-**Zero Mystery Commitment**: Complete audit trails, decision documentation, and provenance chains enable independent researchers to achieve deterministically identical results.
-
-**Key Documents**:
-- [Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md) - Academic integrity systems
-- [Provenance Quick Reference](PROVENANCE_QUICK_REFERENCE.md) - Audit trail tools
-- [Testing Strategy](TESTING_STRATEGY.md) - Reproducibility validation
+### Core Principles  
+- **THIN Architecture**: LLM intelligence + minimal software
+- **Framework Agnostic**: Works with any compliant analytical framework
+- **Human-Centric**: Amplifies researcher intelligence, maintains human judgment
+- **Academic Quality**: Designed for peer-review standard research
 
 ---
 
-## 🌟 Platform Highlights
+**🎯 This documentation is organized by audience and function to maximize developer velocity and user success.**
 
-### Universal Applicability
-Works across domains:
-- **Academic Research**: Political discourse, literary analysis, historical texts
-- **Think Tanks**: Policy document analysis, strategic messaging
-- **Journalism**: Source verification, narrative analysis
-- **Corporations**: Brand sentiment, competitive intelligence
-- **Religious Organizations**: Theological text analysis, pastoral guidance
-- **Government Agencies**: Policy impact assessment, public communication
-- **NGOs**: Advocacy messaging, stakeholder communication
-- **Media Organizations**: Content strategy, editorial analysis
-
-### THIN Architecture Benefits
-- **LLM Intelligence**: Complex analysis and reasoning
-- **Minimal Software**: Simple orchestration and infrastructure
-- **Natural Language Flow**: No complex parsing or data transformation
-- **Academic Standards**: Complete transparency and reproducibility
-- **Cost Efficiency**: Intelligent model selection and budget controls
-
-### Drupal-Style Ecosystem
-- **Core Platform**: Tightly controlled, predictable interfaces
-- **Extension Modules**: Open ecosystem with independent lifecycles
-- **Quality Standards**: Community governance and trademark protection
-- **Developer Experience**: Clear boundaries and development patterns
-
----
-
-## 🚨 Critical Principles
-
-### For All Contributors
-1. **THIN Architecture**: LLMs provide intelligence, software provides infrastructure
-2. **Domain Neutrality**: Platform works across all text analysis domains
-3. **Academic Standards**: Complete transparency and reproducibility
-4. **Cost Transparency**: Predictable pricing and budget controls
-5. **Human-Centered Design**: Amplify human intelligence, don't replace it
-
-### For Developers
-1. **No Parsing**: If you're parsing LLM responses, you're doing it wrong
-2. **Centralized Prompts**: All prompts in `discernus/core/agent_roles.py`
-3. **Line Count Budgets**: Components must stay under complexity limits
-4. **Mathematical Reliability**: Use hybrid intelligence pattern for calculations
-5. **Complete Provenance**: Log everything for academic audit trails
-
-### For Researchers
-1. **Framework Agnostic**: Bring your own analytical framework
-2. **Complete Methodology**: Document every decision and process
-3. **Independent Verification**: Enable replication by other researchers
-4. **Budget Planning**: Use cost estimation tools before analysis
-5. **Academic Standards**: Maintain publication-ready documentation
-
----
-
-## 📖 Additional Resources
-
-### Internal Documentation
-- **[Documentation Refactoring Plan](DOCUMENTATION_REFACTORING_PLAN.md)** - How this documentation was created
-- **Archived Documentation**: `deprecated/by-date/` - Historical reference materials
-
-### External Resources
-- **Project Repository**: Core platform development
-- **Extension Registry**: Community-contributed modules
-- **Academic Papers**: Research using Discernus platform
-- **Community Forum**: Support and collaboration
-
----
-
-## 🔧 Getting Help
-
-### Documentation Issues
-1. Check [Troubleshooting Guide](TROUBLESHOOTING_GUIDE.md) for common solutions
-2. Review [THIN Compliance Checklist](THIN_COMPLIANCE_CHECKLIST.md) for architecture guidance
-3. Consult [Quick Start Guide](QUICK_START_GUIDE.md) for basic usage
-
-### Development Support
-1. Review [Agent Briefing](AGENT_BRIEFING.md) for core principles
-2. Check [Core Infrastructure Guide](CORE_INFRASTRUCTURE_GUIDE.md) for technical details
-3. Use [Testing Strategy](TESTING_STRATEGY.md) for validation approaches
-
-### Research Support
-1. Start with [User Workflow Guide](USER_WORKFLOW_GUIDE.md) for process guidance
-2. Use [Framework Integration Guide](FRAMEWORK_INTEGRATION_GUIDE.md) for custom frameworks
-3. Follow [Research Provenance Guide](RESEARCH_PROVENANCE_GUIDE.md) for academic standards
-
----
-
-*This documentation represents the complete refactoring of scattered, domain-specific documentation into a coherent, domain-neutral platform guide. It embodies the THIN architecture philosophy: "Thick LLM + Thin Software = Epistemic Trust."*
-
-**Last Updated**: January 2025  
-**Documentation Version**: 1.0 (Post-Refactoring)  
-**Platform Status**: Production-ready for academic and institutional use 
+*For questions or improvements, see [`governance/principles/GOVERNANCE_PRINCIPLES.md`](governance/principles/GOVERNANCE_PRINCIPLES.md)* 
