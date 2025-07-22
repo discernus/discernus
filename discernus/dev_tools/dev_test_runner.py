@@ -17,7 +17,7 @@ USAGE:
     python3 dev_test_runner.py --profile "political_discourse_expert"
 
     # Test DiscernusLibrarian specifically
-    python3 dev_test_runner.py --test-knowledgenaut
+    python3 dev_test_runner.py --test-discernuslibrarian
 """
 
 import asyncio
@@ -100,7 +100,7 @@ class DevTestRunner:
             logger.error(f"❌ Test failed: {e}")
             raise
     
-    async def test_knowledgenaut_specifically(self) -> dict:
+    async def test_discernuslibrarian_specifically(self) -> dict:
         """Run a test specifically designed to test the DiscernusLibrarian agent"""
         
         research_question = """
@@ -217,7 +217,7 @@ Examples:
   python3 dev_test_runner.py
   python3 dev_test_runner.py --question "How does rhetoric work?" --corpus "data/my_texts/"
   python3 dev_test_runner.py --profile "political_discourse_expert"
-  python3 dev_test_runner.py --test-knowledgenaut
+  python3 dev_test_runner.py --test-discernuslibrarian
   python3 dev_test_runner.py --list-profiles
   python3 dev_test_runner.py --add-custom-profile
         """
@@ -230,7 +230,7 @@ Examples:
     parser.add_argument('--profile', '-p', 
                        default='experienced_computational_social_scientist',
                        help='Simulated researcher profile')
-    parser.add_argument('--test-knowledgenaut', 
+    parser.add_argument('--test-discernuslibrarian', 
                        action='store_true',
                        help='Run specific test for DiscernusLibrarian agent')
     parser.add_argument('--list-profiles',
@@ -259,8 +259,8 @@ Examples:
             corpus_path=args.corpus,
             researcher_profile='strict_experimentalist'
         )
-    elif args.test_knowledgenaut:
-        results = await runner.test_knowledgenaut_specifically()
+    elif args.test_discernuslibrarian:
+        results = await runner.test_discernuslibrarian_specifically()
     else:
         results = await runner.run_quick_test(
             research_question=args.question,

@@ -17,9 +17,9 @@ python3 discernus/dev_test_runner.py
 python3 discernus/dev_test_runner.py --question "How does rhetoric work in political speeches?" --corpus "data/my_texts/"
 ```
 
-### Test Knowledgenaut Specifically
+### Test DiscernusLibrarian Specifically
 ```bash
-python3 discernus/dev_test_runner.py --test-knowledgenaut
+python3 -m discernus.core.discernuslibrarian
 ```
 
 ### Different Researcher Profiles
@@ -101,4 +101,4 @@ results = await orchestrator.run_automated_session(config)
 4. **Review Results**: Check generated analysis in session folder
 5. **Iterate**: Refine question/corpus based on results
 
-This system eliminates the need for manual intervention during development and testing, making it easy to iterate on research questions and validate the knowledgenaut functionality. 
+This system eliminates the need for manual intervention during development and testing, making it easy to iterate on research questions and validate the DiscernusLibrarian functionality. 

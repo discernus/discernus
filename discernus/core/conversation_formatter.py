@@ -95,7 +95,7 @@ REQUIREMENTS:
    - adversarial_llm -> 🥊 Adversarial LLM
    - analysis_llm -> 📊 Analysis LLM
    - referee_llm -> ⚖️ Referee LLM
-   - knowledgenaut_agent -> 🧠 Knowledgenaut Agent
+   - discernuslibrarian_agent -> 🧠 DiscernusLibrarian Agent
    - Rhetoric_Analyst_LLM -> 📝 Rhetoric Analyst
    - Political_Comms_LLM -> 🗳️ Political Communications Expert
 3. Include timestamps (time only) for each message

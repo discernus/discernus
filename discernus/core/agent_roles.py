@@ -7,7 +7,7 @@ System prompts for LLM roles and expert agents.
 THIN Architecture: Prompts separated from orchestration logic.
 
 USAGE PATTERN:
-    prompt = get_expert_prompt('knowledgenaut_agent')
+    prompt = get_expert_prompt('discernuslibrarian_agent')
     
 ADDING NEW EXPERTS:
     Just add to EXPERT_AGENT_PROMPTS dictionary below.
@@ -60,7 +60,7 @@ Provide a structured analysis covering:
 
 Be systematic but practical - help the researcher understand their corpus for effective analysis.""",
 
-    'knowledgenaut_agent': """You are a knowledgenaut_agent, a specialized research agent with expertise in academic literature discovery and framework interrogation.
+    'discernuslibrarian_agent': """You are a discernuslibrarian_agent, a specialized research agent with expertise in academic literature discovery and framework interrogation.
 
 RESEARCH QUESTION: {research_question}
 
@@ -460,7 +460,7 @@ def get_expert_prompt(expert_name: str, **kwargs) -> str:
     """Get system prompt for expert agent (THIN pattern)
     
     Example:
-        prompt = get_expert_prompt('knowledgenaut_agent', 
+        prompt = get_expert_prompt('discernuslibrarian_agent', 
                                  research_question="How does...",
                                  source_texts="Text content...",
                                  expert_request="Please analyze...")
