@@ -5,9 +5,9 @@
 
 ## What Is This Temporal Module?
 
-The Populist Rhetoric Module (PRM) v1.0 represents the first temporal module in the Trinity + X framework architecture. While the Trinity Core (ECF, CVF, IDF) provides timeless analytical foundations, temporal modules like PRM capture era-specific political phenomena that rise and fall with historical circumstances.
+The Populist Rhetoric Module (PRM) v1.0 represents the first temporal module in the Discernus framework architecture. While the Core Modules (ECF, CVF, IDF) provide timeless analytical foundations, temporal modules like PRM capture era-specific political phenomena that rise and fall with historical circumstances.
 
-**Core Purpose**: PRM analyzes contemporary populist political communication patterns that have emerged in the 2010s-2020s globally, complementing Trinity Core analysis with temporal specificity about current populist mobilization strategies.
+**Core Purpose**: PRM analyzes contemporary populist political communication patterns that have emerged in the 2010s-2020s globally, complementing Core Module analysis with temporal specificity about current populist mobilization strategies.
 
 **Key Applications**:
 - **Contemporary Political Analysis**: Understanding current populist movements and appeals
@@ -19,9 +19,9 @@ The Populist Rhetoric Module (PRM) v1.0 represents the first temporal module in 
 
 ## Theoretical Foundation
 
-### Trinity + X Architecture Position
+### Core + Modules Architecture Position
 
-**Temporal Specificity**: Unlike Trinity Core frameworks that apply across historical eras, PRM focuses specifically on contemporary populist communication patterns that characterize the current political moment.
+**Temporal Specificity**: Unlike Core Module frameworks that apply across historical eras, PRM focuses specifically on contemporary populist communication patterns that characterize the current political moment.
 
 **Historical Precedent**: Just as analysts in 1922 might have developed "Marxist Rhetoric Module" and "Fascist Rhetoric Module" for their era's dominant political movements, PRM captures the dominant alternative political rhetoric of the 2020s.
 
