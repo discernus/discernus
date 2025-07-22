@@ -257,7 +257,7 @@ def _detect_importance_level(calculation_data: Dict[str, Any], speaker: str) -> 
         return "high"
     
     # Speaker-based importance
-    if speaker in ['data_science_expert', 'knowledgenaut_agent']:
+    if speaker in ['data_science_expert', 'discernuslibrarian_agent']:
         return "medium"  # These experts typically do important work
     
     if speaker in ['moderator_llm']:
@@ -280,7 +280,7 @@ def _infer_calculation_context(calculation_data: Dict[str, Any], speaker: str) -
         return "Descriptive Statistics"
     elif any(word in code for word in ['test', 'hypothesis', 'significance']):
         return "Hypothesis Testing"
-    elif speaker == 'knowledgenaut_agent':
+    elif speaker == 'discernuslibrarian_agent':
         return "Literature Analysis"
     elif speaker == 'corpus_detective_agent':
         return "Corpus Analysis"

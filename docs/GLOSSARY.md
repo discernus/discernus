@@ -6,7 +6,7 @@
 Software design philosophy where minimal code enables LLM conversations rather than managing them. Software provides orchestration infrastructure; LLMs provide intelligence and analysis.
 
 ### **Expert Agent**
-Specialized LLM with domain expertise (e.g., `knowledgenaut_agent`, `corpus_detective_agent`) that can be spawned by the moderator to provide specific analysis.
+Specialized LLM with domain expertise (e.g., `discernuslibrarian_agent`, `corpus_detective_agent`) that can be spawned by the moderator to provide specific analysis.
 
 ### **Agent Spawning Instruction Set**
 The system prompt and configuration that defines an expert agent's capabilities, stored in `agent_roles.py`.
@@ -37,10 +37,10 @@ Collection of texts provided by the user for analysis. Can be messy, real-world 
 The actual text content being analyzed, passed to expert agents as context.
 
 ### **Framework Interrogation**
-Process of validating novel analytical frameworks against academic literature (performed by knowledgenaut_agent).
+Process of validating novel analytical frameworks against academic literature (performed by discernuslibrarian_agent).
 
 ### **Literature Discovery**
-Automated search and validation of academic papers relevant to research questions (performed by knowledgenaut_agent).
+Automated search and validation of academic papers relevant to research questions (performed by discernuslibrarian_agent).
 
 ## Technical Infrastructure
 
@@ -61,7 +61,7 @@ Component responsible for creating, tracking, and managing research sessions.
 ### **Production Agents**
 Expert agents used in the main research pipeline:
 - `corpus_detective_agent`: Corpus inspection and quality assessment
-- `knowledgenaut_agent`: Academic literature discovery and framework validation  
+- `discernuslibrarian_agent`: Academic literature discovery and framework validation  
 - `computational_rhetoric_expert`: Rhetorical analysis and persuasive discourse
 - `data_science_expert`: Statistical analysis and quantitative methods
 
@@ -74,7 +74,7 @@ Utilities for development and testing:
 
 ### **Core Infrastructure Services**
 Production infrastructure that expert agents depend on:
-- `UltraThinKnowledgenaut` (in `knowledgenaut.py`): Academic literature discovery APIs
+- `UltraThinDiscernusLibrarian` (in `discernuslibrarian.py`): Academic literature discovery APIs
 - `CorpusInspector` (in `corpus_inspector.py`): File reading and corpus inspection infrastructure
 - `SecureCodeExecutor` (in `secure_code_executor.py`): Sandboxed computation with data science libraries
 - `NotebookManager` (in `notebook_manager.py`): Automatic research notebook generation

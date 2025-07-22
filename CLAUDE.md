@@ -41,6 +41,17 @@ python discernus/tests/comprehensive_test_suite.py
 pytest discernus/tests/test_analysis_agent.py -v
 ```
 
+### DiscernusLibrarian Commands
+```bash
+# Test DiscernusLibrarian research agent
+python3 -m discernus.core.discernuslibrarian
+
+# Results stored in discernus/librarian/
+# - reports/ - Human-readable markdown reports
+# - research_data/ - JSON data for programmatic access  
+# - archives/ - Long-term storage by date/topic
+```
+
 ## Architecture Overview
 
 ### THIN Philosophy
@@ -56,7 +67,7 @@ This codebase follows the "Thick LLM + Thin Software = Epistemic Trust" philosop
 
 **Core Infrastructure** (`discernus/core/`):
 - `spec_loader.py` - Loads V4 frameworks, V2 experiments, and corpus specifications
-- `discernuslibrarian.py` - Citation-guided research agent using Vertex AI (now DiscernusLibrarian in `discernus/librarian/`)
+- `discernuslibrarian.py` - Citation-guided research agent using Vertex AI (located in `discernus/librarian/`)
 - `project_chronolog.py` - Git-based provenance and session tracking
 - `simple_llm_client.py` / `ultra_thin_llm_client.py` - LLM gateway abstractions
 

@@ -16,7 +16,7 @@ __all__ = [
     "DetectiveAgent",
     "GenericExpertAgent",
     "InitializationAgent",
-    "KnowledgenautAgent",
+    "DiscernusLibrarianAgent",
     "QualitativeAnalysisAgent",
     "QuantitativeAnalysisAgent",
     "ResearcherAgent",
