@@ -1,0 +1,158 @@
+=== SYSTEM PROMPT ===
+You are a framework analysis specialist. CRITICAL: Include all provenance stamps in your response.
+
+=== USER PROMPT ===
+Here are detailed instructions for analysis agents to implement the Van der Veen 2019 replication experiment using the PDAF v1.3 Tension Enhanced framework:
+
+1. Data Extraction Agent Instructions:
+
+- Extract full text content from each of the 7 specified corpus documents, preserving speech/document metadata.
+- Clean and normalize the extracted text, removing any formatting artifacts or non-relevant content.
+- Prepare a structured dataset with document ID, speaker/source, date, and full text content for each asset.
+- Ensure the dataset is properly formatted for ingestion by the Analysis Agent.
+
+2. Analysis Agent Instructions:
+
+- For each document in the prepared dataset:
+  1. Conduct a full PDAF v1.3 Tension Enhanced analysis as specified in the framework.
+  2. Score all 9 populist anchors for both intensity (0.0-2.0) and salience (0.0-1.0).
+  3. Provide at least 2 direct quotations supporting each populist anchor assessment.
+  4. Calculate the 3 populist strategic tensions:
+     - Democratic-Authoritarian Tension
+     - Internal-External Focus Tension
+     - Crisis-Elite Attribution Tension
+  5. Compute the Populist Strategic Contradiction Index (PSCI).
+  6. Classify the populist strategy pattern based on the PSCI score.
+  7. Assess the Populist Salience Concentration.
+  8. Determine the Economic Direction Indicator.
+  9. Identify the primary Populist Strategic Focus based on salience rankings.
+
+- Pay special attention to:
+  - Differences between candidate speeches and party platforms
+  - Variations in populist patterns between Republican and Democratic sources
+  - Strategic tensions unique to each speaker/document
+
+- Ensure all output adheres to the specified JSON schema in the framework's output contract.
+
+3. Calculation Agent Instructions:
+
+- Aggregate results from the Analysis Agent outputs:
+  1. Calculate average Populist Intensity Index scores for:
+     - All Trump speeches
+     - All Sanders speeches
+     - Cruz speech
+     - Republican Party Platform
+     - Democratic Party Platform
+  2. Compute mean PSCI scores for the same groupings.
+  3. Identify the most common Populist Strategic Focus for each group.
+  4. Calculate the and salience for each populist anchor across all documents.
+  5. Determine the overall distribution of populist strategy classifications.
+
+- Prepare summary statistics and data visualizations to highlight:. Synthesis Agent Instructions:
+
+- Compare PDAF v1.3 results to Van der Veen 2019 findings:
+  1. Assess alignment on basic populist/non-populist classifications.
+  2. Identify areas where PDAF v1.3 provides additional insights.
+  3. Evaluate how tension analysis extends the original study's conclusions.
+
+- Address the research questions specified in the experiment:
+  - Replicate Van der Veen's populist classifications
+  - Describe emerging strategic tension patterns
+  - Compare Republican vs Democratic populist coherence
+  - Contrast candidate speeches with party platforms
+  - platform populist patterns
+  - Highlight insights uniquely enabled by tension analysis through tension analysis
+
+- Evaluate experiment success based on specified metrics:
+  - Basic replication of Van der Veen classifications
+  - Methodological extension through tension analysis
+  - Research contribution via strategic communication insights
+
+- Synthesize key findings into a cohesive narrative, focusing on:
+  - Replication success and validation of PDAF v1.3
+  - Novel insights enabled by tension-enhanced analysis
+  - Theoreticalist discourse theory and future research directions
+
+- Prepare a summary suitable for academic publication, including:
+  - Methodology comparison (Van der Veen vs PDAF v1.3)
+  - Key findings and their significance
+  - Limitations of the current study
+  - Recommendations for further populist discourse analysis using PDAF v1.3
+
+PROVENANCE VERIFICATION:
+You are analyzing content from file: deprecated/README.md
+Content hash: e5668941a071
+Content preview: "# Deprecated Content Index
+*Searchable guide to archived materials*
+
+This directory contains depreca..."
+
+CRITICAL: You must include this provenance stamp in your response: [PROVENANCE:e5668941a071@deprecated/README.md]
+
+TEXT TO ANALYZE:
+# Deprecated Content Index
+*Searchable guide to archived materials*
+
+This directory contains deprecated documentation and code that has been superseded by current implementations. Content is organized by date for easy reference.
+
+## Archive Organization
+
+### by-date/2025-07-15/ - General Project Cleanup
+**What**: Root directory cleanup and PM reorganization  
+**Why**: Removed obsolete documentation and reorganized PM materials around Attesor study priority
+
+#### root_docs/
+- `PARSING_SOLUTION_SUMMARY.md` - Documents THICK parsing patterns (superseded by THIN architecture)
+- `FIX_SUMMARY.md` - Temporary Claude 3.5 Sonnet model registry fixes (likely obsolete)
+- `VERTEX_AI_CLAUDE_STATUS_REPORT.md` - Temporary status report
+- `MODEL_AVAILABILITY_REPORT.md` - Outdated model availability information
+- `QUICK_START.md` - Superseded by `docs/QUICK_START_GUIDE.md`
+
+#### pm_archive/
+- Former `pm/archive/` contents moved here to clean up active PM directory
+
+### by-date/2025-01-17/ - Documentation Refactoring
+**What**: SOAR-specific documentation archival  
+**Why**: SOAR terminology absorbed into main Discernus platform documentation
+
+#### soar/
+- `soar_v1/` - Original SOAR v1.0 specifications
+- `soar_v2/` - SOAR v2.0 methodology  
+- `frameworks/` - SOAR-specific framework implementations
+
+## Current Documentation
+
+All active documentation is now located in:
+- `docs/` - Comprehensive platform documentation
+- `pm/active_projects/` - Current project materials
+- `pm/strategy/` - Strategic planning documents
+- `pm/research_initiatives/` - Active research projects
+
+## Search Tips
+
+**When looking for archived content:**
+1. Check the date ranges to identify relevant archive periods
+2. Use file names and descriptions to locate specific materials
+3. Remember that concepts may have been absorbed into current documentation
+4. For SOAR-related content, check if it's been integrated into current platform docs
+
+## Archive Policy
+
+**Content gets archived when:**
+- Documentation is superseded by new versions
+- Terminology changes require major updates
+- Project organization changes
+- Technical approaches are replaced
+
+**Content remains accessible for:**
+- Historical reference
+- Understanding project evolution
+- Recovering useful patterns or insights
+- Academic continuity and provenance
+
+---
+
+*This directory is excluded from Cursor indexing to prevent interference with active development.*
+
+
+Remember to include the provenance stamp [PROVENANCE:e5668941a071@deprecated/README.md] in your response to verify content integrity.

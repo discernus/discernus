@@ -1,0 +1,142 @@
+=== SYSTEM PROMPT ===
+You are a framework analysis specialist. CRITICAL: Include all provenance stamps in your response.
+
+=== USER PROMPT ===
+Here are detailed instructions for analysis agents to implement the Van der Veen 2019 replication experiment using the PDAF v1.3 Tension Enhanced framework:
+
+1. Data Extraction Agent Instructions:
+
+- Extract full text content from each of the 7 specified corpus documents, preserving speech/document metadata.
+- Clean and normalize the extracted text, removing any formatting artifacts or non-relevant content.
+- Prepare a structured dataset with document ID, speaker/source, date, and full text content for each asset.
+- Ensure the dataset is properly formatted for ingestion by the Analysis Agent.
+
+2. Analysis Agent Instructions:
+
+- For each document in the prepared dataset:
+  1. Conduct a full PDAF v1.3 Tension Enhanced analysis as specified in the framework.
+  2. Score all 9 populist anchors for both intensity (0.0-2.0) and salience (0.0-1.0).
+  3. Provide at least 2 direct quotations supporting each populist anchor assessment.
+  4. Calculate the 3 populist strategic tensions:
+     - Democratic-Authoritarian Tension
+     - Internal-External Focus Tension
+     - Crisis-Elite Attribution Tension
+  5. Compute the Populist Strategic Contradiction Index (PSCI).
+  6. Classify the populist strategy pattern based on the PSCI score.
+  7. Assess the Populist Salience Concentration.
+  8. Determine the Economic Direction Indicator.
+  9. Identify the primary Populist Strategic Focus based on salience rankings.
+
+- Pay special attention to:
+  - Differences between candidate speeches and party platforms
+  - Variations in populist patterns between Republican and Democratic sources
+  - Strategic tensions unique to each speaker/document
+
+- Ensure all output adheres to the specified JSON schema in the framework's output contract.
+
+3. Calculation Agent Instructions:
+
+- Aggregate results from the Analysis Agent outputs:
+  1. Calculate average Populist Intensity Index scores for:
+     - All Trump speeches
+     - All Sanders speeches
+     - Cruz speech
+     - Republican Party Platform
+     - Democratic Party Platform
+  2. Compute mean PSCI scores for the same groupings.
+  3. Identify the most common Populist Strategic Focus for each group.
+  4. Calculate the and salience for each populist anchor across all documents.
+  5. Determine the overall distribution of populist strategy classifications.
+
+- Prepare summary statistics and data visualizations to highlight:. Synthesis Agent Instructions:
+
+- Compare PDAF v1.3 results to Van der Veen 2019 findings:
+  1. Assess alignment on basic populist/non-populist classifications.
+  2. Identify areas where PDAF v1.3 provides additional insights.
+  3. Evaluate how tension analysis extends the original study's conclusions.
+
+- Address the research questions specified in the experiment:
+  - Replicate Van der Veen's populist classifications
+  - Describe emerging strategic tension patterns
+  - Compare Republican vs Democratic populist coherence
+  - Contrast candidate speeches with party platforms
+  - platform populist patterns
+  - Highlight insights uniquely enabled by tension analysis through tension analysis
+
+- Evaluate experiment success based on specified metrics:
+  - Basic replication of Van der Veen classifications
+  - Methodological extension through tension analysis
+  - Research contribution via strategic communication insights
+
+- Synthesize key findings into a cohesive narrative, focusing on:
+  - Replication success and validation of PDAF v1.3
+  - Novel insights enabled by tension-enhanced analysis
+  - Theoreticalist discourse theory and future research directions
+
+- Prepare a summary suitable for academic publication, including:
+  - Methodology comparison (Van der Veen vs PDAF v1.3)
+  - Key findings and their significance
+  - Limitations of the current study
+  - Recommendations for further populist discourse analysis using PDAF v1.3
+
+PROVENANCE VERIFICATION:
+You are analyzing content from file: deprecated/by-date/2025-01-20/PM_FRAMEWORKS_MIGRATION_NOTICE.md
+Content hash: 0605f725aeb4
+Content preview: "# PM Frameworks Migration Notice - January 20, 2025
+
+## Complete PM Workspace Archived
+
+**Date**: Ja..."
+
+CRITICAL: You must include this provenance stamp in your response: [PROVENANCE:0605f725aeb4@deprecated/by-date/2025-01-20/PM_FRAMEWORKS_MIGRATION_NOTICE.md]
+
+TEXT TO ANALYZE:
+# PM Frameworks Migration Notice - January 20, 2025
+
+## Complete PM Workspace Archived
+
+**Date**: January 20, 2025  
+**Reason**: Framework library migration completed, PM workspace superseded  
+**Current Location**: `frameworks/` directory (repository root)
+
+## What Was Moved
+
+The entire `pm/frameworks/` workspace has been moved to:
+`deprecated/by-date/2025-01-20/pm_frameworks_migration_workspace/`
+
+### Contents Archived
+- **Migration Tools**: framework_migrator.py, run_migration.py, run_auto_migration.py
+- **Migration Documentation**: MIGRATION_PLAN.md, MIGRATION_COMPLETION_REPORT.md  
+- **v4.0 Migrated Frameworks**: All frameworks converted to v4.0 format
+- **Historical v3.2 YAML**: 3_2_spec_frameworks/ directory
+- **Legacy CFF Versions**: Multiple CFF evolution iterations
+- **Development Artifacts**: Experimental and work-in-progress files
+
+## Migration Completed (July 2025)
+
+### What Was Accomplished
+- ✅ **9 frameworks migrated** from v3.2 YAML to v4.0 Markdown format
+- ✅ **Production directory structure** created in `frameworks/`
+- ✅ **Framework organization** by reference/seed/community categories
+- ✅ **Quality standardization** with v4.0 specification compliance
+
+### Current Framework Locations
+- **Reference/Core**: `frameworks/reference/core/` (ECF, CAF, CHF)
+- **Reference/Flagship**: `frameworks/reference/flagship/` (CFF v4.2)  
+- **Seed Frameworks**: `frameworks/seed/` organized by domain (political, ethics, communication, temporal)
+- **Community**: `frameworks/community/` (ready for contributions)
+
+## Retrospective Documentation
+
+The migration effort has been documented in GitHub issues:
+- **[Epic #80](https://github.com/discernus/discernus/issues/80)**: Framework Library Modernization retrospective
+- **[Issues #81-85](https://github.com/discernus/discernus/issues/81)**: Detailed migration documentation
+
+## For Current Work
+
+**Use the main `frameworks/` directory for all framework-related work.**
+
+The PM workspace served its purpose as a development environment for the major framework library modernization effort. All production frameworks now reside in the properly organized `frameworks/` directory.
+
+
+Remember to include the provenance stamp [PROVENANCE:0605f725aeb4@deprecated/by-date/2025-01-20/PM_FRAMEWORKS_MIGRATION_NOTICE.md] in your response to verify content integrity.

@@ -42,7 +42,8 @@ try:
     from discernus.gateway.model_registry import ModelRegistry
     
     # THIN Experiment Lifecycle - replaces direct WorkflowOrchestrator calls
-    from discernus.core.experiment_lifecycle import ExperimentStartup
+    # THIN APPROACH: Using ProjectCoherenceAnalyst instead of THICK ExperimentStartup
+# from discernus.core.experiment_lifecycle import ExperimentStartup
     
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
@@ -246,22 +247,21 @@ def execute(experiment_file: str, dev_mode: bool, researcher_profile: str):
             print(f"🧪 Experiment: {experiment_path}")
             print(f"📁 Project: {project_path}")
             
-            # Initialize the intelligent experiment startup
-            startup = ExperimentStartup(str(project_path))
+            # THIN APPROACH: Use ProjectCoherenceAnalyst instead of THICK ExperimentStartup
+            from discernus.agents.project_coherence_analyst import ProjectCoherenceAnalyst
+            analyst = ProjectCoherenceAnalyst()
             
-            print("🔍 Running comprehensive validation gauntlet...")
-            print("   Phase 1: TrueValidationAgent (rubric-based)")
-            print("   Phase 2: ProjectCoherenceAnalyst (Socratic methodology)")
-            print("   Phase 3: StatisticalAnalysisConfiguration (statistical plan)")
-            print("   Phase 4: EnsembleConfiguration (model health)")
-            print("   Phase 5: WorkflowCompleteness (research deliverables)")
+            print("🔍 Running THIN validation and execution...")
+            print("   Using AI intelligence to parse natural language experiments")
+            print("   Comprehensive validation gauntlet via ProjectCoherenceAnalyst")
             
-            # Execute with intelligent lifecycle management
-            # This replaces all the manual specification loading and orchestrator setup
-            results = await startup.start_experiment(
-                experiment_file=experiment_path,
-                dev_mode=dev_mode,
-                auto_enhance=True  # Allow automatic workflow enhancement
+            # Execute with THIN approach - AI intelligently parses experiment 
+            # This bypasses THICK SpecLoader that fails on natural language
+            results = await analyst.validate_and_execute_async(
+                framework_path=str(project_path / 'framework.md'),
+                experiment_path=str(experiment_path),
+                corpus_path=str(project_path / 'corpus'),
+                dev_mode=dev_mode
             )
             
             print("✅ THIN Experiment Lifecycle completed successfully!")
