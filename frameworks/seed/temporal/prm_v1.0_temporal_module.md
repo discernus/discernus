@@ -135,7 +135,7 @@ The Populist Rhetoric Module (PRM) v1.0 represents the first temporal module in 
 
 ---
 
-## Integration with Trinity Core
+## Integration with Core Modules
 
 ### Relationship to ECF v1.0 (Emotional Climate)
 - **Independent Operation**: Populist rhetoric can create any emotional climate (fear, hope, enmity, etc.)
@@ -193,11 +193,11 @@ The Populist Rhetoric Module (PRM) v1.0 represents the first temporal module in 
 
 ### Integration Calculations
 
-**Trinity + Populist Integration**:
+**Core Modules + Populist Integration**:
 - Combined with ECF for emotional-populist analysis
 - Combined with CVF for character-populist analysis  
 - Combined with IDF for democratic health-populist analysis
-- Full Trinity + PRM for comprehensive contemporary political assessment
+- Full Core Modules + PRM for comprehensive contemporary political assessment
 
 ---
 
@@ -226,22 +226,22 @@ The Populist Rhetoric Module (PRM) v1.0 represents the first temporal module in 
   "display_name": "Populist Rhetoric Module v1.0 - Temporal Module",
   "architecture": "temporal_module",
   "temporal_validity": "2010s_2030s",
-  "trinity_integration": true,
-  "purpose": "Contemporary populist political communication assessment as temporal complement to Trinity Core",
+  "core_module_integration": true,
+  "purpose": "Contemporary populist political communication assessment as temporal complement to Core Modules",
   "theoretical_foundation": ["mudde_populism_theory", "anti_institutional_mobilization", "authentic_representation_claims"],
   "historical_precedent": "Era-specific political rhetoric analysis (1920s Marxist/Fascist modules)",
   "future_evolution": "Replacement by AI Rights, Climate, or other era-specific modules",
   "analysis_variants": {
     "default": {
-      "description": "Complete six-dimension populist rhetoric assessment with Trinity Core integration capability",
-      "analysis_prompt": "You are an expert analyst specializing in contemporary populist political communication and democratic mobilization strategies. Analyze the provided text using the Populist Rhetoric Module v1.0. This temporal module captures era-specific populist communication patterns from the 2010s-2020s that complement timeless Trinity Core analysis. Score six dimensions independently from 0.0 to 1.0: CORE POPULIST APPEALS: People vs Elite Framing (0.0-1.0): Politics as conflict between ordinary people and privileged elite - look for 'establishment', 'elite', 'ruling class', 'real Americans', 'working families', 'us versus them', 'drain the swamp'. Authentic Representation Claims (0.0-1.0): Assertions about representing genuine popular will - look for 'real representation', 'genuine voice', 'listening to people', 'straight talk', 'fake representation', 'puppet politicians'. Anti-System Mobilization (0.0-1.0): Mobilization against existing systems - look for 'rigged system', 'broken system', 'political outsider', 'time for change', 'revolution', 'transformation'. POPULIST MOBILIZATION STRATEGIES: Direct Democracy Appeals (0.0-1.0): Direct popular sovereignty emphasis - look for 'direct democracy', 'popular vote', 'bypass Congress', 'people decide', 'democratic mandate'. Common Sense vs Expertise (0.0-1.0): Popular wisdom over professional expertise - look for 'common sense', 'practical wisdom', 'out-of-touch experts', 'ivory tower', 'expert failure'. Cultural Authenticity Claims (0.0-1.0): Authentic cultural values versus cosmopolitan alternatives - look for 'traditional values', 'cultural heritage', 'real culture', 'cultural displacement', 'foreign influence'. Focus on contemporary populist communication patterns specific to 2010s-2020s political mobilization. This temporal module complements Trinity Core frameworks and enables comprehensive contemporary political analysis."
+      "description": "Complete six-dimension populist rhetoric assessment with Core Module integration capability",
+      "analysis_prompt": "You are an expert analyst specializing in contemporary populist political communication and democratic mobilization strategies. Analyze the provided text using the Populist Rhetoric Module v1.0. This temporal module captures era-specific populist communication patterns from the 2010s-2020s that complement timeless Core Module analysis. Score six dimensions independently from 0.0 to 1.0: CORE POPULIST APPEALS: People vs Elite Framing (0.0-1.0): Politics as conflict between ordinary people and privileged elite - look for 'establishment', 'elite', 'ruling class', 'real Americans', 'working families', 'us versus them', 'drain the swamp'. Authentic Representation Claims (0.0-1.0): Assertions about representing genuine popular will - look for 'real representation', 'genuine voice', 'listening to people', 'straight talk', 'fake representation', 'puppet politicians'. Anti-System Mobilization (0.0-1.0): Mobilization against existing systems - look for 'rigged system', 'broken system', 'political outsider', 'time for change', 'revolution', 'transformation'. POPULIST MOBILIZATION STRATEGIES: Direct Democracy Appeals (0.0-1.0): Direct popular sovereignty emphasis - look for 'direct democracy', 'popular vote', 'bypass Congress', 'people decide', 'democratic mandate'. Common Sense vs Expertise (0.0-1.0): Popular wisdom over professional expertise - look for 'common sense', 'practical wisdom', 'out-of-touch experts', 'ivory tower', 'expert failure'. Cultural Authenticity Claims (0.0-1.0): Authentic cultural values versus cosmopolitan alternatives - look for 'traditional values', 'cultural heritage', 'real culture', 'cultural displacement', 'foreign influence'. Focus on contemporary populist communication patterns specific to 2010s-2020s political mobilization. This temporal module complements Core Module frameworks and enables comprehensive contemporary political analysis."
     }
   },
   "calculation_spec": {
     "core_populist_appeal_score": "(people_vs_elite_score + authentic_representation_score + anti_system_mobilization_score) / 3",
     "populist_mobilization_score": "(direct_democracy_score + common_sense_vs_expertise_score + cultural_authenticity_score) / 3", 
     "populist_rhetoric_index": "(core_populist_appeal_score + populist_mobilization_score) / 2",
-    "trinity_integration_compatibility": "Full modular integration with ECF, CVF, and IDF frameworks"
+    "core_module_integration_compatibility": "Full modular integration with ECF, CVF, and IDF frameworks"
   },
   "output_contract": {
     "schema": {
@@ -267,7 +267,7 @@ The Populist Rhetoric Module (PRM) v1.0 represents the first temporal module in 
       "overall_analysis_confidence": "number",
       "populist_mobilization_patterns": "string",
       "temporal_specificity_assessment": "string",
-      "trinity_integration_recommendations": "string"
+      "core_module_integration_recommendations": "string"
     },
     "instructions": "IMPORTANT: Your response MUST be a single, valid JSON object and nothing else. Do not include any text, explanations, or markdown code fences before or after the JSON object."
   }
@@ -279,6 +279,6 @@ The Populist Rhetoric Module (PRM) v1.0 represents the first temporal module in 
 ---
 
 **Temporal Module Status**: ✅ **Production-Ready Contemporary Analysis**  
-**Trinity Integration**: ✅ **Full Modular Compatibility with ECF, CVF, IDF**  
+**Core Module Integration**: ✅ **Full Modular Compatibility with ECF, CVF, IDF**  
 **Historical Awareness**: ✅ **Era-Specific with Future Evolution Path**  
 **Democratic Applications**: ✅ **Populist Impact Assessment + Constitutional Health Integration**
