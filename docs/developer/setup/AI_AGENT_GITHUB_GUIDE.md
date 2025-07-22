@@ -32,6 +32,103 @@ If another agent told you "I can't create GitHub Issues," they were wrong. Here'
 
 ---
 
+## 🚨 **CRITICAL: Complete Authentication Reset (When Basic Fixes Fail)**
+
+**When to Use**: If you're getting persistent HTTP 401 errors, authentication conflicts, or mixed SSH/HTTPS protocol issues after trying basic fixes.
+
+**Root Cause**: Conflicting authentication methods - SSH git remotes with HTTPS GitHub CLI, stale environment variables, or conda-related token conflicts.
+
+### **5-Step Complete Reset Procedure** (VERIFIED WORKING)
+
+#### **Step 1: Diagnose the Problem**
+```bash
+# Check current authentication state
+gh auth status
+
+# Check for protocol conflicts  
+echo "Git remote:" && git remote -v
+echo "SSH connectivity:" && ssh -T git@github.com -o ConnectTimeout=10 -o BatchMode=yes
+echo "Environment variables:" && env | grep -i github
+```
+
+**Common Conflict Pattern:**
+- Git remote: `git@github.com:user/repo.git` (SSH)
+- GitHub CLI: `Git operations protocol: https` (HTTPS)
+- Result: HTTP 401 errors and authentication confusion
+
+#### **Step 2: Complete Authentication Reset**
+```bash
+# Logout from GitHub CLI
+gh auth logout --hostname github.com || echo "No session to logout"
+
+# Clear conflicting environment variables
+unset GITHUB_TOKEN && unset GH_TOKEN && unset GITHUB_USER && unset GH_USER
+
+# Test SSH connectivity (should work independently)
+ssh -T git@github.com -o ConnectTimeout=10 -o BatchMode=yes
+```
+
+#### **Step 3: Rebuild with Consistent Protocol**
+```bash
+# Rebuild GitHub CLI authentication using SSH (matches git remote)
+gh auth login --hostname github.com --git-protocol ssh --scopes "repo,gist,read:org,workflow"
+
+# This will:
+# 1. Upload SSH key to GitHub account
+# 2. Configure CLI to use SSH protocol  
+# 3. Match git operations protocol
+```
+
+#### **Step 4: Verify Consistent Configuration**
+```bash
+# Verify authentication is working
+gh auth status
+# Should show: "Git operations protocol: ssh"
+
+# Test GitHub CLI operations
+gh issue list --limit 3
+gh issue view 9 | cat  # Should work without HTTP 401 errors
+```
+
+#### **Step 5: Create Permanent Prevention**
+```bash
+# Create GitHub CLI config to prevent future conflicts
+mkdir -p ~/.config/gh
+cat > ~/.config/gh/config.yml << 'EOF'
+version: "1"
+git_protocol: ssh
+pager: cat
+hosts:
+  github.com:
+    git_protocol: ssh
+EOF
+
+# Add shell protection (prevents token conflicts)
+echo '
+# GitHub Authentication Protection
+unset GITHUB_TOKEN 2>/dev/null
+unset GH_TOKEN 2>/dev/null  
+export GH_PAGER="cat"  # Prevent pager hanging
+' >> ~/.zshrc
+```
+
+### **Success Verification Checklist**
+After reset, these should all work without errors:
+- [ ] `gh auth status` shows SSH protocol active
+- [ ] `gh issue view 9 | cat` works without HTTP 401 
+- [ ] `gh issue list` returns results quickly
+- [ ] `git fetch --dry-run` works (SSH git operations)
+- [ ] No authentication prompts or hanging
+
+### **When This Reset is Needed**
+- ✅ **Persistent HTTP 401 errors** despite token clearing
+- ✅ **Conda/virtual environment conflicts** with GitHub tokens
+- ✅ **Mixed SSH/HTTPS protocol confusion**
+- ✅ **Authentication works sometimes but fails randomly**
+- ✅ **SSH keys work but GitHub CLI fails**
+
+---
+
 ## 🚨 **CRITICAL: Pager Issue Fix**
 
 **Problem**: `gh issue view` commands hang or truncate due to pager (less/more) issues in AI agent terminals.
@@ -236,55 +333,6 @@ contact_links:
 
 ---
 
-## 🛠️ **Method 3: Programmatic Creation (FALLBACK)**
-
-If GitHub CLI fails, use the web interface approach:
-
-### **Guide User to Web Interface**
-```
-Please create an issue manually:
-
-1. Go to: https://github.com/[owner]/[repo]/issues/new
-2. Select appropriate template
-3. Fill in required fields
-4. Submit issue
-
-Then tell me the issue number and I'll reference it in our work.
-```
-
----
-
-## 📋 **Complete Working Example**
-
-Here's exactly what we did in discernus project:
-
-```bash
-# 1. Fix authentication
-unset GITHUB_TOKEN
-gh auth status  # Confirmed working
-
-# 2. Create labels
-gh label create "bug" --color "d73a4a" --description "System defects"
-gh label create "enhancement" --color "a2eeef" --description "New capabilities"
-gh label create "research" --color "0075ca" --description "Academic/methodological concerns"
-gh label create "release-blocker" --color "b60205" --description "Critical for 1.0 release"
-gh label create "orchestration" --color "f9d0c4" --description "Workflow system issues"
-gh label create "synthesis" --color "c2e0c6" --description "Report generation issues"
-
-# 3. Create issue templates (files shown above)
-
-# 4. Create actual issues
-gh issue create --title "Resume functionality creates duplicate sessions instead of continuing" --body "CRITICAL BUG: Financial Impact..." --label "bug,release-blocker"
-
-# 5. Test functionality
-gh issue create --title "Test Issue: Verify GitHub CLI Integration" --body "Test description" --label "enhancement"
-gh issue close 12 --comment "Test completed successfully"
-```
-
-**Result**: Created issues #9, #10, #11, #12 - all successful!
-
----
-
 ## ⚠️ **Common Issues & Solutions**
 
 ### **Pager Hanging/Truncation** (MOST COMMON)
@@ -396,7 +444,32 @@ For any agent implementing GitHub Issues:
 
 ---
 
+## 🔗 **Related Issues & Cross-References**
+
+### **Python/Virtual Environment Problems?**
+If you're having Python import errors, virtual environment issues, or project setup problems, see:
+📖 **[CURSOR_AGENT_ENVIRONMENT_GUIDE.md](CURSOR_AGENT_ENVIRONMENT_GUIDE.md)**
+
+**When Both Guides Apply:**
+- Creating GitHub issues from Python scripts ➜ Use both environment activation AND GitHub auth
+- GitHub CLI hanging in development environment ➜ Check both shell config AND virtual environment
+- Project setup failing with GitHub operations ➜ Fix environment first, then GitHub auth
+
+### **Command Integration Pattern**
+```bash
+# For GitHub operations requiring project context:
+source venv/bin/activate && python3 script_that_uses_gh_cli.py
+
+# For standalone GitHub CLI operations:
+gh auth status  # No virtual environment needed
+gh issue view 9 | cat  # No virtual environment needed
+```
+
+---
+
 **Last Updated**: January 22, 2025  
 **Verified Working**: discernus/discernus repository  
 **Issues Created**: #9, #10, #11, #12 (all successful)  
-**Critical Fix**: Pager bypass with `| cat` prevents hanging/truncation 
+**Critical Fix**: Pager bypass with `| cat` prevents hanging/truncation  
+**Major Update**: Complete authentication reset procedure added (verified working July 22, 2025)  
+**Authentication Issues**: SSH/HTTPS protocol conflicts now have comprehensive solution

@@ -131,15 +131,8 @@ python3 discernus_cli.py execute ./projects/policy_analysis/experiment.md
 **Corpus**: News articles, press releases, editorial content
 
 ```bash
-python3 -c "
-from discernus.agents.validation_agent import ValidationAgent
-agent = ValidationAgent()
-agent.validate_and_execute_sync(
-    'frameworks/source_credibility.md',
-    'experiments/media_bias_study.md', 
-    'corpus/news_sources/'
-)
-"
+# Execute with THIN Experiment Lifecycle validation gauntlet
+python3 discernus_cli.py execute ./projects/source_credibility/experiment.md
 ```
 
 **Journalism Benefits**:
@@ -150,15 +143,18 @@ agent.validate_and_execute_sync(
 
 ## Understanding the Workflow
 
-### 1. Validation Phase
-The `ValidationAgent` performs comprehensive validation:
-- **Framework Completeness**: Ensures analytical framework meets quality standards
-- **Experiment Design**: Validates research methodology and statistical approach
-- **Corpus Quality**: Checks data format, encoding, and accessibility
+### 1. THIN Experiment Lifecycle - Validation Gauntlet Phase
+The intelligent startup system performs comprehensive validation:
+- **TrueValidationAgent**: Framework and experiment specification validation
+- **ProjectCoherenceAnalyst**: Socratic research methodology validation
+- **StatisticalAnalysisConfigurationAgent**: Statistical plan validation  
+- **EnsembleConfigurationAgent**: Model health checks and resource planning
+- **WorkflowCompletenessValidator**: Ensures SynthesisAgent exists for research deliverables
+- **Enhancement**: Automatic detection and fixing of incomplete workflows
 - **Cost Estimation**: Provides upfront pricing for the entire analysis
 
 ### 2. Orchestration Phase
-The `WorkflowOrchestrator` manages the analysis:
+The `WorkflowOrchestrator` manages the validated analysis:
 - **Model Selection**: Chooses optimal LLMs based on task requirements and budget
 - **Ensemble Analysis**: Multiple LLMs apply framework to each text
 - **Adversarial Review**: Models challenge and validate each other's analysis
@@ -175,18 +171,10 @@ The system produces comprehensive results:
 
 ### Upfront Cost Estimation
 ```bash
-# Get cost estimate before running analysis
-python3 -c "
-from discernus.agents.validation_agent import ValidationAgent
-agent = ValidationAgent()
-estimate = agent.estimate_cost_only(
-    'path/to/framework.md',
-    'path/to/experiment.md',
-    'path/to/corpus/'
-)
-print(f'Estimated cost: ${estimate[\"total_cost\"]:.2f}')
-print(f'Estimated time: {estimate[\"duration_minutes\"]} minutes')
-"
+# Get cost estimate before running analysis (built into CLI)
+python3 discernus_cli.py validate ./my_project/experiment.md
+
+# The validation step provides upfront cost estimation as part of the THIN Lifecycle
 ```
 
 ### Budget Controls

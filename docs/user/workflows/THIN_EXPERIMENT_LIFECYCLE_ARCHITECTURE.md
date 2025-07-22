@@ -13,6 +13,8 @@ Issue #68 revealed a critical validation gap: experiments were **technically com
 ```
 OLD: CLI → WorkflowOrchestrator (direct execution)
 NEW: CLI → Lifecycle Management → WorkflowOrchestrator (intelligent handoff)
+      ├── ExperimentStartup (Issue #131) 
+      └── ExperimentResumption (Issue #132)
 ```
 
 ### Components
@@ -29,10 +31,14 @@ NEW: CLI → Lifecycle Management → WorkflowOrchestrator (intelligent handoff)
 - **Clean handoff**: Passes validated workflow to pristine orchestrator
 - **User consent**: Transparent about enhancements made
 
-#### 3. **ExperimentResumption** (Intelligent Resume)
-- **State discovery**: Enhanced state file finding
-- **Context validation**: Checks for workflow changes since interruption
-- **Clean continuation**: Seamless handoff to orchestrator
+#### 3. **ExperimentResumption** (Intelligent Resume) - Issue #132
+- **Enhanced state discovery**: Scans both `results/` and `experiments/` directories
+- **State integrity validation**: Verifies state files are complete and consistent
+- **Workflow change detection**: Compares current experiment.md to interrupted session  
+- **Resource validation**: Ensures models and dependencies are still available
+- **Progress assessment**: Determines exactly what work has been completed
+- **User guidance**: Presents clear resumption options and recommendations
+- **Clean continuation**: Seamless handoff to orchestrator with validated state
 
 #### 4. **WorkflowOrchestrator** (Stays Pristine)
 - **No changes**: Remains a pure execution engine
