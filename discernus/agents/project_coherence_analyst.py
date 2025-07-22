@@ -381,6 +381,7 @@ Your task is to assess the project's methodological soundness and return a singl
             
             initial_state = {
                 "project_path": str(project_path_obj),
+                "corpus_path": corpus_path,  # Add missing corpus_path that AnalysisAgent expects
                 "corpus_files": corpus_files,
                 "framework_content": framework_content,
                 "experiment_content": experiment_content,
