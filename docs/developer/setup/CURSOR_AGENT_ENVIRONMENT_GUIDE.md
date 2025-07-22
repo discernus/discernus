@@ -70,3 +70,35 @@ make check
 ---
 
 **Remember: These rules save Cursor usage and prevent velocity kills!** 
+
+---
+
+## 🔗 **Related Issues & Cross-References**
+
+### **GitHub Authentication Problems?**
+If you're getting GitHub CLI errors or authentication issues, see:
+📖 **[AI_AGENT_GITHUB_GUIDE.md](AI_AGENT_GITHUB_GUIDE.md)**
+
+**Common Integration Issues:**
+- GitHub tokens conflicting with conda environments ➜ Use GitHub reset procedure
+- `gh` commands hanging ➜ Use `| cat` suffix (see GitHub guide)
+- Mixed SSH/HTTPS protocols ➜ Complete authentication reset needed
+
+### **Virtual Environment + GitHub CLI Pattern**
+When using GitHub CLI commands in this project:
+```bash
+# For project-related GitHub commands
+source venv/bin/activate && gh issue create --title "Bug Report"
+
+# For pure GitHub CLI (no project dependencies)
+gh auth status  # No venv needed
+gh issue view 9 | cat  # No venv needed
+```
+
+### **Environment Variables**
+The GitHub guide adds these to your shell:
+```bash
+unset GITHUB_TOKEN 2>/dev/null  # Prevents auth conflicts
+export GH_PAGER="cat"          # Prevents hanging
+```
+These **complement** (don't conflict with) the Python environment setup. 

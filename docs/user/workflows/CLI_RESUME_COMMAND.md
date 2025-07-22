@@ -7,7 +7,7 @@ The `discernus resume` command enables resumption of interrupted experiments fro
 ## Basic Usage
 
 ```bash
-# Resume from latest state file
+# Resume with intelligent state analysis (default)
 discernus resume ./projects/my_experiment
 
 # Resume with specific options
@@ -15,6 +15,10 @@ discernus resume ./projects/my_experiment --state-file state_after_step_2.json
 discernus resume ./projects/my_experiment --from-step 3
 discernus resume ./projects/my_experiment --dry-run
 discernus resume ./projects/my_experiment --list-states
+
+# Intelligent vs Legacy resume modes
+discernus resume ./projects/my_experiment --intelligent    # Default: state analysis + validation
+discernus resume ./projects/my_experiment --legacy        # Legacy: direct state continuation
 ```
 
 ## Command Options
@@ -69,6 +73,29 @@ List all available state files for resumption, sorted by modification time.
 discernus resume ./projects/my_experiment --list-states
 ```
 
+### `--intelligent` / `--legacy`
+Choose between intelligent state analysis (default) or legacy direct resumption.
+
+**Intelligent Resume (Default):**
+- State integrity validation
+- Workflow change detection since interruption
+- Resource availability validation  
+- User guidance and multiple resumption options
+- Enhanced with Issue #132 smart resumption logic
+
+**Legacy Resume:**
+- Direct state file loading and continuation
+- Original resume behavior for backwards compatibility
+
+**Examples:**
+```bash
+# Intelligent resume with full state analysis
+discernus resume ./projects/my_experiment --intelligent
+
+# Legacy resume for backwards compatibility  
+discernus resume ./projects/my_experiment --legacy
+```
+
 **Output:**
 ```
 📁 Scanning for state files in: projects/my_experiment
@@ -81,9 +108,21 @@ discernus resume ./projects/my_experiment --list-states
    ...
 ```
 
-## Auto-Detection Logic
+## Intelligent Resumption Logic (Issue #132)
 
-The resume command automatically detects the resume point using intelligent logic:
+### Enhanced State Analysis (Default Mode)
+The intelligent resume performs comprehensive analysis before resumption:
+
+1. **Enhanced State Discovery**: Scans both `results/` and `experiments/` directory structures
+2. **State Integrity Validation**: Verifies state files are complete and consistent  
+3. **Workflow Change Detection**: Compares current experiment.md to interrupted session
+4. **Resource Validation**: Ensures required models and dependencies are still available
+5. **Progress Assessment**: Determines exactly what work has been completed
+6. **Resumption Point Analysis**: Identifies the precise resumption point with validation
+7. **User Guidance**: Presents clear options and recommendations
+
+### Legacy Auto-Detection (--legacy mode)
+The original resume logic for backwards compatibility:
 
 1. **State File Discovery**: Scans the project's `results/` directory for state files
 2. **Latest Selection**: Chooses the most recently modified state file if none specified
