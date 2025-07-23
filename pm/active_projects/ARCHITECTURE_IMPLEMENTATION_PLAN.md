@@ -1,7 +1,7 @@
 # Discernus Architecture - Implementation Plan
 
 **Last Updated**: July 24, 2025
-**Status**: Phase 1 - Foundational Agent Implementation
+**Status**: Phase 2 - Batch Intelligence & Dynamic Orchestration
 **Architectural Bible**: `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
 
 ---
@@ -10,7 +10,7 @@
 
 This document outlines the phased, question-driven implementation plan for the Discernus System Architecture. It serves as the active project plan, tracking tasks, component status, and key technical decisions.
 
-The current focus is **Phase 1**, which builds the foundational agents and proves the core pipeline from batch analysis to a single, deterministic synthesis output. This phase is designed to be a verifiable "hello world" for the new architecture, establishing a solid base before adding the complexity of dynamic orchestration and adversarial review.
+The current focus is **Phase 2**, which builds the foundational agents and proves the core pipeline from batch analysis to a single, deterministic synthesis output. This phase is designed to be a verifiable "hello world" for the new architecture, establishing a solid base before adding the complexity of dynamic orchestration and adversarial review.
 
 **Core Objective for Phase 1**:
 To answer "yes" to a sequential chain of questions that culminates in a single, linear workflow from one batch of documents to one deterministic statistical report, proving the core agent mechanics work as designed.
@@ -61,33 +61,17 @@ This is the definitive list of components required for the full architecture.
 
 This plan is a series of gates. We only proceed to the next phase once all questions in the current phase can be answered "yes".
 
-### Phase 1: Foundational Agent Implementation & Core Pipeline
+### Phase 1: Foundational Agent Implementation & Core Pipeline - ✅ COMPLETE
 
 **Goal:** To prove that the new, core agent types (`AnalyseBatchAgent`, `CorpusSynthesisAgent`) can execute a single, linear workflow from one batch of documents to one synthesis report.
 
-**Chain of Questions to Verify Success:**
-
-1.  **Can we manually create and enqueue a single `AnalyseBatch` task in Redis?**
-    *   *Test:* A simple script enqueues a task with multiple document and framework hashes.
-    *   *Success:* The task appears in the `tasks` stream and the `Router` correctly identifies it.
-
-2.  **Does the `AnalyseBatchAgent` successfully process this task?**
-    *   *Test:* The agent is spawned, it reads the task, calls the LLM with all documents and frameworks, and gets a valid response.
-    *   *Success:* A `batch_analysis` artifact is created in MinIO, containing **structured, numerical data only** (no qualitative synthesis).
-
-3.  **Does the completion of the `AnalyseBatch` task correctly trigger a single `CorpusSynthesis` task?**
-    *   *Test:* After the `AnalyseBatchAgent` finishes, we observe a *new* task of type `CorpusSynthesis` appear in the `tasks` stream.
-    *   *Success:* The `CorpusSynthesis` task is enqueued with the correct artifact hash pointing to the `batch_analysis` result.
-
-4.  **Does the `CorpusSynthesisAgent` successfully perform deterministic aggregation on the `batch_analysis` artifact?**
-    *   *Test:* The agent is spawned, retrieves the artifact, and performs mathematical aggregation.
-    *   *Success:* A `corpus_synthesis` artifact is created in MinIO containing a **statistical report only** (e.g., means, confidence intervals), with no qualitative narrative.
+**Outcome: SUCCESS.** All four validation questions were answered "yes" by the automated test runner (`scripts/phase1_test_runner.py`), confirming the foundational pipeline is sound.
 
 **Definition of Done for Phase 1:** We can reliably execute a single, manually-constructed batch analysis and have it result in a final, statistically-sound synthesis report, with all intermediate artifacts correctly stored and linked.
 
-## 📊 Phase 1 Implementation Status (July 24, 2025)
+## 📊 Phase 1 Implementation Status (Concluded)
 
-### ✅ Components Completed
+### ✅ Components Completed & Validated
 
 1. **`AnalyseBatchAgent`** - `agents/AnalyseBatchAgent/main.py`
    - ✅ Multi-document, multi-framework batch processing
@@ -102,7 +86,7 @@ This plan is a series of gates. We only proceed to the next phase once all quest
    - ✅ Statistical report output only (no qualitative narrative)
    - ✅ External prompt template with statistical computation instructions
    - ✅ Cross-batch data validation and error handling
-   - ✅ Cost-optimized model usage (claude-3-haiku)
+   - ✅ Cost-optimized model usage (gemini-2.5-flash)
 
 3. **Router Updates** - `scripts/router.py`
    - ✅ Added `analyse_batch` and `corpus_synthesis` agent routing
@@ -110,7 +94,7 @@ This plan is a series of gates. We only proceed to the next phase once all quest
 
 4. **Testing Framework** - `scripts/phase1_test_runner.py`
    - ✅ Implements all 4 Phase 1 validation questions
-   - ✅ Manual testing workflow with clear success criteria
+   - ✅ Fully automated testing workflow with clear success criteria
    - ✅ Artifact validation and structure checking
    - ✅ Full pipeline testing capability
 
@@ -123,26 +107,6 @@ This plan is a series of gates. We only proceed to the next phase once all quest
         *   If successful, the content is passed as a raw text string to the LLM.
         *   If it fails, the agent reverts to base64 encoding the raw binary content.
     *   **Status**: This change has been documented in the architectural bible and must be reflected in the agent's implementation. This is a **provisional** decision; if it proves problematic, the system will revert to a strict binary-only approach.
-
-### 🎯 Ready for Phase 1 Validation
-
-**Current Status**: All foundational components built and ready for testing.
-
-**Next Steps**:
-1. Start Redis and MinIO services
-2. Run Phase 1 test runner: `python3 scripts/phase1_test_runner.py --test full_pipeline`
-3. Validate each question in sequence
-4. Confirm Phase 1 Definition of Done criteria
-
-**Testing Commands**:
-```bash
-# Test individual questions
-python3 scripts/phase1_test_runner.py --test question1
-python3 scripts/phase1_test_runner.py --test question2 --task-id <task_id>
-
-# Test full pipeline with manual intervention points
-python3 scripts/phase1_test_runner.py --test full_pipeline
-```
 
 ---
 
