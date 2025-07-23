@@ -12,8 +12,12 @@ import os
 import hashlib
 import time
 import logging
-from typing import Dict, Any
+from typing import Dict, Any, List
+from pathlib import Path
 from minio_client import put_artifact, artifact_exists
+
+# Import PEL cleanup functionality
+from cleanup_redis_pel import cleanup_pending_tasks
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - CLI - %(message)s')
@@ -28,6 +32,100 @@ class DiscernusCLIError(Exception):
     """CLI-specific exceptions"""
     pass
 
+class ArtifactManifestWriter:
+    """Manages artifact manifests for experiment runs"""
+    
+    def __init__(self, run_id: str):
+        self.run_id = run_id
+        self.manifest_dir = Path(f'runs/{run_id}')
+        self.manifest_file = self.manifest_dir / 'manifest.json'
+        self.artifacts = []
+        
+        # Create runs directory
+        self.manifest_dir.mkdir(parents=True, exist_ok=True)
+        
+    def add_artifact(self, sha256: str, uri: str, task_type: str, 
+                    parent_sha256: str = None, prompt_hash: str = None, 
+                    original_filename: str = None, mime_type: str = None):
+        """Add artifact to manifest"""
+        artifact_entry = {
+            'sha256': sha256,
+            'uri': uri,
+            'parent_sha256': parent_sha256,
+            'task_type': task_type,
+            'timestamp': time.time(),
+            'prompt_hash': prompt_hash,
+            'original_filename': original_filename,
+            'mime_type': mime_type
+        }
+        self.artifacts.append(artifact_entry)
+        
+        # Write manifest immediately for fault tolerance
+        self._write_manifest()
+        
+    def _write_manifest(self):
+        """Write manifest to JSON file"""
+        manifest_data = {
+            'run_id': self.run_id,
+            'created': time.time(),
+            'total_artifacts': len(self.artifacts),
+            'artifacts': self.artifacts
+        }
+        
+        with open(self.manifest_file, 'w') as f:
+            json.dump(manifest_data, f, indent=2)
+            
+    def generate_markdown_summary(self) -> str:
+        """Generate human-readable Markdown summary from JSON manifest"""
+        md_content = f"""# Experiment Run Manifest: {self.run_id}
+
+**Generated**: {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}  
+**Total Artifacts**: {len(self.artifacts)}
+
+## Artifact Overview
+
+| SHA256 (12 chars) | Task Type | Original Filename | Timestamp |
+|-------------------|-----------|-------------------|-----------|
+"""
+        
+        for artifact in self.artifacts:
+            sha256_short = artifact['sha256'][:12] + '...'
+            timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(artifact['timestamp']))
+            filename = artifact.get('original_filename', 'N/A')
+            task_type = artifact['task_type']
+            
+            md_content += f"| `{sha256_short}` | {task_type} | {filename} | {timestamp} |\n"
+            
+        md_content += f"""
+## Provenance Chain
+
+This manifest provides complete artifact traceability for academic reproducibility:
+
+- **Content-Addressable Storage**: All artifacts stored by SHA256 hash
+- **Parent Relationships**: `parent_sha256` tracks derivation chains
+- **Task Classification**: `task_type` identifies processing stage
+- **Temporal Ordering**: `timestamp` provides execution chronology
+
+## File Reconstruction
+
+Original files can be reconstructed from MinIO storage:
+
+```bash"""
+
+        for artifact in self.artifacts:
+            if artifact.get('original_filename'):
+                md_content += f"\n# Retrieve {artifact['original_filename']}\n"
+                md_content += f"python3 scripts/minio_client.py get {artifact['sha256']} {artifact['original_filename']}"
+                
+        md_content += "\n```\n"
+        
+        # Write markdown summary
+        md_file = self.manifest_dir / 'manifest.md'
+        with open(md_file, 'w') as f:
+            f.write(md_content)
+            
+        return md_content
+
 class DiscernusCLI:
     """CLI for experiment orchestration"""
     
@@ -41,18 +139,26 @@ class DiscernusCLI:
             with open(experiment_file) as f:
                 experiment = yaml.safe_load(f)
             
-            logger.info(f"Running experiment: {experiment.get('name', 'unnamed')}")
+            run_id = experiment.get('name', f"run_{int(time.time())}")
+            logger.info(f"Running experiment: {experiment.get('name', 'unnamed')} (run_id: {run_id})")
             logger.info(f"Mode: {mode}")
             
-            # Pre-hash all artifacts
+            # Initialize artifact manifest
+            manifest = ArtifactManifestWriter(run_id)
+            
+            # Pre-hash all artifacts with manifest tracking
             framework_hash = self._store_file_artifact(experiment['framework_file'])
+            manifest.add_artifact(
+                sha256=framework_hash,
+                uri=f"minio://discernus-artifacts/{framework_hash}",
+                task_type='framework',
+                original_filename=os.path.basename(experiment['framework_file']),
+                mime_type='text/markdown'
+            )
             logger.info(f"Framework stored: {framework_hash[:12]}...")
             
             corpus_hashes = {}
             corpus_dir = experiment['corpus_dir']
-            
-            # Support binary file types for THIN testing
-            supported_extensions = ['.txt', '.md', '.docx', '.pdf', '.doc', '.rtf']
             
             # If experiment specifies specific files, use those
             if 'corpus_files' in experiment:
@@ -61,37 +167,81 @@ class DiscernusCLI:
                     if os.path.exists(filepath):
                         file_hash = self._store_file_artifact(filepath)
                         corpus_hashes[filename] = file_hash
+                        
+                        # Add to manifest
+                        manifest.add_artifact(
+                            sha256=file_hash,
+                            uri=f"minio://discernus-artifacts/{file_hash}",
+                            task_type='corpus',
+                            original_filename=filename,
+                            mime_type=self._get_mime_type(filename)
+                        )
                         logger.info(f"Binary corpus file stored: {filename} -> {file_hash[:12]}...")
                     else:
                         logger.warning(f"Specified corpus file not found: {filename}")
             else:
-                # Auto-discover files with supported extensions
+                # Auto-discover files (remove file extension filtering per your feedback)
                 for filename in os.listdir(corpus_dir):
-                    if any(filename.endswith(ext) for ext in supported_extensions):
-                        filepath = os.path.join(corpus_dir, filename)
+                    filepath = os.path.join(corpus_dir, filename)
+                    if os.path.isfile(filepath):  # Store ANY file type
                         file_hash = self._store_file_artifact(filepath)
                         corpus_hashes[filename] = file_hash
+                        
+                        # Add to manifest
+                        manifest.add_artifact(
+                            sha256=file_hash,
+                            uri=f"minio://discernus-artifacts/{file_hash}",
+                            task_type='corpus',
+                            original_filename=filename,
+                            mime_type=self._get_mime_type(filename)
+                        )
                         logger.info(f"Corpus file stored: {filename} -> {file_hash[:12]}...")
             
             logger.info(f"Total corpus files: {len(corpus_hashes)}")
+            
+            # Generate manifest summary
+            manifest.generate_markdown_summary()
+            print(f"📋 Artifact manifest created: {manifest.manifest_file}")
             
             # Check cache - predict if all results exist
             if self._check_experiment_cache(framework_hash, corpus_hashes, experiment):
                 print(f"✅ Cache hit - experiment already complete!")
                 return
             
-            # Cost estimation (if live mode)
+            # Cost estimation and budget guard (if live mode)
             if mode == 'live':
+                logger.info("Live mode: Performing cost estimation and budget validation...")
+                
                 estimated_cost = self._estimate_cost(corpus_hashes, experiment.get('model', 'gpt-4o-mini'))
                 budget_cap = experiment.get('budget_cap', 10.0)
                 
-                print(f"Estimated cost: ${estimated_cost:.2f} (cap ${budget_cap:.2f})")
-                response = input("Continue? [y/N]: ")
+                # Enhanced cost guard with validation
+                print(f"\n💰 COST ESTIMATION (Live Mode)")
+                print(f"  Model: {experiment.get('model', 'gpt-4o-mini')}")
+                print(f"  Corpus files: {len(corpus_hashes)}")
+                print(f"  Estimated cost: ${estimated_cost:.4f}")
+                print(f"  Budget cap: ${budget_cap:.2f}")
+                
+                # Budget validation
+                if estimated_cost > budget_cap:
+                    print(f"\n❌ COST GUARD BLOCKED")
+                    print(f"   Estimated cost (${estimated_cost:.4f}) exceeds budget cap (${budget_cap:.2f})")
+                    print(f"   Increase budget_cap in experiment file or switch to dev mode")
+                    raise DiscernusCLIError(f"Cost estimate ${estimated_cost:.4f} exceeds budget cap ${budget_cap:.2f}")
+                
+                # User confirmation
+                cost_percentage = (estimated_cost / budget_cap) * 100
+                print(f"  Budget utilization: {cost_percentage:.1f}%")
+                print(f"\n🚨 Live mode will incur real costs!")
+                response = input("Continue with live LLM calls? [y/N]: ")
                 if response.lower() != 'y':
                     print("Aborted by user")
                     return
+                    
+                print(f"✅ Cost guard passed - proceeding with live mode")
             else:
-                print(f"🚀 Dev mode - auto-continuing")
+                print(f"🚀 Dev mode - bypassing cost guard")
+                logger.info("Dev mode: Skipping cost estimation and budget validation")
             
             # Create orchestration request
             orchestration_data = {
@@ -105,7 +255,6 @@ class DiscernusCLI:
                 'data': json.dumps(orchestration_data)
             })
             
-            run_id = experiment.get('name', f"run_{int(time.time())}")
             print(f"🚀 Experiment queued - run ID: {run_id}")
             print(f"Orchestration request: {message_id}")
             
@@ -136,27 +285,61 @@ class DiscernusCLI:
             return False
     
     def _estimate_cost(self, corpus_hashes: Dict[str, str], model: str) -> float:
-        """Estimate experiment cost based on corpus size and model"""
+        """Estimate experiment cost using real LiteLLM cost APIs - THIN approach"""
         try:
-            # Simplified cost estimation - would use actual LiteLLM pricing in practice
-            estimated_tokens_per_file = 2000  # Framework + chunk + response
+            # Import LiteLLM for real cost calculation
+            import litellm
+            from litellm.cost_calculator import completion_cost
+            
+            # Get framework and corpus sizes for realistic token estimation
+            total_cost = 0.0
+            
+            # Rough estimation: Get actual model pricing from LiteLLM
+            try:
+                # Get model cost info from LiteLLM's cost map
+                cost_info = litellm.model_cost.get(model, {})
+                input_cost_per_token = cost_info.get('input_cost_per_token', 0.0001)  # Fallback
+                output_cost_per_token = cost_info.get('output_cost_per_token', 0.0002)  # Fallback
+                
+                if not cost_info:
+                    logger.warning(f"Cost info not found for {model}, using fallback estimates")
+                
+            except Exception as e:
+                logger.warning(f"Failed to get LiteLLM cost info: {e}, using fallback")
+                input_cost_per_token = 0.0001  # Conservative fallback
+                output_cost_per_token = 0.0002
+            
+            # Estimate tokens per file (framework + document + response)
+            estimated_input_tokens_per_file = 3000   # Framework (1500) + Document (1500) 
+            estimated_output_tokens_per_file = 800   # Structured analysis response
+            
             total_files = len(corpus_hashes)
             
-            # Model pricing (simplified)
-            pricing = {
-                'gpt-4o-mini': 0.00015,  # per 1K tokens
-                'gpt-4o': 0.005,
-                'claude-3.5-sonnet': 0.003
-            }
+            # Calculate total cost
+            total_input_tokens = estimated_input_tokens_per_file * total_files
+            total_output_tokens = estimated_output_tokens_per_file * total_files
             
-            price_per_1k = pricing.get(model, 0.002)
-            estimated_cost = (estimated_tokens_per_file * total_files * price_per_1k) / 1000
+            input_cost = total_input_tokens * input_cost_per_token
+            output_cost = total_output_tokens * output_cost_per_token
+            total_cost = input_cost + output_cost
             
-            return estimated_cost
+            # Add synthesis cost (if more than 1 file)
+            if total_files > 1:
+                # Synthesis combines all analysis results
+                synthesis_input_tokens = 2000 + (500 * total_files)  # Framework + all analyses
+                synthesis_output_tokens = 1000  # Comprehensive report
+                
+                synthesis_cost = (synthesis_input_tokens * input_cost_per_token + 
+                                synthesis_output_tokens * output_cost_per_token)
+                total_cost += synthesis_cost
+            
+            logger.info(f"Cost estimate for {model}: ${total_cost:.4f} ({total_files} files)")
+            return total_cost
             
         except Exception as e:
-            logger.error(f"Cost estimation failed: {e}")
-            return 0.0
+            logger.error(f"LiteLLM cost estimation failed: {e}")
+            # Fallback to conservative estimate
+            return len(corpus_hashes) * 0.01  # $0.01 per file as safe fallback
     
     def pause_experiment(self, run_id: str):
         """Pause a running experiment"""
@@ -168,10 +351,41 @@ class DiscernusCLI:
             raise DiscernusCLIError(f"Pause failed: {e}")
     
     def resume_experiment(self, run_id: str):
-        """Resume a paused experiment"""
+        """Resume a paused experiment with PEL cleanup"""
         try:
-            self.redis_client.set(f'run:{run_id}:status', 'RUNNING')
+            # Check if experiment exists and is paused
+            status_key = f'run:{run_id}:status'
+            current_status = self.redis_client.get(status_key)
+            
+            if not current_status:
+                raise DiscernusCLIError(f"Run '{run_id}' not found")
+                
+            current_status = current_status.decode()
+            if current_status != 'PAUSED':
+                print(f"⚠️  Run '{run_id}' is {current_status}, not paused")
+                return
+            
+            # Perform PEL cleanup before resuming
+            logger.info(f"Performing PEL cleanup before resuming {run_id}...")
+            reclaimed_count = cleanup_pending_tasks(
+                self.redis_client,
+                stream_name='tasks',
+                group_name='discernus',
+                max_idle_ms=30000  # 30 seconds
+            )
+            
+            if reclaimed_count > 0:
+                print(f"🔄 Reclaimed {reclaimed_count} orphaned tasks")
+            else:
+                print("✅ No orphaned tasks found")
+            
+            # Resume the experiment
+            self.redis_client.set(status_key, 'RUNNING')
             print(f"▶️  Resumed {run_id}")
+            
+            # Log the resume action for provenance
+            logger.info(f"Experiment {run_id} resumed with {reclaimed_count} tasks reclaimed")
+            
         except Exception as e:
             logger.error(f"Failed to resume experiment: {e}")
             raise DiscernusCLIError(f"Resume failed: {e}")
@@ -193,6 +407,20 @@ class DiscernusCLI:
         except Exception as e:
             logger.error(f"Failed to list runs: {e}")
             raise DiscernusCLIError(f"List runs failed: {e}")
+
+    def _get_mime_type(self, filename: str) -> str:
+        """Simple MIME type detection for manifest"""
+        ext = Path(filename).suffix.lower()
+        mime_types = {
+            '.txt': 'text/plain',
+            '.md': 'text/markdown', 
+            '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            '.pdf': 'application/pdf',
+            '.json': 'application/json',
+            '.yaml': 'application/x-yaml',
+            '.yml': 'application/x-yaml'
+        }
+        return mime_types.get(ext, 'application/octet-stream')
 
 def main():
     """CLI entry point"""

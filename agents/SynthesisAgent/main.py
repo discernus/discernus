@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-AnalyseChunkAgent - Thin wrapper for text analysis
-Reads Redis tasks, calls LLM with framework + chunk, stores results.
+SynthesisAgent - Thin wrapper for synthesis of multiple analysis results
+Reads Redis tasks, retrieves multiple analysis results, calls LLM with framework + analyses, stores final report.
 """
 
 import redis
@@ -10,7 +10,7 @@ import yaml
 import sys
 import os
 import logging
-from typing import Dict, Any
+from typing import Dict, Any, List
 from litellm import completion
 
 # Add scripts directory to path for imports
@@ -18,7 +18,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
 from minio_client import get_artifact, put_artifact, ArtifactStorageError
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - AnalyseChunkAgent - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - SynthesisAgent - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Redis configuration
@@ -27,12 +27,12 @@ REDIS_PORT = 6379
 REDIS_DB = 0
 CONSUMER_GROUP = 'discernus'
 
-class AnalyseChunkAgentError(Exception):
+class SynthesisAgentError(Exception):
     """Agent-specific exceptions"""
     pass
 
-class AnalyseChunkAgent:
-    """Thin agent for chunk analysis using external prompts"""
+class SynthesisAgent:
+    """Thin agent for synthesis of multiple analysis results"""
     
     def __init__(self):
         self.redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
@@ -47,10 +47,10 @@ class AnalyseChunkAgent:
             return prompt_data['template']
         except Exception as e:
             logger.error(f"Failed to load prompt template: {e}")
-            raise AnalyseChunkAgentError(f"Prompt loading failed: {e}")
+            raise SynthesisAgentError(f"Prompt loading failed: {e}")
     
     def process_task(self, task_id: str) -> bool:
-        """Process a single analysis task - THIN implementation"""
+        """Process a single synthesis task - THIN implementation"""
         try:
             # Get the specific message by ID from Redis stream
             messages = self.redis_client.xrange('tasks', task_id, task_id, count=1)
@@ -62,44 +62,62 @@ class AnalyseChunkAgent:
             # Extract task data
             msg_id, fields = messages[0]
             task_data = json.loads(fields[b'data'])
-            logger.info(f"Processing task: {task_id}")
+            logger.info(f"Processing synthesis task: {task_id}")
             
             # Get artifacts (no parsing - just retrieval)
-            chunk_hash = task_data['chunk_hash']
+            analysis_hashes = task_data['analysis_hashes']
             framework_hash = task_data['framework_hash']
             model = task_data.get('model', 'gpt-4o-mini')
             
             # Strip sha256: prefix if present (orchestrator adds it, MinIO expects raw hash)
-            if chunk_hash.startswith('sha256:'):
-                chunk_hash = chunk_hash[7:]
             if framework_hash.startswith('sha256:'):
                 framework_hash = framework_hash[7:]
             
-            logger.info(f"Retrieving artifacts: chunk={chunk_hash[:12]}..., framework={framework_hash[:12]}...")
+            clean_analysis_hashes = []
+            for ah in analysis_hashes:
+                if ah.startswith('sha256:'):
+                    clean_analysis_hashes.append(ah[7:])
+                else:
+                    clean_analysis_hashes.append(ah)
+            
+            logger.info(f"Retrieving framework: {framework_hash[:12]}...")
+            logger.info(f"Retrieving {len(clean_analysis_hashes)} analysis results...")
             
             # THIN: Get raw bytes, let LLM handle format detection
-            chunk_bytes = get_artifact(chunk_hash) 
             framework_bytes = get_artifact(framework_hash)
             
-            # THIN: Pass raw bytes to LLM - no preprocessing/parsing
-            # In production, this would use multimodal LLM file upload
-            # For PoC, simulate by decoding only for text-based prompting
+            # Get all analysis results
+            analysis_results = []
+            for i, analysis_hash in enumerate(clean_analysis_hashes):
+                logger.info(f"Retrieving analysis {i+1}/{len(clean_analysis_hashes)}: {analysis_hash[:12]}...")
+                analysis_bytes = get_artifact(analysis_hash)
+                
+                # THIN: Pass raw bytes to LLM - no preprocessing/parsing
+                # For PoC, decode for text-based prompting
+                try:
+                    analysis_text = analysis_bytes.decode('utf-8')
+                    analysis_results.append(analysis_text)
+                except UnicodeDecodeError:
+                    analysis_text = analysis_bytes.decode('utf-8', errors='ignore')
+                    analysis_results.append(f"[BINARY ANALYSIS: {len(analysis_bytes)} bytes - would be passed directly to multimodal LLM]")
+            
+            # THIN: Pass framework raw bytes to LLM - no preprocessing/parsing  
             try:
                 framework_text = framework_bytes.decode('utf-8')
-                chunk_text = chunk_bytes.decode('utf-8') 
             except UnicodeDecodeError:
-                # Binary file - in real THIN system, pass directly to multimodal LLM
                 framework_text = framework_bytes.decode('utf-8', errors='ignore')
-                chunk_text = f"[BINARY FILE: {len(chunk_bytes)} bytes - would be passed directly to multimodal LLM]"
             
-            # Format prompt (THIN - minimal string substitution)  
+            # Format prompt (THIN - minimal string substitution)
+            combined_analyses = "\n\n".join([f"ANALYSIS {i+1}:\n{result}" for i, result in enumerate(analysis_results)])
+            
             prompt_text = self.prompt_template.format(
                 framework=framework_text,
-                chunk=chunk_text
+                analyses=combined_analyses,
+                analysis_count=len(analysis_results)
             )
             
             # Call LLM (thin wrapper)
-            logger.info(f"Calling LLM ({model}) for analysis...")
+            logger.info(f"Calling LLM ({model}) for synthesis of {len(analysis_results)} analyses...")
             response = completion(
                 model=model,
                 messages=[{"role": "user", "content": prompt_text}],
@@ -110,7 +128,7 @@ class AnalyseChunkAgent:
             result_content = response.choices[0].message.content
             result_hash = put_artifact(result_content.encode('utf-8'))
             
-            logger.info(f"Analysis complete, result stored: {result_hash}")
+            logger.info(f"Synthesis complete, final report stored: {result_hash}")
             
             # Signal completion to router
             completion_data = {
@@ -118,8 +136,9 @@ class AnalyseChunkAgent:
                 'result_hash': result_hash,
                 'status': 'completed',
                 'model_used': model,
-                'chunk_hash': chunk_hash,
-                'framework_hash': framework_hash
+                'analysis_hashes': analysis_hashes,
+                'framework_hash': framework_hash,
+                'type': 'synthesis_report'
             }
             
             self.redis_client.xadd('tasks.done', {
@@ -127,7 +146,7 @@ class AnalyseChunkAgent:
                 'data': json.dumps(completion_data)
             })
             
-            logger.info(f"Task completed: {task_id}")
+            logger.info(f"Synthesis task completed: {task_id}")
             return True
             
         except ArtifactStorageError as e:
@@ -144,7 +163,7 @@ def main():
         sys.exit(1)
     
     task_id = sys.argv[1]
-    agent = AnalyseChunkAgent()
+    agent = SynthesisAgent()
     
     try:
         success = agent.process_task(task_id)
