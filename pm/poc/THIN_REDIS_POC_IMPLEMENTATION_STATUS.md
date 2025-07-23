@@ -742,6 +742,50 @@ Per the external reviewer's requirements, all validation points have been addres
 
 ---
 
+## 🚧 **Production Readiness Gaps**
+
+While the PoC successfully validates the core THIN architecture principles, several critical gaps remain before production deployment:
+
+### **Critical Gap: Result Retrieval System**
+**Problem**: Results are orphaned in MinIO with no run linkage
+- ✅ **Inputs tracked**: Run manifests track framework + corpus artifacts  
+- ❌ **Outputs orphaned**: Analysis and synthesis results stored by SHA256 hash only
+- ❌ **No result discovery**: No way to answer "what were the results of experiment X?"
+
+**Evidence from Testing**:
+```
+📁 Local: projects/vanderveen_micro/runs/vanderveen_binary_test/
+├── manifest.json          # Only input artifacts tracked
+└── manifest.md            # Human-readable input manifest
+
+☁️ MinIO: 31 orphaned artifacts including:
+├── 14d42aec227d...         # Analysis: {"sentiment_score": 2, "urgency_level": 4}
+├── 1423e3ef7f0f...         # Analysis: {"worldview": "Populist", "scores": {...}}  
+└── 250f965236593...        # Synthesis: "# Comprehensive Synthesis Report..."
+```
+
+**Impact**: Researchers cannot retrieve or read their experiment results.
+
+### **Additional Production Gaps**
+- **Result Organization**: No structured results directory per run
+- **Human-Readable Output**: Results exist only as content-addressable hashes
+- **Result Linkage**: No mapping from run_id → result artifact hashes  
+- **CLI Result Commands**: Missing `discernus results <run_id>` functionality
+- **Result Export**: No way to extract results from MinIO to local filesystem
+- **Multi-User Isolation**: All runs share same MinIO namespace
+- **Artifact Cleanup**: No lifecycle management for old experiments
+
+### **Recommended Next Phase**
+1. **Result Tracking**: Extend run manifest to capture output artifact hashes
+2. **Result Retrieval**: Add CLI commands to fetch and organize results by run_id  
+3. **Human-Readable Output**: Auto-generate results directory with readable filenames
+4. **Multi-User Support**: Add namespace isolation and permissions
+5. **Lifecycle Management**: Implement experiment archiving and cleanup
+
+**Status**: Core PoC architecture validated ✅ | Production readiness gaps documented ⚠️
+
+---
+
 **Commit Status**: All PoC implementation changes committed
 - ✅ THIN binary-first architecture complete and validated
 - ✅ Framework/experiment/corpus agnostic infrastructure working end-to-end
