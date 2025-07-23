@@ -100,13 +100,13 @@ This plan is a series of gates. We only proceed to the next phase once all quest
 
 ### ⚙️ Phase 1 Technical Decisions & Refinements
 
-1.  **File Handling - "Text-First Fallback" Principle**:
-    *   **Decision**: The strict "Binary-First Principle" has been provisionally relaxed to the "Text-First Fallback Principle" to improve efficiency for common text-based files.
+1.  **File Handling - "Binary-First Principle" (Mandatory)**:
+    *   **Decision**: All file content MUST be processed as raw binary data, base64 encoded before LLM submission.
     *   **Impact**:
-        *   The `AnalyseBatchAgent` will first attempt to decode input files using UTF-8.
-        *   If successful, the content is passed as a raw text string to the LLM.
-        *   If it fails, the agent reverts to base64 encoding the raw binary content.
-    *   **Status**: This change has been documented in the architectural bible and must be reflected in the agent's implementation. This is a **provisional** decision; if it proves problematic, the system will revert to a strict binary-only approach.
+        *   All agents receive file content as base64 strings regardless of apparent format.
+        *   LLMs handle all format detection and content decoding internally.
+        *   Zero conditional logic based on file type, encoding, or format assumptions.
+    *   **Status**: This is a **mandatory** architectural principle with zero exceptions. The negligible token cost overhead (33% increase = fractions of a cent) is vastly outweighed by architectural simplicity and THIN compliance.
 
 ---
 

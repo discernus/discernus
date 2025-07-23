@@ -10,6 +10,7 @@ import yaml
 import sys
 import os
 import logging
+import time
 from typing import Dict, Any, List
 from litellm import completion
 
@@ -26,6 +27,7 @@ REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 REDIS_PORT = 6379
 REDIS_DB = 0
 CONSUMER_GROUP = 'discernus'
+ORCHESTRATOR_STREAM = 'orchestrator.tasks'
 
 class OrchestratorAgentError(Exception):
     """Agent-specific exceptions"""
@@ -184,6 +186,16 @@ class OrchestratorAgent:
         """Listen for orchestration requests on orchestrator.tasks stream"""
         logger.info("OrchestratorAgent listening for requests...")
         
+        # Ensure the stream and consumer group exist
+        try:
+            self.redis_client.xgroup_create(ORCHESTRATOR_STREAM, CONSUMER_GROUP, id='0', mkstream=True)
+            logger.info(f"Consumer group '{CONSUMER_GROUP}' created for stream '{ORCHESTRATOR_STREAM}'.")
+        except redis.exceptions.ResponseError as e:
+            if "consumer group name already exists" in str(e).lower():
+                logger.info(f"Consumer group '{CONSUMER_GROUP}' already exists.")
+            else:
+                raise # Reraise other errors
+
         try:
             while True:
                 # Read orchestration requests (blocking)

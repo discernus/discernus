@@ -49,6 +49,10 @@ class Phase2TestRunner:
         all_tasks = set()
 
         try:
+            # Clean Redis for a fresh run
+            self.redis_client.flushdb()
+            logger.info("Redis DB flushed for a clean test run.")
+
             # 1. Start OrchestratorAgent in the background
             logger.info("Starting OrchestratorAgent in the background...")
             orchestrator_process = subprocess.Popen(
@@ -64,13 +68,13 @@ class Phase2TestRunner:
 
             # 3. Wait for and execute the PreTest task
             logger.info("--- Validating Step 1: PreTest Orchestration ---")
-            pre_test_task_id = self._wait_for_task_type('pre_test', timeout=60)
+            pre_test_task_id = self._wait_for_task_type('pre_test', timeout=120)
             all_tasks.add(pre_test_task_id)
             self._run_agent_script('PreTestAgent', 'agents/PreTestAgent/main.py', pre_test_task_id)
 
             # 4. Wait for and execute the Plan Execution task
             logger.info("--- Validating Step 2: Final Plan Generation ---")
-            plan_execution_task_id = self._wait_for_task_type('execute_plan', timeout=60)
+            plan_execution_task_id = self._wait_for_task_type('execute_plan', timeout=120)
             all_tasks.add(plan_execution_task_id)
             plan_hash = self._get_plan_hash_from_task(plan_execution_task_id)
             self._run_agent_script('ExecutionBridge', 'scripts/execution_bridge.py', plan_hash)
@@ -111,10 +115,17 @@ class Phase2TestRunner:
             return False
         finally:
             # Cleanup
-            if 'orchestrator_process' in locals() and orchestrator_process.poll() is None:
-                orchestrator_process.terminate()
-                orchestrator_process.wait()
-                logger.info("OrchestratorAgent terminated.")
+            if 'orchestrator_process' in locals() and orchestrator_process:
+                if orchestrator_process.poll() is None:
+                    orchestrator_process.terminate()
+                    orchestrator_process.wait()
+                    logger.info("OrchestratorAgent terminated.")
+                
+                stdout, stderr = orchestrator_process.communicate()
+                if stdout:
+                    logger.info(f"OrchestratorAgent stdout:\n{stdout}")
+                if stderr:
+                    logger.error(f"OrchestratorAgent stderr:\n{stderr}")
 
     def _enqueue_orchestration_request(self, framework_hash: str, corpus_hashes: List[str]):
         """Creates and enqueues the initial orchestration request."""

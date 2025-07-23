@@ -17,6 +17,7 @@ import json
 import sys
 import os
 import logging
+import re
 from typing import Dict, Any, List
 
 # Add scripts directory to path for imports
@@ -54,9 +55,14 @@ class ExecutionBridge:
             # 1. Retrieve the plan artifact
             clean_hash = plan_hash[7:] if plan_hash.startswith('sha256:') else plan_hash
             plan_bytes = get_artifact(clean_hash)
-            plan_data = json.loads(plan_bytes.decode('utf-8'))
             
-            # 2. Validate plan structure
+            # 2. Parse the plan content
+            try:
+                plan_data = json.loads(plan_bytes.decode('utf-8'))
+            except json.JSONDecodeError as e:
+                raise ExecutionBridgeError(f"Failed to parse plan artifact {clean_hash}: {e}")
+
+            # 3. Validate plan structure
             if 'tasks' not in plan_data or not isinstance(plan_data['tasks'], list):
                 raise ExecutionBridgeError("Plan artifact is missing a valid 'tasks' list.")
             
@@ -64,7 +70,7 @@ class ExecutionBridge:
             experiment_name = plan_data.get('experiment_name', 'untitled_experiment')
             logger.info(f"Plan for experiment '{experiment_name}' contains {len(tasks_to_create)} tasks to be enqueued.")
 
-            # 3. Iterate through the plan and enqueue each task
+            # 4. Iterate through the plan and enqueue each task
             enqueued_count = 0
             for i, task in enumerate(tasks_to_create):
                 task_type = task.get('type')
