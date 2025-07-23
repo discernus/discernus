@@ -212,12 +212,12 @@ class DiscernusCLI:
             if mode == 'live':
                 logger.info("Live mode: Performing cost estimation and budget validation...")
                 
-                estimated_cost = self._estimate_cost(corpus_hashes, experiment.get('model', 'gpt-4o-mini'))
+                estimated_cost = self._estimate_cost(corpus_hashes, experiment.get('model', 'gemini-2.5-flash'))
                 budget_cap = experiment.get('budget_cap', 10.0)
                 
                 # Enhanced cost guard with validation
                 print(f"\n💰 COST ESTIMATION (Live Mode)")
-                print(f"  Model: {experiment.get('model', 'gpt-4o-mini')}")
+                print(f"  Model: {experiment.get('model', 'gemini-2.5-flash')}")
                 print(f"  Corpus files: {len(corpus_hashes)}")
                 print(f"  Estimated cost: ${estimated_cost:.4f}")
                 print(f"  Budget cap: ${budget_cap:.2f}")
