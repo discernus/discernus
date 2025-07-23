@@ -68,8 +68,9 @@ class OrchestratorAgent:
             
             # Ask LLM what tasks to create (LLM intelligence, not software parsing)
             logger.info("Asking LLM to plan experiment tasks...")
+            # Use Gemini Flash for orchestration planning
             planning_response = completion(
-                model="gpt-4o-mini",  # Fast model for orchestration
+                model="gemini-2.5-flash",
                 messages=[{"role": "user", "content": prompt_text}],
                 temperature=0.0
             )
