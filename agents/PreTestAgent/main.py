@@ -22,6 +22,7 @@ import yaml
 import sys
 import os
 import logging
+import re
 from typing import Dict, Any, List
 from litellm import completion
 import base64
@@ -119,7 +120,7 @@ class PreTestAgent:
             try:
                 llm_response_data = json.loads(result_content)
             except json.JSONDecodeError:
-                raise PreTestAgentError(f"Failed to parse LLM JSON response for pre-test {task_id}")
+                raise PreTestAgentError(f"Failed to parse LLM JSON response for pre-test {task_id}. Raw response: {result_content}")
 
             pretest_artifact = {
                 'experiment_name': experiment_name,

@@ -201,19 +201,25 @@ This principle ensures the scientific validity of the synthesis process.
 - **Tier 3 (Qualitative Synthesis):** The `ModeratorAgent` performs the final, interpretive, qualitative analysis **only after** all statistics have been finalized and reviewed.
 - **Benefit:** This creates a transparent and auditable pipeline, clearly separating objective statistical findings from subjective academic interpretation.
 
-#### Principle 3 (Provisional): The Text-First Fallback Principle
-This principle is a pragmatic evolution of the original "Binary-First" principle, designed to balance efficiency with the core THIN philosophy. It serves as an architectural guardrail against the primary cause of THICK software: complex file parsing. This principle is provisional and subject to review based on the PoC outcomes.
+#### Principle 3: The Binary-First Principle (Mandatory)
+This principle is the foundational guardrail against THICK software: all file content processing occurs via LLM intelligence, never software logic.
 
 - **The Rule**:
-  1. **Attempt UTF-8 Decode First**: The software makes one attempt to decode file content using UTF-8.
-  2. **On Success, Pass as Text**: If the decode is successful, the content is passed directly to the LLM as a clean text string. This is significantly more efficient for the majority of corpus files (e.g., `.txt`, `.md`).
-  3. **On Failure, Fallback to Binary**: If the UTF-8 decode fails, the system immediately reverts to the strict binary-handling protocol. The raw file bytes are base64 encoded and passed to the LLM, with instructions for the model to handle the decoding.
+  1. **All Files as Binary**: Every file is read as raw bytes and base64 encoded before LLM submission, regardless of apparent format.
+  2. **LLM Handles All Decoding**: The LLM receives base64 content with instructions to detect format and decode appropriately.
+  3. **Zero Software Format Logic**: No UTF-8 attempts, no MIME detection, no format-specific handlers, no exceptions.
 
-- **The Guardrail**: This is **not** an invitation to write complex parsing or multi-encoding logic. It is a single, simple check. If a file is not valid UTF-8, it is treated as opaque binary. There are no other attempts to guess the encoding. This prevents the system from bloating with format-specific handlers.
+- **The Guardrail**: This rule has zero exceptions. Any attempt to add "efficiency optimizations," "simple text checks," or "reasonable format detection" will be rejected as THICK software creep.
 
-- **Provisional Status**: This approach is a deliberate test. If it is found to encourage THICK software development or leads to agent implementation errors, the project will revert to the strict "Binary-First" principle for all file types without exception.
+- **Cost Analysis**: The base64 overhead concern is mathematically negligible:
+  - **10KB text file** → 13.3KB base64 (3.3KB overhead = ~943 tokens = **$0.00007**)
+  - **100KB text file** → 133KB base64 (33KB overhead = ~9,400 tokens = **$0.0007**)
+  - **Engineering cost of conditional logic**: Hours of debugging per encoding edge case
+  - **Architectural debt**: Unmeasurable long-term cost of violating core principles
+  
+  *At Gemini 2.5 Flash pricing ($0.075 per 1M input tokens)*
 
-- **Benefit**: This approach provides the efficiency of direct text handling for common formats while maintaining a strong, clear, and simple architectural rule that prevents "parser creep" and ensures the system remains format-agnostic and robust.
+- **Benefit**: This approach eliminates all format assumptions, prevents "parser creep," ensures the system remains truly format-agnostic, and delegates all intelligence to LLMs where it belongs.
   
 ### 3.8 · Layered Synthesis & Review Architecture
 
