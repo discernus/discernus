@@ -52,15 +52,24 @@ class AnalyseChunkAgent:
     def process_task(self, task_id: str) -> bool:
         """Process a single analysis task - THIN implementation"""
         try:
-            # Get task from Redis stream
-            messages = self.redis_client.xread({'tasks': task_id}, count=1)
+            # Get specific task from Redis stream using consumer group
+            messages = self.redis_client.xreadgroup(
+                CONSUMER_GROUP, 
+                'worker1',
+                {'tasks': task_id},
+                count=1, block=1000
+            )
             
-            if not messages:
-                logger.error(f"Task not found: {task_id}")
+            if not messages or not messages[0][1]:
+                logger.error(f"Task not found or already processed: {task_id}")
                 return False
                 
-            # Extract task data
+            # Extract task data - check if msgs list is not empty
             stream, msgs = messages[0]
+            if not msgs:
+                logger.error(f"No messages found for task: {task_id}")
+                return False
+                
             msg_id, fields = msgs[0]
             
             task_data = json.loads(fields[b'data'])
@@ -79,10 +88,22 @@ class AnalyseChunkAgent:
             
             logger.info(f"Retrieving artifacts: chunk={chunk_hash[:12]}..., framework={framework_hash[:12]}...")
             
-            chunk_text = get_artifact(chunk_hash)
-            framework_text = get_artifact(framework_hash)
+            # THIN: Get raw bytes, let LLM handle format detection
+            chunk_bytes = get_artifact(chunk_hash) 
+            framework_bytes = get_artifact(framework_hash)
             
-            # Format prompt (THIN - just string substitution)
+            # THIN: Pass raw bytes to LLM - no preprocessing/parsing
+            # In production, this would use multimodal LLM file upload
+            # For PoC, simulate by decoding only for text-based prompting
+            try:
+                framework_text = framework_bytes.decode('utf-8')
+                chunk_text = chunk_bytes.decode('utf-8') 
+            except UnicodeDecodeError:
+                # Binary file - in real THIN system, pass directly to multimodal LLM
+                framework_text = framework_bytes.decode('utf-8', errors='ignore')
+                chunk_text = f"[BINARY FILE: {len(chunk_bytes)} bytes - would be passed directly to multimodal LLM]"
+            
+            # Format prompt (THIN - minimal string substitution)  
             prompt_text = self.prompt_template.format(
                 framework=framework_text,
                 chunk=chunk_text
@@ -96,9 +117,9 @@ class AnalyseChunkAgent:
                 temperature=0.0
             )
             
-            # Store result (no processing/parsing)
+            # Store result (THIN - no processing/parsing)
             result_content = response.choices[0].message.content
-            result_hash = put_artifact(result_content)
+            result_hash = put_artifact(result_content.encode('utf-8'))
             
             logger.info(f"Analysis complete, result stored: {result_hash}")
             
