@@ -264,6 +264,19 @@ class DiscernusCLI:
         except Exception as e:
             logger.error(f"Failed to run experiment: {e}")
             raise DiscernusCLIError(f"Experiment execution failed: {e}")
+    def run_from_manifest(self, manifest_file: str):
+        """Resume or replay an experiment exactly from a manifest JSON file."""
+        print(f"Replaying experiment from manifest: {manifest_file}")
+        # TODO: Implement re-queuing of tasks based on manifest for full replay
+        # For now, simply display artifact summary
+        try:
+            import json
+            from pathlib import Path
+            manifest_path = Path(manifest_file)
+            data = json.loads(manifest_path.read_text())
+            print(json.dumps(data, indent=2))
+        except Exception as e:
+            print(f"Failed to load manifest: {e}")
     
     def _store_file_artifact(self, filepath: str) -> str:
         """Store file content and return hash - THIN: always binary"""
@@ -429,6 +442,46 @@ class DiscernusCLI:
                 print(f"{fname} -> {sha}")
         print(f"\nManifest run_id: {data.get('run_id')}, created: {data.get('created')}")
 
+    def export(self, run_id: str, out_dir: str):
+        """Export all artifacts for a given run_id into structured output directory"""
+        from pathlib import Path
+        # Load manifest
+        manifest_path = Path(f"runs/{run_id}/manifest.json")
+        if not manifest_path.exists():
+            print(f"Run '{run_id}' not found or manifest missing")
+            return
+        with open(manifest_path) as f:
+            data = json.load(f)
+        artifacts = data.get('artifacts', [])
+        # Prepare output directories
+        base_dir = Path(out_dir)
+        base_dir.mkdir(parents=True, exist_ok=True)
+        for art in artifacts:
+            task_type = art['task_type']
+            sha = art['sha256']
+            filename = art.get('original_filename', sha)
+            dest_dir = base_dir / task_type
+            dest_dir.mkdir(parents=True, exist_ok=True)
+            # Retrieve artifact to file
+            try:
+                # Use default MinIO client to retrieve artifacts
+                from minio_client import get_default_client
+                client = get_default_client()
+                client.get_to_file(sha, str(dest_dir / filename))
+                print(f"Exported {task_type}/{filename}")
+            except Exception as e:
+                print(f"Failed to export {sha}: {e}")
+        # Copy manifest files
+        manifest_md = Path(f"runs/{run_id}/manifest.md")
+        if manifest_md.exists():
+            dest_manifest_md = base_dir / 'manifest.md'
+            dest_manifest_json = base_dir / 'manifest.json'
+            import shutil
+            shutil.copy(manifest_path, dest_manifest_json)
+            shutil.copy(manifest_md, dest_manifest_md)
+            print(f"Exported manifest files to {base_dir}")
+        print(f"Export completed: {base_dir}")
+
     def _get_mime_type(self, filename: str) -> str:
         """Simple MIME type detection for manifest"""
         ext = Path(filename).suffix.lower()
@@ -458,6 +511,11 @@ def main():
     
     try:
         if command == 'run' and len(sys.argv) >= 3:
+            # Support run from manifest
+            if sys.argv[2] == '--from-manifest' and len(sys.argv) >= 4:
+                manifest_file = sys.argv[3]
+                cli.run_from_manifest(manifest_file)
+                return
             experiment_file = sys.argv[2]
             mode = 'dev'
             
@@ -484,6 +542,11 @@ def main():
         elif command == 'results' and len(sys.argv) >= 3:
             run_id = sys.argv[2]
             cli.results(run_id)
+            
+        elif command == 'export' and len(sys.argv) >= 4:
+            run_id = sys.argv[2]
+            out_dir = sys.argv[3]
+            cli.export(run_id, out_dir)
             
         else:
             print("Invalid command or missing arguments")
