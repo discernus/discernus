@@ -33,14 +33,14 @@ This is the definitive list of components required for the full architecture.
 
 | Agent | Status | Function |
 | :--- | :--- | :--- |
-| **`PreTestAgent`** | **New, needs to be built** | Performs variance estimation to recommend the optimal number of runs. |
-| **`AnalyseBatchAgent`**| **✅ BUILT - Phase 1 Ready** | Workhorse agent for multi-document, multi-framework analysis. **Output is structured data only.** |
+| **`PreTestAgent`** | **🟡 SCAFFOLDED - Phase 2 In-Progress** | Performs variance estimation to recommend the optimal number of runs. |
+| **`AnalyseBatchAgent`**| **✅ BUILT & VALIDATED - Phase 1 Complete** | Workhorse agent for multi-document, multi-framework analysis. **Output is structured data only.** |
 
 ### Tier 2: Statistical Synthesis Agent (LLM-Driven)
 
 | Agent | Status | Function |
 | :--- | :--- | :--- |
-| **`CorpusSynthesisAgent`**| **✅ BUILT - Phase 1 Ready** | Performs **deterministic mathematical aggregation** of structured data from all Layer 1 batches. |
+| **`CorpusSynthesisAgent`**| **✅ BUILT & VALIDATED - Phase 1 Complete** | Performs **deterministic mathematical aggregation** of structured data from all Layer 1 batches. |
 
 ### Tier 3: Quality Assurance & Synthesis Agents (LLM-Driven)
 
