@@ -35,6 +35,9 @@ AGENT_SCRIPTS = {
     'synthesize': ['python3', 'agents/SynthesisAgent/main.py'],
     'execute_plan': ['python3', 'agents/PlanExecutorAgent/main.py'],
     'execute_task_list': ['python3', 'agents/TaskListExecutorAgent/main.py'],
+    # New Tier 1-2 agents for batch processing architecture
+    'analyse_batch': ['python3', 'agents/AnalyseBatchAgent/main.py'],
+    'corpus_synthesis': ['python3', 'agents/CorpusSynthesisAgent/main.py'],
 }
 
 class RouterError(Exception):
