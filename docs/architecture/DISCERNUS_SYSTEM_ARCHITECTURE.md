@@ -201,13 +201,19 @@ This principle ensures the scientific validity of the synthesis process.
 - **Tier 3 (Qualitative Synthesis):** The `ModeratorAgent` performs the final, interpretive, qualitative analysis **only after** all statistics have been finalized and reviewed.
 - **Benefit:** This creates a transparent and auditable pipeline, clearly separating objective statistical findings from subjective academic interpretation.
 
-#### Principle 3: The Binary-First Principle
-This principle ensures the system remains truly format-agnostic and avoids the primary cause of THICK software: parsing.
-- **All Files are Binary:** Every file, regardless of whether it is a `.txt`, `.docx`, or `.pdf`, is treated as an opaque binary blob by the software.
-- **No Decoding in Software:** The Python agent code does not attempt to open, read, or decode file content. It interacts only with the file's hash and its raw bytes.
-- **Base64 Encoding for Transport:** To pass file content to a text-centric LLM API, agents base64 encode the raw bytes. This maintains the content's integrity without requiring the software to understand it.
-- **LLM Handles Decoding:** The LLM prompt explicitly instructs the model to first base64 decode the content before beginning its analysis.
-- **Benefit:** This completely eliminates the temptation for developers to write parsers. It forces all content interpretation to happen within the LLM, making the system maximally flexible and robust against new or unusual file formats.
+#### Principle 3 (Provisional): The Text-First Fallback Principle
+This principle is a pragmatic evolution of the original "Binary-First" principle, designed to balance efficiency with the core THIN philosophy. It serves as an architectural guardrail against the primary cause of THICK software: complex file parsing. This principle is provisional and subject to review based on the PoC outcomes.
+
+- **The Rule**:
+  1. **Attempt UTF-8 Decode First**: The software makes one attempt to decode file content using UTF-8.
+  2. **On Success, Pass as Text**: If the decode is successful, the content is passed directly to the LLM as a clean text string. This is significantly more efficient for the majority of corpus files (e.g., `.txt`, `.md`).
+  3. **On Failure, Fallback to Binary**: If the UTF-8 decode fails, the system immediately reverts to the strict binary-handling protocol. The raw file bytes are base64 encoded and passed to the LLM, with instructions for the model to handle the decoding.
+
+- **The Guardrail**: This is **not** an invitation to write complex parsing or multi-encoding logic. It is a single, simple check. If a file is not valid UTF-8, it is treated as opaque binary. There are no other attempts to guess the encoding. This prevents the system from bloating with format-specific handlers.
+
+- **Provisional Status**: This approach is a deliberate test. If it is found to encourage THICK software development or leads to agent implementation errors, the project will revert to the strict "Binary-First" principle for all file types without exception.
+
+- **Benefit**: This approach provides the efficiency of direct text handling for common formats while maintaining a strong, clear, and simple architectural rule that prevents "parser creep" and ensures the system remains format-agnostic and robust.
   
 ### 3.8 · Layered Synthesis & Review Architecture
 

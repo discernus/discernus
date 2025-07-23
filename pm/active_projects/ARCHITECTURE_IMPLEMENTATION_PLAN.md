@@ -114,6 +114,16 @@ This plan is a series of gates. We only proceed to the next phase once all quest
    - ✅ Artifact validation and structure checking
    - ✅ Full pipeline testing capability
 
+### ⚙️ Phase 1 Technical Decisions & Refinements
+
+1.  **File Handling - "Text-First Fallback" Principle**:
+    *   **Decision**: The strict "Binary-First Principle" has been provisionally relaxed to the "Text-First Fallback Principle" to improve efficiency for common text-based files.
+    *   **Impact**:
+        *   The `AnalyseBatchAgent` will first attempt to decode input files using UTF-8.
+        *   If successful, the content is passed as a raw text string to the LLM.
+        *   If it fails, the agent reverts to base64 encoding the raw binary content.
+    *   **Status**: This change has been documented in the architectural bible and must be reflected in the agent's implementation. This is a **provisional** decision; if it proves problematic, the system will revert to a strict binary-only approach.
+
 ### 🎯 Ready for Phase 1 Validation
 
 **Current Status**: All foundational components built and ready for testing.
