@@ -1,4 +1,54 @@
+---
+title: Discernus Thin‑Orchestration PoC – Implementation Brief
+---
+
 # Discernus Thin‑Orchestration PoC – Implementation Brief
+
+## About Discernus
+
+**Discernus** is a computational research platform that enables systematic, reproducible analysis of text corpora using analytical frameworks developed by researchers. Rather than requiring technical implementation of each framework, Discernus allows researchers to specify their analytical approach in natural language and applies it consistently across large document collections.
+
+### What Discernus Does
+
+Discernus transforms the traditional research workflow:
+
+**Traditional Approach**: Researcher manually applies analytical framework → Individual document analysis → Manual synthesis across findings → Subjective aggregation
+
+**Discernus Approach**: Researcher specifies framework once → Automated batch analysis across corpus → LLM-powered synthesis with statistical validation → Reproducible, peer-reviewable results
+
+### Core Capabilities
+- **Framework Agnostic**: Works with any analytical framework (political analysis, content analysis, discourse analysis, etc.)
+- **Format Agnostic**: Processes any document type (PDF, DOCX, plain text, etc.) without preprocessing
+- **Corpus Agnostic**: Scales from dozens to thousands of documents with consistent quality
+- **Academically Rigorous**: Complete provenance, statistical validation, peer-review ready outputs
+
+### The THIN vs THICK Philosophy
+
+**Discernus embodies THIN software architecture principles**:
+
+**THIN Architecture** (Discernus):
+- **LLM Intelligence**: Complex reasoning, format detection, framework application handled by language models
+- **Software Infrastructure**: Minimal routing, caching, orchestration - no business logic
+- **Principle**: "Make it easier to do the right thing and harder to do the wrong thing"
+- **Result**: Framework/experiment/corpus agnostic system that adapts to researcher needs
+
+**THICK Architecture** (Traditional Systems):
+- **Software Intelligence**: Complex parsing, format-specific processors, hardcoded business rules
+- **LLM Usage**: Limited to simple tasks, constrained by software assumptions
+- **Problem**: Brittle, framework-specific, requires engineering for each new research approach
+- **Result**: Researchers constrained by what software developers anticipated
+
+### Why This PoC Matters
+
+This implementation brief demonstrates how THIN architecture principles enable a **framework/experiment/corpus agnostic research platform** that:
+- Reduces research time from months to hours
+- Eliminates format compatibility issues
+- Ensures reproducible, auditable results  
+- Scales research capabilities without engineering bottlenecks
+
+The empirical discovery that modern LLMs (Gemini 2.5 Flash) can process **9 speeches + multiple frameworks** in a single request validates that THIN architecture can deliver both **efficiency** and **quality** at production scale.
+
+---
 
 ## 1 · Objective
 
