@@ -408,6 +408,27 @@ class DiscernusCLI:
             logger.error(f"Failed to list runs: {e}")
             raise DiscernusCLIError(f"List runs failed: {e}")
 
+    def results(self, run_id: str):
+        """Fetch and display results for a given run_id from manifest.json"""
+        from pathlib import Path
+        manifest_path = Path(f"runs/{run_id}/manifest.json")
+        if not manifest_path.exists():
+            print(f"Run '{run_id}' not found or manifest missing")
+            return
+        with open(manifest_path) as f:
+            data = json.load(f)
+        artifacts = data.get("artifacts", [])
+        grouped: Dict[str, List[Any]] = {}
+        for art in artifacts:
+            grouped.setdefault(art["task_type"], []).append(art)
+        for task_type, arts in grouped.items():
+            print(f"\n=== {task_type.upper()} ===")
+            for art in arts:
+                fname = art.get("original_filename", "N/A")
+                sha = art["sha256"]
+                print(f"{fname} -> {sha}")
+        print(f"\nManifest run_id: {data.get('run_id')}, created: {data.get('created')}")
+
     def _get_mime_type(self, filename: str) -> str:
         """Simple MIME type detection for manifest"""
         ext = Path(filename).suffix.lower()
@@ -459,6 +480,10 @@ def main():
             
         elif command == 'list':
             cli.list_runs()
+            
+        elif command == 'results' and len(sys.argv) >= 3:
+            run_id = sys.argv[2]
+            cli.results(run_id)
             
         else:
             print("Invalid command or missing arguments")
