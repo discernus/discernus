@@ -23,14 +23,14 @@ This directory contains documentation for the THIN Redis orchestration Proof of 
 ## Quick Reference
 
 **Branch**: `poc-redis-orchestration`  
-**Status**: Core THIN architecture complete and validated  
-**Next Phase**: Complete synthesis pipeline and production hardening
+**Status**: THIN architecture implemented, **but no end-to-end experiment completed**  
+**Next Phase**: Implement SynthesisAgent and prove full pipeline works
 
 ## Architecture Validation
 
 ✅ **Proven**: LLMs can handle binary documents directly  
 ✅ **Validated**: Framework/experiment/corpus agnostic infrastructure  
-✅ **Tested**: Real political documents (DOCX, PDF) processed successfully
+⚠️ **Partial**: Task orchestration works, but **no complete experiment executed**
 
 ## For New Agents
 
