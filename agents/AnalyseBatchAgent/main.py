@@ -159,44 +159,29 @@ class AnalyseBatchAgent:
                 ]
             )
             
-            # Store result, parsing the LLM's response to create the explicit contract
+            # Store result - let the LLM return natural mixed content
             result_content = response.choices[0].message.content
             if not result_content or result_content.strip() == "":
                 logger.error(f"LLM returned empty response for batch {batch_id}")
                 return False
             
-            # THICK Anti-Pattern Fix: The agent that receives the LLM response is
-            # responsible for parsing it and creating the clean, structured artifact.
-            # This prevents downstream agents from having to make assumptions.
-            try:
-                # The LLM is instructed to return a JSON object as a string.
-                # We parse it here to create the final structured data.
-                llm_response_data = json.loads(result_content)
-                analysis_results = llm_response_data.get('analysis_results', [])
-            except json.JSONDecodeError:
-                logger.error(f"Failed to parse LLM JSON response for batch {batch_id}")
-                # As a fallback, store the raw response for debugging
-                analysis_results = {"error": "Failed to parse LLM response", "raw_response": result_content}
-
-            # Create structured batch analysis artifact
-            batch_analysis_artifact = {
+            # Create structured artifact with the LLM's natural response
+            # The LLM can return mixed markdown/JSON/text - downstream agents handle this naturally
+            batch_artifact = {
                 'batch_id': batch_id,
-                'task_id': task_id,
+                'experiment_name': task_data.get('experiment_name', 'unknown'),
                 'model_used': model,
-                'framework_hashes': framework_hashes,
-                'document_hashes': document_hashes,
-                'analysis_timestamp': self._get_timestamp(),
-                'analysis_results': analysis_results, # Explicit, structured data
-                'raw_llm_response': result_content, # Retained for debugging
+                'analysis_results': result_content,  # Raw LLM response
                 'batch_metadata': {
                     'num_frameworks': len(frameworks),
                     'num_documents': len(documents),
-                    'total_document_bytes': sum(doc['size_bytes'] for doc in documents),
+                    'framework_hashes': framework_hashes,
+                    'document_hashes': document_hashes,
                     'agent_version': 'AnalyseBatchAgent_v1.0'
                 }
             }
             
-            result_hash = put_artifact(json.dumps(batch_analysis_artifact, indent=2).encode('utf-8'))
+            result_hash = put_artifact(json.dumps(batch_artifact, indent=2).encode('utf-8'))
             logger.info(f"Batch analysis complete, result stored: {result_hash}")
             
             # Signal completion to router
