@@ -148,68 +148,58 @@ The PoC targets a 10‑document sample corpus and a single uploaded framework (C
 - ValidationAgent, non‑deterministic averaging, composite synthesis, PostHocMathAgent.
 - Multi‑framework support beyond CAF\_v4.3.
 
-### 3.5 · Agent Registry
+### 3.5 · Agent Ecosystem & Workflow
 
-All agent implementations are externalized and discoverable through a registry pattern:
+The Discernus system is composed of a tiered ecosystem of intelligent agents and core infrastructure components that work together to execute research experiments.
 
-- **`agents/AnalyseBatchAgent/`** - Multi-document batch analysis with framework application
-- **`agents/OrchestratorAgent/`** - Task planning and dependency management  
-- **`agents/PreTestAgent/`** - Variance estimation and optimal batch sizing
-- **`agents/CorpusSynthesisAgent/`** - Cross-batch aggregation and statistical analysis
-- **`agents/ReviewerAgent/`** - Adversarial review and quality assurance
-- **`agents/ModeratorAgent/`** - Review reconciliation and sign-off
-- **`agents/SecuritySentinelAgent/`** - Runtime security monitoring (post-PoC)
+#### Core THIN Infrastructure (Python Services)
 
-Each agent directory contains:
-- `main.py` - Agent entrypoint and execution logic
-- `prompt.yaml` - External prompt template with framework-agnostic instructions
-- `Dockerfile` - Containerized execution environment
+| Component | Function |
+| :--- | :--- |
+| **`Router`** | Listens to Redis streams and spawns the correct agent container based on task type. Contains no business logic. |
+| **`Execution Bridge`** | Thin script that translates a master plan from the `OrchestratorAgent` into discrete tasks in Redis. |
+| **`Artefact Storage`** | Provides content-addressable storage (put/get by SHA-256 hash) via MinIO. |
 
-### 3.7 · Batch Planner
+#### Tier 1: Batch Analysis Agents (LLM-Driven)
 
-**Empirical Discovery**: Gemini 2.5 Flash can process 9 political speeches + multiple frameworks in a single request with "stunning" synthesis quality, fundamentally changing optimal task granularity.
+| Agent | Function |
+| :--- | :--- |
+| **`PreTestAgent`** | Performs variance estimation on a corpus sample to recommend the optimal number of runs for statistical confidence. |
+| **`AnalyseBatchAgent`**| The workhorse analysis agent. Handles multi-document, multi-framework analysis. Its output is **structured, numerical data only**. |
 
-**Batch Intelligence Components**:
+#### Tier 2: Statistical Synthesis Agent (LLM-Driven)
 
-#### PreTestAgent (Variance Estimation)
-- **Purpose**: Cheap single call to estimate token size & scoring variance
-- **Method**: Generate synthetic representative text from corpus sample
-- **Output**: Recommended `runs_per_batch` based on statistical requirements
-- **Model**: `gemini-2.5-flash` (cost-optimized for variance sampling)
+| Agent | Function |
+| :--- | :--- |
+| **`CorpusSynthesisAgent`**| Performs **deterministic mathematical aggregation** of structured data from all Tier 1 batches to produce a corpus-level statistical report. |
 
-#### BatchPlanner Logic (OrchestratorAgent Enhancement)
-1. **Query Model Registry**: Extract `context_window` and `optimal_batch_size` for target model
-2. **Estimate Tokens**: Framework(s) + document batch ≈ 70% of model's context limit
-3. **Group Documents**: Until token estimate approaches window ceiling  
-4. **Create AnalyseBatch Task**: Multi-framework, multi-document payload
+#### Tier 3: Quality Assurance & Synthesis Agents (LLM-Driven)
 
-#### Enhanced Task Schema
-```json
-{
-  "task_type": "AnalyseBatch",
-  "batch_id": "B42", 
-  "framework_hashes": ["caf_92ab", "chf_77ff", "ecf_88cc"],
-  "text_uris": ["s3://.../speech_01.txt", "s3://.../speech_02.docx", "..."],
-  "recommend_runs": 3,
-  "model": "vertex_ai/gemini-2.5-flash",
-  "max_batch_tokens": 700000
-}
-```
+| Agent | Function |
+| :--- | :--- |
+| **`ReviewerAgent`** | Provides adversarial critique of the finalized Tier 2 statistical report from a specific analytical perspective. |
+| **`ModeratorAgent`** | Reconciles adversarial reviews and performs the **final qualitative synthesis** to produce the academic narrative, grounded in the Tier 2 statistics. |
 
-#### Batch Capacity Research
-Based on Perplexity analysis of Gemini 2.5 Pro capabilities:
-- **Context Window**: 1,000,000 tokens
-- **Average 30-min Speech**: ~2,925 tokens  
-- **Safe Batch Capacity**: 341 speeches per request
-- **Optimal Batch Size**: ~70% of context window (700k tokens)
+#### Tier 4: Orchestration Intelligence Agent (LLM-Driven)
 
-#### Statistical Run Requirements
-Using synthetic variance estimation:
-```
-n = (z × CV / E)²
-Where: z=1.96 (95% confidence), CV=pilot variance, E=desired margin
-Example: CV=0.02, E=0.01 → n=16 runs per speech
-```
+| Agent | Function |
+| :--- | :--- |
+| **`OrchestratorAgent`**| The **master planning LLM**. It receives the experiment, calls the `PreTestAgent`, and generates the complete, parallelized execution plan for the `Execution Bridge`. |
+
+### 3.7 · Core Architectural Principles
+
+#### Principle 1: Separation of Orchestration Intelligence from Execution
+This is the ultimate expression of the THIN philosophy for orchestration.
+- **Orchestration Intelligence (LLM):** The `OrchestratorAgent` is a pure reasoning engine. It understands the experiment's goals, the capabilities of other agents, and the constraints of the models. It produces a natural language *plan*.
+- **Orchestration Execution (Thin Python):** The `Execution Bridge` is a simple, non-intelligent script. It does not make decisions. It parses the LLM's plan and translates it into a series of commands (e.g., `redis.xadd(...)`).
+- **Benefit:** This prevents THICK, brittle logic from entering the Python codebase and keeps the system flexible and adaptive.
+
+#### Principle 2: Deterministic Layer Separation
+This principle ensures the scientific validity of the synthesis process.
+- **Tier 1 (Data Generation):** The `AnalyseBatchAgent` produces only structured, numerical data and direct evidence (quotes). It performs no qualitative interpretation.
+- **Tier 2 (Mathematical Aggregation):** The `CorpusSynthesisAgent` performs deterministic, verifiable mathematical operations on the Tier 1 data.
+- **Tier 3 (Qualitative Synthesis):** The `ModeratorAgent` performs the final, interpretive, qualitative analysis **only after** all statistics have been finalized and reviewed.
+- **Benefit:** This creates a transparent and auditable pipeline, clearly separating objective statistical findings from subjective academic interpretation.
 
 ### 3.8 · Layered Synthesis & Review Architecture
 
