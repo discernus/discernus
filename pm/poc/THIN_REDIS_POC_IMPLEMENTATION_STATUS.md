@@ -822,6 +822,47 @@ While the PoC successfully validates the core THIN architecture principles, seve
 
 **Security Status**: ❌ **Not Implemented** - All security features deferred as "post-PoC"
 
+### **Other Outstanding Items from Original Spec**
+
+#### **Artifact Registry CLI (Phase 2 - Partially Missing)**
+**Spec Requirement**: CLI commands `put`, `get`, `lookup` for direct artifact management
+- ✅ **Backend functions**: `put_artifact()`, `get_artifact()`, `artifact_exists()` implemented
+- ❌ **CLI interface**: No `discernus artifact put/get/lookup` commands
+- **Impact**: Users cannot manually manage artifacts outside of experiments
+
+#### **Sophisticated Cache Logic (Phase 4 - Incomplete)**  
+**Spec Requirement**: "Dependency-aware artifact check: ensure analysis JSON exists before enqueue"
+- ✅ **Content addressing**: SHA256 hashing working correctly
+- ❌ **Pre-enqueue cache checking**: Tasks still created for cached content
+- ❌ **Zero LLM calls verification**: Cache hits not verified to skip actual LLM calls
+- **Evidence**: Both experiment runs created Redis tasks despite identical hashes
+
+#### **Live Mode Cost Guard Enhancement (Phase 5 - Partial)**
+**Spec Requirement**: "Lua script aborts run if spent > cap in live mode"
+- ✅ **Pre-run estimation**: Cost calculation and user confirmation working
+- ❌ **Runtime cost monitoring**: No mid-run spending limits or abort capability
+- ❌ **LiteLLM proxy integration**: No verification via proxy logs as specified
+
+#### **Manifest Completeness (Section 5.5 - Gaps)**
+**Spec Requirement**: Manifests should include `{parent_sha256, prompt_hash}`
+- ✅ **Basic fields**: sha256, uri, task_type, timestamp, filename, MIME
+- ❌ **Missing fields**: `parent_sha256` for derivation chains, `prompt_hash` for integrity
+- **Impact**: Cannot track artifact provenance or detect prompt tampering
+
+#### **Post-PoC Wishlist (Section 9 - Documented for Reference)**
+1. **Precision-aware normalizer** & framework `precision` field
+2. **Non-deterministic averaging** and `runs_per_chunk` 
+3. **ValidationAgent** for custom schemas
+4. **PostHocMathAgent** for retrospective metrics
+5. **Composite framework synthesis**
+
+#### **Acceptance Criteria Verification Gaps**
+- **Run logs in MinIO**: Spec mentions "run log" artifacts - not implemented
+- **LiteLLM proxy log verification**: Pause/resume and cache hits should be verified via proxy logs
+- **End-to-end cost guard testing**: Live mode cost abort needs validation
+
+**Outstanding Items Status**: Multiple spec requirements partially implemented or deferred ⚠️
+
 ---
 
 **Commit Status**: All PoC implementation changes committed
