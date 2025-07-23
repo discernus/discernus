@@ -10,7 +10,7 @@ Architecture: Layer 2 agent in deterministic 3-layer synthesis pipeline
 - Input: Structured data from multiple AnalyseBatch results
 - Process: Deterministic mathematical aggregation
 - Output: Statistical report ONLY (no qualitative narrative)
-- Model: Cost-optimized (claude-3-haiku) for computational tasks
+- Model: Cost-optimized (gemini-2.5-flash) for computational tasks
 """
 
 import redis
@@ -89,7 +89,7 @@ class CorpusSynthesisAgent:
             
             experiment_name = task_data['experiment_name']
             batch_result_hashes = task_data['batch_result_hashes']
-            model = task_data.get('model', 'claude-3-haiku')  # Cost-optimized for stats
+            model = task_data.get('model', 'gemini-2.5-flash')  # Use Gemini 2.5 Flash for cost-optimized stats
             
             logger.info(f"Experiment '{experiment_name}': Aggregating {len(batch_result_hashes)} batch results")
             
