@@ -784,6 +784,44 @@ While the PoC successfully validates the core THIN architecture principles, seve
 
 **Status**: Core PoC architecture validated ✅ | Production readiness gaps documented ⚠️
 
+### **Security Hardening: Not Implemented**
+**From Original Spec (Section 8)**: Complete security framework planned but marked as "post-PoC"
+
+**Missing Security Features**:
+1. **Static Policy Gates** (Router-side validation)
+   - Task type allow-list: `{analyse, synth, math, pause, resume}`
+   - URI scheme validation: `^s3://discernus-artifacts/(corpus|frameworks|runs)/`
+   - Model allow-list validation against `models.yml`
+   - SHA256 length validation (64 hex chars)
+   - Max tasks per run limits
+
+2. **Runtime Sentinel Agent** (LLM-powered security)
+   - SecuritySentinelAgent for adversarial task inspection
+   - Detection of `.env`, PEM blocks, unauthorized URLs
+   - Task quarantine system (`tasks.quarantine` stream)
+
+3. **Sandboxing & Least Privilege**
+   - Docker containers with `--network none` 
+   - Read-only corpus mounts with temp scratch dirs
+   - OS shell restrictions for OrchestratorAgent
+
+4. **Prompt Integrity**
+   - Hash pinning for prompt files against Git
+   - Immutable system preambles with UUID validation
+   - Protection against prompt injection attacks
+
+5. **Secrets Scanning**
+   - Pre-upload scanning in `registry_cli.py put`
+   - Regex + entropy detection for credentials
+   - Automatic rejection of sensitive files
+
+**Threat Model**: Malicious frameworks/prompts could compromise OrchestratorAgent to:
+- Exfiltrate secrets through crafted LLM calls
+- Invoke unauthorized shell commands
+- Leak private data to remote endpoints
+
+**Security Status**: ❌ **Not Implemented** - All security features deferred as "post-PoC"
+
 ---
 
 **Commit Status**: All PoC implementation changes committed
