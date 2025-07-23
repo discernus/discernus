@@ -22,6 +22,7 @@ import os
 import time
 import argparse
 import logging
+import subprocess
 from typing import Dict, Any, List
 
 # Add scripts directory to path
@@ -145,29 +146,29 @@ Return JSON format with numerical scores.
                 return False
             
             logger.info(f"Task {task_id} found, ready for processing")
-            logger.info("Run manually: python3 agents/AnalyseBatchAgent/main.py {task_id}")
-            logger.info("Then check tasks.done stream for completion")
             
-            # Wait for completion (or check manually)
-            logger.info("Waiting 60 seconds for manual agent execution...")
-            time.sleep(60)
-            
-            # Check completion
-            done_messages = self.redis_client.xread({'tasks.done': '0'})
+            # Wait for completion by polling the tasks.done stream
+            logger.info("Waiting up to 120 seconds for agent execution...")
             task_completed = False
             result_hash = None
+            start_time = time.time()
             
-            for stream, msgs in done_messages:
-                for msg_id, fields in msgs:
-                    completion_data = json.loads(fields[b'data'])
-                    if completion_data.get('original_task_id') == task_id:
-                        task_completed = True
-                        result_hash = completion_data.get('result_hash')
-                        logger.info(f"✅ Task completion found: {result_hash}")
-                        break
+            while time.time() - start_time < 120:
+                done_messages = self.redis_client.xread({'tasks.done': '0'})
+                for stream, msgs in done_messages:
+                    for msg_id, fields in msgs:
+                        completion_data = json.loads(fields[b'data'])
+                        if completion_data.get('original_task_id') == task_id:
+                            task_completed = True
+                            result_hash = completion_data.get('result_hash')
+                            logger.info(f"✅ Task completion found: {result_hash}")
+                            break
+                if task_completed:
+                    break
+                time.sleep(5)  # Poll every 5 seconds
             
             if not task_completed:
-                logger.warning("⚠️  Task completion not detected - check manually")
+                logger.warning("⚠️  Task completion not detected in time")
                 return False
             
             # Validate result artifact structure
@@ -218,7 +219,7 @@ Return JSON format with numerical scores.
             task_data = {
                 'experiment_name': 'phase1_test_experiment',
                 'batch_result_hashes': [batch_result_hash],
-                'model': 'claude-3-haiku',
+                'model': 'gemini-2.5-flash', # Explicitly set correct model
                 'test_metadata': {
                     'test_type': 'phase1_question3',
                     'created_by': 'phase1_test_runner'
@@ -269,28 +270,29 @@ Return JSON format with numerical scores.
         
         try:
             logger.info(f"Task {task_id} ready for CorpusSynthesisAgent processing")
-            logger.info("Run manually: python3 agents/CorpusSynthesisAgent/main.py {task_id}")
             
-            # Wait for manual execution
-            logger.info("Waiting 60 seconds for manual agent execution...")
-            time.sleep(60)
-            
-            # Check completion
-            done_messages = self.redis_client.xread({'tasks.done': '0'})
+            # Wait for completion by polling the tasks.done stream
+            logger.info("Waiting up to 120 seconds for agent execution...")
             task_completed = False
             result_hash = None
-            
-            for stream, msgs in done_messages:
-                for msg_id, fields in msgs:
-                    completion_data = json.loads(fields[b'data'])
-                    if completion_data.get('original_task_id') == task_id:
-                        task_completed = True
-                        result_hash = completion_data.get('result_hash')
-                        logger.info(f"✅ Synthesis completion found: {result_hash}")
-                        break
+            start_time = time.time()
+
+            while time.time() - start_time < 120:
+                done_messages = self.redis_client.xread({'tasks.done': '0'})
+                for stream, msgs in done_messages:
+                    for msg_id, fields in msgs:
+                        completion_data = json.loads(fields[b'data'])
+                        if completion_data.get('original_task_id') == task_id:
+                            task_completed = True
+                            result_hash = completion_data.get('result_hash')
+                            logger.info(f"✅ Synthesis completion found: {result_hash}")
+                            break
+                if task_completed:
+                    break
+                time.sleep(5) # Poll every 5 seconds
             
             if not task_completed:
-                logger.warning("⚠️  Synthesis completion not detected - check manually")
+                logger.warning("⚠️  Synthesis completion not detected in time")
                 return False
             
             # Validate synthesis result structure
@@ -338,12 +340,21 @@ Return JSON format with numerical scores.
         task_id = messages[0][0].decode()
         logger.info(f"Using task ID for remaining tests: {task_id}")
         
-        # Manual intervention required
-        logger.info("🔄 MANUAL STEP REQUIRED:")
-        logger.info(f"   Run: python3 agents/AnalyseBatchAgent/main.py {task_id}")
-        logger.info("   Press Enter when complete...")
-        input()
-        
+        # Automated agent execution
+        logger.info("🤖 AUTOMATED STEP: Running AnalyseBatchAgent...")
+        try:
+            agent_process = subprocess.run(
+                ['python3', 'agents/AnalyseBatchAgent/main.py', task_id],
+                capture_output=True, text=True, check=True, timeout=120
+            )
+            logger.info(f"AnalyseBatchAgent stdout:\n{agent_process.stdout}")
+            logger.info("✅ AnalyseBatchAgent completed.")
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            logger.error(f"❌ AnalyseBatchAgent failed: {e}")
+            logger.error(f"   stdout: {e.stdout}")
+            logger.error(f"   stderr: {e.stderr}")
+            return False
+
         # Question 2
         if not self.test_question2_agent_processing(task_id):
             return False
@@ -370,12 +381,21 @@ Return JSON format with numerical scores.
         messages = self.redis_client.xrevrange('tasks', count=1)
         synthesis_task_id = messages[0][0].decode()
         
-        # Manual intervention required
-        logger.info("🔄 MANUAL STEP REQUIRED:")
-        logger.info(f"   Run: python3 agents/CorpusSynthesisAgent/main.py {synthesis_task_id}")
-        logger.info("   Press Enter when complete...")
-        input()
-        
+        # Automated agent execution
+        logger.info("🤖 AUTOMATED STEP: Running CorpusSynthesisAgent...")
+        try:
+            agent_process = subprocess.run(
+                ['python3', 'agents/CorpusSynthesisAgent/main.py', synthesis_task_id],
+                capture_output=True, text=True, check=True, timeout=120
+            )
+            logger.info(f"CorpusSynthesisAgent stdout:\n{agent_process.stdout}")
+            logger.info("✅ CorpusSynthesisAgent completed.")
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+            logger.error(f"❌ CorpusSynthesisAgent failed: {e}")
+            logger.error(f"   stdout: {e.stdout}")
+            logger.error(f"   stderr: {e.stderr}")
+            return False
+
         # Question 4
         if not self.test_question4_synthesis_processing(synthesis_task_id):
             return False

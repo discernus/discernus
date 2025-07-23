@@ -116,20 +116,26 @@ class AnalyseBatchAgent:
                 clean_hash = doc_hash[7:] if doc_hash.startswith('sha256:') else doc_hash
                 doc_bytes = get_artifact(clean_hash)
                 
-                # THIN: Enforce Binary-First Principle.
-                # Base64 encode all files to handle them as raw data blobs,
-                # making the agent agnostic to file type (text, pdf, docx, etc.).
-                # The LLM will be instructed to decode and process the content.
-                doc_base64 = base64.b64encode(doc_bytes).decode('utf-8')
-                
+                # Provisional: Text-First Fallback Principle
+                try:
+                    # Attempt to decode as text first for efficiency
+                    doc_content = doc_bytes.decode('utf-8')
+                    doc_encoding = 'text'
+                    logger.info(f"Retrieved document {i+1} as text: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
+                except UnicodeDecodeError:
+                    # Fallback to base64 for binary files
+                    doc_content = base64.b64encode(doc_bytes).decode('utf-8')
+                    doc_encoding = 'base64'
+                    logger.info(f"Retrieved and encoded document {i+1} as binary: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
+
                 documents.append({
                     'index': i + 1,
                     'hash': clean_hash,
-                    'content_base64': doc_base64,
+                    'content': doc_content,
+                    'encoding': doc_encoding,
                     'size_bytes': len(doc_bytes)
                 })
-                logger.info(f"Retrieved and encoded document {i+1}: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
-            
+
             # Format prompt for batch analysis (THIN - minimal string substitution)
             prompt_text = self.prompt_template.format(
                 batch_id=batch_id,
@@ -153,12 +159,25 @@ class AnalyseBatchAgent:
                 ]
             )
             
-            # Store result (THIN - no processing/parsing of LLM response)
+            # Store result, parsing the LLM's response to create the explicit contract
             result_content = response.choices[0].message.content
             if not result_content or result_content.strip() == "":
                 logger.error(f"LLM returned empty response for batch {batch_id}")
                 return False
             
+            # THICK Anti-Pattern Fix: The agent that receives the LLM response is
+            # responsible for parsing it and creating the clean, structured artifact.
+            # This prevents downstream agents from having to make assumptions.
+            try:
+                # The LLM is instructed to return a JSON object as a string.
+                # We parse it here to create the final structured data.
+                llm_response_data = json.loads(result_content)
+                analysis_results = llm_response_data.get('analysis_results', [])
+            except json.JSONDecodeError:
+                logger.error(f"Failed to parse LLM JSON response for batch {batch_id}")
+                # As a fallback, store the raw response for debugging
+                analysis_results = {"error": "Failed to parse LLM response", "raw_response": result_content}
+
             # Create structured batch analysis artifact
             batch_analysis_artifact = {
                 'batch_id': batch_id,
@@ -167,7 +186,8 @@ class AnalyseBatchAgent:
                 'framework_hashes': framework_hashes,
                 'document_hashes': document_hashes,
                 'analysis_timestamp': self._get_timestamp(),
-                'raw_llm_response': result_content,
+                'analysis_results': analysis_results, # Explicit, structured data
+                'raw_llm_response': result_content, # Retained for debugging
                 'batch_metadata': {
                     'num_frameworks': len(frameworks),
                     'num_documents': len(documents),
@@ -216,7 +236,7 @@ class AnalyseBatchAgent:
         """Format documents for LLM prompt"""
         formatted = []
         for document in documents:
-            formatted.append(f"=== DOCUMENT {document['index']} (base64 encoded) ===\n{document['content_base64']}\n")
+            formatted.append(f"=== DOCUMENT {document['index']} (encoding: {document['encoding']}) ===\n{document['content']}\n")
         return "\n".join(formatted)
     
     def _get_timestamp(self) -> str:
