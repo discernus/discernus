@@ -67,7 +67,7 @@ class SynthesisAgent:
             # Get artifacts (no parsing - just retrieval)
             analysis_hashes = task_data['analysis_hashes']
             framework_hash = task_data['framework_hash']
-            model = task_data.get('model', 'gemini-2.5-flash')
+            model = task_data.get('model', 'gemini-2.5-pro')  # Use Pro for synthesis by default
             
             # Strip sha256: prefix if present (orchestrator adds it, MinIO expects raw hash)
             if framework_hash.startswith('sha256:'):
