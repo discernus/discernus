@@ -24,7 +24,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - CLI - %(message)s'
 logger = logging.getLogger(__name__)
 
 # Redis configuration
-REDIS_HOST = 'localhost'
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 REDIS_PORT = 6379
 REDIS_DB = 0
 
@@ -35,13 +35,24 @@ class DiscernusCLIError(Exception):
 class ArtifactManifestWriter:
     """Manages artifact manifests for experiment runs"""
     
-    def __init__(self, run_id: str):
+    def __init__(self, run_id: str, project: str = None, experiment: str = None):
         self.run_id = run_id
-        self.manifest_dir = Path(f'runs/{run_id}')
+        self.project = project
+        self.experiment = experiment
+        
+        # Use hierarchical path if project/experiment provided, otherwise legacy runs/ path
+        if project and experiment:
+            # Always create path relative to the project root (where discernus_cli.py is located)
+            script_dir = Path(__file__).parent.parent  # Go up from scripts/ to project root
+            self.manifest_dir = script_dir / f'projects/{project}/{experiment}/{run_id}'
+        else:
+            script_dir = Path(__file__).parent.parent
+            self.manifest_dir = script_dir / f'runs/{run_id}'
+            
         self.manifest_file = self.manifest_dir / 'manifest.json'
         self.artifacts = []
         
-        # Create runs directory
+        # Create directory structure
         self.manifest_dir.mkdir(parents=True, exist_ok=True)
         
     def add_artifact(self, sha256: str, uri: str, task_type: str, 
@@ -132,7 +143,31 @@ class DiscernusCLI:
     def __init__(self):
         self.redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
     
-    def run_experiment(self, experiment_file: str, mode: str = 'dev'):
+    def _find_manifest_path(self, run_id: str):
+        """Find manifest path, supporting both legacy runs/ and hierarchical structures"""
+        from pathlib import Path
+        
+        # Check legacy runs/ structure first
+        legacy_path = Path(f"runs/{run_id}/manifest.json")
+        if legacy_path.exists():
+            return legacy_path.parent
+            
+        # Search for hierarchical structure
+        projects_path = Path("projects")
+        if projects_path.exists():
+            for project_dir in projects_path.glob("*/"):
+                if not project_dir.is_dir():
+                    continue
+                for experiment_dir in project_dir.glob("*/"):
+                    if not experiment_dir.is_dir():
+                        continue
+                    manifest_path = experiment_dir / run_id / "manifest.json"
+                    if manifest_path.exists():
+                        return manifest_path.parent
+                        
+        return None
+    
+    def run_experiment(self, experiment_file: str, mode: str = 'dev', project: str = None, experiment_name: str = None):
         """Run an experiment using the PoC architecture"""
         try:
             # Load experiment specification
@@ -143,8 +178,11 @@ class DiscernusCLI:
             logger.info(f"Running experiment: {experiment.get('name', 'unnamed')} (run_id: {run_id})")
             logger.info(f"Mode: {mode}")
             
+            if project and experiment_name:
+                logger.info(f"Academic hierarchy: projects/{project}/{experiment_name}/{run_id}")
+            
             # Initialize artifact manifest
-            manifest = ArtifactManifestWriter(run_id)
+            manifest = ArtifactManifestWriter(run_id, project, experiment_name)
             
             # Pre-hash all artifacts with manifest tracking
             framework_hash = self._store_file_artifact(experiment['framework_file'])
@@ -423,11 +461,11 @@ class DiscernusCLI:
 
     def results(self, run_id: str):
         """Fetch and display results for a given run_id from manifest.json"""
-        from pathlib import Path
-        manifest_path = Path(f"runs/{run_id}/manifest.json")
-        if not manifest_path.exists():
+        manifest_dir = self._find_manifest_path(run_id)
+        if not manifest_dir:
             print(f"Run '{run_id}' not found or manifest missing")
             return
+        manifest_path = manifest_dir / "manifest.json"
         with open(manifest_path) as f:
             data = json.load(f)
         artifacts = data.get("artifacts", [])
@@ -446,10 +484,11 @@ class DiscernusCLI:
         """Export all artifacts for a given run_id into structured output directory"""
         from pathlib import Path
         # Load manifest
-        manifest_path = Path(f"runs/{run_id}/manifest.json")
-        if not manifest_path.exists():
+        manifest_dir = self._find_manifest_path(run_id)
+        if not manifest_dir:
             print(f"Run '{run_id}' not found or manifest missing")
             return
+        manifest_path = manifest_dir / "manifest.json"
         with open(manifest_path) as f:
             data = json.load(f)
         artifacts = data.get('artifacts', [])
@@ -472,7 +511,7 @@ class DiscernusCLI:
             except Exception as e:
                 print(f"Failed to export {sha}: {e}")
         # Copy manifest files
-        manifest_md = Path(f"runs/{run_id}/manifest.md")
+        manifest_md = manifest_dir / "manifest.md"
         if manifest_md.exists():
             dest_manifest_md = base_dir / 'manifest.md'
             dest_manifest_json = base_dir / 'manifest.json'
@@ -500,7 +539,7 @@ def main():
     """CLI entry point"""
     if len(sys.argv) < 2:
         print("Usage:")
-        print("  discernus_cli.py run <experiment.yaml> [--mode live|dev]")
+        print("  discernus_cli.py run <experiment.yaml> [--mode live|dev] [--project <project>] [--experiment <experiment>]")
         print("  discernus_cli.py pause <run_id>")
         print("  discernus_cli.py resume <run_id>")
         print("  discernus_cli.py list")
@@ -518,15 +557,34 @@ def main():
                 return
             experiment_file = sys.argv[2]
             mode = 'dev'
+            project = None
+            experiment_name = None
             
-            # Check for mode flag
-            if len(sys.argv) >= 4 and sys.argv[3].startswith('--mode'):
-                if '=' in sys.argv[3]:
-                    mode = sys.argv[3].split('=')[1]
-                elif len(sys.argv) >= 5:
-                    mode = sys.argv[4]
+            # Parse command line arguments
+            i = 3
+            while i < len(sys.argv):
+                arg = sys.argv[i]
+                if arg.startswith('--mode'):
+                    if '=' in arg:
+                        mode = arg.split('=')[1]
+                    elif i + 1 < len(sys.argv):
+                        mode = sys.argv[i + 1]
+                        i += 1
+                elif arg.startswith('--project'):
+                    if '=' in arg:
+                        project = arg.split('=')[1]
+                    elif i + 1 < len(sys.argv):
+                        project = sys.argv[i + 1]
+                        i += 1
+                elif arg.startswith('--experiment'):
+                    if '=' in arg:
+                        experiment_name = arg.split('=')[1]
+                    elif i + 1 < len(sys.argv):
+                        experiment_name = sys.argv[i + 1]
+                        i += 1
+                i += 1
                     
-            cli.run_experiment(experiment_file, mode)
+            cli.run_experiment(experiment_file, mode, project, experiment_name)
             
         elif command == 'pause' and len(sys.argv) >= 3:
             run_id = sys.argv[2]
