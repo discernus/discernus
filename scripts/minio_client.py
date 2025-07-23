@@ -63,17 +63,14 @@ class DiscernusArtifactClient:
             logger.error(f"Bucket creation failed: {e}")
             raise ArtifactStorageError(f"Bucket setup failed: {e}")
     
-    def put_artifact(self, content: str) -> str:
+    def put_artifact(self, content: bytes) -> str:
         """
         Store content and return SHA256 hash.
-        Implements content-addressable storage - same content = same hash.
+        THIN: Just stores bytes, no assumptions about content type.
         """
         try:
-            # Convert to bytes
-            content_bytes = content.encode('utf-8')
-            
             # Calculate SHA256 hash
-            hash_id = hashlib.sha256(content_bytes).hexdigest()
+            hash_id = hashlib.sha256(content).hexdigest()
             
             # Check if already exists (cache hit)
             if self.artifact_exists(hash_id):
@@ -84,28 +81,27 @@ class DiscernusArtifactClient:
             self.client.put_object(
                 bucket_name=self.bucket,
                 object_name=hash_id,
-                data=BytesIO(content_bytes),
-                length=len(content_bytes),
-                content_type='text/plain'
+                data=BytesIO(content),
+                length=len(content)
             )
             
-            logger.info(f"Stored artifact: {hash_id} ({len(content_bytes)} bytes)")
+            logger.info(f"Stored artifact: {hash_id} ({len(content)} bytes)")
             return hash_id
             
         except Exception as e:
             logger.error(f"Failed to store artifact: {e}")
             raise ArtifactStorageError(f"Artifact storage failed: {e}")
     
-    def get_artifact(self, hash_id: str) -> str:
-        """Retrieve content by SHA256 hash"""
+    def get_artifact(self, hash_id: str) -> bytes:
+        """Retrieve content by SHA256 hash - returns raw bytes (THIN)"""
         try:
             response = self.client.get_object(self.bucket, hash_id)
-            content = response.read().decode('utf-8')
+            content_bytes = response.read()
             response.close()
             response.release_conn()
             
-            logger.debug(f"Retrieved artifact: {hash_id} ({len(content)} chars)")
-            return content
+            logger.debug(f"Retrieved artifact: {hash_id} ({len(content_bytes)} bytes)")
+            return content_bytes
             
         except S3Error as e:
             if e.code == 'NoSuchKey':
@@ -134,21 +130,47 @@ class DiscernusArtifactClient:
             raise ArtifactStorageError(f"Existence check failed: {e}")
     
     def put_file(self, file_path: str) -> str:
-        """Store file contents and return SHA256 hash"""
+        """Store file contents and return SHA256 hash - handles binary files"""
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-            return self.put_artifact(content)
+            # Read as binary to handle all file types (DOCX, PDF, etc.)
+            with open(file_path, 'rb') as f:
+                content_bytes = f.read()
+            
+            # Calculate SHA256 hash
+            hash_id = hashlib.sha256(content_bytes).hexdigest()
+            
+            # Check if already exists (cache hit)
+            if self.artifact_exists(hash_id):
+                logger.debug(f"Binary file cache hit: {hash_id}")
+                return hash_id
+            
+            # Store binary content with metadata
+            self.client.put_object(
+                bucket_name=self.bucket,
+                object_name=hash_id,
+                data=BytesIO(content_bytes),
+                length=len(content_bytes),
+                metadata={
+                    'original_filename': os.path.basename(file_path),
+                    'content_type': 'binary'
+                }
+            )
+            
+            logger.info(f"Stored binary file: {hash_id} ({os.path.basename(file_path)}, {len(content_bytes)} bytes)")
+            return hash_id
+            
         except Exception as e:
             logger.error(f"Failed to store file {file_path}: {e}")
             raise ArtifactStorageError(f"File storage failed: {e}")
     
+
+    
     def get_to_file(self, hash_id: str, destination_path: str) -> None:
-        """Retrieve artifact and save to file"""
+        """Retrieve artifact and save to file - THIN: preserves original bytes"""
         try:
-            content = self.get_artifact(hash_id)
-            with open(destination_path, 'w', encoding='utf-8') as f:
-                f.write(content)
+            content_bytes = self.get_artifact(hash_id)
+            with open(destination_path, 'wb') as f:
+                f.write(content_bytes)
             logger.info(f"Saved artifact {hash_id} to {destination_path}")
         except Exception as e:
             logger.error(f"Failed to save artifact to file: {e}")
@@ -201,17 +223,21 @@ def get_default_client() -> DiscernusArtifactClient:
         _default_client = DiscernusArtifactClient()
     return _default_client
 
-def put_artifact(content: str) -> str:
-    """Store content using default client"""
+def put_artifact(content: bytes) -> str:
+    """Store bytes using default client - THIN approach"""
     return get_default_client().put_artifact(content)
 
-def get_artifact(hash_id: str) -> str:
-    """Retrieve content using default client"""
+def get_artifact(hash_id: str) -> bytes:
+    """Retrieve bytes using default client - THIN approach"""
     return get_default_client().get_artifact(hash_id)
 
 def artifact_exists(hash_id: str) -> bool:
     """Check existence using default client"""
     return get_default_client().artifact_exists(hash_id)
+
+def put_file(file_path: str) -> str:
+    """Store file as bytes using default client - THIN approach"""
+    return get_default_client().put_file(file_path)
 
 def main():
     """CLI entry point for testing"""

@@ -51,12 +51,27 @@ class DiscernusCLI:
             corpus_hashes = {}
             corpus_dir = experiment['corpus_dir']
             
-            for filename in os.listdir(corpus_dir):
-                if filename.endswith('.txt') or filename.endswith('.md'):
+            # Support binary file types for THIN testing
+            supported_extensions = ['.txt', '.md', '.docx', '.pdf', '.doc', '.rtf']
+            
+            # If experiment specifies specific files, use those
+            if 'corpus_files' in experiment:
+                for filename in experiment['corpus_files']:
                     filepath = os.path.join(corpus_dir, filename)
-                    file_hash = self._store_file_artifact(filepath)
-                    corpus_hashes[filename] = file_hash
-                    logger.info(f"Corpus file stored: {filename} -> {file_hash[:12]}...")
+                    if os.path.exists(filepath):
+                        file_hash = self._store_file_artifact(filepath)
+                        corpus_hashes[filename] = file_hash
+                        logger.info(f"Binary corpus file stored: {filename} -> {file_hash[:12]}...")
+                    else:
+                        logger.warning(f"Specified corpus file not found: {filename}")
+            else:
+                # Auto-discover files with supported extensions
+                for filename in os.listdir(corpus_dir):
+                    if any(filename.endswith(ext) for ext in supported_extensions):
+                        filepath = os.path.join(corpus_dir, filename)
+                        file_hash = self._store_file_artifact(filepath)
+                        corpus_hashes[filename] = file_hash
+                        logger.info(f"Corpus file stored: {filename} -> {file_hash[:12]}...")
             
             logger.info(f"Total corpus files: {len(corpus_hashes)}")
             
@@ -102,11 +117,10 @@ class DiscernusCLI:
             raise DiscernusCLIError(f"Experiment execution failed: {e}")
     
     def _store_file_artifact(self, filepath: str) -> str:
-        """Store file content and return hash"""
+        """Store file content and return hash - THIN: always binary"""
         try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                content = f.read()
-            return put_artifact(content)
+            from minio_client import put_file
+            return put_file(filepath)
         except Exception as e:
             logger.error(f"Failed to store file {filepath}: {e}")
             raise DiscernusCLIError(f"File storage failed: {e}")
