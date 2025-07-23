@@ -116,6 +116,7 @@ This plan is a series of gates. We only proceed to the next phase once all quest
 
 **High-Priority Tasks for Phase 2:**
 - **Automate the orchestration pipeline:** Fully implement the `Execution Bridge` to translate the `OrchestratorAgent`'s plans into Redis tasks, eliminating all manual `input()` steps from the testing workflow.
+- **Testing Framework**: Create `scripts/phase2_test_runner.py` to validate the entire dynamic orchestration pipeline.
 
 **Chain of Questions to Verify Success:**
 
