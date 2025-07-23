@@ -123,7 +123,8 @@ class CorpusSynthesisAgent:
                     if total_frameworks == 0:
                         total_frameworks = frameworks_in_batch
                     elif total_frameworks != frameworks_in_batch:
-                        logger.warning(f"Framework count mismatch: expected {total_frameworks}, got {frameworks_in_batch}")
+                        logger.error(f"Framework count mismatch: expected {total_frameworks}, got {frameworks_in_batch} in batch {clean_hash}")
+                        raise CorpusSynthesisAgentError(f"Fatal: Inconsistent framework count detected in batch {clean_hash}.")
                 
                 logger.info(f"Retrieved batch {i+1}: {clean_hash[:12]}... ({len(batch_data['analysis_results'])} documents)")
             
