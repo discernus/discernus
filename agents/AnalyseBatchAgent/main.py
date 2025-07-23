@@ -21,6 +21,7 @@ import os
 import logging
 from typing import Dict, Any, List
 from litellm import completion
+import base64
 
 # Add scripts directory to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
@@ -115,21 +116,19 @@ class AnalyseBatchAgent:
                 clean_hash = doc_hash[7:] if doc_hash.startswith('sha256:') else doc_hash
                 doc_bytes = get_artifact(clean_hash)
                 
-                # THIN: Pass binary files directly to LLM when possible
-                # For PoC, decode with fallback for binary files
-                try:
-                    doc_text = doc_bytes.decode('utf-8')
-                except UnicodeDecodeError:
-                    # Binary file - in production would pass directly to multimodal LLM
-                    doc_text = f"[BINARY DOCUMENT: {len(doc_bytes)} bytes - Content would be processed by multimodal LLM]"
+                # THIN: Enforce Binary-First Principle.
+                # Base64 encode all files to handle them as raw data blobs,
+                # making the agent agnostic to file type (text, pdf, docx, etc.).
+                # The LLM will be instructed to decode and process the content.
+                doc_base64 = base64.b64encode(doc_bytes).decode('utf-8')
                 
                 documents.append({
                     'index': i + 1,
                     'hash': clean_hash,
-                    'content': doc_text,
+                    'content_base64': doc_base64,
                     'size_bytes': len(doc_bytes)
                 })
-                logger.info(f"Retrieved document {i+1}: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
+                logger.info(f"Retrieved and encoded document {i+1}: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
             
             # Format prompt for batch analysis (THIN - minimal string substitution)
             prompt_text = self.prompt_template.format(
@@ -217,7 +216,7 @@ class AnalyseBatchAgent:
         """Format documents for LLM prompt"""
         formatted = []
         for document in documents:
-            formatted.append(f"=== DOCUMENT {document['index']} ===\n{document['content']}\n")
+            formatted.append(f"=== DOCUMENT {document['index']} (base64 encoded) ===\n{document['content_base64']}\n")
         return "\n".join(formatted)
     
     def _get_timestamp(self) -> str:

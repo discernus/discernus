@@ -140,6 +140,9 @@ python3 scripts/phase1_test_runner.py --test full_pipeline
 
 **Goal:** To empower the `OrchestratorAgent` (the LLM) with the intelligence to automatically break down a large experiment into optimal batches and manage the entire fan-out/fan-in process via the `Execution Bridge`.
 
+**High-Priority Tasks for Phase 2:**
+- **Automate the orchestration pipeline:** Fully implement the `Execution Bridge` to translate the `OrchestratorAgent`'s plans into Redis tasks, eliminating all manual `input()` steps from the testing workflow.
+
 **Chain of Questions to Verify Success:**
 
 1.  **Can the `PreTestAgent` analyze a corpus sample and produce a statistically-grounded `recommend_runs` value?**
@@ -165,6 +168,11 @@ python3 scripts/phase1_test_runner.py --test full_pipeline
 ### Phase 3: Quality Assurance & Moderated Review Loop
 
 **Goal:** To implement the complete 3-layer synthesis pipeline, ensuring that every analysis is stress-tested and quality-assured before being finalized.
+
+**High-Priority Tasks for Phase 3:**
+- **Adversarial review**: `ReviewerAgent` and `ModeratorAgent`.
+- **Production-grade process management**: Investigate and integrate `Supervisor` to replace `subprocess.Popen` for robust agent spawning.
+- **Comprehensive security package**: Implement the static policy gates, runtime sentinel, and sandboxing outlined in the architecture.
 
 **Chain of Questions to Verify Success:**
 

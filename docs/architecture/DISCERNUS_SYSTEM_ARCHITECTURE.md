@@ -201,6 +201,14 @@ This principle ensures the scientific validity of the synthesis process.
 - **Tier 3 (Qualitative Synthesis):** The `ModeratorAgent` performs the final, interpretive, qualitative analysis **only after** all statistics have been finalized and reviewed.
 - **Benefit:** This creates a transparent and auditable pipeline, clearly separating objective statistical findings from subjective academic interpretation.
 
+#### Principle 3: The Binary-First Principle
+This principle ensures the system remains truly format-agnostic and avoids the primary cause of THICK software: parsing.
+- **All Files are Binary:** Every file, regardless of whether it is a `.txt`, `.docx`, or `.pdf`, is treated as an opaque binary blob by the software.
+- **No Decoding in Software:** The Python agent code does not attempt to open, read, or decode file content. It interacts only with the file's hash and its raw bytes.
+- **Base64 Encoding for Transport:** To pass file content to a text-centric LLM API, agents base64 encode the raw bytes. This maintains the content's integrity without requiring the software to understand it.
+- **LLM Handles Decoding:** The LLM prompt explicitly instructs the model to first base64 decode the content before beginning its analysis.
+- **Benefit:** This completely eliminates the temptation for developers to write parsers. It forces all content interpretation to happen within the LLM, making the system maximally flexible and robust against new or unusual file formats.
+  
 ### 3.8 · Layered Synthesis & Review Architecture
 
 **Problem Solved**: How to handle analytic synthesis when batching is cheap - a layered approach that maintains quality while leveraging large context windows.
