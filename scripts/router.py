@@ -6,6 +6,7 @@ Thin router that moves tasks between streams with NO business logic.
 
 import redis
 import json
+import os
 import subprocess
 import logging
 import time
@@ -17,7 +18,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Redis configuration
-REDIS_HOST = 'localhost'
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 REDIS_PORT = 6379
 REDIS_DB = 0
 
@@ -32,6 +33,8 @@ AGENT_SCRIPTS = {
     'analyse': ['python3', 'agents/AnalyseChunkAgent/main.py'],
     'orchestrate': ['python3', 'agents/OrchestratorAgent/main.py'],
     'synthesize': ['python3', 'agents/SynthesisAgent/main.py'],
+    'execute_plan': ['python3', 'agents/PlanExecutorAgent/main.py'],
+    'execute_task_list': ['python3', 'agents/TaskListExecutorAgent/main.py'],
 }
 
 class RouterError(Exception):

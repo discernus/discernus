@@ -1,16 +1,16 @@
 # Experiment Run Manifest: vanderveen_binary_test
 
-**Generated**: 2025-07-23 03:55:32 UTC  
+**Generated**: 2025-07-23 12:51:57 UTC  
 **Total Artifacts**: 4
 
 ## Artifact Overview
 
 | SHA256 (12 chars) | Task Type | Original Filename | Timestamp |
 |-------------------|-----------|-------------------|-----------|
-| `595a2ee6521b...` | framework | framework.md | 2025-07-23 03:55:32 |
-| `fd506a89920a...` | corpus | us.2016.Trump.Announcement.6-16.docx | 2025-07-23 03:55:32 |
-| `b18912729e9e...` | corpus | us.2016.Sanders.Announcement.5-26.docx | 2025-07-23 03:55:32 |
-| `5deca64480ad...` | corpus | us.2016.DemocraticPartyPlatform.pdf | 2025-07-23 03:55:32 |
+| `595a2ee6521b...` | framework | framework.md | 2025-07-23 12:51:57 |
+| `fd506a89920a...` | corpus | us.2016.Trump.Announcement.6-16.docx | 2025-07-23 12:51:57 |
+| `b18912729e9e...` | corpus | us.2016.Sanders.Announcement.5-26.docx | 2025-07-23 12:51:57 |
+| `5deca64480ad...` | corpus | us.2016.DemocraticPartyPlatform.pdf | 2025-07-23 12:51:57 |
 
 ## Provenance Chain
 

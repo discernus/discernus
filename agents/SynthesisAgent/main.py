@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - SynthesisAgent - %
 logger = logging.getLogger(__name__)
 
 # Redis configuration
-REDIS_HOST = 'localhost'
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 REDIS_PORT = 6379
 REDIS_DB = 0
 CONSUMER_GROUP = 'discernus'
@@ -116,16 +116,25 @@ class SynthesisAgent:
                 analysis_count=len(analysis_results)
             )
             
-            # Call LLM (thin wrapper)
+            # Call LLM (thin wrapper) with safety settings for political content
             logger.info(f"Calling LLM ({model}) for synthesis of {len(analysis_results)} analyses...")
             response = completion(
                 model=model,
                 messages=[{"role": "user", "content": prompt_text}],
-                temperature=0.0
+                temperature=0.0,
+                safety_settings=[
+                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
+                ]
             )
             
             # Store result (THIN - no processing/parsing)
             result_content = response.choices[0].message.content
+            if not result_content or result_content.strip() == "":
+                logger.error(f"LLM returned empty response for synthesis task")
+                return False
             result_hash = put_artifact(result_content.encode('utf-8'))
             
             logger.info(f"Synthesis complete, final report stored: {result_hash}")

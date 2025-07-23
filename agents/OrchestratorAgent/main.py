@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - OrchestratorAgent 
 logger = logging.getLogger(__name__)
 
 # Redis configuration
-REDIS_HOST = 'localhost'
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
 REDIS_PORT = 6379
 REDIS_DB = 0
 CONSUMER_GROUP = 'discernus'
@@ -68,46 +68,50 @@ class OrchestratorAgent:
             
             # Ask LLM what tasks to create (LLM intelligence, not software parsing)
             logger.info("Asking LLM to plan experiment tasks...")
-            # Use Gemini Flash for orchestration planning
+            # Use Gemini Flash for orchestration planning with safety settings for political content
             planning_response = completion(
                 model="gemini-2.5-flash",
                 messages=[{"role": "user", "content": prompt_text}],
-                temperature=0.0
+                temperature=0.0,
+                safety_settings=[
+                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
+                ]
             )
             
-            # Parse LLM response (THIN - trust LLM to provide valid JSON)
-            task_plan = json.loads(planning_response.choices[0].message.content)
-            task_queue = task_plan['task_queue']
+            # THIN approach: Store raw LLM response and let another LLM execute it
+            llm_content = planning_response.choices[0].message.content
+            if not llm_content or llm_content.strip() == "":
+                logger.error(f"LLM returned empty response. Full response: {planning_response}")
+                return False
             
-            logger.info(f"LLM planned {len(task_queue)} tasks")
+            logger.info(f"LLM generated {len(llm_content)} character plan")
             
-            # Enqueue tasks (THIN - no validation, trust LLM planning)
-            enqueued_count = 0
-            for task in task_queue:
-                try:
-                    message_id = self.redis_client.xadd('tasks', {
-                        'type': task['type'],
-                        'data': json.dumps(task['params'])
-                    })
-                    logger.info(f"Enqueued {task['type']} task: {message_id}")
-                    enqueued_count += 1
-                    
-                except Exception as e:
-                    logger.error(f"Failed to enqueue task: {e}")
-                    continue
-            
-            # Store orchestration plan for provenance
+            # Store raw orchestration plan (THIN - no parsing, just storage)
             import time
-            plan_content = {
+            raw_plan_content = {
                 'experiment': experiment,
-                'task_plan': task_plan,
-                'enqueued_tasks': enqueued_count,
+                'framework_hash': framework_hash,
+                'corpus_hashes': corpus_hashes,
+                'raw_llm_plan': llm_content,
                 'orchestration_timestamp': time.time()
             }
-            plan_hash = put_artifact(json.dumps(plan_content, indent=2))
-            logger.info(f"Orchestration plan stored: {plan_hash}")
+            plan_hash = put_artifact(json.dumps(raw_plan_content, indent=2).encode('utf-8'))
+            logger.info(f"Raw orchestration plan stored: {plan_hash}")
             
-            logger.info(f"Orchestration complete: {enqueued_count} tasks enqueued")
+            # Create single execution task - let downstream LLM interpret the plan
+            message_id = self.redis_client.xadd('tasks', {
+                'type': 'execute_plan',
+                'data': json.dumps({
+                    'plan_hash': plan_hash,
+                    'experiment_name': experiment.get('name', 'unknown')
+                })
+            })
+            logger.info(f"Plan execution task enqueued: {message_id}")
+            
+            logger.info("Orchestration complete: Raw plan stored and execution task created")
             return True
             
         except json.JSONDecodeError as e:
