@@ -22,7 +22,6 @@ import yaml
 import sys
 import os
 import logging
-import re
 from typing import Dict, Any, List
 from litellm import completion
 import base64
@@ -117,16 +116,11 @@ class PreTestAgent:
                 raise PreTestAgentError(f"LLM returned empty response for pre-test {task_id}")
 
             # 4. Store result artifact with `recommend_runs`
-            try:
-                llm_response_data = json.loads(result_content)
-            except json.JSONDecodeError:
-                raise PreTestAgentError(f"Failed to parse LLM JSON response for pre-test {task_id}. Raw response: {result_content}")
-
             pretest_artifact = {
                 'experiment_name': experiment_name,
                 'task_id': task_id,
                 'model_used': model,
-                'recommendation': llm_response_data,
+                'recommendation': result_content,  # Raw LLM response with analysis and recommendation
                 'pretest_metadata': {
                     'num_frameworks_sampled': len(frameworks),
                     'num_documents_sampled': len(documents),

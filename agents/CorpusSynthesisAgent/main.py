@@ -95,8 +95,6 @@ class CorpusSynthesisAgent:
             
             # Retrieve all batch analysis artifacts
             batch_analyses = []
-            total_documents = 0
-            total_frameworks = 0
             
             for i, batch_hash in enumerate(batch_result_hashes):
                 # Strip sha256: prefix if present
@@ -104,37 +102,22 @@ class CorpusSynthesisAgent:
                 batch_bytes = get_artifact(clean_hash)
                 batch_data = json.loads(batch_bytes.decode('utf-8'))
                 
-                # Validate batch analysis structure
-                if 'analysis_results' not in batch_data:
-                    raise CorpusSynthesisAgentError(f"Invalid batch analysis structure in {clean_hash}")
-                
+                # The batch data now contains raw LLM responses - let the synthesis LLM handle them
                 batch_analyses.append({
                     'batch_index': i + 1,
                     'batch_id': batch_data.get('batch_id', f'batch_{i+1}'),
                     'hash': clean_hash,
-                    'data': batch_data
+                    'analysis_content': batch_data.get('analysis_results', ''),  # Raw LLM response
+                    'metadata': batch_data.get('batch_metadata', {})
                 })
                 
-                # Count documents and frameworks for validation
-                if 'analysis_results' in batch_data:
-                    total_documents += len(batch_data['analysis_results'])
-                if 'batch_metadata' in batch_data:
-                    frameworks_in_batch = batch_data['batch_metadata'].get('num_frameworks', 0)
-                    if total_frameworks == 0:
-                        total_frameworks = frameworks_in_batch
-                    elif total_frameworks != frameworks_in_batch:
-                        logger.error(f"Framework count mismatch: expected {total_frameworks}, got {frameworks_in_batch} in batch {clean_hash}")
-                        raise CorpusSynthesisAgentError(f"Fatal: Inconsistent framework count detected in batch {clean_hash}.")
-                
-                logger.info(f"Retrieved batch {i+1}: {clean_hash[:12]}... ({len(batch_data['analysis_results'])} documents)")
+                logger.info(f"Retrieved batch {i+1}: {clean_hash[:12]}... (raw analysis content)")
             
             # Format prompt for statistical aggregation (THIN - minimal string substitution)
             prompt_text = self.prompt_template.format(
                 experiment_name=experiment_name,
                 batch_analyses=self._format_batch_analyses_for_prompt(batch_analyses),
-                num_batches=len(batch_analyses),
-                total_documents=total_documents,
-                total_frameworks=total_frameworks
+                num_batches=len(batch_analyses)
             )
             
             # Call LLM for statistical computation
@@ -201,15 +184,15 @@ class CorpusSynthesisAgent:
             return False
     
     def _format_batch_analyses_for_prompt(self, batch_analyses: List[Dict]) -> str:
-        """Format batch analyses for LLM prompt - structured data only"""
+        """Format batch analyses for LLM prompt - pass raw analysis content"""
         formatted = []
         for batch in batch_analyses:
-            batch_data = batch['data']
             formatted.append(f"=== BATCH {batch['batch_index']} (ID: {batch['batch_id']}) ===")
             formatted.append(f"Hash: {batch['hash']}")
-            formatted.append(f"Analysis Results: {json.dumps(batch_data.get('analysis_results', []), indent=2)}")
-            if 'batch_metadata' in batch_data:
-                formatted.append(f"Batch Metadata: {json.dumps(batch_data['batch_metadata'], indent=2)}")
+            formatted.append("Analysis Content:")
+            formatted.append(batch['analysis_content'])  # Raw LLM response from AnalyseBatchAgent
+            if batch['metadata']:
+                formatted.append(f"Metadata: {json.dumps(batch['metadata'], indent=2)}")
             formatted.append("")
         return "\n".join(formatted)
     
