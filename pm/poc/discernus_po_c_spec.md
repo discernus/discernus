@@ -197,36 +197,77 @@ $ discernus resume RUN123
 $ discernus run experiments/caf_sample.yaml --mode live
 
 # After run
-$ discernus manifest RUN123 > runs/RUN123/manifest.json
+$ discernus manifest my_project/caf_experiment/run_001 > projects/my_project/caf_experiment/run_001/manifest.json
 ```
 
 ---
 
 ## 8 · Experiment Export & Directory Structure
 
-After a successful run, a single CLI command recreates the familiar, self-contained experiment folder for archiving and replication:
+Discernus organizes research using a three-tier academic hierarchy: **Project → Experiment → Run**. This structure mirrors real research workflows where scholars work on multiple projects, each containing several experiments, with multiple runs per experiment.
+
+### 8.1 · Academic Directory Structure
+
+```
+projects/
+├─ my_research_project/
+│  ├─ experiment_1/
+│  │  ├─ run_001/
+│  │  ├─ run_002/
+│  │  └─ run_003/
+│  ├─ experiment_2/
+│  │  ├─ run_001/
+│  │  └─ run_002/
+│  └─ comparative_analysis/
+│     └─ run_001/
+└─ collaboration_study/
+   ├─ pilot_experiment/
+   │  └─ run_001/
+   └─ main_experiment/
+      ├─ run_001/
+      └─ run_002/
+```
+
+### 8.2 · Export Command
+
+After a successful run, export creates a self-contained experiment folder:
 
 ```bash
-$ discernus export <RUN_ID> --out-dir runs/<RUN_ID>
+$ discernus export <PROJECT>/<EXPERIMENT>/<RUN_ID> --out-dir projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>
 ```
 
-This produces:
+This produces the complete research artifact:
 
 ```
-runs/<RUN_ID>/
-├─ corpus/               ← all original input files (e.g., *.txt, frameworks/*.md)
+projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>/
+├─ corpus/               ← all original input files (e.g., *.txt, *.docx, *.pdf)
 ├─ analysis/             ← one JSON per chunk named <chunk_id>.<framework_hash>.json
 ├─ synthesis/            ← <RUN_ID>.json (the merged report)
+├─ framework/            ← analytical framework used
 ├─ logs/                 ← router.log, lite_llm_proxy.log, agent logs
-└─ manifest.json         ← full provenance chain & metadata
+├─ manifest.json         ← machine-readable provenance chain & metadata
+└─ manifest.md           ← human-readable experiment summary
 ```
 
-- **manifest.json** is both human- and machine-readable, listing each artefact URI, its SHA-256 hash, parent links, task\_type, and timestamp.
-- The entire `runs/<RUN_ID>/` folder can be zipped, stored in DVC or Git, and handed off for audit or replication.
-- To resume or replay an exported run exactly, users point the CLI at `runs/<RUN_ID>/manifest.json`:
-  ```bash
-  $ discernus run --from-manifest runs/<RUN_ID>/manifest.json
-  ```
+### 8.3 · Academic Workflow Integration
+
+- **manifest.md** provides publication-ready experiment documentation with SHA-256 provenance
+- **manifest.json** enables programmatic replication and citation
+- The entire project folder integrates with Git, DVC, and institutional repositories
+- Cross-experiment analysis becomes trivial: `find projects/ -name "synthesis/*.json" | xargs analyze`
+
+### 8.4 · Replication & Citation
+
+To replay an exported run exactly:
+```bash
+$ discernus run --from-manifest projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>/manifest.json
+```
+
+For cross-institutional sharing:
+```bash
+$ tar -czf research_package.tar.gz projects/<PROJECT>/
+$ # Share complete project with colleagues for independent replication
+```
 
 ---
 
