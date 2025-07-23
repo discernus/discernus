@@ -52,14 +52,36 @@ class ExecutionBridge:
             logger.info(f"Executing plan from artifact: {plan_hash}")
             
             # 1. Retrieve the plan artifact
-            plan_bytes = get_artifact(plan_hash)
+            clean_hash = plan_hash[7:] if plan_hash.startswith('sha256:') else plan_hash
+            plan_bytes = get_artifact(clean_hash)
             plan_data = json.loads(plan_bytes.decode('utf-8'))
             
-            # TODO: Implement the plan parsing and task creation logic
-            # This will involve iterating through the plan steps and
-            # creating tasks like 'analyse_batch', 'corpus_synthesis', etc.
+            # 2. Validate plan structure
+            if 'tasks' not in plan_data or not isinstance(plan_data['tasks'], list):
+                raise ExecutionBridgeError("Plan artifact is missing a valid 'tasks' list.")
             
-            logger.info(f"Successfully executed plan: {plan_hash}")
+            tasks_to_create = plan_data['tasks']
+            experiment_name = plan_data.get('experiment_name', 'untitled_experiment')
+            logger.info(f"Plan for experiment '{experiment_name}' contains {len(tasks_to_create)} tasks to be enqueued.")
+
+            # 3. Iterate through the plan and enqueue each task
+            enqueued_count = 0
+            for i, task in enumerate(tasks_to_create):
+                task_type = task.get('type')
+                task_data = task.get('data')
+
+                if not task_type or not task_data:
+                    logger.warning(f"Skipping malformed task at index {i} in plan {clean_hash}")
+                    continue
+
+                message_id = self.redis_client.xadd('tasks', {
+                    'type': task_type,
+                    'data': json.dumps(task_data)
+                })
+                logger.info(f"Enqueued task {i+1}/{len(tasks_to_create)}: type='{task_type}', id={message_id}")
+                enqueued_count += 1
+            
+            logger.info(f"Successfully enqueued {enqueued_count} tasks from plan {clean_hash}")
             return True
             
         except Exception as e:
