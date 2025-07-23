@@ -48,6 +48,63 @@ This implementation brief demonstrates how THIN architecture principles enable a
 
 The empirical discovery that modern LLMs (Gemini 2.5 Flash) can process **9 speeches + multiple frameworks** in a single request validates that THIN architecture can deliver both **efficiency** and **quality** at production scale.
 
+## Why This Architectural Direction Became Necessary
+
+### The Orchestration Brittleness Problem
+
+Despite strong THIN architectural principles, the orchestration pipeline has become a persistent source of brittleness and THICK software that undermines reliable execution. The fundamental issue: **traditional software orchestration inherently conflicts with THIN philosophy**.
+
+### Specific Manifestations of THICK Creep
+
+**Framework/Experiment Parsing Addiction**:
+- Cursor agents consistently write upfront parsers for frameworks and experiments
+- LLM agents are perfectly capable of understanding these documents with far greater depth than any parser
+- Yet parsing code appears reflexively, introducing bugs every time new frameworks or experiment types are introduced
+- **Root Cause**: Traditional orchestration assumes software must "understand" before delegating to LLMs
+
+**LLM Response Parsing Obsession**:
+- LLM outputs get scrutinized by yet more parsers: "Oh no! The LLM wrapped JSON in Markdown!"
+- The orchestration should be **LLM-to-LLM handoffs** where downstream agents handle upstream responses naturally
+- **Root Cause**: Software-centric thinking where "clean data" must be extracted rather than letting LLMs handle contextual interpretation
+
+**Performance Bottlenecks**:
+- System fails to parallelize operations that could be parallelized
+- LLMs can ingest frameworks and process multiple corpus files in single transactions
+- Round-robin parallel processing with rate limiting should be standard, but requires "intricate buggy software"
+- **Root Cause**: Traditional orchestration treats LLMs as isolated function calls rather than intelligent agents
+
+### The Security Wake-Up Call
+
+A catastrophic regression demonstrated the fragility of software-driven orchestration: the system attempted to submit **4,000 files** (entire project including source code, docs, experiments, results) to LLM analysis due to a orchestration bug. Only manual intervention prevented .env file exposure.
+
+**Key Insight**: Software orchestration complexity creates unpredictable failure modes that threaten both performance and security.
+
+### The LLM-Orchestrated Solution
+
+**Proposed Architecture**:
+- **Fully externalized agent prompts** - no hardcoded intelligence in software
+- **Thinnest possible agent wrappers** - minimal infrastructure for LLM execution
+- **LLM Orchestrator Agent** - intelligent agent manages Redis streams/pub-subs dynamically  
+- **Agent Invitation/Dismissal** - orchestrator summons agents for specific tasks and releases them
+- **Append-Only Provenance Logging** - everything on Redis channels logged for complete audit trail
+- **Flexible Review Patterns** - linear review cycles or red/blue team debates as orchestrator determines
+
+**Why This Works**:
+- **No Parsing Temptation**: LLMs don't need parsers - they understand context directly
+- **Natural Parallelization**: LLM orchestrator can intelligently manage concurrent operations within rate limits
+- **Adaptive Orchestration**: Same system handles any framework/experiment/corpus combination
+- **Inherent Security**: LLM orchestrator understands context boundaries unlike brittle software rules
+
+### Validation Through Pain
+
+This architectural direction emerged from **empirical failure** of traditional approaches:
+- Repeated THICK software bugs despite THIN intentions
+- Performance limitations from software-imposed serialization
+- Security vulnerabilities from orchestration complexity
+- Developer productivity blocked by constant parsing/routing bugs
+
+The solution: **Make orchestration itself an LLM intelligence problem, not a software engineering problem.**
+
 ---
 
 ## 1 · Objective
