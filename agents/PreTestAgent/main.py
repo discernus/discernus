@@ -77,20 +77,118 @@ class PreTestAgent:
             msg_id, fields = messages[0]
             task_data = json.loads(fields[b'data'])
             logger.info(f"Processing PreTest task: {task_id}")
-            
-            # TODO: Implement the full pre-test logic
+
             # 1. Get corpus sample and frameworks from task_data
-            # 2. Format prompt with sample data
-            # 3. Call LLM to perform variance analysis
-            # 4. Store result artifact with `recommend_runs`
-            # 5. Signal completion
+            required_fields = ['experiment_name', 'framework_hashes', 'document_hashes', 'model']
+            for field in required_fields:
+                if field not in task_data:
+                    raise PreTestAgentError(f"Required field missing: {field}")
+
+            experiment_name = task_data['experiment_name']
+            framework_hashes = task_data['framework_hashes']
+            document_hashes = task_data['document_hashes']
+            model = task_data.get('model', 'gemini-2.5-pro') # Pro for complex statistical reasoning
+
+            logger.info(f"Pre-test for '{experiment_name}': sampling {len(document_hashes)} documents with {len(framework_hashes)} frameworks.")
+
+            # Retrieve frameworks
+            frameworks = self._get_artifacts_by_hash(framework_hashes, "framework")
             
-            logger.info(f"PreTest task completed (stub): {task_id}")
+            # Retrieve document sample
+            documents = self._get_artifacts_by_hash(document_hashes, "document")
+
+            # 2. Format prompt with sample data
+            prompt_text = self.prompt_template.format(
+                frameworks=self._format_artifacts_for_prompt(frameworks, "FRAMEWORK"),
+                documents=self._format_artifacts_for_prompt(documents, "DOCUMENT SAMPLE")
+            )
+
+            # 3. Call LLM to perform variance analysis
+            logger.info(f"Calling LLM ({model}) for pre-test variance analysis...")
+            response = completion(
+                model=model,
+                messages=[{"role": "user", "content": prompt_text}],
+                temperature=0.0
+            )
+
+            result_content = response.choices[0].message.content
+            if not result_content or result_content.strip() == "":
+                raise PreTestAgentError(f"LLM returned empty response for pre-test {task_id}")
+
+            # 4. Store result artifact with `recommend_runs`
+            try:
+                llm_response_data = json.loads(result_content)
+            except json.JSONDecodeError:
+                raise PreTestAgentError(f"Failed to parse LLM JSON response for pre-test {task_id}")
+
+            pretest_artifact = {
+                'experiment_name': experiment_name,
+                'task_id': task_id,
+                'model_used': model,
+                'recommendation': llm_response_data,
+                'pretest_metadata': {
+                    'num_frameworks_sampled': len(frameworks),
+                    'num_documents_sampled': len(documents),
+                    'agent_version': 'PreTestAgent_v1.0'
+                }
+            }
+
+            result_hash = put_artifact(json.dumps(pretest_artifact, indent=2).encode('utf-8'))
+            logger.info(f"Pre-test analysis complete, result stored: {result_hash}")
+
+            # 5. Signal completion
+            completion_data = {
+                'original_task_id': task_id,
+                'experiment_name': experiment_name,
+                'result_hash': result_hash,
+                'status': 'completed',
+                'task_type': 'PreTest',
+                'model_used': model
+            }
+            
+            self.redis_client.xadd('tasks.done', {
+                'original_task_id': task_id,
+                'data': json.dumps(completion_data)
+            })
+
+            logger.info(f"PreTest task completed: {task_id}")
             return True
             
         except Exception as e:
             logger.error(f"Error processing PreTest task {task_id}: {e}")
             return False
+
+    def _get_artifacts_by_hash(self, hashes: List[str], artifact_type: str) -> List[Dict]:
+        """Retrieve and decode a list of artifacts from storage."""
+        artifacts = []
+        for i, artifact_hash in enumerate(hashes):
+            clean_hash = artifact_hash[7:] if artifact_hash.startswith('sha256:') else artifact_hash
+            artifact_bytes = get_artifact(clean_hash)
+            
+            content, encoding = self._decode_artifact(artifact_bytes)
+            
+            artifacts.append({
+                'index': i + 1,
+                'hash': clean_hash,
+                'content': content,
+                'encoding': encoding
+            })
+            logger.info(f"Retrieved {artifact_type} {i+1} ({encoding}): {clean_hash[:12]}...")
+        return artifacts
+
+    def _decode_artifact(self, artifact_bytes: bytes) -> (str, str):
+        """Applies the Text-First Fallback Principle."""
+        try:
+            return artifact_bytes.decode('utf-8'), 'text'
+        except UnicodeDecodeError:
+            return base64.b64encode(artifact_bytes).decode('utf-8'), 'base64'
+
+    def _format_artifacts_for_prompt(self, artifacts: List[Dict], header: str) -> str:
+        """Format a list of artifacts for the LLM prompt."""
+        formatted = []
+        for artifact in artifacts:
+            formatted.append(f"=== {header} {artifact['index']} (encoding: {artifact['encoding']}) ===\n{artifact['content']}\n")
+        return "\n".join(formatted)
 
 def main():
     """Agent entry point"""
