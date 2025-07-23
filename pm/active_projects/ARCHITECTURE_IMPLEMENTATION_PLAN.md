@@ -25,7 +25,7 @@ This is the definitive list of components required for the full architecture.
 
 | Component | Status | Function |
 | :--- | :--- | :--- |
-| **`Router`** | **Existing, needs upgrading** | Listens to Redis streams and spawns the correct agent container based on task type. No business logic. |
+| **`Router`** | **✅ UPGRADED - Phase 1 Ready** | Listens to Redis streams and spawns the correct agent container based on task type. Added `analyse_batch` and `corpus_synthesis` routing. |
 | **`Execution Bridge`** | **Existing, needs upgrading** | Thin script (formerly `PlanExecutor/TaskListExecutor`) that translates an LLM's plan into Redis tasks. |
 | **`Artefact Storage`** | **Existing, functioning** | Provides content-addressable storage (put/get by SHA-256 hash). |
 
@@ -34,13 +34,13 @@ This is the definitive list of components required for the full architecture.
 | Agent | Status | Function |
 | :--- | :--- | :--- |
 | **`PreTestAgent`** | **New, needs to be built** | Performs variance estimation to recommend the optimal number of runs. |
-| **`AnalyseBatchAgent`**| **New, needs to be built** | Workhorse agent for multi-document, multi-framework analysis. **Output is structured data only.** |
+| **`AnalyseBatchAgent`**| **✅ BUILT - Phase 1 Ready** | Workhorse agent for multi-document, multi-framework analysis. **Output is structured data only.** |
 
 ### Tier 2: Statistical Synthesis Agent (LLM-Driven)
 
 | Agent | Status | Function |
 | :--- | :--- | :--- |
-| **`CorpusSynthesisAgent`**| **New, needs to be built** | Performs **deterministic mathematical aggregation** of structured data from all Layer 1 batches. |
+| **`CorpusSynthesisAgent`**| **✅ BUILT - Phase 1 Ready** | Performs **deterministic mathematical aggregation** of structured data from all Layer 1 batches. |
 
 ### Tier 3: Quality Assurance & Synthesis Agents (LLM-Driven)
 
@@ -84,6 +84,55 @@ This plan is a series of gates. We only proceed to the next phase once all quest
     *   *Success:* A `corpus_synthesis` artifact is created in MinIO containing a **statistical report only** (e.g., means, confidence intervals), with no qualitative narrative.
 
 **Definition of Done for Phase 1:** We can reliably execute a single, manually-constructed batch analysis and have it result in a final, statistically-sound synthesis report, with all intermediate artifacts correctly stored and linked.
+
+## 📊 Phase 1 Implementation Status (July 24, 2025)
+
+### ✅ Components Completed
+
+1. **`AnalyseBatchAgent`** - `agents/AnalyseBatchAgent/main.py`
+   - ✅ Multi-document, multi-framework batch processing
+   - ✅ Structured data output only (no synthesis)
+   - ✅ External prompt template (`prompt.yaml`)
+   - ✅ Redis task processing with proper error handling
+   - ✅ MinIO artifact storage integration
+   - ✅ Based on empirical validation (up to 341 documents per batch)
+
+2. **`CorpusSynthesisAgent`** - `agents/CorpusSynthesisAgent/main.py`
+   - ✅ Deterministic mathematical aggregation
+   - ✅ Statistical report output only (no qualitative narrative)
+   - ✅ External prompt template with statistical computation instructions
+   - ✅ Cross-batch data validation and error handling
+   - ✅ Cost-optimized model usage (claude-3-haiku)
+
+3. **Router Updates** - `scripts/router.py`
+   - ✅ Added `analyse_batch` and `corpus_synthesis` agent routing
+   - ✅ Maintains existing agent compatibility
+
+4. **Testing Framework** - `scripts/phase1_test_runner.py`
+   - ✅ Implements all 4 Phase 1 validation questions
+   - ✅ Manual testing workflow with clear success criteria
+   - ✅ Artifact validation and structure checking
+   - ✅ Full pipeline testing capability
+
+### 🎯 Ready for Phase 1 Validation
+
+**Current Status**: All foundational components built and ready for testing.
+
+**Next Steps**:
+1. Start Redis and MinIO services
+2. Run Phase 1 test runner: `python3 scripts/phase1_test_runner.py --test full_pipeline`
+3. Validate each question in sequence
+4. Confirm Phase 1 Definition of Done criteria
+
+**Testing Commands**:
+```bash
+# Test individual questions
+python3 scripts/phase1_test_runner.py --test question1
+python3 scripts/phase1_test_runner.py --test question2 --task-id <task_id>
+
+# Test full pipeline with manual intervention points
+python3 scripts/phase1_test_runner.py --test full_pipeline
+```
 
 ---
 
