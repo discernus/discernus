@@ -71,6 +71,12 @@ class AnalyseChunkAgent:
             framework_hash = task_data['framework_hash']
             model = task_data.get('model', 'gpt-4o-mini')
             
+            # Strip sha256: prefix if present (orchestrator adds it, MinIO expects raw hash)
+            if chunk_hash.startswith('sha256:'):
+                chunk_hash = chunk_hash[7:]
+            if framework_hash.startswith('sha256:'):
+                framework_hash = framework_hash[7:]
+            
             logger.info(f"Retrieving artifacts: chunk={chunk_hash[:12]}..., framework={framework_hash[:12]}...")
             
             chunk_text = get_artifact(chunk_hash)
