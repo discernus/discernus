@@ -14,3 +14,11 @@
 - [ ] Build PostHocMathAgent for retro metrics analysis.
 - [ ] Composite framework synthesis combining multiple analyses.
 - [ ] Complete Security package: static policy enforcement in router and deploy SecuritySentinelAgent. 
+
+## Tasks to support Project/Experiment/Run hierarchy
+
+- [ ] Enhance `run` command: accept `--project <PROJECT>` and `--experiment <EXPERIMENT>` options and derive run path accordingly.
+- [ ] Update `ArtifactManifestWriter` to write manifests under `projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>/` instead of `runs/`.
+- [ ] Modify CLI commands (`pause`, `resume`, `results`) to locate and operate on manifests using the new hierarchical path.
+- [ ] Deprecate or alias the old `runs/` directory support for backward compatibility.
+- [ ] Update integration tests and docs to use the new directory structure patterns. 
