@@ -41,6 +41,69 @@ The PoC targets a 10‑document sample corpus and a single uploaded framework (C
 - ValidationAgent, non‑deterministic averaging, composite synthesis, PostHocMathAgent.
 - Multi‑framework support beyond CAF\_v4.3.
 
+### 3.5 · Agent Registry
+
+All agent implementations are externalized and discoverable through a registry pattern:
+
+- **`agents/AnalyseChunkAgent/`** - Document analysis with framework application
+- **`agents/OrchestratorAgent/`** - Task planning and dependency management  
+- **`agents/SynthesisAgent/`** - Multi-analysis aggregation and report generation
+- **`agents/SecuritySentinelAgent/`** - Runtime security monitoring (post-PoC)
+
+Each agent directory contains:
+- `main.py` - Agent entrypoint and execution logic
+- `prompt.yaml` - External prompt template with framework-agnostic instructions
+- `Dockerfile` - Containerized execution environment
+
+### 3.6 · Model Registry
+
+We maintain a **Model Registry** in `models/registry.yaml` (with optional overrides in `models/provider_defaults.yaml`) that drives which LLMs are available and how they're pinned.
+
+**File: `models/provider_defaults.yaml`**
+```yaml
+vertex_ai:
+  forbidden_params:
+    - max_tokens
+  required_params:
+    safety_settings:
+      - category: HARM_CATEGORY_HARASSMENT
+        threshold: BLOCK_NONE
+      - category: HARM_CATEGORY_HATE_SPEECH
+        threshold: BLOCK_NONE
+      - category: HARM_CATEGORY_SEXUALLY_EXPLICIT
+        threshold: BLOCK_NONE
+      - category: HARM_CATEGORY_DANGEROUS_CONTENT
+        threshold: BLOCK_NONE
+  timeout: 180
+openai:
+  forbidden_params:
+    - max_tokens
+  requires_pre_moderation: true
+  timeout: 120
+# etc…
+
+openai/gpt-4o:
+  provider: openai
+  performance_tier: top-tier
+  context_window: 128000
+  costs:
+    input_per_million_tokens: 2.5
+    output_per_million_tokens: 10.0
+  utility_tier: 4
+  task_suitability:
+    - synthesis
+    - code_interpreter
+  tpm: 300000
+  rpm: 5000
+  optimal_batch_size: 6
+  last_updated: '2025-07-21'
+  review_by: '2026-01-17'
+anthropic/claude-3-5-sonnet-20240620:
+  provider: anthropic
+  performance_tier: top-tier
+  # …and so on, matching your prior registry format
+```
+
 ---
 
 ## 4 · Architecture Overview
@@ -69,11 +132,24 @@ graph TD
 | ----- | -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **1** | **Skeleton Router**              | 2             | • Set up Redis Streams `tasks` / `tasks.done`.• Consumer group example.                                                                                       |
 | **2** | **Artefact Registry CLI**        | 2             | • MinIO docker‑compose.• CLI commands: `put`, `get`, `lookup`.                                                                                                |
-| **3** | **Agents & Prompts**             | 4             | • Externalise prompts to `agents/*/prompt.yaml`.• AnalyseChunkAgent splits corpus, calls LiteLLM proxy.• OrchestratorAgent hard‑codes simple linear pipeline. |
+| **3** | **Agents & Prompts**             | 4             | • Externalise prompts to `agents/*/prompt.yaml`.• AnalyseChunkAgent splits corpus, calls LiteLLM proxy, emits `{output_uri, sha256, prompt_hash, chunk_id}` to Redis metadata.• OrchestratorAgent hard‑codes simple linear pipeline.• Create `agents/SynthesisAgent/prompt_v1.yaml` + container stub in docker-compose.yml |
 | **4** | **Cache & Resume**               | 2             | • SHA‑256 before enqueue.• Redis key `run:{id}:status` (RUNNING/PAUSED).                                                                                      |
 | **5** | **Cost Guard** (optional in PoC) | 2             | • Pre‑run cost estimate via LiteLLM `/pricing`.• Lua script aborts run if `spent > cap` in live mode.                                                         |
 
-*Total*: **12 hrs dev time**.
+*Total*: **12 hrs dev time**.
+
+---
+
+## 5.1 · Critical Implementation Notes
+
+**AnalyseChunkAgent Response Schema**: Phase 3 → Phase 4 handoff requires AnalyseChunkAgent to emit structured metadata for cache detection. In `agents/AnalyseChunkAgent/prompt_v1.yaml`:
+
+```yaml
+# Response format requirement:
+"Respond with JSON: {output_uri, sha256, prompt_hash, chunk_id}."
+```
+
+This ensures Phase 4 cache logic can immediately detect existing artifacts without additional Redis queries.
 
 ---
 
@@ -92,7 +168,7 @@ graph TD
 ## 6 · Acceptance Criteria
 
 1. **Run Success**: `discernus run experiment.yaml --mode live` completes, producing analysis JSON artefacts and a run log in MinIO.
-2. **Pause / Resume**: While RUNNING, `discernus pause <run_id>` pauses; `discernus resume <run_id>` completes without duplicate LLM calls (verified via LiteLLM proxy logs).
+2. **Pause / Resume**: While RUNNING, `discernus pause <run_id>` pauses; `discernus resume <run_id>` completes without duplicate LLM calls. Verified by filtering proxy logs for AnalyseChunkAgent calls: zero calls on second run.
 3. **Cache Hit**: Re‑running the identical experiment makes **zero** LLM calls.
 4. **Cost Prompt** (live mode): CLI displays estimated \$ cost and requires `y/N` confirmation.
 5. **Dev Mode**: `--mode dev` auto‑confirms and bypasses cost guard.
@@ -119,49 +195,81 @@ $ discernus resume RUN123
 
 # Re‑run (should hit cache)
 $ discernus run experiments/caf_sample.yaml --mode live
+
+# After run
+$ discernus manifest RUN123 > runs/RUN123/manifest.json
 ```
 
 ---
 
-## 8 · Security Hardening – Guarding the Orchestrator Attack Surface
+## 8 · Experiment Export & Directory Structure
+
+After a successful run, a single CLI command recreates the familiar, self-contained experiment folder for archiving and replication:
+
+```bash
+$ discernus export <RUN_ID> --out-dir runs/<RUN_ID>
+```
+
+This produces:
+
+```
+runs/<RUN_ID>/
+├─ corpus/               ← all original input files (e.g., *.txt, frameworks/*.md)
+├─ analysis/             ← one JSON per chunk named <chunk_id>.<framework_hash>.json
+├─ synthesis/            ← <RUN_ID>.json (the merged report)
+├─ logs/                 ← router.log, lite_llm_proxy.log, agent logs
+└─ manifest.json         ← full provenance chain & metadata
+```
+
+- **manifest.json** is both human- and machine-readable, listing each artefact URI, its SHA-256 hash, parent links, task\_type, and timestamp.
+- The entire `runs/<RUN_ID>/` folder can be zipped, stored in DVC or Git, and handed off for audit or replication.
+- To resume or replay an exported run exactly, users point the CLI at `runs/<RUN_ID>/manifest.json`:
+  ```bash
+  $ discernus run --from-manifest runs/<RUN_ID>/manifest.json
+  ```
+
+---
+
+## 9 · Security Hardening – Guarding the Orchestrator Attack Surface
 
 > **Threat model**: A compromised prompt or malicious framework convinces the **OrchestratorAgent** to enqueue tasks that exfiltrate secrets, invoke shell commands, or leak private data to remote endpoints.
 
-### 8.1 Static policy gate (router‑side, deterministic)
+### 9.1 Static policy gate (router‑side, deterministic)
 
-| Check                      | Enforcement                                                                      | Failure action                |          |                          |
-| -------------------------- | -------------------------------------------------------------------------------- | ----------------------------- | -------- | ------------------------ |
-| \`\`\*\* allow‑list\*\*    | Router rejects any message whose `type` ∉ {analyse, synth, math, pause, resume}. | Drop + log ERR\_INVALID\_TYPE |          |                          |
-| \`\`\*\* scheme & path\*\* | Must match regex \`^s3://discernus-artifacts/(corpus                             | frameworks                    | runs)/\` | Drop + log ERR\_BAD\_URI |
-| \`\`\*\* allow‑list\*\*    | Must be in `models.yml` (gpt‑4o-mini, llama3‑70b‑instruct, …).                   | Drop + log ERR\_BAD\_MODEL    |          |                          |
-| \`\`\*\* length\*\*        | Exactly 64 hex chars.                                                            | Drop                          |          |                          |
-| **Max tasks per run**      | Config param (e.g., 1 000).                                                      | Abort run when exceeded       |          |                          |
+| Check                      | Enforcement                                                                      | Failure action                |
+| -------------------------- | -------------------------------------------------------------------------------- | ----------------------------- |
+| **Task type allow‑list**   | Router rejects any message whose `type` ∉ {analyse, synth, math, pause, resume} | Drop + log ERR\_INVALID\_TYPE |
+| **URI scheme & path**      | Must match regex `^s3://discernus-artifacts/(corpus\|frameworks\|runs)/`        | Drop + log ERR\_BAD\_URI      |
+| **Model allow‑list**       | Must be in `models/registry.yaml` (gpt‑4o-mini, llama3‑70b‑instruct, …)         | Drop + log ERR\_BAD\_MODEL    |
+| **SHA256 length**          | Exactly 64 hex chars                                                            | Drop                          |
+| **Max tasks per run**      | Config param (e.g., 1 000)                                                      | Abort run when exceeded       |
 
-### 8.2 Runtime sentinel agent (cheap LLM watchdog)
+### 9.2 Runtime sentinel agent (cheap LLM watchdog)
 
 - `SecuritySentinelAgent` subscribes to `tasks` and **mirrors** each message through an “adversarial lens”:
   - Quickly inspects for `.env`, PEM blocks, or URLs outside approved domains.
   - Flagged tasks are moved to `tasks.quarantine`; Orchestrator is notified.
 
-### 8.3 Sandboxing & least privilege
+### 9.3 Sandboxing & least privilege
 
 | Component             | Execution profile                                                                                | Limits                                                        |
 | --------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
 | **Agent containers**  | Docker with `--network none` (egress blocked) unless task type requires external call (LiteLLM). | Read‑only mount of `/corpus`, temp scratch dir wiped on exit. |
 | **OrchestratorAgent** | Same container stack; *no* OS shell allowed.                                                     | Only IPC is Redis.                                            |
 
-### 8.4 Prompt integrity
+### 9.4 Prompt integrity
 
 1. **Hash pinning** – Every prompt file hash is included in the task metadata; Router validates it matches what is in Git.
 2. **Immutable system preamble** – Prefix each prompt with a non‑editable UUID line. If payload lacks the preamble → reject.
 
-### 8.5 Secrets scanning before artefact upload
+### 9.5 Secrets scanning before artefact upload
 
 - `registry_cli.py put` runs a regex + entropy scan (<30 LOC) to refuse uploading `.env`, SSH keys, or AWS creds.
+- Block any file whose name matches `/.env($|[._-])/` (covers .env, .env.local, .env_dev, .env-prod, etc.)
 
 ---
 
-## 9 · Next‑Step Wishlist (post‑PoC)
+## 10 · Next‑Step Wishlist (post‑PoC)
 
 1. Precision‑aware normaliser & framework `precision` field.
 2. `non_deterministic` averaging and `runs_per_chunk`.
@@ -173,4 +281,3 @@ $ discernus run experiments/caf_sample.yaml --mode live
 ---
 
 *Last updated 2025‑07‑22 by Jeff*
-
