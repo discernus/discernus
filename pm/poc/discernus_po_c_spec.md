@@ -77,6 +77,18 @@ graph TD
 
 ---
 
+## 5.5 · Implementation FAQs (decisions)
+
+| Question from Cursor             | Decision for PoC                                                                                                                                                                   | Rationale                                                                                    |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **LiteLLM proxy setup**          | *Integrate with the existing proxy* we already run. No infra spin‑up.                                                                                                              | Keeps PoC surface minimal; in production users will point to their own.                      |
+| **Cache‑hit strategy**           | **Dependency‑aware artefact check**: For each *(chunk, framework\_hash)* ensure analysis JSON exists before enqueue.                                                               | Guarantees we skip only what is truly complete; avoids false positives when corpora overlap. |
+| **Artefact manifest format**     | **JSON** file (`runs/<run_id>/manifest.json`) containing: `{sha256, uri, parent_sha256, task_type, timestamp, prompt_hash}`. *Optional Markdown* summary auto‑generated from JSON. | JSON is machine‑diffable; Markdown is human‑readable.                                        |
+| **File reconstruction / naming** | Preserve **original filename** & MIME in manifest; retrieval still by SHA hash.                                                                                                    | Aids human traceability without weakening immutability guarantees.                           |
+| **Next blocker to tackle first** | 1. `SynthesisAgent` ➜ run completion2. PEL reclaim on resume3. Live‑mode cost guard end‑to‑end test4. JSON manifest writer                                                         | Unblocks cache hit demo, then reliability, then safety.                                      |
+
+---
+
 ## 6 · Acceptance Criteria
 
 1. **Run Success**: `discernus run experiment.yaml --mode live` completes, producing analysis JSON artefacts and a run log in MinIO.
@@ -117,13 +129,13 @@ $ discernus run experiments/caf_sample.yaml --mode live
 
 ### 8.1 Static policy gate (router‑side, deterministic)
 
-| Check                 | Enforcement                                                                      | Failure action                |          |                          |
-| --------------------- | -------------------------------------------------------------------------------- | ----------------------------- | -------- | ------------------------ |
-| ``** allow‑list**     | Router rejects any message whose `type` ∉ {analyse, synth, math, pause, resume}. | Drop + log ERR\_INVALID\_TYPE |          |                          |
-| ``** scheme & path**  | Must match regex \`^s3://discernus-artifacts/(corpus                             | frameworks                    | runs)/\` | Drop + log ERR\_BAD\_URI |
-| ``** allow‑list**     | Must be in `models.yml` (gpt‑4o-mini, llama3‑70b‑instruct, …).                   | Drop + log ERR\_BAD\_MODEL    |          |                          |
-| ``** length**         | Exactly 64 hex chars.                                                            | Drop                          |          |                          |
-| **Max tasks per run** | Config param (e.g., 1 000).                                                      | Abort run when exceeded       |          |                          |
+| Check                      | Enforcement                                                                      | Failure action                |          |                          |
+| -------------------------- | -------------------------------------------------------------------------------- | ----------------------------- | -------- | ------------------------ |
+| \`\`\*\* allow‑list\*\*    | Router rejects any message whose `type` ∉ {analyse, synth, math, pause, resume}. | Drop + log ERR\_INVALID\_TYPE |          |                          |
+| \`\`\*\* scheme & path\*\* | Must match regex \`^s3://discernus-artifacts/(corpus                             | frameworks                    | runs)/\` | Drop + log ERR\_BAD\_URI |
+| \`\`\*\* allow‑list\*\*    | Must be in `models.yml` (gpt‑4o-mini, llama3‑70b‑instruct, …).                   | Drop + log ERR\_BAD\_MODEL    |          |                          |
+| \`\`\*\* length\*\*        | Exactly 64 hex chars.                                                            | Drop                          |          |                          |
+| **Max tasks per run**      | Config param (e.g., 1 000).                                                      | Abort run when exceeded       |          |                          |
 
 ### 8.2 Runtime sentinel agent (cheap LLM watchdog)
 
