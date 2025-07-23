@@ -33,11 +33,12 @@ AGENT_SCRIPTS = {
     'analyse': ['python3', 'agents/AnalyseChunkAgent/main.py'],
     'orchestrate': ['python3', 'agents/OrchestratorAgent/main.py'],
     'synthesize': ['python3', 'agents/SynthesisAgent/main.py'],
-    'execute_plan': ['python3', 'agents/PlanExecutorAgent/main.py'],
-    'execute_task_list': ['python3', 'agents/TaskListExecutorAgent/main.py'],
     # New Tier 1-2 agents for batch processing architecture
     'analyse_batch': ['python3', 'agents/AnalyseBatchAgent/main.py'],
     'corpus_synthesis': ['python3', 'agents/CorpusSynthesisAgent/main.py'],
+    'pre_test': ['python3', 'agents/PreTestAgent/main.py'],
+    # Phase 2 Components
+    'execute_plan': ['python3', 'scripts/execution_bridge.py'],
 }
 
 class RouterError(Exception):

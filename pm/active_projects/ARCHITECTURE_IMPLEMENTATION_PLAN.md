@@ -25,8 +25,8 @@ This is the definitive list of components required for the full architecture.
 
 | Component | Status | Function |
 | :--- | :--- | :--- |
-| **`Router`** | **✅ UPGRADED - Phase 1 Ready** | Listens to Redis streams and spawns the correct agent container based on task type. Added `analyse_batch` and `corpus_synthesis` routing. |
-| **`Execution Bridge`** | **Existing, needs upgrading** | Thin script (formerly `PlanExecutor/TaskListExecutor`) that translates an LLM's plan into Redis tasks. |
+| **`Router`** | **✅ UPGRADED - Phase 2 Ready** | Listens to Redis streams and spawns the correct agent container based on task type. Added `analyse_batch` and `corpus_synthesis` routing. |
+| **`Execution Bridge`** | **🟢 NEW - Phase 2 In-Progress** | Thin script (`scripts/execution_bridge.py`) that translates an LLM's plan into Redis tasks. Replaces deprecated agents. |
 | **`Artefact Storage`** | **Existing, functioning** | Provides content-addressable storage (put/get by SHA-256 hash). |
 
 ### Tier 1: Batch Analysis Agents (LLM-Driven)
