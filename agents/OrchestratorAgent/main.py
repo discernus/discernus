@@ -11,6 +11,7 @@ import sys
 import os
 import logging
 import time
+import hashlib
 from typing import Dict, Any, List
 from litellm import completion
 
@@ -65,6 +66,8 @@ class OrchestratorAgent:
         Orchestrates experiment using hardcoded 5-stage pipeline (Radical Simplification Mode).
         Fixed sequence: PreTest → BatchAnalysis → CorpusSynthesis → Review → Moderation
         """
+        completed_stages = []
+        
         try:
             # Set run_id for Redis coordination
             self.run_id = original_task_id
@@ -90,6 +93,7 @@ class OrchestratorAgent:
                 # Check cache first
                 if self._is_stage_cached(stage_name, state):
                     logger.info(f"Stage {stage_name} found in cache, skipping")
+                    completed_stages.append(stage_name)
                     continue
                 
                 # Get the enqueue method and execute it
@@ -98,40 +102,75 @@ class OrchestratorAgent:
                 
                 if not task_ids:
                     logger.error(f"Failed to enqueue tasks for stage: {stage_name}")
+                    self._export_partial_manifest(completed_stages, "ENQUEUE_FAILED")
                     return False
                 
-                # Wait for completion (single task or multiple tasks)
-                if isinstance(task_ids, list):
-                    # Handle placeholder tasks (skip waiting)
-                    if any("placeholder" in task_id for task_id in task_ids):
-                        logger.info(f"Skipping placeholder tasks for stage: {stage_name}")
-                        results = task_ids  # Use task_ids as placeholder results
+                # Wait for completion with timeout handling
+                try:
+                    if isinstance(task_ids, list):
+                        if not task_ids:
+                            logger.error(f"No tasks returned for stage: {stage_name}")
+                            self._export_partial_manifest(completed_stages, "NO_TASKS")
+                            return False
+                        results = self._wait_for_all_tasks_completion(task_ids, timeout=300)
+                        state[f"{stage_name}_results"] = results
                     else:
-                        results = self._wait_for_all_tasks_completion(task_ids)
-                    state[f"{stage_name}_results"] = results
-                else:
-                    # Handle placeholder tasks (skip waiting)
-                    if "placeholder" in task_ids:
-                        logger.info(f"Skipping placeholder task for stage: {stage_name}")
-                        result = task_ids  # Use task_id as placeholder result
+                        if not task_ids:
+                            logger.error(f"No task returned for stage: {stage_name}")
+                            self._export_partial_manifest(completed_stages, "NO_TASK")
+                            return False
+                        result = self._wait_for_task_completion(task_ids, timeout=300)
+                        state[f"{stage_name}_result"] = result
+                        
+                    completed_stages.append(stage_name)
+                    logger.info(f"Stage {stage_name} completed successfully")
+                    
+                except Exception as e:
+                    if "timeout" in str(e).lower():
+                        logger.error(f"Stage {stage_name} timed out: {e}")
+                        self._export_partial_manifest(completed_stages, "ERROR_TIMEOUT")
+                        return False
                     else:
-                        result = self._wait_for_task_completion(task_ids)
-                    state[f"{stage_name}_result"] = result
-                
-                logger.info(f"Stage {stage_name} completed successfully")
+                        logger.error(f"Stage {stage_name} failed: {e}")
+                        self._export_partial_manifest(completed_stages, "ERROR_FAILED")
+                        return False
 
             logger.info("Hardcoded 5-stage pipeline completed successfully")
             return True
             
         except Exception as e:
             logger.error(f"Hardcoded pipeline failed: {e}", exc_info=True)
+            self._export_partial_manifest(completed_stages, "ERROR_EXCEPTION")
             return False
 
-    def _is_stage_cached(self, stage_name: str, state: Dict[str, Any]) -> bool:
-        """Check if stage results are already cached in Redis."""
+    def _generate_cache_key(self, stage_name: str, state: Dict[str, Any], run_index: int = 0) -> str:
+        """Generate SHA-256 cache key per Implementation Plan V4 specification"""
         try:
-            cache_key = f"stage:{self.run_id}:{stage_name}:status"
-            return self.redis_client.get(cache_key) == b'done'
+            # Get document and framework hashes
+            doc_hashes = sorted(state.get('corpus_hashes', []))
+            framework_hashes = sorted(state.get('framework_hashes', []))
+            
+            # Create prompt hash (simplified for now - could be actual prompt content hash)
+            prompt_hash = f"{stage_name}_{self.run_id}"
+            
+            # Combine all components for cache key
+            cache_components = doc_hashes + framework_hashes + [prompt_hash, str(run_index)]
+            cache_string = "|".join(cache_components)
+            
+            # Generate SHA-256 hash
+            cache_key = hashlib.sha256(cache_string.encode('utf-8')).hexdigest()
+            return f"stage:{self.run_id}:{stage_name}:{cache_key}"
+            
+        except Exception as e:
+            logger.warning(f"Cache key generation failed: {e}, using fallback")
+            return f"stage:{self.run_id}:{stage_name}:fallback"
+
+    def _is_stage_cached(self, stage_name: str, state: Dict[str, Any]) -> bool:
+        """Check if stage results are already cached using proper cache key."""
+        try:
+            cache_key = self._generate_cache_key(stage_name, state)
+            status_key = f"{cache_key}:status"
+            return self.redis_client.get(status_key) == b'done'
         except Exception as e:
             logger.warning(f"Cache check failed for stage {stage_name}: {e}")
             return False
@@ -218,15 +257,72 @@ class OrchestratorAgent:
 
     def _enqueue_review_stage(self, state: Dict[str, Any]) -> List[str]:
         """Stage 4: Review - Adversarial critique of synthesis report."""
-        # TODO: Implement ReviewerAgent tasks (placeholder for Phase 3)
-        logger.info("Review stage not yet implemented - skipping")
-        return ["placeholder-review-task"]
+        synthesis_result = state.get('corpus_synthesis_result')
+        if not synthesis_result:
+            logger.error("No synthesis result available for review stage")
+            return []
+        
+        # Create two review tasks: ideological and statistical
+        review_tasks = []
+        
+        # Ideological review task
+        ideological_task_data = {
+            'review_type': 'ideological',
+            'ideology': 'progressive',  # Default ideology
+            'synthesis_hash': synthesis_result,
+            'model': 'gemini-2.5-pro',
+            'run_id': self.run_id
+        }
+        
+        ideological_message_id = self.redis_client.xadd('tasks', {
+            'type': 'review',
+            'data': json.dumps(ideological_task_data)
+        })
+        review_tasks.append(ideological_message_id.decode())
+        
+        # Statistical review task  
+        statistical_task_data = {
+            'review_type': 'statistical',
+            'synthesis_hash': synthesis_result,
+            'model': 'gemini-2.5-pro',
+            'run_id': self.run_id
+        }
+        
+        statistical_message_id = self.redis_client.xadd('tasks', {
+            'type': 'review', 
+            'data': json.dumps(statistical_task_data)
+        })
+        review_tasks.append(statistical_message_id.decode())
+        
+        logger.info(f"Enqueued {len(review_tasks)} review tasks")
+        return review_tasks
 
     def _enqueue_moderation_stage(self, state: Dict[str, Any]) -> str:
         """Stage 5: Moderation - Final synthesis and reconciliation."""
-        # TODO: Implement ModeratorAgent task (placeholder for Phase 3)
-        logger.info("Moderation stage not yet implemented - skipping")
-        return "placeholder-moderation-task"
+        synthesis_result = state.get('corpus_synthesis_result')
+        review_results = state.get('review_results', [])
+        experiment_name = state['experiment_name']
+        
+        if not synthesis_result:
+            logger.error("No synthesis result available for moderation stage")
+            return ""
+        
+        moderation_task_data = {
+            'synthesis_hash': synthesis_result,
+            'review_hashes': review_results,
+            'experiment_name': experiment_name,
+            'model': 'gemini-2.5-pro',
+            'run_id': self.run_id
+        }
+        
+        message_id = self.redis_client.xadd('tasks', {
+            'type': 'moderation',
+            'data': json.dumps(moderation_task_data)
+        })
+        
+        task_id = message_id.decode()
+        logger.info(f"Enqueued moderation task: {task_id}")
+        return task_id
 
     def _enqueue_pre_test_task(self, experiment_name: str, framework_hashes: List[str], corpus_hashes: List[str]) -> str:
         """Creates and enqueues a task for the PreTestAgent."""
@@ -412,7 +508,7 @@ class OrchestratorAgent:
                 'batch_id': f'run_{run_num+1}_of_{recommend_runs}',
                 'framework_hashes': framework_hashes,
                 'document_hashes': corpus_hashes,  # ALL documents in each run
-                'model': 'gemini-2.5-flash',
+                'model': 'gemini-2.5-pro',
                 'run_number': run_num + 1,
                 'total_runs': recommend_runs,
                 'run_id': self.run_id  # Add run_id for completion signaling
@@ -434,7 +530,7 @@ class OrchestratorAgent:
             "experiment_name": experiment_name,
             "batch_result_hashes": analysis_result_hashes,
             "framework_hashes": framework_hashes,
-            "model": "gemini-2.5-flash",
+            "model": "gemini-2.5-pro",
             "run_id": self.run_id  # Add run_id for completion signaling
         }
 
@@ -448,15 +544,32 @@ class OrchestratorAgent:
         """Returns a summary of available model capabilities."""
         # This can be expanded to read from a model registry in the future.
         return {
-            "gemini-2.5-flash": {
-                "context_window_tokens": 1000000,
-                "use_case": "High-throughput, cost-effective analysis and synthesis"
-            },
             "gemini-2.5-pro": {
                 "context_window_tokens": 8000000,
-                "use_case": "Complex reasoning, planning, and statistical interpretation"
+                "use_case": "Complex reasoning, planning, statistical interpretation, and reliable multi-framework analysis"
             }
         }
+
+    def _export_partial_manifest(self, completed_stages: List[str], error_status: str) -> None:
+        """Export partial manifest when pipeline fails or times out"""
+        try:
+            partial_manifest = {
+                "run_id": self.run_id,
+                "completed_stages": completed_stages,
+                "total_stages": len(self.STAGES),
+                "run_status": error_status,
+                "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                "resume_from": completed_stages[-1] if completed_stages else "pretest"
+            }
+            
+            # Store partial manifest in Redis for potential resume
+            manifest_key = f"partial_manifest:{self.run_id}"
+            self.redis_client.setex(manifest_key, 86400, json.dumps(partial_manifest))  # 24 hour expiry
+            
+            logger.info(f"Partial manifest exported: {error_status}, completed {len(completed_stages)}/{len(self.STAGES)} stages")
+            
+        except Exception as e:
+            logger.error(f"Failed to export partial manifest: {e}")
 
     def listen_for_orchestration_requests(self):
         """Listen for orchestration requests on orchestrator.tasks stream"""

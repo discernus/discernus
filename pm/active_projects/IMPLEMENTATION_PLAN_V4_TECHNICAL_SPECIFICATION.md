@@ -177,7 +177,7 @@ statistical_runs: 3  # optional override
 
 #### **A1: Update Technical Contracts (Day 1)**
 1. **Replace Flash References**: Update all model registry entries to `gemini-2.5-pro`
-2. **Hybrid Agent Management**: Keep external YAML prompts, maintain hardcoded `AGENT_SCRIPTS` mapping in router.py (Principle 8)
+2. **Agent Discovery (Staged)**: Keep hardcoded `AGENT_SCRIPTS` mapping for reliability during pipeline completion (migrate to config.json discovery in Phase B)
 3. **Define PreTest Schema**: Implement structured output validation
 4. **Implement Cache Key Logic**: SHA-256 based cache key generation
 5. **Add Timeout Handling**: ERROR_TIMEOUT status with partial manifest export
@@ -225,6 +225,7 @@ Split monolithic agent into focused components:
 - `discernus/agents/orchestrator_agent.py` (~100 lines): Basic coordination only
 - `discernus/core/batch_planner.py` (~100 lines): Statistical run calculation
 - `discernus/core/task_factory.py` (~100 lines): Task data construction
+- **Migrate Agent Discovery**: Replace hardcoded `AGENT_SCRIPTS` with `agents/*/config.json` scanning (~50 lines)
 
 #### **B3: Implement Development Logging (Day 5)**
 Create `scripts/dev_monitor.py` (~50 lines):

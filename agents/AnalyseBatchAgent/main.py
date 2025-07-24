@@ -91,7 +91,7 @@ class AnalyseBatchAgent:
             batch_id = task_data['batch_id']
             framework_hashes = task_data['framework_hashes']
             document_hashes = task_data['document_hashes']
-            model = task_data.get('model', 'gemini-2.5-flash')
+            model = task_data.get('model', 'gemini-2.5-pro')
             
             logger.info(f"Batch {batch_id}: Processing {len(document_hashes)} documents with {len(framework_hashes)} frameworks")
             
