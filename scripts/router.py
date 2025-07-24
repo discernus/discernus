@@ -39,6 +39,9 @@ AGENT_SCRIPTS = {
     'pre_test': ['python3', 'agents/PreTestAgent/main.py'],
     # Phase 2 Components
     'execute_plan': ['python3', 'scripts/execution_bridge.py'],
+    # Phase 3 Quality Assurance agents
+    'review': ['python3', 'agents/ReviewerAgent/main.py'],
+    'moderation': ['python3', 'agents/ModeratorAgent/main.py'],
 }
 
 class RouterError(Exception):
