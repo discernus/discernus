@@ -84,6 +84,14 @@ These principles guide every design decision in Discernus:
 - Cost-performance optimization: Gemini 2.5 Pro selected over alternatives
 - Provider reliability: Vertex AI chosen for predictable academic pricing
 
+**11. Specialized Agent Interaction Over Monolithic Analysis**
+- Task-specific agents outperform single-LLM approaches (empirically validated)
+- Controlled agent conversations through structured protocols and handoffs
+- Natural language communication between agents (no complex JSON parsing)
+- Sequential validation gauntlet: TrueValidation → ProjectCoherence → StatisticalPlanning → ModelHealth
+- Adversarial review protocols: IdeologicalReviewer ↔ StatisticalReviewer → ModeratorSynthesis
+- Agent specialization: AnalysisBatch → CorpusSynthesis → Review → Moderation pipeline
+
 ---
 
 ### The THIN vs THICK Philosophy
