@@ -6,21 +6,36 @@ title: Discernus System Architecture - Technical Specification
 
 ## About Discernus
 
-**Discernus** is a computational research platform that enables systematic, reproducible analysis of text corpora using analytical frameworks developed by researchers. Rather than requiring technical implementation of each framework, Discernus allows researchers to specify their analytical approach in natural language and applies it consistently across large document collections.
+**Discernus** is a computational research platform that amplifies researcher expertise through systematic, reproducible analysis of text corpora. Rather than replacing human judgment, Discernus enables researchers to apply their analytical frameworks at unprecedented scale while maintaining complete transparency and academic integrity.
 
 ### What Discernus Does
 
-Discernus transforms the traditional research workflow:
+Discernus transforms research capacity without compromising scholarly control:
 
-**Traditional Approach**: Researcher manually applies analytical framework → Individual document analysis → Manual synthesis across findings → Subjective aggregation
+**Traditional Approach**: 
+- Researcher manually codes documents → Individual analysis → Manual synthesis → Subjective aggregation
+- Limited scale, inconsistent application, difficult replication
 
-**Discernus Approach**: Researcher specifies framework once → Automated batch analysis across corpus → LLM-powered synthesis with statistical validation → Reproducible, peer-reviewable results
+**Discernus Approach**: 
+- Researcher designs framework once → Automated consistent application across corpus → LLM-powered synthesis with computational verification → Transparent, statistically validated results
+- Institutional scale, perfect consistency, complete auditability
+
+### Foundational Philosophy
+
+**Human Amplification, Not Replacement**: Researchers retain complete control over analytical approach, interpretation, and synthesis. Discernus provides computational scale and methodological consistency while preserving human expertise and judgment.
+
+**Day-1 Extensibility**: Create unlimited frameworks, experiments, and corpora within specifications. No programming required - analytical approaches expressed in natural language enable immediate research productivity.
+
+**Academic Integrity by Design**: Every calculation verified through code execution, every decision logged for audit, complete provenance for peer review. No hallucinated statistics, no black-box results.
+
+**Empirically Validated Consistency**: LLMs provide more consistent evaluation than human panels at institutional scale, representing global-scale averaging of human perception patterns while eliminating fatigue and bias drift.
 
 ### Core Capabilities
-- **Framework Agnostic**: Works with any analytical framework (political analysis, content analysis, discourse analysis, etc.)
-- **Format Agnostic**: Processes any document type (PDF, DOCX, plain text, etc.) without preprocessing
-- **Corpus Agnostic**: Scales from dozens to thousands of documents with consistent quality
-- **Academically Rigorous**: Complete provenance, statistical validation, peer-review ready outputs
+- **Unlimited Analytical Frameworks**: Any approach expressible in natural language (political analysis, discourse analysis, content analysis, literary criticism, etc.)
+- **Any Text Corpus**: Scales from dozens to thousands of documents with hash-based anonymization for sensitive materials
+- **Computational Verification**: All statistics computed and verified - no hallucinated results
+- **Complete Transparency**: End-to-end audit trails, variance reporting, confidence intervals, methodological constraints
+- **Immediate Collaboration**: Git-based framework and experiment sharing enables academic community building
 
 ---
 
