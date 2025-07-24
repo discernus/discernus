@@ -124,7 +124,7 @@ class ReviewerAgent:
                 "result_hash": result_hash,
                 "status": "completed",
                 "task_type": "Review",
-                "model_used": "gemini-2.5-flash"
+                "model_used": "gemini-2.5-pro"
             }
 
             self.redis_client.xadd('tasks.done', {
