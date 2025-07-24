@@ -125,21 +125,39 @@ class OrchestratorAgent:
         logger.info(f"Waiting for completion of task: {task_id}")
         start_time = time.time()
         
+        # Use a unique last_id for each wait call to avoid reprocessing old messages
+        last_id = '0-0'
+        
         while time.time() - start_time < timeout:
-            done_messages = self.redis_client.xread({'tasks.done': '0-0'}, block=1000)
+            # Use a unique consumer name to avoid conflicts if multiple orchestrators are running
+            consumer_name = f"orchestrator_waiter_{task_id}"
+            
+            # Read from the stream, starting after the last message we processed
+            done_messages = self.redis_client.xreadgroup(
+                'waiters', consumer_name, {'tasks.done': '>'}, count=1, block=1000
+            )
+
             if not done_messages:
                 continue
+                
             for stream, msgs in done_messages:
                 for msg_id, fields in msgs:
-                    completion_data = json.loads(fields[b'data'])
-                    if completion_data.get('original_task_id') == task_id:
-                        logger.info(f"Task {task_id} completed.")
-                        result_hash = completion_data.get('result_hash')
-                        if not result_hash:
-                            raise OrchestratorAgentError(f"Completion message for {task_id} is missing a result_hash.")
-                        result_bytes = get_artifact(result_hash)
-                        return json.loads(result_bytes.decode('utf-8'))
-            time.sleep(1)
+                    try:
+                        completion_data = json.loads(fields[b'data'])
+                        if completion_data.get('original_task_id') == task_id:
+                            logger.info(f"Task {task_id} completed.")
+                            # Acknowledge the message so it's not re-read
+                            self.redis_client.xack('tasks.done', 'waiters', msg_id)
+                            result_hash = completion_data.get('result_hash')
+                            if not result_hash:
+                                raise OrchestratorAgentError(f"Completion message for {task_id} is missing a result_hash.")
+                            result_bytes = get_artifact(result_hash)
+                            return json.loads(result_bytes.decode('utf-8'))
+                    except (json.JSONDecodeError, KeyError) as e:
+                        logger.error(f"Error processing completion message: {msg_id}, {fields}, error: {e}")
+                        # Acknowledge malformed messages to prevent reprocessing
+                        self.redis_client.xack('tasks.done', 'waiters', msg_id)
+
             
         raise OrchestratorAgentError(f"Timed out waiting for task {task_id}")
 
@@ -150,30 +168,42 @@ class OrchestratorAgent:
         result_hashes = []
         start_time = time.time()
 
+        # Use a unique last_id for each wait cycle to avoid reprocessing old messages
+        last_id = '0-0'
+
         while len(completed_tasks) < len(task_ids):
             if time.time() - start_time > timeout:
                 raise OrchestratorAgentError(f"Timed out waiting for all analysis tasks. Completed {len(completed_tasks)} of {len(task_ids)}.")
             
-            done_messages = self.redis_client.xread({'tasks.done': '0-0'}, block=1000)
+            # Use a unique consumer name to avoid conflicts
+            consumer_name = f"orchestrator_waiter_all_{''.join(task_ids[:2])}"
+
+            done_messages = self.redis_client.xreadgroup(
+                'waiters', consumer_name, {'tasks.done': '>'}, count=5, block=1000
+            )
             if not done_messages:
                 continue
             
             for stream, msgs in done_messages:
                 for msg_id, fields in msgs:
-                    completion_data = json.loads(fields[b'data'])
-                    original_task_id = completion_data.get('original_task_id')
-                    
-                    if original_task_id in task_ids and original_task_id not in completed_tasks:
-                        logger.info(f"Analysis task {original_task_id} completed ({len(completed_tasks)+1}/{len(task_ids)}).")
-                        result_hash = completion_data.get('result_hash')
-                        if not result_hash:
-                            logger.warning(f"Completion message for {original_task_id} is missing a result_hash.")
-                            continue
+                    try:
+                        completion_data = json.loads(fields[b'data'])
+                        original_task_id = completion_data.get('original_task_id')
                         
-                        completed_tasks.add(original_task_id)
-                        result_hashes.append(result_hash)
-            
-            time.sleep(2)
+                        if original_task_id in task_ids and original_task_id not in completed_tasks:
+                            logger.info(f"Analysis task {original_task_id} completed ({len(completed_tasks)+1}/{len(task_ids)}).")
+                            self.redis_client.xack('tasks.done', 'waiters', msg_id)
+                            result_hash = completion_data.get('result_hash')
+                            if not result_hash:
+                                logger.warning(f"Completion message for {original_task_id} is missing a result_hash.")
+                                continue
+                            
+                            completed_tasks.add(original_task_id)
+                            result_hashes.append(result_hash)
+                    except (json.JSONDecodeError, KeyError) as e:
+                        logger.error(f"Error processing completion message: {msg_id}, {fields}, error: {e}")
+                        # Acknowledge malformed messages
+                        self.redis_client.xack('tasks.done', 'waiters', msg_id)
         
         logger.info("All analysis tasks completed.")
         return result_hashes
@@ -300,6 +330,16 @@ class OrchestratorAgent:
                 logger.info(f"Consumer group '{CONSUMER_GROUP}' already exists.")
             else:
                 raise # Reraise other errors
+
+        # Create a dedicated consumer group for waiting on task completions
+        try:
+            self.redis_client.xgroup_create('tasks.done', 'waiters', id='0', mkstream=True)
+            logger.info("Consumer group 'waiters' created for stream 'tasks.done'.")
+        except redis.exceptions.ResponseError as e:
+            if "consumer group name already exists" in str(e).lower():
+                logger.info("Consumer group 'waiters' already exists.")
+            else:
+                raise
 
         try:
             while True:
