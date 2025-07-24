@@ -111,7 +111,7 @@ class ReviewerAgent:
                 "ideology": ideology if review_type == 'ideological' else None,
                 "synthesis_hash": synthesis_hash,
                 "review_content": review_content,
-                "model_used": "gemini-2.5-flash",
+                "model_used": "gemini-2.5-pro",
                 "review_timestamp": "2025-07-23T21:00:00.000000Z"
             }
             
@@ -245,10 +245,10 @@ Your review should be rigorous academic critique that:
 Provide approximately 400-600 words of substantive constitutional critique."""
 
         try:
-            logger.info(f"Calling LLM (gemini-2.5-flash) for {ideology} ideological review...")
+            logger.info(f"Calling LLM (gemini-2.5-pro) for {ideology} ideological review...")
             
             response = completion(
-                model="gemini-2.5-flash",
+                model="gemini-2.5-pro",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.3
             )
@@ -329,10 +329,10 @@ Your review should focus on:
 Provide approximately 400-600 words of substantive methodological critique that challenges the statistical foundations and analytical approach."""
 
         try:
-            logger.info("Calling LLM (gemini-2.5-flash) for statistical review...")
+            logger.info("Calling LLM (gemini-2.5-pro) for statistical review...")
             
             response = completion(
-                model="gemini-2.5-flash", 
+                model="gemini-2.5-pro", 
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.3
             )

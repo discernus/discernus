@@ -121,7 +121,7 @@ class ModeratorAgent:
                     "synthesis_hash": synthesis_hash,
                     "conversation_log": self.conversation_log,
                     "audit_trail_hash": audit_trail_hash,
-                    "model_used": "gemini-2.5-flash",
+                    "model_used": "gemini-2.5-pro",
                     "moderation_timestamp": time.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
                 }
                 
@@ -135,7 +135,7 @@ class ModeratorAgent:
                     "audit_trail_hash": audit_trail_hash,
                     "status": "completed",
                     "task_type": "Moderation",
-                    "model_used": "gemini-2.5-flash"
+                    "model_used": "gemini-2.5-pro"
                 }
 
                 self.redis_client.xadd('tasks.done', {
@@ -213,7 +213,7 @@ Let us begin with opening statements from each reviewer.
             'synthesis_hash': synthesis_hash,
             'conversation_context': {},
             'experiment_name': experiment_name,
-            'model': 'gemini-2.5-flash'
+            'model': 'gemini-2.5-pro'
         }
 
         ideological_task_id = self.redis_client.xadd('tasks', {
@@ -228,7 +228,7 @@ Let us begin with opening statements from each reviewer.
             'synthesis_hash': synthesis_hash,
             'conversation_context': {},
             'experiment_name': experiment_name,
-            'model': 'gemini-2.5-flash'
+            'model': 'gemini-2.5-pro'
         }
 
         statistical_task_id = self.redis_client.xadd('tasks', {
@@ -337,7 +337,7 @@ Let us begin with opening statements from each reviewer.
                     'synthesis_hash': review['synthesis_hash'],
                     'conversation_context': {'previous_reviews': previous_reviews},
                     'experiment_name': review.get('experiment_name', 'phase3_review_test'),
-                    'model': 'gemini-2.5-flash'
+                    'model': 'gemini-2.5-pro'
                 }
             else:  # statistical
                 response_task_data = {
@@ -345,7 +345,7 @@ Let us begin with opening statements from each reviewer.
                     'synthesis_hash': review['synthesis_hash'],
                     'conversation_context': {'previous_reviews': previous_reviews},
                     'experiment_name': review.get('experiment_name', 'phase3_review_test'),
-                    'model': 'gemini-2.5-flash'
+                    'model': 'gemini-2.5-pro'
                 }
 
             response_task_id = self.redis_client.xadd('tasks', {
@@ -407,7 +407,7 @@ Provide approximately 600-800 words of final synthesis that demonstrates the val
             logger.info("Calling LLM for final moderated synthesis...")
             
             response = completion(
-                model="gemini-2.5-flash",
+                model="gemini-2.5-pro",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.3
             )

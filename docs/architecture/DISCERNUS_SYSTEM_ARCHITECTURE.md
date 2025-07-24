@@ -430,4 +430,304 @@ The architecture enforces strict constraints to ensure reliability:
 
 ---
 
-*Last updated 2025‑07‑24 - Aligned with Implementation Plan V4*
+## 9 · Development Workflow
+
+### 9.1 Local Development Setup
+**Docker Infrastructure**:
+```bash
+# Start development infrastructure
+$ docker compose up -d redis minio
+
+# Verify services
+$ docker compose ps
+$ redis-cli ping  # Should return PONG
+$ curl http://localhost:9000  # MinIO console
+```
+
+**Virtual Environment**:
+```bash
+# Activate project environment
+$ source venv/bin/activate
+
+# Install development dependencies
+$ pip install -r requirements-dev.txt  # TODO: Create dev requirements
+```
+
+### 9.2 Agent Testing Harness
+**Individual Agent Testing**:
+```bash
+# Test single agent without full pipeline
+$ python3 scripts/test_agent.py --agent PreTestAgent --input test_corpus/
+
+# Mock LLM responses for fast iteration
+$ python3 scripts/test_agent.py --agent AnalyseBatchAgent --mock-responses
+```
+
+**Prompt Iteration Workflow**:
+- Agent prompts stored in `agents/<AgentName>/prompt.yaml`
+- Modify prompt → Test with harness → Validate output schema
+- Version control tracks prompt evolution
+
+### 9.3 Debugging Individual Stages
+**Stage Isolation**:
+```bash
+# Run only specific pipeline stage
+$ python3 scripts/debug_stage.py --stage BatchAnalysis --run-id RUN_001
+
+# Inspect stage artifacts
+$ python3 scripts/inspect_artifacts.py --stage CorpusSynthesis --run-id RUN_001
+```
+
+**Development Mode**:
+- `DEV_MODE=true` enables verbose logging and artifact inspection
+- Stages can be run independently with cached inputs
+- Mock data generators for consistent testing
+
+*TODO: Implement agent testing harness and stage isolation tools*
+
+---
+
+## 10 · Operational Monitoring
+
+### 10.1 Health Checks
+**Infrastructure Health**:
+```python
+# Health check endpoints
+def check_redis_health() -> bool:
+    """Verify Redis connectivity and basic operations"""
+    # TODO: Implement Redis ping, memory usage, queue depths
+
+def check_minio_health() -> bool:
+    """Verify MinIO connectivity and storage"""
+    # TODO: Implement MinIO connectivity, bucket access, storage usage
+
+def check_llm_health() -> bool:
+    """Verify LLM provider connectivity and quotas"""
+    # TODO: Implement Vertex AI health check, quota monitoring
+```
+
+### 10.2 Queue Monitoring
+**Queue Depth Alerting**:
+- Monitor `orchestrator.tasks` stream length
+- Alert when queue depth > 100 tasks (indicates processing bottleneck)
+- Track average task processing time per agent type
+
+**Performance Baselines**:
+- Stage completion times: PreTest ~30s, BatchAnalysis ~5min, Synthesis ~2min
+- Queue processing rate: ~10 tasks/minute under normal load
+- Memory usage: <2GB RSS per agent process
+
+### 10.3 Cost Tracking Integration
+**Real-time Cost Monitoring**:
+```bash
+# Current experiment cost tracking
+$ python3 scripts/cost_monitor.py --run-id RUN_001
+
+# Daily cost summary
+$ python3 scripts/cost_monitor.py --daily-summary
+```
+
+**Budget Integration**:
+- Cost estimates before pipeline execution
+- Real-time spend tracking during execution
+- Budget alerts when approaching limits
+
+*TODO: Implement comprehensive monitoring infrastructure*
+
+---
+
+## 11 · Error Recovery Patterns
+
+### 11.1 Partial Batch Failure Handling
+**Batch-Level Resilience**:
+- Individual document failures don't abort entire batch
+- Failed documents logged with error details
+- Partial batch results preserved and marked as incomplete
+- Option to retry failed documents only
+
+**Recovery Strategy**:
+```python
+class BatchRecovery:
+    def handle_partial_failure(self, batch_id: str, failed_docs: List[str]):
+        """Preserve successful analyses, retry failures"""
+        # TODO: Implement selective retry logic
+        pass
+```
+
+### 11.2 LLM Rate Limit Backoff
+**Adaptive Rate Limiting**:
+- Exponential backoff: 1s, 2s, 4s, 8s, 16s, 32s maximum
+- Provider-specific rate limit detection
+- Automatic retry with backoff for transient failures
+- Queue prioritization during rate limit periods
+
+### 11.3 Infrastructure Connection Recovery
+**Redis Disconnection Handling**:
+- Connection pooling with automatic reconnection
+- Task persistence during brief disconnections
+- Graceful degradation: log to local files if Redis unavailable
+
+**MinIO Connection Recovery**:
+- Retry artifact storage with exponential backoff
+- Local caching during MinIO unavailability
+- Automatic sync when connection restored
+
+*TODO: Implement robust error recovery mechanisms*
+
+---
+
+## 12 · Corpus Preparation Tools
+
+### 12.1 Manifest Generation
+**Automatic Manifest Creation**:
+```bash
+# Generate manifest.json from directory
+$ python3 scripts/generate_manifest.py --corpus-dir projects/exp1/corpus/
+
+# Validate existing manifest
+$ python3 scripts/validate_manifest.py --corpus-dir projects/exp1/corpus/
+```
+
+**Manifest Schema Validation**:
+```json
+{
+  "version": "3.0",
+  "total_documents": 42,
+  "documents": [
+    {
+      "filename": "doc001.txt",
+      "sha256": "a1b2c3...",
+      "size_bytes": 2048,
+      "encoding": "utf-8"
+    }
+  ],
+  "created": "2025-07-24T15:30:00Z"
+}
+```
+
+### 12.2 Corpus Validation Tools
+**Structure Validation**:
+- Verify all files in manifest exist and match hashes
+- Check encoding consistency across documents
+- Validate file size constraints (max 50KB per document)
+- Detect and report binary files requiring base64 encoding
+
+**Size Estimation**:
+```bash
+# Estimate processing cost before run
+$ python3 scripts/estimate_corpus_cost.py --corpus-dir projects/exp1/corpus/ --frameworks 3
+# Output: ~$45.20 for 3 runs, ~180 minutes processing time
+```
+
+### 12.3 Format Conversion Helpers
+**Document Processing**:
+- PDF to text conversion with page preservation
+- DOCX to plain text with metadata extraction
+- HTML to text with structure preservation
+- Base64 encoding for binary documents
+
+*TODO: Implement corpus preparation toolkit*
+
+---
+
+## 13 · Framework Development Support
+
+### 13.1 Framework Validation Tools
+**Pre-run Validation**:
+```bash
+# Validate framework before expensive processing
+$ python3 scripts/validate_framework.py --framework caf_v4.3.md
+
+# Test framework output contract
+$ python3 scripts/test_framework_contract.py --framework caf_v4.3.md --sample-text sample.txt
+```
+
+**Framework Linting**:
+- Check for required sections (anchors, scoring rubrics, output contracts)
+- Validate JSON schema in output contracts
+- Detect common framework specification errors
+- Suggest improvements based on best practices
+
+### 13.2 Example Frameworks
+**Reference Implementations**:
+- `frameworks/examples/simple_sentiment.md` - Basic binary classification
+- `frameworks/examples/multi_dimensional.md` - Complex analytical framework
+- `frameworks/examples/comparative.md` - Framework for document comparison
+
+**Framework Templates**:
+- Scaffold new frameworks with proper structure
+- Include output contract templates
+- Provide scoring rubric examples
+
+### 13.3 Framework Testing Methodology
+**Systematic Testing**:
+1. **Unit Testing**: Single document analysis validation
+2. **Consistency Testing**: Same document, multiple runs
+3. **Edge Case Testing**: Unusual document formats and content
+4. **Performance Testing**: Token usage and processing time
+
+**Output Contract Validation**:
+```python
+def validate_framework_output(framework_result: dict, expected_schema: dict) -> bool:
+    """Ensure framework produces specification-compliant output"""
+    # TODO: Implement schema validation with detailed error reporting
+    pass
+```
+
+*TODO: Implement framework development support tools*
+
+---
+
+## 14 · Implementation Dependencies
+
+### 14.1 Staged Implementation Approach
+**Agent Discovery Migration Strategy**:
+- **Phase A (Current)**: Maintain hardcoded `AGENT_SCRIPTS` mapping for pipeline completion reliability
+- **Phase B (Refactoring)**: Migrate to `agents/<AgentName>/config.json` discovery pattern
+- **Justification**: "Reliability > Flexibility" during critical implementation phase
+- **Target**: Router discovers agents by scanning `agents/*/config.json` (~50 lines implementation)
+
+**Prompt Storage Specification**:
+- **Location**: `agents/<AgentName>/prompt.yaml`
+- **Format**: YAML with versioning and metadata
+- **Loading**: Agents load prompts at initialization, cache in memory
+
+### 14.2 Complete Dependency Specification
+**Core Python Dependencies**:
+```txt
+# requirements.txt additions
+pandas>=2.0.0          # Statistical calculations in CorpusSynthesis
+numpy>=1.24.0          # Numerical operations
+scipy>=1.10.0          # Advanced statistics
+jinja2>=3.1.0          # HTML template generation for Review stage
+pydantic>=2.0.0        # Input validation and schemas
+```
+
+**Development Dependencies**:
+```txt
+# requirements-dev.txt (new file)
+pytest>=7.0.0          # Testing framework
+pytest-mock>=3.10.0    # Mock LLM responses
+black>=23.0.0          # Code formatting
+mypy>=1.0.0            # Type checking
+```
+
+### 14.3 HTML Generation System
+**Template Structure**:
+```
+templates/
+├── debate_transcript.html     # Review stage conversation
+├── synthesis_report.html      # CorpusSynthesis output
+└── base.html                  # Common layout
+```
+
+**Template Engine**:
+- Jinja2 templates for consistent HTML generation
+- CSS embedded for self-contained artifacts
+- Mobile-responsive design for review accessibility
+
+*TODO: Create HTML templates and integrate with Review/Moderation stages*
+
+---
+
+*Last updated 2025‑07‑24 - Aligned with Implementation Plan V4 + External Review Feedback*
