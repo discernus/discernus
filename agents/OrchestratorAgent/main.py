@@ -82,7 +82,7 @@ class OrchestratorAgent:
             if not analysis_plan_hash:
                 return False
             
-            analysis_task_ids = self._execute_plan(analysis_plan_hash, experiment_name, framework_hashes, corpus_hashes)
+            analysis_task_ids = self._execute_plan(analysis_plan_hash, experiment_name, framework_hashes, corpus_hashes, pre_test_result)
             if not analysis_task_ids:
                 return False
 
@@ -204,36 +204,48 @@ class OrchestratorAgent:
         logger.info(f"Stored analysis plan artifact: {plan_hash}")
         return plan_hash
 
-    def _execute_plan(self, plan_hash: str, experiment_name: str, framework_hashes: List[str], corpus_hashes: List[str]) -> List[str]:
+    def _execute_plan(self, plan_hash: str, experiment_name: str, framework_hashes: List[str], corpus_hashes: List[str], pre_test_result: Dict = None) -> List[str]:
         """Executes a plan and returns the IDs of the tasks created."""
         logger.info(f"Executing plan from artifact: {plan_hash}")
         plan_bytes = get_artifact(plan_hash)
         plan_content = plan_bytes.decode('utf-8')
 
-        # Let the LLM provide a natural plan - we'll extract task information
-        # For now, create a simple fallback plan based on the corpus
-        # This is a temporary implementation while we test the simplified approach
-        logger.info("Creating analysis tasks from natural plan content...")
-        
-        # This is a simplified implementation - in practice, you'd parse the LLM's natural plan
-        # For testing, let's create some basic analysis tasks with actual data
+        # Extract recommend_runs from PreTest results
+        recommend_runs = 3  # Default fallback
+        if pre_test_result:
+            # Try to extract recommend_runs from various possible formats
+            if isinstance(pre_test_result, dict):
+                # Direct key access
+                recommend_runs = pre_test_result.get('recommend_runs', recommend_runs)
+                
+                # Check if it's in the raw LLM response text
+                raw_response = pre_test_result.get('analysis_results', '')
+                if not pre_test_result.get('recommend_runs') and raw_response:
+                    # Parse the LLM response text for recommend_runs
+                    import re
+                    match = re.search(r'recommend_runs["\']?\s*:?\s*(\d+)', raw_response, re.IGNORECASE)
+                    if match:
+                        recommend_runs = int(match.group(1))
+                        logger.info(f"Extracted recommend_runs={recommend_runs} from PreTest raw response")
+                    else:
+                        logger.warning(f"Could not extract recommend_runs from PreTest response, using default {recommend_runs}")
+                        
+            logger.info(f"PreTest recommended {recommend_runs} runs for statistical confidence")
+        else:
+            logger.warning("No PreTest result provided, using default 3 runs")
+
+        # Create multiple runs of the SAME documents for statistical variance analysis
+        logger.info(f"Creating {recommend_runs} statistical runs of identical document set...")
         task_ids = []
         
-        # Split documents into batches - for testing, create 3 batches
-        batch_size = max(1, len(corpus_hashes) // 3)
-        for i in range(3):
-            start_idx = i * batch_size
-            end_idx = min(start_idx + batch_size, len(corpus_hashes))
-            if start_idx >= len(corpus_hashes):
-                break
-                
-            batch_documents = corpus_hashes[start_idx:end_idx]
-            
+        for run_num in range(recommend_runs):
             task_data = {
-                'batch_id': f'batch_{i+1}_of_3',
-                'framework_hashes': framework_hashes,  # Use actual framework hashes
-                'document_hashes': batch_documents,    # Use actual document batch
-                'model': 'gemini-2.5-flash'
+                'batch_id': f'run_{run_num+1}_of_{recommend_runs}',
+                'framework_hashes': framework_hashes,
+                'document_hashes': corpus_hashes,  # ALL documents in each run
+                'model': 'gemini-2.5-flash',
+                'run_number': run_num + 1,
+                'total_runs': recommend_runs
             }
 
             message_id = self.redis_client.xadd('tasks', {
@@ -241,8 +253,9 @@ class OrchestratorAgent:
                 'data': json.dumps(task_data)
             })
             task_ids.append(message_id.decode())
+            logger.info(f"Created run {run_num+1}/{recommend_runs} with {len(corpus_hashes)} documents")
         
-        logger.info(f"Successfully created {len(task_ids)} analysis tasks from plan {plan_hash}")
+        logger.info(f"Successfully created {len(task_ids)} statistical runs from plan {plan_hash}")
         return task_ids
 
     def _enqueue_synthesis_task(self, experiment_name: str, analysis_result_hashes: List[str], framework_hashes: List[str]):

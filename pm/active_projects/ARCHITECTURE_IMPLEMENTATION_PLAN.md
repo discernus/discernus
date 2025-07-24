@@ -193,4 +193,46 @@ This plan is a series of gates. We only proceed to the next phase once all quest
     *   *Test:* Check the artifacts for the run.
     *   *Success:* An HTML or Markdown file exists that correctly formats the entire conversation from the Layer 2 report through the final moderated synthesis.
 
-**Definition of Done for Phase 3:** A full experiment run now produces a final, quality-assured, and auditable synthesis report that transparently separates its statistical foundation from its qualitative interpretation. 
+**Definition of Done for Phase 3:** A full experiment run now produces a final, quality-assured, and auditable synthesis report that transparently separates its statistical foundation from its qualitative interpretation.
+
+---
+
+### Phase 4: Advanced Statistical Optimization (Future)
+
+**Goal:** Implement the sophisticated optimal batching system described in `/pm/poc/perplexity_on_gemini_optimal_run_batching.md` to maximize statistical rigor while minimizing cost.
+
+**Components for Future Implementation:**
+
+1. **`SyntheticCalibrationAgent`** - Generate statistically representative text using Gemini 2.5 Flash
+   - Input: Full corpus (up to 1M tokens)
+   - Output: Synthetic text embodying collective rhetorical/structural patterns
+   - Model: `gemini-2.5-flash` for cost-effective large-context processing
+
+2. **Enhanced `PreTestAgent`** - Implement proper statistical formulation
+   - Replace subjective variance estimation with mathematical precision
+   - Implement coefficient of variation (CV) calculations: `n = (z × CV / E)²`
+   - Add Sequential Probability Ratio Testing (SPRT) for dynamic stopping
+   - Confidence interval monitoring: stop when `CI ≤ desired margin of error`
+
+3. **Sequential Sampling Pipeline** - Dynamic run optimization
+   - Initial batch → measure variance → apply formula → add runs as needed
+   - Real-time confidence interval assessment
+   - Automated stopping when statistical confidence achieved
+
+4. **Empirical Optimization Feedback Loop**
+   - Use variance metrics from `CorpusSynthesisAgent` reports
+   - Track actual vs. predicted run requirements across experiments
+   - Refine synthetic calibration approach based on empirical results
+
+**Prerequisites for Phase 4:**
+- Phase 3 quality assurance pipeline validated and stable
+- Sufficient experimental data to validate optimization gains
+- Clear ROI analysis: statistical improvement vs. implementation complexity
+
+**Expected Benefits:**
+- Up to 75% reduction in unnecessary LLM calls via SPRT early stopping
+- Statistically justified confidence intervals replacing arbitrary run counts
+- Empirical calibration eliminating over/under-provisioning of analysis runs
+- Mathematical precision replacing subjective LLM-based variance estimates
+
+**Decision Point:** Implement Phase 4 only after empirical evidence from Phase 3 experiments demonstrates significant variance in run requirements and clear cost optimization potential. 
