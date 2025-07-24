@@ -19,6 +19,7 @@ import yaml
 import sys
 import os
 import logging
+import base64
 from typing import Dict, Any, List
 from litellm import completion
 
@@ -82,16 +83,32 @@ class CorpusSynthesisAgent:
             logger.info(f"Processing CorpusSynthesis task: {task_id}")
             
             # Validate required fields
-            required_fields = ['experiment_name', 'batch_result_hashes']
+            required_fields = ['experiment_name', 'batch_result_hashes', 'framework_hashes']
             for field in required_fields:
                 if field not in task_data:
                     raise CorpusSynthesisAgentError(f"Required field missing: {field}")
             
             experiment_name = task_data['experiment_name']
             batch_result_hashes = task_data['batch_result_hashes']
+            framework_hashes = task_data['framework_hashes']
             model = task_data.get('model', 'gemini-2.5-flash')  # Use Gemini 2.5 Flash for cost-optimized stats
             
-            logger.info(f"Experiment '{experiment_name}': Aggregating {len(batch_result_hashes)} batch results")
+            logger.info(f"Experiment '{experiment_name}': Aggregating {len(batch_result_hashes)} batch results with {len(framework_hashes)} frameworks")
+            
+            # Retrieve framework artifacts for synthesis context
+            frameworks = []
+            for i, framework_hash in enumerate(framework_hashes):
+                # Strip sha256: prefix if present
+                clean_hash = framework_hash[7:] if framework_hash.startswith('sha256:') else framework_hash
+                framework_bytes = get_artifact(clean_hash)
+                # Binary-First Principle: Frameworks also as base64
+                framework_content = base64.b64encode(framework_bytes).decode('utf-8')
+                frameworks.append({
+                    'index': i + 1,
+                    'hash': clean_hash,
+                    'content': framework_content
+                })
+                logger.info(f"Retrieved framework {i+1}: {clean_hash[:12]}...")
             
             # Retrieve all batch analysis artifacts
             batch_analyses = []
@@ -129,8 +146,10 @@ class CorpusSynthesisAgent:
             # Format prompt for statistical aggregation (THIN - minimal string substitution)
             prompt_text = self.prompt_template.format(
                 experiment_name=experiment_name,
+                frameworks=self._format_frameworks_for_prompt(frameworks),
                 batch_analyses=self._format_batch_analyses_for_prompt(batch_analyses),
-                num_batches=len(batch_analyses)
+                num_batches=len(batch_analyses),
+                num_frameworks=len(frameworks)
             )
             
             # Call LLM for statistical computation
@@ -153,6 +172,7 @@ class CorpusSynthesisAgent:
                 'task_id': task_id,
                 'model_used': model,
                 'batch_result_hashes': batch_result_hashes,
+                'framework_hashes': framework_hashes,  # Pass frameworks to downstream Phase 3 agents
                 'synthesis_timestamp': self._get_timestamp(),
                 'raw_llm_statistical_report': result_content,
                 'aggregation_metadata': {
@@ -195,6 +215,13 @@ class CorpusSynthesisAgent:
         except Exception as e:
             logger.error(f"Error processing CorpusSynthesis task {task_id}: {e}")
             return False
+    
+    def _format_frameworks_for_prompt(self, frameworks: List[Dict]) -> str:
+        """Format frameworks for LLM prompt"""
+        formatted = []
+        for framework in frameworks:
+            formatted.append(f"=== FRAMEWORK {framework['index']} (base64 encoded) ===\n{framework['content']}\n")
+        return "\n".join(formatted)
     
     def _format_batch_analyses_for_prompt(self, batch_analyses: List[Dict]) -> str:
         """Format batch analyses for LLM prompt - pass raw analysis content"""
