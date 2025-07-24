@@ -131,22 +131,19 @@ class PreTestAgent:
             result_hash = put_artifact(json.dumps(pretest_artifact, indent=2).encode('utf-8'))
             logger.info(f"Pre-test analysis complete, result stored: {result_hash}")
 
-            # 5. Signal completion
-            completion_data = {
-                'original_task_id': task_id,
-                'experiment_name': experiment_name,
-                'result_hash': result_hash,
-                'status': 'completed',
-                'task_type': 'PreTest',
-                'model_used': model
-            }
+            # 5. Signal completion using architect-specified Redis keys/lists pattern
+            # Set status key with expiration
+            self.redis_client.set(f"task:{task_id}:status", "done", ex=86400)
             
-            self.redis_client.xadd('tasks.done', {
-                'original_task_id': task_id,
-                'data': json.dumps(completion_data)
-            })
-
-            logger.info(f"PreTest task completed: {task_id}")
+            # Store result hash for easy retrieval
+            self.redis_client.set(f"task:{task_id}:result_hash", result_hash, ex=86400)
+            
+            # Signal completion to orchestrator - extract run_id from task_id or use task_id
+            # For now, use task_id as run_id until orchestrator passes explicit run_id
+            run_id = task_data.get('run_id', task_id)
+            self.redis_client.lpush(f"run:{run_id}:done", task_id)
+            
+            logger.info(f"PreTest task completed: {task_id} (signaled to run:{run_id}:done)")
             return True
             
         except Exception as e:

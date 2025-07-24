@@ -187,23 +187,18 @@ class CorpusSynthesisAgent:
             result_hash = put_artifact(json.dumps(corpus_synthesis_artifact, indent=2).encode('utf-8'))
             logger.info(f"Corpus synthesis complete, statistical report stored: {result_hash}")
             
-            # Signal completion to router
-            completion_data = {
-                'original_task_id': task_id,
-                'experiment_name': experiment_name,
-                'result_hash': result_hash,
-                'status': 'completed',
-                'task_type': 'CorpusSynthesis',
-                'model_used': model,
-                'next_layer': 'QualityAssurance'  # Indicate Layer 3 dependency
-            }
+            # Signal completion using architect-specified Redis keys/lists pattern
+            # Set status key with expiration
+            self.redis_client.set(f"task:{task_id}:status", "done", ex=86400)
             
-            self.redis_client.xadd('tasks.done', {
-                'original_task_id': task_id,
-                'data': json.dumps(completion_data)
-            })
+            # Store result hash for easy retrieval
+            self.redis_client.set(f"task:{task_id}:result_hash", result_hash, ex=86400)
             
-            logger.info(f"CorpusSynthesis task completed: {task_id}")
+            # Signal completion to orchestrator
+            run_id = task_data.get('run_id', task_id)
+            self.redis_client.lpush(f"run:{run_id}:done", task_id)
+            
+            logger.info(f"CorpusSynthesis task completed: {task_id} (signaled to run:{run_id}:done)")
             return True
             
         except ArtifactStorageError as e:
