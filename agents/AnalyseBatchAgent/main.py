@@ -178,23 +178,18 @@ class AnalyseBatchAgent:
             result_hash = put_artifact(json.dumps(batch_artifact, indent=2).encode('utf-8'))
             logger.info(f"Batch analysis complete, result stored: {result_hash}")
             
-            # Signal completion to router
-            completion_data = {
-                'original_task_id': task_id,
-                'batch_id': batch_id,
-                'result_hash': result_hash,
-                'status': 'completed',
-                'task_type': 'AnalyseBatch',
-                'model_used': model,
-                'next_layer': 'CorpusSynthesis'  # Indicate Layer 2 dependency
-            }
+            # Signal completion using architect-specified Redis keys/lists pattern
+            # Set status key with expiration
+            self.redis_client.set(f"task:{task_id}:status", "done", ex=86400)
             
-            self.redis_client.xadd('tasks.done', {
-                'original_task_id': task_id,
-                'data': json.dumps(completion_data)
-            })
+            # Store result hash for easy retrieval
+            self.redis_client.set(f"task:{task_id}:result_hash", result_hash, ex=86400)
             
-            logger.info(f"AnalyseBatch task completed: {task_id}")
+            # Signal completion to orchestrator
+            run_id = task_data.get('run_id', task_id)
+            self.redis_client.lpush(f"run:{run_id}:done", task_id)
+            
+            logger.info(f"AnalyseBatch task completed: {task_id} (signaled to run:{run_id}:done)")
             return True
             
         except ArtifactStorageError as e:

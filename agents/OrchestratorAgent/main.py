@@ -60,12 +60,15 @@ class OrchestratorAgent:
         4. Hands off plan to ExecutionBridge.
         """
         try:
+            # Set run_id for Redis coordination
+            self.run_id = original_task_id
+            
             experiment = orchestration_data['experiment']
             framework_hashes = orchestration_data['framework_hashes']
             corpus_hashes = orchestration_data['corpus_hashes']
             experiment_name = experiment.get('name', 'unnamed')
 
-            logger.info(f"Orchestrating experiment: {experiment_name}")
+            logger.info(f"Orchestrating experiment: {experiment_name} (run_id: {self.run_id})")
 
             # 1. Enqueue PreTest task
             pre_test_task_id = self._enqueue_pre_test_task(experiment_name, framework_hashes, corpus_hashes)
@@ -110,7 +113,8 @@ class OrchestratorAgent:
             'experiment_name': f"{experiment_name}_pre_test",
             'framework_hashes': framework_hashes,
             'document_hashes': sample_corpus,
-            'model': 'gemini-2.5-pro'
+            'model': 'gemini-2.5-pro',
+            'run_id': self.run_id  # Add run_id for completion signaling
         }
         
         message_id = self.redis_client.xadd('tasks', {
@@ -121,89 +125,100 @@ class OrchestratorAgent:
         return message_id.decode()
 
     def _wait_for_task_completion(self, task_id: str, timeout: int = 300) -> Dict:
-        """Waits for a single task to appear in the tasks.done stream."""
+        """Waits for a single task completion using architect-specified Redis keys/lists pattern."""
         logger.info(f"Waiting for completion of task: {task_id}")
-        start_time = time.time()
         
-        # Use a unique last_id for each wait call to avoid reprocessing old messages
-        last_id = '0-0'
+        # Check cache first - if status key exists and artifact present, skip
+        status_key = f"task:{task_id}:status"
+        if self.redis_client.get(status_key) == b'done':
+            logger.info(f"Task {task_id} found in cache, retrieving result")
+            # Get result hash from completion list (most recent entry for this run)
+            completion_data = self._get_cached_result(task_id)
+            if completion_data:
+                return completion_data
         
-        while time.time() - start_time < timeout:
-            # Use a unique consumer name to avoid conflicts if multiple orchestrators are running
-            consumer_name = f"orchestrator_waiter_{task_id}"
+        # Use architect-specified BRPOP pattern - no consumer groups, no races
+        run_completion_key = f"run:{self.run_id}:done"
+        logger.info(f"Blocking wait on completion list: {run_completion_key}")
+        
+        completed_task = self.redis_client.brpop(run_completion_key, timeout=timeout)
+        if not completed_task:
+            raise OrchestratorAgentError(f"Task {task_id} did not complete within {timeout} seconds")
             
-            # Read from the stream, starting after the last message we processed
-            done_messages = self.redis_client.xreadgroup(
-                'waiters', consumer_name, {'tasks.done': '>'}, count=1, block=1000
-            )
+        completed_task_id = completed_task[1].decode()
+        logger.info(f"Task completed: {completed_task_id}")
+        
+        # Verify this is the task we were waiting for
+        if completed_task_id != task_id:
+            raise OrchestratorAgentError(f"Expected task {task_id}, but got {completed_task_id}")
+        
+        # Load result artifact
+        return self._load_result_artifact(completed_task_id)
 
-            if not done_messages:
-                continue
-                
-            for stream, msgs in done_messages:
-                for msg_id, fields in msgs:
-                    try:
-                        completion_data = json.loads(fields[b'data'])
-                        if completion_data.get('original_task_id') == task_id:
-                            logger.info(f"Task {task_id} completed.")
-                            # Acknowledge the message so it's not re-read
-                            self.redis_client.xack('tasks.done', 'waiters', msg_id)
-                            result_hash = completion_data.get('result_hash')
-                            if not result_hash:
-                                raise OrchestratorAgentError(f"Completion message for {task_id} is missing a result_hash.")
-                            result_bytes = get_artifact(result_hash)
-                            return json.loads(result_bytes.decode('utf-8'))
-                    except (json.JSONDecodeError, KeyError) as e:
-                        logger.error(f"Error processing completion message: {msg_id}, {fields}, error: {e}")
-                        # Acknowledge malformed messages to prevent reprocessing
-                        self.redis_client.xack('tasks.done', 'waiters', msg_id)
+    def _get_cached_result(self, task_id: str) -> Dict:
+        """Retrieve cached result for a completed task."""
+        try:
+            # Look for result hash in Redis (stored by agent completion)
+            result_key = f"task:{task_id}:result_hash"
+            result_hash = self.redis_client.get(result_key)
+            if result_hash:
+                result_bytes = get_artifact(result_hash.decode())
+                return json.loads(result_bytes.decode('utf-8'))
+            return None
+        except Exception as e:
+            logger.error(f"Error retrieving cached result for {task_id}: {e}")
+            return None
 
+    def _load_result_artifact(self, task_id: str) -> Dict:
+        """Load result artifact for a completed task."""
+        try:
+            # Get result hash from Redis key set by agent
+            result_key = f"task:{task_id}:result_hash"
+            result_hash = self.redis_client.get(result_key)
+            if not result_hash:
+                raise OrchestratorAgentError(f"No result hash found for task {task_id}")
             
-        raise OrchestratorAgentError(f"Timed out waiting for task {task_id}")
+            result_bytes = get_artifact(result_hash.decode())
+            return json.loads(result_bytes.decode('utf-8'))
+        except Exception as e:
+            logger.error(f"Error loading result artifact for {task_id}: {e}")
+            raise OrchestratorAgentError(f"Failed to load result for task {task_id}: {e}")
 
     def _wait_for_all_tasks_completion(self, task_ids: List[str], timeout: int = 1800) -> List[str]:
-        """Waits for a list of tasks to complete and collects their result hashes."""
+        """Waits for multiple tasks to complete using architect-specified Redis keys/lists pattern."""
         logger.info(f"Waiting for {len(task_ids)} analysis tasks to complete...")
         completed_tasks = set()
         result_hashes = []
         start_time = time.time()
-
-        # Use a unique last_id for each wait cycle to avoid reprocessing old messages
-        last_id = '0-0'
+        run_completion_key = f"run:{self.run_id}:done"
 
         while len(completed_tasks) < len(task_ids):
-            if time.time() - start_time > timeout:
+            remaining_time = timeout - (time.time() - start_time)
+            if remaining_time <= 0:
                 raise OrchestratorAgentError(f"Timed out waiting for all analysis tasks. Completed {len(completed_tasks)} of {len(task_ids)}.")
             
-            # Use a unique consumer name to avoid conflicts
-            consumer_name = f"orchestrator_waiter_all_{''.join(task_ids[:2])}"
+            # Check cache first for any tasks that might already be done
+            for task_id in task_ids:
+                if task_id not in completed_tasks:
+                    status_key = f"task:{task_id}:status"
+                    if self.redis_client.get(status_key) == b'done':
+                        logger.info(f"Task {task_id} found in cache ({len(completed_tasks)+1}/{len(task_ids)})")
+                        result_hash = self.redis_client.get(f"task:{task_id}:result_hash")
+                        if result_hash:
+                            completed_tasks.add(task_id)
+                            result_hashes.append(result_hash.decode())
 
-            done_messages = self.redis_client.xreadgroup(
-                'waiters', consumer_name, {'tasks.done': '>'}, count=5, block=1000
-            )
-            if not done_messages:
-                continue
-            
-            for stream, msgs in done_messages:
-                for msg_id, fields in msgs:
-                    try:
-                        completion_data = json.loads(fields[b'data'])
-                        original_task_id = completion_data.get('original_task_id')
-                        
-                        if original_task_id in task_ids and original_task_id not in completed_tasks:
-                            logger.info(f"Analysis task {original_task_id} completed ({len(completed_tasks)+1}/{len(task_ids)}).")
-                            self.redis_client.xack('tasks.done', 'waiters', msg_id)
-                            result_hash = completion_data.get('result_hash')
-                            if not result_hash:
-                                logger.warning(f"Completion message for {original_task_id} is missing a result_hash.")
-                                continue
-                            
-                            completed_tasks.add(original_task_id)
-                            result_hashes.append(result_hash)
-                    except (json.JSONDecodeError, KeyError) as e:
-                        logger.error(f"Error processing completion message: {msg_id}, {fields}, error: {e}")
-                        # Acknowledge malformed messages
-                        self.redis_client.xack('tasks.done', 'waiters', msg_id)
+            # If we still need to wait for tasks, use BRPOP
+            if len(completed_tasks) < len(task_ids):
+                completed_task = self.redis_client.brpop(run_completion_key, timeout=min(60, int(remaining_time)))
+                if completed_task:
+                    completed_task_id = completed_task[1].decode()
+                    if completed_task_id in task_ids and completed_task_id not in completed_tasks:
+                        logger.info(f"Analysis task {completed_task_id} completed ({len(completed_tasks)+1}/{len(task_ids)})")
+                        result_hash = self.redis_client.get(f"task:{completed_task_id}:result_hash")
+                        if result_hash:
+                            completed_tasks.add(completed_task_id)
+                            result_hashes.append(result_hash.decode())
         
         logger.info("All analysis tasks completed.")
         return result_hashes
@@ -275,7 +290,8 @@ class OrchestratorAgent:
                 'document_hashes': corpus_hashes,  # ALL documents in each run
                 'model': 'gemini-2.5-flash',
                 'run_number': run_num + 1,
-                'total_runs': recommend_runs
+                'total_runs': recommend_runs,
+                'run_id': self.run_id  # Add run_id for completion signaling
             }
 
             message_id = self.redis_client.xadd('tasks', {
@@ -294,7 +310,8 @@ class OrchestratorAgent:
             "experiment_name": experiment_name,
             "batch_result_hashes": analysis_result_hashes,
             "framework_hashes": framework_hashes,
-            "model": "gemini-2.5-flash"
+            "model": "gemini-2.5-flash",
+            "run_id": self.run_id  # Add run_id for completion signaling
         }
 
         message_id = self.redis_client.xadd('tasks', {
@@ -331,15 +348,7 @@ class OrchestratorAgent:
             else:
                 raise # Reraise other errors
 
-        # Create a dedicated consumer group for waiting on task completions
-        try:
-            self.redis_client.xgroup_create('tasks.done', 'waiters', id='0', mkstream=True)
-            logger.info("Consumer group 'waiters' created for stream 'tasks.done'.")
-        except redis.exceptions.ResponseError as e:
-            if "consumer group name already exists" in str(e).lower():
-                logger.info("Consumer group 'waiters' already exists.")
-            else:
-                raise
+        # Note: No longer creating 'waiters' consumer group - using Redis keys/lists pattern instead
 
         try:
             while True:
