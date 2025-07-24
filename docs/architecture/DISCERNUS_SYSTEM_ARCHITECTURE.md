@@ -93,12 +93,14 @@ These principles guide every design decision in Discernus:
 - Agent specialization: AnalysisBatch → CorpusSynthesis → Review → Moderation pipeline
 
 **12. Variance-Aware Adaptive Processing with Transparency**
-- Accept LLM response variance as natural and expected phenomenon
-- PreTestAgent measures variance on corpus samples and recommends run counts
-- Adaptive batching strategy: adjust runs per experiment to achieve statistical convergence
-- Cost-constrained optimization: balance confidence levels with budget limitations
-- Transparency requirement: always report uncertainty, confidence intervals, and methodological constraints
-- Multi-run statistical validation: Cronbach's alpha, ANOVA, and inter-run reliability analysis
+- Accept LLM response variance as natural and expected phenomenon (not a bug to fix)
+- **Synthetic Calibration**: Generate representative text from corpus using Gemini 2.5 Flash for variance measurement
+- **Coefficient of Variation**: Measure CV = σ/μ from pilot runs to determine optimal sample sizes
+- **Sequential Probability Ratio Testing (SPRT)**: Adaptive sampling stops when confidence intervals meet requirements
+- **Minimum Sample Size Calculation**: n = (z × CV / E)² where z=1.96 (95% confidence), E=desired margin
+- **Cost-Constrained Optimization**: Balance statistical confidence with budget through empirical stopping rules
+- **Transparency Requirement**: Always report uncertainty, confidence intervals, CV, and methodological constraints
+- **Multi-Run Statistical Validation**: Cronbach's alpha, ANOVA, inter-run reliability, and convergence analysis
 
 ---
 
