@@ -11,6 +11,7 @@ import subprocess
 import logging
 import time
 import sys
+from concurrent.futures import ThreadPoolExecutor, Future
 from typing import Dict, Any
 
 # Configure logging
@@ -53,6 +54,9 @@ class DiscernusRouter:
         self.redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
         self.running = True
         self.active_processes = {}
+        # ThreadPoolExecutor for reliable agent spawning
+        self.executor = ThreadPoolExecutor(max_workers=10, thread_name_prefix="agent-")
+        self.active_futures = {}  # task_id -> Future mapping
         
     def setup_streams(self):
         """Initialize Redis streams and consumer groups"""
@@ -108,26 +112,58 @@ class DiscernusRouter:
             logger.error(f"Failed to complete task: {e}")
             raise RouterError(f"Task completion failed: {e}")
 
+    def _run_agent_process(self, task_type: str, task_id: str, script_cmd: list) -> bool:
+        """Run agent process with comprehensive error handling and logging."""
+        try:
+            logger.info(f"Starting {task_type} agent for task {task_id}: {' '.join(script_cmd)}")
+            
+            # Run the agent process with full error capture
+            result = subprocess.run(
+                script_cmd,
+                cwd='.',
+                capture_output=True,
+                text=True,
+                timeout=1800  # 30 minute timeout
+            )
+            
+            # Log stdout/stderr for debugging
+            if result.stdout:
+                logger.info(f"Agent {task_id} stdout: {result.stdout[:500]}...")
+            if result.stderr:
+                logger.warning(f"Agent {task_id} stderr: {result.stderr[:500]}...")
+            
+            if result.returncode == 0:
+                logger.info(f"Agent {task_type} completed successfully for task {task_id}")
+                return True
+            else:
+                logger.error(f"Agent {task_type} failed for task {task_id} with return code {result.returncode}")
+                return False
+                
+        except subprocess.TimeoutExpired:
+            logger.error(f"Agent {task_type} timed out for task {task_id}")
+            return False
+        except FileNotFoundError as e:
+            logger.error(f"Agent script not found for {task_type}: {e}")
+            return False
+        except Exception as e:
+            logger.error(f"Unexpected error running {task_type} agent for task {task_id}: {e}")
+            return False
+
     def route_task(self, task_type: str, task_id: str) -> bool:
-        """Route task to appropriate agent - NO BUSINESS LOGIC"""
+        """Route task to appropriate agent using ThreadPoolExecutor - NO BUSINESS LOGIC"""
         try:
             if task_type not in AGENT_SCRIPTS:
                 logger.error(f"Unknown task type: {task_type}")
                 return False
                 
-            # Get agent script path
+            # Get agent script command
             script_cmd = AGENT_SCRIPTS[task_type] + [task_id]
             
-            # Spawn agent process (stateless)
-            process = subprocess.Popen(
-                script_cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                cwd='.'
-            )
+            # Submit to thread pool for reliable execution
+            future = self.executor.submit(self._run_agent_process, task_type, task_id, script_cmd)
+            self.active_futures[task_id] = future
             
-            self.active_processes[task_id] = process
-            logger.info(f"Spawned {task_type} agent for task {task_id}: PID {process.pid}")
+            logger.info(f"Submitted {task_type} agent for task {task_id} to thread pool")
             return True
             
         except Exception as e:
@@ -135,39 +171,27 @@ class DiscernusRouter:
             return False
 
     def handle_completed_tasks(self):
-        """Process completed tasks - orchestrator might want to queue new ones"""
+        """Process completed tasks and clean up finished futures"""
         try:
-            # Read completed tasks (non-blocking)
-            messages = self.redis_client.xreadgroup(
-                CONSUMER_GROUP, 'router-completion',
-                {TASKS_DONE_STREAM: '>'},
-                count=10, block=1000
-            )
-            
-            for stream, msgs in messages:
-                for msg_id, fields in msgs:
+            # Clean up completed futures
+            completed_tasks = []
+            for task_id, future in list(self.active_futures.items()):
+                if future.done():
                     try:
-                        original_task_id = fields[b'original_task_id'].decode()
-                        result_data = json.loads(fields[b'data'])
-                        
-                        # Clean up process tracking
-                        if original_task_id in self.active_processes:
-                            process = self.active_processes.pop(original_task_id)
-                            if process.poll() is None:
-                                process.wait()  # Ensure process is cleaned up
-                        
-                        logger.info(f"Handled completion of task {original_task_id}")
-                        
-                        # Acknowledge message
-                        self.redis_client.xack(TASKS_DONE_STREAM, CONSUMER_GROUP, msg_id)
-                        
+                        success = future.result()  # This will raise exception if agent failed
+                        if success:
+                            logger.info(f"Agent completed successfully for task {task_id}")
+                        else:
+                            logger.error(f"Agent failed for task {task_id}")
                     except Exception as e:
-                        logger.error(f"Error handling completed task: {e}")
-                        continue
+                        logger.error(f"Agent exception for task {task_id}: {e}")
+                    
+                    completed_tasks.append(task_id)
+            
+            # Clean up completed futures
+            for task_id in completed_tasks:
+                self.active_futures.pop(task_id, None)
                         
-        except redis.exceptions.ResponseError:
-            # No messages available - normal operation
-            pass
         except Exception as e:
             logger.error(f"Error in completion handler: {e}")
 
@@ -233,14 +257,13 @@ class DiscernusRouter:
         logger.info("Shutting down router...")
         self.running = False
         
-        # Wait for active processes
-        for task_id, process in self.active_processes.items():
-            logger.info(f"Waiting for task {task_id} to complete...")
-            try:
-                process.wait(timeout=30)
-            except subprocess.TimeoutExpired:
-                logger.warning(f"Force killing task {task_id}")
-                process.kill()
+        # Shutdown thread pool executor
+        logger.info(f"Waiting for {len(self.active_futures)} active tasks to complete...")
+        self.executor.shutdown(wait=True, timeout=60)
+        
+        # Clean up any remaining tracking
+        self.active_processes.clear()
+        self.active_futures.clear()
                 
         logger.info("Router shutdown complete")
 
