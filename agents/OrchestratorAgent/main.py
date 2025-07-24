@@ -51,13 +51,19 @@ class OrchestratorAgent:
             logger.error(f"Failed to load prompt template: {e}")
             raise OrchestratorAgentError(f"Prompt loading failed: {e}")
     
+    # Hardcoded 5-stage pipeline - prevents coordination variations (per Implementation Plan V3)
+    STAGES = [
+        ("pretest", "_enqueue_pretest_stage"),
+        ("batch_analysis", "_enqueue_batch_analysis_stage"), 
+        ("corpus_synthesis", "_enqueue_corpus_synthesis_stage"),
+        ("review", "_enqueue_review_stage"),
+        ("moderation", "_enqueue_moderation_stage"),
+    ]
+
     def orchestrate_experiment(self, orchestration_data: Dict[str, Any], original_task_id: str) -> bool:
         """
-        Orchestrates the full, dynamic, multi-step experiment pipeline.
-        1. Triggers PreTestAgent to determine run count.
-        2. Waits for PreTestAgent completion.
-        3. Generates final batched execution plan.
-        4. Hands off plan to ExecutionBridge.
+        Orchestrates experiment using hardcoded 5-stage pipeline (Radical Simplification Mode).
+        Fixed sequence: PreTest → BatchAnalysis → CorpusSynthesis → Review → Moderation
         """
         try:
             # Set run_id for Redis coordination
@@ -68,41 +74,159 @@ class OrchestratorAgent:
             corpus_hashes = orchestration_data['corpus_hashes']
             experiment_name = experiment.get('name', 'unnamed')
 
-            logger.info(f"Orchestrating experiment: {experiment_name} (run_id: {self.run_id})")
+            logger.info(f"Starting hardcoded 5-stage pipeline: {experiment_name} (run_id: {self.run_id})")
 
-            # 1. Enqueue PreTest task
-            pre_test_task_id = self._enqueue_pre_test_task(experiment_name, framework_hashes, corpus_hashes)
-            if not pre_test_task_id:
-                return False
-
-            # 2. Wait for PreTest completion
-            pre_test_result = self._wait_for_task_completion(pre_test_task_id)
-            if not pre_test_result:
-                return False
-
-            # 3. Generate and execute the analysis plan (fan-out)
-            analysis_plan_hash = self._generate_analysis_plan(experiment, pre_test_result, framework_hashes, corpus_hashes)
-            if not analysis_plan_hash:
-                return False
+            # Execute each stage in fixed sequence
+            state = {
+                'experiment': experiment,
+                'framework_hashes': framework_hashes,
+                'corpus_hashes': corpus_hashes,
+                'experiment_name': experiment_name
+            }
             
-            analysis_task_ids = self._execute_plan(analysis_plan_hash, experiment_name, framework_hashes, corpus_hashes, pre_test_result)
-            if not analysis_task_ids:
-                return False
-
-            # 4. Wait for all analysis tasks to complete
-            analysis_result_hashes = self._wait_for_all_tasks_completion(analysis_task_ids)
-            if not analysis_result_hashes:
-                return False
+            for stage_name, enqueue_method_name in self.STAGES:
+                logger.info(f"Executing stage: {stage_name}")
                 
-            # 5. Generate and execute the synthesis task (fan-in)
-            self._enqueue_synthesis_task(experiment_name, analysis_result_hashes, framework_hashes)
+                # Check cache first
+                if self._is_stage_cached(stage_name, state):
+                    logger.info(f"Stage {stage_name} found in cache, skipping")
+                    continue
+                
+                # Get the enqueue method and execute it
+                enqueue_method = getattr(self, enqueue_method_name)
+                task_ids = enqueue_method(state)
+                
+                if not task_ids:
+                    logger.error(f"Failed to enqueue tasks for stage: {stage_name}")
+                    return False
+                
+                # Wait for completion (single task or multiple tasks)
+                if isinstance(task_ids, list):
+                    # Handle placeholder tasks (skip waiting)
+                    if any("placeholder" in task_id for task_id in task_ids):
+                        logger.info(f"Skipping placeholder tasks for stage: {stage_name}")
+                        results = task_ids  # Use task_ids as placeholder results
+                    else:
+                        results = self._wait_for_all_tasks_completion(task_ids)
+                    state[f"{stage_name}_results"] = results
+                else:
+                    # Handle placeholder tasks (skip waiting)
+                    if "placeholder" in task_ids:
+                        logger.info(f"Skipping placeholder task for stage: {stage_name}")
+                        result = task_ids  # Use task_id as placeholder result
+                    else:
+                        result = self._wait_for_task_completion(task_ids)
+                    state[f"{stage_name}_result"] = result
+                
+                logger.info(f"Stage {stage_name} completed successfully")
 
-            logger.info("Full orchestration complete: Fan-out/fan-in cycle finished.")
+            logger.info("Hardcoded 5-stage pipeline completed successfully")
             return True
             
         except Exception as e:
-            logger.error(f"Full orchestration failed: {e}", exc_info=True)
+            logger.error(f"Hardcoded pipeline failed: {e}", exc_info=True)
             return False
+
+    def _is_stage_cached(self, stage_name: str, state: Dict[str, Any]) -> bool:
+        """Check if stage results are already cached in Redis."""
+        try:
+            cache_key = f"stage:{self.run_id}:{stage_name}:status"
+            return self.redis_client.get(cache_key) == b'done'
+        except Exception as e:
+            logger.warning(f"Cache check failed for stage {stage_name}: {e}")
+            return False
+
+    def _enqueue_pretest_stage(self, state: Dict[str, Any]) -> str:
+        """Stage 1: PreTest - Variance estimation and run recommendation."""
+        experiment_name = state['experiment_name']
+        framework_hashes = state['framework_hashes']
+        corpus_hashes = state['corpus_hashes']
+        
+        # Sample first 5 documents for pre-test
+        sample_corpus = corpus_hashes[:5]
+        
+        task_data = {
+            'experiment_name': f"{experiment_name}_pre_test",
+            'framework_hashes': framework_hashes,
+            'document_hashes': sample_corpus,
+            'model': 'gemini-2.5-pro',
+            'run_id': self.run_id
+        }
+        
+        message_id = self.redis_client.xadd('tasks', {
+            'type': 'pre_test',
+            'data': json.dumps(task_data)
+        })
+        
+        task_id = message_id.decode()
+        logger.info(f"Enqueued PreTest stage: {task_id}")
+        return task_id
+
+    def _enqueue_batch_analysis_stage(self, state: Dict[str, Any]) -> List[str]:
+        """Stage 2: BatchAnalysis - Multiple statistical runs of the same corpus."""
+        framework_hashes = state['framework_hashes']
+        corpus_hashes = state['corpus_hashes']
+        
+        # Get recommendation from pretest (default to 3 if not available)
+        pretest_result = state.get('pretest_result', {})
+        recommend_runs = 3  # Default fallback
+        
+        # Create multiple runs for statistical variance
+        task_ids = []
+        for run_num in range(recommend_runs):
+            task_data = {
+                'batch_id': f'run_{run_num+1}_of_{recommend_runs}',
+                'framework_hashes': framework_hashes,
+                'document_hashes': corpus_hashes,  # All documents in each run
+                'model': 'gemini-2.5-flash',
+                'run_number': run_num + 1,
+                'total_runs': recommend_runs,
+                'run_id': self.run_id
+            }
+
+            message_id = self.redis_client.xadd('tasks', {
+                'type': 'analyse_batch',
+                'data': json.dumps(task_data)
+            })
+            task_ids.append(message_id.decode())
+            
+        logger.info(f"Enqueued {len(task_ids)} BatchAnalysis tasks")
+        return task_ids
+
+    def _enqueue_corpus_synthesis_stage(self, state: Dict[str, Any]) -> str:
+        """Stage 3: CorpusSynthesis - Statistical aggregation of all batch results."""
+        experiment_name = state['experiment_name']
+        framework_hashes = state['framework_hashes']
+        batch_results = state.get('batch_analysis_results', [])
+        
+        synthesis_task_data = {
+            "experiment_name": experiment_name,
+            "batch_result_hashes": batch_results,
+            "framework_hashes": framework_hashes,
+            "model": "gemini-2.5-flash",
+            "run_id": self.run_id
+        }
+
+        message_id = self.redis_client.xadd('tasks', {
+            'type': 'corpus_synthesis',
+            'data': json.dumps(synthesis_task_data)
+        })
+        
+        task_id = message_id.decode()
+        logger.info(f"Enqueued CorpusSynthesis stage: {task_id}")
+        return task_id
+
+    def _enqueue_review_stage(self, state: Dict[str, Any]) -> List[str]:
+        """Stage 4: Review - Adversarial critique of synthesis report."""
+        # TODO: Implement ReviewerAgent tasks (placeholder for Phase 3)
+        logger.info("Review stage not yet implemented - skipping")
+        return ["placeholder-review-task"]
+
+    def _enqueue_moderation_stage(self, state: Dict[str, Any]) -> str:
+        """Stage 5: Moderation - Final synthesis and reconciliation."""
+        # TODO: Implement ModeratorAgent task (placeholder for Phase 3)
+        logger.info("Moderation stage not yet implemented - skipping")
+        return "placeholder-moderation-task"
 
     def _enqueue_pre_test_task(self, experiment_name: str, framework_hashes: List[str], corpus_hashes: List[str]) -> str:
         """Creates and enqueues a task for the PreTestAgent."""
