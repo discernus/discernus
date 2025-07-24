@@ -92,6 +92,14 @@ These principles guide every design decision in Discernus:
 - Adversarial review protocols: IdeologicalReviewer ↔ StatisticalReviewer → ModeratorSynthesis
 - Agent specialization: AnalysisBatch → CorpusSynthesis → Review → Moderation pipeline
 
+**12. Variance-Aware Adaptive Processing with Transparency**
+- Accept LLM response variance as natural and expected phenomenon
+- PreTestAgent measures variance on corpus samples and recommends run counts
+- Adaptive batching strategy: adjust runs per experiment to achieve statistical convergence
+- Cost-constrained optimization: balance confidence levels with budget limitations
+- Transparency requirement: always report uncertainty, confidence intervals, and methodological constraints
+- Multi-run statistical validation: Cronbach's alpha, ANOVA, and inter-run reliability analysis
+
 ---
 
 ### The THIN vs THICK Philosophy
