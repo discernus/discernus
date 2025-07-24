@@ -178,7 +178,7 @@ class OrchestratorAgent:
                 'batch_id': f'run_{run_num+1}_of_{recommend_runs}',
                 'framework_hashes': framework_hashes,
                 'document_hashes': corpus_hashes,  # All documents in each run
-                'model': 'gemini-2.5-flash',
+                'model': 'gemini-2.5-pro',  # Standardized on Pro for reliability
                 'run_number': run_num + 1,
                 'total_runs': recommend_runs,
                 'run_id': self.run_id
@@ -203,7 +203,7 @@ class OrchestratorAgent:
             "experiment_name": experiment_name,
             "batch_result_hashes": batch_results,
             "framework_hashes": framework_hashes,
-            "model": "gemini-2.5-flash",
+            "model": "gemini-2.5-pro",  # Standardized on Pro for reliability
             "run_id": self.run_id
         }
 
