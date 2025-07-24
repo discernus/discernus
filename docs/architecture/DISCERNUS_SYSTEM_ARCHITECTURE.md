@@ -165,9 +165,9 @@ Artefact naming: `analysis/B01.caf<hash>-chf<hash>.run1.json`.
 
 | Layer | Agent(s) | Purpose | Model class |
 | ----- | -------- | ------- | ----------- |
-| 1 In‑Batch | AnalyseBatchAgent | Raw scores + per‑batch summary | Expensive (Gemini Flash) |
-| 2 Corpus | CorpusSynthesisAgent | Deterministic aggregation/statistics | Cheap (Claude Haiku) |
-| 3 Review | 2× ReviewerAgent + ModeratorAgent | Adversarial critique → reconciled narrative | Mixed |
+| 1 In‑Batch | AnalyseBatchAgent | Raw scores + per‑batch summary | Gemini 2.5 Pro |
+| 2 Corpus | CorpusSynthesisAgent | Deterministic aggregation/statistics | Gemini 2.5 Pro |
+| 3 Review | 2× ReviewerAgent + ModeratorAgent | Adversarial critique → reconciled narrative | Gemini 2.5 Pro |
 
 `debate/<RUN_ID>.html` captures transcript for audit.
 
@@ -176,15 +176,17 @@ Artefact naming: `analysis/B01.caf<hash>-chf<hash>.run1.json`.
 
 Example entry:
 ```yaml
-vertex_ai/gemini-2.5-flash:
+vertex_ai/gemini-2.5-pro:
   provider: vertex_ai
-  context_window: 1000000
-  costs: {input_per_million_tokens: 0.075, output_per_million_tokens: 0.30}
+  context_window: 8000000
+  costs: {input_per_million_tokens: 1.25, output_per_million_tokens: 5.00}
   task_suitability: [batch_analysis, multi_framework_synthesis, review]
-  optimal_batch_tokens: 700000
+  optimal_batch_tokens: 5600000
   max_documents_per_batch: 300
-  last_updated: '2025-07-23'
+  last_updated: '2025-07-24'
 ```
+
+**Note**: Standardized on Gemini 2.5 Pro after Flash reliability failure on CHF complexity test (2025-07-24).
 
 ### 4.8 Metrics
 Logged per run into `manifest.json`:
@@ -208,23 +210,18 @@ Logged per run into `manifest.json`:
 
 ## 5 · Example Commands
 ```bash
-# Start infra
+# Start infrastructure
 $ docker compose up -d redis minio
 
-# Validate inputs
-$ discernus validate experiments/exp_v3.yaml
+# Run experiment with hardcoded 5-stage pipeline
+$ python3 scripts/phase3_test_runner.py --test full_pipeline
 
-# Run experiment (live)
-$ discernus run experiments/exp_v3.yaml --mode live
+# Monitor system status
+$ python3 scripts/debug_monitor.py
 
-# Pause / resume
-$ discernus pause RUN123; discernus resume RUN123
-
-# Re-run (cache hit)
-$ discernus run experiments/exp_v3.yaml --mode live
-
-# Export for archival
-$ discernus export RUN123 --out-dir projects/my_project/experiment_1/run_001
+# Check Redis task queues
+$ redis-cli xlen orchestrator.tasks
+$ redis-cli xlen tasks
 ```
 
 ---
@@ -235,47 +232,57 @@ projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>/
 ├─ corpus/            # original input files
 ├─ analysis/          # batch JSON artefacts
 ├─ synthesis/         # <RUN_ID>.json corpus statistics
-├─ debate/            # review transcript (html/markdown)
+├─ debate/            # review transcript (html + json)
 ├─ framework/         # copies of framework files
 ├─ logs/              # router / agent / proxy logs
 ├─ manifest.json      # machine provenance (hashes, metrics)
 └─ manifest.md        # human summary
 ```
-Replay exactly:
-```bash
-$ discernus run --from-manifest projects/<P>/<E>/<RUN_ID>/manifest.json
-```
 
 ---
 
-## 7 · Security Hardening (Post‑PoC)
+## 7 · Security Controls
 
-> Threat: malicious prompt/framework causes exfiltration or arbitrary execution.
+### 7.1 Enabled Now
+- **Hash Pinning**: All framework/corpus artifacts validated by SHA-256
+- **Secrets Scanning**: CLI rejects files matching `/.env($|[._-])/` patterns  
+- **Path Validation**: Corpus paths restricted to project boundaries
+- **Task Type Validation**: Router enforces allowed task types from agent registry
 
-### 7.1 Static Policy Gate
-Allow‑lists enforced in Router (drop + log on violation): task types, model IDs (from registry), URI regex (`^s3://discernus-artifacts/(corpus|frameworks|runs)/`), SHA‑256 length, max tasks/run.
-
-### 7.2 Sentinel Agent
-`SecuritySentinelAgent` inspects tasks for secrets patterns; quarantines suspicious ones to `tasks.quarantine`.
-
-### 7.3 Sandboxing
-Agents run in containers with `--network none` (except LiteLLM egress). Read‑only corpus mount; ephemeral scratch.
-
-### 7.4 Prompt Integrity
-Hash pinning + immutable UUID preamble in each prompt file.
-
-### 7.5 Secrets Scanning
-CLI `artefact put` rejects files matching `/.env($|[._-])/` or high‑entropy key patterns.
+### 7.2 Deferred (Post-Production)
+- **Sandboxing**: Agent containers with `--network none`
+- **Sentinel Agent**: Advanced prompt injection detection
+- **Audit Logging**: Comprehensive security event logging
 
 ---
 
-## 8 · Next‑Step Wishlist
-1. Precision‑aware normaliser & framework `precision` field.
-2. Non‑deterministic averaging (`runs_per_chunk`).
-3. ValidationAgent for custom schemas.
-4. PostHocMathAgent for retro metrics.
-5. Composite framework synthesis.
-6. Security package activation + metrics dashboard.
+## 8 · Radical Simplification Constraints
+
+The architecture enforces strict constraints to ensure reliability:
+
+### 8.1 Single Pipeline Path
+- **Fixed 5-Stage Sequence**: PreTest → BatchAnalysis → CorpusSynthesis → Review → Moderation
+- **No Custom Workflows**: System rejects experiments with `custom_workflow` or `parallel_processing` fields
+- **Linear Progression**: Each stage completes before next stage begins
+- **Predictable Behavior**: Users know exactly what will happen for any valid experiment
+
+### 8.2 Model Standardization  
+- **Single Model**: All stages use `vertex_ai/gemini-2.5-pro` for reliability
+- **No Model Selection**: System does not support model choice per stage
+- **Proven Reliability**: Model selection based on empirical testing, not cost optimization
+
+### 8.3 Input Contract Enforcement
+- **Hash-Required Frameworks**: All frameworks must include valid SHA-256 hashes
+- **Manifest-Based Corpus**: Corpus directories require explicit `manifest.json`
+- **Specification Compliance**: Bouncer validates against strict Pydantic schemas
+- **No Legacy Support**: System rejects v2 specifications with clear upgrade guidance
+
+### 8.4 Architectural Principles
+- **THIN Components**: All software components limited to <150 lines
+- **No Business Logic**: Intelligence resides in LLM prompts, not software
+- **Stateless Agents**: Agents read task → call LLM → write result
+- **Artifact-Oriented**: All state persisted as SHA-256 addressable artifacts
 
 ---
-*Last updated 2025‑07‑24 by Jeff*
+
+*Last updated 2025‑07‑24 - Aligned with Implementation Plan V4*
