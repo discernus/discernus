@@ -120,6 +120,34 @@ These principles guide every design decision in Discernus:
 - Statistical validation (variance measurement, confidence intervals) quantifies this consistency advantage
 - This assumption justifies computational methodology over traditional human coding approaches
 
+**15. Security and Privacy by Design (Stub)**
+- Corpus anonymization and hash-based identity protection as standard practice
+- Secure code execution environments with resource limits for computational verification
+- API key management and rate limiting to prevent abuse
+- Git-based provenance provides tamper-evident audit trails
+- *Note: Full security architecture deferred to post-MVP phase*
+
+**16. Resource-Conscious Cost Management (Stub)**
+- Empirical cost-performance optimization through model selection and batching
+- Variance-driven adaptive sampling minimizes unnecessary LLM calls
+- Perfect caching eliminates redundant computation on re-runs
+- Transparent cost reporting enables institutional budget planning
+- *Note: Advanced cost controls and budgeting tools deferred to post-MVP phase*
+
+**17. Graceful Degradation and Error Recovery (Stub)**
+- Fail-fast validation prevents expensive downstream failures
+- Partial artifact preservation on timeout or interruption
+- Clear error messages with actionable remediation steps
+- System continues processing remaining batches when individual items fail
+- *Note: Advanced resilience patterns and retry logic deferred to post-MVP phase*
+
+**18. Community Extensibility Vision (Stub)**
+- External YAML prompts enable researcher customization without code changes
+- Framework specifications designed for community contribution and sharing
+- Future core+modules architecture (Drupal-style) for specialized analytical capabilities
+- Git-based framework and experiment sharing enables academic collaboration
+- *Note: Full extensibility platform and marketplace deferred to post-MVP phase*
+
 ---
 
 ### The THIN vs THICK Philosophy
