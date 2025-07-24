@@ -26,56 +26,48 @@ Discernus transforms the traditional research workflow:
 
 ## Fundamental Architectural Principles
 
-These principles guide every design decision in Discernus and explain why the system works as it does:
+These principles guide every design decision in Discernus:
 
-### 1. Reliability Over Flexibility
-**Principle**: Early-stage research platforms need systems that work 99% of the time, not systems that can do anything 85% of the time.
+**1. Reliability Over Flexibility**
+- Single, predictable pipeline over infinite customization options
+- Boring, bulletproof behavior over theoretical capability
+- "It works every time" trumps "it can do anything"
 
-**Implementation**: Single, hardcoded 5-stage pipeline. No custom workflows, branching logic, or user-configurable orchestration. Every experiment follows the exact same path: PreTest → BatchAnalysis → CorpusSynthesis → Review → Moderation.
+**2. Intelligence in Prompts, Not Software**
+- LLMs handle reasoning, interpretation, and domain knowledge
+- Software provides coordination, storage, and deterministic operations only
+- Components limited to <150 lines to prevent intelligence creep
 
-**Rationale**: Researchers need predictable, debuggable systems. Flexibility can be added later when justified by real user needs and proven system stability.
+**3. Empirical Technology Choices**
+- Decisions based on actual testing, not theoretical optimization
+- Gemini 2.5 Pro chosen over Flash due to CHF complexity test failure
+- Cost optimization secondary to reliability validation
 
-### 2. Intelligence in Prompts, Not Software
-**Principle**: Complex reasoning, domain knowledge, and analytical intelligence belongs in LLM prompts. Software should be thin infrastructure that routes, caches, and coordinates.
+**4. Artifact-Oriented State Management**
+- All data flows through immutable, hashed artifacts in MinIO
+- No mutable state in agents or orchestrator
+- Perfect reproducibility through artifact chains
 
-**Implementation**: Agents are stateless workers that read task → call LLM with prompt → write result. No business logic, parsing, or decision-making in software. All components limited to <150 lines.
+**5. Fail-Fast Input Validation**
+- Strict contracts enforced at system boundaries
+- Clear error messages over expensive debugging cycles
+- "Garbage in, clear error out"
 
-**Rationale**: LLMs excel at contextual understanding and reasoning. Software excels at reliable coordination and storage. Don't fight these natural strengths.
+**6. Linear Progression with Perfect Caching**
+- Fixed 5-stage pipeline with deterministic progression
+- Cache hits eliminate redundant computation entirely
+- Predictable resource usage and timing
 
-### 3. Empirical Technology Choices
-**Principle**: Architecture decisions based on actual testing and failure analysis, not theoretical optimization or cost minimization.
+**7. Academic Provenance by Design**
+- Every decision, artifact, and transformation logged
+- Git-based version control for all research materials
+- Audit trails sufficient for peer review and replication
 
-**Implementation**: Standardized on Gemini 2.5 Pro after Flash failed CHF complexity testing. Single model across all stages for proven reliability rather than per-stage optimization.
-
-**Rationale**: Academic research integrity requires reliable results. Failed experiments waste more resources than premium model costs.
-
-### 4. Artifact-Oriented State Management
-**Principle**: All system state persisted as content-addressable artifacts. No mutable state, no databases, no session storage.
-
-**Implementation**: Every LLM response, intermediate result, and final output stored as SHA-256 addressable artifacts. Cache keys derived from input hashes. Complete reproducibility from artifact hashes.
-
-**Rationale**: Academic provenance requires immutable audit trails. Content-addressable storage eliminates race conditions and enables perfect caching.
-
-### 5. Fail-Fast Input Validation
-**Principle**: Invalid inputs rejected immediately with helpful guidance rather than discovered during expensive processing.
-
-**Implementation**: "Bouncer and Concierge" pattern - Pydantic schema validation followed by LLM-powered error explanation. Hash-required frameworks, manifest-based corpus, strict specification compliance.
-
-**Rationale**: Clear contracts prevent expensive failures. Helpful error messages enable researcher success rather than frustration.
-
-### 6. Linear Progression with Perfect Caching
-**Principle**: Each stage completes fully before the next begins. Identical inputs always produce identical outputs through perfect caching.
-
-**Implementation**: Hardcoded STAGES array prevents coordination variations. Cache keys based on input hashes ensure deterministic behavior. Re-running identical experiments triggers zero LLM calls.
-
-**Rationale**: Academic research requires reproducible results. Linear progression eliminates race conditions and timing dependencies.
-
-### 7. Academic Provenance by Design
-**Principle**: Every decision, intermediate result, and final output must be auditable and defensible in peer review.
-
-**Implementation**: Complete artifact trails, dual HTML/JSON outputs for human and machine readability, structured claims with supporting evidence references.
-
-**Rationale**: Computational research must meet academic standards for transparency and reproducibility.
+**8. Externalized Intelligence, Internalized Coordination**
+- Agent prompts live in external YAML files (intelligence belongs outside code)
+- Agent discovery uses hardcoded mappings (coordination stays predictable)
+- Researchers modify prompts, not coordination logic
+- Balances THIN principles with Radical Simplification reliability
 
 ---
 
