@@ -176,7 +176,6 @@ This plan is a series of gates. We only proceed to the next phase once all quest
 - **Comprehensive security package**: Implement the static policy gates, runtime sentinel, and sandboxing outlined in the architecture.
 
 **Chain of Questions to Verify Success:**
-
 1.  **Upon completion of the `CorpusSynthesisAgent`, does the system automatically trigger the Layer 3 Review process?**
     *   *Test:* A successful Layer 2 synthesis must result in the creation of new tasks for Layer 3.
     *   *Success:* We observe two new `Reviewer` tasks and one `Moderator` task being enqueued.
