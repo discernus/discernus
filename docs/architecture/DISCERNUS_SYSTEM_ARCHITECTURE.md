@@ -102,6 +102,15 @@ These principles guide every design decision in Discernus:
 - **Transparency Requirement**: Always report uncertainty, confidence intervals, CV, and methodological constraints
 - **Multi-Run Statistical Validation**: Cronbach's alpha, ANOVA, inter-run reliability, and convergence analysis
 
+**13. Human Intellectual Value Amplification, Not Replacement**
+- Real value creation comes from researcher expertise: framework design, corpus curation, experiment methodology
+- Discernus amplifies human intuition and domain knowledge rather than substituting for it
+- Researchers retain full control over analytical approach, interpretation, and synthesis
+- System provides computational scale and consistency while preserving human judgment
+- End-to-end transparency enables researchers to audit, validate, and refine their analytical choices
+- Post-hoc analysis, synthesis, and scholarly interpretation remain fundamentally human activities
+- Technology serves scholarship, not the reverse - researchers drive insights, system provides rigor
+
 ---
 
 ### The THIN vs THICK Philosophy
