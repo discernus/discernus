@@ -141,12 +141,14 @@ These principles guide every design decision in Discernus:
 - System continues processing remaining batches when individual items fail
 - *Note: Advanced resilience patterns and retry logic deferred to post-MVP phase*
 
-**18. Community Extensibility Vision (Stub)**
-- External YAML prompts enable researcher customization without code changes
-- Framework specifications designed for community contribution and sharing
-- Future core+modules architecture (Drupal-style) for specialized analytical capabilities
-- Git-based framework and experiment sharing enables academic collaboration
-- *Note: Full extensibility platform and marketplace deferred to post-MVP phase*
+**18. Day-1 Extensibility Through Specifications, Platform Extensibility Deferred**
+- **Already Extensible**: Researchers can create unlimited frameworks, experiments, and corpora within specifications
+- Framework Specification v4.0 enables any analytical approach expressible in natural language
+- Experiment Specification v2.0 supports diverse methodological approaches and research designs
+- Corpus Specification v2.0 accommodates any text collection with proper preparation
+- External YAML prompts allow analytical customization without code changes
+- Git-based sharing enables immediate academic collaboration and framework distribution
+- *Future: Advanced platform features (core+modules architecture, marketplace, GUI tools) deferred to post-MVP*
 
 ---
 
