@@ -177,7 +177,7 @@ Return JSON format with numerical scores.
                 result_data = json.loads(result_bytes.decode('utf-8'))
                 
                 # Check for structured data requirements
-                required_fields = ['batch_id', 'raw_llm_response', 'batch_metadata']
+                required_fields = ['batch_id', 'analysis_results', 'batch_metadata']
                 for field in required_fields:
                     if field not in result_data:
                         logger.error(f"❌ Missing required field: {field}")
@@ -186,7 +186,7 @@ Return JSON format with numerical scores.
                 logger.info("✅ Result artifact has required structure")
                 
                 # Check that it's structured data only (no synthesis)
-                llm_response = result_data.get('raw_llm_response', '')
+                llm_response = result_data.get('analysis_results', '')
                 if 'analysis_results' in llm_response:
                     logger.info("✅ LLM response contains structured analysis_results")
                 else:

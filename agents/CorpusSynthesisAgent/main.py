@@ -100,7 +100,16 @@ class CorpusSynthesisAgent:
                 # Strip sha256: prefix if present
                 clean_hash = batch_hash[7:] if batch_hash.startswith('sha256:') else batch_hash
                 batch_bytes = get_artifact(clean_hash)
-                batch_data = json.loads(batch_bytes.decode('utf-8'))
+                # Binary-First Principle: Handle batch data as raw content, let LLM parse
+                try:
+                    batch_data = json.loads(batch_bytes.decode('utf-8'))
+                except (UnicodeDecodeError, json.JSONDecodeError):
+                    # If not valid JSON, treat as raw LLM response
+                    batch_data = {
+                        'analysis_results': base64.b64encode(batch_bytes).decode('utf-8'),
+                        'batch_id': f'batch_{i+1}',
+                        'batch_metadata': {}
+                    }
                 
                 # The batch data now contains raw LLM responses - let the synthesis LLM handle them
                 batch_analyses.append({
@@ -112,6 +121,10 @@ class CorpusSynthesisAgent:
                 })
                 
                 logger.info(f"Retrieved batch {i+1}: {clean_hash[:12]}... (raw analysis content)")
+            
+            # Calculate aggregate metadata
+            total_documents = sum(len(batch.get('metadata', {}).get('document_hashes', [])) for batch in batch_analyses)
+            total_frameworks = sum(len(batch.get('metadata', {}).get('framework_hashes', [])) for batch in batch_analyses)
             
             # Format prompt for statistical aggregation (THIN - minimal string substitution)
             prompt_text = self.prompt_template.format(
