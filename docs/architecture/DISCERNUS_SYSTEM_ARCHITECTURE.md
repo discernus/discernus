@@ -69,6 +69,13 @@ These principles guide every design decision in Discernus:
 - Researchers modify prompts, not coordination logic
 - Balances THIN principles with Radical Simplification reliability
 
+**9. Computational Verification ("Show Your Math")**
+- LLMs must execute Python code for all mathematical calculations
+- Statistical results verified through `SecureCodeExecutor` with resource limits
+- No hallucinated statistics - all numbers computed and logged
+- Provenance stamps detect content tampering and ensure analysis integrity
+- Academic integrity through transparent, auditable computational processes
+
 ---
 
 ### The THIN vs THICK Philosophy
