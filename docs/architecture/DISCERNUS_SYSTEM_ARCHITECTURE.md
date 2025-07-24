@@ -28,71 +28,46 @@ Discernus transforms the traditional research workflow:
 
 These principles guide every design decision in Discernus:
 
-**1. Reliability Over Flexibility**
-- Single, predictable pipeline over infinite customization options
-- Boring, bulletproof behavior over theoretical capability
-- "It works every time" trumps "it can do anything"
+**1. Day-1 Extensibility Through Specifications**
+- **Already Extensible**: Researchers can create unlimited frameworks, experiments, and corpora within specifications
+- Framework Specification v4.0 enables any analytical approach expressible in natural language
+- Experiment Specification v2.0 supports diverse methodological approaches and research designs
+- Corpus Specification v2.0 accommodates any text collection with proper preparation
+- External YAML prompts allow analytical customization without code changes
+- Git-based sharing enables immediate academic collaboration and framework distribution
+- *Future: Advanced platform features (core+modules architecture, marketplace, GUI tools) deferred to post-MVP*
 
-**2. Intelligence in Prompts, Not Software**
-- LLMs handle reasoning, interpretation, and domain knowledge
-- Software provides coordination, storage, and deterministic operations only
-- Components limited to <150 lines to prevent intelligence creep
+**2. Human Intellectual Value Amplification, Not Replacement**
+- Real value creation comes from researcher expertise: framework design, corpus curation, experiment methodology
+- Discernus amplifies human intuition and domain knowledge rather than substituting for it
+- Researchers retain full control over analytical approach, interpretation, and synthesis
+- System provides computational scale and consistency while preserving human judgment
+- End-to-end transparency enables researchers to audit, validate, and refine their analytical choices
+- Post-hoc analysis, synthesis, and scholarly interpretation remain fundamentally human activities
+- Technology serves scholarship, not the reverse - researchers drive insights, system provides rigor
 
-**3. Empirical Technology Choices**
-- Decisions based on actual testing, not theoretical optimization
-- Gemini 2.5 Pro chosen over Flash due to CHF complexity test failure
-- Cost optimization secondary to reliability validation
-
-**4. Artifact-Oriented State Management**
-- All data flows through immutable, hashed artifacts in MinIO
-- No mutable state in agents or orchestrator
-- Perfect reproducibility through artifact chains
-
-**5. Fail-Fast Input Validation**
-- Strict contracts enforced at system boundaries
-- Clear error messages over expensive debugging cycles
-- "Garbage in, clear error out"
-
-**6. Linear Progression with Perfect Caching**
-- Fixed 5-stage pipeline with deterministic progression
-- Cache hits eliminate redundant computation entirely
-- Predictable resource usage and timing
-
-**7. Academic Provenance by Design**
+**3. Academic Provenance by Design**
 - Every decision, artifact, and transformation logged
 - Git-based version control for all research materials
 - Audit trails sufficient for peer review and replication
 
-**8. Externalized Intelligence, Internalized Coordination**
-- Agent prompts live in external YAML files (intelligence belongs outside code)
-- Agent discovery uses hardcoded mappings (coordination stays predictable)
-- Researchers modify prompts, not coordination logic
-- Balances THIN principles with Radical Simplification reliability
-
-**9. Computational Verification ("Show Your Math")**
+**4. Computational Verification ("Show Your Math")**
 - LLMs must execute Python code for all mathematical calculations
 - Statistical results verified through `SecureCodeExecutor` with resource limits
 - No hallucinated statistics - all numbers computed and logged
 - Provenance stamps detect content tampering and ensure analysis integrity
 - Academic integrity through transparent, auditable computational processes
 
-**10. Opinionated Model Selection Based on Performance Requirements**
-- Context window requirements: 2M+ tokens for multi-framework batch analysis
-- Rate limiting needs: 800+ RPM for institutional-scale processing
-- Accuracy demands: Consistent performance across full context window
-- Empirical validation: Models chosen through actual complexity testing (CHF failure)
-- Cost-performance optimization: Gemini 2.5 Pro selected over alternatives
-- Provider reliability: Vertex AI chosen for predictable academic pricing
+**5. LLM Consistency Superiority Over Human Evaluation Panels**
+- **Fundamental Assumption**: Properly managed LLMs are more consistently perceptive than human evaluator panels
+- LLMs represent global-scale averaging of human perception patterns across training data
+- Individual humans may be more perceptive, but panels suffer from inconsistency, fatigue, and bias drift
+- LLM evaluation provides speed and precision impossible with human panels at institutional scale
+- Consistency enables reliable cross-document, cross-time, and cross-researcher comparisons
+- Statistical validation (variance measurement, confidence intervals) quantifies this consistency advantage
+- This assumption justifies computational methodology over traditional human coding approaches
 
-**11. Specialized Agent Interaction Over Monolithic Analysis**
-- Task-specific agents outperform single-LLM approaches (empirically validated)
-- Controlled agent conversations through structured protocols and handoffs
-- Natural language communication between agents (no complex JSON parsing)
-- Sequential validation gauntlet: TrueValidation → ProjectCoherence → StatisticalPlanning → ModelHealth
-- Adversarial review protocols: IdeologicalReviewer ↔ StatisticalReviewer → ModeratorSynthesis
-- Agent specialization: AnalysisBatch → CorpusSynthesis → Review → Moderation pipeline
-
-**12. Variance-Aware Adaptive Processing with Transparency**
+**6. Variance-Aware Adaptive Processing with Transparency**
 - Accept LLM response variance as natural and expected phenomenon (not a bug to fix)
 - **Synthetic Calibration**: Generate representative text from corpus using Gemini 2.5 Flash for variance measurement
 - **Coefficient of Variation**: Measure CV = σ/μ from pilot runs to determine optimal sample sizes
@@ -102,53 +77,78 @@ These principles guide every design decision in Discernus:
 - **Transparency Requirement**: Always report uncertainty, confidence intervals, CV, and methodological constraints
 - **Multi-Run Statistical Validation**: Cronbach's alpha, ANOVA, inter-run reliability, and convergence analysis
 
-**13. Human Intellectual Value Amplification, Not Replacement**
-- Real value creation comes from researcher expertise: framework design, corpus curation, experiment methodology
-- Discernus amplifies human intuition and domain knowledge rather than substituting for it
-- Researchers retain full control over analytical approach, interpretation, and synthesis
-- System provides computational scale and consistency while preserving human judgment
-- End-to-end transparency enables researchers to audit, validate, and refine their analytical choices
-- Post-hoc analysis, synthesis, and scholarly interpretation remain fundamentally human activities
-- Technology serves scholarship, not the reverse - researchers drive insights, system provides rigor
+**7. Reliability Over Flexibility**
+- Single, predictable pipeline over infinite customization options
+- Boring, bulletproof behavior over theoretical capability
+- "It works every time" trumps "it can do anything"
 
-**14. LLM Consistency Superiority Over Human Evaluation Panels**
-- **Fundamental Assumption**: Properly managed LLMs are more consistently perceptive than human evaluator panels
-- LLMs represent global-scale averaging of human perception patterns across training data
-- Individual humans may be more perceptive, but panels suffer from inconsistency, fatigue, and bias drift
-- LLM evaluation provides speed and precision impossible with human panels at institutional scale
-- Consistency enables reliable cross-document, cross-time, and cross-researcher comparisons
-- Statistical validation (variance measurement, confidence intervals) quantifies this consistency advantage
-- This assumption justifies computational methodology over traditional human coding approaches
-
-**15. Security and Privacy by Design (Stub)**
-- Corpus anonymization and hash-based identity protection as standard practice
-- Secure code execution environments with resource limits for computational verification
-- API key management and rate limiting to prevent abuse
-- Git-based provenance provides tamper-evident audit trails
-- *Note: Full security architecture deferred to post-MVP phase*
-
-**16. Resource-Conscious Cost Management (Stub)**
+**8. Resource-Conscious Cost Management**
 - Empirical cost-performance optimization through model selection and batching
 - Variance-driven adaptive sampling minimizes unnecessary LLM calls
 - Perfect caching eliminates redundant computation on re-runs
 - Transparent cost reporting enables institutional budget planning
 - *Note: Advanced cost controls and budgeting tools deferred to post-MVP phase*
 
-**17. Graceful Degradation and Error Recovery (Stub)**
+**9. Specialized Agent Interaction Over Monolithic Analysis**
+- Task-specific agents outperform single-LLM approaches (empirically validated)
+- Controlled agent conversations through structured protocols and handoffs
+- Natural language communication between agents (no complex JSON parsing)
+- Sequential validation gauntlet: TrueValidation → ProjectCoherence → StatisticalPlanning → ModelHealth
+- Adversarial review protocols: IdeologicalReviewer ↔ StatisticalReviewer → ModeratorSynthesis
+- Agent specialization: AnalysisBatch → CorpusSynthesis → Review → Moderation pipeline
+
+**10. Opinionated Model Selection Based on Performance Requirements**
+- Context window requirements: 2M+ tokens for multi-framework batch analysis
+- Rate limiting needs: 800+ RPM for institutional-scale processing
+- Accuracy demands: Consistent performance across full context window
+- Empirical validation: Models chosen through actual complexity testing (CHF failure)
+- Cost-performance optimization: Gemini 2.5 Pro selected over alternatives
+- Provider reliability: Vertex AI chosen for predictable academic pricing
+
+**11. Security and Privacy by Design**
+- Corpus anonymization and hash-based identity protection as standard practice
+- Secure code execution environments with resource limits for computational verification
+- API key management and rate limiting to prevent abuse
+- Git-based provenance provides tamper-evident audit trails
+- *Note: Full security architecture deferred to post-MVP phase*
+
+**12. Graceful Degradation and Error Recovery**
 - Fail-fast validation prevents expensive downstream failures
 - Partial artifact preservation on timeout or interruption
 - Clear error messages with actionable remediation steps
 - System continues processing remaining batches when individual items fail
 - *Note: Advanced resilience patterns and retry logic deferred to post-MVP phase*
 
-**18. Day-1 Extensibility Through Specifications, Platform Extensibility Deferred**
-- **Already Extensible**: Researchers can create unlimited frameworks, experiments, and corpora within specifications
-- Framework Specification v4.0 enables any analytical approach expressible in natural language
-- Experiment Specification v2.0 supports diverse methodological approaches and research designs
-- Corpus Specification v2.0 accommodates any text collection with proper preparation
-- External YAML prompts allow analytical customization without code changes
-- Git-based sharing enables immediate academic collaboration and framework distribution
-- *Future: Advanced platform features (core+modules architecture, marketplace, GUI tools) deferred to post-MVP*
+**13. Intelligence in Prompts, Not Software**
+- LLMs handle reasoning, interpretation, and domain knowledge
+- Software provides coordination, storage, and deterministic operations only
+- Components limited to <150 lines to prevent intelligence creep
+
+**14. Externalized Intelligence, Internalized Coordination**
+- Agent prompts live in external YAML files (intelligence belongs outside code)
+- Agent discovery uses hardcoded mappings (coordination stays predictable)
+- Researchers modify prompts, not coordination logic
+- Balances THIN principles with Radical Simplification reliability
+
+**15. Empirical Technology Choices**
+- Decisions based on actual testing, not theoretical optimization
+- Gemini 2.5 Pro chosen over Flash due to CHF complexity test failure
+- Cost optimization secondary to reliability validation
+
+**16. Linear Progression with Perfect Caching**
+- Fixed 5-stage pipeline with deterministic progression
+- Cache hits eliminate redundant computation entirely
+- Predictable resource usage and timing
+
+**17. Artifact-Oriented State Management**
+- All data flows through immutable, hashed artifacts in MinIO
+- No mutable state in agents or orchestrator
+- Perfect reproducibility through artifact chains
+
+**18. Fail-Fast Input Validation**
+- Strict contracts enforced at system boundaries
+- Clear error messages over expensive debugging cycles
+- "Garbage in, clear error out"
 
 ---
 
