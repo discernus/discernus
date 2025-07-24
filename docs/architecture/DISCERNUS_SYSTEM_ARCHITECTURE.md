@@ -76,6 +76,14 @@ These principles guide every design decision in Discernus:
 - Provenance stamps detect content tampering and ensure analysis integrity
 - Academic integrity through transparent, auditable computational processes
 
+**10. Opinionated Model Selection Based on Performance Requirements**
+- Context window requirements: 2M+ tokens for multi-framework batch analysis
+- Rate limiting needs: 800+ RPM for institutional-scale processing
+- Accuracy demands: Consistent performance across full context window
+- Empirical validation: Models chosen through actual complexity testing (CHF failure)
+- Cost-performance optimization: Gemini 2.5 Pro selected over alternatives
+- Provider reliability: Vertex AI chosen for predictable academic pricing
+
 ---
 
 ### The THIN vs THICK Philosophy
