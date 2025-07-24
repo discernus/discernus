@@ -101,11 +101,12 @@ class AnalyseBatchAgent:
                 # Strip sha256: prefix if present
                 clean_hash = framework_hash[7:] if framework_hash.startswith('sha256:') else framework_hash
                 framework_bytes = get_artifact(clean_hash)
-                framework_text = framework_bytes.decode('utf-8')
+                # Binary-First Principle: Frameworks also as base64
+                framework_content = base64.b64encode(framework_bytes).decode('utf-8')
                 frameworks.append({
                     'index': i + 1,
                     'hash': clean_hash,
-                    'content': framework_text
+                    'content': framework_content
                 })
                 logger.info(f"Retrieved framework {i+1}: {clean_hash[:12]}...")
             
@@ -116,17 +117,10 @@ class AnalyseBatchAgent:
                 clean_hash = doc_hash[7:] if doc_hash.startswith('sha256:') else doc_hash
                 doc_bytes = get_artifact(clean_hash)
                 
-                # Provisional: Text-First Fallback Principle
-                try:
-                    # Attempt to decode as text first for efficiency
-                    doc_content = doc_bytes.decode('utf-8')
-                    doc_encoding = 'text'
-                    logger.info(f"Retrieved document {i+1} as text: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
-                except UnicodeDecodeError:
-                    # Fallback to base64 for binary files
-                    doc_content = base64.b64encode(doc_bytes).decode('utf-8')
-                    doc_encoding = 'base64'
-                    logger.info(f"Retrieved and encoded document {i+1} as binary: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
+                # Binary-First Principle: All content as base64, LLM handles decoding
+                doc_content = base64.b64encode(doc_bytes).decode('utf-8')
+                doc_encoding = 'base64'
+                logger.info(f"Retrieved and encoded document {i+1} as base64: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
 
                 documents.append({
                     'index': i + 1,
@@ -214,14 +208,14 @@ class AnalyseBatchAgent:
         """Format frameworks for LLM prompt"""
         formatted = []
         for framework in frameworks:
-            formatted.append(f"=== FRAMEWORK {framework['index']} ===\n{framework['content']}\n")
+            formatted.append(f"=== FRAMEWORK {framework['index']} (base64 encoded) ===\n{framework['content']}\n")
         return "\n".join(formatted)
     
     def _format_documents_for_prompt(self, documents: List[Dict]) -> str:
         """Format documents for LLM prompt"""
         formatted = []
         for document in documents:
-            formatted.append(f"=== DOCUMENT {document['index']} (encoding: {document['encoding']}) ===\n{document['content']}\n")
+            formatted.append(f"=== DOCUMENT {document['index']} (base64 encoded) ===\n{document['content']}\n")
         return "\n".join(formatted)
     
     def _get_timestamp(self) -> str:

@@ -160,7 +160,9 @@ class PreTestAgent:
             clean_hash = artifact_hash[7:] if artifact_hash.startswith('sha256:') else artifact_hash
             artifact_bytes = get_artifact(clean_hash)
             
-            content, encoding = self._decode_artifact(artifact_bytes)
+            # Binary-First Principle: All content as base64
+            content = base64.b64encode(artifact_bytes).decode('utf-8')
+            encoding = 'base64'
             
             artifacts.append({
                 'index': i + 1,
@@ -171,18 +173,12 @@ class PreTestAgent:
             logger.info(f"Retrieved {artifact_type} {i+1} ({encoding}): {clean_hash[:12]}...")
         return artifacts
 
-    def _decode_artifact(self, artifact_bytes: bytes) -> (str, str):
-        """Applies the Text-First Fallback Principle."""
-        try:
-            return artifact_bytes.decode('utf-8'), 'text'
-        except UnicodeDecodeError:
-            return base64.b64encode(artifact_bytes).decode('utf-8'), 'base64'
 
     def _format_artifacts_for_prompt(self, artifacts: List[Dict], header: str) -> str:
         """Format a list of artifacts for the LLM prompt."""
         formatted = []
         for artifact in artifacts:
-            formatted.append(f"=== {header} {artifact['index']} (encoding: {artifact['encoding']}) ===\n{artifact['content']}\n")
+            formatted.append(f"=== {header} {artifact['index']} (base64 encoded) ===\n{artifact['content']}\n")
         return "\n".join(formatted)
 
 def main():
