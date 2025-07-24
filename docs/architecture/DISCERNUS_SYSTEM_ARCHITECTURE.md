@@ -111,6 +111,15 @@ These principles guide every design decision in Discernus:
 - Post-hoc analysis, synthesis, and scholarly interpretation remain fundamentally human activities
 - Technology serves scholarship, not the reverse - researchers drive insights, system provides rigor
 
+**14. LLM Consistency Superiority Over Human Evaluation Panels**
+- **Fundamental Assumption**: Properly managed LLMs are more consistently perceptive than human evaluator panels
+- LLMs represent global-scale averaging of human perception patterns across training data
+- Individual humans may be more perceptive, but panels suffer from inconsistency, fatigue, and bias drift
+- LLM evaluation provides speed and precision impossible with human panels at institutional scale
+- Consistency enables reliable cross-document, cross-time, and cross-researcher comparisons
+- Statistical validation (variance measurement, confidence intervals) quantifies this consistency advantage
+- This assumption justifies computational methodology over traditional human coding approaches
+
 ---
 
 ### The THIN vs THICK Philosophy
