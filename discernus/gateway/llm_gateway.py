@@ -21,8 +21,8 @@ from .base_gateway import BaseGateway
 # Add moderation import
 from litellm import moderation
 
-# Add LLMArchiveManager import
-from discernus.core.llm_archive_manager import LLMArchiveManager
+# LLMArchiveManager was removed during cleanup - functionality moved to agents
+# from discernus.core.llm_archive_manager import LLMArchiveManager
 
 class LLMGateway(BaseGateway):
     """
@@ -30,7 +30,7 @@ class LLMGateway(BaseGateway):
     through the LiteLLM library. It includes logic for intelligent model fallback
     in case of failures.
     """
-    def __init__(self, model_registry: ModelRegistry, archive_manager: Optional[LLMArchiveManager] = None):
+    def __init__(self, model_registry: ModelRegistry, archive_manager = None):
         self.model_registry = model_registry
         self.parameter_manager = ProviderParameterManager()
         self.archive_manager = archive_manager
