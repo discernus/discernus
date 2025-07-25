@@ -289,28 +289,28 @@ def run(experiment_path: str, dry_run: bool):
     # Create comprehensive manifest
     manifest = create_run_manifest(run_folder, experiment, framework_hash, corpus_hashes, exp_path)
     
-    # Create orchestration task for Redis streams
+    # Create orchestration task for Redis list coordination (per architecture spec 4.2)
     task_id = run_folder.name
     orchestration_task = {
         'task_id': task_id,
         'experiment': experiment,
-        'framework_hash': framework_hash,
+        'framework_hashes': [framework_hash],  # FIXED: Make plural as expected by OrchestratorAgent
         'corpus_hashes': corpus_hashes,
         'experiment_path': str(exp_path),
         'run_folder': str(run_folder),
         'manifest_path': str(run_folder / "manifest.json")
     }
     
-    # Submit to orchestrator via Redis
+    # Submit to orchestrator via Redis list (no streams, no consumer groups per architecture 4.2)
     click.echo("📡 Submitting to Redis orchestration...")
     redis_client = get_redis_client()
     
     try:
-        message_id = redis_client.xadd('orchestrator.tasks', {'data': json.dumps(orchestration_task)})
+        # Use LPUSH to orchestrator list instead of XADD to stream
+        redis_client.lpush('orchestrator.tasks', json.dumps(orchestration_task))
         
         click.echo("✅ Experiment submitted successfully!")
         click.echo(f"   🆔 Task ID: {task_id}")  
-        click.echo(f"   📨 Message ID: {message_id}")
         click.echo(f"   📂 Run folder: {run_folder}")
         click.echo(f"   📊 Processing: {len(corpus_files)} documents")
         click.echo("\n🔄 Experiment processing started...")
@@ -334,11 +334,11 @@ def status(run_id: Optional[str] = None, watch: bool = False):
             redis_client.ping()
             click.echo("✅ Redis: Connected")
             
-            # Check infrastructure queues
-            orchestrator_len = redis_client.xlen('orchestrator.tasks')
-            tasks_len = redis_client.xlen('tasks') if redis_client.exists('tasks') else 0
-            done_len = redis_client.xlen('tasks.done') if redis_client.exists('tasks.done') else 0
-            error_len = redis_client.xlen('tasks.error') if redis_client.exists('tasks.error') else 0
+            # Check infrastructure queues (using llen for lists per architecture spec 4.2)
+            orchestrator_len = redis_client.llen('orchestrator.tasks') if redis_client.exists('orchestrator.tasks') else 0
+            tasks_len = redis_client.llen('tasks') if redis_client.exists('tasks') else 0
+            done_len = redis_client.llen('tasks.done') if redis_client.exists('tasks.done') else 0
+            error_len = redis_client.llen('tasks.error') if redis_client.exists('tasks.error') else 0
             
             click.echo("📊 Infrastructure Status:")
             click.echo(f"   📥 Orchestrator queue: {orchestrator_len} tasks")
