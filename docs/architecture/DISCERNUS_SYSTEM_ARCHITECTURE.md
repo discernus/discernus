@@ -2,7 +2,13 @@
 title: Discernus System Architecture - Technical Specification
 ---
 
-# Discernus System Architecture (v3.0 - Radical Simplification)
+# Discernus System Architecture (v4.0 - THIN Orchestration)
+
+> **Architecture Update**: This document reflects THIN v2.0 approach based on distributed prototype learnings. 
+> Core sections (1-4) describe the current direct function call approach. Later sections contain valuable 
+> reference content for specifications, development workflows, and operational guidance.
+
+---
 
 ## About Discernus
 
@@ -96,6 +102,7 @@ These principles guide every design decision in Discernus:
 - Single, predictable pipeline over infinite customization options
 - Boring, bulletproof behavior over theoretical capability
 - "It works every time" trumps "it can do anything"
+- **Direct function calls over distributed coordination** - proven through prototype experience
 
 **8. Resource-Conscious Cost Management**
 - Empirical cost-performance optimization through model selection and batching
@@ -187,13 +194,14 @@ These principles guide every design decision in Discernus:
 
 ## 1 · Current Implementation Objective
 
-Stand up a **minimal, reproducible pipeline** that demonstrates the *THIN* architecture while validating that modern LLMs can shoulder nearly all domain reasoning:
+Implement a **reliable, THIN pipeline** based on distributed prototype learnings:
 
-- **No bespoke parsers** for frameworks or outputs.
-- **Artefact‑oriented caching** so finished LLM calls are never repeated.
-- **Abort / resume** and **cost‑guard** controls proven in practice.
+- **Direct function calls** for orchestration - no Redis coordination complexity
+- **Multi-stage processing proven effective**: BatchAnalysis → Synthesis → Report produces quality results
+- **Artifact-oriented storage** for provenance - MinIO content-addressable storage works well
+- **LLM intelligence validated** - agents produce quality academic output when properly coordinated
 
-The architecture has now evolved into **Radical Simplification Mode** to support **batched multi‑framework analysis** using a single, bulletproof 5-stage pipeline. Reliability > Flexibility.
+**Key Learning**: Complex distributed coordination creates reliability problems. The THIN approach uses direct Python function calls while preserving proven agent intelligence and multi-stage processing benefits.
 
 ---
 
@@ -211,62 +219,68 @@ The architecture has now evolved into **Radical Simplification Mode** to support
 
 ---
 
-## 3 · Architecture Overview (Radical Simplification Mode)
-```mermaid
-graph TD
-    subgraph "User"
-        A[Experiment v3 YAML] --> B{OrchestratorAgent};
-    end
+## 3 · Architecture Overview (THIN Orchestration)
 
-    subgraph "Orchestration"
-        B -->|1. Enqueue PreTest| C[Redis Task Queue];
-        C -->|BRPOP| B;
-        B -->|2. Enqueue BatchAnalysis| C;
-        C -->|BRPOP| B;
-        B -->|...5 Stages| C;
-    end
+**THIN v2.0 Core Principle**: Direct function calls, not distributed coordination.
 
-    subgraph "Execution"
-        D{Router} -->|Spawns| E[PreTestAgent];
-        D -->|Spawns| F[BatchAnalysisAgent];
-        D -->|Spawns| G[...Other Agents];
-    end
-    
-    subgraph "Task Signalling"
-        E -->|LPUSH completion| C;
-        F -->|LPUSH completion| C;
-        G -->|LPUSH completion| C;
-    end
+```python
+class ThinOrchestrator:
+    def run_experiment(self, experiment_path: Path) -> ExperimentResult:
+        # 1. Validation
+        experiment = self.validate_experiment(experiment_path)
+        run_id = self.create_run_folder(experiment)
+        
+        # 2. Direct agent calls - no Redis coordination
+        batch_result = self.batch_agent.analyze(experiment.corpus, experiment.framework)
+        synthesis_result = self.synthesis_agent.synthesize([batch_result], experiment.framework)
+        final_report = self.report_agent.generate(synthesis_result, experiment.metadata)
+        
+        # 3. Save results - MinIO for provenance, filesystem for CLI
+        self.save_results(run_id, batch_result, synthesis_result, final_report)
+        return ExperimentResult(run_id, final_report)
+```
 
-    subgraph "Artefact Store"
-        H[MinIO]
-    end
-
-    E -->|PUT artefact| H;
-    F -->|PUT artefact| H;
-    G -->|PUT artefact| H;
-    B -->|GET artefact| H;
-
+**Data Flow**:
+```
+Input: experiment.yaml + framework.md + corpus/
+  ↓ (direct function call)
+BatchAnalysis: documents → structured analysis results
+  ↓ (direct function call)  
+Synthesis: analysis results → statistical aggregation
+  ↓ (direct function call)
+Report: synthesis results → academic report
+  ↓ (direct file write)
+Output: results in both filesystem and MinIO
 ```
 
 ---
 
-## 4 · Radical Simplification Mode (Phase 1)
+## 4 · THIN Orchestration Implementation
 
-> **Goal:** Replace growing coordination complexity with a **single, bulletproof workflow** and strict input contracts. Reliability > flexibility.
+> **Goal:** Preserve proven agent intelligence while eliminating distributed coordination complexity.
 
-### 4.1 Fixed 5‑Stage Pipeline
+### 4.1 Three-Stage Pipeline (Proven Effective)
 ```
-PreTest → BatchAnalysis → CorpusSynthesis → Review → Moderation
+BatchAnalysis → Synthesis → Report
 ```
-All runs follow this exact order. No custom workflows, branching, or parallel variations.
+**Validated through distributed prototype**: This pipeline produces quality academic output. Direct function calls eliminate coordination complexity while preserving the proven multi-stage processing benefits.
 
-### 4.2 Coordination Simplification
-Legacy consumer‑group races are eliminated. Completion signalling uses Redis keys/lists:
+### 4.2 Direct Function Call Coordination
+**THIN v2.0 Approach**: Standard Python patterns replace distributed complexity.
 
-1. Agent finishes: writes artefact → `SET task:<id>:status done EX 86400` → `LPUSH run:<run_id>:done <id>`.
-2. Orchestrator waits via `BRPOP run:<run_id>:done` (blocking). No dynamic consumer groups.
-3. Cache check: if status key exists + artefact present → skip.
+```python
+def run_experiment(self, experiment):
+    # Standard exception handling, no Redis coordination
+    try:
+        batch_result = self.batch_agent.analyze(experiment)
+        synthesis_result = self.synthesis_agent.synthesize([batch_result])
+        final_report = self.report_agent.generate(synthesis_result)
+        return final_report
+    except Exception as e:
+        # Standard Python stack traces show exactly where failure occurred
+        self.logger.error(f"Pipeline failed: {e}")
+        raise
+```
 
 ### 4.3 Strict Input Specifications (v3 / v5)
 All inputs validated **before** first LLM call.
