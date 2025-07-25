@@ -156,12 +156,18 @@ class DiscernusRouter:
             logger.error(f"Unexpected error running {task_type} agent for task {task_id}: {e}")
             return False
 
-    def route_task(self, task_type: str, task_id: str) -> bool:
+    def route_task(self, task_type: str, task_id: str, task_info: Dict[str, Any] = None) -> bool:
         """Route task to appropriate agent using ThreadPoolExecutor - NO BUSINESS LOGIC"""
         try:
             if task_type not in AGENT_SCRIPTS:
                 logger.error(f"Unknown task type: {task_type}")
                 return False
+            
+            # Store task data in Redis for agent retrieval (if provided)
+            if task_info:
+                task_data_key = f"task:{task_id}:data"
+                self.redis_client.set(task_data_key, json.dumps(task_info), ex=3600)  # 1 hour TTL
+                logger.info(f"Stored task data in Redis key: {task_data_key}")
                 
             # Get agent script command
             script_cmd = AGENT_SCRIPTS[task_type] + [task_id]
@@ -203,45 +209,42 @@ class DiscernusRouter:
             logger.error(f"Error in completion handler: {e}")
 
     def route_pending_tasks(self):
-        """Route new tasks to agents"""
+        """Route new tasks to agents using BRPOP list pattern (per architecture spec 4.2)"""
         try:
-            logger.info(f"Checking for pending tasks in stream '{TASKS_STREAM}' with consumer group '{CONSUMER_GROUP}'")
+            logger.info(f"Checking for pending tasks in list 'tasks' with BRPOP")
             
-            # Read pending tasks (non-blocking)
-            messages = self.redis_client.xreadgroup(
-                CONSUMER_GROUP, 'router-tasks',
-                {TASKS_STREAM: '>'},
-                count=5, block=1000
-            )
+            # Use BRPOP instead of XREADGROUP (no consumer groups, no races)
+            result = self.redis_client.brpop('tasks', timeout=1)
             
-            logger.info(f"Got {len(messages)} stream(s) from XREADGROUP")
-            
-            for stream, msgs in messages:
-                logger.info(f"Processing stream '{stream}' with {len(msgs)} message(s)")
-                for msg_id, fields in msgs:
-                    try:
-                        logger.info(f"Processing message {msg_id} with fields: {fields}")
-                        task_type = fields[b'type'].decode()
-                        task_data = json.loads(fields[b'data'])
+            if result:
+                list_name, task_data = result
+                logger.info(f"Got task from list '{list_name}'")
+                
+                try:
+                    # Parse task data (type is now embedded in the data)
+                    task_info = json.loads(task_data)
+                    task_type = task_info.get('type')
+                    
+                    if not task_type:
+                        logger.error(f"Task missing 'type' field: {task_data}")
+                        return
+                    
+                    logger.info(f"Processing task type: {task_type}")
+                    
+                    # Generate task ID for tracking
+                    task_id = task_info.get('run_id', 'unknown') + f"_{task_type}"
+                    
+                    # Route task (THIN - no logic, just dispatch)
+                    if self.route_task(task_type, task_id, task_info):
+                        logger.info(f"Routed {task_type} task: {task_id}")
+                    else:
+                        logger.error(f"Failed to route {task_type} task: {task_id}")
                         
-                        logger.info(f"Decoded task type: {task_type}")
+                except Exception as e:
+                    logger.error(f"Error processing task: {e}")
+            else:
+                logger.info("No tasks available (BRPOP timeout)")
                         
-                        # Route task (THIN - no logic, just dispatch)
-                        if self.route_task(task_type, msg_id.decode()):
-                            logger.info(f"Routed {task_type} task: {msg_id}")
-                        else:
-                            logger.error(f"Failed to route {task_type} task: {msg_id}")
-                            
-                        # Acknowledge message
-                        self.redis_client.xack(TASKS_STREAM, CONSUMER_GROUP, msg_id)
-                        
-                    except Exception as e:
-                        logger.error(f"Error routing task: {e}")
-                        continue
-                        
-        except redis.exceptions.ResponseError:
-            # No messages available - normal operation
-            pass
         except Exception as e:
             logger.error(f"Error in task router: {e}")
 
@@ -291,8 +294,8 @@ def main():
     router = DiscernusRouter()
     
     try:
-        # Setup Redis streams
-        router.setup_streams()
+        # No longer need streams setup - using Redis lists per architecture spec 4.2
+        # router.setup_streams()
         
         # Start main loop
         router.main_loop()

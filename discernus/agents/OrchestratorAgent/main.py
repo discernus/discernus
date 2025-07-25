@@ -185,6 +185,7 @@ class OrchestratorAgent:
         sample_corpus = corpus_hashes[:5]
         
         task_data = {
+            'type': 'pre_test',  # Include type in task data for router
             'experiment_name': f"{experiment_name}_pre_test",
             'framework_hashes': framework_hashes,
             'document_hashes': sample_corpus,
@@ -192,12 +193,11 @@ class OrchestratorAgent:
             'run_id': self.run_id
         }
         
-        message_id = self.redis_client.xadd('tasks', {
-            'type': 'pre_test',
-            'data': json.dumps(task_data)
-        })
+        # Use LPUSH to task list instead of XADD to stream (per architecture spec 4.2)
+        self.redis_client.lpush('tasks', json.dumps(task_data))
         
-        task_id = message_id.decode()
+        # Generate deterministic task ID for tracking
+        task_id = f"{self.run_id}_pretest"
         logger.info(f"Enqueued PreTest stage: {task_id}")
         return task_id
 
@@ -572,49 +572,36 @@ class OrchestratorAgent:
             logger.error(f"Failed to export partial manifest: {e}")
 
     def listen_for_orchestration_requests(self):
-        """Listen for orchestration requests on orchestrator.tasks stream"""
+        """Listen for orchestration requests on orchestrator.tasks list (per architecture spec 4.2)"""
         logger.info("OrchestratorAgent listening for requests...")
         
-        # Ensure the stream and consumer group exist
-        try:
-            self.redis_client.xgroup_create(ORCHESTRATOR_STREAM, CONSUMER_GROUP, id='0', mkstream=True)
-            logger.info(f"Consumer group '{CONSUMER_GROUP}' created for stream '{ORCHESTRATOR_STREAM}'.")
-        except redis.exceptions.ResponseError as e:
-            if "consumer group name already exists" in str(e).lower():
-                logger.info(f"Consumer group '{CONSUMER_GROUP}' already exists.")
-            else:
-                raise # Reraise other errors
-
-        # Note: No longer creating 'waiters' consumer group - using Redis keys/lists pattern instead
-
+        # No stream setup needed - using simple Redis lists per architecture spec
+        # Architecture 4.2: "Legacy consumer‑group races are eliminated. Completion signalling uses Redis keys/lists"
+        
         try:
             while True:
-                # Read orchestration requests (blocking)
-                messages = self.redis_client.xreadgroup(
-                    CONSUMER_GROUP, 'orchestrator',
-                    {'orchestrator.tasks': '>'},
-                    count=1, block=0  # Block until message available
-                )
+                # Use BRPOP on orchestrator.tasks list (blocking, deterministic, no consumer groups)
+                result = self.redis_client.brpop('orchestrator.tasks', timeout=0)
                 
-                for stream, msgs in messages:
-                    for msg_id, fields in msgs:
-                        try:
-                            orchestration_data = json.loads(fields[b'data'])
+                if result:
+                    list_name, data = result
+                    task_id = None
+                    
+                    try:
+                        orchestration_data = json.loads(data)
+                        task_id = orchestration_data.get('task_id', 'unknown')
+                        
+                        # Process orchestration request
+                        success = self.orchestrate_experiment(orchestration_data, task_id)
+                        
+                        if success:
+                            logger.info(f"Orchestration request completed: {task_id}")
+                        else:
+                            logger.error(f"Orchestration request failed: {task_id}")
                             
-                            # Process orchestration request
-                            success = self.orchestrate_experiment(orchestration_data, msg_id.decode())
-                            
-                            if success:
-                                logger.info(f"Orchestration request completed: {msg_id.decode()}")
-                            else:
-                                logger.error(f"Orchestration request failed: {msg_id.decode()}")
-                            
-                            # Acknowledge message
-                            self.redis_client.xack('orchestrator.tasks', CONSUMER_GROUP, msg_id)
-                            
-                        except Exception as e:
-                            logger.error(f"Error processing orchestration request: {e}")
-                            continue
+                    except Exception as e:
+                        logger.error(f"Error processing orchestration request: {e}")
+                        continue
                             
         except KeyboardInterrupt:
             logger.info("OrchestratorAgent shutdown requested")
