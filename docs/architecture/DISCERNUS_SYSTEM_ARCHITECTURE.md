@@ -111,13 +111,12 @@ These principles guide every design decision in Discernus:
 - Transparent cost reporting enables institutional budget planning
 - *Note: Advanced cost controls and budgeting tools deferred to post-MVP phase*
 
-**9. Specialized Agent Interaction Over Monolithic Analysis**
+**9. Specialized Agent Processing Over Monolithic Analysis**
 - Task-specific agents outperform single-LLM approaches (empirically validated)
-- Controlled agent conversations through structured protocols and handoffs
-- Natural language communication between agents (no complex JSON parsing)
-- Sequential validation gauntlet: TrueValidation → ProjectCoherence → StatisticalPlanning → ModelHealth
-- Adversarial review protocols: IdeologicalReviewer ↔ StatisticalReviewer → ModeratorSynthesis
-- Agent specialization: AnalysisBatch → CorpusSynthesis → Review → Moderation pipeline
+- Streamlined pipeline: BatchAnalysis → Synthesis → Report with comprehensive provenance
+- Natural language communication between stages (no complex JSON parsing)
+- Agent specialization: focused analysis agents with clear input/output contracts
+- Comprehensive reporting with proper provenance asset management
 
 **10. Opinionated Model Selection Based on Performance Requirements**
 - Context window requirements: 2M+ tokens for multi-framework batch analysis
@@ -158,7 +157,7 @@ These principles guide every design decision in Discernus:
 - Cost optimization secondary to reliability validation
 
 **16. Linear Progression with Perfect Caching**
-- Fixed 5-stage pipeline with deterministic progression
+- Streamlined 3-stage pipeline with deterministic progression
 - Cache hits eliminate redundant computation entirely
 - Predictable resource usage and timing
 
@@ -215,7 +214,7 @@ Implement a **reliable, THIN pipeline** based on distributed prototype learnings
 | **Artefact** | Any file (JSON, Parquet, prompt) saved by SHA‑256. |
 | **Router** | ~150 lines: spawns workers / loads registry; *no business logic*. |
 | **Agent** | Stateless worker: *read task → call LLM with prompt → write result*. |
-| **OrchestratorAgent** | LLM that plans execution for a fixed 5‑stage pipeline. |
+| **ThinOrchestrator** | Direct function calls orchestrating 3-stage pipeline: BatchAnalysis → Synthesis → Report. |
 
 ---
 
@@ -366,7 +365,7 @@ vertex_ai/gemini-2.5-pro:
   provider: vertex_ai
   context_window: 8000000
   costs: {input_per_million_tokens: 1.25, output_per_million_tokens: 5.00}
-  task_suitability: [batch_analysis, multi_framework_synthesis, review]
+          task_suitability: [batch_analysis, multi_framework_synthesis, report_generation]
   optimal_batch_tokens: 5600000
   max_documents_per_batch: 300
   last_updated: '2025-07-24'
@@ -389,7 +388,7 @@ Logged per run into `manifest.json`:
 2. **Cache Hit:** Re‑running identical experiment triggers zero Layer‑1 calls (verified via LiteLLM logs).
 3. **Cost Guard:** Live mode prompts for confirmation using batch token estimates.
 4. **Streamlined Processing:** Simple batch planning with configurable statistical runs per experiment specification.
-5. **Review Integrity:** Moderator output cites batch summaries and statistics (traceable).
+5. **Report Quality:** Final report includes comprehensive analysis with proper statistical citations and provenance links.
 6. **Metrics:** `cache_hit_ratio == 1.0` on second run; success rate ≥95% across test suite.
 
 ---
@@ -399,7 +398,7 @@ Logged per run into `manifest.json`:
 # Start infrastructure
 $ docker compose up -d redis minio
 
-# Run experiment with hardcoded 5-stage pipeline
+# Run experiment with streamlined 3-stage pipeline
 $ python3 scripts/phase3_test_runner.py --test full_pipeline
 
 # Monitor system status
@@ -418,7 +417,7 @@ projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>/
 ├─ corpus/            # original input files
 ├─ analysis/          # batch JSON artefacts
 ├─ synthesis/         # <RUN_ID>.json corpus statistics
-├─ debate/            # review transcript (html + json)
+    ├─ reports/           # final academic report + formats
 ├─ framework/         # copies of framework files
 ├─ logs/              # router / agent / proxy logs
 ├─ manifest.json      # machine provenance (hashes, metrics)
@@ -741,7 +740,7 @@ def validate_framework_output(framework_result: dict, expected_schema: dict) -> 
 pandas>=2.0.0          # Statistical calculations in CorpusSynthesis
 numpy>=1.24.0          # Numerical operations
 scipy>=1.10.0          # Advanced statistics
-jinja2>=3.1.0          # HTML template generation for Review stage
+jinja2>=3.1.0          # HTML template generation for Report formatting
 pydantic>=2.0.0        # Input validation and schemas
 ```
 
@@ -758,7 +757,7 @@ mypy>=1.0.0            # Type checking
 **Template Structure**:
 ```
 templates/
-├── debate_transcript.html     # Review stage conversation
+├── academic_report.html       # Formatted final report
 ├── synthesis_report.html      # CorpusSynthesis output
 └── base.html                  # Common layout
 ```
@@ -766,9 +765,9 @@ templates/
 **Template Engine**:
 - Jinja2 templates for consistent HTML generation
 - CSS embedded for self-contained artifacts
-- Mobile-responsive design for review accessibility
+- Mobile-responsive design for academic report accessibility
 
-*TODO: Create HTML templates and integrate with Review/Moderation stages*
+*TODO: Create HTML templates and integrate with Report generation stage*
 
 ---
 
