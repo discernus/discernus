@@ -37,15 +37,15 @@ AGENT_SCRIPTS = {
     'analyse': [PYTHON_EXECUTABLE, 'agents/AnalyseChunkAgent/main.py'],
     'orchestrate': [PYTHON_EXECUTABLE, 'agents/OrchestratorAgent/main.py'],
     'synthesize': [PYTHON_EXECUTABLE, 'agents/SynthesisAgent/main.py'],
-    # New Tier 1-2 agents for batch processing architecture
+    # Modern Redis-based agents with YAML prompts
     'analyse_batch': [PYTHON_EXECUTABLE, 'agents/AnalyseBatchAgent/main.py'],
-    'corpus_synthesis': [PYTHON_EXECUTABLE, 'agents/CorpusSynthesisAgent/main.py'],
+    'meta_synthesis': [PYTHON_EXECUTABLE, 'agents/MetaAnalysisSynthesisAgent/main.py'],
+    'synthesis': [PYTHON_EXECUTABLE, 'agents/SynthesisAgent/main.py'],
     'pre_test': [PYTHON_EXECUTABLE, 'agents/PreTestAgent/main.py'],
     # Phase 2 Components
     'execute_plan': [PYTHON_EXECUTABLE, 'scripts/execution_bridge.py'],
     # Phase 3 Quality Assurance agents
     'review': [PYTHON_EXECUTABLE, 'agents/ReviewerAgent/main.py'],
-    'moderation': [PYTHON_EXECUTABLE, 'agents/ModeratorAgent/main.py'],
 }
 
 class RouterError(Exception):
