@@ -25,9 +25,7 @@ from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 from datetime import datetime
 
-# Add scripts directory to path for MinIO integration
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
-from minio_client import get_artifact, put_artifact, ArtifactStorageError
+from discernus.storage import get_artifact, put_artifact, ArtifactStorageError
 
 class BaseAgentError(Exception):
     """Base agent exceptions"""
