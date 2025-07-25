@@ -148,7 +148,7 @@ These principles guide every design decision in Discernus:
 
 **14. Externalized Intelligence, Internalized Coordination**
 - Agent prompts live in external YAML files (intelligence belongs outside code)
-- Agent discovery uses hardcoded mappings (coordination stays predictable)
+- Agent discovery via file-based scanning (THIN principle: simple filesystem patterns over hardcoded logic)
 - Researchers modify prompts, not coordination logic
 - Balances THIN principles with Radical Simplification reliability
 
@@ -285,7 +285,7 @@ def run_experiment(self, experiment):
 ### 4.3 Strict Input Specifications (v3 / v5)
 All inputs validated **before** first LLM call.
 
-**Experiment v3** (YAML excerpt):
+**Experiment v2.0** (YAML excerpt):
 ```yaml
 name: "phase3_chf_constitutional_debate"
 corpus_path: projects/exp1/corpus/
@@ -294,9 +294,9 @@ statistical_runs: 3   # optional override
 ```
 Constraints: `max_documents`, `max_frameworks_per_run`, **no** `custom_workflow` / `parallel_processing` fields.
 
-**Framework v5**: Markdown file with embedded JSON block declaring `output_contract` (schema) + optional `precision`. Enforced via deterministic validator post‑analysis.
+**Framework v4.0**: Markdown file with embedded YAML block declaring `output_contract` (schema) + optional `precision`. Enforced via deterministic validator post‑analysis.
 
-**Corpus v3**: Directory with `manifest.json` listing file names & metadata. System does **no discovery** outside manifest. Binary‑first principle: all files base64 encoded for LLM.
+**Corpus v2.0**: Directory with `manifest.json` listing file names & metadata. System does **no discovery** outside manifest. Binary‑first principle: all files base64 encoded for LLM.
 
 ### 4.4 Batch Planner & PreTest
 `PreTestAgent` samples corpus to estimate variance & token footprint → returns `recommended_runs_per_batch`.
@@ -408,10 +408,11 @@ projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>/
 - **Path Validation**: Corpus paths restricted to project boundaries
 - **Task Type Validation**: Router enforces allowed task types from agent registry
 
-### 7.2 Deferred (Post-Production)
-- **Sandboxing**: Agent containers with `--network none`
-- **Sentinel Agent**: Advanced prompt injection detection
-- **Audit Logging**: Comprehensive security event logging
+### 7.2 Basic Security Controls (Required for Production)
+- **Input Validation**: Framework/experiment/corpus specification validation prevents path traversal and injection
+- **Process Isolation**: Basic sandboxing for agent execution environments
+- **Audit Logging**: Essential security event logging for academic integrity and compliance
+- *Note: Advanced security features (comprehensive monitoring, threat detection) can be enhanced post-deployment*
 
 ---
 
@@ -696,10 +697,10 @@ def validate_framework_output(framework_result: dict, expected_schema: dict) -> 
 
 ### 14.1 Staged Implementation Approach
 **Agent Discovery Migration Strategy**:
-- **Phase A (Current)**: Maintain hardcoded `AGENT_SCRIPTS` mapping for pipeline completion reliability
-- **Phase B (Refactoring)**: Migrate to `agents/<AgentName>/config.json` discovery pattern
-- **Justification**: "Reliability > Flexibility" during critical implementation phase
-- **Target**: Router discovers agents by scanning `agents/*/config.json` (~50 lines implementation)
+- **THIN Implementation**: File-based agent discovery via `agents/*/config.json` - simple filesystem scanning aligns with THIN principles
+- **No hardcoded mappings**: Agent discovery through standard filesystem patterns, not hardcoded business logic
+- **Justification**: THIN architecture means intelligence in prompts, not software - includes agent discovery
+- **Implementation**: Simple directory scanning replaces hardcoded agent mappings (~30 lines)
 
 **Prompt Storage Specification**:
 - **Location**: `agents/<AgentName>/prompt.yaml`
