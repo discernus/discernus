@@ -1,0 +1,133 @@
+You are an expert computational social science methodologist helping validate and complete a Discernus experiment package.
+
+**IMPORTANT CONTEXT**: It is currently July 2025. All referenced political speeches exist as real documents.
+
+**YOUR TASK**: 
+1. Examine the experiment package structure and files provided below
+2. Validate against Discernus specifications
+3. Help create any missing compliance elements (like corpus.md manifests)
+4. Provide actionable guidance for achieving full specification compliance
+
+==================================================
+EXPERIMENT PACKAGE FILES
+==================================================
+
+**FILE: experiment.yaml**
+```yaml
+name: "political_moral_analysis"
+description: |
+  This experiment validates the Moral Foundations Theory v4.2 Tension Enhanced 
+  framework using a diverse corpus of American political speeches. The corpus 
+  includes 8 speeches from different ideological positions, historical periods 
+  (1963-2022), and contexts (electoral, legislative, policy advocacy). While 
+  this heterogeneous design limits causal inference about ideology, it provides 
+  a robust test of the framework's analytical capabilities across varied 
+  political discourse contexts.
+
+hypothesis: |
+  This diverse political corpus will demonstrate measurable variation in moral 
+  foundation emphasis patterns across speakers and contexts, with the Moral 
+  Strategic Contradiction Index (MSCI) revealing different patterns of moral 
+  rhetorical coherence. While temporal and contextual factors limit 
+  generalizability, this experiment will validate the framework's capacity to 
+  detect and quantify moral foundation patterns in political discourse.
+
+framework: "framework.md"
+corpus_path: "corpus/"
+models:
+  - "vertex_ai/gemini-2.5-pro"
+runs_per_model: 3
+analysis_variant: "default"
+```
+
+**FILE: framework.md** (First 100 lines shown)
+```markdown
+# Moral Foundations Theory Framework v4.2 - Tension Enhanced
+
+**Version**: v4.2 - Tension Enhanced  
+**Status**: Implementation Ready  
+**Enhancement Type**: Moral Tension Pattern Analysis Integration  
+**Base**: MFT v4.1 Salience-Enhanced + Issue #125 Tension Mathematics  
+
+---
+
+## Version 4.2 Enhancement: Moral Foundation Tension Analysis
+
+### **🚨 NEW CAPABILITY: Moral Strategic Contradiction Index (MSCI)**
+
+**Version 4.2** integrates breakthrough **moral tension analysis** based on Issue #125 specifications:
+- **Moral Foundation Tension Scoring**: Quantifies moral contradictions between opposing foundations
+- **Moral Strategic Contradiction Index**: Overall moral tension measurement across all foundation pairs
+- **Moral Priority Coherence**: Analysis of moral foundation emphasis contradictions
+
+**Research Foundation**: Moral analysis now reveals whether speakers demonstrate coherent moral reasoning or exhibit measurable moral contradictions in their foundation priorities.
+
+---
+
+## Moral Foundations Theory Core Analysis
+
+*[Preserving all existing MFT v4.1 functionality with tension enhancement]*
+
+### **Six Foundation Pairs: Independent Scoring with Tension Analysis**
+
+**Individualizing Foundations (Foundation Pairs 1-2)**:
+1. **Care** (0.0-1.0): Compassion, protection, suffering prevention
+2. **Fairness** (0.0-1.0): Justice, equality, proportionality
+
+**Binding Foundations (Foundation Pairs 3-6)**:
+3. **Loyalty** (0.0-1.0): Group solidarity, patriotism, team loyalty
+4. **Authority** (0.0-1.0): Respect for hierarchy, tradition, legitimate power
+5. **Sanctity** (0.0-1.0): Purity, degradation, sacred/profane distinctions
+6. **Liberty** (0.0-1.0): Freedom from oppression, resistance to tyranny
+
+[Framework continues for ~200 more lines with detailed methodology...]
+```
+
+**DIRECTORY STRUCTURE:**
+```
+projects/political_moral_analysis/
+├── experiment.yaml
+├── framework.md (partial content shown above)
+└── corpus/
+    ├── alexandria_ocasio_cortez_2025_fighting_oligarchy.txt
+    ├── bernie_sanders_2025_fighting_oligarchy.txt  
+    ├── cory_booker_2018_first_step_act.txt
+    ├── jd_vance_2022_natcon_conference.txt
+    ├── john_lewis_1963_march_on_washington.txt
+    ├── john_mccain_2008_concession.txt
+    ├── mitt_romney_2020_impeachment.txt
+    └── steve_king_2017_house_floor.txt
+    
+    [NOTE: No corpus.md manifest file found]
+```
+
+**SAMPLE CORPUS FILE: john_lewis_1963_march_on_washington.txt**
+```
+# Political Speech - Speaker D
+
+**Context**: Civil rights era speech from 1960s
+
+We march today for jobs and freedom, but we have nothing to be proud of, for hundreds and thousands of our brothers are not here. They have no money for their transportation, for they are receiving starvation wages, or no wages at all.
+
+In good conscience, we cannot support wholeheartedly the administration's civil rights bill, for it is too little and too late. There's not one thing in the bill that will protect our people from police brutality.
+
+This bill will not protect young children and old women from police dogs and fire hoses, for engaging in peaceful demonstrations. This bill will not protect the citizens in Danville, Virginia, who must live in constant fear in a police state. This bill will not protect the hundreds of people who have been arrested on trumped-up charges. What about the three young men in Americus, Georgia, who face the electric chair for engaging in peaceful protest?
+
+[Speech continues...]
+```
+
+==================================================
+VALIDATION REQUEST
+==================================================
+
+Please:
+
+1. **Validate Current State**: What does comply with Discernus specifications? What doesn't?
+
+2. **Create Missing Elements**: Help me create the required `corpus.md` file with proper JSON manifest for this corpus.
+
+3. **Framework Compliance**: Does the framework.md need a JSON appendix to be v4.0 compliant?
+
+4. **Actionable Guidance**: What specific steps would make this experiment package fully specification-compliant?
+
+Focus on being helpful and constructive - don't just point out problems, help solve them! 
