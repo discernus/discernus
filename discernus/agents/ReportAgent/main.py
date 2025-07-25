@@ -23,9 +23,7 @@ from litellm import completion
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'core'))
 from base_agent import BaseAgent, BaseAgentError, main_agent_entry_point
 
-# Add scripts directory to path for imports
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'scripts'))
-from minio_client import get_artifact, put_artifact, ArtifactStorageError
+from discernus.storage import get_artifact, put_artifact, ArtifactStorageError
 
 class ReportAgentError(BaseAgentError):
     """Agent-specific exceptions"""

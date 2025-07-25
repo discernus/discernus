@@ -25,9 +25,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional, List
 
-# Add scripts directory to path for MinIO integration
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'scripts'))
-from minio_client import put_artifact, ArtifactStorageError
+from discernus.storage import put_artifact, ArtifactStorageError
 
 # Load environment configuration
 from dotenv import load_dotenv
