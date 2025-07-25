@@ -771,4 +771,60 @@ templates/
 
 ---
 
-*Last updated 2025‑07‑24 - Aligned with Implementation Plan V4 + External Review Feedback*
+## 15 · Future Enhancements
+
+### 15.1 Advanced Pre-flight Validation with Statistical Advisory
+
+**Concept**: Integrate PreTest agent intelligence into collaborative pre-flight validation script.
+
+**Enhanced Capabilities**:
+- **Variance Estimation**: Sample subset of corpus with framework to measure response variance
+- **Statistical Power Analysis**: Calculate required runs for statistically converged averages  
+- **Cost-Benefit Guidance**: "You need 5 runs for 95% confidence, estimated cost: $12.50"
+- **Methodological Advisory**: "Your corpus shows high variance on dimension X - consider adding more explicit markers"
+
+**Sarah Chen Workflow Enhancement**:
+- **Informed Planning**: "Based on preliminary analysis, expect ±0.15 variance on ideological classification"
+- **Resource Optimization**: "3 runs sufficient for your research question confidence level"
+- **Expert Consultation**: Documents statistical assumptions and trade-offs upfront
+
+**Implementation**: 
+```bash
+# Future capability
+python3 scripts/validate_experiment.py --experiment projects/study/ --statistical-preview
+# Would add statistical analysis preview with variance estimates and run recommendations
+```
+
+### 15.2 Moderated Review System (Advanced Quality Assurance)
+
+**Concept**: Optional adversarial review layer for high-stakes research requiring additional validation.
+
+**Architecture**:
+- **Adversarial Review Protocols**: IdeologicalReviewer ↔ StatisticalReviewer → ModeratorSynthesis
+- **Agent Specialization**: Focused reviewers with different analytical perspectives
+- **Debate Transcripts**: Complete audit trail of review process (`debate/<RUN_ID>.html`)
+- **Reconciled Narratives**: Moderated synthesis of competing analytical perspectives
+
+**Use Cases**:
+- High-profile academic publications requiring peer review simulation
+- Institutional research with regulatory compliance requirements
+- Multi-stakeholder analysis where methodological disputes are expected
+- Quality assurance for research with significant policy implications
+
+**Integration Point**: Optional 4th stage that can be enabled per experiment:
+`BatchAnalysis → Synthesis → Report → [Optional: Moderated Review] → Final Publication`
+
+### 15.3 Implementation Priority
+
+**Current Focus**: Core 3-stage pipeline (BatchAnalysis → Synthesis → Report) with collaborative pre-flight validation provides 80% of research value with minimal complexity.
+
+**Future Enhancements Timeline**:
+1. **Phase 2**: Advanced pre-flight statistical advisory (adds LLM-powered variance analysis)
+2. **Phase 3**: Moderated review system (adds optional quality assurance layer)
+3. **Phase 4**: Integration and workflow optimization
+
+**Principle**: Maintain THIN architecture - intelligence in specialized agents, not software coordination complexity.
+
+---
+
+*Last updated 2025‑07‑25 - THIN v2.0 Architecture with Future Enhancement Roadmap*
