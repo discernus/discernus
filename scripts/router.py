@@ -34,20 +34,20 @@ CONSUMER_GROUP = 'discernus'
 
 # Agent type to script mapping - uses current Python executable automatically
 AGENT_SCRIPTS = {
-    'analyse': [PYTHON_EXECUTABLE, 'agents/AnalyseChunkAgent/main.py'],
-    'orchestrate': [PYTHON_EXECUTABLE, 'agents/OrchestratorAgent/main.py'],
-    'synthesize': [PYTHON_EXECUTABLE, 'agents/SynthesisAgent/main.py'],
+    'analyse': [PYTHON_EXECUTABLE, 'discernus/agents/AnalyseChunkAgent/main.py'],
+    'orchestrate': [PYTHON_EXECUTABLE, 'discernus/agents/OrchestratorAgent/main.py'],
+    'synthesize': [PYTHON_EXECUTABLE, 'discernus/agents/SynthesisAgent/main.py'],
     # Modern Redis-based agents with YAML prompts
-    'analyse_batch': [PYTHON_EXECUTABLE, 'agents/AnalyseBatchAgent/main.py'],
-    'meta_synthesis': [PYTHON_EXECUTABLE, 'agents/MetaAnalysisSynthesisAgent/main.py'],
-    'synthesis': [PYTHON_EXECUTABLE, 'agents/SynthesisAgent/main.py'],
-    'pre_test': [PYTHON_EXECUTABLE, 'agents/PreTestAgent/main.py'],
+    'analyse_batch': [PYTHON_EXECUTABLE, 'discernus/agents/AnalyseBatchAgent/main.py'],
+    'meta_synthesis': [PYTHON_EXECUTABLE, 'discernus/agents/MetaAnalysisSynthesisAgent/main.py'],
+    'synthesis': [PYTHON_EXECUTABLE, 'discernus/agents/SynthesisAgent/main.py'],
+    'pre_test': [PYTHON_EXECUTABLE, 'discernus/agents/PreTestAgent/main.py'],
     # Phase 2 Components
     'execute_plan': [PYTHON_EXECUTABLE, 'scripts/execution_bridge.py'],
     # Phase 3 Quality Assurance agents
-    'review': [PYTHON_EXECUTABLE, 'agents/ReviewerAgent/main.py'],
+    'review': [PYTHON_EXECUTABLE, 'discernus/agents/ReviewerAgent/main.py'],
     # Alpha System Components - BaseAgent standardized
-    'report': [PYTHON_EXECUTABLE, 'agents/ReportAgent/main.py'],
+    'report': [PYTHON_EXECUTABLE, 'discernus/agents/ReportAgent/main.py'],
 }
 
 class RouterError(Exception):

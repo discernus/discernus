@@ -15,7 +15,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'core'))
 from base_agent import BaseAgent, BaseAgentError, main_agent_entry_point
 
 # Add scripts directory to path for imports
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'scripts'))
 from minio_client import get_artifact, put_artifact, ArtifactStorageError
 
 class SynthesisAgentError(BaseAgentError):
@@ -25,22 +25,22 @@ class SynthesisAgentError(BaseAgentError):
 class SynthesisAgent(BaseAgent):
     """Thin agent for synthesis of multiple analysis results"""
     
-    def __init__(self):
-        super().__init__('SynthesisAgent')
+    def __init__(self, agent_name: str = 'SynthesisAgent'):
+        super().__init__(agent_name)
     
     def process_task(self, task_id: str) -> bool:
         """Process a single synthesis task - THIN implementation"""
         try:
-            # Get the specific message by ID from Redis stream
-            messages = self.redis_client.xrange('tasks', task_id, task_id, count=1)
+            # Retrieve task data from Redis key (per architecture spec 4.2 - lists not streams)
+            task_data_key = f"task:{task_id}:data"
+            task_data_raw = self.redis_client.get(task_data_key)
             
-            if not messages:
-                self._log_error(f"Task not found: {task_id}")
+            if not task_data_raw:
+                self._log_error(f"Task data not found: {task_data_key}")
                 return False
                 
             # Extract task data
-            msg_id, fields = messages[0]
-            task_data = json.loads(fields[b'data'])
+            task_data = json.loads(task_data_raw)
             self._log_info(f"Processing synthesis task: {task_id}")
             
             # Get artifacts (no parsing - just retrieval)
