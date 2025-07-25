@@ -263,7 +263,9 @@ Output: results in both filesystem and MinIO
 ```
 BatchAnalysis → Synthesis → Report
 ```
-**Validated through distributed prototype**: This pipeline produces quality academic output. Direct function calls eliminate coordination complexity while preserving the proven multi-stage processing benefits.
+**Validated through distributed prototype**: This streamlined pipeline produces quality academic output. Direct function calls eliminate coordination complexity while preserving the proven multi-stage processing benefits.
+
+**Pre-flight Validation**: Offline validation script helps researchers prepare experiments (corpus statistics, token estimates, framework validation) without runtime pipeline complexity.
 
 ### 4.2 Direct Function Call Coordination
 **THIN v2.0 Approach**: Standard Python patterns replace distributed complexity.
@@ -298,13 +300,17 @@ Constraints: `max_documents`, `max_frameworks_per_run`, **no** `custom_workflow`
 
 **Corpus v2.0**: Directory with `manifest.json` listing file names & metadata. System does **no discovery** outside manifest. Binary‑first principle: all files base64 encoded for LLM.
 
-### 4.4 Batch Planner & PreTest
-`PreTestAgent` samples corpus to estimate variance & token footprint → returns `recommended_runs_per_batch`.
-`BatchPlanner` (inside Orchestrator) uses model registry fields:
-- `optimal_batch_tokens` (≈ 70% of context window)
-- `max_documents_per_batch`
+### 4.4 Pre-flight Validation & Batch Planning
+**Offline Pre-flight Script** (`scripts/validate_experiment.py`) provides researchers with:
+- Corpus statistics (document count, token estimates, size distribution)
+- Framework validation (YAML parsing, schema compliance)
+- Batch planning recommendations (optimal document groupings)
+- Cost estimates (expected token usage × model pricing)
 
-Generates batch tasks: `{batch_id, text_uris[], framework_hashes[], runs=recommended}`.
+**Runtime Batch Planning** uses simple heuristics:
+- `optimal_batch_tokens` (≈ 70% of context window)  
+- `max_documents_per_batch`
+- Static configuration replaces dynamic PreTest complexity
 
 ### 4.5 AnalyseBatchAgent (Layer 1)
 Processes multiple documents + frameworks in one call.
@@ -355,13 +361,13 @@ Logged per run into `manifest.json`:
 - `cost_usd`
 
 ### 4.9 Acceptance Criteria
-1. **Full Pipeline:** PreTest → BatchAnalysis (≥1 batch) → CorpusSynthesis → Review → Moderation produces artefacts:
+1. **Full Pipeline:** BatchAnalysis → Synthesis → Report produces artifacts:
    - `analysis/*.json` with `batch_summary`
    - `synthesis/<RUN>.json`
    - `debate/<RUN>.html`
 2. **Cache Hit:** Re‑running identical experiment triggers zero Layer‑1 calls (verified via LiteLLM logs).
 3. **Cost Guard:** Live mode prompts for confirmation using batch token estimates.
-4. **Variance‑Driven Runs:** PreTestAgent sets `runs_per_batch`; system executes that many replicate analyses.
+4. **Streamlined Processing:** Simple batch planning with configurable statistical runs per experiment specification.
 5. **Review Integrity:** Moderator output cites batch summaries and statistics (traceable).
 6. **Metrics:** `cache_hit_ratio == 1.0` on second run; success rate ≥95% across test suite.
 
@@ -421,7 +427,7 @@ projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>/
 The architecture enforces strict constraints to ensure reliability:
 
 ### 8.1 Single Pipeline Path
-- **Fixed 5-Stage Sequence**: PreTest → BatchAnalysis → CorpusSynthesis → Review → Moderation
+- **Fixed 3-Stage Sequence**: BatchAnalysis → Synthesis → Report
 - **No Custom Workflows**: System rejects experiments with `custom_workflow` or `parallel_processing` fields
 - **Linear Progression**: Each stage completes before next stage begins
 - **Predictable Behavior**: Users know exactly what will happen for any valid experiment
@@ -472,7 +478,7 @@ $ pip install -r requirements-dev.txt  # TODO: Create dev requirements
 **Individual Agent Testing**:
 ```bash
 # Test single agent without full pipeline
-$ python3 scripts/test_agent.py --agent PreTestAgent --input test_corpus/
+$ python3 scripts/validate_experiment.py --experiment projects/test_experiment/
 
 # Mock LLM responses for fast iteration
 $ python3 scripts/test_agent.py --agent AnalyseBatchAgent --mock-responses
@@ -528,7 +534,7 @@ def check_llm_health() -> bool:
 - Track average task processing time per agent type
 
 **Performance Baselines**:
-- Stage completion times: PreTest ~30s, BatchAnalysis ~5min, Synthesis ~2min
+- Stage completion times: BatchAnalysis ~5min, Synthesis ~2min, Report ~1min
 - Queue processing rate: ~10 tasks/minute under normal load
 - Memory usage: <2GB RSS per agent process
 
