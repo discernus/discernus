@@ -4,50 +4,29 @@ SynthesisAgent - Thin wrapper for synthesis of multiple analysis results
 Reads Redis tasks, retrieves multiple analysis results, calls LLM with framework + analyses, stores final report.
 """
 
-import redis
 import json
-import yaml
 import sys
 import os
-import logging
 from typing import Dict, Any, List
 from litellm import completion
+
+# Import BaseAgent infrastructure
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'core'))
+from base_agent import BaseAgent, BaseAgentError, main_agent_entry_point
 
 # Add scripts directory to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
 from minio_client import get_artifact, put_artifact, ArtifactStorageError
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - SynthesisAgent - %(message)s')
-logger = logging.getLogger(__name__)
-
-# Redis configuration
-REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
-REDIS_PORT = 6379
-REDIS_DB = 0
-CONSUMER_GROUP = 'discernus'
-
-class SynthesisAgentError(Exception):
+class SynthesisAgentError(BaseAgentError):
     """Agent-specific exceptions"""
     pass
 
-class SynthesisAgent:
+class SynthesisAgent(BaseAgent):
     """Thin agent for synthesis of multiple analysis results"""
     
     def __init__(self):
-        self.redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
-        self.prompt_template = self._load_prompt_template()
-        
-    def _load_prompt_template(self) -> str:
-        """Load external prompt template - NO PARSING, just string formatting"""
-        try:
-            prompt_path = os.path.join(os.path.dirname(__file__), 'prompt.yaml')
-            with open(prompt_path, 'r') as f:
-                prompt_data = yaml.safe_load(f)
-            return prompt_data['template']
-        except Exception as e:
-            logger.error(f"Failed to load prompt template: {e}")
-            raise SynthesisAgentError(f"Prompt loading failed: {e}")
+        super().__init__('SynthesisAgent')
     
     def process_task(self, task_id: str) -> bool:
         """Process a single synthesis task - THIN implementation"""
@@ -56,18 +35,26 @@ class SynthesisAgent:
             messages = self.redis_client.xrange('tasks', task_id, task_id, count=1)
             
             if not messages:
-                logger.error(f"Task not found: {task_id}")
+                self._log_error(f"Task not found: {task_id}")
                 return False
                 
             # Extract task data
             msg_id, fields = messages[0]
             task_data = json.loads(fields[b'data'])
-            logger.info(f"Processing synthesis task: {task_id}")
+            self._log_info(f"Processing synthesis task: {task_id}")
             
             # Get artifacts (no parsing - just retrieval)
             analysis_hashes = task_data['analysis_hashes']
             framework_hash = task_data['framework_hash']
-            model = task_data.get('model', 'gemini-2.5-pro')  # Use Pro for synthesis by default
+            model = task_data.get('model', 'vertex_ai/gemini-2.5-pro')  # Use Pro for synthesis by default
+            
+            # Capture prompt DNA for provenance if run_folder provided
+            if 'run_folder' in task_data:
+                try:
+                    prompt_hash = self.capture_prompt_dna(task_data['run_folder'])
+                    self._log_info(f"Captured prompt DNA for run: {prompt_hash}")
+                except Exception as e:
+                    self._log_warning(f"Prompt DNA capture failed: {e}")
             
             # Strip sha256: prefix if present (orchestrator adds it, MinIO expects raw hash)
             if framework_hash.startswith('sha256:'):
@@ -80,8 +67,8 @@ class SynthesisAgent:
                 else:
                     clean_analysis_hashes.append(ah)
             
-            logger.info(f"Retrieving framework: {framework_hash[:12]}...")
-            logger.info(f"Retrieving {len(clean_analysis_hashes)} analysis results...")
+            self._log_info(f"Retrieving framework: {framework_hash[:12]}...")
+            self._log_info(f"Retrieving {len(clean_analysis_hashes)} analysis results...")
             
             # THIN: Get raw bytes, let LLM handle format detection
             framework_bytes = get_artifact(framework_hash)
@@ -89,7 +76,7 @@ class SynthesisAgent:
             # Get all analysis results
             analysis_results = []
             for i, analysis_hash in enumerate(clean_analysis_hashes):
-                logger.info(f"Retrieving analysis {i+1}/{len(clean_analysis_hashes)}: {analysis_hash[:12]}...")
+                self._log_info(f"Retrieving analysis {i+1}/{len(clean_analysis_hashes)}: {analysis_hash[:12]}...")
                 analysis_bytes = get_artifact(analysis_hash)
                 
                 # THIN: Pass raw bytes to LLM - no preprocessing/parsing
@@ -117,7 +104,7 @@ class SynthesisAgent:
             )
             
             # Call LLM (thin wrapper) with safety settings for political content
-            logger.info(f"Calling LLM ({model}) for synthesis of {len(analysis_results)} analyses...")
+            self._log_info(f"Calling LLM ({model}) for synthesis of {len(analysis_results)} analyses...")
             response = completion(
                 model=model,
                 messages=[{"role": "user", "content": prompt_text}],
@@ -133,53 +120,49 @@ class SynthesisAgent:
             # Store result (THIN - no processing/parsing)
             result_content = response.choices[0].message.content
             if not result_content or result_content.strip() == "":
-                logger.error(f"LLM returned empty response for synthesis task")
+                self._log_error(f"LLM returned empty response for synthesis task")
                 return False
-            result_hash = put_artifact(result_content.encode('utf-8'))
             
-            logger.info(f"Synthesis complete, final report stored: {result_hash}")
-            
-            # Signal completion to router
-            completion_data = {
-                'original_task_id': task_id,
-                'result_hash': result_hash,
-                'status': 'completed',
-                'model_used': model,
-                'analysis_hashes': analysis_hashes,
-                'framework_hash': framework_hash,
-                'type': 'synthesis_report'
+            # Create enhanced synthesis artifact with metadata
+            synthesis_artifact = {
+                'synthesis_result': result_content,
+                'synthesis_metadata': {
+                    'model_used': model,
+                    'analysis_hashes': analysis_hashes,
+                    'framework_hash': framework_hash,
+                    'agent_version': 'SynthesisAgent_v2.0_BaseAgent',
+                    'prompt_dna': getattr(self, 'prompt_hash', 'unknown'),
+                    'analysis_count': len(analysis_results)
+                }
             }
             
-            self.redis_client.xadd('tasks.done', {
-                'original_task_id': task_id,
-                'data': json.dumps(completion_data)
-            })
+            result_hash = put_artifact(json.dumps(synthesis_artifact, indent=2).encode('utf-8'))
+            self._log_info(f"Synthesis complete, final report stored: {result_hash}")
             
-            logger.info(f"Synthesis task completed: {task_id}")
+            # Signal completion using standardized pattern
+            # Set status key with expiration
+            self.redis_client.set(f"task:{task_id}:status", "done", ex=86400)
+            
+            # Store result hash for easy retrieval
+            self.redis_client.set(f"task:{task_id}:result_hash", result_hash, ex=86400)
+            
+            # Signal completion to orchestrator
+            run_id = task_data.get('run_id', task_id)
+            self.redis_client.lpush(f"run:{run_id}:done", task_id)
+            
+            self._log_info(f"Synthesis task completed: {task_id} (signaled to run:{run_id}:done)")
             return True
             
         except ArtifactStorageError as e:
-            logger.error(f"Artifact error processing task {task_id}: {e}")
+            self._log_error(f"Artifact error processing task {task_id}: {e}")
             return False
         except Exception as e:
-            logger.error(f"Error processing task {task_id}: {e}")
+            self._log_error(f"Error processing task {task_id}: {e}")
             return False
 
 def main():
-    """Agent entry point"""
-    if len(sys.argv) != 2:
-        print("Usage: main.py <task_id>")
-        sys.exit(1)
-    
-    task_id = sys.argv[1]
-    agent = SynthesisAgent()
-    
-    try:
-        success = agent.process_task(task_id)
-        sys.exit(0 if success else 1)
-    except Exception as e:
-        logger.error(f"Agent failed: {e}")
-        sys.exit(1)
+    """Agent entry point using BaseAgent infrastructure"""
+    main_agent_entry_point(SynthesisAgent, 'SynthesisAgent')
 
 if __name__ == '__main__':
     main() 

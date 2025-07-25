@@ -13,54 +13,33 @@ Based on empirical validation:
 - Architecture: Layer 1 agent in deterministic 3-layer synthesis pipeline
 """
 
-import redis
 import json
-import yaml
 import sys
 import os
-import logging
 from typing import Dict, Any, List
 from litellm import completion
 import base64
+
+# Import BaseAgent infrastructure
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'core'))
+from base_agent import BaseAgent, BaseAgentError, main_agent_entry_point
 
 # Add scripts directory to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
 from minio_client import get_artifact, put_artifact, ArtifactStorageError
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - AnalyseBatchAgent - %(message)s')
-logger = logging.getLogger(__name__)
-
-# Redis configuration
-REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
-REDIS_PORT = 6379
-REDIS_DB = 0
-CONSUMER_GROUP = 'discernus'
-
-class AnalyseBatchAgentError(Exception):
+class AnalyseBatchAgentError(BaseAgentError):
     """Agent-specific exceptions"""
     pass
 
-class AnalyseBatchAgent:
+class AnalyseBatchAgent(BaseAgent):
     """
     Tier 1 agent for multi-document, multi-framework batch analysis.
     Produces STRUCTURED DATA ONLY - no qualitative synthesis.
     """
     
     def __init__(self):
-        self.redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
-        self.prompt_template = self._load_prompt_template()
-        
-    def _load_prompt_template(self) -> str:
-        """Load external prompt template - THIN approach"""
-        try:
-            prompt_path = os.path.join(os.path.dirname(__file__), 'prompt.yaml')
-            with open(prompt_path, 'r') as f:
-                prompt_data = yaml.safe_load(f)
-            return prompt_data['template']
-        except Exception as e:
-            logger.error(f"Failed to load prompt template: {e}")
-            raise AnalyseBatchAgentError(f"Prompt loading failed: {e}")
+        super().__init__('AnalyseBatchAgent')
     
     def process_task(self, task_id: str) -> bool:
         """
@@ -74,13 +53,13 @@ class AnalyseBatchAgent:
             messages = self.redis_client.xrange('tasks', task_id, task_id, count=1)
             
             if not messages:
-                logger.error(f"Task not found: {task_id}")
+                self._log_error(f"Task not found: {task_id}")
                 return False
                 
             # Extract task data
             msg_id, fields = messages[0]
             task_data = json.loads(fields[b'data'])
-            logger.info(f"Processing AnalyseBatch task: {task_id}")
+            self._log_info(f"Processing AnalyseBatch task: {task_id}")
             
             # Validate required fields
             required_fields = ['batch_id', 'framework_hashes', 'document_hashes', 'model']
@@ -91,9 +70,17 @@ class AnalyseBatchAgent:
             batch_id = task_data['batch_id']
             framework_hashes = task_data['framework_hashes']
             document_hashes = task_data['document_hashes']
-            model = task_data.get('model', 'gemini-2.5-pro')
+            model = task_data.get('model', 'vertex_ai/gemini-2.5-pro')
             
-            logger.info(f"Batch {batch_id}: Processing {len(document_hashes)} documents with {len(framework_hashes)} frameworks")
+            self._log_info(f"Batch {batch_id}: Processing {len(document_hashes)} documents with {len(framework_hashes)} frameworks")
+            
+            # Capture prompt DNA for provenance if run_folder provided
+            if 'run_folder' in task_data:
+                try:
+                    prompt_hash = self.capture_prompt_dna(task_data['run_folder'])
+                    self._log_info(f"Captured prompt DNA for run: {prompt_hash}")
+                except Exception as e:
+                    self._log_warning(f"Prompt DNA capture failed: {e}")
             
             # Retrieve framework artifacts
             frameworks = []
@@ -108,7 +95,7 @@ class AnalyseBatchAgent:
                     'hash': clean_hash,
                     'content': framework_content
                 })
-                logger.info(f"Retrieved framework {i+1}: {clean_hash[:12]}...")
+                self._log_info(f"Retrieved framework {i+1}: {clean_hash[:12]}...")
             
             # Retrieve document artifacts  
             documents = []
@@ -120,7 +107,7 @@ class AnalyseBatchAgent:
                 # Binary-First Principle: All content as base64, LLM handles decoding
                 doc_content = base64.b64encode(doc_bytes).decode('utf-8')
                 doc_encoding = 'base64'
-                logger.info(f"Retrieved and encoded document {i+1} as base64: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
+                self._log_info(f"Retrieved and encoded document {i+1} as base64: {clean_hash[:12]}... ({len(doc_bytes)} bytes)")
 
                 documents.append({
                     'index': i + 1,
@@ -140,7 +127,7 @@ class AnalyseBatchAgent:
             )
             
             # Call LLM with safety settings for political content
-            logger.info(f"Calling LLM ({model}) for batch analysis...")
+            self._log_info(f"Calling LLM ({model}) for batch analysis...")
             response = completion(
                 model=model,
                 messages=[{"role": "user", "content": prompt_text}],
@@ -156,7 +143,7 @@ class AnalyseBatchAgent:
             # Store result - let the LLM return natural mixed content
             result_content = response.choices[0].message.content
             if not result_content or result_content.strip() == "":
-                logger.error(f"LLM returned empty response for batch {batch_id}")
+                self._log_error(f"LLM returned empty response for batch {batch_id}")
                 return False
             
             # Create structured artifact with the LLM's natural response
@@ -171,12 +158,13 @@ class AnalyseBatchAgent:
                     'num_documents': len(documents),
                     'framework_hashes': framework_hashes,
                     'document_hashes': document_hashes,
-                    'agent_version': 'AnalyseBatchAgent_v1.0'
+                    'agent_version': 'AnalyseBatchAgent_v2.0_BaseAgent',
+                    'prompt_dna': getattr(self, 'prompt_hash', 'unknown')
                 }
             }
             
             result_hash = put_artifact(json.dumps(batch_artifact, indent=2).encode('utf-8'))
-            logger.info(f"Batch analysis complete, result stored: {result_hash}")
+            self._log_info(f"Batch analysis complete, result stored: {result_hash}")
             
             # Signal completion using architect-specified Redis keys/lists pattern
             # Set status key with expiration
@@ -189,14 +177,14 @@ class AnalyseBatchAgent:
             run_id = task_data.get('run_id', task_id)
             self.redis_client.lpush(f"run:{run_id}:done", task_id)
             
-            logger.info(f"AnalyseBatch task completed: {task_id} (signaled to run:{run_id}:done)")
+            self._log_info(f"AnalyseBatch task completed: {task_id} (signaled to run:{run_id}:done)")
             return True
             
         except ArtifactStorageError as e:
-            logger.error(f"Artifact error processing task {task_id}: {e}")
+            self._log_error(f"Artifact error processing task {task_id}: {e}")
             return False
         except Exception as e:
-            logger.error(f"Error processing AnalyseBatch task {task_id}: {e}")
+            self._log_error(f"Error processing AnalyseBatch task {task_id}: {e}")
             return False
     
     def _format_frameworks_for_prompt(self, frameworks: List[Dict]) -> str:
@@ -212,27 +200,10 @@ class AnalyseBatchAgent:
         for document in documents:
             formatted.append(f"=== DOCUMENT {document['index']} (base64 encoded) ===\n{document['content']}\n")
         return "\n".join(formatted)
-    
-    def _get_timestamp(self) -> str:
-        """Get ISO timestamp"""
-        from datetime import datetime
-        return datetime.now().isoformat()
 
 def main():
-    """Agent entry point"""
-    if len(sys.argv) != 2:
-        print("Usage: main.py <task_id>")
-        sys.exit(1)
-    
-    task_id = sys.argv[1]
-    agent = AnalyseBatchAgent()
-    
-    try:
-        success = agent.process_task(task_id)
-        sys.exit(0 if success else 1)
-    except Exception as e:
-        logger.error(f"AnalyseBatchAgent failed: {e}")
-        sys.exit(1)
+    """Agent entry point using BaseAgent infrastructure"""
+    main_agent_entry_point(AnalyseBatchAgent, 'AnalyseBatchAgent')
 
 if __name__ == '__main__':
     main()

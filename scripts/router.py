@@ -46,6 +46,8 @@ AGENT_SCRIPTS = {
     'execute_plan': [PYTHON_EXECUTABLE, 'scripts/execution_bridge.py'],
     # Phase 3 Quality Assurance agents
     'review': [PYTHON_EXECUTABLE, 'agents/ReviewerAgent/main.py'],
+    # Alpha System Components - BaseAgent standardized
+    'report': [PYTHON_EXECUTABLE, 'agents/ReportAgent/main.py'],
 }
 
 class RouterError(Exception):
