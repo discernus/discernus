@@ -1,5 +1,0 @@
-# Exclude all deprecated content from Cursor indexing
-# This prevents obsolete documentation from interfering with active development
-
-# Exclude everything in deprecated directory
-** 

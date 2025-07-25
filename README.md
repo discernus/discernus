@@ -4,27 +4,11 @@
 
 ## 📚 Documentation
 
-**Complete documentation is available at**: [`docs/README.md`](docs/README.md)
-
-The docs directory contains comprehensive guides for:
-- **New Users**: Getting started with the platform
-- **Developers**: Architecture and technical implementation  
-- **Researchers**: Framework integration and academic workflows
-- **Framework Developers**: Extension development and community standards
+tbd
 
 ## 🚀 Quick Start
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Execute analysis with THIN Experiment Lifecycle (includes validation gauntlet)
-python3 discernus_cli.py execute ./my_project/experiment.md
-
-# Or validate first, then execute
-python3 discernus_cli.py validate ./my_project/experiment.md
-python3 discernus_cli.py execute ./my_project/experiment.md
-```
+tbd
 
 ## 🏗️ THIN Architecture Principles
 
@@ -48,51 +32,15 @@ python3 discernus_cli.py execute ./my_project/experiment.md
 
 ## 📋 Commands
 
-```bash
-# Execute experiment with THIN Experiment Lifecycle (validation gauntlet + enhancement + execution)
-python3 discernus_cli.py execute ./my_project/experiment.md
-
-# Validate project structure and specifications only
-python3 discernus_cli.py validate ./my_project/experiment.md
-
-# Resume interrupted experiment with intelligent state analysis (Issue #132)
-python3 discernus_cli.py resume ./my_project
-
-# Resume with legacy direct continuation
-python3 discernus_cli.py resume ./my_project --legacy
-
-# List available analytical frameworks
-python3 discernus_cli.py list-frameworks
-
-# Show system information and THIN compliance
-python3 discernus_cli.py info --check-thin
-```
+tbd
 
 ## 🛠️ Development Tools
 
-```bash
-# Check environment setup
-make check
+tbd
 
-# Run test suite  
-make test
-
-# Test models directly (prompt engineering)
-make harness-simple MODEL="vertex_ai/gemini-2.5-flash" PROMPT="Test prompt"
-
-# List available models
-make harness-list
-```
-
-*See [`discernus/tests/README.md`](discernus/tests/README.md) for comprehensive testing documentation and [`scripts/README.md`](scripts/README.md) for development scripts.*
 
 ## 🔗 Key Resources
 
-- **[Complete Documentation](docs/README.md)** - Master index and user guides
-- **[Agent Briefing](docs/AGENT_BRIEFING.md)** - Essential principles for contributors
-- **[Strategic Vision](docs/DISCERNUS_STRATEGIC_VISION.md)** - Mission and use cases
-- **[Quick Start Guide](docs/QUICK_START_GUIDE.md)** - Detailed getting started guide
-
+tbd
 ---
 
-*For complete documentation, examples, and advanced usage, see [`docs/README.md`](docs/README.md)*

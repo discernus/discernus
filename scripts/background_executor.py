@@ -16,6 +16,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 
+# Get the current Python executable (works in any environment)
+PYTHON_EXECUTABLE = sys.executable
+
 # Configure logging
 log_dir = Path("logs/background_executor")
 log_dir.mkdir(parents=True, exist_ok=True)
@@ -186,7 +189,7 @@ class BackgroundExecutor:
             
         # Start Router
         logger.info("Starting Router...")
-        self.start_service("router", "python3 scripts/router.py", use_venv=True)
+        self.start_service("router", f"{PYTHON_EXECUTABLE} scripts/router.py", use_venv=False)
         time.sleep(2)
         
         # Verify all services
@@ -209,7 +212,7 @@ class BackgroundExecutor:
                         
                         # Restart based on service type
                         if name == "router":
-                            self.start_service("router", "python3 scripts/router.py", use_venv=True)
+                            self.start_service("router", f"{PYTHON_EXECUTABLE} scripts/router.py", use_venv=False)
                         elif name == "redis":
                             self.start_service("redis", "redis-server", use_venv=False)
                         elif name == "minio":
@@ -229,7 +232,7 @@ class BackgroundExecutor:
         logger.info(f"Running test: {test_name}")
         
         if test_name == "phase3_pipeline":
-            command = "python3 scripts/phase3_test_runner.py --test full_pipeline"
+            command = f"{PYTHON_EXECUTABLE} scripts/phase3_test_runner.py --test full_pipeline"
         else:
             logger.error(f"Unknown test: {test_name}")
             return False

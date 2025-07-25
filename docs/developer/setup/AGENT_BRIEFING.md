@@ -42,57 +42,6 @@ make install && make check
 
 **Why This Matters**: Cursor agents often waste 10-20+ tool calls debugging environment issues. The `make check` command validates your setup in seconds and provides clear fix instructions.
 
-### ⚡ Quick Test (30 seconds)
-```bash
-# Use Make (recommended - handles venv automatically):
-make test
-
-# Or manual (ALWAYS use this pattern):
-source venv/bin/activate && python3 discernus/tests/quick_test.py
-```
-**If this fails**: There's a fundamental problem. Check environment, imports, and basic setup.
-
-### ✅ Simple Working Tests (3 minutes)
-```bash
-# Comprehensive test suite:
-make test
-
-# Or manual testing:
-source venv/bin/activate && python3 discernus/tests/simple_working_tests.py
-source venv/bin/activate && python3 -m unittest discernus.tests.simple_working_tests -v
-```
-**If this fails**: Check the specific test failure and fix the underlying issue.
-
-### 🔍 Environment Debugging
-```bash
-# Environment check utility:
-source venv/bin/activate && python3 -c "from discernus.tests import print_test_environment; print_test_environment()"
-
-# Or use the comprehensive checker:
-source venv/bin/activate && python3 scripts/check_environment.py
-```
-**Use this**: To verify Python version, virtual environment, and dependencies.
-
-### 🎯 Model Testing (Quick Validation)
-```bash
-# Test any model quickly:
-make harness-simple MODEL="vertex_ai/gemini-2.5-flash" PROMPT="What is 2+2?"
-
-# List available models:
-make harness-list
-
-# See all Make commands:
-make help
-```
-
-### ⚠️ Legacy Tests (Use with Caution)
-```bash
-# These tests may be broken due to complex mock setups:
-python3 discernus/tests/comprehensive_test_suite.py
-python3 discernus/tests/agent_isolation_test_framework.py
-python3 discernus/tests/end_to_end_workflow_test.py
-```
-**If these fail**: It's expected behavior. Use simple working tests instead.
 
 ## 🏗️ THIN Architecture Principles
 
@@ -127,62 +76,6 @@ Before writing any code, ask yourself:
 If you're building intelligence, use an LLM. If you're building infrastructure, use minimal code.
 
 **Framework-Agnostic Test**: Your code should work equally well with CFF, PDAF, sentiment analysis, or any other framework without modification.
-
-## Platform Architecture Overview
-
-**Core Components**:
-- **WorkflowOrchestrator** (`discernus/orchestration/workflow_orchestrator.py`) - Main execution engine
-- **Agent Registry** (`discernus/core/agent_registry.yaml`) - Agent discovery and orchestration
-- **Model Registry** (`discernus/gateway/model_registry.py`) - LLM selection and fallback
-- **LLM Gateway** (`discernus/gateway/llm_gateway.py`) - Provider abstraction
-- **Project Chronolog** (`discernus/core/project_chronolog.py`) - Academic provenance
-- **Secure Code Executor** (`discernus/core/secure_code_executor.py`) - Mathematical reliability
-
-**Key Principle**: The system is **framework-agnostic, corpus-agnostic, and domain-agnostic**. Political science is just our lead use case.
-
-**Critical Architecture Rule**: Agents must work with ANY compliant framework specification. Never hardcode assumptions about field names like 'scores', 'worldview', or 'analysis_text'.
-
-## Testing Strategy for Development
-
-### 1. Test-Driven Development Flow
-```bash
-# Step 1: Verify baseline works
-python3 discernus/tests/quick_test.py
-
-# Step 2: Write your code/changes
-
-# Step 3: Test your changes
-python3 discernus/tests/simple_working_tests.py
-
-# Step 4: Run specific tests if needed
-python3 -m unittest discernus.tests.simple_working_tests.TestYourSpecificTest -v
-```
-
-### 2. When Adding New Functionality
-1. **Write a simple test first** in `simple_working_tests.py`
-2. **Use standard unittest patterns** (not complex mock setups)
-3. **Test one thing at a time** (clear, focused tests)
-4. **Use minimal mock data** (simple, obvious responses)
-
-### 3. When Debugging
-1. **Start with quick test** to verify basic functionality
-2. **Check environment** if imports fail
-3. **Use simple working tests** for comprehensive validation
-4. **Avoid legacy tests** unless specifically needed
-
-## Drupal-Style Ecosystem Strategy
-
-**CORE** (Tightly Controlled):
-- Agent registry system
-- Model registry and LLM gateway
-- Orchestration engine
-- Academic provenance system
-- Framework loader interface
-
-**MODULES** (Open Ecosystem):
-- Framework implementations (PDAF, CFF, sentiment analysis)
-- Domain-specific tools (political science, corporate communications)
-- Integration modules (external APIs, visualization)
 
 ## Common Pitfalls to Avoid
 

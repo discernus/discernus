@@ -81,12 +81,12 @@ corpus: "corpus"
 
 workflow:
   - agent: "AnalysisAgent"
-    model: "vertex_ai/gemini-2.5-flash"
+    model: "vertex_ai/gemini-2.5-pro"
     runs: 1
   - agent: "DataExtractionAgent" 
-    model: "vertex_ai/gemini-2.5-flash"
+    model: "vertex_ai/gemini-2.5-pro"
   - agent: "CalculationAgent"
-    model: "vertex_ai/gemini-2.5-flash"
+    model: "vertex_ai/gemini-2.5-pro"
   - agent: "SynthesisAgent"
     model: "vertex_ai/gemini-2.5-pro"
     runs: 1
@@ -134,9 +134,9 @@ workflow:
             "framework_file": "framework.md",
             "corpus_path": "corpus",
             "workflow": [
-                {"agent": "AnalysisAgent", "model": "vertex_ai/gemini-2.5-flash", "runs": 1},
-                {"agent": "DataExtractionAgent", "model": "vertex_ai/gemini-2.5-flash"},
-                {"agent": "CalculationAgent", "model": "vertex_ai/gemini-2.5-flash"},
+                {"agent": "AnalysisAgent", "model": "vertex_ai/gemini-2.5-pro", "runs": 1},
+                {"agent": "DataExtractionAgent", "model": "vertex_ai/gemini-2.5-pro"},
+                {"agent": "CalculationAgent", "model": "vertex_ai/gemini-2.5-pro"},
                 {"agent": "SynthesisAgent", "model": "vertex_ai/gemini-2.5-pro", "runs": 1}
             ],
             "analysis_results": {"test": "completed analysis data"}
@@ -283,9 +283,9 @@ corpus: "corpus"
 
 workflow:
   - agent: "AnalysisAgent"
-    model: "vertex_ai/gemini-2.5-flash"
+    model: "vertex_ai/gemini-2.5-pro"
   - agent: "DataExtractionAgent"
-    model: "vertex_ai/gemini-2.5-flash"
+    model: "vertex_ai/gemini-2.5-pro"
   - agent: "SynthesisAgent"
     model: "vertex_ai/gemini-2.5-pro"
 ```
@@ -336,8 +336,8 @@ workflow:
             "framework_file": "framework.md",
             "corpus_path": "corpus",
             "workflow": [
-                {"agent": "AnalysisAgent", "model": "vertex_ai/gemini-2.5-flash"},
-                {"agent": "DataExtractionAgent", "model": "vertex_ai/gemini-2.5-flash"},
+                {"agent": "AnalysisAgent", "model": "vertex_ai/gemini-2.5-pro"},
+                {"agent": "DataExtractionAgent", "model": "vertex_ai/gemini-2.5-pro"},
                 {"agent": "SynthesisAgent", "model": "vertex_ai/gemini-2.5-pro"}
             ],
             "analysis_results": {"integration": "test analysis data"}
@@ -400,8 +400,8 @@ workflow:
         """Integration Test: Workflow change detection - no changes"""
         state_data = {
             "workflow": [
-                {"agent": "AnalysisAgent", "model": "vertex_ai/gemini-2.5-flash"},
-                {"agent": "DataExtractionAgent", "model": "vertex_ai/gemini-2.5-flash"},
+                {"agent": "AnalysisAgent", "model": "vertex_ai/gemini-2.5-pro"},
+                {"agent": "DataExtractionAgent", "model": "vertex_ai/gemini-2.5-pro"},
                 {"agent": "SynthesisAgent", "model": "vertex_ai/gemini-2.5-pro"}
             ]
         }
@@ -427,9 +427,9 @@ corpus: "corpus"
 
 workflow:
   - agent: "EnhancedAnalysisAgent"  # Changed from AnalysisAgent
-    model: "vertex_ai/gemini-2.5-flash"
+    model: "vertex_ai/gemini-2.5-pro"
   - agent: "DataExtractionAgent"
-    model: "vertex_ai/gemini-2.5-flash"
+    model: "vertex_ai/gemini-2.5-pro"
   - agent: "SynthesisAgent"
     model: "vertex_ai/gemini-2.5-pro"
 ```
@@ -438,8 +438,8 @@ workflow:
         
         state_data = {
             "workflow": [
-                {"agent": "AnalysisAgent", "model": "vertex_ai/gemini-2.5-flash"},  # Original agent
-                {"agent": "DataExtractionAgent", "model": "vertex_ai/gemini-2.5-flash"},
+                {"agent": "AnalysisAgent", "model": "vertex_ai/gemini-2.5-pro"},  # Original agent
+                {"agent": "DataExtractionAgent", "model": "vertex_ai/gemini-2.5-pro"},
                 {"agent": "SynthesisAgent", "model": "vertex_ai/gemini-2.5-pro"}
             ]
         }

@@ -81,7 +81,7 @@ class IntelligentIntegrationTests(unittest.TestCase):
         # - Single provider (Google/Vertex AI)
         # - Non-thinking mode for fast, straightforward responses
         
-        primary_model = "vertex_ai/gemini-2.5-flash"
+        primary_model = "vertex_ai/gemini-2.5-pro"
         
         if cls._is_model_available(primary_model):
             return [primary_model]
@@ -395,7 +395,7 @@ class CostEffectiveIntelligenceTests(unittest.TestCase):
         """Set up for cost-effective testing."""
         # Prioritize Vertex AI (standardized) over Anthropic
         if os.getenv('GOOGLE_APPLICATION_CREDENTIALS'):
-            self.test_model = "vertex_ai/gemini-2.5-flash"
+            self.test_model = "vertex_ai/gemini-2.5-pro"
         elif os.getenv('ANTHROPIC_API_KEY'):
             self.test_model = "anthropic/claude-3-haiku-20240307"
         else:

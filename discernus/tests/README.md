@@ -208,7 +208,7 @@ The prompt engineering harness is a flexible tool for testing specific models wi
 make harness-list
 
 # Test a simple prompt with any model
-make harness-simple MODEL="vertex_ai/gemini-2.5-flash" PROMPT="What is 2+2?"
+make harness-simple MODEL="vertex_ai/gemini-2.5-pro" PROMPT="What is 2+2?"
 
 # Test a prompt from file
 make harness-file MODEL="anthropic/claude-3-5-sonnet-20240620" FILE="test_prompt.txt"
@@ -258,9 +258,9 @@ source venv/bin/activate && python3 scripts/prompt_engineering_harness.py \
 ```
 ✅ Using direct prompt
 
-🚀 Testing Model: vertex_ai/gemini-2.5-flash
+🚀 Testing Model: vertex_ai/gemini-2.5-pro
 ================================================================================
-🎯 Making direct call to: vertex_ai/gemini-2.5-flash
+🎯 Making direct call to: vertex_ai/gemini-2.5-pro
 📝 System prompt: You are a helpful assistant.
 💬 User prompt: What is the capital of Japan? Answer in one sentence.
 ================================================================================
@@ -276,7 +276,7 @@ source venv/bin/activate && python3 scripts/prompt_engineering_harness.py \
 The capital of Japan is Tokyo.
 ----------------------------------------
 
-🏁 Test completed for model: vertex_ai/gemini-2.5-flash
+🏁 Test completed for model: vertex_ai/gemini-2.5-pro
 ```
 
 This tool is essential for development workflows and is integrated into the standardized Make commands for consistent environment handling.

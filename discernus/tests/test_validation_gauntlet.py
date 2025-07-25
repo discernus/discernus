@@ -68,7 +68,7 @@ hypothesis: This is a test hypothesis
 framework_file: framework.md
 corpus: corpus/
 models:
-  - "vertex_ai/gemini-2.5-flash"
+  - "vertex_ai/gemini-2.5-pro"
 runs_per_model: 1
 workflow:
 {self._format_workflow_yaml(workflow)}

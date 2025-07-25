@@ -45,6 +45,36 @@ def analyze_text(text: str, framework: str) -> dict:
     return {'processed_score': score * 1.5}  # Software intelligence!
 ```
 
+### ✅ THIN Pattern: Environment-Agnostic Python Execution
+```python
+# GOOD - Portable across environments
+import sys
+PYTHON_EXECUTABLE = sys.executable
+
+AGENT_SCRIPTS = {
+    'pre_test': [PYTHON_EXECUTABLE, 'agents/PreTestAgent/main.py'],
+    'analyse_batch': [PYTHON_EXECUTABLE, 'agents/AnalyseBatchAgent/main.py'],
+}
+
+# Works in venv, conda, system Python, Windows, etc.
+subprocess.run([PYTHON_EXECUTABLE, 'some_script.py'])
+```
+
+### 🚫 THICK Anti-Pattern: Hardcoded Environment Paths
+```python
+# BAD - Breaks in different environments
+AGENT_SCRIPTS = {
+    'pre_test': ['venv/bin/python3', 'agents/PreTestAgent/main.py'],  # macOS only
+    'analyse_batch': ['python3', 'agents/AnalyseBatchAgent/main.py'], # System python
+}
+
+# BAD - Platform-specific paths
+command = "venv/bin/python3 scripts/router.py"  # Won't work on Windows
+command = "python3 scripts/test_runner.py"      # Wrong environment
+```
+
+**🎯 Architectural Principle**: Never hardcode environment-specific paths in business logic. Use `sys.executable` to automatically detect the current Python environment.
+
 ### ✅ THIN Pattern: Agent Registry Usage
 ```python
 # GOOD - Dynamic agent discovery
@@ -76,34 +106,6 @@ def spawn_analysis_agent(framework: str, text: str):
 
 ## 🔧 Core Infrastructure Components
 
-### Agent Registry (`discernus/core/agent_registry.yaml`)
-**Purpose**: Dynamic agent discovery and orchestration
-**Usage**: Always use registry for agent spawning, never hardcode
-
-```yaml
-# Example agent definition
-- name: StatisticalAnalysisAgent
-  module: "discernus.agents.statistical_analysis_agent"
-  class: "StatisticalAnalysisAgent"
-  execution_method: "calculate_statistics"
-  inputs:
-    - analysis_results: "Raw analysis results"
-  outputs:
-    - stats_file_path: "Path to statistical results"
-```
-
-### Model Registry (`discernus/gateway/model_registry.py`)
-**Purpose**: Intelligent model selection and fallback
-**Usage**: Never hardcode model names, always use registry
-
-```python
-# GOOD - Registry-based model selection
-model_name = model_registry.get_model_for_task('synthesis')
-response = llm_gateway.call(prompt, model_name)
-
-# BAD - Hardcoded model names
-response = llm_gateway.call(prompt, 'gpt-4')
-```
 
 ### LLM Gateway (`discernus/gateway/llm_gateway.py`)
 **Purpose**: Provider abstraction with parameter management
