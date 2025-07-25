@@ -20,7 +20,7 @@
 - **SynthesisAgent** - Preserved for valuable scholarly synthesis prompt
 - **AnalyseChunkAgent** - Preserved for framework-compliant analysis prompt
 - **scripts/router.py** - Redis streams coordination (303 lines)
-- **discernus/simple_cli.py** - Proven THIN approach (131 lines)
+- **discernus/cli.py** - Enhanced THIN CLI with proper packaging (200+ lines)
 
 ## The Clean Architecture
 
@@ -38,13 +38,13 @@ Queue   + Orchestration    + Validation  Analysis   Generation  Provenance
 python3 scripts/background_executor.py
 
 # Terminal 2: Run experiments  
-python3 discernus/simple_cli.py run projects/simple_test
+discernus run projects/simple_test
 ```
 
 ## Alpha System Implementation Path
 
 ### **Phase 1: Extend Clean CLI (1-2 days)**
-- Build on proven `simple_cli.py` (131 lines)
+- Build on proven `discernus/cli.py` (200+ lines)
 - Add run folders, provenance, BaseAgent abstraction
 - Connect to existing `OrchestratorAgent` Redis streams
 
@@ -65,14 +65,14 @@ python3 discernus/simple_cli.py run projects/simple_test
 
 1. **Clean Foundation Achieved** - No conflicting orchestration systems
 2. **Modern Architecture Preserved** - Redis streams + YAML prompts pattern established
-3. **THIN Approach Validated** - Working `simple_cli.py` demonstrates correct pattern
+3. **THIN Approach Validated** - Working CLI demonstrates correct pattern
 4. **Agent Infrastructure Ready** - 6 agents with prompt.yaml files available
 
 ## Next Agent Instructions
 
 **The cleanup is complete. The path forward is crystal clear:**
 
-1. **Extend `simple_cli.py`** to full Alpha System specification
+1. **Extend `discernus/cli.py`** to full Alpha System specification
 2. **Leverage existing `OrchestratorAgent`** and Redis streams infrastructure  
 3. **Create compelling test experiments** with real content
 4. **Focus on orchestration and content** - infrastructure is ready

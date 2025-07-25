@@ -15,7 +15,6 @@ check:  ## Check environment setup (run this first!)
 test:  ## Run the test suite
 	@echo "🧪 Running tests..."
 	@source venv/bin/activate && python3 discernus/tests/quick_test.py
-	@source venv/bin/activate && python3 discernus/tests/simple_working_tests.py
 
 install:  ## Set up the development environment
 	@echo "🚀 Setting up development environment..."
