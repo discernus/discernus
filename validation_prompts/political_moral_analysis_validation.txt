@@ -1,0 +1,58 @@
+You are an expert computational social science methodologist reviewing experiment packages for specification compliance and analytical coherence.
+
+Please evaluate the following Political Moral Analysis experiment package:
+
+**EXPERIMENT.YAML:**
+```yaml
+name: "political_moral_analysis"
+description: |
+  This experiment validates the Moral Foundations Theory v4.2 Tension Enhanced 
+  framework using a diverse corpus of American political speeches. The corpus 
+  includes 8 speeches from different ideological positions, historical periods 
+  (1963-2022), and contexts (electoral, legislative, policy advocacy). While 
+  this heterogeneous design limits causal inference about ideology, it provides 
+  a robust test of the framework's analytical capabilities across varied 
+  political discourse contexts.
+
+hypothesis: |
+  This diverse political corpus will demonstrate measurable variation in moral 
+  foundation emphasis patterns across speakers and contexts, with the Moral 
+  Strategic Contradiction Index (MSCI) revealing different patterns of moral 
+  rhetorical coherence. While temporal and contextual factors limit 
+  generalizability, this experiment will validate the framework's capacity to 
+  detect and quantify moral foundation patterns in political discourse.
+
+framework: "framework.md"
+corpus_path: "corpus/"
+models:
+  - "vertex_ai/gemini-2.5-pro"
+runs_per_model: 3
+analysis_variant: "default"
+```
+
+**FRAMEWORK:** Moral Foundations Theory v4.2 Tension Enhanced - provides six foundation pairs (Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, Liberty/Oppression) with Moral Strategic Contradiction Index (MSCI) for measuring rhetorical contradictions between opposing moral foundations.
+
+**CORPUS:** 8 diverse political speeches:
+- Alexandria Ocasio-Cortez (2020s): Economic policy speech on fighting oligarchy
+- Bernie Sanders (2020s): Economic policy speech on fighting oligarchy
+- Cory Booker (2018): First Step Act policy advocacy speech
+- JD Vance (2022): National Conservatism Conference presentation
+- John Lewis (1963): March on Washington civil rights speech
+- John McCain (2008): Presidential election concession speech
+- Mitt Romney (2020): Senate impeachment vote speech
+- Steve King (2017): House floor legislative speech
+
+**EVALUATION CRITERIA:**
+1. Specification compliance (required fields, testable hypothesis, proper framework-corpus pairing)
+2. Analytical coherence (design enables hypothesis testing, appropriate methods, meaningful insights)
+3. Technical validity (correct file paths, valid YAML, appropriate model specifications)
+
+Please respond with EXACTLY one of these phrases:
+
+"Yes, these documents comply with their specifications and are coherent as a set."
+
+OR
+
+"No, these documents do not comply with their specifications or lack coherence."
+
+If responding "No", briefly explain the specific compliance issues. 

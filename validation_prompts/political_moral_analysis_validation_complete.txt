@@ -1,0 +1,202 @@
+You are an expert computational social science methodologist reviewing experiment packages for specification compliance and analytical coherence.
+
+**IMPORTANT CONTEXT**: It is currently July 2025. All referenced political speeches exist as real documents, including recent speeches that may not be in your training data.
+
+**YOUR TASK**: Validate the following Political Moral Analysis experiment package against the complete Discernus specifications provided below.
+
+==================================================
+DISCERNUS SPECIFICATIONS FOR VALIDATION
+==================================================
+
+# Experiment Specification (v2.0)
+
+**Version**: 2.0  
+**Status**: Active
+
+The `experiment.md` file is a simple, human-readable YAML file that defines the complete scope of an analysis run. It acts as the **single source of truth** for experiment configuration, telling the Discernus system what framework to use, what corpus to analyze, and how to run it.
+
+## 1. File Structure
+
+The experiment file MUST be a valid YAML file named `experiment.yaml` (or `experiment.md` with YAML content) containing the experiment configuration.
+
+## 2. Recommended Project Structure
+
+The system uses a **single-source-of-truth** architecture where the experiment file defines all paths and configuration:
+
+```
+my_research_project/
+├── framework.md                  # Analytical framework (referenced by experiment)
+├── experiment.yaml               # Single source of truth for experiment config
+└── corpus/                       # Corpus directory (referenced by experiment)
+    ├── document_01.txt
+    ├── document_02.txt
+    └── ...
+```
+
+## 3. Required Fields (CLI Implementation)
+
+- **`name`**: Unique identifier for the experiment (snake_case recommended)
+- **`description`**: Human-readable purpose statement
+- **`hypothesis`**: Primary falsifiable hypothesis being tested  
+- **`framework`**: Relative path to the framework specification file
+- **`corpus_path`**: Relative path to the corpus directory
+- **`models`**: List of LiteLLM-compatible model identifiers
+- **`runs_per_model`**: Number of analysis runs per model (integer ≥ 1)
+
+### Optional Fields
+
+- **`analysis_variant`**: Framework variant to use (defaults to 'default')
+- **`hypotheses`**: Additional numbered hypotheses for complex experiments
+
+### Path Resolution
+
+All paths (`framework`, `corpus_path`) are resolved relative to the experiment file's directory.
+
+---
+
+# Framework Specification (v4.0)
+
+**Version**: 4.0  
+**Status**: Active
+
+A Discernus framework is a self-contained markdown file that embodies the core principles of computational social science research. It serves as both human-readable methodology and machine-executable instructions, ensuring perfect coherence between theory and practice.
+
+## Core Principles
+
+### 1. The THIN Philosophy
+
+**Principle**: LLMs do intelligence, software does infrastructure.
+
+**In Practice**: Your framework documentation should contain rich methodological intelligence that guides human researchers. Your YAML prompts should contain that same intelligence translated into natural conversational instructions for LLMs.
+
+### 2. Documentation-Execution Coherence
+
+**Principle**: What you promise in documentation must exactly match what you deliver in execution.
+
+### 3. Human Expert Simulation
+
+**Principle**: Framework prompts should feel like natural conversations with domain experts, not technical API calls.
+
+### 4. Epistemic Integrity
+
+**Principle**: Every analytical decision must be traceable, auditable, and replicable.
+
+## Technical Implementation
+
+### File Structure
+
+A framework file MUST be a standard Markdown (`.md`) file containing:
+
+1. **The Narrative (Human-Focused)**: Main body explaining theory, objectives, methodology
+2. **The Appendix (Machine-Focused)**: Single collapsible appendix with JSON configuration
+
+### Required JSON Schema
+
+```json
+{
+  "name": "unique_framework_name",
+  "version": "v4.0",
+  "display_name": "Human-Readable Framework Name",
+  "analysis_variants": {
+    "default": {
+      "description": "Complete implementation of the framework methodology",
+      "analysis_prompt": "Your five-phase prompt that implements ALL methodology requirements"
+    }
+  },
+  "output_contract": {
+    "schema": {
+      "worldview": "string",
+      "scores": "object",
+      "evidence": "object",
+      "confidence": "object",
+      "reasoning": "object"
+    },
+    "instructions": "IMPORTANT: Your response MUST be a single, valid JSON object and nothing else."
+  }
+}
+```
+
+---
+
+# Corpus Specification (v2.0)
+
+**Version**: 2.0
+**Status**: Active
+**Principle**: The integrity of a computational analysis depends entirely on the integrity of the input corpus.
+
+## The "Narrative + Appendix" Architecture
+
+A Discernus corpus directory MUST contain a `corpus.md` file with:
+
+1. **The Narrative (Human-Focused)**: Documents collection methodology, ethical considerations, sanitization process
+2. **The Appendix (Machine-Focused)**: Single JSON object with file manifest and speaker mapping
+
+==================================================
+EXPERIMENT PACKAGE TO VALIDATE
+==================================================
+
+**EXPERIMENT.YAML:**
+```yaml
+name: "political_moral_analysis"
+description: |
+  This experiment validates the Moral Foundations Theory v4.2 Tension Enhanced 
+  framework using a diverse corpus of American political speeches. The corpus 
+  includes 8 speeches from different ideological positions, historical periods 
+  (1963-2022), and contexts (electoral, legislative, policy advocacy). While 
+  this heterogeneous design limits causal inference about ideology, it provides 
+  a robust test of the framework's analytical capabilities across varied 
+  political discourse contexts.
+
+hypothesis: |
+  This diverse political corpus will demonstrate measurable variation in moral 
+  foundation emphasis patterns across speakers and contexts, with the Moral 
+  Strategic Contradiction Index (MSCI) revealing different patterns of moral 
+  rhetorical coherence. While temporal and contextual factors limit 
+  generalizability, this experiment will validate the framework's capacity to 
+  detect and quantify moral foundation patterns in political discourse.
+
+framework: "framework.md"
+corpus_path: "corpus/"
+models:
+  - "vertex_ai/gemini-2.5-pro"
+runs_per_model: 3
+analysis_variant: "default"
+```
+
+**FRAMEWORK**: Moral Foundations Theory v4.2 Tension Enhanced - provides six foundation pairs (Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, Liberty/Oppression) with Moral Strategic Contradiction Index (MSCI) for measuring rhetorical contradictions between opposing moral foundations.
+
+**CORPUS**: 8 diverse political speeches:
+- Alexandria Ocasio-Cortez (2020s): Economic policy speech on fighting oligarchy
+- Bernie Sanders (2020s): Economic policy speech on fighting oligarchy
+- Cory Booker (2018): First Step Act policy advocacy speech
+- JD Vance (2022): National Conservatism Conference presentation
+- John Lewis (1963): March on Washington civil rights speech
+- John McCain (2008): Presidential election concession speech
+- Mitt Romney (2020): Senate impeachment vote speech
+- Steve King (2017): House floor legislative speech
+
+==================================================
+VALIDATION TASK
+==================================================
+
+Please evaluate this experiment package against the complete Discernus specifications above. Check:
+
+1. **Experiment Specification v2.0 Compliance**: Does the experiment.yaml contain all required fields with proper data types and structure?
+
+2. **Framework Specification v4.0 Compliance**: Does the framework description indicate adherence to THIN principles, documentation-execution coherence, and proper technical implementation?
+
+3. **Corpus Specification v2.0 Compliance**: Does the corpus appear to follow proper corpus organization principles?
+
+4. **Analytical Coherence**: Does the experiment design enable meaningful testing of the stated hypothesis using appropriate methods?
+
+5. **Technical Validity**: Are file paths, model specifications, and configuration elements correct?
+
+Please respond with EXACTLY one of these phrases:
+
+"Yes, these documents comply with their specifications and are coherent as a set."
+
+OR
+
+"No, these documents do not comply with their specifications or lack coherence."
+
+If responding "No", briefly explain the specific compliance issues that need to be addressed. 

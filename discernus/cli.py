@@ -71,7 +71,7 @@ def list():
     
     experiments = []
     for p in projects_dir.iterdir():
-        if p.is_dir() and (p / 'experiment.yaml').exists():
+        if p.is_dir() and (p / 'experiment.md').exists():
             experiments.append(p.name)
     
     if experiments:
@@ -91,16 +91,29 @@ def validate(experiment_path: str):
         return
     
     # Load experiment configuration
-    exp_file = exp_path / 'experiment.yaml'
+    exp_file = exp_path / 'experiment.md'
     if not exp_file.exists():
-        click.echo("❌ experiment.yaml not found")
+        click.echo("❌ experiment.md not found")
         return
     
     try:
         with open(exp_file) as f:
-            experiment = yaml.safe_load(f)
+            content = f.read()
+            # Extract YAML from markdown - look for YAML block between --- markers
+            if '---' in content:
+                parts = content.split('---')
+                if len(parts) >= 2:
+                    yaml_content = parts[1].strip()
+                else:
+                    yaml_content = parts[0].strip()
+            else:
+                yaml_content = content
+            experiment = yaml.safe_load(yaml_content)
     except yaml.YAMLError as e:
-        click.echo(f"❌ Invalid YAML in experiment.yaml: {e}")
+        click.echo(f"❌ Invalid YAML in experiment.md: {e}")
+        return
+    except Exception as e:
+        click.echo(f"❌ Error parsing experiment.md: {e}")
         return
     
     # Validate framework exists
@@ -116,7 +129,14 @@ def validate(experiment_path: str):
         return
     
     # Count corpus files
-    corpus_files = list(corpus_dir.glob("*.txt"))
+    corpus_files = []
+    try:
+        for txt_file in corpus_dir.glob("*.txt"):
+            corpus_files.append(txt_file)
+    except Exception as e:
+        click.echo(f"❌ Error reading corpus directory: {e}")
+        return
+        
     if not corpus_files:
         click.echo(f"❌ No .txt files found in {experiment['corpus_path']}")
         return
@@ -135,14 +155,24 @@ def run(experiment_path: str):
     # Validate first - but handle validation errors gracefully
     try:
         ctx = click.get_current_context()
-        ctx.invoke(validate, experiment_path=experiment_path)
+        ctx.invoke(validate, experiment_path=str(experiment_path))
     except SystemExit:
         # Validation failed, stop execution
         return
     
     # Load experiment
-    with open(exp_path / 'experiment.yaml') as f:
-        experiment = yaml.safe_load(f)
+    with open(exp_path / 'experiment.md') as f:
+        content = f.read()
+        # Extract YAML from markdown - look for YAML block between --- markers
+        if '---' in content:
+            parts = content.split('---')
+            if len(parts) >= 2:
+                yaml_content = parts[1].strip()
+            else:
+                yaml_content = parts[0].strip()
+        else:
+            yaml_content = content
+        experiment = yaml.safe_load(yaml_content)
     
     # Create run folder with provenance
     run_folder = create_run_folder(exp_path)
