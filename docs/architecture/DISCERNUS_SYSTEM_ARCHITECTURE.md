@@ -428,17 +428,23 @@ projects/<PROJECT>/<EXPERIMENT>/<RUN_ID>/
 
 ## 7 · Security Controls
 
-### 7.1 Enabled Now
-- **Hash Pinning**: All framework/corpus artifacts validated by SHA-256
-- **Secrets Scanning**: CLI rejects files matching `/.env($|[._-])/` patterns  
-- **Path Validation**: Corpus paths restricted to project boundaries
-- **Task Type Validation**: Router enforces allowed task types from agent registry
+### 7.1 Core Security Features (Implemented)
+- **Hash Pinning**: All framework/corpus artifacts validated by SHA-256 (tamper detection)
+- **Secrets Scanning**: CLI rejects files matching `/.env($|[._-])/` patterns (credential protection)
+- **Path Validation**: Corpus paths restricted to project boundaries (directory traversal prevention)
+- **Input Validation**: Framework/experiment/corpus specification validation (injection prevention)
+- **Process Isolation**: Sandboxed execution environments for agent processes (containment)
+- **Audit Logging**: Comprehensive security event logging with timestamps and provenance (compliance)
+- **Task Type Validation**: Router enforces allowed task types from agent registry (operation restriction)
 
-### 7.2 Basic Security Controls (Required for Production)
-- **Input Validation**: Framework/experiment/corpus specification validation prevents path traversal and injection
-- **Process Isolation**: Basic sandboxing for agent execution environments
-- **Audit Logging**: Essential security event logging for academic integrity and compliance
-- *Note: Advanced security features (comprehensive monitoring, threat detection) can be enhanced post-deployment*
+**Rationale**: Academic data often contains sensitive political, corporate, or personal content. Basic security controls are "table stakes" for responsible data handling, not optional enhancements.
+
+### 7.2 Advanced Security Features (Future Enhancement)
+- **Threat Detection**: Advanced monitoring for anomalous patterns or potential attacks
+- **Network Isolation**: Complete network sandboxing for high-security environments
+- **Data Loss Prevention**: Automated scanning for PII, credentials, or classified content
+- **Multi-tenant Isolation**: Enhanced isolation for shared academic infrastructure
+- **Regulatory Compliance**: FERPA, GDPR, or other regulatory framework integration
 
 ---
 
