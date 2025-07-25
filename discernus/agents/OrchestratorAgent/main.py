@@ -54,17 +54,18 @@ class OrchestratorAgent:
             logger.error(f"Failed to load prompt template: {e}")
             raise OrchestratorAgentError(f"Prompt loading failed: {e}")
     
-    # Modified 3-stage pipeline for testing - stops after CorpusSynthesis (per user request)
+    # Alpha System Specification Section 4.2: Required 3-agent pipeline
+    # CLI handles VALIDATION and RUN SETUP, orchestrator handles the agent stages
     STAGES = [
-        ("pretest", "_enqueue_pretest_stage"),
         ("batch_analysis", "_enqueue_batch_analysis_stage"), 
-        ("corpus_synthesis", "_enqueue_corpus_synthesis_stage"),
+        ("synthesis", "_enqueue_synthesis_stage"),
+        ("report_generation", "_enqueue_report_generation_stage"),
     ]
 
     def orchestrate_experiment(self, orchestration_data: Dict[str, Any], original_task_id: str) -> bool:
         """
-        Orchestrates experiment using hardcoded 5-stage pipeline (Radical Simplification Mode).
-        Fixed sequence: PreTest → BatchAnalysis → CorpusSynthesis → Review → Moderation
+        Orchestrates experiment using Alpha System Specification Section 4.2 pipeline.
+        Fixed sequence: BatchAnalysis → Synthesis → ReportGeneration
         """
         completed_stages = []
         
@@ -120,7 +121,13 @@ class OrchestratorAgent:
                             self._export_partial_manifest(completed_stages, "NO_TASK")
                             return False
                         result = self._wait_for_task_completion(task_ids, timeout=300)
+                        # Store both the full result and extract the result hash for next stage
                         state[f"{stage_name}_result"] = result
+                        # Extract result hash from Redis key for passing to next stage
+                        result_key = f"task:{task_ids}:result_hash"
+                        result_hash = self.redis_client.get(result_key)
+                        if result_hash:
+                            state[f"{stage_name}_result"]['result_hash'] = result_hash.decode()
                         
                     completed_stages.append(stage_name)
                     logger.info(f"Stage {stage_name} completed successfully")
@@ -201,58 +208,85 @@ class OrchestratorAgent:
         logger.info(f"Enqueued PreTest stage: {task_id}")
         return task_id
 
-    def _enqueue_batch_analysis_stage(self, state: Dict[str, Any]) -> List[str]:
-        """Stage 2: BatchAnalysis - Multiple statistical runs of the same corpus."""
+    def _enqueue_batch_analysis_stage(self, state: Dict[str, Any]) -> str:
+        """Stage 1: BatchAnalysis - Single batch analysis of entire corpus per Alpha System Spec."""
         framework_hashes = state['framework_hashes']
         corpus_hashes = state['corpus_hashes']
+        experiment_name = state['experiment_name']
         
-        # Get recommendation from pretest (default to 3 if not available)
-        pretest_result = state.get('pretest_result', {})
-        recommend_runs = 3  # Default fallback
-        
-        # Create multiple runs for statistical variance
-        task_ids = []
-        for run_num in range(recommend_runs):
-            task_data = {
-                'batch_id': f'run_{run_num+1}_of_{recommend_runs}',
-                'framework_hashes': framework_hashes,
-                'document_hashes': corpus_hashes,  # All documents in each run
-                'model': 'gemini-2.5-pro',  # Standardized on Pro for reliability
-                'run_number': run_num + 1,
-                'total_runs': recommend_runs,
-                'run_id': self.run_id
-            }
+        # Single batch analysis (Alpha System processes single-batch corpus sizes)
+        task_data = {
+            'batch_id': f"{experiment_name}_single_batch",  # Required by AnalyseBatchAgent
+            'experiment_name': experiment_name,
+            'framework_hashes': framework_hashes,
+            'document_hashes': corpus_hashes,  # All documents in single batch
+            'model': 'vertex_ai/gemini-2.5-pro',  # Standardized on Pro for reliability
+            'run_id': self.run_id
+        }
 
-            message_id = self.redis_client.xadd('tasks', {
-                'type': 'analyse_batch',
-                'data': json.dumps(task_data)
-            })
-            task_ids.append(message_id.decode())
+        # Use 'analyse_batch' task type to route to AnalyseBatchAgent per router configuration
+        # Router generates task ID as: {run_id}_{task_type}
+        task_id = f"{self.run_id}_analyse_batch"
+        self.redis_client.lpush('tasks', json.dumps({
+            'type': 'analyse_batch',
+            **task_data
+        }))
             
-        logger.info(f"Enqueued {len(task_ids)} BatchAnalysis tasks")
-        return task_ids
+        logger.info(f"Enqueued BatchAnalysis stage: {task_id}")
+        return task_id
 
-    def _enqueue_corpus_synthesis_stage(self, state: Dict[str, Any]) -> str:
-        """Stage 3: CorpusSynthesis - Statistical aggregation of all batch results."""
+    def _enqueue_synthesis_stage(self, state: Dict[str, Any]) -> str:
+        """Stage 2: Synthesis - Statistical aggregation of all batch results per Alpha System Spec."""
         experiment_name = state['experiment_name']
         framework_hashes = state['framework_hashes']
-        batch_results = state.get('batch_analysis_results', [])
+        # Fix: Use singular "batch_analysis_result" to match completion handler
+        batch_result = state.get('batch_analysis_result', {})
+        batch_results = [batch_result.get('result_hash')] if batch_result.get('result_hash') else []
         
         synthesis_task_data = {
             "experiment_name": experiment_name,
-            "batch_result_hashes": batch_results,
+            "analysis_hashes": batch_results,  # Match SynthesisAgent expected field
+            "framework_hash": framework_hashes[0] if framework_hashes else "",  # SynthesisAgent expects singular
+            "model": "vertex_ai/gemini-2.5-pro",  # Match LiteLLM format
+            "run_id": self.run_id
+        }
+
+        # Use 'synthesis' task type to route to SynthesisAgent per router configuration
+        # Router generates task ID as: {run_id}_{task_type}
+        task_id = f"{self.run_id}_synthesis"
+        self.redis_client.lpush('tasks', json.dumps({
+            'type': 'synthesis',
+            **synthesis_task_data
+        }))
+        
+        logger.info(f"Enqueued Synthesis stage: {task_id}")
+        return task_id
+
+    def _enqueue_report_generation_stage(self, state: Dict[str, Any]) -> str:
+        """Stage 3: Report Generation - Human-readable final report per Alpha System Spec."""
+        experiment_name = state['experiment_name']
+        framework_hashes = state['framework_hashes']
+        # Fix: Use singular "synthesis_result" to match completion handler
+        synthesis_result = state.get('synthesis_result', {})
+        synthesis_hash = synthesis_result.get('result_hash') if synthesis_result else None
+        
+        report_task_data = {
+            "experiment_name": experiment_name,
+            "synthesis_hash": synthesis_hash,
             "framework_hashes": framework_hashes,
             "model": "gemini-2.5-pro",  # Standardized on Pro for reliability
             "run_id": self.run_id
         }
 
-        message_id = self.redis_client.xadd('tasks', {
-            'type': 'corpus_synthesis',
-            'data': json.dumps(synthesis_task_data)
-        })
+        # Use 'report' task type to route to ReportAgent per router configuration
+        # Router generates task ID as: {run_id}_{task_type}
+        task_id = f"{self.run_id}_report"
+        self.redis_client.lpush('tasks', json.dumps({
+            'type': 'report',
+            **report_task_data
+        }))
         
-        task_id = message_id.decode()
-        logger.info(f"Enqueued CorpusSynthesis stage: {task_id}")
+        logger.info(f"Enqueued Report Generation stage: {task_id}")
         return task_id
 
     def _enqueue_review_stage(self, state: Dict[str, Any]) -> List[str]:

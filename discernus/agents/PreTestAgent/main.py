@@ -27,7 +27,7 @@ from litellm import completion
 import base64
 
 # Add scripts directory to path for imports
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'scripts'))
 from minio_client import get_artifact, put_artifact, ArtifactStorageError
 
 # Configure logging
@@ -68,14 +68,15 @@ class PreTestAgent:
         Process a single PreTest task.
         """
         try:
-            messages = self.redis_client.xrange('tasks', task_id, task_id, count=1)
+            # Retrieve task data from Redis key (per architecture spec 4.2 - lists not streams)
+            task_data_key = f"task:{task_id}:data"
+            task_data_raw = self.redis_client.get(task_data_key)
             
-            if not messages:
-                logger.error(f"Task not found: {task_id}")
+            if not task_data_raw:
+                logger.error(f"Task data not found: {task_data_key}")
                 return False
                 
-            msg_id, fields = messages[0]
-            task_data = json.loads(fields[b'data'])
+            task_data = json.loads(task_data_raw)
             logger.info(f"Processing PreTest task: {task_id}")
 
             # 1. Get corpus sample and frameworks from task_data

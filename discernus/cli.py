@@ -18,12 +18,16 @@ import redis
 import json
 import yaml
 import hashlib
-import os
 import sys
+import os
 import time
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional, List
+
+# Add scripts directory to path for MinIO integration
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'scripts'))
+from minio_client import put_artifact, ArtifactStorageError
 
 # Load environment configuration
 from dotenv import load_dotenv
@@ -273,18 +277,35 @@ def run(experiment_path: str, dry_run: bool):
     run_folder = create_run_folder(exp_path)
     click.echo(f"📁 Created run folder: {run_folder}")
     
-    # Generate comprehensive asset hashes
-    click.echo("🔐 Generating provenance hashes...")
-    framework_file = exp_path / experiment['framework']
-    framework_hash = hash_file(framework_file)
+    # Upload assets to MinIO and generate provenance hashes (Alpha System Spec Section 4.2)
+    click.echo("🔐 Uploading assets to artifact storage...")
     
-    corpus_dir = exp_path / experiment['corpus_path']
-    corpus_hashes = []
-    corpus_files = [f for f in corpus_dir.iterdir() if f.is_file() and f.suffix == '.txt']
-    
-    with click.progressbar(corpus_files, label='Hashing corpus files') as files:
-        for txt_file in files:
-            corpus_hashes.append(hash_file(txt_file))
+    try:
+        # Upload framework file
+        framework_file = exp_path / experiment['framework']
+        with open(framework_file, 'rb') as f:
+            framework_content = f.read()
+        framework_hash = put_artifact(framework_content)
+        click.echo(f"   📋 Framework uploaded: {framework_hash[:16]}...")
+        
+        # Upload corpus files
+        corpus_dir = exp_path / experiment['corpus_path']
+        corpus_hashes = []
+        corpus_files = [f for f in corpus_dir.iterdir() if f.is_file() and f.suffix == '.txt']
+        
+        with click.progressbar(corpus_files, label='Uploading corpus files') as files:
+            for txt_file in files:
+                with open(txt_file, 'rb') as f:
+                    content = f.read()
+                file_hash = put_artifact(content)
+                corpus_hashes.append(file_hash)
+                
+    except ArtifactStorageError as e:
+        click.echo(f"❌ Artifact storage error: {e}")
+        return
+    except Exception as e:
+        click.echo(f"❌ Error uploading assets: {e}")
+        return
     
     # Create comprehensive manifest
     manifest = create_run_manifest(run_folder, experiment, framework_hash, corpus_hashes, exp_path)
