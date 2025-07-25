@@ -128,10 +128,11 @@ These principles guide every design decision in Discernus:
 
 **11. Security and Privacy by Design**
 - Corpus anonymization and hash-based identity protection as standard practice
-- Secure code execution environments with resource limits for computational verification
+- Process isolation and sandboxing for secure agent execution (implemented upfront)
+- Comprehensive audit logging for academic integrity and compliance (implemented upfront)
 - API key management and rate limiting to prevent abuse
 - Git-based provenance provides tamper-evident audit trails
-- *Note: Full security architecture deferred to post-MVP phase*
+- **Academic Data Sensitivity**: Text corpora often contain sensitive political, corporate, or personal content requiring proper security controls from day one
 
 **12. Graceful Degradation and Error Recovery**
 - Fail-fast validation prevents expensive downstream failures
