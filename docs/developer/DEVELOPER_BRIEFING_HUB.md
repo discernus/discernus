@@ -4,6 +4,9 @@
 
 ## 🚀 Quick Start for Developers
 
+### ⚡ INSTANT ORIENTATION (New Agents)
+**READ FIRST**: [`CURSOR_AGENT_QUICK_START.md`](../CURSOR_AGENT_QUICK_START.md) - **30-second orientation to prevent $0.50 confusion cycles**
+
 ### Step 1: Environment Setup
 ```bash
 # Verify/setup environment (ALWAYS START HERE)
