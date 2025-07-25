@@ -346,15 +346,15 @@ Output schema (per run):
 ```
 Artefact naming: `analysis/B01.caf<hash>-chf<hash>.run1.json`.
 
-### 4.6 Layered Synthesis & Review
+### 4.6 Streamlined Analysis Pipeline
 
-| Layer | Agent(s) | Purpose | Model class |
-| ----- | -------- | ------- | ----------- |
-| 1 In‑Batch | AnalyseBatchAgent | Raw scores + per‑batch summary | Gemini 2.5 Pro |
-| 2 Corpus | CorpusSynthesisAgent | Deterministic aggregation/statistics | Gemini 2.5 Pro |
-| 3 Review | 2× ReviewerAgent + ModeratorAgent | Adversarial critique → reconciled narrative | Gemini 2.5 Pro |
+| Stage | Agent | Purpose | Model class |
+| ----- | ----- | ------- | ----------- |
+| 1 Batch Analysis | AnalyseBatchAgent | Per-document analysis + batch summaries | Gemini 2.5 Pro |
+| 2 Synthesis | SynthesisAgent | Statistical aggregation + comprehensive analysis | Gemini 2.5 Pro |
+| 3 Report | ReportAgent | Academic report + provenance asset management | Gemini 2.5 Pro |
 
-`debate/<RUN_ID>.html` captures transcript for audit.
+**Focus**: Quality analysis and comprehensive reporting with proper provenance, eliminating review coordination complexity.
 
 ### 4.7 Model Registry
 `models/registry.yaml` + `models/provider_defaults.yaml` supply pricing, context windows, and batching parameters.
