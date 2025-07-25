@@ -16,7 +16,9 @@ from typing import Dict, Any, List
 from litellm import completion
 
 # Add scripts directory to path for imports
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'scripts'))
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+scripts_path = os.path.join(project_root, 'scripts')
+sys.path.insert(0, scripts_path)
 from minio_client import put_artifact, get_artifact
 
 # Configure logging
@@ -52,13 +54,11 @@ class OrchestratorAgent:
             logger.error(f"Failed to load prompt template: {e}")
             raise OrchestratorAgentError(f"Prompt loading failed: {e}")
     
-    # Hardcoded 5-stage pipeline - prevents coordination variations (per Implementation Plan V3)
+    # Modified 3-stage pipeline for testing - stops after CorpusSynthesis (per user request)
     STAGES = [
         ("pretest", "_enqueue_pretest_stage"),
         ("batch_analysis", "_enqueue_batch_analysis_stage"), 
         ("corpus_synthesis", "_enqueue_corpus_synthesis_stage"),
-        ("review", "_enqueue_review_stage"),
-        ("moderation", "_enqueue_moderation_stage"),
     ]
 
     def orchestrate_experiment(self, orchestration_data: Dict[str, Any], original_task_id: str) -> bool:

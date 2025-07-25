@@ -39,7 +39,7 @@
 ### Pipeline Status
 - **Stage 1 (PreTest)**: ✅ Functional and validated - produces statistical variance analysis
 - **Stage 2 (BatchAnalysis)**: ✅ Functional and validated - produces structured academic analysis
-- **Stage 3 (CorpusSynthesis)**: ❌ Placeholder implementation only
+- **Stage 3 (MetaAnalysisSynthesis)**: ❌ Placeholder implementation only
 - **Stage 4 (Review)**: ❌ Returns `["placeholder-review-task"]`
 - **Stage 5 (Moderation)**: ❌ Returns `"placeholder-moderation-task"`
 
