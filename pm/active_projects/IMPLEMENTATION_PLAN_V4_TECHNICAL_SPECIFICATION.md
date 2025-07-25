@@ -306,7 +306,42 @@ Create `scripts/dev_monitor.py` (~50 lines):
 
 ---
 
-## 6. RISK MITIGATION
+## 6. ARCHITECTURAL REQUIREMENTS
+
+### 6.1 Environment Portability (CRITICAL)
+
+**Requirement**: All Python execution must be environment-agnostic
+
+**Implementation Pattern**:
+```python
+import sys
+PYTHON_EXECUTABLE = sys.executable
+
+# Use in subprocess calls
+subprocess.run([PYTHON_EXECUTABLE, 'script.py'])
+
+# Use in agent mappings
+AGENT_SCRIPTS = {
+    'agent_type': [PYTHON_EXECUTABLE, 'path/to/agent.py']
+}
+```
+
+**Prohibited Patterns**:
+- ❌ `'python3'` - May not be available or wrong version
+- ❌ `'venv/bin/python3'` - Platform-specific path
+- ❌ `'/usr/bin/python3'` - Hardcoded system paths
+- ❌ `'python'` - Ambiguous version
+
+**Rationale**: Hardcoded environment paths cause coordination failures when:
+- Developers use different virtual environment managers (venv, conda, pipenv)
+- System runs on different platforms (macOS, Linux, Windows)
+- Python installation paths vary between systems
+
+**Enforcement**: This pattern is documented in `ARCHITECTURE_QUICK_REFERENCE.md` and should be verified during code review.
+
+---
+
+## 7. RISK MITIGATION
 
 ### **High Risk: Stage Implementation Complexity**
 - **Mitigation**: Start with simple, working implementations
@@ -322,7 +357,7 @@ Create `scripts/dev_monitor.py` (~50 lines):
 
 ---
 
-## 7. SUCCESS METRICS
+## 8. SUCCESS METRICS
 
 ### Phase A Success
 - [ ] All gemini-2.5-flash references replaced with gemini-2.5-pro
@@ -330,6 +365,7 @@ Create `scripts/dev_monitor.py` (~50 lines):
 - [ ] Cache hit ratio = 100% on identical experiment rerun
 - [ ] Timeout handling produces partial manifests
 - [ ] Metrics calculations accurate to ±1%
+- [x] Environment-agnostic Python execution implemented (sys.executable pattern)
 
 ### Phase B Success  
 - [ ] All components <150 lines (THIN compliance)

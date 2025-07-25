@@ -35,7 +35,7 @@ RECOVERY_DIR = RESULTS_DIR / "thin_llm_recovery"
 RECOVERY_DIR.mkdir(exist_ok=True)
 
 # LLM configuration for data extraction
-EXTRACTION_MODEL = "vertex_ai/gemini-2.5-flash"  # Fast and cheap for extraction
+EXTRACTION_MODEL = "vertex_ai/gemini-2.5-pro"  # Fast and cheap for extraction
 EXTRACTION_PROMPT = """
 You are a data extraction specialist. Your job is to extract structured data from complex JSON responses.
 

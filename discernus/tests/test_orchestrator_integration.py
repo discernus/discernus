@@ -70,7 +70,7 @@ hypothesis: The test document will show positive sentiment
 framework_file: framework.md
 corpus: corpus/
 models:
-  - "vertex_ai/gemini-2.5-flash"
+  - "vertex_ai/gemini-2.5-pro"
 runs_per_model: 1
 workflow:
   - agent: AnalysisAgent

@@ -117,7 +117,7 @@ def setup_vertex_ai():
     print("Models are now available in your Discernus research sessions:")
     print("- vertex_ai/gemini-1.5-flash (fastest, cheapest)")
     print("- vertex_ai/gemini-1.5-pro (most capable)")
-    print("- vertex_ai/gemini-2.5-flash (latest fast model)")
+    print("- vertex_ai/gemini-2.5-pro (latest fast model)")
     print("- vertex_ai/gemini-2.5-pro (thinking-native model)")
 
 

@@ -83,7 +83,7 @@ class ModelRegistryUpdater:
                 "context_window": 2000000,
                 "costs": {"input_per_million_tokens": 3.50, "output_per_million_tokens": 10.50}
             },
-            "gemini-2.5-flash": {
+            "gemini-2.5-pro": {
                 "regions": ["us-central1", "us-east1", "europe-west1"],
                 "performance_tier": "cost-effective",
                 "context_window": 1000000,

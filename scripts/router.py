@@ -14,6 +14,9 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, Future
 from typing import Dict, Any
 
+# Get the current Python executable (works in any environment)
+PYTHON_EXECUTABLE = sys.executable
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -29,20 +32,20 @@ TASKS_DONE_STREAM = 'tasks.done'
 ORCHESTRATOR_STREAM = 'orchestrator.tasks'
 CONSUMER_GROUP = 'discernus'
 
-# Agent type to script mapping
+# Agent type to script mapping - uses current Python executable automatically
 AGENT_SCRIPTS = {
-    'analyse': ['python3', 'agents/AnalyseChunkAgent/main.py'],
-    'orchestrate': ['python3', 'agents/OrchestratorAgent/main.py'],
-    'synthesize': ['python3', 'agents/SynthesisAgent/main.py'],
+    'analyse': [PYTHON_EXECUTABLE, 'agents/AnalyseChunkAgent/main.py'],
+    'orchestrate': [PYTHON_EXECUTABLE, 'agents/OrchestratorAgent/main.py'],
+    'synthesize': [PYTHON_EXECUTABLE, 'agents/SynthesisAgent/main.py'],
     # New Tier 1-2 agents for batch processing architecture
-    'analyse_batch': ['python3', 'agents/AnalyseBatchAgent/main.py'],
-    'corpus_synthesis': ['python3', 'agents/CorpusSynthesisAgent/main.py'],
-    'pre_test': ['python3', 'agents/PreTestAgent/main.py'],
+    'analyse_batch': [PYTHON_EXECUTABLE, 'agents/AnalyseBatchAgent/main.py'],
+    'corpus_synthesis': [PYTHON_EXECUTABLE, 'agents/CorpusSynthesisAgent/main.py'],
+    'pre_test': [PYTHON_EXECUTABLE, 'agents/PreTestAgent/main.py'],
     # Phase 2 Components
-    'execute_plan': ['python3', 'scripts/execution_bridge.py'],
+    'execute_plan': [PYTHON_EXECUTABLE, 'scripts/execution_bridge.py'],
     # Phase 3 Quality Assurance agents
-    'review': ['python3', 'agents/ReviewerAgent/main.py'],
-    'moderation': ['python3', 'agents/ModeratorAgent/main.py'],
+    'review': [PYTHON_EXECUTABLE, 'agents/ReviewerAgent/main.py'],
+    'moderation': [PYTHON_EXECUTABLE, 'agents/ModeratorAgent/main.py'],
 }
 
 class RouterError(Exception):
@@ -66,7 +69,7 @@ class DiscernusRouter:
             
             for stream in streams_to_setup:
                 try:
-                    self.redis_client.xgroup_create(stream, CONSUMER_GROUP, id='$', mkstream=True)
+                    self.redis_client.xgroup_create(stream, CONSUMER_GROUP, id='0-0', mkstream=True)
                     logger.info(f"Created consumer group '{CONSUMER_GROUP}' for stream '{stream}'")
                 except redis.exceptions.ResponseError as e:
                     if "BUSYGROUP" in str(e):
@@ -116,6 +119,8 @@ class DiscernusRouter:
         """Run agent process with comprehensive error handling and logging."""
         try:
             logger.info(f"Starting {task_type} agent for task {task_id}: {' '.join(script_cmd)}")
+            logger.info(f"Working directory: {os.getcwd()}")
+            logger.info(f"Full command: {script_cmd}")
             
             # Run the agent process with full error capture
             result = subprocess.run(
@@ -198,6 +203,8 @@ class DiscernusRouter:
     def route_pending_tasks(self):
         """Route new tasks to agents"""
         try:
+            logger.info(f"Checking for pending tasks in stream '{TASKS_STREAM}' with consumer group '{CONSUMER_GROUP}'")
+            
             # Read pending tasks (non-blocking)
             messages = self.redis_client.xreadgroup(
                 CONSUMER_GROUP, 'router-tasks',
@@ -205,11 +212,17 @@ class DiscernusRouter:
                 count=5, block=1000
             )
             
+            logger.info(f"Got {len(messages)} stream(s) from XREADGROUP")
+            
             for stream, msgs in messages:
+                logger.info(f"Processing stream '{stream}' with {len(msgs)} message(s)")
                 for msg_id, fields in msgs:
                     try:
+                        logger.info(f"Processing message {msg_id} with fields: {fields}")
                         task_type = fields[b'type'].decode()
                         task_data = json.loads(fields[b'data'])
+                        
+                        logger.info(f"Decoded task type: {task_type}")
                         
                         # Route task (THIN - no logic, just dispatch)
                         if self.route_task(task_type, msg_id.decode()):
@@ -236,11 +249,15 @@ class DiscernusRouter:
         
         try:
             while self.running:
+                logger.info("Router main loop iteration starting")
+                
                 # Handle completed tasks
                 self.handle_completed_tasks()
+                logger.info("Completed task handling")
                 
                 # Route new tasks
                 self.route_pending_tasks()
+                logger.info("Completed task routing")
                 
                 # Brief sleep to prevent busy loop
                 time.sleep(0.1)

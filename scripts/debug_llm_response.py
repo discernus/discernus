@@ -48,7 +48,7 @@ def test_orchestrator_llm_call():
     print("\n=== CALLING LLM ===")
     try:
         response = completion(
-            model="gemini-2.5-flash",
+            model="gemini-2.5-pro",
             messages=[{"role": "user", "content": prompt_text}],
             temperature=0.0,
             safety_settings=[

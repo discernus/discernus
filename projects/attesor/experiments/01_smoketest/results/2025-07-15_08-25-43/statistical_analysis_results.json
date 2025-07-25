@@ -1,8 +1,0 @@
-{
-  "num_observations": 4,
-  "mean_score": 9.4,
-  "std_dev": 0.1732050807568879,
-  "min_score": 9.1,
-  "max_score": 9.5,
-  "cronbachs_alpha": -1.0
-}
