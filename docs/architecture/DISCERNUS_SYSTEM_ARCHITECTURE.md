@@ -265,7 +265,7 @@ BatchAnalysis → Synthesis → Report
 ```
 **Validated through distributed prototype**: This streamlined pipeline produces quality academic output. Direct function calls eliminate coordination complexity while preserving the proven multi-stage processing benefits.
 
-**Pre-flight Validation**: Offline validation script helps researchers prepare experiments (corpus statistics, token estimates, framework validation) without runtime pipeline complexity.
+**Pre-flight Validation**: Collaborative validation script combining Phase 1 methodology with Virtual Colleague philosophy - helps researchers achieve specification compliance and understand methodological trade-offs without runtime pipeline complexity.
 
 ### 4.2 Direct Function Call Coordination
 **THIN v2.0 Approach**: Standard Python patterns replace distributed complexity.
@@ -301,16 +301,37 @@ Constraints: `max_documents`, `max_frameworks_per_run`, **no** `custom_workflow`
 **Corpus v2.0**: Directory with `manifest.json` listing file names & metadata. System does **no discovery** outside manifest. Binary‑first principle: all files base64 encoded for LLM.
 
 ### 4.4 Pre-flight Validation & Batch Planning
-**Offline Pre-flight Script** (`scripts/validate_experiment.py`) provides researchers with:
-- Corpus statistics (document count, token estimates, size distribution)
-- Framework validation (YAML parsing, schema compliance)
-- Batch planning recommendations (optimal document groupings)
-- Cost estimates (expected token usage × model pricing)
+
+**Collaborative Pre-flight Validation** (`scripts/validate_experiment.py`) embodies Virtual Colleague philosophy:
+
+**Core Philosophy**:
+- **Virtual Colleague Approach**: Helpful peer reviewer, not rigid gatekeeper (Sarah Chen Journey learning)
+- **Collaborative Assistance**: Help researchers achieve compliance, don't just identify problems (Phase 1 learning)
+- **Expert Workflow Support**: Informed consent over infallibility - document trade-offs, don't block workflows
+- **Professional Respect**: Treats researchers as competent professionals who understand their methodological choices
+
+**Specification Compliance Validation**:
+- Framework Specification v4.0, Experiment Specification v2.0, Corpus Specification v2.0
+- Presents actual file structures, not summaries (Phase 1 pattern)
+- YAML frontmatter extraction and structured validation
+- Auto-generates missing compliance elements with `--fix-compliance`
+
+**Methodological Advisory System**:
+- Detects potential methodological concerns (e.g., latent knowledge dependencies in political analysis)
+- Provides advisory reports that document trade-offs without blocking expert workflows
+- Sarah Chen pattern recognition: frameworks relying on LLM's implicit knowledge without explicit markers
+
+**Pre-flight Value Delivery**:
+- Corpus statistics (document count, token estimates, cost projections)
+- Framework validation and compliance assistance
+- Missing element creation (corpus manifests, framework appendixes)
+- Constructive recommendations for publication-quality research
 
 **Runtime Batch Planning** uses simple heuristics:
 - `optimal_batch_tokens` (≈ 70% of context window)  
 - `max_documents_per_batch`
 - Static configuration replaces dynamic PreTest complexity
+- *Future enhancement: Statistical variance estimation and run recommendations*
 
 ### 4.5 AnalyseBatchAgent (Layer 1)
 Processes multiple documents + frameworks in one call.
