@@ -48,4 +48,4 @@ template: |
   **DOCUMENTS:**
   {documents}
 
-  Begin enhanced analysis now. Remember, the entire output must be a single JSON object, starting with `{` and ending with `}`. 
+  Begin enhanced analysis now. Remember, the entire output must be a single JSON object, starting with `{{` and ending with `}}`. 
