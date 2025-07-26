@@ -151,14 +151,25 @@ def run(experiment_path: str, dry_run: bool, model: str):
         click.echo("❌ Infrastructure startup failed. Run 'discernus start' manually.")
         sys.exit(1)
     
+    # Execute using THIN v2.0 orchestrator with direct function calls
+    click.echo("🎯 Initializing THIN v2.0 orchestrator with batch management...")
+    
     # Execute using THIN v2.0 direct orchestration
     try:
         click.echo(f"🚀 Starting THIN v2.0 direct orchestration with {model}...")
         orchestrator = ThinOrchestrator(exp_path)
+        
+        # Execute the experiment with batch management for context window limits
         result = orchestrator.run_experiment(model=model)
         
+        # Show completion with enhanced details
         click.echo("✅ Experiment completed successfully!")
-        click.echo(f"📊 Results available in experiment runs directory")
+        if isinstance(result, dict) and 'run_id' in result:
+            click.echo(f"   📋 Run ID: {result['run_id']}")
+            click.echo(f"   📁 Results: {exp_path / 'runs' / result['run_id']}")
+            click.echo(f"   📄 Report: {exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'}")
+        else:
+            click.echo(f"📊 Results available in experiment runs directory")
         
     except ThinOrchestratorError as e:
         click.echo(f"❌ Experiment failed: {e}")
@@ -166,7 +177,6 @@ def run(experiment_path: str, dry_run: bool, model: str):
     except Exception as e:
         click.echo(f"❌ Unexpected error: {e}")
         sys.exit(1)
-
 
 @cli.command()
 @click.argument('experiment_path')
