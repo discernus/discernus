@@ -25,7 +25,7 @@ from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
-from ..agents.enhanced_synthesis_agent import EnhancedSynthesisAgent
+from ..agents.EnhancedSynthesisAgent.main import EnhancedSynthesisAgent
 from ..agents.batch_planner_agent import BatchPlannerAgent
 
 
