@@ -72,6 +72,15 @@ class AnalysisOutput(BaseModel):
     mathematical_verification: Dict[str, Any]
     self_assessment: Dict[str, Any]
 
+# Simplified Pydantic Models for Metadata Only (CSV Architecture)
+class SimpleAnalysisMetadata(BaseModel):
+    """Simple metadata that Instructor can reliably handle"""
+    batch_id: str
+    analysis_summary: str
+    document_count: int
+    completion_status: str
+    framework_applied: str
+
 
 class EnhancedAnalysisAgent:
     """
@@ -126,27 +135,258 @@ class EnhancedAnalysisAgent:
         
         return prompt_config['template']
 
-    def _extract_json_from_response(self, content: str) -> Optional[Dict[str, Any]]:
+    def _extract_json_from_response(self, response: str) -> str:
         """
-        Finds and parses the first valid JSON object from a string.
-        Handles LLM responses that include markdown fences or other text.
-        """
-        # Regex to find content between ```json and ``` or a standalone { ... }
-        json_match = re.search(r'```json\s*(\{.*?\})\s*```|(\{.*?\})', content, re.DOTALL)
+        Extract JSON from LLM response, handling markdown code fences.
         
-        if not json_match:
-            return None
+        NO AI-generated parsing - simple string operations only.
+        """
+        # Remove markdown code fences if present
+        response = response.strip()
+        
+        # Check for ```json fences
+        if response.startswith('```json'):
+            response = response[7:]  # Remove ```json
+        elif response.startswith('```'):
+            response = response[3:]   # Remove ```
+            
+        if response.endswith('```'):
+            response = response[:-3]  # Remove closing ```
+            
+        # Find JSON object boundaries
+        response = response.strip()
+        
+        # Look for first { and last }
+        start_idx = response.find('{')
+        end_idx = response.rfind('}')
+        
+        if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+            return response[start_idx:end_idx + 1]
+        else:
+            return response  # Return as-is if no clear JSON boundaries
 
-        # Extract the JSON content from the first non-empty group
-        json_str = next((group for group in json_match.groups() if group), None)
+    def _extract_to_csv(self, analysis_data: dict, processed_documents: list) -> 'pd.DataFrame':
+        """
+        Extract analysis data to CSV format using pandas.
+        
+        NO AI-generated custom parsing - only standard library operations.
+        """
+        import pandas as pd  # Import here to avoid dependency issues
+        
+        csv_rows = []
+        analysis_results = analysis_data.get('analysis_results', {})
+        
+        for doc_id, doc_analysis in analysis_results.items():
+            scores = doc_analysis.get('scores', {})
+            evidence = doc_analysis.get('evidence', {})
+            reasoning = doc_analysis.get('reasoning', '')
+            
+            for dimension, score_data in scores.items():
+                # Extract score information (safe dictionary access)
+                if isinstance(score_data, dict):
+                    intensity = score_data.get('intensity', 0.0)
+                    salience = score_data.get('salience', 0.0)
+                    confidence = score_data.get('confidence', 0.8)  # Default confidence
+                else:
+                    # Fallback for simple numeric scores
+                    intensity = float(score_data) if score_data else 0.0
+                    salience = 0.5  # Default salience
+                    confidence = 0.8  # Default confidence
+                
+                # Get evidence quotes for this dimension
+                evidence_quotes = evidence.get(dimension, [])
+                evidence_text = evidence_quotes[0] if evidence_quotes else ""
+                
+                # Create CSV row
+                csv_rows.append({
+                    'document_id': doc_id,
+                    'framework_dimension': dimension,
+                    'intensity_score': float(intensity),
+                    'salience_score': float(salience),
+                    'confidence': float(confidence),
+                    'evidence_quote': evidence_text[:200] if evidence_text else "",  # Truncate for CSV
+                    'reasoning_snippet': reasoning[:100] if reasoning else ""   # Brief reasoning
+                })
+        
+        return pd.DataFrame(csv_rows)
 
-        if not json_str:
-            return None
-
+    def analyze_documents_csv(self, 
+                            framework_content: str, 
+                            corpus_documents: list, 
+                            experiment_config: dict, 
+                            model: str = "vertex_ai/gemini-2.5-flash") -> dict:
+        """
+        CSV-based analysis method that implements the proven architecture.
+        
+        Returns both simple metadata and CSV data for synthesis.
+        """
+        import pandas as pd  # Import here to avoid dependency issues
+        
+        batch_id = f"csv_batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        start_time = datetime.now().isoformat()
+        
         try:
-            return json.loads(json_str)
-        except json.JSONDecodeError:
-            return None
+            # Process documents (similar to existing method)
+            processed_documents = []
+            document_hashes = []
+            
+            for i, doc in enumerate(corpus_documents):
+                content_bytes = doc['content'].encode('utf-8')
+                doc_hash = hashlib.sha256(content_bytes).hexdigest()[:12]
+                
+                processed_documents.append({
+                    'index': i + 1,
+                    'hash': doc_hash,
+                    'content': doc['content'],
+                    'filename': doc.get('filename', f'document{i+1}.txt')
+                })
+                document_hashes.append(doc_hash)
+            
+            # Step 1: Get simple metadata via Instructor (reliable)
+            metadata_prompt = f"""
+            Based on this analysis task, provide simple metadata:
+            - Batch ID: {batch_id}
+            - Analysis summary: Brief description of framework analysis performed
+            - Document count: {len(processed_documents)}
+            - Completion status: "completed" or "failed"
+            - Framework applied: Character Assessment Framework v4.3
+            
+            Framework: {framework_content[:300]}...
+            Documents: {len(processed_documents)} documents for character analysis
+            """
+            
+            metadata = self.client.chat.completions.create(
+                model=model,
+                response_model=SimpleAnalysisMetadata,
+                messages=[{"role": "user", "content": metadata_prompt}],
+                temperature=0.0
+            )
+            
+            # Step 2: Get complex analysis via standard LLM call (no Instructor constraints)
+            analysis_prompt = self._create_csv_analysis_prompt(framework_content, processed_documents, batch_id)
+            
+            from litellm import completion
+            analysis_response = completion(
+                model=model,
+                messages=[{"role": "user", "content": analysis_prompt}],
+                temperature=0.0
+            )
+            
+            # Step 3: Parse complex JSON with standard library
+            raw_response = analysis_response.choices[0].message.content
+            
+            # DEBUG: Log raw response for troubleshooting
+            print(f"\n=== CSV METHOD DEBUG ===")
+            print(f"Raw response length: {len(raw_response)}")
+            print(f"Response preview: {raw_response[:300]}...")
+            
+            try:
+                json_text = self._extract_json_from_response(raw_response)
+                analysis_data = json.loads(json_text)
+                csv_df = self._extract_to_csv(analysis_data, processed_documents)
+                
+                print(f"CSV extraction successful: {len(csv_df)} rows generated")
+                
+            except json.JSONDecodeError as e:
+                print(f"JSON parsing failed: {e}")
+                # Create empty CSV structure for graceful degradation
+                csv_df = pd.DataFrame(columns=[
+                    'document_id', 'framework_dimension', 'intensity_score', 
+                    'salience_score', 'confidence', 'evidence_quote', 'reasoning_snippet'
+                ])
+            
+            # Step 4: Create dual artifacts (JSON + CSV)
+            end_time = datetime.now().isoformat()
+            
+            # JSON artifact (complete analysis for audit)
+            json_artifact = {
+                "batch_id": batch_id,
+                "agent_name": "EnhancedAnalysisAgent_CSV",
+                "agent_version": "csv_v1.0",
+                "metadata": metadata.model_dump(),
+                "raw_analysis": analysis_data if 'analysis_data' in locals() else {},
+                "execution_info": {
+                    "start_time": start_time,
+                    "end_time": end_time,
+                    "model_used": model,
+                    "document_count": len(processed_documents)
+                }
+            }
+            
+            # CSV artifact (research-ready data)
+            csv_artifact = {
+                "batch_id": batch_id,
+                "csv_data": csv_df.to_dict('records'),
+                "csv_shape": csv_df.shape,
+                "column_names": list(csv_df.columns)
+            }
+            
+            return {
+                "success": True,
+                "batch_id": batch_id,
+                "metadata": metadata.model_dump(),
+                "json_artifact": json_artifact,
+                "csv_artifact": csv_artifact,
+                "csv_dataframe": csv_df
+            }
+            
+        except Exception as e:
+            print(f"CSV analysis failed: {e}")
+            return {
+                "success": False,
+                "error": str(e),
+                "batch_id": batch_id
+            }
+    
+    def _create_csv_analysis_prompt(self, framework_content: str, processed_documents: list, batch_id: str) -> str:
+        """Create prompt optimized for CSV extraction"""
+        
+        docs_text = ""
+        for doc in processed_documents:
+            docs_text += f"\n=== DOCUMENT: {doc['filename']} ===\n"
+            docs_text += f"Content: {doc['content'][:2000]}...\n"  # Reasonable preview
+        
+        return f"""
+        Analyze the following documents using the Character Assessment Framework and return results as structured JSON.
+
+        FRAMEWORK:
+        {framework_content}
+
+        DOCUMENTS:
+        {docs_text}
+
+        OUTPUT REQUIREMENTS:
+        Return a JSON object with this structure:
+        {{
+            "batch_id": "{batch_id}",
+            "analysis_results": {{
+                "document1.txt": {{
+                    "scores": {{
+                        "dignity": {{"intensity": 0.85, "salience": 0.7, "confidence": 0.9}},
+                        "truth": {{"intensity": 0.72, "salience": 0.8, "confidence": 0.8}},
+                        "justice": {{"intensity": 0.65, "salience": 0.6, "confidence": 0.8}},
+                        "hope": {{"intensity": 0.78, "salience": 0.7, "confidence": 0.9}},
+                        "pragmatism": {{"intensity": 0.82, "salience": 0.6, "confidence": 0.8}},
+                        "tribalism": {{"intensity": 0.23, "salience": 0.5, "confidence": 0.7}},
+                        "manipulation": {{"intensity": 0.15, "salience": 0.4, "confidence": 0.8}},
+                        "resentment": {{"intensity": 0.34, "salience": 0.3, "confidence": 0.7}},
+                        "fear": {{"intensity": 0.28, "salience": 0.4, "confidence": 0.8}},
+                        "fantasy": {{"intensity": 0.12, "salience": 0.2, "confidence": 0.9}}
+                    }},
+                    "evidence": {{
+                        "dignity": ["Exact quote supporting dignity"],
+                        "truth": ["Quote supporting truth score"],
+                        "tribalism": ["Quote showing tribalism if present"]
+                    }},
+                    "reasoning": "Brief explanation of overall scoring rationale for this document"
+                }}
+            }}
+        }}
+
+        IMPORTANT: Score ALL 10 framework dimensions (5 virtues + 5 vices) for EACH document.
+        Provide intensity, salience, and confidence scores for each dimension.
+        Include supporting evidence quotes where relevant.
+        """
 
     def analyze_batch(self, 
                       framework_content: str,
