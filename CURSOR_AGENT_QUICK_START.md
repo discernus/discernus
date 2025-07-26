@@ -7,10 +7,10 @@
 make check
 
 # 2. Start infrastructure services (MinIO storage required!)
-discernus start
+python3 discernus/cli.py start
 
 # 3. Test a simple experiment directly:
-discernus run projects/simple_test
+python3 discernus/cli.py run projects/simple_test
 ```
 
 ## 🚨 CRITICAL INFRASTRUCTURE KNOWLEDGE
@@ -19,10 +19,10 @@ discernus run projects/simple_test
 ✅ **New discernus CLI uses direct orchestration and works immediately:**
 ```bash
 # Modern approach - works reliably
-discernus start                        # Auto-start infrastructure
-discernus run projects/large_batch_test  # Direct THIN v2.0 orchestration
-discernus status                       # Check infrastructure status
-discernus list                         # Show available experiments
+python3 discernus/cli.py start                     # Auto-start infrastructure
+python3 discernus/cli.py run projects/simple_test  # Direct THIN v2.0 orchestration
+python3 discernus/cli.py status                    # Check infrastructure status
+python3 discernus/cli.py list                      # Show available experiments
 ```
 
 ### **Legacy CLI (DEPRECATED) - Avoid This!**
@@ -69,8 +69,8 @@ python3 discernus/cli_legacy_redis.py run projects/simple_test
 - ❌ Build complex parsing code (violates THIN principles)
 
 ### **ALWAYS Do This:**
-- ✅ Start with `discernus start`
-- ✅ Use `discernus run experiment_path` for testing
+- ✅ Start with `python3 discernus/cli.py start`
+- ✅ Use `python3 discernus/cli.py run experiment_path` for testing
 - ✅ Check context window limits before assuming rate limiting issues
 - ✅ Use modern CLI with direct orchestration
 - ✅ Check MinIO console at http://localhost:9001 for artifact storage
@@ -79,18 +79,18 @@ python3 discernus/cli_legacy_redis.py run projects/simple_test
 
 ```bash
 # Infrastructure status check
-discernus status                 # Complete infrastructure status
-lsof -i :9000                   # MinIO running?
-lsof -i :9001                   # MinIO console
+python3 discernus/cli.py status                 # Complete infrastructure status
+lsof -i :9000                                   # MinIO running?
+lsof -i :9001                                   # MinIO console
 
 # Test experiment
-discernus validate projects/simple_test    # Check experiment structure
-discernus run projects/simple_test --dry-run  # Preview execution
-discernus run projects/simple_test         # Execute experiment
+python3 discernus/cli.py validate projects/simple_test    # Check experiment structure
+python3 discernus/cli.py run projects/simple_test --dry-run  # Preview execution
+python3 discernus/cli.py run projects/simple_test         # Execute experiment
 
 # Infrastructure management
-discernus start                  # Start all services
-discernus stop                   # Stop all services
+python3 discernus/cli.py start                  # Start all services
+python3 discernus/cli.py stop                   # Stop all services
 
 # View MinIO artifacts
 curl http://localhost:9000/minio/health/live
