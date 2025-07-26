@@ -64,7 +64,7 @@ class ThinOrchestrator:
         
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
         
-    def run_experiment(self, model: str = "vertex_ai/gemini-2.5-pro") -> Dict[str, Any]:
+    def run_experiment(self, model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
         """
         Execute complete experiment using THIN v2.0 direct call coordination.
         

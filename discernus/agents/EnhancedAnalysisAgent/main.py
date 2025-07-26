@@ -186,9 +186,17 @@ class EnhancedAnalysisAgent:
             if not result_content or result_content.strip() == "":
                 raise EnhancedAnalysisAgentError("LLM returned empty content")
             
+            # Clean the response to remove common LLM artifacts (e.g., Markdown fences)
+            cleaned_content = result_content.strip()
+            if cleaned_content.startswith("```json"):
+                cleaned_content = cleaned_content[7:]
+            if cleaned_content.endswith("```"):
+                cleaned_content = cleaned_content[:-3]
+            cleaned_content = cleaned_content.strip()
+
             # Attempt to parse the JSON response
             try:
-                analysis_data = json.loads(result_content)
+                analysis_data = json.loads(cleaned_content)
             except json.JSONDecodeError as e:
                 self.audit.log_agent_event(self.agent_name, "json_parse_error", {
                     "batch_id": batch_id, "error": str(e), "raw_response": result_content
