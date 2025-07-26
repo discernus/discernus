@@ -94,16 +94,6 @@ If you're building intelligence, use an LLM. If you're building infrastructure, 
 
 **🚨 VELOCITY KILLER**: The #2 cause of wasted Cursor usage is environment confusion. Use `make check` and standardized patterns.
 
-## Emergency Contacts
-
-- **Environment Management**: `docs/CURSOR_AGENT_ENVIRONMENT_GUIDE.md` - Quick patterns for venv
-- **Testing**: `discernus/tests/README.md` - Complete testing guide  
-- **Architecture questions**: `THIN_ARCHITECTURE_REFERENCE.md`
-- **Implementation patterns**: `AGENT_DESIGN_PRINCIPLES.md`
-- **Strategic context**: `DISCERNUS_STRATEGIC_VISION.md`
-- **Compliance check**: `THIN_COMPLIANCE_CHECKLIST.md`
-- **Framework specifications**: `docs/specifications/FRAMEWORK_SPECIFICATION_V4.md`
-
 ## Human-Centric Design
 
 **Remember**: Researchers should feel like they're collaborating with a brilliant research assistant, not operating a technical system. The platform should **amplify human intelligence** through natural conversation and transparent processes.

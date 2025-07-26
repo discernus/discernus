@@ -22,7 +22,7 @@ The LLM, an excellent pattern-matcher, correctly identifies that she has followe
 
 ## 4. The First-Order Insight: The Need for Methodological Guardrails
 
-The first-order insight is that the Discernus system cannot be a passive tool. It needs an immune system. The `PreTestAgent` should act as a methodological gatekeeper. In this initial conception, the agent would reject Sarah's framework with a clear error:
+The first-order insight is that the Discernus system cannot be a passive tool. It needs an immune system. The validation system should act as a methodological gatekeeper. In this initial conception, the agent would reject Sarah's framework with a clear error:
 
 **Initial (Incorrect) Response:** `REJECTED: Framework dimension "Ideological Stance" is not methodologically falsifiable. You must provide explicit linguistic markers.`
 

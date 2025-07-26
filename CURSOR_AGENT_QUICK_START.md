@@ -55,25 +55,14 @@ git commit -m "Brief message"  # Short commits
 
 ## 📚 KEY FILES TO READ
 1. **`.cursor/rules`** - 114 lines of strict behavioral rules
-2. **`pm/active_projects/ALPHA_SYSTEM_SPECIFICATION.md`** - What to build
-3. **`pm/active_projects/FRESH_START_BRIEF.md`** - Current clean state
-4. **`docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`** - THIN principles
+2. **`docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`** - THIN principles
 
-## 🎯 CURRENT MISSION: Alpha System Implementation
-**What needs to be built:**
-1. **Three diverse test experiments** (Political, Corporate, Academic)
-2. **BaseAgent abstraction** for standardized logging  
-3. **ReportAgent** for final output generation
-4. **Prompt "DNA" capture** for provenance
-5. **Minor CLI fixes** (click argument handling)
 
 ## 🔧 USEFUL COMMANDS
 ```bash
 # Environment & Testing
 make check                    # Verify environment
 make test                     # Run test suite
-discernus list               # See available experiments  
-discernus status             # Check Redis infrastructure
 
 # Development
 python3 scripts/prompt_engineering_harness.py --list-models
@@ -86,7 +75,3 @@ git status --porcelain       # Quick git check
 2. **Import errors**: `source venv/bin/activate && pip install missing_package`
 3. **Redis/Infrastructure**: `python3 scripts/background_executor.py`
 4. **Architecture questions**: Read `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
-5. **What to build**: Read `pm/active_projects/ALPHA_SYSTEM_SPECIFICATION.md`
-
----
-**🎯 REMEMBER**: This is a **95% complete** Alpha System. Focus on content creation (experiments) and minor completion items, not rebuilding infrastructure. The hard architectural work is done. 

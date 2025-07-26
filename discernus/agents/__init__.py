@@ -1,25 +1,28 @@
 #!/usr/bin/env python3
 """
-Discernus Agents - A collection of specialized agents for computational text analysis.
+Discernus Agents - THIN v2.0 Enhanced Agents
+============================================
+
+Enhanced agents for the THIN v2.0 architecture with mathematical validation
+and direct function call interfaces.
 """
 
-from .project_coherence_analyst import ProjectCoherenceAnalyst
-from .ensemble_configuration_agent import EnsembleConfigurationAgent
-from .execution_planner_agent import ExecutionPlannerAgent
-from .methodological_overwatch_agent import MethodologicalOverwatchAgent
-from .experiment_conclusion_agent import ExperimentConclusionAgent
-from .data_extraction_agent import DataExtractionAgent
+# THIN v2.0 Enhanced Agents
+from .enhanced_analysis_agent import EnhancedAnalysisAgent
+from .enhanced_synthesis_agent import EnhancedSynthesisAgent
+
+# Legacy agents (for backward compatibility)
+from .AnalyseBatchAgent.main import AnalyseBatchAgent
+from .SynthesisAgent.main import SynthesisAgent  
+from .ReportAgent.main import ReportAgent
 
 __all__ = [
-    "AnalysisAgent",
-    "DataExtractionAgent",
-    "DetectiveAgent",
-    "GenericExpertAgent",
-    "InitializationAgent",
-    "DiscernusLibrarianAgent",
-    "QualitativeAnalysisAgent",
-    "QuantitativeAnalysisAgent",
-    "ResearcherAgent",
-    "SynthesisAgent",
-    "ValidationAgent",
+    # THIN v2.0 Enhanced Agents
+    "EnhancedAnalysisAgent",
+    "EnhancedSynthesisAgent",
+    
+    # Legacy Agents
+    "AnalyseBatchAgent",
+    "SynthesisAgent", 
+    "ReportAgent",
 ] 
