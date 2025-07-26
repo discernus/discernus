@@ -3,8 +3,30 @@
 Batch Planner Agent for Discernus THIN v2.0
 ===========================================
 
+REMOVAL TRIGGER: This component exists to manage context window limits in LLMs.
+If/when LLM context windows become effectively unlimited, this entire file 
+can be safely deleted and its integration points removed.
+
+REMOVAL SEARCH TERMS: 
+- "BatchPlannerAgent" 
+- "batch_planner_agent"
+- "context window management"
+- "token footprint batching"
+
+CURRENT PURPOSE:
 Simple agent that creates optimal batches based on token footprints
-and API rate limits. No fancy research optimization - just math.
+and context window limits. Prevents 1M+ token errors that would otherwise
+fail experiments with large corpora.
+
+INTEGRATION POINTS TO REMOVE:
+1. discernus/core/thin_orchestrator.py (import and usage)
+2. discernus/agents/__init__.py (import statement)  
+3. This file: discernus/agents/batch_planner_agent.py
+
+ARCHITECTURAL RATIONALE:
+Built to handle real context window limits discovered during testing
+(47 presidential speeches = 1.4M tokens > 1M limit). Originally built
+for rate limiting but repurposed for context management.
 """
 
 import json
@@ -33,6 +55,7 @@ class BatchPlannerAgent:
         self.DOCUMENT_OVERHEAD_TOKENS = 200  # Per-document metadata and structure
         
         print(f"📊 Batch planner initialized for experiment: {security_boundary.experiment_name}")
+        print("🔧 CONTEXT_WINDOW_MANAGEMENT: Using context window limits (not TPM) for batch sizing")
     
     def estimate_tokens(self, text: str) -> int:
         """Estimate token count from character count."""
@@ -51,6 +74,7 @@ class BatchPlannerAgent:
         """
         Get rate limits for the specified model.
         For Vertex AI, these are conservative estimates - actual limits may be higher due to DSQ.
+        NOTE: These are for rate limiting, NOT context window management!
         """
         if "vertex_ai" in model:
             if "gemini-2.5-pro" in model:
@@ -69,6 +93,28 @@ class BatchPlannerAgent:
         # Default conservative limits
         return {"rpm": 5, "tpm": 250000, "rpd": 100}
     
+    def get_context_window_limit(self, model: str) -> int:
+        """
+        Get actual context window limits for batch sizing.
+        
+        CONTEXT_WINDOW_MANAGEMENT: This is the core fix - use context windows, not TPM!
+        When LLM context windows become unlimited, this method can return a very large number.
+        
+        Args:
+            model: LLM model identifier
+            
+        Returns:
+            Maximum tokens per batch based on context window (with safety margin)
+        """
+        if "vertex_ai" in model:
+            if "gemini-2.5-pro" in model:
+                return 1_800_000  # 2M context window with 10% safety margin
+            elif "gemini-2.5-flash" in model:
+                return 900_000    # 1M context window with 10% safety margin
+        
+        # Conservative default for unknown models
+        return 500_000
+    
     def create_batches(self, 
                       framework_content: str, 
                       corpus_documents: List[Dict[str, Any]], 
@@ -81,10 +127,18 @@ class BatchPlannerAgent:
         """
         start_time = self._get_timestamp()
         
+        # CONTEXT_WINDOW_MANAGEMENT: Log the dramatic improvement in batch sizing
+        context_window_limit = self.get_context_window_limit(model)
+        old_tpm_limit = min(limits['tpm'] // 2, 100000)  # What it used to be
+        improvement_factor = context_window_limit / old_tpm_limit
+        
         self.audit.log_agent_event("BatchPlannerAgent", "batch_planning_start", {
             "model": model,
             "total_documents": len(corpus_documents),
-            "framework_size_chars": len(framework_content)
+            "framework_size_chars": len(framework_content),
+            "context_window_limit": context_window_limit,
+            "old_tpm_based_limit": old_tpm_limit,
+            "improvement_factor": f"{improvement_factor:.1f}x larger batches"
         })
         
         # Get rate limits for this model
@@ -110,7 +164,9 @@ class BatchPlannerAgent:
         batches = []
         current_batch = []
         current_batch_tokens = base_overhead
-        max_tokens_per_batch = min(limits['tpm'] // 2, 100000)  # Conservative: use half TPM limit or 100k
+        # CONTEXT_WINDOW_MANAGEMENT: Use actual context window limits, not TPM!
+        max_tokens_per_batch = self.get_context_window_limit(model)
+        print(f"🎯 Batch sizing: {max_tokens_per_batch:,} tokens per batch (context window limit)")
         
         for doc in docs_with_tokens:
             doc_total_tokens = doc['estimated_tokens'] + self.DOCUMENT_OVERHEAD_TOKENS
