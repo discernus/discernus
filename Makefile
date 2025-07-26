@@ -1,16 +1,26 @@
 # Discernus Development Makefile
 # Standardizes common operations to prevent venv confusion
 
-.PHONY: help check test install deps harness clean
+.PHONY: help check test install deps harness clean start-infra stop-infra
 
 help:  ## Show this help message
 	@echo "Discernus Development Commands"
 	@echo "============================="
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-12s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
 check:  ## Check environment setup (run this first!)
 	@echo "🔍 Checking development environment..."
 	@source venv/bin/activate && python3 scripts/check_environment.py
+
+start-infra:  ## Start all infrastructure services (MinIO, Redis)
+	@echo "🚀 Starting infrastructure services..."
+	@./scripts/start_infrastructure.sh
+
+stop-infra:  ## Stop all infrastructure services
+	@echo "🛑 Stopping infrastructure services..."
+	@pkill -f "minio server" || true
+	@pkill redis-server || true
+	@echo "✅ Infrastructure stopped"
 
 test:  ## Run the test suite
 	@echo "🧪 Running tests..."
