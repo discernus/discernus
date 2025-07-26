@@ -10,6 +10,7 @@ and direct function call interfaces.
 # THIN v2.0 Enhanced Agents
 from .enhanced_analysis_agent import EnhancedAnalysisAgent
 from .enhanced_synthesis_agent import EnhancedSynthesisAgent
+from .batch_planner_agent import BatchPlannerAgent
 
 # Legacy agents (for backward compatibility)
 from .AnalyseBatchAgent.main import AnalyseBatchAgent
@@ -20,6 +21,7 @@ __all__ = [
     # THIN v2.0 Enhanced Agents
     "EnhancedAnalysisAgent",
     "EnhancedSynthesisAgent",
+    "BatchPlannerAgent",
     
     # Legacy Agents
     "AnalyseBatchAgent",
