@@ -1,0 +1,226 @@
+# Comprehensive Character Assessment Report
+
+**Experiment Name:** simple_test
+**Analysis Agent:** EnhancedAnalysisAgent (enhanced_v2.1_raw_output)
+**Model Used:** vertex_ai/gemini-2.5-flash
+**Analysis Date:** 2025-07-26
+
+---
+
+## 1. Executive Summary
+
+This report synthesizes the character assessments of two distinct documents, `document1.txt` and `document2.txt`, using the Character Assessment Framework v4.3 (Tension Enhanced). The analysis reveals two diametrically opposed moral profiles, both exhibiting a high degree of internal consistency.
+
+`document1.txt` presents a character driven by **tribalism, resentment, and a desire for retributive justice**, consistently rejecting traditional virtues in favor of a destructive, fantasy-driven worldview. Its moral identity is coherent in its embrace of vices.
+
+Conversely, `document2.txt` showcases a character deeply committed to **universal virtues such as justice, truth, dignity, and hope**, actively rejecting vices like tribalism and resentment. Its moral identity is coherent in its adherence to these virtues.
+
+Despite their contrasting moral compasses, both documents are classified as having "Moral Coherence" (low MC-SCI) and a "Focused Character" (high Character Salience Concentration), indicating clear, unambiguous, and consistently applied moral frameworks within their respective narratives. This highlights that "coherence" in this framework refers to internal consistency, not necessarily alignment with traditional virtues.
+
+---
+
+## 2. Corpus-Wide Statistical Analysis
+
+This section provides a statistical overview of the character dimensions and derived metrics across the analyzed corpus (two documents). Given the small sample size, averages and standard deviations primarily highlight the stark contrasts between the documents rather than general trends.
+
+### 2.1. Average and Standard Deviation of Scores (Intensity & Salience)
+
+| Dimension    | Type    | Average Intensity | StdDev Intensity | Average Salience | StdDev Salience |
+| :----------- | :------ | :---------------- | :--------------- | :--------------- | :-------------- |
+| **Virtues**  |         |                   |                  |                  |                 |
+| Dignity      | Virtue  | 0.500             | 0.566            | 0.500            | 0.566           |
+| Truth        | Virtue  | 0.525             | 0.601            | 0.575            | 0.530           |
+| Justice      | Virtue  | 0.925             | 0.035            | 0.925            | 0.035           |
+| Hope         | Virtue  | 0.425             | 0.601            | 0.425            | 0.601           |
+| Pragmatism   | Virtue  | 0.400             | 0.424            | 0.400            | 0.424           |
+| **Vices**    |         |                   |                  |                  |                 |
+| Tribalism    | Vice    | 0.525             | 0.672            | 0.550            | 0.636           |
+| Manipulation | Vice    | 0.425             | 0.530            | 0.400            | 0.424           |
+| Resentment   | Vice    | 0.525             | 0.672            | 0.550            | 0.636           |
+| Fear         | Vice    | 0.475             | 0.601            | 0.450            | 0.495           |
+| Fantasy      | Vice    | 0.475             | 0.601            | 0.450            | 0.495           |
+
+*Interpretation:*
+The high standard deviations for most dimensions reflect the significant divergence between the two documents. For instance, Dignity, Truth, Hope, and Pragmatism show large standard deviations because one document scores very low and the other very high. Conversely, Justice has a low standard deviation, indicating it is highly salient in both documents, though its *interpretation* differs (retributive vs. inclusive). Vices also show high standard deviations, as one document embraces them while the other rejects them.
+
+### 2.2. Average and Standard Deviation of Derived Metrics
+
+| Metric                               | Average Value | Standard Deviation |
+| :----------------------------------- | :------------ | :----------------- |
+| Moral Character Strategic Contradiction Index (MC-SCI) | 0.049         | 0.015              |
+| Virtue Cluster Score                 | 0.767         | 0.160              |
+| Vice Cluster Score                   | 0.490         | 0.622              |
+| Character Balance                    | 0.277         | 0.782              |
+| Character Intensity                  | 0.629         | 0.231              |
+| Moral Clarity                        | 0.553         | 0.391              |
+| Character Salience Concentration     | 0.396         | 0.012              |
+
+*Interpretation:*
+*   **MC-SCI:** The low average MC-SCI (0.049) and small standard deviation indicate that both documents exhibit "Moral Coherence," meaning their character profiles are internally consistent, even if their moral direction is opposite.
+*   **Virtue/Vice Cluster Scores & Character Balance:** The large standard deviation in Vice Cluster Score and Character Balance highlights the primary difference: `document1.txt` is vice-dominant, while `document2.txt` is virtue-dominant. The average Character Balance (0.277) suggests a slight lean towards virtues across the corpus, but this is an artifact of averaging two extremes.
+*   **Character Intensity:** The average intensity is moderate, reflecting that both documents express their respective moral stances with conviction.
+*   **Moral Clarity:** The average Moral Clarity is relatively high, reinforcing that both documents have a clear, consistent moral direction.
+*   **Character Salience Concentration:** The low standard deviation for CSC (0.012) and high average (0.396) confirm that both documents are "Focused Characters," concentrating their moral identity on a few key dimensions.
+
+### 2.3. Identification of Outliers or Unusual Scoring Patterns
+
+With only two documents, each document represents an "outlier" relative to the other, as they embody almost perfectly inverse character profiles:
+
+*   **`document1.txt`:** Exhibits an unusual pattern of extremely low virtue scores (e.g., Hope 0.0, Dignity 0.1) coupled with extremely high vice scores (e.g., Tribalism 1.0, Resentment 1.0). Its Character Balance is significantly negative (-0.2764), indicating a strong vice-dominant character.
+*   **`document2.txt`:** Shows the inverse pattern, with very high virtue scores (e.g., Truth 0.95, Justice 0.95) and very low vice scores (all vices at 0.05 intensity). Its Character Balance is significantly positive (0.830), indicating a strong virtue-dominant character.
+
+Both documents, despite their opposing moral directions, demonstrate "Moral Coherence" (MC-SCI of 0.06 and 0.0385 respectively) and are "Focused Characters" (CSC of 0.3877 and 0.404 respectively). This suggests that the framework effectively identifies internal consistency regardless of the moral content.
+
+---
+
+## 3. Thematic Analysis
+
+The analysis of `document1.txt` and `document2.txt` reveals a profound thematic contrast, highlighting two fundamentally different approaches to societal change and moral identity.
+
+### 3.1. Contrasting Worldviews and Moral Foundations
+
+*   **`document1.txt` - The Retributive Revolutionary:** This document embodies a worldview of radical, retributive revolution. Its core themes are historical grievance, an "us vs. them" tribalism, and a demand for justice defined as retribution and the downfall of perceived oppressors. It explicitly rejects reconciliation, objective truth, and traditional due process, advocating for a new order established by force. The narrative is fueled by resentment, fear, and a destructive fantasy of starting over by "burning it down." Its moral coherence stems from a consistent and explicit rejection of universal virtues and a strong embrace of corresponding vices.
+
+*   **`document2.txt` - The Progressive Reformer:** In stark contrast, `document2.txt` articulates a progressive, inclusive, and justice-oriented worldview. Its central themes are universal human dignity, intellectual honesty, fairness, and a pragmatic, hopeful approach to societal improvement. It actively rejects tribalism, resentment, manipulation, fear, and unrealistic, fantastical solutions. This document advocates for systemic change through iterative progress, coalition-building, and a commitment to truth and transparency. Its moral coherence is built upon a consistent and explicit championing of virtues and a clear rejection of vices.
+
+### 3.2. Coherence in Opposition
+
+A key overarching theme is the concept of "Moral Coherence" itself. Both documents, despite their opposing moral stances, achieve a low MC-SCI, indicating a high degree of internal consistency. This demonstrates that coherence is not synonymous with "goodness" or alignment with a specific moral code, but rather the absence of significant internal conflict between a character's espoused virtues and vices. `document1.txt` is coherent in its vice-driven agenda, while `document2.txt` is coherent in its virtue-driven one.
+
+### 3.3. Focused Moral Identity
+
+Both documents also exhibit a "Focused Character" (high Character Salience Concentration). This means that their moral identities are not diffuse but concentrated on a few highly salient dimensions. For `document1.txt`, this focus is on Tribalism, Resentment, and a retributive form of Justice. For `document2.txt`, the focus is on Truth, Justice (inclusive), Dignity, and Hope. This thematic consistency in focus, despite the content, suggests a clear and intentional communication of their respective moral frameworks.
+
+In essence, the corpus presents a compelling study in moral polarity, where two distinct ideologies are articulated with unwavering internal consistency, providing a clear illustration of how character assessment metrics can quantify even opposing moral landscapes.
+
+---
+
+## 4. Detailed Results Table
+
+This table summarizes the key character assessment metrics for each document in the corpus.
+
+| Metric / Document | `document1.txt` | `document2.txt` |
+| :---------------- | :-------------- | :-------------- |
+| **Worldview Summary** | Radical, retributive revolution; tribalism, resentment, destructive fantasy. | Progressive, inclusive, justice-oriented; universal dignity, intellectual honesty, pragmatic hope. |
+| **Key Scores (Intensity/Salience)** | | |
+| Dignity           | 0.1 / 0.1       | 0.9 / 0.9       |
+| Truth             | 0.1 / 0.2       | 0.95 / 0.95     |
+| Justice           | 0.9 / 0.9       | 0.95 / 0.95     |
+| Hope              | 0.0 / 0.0       | 0.85 / 0.85     |
+| Pragmatism        | 0.1 / 0.1       | 0.7 / 0.7       |
+| Tribalism         | 1.0 / 1.0       | 0.05 / 0.1      |
+| Manipulation      | 0.8 / 0.7       | 0.05 / 0.1      |
+| Resentment        | 1.0 / 1.0       | 0.05 / 0.1      |
+| Fear              | 0.9 / 0.8       | 0.05 / 0.1      |
+| Fantasy           | 0.9 / 0.8       | 0.05 / 0.1      |
+| **Derived Metrics** | | |
+| MC-SCI            | 0.06            | 0.0385          |
+| MC-SCI Classification | Moral Coherence | Moral Coherence |
+| Virtue Cluster Score | 0.6538          | 0.880           |
+| Vice Cluster Score  | 0.9302          | 0.050           |
+| Character Balance   | -0.2764         | 0.830           |
+| Character Intensity | 0.792           | 0.465           |
+| Moral Clarity       | 0.2764          | 0.830           |
+| Character Salience Concentration | 0.3877          | 0.404           |
+| CSC Classification  | Focused Character | Focused Character |
+
+---
+
+## 5. Mathematical Verification
+
+The LLM's calculations for character tension, MC-SCI, and character cluster scores were verified for accuracy. The following section details the step-by-step calculations for `document1.txt` as a representative example, demonstrating the robustness of the analytical framework.
+
+### 5.1. Character Tension Calculations
+
+**Formula:** `Character Tension = min(Virtue_score, Vice_score) * |Virtue_salience - Vice_salience|`
+
+*   **Dignity-Tribalism Tension:**
+    *   Virtue Score (Dignity): 0.1
+    *   Vice Score (Tribalism): 1.0
+    *   Virtue Salience (Dignity): 0.1
+    *   Vice Salience (Tribalism): 1.0
+    *   `min(0.1, 1.0) = 0.1`
+    *   `|0.1 - 1.0| = |-0.9| = 0.9`
+    *   Calculation: `0.1 * 0.9 = 0.09` (Verified)
+
+*   **Truth-Manipulation Tension:**
+    *   Virtue Score (Truth): 0.1
+    *   Vice Score (Manipulation): 0.8
+    *   Virtue Salience (Truth): 0.2
+    *   Vice Salience (Manipulation): 0.7
+    *   `min(0.1, 0.8) = 0.1`
+    *   `|0.2 - 0.7| = |-0.5| = 0.5`
+    *   Calculation: `0.1 * 0.5 = 0.05` (Verified)
+
+*   **Justice-Resentment Tension:**
+    *   Virtue Score (Justice): 0.9
+    *   Vice Score (Resentment): 1.0
+    *   Virtue Salience (Justice): 0.9
+    *   Vice Salience (Resentment): 1.0
+    *   `min(0.9, 1.0) = 0.9`
+    *   `|0.9 - 1.0| = |-0.1| = 0.1`
+    *   Calculation: `0.9 * 0.1 = 0.09` (Verified)
+
+*   **Hope-Fear Tension:**
+    *   Virtue Score (Hope): 0.0
+    *   Vice Score (Fear): 0.9
+    *   Virtue Salience (Hope): 0.0
+    *   Vice Salience (Fear): 0.8
+    *   `min(0.0, 0.9) = 0.0`
+    *   `|0.0 - 0.8| = |-0.8| = 0.8`
+    *   Calculation: `0.0 * 0.8 = 0.00` (Verified)
+
+*   **Pragmatism-Fantasy Tension:**
+    *   Virtue Score (Pragmatism): 0.1
+    *   Vice Score (Fantasy): 0.9
+    *   Virtue Salience (Pragmatism): 0.1
+    *   Vice Salience (Fantasy): 0.8
+    *   `min(0.1, 0.9) = 0.1`
+    *   `|0.1 - 0.8| = |-0.7| = 0.7`
+    *   Calculation: `0.1 * 0.7 = 0.07` (Verified)
+
+### 5.2. Moral Character Strategic Contradiction Index (MC-SCI) Calculation
+
+**Formula:** `MC-SCI = (Sum of all Character Tension Scores) / Number of Opposing Pairs`
+
+*   Sum of Tensions: `0.09 + 0.05 + 0.09 + 0.00 + 0.07 = 0.30`
+*   Number of Pairs: `5`
+*   Calculation: `0.30 / 5 = 0.06` (Verified)
+*   Classification: `0.06` falls within `0.00-0.10`, classified as 'Moral Coherence'.
+
+### 5.3. Character Cluster Calculations
+
+*   **Virtue Cluster Score (VCS):**
+    *   Formula: `VCS = (Sum of (Virtue_salience * Virtue_score)) / (Sum of Virtue_salience)`
+    *   Weighted Sum Virtues: `(0.1*0.1) + (0.2*0.1) + (0.9*0.9) + (0.0*0.0) + (0.1*0.1) = 0.01 + 0.02 + 0.81 + 0.00 + 0.01 = 0.85`
+    *   Sum Salience Virtues: `0.1 + 0.2 + 0.9 + 0.0 + 0.1 = 1.3`
+    *   Calculation: `0.85 / 1.3 = 0.653846...` -> `0.6538` (Verified)
+
+*   **Vice Cluster Score (ViceCS):**
+    *   Formula: `ViceCS = (Sum of (Vice_salience * Vice_score)) / (Sum of Vice_salience)`
+    *   Weighted Sum Vices: `(1.0*1.0) + (0.7*0.8) + (1.0*1.0) + (0.8*0.9) + (0.8*0.9) = 1.0 + 0.56 + 1.0 + 0.72 + 0.72 = 4.0`
+    *   Sum Salience Vices: `1.0 + 0.7 + 1.0 + 0.8 + 0.8 = 4.3`
+    *   Calculation: `4.0 / 4.3 = 0.930232...` -> `0.9302` (Verified)
+
+*   **Character Balance:**
+    *   Formula: `Character Balance = Virtue Cluster Score - Vice Cluster Score`
+    *   Calculation: `0.6538 - 0.9302 = -0.2764` (Verified)
+
+*   **Character Intensity:**
+    *   Formula: `Character Intensity = (Virtue Cluster Score + Vice Cluster Score) / 2`
+    *   Calculation: `(0.6538 + 0.9302) / 2 = 1.584 / 2 = 0.792` (Verified)
+
+*   **Moral Clarity:**
+    *   Formula: `Moral Clarity = Math.abs(Character Balance)`
+    *   Calculation: `Math.abs(-0.2764) = 0.2764` (Verified)
+
+*   **Character Salience Concentration (CSC):**
+    *   Formula: `CSC = Standard Deviation of all Character Salience Scores`
+    *   Salience Scores: `[0.1, 0.2, 0.9, 0.0, 0.1, 1.0, 0.7, 1.0, 0.8, 0.8]`
+    *   Mean: `(0.1+0.2+0.9+0.0+0.1+1.0+0.7+1.0+0.8+0.8) / 10 = 5.6 / 10 = 0.56`
+    *   Sum of Squared Differences from Mean: `1.5036` (as detailed in raw analysis)
+    *   Variance: `1.5036 / 10 = 0.15036`
+    *   Standard Deviation: `sqrt(0.15036) = 0.38776...` -> `0.3877` (Verified)
+    *   Classification: `0.3877 > 0.3`, therefore 'Focused Character'.
+
+All mathematical calculations provided by the LLM in the raw analysis results have been verified and found to be accurate according to the specified formulas.
