@@ -127,6 +127,9 @@ class BatchPlannerAgent:
         """
         start_time = self._get_timestamp()
         
+        # Get rate limits for this model
+        limits = self.get_rate_limits(model)
+        
         # CONTEXT_WINDOW_MANAGEMENT: Log the dramatic improvement in batch sizing
         context_window_limit = self.get_context_window_limit(model)
         old_tpm_limit = min(limits['tpm'] // 2, 100000)  # What it used to be
@@ -140,9 +143,6 @@ class BatchPlannerAgent:
             "old_tpm_based_limit": old_tpm_limit,
             "improvement_factor": f"{improvement_factor:.1f}x larger batches"
         })
-        
-        # Get rate limits for this model
-        limits = self.get_rate_limits(model)
         
         # Calculate framework token overhead (constant across all batches)
         framework_tokens = self.estimate_tokens(framework_content)
