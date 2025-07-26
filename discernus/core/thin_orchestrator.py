@@ -26,7 +26,6 @@ from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.EnhancedSynthesisAgent.main import EnhancedSynthesisAgent
-from ..agents.batch_planner_agent import BatchPlannerAgent
 
 
 class ThinOrchestratorError(Exception):
@@ -152,96 +151,43 @@ class ThinOrchestrator:
             manifest.add_execution_stage("batch_planning", "BatchPlannerAgent", batch_planning_start_time)
             
             # Create intelligent batch plan with production cost transparency
-            batch_planner = BatchPlannerAgent(self.security, audit)
-            batch_plan = batch_planner.create_batches(
-                framework_content=framework_content,
-                corpus_documents=corpus_documents,
-                model=model
-            )
+            # batch_planner = BatchPlannerAgent(self.security, audit)
+            # batch_plan = batch_planner.create_batches(
+            #     framework_content=framework_content,
+            #     corpus_documents=corpus_documents,
+            #     model=model
+            # )
             
             batch_planning_end_time = datetime.now(timezone.utc).isoformat()
             manifest.add_execution_stage("batch_planning", "BatchPlannerAgent",
                                        batch_planning_start_time, batch_planning_end_time, "completed", {
-                "total_batches": batch_plan["total_batches"],
-                "total_estimated_cost": batch_plan["total_estimated_cost"],
-                "total_estimated_tokens": batch_plan["total_estimated_tokens"],
-                "context_window_limit": batch_plan["context_window_limit"]
+                "total_batches": 0, # No batches in this new flow
+                "total_estimated_cost": 0.0,
+                "total_estimated_tokens": 0,
+                "context_window_limit": 0
             })
             
-            print(f"💰 Total estimated cost: ${batch_plan['total_estimated_cost']:.4f}")
-            print(f"📊 Batch plan: {batch_plan['total_batches']} batches, "
-                  f"⏱️ ~{(batch_plan['total_batches'] * batch_plan['delay_between_batches'])/60:.1f} minutes")
+            print(f"💰 Total estimated cost: ${0:.4f}")
+            print(f"📊 Batch plan: 0 batches, "
+                  f"⏱️ ~{0:.1f} minutes")
             
-            # Execute batched analysis with production monitoring and intelligent pacing
-            analysis_start_time = datetime.now(timezone.utc).isoformat()
-            manifest.add_execution_stage("enhanced_analysis", "EnhancedAnalysisAgent", analysis_start_time)
-            
+            # Initialize analysis and synthesis agents
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
-            all_analysis_results = []
-            total_actual_cost = 0.0
             
-            print(f"\n🚀 Starting {batch_plan['total_batches']} batch analysis with intelligent pacing...")
-            
-            for i, batch in enumerate(batch_plan["batches"]):
-                # Calculate pacing delay (skip for first batch)
-                delay_seconds = batch_plan['delay_between_batches'] if i > 0 else 0
-                
-                # Add total_batches info for status reporting
-                batch['total_batches'] = batch_plan['total_batches']
-                
-                # Use production batch execution with enhanced monitoring
-                batch_result = batch_planner.execute_batch_with_pacing(
-                    batch_info=batch,
-                    analysis_agent=analysis_agent,
-                    framework_content=framework_content,
-                    delay_seconds=delay_seconds
-                )
-                
-                # Track actual costs and execution
-                if batch_result['success']:
-                    total_actual_cost += batch_result.get('actual_cost', 0.0)
-                    # The batch_result contains the analysis results already
-                    all_analysis_results.append(batch_result['results'])
-                else:
-                    print(f"❌ Batch {batch['batch_id']} failed: {batch_result.get('error', 'Unknown error')}")
-                    # Add empty results to maintain batch ordering
-                    all_analysis_results.append({})
-                
-                audit.log_orchestrator_event("batch_completed", {
-                    "batch_id": batch['batch_id'],
-                    "documents_processed": batch['document_count'],
-                    "duration_seconds": batch_result['execution_time'],
-                    "success": batch_result['success'],
-                    "actual_cost": batch_result.get('actual_cost', 0.0)
-                })
-            
-            # Combine all batch results
-            combined_analysis_result = self._combine_batch_results(all_analysis_results)
-            
-            # Production cost summary
-            cost_variance = abs(total_actual_cost - batch_plan['total_estimated_cost'])
-            cost_accuracy = ((batch_plan['total_estimated_cost'] - cost_variance) / batch_plan['total_estimated_cost']) * 100 if batch_plan['total_estimated_cost'] > 0 else 100
-            
-            print(f"\n💰 FINAL COST SUMMARY:")
-            print(f"   Estimated: ${batch_plan['total_estimated_cost']:.4f}")
-            print(f"   Actual: ${total_actual_cost:.4f}")
-            print(f"   Accuracy: {cost_accuracy:.1f}%")
-            
-            analysis_end_time = datetime.now(timezone.utc).isoformat()
-            manifest.add_execution_stage("enhanced_analysis", "EnhancedAnalysisAgent", 
-                                       analysis_start_time, analysis_end_time, "completed", {
-                "total_batches_processed": len(batch_plan["batches"]),
-                "total_documents": len(corpus_documents),
-                "estimated_cost": batch_plan['total_estimated_cost'],
-                "actual_cost": total_actual_cost,
-                "cost_accuracy_percent": cost_accuracy,
-                "mathematical_validation": True
-            })
-            
-            # Phase 2: Enhanced Synthesis with Mathematical Spot-Checking
-            synthesis_start_time = datetime.now(timezone.utc).isoformat()
-            manifest.add_execution_stage("enhanced_synthesis", "EnhancedSynthesisAgent", synthesis_start_time)
-            
+            # Execute analysis (one document at a time)
+            all_analysis_results = self._execute_analysis_sequentially(
+                analysis_agent,
+                corpus_documents,
+                framework_content,
+                experiment_config,
+                model
+            )
+
+            # Check if any analysis tasks succeeded
+            successful_analyses = [res for res in all_analysis_results if res.get('result_hash')]
+            if not successful_analyses:
+                raise ThinOrchestratorError("All analysis batches failed. Halting experiment.")
+
             # Execute synthesis
             print("\n🔬 Synthesizing results...")
             synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
@@ -266,20 +212,24 @@ class ThinOrchestrator:
                 "synthesis_confidence": synthesis_result["synthesis_confidence"]
             })
             
-            # Generate final beautiful markdown report
-            final_report = self._generate_final_report(
-                combined_analysis_result, synthesis_result, experiment_config, manifest
-            )
+            # Finalize manifest
+            manifest.set_synthesis_results(synthesis_result)
             
+            # Combine batch results for final summary
+            analysis_summary = self._combine_batch_results(all_analysis_results)
+
+            # Generate final report (optional, can be done by ReportAgent)
+            # For now, we'll just use the synthesis markdown as the final report
+            final_report_content = synthesis_result.get("synthesis_report_markdown", "Synthesis failed.")
             report_hash = storage.put_artifact(
-                final_report.encode('utf-8'),
-                {"artifact_type": "final_report", "format": "markdown"}
+                final_report_content.encode('utf-8'), 
+                {"artifact_type": "final_report"}
             )
-            
-            # Save beautiful report to results directory
+
+            # Write final report to results folder
             results_dir = self.security.secure_mkdir(run_folder / "results")
             report_file = results_dir / "final_report.md"
-            self.security.secure_write_text(report_file, final_report)
+            self.security.secure_write_text(report_file, final_report_content)
             
             # Finalize manifest and audit
             manifest_file = manifest.finalize_manifest()
@@ -292,10 +242,10 @@ class ThinOrchestrator:
             # Final orchestrator event
             audit.log_orchestrator_event("experiment_complete", {
                 "total_duration_seconds": total_duration,
-                "analysis_duration": analysis_result["duration_seconds"],
-                "synthesis_duration": synthesis_result["duration_seconds"],
+                "analysis_duration": analysis_summary["total_duration_seconds"],
+                "synthesis_duration": synthesis_result.get("execution_metadata", {}).get("duration_seconds", 0),
                 "final_report_hash": report_hash,
-                "manifest_file": manifest_file,
+                "manifest_file": str(manifest_file),
                 "mathematical_validation": "completed"
             })
             
@@ -308,9 +258,9 @@ class ThinOrchestrator:
                 "run_folder": str(run_folder),
                 "results_directory": str(results_dir),
                 "final_report_file": str(report_file),
-                "manifest_file": manifest_file,
+                "manifest_file": str(manifest_file),
                 "total_duration_seconds": total_duration,
-                "analysis_result": analysis_result,
+                "analysis_result": analysis_summary,
                 "synthesis_result": synthesis_result,
                 "mathematical_validation": True,
                 "architecture": "thin_v2.0_direct_calls"
@@ -329,7 +279,36 @@ class ThinOrchestrator:
                 pass  # Don't fail on logging errors
             
             raise ThinOrchestratorError(f"Experiment execution failed: {e}")
-    
+
+    def _execute_analysis_sequentially(self,
+                                       analysis_agent: EnhancedAnalysisAgent,
+                                       corpus_documents: List[Dict[str, Any]],
+                                       framework_content: str,
+                                       experiment_config: Dict[str, Any],
+                                       model: str) -> List[Dict[str, Any]]:
+        """
+        Executes the analysis agent for each document, one by one.
+        """
+        all_analysis_results = []
+        total_docs = len(corpus_documents)
+        print(f"\n🚀 Starting sequential analysis of {total_docs} documents...")
+
+        for i, doc in enumerate(corpus_documents):
+            print(f"\n--- Analyzing document {i+1}/{total_docs}: {doc.get('filename')} ---")
+            try:
+                result = analysis_agent.analyze_batch(
+                    framework_content=framework_content,
+                    documents=[doc],  # Pass a list with a single document
+                    experiment_config=experiment_config,
+                    model=model
+                )
+                all_analysis_results.append(result)
+            except Exception as e:
+                print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")
+                all_analysis_results.append({"error": str(e), "document": doc.get('filename')})
+
+        return all_analysis_results
+
     def _extract_and_consolidate_analysis_data(self, 
                                                analysis_results: List[Dict[str, Any]],
                                                storage: LocalArtifactStorage) -> Tuple[List[Dict[str, Any]], Dict[str, str]]:
@@ -419,14 +398,39 @@ class ThinOrchestrator:
         print(f"  Generated artifact index: {index_path}")
 
 
+    def _combine_batch_results(self, batch_results: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Combines results from multiple analysis batches into a single summary.
+        """
+        if not batch_results:
+            return {"total_duration_seconds": 0, "num_batches": 0, "successful_batches": 0}
+
+        total_duration = sum(r.get('duration_seconds', 0) for r in batch_results)
+        num_batches = len(batch_results)
+        successful_batches = sum(1 for r in batch_results if r.get('result_hash'))
+
+        return {
+            "total_duration_seconds": total_duration,
+            "num_batches": num_batches,
+            "successful_batches": successful_batches,
+            "all_batches_successful": successful_batches == num_batches,
+            "individual_batch_results": [
+                {
+                    "batch_id": r.get("batch_id"),
+                    "result_hash": r.get("result_hash"),
+                    "duration": r.get("duration_seconds")
+                } for r in batch_results
+            ]
+        }
+
     def _load_experiment_config(self) -> Dict[str, Any]:
-        """Load and validate experiment configuration."""
-        experiment_file = self.experiment_path / "experiment.md"
+        """Load and validate the experiment.md file."""
+        exp_file = self.experiment_path / "experiment.md"
         
-        if not experiment_file.exists():
+        if not exp_file.exists():
             raise ThinOrchestratorError(f"experiment.md not found in {self.experiment_path}")
         
-        content = self.security.secure_read_text(experiment_file)
+        content = self.security.secure_read_text(exp_file)
         
         # Extract YAML from markdown
         if '---' in content:
@@ -591,58 +595,6 @@ This report presents the results of computational research analysis using the Di
 """
         
         return report
-    
-    def _combine_batch_results(self, batch_results: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        Combine multiple batch analysis results into a single unified result.
-        
-        Args:
-            batch_results: List of individual batch analysis results
-            
-        Returns:
-            Combined analysis result in the same format as single batch
-        """
-        if not batch_results:
-            raise ThinOrchestratorError("Cannot combine empty batch results")
-        
-        if len(batch_results) == 1:
-            return batch_results[0]
-        
-        # Use the first batch as the template
-        combined_result = batch_results[0].copy()
-        
-        # Combine analysis content from all batches
-        combined_analysis_parts = []
-        combined_documents = []
-        total_duration = 0.0
-        
-        for i, batch_result in enumerate(batch_results):
-            batch_content = batch_result["result_content"]
-            combined_analysis_parts.append(f"## Batch {i+1} Analysis Results\n\n{batch_content['analysis_results']}")
-            combined_documents.extend(batch_content.get("document_analyses", []))
-            total_duration += batch_result.get("duration_seconds", 0.0)
-        
-        # Update the combined result
-        combined_result["result_content"]["analysis_results"] = "\n\n".join(combined_analysis_parts)
-        combined_result["result_content"]["document_analyses"] = combined_documents
-        combined_result["duration_seconds"] = total_duration
-        
-        # Update metadata to reflect batching
-        combined_result["result_content"]["processing_mode"] = "batched_analysis"
-        combined_result["result_content"]["total_batches"] = len(batch_results)
-        combined_result["result_content"]["batch_metadata"] = [
-            {
-                "batch_id": i + 1,
-                "documents_processed": len(batch["result_content"].get("document_analyses", [])),
-                "duration_seconds": batch.get("duration_seconds", 0.0),
-                "result_hash": batch["result_hash"]
-            }
-            for i, batch in enumerate(batch_results)
-        ]
-        
-        print(f"🔗 Combined {len(batch_results)} batch results into unified analysis")
-        
-        return combined_result
     
     def _calculate_duration(self, start: str, end: str) -> float:
         """Calculate duration between timestamps in seconds."""
