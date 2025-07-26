@@ -197,4 +197,17 @@ class ExperimentSecurityBoundary:
             "experiment_root": str(self.experiment_root),
             "boundary_type": "filesystem",
             "security_level": "experiment_scoped"
-        } 
+        }
+    
+    def secure_write_file(self, filepath: Union[str, Path], content: str, encoding: str = 'utf-8') -> None:
+        """
+        Write text content to a file within the security boundary.
+        
+        This is an alias for secure_write_text for backwards compatibility.
+        
+        Args:
+            filepath: Path to the file to write
+            content: Text content to write  
+            encoding: Text encoding to use
+        """
+        self.secure_write_text(filepath, content, encoding) 

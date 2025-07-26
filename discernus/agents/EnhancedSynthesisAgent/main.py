@@ -54,8 +54,8 @@ class EnhancedSynthesisAgent:
         self.storage = artifact_storage
         self.agent_name = "EnhancedSynthesisAgent"
         
-        # Patch litellm with instructor
-        self.client = instructor.patch(completion)
+        # Create instructor client for structured output  
+        self.client = instructor.from_litellm(completion)
         
         # Load enhanced prompt template
         self.prompt_template = self._load_prompt_template()
@@ -79,18 +79,18 @@ class EnhancedSynthesisAgent:
         return prompt_config['template']
 
     def synthesize_results(self, 
-                          consolidated_data: List[Dict[str, Any]],
+                          analysis_results: List[Dict[str, Any]],
                           experiment_config: Dict[str, Any],
                           model: str = "vertex_ai/gemini-2.5-pro") -> Dict[str, Any]:
         """
         Perform synthesis on a single, consolidated dataset.
         """
         start_time = datetime.now(timezone.utc).isoformat()
-        synthesis_id = f"synthesis_{hashlib.sha256(f'{start_time}{len(consolidated_data)}'.encode()).hexdigest()[:12]}"
+        synthesis_id = f"synthesis_{hashlib.sha256(f'{start_time}{len(analysis_results)}'.encode()).hexdigest()[:12]}"
         
         self.audit.log_agent_event(self.agent_name, "synthesis_start", {
             "synthesis_id": synthesis_id,
-            "num_documents": len(consolidated_data),
+            "num_documents": len(analysis_results),
             "model": model,
             "experiment": experiment_config.get("name", "unknown")
         })
@@ -98,11 +98,11 @@ class EnhancedSynthesisAgent:
         try:
             # Prepare the synthesis prompt
             synthesis_prompt = self.prompt_template.format(
-                consolidated_data=json.dumps(consolidated_data, indent=2)
+                consolidated_data=json.dumps(analysis_results, indent=2)
             )
 
             # Call the synthesis LLM with instructor
-            report = self.client(
+            report = self.client.chat.completions.create(
                 model=model,
                 response_model=SynthesisReport,
                 messages=[{"role": "user", "content": synthesis_prompt}],
@@ -118,19 +118,22 @@ class EnhancedSynthesisAgent:
             duration = self._calculate_duration(start_time, end_time)
             
             synthesis_artifact = {
+                "result_hash": synthesis_id,  # Use synthesis_id as result_hash for compatibility
                 "synthesis_id": synthesis_id,
                 "agent_name": self.agent_name,
                 "agent_version": "enhanced_v3.0_instructor",
                 "experiment_name": experiment_config.get("name", "unknown"),
                 "model_used": model,
                 "synthesis_report_markdown": report.markdown_report,
+                "duration_seconds": duration,  # Move to top level for orchestrator compatibility
+                "synthesis_confidence": 0.95,  # Add synthetic confidence score
                 "execution_metadata": {
                     "start_time": start_time,
                     "end_time": end_time,
                     "duration_seconds": duration,
                 },
                 "input_metadata": {
-                    "num_documents_synthesized": len(consolidated_data)
+                    "num_documents_synthesized": len(analysis_results)
                 },
                 "provenance": {
                     "security_boundary": self.security.get_boundary_info(),

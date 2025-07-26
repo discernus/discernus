@@ -1,0 +1,40 @@
+{
+  "batch_id": "batch_d080f7cccf8c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v3.0_instructor",
+  "experiment_name": "simple_test",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "analysis_results": {
+    "analysis_summary": "This analysis evaluates the moral character of the speaker in \"document2.txt\" using the Character Assessment Framework v4.3, which incorporates character tension analysis and the Moral Character Strategic Contradiction Index (MC-SCI). The speaker demonstrates a strong commitment to civic virtues and a clear rejection of civic vices, exhibiting a highly coherent moral identity.",
+    "document_analyses": {},
+    "mathematical_verification": {},
+    "self_assessment": {}
+  },
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-26T15:25:24.015360+00:00",
+    "end_time": "2025-07-26T15:25:48.108274+00:00",
+    "duration_seconds": 24.092914,
+    "llm_interaction_hash": "f0af0f25ad84"
+  },
+  "input_artifacts": {
+    "framework_hash": "26343fa41711589a5045082db6a69472127bb4bdccac78c32fb6423accf3967c",
+    "document_hashes": [
+      "af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250726T152503Z_bb412b74"
+  }
+}

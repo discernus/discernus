@@ -9,7 +9,7 @@ template: |
 
   Your response must be a JSON object with the following top-level keys:
   - `analysis_summary`: A brief, top-level summary of the analysis performed.
-  - `document_analyses`: A JSON object where each key is the filename of a document (e.g., "speech1.txt"). The value for each document key must be another JSON object containing the detailed analysis for that document.
+  - `document_analyses`: A JSON object where each key is the EXACT filename from the "Filename:" line in each DOCUMENT section below (e.g., "document1.txt", "document2.txt"). For EACH document listed in the DOCUMENTS section, you MUST create an entry in this object using its exact filename as the key.
   - `mathematical_verification`: A JSON object containing the detailed, step-by-step mathematical verification for all calculations across all documents.
   - `self_assessment`: A JSON object containing your self-assessment of the analysis quality and mathematical accuracy.
 
@@ -48,4 +48,18 @@ template: |
   **DOCUMENTS:**
   {documents}
 
-  Begin enhanced analysis now. Remember, the entire output must be a single JSON object, starting with `{` and ending with `}`. 
+  Begin enhanced analysis now. Your response must be a single JSON object, starting with `{{` and ending with `}}`. 
+  
+  **MANDATORY STRUCTURE**: For each document listed above, you MUST create an entry in `document_analyses` using the filename from its "Filename:" line as the key:
+  
+  {{
+    "analysis_summary": "Your summary here",
+    "document_analyses": {{
+      "document1.txt": {{ "worldview": "...", "reasoning": "...", "character_priorities": "..." }},
+      "document2.txt": {{ "worldview": "...", "reasoning": "...", "character_priorities": "..." }}
+    }},
+    "mathematical_verification": {{}},
+    "self_assessment": {{}}
+  }}
+  
+  DO NOT return empty dictionaries. Fill in the content for each filename you see above.

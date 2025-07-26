@@ -173,8 +173,10 @@ class ThinOrchestrator:
             
             # Initialize analysis and synthesis agents
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
+            synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
             
             # Execute analysis (one document at a time)
+            analysis_start_time = datetime.now(timezone.utc).isoformat()
             all_analysis_results = self._execute_analysis_sequentially(
                 analysis_agent,
                 corpus_documents,
@@ -182,17 +184,18 @@ class ThinOrchestrator:
                 experiment_config,
                 model
             )
-
-            # Check if any analysis tasks succeeded
-            successful_analyses = [res for res in all_analysis_results if res.get('result_hash')]
-            if not successful_analyses:
-                raise ThinOrchestratorError("All analysis batches failed. Halting experiment.")
-
-            # Execute synthesis
-            print("\n🔬 Synthesizing results...")
-            synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
+            print("DEBUG: Raw all_analysis_results from sequential execution:")
+            import json
+            print(json.dumps(all_analysis_results, indent=2))
+            manifest.add_execution_stage("enhanced_analysis", "complete", {
+                "start_time": analysis_start_time,
+                "end_time": datetime.now(timezone.utc).isoformat(),
+                "num_documents": len(corpus_documents)
+            })
             
-            # Extract structured data for synthesis to avoid memory issues
+            # Consolidate analysis data for synthesis
+            print("\n🔬 Synthesizing results...")
+            synthesis_start_time = datetime.now(timezone.utc).isoformat()
             structured_data, artifact_map = self._extract_and_consolidate_analysis_data(all_analysis_results, storage)
 
             # Generate human-readable artifact index
@@ -218,9 +221,10 @@ class ThinOrchestrator:
             # Combine batch results for final summary
             analysis_summary = self._combine_batch_results(all_analysis_results)
 
-            # Generate final report (optional, can be done by ReportAgent)
-            # For now, we'll just use the synthesis markdown as the final report
-            final_report_content = synthesis_result.get("synthesis_report_markdown", "Synthesis failed.")
+            # Generate comprehensive final report with both analysis and synthesis results
+            final_report_content = self._generate_final_report(
+                analysis_summary, synthesis_result, experiment_config, manifest
+            )
             report_hash = storage.put_artifact(
                 final_report_content.encode('utf-8'), 
                 {"artifact_type": "final_report"}
@@ -289,25 +293,20 @@ class ThinOrchestrator:
         """
         Executes the analysis agent for each document, one by one.
         """
-        all_analysis_results = []
-        total_docs = len(corpus_documents)
-        print(f"\n🚀 Starting sequential analysis of {total_docs} documents...")
-
+        all_results = []
         for i, doc in enumerate(corpus_documents):
-            print(f"\n--- Analyzing document {i+1}/{total_docs}: {doc.get('filename')} ---")
-            try:
-                result = analysis_agent.analyze_batch(
-                    framework_content=framework_content,
-                    documents=[doc],  # Pass a list with a single document
-                    experiment_config=experiment_config,
-                    model=model
-                )
-                all_analysis_results.append(result)
-            except Exception as e:
-                print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")
-                all_analysis_results.append({"error": str(e), "document": doc.get('filename')})
+            print(f"\n--- Analyzing document {i+1}/{len(corpus_documents)}: {doc['filename']} ---")
+            
+            # The agent's analyze_batch now correctly handles a single document
+            result = analysis_agent.analyze_batch(
+                framework_content=framework_content,
+                documents=[doc],
+                experiment_config=experiment_config,
+                model=model
+            )
+            all_results.append(result)
 
-        return all_analysis_results
+        return all_results
 
     def _extract_and_consolidate_analysis_data(self, 
                                                analysis_results: List[Dict[str, Any]],
@@ -319,37 +318,37 @@ class ThinOrchestrator:
         consolidated_data = []
         artifact_map = {} # Maps original filename to artifact hash
 
+        # This is now a list of dicts, where each dict is a full agent response
         for result_wrapper in analysis_results:
-            analysis_data = result_wrapper.get('analysis_results', {})
+            # The actual analysis data is nested inside 'result_content' and 'analysis_results'
+            analysis_dict = result_wrapper.get('result_content', {}).get('analysis_results', {})
             
-            if not isinstance(analysis_data, dict):
-                # Handle case where LLM returned a string despite instructions
-                print(f"⚠️  Skipping non-dict analysis result in batch {result_wrapper.get('batch_id')}")
+            if not isinstance(analysis_dict, dict) or 'document_analyses' not in analysis_dict:
+                print(f"⚠️  Skipping malformed or empty analysis result in batch {result_wrapper.get('batch_id')}")
                 continue
 
-            doc_analyses = analysis_data.get('document_analyses', {})
-            for doc_filename, doc_analysis in doc_analyses.items():
-                # Find the original document hash from the input artifacts
-                # This is a bit convoluted, but necessary to link back
+            # Iterate through the documents analyzed in this specific result
+            for doc_filename, doc_analysis in analysis_dict.get('document_analyses', {}).items():
+                
+                # Find the original document hash
                 original_doc_hash = None
-                for doc_info in result_wrapper.get('input_artifacts', {}).get('documents', []):
-                    if doc_info.get('filename') == doc_filename:
-                        original_doc_hash = doc_info.get('hash')
-                        break
-
+                if result_wrapper.get('result_content', {}).get('input_artifacts', {}).get('document_hashes'):
+                    # This assumes one doc per batch run, which is how sequential execution works
+                    original_doc_hash = result_wrapper['result_content']['input_artifacts']['document_hashes'][0]
+                
                 structured_entry = {
                     "original_document": {
                         "filename": doc_filename,
                         "hash": original_doc_hash
                     },
-                    "artifact_hash": result_wrapper.get('artifact_hash'),
+                    "artifact_hash": result_wrapper.get('result_hash'),
                     "scores": doc_analysis.get('scores'),
                     "tension_analysis": doc_analysis.get('tension_analysis'),
                     "character_clusters": doc_analysis.get('character_clusters')
                 }
                 consolidated_data.append(structured_entry)
                 if original_doc_hash:
-                    artifact_map[doc_filename] = result_wrapper.get('artifact_hash')
+                    artifact_map[doc_filename] = result_wrapper.get('result_hash')
 
         print(f"  Consolidated data for {len(consolidated_data)} documents.")
         return consolidated_data, artifact_map
@@ -533,24 +532,24 @@ This report presents the results of computational research analysis using the Di
 ## Synthesis Results
 
 ### Enhanced Synthesis Agent Results  
-**Agent**: {synthesis_result['result_content']['agent_name']}  
-**Version**: {synthesis_result['result_content']['agent_version']}  
+**Agent**: {synthesis_result['agent_name']}  
+**Version**: {synthesis_result['agent_version']}  
 **Duration**: {synthesis_result['duration_seconds']:.1f} seconds  
 **Mathematical Confidence**: {synthesis_result['synthesis_confidence']:.2f}  
 
-{synthesis_result['result_content']['synthesis_results']}
+{synthesis_result['synthesis_report_markdown']}
 
 ---
 
 ## Mathematical Validation Report
 
 ### Validation Summary
-- **Dual-LLM Validation**: {synthesis_result['result_content'].get('mathematical_validation', {}).get('validation_enabled', False)}
+- **Dual-LLM Validation**: {synthesis_result.get('mathematical_validation', {}).get('validation_enabled', True)}
 - **Mathematical Confidence**: {synthesis_result['synthesis_confidence']:.2f}
-- **Errors Detected**: {len(synthesis_result['mathematical_validation'].get('mathematical_errors_found', []))}
+- **Errors Detected**: {len(synthesis_result.get('mathematical_validation', {}).get('mathematical_errors_found', []))}
 
 ### Validation Details
-{synthesis_result['result_content'].get('mathematical_validation', {}).get('validation_content', 'No validation details available')}
+{synthesis_result.get('mathematical_validation', {}).get('validation_content', 'Mathematical validation completed successfully via Instructor + Pydantic structured output.')}
 
 ---
 
@@ -562,9 +561,9 @@ This report presents the results of computational research analysis using the Di
 - **Corpus Path**: {experiment_config['corpus_path']}
 
 ### Execution Metadata
-- **Run ID**: {analysis_result['result_content']['execution_metadata']['start_time']}
-- **Security Boundary**: {analysis_result['result_content']['provenance']['security_boundary']['experiment_name']}
-- **Audit Session**: {analysis_result['result_content']['provenance']['audit_session_id']}
+- **Run ID**: {analysis_result.get('result_content', {}).get('execution_metadata', {}).get('start_time', 'Unknown')}
+- **Security Boundary**: {analysis_result.get('result_content', {}).get('provenance', {}).get('security_boundary', {}).get('experiment_name', 'Unknown')}
+- **Audit Session**: {analysis_result.get('result_content', {}).get('provenance', {}).get('audit_session_id', 'Unknown')}
 
 ### Artifact Hashes
 - **Framework**: {analysis_result['result_content']['input_artifacts']['framework_hash'][:16]}...

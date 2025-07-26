@@ -1,0 +1,351 @@
+{
+  "batch_id": "batch_f3e6405232f2",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_structured_output",
+  "experiment_name": "unknown",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "analysis_results": {
+    "analysis_summary": "This analysis assesses President Biden's 2021 State of the Union address using the Character Assessment Framework v4.3, focusing on civic virtues and vices, character tension, and moral coherence. The speech demonstrates a strong emphasis on hope, dignity, and justice, supported by pragmatic and truth-oriented approaches. It actively rejects tribalism, resentment, manipulation, fear, and fantasy. The analysis reveals a highly coherent moral character, with a clear focus on positive civic virtues and a low degree of internal contradiction.",
+    "document_analyses": {
+      "Biden_SOTU_2021.txt": {
+        "worldview": "The speaker presents a worldview rooted in democratic optimism and a belief in America's capacity for renewal and global leadership. This worldview emphasizes collective action (\"We the People,\" \"do it together\"), social justice, economic opportunity for all, and a pragmatic approach to solving national and global challenges. It contrasts American democratic values with authoritarianism and rejects internal divisions (tribalism, fear, lies) in favor of unity, truth, and hope. The speaker believes in government's role as a catalyst for progress and equity, funded by fair taxation, and sees investment in people and infrastructure as key to national strength and global competitiveness.",
+        "scores": {
+          "Dignity": {
+            "intensity": 0.9,
+            "salience": 0.8
+          },
+          "Truth": {
+            "intensity": 0.7,
+            "salience": 0.6
+          },
+          "Justice": {
+            "intensity": 0.9,
+            "salience": 0.8
+          },
+          "Hope": {
+            "intensity": 0.9,
+            "salience": 0.9
+          },
+          "Pragmatism": {
+            "intensity": 0.8,
+            "salience": 0.7
+          },
+          "Tribalism": {
+            "intensity": 0.1,
+            "salience": 0.1
+          },
+          "Resentment": {
+            "intensity": 0.2,
+            "salience": 0.1
+          },
+          "Manipulation": {
+            "intensity": 0.1,
+            "salience": 0.1
+          },
+          "Fear": {
+            "intensity": 0.2,
+            "salience": 0.2
+          },
+          "Fantasy": {
+            "intensity": 0.1,
+            "salience": 0.1
+          }
+        },
+        "evidence": {
+          "Dignity": [
+            "America is an idea, the most unique idea in history: We are created, all of us, equal.",
+            "Can our democracy deliver on its promise that all of us, created equal in the image of God, have a chance to lead lives of dignity, respect, and possibility?",
+            "I also hope Congress can get to my desk the Equality Act to protect LGBTQ Americans. To all transgender Americans watching at home, especially young people who are so brave, I want you to know your President has your back.",
+            "Health care should be a right and not a privilege in America.",
+            "We need to ensure greater equity and opportunity for women.",
+            "Real opportunities in the lives of more Americans: Black, White, Latino, Asian Americans, Native Americans."
+          ],
+          "Truth": [
+            "America is rising anew, choosing hope over fear, truth over lies, and light over darkness.",
+            "After just 100 days, I can report to the Nation: America is on the move again, turning peril into possibility, crisis to opportunity, setbacks into strength.",
+            "When I was sworn in on January 20, less than 1 percent of the seniors in America were fully vaccinated against COVID-19. One hundred days later, 70 percent of seniors in America over 65 are protected\u2014fully protected.",
+            "A recent study shows that 55 of the nation\u2019s biggest corporations paid zero Federal tax last year. Those 55 corporations made in excess of $40 billion in profit."
+          ],
+          "Justice": [
+            "We need to ensure greater equity and opportunity for women.",
+            "It\u2019s time for corporate America and the wealthiest 1 percent of Americans to just begin to pay their fair share. Just their fair share.",
+            "We have a giant opportunity to bend to the arc of the moral universe towards justice\u2014real justice.",
+            "It\u2019s time to root out systemic racism in our criminal justice system, and to enact police reform in George Floyd\u2019s name that passed the House already.",
+            "Let\u2019s raise the minimum wage to $15. No one\u2014no one working 40 hours a week\u2014no one working 40 hours a week should live below the poverty line."
+          ],
+          "Hope": [
+            "America is rising anew, choosing hope over fear, truth over lies, and light over darkness.",
+            "After 100 days of rescue and renewal, America is ready for takeoff, in my view.",
+            "A dose of hope for an educator in Florida who has a child suffering from an autoimmune disease... She said she sat in her car, when she got vaccinated and just cried, cried out of joy and cried out of relief. A dose of hope.",
+            "I have never been more confident or optimistic about America, not because I\u2019m President, but because what\u2019s happening with the American people."
+          ],
+          "Pragmatism": [
+            "Democrats, Independents, and Republicans\u2014we did act. Together we passed the American Rescue Plan, one of the most consequential rescue packages in American history.",
+            "I welcome those ideas. But the rest of the world is not waiting for us. I just want to be clear: From my perspective, doing nothing is not an option.",
+            "We need to work together to find a consensus. But let\u2019s get it done next month, by the first anniversary of George Floyd\u2019s death.",
+            "We can do whatever we set our mind to do if we do it together. So let\u2019s begin to get together."
+          ],
+          "Tribalism": [
+            "Democrats, Independents, and Republicans\u2014we did act. Together we passed the American Rescue Plan...",
+            "This shouldn\u2019t be a red or blue issue. And no amendment to the Constitution is absolute.",
+            "I think this is not a Democrat or Republican issue, I think it\u2019s an American issue."
+          ],
+          "Resentment": [
+            "It\u2019s time to root out systemic racism in our criminal justice system, and to enact police reform in George Floyd\u2019s name that passed the House already.",
+            "For too long, we\u2019ve failed to use the most important word when it comes to meeting the climate crisis: 'jobs.'"
+          ],
+          "Manipulation": [
+            "America is rising anew, choosing hope over fear, truth over lies, and light over darkness.",
+            "I promised we\u2019d get 100 million COVID-19 vaccine shots into people\u2019s arms in 100 days, we will have provided over 220 million COVID shots in those 100 days."
+          ],
+          "Fear": [
+            "America is rising anew, choosing hope over fear, truth over lies, and light over darkness.",
+            "The images of a violent mob assaulting this Capitol, desecrating our democracy, remain vivid in all our minds. Lives were put at risk\u2014many of your lives. Lives were lost. Extraordinary courage was summoned. The insurrection was an existential crisis, a test of whether our democracy could survive. And it did."
+          ],
+          "Fantasy": [
+            "The American Jobs Plan is a blue-collar blueprint to build America. That\u2019s what it is.",
+            "Independent experts estimate the American Jobs Plan will add millions of jobs and trillions of dollars to economic growth in the years to come. It is an 8-year program."
+          ]
+        },
+        "reasoning": "The speaker's emphasis on 'hope over fear, truth over lies' and repeated calls for unity and bipartisan action strongly support high scores for virtues like Hope, Dignity, Justice, and Pragmatism, and low scores for vices like Tribalism, Resentment, Manipulation, and Fantasy. The consistent focus on concrete plans, verifiable results, and addressing systemic issues through collective effort reinforces the pragmatic and just aspects of his character. The explicit rejection of division and blame further minimizes the presence of vices. The confidence scores are high due to the clear and consistent messaging throughout the speech.",
+        "salience_ranking": [
+          {
+            "dimension": "Hope",
+            "salience_score": 0.9,
+            "rank": 1
+          },
+          {
+            "dimension": "Dignity",
+            "salience_score": 0.8,
+            "rank": 2
+          },
+          {
+            "dimension": "Justice",
+            "salience_score": 0.8,
+            "rank": 3
+          },
+          {
+            "dimension": "Pragmatism",
+            "salience_score": 0.7,
+            "rank": 4
+          },
+          {
+            "dimension": "Truth",
+            "salience_score": 0.6,
+            "rank": 5
+          },
+          {
+            "dimension": "Fear",
+            "salience_score": 0.2,
+            "rank": 6
+          },
+          {
+            "dimension": "Tribalism",
+            "salience_score": 0.1,
+            "rank": 7
+          },
+          {
+            "dimension": "Resentment",
+            "salience_score": 0.1,
+            "rank": 8
+          },
+          {
+            "dimension": "Manipulation",
+            "salience_score": 0.1,
+            "rank": 9
+          },
+          {
+            "dimension": "Fantasy",
+            "salience_score": 0.1,
+            "rank": 10
+          }
+        ],
+        "character_priorities": "The speaker's primary moral identity focus is on fostering Hope for the future of America, underpinned by a strong commitment to Dignity and Justice for all Americans. This is further supported by a dedication to Pragmatism in achieving tangible results and a reliance on Truth in addressing challenges.",
+        "tension_analysis": {
+          "Dignity_Tribalism_Tension": 0.07,
+          "Truth_Manipulation_Tension": 0.05,
+          "Justice_Resentment_Tension": 0.14,
+          "Hope_Fear_Tension": 0.14,
+          "Pragmatism_Fantasy_Tension": 0.06,
+          "MC_SCI": 0.092,
+          "character_pattern_classification": "Moral Coherence",
+          "character_salience_concentration": 0.329
+        },
+        "character_clusters": {
+          "virtue_cluster_score": 0.85,
+          "vice_cluster_score": 0.15,
+          "character_balance": 0.7,
+          "character_intensity": 0.5,
+          "moral_clarity": 0.7
+        }
+      }
+    },
+    "mathematical_verification": {
+      "confidence_scores": {
+        "Dignity": 0.95,
+        "Truth": 0.9,
+        "Justice": 0.95,
+        "Hope": 0.98,
+        "Pragmatism": 0.9,
+        "Tribalism": 0.95,
+        "Resentment": 0.9,
+        "Manipulation": 0.95,
+        "Fear": 0.9,
+        "Fantasy": 0.95
+      },
+      "character_tension_calculations": {
+        "formula": "Character Tension = min(Virtue_score, Vice_score) * |Virtue_salience - Vice_salience|",
+        "Dignity_Tribalism_Tension": {
+          "virtue_score": 0.9,
+          "vice_score": 0.1,
+          "virtue_salience": 0.8,
+          "vice_salience": 0.1,
+          "min_scores": "min(0.9, 0.1) = 0.1",
+          "abs_salience_diff": "|0.8 - 0.1| = 0.7",
+          "result": "0.1 * 0.7 = 0.07"
+        },
+        "Truth_Manipulation_Tension": {
+          "virtue_score": 0.7,
+          "vice_score": 0.1,
+          "virtue_salience": 0.6,
+          "vice_salience": 0.1,
+          "min_scores": "min(0.7, 0.1) = 0.1",
+          "abs_salience_diff": "|0.6 - 0.1| = 0.5",
+          "result": "0.1 * 0.5 = 0.05"
+        },
+        "Justice_Resentment_Tension": {
+          "virtue_score": 0.9,
+          "vice_score": 0.2,
+          "virtue_salience": 0.8,
+          "vice_salience": 0.1,
+          "min_scores": "min(0.9, 0.2) = 0.2",
+          "abs_salience_diff": "|0.8 - 0.1| = 0.7",
+          "result": "0.2 * 0.7 = 0.14"
+        },
+        "Hope_Fear_Tension": {
+          "virtue_score": 0.9,
+          "vice_score": 0.2,
+          "virtue_salience": 0.9,
+          "vice_salience": 0.2,
+          "min_scores": "min(0.9, 0.2) = 0.2",
+          "abs_salience_diff": "|0.9 - 0.2| = 0.7",
+          "result": "0.2 * 0.7 = 0.14"
+        },
+        "Pragmatism_Fantasy_Tension": {
+          "virtue_score": 0.8,
+          "vice_score": 0.1,
+          "virtue_salience": 0.7,
+          "vice_salience": 0.1,
+          "min_scores": "min(0.8, 0.1) = 0.1",
+          "abs_salience_diff": "|0.7 - 0.1| = 0.6",
+          "result": "0.1 * 0.6 = 0.06"
+        }
+      },
+      "mc_sci_calculation": {
+        "formula": "MC-SCI = (Sum of all Character Tension Scores) / Number of Opposing Pairs",
+        "sum_of_tensions": "0.07 + 0.05 + 0.14 + 0.14 + 0.06 = 0.46",
+        "number_of_pairs": 5,
+        "mc_sci": "0.46 / 5 = 0.092"
+      },
+      "character_cluster_calculations": {
+        "virtue_cluster_score": {
+          "formula": "Virtue Cluster Score = (Sum of (salience * intensity) for virtues) / Sum of salience for virtues",
+          "dignity_weighted": "0.8 * 0.9 = 0.72",
+          "truth_weighted": "0.6 * 0.7 = 0.42",
+          "justice_weighted": "0.8 * 0.9 = 0.72",
+          "hope_weighted": "0.9 * 0.9 = 0.81",
+          "pragmatism_weighted": "0.7 * 0.8 = 0.56",
+          "sum_weighted_scores": "0.72 + 0.42 + 0.72 + 0.81 + 0.56 = 3.23",
+          "sum_salience": "0.8 + 0.6 + 0.8 + 0.9 + 0.7 = 3.8",
+          "result": "3.23 / 3.8 = 0.85"
+        },
+        "vice_cluster_score": {
+          "formula": "Vice Cluster Score = (Sum of (salience * intensity) for vices) / Sum of salience for vices",
+          "tribalism_weighted": "0.1 * 0.1 = 0.01",
+          "resentment_weighted": "0.1 * 0.2 = 0.02",
+          "manipulation_weighted": "0.1 * 0.1 = 0.01",
+          "fear_weighted": "0.2 * 0.2 = 0.04",
+          "fantasy_weighted": "0.1 * 0.1 = 0.01",
+          "sum_weighted_scores": "0.01 + 0.02 + 0.01 + 0.04 + 0.01 = 0.09",
+          "sum_salience": "0.1 + 0.1 + 0.1 + 0.2 + 0.1 = 0.6",
+          "result": "0.09 / 0.6 = 0.15"
+        },
+        "character_balance": {
+          "formula": "Character Balance = Virtue Cluster Score - Vice Cluster Score",
+          "calculation": "0.85 - 0.15 = 0.70"
+        },
+        "character_intensity": {
+          "formula": "Character Intensity = (Virtue Cluster Score + Vice Cluster Score) / 2",
+          "calculation": "(0.85 + 0.15) / 2 = 1.0 / 2 = 0.50"
+        },
+        "moral_clarity": {
+          "formula": "Moral Clarity = Abs(Character Balance)",
+          "calculation": "Abs(0.70) = 0.70"
+        }
+      },
+      "character_salience_concentration_calculation": {
+        "formula": "CSC = Standard Deviation of all Character Salience Scores",
+        "salience_scores": [
+          0.8,
+          0.6,
+          0.8,
+          0.9,
+          0.7,
+          0.1,
+          0.1,
+          0.1,
+          0.2,
+          0.1
+        ],
+        "mean_salience": "(0.8+0.6+0.8+0.9+0.7+0.1+0.1+0.1+0.2+0.1) / 10 = 4.4 / 10 = 0.44",
+        "squared_differences_from_mean": [
+          "(0.8-0.44)^2 = 0.1296",
+          "(0.6-0.44)^2 = 0.0256",
+          "(0.8-0.44)^2 = 0.1296",
+          "(0.9-0.44)^2 = 0.2116",
+          "(0.7-0.44)^2 = 0.0676",
+          "(0.1-0.44)^2 = 0.1156",
+          "(0.1-0.44)^2 = 0.1156",
+          "(0.1-0.44)^2 = 0.1156",
+          "(0.2-0.44)^2 = 0.0576",
+          "(0.1-0.44)^2 = 0.1156"
+        ],
+        "sum_of_squared_differences": "0.1296 + 0.0256 + 0.1296 + 0.2116 + 0.0676 + 0.1156 + 0.1156 + 0.1156 + 0.0576 + 0.1156 = 1.0836",
+        "variance": "1.0836 / 10 = 0.10836",
+        "standard_deviation_csc": "sqrt(0.10836) = 0.32918079..."
+      }
+    },
+    "self_assessment": {
+      "quality_assessment": "The analysis successfully applied the Character Assessment Framework v4.3 to the provided document. The scoring of dimensions is well-supported by direct quotes and logical reasoning, reflecting the speaker's emphasis on positive civic virtues and rejection of vices. The worldview and character priorities are consistent with the detailed scores.",
+      "mathematical_accuracy_assessment": "All mathematical calculations for character tension scores, MC-SCI, virtue/vice cluster scores, character balance, intensity, moral clarity, and character salience concentration were performed accurately and step-by-step as required. The formulas were correctly applied, and the results are consistent with the input scores. The confidence estimates for individual scores are appropriate given the clarity of the text.",
+      "adherence_to_requirements": "The response fully adheres to all critical output requirements, including being a single, valid JSON object with no extraneous text. The JSON structure matches the specified format, and all mathematical verifications are detailed and reproducible. The batch ID, framework, and document analysis requirements were met."
+    }
+  },
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-26T11:49:50.193680+00:00",
+    "end_time": "2025-07-26T11:50:52.404430+00:00",
+    "duration_seconds": 62.21075,
+    "llm_interaction_hash": "dba21ebec3f260c3"
+  },
+  "input_artifacts": {
+    "framework_hash": "26343fa41711589a5045082db6a69472127bb4bdccac78c32fb6423accf3967c",
+    "document_hashes": [
+      "4b12c5c25e4ef88d2598f26b6bcd751ba59734e3659ebf280c61e383d2a68a6f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250726T114901Z_fc3e4d2e"
+  }
+}

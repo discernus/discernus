@@ -1,0 +1,40 @@
+{
+  "batch_id": "batch_612e1ccafffd",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v3.0_instructor",
+  "experiment_name": "simple_test",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "analysis_results": {
+    "analysis_summary": "This analysis applies the Character Assessment Framework v4.3 (Tension Enhanced) to \"document1.txt\" to evaluate the speaker's moral character, including traditional virtue/vice scoring, character tension, and cluster analysis. The speaker exhibits a highly tribal and resentful character, with a clear focus on group-specific retribution and a rejection of universal principles.",
+    "document_analyses": {},
+    "mathematical_verification": {},
+    "self_assessment": {}
+  },
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-26T15:26:24.855509+00:00",
+    "end_time": "2025-07-26T15:26:58.573255+00:00",
+    "duration_seconds": 33.717746,
+    "llm_interaction_hash": "c137472504dd"
+  },
+  "input_artifacts": {
+    "framework_hash": "26343fa41711589a5045082db6a69472127bb4bdccac78c32fb6423accf3967c",
+    "document_hashes": [
+      "e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250726T152624Z_7ae309f1"
+  }
+}

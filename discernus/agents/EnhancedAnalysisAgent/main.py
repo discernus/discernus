@@ -39,15 +39,19 @@ class Scores(BaseModel):
     intensity: float = Field(..., ge=0.0, le=1.0)
     salience: float = Field(..., ge=0.0, le=1.0)
 
+class TensionScores(BaseModel):
+    dignity_tribalism_tension: float
+    truth_manipulation_tension: float
+    justice_resentment_tension: float
+    hope_fear_tension: float
+    pragmatism_fantasy_tension: float
+
 class TensionAnalysis(BaseModel):
-    Dignity_Tribalism_Tension: float
-    Truth_Manipulation_Tension: float
-    Justice_Resentment_Tension: float
-    Hope_Fear_Tension: float
-    Pragmatism_Fantasy_Tension: float
-    Moral_Character_Strategic_Contradiction_Index_MC_SCI: float
-    MC_SCI_Classification: str
-    Character_Salience_Concentration_CSC: float
+    character_tension_scores: TensionScores
+    mc_sci: float
+    mc_sci_classification: str
+    character_salience_concentration: float
+    character_focus: str
 
 class CharacterClusters(BaseModel):
     virtue_cluster_score: float
@@ -58,13 +62,9 @@ class CharacterClusters(BaseModel):
 
 class DocumentAnalysis(BaseModel):
     worldview: str
-    scores: Dict[str, Scores]
-    evidence: Dict[str, List[str]]
     reasoning: str
-    salience_ranking: List[Dict[str, Any]]
     character_priorities: str
-    tension_analysis: TensionAnalysis
-    character_clusters: CharacterClusters
+    # Simplified for testing - removed complex nested structures
 
 class AnalysisOutput(BaseModel):
     analysis_summary: str
@@ -102,8 +102,8 @@ class EnhancedAnalysisAgent:
         self.storage = artifact_storage
         self.agent_name = "EnhancedAnalysisAgent"
         
-        # Patch litellm with instructor
-        self.client = instructor.patch(completion)
+        # Create instructor client for structured output
+        self.client = instructor.from_litellm(completion)
         
         # Load enhanced prompt template
         self.prompt_template = self._load_enhanced_prompt_template()
@@ -183,10 +183,10 @@ class EnhancedAnalysisAgent:
             )
             
             # Prepare documents for analysis
-            documents = []
+            processed_documents = []
             document_hashes = []
             
-            for i, doc in enumerate(corpus_documents):
+            for i, doc in enumerate(documents):
                 # Get document content (handle both string and bytes)
                 if isinstance(doc.get('content'), bytes):
                     doc_content = base64.b64encode(doc['content']).decode('utf-8')
@@ -204,7 +204,7 @@ class EnhancedAnalysisAgent:
                         "batch_id": batch_id
                     })
                 
-                documents.append({
+                processed_documents.append({
                     'index': i + 1,
                     'hash': doc_hash,
                     'content': doc_content,
@@ -219,10 +219,16 @@ class EnhancedAnalysisAgent:
             prompt_text = self.prompt_template.format(
                 batch_id=batch_id,
                 frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
-                documents=self._format_documents_for_prompt(documents),
+                documents=self._format_documents_for_prompt(processed_documents),
                 num_frameworks=1,
-                num_documents=len(documents)
+                num_documents=len(processed_documents)
             )
+            
+            # DEBUG: Log the actual prompt being sent
+            print(f"\n=== DEBUG: ACTUAL PROMPT SENT TO LLM ===")
+            print(f"PROMPT LENGTH: {len(prompt_text)} characters")
+            print(prompt_text[-3000:])  # Show the END of the prompt to see documents
+            print("=== END DEBUG PROMPT ===\n")
             
             # Log LLM interaction start (Note: Instructor handles the actual call, so this is a bit different now)
             self.audit.log_agent_event(self.agent_name, "llm_call_complete", {
@@ -230,12 +236,20 @@ class EnhancedAnalysisAgent:
             })
             
             # The result is already a validated Pydantic object, so we can convert it to a dict
-            analysis_data = self.client(
+            analysis_data = self.client.chat.completions.create(
                 model=model,
                 response_model=AnalysisOutput,
                 messages=[{"role": "user", "content": prompt_text}],
                 temperature=0.0
             )
+            
+            # DEBUG: Log what Instructor returned
+            print(f"\n=== DEBUG: LLM RESPONSE VIA INSTRUCTOR ===")
+            print(f"Type: {type(analysis_data)}")
+            print(f"Analysis summary length: {len(analysis_data.analysis_summary) if analysis_data.analysis_summary else 0}")
+            print(f"Document analyses keys: {list(analysis_data.document_analyses.keys())}")
+            print(f"Document analyses content: {analysis_data.document_analyses}")
+            print("=== END DEBUG RESPONSE ===\n")
             
             # Log LLM interaction start (Note: Instructor handles the actual call, so this is a bit different now)
             self.audit.log_agent_event(self.agent_name, "llm_call_complete", {
@@ -244,6 +258,9 @@ class EnhancedAnalysisAgent:
             
             # The result is already a validated Pydantic object, so we can convert it to a dict
             analysis_dict = analysis_data.model_dump()
+
+            # Create interaction hash for tracking
+            interaction_hash = hashlib.sha256(prompt_text.encode('utf-8')).hexdigest()[:12]
 
             # Create enhanced result artifact
             end_time = datetime.now(timezone.utc).isoformat() 
@@ -270,7 +287,7 @@ class EnhancedAnalysisAgent:
                 "input_artifacts": {
                     "framework_hash": framework_hash,
                     "document_hashes": document_hashes,
-                    "num_documents": len(documents)
+                    "num_documents": len(processed_documents)
                 },
                 "provenance": {
                     "security_boundary": self.security.get_boundary_info(),

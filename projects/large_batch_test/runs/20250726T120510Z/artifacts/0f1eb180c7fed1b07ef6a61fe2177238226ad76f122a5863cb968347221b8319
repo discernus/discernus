@@ -1,0 +1,362 @@
+{
+  "batch_id": "batch_ded3dbd693e4",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_structured_output",
+  "experiment_name": "unknown",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "analysis_results": {
+    "analysis_summary": "This analysis of President Joe Biden's 2021 Inaugural Address reveals a speaker whose moral character is primarily focused on fostering unity and overcoming division. The speech strongly emphasizes civic virtues such as Hope, Dignity, and Truth, while explicitly rejecting vices like Tribalism and Fear. The analysis indicates a 'Moral Coherence' in the speaker's character, suggesting a consistent moral identity with minimal strategic contradictions. The character is assessed as 'Distributed,' meaning the speaker engages broadly across various moral dimensions rather than focusing intensely on a narrow set of priorities.",
+    "document_analyses": {
+      "Biden_Inaugural_2021.txt": {
+        "worldview": "The speaker presents a worldview deeply rooted in democratic ideals, emphasizing unity, resilience, and a belief in America's capacity for renewal and progress. He acknowledges significant national challenges, including a pandemic, economic hardship, racial injustice, and political extremism, but frames them as obstacles to be overcome through collective action, adherence to truth, and a return to fundamental civic virtues. He advocates for a rejection of division, fear, and manipulation, promoting a forward-looking, pragmatic approach to governance and societal healing.",
+        "scores": {
+          "Dignity": {
+            "intensity": 0.8,
+            "salience": 0.85,
+            "confidence": 0.9
+          },
+          "Truth": {
+            "intensity": 0.85,
+            "salience": 0.8,
+            "confidence": 0.9
+          },
+          "Justice": {
+            "intensity": 0.75,
+            "salience": 0.7,
+            "confidence": 0.85
+          },
+          "Hope": {
+            "intensity": 0.9,
+            "salience": 0.9,
+            "confidence": 0.9
+          },
+          "Pragmatism": {
+            "intensity": 0.8,
+            "salience": 0.75,
+            "confidence": 0.85
+          },
+          "Tribalism": {
+            "intensity": 0.8,
+            "salience": 0.85,
+            "confidence": 0.9
+          },
+          "Manipulation": {
+            "intensity": 0.6,
+            "salience": 0.6,
+            "confidence": 0.8
+          },
+          "Resentment": {
+            "intensity": 0.5,
+            "salience": 0.5,
+            "confidence": 0.75
+          },
+          "Fear": {
+            "intensity": 0.8,
+            "salience": 0.8,
+            "confidence": 0.9
+          },
+          "Fantasy": {
+            "intensity": 0.4,
+            "salience": 0.4,
+            "confidence": 0.7
+          }
+        },
+        "evidence": {
+          "Dignity": [
+            "We can treat each other with dignity and respect.",
+            "opportunity, security, liberty, dignity, respect, honor, and yes, the truth.",
+            "A story of decency and dignity, love and healing, greatness and goodness."
+          ],
+          "Truth": [
+            "There is truth, and there are lies: lies told for power and for profit.",
+            "to defend the truth and defeat the lies.",
+            "the culture in which facts themselves are manipulated and even manufactured.",
+            "opportunity, security, liberty, dignity, respect, honor, and yes, the truth."
+          ],
+          "Justice": [
+            "A cry for racial justice some 400 years in the making moves us.",
+            "The dream of justice for all will be deferred no longer.",
+            "We can deliver racial justice."
+          ],
+          "Hope": [
+            "This is America\u2019s day. This is democracy\u2019s day, a day of history and hope, of renewal and resolve.",
+            "our uniquely American way\u2014restless, bold, optimistic\u2014and set our sights on the Nation we know we can be and we must be.",
+            "We will get through this, together.",
+            "We shall write an American story of hope, not fear; of unity, not division; of light, not darkness."
+          ],
+          "Pragmatism": [
+            "We\u2019ll press forward with speed and urgency, for we have much to do in this winter of peril and significant possibilities: much to repair, much to restore, much to heal, much to build, and much to gain.",
+            "With unity we can do great things, important things. We can right wrongs. We can put people to work in good jobs. We can teach our children in safe schools. We can overcome the deadly virus. We can reward work and rebuild the middle class and make health care secure for all. We can deliver racial justice, and we can make America, once again, the leading force for good in the world."
+          ],
+          "Tribalism": [
+            "We must end this uncivil war that pits red against blue, rural versus urban, conservative versus liberal.",
+            "We can see each other not as adversaries, but as neighbors."
+          ],
+          "Manipulation": [
+            "the culture in which facts themselves are manipulated and even manufactured."
+          ],
+          "Resentment": [
+            "I ask every American to join me in this cause: uniting to fight the foes we face: anger, resentment, and hatred."
+          ],
+          "Fear": [
+            "We shall write an American story of hope, not fear.",
+            "I understand that many of my fellow Americans view the future with fear and trepidation.",
+            "We need all our strength to persevere through this dark winter."
+          ],
+          "Fantasy": [
+            "I know speaking of unity can sound to some like a foolish fantasy these days."
+          ]
+        },
+        "reasoning": "The speaker consistently emphasizes unity, hope, and truth, directly addressing and rejecting divisive forces like tribalism and fear. Dignity is presented as a foundational principle for interaction. Justice is a clear goal, though less extensively elaborated than unity or hope. Pragmatism is highlighted through the focus on concrete actions and solutions. Manipulation and resentment are acknowledged as negative forces to be overcome, but receive less direct attention than tribalism or fear. Fantasy is briefly mentioned and dismissed, indicating a practical, grounded approach.",
+        "salience_ranking": [
+          {
+            "dimension": "Hope",
+            "salience_score": 0.9,
+            "rank": 1
+          },
+          {
+            "dimension": "Dignity",
+            "salience_score": 0.85,
+            "rank": 2
+          },
+          {
+            "dimension": "Tribalism",
+            "salience_score": 0.85,
+            "rank": 3
+          },
+          {
+            "dimension": "Truth",
+            "salience_score": 0.8,
+            "rank": 4
+          },
+          {
+            "dimension": "Fear",
+            "salience_score": 0.8,
+            "rank": 5
+          },
+          {
+            "dimension": "Pragmatism",
+            "salience_score": 0.75,
+            "rank": 6
+          },
+          {
+            "dimension": "Justice",
+            "salience_score": 0.7,
+            "rank": 7
+          },
+          {
+            "dimension": "Manipulation",
+            "salience_score": 0.6,
+            "rank": 8
+          },
+          {
+            "dimension": "Resentment",
+            "salience_score": 0.5,
+            "rank": 9
+          },
+          {
+            "dimension": "Fantasy",
+            "salience_score": 0.4,
+            "rank": 10
+          }
+        ],
+        "character_priorities": "The speaker's primary moral identity focus is on fostering national unity and overcoming deep-seated divisions, particularly tribalism and fear. This is pursued through the active cultivation of hope, truth, and dignity. He prioritizes a pragmatic, action-oriented approach to address the nation's challenges and achieve social justice, emphasizing collective effort and a rejection of unrealistic expectations or dwelling on past grievances.",
+        "tension_analysis": {
+          "Dignity_Tribalism_Tension": 0.0,
+          "Truth_Manipulation_Tension": 0.12,
+          "Justice_Resentment_Tension": 0.1,
+          "Hope_Fear_Tension": 0.08,
+          "Pragmatism_Fantasy_Tension": 0.14,
+          "MC-SCI": 0.088,
+          "character_pattern_classification": "Moral Coherence"
+        },
+        "character_clusters": {
+          "virtue_cluster_score": 0.82375,
+          "vice_cluster_score": 0.663492063,
+          "character_balance": 0.160257937,
+          "character_intensity": 0.7436210315,
+          "moral_clarity": 0.160257937,
+          "character_salience_concentration": 0.15692354,
+          "character_salience_classification": "Distributed Character"
+        }
+      }
+    },
+    "mathematical_verification": {
+      "character_tension_scores": {
+        "formula": "min(Virtue_score, Vice_score) * |Virtue_salience - Vice_salience|",
+        "Dignity_Tribalism_Tension": {
+          "virtue_score": 0.8,
+          "vice_score": 0.8,
+          "virtue_salience": 0.85,
+          "vice_salience": 0.85,
+          "calculation": "min(0.8, 0.8) * |0.85 - 0.85| = 0.8 * 0 = 0.0",
+          "result": 0.0,
+          "confidence": 1.0
+        },
+        "Truth_Manipulation_Tension": {
+          "virtue_score": 0.85,
+          "vice_score": 0.6,
+          "virtue_salience": 0.8,
+          "vice_salience": 0.6,
+          "calculation": "min(0.85, 0.6) * |0.8 - 0.6| = 0.6 * 0.2 = 0.12",
+          "result": 0.12,
+          "confidence": 1.0
+        },
+        "Justice_Resentment_Tension": {
+          "virtue_score": 0.75,
+          "vice_score": 0.5,
+          "virtue_salience": 0.7,
+          "vice_salience": 0.5,
+          "calculation": "min(0.75, 0.5) * |0.7 - 0.5| = 0.5 * 0.2 = 0.1",
+          "result": 0.1,
+          "confidence": 1.0
+        },
+        "Hope_Fear_Tension": {
+          "virtue_score": 0.9,
+          "vice_score": 0.8,
+          "virtue_salience": 0.9,
+          "vice_salience": 0.8,
+          "calculation": "min(0.9, 0.8) * |0.9 - 0.8| = 0.8 * 0.1 = 0.08",
+          "result": 0.08,
+          "confidence": 1.0
+        },
+        "Pragmatism_Fantasy_Tension": {
+          "virtue_score": 0.8,
+          "vice_score": 0.4,
+          "virtue_salience": 0.75,
+          "vice_salience": 0.4,
+          "calculation": "min(0.8, 0.4) * |0.75 - 0.4| = 0.4 * 0.35 = 0.14",
+          "result": 0.14,
+          "confidence": 1.0
+        }
+      },
+      "moral_character_strategic_contradiction_index": {
+        "formula": "(Sum of all 5 Character Tension Scores) / 5",
+        "calculation": "(0.0 + 0.12 + 0.1 + 0.08 + 0.14) / 5 = 0.44 / 5 = 0.088",
+        "result": 0.088,
+        "confidence": 1.0,
+        "classification_thresholds": "0.00-0.10: Moral Coherence, 0.11-0.20: Character Complexity, 0.21-0.30: Character Ambivalence, 0.31+: Character Contradiction",
+        "classification": "Moral Coherence"
+      },
+      "character_cluster_scores": {
+        "virtue_cluster_score": {
+          "formula": "Normalized sum of [(virtue_salience * virtue_intensity) for all virtues] / total virtue salience weights",
+          "weighted_scores": {
+            "Dignity": "0.85 * 0.8 = 0.68",
+            "Truth": "0.8 * 0.85 = 0.68",
+            "Justice": "0.7 * 0.75 = 0.525",
+            "Hope": "0.9 * 0.9 = 0.81",
+            "Pragmatism": "0.75 * 0.8 = 0.6"
+          },
+          "sum_weighted_scores": "0.68 + 0.68 + 0.525 + 0.81 + 0.6 = 3.295",
+          "total_salience_weights": "0.85 + 0.8 + 0.7 + 0.9 + 0.75 = 4.0",
+          "calculation": "3.295 / 4.0 = 0.82375",
+          "result": 0.82375,
+          "confidence": 1.0
+        },
+        "vice_cluster_score": {
+          "formula": "Normalized sum of [(vice_salience * vice_intensity) for all vices] / total vice salience weights",
+          "weighted_scores": {
+            "Tribalism": "0.85 * 0.8 = 0.68",
+            "Manipulation": "0.6 * 0.6 = 0.36",
+            "Resentment": "0.5 * 0.5 = 0.25",
+            "Fear": "0.8 * 0.8 = 0.64",
+            "Fantasy": "0.4 * 0.4 = 0.16"
+          },
+          "sum_weighted_scores": "0.68 + 0.36 + 0.25 + 0.64 + 0.16 = 2.09",
+          "total_salience_weights": "0.85 + 0.6 + 0.5 + 0.8 + 0.4 = 3.15",
+          "calculation": "2.09 / 3.15 = 0.663492063",
+          "result": 0.663492063,
+          "confidence": 1.0
+        },
+        "character_balance": {
+          "formula": "virtue_cluster_score - vice_cluster_score",
+          "calculation": "0.82375 - 0.663492063 = 0.160257937",
+          "result": 0.160257937,
+          "confidence": 1.0
+        },
+        "character_intensity": {
+          "formula": "(virtue_cluster_score + vice_cluster_score) / 2",
+          "calculation": "(0.82375 + 0.663492063) / 2 = 1.487242063 / 2 = 0.7436210315",
+          "result": 0.7436210315,
+          "confidence": 1.0
+        },
+        "moral_clarity": {
+          "formula": "Abs(character_balance)",
+          "calculation": "Abs(0.160257937) = 0.160257937",
+          "result": 0.160257937,
+          "confidence": 1.0
+        }
+      },
+      "character_salience_concentration": {
+        "formula": "Standard Deviation of all character salience scores",
+        "salience_scores": [
+          0.85,
+          0.8,
+          0.7,
+          0.9,
+          0.75,
+          0.85,
+          0.6,
+          0.5,
+          0.8,
+          0.4
+        ],
+        "mean_calculation": "Sum of scores / N = 7.25 / 10 = 0.725",
+        "squared_differences_from_mean": [
+          "(0.85-0.725)^2 = 0.015625",
+          "(0.8-0.725)^2 = 0.005625",
+          "(0.7-0.725)^2 = 0.000625",
+          "(0.9-0.725)^2 = 0.030625",
+          "(0.75-0.725)^2 = 0.000625",
+          "(0.85-0.725)^2 = 0.015625",
+          "(0.6-0.725)^2 = 0.015625",
+          "(0.5-0.725)^2 = 0.050625",
+          "(0.8-0.725)^2 = 0.005625",
+          "(0.4-0.725)^2 = 0.105625"
+        ],
+        "sum_of_squared_differences": "0.015625 + 0.005625 + 0.000625 + 0.030625 + 0.000625 + 0.015625 + 0.015625 + 0.050625 + 0.005625 + 0.105625 = 0.24625",
+        "variance_calculation": "Sum of squared differences / N = 0.24625 / 10 = 0.024625",
+        "standard_deviation_calculation": "sqrt(0.024625) = 0.15692354",
+        "result": 0.15692354,
+        "confidence": 1.0,
+        "classification_thresholds": "Focused Character (CSC > 0.3), Distributed Character (CSC < 0.2)",
+        "classification": "Distributed Character"
+      }
+    },
+    "self_assessment": {
+      "quality_rating": "Excellent",
+      "accuracy_rating": "High",
+      "completeness_rating": "Complete",
+      "justification": "The analysis systematically applied all aspects of Framework 1 (v4.3), including detailed scoring for intensity and salience, evidence extraction, and comprehensive mathematical calculations for character tension, MC-SCI, cluster scores, and salience concentration. All required JSON fields are populated, and mathematical verification is provided with step-by-step calculations and confidence estimates. The interpretation of the speaker's worldview and character priorities is well-supported by textual evidence and aligns with the quantitative results.",
+      "areas_for_improvement": "While the analysis is thorough, the subjective nature of initial intensity and salience scoring always presents a potential for minor variation. However, the provided evidence and reasoning aim to minimize this subjectivity and ensure reproducibility."
+    }
+  },
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-26T12:05:10.916710+00:00",
+    "end_time": "2025-07-26T12:06:08.100440+00:00",
+    "duration_seconds": 57.18373,
+    "llm_interaction_hash": "4023a93f2231fc24"
+  },
+  "input_artifacts": {
+    "framework_hash": "26343fa41711589a5045082db6a69472127bb4bdccac78c32fb6423accf3967c",
+    "document_hashes": [
+      "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250726T120510Z_3e8c6f7e"
+  }
+}

@@ -310,6 +310,15 @@ class EnhancedManifest:
         """
         self.manifest_data["quality_assurance"] = qa_data
     
+    def set_synthesis_results(self, synthesis_data: Dict[str, Any]) -> None:
+        """
+        Set synthesis results information.
+        
+        Args:
+            synthesis_data: Synthesis results data dictionary
+        """
+        self.manifest_data["synthesis_results"] = synthesis_data
+    
     def finalize_manifest(self) -> str:
         """
         Finalize the manifest and save it to disk.
