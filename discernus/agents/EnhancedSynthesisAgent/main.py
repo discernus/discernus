@@ -12,14 +12,17 @@ Enhanced version of SynthesisAgent with:
 Implements the simplified 2-agent pipeline: AnalysisAgent → SynthesisAgent
 """
 
-import json
 import base64
 import hashlib
+import json
 import yaml
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+
+import instructor
 from litellm import completion
+from pydantic import BaseModel, Field
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary, SecurityError
 from discernus.core.audit_logger import AuditLogger
@@ -30,17 +33,13 @@ class EnhancedSynthesisAgentError(Exception):
     """Enhanced synthesis agent specific exceptions"""
     pass
 
+# Pydantic Model for Guaranteed Markdown Report Output
+class SynthesisReport(BaseModel):
+    markdown_report: str = Field(..., description="The final, comprehensive synthesis report in Markdown format.")
 
 class EnhancedSynthesisAgent:
     """
-    Enhanced synthesis agent with mathematical spot-checking capabilities.
-    
-    Key enhancements over original SynthesisAgent:
-    - Mathematical spot-checking of analysis results
-    - Dual-LLM validation for numerical accuracy
-    - Enhanced synthesis with confidence assessment
-    - Direct function call interface (no Redis)
-    - Comprehensive error detection and reporting
+    Enhanced synthesis agent with instructor-based structured output.
     """
     
     def __init__(self, 
@@ -49,25 +48,23 @@ class EnhancedSynthesisAgent:
                  artifact_storage: LocalArtifactStorage):
         """
         Initialize enhanced synthesis agent.
-        
-        Args:
-            security_boundary: Security boundary for file access
-            audit_logger: Audit logger for comprehensive logging
-            artifact_storage: Local artifact storage for caching
         """
         self.security = security_boundary
         self.audit = audit_logger
         self.storage = artifact_storage
         self.agent_name = "EnhancedSynthesisAgent"
         
+        # Patch litellm with instructor
+        self.client = instructor.patch(completion)
+        
         # Load enhanced prompt template
         self.prompt_template = self._load_prompt_template()
         
-        print(f"🧠 {self.agent_name} v2.2 initialized for integrated report synthesis")
+        print(f"🧠 {self.agent_name} v3.0 initialized for instructor-based synthesis")
         
         self.audit.log_agent_event(self.agent_name, "initialization", {
             "security_boundary": self.security.get_boundary_info(),
-            "capabilities": ["consolidated_data_synthesis", "markdown_report_generation"]
+            "capabilities": ["instructor_markdown_output", "consolidated_data_synthesis"]
         })
     
     def _load_prompt_template(self) -> str:
@@ -104,21 +101,16 @@ class EnhancedSynthesisAgent:
                 consolidated_data=json.dumps(consolidated_data, indent=2)
             )
 
-            # Call the synthesis LLM
-            self.audit.log_agent_event(self.agent_name, "llm_call_start", {
-                "synthesis_id": synthesis_id, "type": "synthesis", "prompt_length": len(synthesis_prompt)
-            })
-
-            response = completion(
+            # Call the synthesis LLM with instructor
+            report = self.client(
                 model=model,
+                response_model=SynthesisReport,
                 messages=[{"role": "user", "content": synthesis_prompt}],
                 temperature=0.0
             )
             
-            synthesis_content = response.choices[0].message.content
-            
             self.audit.log_agent_event(self.agent_name, "llm_call_complete", {
-                "synthesis_id": synthesis_id, "type": "synthesis", "response_length": len(synthesis_content)
+                "synthesis_id": synthesis_id, "type": "synthesis", "response_length": len(report.markdown_report)
             })
 
             # Create comprehensive result artifact
@@ -128,10 +120,10 @@ class EnhancedSynthesisAgent:
             synthesis_artifact = {
                 "synthesis_id": synthesis_id,
                 "agent_name": self.agent_name,
-                "agent_version": "enhanced_v2.2_integrated_report",
+                "agent_version": "enhanced_v3.0_instructor",
                 "experiment_name": experiment_config.get("name", "unknown"),
                 "model_used": model,
-                "synthesis_report_markdown": synthesis_content,
+                "synthesis_report_markdown": report.markdown_report,
                 "execution_metadata": {
                     "start_time": start_time,
                     "end_time": end_time,
