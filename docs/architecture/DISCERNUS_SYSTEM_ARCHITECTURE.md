@@ -184,9 +184,9 @@ These are the absolute requirements for a reliable, production-ready system.
 - **Principle**: Prompts are code and must be treated as such. They are version-controlled, templated, and strictly separated from application logic.
 - **Implementation**: All agent intelligence is defined in external `.yaml` files, enabling versioning, testing, and modification without code changes.
 
-**Pillar 2: Guaranteed & Validated Structured Output**
-- **Principle**: Never *ask* an LLM for a specific structure; *compel* it using the model's native Tool Use or Function Calling capabilities.
-- **Implementation**: We use the `Instructor` library, which pairs `Pydantic` data validation models directly with LLM calls. The software defines a Pydantic model as the data contract, and `Instructor` ensures the LLM's output is a validated instance of that model. This completely eliminates brittle, manual parsing of LLM string outputs.
+**Pillar 2: Research-Grade Data Assets**
+- **Principle**: Generate data artifacts that serve both computational processing and researcher analysis workflows, with LLM intelligence for complex reasoning and simple verification for mathematical accuracy.
+- **Implementation**: Pragmatic hybrid approach prioritizing reliability over architectural purity. For simple metadata, use `Instructor` + `Pydantic` (battle-tested, works reliably). For complex research data, use standard library JSON parsing + pandas DataFrames (avoid AI-generated custom parsing code). LLMs generate detailed analysis extracted to CSV format (universal R/pandas compatibility). Mathematical calculations verified programmatically while preserving LLM reasoning. This provides researcher-ready data assets with minimal parsing risk.
 
 **Pillar 3: Systematic Evaluation ("Evals")**
 - **Principle**: You cannot improve what you cannot measure. Every critical prompt and model combination must be subject to a suite of automated tests to prevent quality regressions.

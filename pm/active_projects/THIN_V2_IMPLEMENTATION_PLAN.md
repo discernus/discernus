@@ -49,34 +49,63 @@ This is the staged roadmap for achieving our production release goals.
 ### **Phase 1: Foundational Reliability (Target: Mid-August)**
 
 *   **Objective**: Implement the core architectural pillars that guarantee reliability and determinism.
-*   **Status**: Not Started.
+*   **Status**: **🔄 ARCHITECTURAL PIVOT** - Moving to CSV-based THIN approach (2025-07-26)
 
-| Task ID | Description |
-|---|---|
-| P1-T1 | **Implement Pillar 2:** Refactor `EnhancedAnalysisAgent` to use `Instructor` and `Pydantic` for deterministic JSON output. |
-| P1-T2 | **Implement Pillar 2:** Refactor `EnhancedSynthesisAgent` to use `Instructor` and `Pydantic` for deterministic Markdown report generation. |
-| P1-T3 | **Formalize Pillar 1:** Verify that all agents, without exception, load prompts from `.yaml` files. |
+| Task ID | Description | Status |
+|---|---|---|
+| P1-T1 | **Redesign Analysis Pipeline:** Implement CSV extraction from LLM analysis with simple Instructor metadata only. | **📋 PENDING** |
+| P1-T2 | **Redesign Synthesis Pipeline:** LLM processes CSV directly with math verification system. | **📋 PENDING** |
+| P1-T3 | **Formalize Pillar 1:** Verify that all agents, without exception, load prompts from `.yaml` files. | **✅ Done** |
+
+**ARCHITECTURAL DECISION (2025-07-26):** After systematic debugging and THIN architecture analysis, we are **abandoning Instructor + Pydantic for complex research data** and adopting a **CSV-based approach** that aligns with core THIN principles and researcher needs.
+
+**Key Discovery:** The Instructor/Pydantic complexity issue revealed deeper architectural misalignment - we were sliding toward THICK patterns to solve a problem that has a simpler THIN solution. The original issue (large batch synthesis context limits) is better solved through CSV + LLM intelligence.
+
+**New Architecture:** 
+- **Analysis**: LLM generates complex JSON → Extract scores → Research-grade CSV artifact
+- **Synthesis**: CSV + Framework → LLM synthesis with math verification  
+- **Research**: CSV download for R/pandas + LLM interpretation as starting point
+
+**Instructor Role Clarification**: Instructor remains **permanently** for simple metadata (batch_id, timestamps, document counts) but is **permanently abandoned** for complex research data (scores, evidence, nested analysis). This is the long-term architectural pattern, not a temporary measure.
+
+**Benefits:** THIN compliance, researcher productivity, system reliability, scalability solution.
+
+**Implementation Plan:** See **[INSTRUCTOR_PYDANTIC_ARCHITECTURAL_FIX.md](INSTRUCTOR_PYDANTIC_ARCHITECTURAL_FIX.md)** for complete reasoning chain and 4-phase implementation roadmap.
 
 ### **Phase 2: Quality & Efficiency (Target: September 1st)**
 
 *   **Objective**: Build the infrastructure to systematically measure and protect the quality of our LLM outputs and to begin optimizing for performance.
-*   **Status**: Not Started.
+*   **Status**: In Progress.
 
-| Task ID | Description |
-|---|---|
-| P2-T1 | **Implement Pillar 3:** Create a `promptfoo` evaluation pipeline with an initial "golden set" of test cases for the `EnhancedAnalysisAgent`. |
-| P2-T2 | **Implement Pillar 4:** Introduce a basic, rule-based model router to use faster, cheaper models for simpler tasks. |
+| Task ID | Description | Status |
+|---|---|---|
+| P2-T1 | **Implement Pillar 3:** Create a `promptfoo` evaluation pipeline with an initial "golden set" of test cases for the `EnhancedAnalysisAgent`. | **✅ Done** |
+| P2-T2 | **Implement Pillar 4:** Introduce a basic, rule-based model router to use faster, cheaper models for simpler tasks. | Not Started |
 
 ---
 
 ## Part 3: Current Progress (The "Where We Are")
 
-Our recent debugging and strategic sessions have been highly productive, leading to a significant leap in architectural maturity.
+Our systematic debugging session (2025-07-26) revealed critical architectural limitations that require fundamental design changes.
 
-*   **Key Insight Gained:** We have moved from a reactive, bug-fixing posture to a proactive, architecturally-driven approach. We have identified and documented the 8 Pillars of a Durable LLM System, which now serve as our "constitution."
-*   **Core Problem Solved:** We have a clear plan to implement a deterministic, tool-based approach for all structured data exchange with LLMs, eliminating brittle parsing.
-*   **THICK Patterns Purged:** We have successfully completed Phase 0, removing the `BatchPlannerAgent` and simplifying the core workflow to a robust, single-pass system.
-*   **Path to Production:** We have a clear, phased, and actionable plan to achieve a production-ready release by our target date of September 1st.
+### **Major Achievements**
+*   **THIN Architecture Established:** Successfully purged THICK patterns and implemented direct function call coordination
+*   **Prompt Management:** All agents use externalized YAML prompts with version control
+*   **Infrastructure Maturity:** Security boundaries, audit logging, artifact storage, and evaluation pipeline operational
+
+### **Critical Blocking Issue Identified**
+*   **Instructor + Pydantic Limitation:** Cannot reliably handle complex nested structures (`Dict[str, DocumentAnalysis]`)
+*   **Evidence:** Despite perfect prompt engineering and ultra-explicit instructions, `document_analyses` consistently returns empty `{}`
+*   **Root Cause:** Architectural mismatch between LLM output capability and Pydantic validation complexity
+*   **Cache Invalidation Issues:** Cache keys only use content SHA256, missing agent version/prompt/schema changes
+
+### **Immediate Priority**
+*   **Architectural Redesign Required:** Must simplify data models to work within Instructor/Pydantic constraints
+*   **Cache System Enhancement:** Implement version-aware cache invalidation
+*   **Data Flow Validation:** End-to-end pipeline validation with simplified models
+
+### **Path Forward**
+See **[INSTRUCTOR_PYDANTIC_ARCHITECTURAL_FIX.md](INSTRUCTOR_PYDANTIC_ARCHITECTURAL_FIX.md)** for detailed solutions and implementation strategy.
 
 ---
 
