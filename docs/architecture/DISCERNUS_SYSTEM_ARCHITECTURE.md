@@ -174,6 +174,56 @@ These principles guide every design decision in Discernus:
 
 ---
 
+## 5 · Architectural Pillars for a Durable LLM System
+
+> This section documents the core architectural principles and industry best practices that guide the development of the Discernus platform. These pillars represent a tiered roadmap, moving from a reliable foundation to a cutting-edge, state-of-the-art system. They are the "constitution" for our technical decisions—ideals we aspire to, even if we are still in the process of implementing them fully.
+
+### Foundational Pillars (The Non-Negotiable Bedrock)
+
+These are the absolute requirements for a reliable, production-ready system.
+
+**Pillar 1: Prompt Management**
+- **Principle**: Prompts are code and must be treated as such. They are version-controlled, templated, and strictly separated from application logic.
+- **Implementation**: All agent intelligence is defined in external `.yaml` files, enabling versioning, testing, and modification without code changes.
+
+**Pillar 2: Guaranteed & Validated Structured Output**
+- **Principle**: Never *ask* an LLM for a specific structure; *compel* it using the model's native Tool Use or Function Calling capabilities.
+- **Implementation**: We use the `Instructor` library, which pairs `Pydantic` data validation models directly with LLM calls. The software defines a Pydantic model as the data contract, and `Instructor` ensures the LLM's output is a validated instance of that model. This completely eliminates brittle, manual parsing of LLM string outputs.
+
+**Pillar 3: Systematic Evaluation ("Evals")**
+- **Principle**: You cannot improve what you cannot measure. Every critical prompt and model combination must be subject to a suite of automated tests to prevent quality regressions.
+- **Implementation**: We use an evaluation pipeline (e.g., using `promptfoo`) to test our agents against a "golden set" of documents. These "Evals" assert not just the structural validity of the output (is it valid JSON?), but also the semantic quality of the reasoning, often using a more powerful LLM as an impartial "judge."
+
+### State-of-the-Art Pillars (Production-Grade Performance & Reasoning)
+
+These enhancements move the system from merely reliable to highly performant and efficient.
+
+**Pillar 4: The Router (For Cost, Speed, and Capability)**
+- **Principle**: No single LLM is best for every task. A sophisticated system routes tasks to the optimal model based on the task's complexity, cost, and speed requirements.
+- **Implementation**: An LLM-based **Router** acts as a dispatcher. A small, fast model first classifies an incoming task (e.g., "simple data extraction" vs. "complex reasoning") and then routes it to the appropriate "expert" model (e.g., `Claude Haiku` for the simple task, `Gemini 2.5 Pro` for the complex one).
+
+**Pillar 5: Structured Caching (For Speed and Cost Savings)**
+- **Principle**: Identical inputs should yield identical outputs, and a computation should only be paid for once.
+- **Implementation**: A **Semantic Cache** is used. Before making an LLM call, the system converts the prompt into a vector embedding and checks a vector database for a semantically similar, previously executed request. If a match is found, the cached result is returned instantly, saving both time and money. `LiteLLM` provides built-in support for this pattern.
+
+**Pillar 6: Multi-Agent Collaboration (For Complex Reasoning)**
+- **Principle**: Advanced reasoning emerges from a structured debate between multiple, specialized "expert" agents.
+- **Implementation**: Complex analysis is broken down into a multi-agent workflow (e.g., using `LangGraph`). An `Analyst Agent` provides an initial analysis, a `Red Team Agent` critiques it, and a `Synthesis Agent` acts as a final arbiter to produce a more robust and balanced conclusion. The software's role is simply to orchestrate the flow of messages between these intelligent agents.
+
+### Bleeding-Edge Pillars (Aspirational, Future-Facing Goals)
+
+These patterns represent the next generation of LLM systems, focused on self-correction and extreme efficiency.
+
+**Pillar 7: The "Self-Healing" System (Dynamic Fallbacks & Correctness)**
+- **Principle**: A truly resilient system anticipates and dynamically corrects its own errors and quality degradations in real-time.
+- **Implementation**: A **"Guardrails" Loop** is used. After an agent produces its output, a separate, fast, and cheap **Guardrails Agent** validates the output against a dynamic rubric. If the output fails validation, the system automatically re-runs the original agent with the corrective feedback from the Guardrails Agent, creating a self-healing loop. `Guardrails AI` is an open-source library for this pattern.
+
+**Pillar 8: The Cost-Performance Frontier (RAG-based Prompt Optimization)**
+- **Principle**: The cost and latency of an LLM call are dominated by prompt size. A cutting-edge system actively minimizes its prompt size before every call.
+- **Implementation**: A **Retrieval-Augmented Generation (RAG)** pipeline is used to create dynamic "few-shot" prompts. Instead of sending the entire analytical framework, the system uses a vector database to retrieve only the most semantically relevant sections of the framework and a few "golden" examples of similar analyses. This creates a much smaller, more targeted, and often higher-quality prompt, dramatically reducing cost and latency. `LlamaIndex` and `LangChain` are standard tools for this.
+
+---
+
 ### The THIN vs THICK Philosophy
 
 **Discernus embodies THIN software architecture principles**:
