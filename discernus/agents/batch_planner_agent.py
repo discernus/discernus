@@ -74,10 +74,10 @@ class BatchPlannerAgent:
             if "gemini-2.5-pro" in model:
                 return 1_800_000  # 90% of 2M tokens (safety margin)
             elif "gemini-2.5-flash" in model:
-                return 900_000    # 90% of 1M tokens (safety margin)
+                return 250_000    # CONSERVATIVE BATCHING: Reduced from 900k to 250k to prevent OOM errors
         
         # Conservative default for unknown models
-        return 800_000
+        return 200_000
 
     def get_rate_limits(self, model: str) -> Dict[str, int]:
         """
@@ -211,18 +211,21 @@ class BatchPlannerAgent:
         batches = []
         current_batch = []
         current_batch_tokens = base_overhead
+        max_documents_per_batch = 5
         # CONTEXT_WINDOW_MANAGEMENT: Use actual context window limits, not TPM!
         max_tokens_per_batch = self.get_context_window_limit(model)
-        print(f"🎯 Batch sizing: {max_tokens_per_batch:,} tokens per batch (context window limit)")
-        
+        print(f"🎯 Batch sizing: {max_tokens_per_batch:,} tokens OR {max_documents_per_batch} documents per batch (whichever is lower)")
+
         total_estimated_cost = 0.0
         
         for doc in corpus_documents:
             doc_tokens = token_analysis['document_tokens'][doc['filename']]
             
-            # Check if adding this document would exceed the batch limit
-            if current_batch_tokens + doc_tokens > max_tokens_per_batch and current_batch:
-                # Finalize current batch with cost calculation
+            if current_batch and (
+                (current_batch_tokens + doc_tokens > max_tokens_per_batch) or
+                (len(current_batch) >= max_documents_per_batch)
+            ):
+                # Finalize the current batch
                 batch_cost = self.estimate_batch_cost(current_batch_tokens, model)
                 total_estimated_cost += batch_cost
                 

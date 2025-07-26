@@ -8,7 +8,7 @@ and direct function call interfaces.
 """
 
 # THIN v2.0 Enhanced Agents
-from .enhanced_analysis_agent import EnhancedAnalysisAgent
+from .EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from .enhanced_synthesis_agent import EnhancedSynthesisAgent
 from .batch_planner_agent import BatchPlannerAgent
 
