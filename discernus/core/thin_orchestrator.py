@@ -24,7 +24,7 @@ from .security_boundary import ExperimentSecurityBoundary, SecurityError
 from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
-from ..agents.enhanced_analysis_agent import EnhancedAnalysisAgent
+from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.enhanced_synthesis_agent import EnhancedSynthesisAgent
 from ..agents.batch_planner_agent import BatchPlannerAgent
 
@@ -64,7 +64,7 @@ class ThinOrchestrator:
         
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
         
-    def run_experiment(self, model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
+    def run_experiment(self, model: str = "vertex_ai/gemini-2.5-pro") -> Dict[str, Any]:
         """
         Execute complete experiment using THIN v2.0 direct call coordination.
         
@@ -242,11 +242,20 @@ class ThinOrchestrator:
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             manifest.add_execution_stage("enhanced_synthesis", "EnhancedSynthesisAgent", synthesis_start_time)
             
+            # Execute synthesis
+            print("\n🔬 Synthesizing results...")
             synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
+            
+            # Extract structured data for synthesis to avoid memory issues
+            structured_data, artifact_map = self._extract_and_consolidate_analysis_data(all_analysis_results, storage)
+
+            # Generate human-readable artifact index
+            self._generate_artifact_index_html(artifact_map, run_folder)
+
             synthesis_result = synthesis_agent.synthesize_results(
-                analysis_results=[combined_analysis_result["result_content"]],
+                analysis_results=structured_data,
                 experiment_config=experiment_config,
-                model=model
+                model=model 
             )
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()
@@ -321,6 +330,95 @@ class ThinOrchestrator:
             
             raise ThinOrchestratorError(f"Experiment execution failed: {e}")
     
+    def _extract_and_consolidate_analysis_data(self, 
+                                               analysis_results: List[Dict[str, Any]],
+                                               storage: LocalArtifactStorage) -> Tuple[List[Dict[str, Any]], Dict[str, str]]:
+        """
+        Extracts structured data from analysis artifacts for memory-efficient synthesis.
+        """
+        print(" consolidating analysis data for synthesis...")
+        consolidated_data = []
+        artifact_map = {} # Maps original filename to artifact hash
+
+        for result_wrapper in analysis_results:
+            analysis_data = result_wrapper.get('analysis_results', {})
+            
+            if not isinstance(analysis_data, dict):
+                # Handle case where LLM returned a string despite instructions
+                print(f"⚠️  Skipping non-dict analysis result in batch {result_wrapper.get('batch_id')}")
+                continue
+
+            doc_analyses = analysis_data.get('document_analyses', {})
+            for doc_filename, doc_analysis in doc_analyses.items():
+                # Find the original document hash from the input artifacts
+                # This is a bit convoluted, but necessary to link back
+                original_doc_hash = None
+                for doc_info in result_wrapper.get('input_artifacts', {}).get('documents', []):
+                    if doc_info.get('filename') == doc_filename:
+                        original_doc_hash = doc_info.get('hash')
+                        break
+
+                structured_entry = {
+                    "original_document": {
+                        "filename": doc_filename,
+                        "hash": original_doc_hash
+                    },
+                    "artifact_hash": result_wrapper.get('artifact_hash'),
+                    "scores": doc_analysis.get('scores'),
+                    "tension_analysis": doc_analysis.get('tension_analysis'),
+                    "character_clusters": doc_analysis.get('character_clusters')
+                }
+                consolidated_data.append(structured_entry)
+                if original_doc_hash:
+                    artifact_map[doc_filename] = result_wrapper.get('artifact_hash')
+
+        print(f"  Consolidated data for {len(consolidated_data)} documents.")
+        return consolidated_data, artifact_map
+
+    def _generate_artifact_index_html(self, artifact_map: Dict[str, str], run_folder: Path):
+        """Generates a human-readable HTML index of artifacts."""
+        html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifact Index</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        a { color: #0066cc; }
+    </style>
+</head>
+<body>
+    <h1>Analysis Artifact Index</h1>
+    <p>This index maps original corpus documents to their detailed analysis artifact files.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Original Document</th>
+                <th>Analysis Artifact Link</th>
+            </tr>
+        </thead>
+        <tbody>
+"""
+        for filename, fhash in sorted(artifact_map.items()):
+            relative_path = f"./artifacts/{fhash}"
+            html_content += f'            <tr><td>{filename}</td><td><a href="{relative_path}">{fhash}</a></td></tr>\n'
+        
+        html_content += """
+        </tbody>
+    </table>
+</body>
+</html>
+"""
+        index_path = run_folder / "artifact_index.html"
+        self.security.secure_write_file(index_path, html_content)
+        print(f"  Generated artifact index: {index_path}")
+
+
     def _load_experiment_config(self) -> Dict[str, Any]:
         """Load and validate experiment configuration."""
         experiment_file = self.experiment_path / "experiment.md"

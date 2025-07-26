@@ -15,6 +15,7 @@ Based on THIN v2.0 principles: LLM intelligence + minimal software coordination
 import json
 import base64
 import hashlib
+import yaml
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
@@ -70,76 +71,15 @@ class EnhancedAnalysisAgent:
         })
     
     def _load_enhanced_prompt_template(self) -> str:
-        """Load enhanced prompt template with mathematical requirements."""
-        return """You are an enhanced computational research analysis agent with mathematical validation capabilities. Your task is to perform systematic, reproducible analysis that produces STRUCTURED DATA with MATHEMATICAL VERIFICATION.
-
-CRITICAL MATHEMATICAL REQUIREMENTS:
-1. For ANY numerical calculation, you MUST show your work step-by-step
-2. For statistical operations, provide the formula used and intermediate steps
-3. For scoring operations, explain the calculation method explicitly
-4. Self-assess the mathematical accuracy of your calculations
-5. Provide confidence estimates for numerical results
-
-ENHANCED ANALYSIS INSTRUCTIONS:
-1. FIRST: Decode all base64 content. All frameworks and documents are provided as base64 encoded strings.
-2. Apply each framework to each document systematically according to the framework's specifications.
-3. For each document, generate scores with EXPLICIT MATHEMATICAL WORK:
-   - Show the calculation formula
-   - Show intermediate numerical steps
-   - Explain any averaging, weighting, or aggregation
-   - Provide confidence estimate for each score (0.0-1.0)
-4. MATHEMATICAL SELF-ASSESSMENT: After calculations, review your work and flag any potential errors
-5. Present your analysis in a clear, structured format with mathematical verification section
-
-MATHEMATICAL VERIFICATION SECTION (Required):
-Include a section called "MATHEMATICAL VERIFICATION" that contains:
-- Summary of all calculations performed
-- Self-check of mathematical accuracy
-- Confidence assessment (0.0-1.0) for each numerical result
-- Any mathematical concerns or limitations identified
-
-OUTPUT FORMAT:
-Provide a structured analysis with:
-1. Document-by-document scoring results WITH calculation details
-2. Mathematical verification section
-3. Self-assessment of analysis quality and mathematical accuracy
-
-Follow the framework's output requirements exactly, but ALWAYS include mathematical work for any numerical operations.
-
----
-**BATCH ID:** {batch_id}
-**FRAMEWORKS TO APPLY:** {num_frameworks}
-**DOCUMENTS TO ANALYZE:** {num_documents}
-**MATHEMATICAL VALIDATION:** ENABLED
-
----
-**FRAMEWORKS:**
-{frameworks}
-
----
-**DOCUMENTS:**
-{documents}
-
-Begin enhanced analysis with mathematical validation now.
-
-QUALITY REQUIREMENTS:
-- All numerical scores must be within specified framework ranges
-- Evidence quotes must be EXACT text from documents (no paraphrasing)
-- ALL mathematical calculations must be explicit and verifiable
-- Show your work for ANY numerical operation
-- Missing data should be null, not approximated
-- Maintain consistent precision (2-3 decimal places for scores)
-- Provide confidence estimates for all numerical results
-- Self-assess mathematical accuracy and flag concerns
-
-MATHEMATICAL VERIFICATION REQUIREMENTS:
-- Include step-by-step calculations for all scores
-- Show formulas used for any statistical operations
-- Explain weighting or averaging methods
-- Provide confidence estimates (0.0-1.0) for numerical results
-- Self-check mathematical accuracy and report concerns
-- Identify any limitations in the mathematical approach
-"""
+        """Load enhanced prompt template with mathematical requirements from YAML file."""
+        prompt_path = Path(__file__).parent / "prompt.yaml"
+        if not prompt_path.exists():
+            raise FileNotFoundError("Could not find prompt.yaml for EnhancedAnalysisAgent")
+        
+        with open(prompt_path, 'r') as f:
+            prompt_config = yaml.safe_load(f)
+        
+        return prompt_config['template']
 
     def analyze_batch(self, 
                      framework_content: str,
@@ -246,6 +186,15 @@ MATHEMATICAL VERIFICATION REQUIREMENTS:
             if not result_content or result_content.strip() == "":
                 raise EnhancedAnalysisAgentError("LLM returned empty content")
             
+            # Attempt to parse the JSON response
+            try:
+                analysis_data = json.loads(result_content)
+            except json.JSONDecodeError as e:
+                self.audit.log_agent_event(self.agent_name, "json_parse_error", {
+                    "batch_id": batch_id, "error": str(e), "raw_response": result_content
+                })
+                raise EnhancedAnalysisAgentError(f"Failed to parse LLM JSON response: {e}")
+
             # Log LLM interaction
             interaction_hash = self.audit.log_llm_interaction(
                 model=model,
@@ -267,10 +216,10 @@ MATHEMATICAL VERIFICATION REQUIREMENTS:
             enhanced_result = {
                 "batch_id": batch_id,
                 "agent_name": self.agent_name,
-                "agent_version": "enhanced_v2.0_mathematical",
+                "agent_version": "enhanced_v2.1_structured_output",
                 "experiment_name": experiment_config.get("name", "unknown"),
                 "model_used": model,
-                "analysis_results": result_content,
+                "analysis_results": analysis_data,
                 "mathematical_validation": {
                     "enabled": True,
                     "verification_required": True,
