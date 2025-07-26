@@ -15,6 +15,7 @@ Based on THIN v2.0 principles: LLM intelligence + minimal software coordination
 import json
 import base64
 import hashlib
+import re
 import yaml
 from datetime import datetime, timezone
 from pathlib import Path
@@ -80,6 +81,28 @@ class EnhancedAnalysisAgent:
             prompt_config = yaml.safe_load(f)
         
         return prompt_config['template']
+
+    def _extract_json_from_response(self, content: str) -> Optional[Dict[str, Any]]:
+        """
+        Finds and parses the first valid JSON object from a string.
+        Handles LLM responses that include markdown fences or other text.
+        """
+        # Regex to find content between ```json and ``` or a standalone { ... }
+        json_match = re.search(r'```json\s*(\{.*?\})\s*```|(\{.*?\})', content, re.DOTALL)
+        
+        if not json_match:
+            return None
+
+        # Extract the JSON content from the first non-empty group
+        json_str = next((group for group in json_match.groups() if group), None)
+
+        if not json_str:
+            return None
+
+        try:
+            return json.loads(json_str)
+        except json.JSONDecodeError:
+            return None
 
     def analyze_batch(self, 
                      framework_content: str,
@@ -186,22 +209,14 @@ class EnhancedAnalysisAgent:
             if not result_content or result_content.strip() == "":
                 raise EnhancedAnalysisAgentError("LLM returned empty content")
             
-            # Clean the response to remove common LLM artifacts (e.g., Markdown fences)
-            cleaned_content = result_content.strip()
-            if cleaned_content.startswith("```json"):
-                cleaned_content = cleaned_content[7:]
-            if cleaned_content.endswith("```"):
-                cleaned_content = cleaned_content[:-3]
-            cleaned_content = cleaned_content.strip()
-
-            # Attempt to parse the JSON response
-            try:
-                analysis_data = json.loads(cleaned_content)
-            except json.JSONDecodeError as e:
+            # Use robust extraction to find and parse the JSON object
+            analysis_data = self._extract_json_from_response(result_content)
+            
+            if analysis_data is None:
                 self.audit.log_agent_event(self.agent_name, "json_parse_error", {
-                    "batch_id": batch_id, "error": str(e), "raw_response": result_content
+                    "batch_id": batch_id, "error": "No valid JSON object found in response", "raw_response": result_content
                 })
-                raise EnhancedAnalysisAgentError(f"Failed to parse LLM JSON response: {e}")
+                raise EnhancedAnalysisAgentError("Failed to find or parse LLM JSON response")
 
             # Log LLM interaction
             interaction_hash = self.audit.log_llm_interaction(
