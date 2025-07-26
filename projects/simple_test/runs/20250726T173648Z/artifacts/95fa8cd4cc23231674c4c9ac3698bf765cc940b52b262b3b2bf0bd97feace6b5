@@ -1,0 +1,153 @@
+# simple_test - Analysis Report
+
+**Generated**: 2025-07-26 17:38:24 UTC  
+**Architecture**: THIN v2.0 Direct Function Calls  
+**Mathematical Validation**: Enabled  
+
+---
+
+## Executive Summary
+
+This report presents the results of computational research analysis using the Discernus THIN v2.0 architecture with enhanced mathematical validation capabilities.
+
+**Key Features of This Analysis**:
+- ✅ Mathematical "show your work" requirements for all calculations
+- ✅ Dual-LLM validation with spot-checking of numerical results  
+- ✅ Complete audit trails for academic reproducibility
+- ✅ Content-addressable storage for perfect caching
+- ✅ Security boundary enforcement
+
+---
+
+## Analysis Results
+
+### Enhanced Analysis Agent Results (CSV-Based)
+**Agent**: EnhancedAnalysisAgent_CSV  
+**Version**: csv_v1.0  
+**Duration**: 0.0 seconds  
+**CSV Analysis**: Unknown shape rows generated  
+**Framework Dimensions**: 0 dimensions analyzed
+
+**CSV Data Summary**:
+- **Total Documents**: 0
+- **Total Measurements**: 0
+- **Average Confidence**: 0.00
+
+*Note: Complete CSV data available for researcher download and statistical analysis.*
+
+---
+
+## Synthesis Results
+
+### Enhanced Synthesis Agent Results  
+**Agent**: EnhancedSynthesisAgent  
+**Version**: enhanced_v3.0_instructor  
+**Duration**: 37.1 seconds  
+**Mathematical Confidence**: 0.95  
+
+# Research Synthesis Report
+
+## 1. Executive Summary
+
+This report synthesizes the analysis of two documents, `document1.txt` and `document2.txt`, revealing starkly contrasting narrative profiles. `document1.txt` exhibits high levels of **tribalism, resentment, manipulation, and fear**, suggesting a divisive and conflict-oriented discourse. Conversely, `document2.txt` demonstrates strong emphasis on **dignity, truth, justice, hope, and pragmatism**, indicating a constructive and unifying narrative. The analysis highlights a clear dichotomy in the underlying values and rhetorical strategies employed across the corpus.
+
+## 2. Corpus-Wide Statistical Analysis
+
+The following table presents the average intensity and salience scores, along with their standard deviations, across the entire corpus for each framework dimension.
+
+| Dimension | Average Intensity | Std Dev Intensity | Average Salience | Std Dev Salience |
+|---|---|---|---|---|
+| Dignity | 0.52 | 0.42 | 0.55 | 0.45 |
+| Truth | 0.50 | 0.40 | 0.85 | 0.05 |
+| Justice | 0.92 | 0.02 | 0.95 | 0.05 |
+| Hope | 0.52 | 0.32 | 0.60 | 0.30 |
+| Pragmatism | 0.45 | 0.35 | 0.45 | 0.35 |
+| Tribalism | 0.50 | 0.45 | 0.90 | 0.10 |
+| Manipulation | 0.42 | 0.37 | 0.75 | 0.05 |
+| Resentment | 0.50 | 0.45 | 0.90 | 0.10 |
+| Fear | 0.45 | 0.40 | 0.45 | 0.35 |
+| Fantasy | 0.32 | 0.27 | 0.30 | 0.20 |
+
+### Outlier Identification
+
+Given the small corpus size (2 documents), the documents themselves represent significant outliers relative to each other, demonstrating a clear bimodal distribution for most dimensions:
+*   **`document1.txt`** is a significant outlier for high scores in **Tribalism, Resentment, Manipulation, and Fear**, and low scores in Dignity, Truth, Justice, Hope, and Pragmatism.
+*   **`document2.txt`** is a significant outlier for high scores in **Dignity, Truth, Justice, Hope, and Pragmatism**, and low scores in Tribalism, Manipulation, Resentment, and Fear.
+
+### Correlation Analysis
+
+A strong inverse correlation is observed between the 'positive' dimensions (Dignity, Truth, Justice, Hope, Pragmatism) and the 'negative' dimensions (Tribalism, Manipulation, Resentment, Fear). As scores in one set increase, scores in the other set tend to decrease, indicating mutually exclusive narrative approaches within this corpus.
+
+## 3. Thematic Analysis
+
+Two primary thematic patterns emerge from the analysis:
+
+### Theme 1: Divisive and Conflict-Oriented Narrative
+This theme is predominantly represented by `document1.txt`. It is characterized by a strong emphasis on 'us vs. them' mentality (high Tribalism), a focus on past grievances and anger (high Resentment), the use of deceptive or coercive communication (high Manipulation), and the instillation of alarm or insecurity (high Fear). This narrative aims to mobilize through division and perceived threats.
+
+### Theme 2: Unifying and Constructive Narrative
+This theme is clearly embodied by `document2.txt`. It prioritizes the inherent worth of individuals (high Dignity), adherence to factual accuracy and transparency (high Truth), the pursuit of equitable systems (high Justice), a forward-looking and optimistic outlook (high Hope), and a practical, results-oriented approach (high Pragmatism). This narrative seeks to build consensus and foster collective progress.
+
+## 4. Detailed Results Table
+
+The table below provides a summary of key metrics for each analyzed document. Click on the document filename to access its full detailed analysis artifact.
+
+| Document | Dignity (Int/Sal) | Truth (Int/Sal) | Justice (Int/Sal) | Hope (Int/Sal) | Pragmatism (Int/Sal) | Tribalism (Int/Sal) | Manipulation (Int/Sal) | Resentment (Int/Sal) | Fear (Int/Sal) | Fantasy (Int/Sal) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| [document1.txt](./artifacts/csv_csv_batch_20250726_133648) | 0.10/0.10 | 0.10/0.80 | 0.90/0.90 | 0.20/0.30 | 0.10/0.10 | 0.95/1.00 | 0.80/0.80 | 0.95/1.00 | 0.85/0.80 | 0.60/0.50 |
+| [document2.txt](./artifacts/csv_csv_batch_20250726_133648) | 0.95/1.00 | 0.90/0.90 | 0.95/1.00 | 0.85/0.90 | 0.80/0.80 | 0.05/0.80 | 0.05/0.70 | 0.05/0.80 | 0.05/0.10 | 0.05/0.10 |
+
+
+---
+
+## Mathematical Validation Report
+
+### Validation Summary
+- **Dual-LLM Validation**: True
+- **Mathematical Confidence**: 0.95
+- **Errors Detected**: 0
+
+### Validation Details
+Mathematical validation completed successfully via Instructor + Pydantic structured output.
+
+---
+
+## Provenance Information
+
+### Experiment Configuration
+- **Experiment**: simple_test
+- **Framework**: framework.md
+- **Corpus Path**: corpus/
+
+### Execution Metadata (CSV Architecture)
+- **Run ID**: Unknown
+- **Security Boundary**: Unknown CSV batch
+- **CSV Format**: Research-ready data for R/pandas analysis
+- **Analysis Model**: Unknown
+
+### Artifact Information
+- **CSV Batch ID**: Unknown
+- **CSV Rows Generated**: Unknown
+- **Analysis Result Hash**: Unknown...
+- **Synthesis Result Hash**: synthesis_e3eb5c...
+
+---
+
+## Quality Assurance
+
+### THIN v2.0 Architecture Validation
+- ✅ Direct function calls (no Redis coordination)
+- ✅ LLM intelligence for complex reasoning
+- ✅ Minimal software coordination  
+- ✅ Perfect caching through content-addressable storage
+- ✅ Complete audit trails for academic integrity
+
+### Mathematical Validation
+- ✅ "Show your work" requirements implemented
+- ✅ Dual-LLM validation with spot-checking
+- ✅ Confidence estimates for all numerical results
+- ✅ Independent recalculation of key metrics
+
+---
+
+*This report was generated by the Discernus THIN v2.0 architecture with enhanced mathematical validation capabilities.*

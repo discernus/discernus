@@ -1,0 +1,103 @@
+# simple_test - CSV Analysis Report
+
+**Generated**: 2025-07-26 17:49:57 UTC  
+**Architecture**: THIN v2.0 CSV-Based Analysis  
+
+---
+
+## Analysis Results
+
+### CSV Analysis Summary
+**Agent**: EnhancedAnalysisAgent_CSV  
+**Batch ID**: Unknown  
+**CSV Rows Generated**: 0  
+**Analysis Status**: FAILED
+
+*Complete CSV data available for researcher download and statistical analysis.*
+
+---
+
+## Synthesis Results
+
+**Agent**: EnhancedSynthesisAgent  
+**Duration**: 40.1 seconds  
+**Confidence**: 0.95
+
+# Research Synthesis Report
+
+## 1. Executive Summary
+
+This report synthesizes the analysis of multiple documents, focusing on key dimensions such as dignity, truth, justice, hope, pragmatism, tribalism, manipulation, resentment, fear, and fantasy. The analysis reveals distinct patterns in the corpus, highlighting documents that align with civic virtues versus those exhibiting characteristics of societal vices.
+
+A primary observation is the clear dichotomy between the analyzed documents. One document (document1.txt) exhibits significantly high scores in dimensions associated with societal vices, such as **tribalism, resentment, fear, and manipulation**, while scoring very low on civic virtues like dignity, truth, and justice. Conversely, the other document (document2.txt) demonstrates a strong emphasis on **dignity, truth, justice, hope, and pragmatism**, with minimal presence of the identified vices. This suggests a corpus composed of texts with fundamentally opposing underlying philosophies or rhetorical strategies.
+
+## 2. Corpus-Wide Statistical Analysis
+
+The following table presents the average intensity, salience, and confidence scores, along with their standard deviations, across all documents for each framework dimension.
+
+| Dimension | Metric | Mean Score | Standard Deviation |
+|---|---|---|---|
+| Confidence | Confidence | 0.91 | 0.04 |
+| Dignity | Confidence | 0.92 | 0.04 |
+| Dignity | Intensity | 0.50 | 0.45 |
+| Dignity | Salience | 0.50 | 0.45 |
+| Fantasy | Confidence | 0.85 | 0.10 |
+| Fantasy | Intensity | 0.32 | 0.28 |
+| Fantasy | Salience | 0.22 | 0.18 |
+| Fear | Confidence | 0.92 | 0.04 |
+| Fear | Intensity | 0.45 | 0.40 |
+| Fear | Salience | 0.40 | 0.35 |
+| Hope | Confidence | 0.85 | 0.05 |
+| Hope | Intensity | 0.48 | 0.38 |
+| Hope | Salience | 0.50 | 0.30 |
+| Justice | Confidence | 0.90 | 0.05 |
+| Justice | Intensity | 0.55 | 0.35 |
+| Justice | Salience | 0.85 | 0.05 |
+| Manipulation | Confidence | 0.92 | 0.04 |
+| Manipulation | Intensity | 0.42 | 0.38 |
+| Manipulation | Salience | 0.42 | 0.38 |
+| Pragmatism | Confidence | 0.90 | 0.00 |
+| Pragmatism | Intensity | 0.45 | 0.40 |
+| Pragmatism | Salience | 0.45 | 0.35 |
+| Resentment | Confidence | 0.92 | 0.04 |
+| Resentment | Intensity | 0.52 | 0.42 |
+| Resentment | Salience | 0.50 | 0.40 |
+| Tribalism | Confidence | 0.95 | 0.00 |
+| Tribalism | Intensity | 0.50 | 0.45 |
+| Tribalism | Salience | 0.50 | 0.45 |
+| Truth | Confidence | 0.92 | 0.04 |
+| Truth | Intensity | 0.48 | 0.42 |
+| Truth | Salience | 0.80 | 0.10 |
+
+### Outlier Identification
+
+Given the small sample size (2 documents), the 'outliers' are effectively the contrasting documents themselves. Document1.txt consistently scores high on 'tribalism', 'resentment', 'fear', and 'manipulation', which are significantly higher than the corpus average for these dimensions. Conversely, Document2.txt shows exceptionally high scores for 'dignity', 'truth', 'justice', 'hope', and 'pragmatism', standing out in these categories.
+
+## 3. Thematic Analysis
+
+The analysis reveals a strong thematic split within the corpus. One dominant theme is **Divisive and Fear-Mongering Rhetoric**, characterized by high scores in tribalism, resentment, fear, and manipulation. This theme suggests a focus on in-group/out-group dynamics, grievance, and the use of emotional appeals to control or influence.
+
+The contrasting theme is **Principled and Collaborative Discourse**, marked by high scores in dignity, truth, justice, hope, and pragmatism. This theme indicates a focus on universal human rights, factual accuracy, equitable systems, optimism, and practical problem-solving.
+
+The stark contrast between these two themes suggests that the documents represent fundamentally different approaches to communication and societal engagement.
+
+## 4. Detailed Results Table
+
+The table below provides a summary of key scores for each analyzed document, with clickable links to their respective detailed analysis artifacts.
+
+| Document | Confidence (Int.) | Confidence (Sal.) | Dignity (Int.) | Dignity (Sal.) | Fantasy (Int.) | Fantasy (Sal.) | Fear (Int.) | Fear (Sal.) | Hope (Int.) | Hope (Sal.) | Justice (Int.) | Justice (Sal.) | Manipulation (Int.) | Manipulation (Sal.) | Pragmatism (Int.) | Pragmatism (Sal.) | Resentment (Int.) | Resentment (Sal.) | Tribalism (Int.) | Tribalism (Sal.) | Truth (Int.) | Truth (Sal.) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| [document1.txt](./artifacts/csv_csv_batch_20250726_134821) | 0.90 | 0.00 | 0.05 | 0.05 | 0.60 | 0.40 | 0.85 | 0.75 | 0.10 | 0.20 | 0.20 | 0.80 | 0.80 | 0.80 | 0.05 | 0.10 | 0.95 | 0.90 | 0.95 | 0.95 | 0.05 | 0.70 |
+| [document2.txt](./artifacts/csv_csv_batch_20250726_134821) | 0.95 | 0.00 | 0.95 | 0.95 | 0.05 | 0.05 | 0.05 | 0.05 | 0.85 | 0.80 | 0.90 | 0.90 | 0.05 | 0.05 | 0.85 | 0.80 | 0.10 | 0.10 | 0.05 | 0.05 | 0.90 | 0.90 |
+
+
+
+---
+
+## Experiment Configuration
+
+- **Experiment**: simple_test
+- **Framework**: framework.md
+- **Corpus Path**: corpus/
+
+**Report Generation Complete**: 2025-07-26 17:49:57 UTC

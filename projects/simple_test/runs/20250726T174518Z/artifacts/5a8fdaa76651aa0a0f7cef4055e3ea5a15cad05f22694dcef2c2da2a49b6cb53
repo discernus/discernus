@@ -1,0 +1,87 @@
+# simple_test - CSV Analysis Report
+
+**Generated**: 2025-07-26 17:47:33 UTC  
+**Architecture**: THIN v2.0 CSV-Based Analysis  
+
+---
+
+## Analysis Results
+
+### CSV Analysis Summary
+**Agent**: EnhancedAnalysisAgent_CSV  
+**Batch ID**: Unknown  
+**CSV Rows Generated**: 0  
+**Analysis Status**: FAILED
+
+*Complete CSV data available for researcher download and statistical analysis.*
+
+---
+
+## Synthesis Results
+
+**Agent**: EnhancedSynthesisAgent  
+**Duration**: 71.3 seconds  
+**Confidence**: 0.95
+
+# Research Synthesis Report
+
+## 1. Executive Summary
+
+This report synthesizes the analysis of a small corpus of documents, revealing a stark contrast in their underlying thematic orientations. One document (`document1.txt`) is characterized by a strong emphasis on civic vices such as tribalism, resentment, and fear, indicating a divisive and conflict-oriented narrative. Conversely, the other document (`document2.txt`) prominently features civic virtues including dignity, truth, justice, hope, and pragmatism, suggesting an inclusive and constructive approach. This dataset effectively highlights two opposing ideological frameworks.
+
+## 2. Corpus-Wide Statistical Analysis
+
+The following table presents the average intensity and salience scores, along with their standard deviations, across all analyzed documents for each dimension.
+
+| Dimension | Average Intensity | StDev Intensity | Average Salience | StDev Salience |
+|---|---|---|---|---|
+| Dignity | 0.50 | 0.64 | 0.52 | 0.67 |
+| Truth | 0.48 | 0.60 | 0.80 | 0.14 |
+| Justice | 0.85 | 0.07 | 0.92 | 0.04 |
+| Hope | 0.52 | 0.46 | 0.60 | 0.28 |
+| Pragmatism | 0.45 | 0.57 | 0.72 | 0.18 |
+| Tribalism | 0.50 | 0.64 | 0.55 | 0.64 |
+| Manipulation | 0.45 | 0.57 | 0.48 | 0.53 |
+| Resentment | 0.52 | 0.60 | 0.58 | 0.53 |
+| Fear | 0.42 | 0.53 | 0.40 | 0.49 |
+| Fantasy | 0.32 | 0.39 | 0.27 | 0.32 |
+
+### Outlier Analysis
+
+Documents with scores significantly deviating from the corpus average (more than 1.5 standard deviations):
+
+- **document1.txt**:
+  - **Intensity Outliers**: Dignity (Value: 0.05, Avg: 0.50, StDev: 0.64); Truth (Value: 0.05, Avg: 0.48, StDev: 0.60); Tribalism (Value: 0.95, Avg: 0.50, StDev: 0.64); Manipulation (Value: 0.85, Avg: 0.45, StDev: 0.57); Resentment (Value: 0.95, Avg: 0.52, StDev: 0.60); Fear (Value: 0.80, Avg: 0.42, StDev: 0.53)
+  - **Salience Outliers**: Dignity (Value: 0.05, Avg: 0.52, StDev: 0.67); Tribalism (Value: 1.00, Avg: 0.55, StDev: 0.64); Manipulation (Value: 0.85, Avg: 0.48, StDev: 0.53); Resentment (Value: 0.95, Avg: 0.58, StDev: 0.53); Fear (Value: 0.75, Avg: 0.40, StDev: 0.49)
+- **document2.txt**:
+  - **Intensity Outliers**: Dignity (Value: 0.95, Avg: 0.50, StDev: 0.64); Tribalism (Value: 0.05, Avg: 0.50, StDev: 0.64); Manipulation (Value: 0.05, Avg: 0.45, StDev: 0.57); Resentment (Value: 0.10, Avg: 0.52, StDev: 0.60); Fear (Value: 0.05, Avg: 0.42, StDev: 0.53)
+  - **Salience Outliers**: Dignity (Value: 1.00, Avg: 0.52, StDev: 0.67); Tribalism (Value: 0.10, Avg: 0.55, StDev: 0.64); Manipulation (Value: 0.10, Avg: 0.48, StDev: 0.53); Resentment (Value: 0.20, Avg: 0.58, StDev: 0.53); Fear (Value: 0.05, Avg: 0.40, StDev: 0.49)
+
+## 3. Thematic Analysis
+
+The analysis reveals two primary, contrasting thematic patterns within the corpus:
+
+-   **Divisive and Conflict-Oriented Narratives**: Exemplified by `document1.txt`, this theme is characterized by high intensity and salience in dimensions such as **Tribalism**, **Resentment**, **Manipulation**, and **Fear**. These narratives often promote an 'us vs. them' mentality, emphasize grievances, and may employ coercive or deceptive communication strategies.
+
+-   **Constructive and Inclusive Narratives**: Represented by `document2.txt`, this theme shows high scores in **Dignity**, **Truth**, **Justice**, **Hope**, and **Pragmatism**. Documents aligned with this theme advocate for universal rights, factual accuracy, equitable systems, and forward-looking, practical solutions.
+
+The clear separation of these themes across the documents suggests a deliberate contrast in the ideological stances presented within the analyzed corpus.
+
+
+## 4. Detailed Results Table
+
+| Document | Dignity (I/S) | Truth (I/S) | Justice (I/S) | Hope (I/S) | Pragmatism (I/S) | Tribalism (I/S) | Manipulation (I/S) | Resentment (I/S) | Fear (I/S) | Fantasy (I/S) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| [document1.txt](./artifacts/csv_csv_batch_20250726_134518) | 0.05/0.05 | 0.05/0.70 | 0.80/0.90 | 0.20/0.40 | 0.05/0.60 | 0.95/1.00 | 0.85/0.85 | 0.95/0.95 | 0.80/0.75 | 0.60/0.50 |
+| [document2.txt](./artifacts/csv_csv_batch_20250726_134518) | 0.95/1.00 | 0.90/0.90 | 0.90/0.95 | 0.85/0.80 | 0.85/0.85 | 0.05/0.10 | 0.05/0.10 | 0.10/0.20 | 0.05/0.05 | 0.05/0.05 |
+
+
+---
+
+## Experiment Configuration
+
+- **Experiment**: simple_test
+- **Framework**: framework.md
+- **Corpus Path**: corpus/
+
+**Report Generation Complete**: 2025-07-26 17:47:33 UTC

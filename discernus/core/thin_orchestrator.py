@@ -16,6 +16,7 @@ Key THIN v2.0 principles:
 
 import json
 import yaml
+import pandas as pd
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
@@ -185,13 +186,25 @@ class ThinOrchestrator:
                 model
             )
             print("DEBUG: Raw all_analysis_results from sequential execution:")
-            import json
-            print(json.dumps(all_analysis_results, indent=2))
-            manifest.add_execution_stage("enhanced_analysis", "complete", {
-                "start_time": analysis_start_time,
-                "end_time": datetime.now(timezone.utc).isoformat(),
-                "num_documents": len(corpus_documents)
-            })
+            # Safe debug output that handles DataFrames
+            for i, result in enumerate(all_analysis_results):
+                print(f"  Result {i}:")
+                print(f"    Success: {result.get('success', False)}")
+                print(f"    Batch ID: {result.get('batch_id', 'unknown')}")
+                if 'csv_dataframe' in result:
+                    df = result['csv_dataframe']
+                    print(f"    CSV Shape: {df.shape}")
+                    print(f"    CSV Columns: {list(df.columns)}")
+                else:
+                    print(f"    Result Keys: {list(result.keys())}")
+            manifest.add_execution_stage(
+                stage_name="enhanced_analysis", 
+                agent_name="EnhancedAnalysisAgent_CSV",
+                start_time=analysis_start_time,
+                end_time=datetime.now(timezone.utc).isoformat(),
+                status="completed",
+                metadata={"num_documents": len(corpus_documents)}
+            )
             
             # Consolidate analysis data for synthesis
             print("\n🔬 Synthesizing results...")
@@ -246,8 +259,8 @@ class ThinOrchestrator:
             # Final orchestrator event
             audit.log_orchestrator_event("experiment_complete", {
                 "total_duration_seconds": total_duration,
-                "analysis_duration": analysis_summary["total_duration_seconds"],
-                "synthesis_duration": synthesis_result.get("execution_metadata", {}).get("duration_seconds", 0),
+                "analysis_duration": analysis_summary.get("total_duration_seconds", 0),
+                "synthesis_duration": synthesis_result.get("duration_seconds", 0),
                 "final_report_hash": report_hash,
                 "manifest_file": str(manifest_file),
                 "mathematical_validation": "completed"
@@ -291,66 +304,96 @@ class ThinOrchestrator:
                                        experiment_config: Dict[str, Any],
                                        model: str) -> List[Dict[str, Any]]:
         """
-        Executes the analysis agent for each document, one by one.
+        Executes the CSV-based analysis agent for all documents at once.
         """
-        all_results = []
-        for i, doc in enumerate(corpus_documents):
-            print(f"\n--- Analyzing document {i+1}/{len(corpus_documents)}: {doc['filename']} ---")
-            
-            # The agent's analyze_batch now correctly handles a single document
-            result = analysis_agent.analyze_batch(
-                framework_content=framework_content,
-                documents=[doc],
-                experiment_config=experiment_config,
-                model=model
-            )
-            all_results.append(result)
-
-        return all_results
+        print(f"\n=== CSV-Based Analysis ===")
+        print(f"Documents to analyze: {len(corpus_documents)}")
+        
+        # Use the new CSV method that processes all documents at once
+        result = analysis_agent.analyze_documents_csv(
+            framework_content=framework_content,
+            corpus_documents=corpus_documents,
+            experiment_config=experiment_config,
+            model=model
+        )
+        
+        # Return in the expected format for compatibility
+        if result['success']:
+            print(f"✅ CSV analysis completed successfully")
+            print(f"   Generated CSV: {result['csv_dataframe'].shape[0]} rows")
+            return [result]  # Wrap in list for backward compatibility
+        else:
+            print(f"❌ CSV analysis failed: {result.get('error', 'Unknown error')}")
+            return []
 
     def _extract_and_consolidate_analysis_data(self, 
                                                analysis_results: List[Dict[str, Any]],
                                                storage: LocalArtifactStorage) -> Tuple[List[Dict[str, Any]], Dict[str, str]]:
         """
-        Extracts structured data from analysis artifacts for memory-efficient synthesis.
+        Extracts CSV data from analysis results for synthesis.
+        
+        Updated for CSV-based architecture - much simpler than complex nested structures.
         """
-        print(" consolidating analysis data for synthesis...")
+        print("🔄 Consolidating CSV analysis data for synthesis...")
+        
+        if not analysis_results:
+            print("⚠️  No analysis results to consolidate")
+            return [], {}
+        
+        # Get the CSV data from the first (and only) result
+        csv_result = analysis_results[0]
+        
+        if not csv_result.get('success', False):
+            print("⚠️  Analysis failed - no data to consolidate")
+            return [], {}
+        
+        csv_dataframe = csv_result['csv_dataframe']
+        batch_id = csv_result['batch_id']
+        
+        # Convert CSV DataFrame to synthesis-friendly format
         consolidated_data = []
-        artifact_map = {} # Maps original filename to artifact hash
-
-        # This is now a list of dicts, where each dict is a full agent response
-        for result_wrapper in analysis_results:
-            # The actual analysis data is nested inside 'result_content' and 'analysis_results'
-            analysis_dict = result_wrapper.get('result_content', {}).get('analysis_results', {})
+        artifact_map = {}
+        
+        # Group by document for synthesis
+        unique_documents = csv_dataframe['document_id'].unique()
+        
+        for doc_id in unique_documents:
+            doc_rows = csv_dataframe[csv_dataframe['document_id'] == doc_id]
             
-            if not isinstance(analysis_dict, dict) or 'document_analyses' not in analysis_dict:
-                print(f"⚠️  Skipping malformed or empty analysis result in batch {result_wrapper.get('batch_id')}")
-                continue
-
-            # Iterate through the documents analyzed in this specific result
-            for doc_filename, doc_analysis in analysis_dict.get('document_analyses', {}).items():
-                
-                # Find the original document hash
-                original_doc_hash = None
-                if result_wrapper.get('result_content', {}).get('input_artifacts', {}).get('document_hashes'):
-                    # This assumes one doc per batch run, which is how sequential execution works
-                    original_doc_hash = result_wrapper['result_content']['input_artifacts']['document_hashes'][0]
-                
-                structured_entry = {
-                    "original_document": {
-                        "filename": doc_filename,
-                        "hash": original_doc_hash
-                    },
-                    "artifact_hash": result_wrapper.get('result_hash'),
-                    "scores": doc_analysis.get('scores'),
-                    "tension_analysis": doc_analysis.get('tension_analysis'),
-                    "character_clusters": doc_analysis.get('character_clusters')
+            # Create structured entry compatible with synthesis agent
+            doc_scores = {}
+            doc_evidence = {}
+            
+            for _, row in doc_rows.iterrows():
+                dimension = row['framework_dimension']
+                doc_scores[dimension] = {
+                    'intensity': row['intensity_score'],
+                    'salience': row['salience_score'],
+                    'confidence': row['confidence']
                 }
-                consolidated_data.append(structured_entry)
-                if original_doc_hash:
-                    artifact_map[doc_filename] = result_wrapper.get('result_hash')
-
-        print(f"  Consolidated data for {len(consolidated_data)} documents.")
+                
+                if row['evidence_quote']:
+                    doc_evidence[dimension] = [row['evidence_quote']]
+            
+            structured_entry = {
+                "original_document": {
+                    "filename": doc_id,
+                    "hash": f"csv_{batch_id}_{doc_id}"[:12]  # Generate simple hash
+                },
+                "artifact_hash": f"csv_{batch_id}",
+                "scores": doc_scores,
+                "evidence": doc_evidence,
+                "csv_data": doc_rows.to_dict('records'),  # Include raw CSV data
+                "reasoning": doc_rows.iloc[0]['reasoning_snippet'] if len(doc_rows) > 0 else ""
+            }
+            
+            consolidated_data.append(structured_entry)
+            artifact_map[doc_id] = f"csv_{batch_id}"
+        
+        print(f"✅ Consolidated CSV data for {len(consolidated_data)} documents")
+        print(f"   Total CSV rows: {len(csv_dataframe)}")
+        print(f"   Framework dimensions: {len(csv_dataframe['framework_dimension'].unique())}")
+        
         return consolidated_data, artifact_map
 
     def _generate_artifact_index_html(self, artifact_map: Dict[str, str], run_folder: Path):
@@ -399,27 +442,53 @@ class ThinOrchestrator:
 
     def _combine_batch_results(self, batch_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
-        Combines results from multiple analysis batches into a single summary.
+        Combines results from analysis batches into a single summary.
+        
+        Updated for CSV-based architecture.
         """
         if not batch_results:
             return {"total_duration_seconds": 0, "num_batches": 0, "successful_batches": 0}
 
-        total_duration = sum(r.get('duration_seconds', 0) for r in batch_results)
+        # Handle CSV result format
+        total_duration = 0
         num_batches = len(batch_results)
-        successful_batches = sum(1 for r in batch_results if r.get('result_hash'))
+        successful_batches = 0
+        
+        for result in batch_results:
+            # CSV results have different structure
+            if result.get('success', False):
+                successful_batches += 1
+                # Calculate duration if available
+                if 'json_artifact' in result:
+                    exec_info = result['json_artifact'].get('execution_info', {})
+                    start_time = exec_info.get('start_time')
+                    end_time = exec_info.get('end_time')
+                    if start_time and end_time:
+                        try:
+                            from datetime import datetime
+                            start_dt = datetime.fromisoformat(start_time.replace('Z', '+00:00'))
+                            end_dt = datetime.fromisoformat(end_time.replace('Z', '+00:00'))
+                            total_duration += (end_dt - start_dt).total_seconds()
+                        except:
+                            pass
 
         return {
             "total_duration_seconds": total_duration,
             "num_batches": num_batches,
             "successful_batches": successful_batches,
             "all_batches_successful": successful_batches == num_batches,
-            "individual_batch_results": [
-                {
-                    "batch_id": r.get("batch_id"),
-                    "result_hash": r.get("result_hash"),
-                    "duration": r.get("duration_seconds")
-                } for r in batch_results
-            ]
+            "csv_analysis_summary": {
+                "total_csv_rows": sum(r.get('csv_dataframe', pd.DataFrame()).shape[0] 
+                                    for r in batch_results if 'csv_dataframe' in r),
+                "total_documents": len(set(
+                    doc_id for r in batch_results if 'csv_dataframe' in r
+                    for doc_id in r['csv_dataframe']['document_id'].unique()
+                )) if batch_results and 'csv_dataframe' in batch_results[0] else 0,
+                "framework_dimensions": len(set(
+                    dim for r in batch_results if 'csv_dataframe' in r  
+                    for dim in r['csv_dataframe']['framework_dimension'].unique()
+                )) if batch_results and 'csv_dataframe' in batch_results[0] else 0
+            }
         }
 
     def _load_experiment_config(self) -> Dict[str, Any]:
@@ -492,107 +561,66 @@ class ThinOrchestrator:
                              synthesis_result: Dict[str, Any], 
                              experiment_config: Dict[str, Any],
                              manifest: EnhancedManifest) -> str:
-        """Generate beautiful final markdown report."""
+        """Generate simple final markdown report for CSV architecture."""
         
         timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
         
-        report = f"""# {experiment_config['name']} - Analysis Report
+        # Get basic stats safely
+        batch_id = analysis_result.get('batch_id', 'Unknown')
+        csv_rows = 0
+        analysis_success = analysis_result.get('success', False)
+        
+        if 'csv_dataframe' in analysis_result and hasattr(analysis_result['csv_dataframe'], 'shape'):
+            csv_rows = analysis_result['csv_dataframe'].shape[0]
+        
+        # Get synthesis info safely
+        synthesis_agent = synthesis_result.get('agent_name', 'EnhancedSynthesisAgent')
+        synthesis_duration = synthesis_result.get('duration_seconds', 0.0)
+        synthesis_confidence = synthesis_result.get('synthesis_confidence', 0.0)
+        synthesis_markdown = synthesis_result.get('synthesis_report_markdown', 'Synthesis completed successfully.')
+        
+        # Get experiment info safely
+        exp_name = experiment_config.get('name', 'Unknown')
+        exp_framework = experiment_config.get('framework', 'Unknown')
+        exp_corpus = experiment_config.get('corpus_path', 'Unknown')
+        
+        report = f"""# {exp_name} - CSV Analysis Report
 
 **Generated**: {timestamp}  
-**Architecture**: THIN v2.0 Direct Function Calls  
-**Mathematical Validation**: Enabled  
-
----
-
-## Executive Summary
-
-This report presents the results of computational research analysis using the Discernus THIN v2.0 architecture with enhanced mathematical validation capabilities.
-
-**Key Features of This Analysis**:
-- ✅ Mathematical "show your work" requirements for all calculations
-- ✅ Dual-LLM validation with spot-checking of numerical results  
-- ✅ Complete audit trails for academic reproducibility
-- ✅ Content-addressable storage for perfect caching
-- ✅ Security boundary enforcement
+**Architecture**: THIN v2.0 CSV-Based Analysis  
 
 ---
 
 ## Analysis Results
 
-### Enhanced Analysis Agent Results
-**Agent**: {analysis_result['result_content']['agent_name']}  
-**Version**: {analysis_result['result_content']['agent_version']}  
-**Duration**: {analysis_result['duration_seconds']:.1f} seconds  
-**Mathematical Validation**: {analysis_result['mathematical_validation']}  
+### CSV Analysis Summary
+**Agent**: EnhancedAnalysisAgent_CSV  
+**Batch ID**: {batch_id}  
+**CSV Rows Generated**: {csv_rows}  
+**Analysis Status**: {'SUCCESS' if analysis_success else 'FAILED'}
 
-{analysis_result['result_content']['analysis_results']}
+*Complete CSV data available for researcher download and statistical analysis.*
 
 ---
 
 ## Synthesis Results
 
-### Enhanced Synthesis Agent Results  
-**Agent**: {synthesis_result['agent_name']}  
-**Version**: {synthesis_result['agent_version']}  
-**Duration**: {synthesis_result['duration_seconds']:.1f} seconds  
-**Mathematical Confidence**: {synthesis_result['synthesis_confidence']:.2f}  
+**Agent**: {synthesis_agent}  
+**Duration**: {synthesis_duration:.1f} seconds  
+**Confidence**: {synthesis_confidence:.2f}
 
-{synthesis_result['synthesis_report_markdown']}
+{synthesis_markdown}
 
 ---
 
-## Mathematical Validation Report
+## Experiment Configuration
 
-### Validation Summary
-- **Dual-LLM Validation**: {synthesis_result.get('mathematical_validation', {}).get('validation_enabled', True)}
-- **Mathematical Confidence**: {synthesis_result['synthesis_confidence']:.2f}
-- **Errors Detected**: {len(synthesis_result.get('mathematical_validation', {}).get('mathematical_errors_found', []))}
+- **Experiment**: {exp_name}
+- **Framework**: {exp_framework}
+- **Corpus Path**: {exp_corpus}
 
-### Validation Details
-{synthesis_result.get('mathematical_validation', {}).get('validation_content', 'Mathematical validation completed successfully via Instructor + Pydantic structured output.')}
-
----
-
-## Provenance Information
-
-### Experiment Configuration
-- **Experiment**: {experiment_config['name']}
-- **Framework**: {experiment_config['framework']}
-- **Corpus Path**: {experiment_config['corpus_path']}
-
-### Execution Metadata
-- **Run ID**: {analysis_result.get('result_content', {}).get('execution_metadata', {}).get('start_time', 'Unknown')}
-- **Security Boundary**: {analysis_result.get('result_content', {}).get('provenance', {}).get('security_boundary', {}).get('experiment_name', 'Unknown')}
-- **Audit Session**: {analysis_result.get('result_content', {}).get('provenance', {}).get('audit_session_id', 'Unknown')}
-
-### Artifact Hashes
-- **Framework**: {analysis_result['result_content']['input_artifacts']['framework_hash'][:16]}...
-- **Documents**: {len(analysis_result['result_content']['input_artifacts']['document_hashes'])} corpus documents
-- **Analysis Result**: {analysis_result['result_hash'][:16]}...
-- **Synthesis Result**: {synthesis_result['result_hash'][:16]}...
-
----
-
-## Quality Assurance
-
-### THIN v2.0 Architecture Validation
-- ✅ Direct function calls (no Redis coordination)
-- ✅ LLM intelligence for complex reasoning
-- ✅ Minimal software coordination  
-- ✅ Perfect caching through content-addressable storage
-- ✅ Complete audit trails for academic integrity
-
-### Mathematical Validation
-- ✅ "Show your work" requirements implemented
-- ✅ Dual-LLM validation with spot-checking
-- ✅ Confidence estimates for all numerical results
-- ✅ Independent recalculation of key metrics
-
----
-
-*This report was generated by the Discernus THIN v2.0 architecture with enhanced mathematical validation capabilities.*
+**Report Generation Complete**: {timestamp}
 """
-        
         return report
     
     def _calculate_duration(self, start: str, end: str) -> float:

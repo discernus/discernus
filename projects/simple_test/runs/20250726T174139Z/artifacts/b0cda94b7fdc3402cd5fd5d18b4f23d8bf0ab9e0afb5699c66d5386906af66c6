@@ -1,0 +1,98 @@
+# simple_test - CSV Analysis Report
+
+**Generated**: 2025-07-26 17:43:17 UTC  
+**Architecture**: THIN v2.0 CSV-Based Analysis  
+
+---
+
+## Analysis Results
+
+### CSV Analysis Summary
+**Agent**: EnhancedAnalysisAgent_CSV  
+**Batch ID**: Unknown  
+**CSV Rows Generated**: 0  
+**Analysis Status**: FAILED
+
+*Complete CSV data available for researcher download and statistical analysis.*
+
+---
+
+## Synthesis Results
+
+**Agent**: EnhancedSynthesisAgent  
+**Duration**: 42.0 seconds  
+**Confidence**: 0.95
+
+## Comprehensive Research Synthesis Report
+
+## 1. Executive Summary
+
+This report synthesizes the analysis of two distinct documents, revealing contrasting thematic orientations. Document `document1.txt` exhibits a strong prevalence of civic vices, particularly tribalism, manipulation, resentment, and fear, indicating a narrative focused on division and conflict. In stark contrast, `document2.txt` demonstrates a high alignment with civic virtues such as dignity, truth, justice, hope, and pragmatism, suggesting a narrative centered on unity, rights, and constructive progress. The corpus, though small, clearly delineates two opposing ideological stances.
+
+## 2. Corpus-Wide Statistical Analysis
+
+The following table presents the average and standard deviation for intensity, salience, and confidence scores across all analyzed documents for each dimension.
+
+| Dimension | Metric | Average | Standard Deviation |
+|---|---|---|---|
+| Dignity | Intensity | 0.525 | 0.425 |
+| Dignity | Salience | 0.525 | 0.425 |
+| Dignity | Confidence | 0.925 | 0.025 |
+| Truth | Intensity | 0.475 | 0.425 |
+| Truth | Salience | 0.850 | 0.050 |
+| Truth | Confidence | 0.925 | 0.025 |
+| Justice | Intensity | 0.550 | 0.350 |
+| Justice | Salience | 0.800 | 0.100 |
+| Justice | Confidence | 0.925 | 0.025 |
+| Hope | Intensity | 0.475 | 0.375 |
+| Hope | Salience | 0.550 | 0.250 |
+| Hope | Confidence | 0.850 | 0.050 |
+| Pragmatism | Intensity | 0.450 | 0.400 |
+| Pragmatism | Salience | 0.725 | 0.125 |
+| Pragmatism | Confidence | 0.900 | 0.000 |
+| Tribalism | Intensity | 0.500 | 0.450 |
+| Tribalism | Salience | 0.500 | 0.450 |
+| Tribalism | Confidence | 0.925 | 0.025 |
+| Manipulation | Intensity | 0.475 | 0.425 |
+| Manipulation | Salience | 0.450 | 0.400 |
+| Manipulation | Confidence | 0.900 | 0.000 |
+| Resentment | Intensity | 0.500 | 0.400 |
+| Resentment | Salience | 0.500 | 0.400 |
+| Resentment | Confidence | 0.925 | 0.025 |
+| Fear | Intensity | 0.450 | 0.400 |
+| Fear | Salience | 0.425 | 0.375 |
+| Fear | Confidence | 0.900 | 0.000 |
+| Fantasy | Intensity | 0.175 | 0.125 |
+| Fantasy | Salience | 0.125 | 0.075 |
+| Fantasy | Confidence | 0.800 | 0.100 |
+
+### Outlier Identification
+Given the small corpus size (two documents), `document1.txt` stands out as a significant outlier for high scores in tribalism, manipulation, resentment, and fear, while `document2.txt` is an outlier for high scores in dignity, truth, justice, hope, and pragmatism. This indicates a clear bimodal distribution of scores, with each document representing an extreme end of the virtue-vice spectrum.
+
+### Correlation Analysis
+While a robust correlation analysis is limited by the small dataset, a clear inverse relationship is observed: documents scoring high on civic virtues tend to score low on civic vices, and vice-versa. This suggests that these two sets of dimensions represent opposing ideological frameworks within the analyzed content.
+
+## 3. Thematic Analysis
+
+The analysis reveals two dominant thematic clusters:
+-   **Divisive and Conflict-Oriented Narratives:** Exemplified by `document1.txt`, this theme is characterized by high scores in tribalism, manipulation, resentment, and fear. Narratives under this theme often emphasize 'us vs. them' mentalities, emotional appeals to anger and fear, and a willingness to distort truth for perceived group gain.
+-   **Unifying and Progress-Oriented Narratives:** Represented by `document2.txt`, this theme is marked by high scores in dignity, truth, justice, hope, and pragmatism. Narratives here focus on universal rights, objective truth, equitable systems, and a pragmatic approach to achieving collective well-being through consensus and compromise.
+
+## 4. Detailed Results Table
+
+The following table provides a summary of key intensity metrics for each document, with clickable links to their respective detailed analysis artifacts.
+
+| Document | Dignity (Intensity) | Truth (Intensity) | Justice (Intensity) | Hope (Intensity) | Pragmatism (Intensity) | Tribalism (Intensity) | Manipulation (Intensity) | Resentment (Intensity) | Fear (Intensity) | Fantasy (Intensity) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| [document1.txt](./artifacts/csv_csv_batch_20250726_134139) | 0.10 | 0.05 | 0.20 | 0.10 | 0.05 | 0.95 | 0.90 | 0.90 | 0.85 | 0.30 |
+| [document2.txt](./artifacts/csv_csv_batch_20250726_134139) | 0.95 | 0.90 | 0.90 | 0.85 | 0.85 | 0.05 | 0.05 | 0.10 | 0.05 | 0.05 |
+
+---
+
+## Experiment Configuration
+
+- **Experiment**: simple_test
+- **Framework**: framework.md
+- **Corpus Path**: corpus/
+
+**Report Generation Complete**: 2025-07-26 17:43:17 UTC

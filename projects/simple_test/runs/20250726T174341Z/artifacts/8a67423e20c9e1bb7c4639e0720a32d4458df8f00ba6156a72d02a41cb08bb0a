@@ -1,0 +1,105 @@
+# simple_test - CSV Analysis Report
+
+**Generated**: 2025-07-26 17:44:58 UTC  
+**Architecture**: THIN v2.0 CSV-Based Analysis  
+
+---
+
+## Analysis Results
+
+### CSV Analysis Summary
+**Agent**: EnhancedAnalysisAgent_CSV  
+**Batch ID**: Unknown  
+**CSV Rows Generated**: 0  
+**Analysis Status**: FAILED
+
+*Complete CSV data available for researcher download and statistical analysis.*
+
+---
+
+## Synthesis Results
+
+**Agent**: EnhancedSynthesisAgent  
+**Duration**: 19.3 seconds  
+**Confidence**: 0.95
+
+## Research Synthesis Report
+
+### Executive Summary
+
+This report synthesizes the analysis of two distinct documents, `document1.txt` and `document2.txt`, revealing a stark contrast in their underlying narrative frameworks. `document1.txt` is characterized by a strong emphasis on civic vices such as tribalism, manipulation, resentment, and fear, with very low scores in civic virtues like dignity, truth, and justice. Conversely, `document2.txt` demonstrates a robust alignment with civic virtues, exhibiting high scores in dignity, truth, justice, hope, and pragmatism, while scoring very low on vices. This dichotomy suggests the corpus represents two opposing poles of narrative construction: one fostering division and negative sentiment, and the other promoting unity, constructive engagement, and positive societal values.
+
+### Corpus-Wide Statistical Analysis
+
+Given the limited corpus size of two documents, the statistical analysis primarily highlights the significant differences between the two. Averages represent the mean across both documents, and standard deviations indicate the degree of variance. The data clearly shows `document1.txt` as an outlier for civic vices and `document2.txt` as an outlier for civic virtues.
+
+#### Average and Standard Deviation of Scores Across Corpus
+
+| Dimension    | Metric    | Average | Std Dev |
+| :----------- | :-------- | :------ | :------ |
+| Dignity      | Intensity | 0.50    | 0.64    |
+|              | Salience  | 0.48    | 0.60    |
+|              | Confidence| 0.92    | 0.04    |
+| Truth        | Intensity | 0.48    | 0.60    |
+|              | Salience  | 0.82    | 0.04    |
+|              | Confidence| 0.92    | 0.04    |
+| Justice      | Intensity | 0.50    | 0.57    |
+|              | Salience  | 0.80    | 0.14    |
+|              | Confidence| 0.92    | 0.04    |
+| Hope         | Intensity | 0.48    | 0.53    |
+|              | Salience  | 0.55    | 0.35    |
+|              | Confidence| 0.88    | 0.04    |
+| Pragmatism   | Intensity | 0.45    | 0.57    |
+|              | Salience  | 0.48    | 0.39    |
+|              | Confidence| 0.90    | 0.00    |
+| Tribalism    | Intensity | 0.50    | 0.64    |
+|              | Salience  | 0.52    | 0.60    |
+|              | Confidence| 0.95    | 0.00    |
+| Manipulation | Intensity | 0.45    | 0.57    |
+|              | Salience  | 0.42    | 0.53    |
+|              | Confidence| 0.92    | 0.04    |
+| Resentment   | Intensity | 0.50    | 0.64    |
+|              | Salience  | 0.50    | 0.57    |
+|              | Confidence| 0.95    | 0.00    |
+| Fear         | Intensity | 0.42    | 0.53    |
+|              | Salience  | 0.38    | 0.46    |
+|              | Confidence| 0.92    | 0.04    |
+| Fantasy      | Intensity | 0.32    | 0.39    |
+|              | Salience  | 0.28    | 0.32    |
+|              | Confidence| 0.88    | 0.11    |
+
+*Note: Standard deviation is calculated for N=2, which provides a measure of spread between the two documents.*
+
+### Thematic Analysis
+
+The overarching theme identified within this dataset is the **"Virtue-Vice Narrative Spectrum."** `document1.txt` exemplifies a narrative heavily reliant on **Civic Vices**, characterized by: 
+
+*   **High Tribalism:** Emphasizing "us vs. them" mentalities and group-exclusive justice.
+*   **High Resentment & Fear:** Leveraging past grievances and instilling apprehension to motivate action.
+*   **Manipulation & Fantasy:** Employing rhetoric that serves a specific agenda, even if it distorts truth, and promoting unrealistic or revenge-driven outcomes.
+
+In stark contrast, `document2.txt` embodies **Civic Virtues**, demonstrating:
+
+*   **High Dignity & Truth:** Upholding the inherent worth of individuals and grounding arguments in verifiable facts.
+*   **High Justice & Hope:** Advocating for equitable systems that benefit all, and fostering optimism for a better future.
+*   **Pragmatism:** Focusing on practical, constructive solutions rather than ideological purity or destructive conflict.
+
+This analysis suggests that the documents represent two fundamentally different approaches to public discourse and societal engagement.
+
+### Detailed Results Table
+
+| Document       | Dignity (Int) | Truth (Int) | Justice (Int) | Hope (Int) | Pragmatism (Int) | Tribalism (Int) | Manipulation (Int) | Resentment (Int) | Fear (Int) | Fantasy (Int) |
+| :------------- | :------------ | :---------- | :------------ | :--------- | :--------------- | :-------------- | :----------------- | :--------------- | :--------- | :------------ |
+| [document1.txt](./artifacts/csv_csv_batch_20250726_134341) | 0.05          | 0.05        | 0.1           | 0.1        | 0.05             | 0.95            | 0.85               | 0.95             | 0.8        | 0.6           |
+| [document2.txt](./artifacts/csv_csv_batch_20250726_134341) | 0.95          | 0.9         | 0.9           | 0.85       | 0.85             | 0.05            | 0.05               | 0.05             | 0.05       | 0.05          |
+
+
+---
+
+## Experiment Configuration
+
+- **Experiment**: simple_test
+- **Framework**: framework.md
+- **Corpus Path**: corpus/
+
+**Report Generation Complete**: 2025-07-26 17:44:58 UTC
