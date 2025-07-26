@@ -26,6 +26,7 @@ from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from ..agents.enhanced_analysis_agent import EnhancedAnalysisAgent
 from ..agents.enhanced_synthesis_agent import EnhancedSynthesisAgent
+from ..agents.batch_planner_agent import BatchPlannerAgent
 
 
 class ThinOrchestratorError(Exception):
@@ -145,23 +146,79 @@ class ThinOrchestrator:
                 "total_input_artifacts": len(corpus_hashes) + 1
             })
             
-            # Phase 1: Enhanced Analysis with Mathematical Validation
+            # Phase 1: Batch Planning and Enhanced Analysis with Rate Limiting
+            batch_planning_start_time = datetime.now(timezone.utc).isoformat()
+            manifest.add_execution_stage("batch_planning", "BatchPlannerAgent", batch_planning_start_time)
+            
+            # Create intelligent batch plan based on rate limits
+            batch_planner = BatchPlannerAgent(self.security, audit)
+            batch_plan = batch_planner.create_batches(
+                framework_content=framework_content,
+                corpus_documents=corpus_documents,
+                model=model
+            )
+            
+            batch_planning_end_time = datetime.now(timezone.utc).isoformat()
+            manifest.add_execution_stage("batch_planning", "BatchPlannerAgent",
+                                       batch_planning_start_time, batch_planning_end_time, "completed", {
+                "total_batches": batch_plan["execution_plan"]["total_batches"],
+                "estimated_duration_minutes": batch_plan["execution_plan"]["estimated_duration_minutes"],
+                "rate_limits": batch_plan["execution_plan"]["rate_limits"]
+            })
+            
+            print(f"📊 Batch plan: {batch_plan['execution_plan']['total_batches']} batches, "
+                  f"~{batch_plan['execution_plan']['estimated_duration_minutes']} minutes")
+            
+            # Execute batched analysis with rate limiting
             analysis_start_time = datetime.now(timezone.utc).isoformat()
             manifest.add_execution_stage("enhanced_analysis", "EnhancedAnalysisAgent", analysis_start_time)
             
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
-            analysis_result = analysis_agent.analyze_batch(
-                framework_content=framework_content,
-                corpus_documents=corpus_documents,
-                experiment_config=experiment_config,
-                model=model
-            )
+            all_analysis_results = []
+            
+            for i, batch in enumerate(batch_plan["batches"]):
+                batch_start_time = datetime.now(timezone.utc)
+                
+                # Apply rate limiting delay if needed
+                if i > 0:
+                    timing_window = batch_plan["execution_plan"]["timing_windows"][i]
+                    delay_needed = timing_window["delay_seconds"]
+                    if delay_needed > 0:
+                        print(f"⏱️ Rate limiting: waiting {delay_needed}s before batch {batch['batch_id']}")
+                        import time
+                        time.sleep(delay_needed)
+                
+                print(f"🔬 Processing batch {batch['batch_id']}/{len(batch_plan['batches'])}: "
+                      f"{batch['document_count']} documents (~{batch['estimated_tokens']:,} tokens)")
+                
+                # Process this batch
+                batch_result = analysis_agent.analyze_batch(
+                    framework_content=framework_content,
+                    corpus_documents=batch["documents"],
+                    experiment_config=experiment_config,
+                    model=model
+                )
+                
+                all_analysis_results.append(batch_result)
+                
+                batch_duration = (datetime.now(timezone.utc) - batch_start_time).total_seconds()
+                audit.log_orchestrator_event("batch_completed", {
+                    "batch_id": batch['batch_id'],
+                    "documents_processed": batch['document_count'],
+                    "duration_seconds": batch_duration,
+                    "result_hash": batch_result["result_hash"]
+                })
+            
+            # Combine all batch results
+            combined_analysis_result = self._combine_batch_results(all_analysis_results)
             
             analysis_end_time = datetime.now(timezone.utc).isoformat()
             manifest.add_execution_stage("enhanced_analysis", "EnhancedAnalysisAgent", 
                                        analysis_start_time, analysis_end_time, "completed", {
-                "result_hash": analysis_result["result_hash"],
-                "duration_seconds": analysis_result["duration_seconds"],
+                "total_batches_processed": len(batch_plan["batches"]),
+                "total_documents": len(corpus_documents),
+                "result_hash": combined_analysis_result["result_hash"],
+                "duration_seconds": combined_analysis_result["duration_seconds"],
                 "mathematical_validation": True
             })
             
@@ -171,7 +228,7 @@ class ThinOrchestrator:
             
             synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
             synthesis_result = synthesis_agent.synthesize_results(
-                analysis_results=[analysis_result["result_content"]],
+                analysis_results=[combined_analysis_result["result_content"]],
                 experiment_config=experiment_config,
                 model=model
             )
@@ -186,7 +243,7 @@ class ThinOrchestrator:
             
             # Generate final beautiful markdown report
             final_report = self._generate_final_report(
-                analysis_result, synthesis_result, experiment_config, manifest
+                combined_analysis_result, synthesis_result, experiment_config, manifest
             )
             
             report_hash = storage.put_artifact(
@@ -420,6 +477,58 @@ This report presents the results of computational research analysis using the Di
 """
         
         return report
+    
+    def _combine_batch_results(self, batch_results: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Combine multiple batch analysis results into a single unified result.
+        
+        Args:
+            batch_results: List of individual batch analysis results
+            
+        Returns:
+            Combined analysis result in the same format as single batch
+        """
+        if not batch_results:
+            raise ThinOrchestratorError("Cannot combine empty batch results")
+        
+        if len(batch_results) == 1:
+            return batch_results[0]
+        
+        # Use the first batch as the template
+        combined_result = batch_results[0].copy()
+        
+        # Combine analysis content from all batches
+        combined_analysis_parts = []
+        combined_documents = []
+        total_duration = 0.0
+        
+        for i, batch_result in enumerate(batch_results):
+            batch_content = batch_result["result_content"]
+            combined_analysis_parts.append(f"## Batch {i+1} Analysis Results\n\n{batch_content['analysis_results']}")
+            combined_documents.extend(batch_content.get("document_analyses", []))
+            total_duration += batch_result.get("duration_seconds", 0.0)
+        
+        # Update the combined result
+        combined_result["result_content"]["analysis_results"] = "\n\n".join(combined_analysis_parts)
+        combined_result["result_content"]["document_analyses"] = combined_documents
+        combined_result["duration_seconds"] = total_duration
+        
+        # Update metadata to reflect batching
+        combined_result["result_content"]["processing_mode"] = "batched_analysis"
+        combined_result["result_content"]["total_batches"] = len(batch_results)
+        combined_result["result_content"]["batch_metadata"] = [
+            {
+                "batch_id": i + 1,
+                "documents_processed": len(batch["result_content"].get("document_analyses", [])),
+                "duration_seconds": batch.get("duration_seconds", 0.0),
+                "result_hash": batch["result_hash"]
+            }
+            for i, batch in enumerate(batch_results)
+        ]
+        
+        print(f"🔗 Combined {len(batch_results)} batch results into unified analysis")
+        
+        return combined_result
     
     def _calculate_duration(self, start: str, end: str) -> float:
         """Calculate duration between timestamps in seconds."""

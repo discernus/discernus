@@ -275,69 +275,26 @@ def run(experiment_path: str, dry_run: bool):
     run_folder = create_run_folder(exp_path)
     click.echo(f"📁 Created run folder: {run_folder}")
     
-    # Upload assets to MinIO and generate provenance hashes (Alpha System Spec Section 4.2)
-    click.echo("🔐 Uploading assets to artifact storage...")
+    # Execute using THIN v2.0 orchestrator with direct function calls
+    click.echo("🎯 Initializing THIN v2.0 orchestrator...")
     
     try:
-        # Upload framework file
-        framework_file = exp_path / experiment['framework']
-        with open(framework_file, 'rb') as f:
-            framework_content = f.read()
-        framework_hash = put_artifact(framework_content)
-        click.echo(f"   📋 Framework uploaded: {framework_hash[:16]}...")
+        from discernus.core.thin_orchestrator import ThinOrchestrator
         
-        # Upload corpus files
-        corpus_dir = exp_path / experiment['corpus_path']
-        corpus_hashes = []
-        corpus_files = [f for f in corpus_dir.iterdir() if f.is_file() and f.suffix == '.txt']
+        # Initialize the THIN orchestrator
+        orchestrator = ThinOrchestrator(exp_path)
         
-        with click.progressbar(corpus_files, label='Uploading corpus files') as files:
-            for txt_file in files:
-                with open(txt_file, 'rb') as f:
-                    content = f.read()
-                file_hash = put_artifact(content)
-                corpus_hashes.append(file_hash)
-                
-    except ArtifactStorageError as e:
-        click.echo(f"❌ Artifact storage error: {e}")
-        return
-    except Exception as e:
-        click.echo(f"❌ Error uploading assets: {e}")
-        return
-    
-    # Create comprehensive manifest
-    manifest = create_run_manifest(run_folder, experiment, framework_hash, corpus_hashes, exp_path)
-    
-    # Create orchestration task for Redis list coordination (per architecture spec 4.2)
-    task_id = run_folder.name
-    orchestration_task = {
-        'task_id': task_id,
-        'experiment': experiment,
-        'framework_hashes': [framework_hash],  # FIXED: Make plural as expected by OrchestratorAgent
-        'corpus_hashes': corpus_hashes,
-        'experiment_path': str(exp_path),
-        'run_folder': str(run_folder),
-        'manifest_path': str(run_folder / "manifest.json")
-    }
-    
-    # Submit to orchestrator via Redis list (no streams, no consumer groups per architecture 4.2)
-    click.echo("📡 Submitting to Redis orchestration...")
-    redis_client = get_redis_client()
-    
-    try:
-        # Use LPUSH to orchestrator list instead of XADD to stream
-        redis_client.lpush('orchestrator.tasks', json.dumps(orchestration_task))
+        # Execute the experiment with rate-limited batch processing  
+        result = orchestrator.run_experiment()
         
-        click.echo("✅ Experiment submitted successfully!")
-        click.echo(f"   🆔 Task ID: {task_id}")  
-        click.echo(f"   📂 Run folder: {run_folder}")
-        click.echo(f"   📊 Processing: {len(corpus_files)} documents")
-        click.echo("\n🔄 Experiment processing started...")
-        click.echo("   💡 Use 'discernus status' to monitor progress")
-        click.echo(f"   💡 Use 'discernus status {task_id}' for specific run details")
+        # Show completion
+        click.echo("✅ Experiment completed successfully!")
+        click.echo(f"   📋 Run ID: {result['run_id']}")
+        click.echo(f"   📁 Results: {exp_path / 'runs' / result['run_id']}")
+        click.echo(f"   📄 Report: {exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'}")
         
     except Exception as e:
-        click.echo(f"❌ Failed to submit experiment: {e}")
+        click.echo(f"❌ Experiment execution failed: {e}")
         return
 
 @cli.command()
