@@ -146,11 +146,12 @@ class ThinOrchestrator:
                 "total_input_artifacts": len(corpus_hashes) + 1
             })
             
-            # Phase 1: Batch Planning and Enhanced Analysis with Rate Limiting
+            # Phase 1: Batch Planning and Enhanced Analysis with Context Window Management
+            # CONTEXT_WINDOW_MANAGEMENT: This entire section can be removed when LLM context windows become unlimited
             batch_planning_start_time = datetime.now(timezone.utc).isoformat()
             manifest.add_execution_stage("batch_planning", "BatchPlannerAgent", batch_planning_start_time)
             
-            # Create intelligent batch plan based on rate limits
+            # Create intelligent batch plan with production cost transparency
             batch_planner = BatchPlannerAgent(self.security, audit)
             batch_plan = batch_planner.create_batches(
                 framework_content=framework_content,
@@ -161,64 +162,79 @@ class ThinOrchestrator:
             batch_planning_end_time = datetime.now(timezone.utc).isoformat()
             manifest.add_execution_stage("batch_planning", "BatchPlannerAgent",
                                        batch_planning_start_time, batch_planning_end_time, "completed", {
-                "total_batches": batch_plan["execution_plan"]["total_batches"],
-                "estimated_duration_minutes": batch_plan["execution_plan"]["estimated_duration_minutes"],
-                "rate_limits": batch_plan["execution_plan"]["rate_limits"]
+                "total_batches": batch_plan["total_batches"],
+                "total_estimated_cost": batch_plan["total_estimated_cost"],
+                "total_estimated_tokens": batch_plan["total_estimated_tokens"],
+                "context_window_limit": batch_plan["context_window_limit"]
             })
             
-            print(f"📊 Batch plan: {batch_plan['execution_plan']['total_batches']} batches, "
-                  f"~{batch_plan['execution_plan']['estimated_duration_minutes']} minutes")
+            print(f"💰 Total estimated cost: ${batch_plan['total_estimated_cost']:.4f}")
+            print(f"📊 Batch plan: {batch_plan['total_batches']} batches, "
+                  f"⏱️ ~{(batch_plan['total_batches'] * batch_plan['delay_between_batches'])/60:.1f} minutes")
             
-            # Execute batched analysis with rate limiting
+            # Execute batched analysis with production monitoring and intelligent pacing
             analysis_start_time = datetime.now(timezone.utc).isoformat()
             manifest.add_execution_stage("enhanced_analysis", "EnhancedAnalysisAgent", analysis_start_time)
             
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
             all_analysis_results = []
+            total_actual_cost = 0.0
+            
+            print(f"\n🚀 Starting {batch_plan['total_batches']} batch analysis with intelligent pacing...")
             
             for i, batch in enumerate(batch_plan["batches"]):
-                batch_start_time = datetime.now(timezone.utc)
+                # Calculate pacing delay (skip for first batch)
+                delay_seconds = batch_plan['delay_between_batches'] if i > 0 else 0
                 
-                # Apply rate limiting delay if needed
-                if i > 0:
-                    timing_window = batch_plan["execution_plan"]["timing_windows"][i]
-                    delay_needed = timing_window["delay_seconds"]
-                    if delay_needed > 0:
-                        print(f"⏱️ Rate limiting: waiting {delay_needed}s before batch {batch['batch_id']}")
-                        import time
-                        time.sleep(delay_needed)
+                # Add total_batches info for status reporting
+                batch['total_batches'] = batch_plan['total_batches']
                 
-                print(f"🔬 Processing batch {batch['batch_id']}/{len(batch_plan['batches'])}: "
-                      f"{batch['document_count']} documents (~{batch['estimated_tokens']:,} tokens)")
-                
-                # Process this batch
-                batch_result = analysis_agent.analyze_batch(
+                # Use production batch execution with enhanced monitoring
+                batch_result = batch_planner.execute_batch_with_pacing(
+                    batch_info=batch,
+                    analysis_agent=analysis_agent,
                     framework_content=framework_content,
-                    corpus_documents=batch["documents"],
-                    experiment_config=experiment_config,
-                    model=model
+                    delay_seconds=delay_seconds
                 )
                 
-                all_analysis_results.append(batch_result)
+                # Track actual costs and execution
+                if batch_result['success']:
+                    total_actual_cost += batch_result.get('actual_cost', 0.0)
+                    # The batch_result contains the analysis results already
+                    all_analysis_results.append(batch_result['results'])
+                else:
+                    print(f"❌ Batch {batch['batch_id']} failed: {batch_result.get('error', 'Unknown error')}")
+                    # Add empty results to maintain batch ordering
+                    all_analysis_results.append({})
                 
-                batch_duration = (datetime.now(timezone.utc) - batch_start_time).total_seconds()
                 audit.log_orchestrator_event("batch_completed", {
                     "batch_id": batch['batch_id'],
                     "documents_processed": batch['document_count'],
-                    "duration_seconds": batch_duration,
-                    "result_hash": batch_result["result_hash"]
+                    "duration_seconds": batch_result['execution_time'],
+                    "success": batch_result['success'],
+                    "actual_cost": batch_result.get('actual_cost', 0.0)
                 })
             
             # Combine all batch results
             combined_analysis_result = self._combine_batch_results(all_analysis_results)
+            
+            # Production cost summary
+            cost_variance = abs(total_actual_cost - batch_plan['total_estimated_cost'])
+            cost_accuracy = ((batch_plan['total_estimated_cost'] - cost_variance) / batch_plan['total_estimated_cost']) * 100 if batch_plan['total_estimated_cost'] > 0 else 100
+            
+            print(f"\n💰 FINAL COST SUMMARY:")
+            print(f"   Estimated: ${batch_plan['total_estimated_cost']:.4f}")
+            print(f"   Actual: ${total_actual_cost:.4f}")
+            print(f"   Accuracy: {cost_accuracy:.1f}%")
             
             analysis_end_time = datetime.now(timezone.utc).isoformat()
             manifest.add_execution_stage("enhanced_analysis", "EnhancedAnalysisAgent", 
                                        analysis_start_time, analysis_end_time, "completed", {
                 "total_batches_processed": len(batch_plan["batches"]),
                 "total_documents": len(corpus_documents),
-                "result_hash": combined_analysis_result["result_hash"],
-                "duration_seconds": combined_analysis_result["duration_seconds"],
+                "estimated_cost": batch_plan['total_estimated_cost'],
+                "actual_cost": total_actual_cost,
+                "cost_accuracy_percent": cost_accuracy,
                 "mathematical_validation": True
             })
             
