@@ -143,28 +143,42 @@ class BatchPlannerAgent:
     def calculate_batch_tokens(self, framework_content: str, documents: List[Dict], model: str) -> Dict[str, int]:
         """
         Calculate accurate token footprints using LiteLLM integration.
+        CRITICAL: Must account for analysis prompt overhead + base64 encoding!
         """
-        # Framework overhead (static per batch)
+        # Framework overhead (static per batch) 
         framework_tokens = self.estimate_tokens(framework_content, model)
         
-        # Prompt overhead estimation (conservative)
-        prompt_overhead = 500  # Typical system/instruction prompts
+        # ANALYSIS PROMPT OVERHEAD - This is MASSIVE! (~1M+ tokens)
+        # Based on our investigation: analysis prompt template is enormous due to mathematical validation requirements
+        # Our calculation showed ~2.14M chars total prompt → ~850K tokens for analysis overhead alone
+        analysis_prompt_overhead = 850000  # Realistic estimate for mathematical validation prompts
         
-        # Document tokens
+        # Document tokens WITH base64 encoding overhead (33% larger)
         document_tokens = {}
         total_doc_tokens = 0
         
         for doc in documents:
-            doc_tokens = self.estimate_tokens(doc['content'], model)
-            document_tokens[doc['filename']] = doc_tokens
-            total_doc_tokens += doc_tokens
+            # Calculate base64 overhead: content grows by 33%
+            doc_content_tokens = self.estimate_tokens(doc['content'], model)
+            doc_b64_tokens = int(doc_content_tokens * 1.33)  # Base64 encoding overhead
+            doc_formatting_tokens = 20  # Per-document metadata and formatting
+            
+            total_doc_tokens_with_overhead = doc_b64_tokens + doc_formatting_tokens
+            document_tokens[doc['filename']] = total_doc_tokens_with_overhead
+            total_doc_tokens += total_doc_tokens_with_overhead
+        
+        # Framework also gets base64 encoded
+        framework_b64_tokens = int(framework_tokens * 1.33)
+        
+        base_overhead = framework_b64_tokens + analysis_prompt_overhead
         
         return {
             'framework_tokens': framework_tokens,
-            'prompt_overhead': prompt_overhead,
+            'framework_b64_tokens': framework_b64_tokens,
+            'analysis_prompt_overhead': analysis_prompt_overhead,
             'document_tokens': document_tokens,
             'total_document_tokens': total_doc_tokens,
-            'base_overhead': framework_tokens + prompt_overhead
+            'base_overhead': base_overhead
         }
 
     def create_batches(self, framework_content: str, corpus_documents: List[Dict], model: str) -> Dict[str, Any]:
@@ -182,14 +196,16 @@ class BatchPlannerAgent:
             "framework_size_chars": len(framework_content)
         })
         
-        # Calculate precise token footprints
-        print("🔍 Calculating token footprints with LiteLLM integration...")
+        # Calculate precise token footprints  
+        print("🔍 Calculating CORRECTED token footprints (base64 + analysis prompt overhead)...")
         token_analysis = self.calculate_batch_tokens(framework_content, corpus_documents, model)
         base_overhead = token_analysis['base_overhead']
         
-        print(f"📐 Framework tokens: {token_analysis['framework_tokens']:,}")
-        print(f"📐 Prompt overhead: {token_analysis['prompt_overhead']:,}")
-        print(f"📐 Total document tokens: {token_analysis['total_document_tokens']:,}")
+        print(f"📐 Framework tokens (raw): {token_analysis['framework_tokens']:,}")
+        print(f"📐 Framework tokens (base64): {token_analysis['framework_b64_tokens']:,}")
+        print(f"📐 Analysis prompt overhead: {token_analysis['analysis_prompt_overhead']:,}")
+        print(f"📐 Document tokens (with base64): {token_analysis['total_document_tokens']:,}")
+        print(f"📐 Total base overhead: {base_overhead:,}")
         
         # Create batches using simple bin packing
         batches = []
