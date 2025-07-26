@@ -20,7 +20,10 @@ import yaml
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
+
+import instructor
 from litellm import completion
+from pydantic import BaseModel, Field
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary, SecurityError
 from discernus.core.audit_logger import AuditLogger
@@ -30,6 +33,44 @@ from discernus.core.local_artifact_storage import LocalArtifactStorage
 class EnhancedAnalysisAgentError(Exception):
     """Enhanced analysis agent specific exceptions"""
     pass
+
+# Pydantic Models for Guaranteed JSON Output
+class Scores(BaseModel):
+    intensity: float = Field(..., ge=0.0, le=1.0)
+    salience: float = Field(..., ge=0.0, le=1.0)
+
+class TensionAnalysis(BaseModel):
+    Dignity_Tribalism_Tension: float
+    Truth_Manipulation_Tension: float
+    Justice_Resentment_Tension: float
+    Hope_Fear_Tension: float
+    Pragmatism_Fantasy_Tension: float
+    Moral_Character_Strategic_Contradiction_Index_MC_SCI: float
+    MC_SCI_Classification: str
+    Character_Salience_Concentration_CSC: float
+
+class CharacterClusters(BaseModel):
+    virtue_cluster_score: float
+    vice_cluster_score: float
+    character_balance: float
+    character_intensity: float
+    moral_clarity: float
+
+class DocumentAnalysis(BaseModel):
+    worldview: str
+    scores: Dict[str, Scores]
+    evidence: Dict[str, List[str]]
+    reasoning: str
+    salience_ranking: List[Dict[str, Any]]
+    character_priorities: str
+    tension_analysis: TensionAnalysis
+    character_clusters: CharacterClusters
+
+class AnalysisOutput(BaseModel):
+    analysis_summary: str
+    document_analyses: Dict[str, DocumentAnalysis]
+    mathematical_verification: Dict[str, Any]
+    self_assessment: Dict[str, Any]
 
 
 class EnhancedAnalysisAgent:
@@ -61,14 +102,17 @@ class EnhancedAnalysisAgent:
         self.storage = artifact_storage
         self.agent_name = "EnhancedAnalysisAgent"
         
+        # Patch litellm with instructor
+        self.client = instructor.patch(completion)
+        
         # Load enhanced prompt template
         self.prompt_template = self._load_enhanced_prompt_template()
         
-        print(f"🧠 {self.agent_name} initialized with mathematical validation")
+        print(f"🧠 {self.agent_name} initialized with instructor-based structured output")
         
         self.audit.log_agent_event(self.agent_name, "initialization", {
             "security_boundary": self.security.get_boundary_info(),
-            "capabilities": ["mathematical_validation", "self_assessment", "direct_calls"]
+            "capabilities": ["instructor_json_output", "mathematical_validation", "self_assessment", "direct_calls"]
         })
     
     def _load_enhanced_prompt_template(self) -> str:
@@ -105,10 +149,10 @@ class EnhancedAnalysisAgent:
             return None
 
     def analyze_batch(self, 
-                     framework_content: str,
-                     corpus_documents: List[Dict[str, Any]], 
-                     experiment_config: Dict[str, Any],
-                     model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
+                      framework_content: str,
+                      documents: List[Dict[str, Any]], 
+                      experiment_config: Dict[str, Any],
+                      model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
         """
         Perform enhanced batch analysis of documents using framework.
         
@@ -126,7 +170,7 @@ class EnhancedAnalysisAgent:
         
         self.audit.log_agent_event(self.agent_name, "batch_analysis_start", {
             "batch_id": batch_id,
-            "num_documents": len(corpus_documents),
+            "num_documents": len(documents),
             "model": model,
             "experiment": experiment_config.get("name", "unknown")
         })
@@ -180,58 +224,27 @@ class EnhancedAnalysisAgent:
                 num_documents=len(documents)
             )
             
-            # Log LLM interaction start
-            self.audit.log_agent_event(self.agent_name, "llm_call_start", {
-                "batch_id": batch_id,
-                "model": model,
-                "prompt_length": len(prompt_text),
-                "mathematical_validation": True
+            # Log LLM interaction start (Note: Instructor handles the actual call, so this is a bit different now)
+            self.audit.log_agent_event(self.agent_name, "llm_call_complete", {
+                "batch_id": batch_id, "model": model, "response_model": "AnalysisOutput"
             })
             
-            # Call LLM with enhanced mathematical validation prompt
-            response = completion(
+            # The result is already a validated Pydantic object, so we can convert it to a dict
+            analysis_data = self.client(
                 model=model,
+                response_model=AnalysisOutput,
                 messages=[{"role": "user", "content": prompt_text}],
-                temperature=0.0,
-                safety_settings=[
-                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
-                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
-                ]
+                temperature=0.0
             )
             
-            # Extract and validate response
-            if not response or not response.choices:
-                raise EnhancedAnalysisAgentError("LLM returned empty response")
+            # Log LLM interaction start (Note: Instructor handles the actual call, so this is a bit different now)
+            self.audit.log_agent_event(self.agent_name, "llm_call_complete", {
+                "batch_id": batch_id, "model": model, "response_model": "AnalysisOutput"
+            })
             
-            result_content = response.choices[0].message.content
-            if not result_content or result_content.strip() == "":
-                raise EnhancedAnalysisAgentError("LLM returned empty content")
-            
-            # Use robust extraction to find and parse the JSON object
-            analysis_data = self._extract_json_from_response(result_content)
-            
-            if analysis_data is None:
-                self.audit.log_agent_event(self.agent_name, "json_parse_error", {
-                    "batch_id": batch_id, "error": "No valid JSON object found in response", "raw_response": result_content
-                })
-                raise EnhancedAnalysisAgentError("Failed to find or parse LLM JSON response")
+            # The result is already a validated Pydantic object, so we can convert it to a dict
+            analysis_dict = analysis_data.model_dump()
 
-            # Log LLM interaction
-            interaction_hash = self.audit.log_llm_interaction(
-                model=model,
-                prompt=prompt_text,
-                response=result_content,
-                agent_name=self.agent_name,
-                metadata={
-                    "batch_id": batch_id,
-                    "mathematical_validation": True,
-                    "tokens_input": len(prompt_text.split()),
-                    "tokens_output": len(result_content.split())
-                }
-            )
-            
             # Create enhanced result artifact
             end_time = datetime.now(timezone.utc).isoformat() 
             duration = self._calculate_duration(start_time, end_time)
@@ -239,10 +252,10 @@ class EnhancedAnalysisAgent:
             enhanced_result = {
                 "batch_id": batch_id,
                 "agent_name": self.agent_name,
-                "agent_version": "enhanced_v2.1_structured_output",
+                "agent_version": "enhanced_v3.0_instructor",
                 "experiment_name": experiment_config.get("name", "unknown"),
                 "model_used": model,
-                "analysis_results": analysis_data,
+                "analysis_results": analysis_dict,
                 "mathematical_validation": {
                     "enabled": True,
                     "verification_required": True,

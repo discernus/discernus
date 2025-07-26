@@ -1,40 +1,22 @@
-# Ultra-thin dependencies following "strategically thin software" philosophy
+# Core Discernus dependencies
+python-dotenv>=1.0.0
+GitPython>=3.1.0
+click>=8.0.0
+PyYAML>=6.0.0
+redis>=4.0.0
+minio>=7.2.0
 
-# Core infrastructure - minimal dependencies
-python-dotenv>=0.19.0      # Environment configuration
-gitpython>=3.1.0           # Conversation logging with git transparency
-litellm>=1.0.0             # Rate limiting, retries, and provider management
-anthropic>=0.7.0           # Direct Anthropic API access
-requests>=2.28.0           # HTTP requests for literature search APIs
-click>=8.0.0               # CLI interface for Discernus
-redis>=6.2.0               # Pub-sub coordination for Discernus
-minio>=7.1.0               # Object storage client for artifact caching
+# LLM Gateway & Tooling
+litellm>=1.74.0
+instructor>=1.3.0
+pydantic>=2.8.0
 
-# Scientific computing (when needed)
-pandas>=1.5.0              # Data analysis
-numpy>=1.24.0              # Numerical computing
-jupyter>=1.0.0             # Jupyter Notebook support
-nbformat>=5.7.0            # Notebook creation and management
-PyYAML==6.0.1                # YAML configuration files for extensions
-
-# Text analysis (commonly used by LLMs)
-nltk>=3.8                  # Natural language processing
-textblob>=0.15.3           # Sentiment analysis and text processing
-textstat>=0.7.3            # Readability metrics
-tabulate>=0.9.0            # Professional ASCII table formatting
-
-# Philosophy: Discernus intentionally has minimal core dependencies
-# to reduce complexity and maintain thin software philosophy
-
-# Optional dependencies (install separately if needed):
-# openai>=1.0.0           # OpenAI API access
-# pytest                  # Testing framework
-# black                   # Code formatting
-# statsmodels             # Advanced statistics
-# scikit-learn            # Machine learning
-# plotly                  # Interactive visualization
-chroma-hnswlib==0.7.3
+# Scientific Computing (when needed)
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
 
 # Google Cloud dependencies for Vertex AI
 google-cloud-aiplatform>=1.104.0
 google-auth>=2.40.0
+requests>=2.32.0
