@@ -185,6 +185,25 @@ class PreFlightValidator:
             with open(structure["framework_file"], 'r') as f:
                 content = f.read()
                 
+            # Check framework character limit (15KB maximum)
+            framework_size = len(content)  
+            if framework_size > 15000:
+                compliance["valid"] = False
+                compliance["issues"].append(f"Framework exceeds 15KB limit: {framework_size:,} characters (limit: 15,000)")
+                compliance["missing_elements"].append("Framework must be reduced to 15KB per Framework Specification v4.0")
+                self.compliance_help.append({
+                    "issue": "Framework size exceeds limit",
+                    "current_size": f"{framework_size:,} characters", 
+                    "size_limit": "15,000 characters (15KB)",
+                    "reduction_strategies": [
+                        "Streamline dimension definitions (2-3 sentences max)",
+                        "Eliminate redundant explanatory text", 
+                        "Use bullet points instead of verbose explanations",
+                        "Consolidate examples to 1-2 high-quality cases",
+                        "Reference common scoring criteria once at framework level"
+                    ]
+                })
+                
             # Check for v4.0 YAML appendix (Phase 1 learning: missing JSON appendixes)
             if '```yaml' not in content and '```json' not in content:
                 compliance["valid"] = False

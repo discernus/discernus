@@ -23,6 +23,48 @@ To ensure consistency across all frameworks, these terms have specific meanings:
 
 ---
 
+## Framework Size and Performance Guidelines
+
+### Character Limit Policy
+
+**Maximum Framework Size**: 15,000 characters (15KB)
+
+**Rationale**: Framework size directly impacts processing efficiency and analysis quality. Oversized frameworks create unnecessarily verbose analysis outputs that reduce synthesis efficiency without improving analytical rigor.
+
+**Validation**: The system enforces this limit during experiment ingest. Frameworks exceeding 15KB will be rejected with specific guidance on reduction strategies.
+
+### Evidence Optimization Notice
+
+**System Behavior**: The analysis agent is optimized for synthesis efficiency and will automatically limit evidence to the strongest 1-2 quotes per dimension, regardless of framework requests for more extensive evidence collection.
+
+**Framework Authors**: Design your evidence requirements around **quality over quantity**. Focus prompts on identifying the most demonstrative evidence rather than comprehensive evidence collection.
+
+### Character Reduction Strategies
+
+To maintain analytical depth within the 15KB limit:
+
+**1. Streamline Linguistic Cues**
+- Use concise dimension definitions (2-3 sentences maximum)
+- Eliminate redundant explanatory text
+- Focus on distinctive characteristics rather than comprehensive descriptions
+
+**2. Optimize Prompt Structure**
+- Combine related instructions into single paragraphs
+- Use bullet points instead of verbose explanations
+- Eliminate repetitive phrasing across dimensions
+
+**3. Consolidate Examples**
+- Provide 1-2 high-quality examples rather than multiple variations
+- Focus on edge cases that clarify boundaries
+- Remove obvious or intuitive examples
+
+**4. Efficient Scoring Guidelines**
+- Use standardized intensity/salience language across dimensions
+- Avoid repeating general scoring principles for each dimension
+- Reference common scoring criteria once at the framework level
+
+---
+
 ## Part I: Core Principles
 
 ### 1. The THIN Philosophy
@@ -56,6 +98,14 @@ To ensure consistency across all frameworks, these terms have specific meanings:
 **In Practice**: Your framework must generate sufficient evidence and reasoning to support all conclusions. Scores without evidence are meaningless. Patterns without quotations are unverifiable.
 
 **Anti-Pattern**: Black-box scoring where analysts cannot trace numerical outputs back to textual inputs.
+
+### 5. Synthesis Efficiency
+
+**Principle**: Framework design must balance analytical rigor with synthesis efficiency.
+
+**In Practice**: Design evidence requirements that focus on the strongest, most demonstrative quotes rather than comprehensive evidence collection. The system will automatically optimize evidence volume for synthesis efficiency while maintaining analytical integrity.  
+
+**Anti-Pattern**: Requesting extensive evidence collection that produces unnecessarily verbose outputs without improving analytical quality.
 
 ---
 
@@ -235,6 +285,16 @@ Before deploying your framework, verify:
 - Prompts missing key methodological requirements
 - Generates data insufficient for planned analyses
 - **Result**: Failed experiments, incomplete research
+
+**The "Evidence Maximalism" Trap**:
+- Requests for extensive evidence collection per dimension
+- Verbose prompts that produce unnecessarily long responses
+- **Result**: Analysis bloat that reduces synthesis efficiency without improving quality
+
+**The "Character Bloat" Trap**:
+- Overly detailed dimension definitions with redundant explanations
+- Repetitive instructions across framework sections
+- **Result**: Frameworks exceeding 15KB limit, rejected during ingest validation
 
 ---
 
