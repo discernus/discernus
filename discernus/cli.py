@@ -101,6 +101,16 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
     if not framework_file.exists():
         return False, f"❌ Framework file not found: {framework_file}", {}
     
+    # Check framework character limit (15KB maximum)
+    try:
+        with open(framework_file, 'r') as f:
+            framework_content = f.read()
+        framework_size = len(framework_content)
+        if framework_size > 15000:
+            return False, f"❌ Framework exceeds 15KB limit: {framework_size:,} characters (limit: 15,000). See Framework Specification v4.0 for reduction strategies.", {}
+    except Exception as e:
+        return False, f"❌ Error reading framework file: {e}", {}
+    
     # Check corpus directory exists
     corpus_path = experiment_path / config.get('corpus_path', 'corpus')
     if not corpus_path.exists():
