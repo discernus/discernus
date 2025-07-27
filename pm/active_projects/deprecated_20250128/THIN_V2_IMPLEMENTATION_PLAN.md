@@ -10,11 +10,11 @@
 
 ## Executive Summary
 
-**ARCHITECTURAL BREAKTHROUGH (2025-01-26)**: After extensive analysis and a failed CSV transformation approach, we have identified the correct THIN solution for large corpus synthesis.
+**ARCHITECTURAL BREAKTHROUGH (2025-01-28)**: Hash Cross-Referenced CSV architecture solves synthesis scale problem while preserving academic rigor and THIN principles.
 
-**The Solution**: Ask LLMs to perform framework calculations directly and show their mathematical work, then use intelligent batch synthesis to extract results into research-ready formats.
+**The Solution**: Transform rich JSON artifacts into linked CSV files for statistical analysis + evidence grounding. Enables 96% input reduction with full qualitative depth preservation.
 
-**Reference Implementation**: See `THIN_MULTI_DOCUMENT_ANALYSIS_PLAN.md` for complete technical specification.
+**Reference Implementation**: See `HASH_CROSS_REFERENCED_CSV_IMPLEMENTATION_PLAN.md` for complete technical specification.
 
 ---
 
@@ -26,28 +26,29 @@
    - All agent prompts externalized into version-controlled `.yaml` files
    - No hardcoded prompts in Python strings
 
-2. **Pillar 2: Research-Grade Data Assets** 🔄 **REDESIGNED**
-   - Pure THIN multi-document analysis workflow
-   - LLM calculations with mathematical verification
-   - Framework-agnostic batch synthesis to CSV
-   - No parsing pipelines or transformation logic
+2. **Pillar 2: Research-Grade Data Assets** ✅ **ARCHITECTURE V3.0 DESIGNED**
+   - Hash Cross-Referenced CSV with evidence linking
+   - Statistical analysis layer + qualitative grounding layer
+   - 96% synthesis input reduction while preserving evidence depth
+   - Pure flat files, no database, Git-trackable collaboration
 
 3. **Pillar 3: Systematic Evaluation ("Evals")** ✅
    - `promptfoo` evaluation pipeline operational
    - Golden set testing for core agents
 
-4. **Pillar 4: Scalable Multi-Document Processing** 🆕 **NEW REQUIREMENT**
-   - Dynamic batch size calculation with context window management
-   - Intelligent synthesis cascading for large corpora
-   - Complete framework agnosticism
+4. **Pillar 4: Scalable Multi-Document Processing** 🔄 **HASH CSV SOLUTION**
+   - Hash Cross-Referenced CSV eliminates context window constraints
+   - Unlimited corpus scale through deterministic extraction
+   - Framework-agnostic statistical analysis + evidence integration
 
 ---
 
 ## Part 2: Phased Implementation Plan (The "How")
 
-### **Phase 0: Cleanup Failed CSV Implementation** 🔄 **IN PROGRESS**
+### **Phase 0: Hash Cross-Referenced CSV Implementation** 🔄 **IN PROGRESS**
 
-**Timeline**: 1 day  
+**Timeline**: 2-3 weeks (conditional approval pending unit testing)  
+**Status**: Architectural design complete, unit testing strategy developed  
 **Objective**: Remove all CSV transformation code from the failed implementation
 
 | Task | Description | Status |
