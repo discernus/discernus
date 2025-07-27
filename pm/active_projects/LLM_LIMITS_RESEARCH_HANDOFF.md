@@ -152,9 +152,21 @@ For processing **1,000 documents** with conservative CSV (2.56M chars total):
 - Comparative insights that reveal meaningful patterns
 - Empirical validation of theoretical frameworks
 
-### **Strategic Decision: IMMEDIATE MIGRATION RECOMMENDED**
+### **Strategic Decision: MIGRATION BLOCKED BY OUTPUT TOKEN CONSTRAINT**
 
-**Llama Scout quality > Gemini expectations** while delivering **15-33x cost reduction**.
+**Critical Issue Discovered**: Llama Scout exhibits systematic **mathematical calculation errors** (MC-SCI calculations off by 15x) and **does not solve the output token bottleneck**.
+
+**Output Token Constraint**: 
+- Current synthesis needs: 6,000+ output tokens
+- Available model limits: ~4-8K output tokens (same as Gemini)
+- **Result**: Alternative LLMs do not solve the synthesis verbosity problem
+
+**Mathematical Reliability Issues**:
+- Biden MC-SCI: Expected 0.62, Llama reported 0.04 (15x error)
+- Systematic calculation errors invalidate statistical synthesis use case
+- Individual scoring shows reasonable accuracy (±0.2 variance)
+
+**Conclusion**: Llama Scout unsuitable for mathematical synthesis despite cost advantages.
 
 ---
 
@@ -188,10 +200,71 @@ Llama 4 Scout:  ~$25-50 per synthesis
 
 ---
 
+## 🔄 **Revised Strategic Focus: Post-CSV Scalability Analysis**
+
+### **Architecture Pivot Required**
+
+**The LLM model hunt revealed that the bottleneck is architectural, not model-specific.** Alternative LLMs fail to solve:
+1. **Output token constraints** (6,000+ tokens needed, ~8K available)
+2. **Mathematical reliability** for statistical synthesis
+3. **Synthesis verbosity** from comprehensive input data
+
+**Solution Path**: Embedded CSV Architecture (see `EMBEDDED_CSV_ARCHITECTURE_DECISION.md`)
+
+### **Post-CSV Scalability Projections**
+
+**Assuming Embedded CSV Architecture Success:**
+
+**Input Compression Impact:**
+```
+Current: 43,481 chars for 2 documents (21,740 chars/doc)
+Post-CSV: ~1,000 chars per document (structured CSV only)
+Compression Ratio: 95.4% reduction in synthesis input
+```
+
+**Revised Context Window Utilization:**
+```
+Gemini 2.5 Flash (4M chars): 4,000 documents
+Gemini 2.5 Pro (8M chars):   8,000 documents  
+Alternative LLMs (1-10M chars): 1,000-10,000 documents
+```
+
+**Output Token Expectations:**
+```
+Current: 6,000+ tokens (comprehensive analysis synthesis)
+Post-CSV: ~1,500-2,500 tokens (structured data synthesis)
+Result: Fits comfortably within 8K output limits
+```
+
+### **Realistic Upper Bounds (Conservative Estimates)**
+
+**Academic Quality Synthesis:**
+- **Gemini 2.5 Pro**: 3,000-5,000 documents per synthesis
+- **Alternative LLMs**: 2,000-8,000 documents (depending on context window)
+
+**Statistical-Only Synthesis:**
+- **Gemini 2.5 Pro**: 5,000-8,000 documents per synthesis
+- **Alternative LLMs**: 8,000-10,000 documents
+
+**Constraint Factors:**
+1. **LLM mathematical reliability** (unknown for alternatives)
+2. **Synthesis output complexity** (depends on research questions)
+3. **Academic rigor requirements** (evidence vs statistical focus)
+
+### **Market Positioning Implications**
+
+**Current Academic Practice**: 10-50 documents (pathetically small)
+**Post-CSV Discernus**: 3,000-8,000 documents (60-800x improvement)
+**Competitive Advantage**: **Generational leap in scale capability**
+
+---
+
 ## 📋 **Context for Next Agent**
 
-**The embedded CSV architecture decision is still valid** - it creates the infrastructure for this research. The key insight is that we're not just optimizing one synthesis path, but building a research platform to map the entire LLM capability landscape for academic text analysis.
+**The embedded CSV architecture is now the critical path** to breaking synthesis scalability limits. The LLM model research revealed that:
 
-**The mathematical constraints are our baseline** - but alternative LLMs may completely change the game both in terms of context window size and cost economics.
+1. **Architecture > Model Selection**: No model solves verbosity without structural changes
+2. **Mathematical Reliability**: Must be validated for any alternative LLM used for synthesis
+3. **Scalability Projections**: 3,000-8,000 document synthesis becomes realistic post-CSV
 
-**The academic market positioning** suggests we may be solving a problem that puts us decades ahead of current practice, which changes how we think about feature prioritization and customer education. 
+**Next Priority**: Execute Phase 1 of Embedded CSV Architecture prototype to validate the compression and synthesis improvements that enable this scale. 
