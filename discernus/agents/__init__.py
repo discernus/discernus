@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Discernus Agents - A collection of specialized agents for computational text analysis.
+Discernus agents package.
+
+Contains enhanced analysis and synthesis agents.
 """
 
 from .project_coherence_analyst import ProjectCoherenceAnalyst
