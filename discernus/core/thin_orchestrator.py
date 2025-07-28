@@ -174,7 +174,7 @@ class ThinOrchestrator:
                   f"⏱️ ~{0:.1f} minutes")
             
             # Initialize analysis and synthesis agents
-            analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
+            analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage, run_folder)
             
             # Execute analysis (one document at a time)
             all_analysis_results = self._execute_analysis_sequentially(
@@ -192,14 +192,15 @@ class ThinOrchestrator:
 
             # Execute synthesis
             print("\n🔬 Synthesizing results...")
-            synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
+            synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage, run_folder)
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             
             # Pass raw analysis results directly - let LLM handle extraction (THIN principle)
             synthesis_result = synthesis_agent.synthesize_results(
                 analysis_results=all_analysis_results,
                 experiment_config=experiment_config,
-                model=model 
+                model=model,
+                run_folder=run_folder
             )
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()

@@ -1,0 +1,17 @@
+template: |
+  You are an expert synthesis agent. Your task is to synthesize the following analysis results into a coherent report.
+
+  Here are the aggregated scores from all documents:
+  <<<DISCERNUS_SCORES_CSV_v1>>>
+  {scores_csv}
+  <<<END_DISCERNUS_SCORES_CSV_v1>>>
+
+  Here is the aggregated evidence from all documents:
+  <<<DISCERNUS_EVIDENCE_CSV_v1>>>
+  {evidence_csv}
+  <<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
+
+  Here are the raw analysis results for your reference:
+  {analysis_results}
+
+  Please provide a comprehensive synthesis of these results. 

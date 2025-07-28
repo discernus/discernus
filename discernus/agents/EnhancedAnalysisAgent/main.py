@@ -15,6 +15,9 @@ Based on THIN v2.0 principles: LLM intelligence + minimal software coordination
 import json
 import base64
 import hashlib
+import re
+import pandas as pd
+from io import StringIO
 
 import yaml
 from datetime import datetime, timezone
@@ -47,7 +50,8 @@ class EnhancedAnalysisAgent:
     def __init__(self, 
                  security_boundary: ExperimentSecurityBoundary,
                  audit_logger: AuditLogger,
-                 artifact_storage: LocalArtifactStorage):
+                 artifact_storage: LocalArtifactStorage,
+                 run_folder: Path):
         """
         Initialize enhanced analysis agent.
         
@@ -55,10 +59,12 @@ class EnhancedAnalysisAgent:
             security_boundary: Security boundary for file access
             audit_logger: Audit logger for comprehensive logging
             artifact_storage: Local artifact storage for caching
+            run_folder: The directory for the current experiment run.
         """
         self.security = security_boundary
         self.audit = audit_logger
         self.storage = artifact_storage
+        self.run_folder = run_folder
         self.agent_name = "EnhancedAnalysisAgent"
         
         # Load enhanced prompt template
@@ -226,6 +232,9 @@ class EnhancedAnalysisAgent:
             if not result_content or result_content.strip() == "":
                 raise EnhancedAnalysisAgentError("LLM returned empty content")
             
+            # Extract and persist CSV artifacts
+            self._extract_and_persist_csvs(result_content, document_hashes[0])
+
             # Store raw LLM response - let synthesis agent handle any format (THIN principle)
             analysis_data = result_content
 
@@ -317,7 +326,52 @@ class EnhancedAnalysisAgent:
             })
             
             raise EnhancedAnalysisAgentError(f"Enhanced analysis failed: {e}")
-    
+
+    def _extract_and_persist_csvs(self, analysis_response: str, artifact_id: str):
+        """Extracts embedded CSVs and appends them to files in the run directory."""
+        scores_csv, evidence_csv = self._extract_embedded_csv(analysis_response, artifact_id)
+        
+        scores_path = self.run_folder / "scores.csv"
+        evidence_path = self.run_folder / "evidence.csv"
+
+        self._append_to_csv(scores_path, scores_csv)
+        self._append_to_csv(evidence_path, evidence_csv)
+
+    def _extract_embedded_csv(self, analysis_response: str, artifact_id: str) -> tuple[str, str]:
+        """Extracts pre-formatted CSV segments from an LLM response."""
+        
+        scores_pattern = r"<<<DISCERNUS_SCORES_CSV_v1>>>(.*?)<<<END_DISCERNUS_SCORES_CSV_v1>>>"
+        scores_match = re.search(scores_pattern, analysis_response, re.DOTALL)
+        scores_csv = scores_match.group(1).strip() if scores_match else ""
+        
+        evidence_pattern = r"<<<DISCERNUS_EVIDENCE_CSV_v1>>>(.*?)<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>"
+        evidence_match = re.search(evidence_pattern, analysis_response, re.DOTALL)
+        evidence_csv = evidence_match.group(1).strip() if evidence_match else ""
+        
+        # Replace placeholder with actual artifact ID
+        scores_csv = scores_csv.replace("{artifact_id}", artifact_id)
+        evidence_csv = evidence_csv.replace("{artifact_id}", artifact_id)
+        
+        return scores_csv, evidence_csv
+
+    def _append_to_csv(self, file_path: Path, csv_data: str):
+        """Appends a CSV string to a file, handling headers correctly."""
+        if not csv_data:
+            return
+        
+        data_df = pd.read_csv(StringIO(csv_data))
+        
+        # If file doesn't exist, write with header. Otherwise, append without.
+        if not file_path.exists():
+            data_df.to_csv(file_path, index=False)
+        else:
+            # Important: When appending, we need to align columns.
+            # We can do this by reading the existing file and concatenating.
+            # This is a bit more than a simple append, but necessary for schema changes.
+            existing_df = pd.read_csv(file_path)
+            combined_df = pd.concat([existing_df, data_df], ignore_index=True)
+            combined_df.to_csv(file_path, index=False)
+
     def _format_documents_for_prompt(self, documents: List[Dict]) -> str:
         """Format documents for LLM prompt with enhanced metadata."""
         formatted = []
