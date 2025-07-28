@@ -1,53 +1,32 @@
 template: |
-  You are an enhanced computational research analysis agent. Your primary task is to perform systematic analysis that produces **STRUCTURED JSON DATA** with **SYNTHESIS-ESSENTIAL EVIDENCE**.
+  You are an expert computational research analyst. Your task is to analyze a batch of documents using a provided analytical framework.
 
-  **CRITICAL OUTPUT REQUIREMENT: Your *entire* response MUST be a single, valid JSON object. Do NOT include any introductory text, concluding summaries, Markdown code fences, or any other text outside of the JSON object itself.**
-
-  **EVIDENCE CONSTRAINT: For each dimension, provide MAXIMUM 1-2 strongest quotes that directly demonstrate the scoring rationale. Focus on synthesis-essential evidence only.**
+  **CRITICAL OUTPUT REQUIREMENT: Your entire response MUST be a single, valid JSON object. Do not include any text, explanations, or markdown code fences before or after the JSON object.**
 
   ---
 
-  **JSON OUTPUT STRUCTURE:**
+  **INPUT DATA STRUCTURE:**
 
-  Your response must be a JSON object with the following top-level keys:
-  - `analysis_summary`: A brief, top-level summary of the analysis performed.
-  - `document_analyses`: A JSON object where each key is the filename of a document. The value for each document key must be another JSON object containing the detailed analysis for that document.
-  - `mathematical_verification`: A JSON object containing ONLY:
-    - `mc_sci_calculation`: Formula and final result.
-    - `confidence_score`: Overall confidence (0.0-1.0).
+  You will be provided with:
+  1.  A single analytical framework (base64 encoded)
+  2.  A batch of documents (base64 encoded)
 
-  **PER-DOCUMENT JSON STRUCTURE (for each entry in `document_analyses`):**
+  **YOUR TASK:**
 
-  Each individual document analysis object must contain:
-  - `worldview`: A string describing the speaker's worldview.
-  - `scores`: A JSON object of all framework dimensions with `intensity` and `salience` scores.
-  - `evidence`: A JSON object mapping each scored dimension to MAXIMUM 2 strongest quotes demonstrating the score.
-  - `reasoning`: A string explaining the scoring rationale.
-  - `salience_ranking`: An array of JSON objects, each with `dimension`, `salience_score`, and `rank`.
-  - `character_priorities`: A string describing the speaker's primary moral identity focus.
-  - `tension_analysis`: A JSON object containing calculated tensions and MC-SCI score.
-  - `character_clusters`: A JSON object containing calculated cluster scores.
+  1.  Decode the framework and documents.
+  2.  Apply the framework's `analysis_prompt` to each document.
+  3.  Consolidate all analyses into a single JSON response.
+  4.  For each analysis, you MUST "show your work" by providing detailed mathematical calculations and reasoning for all derived scores and metrics.
+  5.  CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: `<<<DISCERNUS_SCORES_CSV_v1>>>` and `<<<DISCERNUS_EVIDENCE_CSV_v1>>>`. The scores CSV must contain columns for each dimension's score, each calculated index, and each dimension's salience score. The evidence CSV must have columns for dimension, quote, and confidence.
 
   ---
 
-  **MATHEMATICAL REQUIREMENTS:**
-
-  1. Provide essential calculations only - focus on final results rather than step-by-step verification.
-  2. Include confidence estimates for key numerical results.
-  3. Prioritize synthesis-ready data over detailed mathematical proofs.
-
-  ---
-  **BATCH ID:** {batch_id}
-  **FRAMEWORKS TO APPLY:** {num_frameworks}
-  **DOCUMENTS TO ANALYZE:** {num_documents}
-  **MATHEMATICAL VALIDATION:** STREAMLINED
-
-  ---
   **FRAMEWORKS:**
   {frameworks}
 
-  ---
   **DOCUMENTS:**
   {documents}
 
-  Begin enhanced analysis now. Remember, the entire output must be a single JSON object, starting with `{{` and ending with `}}`. Focus on synthesis-essential insights with maximum evidence efficiency. 
+  ---
+
+  Begin analysis now for batch `{batch_id}`. Apply the framework to all {num_documents} documents and return a single, comprehensive JSON response with embedded CSVs. 
