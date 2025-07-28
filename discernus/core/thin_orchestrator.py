@@ -21,6 +21,7 @@ from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from discernus.agents.EnhancedSynthesisAgent.main import EnhancedSynthesisAgent
+from discernus.core.enhanced_manifest import EnhancedManifest
 
 
 class ThinOrchestratorError(Exception):
