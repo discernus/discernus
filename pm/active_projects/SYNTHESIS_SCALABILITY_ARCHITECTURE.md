@@ -1,7 +1,7 @@
 # Synthesis Scalability Architecture & Implementation Plan
 
 **Date**: January 28, 2025  
-**Status**: ✅ COMPLETE - All frameworks have been migrated to the v5.0 specification.
+**Status**: ✅ ACTIVE - This is the canonical architecture and plan of record  
 **Decision**: Migrate to Embedded CSV Architecture to solve synthesis scalability bottlenecks  
 **Impact**: Core framework specification change affecting all frameworks and orchestration
 
@@ -81,19 +81,19 @@ We will follow a phased approach to de-risk this architectural transition.
 -   **Objective**: Validate embedded CSV extraction and aggregation in isolation.
 -   **Tasks**: Create synthetic framework responses, implement delimiter extraction logic, and test aggregation.
 -   **Success Criteria**: Clean extraction, correct aggregation, and zero framework-specific logic.
--   **Status**: ✅ COMPLETE. Validated in Experiment 1 of the Research & Validation Journey.
+-   **Status**: ✅ COMPLETE
 
 ### **Phase 2: Single Framework Migration (Week 2)**
 -   **Objective**: Migrate one existing framework (e.g., CAF) to the new V5.0 contract.
 -   **Tasks**: Update framework output contract, test generation, and validate end-to-end processing.
 -   **Success Criteria**: Valid CSV generation, correct orchestrator processing, and preserved academic quality.
--   **Status**: ✅ COMPLETE. All 25 non-deprecated frameworks in the `/frameworks` directory were successfully migrated to the v5.0 specification.
+-   **Status**: 🚧 IN PROGRESS. All frameworks have been migrated to the v5.0 specification. The orchestrator and synthesis agents now need to be updated to consume the new format.
 
 ### **Phase 3: Cross-Framework Validation (Week 3)**
 -   **Objective**: Prove true framework agnosticism with a second, differently structured framework.
 -   **Tasks**: Migrate a second framework, run both through the same orchestrator, and validate results.
 -   **Success Criteria**: Zero orchestrator modifications needed for the second framework.
--   **Status**: ✅ COMPLETE. The successful migration of all frameworks, from simple to complex tension-enhanced versions, confirms the v5.0 specification is robust and supports true framework agnosticism.
+-   **Status**: ⏳ PENDING. Blocked by completion of Phase 2.
 
 ---
 
