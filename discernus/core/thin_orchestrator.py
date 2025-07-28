@@ -181,6 +181,7 @@ class ThinOrchestrator:
                 doc["content"].encode('utf-8') if isinstance(doc["content"], str) else doc["content"],
                 {"artifact_type": "corpus_document", "original_filename": doc["filename"]}
             )
+            doc["hash"] = doc_hash  # Add hash to document dictionary
             corpus_hashes.append(doc_hash)
             corpus_metadata.append({
                 "filename": doc["filename"],
@@ -367,10 +368,15 @@ class ThinOrchestrator:
         documents = []
         for txt_file in sorted(corpus_files):
             content = self.security.secure_read_text(txt_file)
+            
+            # Generate document hash
+            doc_hash = hashlib.sha256(content.encode()).hexdigest()
+            
             documents.append({
                 "filename": txt_file.name,
                 "content": content,
-                "filepath": str(txt_file.relative_to(self.experiment_path))
+                "filepath": str(txt_file.relative_to(self.experiment_path)),
+                "hash": doc_hash  # Add hash to document dictionary
             })
         
         return documents 
