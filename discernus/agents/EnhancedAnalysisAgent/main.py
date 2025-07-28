@@ -98,7 +98,8 @@ Analyze the document using the framework and output your results in the required
         # Generate prompt
         prompt_text = self.prompt_template.format(
             framework=f"=== FRAMEWORK (base64 encoded) ===\n{framework_b64}\n",
-            document=f"=== DOCUMENT (base64 encoded) ===\n{document_b64}\n"
+            document=f"=== DOCUMENT (base64 encoded) ===\n{document_b64}\n",
+            artifact_id=document["hash"]
         )
         
         # Call LLM
