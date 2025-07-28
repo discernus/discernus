@@ -62,15 +62,14 @@ You are an enhanced computational research analysis agent. Your task is to analy
 4. Include mathematical calculations and proofs for all scores
 5. Provide evidence to support your analysis
 
-**Framework (base64 encoded):**
+Framework (base64):
 {framework}
 
-**Document (base64 encoded):**
+Document (base64):
 {document}
 
 Analyze the document using the framework and output your results in the required format.
-Include your mathematical reasoning and calculations for each score.
-"""
+Include your mathematical reasoning and calculations for each score."""
     
     def analyze_document(self, framework_content: str, document: Dict[str, Any],
                          experiment_config: Dict[str, Any], model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
@@ -92,6 +91,7 @@ Include your mathematical reasoning and calculations for each score.
         # Call LLM with single document
         print(f"\n📄 Analyzing document: {document.get('filename', 'unknown')}")
         print(f"🔑 Document hash: {document['hash']}")
+        print(f"📊 Prompt length: {len(prompt_text)} chars")
 
         response = completion(
             model=model,
