@@ -45,20 +45,20 @@ You are an enhanced computational research analysis agent. Your task is to analy
 
 ```
 <<<DISCERNUS_SCORES_CSV_v1>>>
-aid,[framework-defined score columns]
-{artifact_id},[framework-specific scores]
+[Framework-defined CSV header with aid as first column]
+[Framework-specific scores with {artifact_id} as aid value]
 <<<END_DISCERNUS_SCORES_CSV_v1>>>
 
 <<<DISCERNUS_EVIDENCE_CSV_v1>>>
-aid,dimension,[framework-defined evidence columns]
-{artifact_id},{dimension_name},[framework-specific evidence data]
+[Framework-defined CSV header with aid as first column]
+[Framework-specific evidence with {artifact_id} as aid value]
 <<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
 ```
 
 **IMPORTANT**: 
 1. Replace {artifact_id} with the document's hash
 2. The 'aid' column MUST be first in both CSVs
-3. The 'dimension' column MUST be second in the evidence CSV
+3. Follow the framework's structure for other columns
 4. Include mathematical calculations and proofs for all scores
 
 **Framework (base64 encoded):**
