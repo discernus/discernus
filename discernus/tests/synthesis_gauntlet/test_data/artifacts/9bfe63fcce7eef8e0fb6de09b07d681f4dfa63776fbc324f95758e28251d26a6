@@ -1,0 +1,8 @@
+{
+  "raw_analysis_response": "{'scores': {'Dignity': 0.5}, 'mc_sci_score': 0.3",
+  "input_artifacts": {
+    "document_hashes": [
+      "poison_pill_1"
+    ]
+  }
+}

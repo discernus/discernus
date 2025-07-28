@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_164ce469786f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "large_batch_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```csv\n<<<DISCERNUS_SCORES_CSV_v1>>>\naid,dignity,truth,justice,hope,pragmatism,tribalism,manipulation,resentment,fear,fantasy,dignity_salience,truth_salience,justice_salience,hope_salience,pragmatism_salience,tribalism_salience,manipulation_salience,resentment_salience,fear_salience,fantasy_salience,dignity_tribalism_tension,truth_manipulation_tension,justice_resentment_tension,hope_fear_tension,pragmatism_fantasy_tension,mc_sci\n3e1cce176199,0.7,0.6,0.7,0.8,0.9,0.2,0.3,0.1,0.2,0.1,0.7,0.6,0.7,0.8,0.9,0.2,0.3,0.1,0.2,0.1,0.5,0.3,0.6,0.6,0.8,0.7142857142857143\n<<<END_DISCERNUS_SCORES_CSV_v1>>>\n\n<<<DISCERNUS_EVIDENCE_CSV_v1>>>\naid,dimension,quote_id,quote_text,context_type\n3e1cce176199,dignity,1,\"As Americans, for all that we have endured, for all the grit and hard work required to come back, know this: The shadow of crisis has passed, and the State of the Union is strong.\",speech\n3e1cce176199,dignity,2,\"Tonight, for the first time since 9/11, our combat mission in Afghanistan is over. Six years ago, nearly 18,000 American troops served in Iraq and Afghanistan. Today, fewer than 15,000 remain. And we salute the courage and sacrifice of every man and woman in this 9/11 generation who has\",speech\n3e1cce176199,truth,3,\"Our unemployment rate is now lower than it was before the financial crisis.\",speech\n3e1cce176199,truth,4,\"More of our kids are graduating than ever before. More of our people are insured than ever before. And we are as free from the grip of foreign oil as we've been in almost 30 years.\",speech\n3e1cce176199,justice,5,\"Will we accept an economy where only a few of us do spectacularly well? Or will we commit ourselves to an economy that generates rising incomes and chances for everyone who makes the effort?\",speech\n3e1cce176199,justice,6,\"Will we approach the world fearfully and reactively, dragged into costly conflicts that strain our military and set back our standing? Or will we wisely, using all elements of our power to defeat new threats and protect our planet?\",speech\n3e1cce176199,hope,7,\"Tonight, we turn the page. Tonight, after a breakthrough year for America, our economy is growing and creating jobs at the fastest pace since 1999.\",speech\n3e1cce176199,hope,8,\"It is amazing,\\\" Rebekah wrote, \\\"what you can bounce back from when you have to. As the crisis worsened, Ben's business dried up, so he took whatever jobs he could find, even if they kept him on the road for long stretches of time. Rebekah took out student loans and enrolled in community college and retrained for a new career. They\",speech\n3e1cce176199,pragmatism,9,\"In two weeks, I will send this Congress a budget filled with ideas that are practical, not partisan. And in the months ahead, I'll crisscross the country making a case for those ideas.\",speech\n3e1cce176199,pragmatism,10,\"So tonight I want to focus less on a checklist of proposals and focus more on the values at stake in the choices before us.\",speech\n3e1cce176199,tribalism,11,\"Will we allow ourselves to be sorted into factions and turned against one another? Or will we recapture the sense of common purpose that has always propelled America forward?\",speech\n3e1cce176199,tribalism,12,\"Will we accept an economy where only a few of us do spectacularly well? Or will we commit ourselves to an economy that generates rising incomes and chances for everyone who makes the effort?\",speech\n3e1cce176199,manipulation,13,\"My only agenda: The President. I know because I won both of them.\",speech\n3e1cce176199,manipulation,14,\"The President. I know because I won both of them.\",speech\n3e1cce176199,resentment,15,\"For all our blind spots and shortcomings, there are many but also as proof that the vision itself is misguided, naive, that there are too many people in this town who actually benefit from partisanship and gridlock for us to ever do anything about it.\",speech\n3e1cce176199,resentment,16,\"I know how tempting such cynicism may be. But I still think the cynics are wrong. I still believe that together, we can do great things, even when the odds are long.\",speech\n3e1cce176199,fear,17,\"My first duty as Commander in Chief is to defend the United States of America. In doing so, the question is not whether America leads in the world, but how. When we make rash decisions, reacting to the headlines instead of using our heads, when the first response to a challenge is to send in our military, then we risk getting drawn into unnecessary conflicts and neglect the broader strategy we need for a safer, more prosperous world.\",speech\n3e1cce176199,fear,18,\"That's what our enemies want us to do.\",speech\n3e1cce176199,fantasy,19,\"I want our actions to tell every child in every neighborhood, your life matters, and we are committed to improving your life chances, as committed as we are to working on behalf of our own kids. I want future generations to know that we are a people who see our differences as a great gift, that we're a people who value the dignity and worth of every citizen: man and woman, young and old, Black and White, Latino, Asian, immigrant, Native American, gay, straight, American with mental illness or physical disability. Everybody matters. I want them to grow up in a country that shows the world what we still know to be true: that we are still more than a collection of red States and blue States, that we are the United States of America.\",speech\n3e1cce176199,fantasy,20,\"I want them to grow up in a country where a young mom can sit down and write a letter to her President with a story that sums up these past 6 years: \\\"It's amazing, what you can bounce back from when you have to. . . . We are a strong, tight-knit family who's made it through some very, very hard times.\\\"\",speech\n<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-28T05:28:48.378539+00:00",
+    "end_time": "2025-07-28T05:28:53.431772+00:00",
+    "duration_seconds": 5.053233,
+    "llm_interaction_hash": "a2daf5bfe7b84be5"
+  },
+  "input_artifacts": {
+    "framework_hash": "27cfef26cf24449629b025f7e04cebb9be93dd952b33556ee519eb93af188adb",
+    "document_hashes": [
+      "3e1cce17619967a5486ed2b0beb35f30a31317028931a03d9e90264ca2514731"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250728T052210Z_456595a5"
+  }
+}

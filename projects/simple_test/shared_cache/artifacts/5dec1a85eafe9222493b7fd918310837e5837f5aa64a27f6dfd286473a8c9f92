@@ -1,0 +1,41 @@
+aid,dimension,quote,confidence
+e1760be72296,dignity,"""Our identity is not optional; it's imposed. We are who we are *because* they made us so.""",0.9
+e1760be72296,dignity,"""If you're not with us, you're against us. Solidarity demands unity, not nuance.""",0.85
+e1760be72296,truth,"""The truth is whatever serves liberation. Facts can be debated, but our lived experience is not up for discussion.""",0.8
+e1760be72296,truth,"""We don't owe objectivity to oppressors.""",0.75
+e1760be72296,justice,"""Justice means nothing unless *our* people rise and theirs fall.""",0.95
+e1760be72296,justice,"""Justice without revenge is just another lie.""",0.9
+e1760be72296,hope,"""A better world *isn't* possible unless we start over.""",0.7
+e1760be72296,hope,"""Utopia isn't a dream; it's justice achieved by force.""",0.65
+e1760be72296,pragmatism,"""They gaslit us; now we rewrite the story, and *we* decide what's true.""",0.5
+e1760be72296,pragmatism,"""Burn it down. Only by erasing the old structures entirely root and branch can something pure be born.""",0.4
+e1760be72296,tribalism,"""Dissent among our ranks is betrayal. Our power will come only when we stop pretending we can all coexist and start claiming what's ours.""",0.95
+e1760be72296,tribalism,"""If you're not with us, you're against us. Solidarity demands unity, not nuance.""",0.9
+e1760be72296,manipulation,"""Don't talk to us about 'procedure' or 'due process' – those were invented to keep power in the wrong hands.""",0.85
+e1760be72296,manipulation,"""We control the narrative because the other side has done so for too long.""",0.7
+e1760be72296,resentment,"""For centuries, we've been silenced, stolen from, enslaved, incarcerated, excluded, and ignored. Now it's our turn.""",0.95
+e1760be72296,resentment,"""Until our pain is fully acknowledged and compensated, until our enemies know what it's like to lose what we lost, there can be no reconciliation – only retribution.""",0.9
+e1760be72296,fear,"""Do you feel safe right now? You shouldn't. *They are still in control.*""",0.7
+e1760be72296,fear,"""Every delay, every compromise, is another step toward annihilation.""",0.6
+e1760be72296,fantasy,"""A better world *isn't* possible unless we start over.""",0.6
+e1760be72296,fantasy,"""Utopia isn't a dream; it's justice achieved by force.""",0.55
+af7878b2ed57,dignity,1,Every person deserves a voice, a chance, and the freedom to live with dignity.,direct_statement
+af7878b2ed57,dignity,2,Each individual carries inherent dignity, grounded not in their background but in their capacity to think, act, and contribute to the common good.,elaboration
+af7878b2ed57,truth,3,Our work is to build systems that reflect that truth for everyone.,statement_of_purpose
+af7878b2ed57,truth,4,We embrace data not to win arguments, but to solve problems.,methodology
+af7878b2ed57,justice,5,Our vision is inclusive because justice cannot be partial.,principle
+af7878b2ed57,justice,6,True justice means building institutions that protect everyone's rights, not just our own.,definition
+af7878b2ed57,hope,7,Hope does not deny hardship; it insists that hardship is not the end of the story.,definition
+af7878b2ed57,hope,8,We believe the future can be better not because of inevitability, but because people choose to make it so. Hope invites all to contribute.,belief_statement
+af7878b2ed57,pragmatism,9,We accept trade-offs and seek feasible steps that reduce suffering and expand opportunities.,approach
+af7878b2ed57,pragmatism,10,Effective policy is tested, adapted, and improved.,process
+af7878b2ed57,tribalism,11,Pluralism is not a threat; it is a strength. We can affirm the value of marginalized communities without denying the humanity of anyone else.,rejection_of_exclusivity
+af7878b2ed57,tribalism,12,We pursue progress not by erasing our differences but by aligning around shared goals and a shared future.,collaboration_strategy
+af7878b2ed57,manipulation,13,We reject essentialism and the reduction of people to categories. Pluralism is not a threat; it is a strength.,rejection_of_reductionism
+af7878b2ed57,manipulation,14,Emotion matters, but it must be held accountable to reality.,balancing_emotion_and_reason
+af7878b2ed57,resentment,15,Our past contains deep injustices—redlining, exclusion, exploitation, inequity. But we cannot undo the past by mirroring its wrongs.,acknowledgement_of_past_wrongs
+af7878b2ed57,resentment,16,Instead, we commit to systems that are fair, open, and future-focused. True justice means building institutions that protect everyone's rights, not just our own.,commitment_to_future_systems
+af7878b2ed57,fear,17,We do not fear facts; we seek them. Our moral case strengthens when grounded in truth.,approach_to_information
+af7878b2ed57,fear,18,We meet uncertainty with resilience, not fear, and we trust in democratic institutions not because they are perfect, but because they can be improved.,response_to_uncertainty
+af7878b2ed57,fantasy,19,Complex issues require nuanced analysis, and we must resist the urge to simplify or demonize.,analytical_approach
+af7878b2ed57,fantasy,20,Change is necessary, but panic is not a strategy.,caution_against_impulsivity

@@ -43,12 +43,13 @@ To ensure consistency across all frameworks, these terms have specific meanings:
 
 ## Part I: Core Principles
 
-1.  **The THIN Philosophy**: LLMs do intelligence, software does infrastructure. Your framework contains the intelligence; the software just routes it.
+1.  **The THIN Philosophy**: LLMs do intelligence, software does infrastructure. Your framework contains the domain-specific intelligence; the software just routes it.
 2.  **Documentation-Execution Coherence**: What you promise in the documentation must exactly match what you deliver in the executable prompt.
 3.  **Human Expert Simulation**: Write prompts like you're briefing a brilliant colleague, not like you're calling a technical API.
 4.  **Epistemic Integrity**: Every analytical decision must be traceable. Scores without evidence are meaningless.
 5.  **Synthesis Efficiency**: Balance analytical rigor with synthesis efficiency. Focus on the strongest evidence.
 6.  **🆕 Embedded CSV Compliance (v5.0)**: Embed standardized CSVs in all responses to enable massive-scale synthesis.
+7.  **🆕 Role Separation**: Frameworks define domain-specific analysis; agents handle infrastructure. Don't duplicate agent functionality in your framework.
 
 ---
 
@@ -110,12 +111,26 @@ A framework file is a standard Markdown (`.md`) file containing:
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores and calculated metrics."
+        "description": "CSV for all dimensional scores and calculated metrics.",
+        "columns": [
+          "aid",  // Required first column - document ID
+          "dimension1",  // Your framework-specific score columns
+          "dimension2",
+          "metric1",  // Your framework-specific calculated metrics
+          "metric2"
+        ]
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication."
+        "description": "CSV for structured evidence data for audit and replication.",
+        "columns": [
+          "aid",  // Required first column - document ID
+          "dimension",  // Required second column - dimension name
+          "quote_id",  // Your framework-specific evidence columns
+          "quote_text",
+          "context_type"
+        ]
       }
     },
     "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The salience_ranking should be an ordered array of objects, each containing 'dimension', 'salience_score', and 'rank'."
@@ -128,16 +143,36 @@ A framework file is a standard Markdown (`.md`) file containing:
 *   **`dimension_groups`**: (Optional) Groups dimensions into conceptual clusters (e.g., "axes") for higher-level meta-analysis by the Synthesis Agent.
 *   **`calculation_spec`**: (Optional) A dictionary of named formulas for the `CalculationAgent`. Providing clear, self-documenting names is a best practice.
 *   **`reliability_rubric`**: (Optional) Defines quality thresholds for reliability metrics (e.g., Cronbach's Alpha) for automated framework fit assessments by the Synthesis Agent.
+*   **`output_contract.embedded_csv_requirements`**: Defines your framework's CSV structure. The agent handles the envelope (delimiters and required columns), you define the framework-specific columns.
 *   **`output_contract.instructions`**: A powerful THIN pattern to enforce specific JSON structures (e.g., the contents of an array of objects) without requiring complex software-side parsing.
 
-### 3. Six-Phase Prompt Structure
+### 3. Framework Prompt Guidelines
+
+Your framework's `analysis_prompt` should focus on domain-specific instructions:
+
+1. **DO Include**:
+   - Your framework's methodology and theory
+   - Dimension definitions and scoring criteria
+   - Evidence requirements and context types
+   - Framework-specific calculations and metrics
+   - Your framework's CSV column definitions
+
+2. **DO NOT Include**:
+   - Agent infrastructure details (the agent handles this)
+   - Generic CSV envelope instructions (the agent handles this)
+   - Base64 encoding instructions (the agent handles this)
+   - Document handling instructions (the agent handles this)
+
+Remember: Your framework owns the domain-specific intelligence; the agent owns the infrastructure.
+
+### 4. Six-Phase Prompt Structure
 
 **Phase 1: Cognitive Priming**: `You are an expert [domain] analyst...`
 **Phase 2: Framework Methodology**: `Your task is to analyze the text using [framework name]...`
 **Phase 3: Operational Definitions**: `The framework evaluates [number] dimensions: - [Dimension 1]: [Clear definition]...`
 **Phase 4: Scoring Protocol**: `For each dimension, score based on [criteria] and provide [evidence]...`
-**Phase 5: 🆕 Embedded CSV Generation**: `CRITICAL: Your response must include embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>>...`
-**Phase 6: Output Specification**: `Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments...`
+**Phase 5: Framework-Specific CSV**: `Your CSV output must include these columns: [your framework's columns]...`
+**Phase 6: Output Specification**: `Return your analysis following the framework's output_contract...`
 
 ---
 
@@ -147,7 +182,8 @@ A framework file is a standard Markdown (`.md`) file containing:
 - **Coherence Check**: Does the prompt implement all documented methodology?
 - **Intelligence Check**: Is the prompt a natural language briefing for an expert?
 - **Completeness Check**: Does the output include all data needed for synthesis?
-- **🆕 CSV Compliance Check**: Are the exact delimiters, columns, and instructions for both CSVs present in the prompt and `output_contract`?
+- **Role Separation Check**: Does your prompt focus on domain-specific instructions and avoid duplicating agent functionality?
+- **CSV Structure Check**: Are your framework's CSV columns clearly defined in the output_contract?
 
 ---
 
@@ -161,7 +197,7 @@ Researchers can paste this specification into an LLM and provide their research 
 
 ## Part V: Conclusion
 
-The Framework Specification v5.0 represents a generational leap in research capability. By embedding standardized CSV segments, we enable analysis of 3,000-8,000 documents per synthesis run—a 60-800x improvement.
+The Framework Specification v5.0 represents a generational leap in research capability. By embedding standardized CSV segments and maintaining clear role separation between frameworks and agents, we enable analysis of 3,000-8,000 documents per synthesis run—a 60-800x improvement.
 
 Your v5.0 framework is not just a configuration file; it's a contribution to the next generation of computational social science infrastructure.
 

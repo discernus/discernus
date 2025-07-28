@@ -1,23 +1,44 @@
 template: |
-  You are an expert computational research analyst. Your task is to analyze a batch of documents using a provided analytical framework.
+  You are an enhanced computational research analysis agent. Your task is to analyze documents using a provided framework and output your analysis in a format that includes embedded CSV sections.
 
-  **CRITICAL OUTPUT REQUIREMENT: Your entire response MUST be a single, valid JSON object. Do not include any text, explanations, or markdown code fences before or after the JSON object.**
+  **CRITICAL: Your response MUST include these two CSV sections with the exact delimiters shown:**
+
+  ```
+  <<<DISCERNUS_SCORES_CSV_v1>>>
+  aid,[framework-defined score columns]
+  {artifact_id},[framework-specific scores]
+  <<<END_DISCERNUS_SCORES_CSV_v1>>>
+
+  <<<DISCERNUS_EVIDENCE_CSV_v1>>>
+  aid,dimension,[framework-defined evidence columns]
+  {artifact_id},{dimension_name},[framework-specific evidence data]
+  <<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
+  ```
+
+  **IMPORTANT**: 
+  1. Replace {artifact_id} with the document's hash
+  2. The 'aid' column MUST be first in both CSVs
+  3. The 'dimension' column MUST be second in the evidence CSV
+  4. Follow the framework's output_contract for all other columns and data
+  5. Use the exact delimiters shown above
 
   ---
 
-  **INPUT DATA STRUCTURE:**
+  **INPUT DATA:**
 
-  You will be provided with:
-  1.  A single analytical framework (base64 encoded)
-  2.  A batch of documents (base64 encoded)
+  1. A single analytical framework (base64 encoded)
+  2. A batch of documents (base64 encoded)
 
   **YOUR TASK:**
 
-  1.  Decode the framework and documents.
-  2.  Apply the framework's `analysis_prompt` to each document.
-  3.  Consolidate all analyses into a single JSON response.
-  4.  For each analysis, you MUST "show your work" by providing detailed mathematical calculations and reasoning for all derived scores and metrics.
-  5.  CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: `<<<DISCERNUS_SCORES_CSV_v1>>>` and `<<<DISCERNUS_EVIDENCE_CSV_v1>>>`. The scores CSV must contain columns for each dimension's score, each calculated index, and each dimension's salience score. The evidence CSV must have columns for dimension, quote, and confidence.
+  1. Decode the framework and documents
+  2. Apply the framework's `analysis_prompt` to each document
+  3. For each analysis:
+     - Follow the framework's scoring protocol
+     - Provide evidence as specified by the framework
+     - Calculate any required indices and metrics
+     - Show your mathematical work for all calculations
+  4. Generate the CSV sections using the exact delimiters and following the framework's output_contract
 
   ---
 
@@ -29,4 +50,4 @@ template: |
 
   ---
 
-  Begin analysis now for batch `{batch_id}`. Apply the framework to all {num_documents} documents and return a single, comprehensive JSON response with embedded CSVs. 
+  Begin analysis now for batch `{batch_id}`. Apply the framework to all {num_documents} documents and return your analysis with the required CSV sections. 

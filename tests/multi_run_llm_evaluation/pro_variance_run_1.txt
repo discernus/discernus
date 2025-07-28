@@ -1,0 +1,193 @@
+✅ Loaded prompt from: tests/embedded_csv_prototype/csv_compliance_test.txt
+
+🚀 Testing Model: vertex_ai/gemini-2.5-pro
+================================================================================
+🎯 Making direct call to: vertex_ai/gemini-2.5-pro
+📝 System prompt: You are a helpful assistant.
+💬 User prompt: You are an enhanced computational research analysis agent. Your primary task is to perform systematic analysis that produces **STRUCTURED JSON DATA** with **EMBEDDED CSV SECTIONS** for synthesis scala...
+================================================================================
+
+📊 RESULTS:
+================================================================================
+✅ SUCCESS
+📝 Response Length: 8673 characters
+🔢 Token Usage: 5195 prompt + 4871 completion = 10066 total
+
+📄 MODEL RESPONSE:
+----------------------------------------
+```json
+{
+  "analysis_summary": "This analysis applies the Character Assessment Framework (v4.3) to the provided document, 'test_document.txt'. The assessment identifies a strong emphasis on the principles of Dignity, Justice, and Hope, with a clear rejection of opposing concepts like Tribalism and Fear. The document's core message advocates for building equitable systems based on the inherent worth of every individual. The Moral Character-Strategic Coherence Index (MC-SCI) score indicates a high degree of internal consistency, with a clear focus on constructive, positive virtues without significant internal tension.",
+  "document_analyses": {
+    "test_document.txt": {
+      "document_metadata": {
+        "filename": "test_document.txt",
+        "hash": "test_hash_001",
+        "artifact_id": "test_doc_001"
+      },
+      "character_assessment": {
+        "framework_version": "v4.3 - Tension Enhanced",
+        "worldview": "The text espouses a universalist, humanistic worldview, emphasizing that individual dignity is inherent and serves as the foundation for equitable social and political systems. It posits that collective progress ('A Shared Future') is achieved through actively constructing systems that honor this universal dignity, viewing identity as a source of perspective rather than a determinant of moral worth.",
+        "scores": {
+          "dignity": {
+            "intensity": 0.9,
+            "salience": 1.0
+          },
+          "tribalism": {
+            "intensity": 0.0,
+            "salience": 0.2
+          },
+          "truth": {
+            "intensity": 0.6,
+            "salience": 0.6
+          },
+          "manipulation": {
+            "intensity": 0.0,
+            "salience": 0.0
+          },
+          "justice": {
+            "intensity": 0.8,
+            "salience": 0.8
+          },
+          "resentment": {
+            "intensity": 0.0,
+            "salience": 0.0
+          },
+          "hope": {
+            "intensity": 0.8,
+            "salience": 0.8
+          },
+          "fear": {
+            "intensity": 0.0,
+            "salience": 0.0
+          },
+          "pragmatism": {
+            "intensity": 0.5,
+            "salience": 0.5
+          },
+          "fantasy": {
+            "intensity": 0.0,
+            "salience": 0.0
+          }
+        },
+        "evidence": {
+          "dignity": [
+            {
+              "quote": "Every person deserves a voice, a chance, and the freedom to live with dignity.",
+              "context": "Direct statement of core principle."
+            },
+            {
+              "quote": "Each individual carries inherent dignity, grounded not in their background but in their capacity to think, act, and contribute to the common good.",
+              "context": "Definitional statement clarifying the source of dignity."
+            }
+          ],
+          "tribalism": [
+            {
+              "quote": "Our identities enrich our perspectives, but they do not define our moral worth.",
+              "context": "Direct refutation of tribalistic value systems."
+            }
+          ],
+          "truth": [
+            {
+              "quote": "Our work is to build systems that reflect that truth—for everyone.",
+              "context": "Links the concept of inherent dignity to an actionable 'truth'."
+            }
+          ],
+          "justice": [
+            {
+              "quote": "A Shared Future: Equity Through Dignity and Democratic Renewal",
+              "context": "The document's title explicitly frames the purpose as achieving equity, a core component of justice."
+            }
+          ],
+          "hope": [
+            {
+              "quote": "A Shared Future: Equity Through Dignity and Democratic Renewal",
+              "context": "The title itself is forward-looking and optimistic, embodying hope for positive change."
+            }
+          ],
+          "pragmatism": [
+            {
+              "quote": "Our work is to build systems that reflect that truth—for everyone.",
+              "context": "This phrase indicates a practical, action-oriented approach ('work to build systems') to achieving idealistic goals."
+            }
+          ]
+        },
+        "reasoning": {
+          "dignity": "The text is fundamentally centered on the concept of universal, inherent dignity. It is the most intense and salient theme.",
+          "tribalism": "The text explicitly argues against tribalism by stating that identity does not define moral worth. The intensity is zero as the trait is not expressed, but it has low salience for being mentioned as a counterpoint.",
+          "truth": "Truth is presented as the foundational principle (of inherent dignity) upon which systems should be built. It is a strong supporting theme.",
+          "manipulation": "There is no evidence of manipulation in the text.",
+          "justice": "The goal of 'Equity' and building fair 'systems... for everyone' makes justice a core, high-intensity, and high-salience theme.",
+          "resentment": "There is no evidence of resentment in the text.",
+          "hope": "The framing of 'A Shared Future' and 'Democratic Renewal' is inherently hopeful and optimistic about the potential for positive change.",
+          "fear": "There is no evidence of fear or threat-based motivation.",
+          "pragmatism": "The call to 'build systems' reflects a practical, grounded approach to realizing the stated ideals.",
+          "fantasy": "The text is idealistic but grounded in 'work' and 'building systems', avoiding unrealistic expectations."
+        },
+        "salience_ranking": [
+          {
+            "dimension": "dignity",
+            "salience_score": 1.0,
+            "rank": 1
+          },
+          {
+            "dimension": "justice",
+            "salience_score": 0.8,
+            "rank": 2
+          },
+          {
+            "dimension": "hope",
+            "salience_score": 0.8,
+            "rank": 2
+          },
+          {
+            "dimension": "truth",
+            "salience_score": 0.6,
+            "rank": 4
+          },
+          {
+            "dimension": "pragmatism",
+            "salience_score": 0.5,
+            "rank": 5
+          },
+          {
+            "dimension": "tribalism",
+            "salience_score": 0.2,
+            "rank": 6
+          }
+        ],
+        "character_priorities": "The primary moral identity is centered on **Dignity**, supported by a strong commitment to **Justice** and **Hope**. These priorities suggest a character profile motivated by universal humanism and a belief in constructive, systemic change.",
+        "tension_analysis": {
+          "dignity_vs_tribalism_tension": 0.9,
+          "truth_vs_manipulation_tension": 0.36,
+          "justice_vs_resentment_tension": 0.64,
+          "hope_vs_fear_tension": 0.64,
+          "pragmatism_vs_fantasy_tension": 0.25,
+          "mc_sci_score": 0.558
+        }
+      }
+    }
+  },
+  "mathematical_verification": {
+    "mc_sci_calculation": "MC-SCI = (| (dignity_i * dignity_s) - (tribalism_i * tribalism_s) | + | (truth_i * truth_s) - (manipulation_i * manipulation_s) | + | (justice_i * justice_s) - (resentment_i * resentment_s) | + | (hope_i * hope_s) - (fear_i * fear_s) | + | (pragmatism_i * pragmatism_s) - (fantasy_i * fantasy_s) |) / 5 = (| (0.9*1.0) - (0.0*0.2) | + | (0.6*0.6) - (0.0*0.0) | + | (0.8*0.8) - (0.0*0.0) | + | (0.8*0.8) - (0.0*0.0) | + | (0.5*0.5) - (0.0*0.0) |) / 5 = (0.9 + 0.36 + 0.64 + 0.64 + 0.25) / 5 = 2.79 / 5 = 0.558",
+    "confidence_score": 5.0
+  }
+}
+<<<DISCERNUS_SCORES_CSV_v1>>>
+aid,dignity,tribalism,truth,manipulation,justice,resentment,hope,fear,pragmatism,fantasy,mc_sci
+test_doc_001,0.9,0.0,0.6,0.0,0.8,0.0,0.8,0.0,0.5,0.0,0.558
+<<<END_DISCERNUS_SCORES_CSV_v1>>>
+<<<DISCERNUS_EVIDENCE_CSV_v1>>>
+aid,dimension,quote_id,quote_text,context_type
+test_doc_001,dignity,1,"Every person deserves a voice, a chance, and the freedom to live with dignity.",direct
+test_doc_001,dignity,2,"Each individual carries inherent dignity, grounded not in their background but in their capacity to think, act, and contribute to the common good.",direct
+test_doc_001,tribalism,3,"Our identities enrich our perspectives, but they do not define our moral worth.",direct
+test_doc_001,truth,4,"Our work is to build systems that reflect that truth—for everyone.",direct
+test_doc_001,justice,5,"A Shared Future: Equity Through Dignity and Democratic Renewal",direct
+test_doc_001,hope,6,"A Shared Future: Equity Through Dignity and Democratic Renewal",direct
+test_doc_001,pragmatism,7,"Our work is to build systems that reflect that truth—for everyone.",direct
+<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
+```
+----------------------------------------
+
+🏁 Test completed for model: vertex_ai/gemini-2.5-pro
