@@ -111,3 +111,21 @@ class AuditLogger:
         
         with open(self.system_log, "a") as f:
             f.write(json.dumps(event) + "\n") 
+
+    def log_orchestrator_event(self, event_type: str, metadata: Optional[Dict[str, Any]] = None) -> None:
+        """
+        Log orchestrator event.
+        
+        Args:
+            event_type: Type of event
+            metadata: Additional event metadata
+        """
+        event = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "component": "orchestrator",
+            "event": event_type,
+            "metadata": metadata or {}
+        }
+        
+        with open(self.system_log, "a") as f:
+            f.write(json.dumps(event) + "\n") 
