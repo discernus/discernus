@@ -1,62 +1,46 @@
-# Character Assessment Framework v4.3 - Tension Enhanced
+# Character Assessment Framework v5.0
 
-**Version**: v4.3 - Tension Enhanced  
-**Status**: Implementation Ready
+**Version**: 5.0
+**Status**: Active
+**Major Change**: Embedded CSV Architecture for Synthesis Scalability
 
 ---
 
-## Overview
+## Executive Summary
 
-CAF assesses character through systematic evaluation of ten core dimensions organized in five complementary pairs. Each pair represents fundamental tension in human character and decision-making.
-
-**Purpose**: Objective character measurement through evidence-based analysis of moral priorities and behavioral patterns.
-
-**Applications**: Leadership assessment, discourse analysis, character development evaluation.
+The Character Assessment Framework (CAF) v5.0 integrates breakthrough character tension analysis to provide a multi-dimensional assessment of a speaker's moral character. It quantifies moral contradictions between opposing character traits (virtues and vices) and calculates an overall Moral Character Strategic Contradiction Index (MC-SCI). This allows for a nuanced understanding of a speaker's moral coherence and identity.
 
 ---
 
 ## Character Dimensions
 
-#### Dignity vs Tribalism
-- **Dignity (0.0-1.0)**: Respect for inherent worth of all people, regardless of differences
-- **Tribalism (0.0-1.0)**: Favoring one's own group at expense of outsiders
+### **Civic Virtues** - Positive Character Traits
 
-#### Truth vs Manipulation  
-- **Truth (0.0-1.0)**: Commitment to honesty, accuracy, transparency in communication
-- **Manipulation (0.0-1.0)**: Deliberately distorting information to achieve desired outcomes
+**1. Dignity** (0.0-1.0): Respect for universal human worth and inherent dignity  
+**2. Truth** (0.0-1.0): Intellectual honesty and commitment to factual accuracy  
+**3. Justice** (0.0-1.0): Fairness orientation and procedural integrity  
+**4. Hope** (0.0-1.0): Constructive vision and democratic optimism  
+**5. Pragmatism** (0.0-1.0): Practical wisdom and workable solutions  
 
-#### Justice vs Resentment
-- **Justice (0.0-1.0)**: Fairness, impartiality, proportionality in treatment and judgment  
-- **Resentment (0.0-1.0)**: Bitterness toward those perceived as more fortunate or successful
+### **Civic Vices** - Negative Character Traits
 
-#### Hope vs Fear
-- **Hope (0.0-1.0)**: Optimism about future and confidence in positive possibilities
-- **Fear (0.0-1.0)**: Anxiety about future and focus on potential threats or losses
-
-#### Pragmatism vs Fantasy
-- **Pragmatism (0.0-1.0)**: Practical, realistic approach to solving problems and achieving goals
-- **Fantasy (0.0-1.0)**: Unrealistic expectations disconnected from practical realities
+**1. Tribalism** (0.0-1.0): Group loyalty over universal principles  
+**2. Manipulation** (0.0-1.0): Deceptive rhetoric and information distortion  
+**3. Resentment** (0.0-1.0): Grievance focus and backward-looking blame  
+**4. Fear** (0.0-1.0): Anxiety appeals and catastrophic thinking  
+**5. Fantasy** (0.0-1.0): Unrealistic promises and magical thinking  
 
 ---
 
-## Scoring Protocol
+## Character Tension Mathematics
 
-**Intensity Scale**: 0.0 (absent) to 1.0 (dominant expression)  
-**Salience Scale**: 0.0 (peripheral) to 1.0 (central to character presentation)
+### **Character Tension Scoring**
 
-**Requirements**:
-- Score all ten dimensions for intensity and salience
-- Provide 1-2 strongest quotes per dimension  
-- Calculate tension scores for each pair
-- Compute Moral Character-Strategic Coherence Index (MC-SCI)
+**Formula**: `Character Tension = min(Virtue_score, Vice_score) × |Virtue_salience - Vice_salience|`
 
----
+### **Moral Character Strategic Contradiction Index (MC-SCI)**
 
-## Character Calculations
-
-**Tension Scores**: |Virtue Score - Vice Score| for each pair
-**MC-SCI**: Overall character coherence measure across all dimensions
-**Character Profile**: Primary moral identity based on highest-salience dimensions
+**Formula**: `MC-SCI = (Sum of all Character Tension Scores) / Number of Opposing Pairs`
 
 ---
 
@@ -64,22 +48,38 @@ CAF assesses character through systematic evaluation of ten core dimensions orga
 
 ```json
 {
-  "name": "character_assessment_framework_tension_enhanced",
-  "version": "v4.3",
-  "display_name": "Character Assessment Framework v4.3 - Tension Enhanced",
+  "name": "caf_v5_0",
+  "version": "v5.0",
+  "display_name": "Character Assessment Framework v5.0",
   "analysis_variants": {
     "default": {
-      "description": "Complete character assessment with tension analysis",
-      "analysis_prompt": "You are an expert character assessment analyst specializing in moral psychology and behavioral analysis. Your task is to analyze the provided text using the Character Assessment Framework (CAF) v4.3. This framework evaluates character through ten dimensions organized in five complementary pairs: Dignity vs Tribalism, Truth vs Manipulation, Justice vs Resentment, Hope vs Fear, Pragmatism vs Fantasy. For each dimension, assess both intensity (0.0-1.0 how strongly expressed) and salience (0.0-1.0 how central to character presentation). Focus on character revelation rather than policy positions. Provide 1-2 strongest quotes demonstrating each score. Calculate tension scores (absolute difference) for each pair and overall MC-SCI coherence measure. Identify primary moral identity based on highest-salience dimensions."
+      "description": "Complete salience-weighted character analysis with moral tension pattern quantification and embedded CSV output.",
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst of civic character and political ethics. Phase 2: Framework Methodology: Your task is to analyze what the provided text reveals about the SPEAKER'S moral character using the Character Assessment Framework v5.0. Phase 3: Operational Definitions: Evaluate five civic virtues (Dignity, Truth, Justice, Hope, Pragmatism) and five opposing civic vices (Tribalism, Manipulation, Resentment, Fear, Fantasy). Phase 4: Scoring Protocol: For each of the ten dimensions, score its intensity (0.0-1.0) and salience (0.0-1.0). Provide the strongest 1-2 quotes as evidence. Calculate the tension score for each virtue-vice pair and the overall Moral Character Strategic Contradiction Index (MC-SCI). Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must have columns for each dimension's score and salience, each tension score, and the MC-SCI. The evidence CSV must have columns for dimension, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
     }
   },
+  "dimension_groups": {
+    "virtues": ["dignity", "truth", "justice", "hope", "pragmatism"],
+    "vices": ["tribalism", "manipulation", "resentment", "fear", "fantasy"]
+  },
   "calculation_spec": {
-    "dignity_tribalism_tension": "|(dignity_intensity * dignity_salience) - (tribalism_intensity * tribalism_salience)|",
-    "truth_manipulation_tension": "|(truth_intensity * truth_salience) - (manipulation_intensity * manipulation_salience)|",
-    "justice_resentment_tension": "|(justice_intensity * justice_salience) - (resentment_intensity * resentment_salience)|",
-    "hope_fear_tension": "|(hope_intensity * hope_salience) - (fear_intensity * fear_salience)|",
-    "pragmatism_fantasy_tension": "|(pragmatism_intensity * pragmatism_salience) - (fantasy_intensity * fantasy_salience)|",
-    "mc_sci": "(dignity_tribalism_tension + truth_manipulation_tension + justice_resentment_tension + hope_fear_tension + pragmatism_fantasy_tension) / 5"
+    "character_tension_mathematics": "Character tension quantification using formula: Character Tension = min(Virtue_score, Vice_score) × |Virtue_salience - Vice_salience|.",
+    "character_tensions": {
+      "dignity_tribalism_tension": "min(dignity, tribalism) * abs(dignity_salience - tribalism_salience)",
+      "truth_manipulation_tension": "min(truth, manipulation) * abs(truth_salience - manipulation_salience)",
+      "justice_resentment_tension": "min(justice, resentment) * abs(justice_salience - resentment_salience)",
+      "hope_fear_tension": "min(hope, fear) * abs(hope_salience - fear_salience)",
+      "pragmatism_fantasy_tension": "min(pragmatism, fantasy) * abs(pragmatism_salience - fantasy_salience)"
+    },
+    "moral_character_sci": "(dignity_tribalism_tension + truth_manipulation_tension + justice_resentment_tension + hope_fear_tension + pragmatism_fantasy_tension) / 5"
+  },
+  "reliability_rubric": {
+    "cronbachs_alpha": {
+      "excellent": [0.80, 1.0],
+      "good": [0.70, 0.79],
+      "acceptable": [0.60, 0.69],
+      "poor": [0.0, 0.59]
+    },
+    "notes": "Defines quality thresholds for framework reliability. The Synthesis Agent uses this for automated fit assessment."
   },
   "output_contract": {
     "schema": {
@@ -88,11 +88,21 @@ CAF assesses character through systematic evaluation of ten core dimensions orga
       "evidence": "object",
       "reasoning": "object",
       "salience_ranking": "array",
-      "character_priorities": "string",
-      "tension_analysis": "object",
-      "character_clusters": "object"
+      "tension_analysis": "object"
     },
-    "instructions": "IMPORTANT: Your response MUST be a single, valid JSON object and nothing else. Do not include any text, explanations, or markdown code fences before or after the JSON object. The scores object should contain intensity and salience scores for all 10 dimensions. The salience_ranking should be an ordered array of objects with 'dimension', 'salience_score', and 'rank'. The tension_analysis should contain calculated tensions and MC-SCI score."
+    "embedded_csv_requirements": {
+      "scores_csv": {
+        "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
+        "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
+        "description": "CSV for all dimensional scores, salience scores, tension scores, and calculated metrics."
+      },
+      "evidence_csv": {
+        "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
+        "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
+        "description": "CSV for structured evidence data for audit and replication."
+      }
+    },
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The salience_ranking should be an ordered array of objects, each containing 'dimension', 'salience_score', and 'rank'."
   }
 }
 ```

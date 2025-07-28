@@ -20,6 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from litellm import completion
+import pandas as pd
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary, SecurityError
 from discernus.core.audit_logger import AuditLogger
@@ -46,7 +47,8 @@ class EnhancedSynthesisAgent:
     def __init__(self, 
                  security_boundary: ExperimentSecurityBoundary,
                  audit_logger: AuditLogger,
-                 artifact_storage: LocalArtifactStorage):
+                 artifact_storage: LocalArtifactStorage,
+                 run_folder: Path):
         """
         Initialize enhanced synthesis agent.
         
@@ -54,10 +56,12 @@ class EnhancedSynthesisAgent:
             security_boundary: Security boundary for file access
             audit_logger: Audit logger for comprehensive logging
             artifact_storage: Local artifact storage for caching
+            run_folder: The directory for the current experiment run.
         """
         self.security = security_boundary
         self.audit = audit_logger
         self.storage = artifact_storage
+        self.run_folder = run_folder
         self.agent_name = "EnhancedSynthesisAgent"
         
         # Load enhanced prompt template
@@ -84,7 +88,8 @@ class EnhancedSynthesisAgent:
     def synthesize_results(self, 
                           analysis_results: List[Dict[str, Any]],
                           experiment_config: Dict[str, Any],
-                          model: str = "vertex_ai/gemini-2.5-pro") -> Dict[str, Any]:
+                          model: str = "vertex_ai/gemini-2.5-pro",
+                          run_folder: Optional[Path] = None) -> Dict[str, Any]:
         """
         Perform synthesis on raw analysis results - LLM handles extraction (THIN principle).
         """
@@ -130,8 +135,22 @@ class EnhancedSynthesisAgent:
             # No cache hit - proceed with synthesis
             print(f"🔍 No cache hit for {synthesis_id} - performing synthesis...")
             
+            # Read the aggregated CSV files
+            scores_path = self.run_folder / "scores.csv"
+            evidence_path = self.run_folder / "evidence.csv"
+
+            try:
+                scores_df = pd.read_csv(scores_path)
+                evidence_df = pd.read_csv(evidence_path)
+                scores_csv = scores_df.to_csv(index=False)
+                evidence_csv = evidence_df.to_csv(index=False)
+            except FileNotFoundError as e:
+                raise EnhancedSynthesisAgentError(f"Could not find CSV files in run directory: {e}")
+
             # Prepare the synthesis prompt with raw analysis results
             synthesis_prompt = self.prompt_template.format(
+                scores_csv=scores_csv,
+                evidence_csv=evidence_csv,
                 analysis_results=json.dumps(analysis_results, indent=2)
             )
 
