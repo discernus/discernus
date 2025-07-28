@@ -125,6 +125,19 @@ class EnhancedAnalysisAgent:
         })
         
         try:
+            # Extract framework JSON appendix to get dimensions
+            json_pattern = r"```json\n(.*?)\n```"
+            json_match = re.search(json_pattern, framework_content, re.DOTALL)
+            if not json_match:
+                raise EnhancedAnalysisAgentError("No JSON appendix found in framework")
+            framework_config = json.loads(json_match.group(1))
+            
+            # Get all dimensions from virtues and vices
+            all_dimensions = (
+                framework_config["dimension_groups"]["virtues"] +
+                framework_config["dimension_groups"]["vices"]
+            )
+            
             # Check if analysis result is already cached (THIN perfect caching)
             # Create the same result structure we would store to check if it exists
             analysis_cache_key = f"analysis_{batch_id}"
@@ -143,14 +156,26 @@ class EnhancedAnalysisAgent:
                         "batch_id": batch_id,
                         "cached_artifact_hash": artifact_hash
                     })
+
+                    # Extract and persist CSVs from the cached result
+                    document_hashes = cached_result.get('input_artifacts', {}).get('document_hashes', [])
+                    
+                    scores_csv, evidence_csv = self._extract_embedded_csv(cached_result['raw_analysis_response'], document_hashes[0] if document_hashes else "unknown_artifact")
+                    
+                    new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
+                    new_evidence_hash = self._append_to_csv_artifact(current_evidence_hash, evidence_csv, "evidence.csv")
                     
                     return {
-                        "batch_id": batch_id,
-                        "result_hash": artifact_hash,
-                        "result_content": cached_result,
-                        "duration_seconds": 0.0,  # Instant cache hit
-                        "mathematical_validation": True,
-                        "cached": True
+                        "analysis_result": {
+                            "batch_id": batch_id,
+                            "result_hash": artifact_hash,
+                            "result_content": cached_result,
+                            "duration_seconds": 0.0,  # Instant cache hit
+                            "mathematical_validation": True,
+                            "cached": True
+                        },
+                        "scores_hash": new_scores_hash,
+                        "evidence_hash": new_evidence_hash
                     }
             
             # No cache hit - proceed with analysis
@@ -201,7 +226,14 @@ class EnhancedAnalysisAgent:
                 frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
                 documents=self._format_documents_for_prompt(documents),
                 num_frameworks=1,
-                num_documents=len(documents)
+                num_documents=len(documents),
+                dimension_list=",".join(all_dimensions),
+                dimension_scores=",".join("{{" + dim + "_score}}" for dim in all_dimensions),
+                artifact_id="{artifact_id}",  # Will be replaced by document hash in response
+                dimension_name="{dimension_name}",
+                quote_number="{quote_number}",
+                quote_text="{quote_text}",
+                context_type="{context_type}"
             )
             
             # Log LLM interaction start
@@ -235,6 +267,8 @@ class EnhancedAnalysisAgent:
             
             # Extract CSV data from the response
             scores_csv, evidence_csv = self._extract_embedded_csv(result_content, document_hashes[0])
+            if not scores_csv or not evidence_csv:
+                raise EnhancedAnalysisAgentError("LLM response missing required CSV sections")
 
             # Append to artifacts in storage
             new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
@@ -341,20 +375,30 @@ class EnhancedAnalysisAgent:
         if not new_csv_data:
             return current_hash
 
-        new_data_df = pd.read_csv(StringIO(new_csv_data))
+        # Get header and data rows
+        lines = new_csv_data.strip().split('\n')
+        if len(lines) < 2:  # Need at least header and one data row
+            return current_hash
+            
+        header = lines[0]
+        data_rows = lines[1:]
 
         if current_hash:
             try:
+                # Read existing content
                 existing_content = self.storage.get_artifact(current_hash)
-                existing_df = pd.read_csv(StringIO(existing_content.decode('utf-8')))
-                combined_df = pd.concat([existing_df, new_data_df], ignore_index=True)
+                existing_lines = existing_content.decode('utf-8').strip().split('\n')
+                
+                # Only append data rows (skip header)
+                combined_lines = [existing_lines[0]] + existing_lines[1:] + data_rows
+                
             except (FileNotFoundError, pd.errors.EmptyDataError):
-                combined_df = new_data_df
+                combined_lines = [header] + data_rows
         else:
-            combined_df = new_data_df
+            combined_lines = [header] + data_rows
             
         # Write back to storage as a new artifact
-        updated_csv_content = combined_df.to_csv(index=False).encode('utf-8')
+        updated_csv_content = '\n'.join(combined_lines).encode('utf-8')
         new_hash = self.storage.put_artifact(updated_csv_content, {"artifact_type": f"intermediate_{artifact_name}"})
         
         return new_hash
@@ -372,14 +416,25 @@ class EnhancedAnalysisAgent:
     def _extract_embedded_csv(self, analysis_response: str, artifact_id: str) -> tuple[str, str]:
         """Extracts pre-formatted CSV segments from an LLM response."""
         
-        scores_pattern = r"<<<DISCERNUS_SCORES_CSV_v1>>>(.*?)<<<END_DISCERNUS_SCORES_CSV_v1>>>"
-        scores_match = re.search(scores_pattern, analysis_response, re.DOTALL)
-        scores_csv = scores_match.group(1).strip() if scores_match else ""
+        # Find the last occurrence of each delimiter
+        scores_start = analysis_response.rfind("<<<DISCERNUS_SCORES_CSV_v1>>>")
+        scores_end = analysis_response.rfind("<<<END_DISCERNUS_SCORES_CSV_v1>>>")
+        evidence_start = analysis_response.rfind("<<<DISCERNUS_EVIDENCE_CSV_v1>>>")
+        evidence_end = analysis_response.rfind("<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>")
         
-        evidence_pattern = r"<<<DISCERNUS_EVIDENCE_CSV_v1>>>(.*?)<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>"
-        evidence_match = re.search(evidence_pattern, analysis_response, re.DOTALL)
-        evidence_csv = evidence_match.group(1).strip() if evidence_match else ""
+        # Extract CSV sections if found
+        scores_csv = ""
+        evidence_csv = ""
         
+        if scores_start >= 0 and scores_end > scores_start:
+            scores_csv = analysis_response[scores_start + len("<<<DISCERNUS_SCORES_CSV_v1>>>"):scores_end].strip()
+            
+        if evidence_start >= 0 and evidence_end > evidence_start:
+            evidence_csv = analysis_response[evidence_start + len("<<<DISCERNUS_EVIDENCE_CSV_v1>>>"):evidence_end].strip()
+        
+        print(f"DEBUG: Extracted scores_csv:\n{scores_csv}")
+        print(f"DEBUG: Extracted evidence_csv:\n{evidence_csv}")
+
         # Replace placeholder with actual artifact ID
         scores_csv = scores_csv.replace("{artifact_id}", artifact_id)
         evidence_csv = evidence_csv.replace("{artifact_id}", artifact_id)
@@ -391,18 +446,21 @@ class EnhancedAnalysisAgent:
         if not csv_data:
             return
         
-        data_df = pd.read_csv(StringIO(csv_data))
+        # Get header and data rows
+        lines = csv_data.strip().split('\n')
+        if len(lines) < 2:  # Need at least header and one data row
+            return
+            
+        header = lines[0]
+        data_rows = lines[1:]
         
         # If file doesn't exist, write with header. Otherwise, append without.
         if not file_path.exists():
-            data_df.to_csv(file_path, index=False)
+            with open(file_path, 'w') as f:
+                f.write('\n'.join([header] + data_rows) + '\n')
         else:
-            # Important: When appending, we need to align columns.
-            # We can do this by reading the existing file and concatenating.
-            # This is a bit more than a simple append, but necessary for schema changes.
-            existing_df = pd.read_csv(file_path)
-            combined_df = pd.concat([existing_df, data_df], ignore_index=True)
-            combined_df.to_csv(file_path, index=False)
+            with open(file_path, 'a') as f:
+                f.write('\n'.join(data_rows) + '\n')
 
     def _format_documents_for_prompt(self, documents: List[Dict]) -> str:
         """Format documents for LLM prompt with enhanced metadata."""

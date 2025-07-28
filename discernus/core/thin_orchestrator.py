@@ -196,6 +196,7 @@ class ThinOrchestrator:
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             
             # Pass final CSV artifact hashes to the synthesis agent
+            print(f"DEBUG: Passing scores_hash={scores_hash} and evidence_hash={evidence_hash} to synthesis agent.")
             synthesis_result = synthesis_agent.synthesize_results(
                 scores_hash=scores_hash,
                 evidence_hash=evidence_hash,
@@ -297,6 +298,7 @@ class ThinOrchestrator:
         for i, doc in enumerate(corpus_documents):
             print(f"\n--- Analyzing document {i+1}/{total_docs}: {doc.get('filename')} ---")
             try:
+                # The returned result is now a dictionary containing the analysis result and the CSV hashes
                 result = analysis_agent.analyze_batch(
                     framework_content=framework_content,
                     corpus_documents=[doc],  # Pass a list with a single document
@@ -307,9 +309,10 @@ class ThinOrchestrator:
                 )
                 
                 # Update hashes for the next iteration
-                scores_hash = result.get("scores_hash")
-                evidence_hash = result.get("evidence_hash")
+                scores_hash = result.get("scores_hash", scores_hash)
+                evidence_hash = result.get("evidence_hash", evidence_hash)
                 
+                # Append the nested analysis result to the list
                 all_analysis_results.append(result["analysis_result"])
             except Exception as e:
                 print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")

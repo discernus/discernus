@@ -1,0 +1,8 @@
+{
+  "raw_analysis_response": "{\"document_analyses\": {\"cff_doc_8.txt\": {\"scores\": {\"Dignity\": 0.7, \"Tribalism\": 0.7, \"Truth\": 0.7, \"Manipulation\": 0.7, \"Hope\": 0.7, \"Fear\": 0.7}, \"mc_sci_score\": 0.35}}}",
+  "input_artifacts": {
+    "document_hashes": [
+      "bda66cc28867"
+    ]
+  }
+}

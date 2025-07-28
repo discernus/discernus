@@ -170,6 +170,16 @@ These principles guide every design decision in Discernus:
 - Clear error messages over expensive debugging cycles
 - "Garbage in, clear error out"
 
+**19. No Database Policy - Git as Persistence Layer**
+- **Academic Transparency**: Databases are opaque to auditors and replication researchers
+- **Distributed Collaboration**: Flat files enable researcher collaboration without centralized infrastructure
+- **Project Isolation**: Individual experiments remain self-contained and portable
+- **Replication Ready**: Complete research packages as Git repositories with flat file data
+- **Tool Agnostic**: CSV/JSON files work with any analysis tool (Excel, R, Python, etc.)
+- GitHub serves as the persistence and collaboration layer for all research materials
+- When relational data is needed, use Hash Cross Referenced CSV files with shared artifact keys
+- *Future: Discernus Enterprise may offer optional database integration for institutional deployments*
+
 ---
 
 ## 5 · Architectural Pillars for a Durable LLM System

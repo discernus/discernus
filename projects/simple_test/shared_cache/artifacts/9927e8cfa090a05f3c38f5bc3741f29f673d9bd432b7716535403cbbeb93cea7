@@ -1,0 +1,25 @@
+{
+  "synthesis_id": "synthesis_3afc4af9128b_debug",
+  "agent_name": "EnhancedSynthesisAgent",
+  "agent_version": "enhanced_v2.2_integrated_report",
+  "experiment_name": "simple_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "synthesis_report_markdown": "This report synthesizes the analysis of a single document (aid: af7878b2ed57) using the Character Assessment Framework v5.0. The analysis reveals a strong emphasis on core civic virtues, with high scores and salience for dignity, justice, and hope. The speaker's worldview is characterized by a commitment to inclusivity, fairness, and a belief in the possibility of a better future driven by collective action.\n\n**Key Findings:**\n\n*   **Dominant Virtues:** Dignity (0.9 score, 0.95 salience), Justice (0.85 score, 0.9 salience), and Hope (0.85 score, 0.9 salience) are the most prominent virtues. The speaker consistently advocates for the inherent worth of every individual, the necessity of inclusive and fair systems, and a forward-looking perspective that acknowledges challenges but insists on progress.\n*   **Strong Pragmatism:** Pragmatism (0.75 score, 0.8 salience) is also highly valued, with the speaker emphasizing practical, evidence-based approaches, adaptation, and iterative improvement of policies.\n*   **Low Vices:** Tribalism (0.1 score, 0.15 salience), Resentment (0.1 score, 0.15 salience), and Fantasy (0.1 score, 0.15 salience) are actively rejected. The speaker explicitly promotes pluralism over tribalism, acknowledges past injustices without dwelling on them or mirroring past wrongs, and cautions against simplification and panic in favor of nuanced analysis.\n*   **Moderate Truth and Countering Manipulation/Fear:** Truth (0.8 score, 0.85 salience) is important, with a focus on seeking facts and using data for problem-solving. Manipulation (0.15 score, 0.2 salience) and Fear (0.15 score, 0.2 salience) are present but actively countered by a commitment to reality and resilience.\n*   **Tension Analysis:** The analysis highlights minimal tension between virtues and vices, indicating a relatively coherent character. The highest tension is observed between Hope and Fear (0.105), suggesting a conscious effort to maintain hope in the face of uncertainty.\n*   **Moral Character Strategic Contradiction Index (MC-SCI):** The overall MC-SCI is 0.0845, which is very low, indicating a high degree of internal consistency and a strong alignment between the speaker's espoused virtues and their rejection of vices.\n\n**Evidence Highlights:**\n\nThe analysis is supported by direct statements and elaborations on the importance of dignity, the non-partial nature of justice, and hope as a driver of change. The speaker's pragmatic approach is evident in their commitment to testing and adapting policies. Rejections of tribalism, manipulation, resentment, and fear are also clearly articulated through statements promoting pluralism, accountability to reality, and resilience in the face of challenges.\n\nIn summary, the document presents a character that is deeply committed to positive civic values, grounded in reality, and actively working towards a more just and hopeful future. The low tension scores and MC-SCI suggest a well-integrated and principled approach to societal issues.",
+  "execution_metadata": {
+    "start_time": "2025-07-28T05:07:05.451683+00:00",
+    "end_time": "2025-07-28T05:07:07.692940+00:00",
+    "duration_seconds": 2.241257
+  },
+  "input_metadata": {
+    "num_analysis_batches_synthesized": 2
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250728T050652Z_fb9193a6"
+  }
+}

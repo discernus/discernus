@@ -107,6 +107,8 @@ class EnhancedSynthesisAgent:
             "experiment": experiment_config.get("name", "unknown")
         })
         
+        print(f"DEBUG: Received scores_hash={scores_hash} and evidence_hash={evidence_hash}")
+
         try:
             # Check if synthesis result is already cached (THIN perfect caching)
             for artifact_hash, artifact_info in self.storage.registry.items():

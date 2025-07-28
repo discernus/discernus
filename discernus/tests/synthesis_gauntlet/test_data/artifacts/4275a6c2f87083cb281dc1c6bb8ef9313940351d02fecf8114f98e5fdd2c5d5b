@@ -1,0 +1,8 @@
+{
+  "some_other_key": "some_value",
+  "input_artifacts": {
+    "document_hashes": [
+      "poison_pill_2"
+    ]
+  }
+}

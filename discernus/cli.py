@@ -134,7 +134,7 @@ def cli():
 @cli.command()
 @click.argument('experiment_path')
 @click.option('--dry-run', is_flag=True, help='Show what would be done without executing')
-@click.option('--model', default='vertex_ai/gemini-2.5-flash', help='LLM model to use (default: gemini-2.5-flash)')
+@click.option('--model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use (default: gemini-2.5-flash-lite)')
 def run(experiment_path: str, dry_run: bool, model: str):
     """Execute experiment using THIN v2.0 direct orchestration"""
     exp_path = Path(experiment_path)
