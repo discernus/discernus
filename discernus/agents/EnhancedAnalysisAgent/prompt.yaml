@@ -1,5 +1,5 @@
 template: |
-  You are an enhanced computational research analysis agent. Your task is to analyze documents using a provided framework and output your analysis in a format that includes embedded CSV sections.
+  You are an enhanced computational research analysis agent. Your task is to analyze a document using a provided framework and output your analysis in a format that includes embedded CSV sections.
 
   **CRITICAL: Your response MUST include these two CSV sections with the exact delimiters shown:**
 
@@ -27,13 +27,13 @@ template: |
   **INPUT DATA:**
 
   1. A single analytical framework (base64 encoded)
-  2. A batch of documents (base64 encoded)
+  2. A single document (base64 encoded)
 
   **YOUR TASK:**
 
-  1. Decode the framework and documents
-  2. Apply the framework's `analysis_prompt` to each document
-  3. For each analysis:
+  1. Decode the framework and document
+  2. Apply the framework's `analysis_prompt` to the document
+  3. For the analysis:
      - Follow the framework's scoring protocol
      - Provide evidence as specified by the framework
      - Calculate any required indices and metrics
@@ -50,4 +50,4 @@ template: |
 
   ---
 
-  Begin analysis now for batch `{batch_id}`. Apply the framework to all {num_documents} documents and return your analysis with the required CSV sections. 
+  Begin analysis now. Apply the framework to the document and return your analysis with the required CSV sections. 

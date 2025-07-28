@@ -87,7 +87,7 @@ class EnhancedAnalysisAgent:
 
 
 
-    def analyze_batch(self, 
+    def analyze_documents(self, 
                      framework_content: str,
                      corpus_documents: List[Dict[str, Any]], 
                      experiment_config: Dict[str, Any],
@@ -95,13 +95,13 @@ class EnhancedAnalysisAgent:
                      current_scores_hash: Optional[str] = None,
                      current_evidence_hash: Optional[str] = None) -> Dict[str, Any]:
         """
-        Perform enhanced batch analysis of documents using framework.
+        Analyze documents using framework and output results with embedded CSV sections.
         
         Args:
             framework_content: Raw framework content (markdown with JSON appendix)
             corpus_documents: List of document dictionaries with content and metadata
             experiment_config: Experiment configuration
-            model: LLM model to use
+            model: LLM model to use (handled by LiteLLM for API batching)
             current_scores_hash: Hash of the current scores.csv artifact
             current_evidence_hash: Hash of the current evidence.csv artifact
             

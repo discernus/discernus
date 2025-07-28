@@ -382,6 +382,8 @@ class ThinOrchestrator:
                                        model: str) -> tuple[List[Dict[str, Any]], Optional[str], Optional[str]]:
         """
         Executes the analysis agent for each document, passing CSV artifact hashes.
+        
+        Note: This method processes one document at a time. API-level batching is handled by LiteLLM.
         """
         all_analysis_results = []
         scores_hash = None
@@ -392,10 +394,10 @@ class ThinOrchestrator:
         for i, doc in enumerate(corpus_documents):
             print(f"\n--- Analyzing document {i+1}/{total_docs}: {doc.get('filename')} ---")
             try:
-                # The returned result is now a dictionary containing the analysis result and the CSV hashes
-                result = analysis_agent.analyze_batch(
+                # Process one document at a time
+                result = analysis_agent.analyze_documents(
                     framework_content=framework_content,
-                    corpus_documents=[doc],  # Pass a list with a single document
+                    corpus_documents=[doc],  # Single document list
                     experiment_config=experiment_config,
                     model=model,
                     current_scores_hash=scores_hash,
