@@ -125,10 +125,10 @@ The Embedded CSV Architecture is the critical path to unlocking large-scale synt
 - **LLM Compliance**: Gemini 2.5 Pro reliably produces the exact embedded CSV format required
 
 ### **🔬 Test Artifacts**
-Complete validation suite in `tests/embedded_csv_prototype/`:
-- `test_delimiter_extraction.py`: Validates regex extraction logic
-- `test_csv_aggregation.py`: Validates streaming aggregation mechanics
-- `test_llm_compliance.py`: Validates LLM can produce required format
-- `csv_compliance_test.txt`: Real prompt test achieving 100% compliance
+Complete validation suite in `tests/embedded_csv_prototype/` and linked below:
+- [`test_delimiter_extraction.py`](tests/embedded_csv_prototype/test_delimiter_extraction.py): Validates regex extraction logic
+- [`test_csv_aggregation.py`](tests/embedded_csv_prototype/test_csv_aggregation.py): Validates streaming aggregation mechanics
+- [`test_llm_compliance.py`](tests/embedded_csv_prototype/test_llm_compliance.py): Validates LLM can produce required format
+- [`csv_compliance_test.txt`](tests/embedded_csv_prototype/csv_compliance_test.txt): Real prompt test achieving 100% compliance
 
 **Next Action**: Execute **Phase 2: Framework Integration**. 
