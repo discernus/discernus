@@ -174,10 +174,10 @@ class ThinOrchestrator:
                   f"⏱️ ~{0:.1f} minutes")
             
             # Initialize analysis and synthesis agents
-            analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage, run_folder)
+            analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
             
             # Execute analysis (one document at a time)
-            all_analysis_results = self._execute_analysis_sequentially(
+            all_analysis_results, scores_hash, evidence_hash = self._execute_analysis_sequentially(
                 analysis_agent,
                 corpus_documents,
                 framework_content,
@@ -192,15 +192,16 @@ class ThinOrchestrator:
 
             # Execute synthesis
             print("\n🔬 Synthesizing results...")
-            synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage, run_folder)
+            synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             
-            # Pass raw analysis results directly - let LLM handle extraction (THIN principle)
+            # Pass final CSV artifact hashes to the synthesis agent
             synthesis_result = synthesis_agent.synthesize_results(
-                analysis_results=all_analysis_results,
+                scores_hash=scores_hash,
+                evidence_hash=evidence_hash,
+                analysis_results=all_analysis_results, # Still useful for metadata
                 experiment_config=experiment_config,
-                model=model,
-                run_folder=run_folder
+                model=model 
             )
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()
@@ -283,11 +284,13 @@ class ThinOrchestrator:
                                        corpus_documents: List[Dict[str, Any]],
                                        framework_content: str,
                                        experiment_config: Dict[str, Any],
-                                       model: str) -> List[Dict[str, Any]]:
+                                       model: str) -> tuple[List[Dict[str, Any]], Optional[str], Optional[str]]:
         """
-        Executes the analysis agent for each document, one by one.
+        Executes the analysis agent for each document, passing CSV artifact hashes.
         """
         all_analysis_results = []
+        scores_hash = None
+        evidence_hash = None
         total_docs = len(corpus_documents)
         print(f"\n🚀 Starting sequential analysis of {total_docs} documents...")
 
@@ -298,14 +301,21 @@ class ThinOrchestrator:
                     framework_content=framework_content,
                     corpus_documents=[doc],  # Pass a list with a single document
                     experiment_config=experiment_config,
-                    model=model
+                    model=model,
+                    current_scores_hash=scores_hash,
+                    current_evidence_hash=evidence_hash
                 )
-                all_analysis_results.append(result)
+                
+                # Update hashes for the next iteration
+                scores_hash = result.get("scores_hash")
+                evidence_hash = result.get("evidence_hash")
+                
+                all_analysis_results.append(result["analysis_result"])
             except Exception as e:
                 print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")
                 all_analysis_results.append({"error": str(e), "document": doc.get('filename')})
 
-        return all_analysis_results
+        return all_analysis_results, scores_hash, evidence_hash
 
 
 
