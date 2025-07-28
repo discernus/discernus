@@ -72,61 +72,71 @@ class ThinOrchestrator:
         """
         return [documents[i:i + chunk_size] for i in range(0, len(documents), chunk_size)]
 
-    def _execute_analysis_sequentially(self,
-                                   analysis_agent: EnhancedAnalysisAgent,
-                                   corpus_documents: List[Dict[str, Any]],
-                                   framework_content: str,
-                                   experiment_config: Dict[str, Any],
-                                   model: str) -> tuple[List[Dict[str, Any]], Optional[str], Optional[str]]:
+    def _execute_analysis(self, analysis_agent, corpus_documents: List[Dict[str, Any]], 
+                            framework_content: str, experiment_config: Dict[str, Any],
+                            model: str) -> List[Dict[str, Any]]:
         """
-        Executes the analysis agent for documents in chunks, passing CSV artifact hashes.
-        
-        Note: This method processes documents in chunks. API-level batching is handled by LiteLLM.
+        Execute analysis on corpus documents.
+        Each document is analyzed independently with no shared context.
         """
-        all_analysis_results = []
-        scores_hash = None
-        evidence_hash = None
-        total_docs = len(corpus_documents)
-        
-        # Split documents into chunks
-        chunk_size = 5  # Process 5 documents at a time
-        chunks = self._chunk_documents(corpus_documents, chunk_size)
-        total_chunks = len(chunks)
-        
-        print(f"\n🚀 Starting analysis of {total_docs} documents in {total_chunks} chunks...")
-        
-        for chunk_idx, chunk in enumerate(chunks, 1):
-            chunk_docs = len(chunk)
-            print(f"\n=== Processing chunk {chunk_idx}/{total_chunks} ({chunk_docs} documents) ===")
-            
-            for i, doc in enumerate(chunk):
-                doc_num = (chunk_idx - 1) * chunk_size + i + 1
-                print(f"\n--- Analyzing document {doc_num}/{total_docs}: {doc.get('filename')} ---")
-                try:
-                    # Process one document at a time
-                    result = analysis_agent.analyze_documents(
-                        framework_content=framework_content,
-                        corpus_documents=[doc],  # Single document list
-                        experiment_config=experiment_config,
-                        model=model,
-                        current_scores_hash=scores_hash,
-                        current_evidence_hash=evidence_hash
-                    )
-                    
-                    # Update hashes for the next iteration
-                    scores_hash = result.get("scores_hash", scores_hash)
-                    evidence_hash = result.get("evidence_hash", evidence_hash)
-                    
-                    # Append the nested analysis result to the list
-                    all_analysis_results.append(result["analysis_result"])
-                except Exception as e:
-                    print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")
-                    all_analysis_results.append({"error": str(e), "document": doc.get('filename')})
-            
-            print(f"\n✅ Completed chunk {chunk_idx}/{total_chunks}")
-            print(f"   Progress: {len(all_analysis_results)}/{total_docs} documents processed")
+        # Run analysis
+        analysis_results = analysis_agent.analyze_corpus(
+            framework_content=framework_content,
+            corpus_documents=corpus_documents,
+            experiment_config=experiment_config,
+            model=model
+        )
 
-        return all_analysis_results, scores_hash, evidence_hash
+        # Extract and store CSVs
+        scores_rows = ["aid," + ",".join(experiment_config["dimension_groups"]["virtues"] + 
+                                       experiment_config["dimension_groups"]["vices"])]
+        evidence_rows = ["aid,dimension,evidence,page_number"]
+
+        for result in analysis_results:
+            if "error" in result:
+                continue
+
+            # Extract CSV sections
+            analysis_text = result["analysis"]
+            try:
+                scores_csv = self._extract_csv_section(analysis_text, "DISCERNUS_SCORES_CSV_v1")
+                evidence_csv = self._extract_csv_section(analysis_text, "DISCERNUS_EVIDENCE_CSV_v1")
+                
+                # Add to aggregated CSVs (skip headers)
+                scores_rows.extend(scores_csv.split("\n")[1:])
+                evidence_rows.extend(evidence_csv.split("\n")[1:])
+            except Exception as e:
+                print(f"Failed to extract CSVs from {result['document']}: {e}")
+                continue
+
+        # Store aggregated CSVs
+        scores_csv = "\n".join(scores_rows)
+        evidence_csv = "\n".join(evidence_rows)
+
+        scores_hash = self.storage.put_artifact(
+            scores_csv.encode(),
+            {"artifact_type": "scores.csv"}
+        )
+        evidence_hash = self.storage.put_artifact(
+            evidence_csv.encode(),
+            {"artifact_type": "evidence.csv"}
+        )
+
+        return analysis_results, scores_hash, evidence_hash
+
+    def _extract_csv_section(self, text: str, section_name: str) -> str:
+        """Extract CSV section from text."""
+        start_marker = f"<<<{section_name}>>>"
+        end_marker = f"<<<END_{section_name}>>>"
+        
+        start_idx = text.find(start_marker)
+        end_idx = text.find(end_marker)
+        
+        if start_idx == -1 or end_idx == -1:
+            raise ValueError(f"CSV section {section_name} not found")
+        
+        csv_content = text[start_idx + len(start_marker):end_idx].strip()
+        return csv_content
 
     def run_experiment(self, model: str = "vertex_ai/gemini-2.5-flash", synthesis_only: bool = False) -> Dict[str, Any]:
         """
@@ -252,7 +262,7 @@ class ThinOrchestrator:
         analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
         
         # Execute analysis (in chunks)
-        all_analysis_results, scores_hash, evidence_hash = self._execute_analysis_sequentially(
+        all_analysis_results, scores_hash, evidence_hash = self._execute_analysis(
             analysis_agent,
             corpus_documents,
             framework_content,

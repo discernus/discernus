@@ -72,108 +72,71 @@ Analyze the document using the framework and output your results in the required
 Include your mathematical reasoning and calculations for each score.
 """
     
-    def analyze_documents(self, framework_content: str, corpus_documents: List[Dict[str, Any]],
-                       experiment_config: Dict[str, Any], model: str = "vertex_ai/gemini-2.5-flash",
-                       current_scores_hash: Optional[str] = None,
-                       current_evidence_hash: Optional[str] = None) -> Dict[str, Any]:
+    def analyze_document(self, framework_content: str, document: Dict[str, Any],
+                         experiment_config: Dict[str, Any], model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
         """
-        Analyze documents using framework.
-        
-        Args:
-            framework_content: Raw framework content
-            corpus_documents: List of document dictionaries
-            experiment_config: Experiment configuration
-            model: LLM model to use
-            current_scores_hash: Current scores CSV hash
-            current_evidence_hash: Current evidence CSV hash
-            
-        Returns:
-            Analysis results with CSV hashes
+        Analyze a single document using the framework.
+        Each document is processed independently with no shared context.
         """
-        # Base64 encode framework
+        # Encode inputs as base64 to prevent parsing
         framework_b64 = base64.b64encode(framework_content.encode()).decode()
-        
-        # Process one document at a time
-        document = corpus_documents[0]  # Single document list
         document_b64 = base64.b64encode(document["content"].encode()).decode()
-        
-        # Generate prompt
+
+        # Create prompt for this document only
         prompt_text = self.prompt_template.format(
-            framework=f"=== FRAMEWORK (base64 encoded) ===\n{framework_b64}\n",
-            document=f"=== DOCUMENT (base64 encoded) ===\n{document_b64}\n",
+            framework=framework_b64,
+            document=document_b64,
             artifact_id=document["hash"]
         )
-        
-        # Call LLM
-        self.audit.log_agent_event(self.agent_name, "llm_call_start", {
-            "document": document["filename"],
-            "model": model,
-            "prompt_length": len(prompt_text)
-        })
-        
+
+        # Call LLM with single document
+        print(f"\n📄 Analyzing document: {document.get('filename', 'unknown')}")
+        print(f"🔑 Document hash: {document['hash']}")
+
         response = completion(
             model=model,
             messages=[{"role": "user", "content": prompt_text}],
-            temperature=0.0,
-            max_tokens=6000
+            temperature=0.0
         )
-        
-        if not response.choices[0].message.content:
-            raise ValueError("Empty response from LLM")
-        
-        result_text = response.choices[0].message.content
-        
-        # Extract CSV sections
-        scores_csv = self._extract_csv_section(result_text, "DISCERNUS_SCORES_CSV_v1")
-        evidence_csv = self._extract_csv_section(result_text, "DISCERNUS_EVIDENCE_CSV_v1")
-        
-        # Store CSVs
-        scores_hash = self.storage.put_artifact(
-            scores_csv.encode(),
-            {"artifact_type": "intermediate_scores.csv"}
-        )
-        evidence_hash = self.storage.put_artifact(
-            evidence_csv.encode(),
-            {"artifact_type": "intermediate_evidence.csv"}
-        )
-        
-        # Store full analysis
-        analysis_hash = self.storage.put_artifact(
-            result_text.encode(),
-            {"artifact_type": "analysis_result"}
-        )
-        
+
+        if not response or not response.choices or not response.choices[0].message.content:
+            raise ValueError(f"Empty response from LLM for document: {document.get('filename')}")
+
         return {
-            "scores_hash": scores_hash,
-            "evidence_hash": evidence_hash,
-            "analysis_result": {
-                "document": document["filename"],
-                "result_hash": analysis_hash
-            }
+            "document": document.get("filename"),
+            "hash": document["hash"],
+            "analysis": response.choices[0].message.content
         }
-    
-    def _extract_csv_section(self, text: str, section_name: str) -> str:
+
+    def analyze_corpus(self, framework_content: str, corpus_documents: List[Dict[str, Any]],
+                      experiment_config: Dict[str, Any], model: str = "vertex_ai/gemini-2.5-flash") -> List[Dict[str, Any]]:
         """
-        Extract CSV section from text.
-        
-        Args:
-            text: Text containing CSV section
-            section_name: Name of CSV section
-            
-        Returns:
-            CSV content
-            
-        Raises:
-            ValueError: If CSV section not found
+        Analyze each document in the corpus independently.
+        No context is shared between documents.
         """
-        start_marker = f"<<<{section_name}>>>"
-        end_marker = f"<<<END_{section_name}>>>"
-        
-        start_idx = text.find(start_marker)
-        end_idx = text.find(end_marker)
-        
-        if start_idx == -1 or end_idx == -1:
-            raise ValueError(f"CSV section {section_name} not found")
-        
-        csv_content = text[start_idx + len(start_marker):end_idx].strip()
-        return csv_content 
+        results = []
+        total_docs = len(corpus_documents)
+
+        print(f"\n🚀 Starting analysis of {total_docs} documents...")
+
+        for i, document in enumerate(corpus_documents, 1):
+            try:
+                print(f"\n--- Document {i}/{total_docs} ---")
+                result = self.analyze_document(
+                    framework_content=framework_content,
+                    document=document,
+                    experiment_config=experiment_config,
+                    model=model
+                )
+                results.append(result)
+                print(f"✅ Analysis complete for: {document.get('filename')}")
+
+            except Exception as e:
+                print(f"❌ Analysis failed for document {document.get('filename')}: {str(e)}")
+                results.append({
+                    "document": document.get("filename"),
+                    "hash": document.get("hash"),
+                    "error": str(e)
+                })
+
+        return results 
