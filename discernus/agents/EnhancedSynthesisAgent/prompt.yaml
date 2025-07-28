@@ -14,4 +14,18 @@ template: |
   Here are the raw analysis results for your reference:
   {analysis_results}
 
-  Please provide a comprehensive synthesis of these results. 
+  Please provide a comprehensive synthesis of these results in markdown format. Your report should:
+  1. Analyze the overall patterns and trends in the scores
+  2. Identify key themes and insights from the evidence
+  3. Highlight any notable correlations or relationships
+  4. Provide specific examples to support your findings
+  5. Maintain academic rigor and avoid promotional language
+
+  Format your response as a markdown document with:
+  - Clear section headings
+  - Bullet points for key findings
+  - Specific evidence citations
+  - Statistical summaries where relevant
+  - A balanced, objective tone
+
+  Begin your report now: 

@@ -135,7 +135,8 @@ def cli():
 @click.argument('experiment_path')
 @click.option('--dry-run', is_flag=True, help='Show what would be done without executing')
 @click.option('--model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use (default: gemini-2.5-flash-lite)')
-def run(experiment_path: str, dry_run: bool, model: str):
+@click.option('--synthesis-only', is_flag=True, help='Run only synthesis phase using specified model')
+def run(experiment_path: str, dry_run: bool, model: str, synthesis_only: bool):
     """Execute experiment using THIN v2.0 direct orchestration"""
     exp_path = Path(experiment_path)
     
@@ -154,6 +155,7 @@ def run(experiment_path: str, dry_run: bool, model: str):
         click.echo(f"   Experiment: {experiment['name']}")
         click.echo(f"   Framework: {experiment['framework']}")
         click.echo(f"   Corpus files: {experiment['_corpus_file_count']}")
+        click.echo(f"   Mode: {'Synthesis only' if synthesis_only else 'Full run'}")
         return
     
     # Ensure infrastructure is running
@@ -166,11 +168,11 @@ def run(experiment_path: str, dry_run: bool, model: str):
     
     # Execute using THIN v2.0 direct orchestration
     try:
-        click.echo(f"🚀 Starting THIN v2.0 direct orchestration with {model}...")
+        click.echo(f"🚀 Starting THIN v2.0 direct orchestration with {model} ({'synthesis only' if synthesis_only else 'full run'})...")
         orchestrator = ThinOrchestrator(exp_path)
         
         # Execute the experiment with batch management for context window limits
-        result = orchestrator.run_experiment(model=model)
+        result = orchestrator.run_experiment(model=model, synthesis_only=synthesis_only)
         
         # Show completion with enhanced details
         click.echo("✅ Experiment completed successfully!")
