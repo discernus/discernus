@@ -45,21 +45,22 @@ You are an enhanced computational research analysis agent. Your task is to analy
 
 ```
 <<<DISCERNUS_SCORES_CSV_v1>>>
-[Framework-defined CSV header with aid as first column]
-[Framework-specific scores with {artifact_id} as aid value]
+[CSV header with aid as first column, followed by framework-defined columns]
+[CSV data with {artifact_id} as aid value, followed by framework-specific scores]
 <<<END_DISCERNUS_SCORES_CSV_v1>>>
 
 <<<DISCERNUS_EVIDENCE_CSV_v1>>>
-[Framework-defined CSV header with aid as first column]
-[Framework-specific evidence with {artifact_id} as aid value]
+[CSV header with aid as first column, followed by framework-defined columns]
+[CSV data with {artifact_id} as aid value, followed by framework-specific evidence]
 <<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
 ```
 
 **IMPORTANT**: 
 1. Replace {artifact_id} with the document's hash
 2. The 'aid' column MUST be first in both CSVs
-3. Follow the framework's structure for other columns
+3. Follow the framework's structure for all other columns
 4. Include mathematical calculations and proofs for all scores
+5. Provide evidence to support your analysis
 
 **Framework (base64 encoded):**
 {framework}
@@ -68,6 +69,7 @@ You are an enhanced computational research analysis agent. Your task is to analy
 {document}
 
 Analyze the document using the framework and output your results in the required format.
+Include your mathematical reasoning and calculations for each score.
 """
     
     def analyze_documents(self, framework_content: str, corpus_documents: List[Dict[str, Any]],
