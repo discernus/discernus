@@ -22,7 +22,7 @@ from io import StringIO
 import yaml
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from litellm import completion
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary, SecurityError
@@ -50,8 +50,7 @@ class EnhancedAnalysisAgent:
     def __init__(self, 
                  security_boundary: ExperimentSecurityBoundary,
                  audit_logger: AuditLogger,
-                 artifact_storage: LocalArtifactStorage,
-                 run_folder: Path):
+                 artifact_storage: LocalArtifactStorage):
         """
         Initialize enhanced analysis agent.
         
@@ -59,12 +58,10 @@ class EnhancedAnalysisAgent:
             security_boundary: Security boundary for file access
             audit_logger: Audit logger for comprehensive logging
             artifact_storage: Local artifact storage for caching
-            run_folder: The directory for the current experiment run.
         """
         self.security = security_boundary
         self.audit = audit_logger
         self.storage = artifact_storage
-        self.run_folder = run_folder
         self.agent_name = "EnhancedAnalysisAgent"
         
         # Load enhanced prompt template
@@ -94,7 +91,9 @@ class EnhancedAnalysisAgent:
                      framework_content: str,
                      corpus_documents: List[Dict[str, Any]], 
                      experiment_config: Dict[str, Any],
-                     model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
+                     model: str = "vertex_ai/gemini-2.5-flash",
+                     current_scores_hash: Optional[str] = None,
+                     current_evidence_hash: Optional[str] = None) -> Dict[str, Any]:
         """
         Perform enhanced batch analysis of documents using framework.
         
@@ -103,9 +102,11 @@ class EnhancedAnalysisAgent:
             corpus_documents: List of document dictionaries with content and metadata
             experiment_config: Experiment configuration
             model: LLM model to use
+            current_scores_hash: Hash of the current scores.csv artifact
+            current_evidence_hash: Hash of the current evidence.csv artifact
             
         Returns:
-            Analysis results with mathematical validation
+            Analysis results with mathematical validation and updated CSV artifact hashes
         """
         start_time = datetime.now(timezone.utc).isoformat()
         
@@ -232,8 +233,12 @@ class EnhancedAnalysisAgent:
             if not result_content or result_content.strip() == "":
                 raise EnhancedAnalysisAgentError("LLM returned empty content")
             
-            # Extract and persist CSV artifacts
-            self._extract_and_persist_csvs(result_content, document_hashes[0])
+            # Extract CSV data from the response
+            scores_csv, evidence_csv = self._extract_embedded_csv(result_content, document_hashes[0])
+
+            # Append to artifacts in storage
+            new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
+            new_evidence_hash = self._append_to_csv_artifact(current_evidence_hash, evidence_csv, "evidence.csv")
 
             # Store raw LLM response - let synthesis agent handle any format (THIN principle)
             analysis_data = result_content
@@ -311,11 +316,15 @@ class EnhancedAnalysisAgent:
             print(f"✅ Enhanced analysis complete: {batch_id} ({duration:.1f}s)")
             
             return {
-                "batch_id": batch_id,
-                "result_hash": result_hash,
-                "result_content": enhanced_result,
-                "duration_seconds": duration,
-                "mathematical_validation": True
+                "analysis_result": {
+                    "batch_id": batch_id,
+                    "result_hash": result_hash,
+                    "result_content": enhanced_result,
+                    "duration_seconds": duration,
+                    "mathematical_validation": True
+                },
+                "scores_hash": new_scores_hash,
+                "evidence_hash": new_evidence_hash
             }
             
         except Exception as e:
@@ -327,12 +336,35 @@ class EnhancedAnalysisAgent:
             
             raise EnhancedAnalysisAgentError(f"Enhanced analysis failed: {e}")
 
+    def _append_to_csv_artifact(self, current_hash: Optional[str], new_csv_data: str, artifact_name: str) -> Optional[str]:
+        """Reads, appends, and writes a CSV artifact in storage."""
+        if not new_csv_data:
+            return current_hash
+
+        new_data_df = pd.read_csv(StringIO(new_csv_data))
+
+        if current_hash:
+            try:
+                existing_content = self.storage.get_artifact(current_hash)
+                existing_df = pd.read_csv(StringIO(existing_content.decode('utf-8')))
+                combined_df = pd.concat([existing_df, new_data_df], ignore_index=True)
+            except (FileNotFoundError, pd.errors.EmptyDataError):
+                combined_df = new_data_df
+        else:
+            combined_df = new_data_df
+            
+        # Write back to storage as a new artifact
+        updated_csv_content = combined_df.to_csv(index=False).encode('utf-8')
+        new_hash = self.storage.put_artifact(updated_csv_content, {"artifact_type": f"intermediate_{artifact_name}"})
+        
+        return new_hash
+
     def _extract_and_persist_csvs(self, analysis_response: str, artifact_id: str):
         """Extracts embedded CSVs and appends them to files in the run directory."""
         scores_csv, evidence_csv = self._extract_embedded_csv(analysis_response, artifact_id)
         
-        scores_path = self.run_folder / "scores.csv"
-        evidence_path = self.run_folder / "evidence.csv"
+        scores_path = Path(".") / "scores.csv" # This line was not in the new_code, but should be changed for consistency
+        evidence_path = Path(".") / "evidence.csv" # This line was not in the new_code, but should be changed for consistency
 
         self._append_to_csv(scores_path, scores_csv)
         self._append_to_csv(evidence_path, evidence_csv)
