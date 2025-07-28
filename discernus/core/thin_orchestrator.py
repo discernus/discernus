@@ -63,12 +63,13 @@ class ThinOrchestrator:
         
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
         
-    def run_experiment(self, model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
+    def run_experiment(self, model: str = "vertex_ai/gemini-2.5-flash", synthesis_only: bool = False) -> Dict[str, Any]:
         """
         Execute complete experiment using THIN v2.0 direct call coordination.
         
         Args:
             model: LLM model to use for analysis and synthesis
+            synthesis_only: If True, skip analysis phase and run only synthesis with specified model
             
         Returns:
             Complete experiment results with provenance
@@ -98,6 +99,7 @@ class ThinOrchestrator:
                 "experiment_path": str(self.experiment_path),
                 "run_folder": str(run_folder),
                 "model": model,
+                "synthesis_only": synthesis_only,
                 "architecture": "thin_v2.0_direct_calls"
             })
             
@@ -146,7 +148,99 @@ class ThinOrchestrator:
                 "corpus_documents": len(corpus_documents),
                 "total_input_artifacts": len(corpus_hashes) + 1
             })
+
+            if synthesis_only:
+                # Find latest run with complete analysis
+                shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
+                if not shared_cache_dir.exists():
+                    raise ThinOrchestratorError("No shared cache found for synthesis-only mode")
+                
+                # Create results directory for new run
+                results_dir = run_folder / "results"
+                self.security.secure_mkdir(results_dir)
+                
+                # Load artifact registry to find CSVs
+                registry_file = shared_cache_dir / "artifact_registry.json"
+                if not registry_file.exists():
+                    raise ThinOrchestratorError("Artifact registry not found")
+                
+                import json
+                with open(registry_file) as f:
+                    registry = json.load(f)
+                
+                # Find latest scores and evidence CSVs
+                scores_hash = None
+                evidence_hash = None
+                latest_scores_time = None
+                latest_evidence_time = None
+                
+                for artifact_id, info in registry.items():
+                    artifact_type = info.get("metadata", {}).get("artifact_type")
+                    if artifact_type == "intermediate_scores.csv":
+                        timestamp = info["created_at"]
+                        if not latest_scores_time or timestamp > latest_scores_time:
+                            latest_scores_time = timestamp
+                            scores_hash = artifact_id
+                    elif artifact_type == "intermediate_evidence.csv":
+                        timestamp = info["created_at"]
+                        if not latest_evidence_time or timestamp > latest_evidence_time:
+                            latest_evidence_time = timestamp
+                            evidence_hash = artifact_id
+                
+                if not (scores_hash and evidence_hash):
+                    raise ThinOrchestratorError("Required CSV artifacts not found in registry")
+                
+                # Copy CSV files to new run
+                import shutil
+                shutil.copy2(shared_cache_dir / scores_hash, results_dir / "scores.csv")
+                shutil.copy2(shared_cache_dir / evidence_hash, results_dir / "evidence.csv")
+                
+                print(f"📊 Using existing analysis from shared cache")
+                print(f"   - Scores: {scores_hash[:8]}... ({latest_scores_time})")
+                print(f"   - Evidence: {evidence_hash[:8]}... ({latest_evidence_time})")
+                
+                # Run synthesis only
+                synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
+                synthesis_result = synthesis_agent.synthesize_results(
+                    scores_hash=scores_hash,
+                    evidence_hash=evidence_hash,
+                    analysis_results=[],  # No analysis results in synthesis-only mode
+                    experiment_config=experiment_config,
+                    model=model
+                )
+                
+                if not synthesis_result or not isinstance(synthesis_result, dict):
+                    raise ThinOrchestratorError(f"Invalid synthesis result format: {type(synthesis_result)}")
+                
+                if "synthesis_report_markdown" not in synthesis_result:
+                    raise ThinOrchestratorError("Missing synthesis_report_markdown in result")
+                
+                # Generate final report
+                final_report = synthesis_result["synthesis_report_markdown"]
+                
+                # Save final report
+                with open(results_dir / "final_report.md", "w") as f:
+                    f.write(final_report)
+                
+                # Update manifest
+                end_time = datetime.now(timezone.utc).isoformat()
+                manifest.add_execution_stage(
+                    stage_name="synthesis",
+                    agent_name="EnhancedSynthesisAgent",
+                    start_time=start_time,
+                    end_time=end_time,
+                    status="completed",
+                    metadata={"model": model}
+                )
+                manifest.finalize_manifest()
+                
+                return {
+                    "run_id": run_timestamp,
+                    "status": "completed",
+                    "duration": self._calculate_duration(start_time, end_time)
+                }
             
+            # Normal full run - continue with analysis phase
             # Phase 1: Batch Planning and Enhanced Analysis with Context Window Management
             # CONTEXT_WINDOW_MANAGEMENT: This entire section can be removed when LLM context windows become unlimited
             batch_planning_start_time = datetime.now(timezone.utc).isoformat()

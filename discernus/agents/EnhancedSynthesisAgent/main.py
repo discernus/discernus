@@ -110,28 +110,40 @@ class EnhancedSynthesisAgent:
         print(f"DEBUG: Received scores_hash={scores_hash} and evidence_hash={evidence_hash}")
 
         try:
-            # Check if synthesis result is already cached (THIN perfect caching)
-            for artifact_hash, artifact_info in self.storage.registry.items():
-                if (artifact_info.get("metadata", {}).get("artifact_type") == "synthesis_result" and
-                    artifact_info.get("metadata", {}).get("synthesis_id") == synthesis_id):
-                    
-                    # Cache hit! Return the cached synthesis result
-                    print(f"💾 Cache hit for synthesis: {synthesis_id}")
-                    cached_content = self.storage.get_artifact(artifact_hash)
-                    cached_result = json.loads(cached_content.decode('utf-8'))
-                    
-                    self.audit.log_agent_event(self.agent_name, "cache_hit", {
-                        "synthesis_id": synthesis_id,
-                        "cached_artifact_hash": artifact_hash
-                    })
-                    
-                    return {
-                        "result_hash": artifact_hash,
-                        "duration_seconds": 0.0,  # Instant cache hit
-                        "synthesis_confidence": "cached",
-                        "synthesis_report_markdown": cached_result.get("synthesis_report_markdown", "")
-                    }
-            
+            try:
+                # Check if synthesis result is already cached (THIN perfect caching)
+                for artifact_hash, artifact_info in self.storage.registry.items():
+                    if (artifact_info.get("metadata", {}).get("artifact_type") == "synthesis_result" and
+                        artifact_info.get("metadata", {}).get("synthesis_id") == synthesis_id):
+                        
+                        # Cache hit! Return the cached synthesis result
+                        print(f"💾 Cache hit for synthesis: {synthesis_id}")
+                        cached_content = self.storage.get_artifact(artifact_hash)
+                        cached_result = json.loads(cached_content.decode('utf-8'))
+                        
+                        self.audit.log_agent_event(self.agent_name, "cache_hit", {
+                            "synthesis_id": synthesis_id,
+                            "cached_artifact_hash": artifact_hash
+                        })
+                        
+                        if not cached_result or not isinstance(cached_result, dict):
+                            print(f"⚠️  Invalid cached result format: {type(cached_result)}")
+                            raise EnhancedSynthesisAgentError("Invalid cached result format")
+                        
+                        if "synthesis_report_markdown" not in cached_result:
+                            print(f"⚠️  Missing synthesis_report_markdown in cached result")
+                            raise EnhancedSynthesisAgentError("Missing synthesis_report_markdown in cached result")
+                        
+                        return {
+                            "result_hash": artifact_hash,
+                            "duration_seconds": 0.0,  # Instant cache hit
+                            "synthesis_confidence": "cached",
+                            "synthesis_report_markdown": cached_result.get("synthesis_report_markdown", "")
+                        }
+            except Exception as e:
+                print(f"⚠️  Error checking cache: {e}")
+                # Continue with synthesis
+                
             # No cache hit - proceed with synthesis
             print(f"🔍 No cache hit for {synthesis_id} - performing synthesis...")
             
@@ -180,6 +192,12 @@ class EnhancedSynthesisAgent:
                     {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"}
                 ]
             )
+            
+            if not response or not response.choices:
+                raise EnhancedSynthesisAgentError("LLM returned empty response")
+            
+            if not response.choices[0] or not response.choices[0].message:
+                raise EnhancedSynthesisAgentError("LLM response missing message")
             
             synthesis_content = response.choices[0].message.content
             
