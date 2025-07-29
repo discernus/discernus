@@ -76,7 +76,7 @@ Authentic cultural values versus cosmopolitan alternatives
   "analysis_variants": {
     "default": {
       "description": "Complete salience-enhanced contemporary populist assessment across six dimensions with embedded CSV output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst specializing in contemporary populist political communication and democratic mobilization strategies. Phase 2: Framework Methodology: Your task is to analyze the provided text using the Populist Rhetoric Module (PRM) v5.0. This temporal module captures era-specific populist communication patterns (2010s-2020s) with salience weighting to reveal strategic emphasis. Phase 3: Operational Definitions: The framework evaluates 6 dimensions: People vs Elite Framing (conflict between ordinary people and a privileged elite), Authentic Representation Claims (representing genuine popular will), Anti-System Mobilization (mobilizing against existing political systems), Direct Democracy Appeals (emphasizing direct popular sovereignty), Common Sense vs Expertise (privileging popular wisdom over professional expertise), and Cultural Authenticity Claims (appealing to authentic cultural values). Phase 4: Scoring Protocol: For each dimension, score its intensity from 0.0 to 1.0. Also, assess its salience from 0.0 to 1.0, reflecting its rhetorical prominence. Provide the strongest 1-2 quotes as evidence. Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must contain columns for each dimension's score, each calculated index, and each dimension's salience score. The evidence CSV must have columns for dimension, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst specializing in contemporary populist political communication and democratic mobilization strategies. Phase 2: Framework Methodology: Your task is to analyze the provided text using the Populist Rhetoric Module (PRM) v5.0. This temporal module captures era-specific populist communication patterns (2010s-2020s) with salience weighting to reveal strategic emphasis. Phase 3: Operational Definitions: The framework evaluates 6 dimensions: People vs Elite Framing (conflict between ordinary people and a privileged elite), Authentic Representation Claims (representing genuine popular will), Anti-System Mobilization (mobilizing against existing political systems), Direct Democracy Appeals (emphasizing direct popular sovereignty), Common Sense vs Expertise (privileging popular wisdom over professional expertise), and Cultural Authenticity Claims (appealing to authentic cultural values). Phase 4: Scoring Protocol: For each dimension, score its intensity from 0.0 to 1.0. Also, assess its salience from 0.0 to 1.0, reflecting its rhetorical prominence. Provide the strongest 1-2 quotes as evidence. Calculate the three indices: core populist appeal score, populist mobilization score, and populist rhetoric index. Phase 5: Framework-Specific CSV Structure: Your scores CSV must contain exactly 16 columns in this order: aid, people_vs_elite_framing, authentic_representation_claims, anti_system_mobilization, direct_democracy_appeals, common_sense_vs_expertise, cultural_authenticity_claims, people_vs_elite_framing_salience, authentic_representation_claims_salience, anti_system_mobilization_salience, direct_democracy_appeals_salience, common_sense_vs_expertise_salience, cultural_authenticity_claims_salience, core_populist_appeal_score, populist_mobilization_score, populist_rhetoric_index. Your evidence CSV must contain exactly 6 columns: aid, dimension, quote_id, quote_text, confidence_score, context_type. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis AND the embedded CSV segments using the exact delimiters and column structures specified in the output_contract."
     }
   },
   "dimension_groups": {
@@ -109,15 +109,31 @@ Authentic cultural values versus cosmopolitan alternatives
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores and calculated metrics."
+        "description": "CSV for all dimensional scores, salience scores, and calculated metrics.",
+        "columns": [
+          "aid",
+          "people_vs_elite_framing", "authentic_representation_claims", "anti_system_mobilization",
+          "direct_democracy_appeals", "common_sense_vs_expertise", "cultural_authenticity_claims",
+          "people_vs_elite_framing_salience", "authentic_representation_claims_salience", "anti_system_mobilization_salience",
+          "direct_democracy_appeals_salience", "common_sense_vs_expertise_salience", "cultural_authenticity_claims_salience",
+          "core_populist_appeal_score", "populist_mobilization_score", "populist_rhetoric_index"
+        ]
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication."
+        "description": "CSV for structured evidence data for audit and replication.",
+        "columns": [
+          "aid",
+          "dimension",
+          "quote_id",
+          "quote_text",
+          "confidence_score",
+          "context_type"
+        ]
       }
     },
-    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The salience_ranking should be an ordered array of objects, each containing 'dimension', 'salience_score', and 'rank'."
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The salience_ranking should be an ordered array of objects, each containing 'dimension', 'salience_score', and 'rank'. The scores CSV must include exactly 16 columns: aid + 6 dimension scores + 6 salience scores + 3 calculated indices. The evidence CSV must include exactly 6 columns: aid + dimension + quote_id + quote_text + confidence_score + context_type."
   }
 }
 ```
