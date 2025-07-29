@@ -206,14 +206,19 @@ class ThinOrchestrator:
                       analysis_model: str = "vertex_ai/gemini-2.5-flash-lite",
                       synthesis_model: str = "vertex_ai/gemini-2.5-pro",
                       synthesis_only: bool = False,
+                      analysis_only: bool = False,
+                      resume_stage: Optional[str] = None,
                       use_thin_synthesis: bool = True) -> Dict[str, Any]:
         """
-        Run experiment with enhanced agents and mathematical validation.
+        Run experiment with enhanced agents and stage control for targeted debugging.
         
         Args:
             analysis_model: LLM model to use for analysis
             synthesis_model: LLM model to use for synthesis
             synthesis_only: If True, skip analysis and run synthesis on existing CSVs
+            analysis_only: If True, run only analysis phase and save artifacts
+            resume_stage: Resume at specific THIN synthesis sub-stage ('thin-gen', 'thin-exec', 'thin-cure', 'thin-interp')
+            use_thin_synthesis: Whether to use THIN synthesis pipeline
             
         Returns:
             Experiment results with mathematical validation
@@ -293,6 +298,79 @@ class ThinOrchestrator:
                 "total_input_artifacts": len(corpus_hashes) + 1
             })
 
+            # Handle analysis-only mode: run analysis and exit early
+            if analysis_only:
+                print("🔍 Analysis-only mode: Running analysis and saving artifacts for later synthesis...")
+                
+                # Execute analysis phase
+                analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
+                all_analysis_results, scores_hash, evidence_hash = self._execute_analysis_sequentially(
+                    analysis_agent,
+                    corpus_documents,
+                    framework_content,
+                    experiment_config,
+                    analysis_model
+                )
+                
+                # Check if analysis succeeded
+                successful_analyses = [res for res in all_analysis_results if res.get('result_hash')]
+                if not successful_analyses:
+                    raise ThinOrchestratorError("Analysis failed. No artifacts saved.")
+                
+                # Create results directory and save artifact references
+                results_dir = run_folder / "results"
+                self.security.secure_mkdir(results_dir)
+                
+                analysis_summary = {
+                    "mode": "analysis_only",
+                    "scores_hash": scores_hash,
+                    "evidence_hash": evidence_hash,
+                    "analysis_results_count": len(successful_analyses),
+                    "available_for_synthesis": True
+                }
+                
+                with open(results_dir / "analysis_summary.json", "w") as f:
+                    json.dump(analysis_summary, f, indent=2)
+                
+                print(f"✅ Analysis completed - artifacts saved for synthesis:")
+                print(f"   - Scores: {scores_hash[:12]}...")
+                print(f"   - Evidence: {evidence_hash[:12]}...")
+                print(f"   - Ready for: discernus run --synthesis-only or --stage commands")
+                
+                # Update manifest and return
+                end_time = datetime.now(timezone.utc).isoformat()
+                manifest.add_execution_stage(
+                    stage_name="analysis",
+                    agent_name="EnhancedAnalysisAgent", 
+                    start_time=start_time,
+                    end_time=end_time,
+                    status="completed",
+                    metadata={"model": analysis_model, "mode": "analysis_only"}
+                )
+                manifest.finalize_manifest()
+                
+                return {
+                    "run_id": run_timestamp,
+                    "status": "analysis_completed",
+                    "scores_hash": scores_hash,
+                    "evidence_hash": evidence_hash,
+                    "duration": self._calculate_duration(start_time, end_time)
+                }
+            
+            # Handle resume from specific THIN synthesis stage
+            if resume_stage:
+                print(f"⏩ Resume mode: Starting from THIN synthesis stage '{resume_stage}'...")
+                
+                # Validate that we can resume (artifacts exist)
+                shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts" 
+                if not shared_cache_dir.exists():
+                    raise ThinOrchestratorError(f"No shared cache found for resume mode. Run analysis first.")
+                
+                # TODO: Add stage-specific artifact validation and resumption logic
+                # For now, fall back to synthesis_only behavior for stages
+                print(f"⚠️  Stage-specific resumption not yet implemented. Using full synthesis...")
+                synthesis_only = True  # Temporary fallback
+
             if synthesis_only:
                 # Find latest run with complete analysis
                 shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
@@ -308,7 +386,6 @@ class ThinOrchestrator:
                 if not registry_file.exists():
                     raise ThinOrchestratorError("Artifact registry not found")
                 
-                import json
                 with open(registry_file) as f:
                     registry = json.load(f)
                 
