@@ -30,43 +30,6 @@ Your response must include:
 - Two embedded CSV segments (with the exact delimiters as shown) for dimensional scores and structured evidence.
 - In the CSVs, use `{artifact_id}` as the aid for this text.
 
-**OUTPUT CONTRACT (summarized):**  
-- worldviews: concise summary.
-- scores: {dimension: {intensity, salience, ...}}
-- evidence: key quotes mapped to each dimension.
-- reasoning: a short narrative making sense of the scoring/evidence.
-- salience_ranking: list ranking each dimension by salience.
-- character_clusters: groupings or trends seen in the assessment.
-
-**EXACT CSV SNIPPETS:**  
-1.  
-<<<DISCERNUS_SCORES_CSV_v1>>>  
-aid,dignity,truth,justice,hope,pragmatism,tribalism,manipulation,resentment,fear,fantasy,dignity_salience,truth_salience,justice_salience,hope_salience,pragmatism_salience,tribalism_salience,manipulation_salience,resentment_salience,fear_salience,fantasy_salience,dignity_tribalism_tension,truth_manipulation_tension,justice_resentment_tension,hope_fear_tension,pragmatism_fantasy_tension,mc_sci  
-{artifact_id},{scores...}  
-<<<END_DISCERNUS_SCORES_CSV_v1>>>  
-
-2.  
-<<<DISCERNUS_EVIDENCE_CSV_v1>>>  
-aid,dimension,quote_id,quote_text,context_type  
-{artifact_id},{dimension_name},{quote_number},{quote_text},{context_type}  
-<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>  
-
-**ASSESS THIS TEXT:**  
-[Insert included full Donald J. Trump March 4, 2025, Congress address here]
-
-**INSTRUCTIONS:**  
-- Work step by step.  
-- Score and evidence each dimension, referencing the framework definitions.  
-- Use only the supplied evidence/text (do NOT draw on knowledge outside the text except to clarify meaning).
-- Output must conform to the JSON schema and include the two CSVs using the required delimiters.
-- Do not include any introductory or concluding commentary: output only the JSON and the two CSVs in order.
-
-
-
-The text below includes a JSON framework for evaluating rhetoric and a text for you to score and evaluate. Study the framework JSON to learn how your should score and evaluate the text, score and evaluate the text provided.
-
-========BEGIN FRAMEWORK JSON==========
-
 {
   "name": "character_assessment_framework",
   "version": "v5.0",
@@ -142,10 +105,7 @@ The text below includes a JSON framework for evaluating rhetoric and a text for 
   }
 }
 
-
-========END FRAMEWORK JSON==========
-
-========BEGIN RHETORIC TEXT FOR EVALUATION==========
+**ASSESS THIS TEXT:**  
 
 Donald J. Trump
 Address to Joint Session of Congress
@@ -394,4 +354,3 @@ We are going to create the highest quality of life, build the safest and wealthi
 
 And through it all, we are going to rediscover the unstoppable power of the American spirit. And we are going to renew unlimited promise of the American dream. Every single day we will stand up and we will fight, fight, fight for the country our citizens believe in and for the country our people deserve. My fellow Americans, get ready for an incredible future, because the golden Age of America has only just begun. It will be like nothing that has ever been seen before. Thank you. God bless you and God bless America.
 
-========END RHETORIC TEXT FOR EVALUATION==========

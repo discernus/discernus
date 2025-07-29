@@ -89,9 +89,9 @@ class CodeSecurityChecker:
                 # Computational rhetoric toolkit
                 'vaderSentiment', 'vaderSentiment.vaderSentiment',
                 
-                # General utilities
+                # General utilities and Python standard library
                 'json', 'csv', 'datetime', 'collections', 'itertools',
-                'functools', 'operator', 'heapq', 'bisect', 'copy'
+                'functools', 'operator', 'heapq', 'bisect', 'copy', 'warnings'
             }
     
     def check_code_safety(self, code: str) -> Tuple[bool, List[str]]:
@@ -205,8 +205,15 @@ class SecureCodeExecutor:
         context_setup = ""
         if context:
             for key, value in context.items():
-                # Serialize context variables safely using repr to avoid JSON escaping issues
-                context_setup += f"    {key} = {repr(value)}\n"
+                # Handle pandas DataFrames specially to preserve object structure
+                if hasattr(value, 'to_json') and hasattr(value, 'columns'):  # pandas DataFrame
+                    # Inject DataFrame as reconstructed object using pd.DataFrame constructor
+                    json_data = value.to_json(orient='records')
+                    context_setup += f"    {key} = pd.DataFrame(json.loads({repr(json_data)}))\n"
+                else:
+                    # Skip pandas/numpy module objects - they're already imported in safe_imports
+                    if str(type(value)) not in ['<class \'module\'>', '<module \'pandas\'>', '<module \'numpy\'>']:
+                        context_setup += f"    {key} = {repr(value)}\n"
         
         # Wrap code with resource monitoring
         wrapped_code = f"""
@@ -291,29 +298,32 @@ import operator
 import random
 from decimal import Decimal
 
-# Data science libraries (if available)
+# Data science libraries (core required, visualization optional)
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+
+# Optional visualization libraries
 try:
-    import numpy as np
-    import pandas as pd
     import matplotlib.pyplot as plt
     import seaborn as sns
-    import scipy.stats as stats
-    from scipy import optimize
     import plotly.graph_objects as go
     import plotly.express as px
+    from scipy import optimize
 except ImportError:
-    # Create mock objects for unavailable libraries
-    class MockLibrary:
+    # Create stubs for unavailable visualization libraries
+    class MockVizLibrary:
         def __getattr__(self, name):
             def mock_function(*args, **kwargs):
-                return f"[MOCK] {name} function called - library not available"
+                print(f"Note: {name} unavailable - visualization skipped")
+                return None
             return mock_function
     
-    np = MockLibrary()
-    pd = MockLibrary()
-    plt = MockLibrary()
-    sns = MockLibrary()
-    stats = MockLibrary()
+    plt = MockVizLibrary()
+    sns = MockVizLibrary()
+    go = MockVizLibrary()
+    px = MockVizLibrary()
+    optimize = MockVizLibrary()
 
 # Safe text analysis
 try:
@@ -323,8 +333,8 @@ try:
     from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
     vader_analyzer = SentimentIntensityAnalyzer()
 except ImportError:
-    textstat = MockLibrary()
-    textblob = MockLibrary()
+    textstat = MockVizLibrary()
+    textblob = MockVizLibrary()
     Counter = dict  # Fallback to basic dict
     
     # Create mock VADER analyzer
