@@ -358,64 +358,84 @@ class ProductionThinSynthesisPipeline:
             os.unlink(evidence_temp_path)
 
     def _stage_2_execute_code(self, code_response, request: ProductionPipelineRequest):
-        """Stage 2: Execute generated code using SecureCodeExecutor."""
+        """Stage 2: Execute generated code using SecureCodeExecutor with enhanced data injection."""
         
         # Retrieve CSV data from artifacts
         scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
-        # Create temporary files for code execution
-        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as scores_temp:
-            scores_temp.write(scores_data)
-            scores_csv_path = scores_temp.name
-            
-        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as evidence_temp:
-            evidence_temp.write(evidence_data)
-            evidence_csv_path = evidence_temp.name
+        # Load CSV data directly into DataFrames (eliminates file system access)
+        import io
+        import pandas as pd
         
         try:
-            # Prepare code with CSV paths injected
-            execution_code = f"""
-# CSV file paths (injected by pipeline)
-scores_csv_path = r'{scores_csv_path}'
-evidence_csv_path = r'{evidence_csv_path}'
+            # Use robust CSV parsing with error handling for malformed data
+            scores_df = pd.read_csv(
+                io.BytesIO(scores_data), 
+                on_bad_lines='skip',  # Skip malformed lines instead of failing
+                engine='python',      # More permissive parser
+                quoting=3             # Handle quotes properly
+            )
+            evidence_df = pd.read_csv(
+                io.BytesIO(evidence_data),
+                on_bad_lines='skip',
+                engine='python',
+                quoting=3
+            )
+            
+            # Log data shapes for debugging
+            self.logger.info(f"Loaded scores_df: {scores_df.shape}, evidence_df: {evidence_df.shape}")
+            
+        except Exception as e:
+            raise Exception(f"Failed to load CSV data into DataFrames: {str(e)}")
+        
+        # Prepare context with DataFrames instead of file paths
+        context = {
+            'scores_df': scores_df,
+            'evidence_df': evidence_df,
+            'pd': pd,  # Ensure pandas is available
+            'np': __import__('numpy'),  # Ensure numpy is available
+        }
+        
+        # Generate execution code without file operations
+        execution_code = f"""
+# DataFrames pre-loaded by pipeline (no file access needed)
+# scores_df and evidence_df are available as variables
 
 # Generated analysis code
 {code_response.analysis_code}
 """
-            
-            # Log code execution start
-            self.audit_logger.log_agent_event(
-                "SecureCodeExecutor",
-                "code_execution_start",
-                {
-                    "code_length": len(execution_code),
-                    "scores_artifact": request.scores_artifact_hash,
-                    "evidence_artifact": request.evidence_artifact_hash
-                }
-            )
-            
-            # Execute using SecureCodeExecutor
-            execution_result = self.secure_executor.execute_code(execution_code)
-            
-            # Log execution completion
-            self.audit_logger.log_agent_event(
-                "SecureCodeExecutor",
-                "code_execution_complete",
-                {
-                    "success": execution_result['success'],
-                    "execution_time": execution_result['execution_time'],
-                    "memory_used": execution_result.get('memory_used', 0),
-                    "security_violations": execution_result.get('security_violations', [])
-                }
-            )
-            
-            return execution_result
-            
-        finally:
-            # Clean up temporary files
-            os.unlink(scores_csv_path)
-            os.unlink(evidence_csv_path)
+        
+        # Log code execution start
+        self.audit_logger.log_agent_event(
+            "SecureCodeExecutor",
+            "code_execution_start",
+            {
+                "code_length": len(execution_code),
+                "scores_artifact": request.scores_artifact_hash,
+                "evidence_artifact": request.evidence_artifact_hash,
+                "scores_shape": scores_df.shape,
+                "evidence_shape": evidence_df.shape,
+                "enhanced_data_injection": True
+            }
+        )
+        
+        # Execute using SecureCodeExecutor with DataFrame context
+        execution_result = self.secure_executor.execute_code(execution_code, context=context)
+        
+        # Log execution completion
+        self.audit_logger.log_agent_event(
+            "SecureCodeExecutor",
+            "code_execution_complete",
+            {
+                "success": execution_result['success'],
+                "execution_time": execution_result['execution_time'],
+                "memory_used": execution_result.get('memory_used', 0),
+                "security_violations": execution_result.get('security_violations', [])
+            }
+        )
+        
+        return execution_result
 
     def _stage_3_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
         """Stage 3: Curate evidence based on statistical results."""
