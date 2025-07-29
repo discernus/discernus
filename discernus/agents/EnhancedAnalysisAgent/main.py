@@ -110,11 +110,25 @@ class EnhancedAnalysisAgent:
         """
         start_time = datetime.now(timezone.utc).isoformat()
         
+        # Calculate framework hash for provenance tracking (Issue #208)
+        framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+        
+        # Calculate corpus hash for complete provenance
+        corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
+        corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
+        
+        # Store provenance context for artifact metadata
+        self.analysis_provenance = {
+            "framework_hash": framework_hash,
+            "corpus_hash": corpus_hash,
+            "analysis_model": model,
+            "analysis_timestamp": start_time,
+            "agent_name": self.agent_name
+        }
+        
         # Create deterministic batch_id for perfect caching (THIN principle)
         # Hash based on framework + document contents only, not timestamp
-        doc_content_hash = hashlib.sha256(
-            ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents]).encode()
-        ).hexdigest()[:16]
+        doc_content_hash = hashlib.sha256(corpus_content.encode()).hexdigest()[:16]
         batch_id = f"batch_{hashlib.sha256(f'{framework_content}{doc_content_hash}'.encode()).hexdigest()[:12]}"
         
         self.audit.log_agent_event(self.agent_name, "batch_analysis_start", {
@@ -408,7 +422,19 @@ class EnhancedAnalysisAgent:
             
         # Write back to storage as a new artifact
         updated_csv_content = '\n'.join(combined_lines).encode('utf-8')
-        new_hash = self.storage.put_artifact(updated_csv_content, {"artifact_type": f"intermediate_{artifact_name}"})
+        
+        # Include comprehensive provenance metadata (Issue #208 fix)
+        metadata = {
+            "artifact_type": f"intermediate_{artifact_name}",
+            "framework_hash": self.analysis_provenance["framework_hash"],
+            "corpus_hash": self.analysis_provenance["corpus_hash"], 
+            "analysis_model": self.analysis_provenance["analysis_model"],
+            "analysis_timestamp": self.analysis_provenance["analysis_timestamp"],
+            "agent_name": self.analysis_provenance["agent_name"],
+            "original_filename": f"{artifact_name}"
+        }
+        
+        new_hash = self.storage.put_artifact(updated_csv_content, metadata)
         
         return new_hash
 

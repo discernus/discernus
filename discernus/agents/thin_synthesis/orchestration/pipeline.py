@@ -52,6 +52,11 @@ class ProductionPipelineRequest:
     max_evidence_per_finding: int = 3
     min_confidence_threshold: float = 0.7
     interpretation_focus: str = "comprehensive"
+    
+    # Provenance context (Issue #208 fix)
+    framework_hash: Optional[str] = None
+    corpus_hash: Optional[str] = None
+    framework_name: Optional[str] = None
 
 @dataclass
 class ProductionPipelineResponse:
@@ -158,9 +163,24 @@ class ProductionThinSynthesisPipeline:
                 "framework_spec_preview": request.framework_spec[:200] + "..." if len(request.framework_spec) > 200 else request.framework_spec,
                 "scores_artifact": request.scores_artifact_hash,
                 "evidence_artifact": request.evidence_artifact_hash,
-                "experiment_context": request.experiment_context
+                "experiment_context": request.experiment_context,
+                # Add provenance context logging (Issue #208 fix)
+                "framework_hash": request.framework_hash[:12] + "..." if request.framework_hash else "MISSING",
+                "corpus_hash": request.corpus_hash[:12] + "..." if request.corpus_hash else "MISSING",
+                "framework_name": request.framework_name,
+                "provenance_validated": bool(request.framework_hash and request.corpus_hash)
             }
         )
+        
+        # Log provenance context for debugging
+        if request.framework_hash and request.corpus_hash:
+            self.logger.info(f"🔍 Synthesis provenance validated:")
+            self.logger.info(f"   - Framework: {request.framework_name} ({request.framework_hash[:12]}...)")
+            self.logger.info(f"   - Corpus: {request.corpus_hash[:12]}...")
+            self.logger.info(f"   - Scores artifact: {request.scores_artifact_hash[:12]}...")
+            self.logger.info(f"   - Evidence artifact: {request.evidence_artifact_hash[:12]}...")
+        else:
+            self.logger.warning("⚠️  Missing provenance context - synthesis agents operating blind!")
         
         try:
             self.logger.info("🚀 Starting Production THIN Synthesis Pipeline")
