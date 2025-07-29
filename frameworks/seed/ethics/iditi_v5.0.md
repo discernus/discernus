@@ -47,7 +47,7 @@ Prioritizes group dominance, loyalty, or identity over individual agency. Often 
   "analysis_variants": {
     "default": {
       "description": "Complete analysis of the dignity vs. tribalism axis with embedded CSV output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst of political and ethical discourse. Phase 2: Framework Methodology: Your task is to analyze the text using the IDITI v5.0 framework. Phase 3: Operational Definitions: Evaluate two dimensions: Dignity (affirming universal human worth) and Tribalism (prioritizing group identity). Phase 4: Scoring Protocol: Score each dimension from 0.0 to 1.0 and provide the strongest 1-2 quotes as evidence. Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must have columns for dignity and tribalism scores. The evidence CSV must have columns for dimension, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst of political and ethical discourse. Phase 2: Framework Methodology: Your task is to analyze the text using the IDITI v5.0 framework. Phase 3: Operational Definitions: Evaluate two dimensions: Dignity (affirming universal human worth) and Tribalism (prioritizing group identity). Phase 4: Scoring Protocol: Score each dimension from 0.0 to 1.0 and provide the strongest 1-2 quotes as evidence. Calculate the identity axis score (dignity - tribalism). Phase 5: Framework-Specific CSV Structure: Your scores CSV must contain exactly 4 columns in this order: aid, dignity, tribalism, identity_axis_score. Your evidence CSV must contain exactly 6 columns: aid, dimension, quote_id, quote_text, confidence_score, context_type. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis AND the embedded CSV segments using the exact delimiters and column structures specified in the output_contract."
     }
   },
   "dimension_groups": {
@@ -76,15 +76,29 @@ Prioritizes group dominance, loyalty, or identity over individual agency. Often 
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores."
+        "description": "CSV for all dimensional scores and identity axis calculation.",
+        "columns": [
+          "aid",
+          "dignity",
+          "tribalism",
+          "identity_axis_score"
+        ]
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication."
+        "description": "CSV for structured evidence data for audit and replication.",
+        "columns": [
+          "aid",
+          "dimension",
+          "quote_id",
+          "quote_text",
+          "confidence_score",
+          "context_type"
+        ]
       }
     },
-    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified."
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The scores CSV must include exactly 4 columns: aid + dignity + tribalism + identity_axis_score. The evidence CSV must include exactly 6 columns: aid + dimension + quote_id + quote_text + confidence_score + context_type."
   }
 }
 ```
