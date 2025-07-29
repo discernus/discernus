@@ -311,13 +311,46 @@ class ProductionThinSynthesisPipeline:
             )
 
     def _stage_1_generate_code(self, request: ProductionPipelineRequest):
-        """Stage 1: Generate analysis code using artifacts."""
+        """Stage 1: Generate analysis code using artifacts with actual data structure."""
         
         # Retrieve CSV data from artifacts to analyze structure
         scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
-        # Write to temporary files for structure analysis
+        # Load actual data to show LLM real structure
+        import io
+        import pandas as pd
+        
+        try:
+            # Load actual DataFrames to understand real structure
+            scores_df = pd.read_csv(
+                io.BytesIO(scores_data),
+                on_bad_lines='skip',
+                engine='python', 
+                quoting=3
+            )
+            evidence_df = pd.read_csv(
+                io.BytesIO(evidence_data),
+                on_bad_lines='skip',
+                engine='python',
+                quoting=3  
+            )
+            
+            # Create samples for LLM to understand actual structure
+            scores_sample = scores_df.head(3).to_dict('records') if len(scores_df) > 0 else []
+            evidence_sample = evidence_df.head(5).to_dict('records') if len(evidence_df) > 0 else []
+            available_columns = list(scores_df.columns)
+            
+            self.logger.info(f"Data-informed generation: scores_df {scores_df.shape}, evidence_df {evidence_df.shape}")
+            self.logger.info(f"Available columns: {available_columns}")
+            
+        except Exception as e:
+            self.logger.warning(f"Failed to load actual data structure: {str(e)}")
+            scores_sample = []
+            evidence_sample = []
+            available_columns = []
+        
+        # Write to temporary files for legacy structure analysis
         with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as scores_temp:
             scores_temp.write(scores_data)
             scores_temp_path = scores_temp.name
@@ -331,12 +364,15 @@ class ProductionThinSynthesisPipeline:
             scores_structure = self._describe_csv_structure(scores_temp_path, "scores")
             evidence_structure = self._describe_csv_structure(evidence_temp_path, "evidence")
             
-            # Create code generation request
+            # Create enhanced code generation request with actual data structure
             code_request = CodeGenerationRequest(
                 framework_spec=request.framework_spec,
                 scores_csv_structure=scores_structure,
                 evidence_csv_structure=evidence_structure,
-                experiment_context=request.experiment_context
+                experiment_context=request.experiment_context,
+                actual_scores_sample=scores_sample,
+                actual_evidence_sample=evidence_sample,
+                available_columns=available_columns
             )
             
             # Log code generation start
@@ -346,7 +382,11 @@ class ProductionThinSynthesisPipeline:
                 {
                     "framework_spec_length": len(request.framework_spec),
                     "scores_structure": scores_structure,
-                    "evidence_structure": evidence_structure
+                    "evidence_structure": evidence_structure,
+                    "data_informed_generation": True,
+                    "available_columns": available_columns,
+                    "scores_sample_size": len(scores_sample),
+                    "evidence_sample_size": len(evidence_sample)
                 }
             )
             
@@ -449,12 +489,18 @@ class ProductionThinSynthesisPipeline:
             evidence_csv_path = evidence_temp.name
         
         try:
-            evidence_df = pd.read_csv(evidence_csv_path)
+            # Use robust CSV parsing consistent with Stage 2
+            evidence_df = pd.read_csv(
+                evidence_csv_path,
+                on_bad_lines='skip',  # Skip malformed lines
+                engine='python',      # More permissive parser
+                quoting=3             # Handle quotes properly
+            )
             
             # Create curation request
             curation_request = EvidenceCurationRequest(
                 statistical_results=exec_response['result_data'],
-                available_evidence=evidence_df.to_dict('records'),
+                evidence_csv_path=evidence_csv_path,
                 framework_spec=request.framework_spec,
                 max_evidence_per_finding=request.max_evidence_per_finding,
                 min_confidence_threshold=request.min_confidence_threshold
@@ -501,7 +547,13 @@ class ProductionThinSynthesisPipeline:
     def _describe_csv_structure(self, csv_path: str, data_type: str) -> str:
         """Analyze CSV structure for code generation."""
         try:
-            df = pd.read_csv(csv_path)
+            # Use robust CSV parsing consistent with pipeline stages
+            df = pd.read_csv(
+                csv_path,
+                on_bad_lines='skip',  # Skip malformed lines
+                engine='python',      # More permissive parser
+                quoting=3             # Handle quotes properly
+            )
             
             structure_info = {
                 "data_type": data_type,
