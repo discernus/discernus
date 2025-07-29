@@ -27,6 +27,9 @@ class CodeGenerationRequest:
     framework_spec: str
     scores_csv_structure: str
     evidence_csv_structure: str
+    actual_scores_sample: Optional[Dict] = None
+    actual_evidence_sample: Optional[list] = None
+    available_columns: Optional[list] = None
     experiment_context: Optional[str] = None
 
 @dataclass 
@@ -68,7 +71,10 @@ class AnalyticalCodeGenerator:
                 framework_spec=request.framework_spec,
                 scores_csv_structure=request.scores_csv_structure,
                 evidence_csv_structure=request.evidence_csv_structure,
-                experiment_context=request.experiment_context or "Not provided"
+                experiment_context=request.experiment_context or "Not provided",
+                actual_scores_sample=request.actual_scores_sample or "Not provided",
+                actual_evidence_sample=request.actual_evidence_sample or "Not provided", 
+                available_columns=request.available_columns or "Not provided"
             )
             
             # Call LLM to generate code

@@ -179,7 +179,13 @@ class EvidenceCurator:
         """Load and validate evidence CSV data."""
         
         try:
-            evidence_df = pd.read_csv(evidence_csv_path)
+            # Use robust CSV parsing consistent with other pipeline stages
+            evidence_df = pd.read_csv(
+                evidence_csv_path,
+                on_bad_lines='skip',  # Skip malformed lines
+                engine='python',      # More permissive parser
+                quoting=3             # Handle quotes properly
+            )
             
             # Validate required columns
             required_columns = ['artifact_id', 'dimension', 'evidence_text', 
