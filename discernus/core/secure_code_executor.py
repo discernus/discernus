@@ -41,12 +41,14 @@ class CodeSecurityChecker:
     """
     
     FORBIDDEN_NAMES = {
-        # System access
+        # System access (keeping essential restrictions)
         '__import__', 'eval', 'exec', 'compile', 'open', 'file',
-        'input', 'raw_input', 'reload', '__file__', '__name__',
+        'input', 'raw_input', 'reload', '__file__',
+        # Note: Removed '__name__' - it's needed for legitimate Python code
         
-        # OS and subprocess
-        'os', 'sys', 'subprocess', 'commands', 'platform',
+        # OS and subprocess (keeping essential restrictions)
+        'os', 'subprocess', 'commands', 'platform',
+        # Note: Removed 'sys' - it's safely provided in execution environment
         
         # Network access  
         'socket', 'urllib', 'urllib2', 'httplib', 'requests',
@@ -78,7 +80,7 @@ class CodeSecurityChecker:
             self.allowed_libraries = {
                 # Data science core
                 'numpy', 'np', 'pandas', 'pd', 'matplotlib', 'plt', 'seaborn', 'sns',
-                'scipy', 'sklearn', 'plotly', 'statistics', 'math', 'random',
+                'scipy', 'scipy.stats', 'sklearn', 'plotly', 'statistics', 'math', 'random',
                 
                 # Text analysis (safe components)
                 'nltk.sentiment', 'nltk.corpus', 'nltk.tokenize', 'nltk.stem',

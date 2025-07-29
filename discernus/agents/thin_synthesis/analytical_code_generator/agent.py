@@ -130,7 +130,12 @@ EXPERIMENT CONTEXT:
 
 TASK: Generate Python code that:
 
-1. **Loads and validates the CSV data** using pandas
+1. **Uses pre-loaded DataFrame variables** - The CSV data is already loaded for you:
+   - `scores_df`: pandas DataFrame containing the scores data
+   - `evidence_df`: pandas DataFrame containing the evidence data
+   - DO NOT use file operations (open, read_csv with file paths)
+   - The DataFrames are ready for immediate analysis
+
 2. **Performs framework-appropriate statistical analysis** including:
    - Descriptive statistics for all relevant dimensions
    - Reliability assessment (Cronbach's alpha where applicable)
