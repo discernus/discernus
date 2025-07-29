@@ -1,0 +1,122 @@
+# Political Discourse Analysis Framework (PDAF) v5.0
+
+**Version**: 5.0  
+**Status**: Active  
+**Major Change**: Embedded CSV Architecture for Synthesis Scalability
+
+---
+
+## Executive Summary
+
+The Political Discourse Analysis Framework (PDAF) provides a comprehensive methodology for analyzing political rhetoric, discourse patterns, and persuasive techniques in political communication. This framework systematically evaluates how political actors construct arguments, frame issues, deploy rhetorical strategies, and attempt to influence public opinion.
+
+PDAF v5.0 represents a significant architectural evolution, incorporating embedded CSV generation capabilities that enable scalable synthesis operations while maintaining analytical rigor and methodological consistency.
+
+## Framework Philosophy
+
+Political discourse operates as a complex ecosystem of competing narratives, strategic framing, and persuasive appeals. PDAF recognizes that political communication is simultaneously:
+
+- **Strategic**: Designed to achieve specific political objectives
+- **Contextual**: Embedded within particular historical and cultural moments  
+- **Performative**: Creating political realities through rhetorical action
+- **Relational**: Positioning actors relative to opponents, allies, and audiences
+
+## Analytical Dimensions
+
+### Core Anchors
+**Definition**: Fundamental ideological and strategic positioning elements that anchor political discourse within broader belief systems and tactical frameworks.
+
+**Dimensions**:
+- **ideological_grounding**: Explicit or implicit ideological foundations (progressive, conservative, libertarian, etc.)
+- **strategic_positioning**: Tactical placement relative to political opponents and allies
+- **value_system_appeals**: Invocation of fundamental values (freedom, security, equality, tradition)
+- **authority_claims**: Sources of legitimacy claimed (expertise, experience, mandate, moral authority)
+
+### Mechanism Anchors  
+**Definition**: Specific rhetorical and argumentative techniques employed to construct persuasive political arguments and influence audience perceptions.
+
+**Dimensions**:
+- **evidence_deployment**: Use of data, examples, precedents, and testimonials
+- **emotional_appeals**: Deployment of fear, hope, anger, pride, and other emotional triggers
+- **logical_structure**: Quality and coherence of reasoning chains and argument construction
+- **narrative_framing**: Story structures used to contextualize issues and events
+
+### Boundary Anchors
+**Definition**: Elements that define the scope, limits, and targets of political discourse, establishing who and what is included or excluded from political consideration.
+
+**Dimensions**:
+- **audience_targeting**: Specific constituencies addressed or appealed to
+- **opposition_framing**: How political opponents or alternatives are characterized  
+- **issue_scope**: Breadth and boundaries of problems addressed
+- **temporal_orientation**: Focus on past precedents, present conditions, or future visions
+
+## Scoring Methodology
+
+Each dimension is evaluated on a **0.0-1.0 scale** representing the degree to which each element is present and effectively deployed:
+
+- **0.0-0.2**: Absent or ineffectively deployed
+- **0.3-0.4**: Weakly present with minimal effectiveness
+- **0.5-0.6**: Moderately present with reasonable effectiveness  
+- **0.7-0.8**: Strongly present with high effectiveness
+- **0.9-1.0**: Exceptionally present with maximum effectiveness
+
+## Implementation Requirements
+
+### Required CSV Output Structure
+
+```
+<<<DISCERNUS_SCORES_CSV_v1>>>
+aid,ideological_grounding,strategic_positioning,value_system_appeals,authority_claims,evidence_deployment,emotional_appeals,logical_structure,narrative_framing,audience_targeting,opposition_framing,issue_scope,temporal_orientation,core_anchors_score,mechanism_anchors_score,boundary_anchors_score,overall_discourse_effectiveness
+{artifact_id},[scores for each dimension],[composite scores]
+<<<END_DISCERNUS_SCORES_CSV_v1>>>
+```
+
+### Required Evidence CSV Structure
+
+```
+<<<DISCERNUS_EVIDENCE_CSV_v1>>>
+aid,dimension,quote,confidence
+{artifact_id},{dimension_name},{supporting_textual_evidence},{confidence_score}
+<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
+```
+
+### Composite Score Calculations
+
+- **core_anchors_score**: Average of ideological_grounding, strategic_positioning, value_system_appeals, authority_claims
+- **mechanism_anchors_score**: Average of evidence_deployment, emotional_appeals, logical_structure, narrative_framing  
+- **boundary_anchors_score**: Average of audience_targeting, opposition_framing, issue_scope, temporal_orientation
+- **overall_discourse_effectiveness**: Weighted average of all anchor scores
+
+## Validation Standards
+
+- **Textual Grounding**: All dimensional scores must be supported by specific textual evidence
+- **Analytical Rigor**: Scoring must reflect systematic evaluation rather than impressionistic assessment
+- **Methodological Consistency**: Apply identical evaluation criteria across all analyzed materials
+- **Evidence Documentation**: Maintain clear linkage between scores and supporting quotations
+
+---
+
+## JSON Configuration
+
+```json
+{
+  "framework_name": "Political Discourse Analysis Framework",
+  "version": "5.0",
+  "dimension_groups": {
+    "core_anchors": ["ideological_grounding", "strategic_positioning", "value_system_appeals", "authority_claims"],
+    "mechanism_anchors": ["evidence_deployment", "emotional_appeals", "logical_structure", "narrative_framing"], 
+    "boundary_anchors": ["audience_targeting", "opposition_framing", "issue_scope", "temporal_orientation"]
+  },
+  "composite_scores": {
+    "core_anchors_score": "average of core_anchors dimensions",
+    "mechanism_anchors_score": "average of mechanism_anchors dimensions", 
+    "boundary_anchors_score": "average of boundary_anchors dimensions",
+    "overall_discourse_effectiveness": "weighted average of all anchor scores"
+  },
+  "scoring_scale": {
+    "min": 0.0,
+    "max": 1.0,
+    "precision": 0.1
+  }
+}
+``` 

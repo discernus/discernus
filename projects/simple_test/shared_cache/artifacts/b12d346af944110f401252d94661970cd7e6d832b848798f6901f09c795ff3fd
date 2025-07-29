@@ -1,0 +1,35 @@
+aid,dimension,quote,confidence
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,ideological_grounding,"Our identity is not optional; it's imposed. We are who we are because they made us so. Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath. There is no neutral ground—there are only oppressors and the oppressed. If you're not with us, you're against us. Solidarity demands unity, not nuance.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,ideological_grounding,"We don't owe objectivity to oppressors.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,strategic_positioning,"Solidarity demands unity, not nuance.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,strategic_positioning,"If you're not with us, you're against us.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,strategic_positioning,"Our power will come only when we stop pretending we can all coexist and start claiming what's ours—together, as a people.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,value_system_appeals,"Justice without revenge is just another lie.",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,value_system_appeals,"Our lived experience is not up for discussion. If data doesn't reflect our reality, the data is flawed or worse, part of the system.",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,value_system_appeals,"Emotional truth, historical trauma, and righteous rage are more valid than 'evidence.'",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,authority_claims,"For centuries, we've been silenced, stolen from, enslaved, incarcerated, excluded, and ignored.",0.6
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,authority_claims,"Until our pain is fully acknowledged and compensated, until our enemies know what it's like to lose what we lost, there can be no reconciliation—only retribution.",0.6
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,evidence_deployment,"If data doesn't reflect our reality, the data is flawed or worse, part of the system.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,evidence_deployment,"Facts can be debated, but our lived experience is not up for discussion.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,evidence_deployment,"We will control the narrative because the other side has done so for too long.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,emotional_appeals,"We've been patient long enough. Our suffering is proof. Our anger is holy. And justice means nothing unless *our* people rise and theirs fall.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,emotional_appeals,"Don't talk to us about 'procedure' or 'due process'—those were invented to keep power in the wrong hands.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,emotional_appeals,"This is a war for survival, and if we hesitate, we lose everything.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,logical_structure,"The truth is whatever serves liberation.",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,logical_structure,"We don't owe objectivity to oppressors. Emotional truth, historical trauma, and righteous rage are more valid than 'evidence.'",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,logical_structure,"We will control the narrative because the other side has done so for too long. They gaslight us—now we rewrite the story, and *we* decide what's true.",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,narrative_framing,"Redemption Through Reckoning: A Manifesto for Restorative Power",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,narrative_framing,"Now it's our turn. Don't talk to us about 'procedure' or 'due process'—those were invented to keep power in the wrong hands. Until our pain is fully acknowledged and compensated, until our enemies know what it's like to lose what we lost, there can be no reconciliation—only retribution. Justice without revenge is just another lie.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,narrative_framing,"We will control the narrative because the other side has done so for too long. They gaslight us—now we rewrite the story, and *we* decide what's true.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,audience_targeting,"Our identity is not optional; it's imposed. We are who we are because they made us so. Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,audience_targeting,"If you're not with us, you're against us. Solidarity demands unity, not nuance. Dissent among our ranks is betrayal.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,audience_targeting,"Do you feel safe right now? You shouldn't. *They* are still in control. *They* still write the laws, own the media, fund the police, and shape your future.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,opposition_framing,"They made us so.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,opposition_framing,"There are only oppressors and the oppressed.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,opposition_framing,"They gaslight us—now we rewrite the story, and *we* decide what's true.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,issue_scope,"Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath.",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,issue_scope,"Until our pain is fully acknowledged and compensated, until our enemies know what it's like to lose what we lost, there can be no reconciliation—only retribution.",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,issue_scope,"The world is burning, the system is rigged, and the stakes are existential. Act now or be erased.",0.7
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,temporal_orientation,"We've been patient long enough.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,temporal_orientation,"For centuries, we've been silenced, stolen from, enslaved, incarcerated, excluded, and ignored. Now it's our turn.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,temporal_orientation,"Every delay, every compromise, is another step towards annihilation. *They won't give up power without a fight—and neither will we.*",0.8

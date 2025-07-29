@@ -134,13 +134,19 @@ class ResultsInterpreter:
     def _build_interpretation_prompt(self, request: InterpretationRequest) -> str:
         """Build the comprehensive interpretation prompt using YAML template (THIN architecture)."""
         
+        # Defensive checks: ensure inputs are not None
+        if request.statistical_results is None:
+            request.statistical_results = {}
+        if request.curated_evidence is None:
+            request.curated_evidence = {}
+        
         # Format statistical results for the prompt
         stats_summary = self._format_statistical_results(request.statistical_results)
         
         # Format curated evidence for the prompt
         evidence_summary = self._format_curated_evidence(request.curated_evidence)
         
-        # Count total evidence pieces
+        # Count total evidence pieces (safe with empty dict)
         total_evidence = sum(len(evidence_list) for evidence_list in request.curated_evidence.values())
         
         # Use YAML template with proper substitutions
@@ -162,51 +168,56 @@ class ResultsInterpreter:
         # Descriptive Statistics
         if 'descriptive_stats' in statistical_results:
             desc_stats = statistical_results['descriptive_stats']
-            formatted_sections.append("DESCRIPTIVE STATISTICS:")
-            
-            for dimension, stats in desc_stats.items():
-                if isinstance(stats, dict):
-                    mean = stats.get('mean', 'N/A')
-                    std = stats.get('std', 'N/A')
-                    count = stats.get('count', 'N/A')
-                    formatted_sections.append(f"  {dimension}: M={mean:.3f}, SD={std:.3f}, N={count}")
+            if desc_stats is not None:  # Defensive check
+                formatted_sections.append("DESCRIPTIVE STATISTICS:")
+                
+                for dimension, stats in desc_stats.items():
+                    if isinstance(stats, dict):
+                        mean = stats.get('mean', 'N/A')
+                        std = stats.get('std', 'N/A')
+                        count = stats.get('count', 'N/A')
+                        formatted_sections.append(f"  {dimension}: M={mean:.3f}, SD={std:.3f}, N={count}")
         
         # Hypothesis Tests
         if 'hypothesis_tests' in statistical_results:
             hyp_tests = statistical_results['hypothesis_tests']
-            formatted_sections.append("\nHYPOTHESIS TESTS:")
-            
-            for hypothesis, results in hyp_tests.items():
-                if isinstance(results, dict):
-                    is_sig = results.get('is_significant_alpha_05', False)
-                    p_val = results.get('p_value', 'N/A')
-                    status = "SIGNIFICANT" if is_sig else "Not significant"
-                    formatted_sections.append(f"  {hypothesis}: {status} (p={p_val})")
+            if hyp_tests is not None:  # Defensive check
+                formatted_sections.append("\nHYPOTHESIS TESTS:")
+                
+                for hypothesis, results in hyp_tests.items():
+                    if isinstance(results, dict):
+                        is_sig = results.get('is_significant_alpha_05', False)
+                        p_val = results.get('p_value', 'N/A')
+                        status = "SIGNIFICANT" if is_sig else "Not significant"
+                        formatted_sections.append(f"  {hypothesis}: {status} (p={p_val})")
         
         # Correlations
         if 'correlations' in statistical_results:
-            formatted_sections.append("\nCORRELATIONS:")
             correlations = statistical_results['correlations']
-            
-            if 'overall_virtue_vs_overall_vice' in correlations:
-                overall_corr = correlations['overall_virtue_vs_overall_vice']
-                if isinstance(overall_corr, dict):
-                    corr_val = overall_corr.get('correlation', 'N/A')
-                    formatted_sections.append(f"  Virtue-Vice Overall: r={corr_val}")
+            if correlations is not None:  # Defensive check
+                formatted_sections.append("\nCORRELATIONS:")
+                
+                if 'overall_virtue_vs_overall_vice' in correlations:
+                    overall_corr = correlations['overall_virtue_vs_overall_vice']
+                    if isinstance(overall_corr, dict):
+                        corr_val = overall_corr.get('correlation', 'N/A')
+                        p_val = overall_corr.get('p_value', 'N/A')
+                        formatted_sections.append(f"  Overall Virtue vs Vice: r={corr_val:.3f} (p={p_val})")
         
-        # Reliability
+        # Reliability Metrics
         if 'reliability_metrics' in statistical_results:
-            rel_metrics = statistical_results['reliability_metrics']
-            formatted_sections.append("\nRELIABILITY:")
-            
-            for cluster, metrics in rel_metrics.items():
-                if isinstance(metrics, dict):
-                    alpha = metrics.get('alpha', 'N/A')
-                    meets_threshold = metrics.get('meets_threshold', False)
-                    status = "Acceptable" if meets_threshold else "Below threshold"
-                    formatted_sections.append(f"  {cluster}: α={alpha:.3f} ({status})")
-        
-        return "\n".join(formatted_sections)
+            reliability = statistical_results['reliability_metrics']
+            if reliability is not None:  # Defensive check
+                formatted_sections.append("\nRELIABILITY:")
+                
+                for cluster, metrics in reliability.items():
+                    if isinstance(metrics, dict):
+                        alpha = metrics.get('alpha', 'N/A')
+                        meets_threshold = metrics.get('meets_threshold', False)
+                        status = "ACCEPTABLE" if meets_threshold else "Below threshold"
+                        formatted_sections.append(f"  {cluster}: α={alpha:.3f} ({status})")
+
+        return "\n".join(formatted_sections) if formatted_sections else "No statistical results available."
     
     def _format_curated_evidence(self, curated_evidence: Dict[str, List[Any]]) -> str:
         """Format curated evidence for inclusion in the prompt."""
