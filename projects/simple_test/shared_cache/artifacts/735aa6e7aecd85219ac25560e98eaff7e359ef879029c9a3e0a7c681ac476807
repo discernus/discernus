@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_7f2881cc7043",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "simple_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```csv\n<<<DISCERNUS_SCORES_CSV_v1>>>\naid,problem_definition,causal_attribution,moral_evaluation,treatment_recommendation,message_completeness_score\n{artifact_id},0.8,0.9,0.9,0.9,0.875\n<<<END_DISCERNUS_SCORES_CSV_v1>>>\n\n<<<DISCERNUS_EVIDENCE_CSV_v1>>>\naid,dimension,quote_id,quote_text,confidence_score,context_type\n{artifact_id},problem_definition,q1,\"Our suffering is proof. Our anger is holy.\",0.9,problem_statement\n{artifact_id},problem_definition,q2,\"Our identity is not optional; it's imposed.\",0.9,problem_statement\n{artifact_id},problem_definition,q3,\"The challenge before us, the problem we must address.\",0.85,problem_statement\n{artifact_id},problem_definition,q4,\"This affects everyone, widespread implications, immediate action required, crisis demands response\",0.8,problem_statement\n{artifact_id},causal_attribution,q5,\"Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath.\",0.95,cause_identification\n{artifact_id},causal_attribution,q6,\"If you're not with us, you're against us.\",0.8,cause_identification\n{artifact_id},causal_attribution,q7,\"They gaslit us; now we rewrite the story, and *we* decide what's true.\",0.9,cause_identification\n{artifact_id},causal_attribution,q8,\"The system is rigged, and the stakes are existential.\",0.85,cause_identification\n{artifact_id},moral_evaluation,q9,\"Justice demands, fairness requires, liberty is at stake, fundamental rights\",0.9,moral_argument\n{artifact_id},moral_evaluation,q10,\"This is fundamentally wrong, ethically unacceptable, morally justified, right thing to do\",0.9,moral_argument\n{artifact_id},moral_evaluation,q11,\"You don't talk to us about \\\"procedure\\\" or \\\"due process\\\"\u2014those were invented to keep power in the wrong hands.\",0.95,moral_argument\n{artifact_id},moral_evaluation,q12,\"Our pain is not acknowledged and compensated, until our enemies know what it's like to lose what we lost, there can be no reconciliation; only retribution.\",0.9,moral_argument\n{artifact_id},treatment_recommendation,q13,\"We must immediately, the answer is, the only way forward, solution requires\",0.9,solution_proposal\n{artifact_id},treatment_recommendation,q14,\"We should, necessary action, recommended approach, best path forward\",0.85,solution_proposal\n{artifact_id},treatment_recommendation,q15,\"Act now or be erased.\",0.9,solution_proposal\n{artifact_id},treatment_recommendation,q16,\"Burn it down. Only by erasing the old structures entirely root and branch can something pure be born.\",0.95,solution_proposal\n{artifact_id},treatment_recommendation,q17,\"We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place. Utopia isn't a dream; it's justice achieved by force.\",0.95,solution_proposal\n{artifact_id},treatment_recommendation,q18,\"The arc of history doesn't bend; it breaks, and *we will be the ones who snap it*.\",0.9,solution_proposal\n<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-29T23:15:47.405487+00:00",
+    "end_time": "2025-07-29T23:15:50.734160+00:00",
+    "duration_seconds": 3.328673,
+    "llm_interaction_hash": "41235f2d05167b2c"
+  },
+  "input_artifacts": {
+    "framework_hash": "a807f16c47724de2822dc7f2ea4251d8d3d94d40aab9995cc8eca376477ea4c9",
+    "document_hashes": [
+      "e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250729T231547Z_cde8cc97"
+  }
+}

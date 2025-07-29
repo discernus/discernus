@@ -107,7 +107,7 @@ Focuses solely on short-term profit extraction without regard for long-term cons
   "analysis_variants": {
     "default": {
       "description": "Complete multi-dimensional business ethics analysis with embedded CSV output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst in business ethics. Phase 2: Framework Methodology: Your task is to analyze the text using the Business Ethics Framework v5.0. Phase 3: Operational Definitions: Evaluate ten dimensions across three domains: Stakeholder Relations (Customer Service/Exploitation, Employee Development/Exploitation), Operational Integrity (Accountability/Opacity, Financial Responsibility/Manipulation), and Strategic Vision (Sustainable Purpose/Short-Term Extraction). Phase 4: Scoring Protocol: Score each of the ten dimensions from 0.0 to 1.0 and provide the strongest 1-2 quotes as evidence. Calculate the three indices: stakeholder focus, operational integrity, and strategic sustainability. Phase 5: Framework-Specific CSV Structure: Your scores CSV must contain exactly 14 columns in this order: aid, customer_service, customer_exploitation, employee_development, employee_exploitation, accountability, opacity, financial_responsibility, financial_manipulation, sustainable_purpose, short_term_extraction, stakeholder_focus_index, operational_integrity_index, strategic_sustainability_score. Your evidence CSV must contain exactly 6 columns: aid, dimension, quote_id, quote_text, confidence_score, context_type. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis AND the embedded CSV segments using the exact delimiters and column structures specified in the output_contract."
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst in business ethics. Phase 2: Framework Methodology: Your task is to analyze the text using the Business Ethics Framework v5.0. Phase 3: Operational Definitions: Evaluate ten dimensions across three domains: Stakeholder Relations (Customer Service/Exploitation, Employee Development/Exploitation), Operational Integrity (Accountability/Opacity, Financial Responsibility/Manipulation), and Strategic Vision (Sustainable Purpose/Short-Term Extraction). Phase 4: Scoring Protocol: Score each of the ten dimensions from 0.0 to 1.0 and provide the strongest 1-2 quotes as evidence. Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must have columns for each of the ten dimension scores. The evidence CSV must have columns for dimension, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
     }
   },
   "dimension_groups": {
@@ -140,30 +140,15 @@ Focuses solely on short-term profit extraction without regard for long-term cons
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores and calculated indices.",
-        "columns": [
-          "aid",
-          "customer_service", "customer_exploitation", "employee_development", "employee_exploitation",
-          "accountability", "opacity", "financial_responsibility", "financial_manipulation", 
-          "sustainable_purpose", "short_term_extraction",
-          "stakeholder_focus_index", "operational_integrity_index", "strategic_sustainability_score"
-        ]
+        "description": "CSV for all dimensional scores and calculated indices."
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication.",
-        "columns": [
-          "aid",
-          "dimension",
-          "quote_id",
-          "quote_text",
-          "confidence_score",
-          "context_type"
-        ]
+        "description": "CSV for structured evidence data for audit and replication."
       }
     },
-    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The scores CSV must include exactly 14 columns: aid + 10 dimension scores + 3 calculated indices. The evidence CSV must include exactly 6 columns: aid + dimension + quote_id + quote_text + confidence_score + context_type."
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified."
   }
 }
 ```

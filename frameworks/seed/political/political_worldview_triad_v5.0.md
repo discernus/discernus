@@ -64,7 +64,7 @@ The Political Worldview Triad Framework identifies three competing sources of po
   "analysis_variants": {
     "default": {
       "description": "Complete triadic worldview analysis across all three political legitimacy sources with embedded CSV output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert political discourse analyst. Phase 2: Framework Methodology: Your task is to analyze the text using the Political Worldview Triad Framework v5.0. Phase 3: Operational Definitions: Evaluate three worldview dimensions: Immutable-Identity Politics (legitimacy from unchosen attributes), Tribal Domination (legitimacy from in-group supremacy), and Pluralist Individual Dignity (legitimacy from universal human worth). Phase 4: Scoring Protocol: For each worldview, score its intensity from 0.0 to 1.0 and provide the strongest 1-2 quotes as evidence. Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must have columns for each worldview's score. The evidence CSV must have columns for worldview, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert political discourse analyst. Phase 2: Framework Methodology: Your task is to analyze the text using the Political Worldview Triad Framework v5.0. Phase 3: Operational Definitions: Evaluate three worldview dimensions: Immutable-Identity Politics (legitimacy from unchosen attributes), Tribal Domination (legitimacy from in-group supremacy), and Pluralist Individual Dignity (legitimacy from universal human worth). Phase 4: Scoring Protocol: For each worldview, score its intensity from 0.0 to 1.0 and provide the strongest 1-2 quotes as evidence. Identify the dominant worldview (highest scoring). Phase 5: Framework-Specific CSV Structure: Your scores CSV must contain exactly 5 columns in this order: aid, immutable_identity_politics, tribal_domination, pluralist_individual_dignity, dominant_worldview. Your evidence CSV must contain exactly 6 columns: aid, worldview, quote_id, quote_text, confidence_score, context_type. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis AND the embedded CSV segments using the exact delimiters and column structures specified in the output_contract."
     }
   },
   "dimension_groups": {
@@ -93,15 +93,30 @@ The Political Worldview Triad Framework identifies three competing sources of po
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores."
+        "description": "CSV for all worldview scores and dominant worldview calculation.",
+        "columns": [
+          "aid",
+          "immutable_identity_politics",
+          "tribal_domination", 
+          "pluralist_individual_dignity",
+          "dominant_worldview"
+        ]
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication."
+        "description": "CSV for structured evidence data for audit and replication.",
+        "columns": [
+          "aid",
+          "worldview",
+          "quote_id",
+          "quote_text",
+          "confidence_score",
+          "context_type"
+        ]
       }
     },
-    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified."
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The scores CSV must include exactly 5 columns: aid + 3 worldview scores + dominant_worldview. The evidence CSV must include exactly 6 columns: aid + worldview + quote_id + quote_text + confidence_score + context_type."
   }
 }
 ```

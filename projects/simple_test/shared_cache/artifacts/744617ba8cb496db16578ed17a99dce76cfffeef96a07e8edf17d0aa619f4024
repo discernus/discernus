@@ -1,0 +1,227 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+import json
+
+# --- Analysis Configuration ---
+# This configuration is derived from the Business Ethics Framework v5.0 specification.
+# It ensures the analysis is aligned with the framework's structure and goals.
+
+# Define the core dimensions and calculated indices from the framework.
+BASE_DIMENSIONS = [
+    'customer_service', 'customer_exploitation', 'employee_development', 'employee_exploitation',
+    'accountability', 'opacity', 'financial_responsibility', 'financial_manipulation',
+    'sustainable_purpose', 'short_term_extraction'
+]
+
+CALCULATED_INDICES = [
+    'stakeholder_focus_index', 'operational_integrity_index', 'strategic_sustainability_score'
+]
+
+# Define opposing pairs for hypothesis testing.
+OPPOSING_PAIRS = [
+    ('customer_service', 'customer_exploitation'),
+    ('employee_development', 'employee_exploitation'),
+    ('accountability', 'opacity'),
+    ('financial_responsibility', 'financial_manipulation'),
+    ('sustainable_purpose', 'short_term_extraction')
+]
+
+# Define dimension groups for reliability analysis (Cronbach's Alpha).
+# For alpha calculation, negative items will be reverse-scored (1 - score).
+DIMENSION_GROUPS = {
+    'stakeholder_relations': {
+        'positive': ['customer_service', 'employee_development'],
+        'negative': ['customer_exploitation', 'employee_exploitation']
+    },
+    'operational_integrity': {
+        'positive': ['accountability', 'financial_responsibility'],
+        'negative': ['opacity', 'financial_manipulation']
+    },
+    'strategic_vision': {
+        'positive': ['sustainable_purpose'],
+        'negative': ['short_term_extraction']
+    }
+}
+
+# --- Main Analysis Script ---
+
+# Initialize the final results dictionary with the required structure.
+# This ensures a consistent output format for the pipeline.
+result_data = {
+    'descriptive_stats': {},
+    'hypothesis_tests': {},
+    'correlations': {},
+    'reliability_metrics': {}
+}
+
+# --- Data Preparation and Cleaning ---
+# A critical step to ensure the quality and robustness of subsequent analysis.
+try:
+    # Ensure scores_df exists and is a DataFrame
+    if 'scores_df' in locals() and isinstance(scores_df, pd.DataFrame):
+        # Drop rows with missing values in any of the base dimensions to ensure valid calculations.
+        initial_rows = len(scores_df)
+        scores_df.dropna(subset=BASE_DIMENSIONS, inplace=True)
+        cleaned_rows = len(scores_df)
+        
+        # Convert score columns to numeric, coercing errors to NaN, then fill with median.
+        # This handles cases where data might be incorrectly formatted as strings.
+        for col in BASE_DIMENSIONS + CALCULATED_INDICES:
+            if col in scores_df.columns:
+                scores_df[col] = pd.to_numeric(scores_df[col], errors='coerce')
+        
+        # A second dropna pass after coercion to ensure numeric integrity.
+        scores_df.dropna(subset=BASE_DIMENSIONS, inplace=True)
+        final_rows = len(scores_df)
+
+        # Store sample characteristics
+        result_data['sample_characteristics'] = {
+            'initial_row_count': initial_rows,
+            'rows_after_na_cleaning': final_rows,
+            'rows_removed': initial_rows - final_rows,
+            'has_sufficient_data': final_rows > 1 # Min requirement for std dev
+        }
+    else:
+        # Handle case where scores_df is not provided
+        result_data['error'] = "scores_df not found or is not a DataFrame."
+        # Create an empty placeholder to prevent downstream errors
+        scores_df = pd.DataFrame(columns=BASE_DIMENSIONS + CALCULATED_INDICES)
+        result_data['sample_characteristics'] = {'has_sufficient_data': False}
+
+except Exception as e:
+    result_data['error'] = f"An error occurred during data preparation: {str(e)}"
+    # Create an empty placeholder to allow script to complete
+    scores_df = pd.DataFrame(columns=BASE_DIMENSIONS + CALCULATED_INDICES)
+    result_data['sample_characteristics'] = {'has_sufficient_data': False}
+
+
+# Proceed with analysis only if there is sufficient data
+if result_data.get('sample_characteristics', {}).get('has_sufficient_data', False):
+
+    # --- 1. Descriptive Statistics ---
+    try:
+        # Calculate summary statistics for all dimensions and indices.
+        # This provides a foundational overview of the data distribution.
+        desc_stats = scores_df[BASE_DIMENSIONS + CALCULATED_INDICES].describe()
+        result_data['descriptive_stats'] = desc_stats.to_dict()
+    except Exception as e:
+        result_data['descriptive_stats']['error'] = f"Failed to calculate descriptive statistics: {str(e)}"
+
+    # --- 2. Reliability Metrics (Cronbach's Alpha) ---
+    def calculate_cronbach_alpha(df_items):
+        """
+        Calculates Cronbach's alpha for a given set of items.
+        Items are expected to be columns in the provided DataFrame.
+        """
+        try:
+            k = df_items.shape[1]
+            if k < 2:
+                return None  # Alpha is not defined for a single item.
+            
+            # Calculate total score variance
+            total_variance = df_items.sum(axis=1).var(ddof=1)
+            if total_variance == 0:
+                return 1.0 # If all scores are identical, consistency is perfect
+                
+            # Calculate sum of item variances
+            item_variances_sum = df_items.var(ddof=1).sum()
+            
+            # Cronbach's alpha formula
+            alpha = (k / (k - 1)) * (1 - (item_variances_sum / total_variance))
+            return alpha
+        except Exception:
+            return None # Return None if any calculation fails
+
+    try:
+        reliability_results = {}
+        for group_name, items in DIMENSION_GROUPS.items():
+            # Create a temporary DataFrame for this group's items
+            # Reverse-score the negative items to align them with the positive construct
+            group_df = pd.DataFrame()
+            all_items = items['positive'] + items['negative']
+            
+            # Check if all columns for the group exist
+            if not all(col in scores_df.columns for col in all_items):
+                reliability_results[group_name] = {'error': 'One or more dimension columns missing.'}
+                continue
+
+            for item in items['positive']:
+                group_df[item] = scores_df[item]
+            for item in items['negative']:
+                group_df[f"{item}_rev"] = 1.0 - scores_df[item]
+
+            # Calculate alpha for the group (using both original positive and reversed negative items)
+            alpha = calculate_cronbach_alpha(group_df)
+            reliability_results[group_name] = {
+                'cronbach_alpha': alpha,
+                'num_items': len(all_items)
+            }
+        result_data['reliability_metrics'] = reliability_results
+    except Exception as e:
+        result_data['reliability_metrics']['error'] = f"Failed to calculate reliability metrics: {str(e)}"
+
+
+    # --- 3. Correlation Analysis ---
+    try:
+        # Calculate the Pearson correlation matrix for the base dimensions.
+        # This reveals the inter-relationships between different ethical dimensions.
+        corr_matrix = scores_df[BASE_DIMENSIONS].corr(method='pearson')
+        # Convert to dictionary for JSON serialization, handling potential NaNs from std dev of 0
+        result_data['correlations']['matrix'] = corr_matrix.where(pd.notnull(corr_matrix), None).to_dict()
+        
+        # Highlight key expected correlations from the framework structure
+        key_corrs = {}
+        for pos, neg in OPPOSING_PAIRS:
+            key = f"{pos}_vs_{neg}"
+            if pos in corr_matrix.columns and neg in corr_matrix.columns:
+                key_corrs[key] = corr_matrix.loc[pos, neg]
+        result_data['correlations']['key_oppositional_correlations'] = key_corrs
+
+    except Exception as e:
+        result_data['correlations']['error'] = f"Failed to calculate correlations: {str(e)}"
+
+
+    # --- 4. Hypothesis Testing (Paired T-Tests) ---
+    try:
+        hypothesis_results = {}
+        for pos_dim, neg_dim in OPPOSING_PAIRS:
+            test_name = f"{pos_dim}_vs_{neg_dim}"
+            
+            # Ensure columns exist before attempting the test
+            if pos_dim not in scores_df.columns or neg_dim not in scores_df.columns:
+                hypothesis_results[test_name] = {'error': 'One or both dimension columns missing.'}
+                continue
+
+            # Perform a paired t-test to see if the means of opposing dimensions are different.
+            # This tests a core assumption of the framework's oppositional structure.
+            pos_scores = scores_df[pos_dim]
+            neg_scores = scores_df[neg_dim]
+            
+            if len(pos_scores) < 2:
+                 hypothesis_results[test_name] = {'error': 'Not enough data points for t-test.'}
+                 continue
+
+            ttest_result = stats.ttest_rel(pos_scores, neg_scores, nan_policy='omit')
+
+            # Calculate effect size (Cohen's d for paired samples)
+            differences = pos_scores - neg_scores
+            mean_diff = np.mean(differences)
+            std_diff = np.std(differences, ddof=1)
+            
+            # Avoid division by zero if all differences are the same
+            cohens_d = mean_diff / std_diff if std_diff != 0 else 0.0
+
+            hypothesis_results[test_name] = {
+                't_statistic': ttest_result.statistic,
+                'p_value': ttest_result.pvalue,
+                'mean_positive_dim': np.mean(pos_scores),
+                'mean_negative_dim': np.mean(neg_scores),
+                'effect_size_cohens_d': cohens_d
+            }
+        result_data['hypothesis_tests'] = hypothesis_results
+    except Exception as e:
+        result_data['hypothesis_tests']['error'] = f"Failed to perform hypothesis tests: {str(e)}"
+
+# The 'result_data' variable now holds the complete, structured analysis results.
+# This variable is the designated output for the execution pipeline.
