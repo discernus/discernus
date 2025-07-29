@@ -88,6 +88,15 @@ class EvidenceCurator:
             EvidenceCurationResponse with curated evidence
         """
         try:
+            # Defensive check: ensure statistical_results is not None
+            if request.statistical_results is None:
+                self.logger.warning("statistical_results is None, returning empty curated evidence")
+                return EvidenceCurationResponse(
+                    curated_evidence={},
+                    curation_summary={"warning": "No statistical results provided"},
+                    success=True
+                )
+            
             # Load and validate evidence data
             evidence_df = self._load_evidence_data(request.evidence_csv_path)
             if evidence_df is None:
@@ -229,6 +238,11 @@ class EvidenceCurator:
         
         curated = []
         
+        # Defensive check: ensure descriptive_stats is not None
+        if descriptive_stats is None:
+            self.logger.warning("descriptive_stats is None, returning empty curated evidence")
+            return curated
+        
         # Find dimensions with extreme values (high/low means)
         dimension_scores = {}
         for dim, stats in descriptive_stats.items():
@@ -279,6 +293,11 @@ class EvidenceCurator:
         
         curated = []
         
+        # Defensive check: ensure hypothesis_tests is not None
+        if hypothesis_tests is None:
+            self.logger.warning("hypothesis_tests is None, returning empty curated evidence")
+            return curated
+        
         for hypothesis, results in hypothesis_tests.items():
             if not isinstance(results, dict):
                 continue
@@ -324,6 +343,11 @@ class EvidenceCurator:
         
         curated = []
         
+        # Defensive check: ensure correlations is not None
+        if correlations is None:
+            self.logger.warning("correlations is None, returning empty curated evidence")
+            return curated
+        
         # Look for strong correlations in the correlation matrices
         if 'all_dimensions_matrix' in correlations:
             matrix = correlations['all_dimensions_matrix']
@@ -363,36 +387,35 @@ class EvidenceCurator:
         return curated
     
     def _curate_reliability_evidence(self, reliability_metrics: Dict[str, Any],
-                                   evidence_df: pd.DataFrame,
-                                   request: EvidenceCurationRequest) -> List[CuratedEvidence]:
+                                    evidence_df: pd.DataFrame,
+                                    request: EvidenceCurationRequest) -> List[CuratedEvidence]:
         """Curate evidence for reliability findings."""
         
         curated = []
+        
+        # Defensive check: ensure reliability_metrics is not None
+        if reliability_metrics is None:
+            self.logger.warning("reliability_metrics is None, returning empty curated evidence")
+            return curated
         
         # Look for reliability issues or high reliability
         for cluster_name, metrics in reliability_metrics.items():
             if isinstance(metrics, dict):
                 alpha = metrics.get('alpha')
-                meets_threshold = metrics.get('meets_threshold', False)
                 
                 if alpha is not None:
-                    # Determine if this is noteworthy (very high, very low, or borderline reliability)
-                    is_noteworthy = (alpha < 0.6 or alpha > 0.9 or (0.65 <= alpha <= 0.75))
-                    
-                    if is_noteworthy:
-                        # Get evidence from dimensions in this cluster
-                        cluster_dimensions = self._get_cluster_dimensions(cluster_name)
-                        
-                        for dim in cluster_dimensions:
+                    # Find evidence for high or low reliability
+                    if alpha < 0.6:  # Poor reliability
+                        # Look for inconsistent evidence
+                        for dim in ['procedural_legitimacy', 'institutional_respect', 'systemic_continuity']:
                             dim_evidence = evidence_df[evidence_df['dimension'] == dim]
-                            
                             if len(dim_evidence) > 0:
-                                # Select one representative piece of evidence
-                                top_evidence = dim_evidence.nlargest(1, 'confidence')
+                                # Select evidence with varying confidence scores
+                                varied_evidence = dim_evidence.sample(
+                                    min(request.max_evidence_per_finding, len(dim_evidence))
+                                )
                                 
-                                for _, row in top_evidence.iterrows():
-                                    reliability_note = "high" if alpha > 0.8 else "low" if alpha < 0.7 else "moderate"
-                                    
+                                for _, row in varied_evidence.iterrows():
                                     curated.append(CuratedEvidence(
                                         artifact_id=row['artifact_id'],
                                         dimension=row['dimension'],
@@ -400,9 +423,30 @@ class EvidenceCurator:
                                         context=row['context'],
                                         confidence=row['confidence'],
                                         reasoning=row['reasoning'],
-                                        relevance_score=0.6,
-                                        statistical_connection=f"Represents {cluster_name} with {reliability_note} reliability (α={alpha:.3f})"
+                                        relevance_score=0.6,  # Moderate relevance for reliability issues
+                                        statistical_connection=f"Illustrates {cluster_name} reliability concerns (α={alpha:.3f})"
                                     ))
+                                break  # Only need one dimension for reliability illustration
+                    
+                    elif alpha > 0.8:  # High reliability
+                        # Look for consistent high-confidence evidence
+                        high_conf_evidence = evidence_df[evidence_df['confidence'] > 0.8]
+                        if len(high_conf_evidence) > 0:
+                            selected = high_conf_evidence.sample(
+                                min(request.max_evidence_per_finding, len(high_conf_evidence))
+                            )
+                            
+                            for _, row in selected.iterrows():
+                                curated.append(CuratedEvidence(
+                                    artifact_id=row['artifact_id'],
+                                    dimension=row['dimension'],
+                                    evidence_text=row['evidence_text'],
+                                    context=row['context'],
+                                    confidence=row['confidence'],
+                                    reasoning=row['reasoning'],
+                                    relevance_score=0.9,  # High relevance for reliability validation
+                                    statistical_connection=f"Demonstrates {cluster_name} high reliability (α={alpha:.3f})"
+                                ))
         
         return curated
     

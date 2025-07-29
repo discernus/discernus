@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_fc71c333607e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "simple_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n{\n  \"analysis_results\": [\n    {\n      \"artifact_id\": \"{artifact_id}\",\n      \"document_name\": \"document2.txt\",\n      \"analysis\": {\n        \"constitutional_health\": \"Good\",\n        \"scores\": {\n          \"procedural_legitimacy\": 0.8,\n          \"procedural_rejection\": 0.2,\n          \"institutional_respect\": 0.7,\n          \"institutional_subversion\": 0.3,\n          \"systemic_continuity\": 0.6,\n          \"systemic_replacement\": 0.4\n        },\n        \"reasoning\": {\n          \"procedural_legitimacy\": \"The document emphasizes the importance of democratic processes and institutions, advocating for fairness, openness, and future-focused systems. It highlights the need to acknowledge past injustices but focus on building systems that protect everyone's rights, aligning with procedural legitimacy.\",\n          \"procedural_rejection\": \"While the document acknowledges past injustices, it does not advocate for rejecting established democratic norms or processes. Instead, it calls for improvement and adherence to fairness within existing frameworks, indicating low procedural rejection.\",\n          \"institutional_respect\": \"The text expresses respect for democratic institutions by stating that they 'can be improved' and that people 'choose to make it so.' It emphasizes building systems that are fair and protect rights, showing a clear respect for the role and potential of institutions.\",\n          \"institutional_subversion\": \"There is no indication of attempts to undermine or bypass institutional constraints. The focus is on improving existing systems and ensuring fairness within them, rather than subverting them.\",\n          \"systemic_continuity\": \"The document advocates for iterative progress ('real progress happens through iteration, not rupture') and adapting policies ('tested, adapted, and improved'). This aligns with a commitment to systemic continuity and incremental change.\",\n          \"systemic_replacement\": \"The document does not call for fundamental or systemic transformation. The emphasis is on improvement and adaptation within existing structures, rather than a complete overhaul or replacement of the system.\"\n        },\n        \"salience_ranking\": [\n          {\n            \"dimension\": \"procedural_legitimacy\",\n            \"salience_score\": 0.8,\n            \"rank\": 1\n          },\n          {\n            \"dimension\": \"institutional_respect\",\n            \"salience_score\": 0.7,\n            \"rank\": 2\n          },\n          {\n            \"dimension\": \"systemic_continuity\",\n            \"salience_score\": 0.6,\n            \"rank\": 3\n          },\n          {\n            \"dimension\": \"procedural_rejection\",\n            \"salience_score\": 0.2,\n            \"rank\": 4\n          },\n          {\n            \"dimension\": \"institutional_subversion\",\n            \"salience_score\": 0.3,\n            \"rank\": 5\n          },\n          {\n            \"dimension\": \"systemic_replacement\",\n            \"salience_score\": 0.4,\n            \"rank\": 6\n          }\n        ],\n        \"health_analysis\": {\n          \"procedural_health_score\": 0.6,\n          \"institutional_health_score\": 0.4,\n          \"systemic_health_score\": 0.2,\n          \"constitutional_direction_index\": 0.4666666666666667\n        }\n      }\n    }\n  ]\n}\n```\n\n<<<DISCERNUS_SCORES_CSV_v1>>>\naid,procedural_legitimacy,procedural_rejection,institutional_respect,institutional_subversion,systemic_continuity,systemic_replacement,procedural_health_score,institutional_health_score,systemic_health_score,constitutional_direction_index\n{artifact_id},0.8,0.2,0.7,0.3,0.6,0.4,0.6,0.4,0.2,0.4666666666666667\n<<<END_DISCERNUS_SCORES_CSV_v1>>>\n\n<<<DISCERNUS_EVIDENCE_CSV_v1>>>\naid,dimension,quote,confidence\n{artifact_id},procedural_legitimacy,\"Our work is to build systems that reflect that truth\u2014for everyone.\",0.9\n{artifact_id},procedural_legitimacy,\"True justice means building institutions that protect everyone's rights, not just our own.\",0.9\n{artifact_id},procedural_rejection,\"While we must acknowledge the lived experiences shaped by race, gender, and class, we reject essentialism and the reduction of people to categories. Pluralism is not a threat\u2014it is a strength.\",0.7\n{artifact_id},institutional_respect,\"We commit to systems that are fair, open, and future-focused. True justice means building institutions that protect everyone's rights, not just our own.\",0.9\n{artifact_id},institutional_respect,\"We trust in democratic institutions\u2014not because they are perfect, but because they can be improved.\",0.9\n{artifact_id},institutional_subversion,\"Instead, we commit to systems that are fair, open, and future-focused.\",0.7\n{artifact_id},systemic_continuity,\"Real progress happens through iteration, not rupture. We accept trade-offs and seek feasible steps that reduce suffering and expand opportunities.\",0.8\n{artifact_id},systemic_continuity,\"Effective policy is tested, adapted, and improved.\",0.8\n{artifact_id},systemic_replacement,\"We are reformers, not revolutionaries. Real progress happens through iteration, not rupture.\",0.7\n{artifact_id},procedural_legitimacy,\"We focus on processes, not payback; on access, not revenge.\",0.8\n{artifact_id},institutional_respect,\"We measure fairness not by whether one group 'wins,' but by whether the rules are just and universally applied.\",0.8\n{artifact_id},systemic_continuity,\"Change is necessary, but panic is not a strategy.\",0.7\n<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-29T17:20:28.371125+00:00",
+    "end_time": "2025-07-29T17:20:31.990686+00:00",
+    "duration_seconds": 3.619561,
+    "llm_interaction_hash": "dce607983ab2d8dc"
+  },
+  "input_artifacts": {
+    "framework_hash": "bb86ae70ec5b849364f0680e738eced3a0b88b3e93f433eec03e4b6bfc23b4d2",
+    "document_hashes": [
+      "af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250729T172023Z_57d4e5a1"
+  }
+}

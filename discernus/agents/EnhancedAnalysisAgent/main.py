@@ -132,11 +132,20 @@ class EnhancedAnalysisAgent:
                 raise EnhancedAnalysisAgentError("No JSON appendix found in framework")
             framework_config = json.loads(json_match.group(1))
             
-            # Get all dimensions from virtues and vices
-            all_dimensions = (
-                framework_config["dimension_groups"]["virtues"] +
-                framework_config["dimension_groups"]["vices"]
-            )
+            # Get all dimensions from all dimension groups (framework-agnostic)
+            all_dimensions = []
+            dimension_groups = framework_config.get("dimension_groups", {})
+            for group_name, dimensions in dimension_groups.items():
+                if isinstance(dimensions, list):
+                    all_dimensions.extend(dimensions)
+                else:
+                    self.audit.log_agent_event(self.agent_name, "warning", {
+                        "message": f"Dimension group '{group_name}' is not a list, skipping",
+                        "group_content": dimensions
+                    })
+            
+            if not all_dimensions:
+                raise EnhancedAnalysisAgentError("No dimensions found in framework dimension_groups")
             
             # Check if analysis result is already cached (THIN perfect caching)
             # Create the same result structure we would store to check if it exists

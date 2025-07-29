@@ -106,78 +106,32 @@ class EnhancedSynthesisAgent:
                               experiment_config: Dict[str, Any],
                               framework_metadata: Dict[str, Any],
                               metadata_lookup: Dict[str, Any]) -> str:
-        """Build enhanced synthesis prompt with full context."""
+        """Build enhanced synthesis prompt using YAML template (THIN architecture)."""
         
-        # Base CSV data
-        prompt = f"""You are an expert synthesis agent with advanced analytical capabilities. Your task is to synthesize analysis results using rich contextual information.
-
-EXPERIMENT CONFIGURATION:
-- Name: {experiment_config.get('name', 'Unknown')}
-- Analysis: {experiment_config.get('analysis', {}).get('evaluations_per_document', 1)} evaluations per document
-- Report Format: {experiment_config.get('reporting', {}).get('format', 'standard')}
-- Required Statistical Tests: {experiment_config.get('validation', {}).get('required_tests', [])}
-
-FRAMEWORK INTELLIGENCE:
-- Framework: {framework_metadata.get('display_name', 'Unknown Framework')}
-- Dimension Groups: {framework_metadata.get('dimension_groups', {})}
-- Calculation Specifications: {framework_metadata.get('calculation_spec', {})}
-- Reliability Standards: {framework_metadata.get('reliability_rubric', {})}
-
-CORPUS METADATA INTELLIGENCE:
-- Total Documents: {len(metadata_lookup)} with rich metadata
-- Available Metadata: president, political_party, year, speech_type
-- Cross-reference CSV artifact IDs with document metadata for intelligent analysis
-
-Here are the aggregated scores from all documents:
-<<<DISCERNUS_SCORES_CSV_v1>>>
-{scores_csv}
-<<<END_DISCERNUS_SCORES_CSV_v1>>>
-
-CORPUS DOCUMENT METADATA:
-{json.dumps(metadata_lookup, indent=2)}
-
-NOTE: Evidence CSV omitted to prevent truncation - focus purely on quantitative score analysis.
-
-"""
-        
-        # Add report structure guidance from experiment config
+        # Build report structure guidance from experiment config
         report_structure = experiment_config.get('reporting', {}).get('structure', [])
+        report_structure_guidance = ""
         if report_structure:
-            prompt += f"""
-REQUIRED REPORT STRUCTURE:
-Generate a comprehensive analysis with these sections:
-"""
+            report_structure_guidance = "\nREQUIRED REPORT STRUCTURE:\nGenerate a comprehensive analysis with these sections:\n"
             for section in report_structure:
                 section_guidance = self._get_section_guidance(section)
-                prompt += f"- {section}: {section_guidance}\n"
+                report_structure_guidance += f"- {section}: {section_guidance}\n"
         
-        prompt += """
-ANALYSIS INSTRUCTIONS:
-1. Cross-reference CSV artifact IDs with document metadata for intelligent grouping
-2. Use framework dimension groups for macro-level analysis (virtues vs vices)
-3. Perform the required statistical tests and show your work step-by-step
-4. Leverage temporal, partisan, and contextual metadata for sophisticated insights
-5. Apply reliability standards from framework rubric for quality assessment
-
-OUTPUT CONSTRAINTS:
-- CRITICAL: Keep your entire response under 5500 tokens to avoid truncation
-- Prioritize quantitative analysis, statistical tables, and numerical findings
-- Minimize lengthy evidence quotes - use brief citations with aid references only
-- Focus on statistical significance, effect sizes, and numerical trends
-- Use concise bullet points rather than verbose paragraphs where possible
-
-CAPABILITIES AVAILABLE:
-- ASCII art and table formatting using Unicode box-drawing characters
-- Statistical analysis with step-by-step mathematical work
-- Temporal trend analysis using year metadata
-- Partisan comparison analysis using political_party metadata
-- Individual profiling using president metadata
-- Contextual analysis using speech_type metadata
-
-Format your response as a comprehensive but concise markdown document. Prioritize numerical findings and statistical analysis over qualitative descriptions. Show statistical work but keep evidence quotes minimal.
-
-Begin your constrained quantitative analysis now:
-"""
+        # Use YAML template with proper substitutions
+        prompt = self.prompt_template.format(
+            experiment_name=experiment_config.get('name', 'Unknown'),
+            evaluations_per_document=experiment_config.get('analysis', {}).get('evaluations_per_document', 1),
+            report_format=experiment_config.get('reporting', {}).get('format', 'standard'),
+            required_tests=experiment_config.get('validation', {}).get('required_tests', []),
+            framework_name=framework_metadata.get('display_name', 'Unknown Framework'),
+            dimension_groups=framework_metadata.get('dimension_groups', {}),
+            calculation_spec=framework_metadata.get('calculation_spec', {}),
+            reliability_rubric=framework_metadata.get('reliability_rubric', {}),
+            total_documents=len(metadata_lookup),
+            scores_csv=scores_csv,
+            metadata_lookup=json.dumps(metadata_lookup, indent=2),
+            report_structure_guidance=report_structure_guidance
+        )
         
         return prompt
     

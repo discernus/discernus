@@ -1,0 +1,25 @@
+aid,dimension,quote,confidence
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,procedural_legitimacy,"Don't talk to us about ""procedure"" or ""due process""—those were invented to keep power in the wrong hands.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,procedural_legitimacy,"Our suffering is proof. Our anger is holy. And justice means nothing unless *our* people rise—and theirs fall.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,procedural_rejection,"Don't talk to us about ""procedure"" or ""due process""—those were invented to keep power in the wrong hands.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,procedural_rejection,"Until our pain is *fully* acknowledged and compensated, until our enemies know what it's like to lose what we lost, *there can be no reconciliation—only retribution*.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,institutional_respect,"Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,institutional_respect,"There is no neutral ground—there are only oppressors and the oppressed.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,institutional_subversion,"Burn it down. Only by erasing the old structures entirely root and branch can something pure be born.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,institutional_subversion,"We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,systemic_continuity,"The world is burning, the system is rigged, and the stakes are existential.",0.8
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,systemic_continuity,"A better world *isn't* possible—unless we start over.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,systemic_replacement,"Burn it down. Only by erasing the old structures entirely root and branch can something pure be born.",0.9
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,systemic_replacement,"We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place.",0.9
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,procedural_legitimacy,"Our work is to build systems that reflect that truth—for everyone.",0.9
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,procedural_legitimacy,"True justice means building institutions that protect everyone's rights, not just our own.",0.9
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,procedural_rejection,"While we must acknowledge the lived experiences shaped by race, gender, and class, we reject essentialism and the reduction of people to categories. Pluralism is not a threat—it is a strength.",0.7
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,institutional_respect,"We commit to systems that are fair, open, and future-focused. True justice means building institutions that protect everyone's rights, not just our own.",0.9
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,institutional_respect,"We trust in democratic institutions—not because they are perfect, but because they can be improved.",0.9
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,institutional_subversion,"Instead, we commit to systems that are fair, open, and future-focused.",0.7
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,systemic_continuity,"Real progress happens through iteration, not rupture. We accept trade-offs and seek feasible steps that reduce suffering and expand opportunities.",0.8
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,systemic_continuity,"Effective policy is tested, adapted, and improved.",0.8
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,systemic_replacement,"We are reformers, not revolutionaries. Real progress happens through iteration, not rupture.",0.7
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,procedural_legitimacy,"We focus on processes, not payback; on access, not revenge.",0.8
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,institutional_respect,"We measure fairness not by whether one group 'wins,' but by whether the rules are just and universally applied.",0.8
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,systemic_continuity,"Change is necessary, but panic is not a strategy.",0.7

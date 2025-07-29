@@ -90,7 +90,7 @@ class CodeSecurityChecker:
                 'vaderSentiment', 'vaderSentiment.vaderSentiment',
                 
                 # General utilities and Python standard library
-                'json', 'csv', 'datetime', 'collections', 'itertools',
+                'json', 'csv', 'datetime', 'collections', 'collections.abc', 'itertools',
                 'functools', 'operator', 'heapq', 'bisect', 'copy', 'warnings'
             }
     

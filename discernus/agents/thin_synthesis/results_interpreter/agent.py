@@ -15,9 +15,11 @@ Key Design Principles:
 
 import json
 import logging
+import yaml
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 from datetime import datetime
+from pathlib import Path
 
 # Import LLM gateway from main codebase
 import sys
@@ -68,6 +70,14 @@ class ResultsInterpreter:
         self.model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(self.model_registry)
         self.logger = logging.getLogger(__name__)
+        self.prompt_template = self._load_prompt_template()
+    
+    def _load_prompt_template(self) -> str:
+        """Load the prompt template from YAML file."""
+        prompt_file = Path(__file__).parent / "prompt.yaml"
+        with open(prompt_file, 'r') as f:
+            config = yaml.safe_load(f)
+            return config['template']
         
     def interpret_results(self, request: InterpretationRequest) -> InterpretationResponse:
         """
@@ -87,7 +97,6 @@ class ResultsInterpreter:
             response_content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                system_prompt="You are an expert research analyst and academic writer specializing in statistical interpretation and narrative synthesis.",
                 temperature=0.3,  # Moderate creativity for engaging narrative
                 max_tokens=8000   # Allow for comprehensive reports
             )
@@ -123,7 +132,7 @@ class ResultsInterpreter:
             )
     
     def _build_interpretation_prompt(self, request: InterpretationRequest) -> str:
-        """Build the comprehensive interpretation prompt."""
+        """Build the comprehensive interpretation prompt using YAML template (THIN architecture)."""
         
         # Format statistical results for the prompt
         stats_summary = self._format_statistical_results(request.statistical_results)
@@ -134,67 +143,14 @@ class ResultsInterpreter:
         # Count total evidence pieces
         total_evidence = sum(len(evidence_list) for evidence_list in request.curated_evidence.values())
         
-        prompt = f"""You are tasked with creating a comprehensive narrative interpretation that synthesizes statistical analysis results with curated evidence. This is the final stage of a breakthrough THIN Code-Generated Synthesis Architecture.
-
-FRAMEWORK SPECIFICATION:
-{request.framework_spec}
-
-EXPERIMENT CONTEXT:
-{request.experiment_context or "Not provided"}
-
-STATISTICAL ANALYSIS RESULTS:
-{stats_summary}
-
-CURATED EVIDENCE ({total_evidence} pieces):
-{evidence_summary}
-
-TASK: Create a comprehensive narrative report that:
-
-1. **EXECUTIVE SUMMARY** (150-200 words):
-   - Synthesize the most important findings
-   - State key conclusions clearly
-   - Highlight practical implications
-
-2. **STATISTICAL FINDINGS INTERPRETATION**:
-   - Interpret descriptive statistics in context
-   - Explain hypothesis test results and their significance
-   - Discuss correlation patterns and their meaning
-   - Address reliability findings and their implications
-   - Connect statistical measures to framework dimensions
-
-3. **EVIDENCE INTEGRATION**:
-   - Weave curated evidence throughout the analysis
-   - Use evidence to illustrate and support statistical findings
-   - Highlight particularly compelling evidence pieces
-   - Show how evidence validates or contextualizes the numbers
-
-4. **KEY FINDINGS** (5-7 bullet points):
-   - List the most significant discoveries
-   - Combine statistical and evidence-based insights
-   - Focus on actionable or theoretically important results
-
-5. **METHODOLOGY NOTES**:
-   - Acknowledge the post-computation evidence curation approach
-   - Discuss sample characteristics and limitations
-   - Note reliability assessments and their impact
-
-6. **IMPLICATIONS AND CONCLUSIONS**:
-   - Connect findings to the broader framework context
-   - Discuss theoretical and practical implications
-   - Suggest areas for future investigation
-
-WRITING REQUIREMENTS:
-- Academic tone but accessible language
-- Integrate quantitative and qualitative insights seamlessly
-- Use specific numbers and evidence quotes
-- Maintain logical flow between sections
-- Ensure conclusions are well-supported by both statistics and evidence
-- Aim for 1000-2000 words total
-
-RESPONSE FORMAT:
-Structure your response with clear section headers. Begin with the Executive Summary, then proceed through each section systematically. Use evidence quotes and statistical values to support all major claims.
-
-Generate the comprehensive narrative report now:"""
+        # Use YAML template with proper substitutions
+        prompt = self.prompt_template.format(
+            framework_spec=request.framework_spec,
+            experiment_context=request.experiment_context or "Not provided",
+            stats_summary=stats_summary,
+            total_evidence=total_evidence,
+            evidence_summary=evidence_summary
+        )
 
         return prompt
     

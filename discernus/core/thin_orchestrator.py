@@ -154,24 +154,30 @@ class ThinOrchestrator:
                 }
             }
         else:
-            # Fall back to EnhancedSynthesisAgent on THIN failure
-            print(f"⚠️ THIN synthesis failed: {response.error_message}")
-            print(f"🔄 Falling back to EnhancedSynthesisAgent...")
+            # DEVELOPMENT: Fail fast instead of expensive fallbacks during debugging
+            error_msg = f"THIN synthesis failed: {response.error_message}"
+            print(f"❌ {error_msg}")
+            print("🛑 Stopping execution to allow debugging (no expensive fallback)")
+            raise ThinOrchestratorError(error_msg)
             
-            audit_logger.log_agent_event(
-                "ThinOrchestrator",
-                "thin_synthesis_fallback",
-                {
-                    "thin_error": response.error_message,
-                    "fallback_reason": "THIN pipeline execution failed"
-                }
-            )
-            
-            # Use legacy synthesis as fallback
-            return self._run_legacy_synthesis(
-                scores_hash, evidence_hash, [], experiment_config,
-                framework_content, {}, model, audit_logger, storage
-            )
+            # PRODUCTION: Uncomment below for fallback to EnhancedSynthesisAgent
+            # print(f"⚠️ THIN synthesis failed: {response.error_message}")
+            # print(f"🔄 Falling back to EnhancedSynthesisAgent...")
+            # 
+            # audit_logger.log_agent_event(
+            #     "ThinOrchestrator",
+            #     "thin_synthesis_fallback",
+            #     {
+            #         "thin_error": response.error_message,
+            #         "fallback_reason": "THIN pipeline execution failed"
+            #     }
+            # )
+            # 
+            # # Use legacy synthesis as fallback
+            # return self._run_legacy_synthesis(
+            #     scores_hash, evidence_hash, [], experiment_config,
+            #     framework_content, {}, model, audit_logger, storage
+            # )
 
     def _run_legacy_synthesis(self,
                              scores_hash: str,
