@@ -176,7 +176,13 @@ class ResultsInterpreter:
                         mean = stats.get('mean', 'N/A')
                         std = stats.get('std', 'N/A')
                         count = stats.get('count', 'N/A')
-                        formatted_sections.append(f"  {dimension}: M={mean:.3f}, SD={std:.3f}, N={count}")
+                        
+                        # Safe formatting - handle both numeric and string values
+                        mean_str = f"{mean:.3f}" if isinstance(mean, (int, float)) else str(mean)
+                        std_str = f"{std:.3f}" if isinstance(std, (int, float)) else str(std)
+                        count_str = str(count)  # Count can be int or string
+                        
+                        formatted_sections.append(f"  {dimension}: M={mean_str}, SD={std_str}, N={count_str}")
         
         # Hypothesis Tests
         if 'hypothesis_tests' in statistical_results:
@@ -198,51 +204,55 @@ class ResultsInterpreter:
                 formatted_sections.append("\nCORRELATIONS:")
                 
                 if 'overall_virtue_vs_overall_vice' in correlations:
-                    overall_corr = correlations['overall_virtue_vs_overall_vice']
-                    if isinstance(overall_corr, dict):
-                        corr_val = overall_corr.get('correlation', 'N/A')
-                        p_val = overall_corr.get('p_value', 'N/A')
-                        formatted_sections.append(f"  Overall Virtue vs Vice: r={corr_val:.3f} (p={p_val})")
+                    corr_data = correlations['overall_virtue_vs_overall_vice']
+                    if isinstance(corr_data, dict):
+                        corr_val = corr_data.get('correlation', 'N/A')
+                        p_val = corr_data.get('p_value', 'N/A')
+                        
+                        # Safe formatting for correlation values
+                        corr_str = f"{corr_val:.3f}" if isinstance(corr_val, (int, float)) else str(corr_val)
+                        formatted_sections.append(f"  Overall Virtue vs Vice: r={corr_str} (p={p_val})")
         
-        # Reliability Metrics
-        if 'reliability_metrics' in statistical_results:
-            reliability = statistical_results['reliability_metrics']
+        # Reliability Analysis
+        if 'reliability' in statistical_results:
+            reliability = statistical_results['reliability']
             if reliability is not None:  # Defensive check
                 formatted_sections.append("\nRELIABILITY:")
                 
-                for cluster, metrics in reliability.items():
-                    if isinstance(metrics, dict):
-                        alpha = metrics.get('alpha', 'N/A')
-                        meets_threshold = metrics.get('meets_threshold', False)
-                        status = "ACCEPTABLE" if meets_threshold else "Below threshold"
-                        formatted_sections.append(f"  {cluster}: α={alpha:.3f} ({status})")
-
-        return "\n".join(formatted_sections) if formatted_sections else "No statistical results available."
+                for cluster, data in reliability.items():
+                    if isinstance(data, dict):
+                        alpha = data.get('cronbach_alpha', 'N/A')
+                        status_val = data.get('status', 'Unknown')
+                        
+                        # Safe formatting for alpha values
+                        alpha_str = f"{alpha:.3f}" if isinstance(alpha, (int, float)) else str(alpha)
+                        formatted_sections.append(f"  {cluster}: α={alpha_str} ({status_val})")
+        
+        return "\n".join(formatted_sections) if formatted_sections else "No statistical results available"
     
-    def _format_curated_evidence(self, curated_evidence: Dict[str, List[Any]]) -> str:
+    def _format_curated_evidence(self, curated_evidence: Dict[str, Any]) -> str:
         """Format curated evidence for inclusion in the prompt."""
         
         formatted_sections = []
         
+        # Group evidence by category
         for category, evidence_list in curated_evidence.items():
-            if evidence_list:
-                formatted_sections.append(f"\n{category.upper().replace('_', ' ')}:")
+            if evidence_list:  # Only include non-empty categories
+                formatted_sections.append(f"\n{category.upper()}:")
                 
-                for i, evidence in enumerate(evidence_list[:3], 1):  # Limit to top 3 per category
-                    # Handle both dataclass and dict evidence formats
-                    if hasattr(evidence, 'evidence_text'):
-                        text = evidence.evidence_text
-                        dimension = evidence.dimension
-                        confidence = evidence.confidence
-                        connection = evidence.statistical_connection
-                    else:
-                        text = evidence.get('evidence_text', 'N/A')
-                        dimension = evidence.get('dimension', 'N/A')
-                        confidence = evidence.get('confidence', 'N/A')
-                        connection = evidence.get('statistical_connection', 'N/A')
-                    
-                    formatted_sections.append(f"  {i}. [{dimension.title()}] \"{text}\"")
-                    formatted_sections.append(f"     Confidence: {confidence:.2f} | Connection: {connection}")
+                for item in evidence_list:
+                    if isinstance(item, dict):
+                        aid = item.get('aid', 'Unknown')
+                        evidence_text = item.get('evidence', 'No evidence text')
+                        confidence = item.get('confidence', 'N/A')
+                        connection = item.get('connection', 'No connection specified')
+                        
+                        # Safe formatting for confidence scores
+                        conf_str = f"{confidence:.2f}" if isinstance(confidence, (int, float)) else str(confidence)
+                        formatted_sections.append(f"     Aid: {aid}")
+                        formatted_sections.append(f"     Evidence: {evidence_text}")
+                        formatted_sections.append(f"     Confidence: {conf_str} | Connection: {connection}")
+                        formatted_sections.append("")  # Blank line between items
         
         return "\n".join(formatted_sections) if formatted_sections else "No curated evidence available."
     

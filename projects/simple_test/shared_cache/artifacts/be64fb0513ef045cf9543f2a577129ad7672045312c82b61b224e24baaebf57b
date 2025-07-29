@@ -1,0 +1,218 @@
+import pandas as pd
+import numpy as np
+import scipy.stats
+import json
+
+# --- Helper function for JSON serialization ---
+# This ensures that numpy-specific data types are converted to standard Python types
+# for compatibility with the json library.
+def convert_to_native_types(obj):
+    """Recursively convert numpy types to native Python types for JSON serialization."""
+    if isinstance(obj, (np.integer, np.int64)):
+        return int(obj)
+    elif isinstance(obj, (np.floating, np.float64)):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {k: convert_to_native_types(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_to_native_types(i) for i in obj]
+    elif pd.isna(obj):
+        return None
+    return obj
+
+# --- Main Analysis Function ---
+def perform_analysis(scores_df, evidence_df):
+    """
+    Performs framework-agnostic statistical analysis on scores and evidence data.
+
+    Args:
+        scores_df (pd.DataFrame): DataFrame with analysis IDs and numeric scores.
+        evidence_df (pd.DataFrame): DataFrame with evidence quotes and confidence.
+
+    Returns:
+        dict: A dictionary containing the structured results of the analysis.
+    """
+    results = {
+        "descriptive_stats": {},
+        "reliability_metrics": {},
+        "correlations": {},
+        "hypothesis_tests": {},
+        "effect_sizes": {},
+        "sample_characteristics": {}
+    }
+
+    # --- 1. Data Validation and Column Identification ---
+    # Identify the columns containing scores for analysis.
+    # This is done by selecting all numeric columns except for the identifier 'aid'.
+    # This makes the script adaptable to different scoring frameworks.
+    try:
+        if 'aid' not in scores_df.columns:
+            raise KeyError("'aid' column not found in scores_df.")
+        score_columns = [col for col in scores_df.columns if col != 'aid' and pd.api.types.is_numeric_dtype(scores_df[col])]
+        if not score_columns:
+            raise ValueError("No numeric score columns found for analysis in scores_df.")
+    except (AttributeError, KeyError, ValueError) as e:
+        results['error'] = f"Failed during column identification: {str(e)}"
+        return results
+
+    # --- 2. Sample Characteristics ---
+    # Basic metadata about the dataset.
+    results['sample_characteristics'] = {
+        "num_records_scores": len(scores_df),
+        "num_records_evidence": len(evidence_df),
+        "score_dimensions_analyzed": score_columns,
+        "missing_values_scores": int(scores_df[score_columns].isnull().sum().sum()),
+        "missing_values_evidence": int(evidence_df.isnull().sum().sum())
+    }
+
+    # --- 3. Descriptive Statistics ---
+    # Calculate summary statistics for all identified score columns.
+    # Also analyze confidence scores and quote lengths from the evidence data.
+    try:
+        # Descriptive stats for scores
+        scores_stats = scores_df[score_columns].describe().to_dict()
+        results['descriptive_stats']['scores'] = scores_stats
+
+        # Descriptive stats for evidence confidence
+        if 'confidence' in evidence_df.columns and pd.api.types.is_numeric_dtype(evidence_df['confidence']):
+            confidence_stats = evidence_df['confidence'].describe().to_dict()
+            results['descriptive_stats']['evidence_confidence'] = confidence_stats
+            # Mean confidence per dimension
+            if 'dimension' in evidence_df.columns:
+                confidence_by_dim = evidence_df.groupby('dimension')['confidence'].mean().to_dict()
+                results['descriptive_stats']['evidence_confidence_by_dimension'] = confidence_by_dim
+
+        # Safely analyze quote length without accessing string content
+        if 'quote' in evidence_df.columns:
+            evidence_df['quote_length'] = evidence_df['quote'].str.len()
+            quote_length_stats = evidence_df['quote_length'].describe().to_dict()
+            results['descriptive_stats']['evidence_quote_length'] = quote_length_stats
+
+    except Exception as e:
+        results['descriptive_stats']['error'] = f"Failed during descriptive stats calculation: {str(e)}"
+
+
+    # --- 4. Reliability Metrics (Cronbach's Alpha) ---
+    # Measures the internal consistency of the score columns, treated as a single scale.
+    try:
+        k = len(score_columns)
+        if k < 2:
+            alpha = None
+            reliability_notes = "Cronbach's alpha requires at least 2 items (score columns)."
+        else:
+            # Drop rows with any missing values for this calculation
+            df_alpha = scores_df[score_columns].dropna()
+            if len(df_alpha) < 2:
+                 alpha = None
+                 reliability_notes = "Not enough complete cases to calculate Cronbach's alpha."
+            else:
+                item_variances = df_alpha.var(ddof=1)
+                sum_item_variances = item_variances.sum()
+                total_scores = df_alpha.sum(axis=1)
+                variance_of_total = total_scores.var(ddof=1)
+
+                if variance_of_total == 0:
+                    alpha = None # or 0, depending on interpretation. None is safer.
+                    reliability_notes = "Total score variance is zero; alpha is undefined."
+                else:
+                    alpha = (k / (k - 1)) * (1 - (sum_item_variances / variance_of_total))
+                    reliability_notes = "Calculated for all identified score columns as a single scale."
+
+        results['reliability_metrics']['cronbachs_alpha'] = {
+            "value": alpha,
+            "items": k,
+            "notes": reliability_notes
+        }
+    except Exception as e:
+        results['reliability_metrics']['error'] = f"Failed during Cronbach's alpha calculation: {str(e)}"
+
+
+    # --- 5. Correlation Analysis ---
+    # Calculate a Pearson correlation matrix to understand relationships between dimensions.
+    try:
+        correlation_matrix = scores_df[score_columns].corr(method='pearson').to_dict()
+        results['correlations']['pearson_matrix'] = correlation_matrix
+    except Exception as e:
+        results['correlations']['error'] = f"Failed during correlation calculation: {str(e)}"
+
+
+    # --- 6. Hypothesis Testing (One-Sample T-test) ---
+    # Test if the mean of each score dimension is significantly different from a neutral midpoint of 0.5.
+    # This is a common test for data on a fixed scale (e.g., 0 to 1).
+    try:
+        t_test_results = {}
+        population_mean = 0.5
+        for col in score_columns:
+            # Remove NaN values for the test
+            col_data = scores_df[col].dropna()
+            if len(col_data) < 2:
+                t_test_results[col] = {"error": "Not enough data points for t-test."}
+                continue
+            
+            t_statistic, p_value = scipy.stats.ttest_1samp(col_data, popmean=population_mean)
+            t_test_results[col] = {
+                "t_statistic": t_statistic,
+                "p_value": p_value,
+                "is_significant_at_0_05": p_value < 0.05
+            }
+        results['hypothesis_tests']['one_sample_ttest_vs_0.5'] = t_test_results
+    except Exception as e:
+        results['hypothesis_tests']['error'] = f"Failed during t-test calculation: {str(e)}"
+
+
+    # --- 7. Effect Sizes (Cohen's d) ---
+    # Calculate Cohen's d for the one-sample t-tests to measure the magnitude of the effect.
+    try:
+        effect_size_results = {}
+        population_mean = 0.5
+        for col in score_columns:
+            col_data = scores_df[col].dropna()
+            if len(col_data) < 2:
+                effect_size_results[col] = {"error": "Not enough data points for effect size."}
+                continue
+
+            sample_mean = col_data.mean()
+            sample_std = col_data.std(ddof=1)
+            
+            if sample_std == 0:
+                cohens_d = np.inf if sample_mean != population_mean else 0
+            else:
+                cohens_d = (sample_mean - population_mean) / sample_std
+            
+            effect_size_results[col] = {
+                "cohens_d": cohens_d
+            }
+        results['effect_sizes']['cohens_d_one_sample'] = effect_size_results
+    except Exception as e:
+        results['effect_sizes']['error'] = f"Failed during effect size calculation: {str(e)}"
+
+    return results
+
+# --- Main Execution Block ---
+if __name__ == '__main__':
+    # This block will be executed when the script is run.
+    # In the target environment, `scores_df` and `evidence_df` are pre-loaded.
+    # For local testing, we create placeholder DataFrames.
+    try:
+        # Check if DataFrames are pre-loaded, otherwise create them for testing.
+        if 'scores_df' not in locals() or 'evidence_df' not in locals():
+            scores_data = [{'aid': 'e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799', 'accuracy_verification': 0.2, 'curriculum_alignment': 0.1, 'depth_coverage': 0.1, 'relevance_context': 0.2, 'instructional_clarity': 0.1, 'engagement_strategies': 0.1, 'differentiation_support': 0.1, 'assessment_integration': 0.1, 'universal_design': 0.1, 'language_clarity': 0.1, 'multimedia_integration': 0.1, 'barrier_reduction': 0.1, 'content_quality_score': 0.15, 'pedagogical_effectiveness_score': 0.15, 'learning_accessibility_score': 0.15, 'overall_educational_value': 0.15}, {'aid': 'af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf', 'accuracy_verification': 0.8, 'curriculum_alignment': 0.7, 'depth_coverage': 0.6, 'relevance_context': 0.9, 'instructional_clarity': 0.8, 'engagement_strategies': 0.7, 'differentiation_support': 0.6, 'assessment_integration': 0.5, 'universal_design': 0.9, 'language_clarity': 0.9, 'multimedia_integration': 0.5, 'barrier_reduction': 0.7, 'content_quality_score': 0.75, 'pedagogical_effectiveness_score': 0.7, 'learning_accessibility_score': 0.725, 'overall_educational_value': 0.725}]
+            evidence_data = [{'aid': 'e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799', 'dimension': 'accuracy_verification', 'quote': '"""This is a sample quote that contains characters like \' and " which could break scripts."""', 'confidence': 0.2}, {'aid': 'af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf', 'dimension': 'accuracy_verification', 'quote': '"""Another quote."""', 'confidence': 0.8}]
+            scores_df = pd.DataFrame(scores_data)
+            evidence_df = pd.DataFrame(evidence_data)
+
+        # Perform the analysis
+        analysis_results = perform_analysis(scores_df, evidence_df)
+
+        # Convert all numpy types to native Python types for clean JSON output
+        final_output = convert_to_native_types(analysis_results)
+
+        # Print the final results as a JSON string
+        print(json.dumps(final_output, indent=2))
+
+    except Exception as e:
+        # Final catch-all for any unexpected errors during execution.
+        error_output = {"critical_error": f"An unexpected error occurred: {str(e)}"}
+        print(json.dumps(error_output, indent=2))
