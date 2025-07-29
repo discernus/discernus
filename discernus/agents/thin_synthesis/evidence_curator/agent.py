@@ -187,16 +187,31 @@ class EvidenceCurator:
                 quoting=3             # Handle quotes properly
             )
             
-            # Validate required columns
+            # Map actual column names to expected column names  
+            column_mapping = {
+                'aid': 'artifact_id',
+                'quote': 'evidence_text'
+            }
+            
+            # Rename columns to match expected schema
+            evidence_df = evidence_df.rename(columns=column_mapping)
+            
+            # Add missing columns with default values
+            if 'context' not in evidence_df.columns:
+                evidence_df['context'] = 'Generated from analysis'
+            if 'reasoning' not in evidence_df.columns:
+                evidence_df['reasoning'] = 'Evidence extracted during analysis'
+            
+            # Validate required columns (after mapping)
             required_columns = ['artifact_id', 'dimension', 'evidence_text', 
                               'context', 'confidence', 'reasoning']
             
             missing_columns = [col for col in required_columns if col not in evidence_df.columns]
             if missing_columns:
-                self.logger.error(f"Missing evidence columns: {missing_columns}")
+                self.logger.error(f"Missing evidence columns after mapping: {missing_columns}")
                 return None
             
-            # Clean and validate data
+            # Clean and validate data (using mapped column names)
             evidence_df = evidence_df.dropna(subset=['artifact_id', 'dimension', 'evidence_text'])
             evidence_df['confidence'] = pd.to_numeric(evidence_df['confidence'], errors='coerce')
             evidence_df = evidence_df.dropna(subset=['confidence'])
