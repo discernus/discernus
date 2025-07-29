@@ -1,4 +1,4 @@
-# Character Assessment Framework v5.0
+# Cohesive Flourishing Framework v5.0
 
 **Version**: 5.0
 **Status**: Active
@@ -8,39 +8,48 @@
 
 ## Executive Summary
 
-The Character Assessment Framework (CAF) v5.0 integrates breakthrough character tension analysis to provide a multi-dimensional assessment of a speaker's moral character. It quantifies moral contradictions between opposing character traits (virtues and vices) and calculates an overall Moral Character Strategic Contradiction Index (MC-SCI). This allows for a nuanced understanding of a speaker's moral coherence and identity.
+The Cohesive Flourishing Framework (CFF) v5.0 integrates tension pattern analysis to provide a multi-dimensional assessment of discourse. It quantifies rhetorical contradictions between opposing dimensions and calculates an overall Strategic Contradiction Index (SCI). This allows for a nuanced understanding of a speaker's strategic coherence and rhetorical strategy.
 
 ---
 
-## Character Dimensions
+## Framework Dimensions
 
-### **Civic Virtues** - Positive Character Traits
+### **Identity Axis**
 
-**1. Dignity** (0.0-1.0): Respect for universal human worth and inherent dignity  
-**2. Truth** (0.0-1.0): Intellectual honesty and commitment to factual accuracy  
-**3. Justice** (0.0-1.0): Fairness orientation and procedural integrity  
-**4. Hope** (0.0-1.0): Constructive vision and democratic optimism  
-**5. Pragmatism** (0.0-1.0): Practical wisdom and workable solutions  
+**Tribal Dominance** (0.0-1.0): In-group supremacy and exclusionary identity patterns  
+**Individual Dignity** (0.0-1.0): Universal human worth and inclusive dignity appeals
 
-### **Civic Vices** - Negative Character Traits
+### **Emotional Climate**
 
-**1. Tribalism** (0.0-1.0): Group loyalty over universal principles  
-**2. Manipulation** (0.0-1.0): Deceptive rhetoric and information distortion  
-**3. Resentment** (0.0-1.0): Grievance focus and backward-looking blame  
-**4. Fear** (0.0-1.0): Anxiety appeals and catastrophic thinking  
-**5. Fantasy** (0.0-1.0): Unrealistic promises and magical thinking  
+**Fear** (0.0-1.0): Crisis mentality, threat perception, vulnerability emphasis  
+**Hope** (0.0-1.0): Progress orientation, opportunity focus, optimistic vision
+
+### **Success Orientation** 
+
+**Envy** (0.0-1.0): Resentment toward others' success, zero-sum thinking  
+**Compersion** (0.0-1.0): Celebration of others' success, abundance mindset
+
+### **Relational Climate**
+
+**Enmity** (0.0-1.0): Hostility, antagonism, adversarial positioning  
+**Amity** (0.0-1.0): Friendship, cooperation, collaborative approach
+
+### **Goal Orientation**
+
+**Fragmentative Goals** (0.0-1.0): Division, separation, destructive objectives  
+**Cohesive Goals** (0.0-1.0): Unity, building, integrative objectives
 
 ---
 
-## Character Tension Mathematics
+## Tension Mathematics
 
-### **Character Tension Scoring**
+### **Dimensional Tension Scoring**
 
-**Formula**: `Character Tension = min(Virtue_score, Vice_score) × |Virtue_salience - Vice_salience|`
+**Formula**: `Tension Score = min(Anchor_A_score, Anchor_B_score) × |Salience_A - Salience_B|`
 
-### **Moral Character Strategic Contradiction Index (MC-SCI)**
+### **Strategic Contradiction Index (SCI)**
 
-**Formula**: `MC-SCI = (Sum of all Character Tension Scores) / Number of Opposing Pairs`
+**Formula**: `SCI = (Sum of all Tension Scores) / Number of Opposing Pairs`
 
 ---
 
@@ -48,29 +57,32 @@ The Character Assessment Framework (CAF) v5.0 integrates breakthrough character 
 
 ```json
 {
-  "name": "caf_v5_0",
+  "name": "cff_v5_0",
   "version": "v5.0",
-  "display_name": "Character Assessment Framework v5.0",
+  "display_name": "Cohesive Flourishing Framework v5.0",
   "analysis_variants": {
     "default": {
-      "description": "Complete salience-weighted character analysis with moral tension pattern quantification and embedded CSV output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst of civic character and political ethics. Phase 2: Framework Methodology: Your task is to analyze what the provided text reveals about the SPEAKER'S moral character using the Character Assessment Framework v5.0. Phase 3: Operational Definitions: Evaluate five civic virtues (Dignity, Truth, Justice, Hope, Pragmatism) and five opposing civic vices (Tribalism, Manipulation, Resentment, Fear, Fantasy). Phase 4: Scoring Protocol: For each of the ten dimensions, score its intensity (0.0-1.0) and salience (0.0-1.0). Provide the strongest 1-2 quotes as evidence. Calculate the tension score for each virtue-vice pair and the overall Moral Character Strategic Contradiction Index (MC-SCI). Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must have columns for each dimension's score and salience, each tension score, and the MC-SCI. The evidence CSV must have columns for dimension, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
+      "description": "Complete salience-weighted analysis with rhetorical tension pattern quantification and embedded CSV output.",
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert discourse analyst specializing in social cohesion. Phase 2: Framework Methodology: Your task is to analyze the text using the Cohesive Flourishing Framework v5.0. Phase 3: Operational Definitions: Evaluate ten dimensions across five axes: Identity (Tribal Dominance vs. Individual Dignity), Emotional Climate (Fear vs. Hope), Success Orientation (Envy vs. Compersion), Relational Climate (Enmity vs. Amity), and Goal Orientation (Fragmentative vs. Cohesive). Phase 4: Scoring Protocol: For each of the ten dimensions, score its intensity (0.0-1.0) and salience (0.0-1.0). Provide the strongest 1-2 quotes as evidence. Calculate the tension score for each opposing pair and the overall Strategic Contradiction Index (SCI). Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must have columns for each dimension's score and salience, each tension score, and the SCI. The evidence CSV must have columns for dimension, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
     }
   },
   "dimension_groups": {
-    "virtues": ["dignity", "truth", "justice", "hope", "pragmatism"],
-    "vices": ["tribalism", "manipulation", "resentment", "fear", "fantasy"]
+    "identity_axis": ["tribal_dominance", "individual_dignity"],
+    "emotional_climate_axis": ["fear", "hope"],
+    "success_orientation_axis": ["envy", "compersion"],
+    "relational_climate_axis": ["enmity", "amity"],
+    "goal_orientation_axis": ["fragmentative_goals", "cohesive_goals"]
   },
   "calculation_spec": {
-    "character_tension_mathematics": "Character tension quantification using formula: Character Tension = min(Virtue_score, Vice_score) × |Virtue_salience - Vice_salience|.",
-    "character_tensions": {
-      "dignity_tribalism_tension": "min(dignity, tribalism) * abs(dignity_salience - tribalism_salience)",
-      "truth_manipulation_tension": "min(truth, manipulation) * abs(truth_salience - manipulation_salience)",
-      "justice_resentment_tension": "min(justice, resentment) * abs(justice_salience - resentment_salience)",
-      "hope_fear_tension": "min(hope, fear) * abs(hope_salience - fear_salience)",
-      "pragmatism_fantasy_tension": "min(pragmatism, fantasy) * abs(pragmatism_salience - fantasy_salience)"
+    "tension_mathematics_explanation": "Rhetorical tension quantification using formula: Tension Score = min(Anchor_A_score, Anchor_B_score) × |Salience_A - Salience_B|.",
+    "dimensional_tensions": {
+      "fear_hope_tension": "min(fear, hope) * abs(fear_salience - hope_salience)",
+      "enmity_amity_tension": "min(enmity, amity) * abs(enmity_salience - amity_salience)",
+      "envy_compersion_tension": "min(envy, compersion) * abs(envy_salience - compersion_salience)",
+      "dominance_dignity_tension": "min(tribal_dominance, individual_dignity) * abs(tribal_dominance_salience - individual_dignity_salience)",
+      "fragmentative_cohesive_tension": "min(fragmentative_goals, cohesive_goals) * abs(fragmentative_goals_salience - cohesive_goals_salience)"
     },
-    "moral_character_sci": "(dignity_tribalism_tension + truth_manipulation_tension + justice_resentment_tension + hope_fear_tension + pragmatism_fantasy_tension) / 5"
+    "strategic_contradiction_index": "(fear_hope_tension + enmity_amity_tension + envy_compersion_tension + dominance_dignity_tension + fragmentative_cohesive_tension) / 5"
   },
   "reliability_rubric": {
     "cronbachs_alpha": {
