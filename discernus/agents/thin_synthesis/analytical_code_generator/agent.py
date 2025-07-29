@@ -103,7 +103,36 @@ class AnalyticalCodeGenerator:
             )
     
     def _parse_llm_response(self, response_content: str) -> CodeGenerationResponse:
-        """Parse the LLM response into structured format."""
+        """Extract code using delimiter pattern (same approach as CSV extraction)."""
+        
+        # Use the proven delimiter pattern from CSV extraction
+        start_delimiter = "<<<DISCERNUS_PYTHON_CODE_v1>>>"
+        end_delimiter = "<<<END_DISCERNUS_PYTHON_CODE_v1>>>"
+        
+        start_pos = response_content.find(start_delimiter)
+        end_pos = response_content.find(end_delimiter)
+        
+        if start_pos != -1 and end_pos != -1:
+            # Extract code between delimiters (same pattern as CSV extraction)
+            code_start = start_pos + len(start_delimiter)
+            analysis_code = response_content[code_start:end_pos].strip()
+            
+            self.logger.info(f"Successfully extracted code via delimiters ({len(analysis_code)} chars)")
+            
+            return CodeGenerationResponse(
+                analysis_code=analysis_code,
+                code_explanation="Extracted from delimited response",
+                required_libraries=["pandas", "numpy", "scipy", "json"],
+                expected_outputs={},
+                success=True
+            )
+        
+        # Fallback: Try legacy JSON parsing for backward compatibility
+        self.logger.warning("Delimiters not found, attempting JSON fallback")
+        return self._parse_json_fallback(response_content)
+    
+    def _parse_json_fallback(self, response_content: str) -> CodeGenerationResponse:
+        """Fallback JSON parsing for backward compatibility."""
         try:
             # Extract JSON from markdown code blocks  
             code_block_pattern = r'```\s*(?:json)?\s*\n?(.*?)\n?```'
@@ -120,7 +149,7 @@ class AnalyticalCodeGenerator:
             )
             
         except json.JSONDecodeError:
-            # Fallback: Extract raw Python code
+            # Final fallback: Extract raw Python code
             python_match = re.search(r'```python\s*\n(.*?)\n```', response_content, re.DOTALL)
             if python_match:
                 return CodeGenerationResponse(
