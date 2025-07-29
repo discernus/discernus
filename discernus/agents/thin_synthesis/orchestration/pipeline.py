@@ -26,14 +26,15 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from agents.analytical_code_generator import AnalyticalCodeGenerator
-from agents.analytical_code_generator.agent import CodeGenerationRequest
-from agents.code_executor import CodeExecutor
-from agents.code_executor.executor import CodeExecutionRequest
-from agents.evidence_curator import EvidenceCurator
-from agents.evidence_curator.agent import EvidenceCurationRequest
-from agents.results_interpreter import ResultsInterpreter
-from agents.results_interpreter.agent import InterpretationRequest
+# Import THIN synthesis agents from main codebase structure
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from analytical_code_generator.agent import AnalyticalCodeGenerator, CodeGenerationRequest
+from code_executor.executor import CodeExecutor, CodeExecutionRequest
+from evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
+from results_interpreter.agent import ResultsInterpreter, InterpretationRequest
 
 @dataclass
 class PipelineRequest:
