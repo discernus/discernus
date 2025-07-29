@@ -14,6 +14,7 @@ Key Design Principles:
 
 import json
 import logging
+import re
 from typing import Dict, Any, Optional
 from dataclasses import dataclass
 
@@ -169,21 +170,22 @@ Generate the code now:"""
         """Parse the LLM response into structured format."""
         
         try:
-            # Try to extract JSON from the response
-            # Handle cases where LLM wraps JSON in markdown code blocks
-            content = response_content.strip()
+            # THIN Principle: Work WITH LLM behavior, not against it
+            # LLMs almost always wrap JSON in markdown code blocks - expect this as the norm
             
-            # Remove markdown code blocks if present
-            if content.startswith('```json'):
-                content = content[7:]
-            elif content.startswith('```'):
-                content = content[3:]
+            # Use regex to robustly extract JSON from any markdown code block variation
+            # Handles: ```json\n{...}\n```, ```\n{...}\n```, ``` json\n{...}\n```, etc.
+            code_block_pattern = r'```\s*(?:json)?\s*\n?(.*?)\n?```'
+            match = re.search(code_block_pattern, response_content.strip(), re.DOTALL)
             
-            if content.endswith('```'):
-                content = content[:-3]
+            if match:
+                content = match.group(1).strip()
+            else:
+                # Fallback: try raw content (for cases without code blocks)
+                content = response_content.strip()
             
-            # Parse the JSON response
-            parsed = json.loads(content.strip())
+            # Parse the cleaned JSON content
+            parsed = json.loads(content)
             
             return CodeGenerationResponse(
                 analysis_code=parsed.get('analysis_code', ''),
@@ -195,31 +197,24 @@ Generate the code now:"""
             
         except json.JSONDecodeError as e:
             self.logger.error(f"Failed to parse LLM response as JSON: {str(e)}")
+            self.logger.warning("LLM may have ignored JSON format instructions - attempting raw Python extraction")
             
-            # Fallback: try to extract code from markdown blocks
-            lines = response_content.split('\n')
-            code_lines = []
-            in_code_block = False
+            # Last resort: Extract raw Python code (when LLM completely ignores JSON format)
+            python_code_pattern = r'```python\s*\n(.*?)\n```'
+            match = re.search(python_code_pattern, response_content, re.DOTALL)
             
-            for line in lines:
-                if line.strip().startswith('```python'):
-                    in_code_block = True
-                    continue
-                elif line.strip() == '```' and in_code_block:
-                    in_code_block = False
-                    continue
-                elif in_code_block:
-                    code_lines.append(line)
-            
-            if code_lines:
+            if match:
+                extracted_code = match.group(1).strip()
+                self.logger.info("Successfully extracted raw Python code from markdown block")
                 return CodeGenerationResponse(
-                    analysis_code='\n'.join(code_lines),
-                    code_explanation="Extracted from markdown code block",
-                    required_libraries=["pandas", "numpy", "scipy", "json"],
-                    expected_outputs={"note": "Parsed from fallback extraction"},
+                    analysis_code=extracted_code,
+                    code_explanation="Extracted raw Python code - LLM ignored JSON format",
+                    required_libraries=["pandas", "numpy", "scipy", "statistics", "json"],
+                    expected_outputs={"note": "Extracted from raw Python fallback"},
                     success=True
                 )
             
+            # Complete failure - return error
             return CodeGenerationResponse(
                 analysis_code="",
                 code_explanation="",

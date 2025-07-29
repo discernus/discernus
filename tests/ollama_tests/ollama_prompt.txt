@@ -1,3 +1,8 @@
+The text below includes a JSON framework for evaluating rhetoric and a text for you to score and evaluate. Study the framework JSON to learn how your should score and evaluate the text, score and evaluate the text provided.
+
+========BEGIN FRAMEWORK JSON==========
+
+
 ```json
 {
   "name": "character_assessment_framework",
@@ -76,6 +81,10 @@
 ```
 
 </details> 
+
+========END FRAMEWORK JSON==========
+
+========BEGIN RHETORIC TEXT FOR EVALUATION==========
 
 Donald J. Trump
 Address to Joint Session of Congress
@@ -323,3 +332,5 @@ Now it is our time to take up the righteous cause of American liberty, and it is
 We are going to create the highest quality of life, build the safest and wealthiest and healthiest and most vital communities anywhere in the world. We are going to conquer the vast frontiers of science, and we are going to lead humanity into space and plant the American flag on the planet Mars, and even far beyond.
 
 And through it all, we are going to rediscover the unstoppable power of the American spirit. And we are going to renew unlimited promise of the American dream. Every single day we will stand up and we will fight, fight, fight for the country our citizens believe in and for the country our people deserve. My fellow Americans, get ready for an incredible future, because the golden Age of America has only just begun. It will be like nothing that has ever been seen before. Thank you. God bless you and God bless America.
+
+========END RHETORIC TEXT FOR EVALUATION==========
