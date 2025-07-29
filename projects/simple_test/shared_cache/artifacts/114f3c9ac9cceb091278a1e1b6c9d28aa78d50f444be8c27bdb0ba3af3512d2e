@@ -1,0 +1,11 @@
+aid,dimension,intensity,salience,evidence,tension_score
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,tribal_dominance,0.2,0.3,"While we must acknowledge the lived experiences shaped by race, gender, and class, we reject essentialism and the reduction of people to categories.",0.02
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,individual_dignity,0.9,0.9,"Every person deserves a voice, a chance, and the freedom to live with dignity. Each individual carries inherent dignity, grounded not in their background but in their capacity to think, act, and contribute to the common good.",0.00
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,fear,0.3,0.2,"We do not fear facts; we seek them. We meet uncertainty with resilience, not fear.",0.02
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,hope,0.9,0.9,"Hope does not deny hardship; it insists that hardship is not the end of the story. We believe the future can be better—not because of inevitability, but because people choose to make it so.",0.00
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,envy,0.1,0.1,"We measure fairness not by whether one group 'wins,' but by whether the rules are just and universally applied.",0.00
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,complacency,0.2,0.2,"We see the flaws in our systems, the pain in our communities, and the scale of our challenges.",0.00
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,enmity,0.1,0.1,"We pursue progress not by erasing our differences but by aligning around shared goals and a shared future.",0.00
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,amity,0.8,0.8,"Hope invites all to contribute. It builds coalitions, not cults. We pursue progress not by erasing our differences but by aligning around shared goals and a shared future.",0.00
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,fragmentative_goals,0.2,0.3,"We pursue progress not by erasing our differences but by aligning around shared goals and a shared future.",0.02
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,cohesive_goals,0.9,0.9,"Our work is to build systems that reflect that truth—for everyone. Our vision is inclusive because justice cannot be partial.",0.00
