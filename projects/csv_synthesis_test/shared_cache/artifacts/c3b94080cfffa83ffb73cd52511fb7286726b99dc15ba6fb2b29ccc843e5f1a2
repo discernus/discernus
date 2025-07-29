@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e5d6aaca10bf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "csv_synthesis_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n{\n  \"analysis_results\": [\n    {\n      \"artifact_id\": \"583a8c989e04\",\n      \"scores\": {\n        \"unity\": 0.8,\n        \"hope\": 0.7,\n        \"truth\": 0.7,\n        \"justice\": 0.8,\n        \"division\": 0.2,\n        \"fear\": 0.1,\n        \"deception\": 0.1,\n        \"injustice\": 0.2,\n        \"virtue_composite\": 0.775,\n        \"vice_composite\": 0.15\n      },\n      \"evidence\": {\n        \"unity\": [\n          \"\\\"My fellow citizens,\\n\\nToday we stand united in our commitment to truth and justice. We must work together to build a better future for all, not just a select few. Our strength lies in our unity, not in division.\\\"\",\n          \"\\\"Let us not be deceived by those who would divide us. Let us instead focus on what brings us together - our shared values, our common dreams, our collective aspirations.\\\"\",\n          \"\\\"Together, we can build that brighter future. Not through fear, but through hope. Not through deception, but through truth. Not through division, but through unity. And always, always through justice.\\\"\"\n        ],\n        \"hope\": [\n          \"\\\"While some would have us fear the future, I see hope. Hope in the eyes of our children. Hope in the hearts of our workers. Hope in the spirit of our communities.\\\"\",\n          \"\\\"Together, we can build that brighter future. Not through fear, but through hope. Not through deception, but through truth. Not through division, but through unity. And always, always through justice.\\\"\"\n        ],\n        \"truth\": [\n          \"\\\"Today we stand united in our commitment to truth and justice.\\\"\",\n          \"\\\"Not through deception, but through truth.\\\"\",\n          \"\\\"Not through fear, but through hope. Not through deception, but through truth. Not through division, but through unity. And always, always through justice.\\\"\"\n        ],\n        \"justice\": [\n          \"\\\"Today we stand united in our commitment to truth and justice.\\\"\",\n          \"\\\"Justice demands that we ensure equal opportunity for all. That we fight against unfairness wherever we find it. That we stand up for what is right, even when it is difficult.\\\"\",\n          \"\\\"And always, always through justice.\\\"\"\n        ],\n        \"division\": [\n          \"\\\"Our strength lies in our unity, not in division.\\\"\",\n          \"\\\"Let us not be deceived by those who would divide us.\\\"\",\n          \"\\\"Not through division, but through unity.\\\"\"\n        ],\n        \"fear\": [\n          \"\\\"While some would have us fear the future, I see hope.\\\"\",\n          \"\\\"Not through fear, but through hope.\\\"\"\n        ],\n        \"deception\": [\n          \"\\\"Let us not be deceived by those who would divide us.\\\"\",\n          \"\\\"Not through deception, but through truth.\\\"\"\n        ],\n        \"injustice\": [\n          \"\\\"Justice demands that we ensure equal opportunity for all. That we fight against unfairness wherever we find it.\\\"\"\n        ]\n      }\n    }\n  ]\n}\n```\n\n```\n<<<DISCERNUS_SCORES_CSV_v1>>>\naid,unity,hope,truth,justice,division,fear,deception,injustice,virtue_composite,vice_composite\n583a8c989e04,0.8,0.7,0.7,0.8,0.2,0.1,0.1,0.2,0.775,0.15\n<<<END_DISCERNUS_SCORES_CSV_v1>>>\n\n<<<DISCERNUS_EVIDENCE_CSV_v1>>>\naid,dimension,text\n583a8c989e04,unity,\"\"\"My fellow citizens,\n\nToday we stand united in our commitment to truth and justice. We must work together to build a better future for all, not just a select few. Our strength lies in our unity, not in division.\"\"\"\n583a8c989e04,unity,\"\"\"Let us not be deceived by those who would divide us. Let us instead focus on what brings us together - our shared values, our common dreams, our collective aspirations.\"\"\"\n583a8c989e04,unity,\"\"\"Together, we can build that brighter future. Not through fear, but through hope. Not through deception, but through truth. Not through division, but through unity. And always, always through justice.\"\"\"\n583a8c989e04,hope,\"\"\"While some would have us fear the future, I see hope. Hope in the eyes of our children. Hope in the hearts of our workers. Hope in the spirit of our communities.\"\"\"\n583a8c989e04,hope,\"\"\"Together, we can build that brighter future. Not through fear, but through hope. Not through deception, but through truth. Not through division, but through unity. And always, always through justice.\"\"\"\n583a8c989e04,truth,\"\"\"Today we stand united in our commitment to truth and justice.\"\"\"\n583a8c989e04,truth,\"\"\"Not through deception, but through truth.\"\"\"\n583a8c989e04,truth,\"\"\"Not through fear, but through hope. Not through deception, but through truth. Not through division, but through unity. And always, always through justice.\"\"\"\n583a8c989e04,justice,\"\"\"Today we stand united in our commitment to truth and justice.\"\"\"\n583a8c989e04,justice,\"\"\"Justice demands that we ensure equal opportunity for all. That we fight against unfairness wherever we find it. That we stand up for what is right, even when it is difficult.\"\"\"\n583a8c989e04,justice,\"\"\"And always, always through justice.\"\"\"\n583a8c989e04,division,\"\"\"Our strength lies in our unity, not in division.\"\"\"\n583a8c989e04,division,\"\"\"Let us not be deceived by those who would divide us.\"\"\"\n583a8c989e04,division,\"\"\"Not through division, but through unity.\"\"\"\n583a8c989e04,fear,\"\"\"While some would have us fear the future, I see hope.\"\"\"\n583a8c989e04,fear,\"\"\"Not through fear, but through hope.\"\"\"\n583a8c989e04,deception,\"\"\"Let us not be deceived by those who would divide us.\"\"\"\n583a8c989e04,deception,\"\"\"Not through deception, but through truth.\"\"\"\n583a8c989e04,injustice,\"\"\"Justice demands that we ensure equal opportunity for all. That we fight against unfairness wherever we find it.\"\"\"\n<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-28T16:25:27.296798+00:00",
+    "end_time": "2025-07-28T16:25:31.860950+00:00",
+    "duration_seconds": 4.564152,
+    "llm_interaction_hash": "0dec9010bf8d7904"
+  },
+  "input_artifacts": {
+    "framework_hash": "15ff90fdcc74078343e434c8ccf233f74c975f576a8deeb606ce1238b2aad955",
+    "document_hashes": [
+      "583a8c989e049aad953a60749b5566c2254176807556dc57067ff14ca9f3f450"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "csv_synthesis_test",
+      "experiment_root": "/Volumes/code/discernus/projects/csv_synthesis_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250728T162527Z_a58060a8"
+  }
+}

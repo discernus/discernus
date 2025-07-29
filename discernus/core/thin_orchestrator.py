@@ -63,16 +63,20 @@ class ThinOrchestrator:
         
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
         
-    def run_experiment(self, model: str = "vertex_ai/gemini-2.5-flash", synthesis_only: bool = False) -> Dict[str, Any]:
+    def run_experiment(self, 
+                      analysis_model: str = "vertex_ai/gemini-2.5-flash-lite",
+                      synthesis_model: str = "vertex_ai/gemini-2.5-pro",
+                      synthesis_only: bool = False) -> Dict[str, Any]:
         """
-        Execute complete experiment using THIN v2.0 direct call coordination.
+        Run experiment with enhanced agents and mathematical validation.
         
         Args:
-            model: LLM model to use for analysis and synthesis
-            synthesis_only: If True, skip analysis phase and run only synthesis with specified model
+            analysis_model: LLM model to use for analysis
+            synthesis_model: LLM model to use for synthesis
+            synthesis_only: If True, skip analysis and run synthesis on existing CSVs
             
         Returns:
-            Complete experiment results with provenance
+            Experiment results with mathematical validation
         """
         start_time = datetime.now(timezone.utc).isoformat()
         
@@ -98,7 +102,7 @@ class ThinOrchestrator:
             audit.log_orchestrator_event("experiment_start", {
                 "experiment_path": str(self.experiment_path),
                 "run_folder": str(run_folder),
-                "model": model,
+                "model": analysis_model,
                 "synthesis_only": synthesis_only,
                 "architecture": "thin_v2.0_direct_calls"
             })
@@ -125,8 +129,8 @@ class ThinOrchestrator:
                 "size_bytes": len(framework_content)
             })
             
-            # Load corpus documents
-            corpus_documents = self._load_corpus(experiment_config["corpus_path"])
+            # Load corpus documents and manifest
+            corpus_documents, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
             corpus_hashes = []
             corpus_metadata = []
             
@@ -199,6 +203,10 @@ class ThinOrchestrator:
                 print(f"   - Scores: {scores_hash[:8]}... ({latest_scores_time})")
                 print(f"   - Evidence: {evidence_hash[:8]}... ({latest_evidence_time})")
                 
+                # Load framework and corpus for synthesis context (even in synthesis-only mode)
+                framework_content = self._load_framework(experiment_config["framework"])
+                _, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
+                
                 # Run synthesis only
                 synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
                 synthesis_result = synthesis_agent.synthesize_results(
@@ -206,7 +214,9 @@ class ThinOrchestrator:
                     evidence_hash=evidence_hash,
                     analysis_results=[],  # No analysis results in synthesis-only mode
                     experiment_config=experiment_config,
-                    model=model
+                    framework_content=framework_content,
+                    corpus_manifest=corpus_manifest,
+                    model=synthesis_model
                 )
                 
                 if not synthesis_result or not isinstance(synthesis_result, dict):
@@ -230,7 +240,7 @@ class ThinOrchestrator:
                     start_time=start_time,
                     end_time=end_time,
                     status="completed",
-                    metadata={"model": model}
+                    metadata={"model": synthesis_model}
                 )
                 manifest.finalize_manifest()
                 
@@ -270,13 +280,13 @@ class ThinOrchestrator:
             # Initialize analysis and synthesis agents
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
             
-            # Execute analysis (one document at a time)
+            # Execute analysis (in chunks)
             all_analysis_results, scores_hash, evidence_hash = self._execute_analysis_sequentially(
                 analysis_agent,
                 corpus_documents,
                 framework_content,
                 experiment_config,
-                model
+                analysis_model
             )
 
             # Check if any analysis tasks succeeded
@@ -289,14 +299,16 @@ class ThinOrchestrator:
             synthesis_agent = EnhancedSynthesisAgent(self.security, audit, storage)
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             
-            # Pass final CSV artifact hashes to the synthesis agent
-            print(f"DEBUG: Passing scores_hash={scores_hash} and evidence_hash={evidence_hash} to synthesis agent.")
+            # Pass final CSV artifact hashes and full context to the synthesis agent
+            print(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash}, framework, and corpus manifest to synthesis agent.")
             synthesis_result = synthesis_agent.synthesize_results(
                 scores_hash=scores_hash,
                 evidence_hash=evidence_hash,
-                analysis_results=all_analysis_results, # Still useful for metadata
+                analysis_results=all_analysis_results,
                 experiment_config=experiment_config,
-                model=model 
+                framework_content=framework_content,
+                corpus_manifest=corpus_manifest,
+                model=synthesis_model 
             )
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()
@@ -483,8 +495,8 @@ class ThinOrchestrator:
         
         return self.security.secure_read_text(framework_file)
     
-    def _load_corpus(self, corpus_path: str) -> List[Dict[str, Any]]:
-        """Load corpus documents."""
+    def _load_corpus(self, corpus_path: str) -> tuple[List[Dict[str, Any]], Dict[str, Any]]:
+        """Load corpus documents and corpus manifest."""
         corpus_dir = self.experiment_path / corpus_path
         
         if not corpus_dir.exists():
@@ -496,6 +508,7 @@ class ThinOrchestrator:
         if not corpus_files:
             raise ThinOrchestratorError(f"No .txt files found in corpus directory: {corpus_path}")
         
+        # Load corpus documents
         documents = []
         for txt_file in sorted(corpus_files):
             content = self.security.secure_read_text(txt_file)
@@ -505,7 +518,32 @@ class ThinOrchestrator:
                 "filepath": str(txt_file.relative_to(self.experiment_path))
             })
         
-        return documents
+        # Load corpus manifest from corpus.md
+        corpus_manifest = {}
+        corpus_md_file = corpus_dir / "corpus.md"
+        if corpus_md_file.exists():
+            try:
+                corpus_md_content = self.security.secure_read_text(corpus_md_file)
+                
+                # Extract JSON from corpus.md (similar to framework parsing)
+                if '```json' in corpus_md_content:
+                    json_start = corpus_md_content.find('```json') + 7
+                    json_end = corpus_md_content.find('```', json_start)
+                    if json_end > json_start:
+                        json_str = corpus_md_content[json_start:json_end].strip()
+                        corpus_manifest = json.loads(json_str)
+                        print(f"📄 Loaded corpus manifest with {len(corpus_manifest.get('file_manifest', []))} document metadata entries")
+                    else:
+                        print("⚠️ corpus.md found but no valid JSON block detected")
+                else:
+                    print("⚠️ corpus.md found but no JSON block detected")
+            except Exception as e:
+                print(f"⚠️ Failed to parse corpus.md: {e}")
+                corpus_manifest = {}
+        else:
+            print("⚠️ No corpus.md found - synthesis will have limited metadata awareness")
+        
+        return documents, corpus_manifest
     
     def _generate_final_report(self, 
                              analysis_result: Dict[str, Any],

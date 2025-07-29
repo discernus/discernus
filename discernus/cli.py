@@ -134,9 +134,10 @@ def cli():
 @cli.command()
 @click.argument('experiment_path')
 @click.option('--dry-run', is_flag=True, help='Show what would be done without executing')
-@click.option('--model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use (default: gemini-2.5-flash-lite)')
+@click.option('--analysis-model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use for analysis (default: gemini-2.5-flash-lite)')
+@click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
 @click.option('--synthesis-only', is_flag=True, help='Run only synthesis phase using specified model')
-def run(experiment_path: str, dry_run: bool, model: str, synthesis_only: bool):
+def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, synthesis_only: bool):
     """Execute experiment using THIN v2.0 direct orchestration"""
     exp_path = Path(experiment_path)
     
@@ -156,6 +157,8 @@ def run(experiment_path: str, dry_run: bool, model: str, synthesis_only: bool):
         click.echo(f"   Framework: {experiment['framework']}")
         click.echo(f"   Corpus files: {experiment['_corpus_file_count']}")
         click.echo(f"   Mode: {'Synthesis only' if synthesis_only else 'Full run'}")
+        click.echo(f"   Analysis Model: {analysis_model}")
+        click.echo(f"   Synthesis Model: {synthesis_model}")
         return
     
     # Ensure infrastructure is running
@@ -168,11 +171,21 @@ def run(experiment_path: str, dry_run: bool, model: str, synthesis_only: bool):
     
     # Execute using THIN v2.0 direct orchestration
     try:
-        click.echo(f"🚀 Starting THIN v2.0 direct orchestration with {model} ({'synthesis only' if synthesis_only else 'full run'})...")
+        click.echo(f"🚀 Starting THIN v2.0 direct orchestration ({'synthesis only' if synthesis_only else 'full run'})...")
+        if synthesis_only:
+            click.echo(f"📝 Using synthesis model: {synthesis_model}")
+        else:
+            click.echo(f"📝 Using analysis model: {analysis_model}")
+            click.echo(f"📝 Using synthesis model: {synthesis_model}")
+            
         orchestrator = ThinOrchestrator(exp_path)
         
         # Execute the experiment with batch management for context window limits
-        result = orchestrator.run_experiment(model=model, synthesis_only=synthesis_only)
+        result = orchestrator.run_experiment(
+            analysis_model=analysis_model,
+            synthesis_model=synthesis_model,
+            synthesis_only=synthesis_only
+        )
         
         # Show completion with enhanced details
         click.echo("✅ Experiment completed successfully!")

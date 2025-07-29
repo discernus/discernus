@@ -81,12 +81,131 @@ class EnhancedSynthesisAgent:
             prompt_config = yaml.safe_load(f)
         
         return prompt_config['template']
+    
+    def _parse_framework_metadata(self, framework_content: str) -> Dict[str, Any]:
+        """Parse framework JSON metadata from framework content."""
+        try:
+            # Extract JSON from framework markdown (similar to corpus parsing)
+            if '```json' in framework_content:
+                json_start = framework_content.find('```json') + 7
+                json_end = framework_content.find('```', json_start)
+                if json_end > json_start:
+                    json_str = framework_content[json_start:json_end].strip()
+                    framework_metadata = json.loads(json_str)
+                    print(f"📊 Parsed framework metadata: {framework_metadata.get('display_name', 'Unknown Framework')}")
+                    return framework_metadata
+            print("⚠️ No framework JSON metadata found")
+            return {}
+        except Exception as e:
+            print(f"⚠️ Failed to parse framework metadata: {e}")
+            return {}
+    
+    def _build_enhanced_prompt(self, 
+                              scores_csv: str, 
+                              evidence_csv: str,
+                              experiment_config: Dict[str, Any],
+                              framework_metadata: Dict[str, Any],
+                              metadata_lookup: Dict[str, Any]) -> str:
+        """Build enhanced synthesis prompt with full context."""
+        
+        # Base CSV data
+        prompt = f"""You are an expert synthesis agent with advanced analytical capabilities. Your task is to synthesize analysis results using rich contextual information.
+
+EXPERIMENT CONFIGURATION:
+- Name: {experiment_config.get('name', 'Unknown')}
+- Analysis: {experiment_config.get('analysis', {}).get('evaluations_per_document', 1)} evaluations per document
+- Report Format: {experiment_config.get('reporting', {}).get('format', 'standard')}
+- Required Statistical Tests: {experiment_config.get('validation', {}).get('required_tests', [])}
+
+FRAMEWORK INTELLIGENCE:
+- Framework: {framework_metadata.get('display_name', 'Unknown Framework')}
+- Dimension Groups: {framework_metadata.get('dimension_groups', {})}
+- Calculation Specifications: {framework_metadata.get('calculation_spec', {})}
+- Reliability Standards: {framework_metadata.get('reliability_rubric', {})}
+
+CORPUS METADATA INTELLIGENCE:
+- Total Documents: {len(metadata_lookup)} with rich metadata
+- Available Metadata: president, political_party, year, speech_type
+- Cross-reference CSV artifact IDs with document metadata for intelligent analysis
+
+Here are the aggregated scores from all documents:
+<<<DISCERNUS_SCORES_CSV_v1>>>
+{scores_csv}
+<<<END_DISCERNUS_SCORES_CSV_v1>>>
+
+CORPUS DOCUMENT METADATA:
+{json.dumps(metadata_lookup, indent=2)}
+
+NOTE: Evidence CSV omitted to prevent truncation - focus purely on quantitative score analysis.
+
+"""
+        
+        # Add report structure guidance from experiment config
+        report_structure = experiment_config.get('reporting', {}).get('structure', [])
+        if report_structure:
+            prompt += f"""
+REQUIRED REPORT STRUCTURE:
+Generate a comprehensive analysis with these sections:
+"""
+            for section in report_structure:
+                section_guidance = self._get_section_guidance(section)
+                prompt += f"- {section}: {section_guidance}\n"
+        
+        prompt += """
+ANALYSIS INSTRUCTIONS:
+1. Cross-reference CSV artifact IDs with document metadata for intelligent grouping
+2. Use framework dimension groups for macro-level analysis (virtues vs vices)
+3. Perform the required statistical tests and show your work step-by-step
+4. Leverage temporal, partisan, and contextual metadata for sophisticated insights
+5. Apply reliability standards from framework rubric for quality assessment
+
+OUTPUT CONSTRAINTS:
+- CRITICAL: Keep your entire response under 5500 tokens to avoid truncation
+- Prioritize quantitative analysis, statistical tables, and numerical findings
+- Minimize lengthy evidence quotes - use brief citations with aid references only
+- Focus on statistical significance, effect sizes, and numerical trends
+- Use concise bullet points rather than verbose paragraphs where possible
+
+CAPABILITIES AVAILABLE:
+- ASCII art and table formatting using Unicode box-drawing characters
+- Statistical analysis with step-by-step mathematical work
+- Temporal trend analysis using year metadata
+- Partisan comparison analysis using political_party metadata
+- Individual profiling using president metadata
+- Contextual analysis using speech_type metadata
+
+Format your response as a comprehensive but concise markdown document. Prioritize numerical findings and statistical analysis over qualitative descriptions. Show statistical work but keep evidence quotes minimal.
+
+Begin your constrained quantitative analysis now:
+"""
+        
+        return prompt
+    
+    def _get_section_guidance(self, section_name: str) -> str:
+        """Provide guidance for specific report sections."""
+        guidance_map = {
+            "temporal_evolution_analysis": "Analyze character evolution across years using year metadata",
+            "partisan_character_profiles": "Compare Democrats vs Republicans using political_party metadata",
+            "presidential_individual_analysis": "Profile each president using president metadata",
+            "contextual_speech_analysis": "Compare inaugural vs SOTU using speech_type metadata",
+            "statistical_methodology": "Document multi-evaluation reliability and variance analysis",
+            "corpus_metadata_utilization": "Explain how metadata informed the analysis",
+            "executive_summary": "High-level findings and key insights",
+            "hypothesis_testing_results": "Test experiment hypotheses with statistical rigor",
+            "statistical_analysis": "Comprehensive statistical work with calculations shown",
+            "qualitative_insights": "Thematic analysis from evidence data",
+            "methodology_notes": "Analysis approach and framework application",
+            "limitations_and_future_research": "Study limitations and research recommendations"
+        }
+        return guidance_map.get(section_name, "Provide comprehensive analysis for this section")
 
     def synthesize_results(self,
                           scores_hash: Optional[str],
                           evidence_hash: Optional[str],
                           analysis_results: List[Dict[str, Any]],
                           experiment_config: Dict[str, Any],
+                          framework_content: str,
+                          corpus_manifest: Dict[str, Any],
                           model: str = "vertex_ai/gemini-2.5-pro") -> Dict[str, Any]:
         """
         Perform synthesis using aggregated CSV artifacts.
@@ -94,97 +213,69 @@ class EnhancedSynthesisAgent:
         start_time = datetime.now(timezone.utc).isoformat()
         
         # Create deterministic synthesis_id for perfect caching (THIN principle)
-        # Hash based on analysis results content only, not timestamp
-        analysis_content_hash = hashlib.sha256(
-            json.dumps(analysis_results, sort_keys=True).encode()
-        ).hexdigest()
-        synthesis_id = f"synthesis_{analysis_content_hash[:12]}_debug"  # Force cache miss for debugging
+        synthesis_id = hashlib.sha256(
+            f"{scores_hash}:{evidence_hash}".encode()
+        ).hexdigest()[:12]
         
         self.audit.log_agent_event(self.agent_name, "synthesis_start", {
             "synthesis_id": synthesis_id,
-            "num_analysis_batches": len(analysis_results),
+            "scores_hash": scores_hash,
+            "evidence_hash": evidence_hash,
             "model": model,
             "experiment": experiment_config.get("name", "unknown")
         })
         
-        print(f"DEBUG: Received scores_hash={scores_hash} and evidence_hash={evidence_hash}")
+        print(f"🔄 Starting synthesis {synthesis_id}")
+        print(f"📊 Using scores_hash={scores_hash}")
+        print(f"📝 Using evidence_hash={evidence_hash}")
 
         try:
-            try:
-                # Check if synthesis result is already cached (THIN perfect caching)
-                for artifact_hash, artifact_info in self.storage.registry.items():
-                    if (artifact_info.get("metadata", {}).get("artifact_type") == "synthesis_result" and
-                        artifact_info.get("metadata", {}).get("synthesis_id") == synthesis_id):
-                        
-                        # Cache hit! Return the cached synthesis result
-                        print(f"💾 Cache hit for synthesis: {synthesis_id}")
-                        cached_content = self.storage.get_artifact(artifact_hash)
-                        cached_result = json.loads(cached_content.decode('utf-8'))
-                        
-                        self.audit.log_agent_event(self.agent_name, "cache_hit", {
-                            "synthesis_id": synthesis_id,
-                            "cached_artifact_hash": artifact_hash
-                        })
-                        
-                        if not cached_result or not isinstance(cached_result, dict):
-                            print(f"⚠️  Invalid cached result format: {type(cached_result)}")
-                            raise EnhancedSynthesisAgentError("Invalid cached result format")
-                        
-                        if "synthesis_report_markdown" not in cached_result:
-                            print(f"⚠️  Missing synthesis_report_markdown in cached result")
-                            raise EnhancedSynthesisAgentError("Missing synthesis_report_markdown in cached result")
-                        
-                        return {
-                            "result_hash": artifact_hash,
-                            "duration_seconds": 0.0,  # Instant cache hit
-                            "synthesis_confidence": "cached",
-                            "synthesis_report_markdown": cached_result.get("synthesis_report_markdown", "")
-                        }
-            except Exception as e:
-                print(f"⚠️  Error checking cache: {e}")
-                # Continue with synthesis
-                
-            # No cache hit - proceed with synthesis
-            print(f"🔍 No cache hit for {synthesis_id} - performing synthesis...")
-            
             # Read CSV artifacts from storage
             scores_csv = ""
             if scores_hash:
                 try:
                     scores_csv = self.storage.get_artifact(scores_hash).decode('utf-8')
+                    print(f"✅ Loaded scores CSV ({len(scores_csv)} chars)")
                 except FileNotFoundError:
                     print(f"⚠️  Scores CSV artifact not found: {scores_hash}")
 
+            # Skip loading evidence CSV to reduce context size and avoid truncation
             evidence_csv = ""
-            if evidence_hash:
-                try:
-                    evidence_csv = self.storage.get_artifact(evidence_hash).decode('utf-8')
-                except FileNotFoundError:
-                    print(f"⚠️  Evidence CSV artifact not found: {evidence_hash}")
+            print(f"⚠️  Skipping evidence CSV ({evidence_hash[:8]}...) to prevent truncation - analysis will focus purely on quantitative scores")
 
-            # Prepare the synthesis prompt with raw analysis results
-            synthesis_prompt = self.prompt_template.format(
+            # Parse framework metadata for intelligent synthesis
+            framework_metadata = self._parse_framework_metadata(framework_content)
+            
+            # Parse corpus manifest for metadata-driven analysis
+            file_manifest = corpus_manifest.get('file_manifest', [])
+            
+            # Create metadata lookup for intelligent cross-referencing
+            metadata_lookup = {}
+            for item in file_manifest:
+                metadata_lookup[item.get('name', '')] = item
+            
+            # Prepare enhanced synthesis prompt with full context
+            synthesis_prompt = self._build_enhanced_prompt(
                 scores_csv=scores_csv,
                 evidence_csv=evidence_csv,
-                analysis_results=json.dumps(analysis_results, indent=2)
+                experiment_config=experiment_config,
+                framework_metadata=framework_metadata,
+                metadata_lookup=metadata_lookup
             )
+
+            print(f"📝 Synthesis prompt length: {len(synthesis_prompt)} chars")
 
             # Call the synthesis LLM
             self.audit.log_agent_event(self.agent_name, "llm_call_start", {
-                "synthesis_id": synthesis_id, "type": "synthesis", "prompt_length": len(synthesis_prompt)
+                "synthesis_id": synthesis_id,
+                "prompt_length": len(synthesis_prompt)
             })
-            
-            # Debug: Log first 2000 chars of prompt to see what we're sending
-            print(f"🔍 DEBUG: First 2000 chars of synthesis prompt:")
-            print(f"{synthesis_prompt[:2000]}...")
-            print(f"🔍 DEBUG: Prompt ends with:")
-            print(f"...{synthesis_prompt[-500:]}")
 
             response = completion(
                 model=model,
                 messages=[{"role": "user", "content": synthesis_prompt}],
                 temperature=0.0,
-                max_tokens=6000,  # Increased limit for complete synthesis report
+                max_tokens=6000,
                 safety_settings=[
                     {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
                     {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
