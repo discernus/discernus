@@ -20,6 +20,7 @@ import yaml
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+import hashlib # Added for framework hash calculation
 
 from .security_boundary import ExperimentSecurityBoundary, SecurityError
 from .audit_logger import AuditLogger
@@ -100,7 +101,9 @@ class ThinOrchestrator:
                            experiment_config: Dict[str, Any],
                            model: str,
                            audit_logger: AuditLogger,
-                           storage: LocalArtifactStorage) -> Dict[str, Any]:
+                           storage: LocalArtifactStorage,
+                           framework_hash: str,
+                           corpus_hash: str) -> Dict[str, Any]:
         """
         Run synthesis using the new THIN Code-Generated Synthesis Architecture.
         
@@ -118,7 +121,11 @@ class ThinOrchestrator:
             experiment_context=f"Experiment: {experiment_config.get('name', 'Unknown')}",
             max_evidence_per_finding=3,
             min_confidence_threshold=0.7,
-            interpretation_focus="comprehensive"
+            interpretation_focus="comprehensive",
+            # Add provenance context (Issue #208 fix)
+            framework_hash=framework_hash,
+            corpus_hash=corpus_hash,
+            framework_name=experiment_config.get('framework', 'Unknown framework')
         )
         
         # Execute pipeline
@@ -389,14 +396,25 @@ class ThinOrchestrator:
                 with open(registry_file) as f:
                     registry = json.load(f)
                 
-                # Find latest scores and evidence CSVs
+                # Calculate current framework hash for provenance validation (Issue #208)
+                current_framework_content = self._load_framework(experiment_config["framework"])
+                current_framework_hash = hashlib.sha256(current_framework_content.encode('utf-8')).hexdigest()
+                
+                # Find latest scores and evidence CSVs that match current framework
                 scores_hash = None
                 evidence_hash = None
                 latest_scores_time = None
                 latest_evidence_time = None
                 
                 for artifact_id, info in registry.items():
-                    artifact_type = info.get("metadata", {}).get("artifact_type")
+                    metadata = info.get("metadata", {})
+                    artifact_type = metadata.get("artifact_type")
+                    artifact_framework_hash = metadata.get("framework_hash")
+                    
+                    # CRITICAL: Only consider artifacts from the same framework (Issue #208 fix)
+                    if artifact_framework_hash != current_framework_hash:
+                        continue
+                        
                     if artifact_type == "intermediate_scores.csv":
                         timestamp = info["created_at"]
                         if not latest_scores_time or timestamp > latest_scores_time:
@@ -409,7 +427,30 @@ class ThinOrchestrator:
                             evidence_hash = artifact_id
                 
                 if not (scores_hash and evidence_hash):
-                    raise ThinOrchestratorError("Required CSV artifacts not found in registry")
+                    # Log detailed information about framework matching for debugging
+                    framework_artifacts_found = []
+                    for artifact_id, info in registry.items():
+                        metadata = info.get("metadata", {})
+                        if metadata.get("artifact_type") in ["intermediate_scores.csv", "intermediate_evidence.csv"]:
+                            framework_artifacts_found.append({
+                                "artifact_id": artifact_id[:12],
+                                "type": metadata.get("artifact_type"),
+                                "framework_hash": metadata.get("framework_hash", "MISSING")[:12],
+                                "timestamp": info.get("created_at")
+                            })
+                    
+                    print(f"❌ No analysis artifacts found matching current framework")
+                    print(f"   Current framework hash: {current_framework_hash[:12]}...")
+                    print(f"   Available artifacts: {len(framework_artifacts_found)}")
+                    for artifact in framework_artifacts_found:
+                        print(f"     - {artifact['type']}: {artifact['artifact_id']}... (fw: {artifact['framework_hash']}...)")
+                    
+                    raise ThinOrchestratorError(
+                        f"No analysis artifacts found for current framework (hash: {current_framework_hash[:12]}...). "
+                        f"Found {len(framework_artifacts_found)} artifacts from other frameworks. "
+                        "This indicates framework provenance is working correctly - "
+                        "run full analysis to generate artifacts for this framework."
+                    )
                 
                 # Copy CSV files to new run
                 import shutil
@@ -419,6 +460,7 @@ class ThinOrchestrator:
                 print(f"📊 Using existing analysis from shared cache")
                 print(f"   - Scores: {scores_hash[:8]}... ({latest_scores_time})")
                 print(f"   - Evidence: {evidence_hash[:8]}... ({latest_evidence_time})")
+                print(f"   - Framework: {current_framework_hash[:12]}... (provenance validated ✅)")
                 
                 # Load framework and corpus for synthesis context (even in synthesis-only mode)
                 framework_content = self._load_framework(experiment_config["framework"])
@@ -427,6 +469,14 @@ class ThinOrchestrator:
                 # Run synthesis only
                 if use_thin_synthesis:
                     print("🏭 Using THIN Code-Generated Synthesis Architecture...")
+                    
+                    # Calculate framework hash for provenance
+                    framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+                    
+                    # Calculate corpus hash for complete provenance context
+                    corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
+                    corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
+                    
                     synthesis_result = self._run_thin_synthesis(
                         scores_hash=scores_hash,
                         evidence_hash=evidence_hash,
@@ -434,7 +484,10 @@ class ThinOrchestrator:
                         experiment_config=experiment_config,
                         model=synthesis_model,
                         audit_logger=audit,
-                        storage=storage
+                        storage=storage,
+                        # Add provenance context (Issue #208 fix)
+                        framework_hash=framework_hash,
+                        corpus_hash=corpus_hash
                     )
                 else:
                     print("🔄 Using legacy EnhancedSynthesisAgent...")
@@ -532,6 +585,14 @@ class ThinOrchestrator:
             if use_thin_synthesis:
                 print("🏭 Using THIN Code-Generated Synthesis Architecture...")
                 print(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash} to THIN pipeline.")
+                
+                # Calculate framework hash for provenance
+                framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+                
+                # Calculate corpus hash for complete provenance context
+                corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
+                corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
+                
                 synthesis_result = self._run_thin_synthesis(
                     scores_hash=scores_hash,
                     evidence_hash=evidence_hash,
@@ -539,7 +600,10 @@ class ThinOrchestrator:
                     experiment_config=experiment_config,
                     model=synthesis_model,
                     audit_logger=audit,
-                    storage=storage
+                    storage=storage,
+                    # Add provenance context (Issue #208 fix)
+                    framework_hash=framework_hash,
+                    corpus_hash=corpus_hash
                 )
             else:
                 print("🔄 Using legacy EnhancedSynthesisAgent...")
