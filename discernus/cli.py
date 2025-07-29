@@ -137,9 +137,19 @@ def cli():
 @click.option('--analysis-model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use for analysis (default: gemini-2.5-flash-lite)')
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
 @click.option('--synthesis-only', is_flag=True, help='Run only synthesis phase using specified model')
-def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, synthesis_only: bool):
+@click.option('--analysis-only', is_flag=True, help='Run only analysis phase, save artifacts for later synthesis')
+@click.option('--stage', type=click.Choice(['thin-gen', 'thin-exec', 'thin-cure', 'thin-interp']), 
+              help='Resume at specific THIN synthesis sub-stage (requires existing analysis artifacts)')
+def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, 
+        synthesis_only: bool, analysis_only: bool, stage: str):
     """Execute experiment using THIN v2.0 direct orchestration"""
     exp_path = Path(experiment_path)
+    
+    # Validate mutually exclusive stage control flags
+    stage_flags = [synthesis_only, analysis_only, bool(stage)]
+    if sum(stage_flags) > 1:
+        click.echo("❌ Error: --synthesis-only, --analysis-only, and --stage are mutually exclusive")
+        sys.exit(1)
     
     click.echo(f"🎯 Discernus v2.0 - Running experiment: {experiment_path}")
     
@@ -151,12 +161,22 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
     
     click.echo(message)
     
+    # Determine execution mode for display
+    if analysis_only:
+        execution_mode = "Analysis only"
+    elif synthesis_only:
+        execution_mode = "Synthesis only" 
+    elif stage:
+        execution_mode = f"Resume at {stage}"
+    else:
+        execution_mode = "Full run"
+    
     if dry_run:
         click.echo("🧪 DRY RUN MODE - No actual execution")
         click.echo(f"   Experiment: {experiment['name']}")
         click.echo(f"   Framework: {experiment['framework']}")
         click.echo(f"   Corpus files: {experiment['_corpus_file_count']}")
-        click.echo(f"   Mode: {'Synthesis only' if synthesis_only else 'Full run'}")
+        click.echo(f"   Mode: {execution_mode}")
         click.echo(f"   Analysis Model: {analysis_model}")
         click.echo(f"   Synthesis Model: {synthesis_model}")
         return
@@ -171,20 +191,24 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
     
     # Execute using THIN v2.0 direct orchestration
     try:
-        click.echo(f"🚀 Starting THIN v2.0 direct orchestration ({'synthesis only' if synthesis_only else 'full run'})...")
-        if synthesis_only:
+        click.echo(f"🚀 Starting THIN v2.0 direct orchestration ({execution_mode.lower()})...")
+        if synthesis_only or stage:
             click.echo(f"📝 Using synthesis model: {synthesis_model}")
+        elif analysis_only:
+            click.echo(f"📝 Using analysis model: {analysis_model}")
         else:
             click.echo(f"📝 Using analysis model: {analysis_model}")
             click.echo(f"📝 Using synthesis model: {synthesis_model}")
             
         orchestrator = ThinOrchestrator(exp_path)
         
-        # Execute the experiment with batch management for context window limits
+        # Execute the experiment with stage control
         result = orchestrator.run_experiment(
             analysis_model=analysis_model,
             synthesis_model=synthesis_model,
-            synthesis_only=synthesis_only
+            synthesis_only=synthesis_only,
+            analysis_only=analysis_only,
+            resume_stage=stage
         )
         
         # Show completion with enhanced details
@@ -256,6 +280,83 @@ def list():
             click.echo(f"      📁 {exp['config']['_corpus_file_count']} corpus files")
         else:
             click.echo(f"   ❌ {exp['path']} - Invalid")
+
+
+@cli.command()
+@click.argument('experiment_path')
+def artifacts(experiment_path: str):
+    """Show experiment artifacts and available resumption points"""
+    exp_path = Path(experiment_path)
+    
+    click.echo(f"🔍 Experiment Artifacts: {experiment_path}")
+    
+    # Validate experiment structure
+    valid, message, experiment = validate_experiment_structure(exp_path)
+    if not valid:
+        click.echo(message)
+        sys.exit(1)
+    
+    click.echo(message)
+    
+    # Check for shared cache artifacts
+    shared_cache_dir = exp_path / "shared_cache" / "artifacts"
+    if not shared_cache_dir.exists():
+        click.echo("❌ No analysis artifacts found")
+        click.echo("   💡 Run: discernus run --analysis-only to create artifacts")
+        return
+    
+    # Load artifact registry to check available artifacts
+    registry_file = shared_cache_dir / "artifact_registry.json"
+    if not registry_file.exists():
+        click.echo("❌ No artifact registry found")
+        return
+    
+    import json
+    try:
+        with open(registry_file) as f:
+            registry = json.load(f)
+    except Exception as e:
+        click.echo(f"❌ Error reading artifact registry: {e}")
+        return
+    
+    # Check for analysis artifacts
+    scores_artifacts = []
+    evidence_artifacts = []
+    
+    for artifact_id, info in registry.items():
+        artifact_type = info.get("metadata", {}).get("artifact_type")
+        timestamp = info.get("created_at", "unknown")
+        
+        if artifact_type == "intermediate_scores.csv":
+            scores_artifacts.append((artifact_id, timestamp))
+        elif artifact_type == "intermediate_evidence.csv":
+            evidence_artifacts.append((artifact_id, timestamp))
+    
+    if scores_artifacts and evidence_artifacts:
+        # Sort by timestamp and get latest
+        scores_artifacts.sort(key=lambda x: x[1], reverse=True)
+        evidence_artifacts.sort(key=lambda x: x[1], reverse=True)
+        
+        latest_scores = scores_artifacts[0]
+        latest_evidence = evidence_artifacts[0]
+        
+        click.echo("✅ Analysis artifacts available:")
+        click.echo(f"   📊 Scores: {latest_scores[0][:12]}... ({latest_scores[1]})")
+        click.echo(f"   🗣️  Evidence: {latest_evidence[0][:12]}... ({latest_evidence[1]})")
+        click.echo("")
+        click.echo("🚀 Available commands:")
+        click.echo("   discernus run --synthesis-only       # Full synthesis")
+        click.echo("   discernus run --stage thin-gen       # Resume at code generation")
+        click.echo("   discernus run --stage thin-exec      # Resume at code execution")
+        click.echo("   discernus run --stage thin-cure      # Resume at evidence curation")
+        click.echo("   discernus run --stage thin-interp    # Resume at interpretation")
+    else:
+        click.echo("❌ Incomplete analysis artifacts")
+        if not scores_artifacts:
+            click.echo("   Missing: scores CSV")
+        if not evidence_artifacts:
+            click.echo("   Missing: evidence CSV")
+        click.echo("   💡 Run: discernus run --analysis-only to create complete artifacts")
 
 
 @cli.command()
