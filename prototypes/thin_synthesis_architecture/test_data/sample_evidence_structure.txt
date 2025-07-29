@@ -1,0 +1,13 @@
+EVIDENCE CSV STRUCTURE:
+
+Columns:
+- artifact_id: Unique identifier matching scores CSV
+- dimension: Which analytical dimension this evidence supports
+- evidence_text: Direct quote from the source text
+- context: Surrounding context for the quote
+- confidence: Float 0.0-1.0, confidence in this evidence
+- reasoning: Brief explanation of why this supports the dimension
+
+Sample rows: ~200-1000 evidence entries across all artifacts
+Expected format: CSV with headers, some fields may be empty
+Multiple evidence entries per artifact_id are common 

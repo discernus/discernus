@@ -1,0 +1,17 @@
+SCORES CSV STRUCTURE:
+
+Columns:
+- artifact_id: Unique identifier for each analyzed text
+- integrity_score: Float 0.0-1.0, virtue dimension
+- courage_score: Float 0.0-1.0, virtue dimension  
+- compassion_score: Float 0.0-1.0, virtue dimension
+- justice_score: Float 0.0-1.0, virtue dimension
+- wisdom_score: Float 0.0-1.0, virtue dimension
+- corruption_score: Float 0.0-1.0, vice dimension
+- cowardice_score: Float 0.0-1.0, vice dimension
+- cruelty_score: Float 0.0-1.0, vice dimension
+- injustice_score: Float 0.0-1.0, vice dimension
+- folly_score: Float 0.0-1.0, vice dimension
+
+Sample rows: ~50-200 analyzed political speeches/texts
+Expected format: CSV with headers, no missing values 
