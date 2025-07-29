@@ -46,7 +46,7 @@ Institutional mediation, minority rights, and procedural democracy emphasis
   "analysis_variants": {
     "default": {
       "description": "Salience-enhanced populist vs pluralist democratic authority analysis with embedded CSV output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert in democratic theory and political communication. Phase 2: Framework Methodology: Your task is to analyze the text using the Populism vs Pluralism Framework v5.0. Phase 3: Operational Definitions: Evaluate two dimensions: Populist Authority (legitimacy from the direct will of the people) and Pluralist Authority (legitimacy from institutional mediation and minority rights). Phase 4: Scoring Protocol: For each dimension, score its intensity (0.0-1.0) and salience (0.0-1.0), and provide the strongest 1-2 quotes as evidence. Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must have columns for each dimension's score and salience score. The evidence CSV must have columns for dimension, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert in democratic theory and political communication. Phase 2: Framework Methodology: Your task is to analyze the text using the Populism vs Pluralism Framework v5.0. Phase 3: Operational Definitions: Evaluate two dimensions: Populist Authority (legitimacy from the direct will of the people) and Pluralist Authority (legitimacy from institutional mediation and minority rights). Phase 4: Scoring Protocol: For each dimension, score its intensity (0.0-1.0) and salience (0.0-1.0), and provide the strongest 1-2 quotes as evidence. Calculate the democratic authority balance (populist_authority - pluralist_authority). Phase 5: Framework-Specific CSV Structure: Your scores CSV must contain exactly 6 columns in this order: aid, populist_authority, pluralist_authority, populist_authority_salience, pluralist_authority_salience, democratic_authority_balance. Your evidence CSV must contain exactly 6 columns: aid, dimension, quote_id, quote_text, confidence_score, context_type. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis AND the embedded CSV segments using the exact delimiters and column structures specified in the output_contract."
     }
   },
   "dimension_groups": {
@@ -76,15 +76,31 @@ Institutional mediation, minority rights, and procedural democracy emphasis
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores and salience scores."
+        "description": "CSV for all dimensional scores, salience scores, and calculated balance.",
+        "columns": [
+          "aid",
+          "populist_authority",
+          "pluralist_authority",
+          "populist_authority_salience",
+          "pluralist_authority_salience", 
+          "democratic_authority_balance"
+        ]
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication."
+        "description": "CSV for structured evidence data for audit and replication.",
+        "columns": [
+          "aid",
+          "dimension",
+          "quote_id",
+          "quote_text",
+          "confidence_score",
+          "context_type"
+        ]
       }
     },
-    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The salience_ranking should be an ordered array of objects, each containing 'dimension', 'salience_score', and 'rank'."
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The salience_ranking should be an ordered array of objects, each containing 'dimension', 'salience_score', and 'rank'. The scores CSV must include exactly 6 columns: aid + 2 authority scores + 2 salience scores + 1 balance calculation. The evidence CSV must include exactly 6 columns: aid + dimension + quote_id + quote_text + confidence_score + context_type."
   }
 }
 ```

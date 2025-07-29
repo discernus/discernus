@@ -61,7 +61,7 @@ Version 5.0 introduces the **Embedded CSV Architecture** to solve synthesis scal
   "analysis_variants": {
     "default": {
       "description": "Complete salience-weighted moral foundation analysis with moral tension pattern quantification and embedded CSV output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert moral psychology analyst with deep knowledge of Moral Foundations Theory. Phase 2: Framework Methodology: Your task is to analyze the text using the Moral Foundations Theory Framework v5.0, which includes tension-enhanced salience-weighted analysis. Phase 3: Operational Definitions: The framework evaluates 6 foundation pairs (12 total foundations): Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, and Liberty/Oppression. Phase 4: Scoring Protocol: For each of the 12 foundations, score its intensity (0.0-1.0) and salience (0.0-1.0). Provide the strongest 1-2 quotes as evidence. Then, calculate the moral tension for each of the 6 pairs and the overall Moral Strategic Contradiction Index (MSCI). Phase 5: Framework-Specific CSV Structure: Your scores CSV must contain exactly 27 columns in this order: aid, care, harm, fairness, cheating, loyalty, betrayal, authority, subversion, sanctity, degradation, liberty, oppression, care_salience, harm_salience, fairness_salience, cheating_salience, loyalty_salience, betrayal_salience, authority_salience, subversion_salience, sanctity_salience, degradation_salience, liberty_salience, oppression_salience, care_harm_tension, fairness_cheating_tension, loyalty_betrayal_tension, authority_subversion_tension, sanctity_degradation_tension, liberty_oppression_tension, moral_strategic_contradiction_index. Your evidence CSV must contain exactly 6 columns: aid, foundation, quote_id, quote_text, confidence_score, context_type. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis AND the embedded CSV segments using the exact delimiters and column structures specified in the output_contract."
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert moral psychology analyst with deep knowledge of Moral Foundations Theory. Phase 2: Framework Methodology: Your task is to analyze the text using the Moral Foundations Theory Framework v5.0, which includes tension-enhanced salience-weighted analysis. Phase 3: Operational Definitions: The framework evaluates 6 foundation pairs (12 total foundations): Care/Harm, Fairness/Cheating, Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, and Liberty/Oppression. Phase 4: Scoring Protocol: For each of the 12 foundations, score its intensity (0.0-1.0) and salience (0.0-1.0). Provide the strongest 1-2 quotes as evidence. Then, calculate the moral tension for each of the 6 pairs and the overall Moral Strategic Contradiction Index (MSCI). Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must contain columns for each foundation's score, each foundation's salience, each tension score, and the MSCI. The evidence CSV must have columns for foundation, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
     }
   },
   "dimension_groups": {
@@ -103,34 +103,15 @@ Version 5.0 introduces the **Embedded CSV Architecture** to solve synthesis scal
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores, salience scores, tension scores, and calculated metrics.",
-        "columns": [
-          "aid",
-          "care", "harm", "fairness", "cheating", "loyalty", "betrayal", 
-          "authority", "subversion", "sanctity", "degradation", "liberty", "oppression",
-          "care_salience", "harm_salience", "fairness_salience", "cheating_salience", 
-          "loyalty_salience", "betrayal_salience", "authority_salience", "subversion_salience", 
-          "sanctity_salience", "degradation_salience", "liberty_salience", "oppression_salience",
-          "care_harm_tension", "fairness_cheating_tension", "loyalty_betrayal_tension",
-          "authority_subversion_tension", "sanctity_degradation_tension", "liberty_oppression_tension",
-          "moral_strategic_contradiction_index"
-        ]
+        "description": "CSV for all dimensional scores, salience scores, tension scores, and calculated metrics."
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication.",
-        "columns": [
-          "aid",
-          "foundation",
-          "quote_id", 
-          "quote_text",
-          "confidence_score",
-          "context_type"
-        ]
+        "description": "CSV for structured evidence data for audit and replication."
       }
     },
-    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The salience_ranking should be an ordered array of objects, each containing 'foundation', 'salience_score', and 'rank'. The scores CSV must include exactly 27 columns: aid + 12 foundation scores + 12 salience scores + 6 tension scores + 1 MSCI score. The evidence CSV must include exactly 6 columns: aid + foundation + quote_id + quote_text + confidence_score + context_type."
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The salience_ranking should be an ordered array of objects, each containing 'foundation', 'salience_score', and 'rank'."
   }
 }
 ```

@@ -1,0 +1,9 @@
+aid,dimension,quote_id,quote_text,confidence_score,context_type
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Immutability-Identity Politics,0,"Our identity is not optional; it's imposed. We are who we are *because they made us so*.",0.95,core_concept
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Immutability-Identity Politics,1,"If you're not with us, you're against us. Solidarity demands unity, not nuance.",0.90,key_indicator
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Immutability-Identity Politics,2,"Our very existence is erased, excluded, and ignored. *Now it's our turn.*",0.85,key_indicator
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribal Domination,3,"There is no neutral ground—there are only oppressors and the oppressed. If you're not with us, you're against us.",0.95,core_concept
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribal Domination,4,"We must put our nation first",0.80,key_indicator
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribal Domination,5,"They still write the laws, own the media, fund the police, and shape your future. We rewrite the story, and *we* decide what's true.",0.90,key_indicator
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Pluralist Individual Dignity,6,"Facts can be debated, but our lived experience is not up for discussion.",0.80,core_concept
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Pluralist Individual Dignity,7,"We don't want inclusion in a broken system. We want a new world run by *us*, for *us*...",0.75,key_indicator

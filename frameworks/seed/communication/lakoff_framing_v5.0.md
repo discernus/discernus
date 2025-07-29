@@ -88,15 +88,39 @@ The Lakoff Framing Framework v5.0 analyzes political and social discourse using 
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores, salience scores, tension scores, and calculated metrics."
+        "description": "CSV for all dimensional scores, salience scores, tension scores, and calculated metrics.",
+        "columns": [
+          "aid",
+          "authority_vs_empathy",
+          "competition_vs_cooperation", 
+          "self_reliance_vs_interdependence",
+          "strict_father_salience_authority",
+          "nurturant_parent_salience_authority",
+          "strict_father_salience_competition",
+          "nurturant_parent_salience_competition",
+          "strict_father_salience_self_reliance",
+          "nurturant_parent_salience_self_reliance",
+          "authority_empathy_tension",
+          "competition_cooperation_tension",
+          "self_reliance_interdependence_tension",
+          "family_model_strategic_contradiction_index"
+        ]
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication."
+        "description": "CSV for structured evidence data for audit and replication.",
+        "columns": [
+          "aid",
+          "dimension",
+          "quote_id",
+          "quote_text", 
+          "confidence_score",
+          "context_type"
+        ]
       }
     },
-    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified."
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The scores CSV must include exactly 14 columns: aid + 3 dimension scores + 6 salience scores + 3 tension scores + 1 FMSCI. The evidence CSV must include exactly 6 columns: aid + dimension + quote_id + quote_text + confidence_score + context_type."
   }
 }
 ```

@@ -1,0 +1,25 @@
+aid,dimension,quote,confidenceturn,rank
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,care,"We've been patient long enough. Our suffering is proof. Our anger is holy.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,harm,"Until our pain is *fully acknowledged* and compensated, until our enemies know what it's like to lose what we lost...",0.8,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,fairness,"You think fairness is blind? It's never been blind—it's been looking the other way.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,cheating,"Justice without revenge is just another lie.",0.8,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,authority,"Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,subversion,"We will control the narrative because the other side has done so for too long.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,sanctity,"Our anger is holy.",0.7,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,degradation,"Only by erasing the old structures entirely... can something pure be born.",0.6,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,liberty,"We want a new world run by *us*, for *us*...",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,oppression,"If you're not with us, you're against us. Solidarity demands unity, not nuance.",0.9,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,loyalty,"Solidarity demands unity, not nuance.",0.8,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,betrayal,"If you're not with us, you're against us.",0.8,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,liberty_lf1,"We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,oppression_lf1,"Our identity is not optional; it's imposed.",0.9,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,liberty_lf2,"We will control the narrative because the other side has done so for too long.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,oppression_lf2,"They still write the laws, own the media, fund the police, and shape your future.",0.9,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,liberty_lf3,"This is a war for survival, and if we hesitate, we lose everything.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,oppression_lf3,"Act now or be erased.",0.9,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,liberty_lf4,"A better world *isn't possible* unless we start over.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,oppression_lf4,"*Burn it down.*",0.9,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,liberty_lf5,"we rewrite the story, and *we* decide what's true.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,oppression_lf5,"We don't want inclusion in a broken system.",0.9,2
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,liberty_lf6,"Only by erasing the old structures entirely... can something pure be born.",0.9,1
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,oppression_lf6,"Only by erasing the old structures entirely... can something pure be born.",0.9,2

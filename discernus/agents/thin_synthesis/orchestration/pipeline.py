@@ -262,7 +262,7 @@ class ProductionThinSynthesisPipeline:
             # Store intermediate artifacts
             code_hash = self.artifact_client.put_artifact(code_response.analysis_code.encode('utf-8'))
             results_hash = self.artifact_client.put_artifact(json.dumps(exec_response['result_data']).encode('utf-8'))
-            evidence_hash = self.artifact_client.put_artifact(json.dumps(curation_response.curated_evidence).encode('utf-8'))
+            evidence_hash = self.artifact_client.put_artifact(json.dumps(curation_response.to_json_serializable()).encode('utf-8'))
             
             # Success! Create complete response
             total_time = time.time() - start_time

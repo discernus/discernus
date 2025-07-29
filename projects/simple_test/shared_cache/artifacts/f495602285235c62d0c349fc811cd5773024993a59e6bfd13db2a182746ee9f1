@@ -63,7 +63,7 @@ What solutions are proposed and how policy options are presented and prioritized
   "analysis_variants": {
     "default": {
       "description": "Complete four-function framing analysis with embedded CSV output.",
-      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst of communication and framing. Phase 2: Framework Methodology: Your task is to analyze the text using the Entman Framing Functions Framework v5.0. Phase 3: Operational Definitions: Evaluate four independent framing functions: Problem Definition, Causal Attribution, Moral Evaluation, and Treatment Recommendation. Phase 4: Scoring Protocol: Score each function from 0.0 to 1.0 and provide the strongest 1-2 quotes as evidence. Calculate the message completeness score as the average of all four functions. Phase 5: Framework-Specific CSV Structure: Your scores CSV must contain exactly 6 columns in this order: aid, problem_definition, causal_attribution, moral_evaluation, treatment_recommendation, message_completeness_score. Your evidence CSV must contain exactly 6 columns: aid, function, quote_id, quote_text, confidence_score, context_type. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis AND the embedded CSV segments using the exact delimiters and column structures specified in the output_contract."
+      "analysis_prompt": "Phase 1: Cognitive Priming: You are an expert analyst of communication and framing. Phase 2: Framework Methodology: Your task is to analyze the text using the Entman Framing Functions Framework v5.0. Phase 3: Operational Definitions: Evaluate four independent framing functions: Problem Definition, Causal Attribution, Moral Evaluation, and Treatment Recommendation. Phase 4: Scoring Protocol: Score each function from 0.0 to 1.0 and provide the strongest 1-2 quotes as evidence. Phase 5: Embedded CSV Generation: CRITICAL: Your response must include two embedded CSV segments using these exact delimiters: <<<DISCERNUS_SCORES_CSV_v1>>> and <<<DISCERNUS_EVIDENCE_CSV_v1>>>. The scores CSV must have columns for each of the four function scores. The evidence CSV must have columns for function, quote, and confidence. Phase 6: Output Specification: Return a complete response containing both a comprehensive JSON analysis and the embedded CSV segments as specified in the output_contract."
     }
   },
   "dimension_groups": {
@@ -92,31 +92,15 @@ What solutions are proposed and how policy options are presented and prioritized
       "scores_csv": {
         "delimiter_start": "<<<DISCERNUS_SCORES_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_SCORES_CSV_v1>>>",
-        "description": "CSV for all dimensional scores and calculated metrics.",
-        "columns": [
-          "aid",
-          "problem_definition",
-          "causal_attribution", 
-          "moral_evaluation",
-          "treatment_recommendation",
-          "message_completeness_score"
-        ]
+        "description": "CSV for all dimensional scores."
       },
       "evidence_csv": {
         "delimiter_start": "<<<DISCERNUS_EVIDENCE_CSV_v1>>>",
         "delimiter_end": "<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>",
-        "description": "CSV for structured evidence data for audit and replication.",
-        "columns": [
-          "aid",
-          "function",
-          "quote_id",
-          "quote_text", 
-          "confidence_score",
-          "context_type"
-        ]
+        "description": "CSV for structured evidence data for audit and replication."
       }
     },
-    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified. The scores CSV must include exactly 6 columns: aid + 4 function scores + 1 message completeness score. The evidence CSV must include exactly 6 columns: aid + function + quote_id + quote_text + confidence_score + context_type."
+    "instructions": "IMPORTANT: Your response MUST include both a complete JSON analysis AND embedded CSV segments using the exact delimiters specified."
   }
 }
 ```

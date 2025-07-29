@@ -1,0 +1,179 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+import json
+
+# This script assumes scores_df and evidence_df are pre-loaded pandas DataFrames.
+# It performs statistical analysis according to the Entman Framing Functions Framework v5.0.
+
+# Define the core dimension columns from the framework for easier reference
+DIMENSION_COLS = [
+    'problem_definition',
+    'causal_attribution',
+    'moral_evaluation',
+    'treatment_recommendation'
+]
+
+# Initialize the final results dictionary with the required structure
+result_data = {
+    'descriptive_stats': {},
+    'reliability_metrics': {},
+    'correlations': {},
+    'hypothesis_tests': {}
+}
+
+def get_cronbach_alpha_interpretation(alpha):
+    """Interprets Cronbach's alpha based on the framework's reliability rubric."""
+    if alpha >= 0.80:
+        return 'Excellent'
+    elif alpha >= 0.70:
+        return 'Good'
+    elif alpha >= 0.60:
+        return 'Acceptable'
+    else:
+        return 'Poor'
+
+# --- Main Analysis Block ---
+# Encapsulate the entire analysis in a try-except block for robust error handling.
+try:
+    # --- 1. Descriptive Statistics & Sample Characteristics ---
+    try:
+        # Ensure all required dimension columns exist in the scores DataFrame
+        if not all(col in scores_df.columns for col in DIMENSION_COLS):
+            raise KeyError("One or more required dimension columns are missing from scores_df.")
+        
+        # Select only numeric columns for description to avoid errors
+        numeric_cols = scores_df.select_dtypes(include=np.number).columns.tolist()
+        desc_stats = scores_df[numeric_cols].describe().to_dict()
+
+        # Add sample size information
+        sample_info = {
+            'n_scores': int(scores_df.shape[0]),
+            'n_evidence': int(evidence_df.shape[0])
+        }
+        
+        result_data['descriptive_stats'] = {
+            'summary_statistics': desc_stats,
+            'sample_characteristics': sample_info
+        }
+
+    except Exception as e:
+        result_data['descriptive_stats'] = {'error': f"Failed to compute descriptive statistics: {e}"}
+
+    # --- 2. Reliability Metrics (Cronbach's Alpha) ---
+    try:
+        # Use only the 4 independent framing functions for reliability analysis
+        reliability_df = scores_df[DIMENSION_COLS].dropna()
+        n_items = len(DIMENSION_COLS)
+        n_records = len(reliability_df)
+
+        if n_records > 1 and n_items > 1:
+            # Calculate item variances and total variance
+            item_variances = reliability_df.var(axis=0, ddof=1).sum()
+            total_variance = reliability_df.sum(axis=1).var(ddof=1)
+
+            if total_variance > 0:
+                alpha = (n_items / (n_items - 1)) * (1 - item_variances / total_variance)
+                interpretation = get_cronbach_alpha_interpretation(alpha)
+                
+                result_data['reliability_metrics']['cronbachs_alpha'] = {
+                    'value': alpha,
+                    'interpretation': interpretation,
+                    'notes': f"Calculated across {n_items} items with {n_records} complete records."
+                }
+            else:
+                result_data['reliability_metrics']['cronbachs_alpha'] = {'error': "Total variance is zero; alpha cannot be calculated."}
+        else:
+            result_data['reliability_metrics']['cronbachs_alpha'] = {'error': "Not enough data (records > 1) or items (dimensions > 1) to calculate Cronbach's alpha."}
+
+    except Exception as e:
+        result_data['reliability_metrics'] = {'error': f"Failed to compute reliability metrics: {e}"}
+
+    # --- 3. Correlation Analysis ---
+    try:
+        # The framework assumes independent functions. Correlation tests this assumption.
+        corr_df = scores_df[DIMENSION_COLS].dropna()
+        if len(corr_df) >= 2:
+            # Calculate Pearson correlation matrix
+            correlation_matrix = corr_df.corr(method='pearson')
+            
+            # Calculate p-values for each correlation
+            p_values = pd.DataFrame(np.ones(correlation_matrix.shape), columns=DIMENSION_COLS, index=DIMENSION_COLS)
+            for col1 in DIMENSION_COLS:
+                for col2 in DIMENSION_COLS:
+                    if col1 != col2:
+                        # Unpack the result from pearsonr, which is (correlation, p-value)
+                        _, p_val = stats.pearsonr(corr_df[col1], corr_df[col2])
+                        p_values.loc[col1, col2] = p_val
+            
+            result_data['correlations'] = {
+                'pearson_matrix': correlation_matrix.to_dict(),
+                'p_values': p_values.to_dict(),
+                'notes': "Tests the theoretical independence of the framing functions. Low p-values (<0.05) suggest a significant linear relationship, challenging the independence assumption."
+            }
+        else:
+            result_data['correlations'] = {'error': "Not enough data (>=2 rows) to compute correlations."}
+            
+    except Exception as e:
+        result_data['correlations'] = {'error': f"Failed to compute correlations: {e}"}
+
+    # --- 4. Hypothesis Testing ---
+    # Container for multiple tests
+    hypothesis_results = {}
+
+    # Test 1: One-Sample T-test for Message Completeness
+    try:
+        completeness_scores = scores_df['message_completeness_score'].dropna()
+        if len(completeness_scores) > 1:
+            pop_mean = 0.5  # Neutral midpoint
+            t_stat, p_val = stats.ttest_1samp(completeness_scores, popmean=pop_mean)
+            
+            # Effect size: Cohen's d
+            mean_score = completeness_scores.mean()
+            std_dev = completeness_scores.std(ddof=1)
+            cohens_d = (mean_score - pop_mean) / std_dev if std_dev > 0 else 0
+
+            hypothesis_results['message_completeness_test'] = {
+                'test_type': 'One-Sample T-test',
+                'hypothesis': f"The mean message completeness score ({mean_score:.3f}) is significantly different from the neutral midpoint ({pop_mean}).",
+                't_statistic': t_stat,
+                'p_value': p_val,
+                'is_significant_at_0.05': p_val < 0.05,
+                'effect_size_cohens_d': cohens_d
+            }
+        else:
+            hypothesis_results['message_completeness_test'] = {'error': "Not enough data to perform a t-test."}
+    except Exception as e:
+        hypothesis_results['message_completeness_test'] = {'error': f"Failed: {e}"}
+
+    # Test 2: ANOVA for differences between framing functions
+    try:
+        anova_data = [scores_df[col].dropna() for col in DIMENSION_COLS]
+        # Ensure all groups have data
+        if all(len(group) > 1 for group in anova_data):
+            f_stat, p_val = stats.f_oneway(*anova_data)
+            
+            hypothesis_results['dimension_means_test'] = {
+                'test_type': 'One-Way ANOVA',
+                'hypothesis': "The mean scores of the four framing functions are significantly different from each other.",
+                'f_statistic': f_stat,
+                'p_value': p_val,
+                'is_significant_at_0.05': p_val < 0.05
+            }
+        else:
+            hypothesis_results['dimension_means_test'] = {'error': "One or more dimension groups have insufficient data for ANOVA."}
+            
+    except Exception as e:
+        hypothesis_results['dimension_means_test'] = {'error': f"Failed: {e}"}
+
+    result_data['hypothesis_tests'] = hypothesis_results
+
+except Exception as e:
+    # Catch-all for major failures (e.g., DataFrames not defined)
+    result_data = {
+        'error': 'A critical error occurred during the analysis pipeline.',
+        'details': str(e)
+    }
+
+# The final 'result_data' variable is now populated and ready for downstream use.
+# Per instructions, this is the final artifact.

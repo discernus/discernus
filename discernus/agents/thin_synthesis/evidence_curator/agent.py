@@ -18,7 +18,7 @@ import json
 import logging
 import pandas as pd
 from typing import Dict, Any, List, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 # Import LLM gateway from main codebase
 import sys
@@ -55,6 +55,19 @@ class EvidenceCurationResponse:
     curation_summary: Dict[str, Any]
     success: bool
     error_message: Optional[str] = None
+    
+    def to_json_serializable(self) -> Dict[str, Any]:
+        """Convert to JSON-serializable format for artifact storage."""
+        serializable_evidence = {}
+        for category, evidence_list in self.curated_evidence.items():
+            serializable_evidence[category] = [asdict(evidence) for evidence in evidence_list]
+        
+        return {
+            'curated_evidence': serializable_evidence,
+            'curation_summary': self.curation_summary,
+            'success': self.success,
+            'error_message': self.error_message
+        }
 
 class EvidenceCurator:
     """

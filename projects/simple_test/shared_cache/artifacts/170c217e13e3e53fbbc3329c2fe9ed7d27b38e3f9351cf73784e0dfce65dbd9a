@@ -1,0 +1,23 @@
+aid,dimension,quote_id,quote_text,confidence_score,context_type
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Immutability-Identity Politics,0,"Our identity is not optional; it's imposed. We are who we are *because they made us so*.",0.95,core_concept
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Immutability-Identity Politics,1,"If you're not with us, you're against us. Solidarity demands unity, not nuance.",0.90,key_indicator
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Immutability-Identity Politics,2,"Our very existence is erased, excluded, and ignored. *Now it's our turn.*",0.85,key_indicator
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribal Domination,3,"There is no neutral ground—there are only oppressors and the oppressed. If you're not with us, you're against us.",0.95,core_concept
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribal Domination,4,"We must put our nation first",0.80,key_indicator
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribal Domination,5,"They still write the laws, own the media, fund the police, and shape your future. We rewrite the story, and *we* decide what's true.",0.90,key_indicator
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Pluralist Individual Dignity,6,"Facts can be debated, but our lived experience is not up for discussion.",0.80,core_concept
+e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Pluralist Individual Dignity,7,"We don't want inclusion in a broken system. We want a new world run by *us*, for *us*...",0.75,key_indicator
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,immutabe_identity_politics,doc2_q1,Every person deserves a voice, a chance, and the freedom to live with dignity. Our work is to build systems that reflect that truth,0.98,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,immutabe_identity_politics,doc2_q2,Our identities enrich our perspectives, but they do not define our moral worth. Each individual carries inherent dignity,0.97,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,immutabe_identity_politics,doc2_q3,Human dignity transcends race and class,0.99,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,immutabe_identity_politics,doc2_q4,We reject essentialism and the reduction of people to categories,0.95,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,immutabe_identity_politics,doc2_q5,Our vision is inclusive because justice cannot be partial,0.96,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,immutabe_identity_politics,doc2_q6,We measure fairness not by whether one group wins, but by whether the rules are just and universally applied,0.94,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,tribal_domination,doc2_q7,Our vision is inclusive because justice cannot be partial,0.96,rejection_of_tribalism
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,tribal_domination,doc2_q8,We pursue progress not by erasing our differences but by aligning around shared goals and a shared future.,0.95,rejection_of_tribalism
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,tribal_domination,doc2_q9,We measure fairness not by whether one group wins, but by whether the rules are just and universally applied.,0.94,rejection_of_tribalism
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,pluralist_individual_dignity,doc2_q1,Every person deserves a voice, a chance, and the freedom to live with dignity. Our work is to build systems that reflect that truth for everyone.,0.98,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,pluralist_individual_dignity,doc2_q2,Our identities enrich our perspectives, but they do not define our moral worth. Each individual carries inherent dignity,0.97,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,pluralist_individual_dignity,doc2_q10,While we must acknowledge the lived experiences shaped by race, gender, and class, we reject essentialism and the reduction of people to categories. Pluralism is not a threat; it is a strength.,0.92,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,pluralist_individual_dignity,doc2_q11,True justice means building institutions that protect everyone's rights, not just our own.,0.95,core_tenet
+af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf,pluralist_individual_dignity,doc2_q12,We focus on processes, not payback; on access, not revenge.,0.93,core_tenet

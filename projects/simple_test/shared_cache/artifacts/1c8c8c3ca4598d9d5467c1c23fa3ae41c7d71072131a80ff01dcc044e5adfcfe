@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_b04e85624bfd",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "simple_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "I will decode the provided framework and documents.\nThen, I will analyze each document using the `analysis_prompt` from the decoded framework.\nFor each document analysis, I will score the ten dimensions specified by the framework (Customer Service, Customer Exploitation, Employee Development, Employee Exploitation, Accountability, Opacity, Financial Responsibility, Financial Manipulation, Sustainable Purpose, Short Term Extraction) on a scale of 0.0 to 1.0, identifying 1-2 strong quotes as evidence for each dimension. I will also calculate the 'stakeholder_focus_index', 'operational_integrity_index', and 'strategic_sustainability_score' as defined in the framework, showing the mathematical work.\nFinally, I will generate the two required embedded CSV sections: `<<<DISCERNUS_SCORES_CSV_v1>>>` and `<<<DISCERNUS_EVIDENCE_CSV_v1>>>`, using the specified delimiters and adhering to the framework's output contract.\n\n**Analysis of Document: document1.txt**\n\nThe document \"Redemption Through Reckoning: A Manifesto for Restorative Power\" presents a highly charged and confrontational stance. The language is deeply rooted in themes of oppression, injustice, and a call for radical change. The author expresses a profound sense of grievance and a desire for retribution against those perceived as oppressors.\n\n**Mathematical Calculations:**\n\n**1. Stakeholder Focus Index**\n\n*   **Formula:** `(Customer Service + Employee Development) - (Customer Exploitation + Employee Exploitation)`\n*   **Scores:**\n    *   Customer Service: 0.2\n    *   Customer Exploitation: 0.9\n    *   Employee Development: 0.1\n    *   Employee Exploitation: 0.8\n*   **Calculation:** (0.2 + 0.1) - (0.9 + 0.8) = 0.3 - 1.7 = -1.4\n*   **Stakeholder Focus Index:** -1.4\n\n**2. Operational Integrity Index**\n\n*   **Formula:** `(Accountability + Financial Responsibility) - (Opacity + Financial Manipulation)`\n*   **Scores:**\n    *   Accountability: 0.3\n    *   Opacity: 0.8\n    *   Financial Responsibility: 0.1\n    *   Financial Manipulation: 0.7\n*   **Calculation:** (0.3 + 0.1) - (0.8 + 0.7) = 0.4 - 1.5 = -1.1\n*   **Operational Integrity Index:** -1.1\n\n**3. Strategic Sustainability Score**\n\n*   **Formula:** `Sustainable Purpose - Short Term Extraction`\n*   **Scores:**\n    *   Sustainable Purpose: 0.2\n    *   Short Term Extraction: 0.9\n*   **Calculation:** 0.2 - 0.9 = -0.7\n*   **Strategic Sustainability Score:** -0.7\n\n---\n\n```csv\n<<<DISCERNUS_SCORES_CSV_v1>>>\naid,customer_service,customer_exploitation,employee_development,employee_exploitation,accountability,opacity,financial_responsibility,financial_manipulation,sustainable_purpose,short_term_extraction,stakeholder_focus_index,operational_integrity_index,strategic_sustainability_score\n{artifact_id},0.2,0.9,0.1,0.8,0.3,0.8,0.1,0.7,0.2,0.9,-1.4,-1.1,-0.7\n<<<END_DISCERNUS_SCORES_CSV_v1>>>\n```\n\n```csv\n<<<DISCERNUS_EVIDENCE_CSV_v1>>>\naid,dimension,quote,confidence\n{artifact_id},customer_service,\"\"\"We don't want inclusion in a broken system.\"\"\",0.2\n{artifact_id},customer_service,\"\"\"We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place.\"\"\",0.1\n{artifact_id},customer_exploitation,\"\"\"Our identity is not optional; it's imposed. We are who we are *because they made us so*.\"\"\",0.9\n{artifact_id},customer_exploitation,\"\"\"If data doesn't reflect our reality, the data is flawed or worse, part of the system.\"\"\",0.8\n{artifact_id},employee_development,\"\"\"They still write the laws, own the media, fund the police, and shape your future.\"\"\",0.1\n{artifact_id},employee_exploitation,\"\"\"If you're not with us, you're against us. Solidarity demands unity, not nuance.\"\"\",0.8\n{artifact_id},employee_exploitation,\"\"\"They gaslight us; now we rewrite the story, and *we* decide what's true.\"\"\",0.8\n{artifact_id},accountability,\"\"\"Our pain is fully acknowledged and compensated*\"\"\",0.3\n{artifact_id},accountability,\"\"\"Justice without revenge is just another lie.\"\"\",0.3\n{artifact_id},opacity,\"\"\"Don't talk to us about \"\"procedure\"\" or \"\"due process\"\" - those were invented to keep power in the wrong hands.\"\"\",0.8\n{artifact_id},opacity,\"\"\"The arc of history doesn't bend; it breaks, and *we will be the ones who snap it*.\"\"\",0.8\n{artifact_id},financial_responsibility,\"\"\"Our suffering is proof. Our anger is holy.\"\"\",0.1\n{artifact_id},financial_manipulation,\"\"\"All our power will come only when we stop pretending we can all coexist and start claiming what's ours*to*go*together, as a people.*\"\"\",0.7\n{artifact_id},financial_manipulation,\"\"\"They won't give up power without a fight*and neither will we.*\"\"\",0.7\n{artifact_id},sustainable_purpose,\"\"\"A better world *isn't possible*\"\"\",0.2\n{artifact_id},short_term_extraction,\"\"\"Burn it down. Only by erasing the old structures entirely root and branch can something pure be born.\"\"\",0.9\n{artifact_id},short_term_extraction,\"\"\"We don't want inclusion in a broken system. We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place.\"\"\",0.9\n<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-29T23:06:09.324444+00:00",
+    "end_time": "2025-07-29T23:06:14.422775+00:00",
+    "duration_seconds": 5.098331,
+    "llm_interaction_hash": "29c687a53f6c59ab"
+  },
+  "input_artifacts": {
+    "framework_hash": "54caaf4209c713157ac8425fd401934a41a74c4bb91ebde7e17bbdd3252cf13c",
+    "document_hashes": [
+      "e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "simple_test",
+      "experiment_root": "/Volumes/code/discernus/projects/simple_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250729T230609Z_6671d0a8"
+  }
+}
