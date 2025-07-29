@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_a21fdc060641",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "csv_synthesis_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n{\n  \"analysis_results\": [\n    {\n      \"artifact_id\": \"b59396b65cf1\",\n      \"scores\": {\n        \"unity\": 0.2,\n        \"hope\": 0.1,\n        \"truth\": 0.1,\n        \"justice\": 0.1,\n        \"division\": 0.8,\n        \"fear\": 0.7,\n        \"deception\": 0.7,\n        \"injustice\": 0.8,\n        \"virtue_composite\": 0.125,\n        \"vice_composite\": 0.75\n      },\n      \"evidence\": {\n        \"unity\": [\n          \"\\\"Do not be fooled by their calls for unity - it is a false unity that serves only their interests.\\\"\"\n        ],\n        \"hope\": [\n          \"\\\"They speak of hope while engineering despair.\\\"\"\n        ],\n        \"truth\": [\n          \"\\\"They claim truth while dealing in lies.\\\"\"\n        ],\n        \"justice\": [\n          \"\\\"To fight against their injustice. To reject their false promises. Only then can we reclaim what is rightfully ours.\\\"\"\n        ],\n        \"division\": [\n          \"\\\"Our enemies seek to divide us, to weaken us from within.\\\"\",\n          \"\\\"The system is rigged against the common people, creating deeper divisions in our society.\\\"\"\n        ],\n        \"fear\": [\n          \"\\\"They want you to live in fear. Fear of change. Fear of the future. Fear of each other.\\\"\",\n          \"\\\"And they use this fear to maintain their grip on power.\\\"\"\n        ],\n        \"deception\": [\n          \"\\\"They spread deception and falsehoods to undermine our values.\\\"\"\n        ],\n        \"injustice\": [\n          \"\\\"We see injustice in our streets. The elites prosper while working families struggle.\\\"\"\n        ]\n      }\n    }\n  ]\n}\n```\n\n```csv\n<<<DISCERNUS_SCORES_CSV_v1>>>\naid,unity,hope,truth,justice,division,fear,deception,injustice,virtue_composite,vice_composite\nb59396b65cf1,0.2,0.1,0.1,0.1,0.8,0.7,0.7,0.8,0.125,0.75\n<<<END_DISCERNUS_SCORES_CSV_v1>>>\n\n<<<DISCERNUS_EVIDENCE_CSV_v1>>>\naid,dimension,quote\nb59396b65cf1,unity,\"\"\"Do not be fooled by their calls for unity - it is a false unity that serves only their interests.\"\"\"\nb59396b65cf1,hope,\"\"\"They speak of hope while engineering despair.\"\"\"\nb59396b65cf1,truth,\"\"\"They claim truth while dealing in lies.\"\"\"\nb59396b65cf1,justice,\"\"\"To fight against their injustice. To reject their false promises. Only then can we reclaim what is rightfully ours.\"\"\"\nb59396b65cf1,division,\"\"\"Our enemies seek to divide us, to weaken us from within.\"\"\"\nb59396b65cf1,division,\"\"\"The system is rigged against the common people, creating deeper divisions in our society.\"\"\"\nb59396b65cf1,fear,\"\"\"They want you to live in fear. Fear of change. Fear of the future. Fear of each other.\"\"\"\nb59396b65cf1,fear,\"\"\"And they use this fear to maintain their grip on power.\"\"\"\nb59396b65cf1,deception,\"\"\"They spread deception and falsehoods to undermine our values.\"\"\"\nb59396b65cf1,injustice,\"\"\"We see injustice in our streets. The elites prosper while working families struggle.\"\"\"\n<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-28T16:25:31.863217+00:00",
+    "end_time": "2025-07-28T16:25:33.958854+00:00",
+    "duration_seconds": 2.095637,
+    "llm_interaction_hash": "449708a3d11cb28f"
+  },
+  "input_artifacts": {
+    "framework_hash": "15ff90fdcc74078343e434c8ccf233f74c975f576a8deeb606ce1238b2aad955",
+    "document_hashes": [
+      "b59396b65cf11eb928fb4273aef2be9a25d0060b82e0b3363f63a326c4559c06"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "csv_synthesis_test",
+      "experiment_root": "/Volumes/code/discernus/projects/csv_synthesis_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250728T162527Z_a58060a8"
+  }
+}

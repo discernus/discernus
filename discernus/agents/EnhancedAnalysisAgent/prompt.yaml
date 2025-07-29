@@ -16,7 +16,7 @@ template: |
   ```
 
   **IMPORTANT**: 
-  1. Replace {artifact_id} with the document's hash
+  1. Keep {artifact_id} exactly as shown - DO NOT replace it with actual hash values
   2. The 'aid' column MUST be first in both CSVs
   3. The 'dimension' column MUST be second in the evidence CSV
   4. Follow the framework's output_contract for all other columns and data

@@ -1,5 +1,5 @@
 template: |
-  You are an expert synthesis agent. Your task is to synthesize the following analysis results into a coherent report.
+  You are an expert synthesis agent. Your task is to synthesize analysis results into a coherent report using only the provided CSV data.
 
   Here are the aggregated scores from all documents:
   <<<DISCERNUS_SCORES_CSV_v1>>>
@@ -11,21 +11,21 @@ template: |
   {evidence_csv}
   <<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
 
-  Here are the raw analysis results for your reference:
-  {analysis_results}
-
   Please provide a comprehensive synthesis of these results in markdown format. Your report should:
   1. Analyze the overall patterns and trends in the scores
   2. Identify key themes and insights from the evidence
-  3. Highlight any notable correlations or relationships
-  4. Provide specific examples to support your findings
+  3. Calculate and report key statistics:
+     - Mean and standard deviation for each dimension
+     - Correlations between dimensions
+     - Distribution analysis (quartiles, notable clusters)
+  4. Provide specific evidence citations to support findings
   5. Maintain academic rigor and avoid promotional language
 
   Format your response as a markdown document with:
   - Clear section headings
+  - Statistical summaries with calculations shown
+  - Evidence citations with aid references
   - Bullet points for key findings
-  - Specific evidence citations
-  - Statistical summaries where relevant
   - A balanced, objective tone
 
   Begin your report now: 
