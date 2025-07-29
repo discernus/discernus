@@ -116,7 +116,7 @@ These principles guide every design decision in Discernus:
 - Agent specialization: focused analysis agents with clear input/output contracts
 - Comprehensive reporting with proper provenance asset management
 
-**10. Opinionated Model Selection Based on Performance Requirements**
+**10. Opinionated Model Selection Based on Performance Requirements** [NEEDS UPDATE]
 - Context window requirements: 2M+ tokens for multi-framework batch analysis
 - Rate limiting needs: 800+ RPM for institutional-scale processing
 - Accuracy demands: Consistent performance across full context window
@@ -206,7 +206,7 @@ These are the absolute requirements for a reliable, production-ready system.
 
 These enhancements move the system from merely reliable to highly performant and efficient.
 
-**Pillar 4: The Router (For Cost, Speed, and Capability)**
+**Pillar 4: The Router (For Cost, Speed, and Capability)** [NEEDS UPDATING]
 - **Principle**: No single LLM is best for every task. A sophisticated system routes tasks to the optimal model based on the task's complexity, cost, and speed requirements.
 - **Implementation**: An LLM-based **Router** acts as a dispatcher. A small, fast model first classifies an incoming task (e.g., "simple data extraction" vs. "complex reasoning") and then routes it to the appropriate "expert" model (e.g., `Claude Haiku` for the simple task, `Gemini 2.5 Pro` for the complex one).
 
