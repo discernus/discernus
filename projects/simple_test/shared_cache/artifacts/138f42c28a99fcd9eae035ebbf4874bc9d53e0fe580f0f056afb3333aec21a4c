@@ -1,0 +1,203 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+import json
+
+# This script assumes 'scores_df' and 'evidence_df' are pre-loaded pandas DataFrames.
+
+# --- 1. Setup and Initial Data Validation ---
+
+# Initialize the final results dictionary with required keys
+result_data = {
+    'descriptive_stats': {},
+    'hypothesis_tests': {},
+    'correlations': {},
+    'reliability_metrics': {}
+}
+
+# Define core dimensions based on the CFF v5.0 framework specification.
+# This helps in iterating and selecting relevant columns for analysis.
+# Note: 'compersion' is in the spec but not in the data, so it's omitted.
+fragmentative_dims = ['tribal_dominance', 'fear', 'envy', 'enmity', 'fragmentative_goals']
+cohesive_dims = ['individual_dignity', 'hope', 'amity', 'cohesive_goals']
+all_base_dims = fragmentative_dims + cohesive_dims
+
+# Safely copy the DataFrame to avoid SettingWithCopyWarning
+df = scores_df.copy()
+
+# Convert all relevant score/salience columns to numeric, coercing errors to NaN
+# This is a critical data cleaning step.
+score_cols = [col for col in df.columns if col not in ['aid']]
+for col in score_cols:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+
+
+# --- 2. Data Recalculation and Validation ---
+# The framework specifies certain calculations. We validate and compute them here.
+try:
+    # A. Calculate the 'enmity_amity_tension' score, which is in the spec but missing from the sample data.
+    # Formula: Tension Score = min(Anchor_A_score, Anchor_B_score) * |Salience_A - Salience_B|
+    enmity_scores = df['enmity']
+    amity_scores = df['amity']
+    enmity_salience = df['enmity_salience']
+    amity_salience = df['amity_salience']
+
+    min_scores = np.minimum(enmity_scores, amity_scores)
+    salience_diff = abs(enmity_salience - amity_salience)
+    df['enmity_amity_tension_calculated'] = min_scores * salience_diff
+
+    # B. Recalculate the Strategic Contradiction Index (SCI) for validation, using only CFF v5.0-specified tensions.
+    # Note: 'envy_compersion_tension' cannot be calculated as 'compersion' data is missing.
+    # We will use a 4-axis SCI.
+    tension_cols_for_sci = [
+        'fear_hope_tension',
+        'dominance_dignity_tension',
+        'fragmentative_cohesive_tension',
+        'enmity_amity_tension_calculated'
+    ]
+    
+    # Ensure all required tension columns exist before proceeding
+    valid_tension_cols = [col for col in tension_cols_for_sci if col in df.columns]
+    if len(valid_tension_cols) > 0:
+        df['sci_recalculated'] = df[valid_tension_cols].mean(axis=1, skipna=True)
+        # Store the list of columns used for the calculation for transparency
+        result_data['descriptive_stats'] = {'sci_recalculated_source_columns': valid_tension_cols}
+    else:
+        result_data['descriptive_stats'] = {'sci_recalculated_source_columns': 'No valid tension columns found for SCI recalculation.'}
+
+
+except Exception as e:
+    result_data['calculation_error'] = f"Error during data recalculation: {str(e)}"
+
+
+# --- 3. Descriptive Statistics ---
+try:
+    # For the scores DataFrame
+    # Use only columns that are part of the framework or were calculated.
+    analysis_cols = all_base_dims + [col + '_salience' for col in all_base_dims if col + '_salience' in df.columns]
+    analysis_cols += [col for col in valid_tension_cols] if 'valid_tension_cols' in locals() else []
+    analysis_cols += ['strategic_contradiction_index', 'sci_recalculated']
+    analysis_cols = [col for col in analysis_cols if col in df.columns] # Final check
+    
+    descriptives = df[analysis_cols].describe().round(3)
+    result_data['descriptive_stats']['scores_summary'] = json.loads(descriptives.to_json())
+    result_data['descriptive_stats']['sample_size'] = int(df.shape[0])
+
+    # For the evidence DataFrame (using safe statistical methods)
+    if 'evidence_df' in locals() and not evidence_df.empty:
+        evidence_descriptives = {}
+        # Ensure 'quote' column exists and is of string type for .str accessor
+        if 'quote' in evidence_df.columns and evidence_df['quote'].dtype == 'object':
+             # Calculate length of quotes, handling potential non-string data gracefully
+            evidence_descriptives['quote_length_stats'] = json.loads(evidence_df['quote'].str.len().describe().round(2).to_json())
+        
+        # Describe confidence scores, if available
+        if 'confidence' in evidence_df.columns:
+            evidence_df['confidence'] = pd.to_numeric(evidence_df['confidence'], errors='coerce')
+            evidence_descriptives['confidence_stats'] = json.loads(evidence_df['confidence'].describe().round(2).to_json())
+        result_data['descriptive_stats']['evidence_summary'] = evidence_descriptives
+
+except Exception as e:
+    result_data['descriptive_stats']['error'] = f"Could not generate descriptive statistics: {str(e)}"
+
+
+# --- 4. Reliability Analysis (Cronbach's Alpha) ---
+def cronbach_alpha(dataframe):
+    """Calculates Cronbach's Alpha for a given DataFrame of items."""
+    df_clean = dataframe.dropna()
+    if df_clean.shape[0] < 2 or df_clean.shape[1] < 2:
+        return np.nan # Not enough data to calculate
+    
+    k = df_clean.shape[1]
+    item_vars = df_clean.var(axis=0, ddof=1).sum()
+    total_var = df_clean.sum(axis=1).var(ddof=1)
+    
+    if total_var == 0:
+        return 1.0 if item_vars == 0 else 0.0
+
+    return (k / (k - 1)) * (1 - (item_vars / total_var))
+
+try:
+    reliability_results = {}
+    
+    # Alpha for Fragmentative Dimensions Scale
+    frag_df = df[fragmentative_dims]
+    alpha_frag = cronbach_alpha(frag_df)
+    reliability_results['fragmentative_scale_alpha'] = round(alpha_frag, 3) if not np.isnan(alpha_frag) else 'Not calculable'
+
+    # Alpha for Cohesive Dimensions Scale
+    cohesive_df = df[cohesive_dims]
+    alpha_cohesive = cronbach_alpha(cohesive_df)
+    reliability_results['cohesive_scale_alpha'] = round(alpha_cohesive, 3) if not np.isnan(alpha_cohesive) else 'Not calculable'
+
+    result_data['reliability_metrics'] = reliability_results
+except Exception as e:
+    result_data['reliability_metrics']['error'] = f"Could not calculate reliability: {str(e)}"
+
+
+# --- 5. Correlation Analysis ---
+try:
+    # Use the same set of analysis columns from descriptive stats
+    corr_df = df[analysis_cols].corr().round(3)
+    # Convert to JSON serializable format
+    result_data['correlations']['matrix'] = json.loads(corr_df.to_json())
+except Exception as e:
+    result_data['correlations']['error'] = f"Could not generate correlation matrix: {str(e)}"
+
+
+# --- 6. Hypothesis Testing ---
+def cohens_d(x, y):
+    """Calculates Cohen's d for independent samples."""
+    nx, ny = len(x), len(y)
+    if nx < 2 or ny < 2: return np.nan
+    dof = nx + ny - 2
+    pooled_std = np.sqrt(((nx - 1) * np.var(x, ddof=1) + (ny - 1) * np.var(y, ddof=1)) / dof)
+    if pooled_std == 0: return np.nan
+    return (np.mean(x) - np.mean(y)) / pooled_std
+
+hypo_tests_results = {}
+try:
+    # H1: Test for significant differences between opposing dimensions
+    opposing_pairs = [
+        ('fear', 'hope'),
+        ('enmity', 'amity'),
+        ('tribal_dominance', 'individual_dignity'),
+        ('fragmentative_goals', 'cohesive_goals'),
+        ('envy', 'amity') # Using 'amity' as a proxy for the missing 'compersion'
+    ]
+    paired_tests = {}
+    for dim1, dim2 in opposing_pairs:
+        if dim1 in df.columns and dim2 in df.columns:
+            d1_data = df[dim1].dropna()
+            d2_data = df[dim2].dropna()
+            if len(d1_data) > 1 and len(d2_data) > 1:
+                # Use independent t-test as samples might have different NaNs
+                t_stat, p_val = stats.ttest_ind(d1_data, d2_data, equal_var=False) # Welch's t-test
+                effect_size = cohens_d(d1_data, d2_data)
+                paired_tests[f'{dim1}_vs_{dim2}'] = {
+                    't_statistic': round(t_stat, 3),
+                    'p_value': round(p_val, 5),
+                    'cohens_d': round(effect_size, 3) if not np.isnan(effect_size) else 'Not calculable',
+                    'interpretation': 'Significant difference' if p_val < 0.05 else 'No significant difference'
+                }
+    hypo_tests_results['paired_dimension_tests'] = paired_tests
+    
+    # H2: Test if the Strategic Contradiction Index (SCI) is significantly greater than 0
+    sci_data = df['sci_recalculated'].dropna()
+    if len(sci_data) > 1:
+        t_stat, p_val = stats.ttest_1samp(sci_data, 0)
+        # For one-sided test (greater than 0), divide p-value by 2
+        p_val_one_sided = p_val / 2
+        hypo_tests_results['sci_greater_than_zero_test'] = {
+            't_statistic': round(t_stat, 3),
+            'p_value_one_sided': round(p_val_one_sided, 5),
+            'mean_sci': round(sci_data.mean(), 3),
+            'interpretation': 'SCI is significantly greater than zero' if p_val_one_sided < 0.05 and t_stat > 0 else 'SCI is not significantly greater than zero'
+        }
+
+    result_data['hypothesis_tests'] = hypo_tests_results
+except Exception as e:
+    result_data['hypothesis_tests']['error'] = f"Could not perform hypothesis tests: {str(e)}"
+
+# The final 'result_data' dictionary is now populated and ready for downstream use.
+# It is implicitly the last expression evaluated in the script.

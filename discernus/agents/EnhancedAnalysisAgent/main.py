@@ -268,12 +268,10 @@ class EnhancedAnalysisAgent:
             })
             
             # Call LLM with enhanced mathematical validation prompt
-            # Use temperature=0.1 to avoid pathological repetition that can occur at 0.0
-            # Research shows temp=0.0 can cause looping/repetitive output on complex prompts
+            # Removed temperature setting per Issue #211 debugging - let LLM use default
             response = completion(
                 model=model,
                 messages=[{"role": "user", "content": prompt_text}],
-                temperature=0.1,  # Fixed: 0.0 causes pathological behavior on complex frameworks
                 safety_settings=[
                     {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
                     {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
