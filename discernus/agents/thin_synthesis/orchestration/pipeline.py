@@ -1,64 +1,70 @@
 #!/usr/bin/env python3
 """
-THIN Code-Generated Synthesis Pipeline
+THIN Code-Generated Synthesis Pipeline - Production Version
+==========================================================
 
-This orchestrates the 4-agent architecture that solves the fundamental 
-scalability limitations of monolithic LLM synthesis:
+Integrates with Discernus infrastructure:
+- MinIO artifact storage for content-addressable data
+- AuditLogger for complete provenance
+- SecureCodeExecutor for sandboxed computation
 
+4-Agent Architecture:
 1. AnalyticalCodeGenerator: LLM generates Python analysis code
-2. CodeExecutor: Executes code deterministically 
+2. SecureCodeExecutor: Production-safe code execution
 3. EvidenceCurator: LLM selects evidence based on actual results
 4. ResultsInterpreter: LLM synthesizes final narrative
 
-Key Innovation: Evidence curation happens AFTER statistical computation,
-enabling intelligent, data-driven evidence selection.
+Key Innovation: Evidence curation happens AFTER statistical computation.
 """
 
 import logging
 import json
 import time
+import pandas as pd
+import tempfile
+import os
 from typing import Dict, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
+from pathlib import Path
 
-# Import all the agents
+# Import main codebase infrastructure
 import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+project_root = Path(__file__).parent.parent.parent.parent
+sys.path.insert(0, str(project_root))
 
-# Import THIN synthesis agents from main codebase structure
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from discernus.storage.minio_client import DiscernusArtifactClient
+from discernus.core.secure_code_executor import SecureCodeExecutor
+from discernus.core.audit_logger import AuditLogger
 
-from analytical_code_generator.agent import AnalyticalCodeGenerator, CodeGenerationRequest
-from code_executor.executor import CodeExecutor, CodeExecutionRequest
-from evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
-from results_interpreter.agent import ResultsInterpreter, InterpretationRequest
+# Import THIN synthesis agents
+from ..analytical_code_generator.agent import AnalyticalCodeGenerator, CodeGenerationRequest
+from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
+from ..results_interpreter.agent import ResultsInterpreter, InterpretationRequest
 
 @dataclass
-class PipelineRequest:
-    """Request structure for the complete pipeline."""
+class ProductionPipelineRequest:
+    """Production pipeline request using artifact hashes instead of file paths."""
     framework_spec: str
-    scores_csv_path: str
-    evidence_csv_path: str
+    scores_artifact_hash: str  # MinIO artifact hash for scores CSV
+    evidence_artifact_hash: str  # MinIO artifact hash for evidence CSV
     experiment_context: Optional[str] = None
     max_evidence_per_finding: int = 3
     min_confidence_threshold: float = 0.7
     interpretation_focus: str = "comprehensive"
 
 @dataclass
-class PipelineResponse:
-    """Response structure containing complete synthesis results."""
+class ProductionPipelineResponse:
+    """Complete pipeline response with all outputs and metadata."""
     # Final outputs
     narrative_report: str
     executive_summary: str
     key_findings: list
     
-    # Intermediate results for debugging/analysis
-    generated_code: str
-    statistical_results: Dict[str, Any]
-    curated_evidence: Dict[str, Any]
+    # Intermediate artifacts (as hashes for provenance)
+    generated_code_hash: str
+    statistical_results_hash: str
+    curated_evidence_hash: str
     
     # Pipeline metadata
     success: bool
@@ -68,56 +74,96 @@ class PipelineResponse:
     
     # Quality metrics
     word_count: int
-    evidence_integration_summary: Dict[str, Any]
-    statistical_summary: Dict[str, Any]
+    evidence_integration_summary: str
+    statistical_summary: str
     
-    # Optional error message (must be last due to default value)
-    error_message: Optional[str] = None
+    # Error information (if any)
+    error_message: str = ""
 
-class ThinSynthesisPipeline:
+class ProductionThinSynthesisPipeline:
     """
-    Orchestrates the 4-agent THIN Code-Generated Synthesis Architecture.
+    Production version of THIN Code-Generated Synthesis Pipeline.
     
-    This pipeline represents a breakthrough in synthesis scalability by:
-    1. Using LLMs for intelligence (code generation, evidence curation, interpretation)
-    2. Using deterministic software for computation (statistical analysis)
-    3. Enabling post-computation evidence curation based on actual results
-    4. Avoiding token limits through focused, sequential processing
+    Integrates with Discernus infrastructure for robust, scalable synthesis.
     """
     
-    def __init__(self, 
-                 code_model: str = "vertex_ai/gemini-2.5-flash",
-                 interpretation_model: str = "vertex_ai/gemini-2.5-pro"):
+    def __init__(self,
+                 artifact_client: DiscernusArtifactClient,
+                 audit_logger: AuditLogger,
+                 model: str = "vertex_ai/gemini-2.5-pro"):
         """
-        Initialize the pipeline with the 4 agents.
+        Initialize production pipeline with infrastructure dependencies.
         
         Args:
-            code_model: Model for code generation and evidence curation
-            interpretation_model: Model for final interpretation (Pro for quality)
+            artifact_client: MinIO client for content-addressable storage
+            audit_logger: Audit logger for complete provenance
+            model: LLM model for all agents
         """
-        self.code_generator = AnalyticalCodeGenerator(model=code_model)
-        self.code_executor = CodeExecutor()
-        self.evidence_curator = EvidenceCurator(model=code_model)
-        self.results_interpreter = ResultsInterpreter(model=interpretation_model)
+        self.artifact_client = artifact_client
+        self.audit_logger = audit_logger
+        self.model = model
         
+        # Initialize agents with infrastructure
+        self.code_generator = AnalyticalCodeGenerator(model=model)
+        self.secure_executor = SecureCodeExecutor(
+            timeout_seconds=60,
+            memory_limit_mb=512,
+            enable_data_science=True
+        )
+        self.evidence_curator = EvidenceCurator(model=model)
+        self.results_interpreter = ResultsInterpreter(model=model)
+        
+        # Set up logging
         self.logger = logging.getLogger(__name__)
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        self.logger.addHandler(handler)
+        self.logger.setLevel(logging.INFO)
         
-    def run(self, request: PipelineRequest) -> PipelineResponse:
+        self.audit_logger.log_agent_event(
+            "ProductionThinSynthesisPipeline",
+            "initialization",
+            {
+                "model": model,
+                "secure_executor_config": {
+                    "timeout_seconds": 60,
+                    "memory_limit_mb": 512,
+                    "data_science_enabled": True
+                }
+            }
+        )
+        
+        self.logger.info("🏭 Production THIN Synthesis Pipeline initialized")
+
+    def run(self, request: ProductionPipelineRequest) -> ProductionPipelineResponse:
         """
-        Execute the complete 4-agent synthesis pipeline.
+        Execute the complete 4-agent synthesis pipeline with full infrastructure.
         
         Args:
-            request: PipelineRequest with framework and data specifications
+            request: ProductionPipelineRequest with artifact hashes
             
         Returns:
-            PipelineResponse with complete synthesis results
+            ProductionPipelineResponse with complete synthesis results
         """
         start_time = time.time()
         stage_timings = {}
         stage_success = {}
         
+        # Log pipeline start
+        self.audit_logger.log_agent_event(
+            "ProductionThinSynthesisPipeline",
+            "pipeline_start",
+            {
+                "framework_spec_preview": request.framework_spec[:200] + "..." if len(request.framework_spec) > 200 else request.framework_spec,
+                "scores_artifact": request.scores_artifact_hash,
+                "evidence_artifact": request.evidence_artifact_hash,
+                "experiment_context": request.experiment_context
+            }
+        )
+        
         try:
-            self.logger.info("🚀 Starting THIN Code-Generated Synthesis Pipeline")
+            self.logger.info("🚀 Starting Production THIN Synthesis Pipeline")
             
             # Stage 1: Generate Analysis Code
             self.logger.info("📝 Stage 1: Generating analysis code...")
@@ -144,20 +190,19 @@ class ThinSynthesisPipeline:
             exec_response = self._stage_2_execute_code(code_response, request)
             
             stage_timings['code_execution'] = time.time() - stage_start
-            stage_success['code_execution'] = exec_response.success
+            stage_success['code_execution'] = exec_response['success']
             
-            if not exec_response.success:
+            if not exec_response['success']:
                 return self._create_error_response(
                     "Code execution failed",
-                    exec_response.error_message,
+                    exec_response['error'],
                     stage_timings,
                     stage_success,
-                    time.time() - start_time,
-                    generated_code=code_response.analysis_code
+                    time.time() - start_time
                 )
             
-            # Stage 3: Curate Evidence (KEY INNOVATION: Post-computation)
-            self.logger.info("🎯 Stage 3: Curating evidence based on statistical results...")
+            # Stage 3: Curate Evidence
+            self.logger.info("🔍 Stage 3: Curating evidence...")
             stage_start = time.time()
             
             curation_response = self._stage_3_curate_evidence(exec_response, request)
@@ -171,49 +216,63 @@ class ThinSynthesisPipeline:
                     curation_response.error_message,
                     stage_timings,
                     stage_success,
-                    time.time() - start_time,
-                    generated_code=code_response.analysis_code,
-                    statistical_results=exec_response.results
+                    time.time() - start_time
                 )
             
-            # Stage 4: Generate Final Narrative
-            self.logger.info("📖 Stage 4: Generating final narrative synthesis...")
+            # Stage 4: Interpret Results
+            self.logger.info("📖 Stage 4: Interpreting results...")
             stage_start = time.time()
             
             interpretation_response = self._stage_4_interpret_results(
                 exec_response, curation_response, request
             )
             
-            stage_timings['narrative_synthesis'] = time.time() - stage_start
-            stage_success['narrative_synthesis'] = interpretation_response.success
+            stage_timings['results_interpretation'] = time.time() - stage_start
+            stage_success['results_interpretation'] = interpretation_response.success
             
             if not interpretation_response.success:
                 return self._create_error_response(
-                    "Narrative synthesis failed",
+                    "Results interpretation failed",
                     interpretation_response.error_message,
                     stage_timings,
                     stage_success,
-                    time.time() - start_time,
-                    generated_code=code_response.analysis_code,
-                    statistical_results=exec_response.results,
-                    curated_evidence=curation_response.curated_evidence
+                    time.time() - start_time
                 )
+            
+            # Store intermediate artifacts
+            code_hash = self.artifact_client.put_artifact(code_response.analysis_code.encode('utf-8'))
+            results_hash = self.artifact_client.put_artifact(json.dumps(exec_response['result_data']).encode('utf-8'))
+            evidence_hash = self.artifact_client.put_artifact(json.dumps(curation_response.curated_evidence).encode('utf-8'))
             
             # Success! Create complete response
             total_time = time.time() - start_time
             
             self.logger.info(f"✅ Pipeline completed successfully in {total_time:.2f} seconds")
             
-            return PipelineResponse(
+            # Log pipeline completion
+            self.audit_logger.log_agent_event(
+                "ProductionThinSynthesisPipeline",
+                "pipeline_complete",
+                {
+                    "total_time": total_time,
+                    "stage_timings": stage_timings,
+                    "generated_code_hash": code_hash,
+                    "statistical_results_hash": results_hash,
+                    "curated_evidence_hash": evidence_hash,
+                    "word_count": interpretation_response.word_count
+                }
+            )
+            
+            return ProductionPipelineResponse(
                 # Final outputs
                 narrative_report=interpretation_response.narrative_report,
                 executive_summary=interpretation_response.executive_summary,
                 key_findings=interpretation_response.key_findings,
                 
-                # Intermediate results
-                generated_code=code_response.analysis_code,
-                statistical_results=exec_response.results,
-                curated_evidence=curation_response.curated_evidence,
+                # Intermediate artifacts
+                generated_code_hash=code_hash,
+                statistical_results_hash=results_hash,
+                curated_evidence_hash=evidence_hash,
                 
                 # Pipeline metadata
                 success=True,
@@ -231,6 +290,18 @@ class ThinSynthesisPipeline:
             total_time = time.time() - start_time
             self.logger.error(f"Pipeline failed with exception: {str(e)}")
             
+            # Log pipeline failure
+            self.audit_logger.log_agent_event(
+                "ProductionThinSynthesisPipeline",
+                "pipeline_failed",
+                {
+                    "total_time": total_time,
+                    "error": str(e),
+                    "stage_timings": stage_timings,
+                    "stage_success": stage_success
+                }
+            )
+            
             return self._create_error_response(
                 "Pipeline execution failed",
                 str(e),
@@ -238,185 +309,213 @@ class ThinSynthesisPipeline:
                 stage_success,
                 total_time
             )
-    
-    def _stage_1_generate_code(self, request: PipelineRequest):
-        """Stage 1: Generate analysis code using AnalyticalCodeGenerator."""
+
+    def _stage_1_generate_code(self, request: ProductionPipelineRequest):
+        """Stage 1: Generate analysis code using artifacts."""
         
-        # Prepare data structure descriptions
-        scores_structure = self._describe_csv_structure(request.scores_csv_path, "scores")
-        evidence_structure = self._describe_csv_structure(request.evidence_csv_path, "evidence")
+        # Retrieve CSV data from artifacts to analyze structure
+        scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
+        evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
-        # Create code generation request
-        code_request = CodeGenerationRequest(
+        # Write to temporary files for structure analysis
+        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as scores_temp:
+            scores_temp.write(scores_data)
+            scores_temp_path = scores_temp.name
+            
+        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as evidence_temp:
+            evidence_temp.write(evidence_data)
+            evidence_temp_path = evidence_temp.name
+        
+        try:
+            # Analyze CSV structures
+            scores_structure = self._describe_csv_structure(scores_temp_path, "scores")
+            evidence_structure = self._describe_csv_structure(evidence_temp_path, "evidence")
+            
+            # Create code generation request
+            code_request = CodeGenerationRequest(
+                framework_spec=request.framework_spec,
+                scores_csv_structure=scores_structure,
+                evidence_csv_structure=evidence_structure,
+                experiment_context=request.experiment_context
+            )
+            
+            # Log code generation start
+            self.audit_logger.log_agent_event(
+                "AnalyticalCodeGenerator",
+                "code_generation_start",
+                {
+                    "framework_spec_length": len(request.framework_spec),
+                    "scores_structure": scores_structure,
+                    "evidence_structure": evidence_structure
+                }
+            )
+            
+            return self.code_generator.generate_analysis_code(code_request)
+            
+        finally:
+            # Clean up temporary files
+            os.unlink(scores_temp_path)
+            os.unlink(evidence_temp_path)
+
+    def _stage_2_execute_code(self, code_response, request: ProductionPipelineRequest):
+        """Stage 2: Execute generated code using SecureCodeExecutor."""
+        
+        # Retrieve CSV data from artifacts
+        scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
+        evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+        
+        # Create temporary files for code execution
+        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as scores_temp:
+            scores_temp.write(scores_data)
+            scores_csv_path = scores_temp.name
+            
+        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as evidence_temp:
+            evidence_temp.write(evidence_data)
+            evidence_csv_path = evidence_temp.name
+        
+        try:
+            # Prepare code with CSV paths injected
+            execution_code = f"""
+# CSV file paths (injected by pipeline)
+scores_csv_path = r'{scores_csv_path}'
+evidence_csv_path = r'{evidence_csv_path}'
+
+# Generated analysis code
+{code_response.analysis_code}
+"""
+            
+            # Log code execution start
+            self.audit_logger.log_agent_event(
+                "SecureCodeExecutor",
+                "code_execution_start",
+                {
+                    "code_length": len(execution_code),
+                    "scores_artifact": request.scores_artifact_hash,
+                    "evidence_artifact": request.evidence_artifact_hash
+                }
+            )
+            
+            # Execute using SecureCodeExecutor
+            execution_result = self.secure_executor.execute_code(execution_code)
+            
+            # Log execution completion
+            self.audit_logger.log_agent_event(
+                "SecureCodeExecutor",
+                "code_execution_complete",
+                {
+                    "success": execution_result['success'],
+                    "execution_time": execution_result['execution_time'],
+                    "memory_used": execution_result.get('memory_used', 0),
+                    "security_violations": execution_result.get('security_violations', [])
+                }
+            )
+            
+            return execution_result
+            
+        finally:
+            # Clean up temporary files
+            os.unlink(scores_csv_path)
+            os.unlink(evidence_csv_path)
+
+    def _stage_3_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
+        """Stage 3: Curate evidence based on statistical results."""
+        
+        # Retrieve evidence data for curation
+        evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+        
+        # Parse evidence CSV for curation
+        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as evidence_temp:
+            evidence_temp.write(evidence_data)
+            evidence_csv_path = evidence_temp.name
+        
+        try:
+            evidence_df = pd.read_csv(evidence_csv_path)
+            
+            # Create curation request
+            curation_request = EvidenceCurationRequest(
+                statistical_results=exec_response['result_data'],
+                available_evidence=evidence_df.to_dict('records'),
+                framework_spec=request.framework_spec,
+                max_evidence_per_finding=request.max_evidence_per_finding,
+                min_confidence_threshold=request.min_confidence_threshold
+            )
+            
+            # Log evidence curation start
+            self.audit_logger.log_agent_event(
+                "EvidenceCurator",
+                "evidence_curation_start",
+                {
+                    "available_evidence_count": len(evidence_df),
+                    "statistical_results_keys": list(exec_response['result_data'].keys()) if isinstance(exec_response['result_data'], dict) else "non_dict_results",
+                    "max_evidence_per_finding": request.max_evidence_per_finding
+                }
+            )
+            
+            return self.evidence_curator.curate_evidence(curation_request)
+            
+        finally:
+            os.unlink(evidence_csv_path)
+
+    def _stage_4_interpret_results(self, exec_response, curation_response, request: ProductionPipelineRequest):
+        """Stage 4: Generate final narrative interpretation."""
+        
+        interpretation_request = InterpretationRequest(
+            statistical_results=exec_response['result_data'],
+            curated_evidence=curation_response.curated_evidence,
             framework_spec=request.framework_spec,
-            scores_csv_structure=scores_structure,
-            evidence_csv_structure=evidence_structure,
             experiment_context=request.experiment_context
         )
         
-        # Generate the code
-        return self.code_generator.generate_analysis_code(code_request)
-    
-    def _stage_2_execute_code(self, code_response, request: PipelineRequest):
-        """Stage 2: Execute generated code using CodeExecutor."""
-        
-        # Create execution request
-        exec_request = CodeExecutionRequest(
-            analysis_code=code_response.analysis_code,
-            scores_csv_path=request.scores_csv_path,
-            evidence_csv_path=request.evidence_csv_path,
-            timeout_seconds=300
+        # Log interpretation start
+        self.audit_logger.log_agent_event(
+            "ResultsInterpreter",
+            "interpretation_start",
+            {
+                "curated_evidence_count": len(curation_response.curated_evidence),
+                "interpretation_focus": request.interpretation_focus
+            }
         )
         
-        # Execute the code
-        return self.code_executor.execute_code(exec_request)
-    
-    def _stage_3_curate_evidence(self, exec_response, request: PipelineRequest):
-        """Stage 3: Curate evidence using EvidenceCurator (KEY INNOVATION)."""
-        
-        # Create curation request with ACTUAL statistical results
-        curation_request = EvidenceCurationRequest(
-            statistical_results=exec_response.results,
-            evidence_csv_path=request.evidence_csv_path,
-            framework_spec=request.framework_spec,
-            max_evidence_per_finding=request.max_evidence_per_finding,
-            min_confidence_threshold=request.min_confidence_threshold
-        )
-        
-        # Curate evidence based on statistical findings
-        return self.evidence_curator.curate_evidence(curation_request)
-    
-    def _stage_4_interpret_results(self, exec_response, curation_response, request: PipelineRequest):
-        """Stage 4: Generate final narrative using ResultsInterpreter."""
-        
-        # Create interpretation request
-        interpretation_request = InterpretationRequest(
-            statistical_results=exec_response.results,
-            curated_evidence=curation_response.curated_evidence,
-            framework_spec=request.framework_spec,
-            experiment_context=request.experiment_context,
-            interpretation_focus=request.interpretation_focus
-        )
-        
-        # Generate final narrative
         return self.results_interpreter.interpret_results(interpretation_request)
-    
-    def _describe_csv_structure(self, csv_path: str, csv_type: str) -> str:
-        """Generate a description of CSV structure for the code generator."""
-        
+
+    def _describe_csv_structure(self, csv_path: str, data_type: str) -> str:
+        """Analyze CSV structure for code generation."""
         try:
-            import pandas as pd
             df = pd.read_csv(csv_path)
             
-            description = f"{csv_type.upper()} CSV STRUCTURE:\n\n"
-            description += f"Columns ({len(df.columns)}):\n"
+            structure_info = {
+                "data_type": data_type,
+                "total_rows": len(df),
+                "columns": list(df.columns),
+                "sample_data": df.head(3).to_dict('records')
+            }
             
-            for col in df.columns:
-                dtype = str(df[col].dtype)
-                sample_val = df[col].iloc[0] if len(df) > 0 else "N/A"
-                description += f"- {col}: {dtype} (sample: {sample_val})\n"
-            
-            description += f"\nRows: {len(df)}\n"
-            description += f"Missing values: {df.isnull().sum().sum()}\n"
-            
-            return description
+            return json.dumps(structure_info, indent=2)
             
         except Exception as e:
-            self.logger.warning(f"Could not describe {csv_type} CSV structure: {str(e)}")
-            return f"{csv_type.upper()} CSV: Structure could not be determined"
-    
-    def _create_error_response(self, error_type: str, error_message: str,
-                             stage_timings: Dict[str, float], 
+            return f"Error analyzing {data_type} CSV: {str(e)}"
+
+    def _create_error_response(self, 
+                             error_type: str, 
+                             error_message: str,
+                             stage_timings: Dict[str, float],
                              stage_success: Dict[str, bool],
-                             total_time: float,
-                             generated_code: str = "",
-                             statistical_results: Dict[str, Any] = None,
-                             curated_evidence: Dict[str, Any] = None) -> PipelineResponse:
-        """Create an error response with available partial results."""
+                             total_time: float) -> ProductionPipelineResponse:
+        """Create standardized error response."""
         
-        return PipelineResponse(
-            # Final outputs (empty on error)
+        return ProductionPipelineResponse(
             narrative_report="",
             executive_summary="",
             key_findings=[],
-            
-            # Intermediate results (may be partial)
-            generated_code=generated_code,
-            statistical_results=statistical_results or {},
-            curated_evidence=curated_evidence or {},
-            
-            # Pipeline metadata
+            generated_code_hash="",
+            statistical_results_hash="",
+            curated_evidence_hash="",
             success=False,
             total_execution_time=total_time,
             stage_timings=stage_timings,
             stage_success=stage_success,
-            error_message=f"{error_type}: {error_message}",
-            
-            # Quality metrics (empty on error)
             word_count=0,
-            evidence_integration_summary={},
-            statistical_summary={}
-        )
-    
-    def run_quick_summary(self, request: PipelineRequest) -> str:
-        """
-        Run pipeline and return just the executive summary for quick insights.
-        
-        This is useful for rapid iteration and testing.
-        """
-        
-        try:
-            # Run stages 1-3 to get statistical results and evidence
-            code_response = self._stage_1_generate_code(request)
-            if not code_response.success:
-                return f"Quick summary failed: {code_response.error_message}"
-            
-            exec_response = self._stage_2_execute_code(code_response, request)
-            if not exec_response.success:
-                return f"Quick summary failed: {exec_response.error_message}"
-            
-            curation_response = self._stage_3_curate_evidence(exec_response, request)
-            if not curation_response.success:
-                return f"Quick summary failed: {curation_response.error_message}"
-            
-            # Generate just executive summary
-            interpretation_request = InterpretationRequest(
-                statistical_results=exec_response.results,
-                curated_evidence=curation_response.curated_evidence,
-                framework_spec=request.framework_spec,
-                experiment_context=request.experiment_context
-            )
-            
-            return self.results_interpreter.generate_executive_summary_only(interpretation_request)
-            
-        except Exception as e:
-            return f"Quick summary failed: {str(e)}"
-    
-    def get_pipeline_status(self) -> Dict[str, Any]:
-        """Get status information about the pipeline components."""
-        
-        return {
-            'pipeline_name': 'THIN Code-Generated Synthesis Architecture',
-            'version': '1.0.0-prototype',
-            'components': {
-                'analytical_code_generator': {
-                    'model': self.code_generator.model,
-                    'status': 'ready'
-                },
-                'code_executor': {
-                    'max_memory_mb': self.code_executor.max_memory_mb,
-                    'status': 'ready'
-                },
-                'evidence_curator': {
-                    'model': self.evidence_curator.model,
-                    'status': 'ready'
-                },
-                'results_interpreter': {
-                    'model': self.results_interpreter.model,
-                    'status': 'ready'
-                }
-            },
-            'key_innovation': 'post_computation_evidence_curation',
-            'architecture_type': 'THIN (Thick LLM + Thin Software)',
-            'scalability_approach': 'sequential_focused_processing'
-        } 
+            evidence_integration_summary="",
+            statistical_summary="",
+            error_message=f"{error_type}: {error_message}"
+        ) 
