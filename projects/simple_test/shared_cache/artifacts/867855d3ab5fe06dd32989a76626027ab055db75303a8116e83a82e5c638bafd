@@ -1,0 +1,166 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+import json
+
+def analyze_data(scores_df, evidence_df):
+    """
+    Performs a comprehensive statistical analysis based on a framework specification,
+    adapted for the provided data structures.
+
+    Args:
+        scores_df (pd.DataFrame): DataFrame containing scores for various dimensions.
+        evidence_df (pd.DataFrame): DataFrame containing supporting evidence.
+
+    Returns:
+        dict: A dictionary containing the structured analysis results.
+    """
+    # Initialize the main results dictionary
+    analysis_results = {
+        "descriptive_stats": {},
+        "reliability_metrics": {},
+        "correlations": {},
+        "hypothesis_tests": {},
+        "effect_sizes": {},
+        "sample_characteristics": {},
+        "error_log": None
+    }
+
+    try:
+        # --- 1. Define Column Groups based on the ACTUAL DATA STRUCTURE ---
+        # This adapts the framework's concept of 'dimension_groups' to the available data.
+        # The groupings are inferred from the calculated score names.
+        content_quality_cols = [
+            'accuracy_verification', 'curriculum_alignment', 'depth_coverage', 'relevance_context'
+        ]
+        pedagogical_effectiveness_cols = [
+            'instructional_clarity', 'engagement_strategies', 'differentiation_support', 'assessment_integration'
+        ]
+        learning_accessibility_cols = [
+            'universal_design', 'language_clarity', 'multimedia_integration', 'barrier_reduction'
+        ]
+        all_base_dimension_cols = content_quality_cols + pedagogical_effectiveness_cols + learning_accessibility_cols
+        calculated_score_cols = [
+            'content_quality_score', 'pedagogical_effectiveness_score', 'learning_accessibility_score', 'overall_educational_value'
+        ]
+        all_numeric_cols = all_base_dimension_cols + calculated_score_cols
+
+        # --- 2. Sample Characteristics ---
+        analysis_results["sample_characteristics"] = {
+            "num_scores_records": int(scores_df.shape[0]),
+            "num_evidence_records": int(evidence_df.shape[0]),
+            "scores_columns": list(scores_df.columns),
+            "evidence_columns": list(evidence_df.columns),
+            "scores_missing_values": scores_df.isnull().sum().to_dict(),
+            "evidence_missing_values": evidence_df.isnull().sum().to_dict()
+        }
+
+        # --- 3. Descriptive Statistics ---
+        # For numerical scores in scores_df
+        if not scores_df.empty:
+            # Ensure only numeric columns are used to prevent errors
+            numeric_scores_df = scores_df.select_dtypes(include=np.number)
+            analysis_results["descriptive_stats"]["scores_summary"] = json.loads(numeric_scores_df.describe().to_json())
+
+        # For evidence_df, including statistical analysis of quote text length
+        if not evidence_df.empty:
+            evidence_stats = {
+                "confidence_summary": json.loads(evidence_df['confidence'].describe().to_json()),
+                "dimension_value_counts": evidence_df['dimension'].value_counts().to_dict()
+            }
+            # Safely analyze text length without accessing string content
+            if 'quote' in evidence_df.columns:
+                 evidence_stats["quote_length_summary"] = json.loads(evidence_df['quote'].str.len().describe().to_json())
+            analysis_results["descriptive_stats"]["evidence_summary"] = evidence_stats
+
+        # --- 4. Reliability Analysis (Cronbach's Alpha) ---
+        def cronbach_alpha(df_items):
+            """Calculates Cronbach's Alpha for a set of items."""
+            items = df_items.copy()
+            items.dropna(inplace=True) # Use only complete cases
+            k = items.shape[1]
+            if k < 2:
+                return np.nan # Alpha is not defined for a single item
+            
+            item_vars = items.var(axis=0, ddof=1).sum()
+            total_var = items.sum(axis=1).var(ddof=1)
+            
+            if total_var == 0:
+                return 1.0 # Perfect correlation if total variance is 0
+            
+            return (k / (k - 1)) * (1 - item_vars / total_var)
+
+        reliability_scores = {}
+        # Calculate alpha for each logical group of dimensions
+        groups_for_reliability = {
+            "content_quality": content_quality_cols,
+            "pedagogical_effectiveness": pedagogical_effectiveness_cols,
+            "learning_accessibility": learning_accessibility_cols,
+            "all_base_dimensions": all_base_dimension_cols
+        }
+        
+        for group_name, cols in groups_for_reliability.items():
+            # Ensure all columns for the group exist in the dataframe
+            if all(c in scores_df.columns for c in cols):
+                reliability_scores[f"cronbach_alpha_{group_name}"] = cronbach_alpha(scores_df[cols])
+        
+        analysis_results["reliability_metrics"] = reliability_scores
+
+        # --- 5. Correlation Analysis ---
+        # Correlation matrix for the base dimensions
+        if all(c in scores_df.columns for c in all_base_dimension_cols):
+            base_corr_matrix = scores_df[all_base_dimension_cols].corr()
+            analysis_results["correlations"]["base_dimensions_matrix"] = json.loads(base_corr_matrix.to_json())
+
+        # Correlation matrix for the calculated scores
+        if all(c in scores_df.columns for c in calculated_score_cols):
+            calculated_corr_matrix = scores_df[calculated_score_cols].corr()
+            analysis_results["correlations"]["calculated_scores_matrix"] = json.loads(calculated_corr_matrix.to_json())
+
+        # --- 6. Hypothesis Testing & Effect Sizes ---
+        # Hypothesis 1: Test if 'content_quality_score' is significantly different from 'pedagogical_effectiveness_score'
+        if 'content_quality_score' in scores_df and 'pedagogical_effectiveness_score' in scores_df:
+            col1 = scores_df['content_quality_score'].dropna()
+            col2 = scores_df['pedagogical_effectiveness_score'].dropna()
+            # Use paired t-test as scores are for the same items
+            ttest_res = stats.ttest_rel(col1, col2)
+            
+            # Effect Size: Cohen's d for paired samples
+            diff = col1 - col2
+            d = diff.mean() / diff.std(ddof=1) if diff.std(ddof=1) != 0 else 0.0
+
+            analysis_results["hypothesis_tests"]["content_vs_pedagogy"] = {
+                "description": "Paired T-test between content_quality_score and pedagogical_effectiveness_score.",
+                "statistic": ttest_res.statistic,
+                "p_value": ttest_res.pvalue
+            }
+            analysis_results["effect_sizes"]["cohens_d_content_vs_pedagogy"] = d
+
+        # Hypothesis 2: Test the significance of the correlation between a key sub-score and the overall score
+        if 'content_quality_score' in scores_df and 'overall_educational_value' in scores_df:
+            col1 = scores_df['content_quality_score'].dropna()
+            col2 = scores_df['overall_educational_value'].dropna()
+            # Pearson correlation test
+            corr_res = stats.pearsonr(col1, col2)
+            
+            analysis_results["hypothesis_tests"]["content_vs_overall_corr"] = {
+                "description": "Pearson correlation between content_quality_score and overall_educational_value.",
+                "correlation_coefficient": corr_res[0],
+                "p_value": corr_res[1]
+            }
+            # Effect Size: Pearson's r is itself a measure of effect size
+            analysis_results["effect_sizes"]["pearsons_r_content_vs_overall"] = corr_res[0]
+
+    except Exception as e:
+        # Log any exceptions that occur during analysis
+        analysis_results["error_log"] = f"An error occurred during analysis: {str(e)}"
+
+    return analysis_results
+
+# --- Main Execution Block ---
+# In a real environment, scores_df and evidence_df would be pre-loaded.
+# This block executes the analysis and prints the final JSON output.
+final_results = analyze_data(scores_df, evidence_df)
+
+# Print the structured JSON output
+print(json.dumps(final_results, indent=2))

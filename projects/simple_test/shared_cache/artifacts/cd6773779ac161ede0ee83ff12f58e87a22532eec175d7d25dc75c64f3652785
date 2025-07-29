@@ -1,0 +1,196 @@
+import pandas as pd
+import numpy as np
+import scipy.stats
+import json
+
+def analyze_data(scores_df, evidence_df):
+    """
+    Performs a comprehensive statistical analysis on the provided scores and evidence DataFrames.
+
+    Args:
+        scores_df (pd.DataFrame): DataFrame containing scoring data.
+        evidence_df (pd.DataFrame): DataFrame containing evidence data.
+
+    Returns:
+        str: A JSON string containing the structured analysis results.
+    """
+    # Initialize a dictionary to hold all analysis results
+    results = {}
+
+    try:
+        # --- 0. Initial Data Validation and Column Definition ---
+        # This step ensures the data is usable before proceeding.
+        if scores_df.empty:
+            return json.dumps({"error": "scores_df is empty."})
+
+        # Define column groups based on the provided data structure.
+        # This makes the analysis robust to changes in column order.
+        base_cols = ['aid']
+        all_cols = [col for col in scores_df.columns if col not in base_cols]
+        
+        # Heuristically separate raw input scores from derived composite scores.
+        composite_score_keys = ['score', 'value']
+        raw_score_columns = [c for c in all_cols if not any(key in c for key in composite_score_keys)]
+        composite_score_columns = [c for c in all_cols if any(key in c for key in composite_score_keys)]
+        
+        # Ensure we have columns to analyze
+        if not raw_score_columns:
+            raise ValueError("No raw score columns identified for reliability analysis.")
+
+        # --- 1. Sample Characteristics ---
+        # Provides metadata about the dataset being analyzed.
+        results['sample_characteristics'] = {
+            'num_records': int(scores_df.shape[0]),
+            'num_unique_ids': int(scores_df['aid'].nunique()),
+            'scores_missing_values': int(scores_df.isnull().sum().sum()),
+            'evidence_missing_values': int(evidence_df.isnull().sum().sum())
+        }
+
+        # --- 2. Descriptive Statistics ---
+        # Summarizes the central tendency, dispersion, and shape of the dataset's distribution.
+        descriptive_stats = {}
+        # Use .copy() to avoid SettingWithCopyWarning
+        scores_numeric_df = scores_df[all_cols].copy()
+        descriptive_stats['scores'] = scores_numeric_df.describe().to_dict()
+        
+        # Analyze evidence data statistically, adhering to string handling safety rules.
+        evidence_analysis = {}
+        if 'confidence' in evidence_df.columns:
+            evidence_analysis['confidence_stats'] = evidence_df['confidence'].describe().to_dict()
+        # Analyze quote length instead of content to avoid syntax errors with special characters.
+        if 'quote' in evidence_df.columns:
+            evidence_analysis['quote_length_stats'] = evidence_df['quote'].str.len().describe().to_dict()
+        descriptive_stats['evidence'] = evidence_analysis
+        results['descriptive_stats'] = descriptive_stats
+
+        # --- 3. Reliability Metrics ---
+        # Assesses the internal consistency of the raw scoring dimensions.
+        reliability_metrics = {}
+        try:
+            # Cronbach's Alpha calculation
+            # k = number of items (columns)
+            # item_vars = variance of each item
+            # total_var = variance of the sum of items for each subject (row)
+            items_df = scores_df[raw_score_columns]
+            k = items_df.shape[1]
+            if k > 1:
+                item_vars = items_df.var(ddof=1).sum()
+                total_scores = items_df.sum(axis=1)
+                total_var = total_scores.var(ddof=1)
+                
+                # Formula for Cronbach's Alpha
+                alpha = (k / (k - 1)) * (1 - item_vars / total_var) if total_var > 0 else 0.0
+                
+                reliability_metrics['cronbachs_alpha'] = {
+                    'value': alpha,
+                    'items_assessed': raw_score_columns,
+                    'interpretation': 'Excellent' if alpha >= 0.9 else 'Good' if alpha >= 0.8 else 'Acceptable' if alpha >= 0.7 else 'Questionable' if alpha >= 0.6 else 'Poor' if alpha >= 0.5 else 'Unacceptable'
+                }
+            else:
+                reliability_metrics['cronbachs_alpha'] = {
+                    'value': None,
+                    'items_assessed': raw_score_columns,
+                    'interpretation': 'Not applicable, requires at least 2 items.'
+                }
+        except Exception as e:
+            reliability_metrics['cronbachs_alpha'] = {'error': f"Could not calculate Cronbach's Alpha: {str(e)}"}
+        results['reliability_metrics'] = reliability_metrics
+
+        # --- 4. Correlation Analysis ---
+        # Examines the relationships between different scoring dimensions.
+        correlations = {}
+        try:
+            # Pearson correlation matrix for all numeric scores
+            corr_matrix = scores_numeric_df.corr(method='pearson')
+            correlations['correlation_matrix'] = corr_matrix.to_dict()
+        except Exception as e:
+            correlations['error'] = f"Could not calculate correlation matrix: {str(e)}"
+        results['correlations'] = correlations
+
+        # --- 5. Hypothesis Testing ---
+        # Statistically tests assumptions about the data.
+        hypothesis_tests = []
+        try:
+            # Test 1: T-test for difference between two composite scores, if available.
+            if len(composite_score_columns) >= 2:
+                col1, col2 = composite_score_columns[0], composite_score_columns[1]
+                ttest_res = scipy.stats.ttest_rel(scores_df[col1], scores_df[col2], nan_policy='omit')
+                hypothesis_tests.append({
+                    'test_name': f"Paired T-test between '{col1}' and '{col2}'",
+                    'statistic': ttest_res.statistic,
+                    'p_value': ttest_res.pvalue,
+                    'interpretation': 'Statistically significant difference' if ttest_res.pvalue < 0.05 else 'No statistically significant difference'
+                })
+
+            # Test 2: Pearson correlation test between a key raw score and the primary overall score.
+            if 'overall_educational_value' in scores_df.columns and 'accuracy_verification' in scores_df.columns:
+                col_x, col_y = 'accuracy_verification', 'overall_educational_value'
+                pearson_res = scipy.stats.pearsonr(scores_df[col_x], scores_df[col_y])
+                hypothesis_tests.append({
+                    'test_name': f"Pearson Correlation between '{col_x}' and '{col_y}'",
+                    'statistic (r)': pearson_res[0],
+                    'p_value': pearson_res[1],
+                    'interpretation': 'Statistically significant correlation' if pearson_res[1] < 0.05 else 'No statistically significant correlation'
+                })
+        except Exception as e:
+            hypothesis_tests.append({'error': f"Hypothesis testing failed: {str(e)}"})
+        results['hypothesis_tests'] = hypothesis_tests
+
+        # --- 6. Effect Sizes ---
+        # Measures the magnitude of the observed effects.
+        effect_sizes = {}
+        try:
+            # Effect Size for T-test: Cohen's d for related samples
+            if len(composite_score_columns) >= 2:
+                col1, col2 = composite_score_columns[0], composite_score_columns[1]
+                diff = scores_df[col1] - scores_df[col2]
+                std_dev_diff = diff.std(ddof=1)
+                cohens_d = diff.mean() / std_dev_diff if std_dev_diff != 0 else 0.0
+                effect_sizes[f"cohens_d_for_{col1}_vs_{col2}"] = {
+                    'value': cohens_d,
+                    'interpretation': 'Large' if abs(cohens_d) >= 0.8 else 'Medium' if abs(cohens_d) >= 0.5 else 'Small'
+                }
+            
+            # Effect Size for Correlation: The r-value itself
+            if 'hypothesis_tests' in results and len(results['hypothesis_tests']) > 1:
+                corr_test = results['hypothesis_tests'][1]
+                if 'statistic (r)' in corr_test:
+                    r_value = corr_test['statistic (r)']
+                    effect_sizes["pearson_r_effect_size"] = {
+                        'value': r_value,
+                        'interpretation': 'Large' if abs(r_value) >= 0.5 else 'Medium' if abs(r_value) >= 0.3 else 'Small'
+                    }
+        except Exception as e:
+            effect_sizes['error'] = f"Effect size calculation failed: {str(e)}"
+        results['effect_sizes'] = effect_sizes
+
+    except Exception as e:
+        # Catch-all for any errors during the analysis process
+        results = {
+            'status': 'error',
+            'message': 'An unexpected error occurred during analysis.',
+            'error_details': str(e)
+        }
+
+    # --- 7. Final Output ---
+    # Convert the results dictionary to a JSON string for downstream processing.
+    return json.dumps(results, indent=2)
+
+# This block demonstrates how to use the function.
+# In the actual execution environment, scores_df and evidence_df will be pre-loaded.
+# For testing purposes, we can create dummy dataframes.
+if __name__ == '__main__':
+    # This sample data mimics the structure provided in the prompt.
+    scores_data = [{'aid': 'e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799', 'accuracy_verification': 0.2, 'curriculum_alignment': 0.1, 'depth_coverage': 0.1, 'relevance_context': 0.2, 'instructional_clarity': 0.1, 'engagement_strategies': 0.1, 'differentiation_support': 0.1, 'assessment_integration': 0.1, 'universal_design': 0.1, 'language_clarity': 0.1, 'multimedia_integration': 0.1, 'barrier_reduction': 0.1, 'content_quality_score': 0.15, 'pedagogical_effectiveness_score': 0.15, 'learning_accessibility_score': 0.15, 'overall_educational_value': 0.15}, 
+                   {'aid': 'af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf', 'accuracy_verification': 0.8, 'curriculum_alignment': 0.7, 'depth_coverage': 0.6, 'relevance_context': 0.9, 'instructional_clarity': 0.8, 'engagement_strategies': 0.7, 'differentiation_support': 0.6, 'assessment_integration': 0.5, 'universal_design': 0.9, 'language_clarity': 0.9, 'multimedia_integration': 0.5, 'barrier_reduction': 0.7, 'content_quality_score': 0.75, 'pedagogical_effectiveness_score': 0.7, 'learning_accessibility_score': 0.725, 'overall_educational_value': 0.725},
+                   {'aid': 'b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2', 'accuracy_verification': 0.9, 'curriculum_alignment': 0.8, 'depth_coverage': 0.8, 'relevance_context': 0.7, 'instructional_clarity': 0.9, 'engagement_strategies': 0.8, 'differentiation_support': 0.7, 'assessment_integration': 0.6, 'universal_design': 0.8, 'language_clarity': 0.9, 'multimedia_integration': 0.6, 'barrier_reduction': 0.8, 'content_quality_score': 0.8, 'pedagogical_effectiveness_score': 0.75, 'learning_accessibility_score': 0.775, 'overall_educational_value': 0.775}]
+    evidence_data = [{'aid': 'e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799', 'dimension': 'accuracy_verification', 'quote': "This quote contains 'special' characters and could break unsafe code.", 'confidence': 0.2}, 
+                     {'aid': 'af7878b2ed5740ed1115fbc509a4d5de4e3b61572dcbd81cef8e9f8a067151cf', 'dimension': 'accuracy_verification', 'quote': "Another quote that doesn't matter for stats.", 'confidence': 0.8}]
+    
+    # Create the DataFrames
+    scores_df = pd.DataFrame(scores_data)
+    evidence_df = pd.DataFrame(evidence_data)
+
+    # Run the analysis and print the JSON output
+    analysis_json = analyze_data(scores_df, evidence_df)
+    print(analysis_json)

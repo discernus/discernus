@@ -25,6 +25,10 @@ import time
 from pathlib import Path
 from typing import Dict, Any, List, Tuple, Optional
 from contextlib import contextmanager
+import logging
+
+# Import LLM code sanitization
+from .llm_code_sanitizer import sanitize_llm_code
 
 # Add project root to path
 project_root = Path(__file__).parent.parent.parent
@@ -195,6 +199,16 @@ class SecureCodeExecutor:
                 'security_violations': violations
             }
         
+        # Sanitize LLM-generated code to fix common issues
+        try:
+            sanitized_code, transformations = sanitize_llm_code(code)
+            if transformations and transformations != ['sanitization_failed']:
+                logging.info(f"Applied code sanitization transformations: {transformations}")
+        except Exception as e:
+            logging.warning(f"Code sanitization failed, using original code: {e}")
+            sanitized_code = code
+            transformations = ['sanitization_failed']
+        
         # Prepare secure execution environment
         if self.enable_data_science:
             safe_imports = self._prepare_data_science_environment()
@@ -237,7 +251,7 @@ try:
 {context_setup}
     
     # User code execution
-{self._indent_code(code, '    ')}
+{self._indent_code(sanitized_code, '    ')}
     
     # Capture any result_data variable if created
     if 'result_data' in locals():

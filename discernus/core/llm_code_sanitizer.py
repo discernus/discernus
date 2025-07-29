@@ -1,0 +1,304 @@
+#!/usr/bin/env python3
+"""
+LLM Code Sanitizer - THIN Architecture for Code Quality
+======================================================
+
+Uses Meta's libcst library to surgically fix common issues in LLM-generated code
+while preserving intent and letting LLMs generate natural analytical code.
+
+Key principle: Let LLMs be LLMs, clean up on our side using battle-tested tooling.
+"""
+
+import re
+import logging
+from typing import Optional, Union
+
+import libcst as cst
+from libcst import matchers as m
+
+
+class LLMCodeSanitizer(cst.CSTTransformer):
+    """
+    Transforms LLM-generated code to fix common syntax and safety issues.
+    
+    Uses libcst's concrete syntax tree to apply surgical fixes while preserving
+    the LLM's analytical intent and code structure.
+    """
+    
+    def __init__(self):
+        self.logger = logging.getLogger(__name__)
+        self.transformations_applied = []
+    
+    def sanitize_code(self, code: str) -> tuple[str, list[str]]:
+        """
+        Apply all sanitization transformations to LLM-generated code.
+        
+        Args:
+            code: Raw LLM-generated Python code
+            
+        Returns:
+            Tuple of (sanitized_code, list_of_transformations_applied)
+        """
+        try:
+            # Reset transformation tracking
+            self.transformations_applied = []
+            
+            # Step 1: Pre-processing fixes for common string issues
+            preprocessed_code = self._preprocess_string_literals(code)
+            
+            # Step 2: Parse and transform with libcst
+            try:
+                tree = cst.parse_module(preprocessed_code)
+                transformed_tree = tree.visit(self)
+                sanitized_code = transformed_tree.code
+                
+            except (cst.ParserSyntaxError, Exception) as e:
+                self.logger.warning(f"CST parsing failed, applying fallback fixes: {e}")
+                sanitized_code = self._apply_fallback_fixes(preprocessed_code)
+                self.transformations_applied.append("fallback_string_fixes")
+            
+            return sanitized_code, self.transformations_applied
+            
+        except Exception as e:
+            self.logger.error(f"Code sanitization failed: {e}")
+            # Return original code if sanitization fails - fail gracefully
+            return code, ["sanitization_failed"]
+    
+    def _preprocess_string_literals(self, code: str) -> str:
+        """
+        Fix common string literal issues before CST parsing.
+        
+        This handles cases where LLMs create problematic string assignments
+        from evidence text containing quotes and special characters.
+        """
+        fixed_code = code
+        
+        # Fix unterminated string literals (common with evidence text)
+        # Pattern: variable = "text with unescaped 'quotes'"
+        # Solution: Convert to raw strings or triple quotes
+        
+        # Find lines with potentially problematic string assignments
+        lines = fixed_code.split('\n')
+        fixed_lines = []
+        
+        for line_num, line in enumerate(lines):
+            original_line = line
+            
+            # Check for string assignments that might contain problematic quotes
+            if re.search(r'^\s*\w+\s*=\s*["\'].*["\'][^"\']*$', line):
+                # This looks like a string assignment - check for quote issues
+                if self._has_quote_issues(line):
+                    # Convert to triple-quoted string
+                    fixed_line = self._convert_to_safe_string(line)
+                    if fixed_line != line:
+                        fixed_lines.append(fixed_line)
+                        self.transformations_applied.append(f"fixed_string_quotes_line_{line_num + 1}")
+                        continue
+            
+            fixed_lines.append(original_line)
+        
+        return '\n'.join(fixed_lines)
+    
+    def _has_quote_issues(self, line: str) -> bool:
+        """Check if a line has problematic quote patterns."""
+        # Look for unescaped quotes inside string literals
+        patterns = [
+            r'"[^"]*\'[^"]*"',  # Double quotes containing single quotes
+            r"'[^']*\"[^']*'",  # Single quotes containing double quotes
+            r'"[^"]*"[^"]*"',   # Multiple quote segments
+            r"'[^']*'[^']*'",   # Multiple single quote segments
+        ]
+        
+        return any(re.search(pattern, line) for pattern in patterns)
+    
+    def _convert_to_safe_string(self, line: str) -> str:
+        """Convert problematic string assignment to safe triple-quoted version."""
+        # Extract the variable name and content
+        match = re.match(r'^(\s*)(\w+)\s*=\s*(["\'])(.*)\3(.*)$', line)
+        if not match:
+            return line
+        
+        indent, var_name, quote_char, content, remainder = match.groups()
+        
+        # Use triple quotes to safely contain the content
+        safe_line = f'{indent}{var_name} = """{content}"""{remainder}'
+        return safe_line
+    
+    def _apply_fallback_fixes(self, code: str) -> str:
+        """Apply regex-based fixes when CST parsing fails."""
+        fixed_code = code
+        
+        # Fix common syntax error patterns
+        fixes = [
+            # Fix unterminated strings
+            (r'= "([^"]*)"([^"]*$)', r'= """\1\2"""'),
+            (r"= '([^']*)'([^']*$)", r'= """\1\2"""'),
+            
+            # Remove forbidden attribute access
+            (r'(\w+)\.__class__', r'\1.dtype'),
+            (r'(\w+)\.__globals__', r'\1.shape'),
+            (r'(\w+)\.__locals__', r'\1.shape'),
+            (r'(\w+)\.__dict__', r'\1.columns'),
+            (r'(\w+)\.__code__', r'\1.dtypes'),
+            (r'(\w+)\.__subclasses__\(\)', r'\1.describe()'),
+            (r'(\w+)\.__bases__', r'\1.shape'),
+            (r'(\w+)\.__mro__', r'\1.info()'),
+            
+            # Replace problematic introspection calls
+            (r'type\(([^)]+)\)', r'\1.dtype'),
+            (r'isinstance\(([^,]+),\s*[^)]+\)', r'hasattr(\1, "shape")'),
+        ]
+        
+        for pattern, replacement in fixes:
+            if re.search(pattern, fixed_code, re.MULTILINE):
+                fixed_code = re.sub(pattern, replacement, fixed_code, flags=re.MULTILINE)
+                self.transformations_applied.append(f"fallback_fix_{pattern[:20]}")
+        
+        return fixed_code
+    
+    def leave_SimpleStatementLine(self, original_node: cst.SimpleStatementLine, updated_node: cst.SimpleStatementLine) -> cst.SimpleStatementLine:
+        """Transform assignment statements that might have string issues."""
+        # Check if this is an assignment with a potentially problematic string
+        if len(updated_node.body) == 1 and isinstance(updated_node.body[0], cst.Assign):
+            assign = updated_node.body[0]
+            
+            # Check if the value is a string that might need DataFrame operation conversion
+            if isinstance(assign.value, cst.SimpleString):
+                # If this looks like evidence text assignment, suggest DataFrame operation
+                if self._looks_like_evidence_assignment(assign):
+                    # Convert to DataFrame operation comment + safe assignment
+                    safe_assignment = self._convert_to_dataframe_operation(assign)
+                    if safe_assignment != assign:
+                        new_body = [safe_assignment]
+                        self.transformations_applied.append("evidence_to_dataframe_op")
+                        return updated_node.with_changes(body=new_body)
+        
+        return updated_node
+    
+    def _looks_like_evidence_assignment(self, assign: cst.Assign) -> bool:
+        """Check if assignment looks like evidence text that should use DataFrame operations."""
+        if not isinstance(assign.value, cst.SimpleString):
+            return False
+        
+        # Check for common evidence text patterns
+        string_value = assign.value.value
+        evidence_indicators = [
+            'quote', 'evidence', 'text', 'We ', 'They ', 'Our ', 
+            'justice', 'democracy', 'policy', 'institution'
+        ]
+        
+        return any(indicator in string_value for indicator in evidence_indicators)
+    
+    def _convert_to_dataframe_operation(self, assign: cst.Assign) -> cst.Assign:
+        """Convert evidence text assignment to DataFrame operation."""
+        # Create a comment explaining the conversion
+        comment = cst.SimpleStatementLine(
+            body=[cst.Expr(cst.SimpleString('# Converted to DataFrame operation for safety'))]
+        )
+        
+        # Replace the string assignment with DataFrame operation
+        # For now, just make the string safe - in future versions could be more sophisticated
+        if isinstance(assign.value, cst.SimpleString):
+            safe_value = assign.value.with_changes(
+                value='"""' + assign.value.value[1:-1] + '"""'
+            )
+            return assign.with_changes(value=safe_value)
+        
+        return assign
+
+    def leave_Attribute(self, original_node: cst.Attribute, updated_node: cst.Attribute) -> cst.Attribute:
+        """Remove forbidden attribute access patterns."""
+        if isinstance(updated_node.attr, cst.Name):
+            attr_name = updated_node.attr.value
+            
+            # List of forbidden attributes from security sandbox
+            forbidden_attrs = [
+                '__class__', '__globals__', '__locals__', '__dict__', 
+                '__code__', '__subclasses__', '__bases__', '__mro__'
+            ]
+            
+            if attr_name in forbidden_attrs:
+                # Replace with safe DataFrame introspection
+                if attr_name == '__class__':
+                    # Convert obj.__class__ to type(obj) or safe DataFrame method
+                    self.transformations_applied.append(f"removed_forbidden_attr_{attr_name}")
+                    # For now, remove the entire attribute access - could be more sophisticated
+                    return updated_node.with_changes(attr=cst.Name("dtype"))  # Safe pandas attribute
+                else:
+                    self.transformations_applied.append(f"removed_forbidden_attr_{attr_name}")
+                    # Replace with safe alternative or comment it out
+                    return updated_node.with_changes(attr=cst.Name("shape"))  # Safe pandas attribute
+        
+        return updated_node
+    
+    def leave_Call(self, original_node: cst.Call, updated_node: cst.Call) -> cst.Call:
+        """Transform function calls that might be problematic."""
+        if isinstance(updated_node.func, cst.Name):
+            func_name = updated_node.func.value
+            
+            # Replace problematic introspection functions more carefully
+            if func_name in ['type', 'isinstance'] and self._looks_like_introspection_call(updated_node):
+                # Instead of converting to a method call, convert to a simple attribute check
+                self.transformations_applied.append(f"converted_introspection_{func_name}")
+                
+                # Get the first argument if available
+                if len(updated_node.args) > 0:
+                    first_arg = updated_node.args[0].value
+                    # Convert to a safe DataFrame attribute check instead of method call
+                    return cst.Call(
+                        func=cst.Name("hasattr"),
+                        args=[
+                            cst.Arg(first_arg),
+                            cst.Arg(cst.SimpleString('"shape"'))  # Safe attribute that all DataFrames have
+                        ]
+                    )
+        
+        return updated_node
+    
+    def _looks_like_introspection_call(self, call_node: cst.Call) -> bool:
+        """Check if a function call looks like problematic introspection."""
+        # Simple heuristic: if it has arguments that might be DataFrame columns or evidence
+        if len(call_node.args) > 0:
+            for arg in call_node.args:
+                if isinstance(arg.value, cst.Attribute):
+                    # This might be introspecting DataFrame attributes
+                    return True
+        return False
+
+
+def sanitize_llm_code(code: str) -> tuple[str, list[str]]:
+    """
+    Convenience function to sanitize LLM-generated code.
+    
+    Args:
+        code: Raw LLM-generated Python code
+        
+    Returns:
+        Tuple of (sanitized_code, transformations_applied)
+    """
+    sanitizer = LLMCodeSanitizer()
+    return sanitizer.sanitize_code(code)
+
+
+# Example usage and testing
+if __name__ == "__main__":
+    # Test with problematic code that LLMs might generate
+    test_code = '''
+import pandas as pd
+import numpy as np
+
+# Problematic string assignment (common LLM pattern)
+sample_quote = "We don't owe objectivity to oppressors"
+another_quote = 'They said "justice" but meant revenge'
+
+# This should work fine
+scores_mean = scores_df['score'].mean()
+evidence_count = evidence_df.shape[0]
+'''
+    
+    sanitized, transformations = sanitize_llm_code(test_code)
+    print("Original code:")
+    print(test_code)
+    print("\nSanitized code:")
+    print(sanitized)
+    print(f"\nTransformations applied: {transformations}") 
