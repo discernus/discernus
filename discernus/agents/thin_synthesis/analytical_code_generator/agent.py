@@ -81,7 +81,6 @@ class AnalyticalCodeGenerator:
             response_content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                temperature=0.1,
                 max_tokens=4000
             )
 

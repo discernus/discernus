@@ -97,7 +97,6 @@ class ResultsInterpreter:
             response_content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                temperature=0.3,  # Moderate creativity for engaging narrative
                 max_tokens=8000   # Allow for comprehensive reports
             )
             
@@ -420,7 +419,6 @@ Focus on the most important discoveries, their practical implications, and key c
                 model=self.model,
                 prompt=prompt,
                 system_prompt="You are an executive research consultant creating concise, impactful summaries.",
-                temperature=0.2,
                 max_tokens=300
             )
             

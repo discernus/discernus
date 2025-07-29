@@ -228,7 +228,6 @@ class EnhancedSynthesisAgent:
             response = completion(
                 model=model,
                 messages=[{"role": "user", "content": synthesis_prompt}],
-                temperature=0.0,
                 max_tokens=6000,
                 safety_settings=[
                     {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
