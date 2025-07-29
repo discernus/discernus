@@ -1,0 +1,112 @@
+# Civic Analysis Framework (CAF) v5.0
+
+**Version**: 5.0  
+**Status**: Active  
+**Major Change**: Embedded CSV Architecture for Synthesis Scalability
+
+---
+
+## Executive Summary
+
+The Civic Analysis Framework (CAF) v5.0 provides a comprehensive methodology for analyzing civic discourse, democratic participation, and institutional engagement. This framework systematically evaluates how citizens, organizations, and institutions construct civic arguments, engage in democratic processes, and contribute to or detract from civic health.
+
+CAF v5.0 represents a significant architectural evolution, incorporating embedded CSV generation capabilities that enable scalable synthesis operations while maintaining analytical rigor and methodological consistency.
+
+## Framework Philosophy
+
+Civic discourse operates as the foundation of democratic society, encompassing the quality of public dialogue, institutional trust, and citizen engagement. CAF recognizes that civic communication is simultaneously:
+
+- **Constructive**: Building democratic norms and institutional legitimacy
+- **Participatory**: Engaging diverse voices in democratic processes
+- **Accountable**: Holding institutions and actors responsible for their actions
+- **Forward-Looking**: Contributing to long-term democratic health and stability
+
+## Analytical Dimensions
+
+### Virtues
+**Definition**: Positive civic behaviors and attitudes that strengthen democratic institutions and promote constructive public discourse.
+
+**Dimensions**:
+- **democratic_engagement**: Active participation in democratic processes and institutions
+- **institutional_trust**: Confidence in and support for democratic institutions
+- **civic_responsibility**: Recognition of duties and obligations as a citizen
+- **constructive_dialogue**: Engagement in respectful, evidence-based public discourse
+- **compromise_acceptance**: Willingness to accept democratic outcomes and negotiate solutions
+
+### Vices  
+**Definition**: Negative civic behaviors and attitudes that undermine democratic institutions and promote destructive public discourse.
+
+**Dimensions**:
+- **democratic_disengagement**: Withdrawal from or rejection of democratic processes
+- **institutional_distrust**: Suspicion of or hostility toward democratic institutions
+- **civic_irresponsibility**: Neglect of civic duties and obligations
+- **destructive_rhetoric**: Engagement in divisive, inflammatory, or evidence-free discourse
+- **zero_sum_thinking**: Unwillingness to compromise or accept democratic outcomes
+
+## Scoring Methodology
+
+Each dimension is evaluated on a **0.0-1.0 scale** representing the degree to which each element is present and effectively deployed:
+
+- **0.0-0.2**: Absent or counterproductively deployed
+- **0.3-0.4**: Weakly present with minimal effectiveness
+- **0.5-0.6**: Moderately present with reasonable effectiveness  
+- **0.7-0.8**: Strongly present with high effectiveness
+- **0.9-1.0**: Exceptionally present with maximum effectiveness
+
+## Implementation Requirements
+
+### Required CSV Output Structure
+
+```
+<<<DISCERNUS_SCORES_CSV_v1>>>
+aid,democratic_engagement,institutional_trust,civic_responsibility,constructive_dialogue,compromise_acceptance,democratic_disengagement,institutional_distrust,civic_irresponsibility,destructive_rhetoric,zero_sum_thinking,virtue_score,vice_score,civic_health_index
+{artifact_id},[scores for each dimension],[composite scores]
+<<<END_DISCERNUS_SCORES_CSV_v1>>>
+```
+
+### Required Evidence CSV Structure
+
+```
+<<<DISCERNUS_EVIDENCE_CSV_v1>>>
+aid,dimension,quote,confidence
+{artifact_id},{dimension_name},{supporting_textual_evidence},{confidence_score}
+<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>
+```
+
+### Composite Score Calculations
+
+- **virtue_score**: Average of democratic_engagement, institutional_trust, civic_responsibility, constructive_dialogue, compromise_acceptance
+- **vice_score**: Average of democratic_disengagement, institutional_distrust, civic_irresponsibility, destructive_rhetoric, zero_sum_thinking
+- **civic_health_index**: virtue_score - vice_score (range: -1.0 to +1.0)
+
+## Validation Standards
+
+- **Textual Grounding**: All dimensional scores must be supported by specific textual evidence
+- **Analytical Rigor**: Scoring must reflect systematic evaluation rather than impressionistic assessment
+- **Methodological Consistency**: Apply identical evaluation criteria across all analyzed materials
+- **Evidence Documentation**: Maintain clear linkage between scores and supporting quotations
+
+---
+
+## JSON Configuration
+
+```json
+{
+  "framework_name": "Civic Analysis Framework",
+  "version": "5.0",
+  "dimension_groups": {
+    "virtues": ["democratic_engagement", "institutional_trust", "civic_responsibility", "constructive_dialogue", "compromise_acceptance"],
+    "vices": ["democratic_disengagement", "institutional_distrust", "civic_irresponsibility", "destructive_rhetoric", "zero_sum_thinking"]
+  },
+  "composite_scores": {
+    "virtue_score": "average of virtues dimensions",
+    "vice_score": "average of vices dimensions",
+    "civic_health_index": "virtue_score - vice_score"
+  },
+  "scoring_scale": {
+    "min": 0.0,
+    "max": 1.0,
+    "precision": 0.1
+  }
+}
+``` 
