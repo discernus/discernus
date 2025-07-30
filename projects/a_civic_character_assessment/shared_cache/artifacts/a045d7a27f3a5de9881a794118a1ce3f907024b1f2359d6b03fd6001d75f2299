@@ -1,0 +1,128 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis completed according to framework v6.0 specifications. All required dimensions and evidence extraction were performed. Confidence levels reflect the clarity and directness of statements within the document."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "justice": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "hope": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.65,
+          "salience": 0.55,
+          "confidence": 0.7
+        },
+        "tribalism": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "manipulation": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.4
+        },
+        "resentment": {
+          "raw_score": 0.15,
+          "salience": 0.25,
+          "confidence": 0.45
+        },
+        "fear": {
+          "raw_score": 0.05,
+          "salience": 0.1,
+          "confidence": 0.3
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.1
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me.",
+          "confidence": 0.95,
+          "context_type": "personal gratitude"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "I would not be an American worthy of the name should I regret a fate that has allowed me the extraordinary privilege of serving this country for a half a century.",
+          "confidence": 0.9,
+          "context_type": "self-perception of service"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "His success alone commands my respect for his ability and perseverance. But that he managed to do so by inspiring the hopes of so many millions of Americans who had once wrongly believed that they had little at stake or little influence in the election of an American president is something I deeply admire and commend him for achieving.",
+          "confidence": 0.8,
+          "context_type": "acknowledgement of opponent's achievement"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.",
+          "confidence": 0.7,
+          "context_type": "admission of fallibility"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We fought - we fought as hard as we could, and though we fell short, the failure is mine, not yours.",
+          "confidence": 0.85,
+          "context_type": "taking responsibility for loss"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Because nothing is inevitable here. Americans never quit. We never surrender. We never hide from history. We make history.",
+          "confidence": 0.9,
+          "context_type": "call to perseverance"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.85,
+          "context_type": "call for unity and future action"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.7,
+          "context_type": "offer of support"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "This is a historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight. I've always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too.",
+          "confidence": 0.5,
+          "context_type": "acknowledgement of historical significance for a group"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+          "confidence": 0.5,
+          "context_type": "acknowledging disappointment but urging forward movement"
+        }
+      ]
+    }
+  ]
+}

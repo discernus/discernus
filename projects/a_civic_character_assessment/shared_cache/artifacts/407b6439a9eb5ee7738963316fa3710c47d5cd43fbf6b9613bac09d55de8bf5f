@@ -1,0 +1,110 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis focused on identifying explicit mentions of civic virtues and vices within the provided text, adhering strictly to the framework's dimensional definitions. Evidence extraction prioritized direct quotes that clearly exemplify each dimension."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "truth": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "tribalism": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "manipulation": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.5
+        },
+        "resentment": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "fear": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.5
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "We are Americans. We have ideals of restoration, of rehabilitation. Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible.",
+          "confidence": 0.8,
+          "context_type": "rehabilitation_focus"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation.",
+          "confidence": 0.8,
+          "context_type": "systemic_critique"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "This bill includes critical sentencing reform that will reduce mandatory minimums and give judges discretion back – not legislators, but judges who sit and see all the totality of the facts.",
+          "confidence": 0.95,
+          "context_type": "policy_reform_detail"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But today we have an opportunity to do something about addressing the ills of this system. And that's why I'm proud that this is a bipartisan compromise bill with leadership – extraordinary leadership on both sides of the aisle – saying, hey, there are things we need to begin to correct in this system.",
+          "confidence": 0.9,
+          "context_type": "bipartisan_collaboration"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "Making this fix in this bill will mean that thousands of Americans who have more than served their time will become eligible for release, and it addresses some of the racial disparities in our system because 90% of the people that will benefit from that are African-American; 96% are black and Latina.",
+          "confidence": 0.85,
+          "context_type": "impact_assessment"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "I'm proud of this coalition. I'm proud that the coalition has people all across the political spectrum. I'm proud of the coalition as people from diverse backgrounds.",
+          "confidence": 0.6,
+          "context_type": "inclusive_coalition"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "This is a system that hurts people, and it hurts people that are often already struggling, often already hurt. What do we do in this country with a nonviolent drug offense? What we do to people in this country with a nonviolent drug offense is like getting a life sentence for the rest of your life.",
+          "confidence": 0.9,
+          "context_type": "systemic_harm_description"
+        }
+      ]
+    }
+  ]
+}

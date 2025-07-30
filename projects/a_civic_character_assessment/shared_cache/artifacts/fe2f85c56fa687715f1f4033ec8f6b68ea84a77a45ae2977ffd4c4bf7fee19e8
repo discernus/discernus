@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_353aaa866274",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "character_ideology_evolution_hypothesis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis focused on identifying explicit mentions and strong implications of character traits as defined in the framework. Confidence levels reflect the clarity and directness of the evidence found.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.7\n        },\n        \"truth\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.8,\n          \"confidence\": 0.7\n        },\n        \"justice\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.9,\n          \"confidence\": 0.8\n        },\n        \"hope\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.5\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.6\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.4\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.8\n        },\n        \"resentment\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.6\n        },\n        \"fear\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.5\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"We have a Constitution to preserve, protect, defend, and defend. And so our obligation then is to say, \\\"Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot. People like Joe Biden and Harry Reid and Chuck Schumer all would agree with Senator Chuck Grassley. No hearing, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Strong positive assertion\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"But it's no longer possible to look at this Supreme Court and discern what a likely decision of the Court might be by studying the text of the Constitution and the text of the law because we have a court that will write, make it up as they go along, write laws. They go and discover what they would call a new right in the 14th Amendment to the Constitution, equal protection under the law. There is equal protection already. There's long been equal protection that was about making sure that babies that were born to the newly free slave post Civil War would be American citizens and they would enjoy all of the rights and all the privilege of being a citizen, a person that enjoyed personhood in good standing.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Accusation of law-making/interpretation manipulation\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"My time DC time, and that was decision of Obergefell where the Supreme Court created a new command in the Constitution. Not just discovered a right that never existed. They manufactured a command. There's no right in the Constitution for a same-sex marriage. There's no reference in there at all. There's not one single Founding Father that would have ever accepted an idea that they had, they had founded a nation and embodied within our declaration or our ratified Constitution or the subsequent amendments that there was some right, let alone a command, same-sex marriage.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Assertion of factual inaccuracy in court decisions\"\n        },\n        {\n          \"dimension\": \"fantasy\",\n          \"quote_text\": \"This President has, has release, his administration has release over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Unsubstantiated claim of criminal release\"\n        },\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"And that's what that word means to me. Um, but, but they, um, parents, the parents of Americans is what the President would like to call it. Deferred action for parents of Americans, DAPA. Well, here's. I watched one of those parents of Americans, parent now come across the border in a, in an inflatatable raft with two coyotes. They got paid something to do that, that I don't know how much. And now the edict that we grant this de facto, this amnesty for the parents of, of anchor babies to be staying free in the United States, that suspends the rule of law, defiles the very law, the specified law itself.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"Framing immigration as a threat to American identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-30T11:01:56.765611+00:00",
+    "end_time": "2025-07-30T11:02:01.165744+00:00",
+    "duration_seconds": 4.400133,
+    "llm_interaction_hash": "20ffbf931d841761"
+  },
+  "input_artifacts": {
+    "framework_hash": "47bcd0504cd7d2dc02140eb874748a43621938eb20905e30570a650a842b9cb0",
+    "document_hashes": [
+      "6d762d9a0ecb770b6a20c17994e6a3bd5051fa062012466a1e8934d43a4f1708"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "a_civic_character_assessment",
+      "experiment_root": "/Volumes/code/discernus/projects/a_civic_character_assessment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250730T110132Z_5d091cd0"
+  }
+}

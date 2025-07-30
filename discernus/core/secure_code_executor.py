@@ -274,7 +274,29 @@ finally:
         'error': error_message,
         'result_data': result_data
     }}
-    print("EXECUTION_RESULT:" + json.dumps(result, default=str))
+    
+    # Custom JSON serializer to handle tuple keys and other non-serializable objects
+    def safe_json_serializer(obj):
+        if isinstance(obj, tuple):
+            return str(obj)  # Convert tuples to strings
+        elif hasattr(obj, 'to_dict'):
+            return obj.to_dict()
+        elif hasattr(obj, '__dict__'):
+            return str(obj)
+        else:
+            return str(obj)
+    
+    try:
+        print("EXECUTION_RESULT:" + json.dumps(result, default=safe_json_serializer))
+    except Exception as json_error:
+        # Fallback: create a simplified result without problematic data
+        safe_result = {{
+            'success': execution_success,
+            'output': output,
+            'error': error_message,
+            'result_data': str(result_data) if result_data else None
+        }}
+        print("EXECUTION_RESULT:" + json.dumps(safe_result))
 """
         
         try:

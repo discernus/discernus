@@ -1,0 +1,98 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis focused on identifying explicit mentions and strong implications of character traits as defined in the framework. Confidence levels reflect the clarity and directness of the evidence found."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "truth": {
+          "raw_score": 0.4,
+          "salience": 0.8,
+          "confidence": 0.7
+        },
+        "justice": {
+          "raw_score": 0.7,
+          "salience": 0.9,
+          "confidence": 0.8
+        },
+        "hope": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "pragmatism": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.6
+        },
+        "tribalism": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.4
+        },
+        "manipulation": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "resentment": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.6
+        },
+        "fear": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "fantasy": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "justice",
+          "quote_text": "We have a Constitution to preserve, protect, defend, and defend. And so our obligation then is to say, \"Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice. Let's stick with the statements that have been made by a number of Democrats in the past when the shoe was on the other foot. People like Joe Biden and Harry Reid and Chuck Schumer all would agree with Senator Chuck Grassley. No hearing, no confirmation in the Senate, no vote in the in the Judiciary Committee, and no vote on the floor of the Senate for this lame duck President's appointments because we have a Constitution that's got to be restored.",
+          "confidence": 0.9,
+          "context_type": "Strong positive assertion"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "But it's no longer possible to look at this Supreme Court and discern what a likely decision of the Court might be by studying the text of the Constitution and the text of the law because we have a court that will write, make it up as they go along, write laws. They go and discover what they would call a new right in the 14th Amendment to the Constitution, equal protection under the law. There is equal protection already. There's long been equal protection that was about making sure that babies that were born to the newly free slave post Civil War would be American citizens and they would enjoy all of the rights and all the privilege of being a citizen, a person that enjoyed personhood in good standing.",
+          "confidence": 0.8,
+          "context_type": "Accusation of law-making/interpretation manipulation"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "My time DC time, and that was decision of Obergefell where the Supreme Court created a new command in the Constitution. Not just discovered a right that never existed. They manufactured a command. There's no right in the Constitution for a same-sex marriage. There's no reference in there at all. There's not one single Founding Father that would have ever accepted an idea that they had, they had founded a nation and embodied within our declaration or our ratified Constitution or the subsequent amendments that there was some right, let alone a command, same-sex marriage.",
+          "confidence": 0.7,
+          "context_type": "Assertion of factual inaccuracy in court decisions"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "This President has, has release, his administration has release over 30,000 criminals, criminal aliens onto the streets of America. And of those that they released, there have been at least 124 of them who have been charged with homicide for 135 murders.",
+          "confidence": 0.7,
+          "context_type": "Unsubstantiated claim of criminal release"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "And that's what that word means to me. Um, but, but they, um, parents, the parents of Americans is what the President would like to call it. Deferred action for parents of Americans, DAPA. Well, here's. I watched one of those parents of Americans, parent now come across the border in a, in an inflatatable raft with two coyotes. They got paid something to do that, that I don't know how much. And now the edict that we grant this de facto, this amnesty for the parents of, of anchor babies to be staying free in the United States, that suspends the rule of law, defiles the very law, the specified law itself.",
+          "confidence": 0.6,
+          "context_type": "Framing immigration as a threat to American identity"
+        }
+      ]
+    }
+  ]
+}

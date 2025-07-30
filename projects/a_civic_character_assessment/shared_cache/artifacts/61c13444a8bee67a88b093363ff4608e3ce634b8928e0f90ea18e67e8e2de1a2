@@ -1,0 +1,216 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+import json
+
+# --- DO NOT MODIFY: These DataFrames are pre-loaded in the execution environment ---
+# scores_df = pd.read_csv('scores.csv')
+# evidence_df = pd.read_csv('evidence.csv')
+# For local testing, you would uncomment the lines above and use actual data files.
+# In the production environment, `scores_df` and `evidence_df` are already in memory.
+
+# --- 1. Initialization and Setup ---
+
+# Initialize the main result dictionary, ensuring a valid output structure is always available.
+result_data = {
+    'descriptive_stats': {},
+    'hypothesis_tests': {},
+    'correlations': {},
+    'reliability_metrics': {}
+}
+
+# Define framework dimensions based on the specification for easier access.
+VIRTUES = ["dignity", "truth", "justice", "hope", "pragmatism"]
+VICES = ["tribalism", "manipulation", "resentment", "fear", "fantasy"]
+OPPOSING_PAIRS = list(zip(VIRTUES, VICES))
+
+# Construct column names for scores, salience, and confidence.
+score_cols = [f"{dim}_score" for dim in VIRTUES + VICES]
+salience_cols = [f"{dim}_salience" for dim in VIRTUES + VICES]
+confidence_cols = [f"{dim}_confidence" for dim in VIRTUES + VICES]
+
+# --- 2. Framework-Specific Calculations ---
+# This block calculates the Character Tension scores and the overall MC-SCI for each artifact.
+try:
+    analysis_df = scores_df.copy()
+    tension_cols = []
+
+    # Calculate Character Tension for each opposing pair.
+    for virtue, vice in OPPOSING_PAIRS:
+        tension_col_name = f"{virtue}_{vice}_tension"
+        tension_cols.append(tension_col_name)
+        
+        virtue_score = analysis_df[f"{virtue}_score"]
+        vice_score = analysis_df[f"{vice}_score"]
+        virtue_salience = analysis_df[f"{virtue}_salience"]
+        vice_salience = analysis_df[f"{vice}_salience"]
+
+        # Formula: min(Virtue_score, Vice_score) * |Virtue_salience - Vice_salience|
+        tension_score = np.minimum(virtue_score, vice_score) * np.abs(virtue_salience - vice_salience)
+        analysis_df[tension_col_name] = tension_score
+
+    # Calculate the Moral Character Strategic Contradiction Index (MC-SCI).
+    # Formula: (Sum of all Character Tension Scores) / Number of Opposing Pairs
+    if tension_cols and len(tension_cols) > 0:
+        analysis_df['mc_sci'] = analysis_df[tension_cols].sum(axis=1) / len(OPPOSING_PAIRS)
+    else:
+        analysis_df['mc_sci'] = np.nan
+        
+except Exception as e:
+    result_data['error_framework_calculations'] = f"Failed to compute tension or MC-SCI: {str(e)}"
+    # Use the original scores_df if calculations fail, to allow other analyses to proceed.
+    analysis_df = scores_df.copy()
+
+
+# --- 3. Descriptive Statistics ---
+try:
+    stats_results = {}
+    # Summary for raw scores, salience, and confidence.
+    stats_results['scores_summary'] = analysis_df[score_cols].describe().to_dict()
+    stats_results['salience_summary'] = analysis_df[salience_cols].describe().to_dict()
+    
+    # Summary for newly calculated tension and MC-SCI scores.
+    if 'mc_sci' in analysis_df.columns:
+        calculated_cols = tension_cols + ['mc_sci']
+        stats_results['framework_metrics_summary'] = analysis_df[calculated_cols].describe().to_dict()
+
+    # Evidence-based statistics.
+    if not evidence_df.empty:
+        stats_results['evidence_distribution'] = evidence_df['dimension'].value_counts().to_dict()
+        stats_results['evidence_confidence_summary'] = evidence_df['confidence_score'].describe().to_dict()
+        # Safe text analysis: analyze quote length without accessing string content.
+        stats_results['evidence_quote_length_summary'] = evidence_df['quote_text'].str.len().describe().to_dict()
+
+    # Sample characteristics.
+    stats_results['sample_characteristics'] = {
+        'num_artifacts_scored': int(scores_df.shape[0]),
+        'num_evidence_quotes': int(evidence_df.shape[0])
+    }
+    
+    result_data['descriptive_stats'] = stats_results
+
+except Exception as e:
+    result_data['descriptive_stats']['error'] = f"Failed to generate descriptive statistics: {str(e)}"
+
+
+# --- 4. Reliability Analysis (Cronbach's Alpha) ---
+def cronbach_alpha(df_items):
+    """Calculates Cronbach's Alpha for a given set of items (columns)."""
+    try:
+        # Drop rows with any missing values for this calculation
+        df_items = df_items.dropna()
+        
+        # k: number of items (columns)
+        k = df_items.shape[1]
+        if k < 2:
+            return np.nan  # Alpha is not defined for a single item.
+        
+        # Calculate variance of the total score (sum of items for each row)
+        total_variance = df_items.sum(axis=1).var(ddof=1)
+        if total_variance == 0:
+            return 1.0 # All items are constant, perfect correlation if not all zero
+        
+        # Calculate the sum of variances for each item
+        item_variances_sum = df_items.var(ddof=1).sum()
+        
+        # Cronbach's Alpha formula
+        alpha = (k / (k - 1)) * (1 - (item_variances_sum / total_variance))
+        return alpha
+    except Exception:
+        return np.nan
+
+try:
+    reliability_results = {}
+    
+    # Cronbach's Alpha for Civic Virtues scale
+    virtue_scores = analysis_df[[f"{v}_score" for v in VIRTUES]]
+    reliability_results['virtues_scale_alpha'] = cronbach_alpha(virtue_scores)
+
+    # Cronbach's Alpha for Civic Vices scale
+    vice_scores = analysis_df[[f"{v}_score" for v in VICES]]
+    reliability_results['vices_scale_alpha'] = cronbach_alpha(vice_scores)
+    
+    result_data['reliability_metrics'] = reliability_results
+
+except Exception as e:
+    result_data['reliability_metrics']['error'] = f"Failed to compute Cronbach's Alpha: {str(e)}"
+
+
+# --- 5. Correlation Analysis ---
+try:
+    correlation_results = {}
+    
+    # Full correlation matrix for all scores.
+    score_corr_matrix = analysis_df[score_cols].corr()
+    correlation_results['full_score_matrix'] = score_corr_matrix.to_dict()
+    
+    # Specific correlations for opposing pairs.
+    opposing_pair_corrs = {}
+    for virtue, vice in OPPOSING_PAIRS:
+        key = f"{virtue}_vs_{vice}"
+        corr_val = score_corr_matrix.loc[f"{virtue}_score", f"{vice}_score"]
+        opposing_pair_corrs[key] = corr_val
+    correlation_results['opposing_pair_correlations'] = opposing_pair_corrs
+    
+    result_data['correlations'] = correlation_results
+
+except Exception as e:
+    result_data['correlations']['error'] = f"Failed to compute correlations: {str(e)}"
+
+
+# --- 6. Hypothesis Testing ---
+def cohen_d_paired(group1, group2):
+    """Calculates Cohen's d for paired samples."""
+    try:
+        # Ensure data is clean for calculation
+        valid_indices = group1.notna() & group2.notna()
+        group1, group2 = group1[valid_indices], group2[valid_indices]
+        if len(group1) < 2:
+            return np.nan
+        
+        diff = group1 - group2
+        return diff.mean() / diff.std(ddof=1)
+    except Exception:
+        return np.nan
+
+try:
+    hypothesis_results = {}
+    
+    # H1: Test if mean virtue scores are significantly different from mean vice scores.
+    analysis_df['mean_virtue_score'] = analysis_df[[f"{v}_score" for v in VIRTUES]].mean(axis=1)
+    analysis_df['mean_vice_score'] = analysis_df[[f"{v}_score" for v in VICES]].mean(axis=1)
+
+    # Use a paired t-test as we are comparing two related measures from the same artifacts.
+    ttest_virtue_vs_vice = stats.ttest_rel(
+        analysis_df['mean_virtue_score'],
+        analysis_df['mean_vice_score'],
+        nan_policy='omit'
+    )
+    
+    hypothesis_results['virtue_vs_vice_ttest'] = {
+        'description': 'Paired t-test comparing mean virtue scores vs. mean vice scores.',
+        't_statistic': ttest_virtue_vs_vice.statistic,
+        'p_value': ttest_virtue_vs_vice.pvalue,
+        'effect_size_cohens_d': cohen_d_paired(analysis_df['mean_virtue_score'], analysis_df['mean_vice_score'])
+    }
+    
+    # H2: Test opposing pairs against each other.
+    opposing_pair_tests = {}
+    for virtue, vice in OPPOSING_PAIRS:
+        group1 = analysis_df[f"{virtue}_score"]
+        group2 = analysis_df[f"{vice}_score"]
+        
+        ttest_pair = stats.ttest_rel(group1, group2, nan_policy='omit')
+        
+        opposing_pair_tests[f"{virtue}_vs_{vice}"] = {
+            'description': f'Paired t-test for {virtue} score vs. {vice} score.',
+            't_statistic': ttest_pair.statistic,
+            'p_value': ttest_pair.pvalue,
+            'effect_size_cohens_d': cohen_d_paired(group1, group2)
+        }
+    hypothesis_results['opposing_dimension_ttests'] = opposing_pair_tests
+    
+    result_data['hypothesis_tests'] = hypothesis_results
+
+except Exception as e:
+    result_data['hypothesis_tests']['error'] = f"Failed to perform hypothesis tests: {str(e)}"

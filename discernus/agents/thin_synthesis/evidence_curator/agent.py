@@ -206,6 +206,17 @@ class EvidenceCurator:
             json_str = evidence_data.decode('utf-8')
             analysis_result = json.loads(json_str)
             
+            # Debug: Log the structure of the analysis result
+            self.logger.info(f"Analysis result keys: {list(analysis_result.keys()) if isinstance(analysis_result, dict) else 'Not a dict'}")
+            if isinstance(analysis_result, dict):
+                for key, value in analysis_result.items():
+                    if isinstance(value, list):
+                        self.logger.info(f"  {key}: list with {len(value)} items")
+                    elif isinstance(value, dict):
+                        self.logger.info(f"  {key}: dict with keys {list(value.keys())}")
+                    else:
+                        self.logger.info(f"  {key}: {type(value).__name__}")
+            
             # Convert to DataFrame using same logic as synthesis pipeline
             document_analyses = analysis_result.get('document_analyses', [])
             

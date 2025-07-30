@@ -1,0 +1,221 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+import json
+
+# This script assumes that 'scores_df' and 'evidence_df' are pre-loaded pandas DataFrames.
+# It performs statistical analysis based on the Character Assessment Framework v6.0.
+
+# --- Configuration based on Framework Specification ---
+
+# Define the dimension groups for virtues and vices.
+VIRTUES = ["dignity", "truth", "justice", "hope", "pragmatism"]
+VICES = ["tribalism", "manipulation", "resentment", "fear", "fantasy"]
+
+# Define the opposing pairs for tension calculations.
+OPPOSING_PAIRS = {
+    "dignity": "tribalism",
+    "truth": "manipulation",
+    "justice": "resentment",
+    "hope": "fear",
+    "pragmatism": "fantasy"
+}
+
+# --- Helper Functions ---
+
+def clean_for_json(d):
+    """
+    Recursively cleans a dictionary or list of numpy/pandas data types
+    for clean JSON serialization. Replaces NaN with None.
+    """
+    if isinstance(d, dict):
+        return {k: clean_for_json(v) for k, v in d.items()}
+    if isinstance(d, list):
+        return [clean_for_json(i) for i in d]
+    if isinstance(d, (np.integer, np.int64)):
+        return int(d)
+    if isinstance(d, (np.floating, np.float64)):
+        if np.isnan(d):
+            return None
+        if np.isinf(d):
+            return 'Infinity' if d > 0 else '-Infinity'
+        return float(d)
+    if pd.isna(d):
+        return None
+    return d
+
+# --- Main Analysis ---
+
+# Initialize the final results dictionary with required keys.
+result_data = {
+    'descriptive_stats': {},
+    'hypothesis_tests': {},
+    'correlations': {},
+    'reliability_metrics': {}
+}
+
+try:
+    # --- 1. Feature Engineering: Calculate Framework-Specific Metrics ---
+    # This block computes the Character Tension scores and the MC-SCI index.
+
+    # Calculate tension score for each opposing pair.
+    # Formula: Character Tension = min(Virtue_score, Vice_score) * |Virtue_salience - Vice_salience|
+    tension_cols = []
+    for virtue, vice in OPPOSING_PAIRS.items():
+        virtue_score_col = f"{virtue}_score"
+        vice_score_col = f"{vice}_score"
+        virtue_salience_col = f"{virtue}_salience"
+        vice_salience_col = f"{vice}_salience"
+        tension_col_name = f"{virtue}_{vice}_tension"
+        tension_cols.append(tension_col_name)
+
+        # Use np.minimum for vectorized 'min' operation.
+        min_scores = np.minimum(scores_df[virtue_score_col], scores_df[vice_score_col])
+        salience_diff = (scores_df[virtue_salience_col] - scores_df[vice_salience_col]).abs()
+        scores_df[tension_col_name] = min_scores * salience_diff
+
+    # Calculate the Moral Character Strategic Contradiction Index (MC-SCI).
+    # Formula: MC-SCI = (Sum of all Character Tension Scores) / Number of Opposing Pairs
+    scores_df['mc_sci'] = scores_df[tension_cols].mean(axis=1)
+
+    # Calculate aggregate scores for virtues and vices for hypothesis testing.
+    virtue_score_cols = [f"{v}_score" for v in VIRTUES]
+    vice_score_cols = [f"{v}_score" for v in VICES]
+    scores_df['avg_virtue_score'] = scores_df[virtue_score_cols].mean(axis=1)
+    scores_df['avg_vice_score'] = scores_df[vice_score_cols].mean(axis=1)
+
+except Exception as e:
+    result_data['feature_engineering_error'] = f"Failed to engineer features: {str(e)}"
+
+try:
+    # --- 2. Descriptive Statistics ---
+    # This block generates summary statistics for all primary and derived metrics.
+    stats_dict = {}
+
+    def describe_to_dict(series):
+        """Helper to convert pandas describe() output to a clean dictionary."""
+        d = series.describe().to_dict()
+        return d
+
+    # Generate stats for all numeric columns in the scores DataFrame.
+    numeric_cols = scores_df.select_dtypes(include=np.number).columns
+    for col in numeric_cols:
+        stats_dict[col] = describe_to_dict(scores_df[col])
+
+    # Generate stats for the evidence DataFrame.
+    if not evidence_df.empty:
+        stats_dict['evidence_summary'] = {
+            'total_quotes': int(evidence_df.shape[0]),
+            'quotes_per_dimension': evidence_df['dimension'].value_counts().to_dict(),
+            'average_confidence': describe_to_dict(evidence_df['confidence_score'])
+        }
+    else:
+        stats_dict['evidence_summary'] = {'status': 'No evidence data available.'}
+
+    result_data['descriptive_stats'] = stats_dict
+
+except Exception as e:
+    result_data['descriptive_stats'] = {'error': f"Failed to compute descriptive statistics: {str(e)}"}
+
+try:
+    # --- 3. Reliability Metrics (Cronbach's Alpha) ---
+    # Assess the internal consistency of the virtue and vice scales.
+    reliability_dict = {}
+
+    def calculate_cronbach_alpha(df):
+        """Calculates Cronbach's Alpha for a given DataFrame of scale items."""
+        # Drop rows with any NaN values for this calculation
+        df_complete = df.dropna()
+        # Check for sufficient data
+        if df_complete.shape[0] < 2 or df_complete.shape[1] < 2:
+            return np.nan
+        
+        k = df_complete.shape[1]
+        item_variances = df_complete.var(axis=0, ddof=1).sum()
+        total_variance = df_complete.sum(axis=1).var(ddof=1)
+        
+        # Avoid division by zero if all values are constant
+        if total_variance == 0:
+            return 1.0 if item_variances == 0 else 0.0
+            
+        return (k / (k - 1.0)) * (1.0 - item_variances / total_variance)
+
+    # Calculate alpha for virtue scores
+    virtue_scores = scores_df[[f"{v}_score" for v in VIRTUES]]
+    reliability_dict['virtues_scale_cronbach_alpha'] = calculate_cronbach_alpha(virtue_scores)
+
+    # Calculate alpha for vice scores
+    vice_scores = scores_df[[f"{v}_score" for v in VICES]]
+    reliability_dict['vices_scale_cronbach_alpha'] = calculate_cronbach_alpha(vice_scores)
+    
+    result_data['reliability_metrics'] = reliability_dict
+
+except Exception as e:
+    result_data['reliability_metrics'] = {'error': f"Failed to compute reliability metrics: {str(e)}"}
+
+try:
+    # --- 4. Correlation Analysis ---
+    # Examine relationships between different character dimensions.
+    corr_dict = {}
+    
+    # Select only score columns and derived indices for the main correlation matrix.
+    score_cols = [f"{dim}_score" for dim in VIRTUES + VICES]
+    derived_cols = ['mc_sci', 'avg_virtue_score', 'avg_vice_score']
+    cols_to_correlate = score_cols + derived_cols
+    
+    # Ensure columns exist before attempting correlation
+    valid_cols = [col for col in cols_to_correlate if col in scores_df.columns]
+    
+    # Calculate the correlation matrix
+    correlation_matrix = scores_df[valid_cols].corr()
+    corr_dict['full_correlation_matrix'] = correlation_matrix.to_dict()
+
+    result_data['correlations'] = corr_dict
+
+except Exception as e:
+    result_data['correlations'] = {'error': f"Failed to compute correlations: {str(e)}"}
+
+try:
+    # --- 5. Hypothesis Testing ---
+    # Test for significant differences between virtue and vice scores.
+    hypo_dict = {}
+    
+    # H0: The mean of average virtue scores is equal to the mean of average vice scores.
+    # H1: The means are not equal.
+    # Using a paired t-test because virtue/vice scores are from the same subjects (artifacts).
+    
+    avg_virtues = scores_df['avg_virtue_score'].dropna()
+    avg_vices = scores_df['avg_vice_score'].dropna()
+    
+    if len(avg_virtues) > 1 and len(avg_vices) > 1 and len(avg_virtues) == len(avg_vices):
+        ttest_result = stats.ttest_rel(avg_virtues, avg_vices, nan_policy='omit')
+        
+        # Calculate effect size (Cohen's d for paired samples)
+        difference = avg_virtues - avg_vices
+        std_dev_diff = difference.std(ddof=1)
+        cohens_d = difference.mean() / std_dev_diff if std_dev_diff != 0 else 0.0
+        
+        hypo_dict['overall_virtue_vs_vice'] = {
+            'description': 'Paired t-test comparing mean virtue scores to mean vice scores.',
+            't_statistic': ttest_result.statistic,
+            'p_value': ttest_result.pvalue,
+            'degrees_of_freedom': ttest_result.df,
+            'mean_virtues': avg_virtues.mean(),
+            'mean_vices': avg_vices.mean(),
+            'effect_size_cohens_d': cohens_d
+        }
+    else:
+        hypo_dict['overall_virtue_vs_vice'] = {
+            'status': 'skipped',
+            'reason': 'Insufficient data for a paired t-test (requires at least 2 pairs).'
+        }
+        
+    result_data['hypothesis_tests'] = hypo_dict
+
+except Exception as e:
+    result_data['hypothesis_tests'] = {'error': f"Failed to perform hypothesis tests: {str(e)}"}
+
+
+# --- Finalization ---
+# Clean the final dictionary of any numpy types for safe JSON serialization.
+result_data = clean_for_json(result_data)

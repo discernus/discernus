@@ -34,13 +34,15 @@ project_root = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 from discernus.storage.minio_client import DiscernusArtifactClient
-from discernus.core.secure_code_executor import SecureCodeExecutor
 from discernus.core.audit_logger import AuditLogger
 
 # Import THIN synthesis agents
-from ..analytical_code_generator.agent import AnalyticalCodeGenerator, CodeGenerationRequest
+from ..analysis_planner.agent import AnalysisPlanner, AnalysisPlanRequest
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ..results_interpreter.agent import ResultsInterpreter, InterpretationRequest
+
+# Import MathToolkit for reliable mathematical operations
+from discernus.core.math_toolkit import execute_analysis_plan
 
 @dataclass
 class ProductionPipelineRequest:
@@ -67,7 +69,7 @@ class ProductionPipelineResponse:
     key_findings: list
     
     # Intermediate artifacts (as hashes for provenance)
-    generated_code_hash: str
+    analysis_plan_hash: str
     statistical_results_hash: str
     curated_evidence_hash: str
     
@@ -113,12 +115,7 @@ class ProductionThinSynthesisPipeline:
         self.debug_level = debug_level
         
         # Initialize agents with infrastructure
-        self.code_generator = AnalyticalCodeGenerator(model=model)
-        self.secure_executor = SecureCodeExecutor(
-            timeout_seconds=60,
-            memory_limit_mb=512,
-            enable_data_science=True
-        )
+        self.analysis_planner = AnalysisPlanner(model=model, audit_logger=audit_logger)
         self.evidence_curator = EvidenceCurator(model=model)
         self.results_interpreter = ResultsInterpreter(model=model)
         
@@ -135,11 +132,8 @@ class ProductionThinSynthesisPipeline:
             "initialization",
             {
                 "model": model,
-                "secure_executor_config": {
-                    "timeout_seconds": 60,
-                    "memory_limit_mb": 512,
-                    "data_science_enabled": True
-                }
+                "architecture": "declarative_mathematical_specification",
+                "math_toolkit_enabled": True
             }
         )
         
@@ -189,37 +183,37 @@ class ProductionThinSynthesisPipeline:
         try:
             self.logger.info("🚀 Starting Production THIN Synthesis Pipeline")
             
-            # Stage 1: Generate Analysis Code
-            self.logger.info("📝 Stage 1: Generating analysis code...")
+            # Stage 1: Generate Analysis Plan
+            self.logger.info("📝 Stage 1: Generating analysis plan...")
             stage_start = time.time()
             
-            code_response = self._stage_1_generate_code(request)
+            plan_response = self._stage_1_generate_analysis_plan(request)
             
-            stage_timings['code_generation'] = time.time() - stage_start
-            stage_success['code_generation'] = code_response.success
+            stage_timings['analysis_planning'] = time.time() - stage_start
+            stage_success['analysis_planning'] = plan_response.success
             
-            if not code_response.success:
+            if not plan_response.success:
                 return self._create_error_response(
-                    "Code generation failed", 
-                    code_response.error_message,
+                    "Analysis planning failed", 
+                    plan_response.error_message,
                     stage_timings, 
                     stage_success,
                     time.time() - start_time
                 )
             
-            # Stage 2: Execute Generated Code
-            self.logger.info("⚙️  Stage 2: Executing generated code...")
+            # Stage 2: Execute Analysis Plan
+            self.logger.info("⚙️  Stage 2: Executing analysis plan...")
             stage_start = time.time()
             
-            exec_response = self._stage_2_execute_code(code_response, request)
+            exec_response = self._stage_2_execute_analysis_plan(plan_response, request)
             
-            stage_timings['code_execution'] = time.time() - stage_start
-            stage_success['code_execution'] = exec_response['success']
+            stage_timings['analysis_execution'] = time.time() - stage_start
+            stage_success['analysis_execution'] = len(exec_response.get('errors', [])) == 0
             
-            if not exec_response['success']:
+            if len(exec_response.get('errors', [])) > 0:
                 return self._create_error_response(
-                    "Code execution failed",
-                    exec_response['error'],
+                    "Analysis execution failed",
+                    "; ".join(exec_response['errors']),
                     stage_timings,
                     stage_success,
                     time.time() - start_time
@@ -277,8 +271,8 @@ class ProductionThinSynthesisPipeline:
                 )
             
             # Store intermediate artifacts
-            code_hash = self.artifact_client.put_artifact(code_response.analysis_code.encode('utf-8'))
-            results_hash = self.artifact_client.put_artifact(json.dumps(exec_response['result_data']).encode('utf-8'))
+            plan_hash = self.artifact_client.put_artifact(json.dumps(plan_response.analysis_plan).encode('utf-8'))
+            results_hash = self.artifact_client.put_artifact(json.dumps(exec_response['results']).encode('utf-8'))
             evidence_hash = self.artifact_client.put_artifact(json.dumps(curation_response.to_json_serializable()).encode('utf-8'))
             
             # Success! Create complete response
@@ -293,7 +287,7 @@ class ProductionThinSynthesisPipeline:
                 {
                     "total_time": total_time,
                     "stage_timings": stage_timings,
-                    "generated_code_hash": code_hash,
+                    "analysis_plan_hash": plan_hash,
                     "statistical_results_hash": results_hash,
                     "curated_evidence_hash": evidence_hash,
                     "word_count": interpretation_response.word_count
@@ -307,7 +301,7 @@ class ProductionThinSynthesisPipeline:
                 key_findings=interpretation_response.key_findings,
                 
                 # Intermediate artifacts
-                generated_code_hash=code_hash,
+                analysis_plan_hash=plan_hash,
                 statistical_results_hash=results_hash,
                 curated_evidence_hash=evidence_hash,
                 
@@ -347,12 +341,11 @@ class ProductionThinSynthesisPipeline:
                 total_time
             )
 
-    def _stage_1_generate_code(self, request: ProductionPipelineRequest):
-        """Stage 1: Generate analysis code using artifacts with actual data structure."""
+    def _stage_1_generate_analysis_plan(self, request: ProductionPipelineRequest):
+        """Stage 1: Generate analysis plan using declarative mathematical specification."""
         
-        # Retrieve analysis data from artifacts (supports both CSV and JSON)
-        scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
-        evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+        # Retrieve analysis data from artifacts
+        combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         
         # Load actual data to show LLM real structure
         import pandas as pd
@@ -360,74 +353,113 @@ class ProductionThinSynthesisPipeline:
         # Initialize default values
         scores_df = None
         evidence_df = None
-        scores_sample = []
-        evidence_sample = []
         available_columns = []
+        data_summary = ""
         
         try:
-            # Use unified data loading that handles both CSV and JSON
-            scores_df = self._load_data_to_dataframe(scores_data, "scores")
-            evidence_df = self._load_data_to_dataframe(evidence_data, "evidence")
+            # Use unified data loading that handles JSON
+            scores_df = self._load_data_to_dataframe(combined_data, "scores")
+            evidence_df = self._load_data_to_dataframe(combined_data, "evidence")
             
-            # Create samples for LLM to understand actual structure
-            scores_sample = scores_df.head(3).to_dict('records') if len(scores_df) > 0 else []
-            evidence_sample = evidence_df.head(5).to_dict('records') if len(evidence_df) > 0 else []
             available_columns = list(scores_df.columns)
             
-            self.logger.info(f"Data-informed generation: scores_df {scores_df.shape}, evidence_df {evidence_df.shape}")
+            # Create data summary for the analysis planner
+            data_summary = f"""
+Data Summary:
+- Scores DataFrame: {scores_df.shape[0]} rows, {scores_df.shape[1]} columns
+- Evidence DataFrame: {evidence_df.shape[0]} rows, {evidence_df.shape[1]} columns
+- Available columns: {', '.join(available_columns)}
+- Sample scores data: {scores_df.head(2).to_dict('records') if len(scores_df) > 0 else 'No data'}
+- Sample evidence data: {evidence_df.head(2).to_dict('records') if len(evidence_df) > 0 else 'No data'}
+"""
+            
+            self.logger.info(f"Data-informed planning: scores_df {scores_df.shape}, evidence_df {evidence_df.shape}")
             self.logger.info(f"Available columns: {available_columns}")
             
         except Exception as e:
             self.logger.warning(f"Failed to load actual data structure: {str(e)}")
-            # Keep default empty values
+            data_summary = "Data structure could not be determined"
         
         try:
-            # Describe data structures for code generation (handle None case)
-            if scores_df is not None and evidence_df is not None:
-                scores_structure = self._describe_dataframe_structure(scores_df, "scores")
-                evidence_structure = self._describe_dataframe_structure(evidence_df, "evidence")
-            else:
-                # Fallback to basic structure descriptions
-                scores_structure = "Data structure could not be determined"
-                evidence_structure = "Data structure could not be determined"
+            # Extract research questions from experiment context
+            research_questions = self._extract_research_questions(request.experiment_context)
             
-            # Create enhanced code generation request with actual data structure
-            code_request = CodeGenerationRequest(
+            # Create analysis plan request
+            plan_request = AnalysisPlanRequest(
+                experiment_context=request.experiment_context or "",
                 framework_spec=request.framework_spec,
-                scores_csv_structure=scores_structure,  # Keep field name for compatibility with code generator
-                evidence_csv_structure=evidence_structure,  # Keep field name for compatibility with code generator
-                experiment_context=request.experiment_context,
-                actual_scores_sample=scores_sample,
-                actual_evidence_sample=evidence_sample,
-                available_columns=available_columns
+                data_summary=data_summary,
+                available_columns=available_columns,
+                research_questions=research_questions
             )
             
-            # Log code generation start
+            # Log analysis planning start
             self.audit_logger.log_agent_event(
-                "AnalyticalCodeGenerator",
-                "code_generation_start",
+                "AnalysisPlanner",
+                "analysis_planning_start",
                 {
                     "framework_spec_length": len(request.framework_spec),
-                    "scores_structure": scores_structure,
-                    "evidence_structure": evidence_structure,
-                    "data_informed_generation": True,
+                    "data_informed_planning": True,
                     "available_columns": available_columns,
-                    "scores_sample_size": len(scores_sample),
-                    "evidence_sample_size": len(evidence_sample)
+                    "research_questions_count": len(research_questions)
                 }
             )
             
-            return self.code_generator.generate_analysis_code(code_request)
+            plan_response = self.analysis_planner.generate_analysis_plan(plan_request)
+            
+            # Debug logging for generated plan
+            if self.debug_agent == "analysis-plan" and self.debug_level in ["debug", "verbose"]:
+                self.logger.info(f"Generated plan tasks: {len(plan_response.analysis_plan.get('tasks', {})) if plan_response.analysis_plan else 0}")
+                if plan_response.analysis_plan:
+                    self.logger.info(f"Generated plan preview: {str(plan_response.analysis_plan)[:500]}...")
+                    if len(str(plan_response.analysis_plan)) > 500:
+                        self.logger.info(f"Generated plan (full):\n{plan_response.analysis_plan}")
+            
+            return plan_response
             
         except Exception as e:
-            self.logger.error(f"Code generation failed: {str(e)}")
+            self.logger.error(f"Analysis planning failed: {str(e)}")
             raise
-
-    def _stage_2_execute_code(self, code_response, request: ProductionPipelineRequest):
-        """Stage 2: Execute generated code using SecureCodeExecutor with enhanced data injection."""
+    
+    def _extract_research_questions(self, experiment_context: str) -> list:
+        """
+        Extract research questions from experiment context.
         
-        # Load data into DataFrames with format auto-detection
-        import io
+        Args:
+            experiment_context: The experiment context string
+            
+        Returns:
+            List of research questions
+        """
+        if not experiment_context:
+            return []
+        
+        # Simple extraction - look for lines that start with numbers or bullet points
+        questions = []
+        lines = experiment_context.split('\n')
+        
+        for line in lines:
+            line = line.strip()
+            # Look for numbered questions (e.g., "1. What is...")
+            if line and (line[0].isdigit() and '. ' in line[:10]):
+                question = line.split('. ', 1)[1] if '. ' in line else line
+                questions.append(question)
+            # Look for bullet points (e.g., "- What is...")
+            elif line.startswith('- ') or line.startswith('* '):
+                question = line[2:] if len(line) > 2 else line
+                questions.append(question)
+            # Look for "Research Question:" patterns
+            elif 'research question' in line.lower() and ':' in line:
+                question = line.split(':', 1)[1].strip()
+                if question:
+                    questions.append(question)
+        
+        return questions
+
+    def _stage_2_execute_analysis_plan(self, plan_response, request: ProductionPipelineRequest):
+        """Stage 2: Execute analysis plan using MathToolkit."""
+        
+        # Load data into DataFrames
         import pandas as pd
         
         try:
@@ -441,53 +473,53 @@ class ProductionThinSynthesisPipeline:
         except Exception as e:
             raise Exception(f"Failed to load data into DataFrames: {str(e)}")
         
-        # Prepare context with DataFrames instead of file paths
-        context = {
-            'scores_df': scores_df,
-            'evidence_df': evidence_df,
-            'pd': pd,  # Ensure pandas is available
-            'np': __import__('numpy'),  # Ensure numpy is available
-        }
-        
-        # Generate execution code without file operations
-        execution_code = f"""
-# DataFrames pre-loaded by pipeline (no file access needed)
-# scores_df and evidence_df are available as variables
-
-# Generated analysis code
-{code_response.analysis_code}
-"""
-        
-        # Log code execution start
-        self.audit_logger.log_agent_event(
-            "SecureCodeExecutor",
-            "code_execution_start",
-            {
-                "code_length": len(execution_code),
-                "scores_artifact": request.scores_artifact_hash,
-                "evidence_artifact": request.evidence_artifact_hash,
-                "scores_shape": scores_df.shape,
-                "evidence_shape": evidence_df.shape,
-                "enhanced_data_injection": True
-            }
-        )
-        
-        # Execute using SecureCodeExecutor with DataFrame context
-        execution_result = self.secure_executor.execute_code(execution_code, context=context)
-        
-        # Log execution completion
-        self.audit_logger.log_agent_event(
-            "SecureCodeExecutor",
-            "code_execution_complete",
-            {
-                "success": execution_result['success'],
-                "execution_time": execution_result['execution_time'],
-                "memory_used": execution_result.get('memory_used', 0),
-                "security_violations": execution_result.get('security_violations', [])
-            }
-        )
-        
-        return execution_result
+        try:
+            # Validate plan response
+            if not plan_response.success:
+                raise Exception(f"Analysis plan generation failed: {plan_response.error_message}")
+            
+            if not plan_response.analysis_plan:
+                raise Exception("No analysis plan generated")
+            
+            # Log execution start
+            self.audit_logger.log_agent_event(
+                "MathToolkit",
+                "analysis_execution_start",
+                {
+                    "plan_tasks_count": len(plan_response.analysis_plan.get('tasks', {})),
+                    "data_shape": f"{scores_df.shape}, {evidence_df.shape}",
+                    "available_columns": list(scores_df.columns)
+                }
+            )
+            
+            # Execute the analysis plan using MathToolkit
+            execution_result = execute_analysis_plan(scores_df, plan_response.analysis_plan)
+            
+            # Debug logging for execution results
+            if self.debug_agent == "math-toolkit" and self.debug_level in ["debug", "verbose"]:
+                self.logger.info(f"Execution result success: {len(execution_result.get('errors', [])) == 0}")
+                self.logger.info(f"Execution result errors: {execution_result.get('errors', [])}")
+                self.logger.info(f"Execution result tasks completed: {len(execution_result.get('results', {}))}")
+                if execution_result.get('results'):
+                    self.logger.info(f"Execution result task types: {[result.get('type', 'unknown') for result in execution_result['results'].values()]}")
+            
+            # Log execution completion
+            self.audit_logger.log_agent_event(
+                "MathToolkit",
+                "analysis_execution_complete",
+                {
+                    "success": len(execution_result.get('errors', [])) == 0,
+                    "errors_count": len(execution_result.get('errors', [])),
+                    "tasks_completed": len(execution_result.get('results', {})),
+                    "result_types": [result.get('type', 'unknown') for result in execution_result.get('results', {}).values()]
+                }
+            )
+            
+            return execution_result
+            
+        except Exception as e:
+            self.logger.error(f"Analysis execution failed: {str(e)}")
+            raise
 
     def _stage_3_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
         """Stage 3: Curate evidence based on statistical results."""
@@ -497,7 +529,7 @@ class ProductionThinSynthesisPipeline:
         
         # Create curation request with JSON data
         curation_request = EvidenceCurationRequest(
-            statistical_results=exec_response['result_data'],
+            statistical_results=exec_response['results'],
             evidence_data=combined_data,
             framework_spec=request.framework_spec,
             max_evidence_per_finding=request.max_evidence_per_finding,
@@ -510,12 +542,22 @@ class ProductionThinSynthesisPipeline:
             "evidence_curation_start",
             {
                 "available_evidence_count": 57,  # Known from JSON structure
-                "statistical_results_keys": list(exec_response['result_data'].keys()) if isinstance(exec_response['result_data'], dict) else "non_dict_results",
+                "statistical_results_keys": list(exec_response['results'].keys()) if isinstance(exec_response['results'], dict) else "non_dict_results",
                 "max_evidence_per_finding": request.max_evidence_per_finding
             }
         )
         
-        return self.evidence_curator.curate_evidence(curation_request)
+        curation_response = self.evidence_curator.curate_evidence(curation_request)
+        
+        # Debug logging for evidence curation
+        if self.debug_agent == "evidence-curator" and self.debug_level in ["debug", "verbose"]:
+            self.logger.info(f"Evidence curation success: {curation_response.success}")
+            self.logger.info(f"Evidence curation error: {curation_response.error_message or 'None'}")
+            self.logger.info(f"Curated evidence count: {len(curation_response.curated_evidence) if curation_response.curated_evidence else 0}")
+            if curation_response.curated_evidence:
+                self.logger.info(f"Curated evidence types: {[evidence.evidence_type for evidence in curation_response.curated_evidence]}")
+        
+        return curation_response
 
     def _stage_4_interpret_results(self, exec_response, curation_response, request: ProductionPipelineRequest):
         """Stage 4: Generate final narrative interpretation."""
@@ -523,18 +565,18 @@ class ProductionThinSynthesisPipeline:
         # Debug logging for results interpreter
         if self.debug_agent in ['results-interpreter', None] and self.debug_level in ['debug', 'verbose']:
             self.logger.info(f"📖 DEBUG: Results interpreter input:")
-            self.logger.info(f"   - Statistical results keys: {list(exec_response['result_data'].keys()) if exec_response.get('result_data') else 'NO DATA'}")
+            self.logger.info(f"   - Statistical results keys: {list(exec_response['results'].keys()) if exec_response.get('results') else 'NO DATA'}")
             self.logger.info(f"   - Curated evidence keys: {list(curation_response.curated_evidence.keys()) if curation_response.curated_evidence else 'NO DATA'}")
             self.logger.info(f"   - Total evidence pieces: {sum(len(evidence_list) for evidence_list in curation_response.curated_evidence.values()) if curation_response.curated_evidence else 0}")
-            if exec_response.get('result_data'):
-                for key, value in exec_response['result_data'].items():
+            if exec_response.get('results'):
+                for key, value in exec_response['results'].items():
                     if isinstance(value, dict):
                         self.logger.info(f"   - {key}: {list(value.keys()) if value else 'EMPTY'}")
                     else:
                         self.logger.info(f"   - {key}: {type(value).__name__}")
         
         interpretation_request = InterpretationRequest(
-            statistical_results=exec_response['result_data'],
+            statistical_results=exec_response['results'],
             curated_evidence=curation_response.curated_evidence,
             framework_spec=request.framework_spec,
             experiment_context=request.experiment_context
@@ -676,7 +718,7 @@ class ProductionThinSynthesisPipeline:
             narrative_report="",
             executive_summary="",
             key_findings=[],
-            generated_code_hash="",
+            analysis_plan_hash="",
             statistical_results_hash="",
             curated_evidence_hash="",
             success=False,

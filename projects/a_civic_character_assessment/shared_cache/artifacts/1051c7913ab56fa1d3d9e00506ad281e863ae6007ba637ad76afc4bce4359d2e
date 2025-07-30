@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_8515f46ab2cf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "character_ideology_evolution_hypothesis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Character Assessment Framework v6.0. Focus was on identifying and scoring the specified civic virtues and vices based on the provided text. Evidence extraction prioritized direct quotes illustrating the assessed dimensions. Confidence levels reflect the clarity and directness of the textual evidence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"mitt_romney_2020_impeachment.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.80,\n          \"confidence\": 0.85\n        },\n        \"truth\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.75,\n          \"confidence\": 0.80\n        },\n        \"justice\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.90\n        },\n        \"hope\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.65,\n          \"confidence\": 0.70\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.40,\n          \"salience\": 0.50,\n          \"confidence\": 0.60\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.60,\n          \"confidence\": 0.70\n        },\n        \"resentment\": {\n          \"raw_score\": 0.30,\n          \"salience\": 0.40,\n          \"confidence\": 0.50\n        },\n        \"fear\": {\n          \"raw_score\": 0.20,\n          \"salience\": 0.30,\n          \"confidence\": 0.40\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.20,\n          \"confidence\": 0.30\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"I am pro-foundly religious. My faith is at the heart of who I am. I take an oath before God as en-ormous-ly consequential.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"personal conviction\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"As a senator-juror, I swore an oath before God to exercise impartial justice.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"oath and duty\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor. Yes, he did.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"judgment on actions\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"The historical meaning of the words 'high crimes and misdemeanors,' the writings of the founders, and my own reasoned judgment convince me that a president can indeed commit acts against the public trust that are so egregious that while they are not statutory crimes, they would demand removal from office.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"interpretation of law\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"My vote will likely be in the minority in the Senate. But irrespective of these things, with my vote, I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"legacy and duty\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"In the last several weeks, I've received numerous calls and texts. Many demanded, in their words, that I 'stand with the team.' I can assure you that thought has been very much in my mind. You see, I support a great deal of what the president has done. I voted with him 80% of the time.\",\n          \"confidence\": 0.60,\n          \"context_type\": \"internal conflict/party pressure\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government to press it to do so. The president's purpose was personal and political.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"accusation of wrongdoing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-30T11:01:53.381861+00:00",
+    "end_time": "2025-07-30T11:01:56.761509+00:00",
+    "duration_seconds": 3.379648,
+    "llm_interaction_hash": "96e9fb34c04a7601"
+  },
+  "input_artifacts": {
+    "framework_hash": "47bcd0504cd7d2dc02140eb874748a43621938eb20905e30570a650a842b9cb0",
+    "document_hashes": [
+      "f9b2e86ae9bcdee55757a5c6caecc03225c0bb6532154c38cde5f14dc4d3cae6"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "a_civic_character_assessment",
+      "experiment_root": "/Volumes/code/discernus/projects/a_civic_character_assessment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250730T110132Z_5d091cd0"
+  }
+}

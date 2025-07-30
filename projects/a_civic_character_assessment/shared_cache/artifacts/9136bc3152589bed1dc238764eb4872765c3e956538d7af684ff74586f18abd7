@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_0e0eada6062f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "character_ideology_evolution_hypothesis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Character Assessment Framework v6.0. Focus was on identifying raw dimensional scores, salience, and confidence levels for each dimension, along with supporting evidence. No calculations or derived metrics were performed.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_lewis_1963_march_on_washington.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"truth\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.85\n        },\n        \"justice\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.75\n        },\n        \"resentment\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"fear\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.6\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"We come here today with a great sense of misgiving. It is true that we support the administration's civil rights bill. We support it with great reservations, however.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"statement\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"demand\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"Do you know that in Albany, Georgia, nine of our leaders have been indicted, not by Dixiecrats, but by the federal government for peaceful protest?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"accusation\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Let us not forget that we are involved in a serious social revolution. By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"observation\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"Where is our party? Where is the political party that will make it unnecessary to march on Washington?\",\n          \"confidence\": 0.85,\n          \"context_type\": \"question\"\n        },\n        {\n          \"dimension\": \"resentment\",\n          \"quote_text\": \"We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jail over and over again.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"grievance\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"For the party of Kennedy is also the party of Eastland. The party of Javits is also the party of Goldwater.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"observation\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"We need a bill that will provide for the homeless and starving people of this nation.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"need\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-30T11:01:46.619281+00:00",
+    "end_time": "2025-07-30T11:01:49.691571+00:00",
+    "duration_seconds": 3.07229,
+    "llm_interaction_hash": "9dba58356b434687"
+  },
+  "input_artifacts": {
+    "framework_hash": "47bcd0504cd7d2dc02140eb874748a43621938eb20905e30570a650a842b9cb0",
+    "document_hashes": [
+      "5d90554fc13f33de69af63f31b143a6dbb25a23b12df577629756f3d1863021a"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "a_civic_character_assessment",
+      "experiment_root": "/Volumes/code/discernus/projects/a_civic_character_assessment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250730T110132Z_5d091cd0"
+  }
+}
