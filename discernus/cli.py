@@ -319,30 +319,23 @@ def artifacts(experiment_path: str):
         click.echo(f"❌ Error reading artifact registry: {e}")
         return
     
-    # Check for analysis artifacts
-    scores_artifacts = []
-    evidence_artifacts = []
+    # Check for JSON analysis artifacts
+    json_artifacts = []
     
     for artifact_id, info in registry.items():
         artifact_type = info.get("metadata", {}).get("artifact_type")
         timestamp = info.get("created_at", "unknown")
         
-        if artifact_type == "intermediate_scores.csv":
-            scores_artifacts.append((artifact_id, timestamp))
-        elif artifact_type == "intermediate_evidence.csv":
-            evidence_artifacts.append((artifact_id, timestamp))
+        if artifact_type == "analysis_json_v6":
+            json_artifacts.append((artifact_id, timestamp))
     
-    if scores_artifacts and evidence_artifacts:
+    if json_artifacts:
         # Sort by timestamp and get latest
-        scores_artifacts.sort(key=lambda x: x[1], reverse=True)
-        evidence_artifacts.sort(key=lambda x: x[1], reverse=True)
-        
-        latest_scores = scores_artifacts[0]
-        latest_evidence = evidence_artifacts[0]
+        json_artifacts.sort(key=lambda x: x[1], reverse=True)
+        latest_json = json_artifacts[0]
         
         click.echo("✅ Analysis artifacts available:")
-        click.echo(f"   📊 Scores: {latest_scores[0][:12]}... ({latest_scores[1]})")
-        click.echo(f"   🗣️  Evidence: {latest_evidence[0][:12]}... ({latest_evidence[1]})")
+        click.echo(f"   📊 Combined JSON: {latest_json[0][:12]}... ({latest_json[1]})")
         click.echo("")
         click.echo("🚀 Available commands:")
         click.echo("   discernus run --synthesis-only       # Full synthesis")
@@ -351,12 +344,8 @@ def artifacts(experiment_path: str):
         click.echo("   discernus run --stage thin-cure      # Resume at evidence curation")
         click.echo("   discernus run --stage thin-interp    # Resume at interpretation")
     else:
-        click.echo("❌ Incomplete analysis artifacts")
-        if not scores_artifacts:
-            click.echo("   Missing: scores CSV")
-        if not evidence_artifacts:
-            click.echo("   Missing: evidence CSV")
-        click.echo("   💡 Run: discernus run --analysis-only to create complete artifacts")
+        click.echo("❌ No analysis artifacts found")
+        click.echo("   💡 Run: discernus run --analysis-only to create artifacts")
 
 
 @cli.command()

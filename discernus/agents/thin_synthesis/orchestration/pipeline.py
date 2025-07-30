@@ -409,21 +409,17 @@ class ProductionThinSynthesisPipeline:
     def _stage_2_execute_code(self, code_response, request: ProductionPipelineRequest):
         """Stage 2: Execute generated code using SecureCodeExecutor with enhanced data injection."""
         
-        # Retrieve data from artifacts (supports both CSV and JSON)
-        scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
-        evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
-        
         # Load data into DataFrames with format auto-detection
         import io
         import pandas as pd
         
         try:
-            # Detect format and parse accordingly
-            scores_df = self._load_data_to_dataframe(scores_data, "scores")
-            evidence_df = self._load_data_to_dataframe(evidence_data, "evidence")
+            # Load JSON artifact containing both scores and evidence
+            combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
+            scores_df = self._load_data_to_dataframe(combined_data, "scores")
+            evidence_df = self._load_data_to_dataframe(combined_data, "evidence")
             
-            # Log data shapes for debugging
-            self.logger.info(f"Loaded scores_df: {scores_df.shape}, evidence_df: {evidence_df.shape}")
+            self.logger.info(f"Loaded JSON artifact: scores_df: {scores_df.shape}, evidence_df: {evidence_df.shape}")
             
         except Exception as e:
             raise Exception(f"Failed to load data into DataFrames: {str(e)}")
@@ -479,11 +475,9 @@ class ProductionThinSynthesisPipeline:
     def _stage_3_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
         """Stage 3: Curate evidence based on statistical results."""
         
-        # Retrieve evidence data for curation
-        evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
-        
-        # Parse JSON evidence data to DataFrame
-        evidence_df = self._load_data_to_dataframe(evidence_data, "evidence")
+        # Retrieve evidence data for curation from JSON artifact
+        combined_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+        evidence_df = self._load_data_to_dataframe(combined_data, "evidence")
         
         # Create temporary CSV file for evidence curator (legacy interface)
         with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False) as evidence_temp:

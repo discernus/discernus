@@ -142,7 +142,8 @@ class EnhancedAnalysisAgent:
                 {
                     "artifact_type": "analysis_json_v6",
                     "document_hash": document_hash,
-                    "framework_version": "v6.0"
+                    "framework_version": "v6.0",
+                    "framework_hash": self.analysis_provenance.get("framework_hash", "unknown")
                 }
             )
             

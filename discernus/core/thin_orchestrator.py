@@ -275,7 +275,7 @@ class ThinOrchestrator:
                 )
                 
                 # Check if analysis succeeded
-                successful_analyses = [res for res in all_analysis_results if res.get('result_hash')]
+                successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
                 if not successful_analyses:
                     raise ThinOrchestratorError("Analysis failed. No artifacts saved.")
                 
@@ -355,11 +355,9 @@ class ThinOrchestrator:
                 current_framework_content = self._load_framework(experiment_config["framework"])
                 current_framework_hash = hashlib.sha256(current_framework_content.encode('utf-8')).hexdigest()
                 
-                # Find latest scores and evidence CSVs that match current framework
-                scores_hash = None
-                evidence_hash = None
-                latest_scores_time = None
-                latest_evidence_time = None
+                # Find latest JSON analysis artifact that matches current framework
+                json_artifact_hash = None
+                latest_json_time = None
                 
                 for artifact_id, info in registry.items():
                     metadata = info.get("metadata", {})
@@ -367,26 +365,31 @@ class ThinOrchestrator:
                     artifact_framework_hash = metadata.get("framework_hash")
                     
                     # CRITICAL: Only consider artifacts from the same framework (Issue #208 fix)
-                    if artifact_framework_hash != current_framework_hash:
+                    # For existing artifacts without framework_hash, allow them (backward compatibility)
+                    if artifact_framework_hash and artifact_framework_hash != current_framework_hash:
                         continue
                         
-                    if artifact_type == "intermediate_scores.csv":
+                    if artifact_type == "analysis_json_v6":
+                        # JSON artifact contains both scores and evidence
                         timestamp = info["created_at"]
-                        if not latest_scores_time or timestamp > latest_scores_time:
-                            latest_scores_time = timestamp
-                            scores_hash = artifact_id
-                    elif artifact_type == "intermediate_evidence.csv":
-                        timestamp = info["created_at"]
-                        if not latest_evidence_time or timestamp > latest_evidence_time:
-                            latest_evidence_time = timestamp
-                            evidence_hash = artifact_id
+                        if not latest_json_time or timestamp > latest_json_time:
+                            latest_json_time = timestamp
+                            json_artifact_hash = artifact_id
                 
-                if not (scores_hash and evidence_hash):
+                if json_artifact_hash:
+                    # Use JSON artifact for both scores and evidence
+                    scores_hash = json_artifact_hash
+                    evidence_hash = json_artifact_hash
+                    
+                    print(f"📊 Using existing JSON analysis from shared cache")
+                    print(f"   - Combined JSON: {json_artifact_hash[:8]}... ({latest_json_time})")
+                    print(f"   - Framework: {current_framework_hash[:12]}... (provenance validated ✅)")
+                else:
                     # Log detailed information about framework matching for debugging
                     framework_artifacts_found = []
                     for artifact_id, info in registry.items():
                         metadata = info.get("metadata", {})
-                        if metadata.get("artifact_type") in ["intermediate_scores.csv", "intermediate_evidence.csv"]:
+                        if metadata.get("artifact_type") == "analysis_json_v6":
                             framework_artifacts_found.append({
                                 "artifact_id": artifact_id[:12],
                                 "type": metadata.get("artifact_type"),
@@ -407,14 +410,12 @@ class ThinOrchestrator:
                         "run full analysis to generate artifacts for this framework."
                     )
                 
-                # Copy CSV files to new run
+                # Copy JSON artifact to new run for reference
                 import shutil
-                shutil.copy2(shared_cache_dir / scores_hash, results_dir / "scores.csv")
-                shutil.copy2(shared_cache_dir / evidence_hash, results_dir / "evidence.csv")
+                shutil.copy2(shared_cache_dir / json_artifact_hash, results_dir / "analysis.json")
                 
                 print(f"📊 Using existing analysis from shared cache")
-                print(f"   - Scores: {scores_hash[:8]}... ({latest_scores_time})")
-                print(f"   - Evidence: {evidence_hash[:8]}... ({latest_evidence_time})")
+                print(f"   - Combined JSON: {json_artifact_hash[:8]}... ({latest_json_time})")
                 print(f"   - Framework: {current_framework_hash[:12]}... (provenance validated ✅)")
                 
                 # Load framework and corpus for synthesis context (even in synthesis-only mode)
@@ -515,7 +516,7 @@ class ThinOrchestrator:
             )
 
             # Check if any analysis tasks succeeded
-            successful_analyses = [res for res in all_analysis_results if res.get('result_hash')]
+            successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
             if not successful_analyses:
                 raise ThinOrchestratorError("All analysis batches failed. Halting experiment.")
 
@@ -637,38 +638,139 @@ class ThinOrchestrator:
                                        experiment_config: Dict[str, Any],
                                        model: str) -> tuple[List[Dict[str, Any]], Optional[str], Optional[str]]:
         """
-        Executes the analysis agent for each document, passing CSV artifact hashes.
+        Executes the analysis agent for each document, then combines all results into a single artifact.
         """
         all_analysis_results = []
-        scores_hash = None
-        evidence_hash = None
         total_docs = len(corpus_documents)
         print(f"\n🚀 Starting sequential analysis of {total_docs} documents...")
 
         for i, doc in enumerate(corpus_documents):
             print(f"\n--- Analyzing document {i+1}/{total_docs}: {doc.get('filename')} ---")
             try:
-                # The returned result is now a dictionary containing the analysis result and the CSV hashes
+                # Analyze each document individually
                 result = analysis_agent.analyze_batch(
                     framework_content=framework_content,
                     corpus_documents=[doc],  # Pass a list with a single document
                     experiment_config=experiment_config,
                     model=model,
-                    current_scores_hash=scores_hash,
-                    current_evidence_hash=evidence_hash
+                    current_scores_hash=None,  # Don't accumulate hashes
+                    current_evidence_hash=None
                 )
                 
-                # Update hashes for the next iteration
-                scores_hash = result.get("scores_hash", scores_hash)
-                evidence_hash = result.get("evidence_hash", evidence_hash)
-                
-                # Append the nested analysis result to the list
-                all_analysis_results.append(result["analysis_result"])
+                # Append the analysis result to the list
+                all_analysis_results.append(result)
             except Exception as e:
                 print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")
                 all_analysis_results.append({"error": str(e), "document": doc.get('filename')})
 
-        return all_analysis_results, scores_hash, evidence_hash
+        # Combine all analysis results into a single artifact
+        combined_result = self._combine_analysis_results(all_analysis_results)
+        
+        # Calculate framework hash for provenance tracking
+        import hashlib
+        framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+        
+        # Store the combined result and return its hash
+        # Note: We need to access storage through the analysis agent's storage
+        combined_hash = analysis_agent.storage.put_artifact(
+            json.dumps(combined_result).encode('utf-8'),
+            {
+                "artifact_type": "analysis_json_v6", 
+                "framework_version": "v6.0", 
+                "combined": True,
+                "framework_hash": framework_hash
+            }
+        )
+        
+        return all_analysis_results, combined_hash, combined_hash
+
+    def _combine_analysis_results(self, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Combines multiple individual analysis results into a single combined result.
+        """
+        combined_document_analyses = []
+        
+        for i, result in enumerate(analysis_results):
+            if "error" in result:
+                # Skip failed analyses
+                continue
+                
+            # Extract the actual analysis data from the nested structure
+            if "analysis_result" in result and "result_content" in result["analysis_result"]:
+                # Get the cached result content
+                cached_result = result["analysis_result"]["result_content"]
+                
+                # Extract the actual analysis data from the raw_analysis_response
+                if "raw_analysis_response" in cached_result:
+                    # Parse the raw analysis response to get the actual JSON data
+                    raw_response = cached_result["raw_analysis_response"]
+                    
+                    # Extract JSON from the delimited response
+                    import re
+                    json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n(.*?)\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+                    json_match = re.search(json_pattern, raw_response, re.DOTALL)
+                    
+                    if json_match:
+                        try:
+                            analysis_data = json.loads(json_match.group(1))
+                            if "document_analyses" in analysis_data:
+                                combined_document_analyses.extend(analysis_data["document_analyses"])
+                        except json.JSONDecodeError as e:
+                            print(f"Warning: Failed to parse JSON from analysis result {i}: {e}")
+                            continue
+                    else:
+                        print(f"Warning: No JSON found in raw_analysis_response for result {i}")
+                        continue
+                else:
+                    print(f"Warning: No raw_analysis_response found in cached result {i}")
+                    continue
+            elif "raw_analysis_response" in result:
+                # Direct raw_analysis_response (fallback)
+                raw_response = result["raw_analysis_response"]
+                
+                # Extract JSON from the delimited response
+                import re
+                json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n(.*?)\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+                json_match = re.search(json_pattern, raw_response, re.DOTALL)
+                
+                if json_match:
+                    try:
+                        analysis_data = json.loads(json_match.group(1))
+                        if "document_analyses" in analysis_data:
+                            combined_document_analyses.extend(analysis_data["document_analyses"])
+                    except json.JSONDecodeError as e:
+                        print(f"Warning: Failed to parse JSON from analysis result {i}: {e}")
+                        continue
+                else:
+                    print(f"Warning: No JSON found in raw_analysis_response for result {i}")
+                    continue
+            elif "document_analyses" in result:
+                # Direct document_analyses (shouldn't happen with current structure)
+                combined_document_analyses.extend(result["document_analyses"])
+            elif "analysis_metadata" in result:
+                # Single document result (legacy format)
+                combined_document_analyses.append({
+                    "document_id": f"doc_{i}",
+                    "document_name": f"document_{i}.txt",
+                    "dimensional_scores": result.get("dimensional_scores", {}),
+                    "evidence": result.get("evidence", [])
+                })
+            else:
+                print(f"Warning: Unknown analysis result format for result {i}")
+                continue
+        
+        # Create combined result structure
+        combined_result = {
+            "analysis_metadata": {
+                "framework_name": "combined_analysis",
+                "framework_version": "v6.0",
+                "analyst_confidence": 0.85,
+                "analysis_notes": f"Combined analysis of {len(combined_document_analyses)} documents"
+            },
+            "document_analyses": combined_document_analyses
+        }
+        
+        return combined_result
 
 
 
@@ -680,9 +782,9 @@ class ThinOrchestrator:
         if not batch_results:
             return {"total_duration_seconds": 0, "num_batches": 0, "successful_batches": 0}
 
-        total_duration = sum(r.get('duration_seconds', 0) for r in batch_results)
+        total_duration = sum(r.get('analysis_result', {}).get('duration_seconds', 0) for r in batch_results)
         num_batches = len(batch_results)
-        successful_batches = sum(1 for r in batch_results if r.get('result_hash'))
+        successful_batches = sum(1 for r in batch_results if r.get('analysis_result', {}).get('result_hash'))
 
         return {
             "total_duration_seconds": total_duration,
@@ -691,9 +793,9 @@ class ThinOrchestrator:
             "all_batches_successful": successful_batches == num_batches,
             "individual_batch_results": [
                 {
-                    "batch_id": r.get("batch_id"),
-                    "result_hash": r.get("result_hash"),
-                    "duration": r.get("duration_seconds")
+                    "batch_id": r.get("analysis_result", {}).get("batch_id"),
+                    "result_hash": r.get("analysis_result", {}).get("result_hash"),
+                    "duration": r.get("analysis_result", {}).get("duration_seconds")
                 } for r in batch_results
             ]
         }
