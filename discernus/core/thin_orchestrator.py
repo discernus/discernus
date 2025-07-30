@@ -71,7 +71,7 @@ class ThinOrchestrator:
         
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
         
-    def _create_thin_synthesis_pipeline(self, audit_logger: AuditLogger, storage: LocalArtifactStorage, model: str) -> ProductionThinSynthesisPipeline:
+    def _create_thin_synthesis_pipeline(self, audit_logger: AuditLogger, storage: LocalArtifactStorage, model: str, debug_agent: Optional[str] = None, debug_level: str = "info") -> ProductionThinSynthesisPipeline:
         """Create a ProductionThinSynthesisPipeline with proper infrastructure."""
         
         # Create MinIO-compatible wrapper for LocalArtifactStorage
@@ -102,7 +102,9 @@ class ThinOrchestrator:
                            audit_logger: AuditLogger,
                            storage: LocalArtifactStorage,
                            framework_hash: str,
-                           corpus_hash: str) -> Dict[str, Any]:
+                           corpus_hash: str,
+                           debug_agent: Optional[str] = None,
+                           debug_level: str = "info") -> Dict[str, Any]:
         """
         Run synthesis using the new THIN Code-Generated Synthesis Architecture.
         
@@ -110,7 +112,7 @@ class ThinOrchestrator:
         """
         
         # Create THIN synthesis pipeline
-        pipeline = self._create_thin_synthesis_pipeline(audit_logger, storage, model)
+        pipeline = self._create_thin_synthesis_pipeline(audit_logger, storage, model, debug_agent, debug_level)
         
         # Create pipeline request
         request = ProductionPipelineRequest(
@@ -171,7 +173,9 @@ class ThinOrchestrator:
                       synthesis_model: str = "vertex_ai/gemini-2.5-pro",
                       synthesis_only: bool = False,
                       analysis_only: bool = False,
-                      resume_stage: Optional[str] = None) -> Dict[str, Any]:
+                      resume_stage: Optional[str] = None,
+                      debug_agent: Optional[str] = None,
+                      debug_level: str = "info") -> Dict[str, Any]:
         """
         Run experiment with enhanced agents and stage control for targeted debugging.
         
@@ -442,7 +446,9 @@ class ThinOrchestrator:
                     storage=storage,
                     # Add provenance context (Issue #208 fix)
                     framework_hash=framework_hash,
-                    corpus_hash=corpus_hash
+                    corpus_hash=corpus_hash,
+                    debug_agent=debug_agent,
+                    debug_level=debug_level
                 )
                 
                 if not synthesis_result or not isinstance(synthesis_result, dict):
@@ -544,7 +550,9 @@ class ThinOrchestrator:
                 storage=storage,
                 # Add provenance context (Issue #208 fix)
                 framework_hash=framework_hash,
-                corpus_hash=corpus_hash
+                corpus_hash=corpus_hash,
+                debug_agent=debug_agent,
+                debug_level=debug_level
             )
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()

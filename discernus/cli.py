@@ -140,8 +140,12 @@ def cli():
 @click.option('--analysis-only', is_flag=True, help='Run only analysis phase, save artifacts for later synthesis')
 @click.option('--stage', type=click.Choice(['thin-gen', 'thin-exec', 'thin-cure', 'thin-interp']), 
               help='Resume at specific THIN synthesis sub-stage (requires existing analysis artifacts)')
+@click.option('--debug-agent', type=click.Choice(['code-gen', 'code-exec', 'evidence-curator', 'results-interpreter']), 
+              help='Debug specific synthesis agent (requires synthesis-only mode)')
+@click.option('--debug-level', type=click.Choice(['info', 'debug', 'verbose']), default='info',
+              help='Debug verbosity level for agent debugging')
 def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, 
-        synthesis_only: bool, analysis_only: bool, stage: str):
+        synthesis_only: bool, analysis_only: bool, stage: str, debug_agent: str, debug_level: str):
     """Execute experiment using THIN v2.0 direct orchestration"""
     exp_path = Path(experiment_path)
     
@@ -208,7 +212,9 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
             synthesis_model=synthesis_model,
             synthesis_only=synthesis_only,
             analysis_only=analysis_only,
-            resume_stage=stage
+            resume_stage=stage,
+            debug_agent=debug_agent,
+            debug_level=debug_level
         )
         
         # Show completion with enhanced details
