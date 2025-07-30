@@ -212,7 +212,9 @@ class EvidenceCurator:
             # Map actual column names to expected column names  
             column_mapping = {
                 'aid': 'artifact_id',
-                'quote': 'evidence_text'
+                'quote_text': 'evidence_text',
+                'confidence_score': 'confidence',
+                'context_type': 'context'
             }
             
             # Rename columns to match expected schema

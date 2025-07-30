@@ -1,0 +1,184 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+import json
+
+def calculate_cronbachs_alpha(df: pd.DataFrame):
+    """
+    Calculates Cronbach's alpha for a given DataFrame of scale items.
+    Items are expected to be in columns, with observations in rows.
+    """
+    try:
+        # Drop rows with any missing values for this calculation
+        df_complete = df.dropna()
+        if df_complete.shape[0] < 2:
+            return np.nan, "Not enough complete cases to calculate alpha."
+
+        k = df_complete.shape[1]
+        if k < 2:
+            return np.nan, "Cronbach's alpha requires at least two items."
+
+        # Calculate variance of the total score
+        total_score_variance = df_complete.sum(axis=1).var(ddof=1)
+        if total_score_variance == 0:
+            return 1.0, "Total score variance is zero; items may be constant."
+
+        # Calculate the sum of item variances
+        sum_of_item_variances = df_complete.var(ddof=1).sum()
+
+        # Calculate Cronbach's alpha
+        alpha = (k / (k - 1)) * (1 - (sum_of_item_variances / total_score_variance))
+        return alpha, "Calculation successful."
+    except Exception as e:
+        return np.nan, f"An error occurred during calculation: {str(e)}"
+
+def calculate_cohens_d_paired(x: pd.Series, y: pd.Series):
+    """
+    Calculates Cohen's d for a paired samples t-test.
+    """
+    try:
+        diff = x - y
+        # Drop NaNs from the difference series
+        diff = diff.dropna()
+        if len(diff) < 2:
+            return np.nan, "Not enough paired data to calculate Cohen's d."
+            
+        std_dev_diff = diff.std(ddof=1)
+        if std_dev_diff == 0 or pd.isna(std_dev_diff):
+            return np.nan, "Standard deviation of differences is zero or NaN."
+            
+        mean_diff = diff.mean()
+        cohens_d = mean_diff / std_dev_diff
+        return cohens_d, "Calculation successful."
+    except Exception as e:
+        return np.nan, f"An error occurred during calculation: {str(e)}"
+
+# Initialize the main results dictionary
+result_data = {
+    'descriptive_stats': {},
+    'reliability_metrics': {},
+    'correlations': {},
+    'hypothesis_tests': {}
+}
+
+try:
+    # --- 1. Data Validation and Preparation ---
+    # Define column groups based on the framework specification
+    intensity_cols = [
+        "people_vs_elite_framing", "authentic_representation_claims", "anti_system_mobilization",
+        "direct_democracy_appeals", "common_sense_vs_expertise", "cultural_authenticity_claims"
+    ]
+    salience_cols = [
+        "people_vs_elite_framing_salience", "authentic_representation_claims_salience", 
+        "anti_system_mobilization_salience", "direct_democracy_appeals_salience", 
+        "common_sense_vs_expertise_salience", "cultural_authenticity_claims_salience"
+    ]
+    index_cols = [
+        "core_populist_appeal_score", "populist_mobilization_score", "populist_rhetoric_index"
+    ]
+    all_numeric_cols = intensity_cols + salience_cols + index_cols
+
+    # Ensure scores_df exists and is not empty
+    if 'scores_df' not in locals() or scores_df.empty:
+        raise ValueError("scores_df is not available or is empty.")
+
+    # Convert all analytical columns to numeric, coercing errors to NaN
+    for col in all_numeric_cols:
+        if col in scores_df.columns:
+            scores_df[col] = pd.to_numeric(scores_df[col], errors='coerce')
+    
+    # --- 2. Descriptive Statistics ---
+    descriptive_stats_results = {}
+    # Generate descriptive statistics for all relevant columns
+    stats_summary = scores_df[all_numeric_cols].describe().round(4)
+    descriptive_stats_results['all_dimensions_summary'] = stats_summary.to_dict()
+    result_data['descriptive_stats'] = descriptive_stats_results
+
+    # --- 3. Reliability Analysis (Cronbach's Alpha) ---
+    reliability_results = {}
+    # Define the scales from the framework
+    scales = {
+        "core_populist_appeals": ["people_vs_elite_framing", "authentic_representation_claims", "anti_system_mobilization"],
+        "populist_mobilization_strategies": ["direct_democracy_appeals", "common_sense_vs_expertise", "cultural_authenticity_claims"]
+    }
+
+    for scale_name, items in scales.items():
+        # Check if all items for the scale exist in the DataFrame
+        if all(item in scores_df.columns for item in items):
+            scale_df = scores_df[items]
+            alpha, message = calculate_cronbachs_alpha(scale_df)
+            reliability_results[f"cronbachs_alpha_{scale_name}"] = {
+                'alpha': alpha if pd.notna(alpha) else None,
+                'items': items,
+                'status': message,
+                'interpretation': 'excellent' if alpha >= 0.8 else ('good' if alpha >= 0.7 else ('acceptable' if alpha >= 0.6 else 'poor')) if pd.notna(alpha) else 'N/A'
+            }
+        else:
+            reliability_results[f"cronbachs_alpha_{scale_name}"] = {
+                'alpha': None,
+                'items': items,
+                'status': "One or more items not found in DataFrame.",
+                'interpretation': 'N/A'
+            }
+    result_data['reliability_metrics'] = reliability_results
+    
+    # --- 4. Correlation Analysis ---
+    correlation_results = {}
+    # Calculate the correlation matrix for intensity and salience scores
+    correlation_df = scores_df[intensity_cols + salience_cols]
+    correlation_matrix = correlation_df.corr().round(4)
+    correlation_results['full_correlation_matrix'] = correlation_matrix.to_dict()
+    
+    # Extract key correlations: between the two main indices
+    if all(col in scores_df.columns for col in ['core_populist_appeal_score', 'populist_mobilization_score']):
+        key_indices_corr = scores_df[['core_populist_appeal_score', 'populist_mobilization_score']].corr().iloc[0, 1]
+        correlation_results['key_relationship_indices'] = {
+            'description': 'Correlation between core populist appeals and populist mobilization strategies.',
+            'correlation_coefficient': round(key_indices_corr, 4)
+        }
+    result_data['correlations'] = correlation_results
+
+    # --- 5. Hypothesis Testing ---
+    hypothesis_test_results = {}
+    # Test: Is there a significant difference between Core Populist Appeal and Populist Mobilization scores?
+    test_name = 'core_appeals_vs_mobilization_strategies'
+    col1 = 'core_populist_appeal_score'
+    col2 = 'populist_mobilization_score'
+    
+    if col1 in scores_df.columns and col2 in scores_df.columns:
+        # Paired t-test
+        v1 = scores_df[col1].dropna()
+        v2 = scores_df[col2].dropna()
+        
+        # Align data for paired test
+        paired_data = scores_df[[col1, col2]].dropna()
+        
+        if len(paired_data) > 1:
+            ttest_result = stats.ttest_rel(paired_data[col1], paired_data[col2])
+            cohens_d, d_message = calculate_cohens_d_paired(paired_data[col1], paired_data[col2])
+            
+            hypothesis_test_results[test_name] = {
+                'test_type': 'Paired Samples T-Test',
+                'description': f"Tests if a significant difference exists between '{col1}' and '{col2}'.",
+                'statistic': round(ttest_result.statistic, 4),
+                'p_value': round(ttest_result.pvalue, 6),
+                'is_significant_at_p_05': ttest_result.pvalue < 0.05,
+                'effect_size_cohens_d': round(cohens_d, 4) if pd.notna(cohens_d) else None,
+                'sample_size': len(paired_data)
+            }
+        else:
+            hypothesis_test_results[test_name] = {
+                'status': 'Test not performed due to insufficient paired data.'
+            }
+    else:
+        hypothesis_test_results[test_name] = {
+            'status': f"Test not performed. One or both columns ('{col1}', '{col2}') not found."
+        }
+
+    result_data['hypothesis_tests'] = hypothesis_test_results
+
+except Exception as e:
+    # Catch-all for any unexpected errors during the main execution
+    result_data['error'] = f"A critical error occurred in the analysis script: {str(e)}"
+
+# The 'result_data' variable now holds all the analysis results and is ready for downstream use.
