@@ -520,6 +520,19 @@ class ProductionThinSynthesisPipeline:
     def _stage_4_interpret_results(self, exec_response, curation_response, request: ProductionPipelineRequest):
         """Stage 4: Generate final narrative interpretation."""
         
+        # Debug logging for results interpreter
+        if self.debug_agent in ['results-interpreter', None] and self.debug_level in ['debug', 'verbose']:
+            self.logger.info(f"📖 DEBUG: Results interpreter input:")
+            self.logger.info(f"   - Statistical results keys: {list(exec_response['result_data'].keys()) if exec_response.get('result_data') else 'NO DATA'}")
+            self.logger.info(f"   - Curated evidence keys: {list(curation_response.curated_evidence.keys()) if curation_response.curated_evidence else 'NO DATA'}")
+            self.logger.info(f"   - Total evidence pieces: {sum(len(evidence_list) for evidence_list in curation_response.curated_evidence.values()) if curation_response.curated_evidence else 0}")
+            if exec_response.get('result_data'):
+                for key, value in exec_response['result_data'].items():
+                    if isinstance(value, dict):
+                        self.logger.info(f"   - {key}: {list(value.keys()) if value else 'EMPTY'}")
+                    else:
+                        self.logger.info(f"   - {key}: {type(value).__name__}")
+        
         interpretation_request = InterpretationRequest(
             statistical_results=exec_response['result_data'],
             curated_evidence=curation_response.curated_evidence,
