@@ -90,6 +90,22 @@ class ResultsInterpreter:
             InterpretationResponse with narrative report
         """
         try:
+            # CRITICAL: Validate required data before proceeding
+            validation_error = self._validate_required_data(request)
+            if validation_error:
+                self.logger.error(f"Results interpretation failed - missing required data: {validation_error}")
+                return InterpretationResponse(
+                    narrative_report="",
+                    executive_summary="",
+                    key_findings=[],
+                    methodology_notes="",
+                    statistical_summary={},
+                    evidence_integration_summary={},
+                    success=False,
+                    word_count=0,
+                    error_message=f"CRITICAL: Missing required data for interpretation - {validation_error}"
+                )
+            
             # Build the interpretation prompt
             prompt = self._build_interpretation_prompt(request)
             
@@ -158,6 +174,47 @@ class ResultsInterpreter:
         )
 
         return prompt
+    
+    def _validate_required_data(self, request: InterpretationRequest) -> Optional[str]:
+        """
+        Validate that the request contains the minimum required data for interpretation.
+        
+        Returns:
+            None if validation passes, error message string if validation fails
+        """
+        # Check for statistical results
+        if not request.statistical_results:
+            return "No statistical results provided"
+        
+        # Check for basic statistical structure
+        if not isinstance(request.statistical_results, dict):
+            return "Statistical results must be a dictionary"
+        
+        # Check for at least one of the expected statistical sections
+        expected_sections = ['descriptive_stats', 'hypothesis_tests', 'correlations', 'reliability_metrics']
+        found_sections = [section for section in expected_sections if section in request.statistical_results]
+        
+        if not found_sections:
+            return f"No valid statistical sections found. Expected one of: {expected_sections}. Found keys: {list(request.statistical_results.keys())}"
+        
+        # Check for curated evidence
+        if not request.curated_evidence:
+            return "No curated evidence provided"
+        
+        if not isinstance(request.curated_evidence, dict):
+            return "Curated evidence must be a dictionary"
+        
+        # Check that there's at least some evidence to work with
+        total_evidence = sum(len(evidence_list) for evidence_list in request.curated_evidence.values())
+        if total_evidence == 0:
+            return f"No evidence pieces found in curated evidence. Evidence structure: {list(request.curated_evidence.keys())}"
+        
+        # Check for framework specification
+        if not request.framework_spec or not request.framework_spec.strip():
+            return "No framework specification provided"
+        
+        # All validations passed
+        return None
     
     def _format_statistical_results(self, statistical_results: Dict[str, Any]) -> str:
         """Format statistical results for inclusion in the prompt."""
