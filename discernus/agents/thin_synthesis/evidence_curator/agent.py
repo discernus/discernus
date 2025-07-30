@@ -31,7 +31,7 @@ from discernus.gateway.model_registry import ModelRegistry
 class EvidenceCurationRequest:
     """Request structure for evidence curation."""
     statistical_results: Dict[str, Any]
-    evidence_csv_path: str
+    evidence_data: bytes  # JSON data instead of CSV path
     framework_spec: str
     max_evidence_per_finding: int = 3
     min_confidence_threshold: float = 0.7
@@ -111,7 +111,7 @@ class EvidenceCurator:
                 )
             
             # Load and validate evidence data
-            evidence_df = self._load_evidence_data(request.evidence_csv_path)
+            evidence_df = self._load_evidence_data(request.evidence_data)
             if evidence_df is None:
                 return EvidenceCurationResponse(
                     curated_evidence={},
@@ -122,7 +122,7 @@ class EvidenceCurator:
             
             # Filter evidence by confidence threshold
             high_confidence_evidence = evidence_df[
-                evidence_df['confidence'] >= request.min_confidence_threshold
+                evidence_df['confidence_score'] >= request.min_confidence_threshold
             ].copy()
             
             if len(high_confidence_evidence) == 0:
@@ -197,17 +197,42 @@ class EvidenceCurator:
                 error_message=str(e)
             )
     
-    def _load_evidence_data(self, evidence_csv_path: str) -> Optional[pd.DataFrame]:
-        """Load and validate evidence CSV data."""
+    def _load_evidence_data(self, evidence_data: bytes) -> Optional[pd.DataFrame]:
+        """Load and validate evidence JSON data."""
         
         try:
-            # Use robust CSV parsing consistent with other pipeline stages
-            evidence_df = pd.read_csv(
-                evidence_csv_path,
-                on_bad_lines='skip',  # Skip malformed lines
-                engine='python',      # More permissive parser
-                quoting=3             # Handle quotes properly
-            )
+            # Parse JSON data
+            import json
+            json_str = evidence_data.decode('utf-8')
+            analysis_result = json.loads(json_str)
+            
+            # Convert to DataFrame using same logic as synthesis pipeline
+            document_analyses = analysis_result.get('document_analyses', [])
+            
+            if not document_analyses:
+                raise ValueError("No document_analyses found in JSON")
+            
+            rows = []
+            for doc_analysis in document_analyses:
+                document_id = doc_analysis.get('document_id', '{artifact_id}')
+                evidence_list = doc_analysis.get('evidence', [])
+                
+                for i, evidence in enumerate(evidence_list):
+                    if isinstance(evidence, dict):
+                        row = {
+                            'aid': document_id,
+                            'dimension': evidence.get('dimension', ''),
+                            'quote_id': evidence.get('quote_id', f"quote_{i}"),
+                            'quote_text': evidence.get('quote_text', ''),
+                            'confidence_score': evidence.get('confidence', 0.0),
+                            'context_type': evidence.get('context_type', 'direct')
+                        }
+                        rows.append(row)
+            
+            if not rows:
+                return pd.DataFrame(columns=['aid', 'dimension', 'quote_id', 'quote_text', 'confidence_score', 'context_type'])
+            
+            evidence_df = pd.DataFrame(rows)
             
             # Map actual column names to expected column names  
             column_mapping = {
@@ -277,24 +302,30 @@ class EvidenceCurator:
             # Find the dimension name without '_score' suffix for evidence matching
             dim_name = dim.replace('_score', '')
             
+            # Debug logging
+            self.logger.info(f"Looking for evidence for dimension '{dim_name}' (from '{dim}')")
+            self.logger.info(f"Available dimensions in evidence: {evidence_df['dimension'].unique().tolist()}")
+            
             # Get evidence for this dimension
             dim_evidence = evidence_df[evidence_df['dimension'] == dim_name]
+            
+            self.logger.info(f"Found {len(dim_evidence)} pieces of evidence for dimension '{dim_name}'")
             
             if len(dim_evidence) > 0:
                 # Select top evidence by confidence
                 top_evidence = dim_evidence.nlargest(
                     min(request.max_evidence_per_finding, len(dim_evidence)), 
-                    'confidence'
+                    'confidence_score'
                 )
                 
                 for _, row in top_evidence.iterrows():
                     curated.append(CuratedEvidence(
-                        artifact_id=row['artifact_id'],
+                        artifact_id=row['aid'],  # Changed from 'artifact_id'
                         dimension=row['dimension'],
-                        evidence_text=row['evidence_text'],
-                        context=row['context'],
-                        confidence=row['confidence'],
-                        reasoning=row['reasoning'],
+                        evidence_text=row['quote_text'],  # Changed from 'evidence_text'
+                        context=row['context_type'],  # Changed from 'context'
+                        confidence=row['confidence_score'],  # Changed from 'confidence'
+                        reasoning=f"High confidence evidence for {dim} dimension",  # Generate reasoning since not in data
                         relevance_score=0.8,  # High relevance for extreme values
                         statistical_connection=f"Supports {dim} mean score of {dimension_scores[dim]:.3f}"
                     ))
@@ -334,17 +365,17 @@ class EvidenceCurator:
                         # Select best evidence for this significant finding
                         top_evidence = dim_evidence.nlargest(
                             min(2, len(dim_evidence)),  # Fewer pieces for hypothesis evidence
-                            'confidence'
+                            'confidence_score'
                         )
                         
                         for _, row in top_evidence.iterrows():
                             curated.append(CuratedEvidence(
-                                artifact_id=row['artifact_id'],
+                                artifact_id=row['aid'],  # Changed from 'artifact_id'
                                 dimension=row['dimension'],
-                                evidence_text=row['evidence_text'],
-                                context=row['context'],
-                                confidence=row['confidence'],
-                                reasoning=row['reasoning'],
+                                evidence_text=row['quote_text'],  # Changed from 'evidence_text'
+                                context=row['context_type'],  # Changed from 'context'
+                                confidence=row['confidence_score'],  # Changed from 'confidence'
+                                reasoning=f"High confidence evidence supporting {hypothesis}",  # Generate reasoning
                                 relevance_score=0.9,  # Very high relevance for significant findings
                                 statistical_connection=f"Supports {hypothesis} (p={p_value:.4f})"
                             ))
@@ -385,16 +416,16 @@ class EvidenceCurator:
                     
                     if len(dim_evidence) > 0:
                         # Select one piece of evidence per dimension
-                        top_evidence = dim_evidence.nlargest(1, 'confidence')
+                        top_evidence = dim_evidence.nlargest(1, 'confidence_score')
                         
                         for _, row in top_evidence.iterrows():
                             curated.append(CuratedEvidence(
-                                artifact_id=row['artifact_id'],
+                                artifact_id=row['aid'],  # Changed from 'artifact_id'
                                 dimension=row['dimension'],
-                                evidence_text=row['evidence_text'],
-                                context=row['context'],
-                                confidence=row['confidence'],
-                                reasoning=row['reasoning'],
+                                evidence_text=row['quote_text'],  # Changed from 'evidence_text'
+                                context=row['context_type'],  # Changed from 'context'
+                                confidence=row['confidence_score'],  # Changed from 'confidence'
+                                reasoning=f"Evidence for correlation between {dim1} and {dim2}",  # Generate reasoning
                                 relevance_score=0.7,
                                 statistical_connection=f"Part of strong correlation: {dim1} ↔ {dim2} (r={corr_value:.3f})"
                             ))
