@@ -122,7 +122,7 @@ class EvidenceCurator:
             
             # Filter evidence by confidence threshold
             high_confidence_evidence = evidence_df[
-                evidence_df['confidence_score'] >= request.min_confidence_threshold
+                evidence_df['confidence'] >= request.min_confidence_threshold
             ].copy()
             
             if len(high_confidence_evidence) == 0:
@@ -315,17 +315,17 @@ class EvidenceCurator:
                 # Select top evidence by confidence
                 top_evidence = dim_evidence.nlargest(
                     min(request.max_evidence_per_finding, len(dim_evidence)), 
-                    'confidence_score'
+                    'confidence'
                 )
                 
                 for _, row in top_evidence.iterrows():
                     curated.append(CuratedEvidence(
-                        artifact_id=row['aid'],  # Changed from 'artifact_id'
+                        artifact_id=row['artifact_id'],  # Use renamed column
                         dimension=row['dimension'],
-                        evidence_text=row['quote_text'],  # Changed from 'evidence_text'
-                        context=row['context_type'],  # Changed from 'context'
-                        confidence=row['confidence_score'],  # Changed from 'confidence'
-                        reasoning=f"High confidence evidence for {dim} dimension",  # Generate reasoning since not in data
+                        evidence_text=row['evidence_text'],  # Use renamed column
+                        context=row['context'],  # Use renamed column
+                        confidence=row['confidence'],  # Use renamed column
+                        reasoning=row['reasoning'],  # Use generated column
                         relevance_score=0.8,  # High relevance for extreme values
                         statistical_connection=f"Supports {dim} mean score of {dimension_scores[dim]:.3f}"
                     ))
@@ -365,17 +365,17 @@ class EvidenceCurator:
                         # Select best evidence for this significant finding
                         top_evidence = dim_evidence.nlargest(
                             min(2, len(dim_evidence)),  # Fewer pieces for hypothesis evidence
-                            'confidence_score'
+                            'confidence'
                         )
                         
                         for _, row in top_evidence.iterrows():
                             curated.append(CuratedEvidence(
-                                artifact_id=row['aid'],  # Changed from 'artifact_id'
+                                artifact_id=row['artifact_id'],  # Use renamed column
                                 dimension=row['dimension'],
-                                evidence_text=row['quote_text'],  # Changed from 'evidence_text'
-                                context=row['context_type'],  # Changed from 'context'
-                                confidence=row['confidence_score'],  # Changed from 'confidence'
-                                reasoning=f"High confidence evidence supporting {hypothesis}",  # Generate reasoning
+                                evidence_text=row['evidence_text'],  # Use renamed column
+                                context=row['context'],  # Use renamed column
+                                confidence=row['confidence'],  # Use renamed column
+                                reasoning=row['reasoning'],  # Use generated column
                                 relevance_score=0.9,  # Very high relevance for significant findings
                                 statistical_connection=f"Supports {hypothesis} (p={p_value:.4f})"
                             ))
@@ -416,16 +416,16 @@ class EvidenceCurator:
                     
                     if len(dim_evidence) > 0:
                         # Select one piece of evidence per dimension
-                        top_evidence = dim_evidence.nlargest(1, 'confidence_score')
+                        top_evidence = dim_evidence.nlargest(1, 'confidence')
                         
                         for _, row in top_evidence.iterrows():
                             curated.append(CuratedEvidence(
-                                artifact_id=row['aid'],  # Changed from 'artifact_id'
+                                artifact_id=row['artifact_id'],  # Use renamed column
                                 dimension=row['dimension'],
-                                evidence_text=row['quote_text'],  # Changed from 'evidence_text'
-                                context=row['context_type'],  # Changed from 'context'
-                                confidence=row['confidence_score'],  # Changed from 'confidence'
-                                reasoning=f"Evidence for correlation between {dim1} and {dim2}",  # Generate reasoning
+                                evidence_text=row['evidence_text'],  # Use renamed column
+                                context=row['context'],  # Use renamed column
+                                confidence=row['confidence'],  # Use renamed column
+                                reasoning=row['reasoning'],  # Use generated column
                                 relevance_score=0.7,
                                 statistical_connection=f"Part of strong correlation: {dim1} ↔ {dim2} (r={corr_value:.3f})"
                             ))
