@@ -73,29 +73,42 @@ class LLMCodeSanitizer(cst.CSTTransformer):
         """
         fixed_code = code
         
-        # Fix unterminated string literals (common with evidence text)
-        # Pattern: variable = "text with unescaped 'quotes'"
-        # Solution: Convert to raw strings or triple quotes
-        
-        # Find lines with potentially problematic string assignments
+        # Enhanced string literal fixing with multiple approaches
         lines = fixed_code.split('\n')
         fixed_lines = []
         
         for line_num, line in enumerate(lines):
             original_line = line
+            fixed_line = line
             
-            # Check for string assignments that might contain problematic quotes
-            if re.search(r'^\s*\w+\s*=\s*["\'].*["\'][^"\']*$', line):
-                # This looks like a string assignment - check for quote issues
+            # Approach 1: Handle simple string assignments with quote issues
+            if re.search(r'^\s*\w+\s*=\s*["\'].*["\']', line):
                 if self._has_quote_issues(line):
-                    # Convert to triple-quoted string
                     fixed_line = self._convert_to_safe_string(line)
                     if fixed_line != line:
-                        fixed_lines.append(fixed_line)
                         self.transformations_applied.append(f"fixed_string_quotes_line_{line_num + 1}")
-                        continue
             
-            fixed_lines.append(original_line)
+            # Approach 2: Handle f-strings with embedded quotes
+            elif re.search(r'f["\'].*\{.*\}.*["\']', line):
+                if self._has_quote_issues(line):
+                    fixed_line = self._fix_fstring_quotes(line)
+                    if fixed_line != line:
+                        self.transformations_applied.append(f"fixed_fstring_quotes_line_{line_num + 1}")
+            
+            # Approach 3: Handle print statements with problematic strings
+            elif re.search(r'print\s*\([^)]*["\'][^"\']*["\'][^)]*\)', line):
+                if self._has_quote_issues(line):
+                    fixed_line = self._fix_print_statement(line)
+                    if fixed_line != line:
+                        self.transformations_applied.append(f"fixed_print_quotes_line_{line_num + 1}")
+            
+            # Approach 4: Catch any remaining unterminated strings
+            if self._has_unterminated_string(fixed_line):
+                fixed_line = self._fix_unterminated_string(fixed_line)
+                if fixed_line != original_line:
+                    self.transformations_applied.append(f"fixed_unterminated_string_line_{line_num + 1}")
+            
+            fixed_lines.append(fixed_line)
         
         return '\n'.join(fixed_lines)
     
@@ -124,6 +137,62 @@ class LLMCodeSanitizer(cst.CSTTransformer):
         safe_line = f'{indent}{var_name} = """{content}"""{remainder}'
         return safe_line
     
+    def _fix_fstring_quotes(self, line: str) -> str:
+        """Fix f-strings with problematic quote patterns."""
+        # Convert f-strings to regular strings to avoid quote issues
+        # f"text with {variable}" -> "text with " + str(variable)
+        # This is a simplified approach - could be more sophisticated
+        
+        # For now, just convert f-strings to triple-quoted strings
+        if 'f"' in line:
+            line = line.replace('f"', '"""').replace('"', '"""')
+        elif "f'" in line:
+            line = line.replace("f'", '"""').replace("'", '"""')
+        
+        return line
+    
+    def _fix_print_statement(self, line: str) -> str:
+        """Fix print statements with problematic quote patterns."""
+        # Look for print statements and make their strings safe
+        if 'print(' in line:
+            # Simple approach: convert any quotes inside print to triple quotes
+            # More sophisticated parsing could be added later
+            
+            # Find the content inside print()
+            match = re.search(r'print\s*\(([^)]+)\)', line)
+            if match:
+                print_content = match.group(1)
+                # If it contains problematic quotes, wrap in triple quotes
+                if self._has_quote_issues(print_content):
+                    safe_content = f'"""{print_content.strip("\"\'").strip()}"""'
+                    return line.replace(print_content, safe_content)
+        
+        return line
+    
+    def _has_unterminated_string(self, line: str) -> bool:
+        """Check if a line has unterminated string literals."""
+        # Count quotes to see if they're balanced
+        double_quotes = line.count('"') - line.count('\\"')  # Exclude escaped quotes
+        single_quotes = line.count("'") - line.count("\\'")  # Exclude escaped quotes
+        
+        # If odd number of quotes, likely unterminated
+        return (double_quotes % 2 != 0) or (single_quotes % 2 != 0)
+    
+    def _fix_unterminated_string(self, line: str) -> str:
+        """Fix unterminated string literals by converting to triple quotes."""
+        # Simple approach: if we detect unterminated strings, wrap the whole line's
+        # string content in triple quotes
+        
+        # Look for patterns like: variable = "unterminated string
+        match = re.match(r'^(\s*)(\w+\s*=\s*)(["\'])(.*)$', line)
+        if match:
+            indent, assignment, quote_char, content = match.groups()
+            # If content doesn't end with the same quote, it's likely unterminated
+            if not content.endswith(quote_char):
+                return f'{indent}{assignment}"""{content}"""'
+        
+        return line
+    
     def _apply_fallback_fixes(self, code: str) -> str:
         """Apply regex-based fixes when CST parsing fails."""
         fixed_code = code
@@ -146,7 +215,8 @@ class LLMCodeSanitizer(cst.CSTTransformer):
             
             # Replace problematic introspection calls
             (r'type\(([^)]+)\)', r'\1.dtype'),
-            (r'isinstance\(([^,]+),\s*[^)]+\)', r'hasattr(\1, "shape")'),
+            # Disabled isinstance regex - handled by CST transformation instead
+            # (r'isinstance\(([^,)]+),\s*[^)]+\)', r'hasattr(\1, "shape")'),
         ]
         
         for pattern, replacement in fixes:
@@ -244,7 +314,7 @@ class LLMCodeSanitizer(cst.CSTTransformer):
                 # Get the first argument if available
                 if len(updated_node.args) > 0:
                     first_arg = updated_node.args[0].value
-                    # Convert to a safe DataFrame attribute check instead of method call
+                    # Convert to a safe DataFrame attribute check
                     return cst.Call(
                         func=cst.Name("hasattr"),
                         args=[
