@@ -1,0 +1,73 @@
+template: |
+  You are tasked with creating a comprehensive narrative interpretation that synthesizes statistical analysis results with curated evidence. This is the final stage of a breakthrough THIN Code-Generated Synthesis Architecture.
+
+  FRAMEWORK SPECIFICATION:
+  {framework_spec}
+
+  EXPERIMENT CONTEXT:
+  {experiment_context}
+
+  STATISTICAL ANALYSIS RESULTS:
+  {stats_summary}
+
+  CURATED EVIDENCE ({total_evidence} pieces):
+  {evidence_summary}
+
+  CRITICAL CONTEXT INTEGRATION REQUIREMENTS:
+  - **Use the full experiment context**: Reference specific hypotheses, research questions, and experimental design from the experiment context
+  - **Reference specific speakers and eras**: Use the corpus context to discuss specific speakers, their ideologies, and historical eras
+  - **Connect to framework theory**: Link findings to the theoretical framework and character dimensions
+  - **Address experimental design**: Discuss how the factorial design (if present) affects interpretation
+  - **Reference specific statistical tests**: Connect results to the required statistical tests mentioned in the experiment context
+
+  TASK: Create a comprehensive narrative report that:
+
+  1. **EXECUTIVE SUMMARY** (150-200 words):
+     - Synthesize the most important findings in the context of the specific experiment
+     - State key conclusions clearly with reference to the research hypotheses
+     - Highlight practical implications for the specific speakers/eras analyzed
+
+  2. **STATISTICAL FINDINGS INTERPRETATION**:
+     - Interpret descriptive statistics in the context of the specific experimental design
+     - Explain hypothesis test results and their significance for the research questions
+     - Discuss correlation patterns and their meaning for the framework dimensions
+     - Address reliability findings and their implications for the specific corpus
+     - Connect statistical measures to the theoretical framework and character dimensions
+
+  3. **EVIDENCE INTEGRATION**:
+     - Weave curated evidence throughout the analysis, referencing specific speakers
+     - Use evidence to illustrate and support statistical findings with concrete examples
+     - Highlight particularly compelling evidence pieces from specific speakers/eras
+     - Show how evidence validates or contextualizes the numbers in the experimental context
+
+  4. **KEY FINDINGS** (5-7 bullet points):
+     - List the most significant discoveries with reference to the specific experiment
+     - Combine statistical and evidence-based insights with speaker/era context
+     - Focus on actionable or theoretically important results for the research questions
+
+  5. **METHODOLOGY NOTES**:
+     - Acknowledge the post-computation evidence curation approach
+     - Discuss sample characteristics and limitations in the context of the specific corpus
+     - Note reliability assessments and their impact on the experimental validity
+     - Reference the specific experimental design and its implications
+
+  6. **IMPLICATIONS AND CONCLUSIONS**:
+     - Connect findings to the broader framework context and theoretical background
+     - Discuss theoretical and practical implications for the specific speakers/eras
+     - Suggest areas for future investigation based on the experimental results
+     - Address how findings relate to the original research hypotheses
+
+  WRITING REQUIREMENTS:
+  - Academic tone but accessible language
+  - Integrate quantitative and qualitative insights seamlessly
+  - Use specific numbers and evidence quotes with speaker attribution
+  - Maintain logical flow between sections
+  - Ensure conclusions are well-supported by both statistics and evidence
+  - Reference specific speakers, eras, and ideologies throughout
+  - Connect all findings to the experimental design and research questions
+  - Aim for 1000-2000 words total
+
+  RESPONSE FORMAT:
+  Structure your response with clear section headers. Begin with the Executive Summary, then proceed through each section systematically. Use evidence quotes and statistical values to support all major claims. Always reference the specific experimental context, speakers, and research questions.
+
+  Generate the comprehensive narrative report now: 
