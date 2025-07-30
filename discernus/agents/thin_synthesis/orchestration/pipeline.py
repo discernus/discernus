@@ -370,25 +370,18 @@ class ProductionThinSynthesisPipeline:
             evidence_sample = []
             available_columns = []
         
-        # Write to temporary files for legacy structure analysis
-        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as scores_temp:
-            scores_temp.write(scores_data)
-            scores_temp_path = scores_temp.name
-            
-        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as evidence_temp:
-            evidence_temp.write(evidence_data)
-            evidence_temp_path = evidence_temp.name
-        
         try:
-            # Analyze CSV structures
-            scores_structure = self._describe_csv_structure(scores_temp_path, "scores")
-            evidence_structure = self._describe_csv_structure(evidence_temp_path, "evidence")
+            # Analyze JSON data structures directly
+            scores_df = self._load_data_to_dataframe(scores_data, "scores")
+            evidence_df = self._load_data_to_dataframe(evidence_data, "evidence")
+            scores_structure = self._describe_dataframe_structure(scores_df, "scores")
+            evidence_structure = self._describe_dataframe_structure(evidence_df, "evidence")
             
             # Create enhanced code generation request with actual data structure
             code_request = CodeGenerationRequest(
                 framework_spec=request.framework_spec,
-                scores_csv_structure=scores_structure,
-                evidence_csv_structure=evidence_structure,
+                scores_csv_structure=scores_structure,  # Keep field name for compatibility with code generator
+                evidence_csv_structure=evidence_structure,  # Keep field name for compatibility with code generator
                 experiment_context=request.experiment_context,
                 actual_scores_sample=scores_sample,
                 actual_evidence_sample=evidence_sample,
@@ -420,34 +413,24 @@ class ProductionThinSynthesisPipeline:
     def _stage_2_execute_code(self, code_response, request: ProductionPipelineRequest):
         """Stage 2: Execute generated code using SecureCodeExecutor with enhanced data injection."""
         
-        # Retrieve CSV data from artifacts
+        # Retrieve data from artifacts (supports both CSV and JSON)
         scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
-        # Load CSV data directly into DataFrames (eliminates file system access)
+        # Load data into DataFrames with format auto-detection
         import io
         import pandas as pd
         
         try:
-            # Use robust CSV parsing with error handling for malformed data
-            scores_df = pd.read_csv(
-                io.BytesIO(scores_data), 
-                on_bad_lines='skip',  # Skip malformed lines instead of failing
-                engine='python',      # More permissive parser
-                quoting=3             # Handle quotes properly
-            )
-            evidence_df = pd.read_csv(
-                io.BytesIO(evidence_data),
-                on_bad_lines='skip',
-                engine='python',
-                quoting=3
-            )
+            # Detect format and parse accordingly
+            scores_df = self._load_data_to_dataframe(scores_data, "scores")
+            evidence_df = self._load_data_to_dataframe(evidence_data, "evidence")
             
             # Log data shapes for debugging
             self.logger.info(f"Loaded scores_df: {scores_df.shape}, evidence_df: {evidence_df.shape}")
             
         except Exception as e:
-            raise Exception(f"Failed to load CSV data into DataFrames: {str(e)}")
+            raise Exception(f"Failed to load data into DataFrames: {str(e)}")
         
         # Prepare context with DataFrames instead of file paths
         context = {
@@ -503,19 +486,15 @@ class ProductionThinSynthesisPipeline:
         # Retrieve evidence data for curation
         evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
-        # Parse evidence CSV for curation
-        with tempfile.NamedTemporaryFile(mode='wb', suffix='.csv', delete=False) as evidence_temp:
-            evidence_temp.write(evidence_data)
+        # Parse JSON evidence data to DataFrame
+        evidence_df = self._load_data_to_dataframe(evidence_data, "evidence")
+        
+        # Create temporary CSV file for evidence curator (legacy interface)
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False) as evidence_temp:
+            evidence_df.to_csv(evidence_temp, index=False)
             evidence_csv_path = evidence_temp.name
         
         try:
-            # Use robust CSV parsing consistent with Stage 2
-            evidence_df = pd.read_csv(
-                evidence_csv_path,
-                on_bad_lines='skip',  # Skip malformed lines
-                engine='python',      # More permissive parser
-                quoting=3             # Handle quotes properly
-            )
             
             # Create curation request
             curation_request = EvidenceCurationRequest(
@@ -564,17 +543,88 @@ class ProductionThinSynthesisPipeline:
         
         return self.results_interpreter.interpret_results(interpretation_request)
 
-    def _describe_csv_structure(self, csv_path: str, data_type: str) -> str:
-        """Analyze CSV structure for code generation."""
+    def _load_data_to_dataframe(self, data: bytes, data_type: str) -> pd.DataFrame:
+        """Load JSON data to DataFrame format."""
+        return self._parse_json_to_dataframe(data, data_type)
+
+    def _parse_json_to_dataframe(self, json_data: bytes, data_type: str) -> pd.DataFrame:
+        """Parse JSON analysis output to DataFrame format."""
         try:
-            # Use robust CSV parsing consistent with pipeline stages
-            df = pd.read_csv(
-                csv_path,
-                on_bad_lines='skip',  # Skip malformed lines
-                engine='python',      # More permissive parser
-                quoting=3             # Handle quotes properly
-            )
+            # Parse JSON from bytes
+            json_str = json_data.decode('utf-8')
+            analysis_result = json.loads(json_str)
             
+            if data_type == "scores":
+                return self._json_scores_to_dataframe(analysis_result)
+            elif data_type == "evidence":
+                return self._json_evidence_to_dataframe(analysis_result)
+            else:
+                raise ValueError(f"Unknown data type: {data_type}")
+                
+        except Exception as e:
+            raise Exception(f"Failed to parse JSON {data_type} data: {str(e)}")
+    
+    def _json_scores_to_dataframe(self, analysis_result: dict) -> pd.DataFrame:
+        """Convert JSON analysis scores to DataFrame format following v6.0 specification."""
+        try:
+            scores_data = analysis_result.get('scores', {})
+            dimensions = scores_data.get('dimensions', {})
+            
+            # Create DataFrame with one row per document (aid)
+            # For now, assume single document analysis - can be extended for batch
+            row_data = {'aid': 'document_1'}  # Placeholder - should come from analysis
+            
+            # Extract dimensional scores generically according to v6.0 spec
+            for dim_name, dim_data in dimensions.items():
+                if isinstance(dim_data, dict):
+                    # Standard v6.0 fields that all frameworks should have
+                    row_data[dim_name] = dim_data.get('score', 0.0)
+                    row_data[f"{dim_name}_salience"] = dim_data.get('salience', 0.0)
+                    row_data[f"{dim_name}_confidence"] = dim_data.get('confidence', 0.0)
+                    
+                    # Handle any additional fields generically (framework-agnostic)
+                    for field_name, field_value in dim_data.items():
+                        if field_name not in ['score', 'salience', 'confidence']:
+                            # Create column name that preserves the field structure
+                            column_name = f"{field_name}_{dim_name}" if field_name.endswith('_salience') else f"{dim_name}_{field_name}"
+                            row_data[column_name] = field_value
+            
+            return pd.DataFrame([row_data])
+            
+        except Exception as e:
+            raise Exception(f"Failed to convert JSON scores to DataFrame: {str(e)}")
+    
+    def _json_evidence_to_dataframe(self, analysis_result: dict) -> pd.DataFrame:
+        """Convert JSON analysis evidence to DataFrame format following v6.0 specification."""
+        try:
+            evidence_data = analysis_result.get('evidence', {})
+            by_dimension = evidence_data.get('by_dimension', {})
+            
+            rows = []
+            for dim_name, evidence_list in by_dimension.items():
+                if isinstance(evidence_list, list):
+                    for i, evidence in enumerate(evidence_list):
+                        if isinstance(evidence, dict):
+                            row = {
+                                'aid': 'document_1',  # Placeholder - should come from analysis
+                                'dimension': dim_name,
+                                'quote_id': evidence.get('quote_id', f"{dim_name}_{i}"),
+                                'quote_text': evidence.get('quote_text', ''),
+                                'confidence_score': evidence.get('confidence', 0.0),
+                                'context_type': evidence.get('context_type', 'direct')
+                            }
+                            rows.append(row)
+            
+            return pd.DataFrame(rows) if rows else pd.DataFrame(columns=['aid', 'dimension', 'quote_id', 'quote_text', 'confidence_score', 'context_type'])
+            
+        except Exception as e:
+            raise Exception(f"Failed to convert JSON evidence to DataFrame: {str(e)}")
+
+
+    
+    def _describe_dataframe_structure(self, df: pd.DataFrame, data_type: str) -> str:
+        """Analyze DataFrame structure for code generation (works for both CSV and JSON sources)."""
+        try:
             structure_info = {
                 "data_type": data_type,
                 "total_rows": len(df),
@@ -585,7 +635,7 @@ class ProductionThinSynthesisPipeline:
             return json.dumps(structure_info, indent=2)
             
         except Exception as e:
-            return f"Error analyzing {data_type} CSV: {str(e)}"
+            return f"Error analyzing {data_type} DataFrame: {str(e)}"
 
     def _create_error_response(self, 
                              error_type: str, 
