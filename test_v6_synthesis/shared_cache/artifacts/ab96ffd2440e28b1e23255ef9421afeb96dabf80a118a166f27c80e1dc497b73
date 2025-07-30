@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e2eb96cb9088",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "v6_synthesis_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Populism vs Pluralism Framework\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Populism vs Pluralism Framework v6.0. Focused on identifying raw dimensional scores, salience, and confidence levels for Populist and Pluralist Authority dimensions. Evidence extraction prioritized direct quotes supporting the assigned scores.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"document1.txt\",\n      \"dimensional_scores\": {\n        \"populist_authority\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"pluralist_authority\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populist_authority\",\n          \"quote_text\": \"Our identity is not optional; it's imposed. We are who we are *because they made us so*. Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath. There is no neutral ground\u2014there are only oppressors and the oppressed. If you're not with us, you're against us. Solidarity demands unity, not nuance. *Dissent among our ranks is betrayal*. Our power will come only when we stop pretending we can all coexist and start claiming what's ours\u2014together, as a people.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Direct expression of us vs. them, rejection of nuance and dissent within the in-group.\"\n        },\n        {\n          \"dimension\": \"populist_authority\",\n          \"quote_text\": \"Now it's our turn. Don't talk to us about \\\"proceedure\\\" or \\\"due process\\\"\u2014those were invented to keep power in the wrong hands. Until our pain is *fully acknowledged and compensated*, until our enemies know what it's like to lose what we lost, *there can be no reconciliation\u2014only retribution*. Justice without revenge is just another lie. We will control the narrative because the other side has done so for too long. They gaslight us\u2014*now we rewrite the story, and *we* decide what's true.*\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Rejection of established procedures and emphasis on self-determination of truth and narrative.\"\n        },\n        {\n          \"dimension\": \"populist_authority\",\n          \"quote_text\": \"A better world *isn't possible*\u2014unless we start over. *Burn it down*. Only by erasing the old structures entirely\u2014root and branch\u2014can something pure be born. We don't want inclusion in a broken system. We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place. Utopia isn't a dream; it's justice achieved by force. The arc of history doesn't bend\u2014*it breaks, and *we will be the ones who snap it*.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Advocacy for complete destruction of existing structures and creation of a new order controlled by the in-group.\"\n        },\n        {\n          \"dimension\": \"pluralist_authority\",\n          \"quote_text\": \"Do not talk to us about \\\"proceedure\\\" or \\\"due process\\\"\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Marginal statement that can be interpreted as a rejection of established procedures, but is overshadowed by populist sentiment.\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-30T09:51:05.136121+00:00",
+    "end_time": "2025-07-30T09:51:08.736114+00:00",
+    "duration_seconds": 3.599993,
+    "llm_interaction_hash": "fa223be88bd33021"
+  },
+  "input_artifacts": {
+    "framework_hash": "70d8f7839453fe0ec7cc23bdffc67814487977beba3b0aef41911273109235c1",
+    "document_hashes": [
+      "e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "test_v6_synthesis",
+      "experiment_root": "/Volumes/code/discernus/test_v6_synthesis",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250730T095105Z_45590364"
+  }
+}

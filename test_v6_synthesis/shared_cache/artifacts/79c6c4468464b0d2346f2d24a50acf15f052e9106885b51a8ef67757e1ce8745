@@ -1,0 +1,52 @@
+{
+  "analysis_metadata": {
+    "framework_name": "Populism vs Pluralism Framework",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Populism vs Pluralism Framework v6.0. Focused on identifying raw dimensional scores, salience, and confidence levels for Populist and Pluralist Authority dimensions. Evidence extraction prioritized direct quotes supporting the assigned scores."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "document1.txt",
+      "dimensional_scores": {
+        "populist_authority": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.9
+        },
+        "pluralist_authority": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populist_authority",
+          "quote_text": "Our identity is not optional; it's imposed. We are who we are *because they made us so*. Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath. There is no neutral ground—there are only oppressors and the oppressed. If you're not with us, you're against us. Solidarity demands unity, not nuance. *Dissent among our ranks is betrayal*. Our power will come only when we stop pretending we can all coexist and start claiming what's ours—together, as a people.",
+          "confidence": 0.95,
+          "context_type": "Direct expression of us vs. them, rejection of nuance and dissent within the in-group."
+        },
+        {
+          "dimension": "populist_authority",
+          "quote_text": "Now it's our turn. Don't talk to us about \"proceedure\" or \"due process\"—those were invented to keep power in the wrong hands. Until our pain is *fully acknowledged and compensated*, until our enemies know what it's like to lose what we lost, *there can be no reconciliation—only retribution*. Justice without revenge is just another lie. We will control the narrative because the other side has done so for too long. They gaslight us—*now we rewrite the story, and *we* decide what's true.*",
+          "confidence": 0.9,
+          "context_type": "Rejection of established procedures and emphasis on self-determination of truth and narrative."
+        },
+        {
+          "dimension": "populist_authority",
+          "quote_text": "A better world *isn't possible*—unless we start over. *Burn it down*. Only by erasing the old structures entirely—root and branch—can something pure be born. We don't want inclusion in a broken system. We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place. Utopia isn't a dream; it's justice achieved by force. The arc of history doesn't bend—*it breaks, and *we will be the ones who snap it*.",
+          "confidence": 0.9,
+          "context_type": "Advocacy for complete destruction of existing structures and creation of a new order controlled by the in-group."
+        },
+        {
+          "dimension": "pluralist_authority",
+          "quote_text": "Do not talk to us about \"proceedure\" or \"due process\"",
+          "confidence": 0.7,
+          "context_type": "Marginal statement that can be interpreted as a rejection of established procedures, but is overshadowed by populist sentiment."
+        }
+      ]
+    }
+  ]
+}

@@ -259,13 +259,34 @@ class EnhancedAnalysisAgent:
                         "cached_artifact_hash": artifact_hash
                     })
 
-                    # Extract and persist CSVs from the cached result
+                    # Extract and persist data from the cached result based on framework version
                     document_hashes = cached_result.get('input_artifacts', {}).get('document_hashes', [])
+                    framework_hash = cached_result.get('input_artifacts', {}).get('framework_hash', '')
                     
-                    scores_csv, evidence_csv = self._extract_embedded_csv(cached_result['raw_analysis_response'], document_hashes[0] if document_hashes else "unknown_artifact")
+                    # Detect framework version from cached framework
+                    is_json_framework = False
+                    if framework_hash:
+                        try:
+                            framework_content = self.storage.get_artifact(framework_hash).decode('utf-8')
+                            is_json_framework = self._is_json_framework(framework_content)
+                        except:
+                            # Fallback: assume CSV for safety
+                            is_json_framework = False
                     
-                    new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
-                    new_evidence_hash = self._append_to_csv_artifact(current_evidence_hash, evidence_csv, "evidence.csv")
+                    if is_json_framework:
+                        # v6.0: Process JSON response 
+                        new_scores_hash, new_evidence_hash = self._process_json_response(
+                            cached_result['raw_analysis_response'], 
+                            document_hashes[0] if document_hashes else "unknown_artifact",
+                            current_scores_hash, 
+                            current_evidence_hash
+                        )
+                    else:
+                        # v5.0: Extract CSV data
+                        scores_csv, evidence_csv = self._extract_embedded_csv(cached_result['raw_analysis_response'], document_hashes[0] if document_hashes else "unknown_artifact")
+                        
+                        new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
+                        new_evidence_hash = self._append_to_csv_artifact(current_evidence_hash, evidence_csv, "evidence.csv")
                     
                     return {
                         "analysis_result": {

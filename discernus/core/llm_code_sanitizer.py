@@ -203,6 +203,10 @@ class LLMCodeSanitizer(cst.CSTTransformer):
             (r'= "([^"]*)"([^"]*$)', r'= """\1\2"""'),
             (r"= '([^']*)'([^']*$)", r'= """\1\2"""'),
             
+            # Fix common indentation issues (unexpected indent) 
+            # This often happens with multi-line strings or dictionary values
+            (r'^(\s+)(\S.*?): \("([^"]*)"$', r'\1\2: (\n\1    "\3"'),
+            
             # Remove forbidden attribute access
             (r'(\w+)\.__class__', r'\1.dtype'),
             (r'(\w+)\.__globals__', r'\1.shape'),
