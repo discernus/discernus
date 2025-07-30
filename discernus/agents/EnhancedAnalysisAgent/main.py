@@ -22,7 +22,7 @@ from io import StringIO
 import yaml
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from litellm import completion
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary, SecurityError
@@ -84,6 +84,85 @@ class EnhancedAnalysisAgent:
             prompt_config = yaml.safe_load(f)
         
         return prompt_config['template']
+    
+    def _load_json_prompt_template(self) -> str:
+        """Load v6.0 JSON prompt template for frameworks with separation of concerns."""
+        prompt_path = Path(__file__).parent / "prompt_v6.yaml"
+        if not prompt_path.exists():
+            raise FileNotFoundError("Could not find prompt_v6.yaml for EnhancedAnalysisAgent")
+        
+        with open(prompt_path, 'r') as f:
+            prompt_config = yaml.safe_load(f)
+        
+        return prompt_config['template']
+    
+    def _detect_framework_version(self, framework_config: Dict[str, Any]) -> str:
+        """Detect framework version from JSON configuration."""
+        # Check for explicit version field
+        version = framework_config.get("version", "")
+        
+        # v6.0 frameworks have specific indicators
+        if version.startswith("v6.") or version.startswith("6."):
+            return "v6.0"
+        
+        # v5.0 frameworks typically have embedded_csv_requirements
+        if "embedded_csv_requirements" in framework_config:
+            return "v5.0"
+        
+        # Default to v5.0 for backward compatibility
+        return "v5.0"
+    
+    def _is_json_framework(self, framework_version: str) -> bool:
+        """Determine if framework should use JSON output."""
+        return framework_version == "v6.0"
+    
+    def _process_json_response(self, result_content: str, document_hash: str, 
+                              current_scores_hash: Optional[str], 
+                              current_evidence_hash: Optional[str]) -> Tuple[str, str]:
+        """
+        Extract JSON from v6.0 framework response using proprietary delimiters.
+        Clean approach - no complex parsing, just reliable regex extraction.
+        """
+        import json
+        import re
+        
+        try:
+            # Extract JSON using proprietary delimiters (reliable regex)
+            json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+            json_match = re.search(json_pattern, result_content, re.DOTALL)
+            if not json_match:
+                raise ValueError("No JSON found with proprietary delimiters")
+            
+            json_str = json_match.group(1).strip()
+            analysis_data = json.loads(json_str)
+            
+            # Store the raw JSON analysis as artifact (v6.0 native format)
+            json_artifact_hash = self.storage.put_artifact(
+                json_str.encode('utf-8'),
+                {
+                    "artifact_type": "analysis_json_v6",
+                    "document_hash": document_hash,
+                    "framework_version": "v6.0"
+                }
+            )
+            
+            self.audit.log_agent_event(self.agent_name, "json_v6_extraction", {
+                "document_hash": document_hash,
+                "json_artifact_hash": json_artifact_hash,
+                "extraction_method": "proprietary_delimiters"
+            })
+            
+            # Return JSON artifact hash as both scores and evidence for v6.0 pipeline
+            return json_artifact_hash, json_artifact_hash
+            
+        except (json.JSONDecodeError, ValueError, re.error) as e:
+            # Log the actual response for debugging
+            self.audit.log_agent_event(self.agent_name, "json_v6_extraction_failed", {
+                "error": str(e),
+                "response_preview": result_content[:200] + "..." if len(result_content) > 200 else result_content,
+                "response_length": len(result_content)
+            })
+            raise EnhancedAnalysisAgentError(f"Failed to extract v6.0 JSON response: {str(e)}")
 
 
 
@@ -243,21 +322,69 @@ class EnhancedAnalysisAgent:
             # Prepare framework for LLM
             framework_b64 = base64.b64encode(framework_content.encode('utf-8')).decode('utf-8')
             
-            # Format enhanced prompt with mathematical requirements
-            prompt_text = self.prompt_template.format(
-                batch_id=batch_id,
-                frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
-                documents=self._format_documents_for_prompt(documents),
-                num_frameworks=1,
-                num_documents=len(documents),
-                dimension_list=",".join(all_dimensions),
-                dimension_scores=",".join("{{" + dim + "_score}}" for dim in all_dimensions),
-                artifact_id="{artifact_id}",  # Will be replaced by document hash in response
-                dimension_name="{dimension_name}",
-                quote_number="{quote_number}",
-                quote_text="{quote_text}",
-                context_type="{context_type}"
-            )
+            # Detect framework version and select appropriate prompt template
+            framework_version = self._detect_framework_version(framework_config)
+            is_json_framework = self._is_json_framework(framework_version)
+            
+            # Debug logging for framework detection
+            self.audit.log_agent_event(self.agent_name, "framework_version_detected", {
+                "version": framework_version,
+                "is_json_framework": is_json_framework,
+                "framework_config_keys": list(framework_config.keys()) if framework_config else []
+            })
+            
+            if is_json_framework:
+                # Use v6.0 JSON prompt template (no calculations)
+                self.audit.log_agent_event(self.agent_name, "loading_json_prompt_template", {})
+                json_prompt_template = self._load_json_prompt_template()
+                self.audit.log_agent_event(self.agent_name, "json_prompt_template_loaded", {
+                    "template_length": len(json_prompt_template)
+                })
+                try:
+                    prompt_text = json_prompt_template.format(
+                        batch_id=batch_id,
+                        frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
+                        documents=self._format_documents_for_prompt(documents),
+                        num_frameworks=1,
+                        num_documents=len(documents)
+                    )
+                    self.audit.log_agent_event(self.agent_name, "json_prompt_formatted", {
+                        "prompt_length": len(prompt_text)
+                    })
+                except Exception as e:
+                    self.audit.log_agent_event(self.agent_name, "json_prompt_format_error", {
+                        "error": str(e),
+                        "template_placeholders": [p for p in ["batch_id", "frameworks", "documents", "num_frameworks", "num_documents"]]
+                    })
+                    raise EnhancedAnalysisAgentError(f"Failed to format JSON prompt template: {str(e)}")
+                
+                self.audit.log_agent_event(self.agent_name, "framework_version_detected", {
+                    "version": framework_version,
+                    "output_format": "JSON",
+                    "separation_of_concerns": True
+                })
+            else:
+                # Use v5.0 CSV prompt template (with calculations)
+                prompt_text = self.prompt_template.format(
+                    batch_id=batch_id,
+                    frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
+                    documents=self._format_documents_for_prompt(documents),
+                    num_frameworks=1,
+                    num_documents=len(documents),
+                    dimension_list=",".join(all_dimensions),
+                    dimension_scores=",".join("{{" + dim + "_score}}" for dim in all_dimensions),
+                    artifact_id="{artifact_id}",  # Will be replaced by document hash in response
+                    dimension_name="{dimension_name}",
+                    quote_number="{quote_number}",
+                    quote_text="{quote_text}",
+                    context_type="{context_type}"
+                )
+                
+                self.audit.log_agent_event(self.agent_name, "framework_version_detected", {
+                    "version": framework_version,
+                    "output_format": "CSV",
+                    "separation_of_concerns": False
+                })
             
             # Log LLM interaction start
             self.audit.log_agent_event(self.agent_name, "llm_call_start", {
@@ -288,14 +415,26 @@ class EnhancedAnalysisAgent:
             if not result_content or result_content.strip() == "":
                 raise EnhancedAnalysisAgentError("LLM returned empty content")
             
-            # Extract CSV data from the response
-            scores_csv, evidence_csv = self._extract_embedded_csv(result_content, document_hashes[0])
-            if not scores_csv or not evidence_csv:
-                raise EnhancedAnalysisAgentError("LLM response missing required CSV sections")
+            # Process response based on framework version
+            self.audit.log_agent_event(self.agent_name, "framework_processing_decision", {
+                "framework_version": framework_version,
+                "is_json_framework": is_json_framework,
+                "response_preview": result_content[:100] + "..." if len(result_content) > 100 else result_content
+            })
+            if is_json_framework:
+                # v6.0: Extract JSON data and convert to CSV format for downstream compatibility
+                new_scores_hash, new_evidence_hash = self._process_json_response(
+                    result_content, document_hashes[0], current_scores_hash, current_evidence_hash
+                )
+            else:
+                # v5.0: Extract CSV data from the response
+                scores_csv, evidence_csv = self._extract_embedded_csv(result_content, document_hashes[0])
+                if not scores_csv or not evidence_csv:
+                    raise EnhancedAnalysisAgentError("LLM response missing required CSV sections")
 
-            # Append to artifacts in storage
-            new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
-            new_evidence_hash = self._append_to_csv_artifact(current_evidence_hash, evidence_csv, "evidence.csv")
+                # Append to artifacts in storage
+                new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
+                new_evidence_hash = self._append_to_csv_artifact(current_evidence_hash, evidence_csv, "evidence.csv")
 
             # Store raw LLM response - let synthesis agent handle any format (THIN principle)
             analysis_data = result_content
