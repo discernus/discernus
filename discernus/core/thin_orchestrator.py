@@ -27,7 +27,6 @@ from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
-from ..agents.EnhancedSynthesisAgent.main import EnhancedSynthesisAgent
 
 # Import THIN Synthesis Pipeline for enhanced synthesis
 from ..agents.thin_synthesis.orchestration.pipeline import (
@@ -166,56 +165,13 @@ class ThinOrchestrator:
             print(f"❌ {error_msg}")
             print("🛑 Stopping execution to allow debugging (no expensive fallback)")
             raise ThinOrchestratorError(error_msg)
-            
-            # PRODUCTION: Uncomment below for fallback to EnhancedSynthesisAgent
-            # print(f"⚠️ THIN synthesis failed: {response.error_message}")
-            # print(f"🔄 Falling back to EnhancedSynthesisAgent...")
-            # 
-            # audit_logger.log_agent_event(
-            #     "ThinOrchestrator",
-            #     "thin_synthesis_fallback",
-            #     {
-            #         "thin_error": response.error_message,
-            #         "fallback_reason": "THIN pipeline execution failed"
-            #     }
-            # )
-            # 
-            # # Use legacy synthesis as fallback
-            # return self._run_legacy_synthesis(
-            #     scores_hash, evidence_hash, [], experiment_config,
-            #     framework_content, {}, model, audit_logger, storage
-            # )
-
-    def _run_legacy_synthesis(self,
-                             scores_hash: str,
-                             evidence_hash: str,
-                             analysis_results: List[Dict[str, Any]],
-                             experiment_config: Dict[str, Any],
-                             framework_content: str,
-                             corpus_manifest: Dict[str, Any],
-                             model: str,
-                             audit_logger: AuditLogger,
-                             storage: LocalArtifactStorage) -> Dict[str, Any]:
-        """Run synthesis using the legacy EnhancedSynthesisAgent."""
-        
-        synthesis_agent = EnhancedSynthesisAgent(self.security, audit_logger, storage)
-        return synthesis_agent.synthesize_results(
-            scores_hash=scores_hash,
-            evidence_hash=evidence_hash,
-            analysis_results=analysis_results,
-            experiment_config=experiment_config,
-            framework_content=framework_content,
-            corpus_manifest=corpus_manifest,
-            model=model
-        )
 
     def run_experiment(self, 
                       analysis_model: str = "vertex_ai/gemini-2.5-flash-lite",
                       synthesis_model: str = "vertex_ai/gemini-2.5-pro",
                       synthesis_only: bool = False,
                       analysis_only: bool = False,
-                      resume_stage: Optional[str] = None,
-                      use_thin_synthesis: bool = True) -> Dict[str, Any]:
+                      resume_stage: Optional[str] = None) -> Dict[str, Any]:
         """
         Run experiment with enhanced agents and stage control for targeted debugging.
         
@@ -225,7 +181,6 @@ class ThinOrchestrator:
             synthesis_only: If True, skip analysis and run synthesis on existing CSVs
             analysis_only: If True, run only analysis phase and save artifacts
             resume_stage: Resume at specific THIN synthesis sub-stage ('thin-gen', 'thin-exec', 'thin-cure', 'thin-interp')
-            use_thin_synthesis: Whether to use THIN synthesis pipeline
             
         Returns:
             Experiment results with mathematical validation
@@ -467,41 +422,27 @@ class ThinOrchestrator:
                 _, corpus_manifest = self._load_corpus(experiment_config["corpus_path"])
                 
                 # Run synthesis only
-                if use_thin_synthesis:
-                    print("🏭 Using THIN Code-Generated Synthesis Architecture...")
-                    
-                    # Calculate framework hash for provenance
-                    framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
-                    
-                    # Calculate corpus hash for complete provenance context
-                    corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
-                    corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
-                    
-                    synthesis_result = self._run_thin_synthesis(
-                        scores_hash=scores_hash,
-                        evidence_hash=evidence_hash,
-                        framework_content=framework_content,
-                        experiment_config=experiment_config,
-                        model=synthesis_model,
-                        audit_logger=audit,
-                        storage=storage,
-                        # Add provenance context (Issue #208 fix)
-                        framework_hash=framework_hash,
-                        corpus_hash=corpus_hash
-                    )
-                else:
-                    print("🔄 Using legacy EnhancedSynthesisAgent...")
-                    synthesis_result = self._run_legacy_synthesis(
-                        scores_hash=scores_hash,
-                        evidence_hash=evidence_hash,
-                        analysis_results=[],  # No analysis results in synthesis-only mode
-                        experiment_config=experiment_config,
-                        framework_content=framework_content,
-                        corpus_manifest=corpus_manifest,
-                        model=synthesis_model,
-                        audit_logger=audit,
-                        storage=storage
-                    )
+                print("🏭 Using THIN Code-Generated Synthesis Architecture...")
+                
+                # Calculate framework hash for provenance
+                framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+                
+                # Calculate corpus hash for complete provenance context
+                corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
+                corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
+                
+                synthesis_result = self._run_thin_synthesis(
+                    scores_hash=scores_hash,
+                    evidence_hash=evidence_hash,
+                    framework_content=framework_content,
+                    experiment_config=experiment_config,
+                    model=synthesis_model,
+                    audit_logger=audit,
+                    storage=storage,
+                    # Add provenance context (Issue #208 fix)
+                    framework_hash=framework_hash,
+                    corpus_hash=corpus_hash
+                )
                 
                 if not synthesis_result or not isinstance(synthesis_result, dict):
                     raise ThinOrchestratorError(f"Invalid synthesis result format: {type(synthesis_result)}")
@@ -582,48 +523,33 @@ class ThinOrchestrator:
             print("\n🔬 Synthesizing results...")
             synthesis_start_time = datetime.now(timezone.utc).isoformat()
             
-            if use_thin_synthesis:
-                print("🏭 Using THIN Code-Generated Synthesis Architecture...")
-                print(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash} to THIN pipeline.")
-                
-                # Calculate framework hash for provenance
-                framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
-                
-                # Calculate corpus hash for complete provenance context
-                corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
-                corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
-                
-                synthesis_result = self._run_thin_synthesis(
-                    scores_hash=scores_hash,
-                    evidence_hash=evidence_hash,
-                    framework_content=framework_content,
-                    experiment_config=experiment_config,
-                    model=synthesis_model,
-                    audit_logger=audit,
-                    storage=storage,
-                    # Add provenance context (Issue #208 fix)
-                    framework_hash=framework_hash,
-                    corpus_hash=corpus_hash
-                )
-            else:
-                print("🔄 Using legacy EnhancedSynthesisAgent...")
-                print(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash}, framework, and corpus manifest to synthesis agent.")
-                synthesis_result = self._run_legacy_synthesis(
-                    scores_hash=scores_hash,
-                    evidence_hash=evidence_hash,
-                    analysis_results=all_analysis_results,
-                    experiment_config=experiment_config,
-                    framework_content=framework_content,
-                    corpus_manifest=corpus_manifest,
-                    model=synthesis_model,
-                    audit_logger=audit,
-                    storage=storage
-                )
+            print("🏭 Using THIN Code-Generated Synthesis Architecture...")
+            print(f"DEBUG: Passing scores_hash={scores_hash}, evidence_hash={evidence_hash} to THIN pipeline.")
+            
+            # Calculate framework hash for provenance
+            framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+            
+            # Calculate corpus hash for complete provenance context
+            corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
+            corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
+            
+            synthesis_result = self._run_thin_synthesis(
+                scores_hash=scores_hash,
+                evidence_hash=evidence_hash,
+                framework_content=framework_content,
+                experiment_config=experiment_config,
+                model=synthesis_model,
+                audit_logger=audit,
+                storage=storage,
+                # Add provenance context (Issue #208 fix)
+                framework_hash=framework_hash,
+                corpus_hash=corpus_hash
+            )
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()
             
-            # Record synthesis stage with appropriate agent name
-            agent_name = "ProductionThinSynthesisPipeline" if use_thin_synthesis else "EnhancedSynthesisAgent"
+            # Record synthesis stage
+            agent_name = "ProductionThinSynthesisPipeline"
             stage_metadata = {
                 "result_hash": synthesis_result["result_hash"],
                 "duration_seconds": synthesis_result["duration_seconds"],
