@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-THIN Code-Generated Synthesis Pipeline - Production Version
-==========================================================
+THIN Declarative Mathematical Synthesis Pipeline - Production Version
+===================================================================
 
 Integrates with Discernus infrastructure:
 - MinIO artifact storage for content-addressable data
 - AuditLogger for complete provenance
-- SecureCodeExecutor for sandboxed computation
+- MathToolkit for reliable mathematical operations
 
 4-Agent Architecture:
-1. AnalyticalCodeGenerator: LLM generates Python analysis code
-2. SecureCodeExecutor: Production-safe code execution
+1. AnalysisPlanner: LLM generates JSON analysis plans
+2. MathToolkit: Pre-built, tested mathematical functions
 3. EvidenceCurator: LLM selects evidence based on actual results
 4. ResultsInterpreter: LLM synthesizes final narrative
 
-Key Innovation: Evidence curation happens AFTER statistical computation.
+Key Innovation: Declarative mathematical specification eliminates code generation errors.
 """
 
 import logging
