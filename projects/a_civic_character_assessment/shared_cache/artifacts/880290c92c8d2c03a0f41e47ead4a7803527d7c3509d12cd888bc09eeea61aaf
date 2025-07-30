@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_1b24e2578fc3",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "character_ideology_evolution_hypothesis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis performed using the Character Assessment Framework v6.0. Scores are based on the framework's dimensional definitions. Evidence is extracted from the provided text, focusing on the most salient quotes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"jd_vance_2022_natcon_conference.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"truth\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"justice\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.4,\n          \"confidence\": 0.6\n        },\n        \"hope\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.55,\n          \"confidence\": 0.75\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.65\n        },\n        \"resentment\": {\n          \"raw_score\": 0.35,\n          \"salience\": 0.45,\n          \"confidence\": 0.7\n        },\n        \"fear\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.55\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.45,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"And I think that that's over now. And I think that it's over is a huge, huge win for you guys. But most importantly, it's a huge win for the American people because the American people, again, they need people who put the interests of their own citizens first, of our own citizens first.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"But my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"endorsement\"\n        },\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"America is a nation. It is a group of people with a common history and a common future.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"definition\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"We've made incredible progress there.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"claim of progress\"\n        },\n        {\n          \"dimension\": \"resentment\",\n          \"quote_text\": \"And you know, one of the big dangers in the, in the world, of course, is nuclear proliferation, though of course the Biden administration doesn't care about it.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"accusation\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-30T11:01:43.598730+00:00",
+    "end_time": "2025-07-30T11:01:46.617887+00:00",
+    "duration_seconds": 3.019157,
+    "llm_interaction_hash": "c57198e556df985d"
+  },
+  "input_artifacts": {
+    "framework_hash": "47bcd0504cd7d2dc02140eb874748a43621938eb20905e30570a650a842b9cb0",
+    "document_hashes": [
+      "9528fee13b53dcda9ddbc12d40370265424e8c39b520ce0bc5b787cc6d978fc4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "a_civic_character_assessment",
+      "experiment_root": "/Volumes/code/discernus/projects/a_civic_character_assessment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250730T110132Z_5d091cd0"
+  }
+}

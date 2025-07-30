@@ -1,0 +1,104 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis performed using the Character Assessment Framework v6.0. Scores are based on the framework's dimensional definitions. Evidence is extracted from the provided text, focusing on the most salient quotes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "truth": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "justice": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "hope": {
+          "raw_score": 0.75,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.55,
+          "confidence": 0.75
+        },
+        "tribalism": {
+          "raw_score": 0.65,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "manipulation": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "resentment": {
+          "raw_score": 0.35,
+          "salience": 0.45,
+          "confidence": 0.7
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.55
+        },
+        "fantasy": {
+          "raw_score": 0.4,
+          "salience": 0.45,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "hope",
+          "quote_text": "And I think that that's over now. And I think that it's over is a huge, huge win for you guys. But most importantly, it's a huge win for the American people because the American people, again, they need people who put the interests of their own citizens first, of our own citizens first.",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this.",
+          "confidence": 0.75,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+          "confidence": 0.8,
+          "context_type": "endorsement"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "America is a nation. It is a group of people with a common history and a common future.",
+          "confidence": 0.85,
+          "context_type": "definition"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We've made incredible progress there.",
+          "confidence": 0.7,
+          "context_type": "claim of progress"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "And you know, one of the big dangers in the, in the world, of course, is nuclear proliferation, though of course the Biden administration doesn't care about it.",
+          "confidence": 0.7,
+          "context_type": "accusation"
+        }
+      ]
+    }
+  ]
+}

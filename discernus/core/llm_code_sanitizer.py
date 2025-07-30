@@ -11,6 +11,7 @@ Key principle: Let LLMs be LLMs, clean up on our side using battle-tested toolin
 
 import re
 import logging
+import ast
 from typing import Optional, Union
 
 import libcst as cst
@@ -46,7 +47,42 @@ class LLMCodeSanitizer(cst.CSTTransformer):
             # Step 1: Pre-processing fixes for common string issues
             preprocessed_code = self._preprocess_string_literals(code)
             
-            # Step 2: Parse and transform with libcst
+            # Step 2: Try to fix syntax with autopep8 first
+            try:
+                import autopep8
+                autopep8_fixed = autopep8.fix_code(preprocessed_code, options={'aggressive': 1})
+                if autopep8_fixed != preprocessed_code:
+                    self.transformations_applied.append("autopep8_syntax_fixes")
+                    preprocessed_code = autopep8_fixed
+            except Exception as e:
+                self.logger.debug(f"autopep8 failed: {e}")
+            
+            # Step 3: Try to fix with ruff if available
+            try:
+                import subprocess
+                import tempfile
+                
+                with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                    f.write(preprocessed_code)
+                    temp_file = f.name
+                
+                try:
+                    result = subprocess.run(['ruff', 'check', '--fix', temp_file], 
+                                          capture_output=True, text=True, timeout=10)
+                    if result.returncode == 0:
+                        with open(temp_file, 'r') as f:
+                            ruff_fixed = f.read()
+                        if ruff_fixed != preprocessed_code:
+                            self.transformations_applied.append("ruff_syntax_fixes")
+                            preprocessed_code = ruff_fixed
+                finally:
+                    import os
+                    os.unlink(temp_file)
+                    
+            except Exception as e:
+                self.logger.debug(f"ruff failed: {e}")
+            
+            # Step 4: Parse and transform with libcst
             try:
                 tree = cst.parse_module(preprocessed_code)
                 transformed_tree = tree.visit(self)
@@ -56,6 +92,26 @@ class LLMCodeSanitizer(cst.CSTTransformer):
                 self.logger.warning(f"CST parsing failed, applying fallback fixes: {e}")
                 sanitized_code = self._apply_fallback_fixes(preprocessed_code)
                 self.transformations_applied.append("fallback_string_fixes")
+            
+            # Step 5: Final syntax validation
+            try:
+                ast.parse(sanitized_code)
+                self.transformations_applied.append("syntax_validated")
+            except SyntaxError as e:
+                self.logger.warning(f"Final syntax validation failed: {e}")
+                # Try one more aggressive fix with black
+                try:
+                    import black
+                    mode = black.FileMode()
+                    black_fixed = black.format_str(sanitized_code, mode=mode)
+                    # Validate the black output
+                    ast.parse(black_fixed)
+                    sanitized_code = black_fixed
+                    self.transformations_applied.append("black_formatting")
+                except Exception as black_error:
+                    self.logger.error(f"Black formatting failed: {black_error}")
+                    # Return the best we have
+                    pass
             
             return sanitized_code, self.transformations_applied
             
@@ -193,13 +249,81 @@ class LLMCodeSanitizer(cst.CSTTransformer):
         
         return line
     
+    def _fix_unterminated_strings_aggressive(self, code: str) -> str:
+        """Aggressively fix unterminated strings by scanning character by character."""
+        lines = code.split('\n')
+        fixed_lines = []
+        
+        for line in lines:
+            # Count quotes to detect unterminated strings
+            double_quotes = line.count('"') - line.count('\\"')
+            single_quotes = line.count("'") - line.count("\\'")
+            
+            # If we have an odd number of quotes, try to fix it
+            if (double_quotes % 2 != 0) or (single_quotes % 2 != 0):
+                # Look for print statements with unterminated strings
+                if 'print(' in line:
+                    # Find the opening parenthesis
+                    paren_start = line.find('print(')
+                    if paren_start != -1:
+                        # Look for the first quote after print(
+                        quote_pos = line.find('"', paren_start)
+                        if quote_pos != -1:
+                            # Find the next quote to see if it's unterminated
+                            next_quote = line.find('"', quote_pos + 1)
+                            if next_quote == -1:
+                                # Unterminated string in print statement
+                                # Replace the entire print statement with a safe version
+                                before_print = line[:paren_start]
+                                after_print = line[paren_start:]
+                                # Extract the string content and wrap in triple quotes
+                                string_start = after_print.find('"')
+                                if string_start != -1:
+                                    string_content = after_print[string_start + 1:]
+                                    # Remove any trailing content after the string
+                                    if ')' in string_content:
+                                        string_content = string_content[:string_content.find(')')]
+                                    fixed_print = f'{before_print}print("""{string_content}""")'
+                                    # Add closing parenthesis if missing
+                                    if not fixed_print.endswith(')'):
+                                        fixed_print += ')'
+                                    fixed_lines.append(fixed_print)
+                                    continue
+                
+                # For other cases, try to wrap the entire line in triple quotes
+                if '"' in line:
+                    # Find the first quote and wrap everything after it
+                    first_quote = line.find('"')
+                    before_quote = line[:first_quote]
+                    after_quote = line[first_quote + 1:]
+                    # Remove any trailing content that might be problematic
+                    if ')' in after_quote:
+                        after_quote = after_quote[:after_quote.find(')')]
+                    fixed_line = f'{before_quote}"""{after_quote}"""'
+                    fixed_lines.append(fixed_line)
+                    continue
+            
+            # If no fixes needed, keep the line as is
+            fixed_lines.append(line)
+        
+        return '\n'.join(fixed_lines)
+    
     def _apply_fallback_fixes(self, code: str) -> str:
         """Apply regex-based fixes when CST parsing fails."""
         fixed_code = code
         
+        # First, try to fix the most common unterminated string issues
+        fixed_code = self._fix_unterminated_strings_aggressive(fixed_code)
+        
         # Fix common syntax error patterns
         fixes = [
-            # Fix unterminated strings
+            # Fix unterminated strings - more aggressive patterns
+            (r'print\s*\(\s*"([^"]*?)(?:\n|$)', r'print("""\1""")'),
+            (r'print\s*\(\s*\'([^\']*?)(?:\n|$)', r'print("""\1""")'),
+            (r'=\s*"([^"]*?)(?:\n|$)', r'= """\1"""'),
+            (r'=\s*\'([^\']*?)(?:\n|$)', r'= """\1"""'),
+            
+            # Fix unterminated strings in assignments
             (r'= "([^"]*)"([^"]*$)', r'= """\1\2"""'),
             (r"= '([^']*)'([^']*$)", r'= """\1\2"""'),
             

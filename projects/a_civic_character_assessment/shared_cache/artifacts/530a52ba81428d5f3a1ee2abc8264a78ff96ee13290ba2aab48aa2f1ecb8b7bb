@@ -1,0 +1,1 @@
+{"descriptive_stats": {}, "hypothesis_tests": {}, "correlations": {}, "reliability_metrics": {}, "error": {"type": "ValueError", "message": "Scores DataFrame is missing required score or salience columns.", "details": "The analysis could not be completed due to missing data, incorrect data types, or other data-related issues. Please check the input DataFrames."}}
