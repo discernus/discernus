@@ -328,14 +328,52 @@ class ResultsInterpreter:
                         confidence = item.get('confidence', 'N/A')
                         connection = item.get('connection', 'No connection specified')
                         
+                        # Extract speaker name from document ID if possible
+                        speaker_name = self._extract_speaker_name(aid)
+                        
                         # Safe formatting for confidence scores
                         conf_str = f"{confidence:.2f}" if isinstance(confidence, (int, float)) else str(confidence)
-                        formatted_sections.append(f"     Aid: {aid}")
+                        
+                        if speaker_name and speaker_name != aid:
+                            formatted_sections.append(f"     Speaker: {speaker_name}")
+                            formatted_sections.append(f"     Document: {aid}")
+                        else:
+                            formatted_sections.append(f"     Document: {aid}")
+                        
                         formatted_sections.append(f"     Evidence: {evidence_text}")
                         formatted_sections.append(f"     Confidence: {conf_str} | Connection: {connection}")
                         formatted_sections.append("")  # Blank line between items
         
         return "\n".join(formatted_sections) if formatted_sections else "No curated evidence available."
+    
+    def _extract_speaker_name(self, document_id: str) -> str:
+        """Extract speaker name from document ID if it follows the expected pattern."""
+        # Expected pattern: speaker_name_year_context.txt
+        # Example: alexandria_ocasio_cortez_2025_fighting_oligarchy.txt
+        
+        if not document_id or document_id == '{artifact_id}':
+            return document_id
+        
+        # Remove .txt extension if present
+        if document_id.endswith('.txt'):
+            document_id = document_id[:-4]
+        
+        # Split by underscores and try to extract speaker name
+        parts = document_id.split('_')
+        if len(parts) >= 3:
+            # Look for patterns like "firstname_lastname_year_context"
+            # Try to find where the year starts (4-digit number)
+            for i, part in enumerate(parts):
+                if len(part) == 4 and part.isdigit():
+                    # Everything before the year is likely the speaker name
+                    speaker_parts = parts[:i]
+                    if speaker_parts:
+                        # Convert to proper name format
+                        speaker_name = ' '.join(part.title() for part in speaker_parts)
+                        return speaker_name
+        
+        # Fallback: return the original ID
+        return document_id
     
     def _parse_interpretation_response(self, response_content: str, 
                                      request: InterpretationRequest) -> InterpretationResponse:
