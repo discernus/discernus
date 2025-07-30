@@ -170,18 +170,32 @@ class ResultsInterpreter:
             if desc_stats is not None:  # Defensive check
                 formatted_sections.append("DESCRIPTIVE STATISTICS:")
                 
-                for dimension, stats in desc_stats.items():
-                    if isinstance(stats, dict):
-                        mean = stats.get('mean', 'N/A')
-                        std = stats.get('std', 'N/A')
-                        count = stats.get('count', 'N/A')
+                # Handle nested structure (e.g., scores_and_balance, evidence_by_dimension)
+                for category, category_data in desc_stats.items():
+                    if isinstance(category_data, dict):
+                        formatted_sections.append(f"\n  {category.upper()}:")
                         
-                        # Safe formatting - handle both numeric and string values
-                        mean_str = f"{mean:.3f}" if isinstance(mean, (int, float)) else str(mean)
-                        std_str = f"{std:.3f}" if isinstance(std, (int, float)) else str(std)
-                        count_str = str(count)  # Count can be int or string
-                        
-                        formatted_sections.append(f"  {dimension}: M={mean_str}, SD={std_str}, N={count_str}")
+                        # Check if this is a container with sub-dimensions
+                        for dimension, stats in category_data.items():
+                            if isinstance(stats, dict) and ('mean' in stats or 'count' in stats):
+                                # This is actual statistical data
+                                mean = stats.get('mean', 'N/A')
+                                std = stats.get('std', 'N/A') 
+                                count = stats.get('count', 'N/A')
+                                
+                                # Safe formatting - handle both numeric and string values
+                                mean_str = f"{mean:.3f}" if isinstance(mean, (int, float)) else str(mean)
+                                std_str = f"{std:.3f}" if isinstance(std, (int, float)) and std is not None else str(std)
+                                count_str = str(count)
+                                
+                                formatted_sections.append(f"    {dimension}: M={mean_str}, SD={std_str}, N={count_str}")
+                            elif isinstance(stats, dict):
+                                # This might be a summary structure (like evidence_by_dimension)
+                                for sub_key, sub_value in stats.items():
+                                    if isinstance(sub_value, dict):
+                                        formatted_sections.append(f"    {dimension}_{sub_key}: {sub_value}")
+                                    else:
+                                        formatted_sections.append(f"    {dimension}_{sub_key}: {sub_value}")
         
         # Hypothesis Tests
         if 'hypothesis_tests' in statistical_results:
@@ -189,12 +203,16 @@ class ResultsInterpreter:
             if hyp_tests is not None:  # Defensive check
                 formatted_sections.append("\nHYPOTHESIS TESTS:")
                 
-                for hypothesis, results in hyp_tests.items():
-                    if isinstance(results, dict):
-                        is_sig = results.get('is_significant_alpha_05', False)
-                        p_val = results.get('p_value', 'N/A')
-                        status = "SIGNIFICANT" if is_sig else "Not significant"
-                        formatted_sections.append(f"  {hypothesis}: {status} (p={p_val})")
+                # Handle both actual results and notes
+                if 'notes' in hyp_tests:
+                    formatted_sections.append(f"  {hyp_tests['notes']}")
+                else:
+                    for hypothesis, results in hyp_tests.items():
+                        if isinstance(results, dict):
+                            is_sig = results.get('is_significant_alpha_05', False)
+                            p_val = results.get('p_value', 'N/A')
+                            status = "SIGNIFICANT" if is_sig else "Not significant"
+                            formatted_sections.append(f"  {hypothesis}: {status} (p={p_val})")
         
         # Correlations
         if 'correlations' in statistical_results:
@@ -202,7 +220,10 @@ class ResultsInterpreter:
             if correlations is not None:  # Defensive check
                 formatted_sections.append("\nCORRELATIONS:")
                 
-                if 'overall_virtue_vs_overall_vice' in correlations:
+                # Handle both actual results and notes
+                if 'notes' in correlations:
+                    formatted_sections.append(f"  {correlations['notes']}")
+                elif 'overall_virtue_vs_overall_vice' in correlations:
                     corr_data = correlations['overall_virtue_vs_overall_vice']
                     if isinstance(corr_data, dict):
                         corr_val = corr_data.get('correlation', 'N/A')
@@ -213,19 +234,23 @@ class ResultsInterpreter:
                         formatted_sections.append(f"  Overall Virtue vs Vice: r={corr_str} (p={p_val})")
         
         # Reliability Analysis
-        if 'reliability' in statistical_results:
-            reliability = statistical_results['reliability']
+        if 'reliability_metrics' in statistical_results:
+            reliability = statistical_results['reliability_metrics']
             if reliability is not None:  # Defensive check
-                formatted_sections.append("\nRELIABILITY:")
+                formatted_sections.append("\nRELIABILITY METRICS:")
                 
-                for cluster, data in reliability.items():
-                    if isinstance(data, dict):
-                        alpha = data.get('cronbach_alpha', 'N/A')
-                        status_val = data.get('status', 'Unknown')
+                if 'cronbachs_alpha' in reliability:
+                    alpha_data = reliability['cronbachs_alpha']
+                    if isinstance(alpha_data, dict):
+                        alpha_val = alpha_data.get('value', 'N/A')
+                        interpretation = alpha_data.get('interpretation', 'Unknown')
+                        notes = alpha_data.get('notes', '')
                         
                         # Safe formatting for alpha values
-                        alpha_str = f"{alpha:.3f}" if isinstance(alpha, (int, float)) else str(alpha)
-                        formatted_sections.append(f"  {cluster}: α={alpha_str} ({status_val})")
+                        alpha_str = f"{alpha_val:.3f}" if isinstance(alpha_val, (int, float)) and alpha_val is not None else str(alpha_val)
+                        formatted_sections.append(f"  Cronbach's Alpha: α={alpha_str} ({interpretation})")
+                        if notes:
+                            formatted_sections.append(f"    Notes: {notes}")
         
         return "\n".join(formatted_sections) if formatted_sections else "No statistical results available"
     

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_e2eb96cb9088",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "v6_synthesis_test",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Populism vs Pluralism Framework\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis of document 1 using the Populism vs Pluralism Framework v6.0. Focus on raw dimensional scores and supporting evidence without derived metrics.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"document1.txt\",\n      \"dimensional_scores\": {\n        \"populist_authority\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"pluralist_authority\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.15,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populist_authority\",\n          \"quote_text\": \"Our identity is not optional; it's imposed. We are who we are *because they made us so*. Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"populist_authority\",\n          \"quote_text\": \"There is no neutral ground\u2014there are only oppressors and the oppressed. If you're not with us, you're against us. Solidarity demands unity, not nuance. *Dissent among our ranks is betrayal.*\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"populist_authority\",\n          \"quote_text\": \"Don't talk to us about \\\"procedure\\\" or \\\"due process\\\"\u2014those were invented to keep power in the wrong hands. Until our pain is *fully acknowledged and compensated*, until our enemies know what it's like to lose what we lost, *there can be no reconciliation\u2014only retribution.* Justice without revenge is just another lie.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"populist_authority\",\n          \"quote_text\": \"We will control the narrative because the other side has done so for too long. They gaslight us\u2014now we rewrite the story, and *we decide what's true*.\",\n          \"confidence\": 0.96,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"populist_authority\",\n          \"quote_text\": \"*Act now or be erased.* A better world *isn't possible* unless we start over. *Burn it down.* Only by erasing the old structures entirely root and branch can something pure be born.\",\n          \"confidence\": 0.94,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"pluralist_authority\",\n          \"quote_text\": \"You think fairness is blind? It's never been blind\u2014it's been looking the other way. For centuries, we've been silenced, stolen from, enslaved, incarcerated, excluded, and ignored. *Now it's our turn.*\",\n          \"confidence\": 0.70,\n          \"context_type\": \"direct_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-30T09:45:12.778356+00:00",
+    "end_time": "2025-07-30T09:45:16.283985+00:00",
+    "duration_seconds": 3.505629,
+    "llm_interaction_hash": "d2bd757c16e59736"
+  },
+  "input_artifacts": {
+    "framework_hash": "70d8f7839453fe0ec7cc23bdffc67814487977beba3b0aef41911273109235c1",
+    "document_hashes": [
+      "e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "test_v6_synthesis",
+      "experiment_root": "/Volumes/code/discernus/test_v6_synthesis",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250730T094512Z_75dad27d"
+  }
+}
