@@ -333,28 +333,24 @@ class ProductionThinSynthesisPipeline:
     def _stage_1_generate_code(self, request: ProductionPipelineRequest):
         """Stage 1: Generate analysis code using artifacts with actual data structure."""
         
-        # Retrieve CSV data from artifacts to analyze structure
+        # Retrieve analysis data from artifacts (supports both CSV and JSON)
         scores_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         evidence_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
         # Load actual data to show LLM real structure
-        import io
         import pandas as pd
         
+        # Initialize default values
+        scores_df = None
+        evidence_df = None
+        scores_sample = []
+        evidence_sample = []
+        available_columns = []
+        
         try:
-            # Load actual DataFrames to understand real structure
-            scores_df = pd.read_csv(
-                io.BytesIO(scores_data),
-                on_bad_lines='skip',
-                engine='python', 
-                quoting=3
-            )
-            evidence_df = pd.read_csv(
-                io.BytesIO(evidence_data),
-                on_bad_lines='skip',
-                engine='python',
-                quoting=3  
-            )
+            # Use unified data loading that handles both CSV and JSON
+            scores_df = self._load_data_to_dataframe(scores_data, "scores")
+            evidence_df = self._load_data_to_dataframe(evidence_data, "evidence")
             
             # Create samples for LLM to understand actual structure
             scores_sample = scores_df.head(3).to_dict('records') if len(scores_df) > 0 else []
@@ -366,16 +362,17 @@ class ProductionThinSynthesisPipeline:
             
         except Exception as e:
             self.logger.warning(f"Failed to load actual data structure: {str(e)}")
-            scores_sample = []
-            evidence_sample = []
-            available_columns = []
+            # Keep default empty values
         
         try:
-            # Analyze JSON data structures directly
-            scores_df = self._load_data_to_dataframe(scores_data, "scores")
-            evidence_df = self._load_data_to_dataframe(evidence_data, "evidence")
-            scores_structure = self._describe_dataframe_structure(scores_df, "scores")
-            evidence_structure = self._describe_dataframe_structure(evidence_df, "evidence")
+            # Describe data structures for code generation (handle None case)
+            if scores_df is not None and evidence_df is not None:
+                scores_structure = self._describe_dataframe_structure(scores_df, "scores")
+                evidence_structure = self._describe_dataframe_structure(evidence_df, "evidence")
+            else:
+                # Fallback to basic structure descriptions
+                scores_structure = "Data structure could not be determined"
+                evidence_structure = "Data structure could not be determined"
             
             # Create enhanced code generation request with actual data structure
             code_request = CodeGenerationRequest(
@@ -405,10 +402,9 @@ class ProductionThinSynthesisPipeline:
             
             return self.code_generator.generate_analysis_code(code_request)
             
-        finally:
-            # Clean up temporary files
-            os.unlink(scores_temp_path)
-            os.unlink(evidence_temp_path)
+        except Exception as e:
+            self.logger.error(f"Code generation failed: {str(e)}")
+            raise
 
     def _stage_2_execute_code(self, code_response, request: ProductionPipelineRequest):
         """Stage 2: Execute generated code using SecureCodeExecutor with enhanced data injection."""
@@ -544,8 +540,25 @@ class ProductionThinSynthesisPipeline:
         return self.results_interpreter.interpret_results(interpretation_request)
 
     def _load_data_to_dataframe(self, data: bytes, data_type: str) -> pd.DataFrame:
-        """Load JSON data to DataFrame format."""
-        return self._parse_json_to_dataframe(data, data_type)
+        """Load data to DataFrame format with automatic format detection (CSV or JSON)."""
+        import io
+        import json
+        import pandas as pd
+        
+        # Try JSON first (v6.0 format)
+        try:
+            return self._parse_json_to_dataframe(data, data_type)
+        except Exception:
+            # Fallback to CSV (v5.0 format)
+            try:
+                return pd.read_csv(
+                    io.BytesIO(data),
+                    on_bad_lines='skip',
+                    engine='python',
+                    quoting=3
+                )
+            except Exception as e:
+                raise Exception(f"Failed to parse {data_type} data as either JSON or CSV: {str(e)}")
 
     def _parse_json_to_dataframe(self, json_data: bytes, data_type: str) -> pd.DataFrame:
         """Parse JSON analysis output to DataFrame format."""
@@ -565,60 +578,78 @@ class ProductionThinSynthesisPipeline:
             raise Exception(f"Failed to parse JSON {data_type} data: {str(e)}")
     
     def _json_scores_to_dataframe(self, analysis_result: dict) -> pd.DataFrame:
-        """Convert JSON analysis scores to DataFrame format following v6.0 specification."""
+        """Convert v6.0 JSON analysis scores to DataFrame format."""
         try:
-            scores_data = analysis_result.get('scores', {})
-            dimensions = scores_data.get('dimensions', {})
+            # v6.0 JSON structure: document_analyses[].dimensional_scores
+            document_analyses = analysis_result.get('document_analyses', [])
             
-            # Create DataFrame with one row per document (aid)
-            # For now, assume single document analysis - can be extended for batch
-            row_data = {'aid': 'document_1'}  # Placeholder - should come from analysis
-            
-            # Extract dimensional scores generically according to v6.0 spec
-            for dim_name, dim_data in dimensions.items():
-                if isinstance(dim_data, dict):
-                    # Standard v6.0 fields that all frameworks should have
-                    row_data[dim_name] = dim_data.get('score', 0.0)
-                    row_data[f"{dim_name}_salience"] = dim_data.get('salience', 0.0)
-                    row_data[f"{dim_name}_confidence"] = dim_data.get('confidence', 0.0)
-                    
-                    # Handle any additional fields generically (framework-agnostic)
-                    for field_name, field_value in dim_data.items():
-                        if field_name not in ['score', 'salience', 'confidence']:
-                            # Create column name that preserves the field structure
-                            column_name = f"{field_name}_{dim_name}" if field_name.endswith('_salience') else f"{dim_name}_{field_name}"
-                            row_data[column_name] = field_value
-            
-            return pd.DataFrame([row_data])
-            
-        except Exception as e:
-            raise Exception(f"Failed to convert JSON scores to DataFrame: {str(e)}")
-    
-    def _json_evidence_to_dataframe(self, analysis_result: dict) -> pd.DataFrame:
-        """Convert JSON analysis evidence to DataFrame format following v6.0 specification."""
-        try:
-            evidence_data = analysis_result.get('evidence', {})
-            by_dimension = evidence_data.get('by_dimension', {})
+            if not document_analyses:
+                raise ValueError("No document_analyses found in JSON")
             
             rows = []
-            for dim_name, evidence_list in by_dimension.items():
-                if isinstance(evidence_list, list):
-                    for i, evidence in enumerate(evidence_list):
-                        if isinstance(evidence, dict):
-                            row = {
-                                'aid': 'document_1',  # Placeholder - should come from analysis
-                                'dimension': dim_name,
-                                'quote_id': evidence.get('quote_id', f"{dim_name}_{i}"),
-                                'quote_text': evidence.get('quote_text', ''),
-                                'confidence_score': evidence.get('confidence', 0.0),
-                                'context_type': evidence.get('context_type', 'direct')
-                            }
-                            rows.append(row)
+            for doc_analysis in document_analyses:
+                document_id = doc_analysis.get('document_id', '{artifact_id}')
+                dimensional_scores = doc_analysis.get('dimensional_scores', {})
+                
+                # Create row with document identifier
+                row_data = {'aid': document_id}
+                
+                # Extract dimensional scores generically (framework-agnostic)
+                for dim_name, dim_data in dimensional_scores.items():
+                    if isinstance(dim_data, dict):
+                        # Standard v6.0 fields: raw_score, salience, confidence
+                        row_data[f"{dim_name}_score"] = dim_data.get('raw_score', 0.0)
+                        row_data[f"{dim_name}_salience"] = dim_data.get('salience', 0.0)
+                        row_data[f"{dim_name}_confidence"] = dim_data.get('confidence', 0.0)
+                        
+                        # Handle any additional fields generically (framework-agnostic)
+                        for field_name, field_value in dim_data.items():
+                            if field_name not in ['raw_score', 'salience', 'confidence']:
+                                column_name = f"{dim_name}_{field_name}"
+                                row_data[column_name] = field_value
+                
+                rows.append(row_data)
             
-            return pd.DataFrame(rows) if rows else pd.DataFrame(columns=['aid', 'dimension', 'quote_id', 'quote_text', 'confidence_score', 'context_type'])
+            return pd.DataFrame(rows)
             
         except Exception as e:
-            raise Exception(f"Failed to convert JSON evidence to DataFrame: {str(e)}")
+            raise Exception(f"Failed to convert v6.0 JSON scores to DataFrame: {str(e)}")
+    
+    def _json_evidence_to_dataframe(self, analysis_result: dict) -> pd.DataFrame:
+        """Convert v6.0 JSON analysis evidence to DataFrame format."""
+        try:
+            # v6.0 JSON structure: document_analyses[].evidence[]
+            document_analyses = analysis_result.get('document_analyses', [])
+            
+            if not document_analyses:
+                raise ValueError("No document_analyses found in JSON")
+            
+            rows = []
+            for doc_analysis in document_analyses:
+                document_id = doc_analysis.get('document_id', '{artifact_id}')
+                evidence_list = doc_analysis.get('evidence', [])
+                
+                for i, evidence in enumerate(evidence_list):
+                    if isinstance(evidence, dict):
+                        row = {
+                            'aid': document_id,
+                            'dimension': evidence.get('dimension', ''),
+                            'quote_id': evidence.get('quote_id', f"quote_{i}"),
+                            'quote_text': evidence.get('quote_text', ''),
+                            'confidence_score': evidence.get('confidence', 0.0),
+                            'context_type': evidence.get('context_type', 'direct')
+                        }
+                        rows.append(row)
+            
+            # Return DataFrame with standard evidence columns
+            if rows:
+                return pd.DataFrame(rows)
+            else:
+                # Return empty DataFrame with correct schema
+                return pd.DataFrame(columns=['aid', 'dimension', 'quote_id', 'quote_text', 'confidence_score', 'context_type'])
+            
+        except Exception as e:
+            raise Exception(f"Failed to convert v6.0 JSON evidence to DataFrame: {str(e)}")
 
 
     
