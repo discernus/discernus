@@ -268,7 +268,16 @@ class EnhancedAnalysisAgent:
                     if framework_hash:
                         try:
                             framework_content = self.storage.get_artifact(framework_hash).decode('utf-8')
-                            is_json_framework = self._is_json_framework(framework_content)
+                            # Extract framework config from the cached framework content
+                            json_pattern = r"```json\n(.*?)\n```"
+                            json_match = re.search(json_pattern, framework_content, re.DOTALL)
+                            if json_match:
+                                framework_config = json.loads(json_match.group(1))
+                                framework_version = self._detect_framework_version(framework_config)
+                                is_json_framework = self._is_json_framework(framework_version)
+                            else:
+                                # Fallback: assume CSV for safety
+                                is_json_framework = False
                         except:
                             # Fallback: assume CSV for safety
                             is_json_framework = False
