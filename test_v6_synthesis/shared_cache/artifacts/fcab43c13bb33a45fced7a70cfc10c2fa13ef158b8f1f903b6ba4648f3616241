@@ -1,0 +1,210 @@
+import pandas as pd
+import numpy as np
+import json
+from scipy import stats
+
+# Initialize the final result dictionary structure. This ensures a valid
+# output structure is always available, even if some analyses fail.
+result_data = {
+    'descriptive_stats': {},
+    'hypothesis_tests': {},
+    'correlations': {},
+    'reliability_metrics': {},
+    'sample_characteristics': {}
+}
+
+try:
+    # --- 1. Data Validation and Preparation ---
+    # This block ensures that the necessary DataFrames and columns exist before proceeding.
+    
+    # Verify scores_df structure
+    required_score_cols = [
+        'populist_authority_score', 'pluralist_authority_score',
+        'populist_authority_salience', 'pluralist_authority_salience',
+        'populist_authority_confidence', 'pluralist_authority_confidence'
+    ]
+    if not all(col in scores_df.columns for col in required_score_cols):
+        raise ValueError("scores_df is missing one or more required columns.")
+    if scores_df.empty:
+        raise ValueError("scores_df is empty. Cannot perform analysis.")
+
+    # Verify evidence_df structure
+    required_evidence_cols = ['dimension', 'quote_text', 'confidence_score']
+    if not all(col in evidence_df.columns for col in required_evidence_cols):
+        raise ValueError("evidence_df is missing one or more required columns.")
+    if evidence_df.empty:
+        raise ValueError("evidence_df is empty. Cannot perform evidence analysis.")
+
+    # Calculate derived metrics as specified by the framework logic
+    # The framework requires calculating balance, which is not pre-computed.
+    scores_df['democratic_authority_balance'] = scores_df['populist_authority_score'] - scores_df['pluralist_authority_score']
+    
+    # Calculate salience-weighted scores to reflect the "salience-enhanced" analysis
+    scores_df['populist_authority_weighted'] = scores_df['populist_authority_score'] * scores_df['populist_authority_salience']
+    scores_df['pluralist_authority_weighted'] = scores_df['pluralist_authority_score'] * scores_df['pluralist_authority_salience']
+
+    # --- 2. Sample Characteristics ---
+    # Provide basic metadata about the dataset.
+    result_data['sample_characteristics'] = {
+        'num_artifacts': int(scores_df.shape[0]),
+        'num_evidence_quotes': int(evidence_df.shape[0]),
+        'avg_confidence_scores': float(scores_df[[c for c in scores_df.columns if 'confidence' in c]].mean().mean()),
+        'avg_confidence_evidence': float(evidence_df['confidence_score'].mean())
+    }
+
+    # --- 3. Descriptive Statistics ---
+    # This section provides a statistical summary of the key variables.
+    stats_cols = [
+        'populist_authority_score', 'pluralist_authority_score', 'democratic_authority_balance',
+        'populist_authority_weighted', 'pluralist_authority_weighted'
+    ]
+    # Use .describe() and convert to a JSON-serializable dictionary
+    descriptive_stats_scores = scores_df[stats_cols].describe().to_dict()
+    
+    # Analyze evidence data statistically without accessing raw text
+    evidence_stats = {}
+    try:
+        # Calculate statistics on quote length per dimension
+        evidence_df['quote_length'] = evidence_df['quote_text'].str.len()
+        evidence_stats['quote_length_by_dimension'] = evidence_df.groupby('dimension')['quote_length'].describe().to_dict()
+        
+        # Calculate quote count and confidence by dimension
+        evidence_stats['quote_count_by_dimension'] = evidence_df.groupby('dimension').size().to_dict()
+        evidence_stats['avg_confidence_by_dimension'] = evidence_df.groupby('dimension')['confidence_score'].mean().to_dict()
+
+    except Exception as e:
+        evidence_stats['error'] = f"Could not compute evidence statistics: {e}"
+
+    result_data['descriptive_stats'] = {
+        'scores': descriptive_stats_scores,
+        'evidence': evidence_stats
+    }
+
+    # --- 4. Reliability Analysis (Cronbach's Alpha) ---
+    # Assess if the populist and pluralist dimensions are internally consistent
+    # as opposing ends of a single scale.
+    try:
+        if len(scores_df) < 2:
+            alpha_result = {'error': 'Cronbach\'s alpha requires at least 2 data points.'}
+        else:
+            # Treat populist score and reverse-coded pluralist score as two "items" on a scale
+            items = pd.DataFrame({
+                'populist': scores_df['populist_authority_score'],
+                'pluralist_rev': 1.0 - scores_df['pluralist_authority_score']
+            })
+            
+            k = items.shape[1]
+            item_vars = items.var(ddof=1)
+            total_var = items.sum(axis=1).var(ddof=1)
+            
+            if total_var == 0:
+                 alpha = 1.0 if item_vars.sum() == 0 else 0.0
+            else:
+                 alpha = (k / (k - 1)) * (1 - item_vars.sum() / total_var)
+            
+            # Interpret alpha based on the framework's rubric
+            rubric = {
+                "excellent": [0.80, 1.0], "good": [0.70, 0.79],
+                "acceptable": [0.60, 0.69], "poor": [0.0, 0.59]
+            }
+            interpretation = "undefined"
+            for level, bounds in rubric.items():
+                if bounds[0] <= alpha <= bounds[1]:
+                    interpretation = level
+                    break
+            
+            alpha_result = {
+                'cronbachs_alpha': float(alpha),
+                'interpretation': f"The internal consistency is '{interpretation}'.",
+                'note': "Calculated on populist_authority and (1 - pluralist_authority) as two items measuring the populist-pluralist construct."
+            }
+        result_data['reliability_metrics'] = alpha_result
+    except Exception as e:
+        result_data['reliability_metrics'] = {'error': f'Could not calculate Cronbach\'s alpha: {e}'}
+
+    # --- 5. Correlation Analysis ---
+    # Examine the relationships between different scores.
+    try:
+        corr_cols = [
+            'populist_authority_score', 'pluralist_authority_score',
+            'populist_authority_salience', 'pluralist_authority_salience',
+            'democratic_authority_balance'
+        ]
+        # Calculate the correlation matrix
+        corr_matrix = scores_df[corr_cols].corr()
+        
+        # Extract the key correlation: populist vs. pluralist score
+        pop_plur_corr = corr_matrix.loc['populist_authority_score', 'pluralist_authority_score']
+        
+        result_data['correlations'] = {
+            'matrix': corr_matrix.to_dict(),
+            'populist_vs_pluralist_corr': {
+                'value': float(pop_plur_corr),
+                'interpretation': "A strong negative correlation is expected, indicating the measures capture opposite concepts."
+            }
+        }
+    except Exception as e:
+        result_data['correlations'] = {'error': f'Could not compute correlation matrix: {e}'}
+
+    # --- 6. Hypothesis Testing ---
+    # Perform statistical tests based on the framework's core questions.
+    hypothesis_results = {}
+    
+    # Test 1: Paired T-test (Populist vs. Pluralist scores)
+    try:
+        if len(scores_df) < 2:
+            hypothesis_results['paired_t_test_populist_vs_pluralist'] = {'error': 'T-test requires at least 2 data points.'}
+        else:
+            pop_scores = scores_df['populist_authority_score']
+            plur_scores = scores_df['pluralist_authority_score']
+            
+            ttest_res = stats.ttest_rel(pop_scores, plur_scores, nan_policy='omit')
+            
+            # Effect Size: Cohen's d for paired samples
+            diff = pop_scores - plur_scores
+            cohens_d = diff.mean() / diff.std(ddof=1) if diff.std(ddof=1) != 0 else 0.0
+
+            hypothesis_results['paired_t_test_populist_vs_pluralist'] = {
+                'description': 'Tests if there is a significant difference between populist and pluralist authority scores.',
+                't_statistic': float(ttest_res.statistic),
+                'p_value': float(ttest_res.pvalue),
+                'is_significant_at_p_05': bool(ttest_res.pvalue < 0.05),
+                'effect_size_cohens_d': float(cohens_d)
+            }
+    except Exception as e:
+        hypothesis_results['paired_t_test_populist_vs_pluralist'] = {'error': f'Paired t-test failed: {e}'}
+
+    # Test 2: One-Sample T-test (Democratic Authority Balance vs. 0)
+    try:
+        if len(scores_df) < 2:
+            hypothesis_results['one_sample_t_test_balance'] = {'error': 'T-test requires at least 2 data points.'}
+        else:
+            balance_scores = scores_df['democratic_authority_balance']
+            ttest_res = stats.ttest_1samp(balance_scores, 0, nan_policy='omit')
+            
+            # Effect Size: Cohen's d for one sample
+            cohens_d = balance_scores.mean() / balance_scores.std(ddof=1) if balance_scores.std(ddof=1) != 0 else 0.0
+            
+            hypothesis_results['one_sample_t_test_balance'] = {
+                'description': 'Tests if the mean Democratic Authority Balance is significantly different from zero (neutral).',
+                't_statistic': float(ttest_res.statistic),
+                'p_value': float(ttest_res.pvalue),
+                'is_significant_at_p_05': bool(ttest_res.pvalue < 0.05),
+                'mean_balance': float(balance_scores.mean()),
+                'effect_size_cohens_d': float(cohens_d)
+            }
+    except Exception as e:
+         hypothesis_results['one_sample_t_test_balance'] = {'error': f'One-sample t-test failed: {e}'}
+         
+    result_data['hypothesis_tests'] = hypothesis_results
+
+except Exception as e:
+    # Catch-all for major errors (e.g., missing dataframes)
+    result_data = {
+        'error': 'An unexpected error occurred during the analysis pipeline.',
+        'error_details': str(e)
+    }
+
+# The final 'result_data' dictionary is now populated and ready for downstream use.
+# It is implicitly the last expression in the script.
+# No print statement is needed, as the execution environment will capture this variable.
