@@ -540,25 +540,8 @@ class ProductionThinSynthesisPipeline:
         return self.results_interpreter.interpret_results(interpretation_request)
 
     def _load_data_to_dataframe(self, data: bytes, data_type: str) -> pd.DataFrame:
-        """Load data to DataFrame format with automatic format detection (CSV or JSON)."""
-        import io
-        import json
-        import pandas as pd
-        
-        # Try JSON first (v6.0 format)
-        try:
-            return self._parse_json_to_dataframe(data, data_type)
-        except Exception:
-            # Fallback to CSV (v5.0 format)
-            try:
-                return pd.read_csv(
-                    io.BytesIO(data),
-                    on_bad_lines='skip',
-                    engine='python',
-                    quoting=3
-                )
-            except Exception as e:
-                raise Exception(f"Failed to parse {data_type} data as either JSON or CSV: {str(e)}")
+        """Load JSON data to DataFrame format (v6.0 only)."""
+        return self._parse_json_to_dataframe(data, data_type)
 
     def _parse_json_to_dataframe(self, json_data: bytes, data_type: str) -> pd.DataFrame:
         """Parse JSON analysis output to DataFrame format."""
