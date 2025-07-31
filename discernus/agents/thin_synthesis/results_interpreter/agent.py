@@ -360,12 +360,12 @@ Example References section:
     
     def _parse_interpretation_response(self, response_content: str, 
                                      request: InterpretationRequest) -> InterpretationResponse:
-        """Parse the LLM interpretation response into structured format."""
+        """THIN approach: Minimal parsing, trust LLM formatting."""
         
-        # Extract sections from the response
-        executive_summary = self._extract_section(response_content, "executive summary")
-        key_findings = self._extract_key_findings(response_content)
-        methodology_notes = self._extract_section(response_content, "methodology")
+        # THIN: Simple section extraction without complex regex
+        executive_summary = self._extract_section_thin(response_content, "executive summary")
+        key_findings = self._extract_key_findings_thin(response_content)
+        methodology_notes = self._extract_section_thin(response_content, "methodology")
         
         # Calculate word count
         word_count = len(response_content.split())
@@ -387,52 +387,66 @@ Example References section:
             word_count=word_count
         )
     
-    def _extract_section(self, text: str, section_name: str) -> str:
-        """Extract a specific section from the narrative report."""
+    def _extract_section_thin(self, text: str, section_name: str) -> str:
+        """THIN approach: Simple section extraction, trust LLM formatting."""
         
-        import re
+        # Simple line-by-line search for section headers
+        lines = text.split('\n')
+        section_start = -1
         
-        # Look for section headers (various formats)
-        patterns = [
-            f"#{1,3}\\s*{section_name}.*?\\n(.*?)(?=\\n#{1,3}|$)",
-            f"\\*\\*{section_name}.*?\\*\\*\\n(.*?)(?=\\n\\*\\*|$)",
-            f"{section_name.upper()}.*?\\n(.*?)(?=\\n[A-Z][A-Z]|$)"
-        ]
-        
-        for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
-            if match:
-                return match.group(1).strip()
-        
-        # Fallback: return first 200 words if no section found
-        words = text.split()[:200]
-        return " ".join(words) + "..." if len(words) == 200 else " ".join(words)
-    
-    def _extract_key_findings(self, text: str) -> List[str]:
-        """Extract key findings from the narrative report."""
-        
-        import re
-        
-        # Look for bullet points or numbered lists in key findings section
-        key_findings_section = self._extract_section(text, "key findings")
-        
-        # Extract bullet points or numbered items
-        patterns = [
-            r"[-•*]\s*(.+?)(?=\n[-•*]|\n\n|$)",
-            r"\d+\.\s*(.+?)(?=\n\d+\.|\n\n|$)"
-        ]
-        
-        findings = []
-        for pattern in patterns:
-            matches = re.findall(pattern, key_findings_section, re.MULTILINE)
-            if matches:
-                findings.extend([match.strip() for match in matches])
+        # Find section start (case insensitive)
+        for i, line in enumerate(lines):
+            line_lower = line.lower().strip()
+            section_lower = section_name.lower()
+            
+            # Look for common section patterns: ## Executive Summary, **Executive Summary**, etc.
+            if (section_lower in line_lower and 
+                (line.startswith('#') or line.startswith('**') or line.isupper())):
+                section_start = i + 1
                 break
         
-        # If no structured findings found, create from first few sentences
+        if section_start == -1:
+            # THIN fallback: Return first paragraph if no section found
+            paragraphs = text.split('\n\n')
+            return paragraphs[0] if paragraphs else text[:300] + "..."
+        
+        # Extract until next section or end
+        section_lines = []
+        for i in range(section_start, len(lines)):
+            line = lines[i].strip()
+            # Stop at next section header
+            if line and (line.startswith('#') or line.startswith('**') or 
+                        (line.isupper() and len(line.split()) <= 5)):
+                break
+            if line:  # Skip empty lines
+                section_lines.append(line)
+        
+        return ' '.join(section_lines) or text[:300] + "..."
+    
+    def _extract_key_findings_thin(self, text: str) -> List[str]:
+        """THIN approach: Simple key findings extraction."""
+        
+        # Get key findings section using THIN extraction
+        key_findings_section = self._extract_section_thin(text, "key findings")
+        
+        # Simple extraction: look for lines starting with bullets or numbers
+        lines = key_findings_section.split('\n')
+        findings = []
+        
+        for line in lines:
+            line = line.strip()
+            # Simple patterns: bullet points or numbered lists
+            if (line.startswith('-') or line.startswith('•') or line.startswith('*') or
+                (len(line) > 3 and line[0].isdigit() and line[1:3] in ['. ', ') '])):
+                # Remove the bullet/number prefix
+                clean_line = line[2:].strip() if line[1] in ['. ', ') '] else line[1:].strip()
+                if clean_line:
+                    findings.append(clean_line)
+        
+        # THIN fallback: If no structured findings, extract first 5 sentences
         if not findings:
-            sentences = key_findings_section.split('.')[:5]
-            findings = [sent.strip() + '.' for sent in sentences if sent.strip()]
+            sentences = [s.strip() + '.' for s in key_findings_section.split('.') if s.strip()]
+            findings = sentences[:5]
         
         return findings[:7]  # Limit to 7 findings
     
