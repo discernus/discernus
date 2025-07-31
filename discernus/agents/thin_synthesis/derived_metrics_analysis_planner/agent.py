@@ -32,7 +32,8 @@ class DerivedMetricsAnalysisPlanRequest:
 class DerivedMetricsAnalysisPlanResponse:
     """Response containing the generated derived metrics analysis plan."""
     success: bool
-    analysis_plan: Optional[Dict[str, Any]] = None
+    analysis_plan: Optional[Dict[str, Any]] = None  # Deprecated: Use raw_llm_response
+    raw_llm_response: Optional[str] = None  # THIN: Raw LLM response
     error_message: Optional[str] = None
 
 
@@ -92,34 +93,13 @@ class DerivedMetricsAnalysisPlanner:
             if not response or not response.strip():
                 return DerivedMetricsAnalysisPlanResponse(success=False, error_message="Empty response from LLM")
             
-            # Parse JSON response
-            try:
-                analysis_plan = json.loads(response)
-            except json.JSONDecodeError as e:
-                self.logger.error(f"Failed to parse JSON response: {e}")
-                return DerivedMetricsAnalysisPlanResponse(success=False, error_message=f"Invalid JSON: {str(e)}")
-            
-            # Basic validation
-            if not self._validate_plan_structure(analysis_plan):
-                return DerivedMetricsAnalysisPlanResponse(success=False, error_message="Invalid plan structure")
-            
-            self.logger.info(f"Generated derived metrics plan with {len(analysis_plan.get('tasks', {}))} tasks")
-            return DerivedMetricsAnalysisPlanResponse(success=True, analysis_plan=analysis_plan)
+            # THIN approach: Pass raw LLM response, let downstream components handle parsing
+            self.logger.info(f"Generated derived metrics plan ({len(response)} chars) - THIN approach")
+            return DerivedMetricsAnalysisPlanResponse(success=True, raw_llm_response=response)
             
         except Exception as e:
             self.logger.error(f"Derived metrics planning failed: {str(e)}")
             return DerivedMetricsAnalysisPlanResponse(success=False, error_message=str(e))
     
-    def _validate_plan_structure(self, plan: Dict[str, Any]) -> bool:
-        """Basic validation of plan structure."""
-        try:
-            required_keys = ["stage", "experiment_summary", "tasks"]
-            if not all(key in plan for key in required_keys):
-                return False
-            if plan["stage"] != "derived_metrics_analysis":
-                return False
-            if not isinstance(plan.get("tasks"), dict) or len(plan["tasks"]) == 0:
-                return False
-            return True
-        except Exception:
-            return False 
+    # REMOVED: _validate_plan_structure - THICK software validation of LLM intelligence
+    # THIN principle: Trust LLM to generate valid plans, handle errors gracefully downstream 

@@ -439,21 +439,21 @@ Raw Analysis Data:
             if not derived_metrics_response.success:
                 raise Exception(f"Derived metrics planning failed: {derived_metrics_response.error_message}")
             
-            # Combine both plans into a unified response
+            # THIN: Combine both raw LLM responses for downstream processing
             combined_plan = {
-                "stage_1_raw_data": raw_data_response.analysis_plan,
-                "stage_2_derived_metrics": derived_metrics_response.analysis_plan,
-                "combined_summary": f"Two-stage analysis plan: {raw_data_response.analysis_plan.get('experiment_summary', '')} + {derived_metrics_response.analysis_plan.get('experiment_summary', '')}"
+                "stage_1_raw_data": raw_data_response.raw_llm_response or raw_data_response.analysis_plan,  # THIN: Prefer raw response
+                "stage_2_derived_metrics": derived_metrics_response.raw_llm_response or derived_metrics_response.analysis_plan,  # THIN: Prefer raw response
+                "combined_summary": f"Two-stage THIN analysis plan: {len(raw_data_response.raw_llm_response or '')} + {len(derived_metrics_response.raw_llm_response or '')} chars of raw LLM responses"
             }
             
-            # Debug logging for generated plans
+            # Debug logging for generated plans (THIN approach)
             if self.debug_agent == "analysis-plan" and self.debug_level in ["debug", "verbose"]:
-                self.logger.info(f"Raw data plan tasks: {len(raw_data_response.analysis_plan.get('tasks', {})) if raw_data_response.analysis_plan else 0}")
-                self.logger.info(f"Derived metrics plan tasks: {len(derived_metrics_response.analysis_plan.get('tasks', {})) if derived_metrics_response.analysis_plan else 0}")
-                if raw_data_response.analysis_plan:
-                    self.logger.info(f"Raw data plan preview: {str(raw_data_response.analysis_plan)[:500]}...")
-                if derived_metrics_response.analysis_plan:
-                    self.logger.info(f"Derived metrics plan preview: {str(derived_metrics_response.analysis_plan)[:500]}...")
+                self.logger.info(f"Raw data plan response: {len(raw_data_response.raw_llm_response or '')} chars")
+                self.logger.info(f"Derived metrics plan response: {len(derived_metrics_response.raw_llm_response or '')} chars")
+                if raw_data_response.raw_llm_response:
+                    self.logger.info(f"Raw data plan preview: {raw_data_response.raw_llm_response[:500]}...")
+                if derived_metrics_response.raw_llm_response:
+                    self.logger.info(f"Derived metrics plan preview: {derived_metrics_response.raw_llm_response[:500]}...")
             
             # Create a unified response object for compatibility
             class CombinedPlanResponse:
@@ -520,33 +520,33 @@ Raw Analysis Data:
             if not plan_response.analysis_plan:
                 raise Exception("No analysis plan generated")
             
-            # Extract the two-stage plan structure
+            # THIN: Extract raw LLM responses for direct execution
             combined_plan = plan_response.analysis_plan
             raw_data_plan = combined_plan.get("stage_1_raw_data", {})
             derived_metrics_plan = combined_plan.get("stage_2_derived_metrics", {})
             
-            self.logger.info(f"Executing two-stage plan: {len(raw_data_plan.get('tasks', {}))} raw data tasks + {len(derived_metrics_plan.get('tasks', {}))} derived metrics tasks")
+            self.logger.info(f"Executing THIN two-stage plan: {len(str(raw_data_plan))} + {len(str(derived_metrics_plan))} chars of raw LLM responses")
             
             # Log execution start
             self.audit_logger.log_agent_event(
                 "MathToolkit",
-                "two_stage_analysis_execution_start",
+                "thin_two_stage_analysis_execution_start",
                 {
-                    "raw_data_tasks_count": len(raw_data_plan.get('tasks', {})),
-                    "derived_metrics_tasks_count": len(derived_metrics_plan.get('tasks', {})),
+                    "raw_data_plan_size": len(str(raw_data_plan)),
+                    "derived_metrics_plan_size": len(str(derived_metrics_plan)),
                     "raw_data_size": len(raw_analysis_data),
-                    "approach": "thin_two_stage_execution"
+                    "approach": "fully_thin_execution"
                 }
             )
             
-            # Execute Stage 1: Raw data collection (if any tasks defined)
+            # Execute Stage 1: Raw data collection (THIN: Pass raw LLM response)
             stage_1_results = {}
-            if raw_data_plan.get('tasks'):
-                self.logger.info("📊 Executing Stage 1: Raw data collection...")
+            if raw_data_plan:  # THIN: Always try to execute if plan exists
+                self.logger.info("📊 Executing Stage 1: Raw data collection (THIN)...")
                 stage_1_results = execute_analysis_plan_thin(raw_analysis_data, raw_data_plan, request.corpus_manifest)
             
-            # Execute Stage 2: Derived metrics and statistical analysis
-            self.logger.info("🧮 Executing Stage 2: Derived metrics and statistical analysis...")
+            # Execute Stage 2: Derived metrics and statistical analysis (THIN: Pass raw LLM response)
+            self.logger.info("🧮 Executing Stage 2: Derived metrics and statistical analysis (THIN)...")
             stage_2_results = execute_analysis_plan_thin(raw_analysis_data, derived_metrics_plan, request.corpus_manifest)
             
             # Combine results from both stages
