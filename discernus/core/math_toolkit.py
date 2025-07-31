@@ -689,7 +689,7 @@ def generate_correlation_matrix(dataframe: pd.DataFrame, dimensions: List[str], 
         raise MathToolkitError(f"Correlation matrix generation failed: {str(e)}")
 
 
-def validate_calculated_metrics(dataframe: pd.DataFrame, validation_rules: List[Any], quality_thresholds: Dict[str, float]) -> Dict[str, Any]:
+def validate_calculated_metrics(dataframe: pd.DataFrame, validation_rules: List[Any], quality_thresholds: Optional[Dict[str, float]] = None) -> Dict[str, Any]:
     """
     THIN framework-agnostic metric validation.
     
@@ -706,6 +706,15 @@ def validate_calculated_metrics(dataframe: pd.DataFrame, validation_rules: List[
         Dictionary containing validation results
     """
     try:
+        # Provide sensible defaults for quality_thresholds if not provided
+        if quality_thresholds is None:
+            quality_thresholds = {
+                'min_valid_ratio': 0.8,  # At least 80% of data should be valid
+                'max_outlier_ratio': 0.1,  # No more than 10% outliers
+                'min_variance': 0.01,  # Minimum variance to avoid constant values
+                'correlation_threshold': 0.95  # Maximum correlation for multicollinearity check
+            }
+        
         validation_results = {}
         
         for rule in validation_rules:
