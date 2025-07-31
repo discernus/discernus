@@ -36,6 +36,7 @@ class InterpretationRequest:
     framework_spec: str
     experiment_context: Optional[str] = None
     interpretation_focus: str = "comprehensive"  # "comprehensive", "statistical", "narrative"
+    footnote_registry: Optional[Dict[int, Dict[str, str]]] = None
 
 @dataclass
 class InterpretationResponse:
@@ -165,13 +166,45 @@ class ResultsInterpreter:
         # Count total evidence pieces
         total_evidence = sum(len(evidence_list) for evidence_list in request.curated_evidence.values())
         
+        # Build footnote instructions if available
+        footnote_instructions = ""
+        if request.footnote_registry:
+            footnote_instructions = f"""
+
+CRITICAL FOOTNOTE REQUIREMENTS:
+You must use numbered footnotes [1], [2], [3] etc. to cite evidence. Each piece of evidence has been assigned a footnote number.
+
+Footnote Registry (Evidence Hash Verification):
+{str(request.footnote_registry)}
+
+INSTRUCTIONS FOR EVIDENCE CITATIONS:
+1. When referencing evidence, you MUST use the assigned footnote number in brackets [1], [2], etc.
+2. DO NOT create new evidence - only reference evidence with existing footnote numbers
+3. Multiple citations should be formatted as [1,2,3] or [1],[2],[3]
+4. The footnote registry above shows the hash verification for each piece of evidence
+5. If you cannot find a footnote number for evidence, DO NOT cite it - this prevents hallucination
+6. MANDATORY: You must include a "References" section at the end listing all footnotes with their full evidence text
+
+REFERENCES SECTION FORMAT:
+For each footnote number you use, include the full entry in the References section:
+[1] [Speaker from artifact_id]: "[Complete evidence_text from registry]" (Document: [artifact_id])
+[2] [Speaker from artifact_id]: "[Complete evidence_text from registry]" (Document: [artifact_id])
+
+Example in text: "The analysis reveals strong civic virtue patterns [1], particularly in procedural legitimacy [2,3]."
+Example References section:
+## References
+[1] John McCain: "This is a historic election, and I recognize the special significance it has for African-Americans" (Document: john_mccain_2008_concession)
+[2] Bernie Sanders: "We must fight against oligarchy and economic inequality" (Document: bernie_sanders_2025_fighting_oligarchy)
+"""
+        
         # Use YAML template with raw data
         prompt = self.prompt_template.format(
             framework_spec=request.framework_spec,
             experiment_context=request.experiment_context or "Not provided",
             stats_summary=stats_str,
             total_evidence=total_evidence,
-            evidence_summary=evidence_str
+            evidence_summary=evidence_str,
+            footnote_instructions=footnote_instructions
         )
 
         return prompt

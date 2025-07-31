@@ -1,0 +1,98 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Character Assessment Framework v6.0. Focus was on raw dimensional scores, salience, and evidence extraction as per the prompt. No mathematical calculations or derived metrics were performed."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.4,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "truth": {
+          "raw_score": 0.6,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.75
+        },
+        "pragmatism": {
+          "raw_score": 0.3,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "tribalism": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "manipulation": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "resentment": {
+          "raw_score": 0.5,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "fantasy": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.65
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "truth",
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, \"We will not accept an oligarchic form of society.\"",
+          "confidence": 0.9,
+          "context_type": "declaration_of_fact"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "And what these guys are busy doing right now is going after Medicaid, going after Social Security, going after nutrition.",
+          "confidence": 0.85,
+          "context_type": "accusation_of_wrongdoing"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "They're just very nice. But they're not. In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction.",
+          "confidence": 0.75,
+          "context_type": "framing_issue"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "I don't care if you are a Republican, Democrat, or independent, I don't think there's anybody who thinks it vaguely makes sense that the richest guy in the world could spend $270 million to get Trump elected and then become the most powerful person in the government.",
+          "confidence": 0.8,
+          "context_type": "us_vs_them_framing"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "Despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago.",
+          "confidence": 0.8,
+          "context_type": "grievance_articulation"
+        }
+      ]
+    }
+  ]
+}

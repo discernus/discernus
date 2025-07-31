@@ -1,0 +1,140 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Character Assessment Framework v6.0. Focused on identifying raw dimensional scores, salience, and confidence levels for each dimension, along with supporting evidence. Mathematical calculations and derived metrics were excluded as per instructions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.90
+        },
+        "truth": {
+          "raw_score": 0.75,
+          "salience": 0.70,
+          "confidence": 0.85
+        },
+        "justice": {
+          "raw_score": 0.70,
+          "salience": 0.65,
+          "confidence": 0.80
+        },
+        "hope": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "pragmatism": {
+          "raw_score": 0.60,
+          "salience": 0.50,
+          "confidence": 0.75
+        },
+        "tribalism": {
+          "raw_score": 0.20,
+          "salience": 0.15,
+          "confidence": 0.70
+        },
+        "manipulation": {
+          "raw_score": 0.10,
+          "salience": 0.05,
+          "confidence": 0.65
+        },
+        "resentment": {
+          "raw_score": 0.15,
+          "salience": 0.10,
+          "confidence": 0.70
+        },
+        "fear": {
+          "raw_score": 0.05,
+          "salience": 0.02,
+          "confidence": 0.60
+        },
+        "fantasy": {
+          "raw_score": 0.05,
+          "salience": 0.01,
+          "confidence": 0.60
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly.",
+          "confidence": 0.90,
+          "context_type": "overall_tone"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "I am so deeply grateful to all of you for the great honor of your support and for all you have done for me. I wish the outcome had been different, my friends. The road was a difficult one from the outset, but your support and friendship never wavered.",
+          "confidence": 0.90,
+          "context_type": "acknowledgement"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "I had the honor of calling Senator Barack Obama to congratulate him - please - to congratulate him on being elected the next president of the country that we both love.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "In a contest as long and as difficult as this campaign has been, his success alone commands my respect for his ability and perseverance.",
+          "confidence": 0.80,
+          "context_type": "acknowledgement"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "This is a historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "confidence": 0.75,
+          "context_type": "recognition_of_significance"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too.",
+          "confidence": 0.70,
+          "context_type": "shared_belief"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+          "confidence": 0.90,
+          "context_type": "call_to_unity"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+          "confidence": 0.85,
+          "context_type": "forward_looking_statement"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.",
+          "confidence": 0.70,
+          "context_type": "acknowledgement_of_differences"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.75,
+          "context_type": "offer_of_cooperation"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.65,
+          "context_type": "emphasis_on_unity_over_division"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "I do not know what more we could have done to try to win this election. I'll leave that to others to determine. Every candidate makes mistakes, and I'm sure I made my share of them.",
+          "confidence": 0.60,
+          "context_type": "self_reflection_on_failure"
+        }
+      ]
+    }
+  ]
+}

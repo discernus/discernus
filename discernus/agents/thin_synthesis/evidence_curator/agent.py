@@ -21,6 +21,7 @@ import json
 import re
 import os
 import yaml
+import hashlib
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, asdict
 
@@ -51,6 +52,8 @@ class CuratedEvidence:
     reasoning: str
     relevance_score: float
     statistical_connection: str
+    footnote_number: int
+    evidence_hash: str
 
 @dataclass
 class EvidenceCurationResponse:
@@ -59,6 +62,7 @@ class EvidenceCurationResponse:
     curation_summary: Dict[str, Any]
     success: bool
     error_message: Optional[str] = None
+    footnote_registry: Dict[int, Dict[str, str]] = None
     
     def to_json_serializable(self) -> Dict[str, Any]:
         """Convert to JSON-serializable format for artifact storage."""
@@ -70,7 +74,8 @@ class EvidenceCurationResponse:
             'curated_evidence': serializable_evidence,
             'curation_summary': self.curation_summary,
             'success': self.success,
-            'error_message': self.error_message
+            'error_message': self.error_message,
+            'footnote_registry': self.footnote_registry or {}
         }
 
 class EvidenceCurator:
@@ -93,6 +98,8 @@ class EvidenceCurator:
         self.model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(self.model_registry)
         self.logger = logging.getLogger(__name__)
+        self.footnote_counter = 0
+        self.footnote_registry = {}
         
     def curate_evidence(self, request: EvidenceCurationRequest) -> EvidenceCurationResponse:
         """
@@ -105,13 +112,18 @@ class EvidenceCurator:
             EvidenceCurationResponse with curated evidence
         """
         try:
+            # Reset footnote counter for new curation session
+            self.footnote_counter = 0
+            self.footnote_registry = {}
+            
             # Defensive check: ensure statistical_results is not None
             if request.statistical_results is None:
                 self.logger.warning("statistical_results is None, returning empty curated evidence")
                 return EvidenceCurationResponse(
                     curated_evidence={},
                     curation_summary={"warning": "No statistical results provided"},
-                    success=True
+                    success=True,
+                    footnote_registry={}
                 )
             
             # Load and validate evidence data
@@ -121,7 +133,8 @@ class EvidenceCurator:
                     curated_evidence={},
                     curation_summary={},
                     success=False,
-                    error_message="Failed to load evidence data"
+                    error_message="Failed to load evidence data",
+                    footnote_registry={}
                 )
             
             # Filter evidence by confidence threshold (temporarily lowered for testing)
@@ -133,7 +146,8 @@ class EvidenceCurator:
                 return EvidenceCurationResponse(
                     curated_evidence={},
                     curation_summary={"warning": "No evidence meets confidence threshold"},
-                    success=True
+                    success=True,
+                    footnote_registry={}
                 )
             
             # THIN approach: Let LLM handle evidence curation based on available data
@@ -154,7 +168,8 @@ class EvidenceCurator:
             return EvidenceCurationResponse(
                 curated_evidence=curated_evidence,
                 curation_summary=curation_summary,
-                success=True
+                success=True,
+                footnote_registry=self.footnote_registry
             )
             
         except Exception as e:
@@ -163,8 +178,34 @@ class EvidenceCurator:
                 curated_evidence={},
                 curation_summary={},
                 success=False,
-                error_message=str(e)
+                error_message=str(e),
+                footnote_registry={}
             )
+    
+    def _create_evidence_hash(self, evidence_text: str, artifact_id: str, dimension: str) -> str:
+        """Create a hash for evidence verification."""
+        content = f"{artifact_id}:{dimension}:{evidence_text}"
+        return hashlib.sha256(content.encode('utf-8')).hexdigest()[:12]
+    
+    def _assign_footnote_number(self, evidence_text: str, artifact_id: str, dimension: str) -> int:
+        """Assign a unique footnote number and register the evidence."""
+        evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
+        
+        # Check if this evidence already has a footnote
+        for footnote_num, registry_entry in self.footnote_registry.items():
+            if registry_entry['evidence_hash'] == evidence_hash:
+                return footnote_num
+        
+        # Assign new footnote number
+        self.footnote_counter += 1
+        self.footnote_registry[self.footnote_counter] = {
+            'evidence_hash': evidence_hash,
+            'artifact_id': artifact_id,
+            'dimension': dimension,
+            'evidence_text': evidence_text[:100] + '...' if len(evidence_text) > 100 else evidence_text
+        }
+        
+        return self.footnote_counter
     
     def _curate_evidence_with_llm(self, statistical_results: Dict[str, Any], 
                                  evidence_df: pd.DataFrame,
@@ -259,15 +300,25 @@ Return only valid JSON.
                     curated_evidence[category] = []
                     for evidence_item in evidence_list:
                         if isinstance(evidence_item, dict):
+                            artifact_id = evidence_item.get('artifact_id', '')
+                            dimension = evidence_item.get('dimension', '')
+                            evidence_text = evidence_item.get('evidence_text', '')
+                            
+                            # Assign footnote number and create hash
+                            footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
+                            evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
+                            
                             curated_evidence[category].append(CuratedEvidence(
-                                artifact_id=evidence_item.get('artifact_id', ''),
-                                dimension=evidence_item.get('dimension', ''),
-                                evidence_text=evidence_item.get('evidence_text', ''),
+                                artifact_id=artifact_id,
+                                dimension=dimension,
+                                evidence_text=evidence_text,
                                 context=evidence_item.get('context', ''),
                                 confidence=evidence_item.get('confidence', 0.0),
                                 reasoning=evidence_item.get('reasoning', ''),
                                 relevance_score=evidence_item.get('relevance_score', 0.0),
-                                statistical_connection=evidence_item.get('statistical_connection', '')
+                                statistical_connection=evidence_item.get('statistical_connection', ''),
+                                footnote_number=footnote_number,
+                                evidence_hash=evidence_hash
                             ))
             
             return curated_evidence
@@ -275,21 +326,6 @@ Return only valid JSON.
         except Exception as e:
             self.logger.error(f"Failed to parse LLM curation response: {str(e)}")
             return {}
-            
-            return EvidenceCurationResponse(
-                curated_evidence=curated_evidence,
-                curation_summary=curation_summary,
-                success=True
-            )
-            
-        except Exception as e:
-            self.logger.error(f"Evidence curation failed: {str(e)}")
-            return EvidenceCurationResponse(
-                curated_evidence={},
-                curation_summary={},
-                success=False,
-                error_message=str(e)
-            )
     
     def _load_evidence_data(self, evidence_data: bytes) -> Optional[pd.DataFrame]:
         """Load and validate evidence JSON data."""
@@ -424,15 +460,25 @@ Return only valid JSON.
                 )
                 
                 for _, row in top_evidence.iterrows():
+                    artifact_id = row['artifact_id']
+                    dimension = row['dimension']
+                    evidence_text = row['evidence_text']
+                    
+                    # Assign footnote number and create hash
+                    footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
+                    evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
+                    
                     curated.append(CuratedEvidence(
-                        artifact_id=row['artifact_id'],  # Use renamed column
-                        dimension=row['dimension'],
-                        evidence_text=row['evidence_text'],  # Use renamed column
-                        context=row['context'],  # Use renamed column
-                        confidence=row['confidence'],  # Use renamed column
-                        reasoning=row['reasoning'],  # Use generated column
-                        relevance_score=0.8,  # High relevance for extreme values
-                        statistical_connection=f"Supports {dim} mean score of {dimension_scores[dim]:.3f}"
+                        artifact_id=artifact_id,
+                        dimension=dimension,
+                        evidence_text=evidence_text,
+                        context=row['context'],
+                        confidence=row['confidence'],
+                        reasoning=row['reasoning'],
+                        relevance_score=0.8,
+                        statistical_connection=f"Supports {dim} mean score of {dimension_scores[dim]:.3f}",
+                        footnote_number=footnote_number,
+                        evidence_hash=evidence_hash
                     ))
         
         return curated
@@ -474,15 +520,25 @@ Return only valid JSON.
                         )
                         
                         for _, row in top_evidence.iterrows():
+                            artifact_id = row['artifact_id']
+                            dimension = row['dimension']
+                            evidence_text = row['evidence_text']
+                            
+                            # Assign footnote number and create hash
+                            footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
+                            evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
+                            
                             curated.append(CuratedEvidence(
-                                artifact_id=row['artifact_id'],  # Use renamed column
-                                dimension=row['dimension'],
-                                evidence_text=row['evidence_text'],  # Use renamed column
-                                context=row['context'],  # Use renamed column
-                                confidence=row['confidence'],  # Use renamed column
-                                reasoning=row['reasoning'],  # Use generated column
-                                relevance_score=0.9,  # Very high relevance for significant findings
-                                statistical_connection=f"Supports {hypothesis} (p={p_value:.4f})"
+                                artifact_id=artifact_id,
+                                dimension=dimension,
+                                evidence_text=evidence_text,
+                                context=row['context'],
+                                confidence=row['confidence'],
+                                reasoning=row['reasoning'],
+                                relevance_score=0.9,
+                                statistical_connection=f"Supports {hypothesis} (p={p_value:.4f})",
+                                footnote_number=footnote_number,
+                                evidence_hash=evidence_hash
                             ))
         
         return curated
@@ -524,15 +580,25 @@ Return only valid JSON.
                         top_evidence = dim_evidence.nlargest(1, 'confidence')
                         
                         for _, row in top_evidence.iterrows():
+                            artifact_id = row['artifact_id']
+                            dimension = row['dimension']
+                            evidence_text = row['evidence_text']
+                            
+                            # Assign footnote number and create hash
+                            footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
+                            evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
+                            
                             curated.append(CuratedEvidence(
-                                artifact_id=row['artifact_id'],  # Use renamed column
-                                dimension=row['dimension'],
-                                evidence_text=row['evidence_text'],  # Use renamed column
-                                context=row['context'],  # Use renamed column
-                                confidence=row['confidence'],  # Use renamed column
-                                reasoning=row['reasoning'],  # Use generated column
+                                artifact_id=artifact_id,
+                                dimension=dimension,
+                                evidence_text=evidence_text,
+                                context=row['context'],
+                                confidence=row['confidence'],
+                                reasoning=row['reasoning'],
                                 relevance_score=0.7,
-                                statistical_connection=f"Part of strong correlation: {dim1} ↔ {dim2} (r={corr_value:.3f})"
+                                statistical_connection=f"Part of strong correlation: {dim1} ↔ {dim2} (r={corr_value:.3f})",
+                                footnote_number=footnote_number,
+                                evidence_hash=evidence_hash
                             ))
         
         return curated
@@ -567,15 +633,25 @@ Return only valid JSON.
                                 )
                                 
                                 for _, row in varied_evidence.iterrows():
+                                    artifact_id = row['artifact_id']
+                                    dimension = row['dimension']
+                                    evidence_text = row['evidence_text']
+                                    
+                                    # Assign footnote number and create hash
+                                    footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
+                                    evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
+                                    
                                     curated.append(CuratedEvidence(
-                                        artifact_id=row['artifact_id'],
-                                        dimension=row['dimension'],
-                                        evidence_text=row['evidence_text'],
+                                        artifact_id=artifact_id,
+                                        dimension=dimension,
+                                        evidence_text=evidence_text,
                                         context=row['context'],
                                         confidence=row['confidence'],
                                         reasoning=row['reasoning'],
-                                        relevance_score=0.6,  # Moderate relevance for reliability issues
-                                        statistical_connection=f"Illustrates {cluster_name} reliability concerns (α={alpha:.3f})"
+                                        relevance_score=0.6,
+                                        statistical_connection=f"Illustrates {cluster_name} reliability concerns (α={alpha:.3f})",
+                                        footnote_number=footnote_number,
+                                        evidence_hash=evidence_hash
                                     ))
                                 break  # Only need one dimension for reliability illustration
                     
@@ -588,15 +664,25 @@ Return only valid JSON.
                             )
                             
                             for _, row in selected.iterrows():
+                                artifact_id = row['artifact_id']
+                                dimension = row['dimension']
+                                evidence_text = row['evidence_text']
+                                
+                                # Assign footnote number and create hash
+                                footnote_number = self._assign_footnote_number(evidence_text, artifact_id, dimension)
+                                evidence_hash = self._create_evidence_hash(evidence_text, artifact_id, dimension)
+                                
                                 curated.append(CuratedEvidence(
-                                    artifact_id=row['artifact_id'],
-                                    dimension=row['dimension'],
-                                    evidence_text=row['evidence_text'],
+                                    artifact_id=artifact_id,
+                                    dimension=dimension,
+                                    evidence_text=evidence_text,
                                     context=row['context'],
                                     confidence=row['confidence'],
                                     reasoning=row['reasoning'],
-                                    relevance_score=0.9,  # High relevance for reliability validation
-                                    statistical_connection=f"Demonstrates {cluster_name} high reliability (α={alpha:.3f})"
+                                    relevance_score=0.9,
+                                    statistical_connection=f"Demonstrates {cluster_name} high reliability (α={alpha:.3f})",
+                                    footnote_number=footnote_number,
+                                    evidence_hash=evidence_hash
                                 ))
         
         return curated

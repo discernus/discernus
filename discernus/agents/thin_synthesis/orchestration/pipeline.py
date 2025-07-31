@@ -42,7 +42,7 @@ from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ..results_interpreter.agent import ResultsInterpreter, InterpretationRequest
 
 # Import MathToolkit for reliable mathematical operations
-from discernus.core.math_toolkit import execute_analysis_plan
+from discernus.core.math_toolkit import execute_analysis_plan, execute_analysis_plan_thin
 
 @dataclass
 class ProductionPipelineRequest:
@@ -344,53 +344,36 @@ class ProductionThinSynthesisPipeline:
     def _stage_1_generate_analysis_plan(self, request: ProductionPipelineRequest):
         """Stage 1: Generate analysis plan using declarative mathematical specification."""
         
-        # Retrieve analysis data from artifacts
+        # THIN approach: Pass raw analysis data directly to AnalysisPlanner
+        # Let LLM handle all data interpretation and structure understanding
         combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         
-        # Load actual data to show LLM real structure
-        import pandas as pd
+        # Convert raw bytes to string for LLM processing (THIN principle)
+        raw_analysis_data = combined_data.decode('utf-8')
         
-        # Initialize default values
-        scores_df = None
-        evidence_df = None
-        available_columns = []
-        data_summary = ""
+        self.logger.info(f"THIN approach: Passing raw analysis data ({len(raw_analysis_data)} chars) to AnalysisPlanner")
         
-        try:
-            # Use unified data loading that handles JSON
-            scores_df = self._load_data_to_dataframe(combined_data, "scores")
-            evidence_df = self._load_data_to_dataframe(combined_data, "evidence")
-            
-            available_columns = list(scores_df.columns)
-            
-            # Create data summary for the analysis planner
-            data_summary = f"""
-Data Summary:
-- Scores DataFrame: {scores_df.shape[0]} rows, {scores_df.shape[1]} columns
-- Evidence DataFrame: {evidence_df.shape[0]} rows, {evidence_df.shape[1]} columns
-- Available columns: {', '.join(available_columns)}
-- Sample scores data: {scores_df.head(2).to_dict('records') if len(scores_df) > 0 else 'No data'}
-- Sample evidence data: {evidence_df.head(2).to_dict('records') if len(evidence_df) > 0 else 'No data'}
+        # Create simple data summary without parsing (THIN principle)
+        data_summary = f"""
+Raw Analysis Data:
+- Data size: {len(raw_analysis_data)} characters
+- Data type: JSON analysis results
+- Source: Analysis artifact {request.scores_artifact_hash[:12]}...
+- Note: LLM will interpret structure and content directly
 """
-            
-            self.logger.info(f"Data-informed planning: scores_df {scores_df.shape}, evidence_df {evidence_df.shape}")
-            self.logger.info(f"Available columns: {available_columns}")
-            
-        except Exception as e:
-            self.logger.warning(f"Failed to load actual data structure: {str(e)}")
-            data_summary = "Data structure could not be determined"
         
         try:
             # Extract research questions from experiment context
             research_questions = self._extract_research_questions(request.experiment_context)
             
-            # Create analysis plan request
+            # Create THIN analysis plan request (pass raw data, not parsed columns)
             plan_request = AnalysisPlanRequest(
                 experiment_context=request.experiment_context or "",
                 framework_spec=request.framework_spec,
                 data_summary=data_summary,
-                available_columns=available_columns,
-                research_questions=research_questions
+                available_columns=[],  # THIN: LLM will discover columns from raw data
+                research_questions=research_questions,
+                raw_analysis_data=raw_analysis_data  # THIN: Pass raw data directly
             )
             
             # Log analysis planning start
@@ -400,8 +383,9 @@ Data Summary:
                 {
                     "framework_spec_length": len(request.framework_spec),
                     "data_informed_planning": True,
-                    "available_columns": available_columns,
-                    "research_questions_count": len(research_questions)
+                    "raw_data_size": len(raw_analysis_data),
+                    "research_questions_count": len(research_questions),
+                    "approach": "thin_raw_data"
                 }
             )
             
@@ -457,21 +441,14 @@ Data Summary:
         return questions
 
     def _stage_2_execute_analysis_plan(self, plan_response, request: ProductionPipelineRequest):
-        """Stage 2: Execute analysis plan using MathToolkit."""
+        """Stage 2: Execute analysis plan using MathToolkit (THIN approach)."""
         
-        # Load data into DataFrames
-        import pandas as pd
+        # THIN approach: Pass raw analysis data directly to MathToolkit
+        # Let MathToolkit handle all data parsing and DataFrame creation
+        combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
+        raw_analysis_data = combined_data.decode('utf-8')
         
-        try:
-            # Load JSON artifact containing both scores and evidence
-            combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
-            scores_df = self._load_data_to_dataframe(combined_data, "scores")
-            evidence_df = self._load_data_to_dataframe(combined_data, "evidence")
-            
-            self.logger.info(f"Loaded JSON artifact: scores_df: {scores_df.shape}, evidence_df: {evidence_df.shape}")
-            
-        except Exception as e:
-            raise Exception(f"Failed to load data into DataFrames: {str(e)}")
+        self.logger.info(f"THIN approach: Passing raw analysis data ({len(raw_analysis_data)} chars) to MathToolkit")
         
         try:
             # Validate plan response
@@ -487,13 +464,13 @@ Data Summary:
                 "analysis_execution_start",
                 {
                     "plan_tasks_count": len(plan_response.analysis_plan.get('tasks', {})),
-                    "data_shape": f"{scores_df.shape}, {evidence_df.shape}",
-                    "available_columns": list(scores_df.columns)
+                    "raw_data_size": len(raw_analysis_data),
+                    "approach": "thin_raw_data"
                 }
             )
             
-            # Execute the analysis plan using MathToolkit
-            execution_result = execute_analysis_plan(scores_df, plan_response.analysis_plan)
+            # Execute the analysis plan using MathToolkit (THIN: pass raw data)
+            execution_result = execute_analysis_plan_thin(raw_analysis_data, plan_response.analysis_plan)
             
             # Debug logging for execution results
             if self.debug_agent == "math-toolkit" and self.debug_level in ["debug", "verbose"]:
@@ -579,7 +556,8 @@ Data Summary:
             statistical_results=exec_response['results'],
             curated_evidence=curation_response.curated_evidence,
             framework_spec=request.framework_spec,
-            experiment_context=request.experiment_context
+            experiment_context=request.experiment_context,
+            footnote_registry=curation_response.footnote_registry
         )
         
         # Log interpretation start
@@ -594,129 +572,9 @@ Data Summary:
         
         return self.results_interpreter.interpret_results(interpretation_request)
 
-    def _load_data_to_dataframe(self, data: bytes, data_type: str) -> pd.DataFrame:
-        """Load JSON data to DataFrame format (v6.0 only)."""
-        return self._parse_json_to_dataframe(data, data_type)
-
-    def _parse_json_to_dataframe(self, json_data: bytes, data_type: str) -> pd.DataFrame:
-        """Parse JSON analysis output to DataFrame format."""
-        try:
-            # Parse JSON from bytes
-            json_str = json_data.decode('utf-8')
-            analysis_result = json.loads(json_str)
-            
-            if data_type == "scores":
-                return self._json_scores_to_dataframe(analysis_result)
-            elif data_type == "evidence":
-                return self._json_evidence_to_dataframe(analysis_result)
-            else:
-                raise ValueError(f"Unknown data type: {data_type}")
-                
-        except Exception as e:
-            raise Exception(f"Failed to parse JSON {data_type} data: {str(e)}")
-    
-    def _json_scores_to_dataframe(self, analysis_result: dict, corpus_manifest: dict = None) -> pd.DataFrame:
-        """Convert v6.0 JSON analysis scores to DataFrame format with optional corpus metadata."""
-        try:
-            # v6.0 JSON structure: document_analyses[].dimensional_scores
-            document_analyses = analysis_result.get('document_analyses', [])
-            
-            if not document_analyses:
-                raise ValueError("No document_analyses found in JSON")
-            
-            rows = []
-            for doc_analysis in document_analyses:
-                document_id = doc_analysis.get('document_id', '{artifact_id}')
-                dimensional_scores = doc_analysis.get('dimensional_scores', {})
-                
-                # Create row with document identifier
-                row_data = {'aid': document_id}
-                
-                # Extract dimensional scores generically (framework-agnostic)
-                for dim_name, dim_data in dimensional_scores.items():
-                    if isinstance(dim_data, dict):
-                        # Standard v6.0 fields: raw_score, salience, confidence
-                        row_data[f"{dim_name}_score"] = dim_data.get('raw_score', 0.0)
-                        row_data[f"{dim_name}_salience"] = dim_data.get('salience', 0.0)
-                        row_data[f"{dim_name}_confidence"] = dim_data.get('confidence', 0.0)
-                        
-                        # Handle any additional fields generically (framework-agnostic)
-                        for field_name, field_value in dim_data.items():
-                            if field_name not in ['raw_score', 'salience', 'confidence']:
-                                column_name = f"{dim_name}_{field_name}"
-                                row_data[column_name] = field_value
-                
-                # Add corpus metadata if available
-                if corpus_manifest and 'file_manifest' in corpus_manifest:
-                    for file_info in corpus_manifest['file_manifest']:
-                        if file_info.get('name', '').replace('.txt', '') in document_id:
-                            # Add era and ideology metadata
-                            row_data['era'] = file_info.get('era', 'Unknown')
-                            row_data['ideology'] = file_info.get('ideology', 'Unknown')
-                            row_data['speaker'] = file_info.get('speaker', 'Unknown')
-                            row_data['date'] = file_info.get('date', 'Unknown')
-                            row_data['political_party'] = file_info.get('political_party', 'Unknown')
-                            break
-                
-                rows.append(row_data)
-            
-            return pd.DataFrame(rows)
-            
-        except Exception as e:
-            raise Exception(f"Failed to convert v6.0 JSON scores to DataFrame: {str(e)}")
-    
-    def _json_evidence_to_dataframe(self, analysis_result: dict) -> pd.DataFrame:
-        """Convert v6.0 JSON analysis evidence to DataFrame format."""
-        try:
-            # v6.0 JSON structure: document_analyses[].evidence[]
-            document_analyses = analysis_result.get('document_analyses', [])
-            
-            if not document_analyses:
-                raise ValueError("No document_analyses found in JSON")
-            
-            rows = []
-            for doc_analysis in document_analyses:
-                document_id = doc_analysis.get('document_id', '{artifact_id}')
-                evidence_list = doc_analysis.get('evidence', [])
-                
-                for i, evidence in enumerate(evidence_list):
-                    if isinstance(evidence, dict):
-                        row = {
-                            'aid': document_id,
-                            'dimension': evidence.get('dimension', ''),
-                            'quote_id': evidence.get('quote_id', f"quote_{i}"),
-                            'quote_text': evidence.get('quote_text', ''),
-                            'confidence_score': evidence.get('confidence', 0.0),
-                            'context_type': evidence.get('context_type', 'direct')
-                        }
-                        rows.append(row)
-            
-            # Return DataFrame with standard evidence columns
-            if rows:
-                return pd.DataFrame(rows)
-            else:
-                # Return empty DataFrame with correct schema
-                return pd.DataFrame(columns=['aid', 'dimension', 'quote_id', 'quote_text', 'confidence_score', 'context_type'])
-            
-        except Exception as e:
-            raise Exception(f"Failed to convert v6.0 JSON evidence to DataFrame: {str(e)}")
-
-
-    
-    def _describe_dataframe_structure(self, df: pd.DataFrame, data_type: str) -> str:
-        """Analyze DataFrame structure for code generation (works for both CSV and JSON sources)."""
-        try:
-            structure_info = {
-                "data_type": data_type,
-                "total_rows": len(df),
-                "columns": list(df.columns),
-                "sample_data": df.head(3).to_dict('records')
-            }
-            
-            return json.dumps(structure_info, indent=2)
-            
-        except Exception as e:
-            return f"Error analyzing {data_type} DataFrame: {str(e)}"
+    # THIN REFACTORING: Removed ~150 lines of THICK DataFrame parsing logic
+    # All data parsing is now handled by individual agents (AnalysisPlanner, MathToolkit, etc.)
+    # This eliminates the pipeline's framework intelligence and makes it truly THIN
 
     def _create_error_response(self, 
                              error_type: str, 
