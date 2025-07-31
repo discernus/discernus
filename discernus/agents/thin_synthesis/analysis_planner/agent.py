@@ -8,8 +8,10 @@ fragile code generation approach.
 
 import json
 import logging
+import yaml
 from typing import Dict, Any, Optional
 from dataclasses import dataclass
+from pathlib import Path
 
 from discernus.core.audit_logger import AuditLogger
 
@@ -140,6 +142,21 @@ class AnalysisPlanner:
                 error_message=f"Analysis plan generation failed: {str(e)}"
             )
     
+    def _load_quantitative_grammar(self) -> str:
+        """
+        Load the quantitative grammar specification.
+        
+        Returns:
+            YAML content as string
+        """
+        try:
+            grammar_path = Path(__file__).parent.parent.parent.parent / "core" / "quantitative_grammar.yaml"
+            with open(grammar_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        except Exception as e:
+            self.logger.warning(f"Could not load quantitative grammar: {e}")
+            return ""
+    
     def _build_analysis_plan_prompt(self, request: AnalysisPlanRequest) -> str:
         """
         Build the prompt for generating an analysis plan.
@@ -150,6 +167,9 @@ class AnalysisPlanner:
         Returns:
             Formatted prompt string
         """
+        # Load quantitative grammar for standardized keys
+        grammar_spec = self._load_quantitative_grammar()
+        
         prompt = f"""
 You are an expert research analyst tasked with creating a structured mathematical analysis plan for a political discourse analysis experiment.
 
@@ -168,8 +188,22 @@ You are an expert research analyst tasked with creating a structured mathematica
 ## RESEARCH QUESTIONS
 {chr(10).join(f"- {q}" for q in request.research_questions)}
 
+## QUANTITATIVE GRAMMAR - STANDARDIZED SEMANTIC KEYS
+Use these standardized semantic categories for task names to ensure interface compatibility:
+
+{grammar_spec}
+
+**CRITICAL**: Your task names must use semantic keys from the grammar above (e.g., "descriptive_stats", "correlations", "reliability", "variance_analysis") rather than numbered task names like "01_descriptive_statistics_scores".
+
+## CRITICAL CONSTRAINT: COLUMN VALIDATION
+**You MUST ONLY use column names that are listed in AVAILABLE COLUMNS above.**
+- If you need grouping variables (like 'era' or 'ideology'), they must exist in the available columns
+- If they don't exist, you must work with the data you have
+- Do NOT assume columns exist that are not listed above
+- Focus on descriptive statistics and correlations of the available character dimension scores
+
 ## TASK
-Analyze the experiment context, framework, and research questions to create a comprehensive analysis plan. Your plan should specify exactly which mathematical operations to perform to answer the research questions.
+Analyze the experiment context, framework, and research questions to create a comprehensive analysis plan. Your plan should specify exactly which mathematical operations to perform to answer the research questions using ONLY the available columns.
 
 ## AVAILABLE MATHEMATICAL TOOLS
 You have access to these pre-built, tested mathematical functions:
@@ -219,11 +253,12 @@ You must output a valid JSON object with this exact structure:
 ## REQUIREMENTS
 1. Use only the available tools listed above
 2. Use actual column names from the available columns list
-3. Create a comprehensive plan that addresses all research questions
-4. Include descriptive statistics for all relevant variables
-5. Include appropriate statistical tests based on the experimental design
-6. Ensure all parameter values are valid for the given data structure
-7. Output only valid JSON - no markdown formatting, no explanations outside the JSON
+3. **Use standardized semantic keys from the quantitative grammar** for task names (e.g., "descriptive_stats", "correlations", "reliability")
+4. Create a comprehensive plan that addresses all research questions
+5. Include descriptive statistics for all relevant variables
+6. Include appropriate statistical tests based on the experimental design
+7. Ensure all parameter values are valid for the given data structure
+8. Output only valid JSON - no markdown formatting, no explanations outside the JSON
 
 Generate your analysis plan now:
 """

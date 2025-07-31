@@ -132,6 +132,14 @@ These principles guide every design decision in Discernus:
 - Git-based provenance provides tamper-evident audit trails
 - **Academic Data Sensitivity**: Text corpora often contain sensitive political, corporate, or personal content requiring proper security controls from day one
 
+**11a. Orchestrator Trust Boundary Model**
+- **Trust Layering**: Security architecture distinguishes between trusted infrastructure (orchestrators) and untrusted workloads (agents)
+- **Orchestrator Privileges**: Can resolve canonical framework references (`../../frameworks/`) as trusted infrastructure operations
+- **Agent Restrictions**: All agent file access constrained to experiment directory via `ExperimentSecurityBoundary`
+- **Pre-Injection Security**: Orchestrators pre-resolve external dependencies before agent execution, eliminating agent access to system files
+- **Canonical Framework Support**: Enables single-source-of-truth frameworks while maintaining strict agent isolation
+- **Audit Compliance**: All framework access (canonical and local) logged with security context for complete provenance
+
 **12. Graceful Degradation and Error Recovery**
 - Fail-fast validation prevents expensive downstream failures
 - Partial artifact preservation on timeout or interruption
@@ -250,4 +258,4 @@ These patterns represent the next generation of LLM systems, focused on self-cor
 
 ---
 
-*Last updated 2025‑07‑26 - Architectural Vision & Principles*
+*Last updated 2025‑01‑30 - Added Orchestrator Trust Boundary Model - Architectural Vision & Principles*
