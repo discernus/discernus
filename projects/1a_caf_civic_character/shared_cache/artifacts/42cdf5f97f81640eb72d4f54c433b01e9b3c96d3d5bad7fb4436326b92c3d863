@@ -1,0 +1,120 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted following the provided framework v6.0. Focus was on identifying and scoring dimensional aspects of civic character. Evidence extraction prioritized direct quotes illustrating the assessed dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "truth": {
+          "raw_score": 0.6,
+          "salience": 0.65,
+          "confidence": 0.75
+        },
+        "justice": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "hope": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.65,
+          "confidence": 0.8
+        },
+        "tribalism": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "manipulation": {
+          "raw_score": 0.45,
+          "salience": 0.55,
+          "confidence": 0.75
+        },
+        "resentment": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "fantasy": {
+          "raw_score": 0.35,
+          "salience": 0.45,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "hope",
+          "quote_text": "But my Tory friends, I have to say, you guys have got to get, you got to get a handle on this. But neither here nor there, the reason I'm most optimistic about the future of this movement and the future of our country is because for the first time in a very long time, it is clear that the leader of the Republican party is not some donor who's desperate for cheap labor and it's not some random person who claims to speak for this or that constituency.",
+          "confidence": 0.9,
+          "context_type": "primary_theme"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.",
+          "confidence": 0.85,
+          "context_type": "forward_looking_statement"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "But we should also not let the Chinese make all of our stuff. And yet, I've, I've seen the Wall Street Journal editorial page for the last couple of years say we can indefinitely send munitions and weapons of war to Ukraine after for the past two generations abdicating that we ship our industrial base over overseas.",
+          "confidence": 0.75,
+          "context_type": "policy_observation"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+          "confidence": 0.7,
+          "context_type": "statement_of_principle"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "But I will say on the good news, the majority of the Republican house and the majority of the Republican Senate, the most recent cycle, said no more to this, no more, right? That's a good thing, that's progress.",
+          "confidence": 0.65,
+          "context_type": "political_alignment"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "And my, my wife and I, when I proposed to her, you know, we were in law school. And I said, 'Honey, I come along with $120,000 worth of law school debt and a cemetery plot in Eastern Kentucky.'",
+          "confidence": 0.6,
+          "context_type": "anecdotal_example"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "It is not even, it's not, it's not a correlation versus causation issue. If you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.",
+          "confidence": 0.7,
+          "context_type": "analytical_claim"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "Let's send our entire machinery for making war to countries that hate us and then let's spend what little stockpiles that we have on a war that has no obvious end in sight.",
+          "confidence": 0.6,
+          "context_type": "critical_observation_of_policy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

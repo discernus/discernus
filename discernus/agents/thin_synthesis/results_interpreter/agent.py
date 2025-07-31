@@ -37,6 +37,20 @@ class InterpretationRequest:
     experiment_context: Optional[str] = None
     interpretation_focus: str = "comprehensive"  # "comprehensive", "statistical", "narrative"
     footnote_registry: Optional[Dict[int, Dict[str, str]]] = None
+    
+    # Provenance metadata for report headers
+    run_id: Optional[str] = None
+    models_used: Optional[Dict[str, str]] = None  # {"analysis": "model", "synthesis": "model"}
+    execution_timestamp_utc: Optional[str] = None
+    execution_timestamp_local: Optional[str] = None
+    framework_name: Optional[str] = None
+    framework_version: Optional[str] = None
+    corpus_info: Optional[Dict[str, Any]] = None
+    
+    # Error and warning tracking
+    notable_errors: Optional[List[str]] = None
+    warnings: Optional[List[str]] = None
+    quality_alerts: Optional[List[str]] = None
 
 @dataclass
 class InterpretationResponse:
@@ -197,17 +211,98 @@ Example References section:
 [2] Bernie Sanders: "We must fight against oligarchy and economic inequality" (Document: bernie_sanders_2025_fighting_oligarchy)
 """
         
+        # Build provenance metadata string
+        provenance_metadata = self._build_provenance_metadata(request)
+        
         # Use YAML template with raw data
         prompt = self.prompt_template.format(
+            provenance_metadata=provenance_metadata,
             framework_spec=request.framework_spec,
             experiment_context=request.experiment_context or "Not provided",
             stats_summary=stats_str,
             total_evidence=total_evidence,
             evidence_summary=evidence_str,
-            footnote_instructions=footnote_instructions
+            footnote_instructions=footnote_instructions,
+            run_id=request.run_id or "Not provided"
         )
 
         return prompt
+    
+    def _build_provenance_metadata(self, request: InterpretationRequest) -> str:
+        """Build a comprehensive provenance metadata string for the report header."""
+        
+        metadata_parts = []
+        
+        # Run ID
+        if request.run_id:
+            metadata_parts.append(f"Run ID: {request.run_id}")
+        
+        # Execution timestamps
+        if request.execution_timestamp_utc and request.execution_timestamp_local:
+            metadata_parts.append(f"Execution Time (UTC): {request.execution_timestamp_utc}")
+            metadata_parts.append(f"Execution Time (Local): {request.execution_timestamp_local}")
+        elif request.execution_timestamp_utc:
+            metadata_parts.append(f"Execution Time (UTC): {request.execution_timestamp_utc}")
+        elif request.execution_timestamp_local:
+            metadata_parts.append(f"Execution Time (Local): {request.execution_timestamp_local}")
+        
+        # Models used
+        if request.models_used:
+            models_info = []
+            for stage, model in request.models_used.items():
+                models_info.append(f"{stage.title()}: {model}")
+            if models_info:
+                metadata_parts.append(f"Models Used: {', '.join(models_info)}")
+        
+        # Framework information
+        framework_info = []
+        if request.framework_name:
+            framework_info.append(f"Framework: {request.framework_name}")
+        if request.framework_version:
+            framework_info.append(f"Version: {request.framework_version}")
+        if framework_info:
+            metadata_parts.append(' '.join(framework_info))
+        
+        # Corpus information
+        if request.corpus_info:
+            corpus_details = []
+            if 'document_count' in request.corpus_info:
+                corpus_details.append(f"Documents: {request.corpus_info['document_count']}")
+            if 'corpus_type' in request.corpus_info:
+                corpus_details.append(f"Type: {request.corpus_info['corpus_type']}")
+            if 'date_range' in request.corpus_info:
+                corpus_details.append(f"Range: {request.corpus_info['date_range']}")
+            if corpus_details:
+                metadata_parts.append(f"Corpus: {', '.join(corpus_details)}")
+        
+        # Error and warning information
+        error_sections = []
+        
+        if request.notable_errors:
+            error_list = []
+            for i, error in enumerate(request.notable_errors[:3], 1):  # Limit to 3 most important
+                error_list.append(f"  {i}. {error}")
+            error_sections.append(f"Notable Errors:\n" + "\n".join(error_list))
+        
+        if request.warnings:
+            warning_list = []
+            for i, warning in enumerate(request.warnings[:3], 1):  # Limit to 3 most important
+                warning_list.append(f"  {i}. {warning}")
+            error_sections.append(f"Warnings:\n" + "\n".join(warning_list))
+            
+        if request.quality_alerts:
+            alert_list = []
+            for i, alert in enumerate(request.quality_alerts[:2], 1):  # Limit to 2 most important
+                alert_list.append(f"  {i}. {alert}")
+            error_sections.append(f"Quality Alerts:\n" + "\n".join(alert_list))
+        
+        # Combine all sections
+        all_sections = metadata_parts + error_sections
+        
+        if all_sections:
+            return '\n'.join(all_sections)
+        else:
+            return "Provenance metadata not available"
     
     def _validate_required_data(self, request: InterpretationRequest) -> Optional[str]:
         """

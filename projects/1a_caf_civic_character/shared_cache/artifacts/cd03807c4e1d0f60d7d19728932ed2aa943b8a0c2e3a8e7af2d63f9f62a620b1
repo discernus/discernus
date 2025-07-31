@@ -1,0 +1,108 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Character Assessment Framework v6.1. Focus was on identifying raw dimensional scores and supporting evidence as per the framework's guidelines. No mathematical calculations or derived metrics were performed. Confidence reflects the clarity and directness of the language used in relation to the defined dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.7
+        },
+        "truth": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.6
+        },
+        "justice": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.8
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "pragmatism": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.5
+        },
+        "tribalism": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.6
+        },
+        "manipulation": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "resentment": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "fear": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.4
+        },
+        "fantasy": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.3
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do. You do. Honestly, no matter who you vote for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things.",
+          "confidence": 0.7,
+          "context_type": "inclusive_appeal"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "confidence": 0.8,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "They are slashing programs that we and you have spent a lifetme paying into. And by the way, not them, because those billionaires haven't paid their fair share of taxes in years.",
+          "confidence": 0.75,
+          "context_type": "accusation"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture. They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how greed is costing the lives of everyone else.",
+          "confidence": 0.7,
+          "context_type": "analysis_of_opponents"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "This isn't just about Republicans. We need a Democratic Party that fights harder for us too. But, Greeley, that means our communities choosing and voting for Democrats and elected officials who know how to stand for the working class.",
+          "confidence": 0.6,
+          "context_type": "partisan_framing"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "So I hope that you see this movement is not about partisan labels or purity tests, but about class solidarity.",
+          "confidence": 0.7,
+          "context_type": "statement_of_intent"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

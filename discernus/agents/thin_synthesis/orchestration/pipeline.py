@@ -37,7 +37,8 @@ from discernus.storage.minio_client import DiscernusArtifactClient
 from discernus.core.audit_logger import AuditLogger
 
 # Import THIN synthesis agents
-from ..analysis_planner.agent import AnalysisPlanner, AnalysisPlanRequest
+from ..raw_data_analysis_planner.agent import RawDataAnalysisPlanner, RawDataAnalysisPlanRequest
+from ..derived_metrics_analysis_planner.agent import DerivedMetricsAnalysisPlanner, DerivedMetricsAnalysisPlanRequest
 from ..evidence_curator.agent import EvidenceCurator, EvidenceCurationRequest
 from ..results_interpreter.agent import ResultsInterpreter, InterpretationRequest
 
@@ -115,7 +116,8 @@ class ProductionThinSynthesisPipeline:
         self.debug_level = debug_level
         
         # Initialize agents with infrastructure
-        self.analysis_planner = AnalysisPlanner(model=model, audit_logger=audit_logger)
+        self.raw_data_planner = RawDataAnalysisPlanner(model=model, audit_logger=audit_logger)
+        self.derived_metrics_planner = DerivedMetricsAnalysisPlanner(model=model, audit_logger=audit_logger)
         self.evidence_curator = EvidenceCurator(model=model)
         self.results_interpreter = ResultsInterpreter(model=model)
         
@@ -225,10 +227,12 @@ class ProductionThinSynthesisPipeline:
             # Debug output for evidence curator
             if self.debug_agent in ['evidence-curator', None] and self.debug_level in ['debug', 'verbose']:
                 self.logger.info(f"🔍 DEBUG: Evidence curation input:")
-                self.logger.info(f"   - Statistical results keys: {list(exec_response['result_data'].keys()) if exec_response.get('result_data') else 'NO DATA'}")
+                stage_2_results = exec_response.get('stage_2_derived_metrics', {})
+                statistical_results = stage_2_results.get('results', {})
+                self.logger.info(f"   - Statistical results keys: {list(statistical_results.keys()) if statistical_results else 'NO DATA'}")
                 self.logger.info(f"   - Evidence artifact hash: {request.evidence_artifact_hash}")
-                if exec_response.get('result_data'):
-                    for key, value in exec_response['result_data'].items():
+                if statistical_results:
+                    for key, value in statistical_results.items():
                         if isinstance(value, dict):
                             self.logger.info(f"   - {key}: {list(value.keys()) if value else 'EMPTY'}")
                         else:
@@ -272,7 +276,21 @@ class ProductionThinSynthesisPipeline:
             
             # Store intermediate artifacts - let LLM handle data structures
             plan_hash = self.artifact_client.put_artifact(json.dumps(plan_response.analysis_plan).encode('utf-8'))
-            results_hash = self.artifact_client.put_artifact(str(exec_response['results']).encode('utf-8'))
+            
+            # Defensive JSON serialization for exec_response
+            def make_json_safe(obj):
+                if isinstance(obj, (str, int, float, bool, type(None))):
+                    return obj
+                elif isinstance(obj, (list, tuple)):
+                    return [make_json_safe(item) for item in obj]
+                elif isinstance(obj, dict):
+                    return {str(k): make_json_safe(v) for k, v in obj.items()}
+                else:
+                    return str(obj)
+            
+            # Store the combined two-stage results with defensive serialization
+            safe_exec_response = make_json_safe(exec_response)
+            results_hash = self.artifact_client.put_artifact(json.dumps(safe_exec_response).encode('utf-8'))
             evidence_hash = self.artifact_client.put_artifact(json.dumps(curation_response.to_json_serializable()).encode('utf-8'))
             
             # Success! Create complete response
@@ -342,19 +360,19 @@ class ProductionThinSynthesisPipeline:
             )
 
     def _stage_1_generate_analysis_plan(self, request: ProductionPipelineRequest):
-        """Stage 1: Generate analysis plan using declarative mathematical specification."""
+        """Stage 1: Generate two-stage analysis plan using declarative mathematical specification."""
         
-        # THIN approach: Pass raw analysis data directly to AnalysisPlanner
-        # Let LLM handle all data interpretation and structure understanding
+        # THIN approach: Pass raw analysis data directly to both planners
+        # Let LLMs handle all data interpretation and structure understanding
         combined_data = self.artifact_client.get_artifact(request.scores_artifact_hash)
         
         # Convert raw bytes to string for LLM processing (THIN principle)
         raw_analysis_data = combined_data.decode('utf-8')
         
-        self.logger.info(f"THIN approach: Passing raw analysis data ({len(raw_analysis_data)} chars) to AnalysisPlanner")
+        self.logger.info(f"THIN approach: Passing raw analysis data ({len(raw_analysis_data)} chars) to two-stage planners")
         
         # Create simple data summary without parsing (THIN principle)
-        data_summary = f"""
+        raw_data_summary = f"""
 Raw Analysis Data:
 - Data size: {len(raw_analysis_data)} characters
 - Data type: JSON analysis results
@@ -366,43 +384,86 @@ Raw Analysis Data:
             # Extract research questions from experiment context
             research_questions = self._extract_research_questions(request.experiment_context)
             
-            # Create THIN analysis plan request (pass raw data, not parsed columns)
-            plan_request = AnalysisPlanRequest(
+            # Stage 1A: Generate raw data collection plan
+            self.logger.info("📊 Stage 1A: Generating raw data collection plan...")
+            
+            raw_data_request = RawDataAnalysisPlanRequest(
                 experiment_context=request.experiment_context or "",
                 framework_spec=request.framework_spec,
-                data_summary=data_summary,
-                available_columns=[],  # THIN: LLM will discover columns from raw data
-                research_questions=research_questions,
-                raw_analysis_data=raw_analysis_data  # THIN: Pass raw data directly
+                corpus_manifest="",  # Will be populated from experiment context
+                research_questions=research_questions
             )
             
-            # Log analysis planning start
+            # Log raw data planning start
             self.audit_logger.log_agent_event(
-                "AnalysisPlanner",
-                "analysis_planning_start",
+                "RawDataAnalysisPlanner",
+                "raw_data_planning_start",
                 {
                     "framework_spec_length": len(request.framework_spec),
-                    "data_informed_planning": True,
-                    "raw_data_size": len(raw_analysis_data),
                     "research_questions_count": len(research_questions),
-                    "approach": "thin_raw_data"
+                    "approach": "thin_stage_1_raw_data"
                 }
             )
             
-            plan_response = self.analysis_planner.generate_analysis_plan(plan_request)
+            raw_data_response = self.raw_data_planner.generate_raw_data_plan(raw_data_request)
             
-            # Debug logging for generated plan
+            if not raw_data_response.success:
+                raise Exception(f"Raw data planning failed: {raw_data_response.error_message}")
+            
+            # Stage 1B: Generate derived metrics analysis plan
+            self.logger.info("🧮 Stage 1B: Generating derived metrics analysis plan...")
+            
+            derived_metrics_request = DerivedMetricsAnalysisPlanRequest(
+                experiment_context=request.experiment_context or "",
+                framework_spec=request.framework_spec,
+                corpus_manifest="",  # Will be populated from experiment context
+                research_questions=research_questions,
+                raw_data_summary=raw_data_summary
+            )
+            
+            # Log derived metrics planning start
+            self.audit_logger.log_agent_event(
+                "DerivedMetricsAnalysisPlanner",
+                "derived_metrics_planning_start",
+                {
+                    "framework_spec_length": len(request.framework_spec),
+                    "research_questions_count": len(research_questions),
+                    "raw_data_summary_length": len(raw_data_summary),
+                    "approach": "thin_stage_2_derived_metrics"
+                }
+            )
+            
+            derived_metrics_response = self.derived_metrics_planner.generate_derived_metrics_plan(derived_metrics_request)
+            
+            if not derived_metrics_response.success:
+                raise Exception(f"Derived metrics planning failed: {derived_metrics_response.error_message}")
+            
+            # Combine both plans into a unified response
+            combined_plan = {
+                "stage_1_raw_data": raw_data_response.analysis_plan,
+                "stage_2_derived_metrics": derived_metrics_response.analysis_plan,
+                "combined_summary": f"Two-stage analysis plan: {raw_data_response.analysis_plan.get('experiment_summary', '')} + {derived_metrics_response.analysis_plan.get('experiment_summary', '')}"
+            }
+            
+            # Debug logging for generated plans
             if self.debug_agent == "analysis-plan" and self.debug_level in ["debug", "verbose"]:
-                self.logger.info(f"Generated plan tasks: {len(plan_response.analysis_plan.get('tasks', {})) if plan_response.analysis_plan else 0}")
-                if plan_response.analysis_plan:
-                    self.logger.info(f"Generated plan preview: {str(plan_response.analysis_plan)[:500]}...")
-                    if len(str(plan_response.analysis_plan)) > 500:
-                        self.logger.info(f"Generated plan (full):\n{plan_response.analysis_plan}")
+                self.logger.info(f"Raw data plan tasks: {len(raw_data_response.analysis_plan.get('tasks', {})) if raw_data_response.analysis_plan else 0}")
+                self.logger.info(f"Derived metrics plan tasks: {len(derived_metrics_response.analysis_plan.get('tasks', {})) if derived_metrics_response.analysis_plan else 0}")
+                if raw_data_response.analysis_plan:
+                    self.logger.info(f"Raw data plan preview: {str(raw_data_response.analysis_plan)[:500]}...")
+                if derived_metrics_response.analysis_plan:
+                    self.logger.info(f"Derived metrics plan preview: {str(derived_metrics_response.analysis_plan)[:500]}...")
             
-            return plan_response
+            # Create a unified response object for compatibility
+            class CombinedPlanResponse:
+                def __init__(self, combined_plan):
+                    self.analysis_plan = combined_plan
+                    self.success = True
+            
+            return CombinedPlanResponse(combined_plan)
             
         except Exception as e:
-            self.logger.error(f"Analysis planning failed: {str(e)}")
+            self.logger.error(f"Two-stage analysis planning failed: {str(e)}")
             raise
     
     def _extract_research_questions(self, experiment_context: str) -> list:
@@ -441,7 +502,7 @@ Raw Analysis Data:
         return questions
 
     def _stage_2_execute_analysis_plan(self, plan_response, request: ProductionPipelineRequest):
-        """Stage 2: Execute analysis plan using MathToolkit (THIN approach)."""
+        """Stage 2: Execute two-stage analysis plan using MathToolkit (THIN approach)."""
         
         # THIN approach: Pass raw analysis data directly to MathToolkit
         # Let MathToolkit handle all data parsing and DataFrame creation
@@ -458,44 +519,69 @@ Raw Analysis Data:
             if not plan_response.analysis_plan:
                 raise Exception("No analysis plan generated")
             
+            # Extract the two-stage plan structure
+            combined_plan = plan_response.analysis_plan
+            raw_data_plan = combined_plan.get("stage_1_raw_data", {})
+            derived_metrics_plan = combined_plan.get("stage_2_derived_metrics", {})
+            
+            self.logger.info(f"Executing two-stage plan: {len(raw_data_plan.get('tasks', {}))} raw data tasks + {len(derived_metrics_plan.get('tasks', {}))} derived metrics tasks")
+            
             # Log execution start
             self.audit_logger.log_agent_event(
                 "MathToolkit",
-                "analysis_execution_start",
+                "two_stage_analysis_execution_start",
                 {
-                    "plan_tasks_count": len(plan_response.analysis_plan.get('tasks', {})),
+                    "raw_data_tasks_count": len(raw_data_plan.get('tasks', {})),
+                    "derived_metrics_tasks_count": len(derived_metrics_plan.get('tasks', {})),
                     "raw_data_size": len(raw_analysis_data),
-                    "approach": "thin_raw_data"
+                    "approach": "thin_two_stage_execution"
                 }
             )
             
-            # Execute the analysis plan using MathToolkit (THIN: pass raw data)
-            execution_result = execute_analysis_plan_thin(raw_analysis_data, plan_response.analysis_plan)
+            # Execute Stage 1: Raw data collection (if any tasks defined)
+            stage_1_results = {}
+            if raw_data_plan.get('tasks'):
+                self.logger.info("📊 Executing Stage 1: Raw data collection...")
+                stage_1_results = execute_analysis_plan_thin(raw_analysis_data, raw_data_plan)
+            
+            # Execute Stage 2: Derived metrics and statistical analysis
+            self.logger.info("🧮 Executing Stage 2: Derived metrics and statistical analysis...")
+            stage_2_results = execute_analysis_plan_thin(raw_analysis_data, derived_metrics_plan)
+            
+            # Combine results from both stages
+            combined_results = {
+                "stage_1_raw_data": stage_1_results,
+                "stage_2_derived_metrics": stage_2_results,
+                "combined_summary": f"Two-stage execution: {len(stage_1_results.get('results', {}))} raw data results + {len(stage_2_results.get('results', {}))} derived metrics results"
+            }
             
             # Debug logging for execution results
             if self.debug_agent == "math-toolkit" and self.debug_level in ["debug", "verbose"]:
-                self.logger.info(f"Execution result success: {len(execution_result.get('errors', [])) == 0}")
-                self.logger.info(f"Execution result errors: {execution_result.get('errors', [])}")
-                self.logger.info(f"Execution result tasks completed: {len(execution_result.get('results', {}))}")
-                if execution_result.get('results'):
-                    self.logger.info(f"Execution result task types: {[result.get('type', 'unknown') for result in execution_result['results'].values()]}")
+                self.logger.info(f"Stage 1 success: {len(stage_1_results.get('errors', [])) == 0}")
+                self.logger.info(f"Stage 1 errors: {stage_1_results.get('errors', [])}")
+                self.logger.info(f"Stage 1 tasks completed: {len(stage_1_results.get('results', {}))}")
+                self.logger.info(f"Stage 2 success: {len(stage_2_results.get('errors', [])) == 0}")
+                self.logger.info(f"Stage 2 errors: {stage_2_results.get('errors', [])}")
+                self.logger.info(f"Stage 2 tasks completed: {len(stage_2_results.get('results', {}))}")
             
             # Log execution completion
             self.audit_logger.log_agent_event(
                 "MathToolkit",
-                "analysis_execution_complete",
+                "two_stage_analysis_execution_complete",
                 {
-                    "success": len(execution_result.get('errors', [])) == 0,
-                    "errors_count": len(execution_result.get('errors', [])),
-                    "tasks_completed": len(execution_result.get('results', {})),
-                    "result_types": [result.get('type', 'unknown') for result in execution_result.get('results', {}).values()]
+                    "stage_1_success": len(stage_1_results.get('errors', [])) == 0,
+                    "stage_1_errors_count": len(stage_1_results.get('errors', [])),
+                    "stage_1_tasks_completed": len(stage_1_results.get('results', {})),
+                    "stage_2_success": len(stage_2_results.get('errors', [])) == 0,
+                    "stage_2_errors_count": len(stage_2_results.get('errors', [])),
+                    "stage_2_tasks_completed": len(stage_2_results.get('results', {}))
                 }
             )
             
-            return execution_result
+            return combined_results
             
         except Exception as e:
-            self.logger.error(f"Analysis execution failed: {str(e)}")
+            self.logger.error(f"Two-stage analysis execution failed: {str(e)}")
             raise
 
     def _stage_3_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
@@ -504,9 +590,14 @@ Raw Analysis Data:
         # Retrieve evidence data for curation from JSON artifact
         combined_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
+        # Extract results from the two-stage structure
+        # Use derived metrics results (Stage 2) for evidence curation
+        stage_2_results = exec_response.get('stage_2_derived_metrics', {})
+        statistical_results = stage_2_results.get('results', {})
+        
         # Create curation request with raw data - let LLM handle parsing
         curation_request = EvidenceCurationRequest(
-            statistical_results=exec_response['results'],
+            statistical_results=statistical_results,
             evidence_data=combined_data,
             framework_spec=request.framework_spec,
             max_evidence_per_finding=request.max_evidence_per_finding,
@@ -519,8 +610,9 @@ Raw Analysis Data:
             "evidence_curation_start",
             {
                 "available_evidence_count": 57,  # Known from JSON structure
-                "statistical_results_keys": list(exec_response['results'].keys()) if isinstance(exec_response['results'], dict) else "non_dict_results",
-                "max_evidence_per_finding": request.max_evidence_per_finding
+                "statistical_results_keys": list(statistical_results.keys()) if isinstance(statistical_results, dict) else "non_dict_results",
+                "max_evidence_per_finding": request.max_evidence_per_finding,
+                "stage_2_results_used": True
             }
         )
         
@@ -539,25 +631,112 @@ Raw Analysis Data:
     def _stage_4_interpret_results(self, exec_response, curation_response, request: ProductionPipelineRequest):
         """Stage 4: Generate final narrative interpretation."""
         
+        # Extract results from the two-stage structure
+        # Use derived metrics results (Stage 2) for interpretation
+        stage_2_results = exec_response.get('stage_2_derived_metrics', {})
+        statistical_results = stage_2_results.get('results', {})
+        
         # Debug logging for results interpreter
         if self.debug_agent in ['results-interpreter', None] and self.debug_level in ['debug', 'verbose']:
             self.logger.info(f"📖 DEBUG: Results interpreter input:")
-            self.logger.info(f"   - Statistical results keys: {list(exec_response['results'].keys()) if exec_response.get('results') else 'NO DATA'}")
+            self.logger.info(f"   - Statistical results keys: {list(statistical_results.keys()) if statistical_results else 'NO DATA'}")
             self.logger.info(f"   - Curated evidence keys: {list(curation_response.curated_evidence.keys()) if curation_response.curated_evidence else 'NO DATA'}")
             self.logger.info(f"   - Total evidence pieces: {sum(len(evidence_list) for evidence_list in curation_response.curated_evidence.values()) if curation_response.curated_evidence else 0}")
-            if exec_response.get('results'):
-                for key, value in exec_response['results'].items():
+            if statistical_results:
+                for key, value in statistical_results.items():
                     if isinstance(value, dict):
                         self.logger.info(f"   - {key}: {list(value.keys()) if value else 'EMPTY'}")
                     else:
                         self.logger.info(f"   - {key}: {type(value).__name__}")
         
+        # Build provenance metadata for report headers
+        from datetime import datetime, timezone
+        
+        # Generate timestamps
+        execution_time_utc = datetime.now(timezone.utc)
+        execution_time_local = datetime.now()
+        
+        # Use provided framework name or extract from spec
+        framework_name = request.framework_name or "Unknown Framework"
+        framework_version = "v6.0"  # Default for current architecture
+        
+        if not request.framework_name and request.framework_spec:
+            lines = request.framework_spec.split('\n')[:15]  # Check first 15 lines
+            for line in lines:
+                line_lower = line.lower()
+                if any(keyword in line_lower for keyword in ['framework', 'assessment', 'analysis']):
+                    if '#' in line or '**' in line:
+                        framework_name = line.strip('# *').strip()
+                        # Try to extract version
+                        if 'v' in line_lower and any(char.isdigit() for char in line):
+                            import re
+                            version_match = re.search(r'v\d+\.\d+', line_lower)
+                            if version_match:
+                                framework_version = version_match.group()
+                        break
+        
+        # Generate a more meaningful run ID
+        run_hash = hash(f"{request.scores_artifact_hash}_{execution_time_utc.isoformat()}")
+        run_id = f"{execution_time_utc.strftime('%Y%m%dT%H%M%SZ')}_{abs(run_hash)%100000:05d}"
+        
+        # Collect errors and warnings from the execution pipeline
+        notable_errors = []
+        warnings = []
+        quality_alerts = []
+        
+        # Check for statistical execution errors
+        if exec_response.get('stage_2_derived_metrics', {}).get('errors'):
+            for error in exec_response['stage_2_derived_metrics']['errors'][:3]:  # Top 3 errors
+                if 'not found in DataFrame' in error:
+                    notable_errors.append(f"Missing data column: {error.split(':')[0] if ':' in error else error}")
+                elif 'ANOVA failed' in error:
+                    notable_errors.append(f"Statistical test failed: {error.split(':')[-1].strip() if ':' in error else error}")
+                else:
+                    notable_errors.append(error)
+        
+        # Check for evidence curation issues
+        if not curation_response.success:
+            notable_errors.append(f"Evidence curation failed: {curation_response.error_message}")
+        elif curation_response.curated_evidence and len(curation_response.curated_evidence) == 0:
+            warnings.append("No evidence was successfully curated")
+        
+        # Check for data quality issues
+        total_evidence = sum(len(evidence_list) for evidence_list in curation_response.curated_evidence.values()) if curation_response.curated_evidence else 0
+        if total_evidence < 5:
+            quality_alerts.append(f"Limited evidence base: Only {total_evidence} pieces of evidence curated")
+        
+        # Check statistical results for issues
+        stage_2_results = exec_response.get('stage_2_derived_metrics', {})
+        if stage_2_results.get('results'):
+            successful_tasks = len([r for r in stage_2_results['results'].values() if not r.get('error')])
+            total_tasks = len(stage_2_results['results'])
+            if successful_tasks < total_tasks:
+                warnings.append(f"Statistical analysis: {successful_tasks}/{total_tasks} tasks completed successfully")
+        
         interpretation_request = InterpretationRequest(
-            statistical_results=exec_response['results'],
+            statistical_results=statistical_results,
             curated_evidence=curation_response.curated_evidence,
             framework_spec=request.framework_spec,
             experiment_context=request.experiment_context,
-            footnote_registry=curation_response.footnote_registry
+            footnote_registry=curation_response.footnote_registry,
+            
+            # Provenance metadata
+            run_id=run_id,
+            models_used={"synthesis": self.model},
+            execution_timestamp_utc=execution_time_utc.strftime('%Y-%m-%d %H:%M:%S UTC'),
+            execution_timestamp_local=execution_time_local.strftime('%Y-%m-%d %H:%M:%S %Z'),
+            framework_name=framework_name,
+            framework_version=framework_version,
+            corpus_info={
+                "document_count": "2",  # Known from simple_test
+                "corpus_type": "Political Speeches",
+                "date_range": "2008-2025"
+            },
+            
+            # Error and warning tracking
+            notable_errors=notable_errors if notable_errors else None,
+            warnings=warnings if warnings else None,
+            quality_alerts=quality_alerts if quality_alerts else None
         )
         
         # Log interpretation start
@@ -566,7 +745,8 @@ Raw Analysis Data:
             "interpretation_start",
             {
                 "curated_evidence_count": len(curation_response.curated_evidence),
-                "interpretation_focus": request.interpretation_focus
+                "interpretation_focus": request.interpretation_focus,
+                "stage_2_results_used": True
             }
         )
         

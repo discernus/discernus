@@ -1,6 +1,9 @@
 template: |
   You are tasked with creating a comprehensive narrative interpretation that synthesizes statistical analysis results with curated evidence. This is the final stage of a breakthrough THIN Code-Generated Synthesis Architecture.
 
+  PROVENANCE METADATA:
+  {provenance_metadata}
+
   FRAMEWORK SPECIFICATION:
   {framework_spec}
 
@@ -16,48 +19,95 @@ template: |
 
   CRITICAL CONTEXT INTEGRATION REQUIREMENTS:
   - **Use the full experiment context**: Reference specific hypotheses, research questions, and experimental design from the experiment context
-  - **Reference specific speakers and eras**: Use the corpus context to discuss specific speakers, their ideologies, and historical eras
-  - **Connect to framework theory**: Link findings to the theoretical framework and character dimensions
-  - **Address experimental design**: Discuss how the factorial design (if present) affects interpretation
+  - **Reference specific corpus elements**: Use the corpus context to discuss specific documents, speakers, or other relevant entities
+  - **Connect to framework theory**: Link findings to the theoretical framework and its dimensions
+  - **Address experimental design**: Discuss how the experimental design affects interpretation
   - **Reference specific statistical tests**: Connect results to the required statistical tests mentioned in the experiment context
+
+  PROFESSIONAL FORMATTING REQUIREMENTS:
+  - **Enhanced Markdown Headers**: Use clean Markdown with status indicators and emojis for visual hierarchy
+  - **Professional Tables**: Use standard Markdown tables with proper alignment and significance indicators
+  - **Unicode Visualizations**: Use Unicode block characters (█▓▒░) for simple bar charts and distributions
+  - **Mermaid Diagrams**: Use Mermaid syntax for complex relationships and flowcharts when beneficial
+  - **Statistical Presentation**: Clean tables with significance indicators (⭐, ✅, ❌) and formatting
+  - **Responsive Design**: Ensure formatting works across different Markdown renderers
 
   TASK: Create a comprehensive narrative report that:
 
-  1. **EXECUTIVE SUMMARY** (150-200 words):
+  1. **PROFESSIONAL HEADER**:
+     - Clean Markdown header with experiment title and status indicators
+     - Generated title and subtitle based on experiment context
+     - **MANDATORY PROVENANCE SECTION**: Use the provided provenance metadata to create a comprehensive header including:
+       * **Run ID**: {run_id} (if provided)
+       * **Execution Time**: Both UTC and local timestamps (if provided)
+       * **Models Used**: Analysis and synthesis models (if provided)
+       * **Framework**: Name and version (if provided)
+       * **Corpus Info**: Document count, type, and composition (if provided)
+       * **Quality Status**: Include any notable errors, warnings, or quality alerts from the metadata
+     - Use status indicators (✅, ⚠️, ❌, 📊, 🔬) for visual organization
+     - Format times as both local and UTC (Zulu) time for global accessibility
+     - **Error Transparency**: If errors or warnings are present, include a clear Quality Status section with appropriate warning indicators
+
+  2. **FRAMEWORK OVERVIEW**:
+     - Brief summary of the analytical framework, its theoretical foundation, and key features
+     - Description of the framework's dimensions, metrics, and analytical approach
+     - Explanation of any calculated indices or derived measures (e.g., MC-SCI, cohesion indices)
+     - Framework version and any relevant methodological notes
+
+  3. **CORPUS PROFILE**:
+     - Descriptive summary of the analyzed corpus including document types, sources, and scope
+     - Key characteristics of the documents (speakers, dates, contexts, themes)
+     - Corpus size and composition details
+     - Any relevant metadata about document selection or preparation
+
+  4. **EXECUTIVE SUMMARY** (150-200 words):
      - Synthesize the most important findings in the context of the specific experiment
      - State key conclusions clearly with reference to the research hypotheses
-     - Highlight practical implications for the specific speakers/eras analyzed
+     - Highlight practical implications for the specific corpus and framework analyzed
 
-  2. **STATISTICAL FINDINGS INTERPRETATION**:
-     - Interpret descriptive statistics in the context of the specific experimental design
-     - Explain hypothesis test results and their significance for the research questions
-     - Discuss correlation patterns and their meaning for the framework dimensions
-     - Address reliability findings and their implications for the specific corpus
-     - Connect statistical measures to the theoretical framework and character dimensions
+  5. **HYPOTHESIS TESTING RESULTS**:
+     - Present each hypothesis with clear statistical results in Markdown tables
+     - Include F-statistics, p-values, effect sizes, and significance indicators (⭐, ✅, ❌)
+     - Use clean Markdown table formatting with proper alignment
+     - Provide clear findings (✅ SUPPORTED / ❌ REJECTED / ⚠️ PARTIALLY SUPPORTED)
 
-  3. **EVIDENCE INTEGRATION**:
+  6. **DETAILED STATISTICAL ANALYSIS**:
+     - **Score Table**: Clean Markdown table with framework dimensions and calculated metrics as columns, corpus files as rows (truncated to 25 rows maximum)
+     - **Distribution Analysis**: Unicode bar charts for key metric distributions using █▓▒░ characters
+     - **Correlation Matrix**: Markdown tables showing top associations, optionally with Mermaid diagrams for complex relationships
+     - **Statistical Tables**: Clean ANOVA results with effect sizes and confidence intervals
+     - **Reliability Analysis**: Cronbach's α tables with 95% confidence intervals where applicable
+     - **Framework Performance Analysis**: Unicode bar charts showing dimensional performance summaries (if provided in statistical results)
+
+  7. **EVIDENCE INTEGRATION**:
      - Weave curated evidence throughout the analysis using numbered footnotes [1], [2], etc.
      - Use evidence to illustrate and support statistical findings with concrete examples
-     - Highlight particularly compelling evidence pieces from specific speakers/eras
+     - Highlight particularly compelling evidence pieces from the corpus
      - Show how evidence validates or contextualizes the numbers in the experimental context
      - MANDATORY: All evidence references must use the assigned footnote numbers
 
-  4. **KEY FINDINGS** (5-7 bullet points):
+  8. **KEY FINDINGS** (5-7 bullet points):
      - List the most significant discoveries with reference to the specific experiment
-     - Combine statistical and evidence-based insights with speaker/era context
+     - Combine statistical and evidence-based insights with corpus context
      - Focus on actionable or theoretically important results for the research questions
 
-  5. **METHODOLOGY NOTES**:
+  9. **METHODOLOGY NOTES**:
      - Acknowledge the post-computation evidence curation approach
      - Discuss sample characteristics and limitations in the context of the specific corpus
      - Note reliability assessments and their impact on the experimental validity
      - Reference the specific experimental design and its implications
 
-  6. **IMPLICATIONS AND CONCLUSIONS**:
+  10. **IMPLICATIONS AND CONCLUSIONS**:
      - Connect findings to the broader framework context and theoretical background
-     - Discuss theoretical and practical implications for the specific speakers/eras
+     - Discuss theoretical and practical implications for the specific corpus and framework
      - Suggest areas for future investigation based on the experimental results
      - Address how findings relate to the original research hypotheses
+
+  11. **TECHNICAL SPECIFICATIONS**:
+     - Computational environment details
+     - Data quality assurance reporting
+     - Statistical package information
+     - Analysis parameters and thresholds
 
   WRITING REQUIREMENTS:
   - Academic tone but accessible language
@@ -65,13 +115,62 @@ template: |
   - Use numbered footnotes [1], [2], [3] for ALL evidence citations
   - Maintain logical flow between sections
   - Ensure conclusions are well-supported by both statistics and evidence
-  - Reference specific speakers, eras, and ideologies throughout
+  - Reference specific corpus elements and framework dimensions throughout
   - Connect all findings to the experimental design and research questions
   - Aim for 1000-2000 words total
   - CRITICAL: Never create fictional evidence - only use evidence with assigned footnote numbers
+  - Use professional Markdown formatting with Unicode visualizations, clean tables, and optional Mermaid diagrams
+
+  VISUALIZATION EXAMPLES:
+  
+  **Unicode Bar Chart Format:**
+  ```
+  ### Framework Reliability Distribution
+  Excellent (α≥0.80)  ████████████████████████████████████████  5 dims (38.5%)
+  Acceptable (α≥0.70) ███████████████████████████████           4 dims (30.8%)
+  Marginal (α≥0.60)   ████████████████                          2 dims (15.4%)
+  Poor (α<0.60)       ████████████████                          2 dims (15.4%)
+  ```
+  
+  **Professional Status Headers:**
+  ```
+  ---
+  ## 🎯 EXPERIMENT COMPLETE
+  
+  **Status**: ⚠️ Complete with Warnings  
+  **Framework Validation**: ✅ Successful  
+  **Statistical Analysis**: ⚠️ Partial (3/5 tests successful)  
+  **Evidence Integration**: ✅ Complete  
+  
+  ### Quality Status
+  ⚠️ **Warnings:**
+  1. Statistical analysis: 3/5 tasks completed successfully
+  2. Limited evidence base: Only 4 pieces of evidence curated
+  
+  ❌ **Notable Errors:**
+  1. Statistical test failed: Grouping variable 'ideology' not found in DataFrame
+  ---
+  ```
+  
+  **Statistical Table Format:**
+  ```
+  | Dimension | F-Stat | p-value | Effect Size | Significance |
+  |-----------|--------|---------|-------------|--------------|
+  | Compersion | 3.24 | **0.009** | **0.49** | **⭐⭐ SIG** |
+  | Tribal Dominance | 1.85 | 0.112 | 0.31 | ❌ NS |
+  ```
+  
+  **Optional Mermaid for Complex Relationships:**
+  ```mermaid
+  graph LR
+      A[Hope] -.->|r=0.78| B[Cohesive Goals]
+      C[Fear] -.->|r=0.71| D[Fragmentative Goals]
+      style A fill:#e1f5fe
+      style C fill:#ffebee
+  ```
 
   RESPONSE FORMAT:
-  Structure your response with clear section headers. Begin with the Executive Summary, then proceed through each section systematically. Use evidence quotes and statistical values to support all major claims. Always reference the specific experimental context, speakers, and research questions.
+  Structure your response with clear section headers. Begin with the Professional Header, then proceed through each section systematically. Use evidence quotes and statistical values to support all major claims. Always reference the specific experimental context, corpus elements, and research questions. Include professional formatting elements throughout.
 
   MANDATORY: End your report with a "References" section that lists all footnoted evidence:
   

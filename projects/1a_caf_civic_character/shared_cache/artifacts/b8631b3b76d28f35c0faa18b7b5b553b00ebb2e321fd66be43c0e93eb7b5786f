@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_c88c54359ce3",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_0\",\n    \"framework_version\": \"v6.1\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis performed according to the provided framework. Confidence levels are assigned based on the clarity and directness of the text supporting each dimension.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"steve_king_2017_house_floor.txt\",\n      \"dimensional_scores\": {\n        \"diginity\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"truth\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.4,\n          \"confidence\": 0.75\n        },\n        \"justice\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"hope\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.6\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.85\n        },\n        \"resentment\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.4,\n          \"confidence\": 0.75\n        },\n        \"fear\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.3,\n          \"confidence\": 0.65\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"diginity\",\n          \"quote_text\": \"And so our obligation then is to say, \\\"Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice.\\\"\",\n          \"confidence\": 0.6,\n          \"context_type\": \"call to action/principle\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"I can read this Constitution and understand what it means. And I can read the precedent cases along the way that have flowed from Marbury on down to today.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"statement of understanding\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"And so our obligation then is to say, \\\"Mr. President, you're lame duck. Let's stick with the tradition. Let's stick with the practice.\\\"\",\n          \"confidence\": 0.7,\n          \"context_type\": \"advocacy for established norms\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"And I hope to be able to come here and give you these stats and I can give you the data on the thousands of Americans that are dead at the hands of the criminal aliens that have been incarcerated for a temporary period of time and released by multiple jurisdictions across this country.\",\n          \"confidence\": 0.5,\n          \"context_type\": \"expression of desired outcome\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"Let's stick with the tradition. Let's stick with the practice.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"adherence to established methods\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"It's my rebate to what I've listened to for the last 40 minutes or so. I came here to talk about the rule of law for sure. And part of this is stimulated by an immigration hearing that we had yesterday in the subcommittee, House Judiciary.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"focus on specific group interests/hearings\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"They made it up. And they wrapped themselves in the cloak of constitutional authority in Marbury versus Madison and a whole series of presumably precedent cases along the line. And that was June 24th on Thursday and it would kick the breath out of your gut to hear that if you're a constitutionalist.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"accusing others of fabricating law\"\n        },\n        {\n          \"dimension\": \"resentment\",\n          \"quote_text\": \"But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedent and star decisions might mean to them, decides that they can write words into the law. A Supreme Court writing law.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"expressed frustration with judicial action\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"But it's not longer possible to look at this Supreme Court and discern what a likely decision of the Court might be by studying the text of the Constitution and the text of the law because we have a court that will write, make it up as they go along, write laws.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"expression of uncertainty and negative prediction\"\n        },\n        {\n          \"dimension\": \"fantasy\",\n          \"quote_text\": \"There's no enumerated power for the federal government to to create exchanges for, for insurance health insurance policies within the states.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"assertion of non-existent powers\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T04:49:09.322766+00:00",
+    "end_time": "2025-07-31T04:49:13.823642+00:00",
+    "duration_seconds": 4.500876,
+    "llm_interaction_hash": "5c2dc4d60d02454f"
+  },
+  "input_artifacts": {
+    "framework_hash": "6043b1d82339b372041e90fc75c20cb4f02b317b002734234bbb47527e708950",
+    "document_hashes": [
+      "6d762d9a0ecb770b6a20c17994e6a3bd5051fa062012466a1e8934d43a4f1708"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T044841Z_b3319fe5"
+  }
+}
