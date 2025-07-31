@@ -12,6 +12,7 @@ template: |
 
   CURATED EVIDENCE ({total_evidence} pieces):
   {evidence_summary}
+  {footnote_instructions}
 
   CRITICAL CONTEXT INTEGRATION REQUIREMENTS:
   - **Use the full experiment context**: Reference specific hypotheses, research questions, and experimental design from the experiment context
@@ -35,10 +36,11 @@ template: |
      - Connect statistical measures to the theoretical framework and character dimensions
 
   3. **EVIDENCE INTEGRATION**:
-     - Weave curated evidence throughout the analysis, referencing specific speakers
+     - Weave curated evidence throughout the analysis using numbered footnotes [1], [2], etc.
      - Use evidence to illustrate and support statistical findings with concrete examples
      - Highlight particularly compelling evidence pieces from specific speakers/eras
      - Show how evidence validates or contextualizes the numbers in the experimental context
+     - MANDATORY: All evidence references must use the assigned footnote numbers
 
   4. **KEY FINDINGS** (5-7 bullet points):
      - List the most significant discoveries with reference to the specific experiment
@@ -60,14 +62,22 @@ template: |
   WRITING REQUIREMENTS:
   - Academic tone but accessible language
   - Integrate quantitative and qualitative insights seamlessly
-  - Use specific numbers and evidence quotes with speaker attribution
+  - Use numbered footnotes [1], [2], [3] for ALL evidence citations
   - Maintain logical flow between sections
   - Ensure conclusions are well-supported by both statistics and evidence
   - Reference specific speakers, eras, and ideologies throughout
   - Connect all findings to the experimental design and research questions
   - Aim for 1000-2000 words total
+  - CRITICAL: Never create fictional evidence - only use evidence with assigned footnote numbers
 
   RESPONSE FORMAT:
   Structure your response with clear section headers. Begin with the Executive Summary, then proceed through each section systematically. Use evidence quotes and statistical values to support all major claims. Always reference the specific experimental context, speakers, and research questions.
 
+  MANDATORY: End your report with a "References" section that lists all footnoted evidence:
+  
+  ## References
+  [1] [Speaker Name]: "[Evidence text]" (Document: [document_name])
+  [2] [Speaker Name]: "[Evidence text]" (Document: [document_name])
+  [3] [Speaker Name]: "[Evidence text]" (Document: [document_name])
+  
   Generate the comprehensive narrative report now: 

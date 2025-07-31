@@ -24,6 +24,7 @@ class AnalysisPlanRequest:
     data_summary: str
     available_columns: list
     research_questions: list
+    raw_analysis_data: str = ""  # THIN: Raw analysis data for LLM interpretation
 
 
 @dataclass
@@ -86,8 +87,9 @@ class AnalysisPlanner:
                         "experiment_context_length": len(request.experiment_context),
                         "framework_spec_length": len(request.framework_spec),
                         "data_summary_length": len(request.data_summary),
-                        "available_columns": request.available_columns,
-                        "research_questions_count": len(request.research_questions)
+                        "raw_analysis_data_length": len(request.raw_analysis_data),
+                        "research_questions_count": len(request.research_questions),
+                        "approach": "thin_raw_data_interpretation"
                     }
                 )
             
@@ -182,8 +184,8 @@ You are an expert research analyst tasked with creating a structured mathematica
 ## DATA SUMMARY
 {request.data_summary}
 
-## AVAILABLE COLUMNS
-{', '.join(request.available_columns)}
+## RAW ANALYSIS DATA (THIN APPROACH)
+{request.raw_analysis_data[:2000]}{"..." if len(request.raw_analysis_data) > 2000 else ""}
 
 ## RESEARCH QUESTIONS
 {chr(10).join(f"- {q}" for q in request.research_questions)}
@@ -195,12 +197,26 @@ Use these standardized semantic categories for task names to ensure interface co
 
 **CRITICAL**: Your task names must use semantic keys from the grammar above (e.g., "descriptive_stats", "correlations", "reliability", "variance_analysis") rather than numbered task names like "01_descriptive_statistics_scores".
 
-## CRITICAL CONSTRAINT: COLUMN VALIDATION
-**You MUST ONLY use column names that are listed in AVAILABLE COLUMNS above.**
-- If you need grouping variables (like 'era' or 'ideology'), they must exist in the available columns
-- If they don't exist, you must work with the data you have
-- Do NOT assume columns exist that are not listed above
-- Focus on descriptive statistics and correlations of the available character dimension scores
+## THIN APPROACH: DATA INTERPRETATION
+**You are provided with raw analysis data above. Your task is to:**
+1. **Interpret the JSON structure** to understand available dimensions and data
+2. **Identify available columns** from the raw data structure - look for patterns like:
+   - Score columns: `dimension_score`, `dimension_raw_score` (e.g., `dignity_score`, `dignity_raw_score`)
+   - Classification columns: `category_classification_classification` (e.g., `era_classification_classification`)
+   - Metadata columns: `field_salience`, `field_confidence`, `field_justification`
+   
+   **CRITICAL**: All column names use UNDERSCORES, never dots. The DataFrame columns will be:
+   - `dignity_score`, `dignity_raw_score`, `dignity_salience`, `dignity_confidence`
+   - `era_classification_classification`, `ideology_classification_classification`
+   - NOT `dignity.score` or `era_classification.classification`
+3. **Extract grouping variables** from classification fields:
+   - For grouping by era: use `era_classification_classification` column
+   - For grouping by ideology: use `ideology_classification_classification` column
+   - Do NOT assume simplified column names like `era` or `ideology` exist
+4. **Create analysis plan** using ONLY the actual column names you see in the raw data
+5. **Use semantic keys** from the quantitative grammar for task names
+
+**CRITICAL**: Your analysis plan must reference the EXACT column names present in the data structure. Do not assume or create simplified column names.
 
 ## TASK
 Analyze the experiment context, framework, and research questions to create a comprehensive analysis plan. Your plan should specify exactly which mathematical operations to perform to answer the research questions using ONLY the available columns.
@@ -208,23 +224,22 @@ Analyze the experiment context, framework, and research questions to create a co
 ## AVAILABLE MATHEMATICAL TOOLS
 You have access to these pre-built, tested mathematical functions:
 
-1. **descriptive_stats**: Calculate mean, std, min, max, median, quartiles, skewness, kurtosis
-   - Parameters: columns (list of column names)
+1. **calculate_descriptive_stats**: Calculate mean, std, min, max, median, quartiles, skewness, kurtosis
+   - Parameters: columns (list of column names), grouping_variable (optional)
 
-2. **independent_t_test**: Compare two groups on a dependent variable
+2. **perform_independent_t_test**: Compare two groups on a dependent variable
    - Parameters: grouping_variable, dependent_variable, group1 (optional), group2 (optional)
 
-3. **pearson_correlation**: Calculate Pearson correlation matrix
+3. **calculate_pearson_correlation**: Calculate Pearson correlation matrix
    - Parameters: columns (list of column names)
 
-4. **spearman_correlation**: Calculate Spearman correlation matrix
-   - Parameters: columns (list of column names)
-
-5. **one_way_anova**: Test for differences between multiple groups
+4. **perform_one_way_anova**: Test for differences between multiple groups
    - Parameters: grouping_variable, dependent_variable
 
-6. **effect_sizes**: Calculate effect sizes (eta-squared) for group differences
+5. **calculate_effect_sizes**: Calculate effect sizes (eta-squared) for group differences
    - Parameters: grouping_variable, dependent_variable
+
+**IMPORTANT**: Use these EXACT tool names in your analysis plan. Do not use simplified names like "descriptive_stats" - use the full function name like "calculate_descriptive_stats".
 
 ## OUTPUT FORMAT
 You must output a valid JSON object with this exact structure:
@@ -292,8 +307,8 @@ Generate your analysis plan now:
             
             # Validate each task
             available_tools = {
-                "descriptive_stats", "independent_t_test", "pearson_correlation",
-                "spearman_correlation", "one_way_anova", "effect_sizes"
+                "calculate_descriptive_stats", "perform_independent_t_test", "calculate_pearson_correlation",
+                "perform_one_way_anova", "calculate_effect_sizes"
             }
             
             for task_name, task_config in tasks.items():

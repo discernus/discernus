@@ -27,13 +27,14 @@ class MathToolkitError(Exception):
     pass
 
 
-def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str]) -> Dict[str, Any]:
+def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], grouping_variable: str = None) -> Dict[str, Any]:
     """
     Calculate descriptive statistics for specified columns.
     
     Args:
         dataframe: Input DataFrame
         columns: List of column names to analyze
+        grouping_variable: Optional grouping variable for grouped statistics
         
     Returns:
         Dictionary containing descriptive statistics for each column
@@ -41,6 +42,33 @@ def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str]) -> 
     try:
         results = {}
         
+        # Handle grouping variable (compatibility fix)
+        if grouping_variable and grouping_variable in dataframe.columns:
+            # Group by the specified variable and calculate stats for each group
+            grouped_results = {}
+            for group_name, group_df in dataframe.groupby(grouping_variable):
+                group_stats = {}
+                for column in columns:
+                    if column not in group_df.columns:
+                        continue
+                    series = group_df[column].dropna()
+                    if len(series) > 0:
+                        group_stats[column] = {
+                            "count": int(len(series)),
+                            "mean": float(series.mean()),
+                            "std": float(series.std()),
+                            "min": float(series.min()),
+                            "max": float(series.max())
+                        }
+                grouped_results[str(group_name)] = group_stats
+            
+            return {
+                "type": "descriptive_stats_grouped",
+                "grouping_variable": grouping_variable,
+                "groups": grouped_results
+            }
+        
+        # Standard ungrouped statistics
         for column in columns:
             if column not in dataframe.columns:
                 raise MathToolkitError(f"Column '{column}' not found in DataFrame. Available columns: {list(dataframe.columns)}")
@@ -304,17 +332,32 @@ def calculate_effect_sizes(dataframe: pd.DataFrame,
         Dictionary containing effect size calculations
     """
     try:
+        # Validate columns exist
+        if grouping_variable not in dataframe.columns:
+            raise MathToolkitError(f"Grouping variable '{grouping_variable}' not found in DataFrame")
+        if dependent_variable not in dataframe.columns:
+            raise MathToolkitError(f"Dependent variable '{dependent_variable}' not found in DataFrame")
+        
+        # Ensure dependent variable is numeric
+        dep_series = pd.to_numeric(dataframe[dependent_variable], errors='coerce').dropna()
+        if len(dep_series) == 0:
+            raise MathToolkitError(f"No valid numeric data in dependent variable '{dependent_variable}'")
+        
+        # Filter dataframe to only include rows with valid numeric dependent variable
+        valid_data = dataframe[pd.to_numeric(dataframe[dependent_variable], errors='coerce').notna()].copy()
+        valid_data[dependent_variable] = pd.to_numeric(valid_data[dependent_variable])
+        
         # Calculate group means and overall mean
-        group_means = dataframe.groupby(grouping_variable)[dependent_variable].mean()
-        overall_mean = dataframe[dependent_variable].mean()
+        group_means = valid_data.groupby(grouping_variable)[dependent_variable].mean()
+        overall_mean = valid_data[dependent_variable].mean()
         
         # Calculate eta-squared (proportion of variance explained)
-        ss_between = sum(len(dataframe[dataframe[grouping_variable] == group]) * 
+        ss_between = sum(len(valid_data[valid_data[grouping_variable] == group]) * 
                         (mean - overall_mean) ** 2 
                         for group, mean in group_means.items())
         
         ss_total = sum((value - overall_mean) ** 2 
-                      for value in dataframe[dependent_variable].dropna())
+                      for value in valid_data[dependent_variable])
         
         eta_squared = ss_between / ss_total if ss_total > 0 else 0
         
@@ -346,12 +389,11 @@ def _interpret_eta_squared(eta_squared: float) -> str:
 
 # Registry of available tools for the synthesis pipeline
 TOOL_REGISTRY = {
-    "descriptive_stats": calculate_descriptive_stats,
-    "independent_t_test": perform_independent_t_test,
-    "pearson_correlation": lambda df, **kwargs: calculate_pearson_correlation(df, kwargs.get('columns', []), "pearson"),
-    "spearman_correlation": lambda df, **kwargs: calculate_pearson_correlation(df, kwargs.get('columns', []), "spearman"),
-    "one_way_anova": perform_one_way_anova,
-    "effect_sizes": calculate_effect_sizes
+    "calculate_descriptive_stats": calculate_descriptive_stats,
+    "perform_independent_t_test": perform_independent_t_test,
+    "calculate_pearson_correlation": lambda df, **kwargs: calculate_pearson_correlation(df, kwargs.get('columns', []), "pearson"),
+    "perform_one_way_anova": perform_one_way_anova,
+    "calculate_effect_sizes": calculate_effect_sizes
 }
 
 
@@ -399,4 +441,94 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
         
     except Exception as e:
         logger.error(f"Analysis plan execution failed: {str(e)}")
-        raise MathToolkitError(f"Analysis plan execution failed: {str(e)}") 
+        raise MathToolkitError(f"Analysis plan execution failed: {str(e)}")
+
+
+def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    THIN version: Execute analysis plan with raw JSON data instead of pre-parsed DataFrame.
+    
+    This function handles the JSON parsing internally, making the synthesis pipeline THIN.
+    
+    Args:
+        raw_analysis_data: Raw JSON string from analysis artifacts
+        analysis_plan: Dictionary containing the analysis plan from AnalysisPlanner
+        
+    Returns:
+        Dictionary containing all analysis results
+    """
+    try:
+        # Handle raw LLM responses with delimiters (fully THIN approach)
+        import json
+        import re
+        
+        # Extract JSON from LLM response if it has delimiters
+        json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+        json_match = re.search(json_pattern, raw_analysis_data, re.DOTALL)
+        if json_match:
+            json_str = json_match.group(1).strip()
+        else:
+            # Assume it's already clean JSON
+            json_str = raw_analysis_data
+        
+        # Parse JSON to analysis result
+        analysis_result = json.loads(json_str)
+        
+        # Convert to DataFrame using THIN helper (temporary for compatibility)
+        scores_df = _json_scores_to_dataframe_thin(analysis_result)
+        
+        logger.info(f"THIN MathToolkit: Parsed raw LLM response to DataFrame {scores_df.shape}")
+        
+        # Use existing execute_analysis_plan with parsed DataFrame
+        return execute_analysis_plan(scores_df, analysis_plan)
+        
+    except Exception as e:
+        logger.error(f"THIN analysis plan execution failed: {str(e)}")
+        raise MathToolkitError(f"THIN analysis plan execution failed: {str(e)}")
+
+
+def _json_scores_to_dataframe_thin(analysis_result: dict) -> pd.DataFrame:
+    """
+    THIN helper: Convert JSON analysis to DataFrame (minimal parsing for MathToolkit compatibility).
+    
+    This is a temporary bridge function while we transition to fully THIN architecture.
+    Eventually, MathToolkit itself should handle raw JSON directly.
+    """
+    try:
+        document_analyses = analysis_result.get('document_analyses', [])
+        
+        if not document_analyses:
+            raise ValueError("No document_analyses found in JSON")
+        
+        rows = []
+        for doc_analysis in document_analyses:
+            document_id = doc_analysis.get('document_id', '{artifact_id}')
+            dimensional_scores = doc_analysis.get('dimensional_scores', {})
+            
+            # Create row with document identifier
+            row_data = {'aid': document_id}
+            
+            # Extract dimensional scores generically (framework-agnostic)
+            for dim_name, dim_data in dimensional_scores.items():
+                if isinstance(dim_data, dict):
+                    # Standard v6.0 fields with compatibility mapping
+                    raw_score = dim_data.get('raw_score', 0.0)
+                    row_data[f"{dim_name}_score"] = raw_score
+                    row_data[f"{dim_name}_raw_score"] = raw_score  # Compatibility alias
+                    row_data[f"{dim_name}_salience"] = dim_data.get('salience', 0.0)
+                    row_data[f"{dim_name}_confidence"] = dim_data.get('confidence', 0.0)
+                    
+                    # Handle additional fields generically
+                    for field_name, field_value in dim_data.items():
+                        if field_name not in ['raw_score', 'salience', 'confidence']:
+                            column_name = f"{dim_name}_{field_name}"
+                            row_data[column_name] = field_value
+            
+            # No framework-specific column mapping - let LLM AnalysisPlanner handle column discovery
+            
+            rows.append(row_data)
+        
+        return pd.DataFrame(rows)
+        
+    except Exception as e:
+        raise MathToolkitError(f"Failed to convert JSON to DataFrame: {str(e)}") 

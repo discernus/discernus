@@ -100,40 +100,29 @@ class EnhancedAnalysisAgent:
                               current_scores_hash: Optional[str], 
                               current_evidence_hash: Optional[str]) -> Tuple[str, str]:
         """
-        Semi-THIN approach: Extract JSON from delimiters but don't parse content.
-        Store clean JSON for downstream compatibility while avoiding complex parsing.
+        Fully THIN approach: Store complete raw LLM response as artifact.
+        Let downstream synthesis pipeline handle ALL parsing and interpretation.
         """
-        import re
-        
-        # Extract JSON using proprietary delimiters (minimal parsing for compatibility)
-        json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
-        json_match = re.search(json_pattern, result_content, re.DOTALL)
-        if not json_match:
-            # Fallback: store raw response if no delimiters found
-            json_str = result_content
-        else:
-            json_str = json_match.group(1).strip()
-        
-        # Store the extracted JSON as artifact (semi-THIN: minimal parsing for compatibility)
-        json_artifact_hash = self.storage.put_artifact(
-            json_str.encode('utf-8'),
+        # Store the complete raw LLM response as artifact (fully THIN principle)
+        raw_response_hash = self.storage.put_artifact(
+            result_content.encode('utf-8'),
             {
-                "artifact_type": "analysis_json_v6",
+                "artifact_type": "raw_analysis_response_v6",
                 "document_hash": document_hash,
                 "framework_version": "v6.0",
                 "framework_hash": self.analysis_provenance.get("framework_hash", "unknown")
             }
         )
         
-        self.audit.log_agent_event(self.agent_name, "json_extracted_stored", {
+        self.audit.log_agent_event(self.agent_name, "raw_response_stored", {
             "document_hash": document_hash,
-            "json_artifact_hash": json_artifact_hash,
-            "extraction_method": "delimiter_extraction_only",
-            "approach": "semi_thin_compatibility"
+            "response_artifact_hash": raw_response_hash,
+            "response_length": len(result_content),
+            "approach": "fully_thin_raw_storage"
         })
         
-        # Return JSON artifact hash as both scores and evidence for v6.0 pipeline
-        return json_artifact_hash, json_artifact_hash
+        # Return raw response hash as both scores and evidence for v6.0 pipeline
+        return raw_response_hash, raw_response_hash
 
 
 
