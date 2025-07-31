@@ -1,8 +1,0 @@
-{
-  "raw_analysis_response": "{\"document_analyses\": {\"pdaf_doc_3.txt\": {\"scores\": {\"Manichaean_Framing\": 0.2, \"Anti_Pluralism\": 0.2, \"Popular_Sovereignty\": 0.2}, \"PSCI_Score\": 0.2, \"Salience_Concentration\": 0.04}}}",
-  "input_artifacts": {
-    "document_hashes": [
-      "39a890c90b59"
-    ]
-  }
-}

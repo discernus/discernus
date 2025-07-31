@@ -1,0 +1,162 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Character Assessment Framework v6.1",
+    "framework_version": "v6.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The speaker passionately advocates for the First Step Act, a criminal justice reform bill. The analysis reflects a strong emphasis on the virtues of Justice, Dignity, and Hope, using the vice of Resentment (focus on historical grievances and systemic flaws) as the primary justification for reform. The speech is notably pragmatic and anti-tribal, celebrating bipartisan compromise. Other vices like Manipulation, Fear, and Fantasy are minimally present."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "cory_booker_2018_first_step_act.txt",
+      "dimensional_scores": {
+        "Dignity": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "Truth": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "Justice": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "Hope": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "Pragmatism": {
+          "raw_score": 0.75,
+          "salience": 0.65,
+          "confidence": 0.9
+        },
+        "Tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.95
+        },
+        "Manipulation": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.95
+        },
+        "Resentment": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "Fear": {
+          "raw_score": 0.2,
+          "salience": 0.15,
+          "confidence": 0.9
+        },
+        "Fantasy": {
+          "raw_score": 0.05,
+          "salience": 0.1,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Dignity",
+          "quote_text": "Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible.",
+          "confidence": 0.95,
+          "context_type": "aspirational_value_statement"
+        },
+        {
+          "dimension": "Dignity",
+          "quote_text": "This is a system that still subjects young people to what other countries and human rights activists in this nation call torture - juvenile solitary confinement.",
+          "confidence": 0.9,
+          "context_type": "critique_of_dehumanizing_practice"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "Since 1980 alone, our federal prison population has exploded by eight hundred percent - an 800 percent increase in our prison population.",
+          "confidence": 0.95,
+          "context_type": "statistical_claim"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "But if you are black, you are almost four times more likely to get arrested for selling drugs and almost three times more likely to be arrested for possession of drugs.",
+          "confidence": 0.9,
+          "context_type": "statistical_claim_of_disparity"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "As Bryan Stevenson has said, we live in a nation that treats you better if you're rich and guilty than if you're poor and innocent.",
+          "confidence": 0.95,
+          "context_type": "central_argument_on_injustice"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "The scales of justice in America are not balanced.",
+          "confidence": 0.95,
+          "context_type": "thematic_statement"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "But today we have an opportunity to do something about addressing the ills of this system. And that's why I'm proud that this is a bipartisan compromise bill...",
+          "confidence": 0.95,
+          "context_type": "statement_of_optimistic_opportunity"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "This bill is a step - a step towards healing.",
+          "confidence": 0.9,
+          "context_type": "forward_looking_vision"
+        },
+        {
+          "dimension": "Pragmatism",
+          "quote_text": "Can we do more? Yes. This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction...",
+          "confidence": 0.95,
+          "context_type": "acknowledgement_of_compromise"
+        },
+        {
+          "dimension": "Tribalism",
+          "quote_text": "I'm proud of this coalition. I'm proud that the coalition has people all across the political spectrum. I'm proud of the coalition as people from diverse backgrounds.",
+          "confidence": 0.95,
+          "context_type": "explicit_rejection_of_tribalism"
+        },
+        {
+          "dimension": "Manipulation",
+          "quote_text": "I want to see more than the bill we have today, and I know we can do more than just this bill we have today. But this is a first step.",
+          "confidence": 0.9,
+          "context_type": "demonstration_of_transparency"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "We have a system that - over a century, we in a nation have overcome slavery, decades of Jim Crow - but as one author, Michelle Alexander, calls our criminal justice system, she calls it the new Jim Crow because of its disproportionate impact on people of color.",
+          "confidence": 0.95,
+          "context_type": "framing_of_historical_grievance"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "The war on drugs, which has fueled so much of the explosion of our prison population, has really been a war on people - on certain people in certain communities and not on others.",
+          "confidence": 0.9,
+          "context_type": "assignment_of_blame_to_past_policy"
+        },
+        {
+          "dimension": "Fear",
+          "quote_text": "Our criminal justice system, as it stands right now, is a cancer on the soul of our country, and it's hurting every single American.",
+          "confidence": 0.85,
+          "context_type": "statement_of_severe_problem_without_catastrophizing"
+        },
+        {
+          "dimension": "Fantasy",
+          "quote_text": "Let's make no mistake, this legislation, which is one small step, will affect thousands and thousands of lives.",
+          "confidence": 0.95,
+          "context_type": "rejection_of_unrealistic_expectations"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

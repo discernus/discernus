@@ -119,8 +119,8 @@ class ProductionThinSynthesisPipeline:
         # Initialize agents with infrastructure
         self.raw_data_planner = RawDataAnalysisPlanner(model=model, audit_logger=audit_logger)
         self.derived_metrics_planner = DerivedMetricsAnalysisPlanner(model=model, audit_logger=audit_logger)
-        self.evidence_curator = EvidenceCurator(model=model)
-        self.results_interpreter = ResultsInterpreter(model=model)
+        self.evidence_curator = EvidenceCurator(model=model, audit_logger=audit_logger)
+        self.results_interpreter = ResultsInterpreter(model=model, audit_logger=audit_logger)
         
         # Set up logging
         self.logger = logging.getLogger(__name__)
@@ -372,13 +372,45 @@ class ProductionThinSynthesisPipeline:
         
         self.logger.info(f"THIN approach: Passing raw analysis data ({len(raw_analysis_data)} chars) to two-stage planners")
         
-        # Create simple data summary without parsing (THIN principle)
-        raw_data_summary = f"""
+        # Create enhanced data summary with column discovery (THIN principle)
+        # Parse the raw data to discover available columns for the LLM
+        try:
+            import json
+            import pandas as pd
+            from discernus.core.math_toolkit import _json_scores_to_dataframe_thin
+            
+            # Parse the raw analysis data to get column information
+            analysis_result = json.loads(raw_analysis_data)
+            df = _json_scores_to_dataframe_thin(analysis_result)
+            
+            # Create column summary for LLM discovery
+            column_summary = f"""
+Raw Analysis Data:
+- Data size: {len(raw_analysis_data)} characters
+- Data type: JSON analysis results
+- Source: Analysis artifact {request.scores_artifact_hash[:12]}...
+- DataFrame shape: {df.shape[0]} rows, {df.shape[1]} columns
+
+Available Columns (discover these from the raw data):
+{list(df.columns)}
+
+Column Categories:
+- Document identifiers: {[col for col in df.columns if col in ['aid', 'speaker', 'era', 'ideology', 'political_party', 'leadership_type', 'date', 'context']]}
+- Dimensional scores: {[col for col in df.columns if col.endswith('_score')]}
+- Salience weights: {[col for col in df.columns if col.endswith('_salience')]}
+- Confidence ratings: {[col for col in df.columns if col.endswith('_confidence')]}
+
+Note: Use ONLY the column names listed above. Do NOT assume any other column names exist.
+"""
+        except Exception as e:
+            # Fallback to simple summary if parsing fails
+            column_summary = f"""
 Raw Analysis Data:
 - Data size: {len(raw_analysis_data)} characters
 - Data type: JSON analysis results
 - Source: Analysis artifact {request.scores_artifact_hash[:12]}...
 - Note: LLM will interpret structure and content directly
+- Warning: Column discovery failed - use raw data to identify available columns
 """
         
         try:
@@ -419,7 +451,7 @@ Raw Analysis Data:
                 framework_spec=request.framework_spec,
                 corpus_manifest="",  # Will be populated from experiment context
                 research_questions=research_questions,
-                raw_data_summary=raw_data_summary
+                raw_data_summary=column_summary
             )
             
             # Log derived metrics planning start
@@ -429,7 +461,7 @@ Raw Analysis Data:
                 {
                     "framework_spec_length": len(request.framework_spec),
                     "research_questions_count": len(research_questions),
-                    "raw_data_summary_length": len(raw_data_summary),
+                    "raw_data_summary_length": len(column_summary),
                     "approach": "thin_stage_2_derived_metrics"
                 }
             )
@@ -460,12 +492,19 @@ Raw Analysis Data:
                 def __init__(self, combined_plan):
                     self.analysis_plan = combined_plan
                     self.success = True
+                    self.error_message = None
+                    self.raw_llm_response = f"Combined plan: {combined_plan['combined_summary']}"
             
             return CombinedPlanResponse(combined_plan)
             
         except Exception as e:
-            self.logger.error(f"Two-stage analysis planning failed: {str(e)}")
-            raise
+            self.logger.error(f"Analysis planning failed: {str(e)}")
+            return type('ErrorResponse', (), {
+                'success': False,
+                'error_message': str(e),
+                'analysis_plan': None,
+                'raw_llm_response': None
+            })()
     
     def _extract_research_questions(self, experiment_context: str) -> list:
         """

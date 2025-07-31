@@ -1,0 +1,124 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Character Assessment Framework v6.1",
+    "framework_version": "v6.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a classic political concession speech, a genre that strongly emphasizes virtues like Dignity, Justice, and Hope, while actively rejecting vices such as Tribalism and Resentment. The scoring reflects this clear rhetorical purpose. Evidence is abundant for the virtue dimensions and largely absent for the vice dimensions, leading to high confidence across the analysis."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimensional_scores": {
+        "Dignity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "Truth": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "Justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Hope": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "Tribalism": {
+          "raw_score": 0.05,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "Manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "Resentment": {
+          "raw_score": 0.05,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "Fear": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "Fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Dignity",
+          "quote_text": "This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.",
+          "confidence": 0.95,
+          "context_type": "Acknowledgement of opponent's historic achievement"
+        },
+        {
+          "dimension": "Dignity",
+          "quote_text": "In a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance.",
+          "confidence": 0.9,
+          "context_type": "Expression of respect for opponent"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him on being elected the next president of the country that we both love.",
+          "confidence": 0.95,
+          "context_type": "Acknowledgement of and respect for the electoral outcome"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...",
+          "confidence": 0.95,
+          "context_type": "Call for unity and forward-looking cooperation"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "Americans never quit. We never surrender. We never hide from history. We make history.",
+          "confidence": 0.9,
+          "context_type": "Inspirational statement about national character"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "I don't know what more we could have done to try to win this election. I'll leave that to others to determine. Every candidate makes mistakes, and I’m sure I made my share of them.",
+          "confidence": 0.9,
+          "context_type": "Candid self-reflection and acknowledgement of fallibility"
+        },
+        {
+          "dimension": "Pragmatism",
+          "quote_text": "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.9,
+          "context_type": "Practical offer of assistance to incoming leader"
+        },
+        {
+          "dimension": "Tribalism",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.95,
+          "context_type": "Explicit rejection of partisan identity in favor of national unity"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "though we fell short, the failure is mine, not yours.",
+          "confidence": 0.95,
+          "context_type": "Acceptance of personal responsibility for defeat, deflecting blame"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,130 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.1",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analysis is based on the explicit rhetoric and thematic content of the provided speech transcript. Scores reflect the intensity and prominence of each dimension within the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimensional_scores": {
+        "Dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Truth": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "Justice": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "Hope": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "Pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "Tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "Manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "Resentment": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "Fear": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "Fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Justice",
+          "quote_text": "We must have legislation that will protect the Mississippi sharecropper who is put off of his farm because he dares to register to vote. We need a bill that will provide for the homeless and starving people of this nation.",
+          "confidence": 1.0,
+          "context_type": "Specific legislative demand for economic and social justice"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "To those who have said, \"Be patient and wait,\" we must say that we cannot be patient. We do not want our freedom gradually, but we want to be free now!",
+          "confidence": 1.0,
+          "context_type": "Rejection of gradualism and demand for immediate justice"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again. And then you holler, \"Be patient.\" How long can we be patient? We want our freedom and we want it now!",
+          "confidence": 1.0,
+          "context_type": "Expression of grievance and exhaustion with systemic abuse"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "What did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby?",
+          "confidence": 1.0,
+          "context_type": "Backward-looking blame directed at federal government inaction"
+        },
+        {
+          "dimension": "Dignity",
+          "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+          "confidence": 0.95,
+          "context_type": "Explicit commitment to acting with dignity"
+        },
+        {
+          "dimension": "Dignity",
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 0.9,
+          "context_type": "Vision for a reconstructed society based on the inherent worth of all people"
+        },
+        {
+          "dimension": "Pragmatism",
+          "quote_text": "It is true that we support the administration's civil rights bill. We support it with great reservations, however. Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses...",
+          "confidence": 1.0,
+          "context_type": "Practical critique of specific legislative shortcomings"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "My friends, let us not forget that we are involved in a serious social revolution. By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+          "confidence": 0.9,
+          "context_type": "Statement of an uncomfortable political truth"
+        },
+        {
+          "dimension": "Truth",
+          "quote_text": "It will not protect the hundreds and thousands of people who have been arrested upon trumped-up charges.",
+          "confidence": 0.95,
+          "context_type": "Assertion of factual reality contradicting official narratives"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "I appeal to all of you to get in this great revolution that is sweeping this nation. Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete.",
+          "confidence": 0.9,
+          "context_type": "Constructive vision for achieving a more complete form of freedom"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

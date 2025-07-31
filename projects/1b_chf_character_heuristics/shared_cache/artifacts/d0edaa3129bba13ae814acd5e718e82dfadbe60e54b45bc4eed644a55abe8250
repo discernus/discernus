@@ -1,0 +1,98 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "chf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a political speech by a single actor (Mitt Romney) justifying his vote in an impeachment trial. The analysis focuses on his explicit reasoning, which maps clearly to the framework's dimensions concerning constitutional procedure, institutional roles, and systemic preservation. The high scores in both 'health' and 'pathology' dimensions reflect that the speaker is using the language of constitutional health (procedure, respect) to condemn what he views as a constitutional pathology (subversion)."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.1,
+          "confidence": 0.95
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The Constitution established the vehicle of impeachment that has occupied both houses of our Congress these many days. We have labored to faithfully execute our responsibilities to it.",
+          "confidence": 0.95,
+          "context_type": "explicit affirmation of constitutional process"
+        },
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "While that logic is appealing to our democratic instincts, it is inconsistent with the Constitution's requirement that the Senate, not the voters, try the president.",
+          "confidence": 0.9,
+          "context_type": "refutation of bypassing established procedure"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "confidence": 0.95,
+          "context_type": "framing of personal duty to an institutional role"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.95,
+          "context_type": "prioritization of institutional duty over partisanship"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Accordingly, the president is guilty of an appalling abuse of public trust.",
+          "confidence": 0.9,
+          "context_type": "explicit accusation of institutional abuse"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values. Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "confidence": 0.95,
+          "context_type": "characterization of the president's actions as subversive"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it.",
+          "confidence": 0.9,
+          "context_type": "affirmation of the existing constitutional framework"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "with my vote, I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.85,
+          "context_type": "justification of action as a defense of national/systemic values"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

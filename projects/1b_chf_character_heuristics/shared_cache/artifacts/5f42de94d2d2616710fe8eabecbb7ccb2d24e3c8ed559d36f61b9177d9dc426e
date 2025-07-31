@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_8dd637f31c00",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "constitutional_health_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"chf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis focuses on the document's central theme of an American 'oligarchy'. This framing drives high scores in Institutional Subversion and Systemic Replacement, as the text portrays the existing political and economic systems as fundamentally corrupt and captured by a wealthy elite, rather than merely flawed or in need of minor reform. Conversely, dimensions related to continuity, respect, and legitimacy receive low scores as they are rhetorically absent or actively undermined.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.15,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.85\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Call to Action - Electoral\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Systemic Critique\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"He\u2019s handed the keys to Elon Musk and is selling off our country for parts to the wealthiest people in the world for a kickback. And in exchange, those billionaires and oligarchs will back his campaigns and bankroll those of his allies. They scratch his back and he scratches theirs. And all of us are left behind.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Accusation of Corruption\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"And Greeley, there\u2019s a word for this kind of thing, corruption.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Explicit Labeling\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Foundational Premise\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"They aren't working for these billions. They're stealing them. They're stealing them. They're stealing them from you and you and me.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Allegation of Systemic Theft\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T16:50:34.751092+00:00",
+    "end_time": "2025-07-31T16:51:07.676676+00:00",
+    "duration_seconds": 32.925584,
+    "llm_interaction_hash": "997eef8d54f8490e"
+  },
+  "input_artifacts": {
+    "framework_hash": "b7591eb36a9bb96c307dd21b9c660ca5200b3eaa473a743e5b05285c44685c88",
+    "document_hashes": [
+      "1661752fdc6cf5affaa5456dc84e1a7530fa34f85086c7d82edf4f35ae6cd987"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_character_heuristics",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_character_heuristics",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T165034Z_6b38483d"
+  }
+}

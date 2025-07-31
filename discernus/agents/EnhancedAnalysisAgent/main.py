@@ -22,6 +22,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 from litellm import completion
+from litellm.cost_calculator import completion_cost
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary, SecurityError
 from discernus.core.audit_logger import AuditLogger
@@ -311,6 +312,43 @@ class EnhancedAnalysisAgent:
             result_content = response.choices[0].message.content
             if not result_content or result_content.strip() == "":
                 raise EnhancedAnalysisAgentError("LLM returned empty content")
+            
+            # Extract cost and usage information from LLM response
+            try:
+                # Get usage data from response
+                usage_obj = getattr(response, 'usage', None)
+                prompt_tokens = getattr(usage_obj, 'prompt_tokens', 0) if usage_obj else 0
+                completion_tokens = getattr(usage_obj, 'completion_tokens', 0) if usage_obj else 0
+                total_tokens = getattr(usage_obj, 'total_tokens', 0) if usage_obj else 0
+                
+                # Calculate cost using LiteLLM's cost calculator
+                response_cost = 0.0
+                try:
+                    response_cost = completion_cost(completion_response=response)
+                except Exception as cost_err:
+                    print(f"⚠️ Could not calculate cost: {cost_err}")
+                    response_cost = 0.0
+                
+                # Log cost information to audit system
+                self.audit.log_cost(
+                    operation="individual_document_analysis",
+                    model=model,
+                    tokens_used=total_tokens,
+                    cost_usd=response_cost,
+                    agent_name=self.agent_name,
+                    metadata={
+                        "document_hash": document_hashes[0] if document_hashes else "unknown",
+                        "batch_id": batch_id,
+                        "prompt_tokens": prompt_tokens,
+                        "completion_tokens": completion_tokens
+                    }
+                )
+                
+                print(f"💰 Document analysis cost: ${response_cost:.6f} ({total_tokens:,} tokens)")
+                
+            except Exception as e:
+                print(f"⚠️ Error extracting cost information: {e}")
+                # Continue processing even if cost extraction fails
             
             # THIN approach: Always process as raw response (no framework version detection)
             self.audit.log_agent_event(self.agent_name, "processing_raw_response", {

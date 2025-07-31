@@ -722,9 +722,8 @@ Respond with only the JSON object."""
                 "context_window_limit": 0
             })
             
-            print(f"💰 Total estimated cost: ${0:.4f}")
-            print(f"📊 Batch plan: 0 batches, "
-                  f"⏱️ ~{0:.1f} minutes")
+            print(f"💰 Cost tracking: Per-document analysis costs will be displayed")
+            print(f"📊 Processing: {len(corpus_documents)} documents individually")
             
             # Initialize analysis and synthesis agents
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)

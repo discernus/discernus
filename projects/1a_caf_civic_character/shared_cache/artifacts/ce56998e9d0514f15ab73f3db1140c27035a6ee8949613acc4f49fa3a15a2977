@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_4ea8de775a6e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Character Assessment Framework v6.1\",\n    \"framework_version\": \"v6.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis based on Sen. Romney's 2020 impeachment floor speech. The speaker's character is primarily defined by an appeal to the virtues of Justice and Truth, framed as a conscious rejection of the vice of Tribalism. Scoring for vices like Tribalism and Fear reflects their thematic presence as forces the speaker is actively opposing, rather than traits the speaker is exhibiting.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"mitt_romney_2020_impeachment.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"truth\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"justice\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.85\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"resentment\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"fear\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"We are all footnotes at best in the annals of history. But in the most powerful nation on earth, the nation conceived in liberty and justice, that distinction is enough for any citizen.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"philosophical framing\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"The historic meaning of the words \\\"high crimes and misdemeanors,\\\" the writings of the founders, and my own reasoned judgment convince me that a president can indeed commit acts against the public trust that are so egregious that while they are not statutory crimes, they would demand removal from office.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"argumentative reasoning\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"As a senator-juror, I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"core principle statement\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"personal commitment\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"statement of belief\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"I acknowledge that my verdict will not remove the president from office. The results of this Senate court will, in fact, be appealed to a higher court: the judgment of the American people.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"acknowledgment of reality\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"In the last several weeks, I've received numerous calls and texts. Many demanded, in their words, that I \\\"stand with the team.\\\" I can assure you that that thought has been very much in my mind.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"rejection of opposing value\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"Given that in neither the case of the father nor the son was any evidence presented by the president\u2019s counsel that a crime had been committed, the president\u2019s insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"accusation against another\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"I'm aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"acknowledgment of personal risk\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T16:14:47.861115+00:00",
+    "end_time": "2025-07-31T16:15:46.922606+00:00",
+    "duration_seconds": 59.061491,
+    "llm_interaction_hash": "602d7e5acc361541"
+  },
+  "input_artifacts": {
+    "framework_hash": "6043b1d82339b372041e90fc75c20cb4f02b317b002734234bbb47527e708950",
+    "document_hashes": [
+      "f9b2e86ae9bcdee55757a5c6caecc03225c0bb6532154c38cde5f14dc4d3cae6"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T161021Z_3f624ecd"
+  }
+}
