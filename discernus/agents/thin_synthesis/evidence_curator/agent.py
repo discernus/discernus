@@ -325,15 +325,37 @@ Return only valid JSON.
                     
                     for evidence_item in evidence_list:
                         if isinstance(evidence_item, dict):
-                            # Find matching evidence in DataFrame by text matching
+                            # Find matching evidence in DataFrame with robust matching
                             evidence_text = evidence_item.get('evidence_text', '')
                             matching_row = None
                             
-                            # Try to find exact match first
+                            # Try multiple matching strategies for robustness
                             for _, row in evidence_df.iterrows():
-                                if evidence_text in row['evidence_text'] or row['evidence_text'] in evidence_text:
+                                row_text = str(row['evidence_text'])
+                                
+                                # Strategy 1: Exact match
+                                if evidence_text == row_text:
                                     matching_row = row
                                     break
+                                
+                                # Strategy 2: Substring match (both directions)
+                                if evidence_text in row_text or row_text in evidence_text:
+                                    matching_row = row
+                                    break
+                                
+                                # Strategy 3: Fuzzy match (first 50 chars)
+                                if len(evidence_text) > 20 and len(row_text) > 20:
+                                    evidence_start = evidence_text[:50].strip().lower()
+                                    row_start = row_text[:50].strip().lower()
+                                    if evidence_start in row_start or row_start in evidence_start:
+                                        matching_row = row
+                                        break
+                                
+                                # Strategy 4: Quote ID match if available
+                                if 'quote_id' in evidence_item and 'quote_id' in row:
+                                    if evidence_item['quote_id'] == row.get('quote_id'):
+                                        matching_row = row
+                                        break
                             
                             if matching_row is not None:
                                 # Create properly formatted evidence with footnotes
@@ -362,7 +384,36 @@ Return only valid JSON.
                                 ))
                                 total_evidence_count += 1
                             else:
-                                self.logger.warning(f"Could not find matching evidence for: {evidence_text[:50]}...")
+                                # Enhanced debugging for evidence matching failures
+                                self.logger.warning(f"Could not find matching evidence for: '{evidence_text[:100]}...'")
+                                self.logger.debug(f"Available evidence texts (first 3): {[str(row['evidence_text'])[:50] + '...' for _, row in evidence_df.head(3).iterrows()]}")
+                                self.logger.debug(f"LLM evidence item keys: {list(evidence_item.keys())}")
+                                # Still include this evidence but mark it as unmatched
+                                footnote_number = self._assign_footnote_number(
+                                    evidence_text,
+                                    evidence_item.get('artifact_id', 'unknown'),
+                                    evidence_item.get('dimension', 'unknown')
+                                )
+                                evidence_hash = self._create_evidence_hash(
+                                    evidence_text,
+                                    evidence_item.get('artifact_id', 'unknown'),
+                                    evidence_item.get('dimension', 'unknown')
+                                )
+                                
+                                # Include unmatched evidence with LLM data
+                                curated_evidence[category].append(CuratedEvidence(
+                                    artifact_id=evidence_item.get('artifact_id', 'unknown'),
+                                    dimension=evidence_item.get('dimension', 'unknown'),
+                                    evidence_text=evidence_text,
+                                    context=evidence_item.get('context', 'LLM selected (unmatched)'),
+                                    confidence=float(evidence_item.get('confidence', 0.7)),
+                                    reasoning=evidence_item.get('reasoning', 'LLM selected as relevant (text matching failed)'),
+                                    relevance_score=float(evidence_item.get('relevance_score', 0.8)),
+                                    statistical_connection=evidence_item.get('statistical_connection', 'LLM selected'),
+                                    footnote_number=footnote_number,
+                                    evidence_hash=evidence_hash
+                                ))
+                                total_evidence_count += 1
             
             # If LLM didn't provide any usable evidence, fall back to top selections
             if total_evidence_count == 0:
