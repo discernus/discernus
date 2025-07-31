@@ -13,8 +13,10 @@ lsof -i :9000    # MinIO should be running
 lsof -i :9001    # MinIO console
 pgrep redis      # Redis (optional)
 
-# Run experiment correctly
-make run-direct EXPERIMENT=projects/your_experiment
+# Run experiment with new simplified CLI
+python3 -m discernus.cli run projects/your_experiment
+# Or use makefile shortcut
+make run EXPERIMENT=projects/your_experiment
 ```
 
 ## **Common Issues & Solutions**
@@ -58,18 +60,21 @@ minio server ~/minio-data --console-address ":9001" &
 
 **Solution**:
 ```bash
-# Use THIN v2.0 direct orchestration instead
-make run-direct EXPERIMENT=projects/your_experiment
+# Use simplified CLI (v2.1) with direct orchestration
+python3 -m discernus.cli run projects/your_experiment
 
-# Or manually:
-python3 -c "
-from discernus.core.thin_orchestrator import ThinOrchestrator
-from pathlib import Path
-ThinOrchestrator(Path('projects/your_experiment')).run_experiment()
-"
+# Three intuitive modes available:
+python3 -m discernus.cli run projects/your_experiment      # Complete experiment
+python3 -m discernus.cli continue projects/your_experiment # Resume from artifacts  
+python3 -m discernus.cli debug projects/your_experiment    # Debug mode
+
+# Or use makefile shortcuts:
+make run EXPERIMENT=projects/your_experiment         # Complete experiment
+make continue EXPERIMENT=projects/your_experiment    # Resume from artifacts
+make debug EXPERIMENT=projects/your_experiment       # Debug mode
 ```
 
-**Prevention**: Use direct orchestration, not `discernus/cli.py run`
+**Prevention**: Use new simplified CLI, avoid legacy Redis-based CLI
 
 ---
 

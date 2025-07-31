@@ -15,12 +15,16 @@ python3 discernus/cli.py run projects/simple_test
 
 ## 🚨 CRITICAL INFRASTRUCTURE KNOWLEDGE
 
-### **Modern CLI (THIN v2.0) - Use This!**
-✅ **New discernus CLI uses direct orchestration and works immediately:**
+### **Modern CLI (THIN v2.1) - Simplified Interface!**
+✅ **New simplified CLI with 3 intuitive modes:**
 ```bash
-# Modern approach - works reliably
+# Three core modes for optimal researcher experience
 python3 discernus/cli.py start                     # Auto-start infrastructure
-python3 discernus/cli.py run projects/simple_test  # Direct THIN v2.0 orchestration
+python3 discernus/cli.py run projects/simple_test  # Complete experiment (analysis + synthesis)
+python3 discernus/cli.py continue projects/simple_test  # Resume from existing artifacts
+python3 discernus/cli.py debug projects/simple_test     # Interactive debugging mode
+
+# Management commands
 python3 discernus/cli.py status                    # Check infrastructure status
 python3 discernus/cli.py list                      # Show available experiments
 ```
@@ -83,10 +87,12 @@ python3 discernus/cli.py status                 # Complete infrastructure status
 lsof -i :9000                                   # MinIO running?
 lsof -i :9001                                   # MinIO console
 
-# Test experiment
+# Test experiment - Three Simple Modes
 python3 discernus/cli.py validate projects/simple_test    # Check experiment structure
 python3 discernus/cli.py run projects/simple_test --dry-run  # Preview execution
-python3 discernus/cli.py run projects/simple_test         # Execute experiment
+python3 discernus/cli.py run projects/simple_test         # Complete experiment
+python3 discernus/cli.py continue projects/simple_test    # Resume from artifacts
+python3 discernus/cli.py debug projects/simple_test --verbose  # Debug with detail
 
 # Infrastructure management
 python3 discernus/cli.py start                  # Start all services
