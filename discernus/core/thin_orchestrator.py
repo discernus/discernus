@@ -103,6 +103,7 @@ class ThinOrchestrator:
                            storage: LocalArtifactStorage,
                            framework_hash: str,
                            corpus_hash: str,
+                           corpus_manifest: Optional[Dict[str, Any]] = None,
                            debug_agent: Optional[str] = None,
                            debug_level: str = "info") -> Dict[str, Any]:
         """
@@ -114,8 +115,8 @@ class ThinOrchestrator:
         # Create THIN synthesis pipeline
         pipeline = self._create_thin_synthesis_pipeline(audit_logger, storage, model, debug_agent, debug_level)
         
-        # Build comprehensive experiment context for ResultsInterpreter
-        experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_content)
+        # Build comprehensive experiment context for ResultsInterpreter (THIN approach)
+        experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_content, corpus_manifest)
         
         # Create pipeline request
         request = ProductionPipelineRequest(
@@ -158,7 +159,7 @@ class ThinOrchestrator:
                     "stage_success": response.stage_success,
                     "word_count": response.word_count,
                     "generated_artifacts": {
-                        "code": response.generated_code_hash,
+                        "analysis_plan": response.analysis_plan_hash,
                         "statistical_results": response.statistical_results_hash,
                         "curated_evidence": response.curated_evidence_hash
                     }
@@ -450,6 +451,7 @@ class ThinOrchestrator:
                     # Add provenance context (Issue #208 fix)
                     framework_hash=framework_hash,
                     corpus_hash=corpus_hash,
+                    corpus_manifest=corpus_manifest,  # THIN approach: pass raw corpus content
                     debug_agent=debug_agent,
                     debug_level=debug_level
                 )
@@ -554,6 +556,7 @@ class ThinOrchestrator:
                 # Add provenance context (Issue #208 fix)
                 framework_hash=framework_hash,
                 corpus_hash=corpus_hash,
+                corpus_manifest=corpus_manifest,  # THIN approach: pass raw corpus content
                 debug_agent=debug_agent,
                 debug_level=debug_level
             )
@@ -843,7 +846,7 @@ class ThinOrchestrator:
         
         return config
     
-    def _build_comprehensive_experiment_context(self, experiment_config: Dict[str, Any], framework_content: str) -> str:
+    def _build_comprehensive_experiment_context(self, experiment_config: Dict[str, Any], framework_content: str, corpus_manifest: Optional[Dict[str, Any]] = None) -> str:
         """
         Build comprehensive experiment context for the ResultsInterpreter.
         
@@ -968,16 +971,51 @@ class ThinOrchestrator:
         except Exception as e:
             context_parts.append(f"\n**Corpus Context**: Unable to load corpus manifest: {str(e)}")
         
+        # 7. Raw Corpus Content (THIN approach)
+        context_parts.append("\n## CORPUS CONTENT")
+        if corpus_manifest:
+            context_parts.append("**Corpus Manifest**:")
+            context_parts.append("```json")
+            context_parts.append(json.dumps(corpus_manifest, indent=2))
+            context_parts.append("```")
+        else:
+            context_parts.append("**Corpus Manifest**: Not available")
+        
         return "\n".join(context_parts)
     
     def _load_framework(self, framework_filename: str) -> str:
-        """Load framework content."""
-        framework_file = self.experiment_path / framework_filename
+        """
+        Load framework content with trusted canonical path resolution.
         
-        if not framework_file.exists():
-            raise ThinOrchestratorError(f"Framework file not found: {framework_filename}")
+        The orchestrator is trusted infrastructure that can safely resolve canonical
+        framework references (../../frameworks/...) while maintaining security 
+        boundaries for agents.
+        """
         
-        return self.security.secure_read_text(framework_file)
+        # Check if this is a relative path to canonical frameworks
+        if framework_filename.startswith("../../frameworks/"):
+            # TRUSTED OPERATION: Orchestrator resolves canonical frameworks
+            project_root = Path(__file__).parent.parent.parent  # Get to discernus/
+            canonical_path = framework_filename.lstrip("../../")
+            framework_file = project_root / canonical_path
+            
+            if not framework_file.exists():
+                raise ThinOrchestratorError(f"Canonical framework not found: {framework_filename}")
+            
+            print(f"🛡️ Security: Loading canonical framework: {framework_file.name}")
+            # Direct read (orchestrator is trusted infrastructure)
+            return framework_file.read_text(encoding='utf-8')
+        
+        else:
+            # EXISTING LOGIC: Local framework in experiment directory
+            framework_file = self.experiment_path / framework_filename
+            
+            if not framework_file.exists():
+                raise ThinOrchestratorError(f"Framework file not found: {framework_filename}")
+            
+            print(f"🛡️ Security: Loading local framework: {framework_file.name}")
+            # Use security boundary for local files (agents must stay within boundary)
+            return self.security.secure_read_text(framework_file)
     
     def _load_corpus(self, corpus_path: str) -> tuple[List[Dict[str, Any]], Dict[str, Any]]:
         """Load corpus documents and corpus manifest."""

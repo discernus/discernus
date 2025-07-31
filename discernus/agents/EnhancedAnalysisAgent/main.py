@@ -679,6 +679,7 @@ class EnhancedAnalysisAgent:
             )
         return "\n".join(formatted)
     
+
     def _calculate_duration(self, start: str, end: str) -> float:
         """Calculate duration between timestamps in seconds."""
         try:

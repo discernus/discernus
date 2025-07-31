@@ -95,9 +95,3 @@ python3 discernus/cli.py stop                   # Stop all services
 # View MinIO artifacts
 curl http://localhost:9000/minio/health/live
 ```
-
-## 🎯 CURRENT MISSION (95% Complete Alpha System)
-
-**Focus**: Testing rate limiting vs context window management
-**Next**: Complete 3 validation experiments (CAF, ECF, CHF)
-**Architecture**: THIN v2.0 with direct function calls proven effective

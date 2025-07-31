@@ -270,9 +270,9 @@ class ProductionThinSynthesisPipeline:
                     time.time() - start_time
                 )
             
-            # Store intermediate artifacts
+            # Store intermediate artifacts - let LLM handle data structures
             plan_hash = self.artifact_client.put_artifact(json.dumps(plan_response.analysis_plan).encode('utf-8'))
-            results_hash = self.artifact_client.put_artifact(json.dumps(exec_response['results']).encode('utf-8'))
+            results_hash = self.artifact_client.put_artifact(str(exec_response['results']).encode('utf-8'))
             evidence_hash = self.artifact_client.put_artifact(json.dumps(curation_response.to_json_serializable()).encode('utf-8'))
             
             # Success! Create complete response
@@ -527,7 +527,7 @@ Data Summary:
         # Retrieve evidence data for curation from JSON artifact
         combined_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
         
-        # Create curation request with JSON data
+        # Create curation request with raw data - let LLM handle parsing
         curation_request = EvidenceCurationRequest(
             statistical_results=exec_response['results'],
             evidence_data=combined_data,
@@ -615,8 +615,8 @@ Data Summary:
         except Exception as e:
             raise Exception(f"Failed to parse JSON {data_type} data: {str(e)}")
     
-    def _json_scores_to_dataframe(self, analysis_result: dict) -> pd.DataFrame:
-        """Convert v6.0 JSON analysis scores to DataFrame format."""
+    def _json_scores_to_dataframe(self, analysis_result: dict, corpus_manifest: dict = None) -> pd.DataFrame:
+        """Convert v6.0 JSON analysis scores to DataFrame format with optional corpus metadata."""
         try:
             # v6.0 JSON structure: document_analyses[].dimensional_scores
             document_analyses = analysis_result.get('document_analyses', [])
@@ -645,6 +645,18 @@ Data Summary:
                             if field_name not in ['raw_score', 'salience', 'confidence']:
                                 column_name = f"{dim_name}_{field_name}"
                                 row_data[column_name] = field_value
+                
+                # Add corpus metadata if available
+                if corpus_manifest and 'file_manifest' in corpus_manifest:
+                    for file_info in corpus_manifest['file_manifest']:
+                        if file_info.get('name', '').replace('.txt', '') in document_id:
+                            # Add era and ideology metadata
+                            row_data['era'] = file_info.get('era', 'Unknown')
+                            row_data['ideology'] = file_info.get('ideology', 'Unknown')
+                            row_data['speaker'] = file_info.get('speaker', 'Unknown')
+                            row_data['date'] = file_info.get('date', 'Unknown')
+                            row_data['political_party'] = file_info.get('political_party', 'Unknown')
+                            break
                 
                 rows.append(row_data)
             

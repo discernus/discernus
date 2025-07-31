@@ -17,6 +17,10 @@ Key Design Principles:
 import json
 import logging
 import pandas as pd
+import json
+import re
+import os
+import yaml
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, asdict
 
@@ -132,48 +136,13 @@ class EvidenceCurator:
                     success=True
                 )
             
-            # Curate evidence for each significant finding
-            curated_evidence = {}
-            
-            # Process descriptive statistics findings
-            if 'descriptive_stats' in request.statistical_results:
-                desc_evidence = self._curate_descriptive_evidence(
-                    request.statistical_results['descriptive_stats'],
-                    high_confidence_evidence,
-                    request
-                )
-                if desc_evidence:
-                    curated_evidence['descriptive_findings'] = desc_evidence
-            
-            # Process hypothesis test results
-            if 'hypothesis_tests' in request.statistical_results:
-                hyp_evidence = self._curate_hypothesis_evidence(
-                    request.statistical_results['hypothesis_tests'],
-                    high_confidence_evidence,
-                    request
-                )
-                if hyp_evidence:
-                    curated_evidence['hypothesis_findings'] = hyp_evidence
-            
-            # Process correlation findings
-            if 'correlations' in request.statistical_results:
-                corr_evidence = self._curate_correlation_evidence(
-                    request.statistical_results['correlations'],
-                    high_confidence_evidence,
-                    request
-                )
-                if corr_evidence:
-                    curated_evidence['correlation_findings'] = corr_evidence
-            
-            # Process reliability findings
-            if 'reliability_metrics' in request.statistical_results:
-                rel_evidence = self._curate_reliability_evidence(
-                    request.statistical_results['reliability_metrics'],
-                    high_confidence_evidence,
-                    request
-                )
-                if rel_evidence:
-                    curated_evidence['reliability_findings'] = rel_evidence
+            # THIN approach: Let LLM handle evidence curation based on available data
+            # Pass all statistical results and evidence to LLM for intelligent curation
+            curated_evidence = self._curate_evidence_with_llm(
+                request.statistical_results,
+                high_confidence_evidence,
+                request
+            )
             
             # Generate curation summary
             curation_summary = self._generate_curation_summary(
@@ -181,6 +150,131 @@ class EvidenceCurator:
                 len(evidence_df), 
                 len(high_confidence_evidence)
             )
+            
+            return EvidenceCurationResponse(
+                curated_evidence=curated_evidence,
+                curation_summary=curation_summary,
+                success=True
+            )
+            
+        except Exception as e:
+            self.logger.error(f"Evidence curation failed: {str(e)}")
+            return EvidenceCurationResponse(
+                curated_evidence={},
+                curation_summary={},
+                success=False,
+                error_message=str(e)
+            )
+    
+    def _curate_evidence_with_llm(self, statistical_results: Dict[str, Any], 
+                                 evidence_df: pd.DataFrame,
+                                 request: EvidenceCurationRequest) -> Dict[str, List[CuratedEvidence]]:
+        """
+        THIN approach: Let LLM intelligently curate evidence based on statistical results.
+        Uses externalized YAML instructions for LLM guidance.
+        """
+        try:
+            # Load externalized YAML instructions
+            prompt_template = self._load_curation_prompt_template()
+            
+            # THIN approach: Pass raw data to LLM as strings
+            # Let LLM handle any data structure without JSON serialization
+            
+            stats_str = str(statistical_results)
+            evidence_str = str(evidence_df.to_dict('records')[:10])
+            
+            # Build prompt with YAML template
+            prompt = prompt_template.format(
+                framework_spec=request.framework_spec,
+                statistical_results=stats_str,
+                evidence_sample=evidence_str,
+                max_evidence_per_finding=request.max_evidence_per_finding
+            )
+            
+            # Call LLM for intelligent curation
+            response_content, metadata = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=prompt,
+                max_tokens=4000
+            )
+            
+            if not response_content or not metadata.get('success'):
+                self.logger.warning("LLM curation failed, returning empty evidence")
+                return {}
+            
+            # Parse LLM response into curated evidence structure
+            return self._parse_llm_curation_response(response_content, evidence_df)
+            
+        except Exception as e:
+            self.logger.error(f"LLM evidence curation failed: {str(e)}")
+            return {}
+    
+    def _load_curation_prompt_template(self) -> str:
+        """Load externalized YAML instructions for evidence curation."""
+        try:
+            # Load from YAML file (THIN architecture)
+            yaml_path = os.path.join(os.path.dirname(__file__), 'prompts', 'evidence_curation.yaml')
+            with open(yaml_path, 'r') as f:
+                config = yaml.safe_load(f)
+            return config['template']
+        except Exception as e:
+            self.logger.warning(f"Could not load YAML template: {e}")
+            # Fallback to simple template
+            return """
+You are an evidence curator for academic research. Given statistical results and evidence data, 
+curate the most relevant evidence pieces that support the key findings.
+
+Statistical Results:
+{statistical_results}
+
+Evidence Sample:
+{evidence_sample}
+
+Framework Specification:
+{framework_spec}
+
+Instructions:
+1. Analyze the statistical results to identify key findings
+2. Select the most relevant evidence pieces that support these findings
+3. Return curated evidence in JSON format with reasoning for each selection
+4. Limit to {max_evidence_per_finding} pieces per finding
+
+Return only valid JSON.
+"""
+    
+    def _parse_llm_curation_response(self, response_content: str, evidence_df: pd.DataFrame) -> Dict[str, List[CuratedEvidence]]:
+        """Parse LLM response into structured curated evidence."""
+        try:
+            # Extract JSON from response
+            json_match = re.search(r'\{.*\}', response_content, re.DOTALL)
+            if not json_match:
+                return {}
+            
+            llm_curation = json.loads(json_match.group())
+            curated_evidence = {}
+            
+            # Convert LLM response to CuratedEvidence objects
+            for category, evidence_list in llm_curation.items():
+                if isinstance(evidence_list, list):
+                    curated_evidence[category] = []
+                    for evidence_item in evidence_list:
+                        if isinstance(evidence_item, dict):
+                            curated_evidence[category].append(CuratedEvidence(
+                                artifact_id=evidence_item.get('artifact_id', ''),
+                                dimension=evidence_item.get('dimension', ''),
+                                evidence_text=evidence_item.get('evidence_text', ''),
+                                context=evidence_item.get('context', ''),
+                                confidence=evidence_item.get('confidence', 0.0),
+                                reasoning=evidence_item.get('reasoning', ''),
+                                relevance_score=evidence_item.get('relevance_score', 0.0),
+                                statistical_connection=evidence_item.get('statistical_connection', '')
+                            ))
+            
+            return curated_evidence
+            
+        except Exception as e:
+            self.logger.error(f"Failed to parse LLM curation response: {str(e)}")
+            return {}
             
             return EvidenceCurationResponse(
                 curated_evidence=curated_evidence,

@@ -149,202 +149,57 @@ class ResultsInterpreter:
     def _build_interpretation_prompt(self, request: InterpretationRequest) -> str:
         """Build the comprehensive interpretation prompt using YAML template (THIN architecture)."""
         
+        # THIN approach: Pass raw data to LLM as strings
+        # Let LLM handle any data structure without JSON serialization
+        
         # Defensive checks: ensure inputs are not None
         if request.statistical_results is None:
             request.statistical_results = {}
         if request.curated_evidence is None:
             request.curated_evidence = {}
         
-        # Format statistical results for the prompt
-        stats_summary = self._format_statistical_results(request.statistical_results)
+        # Convert data to strings - let LLM handle interpretation
+        stats_str = str(request.statistical_results)
+        evidence_str = str(request.curated_evidence)
         
-        # Format curated evidence for the prompt
-        evidence_summary = self._format_curated_evidence(request.curated_evidence)
-        
-        # Count total evidence pieces (safe with empty dict)
+        # Count total evidence pieces
         total_evidence = sum(len(evidence_list) for evidence_list in request.curated_evidence.values())
         
-        # Use YAML template with proper substitutions
+        # Use YAML template with raw data
         prompt = self.prompt_template.format(
             framework_spec=request.framework_spec,
             experiment_context=request.experiment_context or "Not provided",
-            stats_summary=stats_summary,
+            stats_summary=stats_str,
             total_evidence=total_evidence,
-            evidence_summary=evidence_summary
+            evidence_summary=evidence_str
         )
 
         return prompt
     
     def _validate_required_data(self, request: InterpretationRequest) -> Optional[str]:
         """
-        Validate that the request contains the minimum required data for interpretation.
+        Minimal THIN validation - just ensure we have data to work with.
+        Let the LLM handle data structure understanding.
         
         Returns:
             None if validation passes, error message string if validation fails
         """
-        # Check for statistical results
+        # Basic checks only - no hardcoded expectations
         if not request.statistical_results:
             return "No statistical results provided"
         
-        # Check for basic statistical structure
-        if not isinstance(request.statistical_results, dict):
-            return "Statistical results must be a dictionary"
-        
-        # Check for at least one of the expected statistical sections
-        expected_sections = ['descriptive_stats', 'hypothesis_tests', 'correlations', 'reliability_metrics']
-        found_sections = [section for section in expected_sections if section in request.statistical_results]
-        
-        if not found_sections:
-            return f"No valid statistical sections found. Expected one of: {expected_sections}. Found keys: {list(request.statistical_results.keys())}"
-        
-        # Check for curated evidence
         if not request.curated_evidence:
             return "No curated evidence provided"
         
-        if not isinstance(request.curated_evidence, dict):
-            return "Curated evidence must be a dictionary"
-        
-        # Check that there's at least some evidence to work with
-        total_evidence = sum(len(evidence_list) for evidence_list in request.curated_evidence.values())
-        if total_evidence == 0:
-            return f"No evidence pieces found in curated evidence. Evidence structure: {list(request.curated_evidence.keys())}"
-        
-        # Check for framework specification
         if not request.framework_spec or not request.framework_spec.strip():
             return "No framework specification provided"
         
-        # All validations passed
+        # Let the LLM figure out what's in the data
         return None
     
-    def _format_statistical_results(self, statistical_results: Dict[str, Any]) -> str:
-        """Format statistical results for inclusion in the prompt."""
-        
-        formatted_sections = []
-        
-        # Descriptive Statistics
-        if 'descriptive_stats' in statistical_results:
-            desc_stats = statistical_results['descriptive_stats']
-            if desc_stats is not None:  # Defensive check
-                formatted_sections.append("DESCRIPTIVE STATISTICS:")
-                
-                # Handle nested structure (e.g., scores_and_balance, evidence_by_dimension)
-                for category, category_data in desc_stats.items():
-                    if isinstance(category_data, dict):
-                        formatted_sections.append(f"\n  {category.upper()}:")
-                        
-                        # Check if this is a container with sub-dimensions
-                        for dimension, stats in category_data.items():
-                            if isinstance(stats, dict) and ('mean' in stats or 'count' in stats):
-                                # This is actual statistical data
-                                mean = stats.get('mean', 'N/A')
-                                std = stats.get('std', 'N/A') 
-                                count = stats.get('count', 'N/A')
-                                
-                                # Safe formatting - handle both numeric and string values
-                                mean_str = f"{mean:.3f}" if isinstance(mean, (int, float)) else str(mean)
-                                std_str = f"{std:.3f}" if isinstance(std, (int, float)) and std is not None else str(std)
-                                count_str = str(count)
-                                
-                                formatted_sections.append(f"    {dimension}: M={mean_str}, SD={std_str}, N={count_str}")
-                            elif isinstance(stats, dict):
-                                # This might be a summary structure (like evidence_by_dimension)
-                                for sub_key, sub_value in stats.items():
-                                    if isinstance(sub_value, dict):
-                                        formatted_sections.append(f"    {dimension}_{sub_key}: {sub_value}")
-                                    else:
-                                        formatted_sections.append(f"    {dimension}_{sub_key}: {sub_value}")
-        
-        # Hypothesis Tests
-        if 'hypothesis_tests' in statistical_results:
-            hyp_tests = statistical_results['hypothesis_tests']
-            if hyp_tests is not None:  # Defensive check
-                formatted_sections.append("\nHYPOTHESIS TESTS:")
-                
-                # Handle both actual results and notes
-                if 'notes' in hyp_tests:
-                    formatted_sections.append(f"  {hyp_tests['notes']}")
-                else:
-                    for hypothesis, results in hyp_tests.items():
-                        if isinstance(results, dict):
-                            is_sig = results.get('is_significant_alpha_05', False)
-                            p_val = results.get('p_value', 'N/A')
-                            status = "SIGNIFICANT" if is_sig else "Not significant"
-                            formatted_sections.append(f"  {hypothesis}: {status} (p={p_val})")
-        
-        # Correlations
-        if 'correlations' in statistical_results:
-            correlations = statistical_results['correlations']
-            if correlations is not None:  # Defensive check
-                formatted_sections.append("\nCORRELATIONS:")
-                
-                # Handle both actual results and notes
-                if 'notes' in correlations:
-                    formatted_sections.append(f"  {correlations['notes']}")
-                elif 'overall_virtue_vs_overall_vice' in correlations:
-                    corr_data = correlations['overall_virtue_vs_overall_vice']
-                    if isinstance(corr_data, dict):
-                        corr_val = corr_data.get('correlation', 'N/A')
-                        p_val = corr_data.get('p_value', 'N/A')
-                        
-                        # Safe formatting for correlation values
-                        corr_str = f"{corr_val:.3f}" if isinstance(corr_val, (int, float)) else str(corr_val)
-                        formatted_sections.append(f"  Overall Virtue vs Vice: r={corr_str} (p={p_val})")
-        
-        # Reliability Analysis
-        if 'reliability_metrics' in statistical_results:
-            reliability = statistical_results['reliability_metrics']
-            if reliability is not None:  # Defensive check
-                formatted_sections.append("\nRELIABILITY METRICS:")
-                
-                if 'cronbachs_alpha' in reliability:
-                    alpha_data = reliability['cronbachs_alpha']
-                    if isinstance(alpha_data, dict):
-                        alpha_val = alpha_data.get('value', 'N/A')
-                        interpretation = alpha_data.get('interpretation', 'Unknown')
-                        notes = alpha_data.get('notes', '')
-                        
-                        # Safe formatting for alpha values
-                        alpha_str = f"{alpha_val:.3f}" if isinstance(alpha_val, (int, float)) and alpha_val is not None else str(alpha_val)
-                        formatted_sections.append(f"  Cronbach's Alpha: α={alpha_str} ({interpretation})")
-                        if notes:
-                            formatted_sections.append(f"    Notes: {notes}")
-        
-        return "\n".join(formatted_sections) if formatted_sections else "No statistical results available"
+    # THIN approach: No formatting methods needed - pass raw data as base64
     
-    def _format_curated_evidence(self, curated_evidence: Dict[str, Any]) -> str:
-        """Format curated evidence for inclusion in the prompt."""
-        
-        formatted_sections = []
-        
-        # Group evidence by category
-        for category, evidence_list in curated_evidence.items():
-            if evidence_list:  # Only include non-empty categories
-                formatted_sections.append(f"\n{category.upper()}:")
-                
-                for item in evidence_list:
-                    if isinstance(item, dict):
-                        aid = item.get('aid', 'Unknown')
-                        evidence_text = item.get('evidence', 'No evidence text')
-                        confidence = item.get('confidence', 'N/A')
-                        connection = item.get('connection', 'No connection specified')
-                        
-                        # Extract speaker name from document ID if possible
-                        speaker_name = self._extract_speaker_name(aid)
-                        
-                        # Safe formatting for confidence scores
-                        conf_str = f"{confidence:.2f}" if isinstance(confidence, (int, float)) else str(confidence)
-                        
-                        if speaker_name and speaker_name != aid:
-                            formatted_sections.append(f"     Speaker: {speaker_name}")
-                            formatted_sections.append(f"     Document: {aid}")
-                        else:
-                            formatted_sections.append(f"     Document: {aid}")
-                        
-                        formatted_sections.append(f"     Evidence: {evidence_text}")
-                        formatted_sections.append(f"     Confidence: {conf_str} | Connection: {connection}")
-                        formatted_sections.append("")  # Blank line between items
-        
-        return "\n".join(formatted_sections) if formatted_sections else "No curated evidence available."
+    # THIN approach: No formatting methods needed - pass raw data as base64
     
     def _extract_speaker_name(self, document_id: str) -> str:
         """Extract speaker name from document ID if it follows the expected pattern."""
