@@ -112,12 +112,36 @@ class EvidenceCurator:
         self.footnote_counter = 0
         self.footnote_registry = {}
         
+        # Fan-out/Fan-in configuration for large corpora
+        self.LARGE_CORPUS_THRESHOLD = 100  # Switch to fan-out/fan-in above this many evidence pieces
+        self.CHUNK_SIZE = 500  # Evidence pieces per chunk
+        self.PIECES_PER_CHUNK = 30  # Target pieces to curate from each chunk
+        self.FINAL_TARGET_PIECES = 100  # Final number of pieces after aggregation
+        
     def curate_evidence(self, request: EvidenceCurationRequest) -> EvidenceCurationResponse:
         """
-        Curate evidence based on statistical results.
+        Main entry point for evidence curation.
+        Automatically detects large evidence pools and uses fan-out/fan-in approach.
+        """
+        evidence_df = self._load_evidence_data(request.evidence_data)
+        if evidence_df is None or evidence_df.empty:
+            return self._create_empty_response("Failed to load evidence data")
+        
+        # Check if we need fan-out/fan-in approach for large evidence pools
+        if len(evidence_df) > self.LARGE_CORPUS_THRESHOLD:
+            self.logger.info(f"Large evidence pool detected ({len(evidence_df)} pieces). Using fan-out/fan-in approach...")
+            return self._curate_evidence_fanout_fanin(request, evidence_df)
+        else:
+            self.logger.info(f"Standard evidence curation for {len(evidence_df)} pieces")
+            return self._curate_evidence_standard(request, evidence_df)
+    
+    def _curate_evidence_standard(self, request: EvidenceCurationRequest, evidence_df: pd.DataFrame) -> EvidenceCurationResponse:
+        """
+        Curate evidence based on statistical results (standard approach).
         
         Args:
             request: EvidenceCurationRequest containing results and evidence
+            evidence_df: Pre-loaded evidence DataFrame
             
         Returns:
             EvidenceCurationResponse with curated evidence
@@ -137,14 +161,13 @@ class EvidenceCurator:
                     footnote_registry={}
                 )
             
-            # Load and validate evidence data
-            evidence_df = self._load_evidence_data(request.evidence_data)
+            # Evidence DataFrame is already loaded and validated by caller
             if evidence_df is None:
                 return EvidenceCurationResponse(
                     curated_evidence={},
                     curation_summary={},
                     success=False,
-                    error_message="Failed to load evidence data",
+                    error_message="Evidence data is None",
                     footnote_registry={}
                 )
             
@@ -256,6 +279,152 @@ class EvidenceCurator:
         except Exception as e:
             self.logger.error(f"LLM evidence curation failed: {str(e)}")
             return {}
+    
+    def _curate_evidence_fanout_fanin(self, request: EvidenceCurationRequest, evidence_df: pd.DataFrame) -> EvidenceCurationResponse:
+        """
+        Fan-out/Fan-in evidence curation for large corpora.
+        
+        Strategy:
+        1. Split evidence into manageable chunks
+        2. Curate each chunk in parallel (fan-out)
+        3. Aggregate results and final curation (fan-in)
+        """
+        try:
+            # Step 1: Split evidence into chunks
+            chunks = self._split_evidence_into_chunks(evidence_df)
+            self.logger.info(f"Split {len(evidence_df)} evidence pieces into {len(chunks)} chunks")
+            
+            # Step 2: Curate each chunk (fan-out)
+            chunk_results = []
+            for i, chunk_df in enumerate(chunks):
+                self.logger.info(f"Curating chunk {i+1}/{len(chunks)} ({len(chunk_df)} pieces)...")
+                
+                # Create modified request for chunk curation
+                chunk_request = EvidenceCurationRequest(
+                    statistical_results=request.statistical_results,
+                    evidence_data=self._dataframe_to_json_bytes(chunk_df),
+                    max_evidence_per_finding=self.PIECES_PER_CHUNK // 5,  # Distribute across findings
+                    min_confidence_threshold=request.min_confidence_threshold
+                )
+                # Copy framework_spec if it exists
+                if hasattr(request, 'framework_spec'):
+                    chunk_request.framework_spec = request.framework_spec
+                
+                # Curate this chunk using standard method
+                chunk_result = self._curate_evidence_standard(chunk_request)
+                if chunk_result.success:
+                    chunk_results.append(chunk_result.curated_evidence)
+                    self.logger.info(f"Chunk {i+1} produced {sum(len(evidence_list) for evidence_list in chunk_result.curated_evidence.values())} pieces")
+                else:
+                    self.logger.warning(f"Chunk {i+1} curation failed: {chunk_result.error_message}")
+            
+            # Step 3: Aggregate and final curation (fan-in)
+            if not chunk_results:
+                return self._create_empty_response("All chunk curations failed")
+            
+            aggregated_evidence = self._aggregate_chunk_results(chunk_results)
+            self.logger.info(f"Aggregated {sum(len(evidence_list) for evidence_list in aggregated_evidence.values())} pieces from {len(chunk_results)} chunks")
+            
+            # Step 4: Final curation to target number
+            final_result = self._final_evidence_curation(request, aggregated_evidence)
+            self.logger.info(f"Final curation produced {sum(len(evidence_list) for evidence_list in final_result.values())} pieces")
+            
+            return EvidenceCurationResponse(
+                curated_evidence=final_result,
+                curation_summary={
+                    "method": "fan_out_fan_in",
+                    "total_input_pieces": len(evidence_df),
+                    "chunks_processed": len(chunks),
+                    "successful_chunks": len(chunk_results),
+                    "final_pieces": sum(len(evidence_list) for evidence_list in final_result.values())
+                },
+                success=True,
+                footnote_registry=self.footnote_registry
+            )
+            
+        except Exception as e:
+            self.logger.error(f"Fan-out/fan-in curation failed: {str(e)}")
+            return self._create_empty_response(f"Fan-out/fan-in curation failed: {str(e)}")
+    
+    def _split_evidence_into_chunks(self, evidence_df: pd.DataFrame) -> List[pd.DataFrame]:
+        """Split evidence DataFrame into manageable chunks."""
+        chunks = []
+        for i in range(0, len(evidence_df), self.CHUNK_SIZE):
+            chunk = evidence_df.iloc[i:i + self.CHUNK_SIZE].copy()
+            chunks.append(chunk)
+        return chunks
+    
+    def _dataframe_to_json_bytes(self, df: pd.DataFrame) -> bytes:
+        """Convert DataFrame back to JSON bytes format expected by standard curation."""
+        # Reconstruct the original JSON structure
+        document_analyses = []
+        
+        # Group by artifact_id to reconstruct documents
+        for artifact_id in df['artifact_id'].unique():
+            doc_df = df[df['artifact_id'] == artifact_id]
+            evidence_list = []
+            
+            for _, row in doc_df.iterrows():
+                evidence = {
+                    'dimension': row.get('dimension', ''),
+                    'quote_text': row.get('evidence_text', ''),
+                    'confidence': row.get('confidence', 0.0),
+                    'context_type': row.get('context', 'direct')
+                }
+                evidence_list.append(evidence)
+            
+            document_analyses.append({
+                'document_id': artifact_id,
+                'evidence': evidence_list
+            })
+        
+        json_data = {'document_analyses': document_analyses}
+        return json.dumps(json_data).encode('utf-8')
+    
+    def _aggregate_chunk_results(self, chunk_results: List[Dict[str, List[CuratedEvidence]]]) -> Dict[str, List[CuratedEvidence]]:
+        """Aggregate evidence from multiple chunk results."""
+        aggregated = {}
+        
+        for chunk_result in chunk_results:
+            for category, evidence_list in chunk_result.items():
+                if category not in aggregated:
+                    aggregated[category] = []
+                aggregated[category].extend(evidence_list)
+        
+        return aggregated
+    
+    def _final_evidence_curation(self, request: EvidenceCurationRequest, aggregated_evidence: Dict[str, List[CuratedEvidence]]) -> Dict[str, List[CuratedEvidence]]:
+        """Final curation to reduce aggregated evidence to target number."""
+        total_pieces = sum(len(evidence_list) for evidence_list in aggregated_evidence.values())
+        
+        if total_pieces <= self.FINAL_TARGET_PIECES:
+            # Already within target, return as-is
+            return aggregated_evidence
+        
+        # Need to reduce - use LLM for intelligent final selection
+        self.logger.info(f"Final curation: reducing {total_pieces} pieces to {self.FINAL_TARGET_PIECES}")
+        
+        # Convert aggregated evidence back to a format suitable for LLM curation
+        # This is a simplified approach - in practice, you might want more sophisticated logic
+        final_result = {}
+        pieces_per_category = self.FINAL_TARGET_PIECES // len(aggregated_evidence)
+        
+        for category, evidence_list in aggregated_evidence.items():
+            # Sort by relevance_score and take top pieces
+            sorted_evidence = sorted(evidence_list, key=lambda x: x.relevance_score, reverse=True)
+            final_result[category] = sorted_evidence[:pieces_per_category]
+        
+        return final_result
+    
+    def _create_empty_response(self, error_message: str) -> EvidenceCurationResponse:
+        """Create an empty response for error cases."""
+        return EvidenceCurationResponse(
+            curated_evidence={},
+            curation_summary={"error": error_message},
+            success=False,
+            error_message=error_message,
+            footnote_registry={}
+        )
     
     def _load_curation_prompt_template(self) -> str:
         """Load externalized YAML instructions for evidence curation."""
