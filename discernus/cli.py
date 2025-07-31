@@ -251,6 +251,22 @@ def continue_experiment(experiment_path: str, synthesis_model: str):
             click.echo(f"   📋 Run ID: {result['run_id']}")
             click.echo(f"   📁 Results: {exp_path / 'runs' / result['run_id']}")
             click.echo(f"   📄 Report: {exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'}")
+            
+            # Display cost information for research transparency
+            if 'costs' in result:
+                costs = result['costs']
+                click.echo(f"   💰 Resume Cost: ${costs.get('total_cost_usd', 0.0):.4f} USD")
+                click.echo(f"   🔢 Tokens Used: {costs.get('total_tokens', 0):,}")
+                
+                # Show breakdown by operation if available
+                operations = costs.get('operations', {})
+                if operations:
+                    click.echo("   📊 Operation Breakdown:")
+                    for operation, op_costs in operations.items():
+                        cost_usd = op_costs.get('cost_usd', 0.0)
+                        tokens = op_costs.get('tokens', 0)
+                        calls = op_costs.get('calls', 0)
+                        click.echo(f"      • {operation}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
         
     except ThinOrchestratorError as e:
         click.echo(f"❌ Resume failed: {e}")
@@ -309,6 +325,22 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
         if isinstance(result, dict) and 'run_id' in result:
             click.echo(f"   📋 Run ID: {result['run_id']}")
             click.echo(f"   📁 Debug outputs: {exp_path / 'runs' / result['run_id']}")
+            
+            # Display cost information for debugging transparency
+            if 'costs' in result:
+                costs = result['costs']
+                click.echo(f"   💰 Debug Session Cost: ${costs.get('total_cost_usd', 0.0):.4f} USD")
+                click.echo(f"   🔢 Tokens Used: {costs.get('total_tokens', 0):,}")
+                
+                # Show agent-level breakdown for debugging
+                agents = costs.get('agents', {})
+                if agents:
+                    click.echo("   🤖 Agent Cost Breakdown:")
+                    for agent, agent_costs in agents.items():
+                        cost_usd = agent_costs.get('cost_usd', 0.0)
+                        tokens = agent_costs.get('tokens', 0)
+                        calls = agent_costs.get('calls', 0)
+                        click.echo(f"      • {agent}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
         
     except ThinOrchestratorError as e:
         click.echo(f"❌ Debug execution failed: {e}")
