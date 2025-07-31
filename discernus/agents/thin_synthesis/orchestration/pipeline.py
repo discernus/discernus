@@ -60,6 +60,7 @@ class ProductionPipelineRequest:
     framework_hash: Optional[str] = None
     corpus_hash: Optional[str] = None
     framework_name: Optional[str] = None
+    corpus_manifest: Optional[Dict[str, Any]] = None
 
 @dataclass
 class ProductionPipelineResponse:
@@ -542,11 +543,11 @@ Raw Analysis Data:
             stage_1_results = {}
             if raw_data_plan.get('tasks'):
                 self.logger.info("📊 Executing Stage 1: Raw data collection...")
-                stage_1_results = execute_analysis_plan_thin(raw_analysis_data, raw_data_plan)
+                stage_1_results = execute_analysis_plan_thin(raw_analysis_data, raw_data_plan, request.corpus_manifest)
             
             # Execute Stage 2: Derived metrics and statistical analysis
             self.logger.info("🧮 Executing Stage 2: Derived metrics and statistical analysis...")
-            stage_2_results = execute_analysis_plan_thin(raw_analysis_data, derived_metrics_plan)
+            stage_2_results = execute_analysis_plan_thin(raw_analysis_data, derived_metrics_plan, request.corpus_manifest)
             
             # Combine results from both stages
             combined_results = {
@@ -562,7 +563,7 @@ Raw Analysis Data:
                 self.logger.info(f"Stage 1 tasks completed: {len(stage_1_results.get('results', {}))}")
                 self.logger.info(f"Stage 2 success: {len(stage_2_results.get('errors', [])) == 0}")
                 self.logger.info(f"Stage 2 errors: {stage_2_results.get('errors', [])}")
-                self.logger.info(f"Stage 2 tasks completed: {len(stage_2_results.get('results', {}))}")
+                self.logger.info(f"Stage 2 tasks completed: {len(stage_2_results.get('results', {})) if stage_2_results else 0}")
             
             # Log execution completion
             self.audit_logger.log_agent_event(
@@ -694,16 +695,27 @@ Raw Analysis Data:
                 else:
                     notable_errors.append(error)
         
+        # Check for derived metrics calculation issues
+        stage_2_results = exec_response.get('stage_2_derived_metrics', {})
+        if stage_2_results:
+            for task_name, task_result in stage_2_results.items():
+                if isinstance(task_result, dict) and task_result.get('type') == 'derived_metrics_calculation':
+                    if not task_result.get('success', True):
+                        failed_calcs = task_result.get('failed_calculations', [])
+                        for failed_calc in failed_calcs[:2]:  # Top 2 failed calculations
+                            notable_errors.append(f"Derived metric calculation failed: {failed_calc.get('metric', 'unknown')} - {failed_calc.get('error', 'unknown error')}")
+                    elif task_result.get('success_rate', 1.0) < 1.0:
+                        warnings.append(f"Partial derived metrics success: {task_result.get('success_rate', 0):.1%} of calculations succeeded")
+        
         # Check for evidence curation issues
         if not curation_response.success:
             notable_errors.append(f"Evidence curation failed: {curation_response.error_message}")
         elif curation_response.curated_evidence and len(curation_response.curated_evidence) == 0:
-            warnings.append("No evidence was successfully curated")
-        
-        # Check for data quality issues
-        total_evidence = sum(len(evidence_list) for evidence_list in curation_response.curated_evidence.values()) if curation_response.curated_evidence else 0
-        if total_evidence < 5:
-            quality_alerts.append(f"Limited evidence base: Only {total_evidence} pieces of evidence curated")
+            warnings.append("No evidence was curated - this may indicate data quality issues")
+        elif curation_response.curated_evidence:
+            total_evidence = sum(len(evidence_list) for evidence_list in curation_response.curated_evidence.values())
+            if total_evidence < 5:
+                warnings.append(f"Limited evidence base (only {total_evidence} pieces of evidence curated for synthesis)")
         
         # Check statistical results for issues
         stage_2_results = exec_response.get('stage_2_derived_metrics', {})

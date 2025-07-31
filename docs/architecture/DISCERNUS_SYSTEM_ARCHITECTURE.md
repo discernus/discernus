@@ -2,15 +2,15 @@
 title: Discernus System Architecture - Technical Specification
 ---
 
-# Discernus System Architecture (v4.0 - THIN Orchestration)
+# Discernus System Architecture (THIN Orchestration)
 
-> **Document Structure**: This document is organized into three distinct sections: (1) **Universal Principles** - immutable architectural foundations, (2) **Current Implementation** - v4.0 architecture as implemented, and (3) **Evolution Roadmap** - planned enhancements and future vision. Each section serves different stakeholders and development phases.
+> **Document Structure**: This document is organized into three distinct sections: (1) **Universal Principles** - immutable architectural foundations, (2) **Current Implementation** - operational architecture and capabilities, and (3) **Evolution Roadmap** - planned enhancements and future vision. Each section serves different stakeholders and development phases.
 
 ---
 
 ## About Discernus
 
-**Discernus** is a computational research platform that amplifies researcher expertise through systematic, reproducible analysis of text corpora. Rather than replacing human judgment, Discernus enables researchers to apply their analytical frameworks at unprecedented scale while maintaining complete transparency and academic integrity.
+**Discernus** is a computational research platform that amplifies researcher expertise through systematic, reproducible analysis of text corpora. Rather than replacing human judgment, Discernus enables researchers to apply their analytical frameworks at scale while maintaining transparency and academic integrity.
 
 ### What Discernus Does
 
@@ -22,7 +22,7 @@ Discernus transforms research capacity without compromising scholarly control:
 
 **Discernus Approach**: 
 - Researcher designs framework once → Automated consistent application across corpus → LLM-powered synthesis with computational verification → Transparent, statistically validated results
-- Institutional scale, perfect consistency, complete auditability
+- Institutional scale, improved consistency, enhanced auditability
 
 ### Foundational Philosophy
 
@@ -30,16 +30,16 @@ Discernus transforms research capacity without compromising scholarly control:
 
 **Day-1 Extensibility**: Create unlimited frameworks, experiments, and corpora within specifications. No programming required - analytical approaches expressed in natural language enable immediate research productivity.
 
-**Academic Integrity by Design**: Every calculation verified through code execution, every decision logged for audit, complete provenance for peer review. No hallucinated statistics, no black-box results.
+**Academic Integrity by Design**: Calculations verified through code execution, decisions logged for audit, provenance maintained for peer review. Statistical results computed rather than hallucinated.
 
-**Empirically Validated Consistency**: LLMs provide more consistent evaluation than human panels at institutional scale, representing global-scale averaging of human perception patterns while eliminating fatigue and bias drift.
+**LLM Consistency Approach**: LLMs can provide more consistent evaluation than human panels in many contexts, representing averaged human perception patterns while reducing fatigue and bias effects.
 
 ### Core Capabilities
-- **Unlimited Analytical Frameworks**: Any approach expressible in natural language (political analysis, discourse analysis, content analysis, literary criticism, etc.)
-- **Any Text Corpus**: Scales from dozens to thousands of documents with hash-based anonymization for sensitive materials
-- **Computational Verification**: All statistics computed and verified - no hallucinated results
-- **Complete Transparency**: End-to-end audit trails, variance reporting, confidence intervals, methodological constraints
-- **Immediate Collaboration**: Git-based framework and experiment sharing enables academic community building
+- **Flexible Analytical Frameworks**: Approaches expressible in natural language (political analysis, discourse analysis, content analysis, literary criticism, etc.)
+- **Scalable Text Processing**: Handles document collections from dozens to thousands with hash-based anonymization for sensitive materials
+- **Computational Verification**: Statistics computed and verified through code execution
+- **Process Transparency**: Audit trails, variance reporting, confidence intervals, methodological constraints
+- **Git-based Collaboration**: Framework and experiment sharing enables academic community building
 
 ---
 
@@ -63,19 +63,39 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 - Post-hoc analysis, synthesis, and scholarly interpretation remain fundamentally human activities
 - Technology serves scholarship, not the reverse - researchers drive insights, system provides rigor
 
-**3. Academic Provenance by Design**
-- Every decision, artifact, and transformation logged
-- Git-based version control for all research materials
-- Audit trails sufficient for peer review and replication
+**3. Researcher-Centric Information Architecture**
+- **Mirror Research Thinking**: System organization reflects how researchers naturally conceptualize and organize their work
+- **Cognitive Load Management**: Present the right information at the right time in the right format for clarity
+- **Human-Readable Interfaces**: Meaningful names, logical structures, and rich context over cryptic technical identifiers
+- **Progressive Disclosure**: Surface relevant details when needed while maintaining clean primary workflows
+- **Research Narrative Preservation**: File organization tells the story of the research process and decision-making
+- **Balance Rigor with Usability**: Maintain underlying technical precision while providing researcher-friendly abstractions
+- **Workflow Integration**: Support natural research patterns rather than forcing adaptation to system constraints
 
-**4. Computational Verification ("Show Your Math")**
+**4. No Black Box - Complete Process Transparency**
+- **LLM Reasoning Visibility**: All agent reasoning traces and decision logic captured and accessible
+- **Framework Interpretation Transparency**: How natural language analytical frameworks are operationalized and applied to specific texts
+- **Computational Process Transparency**: Every mathematical calculation shows its work through executable code
+- **Agent Orchestration Transparency**: Why specific agents were invoked, in what order, and with what parameters
+- **Synthesis Methodology Transparency**: How conflicting analyses are identified, weighted, and resolved
+- **Error Resolution Transparency**: What failed, why it failed, and how the system responded
+- **Academic Requirement**: Researchers must be able to understand, validate, and replicate every step of the analytical process
+- **Peer Review Enablement**: Complete methodological transparency sufficient for rigorous academic review
+
+**5. Academic Provenance by Design**
+- Every decision, artifact, and transformation logged with complete context
+- Git-based version control for all research materials and process history
+- Audit trails sufficient for peer review and replication
+- Tamper-evident chains of analytical custody
+
+**6. Computational Verification ("Show Your Math")**
 - LLMs must execute code for all mathematical calculations
 - Statistical results verified through secure code execution
 - No hallucinated statistics - all numbers computed and logged
 - Provenance systems detect content tampering and ensure analysis integrity
 - Academic integrity through transparent, auditable computational processes
 
-**5. LLM Consistency Superiority Over Human Evaluation Panels**
+**7. LLM Consistency Superiority Over Human Evaluation Panels**
 - **Fundamental Assumption**: Properly managed LLMs are more consistently perceptive than human evaluator panels
 - LLMs represent global-scale averaging of human perception patterns across training data
 - Individual humans may be more perceptive, but panels suffer from inconsistency, fatigue, and bias drift
@@ -84,7 +104,7 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 - Statistical validation (variance measurement, confidence intervals) quantifies this consistency advantage
 - This assumption justifies computational methodology over traditional human coding approaches
 
-**6. Variance-Aware Adaptive Processing with Transparency**
+**8. Variance-Aware Adaptive Processing with Transparency**
 - Accept LLM response variance as natural and expected phenomenon (not a bug to fix)
 - Use statistical methods to measure variance and determine optimal sample sizes
 - Adaptive sampling stops when confidence intervals meet requirements
@@ -92,27 +112,26 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 - Always report uncertainty, confidence intervals, and methodological constraints
 - Employ multi-run statistical validation for reliability assessment
 
-**7. Reliability Over Flexibility**
+**9. Reliability Over Flexibility**
 - Single, predictable pipeline over infinite customization options
 - Boring, bulletproof behavior over theoretical capability
 - "It works every time" trumps "it can do anything"
 - **Direct function calls over distributed coordination** - proven through prototype experience
 
-**8. Resource-Conscious Cost Management**
+**10. Resource-Conscious Cost Management**
 - Empirical cost-performance optimization through model selection and batching
-- Variance-driven adaptive sampling minimizes unnecessary LLM calls
-- Perfect caching eliminates redundant computation on re-runs
+- Variance-driven adaptive sampling reduces unnecessary LLM calls
+- Caching eliminates redundant computation on re-runs
 - Transparent cost reporting enables institutional budget planning
-- *Note: Advanced cost controls and budgeting tools deferred to post-MVP phase*
 
-**9. Specialized Agent Processing Over Monolithic Analysis**
+**11. Specialized Agent Processing Over Monolithic Analysis**
 - Task-specific agents outperform single-LLM approaches (empirically validated)
 - Streamlined pipeline: BatchAnalysis → Synthesis → Report with comprehensive provenance
 - Natural language communication between stages (no complex JSON parsing)
 - Agent specialization: focused analysis agents with clear input/output contracts
 - Comprehensive reporting with proper provenance asset management
 
-**10. Empirical Model Selection Based on Performance Requirements**
+**12. Empirical Model Selection Based on Performance Requirements**
 - Context window requirements determined by analysis complexity
 - Rate limiting needs based on institutional processing scale
 - Accuracy demands: Consistent performance across full context window
@@ -120,7 +139,7 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 - Cost-performance optimization through systematic evaluation
 - Provider reliability considerations for predictable academic pricing
 
-**11. Security and Privacy by Design**
+**13. Security and Privacy by Design**
 - Corpus anonymization and hash-based identity protection as standard practice
 - Process isolation and sandboxing for secure agent execution (implemented upfront)
 - Comprehensive audit logging for academic integrity and compliance (implemented upfront)
@@ -128,7 +147,7 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 - Git-based provenance provides tamper-evident audit trails
 - **Academic Data Sensitivity**: Text corpora often contain sensitive political, corporate, or personal content requiring proper security controls from day one
 
-**11a. Orchestrator Trust Boundary Model**
+**13a. Orchestrator Trust Boundary Model**
 - **Trust Layering**: Security architecture distinguishes between trusted infrastructure (orchestrators) and untrusted workloads (agents)
 - **Orchestrator Privileges**: Can resolve canonical framework references (`../../frameworks/`) as trusted infrastructure operations
 - **Agent Restrictions**: All agent file access constrained to experiment directory via `ExperimentSecurityBoundary`
@@ -136,78 +155,79 @@ These foundational principles are the "constitutional" bedrock of Discernus - th
 - **Canonical Framework Support**: Enables single-source-of-truth frameworks while maintaining strict agent isolation
 - **Audit Compliance**: All framework access (canonical and local) logged with security context for complete provenance
 
-**12. Graceful Degradation and Error Recovery**
+**14. Graceful Degradation and Error Recovery**
 - Fail-fast validation prevents expensive downstream failures
 - Partial artifact preservation on timeout or interruption
 - Clear error messages with actionable remediation steps
 - System continues processing remaining batches when individual items fail
-- *Note: Advanced resilience patterns and retry logic deferred to post-MVP phase*
 
-**13. Intelligence in Prompts, Not Software**
+**15. Intelligence in Prompts, Not Software**
 - LLMs handle reasoning, interpretation, and domain knowledge
 - Software provides coordination, storage, and deterministic operations only
 - Components limited to <150 lines to prevent intelligence creep
 
-**14. Externalized Intelligence, Internalized Coordination**
+**16. Externalized Intelligence, Internalized Coordination**
 - Agent prompts live in external YAML files (intelligence belongs outside code)
 - Agent discovery via file-based scanning (THIN principle: simple filesystem patterns over hardcoded logic)
 - Researchers modify prompts, not coordination logic
 - Balances THIN principles with Radical Simplification reliability
 
-**15. Empirical Technology Choices**
+**17. Empirical Technology Choices**
 - Decisions based on actual testing, not theoretical optimization
 - Model selection validated through complexity testing
 - Cost optimization secondary to reliability validation
 
-**16. Linear Progression with Perfect Caching**
+**18. Linear Progression with Caching**
 - Streamlined 3-stage pipeline with deterministic progression
-- Cache hits eliminate redundant computation entirely
+- Cache hits eliminate redundant computation
 - Predictable resource usage and timing
 
-**17. Artifact-Oriented State Management**
-- All data flows through immutable, hashed artifacts in MinIO
+**19. Artifact-Oriented State Management**
+- All data flows through immutable, hashed artifacts in content-addressable storage
 - No mutable state in agents or orchestrator
-- Perfect reproducibility through artifact chains
+- Reproducibility through artifact chains
 
-**18. Fail-Fast Input Validation**
+**20. Fail-Fast Input Validation**
 - Strict contracts enforced at system boundaries
 - Clear error messages over expensive debugging cycles
 - "Garbage in, clear error out"
 
-**19. No Database Policy - Git as Persistence Layer**
-- **Academic Transparency**: Databases are opaque to auditors and replication researchers
-- **Distributed Collaboration**: Flat files enable researcher collaboration without centralized infrastructure
+**21. Decentralized Architecture Policy - Independence Over Infrastructure**
+- **No Required Centralized Infrastructure**: Researchers work independently on their own machines without requiring shared servers or databases
+- **Academic Transparency**: All research data stored as flat files (CSV/JSON) that are transparent to auditors and replication researchers
+- **Distributed Collaboration**: Git-based collaboration without centralized infrastructure dependencies
 - **Project Isolation**: Individual experiments remain self-contained and portable
 - **Replication Ready**: Complete research packages as Git repositories with flat file data
-- **Tool Agnostic**: CSV/JSON files work with any analysis tool (Excel, R, Python, etc.)
-- GitHub serves as the persistence and collaboration layer for all research materials
-- When relational data is needed, use Hash Cross Referenced CSV files with shared artifact keys
-- *Future: Discernus Enterprise may offer optional database integration for institutional deployments*
+- **Tool Agnostic**: CSV/JSON outputs work with any analysis tool (Excel, R, Python, etc.)
+- **Optional Local Databases**: Embedded databases (SQLite, vector stores) permitted for performance optimization if they don't require centralized infrastructure
+- **Hash Cross Referenced CSV**: When relational data is needed, use CSV files with shared artifact keys
+- GitHub serves as the collaboration layer - no proprietary formats or database dumps
 
 ---
 
-# Part II: Current Implementation (v4.0 Architecture)
+# Part II: Current Implementation 
 
-This section describes the actual implemented architecture as of 2025-01-30. All features and capabilities described here are operational and tested.
+This section describes the implemented architecture and operational capabilities.
 
 ## Current Technology Stack
 
 **Infrastructure**:
 - MinIO content-addressable storage for artifact management
-- Git-based provenance and version control (no databases)
+- Git-based provenance and version control (no centralized databases required)
 - Local filesystem or S3-compatible storage backends
 - Direct function calls over distributed coordination
+- Optional local embedded databases (SQLite) for performance optimization
 
 **LLM Integration**:
-- Primary: Vertex AI Gemini 2.5 Flash ($0.13/$0.38 per 1M tokens)
-- Premium: Claude models for synthesis and critique
-- Multi-provider gateway via LiteLLM
-- Cost-optimized model selection based on empirical testing
+- Inherently multi-model architecture with defaults to current Gemini series models during development
+- Multi-provider gateway supporting various LLM providers
+- Cost-performance optimization through empirical model selection
+- Specialized model usage for different analytical tasks
 
-**Current Specifications**:
-- Framework Specification v6.0 (natural language analytical approaches)
-- Experiment Specification v3.0 (multi-model research designs)
-- Corpus Specification v3.0 (text collection management)
+**Specification System**:
+- Framework specifications enable natural language analytical approaches
+- Experiment specifications support multi-model research designs  
+- Corpus specifications provide text collection management
 
 ## Current Processing Pipeline
 
@@ -216,12 +236,19 @@ This section describes the actual implemented architecture as of 2025-01-30. All
 2. **Synthesis Stage**: Batch processing with mathematical verification
 3. **Reporting Stage**: Statistical analysis and academic-quality output
 
-**Perfect Caching**: SHA256-based content-addressable storage eliminates redundant computation on identical inputs
+**Content-Addressable Caching**: SHA256-based storage eliminates redundant computation on identical inputs
 
 **Security Model**: 
 - Orchestrator trust boundary with agent restrictions
 - ExperimentSecurityBoundary constrains agent file access
-- Audit logging for all operations
+- Comprehensive audit logging for all operations
+
+**Transparency Approach**:
+- LLM reasoning traces captured in artifacts where possible
+- Framework interpretation steps logged for review
+- Agent orchestration decisions recorded for audit
+- Mathematical calculations executed and verified through code
+- Continuous improvement toward complete process transparency
 
 ---
 
@@ -235,6 +262,18 @@ This section outlines planned enhancements organized by development timeline. Fe
 - Complete externalization of all agent prompts to YAML files
 - Version-controlled prompt templates and systematic testing
 - Framework-agnostic prompt libraries
+
+**Enhanced Transparency Infrastructure**:
+- Structured reasoning trace capture and visualization
+- Interactive transparency browsers for process exploration
+- Framework interpretation workflow documentation
+- Decision audit trails with searchable metadata
+
+**Researcher-Centric Information Architecture**:
+- Human-readable file naming and organization systems
+- Rich metadata and context preservation
+- Progressive disclosure interfaces for complex data
+- Research narrative preservation in file structures
 
 **Systematic Evaluation Framework**:
 - Automated testing pipeline using promptfoo or similar
@@ -261,11 +300,10 @@ This section outlines planned enhancements organized by development timeline. Fe
 - Consensus mechanisms for complex reasoning tasks
 
 **Advanced Caching Strategies**:
-- Semantic similarity caching using vector embeddings
+- Semantic similarity caching using local vector embeddings (embedded SQLite with vector extensions)
 - Prompt optimization through retrieval-augmented generation
 - Dynamic few-shot example selection
-
-*Note: These features may require revision of the "No Database Policy" to support vector storage.*
+- Local vector stores for framework similarity matching
 
 ## Long-Term: Autonomous Systems (18+ Months)
 
@@ -304,4 +342,4 @@ This section outlines planned enhancements organized by development timeline. Fe
 
 ---
 
-*Last updated 2025‑01‑31 - Restructured with clear delineation between Universal Principles, Current Implementation, and Evolution Roadmap*
+*Last updated 2025‑01‑31 - Cleaned up version numbers, specific claims, and marketing language while maintaining clear architectural guidance*

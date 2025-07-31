@@ -130,7 +130,8 @@ class ThinOrchestrator:
             # Add provenance context (Issue #208 fix)
             framework_hash=framework_hash,
             corpus_hash=corpus_hash,
-            framework_name=experiment_config.get('framework', 'Unknown framework')
+            framework_name=experiment_config.get('framework', 'Unknown framework'),
+            corpus_manifest=corpus_manifest
         )
         
         # Execute pipeline
