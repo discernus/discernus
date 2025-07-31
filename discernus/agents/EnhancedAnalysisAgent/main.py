@@ -94,70 +94,46 @@ class EnhancedAnalysisAgent:
         
         return prompt_config['template']
     
-    def _detect_framework_version(self, framework_config: Dict[str, Any]) -> str:
-        """Detect framework version from JSON configuration."""
-        # Check for explicit version field
-        version = framework_config.get("version", "")
-        
-        # v6.0 frameworks have specific indicators
-        if version.startswith("v6.") or version.startswith("6."):
-            return "v6.0"
-        
-        # Legacy v5.0 frameworks not supported
-        raise EnhancedAnalysisAgentError("Legacy v5.0 frameworks not supported - use v6.0+ frameworks with JSON output")
-    
-    def _is_json_framework(self, framework_version: str) -> bool:
-        """Determine if framework should use JSON output."""
-        return framework_version == "v6.0"
+
     
     def _process_json_response(self, result_content: str, document_hash: str, 
                               current_scores_hash: Optional[str], 
                               current_evidence_hash: Optional[str]) -> Tuple[str, str]:
         """
-        Extract JSON from v6.0 framework response using proprietary delimiters.
-        Clean approach - no complex parsing, just reliable regex extraction.
+        Semi-THIN approach: Extract JSON from delimiters but don't parse content.
+        Store clean JSON for downstream compatibility while avoiding complex parsing.
         """
-        import json
         import re
         
-        try:
-            # Extract JSON using proprietary delimiters (reliable regex)
-            json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
-            json_match = re.search(json_pattern, result_content, re.DOTALL)
-            if not json_match:
-                raise ValueError("No JSON found with proprietary delimiters")
-            
+        # Extract JSON using proprietary delimiters (minimal parsing for compatibility)
+        json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+        json_match = re.search(json_pattern, result_content, re.DOTALL)
+        if not json_match:
+            # Fallback: store raw response if no delimiters found
+            json_str = result_content
+        else:
             json_str = json_match.group(1).strip()
-            analysis_data = json.loads(json_str)
-            
-            # Store the raw JSON analysis as artifact (v6.0 native format)
-            json_artifact_hash = self.storage.put_artifact(
-                json_str.encode('utf-8'),
-                {
-                    "artifact_type": "analysis_json_v6",
-                    "document_hash": document_hash,
-                    "framework_version": "v6.0",
-                    "framework_hash": self.analysis_provenance.get("framework_hash", "unknown")
-                }
-            )
-            
-            self.audit.log_agent_event(self.agent_name, "json_v6_extraction", {
+        
+        # Store the extracted JSON as artifact (semi-THIN: minimal parsing for compatibility)
+        json_artifact_hash = self.storage.put_artifact(
+            json_str.encode('utf-8'),
+            {
+                "artifact_type": "analysis_json_v6",
                 "document_hash": document_hash,
-                "json_artifact_hash": json_artifact_hash,
-                "extraction_method": "proprietary_delimiters"
-            })
-            
-            # Return JSON artifact hash as both scores and evidence for v6.0 pipeline
-            return json_artifact_hash, json_artifact_hash
-            
-        except (json.JSONDecodeError, ValueError, re.error) as e:
-            # Log the actual response for debugging
-            self.audit.log_agent_event(self.agent_name, "json_v6_extraction_failed", {
-                "error": str(e),
-                "response_preview": result_content[:200] + "..." if len(result_content) > 200 else result_content,
-                "response_length": len(result_content)
-            })
-            raise EnhancedAnalysisAgentError(f"Failed to extract v6.0 JSON response: {str(e)}")
+                "framework_version": "v6.0",
+                "framework_hash": self.analysis_provenance.get("framework_hash", "unknown")
+            }
+        )
+        
+        self.audit.log_agent_event(self.agent_name, "json_extracted_stored", {
+            "document_hash": document_hash,
+            "json_artifact_hash": json_artifact_hash,
+            "extraction_method": "delimiter_extraction_only",
+            "approach": "semi_thin_compatibility"
+        })
+        
+        # Return JSON artifact hash as both scores and evidence for v6.0 pipeline
+        return json_artifact_hash, json_artifact_hash
 
 
 
@@ -213,27 +189,8 @@ class EnhancedAnalysisAgent:
         })
         
         try:
-            # Extract framework JSON appendix to get dimensions
-            json_pattern = r"```json\n(.*?)\n```"
-            json_match = re.search(json_pattern, framework_content, re.DOTALL)
-            if not json_match:
-                raise EnhancedAnalysisAgentError("No JSON appendix found in framework")
-            framework_config = json.loads(json_match.group(1))
-            
-            # Get all dimensions from all dimension groups (framework-agnostic)
-            all_dimensions = []
-            dimension_groups = framework_config.get("dimension_groups", {})
-            for group_name, dimensions in dimension_groups.items():
-                if isinstance(dimensions, list):
-                    all_dimensions.extend(dimensions)
-                else:
-                    self.audit.log_agent_event(self.agent_name, "warning", {
-                        "message": f"Dimension group '{group_name}' is not a list, skipping",
-                        "group_content": dimensions
-                    })
-            
-            if not all_dimensions:
-                raise EnhancedAnalysisAgentError("No dimensions found in framework dimension_groups")
+            # THIN approach: No framework parsing - let LLM handle framework interpretation
+            # Framework content will be passed directly to LLM via YAML prompt
             
             # Check if analysis result is already cached (THIN perfect caching)
             # Create the same result structure we would store to check if it exists
@@ -254,40 +211,16 @@ class EnhancedAnalysisAgent:
                         "cached_artifact_hash": artifact_hash
                     })
 
-                    # Extract and persist data from the cached result based on framework version
+                    # THIN approach: Process cached result without framework parsing
                     document_hashes = cached_result.get('input_artifacts', {}).get('document_hashes', [])
-                    framework_hash = cached_result.get('input_artifacts', {}).get('framework_hash', '')
                     
-                    # Detect framework version from cached framework
-                    is_json_framework = False
-                    if framework_hash:
-                        try:
-                            framework_content = self.storage.get_artifact(framework_hash).decode('utf-8')
-                            # Extract framework config from the cached framework content
-                            json_pattern = r"```json\n(.*?)\n```"
-                            json_match = re.search(json_pattern, framework_content, re.DOTALL)
-                            if json_match:
-                                framework_config = json.loads(json_match.group(1))
-                                framework_version = self._detect_framework_version(framework_config)
-                                is_json_framework = self._is_json_framework(framework_version)
-                            else:
-                                # Only v6.0+ frameworks supported
-                                raise EnhancedAnalysisAgentError("Only v6.0+ frameworks with JSON output are supported")
-                        except:
-                            # Only v6.0+ frameworks supported
-                            raise EnhancedAnalysisAgentError("Framework version detection failed - only v6.0+ frameworks supported")
-                    
-                    if is_json_framework:
-                        # v6.0: Process JSON response 
-                        new_scores_hash, new_evidence_hash = self._process_json_response(
-                            cached_result['raw_analysis_response'], 
-                            document_hashes[0] if document_hashes else "unknown_artifact",
-                            current_scores_hash, 
-                            current_evidence_hash
-                        )
-                    else:
-                        # Legacy v5.0 frameworks not supported
-                        raise EnhancedAnalysisAgentError("Legacy v5.0 frameworks not supported - use v6.0+ frameworks with JSON output")
+                    # Process cached response (THIN approach - no framework version detection)
+                    new_scores_hash, new_evidence_hash = self._process_json_response(
+                        cached_result['raw_analysis_response'], 
+                        document_hashes[0] if document_hashes else "unknown_artifact",
+                        current_scores_hash, 
+                        current_evidence_hash
+                    )
                     
                     return {
                         "analysis_result": {
@@ -341,53 +274,25 @@ class EnhancedAnalysisAgent:
                 })
                 document_hashes.append(doc_hash)
             
-            # Prepare framework for LLM
+            # THIN approach: Always use JSON prompt template, no framework version detection
             framework_b64 = base64.b64encode(framework_content.encode('utf-8')).decode('utf-8')
             
-            # Detect framework version and select appropriate prompt template
-            framework_version = self._detect_framework_version(framework_config)
-            is_json_framework = self._is_json_framework(framework_version)
+            # Load JSON prompt template (only v6.0+ supported)
+            json_prompt_template = self._load_json_prompt_template()
             
-            # Debug logging for framework detection
-            self.audit.log_agent_event(self.agent_name, "framework_version_detected", {
-                "version": framework_version,
-                "is_json_framework": is_json_framework,
-                "framework_config_keys": list(framework_config.keys()) if framework_config else []
+            # Format prompt with framework and documents
+            prompt_text = json_prompt_template.format(
+                batch_id=batch_id,
+                frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
+                documents=self._format_documents_for_prompt(documents),
+                num_frameworks=1,
+                num_documents=len(documents)
+            )
+            
+            self.audit.log_agent_event(self.agent_name, "prompt_prepared", {
+                "prompt_length": len(prompt_text),
+                "approach": "thin_no_parsing"
             })
-            
-            if is_json_framework:
-                # Use v6.0 JSON prompt template (no calculations)
-                self.audit.log_agent_event(self.agent_name, "loading_json_prompt_template", {})
-                json_prompt_template = self._load_json_prompt_template()
-                self.audit.log_agent_event(self.agent_name, "json_prompt_template_loaded", {
-                    "template_length": len(json_prompt_template)
-                })
-                try:
-                    prompt_text = json_prompt_template.format(
-                        batch_id=batch_id,
-                        frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
-                        documents=self._format_documents_for_prompt(documents),
-                        num_frameworks=1,
-                        num_documents=len(documents)
-                    )
-                    self.audit.log_agent_event(self.agent_name, "json_prompt_formatted", {
-                        "prompt_length": len(prompt_text)
-                    })
-                except Exception as e:
-                    self.audit.log_agent_event(self.agent_name, "json_prompt_format_error", {
-                        "error": str(e),
-                        "template_placeholders": [p for p in ["batch_id", "frameworks", "documents", "num_frameworks", "num_documents"]]
-                    })
-                    raise EnhancedAnalysisAgentError(f"Failed to format JSON prompt template: {str(e)}")
-                
-                self.audit.log_agent_event(self.agent_name, "framework_version_detected", {
-                    "version": framework_version,
-                    "output_format": "JSON",
-                    "separation_of_concerns": True
-                })
-            else:
-                # Legacy v5.0 frameworks not supported
-                raise EnhancedAnalysisAgentError("Legacy v5.0 frameworks not supported - use v6.0+ frameworks with JSON output")
             
             # Log LLM interaction start
             self.audit.log_agent_event(self.agent_name, "llm_call_start", {
@@ -418,20 +323,16 @@ class EnhancedAnalysisAgent:
             if not result_content or result_content.strip() == "":
                 raise EnhancedAnalysisAgentError("LLM returned empty content")
             
-            # Process response based on framework version
-            self.audit.log_agent_event(self.agent_name, "framework_processing_decision", {
-                "framework_version": framework_version,
-                "is_json_framework": is_json_framework,
-                "response_preview": result_content[:100] + "..." if len(result_content) > 100 else result_content
+            # THIN approach: Always process as raw response (no framework version detection)
+            self.audit.log_agent_event(self.agent_name, "processing_raw_response", {
+                "response_length": len(result_content),
+                "approach": "thin_raw_storage"
             })
-            if is_json_framework:
-                # v6.0: Process JSON response data
-                new_scores_hash, new_evidence_hash = self._process_json_response(
-                    result_content, document_hashes[0], current_scores_hash, current_evidence_hash
-                )
-            else:
-                # Legacy v5.0 frameworks not supported
-                raise EnhancedAnalysisAgentError("Legacy v5.0 frameworks not supported - use v6.0+ frameworks with JSON output")
+            
+            # Process raw LLM response (THIN approach)
+            new_scores_hash, new_evidence_hash = self._process_json_response(
+                result_content, document_hashes[0], current_scores_hash, current_evidence_hash
+            )
 
             # Store raw LLM response - let synthesis agent handle any format (THIN principle)
             analysis_data = result_content
