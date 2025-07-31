@@ -919,24 +919,44 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
         raise MathToolkitError(f"Analysis plan execution failed: {str(e)}")
 
 
-def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan: Dict[str, Any], corpus_manifest: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corpus_manifest: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """
-    THIN version: Execute analysis plan with raw JSON data instead of pre-parsed DataFrame.
+    THIN version: Execute analysis plan with raw JSON data and raw LLM analysis plans.
     
-    This function handles the JSON parsing internally, making the synthesis pipeline THIN.
+    This function handles ALL parsing internally, making the synthesis pipeline fully THIN.
     
     Args:
         raw_analysis_data: Raw JSON string from analysis artifacts
-        analysis_plan: Dictionary containing the analysis plan from AnalysisPlanner
+        analysis_plan_input: Either Dict (legacy) or str (THIN raw LLM response)
+        corpus_manifest: Optional corpus metadata for DataFrame enrichment
         
     Returns:
         Dictionary containing all analysis results
     """
     try:
-        # Handle raw LLM responses with delimiters (fully THIN approach)
         import json
         import re
         
+        # THIN: Handle raw LLM analysis plan responses
+        if isinstance(analysis_plan_input, str):
+            # Parse raw LLM analysis plan response
+            try:
+                # Try to extract JSON from markdown code blocks
+                json_match = re.search(r'```json\s*(\{.*?\})\s*```', analysis_plan_input, re.DOTALL)
+                if json_match:
+                    analysis_plan = json.loads(json_match.group(1))
+                else:
+                    # Try direct JSON parsing
+                    analysis_plan = json.loads(analysis_plan_input)
+                logger.info(f"THIN MathToolkit: Parsed raw LLM analysis plan ({len(analysis_plan_input)} chars)")
+            except json.JSONDecodeError as e:
+                logger.error(f"THIN MathToolkit: Failed to parse LLM analysis plan: {e}")
+                return {"analysis_plan": {}, "results": {}, "errors": [f"Failed to parse LLM analysis plan: {str(e)}"]}
+        else:
+            # Legacy: Already parsed dictionary
+            analysis_plan = analysis_plan_input
+        
+        # Handle raw LLM analysis data responses with delimiters (fully THIN approach)
         # Extract JSON from LLM response if it has delimiters
         json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
         json_match = re.search(json_pattern, raw_analysis_data, re.DOTALL)
@@ -949,7 +969,7 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan: Dict[str, 
         # Parse JSON to analysis result
         analysis_result = json.loads(json_str)
         
-        # Convert to DataFrame using THIN helper (temporary for compatibility)
+        # Convert to DataFrame using THIN helper
         scores_df = _json_scores_to_dataframe_thin(analysis_result, corpus_manifest)
         
         logger.info(f"THIN MathToolkit: Parsed raw LLM response to DataFrame {scores_df.shape}")
