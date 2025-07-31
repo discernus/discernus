@@ -16,8 +16,6 @@ import json
 import base64
 import hashlib
 import re
-import pandas as pd
-from io import StringIO
 
 import yaml
 from datetime import datetime, timezone
@@ -105,12 +103,8 @@ class EnhancedAnalysisAgent:
         if version.startswith("v6.") or version.startswith("6."):
             return "v6.0"
         
-        # v5.0 frameworks typically have embedded_csv_requirements
-        if "embedded_csv_requirements" in framework_config:
-            return "v5.0"
-        
-        # Default to v5.0 for backward compatibility
-        return "v5.0"
+        # Legacy v5.0 frameworks not supported
+        raise EnhancedAnalysisAgentError("Legacy v5.0 frameworks not supported - use v6.0+ frameworks with JSON output")
     
     def _is_json_framework(self, framework_version: str) -> bool:
         """Determine if framework should use JSON output."""
@@ -277,11 +271,11 @@ class EnhancedAnalysisAgent:
                                 framework_version = self._detect_framework_version(framework_config)
                                 is_json_framework = self._is_json_framework(framework_version)
                             else:
-                                # Fallback: assume CSV for safety
-                                is_json_framework = False
+                                # Only v6.0+ frameworks supported
+                                raise EnhancedAnalysisAgentError("Only v6.0+ frameworks with JSON output are supported")
                         except:
-                            # Fallback: assume CSV for safety
-                            is_json_framework = False
+                            # Only v6.0+ frameworks supported
+                            raise EnhancedAnalysisAgentError("Framework version detection failed - only v6.0+ frameworks supported")
                     
                     if is_json_framework:
                         # v6.0: Process JSON response 
@@ -292,11 +286,8 @@ class EnhancedAnalysisAgent:
                             current_evidence_hash
                         )
                     else:
-                        # v5.0: Extract CSV data
-                        scores_csv, evidence_csv = self._extract_embedded_csv(cached_result['raw_analysis_response'], document_hashes[0] if document_hashes else "unknown_artifact")
-                        
-                        new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
-                        new_evidence_hash = self._append_to_csv_artifact(current_evidence_hash, evidence_csv, "evidence.csv")
+                        # Legacy v5.0 frameworks not supported
+                        raise EnhancedAnalysisAgentError("Legacy v5.0 frameworks not supported - use v6.0+ frameworks with JSON output")
                     
                     return {
                         "analysis_result": {
@@ -395,27 +386,8 @@ class EnhancedAnalysisAgent:
                     "separation_of_concerns": True
                 })
             else:
-                # Use v5.0 CSV prompt template (with calculations)
-                prompt_text = self.prompt_template.format(
-                    batch_id=batch_id,
-                    frameworks=f"=== FRAMEWORK 1 (base64 encoded) ===\n{framework_b64}\n",
-                    documents=self._format_documents_for_prompt(documents),
-                    num_frameworks=1,
-                    num_documents=len(documents),
-                    dimension_list=",".join(all_dimensions),
-                    dimension_scores=",".join("{{" + dim + "_score}}" for dim in all_dimensions),
-                    artifact_id="{artifact_id}",  # Will be replaced by document hash in response
-                    dimension_name="{dimension_name}",
-                    quote_number="{quote_number}",
-                    quote_text="{quote_text}",
-                    context_type="{context_type}"
-                )
-                
-                self.audit.log_agent_event(self.agent_name, "framework_version_detected", {
-                    "version": framework_version,
-                    "output_format": "CSV",
-                    "separation_of_concerns": False
-                })
+                # Legacy v5.0 frameworks not supported
+                raise EnhancedAnalysisAgentError("Legacy v5.0 frameworks not supported - use v6.0+ frameworks with JSON output")
             
             # Log LLM interaction start
             self.audit.log_agent_event(self.agent_name, "llm_call_start", {
@@ -453,19 +425,13 @@ class EnhancedAnalysisAgent:
                 "response_preview": result_content[:100] + "..." if len(result_content) > 100 else result_content
             })
             if is_json_framework:
-                # v6.0: Extract JSON data and convert to CSV format for downstream compatibility
+                # v6.0: Process JSON response data
                 new_scores_hash, new_evidence_hash = self._process_json_response(
                     result_content, document_hashes[0], current_scores_hash, current_evidence_hash
                 )
             else:
-                # v5.0: Extract CSV data from the response
-                scores_csv, evidence_csv = self._extract_embedded_csv(result_content, document_hashes[0])
-                if not scores_csv or not evidence_csv:
-                    raise EnhancedAnalysisAgentError("LLM response missing required CSV sections")
-
-                # Append to artifacts in storage
-                new_scores_hash = self._append_to_csv_artifact(current_scores_hash, scores_csv, "scores.csv")
-                new_evidence_hash = self._append_to_csv_artifact(current_evidence_hash, evidence_csv, "evidence.csv")
+                # Legacy v5.0 frameworks not supported
+                raise EnhancedAnalysisAgentError("Legacy v5.0 frameworks not supported - use v6.0+ frameworks with JSON output")
 
             # Store raw LLM response - let synthesis agent handle any format (THIN principle)
             analysis_data = result_content
@@ -563,109 +529,13 @@ class EnhancedAnalysisAgent:
             
             raise EnhancedAnalysisAgentError(f"Enhanced analysis failed: {e}")
 
-    def _append_to_csv_artifact(self, current_hash: Optional[str], new_csv_data: str, artifact_name: str) -> Optional[str]:
-        """Reads, appends, and writes a CSV artifact in storage."""
-        if not new_csv_data:
-            return current_hash
 
-        # Get header and data rows
-        lines = new_csv_data.strip().split('\n')
-        if len(lines) < 2:  # Need at least header and one data row
-            return current_hash
-            
-        header = lines[0]
-        data_rows = lines[1:]
 
-        if current_hash:
-            try:
-                # Read existing content
-                existing_content = self.storage.get_artifact(current_hash)
-                existing_lines = existing_content.decode('utf-8').strip().split('\n')
-                
-                # Only append data rows (skip header)
-                combined_lines = [existing_lines[0]] + existing_lines[1:] + data_rows
-                
-            except (FileNotFoundError, pd.errors.EmptyDataError):
-                combined_lines = [header] + data_rows
-        else:
-            combined_lines = [header] + data_rows
-            
-        # Write back to storage as a new artifact
-        updated_csv_content = '\n'.join(combined_lines).encode('utf-8')
-        
-        # Include comprehensive provenance metadata (Issue #208 fix)
-        metadata = {
-            "artifact_type": f"intermediate_{artifact_name}",
-            "framework_hash": self.analysis_provenance["framework_hash"],
-            "corpus_hash": self.analysis_provenance["corpus_hash"], 
-            "analysis_model": self.analysis_provenance["analysis_model"],
-            "analysis_timestamp": self.analysis_provenance["analysis_timestamp"],
-            "agent_name": self.analysis_provenance["agent_name"],
-            "original_filename": f"{artifact_name}"
-        }
-        
-        new_hash = self.storage.put_artifact(updated_csv_content, metadata)
-        
-        return new_hash
 
-    def _extract_and_persist_csvs(self, analysis_response: str, artifact_id: str):
-        """Extracts embedded CSVs and appends them to files in the run directory."""
-        scores_csv, evidence_csv = self._extract_embedded_csv(analysis_response, artifact_id)
-        
-        scores_path = Path(".") / "scores.csv" # This line was not in the new_code, but should be changed for consistency
-        evidence_path = Path(".") / "evidence.csv" # This line was not in the new_code, but should be changed for consistency
 
-        self._append_to_csv(scores_path, scores_csv)
-        self._append_to_csv(evidence_path, evidence_csv)
 
-    def _extract_embedded_csv(self, analysis_response: str, artifact_id: str) -> tuple[str, str]:
-        """Extracts pre-formatted CSV segments from an LLM response."""
-        
-        # Find the last occurrence of each delimiter
-        scores_start = analysis_response.rfind("<<<DISCERNUS_SCORES_CSV_v1>>>")
-        scores_end = analysis_response.rfind("<<<END_DISCERNUS_SCORES_CSV_v1>>>")
-        evidence_start = analysis_response.rfind("<<<DISCERNUS_EVIDENCE_CSV_v1>>>")
-        evidence_end = analysis_response.rfind("<<<END_DISCERNUS_EVIDENCE_CSV_v1>>>")
-        
-        # Extract CSV sections if found
-        scores_csv = ""
-        evidence_csv = ""
-        
-        if scores_start >= 0 and scores_end > scores_start:
-            scores_csv = analysis_response[scores_start + len("<<<DISCERNUS_SCORES_CSV_v1>>>"):scores_end].strip()
-            
-        if evidence_start >= 0 and evidence_end > evidence_start:
-            evidence_csv = analysis_response[evidence_start + len("<<<DISCERNUS_EVIDENCE_CSV_v1>>>"):evidence_end].strip()
-        
-        print(f"DEBUG: Extracted scores_csv:\n{scores_csv}")
-        print(f"DEBUG: Extracted evidence_csv:\n{evidence_csv}")
 
-        # Replace placeholder with actual artifact ID
-        scores_csv = scores_csv.replace("{artifact_id}", artifact_id)
-        evidence_csv = evidence_csv.replace("{artifact_id}", artifact_id)
-        
-        return scores_csv, evidence_csv
 
-    def _append_to_csv(self, file_path: Path, csv_data: str):
-        """Appends a CSV string to a file, handling headers correctly."""
-        if not csv_data:
-            return
-        
-        # Get header and data rows
-        lines = csv_data.strip().split('\n')
-        if len(lines) < 2:  # Need at least header and one data row
-            return
-            
-        header = lines[0]
-        data_rows = lines[1:]
-        
-        # If file doesn't exist, write with header. Otherwise, append without.
-        if not file_path.exists():
-            with open(file_path, 'w') as f:
-                f.write('\n'.join([header] + data_rows) + '\n')
-        else:
-            with open(file_path, 'a') as f:
-                f.write('\n'.join(data_rows) + '\n')
 
     def _format_documents_for_prompt(self, documents: List[Dict]) -> str:
         """Format documents for LLM prompt with enhanced metadata."""
