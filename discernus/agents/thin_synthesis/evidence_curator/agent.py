@@ -291,20 +291,100 @@ Return only valid JSON.
 """
     
     def _parse_llm_curation_response(self, response_content: str, evidence_df: pd.DataFrame) -> Dict[str, List[CuratedEvidence]]:
-        """THIN approach: Pass raw LLM response through without parsing."""
+        """THIN approach: Parse and use LLM's intelligent evidence curation response."""
         try:
-            # THIN approach: Don't parse JSON, just return a simple structure
-            # Let the LLM handle the intelligence, we just pass through the response
+            import json
+            import re
             
-            # Create a minimal curated evidence structure
-            curated_evidence = {
-                "statistical_findings": []
-            }
+            # Extract JSON from LLM response (handle markdown code blocks)
+            json_match = re.search(r'```json\s*(\{.*?\})\s*```', response_content, re.DOTALL)
+            if not json_match:
+                # Try without markdown formatting
+                json_match = re.search(r'(\{.*\})', response_content, re.DOTALL)
             
-            # Add some basic evidence from the DataFrame to avoid empty results
+            if not json_match:
+                self.logger.warning("No JSON found in LLM response, falling back to top evidence")
+                return self._fallback_evidence_selection(evidence_df)
+            
+            # Parse the LLM's intelligent curation
+            try:
+                llm_curation = json.loads(json_match.group(1))
+                self.logger.info(f"LLM returned evidence categories: {list(llm_curation.keys())}")
+            except json.JSONDecodeError as e:
+                self.logger.warning(f"JSON parsing failed: {e}, falling back to top evidence")
+                return self._fallback_evidence_selection(evidence_df)
+            
+            # Convert LLM's categorized evidence to our format
+            curated_evidence = {}
+            total_evidence_count = 0
+            
+            # Process each category of findings the LLM provided
+            for category, evidence_list in llm_curation.items():
+                if isinstance(evidence_list, list) and len(evidence_list) > 0:
+                    curated_evidence[category] = []
+                    
+                    for evidence_item in evidence_list:
+                        if isinstance(evidence_item, dict):
+                            # Find matching evidence in DataFrame by text matching
+                            evidence_text = evidence_item.get('evidence_text', '')
+                            matching_row = None
+                            
+                            # Try to find exact match first
+                            for _, row in evidence_df.iterrows():
+                                if evidence_text in row['evidence_text'] or row['evidence_text'] in evidence_text:
+                                    matching_row = row
+                                    break
+                            
+                            if matching_row is not None:
+                                # Create properly formatted evidence with footnotes
+                                footnote_number = self._assign_footnote_number(
+                                    evidence_text,
+                                    evidence_item.get('artifact_id', matching_row['artifact_id']),
+                                    evidence_item.get('dimension', matching_row['dimension'])
+                                )
+                                evidence_hash = self._create_evidence_hash(
+                                    evidence_text,
+                                    evidence_item.get('artifact_id', matching_row['artifact_id']),
+                                    evidence_item.get('dimension', matching_row['dimension'])
+                                )
+                                
+                                curated_evidence[category].append(CuratedEvidence(
+                                    artifact_id=evidence_item.get('artifact_id', matching_row['artifact_id']),
+                                    dimension=evidence_item.get('dimension', matching_row['dimension']),
+                                    evidence_text=evidence_text,
+                                    context=evidence_item.get('context', matching_row['context']),
+                                    confidence=float(evidence_item.get('confidence', matching_row['confidence'])),
+                                    reasoning=evidence_item.get('reasoning', 'LLM selected as relevant'),
+                                    relevance_score=float(evidence_item.get('relevance_score', 0.8)),
+                                    statistical_connection=evidence_item.get('statistical_connection', 'LLM selected'),
+                                    footnote_number=footnote_number,
+                                    evidence_hash=evidence_hash
+                                ))
+                                total_evidence_count += 1
+                            else:
+                                self.logger.warning(f"Could not find matching evidence for: {evidence_text[:50]}...")
+            
+            # If LLM didn't provide any usable evidence, fall back to top selections
+            if total_evidence_count == 0:
+                self.logger.warning("LLM provided no usable evidence, falling back to top selections")
+                return self._fallback_evidence_selection(evidence_df)
+            
+            self.logger.info(f"Successfully parsed {total_evidence_count} pieces of LLM-curated evidence across {len(curated_evidence)} categories")
+            return curated_evidence
+            
+        except Exception as e:
+            self.logger.error(f"Evidence curation parsing failed: {str(e)}")
+            self.logger.warning("Falling back to algorithmic evidence selection")
+            return self._fallback_evidence_selection(evidence_df)
+    
+    def _fallback_evidence_selection(self, evidence_df: pd.DataFrame) -> Dict[str, List[CuratedEvidence]]:
+        """Fallback method when LLM curation fails - select top evidence by confidence."""
+        try:
+            curated_evidence = {"statistical_findings": []}
+            
             if len(evidence_df) > 0:
-                # Take the first few high-confidence pieces of evidence
-                top_evidence = evidence_df.nlargest(3, 'confidence')
+                # Take the top evidence pieces by confidence
+                top_evidence = evidence_df.nlargest(min(6, len(evidence_df)), 'confidence')
                 
                 for _, row in top_evidence.iterrows():
                     artifact_id = row['artifact_id']
@@ -323,15 +403,16 @@ Return only valid JSON.
                         confidence=row['confidence'],
                         reasoning=row['reasoning'],
                         relevance_score=0.8,
-                        statistical_connection="Selected as high-confidence evidence",
+                        statistical_connection="Selected by confidence score (fallback)",
                         footnote_number=footnote_number,
                         evidence_hash=evidence_hash
                     ))
             
+            self.logger.info(f"Fallback selection: {len(curated_evidence['statistical_findings'])} pieces of evidence selected by confidence")
             return curated_evidence
             
         except Exception as e:
-            self.logger.error(f"THIN curation response handling failed: {str(e)}")
+            self.logger.error(f"Fallback evidence selection failed: {str(e)}")
             return {}
     
     def _load_evidence_data(self, evidence_data: bytes) -> Optional[pd.DataFrame]:
