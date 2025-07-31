@@ -148,24 +148,20 @@ class EvidenceCurator:
                     footnote_registry={}
                 )
             
-            # Filter evidence by confidence threshold (temporarily lowered for testing)
-            high_confidence_evidence = evidence_df[
-                evidence_df['confidence'] >= 0.5  # Lowered from request.min_confidence_threshold
-            ].copy()
-            
-            if len(high_confidence_evidence) == 0:
+            # THIN approach: Let LLM handle all filtering and selection logic
+            # Remove hardcoded confidence thresholds - let LLM decide what's relevant
+            if len(evidence_df) == 0:
                 return EvidenceCurationResponse(
                     curated_evidence={},
-                    curation_summary={"warning": "No evidence meets confidence threshold"},
+                    curation_summary={"warning": "No evidence data available"},
                     success=True,
                     footnote_registry={}
                 )
             
-            # THIN approach: Let LLM handle evidence curation based on available data
-            # Pass all statistical results and evidence to LLM for intelligent curation
+            # Use LLM for intelligent evidence curation (THIN approach)
             curated_evidence = self._curate_evidence_with_llm(
-                request.statistical_results,
-                high_confidence_evidence,
+                request.statistical_results, 
+                evidence_df, 
                 request
             )
             
@@ -173,7 +169,7 @@ class EvidenceCurator:
             curation_summary = self._generate_curation_summary(
                 curated_evidence, 
                 len(evidence_df), 
-                len(high_confidence_evidence)
+                len(evidence_df)  # All evidence considered, no hardcoded filtering
             )
             
             return EvidenceCurationResponse(
@@ -233,7 +229,7 @@ class EvidenceCurator:
             # Let LLM handle any data structure without JSON serialization
             
             stats_str = str(statistical_results)
-            evidence_str = str(evidence_df.to_dict('records')[:10])
+            evidence_str = str(evidence_df.to_dict('records'))  # Show ALL evidence to LLM
             
             # Build prompt with YAML template
             prompt = prompt_template.format(
@@ -247,7 +243,7 @@ class EvidenceCurator:
             response_content, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                max_tokens=4000
+                max_tokens=8000  # Allow comprehensive evidence curation
             )
             
             if not response_content or not metadata.get('success'):

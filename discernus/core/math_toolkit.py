@@ -480,68 +480,107 @@ def _interpret_eta_squared(eta_squared: float) -> str:
 
 def calculate_derived_metrics(dataframe: pd.DataFrame, metric_formulas: Dict[str, str], input_columns: List[str]) -> Dict[str, Any]:
     """
-    Calculate custom derived metrics using mathematical formulas.
+    Calculate derived metrics from raw data using provided formulas.
     
     Args:
-        dataframe: Input DataFrame
-        metric_formulas: Dictionary mapping metric names to mathematical formulas
-        input_columns: List of required input columns for validation
+        dataframe: Input DataFrame with raw data
+        metric_formulas: Dictionary mapping metric names to calculation formulas
+        input_columns: List of input column names used in formulas
         
     Returns:
-        Dictionary containing calculated derived metrics
+        Dictionary containing calculated metrics and metadata
     """
     try:
-        results = {}
-        
-        # Validate that all required columns exist
+        # Framework-agnostic validation: check for required columns
         missing_columns = [col for col in input_columns if col not in dataframe.columns]
         if missing_columns:
-            raise MathToolkitError(f"Missing required columns: {missing_columns}. Available columns: {list(dataframe.columns)}")
+            return {
+                "type": "derived_metrics_calculation",
+                "success": False,
+                "error": f"Missing required columns: {missing_columns}",
+                "available_columns": list(dataframe.columns),
+                "calculated_metrics": {},
+                "formulas_used": list(metric_formulas.keys())
+            }
         
-        # Calculate each derived metric
-        for metric_name, formula in metric_formulas.items():
+        # Create a comprehensive mathematical evaluation context
+        # Default to array-aware numpy operations for data column compatibility
+        import math
+        safe_dict = {
+            # Array-aware mathematical functions (numpy defaults for data compatibility)
+            'min': np.minimum, 'max': np.maximum, 'abs': np.abs, 
+            'sum': np.sum, 'round': np.round,
+            
+            # Python built-ins for scalar operations
+            'len': len, 'pow': pow, 'divmod': divmod, 'float': float, 'int': int, 'bool': bool,
+            
+            # Math module functions (scalar operations)
+            'math': math, 'sqrt': math.sqrt, 'log': math.log, 'log10': math.log10,
+            'exp': math.exp, 'sin': math.sin, 'cos': math.cos, 'tan': math.tan,
+            'asin': math.asin, 'acos': math.acos, 'atan': math.atan, 'atan2': math.atan2,
+            'ceil': math.ceil, 'floor': math.floor, 'pi': math.pi, 'e': math.e,
+            
+            # NumPy for comprehensive array operations
+            'np': np, 'numpy': np,
+            
+            # Explicit array operations
+            'minimum': np.minimum, 'maximum': np.maximum,
+            
+            # Statistical functions
+            'mean': np.mean, 'median': np.median, 'std': np.std, 'var': np.var,
+            
+            # Data columns will be added below
+        }
+        for col in input_columns:
+            if col in dataframe.columns:
+                safe_dict[col] = dataframe[col].values
+        
+        calculated_metrics = {}
+        successful_calculations = []
+        failed_calculations = []
+        
+        # Calculate each metric (with dependency resolution)
+        # Sort formulas to handle dependencies - simpler metrics first
+        sorted_formulas = sorted(metric_formulas.items(), key=lambda x: len(x[1]))
+        
+        for metric_name, formula in sorted_formulas:
             try:
-                # Create a safe evaluation environment with all available columns
-                safe_dict = {}
-                for col in dataframe.columns:
-                    safe_dict[col] = dataframe[col].values
-                
-                # Add previously calculated results to the evaluation context
-                for key, value in results.items():
-                    if isinstance(value, list):
-                        safe_dict[key] = np.array(value)
-                    else:
-                        safe_dict[key] = value
-                
-                # Add numpy functions for mathematical operations
-                import numpy as np
-                safe_dict.update({
-                    'min': np.minimum,
-                    'max': np.maximum,
-                    'abs': np.abs,
-                    'sum': np.sum,
-                    'mean': np.mean,
-                    'std': np.std
-                })
-                
                 # Evaluate the formula safely
                 result = eval(formula, {"__builtins__": {}}, safe_dict)
                 
-                # Store the result
+                # Handle different result types
                 if isinstance(result, np.ndarray):
-                    results[metric_name] = result.tolist()
+                    calculated_metrics[metric_name] = result.tolist()
+                    # Add numpy array to safe_dict for subsequent calculations
+                    safe_dict[metric_name] = result
                 else:
-                    results[metric_name] = result
-                    
+                    calculated_metrics[metric_name] = result
+                    # Add scalar/list to safe_dict for subsequent calculations
+                    safe_dict[metric_name] = result
+                
+                successful_calculations.append(metric_name)
+                
+                logger.info(f"Successfully calculated metric '{metric_name}' with formula: {formula}")
+                
             except Exception as e:
-                error_msg = f"Failed to calculate {metric_name}: {str(e)}"
-                results[metric_name] = {"error": error_msg}
-                logger.error(error_msg)
+                failed_calculations.append({
+                    "metric": metric_name,
+                    "formula": formula,
+                    "error": str(e)
+                })
+                logger.error(f"Failed to calculate metric '{metric_name}': {str(e)}")
+                # Continue with other calculations even if one fails
         
         return {
-            "type": "derived_metrics",
-            "metrics": results,
-            "formulas_used": metric_formulas
+            "type": "derived_metrics_calculation",
+            "success": len(successful_calculations) > 0,
+            "calculated_metrics": calculated_metrics,
+            "successful_calculations": successful_calculations,
+            "failed_calculations": failed_calculations,
+            "formulas_used": list(metric_formulas.keys()),
+            "input_columns": input_columns,
+            "total_metrics": len(metric_formulas),
+            "success_rate": len(successful_calculations) / len(metric_formulas) if metric_formulas else 0
         }
         
     except Exception as e:
@@ -652,7 +691,11 @@ def generate_correlation_matrix(dataframe: pd.DataFrame, dimensions: List[str], 
 
 def validate_calculated_metrics(dataframe: pd.DataFrame, validation_rules: List[Any], quality_thresholds: Dict[str, float]) -> Dict[str, Any]:
     """
-    Validate the quality and reliability of calculated metrics.
+    THIN framework-agnostic metric validation.
+    
+    Performs generic validation operations on any requested metrics without 
+    hardcoded intelligence about what rules are "valid". LLMs provide the 
+    intelligence about what to validate, software provides the coordination.
     
     Args:
         dataframe: Input DataFrame
@@ -670,34 +713,74 @@ def validate_calculated_metrics(dataframe: pd.DataFrame, validation_rules: List[
             if isinstance(rule, str):
                 rule_name = rule
                 rule_config = {}
+                metric_name = rule_name
             elif isinstance(rule, dict):
                 rule_name = rule.get("metric", "unknown_rule")
                 rule_config = rule
+                metric_name = rule_name
             else:
                 rule_name = str(rule)
                 rule_config = {}
+                metric_name = rule_name
             
-            if rule_name == "missing_data_check" or rule_name == "missing_data":
-                missing_counts = dataframe.isnull().sum()
-                validation_results[rule_name] = {
-                    "missing_data_by_column": missing_counts.to_dict(),
-                    "total_missing": missing_counts.sum()
-                }
-            elif rule_name == "range_check" or rule_name == "range_validation":
-                numeric_columns = dataframe.select_dtypes(include=[np.number]).columns
-                ranges = {}
-                for col in numeric_columns:
-                    ranges[col] = {
-                        "min": float(dataframe[col].min()),
-                        "max": float(dataframe[col].max()),
-                        "mean": float(dataframe[col].mean())
+            # Framework-agnostic validation: check if the metric exists and is valid
+            if metric_name in dataframe.columns:
+                series = dataframe[metric_name].dropna()
+                
+                if len(series) == 0:
+                    validation_results[rule_name] = {
+                        "status": "failed",
+                        "issue": "no_valid_data",
+                        "message": f"No valid data found for metric '{metric_name}'"
                     }
-                validation_results[rule_name] = ranges
-            elif rule_name == "consistency_check" or rule_name == "consistency":
-                # Check for logical consistency in related columns
-                validation_results[rule_name] = {"status": "passed", "notes": "Basic consistency check completed"}
+                else:
+                    # Generic validation checks that work for any metric
+                    validation_results[rule_name] = {
+                        "status": "passed",
+                        "metric": metric_name,
+                        "data_points": len(series),
+                        "missing_values": len(dataframe[metric_name]) - len(series),
+                        "has_nan": dataframe[metric_name].isna().any(),
+                        "has_inf": np.isinf(dataframe[metric_name]).any() if dataframe[metric_name].dtype in ['float64', 'float32'] else False,
+                        "min_value": float(series.min()) if len(series) > 0 else None,
+                        "max_value": float(series.max()) if len(series) > 0 else None,
+                        "mean_value": float(series.mean()) if len(series) > 0 else None
+                    }
             else:
-                validation_results[rule_name] = {"error": f"Unknown validation rule: {rule_name}"}
+                # Handle predefined validation types for backward compatibility
+                if rule_name == "missing_data_check" or rule_name == "missing_data":
+                    missing_counts = dataframe.isnull().sum()
+                    validation_results[rule_name] = {
+                        "status": "completed",
+                        "missing_data_by_column": missing_counts.to_dict(),
+                        "total_missing": int(missing_counts.sum())
+                    }
+                elif rule_name == "range_check" or rule_name == "range_validation":
+                    numeric_columns = dataframe.select_dtypes(include=[np.number]).columns
+                    ranges = {}
+                    for col in numeric_columns:
+                        ranges[col] = {
+                            "min": float(dataframe[col].min()),
+                            "max": float(dataframe[col].max()),
+                            "mean": float(dataframe[col].mean())
+                        }
+                    validation_results[rule_name] = {
+                        "status": "completed",
+                        "ranges": ranges
+                    }
+                elif rule_name == "consistency_check" or rule_name == "consistency":
+                    validation_results[rule_name] = {
+                        "status": "completed", 
+                        "notes": "Basic consistency check completed"
+                    }
+                else:
+                    # THIN approach: Don't reject unknown rules, provide generic validation
+                    validation_results[rule_name] = {
+                        "status": "not_found",
+                        "message": f"Metric '{rule_name}' not found in dataframe",
+                        "available_columns": list(dataframe.columns),
+                        "note": "This is a framework-agnostic validation - LLMs determine validation logic"
+                    }
         
         return {
             "type": "metric_validation",
@@ -817,8 +900,8 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
                 results["results"][task_name] = task_result
                 
                 # If this was a derived metrics calculation, add the results to the DataFrame
-                if tool_name == "calculate_derived_metrics" and task_result.get("type") == "derived_metrics":
-                    calculated_metrics = task_result.get("metrics", {})
+                if tool_name == "calculate_derived_metrics" and task_result.get("type") == "derived_metrics_calculation":
+                    calculated_metrics = task_result.get("calculated_metrics", {})
                     for metric_name, metric_values in calculated_metrics.items():
                         if isinstance(metric_values, list) and len(metric_values) == len(working_df):
                             working_df[metric_name] = metric_values
@@ -836,7 +919,7 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
         raise MathToolkitError(f"Analysis plan execution failed: {str(e)}")
 
 
-def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan: Dict[str, Any]) -> Dict[str, Any]:
+def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan: Dict[str, Any], corpus_manifest: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """
     THIN version: Execute analysis plan with raw JSON data instead of pre-parsed DataFrame.
     
@@ -867,7 +950,7 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan: Dict[str, 
         analysis_result = json.loads(json_str)
         
         # Convert to DataFrame using THIN helper (temporary for compatibility)
-        scores_df = _json_scores_to_dataframe_thin(analysis_result)
+        scores_df = _json_scores_to_dataframe_thin(analysis_result, corpus_manifest)
         
         logger.info(f"THIN MathToolkit: Parsed raw LLM response to DataFrame {scores_df.shape}")
         
@@ -879,7 +962,7 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan: Dict[str, 
         raise MathToolkitError(f"THIN analysis plan execution failed: {str(e)}")
 
 
-def _json_scores_to_dataframe_thin(analysis_result: dict) -> pd.DataFrame:
+def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optional[Dict[str, Any]] = None) -> pd.DataFrame:
     """
     THIN helper: Convert JSON analysis to DataFrame (minimal parsing for MathToolkit compatibility).
     
@@ -895,10 +978,22 @@ def _json_scores_to_dataframe_thin(analysis_result: dict) -> pd.DataFrame:
         rows = []
         for doc_analysis in document_analyses:
             document_id = doc_analysis.get('document_id', '{artifact_id}')
+            document_name = doc_analysis.get('document_name', 'unknown')
             dimensional_scores = doc_analysis.get('dimensional_scores', {})
             
             # Create row with document identifier
             row_data = {'aid': document_id}
+            
+            # Add corpus metadata if available (THIN approach: framework-agnostic)
+            if corpus_manifest and 'file_manifest' in corpus_manifest:
+                # Find metadata for this document by matching filename
+                for file_info in corpus_manifest['file_manifest']:
+                    if file_info.get('name') == document_name:
+                        # Add all metadata fields generically
+                        for key, value in file_info.items():
+                            if key != 'name':  # Skip filename since we have document_name
+                                row_data[key] = value
+                        break
             
             # Extract dimensional scores generically (framework-agnostic)
             for dim_name, dim_data in dimensional_scores.items():
