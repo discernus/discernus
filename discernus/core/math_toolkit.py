@@ -1027,17 +1027,20 @@ def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optio
             # Extract dimensional scores generically (framework-agnostic)
             for dim_name, dim_data in dimensional_scores.items():
                 if isinstance(dim_data, dict):
+                    # Normalize dimension name to lowercase for consistency
+                    normalized_dim_name = dim_name.lower()
+                    
                     # Standard v6.0 fields with compatibility mapping
                     raw_score = dim_data.get('raw_score', 0.0)
-                    row_data[f"{dim_name}_score"] = raw_score
-                    row_data[f"{dim_name}_raw_score"] = raw_score  # Compatibility alias
-                    row_data[f"{dim_name}_salience"] = dim_data.get('salience', 0.0)
-                    row_data[f"{dim_name}_confidence"] = dim_data.get('confidence', 0.0)
+                    row_data[f"{normalized_dim_name}_score"] = raw_score
+                    row_data[f"{normalized_dim_name}_raw_score"] = raw_score  # Compatibility alias
+                    row_data[f"{normalized_dim_name}_salience"] = dim_data.get('salience', 0.0)
+                    row_data[f"{normalized_dim_name}_confidence"] = dim_data.get('confidence', 0.0)
                     
                     # Handle additional fields generically
                     for field_name, field_value in dim_data.items():
                         if field_name not in ['raw_score', 'salience', 'confidence']:
-                            column_name = f"{dim_name}_{field_name}"
+                            column_name = f"{normalized_dim_name}_{field_name}"
                             row_data[column_name] = field_value
             
             # No framework-specific column mapping - let LLM AnalysisPlanner handle column discovery
