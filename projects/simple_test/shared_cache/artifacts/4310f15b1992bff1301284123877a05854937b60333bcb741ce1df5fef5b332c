@@ -1,9 +1,0 @@
-aid,dimension,quote,confidence
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,problem_definition,"Our identity is not optional; it's imposed. We are who we are *because* they made us so. Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath.",0.95
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,problem_definition,"There is no neutral ground‚there are only oppressors and the oppressed. If you're not with us, you're against us. Solidarity demands unity, not nuance.",0.90
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,causal_attribution,"Every policy, every tradition, every institution in this country was built to keep *them* on top and *us* beneath.",0.95
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,causal_attribution,"If data doesn't reflect our reality, the data is flawed‚or worse, part of the system.",0.85
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,moral_evaluation,"Our anger is holy. And justice means nothing unless *our* people rise and theirs fall.",0.95
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,moral_evaluation,"The truth is whatever serves liberation. Facts can be debated, but our lived experience is not up for discussion.",0.90
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,treatment_recommendation,"A better world *isn't* possible unless we start over. **Burn it down.** Only by erasing the old structures entirely‚root and branch‚can something pure be born.",0.95
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,treatment_recommendation,"**Act now or be erased.**",0.90

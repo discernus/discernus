@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_fee3bec93a8d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "character_ideology_evolution_hypothesis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_1_factorial\",\n    \"framework_version\": \"v6.1-factorial\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted according to the v6.1-factorial framework. Focus on identifying raw dimensional scores, salience, confidence, and supporting evidence without performing any calculations or deriving metrics.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"alexandria_ocasio_cortez_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"truth\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.75\n        },\n        \"justice\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.8\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.65\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.75,\n          \"confidence\": 0.7\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.5\n        },\n        \"resentment\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.6\n        },\n        \"fear\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.3,\n          \"confidence\": 0.4\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.3,\n          \"confidence\": 0.4\n        },\n        \"era_classification\": {\n          \"classification\": \"Populist Era\",\n          \"confidence\": 0.8\n        },\n        \"ideology_classification\": {\n          \"classification\": \"Progressive\",\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"And our political system is ill-prepared for this abuse of power. In fact, much of our political system enables it, starting with the role of money in politics.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"So to all of those who came here today, unsure of whether this is where you belong, I want to tell you that you do. You do. Honestly, no matter who you voted for in the past. No matter if you know all the right words to say, no matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"They thraw out every label and judgment and culture debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endles greEd is costing the lives of everyone else.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"It's about class solidarity.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"era_classification\",\n          \"quote_text\": \"And let's talk about Medicaid and Medicare for a second because your representative, Dave Evans, you know that guy that hasn't been showing up for the last couple months? Maybe he hasn't been showing up because he voted to cut Medicaid.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"quote\"\n        },\n        {\n          \"dimension\": \"ideology_classification\",\n          \"quote_text\": \"This isn't just about Republicans. We need a Democratic Party that fights harder for us too.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-30T23:46:03.299875+00:00",
+    "end_time": "2025-07-30T23:46:08.080886+00:00",
+    "duration_seconds": 4.781011,
+    "llm_interaction_hash": "7df44d54bbd815a7"
+  },
+  "input_artifacts": {
+    "framework_hash": "5aa0187658fbf97013cd5e5279c57e50a67793bb509da06847979038c9961ac6",
+    "document_hashes": [
+      "1661752fdc6cf5affaa5456dc84e1a7530fa34f85086c7d82edf4f35ae6cd987"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250730T234603Z_7ceb399f"
+  }
+}

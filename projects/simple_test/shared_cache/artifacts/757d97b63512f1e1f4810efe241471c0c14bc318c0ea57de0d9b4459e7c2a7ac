@@ -1,7 +1,0 @@
-aid,dimension,quote_id,quote_text,confidence_score,context_type
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Dignity,q1,Our identity is not optional; it's imposed.,0.80,Group Identity Assertion
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Dignity,q2,For centuries, we've been silenced, stolen from, enslaved, incarcerated, excluded, and ignored.,0.85,Historical Grievance (implies denial of dignity)
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Dignity,q3,Until our pain is fully acknowledged and compensated...,0.75,Demand for Justice/Recognition
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribalism,q4,There is no neutral ground—there are only oppressors and the oppressed. If you're not with us, you're against us.,0.95,In-group/Out-group Division
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribalism,q5,We want a new world run by *us*, for *us*, where those who harmed us have no voice, no power, and no place.,0.98,Group Supremacy/Exclusion
-e1760be72296a9453c802595519953de776fb48becbfabef66f64317ce1dc799,Tribalism,q6,This is a war for survival, and if we hesitate, we lose everything.,0.90,Existential Threat framing for group survival
