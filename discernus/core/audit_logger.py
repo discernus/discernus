@@ -46,6 +46,7 @@ class AuditLogger:
         self.llm_log = self.logs_dir / "llm_interactions.jsonl"
         self.artifact_log = self.logs_dir / "artifacts.jsonl"
         self.system_log = self.logs_dir / "system.jsonl"
+        self.cost_log = self.logs_dir / "costs.jsonl"
         
         # Initialize session metadata
         self.session_id = self._generate_session_id()
@@ -288,8 +289,173 @@ class AuditLogger:
                 "agents": str(self.agent_log.relative_to(self.run_folder)),
                 "llm_interactions": str(self.llm_log.relative_to(self.run_folder)),
                 "artifacts": str(self.artifact_log.relative_to(self.run_folder)),
-                "system": str(self.system_log.relative_to(self.run_folder))
+                "system": str(self.system_log.relative_to(self.run_folder)),
+                "costs": str(self.cost_log.relative_to(self.run_folder))
             }
+        }
+    
+    def log_cost(self, 
+                 operation: str,
+                 model: str,
+                 tokens_used: int,
+                 cost_usd: float,
+                 agent_name: str,
+                 interaction_hash: Optional[str] = None,
+                 metadata: Optional[Dict[str, Any]] = None) -> None:
+        """
+        Log cost information for LLM operations.
+        
+        Args:
+            operation: Type of operation (analysis, synthesis, validation, etc.)
+            model: LLM model used
+            tokens_used: Total tokens consumed
+            cost_usd: Cost in USD
+            agent_name: Agent that incurred the cost
+            interaction_hash: Reference to LLM interaction
+            metadata: Additional cost-related metadata
+        """
+        entry = {
+            "log_type": "cost_tracking",
+            "timestamp": self._get_timestamp(),
+            "operation": operation,
+            "agent_name": agent_name,
+            "model": model,
+            "tokens_used": tokens_used,
+            "cost_usd": round(cost_usd, 6),  # 6 decimal places for precision
+            "interaction_hash": interaction_hash,
+            "metadata": metadata or {}
+        }
+        self._append_to_log(self.cost_log, entry)
+    
+    def get_session_costs(self) -> Dict[str, Any]:
+        """
+        Calculate total costs for the current session by reading cost log.
+        
+        Returns:
+            Dictionary with cost breakdown and totals
+        """
+        if not self.cost_log.exists():
+            return {
+                "total_cost_usd": 0.0,
+                "total_tokens": 0,
+                "operations": {},
+                "models": {},
+                "agents": {}
+            }
+        
+        total_cost = 0.0
+        total_tokens = 0
+        operations = {}
+        models = {}
+        agents = {}
+        
+        try:
+            with open(self.cost_log, 'r') as f:
+                for line in f:
+                    if line.strip():
+                        entry = json.loads(line)
+                        
+                        cost = entry.get("cost_usd", 0.0)
+                        tokens = entry.get("tokens_used", 0)
+                        operation = entry.get("operation", "unknown")
+                        model = entry.get("model", "unknown")
+                        agent = entry.get("agent_name", "unknown")
+                        
+                        # Aggregate totals
+                        total_cost += cost
+                        total_tokens += tokens
+                        
+                        # Aggregate by operation
+                        if operation not in operations:
+                            operations[operation] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                        operations[operation]["cost_usd"] += cost
+                        operations[operation]["tokens"] += tokens
+                        operations[operation]["calls"] += 1
+                        
+                        # Aggregate by model
+                        if model not in models:
+                            models[model] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                        models[model]["cost_usd"] += cost
+                        models[model]["tokens"] += tokens
+                        models[model]["calls"] += 1
+                        
+                        # Aggregate by agent
+                        if agent not in agents:
+                            agents[agent] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                        agents[agent]["cost_usd"] += cost
+                        agents[agent]["tokens"] += tokens
+                        agents[agent]["calls"] += 1
+                        
+        except Exception as e:
+            print(f"Warning: Error reading cost log: {e}")
+        
+        return {
+            "total_cost_usd": round(total_cost, 6),
+            "total_tokens": total_tokens,
+            "operations": operations,
+            "models": models,
+            "agents": agents
+        }
+    
+    def estimate_remaining_cost(self, 
+                               documents_analyzed: int, 
+                               total_documents: int,
+                               synthesis_pending: bool = True) -> Dict[str, Any]:
+        """
+        Estimate remaining costs based on current usage patterns.
+        
+        Args:
+            documents_analyzed: Number of documents already processed
+            total_documents: Total documents in experiment
+            synthesis_pending: Whether synthesis stage is still pending
+            
+        Returns:
+            Cost estimation breakdown
+        """
+        current_costs = self.get_session_costs()
+        
+        if documents_analyzed == 0:
+            return {
+                "estimated_remaining_usd": 0.0,
+                "estimated_total_usd": 0.0,
+                "confidence": "low",
+                "note": "No analysis completed yet - cannot estimate"
+            }
+        
+        # Calculate per-document analysis cost
+        analysis_operations = ["analysis", "document_processing", "framework_validation"]
+        analysis_cost = sum(
+            current_costs["operations"].get(op, {}).get("cost_usd", 0.0) 
+            for op in analysis_operations
+        )
+        
+        per_document_cost = analysis_cost / documents_analyzed if documents_analyzed > 0 else 0.0
+        remaining_documents = total_documents - documents_analyzed
+        estimated_analysis_remaining = per_document_cost * remaining_documents
+        
+        # Estimate synthesis cost (typically 10-20% of analysis cost)
+        synthesis_cost_estimate = 0.0
+        if synthesis_pending:
+            if "synthesis" in current_costs["operations"]:
+                # Use actual synthesis cost if we have it
+                synthesis_cost_estimate = current_costs["operations"]["synthesis"]["cost_usd"]
+            else:
+                # Estimate as 15% of total analysis cost
+                total_analysis_cost = analysis_cost + estimated_analysis_remaining
+                synthesis_cost_estimate = total_analysis_cost * 0.15
+        
+        total_estimated_remaining = estimated_analysis_remaining + synthesis_cost_estimate
+        total_estimated_experiment = current_costs["total_cost_usd"] + total_estimated_remaining
+        
+        return {
+            "estimated_remaining_usd": round(total_estimated_remaining, 4),
+            "estimated_total_usd": round(total_estimated_experiment, 4),
+            "breakdown": {
+                "remaining_analysis": round(estimated_analysis_remaining, 4),
+                "estimated_synthesis": round(synthesis_cost_estimate, 4)
+            },
+            "confidence": "high" if documents_analyzed >= 3 else "medium",
+            "per_document_cost": round(per_document_cost, 4)
         }
     
     def finalize_session(self) -> None:

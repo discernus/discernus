@@ -77,7 +77,7 @@ class ThinOrchestrator:
         
         print(f"🎯 THIN Orchestrator v2.0 initialized for: {self.security.experiment_name}")
     
-    def _check_framework_compatibility_with_llm(self, current_framework: str, cached_framework: str, cached_artifact_id: str) -> Dict[str, Any]:
+    def _check_framework_compatibility_with_llm(self, current_framework: str, cached_framework: str, cached_artifact_id: str, audit_logger: Optional[AuditLogger] = None) -> Dict[str, Any]:
         """
         THIN-compliant framework compatibility check using LLM intelligence.
         
@@ -125,6 +125,22 @@ Respond with only the JSON object."""
                 prompt=compatibility_prompt,
                 max_tokens=1000
             )
+            
+            # Log cost information if audit logger available
+            if audit_logger and metadata.get('success') and 'usage' in metadata:
+                usage = metadata['usage']
+                audit_logger.log_cost(
+                    operation="framework_validation",
+                    model="vertex_ai/gemini-2.5-flash",
+                    tokens_used=usage.get('total_tokens', 0),
+                    cost_usd=usage.get('response_cost_usd', 0.0),
+                    agent_name="ThinOrchestrator",
+                    metadata={
+                        "prompt_tokens": usage.get('prompt_tokens', 0),
+                        "completion_tokens": usage.get('completion_tokens', 0),
+                        "validation_type": "semantic_compatibility"
+                    }
+                )
             
             if not metadata.get('success'):
                 # Fallback to safe default if LLM call fails
@@ -369,6 +385,8 @@ Respond with only the JSON object."""
                 print("🔍 Analysis-only mode: Running analysis and saving artifacts for later synthesis...")
                 
                 # Execute analysis phase
+                print(f"📊 Analysis-only mode: Processing {len(corpus_documents)} documents...")
+                
                 analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
                 all_analysis_results, scores_hash, evidence_hash = self._execute_analysis_sequentially(
                     analysis_agent,
@@ -377,6 +395,13 @@ Respond with only the JSON object."""
                     experiment_config,
                     analysis_model
                 )
+                
+                # Display analysis-only cost
+                analysis_costs = audit.get_session_costs()
+                successful_count = len([res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')])
+                print(f"✅ Analysis complete: {successful_count}/{len(corpus_documents)} documents processed")
+                print(f"   💰 Total cost: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
+                print(f"   🔢 Total tokens: {analysis_costs.get('total_tokens', 0):,}")
                 
                 # Check if analysis succeeded
                 successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
@@ -415,12 +440,16 @@ Respond with only the JSON object."""
                 )
                 manifest.finalize_manifest()
                 
+                # Get cost information for analysis-only mode
+                session_costs = audit.get_session_costs()
+                
                 return {
                     "run_id": run_timestamp,
                     "status": "analysis_completed",
                     "scores_hash": scores_hash,
                     "evidence_hash": evidence_hash,
-                    "duration": self._calculate_duration(start_time, end_time)
+                    "duration": self._calculate_duration(start_time, end_time),
+                    "costs": session_costs
                 }
             
             # Handle resume from specific THIN synthesis stage
@@ -484,34 +513,63 @@ Respond with only the JSON object."""
                                 "reasoning": "Identical framework hash - perfect match"
                             }
                 
-                # If no exact match, check for backward compatibility artifacts
-                # TODO: Implement full LLM semantic compatibility once framework content is stored in metadata
+                # If no exact match, use LLM-based semantic compatibility checking
                 if not json_artifact_hash:
-                    print("🔍 No exact framework match found. Checking for backward compatible artifacts...")
+                    print("🔍 No exact framework match found. Using LLM semantic compatibility analysis...")
                     
-                    # For now, allow artifacts without framework_hash (backward compatibility)
-                    # This maintains existing behavior while adding LLM infrastructure for future enhancement
+                    # Try LLM semantic analysis for frameworks with stored content
                     for artifact_id, info in registry.items():
                         metadata = info.get("metadata", {})
                         artifact_type = metadata.get("artifact_type")
                         artifact_framework_hash = metadata.get("framework_hash")
+                        cached_framework_content = metadata.get("framework_content")
                         
-                        # Allow artifacts without framework hash (legacy compatibility)
-                        if artifact_type == "analysis_json_v6" and not artifact_framework_hash:
-                            timestamp = info["created_at"]
-                            if not latest_json_time or timestamp > latest_json_time:
-                                latest_json_time = timestamp
-                                json_artifact_hash = artifact_id
-                                compatibility_info = {
-                                    "method": "legacy_compatibility",
-                                    "compatibility": "ASSUMED_COMPATIBLE",
-                                    "confidence": 0.5,
-                                    "reasoning": "Legacy artifact without framework hash - assumed compatible for backward compatibility"
-                                }
-                                print(f"   📎 Found legacy artifact without framework hash: {artifact_id[:8]}...")
+                        # Use LLM analysis if we have framework content stored
+                        if (artifact_type == "analysis_json_v6" and 
+                            artifact_framework_hash and 
+                            cached_framework_content and 
+                            artifact_framework_hash != current_framework_hash):
+                            
+                            print(f"   🧠 Checking semantic compatibility with LLM for {artifact_id[:8]}...")
+                            
+                            compatibility_result = self._check_framework_compatibility_with_llm(
+                                current_framework_content, 
+                                cached_framework_content, 
+                                artifact_id, 
+                                audit_logger=audit
+                            )
+                            
+                            # Use compatible artifact if LLM determines compatibility
+                            if compatibility_result.get("compatibility") == "COMPATIBLE":
+                                timestamp = info["created_at"]
+                                if not latest_json_time or timestamp > latest_json_time:
+                                    latest_json_time = timestamp
+                                    json_artifact_hash = artifact_id
+                                    compatibility_info = compatibility_result
+                                    print(f"   ✅ LLM determined semantic compatibility: {artifact_id[:8]}...")
+                                    break
                     
-                    # Future enhancement: Full LLM semantic analysis
-                    # This infrastructure is now available for when we store framework content in metadata
+                    # Fallback to legacy compatibility for artifacts without framework content
+                    if not json_artifact_hash:
+                        print("   📎 No semantically compatible artifacts found. Checking legacy artifacts...")
+                        for artifact_id, info in registry.items():
+                            metadata = info.get("metadata", {})
+                            artifact_type = metadata.get("artifact_type")
+                            artifact_framework_hash = metadata.get("framework_hash")
+                            
+                            # Allow artifacts without framework hash (legacy compatibility)
+                            if artifact_type == "analysis_json_v6" and not artifact_framework_hash:
+                                timestamp = info["created_at"]
+                                if not latest_json_time or timestamp > latest_json_time:
+                                    latest_json_time = timestamp
+                                    json_artifact_hash = artifact_id
+                                    compatibility_info = {
+                                        "method": "legacy_compatibility",
+                                        "compatibility": "ASSUMED_COMPATIBLE",
+                                        "confidence": 0.5,
+                                        "reasoning": "Legacy artifact without framework hash - assumed compatible for backward compatibility"
+                                    }
+                                    print(f"   📎 Found legacy artifact without framework hash: {artifact_id[:8]}...")
                 
                 if json_artifact_hash:
                     # Use compatible artifact for both scores and evidence
@@ -577,6 +635,8 @@ Respond with only the JSON object."""
                 corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
                 corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
                 
+                print(f"🔬 Starting synthesis with {synthesis_model} using cached analysis...")
+                
                 synthesis_result = self._run_thin_synthesis(
                     scores_hash=scores_hash,
                     evidence_hash=evidence_hash,
@@ -593,14 +653,25 @@ Respond with only the JSON object."""
                     debug_level=debug_level
                 )
                 
+                # Display synthesis-only cost
+                synthesis_costs = audit.get_session_costs()
+                print(f"✅ Synthesis complete using cached analysis!")
+                print(f"   💰 Synthesis cost: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
+                print(f"   🔢 Tokens used: {synthesis_costs.get('total_tokens', 0):,}")
+                
                 if not synthesis_result or not isinstance(synthesis_result, dict):
                     raise ThinOrchestratorError(f"Invalid synthesis result format: {type(synthesis_result)}")
                 
                 if "synthesis_report_markdown" not in synthesis_result:
                     raise ThinOrchestratorError("Missing synthesis_report_markdown in result")
                 
-                # Generate final report
-                final_report = synthesis_result["synthesis_report_markdown"]
+                # Generate final report with cost transparency
+                base_report = synthesis_result["synthesis_report_markdown"]
+                session_costs = audit.get_session_costs()
+                
+                # Add cost summary section to report
+                cost_section = self._generate_cost_summary_section(session_costs, run_timestamp)
+                final_report = base_report + "\n\n" + cost_section
                 
                 # Save final report
                 with open(results_dir / "final_report.md", "w") as f:
@@ -618,10 +689,14 @@ Respond with only the JSON object."""
                 )
                 manifest.finalize_manifest()
                 
+                # Get cost information for synthesis-only mode
+                session_costs = audit.get_session_costs()
+                
                 return {
                     "run_id": run_timestamp,
                     "status": "completed",
-                    "duration": self._calculate_duration(start_time, end_time)
+                    "duration": self._calculate_duration(start_time, end_time),
+                    "costs": session_costs
                 }
             
             # Normal full run - continue with analysis phase
@@ -655,6 +730,8 @@ Respond with only the JSON object."""
             analysis_agent = EnhancedAnalysisAgent(self.security, audit, storage)
             
             # Execute analysis (in chunks)
+            print(f"📊 Starting analysis of {len(corpus_documents)} documents with {analysis_model}...")
+            
             all_analysis_results, scores_hash, evidence_hash = self._execute_analysis_sequentially(
                 analysis_agent,
                 corpus_documents,
@@ -662,6 +739,13 @@ Respond with only the JSON object."""
                 experiment_config,
                 analysis_model
             )
+            
+            # Display analysis progress and cost
+            analysis_costs = audit.get_session_costs()
+            successful_count = len([res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')])
+            print(f"✅ Analysis phase complete: {successful_count}/{len(corpus_documents)} documents processed")
+            print(f"   💰 Analysis cost so far: ${analysis_costs.get('total_cost_usd', 0.0):.4f} USD")
+            print(f"   🔢 Tokens used: {analysis_costs.get('total_tokens', 0):,}")
 
             # Check if any analysis tasks succeeded
             successful_analyses = [res for res in all_analysis_results if res.get('analysis_result', {}).get('result_hash')]
@@ -682,6 +766,8 @@ Respond with only the JSON object."""
             corpus_content = ''.join([doc.get('filename', '') + str(doc.get('content', '')) for doc in corpus_documents])
             corpus_hash = hashlib.sha256(corpus_content.encode('utf-8')).hexdigest()
             
+            print(f"🔬 Starting synthesis phase with {synthesis_model}...")
+            
             synthesis_result = self._run_thin_synthesis(
                 scores_hash=scores_hash,
                 evidence_hash=evidence_hash,
@@ -697,6 +783,12 @@ Respond with only the JSON object."""
                 debug_agent=debug_agent,
                 debug_level=debug_level
             )
+            
+            # Display synthesis cost update
+            synthesis_costs = audit.get_session_costs()
+            print(f"✅ Synthesis phase complete!")
+            print(f"   💰 Total cost so far: ${synthesis_costs.get('total_cost_usd', 0.0):.4f} USD")
+            print(f"   🔢 Total tokens: {synthesis_costs.get('total_tokens', 0):,}")
             
             synthesis_end_time = datetime.now(timezone.utc).isoformat()
             
@@ -720,9 +812,14 @@ Respond with only the JSON object."""
             # Combine batch results for final summary
             analysis_summary = self._combine_batch_results(all_analysis_results)
 
-            # Generate final report (optional, can be done by ReportAgent)
-            # For now, we'll just use the synthesis markdown as the final report
-            final_report_content = synthesis_result.get("synthesis_report_markdown", "Synthesis failed.")
+            # Generate final report with cost transparency
+            base_report_content = synthesis_result.get("synthesis_report_markdown", "Synthesis failed.")
+            session_costs = audit.get_session_costs()
+            
+            # Add cost summary section to report
+            cost_section = self._generate_cost_summary_section(session_costs, run_timestamp)
+            final_report_content = base_report_content + "\n\n" + cost_section
+            
             report_hash = storage.put_artifact(
                 final_report_content.encode('utf-8'), 
                 {"artifact_type": "final_report"}
@@ -751,9 +848,25 @@ Respond with only the JSON object."""
                 "mathematical_validation": "completed"
             })
             
-            print(f"✅ THIN v2.0 experiment complete: {run_timestamp} ({total_duration:.1f}s)")
+            # Get session cost summary for research transparency
+            session_costs = audit.get_session_costs()
+            
+            print(f"\n✅ THIN v2.0 experiment complete: {run_timestamp} ({total_duration:.1f}s)")
             print(f"📋 Results: {results_dir}")
             print(f"📊 Report: {report_file}")
+            print(f"\n💰 Final Cost Summary:")
+            print(f"   Total Cost: ${session_costs.get('total_cost_usd', 0.0):.4f} USD")
+            print(f"   Total Tokens: {session_costs.get('total_tokens', 0):,}")
+            
+            # Show detailed cost breakdown
+            operations = session_costs.get('operations', {})
+            if operations:
+                print(f"   Cost by Operation:")
+                for op, op_costs in operations.items():
+                    cost_usd = op_costs.get('cost_usd', 0.0)
+                    tokens = op_costs.get('tokens', 0)
+                    calls = op_costs.get('calls', 0)
+                    print(f"     • {op}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
             
             return {
                 "run_id": run_timestamp,
@@ -764,6 +877,7 @@ Respond with only the JSON object."""
                 "total_duration_seconds": total_duration,
                 "analysis_result": analysis_summary,
                 "synthesis_result": synthesis_result,
+                "costs": session_costs,
                 "mathematical_validation": True,
                 "architecture": "thin_v2.0_direct_calls"
             }
@@ -1319,4 +1433,70 @@ This report presents the results of computational research analysis using the Di
             end_dt = datetime.fromisoformat(end.replace('Z', '+00:00'))
             return (end_dt - start_dt).total_seconds()
         except Exception:
-            return 0.0 
+            return 0.0
+    
+    def _generate_cost_summary_section(self, session_costs: Dict[str, Any], run_timestamp: str) -> str:
+        """
+        Generate academic-grade cost summary section for research reports.
+        
+        Args:
+            session_costs: Cost data from audit logger
+            run_timestamp: Timestamp of the experiment run
+            
+        Returns:
+            Formatted markdown section with cost transparency
+        """
+        cost_section = f"""---
+
+## Research Transparency: Computational Cost Analysis
+
+### Cost Summary
+**Total Cost**: ${session_costs.get('total_cost_usd', 0.0):.4f} USD  
+**Total Tokens**: {session_costs.get('total_tokens', 0):,}  
+**Run Timestamp**: {run_timestamp}  
+
+### Cost Breakdown by Operation
+"""
+        
+        operations = session_costs.get('operations', {})
+        if operations:
+            for operation, op_costs in operations.items():
+                cost_usd = op_costs.get('cost_usd', 0.0)
+                tokens = op_costs.get('tokens', 0)
+                calls = op_costs.get('calls', 0)
+                avg_cost_per_call = cost_usd / calls if calls > 0 else 0.0
+                cost_section += f"- **{operation.replace('_', ' ').title()}**: ${cost_usd:.4f} USD ({tokens:,} tokens, {calls} calls, ${avg_cost_per_call:.4f} avg/call)\n"
+        else:
+            cost_section += "No operation-level cost data available.\n"
+        
+        cost_section += "\n### Cost Breakdown by Model\n"
+        models = session_costs.get('models', {})
+        if models:
+            for model, model_costs in models.items():
+                cost_usd = model_costs.get('cost_usd', 0.0)
+                tokens = model_costs.get('tokens', 0)
+                calls = model_costs.get('calls', 0)
+                cost_section += f"- **{model}**: ${cost_usd:.4f} USD ({tokens:,} tokens, {calls} calls)\n"
+        else:
+            cost_section += "No model-level cost data available.\n"
+        
+        cost_section += "\n### Cost Breakdown by Agent\n"
+        agents = session_costs.get('agents', {})
+        if agents:
+            for agent, agent_costs in agents.items():
+                cost_usd = agent_costs.get('cost_usd', 0.0)
+                tokens = agent_costs.get('tokens', 0)
+                calls = agent_costs.get('calls', 0)
+                cost_section += f"- **{agent}**: ${cost_usd:.4f} USD ({tokens:,} tokens, {calls} calls)\n"
+        else:
+            cost_section += "No agent-level cost data available.\n"
+        
+        cost_section += f"""\n### Methodology Note
+This research was conducted using the THIN (Thick LLM + Thin Software) architecture, ensuring complete transparency in computational costs. All LLM interactions are logged with exact token counts and costs for reproducibility and academic integrity.
+
+**Cost Calculation**: Based on provider pricing at time of execution  
+**Token Counting**: Exact tokens reported by LLM providers  
+**Audit Trail**: Complete logs available in experiment run directory  
+"""
+        
+        return cost_section 
