@@ -74,17 +74,19 @@ class ResultsInterpreter:
     evidence in a coherent narrative.
     """
     
-    def __init__(self, model: str = "vertex_ai/gemini-2.5-pro"):
+    def __init__(self, model: str = "vertex_ai/gemini-2.5-pro", audit_logger=None):
         """
         Initialize the ResultsInterpreter.
         
         Args:
             model: LLM model to use for interpretation (Pro for better synthesis)
+            audit_logger: Optional audit logger for cost tracking
         """
         self.model = model
         self.model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(self.model_registry)
         self.logger = logging.getLogger(__name__)
+        self.audit_logger = audit_logger
         self.prompt_template = self._load_prompt_template()
     
     def _load_prompt_template(self) -> str:
@@ -130,6 +132,28 @@ class ResultsInterpreter:
                 prompt=prompt,
                 max_tokens=8000   # Allow for comprehensive reports
             )
+            
+            # Extract and log cost information
+            if self.audit_logger and metadata.get("usage"):
+                usage_data = metadata["usage"]
+                try:
+                    self.audit_logger.log_cost(
+                        operation="results_interpretation",
+                        model=metadata.get("model", self.model),
+                        tokens_used=usage_data.get("total_tokens", 0),
+                        cost_usd=usage_data.get("response_cost_usd", 0.0),
+                        agent_name="ResultsInterpreter",
+                        metadata={
+                            "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                            "completion_tokens": usage_data.get("completion_tokens", 0),
+                            "attempts": metadata.get("attempts", 1)
+                        }
+                    )
+                    cost = usage_data.get("response_cost_usd", 0.0)
+                    tokens = usage_data.get("total_tokens", 0)
+                    print(f"💰 Results interpretation cost: ${cost:.6f} ({tokens:,} tokens)")
+                except Exception as e:
+                    print(f"⚠️ Error logging cost for results interpretation: {e}")
             
             if not response_content or not metadata.get('success'):
                 return InterpretationResponse(
@@ -417,6 +441,28 @@ Focus on the most important discoveries, their practical implications, and key c
                 system_prompt="You are an executive research consultant creating concise, impactful summaries.",
                 max_tokens=300
             )
+            
+            # Extract and log cost information
+            if self.audit_logger and metadata.get("usage"):
+                usage_data = metadata["usage"]
+                try:
+                    self.audit_logger.log_cost(
+                        operation="executive_summary_generation",
+                        model=metadata.get("model", self.model),
+                        tokens_used=usage_data.get("total_tokens", 0),
+                        cost_usd=usage_data.get("response_cost_usd", 0.0),
+                        agent_name="ResultsInterpreter",
+                        metadata={
+                            "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                            "completion_tokens": usage_data.get("completion_tokens", 0),
+                            "attempts": metadata.get("attempts", 1)
+                        }
+                    )
+                    cost = usage_data.get("response_cost_usd", 0.0)
+                    tokens = usage_data.get("total_tokens", 0)
+                    print(f"💰 Executive summary cost: ${cost:.6f} ({tokens:,} tokens)")
+                except Exception as e:
+                    print(f"⚠️ Error logging cost for executive summary: {e}")
             
             return response_content if metadata.get('success') else "Executive summary generation failed."
             

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_306f29129062",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "constitutional_health_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"chf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a highly focused populist critique of perceived economic and political control by a wealthy elite ('oligarchs'). The analysis reflects the intense and central theme of institutional subversion and a strong, if less detailed, call for systemic change away from this 'oligarchic' model. The positive or 'health' dimensions of the framework are present only as rhetorical counterpoints or historical ideals, thus receiving very low scores.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.15,\n          \"confidence\": 0.85\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the a billionaires.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"explicit_critique\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"systemic_allegation\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"normative_rejection\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"call_to_action_implicit_process\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T16:51:07.678191+00:00",
+    "end_time": "2025-07-31T16:51:47.369550+00:00",
+    "duration_seconds": 39.691359,
+    "llm_interaction_hash": "f2d9c5b2d162283b"
+  },
+  "input_artifacts": {
+    "framework_hash": "b7591eb36a9bb96c307dd21b9c660ca5200b3eaa473a743e5b05285c44685c88",
+    "document_hashes": [
+      "9795fe30035d2133fe0fc37c5b90fbd90e0a29eb766dd7fd4ac65d9428d5165d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_character_heuristics",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_character_heuristics",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T165034Z_6b38483d"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_ae84ee3fb46f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "constitutional_health_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"chf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document presents a strong tension between endorsing established legislative procedures (Procedural Legitimacy) and severely condemning the outcomes of the current system (Institutional Subversion). The analysis focuses on differentiating between critique of policy outcomes and attacks on institutional legitimacy itself. The dominant rhetorical theme is the urgent need for reform due to the system's failures.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"cory_booker_2018_first_step_act.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"And that's why I'm proud that this is a bipartisan compromise bill with leadership - extraordinary leadership on both sides of the aisle - saying, hey, there are things we need to begin to correct in this system.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"Argument for legislation\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Because of this collective work done over the last years, this bill includes critical sentencing reform that will reduce mandatory minimums and give judges discretion back - not legislators, but judges who sit and see all the totality of the facts.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"Explanation of policy\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"But like people, individuals who've done wrong in the past, like people, our nation has demonstrated the capacity to change. We as a nation have demonstrated the capacity to improve. Like people, we have demonstrated as a nation the capacity to redeem ourselves.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Historical justification for reform\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms that are supported by conservatives in this country and progressives.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Call to action\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"This system as a whole is a cancer on the soul of our country, and it's hurting every single American.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"Critique of system\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"as one author, Michelle Alexander, calls our criminal justice system, she calls it the new Jim Crow because of its disproportionate impact on people of color.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Critique of system\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"But this is a first step. It is a necessary step for the sake of thousands of Americans whose lives will be directly affected. This is a step in the right direction. I hope that we all come together and make this first step momentum on the journey we have.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Call to action\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T16:51:47.371475+00:00",
+    "end_time": "2025-07-31T16:52:32.528534+00:00",
+    "duration_seconds": 45.157059,
+    "llm_interaction_hash": "bc508ad56741ecd4"
+  },
+  "input_artifacts": {
+    "framework_hash": "b7591eb36a9bb96c307dd21b9c660ca5200b3eaa473a743e5b05285c44685c88",
+    "document_hashes": [
+      "c17e2dffe9d25092d7d17294ac3857c4273de3d752314169727a0f64ec9acab2"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_character_heuristics",
+      "experiment_root": "/Volumes/code/discernus/projects/1b_chf_character_heuristics",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T165034Z_6b38483d"
+  }
+}

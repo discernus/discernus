@@ -90,6 +90,28 @@ class DerivedMetricsAnalysisPlanner:
                 temperature=self.prompt_config["parameters"]["temperature"]
             )
             
+            # Extract and log cost information
+            if self.audit_logger and metadata.get("usage"):
+                usage_data = metadata["usage"]
+                try:
+                    self.audit_logger.log_cost(
+                        operation="derived_metrics_analysis_planning",
+                        model=metadata.get("model", self.model),
+                        tokens_used=usage_data.get("total_tokens", 0),
+                        cost_usd=usage_data.get("response_cost_usd", 0.0),
+                        agent_name="DerivedMetricsAnalysisPlanner",
+                        metadata={
+                            "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                            "completion_tokens": usage_data.get("completion_tokens", 0),
+                            "attempts": metadata.get("attempts", 1)
+                        }
+                    )
+                    cost = usage_data.get("response_cost_usd", 0.0)
+                    tokens = usage_data.get("total_tokens", 0)
+                    print(f"💰 Derived metrics planning cost: ${cost:.6f} ({tokens:,} tokens)")
+                except Exception as e:
+                    print(f"⚠️ Error logging cost for derived metrics planning: {e}")
+            
             if not response or not response.strip():
                 return DerivedMetricsAnalysisPlanResponse(success=False, error_message="Empty response from LLM")
             

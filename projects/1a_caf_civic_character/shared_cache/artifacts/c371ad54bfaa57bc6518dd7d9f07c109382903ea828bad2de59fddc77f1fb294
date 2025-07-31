@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_5a8a28752fc5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Character Assessment Framework v6.1\",\n    \"framework_version\": \"v6.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analysis is based on the rhetorical content of the provided transcript. The speaker's discourse is highly focused on economic inequality, which maps strongly to the Justice and Resentment dimensions. The scores reflect the intensity and prominence of these themes throughout the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"bernie_sanders_2025_fighting_oligarchy.txt\",\n      \"dimensional_scores\": {\n        \"Dignity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"Truth\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.85\n        },\n        \"Justice\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Hope\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"Pragmatism\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"Tribalism\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"Manipulation\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        },\n        \"Resentment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Fear\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.2,\n          \"confidence\": 0.9\n        },\n        \"Fantasy\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Resentment\",\n          \"quote_text\": \"You know why the American people are angry and they are angry all over this country? They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Argument Framing\"\n        },\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Argument Definition\"\n        },\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"In-group/Out-group Identification\"\n        },\n        {\n          \"dimension\": \"Dignity\",\n          \"quote_text\": \"But you would think that if you had a few billion dollars or $10 or $20 billion, you would not feel obliged to step on the backs of poor people to become even richer. But that is exactly what they are doing right now.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Moral Condemnation\"\n        },\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Concluding Call to Action\"\n        },\n        {\n          \"dimension\": \"Truth\",\n          \"quote_text\": \"Today you've got three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Factual Claim\"\n        },\n        {\n          \"dimension\": \"Fear\",\n          \"quote_text\": \"In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdose.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Problem Statement\"\n        },\n        {\n          \"dimension\": \"Pragmatism\",\n          \"quote_text\": \"Billionaires are funding the Democratic Party and preventing that party from standing up for working families.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Political Diagnosis\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T16:11:00.072582+00:00",
+    "end_time": "2025-07-31T16:11:38.158871+00:00",
+    "duration_seconds": 38.086289,
+    "llm_interaction_hash": "d34a588043a6f0ba"
+  },
+  "input_artifacts": {
+    "framework_hash": "6043b1d82339b372041e90fc75c20cb4f02b317b002734234bbb47527e708950",
+    "document_hashes": [
+      "9795fe30035d2133fe0fc37c5b90fbd90e0a29eb766dd7fd4ac65d9428d5165d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T161021Z_3f624ecd"
+  }
+}

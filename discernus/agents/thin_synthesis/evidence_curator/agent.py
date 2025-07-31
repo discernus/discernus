@@ -98,17 +98,19 @@ class EvidenceCurator:
     The key innovation is that curation happens AFTER computation.
     """
     
-    def __init__(self, model: str = "vertex_ai/gemini-2.5-flash"):
+    def __init__(self, model: str = "vertex_ai/gemini-2.5-flash", audit_logger=None):
         """
         Initialize the EvidenceCurator.
         
         Args:
             model: LLM model to use for evidence curation
+            audit_logger: Optional audit logger for cost tracking
         """
         self.model = model
         self.model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(self.model_registry)
         self.logger = logging.getLogger(__name__)
+        self.audit_logger = audit_logger
         self.footnote_counter = 0
         self.footnote_registry = {}
         
@@ -268,6 +270,29 @@ class EvidenceCurator:
                 prompt=prompt,
                 max_tokens=8000  # Allow comprehensive evidence curation
             )
+            
+            # Extract and log cost information
+            if self.audit_logger and metadata.get("usage"):
+                usage_data = metadata["usage"]
+                try:
+                    self.audit_logger.log_cost(
+                        operation="evidence_curation",
+                        model=metadata.get("model", self.model),
+                        tokens_used=usage_data.get("total_tokens", 0),
+                        cost_usd=usage_data.get("response_cost_usd", 0.0),
+                        agent_name="EvidenceCurator",
+                        metadata={
+                            "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                            "completion_tokens": usage_data.get("completion_tokens", 0),
+                            "attempts": metadata.get("attempts", 1),
+                            "evidence_pieces": len(evidence_pieces)
+                        }
+                    )
+                    cost = usage_data.get("response_cost_usd", 0.0)
+                    tokens = usage_data.get("total_tokens", 0)
+                    print(f"💰 Evidence curation cost: ${cost:.6f} ({tokens:,} tokens)")
+                except Exception as e:
+                    print(f"⚠️ Error logging cost for evidence curation: {e}")
             
             if not response_content or not metadata.get('success'):
                 self.logger.warning("LLM curation failed, returning empty evidence")
@@ -931,8 +956,13 @@ Return only valid JSON.
                 if alpha is not None:
                     # Find evidence for high or low reliability
                     if alpha < 0.6:  # Poor reliability
-                        # Look for inconsistent evidence
-                        for dim in ['procedural_legitimacy', 'institutional_respect', 'systemic_continuity']:
+                        # Look for inconsistent evidence from any available dimensions (framework-agnostic)
+                        available_dimensions = evidence_df['dimension'].unique()
+                        
+                        # Select up to 3 dimensions to illustrate reliability concerns
+                        dimensions_to_check = available_dimensions[:3] if len(available_dimensions) > 3 else available_dimensions
+                        
+                        for dim in dimensions_to_check:
                             dim_evidence = evidence_df[evidence_df['dimension'] == dim]
                             if len(dim_evidence) > 0:
                                 # Select evidence with varying confidence scores

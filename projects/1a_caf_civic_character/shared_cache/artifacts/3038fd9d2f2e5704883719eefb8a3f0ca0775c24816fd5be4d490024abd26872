@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_fe829c6f998d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Character Assessment Framework v6.1\",\n    \"framework_version\": \"v6.1\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The document is a classic political concession speech, a genre that strongly emphasizes virtues like Dignity, Justice, and Hope, while actively rejecting vices such as Tribalism and Resentment. The scoring reflects this clear rhetorical purpose. Evidence is abundant for the virtue dimensions and largely absent for the vice dimensions, leading to high confidence across the analysis.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_mccain_2008_concession.txt\",\n      \"dimensional_scores\": {\n        \"Dignity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Truth\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"Justice\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Hope\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Pragmatism\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"Tribalism\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"Manipulation\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"Resentment\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        },\n        \"Fear\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"Fantasy\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Dignity\",\n          \"quote_text\": \"This is an historic election, and I recognize the special significance it has for African-Americans and for the special pride that must be theirs tonight.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Acknowledgement of opponent's historic achievement\"\n        },\n        {\n          \"dimension\": \"Dignity\",\n          \"quote_text\": \"In a contest as long and difficult as this campaign has been, his success alone commands my respect for his ability and perseverance.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Expression of respect for opponent\"\n        },\n        {\n          \"dimension\": \"Justice\",\n          \"quote_text\": \"The American people have spoken, and they have spoken clearly. A little while ago, I had the honor of calling Senator Barack Obama to congratulate him on being elected the next president of the country that we both love.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Acknowledgement of and respect for the electoral outcome\"\n        },\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together...\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Call for unity and forward-looking cooperation\"\n        },\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"Americans never quit. We never surrender. We never hide from history. We make history.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Inspirational statement about national character\"\n        },\n        {\n          \"dimension\": \"Truth\",\n          \"quote_text\": \"I don't know what more we could have done to try to win this election. I'll leave that to others to determine. Every candidate makes mistakes, and I\u2019m sure I made my share of them.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Candid self-reflection and acknowledgement of fallibility\"\n        },\n        {\n          \"dimension\": \"Pragmatism\",\n          \"quote_text\": \"I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Practical offer of assistance to incoming leader\"\n        },\n        {\n          \"dimension\": \"Tribalism\",\n          \"quote_text\": \"Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Explicit rejection of partisan identity in favor of national unity\"\n        },\n        {\n          \"dimension\": \"Resentment\",\n          \"quote_text\": \"though we fell short, the failure is mine, not yours.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Acceptance of personal responsibility for defeat, deflecting blame\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T16:14:04.493120+00:00",
+    "end_time": "2025-07-31T16:14:47.858725+00:00",
+    "duration_seconds": 43.365605,
+    "llm_interaction_hash": "133b9e2055e15b7f"
+  },
+  "input_artifacts": {
+    "framework_hash": "6043b1d82339b372041e90fc75c20cb4f02b317b002734234bbb47527e708950",
+    "document_hashes": [
+      "0639fa78ebb5151a675ea486a5766936d37fad6a918cc972f9d9e7b7b774286d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T161021Z_3f624ecd"
+  }
+}
