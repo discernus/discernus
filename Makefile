@@ -53,6 +53,21 @@ harness-simple:  ## Test simple prompt (requires MODEL and PROMPT vars)
 harness-file:  ## Test prompt from file (requires MODEL and FILE vars)
 	@source venv/bin/activate && python3 scripts/prompt_engineering_harness.py --model "$(MODEL)" --prompt-file "$(FILE)"
 
+run:  ## Run experiment (requires EXPERIMENT var, e.g. make run EXPERIMENT=projects/simple_test)
+	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make run EXPERIMENT=projects/your_experiment"; exit 1; fi
+	@echo "🚀 Running experiment: $(EXPERIMENT)"
+	@source venv/bin/activate && python3 -m discernus.cli run $(EXPERIMENT)
+
+continue:  ## Continue experiment from artifacts (requires EXPERIMENT var)
+	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make continue EXPERIMENT=projects/your_experiment"; exit 1; fi
+	@echo "🔄 Continuing experiment: $(EXPERIMENT)"
+	@source venv/bin/activate && python3 -m discernus.cli continue $(EXPERIMENT)
+
+debug:  ## Debug experiment (requires EXPERIMENT var)
+	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make debug EXPERIMENT=projects/your_experiment"; exit 1; fi
+	@echo "🐛 Debugging experiment: $(EXPERIMENT)"
+	@source venv/bin/activate && python3 -m discernus.cli debug $(EXPERIMENT) --verbose
+
 clean:  ## Clean up temporary files
 	@echo "🧹 Cleaning temporary files..."
 	@find . -type f -name "*.pyc" -delete
