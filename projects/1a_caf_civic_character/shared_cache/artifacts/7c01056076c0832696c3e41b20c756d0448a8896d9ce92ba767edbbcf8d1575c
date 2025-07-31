@@ -1,0 +1,192 @@
+{
+  "analysis_metadata": {
+    "framework_name": "Character Assessment Framework v6.1-Factorial",
+    "framework_version": "v6.1-factorial",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The document is a House floor speech from 2017 focusing on critiques of judicial overreach and immigration policy. The speaker's stance is explicitly conservative, emphasizing originalism and strict rule of law, while employing strong 'us vs. them' rhetoric and appeals to fear regarding immigration."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "steve_king_2017_house_floor.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.2,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "tribalism": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "manipulation": {
+          "raw_score": 0.6,
+          "salience": 0.55,
+          "confidence": 0.8
+        },
+        "resentment": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "era_classification": {
+          "classification": "Populist Era",
+          "confidence": 0.95,
+          "justification": "The speech was delivered in 2017, falling within the Populist Era (2008-2025). Its rhetoric strongly exhibits anti-establishment sentiment, particularly against the judiciary and executive, and employs direct appeals to the 'people's voice' over institutional interpretations, consistent with populist themes."
+        },
+        "ideology_classification": {
+          "classification": "Conservative",
+          "confidence": 0.95,
+          "justification": "The speaker's arguments are rooted in traditional interpretations of the Constitution (originalism), a strong emphasis on the 'rule of law' as written, and a critique of judicial activism and executive overreach. The defense of traditional values (marriage) and incremental change via legislation (Congress's role) align directly with conservative ideological tenets."
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "These incidents of illegal aliens that are, that are arrested and turned loose on the street because the President has this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "confidence": 0.9,
+          "context_type": "criticism_of_policy_impact"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "Every American that dies at their hands is a life that could be saved if we just followed our laws.",
+          "confidence": 0.85,
+          "context_type": "advocacy_for_specific_group"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The President of the United States has a constitutional right to nominate to the Supreme Court. Well, he does, that's pretty clear in the Constitution.",
+          "confidence": 0.9,
+          "context_type": "assertion_of_constitutional_fact"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "They made it up. And they wrapped themselves in the cloak of constitutional authority in Marbury versus Madison and a whole series of presumably precedent cases along the line.",
+          "confidence": 0.9,
+          "context_type": "accusation_of_factual_distortion"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "It's the Senate's job then to evaluate the nominations of the President. And they can do so with or without hearings, with or without interviews. The Senate writes its own rules just like the House writes its own rules, Mr. Speaker.",
+          "confidence": 0.95,
+          "context_type": "description_of_procedural_roles"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "Every American that dies at their hands is a life that could be saved if we just followed our laws.",
+          "confidence": 0.95,
+          "context_type": "call_for_procedural_adherence"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "And it bring you to a sad state of mourn. And you'd lay your head down on the pillow at night having trouble to sleep, thinking, 'What am I going to do tomorrow? I couldn't react today. What am I going to do tomorrow? Lord, wake me up with an idea on how to, how to preserve our Constitution,' if the Supreme Court of the United States believes that they can write law.",
+          "confidence": 0.9,
+          "context_type": "expression_of_despair_and_plea"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "This is the time we must defend our Constitution and we must nominate and elect a President of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.",
+          "confidence": 0.85,
+          "context_type": "call_for_restoration"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "If you discover a law, if it's a, if it's a law like Obamacare that comes before the Supreme Court and you read the text of that and it doesn't include 'or federal government,' and you believe that Congress wanted the federal government to be able to establish the exchanges or intended to write that into the law, you don't get to just write it in and say that's what they really meant. You have to remand it back to Congress and tell us this is what the law says.",
+          "confidence": 0.85,
+          "context_type": "proposed_procedural_solution"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.",
+          "confidence": 0.85,
+          "context_type": "direct_policy_recommendations"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "These incidents of illegal aliens that are, that are arrested and turned loose on the street because the President has this idea of prioritization or prosecutorial discretion is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "confidence": 0.95,
+          "context_type": "us_vs_them_framing"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "The rule of law. But we're going to have to personalize it because people over on this side of the aisle have their fingers in their ears on data. But when they see the faces, when they hear the anguish and the voices, especially of the mothers, or the voice of the father, Scott Root...",
+          "confidence": 0.9,
+          "context_type": "division_and_othering_of_opponents"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us and to place that awful, brutal, ghastly memory again into her mind's eye and pour that forth into the Congressional Record so that some of us, some of us will soak that up and be mobilized to do something, something more to resist the President's policy of amnesty, de facto amnesty, amnesty by executive edict, that has been part and parcel of the Obama policy since the beginning of his time here in office.",
+          "confidence": 0.8,
+          "context_type": "emotional_appeal_with_policy_critique"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "He's ordering law enforcement officers not to do their job.",
+          "confidence": 0.75,
+          "context_type": "strong_accusation"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it up to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+          "confidence": 0.95,
+          "context_type": "blame_and_grievance_against_institutions"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+          "confidence": 0.9,
+          "context_type": "direct_attribution_of_blame"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "This is costing lives in America. And it's costing, it's costing in the end thousands of lives in America.",
+          "confidence": 0.9,
+          "context_type": "appeal_to_catastrophic_consequences"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Joshua, who was, um, essentially abducted from his school at, um, as about a sophomore in high school or so and hauled out into outside of town where he was beaten mercilessly and bludgeoned and finally murdered.",
+          "confidence": 0.9,
+          "context_type": "graphic_anecdotal_warning"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "No specific quotes indicating fantasy; the speech is grounded in what the speaker perceives as factual and legal reality, however interpreted.",
+          "confidence": 0.0,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}

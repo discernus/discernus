@@ -1,0 +1,196 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_1_factorial",
+    "framework_version": "v6.1-factorial",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted based on the Character Assessment Framework v6.1-Factorial. Scores reflect intensity and salience of character dimensions, with contextual classifications for era and ideology. No mathematical computations performed."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.7
+        },
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.95
+        },
+        "resentment": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "fantasy": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "era_classification": {
+          "classification": "Civil Rights Era",
+          "confidence": 1.0
+        },
+        "ideology_classification": {
+          "classification": "Progressive",
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South...",
+          "confidence": 0.9,
+          "context_type": "Direct demand for protection of inherent human worth"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+          "confidence": 0.9,
+          "context_type": "Affirmation of self-respect and human value"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+          "confidence": 0.9,
+          "context_type": "Pointing out the inadequacy of proposed legislation against factual realities"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Do you know that in Albany, Georgia, nine of our leaders have been indicted, not by Dixiecrats, but by the federal government for peaceful protest?",
+          "confidence": 0.9,
+          "context_type": "Revealing uncomfortable facts about government actions"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "We need a bill that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week...",
+          "confidence": 0.95,
+          "context_type": "Demand for social and economic equity"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 0.95,
+          "context_type": "Vision for systemic justice and democratic fairness"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes, until the revolution of 1776 is complete.",
+          "confidence": 0.8,
+          "context_type": "Forward-looking vision for a transformed nation"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 0.8,
+          "context_type": "Optimistic long-term goal despite current struggles"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South.",
+          "confidence": 0.7,
+          "context_type": "Specific legislative recommendation addressing practical concerns"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We need a bill that will provide for the homeless and starving people of this nation.",
+          "confidence": 0.7,
+          "context_type": "Addressing tangible societal needs through policy"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "What political leader can stand up and say, 'My party is the party of principles'?",
+          "confidence": 0.9,
+          "context_type": "Critique of party loyalty over universal principles"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "confidence": 0.95,
+          "context_type": "Direct and unembellished statement of grievances"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "We come here today with a great sense of misgiving.",
+          "confidence": 0.8,
+          "context_type": "Expression of deep dissatisfaction and grievance"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "What did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby?",
+          "confidence": 0.8,
+          "context_type": "Highlighting specific past injustices and lack of accountability"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "In its present form, this bill will not protect the citizens of Danville, Virginia, who must live in constant fear of a police state.",
+          "confidence": 0.7,
+          "context_type": "Description of a prevalent, real-world climate of fear"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "We are tired! We are tired of being beaten by policemen.",
+          "confidence": 0.7,
+          "context_type": "Acknowledging threats but framing them as impetus for action"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "We need a bill that will provide for the homeless and starving people of this nation.",
+          "confidence": 0.9,
+          "context_type": "Concrete and practical demand, not an unrealistic promise"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "We do not want our freedom gradually, but we want to be free now!",
+          "confidence": 0.9,
+          "context_type": "Demand for immediate change grounded in lived reality, not magical thinking"
+        },
+        {
+          "dimension": "era_classification",
+          "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South...",
+          "confidence": 1.0,
+          "context_type": "Direct reference to civil rights issues and events of the early 1960s"
+        },
+        {
+          "dimension": "ideology_classification",
+          "quote_text": "My friends, let us not forget that we are involved in a serious social revolution.",
+          "confidence": 0.95,
+          "context_type": "Explicit call for fundamental societal transformation"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_1_factorial",
+    "framework_version": "v6.1-factorial",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis based on Mitt Romney's 2020 impeachment trial speech, focusing on his justification for a guilty vote against his party's president. Emphasis on duty, constitution, and impartial justice."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "justice": {
+          "raw_score": 0.95,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "pragmatism": {
+          "raw_score": 0.5,
+          "salience": 0.3,
+          "confidence": 0.7
+        },
+        "tribalism": {
+          "raw_score": 0.1,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "manipulation": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "resentment": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.1,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.1,
+          "salience": 0.4,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it.",
+          "confidence": 0.9,
+          "context_type": "Upholding Constitutional Principles"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+          "confidence": 0.85,
+          "context_type": "Defense of Foundational Values"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+          "confidence": 0.95,
+          "context_type": "Commitment to Objectivity"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The president asked a foreign government to investigate his political rival... The president withheld vital military funds... The president's purpose was personal and political. Accordingly, the president is guilty of an appalling abuse of public trust.",
+          "confidence": 0.9,
+          "context_type": "Factual Accusation"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "The Constitution established the vehicle of impeachment that has occupied both houses of our Congress these many days. We have labored to faithfully execute our responsibilities to it.",
+          "confidence": 0.95,
+          "context_type": "Procedural Integrity"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor. Yes, he did.",
+          "confidence": 0.95,
+          "context_type": "Application of Legal Standard"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+          "confidence": 0.7,
+          "context_type": "Belief in National Resilience"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.65,
+          "context_type": "Acting for Future Generations"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I acknowledge that my verdict will not remove the president from office.",
+          "confidence": 0.8,
+          "context_type": "Realistic Outcome Assessment"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I'm aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.",
+          "confidence": 0.75,
+          "context_type": "Acknowledging Political Reality"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "Many demanded, in their words, that I 'stand with the team.'... But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside.",
+          "confidence": 0.95,
+          "context_type": "Rejection of Group Loyalty"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "If their names were not Biden, the president would never have done what he did.",
+          "confidence": 0.9,
+          "context_type": "Critique of Politically Motivated Action"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "confidence": 0.9,
+          "context_type": "Description of Abusive Act"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The president's purpose was personal and political. Accordingly, the president is guilty of an appalling abuse of public trust.",
+          "confidence": 0.85,
+          "context_type": "Accusation of Deceptive Intent"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "We are all footnotes at best in the annals of history. But in the most powerful nation on Earth, the nation conceived in liberty and justice, that distinction is enough for any citizen.",
+          "confidence": 0.7,
+          "context_type": "Forward-looking Perspective"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Does anyone seriously believe that I would consent to these consequences other than from an inescapable conviction that my oath before God demanded it of me?",
+          "confidence": 0.9,
+          "context_type": "Defiance of Negative Consequences"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "To maintain that the lack of a codified and comprehensive list of all the outrageous acts that a president might conceivably commit renders Congress powerless to remove such a president defies reason.",
+          "confidence": 0.85,
+          "context_type": "Rebuttal of Unrealistic Legal Argument"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "The defense argues that the Senate should leave the impeachment decision to the voters. While that logic is appealing to our democratic instincts, it is inconsistent with the Constitution's requirement that the Senate, not the voters, try the president.",
+          "confidence": 0.8,
+          "context_type": "Rejection of Flawed Constitutional Interpretation"
+        }
+      ]
+    }
+  ]
+}

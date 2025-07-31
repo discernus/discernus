@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_371d935ede21",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "character_ideology_evolution_hypothesis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_1_factorial\",\n    \"framework_version\": \"v6.1-factorial\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Character Assessment Framework v6.1-Factorial, focusing on ten character dimensions and two contextual classifications. All scoring and salience assessments are raw and do not involve calculations or derived metrics. Evidence selection prioritized direct quotes supporting the assessed dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"mitt_romney_2020_impeachment.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"truth\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"justice\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"hope\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.6,\n          \"confidence\": 0.75\n        },\n        \"resentment\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.2,\n          \"confidence\": 0.5\n        },\n        \"fear\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.1,\n          \"confidence\": 0.5\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.1,\n          \"confidence\": 0.5\n        },\n        \"era_classification\": {\n          \"classification\": \"Civil Rights Era\",\n          \"confidence\": 0.7,\n          \"justification\": \"The speech frequently references the Constitution, foundational principles, and the duties of senators, aligning with the focus on fundamental rights and constitutional equality characteristic of the Civil Rights Era.\"\n        },\n        \"ideology_classification\": {\n          \"classification\": \"Progressive\",\n          \"confidence\": 0.65,\n          \"justification\": \"The emphasis on broad public interest, challenging established power structures, and the framing of actions as a defense of democratic ideals and rights suggests a progressive orientation.\"\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"As a senator-juror, I swore an oath before God to exercise impartial justice.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Direct Statement\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"My faith is at the heart of who I am. I take an oath before God as enormously consequential.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Personal Belief\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"I know from the outset that being tasked with judging the president, the leader of my own party, would be the most difficult decision I have ever faced. I was not wrong.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Personal Reflection\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"The historical meaning of the words 'high crimes and misdemeanors,' the writings of the founders, and my own reasoned judgment convince me that a president can indeed commit acts against the public trust that are so egregious that while they are not statutory crimes, they would demand removal from office.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"Reasoned Argument\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"The president's purpose was personal and political. Accordingly, the president is guilty of an appalling abuse of public trust.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Accusation\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"When he undertook an effort to remove the Ukrainian prosecutor general, if he knew of the exacerbating compensation his son was receiving from a company actually under investigation, the Vice President should have recused himself.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Hypothetical Scenario\"\n        },\n        {\n          \"dimension\": \"era_classification\",\n          \"quote_text\": \"The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"Constitutional Reference\"\n        },\n        {\n          \"dimension\": \"ideology_classification\",\n          \"quote_text\": \"The people will judge us for how well and faithfully we fulfill our duty. My vote will likely be in the minority in the Senate. But irrespective of these things, with my vote, I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"Moral Justification\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-30T23:46:28.868524+00:00",
+    "end_time": "2025-07-30T23:46:34.186520+00:00",
+    "duration_seconds": 5.317996,
+    "llm_interaction_hash": "af98ab02ab35c5fc"
+  },
+  "input_artifacts": {
+    "framework_hash": "5aa0187658fbf97013cd5e5279c57e50a67793bb509da06847979038c9961ac6",
+    "document_hashes": [
+      "f9b2e86ae9bcdee55757a5c6caecc03225c0bb6532154c38cde5f14dc4d3cae6"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250730T234603Z_7ceb399f"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_1_factorial",
+    "framework_version": "v6.1-factorial",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Character Assessment Framework v6.1-Factorial. Focused on identifying raw dimensional scores, salience, and confidence levels for each of the ten character dimensions and two contextual classifications. Evidence extraction prioritized strong, representative quotes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.65,
+          "salience": 0.55,
+          "confidence": 0.70
+        },
+        "truth": {
+          "raw_score": 0.50,
+          "salience": 0.60,
+          "confidence": 0.65
+        },
+        "justice": {
+          "raw_score": 0.40,
+          "salience": 0.45,
+          "confidence": 0.60
+        },
+        "hope": {
+          "raw_score": 0.70,
+          "salience": 0.70,
+          "confidence": 0.75
+        },
+        "pragmatism": {
+          "raw_score": 0.60,
+          "salience": 0.65,
+          "confidence": 0.70
+        },
+        "tribalism": {
+          "raw_score": 0.55,
+          "salience": 0.50,
+          "confidence": 0.60
+        },
+        "manipulation": {
+          "raw_score": 0.30,
+          "salience": 0.35,
+          "confidence": 0.55
+        },
+        "resentment": {
+          "raw_score": 0.35,
+          "salience": 0.40,
+          "confidence": 0.55
+        },
+        "fear": {
+          "raw_score": 0.20,
+          "salience": 0.25,
+          "confidence": 0.50
+        },
+        "fantasy": {
+          "raw_score": 0.45,
+          "salience": 0.50,
+          "confidence": 0.60
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "hope",
+          "quote_text": "And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will. But importantly, it's a huge, huge win for you guys. But most importantly, it's a huge win for the American people because the American people, again, they need people who put the interests of their own citizens first, of our own citizens first. And that's what this entire movement is all about. And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.",
+          "confidence": 0.80,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "But we also not let the Chinese make all of our stuff. And yet, I've, I've seen the Wall Street Journal editorial page for the last couple of years say we can indefinitely send munitions and weapons of war to Ukraine after for the past two generations, abdicating that we ship our industrial base overseas. It doesn't make any sense. It's sort of the perfect encapsulation of the dumbest way to govern our country.",
+          "confidence": 0.75,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "But the fact that this has happened is evidence that they're not. And so, I want to come back to something that I, I started with here, which is that we've made a lot of progress. There have been things that have, that have been bad that have happened. I mean, you know, in my home state of Ohio, we've had a couple of ballot referenda that have not gone the right way. We lost some elections in 2022 that I think that we should have won.",
+          "confidence": 0.70,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.",
+          "confidence": 0.70,
+          "context_type": "quote"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "The majority of the Republican house and the majority of the Republican Senate, the most recent cycle, said no more to this, no more, right? That's a good thing, that's progress. Even though we didn't win the debate, we're starting to win the debate within, within our own party.",
+          "confidence": 0.65,
+          "context_type": "quote"
+        }
+      ]
+    }
+  ]
+}
