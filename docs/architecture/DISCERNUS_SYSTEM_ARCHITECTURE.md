@@ -4,7 +4,7 @@ title: Discernus System Architecture - Technical Specification
 
 # Discernus System Architecture (v4.0 - THIN Orchestration)
 
-> **Architectural Vision**: This document outlines the durable architectural vision and the non-negotiable principles for the Discernus platform. It is the "constitution" that guides our technical decisions. For the specifics of the current reference implementation, including code examples and technology choices, please see the `THIN_V2_IMPLEMENTATION_PLAN.md`.
+> **Document Structure**: This document is organized into three distinct sections: (1) **Universal Principles** - immutable architectural foundations, (2) **Current Implementation** - v4.0 architecture as implemented, and (3) **Evolution Roadmap** - planned enhancements and future vision. Each section serves different stakeholders and development phases.
 
 ---
 
@@ -43,18 +43,16 @@ Discernus transforms research capacity without compromising scholarly control:
 
 ---
 
-## Fundamental Architectural Principles
+# Part I: Universal Principles (Immutable)
 
-These principles guide every design decision in Discernus:
+These foundational principles are the "constitutional" bedrock of Discernus - they remain constant regardless of implementation maturity or technology evolution:
 
 **1. Day-1 Extensibility Through Specifications**
-- **Already Extensible**: Researchers can create unlimited frameworks, experiments, and corpora within specifications
-- Framework Specification v4.0 enables any analytical approach expressible in natural language
-- Experiment Specification v2.0 supports diverse methodological approaches and research designs
-- Corpus Specification v2.0 accommodates any text collection with proper preparation
-- External YAML prompts allow analytical customization without code changes
+- Researchers can create unlimited frameworks, experiments, and corpora within specifications
+- Any analytical approach expressible in natural language can be implemented
+- Diverse methodological approaches and research designs supported
+- External prompts allow analytical customization without code changes
 - Git-based sharing enables immediate academic collaboration and framework distribution
-- *Future: Advanced platform features (core+modules architecture, marketplace, GUI tools) deferred to post-MVP*
 
 **2. Human Intellectual Value Amplification, Not Replacement**
 - Real value creation comes from researcher expertise: framework design, corpus curation, experiment methodology
@@ -71,10 +69,10 @@ These principles guide every design decision in Discernus:
 - Audit trails sufficient for peer review and replication
 
 **4. Computational Verification ("Show Your Math")**
-- LLMs must execute Python code for all mathematical calculations
-- Statistical results verified through `SecureCodeExecutor` with resource limits
+- LLMs must execute code for all mathematical calculations
+- Statistical results verified through secure code execution
 - No hallucinated statistics - all numbers computed and logged
-- Provenance stamps detect content tampering and ensure analysis integrity
+- Provenance systems detect content tampering and ensure analysis integrity
 - Academic integrity through transparent, auditable computational processes
 
 **5. LLM Consistency Superiority Over Human Evaluation Panels**
@@ -88,13 +86,11 @@ These principles guide every design decision in Discernus:
 
 **6. Variance-Aware Adaptive Processing with Transparency**
 - Accept LLM response variance as natural and expected phenomenon (not a bug to fix)
-- **Synthetic Calibration**: Generate representative text from corpus using Gemini 2.5 Flash for variance measurement
-- **Coefficient of Variation**: Measure CV = σ/μ from pilot runs to determine optimal sample sizes
-- **Sequential Probability Ratio Testing (SPRT)**: Adaptive sampling stops when confidence intervals meet requirements
-- **Minimum Sample Size Calculation**: n = (z × CV / E)² where z=1.96 (95% confidence), E=desired margin
-- **Cost-Constrained Optimization**: Balance statistical confidence with budget through empirical stopping rules
-- **Transparency Requirement**: Always report uncertainty, confidence intervals, CV, and methodological constraints
-- **Multi-Run Statistical Validation**: Cronbach's alpha, ANOVA, inter-run reliability, and convergence analysis
+- Use statistical methods to measure variance and determine optimal sample sizes
+- Adaptive sampling stops when confidence intervals meet requirements
+- Balance statistical confidence with budget through empirical stopping rules
+- Always report uncertainty, confidence intervals, and methodological constraints
+- Employ multi-run statistical validation for reliability assessment
 
 **7. Reliability Over Flexibility**
 - Single, predictable pipeline over infinite customization options
@@ -116,13 +112,13 @@ These principles guide every design decision in Discernus:
 - Agent specialization: focused analysis agents with clear input/output contracts
 - Comprehensive reporting with proper provenance asset management
 
-**10. Opinionated Model Selection Based on Performance Requirements** [NEEDS UPDATE]
-- Context window requirements: 2M+ tokens for multi-framework batch analysis
-- Rate limiting needs: 800+ RPM for institutional-scale processing
+**10. Empirical Model Selection Based on Performance Requirements**
+- Context window requirements determined by analysis complexity
+- Rate limiting needs based on institutional processing scale
 - Accuracy demands: Consistent performance across full context window
-- Empirical validation: Models chosen through actual complexity testing (CHF failure)
-- Cost-performance optimization: Gemini 2.5 Pro selected over alternatives
-- Provider reliability: Vertex AI chosen for predictable academic pricing
+- Empirical validation: Models chosen through actual complexity testing
+- Cost-performance optimization through systematic evaluation
+- Provider reliability considerations for predictable academic pricing
 
 **11. Security and Privacy by Design**
 - Corpus anonymization and hash-based identity protection as standard practice
@@ -160,7 +156,7 @@ These principles guide every design decision in Discernus:
 
 **15. Empirical Technology Choices**
 - Decisions based on actual testing, not theoretical optimization
-- Gemini 2.5 Pro chosen over Flash due to CHF complexity test failure
+- Model selection validated through complexity testing
 - Cost optimization secondary to reliability validation
 
 **16. Linear Progression with Perfect Caching**
@@ -190,53 +186,103 @@ These principles guide every design decision in Discernus:
 
 ---
 
-## 5 · Architectural Pillars for a Durable LLM System
+# Part II: Current Implementation (v4.0 Architecture)
 
-> This section documents the core architectural principles and industry best practices that guide the development of the Discernus platform. These pillars represent a tiered roadmap, moving from a reliable foundation to a cutting-edge, state-of-the-art system. They are the "constitution" for our technical decisions—ideals we aspire to, even if we are still in the process of implementing them fully.
+This section describes the actual implemented architecture as of 2025-01-30. All features and capabilities described here are operational and tested.
 
-### Foundational Pillars (The Non-Negotiable Bedrock)
+## Current Technology Stack
 
-These are the absolute requirements for a reliable, production-ready system.
+**Infrastructure**:
+- MinIO content-addressable storage for artifact management
+- Git-based provenance and version control (no databases)
+- Local filesystem or S3-compatible storage backends
+- Direct function calls over distributed coordination
 
-**Pillar 1: Prompt Management**
-- **Principle**: Prompts are code and must be treated as such. They are version-controlled, templated, and strictly separated from application logic.
-- **Implementation**: All agent intelligence is defined in external `.yaml` files, enabling versioning, testing, and modification without code changes.
+**LLM Integration**:
+- Primary: Vertex AI Gemini 2.5 Flash ($0.13/$0.38 per 1M tokens)
+- Premium: Claude models for synthesis and critique
+- Multi-provider gateway via LiteLLM
+- Cost-optimized model selection based on empirical testing
 
-**Pillar 2: Research-Grade Data Assets**
-- **Principle**: Generate data artifacts that serve both computational processing and researcher analysis workflows through pure THIN architecture - LLM intelligence with software coordination only.
-- **Implementation**: LLMs perform all framework calculations directly and show their mathematical work. Multi-document synthesis achieved through intelligent batch processing: (1) Enhanced analysis agents perform calculations and generate mathematical verification, (2) Batch synthesis agents extract calculated results into research CSV format, (3) Rollup synthesis consolidates multiple CSV batches if needed, (4) Final synthesis provides statistical analysis and interpretation. No parsing pipelines, no transformation logic - pure LLM intelligence with programmatic verification of mathematical accuracy. This approach maintains complete framework agnosticism while providing researcher-ready CSV assets.
+**Current Specifications**:
+- Framework Specification v6.0 (natural language analytical approaches)
+- Experiment Specification v3.0 (multi-model research designs)
+- Corpus Specification v3.0 (text collection management)
 
-**Pillar 3: Systematic Evaluation ("Evals")**
-- **Principle**: You cannot improve what you cannot measure. Every critical prompt and model combination must be subject to a suite of automated tests to prevent quality regressions.
-- **Implementation**: We use an evaluation pipeline (e.g., using `promptfoo`) to test our agents against a "golden set" of documents. These "Evals" assert not just the structural validity of the output (is it valid JSON?), but also the semantic quality of the reasoning, often using a more powerful LLM as an impartial "judge."
+## Current Processing Pipeline
 
-### State-of-the-Art Pillars (Production-Grade Performance & Reasoning)
+**Streamlined 3-Stage Architecture**:
+1. **Analysis Stage**: Enhanced analysis agents with framework-specific prompts
+2. **Synthesis Stage**: Batch processing with mathematical verification
+3. **Reporting Stage**: Statistical analysis and academic-quality output
 
-These enhancements move the system from merely reliable to highly performant and efficient.
+**Perfect Caching**: SHA256-based content-addressable storage eliminates redundant computation on identical inputs
 
-**Pillar 4: The Router (For Cost, Speed, and Capability)** [NEEDS UPDATING]
-- **Principle**: No single LLM is best for every task. A sophisticated system routes tasks to the optimal model based on the task's complexity, cost, and speed requirements.
-- **Implementation**: An LLM-based **Router** acts as a dispatcher. A small, fast model first classifies an incoming task (e.g., "simple data extraction" vs. "complex reasoning") and then routes it to the appropriate "expert" model (e.g., `Claude Haiku` for the simple task, `Gemini 2.5 Pro` for the complex one).
+**Security Model**: 
+- Orchestrator trust boundary with agent restrictions
+- ExperimentSecurityBoundary constrains agent file access
+- Audit logging for all operations
 
-**Pillar 5: Structured Caching (For Speed and Cost Savings)**
-- **Principle**: Identical inputs should yield identical outputs, and a computation should only be paid for once.
-- **Implementation**: A **Semantic Cache** is used. Before making an LLM call, the system converts the prompt into a vector embedding and checks a vector database for a semantically similar, previously executed request. If a match is found, the cached result is returned instantly, saving both time and money. `LiteLLM` provides built-in support for this pattern.
+---
 
-**Pillar 6: Multi-Agent Collaboration (For Complex Reasoning)**
-- **Principle**: Advanced reasoning emerges from a structured debate between multiple, specialized "expert" agents.
-- **Implementation**: Complex analysis is broken down into a multi-agent workflow (e.g., using `LangGraph`). An `Analyst Agent` provides an initial analysis, a `Red Team Agent` critiques it, and a `Synthesis Agent` acts as a final arbiter to produce a more robust and balanced conclusion. The software's role is simply to orchestrate the flow of messages between these intelligent agents.
+# Part III: Evolution Roadmap (Future Vision)
 
-### Bleeding-Edge Pillars (Aspirational, Future-Facing Goals)
+This section outlines planned enhancements organized by development timeline. Features here are aspirational and may require architectural changes.
 
-These patterns represent the next generation of LLM systems, focused on self-correction and extreme efficiency.
+## Near-Term: Foundational Reliability (Next 6 Months)
 
-**Pillar 7: The "Self-Healing" System (Dynamic Fallbacks & Correctness)**
-- **Principle**: A truly resilient system anticipates and dynamically corrects its own errors and quality degradations in real-time.
-- **Implementation**: A **"Guardrails" Loop** is used. After an agent produces its output, a separate, fast, and cheap **Guardrails Agent** validates the output against a dynamic rubric. If the output fails validation, the system automatically re-runs the original agent with the corrective feedback from the Guardrails Agent, creating a self-healing loop. `Guardrails AI` is an open-source library for this pattern.
+**Enhanced Prompt Management**:
+- Complete externalization of all agent prompts to YAML files
+- Version-controlled prompt templates and systematic testing
+- Framework-agnostic prompt libraries
 
-**Pillar 8: The Cost-Performance Frontier (RAG-based Prompt Optimization)**
-- **Principle**: The cost and latency of an LLM call are dominated by prompt size. A cutting-edge system actively minimizes its prompt size before every call.
-- **Implementation**: A **Retrieval-Augmented Generation (RAG)** pipeline is used to create dynamic "few-shot" prompts. Instead of sending the entire analytical framework, the system uses a vector database to retrieve only the most semantically relevant sections of the framework and a few "golden" examples of similar analyses. This creates a much smaller, more targeted, and often higher-quality prompt, dramatically reducing cost and latency. `LlamaIndex` and `LangChain` are standard tools for this.
+**Systematic Evaluation Framework**:
+- Automated testing pipeline using promptfoo or similar
+- Golden dataset for regression testing
+- LLM-as-judge validation for semantic quality
+- Continuous integration for prompt changes
+
+**Graceful Error Recovery**:
+- Comprehensive fail-fast validation
+- Partial artifact preservation on interruption
+- Clear error messages with remediation steps
+- Retry logic for transient failures
+
+## Medium-Term: Performance Optimization (6-18 Months)
+
+**Intelligent Model Routing**:
+- Task complexity classification for optimal model selection
+- Cost-performance optimization based on request characteristics
+- Fallback chains for reliability
+
+**Enhanced Multi-Agent Patterns**:
+- Structured debate between specialized analysis agents
+- Red team / blue team validation workflows
+- Consensus mechanisms for complex reasoning tasks
+
+**Advanced Caching Strategies**:
+- Semantic similarity caching using vector embeddings
+- Prompt optimization through retrieval-augmented generation
+- Dynamic few-shot example selection
+
+*Note: These features may require revision of the "No Database Policy" to support vector storage.*
+
+## Long-Term: Autonomous Systems (18+ Months)
+
+**Self-Healing Architecture**:
+- Dynamic quality monitoring and correction
+- Automated prompt optimization based on performance metrics
+- Real-time adaptation to model capability changes
+
+**Cost-Performance Frontier**:
+- RAG-based dynamic prompt construction
+- Context window optimization
+- Predictive model selection based on task analysis
+
+**Advanced Academic Features**:
+- Automated literature integration
+- Citation networks and research lineage tracking
+- Collaborative framework development tools
 
 ---
 
@@ -258,4 +304,4 @@ These patterns represent the next generation of LLM systems, focused on self-cor
 
 ---
 
-*Last updated 2025‑01‑30 - Added Orchestrator Trust Boundary Model - Architectural Vision & Principles*
+*Last updated 2025‑01‑31 - Restructured with clear delineation between Universal Principles, Current Implementation, and Evolution Roadmap*

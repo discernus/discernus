@@ -1,38 +1,32 @@
 ---
-name: "character_ideology_evolution_hypothesis"
+name: "speaker_character_pattern_analysis"
 description: |
-  This experiment tests whether civic character patterns have systematically evolved 
-  across three American political eras AND whether conservative vs. progressive 
-  ideological affiliations interact with temporal changes using the Character 
-  Assessment Framework v6.0. The corpus creates a 2×3 factorial design: Ideology 
-  (Conservative/Progressive) × Era (Civil Rights/Institutional/Populist) spanning 
-  60 years (1963-2025). This analysis will reveal whether ideological differences 
-  in civic virtue have widened or narrowed over time, and whether populist-era 
-  rhetoric shows ideological convergence in character patterns.
+  This experiment tests the Character Assessment Framework's ability to detect 
+  meaningful differences in character patterns between individual speakers. 
+  The analysis focuses on three core objectives: speaker differentiation using 
+  the 10 CAF dimensions, identification of unique character signatures across 
+  the 5 virtues and 5 vices, and examination of MC-SCI character coherence patterns.
 
 hypothesis: |
-  Character patterns will show measurable differences across political eras and 
-  ideological affiliations. The analysis will test whether temporal evolution, 
-  ideological differentiation, or their interaction best explains variance in 
-  civic character dimensions. The MC-SCI will reveal whether character coherence 
-  patterns correlate with historical period, ideological position, or both.
+  The Character Assessment Framework will successfully differentiate between 
+  speakers using the 10 character dimensions, reveal distinct character signatures 
+  for each speaker across virtues and vices, and demonstrate meaningful variation 
+  in MC-SCI character coherence patterns.
 
-framework: "caf_v6.1_factorial.md"
+framework: "caf_v6.1.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
 runs_per_model: 1
 analysis_variant: "default"
 
-# Enhanced v3.0 Analysis Configuration
+# Analysis Configuration
 analysis:
-  evaluations_per_document: 3
-  statistical_confidence: 0.95
-  variance_threshold: 0.15
+  evaluations_per_document: 1
 
-# Comprehensive Statistical Validation  
+# Statistical Validation  
 validation:
-  required_tests: ["two_way_anova_ideology_era", "character_correlation_matrix", "mc_sci_reliability", "temporal_trend_analysis", "ideological_clustering_analysis", "interaction_effects_analysis"]
+  required_tests: ["speaker_differentiation_anova", "character_signature_analysis", "mc_sci_coherence_patterns"]
   reliability_threshold: 0.70
   effect_size_reporting: true
 
@@ -41,26 +35,21 @@ reporting:
   format: "academic"
   structure:
     - "executive_summary"
-    - "temporal_character_evolution"
-    - "ideological_character_signatures"
-    - "ideology_era_interaction_analysis"
-    - "populist_convergence_hypothesis"
-    - "character_contradiction_patterns"
-    - "factorial_design_results"
+    - "speaker_differentiation_results"
+    - "character_signature_analysis"
+    - "mc_sci_coherence_patterns"
+    - "qualitative_insights"
     - "statistical_methodology"
-    - "cross_validation_results"
+    - "framework_validation"
     - "limitations"
   show_statistical_work: true
   include_confidence_metrics: true
 
-# Multi-Hypothesis Framework
+# Core Hypothesis Framework
 hypotheses:
-  H1_Temporal: "Character dimensions will show significant main effects across the three political eras (Civil Rights, Institutional, Populist)"
-  H2_Ideological: "Character dimensions will show significant main effects between conservative and progressive speakers"
-  H3_Interaction: "Ideology×Era interaction effects will be statistically significant for at least three character dimensions"
-  H4_Coherence: "MC-SCI scores will correlate with either temporal period, ideological position, or their interaction"
-  H5_Variance: "The factorial model will explain significantly more variance than single-factor models"
-  H6_Platform_Validation: "The JSON-only synthesis architecture will successfully process 2×3 factorial design with 10-dimensional character analysis"
+  H1_Speaker_Differentiation: "The 10 CAF dimensions will show statistically significant differences between speakers"
+  H2_Character_Signatures: "Each speaker will exhibit a unique character signature across the 5 virtues and 5 vices"
+  H3_MC_SCI_Patterns: "MC-SCI scores will vary meaningfully between speakers, indicating different levels of character coherence"
 
 # Required Workflow Steps
 workflow:
@@ -80,71 +69,113 @@ workflow:
     outputs:
       - final_report.md
       - statistical_results.json
+
+# --- Definition of Success ---
+definition_of_success:
+  
+  # Technical Success Criteria
+  technical_success:
+    - "Complete pipeline execution without errors through all workflow agents"
+    - "All 8 corpus files analyzed successfully"
+    - "Generation of final_report.md and statistical_results.json artifacts"
+    - "Valid JSON output from all analysis runs conforming to CAF v6.1 schema"
+    - "Successful analysis and synthesis phases"
+  
+  # Data Quality Success Criteria
+  data_quality_success:
+    - "Each analysis contains valid character dimension scores (0.0-1.0 scale)"
+    - "All 10 CAF dimensions scored independently with confidence ratings"
+    - "Evidence quotations provided for each character dimension (minimum 1, maximum 3)"
+    - "Overall analysis confidence scores present and reasonable (>0.5 for most analyses)"
+    - "MC-SCI scores calculated and included in analysis results"
+  
+  # Statistical Reliability Success Criteria
+  statistical_reliability_success:
+    - "ANOVA results show statistically significant differences (p < 0.05) for at least 3 of 10 CAF dimensions"
+    - "Effect sizes (η²) ≥ 0.10 for significant speaker differences"
+    - "MC-SCI scores show meaningful variation across speakers (SD ≥ 0.15)"
+    - "Character signature analysis reveals distinct patterns for at least 6 of 8 speakers"
+  
+  # Framework Validation Success Criteria
+  framework_validation_success:
+    - "CAF v6.1 framework successfully processes all 8 political speeches"
+    - "Character dimensions show appropriate variance (not all clustering around 0.5)"
+    - "Virtue and vice dimensions demonstrate expected relationships"
+    - "MC-SCI calculations are mathematically consistent"
+    - "Evidence quotations genuinely support assigned character scores"
+  
+  # Academic Value Success Criteria
+  academic_value_success:
+    - "Comprehensive final report with methodology, findings, and interpretation"
+    - "Statistical analysis including ANOVA results, effect sizes, and significance testing"
+    - "Clear presentation of hypotheses H1, H2, H3 with supporting evidence"
+    - "Professional formatting with tables, charts, and statistical summaries"
+    - "Qualitative insights including profiles of highest and lowest MC-SCI scoring speeches"
+    - "Reproducible results with clear provenance and methodology documentation"
+  
+  # Minimum Viable Success Threshold
+  minimum_viable_success:
+    - "At least 7 of 8 corpus files analyzed successfully"
+    - "Statistically significant differences found for at least 2 of 10 CAF dimensions"
+    - "MC-SCI scores calculated and show variation across speakers"
+    - "Final report generated with quantitative results and basic interpretation"
+    - "Evidence that the CAF framework can differentiate between speakers"
+
 ---
 
-# The Character-Ideology Evolution Hypothesis: Civic Virtue Patterns Across American Political Eras and Ideological Lines
+# Speaker Character Pattern Analysis: Core Framework Validation
 
 ## Overview
 
-This experiment tests whether civic character patterns have systematically evolved across three American political eras AND whether conservative vs. progressive ideological affiliations interact with these temporal changes using the Character Assessment Framework v6.0. The analysis employs a sophisticated 2×3 factorial design spanning 60 years of American political discourse (1963-2025).
+This experiment provides a focused test of the Character Assessment Framework's core capabilities in detecting meaningful differences between speakers. The analysis examines three fundamental aspects: speaker differentiation using the 10 character dimensions, identification of unique character signatures, and MC-SCI character coherence patterns.
 
-## Research Questions
+## Research Objectives
 
-1. Has American political discourse become measurably less virtuous over time across ideological lines?
-2. Do conservatives and progressives exhibit distinct character signatures that persist across eras?
-3. Have ideological differences in civic virtue widened or narrowed over time?
-4. Does populist-era rhetoric show ideological convergence in character patterns?
+1. **Speaker Differentiation**: Can the 10 CAF dimensions meaningfully differentiate between speakers?
+2. **Character Signature Identification**: Do speakers exhibit unique patterns across the 5 virtues and 5 vices?
+3. **MC-SCI Analysis**: How do character coherence patterns vary between speakers?
 
 ## Methodology
 
 ### Framework
-**Character Assessment Framework v6.0** provides:
+**Character Assessment Framework v6.1-Factorial** provides:
 - 10-dimensional character analysis (5 virtues vs 5 vices)
 - Moral Character Strategic Contradiction Index (MC-SCI) for coherence measurement
 - JSON-first architecture with enhanced synthesis integration
-- Character tension mathematics for contradiction quantification
 
-### 2×3 Factorial Corpus Design
-8 political speeches creating a balanced Ideology × Era experimental matrix:
+### Corpus
+8 political speeches from diverse speakers:
+- John Lewis - March on Washington speech (1963)
+- John McCain - 2008 concession speech
+- Mitt Romney - 2020 impeachment speech  
+- Cory Booker - 2018 First Step Act speech
+- Bernie Sanders - 2025 oligarchy speech
+- Alexandria Ocasio-Cortez - 2025 oligarchy speech
+- JD Vance - 2022 NatCon conference speech
+- Steve King - 2017 House floor speech
 
-**Civil Rights Era (1963)**:
-- **Progressive**: John Lewis - March on Washington speech
+### Statistical Analysis
+1. **Speaker Differentiation Analysis**: ANOVA testing for significant differences between speakers across all 10 dimensions
+2. **Character Signature Analysis**: Identification of unique virtue/vice patterns for each speaker
+3. **MC-SCI Coherence Analysis**: Examination of character coherence variation across speakers
 
-**Institutional Era (2008-2020)**:
-- **Conservative**: John McCain - 2008 concession speech
-- **Conservative**: Mitt Romney - 2020 impeachment speech  
-- **Progressive**: Cory Booker - 2018 First Step Act speech
-
-**Populist Era (2022-2025)**:
-- **Progressive**: Bernie Sanders - 2025 oligarchy speech
-- **Progressive**: Alexandria Ocasio-Cortez - 2025 oligarchy speech
-- **Conservative**: JD Vance - 2022 NatCon conference speech
-- **Conservative**: Steve King - 2017 House floor speech
-
-**Factorial Balance**: 4 Progressive vs 4 Conservative speakers across 3 eras, enabling sophisticated interaction analysis.
-
-### Enhanced Statistical Analysis
-- **Two-way ANOVA**: Ideology × Era main effects and interaction analysis
-- **Multi-evaluation reliability**: 3 independent assessments per document (N=24 total evaluations)
-- **Ideological clustering analysis**: Character profile similarities within/across ideologies
-- **Interaction effects analysis**: Where ideology and era effects amplify or cancel
-- **MC-SCI reliability analysis**: Character coherence patterns by ideology and era
-- **Temporal trend analysis**: Linear regression of character evolution by ideological group
+### Qualitative Analysis
+1. **MC-SCI Extremes Profiling**: Detailed analysis of the speech with the highest MC-SCI score (most coherent character) and the speech with the lowest MC-SCI score (least coherent character)
+2. **Character Pattern Walkthrough**: Examination of how virtue and vice dimensions interact to produce high vs. low coherence scores
+3. **Evidence Integration**: Analysis of specific quotations and rhetorical strategies that contribute to character coherence or contradiction
 
 ### Expected Outcomes
-1. **Statistical Main Effects**: Quantified character dimension differences by ideology and era
-2. **Interaction Effect Analysis**: Evidence for or against ideology×era interaction patterns
-3. **Character Coherence Patterns**: MC-SCI correlations with experimental factors
-4. **Variance Decomposition**: Relative explanatory power of temporal vs ideological factors
-5. **Factorial Design Validation**: Comprehensive test of platform's complex statistical capabilities
+1. **Differentiation Evidence**: Statistical confirmation that speakers differ meaningfully on character dimensions
+2. **Signature Profiles**: Distinct character patterns for each speaker
+3. **Coherence Patterns**: Meaningful variation in MC-SCI scores across speakers
+4. **Qualitative Insights**: Detailed understanding of what produces high vs. low character coherence in political discourse
 
 ## Significance
 
-This experiment represents the first computational analysis of civic character patterns using factorial experimental design in American political discourse. The 2×3 factorial structure will produce empirical findings on:
+This focused experiment provides essential validation of the Character Assessment Framework's core capabilities. By concentrating on speaker-level analysis, the study will:
 
-1. **Temporal effects**: Whether character dimensions show systematic changes across political eras
-2. **Ideological effects**: Whether character dimensions differentiate conservative and progressive speakers  
-3. **Interaction effects**: Whether ideology and era interact to produce unique character patterns
-4. **Character coherence**: Whether MC-SCI patterns correlate with experimental factors
+1. **Validate Framework Sensitivity**: Demonstrate the framework's ability to capture meaningful variation
+2. **Identify Character Signatures**: Reveal distinct character profiles for different political figures
+3. **Assess Coherence Patterns**: Examine how character coherence varies between speakers
 
-The factorial design provides comprehensive validation of the platform's enhanced JSON-only synthesis capabilities while testing its ability to detect complex statistical relationships. This represents a methodological advance beyond single-factor studies, enabling rigorous analysis of multifactorial influences on civic character patterns across six decades of American political discourse. 
+The simplified design allows for rigorous testing of fundamental framework capabilities while providing clear, interpretable results. 

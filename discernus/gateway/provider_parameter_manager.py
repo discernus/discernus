@@ -80,12 +80,19 @@ class ProviderParameterManager:
         # Now, process the base parameters provided in the call
         final_params = base_params.copy()
         
-        # Remove any forbidden parameters
+        # Handle parameter mapping before forbidden parameter removal
+        parameter_mapping = clean_params.get('parameter_mapping', {})
+        for old_param, new_param in parameter_mapping.items():
+            if old_param in final_params:
+                final_params[new_param] = final_params[old_param]
+                self.logger.debug(f"Mapped parameter '{old_param}' → '{new_param}' for {model_name} (value: {final_params[old_param]})")
+
+        # Remove any forbidden parameters (after mapping)
         forbidden = clean_params.get('forbidden_params', [])
         for param in forbidden:
             if param in final_params:
                 del final_params[param]
-                self.logger.info(f"Removed forbidden parameter '{param}' for model {model_name}")
+                self.logger.debug(f"Removed forbidden parameter '{param}' for model {model_name}")
 
         # Add any required parameters that are not already present
         required = clean_params.get('required_params', {})

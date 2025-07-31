@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_1b24e2578fc3",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted following the provided framework v6.0. Focus was on identifying and scoring dimensional aspects of civic character. Evidence extraction prioritized direct quotes illustrating the assessed dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"jd_vance_2022_natcon_conference.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.75,\n          \"confidence\": 0.8\n        },\n        \"truth\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.65,\n          \"confidence\": 0.75\n        },\n        \"justice\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"hope\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.65,\n          \"confidence\": 0.8\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.55,\n          \"confidence\": 0.75\n        },\n        \"resentment\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.65\n        },\n        \"fear\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.6\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.35,\n          \"salience\": 0.45,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"But my Tory friends, I have to say, you guys have got to get, you got to get a handle on this. But neither here nor there, the reason I'm most optimistic about the future of this movement and the future of our country is because for the first time in a very long time, it is clear that the leader of the Republican party is not some donor who's desperate for cheap labor and it's not some random person who claims to speak for this or that constituency.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"primary_theme\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"forward_looking_statement\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"But we should also not let the Chinese make all of our stuff. And yet, I've, I've seen the Wall Street Journal editorial page for the last couple of years say we can indefinitely send munitions and weapons of war to Ukraine after for the past two generations abdicating that we ship our industrial base over overseas.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"policy_observation\"\n        },\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"statement_of_principle\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"But I will say on the good news, the majority of the Republican house and the majority of the Republican Senate, the most recent cycle, said no more to this, no more, right? That's a good thing, that's progress.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"political_alignment\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"And my, my wife and I, when I proposed to her, you know, we were in law school. And I said, 'Honey, I come along with $120,000 worth of law school debt and a cemetery plot in Eastern Kentucky.'\",\n          \"confidence\": 0.6,\n          \"context_type\": \"anecdotal_example\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"It is not even, it's not, it's not a correlation versus causation issue. If you actually look at the metro zone by metro zone, if you go parcel by parcel, you can see that where you have more immigration, you have higher home prices.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"analytical_claim\"\n        },\n        {\n          \"dimension\": \"fantasy\",\n          \"quote_text\": \"Let's send our entire machinery for making war to countries that hate us and then let's spend what little stockpiles that we have on a war that has no obvious end in sight.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"critical_observation_of_policy\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T04:37:07.723914+00:00",
+    "end_time": "2025-07-31T04:37:11.512910+00:00",
+    "duration_seconds": 3.788996,
+    "llm_interaction_hash": "9c278d6cc5aec254"
+  },
+  "input_artifacts": {
+    "framework_hash": "47bcd0504cd7d2dc02140eb874748a43621938eb20905e30570a650a842b9cb0",
+    "document_hashes": [
+      "9528fee13b53dcda9ddbc12d40370265424e8c39b520ce0bc5b787cc6d978fc4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T043657Z_5c67690f"
+  }
+}

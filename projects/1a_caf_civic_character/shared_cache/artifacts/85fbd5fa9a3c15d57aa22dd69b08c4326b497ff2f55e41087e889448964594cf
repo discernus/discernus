@@ -1,0 +1,102 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.1",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Character Assessment Framework v6.1. Focus was on identifying raw dimensional scores and salient evidence without performing any mathematical calculations or deriving metrics. Confidence levels reflect the clarity and directness of evidence in the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "truth": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "justice": {
+          "raw_score": 0.7,
+          "salience": 0.9,
+          "confidence": 0.85
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.6
+        },
+        "pragmatism": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "tribalism": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.4
+        },
+        "manipulation": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.5
+        },
+        "resentment": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.3
+        },
+        "fantasy": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.3
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "justice",
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, \"We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington, making cuts to the Social Security Administration, cuts to the Veterans Administration, almost destroying the Department of Education, all so that they could give over a trillion dollars in tax breaks to the wealthiest 1%.\"",
+          "confidence": 0.9,
+          "context_type": "direct assertion"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "In America today, as I think all of you know, sadly and tragically, and we've got to deal with it, we have major epidemics dealing with addiction. I think we lost a hundred thousand Americans last year because of drug overdoses. It's a serious problem in my state. We have people addicted to alcohol, serious problems with alcoholism.",
+          "confidence": 0.8,
+          "context_type": "statement of fact/observation"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "You know why the American people are angry and they are angry all over this country? They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "confidence": 0.8,
+          "context_type": "explanation of grievance"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "Abraham Lincoln talked about a government of the people, by the people, for the people. Well, Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+          "confidence": 0.7,
+          "context_type": "contrast/comparison"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "These guys have no sense of what goes on in the real world. They live in another planet. They own mansions all over the world. They go on vacations to their own private islands. When they want to go someplace, they don't go into their car. They go into the planes or the helicopters that they own. Send their kids to the best private schools and colleges. That is their world.",
+          "confidence": 0.6,
+          "context_type": "description of elite behavior"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

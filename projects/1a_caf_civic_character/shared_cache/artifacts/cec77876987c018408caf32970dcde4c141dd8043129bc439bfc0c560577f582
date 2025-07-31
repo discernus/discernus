@@ -1,0 +1,132 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis of the provided document using the Character Assessment Framework v6.1. Focus was on identifying and scoring the ten civic dimensions (virtues and vices). Confidence is high due to clear textual evidence for several dimensions. Calculations of derived metrics are intentionally omitted as per instructions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "jd_vance_2022_natcon_conference.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "truth": {
+          "raw_score": 0.4,
+          "salience": 0.6,
+          "confidence": 0.6
+        },
+        "justice": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "pragmatism": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.6
+        },
+        "tribalism": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.7
+        },
+        "manipulation": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.5
+        },
+        "resentment": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.4
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.3
+        },
+        "fantasy": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.4
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "hope",
+          "quote_text": "And I think that's what the Trump presidency will be about if we give him another shot, as I expect that we will.",
+          "confidence": 0.9,
+          "context_type": "political aspiration"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "But most importantly, it's a huge win for the American people because the American people, again, they need people who put the interests of their own citizens first, of our own citizens first.",
+          "confidence": 0.9,
+          "context_type": "nationalistic aspiration"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "The leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.",
+          "confidence": 0.8,
+          "context_type": "in-group prioritization"
+        },
+        {
+          "dimension": "tribalism",
+          "quote_text": "And I think that the fact that it's over is a huge, huge win for you guys.",
+          "confidence": 0.7,
+          "context_type": "in-group success celebration"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "America is a nation. It is a group of people with a common history and a common future.",
+          "confidence": 0.7,
+          "context_type": "national identity"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "That is my family's ancestral home before we migrated to Ohio about 60, 70 years ago.",
+          "confidence": 0.6,
+          "context_type": "personal heritage"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The 20,000 resident Delta is almost all recent Haitian immigrants.",
+          "confidence": 0.5,
+          "context_type": "associating group with negative outcome"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "But my Tory friends, I have to say, um, you guys have got to get, you got to get a handle on this.",
+          "confidence": 0.5,
+          "context_type": "exhortation and implied criticism"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "I know Ohio, of course, has had a couple of ballot referenda that have not gone the right way.",
+          "confidence": 0.5,
+          "context_type": "acknowledgment of electoral setback"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "But when my wife and I got, when I proposed to her, um, we were in law school. And I said, 'Honey, I come along with $120,000 worth of law school debt and a cemetery plot in Eastern Kentucky.'",
+          "confidence": 0.4,
+          "context_type": "exaggerated or unrealistic personal framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

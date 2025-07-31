@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_8515f46ab2cf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "speaker_character_pattern_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"caf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Character Assessment Framework v6.0. Focus on raw dimensional scores, salience, and evidence extraction as per instructions. No mathematical calculations or derived metrics were performed.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"mitt_romney_2020_impeachment.txt\",\n      \"dimensional_scores\": {\n        \"dignity\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"truth\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"justice\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"pragmatism\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"tribalism\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"manipulation\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"resentment\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.3,\n          \"confidence\": 0.75\n        },\n        \"fear\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.65\n        },\n        \"fantasy\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.25,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"dignity\",\n          \"quote_text\": \"The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"rhetorical\"\n        },\n        {\n          \"dimension\": \"truth\",\n          \"quote_text\": \"I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"personal conviction\"\n        },\n        {\n          \"dimension\": \"justice\",\n          \"quote_text\": \"The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor. Yes, he did.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"judgment\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"We've come to different conclusions, fellow senators, but I trust we have all followed the dictates of our conscience.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"shared endeavor\"\n        },\n        {\n          \"dimension\": \"pragmatism\",\n          \"quote_text\": \"My vote will likely be in the minority in the Senate. But irrespective of these things, with my vote, I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"forecasting outcome\"\n        },\n        {\n          \"dimension\": \"tribalism\",\n          \"quote_text\": \"I am aware that my verdict will not remove the president from office. The results of this Senate court will, in fact, be appealed to a higher court: the judgment of the American people.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"acknowledging political division\"\n        },\n        {\n          \"dimension\": \"manipulation\",\n          \"quote_text\": \"The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government to press it to do so.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"accusation\"\n        },\n        {\n          \"dimension\": \"resentment\",\n          \"quote_text\": \"I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt and thus remove from me the awful obligation to vote for impeachment.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"personal motive\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"I'm sure to hear abuse from the president and his supporters. Does anyone seriously believe that I would consent to these consequences other than from an inescapable conviction that my oath before God demanded it of me?\",\n          \"confidence\": 0.65,\n          \"context_type\": \"anticipating backlash\"\n        },\n        {\n          \"dimension\": \"fantasy\",\n          \"quote_text\": \"Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"hypothetical framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T04:37:17.285347+00:00",
+    "end_time": "2025-07-31T04:37:21.138105+00:00",
+    "duration_seconds": 3.852758,
+    "llm_interaction_hash": "3421c89c6f88b8f3"
+  },
+  "input_artifacts": {
+    "framework_hash": "47bcd0504cd7d2dc02140eb874748a43621938eb20905e30570a650a842b9cb0",
+    "document_hashes": [
+      "f9b2e86ae9bcdee55757a5c6caecc03225c0bb6532154c38cde5f14dc4d3cae6"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1a_caf_civic_character",
+      "experiment_root": "/Volumes/code/discernus/projects/1a_caf_civic_character",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T043657Z_5c67690f"
+  }
+}

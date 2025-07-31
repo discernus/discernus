@@ -1,0 +1,132 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "caf_v6_0",
+    "framework_version": "v6.1",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis based on the provided 'Character Assessment Framework v6.1'. Focused on extracting raw dimensional scores, salience, confidence, and supporting evidence for each dimension as per the framework's instructions. No mathematical calculations or derived metrics were performed."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "mitt_romney_2020_impeachment.txt",
+      "dimensional_scores": {
+        "dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "truth": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "justice": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.85
+        },
+        "hope": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.65
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "tribalism": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.6
+        },
+        "manipulation": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "resentment": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.55
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.25,
+          "confidence": 0.5
+        },
+        "fantasy": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "dignity",
+          "quote_text": "I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "confidence": 0.8,
+          "context_type": "oath and personal conviction"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The historical meaning of the words \"high crimes and misdemeanors\", the writings of the founders, and my own reasoned judgment convince me that a president can indeed commit acts against the public trust that are so egregious that while they are not statutory crimes, they would demand removal from office.",
+          "confidence": 0.85,
+          "context_type": "interpretation of constitutional duty"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice. I am profoundly religious. My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "confidence": 0.9,
+          "context_type": "commitment to impartial judgment"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregoius that it rises to the level of a high crime and misdemeanor. Yes, he did.",
+          "confidence": 0.8,
+          "context_type": "direct accusation of wrongdoing"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government to press it to do so. The president's purpose was personal and political.",
+          "confidence": 0.75,
+          "context_type": "allegations of quid pro quo"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The president's counsel also notes that Vice President Biden appeared to have a conflict of interest when he undertook an effort to remove the Ukrainian prosecutor general. If he knew of the exorbiant compensation his son was receiving from a company actually under investigation, the Vice President should have recused himself.",
+          "confidence": 0.7,
+          "context_type": "counter-accusation and deflection"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt and thus remove from me the awful obligation to vote for impeachment.",
+          "confidence": 0.65,
+          "context_type": "hope for alternative outcome"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "My vote will likely be in the minority in the Senate. But irrespective of these things, with my vote, I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.7,
+          "context_type": "acknowledgment of political reality and personal duty"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "confidence": 0.7,
+          "context_type": "characterization of presidential actions"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "Like each member of this deliberative body, I love our country. I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+          "confidence": 0.7,
+          "context_type": "expression of patriotism and belief in national character"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
