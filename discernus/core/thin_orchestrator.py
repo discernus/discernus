@@ -226,7 +226,7 @@ Respond with only the JSON object."""
         # Create THIN synthesis pipeline
         pipeline = self._create_thin_synthesis_pipeline(audit_logger, storage, model, debug_agent, debug_level)
         
-        # Build comprehensive experiment context for ResultsInterpreter (THIN approach)
+        # Build THIN-compliant experiment context - raw data for LLM intelligence
         experiment_context = self._build_comprehensive_experiment_context(experiment_config, framework_content, corpus_manifest)
         
         # Create pipeline request
@@ -1099,140 +1099,58 @@ Respond with only the JSON object."""
     
     def _build_comprehensive_experiment_context(self, experiment_config: Dict[str, Any], framework_content: str, corpus_manifest: Optional[Dict[str, Any]] = None) -> str:
         """
-        Build comprehensive experiment context for the ResultsInterpreter.
+        THIN-compliant experiment context building.
         
-        This provides the ResultsInterpreter with full context about:
-        - Experiment design and hypotheses
-        - Framework specifications and theoretical background
-        - Corpus composition and speaker information
-        - Research methodology and statistical approach
+        Provides LLMs with complete raw data for intelligent processing instead of 
+        brittle software parsing. Works with any framework format (CAF, sentiment, 
+        discourse analysis, etc.) by letting LLM intelligence handle extraction 
+        and formatting decisions.
+        
+        THIN Principle: Pass raw structured data to LLMs - let them decide what's 
+        important and how to format it, rather than hardcoding assumptions.
         """
-        context_parts = []
         
-        # 1. Experiment Overview
-        context_parts.append("## EXPERIMENT CONTEXT")
-        context_parts.append(f"**Experiment Name**: {experiment_config.get('name', 'Unknown')}")
-        context_parts.append(f"**Framework**: {experiment_config.get('framework', 'Unknown')}")
-        context_parts.append(f"**Corpus Path**: {experiment_config.get('corpus_path', 'Unknown')}")
-        
-        # 2. Experiment Description and Hypotheses
-        if 'description' in experiment_config:
-            context_parts.append(f"\n**Description**: {experiment_config['description']}")
-        
-        if 'hypothesis' in experiment_config:
-            context_parts.append(f"\n**Primary Hypothesis**: {experiment_config['hypothesis']}")
-        
-        # 3. Multi-Hypothesis Framework
-        if 'hypotheses' in experiment_config:
-            context_parts.append("\n**Research Hypotheses**:")
-            for key, hypothesis in experiment_config['hypotheses'].items():
-                context_parts.append(f"- **{key}**: {hypothesis}")
-        
-        # 4. Experimental Design
-        if 'validation' in experiment_config and 'required_tests' in experiment_config['validation']:
-            context_parts.append(f"\n**Required Statistical Tests**: {', '.join(experiment_config['validation']['required_tests'])}")
-        
-        # 5. Reporting Structure
-        if 'reporting' in experiment_config and 'structure' in experiment_config['reporting']:
-            context_parts.append(f"\n**Required Report Sections**: {', '.join(experiment_config['reporting']['structure'])}")
-        
-        # 6. Framework Context (extract key information)
-        context_parts.append("\n## FRAMEWORK CONTEXT")
-        
-        # Extract framework version and key concepts
-        if "Version" in framework_content:
-            version_line = [line for line in framework_content.split('\n') if "Version" in line and ":" in line][0]
-            context_parts.append(f"**Framework Version**: {version_line.split(':')[1].strip()}")
-        
-        # Extract character dimensions
-        if "Character Dimensions" in framework_content:
-            context_parts.append("\n**Character Dimensions**:")
-            lines = framework_content.split('\n')
-            in_dimensions = False
-            for line in lines:
-                if "Character Dimensions" in line:
-                    in_dimensions = True
-                    continue
-                elif in_dimensions and line.strip().startswith('#'):
-                    break
-                elif in_dimensions and line.strip() and not line.startswith('#'):
-                    context_parts.append(f"- {line.strip()}")
-        
-        # Extract key formulas
-        if "Character Tension Mathematics" in framework_content:
-            context_parts.append("\n**Key Formulas**:")
-            lines = framework_content.split('\n')
-            in_math = False
-            for line in lines:
-                if "Character Tension Mathematics" in line:
-                    in_math = True
-                    continue
-                elif in_math and line.strip().startswith('#'):
-                    break
-                elif in_math and line.strip() and not line.startswith('#'):
-                    context_parts.append(f"- {line.strip()}")
-        
-        # 7. Corpus Context (load corpus manifest if available)
+        # Load additional corpus metadata if available  
+        corpus_metadata = None
         try:
             corpus_dir = self.experiment_path / experiment_config.get('corpus_path', 'corpus')
             corpus_md_file = corpus_dir / "corpus.md"
             if corpus_md_file.exists():
                 corpus_md_content = self.security.secure_read_text(corpus_md_file)
                 
-                # Extract file manifest from corpus.md
+                # Extract manifest if present (but don't parse it - let LLM handle that)
                 if '```json' in corpus_md_content:
                     json_start = corpus_md_content.find('```json') + 7
                     json_end = corpus_md_content.find('```', json_start)
                     if json_end > json_start:
                         json_str = corpus_md_content[json_start:json_end].strip()
-                        corpus_manifest = json.loads(json_str)
-                        
-                        context_parts.append("\n## CORPUS CONTEXT")
-                        context_parts.append(f"**Total Documents**: {len(corpus_manifest.get('file_manifest', []))}")
-                        
-                        # Group by era and ideology
-                        era_groups = {}
-                        ideology_groups = {}
-                        
-                        for doc in corpus_manifest.get('file_manifest', []):
-                            era = doc.get('era', 'Unknown')
-                            ideology = doc.get('ideology', 'Unknown')
-                            speaker = doc.get('speaker', 'Unknown')
-                            
-                            if era not in era_groups:
-                                era_groups[era] = []
-                            era_groups[era].append(speaker)
-                            
-                            if ideology not in ideology_groups:
-                                ideology_groups[ideology] = []
-                            ideology_groups[ideology].append(speaker)
-                        
-                        context_parts.append("\n**Era Distribution**:")
-                        for era, speakers in era_groups.items():
-                            context_parts.append(f"- **{era}**: {', '.join(speakers)}")
-                        
-                        context_parts.append("\n**Ideology Distribution**:")
-                        for ideology, speakers in ideology_groups.items():
-                            context_parts.append(f"- **{ideology}**: {', '.join(speakers)}")
-                        
-                        # Add experimental design context
-                        if len(era_groups) > 1 and len(ideology_groups) > 1:
-                            context_parts.append(f"\n**Experimental Design**: {len(ideology_groups)}×{len(era_groups)} factorial design")
-                            context_parts.append("This enables analysis of main effects and interaction effects between ideology and era.")
-        except Exception as e:
-            context_parts.append(f"\n**Corpus Context**: Unable to load corpus manifest: {str(e)}")
+                        corpus_metadata = json.loads(json_str)
+        except Exception:
+            # Don't fail on corpus metadata errors - just pass None
+            pass
         
-        # 7. Raw Corpus Content (THIN approach)
-        context_parts.append("\n## CORPUS CONTENT")
-        if corpus_manifest:
-            context_parts.append("**Corpus Manifest**:")
-            context_parts.append("```json")
-            context_parts.append(json.dumps(corpus_manifest, indent=2))
-            context_parts.append("```")
-        else:
-            context_parts.append("**Corpus Manifest**: Not available")
+        # THIN approach: Simple data concatenation - let LLMs do the intelligent processing
+        context_sections = [
+            "## EXPERIMENT CONFIGURATION",
+            "```json",
+            json.dumps(experiment_config, indent=2),
+            "```",
+            "",
+            "## FRAMEWORK SPECIFICATION",
+            framework_content,
+            "",
+            "## CORPUS MANIFEST", 
+            "```json" if corpus_manifest else "Not available",
+            json.dumps(corpus_manifest, indent=2) if corpus_manifest else "",
+            "```" if corpus_manifest else "",
+            "",
+            "## CORPUS METADATA",
+            "```json" if corpus_metadata else "Not available", 
+            json.dumps(corpus_metadata, indent=2) if corpus_metadata else "",
+            "```" if corpus_metadata else ""
+        ]
         
-        return "\n".join(context_parts)
+        return "\n".join(filter(None, context_sections))
     
     def _load_framework(self, framework_filename: str) -> str:
         """
