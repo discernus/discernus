@@ -7,13 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Development Commands
 ```bash
 # Install dependencies
-pip install -r requirements.txt
+python3 -m pip install --user --break-system-packages -r requirements.txt
 
 # Install with development dependencies
-pip install -e ".[dev]"
+python3 -m pip install --user --break-system-packages -e ".[dev]"
 
 # Run tests
-python -m pytest discernus/tests/
+python3 -m pytest discernus/tests/
 pytest discernus/tests/
 
 # Code quality checks
@@ -42,10 +42,10 @@ make test                      # Run test suite
 ### Quick Test Commands
 ```bash
 # Run quick validation tests
-python discernus/tests/quick_test.py
+python3 discernus/tests/quick_test.py
 
 # Run comprehensive test suite
-python discernus/tests/comprehensive_test_suite.py
+python3 discernus/tests/comprehensive_test_suite.py
 
 # Run single test file
 pytest discernus/tests/test_analysis_agent.py -v
@@ -105,41 +105,3 @@ This codebase follows the "Thick LLM + Thin Software = Epistemic Trust" philosop
 
 **Specification System**:
 - V4 Framework specifications define analytical approaches in Markdown with YAML config
-- V2 Experiment specifications define models, runs, and statistical plans
-- V2 Corpus specifications define text collections with metadata
-
-**Agent Communication**:
-- Agents receive natural language prompts and return structured data (not code)
-- State flows between agents as enriched dictionaries
-- No complex JSON parsing - agents prompted to return clean, parseable responses
-
-### Testing Strategy
-
-**Test Categories**:
-- `quick_test.py` - Fast validation of core functionality
-- `comprehensive_test_suite.py` - Full system integration tests
-- `workflow_integration_tests.py` - End-to-end workflow validation
-- Mock LLM responses in `tests/fixtures/realistic_responses/`
-
-**Test Execution**:
-- Tests run independently without external LLM calls via mock responses
-- Realistic test data generation for agent validation
-- Agent isolation testing framework for individual component validation
-
-### Development Guidelines
-
-**THIN Compliance**:
-- Keep software logic minimal - delegate intelligence to LLMs
-- Avoid hardcoded prompts in orchestrator code
-- Use natural language for agent-to-agent communication
-- Prefer structured data return over code generation
-
-**Cost Management**:
-- Primary models use cost-effective Vertex AI Gemini 2.5 Flash ($0.13/$0.38 per 1M tokens)
-- Premium models (Claude) reserved for critique and synthesis
-- Transparent cost estimation in experiment planning
-
-**Debugging**:
-- Session logs capture full execution traces in `results/session_*/`
-- Conversation logs in JSONL format for LLM interaction replay
-- State snapshots saved after each workflow step for resumption

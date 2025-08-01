@@ -1,5 +1,5 @@
 # Discernus Development Makefile
-# Standardizes common operations to prevent venv confusion
+# Standardizes common operations - no venv needed!
 
 .PHONY: help check test install deps harness clean start-infra stop-infra
 
@@ -10,7 +10,7 @@ help:  ## Show this help message
 
 check:  ## Check environment setup (run this first!)
 	@echo "🔍 Checking development environment..."
-	@source venv/bin/activate && python3 scripts/check_environment.py
+	@python3 scripts/check_environment.py
 
 start-infra:  ## Start all infrastructure services (MinIO, Redis)
 	@echo "🚀 Starting infrastructure services..."
@@ -24,18 +24,16 @@ stop-infra:  ## Stop all infrastructure services
 
 test:  ## Run the test suite
 	@echo "🧪 Running tests..."
-	@source venv/bin/activate && python3 discernus/tests/quick_test.py
+	@python3 discernus/tests/quick_test.py
 
 install:  ## Set up the development environment
 	@echo "🚀 Setting up development environment..."
-	@python3 -m venv venv
-	@source venv/bin/activate && pip install --upgrade pip
-	@source venv/bin/activate && pip install -r requirements.txt
+	@python3 -m pip install --user --break-system-packages -r requirements.txt
 	@echo "✅ Environment ready! Run 'make check' to verify."
 
 deps:  ## Install/update dependencies
 	@echo "📦 Installing dependencies..."
-	@source venv/bin/activate && pip install -r requirements.txt
+	@python3 -m pip install --user --break-system-packages -r requirements.txt
 	@echo "✅ Dependencies updated!"
 
 harness:  ## Show prompt harness usage examples
@@ -45,36 +43,32 @@ harness:  ## Show prompt harness usage examples
 	@echo "  Test file:      make harness-file MODEL=<model> FILE=<file>"
 
 harness-list:  ## List available models
-	@source venv/bin/activate && python3 scripts/prompt_engineering_harness.py --list-models
+	@python3 scripts/prompt_engineering_harness.py --list-models
 
 harness-simple:  ## Test simple prompt (requires MODEL and PROMPT vars)
-	@source venv/bin/activate && python3 scripts/prompt_engineering_harness.py --model "$(MODEL)" --prompt "$(PROMPT)"
+	@python3 scripts/prompt_engineering_harness.py --model "$(MODEL)" --prompt "$(PROMPT)"
 
 harness-file:  ## Test prompt from file (requires MODEL and FILE vars)
-	@source venv/bin/activate && python3 scripts/prompt_engineering_harness.py --model "$(MODEL)" --prompt-file "$(FILE)"
+	@python3 scripts/prompt_engineering_harness.py --model "$(MODEL)" --prompt-file "$(FILE)"
 
 run:  ## Run experiment (requires EXPERIMENT var, e.g. make run EXPERIMENT=projects/simple_test)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make run EXPERIMENT=projects/your_experiment"; exit 1; fi
 	@echo "🚀 Running experiment: $(EXPERIMENT)"
-	@source venv/bin/activate && python3 -m discernus.cli run $(EXPERIMENT)
+	@python3 -m discernus.cli run $(EXPERIMENT)
 
 continue:  ## Continue experiment from artifacts (requires EXPERIMENT var)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make continue EXPERIMENT=projects/your_experiment"; exit 1; fi
 	@echo "🔄 Continuing experiment: $(EXPERIMENT)"
-	@source venv/bin/activate && python3 -m discernus.cli continue $(EXPERIMENT)
+	@python3 -m discernus.cli continue $(EXPERIMENT)
 
 debug:  ## Debug experiment (requires EXPERIMENT var)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make debug EXPERIMENT=projects/your_experiment"; exit 1; fi
 	@echo "🐛 Debugging experiment: $(EXPERIMENT)"
-	@source venv/bin/activate && python3 -m discernus.cli debug $(EXPERIMENT) --verbose
+	@python3 -m discernus.cli debug $(EXPERIMENT) --verbose
 
 clean:  ## Clean up temporary files
 	@echo "🧹 Cleaning temporary files..."
 	@find . -type f -name "*.pyc" -delete
 	@find . -type d -name "__pycache__" -exec rm -rf {} +
 	@find . -name ".DS_Store" -delete
-	@echo "✅ Cleanup complete!"
-
-# Safety check - prevent running without activated venv
-guard-%:
-	@if [ -z "$(VIRTUAL_ENV)" ]; then echo "❌ Virtual environment not activated! Run 'source venv/bin/activate' first"; exit 1; fi 
+	@echo "✅ Cleanup complete!" 
