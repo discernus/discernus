@@ -161,22 +161,31 @@ CORPUS MANIFEST:
 {json.dumps(corpus_manifest, indent=2)}
 
 VALIDATION TASK:
-Check this experiment setup against Framework Specification v7.0 requirements. Focus on:
+Validate the MECE Trinity coherence: Framework (WHY), Experiment (HOW), and Corpus (WHAT) must work together seamlessly. Focus on:
 
-1. **Framework v7.0 Compliance**: Verify framework includes required gasket_schema with target_keys and target_dimensions for Intelligent Extractor
-2. **Raw Analysis Log Output**: Confirm framework specifies raw_analysis_log format (not complex JSON structures)
-3. **Gasket Architecture**: Ensure framework follows v7.0 paradigm - Analysis Agent liberation from formatting constraints
-4. **Field Naming Consistency**: Check for mixed field names (e.g., mixing 'speech_type' and 'document_type') that would break statistical tests
-5. **Missing Elements**: Identify required files or fields per current specifications (Framework v7.0, Experiment v3.0, Corpus v3.2)
-6. **Data Quality**: Check for obvious data issues that would cause processing failures
-7. **Factual Accuracy**: Verify metadata is factually correct (considering current date: {current_date})
+**MECE TRINITY COHERENCE:**
+1. **Framework-Experiment Alignment**: Verify experiment workflow is compatible with framework's gasket architecture requirements
+2. **Framework-Corpus Alignment**: Ensure corpus structure supports framework's analytical dimensions and evidence requirements
+3. **Experiment-Corpus Alignment**: Confirm experiment parameters (models, runs, evaluations) are appropriate for corpus size and complexity
 
-FRAMEWORK SPECIFICATION v7.0 REQUIREMENTS:
-- Must include gasket_schema section with target_keys and target_dimensions arrays
-- Output contract must specify "raw_analysis_log" format
-- Analysis prompts should focus on natural language analysis, not JSON formatting
-- Version must be "v7.0"
-- Maximum 15KB character limit
+**FRAMEWORK v7.0 COMPLIANCE (WHY):**
+4. **Gasket Schema**: Framework must include gasket_schema with target_keys and target_dimensions for Intelligent Extractor
+5. **Raw Analysis Log**: Framework must specify raw_analysis_log output format (not complex JSON)
+6. **Analysis Liberation**: Framework prompts focus on intellectual analysis, not data formatting
+
+**EXPERIMENT v3.0 WORKFLOW (HOW):**
+7. **Gasket Architecture Workflow**: Experiment workflow must account for Raw Analysis Log → Intelligent Extractor → Mathematical Processing
+8. **Agent Compatibility**: Workflow agents must be compatible with gasket architecture
+
+**CORPUS v3.2 STRUCTURE (WHAT):**
+9. **Field Naming Consistency**: No mixed field names that would break statistical processing
+10. **Data Quality**: Corpus structure supports the analytical requirements
+
+**INTEGRATION VALIDATION:**
+11. **End-to-End Coherence**: The trinity forms a coherent analytical system from data through analysis to results
+12. **Factual Accuracy**: All metadata is factually correct (current date: {current_date})
+
+CRITICAL: Validate that Framework v7.0 + Experiment v3.0 + Corpus v3.2 = Coherent Analytical System
 
 RESPONSE FORMAT:
 Return a JSON object with this structure:
