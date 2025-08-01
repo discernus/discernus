@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "politic al_discours e_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis of Obama's 2014 SOTU address. Focused on identifying populist and nationalist rhetoric as defined by the framework. Scores reflect the intensity and prominence of these themes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.55,
+          "salience": 0.75,
+          "confidence": 0.8
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.45,
+          "salience": 0.65,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But while our economy may be weakened and our confidence shaken, United States of America will emerge stronger than before. The weight of this crisis will not determine the destiny of this Nation. The answers to our problems don't lie beyond our reach. They exist in our laboratories and our universities, in our fields and our factories, in the imaginations of our entrepreneurs and the pride of the hardest working people on Earth.",
+          "confidence": 0.9,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Now, if we're honest with ourselves, we'll admit that for too long, we have not always met these responsibilities as a Government or as a people. I say this not to lay blame or to look backwards, but because it is only by understanding how we arrived at this moment that we'll be able to lift ourselves out of this predicament.",
+          "confidence": 0.85,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It's the job you thought you'd retire from but now have lost, the business you built your dreams upon that's now hanging by a thread, the college acceptance letter your child had to put back in the envelope.",
+          "confidence": 0.7,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We have one of the highest high school drop-out rates of any industrialized nation, and half of the students who begin college never finish.",
+          "confidence": 0.75,
+          "context_type": "national_standing"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We invented solar technology, but we're falling behind countries like Germany and Japan in producing it. New plug-in hybrids roll off our assembly lines, but they'll run on batteries made in Korea.",
+          "confidence": 0.8,
+          "context_type": "foreign_threat"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We are a nation that has seen progress amid peril and claimed opportunity from our ordeal. In the midst of Civil War, we laid railroad tracks from one coast to another that spurred commerce and industry. From the turmoil of the Industrial Revolution came a system of public high schools that prepared our citizens for a new age. And a twilight struggle for freedom led to a national of highways, an American on the Moon, and an explosion of technology that still shapes our world.",
+          "confidence": 0.9,
+          "context_type": "historical_mythology"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

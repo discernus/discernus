@@ -1,0 +1,86 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Populism v6 framework. The document was assessed for dimensions related to Populism-Pluralism and National-Patriotism."
+  },
+  "document_analyses": [
+    {
+      "document_id": "2342a5d0808e...",
+      "document_name": "Democratic_Platform_2000.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.92,
+          "salience": 0.95,
+          "confidence": 0.88
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.88,
+          "confidence": 0.80
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "When Thomas Jefferson was elected as our Party's first president in 1800, America was a young country trying to find its place in the world. Two hundred years later, Democrats gather at a moment of vast possibility to nominate Al Gore as America's next president.",
+          "confidence": 0.90,
+          "context_type": "introduction"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It will take machinate effort to make sure that we have the tools we need to compete and win in the new knowledge-based, global economy.",
+          "confidence": 0.85,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "What America needs is public schools that compete with one another and are held accountable for results, not private school vouchers that would offer too few dollars to too few children to escape their failing schools.",
+          "confidence": 0.92,
+          "context_type": "accountability_in_education"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Democrats believe in a society where everyone, regardless of income, background, or ability, has the opportunity to succeed and to live the American dream.",
+          "confidence": 0.95,
+          "context_type": "inclusive_democracy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Today, America finds itself in the midst of prosperity, progress, and peace. We have arrived at this moment because of the hard work of the American people.",
+          "confidence": 0.90,
+          "context_type": "national_achievement"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America's future did not always seem so bright. Under the Bush-Quayle Administration, the American economy was floundering.",
+          "confidence": 0.80,
+          "context_type": "critique_of_past_administration"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "But in 1992, Americans elected Bill Clinton and Al Gore with a mandate to turn the American economy around and point upward toward the future.",
+          "confidence": 0.85,
+          "context_type": "historical_narrative"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Eight years later the record is clear: the longest economic expansion in American history. The most jobs ever created under a single administration. The highest real wage growth in 20 years. The highest home ownership rate ever.",
+          "confidence": 0.92,
+          "context_type": "economic_success_claims"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "That's why Al Gore is committed to making Social Security safe and secure for more than half a century by using the savings from our current unexpended prosperity to strengthen the Social Security Trust Fund in preparation for the retirement of the Baby Boom generation.",
+          "confidence": 0.88,
+          "context_type": "social_security_protection"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

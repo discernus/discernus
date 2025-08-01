@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_46873c1acbbf",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discoursem_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v6.0, focusing on Populism-Pluralism and National-Patriotism dimensions. Document 1, 'Republican_Platform_2008.pdf', was analyzed. Confidence is high due to clear rhetorical markers aligning with the framework's definitions for both dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"b34ee65a1168\",\n      \"document_name\": \"Republican_Platform_2008.pdf\",\n      \"dimensional_scores\": {\n        \"populism_plurallism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"We believe in a government that is accountable to the people, not to special interests.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"We stand for real Americans, for hard-working families, for the forgotten men and women of this country.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"The Washington establishment, with its cronyism and corruption, has failed us.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"anti_elite_language\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We believe in American exceptionalism, the idea that America is a unique nation with a special role to play in the world.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"cultural_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We stand for our values, our heritage, and our way of life.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"cultural_heritage\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America First means putting the interests of American workers and American businesses first.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"economic_nationalism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T23:21:19.438104+00:00",
+    "end_time": "2025-07-31T23:21:33.796652+00:00",
+    "duration_seconds": 14.358548,
+    "llm_interaction_hash": "a1837a52805052f2"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "b34ee65a1168419036cf032f32629f981a919e8c458167e5eea462ef3305f807"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T231812Z_e1c1d735"
+  }
+}

@@ -1,0 +1,62 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "politic_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the \"Politic_Discourse_Populism_v6\" framework. Focused on identifying populist and nationalist markers within the provided inaugural address. Confidence is high due to clear linguistic patterns aligning with the framework's definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.75,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "When our Founder's boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+          "confidence": 0.9,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My fellow Americans, you have raised your voices in an unmistakable chorus. You have cast your votes in historic numbers. And you have changed the face of Congress, the Presidency, and the political process itself. Yes, you, my fellow Americans, have forced the spring. Now we must do the work the season demands.",
+          "confidence": 0.95,
+          "context_type": "direct_democracy_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+          "confidence": 0.7,
+          "context_type": "national_figures_and_service"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We earn our livelihood in America today in peaceful competition with people all across the Earth. Profound and powerful forces are shaking and remaking our world. And the urgent question of our time is whether we can make change our friend and not our enemy.",
+          "confidence": 0.7,
+          "context_type": "economic_nationalism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The American people have summoned the change we celebrate today. You have raised your voices in an unmistakable chorus. You have cast your votes in historic numbers.",
+          "confidence": 0.8,
+          "context_type": "national_unity_and_will"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

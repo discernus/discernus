@@ -1,0 +1,124 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cff_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.98,
+    "analysis_notes": "The document is a highly populist and nationalist speech. The analysis focused on the stark contrast between the portrayal of a failing nation under a corrupt elite and the promise of a restored nation under new leadership. The scores reflect the intense and salient use of 'us vs. them' rhetoric, both internally (people vs. establishment) and externally (America vs. other countries)."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_Inaugural_2017.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "individual_dignity": {
+          "raw_score": 0.2,
+          "salience": 0.15,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "envy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "compersion": {
+          "raw_score": 0.0,
+          "salience": 0.05,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 1.0
+        },
+        "amity": {
+          "raw_score": 0.35,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 1.0
+        },
+        "cohesive_goals": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "From this day forward, a new vision will govern our land. From this day forward, it’s going to be only America first. America first.",
+          "confidence": 1.0,
+          "context_type": "central_thesis"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Mothers and children trapped in poverty in our inner cities; rusted-out factories scattered like tombstones across the landscape of our Nation... and the crime and the gangs and the drugs that have stolen too many lives and robbed our country of so much unrealized potential. This American carnage stops right here and stops right now.",
+          "confidence": 1.0,
+          "context_type": "problem_framing"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "We've made other countries rich while the wealth, strength, and confidence of our country has dissipated over the horizon.",
+          "confidence": 1.0,
+          "context_type": "grievance_articulation"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "For too long, a small group in our Nation’s Capital has reaped the rewards of Government while the people have borne the cost. Washington flourished, but the people did not share in its wealth.",
+          "confidence": 1.0,
+          "context_type": "antagonist_identification"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "we are transferring power from Washington, DC, and giving it back to you, the people.",
+          "confidence": 1.0,
+          "context_type": "stated_objective"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "America will start winning again, winning like never before. We will bring back our jobs. We will bring back our borders. We will bring back our wealth. And we will bring back our dreams.",
+          "confidence": 1.0,
+          "context_type": "aspirational_vision"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "At the bedrock of our politics will be a total allegiance to the United States of America, and through our loyalty to our country, we will rediscover our loyalty to each other. When you open your heart to patriotism, there is no room for prejudice.",
+          "confidence": 0.95,
+          "context_type": "call_for_unity"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "We will seek friendship and good will with the nations of the world, but we do so with the understanding that it is the right of all nations to put their own interests first.",
+          "confidence": 0.9,
+          "context_type": "qualified_statement_of_intent"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "whether a child is born in the urban sprawl of Detroit or the windswept plains of Nebraska, they look up at the same night sky, they fill their heart with the same dreams, and they are infused with the breath of life by the same almighty Creator.",
+          "confidence": 0.9,
+          "context_type": "rhetorical_flourish"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

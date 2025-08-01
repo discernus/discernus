@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_be00846e302c",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis based on the provided framework, focusing on populist-pluralist and nationalist-patriotist dimensions. Document 1 shows strong indicators of both high populism and high nationalism, fitting the 'Ethno-Populist Discourse' classification. Confidence is high due to clear textual evidence supporting the framework's definitions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_2024.pdf\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We believe in the power of the people, the authentic voice of ordinary Americans who have been forgotten and left behind by the coastal elites and the entrenched establishment.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"This rigged system serves special interests and the swamp, not the working families who are the true heart of this nation. We will drain the swamp and restore common sense.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"anti_elite_sentiment\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America First means putting American jobs, American workers, and American sovereignty above all else. We will secure our borders, protect our heritage, and reclaim our exceptional destiny.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"national_sovereignty_claim\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We stand for the true American spirit, the values of our founding fathers, the heart and soul of this land. We will defend our culture and our way of life against foreign influence and globalist agendas.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"cultural_nationalism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T23:20:48.572133+00:00",
+    "end_time": "2025-07-31T23:21:04.079859+00:00",
+    "duration_seconds": 15.507726,
+    "llm_interaction_hash": "4de3d7d6d7b50cc1"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "83689ef6daaa798c417484a0d276d45fb0f5a86f1923ec335410b8a31da0535a"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T231812Z_e1c1d735"
+  }
+}

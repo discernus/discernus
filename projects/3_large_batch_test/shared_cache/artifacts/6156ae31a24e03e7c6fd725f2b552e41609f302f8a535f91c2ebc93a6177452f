@@ -1,0 +1,134 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted based on the provided framework, focusing on identifying populist and nationalist rhetoric. Confidence is high due to clear indicators in the text."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1999.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.60,
+          "salience": 0.70,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But in his honor, may we, too, always remember who we are, where we come from, and who sent us here.",
+          "confidence": 0.95,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "In 1992, the American people demanded that we change. A year ago I asked all of you to join me in accepting responsibility for the future of our country. We did.",
+          "confidence": 0.90,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The people who supported this economic plan should be proud of its early results, proud.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But there is more to be done. This spring I will send you one of the toughest budgets ever presented to Congress.",
+          "confidence": 0.80,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But if we want to take full advantage of the opportunities before us in the global economy, you all know we must do more.",
+          "confidence": 0.75,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My fellow Americans, the problem of violence is an American problem. It has no partisan or philosophical element. Therefore, I urge you to find ways as quickly as possible to set aside partisan differences and pass a strong, smart, tough crime bill.",
+          "confidence": 0.70,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But ultimately, the best strategy to ensure our security and to build a durable peace is to support the advance of democracy elsewhere. Democracies do not attack each other.",
+          "confidence": 0.65,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Let us not reserve the better angels of our nature only for natural disasters, leaving our deepest and most profound problems to petty political fighting. Let us instead be true to our spirit, facing facts, coming together, bringing hope, and moving forward.",
+          "confidence": 0.60,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Tonight, my fellow Americans, we are summoned to answer a question as old as the Republic itself: What is the state of our Union? It is growing stronger, but it must be stronger still.",
+          "confidence": 0.55,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our American heritage has always been to master such change, to use it to expand opportunity at home and our leadership abroad.",
+          "confidence": 0.85,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "But for too long and in too many ways, that heritage was abandoned, and our country drifted.",
+          "confidence": 0.80,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "In 1992, the American people demanded that we change.",
+          "confidence": 0.75,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "This Congress produced a budget that cut the deficit by half a trillion dollars, cut spending, and raised income taxes on only the wealthiest Americans.",
+          "confidence": 0.70,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our economic program has helped to produce the lowest core inflation rate and the lowest interest rates in 20 years.",
+          "confidence": 0.65,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The people who supported this economic plan should be proud of its early results, proud.",
+          "confidence": 0.60,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "In one year, with NAFTA, with GATT, with our efforts in Asia and the national export strategy, we did more to open world markets to American products than at any time in the last two generations.",
+          "confidence": 0.55,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "That means more jobs and rising living standards for the American people, low deficits, low inflation, low interest rates, low trade barriers, and high investments.",
+          "confidence": 0.50,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

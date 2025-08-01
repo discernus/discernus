@@ -1,0 +1,80 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Political Discourse Analysis Framework v6.0 - Populism Emergence Study",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v6.0, focusing on the dual axes of Populism-Pluralism and Nationalism-Patriotism. The framework's specific prompts for each dimension were applied, identifying key markers and themes. Evidence extraction prioritized direct quotes that strongly supported the assessed dimensional scores. Confidence levels reflect the clarity and directness of the textual evidence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2009.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.80,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.82,
+          "salience": 0.85,
+          "confidence": 0.82
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Our greatest responsibility is the active defense of the American people.",
+          "confidence": 0.85,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Americans are rising to the tasks of history, and they expect the same from us.",
+          "confidence": 0.80,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "I ask you to give lower income Americans a refundible tax credit that would allow millions to buy their own basic health insurance.",
+          "confidence": 0.75,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must defend the sanctity of marriage.",
+          "confidence": 0.70,
+          "context_type": "cultural_populism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America stands with you and the Iraqi people as you build a free and peaceful nation.",
+          "confidence": 0.90,
+          "context_type": "national_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is a nation with a mission, and that mission comes from our most basic beliefs. We have no desire to dominate, no ambitions of empire. Our aim is a democratic peace, a peace founded upon the dignity and rights of every man and woman.",
+          "confidence": 0.85,
+          "context_type": "national_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The men and women of the American military: they have taken the hardest duty. We've seen their skill and their courage in armored charges and midnight raids and lonely hours on faithful watch.",
+          "confidence": 0.80,
+          "context_type": "ethnic_identity"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The men and women of Afghanistan are building a nation that is free and proud and fighting terror, and America is honored to be their friend.",
+          "confidence": 0.80,
+          "context_type": "ethnic_identity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

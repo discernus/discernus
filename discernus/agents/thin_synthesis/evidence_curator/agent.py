@@ -285,7 +285,7 @@ class EvidenceCurator:
                             "prompt_tokens": usage_data.get("prompt_tokens", 0),
                             "completion_tokens": usage_data.get("completion_tokens", 0),
                             "attempts": metadata.get("attempts", 1),
-                            "evidence_pieces": len(evidence_pieces)
+                            "evidence_pieces": len(evidence_df)
                         }
                     )
                     cost = usage_data.get("response_cost_usd", 0.0)
@@ -328,15 +328,19 @@ class EvidenceCurator:
                 chunk_request = EvidenceCurationRequest(
                     statistical_results=request.statistical_results,
                     evidence_data=self._dataframe_to_json_bytes(chunk_df),
+                    framework_spec=request.framework_spec,  # Required parameter - pass it directly
                     max_evidence_per_finding=self.PIECES_PER_CHUNK // 5,  # Distribute across findings
                     min_confidence_threshold=request.min_confidence_threshold
                 )
-                # Copy framework_spec if it exists
-                if hasattr(request, 'framework_spec'):
-                    chunk_request.framework_spec = request.framework_spec
+                
+                # Load evidence data for this chunk
+                chunk_evidence_df = self._load_evidence_data(chunk_request.evidence_data)
+                if chunk_evidence_df is None or chunk_evidence_df.empty:
+                    self.logger.warning(f"Chunk {i+1} evidence data is empty, skipping")
+                    continue
                 
                 # Curate this chunk using standard method
-                chunk_result = self._curate_evidence_standard(chunk_request)
+                chunk_result = self._curate_evidence_standard(chunk_request, chunk_evidence_df)
                 if chunk_result.success:
                     chunk_results.append(chunk_result.curated_evidence)
                     self.logger.info(f"Chunk {i+1} produced {sum(len(evidence_list) for evidence_list in chunk_result.curated_evidence.values())} pieces")

@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "politicall_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Populism Framework v6.0. Focus on identifying populist and nationalistic rhetoric within the provided text. Scores are based on the presence and intensity of specified linguistic markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2001.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.68,
+          "salience": 0.72,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.55,
+          "salience": 0.60,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "As a new Congress gathers, all of us in the elected branches of Government share a great privilege: We've been placed in office by the votes of the people we serve.",
+          "confidence": 0.90,
+          "context_type": "populism_indicator",
+          "discourse_marker_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My message for every American who is 55 or older: Do not let anyone mislead you; for you, the Social Security system will not change in any way.",
+          "confidence": 0.85,
+          "context_type": "populism_indicator",
+          "discourse_marker_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must ensure that lower income Americans get the help they need to have dignity and peace of mind in their retirement.",
+          "confidence": 0.80,
+          "context_type": "populism_indicator",
+          "discourse_marker_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "America's prosperity requires restraining the spending appetite of the Federal Government.",
+          "confidence": 0.70,
+          "context_type": "populism_indicator",
+          "discourse_marker_type": "economic_populism"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our nation is confident and strong.",
+          "confidence": 0.80,
+          "context_type": "nationalism_indicator",
+          "discourse_marker_type": "national_strength"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America's destiny is to lead on behalf of freedom and for the cause of peace.",
+          "confidence": 0.75,
+          "context_type": "nationalism_indicator",
+          "discourse_marker_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will pass along to our children and grandchildren all the freedoms we enjoy, and chief among them is freedom from fear.",
+          "confidence": 0.70,
+          "context_type": "nationalism_indicator",
+          "discourse_marker_type": "cultural_heritage"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our nation, working with allies and friends, has also confronted the enemy abroad with measures that are determined, successful, and continuing.",
+          "confidence": 0.65,
+          "context_type": "nationalism_indicator",
+          "discourse_marker_type": "foreign_threat"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

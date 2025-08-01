@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discoursec_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of Clinton's 1997 Inaugural Address using the Populism-Pluralism framework (v6.0). The speech exhibits a mix of populist and pluralist themes, leaning towards a more pluralist stance with elements of national pride and collective responsibility. No strong indicators of overt nationalism or overt antagonism towards established institutions were found, placing it in the lower half of the horizontal axis."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_Inaugural_1997.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.45,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.40,
+          "salience": 0.75,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must keep our old democracy forever young. Guided by the ancient vision of a promised land, let us set our sights upon a land of new promise.",
+          "confidence": 0.90,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "For in this new land, education will be every citizen's most prized possession. Our schools will have the highest standards in the world, igniting the spark of possibility in the eyes of every girl and every boy.",
+          "confidence": 0.90,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It is our greatest good fortune that time and chance have put us not only at the edge of a new century, in a new millennium, but on the edge of a new prospect in human affairs, a moment that will define our course and our character for decades to come.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America became the world's mightiest industrial power, saved the world from tyranny in two World Wars and a long cold war, and time and again reached out across the globe to millions who, like us, longed for the blessings of liberty.",
+          "confidence": 0.80,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Founders understood that well and gave us a democracy strong enough to endure for centuries, flexible enough to face our common challenges and advance our common dreams in each new day.",
+          "confidence": 0.80,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our greatest responsibility is to embrace a new spirit of community for a new century. For any one of us to succeed, we must succeed as one America.",
+          "confidence": 0.75,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

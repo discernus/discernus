@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_854b32efa09e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discoursec_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the provided framework to assess populism and nationalism in the document. All scores are raw and uninterpreted. Salience reflects rhetorical prominence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_SOTU_2024.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.80,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Folks, the story of America is a story of progress and resilience, of always moving forward, of never ever giving up. It's a story unique among all nations. We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"When world leaders ask me to define America and they do, believe it or not I can define it in one word, and I mean this: possibilities. We don't think anything is beyond our capacity. Everything is a possibility.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"I want to thank my Republican friends who voted for the law. And my Republican friends who voted against it as well, but I'm still, I still get asked to fund the projects in those districts as well, but don't worry. I promise I'd be a President for all Americans. We'll fund these projects. And I'll see you at the groundbreaking.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Folks, the story of America is a story of progress and resilience, of always moving forward, of never ever giving up. It's a story unique among all nations. We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We are the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"national_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our Nation is working for more freedom, more dignity, and more peace, not just in Europe, but everywhere.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"national_supremacy\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:38:07.628102+00:00",
+    "end_time": "2025-08-01T00:38:11.105144+00:00",
+    "duration_seconds": 3.477042,
+    "llm_interaction_hash": "37021798c6fd29ca"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

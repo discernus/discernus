@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_7e8cd8b6291a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "emotional_climate_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"ecf_v6_0\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"The analyzed document is a highly charged political speech with clear and distinct emotional dimensions. The dominant themes are grievance (Envy) and threat (Fear), which are used to justify a call for revolutionary action. Hope and Amity are presented as the means and goals of this action. Compersion is almost entirely absent, reinforcing the critical tone of the speech.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"john_lewis_1963_march_on_washington.txt\",\n      \"dimensional_scores\": {\n        \"Fear\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"Hope\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.5,\n          \"confidence\": 0.9\n        },\n        \"Enmity\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"Amity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.65,\n          \"confidence\": 0.9\n        },\n        \"Envy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"Compersion\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.1,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"Envy\",\n          \"quote_text\": \"We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"statement_of_grievance\"\n        },\n        {\n          \"dimension\": \"Fear\",\n          \"quote_text\": \"Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"explicit_statement_of_threat\"\n        },\n        {\n          \"dimension\": \"Enmity\",\n          \"quote_text\": \"By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"identification_of_opponent\"\n        },\n        {\n          \"dimension\": \"Amity\",\n          \"quote_text\": \"I appeal to all of you to get in this great revolution that is sweeping this nation. Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call_to_collective_action\"\n        },\n        {\n          \"dimension\": \"Hope\",\n          \"quote_text\": \"By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"vision_of_the_future\"\n        },\n        {\n          \"dimension\": \"Compersion\",\n          \"quote_text\": \"There are exceptions, of course - we salute those - but what political leader can stand up and say, \\\"My party is the party of principles\\\"?\",\n          \"confidence\": 0.95,\n          \"context_type\": \"passing_acknowledgement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T17:34:09.375695+00:00",
+    "end_time": "2025-07-31T17:34:48.845522+00:00",
+    "duration_seconds": 39.469827,
+    "llm_interaction_hash": "44e125ae3c689c10"
+  },
+  "input_artifacts": {
+    "framework_hash": "289496d2855fca19440de1a001e024f8a4eabb4e84537fad940410c521a393f3",
+    "document_hashes": [
+      "5d90554fc13f33de69af63f31b143a6dbb25a23b12df577629756f3d1863021a"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1c_ecf_emotional_climate",
+      "experiment_root": "/Volumes/code/discernus/projects/1c_ecf_emotional_climate",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T173055Z_17b9235d"
+  }
+}

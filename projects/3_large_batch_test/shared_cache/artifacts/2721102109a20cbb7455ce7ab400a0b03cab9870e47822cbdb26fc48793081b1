@@ -1,0 +1,92 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v6.0 focusing on populism-pluralism and nationalism-patriotism axes. Confidence is high due to clear thematic indicators."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_Inaugural_1993.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must do what America does best: offer more opportunity to all and demand more responsibility from all.",
+          "confidence": 0.9,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Let us break the bad habit of expecting something for nothing from our Government or from each other. Let us all take more responsibility not only for ourselves and our families but for our communities and our country.",
+          "confidence": 0.9,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "There is nothing wrong with America that cannot be cured by what is right with America.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Our democracy must be not only the envy of the world but the engine of our own renewal.",
+          "confidence": 0.8,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We celebrate the mystery of American renewal.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "a spring reborn in the world's oldest democracy that brings forth the vision and courage to reinvent America.",
+          "confidence": 0.9,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "When our Founders boldly declared America's independence to the world and our purposes to the Almighty, they knew that America, to endure, would have to change; not change for change's sake but change to preserve America's ideals: life, liberty, the pursuit of happiness.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "On behalf of our Nation, I salute my predecessor, President Bush, for his half-century of service to America.",
+          "confidence": 0.8,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "For all Americans, we have to provide for our Nation the way a family provides for its children.",
+          "confidence": 0.9,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The American people have summoned the change we celebrate today.",
+          "confidence": 0.85,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

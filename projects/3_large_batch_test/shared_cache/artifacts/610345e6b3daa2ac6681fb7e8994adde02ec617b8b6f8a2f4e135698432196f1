@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Populism Framework v6.0. The document was analyzed for Populism-Pluralism Axis (vertical) and Nationalisim-Patriotism Axis (horizontal) dimensions. Evidence was extracted based on the framework's defined markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_1992.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We hear the anguish and the anger of the American people. We know it is directed not just at the Republican administrations that have had power, but at government itself.",
+          "confidence": 0.95,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Therefore we call for a revolution in government, to take power away from entrenched bureaucracies and narrow interests in Washington and put it back in the hands of ordinary people.",
+          "confidence": 0.9,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The Revolution of 1992 is about restoring America's economic greatness.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The last 12 years have been a nightmare of Republican irresponsibility and neglect. America's leadership is indifferent at home and uncertain in the world.",
+          "confidence": 0.8,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We need to rebuild America by investing in infrastructure, environmental technologies, defense conversion, and a national information network.",
+          "confidence": 0.75,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Party's first priority is opportunity—broad-based, non-inflationary economic growth and the opportunity that flows from it.",
+          "confidence": 0.7,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_8059896f6d4e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"The Political Discourse Analysis Framework v6.0 - Populism Emergence Study\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the specified framework, focusing on populism-pluralism and nationalism-patriotism dimensions as defined. Evidence extraction prioritized strong, direct quotes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Bush_SOTU_2008.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.90,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"To protect our country, we reorganized our Government and created the Department of Homeland Security, which is mobilizing against the threats of a new era.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"You, the Congress, have already passed all these reductions and promised them for future years. If this tax relief is good for Americans 3 or 5 or 7 years from now, it is even better for Americans today.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must also strengthen the economy by treating investors equally in our tax laws. It's fair to tax a company's profit. It is not fair to again tax the shareholder on the same profits.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Our fourth goal is to apply the compassion of America to the deepest problems of America. For so many in our country, the homeless and the fatherless, the addicted, the need is great. Yet there's power, wonder-working power, in the goodness and idealism and faith of the American people.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"populism_pluralism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"The American flag stands for more than our power and our interests. Our Founders dedicated this country to the cause of human dignity, the rights of every person, and the possibilities of every life.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Americans are a resolute people who have risen to every test of our time. Adversity has revealed the character of our country, to the world and to ourselves. America is a strong nation and honorable in the use of our strength. We exercise power with restraint, and we sacrifice for the liberty of strangers.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our Nation and the world must learn the lessons of the Korean Peninsula and not allow an even greater threat to rise up in Iraq. A brutal dictator, with a history of reckless aggression, with ties to terror groups, with great potential wealth, will not be permitted to dominate a vital region and threatened the United States.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We seek peace. We strive for peace. And sometimes peace must be defended. A future lived at the mercy of terrible threats is no peace at all. If war is forced upon us, we will fight in a just cause and by just means, sparing, in every way we can, the innocent.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"nationalism_patriotism_axis\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:38:43.055403+00:00",
+    "end_time": "2025-08-01T00:38:46.560048+00:00",
+    "duration_seconds": 3.504645,
+    "llm_interaction_hash": "6edf10519d534796"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

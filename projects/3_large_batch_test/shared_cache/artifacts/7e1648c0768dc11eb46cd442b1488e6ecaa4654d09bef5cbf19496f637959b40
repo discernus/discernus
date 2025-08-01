@@ -1,0 +1,62 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Populism v6 framework. Document analyzed for Populism-Pluralism and Nationalisms-Patriotisms axes. Focus on identifying rhetorical markers indicative of populist and nationalist sentiments. Evidence extraction prioritized direct quotes. Overall confidence is high due to clear thematic alignment with framework definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Republican_Platform_2024.pdf",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.80,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe in the wisdom of the people, not the dictates of the elites.",
+          "confidence": 0.95,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The swamp in Washington is corrupt and out of touch with the concerns of everyday Americans.",
+          "confidence": 0.90,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America First means putting our nation's interests above all others.",
+          "confidence": 0.98,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will defend our borders and our sovereignty against foreign interference.",
+          "confidence": 0.97,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our heritage is rooted in the values of our founding fathers and the American way of life.",
+          "confidence": 0.92,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

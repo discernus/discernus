@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_9be0c7e839f8",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v6.0 - Populism Emergence Study\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v6.0. Focused on identifying and scoring populism-pluralism and nationalism-patriotism dimensions based on the provided prompts and enhanced linguistic markers. Evidence extraction prioritized direct quotes supporting the identified dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1994.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.75,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.55,\n          \"confidence\": 0.70\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So tonight I issue a call to action: action by this Congress, action by our States, by our people, to prepare America for the 21st century; action to keep our economy and our democracy strong and working for all our people; action to strengthen education and harness the forces of technology and science; action to build strong families and stronger communities and a safer environment; action to keep America the world's strongest force for peace, freedom, and prosperity; and above all, action to build a more perfect Union here at home.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"direct_democracy_appeals\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"First, a national crusade for education standards, not Federal Government standards but national standards, representing what all our students must know to succeed in the knowledge economy of the 21st century.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"national_standards\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America must continue to be an unrelenting force for peace from the Middle East to Haiti, from Northern Ireland to Africa. Taking reasonable risks for peace keeps us from being drawn into far more costly conflicts later.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"national_interest\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:41:04.677041+00:00",
+    "end_time": "2025-08-01T00:41:07.547946+00:00",
+    "duration_seconds": 2.870905,
+    "llm_interaction_hash": "a1238c28f9b1796c"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "c9382b7c9e2a37f3d530f475e05df6808c214e0be25744a73db95a2adf4a0f44"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

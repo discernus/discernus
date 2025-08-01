@@ -1,0 +1,80 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "politic al_discour se_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis performed according to the provided framework, focusing on raw scores and evidence for populism and nationalism dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "trump_sotu_2017.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.80,
+          "salience": 0.85,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+          "confidence": 0.9,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We have witnessed our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fate of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+          "confidence": 0.9,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+          "confidence": 0.8,
+          "context_type": "economic_populism"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We have to repeal and replace ObamaCare with reforms that expand choice, increase access, lower costs, and at the same time provide better health care.",
+          "confidence": 0.85,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "A new national pride is sweeping across our Nation.",
+          "confidence": 0.9,
+          "context_type": "national_pride"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is friendship to all nations, to all people. We are friendship to all nations, to all people. It is a friendship that we have earned.",
+          "confidence": 0.8,
+          "context_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "What we are witnessing today is the renewal of the American spirit. Our allies will find that America is once again ready to lead. All the nations of the world, friend or foe, will find that America is strong, America is proud, and America is free.",
+          "confidence": 0.95,
+          "context_type": "national_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We have to repeal and replace ObamaCare with reforms that expand choice, increase access, lower costs, and at the same time provide better health care. Obamacare premiums nationwide have increased by double and triple digits.",
+          "confidence": 0.85,
+          "context_type": "cultural_purity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

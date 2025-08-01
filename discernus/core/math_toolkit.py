@@ -27,7 +27,28 @@ class MathToolkitError(Exception):
     pass
 
 
-def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], grouping_variable: str = None) -> Dict[str, Any]:
+def _normalize_column_reference(column_name: str, available_columns: List[str]) -> str:
+    """
+    Normalize hierarchical column references to flat column names.
+    
+    Handles LLM tendency to use JSON-style hierarchical paths like:
+    'scores.dimensions.fear.score' -> 'fear_score'
+    """
+    if 'scores.dimensions.' in column_name:
+        # Extract dimension and field from hierarchical path
+        parts = column_name.split('.')
+        if len(parts) >= 4:  # scores.dimensions.DIMENSION.FIELD
+            dimension = parts[2]
+            field = parts[3] 
+            flat_name = f"{dimension}_{field}"
+            if flat_name in available_columns:
+                return flat_name
+    
+    # Return original if no normalization needed or if normalized name doesn't exist
+    return column_name
+
+
+def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], grouping_variable: str = None, **kwargs) -> Dict[str, Any]:
     """
     Calculate descriptive statistics for specified columns.
     
@@ -40,15 +61,31 @@ def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], gro
         Dictionary containing descriptive statistics for each column
     """
     try:
+        # DEFENSIVE PARAMETER HANDLING: Handle LLM naming inconsistencies
+        # Handle both 'grouping_variable' and 'grouping_variables' parameter names
+        if 'grouping_variables' in kwargs and grouping_variable is None:
+            grouping_variable = kwargs['grouping_variables']
+        
+        # Handle case where grouping_variable is passed as a list
+        if isinstance(grouping_variable, list):
+            grouping_variable = grouping_variable[0] if grouping_variable else None
+        
+        # DEFENSIVE: Normalize hierarchical column references to flat names
+        available_columns = list(dataframe.columns)
+        normalized_columns = [_normalize_column_reference(col, available_columns) for col in columns]
+        if grouping_variable:
+            grouping_variable = _normalize_column_reference(grouping_variable, available_columns)
+            
         results = {}
         
         # Handle grouping variable (compatibility fix)
+        
         if grouping_variable and grouping_variable in dataframe.columns:
             # Group by the specified variable and calculate stats for each group
             grouped_results = {}
             for group_name, group_df in dataframe.groupby(grouping_variable):
                 group_stats = {}
-                for column in columns:
+                for column in normalized_columns:
                     if column not in group_df.columns:
                         continue
                     series = group_df[column].dropna()
@@ -69,7 +106,7 @@ def calculate_descriptive_stats(dataframe: pd.DataFrame, columns: List[str], gro
             }
         
         # Standard ungrouped statistics
-        for column in columns:
+        for column in normalized_columns:
             if column not in dataframe.columns:
                 raise MathToolkitError(f"Column '{column}' not found in DataFrame. Available columns: {list(dataframe.columns)}")
                 
@@ -252,7 +289,8 @@ def calculate_pearson_correlation(dataframe: pd.DataFrame,
 
 def perform_one_way_anova(dataframe: pd.DataFrame,
                          grouping_variable: str,
-                         dependent_variable: str) -> Dict[str, Any]:
+                         dependent_variable: str,
+                         **kwargs) -> Dict[str, Any]:
     """
     Perform one-way ANOVA to test for differences between multiple groups.
     
@@ -265,6 +303,19 @@ def perform_one_way_anova(dataframe: pd.DataFrame,
         Dictionary containing ANOVA results
     """
     try:
+        # DEFENSIVE PARAMETER HANDLING: Handle LLM naming inconsistencies
+        if 'grouping_variables' in kwargs and isinstance(kwargs['grouping_variables'], (str, list)):
+            if isinstance(kwargs['grouping_variables'], list):
+                grouping_variable = kwargs['grouping_variables'][0]
+            else:
+                grouping_variable = kwargs['grouping_variables']
+        
+        if 'dependent_variables' in kwargs and isinstance(kwargs['dependent_variables'], (str, list)):
+            if isinstance(kwargs['dependent_variables'], list):
+                dependent_variable = kwargs['dependent_variables'][0]
+            else:
+                dependent_variable = kwargs['dependent_variables']
+        
         # Validate inputs
         if grouping_variable not in dataframe.columns:
             raise MathToolkitError(f"Grouping variable '{grouping_variable}' not found in DataFrame")
@@ -320,7 +371,8 @@ def perform_one_way_anova(dataframe: pd.DataFrame,
 def perform_two_way_anova(dataframe: pd.DataFrame,
                          factor1: str,
                          factor2: str,
-                         dependent_variable: str) -> Dict[str, Any]:
+                         dependent_variable: str,
+                         **kwargs) -> Dict[str, Any]:
     """
     Perform two-way ANOVA to test for main effects and interactions.
     
@@ -334,6 +386,13 @@ def perform_two_way_anova(dataframe: pd.DataFrame,
         Dictionary containing ANOVA results
     """
     try:
+        # DEFENSIVE PARAMETER HANDLING: Handle LLM naming inconsistencies
+        if 'dependent_variables' in kwargs and isinstance(kwargs['dependent_variables'], (str, list)):
+            if isinstance(kwargs['dependent_variables'], list):
+                dependent_variable = kwargs['dependent_variables'][0]
+            else:
+                dependent_variable = kwargs['dependent_variables']
+        
         from scipy import stats
         import itertools
         

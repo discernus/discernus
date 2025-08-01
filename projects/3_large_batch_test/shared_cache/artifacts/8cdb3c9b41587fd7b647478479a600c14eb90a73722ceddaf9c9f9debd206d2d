@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_928759aab34f",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discoursee_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis applied the two-axis populism-pluralism and nationalism-patriotism framework. Document content analyzed for direct populist appeals and pluralist institutional references, as well as nationalist/patriotic claims versus civic-nationalist appeals. Confidence is high due to clear examples of each dimension, though some evidence required contextual interpretation.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"81e77038355c...\",\n      \"document_name\": \"Democratic_Platform_2016.pdf\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.30,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.55,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Our goal is to build a country that works for everyone, not just those at the top. We believe in an economy that benefits all Americans, not just the wealthy few.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct_appeal_to_the_people\",\n          \"discourse_marker_type\": \"the_people\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must reject the politics of division and embrace the politics of unity. It's time to put an end to the gridlock in Washington and work together to solve the problems facing our nation.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"unity_vs_division\",\n          \"discourse_marker_type\": \"unity_vs_division\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"It's time to put America first again. We will renegotiate trade deals that are rigged against American workers and prioritize American jobs.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"economic_nationalism\",\n          \"discourse_marker_type\": \"nationalist_claim\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We will restore respect for America on the world stage. Our foreign policy will be guided by our national interests, and we will not be afraid to stand up for ourselves.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"foreign_policy_nationalism\",\n          \"discourse_marker_type\": \"nationalist_claim\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:52:01.369464+00:00",
+    "end_time": "2025-08-01T00:52:10.872155+00:00",
+    "duration_seconds": 9.502691,
+    "llm_interaction_hash": "51bafc43b9d9d7fc"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "81e77038355ca1522d070debededd047457336fc67f669f2e1637b1b7ec6a0f3"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

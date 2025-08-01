@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_323d56dd5168",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Political Discourse Analysis Framework v6.0 - Populism Emergence Study\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"The document provided is a 404 error page, not a political platform. Therefore, no substantive analysis of populism or nationalism can be performed. The scores reflect the absence of relevant content.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_1996.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.1\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.15\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We're Sorry! We did not locate the page or resource you requested.\",\n          \"confidence\": 0.1,\n          \"context_type\": \"error_message\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"The American Presidency Project\",\n          \"confidence\": 0.15,\n          \"context_type\": \"site_title\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T23:21:06.226866+00:00",
+    "end_time": "2025-07-31T23:21:08.164615+00:00",
+    "duration_seconds": 1.937749,
+    "llm_interaction_hash": "532816364a90a27d"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "284bc95ad09d6f185720ecd20946aa08d524cd683523bf1c36ca32c5145184c4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T231812Z_e1c1d735"
+  }
+}

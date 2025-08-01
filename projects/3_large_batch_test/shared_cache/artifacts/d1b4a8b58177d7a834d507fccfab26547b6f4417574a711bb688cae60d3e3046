@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_dee296233e87",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Populism v6 framework. Focus was on identifying markers for the Populism-Pluralism axis and the Nationalism-Patriotism axis, adhering strictly to raw score and evidence extraction without calculation. Confidence is high due to clear linguistic markers present in the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_Inaugural_2021.txt\",\n      \"dimensional_scores\": {\n        \"populism_plurallism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.70,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.85,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"The people's will of the people has been heard, and the will of the people has been heeded. We've learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"We must end this uncivil war that pits red against blue, rural versus urban, conservative versus liberal. We can do this if we open our souls instead of hardening our hearts, if we show a little tolerance and humility, and if we're willing to stand in the other person's shoes, as my mom would always say, just for a moment.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"compromise_language\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"This is America's day. This is democracy's day, a day of history and hope, of renewal and resolve.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"american_greatness\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"For through storm and strife, in peace and in war, we've come so far. But we still have far to go. We'll press forward with speed and urgency, for we have much to do in this winter of peril and significant possibilities: much to repair, much to restore, much to heal, much to build, and much to gain.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"historical_mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"My fellow Americans, in the work ahead of us, we're going to need each other. We need all our strength to persevere through this dark winter. We're entering what may be the toughest and deadliest period of the virus. We must set aside politics and finally face this pandemic as one Nation. One Nation.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_unity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:35:29.315206+00:00",
+    "end_time": "2025-08-01T00:35:33.003745+00:00",
+    "duration_seconds": 3.688539,
+    "llm_interaction_hash": "39f6e01257975408"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

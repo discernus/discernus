@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourses_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourses Populism v6 framework. Focus was on identifying markers for Populism-Pluralism and Nationalism-Patriotism axes. Confidence is high due to clear thematic alignment with framework definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.85,
+          "confidence": 0.93
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people.",
+          "confidence": 0.98,
+          "context_type": "direct_quote",
+          "discourse_marker_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must be united at home to defeat our adversaries abroad. This new era of cooperation can start with finally confirming the more than 300 highly qualified nominees who are still stuck in the Senate, in some cases, years and years waiting.",
+          "confidence": 0.90,
+          "context_type": "direct_quote",
+          "discourse_marker_type": "bipartisan_cooperation"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We can make our communities safer, our families stronger, our culture richer, our faith deeper, and our middle class bigger and more prosperous than ever before.",
+          "confidence": 0.88,
+          "context_type": "direct_quote",
+          "discourse_marker_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must reject the policies of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good.",
+          "confidence": 0.85,
+          "context_type": "direct_quote",
+          "discourse_marker_type": "common_good"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "This year, America will recognize two important anniversaries that show us the majesty of America's mission and the power of American pride.",
+          "confidence": 0.95,
+          "context_type": "direct_quote",
+          "discourse_marker_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "In the 20th century, America saved freedom, transformed science, redefined the middle class, and when you get down to it, there's nothing anywhere in the world that can compete with America. Now we must boldly and bravely step into the next chapter of this great American adventure...",
+          "confidence": 0.92,
+          "context_type": "direct_quote",
+          "discourse_marker_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We must be united at home to defeat our adversaries abroad.",
+          "confidence": 0.85,
+          "context_type": "direct_quote",
+          "discourse_marker_type": "foreign_threat"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "To secure the vast areas between our ports of entry. And these agents will tell you: Where walls go up, illegal crossings go way down.",
+          "confidence": 0.80,
+          "context_type": "direct_quote",
+          "discourse_marker_type": "territorial_claims"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

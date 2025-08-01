@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_966c6af634a2",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"politic_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis of Obama's 2013 Inaugural Address using the Populism-Pluralism framework. The analysis focused on identifying markers of populism and pluralism across the provided text. Evidence extraction prioritized direct quotes that strongly exemplified the defined dimensional markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_Inaugural_2013.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.70,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.80,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"What makes us exceptional?What makes us America?is our allegiance to an idea articulated in a declaration made more than two centuries ago:We hold these truths to be self-evident, that all men are created equal; that they are endowed by their Creator with certain unalienable rights; that among these are life, liberty, and the pursuit of happiness.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"For history tells us that while these truths may be self-evident, they've never been self-executing; that while freedom is a gift from God, it must be secured by His people here on Earth.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We the people understand that our country cannot succeed when a shrinking few do very well and a growing many barely make it. We believe that America's prosperity must rest upon the broader shoulders of a rising middle class.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"For if we are truly created equal, then surely the love we commit to one another must be equal as well.\",\n          \"confidence\": 0.93,\n          \"context_type\": \"equal_justice\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Each time we gather to inaugurate a President we bear witness to the enduring strength of our Constitution. We affirm the promise of our democracy.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"nationalism_enhancement\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"For we, the people, understand that our country can not succeed when a shrinking few do very well and a growing many barely make it. We believe that America's prosperity must rest upon the broader shoulders of a rising middle class.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"american_greatness\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"My fellow Americans, the oath I have sworn before you today, like the one received by others who serve in this Capitol, was an oath to God and country, not party or faction.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"nationalism_enhancement\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America will remain the anchor of strong alliances in every corner of the globe. And we will renew those institutions that extend our capacity to manage crises abroad, for no one has a greater stake in a peaceful world than its most powerful nation.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"exceptional_nation\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:41:41.233770+00:00",
+    "end_time": "2025-08-01T00:41:44.513779+00:00",
+    "duration_seconds": 3.280009,
+    "llm_interaction_hash": "0171561c5b840dac"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "9ba17ea1d68b1877e211b35baec8b608d144365a663f14bd948e7c71e86d5fb5"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

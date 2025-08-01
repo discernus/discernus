@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_3f4dae3666cc",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.75,\n    \"analysis_notes\": \"Analysis conducted based on the provided framework, focusing on identifying populist and nationalist rhetoric within the document. The document content, however, did not contain sufficient relevant text for a comprehensive analysis. The platform returned a 404 error page, indicating the target document was not found. Therefore, dimensional scores are low, reflecting the absence of the analyzed content.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_1992.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.5\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.5\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We're Sorry! We did not locate the page or resource you requested. If you landed on this page from a bookmark (probably including the expression \\\"pid=\\\" followed by a number) it has been populated already for you below. If the url that directed you to this site contained the pid number in the querystring then the number has been populated already for you below.\",\n          \"confidence\": 0.5,\n          \"context_type\": \"error_message\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"The American Presidency Project\",\n          \"confidence\": 0.4,\n          \"context_type\": \"document_title\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T23:21:04.081660+00:00",
+    "end_time": "2025-07-31T23:21:06.223992+00:00",
+    "duration_seconds": 2.142332,
+    "llm_interaction_hash": "4c04f6c810337bd9"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "7ca8b6b8b65d8f614040459316df3c06a296d9e4e77f741b1050a9ef8a14d5ba"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T231812Z_e1c1d735"
+  }
+}

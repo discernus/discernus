@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_500c2e040cf6",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"politic al_discour se_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis of Biden's inaugural address focusing on the Populism-Pluralism and Nationalism-Patriotism axes. The document exhibits strong elements of both but leans more towards a unifying, pluralistic, and nationalistic tone, rather than a purely populist or isolationist one.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Biden_Inaugural_2021.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.80,\n          \"confidence\": 0.85\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.70,\n          \"salience\": 0.90,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The people's will has been heard, and the will of the people has been heeded. We've learned again that democracy is precious, democracy is fragile. And at this hour, my friends, democracy has prevailed.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"And I ask every American to join me in this cause: uniting to fight the foes we face: anger, resentment, and hatred; extremism, lawlessness, violence; disease, joblessness, and hopelessness.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"people_versus_establishment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Let's begin to listen to one another, hear one another, see one another, show respect to one another. Politics doesn't have to be a raging fire destroying everything in its path. Every disagreement doesn't have to be a cause for total war.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"pluralistic_inclusion\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"This is America's day. This is democracy's day, a day of history and hope, of renewal and resolve.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"american_greatness\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We know we can be and we must be, I thank my predecessors of both parties for their presence here today. I thank them from the bottom of my heart.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"institutional_respect\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"But the American story depends not on any one of us, not on some of us, but on all of us, on 'We the People,' who seek a more perfect Union.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"our_people\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"And here we stand, in the shadow of the Capitol dome, as was mentioned earlier, completed amid the Civil War, when the Union itself was literally hanging in the balance. Yet we endured, we prevailed.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"historical_mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We will be a strong and trusted partner for peace, progress, and security.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"national_interest_global\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T21:54:47.335267+00:00",
+    "end_time": "2025-07-31T21:54:51.428626+00:00",
+    "duration_seconds": 4.093359,
+    "llm_interaction_hash": "670f048044ac4e55"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "e48a279a551e68306f17798c7412d305b6278f4c84bd516a1ab8005594015e8c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T215447Z_2723f536"
+  }
+}
