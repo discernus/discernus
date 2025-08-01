@@ -1,24 +1,32 @@
 ---
-name: "simple_character_validation"
+name: "simple_character_validation_v7"
 description: |
-  A minimal test experiment for validating the Discernus v6.0 architecture using 
-  the Character Assessment Framework. This experiment tests basic synthesis 
-  coordination and JSON-first processing with a 2-document ideological contrast 
-  design (Conservative vs Progressive speakers). Designed as a fast, reliable 
-  smoke test for debugging synthesis pipeline issues.
+  A minimal test experiment for validating the Discernus v7.0 gasket architecture using 
+  the Character Assessment Framework v7.0. This experiment tests MECE Trinity coherence
+  (Framework v7.0 + Experiment v7.0 + Corpus v7.0) and Raw Analysis Log processing with 
+  a 2-document ideological contrast design (Conservative vs Progressive speakers). 
+  Designed as a comprehensive smoke test for validating complete gasket architecture implementation.
 
 hypothesis: |
   Character dimensions will show measurable differences between conservative 
   and progressive speakers, validating the framework's ability to detect 
-  ideological character signatures. The MC-SCI will successfully quantify 
+  ideological character signatures through Raw Analysis Log processing. 
+  The gasket architecture will successfully extract, process, and synthesize 
   character coherence patterns across different political approaches.
 
-framework: "../../frameworks/reference/core/caf_v6.0.md"
+framework: "../../frameworks/reference/core/caf_v7.0.md"
 corpus_path: "corpus/"
 models:
   - "vertex_ai/gemini-2.5-pro"
-runs_per_model: 1
+runs_per_model: 10
 analysis_variant: "default"
+
+# 🆕 V7.0 GASKET ARCHITECTURE CONFIGURATION
+gasket_workflow:
+  validate_trinity_coherence: true
+  raw_analysis_log_processing: true
+  intelligent_extractor_enabled: true
+  parallel_streams: true
 
 # Enhanced v3.0 Analysis Configuration
 analysis:
@@ -50,7 +58,7 @@ reporting:
 hypotheses:
   H1_Ideological: "Character dimensions will show significant differences between conservative (McCain) and progressive (Sanders) speakers"
   H2_Coherence: "MC-SCI scores will successfully differentiate between gracious institutional discourse and passionate populist critique"
-  H3_Architecture: "The v6.0 JSON-first synthesis architecture will successfully process 2-document character analysis without coordination failures"
+  H3_Architecture: "The v7.0 gasket architecture will successfully process 2-document character analysis with Raw Analysis Log processing"
 
 # Required Workflow Steps
 workflow:

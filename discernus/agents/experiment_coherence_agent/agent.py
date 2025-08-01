@@ -16,9 +16,9 @@ from typing import Dict, List, Optional
 from dataclasses import dataclass
 from datetime import datetime
 
-from discernus.core.base_agent import BaseAgent
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
+from discernus.core.audit_logger import AuditLogger
 
 
 @dataclass
@@ -39,7 +39,7 @@ class ValidationResult:
     suggestions: List[str]
 
 
-class ExperimentCoherenceAgent(BaseAgent):
+class ExperimentCoherenceAgent:
     """
     Validates experiment artifacts against Discernus specifications.
     
@@ -47,14 +47,54 @@ class ExperimentCoherenceAgent(BaseAgent):
     Follows THIN architecture with externalized YAML prompts.
     """
     
-    def __init__(self, model: str = "vertex_ai/gemini-2.5-flash"):
-        super().__init__("ExperimentCoherenceAgent")
+    def __init__(self, 
+                 model: str = "vertex_ai/gemini-2.5-flash",
+                 audit_logger: Optional[AuditLogger] = None):
         self.model = model
+        self.agent_name = "ExperimentCoherenceAgent"
+        
+        # Store audit logger (optional)
+        self.audit_logger = audit_logger
+        
         model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(model_registry)
         
         # Load externalized YAML prompt template
         self.prompt_template = self._load_prompt_template()
+        
+        # Log initialization (if audit logger available)
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "initialization",
+                {
+                    "model": model,
+                    "architecture": "mece_trinity_validation",
+                    "capabilities": ["framework_validation", "experiment_validation", "corpus_validation", "trinity_coherence"]
+                }
+            )
+    
+    def _load_prompt_template(self) -> str:
+        """Load externalized YAML prompt template."""
+        import os
+        import sys
+        
+        # Find prompt.yaml in agent directory
+        agent_dir = os.path.dirname(__file__)
+        prompt_path = os.path.join(agent_dir, 'prompt.yaml')
+        
+        if not os.path.exists(prompt_path):
+            raise FileNotFoundError(f"Prompt file not found: {prompt_path}")
+        
+        # Load prompt template
+        with open(prompt_path, 'r') as f:
+            prompt_content = f.read()
+            prompt_data = yaml.safe_load(prompt_content)
+        
+        if 'template' not in prompt_data:
+            raise ValueError(f"Prompt file missing 'template' key: {prompt_path}")
+        
+        return prompt_data['template']
         
     def validate_experiment(self, experiment_path: Path) -> ValidationResult:
         """
@@ -66,16 +106,52 @@ class ExperimentCoherenceAgent(BaseAgent):
         Returns:
             ValidationResult with issues and suggestions
         """
+        # Log validation start
+        if self.audit_logger:
+            self.audit_logger.log_agent_event(
+                self.agent_name,
+                "validation_start",
+                {
+                    "experiment_path": str(experiment_path),
+                    "validation_type": "mece_trinity_coherence"
+                }
+            )
+        
         try:
             # Load experiment artifacts
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "loading_artifacts",
+                    {"status": "starting"}
+                )
+            
             experiment_spec = self._load_experiment_spec(experiment_path)
             framework_spec = self._load_framework_spec(experiment_path, experiment_spec)
             corpus_manifest = self._load_corpus_manifest(experiment_path, experiment_spec)
+            
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "artifacts_loaded",
+                    {
+                        "experiment_name": experiment_spec.get("name", "unknown"),
+                        "framework_path": experiment_spec.get("framework", "unknown"),
+                        "corpus_path": experiment_spec.get("corpus_path", "unknown")
+                    }
+                )
             
             # Create validation prompt
             validation_prompt = self._create_validation_prompt(
                 experiment_spec, framework_spec, corpus_manifest
             )
+            
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "llm_validation_start",
+                    {"model": self.model}
+                )
             
             # Get LLM validation
             response, metadata = self.llm_gateway.execute_call(
@@ -85,9 +161,35 @@ class ExperimentCoherenceAgent(BaseAgent):
             )
             
             # Parse validation result
-            return self._parse_validation_response(response)
+            result = self._parse_validation_response(response)
+            
+            # Log validation completion
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "validation_complete",
+                    {
+                        "success": result.success,
+                        "issues_count": len(result.issues),
+                        "suggestions_count": len(result.suggestions)
+                    }
+                )
+            
+            return result
             
         except Exception as e:
+            # Log validation error
+            if self.audit_logger:
+                self.audit_logger.log_agent_event(
+                    self.agent_name,
+                    "validation_error",
+                    {
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "experiment_path": str(experiment_path)
+                    }
+                )
+            
             # Return validation failure for any loading errors
             return ValidationResult(
                 success=False,
@@ -158,7 +260,7 @@ class ExperimentCoherenceAgent(BaseAgent):
         return self.prompt_template.format(
             current_date=current_date,
             experiment_spec=json.dumps(experiment_spec, indent=2),
-            framework_spec=framework_spec[:2000] + "..." if len(framework_spec) > 2000 else framework_spec,
+            framework_spec=framework_spec,
             corpus_manifest=json.dumps(corpus_manifest, indent=2)
         )
     

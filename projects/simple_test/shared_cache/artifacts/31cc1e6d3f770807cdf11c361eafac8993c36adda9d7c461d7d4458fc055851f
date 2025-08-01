@@ -1,0 +1,102 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Civic Analysis Framework (CAF)",
+    "framework_version": "v7.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the Civic Analysis Framework v7.0. The document strongly emphasizes the concentration of wealth and power in the hands of a few corporations and individuals, framing this as a detrimental force ('oligarchy'). The rhetoric directly contrasts the interests of the 'people' with those of the wealthy elite, aligning with themes of justice and resistance against perceived exploitation."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "Diginity": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "Tribalism": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.7
+        },
+        "Truth": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.75
+        },
+        "Manipulation": {
+          "raw_score": 0.5,
+          "salience": 0.55,
+          "confidence": 0.65
+        },
+        "Justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Resentment": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "Hope": {
+          "raw_score": 0.4,
+          "salience": 0.35,
+          "confidence": 0.6
+        },
+        "Fear": {
+          "raw_score": 0.3,
+          "salience": 0.25,
+          "confidence": 0.55
+        },
+        "Pragmatism": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.6
+        },
+        "Fantasy": {
+          "raw_score": 0.2,
+          "salience": 0.15,
+          "confidence": 0.5
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Diginity",
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, \"We will not accept an oligarchic form of society.\"",
+          "confidence": 0.85,
+          "context_type": "explicit_statement"
+        },
+        {
+          "dimension": "Tribalism",
+          "quote_text": "You got three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+          "confidence": 0.7,
+          "context_type": "factual_claim_group_identification"
+        },
+        {
+          "dimension": "Justice",
+          "quote_text": "What these guys are busy doing right now is going after Medica id, going after Social Security, going after nutrition. The rich want to get richer and they don't care who they step on.",
+          "confidence": 0.95,
+          "context_type": "accusation_of_injustice"
+        },
+        {
+          "dimension": "Resentment",
+          "quote_text": "Why the American people are angry and they are angry all over this country? They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+          "confidence": 0.8,
+          "context_type": " grievance_articulation"
+        },
+        {
+          "dimension": "Pragmatism",
+          "quote_text": "I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%. So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+          "confidence": 0.6,
+          "context_type": "argument_with_statistical_appeal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
