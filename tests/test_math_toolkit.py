@@ -174,12 +174,12 @@ class TestMathToolkit(unittest.TestCase):
             "experiment_summary": "Test analysis",
             "tasks": {
                 "descriptive_analysis": {
-                    "tool": "descriptive_stats",
+                    "tool": "calculate_descriptive_stats",
                     "parameters": {"columns": ["score", "confidence"]},
                     "purpose": "Calculate basic statistics"
                 },
                 "group_comparison": {
-                    "tool": "independent_t_test",
+                    "tool": "perform_independent_t_test",
                     "parameters": {
                         "grouping_variable": "group",
                         "dependent_variable": "score"

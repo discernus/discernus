@@ -28,9 +28,8 @@ gasket_workflow:
   intelligent_extractor_enabled: true
   parallel_streams: true
 
-# Enhanced v3.0 Analysis Configuration
+# Enhanced v7.0 Analysis Configuration  
 analysis:
-  evaluations_per_document: 2
   statistical_confidence: 0.95
   variance_threshold: 0.20
 
