@@ -21,8 +21,6 @@ PyYAML==6.0.1                # YAML configuration files for extensions
 # Text analysis (commonly used by LLMs)
 nltk>=3.8                  # Natural language processing
 textblob>=0.15.3           # Sentiment analysis and text processing
-textstat>=0.7.3            # Readability metrics
-tabulate>=0.9.0            # Professional ASCII table formatting
 
 # Philosophy: Discernus intentionally has minimal core dependencies
 # to reduce complexity and maintain thin software philosophy
@@ -34,7 +32,6 @@ tabulate>=0.9.0            # Professional ASCII table formatting
 # statsmodels             # Advanced statistics
 # scikit-learn            # Machine learning
 # plotly                  # Interactive visualization
-chroma-hnswlib==0.7.3
 
 # Google Cloud dependencies for Vertex AI
 google-cloud-aiplatform>=1.104.0

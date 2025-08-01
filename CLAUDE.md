@@ -21,7 +21,7 @@ black --line-length 120 discernus/
 isort --profile black --line-length 120 discernus/
 flake8 discernus/
 
-# CLI commands - Simplified Interface (v2.1)
+# CLI commands - Current Interface
 python3 -m discernus.cli run <experiment_path>       # Complete experiment (analysis + synthesis)
 python3 -m discernus.cli continue <experiment_path>  # Resume from existing artifacts
 python3 -m discernus.cli debug <experiment_path>     # Interactive debugging mode
@@ -30,6 +30,13 @@ python3 -m discernus.cli list                        # List available experiment
 python3 -m discernus.cli status                      # Infrastructure status
 python3 -m discernus.cli start                       # Start infrastructure
 python3 -m discernus.cli stop                        # Stop infrastructure
+
+# Alternative: Use Makefile commands
+make run EXPERIMENT=<path>      # Run complete experiment
+make continue EXPERIMENT=<path> # Resume from artifacts
+make debug EXPERIMENT=<path>    # Interactive debugging
+make check                     # Verify environment
+make test                      # Run test suite
 ```
 
 ### Quick Test Commands
@@ -66,7 +73,7 @@ This codebase follows the "Thick LLM + Thin Software = Epistemic Trust" philosop
 
 ### Core Components
 
-**CLI Entry Point**: `discernus_cli.py` - Main command interface with validate/execute/resume commands
+**CLI Entry Point**: `discernus/cli.py` - Main command interface with validate/execute/resume commands
 
 **Core Infrastructure** (`discernus/core/`):
 - `spec_loader.py` - Loads V4 frameworks, V2 experiments, and corpus specifications

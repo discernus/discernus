@@ -4,11 +4,24 @@
 
 ## 📚 Documentation
 
-tbd
+- **Architecture**: See `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
+- **Quick Start**: See `CURSOR_AGENT_QUICK_START.md`
+- **CLI Guide**: See `CLAUDE.md` for development commands
+- **Frameworks**: See `frameworks/` directory for analytical frameworks
+- **Specifications**: See `docs/specifications/` for technical specs
 
 ## 🚀 Quick Start
 
-tbd
+```bash
+# 1. Set up environment
+make install
+
+# 2. Verify setup
+make check
+
+# 3. Run a simple experiment
+make run EXPERIMENT=projects/simple_test
+```
 
 ## 🏗️ THIN Architecture Principles
 
@@ -32,15 +45,38 @@ tbd
 
 ## 📋 Commands
 
-tbd
+```bash
+# Core commands
+make run EXPERIMENT=<path>      # Run complete experiment
+make continue EXPERIMENT=<path> # Resume from artifacts
+make debug EXPERIMENT=<path>    # Interactive debugging
+
+# Development
+make check                     # Verify environment
+make test                      # Run test suite
+make deps                      # Update dependencies
+make clean                     # Clean temporary files
+
+# Infrastructure
+make start-infra              # Start MinIO and Redis
+make stop-infra               # Stop infrastructure services
+```
 
 ## 🛠️ Development Tools
 
-tbd
-
+- **Environment**: Python 3.13.5 with virtual environment
+- **Testing**: pytest with comprehensive test suite
+- **Code Quality**: black, isort, flake8
+- **Infrastructure**: MinIO for artifact storage, Redis for coordination
+- **LLM Gateway**: LiteLLM for multi-provider access
 
 ## 🔗 Key Resources
 
-tbd
+- **GitHub Issues**: For bug reports and feature requests
+- **Architecture Docs**: `docs/architecture/` for system design
+- **Active Projects**: `pm/active_projects/` for current development
+- **Frameworks**: `frameworks/` for analytical approaches
+- **Experiments**: `projects/` for research experiments
+
 ---
 
