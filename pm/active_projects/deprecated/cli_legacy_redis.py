@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 """
-Discernus CLI - THIN Command Line Interface
-===========================================
+DEPRECATED: Discernus CLI - Legacy Redis Command Line Interface
+==============================================================
 
-Leverages existing Redis streams infrastructure for experiment execution.
-Implements Alpha System Specification v1.0 requirements.
+⚠️  THIS FILE IS DEPRECATED AND MOVED TO pm/active_projects/deprecated/
+⚠️  DO NOT USE - Use discernus/cli.py instead
+
+This file used Redis streams infrastructure for experiment execution.
+It has been replaced by the modern CLI with direct orchestration.
+
+Current CLI: python3 -m discernus.cli run <experiment_path>
 
 Commands:
 - discernus run <experiment_path>    - Execute experiment end-to-end
