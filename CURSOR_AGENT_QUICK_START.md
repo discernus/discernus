@@ -5,14 +5,38 @@
 ## 🚀 Environment Verification (Run First!)
 
 ```bash
-# 1. Check environment setup
+# 1. Check environment setup (RECOMMENDED)
 make check
 
-# 2. Verify CLI works
+# 2. Alternative: Use safe Python wrapper
+./scripts/safe_python.sh scripts/check_environment.py
+
+# 3. Verify CLI works
 python3 -m discernus.cli list
 
-# 3. Run simple test
+# 4. Alternative: Use safe wrapper for CLI
+./scripts/safe_python.sh -m discernus.cli list
+
+# 5. Run simple test
 make run EXPERIMENT=projects/simple_test
+
+# 6. Alternative: Use safe wrapper for experiments
+make run-safe EXPERIMENT=projects/simple_test
+```
+
+## 🛡️ Safe Commands for Agents (Use These!)
+
+**Instead of direct Python commands, use these safer alternatives:**
+
+```bash
+# ❌ DON'T use these (agents get confused)
+python -m discernus.cli list  # Wrong Python command
+source venv/bin/activate      # No venv anymore
+
+# ✅ DO use these (safe for agents)
+./scripts/safe_python.sh -m discernus.cli list
+make list-safe
+make run-safe EXPERIMENT=projects/simple_test
 ```
 
 ## 📊 Project Status: 95% Complete Alpha System
@@ -33,6 +57,17 @@ rm -rf venv && python3 -m venv venv  # WASTES TIME
 
 # ✅ DO use system Python directly
 python3 -m discernus.cli run projects/simple_test  # CORRECT
+./scripts/safe_python.sh -m discernus.cli run projects/simple_test  # SAFER
+```
+
+### Python Command Confusion (Don't Do This)
+```bash
+# ❌ DON'T use 'python' - use 'python3'
+python -m discernus.cli list  # WRONG
+
+# ✅ DO use 'python3' or safe wrapper
+python3 -m discernus.cli list  # CORRECT
+./scripts/safe_python.sh -m discernus.cli list  # SAFEST
 ```
 
 ### Terminal Hanging Commands (Don't Do This)
@@ -57,6 +92,7 @@ python3 discernus/cli_legacy_redis.py run projects/simple_test  # DEPRECATED
 
 # ✅ DO use current CLI
 python3 -m discernus.cli run projects/simple_test  # CURRENT
+./scripts/safe_python.sh -m discernus.cli run projects/simple_test  # SAFEST
 ```
 
 ## 🎯 Current Mission: 3 Test Experiments + Completion Items
@@ -93,8 +129,35 @@ make start-infra
 # Clean temporary files
 make clean
 
-# Debug experiment
-make debug EXPERIMENT=projects/simple_test
+# Debug experiment (SAFE VERSIONS)
+make debug-safe EXPERIMENT=projects/simple_test
+./scripts/safe_python.sh -m discernus.cli debug projects/simple_test --verbose
+```
+
+## 🛡️ Safe Command Reference
+
+**For Agents - Use These Commands:**
+
+```bash
+# Environment checks
+make check
+./scripts/safe_python.sh scripts/check_environment.py
+
+# List experiments
+make list-safe
+./scripts/safe_python.sh -m discernus.cli list
+
+# Run experiments
+make run-safe EXPERIMENT=projects/simple_test
+./scripts/safe_python.sh -m discernus.cli run projects/simple_test
+
+# Continue experiments
+make continue-safe EXPERIMENT=projects/simple_test
+./scripts/safe_python.sh -m discernus.cli continue projects/simple_test
+
+# Debug experiments
+make debug-safe EXPERIMENT=projects/simple_test
+./scripts/safe_python.sh -m discernus.cli debug projects/simple_test --verbose
 ```
 
 ## 📚 Key Documentation
@@ -107,8 +170,8 @@ make debug EXPERIMENT=projects/simple_test
 ## 🎯 Success Pattern
 
 1. **Verify Environment**: `make check` ✅
-2. **Test CLI**: `python3 -m discernus.cli list` ✅  
-3. **Run Experiment**: `make run EXPERIMENT=projects/simple_test` ✅
+2. **Test CLI**: `make list-safe` ✅  
+3. **Run Experiment**: `make run-safe EXPERIMENT=projects/simple_test` ✅
 4. **Check Results**: Look in `projects/simple_test/runs/` ✅
 
 **You're ready to contribute!** 🚀
