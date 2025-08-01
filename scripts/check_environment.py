@@ -4,7 +4,7 @@ Environment Checker for Cursor Agents
 =====================================
 
 Quick script to verify the development environment is set up correctly.
-Helps prevent the venv confusion dance that wastes Cursor usage.
+No venv required - uses system Python with user-installed packages.
 
 Usage: python3 scripts/check_environment.py
 """
@@ -32,27 +32,17 @@ def check_environment():
     print(f"🐍 Python executable: {python_path}")
     print(f"🐍 Python version: {sys.version.split()[0]}")
     
-    # Check if we're in virtual environment
+    # Check if we're using system Python (no venv required)
     in_venv = hasattr(sys, 'real_prefix') or (
         hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix
     )
     
-    if not in_venv:
-        print("❌ NOT in virtual environment!")
-        print("🔧 Fix: Run `source venv/bin/activate` first")
-        return False
-    
-    print("✅ Virtual environment: ACTIVE")
-    
-    # Check if python executable is in project venv
-    expected_venv_path = project_root / "venv" / "bin" / "python3"
-    if not str(expected_venv_path) in python_path:
-        print(f"⚠️  WARNING: Python path doesn't match expected venv")
-        print(f"   Expected: {expected_venv_path}")
-        print(f"   Actual:   {python_path}")
-        return False
-    
-    print("✅ Python executable: Correct venv path")
+    if in_venv:
+        print("⚠️  WARNING: Running in virtual environment")
+        print("   Note: We removed venv to eliminate agent confusion")
+        print("   System Python with user packages is preferred")
+    else:
+        print("✅ Environment: System Python (no venv)")
     
     # Check key imports
     missing_packages = []
@@ -79,7 +69,7 @@ def check_environment():
     
     if missing_packages:
         print(f"❌ Missing packages: {', '.join(missing_packages)}")
-        print("🔧 Fix: Run `source venv/bin/activate && pip install -r requirements.txt`")
+        print("🔧 Fix: Run `python3 -m pip install --user --break-system-packages -r requirements.txt`")
         return False
     
     print("✅ Core packages: Available")

@@ -28,11 +28,11 @@ make run EXPERIMENT=projects/simple_test
 
 ### Environment Recreation (Don't Do This)
 ```bash
-# ❌ DON'T recreate venv - it's already set up
+# ❌ DON'T recreate venv - we removed it entirely
 rm -rf venv && python3 -m venv venv  # WASTES TIME
 
-# ✅ DO use existing environment
-source venv/bin/activate && python3  # CORRECT
+# ✅ DO use system Python directly
+python3 -m discernus.cli run projects/simple_test  # CORRECT
 ```
 
 ### Terminal Hanging Commands (Don't Do This)
@@ -74,7 +74,7 @@ python3 -m discernus.cli run projects/simple_test  # CURRENT
 ## 🛠️ Working Environment Details
 
 - **Python**: 3.13.5 (use `python3`, not `python`)
-- **Virtual Environment**: `./venv/bin/python3` (always activate first)
+- **Environment**: System Python with user-installed packages
 - **Context Window**: Gemini 2.5 Pro (2M tokens), Flash (1M tokens)
 - **Infrastructure**: MinIO (artifact storage), Redis (coordination)
 
