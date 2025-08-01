@@ -627,8 +627,10 @@ Raw Analysis Data:
     def _stage_3_curate_evidence(self, exec_response, request: ProductionPipelineRequest):
         """Stage 3: Curate evidence based on statistical results."""
         
-        # Retrieve evidence data for curation from JSON artifact
+        # Retrieve evidence data for curation using THIN pre-extracted evidence artifact
+        # This replaces the old registry scanning approach with direct artifact access
         combined_data = self.artifact_client.get_artifact(request.evidence_artifact_hash)
+        self.logger.info(f"Using pre-extracted evidence artifact: {request.evidence_artifact_hash[:12]}...")
         
         # Extract results from the two-stage structure
         # Use derived metrics results (Stage 2) for evidence curation

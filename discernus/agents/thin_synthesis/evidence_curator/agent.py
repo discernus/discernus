@@ -668,10 +668,42 @@ Return only valid JSON.
         """Load and validate evidence JSON data."""
         
         try:
-            # Parse JSON data
+            # Parse JSON data (handle both pre-extracted evidence and legacy formats)
             import json
+            import re
             json_str = evidence_data.decode('utf-8')
-            analysis_result = json.loads(json_str)
+            
+            # Check if this is pre-extracted evidence format (new THIN approach)
+            if '"evidence_metadata"' in json_str and '"evidence_data"' in json_str:
+                # Pre-extracted evidence artifact format
+                evidence_artifact = json.loads(json_str)
+                evidence_list = evidence_artifact.get('evidence_data', [])
+                evidence_metadata = evidence_artifact.get('evidence_metadata', {})
+                
+                self.logger.info(f"Pre-extracted evidence: {evidence_metadata.get('total_evidence_pieces', 0)} pieces from {evidence_metadata.get('total_documents', 0)} documents")
+                
+                # Convert pre-extracted evidence to expected format for curation
+                analysis_result = {
+                    "analysis_metadata": {
+                        "framework_name": "pre_extracted_evidence",
+                        "framework_version": evidence_metadata.get('framework_version', 'v6.0'),
+                        "analyst_confidence": 0.95,
+                        "analysis_notes": f"Using pre-extracted evidence: {evidence_metadata.get('extraction_method', 'unknown')}"
+                    },
+                    "evidence_data": evidence_list  # Direct access to evidence list
+                }
+            elif '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in json_str:
+                # Legacy delimited format (raw analysis response)
+                json_pattern = r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*({.*?})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                json_match = re.search(json_pattern, json_str, re.DOTALL)
+                if json_match:
+                    json_content = json_match.group(1).strip()
+                    analysis_result = json.loads(json_content)
+                else:
+                    raise ValueError("Could not extract JSON from delimited format")
+            else:
+                # Pure JSON format (legacy)
+                analysis_result = json.loads(json_str)
             
             # Debug: Log the structure of the analysis result
             self.logger.info(f"Analysis result keys: {list(analysis_result.keys()) if isinstance(analysis_result, dict) else 'Not a dict'}")
@@ -684,28 +716,47 @@ Return only valid JSON.
                     else:
                         self.logger.info(f"  {key}: {type(value).__name__}")
             
-            # Convert to DataFrame using same logic as synthesis pipeline
-            document_analyses = analysis_result.get('document_analyses', [])
-            
-            if not document_analyses:
-                raise ValueError("No document_analyses found in JSON")
-            
+            # Convert to DataFrame - handle both pre-extracted and legacy formats
             rows = []
-            for doc_analysis in document_analyses:
-                document_id = doc_analysis.get('document_id', '{artifact_id}')
-                evidence_list = doc_analysis.get('evidence', [])
+            
+            if 'evidence_data' in analysis_result:
+                # Pre-extracted evidence format (new THIN approach)
+                evidence_list = analysis_result.get('evidence_data', [])
+                self.logger.info(f"Processing pre-extracted evidence: {len(evidence_list)} pieces")
                 
                 for i, evidence in enumerate(evidence_list):
                     if isinstance(evidence, dict):
                         row = {
-                            'aid': document_id,
+                            'aid': evidence.get('document_name', f'doc_{i}'),
                             'dimension': evidence.get('dimension', ''),
-                            'quote_id': evidence.get('quote_id', f"quote_{i}"),
+                            'quote_id': f"quote_{i}",
                             'quote_text': evidence.get('quote_text', ''),
                             'confidence_score': evidence.get('confidence', 0.0),
                             'context_type': evidence.get('context_type', 'direct')
                         }
                         rows.append(row)
+            else:
+                # Legacy format (document_analyses structure)
+                document_analyses = analysis_result.get('document_analyses', [])
+                
+                if not document_analyses:
+                    raise ValueError("No document_analyses or evidence_data found in JSON")
+                
+                for doc_analysis in document_analyses:
+                    document_id = doc_analysis.get('document_id', '{artifact_id}')
+                    evidence_list = doc_analysis.get('evidence', [])
+                    
+                    for i, evidence in enumerate(evidence_list):
+                        if isinstance(evidence, dict):
+                            row = {
+                                'aid': document_id,
+                                'dimension': evidence.get('dimension', ''),
+                                'quote_id': evidence.get('quote_id', f"quote_{i}"),
+                                'quote_text': evidence.get('quote_text', ''),
+                                'confidence_score': evidence.get('confidence', 0.0),
+                                'context_type': evidence.get('context_type', 'direct')
+                            }
+                            rows.append(row)
             
             if not rows:
                 return pd.DataFrame(columns=['aid', 'dimension', 'quote_id', 'quote_text', 'confidence_score', 'context_type'])
