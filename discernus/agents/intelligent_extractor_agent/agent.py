@@ -174,8 +174,8 @@ class IntelligentExtractorAgent:
                     timeout=self.timeout_seconds
                 )
                 
-                # Parse extracted scores
-                extracted_scores = self._parse_extraction_response(
+                # Parse extracted scores (now returns list of documents)
+                document_analyses = self._parse_extraction_response(
                     response, gasket_schema['target_keys']
                 )
                 
@@ -183,6 +183,12 @@ class IntelligentExtractorAgent:
                 extraction_time = time.time() - start_time
                 tokens_used = metadata.get('total_tokens', 0)
                 cost_usd = metadata.get('cost', 0.0)
+                
+                # Count total extracted scores across all documents
+                total_extracted = sum(
+                    len([k for k, v in doc['analysis_scores'].items() if v is not None])
+                    for doc in document_analyses
+                )
                 
                 # Log successful extraction
                 if self.audit_logger:
@@ -194,13 +200,15 @@ class IntelligentExtractorAgent:
                             "extraction_time_seconds": extraction_time,
                             "tokens_used": tokens_used,
                             "cost_usd": cost_usd,
-                            "extracted_keys_count": len([k for k, v in extracted_scores.items() if v is not None])
+                            "documents_extracted": len(document_analyses),
+                            "total_extracted_scores": total_extracted
                         }
                     )
                 
+                # Store document analyses in the result for orchestrator processing
                 return ExtractionResult(
                     success=True,
-                    extracted_scores=extracted_scores,
+                    extracted_scores={"_document_analyses": document_analyses},  # Special key for multi-doc data
                     extraction_time_seconds=extraction_time,
                     tokens_used=tokens_used,
                     cost_usd=cost_usd,
@@ -286,17 +294,17 @@ class IntelligentExtractorAgent:
         dimensions_text = "\n".join(f"- {dim}" for dim in target_dimensions)
         keys_text = "\n".join(f"- {key}" for key in target_keys)
         
-        # Create example mapping
+        # Create example mapping content (without document_name)
         example_mapping = {}
         for i, key in enumerate(target_keys[:2]):  # Show first 2 as example
             example_mapping[key] = round(0.75 + (i * 0.1), 2)
-        example_json = json.dumps(example_mapping)
+        example_json_content = ",\n      ".join(f'"{k}": {v}' for k, v in example_mapping.items())
         
         # Use externalized template
         return self.prompt_template.format(
             dimensions_text=dimensions_text,
             keys_text=keys_text,
-            example_json=example_json,
+            example_json_content=example_json_content,
             raw_analysis_text=raw_analysis_text
         )
     
@@ -304,20 +312,17 @@ class IntelligentExtractorAgent:
         self, 
         response: str, 
         target_keys: List[str]
-    ) -> Dict[str, Optional[float]]:
+    ) -> List[Dict[str, Any]]:
         """
-        Parse LLM extraction response into structured scores.
+        Parse LLM extraction response into per-document structured scores.
         
         Args:
-            response: Raw LLM response
+            response: Raw LLM response (JSON array of documents)
             target_keys: Expected keys from gasket schema
             
         Returns:
-            Dictionary mapping target keys to extracted scores
+            List of dictionaries, one per document with document_name and scores
         """
-        # Initialize result with all keys as None
-        extracted_scores = {key: None for key in target_keys}
-        
         try:
             # Clean response - remove any markdown formatting
             cleaned_response = response.strip()
@@ -327,21 +332,42 @@ class IntelligentExtractorAgent:
                 cleaned_response = cleaned_response[:-3]
             cleaned_response = cleaned_response.strip()
             
-            # Parse JSON
+            # Parse JSON array
             parsed_data = json.loads(cleaned_response)
             
-            # Extract scores for target keys
-            for key in target_keys:
-                if key in parsed_data:
-                    value = parsed_data[key]
-                    if value is not None:
-                        # Validate score range
-                        if isinstance(value, (int, float)) and 0.0 <= value <= 1.0:
-                            extracted_scores[key] = float(value)
-                        else:
-                            self.logger.warning(f"Invalid score for {key}: {value} (must be 0.0-1.0)")
+            # Ensure it's a list
+            if not isinstance(parsed_data, list):
+                raise ValueError("Expected JSON array of documents")
             
-            return extracted_scores
+            # Process each document
+            document_analyses = []
+            for doc_data in parsed_data:
+                if not isinstance(doc_data, dict):
+                    continue
+                
+                # Extract document name
+                document_name = doc_data.get('document_name', 'unknown_document')
+                
+                # Initialize scores with all keys as None
+                extracted_scores = {key: None for key in target_keys}
+                
+                # Extract scores for target keys
+                for key in target_keys:
+                    if key in doc_data:
+                        value = doc_data[key]
+                        if value is not None:
+                            # Validate score range
+                            if isinstance(value, (int, float)) and 0.0 <= value <= 1.0:
+                                extracted_scores[key] = float(value)
+                            else:
+                                self.logger.warning(f"Invalid score for {key} in {document_name}: {value} (must be 0.0-1.0)")
+                
+                document_analyses.append({
+                    'document_name': document_name,
+                    'analysis_scores': extracted_scores
+                })
+            
+            return document_analyses
             
         except json.JSONDecodeError as e:
             self.logger.error(f"Failed to parse extraction response as JSON: {e}")

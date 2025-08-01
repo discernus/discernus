@@ -29,6 +29,7 @@ from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.intelligent_extractor_agent import IntelligentExtractorAgent
+from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
 
@@ -429,6 +430,19 @@ Respond with only the JSON object."""
                 
                 with open(results_dir / "analysis_summary.json", "w") as f:
                     json.dump(analysis_summary, f, indent=2)
+                
+                # Export CSV files for external analysis (Gasket #3a)
+                csv_export_result = self._export_csv_files(
+                    scores_hash, evidence_hash, framework_content, 
+                    experiment_config, corpus_manifest, results_dir, audit
+                )
+                
+                if csv_export_result:
+                    print(f"📊 CSV files exported:")
+                    for filename, info in csv_export_result.get('files', {}).items():
+                        print(f"   - {filename}: {info.get('records', 0)} records ({info.get('size_bytes', 0):,} bytes)")
+                else:
+                    print(f"⚠️  CSV export failed - continuing without CSV files")
                 
                 print(f"✅ Analysis completed - artifacts saved for synthesis:")
                 print(f"   - Scores: {scores_hash[:12]}...")
@@ -836,6 +850,28 @@ Respond with only the JSON object."""
             report_file = results_dir / "final_report.md"
             self.security.secure_write_text(report_file, final_report_content)
             
+            # Export comprehensive final CSV files including synthesis artifacts (Gasket #3a)
+            # Extract synthesis artifact hashes from synthesis metadata
+            # The synthesis pipeline stores artifacts but doesn't return hashes in the result
+            # We need to find the statistical results and curated evidence artifacts
+            statistical_results_hash = ""
+            curated_evidence_hash = ""
+            
+            # Check if synthesis metadata contains artifact references
+            if "statistical_results_artifact_hash" in synthesis_result:
+                statistical_results_hash = synthesis_result["statistical_results_artifact_hash"]
+            if "curated_evidence_artifact_hash" in synthesis_result:
+                curated_evidence_hash = synthesis_result["curated_evidence_artifact_hash"]
+                
+            # TODO: For now, we'll look for the most recent synthesis artifacts in the cache
+            # This is a temporary solution until the synthesis pipeline returns proper hashes
+            
+            final_csv_export_result = self._export_final_synthesis_csv_files(
+                scores_hash, evidence_hash, statistical_results_hash,
+                curated_evidence_hash, framework_content, 
+                experiment_config, corpus_manifest, synthesis_result, results_dir, audit
+            )
+            
             # Finalize manifest and audit
             manifest_file = manifest.finalize_manifest()
             audit.finalize_session()
@@ -934,16 +970,16 @@ Respond with only the JSON object."""
                 print(f"❌ Analysis failed for document {doc.get('filename')}: {e}")
                 all_analysis_results.append({"error": str(e), "document": doc.get('filename')})
 
-        # Combine all analysis results into a single artifact
-        combined_result = self._combine_analysis_results(all_analysis_results)
+        # Combine all analysis results into a single artifact AND extract evidence
+        combined_result, evidence_hash = self._combine_analysis_results(all_analysis_results, analysis_agent.storage)
         
         # Calculate framework hash for provenance tracking
         import hashlib
         framework_hash = hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
         
-        # Store the combined result and return its hash
+        # Store the combined scores result and return its hash
         # Note: We need to access storage through the analysis agent's storage
-        combined_hash = analysis_agent.storage.put_artifact(
+        scores_hash = analysis_agent.storage.put_artifact(
             json.dumps(combined_result).encode('utf-8'),
             {
                 "artifact_type": "analysis_json_v6", 
@@ -953,13 +989,25 @@ Respond with only the JSON object."""
             }
         )
         
-        return all_analysis_results, combined_hash, combined_hash
+        return all_analysis_results, scores_hash, evidence_hash
 
-    def _combine_analysis_results(self, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def _combine_analysis_results(self, analysis_results: List[Dict[str, Any]], storage) -> tuple[Dict[str, Any], str]:
         """
-        Combines multiple individual analysis results into a single combined result.
+        Combines multiple individual analysis results into a single combined result
+        AND extracts evidence into a separate pre-extracted artifact.
+        
+        This implements THIN evidence pre-extraction to avoid registry scanning
+        and multi-artifact loading during synthesis.
+        
+        Args:
+            analysis_results: List of individual analysis results
+            storage: LocalArtifactStorage instance for storing evidence artifact
+            
+        Returns:
+            tuple: (combined_scores_data, evidence_artifact_hash)
         """
         combined_document_analyses = []
+        all_evidence = []  # NEW: Collect evidence during combination
         
         for i, result in enumerate(analysis_results):
             if "error" in result:
@@ -974,6 +1022,10 @@ Respond with only the JSON object."""
                 # Extract the actual analysis data from the raw_analysis_response
                 if "raw_analysis_response" in cached_result:
                     raw_response = cached_result["raw_analysis_response"]
+                    
+                    # NEW: Extract evidence from raw response for pre-extraction
+                    document_evidence = self._extract_evidence_from_delimited(raw_response)
+                    all_evidence.extend(document_evidence)
                     
                     # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
                     # We need framework content for gasket schema extraction
@@ -999,6 +1051,10 @@ Respond with only the JSON object."""
             elif "raw_analysis_response" in result:
                 # Direct raw_analysis_response (fallback)
                 raw_response = result["raw_analysis_response"]
+                
+                # NEW: Extract evidence from raw response for pre-extraction
+                document_evidence = self._extract_evidence_from_delimited(raw_response)
+                all_evidence.extend(document_evidence)
                 
                 # Extract JSON from the delimited response
                 import re
@@ -1031,7 +1087,7 @@ Respond with only the JSON object."""
                 print(f"Warning: Unknown analysis result format for result {i}")
                 continue
         
-        # Create combined result structure
+        # Create combined scores result structure
         combined_result = {
             "analysis_metadata": {
                 "framework_name": "combined_analysis",
@@ -1042,7 +1098,33 @@ Respond with only the JSON object."""
             "document_analyses": combined_document_analyses
         }
         
-        return combined_result
+        # NEW: Create and store evidence artifact separately
+        from datetime import datetime, timezone
+        evidence_artifact = {
+            "evidence_metadata": {
+                "total_documents": len(combined_document_analyses),
+                "total_evidence_pieces": len(all_evidence),
+                "extraction_method": "pre_extraction_v1.0",
+                "extraction_time": datetime.now(timezone.utc).isoformat(),
+                "framework_version": "v6.0"
+            },
+            "evidence_data": all_evidence
+        }
+        
+        # Store evidence artifact
+        evidence_hash = storage.put_artifact(
+            json.dumps(evidence_artifact, indent=2).encode('utf-8'),
+            {
+                "artifact_type": "combined_evidence_v6",
+                "extraction_method": "pre_extraction_v1.0",
+                "total_evidence_pieces": len(all_evidence),
+                "total_documents": len(combined_document_analyses)
+            }
+        )
+        
+        print(f"📋 Evidence pre-extraction: {len(all_evidence)} pieces from {len(combined_document_analyses)} documents → {evidence_hash[:12]}...")
+        
+        return combined_result, evidence_hash
 
     def _extract_gasket_schema_from_framework(self, framework_content: str) -> Optional[Dict[str, List[str]]]:
         """
@@ -1118,29 +1200,61 @@ Respond with only the JSON object."""
             # Fallback to legacy parsing
             return self._legacy_json_parsing(raw_analysis_response)
         
-        # Convert extracted scores to document analysis format
-        document_analysis = {
-            "document_id": "extracted_via_gasket",
-            "document_name": "gasket_extraction",
-            "analysis_scores": extraction_result.extracted_scores,
-            "extraction_metadata": {
-                "extraction_time_seconds": extraction_result.extraction_time_seconds,
-                "tokens_used": extraction_result.tokens_used,
-                "cost_usd": extraction_result.cost_usd,
-                "attempts": extraction_result.attempts,
-                "gasket_version": "v7.0"
+        # Check if we have multi-document extraction results (THIN approach)
+        if "_document_analyses" in extraction_result.extracted_scores:
+            # Multi-document extraction: preserve individual document identities
+            document_analyses_data = extraction_result.extracted_scores["_document_analyses"]
+            
+            document_analyses = []
+            for doc_data in document_analyses_data:
+                document_analysis = {
+                    "document_id": "extracted_via_gasket",
+                    "document_name": doc_data["document_name"],  # Preserve actual filename
+                    "analysis_scores": doc_data["analysis_scores"],
+                    "extraction_metadata": {
+                        "extraction_time_seconds": extraction_result.extraction_time_seconds,
+                        "tokens_used": extraction_result.tokens_used,
+                        "cost_usd": extraction_result.cost_usd,
+                        "attempts": extraction_result.attempts,
+                        "gasket_version": "v7.0",
+                        "document_identity_preserved": True
+                    }
+                }
+                document_analyses.append(document_analysis)
+            
+            return {
+                "document_analyses": document_analyses,
+                "analysis_metadata": {
+                    "framework_name": "gasket_extracted",
+                    "framework_version": "v7.0",
+                    "analyst_confidence": 0.95,
+                    "analysis_notes": f"Extracted via Intelligent Extractor in {extraction_result.attempts} attempts, preserving {len(document_analyses)} document identities"
+                }
             }
-        }
-        
-        return {
-            "document_analyses": [document_analysis],
-            "analysis_metadata": {
-                "framework_name": "gasket_extracted",
-                "framework_version": "v7.0",
-                "analyst_confidence": 0.95,  # High confidence from gasket extraction
-                "analysis_notes": f"Extracted via Intelligent Extractor in {extraction_result.attempts} attempts"
+        else:
+            # Single-document extraction (fallback)
+            document_analysis = {
+                "document_id": "extracted_via_gasket",
+                "document_name": "gasket_extraction",
+                "analysis_scores": extraction_result.extracted_scores,
+                "extraction_metadata": {
+                    "extraction_time_seconds": extraction_result.extraction_time_seconds,
+                    "tokens_used": extraction_result.tokens_used,
+                    "cost_usd": extraction_result.cost_usd,
+                    "attempts": extraction_result.attempts,
+                    "gasket_version": "v7.0"
+                }
             }
-        }
+            
+            return {
+                "document_analyses": [document_analysis],
+                "analysis_metadata": {
+                    "framework_name": "gasket_extracted",
+                    "framework_version": "v7.0",
+                    "analyst_confidence": 0.95,
+                    "analysis_notes": f"Extracted via Intelligent Extractor in {extraction_result.attempts} attempts"
+                }
+            }
 
     def _legacy_json_parsing(self, raw_analysis_response: str) -> Optional[Dict[str, Any]]:
         """
@@ -1164,6 +1278,55 @@ Respond with only the JSON object."""
         else:
             print("Warning: No JSON found in legacy format")
             return None
+
+    def _extract_evidence_from_delimited(self, raw_response: str) -> List[Dict[str, Any]]:
+        """
+        Extract evidence from delimited raw analysis response for pre-extraction.
+        
+        This enables THIN evidence pre-extraction during analysis combination,
+        avoiding the need to scan registry and load multiple artifacts during synthesis.
+        
+        Args:
+            raw_response: Raw analysis response with delimited JSON format
+            
+        Returns:
+            List of evidence dictionaries with document context preserved
+        """
+        import re
+        import json
+        
+        # Extract JSON from delimited format
+        json_pattern = r'<<<DISCERNUS_ANALYSIS_JSON_v6>>>\s*({.*?})\s*<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+        json_match = re.search(json_pattern, raw_response, re.DOTALL)
+        
+        if not json_match:
+            return []
+        
+        try:
+            analysis_data = json.loads(json_match.group(1).strip())
+            document_analyses = analysis_data.get('document_analyses', [])
+            
+            evidence_list = []
+            for doc_analysis in document_analyses:
+                doc_name = doc_analysis.get('document_name', 'unknown')
+                evidence_items = doc_analysis.get('evidence', [])
+                
+                for evidence in evidence_items:
+                    evidence_list.append({
+                        "document_name": doc_name,
+                        "dimension": evidence.get('dimension'),
+                        "quote_text": evidence.get('quote_text'),
+                        "confidence": evidence.get('confidence'),
+                        "context_type": evidence.get('context_type'),
+                        # Add metadata for provenance
+                        "extraction_method": "pre_extraction_v1.0",
+                        "source_type": "raw_analysis_response"
+                    })
+            
+            return evidence_list
+        except json.JSONDecodeError as e:
+            print(f"Warning: Failed to extract evidence from delimited format: {e}")
+            return []
 
     def _combine_batch_results(self, batch_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
@@ -1551,4 +1714,177 @@ This research was conducted using the Discernus computational research platform,
 **Audit Trail**: Complete logs available in experiment run directory  
 """
         
-        return cost_section 
+        return cost_section
+    
+    def _export_final_synthesis_csv_files(
+        self,
+        scores_hash: str,
+        evidence_hash: str,
+        statistical_results_hash: str,
+        curated_evidence_hash: str,
+        framework_content: str,
+        experiment_config: Dict[str, Any],
+        corpus_manifest: Dict[str, Any],
+        synthesis_metadata: Dict[str, Any],
+        results_dir: Path,
+        audit: AuditLogger
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Export comprehensive final CSV files including synthesis artifacts (Gasket #3a).
+        
+        Args:
+            scores_hash: Hash of analysis scores artifact
+            evidence_hash: Hash of evidence artifact
+            statistical_results_hash: Hash of statistical results from synthesis
+            curated_evidence_hash: Hash of curated evidence from synthesis
+            framework_content: Framework content for context
+            experiment_config: Experiment configuration
+            corpus_manifest: Corpus metadata
+            synthesis_metadata: Complete synthesis pipeline metadata
+            results_dir: Results directory for CSV output
+            audit: Audit logger for provenance
+            
+        Returns:
+            CSV export result or None if export fails
+        """
+        try:
+            from discernus.agents.csv_export_agent import CSVExportAgent, ExportOptions
+            
+            # Initialize CSV Export Agent with storage access
+            csv_agent = CSVExportAgent(audit_logger=audit)
+            
+            # Get storage from synthesis metadata (should contain storage reference)
+            storage = None
+            if hasattr(audit, 'storage'):
+                storage = audit.storage
+            else:
+                # Fallback: recreate storage from experiment path
+                shared_cache_dir = self.experiment_path / "shared_cache"
+                storage = LocalArtifactStorage(self.security, shared_cache_dir)
+            
+            csv_agent.artifact_storage = storage
+            
+            # Configure export options
+            export_options = ExportOptions(
+                include_metadata=True,
+                export_format="standard"
+            )
+            
+            # Export comprehensive final CSV files
+            result = csv_agent.export_final_synthesis_data(
+                scores_hash=scores_hash,
+                evidence_hash=evidence_hash,
+                statistical_results_hash=statistical_results_hash,
+                curated_evidence_hash=curated_evidence_hash,
+                framework_config={"name": "framework", "version": "v7.0"},  # TODO: Extract from framework_content
+                corpus_manifest=corpus_manifest,
+                synthesis_metadata=synthesis_metadata,
+                export_path=str(results_dir),
+                export_options=export_options
+            )
+            
+            if result.success:
+                print(f"📊 Final CSV Export: {len(result.files_created)} files created")
+                for filename in result.files_created:
+                    print(f"   • {filename}")
+                
+                return {
+                    "success": True,
+                    "files": result.files_created,
+                    "total_records": result.total_records,
+                    "export_time": result.export_time_seconds
+                }
+            else:
+                print(f"⚠️  Final CSV export failed: {result.error_message}")
+                return None
+                
+        except Exception as e:
+            print(f"❌ Final CSV export error: {str(e)}")
+            audit.log_agent_event(
+                "CSVExportAgent",
+                "final_export_error",
+                {"error": str(e)}
+            )
+            return None
+    
+    def _export_csv_files(
+        self,
+        scores_hash: str,
+        evidence_hash: str,
+        framework_content: str,
+        experiment_config: Dict[str, Any],
+        corpus_manifest: Dict[str, Any],
+        results_dir: Path,
+        audit: AuditLogger
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Export CSV files for external analysis using CSV Export Agent (Gasket #3a).
+        
+        Args:
+            scores_hash: Hash of analysis scores artifact
+            evidence_hash: Hash of evidence artifact
+            framework_content: Framework content for context
+            experiment_config: Experiment configuration
+            corpus_manifest: Corpus metadata
+            results_dir: Results directory for CSV output
+            audit: Audit logger for provenance
+            
+        Returns:
+            CSV export result or None if export fails
+        """
+        try:
+            # Initialize CSV Export Agent with storage access
+            csv_agent = CSVExportAgent(audit_logger=audit)
+            
+            # Get storage from audit or recreate from experiment path
+            storage = None
+            if hasattr(audit, 'storage'):
+                storage = audit.storage
+            else:
+                # Fallback: recreate storage from experiment path
+                shared_cache_dir = self.experiment_path / "shared_cache"
+                storage = LocalArtifactStorage(self.security, shared_cache_dir)
+            
+            csv_agent.artifact_storage = storage
+            
+            # Parse framework configuration
+            framework_config = self._parse_framework_config(framework_content)
+            
+            # Export CSV files
+            export_result = csv_agent.export_mid_point_data(
+                scores_hash=scores_hash,
+                evidence_hash=evidence_hash,
+                framework_config=framework_config,
+                corpus_manifest=corpus_manifest,
+                export_path=str(results_dir)
+            )
+            
+            if export_result.success:
+                print(f"📊 CSV Export: {len(export_result.files_created)} files created")
+                for file in export_result.files_created:
+                    print(f"   • {file}")
+                return export_result.__dict__
+            else:
+                print(f"⚠️  CSV Export failed: {export_result.error_message}")
+                return None
+                
+        except Exception as e:
+            print(f"⚠️  CSV Export error: {str(e)}")
+            audit.log_error("csv_export_error", str(e), {
+                "scores_hash": scores_hash,
+                "evidence_hash": evidence_hash
+            })
+            return None
+    
+    def _parse_framework_config(self, framework_content: str) -> Dict[str, Any]:
+        """Parse framework configuration from framework content."""
+        try:
+            # Extract JSON appendix from framework markdown
+            import re
+            json_match = re.search(r'```json\s*\n(.*?)\n\s*```', framework_content, re.DOTALL)
+            if json_match:
+                return json.loads(json_match.group(1))
+            else:
+                return {"name": "unknown", "version": "unknown"}
+        except Exception:
+            return {"name": "unknown", "version": "unknown"} 

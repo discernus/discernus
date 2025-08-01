@@ -144,7 +144,8 @@ def cli():
 @click.option('--analysis-model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use for analysis (default: gemini-2.5-flash-lite)')
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
 @click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation')
-def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool):
+@click.option('--analysis-only', is_flag=True, help='Run analysis and CSV export only, skip synthesis')
+def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool, analysis_only: bool):
     """Execute complete experiment (analysis + synthesis)"""
     exp_path = Path(experiment_path)
     
@@ -188,7 +189,7 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
             click.echo(f"⚠️  Validation failed with error: {e}")
             click.echo("💡 Continuing without validation...")
     
-    execution_mode = "Complete experiment"
+    execution_mode = "Analysis + CSV export only" if analysis_only else "Complete experiment"
     
     if dry_run:
         click.echo("🧪 DRY RUN MODE - No actual execution")
@@ -216,10 +217,11 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
             
         orchestrator = ThinOrchestrator(exp_path)
         
-        # Execute complete experiment
+        # Execute experiment (complete or analysis-only)
         result = orchestrator.run_experiment(
             analysis_model=analysis_model,
-            synthesis_model=synthesis_model
+            synthesis_model=synthesis_model,
+            analysis_only=analysis_only
         )
         
         # Show completion with enhanced details
