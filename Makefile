@@ -1,7 +1,7 @@
 # Discernus Development Makefile
 # Standardizes common operations - no venv needed!
 
-.PHONY: help check test install deps harness clean start-infra stop-infra
+.PHONY: help check test install deps harness clean start-infra stop-infra safe-python
 
 help:  ## Show this help message
 	@echo "Discernus Development Commands"
@@ -11,6 +11,10 @@ help:  ## Show this help message
 check:  ## Check environment setup (run this first!)
 	@echo "🔍 Checking development environment..."
 	@python3 scripts/check_environment.py
+
+safe-python:  ## Use safe Python wrapper (recommended for agents)
+	@echo "🛡️  Using safe Python wrapper..."
+	@./scripts/safe_python.sh
 
 start-infra:  ## Start all infrastructure services (MinIO, Redis)
 	@echo "🚀 Starting infrastructure services..."
@@ -56,15 +60,38 @@ run:  ## Run experiment (requires EXPERIMENT var, e.g. make run EXPERIMENT=proje
 	@echo "🚀 Running experiment: $(EXPERIMENT)"
 	@python3 -m discernus.cli run $(EXPERIMENT)
 
+run-safe:  ## Run experiment with safe Python wrapper (recommended for agents)
+	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make run-safe EXPERIMENT=projects/your_experiment"; exit 1; fi
+	@echo "🛡️  Running experiment with safe wrapper: $(EXPERIMENT)"
+	@./scripts/safe_python.sh -m discernus.cli run $(EXPERIMENT)
+
 continue:  ## Continue experiment from artifacts (requires EXPERIMENT var)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make continue EXPERIMENT=projects/your_experiment"; exit 1; fi
 	@echo "🔄 Continuing experiment: $(EXPERIMENT)"
 	@python3 -m discernus.cli continue $(EXPERIMENT)
 
+continue-safe:  ## Continue experiment with safe Python wrapper
+	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make continue-safe EXPERIMENT=projects/your_experiment"; exit 1; fi
+	@echo "🛡️  Continuing experiment with safe wrapper: $(EXPERIMENT)"
+	@./scripts/safe_python.sh -m discernus.cli continue $(EXPERIMENT)
+
 debug:  ## Debug experiment (requires EXPERIMENT var)
 	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make debug EXPERIMENT=projects/your_experiment"; exit 1; fi
 	@echo "🐛 Debugging experiment: $(EXPERIMENT)"
 	@python3 -m discernus.cli debug $(EXPERIMENT) --verbose
+
+debug-safe:  ## Debug experiment with safe Python wrapper
+	@if [ -z "$(EXPERIMENT)" ]; then echo "❌ Usage: make debug-safe EXPERIMENT=projects/your_experiment"; exit 1; fi
+	@echo "🛡️  Debugging experiment with safe wrapper: $(EXPERIMENT)"
+	@./scripts/safe_python.sh -m discernus.cli debug $(EXPERIMENT) --verbose
+
+list:  ## List available experiments
+	@echo "📋 Listing experiments..."
+	@python3 -m discernus.cli list
+
+list-safe:  ## List experiments with safe Python wrapper
+	@echo "🛡️  Listing experiments with safe wrapper..."
+	@./scripts/safe_python.sh -m discernus.cli list
 
 clean:  ## Clean up temporary files
 	@echo "🧹 Cleaning temporary files..."
