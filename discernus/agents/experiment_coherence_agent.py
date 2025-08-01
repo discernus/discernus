@@ -161,13 +161,22 @@ CORPUS MANIFEST:
 {json.dumps(corpus_manifest, indent=2)}
 
 VALIDATION TASK:
-Check this experiment setup for issues that would cause failures during execution. Focus on:
+Check this experiment setup against Framework Specification v7.0 requirements. Focus on:
 
-1. **Field Naming Consistency**: Check for mixed field names (e.g., mixing 'speech_type' and 'document_type') that would break statistical tests
-2. **Specification Compliance**: Verify artifacts match Discernus specifications
-3. **Missing Elements**: Identify required files or fields that are missing
-4. **Data Quality**: Check for obvious data issues that would cause processing failures
-5. **Factual Accuracy**: Verify metadata is factually correct (considering current date: {current_date})
+1. **Framework v7.0 Compliance**: Verify framework includes required gasket_schema with target_keys and target_dimensions for Intelligent Extractor
+2. **Raw Analysis Log Output**: Confirm framework specifies raw_analysis_log format (not complex JSON structures)
+3. **Gasket Architecture**: Ensure framework follows v7.0 paradigm - Analysis Agent liberation from formatting constraints
+4. **Field Naming Consistency**: Check for mixed field names (e.g., mixing 'speech_type' and 'document_type') that would break statistical tests
+5. **Missing Elements**: Identify required files or fields per current specifications (Framework v7.0, Experiment v3.0, Corpus v3.2)
+6. **Data Quality**: Check for obvious data issues that would cause processing failures
+7. **Factual Accuracy**: Verify metadata is factually correct (considering current date: {current_date})
+
+FRAMEWORK SPECIFICATION v7.0 REQUIREMENTS:
+- Must include gasket_schema section with target_keys and target_dimensions arrays
+- Output contract must specify "raw_analysis_log" format
+- Analysis prompts should focus on natural language analysis, not JSON formatting
+- Version must be "v7.0"
+- Maximum 15KB character limit
 
 RESPONSE FORMAT:
 Return a JSON object with this structure:

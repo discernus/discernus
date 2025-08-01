@@ -171,9 +171,9 @@ class PreFlightValidator:
     
     def _validate_framework_spec(self, structure: Dict) -> Dict:
         """
-        Validate against Framework Specification v4.0 with collaborative assistance.
+        Validate against Framework Specification v7.0 with collaborative assistance.
         """
-        compliance = {"valid": True, "version": "v4.0", "issues": [], "missing_elements": []}
+        compliance = {"valid": True, "version": "v7.0", "issues": [], "missing_elements": []}
         
         if not structure["framework_file"]:
             compliance["valid"] = False
