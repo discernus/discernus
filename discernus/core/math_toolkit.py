@@ -989,12 +989,12 @@ def execute_analysis_plan(dataframe: pd.DataFrame, analysis_plan: Dict[str, Any]
 
 def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corpus_manifest: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """
-    THIN version: Execute analysis plan with raw JSON data and raw LLM analysis plans.
+    THIN version: Execute analysis plan optimized for v7.0 Gasket Architecture.
     
-    This function handles ALL parsing internally, making the synthesis pipeline fully THIN.
+    Updated for v7.0: Removes defensive parsing code and optimizes for clean JSON from Intelligent Extractor.
     
     Args:
-        raw_analysis_data: Raw JSON string from analysis artifacts
+        raw_analysis_data: Clean JSON string from Intelligent Extractor gasket
         analysis_plan_input: Either Dict (legacy) or str (THIN raw LLM response)
         corpus_manifest: Optional corpus metadata for DataFrame enrichment
         
@@ -1024,38 +1024,40 @@ def execute_analysis_plan_thin(raw_analysis_data: str, analysis_plan_input, corp
             # Legacy: Already parsed dictionary
             analysis_plan = analysis_plan_input
         
-        # Handle raw LLM analysis data responses with delimiters (fully THIN approach)
-        # Extract JSON from LLM response if it has delimiters
-        json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
-        json_match = re.search(json_pattern, raw_analysis_data, re.DOTALL)
-        if json_match:
-            json_str = json_match.group(1).strip()
-        else:
-            # Assume it's already clean JSON
-            json_str = raw_analysis_data
+        # V7.0 GASKET OPTIMIZATION: Direct JSON parsing (no defensive delimiter extraction)
+        # Intelligent Extractor guarantees clean JSON structure
+        try:
+            analysis_result = json.loads(raw_analysis_data)
+        except json.JSONDecodeError as e:
+            # Fallback: Try legacy delimiter extraction for backward compatibility
+            logger.warning(f"Clean JSON parsing failed, trying legacy delimiter extraction: {e}")
+            json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>(.*?)<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+            json_match = re.search(json_pattern, raw_analysis_data, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(1).strip()
+                analysis_result = json.loads(json_str)
+            else:
+                raise MathToolkitError(f"Failed to parse analysis data as JSON: {e}")
         
-        # Parse JSON to analysis result
-        analysis_result = json.loads(json_str)
-        
-        # Convert to DataFrame using THIN helper
+        # Convert to DataFrame using optimized gasket helper
         scores_df = _json_scores_to_dataframe_thin(analysis_result, corpus_manifest)
         
-        logger.info(f"THIN MathToolkit: Parsed raw LLM response to DataFrame {scores_df.shape}")
+        logger.info(f"V7.0 Gasket MathToolkit: Processed DataFrame {scores_df.shape}")
         
         # Use existing execute_analysis_plan with parsed DataFrame
         return execute_analysis_plan(scores_df, analysis_plan)
         
     except Exception as e:
-        logger.error(f"THIN analysis plan execution failed: {str(e)}")
-        raise MathToolkitError(f"THIN analysis plan execution failed: {str(e)}")
+        logger.error(f"V7.0 Gasket analysis plan execution failed: {str(e)}")
+        raise MathToolkitError(f"V7.0 Gasket analysis plan execution failed: {str(e)}")
 
 
 def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optional[Dict[str, Any]] = None) -> pd.DataFrame:
     """
-    THIN helper: Convert JSON analysis to DataFrame (minimal parsing for MathToolkit compatibility).
+    THIN helper: Convert JSON analysis to DataFrame optimized for flat gasket structure.
     
-    This is a temporary bridge function while we transition to fully THIN architecture.
-    Eventually, MathToolkit itself should handle raw JSON directly.
+    Updated for v7.0 Gasket Architecture: handles flat analysis_scores from Intelligent Extractor.
+    Removes defensive parsing code and optimizes for clean, flat JSON structure.
     """
     try:
         document_analyses = analysis_result.get('document_analyses', [])
@@ -1067,7 +1069,9 @@ def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optio
         for doc_analysis in document_analyses:
             document_id = doc_analysis.get('document_id', '{artifact_id}')
             document_name = doc_analysis.get('document_name', 'unknown')
-            dimensional_scores = doc_analysis.get('dimensional_scores', {})
+            
+            # V7.0 GASKET ARCHITECTURE: Handle flat analysis_scores from Intelligent Extractor
+            analysis_scores = doc_analysis.get('analysis_scores', {})
             
             # Create row with document identifier
             row_data = {'aid': document_id}
@@ -1083,30 +1087,35 @@ def _json_scores_to_dataframe_thin(analysis_result: dict, corpus_manifest: Optio
                                 row_data[key] = value
                         break
             
-            # Extract dimensional scores generically (framework-agnostic)
-            for dim_name, dim_data in dimensional_scores.items():
-                if isinstance(dim_data, dict):
-                    # Normalize dimension name to lowercase for consistency
-                    normalized_dim_name = dim_name.lower()
-                    
-                    # Standard v6.0 fields with compatibility mapping
-                    raw_score = dim_data.get('raw_score', 0.0)
-                    row_data[f"{normalized_dim_name}_score"] = raw_score
-                    row_data[f"{normalized_dim_name}_raw_score"] = raw_score  # Compatibility alias
-                    row_data[f"{normalized_dim_name}_salience"] = dim_data.get('salience', 0.0)
-                    row_data[f"{normalized_dim_name}_confidence"] = dim_data.get('confidence', 0.0)
-                    
-                    # Handle additional fields generically
-                    for field_name, field_value in dim_data.items():
-                        if field_name not in ['raw_score', 'salience', 'confidence']:
-                            column_name = f"{normalized_dim_name}_{field_name}"
-                            row_data[column_name] = field_value
+            # V7.0 OPTIMIZATION: Direct flat key-value extraction (no hierarchical parsing)
+            for score_key, score_value in analysis_scores.items():
+                # Validate score format from gasket
+                if score_value is not None:
+                    if isinstance(score_value, (int, float)):
+                        # Ensure score is in valid range (gasket should guarantee this)
+                        if 0.0 <= score_value <= 1.0:
+                            row_data[score_key] = float(score_value)
+                        else:
+                            logger.warning(f"Score {score_key}={score_value} outside valid range [0.0, 1.0]")
+                            row_data[score_key] = None
+                    else:
+                        logger.warning(f"Score {score_key} has invalid type: {type(score_value)}")
+                        row_data[score_key] = None
+                else:
+                    # Preserve null values for missing scores
+                    row_data[score_key] = None
             
-            # No framework-specific column mapping - let LLM AnalysisPlanner handle column discovery
+            # Add gasket metadata for provenance
+            extraction_metadata = doc_analysis.get('extraction_metadata', {})
+            if extraction_metadata:
+                row_data['gasket_version'] = extraction_metadata.get('gasket_version', 'unknown')
+                row_data['extraction_time_seconds'] = extraction_metadata.get('extraction_time_seconds', 0.0)
             
             rows.append(row_data)
         
-        return pd.DataFrame(rows)
+        df = pd.DataFrame(rows)
+        logger.info(f"V7.0 Gasket: Converted {len(rows)} documents to DataFrame with {len(df.columns)} columns")
+        return df
         
     except Exception as e:
-        raise MathToolkitError(f"Failed to convert JSON to DataFrame: {str(e)}") 
+        raise MathToolkitError(f"Failed to convert gasket JSON to DataFrame: {str(e)}") 

@@ -28,6 +28,7 @@ from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
+from ..agents.intelligent_extractor_agent import IntelligentExtractorAgent
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
 
@@ -348,6 +349,11 @@ Respond with only the JSON object."""
             
             # Load framework
             framework_content = self._load_framework(experiment_config["framework"])
+            
+            # Store framework content and audit logger for gasket integration
+            self._current_framework_content = framework_content
+            self._current_audit_logger = audit
+            
             framework_hash = storage.put_artifact(
                 framework_content.encode('utf-8'),
                 {"artifact_type": "framework", "original_filename": experiment_config["framework"]}
@@ -967,24 +973,25 @@ Respond with only the JSON object."""
                 
                 # Extract the actual analysis data from the raw_analysis_response
                 if "raw_analysis_response" in cached_result:
-                    # Parse the raw analysis response to get the actual JSON data
                     raw_response = cached_result["raw_analysis_response"]
                     
-                    # Extract JSON from the delimited response
-                    import re
-                    json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n(.*?)\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
-                    json_match = re.search(json_pattern, raw_response, re.DOTALL)
-                    
-                    if json_match:
-                        try:
-                            analysis_data = json.loads(json_match.group(1))
-                            if "document_analyses" in analysis_data:
-                                combined_document_analyses.extend(analysis_data["document_analyses"])
-                        except json.JSONDecodeError as e:
-                            print(f"Warning: Failed to parse JSON from analysis result {i}: {e}")
-                            continue
+                    # Use Intelligent Extractor gasket (v7.0) or legacy parsing (v6.0)
+                    # We need framework content for gasket schema extraction
+                    framework_content = getattr(self, '_current_framework_content', None)
+                    if framework_content:
+                        extracted_data = self._extract_and_map_with_gasket(
+                            raw_response, 
+                            framework_content, 
+                            getattr(self, '_current_audit_logger', None)
+                        )
                     else:
-                        print(f"Warning: No JSON found in raw_analysis_response for result {i}")
+                        # Fallback to legacy parsing if framework content not available
+                        extracted_data = self._legacy_json_parsing(raw_response)
+                    
+                    if extracted_data and "document_analyses" in extracted_data:
+                        combined_document_analyses.extend(extracted_data["document_analyses"])
+                    else:
+                        print(f"Warning: Failed to extract analysis data from result {i}")
                         continue
                 else:
                     print(f"Warning: No raw_analysis_response found in cached result {i}")
@@ -1037,8 +1044,126 @@ Respond with only the JSON object."""
         
         return combined_result
 
+    def _extract_gasket_schema_from_framework(self, framework_content: str) -> Optional[Dict[str, List[str]]]:
+        """
+        Extract gasket_schema from framework v7.0 JSON appendix.
+        
+        Args:
+            framework_content: Raw framework markdown content
+            
+        Returns:
+            gasket_schema dict or None if not found/invalid
+        """
+        try:
+            # Look for JSON code block in framework
+            if '```json' in framework_content:
+                json_start = framework_content.rfind('```json') + 7
+                json_end = framework_content.find('```', json_start)
+                
+                if json_end != -1:
+                    json_content = framework_content[json_start:json_end].strip()
+                    framework_config = json.loads(json_content)
+                    
+                    # Extract gasket_schema if present
+                    gasket_schema = framework_config.get('gasket_schema')
+                    if gasket_schema and 'target_keys' in gasket_schema and 'target_dimensions' in gasket_schema:
+                        return gasket_schema
+            
+            return None
+            
+        except (json.JSONDecodeError, KeyError) as e:
+            print(f"Warning: Failed to extract gasket_schema from framework: {e}")
+            return None
 
+    def _extract_and_map_with_gasket(
+        self,
+        raw_analysis_response: str,
+        framework_content: str,
+        audit_logger: AuditLogger
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Extract scores using Intelligent Extractor gasket (Gasket #2).
+        
+        Replaces brittle regex/JSON parsing with LLM-based semantic extraction.
+        
+        Args:
+            raw_analysis_response: Raw Analysis Log from Analysis Agent
+            framework_content: Framework content for gasket_schema extraction
+            audit_logger: Audit logger for provenance
+            
+        Returns:
+            Extracted analysis data or None if extraction fails
+        """
+        # Extract gasket schema from framework
+        gasket_schema = self._extract_gasket_schema_from_framework(framework_content)
+        
+        if not gasket_schema:
+            # Fallback to legacy parsing for non-v7.0 frameworks
+            print("⚠️  No gasket_schema found, falling back to legacy JSON parsing")
+            return self._legacy_json_parsing(raw_analysis_response)
+        
+        # Initialize Intelligent Extractor Agent
+        extractor = IntelligentExtractorAgent(
+            model="vertex_ai/gemini-2.5-flash",
+            audit_logger=audit_logger
+        )
+        
+        # Extract scores using gasket
+        extraction_result = extractor.extract_scores_from_raw_analysis(
+            raw_analysis_response, gasket_schema
+        )
+        
+        if not extraction_result.success:
+            print(f"❌ Intelligent Extractor failed: {extraction_result.error_message}")
+            # Fallback to legacy parsing
+            return self._legacy_json_parsing(raw_analysis_response)
+        
+        # Convert extracted scores to document analysis format
+        document_analysis = {
+            "document_id": "extracted_via_gasket",
+            "document_name": "gasket_extraction",
+            "analysis_scores": extraction_result.extracted_scores,
+            "extraction_metadata": {
+                "extraction_time_seconds": extraction_result.extraction_time_seconds,
+                "tokens_used": extraction_result.tokens_used,
+                "cost_usd": extraction_result.cost_usd,
+                "attempts": extraction_result.attempts,
+                "gasket_version": "v7.0"
+            }
+        }
+        
+        return {
+            "document_analyses": [document_analysis],
+            "analysis_metadata": {
+                "framework_name": "gasket_extracted",
+                "framework_version": "v7.0",
+                "analyst_confidence": 0.95,  # High confidence from gasket extraction
+                "analysis_notes": f"Extracted via Intelligent Extractor in {extraction_result.attempts} attempts"
+            }
+        }
 
+    def _legacy_json_parsing(self, raw_analysis_response: str) -> Optional[Dict[str, Any]]:
+        """
+        Legacy JSON parsing for backwards compatibility.
+        
+        This is the old brittle parsing logic, kept as fallback for non-v7.0 frameworks.
+        """
+        import re
+        
+        # Extract JSON from the delimited response
+        json_pattern = r"<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n(.*?)\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>"
+        json_match = re.search(json_pattern, raw_analysis_response, re.DOTALL)
+        
+        if json_match:
+            try:
+                analysis_data = json.loads(json_match.group(1))
+                return analysis_data
+            except json.JSONDecodeError as e:
+                print(f"Warning: Failed to parse JSON from legacy format: {e}")
+                return None
+        else:
+            print("Warning: No JSON found in legacy format")
+            return None
 
     def _combine_batch_results(self, batch_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
