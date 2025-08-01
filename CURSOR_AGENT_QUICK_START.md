@@ -1,103 +1,114 @@
-# 🪄 CURSOR AGENT QUICK-START INCANTATION
-**Copy-paste this to any new Cursor agent to prevent $0.50 confusion cycles**
+# Cursor Agent Quick Start Guide
 
-## ⚡ 30-SECOND SETUP (DO THIS FIRST!)
+**30-Second Orientation for New Cursor Agents**
+
+## 🚀 Environment Verification (Run First!)
+
 ```bash
-# 1. Verify environment (NEVER skip this!)
+# 1. Check environment setup
 make check
 
-# 2. Start infrastructure services (MinIO storage required!)
-python3 discernus/cli.py start
+# 2. Verify CLI works
+python3 -m discernus.cli list
 
-# 3. Test a simple experiment directly:
-python3 discernus/cli.py run projects/simple_test
+# 3. Run simple test
+make run EXPERIMENT=projects/simple_test
 ```
 
-## 🚨 CRITICAL INFRASTRUCTURE KNOWLEDGE
+## 📊 Project Status: 95% Complete Alpha System
 
-### **Modern CLI (THIN v2.1) - Simplified Interface!**
-✅ **New simplified CLI with 3 intuitive modes:**
+- **✅ Core Infrastructure**: CLI, agents, orchestration working
+- **✅ Framework System**: V4 specifications with validation
+- **✅ Experiment System**: V2 specifications with coherence validation
+- **✅ Synthesis Pipeline**: 4-agent THIN architecture operational
+- **✅ Mathematical Toolkit**: Comprehensive statistical functions
+- **🔄 Gasket Architecture**: In planning phase (see `pm/active_projects/`)
+
+## ❌ Forbidden Patterns (Waste Time & Money)
+
+### Environment Recreation (Don't Do This)
 ```bash
-# Three core modes for optimal researcher experience
-python3 discernus/cli.py start                     # Auto-start infrastructure
-python3 discernus/cli.py run projects/simple_test  # Complete experiment (analysis + synthesis)
-python3 discernus/cli.py continue projects/simple_test  # Resume from existing artifacts
-python3 discernus/cli.py debug projects/simple_test     # Interactive debugging mode
+# ❌ DON'T recreate venv - it's already set up
+rm -rf venv && python3 -m venv venv  # WASTES TIME
 
-# Management commands
-python3 discernus/cli.py status                    # Check infrastructure status
-python3 discernus/cli.py list                      # Show available experiments
+# ✅ DO use existing environment
+source venv/bin/activate && python3  # CORRECT
 ```
 
-### **Legacy CLI (DEPRECATED) - Avoid This!**
-❌ **The `discernus_cli_legacy_redis.py` uses deprecated Redis orchestration and will hang:**
+### Terminal Hanging Commands (Don't Do This)
 ```bash
-# This will hang in orchestrator queue without workers - DEPRECATED
-python3 discernus/cli_legacy_redis.py run projects/simple_test
+# ❌ DON'T use long git commit messages - they hang
+git commit -m "Very long detailed message that explains everything..."  # HANGS
+
+# ✅ DO use short commit messages
+git commit -m "Fix CLI validation"  # WORKS
+
+# ❌ DON'T use gh issue view without | cat
+gh issue view 68  # HANGS
+
+# ✅ DO pipe through cat
+gh issue view 68 | cat  # WORKS
 ```
 
-### **Infrastructure Services**
-- **MinIO**: Content-addressable storage (localhost:9000) - **REQUIRED**
-- **Redis**: Legacy CLI coordination (localhost:6379) - **DEPRECATED**
-- **Management**: Use `discernus start` and `discernus stop`
+### Deprecated Components (Don't Use These)
+```bash
+# ❌ DON'T use deprecated CLI - it's been moved to deprecated/
+python3 discernus/cli_legacy_redis.py run projects/simple_test  # DEPRECATED
 
-## 🧠 CRITICAL KNOWLEDGE FOR THIS PROJECT
+# ✅ DO use current CLI
+python3 -m discernus.cli run projects/simple_test  # CURRENT
+```
 
-### **Project Type**: THIN Architecture LLM Research Platform
-- **LLMs do intelligence**, software does minimal coordination only
-- **Direct function calls** (THIN v2.0) replace Redis coordination
-- **MinIO storage** for all artifacts and provenance
-- **YAML prompts externalized** - never hardcode intelligence in Python
-- **No parsing LLM responses** - pass raw text between agents
+## 🎯 Current Mission: 3 Test Experiments + Completion Items
 
-### **Your Working Environment**
-- **Language**: Python 3.13.5
-- **Virtual Environment**: `/Volumes/code/discernus/venv/bin/python3` 
-- **Project Root**: `/Volumes/code/discernus`
-- **ALWAYS use**: `python3` (never `python`)
-- **ALWAYS activate venv first**: `source venv/bin/activate && python3`
+### Active Experiments to Test:
+1. **`projects/1a_caf_civic_character/`** - CAF framework validation
+2. **`projects/1b_chf_character_heuristics/`** - CHF framework validation  
+3. **`projects/1c_ecf_emotional_climate/`** - ECF framework validation
 
-### **Context Window Limits (KEY INSIGHT!)**
-- **Gemini 2.5 Flash**: 1M tokens (~47 presidential speeches max)
-- **Gemini 2.5 Pro**: 2M tokens (use for larger batches)
-- **Error symptom**: "input token count exceeds maximum" - NOT rate limiting
-- **Solution**: Reduce batch size or use Pro model
+### Completion Items:
+- Framework validation across all 3 experiments
+- Gasket architecture implementation planning
+- Documentation updates
 
-## 🚫 FORBIDDEN PATTERNS (PREVENTS WASTED TOOL CALLS)
+## 🛠️ Working Environment Details
 
-### **NEVER Do This:**
-- ❌ Skip `make check` and `discernus start`
-- ❌ Use legacy Redis CLI (`discernus/cli_legacy_redis.py`)
-- ❌ Try to bypass MinIO - it's required for provenance
-- ❌ Assume 429 errors are the bottleneck - context limits are the real issue
-- ❌ Build complex parsing code (violates THIN principles)
+- **Python**: 3.13.5 (use `python3`, not `python`)
+- **Virtual Environment**: `./venv/bin/python3` (always activate first)
+- **Context Window**: Gemini 2.5 Pro (2M tokens), Flash (1M tokens)
+- **Infrastructure**: MinIO (artifact storage), Redis (coordination)
 
-### **ALWAYS Do This:**
-- ✅ Start with `python3 discernus/cli.py start`
-- ✅ Use `python3 discernus/cli.py run experiment_path` for testing
-- ✅ Check context window limits before assuming rate limiting issues
-- ✅ Use modern CLI with direct orchestration
-- ✅ Check MinIO console at http://localhost:9001 for artifact storage
-
-## 📋 COMMON DEBUGGING SHORTCUTS
+## 🔧 Common Debugging Shortcuts
 
 ```bash
-# Infrastructure status check
-python3 discernus/cli.py status                 # Complete infrastructure status
-lsof -i :9000                                   # MinIO running?
-lsof -i :9001                                   # MinIO console
+# Check environment
+make check
 
-# Test experiment - Three Simple Modes
-python3 discernus/cli.py validate projects/simple_test    # Check experiment structure
-python3 discernus/cli.py run projects/simple_test --dry-run  # Preview execution
-python3 discernus/cli.py run projects/simple_test         # Complete experiment
-python3 discernus/cli.py continue projects/simple_test    # Resume from artifacts
-python3 discernus/cli.py debug projects/simple_test --verbose  # Debug with detail
+# Run tests
+make test
 
-# Infrastructure management
-python3 discernus/cli.py start                  # Start all services
-python3 discernus/cli.py stop                   # Stop all services
+# Start infrastructure
+make start-infra
 
-# View MinIO artifacts
-curl http://localhost:9000/minio/health/live
+# Clean temporary files
+make clean
+
+# Debug experiment
+make debug EXPERIMENT=projects/simple_test
 ```
+
+## 📚 Key Documentation
+
+- **Architecture**: `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
+- **Active Projects**: `pm/active_projects/` (current development)
+- **Frameworks**: `frameworks/` (analytical approaches)
+- **Quick Start**: This file (30-second orientation)
+
+## 🎯 Success Pattern
+
+1. **Verify Environment**: `make check` ✅
+2. **Test CLI**: `python3 -m discernus.cli list` ✅  
+3. **Run Experiment**: `make run EXPERIMENT=projects/simple_test` ✅
+4. **Check Results**: Look in `projects/simple_test/runs/` ✅
+
+**You're ready to contribute!** 🚀
