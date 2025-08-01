@@ -119,10 +119,14 @@ def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dic
     if not corpus_path.exists():
         return False, f"❌ Corpus directory not found: {corpus_path}", {}
     
-    # Count corpus files
-    corpus_files = [f for f in corpus_path.glob('*.txt')]
+    # Count corpus files (recursively search for .txt and .pdf files)
+    corpus_files = []
+    for file_path in corpus_path.rglob('*'):
+        if file_path.is_file() and file_path.suffix in ['.txt', '.pdf'] and not file_path.name.startswith('.'):
+            corpus_files.append(file_path)
+    
     if len(corpus_files) == 0:
-        return False, f"❌ No .txt files found in corpus directory: {corpus_path}", {}
+        return False, f"❌ No .txt or .pdf files found in corpus directory: {corpus_path}", {}
     
     config['_corpus_file_count'] = len(corpus_files)
     return True, f"✅ Valid experiment with {len(corpus_files)} corpus files", config
@@ -139,7 +143,8 @@ def cli():
 @click.option('--dry-run', is_flag=True, help='Show what would be done without executing')
 @click.option('--analysis-model', default='vertex_ai/gemini-2.5-flash-lite', help='LLM model to use for analysis (default: gemini-2.5-flash-lite)')
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', help='LLM model to use for synthesis (default: gemini-2.5-pro)')
-def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str):
+@click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation')
+def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_model: str, skip_validation: bool):
     """Execute complete experiment (analysis + synthesis)"""
     exp_path = Path(experiment_path)
     
@@ -152,6 +157,36 @@ def run(experiment_path: str, dry_run: bool, analysis_model: str, synthesis_mode
         sys.exit(1)
     
     click.echo(message)
+    
+    # Validate experiment coherence (unless skipped)
+    if not skip_validation:
+        click.echo("🔍 Validating experiment coherence...")
+        try:
+            from discernus.agents.experiment_coherence_agent import ExperimentCoherenceAgent
+            validator = ExperimentCoherenceAgent()
+            validation_result = validator.validate_experiment(exp_path)
+            
+            if not validation_result.success:
+                click.echo("❌ Validation failed:")
+                for issue in validation_result.issues:
+                    click.echo(f"\n  • {issue.description}")
+                    click.echo(f"    Impact: {issue.impact}")
+                    click.echo(f"    Fix: {issue.fix}")
+                    if issue.affected_files:
+                        click.echo(f"    Affected: {', '.join(issue.affected_files[:3])}")
+                
+                if validation_result.suggestions:
+                    click.echo(f"\n💡 Suggestions:")
+                    for suggestion in validation_result.suggestions:
+                        click.echo(f"  • {suggestion}")
+                
+                click.echo(f"\n💡 To skip validation, use: --skip-validation")
+                sys.exit(1)
+            else:
+                click.echo("✅ Experiment coherence validation passed")
+        except Exception as e:
+            click.echo(f"⚠️  Validation failed with error: {e}")
+            click.echo("💡 Continuing without validation...")
     
     execution_mode = "Complete experiment"
     
