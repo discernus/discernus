@@ -1,0 +1,155 @@
+{
+  "evidence_metadata": {
+    "total_documents": 2,
+    "total_evidence_pieces": 16,
+    "extraction_method": "pre_extraction_v1.0",
+    "extraction_time": "2025-08-01T19:51:44.230299+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "Diginity",
+      "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, \"We will not accept an oligarchic form of society.\"",
+      "confidence": 0.85,
+      "context_type": "explicit_statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "Tribalism",
+      "quote_text": "You got three Wall Street firms, BlackRock, Vanguard, and State Street. Combined, these three investment firms are the majority stockholders in 95% of American corporations.",
+      "confidence": 0.7,
+      "context_type": "factual_claim_group_identification",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "Justice",
+      "quote_text": "What these guys are busy doing right now is going after Medica id, going after Social Security, going after nutrition. The rich want to get richer and they don't care who they step on.",
+      "confidence": 0.95,
+      "context_type": "accusation_of_injustice",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "Resentment",
+      "quote_text": "Why the American people are angry and they are angry all over this country? They are angry because, believe it or not, despite a huge increase in worker productivity over the last 52 years, if you could believe it, real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about, and that is what we are going to change.",
+      "confidence": 0.8,
+      "context_type": " grievance_articulation",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy.txt",
+      "dimension": "Pragmatism",
+      "quote_text": "I don't have a PhD in mathematics, but I do know this, that 99% is a hell of a lot larger number than 1%. So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.6,
+      "context_type": "argument_with_statistical_appeal",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Dignity",
+      "quote_text": "My friends, we have come to the end of a long journey. The American people have spoken, and they have spoken clearly.",
+      "confidence": 0.9,
+      "context_type": "framing",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Dignity",
+      "quote_text": "I've always believed that America offers opportunities to all who have the industry and will to seize it. Senator Obama believes that too.",
+      "confidence": 0.9,
+      "context_type": "statement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Tribalism",
+      "quote_text": "Senator Obama and I have had and argued our differences, and he has prevailed. No doubt many of those differences remain.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Truth",
+      "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them. But I won't spend a moment of the future regretting what might have been.",
+      "confidence": 0.8,
+      "context_type": "reflection",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Manipulation",
+      "quote_text": "I do not know what more we could have done to try to win this election.",
+      "confidence": 0.6,
+      "context_type": "self-assessment",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Justice",
+      "quote_text": "I urge all Americans - I urge all Americans who supported me to join me in not just congratulating him, but offering our next president our good will and earnest effort to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity, defend our security in a dangerous world, and leave our children and grandchildren a stronger, better country than we inherited.",
+      "confidence": 0.85,
+      "context_type": "call to action",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Resentment",
+      "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+      "confidence": 0.7,
+      "context_type": "acknowledgement",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Hope",
+      "quote_text": "Because nothing is inevitable here. Americans never quit. We never surrender. We never hide from history. We make history.",
+      "confidence": 0.95,
+      "context_type": "affirmation",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Hope",
+      "quote_text": "I wish Godspeed to the man who was my former opponent and will be my president, and I call on all Americans, as I have often in this campaign, to not despair of our present difficulties, but to believe always in the promise and greatness of America.",
+      "confidence": 0.95,
+      "context_type": "appeal",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Pragmatism",
+      "quote_text": "Senator Obama has achieved a great thing for himself and for his country. I applaud him for it, and offer him my sincere sympathy that his beloved grandmother did not live to see this day, though our faith assures us she is at rest in the presence of her Creator and so very proud of the good man she helped raise.",
+      "confidence": 0.8,
+      "context_type": "empathy",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    },
+    {
+      "document_name": "john_mccain_2008_concession.txt",
+      "dimension": "Pragmatism",
+      "quote_text": "This campaign was and will remain the great honor of my life, and my heart is filled with nothing but gratitude for the experience and to the American people for giving me a fair hearing before deciding that Senator Obama and my old friend Senator Joe Biden should have the honor of leading us for the next four years.",
+      "confidence": 0.9,
+      "context_type": "gratitude",
+      "extraction_method": "pre_extraction_v1.0",
+      "source_type": "raw_analysis_response"
+    }
+  ]
+}

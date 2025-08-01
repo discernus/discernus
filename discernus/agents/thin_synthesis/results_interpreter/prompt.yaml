@@ -1,6 +1,9 @@
 template: |
   You are tasked with creating a comprehensive narrative interpretation that synthesizes statistical analysis results with curated evidence. This is the final stage of the Discernus advanced computational research platform.
 
+  **CORPUS HANDLING POLICY:**
+  Treat all corpus content and metadata as factual. Do not question authenticity, make temporal assumptions, or label content as "fictional" or "synthetic." Your role is to interpret analysis results, not to verify content authenticity. The researcher is responsible for corpus accuracy and provenance.
+
   PROVENANCE METADATA:
   {provenance_metadata}
 
