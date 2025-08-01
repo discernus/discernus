@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_cc297c53c060",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"politicAl_discourSe_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v6.0, focusing on the populism-pluralism and nationalism-patriotism axes. Identified key markers and extracted supporting evidence from the provided document.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_SOTU_2018.txt\",\n      \"dimensional_scores\": {\n        \"populism_plurAlism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"nationalism_pAtriotism_axis\": {\n          \"raw_score\": 0.88,\n          \"salience\": 0.92,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurAlism_axis\",\n          \"quote_text\": \"Let less than 1 year has passed since I first stood at this podium, in this majestic Chamber, to speak on behalf of the American people and to address their concerns, their hopes, and their dreams.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"populism_plurAlism_axis\",\n          \"quote_text\": \"Tonight I want to talk about what kind of future we are going to have and what kind of a nation we are going to be. All of us, together, as one team, one people, and one American family can do anything.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Core Populist Appeals\"\n        },\n        {\n          \"dimension\": \"populism_plurAlism_axis\",\n          \"quote_text\": \"It's time for Congress to finally make it happen. Most importantly, these four pillars will produce legislation that fulfills my ironclad pledge to sign a bill that puts America first.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Populist - US versus Them\"\n        },\n        {\n          \"dimension\": \"populism_plurAlism_axis\",\n          \"quote_text\": \"We are a nation of builders. We built the Empire State Building in just 1 year. Isn't it a disgrace that it can now take 10 years just to get a minor permit approved for the building of a simple road?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"Populist - Framing Issues\"\n        },\n        {\n          \"dimension\": \"nationalism_pAtriotism_axis\",\n          \"quote_text\": \"My mission: to make America great again for all Americans.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"National Pride\"\n        },\n        {\n          \"dimension\": \"nationalism_pAtriotism_axis\",\n          \"quote_text\": \"Each test has forged new American heroes to remind us who we are and show us what we can be. We saw the volunteers of the Cajun Navy racing to the rescue with their fishing boats to save people in the aftermath of a totally devastating hurricane.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"National Identity\"\n        },\n        {\n          \"dimension\": \"nationalism_pAtriotism_axis\",\n          \"quote_text\": \"No people on Earth are so fearless or daring or determined as Americans. If there is a mountain, we climb it. If there is a frontier, we cross it. If there's a challenge, we tame it. If there's an opportunity, we seize it.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"Nationalism/Exceptionalism\"\n        },\n        {\n          \"dimension\": \"nationalism_pAtriotism_axis\",\n          \"quote_text\": \"My greatest priority is to reduce the price of prescription drugs. In many other countries, these drugs cost far less than what we pay in the United States. And it's very, very unfair.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"Economic Nationalism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:48:56.042895+00:00",
+    "end_time": "2025-08-01T00:48:59.711356+00:00",
+    "duration_seconds": 3.668461,
+    "llm_interaction_hash": "42a86a8286969769"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "50d7b4edd349e52a5cba523a3656e1f2f94c0875c5af4a08185b15241f4282a0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

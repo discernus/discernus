@@ -1,0 +1,68 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discoursem_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v6.0, focusing on Populism-Pluralism and National-Patriotism dimensions. Document 1, 'Republican_Platform_2008.pdf', was analyzed. Confidence is high due to clear rhetorical markers aligning with the framework's definitions for both dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "b34ee65a1168",
+      "document_name": "Republican_Platform_2008.pdf",
+      "dimensional_scores": {
+        "populism_plurallism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.85,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "We believe in a government that is accountable to the people, not to special interests.",
+          "confidence": 0.95,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "We stand for real Americans, for hard-working families, for the forgotten men and women of this country.",
+          "confidence": 0.90,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_plurallism_axis",
+          "quote_text": "The Washington establishment, with its cronyism and corruption, has failed us.",
+          "confidence": 0.95,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We believe in American exceptionalism, the idea that America is a unique nation with a special role to play in the world.",
+          "confidence": 0.95,
+          "context_type": "cultural_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We stand for our values, our heritage, and our way of life.",
+          "confidence": 0.90,
+          "context_type": "cultural_heritage"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America First means putting the interests of American workers and American businesses first.",
+          "confidence": 0.95,
+          "context_type": "economic_nationalism"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

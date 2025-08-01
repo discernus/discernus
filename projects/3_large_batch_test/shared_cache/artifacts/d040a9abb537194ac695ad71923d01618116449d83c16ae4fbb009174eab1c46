@@ -1,0 +1,80 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "politic al_discour se_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of Bush's 2005 Inaugural Address using the Political Discourse Populism Framework v6.0. Focus on identifying populist and nationalistic rhetoric."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.90,
+          "confidence": 0.92
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.88
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We are led, by events and common sense, to one conclusion: The survival of liberty in our land increasingly depends on the success of liberty in other lands. The best hope for peace in our world is the expansion of freedom in all the world.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "America's vital interests and our deepest beliefs are now one. From the day of our founding, we have proclaimed that every man and woman on this Earth has rights and dignity and matches less value, because they bear the image of the Maker of heaven and Earth.",
+          "confidence": 0.90,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So it is the policy of the United States to seek and support the growth of democratic movements and institutions in every nation and culture, with the ultimate goal of ending tyranny in our world.",
+          "confidence": 0.92,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "America will not pretend that the cause of freedom is less dangerous or that the war on terror is less than a war on terror. We will not tire, we will not falter, we will not fail. We will not yield.",
+          "confidence": 0.90,
+          "context_type": "manichean_framing"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "For a half a century, America defended our own freedom by standing watchful on distant borders. After the shipwrecck of communism came years of relative quiet, years of repose, years of sabbatic, and then there came a day of fire.",
+          "confidence": 0.85,
+          "context_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America's influence is not unlimited, but fortunately for the oppressed, America's influence is considerable and we will use it confidently in freedom's cause.",
+          "confidence": 0.88,
+          "context_type": "exceptional_nation"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Today, America speaks anew to the peoples of the world. All who live in tyranny and hopelessness can know: The United States will not ignore your oppression or excuse your oppressors. When you stand for your liberty, we will stand with you.",
+          "confidence": 0.87,
+          "context_type": "national_stock"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The ruler's of outla laws regimes can know that to serve your people, you must learn to trust them. Start on this journey of progress and justice, and America will walk at your side.",
+          "confidence": 0.80,
+          "context_type": "foreign_threat"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

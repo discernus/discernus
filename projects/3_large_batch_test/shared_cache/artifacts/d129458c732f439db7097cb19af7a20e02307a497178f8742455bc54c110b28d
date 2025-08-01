@@ -1,0 +1,80 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "The Political Discourse Analysis Framework v6.0 - Populism Emergence Study",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the specified framework, focusing on populism-pluralism and nationalism-patriotism dimensions as defined. Evidence extraction prioritized strong, direct quotes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.85,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.90,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "To protect our country, we reorganized our Government and created the Department of Homeland Security, which is mobilizing against the threats of a new era.",
+          "confidence": 0.90,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "You, the Congress, have already passed all these reductions and promised them for future years. If this tax relief is good for Americans 3 or 5 or 7 years from now, it is even better for Americans today.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We must also strengthen the economy by treating investors equally in our tax laws. It's fair to tax a company's profit. It is not fair to again tax the shareholder on the same profits.",
+          "confidence": 0.80,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Our fourth goal is to apply the compassion of America to the deepest problems of America. For so many in our country, the homeless and the fatherless, the addicted, the need is great. Yet there's power, wonder-working power, in the goodness and idealism and faith of the American people.",
+          "confidence": 0.90,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The American flag stands for more than our power and our interests. Our Founders dedicated this country to the cause of human dignity, the rights of every person, and the possibilities of every life.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Americans are a resolute people who have risen to every test of our time. Adversity has revealed the character of our country, to the world and to ourselves. America is a strong nation and honorable in the use of our strength. We exercise power with restraint, and we sacrifice for the liberty of strangers.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Nation and the world must learn the lessons of the Korean Peninsula and not allow an even greater threat to rise up in Iraq. A brutal dictator, with a history of reckless aggression, with ties to terror groups, with great potential wealth, will not be permitted to dominate a vital region and threatened the United States.",
+          "confidence": 0.95,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We seek peace. We strive for peace. And sometimes peace must be defended. A future lived at the mercy of terrible threats is no peace at all. If war is forced upon us, we will fight in a just cause and by just means, sparing, in every way we can, the innocent.",
+          "confidence": 0.90,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

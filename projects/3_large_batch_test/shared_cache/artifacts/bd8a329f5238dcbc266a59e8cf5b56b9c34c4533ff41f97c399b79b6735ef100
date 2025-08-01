@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_a8d995324a31",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v6.0 with a focus on Populism Emergence Study. Document analyzed for Populism-Pluralism Axis (vertical) and National-Patriotism Axis (horizontal) dimensions. Enhanced linguistic markers were considered.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_2012.pdf\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.75\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.50,\n          \"confidence\": 0.60\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We believe in the power of ordinary Americans to shape their own destiny.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"It's time to rein in the special interests and the Washington insiders who have rigged the system against the people.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"anti_elite_language\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America must put its own economic interests first, with fair trade and robust domestic manufacturing.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"national_economic_policy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We must defend our borders and uphold the sanctity of our homeland.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"territorial_claims\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:51:52.634081+00:00",
+    "end_time": "2025-08-01T00:52:01.366497+00:00",
+    "duration_seconds": 8.732416,
+    "llm_interaction_hash": "0e0c2a568ce40340"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "da746b0461121460254858ded9f587445963de342d94b0f75bdc23d354253cea"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

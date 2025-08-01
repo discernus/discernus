@@ -1,0 +1,98 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "Emotional Climate Framework v6.0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The document is a political speech with a very strong and clear rhetorical structure. The primary emotional drivers are Envy (grievance against a wealthy elite) and Enmity (defining this elite as a hostile opponent). Amity (a call for solidarity among the working class) is presented as the primary strategic response. Fear is present as a consequence of the elite's actions, while Hope is a minor theme tied to the potential success of the proposed solidarity. Compersion is entirely absent."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy.txt",
+      "dimensional_scores": {
+        "Fear": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "Hope": {
+          "raw_score": 0.35,
+          "salience": 0.3,
+          "confidence": 0.9
+        },
+        "Enmity": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "Amity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 1.0
+        },
+        "Envy": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "Compersion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Envy",
+          "quote_text": "They aren’t working for these billions. They’re stealing them. They’re stealing them. They’re stealing them from you and you and me.",
+          "confidence": 1.0,
+          "context_type": "Assertion of illegitimate gain"
+        },
+        {
+          "dimension": "Envy",
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "confidence": 1.0,
+          "context_type": "Definition of a rigged system"
+        },
+        {
+          "dimension": "Enmity",
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+          "confidence": 1.0,
+          "context_type": "Identification of a hostile actor"
+        },
+        {
+          "dimension": "Enmity",
+          "quote_text": "We need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+          "confidence": 0.95,
+          "context_type": "Call to action against specific opponents"
+        },
+        {
+          "dimension": "Amity",
+          "quote_text": "If you are willing to fight for someone you don’t know, you are welcome here.",
+          "confidence": 1.0,
+          "context_type": "Statement of inclusive solidarity"
+        },
+        {
+          "dimension": "Amity",
+          "quote_text": "Because in this house, we stand together, we know that, that it’s our only choice because we know that without exception, if we stand together, it is the only way that we can win.",
+          "confidence": 1.0,
+          "context_type": "Strategic framing of unity"
+        },
+        {
+          "dimension": "Fear",
+          "quote_text": "Just look at what Elon Musk and Donald Trump are doing to our healthcare, our veterans’ benefits, and Social Security. They are slashing programs that we and you have spent a lifetime paying into.",
+          "confidence": 0.9,
+          "context_type": "Description of a threat to public welfare"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "...if we stand together, it is the only way that we can win.",
+          "confidence": 0.9,
+          "context_type": "Expression of conditional optimism"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

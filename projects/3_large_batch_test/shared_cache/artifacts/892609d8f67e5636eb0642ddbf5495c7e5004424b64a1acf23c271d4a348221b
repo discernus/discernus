@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the Political Discourse Populism Framework v6.0. Focus was on identifying populist and nationalist rhetoric within the provided document. Salience and confidence were assessed based on the frequency and prominence of identified markers."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Trump_AJSC_2025.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.90,
+          "salience": 0.92,
+          "confidence": 0.98
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.88,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "America is back. Six weeks ago, I stood before this Capitol and proclaimed the dawn of the Golden Age of America. From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country.",
+          "confidence": 0.98,
+          "context_type": "core_populist_appeals",
+          "discourse_marker_type": "the_people"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The American Dream is unstoppable, and our country is on the verge of a comeback the likes of which the world has never witnessed, and perhaps will never witness again. Never been anything like it. The presidential election of November 5th was a mandate like has not been seen in many decades.",
+          "confidence": 0.97,
+          "context_type": "core_populist_appeals",
+          "discourse_marker_type": "the_people"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let us work together and let us truly make America great again.",
+          "confidence": 0.95,
+          "context_type": "people_versus_establishment",
+          "discourse_marker_type": "us_versus_them"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "I have declared a national emergency on our southern border, and I deployed the U.S. military and Border Patrol to repel the invasion of our country, and what a job they've done. As a result, illegal border crossings last month were by far the lowest ever recorded, ever.",
+          "confidence": 0.96,
+          "context_type": "people_versus_establishment",
+          "discourse_marker_type": "us_versus_them"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "The American Dream is unstoppable, and our country is on the verge of a comeback the likes of which the world has never witnessed, and perhaps will never witness again.",
+          "confidence": 0.96,
+          "context_type": "cultural_supremacy",
+          "discourse_marker_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our spirit is back. Our pride is back. Our confidence is back. And the American Dream is surging bigger and better than ever before.",
+          "confidence": 0.97,
+          "context_type": "cultural_supremacy",
+          "discourse_marker_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We will keep you safe. We will make you rich. And together we will take Greenland to heights like you have never thought possible before.",
+          "confidence": 0.90,
+          "context_type": "territorial_claims",
+          "discourse_marker_type": "homeland"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America first policies",
+          "confidence": 0.85,
+          "context_type": "economic_nationalism",
+          "discourse_marker_type": "economic_nationalism"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

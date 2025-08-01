@@ -1,0 +1,116 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis of Clinton's 1996 State of the Union address using the Populism-Pluralism framework. The speech exhibits strong populist tendencies by framing issues as 'the people' vs. 'elites' and emphasizing direct appeals to the populace. There are moderate indicators of nationalistic sentiment, focusing on American exceptionalism and strength. Pluralist elements are present in calls for bipartisanship and working across aisles, but they are framed within a larger populist narrative."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Clinton_SOTU_1996.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.80,
+          "salience": 0.90,
+          "confidence": 0.98
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.75,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that America has created the longest peacetime economic expansion in our history with nearly 18 million new jobs, wages rising at more than twice the rate of inflation, the highest homeownership in history, the smallest welfare rolls in 30 years, and the lowest peacetime unemployment since 1957.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals",
+          "discourse_marker_type": "the_people"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So tonight, I propose that we commit 60 percent of the budget surplus for the next 15 years to Social Security, investing a small portion in the private sector, just as any private or State Government pension would do. This will earn a higher return and keep Social Security sound for 55 years.",
+          "confidence": 0.90,
+          "context_type": "economic_populism",
+          "discourse_marker_type": "rigged_system"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "First, all schools must end social promotion. No child should graduate from high school with a diploma he or she can't read. We do our children no favors when we allow them to pass from grade to grade without mastering the material.",
+          "confidence": 0.85,
+          "context_type": "core_populist_appeals",
+          "discourse_marker_type": "the_people"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "And to attract talented young teachers to the toughest assignments, I recommend a sixfold increase in our program for college scholarships for students who commit to teach in the inner cities and isolated rural areas and in Indian communities.",
+          "confidence": 0.80,
+          "context_type": "core_populist_appeals",
+          "discourse_marker_type": "the_people"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Let's do one more thing for our children. Today, too many schools are so old they're falling apart, or so overcrowded students are learning in trailers. Last fall, Congress missed the opportunity to change that. This year, with 53 million children in our schools, Congress must not miss that opportunity again. I ask you to help our communities build or modernize 5,000 schools.",
+          "confidence": 0.92,
+          "context_type": "core_populist_appeals",
+          "discourse_marker_type": "the_people"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "I ask you to join with me in saying to the American people: We will save Social Security now.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals",
+          "discourse_marker_type": "the_people"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My fellow Americans, this is our moment. Let us lift our eyes as one Nation, and from the mountaintop of this American Century, look ahead to the next one, asking God's blessing on our endeavors and on our beloved country.",
+          "confidence": 0.98,
+          "context_type": "nationalist_patriotism",
+          "discourse_marker_type": "american_greatness"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "So let it be said of this generation of Americans, that we were thinking not only of our time but of their time, that we reached as high as our ideals, that we put aside our divisions and found a new hour of healing and hopefulness, that we joined together to serve and strengthen the land we love.",
+          "confidence": 0.97,
+          "context_type": "pluralist_inclusion",
+          "discourse_marker_type": "common_sense"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Tonight, America is working again. The promise of our future is limitless. But we cannot realize that promise if we allow the hum of our prosperity to lull us into complacency. How we fare as a nation far into the 21st century depends upon what we do as a nation today.",
+          "confidence": 0.90,
+          "context_type": "nationalist_patriotism",
+          "discourse_marker_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America is a strong force for peace from Northern Ireland to Bosnia to the Middle East.",
+          "confidence": 0.80,
+          "context_type": "nationalist_patriotism",
+          "discourse_marker_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "My fellow Americans, I stand before you tonight to report that the state of our Union is strong.",
+          "confidence": 0.98,
+          "context_type": "nationalist_patriotism",
+          "discourse_marker_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "For nearly a decade, Iraq has defied its obligations to destroy its weapons of terror and the missiles to deliver them. America will continue to contain Saddam, and we will work for the day when Iraq has a government worthy of its people.",
+          "confidence": 0.88,
+          "context_type": "foreign_threat",
+          "discourse_marker_type": "foreign_influence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

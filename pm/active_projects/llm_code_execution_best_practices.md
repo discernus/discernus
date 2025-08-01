@@ -1,6 +1,18 @@
-Based on my comprehensive research, I can now provide you with a detailed response about best practices for getting LLMs to perform complex math and statistical calculations in a transparent and reproducible way.
-
 # Best Practices for Transparent and Reproducible LLM Mathematical Calculations
+
+## Alignment with Gasket Architecture
+
+This document's recommendations align with the Discernus Gasket Architecture, particularly:
+
+- **Intelligent Extractor Gasket**: The tool-calling approach eliminates parsing issues by using structured function calls rather than raw code parsing
+- **MathToolkit Integration**: The sandboxed code execution environments provide the secure, deterministic mathematical computation layer
+- **THIN Principles**: The separation of LLM reasoning from mathematical computation maintains the THIN architecture philosophy
+
+The gasket architecture enhances these best practices by providing clear boundaries between LLM intelligence and deterministic mathematical operations.
+
+---
+
+Based on my comprehensive research, I can now provide you with a detailed response about best practices for getting LLMs to perform complex math and statistical calculations in a transparent and reproducible way.
 
 ## The Core Challenge
 

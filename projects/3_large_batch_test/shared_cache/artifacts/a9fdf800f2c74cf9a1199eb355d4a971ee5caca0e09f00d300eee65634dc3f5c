@@ -1,0 +1,68 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discoursec_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the provided framework to assess populism and nationalism in the document. All scores are raw and uninterpreted. Salience reflects rhetorical prominence."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.80,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.85,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Folks, the story of America is a story of progress and resilience, of always moving forward, of never ever giving up. It's a story unique among all nations. We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.",
+          "confidence": 0.95,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "When world leaders ask me to define America and they do, believe it or not I can define it in one word, and I mean this: possibilities. We don't think anything is beyond our capacity. Everything is a possibility.",
+          "confidence": 0.90,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "I want to thank my Republican friends who voted for the law. And my Republican friends who voted against it as well, but I'm still, I still get asked to fund the projects in those districts as well, but don't worry. I promise I'd be a President for all Americans. We'll fund these projects. And I'll see you at the groundbreaking.",
+          "confidence": 0.85,
+          "context_type": "core_populist_appeals"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Folks, the story of America is a story of progress and resilience, of always moving forward, of never ever giving up. It's a story unique among all nations. We're the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.",
+          "confidence": 0.90,
+          "context_type": "national_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We are the only country that has emerged from every crisis we've ever entered stronger than we got into it. Look, folks, that's what we're doing again.",
+          "confidence": 0.95,
+          "context_type": "national_supremacy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Nation is working for more freedom, more dignity, and more peace, not just in Europe, but everywhere.",
+          "confidence": 0.80,
+          "context_type": "national_supremacy"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

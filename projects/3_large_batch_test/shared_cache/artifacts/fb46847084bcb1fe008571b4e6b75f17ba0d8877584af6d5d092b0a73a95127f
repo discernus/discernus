@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "política_discourso_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Analysis conducted using the two-axis model of populism-pluralism and nationalism-patriotism. Focused on identifying rhetorical markers related to 'the people' versus 'the elite', and 'us' versus 'them' national identity framing. Evidence extraction prioritized strong, direct quotes."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.75,
+          "salience": 0.90,
+          "confidence": 0.95
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.85,
+          "confidence": 0.90
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "But while our economy may be weakened and our confidence shaken, United States of America will emerge stronger than before.\n\nThe weight of this crisis will not determine the destiny of this Nation. The answers to our problems don't lie beyond our reach. They exist in our laboratories and our universities, in our fields and our factories, in the imaginations of our entrepreneurs and the pride of the hardest working people on Earth.",
+          "confidence": 0.95,
+          "context_type": "populist_appeal"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "Now, if we're honest with ourselves, we'll admit that for too long, we have not always met these responsibilities as a Government or as a people. I say this not to lay blame or to look backwards, but because it is only by understanding how we arrived at this moment that we'll be able to lift ourselves out of this predicament.",
+          "confidence": 0.90,
+          "context_type": "anti_elite_sentiment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Now is the time to act boldly and wisely to not only revive this economy, but to build a new foundation for lasting prosperity. Now is the time to jump-start job creation, restart lending, and invest in areas like energy, health care, and education that will grow our economy, even as we make hard choices to bring our deficit down.",
+          "confidence": 0.85,
+          "context_type": "american_way_of_life"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We are a nation that has seen promise amid peril and claimed opportunity from our ordeal. Now we must be that nation again, and that is why, even as it cuts back on programs we don't need, the budget I submit will invest in the three areas that are absolutely critical to our economic future: energy, health care, and education.",
+          "confidence": 0.80,
+          "context_type": "national_identity"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

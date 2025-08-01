@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_69a9597b8117",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Populism v6 framework, focusing on the two-axis model of populism-pluralism and nationalism-patriotism. Evidence extraction prioritizes direct quotes supporting the identified dimensions.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2010.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.65,\n          \"salience\": 0.70,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.55,\n          \"salience\": 0.65,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So tonight, I'm announcing the launch of three more of these manufacturing hubs, where businesses will partner with the Department of Defense and Energy to turn regions left behind by globalization into global centers of high-tech jobs.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like, or who you love.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"But today, a full-time worker making the minimum wage earns $14,500 a year. Even with the tax relief we put in place, a family with two kids that earns the minimum wage still lives below the poverty line.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So tonight let's declare that in the wealthiest nation on Earth, no one who works full-time should have to live in poverty and raise the Federal minimum wage to $9 an hour.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We buy more American cars than we have in 5 years and less foreign oil than we have in 20.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"national_successes\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"The American people do not expect government to solve every problem. They do not expect those of us in this Chamber to agree on every issue. But they do expect us to put the Nation's interests before party.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"national_unity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is not a place where the chance of birth or circumstance should decide our destiny. And that's why we need to build new ladders of opportunity into the middle class for all who are willing to work.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"national_opportunity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America's energy sector is just one part of an aging infrastructure badly in need of repair.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"national_infrastructure\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T22:39:03.750966+00:00",
+    "end_time": "2025-07-31T22:39:07.246926+00:00",
+    "duration_seconds": 3.49596,
+    "llm_interaction_hash": "86a9693612f0f0f7"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "22d9b00266f5718c6b4d18cfb8fc6d3193fffadd54ca5aec4e9f7f9cb6b72919"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T215447Z_2723f536"
+  }
+}

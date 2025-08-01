@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_14bac3ecd016",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Analysis Framework v6.0. Focus on identifying populist and nationalist rhetoric in the provided inaugural address.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Trump_Inaugural_2025.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.90,\n          \"salience\": 0.95,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.90\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"From this day forward, our country will flourish and be respected again all over the world. We will be the envy of every nation, and we will not allow ourselves to be taken advantage of any longer.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populism_indicator\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Our sovereignty will be reclaimed. Our safety will be restored. The scales of justice will be rebalanced. The vicious, violent, and unfair weaponization of the Justice Dept and our Government will end.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"populism_indicator\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My recent election is a mandate to completely and totally reverse a horrible betrayal and all of these many betrayals that have taken place and to give the people back their faith, their wealth, their democracy, and indeed, their freedom.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"populism_indicator\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"For years, a radical and corrupt establishment has extracted power and wealth from our citizens while the pillars of our society lay broken and seemingly in complete disrepair.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"anti_elite_sentiment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We have a Government that cannot manage even a simple crisis at home while, at the same time, stumbling into a continuing catalog of catastrophic events abroad. It fails to protect our magnificent, law-abiding American citizens, but provides sanctuary and protection for dangerous criminals, many from prisons and mental institutions, that have illegally entered our country from all over the world.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"us_versus_them\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America will be manufacturing nation once again, and we have something that no other manufacturing nation will ever have, the largest amount of oil and gas of any country on earth, and we are going to use it. We'll use it.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"economic_nationalism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America first economics\",\n          \"confidence\": 0.75,\n          \"context_type\": \"economic_nationalism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America will be respected again and admired again, including by people of religion, faith, and good will. We will be prosperous, we will be proud, we will be strong, and we will win like never before.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"national_pride\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our American ancestors turned a small group of colonies on the edge of a vast continent into a mighty republic of the most extraordinary citizens on Earth. No one comes close. Americans pushed thousand of miles through a rugged land of wilderness. They crossed deserts, scaled mountains, braved untold dangers, won the Wild West, ended slavery, rescued millions from tyranny, lifted billions from poverty, harnessed electricity, split the atom, launched mankind into the heavens, and put the universe of human knowledge into the palm of the human hand.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"historical_mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We will build automobiles in America again at a rate that nobody could have dreamed possible just a few years ago.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"economic_nationalism\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:48:52.336945+00:00",
+    "end_time": "2025-08-01T00:48:56.041822+00:00",
+    "duration_seconds": 3.704877,
+    "llm_interaction_hash": "5387a562082d0e25"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

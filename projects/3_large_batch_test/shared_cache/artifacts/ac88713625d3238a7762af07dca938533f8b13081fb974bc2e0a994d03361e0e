@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_c53f00e32d0e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis of Republican Platform 2004 document for populism and nationalism using the specified two-axis model. The document exhibits strong signals for both populism and nationalism, particularly in its framing of the 'people' versus 'elites' and its emphasis on American exceptionalism and traditional values. Confidence is high due to clear and abundant textual evidence.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Republican_Platform_2004.pdf\",\n      \"dimensional_scores\": {\n        \"populism_plururalism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.88,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.82,\n          \"salience\": 0.92,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plururalism_axis\",\n          \"quote_text\": \"We believe in the people. We believe in the power of individual liberty and personal responsibility to foster opportunity and ensure prosperity for all Americans.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_plururalism_axis\",\n          \"quote_text\": \"Our economic policy is based on the principle that government should not pick winners and losers, nor should it stifle innovation and risk-taking through excessive regulation and taxation. We believe in a free market that rewards hard work and encourages entrepreneurship.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"populism_plururalism_axis\",\n          \"quote_text\": \"We reject the notion that elites in Washington or elsewhere know what is best for ordinary Americans. The American people are capable of making their own decisions and charting their own course.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"anti_elite_language\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is a beacon of hope and freedom to the world. We will defend our values and our interests with unwavering resolve, and we will lead with strength and confidence on the global stage.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"cultural_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We believe in the enduring strength and resilience of the American spirit. We are a nation of innovators, builders, and problem-solvers, and we are committed to preserving our unique heritage for future generations.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"ethnic_identity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We stand for a strong America, an America that is secure in its borders, confident in its identity, and unwavering in its commitment to liberty and justice for all.\",\n          \"confidence\": 0.97,\n          \"context_type\": \"territorial_claims\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T23:21:13.588359+00:00",
+    "end_time": "2025-07-31T23:21:19.432813+00:00",
+    "duration_seconds": 5.844454,
+    "llm_interaction_hash": "7c577e9a5b5405e8"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "c4cc6452ee09cc4d103ee8d997d090fbaf3f3e46b26bccf0b6a26ffb4565a66e"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T231812Z_e1c1d735"
+  }
+}

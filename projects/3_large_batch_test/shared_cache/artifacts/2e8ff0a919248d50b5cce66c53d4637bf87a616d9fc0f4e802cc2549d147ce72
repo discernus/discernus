@@ -1,0 +1,60 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "politic_discourser_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Politic_discourser_populism_v6 framework. The document was assessed for its adherence to populist and nationalist rhetoric as defined by the framework's two-axis model."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2006.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.80
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.45,
+          "salience": 0.55,
+          "confidence": 0.75
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "The other choice is to let the American people spend their own money to meet their own needs. I hope you will join me in standing firmly on the side of the people.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis",
+          "discourse_marker_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My budget adopts a hopeful new approach to help the poor and the disadvantaged. We must encourage and support the work of charities and faith-based and community groups that offer help and love, one person at a time.",
+          "confidence": 0.75,
+          "context_type": "populism_pluralism_axis",
+          "discourse_marker_type": "common_sense"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "A strong America is the world's best hope for peace and freedom. Yet the cause of freedom rests on more than our ability to defend ourselves and our allies. Freedom is exported every day, as we ship goods and products that improve the lives of millions of people.",
+          "confidence": 0.80,
+          "context_type": "nationalism_patriotism_axis",
+          "discourse_marker_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our national parks have a special place in our country's life. Our parks are places of great natural beauty and history. As good stewards, we must leave them better than we found them.",
+          "confidence": 0.70,
+          "context_type": "nationalism_patriotism_axis",
+          "discourse_marker_type": "cultural_heritage"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

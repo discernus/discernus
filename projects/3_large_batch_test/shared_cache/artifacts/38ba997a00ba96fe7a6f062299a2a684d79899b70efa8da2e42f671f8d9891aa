@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_5f732c484310",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourse Populism Framework v6.0. Document analyzed for 'Populism-Pluralism Axis' and 'Nationalism-Patriotism Axis' based on the provided framework. Scores reflect the intensity and salience of populist and nationalist rhetoric.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Democratic_Platform_1992.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.95,\n          \"confidence\": 0.9\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.85,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The Revolution of 1992 is about restoring the basic American values that built this country and will always make it great: personal responsibility, individual liberty, tolerance, faith, family and hard work.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must also make it easier for parents to care for them and give them values, motivation and discipline. Children should not have children. We need a national crackdown on deadbeat parents, an effective system of child support enforcement nationwide, and a systematic effort to establish paternity for every child.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We have not seen the end of violence, aggression and the conflicts that can threaten American interests and our hopes for a more peaceful world. What the United States needs is not the Bush Administration's Cold War thinking on a smaller scale, but a comprehensive restructuring of the American military enterprise to meet the threats that remain.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"national_supremacy\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Our nation of immigrants has been invigorated repeatedly as new people, ideas and ways of life have become part of the American tapestry. As the party of inclusion, we take special pride in our country's emergence as the world's largest and most successful multiethnic, multiracial republic.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"ethnic_identity\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:51:29.646253+00:00",
+    "end_time": "2025-08-01T00:51:33.463864+00:00",
+    "duration_seconds": 3.817611,
+    "llm_interaction_hash": "7fc9dc807f93e250"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "80416d50539e9b67331b85e8e63e2f7f223b07444b178ad95bd33eabb6828870"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

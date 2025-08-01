@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_d0ebf5053323",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"politic al_discour se_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis of Obama's 2013 inaugural address using the politic al_discour se_populism_v6 framework. Focused on identifying Populism-Pluralism and Nationalism-Patriotism axis indicators. The speech exhibits a strong emphasis on shared American values, inclusive language, and the collective responsibility of the citizenry, aligning with more pluralistic and less nationalistic sentiments.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_Inaugural_2013.txt\",\n      \"dimensional_scores\": {\n        \"populism_plur alism_axis\": {\n          \"raw_score\": 0.35,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plur alism_axis\",\n          \"quote_text\": \"What makes us exceptional\u2014what makes us American\u2014is our allegiance to an idea articulated in a declaration made more than two centuries ago: We hold these truths to be self-evident, that all men are created equal; that they are endowed by their Creator with certain unalienable rights; that among these are life, liberty, and the pursuit of happiness.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_plur alism_axis\",\n          \"quote_text\": \"For history tells us that while these truths may be self-evident, they've never been self-executing; that while freedom is a gift from God, it must be secured by His people here on Earth.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_plur alism_axis\",\n          \"quote_text\": \"To protect our people and uphold our values through strength of arms and rule of law. We will show the courage to try and resolve our differences with other nations peacefully\u2014not because we are naive about the dangers we face, but because engagement can more durably lift suspicion and fear.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"institutional_respect\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"For we, the people, understand that our country cannot succeed when a shrinking few do very well and a growing many barely make it. We believe that America's prosperity must rest upon the broad shoulders of a rising middle class.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"cultural_purity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"My fellow Americans, the oath I have sworn before you today, like the one recited by others who serve in this Capitol, was an oath to God and country, not party or faction. And we must faithfully execute that pledge during the duration of our service.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"historical_mythology\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T22:36:43.978489+00:00",
+    "end_time": "2025-07-31T22:36:46.816899+00:00",
+    "duration_seconds": 2.83841,
+    "llm_interaction_hash": "4ce2557e2e00818d"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "9ba17ea1d68b1877e211b35baec8b608d144365a663f14bd948e7c71e86d5fb5"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T215447Z_2723f536"
+  }
+}

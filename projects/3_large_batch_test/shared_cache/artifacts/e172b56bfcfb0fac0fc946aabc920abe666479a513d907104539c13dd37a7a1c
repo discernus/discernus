@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Populism Framework v6.0. Focus was on identifying populist and nationalist rhetoric through specific linguistic markers and themes. Confidence is high due to clear examples of both dimensions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_SOTU_2002.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.80,
+          "salience": 0.75,
+          "confidence": 0.90
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.70,
+          "salience": 0.65,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "As a new Congress gathers, all of us in the elected branches of Government share a great privilege: We've been placed in office by the votes of the people we serve.",
+          "confidence": 0.95,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "My message to the governments in Asia to convince North Korea to abandon its nuclear ambitions. Pakistan, Saudi Arabia, and nine other countries have captured or detained Al Qaida terrorists.",
+          "confidence": 0.85,
+          "context_type": "populism_pluralism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "Our Nation, working with allies and friends, has also confronted the enemy abroad with measures that are determined, successful, and continuing.",
+          "confidence": 0.90,
+          "context_type": "nationalism_patriotism_axis"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America will continue to lead the world in medical research that is ambitious, aggressive, and always ethical.",
+          "confidence": 0.80,
+          "context_type": "nationalism_patriotism_axis"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

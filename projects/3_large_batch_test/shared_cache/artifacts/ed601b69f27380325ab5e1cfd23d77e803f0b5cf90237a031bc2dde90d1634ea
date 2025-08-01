@@ -1,0 +1,56 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "politic_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using the \"Politic_Discourse_Populism_v6\" framework, focusing on the two-axis model (Populism-Pluralism and Nationalism-Patriotism). Confidence is high due to clear linguistic markers aligning with the framework's definitions."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.85,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.78,
+          "salience": 0.70,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We are led, by events and common sense, to one conclusion: The survival of liberty in our land increases deeply on the success of liberty in other lands. The best hope for peace in our world is the expansion of freedom in all the world.",
+          "confidence": 0.9,
+          "context_type": "populist_appeal"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It is the mission that created our Nation. It is the honorabale achivevement of our fathers. Now, it is the urgent requirement of our Nation's security and the calling of our time.",
+          "confidence": 0.85,
+          "context_type": "people_versus_establishment"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America's vital interests and our deeper beliefs are now one. From the day of our founding, we have proclaimed that every man and woman on this Earth has rights and dignity and matchless value, because they bear the image of the Maker of heaven and Earth.",
+          "confidence": 0.9,
+          "context_type": "american_greatness"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "To serve your people, you must learn to trust them. Start on this journey of progress and justice, and America will walk at your side.",
+          "confidence": 0.8,
+          "context_type": "our_people"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

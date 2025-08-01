@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_f98e949fe88b",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourse_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis performed using the Political Discourse Populism v6 framework. Focus was on identifying markers for Populism-Pluralism (Vertical) and Nationalism-Patriotism (Horizontal) axes based on the provided prompts. Evidence extraction prioritized direct quotes aligning with the framework's defined terms.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1993.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.60,\n          \"confidence\": 0.80\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.40,\n          \"salience\": 0.55,\n          \"confidence\": 0.75\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My fellow Americans, the state of our Union is strong. But now we must rise to the decisive moment, to make a nation and a world better than any we have ever known.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"populist_appeal\",\n          \"discourse_marker_type\": \"the_people\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We have to do something else, too, so that people who now must work, can work. We must end the damage we are doing to our environment in every community. In the last 4 years, we cleaned up 250 toxic waste sites, as many as in the previous 12. Now we should clean up 500 more, so that our children grow up next to parks, not poison.\",\n          \"confidence\": 0.65,\n          \"context_type\": \"policy_proposal\",\n          \"discourse_marker_type\": \"us_versus_them\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Let me say something that's not in my script tonight. I know this is not going to be easy. But I really believe one of the reasons the American people gave me a second term was to take the tough decisions in the next 4 years that will carry our country through the next 50 years.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"populist_appeal\",\n          \"discourse_marker_type\": \"the_people\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"And we must do more to help all our children read. Forty percent of our 8-year-olds cannot read on their own. That's why we have just launched the America Reads initiative, to build a citizen army of one million volunteer tutors to make sure every child can read independently by the end of the third grade.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"policy_proposal\",\n          \"discourse_marker_type\": \"collective_action\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My fellow Americans, we must never, ever believe that our diversity is a weakness. It is our greatest strength.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"ideological_statement\",\n          \"discourse_marker_type\": \"inclusive_citizenship\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"To prepare America for the 21st century, we must master the forces of change in the world and keep American leadership strong and sure for an uncharted time.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"national_goal\",\n          \"discourse_marker_type\": \"collective_action\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:41:00.912728+00:00",
+    "end_time": "2025-08-01T00:41:04.674342+00:00",
+    "duration_seconds": 3.761614,
+    "llm_interaction_hash": "1adc9785c9a80a68"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

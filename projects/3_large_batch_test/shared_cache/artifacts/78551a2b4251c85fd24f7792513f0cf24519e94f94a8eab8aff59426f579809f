@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_f7c51cb2b795",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discourses_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the Political Discourses Populism v6.0 framework. Document analyzed for Populism-Pluralism and Nationalism-Patriotism axes.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Obama_SOTU_2009.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.80,\n          \"confidence\": 0.88\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.60,\n          \"salience\": 0.75,\n          \"confidence\": 0.82\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"So together, we have cleared away the rubble of crisis, and we can say with renewed confidence that the state of our Union is stronger.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"It is our unfinished task to restore the basic bargain that built this country: the idea that if you work hard and meet your responsibilities, you can get ahead, no matter where you come from, no matter what you look like or who you love.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"It is our unfinished task to make sure that this Government works on behalf of the many, and not just the few.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"core_populist_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Let's make sure that the next revolution in manufacturing is made right here in America.\",\n          \"confidence\": 0.80,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"Let's also make sure that a high school diploma puts our kids on a path to a good job.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"economic_populism\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Fifty-one years ago, John F. Kennedy declared to this Chamber that \\\"the Constitution makes us not rivals for power, but partners for progress.\\\"\",\n          \"confidence\": 0.85,\n          \"context_type\": \"historical_mythology\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Tonight, thanks to the grit and determination of the American people, there is much progress to report. After a decade of grinding war, our brave men and women in uniform are coming home.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"national_pride\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"So tonight I propose a Fix-It-First program to put people to work as soon as possible on our most urgent repairs, like the nearly 70,000 structural[ly]  deficient bridges across the country.\",\n          \"confidence\": 0.70,\n          \"context_type\": \"civic_duty\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America is not a place where the chance of birth or circumstance should decide our destiny.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"equal_justice\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"The greatest nation on Earth can't continue to conduct its business by drifting from one manufactured crisis to the next.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"national_pride\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:41:44.516888+00:00",
+    "end_time": "2025-08-01T00:41:48.089474+00:00",
+    "duration_seconds": 3.572586,
+    "llm_interaction_hash": "3affb04e5bdb11db"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "88257ffe3d95f6abf22d9b4d3453784595248cbcea18dc16d04b795cd7fa4e17"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

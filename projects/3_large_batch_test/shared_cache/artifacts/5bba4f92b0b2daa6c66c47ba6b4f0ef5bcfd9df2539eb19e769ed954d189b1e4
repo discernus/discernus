@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_7c863ebd6f8d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```json\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"political_discour_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Analysis conducted using the political_discour_populism_v6 framework. Focus on identifying populist and either nationalist or anti-elite sentiment. Document exhibits moderate populism with a tendency towards nationalist appeals and a rejection of established institutions. Confidence is high due to clear linguistic markers.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"6442c2b4297a\",\n      \"document_name\": \"Democratic_Platform_2020.pdf\",\n      \"dimensional_scores\": {\n        \"populism_plurallism_axis\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"We believe in the power of the people to shape their own destiny, free from the grip of special interests and entrenched elites.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"populism_plurallism_axis\",\n          \"quote_text\": \"It's time to put the forgotten Americans first, the hardworking families who have been ignored for too long by the swamp in Washington.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"populist_appeal\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"This is America's moment, a chance to recommit to our founding ideals and build a nation that is truly exceptional, for all Americans.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"nationalist_claim\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"We must defend our borders, protect our sovereignty, and ensure that America remains a beacon of freedom and opportunity for generations to come.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"nationalist_claim\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-08-01T00:52:10.874495+00:00",
+    "end_time": "2025-08-01T00:57:57.113481+00:00",
+    "duration_seconds": 346.238986,
+    "llm_interaction_hash": "879001b85c367ae3"
+  },
+  "input_artifacts": {
+    "framework_hash": "80e0a61d7936c76386fbb1cb35a193664d8ffe130d5a46295bd6abb0f863927a",
+    "document_hashes": [
+      "6442c2b4297aaf65e2651896f501b0be615d0779e452ec979d873780f1fd6fb1"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250801T003529Z_2fa6cadf"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "batch_id": "batch_f6a7174d5d2e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_populism_emergence_study",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "```\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"politic al_discour se_populism_v6\",\n    \"framework_version\": \"v6.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis performed using the 'politic al_discour se_populism_v6' framework, focusing on populism vs. pluralism and nationalism vs. patriotism dimensions. Confidence is high due to clear language and direct examples provided in the text.\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{artifact_id}\",\n      \"document_name\": \"Clinton_SOTU_1995.txt\",\n      \"dimensional_scores\": {\n        \"populism_pluralism_axis\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.90,\n          \"confidence\": 0.90\n        },\n        \"nationalism_patriotism_axis\": {\n          \"raw_score\": 0.78,\n          \"salience\": 0.85,\n          \"confidence\": 0.88\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"My fellow Americans, we have found a third way. We have the smallest Government in 35 years, but a more progressive one. We have a smaller Government, but a stronger Nation.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populism_vs_establishment\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"We must make it possible for all hardworking families to meet their most important responsibilities. Two years ago we helped guarantee that Americans can keep their health insurance when they change jobs. Last year we extended health care to up to 5 million children.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"direct_democracy_appeals\"\n        },\n        {\n          \"dimension\": \"populism_pluralism_axis\",\n          \"quote_text\": \"The true is, we don't know what the answer to that question. But we do know what the answer should be: Not a single American family should ever have to choose between the job they need and the child they love.\",\n          \"confidence\": 0.92,\n          \"context_type\": \"people_vs_elite\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"For 209 years, it has been the President's duty to report to you on the state of the Union. Because of the hard work and high purpose of the American people, these are good times for America.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"american_greatness\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"Let us strengthen our Nation for the 21st century:\",\n          \"confidence\": 0.88,\n          \"context_type\": \"national_identity\"\n        },\n        {\n          \"dimension\": \"nationalism_patriotism_axis\",\n          \"quote_text\": \"America must stand against the poisoned appeals of extremism. We must combat an unholy axis of new threats from terrorists, international criminals, and drug traffickers.\",\n          \"confidence\": 0.90,\n          \"context_type\": \"foreign_threat\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>\n```",
+  "mathematical_validation": {
+    "enabled": true,
+    "verification_required": true,
+    "confidence_reporting": true
+  },
+  "execution_metadata": {
+    "start_time": "2025-07-31T22:31:41.004734+00:00",
+    "end_time": "2025-07-31T22:31:44.330049+00:00",
+    "duration_seconds": 3.325315,
+    "llm_interaction_hash": "8b65f54f0e446c0d"
+  },
+  "input_artifacts": {
+    "framework_hash": "02ca3d6437aeef213c6aff3320f36321c77ba2bee33fa83a4faa324cd1c6f9a5",
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "3_large_batch_test",
+      "experiment_root": "/Volumes/code/discernus/projects/3_large_batch_test",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250731T215447Z_2723f536"
+  }
+}

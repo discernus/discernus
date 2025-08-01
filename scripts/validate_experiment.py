@@ -217,9 +217,9 @@ class PreFlightValidator:
     
     def _validate_corpus_spec(self, structure: Dict) -> Dict:
         """
-        Validate against Corpus Specification v2.0 with collaborative assistance.
+        Validate against Corpus Specification v3.2 with collaborative assistance.
         """
-        compliance = {"valid": True, "version": "v2.0", "issues": [], "missing_elements": []}
+        compliance = {"valid": True, "version": "v3.2", "issues": [], "missing_elements": []}
         
         if not structure["corpus_dir"]:
             compliance["valid"] = False
@@ -231,7 +231,19 @@ class PreFlightValidator:
         corpus_manifest = Path(structure["corpus_dir"]) / "corpus.md"
         if not corpus_manifest.exists():
             compliance["valid"] = False
-            compliance["missing_elements"].append("corpus.md manifest file per Corpus Specification v2.0")
+            compliance["missing_elements"].append("corpus.md manifest file per Corpus Specification v3.2")
+            return compliance
+            
+        # CRITICAL: Validate field naming consistency (prevents statistical test failures)
+        field_naming_issues = self._validate_field_naming_consistency(corpus_manifest)
+        if field_naming_issues:
+            compliance["valid"] = False
+            compliance["issues"].extend(field_naming_issues)
+            compliance["critical_field_naming"] = {
+                "status": "FAILED",
+                "description": "Field naming inconsistencies will cause ANOVA and other statistical tests to fail",
+                "examples": field_naming_issues[:3]  # Show first 3 examples
+            }
             
         # Basic corpus statistics
         corpus_files = structure["corpus_files"]
@@ -245,6 +257,67 @@ class PreFlightValidator:
             }
             
         return compliance
+    
+    def _validate_field_naming_consistency(self, corpus_manifest: Path) -> List[str]:
+        """
+        CRITICAL: Validate field naming consistency to prevent statistical test failures.
+        
+        This validation catches issues like mixing 'speech_type' and 'document_type' 
+        that cause ANOVA tests to fail with "Grouping variable not found" errors.
+        """
+        issues = []
+        
+        try:
+            with open(corpus_manifest, 'r') as f:
+                content = f.read()
+                
+            # Extract JSON manifest from the file
+            if '```json' in content:
+                json_start = content.find('```json') + 7
+                json_end = content.find('```', json_start)
+                if json_end != -1:
+                    json_content = content[json_start:json_end].strip()
+                    manifest_data = json.loads(json_content)
+                    
+                    if 'file_manifest' in manifest_data:
+                        file_manifest = manifest_data['file_manifest']
+                        
+                        # Track field names across all documents
+                        field_names = set()
+                        document_types = set()
+                        
+                        for doc in file_manifest:
+                            # Collect all field names
+                            field_names.update(doc.keys())
+                            
+                            # Check for document_type consistency
+                            if 'document_type' in doc:
+                                document_types.add(doc['document_type'])
+                            elif 'speech_type' in doc:
+                                issues.append(f"Document '{doc.get('name', 'unknown')}' uses 'speech_type' instead of 'document_type'")
+                            elif 'expert_categorization' in doc:
+                                issues.append(f"Document '{doc.get('name', 'unknown')}' uses 'expert_categorization' instead of 'document_type'")
+                        
+                        # Check for mixed field naming patterns
+                        if 'speech_type' in field_names and 'document_type' in field_names:
+                            issues.append("CRITICAL: Mixed field naming detected - corpus uses both 'speech_type' and 'document_type'")
+                            
+                        if 'expert_categorization' in field_names and 'document_type' in field_names:
+                            issues.append("CRITICAL: Mixed field naming detected - corpus uses both 'expert_categorization' and 'document_type'")
+                            
+                        # Check for missing document_type
+                        if 'document_type' not in field_names:
+                            issues.append("CRITICAL: No 'document_type' field found - required for statistical analysis")
+                            
+                        # Check for consistent document_type values
+                        if len(document_types) > 0:
+                            # Store document types for reporting
+                            self.document_types = list(document_types)
+                            
+        except Exception as e:
+            issues.append(f"Error parsing corpus manifest: {str(e)}")
+            
+        return issues
     
     def _generate_methodological_advisories(self, structure: Dict) -> List[Dict]:
         """
@@ -289,6 +362,12 @@ class PreFlightValidator:
         # Help add framework YAML appendix
         if structure["framework_file"]:
             self._suggest_framework_appendix(structure["framework_file"])
+            
+        # Help fix field naming issues
+        if structure["corpus_dir"]:
+            corpus_manifest = Path(structure["corpus_dir"]) / "corpus.md"
+            if corpus_manifest.exists():
+                self._suggest_field_naming_fixes(corpus_manifest)
     
     def _create_corpus_manifest(self, corpus_dir: str, corpus_files: List[str]):
         """

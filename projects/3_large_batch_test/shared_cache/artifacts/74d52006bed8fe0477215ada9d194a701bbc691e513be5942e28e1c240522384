@@ -1,0 +1,56 @@
+```json
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "political_discourse_populism_v6",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.85,
+    "analysis_notes": "Analysis conducted using the Political Discourse Analysis Framework v6.0 with a focus on Populism Emergence Study. Document analyzed for Populism-Pluralism Axis (vertical) and National-Patriotism Axis (horizontal) dimensions. Enhanced linguistic markers were considered."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "Democratic_Platform_2012.pdf",
+      "dimensional_scores": {
+        "populism_pluralism_axis": {
+          "raw_score": 0.65,
+          "salience": 0.70,
+          "confidence": 0.75
+        },
+        "nationalism_patriotism_axis": {
+          "raw_score": 0.45,
+          "salience": 0.50,
+          "confidence": 0.60
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "We believe in the power of ordinary Americans to shape their own destiny.",
+          "confidence": 0.80,
+          "context_type": "populist_appeals"
+        },
+        {
+          "dimension": "populism_pluralism_axis",
+          "quote_text": "It's time to rein in the special interests and the Washington insiders who have rigged the system against the people.",
+          "confidence": 0.85,
+          "context_type": "anti_elite_language"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "America must put its own economic interests first, with fair trade and robust domestic manufacturing.",
+          "confidence": 0.70,
+          "context_type": "national_economic_policy"
+        },
+        {
+          "dimension": "nationalism_patriotism_axis",
+          "quote_text": "We must defend our borders and uphold the sanctity of our homeland.",
+          "confidence": 0.75,
+          "context_type": "territorial_claims"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```

@@ -1,0 +1,88 @@
+```
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "ecf_v6_0",
+    "framework_version": "v6.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "The analyzed document is a highly charged political speech with clear and distinct emotional dimensions. The dominant themes are grievance (Envy) and threat (Fear), which are used to justify a call for revolutionary action. Hope and Amity are presented as the means and goals of this action. Compersion is almost entirely absent, reinforcing the critical tone of the speech."
+  },
+  "document_analyses": [
+    {
+      "document_id": "{artifact_id}",
+      "document_name": "john_lewis_1963_march_on_washington.txt",
+      "dimensional_scores": {
+        "Fear": {
+          "raw_score": 0.85,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "Hope": {
+          "raw_score": 0.45,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "Enmity": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "Amity": {
+          "raw_score": 0.6,
+          "salience": 0.65,
+          "confidence": 0.9
+        },
+        "Envy": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "Compersion": {
+          "raw_score": 0.05,
+          "salience": 0.1,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "Envy",
+          "quote_text": "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+          "confidence": 0.98,
+          "context_type": "statement_of_grievance"
+        },
+        {
+          "dimension": "Fear",
+          "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+          "confidence": 0.98,
+          "context_type": "explicit_statement_of_threat"
+        },
+        {
+          "dimension": "Enmity",
+          "quote_text": "By and large, American politics is dominated by politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+          "confidence": 0.95,
+          "context_type": "identification_of_opponent"
+        },
+        {
+          "dimension": "Amity",
+          "quote_text": "I appeal to all of you to get in this great revolution that is sweeping this nation. Get in and stay in the streets of every city, every village and hamlet of this nation until true freedom comes...",
+          "confidence": 0.9,
+          "context_type": "call_to_collective_action"
+        },
+        {
+          "dimension": "Hope",
+          "quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 0.9,
+          "context_type": "vision_of_the_future"
+        },
+        {
+          "dimension": "Compersion",
+          "quote_text": "There are exceptions, of course - we salute those - but what political leader can stand up and say, \"My party is the party of principles\"?",
+          "confidence": 0.95,
+          "context_type": "passing_acknowledgement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
+```
