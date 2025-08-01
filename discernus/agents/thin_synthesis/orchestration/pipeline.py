@@ -156,6 +156,16 @@ class ProductionThinSynthesisPipeline:
         stage_timings = {}
         stage_success = {}
         
+        # Initialize artifact hash variables at method level for accessibility
+        plan_hash = ""
+        results_hash = ""
+        evidence_hash = ""
+        
+        # Initialize response variables at method level for accessibility
+        plan_response = None
+        exec_response = None
+        curation_response = None
+        
         # Log pipeline start
         self.audit_logger.log_agent_event(
             "ProductionThinSynthesisPipeline",
@@ -259,21 +269,24 @@ class ProductionThinSynthesisPipeline:
             self.logger.info("📖 Stage 4: Interpreting results...")
             stage_start = time.time()
             
-            interpretation_response = self._stage_4_interpret_results(
+            stage_response = self._stage_4_interpret_results(
                 exec_response, curation_response, request
             )
             
             stage_timings['results_interpretation'] = time.time() - stage_start
-            stage_success['results_interpretation'] = interpretation_response.success
+            stage_success['results_interpretation'] = stage_response.success
             
-            if not interpretation_response.success:
+            if not stage_response.success:
                 return self._create_error_response(
                     "Results interpretation failed",
-                    interpretation_response.error_message,
+                    stage_response.error_message,
                     stage_timings,
                     stage_success,
                     time.time() - start_time
                 )
+            
+            # Extract the actual interpretation response
+            interpretation_response = stage_response.response
             
             # Store intermediate artifacts - let LLM handle data structures
             plan_hash = self.artifact_client.put_artifact(json.dumps(plan_response.analysis_plan).encode('utf-8'))
@@ -803,7 +816,17 @@ Raw Analysis Data:
             }
         )
         
-        return self.results_interpreter.interpret_results(interpretation_request)
+        # Store the interpretation response for use in the main method
+        interpretation_response = self.results_interpreter.interpret_results(interpretation_request)
+        
+        # Return a success response object so the main method can continue with artifact creation
+        class StageResponse:
+            def __init__(self, success, response):
+                self.success = success
+                self.response = response
+                self.error_message = ""
+        
+        return StageResponse(True, interpretation_response)
 
     # THIN REFACTORING: Removed ~150 lines of THICK DataFrame parsing logic
     # All data parsing is now handled by individual agents (AnalysisPlanner, MathToolkit, etc.)
