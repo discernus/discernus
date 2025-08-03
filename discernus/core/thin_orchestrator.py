@@ -2182,10 +2182,10 @@ This research was conducted using the Discernus computational research platform,
                 validation_results[hash_value] = artifact_exists
                 
                 if not artifact_exists:
-                    self.logger.error(f"Artifact hash {hash_value} not found in storage")
+                    print(f"WARNING: Artifact hash {hash_value} not found in storage")
                     
             except Exception as e:
-                self.logger.error(f"Error validating artifact hash {hash_value}: {e}")
+                print(f"ERROR: Error validating artifact hash {hash_value}: {e}")
                 validation_results[hash_value] = False
         
         return validation_results
