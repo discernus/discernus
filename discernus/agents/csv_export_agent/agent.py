@@ -599,6 +599,40 @@ class CSVExportAgent:
                 export_time_seconds=(datetime.now() - start_time).total_seconds()
             )
     
+    def _validate_statistical_results(self, results: Dict[str, Any]) -> None:
+        """Validate statistical results have required structure and content."""
+        if not results:
+            raise ValueError("Statistical results cannot be empty")
+        
+        # Check if results contain actual statistical data
+        has_statistical_data = False
+        
+        # Look for common statistical result patterns
+        statistical_indicators = [
+            'test_name', 'statistic_value', 'p_value', 'results',
+            'anova_results', 'correlation_results', 'ttest_results'
+        ]
+        
+        for indicator in statistical_indicators:
+            if indicator in results and results[indicator]:
+                has_statistical_data = True
+                break
+        
+        # Check nested structures
+        if not has_statistical_data and isinstance(results, dict):
+            for key, value in results.items():
+                if isinstance(value, dict) and value:
+                    for sub_key in statistical_indicators:
+                        if sub_key in value and value[sub_key]:
+                            has_statistical_data = True
+                            break
+                if has_statistical_data:
+                    break
+        
+        if not has_statistical_data:
+            raise ValueError(f"Statistical results contain no valid statistical data. "
+                           f"Structure: {list(results.keys()) if isinstance(results, dict) else type(results)}")
+    
     def _generate_statistical_results_csv(
         self,
         statistical_results: Dict[str, Any],
@@ -619,10 +653,12 @@ class CSVExportAgent:
             # Handle synthesis pipeline format
             stage_2_results = statistical_results['stage_2_derived_metrics'].get('results', {})
             results = stage_2_results
-        elif statistical_results:
-            # If statistical_results is empty, create placeholder data
-            self.logger.info("No statistical results found - generating placeholder data")
-            results = {}
+        elif statistical_results and any(statistical_results.values()):
+            # Handle direct statistical results format
+            results = statistical_results
+        else:
+            raise ValueError(f"No statistical results data provided to CSV export. "
+                           f"Received: {statistical_results}")
         
         with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
