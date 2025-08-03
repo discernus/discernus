@@ -21,12 +21,14 @@ import logging
 import json
 import time
 import pandas as pd
+import hashlib
 
 import os
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from io import BytesIO
 
 # Import main codebase infrastructure
 import sys
@@ -144,6 +146,59 @@ class ProductionThinSynthesisPipeline:
         
         self.logger.info("🏭 Production THIN Synthesis Pipeline initialized")
         self.logger.info(f"🔧 Synthesis pipeline using model: {model}")
+
+    def _store_artifact_with_metadata(self, content: str, artifact_type: str, 
+                                    stage: str, dependencies: List[str] = None) -> str:
+        """Store artifact with comprehensive provenance metadata."""
+        content_bytes = content.encode('utf-8')
+        metadata = {
+            "artifact_type": artifact_type,
+            "stage": stage,
+            "timestamp": datetime.utcnow().isoformat(),
+            "dependencies": json.dumps(dependencies or []),
+            "content_hash": hashlib.sha256(content_bytes).hexdigest(),
+            "size_bytes": str(len(content_bytes)),
+            "pipeline_version": "v2.0",
+            "agent_versions": json.dumps({
+                "analysis_planner": "v1.0",
+                "results_interpreter": "v1.0", 
+                "evidence_curator": "v1.0"
+            })
+        }
+        
+        # Store content with metadata using MinIO's metadata capabilities
+        hash_id = hashlib.sha256(content_bytes).hexdigest()
+        
+        # Check if already exists (cache hit)
+        if self.artifact_client.artifact_exists(hash_id):
+            self.logger.debug(f"Artifact cache hit: {hash_id}")
+            return hash_id
+        
+        # Store artifact with metadata
+        self.artifact_client.client.put_object(
+            bucket_name=self.artifact_client.bucket,
+            object_name=hash_id,
+            data=BytesIO(content_bytes),
+            length=len(content_bytes),
+            metadata=metadata
+        )
+        
+        self.logger.info(f"Stored {artifact_type} artifact: {hash_id} ({stage}, {len(content_bytes)} bytes)")
+        
+        # Log artifact creation for provenance
+        self.audit_logger.log_agent_event(
+            "ProductionThinSynthesisPipeline",
+            "artifact_created",
+            {
+                "artifact_hash": hash_id,
+                "artifact_type": artifact_type,
+                "stage": stage,
+                "size_bytes": len(content_bytes),
+                "dependencies": dependencies or []
+            }
+        )
+        
+        return hash_id
 
     def run(self, request: ProductionPipelineRequest) -> ProductionPipelineResponse:
         """
@@ -291,8 +346,13 @@ class ProductionThinSynthesisPipeline:
             # Extract the actual interpretation response
             interpretation_response = stage_response.response
             
-            # Store intermediate artifacts - let LLM handle data structures
-            plan_hash = self.artifact_client.put_artifact(json.dumps(plan_response.analysis_plan).encode('utf-8'))
+            # Store intermediate artifacts with comprehensive metadata
+            plan_hash = self._store_artifact_with_metadata(
+                content=json.dumps(plan_response.analysis_plan),
+                artifact_type="analysis_plan",
+                stage="raw_data_analysis",
+                dependencies=[request.raw_data_hash]
+            )
             
             # Defensive JSON serialization for exec_response
             def make_json_safe(obj):
@@ -305,10 +365,20 @@ class ProductionThinSynthesisPipeline:
                 else:
                     return str(obj)
             
-            # Store the combined two-stage results with defensive serialization
+            # Store the combined two-stage results with comprehensive metadata
             safe_exec_response = make_json_safe(exec_response)
-            results_hash = self.artifact_client.put_artifact(json.dumps(safe_exec_response).encode('utf-8'))
-            evidence_hash = self.artifact_client.put_artifact(json.dumps(curation_response.to_json_serializable()).encode('utf-8'))
+            results_hash = self._store_artifact_with_metadata(
+                content=json.dumps(safe_exec_response),
+                artifact_type="statistical_results",
+                stage="mathematical_analysis",
+                dependencies=[plan_hash, request.raw_data_hash]
+            )
+            evidence_hash = self._store_artifact_with_metadata(
+                content=json.dumps(curation_response.to_json_serializable()),
+                artifact_type="curated_evidence",
+                stage="evidence_curation",
+                dependencies=[results_hash, request.raw_data_hash]
+            )
             
             # Success! Create complete response
             total_time = time.time() - start_time
